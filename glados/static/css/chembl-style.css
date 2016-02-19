@@ -1,0 +1,150 @@
+/*
+* ChEMBL custom style added to materialize
+*/
+
+/**
+* Fonts
+*/
+
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana), url("../font/verdana/Verdana.eot");
+  src: url("../font/verdana/Verdana.eot?#iefix") format("embedded-opentype"), url("../font/verdana/Verdana.woff") format("woff"), url("../font/verdana/Verdana.ttf") format("truetype"), url('../font/verdana/Verdana.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana Bold), url("../font/verdana/Verdana-Bold.eot");
+  src: url("../font/verdana/Verdana-Bold.eot?#iefix") format("embedded-opentype"), url("../font/verdana/Verdana-Bold.woff") format("woff"), url("../font/verdana/Verdana-Bold.ttf") format("truetype"), url('../font/verdana/Verdana-Bold.svg') format('svg');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "ChEMBL_HelveticaNeue";
+  src: local(Verdana Bold), url("../font/helvetica/HelveticaNeue.eot");
+  src: url("../font/helvetica/HelveticaNeue.eot?#iefix") format("embedded-opentype"), url("../font/helvetica/HelveticaNeue.woff") format("woff"), url("../font/helvetica/HelveticaNeue.ttf") format("truetype"), url('../font/helvetica/HelveticaNeue.svg') format('svg');
+}
+
+/**
+* Typograhpy and colours
+*/
+
+html {
+  font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+}
+
+body {
+  line-height: 20px;
+}
+
+h1 {
+  color: #c1c1c1;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+h2 {
+  color: #207a7a;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+h3 {
+  color: #996a44;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+h4 {
+  color: #222;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+h5 {
+  color: #222;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+h6 {
+  color: #222;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+/**
+* Side Menu bar
+*/
+
+ul.side-nav.fixed li.menu-logo {
+  text-align: center;
+  background-color: #079296;
+  height: 90px;
+}
+
+ul.side-nav.fixed li.menu-logo a{
+  height: 100%;
+  padding: 0px;
+}
+
+ul.side-nav.fixed li.menu-logo img{
+  height: 90%;
+  padding: 5px;
+}
+
+ul.side-nav.fixed li.logo:hover {
+  background-color: transparent;
+}
+
+.side-nav {
+  width: 200px;
+  padding-top: 32px;
+  z-index: 998;
+}
+
+
+main, footer {
+  padding-left: 200px;
+}
+
+/**
+* Top bar
+*/
+
+nav.brand-logo {
+  text-shadow: 3px 3px #077b7f;
+  font-size: 3rem;
+}
+
+nav.top-nav {
+  background-color: #079296;
+  background: linear-gradient(to right, #079296 60%, white);
+  height: 90px;
+  line-height: 90px;
+  margin-top: 32px;
+  margin-left: 50px;
+}
+
+@media only screen and (max-width: 993px) {
+  header, main, footer {
+    padding-left: 0px;
+  }
+  nav.top-nav {
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+
+/**
+* EMBL-EBI bar
+*/
+
+nav.embl-nav {
+  height: 32px;
+  background-color: #000000;
+  position:fixed;
+  z-index: 999;
+  line-height: 1px;
+}
+
+nav.embl-nav img {
+  height: 30px;
+  padding-left: 9px;
+}

@@ -7,17 +7,144 @@
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="/static/css/materialize.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="/static/css/materialize.css" media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="/static/css/chembl-style.css" media="screen,projection"/>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 </head>
 <body>
-<h1>It works!</h1>
 
-  <!-- APIs -->
-  <script type="text/javascript" src="/static/js/api/jquery-1.12.0.js"></script>
-  <script type="text/javascript" src="/static/js/api/materialize.js"></script>
+<body>
+
+
+<header>
+
+
+  <div class="row">
+
+    <!-- EMBL-EBI Header-->
+    <nav class="embl-nav hide-on-med-and-down">
+
+        <a href="//www.ebi.ac.uk/" title="Go to the EMBL-EBI homepage">
+          <img src="//www.ebi.ac.uk/web_guidelines/images/logos/EMBL-EBI/EMBL_EBI_Logo_white.png" alt="EMBL European Bioinformatics Institute">
+        </a>
+        <ul id="embl-ebi-bar" class="right hide-on-med-and-down">
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Research</a></li>
+          <li><a href="#">Training</a></li>
+          <li><a href="#">About us</a></li>
+        </ul>
+
+    </nav>
+
+
+  </div>
+
+  <div class="row">
+    <!-- ChEMBL Header-->
+    <nav class="top-nav">
+      <!-- To show the side navbar when it has been hidden-->
+      <div class="container">
+        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
+          <i class="mdi-navigation-menu"></i>
+        </a>
+      </div>
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">ChEMBL</a>
+          <ul class="right hide-on-med-and-down">
+            <li><img src="/static/img/wellcometrust.png" height="30" style="padding-top: 10px"/></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+</header>
+
+<main>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col">
+        <!-- Side Navbar-->
+        <ul id="nav-mobile" class="side-nav fixed">
+          <li class="menu-logo"><a href="#"><img src="/static/img/chembl_logo.png"/></a></li>
+          <li><a href="#">ChEMBL</a></li>
+          <li><a href="#">Downloads</a></li>
+          <li><a href="#">UniChem</a></li>
+          <li><a href="#">Malaria Data</a></li>
+          <li><a href="#">ChEMBL-NTD</a></li>
+          <li><a href="#">ADME SARfari <span class="new badge"></span></a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m9 l10">
+        <h1>h1: The quick brown fox jumps over the lazy dog.</h1>
+        <h2>h2: The quick brown fox jumps over the lazy dog.</h2>
+        <h3>h3: The quick brown fox jumps over the lazy dog.</h3>
+        <h4>h4: The quick brown fox jumps over the lazy dog.</h4>
+        <h5>h5: The quick brown fox jumps over the lazy dog.</h5>
+        <h6>h6: The quick brown fox jumps over the lazy dog.</h6>
+        <p> p: The quick brown fox jumps over the lazy dog. </p>
+        <p> p: The quick brown fox jumps over the lazy dog. </p>
+        <p><b> p: The quick brown fox jumps over the lazy dog.</b></p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et interdum felis. Nunc sollicitudin est nec
+          lorem fermentum fermentum. Curabitur eget ultricies libero, et rutrum lacus. Vestibulum varius cursus lorem ac
+          malesuada. Phasellus sed efficitur arcu. Proin ut orci feugiat, fermentum tortor quis, dictum magna. Integer
+          ultrices justo et euismod molestie. Sed fermentum, odio non fringilla suscipit, lacus libero feugiat nulla,
+          nec posuere eros neque et erat. Donec ipsum nisi, lobortis vel mollis sed, semper et tortor. Nunc et congue
+          lorem.
+
+          Nulla a egestas nisl, non facilisis nisl. Quisque euismod nunc eget ex condimentum tincidunt. Morbi dignissim
+          quam ut tristique eleifend. Phasellus leo odio, blandit a diam in, vestibulum gravida metus. Aenean sagittis
+          neque laoreet lacus vulputate auctor vitae sit amet turpis. Fusce luctus leo augue, vitae commodo dui
+          vestibulum interdum. In aliquet libero vel urna tristique, in rutrum dolor condimentum. Mauris vestibulum
+          lacus nec nulla pellentesque mollis quis in metus. Aliquam id varius mi. Etiam accumsan molestie tellus, ac
+          sodales odio malesuada a.
+
+          Etiam consequat neque nec magna placerat condimentum. Fusce efficitur bibendum velit, eu hendrerit lorem
+          porttitor at. Duis sed felis blandit, tempus nisi eget, molestie risus. Suspendisse potenti. Curabitur
+          porttitor rhoncus massa id ornare. Donec gravida egestas fringilla. Cras gravida aliquet bibendum. Ut
+          tincidunt dolor vel mauris condimentum volutpat. Aliquam erat volutpat. Proin convallis ante sit amet purus
+          viverra semper. Vestibulum laoreet, nisl eget ullamcorper pharetra, ligula ligula finibus eros, non sagittis
+          ipsum augue quis diam. Ut lorem neque, tincidunt a ullamcorper eu, facilisis at risus. Etiam lobortis luctus
+          aliquam.
+
+          In varius turpis vitae magna ullamcorper, ac ullamcorper elit laoreet. Proin nec augue augue. Suspendisse
+          volutpat, metus ac aliquam sodales, arcu mauris volutpat elit, non sodales turpis leo in purus. Suspendisse
+          elit neque, vulputate ac nunc sit amet, facilisis vulputate nisl. In gravida enim ex, vitae pulvinar odio
+          auctor at. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vel
+          congue diam. Nulla sodales in ante ac scelerisque. Suspendisse lacus libero, gravida non enim eget, dictum
+          posuere nunc.
+
+          Nunc auctor convallis felis, vitae tempor ipsum vestibulum at. Cras quis auctor dolor. Nunc sit amet est nec
+          nibh pretium aliquet sed eget orci. Vestibulum velit neque, malesuada quis consectetur a, pretium quis enim.
+          Phasellus lacinia nunc neque, ac cursus metus lobortis ac. Morbi in cursus metus, in blandit risus. Quisque
+          nibh enim, lobortis at magna a, pellentesque euismod odio. Integer in tristique nisl, eu mattis augue. Ut ac
+          dui lectus.
+
+        </p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+<!-- APIs -->
+<script type="text/javascript" src="/static/js/api/jquery-2.2.0.js"></script>
+<script type="text/javascript" src="/static/js/api/materialize.js"></script>
+
 
 </body>
 </html>
