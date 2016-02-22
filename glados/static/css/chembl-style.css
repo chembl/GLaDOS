@@ -79,12 +79,12 @@ ul.side-nav.fixed li.menu-logo {
   height: 90px;
 }
 
-ul.side-nav.fixed li.menu-logo a{
+ul.side-nav.fixed li.menu-logo a {
   height: 100%;
   padding: 0px;
 }
 
-ul.side-nav.fixed li.menu-logo img{
+ul.side-nav.fixed li.menu-logo img {
   height: 90%;
   padding: 5px;
 }
@@ -93,24 +93,24 @@ ul.side-nav.fixed li.logo:hover {
   background-color: transparent;
 }
 
+
 .side-nav {
   width: 200px;
   padding-top: 32px;
-  z-index: 998;
+  z-index: 997;
 }
-
 
 main, footer {
   padding-left: 200px;
 }
 
 /**
-* Top bar
+* Chembl bar
 */
 
 nav.brand-logo {
-  text-shadow: 3px 3px #077b7f;
-  font-size: 3rem;
+  text-shadow: 5px 5px #eeeeee;
+  font-size: 5rem;
 }
 
 nav.top-nav {
@@ -120,12 +120,14 @@ nav.top-nav {
   line-height: 90px;
   margin-top: 32px;
   margin-left: 50px;
+  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
 }
 
 @media only screen and (max-width: 993px) {
   header, main, footer {
     padding-left: 0px;
   }
+
   nav.top-nav {
     margin-left: 0px;
     margin-top: 0px;
@@ -136,15 +138,176 @@ nav.top-nav {
 * EMBL-EBI bar
 */
 
-nav.embl-nav {
-  height: 32px;
+div#global-masthead,
+div#global-masthead nav {
+  height: auto;
+
   background-color: #000000;
-  position:fixed;
-  z-index: 999;
+  position: fixed;
+  z-index: 998;
   line-height: 1px;
+  border-bottom: 1px solid #e3e3e3
 }
 
-nav.embl-nav img {
-  height: 30px;
-  padding-left: 9px;
+div#global-masthead nav {
+  float: right
+}
+
+div#global-masthead p {
+  margin: 0
+}
+
+div.masthead ul {
+  margin: 0;
+  padding: 0;
+  float: left;
+  list-style: none;
+  line-height: normal;
+}
+
+div.masthead ul li {
+  float: left;
+}
+
+div.masthead ul a {
+  display: block;
+}
+
+div.masthead ul li a,
+div.masthead ul li a {
+  padding: 0.2em 0.6em;
+  font-size: 93%;
+
+}
+
+div.masthead ul li abbr {
+  border-bottom: 0 none
+}
+
+div#global-masthead {
+  border-bottom: 1px solid #e3e3e3
+}
+
+div#global-masthead p,
+div#global-masthead img {
+  float: left
+}
+
+div#global-masthead img {
+  padding-left: 0.69em;
+
+  float: left;
+}
+
+div#global-masthead p {
+}
+
+div#global-masthead p#logo a,
+div#global-masthead p#logo a:link,
+div#global-masthead p#logo a:visited {
+  border: 0 none
+}
+
+div#local-footer p {
+  padding-top: 10px;
+  margin: 0
+}
+
+div#global-masthead nav {
+  height:auto;
+}
+
+div#global-masthead ul {
+  float: right;
+  font-size: 93%;
+
+}
+
+div#global-masthead ul li a {
+  display: block;
+  border-right: 1px solid #000;
+  border-left: 1px solid #666;
+  padding-top: 5px;
+  height:31px;
+}
+
+.oldie div#global-masthead ul li a {
+  width: 5em;
+  text-align: center
+}
+
+div#global-masthead ul li.first a {
+  border-left: 0 none
+}
+
+div#global-masthead ul li.last a {
+  border-right: 0 none
+}
+
+div#global-masthead ul li a,
+div#global-masthead ul li a:link,
+div#global-masthead ul li a:visited {
+  color: white;
+  border-bottom: 0 none
+}
+
+div#global-masthead ul li a:hover,
+div#global-masthead ul li a:active,
+div#global-masthead ul li a:focus,
+div#global-masthead ul li.active a,
+div#global-masthead ul li.active-trail a {
+  border-top: 3px solid white;
+
+}
+
+div#global-masthead ul li#services a:hover,
+div#global-masthead ul li#services a:active,
+div#global-masthead ul li#services a:focus,
+div#global-masthead ul li.active#services a,
+div#global-masthead ul li.active-trail#services a {
+  border-top-color: #207a7a
+}
+
+div#global-masthead ul li#research a:hover,
+div#global-masthead ul li#research a:active,
+div#global-masthead ul li#research a:focus,
+div#global-masthead ul li#research.active a,
+div#global-masthead ul li#research.active-trail a {
+  border-top-color: #71b360
+}
+
+div#global-masthead ul li#training a:hover,
+div#global-masthead ul li#training a:active,
+div#global-masthead ul li#training a:focus,
+div#global-masthead ul li#training.active a,
+div#global-masthead ul li#training.active-trail a {
+  border-top-color: #fab700
+}
+
+div#global-masthead ul li#industry a:hover,
+div#global-masthead ul li#industry a:active,
+div#global-masthead ul li#industry a:focus,
+div#global-masthead ul li#industry.active a,
+div#global-masthead ul li#industry.active-trail a {
+  border-top-color: #346189
+}
+
+div#global-masthead ul li#industry {
+  display: none !important
+}
+
+div#global-masthead ul li#about a:hover,
+div#global-masthead ul li#about a:active,
+div#global-masthead ul li#about a:focus,
+div#global-masthead ul li#about.active a,
+div#global-masthead ul li#about.active-trail a {
+  border-top-color: #207a7a
+}
+
+div#global-masthead ul li#about-us a:hover,
+div#global-masthead ul li#about-us a:active,
+div#global-masthead ul li#about-us a:focus,
+div#global-masthead ul li#about-us.active a,
+div#global-masthead ul li#about-us.active-trail a {
+  border-top-color: #207a7a
 }
