@@ -93,25 +93,19 @@ ul.side-nav.fixed li.logo:hover {
   background-color: transparent;
 }
 
-
 .side-nav {
   width: 200px;
   padding-top: 32px;
-  z-index: 997;
+  z-index: 960;
 }
 
-main, footer {
+main {
   padding-left: 200px;
 }
 
 /**
 * Chembl bar
 */
-
-nav.brand-logo {
-  text-shadow: 5px 5px #eeeeee;
-  font-size: 5rem;
-}
 
 nav.top-nav {
   background-color: #079296;
@@ -121,6 +115,11 @@ nav.top-nav {
   margin-top: 32px;
   margin-left: 50px;
   font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+}
+
+nav.top-nav a {
+  text-shadow: 1px 1px #000000;
+  font-size: 3rem;
 }
 
 @media only screen and (max-width: 993px) {
@@ -141,10 +140,9 @@ nav.top-nav {
 div#global-masthead,
 div#global-masthead nav {
   height: auto;
-
   background-color: #000000;
   position: fixed;
-  z-index: 998;
+  z-index: 970;
   line-height: 1px;
   border-bottom: 1px solid #e3e3e3
 }
@@ -195,7 +193,6 @@ div#global-masthead img {
 
 div#global-masthead img {
   padding-left: 0.69em;
-
   float: left;
 }
 
@@ -214,7 +211,7 @@ div#local-footer p {
 }
 
 div#global-masthead nav {
-  height:auto;
+  height: auto;
 }
 
 div#global-masthead ul {
@@ -228,7 +225,7 @@ div#global-masthead ul li a {
   border-right: 1px solid #000;
   border-left: 1px solid #666;
   padding-top: 5px;
-  height:31px;
+  height: 31px;
 }
 
 .oldie div#global-masthead ul li a {
@@ -311,3 +308,155 @@ div#global-masthead ul li#about-us.active a,
 div#global-masthead ul li#about-us.active-trail a {
   border-top-color: #207a7a
 }
+
+/**
+* EMBL-EBI footer
+*/
+
+div#global-footer {
+  background-color: rgba(250, 250, 250, 0.85);
+  margin: 0;
+  width: 100%;
+  position: relative;
+  z-index: 980;
+  height: auto;
+  max-width: none;
+}
+
+div#global-footer img {
+  padding-left: 0.7em;
+  margin: 29px 0 0 0;
+  float: left;
+}
+
+.oldie div#local-footer,
+.oldie div#global-footer {
+  background-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#d9ffffff', EndColorStr='#d9ffffff')
+}
+
+#ebi-footer-meta {
+  padding-bottom: 1px;
+  clear: both
+}
+
+div#local-footer {
+  background-color: #fff;
+  border-top: 2px solid #eee
+}
+
+#global-footer {
+  border-top: 5px solid #eee
+}
+
+#global-footer h3 {
+  font-size: 123.1%;
+  margin-bottom: 5px;
+  color: #333;
+  line-height: 1.538;
+  margin-top: 20px;
+}
+
+#global-footer h3 a {
+  padding: 0.5em 0.3em 0em 0.3em;
+}
+
+#global-footer h3 a:link {
+  color: #333333;
+}
+
+#global-footer h3 a:visited {
+  color: #333333;
+}
+
+#global-footer p {
+  font-size: 100%;
+  margin: 0 0 5px 0
+}
+
+#global-footer ul {
+  font-size: 75%;
+  padding: 0 0 0 9px;
+  list-style: none;
+  margin: 0;
+}
+
+#global-footer a {
+  border-bottom: 0 none;
+  color: #0f2559;
+}
+
+#global-footer a:hover {
+  color: #0e6a0e;
+}
+
+#global-footer a:visited {
+  color: #666;
+}
+
+#global-footer ul li a,
+#ebi-footer-meta p a {
+  padding: 2px 4px 2px 0
+}
+
+#ebi-footer-meta p a {
+  margin-left: 0
+}
+
+#global-footer ul li a:hover,
+#global-footer ul li a:focus,
+#global-footer ul li a:active,
+#ebi-footer-meta p a:hover,
+#ebi-footer-meta p a:focus,
+#ebi-footer-meta p a:active {
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #e4e4e4
+}
+
+#ebi-footer-meta p.address {
+  color: #888;
+  font-size: 85%;
+}
+
+#ebi-footer-meta p.terms-of-use {
+  font-size: 85%;
+}
+
+#ebi-footer-meta p.legal {
+  margin-bottom: 9px
+}
+
+#global-footer h3.services {
+  border-bottom: 2px solid #207a7a
+}
+
+#global-footer h3.research {
+  border-bottom: 2px solid #71b360
+}
+
+#global-footer h3.training {
+  border-bottom: 2px solid #fab700
+}
+
+#global-footer h3.industry {
+  border-bottom: 2px solid #346189
+}
+
+#global-footer h3.about {
+  border-bottom: 2px solid #207a7a
+}
+
+#global-footer h3:hover,
+#global-footer h3:focus,
+#global-footer h3:active {
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #e4e4e4
+}
+
+
