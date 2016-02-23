@@ -22,9 +22,9 @@
 }
 
 @font-face {
-  font-family: "ChEMBL_HelveticaNeue";
-  src: local(Verdana Bold), url("../font/helvetica/HelveticaNeue.eot");
-  src: url("../font/helvetica/HelveticaNeue.eot?#iefix") format("embedded-opentype"), url("../font/helvetica/HelveticaNeue.woff") format("woff"), url("../font/helvetica/HelveticaNeue.ttf") format("truetype"), url('../font/helvetica/HelveticaNeue.svg') format('svg');
+  font-family: "ChEMBL_HelveticaNeueLTPRo";
+  src: local(Verdana Bold), url("../font/helvetica/helveticaneueltprolt.eot");
+  src: url("../font/helvetica/helveticaneueltprolt.eot?#iefix") format("embedded-opentype"), url("../font/helvetica/helveticaneueltprolt.woff") format("woff"), url("../font/helvetica/helveticaneueltprolt.ttf") format("truetype"), url('../font/helvetica/helveticaneueltprolt.svg') format('svg'), url('../font/helvetica/helveticaneueltprolt.otf') format('otf');
 }
 
 /**
@@ -41,32 +41,32 @@ body {
 
 h1 {
   color: #c1c1c1;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 h2 {
   color: #207a7a;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 h3 {
   color: #996a44;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 h4 {
   color: #222;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 h5 {
   color: #222;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 h6 {
   color: #222;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 /**
@@ -114,7 +114,7 @@ nav.top-nav {
   line-height: 90px;
   margin-top: 32px;
   margin-left: 50px;
-  font-family: "ChEMBL_HelveticaNeue", helvetica, Arial, sans-serif;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
 nav.top-nav a {
