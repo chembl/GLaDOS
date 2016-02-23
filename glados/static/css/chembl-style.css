@@ -4,6 +4,7 @@
 
 /**
 * Fonts
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
 @font-face {
@@ -29,6 +30,7 @@
 
 /**
 * Typograhpy and colours
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
 html {
@@ -71,50 +73,71 @@ h6 {
 
 /**
 * Side Menu bar
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
-ul.side-nav.fixed li.menu-logo {
+.side-nav.fixed li.menu-logo {
   text-align: center;
   background-color: #079296;
   height: 90px;
+  border-bottom: 2px solid #d1d1d1;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
 }
 
-ul.side-nav.fixed li.menu-logo a {
+.side-nav.fixed li.menu-logo a {
   height: 100%;
   padding: 0px;
 }
 
-ul.side-nav.fixed li.menu-logo img {
+.side-nav.fixed li.menu-logo img {
   height: 90%;
   padding: 5px;
+  margin-top: 5px;
 }
 
-ul.side-nav.fixed li.logo:hover {
-  background-color: transparent;
-}
-
-.side-nav {
-  width: 200px;
+.side-nav.fixed {
+  width: 180px;
   padding-top: 32px;
   z-index: 960;
 }
 
+.side-nav.fixed li {
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+}
+
+.side-nav.fixed a,
+.side-nav.fixed li{
+  height: 44px;
+  line-height: 44px;
+}
+
+.side-nav.fixed span{
+  height: 20px;
+  line-height: 22px;
+  margin-top: 8px;
+  padding: 0 2px 0 2px;
+}
+
 main {
-  padding-left: 200px;
+  /* to prevent the side bar from overlapping the main contens */
+  padding-left: 180px;
 }
 
 /**
 * Chembl bar
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
 nav.top-nav {
   background-color: #079296;
   background: linear-gradient(to right, #079296 60%, white);
   height: 90px;
-  line-height: 90px;
+  line-height: 100px;
   margin-top: 32px;
   margin-left: 50px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  border-bottom: 2px solid #d1d1d1
 }
 
 nav.top-nav a {
@@ -122,6 +145,7 @@ nav.top-nav a {
   font-size: 3rem;
 }
 
+/* responsive sizes */
 @media only screen and (max-width: 993px) {
   header, main, footer {
     padding-left: 0px;
@@ -135,6 +159,7 @@ nav.top-nav a {
 
 /**
 * EMBL-EBI bar
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
 div#global-masthead,
@@ -309,8 +334,23 @@ div#global-masthead ul li#about-us.active-trail a {
   border-top-color: #207a7a
 }
 
+/*
+* Responsive layout
+*/
+@media only screen and (max-width: 420px) {
+
+  div#global-masthead ul {
+    font-size: 80%;
+  }
+
+  div#global-masthead img {
+    padding-left: 0.2em;
+  }
+}
+
 /**
 * EMBL-EBI footer
+* ----------------------------------------------------------------------------------------------------------------------
 */
 
 div#global-footer {
@@ -321,6 +361,7 @@ div#global-footer {
   z-index: 980;
   height: auto;
   max-width: none;
+  line-height: 1.538;
 }
 
 div#global-footer img {
@@ -419,14 +460,12 @@ div#local-footer {
 #ebi-footer-meta p.address {
   color: #888;
   font-size: 85%;
+  padding-left: 0.7em;
 }
 
 #ebi-footer-meta p.terms-of-use {
   font-size: 85%;
-}
-
-#ebi-footer-meta p.legal {
-  margin-bottom: 9px
+  padding-left: 0.7em;
 }
 
 #global-footer h3.services {
@@ -457,6 +496,71 @@ div#local-footer {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   background-color: #e4e4e4
+}
+
+/*
+* Responsive layout
+*/
+
+@media only screen and (max-width: 630px) {
+
+  #ebi-footer-meta p.terms-of-use,
+  #ebi-footer-meta p.address {
+    font-size: 60%;
+    padding-left: 0.3em;
+  }
+
+  div#global-footer img {
+    padding-left: 0.3em;
+    margin: 15px 0 0 0;
+    float: left;
+    height: 20px;
+  }
+
+  #global-footer ul {
+    font-size: 55%;
+    padding: 0 0 0 4px;
+
+  }
+
+  #global-footer h3 {
+    font-size: 80%;
+    margin-bottom: 2px;
+    line-height: 1.2;
+    margin-top: 10px;
+  }
+
+  div#global-footer {
+    line-height: 1;
+  }
+
+}
+
+@media only screen and (max-width: 360px) {
+
+  #ebi-footer-meta p.terms-of-use,
+  #ebi-footer-meta p.address {
+    font-size: 40%;
+    padding-left: 0.1em;
+  }
+
+  div#global-footer img {
+    padding-left: 0.1em;
+    margin: 10px 0 0 0;
+    height: 15px;
+  }
+
+  #global-footer h3 {
+    font-size: 70%;
+    line-height: 1;
+    margin-top: 7px;
+  }
+
+  #global-footer ul {
+
+    padding: 0 0 0 1px;
+
+  }
 }
 
 
