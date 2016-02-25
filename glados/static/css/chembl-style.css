@@ -78,9 +78,9 @@ h6 {
 
 .side-nav.fixed li.menu-logo {
   text-align: center;
-  background-color: #079296;
+  background-color: #207a7a;
   height: 90px;
-  border-bottom: 2px solid #d1d1d1;
+  border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
 }
@@ -108,14 +108,15 @@ h6 {
 
 .side-nav.fixed a,
 .side-nav.fixed li{
-  height: 44px;
-  line-height: 44px;
+  height: 34px;
+  line-height: 34px;
 }
+
 
 .side-nav.fixed span{
   height: 20px;
-  line-height: 22px;
-  margin-top: 8px;
+  line-height: 19px;
+  margin-top: 6px;
   padding: 0 2px 0 2px;
 }
 
@@ -130,14 +131,14 @@ main {
 */
 
 nav.top-nav {
-  background-color: #079296;
-  background: linear-gradient(to right, #079296 60%, white);
+  background-color: #207a7a;
+  background: linear-gradient(to right, #207a7a 60%, white);
   height: 90px;
   line-height: 100px;
   margin-top: 32px;
   margin-left: 50px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  border-bottom: 2px solid #d1d1d1
+  border-bottom: 1px solid #d1d1d1
 }
 
 nav.top-nav a {
@@ -152,6 +153,7 @@ nav.top-nav a {
   }
 
   nav.top-nav {
+    background: #207a7a;
     margin-left: 0px;
     margin-top: 0px;
   }
