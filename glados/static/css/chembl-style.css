@@ -107,13 +107,12 @@ h6 {
 }
 
 .side-nav.fixed a,
-.side-nav.fixed li{
+.side-nav.fixed li {
   height: 34px;
   line-height: 34px;
 }
 
-
-.side-nav.fixed span{
+.side-nav.fixed span {
   height: 20px;
   line-height: 19px;
   margin-top: 6px;
@@ -155,7 +154,13 @@ nav.top-nav a {
   nav.top-nav {
     background: #207a7a;
     margin-left: 0px;
-    margin-top: 0px;
+    margin-top: 49px;
+    height: 56px;
+    line-height: 61px;
+  }
+
+  nav.top-nav a {
+    font-size: 2rem;
   }
 }
 
@@ -337,6 +342,98 @@ div#global-masthead ul li#about-us.active-trail a {
 }
 
 /**
+* EMBL-EBI Medium and small bar
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+div#global-masthead-small nav {
+  height: 49px;
+  background-color: #333333;
+  position: fixed;
+  z-index: 970;
+  line-height: 10px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+div#global-masthead-small img {
+  margin-left: 9px;
+  margin-top: 9px;
+}
+
+#global-masthead-small .row {
+  margin-bottom: 0px;
+}
+
+#global-masthead-small .menu-link {
+  display: inline-block;
+  margin: 0 0 -4px 0;
+  line-height: 4px;
+  vertical-align: middle;
+  padding: 6px 4px 0px;
+  width: 48px;
+  text-align: center;
+  font-size: 9px;
+  height: 49px;
+  overflow: hidden;
+  float: right;
+}
+
+#global-masthead-small div#masthead-mobile-services {
+  border-bottom: 3px solid #60bdc4;
+}
+
+#global-masthead-small div#masthead-mobile-research {
+  border-bottom: 3px solid #73A95B;
+}
+
+#global-masthead-small div#masthead-mobile-training {
+  border-bottom: 3px solid #fab700;
+}
+
+#global-masthead-small div#masthead-mobile-about {
+  border-bottom: 3px solid #60bdc4;
+}
+
+#global-masthead-small div#masthead-mobile-search {
+  border-bottom: 3px solid #000;
+}
+
+#global-masthead-small div#masthead-mobile-services.active {
+  background: #60bdc4;
+  border-bottom: 3px solid #FFF;
+}
+
+#global-masthead-small div#masthead-mobile-research.active {
+  background: #73A95B;
+  border-bottom: 3px solid #FFF;
+}
+
+#global-masthead-small div#masthead-mobile-training.active {
+  background: #fab700;
+  border-bottom: 3px solid #FFF;
+}
+
+#global-masthead-small div#masthead-mobile-about.active {
+  background: #60bdc4;
+  border-bottom: 3px solid #FFF;
+}
+
+#global-masthead-small div#masthead-mobile-search.active {
+  background: #000;
+  border-bottom: 3px solid #FFF;
+}
+
+/* responsive sizes
+@media only screen and (max-width: 600px) {
+
+  div#global-masthead-small img {
+    height: 50px;
+  }
+
+}*/
+
+/**
 * EMBL-EBI footer
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -476,7 +573,6 @@ div#global-footer img {
   background-color: #e4e4e4
 }
 
-
 #ebi-footer-meta-medium p.address,
 #ebi-footer-meta p.address {
   color: #888;
@@ -491,7 +587,7 @@ div#global-footer img {
 }
 
 #ebi-footer-meta-small p.address,
-#ebi-footer-meta-small p.terms-of-use{
+#ebi-footer-meta-small p.terms-of-use {
   font-size: 65%;
   padding-left: 0.7em;
 }

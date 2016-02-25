@@ -16,14 +16,13 @@
 </head>
 <body>
 
-<body>
-
 
 <header>
 
 
   <div class="row">
 
+    <!-- EBI Large Header -->
     <div id="global-masthead" class="masthead hide-on-med-and-down">
 
       <nav>
@@ -45,8 +44,66 @@
 
     </div>
 
+    <!-- EBI Small and Medium Header -->
+
+    <div id="global-masthead-small" class="masthead hide-on-large-only">
+
+      <nav>
+        <div class="container" style="width: 100%;">
+
+          <div class="row">
+
+            <!-- EBI logo -->
+            <div class="col s1 m3">
+              <!--This has to be one line and no newline characters-->
+              <a href="//www.ebi.ac.uk/" title="Go to the EMBL-EBI homepage"><img
+                src="//www.ebi.ac.uk/web_guidelines/images/logos/EMBL-EBI/EMBL_EBI_Logo_white.png"
+                alt="EMBL European Bioinformatics Institute"></a>
+            </div>
+
+            <!-- Item services-->
+            <div class="col s9 push-s2 m4 push-m5">
+
+              <div class="container">
+
+                <div >
+                  <div id="masthead-mobile-about" class="menu-link">
+                    <a href="/about" >
+                      <p><span class="icon-info"></span></p>
+                      <p>About</p></a>
+                  </div>
+                  <div id="masthead-mobile-training" class="menu-link">
+                    <a href="/training" >
+                      <p><span class="icon-training"></span></p>
+                      <p>Training</p></a>
+                  </div>
+                   <div id="masthead-mobile-research" class="menu-link">
+                    <a href="/research" >
+                      <p><span class="icon-research"></span></p>
+                      <p>Research</p>
+                    </a>
+                  </div>
+                  <div id="masthead-mobile-services" class="menu-link">
+                    <a href="/services" >
+                      <p><span class="icon-services"></span></p>
+                      <p>Services</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+      </nav>
+
+    </div>
 
   </div>
+
 
   <div class="row">
     <!-- ChEMBL Header-->
@@ -54,7 +111,7 @@
       <!-- To show the side navbar when it has been hidden-->
       <div class="container">
         <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
-          <i class="mdi-navigation-menu"></i>
+          <i class="mdi-navigation-menu" style="line-height: 50px;"></i>
         </a>
       </div>
       <div class="container">
@@ -63,7 +120,8 @@
             <small><span class="icon-beta"></span></small>
           </a>
           <ul class="right hide-on-med-and-down">
-            <li><img alt="Wellcome Trust" src="/static/img/wellcometrust.png" height="30" style="padding-top: 10px"/>
+            <li><img alt="Wellcome Trust" src="/static/img/wellcometrust.png" height="30"
+                     style="padding-top: 10px;"/>
             </li>
           </ul>
         </div>
