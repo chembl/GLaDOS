@@ -165,7 +165,7 @@ nav.top-nav a {
 div#global-masthead,
 div#global-masthead nav {
   height: auto;
-  background-color: #000000;
+  background-color: #333333;
   position: fixed;
   z-index: 970;
   line-height: 1px;
@@ -334,27 +334,13 @@ div#global-masthead ul li#about-us.active-trail a {
   border-top-color: #207a7a
 }
 
-/*
-* Responsive layout
-*/
-@media only screen and (max-width: 420px) {
-
-  div#global-masthead ul {
-    font-size: 80%;
-  }
-
-  div#global-masthead img {
-    padding-left: 0.2em;
-  }
-}
-
 /**
 * EMBL-EBI footer
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
 div#global-footer {
-  background-color: rgba(250, 250, 250, 0.85);
+  background-color: rgb(250, 250, 250);
   margin: 0;
   width: 100%;
   position: relative;
@@ -498,69 +484,5 @@ div#local-footer {
   background-color: #e4e4e4
 }
 
-/*
-* Responsive layout
-*/
-
-@media only screen and (max-width: 630px) {
-
-  #ebi-footer-meta p.terms-of-use,
-  #ebi-footer-meta p.address {
-    font-size: 60%;
-    padding-left: 0.3em;
-  }
-
-  div#global-footer img {
-    padding-left: 0.3em;
-    margin: 15px 0 0 0;
-    float: left;
-    height: 20px;
-  }
-
-  #global-footer ul {
-    font-size: 55%;
-    padding: 0 0 0 4px;
-
-  }
-
-  #global-footer h3 {
-    font-size: 80%;
-    margin-bottom: 2px;
-    line-height: 1.2;
-    margin-top: 10px;
-  }
-
-  div#global-footer {
-    line-height: 1;
-  }
-
-}
-
-@media only screen and (max-width: 360px) {
-
-  #ebi-footer-meta p.terms-of-use,
-  #ebi-footer-meta p.address {
-    font-size: 40%;
-    padding-left: 0.1em;
-  }
-
-  div#global-footer img {
-    padding-left: 0.1em;
-    margin: 10px 0 0 0;
-    height: 15px;
-  }
-
-  #global-footer h3 {
-    font-size: 70%;
-    line-height: 1;
-    margin-top: 7px;
-  }
-
-  #global-footer ul {
-
-    padding: 0 0 0 1px;
-
-  }
-}
 
 
