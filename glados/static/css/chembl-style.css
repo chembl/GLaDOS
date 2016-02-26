@@ -129,12 +129,15 @@ main {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+header .row {
+  margin-bottom: 0;
+}
+
 nav.top-nav {
   background-color: #207a7a;
   background: linear-gradient(to right, #207a7a 60%, white);
   height: 90px;
   line-height: 100px;
-  margin-top: 32px;
   margin-left: 50px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   border-bottom: 1px solid #d1d1d1
@@ -154,7 +157,7 @@ nav.top-nav a {
   nav.top-nav {
     background: #207a7a;
     margin-left: 0px;
-    margin-top: 49px;
+    margin-top: 0px;
     height: 56px;
     line-height: 61px;
   }
@@ -173,7 +176,7 @@ div#global-masthead,
 div#global-masthead nav {
   height: auto;
   background-color: #333333;
-  position: fixed;
+  position: relative;
   z-index: 970;
   line-height: 1px;
   border-bottom: 1px solid #e3e3e3
@@ -349,7 +352,7 @@ div#global-masthead ul li#about-us.active-trail a {
 div#global-masthead-small nav {
   height: 49px;
   background-color: #333333;
-  position: fixed;
+  position: relative;
   z-index: 970;
   line-height: 10px;
   -webkit-font-smoothing: antialiased;
@@ -358,7 +361,7 @@ div#global-masthead-small nav {
 
 div#global-masthead-small img {
   margin-left: 9px;
-  margin-top: 9px;
+  margin-top: 7px;
 }
 
 #global-masthead-small .row {
@@ -373,10 +376,14 @@ div#global-masthead-small img {
   padding: 6px 4px 0px;
   width: 48px;
   text-align: center;
-  font-size: 9px;
+  font-size: 8px;
   height: 49px;
   overflow: hidden;
   float: right;
+}
+
+#global-masthead-small a {
+  color: #dedede;
 }
 
 #global-masthead-small div#masthead-mobile-services {
@@ -424,14 +431,14 @@ div#global-masthead-small img {
   border-bottom: 3px solid #FFF;
 }
 
-/* responsive sizes
-@media only screen and (max-width: 600px) {
+/*  TODO: check if there is a better way to paint the borders of the menu items */
 
-  div#global-masthead-small img {
-    height: 50px;
-  }
 
-}*/
+#global-masthead-small .embl-bar-icon {
+  padding: 0;
+  margin: 0;
+  font-size: 2.2em;
+}
 
 /**
 * EMBL-EBI footer
