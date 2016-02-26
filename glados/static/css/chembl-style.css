@@ -76,47 +76,47 @@ h6 {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.side-nav.fixed li.menu-logo {
+.side-nav li.menu-logo {
   text-align: center;
+  height: 105px;
   background-color: #207a7a;
-  height: 90px;
   border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
 }
 
-.side-nav.fixed li.menu-logo a {
+.side-nav.fixed li.menu-logo {
+  height: 90px;
+}
+
+.side-nav li.menu-logo a {
   height: 100%;
   padding: 0px;
 }
 
-.side-nav.fixed li.menu-logo img {
+.side-nav li.menu-logo img {
   height: 90%;
   padding: 5px;
   margin-top: 5px;
 }
 
-.side-nav.fixed {
+.side-nav {
   width: 180px;
+}
+
+.side-nav.fixed {
   padding-top: 32px;
   z-index: 960;
 }
 
-.side-nav.fixed li {
+.side-nav li {
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 }
 
-.side-nav.fixed a,
-.side-nav.fixed li {
+.side-nav a,
+.side-nav li {
   height: 34px;
   line-height: 34px;
-}
-
-.side-nav.fixed span {
-  height: 20px;
-  line-height: 19px;
-  margin-top: 6px;
-  padding: 0 2px 0 2px;
 }
 
 main {
@@ -432,7 +432,6 @@ div#global-masthead-small img {
 }
 
 /*  TODO: check if there is a better way to paint the borders of the menu items */
-
 
 #global-masthead-small .embl-bar-icon {
   padding: 0;

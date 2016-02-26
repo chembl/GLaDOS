@@ -65,29 +65,28 @@
             <div class="col s9 push-s2 m5 push-m4">
 
 
-                  <div id="masthead-mobile-about" class="menu-link">
-                    <a href="/about">
-                      <p class="embl-bar-icon"><span class="icon-info"></span></p>
-                      <p>About</p></a>
-                  </div>
-                  <div id="masthead-mobile-training" class="menu-link">
-                    <a href="/training">
-                      <p class="embl-bar-icon"><span class="icon-tutorial"></span></p>
-                      <p>Training</p></a>
-                  </div>
-                  <div id="masthead-mobile-research" class="menu-link">
-                    <a href="/research">
-                      <p class="embl-bar-icon"><span class="icon-research"></span></p>
-                      <p>Research</p>
-                    </a>
-                  </div>
-                  <div id="masthead-mobile-services" class="menu-link active">
-                    <a href="/services">
-                      <p class="embl-bar-icon"><span class="icon-services"></span></p>
-                      <p>Services</p>
-                    </a>
-                  </div>
-
+              <div id="masthead-mobile-about" class="menu-link">
+                <a href="/about">
+                  <p class="embl-bar-icon"><span class="icon-info"></span></p>
+                  <p>About</p></a>
+              </div>
+              <div id="masthead-mobile-training" class="menu-link">
+                <a href="/training">
+                  <p class="embl-bar-icon"><span class="icon-tutorial"></span></p>
+                  <p>Training</p></a>
+              </div>
+              <div id="masthead-mobile-research" class="menu-link">
+                <a href="/research">
+                  <p class="embl-bar-icon"><span class="icon-research"></span></p>
+                  <p>Research</p>
+                </a>
+              </div>
+              <div id="masthead-mobile-services" class="menu-link active">
+                <a href="/services">
+                  <p class="embl-bar-icon"><span class="icon-services"></span></p>
+                  <p>Services</p>
+                </a>
+              </div>
 
 
             </div>
@@ -108,7 +107,7 @@
     <nav class="top-nav">
       <!-- To show the side navbar when it has been hidden-->
       <div class="container">
-        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only">
+        <a href="#" data-activates="slide-out" class="button-collapse full hide-on-large-only">
           <i class="mdi-navigation-menu" style="line-height: 50px;"></i>
         </a>
       </div>
@@ -137,23 +136,44 @@
 
       <div class="col">
         <!-- Side Navbar-->
-        <ul id="nav-mobile" class="side-nav fixed">
-          <li class="menu-logo"><a href="#"><img alt="ChEMBL" src="/static/img/chembl_logo.png"/></a></li>
-          <li><a href="#">ChEMBL</a></li>
-          <li><a href="#">Downloads</a></li>
-          <li><a href="#">UniChem</a></li>
-          <li><a href="#">Malaria Data</a></li>
-          <li><a href="#">ChEMBL-NTD</a></li>
-          <li><a href="#">ADME SARfari <span class="new badge"></span></a></li>
-          <li><a href="#">Kinase SARfari </a></li>
-          <li><a hred="#">GPCR Sarfari</a></li>
-          <li><a hred="#">DrugEBility</a></li>
-          <li><a hred="#">Web Services <span class="new badge"></span></a></li>
-          <li><a hred="#">SureChEMBL <span class="new badge"></span></a></li>
-          <li><a hred="#">EBI RDF Platform</a></li>
-          <li><a hred="#">FAQ</span></a></li>
-          <li><a hred="#">Statistics</a></li>
-        </ul>
+        <nav>
+          <!-- This shows when the screen is large -->
+          <ul class="side-nav fixed hide-on-med-and-down">
+            <li class="menu-logo"><a href="#"><img alt="ChEMBL" src="/static/img/chembl_logo.png"/></a></li>
+            <li><a href="#">ChEMBL</a></li>
+            <li><a href="#">Downloads</a></li>
+            <li><a href="#">UniChem</a></li>
+            <li><a href="#">Malaria Data</a></li>
+            <li><a href="#">ChEMBL-NTD</a></li>
+            <li><a href="#">ADME SARfari <span class="new badge"></span></a></li>
+            <li><a href="#">Kinase SARfari </a></li>
+            <li><a hred="#">GPCR Sarfari</a></li>
+            <li><a hred="#">DrugEBility</a></li>
+            <li><a hred="#">Web Services <span class="new badge"></span></a></li>
+            <li><a hred="#">SureChEMBL <span class="new badge"></span></a></li>
+            <li><a hred="#">EBI RDF Platform</a></li>
+            <li><a hred="#">FAQ</span></a></li>
+            <li><a hred="#">Statistics</a></li>
+          </ul>
+          <!-- This shows when the screen is medium or smaller -->
+          <ul id="slide-out" class="side-nav">
+            <li class="menu-logo"><a href="#"><img alt="ChEMBL" src="/static/img/chembl_logo.png"/></a></li>
+            <li><a href="#">ChEMBL</a></li>
+            <li><a href="#">Downloads</a></li>
+            <li><a href="#">UniChem</a></li>
+            <li><a href="#">Malaria Data</a></li>
+            <li><a href="#">ChEMBL-NTD</a></li>
+            <li><a href="#">ADME SARfari <span class="new badge"></span></a></li>
+            <li><a href="#">Kinase SARfari </a></li>
+            <li><a hred="#">GPCR Sarfari</a></li>
+            <li><a hred="#">DrugEBility</a></li>
+            <li><a hred="#">Web Services <span class="new badge"></span></a></li>
+            <li><a hred="#">SureChEMBL <span class="new badge"></span></a></li>
+            <li><a hred="#">EBI RDF Platform</a></li>
+            <li><a hred="#">FAQ</span></a></li>
+            <li><a hred="#">Statistics</a></li>
+          </ul>
+        </nav>
       </div>
 
     </div>
