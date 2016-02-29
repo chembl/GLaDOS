@@ -111,12 +111,19 @@ h6 {
 
 .side-nav li {
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  padding-left: 5px;
 }
 
 .side-nav a,
 .side-nav li {
   height: 34px;
   line-height: 34px;
+}
+
+.side-nav span.badge{
+  position: static;
+  padding: 3px 6px 3px 3px;
+  border-radius: 3px;
 }
 
 main {
