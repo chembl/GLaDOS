@@ -42,33 +42,39 @@ body {
 }
 
 h1 {
-  color: #c1c1c1;
+  color: #f7f7f7;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 370%;
 }
 
 h2 {
   color: #207a7a;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 277%;
 }
 
 h3 {
   color: #996a44;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 182%;
 }
 
 h4 {
   color: #222;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 161.6%;
 }
 
 h5 {
   color: #222;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 138.5%;
 }
 
 h6 {
   color: #222;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-size: 123.1%;
 }
 
 /**
