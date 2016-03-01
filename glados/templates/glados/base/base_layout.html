@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
 
+  {% load compress %}
   <!-- Imports used by all the templates-->
 
   <!--Import Google Icon Font-->
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  {% compress css %}
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="/static/css/materialize.css" media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="/static/css/chembl-style.css" media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="/static/css/chembl-icons.css" media="screen,projection"/>
+  {% endcompress %}
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -643,9 +647,11 @@
 <!------------------------------------------------------------------------------------------------------------------>
 
 <!-- common imports for all templates -->
+{% compress js %}
 <script type="text/javascript" src="/static/js/api/jquery-2.2.0.js"></script>
 <script type="text/javascript" src="/static/js/api/materialize.js"></script>
 <script type="text/javascript" src="/static/js/styling/menu_helper.js"></script>
+{% endcompress %}
 
 
 </body>

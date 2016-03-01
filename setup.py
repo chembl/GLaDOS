@@ -24,6 +24,7 @@ setup(
     long_description=open('README.md').read(),
     install_requires=[
         'django>=1.9',
+        'django-compressor>=2.0',
     ],
     include_package_data=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
