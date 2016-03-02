@@ -114,7 +114,6 @@ h6 {
 
 .side-nav {
   width: 180px;
-  background-color: #b2dfdb;
 }
 
 .side-nav.fixed {
@@ -169,9 +168,9 @@ nav.top-nav {
   background: linear-gradient(to right, #207a7a 60%, white);
   height: 90px;
   line-height: 100px;
-  margin-left: 50px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  border-bottom: 1px solid #d1d1d1
+  border-bottom: 1px solid #d1d1d1;
+  padding-left: 50px;
 }
 
 nav.top-nav a {
@@ -191,6 +190,7 @@ nav.top-nav a {
     margin-top: 0px;
     height: 56px;
     line-height: 61px;
+    padding-left: 0px;
   }
 
   nav.top-nav a {
