@@ -78,10 +78,19 @@ h6 {
 }
 
 /**
-* Side Menu bar
+* General layout setup
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/**
+* Side Menu bar
+* ----------------------------------------------------------------------------------------------------------------------
+*/
 
 .side-nav li.menu-logo {
   text-align: center;
@@ -126,7 +135,6 @@ h6 {
   padding-left: 5px;
 }
 
-
 .side-nav li:hover {
   background-color: #e0f2f1;
 }
@@ -141,8 +149,7 @@ h6 {
   padding-top: 2px;
 }
 
-
-.side-nav span.badge{
+.side-nav span.badge {
   position: relative;
   padding: 3px;
   border-radius: 4px;
