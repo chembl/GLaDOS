@@ -137,6 +137,9 @@ h6 {
   line-height: 34px;
 }
 
+.side-nav a {
+  padding-top: 2px;
+}
 
 
 .side-nav span.badge{
