@@ -82,13 +82,19 @@ h6 {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+
 .side-nav li.menu-logo {
   text-align: center;
   height: 105px;
   background-color: #207a7a;
   border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin-bottom: 5%;
 
+}
+
+.side-nav li.menu-logo:hover {
+  background-color: #207a7a;
 }
 
 .side-nav.fixed li.menu-logo {
@@ -108,6 +114,7 @@ h6 {
 
 .side-nav {
   width: 180px;
+  background-color: #b2dfdb;
 }
 
 .side-nav.fixed {
@@ -120,16 +127,27 @@ h6 {
   padding-left: 5px;
 }
 
+
+.side-nav li:hover {
+  background-color: #80cbc4;
+}
+
 .side-nav a,
 .side-nav li {
   height: 34px;
   line-height: 34px;
+  padding-top: 2px;
 }
 
+
+
 .side-nav span.badge{
-  position: static;
-  padding: 3px 6px 3px 3px;
-  border-radius: 3px;
+  position: relative;
+  padding: 3px;
+  border-radius: 4px;
+  text-align: center;
+  left: 5px;
+  bottom: 2px;
 }
 
 main {
