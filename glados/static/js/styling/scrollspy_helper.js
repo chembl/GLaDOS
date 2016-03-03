@@ -11,12 +11,10 @@ initializeScrollSpyHelper = function() {
     top = win.scrollTop();
     if ((top > startFixation) && (scrollspy_wrapper.css('position') !== 'fixed')) {
       scrollspy_wrapper.removeClass('pin-top');
-      scrollspy_wrapper.addClass('pinned');
-      return console.log('fixing');
+      return scrollspy_wrapper.addClass('pinned');
     } else if ((top < startFixation) && (scrollspy_wrapper.css('position') !== 'relative')) {
       scrollspy_wrapper.removeClass('pinned');
-      scrollspy_wrapper.addClass('pin-top');
-      return console.log('unfixing');
+      return scrollspy_wrapper.addClass('pin-top');
     }
   });
 };

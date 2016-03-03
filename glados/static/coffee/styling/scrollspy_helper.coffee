@@ -16,11 +16,9 @@ initializeScrollSpyHelper = ->
 
       scrollspy_wrapper.removeClass('pin-top')
       scrollspy_wrapper.addClass('pinned')
-      console.log('fixing')
 
     else if (top < startFixation) and (scrollspy_wrapper.css('position') != 'relative')
 
       scrollspy_wrapper.removeClass('pinned')
       scrollspy_wrapper.addClass('pin-top')
-      console.log('unfixing')
 
