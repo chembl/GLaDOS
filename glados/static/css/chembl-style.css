@@ -719,3 +719,9 @@ div#global-footer img {
 div#CompoundNameAndClassification .row{
   margin-bottom: 0;
 }
+
+
+div#CompoundNameAndClassification .CNC-table td{
+  padding: 5px;
+  font-size: 80%;
+}

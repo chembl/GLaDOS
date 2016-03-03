@@ -9,8 +9,8 @@
 
   <div class="row">
 
-    <!-- give more space for the scrollspy in the medium size -->
-    <div class="col s12 m9 l10">
+    <!-- the scrollspy disappears in medium and down -->
+    <div class="col m12 l10">
 
       <h2>Compound Report Card</h2>
 
@@ -20,14 +20,16 @@
 
         <div class="row">
 
-          <div class="col s12 ">
 
+          <div class="col s12 m9 ">
+
+            <!-- Card Start -->
             <div class="card-panel">
 
               <div class="row">
 
                 <!-- Coumpound Image -->
-                <div class="col s12 m6">
+                <div class="col s12 m4">
 
                   <div class="card-image">
                     <img class="responsive-img" src="https://www.ebi.ac.uk/chembl/compound/displayimage_large/2046">
@@ -37,37 +39,46 @@
                 </div>
 
                 <!-- Basic info table -->
-                <div class="col s12 m6 teal lighten-5">
+                <div class="col s12 m8 teal lighten-5">
 
-                  <table >
 
-                    <tbody>
-                    <tr>
-                      <td><b>ID:</b></td>
-                      <td>CHEMBL35</td>
-                    </tr>
-                    <tr>
-                      <td><b>Name:</b></td>
-                      <td>FUROSEMIDE</td>
-                    </tr>
-                    <tr>
-                      <td><b>ChEMBL Synonyms:</b></td>
-                      <td>Furosemide | Aquamed | furosemide | Frusemide | Disal | Lasix | LB-502</td>
-                    </tr>
-                    <tr>
-                      <td><b>Max Phase:</b></td>
-                      <td>4 (Approved)</td>
-                    </tr>
-                    <tr>
-                      <td><b>Trade Names:</b></td>
-                      <td>Disal | Lasix | Aquamed | Frusemide | Furosemide</td>
-                    </tr>
-                     <tr>
-                      <td><b>Molecular Formula:</b></td>
-                      <td>C12H11ClN2O5S</td>
-                    </tr>
-                    </tbody>
-                  </table>
+
+                    <table class="CNC-table">
+
+                      <tbody>
+                      <tr>
+                        <td><b>ID:</b></td>
+                        <td>CHEMBL35</td>
+                        <td><b>Max Phase:</b></td>
+                        <td>4 (Approved)</td>
+                      </tr>
+                      <tr>
+                        <td><b>Name:</b></td>
+                        <td>FUROSEMIDE</td>
+                        <td><b>Molecular Formula:</b></td>
+                        <td>C12H11ClN2O5S</td>
+                      </tr>
+                      <tr>
+                        <td><b>ChEMBL Synonyms:</b></td>
+                        <td colspan="3">
+                            Furosemide
+                            Aquamed
+                            Frusemide
+                            Disal
+                            Lasix
+                            LB-502
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><b>Trade Names:</b></td>
+                        <td colspan="3">Disal | Lasix | Aquamed | Frusemide | Furosemide</td>
+                      </tr>
+                      </tbody>
+
+                    </table>
+
+
 
                 </div>
 
@@ -169,7 +180,7 @@
     <!-- Scrolspy -->
     <!---------------------------------------------------------------------------------------------------------------->
 
-    <div class="col m3 l2 hide-on-small-only">
+    <div class="col l2 hide-on-med-and-down">
 
       <div class="scrollspy-wrapper pin-top">
 
