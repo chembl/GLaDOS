@@ -710,3 +710,12 @@ div#global-footer img {
   width: 100%;
   padding-left: 2%;
 }
+
+/**
+* Compound report card
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+div#CompoundNameAndClassification .row{
+  margin-bottom: 0;
+}
