@@ -684,5 +684,29 @@ div#global-footer img {
   background-color: #e4e4e4
 }
 
+/**
+* Scroll spy
+* ----------------------------------------------------------------------------------------------------------------------
+*/
 
+.scrollspy-wrapper{
+  position: relative;
+}
 
+.pin-top{
+  margin-top: 40px;
+}
+
+.pinned{
+  top: 40px;
+}
+
+/**
+* main content container
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.main-container{
+  width: 100%;
+  padding-left: 2%;
+}

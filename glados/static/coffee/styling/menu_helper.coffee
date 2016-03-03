@@ -1,7 +1,5 @@
-$ ->
 
-  # Initialize collapse button, the one that shows the sidenav on mobile
-  $(".button-collapse").sideNav();
+initializeTopMenuController = ->
 
   # This changes the padding of the side nav when the window is scrolled.
   # So it doesn't leave a blank space when the top embl-ebi bar disapears
@@ -18,7 +16,4 @@ $ ->
     else:
       sidenav_fixed.css
         'paddingTop': maxPadding - top + 'px'
-
-
-
 

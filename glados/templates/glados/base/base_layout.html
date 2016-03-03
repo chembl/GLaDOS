@@ -653,6 +653,27 @@
 <script type="text/javascript" src="/static/js/styling/menu_helper.js"></script>
 {% endcompress %}
 
+<!-- custom js imports that each template decides to load -->
+{% compress js %}
+   {% block custom_js %}{% endblock %}
+{% endcompress %}
+
+<!-- inline javascript -->
+{% compress js %}
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+
+    // initialization of visualization code.
+    // This controls the padding of the sidenav.
+    initializeTopMenuController();
+    // collapse button, the one that shows the sidenav on mobile
+    $(".button-collapse").sideNav();
+
+    {% block custom_js_inline %}{% endblock %}
+
+  });
+</script>
+{% endcompress%}
 
 </body>
 </html>
