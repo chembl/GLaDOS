@@ -701,6 +701,14 @@ div#global-footer img {
   top: 40px;
 }
 
+.table-of-contents a.active{
+  border-left: 2px solid #996a44;
+}
+
+.table-of-contents a:hover {
+  border-left: 1px solid #996a44;
+}
+
 /**
 * main content container
 * ----------------------------------------------------------------------------------------------------------------------
