@@ -735,7 +735,8 @@ div#CompoundNameAndClassification .CNC-img{
 
 div#CompoundNameAndClassification .CNC-img-btn{
   position: absolute;
-  top: 50%;
+  bottom: 0;
+  left: 0;
 }
 
 div#CompoundNameAndClassification .CNC-table-oneline{
@@ -775,9 +776,12 @@ div#CompoundNameAndClassification .CNC-chip-syn{
 
 div#CompoundNameAndClassification .CNC-chip-syn {
   background-color: #eeeeee;
-
 }
 
 div#CompoundNameAndClassification .CNC-chip-tn {
-  background-color: #cfd8dc;
+  background-color: #eeeeee;
+}
+
+div#CompoundNameAndClassification .CNC-btn{
+  padding: 0 5px;
 }
