@@ -733,6 +733,11 @@ div#CompoundNameAndClassification .CNC-img{
   max-height: 90%;
 }
 
+div#CompoundNameAndClassification .CNC-img-btn{
+  position: absolute;
+  top: 50%;
+}
+
 div#CompoundNameAndClassification .CNC-table td{
   padding: 2px;
   font-size: 80%;
