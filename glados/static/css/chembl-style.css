@@ -738,6 +738,14 @@ div#CompoundNameAndClassification .CNC-img-btn{
   top: 50%;
 }
 
+div#CompoundNameAndClassification .CNC-table-oneline{
+  white-space: nowrap;
+}
+
+div#CompoundNameAndClassification .CNC-table-lastrow{
+  border-bottom: 0;
+}
+
 div#CompoundNameAndClassification .CNC-table td{
   padding: 2px;
   font-size: 80%;
