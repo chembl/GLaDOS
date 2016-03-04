@@ -1,0 +1,61 @@
+/*
+ easyChem. v0.6.23β 2013-04-01 by PeterWin
+*/
+/*
+ easyChem CSS file
+*/
+/* Periodic system table */
+.mentable { border-collapse:collapse; margin-top:5px; line-height:1;}
+.mentable td { text-align:center; padding:5px 2px;}
+.mentable td.chem-element { width:4em; max-width:4em; border:1px #000 solid; }
+.mentable td.chem-row { border-top:1px #000 solid; border-bottom:1px #000 solid;}
+.mentable td.chem-cell { border:1px #000 solid; }
+.mentable td.chem-cell.noleft {border-left:none;}
+.mentable td.chem-cell.noright {border-right:none;}
+.mentable td.group-id { vertical-align:bottom;}
+.mentable td.period-id { vertical-align:center; border:1px #000 solid;}
+.mentable-text {font-size:12px;}
+.mentable-subgroup-hd {vertical-align:bottom; height:100%; font-size:12px;}
+.mentable-subgroup-hd .left {float:left; margin-left:0.5em;}
+.mentable-subgroup-hd .right {float:right; margin-right:0.5em;}
+.chem-element .number { float:left; font-size:12px;}
+.chem-element.subgr_b .number { float:right;}
+.chem-element .id { font-weight:bold; }
+.chem-element.subgr_a .id { float:right; margin-right:0.5em;}
+.chem-element.subgr_b .id { float:left; margin-left:0.5em;}
+.chem-element .name { font-size:10px; color:#555; font-family:Arial; clear:both;}
+.chem-element .mass { font-size:12px; color:#777;}
+
+
+.chem-element.s_block { background-color:#FCF;}
+.chem-element.p_block { background-color:#FFC;}
+.chem-element.d_block { background-color:#CCF;}
+.chem-element.f_block { background-color:#CFC;}
+
+/* colors from wikipedia */
+.chem-element.Alkali-metals { background-color:#F66;}
+.chem-element.Alkaline-earth-metals { background-color:#FFDEAD;}
+.chem-element.Lanthanides {background-color:#FFBFFF;}
+.chem-element.Actinides {background-color:#F9C;}
+.chem-element.Transition-metals { background-color:#FFC0C0;}
+.chem-element.Post-transition-metals {background-color:#CCC;}
+.chem-element.Metalloids {background-color:#CC9;}
+.chem-element.Other-nonmetals {background-color:#A0FFA0;}
+.chem-element.Halogens {background-color:#FF9;}
+.chem-element.Noble-gases {background-color:#C0FFFF;}
+.chem-element.Unknown-props {background-color:#E8E8E8;}
+
+
+.echem-comment {color:blue;}
+.echem-opcomment { font-size:70%; display:block;}
+.echem-op {display:inline-block; text-align:center; line-height:0.5;}
+/* atom charge. over atom id */
+.echem-item-charge { 
+    display: inline-block;
+    font-size: 0.7em;
+    left: -0.7em;
+    position: relative;
+    top: -0.5em;
+    width: 0.1em;
+    white-space: nowrap;
+}
