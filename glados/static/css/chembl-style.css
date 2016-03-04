@@ -754,3 +754,30 @@ div#CompoundNameAndClassification .CNC-table td{
 div#CompoundNameAndClassification .card-panel{
   padding: 5px;
 }
+
+div#CompoundNameAndClassification .comp-approved-phase-4{
+  color: #00c853;
+}
+
+div#CompoundNameAndClassification .CNC-chip-tn,
+div#CompoundNameAndClassification .CNC-chip-syn{
+  font-size: 100%;
+  margin: 1px 0;
+  border-radius: 0px;
+  line-height: 10px;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: 500;
+  display: inline-block;
+  height: 20px;
+}
+
+div#CompoundNameAndClassification .CNC-chip-syn {
+  background-color: #eeeeee;
+
+}
+
+div#CompoundNameAndClassification .CNC-chip-tn {
+  background-color: #cfd8dc;
+}
