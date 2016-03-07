@@ -22,11 +22,13 @@ setContractIcon = function(elem) {
 };
 
 setExpandTooltip = function(elem) {
-  return $(elem).attr('data-tooltip', 'Expand');
+  $(elem).attr('data-tooltip', 'Expand');
+  return $('.material-tooltip').hide();
 };
 
 setContractTooltip = function(elem) {
-  return $(elem).attr('data-tooltip', 'Contract');
+  $(elem).attr('data-tooltip', 'Contract');
+  return $('.material-tooltip').hide();
 };
 
 /* *

@@ -20,9 +20,11 @@ setContractIcon = (elem) ->
 
 setExpandTooltip = (elem) ->
   $(elem).attr('data-tooltip','Expand')
+  $('.material-tooltip').hide()
 
 setContractTooltip = (elem) ->
   $(elem).attr('data-tooltip','Contract')
+  $('.material-tooltip').hide()
 
 
 ### *
