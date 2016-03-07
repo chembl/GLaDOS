@@ -77,7 +77,6 @@ initCroppedContainers = function() {
       activator.hide();
       return;
     }
-    console.log(activated.children().text().length);
     toggler = toggleCroppedContainerWrapper(activated, ellipsis);
     return activator.click(toggler);
   });
