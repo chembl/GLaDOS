@@ -791,7 +791,7 @@ div#CompoundNameAndClassification .CNC-btn{
 
 div#CompoundNameAndClassification .cropped {
   overflow: hidden;
-  max-height: 65px;
+  max-height: 90px;
 }
 
 div#CompoundNameAndClassification .expanded {

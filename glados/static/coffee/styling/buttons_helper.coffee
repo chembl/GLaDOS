@@ -18,6 +18,12 @@ setContractIcon = (elem) ->
   $(elem).addClass('fa-compress')
   $(elem).removeClass('fa-expand')
 
+setExpandTooltip = (elem) ->
+  $(elem).attr('data-tooltip','Expand')
+
+setContractTooltip = (elem) ->
+  $(elem).attr('data-tooltip','Contract')
+
 
 ### *
   * @param {JQuery} elem element that is going to be toggled
@@ -36,10 +42,13 @@ toggleCroppedContainerWrapper = (elem, ellipsis) ->
       contract(elem)
       ellipsis.show()
       setExpandIcon($(this).find('i'))
+      setExpandTooltip($(this))
+
     else
       expand(elem)
       ellipsis.hide()
       setContractIcon($(this).find('i'))
+      setContractTooltip($(this))
 
   return toggleCroppedContainer
 
@@ -62,7 +71,7 @@ initCroppedContainers = ->
       # the trim could be removed once the page loads from the web services
       numLetters += $(this).text().trim().length
 
-    if numLetters < 100
+    if numLetters < 142
       ellipsis.hide()
       activator.hide();
       return
