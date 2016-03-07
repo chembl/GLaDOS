@@ -807,5 +807,6 @@ div#CompoundNameAndClassification .CNC-syn-tn-buttons{
 div#CompoundNameAndClassification .CNC-syn-tn-buttons a{
   color: #ffffff;
   padding: 0 4px;
-  border-radius: 5px;
+  border-radius: 3px;
+  margin: 0 1px;
 }
