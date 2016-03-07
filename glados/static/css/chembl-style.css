@@ -791,7 +791,7 @@ div#CompoundNameAndClassification .CNC-btn{
 
 div#CompoundNameAndClassification .cropped {
   overflow: hidden;
-  max-height: 90px;
+  max-height: 88px;
 }
 
 div#CompoundNameAndClassification .expanded {
@@ -807,6 +807,10 @@ div#CompoundNameAndClassification .cropped-container-btns {
   position: absolute;
   bottom: 0px;
   right: 0px;
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.7), rgb(255, 255, 255)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, rgba(255, 255, 255, 0.7), rgb(255, 255, 255)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.7), rgb(255, 255, 255)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgb(255, 255, 255)); /* Standard syntax (must be last) */
 }
 
 div#CompoundNameAndClassification .cropped-container-btns a{
