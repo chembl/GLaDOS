@@ -768,7 +768,6 @@ div#CompoundNameAndClassification .CNC-chip-tn,
 div#CompoundNameAndClassification .CNC-chip-syn{
   font-size: 100%;
   margin: 1px 0;
-  border-radius: 0px;
   line-height: 10px;
   color: rgba(0, 0, 0, 0.6);
   border-radius: 5px;
@@ -788,4 +787,25 @@ div#CompoundNameAndClassification .CNC-chip-tn {
 
 div#CompoundNameAndClassification .CNC-btn{
   padding: 0 5px;
+}
+
+div#CompoundNameAndClassification .CNC-syn-crop{
+  overflow: hidden;
+  max-height: 65px;
+}
+
+div#CompoundNameAndClassification .CNC-syn-tn-container{
+  position: relative;
+}
+
+div#CompoundNameAndClassification .CNC-syn-tn-buttons{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+div#CompoundNameAndClassification .CNC-syn-tn-buttons a{
+  color: #ffffff;
+  padding: 0 4px;
+  border-radius: 5px;
 }
