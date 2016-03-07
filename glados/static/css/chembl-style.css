@@ -789,24 +789,41 @@ div#CompoundNameAndClassification .CNC-btn{
   padding: 0 5px;
 }
 
-div#CompoundNameAndClassification .CNC-syn-crop{
+div#CompoundNameAndClassification .cropped {
   overflow: hidden;
   max-height: 65px;
 }
 
-div#CompoundNameAndClassification .CNC-syn-tn-container{
+div#CompoundNameAndClassification .expanded {
+  overflow: visible;
+  max-height: none;
+}
+
+div#CompoundNameAndClassification .cropped-container {
   position: relative;
 }
 
-div#CompoundNameAndClassification .CNC-syn-tn-buttons{
+div#CompoundNameAndClassification .cropped-container-btns {
   position: absolute;
   bottom: 0px;
   right: 0px;
 }
 
-div#CompoundNameAndClassification .CNC-syn-tn-buttons a{
+div#CompoundNameAndClassification .cropped-container-btns a{
   color: #ffffff;
   padding: 0 4px;
   border-radius: 3px;
   margin: 0 1px;
 }
+
+.material-tooltip {
+  padding: 5px 4px;
+  font-size: 0.8rem;
+  min-height: 20px;
+}
+
+div#CompoundNameAndClassification .cropped-container-btns span{
+  margin: 0 1px;
+  padding-left: 3px;
+}
+

@@ -73,17 +73,19 @@
                         <td class="CNC-table-oneline"><b>ChEMBL Synonyms:</b></td>
                         <td>
 
-                          <div class="CNC-syn-tn-container">
+                          <div class="cropped-container">
 
-                            <div class="CNC-syn-tn-buttons grey lighten-5">
-                              <a class="waves-effect waves-light tooltipped teal" data-tooltip="Show all"
-                                 href="#"><i class="fa fa-expand"></i></a
+                            <div class="cropped-container-btns grey lighten-5">
+                              <span><i class="fa fa-ellipsis-h cropped-container-ellipsis"></i></span>
+                              <a data-activates="CompNameClass-synonyms"
+                                 class="waves-effect waves-light tooltipped teal" data-tooltip="Show all"
+                              ><i class="fa fa-expand"></i></a
                               ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"
-                                 href="#"><i class="fa fa-clipboard"></i></a>
+                            ><i class="fa fa-clipboard"></i></a>
                             </div>
 
 
-                            <div class="CNC-syn-crop">
+                            <div id="CompNameClass-synonyms" class="cropped">
 
                           <span class="CNC-chip-syn">
                             Furosemide
@@ -250,6 +252,19 @@
                         <td><b>Trade Names:</b></td>
                         <td>
 
+                          <div class="cropped-container">
+
+                            <div class="cropped-container-btns grey lighten-5">
+                              <span><i class="fa fa-ellipsis-h cropped-container-ellipsis"></i></span>
+                              <a data-activates="CompNameClass-tradenames"
+                                 class="waves-effect waves-light tooltipped teal" data-tooltip="Show all"
+                              ><i class="fa fa-expand"></i></a
+                              ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"
+                            ><i class="fa fa-clipboard"></i></a>
+                            </div>
+
+                            <div id="CompNameClass-tradenames" class="cropped">
+
                           <span class="CNC-chip-tn">
                             Disal
                           </span>
@@ -265,6 +280,10 @@
                           <span class="CNC-chip-tn">
                             Furosemide
                           </span>
+
+                            </div>
+
+                          </div>
 
                         </td>
                       </tr>
@@ -434,10 +453,13 @@
 
 {% block custom_js %}
 <script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
+<script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 {% endblock %}
 
 {% endblock %}
 {% block custom_js_inline %}
+
 $('.scrollspy').scrollSpy();
-initializeScrollSpyHelper();
+initCroppedContainers();
+
 {% endblock %}
