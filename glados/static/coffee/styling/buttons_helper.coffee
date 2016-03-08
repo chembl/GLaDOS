@@ -10,29 +10,20 @@ contract = (elem) ->
   elem.removeClass("expanded")
   elem.addClass("cropped")
 
-setExpandIcon = (elem) ->
-  $(elem).removeClass('fa-compress')
-  $(elem).addClass('fa-expand')
+setMoreText = (elem) ->
+  $(elem).text('more...')
 
-setContractIcon = (elem) ->
-  $(elem).addClass('fa-compress')
-  $(elem).removeClass('fa-expand')
+setLessText = (elem) ->
+  $(elem).text('less')
 
-setExpandTooltip = (elem) ->
-  $(elem).attr('data-tooltip','Expand')
-  $('.material-tooltip').hide()
-
-setContractTooltip = (elem) ->
-  $(elem).attr('data-tooltip','Contract')
-  $('.material-tooltip').hide()
 
 
 ### *
   * @param {JQuery} elem element that is going to be toggled
-  * @param {JQuery} ellipsis element that contains the ellipsis to be hidden.
+  * @param {JQuery} buttons element that contains the buttons that activate this..
   * @return {Function} function that toggles the cropped container
 ###
-toggleCroppedContainerWrapper = (elem, ellipsis) ->
+toggleCroppedContainerWrapper = (elem, buttons) ->
 
 
   # this toggles the div elements to show or hide all the contents.
@@ -42,15 +33,12 @@ toggleCroppedContainerWrapper = (elem, ellipsis) ->
 
     if elem.hasClass( "expanded" )
       contract(elem)
-      ellipsis.show()
-      setExpandIcon($(this).find('i'))
-      setExpandTooltip($(this))
-
+      setMoreText($(this))
+      buttons.removeClass('cropped-container-btns-exp')
     else
       expand(elem)
-      ellipsis.hide()
-      setContractIcon($(this).find('i'))
-      setContractTooltip($(this))
+      setLessText($(this))
+      buttons.addClass('cropped-container-btns-exp')
 
   return toggleCroppedContainer
 
@@ -63,9 +51,9 @@ initCroppedContainers = ->
 
   $('.cropped-container').each ->
 
-    activator = $(this).find('a[data-activates]')
+    activator = $(this).find('span[data-activates]')
     activated = $('#' + activator.attr('data-activates'))
-    ellipsis = $(this).find('.cropped-container-ellipsis')
+    buttons = $(this).find('.cropped-container-btns')
 
     # don't bother to activate the buttons if there is not enough text
     numLetters = 0
@@ -74,11 +62,10 @@ initCroppedContainers = ->
       numLetters += $(this).text().trim().length
 
     if numLetters < 142
-      ellipsis.hide()
       activator.hide();
       return
 
-    toggler = toggleCroppedContainerWrapper(activated, ellipsis)
+    toggler = toggleCroppedContainerWrapper(activated, buttons)
     activator.click(toggler)
 
 
