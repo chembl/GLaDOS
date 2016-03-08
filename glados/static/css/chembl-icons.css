@@ -2,6 +2,13 @@
 * ChEMBL custom icons added to materialize
 */
 
+
+/*
+* ---------------------------------------------------------------------------------------------------------------------
+* EBI-Generic
+* ---------------------------------------------------------------------------------------------------------------------
+*/
+
 @font-face {
     font-family: 'EBI-Generic';
     src: url('../font/EBI-Generic/EBI-Generic.eot');
@@ -33,6 +40,7 @@
     -moz-osx-font-smoothing: grayscale;
 
 }
+
 
 .icon-accommodation:before {
     content: "\61";
@@ -241,3 +249,73 @@
 .icon-walk:before {
     content: "\36";
 }
+
+/*
+* ---------------------------------------------------------------------------------------------------------------------
+* EBI-Conceptual
+* ---------------------------------------------------------------------------------------------------------------------
+*/
+
+@font-face {
+    font-family: 'EBI-Conceptual';
+    src:    url('../font/EBI-Conceptual/EBI-Conceptual.eot?umybz4');
+    src:    url('../font/EBI-Conceptual/EBI-Conceptual.eot?#iefix') format('embedded-opentype'),
+        url('../font/EBI-Conceptual/EBI-Conceptual.ttf?umybz4') format('truetype'),
+        url('../font/EBI-Conceptual/EBI-Conceptual.woff?umybz4') format('woff'),
+        url('../font/EBI-Conceptual/EBI-Conceptual.svg?umybz4#EBI-Conceptual') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'EBI-Conceptual';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    -o-font-feature-settings: "liga";
+    font-feature-settings: "liga";
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chemical:before {
+    content: "\62";
+}
+.icon-cross-domain:before {
+    content: "\63";
+}
+.icon-dna:before {
+    content: "\64";
+}
+.icon-expression:before {
+    content: "\67";
+}
+.icon-literature:before {
+    content: "\6c";
+}
+.icon-ontology:before {
+    content: "\6f";
+}
+.icon-proteins:before {
+    content: "\50";
+}
+.icon-structures:before {
+    content: "\73";
+}
+.icon-systems:before {
+    content: "\79";
+}
+
+
