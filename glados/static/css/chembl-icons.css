@@ -12,7 +12,7 @@
 
 [class^="icon-"], [class*=" icon-"] {
 
-    font-family: 'EBI-Generic';
+    font-family: 'EBI-Generic','EBI-Conceptual';
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
