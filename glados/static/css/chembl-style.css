@@ -837,3 +837,32 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   display: inline-block;
   float: right;
 }
+
+
+.CNC-dropdown-content {
+  background-color: rgba(158, 158, 158, 0.6);
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  overflow: hidden;
+  display: none;
+}
+
+.CNC-dropdown-content a{
+  color: white;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  display: inline-block;
+  padding: 6px;
+}
+
+.CNC-dropdown-content i{
+  color: white;
+  font-size: 120%;
+}
+
+.CNC-dropdown-content p{
+  margin: 0;
+  text-align: center;
+}

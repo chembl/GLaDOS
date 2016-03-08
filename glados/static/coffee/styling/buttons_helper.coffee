@@ -29,8 +29,6 @@ toggleCroppedContainerWrapper = (elem, buttons) ->
   # this toggles the div elements to show or hide all the contents.
   toggleCroppedContainer = ->
 
-    # elem and ellipsis are the variables that come from the closure
-
     if elem.hasClass( "expanded" )
       contract(elem)
       setMoreText($(this))
@@ -44,8 +42,7 @@ toggleCroppedContainerWrapper = (elem, buttons) ->
 
 
 ### *
-  * Initializes the cropped container on the current element
-  * The element that calls this function must be of the class cropped-container
+  * Initializes the cropped container on the elements of the class 'cropped-container'
 ###
 initCroppedContainers = ->
 
@@ -69,6 +66,33 @@ initCroppedContainers = ->
     activator.click(toggler)
 
 
+# ------------------------------------------------------------
+# Image with options
+# ------------------------------------------------------------
+
+toggleExpandableMenuWrapper = (elem) ->
+
+  toggleExpandableMenu = ->
+
+    if elem.css('display') == 'none'
+      elem.slideDown(300)
+    else
+      elem.slideUp(300)
+
+  return toggleExpandableMenu
+
+### *
+  *  Initializes the cropped container on the elements of the class 'expandable-menu'
+###
+initExpendableMenus = ->
+
+  $('.expandable-menu').each ->
+
+    activator = $(this).find('a[data-activates]')
+    activated = $('#' + activator.attr('data-activates'))
+
+    toggler = toggleExpandableMenuWrapper(activated)
+    activator.click(toggler)
 
 
 

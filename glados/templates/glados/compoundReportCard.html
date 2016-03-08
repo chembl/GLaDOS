@@ -31,14 +31,52 @@
                 <!-- Coumpound Image -->
                 <div class="col s6 m4 offset-s3">
 
-                  <div class="card z-depth-0">
+                  <div class="card z-depth-0 expandable-menu">
+
                     <div class="card-image white hoverable">
                       <img class="CNC-img" src="https://www.ebi.ac.uk/chembl/compound/displayimage_large/2046">
                     <span class="CNC-img-btn">
-                      <a class="CNC-btn btn waves-effect waves-light teal"><i
+
+                      <a class="CNC-btn btn waves-effect waves-light teal"
+                         data-activates="CNC-expandable-menu"><i
                         class="material-icons">add</i></a>
+
                     </span>
                     </div>
+
+                    <!-- Dropdown Structure -->
+                    <div id='CNC-expandable-menu' class='CNC-dropdown-content'>
+
+                      <div class="container">
+
+                        <div class="row">
+
+                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Zoom" href="#">
+                            <p><i class="fa fa-search-plus"></i></p>
+
+                          </a>
+
+
+                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="3D" href="#">
+                            <p><i class="fa fa-cube"></i></p>
+
+                          </a>
+
+
+                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Download"
+                             href="#">
+                            <p><i class="fa fa-download"></i></p>
+
+                          </a>
+
+
+                        </div>
+
+                      </div>
+
+
+                    </div>
+
                   </div>
 
 
@@ -74,8 +112,6 @@
                         <td>
 
                           <div class="cropped-container">
-
-
 
 
                             <div id="CompNameClass-synonyms" class="cropped">
@@ -237,7 +273,7 @@
 
                             </div>
 
-                             <div class="cropped-container-btns">
+                            <div class="cropped-container-btns">
                               <span data-activates="CompNameClass-synonyms">more...</span
                               ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"><i
                               class="fa fa-clipboard"></i></a>
@@ -252,7 +288,6 @@
                         <td>
 
                           <div class="cropped-container">
-
 
 
                             <div id="CompNameClass-tradenames" class="cropped">
@@ -461,5 +496,6 @@
 $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();
 initCroppedContainers();
+initExpendableMenus();
 
 {% endblock %}
