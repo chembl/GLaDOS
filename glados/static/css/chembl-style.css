@@ -850,8 +850,7 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 
 .CNC-dropdown-content a{
   color: white;
-  margin-top: 8px;
-  margin-bottom: 10px;
+  margin: 8px auto 8px auto;
   border-radius: 2px;
   display: inline-block;
   padding: 6px;
@@ -865,4 +864,19 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 .CNC-dropdown-content p{
   margin: 0;
   text-align: center;
+}
+
+/* responsive sizes */
+@media only screen and (max-width: 600px) {
+
+  .CNC-dropdown-content {
+    width: 35px;
+    top: 0;
+    left: -40px;
+  }
+
+  .CNC-dropdown-content a{
+    margin: 2px auto 2px 2px;
+  }
+
 }
