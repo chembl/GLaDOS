@@ -69,7 +69,6 @@ initCroppedContainers = ->
         overflow = true
         return false
 
-    console.log(overflow)
     if overflow
       toggler = toggleCroppedContainerWrapper(activated, buttons)
       activator.click(toggler)
@@ -81,14 +80,18 @@ initCroppedContainers = ->
 # Image with options
 # ------------------------------------------------------------
 
-toggleExpandableMenuWrapper = (elem) ->
+toggleExpandableMenuWrapper = (elem_id_list) ->
 
   toggleExpandableMenu = ->
 
-    if elem.css('display') == 'none'
-      elem.slideDown(300)
-    else
-      elem.slideUp(300)
+    $.each elem_id_list, (index, elem_id) ->
+
+      elem = $('#' + elem_id)
+
+      if elem.css('display') == 'none'
+        elem.slideDown(300)
+      else
+        elem.slideUp(300)
 
   return toggleExpandableMenu
 
@@ -99,11 +102,15 @@ initExpendableMenus = ->
 
   $('.expandable-menu').each ->
 
-    activator = $(this).find('a[data-activates]')
-    activated = $('#' + activator.attr('data-activates'))
+    activators = $(this).find('a[data-activates]')
 
-    toggler = toggleExpandableMenuWrapper(activated)
-    activator.click(toggler)
+    activators.each ->
+
+      activator = $( this )
+      activated_list = activator.attr('data-activates').split(',')
+
+      toggler = toggleExpandableMenuWrapper(activated_list)
+      activator.click(toggler)
 
 
 

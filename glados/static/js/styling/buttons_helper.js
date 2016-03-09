@@ -78,14 +78,18 @@ initCroppedContainers = function() {
   });
 };
 
-toggleExpandableMenuWrapper = function(elem) {
+toggleExpandableMenuWrapper = function(elem_id_list) {
   var toggleExpandableMenu;
   toggleExpandableMenu = function() {
-    if (elem.css('display') === 'none') {
-      return elem.slideDown(300);
-    } else {
-      return elem.slideUp(300);
-    }
+    return $.each(elem_id_list, function(index, elem_id) {
+      var elem;
+      elem = $('#' + elem_id);
+      if (elem.css('display') === 'none') {
+        return elem.slideDown(300);
+      } else {
+        return elem.slideUp(300);
+      }
+    });
   };
   return toggleExpandableMenu;
 };
@@ -97,10 +101,14 @@ toggleExpandableMenuWrapper = function(elem) {
 
 initExpendableMenus = function() {
   return $('.expandable-menu').each(function() {
-    var activated, activator, toggler;
-    activator = $(this).find('a[data-activates]');
-    activated = $('#' + activator.attr('data-activates'));
-    toggler = toggleExpandableMenuWrapper(activated);
-    return activator.click(toggler);
+    var activators;
+    activators = $(this).find('a[data-activates]');
+    return activators.each(function() {
+      var activated_list, activator, toggler;
+      activator = $(this);
+      activated_list = activator.attr('data-activates').split(',');
+      toggler = toggleExpandableMenuWrapper(activated_list);
+      return activator.click(toggler);
+    });
   });
 };

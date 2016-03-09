@@ -840,8 +840,10 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   float: right;
 }
 
-
-.CNC-dropdown-content {
+.CNC-expandable-content-right,
+.CNC-expandable-content-left,
+.CNC-expandable-content-top,
+.CNC-expandable-content-bottom {
   background-color: rgba(158, 158, 158, 0.6);
   position: absolute;
   z-index: 999;
@@ -850,7 +852,26 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   display: none;
 }
 
-.CNC-dropdown-content a{
+.CNC-expandable-content-top {
+  bottom: 100%;
+}
+
+.CNC-expandable-content-left {
+  width: 35px;
+  top: 0;
+  right: 100%;
+}
+
+.CNC-expandable-content-right {
+  width: 35px;
+  top: 0;
+  left: 100%;
+}
+
+.CNC-expandable-content-right a,
+.CNC-expandable-content-left a,
+.CNC-expandable-content-top a,
+.CNC-expandable-content-bottom a{
   color: white;
   margin: 8px auto 8px auto;
   border-radius: 2px;
@@ -858,27 +879,32 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   padding: 6px;
 }
 
-.CNC-dropdown-content i{
+.CNC-expandable-content-right a,
+.CNC-expandable-content-left a{
+  margin: 2px auto 2px 2px;
+}
+
+.CNC-expandable-content-right i,
+.CNC-expandable-content-left i,
+.CNC-expandable-content-top i,
+.CNC-expandable-content-bottom i{
   color: white;
   font-size: 120%;
 }
 
-.CNC-dropdown-content p{
+.CNC-expandable-content-right p,
+.CNC-expandable-content-left p,
+.CNC-expandable-content-top p,
+.CNC-expandable-content-bottom p{
   margin: 0;
   text-align: center;
 }
 
-/* responsive sizes */
-@media only screen and (max-width: 600px) {
+.CNC-expandable-content-right .container,
+.CNC-expandable-content-left .container,
+.CNC-expandable-content-top .container,
+.CNC-expandable-content-bottom .container{
 
-  .CNC-dropdown-content {
-    width: 35px;
-    top: 0;
-    left: -40px;
-  }
-
-  .CNC-dropdown-content a{
-    margin: 2px auto 2px 2px;
-  }
+  width: 90%;
 
 }
