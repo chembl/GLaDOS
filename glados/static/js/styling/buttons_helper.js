@@ -12,11 +12,17 @@ contract = function(elem) {
 };
 
 setMoreText = function(elem) {
-  return $(elem).text('more...');
+  var icon;
+  icon = $(elem).children('i');
+  icon.removeClass('fa-caret-up');
+  return icon.addClass('fa-caret-down');
 };
 
 setLessText = function(elem) {
-  return $(elem).text('less');
+  var icon;
+  icon = $(elem).children('i');
+  icon.removeClass('fa-caret-down');
+  return icon.addClass('fa-caret-up');
 };
 
 /* *
@@ -49,20 +55,27 @@ toggleCroppedContainerWrapper = function(elem, buttons) {
 
 initCroppedContainers = function() {
   return $('.cropped-container').each(function() {
-    var activated, activator, buttons, numLetters, toggler;
-    activator = $(this).find('span[data-activates]');
+    var activated, activator, buttons, heightLimit, overflow, toggler;
+    activator = $(this).find('a[data-activates]');
     activated = $('#' + activator.attr('data-activates'));
     buttons = $(this).find('.cropped-container-btns');
-    numLetters = 0;
+    overflow = false;
+    heightLimit = activated.offset().top + activated.height();
     activated.children().each(function() {
-      return numLetters += $(this).text().trim().length;
+      var childHeightLimit;
+      childHeightLimit = $(this).offset().top + $(this).height();
+      if (childHeightLimit > heightLimit) {
+        overflow = true;
+        return false;
+      }
     });
-    if (numLetters < 142) {
-      activator.hide();
-      return;
+    console.log(overflow);
+    if (overflow) {
+      toggler = toggleCroppedContainerWrapper(activated, buttons);
+      return activator.click(toggler);
+    } else {
+      return activator.hide();
     }
-    toggler = toggleCroppedContainerWrapper(activated, buttons);
-    return activator.click(toggler);
   });
 };
 

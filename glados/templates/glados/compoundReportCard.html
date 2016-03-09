@@ -49,22 +49,22 @@
 
                       <div class="container">
 
-                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Zoom" >
-                            <p><i class="fa fa-search-plus"></i></p>
+                        <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Zoom">
+                          <p><i class="fa fa-search-plus"></i></p>
 
-                          </a>
-
-
-                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="3D" >
-                            <p><i class="fa fa-cube"></i></p>
-
-                          </a>
+                        </a>
 
 
-                          <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Download">
-                            <p><i class="fa fa-download"></i></p>
+                        <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="3D">
+                          <p><i class="fa fa-cube"></i></p>
 
-                          </a>
+                        </a>
+
+
+                        <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Download">
+                          <p><i class="fa fa-download"></i></p>
+
+                        </a>
 
                       </div>
 
@@ -268,7 +268,8 @@
                             </div>
 
                             <div class="cropped-container-btns">
-                              <span data-activates="CompNameClass-synonyms">more...</span
+                              <a class="waves-effect waves-light teal" data-activates="CompNameClass-synonyms"><i
+                                class="fa fa-caret-down"></i></a
                               ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"><i
                               class="fa fa-clipboard"></i></a>
                             </div>
@@ -306,7 +307,8 @@
                             </div>
 
                             <div class="cropped-container-btns">
-                              <span data-activates="CompNameClass-tradenames">more...</span
+                              <a class="waves-effect waves-light teal" data-activates="CompNameClass-tradenames"><i
+                                class="fa fa-caret-down"></i></a
                               ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"
                             ><i class="fa fa-clipboard"></i></a>
                             </div>
@@ -482,6 +484,9 @@
 {% block custom_js %}
 <script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
+<script type="text/javascript" src="/static/js/models/Compound.js"></script>
+<script type="text/javascript" src="/static/js/views/CompoundViews.js"></script>
+
 {% endblock %}
 
 {% endblock %}

@@ -11,10 +11,15 @@ contract = (elem) ->
   elem.addClass("cropped")
 
 setMoreText = (elem) ->
-  $(elem).text('more...')
+  icon = $(elem).children('i')
+  icon.removeClass('fa-caret-up')
+  icon.addClass('fa-caret-down')
 
 setLessText = (elem) ->
-  $(elem).text('less')
+
+  icon = $(elem).children('i')
+  icon.removeClass('fa-caret-down')
+  icon.addClass('fa-caret-up')
 
 
 
@@ -48,22 +53,28 @@ initCroppedContainers = ->
 
   $('.cropped-container').each ->
 
-    activator = $(this).find('span[data-activates]')
+    activator = $(this).find('a[data-activates]')
     activated = $('#' + activator.attr('data-activates'))
     buttons = $(this).find('.cropped-container-btns')
 
-    # don't bother to activate the buttons if there is not enough text
-    numLetters = 0
+    # don't bother to activate the buttons if no elements are overflowing
+    overflow = false
+    heightLimit = activated.offset().top + activated.height()
+
+
     activated.children().each ->
-      # the trim could be removed once the page loads from the web services
-      numLetters += $(this).text().trim().length
 
-    if numLetters < 142
+      childHeightLimit = $(this).offset().top + $(this).height()
+      if childHeightLimit > heightLimit
+        overflow = true
+        return false
+
+    console.log(overflow)
+    if overflow
+      toggler = toggleCroppedContainerWrapper(activated, buttons)
+      activator.click(toggler)
+    else
       activator.hide();
-      return
-
-    toggler = toggleCroppedContainerWrapper(activated, buttons)
-    activator.click(toggler)
 
 
 # ------------------------------------------------------------

@@ -1,0 +1,1 @@
+Compound = Backbone.Model.extend({})
