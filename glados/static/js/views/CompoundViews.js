@@ -8,6 +8,6 @@ CompoundNameClassificationView = Backbone.View.extend({
     return this.renderTitle();
   },
   renderTitle: function() {
-    return $(this.el).find('#Bck-CHEMBL_ID').text(this.model.get('chembl_id'));
+    return $(this.el).find('.Bck-CHEMBL_ID').text(this.model.get('molecule_chembl_id'));
   }
 });

@@ -7,6 +7,6 @@ CompoundNameClassificationView = Backbone.View.extend
     @renderTitle()
 
   renderTitle: ->
-    $(@el).find('.Bck-CHEMBL_ID').text(@model.get('chembl_id'))
+    $(@el).find('.Bck-CHEMBL_ID').text(@model.get('molecule_chembl_id'))
 
 

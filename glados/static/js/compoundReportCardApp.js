@@ -2,7 +2,7 @@
 var compound, initCNCView;
 
 compound = new Compound({
-  chembl_id: 'CHEMBL25'
+  molecule_chembl_id: 'CHEMBL25'
 });
 
 /* *

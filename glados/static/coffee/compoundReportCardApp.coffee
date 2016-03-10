@@ -1,6 +1,6 @@
 # This takes care of the handling of the report card of a compound
 
-compound = new Compound(chembl_id: 'CHEMBL25')
+compound = new Compound(molecule_chembl_id: 'CHEMBL25')
 
 ### *
   * Initializes de CNCView
