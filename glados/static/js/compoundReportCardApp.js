@@ -2,7 +2,63 @@
 var compound, initCNCView;
 
 compound = new Compound({
-  molecule_chembl_id: 'CHEMBL25'
+  molecule_chembl_id: 'CHEMBL25',
+  pref_name: 'ASPIRIN',
+  max_phase: 4,
+  molecule_properties: {
+    full_molformula: "C9H8O4"
+  },
+  molecule_synonyms: [
+    {
+      syn_type: 'TRADE_NAME',
+      synonyms: '8-Hour Bayer'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Acetosalic Acid'
+    }, {
+      syn_type: 'INN',
+      synonyms: 'Acetylsalicylic Acid'
+    }, {
+      syn_type: 'OTHER',
+      synonyms: 'Acetylsalicylic Acid'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Acetylsalicylic Acid'
+    }, {
+      syn_type: 'BAN',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'FDA',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'JAN',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'USAN',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'USP',
+      synonyms: 'Aspirin'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Bayer Extra Strength'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Ecotrin'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Equi-Prin'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Measurin'
+    }, {
+      syn_type: 'TRADE_NAME',
+      synonyms: 'Salicylic Acid Acetate'
+    }
+  ]
 });
 
 /* *
