@@ -1,3 +1,12 @@
 # View that renders the Compound Name and Classification section
 # from the compound report card
-CompoundView = Backbone.View.extend({})
+CompoundNameClassificationView = Backbone.View.extend
+
+  render: ->
+    attributes = @model.toJSON()
+    @renderTitle()
+
+  renderTitle: ->
+    $(@el).find('.Bck-CHEMBL_ID').text(@model.get('chembl_id'))
+
+

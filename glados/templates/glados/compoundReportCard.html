@@ -24,7 +24,7 @@
           <div class="col s12 m10 ">
 
             <!-- Card Start -->
-            <div class="card-panel grey lighten-5">
+            <div id="CNCCard" class="card-panel grey lighten-5">
 
               <div class="row">
 
@@ -146,7 +146,7 @@
                       <tbody>
                       <tr>
                         <td><b>ID:</b></td>
-                        <td>CHEMBL35</td>
+                        <td class="Bck-CHEMBL_ID"></td>
                       </tr>
                       <tr>
                         <td><b>Name:</b></td>
@@ -548,7 +548,7 @@
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 <script type="text/javascript" src="/static/js/models/Compound.js"></script>
 <script type="text/javascript" src="/static/js/views/CompoundViews.js"></script>
-
+<script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
 {% endblock %}
 
 
@@ -558,5 +558,8 @@ $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();
 initCroppedContainers();
 initExpendableMenus();
+
+cncView = initCNCView(compound, $('#CNCCard'));
+cncView.render();
 
 {% endblock %}
