@@ -934,3 +934,12 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   width: 90%;
 
 }
+
+/**
+* Preloaders and Error message wrapppers
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.card-load-error,
+.card-preolader-to-hide {
+  padding: 10% 5%;
+}

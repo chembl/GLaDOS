@@ -1,9 +1,8 @@
 # This takes care of the handling of the report card of a compound
 
-loadCompound = ->
+initCompound = ->
   compound = new Compound
   compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL25.json'
-  compound.fetch({async:false})
   return compound
 
 
@@ -20,4 +19,3 @@ initCNCView = (model, top_level_elem) ->
     el: top_level_elem
 
   return cncView
-

@@ -2,8 +2,18 @@
 var CompoundNameClassificationView;
 
 CompoundNameClassificationView = Backbone.View.extend({
+  initialize: function() {
+    this.model.on('change', this.render, this);
+    return this.model.on('error', this.showErrorCard, this);
+  },
+  showErrorCard: function() {
+    $(this.el).children('.card-preolader-to-hide').hide();
+    return $(this.el).children('.card-load-error').show();
+  },
   render: function() {
     var attributes;
+    $(this.el).children('.card-preolader-to-hide').hide();
+    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     attributes = this.model.toJSON();
     this.renderTitle();
     this.renderPrefName();

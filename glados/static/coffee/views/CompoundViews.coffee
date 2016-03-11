@@ -2,7 +2,18 @@
 # from the compound report card
 CompoundNameClassificationView = Backbone.View.extend
 
+  initialize: ->
+    @model.on 'change', @.render, @
+    @model.on 'error', @.showErrorCard, @
+
+  showErrorCard: ->
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children('.card-load-error').show()
+
   render: ->
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
+
     attributes = @model.toJSON()
     @renderTitle()
     @renderPrefName()
