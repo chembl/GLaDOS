@@ -1,8 +1,8 @@
 # This takes care of the handling of the report card of a compound
 
-initCompound = ->
+initCompound = (chembl_id) ->
   compound = new Compound
-  compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/CHEMBL25.json'
+  compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/' + chembl_id + '.json'
   return compound
 
 
@@ -15,7 +15,7 @@ initCompound = ->
 initCNCView = (model, top_level_elem) ->
 
   cncView = new CompoundNameClassificationView
-    model: compound
+    model: model
     el: top_level_elem
 
   return cncView
