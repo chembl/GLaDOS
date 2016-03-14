@@ -20,7 +20,8 @@ CompoundNameClassificationView = Backbone.View.extend({
     this.renderMaxPhase();
     this.renderMolFormula();
     this.renderImage();
-    return this.renderSynonymsAndTradeNames();
+    this.renderSynonymsAndTradeNames();
+    return ChemJQ.autoCompile();
   },
   renderTitle: function() {
     return $(this.el).find('#Bck-CHEMBL_ID').text(this.model.get('molecule_chembl_id'));
