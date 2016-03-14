@@ -15,11 +15,11 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     attributes = @model.toJSON()
+    @renderImage()
     @renderTitle()
     @renderPrefName()
     @renderMaxPhase()
     @renderMolFormula()
-    @renderImage()
     @renderSynonymsAndTradeNames()
 
     # this is required to render correctly the molecular formulas.
@@ -100,8 +100,24 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
 
   renderImage: ->
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
-    $(@el).find('#Bck-COMP_IMG').attr('src', img_url)
+
+    if @model.get('structure_type') == 'NONE'
+      img_url = '/static/img/structure_not_available.png'
+    else if @model.get('structure_type') == 'SEQ'
+      img_url = '/static/img/protein_structure.png'
+    else
+      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
+
+    img = $(@el).find('#Bck-COMP_IMG')
+
+    # protein_structure is used when the molecule has a very complex structure that can not be shown in an image.
+    # not_available is when the compound has no structure to show.
+    # not_found is when there was an error loading the image
+    img.error ->
+      img.attr('src', '/static/img/structure_not_found.png')
+
+
+    img.attr('src', img_url)
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')

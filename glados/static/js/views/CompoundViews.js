@@ -15,11 +15,11 @@ CompoundNameClassificationView = Backbone.View.extend({
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     attributes = this.model.toJSON();
+    this.renderImage();
     this.renderTitle();
     this.renderPrefName();
     this.renderMaxPhase();
     this.renderMolFormula();
-    this.renderImage();
     this.renderSynonymsAndTradeNames();
     return ChemJQ.autoCompile();
   },
@@ -88,9 +88,19 @@ CompoundNameClassificationView = Backbone.View.extend({
     return $(this.el).find('#Bck-MOLFORMULA').text(this.model.get('molecule_properties')['full_molformula']);
   },
   renderImage: function() {
-    var img_url;
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
-    return $(this.el).find('#Bck-COMP_IMG').attr('src', img_url);
+    var img, img_url;
+    if (this.model.get('structure_type') === 'NONE') {
+      img_url = '/static/img/structure_not_available.png';
+    } else if (this.model.get('structure_type') === 'SEQ') {
+      img_url = '/static/img/protein_structure.png';
+    } else {
+      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
+    }
+    img = $(this.el).find('#Bck-COMP_IMG');
+    img.error(function() {
+      return img.attr('src', '/static/img/structure_not_found.png');
+    });
+    return img.attr('src', img_url);
   },
   renderSynonymsAndTradeNames: function() {
     var all_syns, syn_rendered, synonyms_source, tn_rendered, trade_names, tradenames_source, unique_synonyms;
