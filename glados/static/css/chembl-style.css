@@ -852,6 +852,7 @@ div#CompoundNameAndClassification .cropped-container-btns a{
   padding: 5px 4px;
   font-size: 0.8rem;
   min-height: 20px;
+  max-width: calc(80% - 4px)
 }
 
 div#CompoundNameAndClassification .cropped-container-btns span{

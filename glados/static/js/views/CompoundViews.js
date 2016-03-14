@@ -30,19 +30,51 @@ CompoundNameClassificationView = Backbone.View.extend({
     return $(this.el).find('#Bck-PREF_NAME').text(this.model.get('pref_name'));
   },
   renderMaxPhase: function() {
-    var phase, phase_class, rendered, source, template;
+    var description, phase, phase_class, rendered, show_phase, source, template, tooltip_text;
     phase = this.model.get('max_phase');
     phase_class = 'comp-phase-' + phase;
-    if (phase === 4) {
-      phase += ' (Approved)';
-    }
-    source = '<span class="{{class}}"> {{text}} </span>';
+    show_phase = phase !== 0;
+    description = (function() {
+      switch (false) {
+        case phase !== 1:
+          return 'Phase I';
+        case phase !== 2:
+          return 'Phase II';
+        case phase !== 3:
+          return 'Phase III';
+        case phase !== 4:
+          return 'Approved';
+        default:
+          return 'Undefined';
+      }
+    })();
+    tooltip_text = (function() {
+      switch (false) {
+        case phase !== 0:
+          return 'Phase 0: Exploratory study involving very limited human exposure to the drug, with no ' + 'therapeutic or diagnostic goals (for example, screening studies, microdose studies)';
+        case phase !== 1:
+          return 'Phase 1: Studies that are usually conducted with healthy volunteers and that emphasize ' + 'safety. The goal is to find out what the drug\'s most frequent and serious adverse events are and, often, ' + 'how the drug is metabolized and excreted.';
+        case phase !== 2:
+          return 'Phase 2: Studies that gather preliminary data on effectiveness (whether the drug works ' + 'in people who have a certain disease or condition). For example, participants receiving the drug may be ' + 'compared to similar participants receiving a different treatment, usually an inactive substance, called a ' + 'placebo, or a different drug. Safety continues to be evaluated, and short-term adverse events are studied.';
+        case phase !== 3:
+          return 'Phase 3: Studies that gather more information about safety and effectiveness by studying ' + 'different populations and different dosages and by using the drug in combination with other drugs.';
+        case phase !== 4:
+          return 'Phase 4: Studies occurring after FDA has approved a drug for marketing. These including ' + 'postmarket requirement and commitment studies that are required of or agreed to by the study sponsor. These ' + 'studies gather additional information about a drug\'s safety, efficacy, or optimal use.';
+        default:
+          return 'Undefined';
+      }
+    })();
+    source = '<span class="{{class}}"> {{text}} </span>' + '{{#if show_phase}}' + '  <span class="{{class}}"> {{desc}} </span>' + '{{/if}}' + '<span >' + ' <i class="fa fa-question hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"> </i></a>' + '</span>';
     template = Handlebars.compile(source);
     rendered = template({
       "class": phase_class,
-      text: phase
+      text: phase,
+      desc: description,
+      show_phase: show_phase,
+      tooltip: tooltip_text
     });
-    return $(this.el).find('#Bck-MAX_PHASE').html(rendered);
+    $(this.el).find('#Bck-MAX_PHASE').html(rendered);
+    return $(this.el).find('#Bck-MAX_PHASE').find('.tooltipped').tooltip();
   },
   renderMolFormula: function() {
     return $(this.el).find('#Bck-MOLFORMULA').text(this.model.get('molecule_properties')['full_molformula']);
