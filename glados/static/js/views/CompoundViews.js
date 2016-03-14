@@ -27,7 +27,15 @@ CompoundNameClassificationView = Backbone.View.extend({
     return $(this.el).find('#Bck-CHEMBL_ID').text(this.model.get('molecule_chembl_id'));
   },
   renderPrefName: function() {
-    return $(this.el).find('#Bck-PREF_NAME').text(this.model.get('pref_name'));
+    var name, rendered, source, text;
+    name = this.model.get('pref_name');
+    text = name !== null ? name : 'Undefined';
+    source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>';
+    rendered = Handlebars.compile(source)({
+      name: text,
+      undef: name === null
+    });
+    return $(this.el).find('#Bck-PREF_NAME').html(rendered);
   },
   renderMaxPhase: function() {
     var description, phase, phase_class, rendered, show_phase, source, template, tooltip_text;

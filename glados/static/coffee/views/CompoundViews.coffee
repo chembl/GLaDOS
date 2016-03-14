@@ -30,7 +30,17 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).find('#Bck-CHEMBL_ID').text(@model.get('molecule_chembl_id'))
 
   renderPrefName: ->
-    $(@el).find('#Bck-PREF_NAME').text(@model.get('pref_name'))
+
+    name = @model.get('pref_name')
+
+    text = if name !=null then name else 'Undefined'
+
+    source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>'
+    rendered = Handlebars.compile(source)
+      name: text
+      undef: name ==null
+
+    $(@el).find('#Bck-PREF_NAME').html(rendered)
 
   renderMaxPhase: ->
     phase = @model.get('max_phase')
