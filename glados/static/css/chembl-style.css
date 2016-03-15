@@ -403,7 +403,7 @@ div#global-masthead-small img {
   margin-left: 9px;
   margin-top: 7px;
   min-width: 100px;
-
+  max-width: 125px;
 }
 
 #global-masthead-small .row {
