@@ -269,7 +269,6 @@ div#global-masthead img {
 div#global-masthead img {
   padding-left: 0.69em;
   float: left;
-  max-width: 105px;
 }
 
 div#global-masthead p {
@@ -403,6 +402,8 @@ div#global-masthead-small nav {
 div#global-masthead-small img {
   margin-left: 9px;
   margin-top: 7px;
+  min-width: 100px;
+
 }
 
 #global-masthead-small .row {
