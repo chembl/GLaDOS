@@ -4,7 +4,7 @@ import unittest
 
 class CompoundReportCardTest(unittest.TestCase):
   # tweak this if the web services are taking a bit longer to load the compound.
-  IMPLICIT_WAIT = 20
+  IMPLICIT_WAIT = 10000
 
   def setUp(self):
     self.browser = webdriver.Firefox()
@@ -89,16 +89,31 @@ class CompoundReportCardTest(unittest.TestCase):
     # Synonyms should present only entries that are not trade names.
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
     self.browser.implicitly_wait(self.IMPLICIT_WAIT)
-    synoyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
+    synonyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
 
     self.assertEqual(
       'GNF-Pf-3680 MB-800 MB-800 [as isethionate] Pentamidine Pentamidine Isetionate RP-2512 RP-2512 [as isethionate]',
-      synoyms_td.text)
+      synonyms_td.text)
 
     self.assertEqual(
       'Nebupent [as isethionate] Pentacarinat [as isethionate] Pentam 300 [as isethionate]',
       tradenames_td.text)
+
+    # if trade names or synonyms are empty, don't show this row at all
+
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6939/')
+    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
+    synonyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
+    synonyms_tr = synonyms_td.find_element_by_xpath('..')
+    self.assertFalse(synonyms_tr.is_displayed())
+
+
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588/')
+    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
+    tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
+    tradenames_tr = tradenames_td.find_element_by_xpath('..')
+    self.assertFalse(tradenames_tr.is_displayed())
 
 
 if __name__ == '__main__':

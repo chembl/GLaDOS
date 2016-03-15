@@ -133,23 +133,36 @@ CompoundNameClassificationView = Backbone.View.extend
       else
         unique_synonyms.add(value.synonyms)
 
-    synonyms_source = '{{#each items}}' +
-      ' <span class="CNC-chip-syn">{{ this }}</span> ' +
-      '{{/each}}'
+    if trade_names.size == 0
 
-    syn_rendered = Handlebars.compile(synonyms_source)
-      items: Array.from(unique_synonyms)
+      $(@el).find('#CompNameClass-synonyms').parent().parent().parent().hide()
 
-    $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
+    else
 
-    tradenames_source = '{{#each items}}' +
-      ' <span class="CNC-chip-tn">{{ this }}</span> ' +
-      '{{/each}}'
+      synonyms_source = '{{#each items}}' +
+        ' <span class="CNC-chip-syn">{{ this }}</span> ' +
+        '{{/each}}'
 
-    tn_rendered = Handlebars.compile(tradenames_source)
-      items: Array.from(trade_names)
+      syn_rendered = Handlebars.compile(synonyms_source)
+        items: Array.from(unique_synonyms)
 
-    $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
+      $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
+      
+
+    if trade_names.size == 0
+
+      $(@el).find('#CompNameClass-tradenames').parent().parent().parent().hide()
+
+    else
+
+      tradenames_source = '{{#each items}}' +
+        ' <span class="CNC-chip-tn">{{ this }}</span> ' +
+        '{{/each}}'
+
+      tn_rendered = Handlebars.compile(tradenames_source)
+        items: Array.from(trade_names)
+
+      $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
 
 
 

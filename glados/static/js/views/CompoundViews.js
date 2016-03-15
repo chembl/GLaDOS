@@ -118,15 +118,23 @@ CompoundNameClassificationView = Backbone.View.extend({
         return unique_synonyms.add(value.synonyms);
       }
     });
-    synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
-    syn_rendered = Handlebars.compile(synonyms_source)({
-      items: Array.from(unique_synonyms)
-    });
-    $(this.el).find('#CompNameClass-synonyms').html(syn_rendered);
-    tradenames_source = '{{#each items}}' + ' <span class="CNC-chip-tn">{{ this }}</span> ' + '{{/each}}';
-    tn_rendered = Handlebars.compile(tradenames_source)({
-      items: Array.from(trade_names)
-    });
-    return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
+    if (trade_names.size === 0) {
+      $(this.el).find('#CompNameClass-synonyms').parent().parent().parent().hide();
+    } else {
+      synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
+      syn_rendered = Handlebars.compile(synonyms_source)({
+        items: Array.from(unique_synonyms)
+      });
+      $(this.el).find('#CompNameClass-synonyms').html(syn_rendered);
+    }
+    if (trade_names.size === 0) {
+      return $(this.el).find('#CompNameClass-tradenames').parent().parent().parent().hide();
+    } else {
+      tradenames_source = '{{#each items}}' + ' <span class="CNC-chip-tn">{{ this }}</span> ' + '{{/each}}';
+      tn_rendered = Handlebars.compile(tradenames_source)({
+        items: Array.from(trade_names)
+      });
+      return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
+    }
   }
 });
