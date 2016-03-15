@@ -79,7 +79,7 @@ CompoundNameClassificationView = Backbone.View.extend
         '  <span class="{{class}}"> {{desc}} </span>' +
         '{{/if}}' +
         '<span >' +
-        ' <i class="fa fa-question hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"> </i></a>' +
+        ' <span class="icon-help hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"></span></a>' +
         '</span>'
 
 

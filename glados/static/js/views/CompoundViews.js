@@ -72,7 +72,7 @@ CompoundNameClassificationView = Backbone.View.extend({
           return 'Undefined';
       }
     })();
-    source = '<span class="{{class}}"> {{text}} </span>' + '{{#if show_phase}}' + '  <span class="{{class}}"> {{desc}} </span>' + '{{/if}}' + '<span >' + ' <i class="fa fa-question hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"> </i></a>' + '</span>';
+    source = '<span class="{{class}}"> {{text}} </span>' + '{{#if show_phase}}' + '  <span class="{{class}}"> {{desc}} </span>' + '{{/if}}' + '<span >' + ' <span class="icon-help hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"></span></a>' + '</span>';
     template = Handlebars.compile(source);
     rendered = template({
       "class": phase_class,
