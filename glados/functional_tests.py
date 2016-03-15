@@ -4,7 +4,7 @@ import unittest
 
 class CompoundReportCardTest(unittest.TestCase):
   # tweak this if the web services are taking a bit longer to load the compound.
-  IMPLICIT_WAIT = 10000
+  IMPLICIT_WAIT = 10
 
   def setUp(self):
     self.browser = webdriver.Firefox()
@@ -21,13 +21,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # structure not available
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6963')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
     self.assertEqual(img.get_attribute('src'), 'http://127.0.0.1:8000/static/img/structure_not_available.png')
 
     # protein sctructure
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2108680')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
     self.assertEqual(img.get_attribute('src'), 'http://127.0.0.1:8000/static/img/protein_structure.png')
 
@@ -38,7 +36,6 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this one has a null name
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6939')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
     self.assertEqual('Undefined', name_td.text)
 
@@ -61,26 +58,22 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Max Phase 1
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL1742987')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('1 Phase I', phase_td.text)
 
     # Max Phase 0
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6963')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('0', phase_td.text)
 
   def test_molecular_formula(self):
     # Molecular formula of aspirin is C9H8O4
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     self.assertEqual('C9H8O4', molformula_td.text)
 
     # When there is no formula availavle the row should not be shown at all.
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     molformula_tr = molformula_td.find_element_by_xpath('..')
     self.assertFalse(molformula_tr.is_displayed())
@@ -88,7 +81,6 @@ class CompoundReportCardTest(unittest.TestCase):
   def test_synonyms_and_tradenames(self):
     # Synonyms should present only entries that are not trade names.
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     synonyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
 
@@ -103,17 +95,23 @@ class CompoundReportCardTest(unittest.TestCase):
     # if trade names or synonyms are empty, don't show this row at all
 
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6939/')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     synonyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
     synonyms_tr = synonyms_td.find_element_by_xpath('..')
     self.assertFalse(synonyms_tr.is_displayed())
 
 
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588/')
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
     tradenames_tr = tradenames_td.find_element_by_xpath('..')
     self.assertFalse(tradenames_tr.is_displayed())
+
+  def test_load_non_existent_compound(self):
+
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL7/')
+    error_msg_p = self.browser.find_element_by_id('Bck-errormsg')
+    self.assertEqual(error_msg_p.text, 'No compound found with id CHEMBL7')
+
+
 
 
 if __name__ == '__main__':

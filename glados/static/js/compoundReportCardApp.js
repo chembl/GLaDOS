@@ -3,7 +3,9 @@ var initCNCView, initCompound;
 
 initCompound = function(chembl_id) {
   var compound;
-  compound = new Compound;
+  compound = new Compound({
+    molecule_chembl_id: chembl_id
+  });
   compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/' + chembl_id + '.json';
   return compound;
 };
