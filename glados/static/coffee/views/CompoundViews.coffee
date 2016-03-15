@@ -32,13 +32,12 @@ CompoundNameClassificationView = Backbone.View.extend
   renderPrefName: ->
 
     name = @model.get('pref_name')
-
     text = if name !=null then name else 'Undefined'
 
     source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>'
     rendered = Handlebars.compile(source)
       name: text
-      undef: name ==null
+      undef: name == null
 
     $(@el).find('#Bck-PREF_NAME').html(rendered)
 
@@ -97,7 +96,11 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).find('#Bck-MAX_PHASE').find('.tooltipped').tooltip()
 
   renderMolFormula: ->
-    $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
+
+    if @model.get('structure_type') == 'SEQ'
+      $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
+    else
+      $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
 
   renderImage: ->
 
@@ -115,7 +118,6 @@ CompoundNameClassificationView = Backbone.View.extend
     # not_found is when there was an error loading the image
     img.error ->
       img.attr('src', '/static/img/structure_not_found.png')
-
 
     img.attr('src', img_url)
 

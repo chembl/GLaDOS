@@ -85,7 +85,11 @@ CompoundNameClassificationView = Backbone.View.extend({
     return $(this.el).find('#Bck-MAX_PHASE').find('.tooltipped').tooltip();
   },
   renderMolFormula: function() {
-    return $(this.el).find('#Bck-MOLFORMULA').text(this.model.get('molecule_properties')['full_molformula']);
+    if (this.model.get('structure_type') === 'SEQ') {
+      return $(this.el).find('#Bck-MOLFORMULA').parent().parent().hide();
+    } else {
+      return $(this.el).find('#Bck-MOLFORMULA').text(this.model.get('molecule_properties')['full_molformula']);
+    }
   },
   renderImage: function() {
     var img, img_url;

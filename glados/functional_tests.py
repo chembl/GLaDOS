@@ -73,13 +73,19 @@ class CompoundReportCardTest(unittest.TestCase):
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('0', phase_td.text)
 
+  def test_molecular_formula(self):
 
+    #Molecular formula of aspirin is C9H8O4
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
+    molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
+    self.assertEqual('C9H8O4', molformula_td.text)
 
-
-
-
-
-
+    #When there is no formula availavle the row should not be shown at all.
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588')
+    molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
+    molformula_tr = molformula_td.find_element_by_xpath('..')
+    self.assertFalse(molformula_tr.is_displayed())
+  
 
 if __name__ == '__main__':
   unittest.main()
