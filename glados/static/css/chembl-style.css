@@ -269,6 +269,7 @@ div#global-masthead img {
 div#global-masthead img {
   padding-left: 0.69em;
   float: left;
+  max-width: 105px;
 }
 
 div#global-masthead p {
