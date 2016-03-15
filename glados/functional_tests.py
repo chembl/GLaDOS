@@ -1,9 +1,10 @@
 from selenium import webdriver
 import unittest
 
-class CompoundReportCardTest(unittest.TestCase):
 
-  IMPLICIT_WAIT = 3
+class CompoundReportCardTest(unittest.TestCase):
+  # tweak this if the web services are taking a bit longer to load the compound.
+  IMPLICIT_WAIT = 20
 
   def setUp(self):
     self.browser = webdriver.Firefox()
@@ -13,7 +14,6 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.quit()
 
   def test_compound_image(self):
-
     # Normal structure image
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
@@ -32,7 +32,6 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual(img.get_attribute('src'), 'http://127.0.0.1:8000/static/img/protein_structure.png')
 
   def test_compound_name(self):
-
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
     name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
     self.assertEqual('ASPIRIN', name_td.text)
@@ -44,7 +43,6 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual('Undefined', name_td.text)
 
   def test_compound_phase(self):
-
     # Max Phase 4
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
@@ -74,18 +72,34 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual('0', phase_td.text)
 
   def test_molecular_formula(self):
-
-    #Molecular formula of aspirin is C9H8O4
+    # Molecular formula of aspirin is C9H8O4
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
+    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     self.assertEqual('C9H8O4', molformula_td.text)
 
-    #When there is no formula availavle the row should not be shown at all.
+    # When there is no formula availavle the row should not be shown at all.
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588')
+    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     molformula_tr = molformula_td.find_element_by_xpath('..')
     self.assertFalse(molformula_tr.is_displayed())
-  
+
+  def test_synonyms_and_tradenames(self):
+    # Synonyms should present only entries that are not trade names.
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
+    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
+    synoyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
+    tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
+
+    self.assertEqual(
+      'GNF-Pf-3680 MB-800 MB-800 [as isethionate] Pentamidine Pentamidine Isetionate RP-2512 RP-2512 [as isethionate]',
+      synoyms_td.text)
+
+    self.assertEqual(
+      'Nebupent [as isethionate] Pentacarinat [as isethionate] Pentam 300 [as isethionate]',
+      tradenames_td.text)
+
 
 if __name__ == '__main__':
   unittest.main()

@@ -127,10 +127,11 @@ CompoundNameClassificationView = Backbone.View.extend
     trade_names = new Set()
 
     $.each all_syns, (index, value) ->
+
       if value.syn_type == 'TRADE_NAME'
         trade_names.add(value.synonyms)
-
-      unique_synonyms.add(value.synonyms)
+      else
+        unique_synonyms.add(value.synonyms)
 
     synonyms_source = '{{#each items}}' +
       ' <span class="CNC-chip-syn">{{ this }}</span> ' +

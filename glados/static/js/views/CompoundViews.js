@@ -113,9 +113,10 @@ CompoundNameClassificationView = Backbone.View.extend({
     trade_names = new Set();
     $.each(all_syns, function(index, value) {
       if (value.syn_type === 'TRADE_NAME') {
-        trade_names.add(value.synonyms);
+        return trade_names.add(value.synonyms);
+      } else {
+        return unique_synonyms.add(value.synonyms);
       }
-      return unique_synonyms.add(value.synonyms);
     });
     synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
     syn_rendered = Handlebars.compile(synonyms_source)({
