@@ -752,6 +752,11 @@ div#CompoundNameAndClassification .CNC-table td{
   font-size: 80%;
 }
 
+div#CompoundNameAndClassification .CNC-table-firstcolumn{
+  width: 12em;
+}
+
+
 div#CompoundNameAndClassification .card-panel{
   padding: 5px;
 }
