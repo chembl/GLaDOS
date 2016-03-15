@@ -114,11 +114,14 @@ CompoundNameClassificationView = Backbone.View.extend({
     $.each(all_syns, function(index, value) {
       if (value.syn_type === 'TRADE_NAME') {
         return trade_names.add(value.synonyms);
-      } else {
+      }
+    });
+    $.each(all_syns, function(index, value) {
+      if (value.syn_type !== 'TRADE_NAME' && !trade_names.has(value.synonyms)) {
         return unique_synonyms.add(value.synonyms);
       }
     });
-    if (trade_names.size === 0) {
+    if (unique_synonyms.size === 0) {
       $(this.el).find('#CompNameClass-synonyms').parent().parent().parent().hide();
     } else {
       synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';

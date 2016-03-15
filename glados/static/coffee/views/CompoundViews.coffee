@@ -130,10 +130,14 @@ CompoundNameClassificationView = Backbone.View.extend
 
       if value.syn_type == 'TRADE_NAME'
         trade_names.add(value.synonyms)
-      else
+
+    # I had to make 2 iterations because the keyword delete has some issues in coffesscript
+    $.each all_syns, (index, value) ->
+
+      if value.syn_type != 'TRADE_NAME' and not trade_names.has(value.synonyms)
         unique_synonyms.add(value.synonyms)
 
-    if trade_names.size == 0
+    if unique_synonyms.size == 0
 
       $(@el).find('#CompNameClass-synonyms').parent().parent().parent().hide()
 
@@ -147,7 +151,7 @@ CompoundNameClassificationView = Backbone.View.extend
         items: Array.from(unique_synonyms)
 
       $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
-      
+
 
     if trade_names.size == 0
 
