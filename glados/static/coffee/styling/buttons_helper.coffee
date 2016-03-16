@@ -77,10 +77,37 @@ initCroppedContainers = ->
 
 
 # ------------------------------------------------------------
-# Image with options
+# Expandable Menu
 # ------------------------------------------------------------
 
-toggleExpandableMenuWrapper = (elem_id_list) ->
+showExpandableMenu = (activator, elem) ->
+
+  activator.html('<i class="material-icons">remove</i>')
+  elem.slideDown(300)
+
+hideExpandableMenu = (activator, elem) ->
+
+  activator.html('<i class="material-icons">add</i>')
+  elem.slideUp(300)
+
+hideExpandableMenuWrapper = (activator, elem_id_list) ->
+
+  toggleExpandableMenu = ->
+
+    $.each elem_id_list, (index, elem_id) ->
+
+      elem = $('#' + elem_id)
+
+      hideExpandableMenu(activator, elem)
+
+  return toggleExpandableMenu
+
+### *
+* @param {JQuery} activator element that activates toggles the expandable menu
+  * @param {Array} elem_id_list list of menu elements that are going to be shown
+  * @return {Function} function that toggles the expandable menus
+###
+toggleExpandableMenuWrapper = (activator, elem_id_list) ->
 
   toggleExpandableMenu = ->
 
@@ -89,9 +116,9 @@ toggleExpandableMenuWrapper = (elem_id_list) ->
       elem = $('#' + elem_id)
 
       if elem.css('display') == 'none'
-        elem.slideDown(300)
+        showExpandableMenu(activator, elem)
       else
-        elem.slideUp(300)
+        hideExpandableMenu(activator, elem)
 
   return toggleExpandableMenu
 
@@ -102,6 +129,7 @@ initExpendableMenus = ->
 
   $('.expandable-menu').each ->
 
+    currentDiv = $(this)
     activators = $(this).find('a[data-activates]')
 
     activators.each ->
@@ -109,8 +137,28 @@ initExpendableMenus = ->
       activator = $( this )
       activated_list = activator.attr('data-activates').split(',')
 
-      toggler = toggleExpandableMenuWrapper(activated_list)
+      toggler = toggleExpandableMenuWrapper(activator, activated_list)
       activator.click(toggler)
+
+      #hide when click outside the menu
+      hider = hideExpandableMenuWrapper(activator, activated_list)
+      activated_list_selectors = ''
+      $.each activated_list, (index, elem_id) ->
+        activated_list_selectors += '#' + elem_id + ', '
+
+      console.log(activated_list_selectors)
+
+      $('body').click (e) ->
+        if not $.contains(currentDiv[0], e.target)
+          hider()
+
+      activator.click (event) ->
+        event.stopPropagation()
+
+
+
+
+
 
 
 
