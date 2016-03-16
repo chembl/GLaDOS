@@ -32,6 +32,8 @@ CompoundNameClassificationView = Backbone.View.extend({
     this.renderMaxPhase();
     this.renderMolFormula();
     this.renderSynonymsAndTradeNames();
+    this.initEmbedModal();
+    this.renderModalPreview();
     return ChemJQ.autoCompile();
   },
   renderTitle: function() {
@@ -150,5 +152,23 @@ CompoundNameClassificationView = Backbone.View.extend({
       });
       return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
     }
+  },
+  initEmbedModal: function() {
+    var code_elem, modal, rendered, source;
+    modal = $(this.el).find('#CNC-embed-modal');
+    code_elem = modal.find('code');
+    source = '<object ' + 'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' + 'width="360px" height="480px"></object>';
+    rendered = Handlebars.compile(source)({
+      chembl_id: this.model.get('molecule_chembl_id')
+    });
+    return code_elem.text(rendered);
+  },
+  renderModalPreview: function() {
+    var code_elem, code_to_preview, modal, preview_elem;
+    modal = $(this.el).find('#CNC-embed-modal');
+    preview_elem = modal.find('.embed-preview');
+    code_elem = modal.find('code');
+    code_to_preview = code_elem.text();
+    return preview_elem.html(code_to_preview);
   }
 });

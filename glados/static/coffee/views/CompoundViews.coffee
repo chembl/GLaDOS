@@ -33,6 +33,8 @@ CompoundNameClassificationView = Backbone.View.extend
     @renderMaxPhase()
     @renderMolFormula()
     @renderSynonymsAndTradeNames()
+    @initEmbedModal()
+    @renderModalPreview()
 
     # this is required to render correctly the molecular formulas.
     # it comes from the easychem.js library
@@ -42,9 +44,8 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).find('#Bck-CHEMBL_ID').text(@model.get('molecule_chembl_id'))
 
   renderPrefName: ->
-
     name = @model.get('pref_name')
-    text = if name !=null then name else 'Undefined'
+    text = if name != null then name else 'Undefined'
 
     source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>'
     rendered = Handlebars.compile(source)
@@ -108,14 +109,12 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).find('#Bck-MAX_PHASE').find('.tooltipped').tooltip()
 
   renderMolFormula: ->
-
     if @model.get('structure_type') == 'SEQ'
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
     else
       $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
 
   renderImage: ->
-
     if @model.get('structure_type') == 'NONE'
       img_url = '/static/img/structure_not_available.png'
     else if @model.get('structure_type') == 'SEQ'
@@ -139,13 +138,11 @@ CompoundNameClassificationView = Backbone.View.extend
     trade_names = new Set()
 
     $.each all_syns, (index, value) ->
-
       if value.syn_type == 'TRADE_NAME'
         trade_names.add(value.synonyms)
 
     # I had to make 2 iterations because the keyword delete has some issues in coffesscript
     $.each all_syns, (index, value) ->
-
       if value.syn_type != 'TRADE_NAME' and not trade_names.has(value.synonyms)
         unique_synonyms.add(value.synonyms)
 
@@ -154,7 +151,6 @@ CompoundNameClassificationView = Backbone.View.extend
       $(@el).find('#CompNameClass-synonyms').parent().parent().parent().hide()
 
     else
-
       synonyms_source = '{{#each items}}' +
         ' <span class="CNC-chip-syn">{{ this }}</span> ' +
         '{{/each}}'
@@ -170,7 +166,6 @@ CompoundNameClassificationView = Backbone.View.extend
       $(@el).find('#CompNameClass-tradenames').parent().parent().parent().hide()
 
     else
-
       tradenames_source = '{{#each items}}' +
         ' <span class="CNC-chip-tn">{{ this }}</span> ' +
         '{{/each}}'
@@ -179,6 +174,32 @@ CompoundNameClassificationView = Backbone.View.extend
         items: Array.from(trade_names)
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
+
+  initEmbedModal: ->
+
+    modal = $(@el).find('#CNC-embed-modal')
+    code_elem = modal.find('code')
+
+    source = '<object ' +
+             'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' +
+             'width="360px" height="480px"></object>'
+
+    rendered = Handlebars.compile(source)
+      chembl_id: @model.get('molecule_chembl_id')
+
+    code_elem.text(rendered)
+
+  renderModalPreview: ->
+
+    modal = $(@el).find('#CNC-embed-modal')
+    preview_elem = modal.find('.embed-preview')
+
+    code_elem = modal.find('code')
+    code_to_preview = code_elem.text()
+
+    preview_elem.html(code_to_preview)
+
+
 
 
 
