@@ -146,7 +146,6 @@ initExpendableMenus = ->
       $.each activated_list, (index, elem_id) ->
         activated_list_selectors += '#' + elem_id + ', '
 
-      console.log(activated_list_selectors)
 
       $('body').click (e) ->
         if not $.contains(currentDiv[0], e.target)

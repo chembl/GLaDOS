@@ -144,7 +144,6 @@ initExpendableMenus = function() {
       $.each(activated_list, function(index, elem_id) {
         return activated_list_selectors += '#' + elem_id + ', ';
       });
-      console.log(activated_list_selectors);
       $('body').click(function(e) {
         if (!$.contains(currentDiv[0], e.target)) {
           return hider();
