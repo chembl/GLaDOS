@@ -761,6 +761,7 @@ div#CompoundNameAndClassification .CNC-table-firstcolumn{
 
 div#CompoundNameAndClassification .card-panel{
   padding: 5px;
+  position: relative;
 }
 
 div#CompoundNameAndClassification .comp-phase-0,
@@ -941,6 +942,14 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 
   width: 90%;
 
+}
+
+.embed-btn{
+  position: absolute;
+  color:white;
+  padding: 0 4px;
+  top: -3px;
+  right: 0px;
 }
 
 /**

@@ -182,7 +182,7 @@ CompoundNameClassificationView = Backbone.View.extend
 
     source = '<object ' +
              'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' +
-             'width="360px" height="480px"></object>'
+             'width="360px" height="600px"></object>'
 
     rendered = Handlebars.compile(source)
       chembl_id: @model.get('molecule_chembl_id')

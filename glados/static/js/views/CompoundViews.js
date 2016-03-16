@@ -157,7 +157,7 @@ CompoundNameClassificationView = Backbone.View.extend({
     var code_elem, modal, rendered, source;
     modal = $(this.el).find('#CNC-embed-modal');
     code_elem = modal.find('code');
-    source = '<object ' + 'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' + 'width="360px" height="480px"></object>';
+    source = '<object ' + 'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' + 'width="360px" height="600px"></object>';
     rendered = Handlebars.compile(source)({
       chembl_id: this.model.get('molecule_chembl_id')
     });
