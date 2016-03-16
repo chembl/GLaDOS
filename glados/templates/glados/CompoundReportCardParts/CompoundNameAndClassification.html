@@ -1,0 +1,220 @@
+<div class="col s12 m10 l12">
+
+  <!-- Card Start -->
+  <div id="CNCCard" class="card-panel grey lighten-5">
+
+    <!-- Preloader -->
+    <div class="card-preolader-to-hide">
+
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+
+
+    </div>
+
+    <!-- Error message -->
+    <div class="card-load-error" style="display:none">
+
+      <div class="card-panel red darken-4">
+                  <span class="white-text">
+                    <p id="Bck-errormsg" class="center-align">
+                      <i class="fa fa-exclamation-circle"></i>
+                      <!--Backbone -->
+                    </p>
+                  </span>
+      </div>
+
+
+    </div>
+
+    <div class="row" style="display:none">
+
+      <!-- Coumpound Image -->
+      <div class="col s6 m4 offset-s3">
+
+        <div class="card z-depth-0 expandable-menu">
+
+          <div class="card-image white hoverable">
+            <img id="Bck-COMP_IMG" class="CNC-img">
+                    <span class="CNC-img-btn">
+
+                      <a class="CNC-btn btn waves-effect waves-light teal hide-on-small-only"
+                         data-activates="CNC-expandable-bottom,CNC-expandable-top"><i
+                        class="material-icons">add</i></a>
+
+                      <a class="CNC-btn btn waves-effect waves-light teal hide-on-med-and-up"
+                         data-activates="CNC-expandable-left,CNC-expandable-right"
+                      ><i
+                        class="material-icons">add</i></a>
+
+                    </span>
+          </div>
+
+          <!-- Expandable menu bottom -->
+          <div id="CNC-expandable-bottom" class='CNC-expandable-content-bottom hide-on-small-only'>
+
+            <div class="container">
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Zoom">
+                <p><i class="fa fa-search-plus"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="3D">
+                <p><i class="fa fa-cube"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="Download">
+                <p><i class="fa fa-download"></i></p>
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- Expandable menu top -->
+          <div id="CNC-expandable-top" class='CNC-expandable-content-top hide-on-small-only'>
+
+            <div class="container">
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="top"
+                 data-tooltip="PNG File">
+                <p><i class="fa fa-file-image-o"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="top"
+                 data-tooltip="SVG File">
+                <p><i class="fa fa-file-code-o"></i></p>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Expandable menu left -->
+          <div id="CNC-expandable-left" class='CNC-expandable-content-left hide-on-med-and-up'>
+
+            <div class="container">
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="left"
+                 data-tooltip="Zoom">
+                <p><i class="fa fa-search-plus"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="left"
+                 data-tooltip="3D">
+                <p><i class="fa fa-cube"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="left"
+                 data-tooltip="Download">
+                <p><i class="fa fa-download"></i></p>
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- Expandable menu right -->
+          <div id="CNC-expandable-right" class='CNC-expandable-content-right hide-on-med-and-up'>
+
+            <div class="container">
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="top"
+                 data-tooltip="PNG File">
+                <p><i class="fa fa-file-image-o"></i></p>
+              </a>
+
+              <a class="hoverable waves-effect waves-light teal tooltipped" data-position="top"
+                 data-tooltip="SVG File">
+                <p><i class="fa fa-file-code-o"></i></p>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- Basic info table -->
+      <div class="col s12 m8">
+
+                  <span class="easyChemConfig auto-compile">
+
+                    <table class="CNC-table bordered">
+
+                      <tbody>
+                      <tr>
+                        <td class="CNC-table-firstcolumn"><b>ID:</b></td>
+                        <td id="Bck-CHEMBL_ID"><!-- Backbone --></td>
+                      </tr>
+                      <tr>
+                        <td class="CNC-table-firstcolumn"><b>Name:</b></td>
+                        <td id="Bck-PREF_NAME"><!-- Backbone --></td>
+                      <tr>
+                        <td class="CNC-table-firstcolumn"><b>Max Phase:</b></td>
+                        <td id="Bck-MAX_PHASE"><!-- Backbone --></td>
+                      </tr>
+                      <tr>
+                        <td class="CNC-table-oneline CNC-table-firstcolumn"><b>Molecular Formula:</b></td>
+                        <td><span id="Bck-MOLFORMULA" class="echem-formula"><!-- Backbone --></span></td>
+                      </tr>
+                      <tr>
+                        <td class="CNC-table-oneline CNC-table-firstcolumn"><b>ChEMBL Synonyms:</b></td>
+                        <td>
+
+                          <div class="cropped-container">
+
+
+                            <div id="CompNameClass-synonyms" class="cropped">
+                              <!-- Backbone -->
+                            </div>
+
+                            <div class="cropped-container-btns">
+                              <a class="waves-effect waves-light teal" data-activates="CompNameClass-synonyms"><i
+                                class="fa fa-caret-down"></i></a
+                              ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"><i
+                              class="fa fa-clipboard"></i></a>
+                            </div>
+
+                          </div>
+
+                        </td>
+                      </tr>
+                      <tr class="CNC-table-lastrow CNC-table-firstcolumn">
+                        <td><b>Trade Names:</b></td>
+                        <td>
+
+                          <div class="cropped-container">
+
+
+                            <div id="CompNameClass-tradenames" class="cropped">
+                              <!-- Backbone -->
+                            </div>
+
+                            <div class="cropped-container-btns">
+                              <a class="waves-effect waves-light teal" data-activates="CompNameClass-tradenames"><i
+                                class="fa fa-caret-down"></i></a
+                              ><a class="waves-effect waves-light tooltipped teal" data-tooltip="Copy to clipboard"
+                            ><i class="fa fa-clipboard"></i></a>
+                            </div>
+
+                          </div>
+
+                        </td>
+                      </tr>
+                      </tbody>
+
+                    </table>
+                    </span>
+
+      </div>
+
+
+    </div>
+
+  </div> <!-- Card End -->
+
+</div>
