@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+
+  {% load compress %}
+  <!-- Imports used by all the templates-->
+  {% block common_css %}
+    {% include "glados/base/css_imports_for_all.html" %}
+  {% endblock %}
+
+  <!-- Imports used by the current template -->
+  {% block stylesheets %}{% endblock %}
+
+</head>
+<body>
+
+  {% block content %}
+  {% endblock %}
+
+<!-------------------->
+<!-- APIs -->
+<!-------------------->
+
+<!-- common imports for all templates -->
+{% compress js %}
+
+   {% block common_js %}
+    {% include "glados/base/js_imports_for_all.html" %}
+  {% endblock %}
+
+{% endcompress %}
+
+<!-- custom js imports that each template decides to load -->
+{% compress js %}
+   {% block custom_js %}{% endblock %}
+{% endcompress %}
+
+<!-- inline javascript -->
+{% compress js %}
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+
+    {% block custom_js_inline %}{% endblock %}
+
+  });
+</script>
+{% endcompress%}
+
+<!-- common imports for all templates that need to be last -->
+{% compress js %}
+<!-- this sets up the styles for the chemical formulas after they have been rendered in the page-->
+<script type="text/javascript" src="/static/js/api/easychem.js"></script>
+{% endcompress %}
+
+</body>
+</html>

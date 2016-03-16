@@ -1,0 +1,34 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compound report card{% endblock %}
+
+{% block content %}
+<div class="container">
+
+   <div id="CompoundNameAndClassification" class="section" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
+   </div>
+</div>
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
+<script type="text/javascript" src="/static/js/models/Compound.js"></script>
+<script type="text/javascript" src="/static/js/views/CompoundViews.js"></script>
+<script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var pathname = window.location.pathname;
+var pathnameParts = pathname.split('/')
+var chemblID = pathnameParts[pathnameParts.length - 4]
+var compound = initCompound(chemblID);
+var cncView = initCNCView(compound, $('#CNCCard'));
+compound.fetch();
+
+initCroppedContainers();
+initExpendableMenus();
+
+{% endblock %}
+
