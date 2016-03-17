@@ -1023,7 +1023,7 @@ div#CompoundNameAndClassification .expanded {
 
 /* tablet screens */
 @media only screen and (max-width: 993px) {
-  
+
   .cropped-text-field input {
     width: 85%;
   }
