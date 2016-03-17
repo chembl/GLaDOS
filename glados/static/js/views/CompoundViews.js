@@ -34,6 +34,7 @@ CompoundNameClassificationView = Backbone.View.extend({
     this.renderSynonymsAndTradeNames();
     this.initEmbedModal();
     this.renderModalPreview();
+    this.initDownloadPNGButton();
     return ChemJQ.autoCompile();
   },
   renderTitle: function() {
@@ -170,5 +171,11 @@ CompoundNameClassificationView = Backbone.View.extend({
     code_elem = modal.find('code');
     code_to_preview = code_elem.text();
     return preview_elem.html(code_to_preview);
+  },
+  initDownloadPNGButton: function() {
+    var img_url;
+    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
+    $('.CNC-download-png').attr('href', img_url);
+    return $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
   }
 });

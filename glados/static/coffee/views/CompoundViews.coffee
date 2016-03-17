@@ -35,6 +35,7 @@ CompoundNameClassificationView = Backbone.View.extend
     @renderSynonymsAndTradeNames()
     @initEmbedModal()
     @renderModalPreview()
+    @initDownloadPNGButton()
 
     # this is required to render correctly the molecular formulas.
     # it comes from the easychem.js library
@@ -198,6 +199,12 @@ CompoundNameClassificationView = Backbone.View.extend
     code_to_preview = code_elem.text()
 
     preview_elem.html(code_to_preview)
+
+  initDownloadPNGButton: ->
+
+    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
+    $('.CNC-download-png').attr('href', img_url)
+    $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
 
 
 

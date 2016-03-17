@@ -99,18 +99,27 @@ class CompoundReportCardTest(unittest.TestCase):
     synonyms_tr = synonyms_td.find_element_by_xpath('..')
     self.assertFalse(synonyms_tr.is_displayed())
 
-
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL2109588/')
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
     tradenames_tr = tradenames_td.find_element_by_xpath('..')
     self.assertFalse(tradenames_tr.is_displayed())
 
   def test_load_non_existent_compound(self):
-
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL7/')
     error_msg_p = self.browser.find_element_by_id('Bck-errormsg')
     self.assertEqual(error_msg_p.text, 'No compound found with id CHEMBL7')
 
+  def test_png_download_button(self):
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
+    download_button = self.browser.find_element_by_id('CNC-expandable-right').find_element_by_class_name(
+      'CNC-download-png')
+
+    self.assertEqual(download_button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
+
+    download_button_big = self.browser.find_element_by_id('CNC-expandable-top').find_element_by_class_name(
+      'CNC-download-png')
+
+    self.assertEqual(download_button_big.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
 
 
 
