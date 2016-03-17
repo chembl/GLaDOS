@@ -91,8 +91,8 @@ CompoundNameClassificationView = Backbone.View.extend
         '{{#if show_phase}}' +
         '  <span class="{{class}}"> {{desc}} </span>' +
         '{{/if}}' +
-        '<span >' +
-        ' <span class="icon-help hoverable tooltipped" data-tooltip="{{tooltip}}" data-position="top"></span></a>' +
+        '<span class="chembl-help">' +
+        ' <sub><span class="icon-help hoverable tooltipped indigo-text" data-tooltip="{{tooltip}}" data-position="top"></span></sub>' +
         '</span>'
 
 

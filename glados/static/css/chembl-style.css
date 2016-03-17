@@ -960,3 +960,14 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 .card-preolader-to-hide {
   padding: 10% 5%;
 }
+
+.chembl-help {
+  font-size: 210%;
+  line-height: 10px;
+}
+
+.chembl-help span{
+
+  border-radius: 15px;
+
+}
