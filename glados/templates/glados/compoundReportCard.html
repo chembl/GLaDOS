@@ -38,7 +38,13 @@
       <div id="CompoundRepresentations" class="section scrollspy">
         <h3>Compound Representations</h3>
 
-        <p>Stuff</p>
+         <div class="row">
+
+          {% block representations %}
+            {% include "glados/CompoundReportCardParts/Representations.html" %}
+          {% endblock %}
+
+        </div>
 
 
       </div>

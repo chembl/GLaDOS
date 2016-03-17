@@ -971,3 +971,23 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   border-radius: 15px;
 
 }
+
+/**
+* Compound Representations
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.chembl-card .btn{
+  font-size: 80%;
+  padding: 0 10%;
+}
+
+.inline-block {
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.compact-table td{
+  font-size: 80%;
+  padding: 5px;
+}
