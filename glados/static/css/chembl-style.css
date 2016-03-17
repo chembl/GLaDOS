@@ -741,7 +741,7 @@ div#CompoundNameAndClassification .CNC-img-btn{
   left: 0;
 }
 
-div#CompoundNameAndClassification .CNC-table-oneline{
+.td-oneline {
   white-space: nowrap;
 }
 
