@@ -111,7 +111,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_png_download_button(self):
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
-    download_png_buttons = self.browser.find_element_by_id('CNC-expandable-right').find_elements_by_class_name(
+    download_png_buttons = self.browser.find_elements_by_class_name(
       'CNC-download-png')
 
     for button in download_png_buttons:
