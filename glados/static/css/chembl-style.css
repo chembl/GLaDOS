@@ -691,19 +691,19 @@ div#global-footer img {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.scrollspy-wrapper{
+.scrollspy-wrapper {
   position: relative;
 }
 
-.pin-top{
+.pin-top {
   margin-top: 40px;
 }
 
-.pinned{
+.pinned {
   top: 40px;
 }
 
-.table-of-contents a.active{
+.table-of-contents a.active {
   border-left: 2px solid #996a44;
 }
 
@@ -716,7 +716,7 @@ div#global-footer img {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.main-container{
+.main-container {
   width: 100%;
   padding-left: 2%;
 }
@@ -726,16 +726,16 @@ div#global-footer img {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-div#CompoundNameAndClassification .row{
+div#CompoundNameAndClassification .row {
   margin-bottom: 0;
 }
 
-div#CompoundNameAndClassification .CNC-img{
+div#CompoundNameAndClassification .CNC-img {
   max-width: 100%;
   max-height: 90%;
 }
 
-div#CompoundNameAndClassification .CNC-img-btn{
+div#CompoundNameAndClassification .CNC-img-btn {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -745,21 +745,20 @@ div#CompoundNameAndClassification .CNC-img-btn{
   white-space: nowrap;
 }
 
-div#CompoundNameAndClassification .CNC-table-lastrow{
+div#CompoundNameAndClassification .CNC-table-lastrow {
   border-bottom: 0;
 }
 
-div#CompoundNameAndClassification .CNC-table td{
+div#CompoundNameAndClassification .CNC-table td {
   padding: 2px;
   font-size: 80%;
 }
 
-div#CompoundNameAndClassification .CNC-table-firstcolumn{
+div#CompoundNameAndClassification .CNC-table-firstcolumn {
   width: 12em;
 }
 
-
-div#CompoundNameAndClassification .card-panel{
+div#CompoundNameAndClassification .card-panel {
   padding: 5px;
   position: relative;
 }
@@ -796,10 +795,8 @@ div#CompoundNameAndClassification .comp-phase-0 {
   background-color: #9e9e9e;
 }
 
-
-
 div#CompoundNameAndClassification .CNC-chip-tn,
-div#CompoundNameAndClassification .CNC-chip-syn{
+div#CompoundNameAndClassification .CNC-chip-syn {
   font-size: 100%;
   margin: 1px 0;
   line-height: 10px;
@@ -819,7 +816,7 @@ div#CompoundNameAndClassification .CNC-chip-tn {
   background-color: #c5e1a5;
 }
 
-div#CompoundNameAndClassification .CNC-btn{
+div#CompoundNameAndClassification .CNC-btn {
   padding: 0 5px;
 }
 
@@ -835,11 +832,11 @@ div#CompoundNameAndClassification .expanded {
   max-width: 100%;
 }
 
-div#CompoundNameAndClassification .cropped-container {
+.cropped-container {
   position: relative;
 }
 
-div#CompoundNameAndClassification .cropped-container-btns {
+.cropped-container-btns {
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -847,7 +844,7 @@ div#CompoundNameAndClassification .cropped-container-btns {
   min-width: 20px;
 }
 
-div#CompoundNameAndClassification .cropped-container-btns a{
+.cropped-container-btns a {
   color: #ffffff;
   padding: 0 4px;
   border-radius: 3px;
@@ -863,13 +860,13 @@ div#CompoundNameAndClassification .cropped-container-btns a{
   max-width: calc(80% - 4px)
 }
 
-div#CompoundNameAndClassification .cropped-container-btns span{
+.cropped-container-btns span {
   margin: 0 1px;
   padding-left: 3px;
   font-size: 0.65rem;
 }
 
-div#CompoundNameAndClassification .cropped-container-btns-exp{
+.cropped-container-btns-exp {
   position: relative;
   display: inline-block;
   float: right;
@@ -906,7 +903,7 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 .CNC-expandable-content-right a,
 .CNC-expandable-content-left a,
 .CNC-expandable-content-top a,
-.CNC-expandable-content-bottom a{
+.CNC-expandable-content-bottom a {
   color: white;
   margin: 8px auto 8px auto;
   border-radius: 2px;
@@ -915,14 +912,14 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 }
 
 .CNC-expandable-content-right a,
-.CNC-expandable-content-left a{
+.CNC-expandable-content-left a {
   margin: 2px auto 2px 2px;
 }
 
 .CNC-expandable-content-right i,
 .CNC-expandable-content-left i,
 .CNC-expandable-content-top i,
-.CNC-expandable-content-bottom i{
+.CNC-expandable-content-bottom i {
   color: white;
   font-size: 120%;
 }
@@ -930,7 +927,7 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 .CNC-expandable-content-right p,
 .CNC-expandable-content-left p,
 .CNC-expandable-content-top p,
-.CNC-expandable-content-bottom p{
+.CNC-expandable-content-bottom p {
   margin: 0;
   text-align: center;
 }
@@ -938,15 +935,15 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 .CNC-expandable-content-right .container,
 .CNC-expandable-content-left .container,
 .CNC-expandable-content-top .container,
-.CNC-expandable-content-bottom .container{
+.CNC-expandable-content-bottom .container {
 
   width: 90%;
 
 }
 
-.embed-btn{
+.embed-btn {
   position: absolute;
-  color:white;
+  color: white;
   padding: 0 4px;
   top: -3px;
   right: 0px;
@@ -966,7 +963,7 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
   line-height: 10px;
 }
 
-.chembl-help span{
+.chembl-help span {
 
   border-radius: 15px;
 
@@ -977,17 +974,58 @@ div#CompoundNameAndClassification .cropped-container-btns-exp{
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.chembl-card .btn{
+.chembl-card .btn {
   font-size: 80%;
-  padding: 0 10%;
+  padding: 0 5px;
 }
 
+.chembl-card .btn i{
+  margin-right: 5px;
+}
 .inline-block {
   display: inline-block;
   margin-top: 2px;
 }
 
-.compact-table td{
+.compact-table td {
   font-size: 80%;
   padding: 5px;
+}
+
+.cropped-text-field {
+  position: relative;
+}
+
+.cropped-text-field input {
+  width: 89%;
+}
+
+.cropped-text-field-btns {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  width: 12%;
+  max-height: 32px;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 60px;
+}
+
+.cropped-text-field-btns a {
+  float: right;
+  margin-left: 1px;
+  color: #ffffff;
+  padding: 6px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+
+}
+
+/* tablet screens */
+@media only screen and (max-width: 993px) {
+  
+  .cropped-text-field input {
+    width: 85%;
+  }
+
 }
