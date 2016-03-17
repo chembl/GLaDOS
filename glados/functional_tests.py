@@ -111,15 +111,12 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_png_download_button(self):
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL55/')
-    download_button = self.browser.find_element_by_id('CNC-expandable-right').find_element_by_class_name(
+    download_png_buttons = self.browser.find_element_by_id('CNC-expandable-right').find_elements_by_class_name(
       'CNC-download-png')
 
-    self.assertEqual(download_button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
+    for button in download_png_buttons:
+      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
 
-    download_button_big = self.browser.find_element_by_id('CNC-expandable-top').find_element_by_class_name(
-      'CNC-download-png')
-
-    self.assertEqual(download_button_big.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
 
 
 
