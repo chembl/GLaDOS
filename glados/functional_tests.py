@@ -115,7 +115,13 @@ class CompoundReportCardTest(unittest.TestCase):
       'CNC-download-png')
 
     for button in download_png_buttons:
-      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55')
+      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.png')
+
+    download_svg_buttons = self.browser.find_elements_by_class_name(
+      'CNC-download-svg')
+
+    for button in download_svg_buttons:
+      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.svg')
 
 
 

@@ -34,7 +34,7 @@ CompoundNameClassificationView = Backbone.View.extend({
     this.renderSynonymsAndTradeNames();
     this.initEmbedModal();
     this.renderModalPreview();
-    this.initDownloadPNGButton();
+    this.initDownloadButtons();
     return ChemJQ.autoCompile();
   },
   renderTitle: function() {
@@ -172,10 +172,12 @@ CompoundNameClassificationView = Backbone.View.extend({
     code_to_preview = code_elem.text();
     return preview_elem.html(code_to_preview);
   },
-  initDownloadPNGButton: function() {
+  initDownloadButtons: function() {
     var img_url;
     img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
-    $('.CNC-download-png').attr('href', img_url);
-    return $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
+    $('.CNC-download-png').attr('href', img_url + '.png');
+    $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
+    $('.CNC-download-svg').attr('href', img_url + '.svg');
+    return $('.CNC-download-svg').attr('download', this.model.get('molecule_chembl_id') + '.svg');
   }
 });
