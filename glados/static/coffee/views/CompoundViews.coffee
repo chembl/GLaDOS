@@ -23,16 +23,18 @@ CompoundNameClassificationView = Backbone.View.extend
     $(@el).children('.card-load-error').show()
 
   render: ->
-    $(@el).children('.card-preolader-to-hide').hide()
-    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
-    attributes = @model.toJSON()
     @renderImage()
     @renderTitle()
     @renderPrefName()
     @renderMaxPhase()
     @renderMolFormula()
     @renderSynonymsAndTradeNames()
+
+    # until here, all the visible content has been rendered.
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
+
     @initEmbedModal()
     @renderModalPreview()
     @initDownloadButtons()

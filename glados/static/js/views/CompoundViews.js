@@ -22,16 +22,14 @@ CompoundNameClassificationView = Backbone.View.extend({
     return $(this.el).children('.card-load-error').show();
   },
   render: function() {
-    var attributes;
-    $(this.el).children('.card-preolader-to-hide').hide();
-    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
-    attributes = this.model.toJSON();
     this.renderImage();
     this.renderTitle();
     this.renderPrefName();
     this.renderMaxPhase();
     this.renderMolFormula();
     this.renderSynonymsAndTradeNames();
+    $(this.el).children('.card-preolader-to-hide').hide();
+    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal();
     this.renderModalPreview();
     this.initDownloadButtons();
