@@ -35,6 +35,7 @@ CompoundNameClassificationView = Backbone.View.extend({
     this.initEmbedModal();
     this.renderModalPreview();
     this.initDownloadButtons();
+    this.initZoomModal();
     return ChemJQ.autoCompile();
   },
   renderTitle: function() {
@@ -179,5 +180,14 @@ CompoundNameClassificationView = Backbone.View.extend({
     $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
     $('.CNC-download-svg').attr('href', img_url + '.svg');
     return $('.CNC-download-svg').attr('download', this.model.get('molecule_chembl_id') + '.svg');
+  },
+  initZoomModal: function() {
+    var img, modal, title;
+    modal = $(this.el).find('#CNC-zoom-modal');
+    title = modal.find('.modal-content h3');
+    title.text(this.model.get('molecule_chembl_id'));
+    img = modal.find('.modal-content img');
+    img.attr('src', $(this.el).find('#Bck-COMP_IMG').attr('src'));
+    return img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
   }
 });

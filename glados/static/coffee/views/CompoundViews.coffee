@@ -36,6 +36,7 @@ CompoundNameClassificationView = Backbone.View.extend
     @initEmbedModal()
     @renderModalPreview()
     @initDownloadButtons()
+    @initZoomModal()
 
     # this is required to render correctly the molecular formulas.
     # it comes from the easychem.js library
@@ -208,6 +209,18 @@ CompoundNameClassificationView = Backbone.View.extend
 
     $('.CNC-download-svg').attr('href', img_url + '.svg')
     $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
+
+  initZoomModal: ->
+
+    modal = $(@el).find('#CNC-zoom-modal')
+
+    title = modal.find('.modal-content h3')
+    title.text(@model.get('molecule_chembl_id'))
+
+    img = modal.find('.modal-content img')
+    img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
+    img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
+
 
 
 
