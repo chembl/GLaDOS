@@ -155,6 +155,29 @@ initExpendableMenus = ->
         event.stopPropagation()
 
 
+# ------------------------------------------------------------
+# cropped text field
+# ------------------------------------------------------------
+
+
+### *
+  *  Initializes the cropped container on the elements of the class 'cropped-text-field'
+  * It is based on an input field to show the information
+###
+initCroppedTextFields = ->
+
+  $('.cropped-text-field').each ->
+
+    input_field = $(this).find('input')
+    input_field.click ->
+      $(this).select()
+
+    download_text_btn = $(this).find('.download-text')
+    download_text_btn.attr('download', CHEMBL_ID + download_text_btn.attr('data-filename-suffix') + '.txt')
+    download_text_btn.attr('href', 'data:text/html,' + input_field.attr('value'))
+
+
+
 
 
 

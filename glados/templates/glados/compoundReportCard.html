@@ -199,8 +199,8 @@
 
 var pathname = window.location.pathname;
 var pathnameParts = pathname.split('/')
-var chemblID = pathnameParts[pathnameParts.length - 2]
-var compound = initCompound(chemblID);
+CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
+var compound = initCompound(CHEMBL_ID);
 var cncView = initCNCView(compound, $('#CNCCard'));
 compound.fetch();
 
@@ -209,5 +209,7 @@ initializeScrollSpyHelper();
 initCroppedContainers();
 initExpendableMenus();
 $('.modal-trigger').leanModal();
+
+initCroppedTextFields();
 
 {% endblock %}
