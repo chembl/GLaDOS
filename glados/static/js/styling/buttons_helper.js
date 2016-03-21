@@ -173,8 +173,10 @@ initCroppedTextFields = function() {
     });
     $(this).attr('data-original-value', input_field.attr('value'));
     download_text_btn = $(this).find('.download-text');
-    download_text_btn.attr('download', CHEMBL_ID + download_text_btn.attr('data-filename-suffix') + '.txt');
+    download_text_btn.attr('download', CHEMBL_ID + '-' + download_text_btn.attr('data-filename-suffix') + '.txt');
     download_text_btn.attr('href', 'data:text/html,' + $(this).attr('data-original-value'));
+    download_text_btn.addClass('tooltipped');
+    download_text_btn.attr('data-tooltip', 'Download ' + download_text_btn.attr('data-filename-suffix') + ' file.');
     input_field.focusout(function() {
       return cropTextIfNecessary(currentDiv);
     });
