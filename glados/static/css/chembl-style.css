@@ -754,7 +754,7 @@ div#CompoundNameAndClassification .CNC-table td {
   font-size: 80%;
 }
 
-div#CompoundNameAndClassification .CNC-table-firstcolumn {
+.fixed-width-column {
   width: 12em;
 }
 
