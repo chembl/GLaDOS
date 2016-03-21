@@ -998,6 +998,7 @@ div#CompoundNameAndClassification .expanded {
 
 .cropped-text-field input {
   width: 89%;
+  font-family: courier, sans-serif;
 }
 
 .cropped-text-field-btns {
