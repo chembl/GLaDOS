@@ -1046,14 +1046,3 @@ div#CompoundNameAndClassification .expanded {
   text-overflow: ellipsis;
 }
 
-.cropped-text-field-ellipsis {
-  display: none;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  top: 1em;
-  width: 100%;
-  text-align: center;
-}

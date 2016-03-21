@@ -164,25 +164,17 @@ initExpendableMenus = function() {
 
 initCroppedTextFields = function() {
   return $('.cropped-text-field').each(function() {
-    var currentDiv, download_text_btn, ellipsis, input_field;
+    var currentDiv, download_text_btn, input_field;
     currentDiv = $(this);
     input_field = $(this).find('input');
     input_field.click(function() {
-      return $(this).select();
+      input_field.val(currentDiv.attr('data-original-value'));
+      return input_field.select();
     });
     $(this).attr('data-original-value', input_field.attr('value'));
     download_text_btn = $(this).find('.download-text');
     download_text_btn.attr('download', CHEMBL_ID + download_text_btn.attr('data-filename-suffix') + '.txt');
     download_text_btn.attr('href', 'data:text/html,' + $(this).attr('data-original-value'));
-    ellipsis = $(this).find('.cropped-text-field-ellipsis');
-    ellipsis.click(function() {
-      $(this).hide();
-      input_field.val(currentDiv.attr('data-original-value'));
-      console.log('---');
-      console.log('setting value to:');
-      console.log(currentDiv.attr('data-original-value'));
-      return input_field.click();
-    });
     input_field.focusout(function() {
       return cropTextIfNecessary(currentDiv);
     });
@@ -204,7 +196,7 @@ initCroppedTextFields = function() {
 
 
 cropTextIfNecessary = function(input_div) {
-  var charLength, ellipsis, input_field, numVisibleChars, originalInputValue, shownValue;
+  var charLength, input_field, numVisibleChars, originalInputValue, shownValue;
   input_field = input_div.find('input')[0];
   console.log("---");
   console.log(input_field);
@@ -212,7 +204,6 @@ cropTextIfNecessary = function(input_div) {
   console.log(input_field.scrollWidth);
   console.log("offset width");
   console.log(input_field.offsetWidth);
-  ellipsis = input_div.find('.cropped-text-field-ellipsis');
   originalInputValue = input_div.attr('data-original-value');
   input_field.value = originalInputValue;
   charLength = Math.round((input_field.scrollWidth / originalInputValue.length) + 0.5);
@@ -224,17 +215,15 @@ cropTextIfNecessary = function(input_div) {
   console.log('Original value lenght:');
   console.log(originalInputValue.length);
   if (input_field.scrollWidth > input_field.offsetWidth) {
-    ellipsis.show();
     console.log('overflow!');
-    shownValue = originalInputValue.substring(0, (numVisibleChars / 2) - 3) + '      ' + originalInputValue.substring(originalInputValue.length - ((numVisibleChars / 2) - 6), originalInputValue.length);
+    shownValue = originalInputValue.substring(0, (numVisibleChars / 2) - 2) + ' ... ' + originalInputValue.substring(originalInputValue.length - ((numVisibleChars / 2) - 2), originalInputValue.length);
     console.log('based on:');
     console.log(originalInputValue);
     console.log('value will be:');
     console.log(shownValue);
     input_field.value = shownValue;
   } else {
-    ellipsis.hide();
-    ellipsis = input_div.find('.cropped-text-field-ellipsis').hide();
+    input_field.value = originalInputValue;
   }
   return true;
 };

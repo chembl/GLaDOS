@@ -171,7 +171,8 @@ initCroppedTextFields = ->
     currentDiv = $(this)
     input_field = $(this).find('input')
     input_field.click ->
-      $(this).select()
+      input_field.val(currentDiv.attr('data-original-value'))
+      input_field.select()
 
     # this is to allow to easily modify the content of the input if it needs to be cropped
     $(this).attr('data-original-value', input_field.attr('value'))
@@ -180,14 +181,6 @@ initCroppedTextFields = ->
     download_text_btn.attr('download', CHEMBL_ID + download_text_btn.attr('data-filename-suffix') + '.txt')
     download_text_btn.attr('href', 'data:text/html,' + $(this).attr('data-original-value'))
 
-    ellipsis = $(this).find('.cropped-text-field-ellipsis')
-    ellipsis.click ->
-      $(this).hide()
-      input_field.val(currentDiv.attr('data-original-value'))
-      console.log('---')
-      console.log('setting value to:')
-      console.log(currentDiv.attr('data-original-value'))
-      input_field.click()
 
     input_field.focusout ->
       cropTextIfNecessary(currentDiv)
@@ -215,7 +208,6 @@ cropTextIfNecessary = (input_div)->
   console.log(input_field.scrollWidth)
   console.log("offset width")
   console.log(input_field.offsetWidth)
-  ellipsis = input_div.find('.cropped-text-field-ellipsis')
 
   originalInputValue = input_div.attr('data-original-value')
   input_field.value = originalInputValue
@@ -233,12 +225,11 @@ cropTextIfNecessary = (input_div)->
 
   if input_field.scrollWidth > input_field.offsetWidth
     # overflow
-    ellipsis.show()
     console.log('overflow!')
 
-    shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 3 ) + '      ' +
+    shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 2 ) + ' ... ' +
                  originalInputValue.substring(
-                   originalInputValue.length - ( ( numVisibleChars / 2 ) - 6), originalInputValue.length)
+                   originalInputValue.length - ( ( numVisibleChars / 2 ) - 2), originalInputValue.length)
 
     console.log('based on:')
     console.log(originalInputValue)
@@ -248,8 +239,8 @@ cropTextIfNecessary = (input_div)->
     input_field.value = shownValue
 
   else
-    ellipsis.hide()
-    ellipsis = input_div.find('.cropped-text-field-ellipsis').hide()
+
+    input_field.value = originalInputValue
 
 
 
