@@ -980,17 +980,28 @@ div#CompoundNameAndClassification .expanded {
   padding: 10px 6px 6px 6px;
   text-align: center;
   width: 65px;
-  line-height: 10px;
-  height: 100%;
+  line-height: 9px;
+  font-size: 9px;
 }
 
+.btn-mini i,
 .btn-small i{
   font-size: 180%;
 }
 
-.btn-small p{
-  font-size: 80%;
+
+
+.btn-mini {
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 10px 3px 6px 3px;
+  text-align: center;
+  width: 30px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 3px;
 }
+
 
 .chembl-card .btn {
   font-size: 80%;
@@ -1015,7 +1026,7 @@ div#CompoundNameAndClassification .expanded {
 }
 
 .cropped-text-field-input {
-  width: 89%;
+  width: 90%;
   position: relative;
 }
 .cropped-text-field-input {
@@ -1026,22 +1037,16 @@ div#CompoundNameAndClassification .expanded {
   position: absolute;
   top: 12px;
   right: 0;
-  width: 12%;
+  width: 10%;
   max-height: 32px;
-  overflow: hidden;
   white-space: nowrap;
   min-width: 60px;
 }
 
-.cropped-text-field-btns a {
+.cropped-text-field-btns .btn-mini {
   float: right;
-  margin-left: 3px;
-  color: #ffffff;
-  padding: 6px;
-  border-radius: 3px;
-  font-size: 1.2rem;
-
 }
+
 
 /* tablet screens */
 @media only screen and (max-width: 992px) {
@@ -1054,9 +1059,6 @@ div#CompoundNameAndClassification .expanded {
     width: 15%;
   }
 
-  .cropped-text-field-btns a {
-    margin-left: 1px;
-  }
 
 }
 
@@ -1066,6 +1068,14 @@ div#CompoundNameAndClassification .expanded {
 
 /* small screens */
 @media only screen and (max-width: 600px) {
+
+  .cropped-text-field-input {
+    width: 75%;
+  }
+
+  .cropped-text-field-btns {
+    width: 25%;
+  }
 
 
 }
