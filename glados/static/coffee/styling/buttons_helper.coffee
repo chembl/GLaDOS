@@ -211,7 +211,6 @@ cropTextIfNecessary = (input_div)->
 
   if input_field.scrollWidth > input_field.offsetWidth
     # overflow
-
     shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 2 ) + ' ... ' +
                  originalInputValue.substring(
                    originalInputValue.length - ( ( numVisibleChars / 2 ) - 2), originalInputValue.length)
@@ -220,7 +219,6 @@ cropTextIfNecessary = (input_div)->
     input_field.value = shownValue
 
   else
-
     input_field.value = originalInputValue
 
 
