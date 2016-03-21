@@ -202,12 +202,6 @@ initCroppedTextFields = ->
 cropTextIfNecessary = (input_div)->
 
   input_field = input_div.find('input')[0]
-  console.log("---")
-  console.log(input_field)
-  console.log("scroll width")
-  console.log(input_field.scrollWidth)
-  console.log("offset width")
-  console.log(input_field.offsetWidth)
 
   originalInputValue = input_div.attr('data-original-value')
   input_field.value = originalInputValue
@@ -215,26 +209,13 @@ cropTextIfNecessary = (input_div)->
   charLength = Math.round( ( input_field.scrollWidth / originalInputValue.length ) + 0.5)
   numVisibleChars = Math.round(input_field.offsetWidth / charLength)
 
-  console.log('charLenght:')
-  console.log(charLength)
-  console.log('numVisibleChars:')
-  console.log(numVisibleChars)
-  console.log('Original value lenght:')
-  console.log(originalInputValue.length)
-
-
   if input_field.scrollWidth > input_field.offsetWidth
     # overflow
-    console.log('overflow!')
 
     shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 2 ) + ' ... ' +
                  originalInputValue.substring(
                    originalInputValue.length - ( ( numVisibleChars / 2 ) - 2), originalInputValue.length)
 
-    console.log('based on:')
-    console.log(originalInputValue)
-    console.log('value will be:')
-    console.log(shownValue)
     # remember that the original value is stored in the input_div's 'data-original-value' attribute
     input_field.value = shownValue
 
