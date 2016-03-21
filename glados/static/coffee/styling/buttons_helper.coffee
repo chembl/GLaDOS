@@ -168,13 +168,92 @@ initCroppedTextFields = ->
 
   $('.cropped-text-field').each ->
 
+    currentDiv = $(this)
     input_field = $(this).find('input')
     input_field.click ->
       $(this).select()
 
+    # this is to allow to easily modify the content of the input if it needs to be cropped
+    $(this).attr('data-original-value', input_field.attr('value'))
+
     download_text_btn = $(this).find('.download-text')
     download_text_btn.attr('download', CHEMBL_ID + download_text_btn.attr('data-filename-suffix') + '.txt')
-    download_text_btn.attr('href', 'data:text/html,' + input_field.attr('value'))
+    download_text_btn.attr('href', 'data:text/html,' + $(this).attr('data-original-value'))
+
+    ellipsis = $(this).find('.cropped-text-field-ellipsis')
+    ellipsis.click ->
+      $(this).hide()
+      input_field.val(currentDiv.attr('data-original-value'))
+      console.log('---')
+      console.log('setting value to:')
+      console.log(currentDiv.attr('data-original-value'))
+      input_field.click()
+
+    input_field.focusout ->
+      cropTextIfNecessary(currentDiv)
+
+    cropTextIfNecessary(currentDiv)
+
+    $( window ).resize ->
+
+      if currentDiv.is(':visible')
+        cropTextIfNecessary(currentDiv)
+
+
+### *
+  * Decides if the input contained in the div is overlapping and the ellipsis must be shown.
+  * if it is overlapping, shows the ellipsis and crops the text, if not, it doesn't show the ellipsis
+  * and shows all the text in the input
+  * @param {JQuery} input_div element that contains the ellipsis and the input
+###
+cropTextIfNecessary = (input_div)->
+
+  input_field = input_div.find('input')[0]
+  console.log("---")
+  console.log(input_field)
+  console.log("scroll width")
+  console.log(input_field.scrollWidth)
+  console.log("offset width")
+  console.log(input_field.offsetWidth)
+  ellipsis = input_div.find('.cropped-text-field-ellipsis')
+
+  originalInputValue = input_div.attr('data-original-value')
+  input_field.value = originalInputValue
+
+  charLength = Math.round( ( input_field.scrollWidth / originalInputValue.length ) + 0.5)
+  numVisibleChars = Math.round(input_field.offsetWidth / charLength)
+
+  console.log('charLenght:')
+  console.log(charLength)
+  console.log('numVisibleChars:')
+  console.log(numVisibleChars)
+  console.log('Original value lenght:')
+  console.log(originalInputValue.length)
+
+
+  if input_field.scrollWidth > input_field.offsetWidth
+    # overflow
+    ellipsis.show()
+    console.log('overflow!')
+
+    shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 3 ) + '      ' +
+                 originalInputValue.substring(
+                   originalInputValue.length - ( ( numVisibleChars / 2 ) - 6), originalInputValue.length)
+
+    console.log('based on:')
+    console.log(originalInputValue)
+    console.log('value will be:')
+    console.log(shownValue)
+    # remember that the original value is stored in the input_div's 'data-original-value' attribute
+    input_field.value = shownValue
+
+  else
+    ellipsis.hide()
+    ellipsis = input_div.find('.cropped-text-field-ellipsis').hide()
+
+
+
+  return true
 
 
 
