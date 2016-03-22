@@ -949,6 +949,38 @@ div#CompoundNameAndClassification .expanded {
   right: 0px;
 }
 
+div#CNC-zoom-modal {
+  height: 70%;
+  overflow-y: hidden;
+}
+
+.img-zoom-container {
+  height: 95%;
+  width: 95%;
+  text-align: center;
+  margin: 2% auto 2% auto;
+}
+
+.responsive-height-img{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.img-zoom-title {
+  position: absolute;
+  top: 0;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.img-zoom-footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+
 /**
 * Preloaders and Error message wrapppers
 * ----------------------------------------------------------------------------------------------------------------------

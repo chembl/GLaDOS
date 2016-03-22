@@ -216,10 +216,10 @@ CompoundNameClassificationView = Backbone.View.extend
 
     modal = $(@el).find('#CNC-zoom-modal')
 
-    title = modal.find('.modal-content h3')
+    title = modal.find('h3')
     title.text(@model.get('molecule_chembl_id'))
 
-    img = modal.find('.modal-content img')
+    img = modal.find('img')
     img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
