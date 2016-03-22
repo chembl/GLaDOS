@@ -975,7 +975,7 @@ div#CNC-zoom-modal {
 
 .img-zoom-footer {
   position: absolute;
-  bottom: 0;
+  bottom: 5px;
   right: 0;
 }
 
