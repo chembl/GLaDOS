@@ -986,11 +986,22 @@ div#CNC-zoom-modal {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  max-width: 90%;
-
+  max-width: 50%;
+  padding: 15px;
+  border-radius: 5px;
 
 }
 
+.img-zoom-menu label{
+  color: black;
+}
+
+/* small screens */
+@media only screen and (max-width: 600px) {
+  .img-zoom-menu {
+    max-width: 90%;
+  }
+}
 
 /**
 * Preloaders and Error message wrapppers
