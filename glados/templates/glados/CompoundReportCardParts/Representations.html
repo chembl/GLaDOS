@@ -1,8 +1,12 @@
 <div class="col s12 m10 l12">
 
-  <div class="card chembl-card grey lighten-5">
+  <div id='CompRepsCard' class="card chembl-card grey lighten-5">
 
-    <div class="card-content">
+    {% block card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
+
+    <div class="card-content" style="display: none">
       <div class="row">
 
         <!-- table for medium and large screens -->

@@ -21,3 +21,17 @@ initCNCView = (model, top_level_elem) ->
     el: top_level_elem
 
   return cncView
+
+### *
+  * Initializes de Compound Representations View
+  * @param {Compound} model, base model for the view
+  * @param {JQuery} element that renders the model.
+  * @return {CompoundNameClassificationView} the view that has been created
+###
+initCompRepsView = (model, top_level_elem) ->
+
+  compRepsView = new CompoundRepresentationsView
+    model: model
+    el: top_level_elem
+
+  return compRepsView
