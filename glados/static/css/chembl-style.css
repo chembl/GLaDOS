@@ -973,12 +973,23 @@ div#CNC-zoom-modal {
   margin-top: 10px;
 }
 
-.img-zoom-footer {
+.img-zoom-close {
   position: absolute;
-  bottom: 5px;
+  top: 5px;
   right: 0;
 }
 
+.img-zoom-menu {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+
+
+}
 
 
 /**
