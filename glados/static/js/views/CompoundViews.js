@@ -111,7 +111,7 @@ CompoundNameClassificationView = Backbone.View.extend({
     } else if (this.model.get('structure_type') === 'SEQ') {
       img_url = '/static/img/protein_structure.png';
     } else {
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
+      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + '.svg';
     }
     img = $(this.el).find('#Bck-COMP_IMG');
     img.error(function() {

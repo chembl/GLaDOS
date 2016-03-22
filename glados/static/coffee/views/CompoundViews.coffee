@@ -124,7 +124,7 @@ CompoundNameClassificationView = Backbone.View.extend
     else if @model.get('structure_type') == 'SEQ'
       img_url = '/static/img/protein_structure.png'
     else
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
+      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + '.svg'
 
     img = $(@el).find('#Bck-COMP_IMG')
 

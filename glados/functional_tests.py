@@ -17,7 +17,7 @@ class CompoundReportCardTest(unittest.TestCase):
     # Normal structure image
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25')
+    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg')
 
     # structure not available
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL6963')
