@@ -1053,7 +1053,7 @@ div#CNC-zoom-modal {
   width: 30px;
   line-height: 9px;
   font-size: 9px;
-  margin-left: 3px;
+  margin-left: 4px;
 }
 
 
@@ -1070,6 +1070,11 @@ div#CNC-zoom-modal {
   margin-top: 2px;
 }
 
+.inline {
+  display: inline;
+  margin-top: 2px;
+}
+
 .compact-table td {
   font-size: 80%;
   padding: 5px;
@@ -1080,21 +1085,14 @@ div#CNC-zoom-modal {
 }
 
 .cropped-text-field-input {
-  width: 90%;
   position: relative;
 }
 .cropped-text-field-input {
-  font-family: courier, sans-serif;
+  font-family: 'Roboto Mono','Ubuntu Mono', courier, sans-serif;
 }
 
 .cropped-text-field-btns {
-  position: absolute;
-  top: 12px;
-  right: 0;
-  width: 10%;
   max-height: 32px;
-  white-space: nowrap;
-  min-width: 60px;
 }
 
 .cropped-text-field-btns .btn-mini {
@@ -1102,34 +1100,14 @@ div#CNC-zoom-modal {
 }
 
 
-/* tablet screens */
-@media only screen and (max-width: 992px) {
-
-  .cropped-text-field-input {
-    width: 85%;
-  }
-
-  .cropped-text-field-btns {
-    width: 15%;
-  }
-
-
-}
-
 .overflow-ellipsis {
   text-overflow: ellipsis;
 }
 
-/* small screens */
-@media only screen and (max-width: 600px) {
+.cropped-text-field td{
+  padding: 0;
+}
 
-  .cropped-text-field-input {
-    width: 75%;
-  }
-
-  .cropped-text-field-btns {
-    width: 25%;
-  }
-
-
+.cropped-text-field-btns-cell {
+  width: 75px;
 }
