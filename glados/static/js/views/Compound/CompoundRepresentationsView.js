@@ -7,7 +7,25 @@ CompoundRepresentationsView = CardView.extend({
     return this.model.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
+    this.renderCanonicalSmiles();
+    this.renderStandardInchi();
+    this.renderStandardInchiKey();
     $(this.el).children('.card-preolader-to-hide').hide();
     return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+  },
+  renderCanonicalSmiles: function() {
+    var molecule_structures;
+    molecule_structures = this.model.get('molecule_structures');
+    return $(this.el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value', molecule_structures['canonical_smiles']);
+  },
+  renderStandardInchi: function() {
+    var molecule_structures;
+    molecule_structures = this.model.get('molecule_structures');
+    return $(this.el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value', molecule_structures['standard_inchi']);
+  },
+  renderStandardInchiKey: function() {
+    var molecule_structures;
+    molecule_structures = this.model.get('molecule_structures');
+    return $(this.el).find('#CompReps-standardInchiKey, #CompReps-standardInchiKey-small').attr('value', molecule_structures['standard_inchi_key']);
   }
 });
