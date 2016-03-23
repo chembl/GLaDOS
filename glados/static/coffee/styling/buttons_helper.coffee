@@ -204,17 +204,21 @@ cropTextIfNecessary = (input_div)->
 
   input_field = input_div.find('input')[0]
 
+  console.log('--cropping')
+
   originalInputValue = input_div.attr('data-original-value')
   # don't bother to do anything if there is no text in the input.
   if originalInputValue == undefined
     return
 
+  console.log('cont cropping')
   input_field.value = originalInputValue
 
   charLength = Math.round( ( input_field.scrollWidth / originalInputValue.length ) + 0.5)
   numVisibleChars = Math.round(input_field.offsetWidth / charLength)
 
   if input_field.scrollWidth > input_field.offsetWidth
+    console.log('overflow!')
     # overflow
     shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 2 ) + ' ... ' +
                  originalInputValue.substring(

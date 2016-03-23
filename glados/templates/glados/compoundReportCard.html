@@ -215,7 +215,12 @@ initCroppedContainers();
 initExpendableMenus();
 $('.modal-trigger').leanModal();
 
-initCroppedTextFields();
+
 $('.tooltipped').tooltip()
+
+{% block custom_afterRender %}
+  console.log('after render!');
+  initCroppedTextFields();
+{% endblock %}
 
 {% endblock %}
