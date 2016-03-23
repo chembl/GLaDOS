@@ -13,6 +13,10 @@ class CompoundReportCardTest(unittest.TestCase):
   def tearDown(self):
     self.browser.quit()
 
+  # --------------------------------------
+  # Compound Name and Classification
+  # --------------------------------------
+
   def test_compound_image(self):
     # Normal structure image
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25')
@@ -123,7 +127,45 @@ class CompoundReportCardTest(unittest.TestCase):
     for button in download_svg_buttons:
       self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.svg')
 
+  # --------------------------------------
+  # Compound Representations
+  # --------------------------------------
 
+  def test_canonical_smiles(self):
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25/')
+    canonical_smiles_input = self.browser.find_element_by_id('CompReps-canonicalSmiles')
+    canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), 'CC(=O)Oc1ccccc1C(=O)O')
+
+    canonical_smiles_input = self.browser.find_element_by_id('CompReps-canonicalSmiles-small')
+    canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), 'CC(=O)Oc1ccccc1C(=O)O')
+
+
+  def test_standard_inchi(self):
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25/')
+    standard_inchi_input = self.browser.find_element_by_id('CompReps-standardInchi')
+    standard_inchi_div = standard_inchi_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(standard_inchi_div.get_attribute('data-original-value'),
+                     'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+
+    standard_inchi_input = self.browser.find_element_by_id('CompReps-standardInchi-small')
+    standard_inchi_div = standard_inchi_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(standard_inchi_div.get_attribute('data-original-value'),
+                     'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+
+  def test_standard_inchi_key(self):
+
+    self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL25/')
+    standard_inchi_key_input = self.browser.find_element_by_id('CompReps-standardInchiKey')
+    standard_inchi_key_div = standard_inchi_key_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
+                     'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+
+    standard_inchi_key_input = self.browser.find_element_by_id('CompReps-standardInchiKey-small')
+    standard_inchi_key_div = standard_inchi_key_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
+                     'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
 
 
 if __name__ == '__main__':
