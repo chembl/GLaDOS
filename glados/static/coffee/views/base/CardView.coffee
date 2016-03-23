@@ -19,3 +19,36 @@ CardView = Backbone.View.extend
 
     $(@el).find('#Bck-CHEMBL_ID')
 
+  initEmbedModal: (section_name) ->
+
+    modal_trigger = $(@el).find('.embed-modal-trigger')
+
+    modal = $(@el).find('.embed-modal')
+    modal_id = 'embed-modal-for-' + $(@el).attr('id')
+    modal.attr('id', modal_id)
+    modal_trigger.attr('href', '#' + modal_id)
+
+    code_elem = modal.find('code')
+
+    source = '<object ' +
+             'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/{{section_name}}/" ' +
+             'width="360px" height="600px"></object>'
+
+    rendered = Handlebars.compile(source)
+      chembl_id: @model.get('molecule_chembl_id')
+      section_name: section_name
+
+
+
+    code_elem.text(rendered)
+
+  renderModalPreview: ->
+
+    modal = $(@el).find('.embed-modal')
+    preview_elem = modal.find('.embed-preview')
+
+    code_elem = modal.find('code')
+    code_to_preview = code_elem.text()
+
+    preview_elem.html(code_to_preview)
+

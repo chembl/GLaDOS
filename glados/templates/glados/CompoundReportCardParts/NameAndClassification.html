@@ -4,6 +4,11 @@
   <div id="CNCCard" class="card-panel grey lighten-5">
 
 
+    <!-- modal trigger -->
+    {% block embed_button %}
+      {% include "glados/base/embed_button.html" %}
+    {% endblock %}
+
     {% block card_loaders %}
       {% include "glados/base/card_loaders.html" %}
     {% endblock %}
@@ -37,7 +42,8 @@
 
             <div class="container">
 
-              <a class="hoverable waves-effect waves-light teal tooltipped modal-trigger" href="#CNC-zoom-modal"
+              <!-- backbone will set up the href for this modal -->
+              <a class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
                  data-tooltip="Zoom">
                 <p><i class="fa fa-search-plus"></i></p>
               </a>
@@ -119,33 +125,12 @@
 
         </div>
 
+
         <!-- Embed Modal Structure -->
-        <div id="CNC-embed-modal" class="modal">
-          <div class="modal-content">
-            <h3>Embed Card</h3>
-            <p>Use the following code to embed the card in your site: </p>
-            <code>
+        {% block embed_modal %}
+          {% include "glados/base/embed_modal.html" %}
+        {% endblock %}
 
-            </code>
-
-            <p>You can change the width and height as you need. </p>
-
-            <p>Preview:</p>
-
-            <div class="container">
-
-              <div class="embed-preview">
-              </div>
-
-            </div>
-
-
-          </div>
-
-          <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
-          </div>
-        </div>
 
         <!-- Image zoom Modal Structure -->
         <div id="CNC-zoom-modal" class="modal ">

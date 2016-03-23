@@ -20,7 +20,7 @@ CompoundNameClassificationView = CardView.extend
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
-    @initEmbedModal()
+    @initEmbedModal('name_and_classification')
     @renderModalPreview()
     @initDownloadButtons()
     @initZoomModal()
@@ -164,29 +164,6 @@ CompoundNameClassificationView = CardView.extend
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
 
-  initEmbedModal: ->
-
-    modal = $(@el).find('#CNC-embed-modal')
-    code_elem = modal.find('code')
-
-    source = '<object ' +
-             'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/name_and_classification/" ' +
-             'width="360px" height="600px"></object>'
-
-    rendered = Handlebars.compile(source)
-      chembl_id: @model.get('molecule_chembl_id')
-
-    code_elem.text(rendered)
-
-  renderModalPreview: ->
-
-    modal = $(@el).find('#CNC-embed-modal')
-    preview_elem = modal.find('.embed-preview')
-
-    code_elem = modal.find('code')
-    code_to_preview = code_elem.text()
-
-    preview_elem.html(code_to_preview)
 
   initDownloadButtons: ->
 
@@ -207,6 +184,7 @@ CompoundNameClassificationView = CardView.extend
     img = modal.find('img')
     img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
+
 
 
 

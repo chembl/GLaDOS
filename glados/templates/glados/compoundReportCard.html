@@ -213,7 +213,6 @@ $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();
 initCroppedContainers();
 initExpendableMenus();
-$('.modal-trigger').leanModal();
 
 
 $('.tooltipped').tooltip()
@@ -222,4 +221,5 @@ $('.tooltipped').tooltip()
 
 {% block custom_afterRender %}
   initCroppedTextFields();
+  $('.modal-trigger').leanModal();
 {% endblock %}

@@ -17,5 +17,28 @@ CardView = Backbone.View.extend({
     $(this.el).children('.card-load-error').find('.Bck-errormsg').html(rendered);
     $(this.el).children('.card-load-error').show();
     return $(this.el).find('#Bck-CHEMBL_ID');
+  },
+  initEmbedModal: function(section_name) {
+    var code_elem, modal, modal_id, modal_trigger, rendered, source;
+    modal_trigger = $(this.el).find('.embed-modal-trigger');
+    modal = $(this.el).find('.embed-modal');
+    modal_id = 'embed-modal-for-' + $(this.el).attr('id');
+    modal.attr('id', modal_id);
+    modal_trigger.attr('href', '#' + modal_id);
+    code_elem = modal.find('code');
+    source = '<object ' + 'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/{{section_name}}/" ' + 'width="360px" height="600px"></object>';
+    rendered = Handlebars.compile(source)({
+      chembl_id: this.model.get('molecule_chembl_id'),
+      section_name: section_name
+    });
+    return code_elem.text(rendered);
+  },
+  renderModalPreview: function() {
+    var code_elem, code_to_preview, modal, preview_elem;
+    modal = $(this.el).find('.embed-modal');
+    preview_elem = modal.find('.embed-preview');
+    code_elem = modal.find('code');
+    code_to_preview = code_elem.text();
+    return preview_elem.html(code_to_preview);
   }
 });
