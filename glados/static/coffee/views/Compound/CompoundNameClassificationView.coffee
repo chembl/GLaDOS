@@ -1,26 +1,11 @@
 # View that renders the Compound Name and Classification section
 # from the compound report card
-CompoundNameClassificationView = Backbone.View.extend
+# load CardView first!
+CompoundNameClassificationView = CardView.extend
 
   initialize: ->
     @model.on 'change', @.render, @
-    @model.on 'error', @.showErrorCard, @
-
-  showErrorCard: (model, xhr, options)->
-    $(@el).children('.card-preolader-to-hide').hide()
-
-    if xhr.status == 404
-      error_msg = 'No compound found with id ' + @model.get('molecule_chembl_id')
-    else
-      error_msg = 'There was an error while loading the compound (' + xhr.status + ' ' + xhr.statusText + ')'
-
-    source = '<i class="fa fa-exclamation-circle"></i> {{msg}}'
-    rendered = Handlebars.compile(source)
-      msg: error_msg
-
-    $(@el).children('.card-load-error').find('#Bck-errormsg').html(rendered)
-
-    $(@el).children('.card-load-error').show()
+    @model.on 'error', @.showCompoundErrorCard, @
 
   render: ->
 
