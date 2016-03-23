@@ -186,13 +186,13 @@ initCroppedTextFields = ->
     input_field.focusout ->
       cropTextIfNecessary(currentDiv)
 
-    cropTextIfNecessary(currentDiv)
-
     $( window ).resize ->
 
       if currentDiv.is(':visible')
         cropTextIfNecessary(currentDiv)
 
+
+    cropTextIfNecessary(currentDiv)
 
 ### *
   * Decides if the input contained in the div is overlapping and the ellipsis must be shown.
@@ -204,25 +204,23 @@ cropTextIfNecessary = (input_div)->
 
   input_field = input_div.find('input')[0]
 
-  console.log('--cropping')
-
   originalInputValue = input_div.attr('data-original-value')
   # don't bother to do anything if there is no text in the input.
   if originalInputValue == undefined
     return
 
-  console.log('cont cropping')
   input_field.value = originalInputValue
 
-  charLength = Math.round( ( input_field.scrollWidth / originalInputValue.length ) + 0.5)
-  numVisibleChars = Math.round(input_field.offsetWidth / charLength)
+  charLength = ( input_field.scrollWidth / originalInputValue.length )
+  numVisibleChars = Math.round(input_field.clientWidth / charLength)
 
-  if input_field.scrollWidth > input_field.offsetWidth
-    console.log('overflow!')
+
+  if input_field.scrollWidth > input_field.clientWidth
     # overflow
-    shownValue = originalInputValue.substring(0, ( numVisibleChars / 2 ) - 2 ) + ' ... ' +
+    partSize = ( numVisibleChars / 2 ) - 2
+    shownValue = originalInputValue.substring(0, partSize) + ' ... ' +
                  originalInputValue.substring(
-                   originalInputValue.length - ( ( numVisibleChars / 2 ) - 2), originalInputValue.length)
+                   originalInputValue.length - partSize + 2, originalInputValue.length)
 
     # remember that the original value is stored in the input_div's 'data-original-value' attribute
     input_field.value = shownValue

@@ -180,12 +180,12 @@ initCroppedTextFields = function() {
     input_field.focusout(function() {
       return cropTextIfNecessary(currentDiv);
     });
-    cropTextIfNecessary(currentDiv);
-    return $(window).resize(function() {
+    $(window).resize(function() {
       if (currentDiv.is(':visible')) {
         return cropTextIfNecessary(currentDiv);
       }
     });
+    return cropTextIfNecessary(currentDiv);
   });
 };
 
@@ -198,20 +198,18 @@ initCroppedTextFields = function() {
 
 
 cropTextIfNecessary = function(input_div) {
-  var charLength, input_field, numVisibleChars, originalInputValue, shownValue;
+  var charLength, input_field, numVisibleChars, originalInputValue, partSize, shownValue;
   input_field = input_div.find('input')[0];
-  console.log('--cropping');
   originalInputValue = input_div.attr('data-original-value');
   if (originalInputValue === void 0) {
     return;
   }
-  console.log('cont cropping');
   input_field.value = originalInputValue;
-  charLength = Math.round((input_field.scrollWidth / originalInputValue.length) + 0.5);
-  numVisibleChars = Math.round(input_field.offsetWidth / charLength);
-  if (input_field.scrollWidth > input_field.offsetWidth) {
-    console.log('overflow!');
-    shownValue = originalInputValue.substring(0, (numVisibleChars / 2) - 2) + ' ... ' + originalInputValue.substring(originalInputValue.length - ((numVisibleChars / 2) - 2), originalInputValue.length);
+  charLength = input_field.scrollWidth / originalInputValue.length;
+  numVisibleChars = Math.round(input_field.clientWidth / charLength);
+  if (input_field.scrollWidth > input_field.clientWidth) {
+    partSize = (numVisibleChars / 2) - 2;
+    shownValue = originalInputValue.substring(0, partSize) + ' ... ' + originalInputValue.substring(originalInputValue.length - partSize + 2, originalInputValue.length);
     return input_field.value = shownValue;
   } else {
     return input_field.value = originalInputValue;

@@ -218,9 +218,8 @@ $('.modal-trigger').leanModal();
 
 $('.tooltipped').tooltip()
 
-{% block custom_afterRender %}
-  console.log('after render!');
-  initCroppedTextFields();
 {% endblock %}
 
+{% block custom_afterRender %}
+  initCroppedTextFields();
 {% endblock %}
