@@ -14,7 +14,7 @@ CardView = Backbone.View.extend({
     rendered = Handlebars.compile(source)({
       msg: error_msg
     });
-    $(this.el).children('.card-load-error').find('#Bck-errormsg').html(rendered);
+    $(this.el).children('.card-load-error').find('.Bck-errormsg').html(rendered);
     $(this.el).children('.card-load-error').show();
     return $(this.el).find('#Bck-CHEMBL_ID');
   }

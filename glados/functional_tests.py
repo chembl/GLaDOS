@@ -110,7 +110,8 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_load_non_existent_compound(self):
     self.browser.get('http://127.0.0.1:8000/compound_report_card/CHEMBL7/')
-    error_msg_p = self.browser.find_element_by_id('Bck-errormsg')
+
+    error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
     self.assertEqual(error_msg_p.text, 'No compound found with id CHEMBL7')
 
   def test_png_download_button(self):

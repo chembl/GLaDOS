@@ -13,7 +13,7 @@ CardView = Backbone.View.extend
     rendered = Handlebars.compile(source)
       msg: error_msg
 
-    $(@el).children('.card-load-error').find('#Bck-errormsg').html(rendered)
+    $(@el).children('.card-load-error').find('.Bck-errormsg').html(rendered)
 
     $(@el).children('.card-load-error').show()
 
