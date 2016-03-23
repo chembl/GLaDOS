@@ -205,6 +205,10 @@ cropTextIfNecessary = (input_div)->
   input_field = input_div.find('input')[0]
 
   originalInputValue = input_div.attr('data-original-value')
+  # don't bother to do anything if there is no text in the input.
+  if originalInputValue == undefined
+    return
+
   input_field.value = originalInputValue
 
   charLength = Math.round( ( input_field.scrollWidth / originalInputValue.length ) + 0.5)
@@ -223,8 +227,6 @@ cropTextIfNecessary = (input_div)->
     input_field.value = originalInputValue
 
 
-
-  return true
 
 
 

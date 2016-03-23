@@ -201,14 +201,16 @@ cropTextIfNecessary = function(input_div) {
   var charLength, input_field, numVisibleChars, originalInputValue, shownValue;
   input_field = input_div.find('input')[0];
   originalInputValue = input_div.attr('data-original-value');
+  if (originalInputValue === void 0) {
+    return;
+  }
   input_field.value = originalInputValue;
   charLength = Math.round((input_field.scrollWidth / originalInputValue.length) + 0.5);
   numVisibleChars = Math.round(input_field.offsetWidth / charLength);
   if (input_field.scrollWidth > input_field.offsetWidth) {
     shownValue = originalInputValue.substring(0, (numVisibleChars / 2) - 2) + ' ... ' + originalInputValue.substring(originalInputValue.length - ((numVisibleChars / 2) - 2), originalInputValue.length);
-    input_field.value = shownValue;
+    return input_field.value = shownValue;
   } else {
-    input_field.value = originalInputValue;
+    return input_field.value = originalInputValue;
   }
-  return true;
 };
