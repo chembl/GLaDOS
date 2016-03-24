@@ -1,4 +1,5 @@
 # Base view for most of the cards in the page
+# make sure the handlebars templates are loaded!
 CardView = Backbone.View.extend
 
   showCompoundErrorCard: (model, xhr, options) ->
@@ -9,8 +10,7 @@ CardView = Backbone.View.extend
     else
       error_msg = 'There was an error while loading the compound (' + xhr.status + ' ' + xhr.statusText + ')'
 
-    source = '<i class="fa fa-exclamation-circle"></i> {{msg}}'
-    rendered = Handlebars.compile(source)
+    rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())
       msg: error_msg
 
     $(@el).children('.card-load-error').find('.Bck-errormsg').html(rendered)
@@ -30,11 +30,7 @@ CardView = Backbone.View.extend
 
     code_elem = modal.find('code')
 
-    source = '<object ' +
-             'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/{{section_name}}/" ' +
-             'width="360px" height="600px"></object>'
-
-    rendered = Handlebars.compile(source)
+    rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
       chembl_id: @model.get('molecule_chembl_id')
       section_name: section_name
 

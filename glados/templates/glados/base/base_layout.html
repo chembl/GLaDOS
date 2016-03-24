@@ -77,6 +77,11 @@
    {% block custom_js %}{% endblock %}
 {% endcompress %}
 
+<!-- handlebars templates -->
+{% block common_handlebars %}
+  {% include "glados/Handlebars/CommonSources.html" %}
+{% endblock %}
+
 <!-- inline javascript -->
 {% compress js %}
 <script type="text/javascript" charset="utf-8">

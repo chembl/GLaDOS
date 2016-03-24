@@ -1,6 +1,7 @@
 # View that renders the Compound Name and Classification section
 # from the compound report card
 # load CardView first!
+# also make sure the html can access the handlebars templates!
 CompoundNameClassificationView = CardView.extend
 
   initialize: ->

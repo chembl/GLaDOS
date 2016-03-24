@@ -3,15 +3,14 @@ var CardView;
 
 CardView = Backbone.View.extend({
   showCompoundErrorCard: function(model, xhr, options) {
-    var error_msg, rendered, source;
+    var error_msg, rendered;
     $(this.el).children('.card-preolader-to-hide').hide();
     if (xhr.status === 404) {
       error_msg = 'No compound found with id ' + this.model.get('molecule_chembl_id');
     } else {
       error_msg = 'There was an error while loading the compound (' + xhr.status + ' ' + xhr.statusText + ')';
     }
-    source = '<i class="fa fa-exclamation-circle"></i> {{msg}}';
-    rendered = Handlebars.compile(source)({
+    rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())({
       msg: error_msg
     });
     $(this.el).children('.card-load-error').find('.Bck-errormsg').html(rendered);
@@ -19,15 +18,14 @@ CardView = Backbone.View.extend({
     return $(this.el).find('#Bck-CHEMBL_ID');
   },
   initEmbedModal: function(section_name) {
-    var code_elem, modal, modal_id, modal_trigger, rendered, source;
+    var code_elem, modal, modal_id, modal_trigger, rendered;
     modal_trigger = $(this.el).find('.embed-modal-trigger');
     modal = $(this.el).find('.embed-modal');
     modal_id = 'embed-modal-for-' + $(this.el).attr('id');
     modal.attr('id', modal_id);
     modal_trigger.attr('href', '#' + modal_id);
     code_elem = modal.find('code');
-    source = '<object ' + 'data="http://glados-ebitest.rhcloud.com//compound_report_card/{{chembl_id}}/embed/{{section_name}}/" ' + 'width="360px" height="600px"></object>';
-    rendered = Handlebars.compile(source)({
+    rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())({
       chembl_id: this.model.get('molecule_chembl_id'),
       section_name: section_name
     });
