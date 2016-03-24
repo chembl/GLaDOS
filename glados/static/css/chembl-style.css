@@ -973,7 +973,7 @@ div#CNC-zoom-modal {
   margin-top: 10px;
 }
 
-.img-zoom-close {
+.modal-close-icon {
   position: absolute;
   top: 5px;
   right: 0;
