@@ -37,8 +37,7 @@ CompoundNameClassificationView = CardView.extend
     name = @model.get('pref_name')
     text = if name != null then name else 'Undefined'
 
-    source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>'
-    rendered = Handlebars.compile(source)
+    rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-renderPrefName').html())
       name: text
       undef: name == null
 
@@ -76,17 +75,8 @@ CompoundNameClassificationView = CardView.extend
       else
         'Undefined'
 
-    source =
-      '<span class="{{class}}"> {{text}} </span>' +
-        '{{#if show_phase}}' +
-        '  <span class="{{class}}"> {{desc}} </span>' +
-        '{{/if}}' +
-        '<span class="chembl-help">' +
-        ' <sub><span class="icon-help hoverable tooltipped indigo-text" data-tooltip="{{tooltip}}" data-position="top"></span></sub>' +
-        '</span>'
 
-
-    template = Handlebars.compile(source)
+    template = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-renderMaxPhase').html())
     rendered = template
       class: phase_class
       text: phase
@@ -145,7 +135,7 @@ CompoundNameClassificationView = CardView.extend
         ' <span class="CNC-chip-syn">{{ this }}</span> ' +
         '{{/each}}'
 
-      syn_rendered = Handlebars.compile(synonyms_source)
+      syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())
         items: Array.from(unique_synonyms)
 
       $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
@@ -156,11 +146,8 @@ CompoundNameClassificationView = CardView.extend
       $(@el).find('#CompNameClass-tradenames').parent().parent().parent().hide()
 
     else
-      tradenames_source = '{{#each items}}' +
-        ' <span class="CNC-chip-tn">{{ this }}</span> ' +
-        '{{/each}}'
 
-      tn_rendered = Handlebars.compile(tradenames_source)
+      tn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-tradenames').html())
         items: Array.from(trade_names)
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)

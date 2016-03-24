@@ -25,18 +25,17 @@ CompoundNameClassificationView = CardView.extend({
     return $(this.el).find('#Bck-CHEMBL_ID').text(this.model.get('molecule_chembl_id'));
   },
   renderPrefName: function() {
-    var name, rendered, source, text;
+    var name, rendered, text;
     name = this.model.get('pref_name');
     text = name !== null ? name : 'Undefined';
-    source = '<span> {{#if undef}}<i>{{/if}} {{name}} {{#if undef}}</i>{{/if}} </span>';
-    rendered = Handlebars.compile(source)({
+    rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-renderPrefName').html())({
       name: text,
       undef: name === null
     });
     return $(this.el).find('#Bck-PREF_NAME').html(rendered);
   },
   renderMaxPhase: function() {
-    var description, phase, phase_class, rendered, show_phase, source, template, tooltip_text;
+    var description, phase, phase_class, rendered, show_phase, template, tooltip_text;
     phase = this.model.get('max_phase');
     phase_class = 'comp-phase-' + phase;
     show_phase = phase !== 0;
@@ -70,8 +69,7 @@ CompoundNameClassificationView = CardView.extend({
           return 'Undefined';
       }
     })();
-    source = '<span class="{{class}}"> {{text}} </span>' + '{{#if show_phase}}' + '  <span class="{{class}}"> {{desc}} </span>' + '{{/if}}' + '<span class="chembl-help">' + ' <sub><span class="icon-help hoverable tooltipped indigo-text" data-tooltip="{{tooltip}}" data-position="top"></span></sub>' + '</span>';
-    template = Handlebars.compile(source);
+    template = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-renderMaxPhase').html());
     rendered = template({
       "class": phase_class,
       text: phase,
@@ -105,7 +103,7 @@ CompoundNameClassificationView = CardView.extend({
     return img.attr('src', img_url);
   },
   renderSynonymsAndTradeNames: function() {
-    var all_syns, syn_rendered, synonyms_source, tn_rendered, trade_names, tradenames_source, unique_synonyms;
+    var all_syns, syn_rendered, synonyms_source, tn_rendered, trade_names, unique_synonyms;
     all_syns = this.model.get('molecule_synonyms');
     unique_synonyms = new Set();
     trade_names = new Set();
@@ -123,7 +121,7 @@ CompoundNameClassificationView = CardView.extend({
       $(this.el).find('#CompNameClass-synonyms').parent().parent().parent().hide();
     } else {
       synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
-      syn_rendered = Handlebars.compile(synonyms_source)({
+      syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())({
         items: Array.from(unique_synonyms)
       });
       $(this.el).find('#CompNameClass-synonyms').html(syn_rendered);
@@ -131,8 +129,7 @@ CompoundNameClassificationView = CardView.extend({
     if (trade_names.size === 0) {
       return $(this.el).find('#CompNameClass-tradenames').parent().parent().parent().hide();
     } else {
-      tradenames_source = '{{#each items}}' + ' <span class="CNC-chip-tn">{{ this }}</span> ' + '{{/each}}';
-      tn_rendered = Handlebars.compile(tradenames_source)({
+      tn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-tradenames').html())({
         items: Array.from(trade_names)
       });
       return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
