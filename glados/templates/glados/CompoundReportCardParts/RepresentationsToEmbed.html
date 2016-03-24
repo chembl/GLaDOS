@@ -1,11 +1,11 @@
 {% extends "glados/base/embed_base.html" %}
 
-{% block title %}Compound report card{% endblock %}
+{% block title %}Compound Representations{% endblock %}
 
 {% block content %}
 
-   <div style="margin-top: 25px;">
-    {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
+   <div id="CompoundNameAndClassification" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/Representations.html" %}
    </div>
 
 {% endblock %}
@@ -14,14 +14,16 @@
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 <script type="text/javascript" src="/static/js/models/Compound.js"></script>
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
-<script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundRepresentationsView.js"></script>
 <script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
 {% endblock %}
 
 {% block custom_js_inline %}
 
+var pathname = window.location.pathname;
+var pathnameParts = pathname.split('/')
 var compound = initCompound(CHEMBL_ID);
-var cncView = initCNCView(compound, $('#CNCCard'));
+var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
 compound.fetch();
 
 initCroppedContainers();
@@ -30,5 +32,6 @@ $('.modal-trigger').hide();
 
 {% endblock %}
 
-
-
+{% block custom_afterRender %}
+  initCroppedTextFields();
+{% endblock %}

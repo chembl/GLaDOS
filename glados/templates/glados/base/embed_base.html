@@ -42,11 +42,27 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
 
+    var pathname = window.location.pathname;
+    var pathnameParts = pathname.split('/')
+    CHEMBL_ID = pathnameParts[pathnameParts.length - 4]
     {% block custom_js_inline %}{% endblock %}
 
   });
 </script>
 {% endcompress%}
+
+  <!-- a function to be called after the content is rendered  -->
+{% compress js %}
+  <script type="text/javascript" charset="utf-8">
+
+    afterRender = function (){
+
+      {% block custom_afterRender %}{% endblock %}
+
+    }
+
+  </script>
+  {% endcompress%}
 
 <!-- common imports for all templates that need to be last -->
 {% compress js %}
