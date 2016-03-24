@@ -67,3 +67,9 @@ target/
 
 # pyenv
 .python-version
+
+# database files
+db.sqlite3
+
+# filre created in tests
+/__init__.py

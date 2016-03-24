@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = [
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = 'tests.urls'
 
 TEMPLATES = [
   {
@@ -85,8 +85,6 @@ TEMPLATES = [
     },
   },
 ]
-
-WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
