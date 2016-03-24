@@ -2,21 +2,21 @@
 
   <div id='CompRepsCard' class="card chembl-card grey lighten-5">
 
-     <!-- modal trigger -->
+    <!-- modal trigger -->
     {% block embed_button %}
-      {% include "glados/base/embed_button.html" %}
+    {% include "glados/base/embed_button.html" %}
     {% endblock %}
 
     {% block card_loaders %}
-      {% include "glados/base/card_loaders.html" %}
+    {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
     <div class="card-content" style="display: none">
 
-       <!-- Embed Modal Structure -->
-        {% block embed_modal %}
-          {% include "glados/base/embed_modal.html" %}
-        {% endblock %}
+      <!-- Embed Modal Structure -->
+      {% block embed_modal %}
+      {% include "glados/base/embed_modal.html" %}
+      {% endblock %}
 
       <div class="row">
 
@@ -100,7 +100,7 @@
                     <td>
                       <div class="cropped-text-field-input">
                         <input id="CompReps-standardInchi" type="text">
-                          <!--Backbone-->
+                        <!--Backbone-->
                       </div>
 
                     </td>
@@ -173,6 +173,10 @@
 
             <td class="fixed-width-column"><b>Molfile:</b></td>
 
+          </tr>
+
+          <tr>
+
             <td>
               <div class="inline-block">
                 <a class="waves-effect waves-light btn-small teal">
@@ -217,7 +221,7 @@
                     <td>
                       <div class="cropped-text-field-input">
                         <input id="CompReps-canonicalSmiles-small" type="text">
-                          <!--Backbone-->
+                        <!--Backbone-->
                       </div>
                     </td>
 
@@ -257,7 +261,7 @@
 
                       <div class="cropped-text-field-input">
                         <input id="CompReps-standardInchi-small" type="text">
-                          <!--Backbone-->
+                        <!--Backbone-->
                       </div>
 
                     </td>
@@ -299,7 +303,7 @@
                     <td>
                       <div class="cropped-text-field-input">
                         <input id="CompReps-standardInchiKey-small" type="text">
-                          <!--Backbone-->
+                        <!--Backbone-->
                       </div>
                     </td>
 
