@@ -1124,3 +1124,7 @@ div#CNC-zoom-modal {
 .cropped-text-field-btns-cell {
   width: 75px;
 }
+
+.card {
+  position: relative;
+}

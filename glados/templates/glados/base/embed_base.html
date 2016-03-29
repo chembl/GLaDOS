@@ -45,6 +45,7 @@
     var pathname = window.location.pathname;
     var pathnameParts = pathname.split('/')
     CHEMBL_ID = pathnameParts[pathnameParts.length - 4]
+    EMBEDED = $.inArray('embed', pathnameParts) != -1
     {% block custom_js_inline %}{% endblock %}
 
   });

@@ -7,7 +7,7 @@
 
 <div class="col s12 m10 l12">
 
-  <div id="MechOfActCard" class="card-panel grey lighten-5">
+  <div id="MechOfActCard" class="card grey lighten-5">
 
     <!-- modal trigger -->
     {% block embed_button %}
@@ -18,7 +18,7 @@
     {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
-    <div class="row" style="display:none">
+    <div class="card-content" style="display:none">
 
       <table class="compact-table striped">
         <thead>
@@ -37,11 +37,15 @@
       </table>
     </div>
 
-  </div>
 
   <!-- Embed Modal Structure -->
   {% block embed_modal %}
   {% include "glados/base/embed_modal.html" %}
   {% endblock %}
+
+  </div>
+
+
+
 
 </div>

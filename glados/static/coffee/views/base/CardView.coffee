@@ -21,6 +21,12 @@ CardView = Backbone.View.extend
 
   initEmbedModal: (section_name) ->
 
+    if EMBEDED?
+      # prevent unnecessary loops
+      $(@el).find('.embed-modal-trigger').remove()
+      $(@el).find('.embed-modal').remove()
+      return
+
     modal_trigger = $(@el).find('.embed-modal-trigger')
 
     modal = $(@el).find('.embed-modal')
@@ -30,15 +36,18 @@ CardView = Backbone.View.extend
 
     code_elem = modal.find('code')
 
+    chembl_id = if @model? then @model.get('molecule_chembl_id') else CHEMBL_ID
+
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
-      chembl_id: @model.get('molecule_chembl_id')
+      chembl_id: chembl_id
       section_name: section_name
-
-
 
     code_elem.text(rendered)
 
   renderModalPreview: ->
+
+    if EMBEDED?
+      return
 
     modal = $(@el).find('.embed-modal')
     preview_elem = modal.find('.embed-preview')
@@ -47,4 +56,5 @@ CardView = Backbone.View.extend
     code_to_preview = code_elem.text()
 
     preview_elem.html(code_to_preview)
+
 

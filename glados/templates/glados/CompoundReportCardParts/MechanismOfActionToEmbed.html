@@ -1,0 +1,30 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Mechanism Of Action{% endblock %}
+
+{% block content %}
+
+   <div id="MechanismOfAction" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
+   </div>
+
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="/static/js/models/MechanismOfAction.js"></script>
+<script type="text/javascript" src="/static/js/models/MechanismOfActionList.js"></script>
+<script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
+<script type="text/javascript" src="/static/js/views/MechanismOfAction/MechanismOfActionRowView.js"></script>
+<script type="text/javascript" src="/static/js/views/MechanismOfAction/CompoundMechanismsOfActionView.js"></script>
+<script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID)
+var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
+mechanismOfActionList.fetch({reset: true});
+
+$('.tooltipped').tooltip()
+
+{% endblock %}
