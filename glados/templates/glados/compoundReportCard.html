@@ -22,7 +22,7 @@
         <div class="row">
 
           {% block cnc %}
-            {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
+          {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
           {% endblock %}
 
         </div>
@@ -38,10 +38,10 @@
       <div id="CompoundRepresentations" class="section scrollspy">
         <h3>Compound Representations</h3>
 
-         <div class="row">
+        <div class="row">
 
           {% block representations %}
-            {% include "glados/CompoundReportCardParts/Representations.html" %}
+          {% include "glados/CompoundReportCardParts/Representations.html" %}
           {% endblock %}
 
         </div>
@@ -52,7 +52,15 @@
       <div class="divider"></div>
       <div id="MechanismOfAction" class="section scrollspy">
         <h3>Mechanism of Action</h3>
-        <p>Stuff</p>
+        <div class="row">
+
+
+          {% block mechanism_of_action %}
+          {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
+          {% endblock %}
+
+
+        </div>
       </div>
 
       <div class="divider"></div>
@@ -220,6 +228,6 @@ $('.tooltipped').tooltip()
 {% endblock %}
 
 {% block custom_afterRender %}
-  initCroppedTextFields();
-  $('.modal-trigger').leanModal();
+initCroppedTextFields();
+$('.modal-trigger').leanModal();
 {% endblock %}
