@@ -13,6 +13,6 @@ MechanismOfActionRowView = Backbone.View.extend({
       target_chembl_id: this.model.get('target_chembl_id')
     });
     $(this.el).html(rendered);
-    return console.log($(this.el).html());
+    return this;
   }
 });

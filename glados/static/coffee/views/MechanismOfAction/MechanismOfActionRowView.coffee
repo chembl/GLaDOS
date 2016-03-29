@@ -1,3 +1,5 @@
+# This view renders a row of a table
+# from the information on the mechanism of action.
 MechanismOfActionRowView = Backbone.View.extend
 
   tagName: 'tr'
@@ -12,4 +14,4 @@ MechanismOfActionRowView = Backbone.View.extend
       target_chembl_id: @model.get('target_chembl_id')
 
     $(this.el).html(rendered);
-    console.log($(this.el).html())
+    return @
