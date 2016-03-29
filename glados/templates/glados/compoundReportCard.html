@@ -198,9 +198,11 @@
 <script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 <script type="text/javascript" src="/static/js/models/Compound.js"></script>
+<script type="text/javascript" src="/static/js/models/MechanismOfAction.js"></script>
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundRepresentationsView.js"></script>
+<script type="text/javascript" src="/static/js/views/MechanismOfAction/MechanismOfActionRowView.js"></script>
 <script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
 {% endblock %}
 
@@ -211,11 +213,15 @@ var pathname = window.location.pathname;
 var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var compound = initCompound(CHEMBL_ID);
+var mechanismOfAction = initMechanismOfAction(16)
 
 var cncView = initCNCView(compound, $('#CNCCard'));
 var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
+var mechanismOfActionRowView = initMechanismOfActionRowView(mechanismOfAction);
 
 compound.fetch();
+mechanismOfAction.fetch();
+console.log(mechanismOfAction.toJSON());
 
 $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();

@@ -1,0 +1,1 @@
+MechanismOfAction= Backbone.Model.extend({})

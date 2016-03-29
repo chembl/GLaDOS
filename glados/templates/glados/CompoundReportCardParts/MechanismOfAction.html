@@ -1,0 +1,42 @@
+{% block custom_models %}
+{% endblock %}
+
+{% block custom_handlebars %}
+  {% include "glados/Handlebars/CompoundReportCard/MechanismOfAction.html" %}
+{% endblock %}
+
+<div class="col s12 m10 l12">
+
+  <div id="MechOfActCard" class="card-panel grey lighten-5">
+
+   <table class="compact-table striped">
+        <thead>
+          <tr>
+              <th data-field="id">Mechanism Of Action</th>
+              <th data-field="name">Chembl Target</th>
+              <th data-field="price">References</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Carbonic anhydrase I inhibitor</td>
+            <td><a href="https://www.ebi.ac.uk/chembl/target/inspect/CHEMBL261">Carbonic anhydrase I</a></td>
+            <td><a href="http://europepmc.org/abstract/MED/18336310">PubMed</a> </td>
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+
+</div>

@@ -7,6 +7,19 @@ initCompound = (chembl_id) ->
   compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/' + chembl_id + '.json'
   return compound
 
+initMechanismOfAction = (mechanism_id) ->
+  mechanismOfAction = new MechanismOfAction
+    mec_id: mechanism_id
+
+  mechanismOfAction.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism/' + mechanism_id + '.json'
+  return mechanismOfAction
+
+initMechanismOfActionRowView = (model) ->
+  mechanismOfActionRowView = new MechanismOfActionRowView
+    model: model
+
+  return mechanismOfActionRowView
+
 
 ### *
   * Initializes de CNCView
