@@ -178,6 +178,21 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
                      'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
 
+  # --------------------------------------
+  # Mechanism of action
+  # --------------------------------------
+  def test_mechanism_of_action(self):
+    self.getURL('http://' + HOST + '/compound_report_card/CHEMBL17/', SLEEP_TIME)
+    mechanisms_of_action_table = self.browser.find_element_by_id('MechOfActCard').find_element_by_tag_name('table')
+    mechanisms_of_action_trs = mechanisms_of_action_table.find_elements_by_tag_name('tr')
+
+    texts = [row.text for row in mechanisms_of_action_trs]
+
+    self.assertIn('Carbonic anhydrase I inhibitor CHEMBL261 PubMed', texts)
+    self.assertIn('Carbonic anhydrase II inhibitor CHEMBL205 PubMed', texts)
+    self.assertIn('Carbonic anhydrase XII inhibitor CHEMBL3242 PubMed', texts)
+    self.assertIn('Carbonic anhydrase IV inhibitor CHEMBL3729 PubMed', texts)
+
 
 if __name__ == '__main__':
   unittest.main()
