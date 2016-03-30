@@ -1,9 +1,11 @@
 from selenium import webdriver
 import unittest
 import time
+import re
 
 HOST = '127.0.0.1:8000'
 SLEEP_TIME = 1
+
 
 class CompoundReportCardTest(unittest.TestCase):
   # tweak this if the web services are taking a bit longer to load the compound.
@@ -11,10 +13,8 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def setUp(self):
     self.browser = webdriver.Firefox()
+    self.browser.set_window_size(1024, 768)
     self.browser.implicitly_wait(self.IMPLICIT_WAIT)
-
-    print('---------------')
-    print( self.browser.page_source)
 
   def tearDown(self):
     self.browser.quit()
@@ -122,7 +122,8 @@ class CompoundReportCardTest(unittest.TestCase):
     self.getURL('http://' + HOST + '/compound_report_card/CHEMBL7/', SLEEP_TIME)
 
     error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
-    self.assertEqual(error_msg_p.text, 'No compound found with id CHEMBL7')
+    self.assertRegexpMatches(error_msg_p.text,
+                             'No compound found with id CHEMBL7|There was an error while loading the compound \(0 error\)')
 
   def test_png_download_button(self):
     self.getURL('http://' + HOST + '/compound_report_card/CHEMBL55/', SLEEP_TIME)
@@ -151,7 +152,6 @@ class CompoundReportCardTest(unittest.TestCase):
     canonical_smiles_input = self.browser.find_element_by_id('CompReps-canonicalSmiles-small')
     canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
     self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), 'CC(=O)Oc1ccccc1C(=O)O')
-
 
   def test_standard_inchi(self):
     self.getURL('http://' + HOST + '/compound_report_card/CHEMBL25/', SLEEP_TIME)

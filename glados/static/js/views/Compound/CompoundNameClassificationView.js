@@ -105,32 +105,32 @@ CompoundNameClassificationView = CardView.extend({
   renderSynonymsAndTradeNames: function() {
     var all_syns, syn_rendered, synonyms_source, tn_rendered, trade_names, unique_synonyms;
     all_syns = this.model.get('molecule_synonyms');
-    unique_synonyms = new Set();
-    trade_names = new Set();
+    unique_synonyms = {};
+    trade_names = {};
     $.each(all_syns, function(index, value) {
       if (value.syn_type === 'TRADE_NAME') {
-        return trade_names.add(value.synonyms);
+        return trade_names[value.synonyms] = value.synonyms;
       }
     });
     $.each(all_syns, function(index, value) {
-      if (value.syn_type !== 'TRADE_NAME' && !trade_names.has(value.synonyms)) {
-        return unique_synonyms.add(value.synonyms);
+      if (value.syn_type !== 'TRADE_NAME' && !(trade_names[value.synonyms] != null)) {
+        return unique_synonyms[value.synonyms] = value.synonyms;
       }
     });
-    if (unique_synonyms.size === 0) {
+    if (Object.keys(unique_synonyms).length === 0) {
       $(this.el).find('#CompNameClass-synonyms').parent().parent().parent().hide();
     } else {
       synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
       syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())({
-        items: Array.from(unique_synonyms)
+        items: Object.keys(unique_synonyms)
       });
       $(this.el).find('#CompNameClass-synonyms').html(syn_rendered);
     }
-    if (trade_names.size === 0) {
+    if (Object.keys(trade_names).length === 0) {
       return $(this.el).find('#CompNameClass-tradenames').parent().parent().parent().hide();
     } else {
       tn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-tradenames').html())({
-        items: Array.from(trade_names)
+        items: Object.keys(trade_names)
       });
       return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
     }

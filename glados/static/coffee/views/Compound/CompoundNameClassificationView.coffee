@@ -114,19 +114,19 @@ CompoundNameClassificationView = CardView.extend
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')
-    unique_synonyms = new Set()
-    trade_names = new Set()
+    unique_synonyms = {}
+    trade_names = {}
 
     $.each all_syns, (index, value) ->
       if value.syn_type == 'TRADE_NAME'
-        trade_names.add(value.synonyms)
+        trade_names[value.synonyms] = value.synonyms
 
     # I had to make 2 iterations because the keyword delete has some issues in coffesscript
     $.each all_syns, (index, value) ->
-      if value.syn_type != 'TRADE_NAME' and not trade_names.has(value.synonyms)
-        unique_synonyms.add(value.synonyms)
+      if value.syn_type != 'TRADE_NAME' and not trade_names[value.synonyms]?
+        unique_synonyms[value.synonyms] = value.synonyms
 
-    if unique_synonyms.size == 0
+    if Object.keys(unique_synonyms).length == 0
 
       $(@el).find('#CompNameClass-synonyms').parent().parent().parent().hide()
 
@@ -136,19 +136,19 @@ CompoundNameClassificationView = CardView.extend
         '{{/each}}'
 
       syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())
-        items: Array.from(unique_synonyms)
+        items: Object.keys(unique_synonyms)
 
       $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
 
 
-    if trade_names.size == 0
+    if Object.keys(trade_names).length == 0
 
       $(@el).find('#CompNameClass-tradenames').parent().parent().parent().hide()
 
     else
 
       tn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-tradenames').html())
-        items: Array.from(trade_names)
+        items: Object.keys(trade_names)
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
 
