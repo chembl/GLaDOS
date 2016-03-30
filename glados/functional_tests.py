@@ -99,6 +99,15 @@ class CompoundReportCardTest(unittest.TestCase):
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('0', phase_td.text)
 
+    # --------------------------------------
+    # Compound Representations
+    # --------------------------------------
+
+    # if compound_representations is null, the section is not shown
+    comp_reps_div = self.browser.find_element_by_id('CompoundRepresentations')
+    self.assertFalse(comp_reps_div.is_displayed())
+
+
 
   def test_compund_report_card_scenario_3(self):
 

@@ -8,6 +8,12 @@ CompoundRepresentationsView = CardView.extend
 
   render: ->
 
+    @molecule_structures = @model.get('molecule_structures')
+
+    if not @molecule_structures?
+      $('#CompoundRepresentations').hide()
+      return
+
     @renderCanonicalSmiles()
     @renderStandardInchi()
     @renderStandardInchiKey()
@@ -23,21 +29,19 @@ CompoundRepresentationsView = CardView.extend
 
   renderCanonicalSmiles: ->
 
-    molecule_structures = @model.get('molecule_structures')
+
     $(@el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value',
-      molecule_structures['canonical_smiles'])
+      @molecule_structures['canonical_smiles'])
 
   renderStandardInchi: ->
 
-    molecule_structures = @model.get('molecule_structures')
     $(@el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value',
-      molecule_structures['standard_inchi'])
+      @molecule_structures['standard_inchi'])
 
   renderStandardInchiKey: ->
 
-    molecule_structures = @model.get('molecule_structures')
     $(@el).find('#CompReps-standardInchiKey, #CompReps-standardInchiKey-small').attr('value',
-      molecule_structures['standard_inchi_key'])
+      @molecule_structures['standard_inchi_key'])
 
 
 
