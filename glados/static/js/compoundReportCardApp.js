@@ -23,6 +23,8 @@ initMechanismOfActionList = function(from_mol_chembl_id) {
   var mechanismOfActionList;
   mechanismOfActionList = new MechanismOfActionList;
   mechanismOfActionList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?molecule_chembl_id=' + from_mol_chembl_id;
+  console.log('url for mechanisms of action:');
+  console.log(mechanismOfActionList.url);
   return mechanismOfActionList;
 };
 
