@@ -103,9 +103,13 @@ class CompoundReportCardTest(unittest.TestCase):
     # Compound Representations
     # --------------------------------------
 
-    # if compound_representations is null, the section is not shown
+    # compound_representations is null, the section must not be shown
     comp_reps_div = self.browser.find_element_by_id('CompoundRepresentations')
     self.assertFalse(comp_reps_div.is_displayed())
+
+    # there are not mechanisms of action, the section must not be shown
+    mech_act_div = self.browser.find_element_by_id('MechanismOfAction')
+    self.assertFalse(mech_act_div.is_displayed())
 
 
 

@@ -7,6 +7,10 @@ CompoundMechanismsOfActionView = CardView.extend({
     return this.collection.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
+    if (this.collection.size() === 0) {
+      $('#MechanismOfAction').hide();
+      return;
+    }
     this.addAllMechanisms();
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();

@@ -10,6 +10,10 @@ CompoundMechanismsOfActionView = CardView.extend
 
   render: ->
 
+    if @collection.size() == 0
+      $('#MechanismOfAction').hide()
+      return
+
     @addAllMechanisms()
 
     # until here, all the visible content has been rendered.
