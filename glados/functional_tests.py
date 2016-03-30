@@ -4,7 +4,7 @@ import time
 import re
 
 HOST = '127.0.0.1:8000'
-SLEEP_TIME = 0.2
+SLEEP_TIME = 1
 
 
 class CompoundReportCardTest(unittest.TestCase):
@@ -12,7 +12,8 @@ class CompoundReportCardTest(unittest.TestCase):
   IMPLICIT_WAIT = 10
 
   def setUp(self):
-    self.browser = webdriver.PhantomJS()
+    self.browser = webdriver.Firefox()
+    self.browser.set_window_size(1024, 768)
     self.browser.implicitly_wait(self.IMPLICIT_WAIT)
 
   def tearDown(self):
