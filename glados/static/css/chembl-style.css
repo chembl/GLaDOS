@@ -1130,3 +1130,30 @@ div#CNC-zoom-modal {
 .card {
   position: relative;
 }
+
+/**
+* Molecule Features
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.mol-features-grid .col{
+  padding: 7px 0;
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+}
+
+.mol-features-grid .row{
+  margin-bottom: 0;
+}
+
+.mol-features-grid {
+  line-height: 1.5;
+}
+
+.mol-features-grid i{
+  font-size: 200%;
+}
+
+.mol-features-grid .mol-features-detail{
+  font-size: 65%;
+}
