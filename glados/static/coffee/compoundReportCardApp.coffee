@@ -71,3 +71,17 @@ initCompMechanismsOfActionView = (mech_of_action_list, top_level_elem) ->
     el: top_level_elem
 
   return compoundMechanismsOfActionView
+
+### *
+  * Initializes de Compound Featues View
+  * @param {Compound} model, base model for the view
+  * @param {JQuery} element that renders the model.
+  * @return {CompoundNameClassificationView} the view that has been created
+###
+initCompFeaturesView = (model, top_level_elem) ->
+
+  compFeaturesView = new CompoundFeaturesView
+    model: model
+    el: top_level_elem
+
+  return compFeaturesView

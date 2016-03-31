@@ -211,6 +211,7 @@
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundRepresentationsView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundFeaturesView.js"></script>
 <script type="text/javascript" src="/static/js/views/MechanismOfAction/MechanismOfActionRowView.js"></script>
 <script type="text/javascript" src="/static/js/views/MechanismOfAction/CompoundMechanismsOfActionView.js"></script>
 <script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
@@ -228,6 +229,7 @@ var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID)
 var cncView = initCNCView(compound, $('#CNCCard'));
 var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
 var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
+var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
 
 compound.fetch();
 mechanismOfActionList.fetch({reset: true});
