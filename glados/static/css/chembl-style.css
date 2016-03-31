@@ -77,18 +77,6 @@ h6 {
   font-size: 123.1%;
 }
 
-a {
-  border-bottom: 0 none;
-  color: #0f2559;
-}
-
-a:hover {
-  color: #0e6a0e;
-}
-
-a:visited {
-  color: #666;
-}
 
 /**
 * General layout setup
@@ -1091,6 +1079,20 @@ div#CNC-zoom-modal {
 .compact-table td {
   font-size: 80%;
   padding: 5px;
+}
+
+
+.ebi-links a {
+  border-bottom: 0 none;
+  color: #0f2559;
+}
+
+.ebi-links a:hover {
+  color: #0e6a0e;
+}
+
+.ebi-links a:visited {
+  color: #666;
 }
 
 .cropped-text-field {
