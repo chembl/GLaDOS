@@ -238,6 +238,18 @@ class CompoundReportCardTest(unittest.TestCase):
     error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
     self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
 
+    # --------------------------------------
+    # Compound Representations
+    # --------------------------------------
+    error_msg_p = self.browser.find_element_by_id('CompRepsCard').find_element_by_class_name('Bck-errormsg')
+    self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
+
+     # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+    error_msg_p = self.browser.find_element_by_id('MoleculeFeaturesCard').find_element_by_class_name('Bck-errormsg')
+    self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
+
 
 
   def test_compound_report_card_scenario_10(self):
