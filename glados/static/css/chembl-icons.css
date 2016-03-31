@@ -2,242 +2,161 @@
 * ChEMBL custom icons added to materialize
 */
 
+/* Biological concepts and top-level icons (e.g. Services, Research, etc. */
 @font-face {
-    font-family: 'EBI-Generic';
-    src: url('../font/EBI-Generic/EBI-Generic.eot');
-    src: url('../font/EBI-Generic/EBI-Generic.eot?#iefix') format('embedded-opentype'), url('../font/EBI-Generic/EBI-Generic.woff') format('woff'), local('☺'), url('../font/EBI-Generic/EBI-Generic.svg#EBI-Generic') format('svg'), url('../font/EBI-Generic/EBI-Generic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal
+  font-family: 'EBI-Conceptual';
+  src: url('../font/EBI-Conceptual/EBI-Conceptual.eot');
+  src: url('../font/EBI-Conceptual/EBI-Conceptual.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-Conceptual/EBI-Conceptual.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-Conceptual/EBI-Conceptual.svg#EBI-Conceptual') format('svg'),
+  url('../font/EBI-Conceptual/EBI-Conceptual.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-
-    font-family: 'EBI-Generic','EBI-Conceptual';
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Enable Ligatures ================ */
-    letter-spacing: 0;
-    -webkit-font-feature-settings: "liga";
-    -moz-font-feature-settings: "liga=1";
-    -moz-font-feature-settings: "liga";
-    -ms-font-feature-settings: "liga" 1;
-    -o-font-feature-settings: "liga";
-    font-feature-settings: "liga";
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
+/* Generic, functional or activity-orientated icons */
+@font-face {
+  font-family: 'EBI-Functional';
+  src: url('../font/EBI-Functional/EBI-Functional.eot');
+  src: url('../font/EBI-Functional/EBI-Functional.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-Functional/EBI-Functional.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-Functional/EBI-Functional.svg#EBI-Functional') format('svg'),
+  url('../font/EBI-Functional/EBI-Functional.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.icon-accommodation:before {
-    content: "\61";
-}
-.icon-alert:before {
-    content: "\6c";
-}
-.icon-alumni:before {
-    content: "\41";
-}
-.icon-announcement:before {
-    content: "\55";
-}
-.icon-basket:before {
-    content: "\62";
-}
-.icon-beta:before {
-    content: "\3e";
-}
-.icon-bike:before {
-    content: "\33";
-}
-.icon-biotech:before {
-    content: "\42";
-}
-.icon-bus:before {
-    content: "\31";
-}
-.icon-calendar:before {
-    content: "\72";
-}
-.icon-camera:before {
-    content: "\21";
-}
-.icon-car:before {
-    content: "\32";
-}
-.icon-careers:before {
-    content: "\63";
-}
-.icon-classification:before {
-    content: "\65";
-}
-.icon-clock:before {
-    content: "\7b";
-}
-.icon-contact:before {
-    content: "\43";
-}
-.icon-crosslink:before {
-    content: "\64";
-}
-.icon-database:before {
-    content: "\44";
-}
-.icon-discuss:before {
-    content: "\5c";
-}
-.icon-documentation:before {
-    content: "\3b";
-}
-.icon-drug:before {
-    content: "\75";
-}
-.icon-elixir:before {
-    content: "\25";
-}
-.icon-email:before {
-    content: "\45";
-}
-.icon-embl:before {
-    content: "\26";
-}
-.icon-external-link:before {
-    content: "\78";
-}
-.icon-external-systems:before {
-    content: "\79";
-}
-.icon-face-to-face:before {
-    content: "\66";
-}
-.icon-find-us:before {
-    content: "\5d";
-}
-.icon-funding:before {
-    content: "\46";
-}
-.icon-graph:before {
-    content: "\67";
-}
-.icon-group:before {
-    content: "\7d";
-}
-.icon-gtls:before {
-    content: "\47";
-}
-.icon-health:before {
-    content: "\68";
-}
-.icon-help:before {
-    content: "\3f";
-}
-.icon-home:before {
-    content: "\48";
-}
-.icon-industry:before {
-    content: "\49";
-}
-.icon-info:before {
-    content: "\69";
-}
-.icon-link:before {
-    content: "\4c";
-}
-.icon-location:before {
-    content: "\5b";
-}
-.icon-lovedata:before {
-    content: "\6f";
-}
-.icon-mailing-list:before {
-    content: "\6d";
-}
-.icon-math:before {
-    content: "\76";
-}
-.icon-meet-us:before {
-    content: "\4d";
-}
-.icon-mobile-device:before {
-    content: "\2f";
-}
-.icon-new:before {
-    content: "\3c";
-}
-.icon-newcomers:before {
-    content: "\6e";
-}
-.icon-news:before {
-    content: "\4e";
-}
-.icon-nutraceuticals:before {
-    content: "\22";
-}
-.icon-open-day:before {
-    content: "\4f";
-}
-.icon-piechart:before {
-    content: "\70";
-}
-.icon-plane:before {
-    content: "\34";
-}
-.icon-publication:before {
-    content: "\50";
-}
-.icon-research:before {
-    content: "\29";
-}
-.icon-resource:before {
-    content: "\52";
-}
-.icon-reviewed-data:before {
-    content: "\71";
-}
-.icon-services:before {
-    content: "\28";
-}
-.icon-steps:before {
-    content: "\23";
-}
-.icon-support:before {
-    content: "\73";
-}
-.icon-systems:before {
-    content: "\53";
-}
-.icon-terms:before {
-    content: "\27";
-}
-.icon-test:before {
-    content: "\30";
-}
-.icon-text-mining:before {
-    content: "\58";
-}
-.icon-toolkit:before {
-    content: "\3a";
-}
-.icon-train:before {
-    content: "\37";
-}
-.icon-training:before {
-    content: "\54";
-}
-.icon-tutorial:before {
-    content: "\74";
-}
-.icon-unreviewed-data:before {
-    content: "\51";
-}
-.icon-video:before {
-    content: "\56";
-}
-.icon-walk:before {
-    content: "\36";
+/* Generic icons that can be used as decoration or emphasis */
+@font-face {
+  font-family: 'EBI-Generic';
+  src: url('../font/EBI-Generic/EBI-Generic.eot');
+  src: url('../font/EBI-Generic/EBI-Generic.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-Generic/EBI-Generic.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-Generic/EBI-Generic.svg#EBI-Generic') format('svg'),
+  url('../font/EBI-Generic/EBI-Generic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Icons for commonly referenced species and orgamisms */
+@font-face {
+  font-family: 'EBI-Species';
+  src: url('../font/EBI-Species/EBI-Species.eot');
+  src: url('../font/EBI-Species/EBI-Species.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-Species/EBI-Species.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-Species/EBI-Species.svg#EBI-Species') format('svg'),
+  url('../font/EBI-Species/EBI-Species.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Icons for social media */
+@font-face {
+  font-family: 'EBI-SocialMedia';
+  src: url('../font/EBI-SocialMedia/EBI-SocialMedia.eot');
+  src: url('../font/EBI-SocialMedia/EBI-SocialMedia.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-SocialMedia/EBI-SocialMedia.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-SocialMedia/EBI-SocialMedia.svg#EBI-SocialMedia') format('svg'),
+  url('../font/EBI-SocialMedia/EBI-SocialMedia.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Specific file formats */
+@font-face {
+  font-family: 'EBI-FileFormats';
+  src: url('../font/EBI-FileFormats/EBI-FileFormats.eot');
+  src: url('../font/EBI-FileFormats/EBI-FileFormats.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-FileFormats/EBI-FileFormats.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-FileFormats/EBI-FileFormats.svg#EBI-Functional') format('svg'),
+  url('../font/EBI-FileFormats/EBI-FileFormats.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Chemistry font */
+@font-face {
+  font-family: 'EBI-Chemistry';
+  src: url('../font/EBI-Chemistry/EBI-Chemistry.eot');
+  src: url('../font/EBI-Chemistry/EBI-Chemistry.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-Chemistry/EBI-Chemistry.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-Chemistry/EBI-Chemistry.svg#EBI-Chemistry') format('svg'),
+  url('../font/EBI-Chemistry/EBI-Chemistry.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  text-decoration: none;
+  font-style: normal;
+}
+
+.icon-conceptual:before {
+  font-family: 'EBI-Conceptual';
+  /* font-size: 123.1%; */
+  font-size: 138.5%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-functional:before {
+  font-family: 'EBI-Functional';
+  /* font-size: 123.1%; */
+  font-size: 100%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-static:before, /* deprecated, included for back-compatibility */
+.icon-generic:before {
+  font-family: 'EBI-Generic';
+  /* font-size: 123.1%; */
+  font-size: 100%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-species:before {
+  font-family: 'EBI-Species';
+  /* font-size: 123.1%; */
+  font-size: 100%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-socialmedia:before {
+  font-family: 'EBI-SocialMedia';
+  /* font-size: 123.1%; */
+  font-size: 100%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-fileformats:before {
+  font-family: 'EBI-FileFormats';
+  /* font-size: 123.1%; */
+  font-size: 123.1%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-chemistry:before {
+  font-family: 'EBI-Chemistry';
+  font-size: 100%;
+  color: #bbb;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
 }
