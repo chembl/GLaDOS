@@ -102,7 +102,6 @@
   font-family: 'EBI-Conceptual';
   /* font-size: 123.1%; */
   font-size: 138.5%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -111,7 +110,6 @@
   font-family: 'EBI-Functional';
   /* font-size: 123.1%; */
   font-size: 100%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -121,7 +119,6 @@
   font-family: 'EBI-Generic';
   /* font-size: 123.1%; */
   font-size: 100%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -130,7 +127,6 @@
   font-family: 'EBI-Species';
   /* font-size: 123.1%; */
   font-size: 100%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -139,7 +135,6 @@
   font-family: 'EBI-SocialMedia';
   /* font-size: 123.1%; */
   font-size: 100%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -148,7 +143,6 @@
   font-family: 'EBI-FileFormats';
   /* font-size: 123.1%; */
   font-size: 123.1%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
@@ -156,7 +150,6 @@
 .icon-chemistry:before {
   font-family: 'EBI-Chemistry';
   font-size: 100%;
-  color: #bbb;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
 }
