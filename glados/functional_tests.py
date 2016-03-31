@@ -93,7 +93,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # structure not available
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), 'http://127.0.0.1:8000/static/img/structure_not_available.png')
+    self.assertEqual(img.get_attribute('src'), HOST + '/static/img/structure_not_available.png')
 
     # Max Phase 0
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
@@ -123,7 +123,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # protein sctructure
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), 'http://127.0.0.1:8000/static/img/protein_structure.png')
+    self.assertEqual(img.get_attribute('src'), HOST + '/static/img/protein_structure.png')
 
   def test_compound_report_card_scenario_4(self):
 
