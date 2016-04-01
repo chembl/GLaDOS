@@ -1137,9 +1137,9 @@ div#CNC-zoom-modal {
 */
 
 .mol-features-grid .col{
-  padding: 7px 0;
-  border: 1px solid #afafaf;
-  border-radius: 5px;
+  border: 1px solid #fafafa;
+  padding: 2px;
+  background-color: #e0e0e0;
 }
 
 .mol-features-grid .row{
@@ -1156,4 +1156,19 @@ div#CNC-zoom-modal {
 
 .mol-features-grid .mol-features-detail{
   font-size: 65%;
+}
+
+.mol-features-grid .feat-icon{
+  border: 4px solid #000000;
+  border-radius: 4px;
+  padding: 1px;
+}
+
+.mol-features-grid .first-row .active{
+  background-color: #73b360;
+  opacity: 0.9
+}
+
+.mol-features-grid .second-row .active{
+  background-color: #077b7f;
 }
