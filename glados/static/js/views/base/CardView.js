@@ -47,5 +47,8 @@ CardView = Backbone.View.extend({
     code_elem = modal.find('code');
     code_to_preview = code_elem.text();
     return preview_elem.html(code_to_preview);
+  },
+  activateTooltips: function() {
+    return $(this.el).find('.tooltipped').tooltip();
   }
 });

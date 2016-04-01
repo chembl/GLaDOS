@@ -82,6 +82,19 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
                      'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
 
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    #this is a small molecule
+    molecule_type_div = self.browser.find_element_by_id('Bck-MolType')
+    molecule_type_img = molecule_type_div.find_element_by_tag_name('img')
+    self.assertEqual(molecule_type_img.get_attribute('src'),
+                     HOST + '/static/img/molecule_features/mt_small_molecule.svg')
+    self.assertEqual(molecule_type_img.get_attribute('data-tooltip'),
+                     'Molecule Type: small molecule')
+
+
 
   def test_compound_report_card_scenario_2(self):
 

@@ -7,7 +7,25 @@ CompoundFeaturesView = CardView.extend({
     return this.model.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
+    this.renderMoleculeType();
+    this.activateTooltips();
     $(this.el).children('.card-preolader-to-hide').hide();
     return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+  },
+  renderMoleculeType: function() {
+    var moltype_div, rendered;
+    moltype_div = $(this.el).find('#Bck-MolType');
+    rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())({
+      active_class: 'active',
+      filename: this.molTypeToFilename[this.model.get('molecule_type')],
+      tooltip: this.molTypeToTooltip[this.model.get('molecule_type')]
+    });
+    return moltype_div.html(rendered);
+  },
+  molTypeToFilename: {
+    'Small molecule': 'mt_small_molecule'
+  },
+  molTypeToTooltip: {
+    'Small molecule': 'Molecule Type: small molecule'
   }
 });

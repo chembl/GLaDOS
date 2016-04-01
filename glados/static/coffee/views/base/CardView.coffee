@@ -57,4 +57,7 @@ CardView = Backbone.View.extend
 
     preview_elem.html(code_to_preview)
 
+  activateTooltips: ->
+    $(@el).find('.tooltipped').tooltip()
+
 
