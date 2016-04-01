@@ -33,3 +33,4 @@ CompoundFeaturesView = CardView.extend
   molTypeToFilenameTooltipDesc:
     'Small molecule': ['mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule']
     'Antibody': ['mt_antibody', 'Molecule Type: Antibody', 'Antibody']
+    'Enzyme': ['mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme']

@@ -292,6 +292,18 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertIn('Carbonic anhydrase XII inhibitor CHEMBL3242 PubMed', texts)
     self.assertIn('Carbonic anhydrase IV inhibitor CHEMBL3729 PubMed', texts)
 
+  def test_compound_report_card_scenario_11(self):
+
+    self.getURL(HOST + '/compound_report_card/CHEMBL1201822/', SLEEP_TIME)
+
+     # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # this is an Enzyme
+    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_enzyme.svg',
+                                 'Molecule Type: Enzyme', 'Enzyme')
+
 
 if __name__ == '__main__':
   unittest.main()
