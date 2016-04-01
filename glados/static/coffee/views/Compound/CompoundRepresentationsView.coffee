@@ -24,6 +24,7 @@ CompoundRepresentationsView = CardView.extend
 
     @initEmbedModal('representations')
     @renderModalPreview()
+    @activateTooltips()
 
     afterRender()
 

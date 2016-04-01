@@ -14,6 +14,8 @@ CompoundFeaturesView = CardView.extend
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
+    @activateTooltips()
+
   renderMoleculeType: ->
     moltype_div = $(@el).find('#Bck-MolType')
 

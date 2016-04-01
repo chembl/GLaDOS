@@ -22,6 +22,7 @@ CompoundMechanismsOfActionView = CardView.extend
 
     @initEmbedModal('mechanism_of_action')
     @renderModalPreview()
+    @activateTooltips()
 
   addOneMechanism: (mechanismOfAction) ->
     view = new MechanismOfActionRowView({model: mechanismOfAction});

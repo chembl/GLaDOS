@@ -10,7 +10,8 @@ CompoundFeaturesView = CardView.extend({
     this.renderMoleculeType();
     this.activateTooltips();
     $(this.el).children('.card-preolader-to-hide').hide();
-    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    return this.activateTooltips();
   },
   renderMoleculeType: function() {
     var moltype_div, rendered;

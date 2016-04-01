@@ -19,6 +19,7 @@ CompoundRepresentationsView = CardView.extend({
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('representations');
     this.renderModalPreview();
+    this.activateTooltips();
     return afterRender();
   },
   renderCanonicalSmiles: function() {

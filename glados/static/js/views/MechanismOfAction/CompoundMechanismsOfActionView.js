@@ -15,7 +15,8 @@ CompoundMechanismsOfActionView = CardView.extend({
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('mechanism_of_action');
-    return this.renderModalPreview();
+    this.renderModalPreview();
+    return this.activateTooltips();
   },
   addOneMechanism: function(mechanismOfAction) {
     var table, view;
