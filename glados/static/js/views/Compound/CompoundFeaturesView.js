@@ -18,7 +18,8 @@ CompoundFeaturesView = CardView.extend({
     rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())({
       active_class: 'active',
       filename: this.molTypeToFilename[this.model.get('molecule_type')],
-      tooltip: this.molTypeToTooltip[this.model.get('molecule_type')]
+      tooltip: this.molTypeToTooltip[this.model.get('molecule_type')],
+      description: this.molTypeToDesc[this.model.get('molecule_type')]
     });
     return moltype_div.html(rendered);
   },
@@ -27,5 +28,8 @@ CompoundFeaturesView = CardView.extend({
   },
   molTypeToTooltip: {
     'Small molecule': 'Molecule Type: small molecule'
+  },
+  molTypeToDesc: {
+    'Small molecule': 'Small Molecule'
   }
 });

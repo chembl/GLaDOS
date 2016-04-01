@@ -21,6 +21,7 @@ CompoundFeaturesView = CardView.extend
       active_class: 'active'
       filename: @molTypeToFilename[@model.get('molecule_type')]
       tooltip: @molTypeToTooltip[@model.get('molecule_type')]
+      description: @molTypeToDesc[@model.get('molecule_type')]
 
     moltype_div.html(rendered)
 
@@ -30,3 +31,6 @@ CompoundFeaturesView = CardView.extend
 
   molTypeToTooltip:
     'Small molecule': 'Molecule Type: small molecule'
+
+  molTypeToDesc:
+    'Small molecule': 'Small Molecule'

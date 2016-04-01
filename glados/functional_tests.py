@@ -38,7 +38,7 @@ class CompoundReportCardTest(unittest.TestCase):
     name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
     self.assertEqual('ASPIRIN', name_td.text)
 
-     # Max Phase 4
+    # Max Phase 4
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('4 Approved', phase_td.text)
 
@@ -70,7 +70,6 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual(standard_inchi_div.get_attribute('data-original-value'),
                      'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
 
-
     # normal standard inchi key
     standard_inchi_key_input = self.browser.find_element_by_id('CompReps-standardInchiKey')
     standard_inchi_key_div = standard_inchi_key_input.find_element_by_xpath('../../../../../..')
@@ -86,15 +85,16 @@ class CompoundReportCardTest(unittest.TestCase):
     # Molecule Features
     # --------------------------------------
 
-    #this is a small molecule
+    # this is a small molecule
     molecule_type_div = self.browser.find_element_by_id('Bck-MolType')
     molecule_type_img = molecule_type_div.find_element_by_tag_name('img')
     self.assertEqual(molecule_type_img.get_attribute('src'),
                      HOST + '/static/img/molecule_features/mt_small_molecule.svg')
     self.assertEqual(molecule_type_img.get_attribute('data-tooltip'),
                      'Molecule Type: small molecule')
-
-
+    molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
+    self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
+                     'Small Molecule')
 
   def test_compound_report_card_scenario_2(self):
 
@@ -124,8 +124,6 @@ class CompoundReportCardTest(unittest.TestCase):
     mech_act_div = self.browser.find_element_by_id('MechanismOfAction')
     self.assertFalse(mech_act_div.is_displayed())
 
-
-
   def test_compund_report_card_scenario_3(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL2108680', SLEEP_TIME)
@@ -154,7 +152,6 @@ class CompoundReportCardTest(unittest.TestCase):
     synonyms_td = self.browser.find_element_by_id('CompNameClass-synonyms')
     synonyms_tr = synonyms_td.find_element_by_xpath('..')
     self.assertFalse(synonyms_tr.is_displayed())
-
 
   def test_compound_report_card_scenario_5(self):
 
@@ -249,21 +246,19 @@ class CompoundReportCardTest(unittest.TestCase):
     # Compound Name and Classification
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
-    self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
+    self.assertEquals(error_msg_p.text, 'No compound found with id CHEMBL7')
 
     # --------------------------------------
     # Compound Representations
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('CompRepsCard').find_element_by_class_name('Bck-errormsg')
-    self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
+    self.assertEquals(error_msg_p.text, 'No compound found with id CHEMBL7')
 
-     # --------------------------------------
+    # --------------------------------------
     # Molecule Features
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('MoleculeFeaturesCard').find_element_by_class_name('Bck-errormsg')
-    self.assertEquals(error_msg_p.text,'No compound found with id CHEMBL7')
-
-
+    self.assertEquals(error_msg_p.text, 'No compound found with id CHEMBL7')
 
   def test_compound_report_card_scenario_10(self):
 
