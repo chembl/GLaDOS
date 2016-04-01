@@ -18,21 +18,18 @@ CompoundFeaturesView = CardView.extend
 
   renderMoleculeType: ->
     moltype_div = $(@el).find('#Bck-MolType')
+    console.log(@model.get('molecule_type'))
 
     rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())
       active_class: 'active'
-      filename: @molTypeToFilename[@model.get('molecule_type')]
-      tooltip: @molTypeToTooltip[@model.get('molecule_type')]
-      description: @molTypeToDesc[@model.get('molecule_type')]
+      filename: @molTypeToFilenameTooltipDesc[@model.get('molecule_type')][0]
+      tooltip: @molTypeToFilenameTooltipDesc[@model.get('molecule_type')][1]
+      description: @molTypeToFilenameTooltipDesc[@model.get('molecule_type')][2]
 
     moltype_div.html(rendered)
 
 
-  molTypeToFilename:
-    'Small molecule': 'mt_small_molecule'
-
-  molTypeToTooltip:
-    'Small molecule': 'Molecule Type: small molecule'
-
-  molTypeToDesc:
-    'Small molecule': 'Small Molecule'
+  # filename, tooltip, mobile description
+  molTypeToFilenameTooltipDesc:
+    'Small molecule': ['mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule']
+    'Antibody': ['mt_antibody', 'Molecule Type: Antibody', 'Antibody']

@@ -22,6 +22,18 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.get(url)
     time.sleep(sleeptime)
 
+  def assert_molecule_feature(self, img_src, img_tooltip, mobile_description):
+
+    molecule_type_div = self.browser.find_element_by_id('Bck-MolType')
+    molecule_type_img = molecule_type_div.find_element_by_tag_name('img')
+    self.assertEqual(molecule_type_img.get_attribute('src'),
+                     img_src)
+    self.assertEqual(molecule_type_img.get_attribute('data-tooltip'),
+                     img_tooltip)
+    molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
+    self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
+                     mobile_description)
+
   def test_compound_report_card_scenario_1(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL25', SLEEP_TIME)
@@ -86,15 +98,8 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # this is a small molecule
-    molecule_type_div = self.browser.find_element_by_id('Bck-MolType')
-    molecule_type_img = molecule_type_div.find_element_by_tag_name('img')
-    self.assertEqual(molecule_type_img.get_attribute('src'),
-                     HOST + '/static/img/molecule_features/mt_small_molecule.svg')
-    self.assertEqual(molecule_type_img.get_attribute('data-tooltip'),
-                     'Molecule Type: small molecule')
-    molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
-    self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
-                     'Small Molecule')
+    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_small_molecule.svg',
+                                 'Molecule Type: small molecule', 'Small Molecule')
 
   def test_compound_report_card_scenario_2(self):
 
@@ -135,6 +140,14 @@ class CompoundReportCardTest(unittest.TestCase):
     # protein sctructure
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
     self.assertEqual(img.get_attribute('src'), HOST + '/static/img/protein_structure.png')
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # this is an Antibody
+    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_antibody.svg',
+                                 'Molecule Type: Antibody', 'Antibody')
 
   def test_compound_report_card_scenario_4(self):
 

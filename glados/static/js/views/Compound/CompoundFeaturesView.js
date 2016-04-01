@@ -16,21 +16,17 @@ CompoundFeaturesView = CardView.extend({
   renderMoleculeType: function() {
     var moltype_div, rendered;
     moltype_div = $(this.el).find('#Bck-MolType');
+    console.log(this.model.get('molecule_type'));
     rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())({
       active_class: 'active',
-      filename: this.molTypeToFilename[this.model.get('molecule_type')],
-      tooltip: this.molTypeToTooltip[this.model.get('molecule_type')],
-      description: this.molTypeToDesc[this.model.get('molecule_type')]
+      filename: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][0],
+      tooltip: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][1],
+      description: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][2]
     });
     return moltype_div.html(rendered);
   },
-  molTypeToFilename: {
-    'Small molecule': 'mt_small_molecule'
-  },
-  molTypeToTooltip: {
-    'Small molecule': 'Molecule Type: small molecule'
-  },
-  molTypeToDesc: {
-    'Small molecule': 'Small Molecule'
+  molTypeToFilenameTooltipDesc: {
+    'Small molecule': ['mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule'],
+    'Antibody': ['mt_antibody', 'Molecule Type: Antibody', 'Antibody']
   }
 });
