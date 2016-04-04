@@ -351,6 +351,22 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_0.svg',
                                  'Chirality: Racemic Mixture', 'Racemic Mixture')
 
+    # Is no prodrug: 0
+    self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
+                                 'Prodrug: No', 'Prodrug: No')
+
+  def test_compound_report_card_scenario_13(self):
+
+    self.getURL(HOST + '/compound_report_card/CHEMBL2106520/', SLEEP_TIME)
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # Is prodrug: 1
+    self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
+                                 'Prodrug: Yes', 'Prodrug: Yes')
+
 
 if __name__ == '__main__':
   unittest.main()

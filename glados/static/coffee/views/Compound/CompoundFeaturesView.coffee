@@ -10,6 +10,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-FirstInClass', 'first_in_class')
     @renderProperty('Bck-Chirality', 'chirality')
+    @renderProperty('Bck-Prodrug', 'prodrug')
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
@@ -45,3 +46,6 @@ CompoundFeaturesView = CardView.extend
       '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture']
       '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner']
       '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule']
+    'prodrug':
+      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug: No']
+      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug: Yes']

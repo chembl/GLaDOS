@@ -10,6 +10,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-MolType', 'molecule_type');
     this.renderProperty('Bck-FirstInClass', 'first_in_class');
     this.renderProperty('Bck-Chirality', 'chirality');
+    this.renderProperty('Bck-Prodrug', 'prodrug');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -43,6 +44,10 @@ CompoundFeaturesView = CardView.extend({
       '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture'],
       '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner'],
       '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule']
+    },
+    'prodrug': {
+      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug: No'],
+      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug: Yes']
     }
   }
 });
