@@ -64,6 +64,21 @@
       </div>
 
       <div class="divider"></div>
+      <div id="Indications" class="section scrollspy">
+        <h3>Indications</h3>
+
+        <div class="row">
+
+          {% block indications %}
+          {% include "glados/CompoundReportCardParts/Indications.html" %}
+          {% endblock %}
+
+        </div>
+
+
+      </div>
+
+      <div class="divider"></div>
       <div id="MoleculeFeatures" class="section scrollspy">
         <h3>Molecule Features</h3>
 
@@ -158,6 +173,9 @@
           <li><a href="#MechanismOfAction">
             <small>Mechanism of Action</small>
           </a></li>
+          <li><a href="#Indications">
+            <small>Indications</small>
+          </a></li>
           <li><a href="#MoleculeFeatures">
             <small>Molecule Features</small>
           </a></li>
@@ -238,6 +256,9 @@ $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();
 initCroppedContainers();
 initExpendableMenus();
+
+// remeber to make it view-specific
+$('select').material_select();
 
 
 {% endblock %}

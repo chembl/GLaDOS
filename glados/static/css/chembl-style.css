@@ -1172,3 +1172,20 @@ div#CNC-zoom-modal {
 .mol-features-grid .second-row .active{
   background-color: #077b7f;
 }
+
+/**
+* Indications
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.chembl-paginated-table .pagination{
+  padding-bottom: 15px;
+}
+
+.chembl-paginated-table .pagination li{
+  font-size: 1rem;
+}
+
+.chembl-paginated-table .pagination li.active{
+  background-color: #009688;
+}
