@@ -27,8 +27,6 @@ CompoundFeaturesView = CardView.extend
   renderProperty: (div_id, property) ->
 
     property_div = $(@el).find('#' + div_id)
-    console.log(property + ':')
-    console.log(@model.get(property))
 
     property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
       active_class: @getMolFeatureDetails(property, 0)

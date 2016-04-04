@@ -24,8 +24,6 @@ CompoundFeaturesView = CardView.extend({
   renderProperty: function(div_id, property) {
     var property_div;
     property_div = $(this.el).find('#' + div_id);
-    console.log(property + ':');
-    console.log(this.model.get(property));
     return property_div.html(Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())({
       active_class: this.getMolFeatureDetails(property, 0),
       filename: this.getMolFeatureDetails(property, 1),
