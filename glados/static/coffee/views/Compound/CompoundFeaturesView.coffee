@@ -47,13 +47,16 @@ CompoundFeaturesView = CardView.extend
       'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody', 'top']
       'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme', 'top']
     'first_in_class':
+      '-1': ['', 'first_in_class', 'First in Class: Undefined', 'First in Class', 'top']
       '0': ['', 'first_in_class', 'First in Class: No', 'First in Class', 'top']
       '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class', 'top']
     'chirality':
+      '-1': ['', 'chirality_0', 'Chirality: Undefined', 'Chirality: Undefined', 'top']
       '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top']
       '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner', 'top']
       '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top']
     'prodrug':
+      '-1': ['', 'prodrug', 'Prodrug: Undefined', 'Prodrug', 'top'],
       '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug', 'top']
       '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug', 'top']
     'oral':
@@ -69,6 +72,7 @@ CompoundFeaturesView = CardView.extend
       '0': ['', 'black_box', 'Black Box: No', 'Black Box', 'bottom']
       '1': ['active', 'black_box', 'Black Box: Yes', 'Black Box', 'bottom']
     'availability_type':
+      '-1': ['', 'availability_0', 'Availability: Undefined', 'Availability: Undefined', 'bottom']
       '0': ['active', 'availability_0', 'Availability: Discontinued', 'Discontinued', 'bottom']
       '1': ['active', 'availability_1', 'Availability: Prescription Only', 'Prescription Only', 'bottom']
       '2': ['active', 'availability_2', 'Availability: Over the Counter', 'Over the Counter', 'bottom']

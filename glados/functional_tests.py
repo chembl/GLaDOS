@@ -166,6 +166,28 @@ class CompoundReportCardTest(unittest.TestCase):
     mech_act_div = self.browser.find_element_by_id('MechanismOfAction')
     self.assertFalse(mech_act_div.is_displayed())
 
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # First in class is undefined: -1
+    self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
+                                 'First in Class: Undefined', 'First in Class', 'top')
+
+    # Chirality Undefined: -1
+    self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_0.svg',
+                                 'Chirality: Undefined', 'Chirality: Undefined', 'top')
+
+    # Prodrug Undefined: -1
+    self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
+                                 'Prodrug: Undefined', 'Prodrug', 'top')
+
+    # Availability Type is Undefined: -1
+    self.assert_molecule_feature('Bck-Availability', False, HOST + '/static/img/molecule_features/availability_0.svg',
+                                 'Availability: Undefined', 'Availability: Undefined', 'bottom')
+
+
+
   def test_compund_report_card_scenario_3(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL2108680', SLEEP_TIME)
