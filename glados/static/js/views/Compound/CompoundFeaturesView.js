@@ -15,6 +15,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-Parenteral', 'parenteral');
     this.renderProperty('Bck-Topical', 'topical');
     this.renderProperty('Bck-BlackBox', 'black_box_warning');
+    this.renderProperty('Bck-Availability', 'availability_type');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -69,6 +70,11 @@ CompoundFeaturesView = CardView.extend({
     'black_box_warning': {
       '0': ['', 'black_box', 'Black Box: No', 'Black Box', 'bottom'],
       '1': ['active', 'black_box', 'Black Box: Yes', 'Black Box', 'bottom']
+    },
+    'availability_type': {
+      '0': ['active', 'availability_0', 'Availability: Discontinued', 'Discontinued', 'bottom'],
+      '1': ['active', 'availability_1', 'Availability: Prescription Only', 'Prescription Only', 'bottom'],
+      '2': ['active', 'availability_2', 'Availability: Over the Counter', 'Over the Counter', 'bottom']
     }
   }
 });

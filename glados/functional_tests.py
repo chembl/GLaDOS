@@ -131,6 +131,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-BlackBox', False, HOST + '/static/img/molecule_features/black_box.svg',
                                  'Black Box: No', 'Black Box', 'bottom')
 
+    # Availability Type: Over the counter: 2
+    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_2.svg',
+                                 'Availability: Over the Counter', 'Over the Counter', 'bottom')
+
   def test_compound_report_card_scenario_2(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
@@ -304,6 +308,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: Yes', 'Topical', 'bottom')
 
+    # Availability Type: Prescription Only: 1
+    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_1.svg',
+                                 'Availability: Prescription Only', 'Prescription Only', 'bottom')
+
   def test_compound_report_card_scenario_9(self):
 
     # this compound does not exist!
@@ -357,6 +365,10 @@ class CompoundReportCardTest(unittest.TestCase):
     # this is an Enzyme
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_enzyme.svg',
                                  'Molecule Type: Enzyme', 'Enzyme', 'top')
+
+    # Availability Type: Discontinued: 0
+    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_0.svg',
+                                 'Availability: Discontinued', 'Discontinued', 'bottom')
 
   def test_compound_report_card_scenario_12(self):
 

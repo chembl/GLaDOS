@@ -15,6 +15,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-Parenteral', 'parenteral')
     @renderProperty('Bck-Topical', 'topical')
     @renderProperty('Bck-BlackBox', 'black_box_warning')
+    @renderProperty('Bck-Availability', 'availability_type')
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
@@ -66,3 +67,7 @@ CompoundFeaturesView = CardView.extend
     'black_box_warning':
       '0': ['', 'black_box', 'Black Box: No', 'Black Box', 'bottom']
       '1': ['active', 'black_box', 'Black Box: Yes', 'Black Box', 'bottom']
+    'availability_type':
+      '0': ['active', 'availability_0', 'Availability: Discontinued', 'Discontinued', 'bottom']
+      '1': ['active', 'availability_1', 'Availability: Prescription Only', 'Prescription Only', 'bottom']
+      '2': ['active', 'availability_2', 'Availability: Over the Counter', 'Over the Counter', 'bottom']
