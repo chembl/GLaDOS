@@ -14,6 +14,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-Oral', 'oral');
     this.renderProperty('Bck-Parenteral', 'parenteral');
     this.renderProperty('Bck-Topical', 'topical');
+    this.renderProperty('Bck-BlackBox', 'black_box_warning');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -64,6 +65,10 @@ CompoundFeaturesView = CardView.extend({
     'topical': {
       'true': ['active', 'topical', 'Topical: Yes', 'Topical', 'bottom'],
       'false': ['', 'topical', 'Topical: No', 'Topical', 'bottom']
+    },
+    'black_box_warning': {
+      '0': ['', 'black_box', 'Black Box: No', 'Black Box', 'bottom'],
+      '1': ['active', 'black_box', 'Black Box: Yes', 'Black Box', 'bottom']
     }
   }
 });

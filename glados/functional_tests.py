@@ -127,6 +127,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Topical', False, HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: No', 'Topical', 'bottom')
 
+    # Black Box No: 0
+    self.assert_molecule_feature('Bck-BlackBox', False, HOST + '/static/img/molecule_features/black_box.svg',
+                                 'Black Box: No', 'Black Box', 'bottom')
+
   def test_compound_report_card_scenario_2(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
@@ -296,6 +300,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: Yes', 'Topical', 'bottom')
 
+    # Black Box Warning No: 0
+    self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
+                                 'Topical: Yes', 'Topical', 'bottom')
+
   def test_compound_report_card_scenario_9(self):
 
     # this compound does not exist!
@@ -389,6 +397,18 @@ class CompoundReportCardTest(unittest.TestCase):
     # Is prodrug: 1
     self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: Yes', 'Prodrug', 'top')
+
+  def test_compound_report_card_scenario_14(self):
+
+    self.getURL(HOST + '/compound_report_card/CHEMBL35/', SLEEP_TIME)
+
+     # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+     # Black Box No: 0
+    self.assert_molecule_feature('Bck-BlackBox', True, HOST + '/static/img/molecule_features/black_box.svg',
+                                 'Black Box: Yes', 'Black Box', 'bottom')
 
 
 if __name__ == '__main__':
