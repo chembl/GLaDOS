@@ -21,7 +21,7 @@
 
 {% block custom_js_inline %}
 
-var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID)
+var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
 var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
 mechanismOfActionList.fetch({reset: true});
 

@@ -19,6 +19,8 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-Availability', 'availability_type');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    this.initEmbedModal('molecule_features');
+    this.renderModalPreview();
     return this.activateTooltips();
   },
   renderProperty: function(div_id, property) {
