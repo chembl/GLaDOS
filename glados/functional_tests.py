@@ -112,6 +112,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
                                  'First in Class: No', 'First in Class')
 
+    # Chirality: single stereoisomer: 1
+    self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_1.svg',
+                                 'Chirality: Single Stereoisomner', 'Single Stereoisomner')
+
   def test_compound_report_card_scenario_2(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
@@ -261,6 +265,14 @@ class CompoundReportCardTest(unittest.TestCase):
     for button in download_svg_buttons:
       self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.svg')
 
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # Chirality: achiral molecule: 2
+    self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_1.svg',
+                                 'Chirality: Achiral Molecule', 'Achiral Molecule')
+
   def test_compound_report_card_scenario_9(self):
 
     # this compound does not exist!
@@ -327,6 +339,17 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-FirstInClass', True, HOST + '/static/img/molecule_features/first_in_class.svg',
                                  'First in Class: Yes', 'First in Class')
 
+  def test_compound_report_card_scenario_13(self):
+
+    self.getURL(HOST + '/compound_report_card/CHEMBL6995/', SLEEP_TIME)
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # Chirality: achiral molecule: 0
+    self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_0.svg',
+                                 'Chirality: Racemic Mixture', 'Racemic Mixture')
 
 
 if __name__ == '__main__':
