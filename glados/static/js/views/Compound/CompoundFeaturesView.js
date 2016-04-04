@@ -8,6 +8,7 @@ CompoundFeaturesView = CardView.extend({
   },
   render: function() {
     this.renderProperty('Bck-MolType', 'molecule_type');
+    this.renderProperty('Bck-RuleOfFive', 'ro5');
     this.renderProperty('Bck-FirstInClass', 'first_in_class');
     this.renderProperty('Bck-Chirality', 'chirality');
     this.renderProperty('Bck-Prodrug', 'prodrug');
@@ -75,6 +76,10 @@ CompoundFeaturesView = CardView.extend({
       '0': ['active', 'availability_0', 'Availability: Discontinued', 'Discontinued', 'bottom'],
       '1': ['active', 'availability_1', 'Availability: Prescription Only', 'Prescription Only', 'bottom'],
       '2': ['active', 'availability_2', 'Availability: Over the Counter', 'Over the Counter', 'bottom']
+    },
+    'ro5': {
+      'true': ['active', 'rule_of_five', 'Rule Of Five: Yes', 'Rule Of Five', 'top'],
+      'false': ['', 'rule_of_five', 'Rule Of Five: No', 'Rule Of Five', 'top']
     }
   }
 });

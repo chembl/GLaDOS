@@ -110,6 +110,9 @@ class CompoundReportCardTest(unittest.TestCase):
     # this is a small molecule
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_small_molecule.svg',
                                  'Molecule Type: small molecule', 'Small Molecule', 'top')
+    # Rule of five: No. false
+    self.assert_molecule_feature('Bck-RuleOfFive', True, HOST + '/static/img/molecule_features/rule_of_five.svg',
+                                 'Rule Of Five: Yes', 'Rule Of Five', 'top')
 
     # this compound is not first in class
     self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
@@ -226,6 +229,14 @@ class CompoundReportCardTest(unittest.TestCase):
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
     tradenames_tr = tradenames_td.find_element_by_xpath('..')
     self.assertFalse(tradenames_tr.is_displayed())
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # Rule of five: No. false
+    self.assert_molecule_feature('Bck-RuleOfFive', False, HOST + '/static/img/molecule_features/rule_of_five.svg',
+                                 'Rule Of Five: No', 'Rule Of Five', 'top')
 
   def test_compound_report_card_scenario_6(self):
 
