@@ -123,6 +123,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Oral', True, HOST + '/static/img/molecule_features/oral.svg',
                                  'Oral: Yes', 'Oral', 'bottom')
 
+    # Parenteral No: false
+    self.assert_molecule_feature('Bck-Parenteral', False, HOST + '/static/img/molecule_features/parenteral.svg',
+                                 'Parenteral: No', 'Parenteral', 'bottom')
+
   def test_compound_report_card_scenario_2(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
@@ -283,6 +287,10 @@ class CompoundReportCardTest(unittest.TestCase):
     # Oral No: false
     self.assert_molecule_feature('Bck-Oral', False, HOST + '/static/img/molecule_features/oral.svg',
                                  'Oral: No', 'Oral', 'bottom')
+
+    # Parenteral Yes: true
+    self.assert_molecule_feature('Bck-Parenteral', True, HOST + '/static/img/molecule_features/parenteral.svg',
+                                 'Parenteral: Yes', 'Parenteral', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
 

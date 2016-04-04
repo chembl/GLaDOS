@@ -12,6 +12,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-Chirality', 'chirality');
     this.renderProperty('Bck-Prodrug', 'prodrug');
     this.renderProperty('Bck-Oral', 'oral');
+    this.renderProperty('Bck-Parenteral', 'parenteral');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -54,6 +55,10 @@ CompoundFeaturesView = CardView.extend({
     'oral': {
       'true': ['active', 'oral', 'Oral: Yes', 'Oral', 'bottom'],
       'false': ['', 'oral', 'Oral: No', 'Oral', 'bottom']
+    },
+    'parenteral': {
+      'true': ['active', 'parenteral', 'Parenteral: Yes', 'Parenteral', 'bottom'],
+      'false': ['', 'parenteral', 'Parenteral: No', 'Parenteral', 'bottom']
     }
   }
 });
