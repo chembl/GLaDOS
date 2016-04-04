@@ -13,6 +13,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-Prodrug', 'prodrug')
     @renderProperty('Bck-Oral', 'oral')
     @renderProperty('Bck-Parenteral', 'parenteral')
+    @renderProperty('Bck-Topical', 'topical')
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
@@ -58,3 +59,6 @@ CompoundFeaturesView = CardView.extend
     'parenteral':
       'true': ['active', 'parenteral', 'Parenteral: Yes', 'Parenteral', 'bottom']
       'false': ['', 'parenteral', 'Parenteral: No', 'Parenteral', 'bottom']
+    'topical':
+      'true': ['active', 'topical', 'Topical: Yes', 'Topical', 'bottom']
+      'false': ['', 'topical', 'Topical: No', 'Topical', 'bottom']

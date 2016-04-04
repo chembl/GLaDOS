@@ -123,9 +123,9 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Oral', True, HOST + '/static/img/molecule_features/oral.svg',
                                  'Oral: Yes', 'Oral', 'bottom')
 
-    # Parenteral No: false
-    self.assert_molecule_feature('Bck-Parenteral', False, HOST + '/static/img/molecule_features/parenteral.svg',
-                                 'Parenteral: No', 'Parenteral', 'bottom')
+    # Topical No: false
+    self.assert_molecule_feature('Bck-Topical', False, HOST + '/static/img/molecule_features/topical.svg',
+                                 'Topical: No', 'Topical', 'bottom')
 
   def test_compound_report_card_scenario_2(self):
 
@@ -291,6 +291,10 @@ class CompoundReportCardTest(unittest.TestCase):
     # Parenteral Yes: true
     self.assert_molecule_feature('Bck-Parenteral', True, HOST + '/static/img/molecule_features/parenteral.svg',
                                  'Parenteral: Yes', 'Parenteral', 'bottom')
+
+    # Topical Yes: true
+    self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
+                                 'Topical: Yes', 'Topical', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
 
