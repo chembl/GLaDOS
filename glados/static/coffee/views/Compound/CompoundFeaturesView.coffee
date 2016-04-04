@@ -7,8 +7,8 @@ CompoundFeaturesView = CardView.extend
     @model.on 'error', @.showCompoundErrorCard, @
 
   render: ->
-    @renderMoleculeType()
-    @renderFirstInClass()
+    @renderProperty('Bck-MolType', 'molecule_type')
+    @renderProperty('Bck-FirstInClass', 'first_in_class')
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
@@ -16,33 +16,22 @@ CompoundFeaturesView = CardView.extend
 
     @activateTooltips()
 
-  renderMoleculeType: ->
-    moltype_div = $(@el).find('#Bck-MolType')
-    console.log(@model.get('molecule_type'))
+  renderProperty: (div_id, property) ->
 
-    rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())
-      active_class: @getMolFeatureDetails('molecule_type', 0)
-      filename: @getMolFeatureDetails('molecule_type', 1)
-      tooltip: @getMolFeatureDetails('molecule_type', 2)
-      description: @getMolFeatureDetails('molecule_type', 3)
+    property_div = $(@el).find('#' + div_id)
+    console.log(property + ':')
+    console.log(@model.get(property))
 
-    moltype_div.html(rendered)
-
-  renderFirstInClass: ->
-
-    first_in_class_div = $(@el).find('#Bck-FirstInClass')
-    console.log(@model.get('first_in_class'))
-
-    first_in_class_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-FirstInClass').html())
-      active_class: @getMolFeatureDetails('first_in_class', 0)
-      filename: @getMolFeatureDetails('first_in_class', 1)
-      tooltip: @getMolFeatureDetails('first_in_class', 2)
-      description: @getMolFeatureDetails('first_in_class', 3)
+    property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
+      active_class: @getMolFeatureDetails(property, 0)
+      filename: @getMolFeatureDetails(property, 1)
+      tooltip: @getMolFeatureDetails(property, 2)
+      description: @getMolFeatureDetails(property, 3)
 
   getMolFeatureDetails: (feature, position) ->
     return @molFeatures[feature][@model.get(feature)][position]
 
-  # active class, tooltip, mobile description
+  # active class,filename, tooltip, mobile description
   molFeatures:
     'molecule_type':
       'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule']

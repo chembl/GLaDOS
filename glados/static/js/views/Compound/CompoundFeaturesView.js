@@ -7,33 +7,22 @@ CompoundFeaturesView = CardView.extend({
     return this.model.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
-    this.renderMoleculeType();
-    this.renderFirstInClass();
+    this.renderProperty('Bck-MolType', 'molecule_type');
+    this.renderProperty('Bck-FirstInClass', 'first_in_class');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
   },
-  renderMoleculeType: function() {
-    var moltype_div, rendered;
-    moltype_div = $(this.el).find('#Bck-MolType');
-    console.log(this.model.get('molecule_type'));
-    rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())({
-      active_class: this.getMolFeatureDetails('molecule_type', 0),
-      filename: this.getMolFeatureDetails('molecule_type', 1),
-      tooltip: this.getMolFeatureDetails('molecule_type', 2),
-      description: this.getMolFeatureDetails('molecule_type', 3)
-    });
-    return moltype_div.html(rendered);
-  },
-  renderFirstInClass: function() {
-    var first_in_class_div;
-    first_in_class_div = $(this.el).find('#Bck-FirstInClass');
-    console.log(this.model.get('first_in_class'));
-    return first_in_class_div.html(Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-FirstInClass').html())({
-      active_class: this.getMolFeatureDetails('first_in_class', 0),
-      filename: this.getMolFeatureDetails('first_in_class', 1),
-      tooltip: this.getMolFeatureDetails('first_in_class', 2),
-      description: this.getMolFeatureDetails('first_in_class', 3)
+  renderProperty: function(div_id, property) {
+    var property_div;
+    property_div = $(this.el).find('#' + div_id);
+    console.log(property + ':');
+    console.log(this.model.get(property));
+    return property_div.html(Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())({
+      active_class: this.getMolFeatureDetails(property, 0),
+      filename: this.getMolFeatureDetails(property, 1),
+      tooltip: this.getMolFeatureDetails(property, 2),
+      description: this.getMolFeatureDetails(property, 3)
     }));
   },
   getMolFeatureDetails: function(feature, position) {
