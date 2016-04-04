@@ -22,9 +22,16 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.get(url)
     time.sleep(sleeptime)
 
-  def assert_molecule_feature(self, img_src, img_tooltip, mobile_description):
+  def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip, mobile_description):
 
-    molecule_type_div = self.browser.find_element_by_id('Bck-MolType')
+    molecule_type_div = self.browser.find_element_by_id(elem_id)
+    icon_div = molecule_type_div.find_element_by_class_name('feat-icon')
+
+    if should_be_active:
+      self.assertIn('active', icon_div.get_attribute('class'))
+    else:
+      self.assertNotIn('active', icon_div.get_attribute('class'))
+
     molecule_type_img = molecule_type_div.find_element_by_tag_name('img')
     self.assertEqual(molecule_type_img.get_attribute('src'),
                      img_src)
@@ -98,8 +105,12 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # this is a small molecule
-    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_small_molecule.svg',
+    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_small_molecule.svg',
                                  'Molecule Type: small molecule', 'Small Molecule')
+
+    # this compound is not first in class
+    self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
+                                 'First in Class: No', 'First in Class')
 
   def test_compound_report_card_scenario_2(self):
 
@@ -146,7 +157,7 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # this is an Antibody
-    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_antibody.svg',
+    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_antibody.svg',
                                  'Molecule Type: Antibody', 'Antibody')
 
   def test_compound_report_card_scenario_4(self):
@@ -296,13 +307,26 @@ class CompoundReportCardTest(unittest.TestCase):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL1201822/', SLEEP_TIME)
 
-     # --------------------------------------
+    # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # this is an Enzyme
-    self.assert_molecule_feature(HOST + '/static/img/molecule_features/mt_enzyme.svg',
+    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_enzyme.svg',
                                  'Molecule Type: Enzyme', 'Enzyme')
+
+  def test_compound_report_card_scenario_12(self):
+
+    self.getURL(HOST + '/compound_report_card/CHEMBL254328/', SLEEP_TIME)
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # this compound is first in class
+    self.assert_molecule_feature('Bck-FirstInClass', True, HOST + '/static/img/molecule_features/first_in_class.svg',
+                                 'First in Class: Yes', 'First in Class')
+
 
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ CompoundFeaturesView = CardView.extend({
   },
   render: function() {
     this.renderMoleculeType();
-    this.activateTooltips();
+    this.renderFirstInClass();
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -18,16 +18,36 @@ CompoundFeaturesView = CardView.extend({
     moltype_div = $(this.el).find('#Bck-MolType');
     console.log(this.model.get('molecule_type'));
     rendered = Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-MolType').html())({
-      active_class: 'active',
-      filename: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][0],
-      tooltip: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][1],
-      description: this.molTypeToFilenameTooltipDesc[this.model.get('molecule_type')][2]
+      active_class: this.getMolFeatureDetails('molecule_type', 0),
+      filename: this.getMolFeatureDetails('molecule_type', 1),
+      tooltip: this.getMolFeatureDetails('molecule_type', 2),
+      description: this.getMolFeatureDetails('molecule_type', 3)
     });
     return moltype_div.html(rendered);
   },
-  molTypeToFilenameTooltipDesc: {
-    'Small molecule': ['mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule'],
-    'Antibody': ['mt_antibody', 'Molecule Type: Antibody', 'Antibody'],
-    'Enzyme': ['mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme']
+  renderFirstInClass: function() {
+    var first_in_class_div;
+    first_in_class_div = $(this.el).find('#Bck-FirstInClass');
+    console.log(this.model.get('first_in_class'));
+    return first_in_class_div.html(Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-FirstInClass').html())({
+      active_class: this.getMolFeatureDetails('first_in_class', 0),
+      filename: this.getMolFeatureDetails('first_in_class', 1),
+      tooltip: this.getMolFeatureDetails('first_in_class', 2),
+      description: this.getMolFeatureDetails('first_in_class', 3)
+    }));
+  },
+  getMolFeatureDetails: function(feature, position) {
+    return this.molFeatures[feature][this.model.get(feature)][position];
+  },
+  molFeatures: {
+    'molecule_type': {
+      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule'],
+      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody'],
+      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme']
+    },
+    'first_in_class': {
+      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class'],
+      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class']
+    }
   }
 });
