@@ -11,6 +11,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-FirstInClass', 'first_in_class')
     @renderProperty('Bck-Chirality', 'chirality')
     @renderProperty('Bck-Prodrug', 'prodrug')
+    @renderProperty('Bck-Oral', 'oral')
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
@@ -29,23 +30,27 @@ CompoundFeaturesView = CardView.extend
       filename: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
       description: @getMolFeatureDetails(property, 3)
+      tooltip_position: @getMolFeatureDetails(property, 4)
 
   getMolFeatureDetails: (feature, position) ->
     return @molFeatures[feature][@model.get(feature)][position]
 
-  # active class,filename, tooltip, mobile description
+  # active class,filename, tooltip, mobile description, tooltip position
   molFeatures:
     'molecule_type':
-      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule']
-      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody']
-      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme']
+      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule', 'top']
+      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody', 'top']
+      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme', 'top']
     'first_in_class':
-      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class']
-      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class']
+      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class', 'top']
+      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class', 'top']
     'chirality':
-      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture']
-      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner']
-      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule']
+      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top']
+      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner', 'top']
+      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top']
     'prodrug':
-      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug: No']
-      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug: Yes']
+      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug', 'top']
+      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug', 'top']
+    'oral':
+      'true': ['active', 'oral', 'Oral: Yes', 'Oral', 'bottom']
+      'false': ['', 'oral', 'Oral: No', 'Oral', 'bottom']

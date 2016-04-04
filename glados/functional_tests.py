@@ -22,7 +22,8 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.get(url)
     time.sleep(sleeptime)
 
-  def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip, mobile_description):
+  def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip, mobile_description,
+                              tooltip_position):
 
     molecule_type_div = self.browser.find_element_by_id(elem_id)
     icon_div = molecule_type_div.find_element_by_class_name('feat-icon')
@@ -36,7 +37,9 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertEqual(molecule_type_img.get_attribute('src'),
                      img_src)
     self.assertEqual(molecule_type_img.get_attribute('data-tooltip'),
-                     img_tooltip)
+                     img_tooltip),
+    self.assertEqual(molecule_type_img.get_attribute('data-position'),
+                     tooltip_position)
     molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
     self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
                      mobile_description)
@@ -106,15 +109,19 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is a small molecule
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_small_molecule.svg',
-                                 'Molecule Type: small molecule', 'Small Molecule')
+                                 'Molecule Type: small molecule', 'Small Molecule', 'top')
 
     # this compound is not first in class
     self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
-                                 'First in Class: No', 'First in Class')
+                                 'First in Class: No', 'First in Class', 'top')
 
     # Chirality: single stereoisomer: 1
     self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_1.svg',
-                                 'Chirality: Single Stereoisomner', 'Single Stereoisomner')
+                                 'Chirality: Single Stereoisomner', 'Single Stereoisomner', 'top')
+
+    # Ora yes: 'true'
+    self.assert_molecule_feature('Bck-Oral', True, HOST + '/static/img/molecule_features/oral.svg',
+                                 'Oral: Yes', 'Oral', 'bottom')
 
   def test_compound_report_card_scenario_2(self):
 
@@ -162,7 +169,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is an Antibody
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_antibody.svg',
-                                 'Molecule Type: Antibody', 'Antibody')
+                                 'Molecule Type: Antibody', 'Antibody', 'top')
 
   def test_compound_report_card_scenario_4(self):
 
@@ -271,7 +278,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Chirality: achiral molecule: 2
     self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_1.svg',
-                                 'Chirality: Achiral Molecule', 'Achiral Molecule')
+                                 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top')
+
+    # Oral No: false
+    self.assert_molecule_feature('Bck-Oral', False, HOST + '/static/img/molecule_features/oral.svg',
+                                 'Oral: No', 'Oral', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
 
@@ -325,7 +336,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is an Enzyme
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_enzyme.svg',
-                                 'Molecule Type: Enzyme', 'Enzyme')
+                                 'Molecule Type: Enzyme', 'Enzyme', 'top')
 
   def test_compound_report_card_scenario_12(self):
 
@@ -337,7 +348,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this compound is first in class
     self.assert_molecule_feature('Bck-FirstInClass', True, HOST + '/static/img/molecule_features/first_in_class.svg',
-                                 'First in Class: Yes', 'First in Class')
+                                 'First in Class: Yes', 'First in Class', 'top')
 
   def test_compound_report_card_scenario_13(self):
 
@@ -349,11 +360,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Chirality: achiral molecule: 0
     self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_0.svg',
-                                 'Chirality: Racemic Mixture', 'Racemic Mixture')
+                                 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top')
 
     # Is no prodrug: 0
     self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
-                                 'Prodrug: No', 'Prodrug: No')
+                                 'Prodrug: No', 'Prodrug', 'top')
 
   def test_compound_report_card_scenario_13(self):
 
@@ -365,7 +376,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Is prodrug: 1
     self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
-                                 'Prodrug: Yes', 'Prodrug: Yes')
+                                 'Prodrug: Yes', 'Prodrug', 'top')
 
 
 if __name__ == '__main__':

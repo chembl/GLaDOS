@@ -11,6 +11,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-FirstInClass', 'first_in_class');
     this.renderProperty('Bck-Chirality', 'chirality');
     this.renderProperty('Bck-Prodrug', 'prodrug');
+    this.renderProperty('Bck-Oral', 'oral');
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     return this.activateTooltips();
@@ -24,7 +25,8 @@ CompoundFeaturesView = CardView.extend({
       active_class: this.getMolFeatureDetails(property, 0),
       filename: this.getMolFeatureDetails(property, 1),
       tooltip: this.getMolFeatureDetails(property, 2),
-      description: this.getMolFeatureDetails(property, 3)
+      description: this.getMolFeatureDetails(property, 3),
+      tooltip_position: this.getMolFeatureDetails(property, 4)
     }));
   },
   getMolFeatureDetails: function(feature, position) {
@@ -32,22 +34,26 @@ CompoundFeaturesView = CardView.extend({
   },
   molFeatures: {
     'molecule_type': {
-      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule'],
-      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody'],
-      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme']
+      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule', 'top'],
+      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody', 'top'],
+      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme', 'top']
     },
     'first_in_class': {
-      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class'],
-      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class']
+      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class', 'top'],
+      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class', 'top']
     },
     'chirality': {
-      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture'],
-      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner'],
-      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule']
+      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top'],
+      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner', 'top'],
+      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top']
     },
     'prodrug': {
-      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug: No'],
-      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug: Yes']
+      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug', 'top'],
+      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug', 'top']
+    },
+    'oral': {
+      'true': ['active', 'oral', 'Oral: Yes', 'Oral', 'bottom'],
+      'false': ['', 'oral', 'Oral: No', 'Oral', 'bottom']
     }
   }
 });
