@@ -109,7 +109,13 @@
       <div class="divider"></div>
       <div id="StructuralAlerts" class="section scrollspy">
         <h3>Structural Alerts</h3>
-        <p>Stuff</p>
+
+
+          {% block structural_alerts %}
+          {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+          {% endblock %}
+
+
       </div>
 
       <div class="divider"></div>
