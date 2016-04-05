@@ -95,7 +95,15 @@
       <div class="divider"></div>
       <div id="ClinicalData" class="section scrollspy">
         <h3>Clinical Data</h3>
-        <p>Stuff</p>
+
+         <div class="row">
+
+          {% block clinical_data %}
+          {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
+          {% endblock %}
+
+        </div>
+
       </div>
 
       <div class="divider"></div>
