@@ -29,6 +29,10 @@ CompoundMechanismsOfActionView = CardView.extend
     table = $(@el).find('table')
     table.append(view.render().el)
 
+    collItemView = new MechanismOfActionCollItemView({model:mechanismOfAction})
+    coll = $(@el).find('ul')
+    coll.append(collItemView.render().el)
+
   addAllMechanisms: ->
     @collection.forEach @addOneMechanism, @
 

@@ -387,6 +387,21 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertIn('Carbonic anhydrase XII inhibitor CHEMBL3242 PubMed', texts)
     self.assertIn('Carbonic anhydrase IV inhibitor CHEMBL3729 PubMed', texts)
 
+    # test the collection view for mobile devices
+    mechanisms_of_action_collection = self.browser.find_element_by_id('MechOfActCard').find_element_by_tag_name('ul')
+    mechanisms_of_action_lis = mechanisms_of_action_collection.find_elements_by_tag_name('li')
+
+    # here inner html is used because element is not visible on this tests' screen size ( see setUp() )
+    # in the future, dedicated tests for mobile can be implemented
+    texts = '|'.join([li.get_attribute('innerHTML') for li in mechanisms_of_action_lis])
+
+    self.assertIn('Carbonic anhydrase I inhibitor', texts)
+    self.assertIn('Carbonic anhydrase II inhibitor', texts)
+    self.assertIn('Carbonic anhydrase XII inhibitor', texts)
+    self.assertIn('Carbonic anhydrase IV inhibitor', texts)
+
+
+
   def test_compound_report_card_scenario_11(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL1201822/', SLEEP_TIME)

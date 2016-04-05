@@ -19,12 +19,17 @@ CompoundMechanismsOfActionView = CardView.extend({
     return this.activateTooltips();
   },
   addOneMechanism: function(mechanismOfAction) {
-    var table, view;
+    var coll, collItemView, table, view;
     view = new MechanismOfActionRowView({
       model: mechanismOfAction
     });
     table = $(this.el).find('table');
-    return table.append(view.render().el);
+    table.append(view.render().el);
+    collItemView = new MechanismOfActionCollItemView({
+      model: mechanismOfAction
+    });
+    coll = $(this.el).find('ul');
+    return coll.append(collItemView.render().el);
   },
   addAllMechanisms: function() {
     return this.collection.forEach(this.addOneMechanism, this);
