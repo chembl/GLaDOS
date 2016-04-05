@@ -121,7 +121,16 @@
       <div class="divider"></div>
       <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy">
         <h3>Alternate Forms of Compound in ChEMBL</h3>
-        <p>Stuff</p>
+
+
+        <div class="row">
+
+          {% block alternate_forms %}
+          {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
+          {% endblock %}
+
+        </div>
+
       </div>
 
       <div class="divider"></div>

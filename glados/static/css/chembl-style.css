@@ -1191,3 +1191,17 @@ div#CNC-zoom-modal {
 .inications-dowload{
   margin-top: 14px;
 }
+
+/**
+* Alternate Forms
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.card .card-image .chembl-card-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+}
