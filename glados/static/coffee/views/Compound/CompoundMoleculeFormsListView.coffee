@@ -10,21 +10,22 @@ CompoundMoleculeFormsListView = CardView.extend
 
   render: ->
 
+    console.log('render')
     @addAllAlternateForms()
 
     # until here, all the visible content has been rendered.
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
-    #@initEmbedModal('mechanism_of_action')
-    #@renderModalPreview()
-    #@activateTooltips()
+    @initEmbedModal('alternate_forms')
+    @renderModalPreview()
+    @activateTooltips()
 
   addOneAlternateForm: (alternateForm) ->
     console.log('oneAlternate form')
     console.log(alternateForm)
     view = new CompoundMoleculeFormView({model: alternateForm});
-    row = $(@el).find('.card-content .row')
+    row = $(@el).find('#Bck-AlternateForms')
     row.append(view.render().el)
 
 

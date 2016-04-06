@@ -7,9 +7,13 @@ CompoundMoleculeFormsListView = CardView.extend({
     return this.collection.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
+    console.log('render');
     this.addAllAlternateForms();
     $(this.el).children('.card-preolader-to-hide').hide();
-    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    this.initEmbedModal('alternate_forms');
+    this.renderModalPreview();
+    return this.activateTooltips();
   },
   addOneAlternateForm: function(alternateForm) {
     var row, view;
@@ -18,7 +22,7 @@ CompoundMoleculeFormsListView = CardView.extend({
     view = new CompoundMoleculeFormView({
       model: alternateForm
     });
-    row = $(this.el).find('.card-content .row');
+    row = $(this.el).find('#Bck-AlternateForms');
     return row.append(view.render().el);
   },
   addAllAlternateForms: function() {
