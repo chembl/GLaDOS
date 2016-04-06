@@ -6,6 +6,9 @@ HOST = 'http://127.0.0.1:8000'
 SLEEP_TIME = 1
 
 
+# Cases for visualization:
+# - Compound with more alternate forms: CHEMBL1236196
+
 class CompoundReportCardTest(unittest.TestCase):
   # tweak this if the web services are taking a bit longer to load the compound.
   IMPLICIT_WAIT = 10
@@ -43,6 +46,25 @@ class CompoundReportCardTest(unittest.TestCase):
     molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
     self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
                      mobile_description)
+
+  def assert_alternate_forms(self, chembl_ids_list):
+
+    alternate_forms_row = self.browser.find_element_by_id('Bck-AlternateForms')
+    alternate_forms_cards = alternate_forms_row.find_elements_by_class_name('card')
+
+    actual_srcs = [card.find_element_by_tag_name('img').get_attribute('src') for card in alternate_forms_cards]
+    test_srcs = ['https://www.ebi.ac.uk/chembl/api/data/image/' + chembl_id + '.svg' for chembl_id in chembl_ids_list]
+    self.assertEqual(sorted(actual_srcs), sorted(test_srcs))
+
+    print('---')
+    actual_links = [card.find_element_by_class_name('chembl-card-title').find_element_by_tag_name('a') for card in
+                    alternate_forms_cards]
+    actual_links_hrefs = [link.get_attribute('href') for link in actual_links]
+    test_links_hrefs = ['http://glados-ebitest.rhcloud.com/compound_report_card/' + chembl_id + '/' for chembl_id in chembl_ids_list]
+    self.assertEqual(sorted(actual_links_hrefs), sorted(test_links_hrefs))
+
+    actual_links_texts = [link.text for link in actual_links]
+    self.assertEqual(sorted(actual_links_texts), sorted(chembl_ids_list))
 
   def test_compound_report_card_scenario_1(self):
 
@@ -138,6 +160,12 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_2.svg',
                                  'Availability: Over the Counter', 'Over the Counter', 'bottom')
 
+    # --------------------------------------
+    # Alternate Forms of Compound in ChEMBL
+    # --------------------------------------
+
+    self.assert_alternate_forms(['CHEMBL25', 'CHEMBL2296002', 'CHEMBL1697753'])
+
   def test_compound_report_card_scenario_2(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
@@ -185,8 +213,6 @@ class CompoundReportCardTest(unittest.TestCase):
     # Availability Type is Undefined: -1
     self.assert_molecule_feature('Bck-Availability', False, HOST + '/static/img/molecule_features/availability_0.svg',
                                  'Availability: Undefined', 'Availability: Undefined', 'bottom')
-
-
 
   def test_compund_report_card_scenario_3(self):
 
@@ -400,8 +426,6 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assertIn('Carbonic anhydrase XII inhibitor', texts)
     self.assertIn('Carbonic anhydrase IV inhibitor', texts)
 
-
-
   def test_compound_report_card_scenario_11(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL1201822/', SLEEP_TIME)
@@ -462,11 +486,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL35/', SLEEP_TIME)
 
-     # --------------------------------------
+    # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
-     # Black Box No: 0
+    # Black Box No: 0
     self.assert_molecule_feature('Bck-BlackBox', True, HOST + '/static/img/molecule_features/black_box.svg',
                                  'Black Box: Yes', 'Black Box', 'bottom')
 

@@ -1,11 +1,28 @@
-# This takes care of the handling of the report card of a compound
+# This initializes the entities of the compound report card
 
+# -------------------------------------------------------------
+# Models
+# -------------------------------------------------------------
 initCompound = (chembl_id) ->
   compound = new Compound
     molecule_chembl_id: chembl_id
 
   compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/' + chembl_id + '.json'
   return compound
+
+### *
+  * Initializes a molecule forms list given a member compound (not necessarily the parent!)
+  * For now, it lazy-loads each of the compounds
+  * @param {Compound} member_compound, the list of compounds
+  * @return {CompoundList} the list that has been created
+###
+initMoleculeFormsList = (member_compound) ->
+  compoundList = new CompoundList
+
+  compoundList.original_compound = member_compound
+  compoundList.origin = 'molecule_forms'
+  compoundList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
+  return compoundList
 
 initMechanismOfAction = (mechanism_id) ->
   mechanismOfAction = new MechanismOfAction
@@ -20,6 +37,10 @@ initMechanismOfActionList = (from_mol_chembl_id) ->
   mechanismOfActionList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?molecule_chembl_id=' + from_mol_chembl_id
   return mechanismOfActionList
 
+
+# -------------------------------------------------------------
+# Views
+# -------------------------------------------------------------
 
 ### *
   * Initializes de CNCView
@@ -79,9 +100,21 @@ initCompMechanismsOfActionView = (mech_of_action_list, top_level_elem) ->
   * @return {CompoundNameClassificationView} the view that has been created
 ###
 initCompFeaturesView = (model, top_level_elem) ->
-
   compFeaturesView = new CompoundFeaturesView
     model: model
     el: top_level_elem
 
   return compFeaturesView
+
+### *
+  * Initializes de CompoundMoleculeFormsListView, This view knows all the alternate forms of a compound
+  * @param {CompoundList} compound_list, list of compounds
+  * @param {JQuery} top_level_elem element for this view.
+  * @return {CompoundMoleculeFormsListView} the view that has been created
+###
+initCompMoleculeFormsListView = (compound_list, top_level_elem) ->
+  compoundMoleculeFormsListView = new CompoundMoleculeFormsListView
+    collection: compound_list
+    el: top_level_elem
+
+  return compoundMoleculeFormsListView

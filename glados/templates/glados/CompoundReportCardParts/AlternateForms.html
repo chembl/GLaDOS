@@ -1,68 +1,24 @@
+{% block custom_handlebars %}
+{% include "glados/Handlebars/CompoundReportCard/Hbs-AlternateForms.html" %}
+{% endblock %}
 <div class="col s12 m10 l12">
 
   <div id='AlternateFormsCard' class="card chembl-card grey lighten-5">
 
-    <div class="card-content ebi-links">
+     <!-- modal trigger -->
+      {% block embed_button %}
+      {% include "glados/base/embed_button.html" %}
+      {% endblock %}
 
-      <div class="row">
+      {% block card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+      {% endblock %}
 
-        <div class="col s6 m4 l3">
+    <div class="card-content ebi-links" style="display: none">
 
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55" class="responsive-img">
-              <span class="chembl-card-title"><a
-                href="http://127.0.0.1:8000/compound_report_card/CHEMBL55/">CHEMBL55</a></span>
-            </div>
-          </div>
+      <div id='Bck-AlternateForms' class="row">
 
-        </div>
-
-        <div class="col s6 m4 l3">
-
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL494163" class="responsive-img">
-              <span class="chembl-card-title"><a href="http://127.0.0.1:8000/compound_report_card/CHEMBL494163/">CHEMBL494163</a></span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col s6 m4 l3">
-
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL543544" class="responsive-img">
-              <span class="chembl-card-title"><a href="http://127.0.0.1:8000/compound_report_card/CHEMBL543544/">CHEMBL543544</a></span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col s6 m4 l3">
-
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL935" class="responsive-img">
-              <span class="chembl-card-title"><a
-                href="http://127.0.0.1:8000/compound_report_card/CHEMBL935/">CHEMBL935</a></span>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col s6 m4 l3">
-
-          <div class="card">
-            <div class="card-image">
-              <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL361506" class="responsive-img">
-              <span class="chembl-card-title"><a
-                href="http://127.0.0.1:8000/compound_report_card/CHEMBL361506/">CHEMBL361506</a></span>
-            </div>
-          </div>
-
-        </div>
+        <!-- Backbone -->
 
 
       </div>

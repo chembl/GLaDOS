@@ -247,12 +247,15 @@
 <script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 <script type="text/javascript" src="/static/js/models/Compound.js"></script>
+<script type="text/javascript" src="/static/js/models/CompoundList.js"></script>
 <script type="text/javascript" src="/static/js/models/MechanismOfAction.js"></script>
 <script type="text/javascript" src="/static/js/models/MechanismOfActionList.js"></script>
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundRepresentationsView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundFeaturesView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundMoleculeFormView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundMoleculeFormsListView.js"></script>
 <script type="text/javascript" src="/static/js/views/MechanismOfAction/MechanismOfActionRowView.js"></script>
 <script type="text/javascript" src="/static/js/views/MechanismOfAction/MechanismOfActionCollItemView.js"></script>
 <script type="text/javascript" src="/static/js/views/MechanismOfAction/CompoundMechanismsOfActionView.js"></script>
@@ -266,15 +269,18 @@ var pathname = window.location.pathname;
 var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var compound = initCompound(CHEMBL_ID);
-var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID)
+var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
+var moleculeFormsList = initMoleculeFormsList(compound);
 
 var cncView = initCNCView(compound, $('#CNCCard'));
 var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
 var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
 var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
+var compMoleculeFormsListView = initCompMoleculeFormsListView(moleculeFormsList, $('#AlternateFormsCard'))
 
 compound.fetch();
 mechanismOfActionList.fetch({reset: true});
+moleculeFormsList.fetch({reset: true});
 
 $('.scrollspy').scrollSpy();
 initializeScrollSpyHelper();
