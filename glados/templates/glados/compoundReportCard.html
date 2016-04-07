@@ -197,7 +197,14 @@
       <div class="divider"></div>
       <div id="UniChemCrossReferences" class="section scrollspy">
         <h3>UniChem Cross References</h3>
-        <p>Stuff</p>
+
+        <div class="row">
+
+          {% block unichem_cross_references %}
+          {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
+          {% endblock %}
+
+        </div>
       </div>
 
     </div>
