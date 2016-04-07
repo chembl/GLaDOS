@@ -168,7 +168,16 @@
       <div class="divider"></div>
       <div id="CalculatedCompoundParentProperties" class="section scrollspy">
         <h3>Calculated Compound Parent Properties</h3>
-        <p>Stuff</p>
+
+
+         <div class="row">
+
+          {% block calculated_parent_properties %}
+          {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
+          {% endblock %}
+
+        </div>
+
       </div>
 
       <div class="divider"></div>
