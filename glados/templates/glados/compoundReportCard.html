@@ -96,7 +96,7 @@
       <div id="ClinicalData" class="section scrollspy">
         <h3>Clinical Data</h3>
 
-         <div class="row">
+        <div class="row">
 
           {% block clinical_data %}
           {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
@@ -111,9 +111,9 @@
         <h3>Structural Alerts</h3>
 
 
-          {% block structural_alerts %}
-          {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
-          {% endblock %}
+        {% block structural_alerts %}
+        {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+        {% endblock %}
 
 
       </div>
@@ -154,7 +154,15 @@
       <div class="divider"></div>
       <div id="TargetPredictions" class="section scrollspy">
         <h3>Target Predictions</h3>
-        <p>Stuff</p>
+
+        <div class="row">
+
+          {% block target_predictions %}
+          {% include "glados/CompoundReportCardParts/TargetPredictions.html" %}
+          {% endblock %}
+
+        </div>
+
       </div>
 
       <div class="divider"></div>
