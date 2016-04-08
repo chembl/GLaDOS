@@ -8,15 +8,17 @@ PieView = Backbone.View.extend
     # Load the Visualization API and the corechart package.
     google.charts.load('current', 'packages':['corechart'])
 
-    $(window).resize( $.proxy(@drawPie, @) )
+    # this helps a lot when resizing the page correctly when rotating a mobile device!
+    $(window).resize( _.debounce( $.proxy(@drawPie, @), 250 ) )
 
 
   drawPie: ->
 
-    console.log('paiting!')
+    # this helps a lot when resizing the page correctly when rotating a mobile device!
+    $('#Bck-BioactivitySummaryChart').empty()
 
     if not GRAHPS_LIBS_LOADED
-      setTimeout($.proxy(@drawPie,@), 1000) # check in 1 second if the libraries have been loaded
+      setTimeout($.proxy(@drawPie, @), 1000) # check in 1 second if the libraries have been loaded
       return
 
     # Create the data table.

@@ -6,11 +6,11 @@ PieView = Backbone.View.extend({
     google.charts.load('current', {
       'packages': ['corechart']
     });
-    return $(window).resize($.proxy(this.drawPie, this));
+    return $(window).resize(_.debounce($.proxy(this.drawPie, this), 250));
   },
   drawPie: function() {
     var chart, data, options;
-    console.log('paiting!');
+    $('#Bck-BioactivitySummaryChart').empty();
     if (!GRAHPS_LIBS_LOADED) {
       setTimeout($.proxy(this.drawPie, this), 1000);
       return;
