@@ -147,5 +147,6 @@ initCompMoleculeFormsListView = function(compound_list, top_level_elem) {
 initPieView = function() {
   var pieview;
   pieview = new PieView;
+  console.log(pieview);
   return pieview.render();
 };

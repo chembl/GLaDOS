@@ -121,5 +121,5 @@ initCompMoleculeFormsListView = (compound_list, top_level_elem) ->
 
 initPieView = ->
   pieview = new PieView
-
+  console.log(pieview)
   pieview.render()

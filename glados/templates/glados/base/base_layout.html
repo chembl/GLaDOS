@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
 
+  <!-- google graphs loader -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   {% load compress %}
   <!-- Imports used by all the templates-->
   {% block common_css %}
@@ -88,10 +91,12 @@
 <!-- inline javascript -->
 {% compress js %}
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function () {
 
-    // make charts responsive
-    Chart.defaults.global.responsive = true;
+  GRAHPS_LIBS_LOADED = false;
+
+  google.charts.setOnLoadCallback(function(){GRAHPS_LIBS_LOADED = true;});
+
+  $(document).ready(function () {
 
     // initialization of visualization code.
     // This controls the padding of the sidenav.

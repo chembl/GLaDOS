@@ -2,49 +2,33 @@
 var PieView;
 
 PieView = Backbone.View.extend({
+  initialize: function() {
+    google.charts.load('current', {
+      'packages': ['corechart']
+    });
+    return $(window).resize($.proxy(this.drawPie, this));
+  },
   drawPie: function() {
-    var ctx, data, lengend_div, myPieChart, options;
-    ctx = $("#Bck-BioactivitySummaryChart").get(0).getContext("2d");
-    data = [
-      {
-        value: 300,
-        color: '#F7464A',
-        highlight: '#FF5A5E',
-        label: 'Red'
-      }, {
-        value: 50,
-        color: '#46BFBD',
-        highlight: '#5AD3D1',
-        label: 'Green'
-      }, {
-        value: 100,
-        color: '#FDB45C',
-        highlight: '#FFC870',
-        label: 'Yellow'
-      }
-    ];
+    var chart, data, options;
+    console.log('paiting!');
+    if (!GRAHPS_LIBS_LOADED) {
+      setTimeout($.proxy(this.drawPie, this), 1000);
+      return;
+    }
+    data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([['Mushrooms', 3], ['Onions', 1], ['Olives', 1], ['Zucchini', 1], ['Pepperoni', 2]]);
     options = {
-      scaleShowLabelBackdrop: true,
-      scaleBackdropColor: 'rgba(255,255,255,0.75)',
-      scaleBeginAtZero: true,
-      scaleBackdropPaddingY: 2,
-      scaleBackdropPaddingX: 2,
-      scaleShowLine: true,
-      segmentShowStroke: true,
-      segmentStrokeColor: '#fff',
-      segmentStrokeWidth: 2,
-      animationSteps: 100,
-      animationEasing: 'easeOutBounce',
-      animateRotate: false,
-      animateScale: false,
-      legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+      'title': 'How Much Pizza I Ate Last Night',
+      'height': '400px'
     };
-    myPieChart = new Chart(ctx).Pie(data, options);
-    lengend_div = $('#Bck-BioactivitySummaryChartLegend');
-    lengend_div.html(myPieChart.generateLegend());
-    return console.log(myPieChart.generateLegend());
+    chart = new google.visualization.PieChart(document.getElementById('Bck-BioactivitySummaryChart'));
+    return chart.draw(data, options);
   },
   render: function() {
-    return this.drawPie();
+    this.drawPie();
+    $(this.el).children('.card-preolader-to-hide').hide();
+    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
   }
 });

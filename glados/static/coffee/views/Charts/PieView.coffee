@@ -3,61 +3,51 @@
 # <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 PieView = Backbone.View.extend
 
+  initialize: ->
+
+    # Load the Visualization API and the corechart package.
+    google.charts.load('current', 'packages':['corechart'])
+
+    $(window).resize( $.proxy(@drawPie, @) )
+
+
   drawPie: ->
 
+    console.log('paiting!')
 
-    # Get context with jQuery - using jQuery's .get() method.
-    ctx = $("#Bck-BioactivitySummaryChart").get(0).getContext("2d")
-    #This will get the first returned node in the jQuery collection.
+    if not GRAHPS_LIBS_LOADED
+      setTimeout($.proxy(@drawPie,@), 1000) # check in 1 second if the libraries have been loaded
+      return
 
-    data = [
-      {
-        value: 300
-        color: '#F7464A'
-        highlight: '#FF5A5E'
-        label: 'Red'
-      }
-      {
-        value: 50
-        color: '#46BFBD'
-        highlight: '#5AD3D1'
-        label: 'Green'
-      }
-      {
-        value: 100
-        color: '#FDB45C'
-        highlight: '#FFC870'
-        label: 'Yellow'
-      }
-    ]
+    # Create the data table.
+    data = new google.visualization.DataTable()
+    data.addColumn 'string', 'Topping'
+    data.addColumn 'number', 'Slices'
+    data.addRows([
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ])
 
+    #Set chart options
     options =
-      scaleShowLabelBackdrop: true
-      scaleBackdropColor: 'rgba(255,255,255,0.75)'
-      scaleBeginAtZero: true
-      scaleBackdropPaddingY: 2
-      scaleBackdropPaddingX: 2
-      scaleShowLine: true
-      segmentShowStroke: true
-      segmentStrokeColor: '#fff'
-      segmentStrokeWidth: 2
-      animationSteps: 100
-      animationEasing: 'easeOutBounce'
-      animateRotate: false
-      animateScale: false
-      legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
+      'title':'How Much Pizza I Ate Last Night'
+      'height': '400px'
 
+    # Instantiate and draw our chart, passing in some options.
+    chart = new google.visualization.PieChart(document.getElementById('Bck-BioactivitySummaryChart'));
+    chart.draw(data, options);
 
-    myPieChart = new Chart(ctx).Pie(data, options)
-    lengend_div = $('#Bck-BioactivitySummaryChartLegend')
-    lengend_div.html myPieChart.generateLegend()
-
-    console.log(myPieChart.generateLegend())
 
   render: ->
 
     @drawPie()
 
+     # until here, all the visible content has been rendered.
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
 
 
