@@ -21,6 +21,7 @@ CompoundFeaturesView = CardView.extend({
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('molecule_features');
     this.renderModalPreview();
+    this.activateModals();
     return this.activateTooltips();
   },
   renderProperty: function(div_id, property) {

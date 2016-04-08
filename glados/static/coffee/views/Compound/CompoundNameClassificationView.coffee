@@ -26,6 +26,7 @@ CompoundNameClassificationView = CardView.extend
     @initDownloadButtons()
     @initZoomModal()
     @activateTooltips()
+    @activateModals()
 
     # this is required to render correctly the molecular formulas.
     # it comes from the easychem.js library

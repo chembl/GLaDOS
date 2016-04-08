@@ -19,6 +19,7 @@ CompoundMoleculeFormsListView = CardView.extend
     @initEmbedModal('alternate_forms')
     @renderModalPreview()
     @activateTooltips()
+    @activateModals()
 
   addOneAlternateForm: (alternateForm) ->
     view = new CompoundMoleculeFormView({model: alternateForm});

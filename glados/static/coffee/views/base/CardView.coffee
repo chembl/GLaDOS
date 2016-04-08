@@ -44,6 +44,8 @@ CardView = Backbone.View.extend
 
     code_elem.text(rendered)
 
+
+
   renderModalPreview: ->
 
     if EMBEDED?
@@ -59,5 +61,8 @@ CardView = Backbone.View.extend
 
   activateTooltips: ->
     $(@el).find('.tooltipped').tooltip()
+
+  activateModals: ->
+    $(@el).find('.modal-trigger').leanModal();
 
 

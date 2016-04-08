@@ -24,6 +24,7 @@ CompoundFeaturesView = CardView.extend
 
     @initEmbedModal('molecule_features')
     @renderModalPreview()
+    @activateModals()
 
     @activateTooltips()
 

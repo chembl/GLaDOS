@@ -20,6 +20,7 @@ CompoundRepresentationsView = CardView.extend({
     this.initEmbedModal('representations');
     this.renderModalPreview();
     this.activateTooltips();
+    this.activateModals();
     return afterRender();
   },
   renderCanonicalSmiles: function() {

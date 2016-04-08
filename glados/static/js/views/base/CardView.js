@@ -50,5 +50,8 @@ CardView = Backbone.View.extend({
   },
   activateTooltips: function() {
     return $(this.el).find('.tooltipped').tooltip();
+  },
+  activateModals: function() {
+    return $(this.el).find('.modal-trigger').leanModal();
   }
 });
