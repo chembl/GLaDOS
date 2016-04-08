@@ -118,3 +118,8 @@ initCompMoleculeFormsListView = (compound_list, top_level_elem) ->
     el: top_level_elem
 
   return compoundMoleculeFormsListView
+
+initPieView = ->
+  pieview = new PieView
+
+  pieview.render()
