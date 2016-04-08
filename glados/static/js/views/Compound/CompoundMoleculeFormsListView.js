@@ -7,7 +7,6 @@ CompoundMoleculeFormsListView = CardView.extend({
     return this.collection.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
-    console.log('render');
     this.addAllAlternateForms();
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
@@ -17,8 +16,6 @@ CompoundMoleculeFormsListView = CardView.extend({
   },
   addOneAlternateForm: function(alternateForm) {
     var row, view;
-    console.log('oneAlternate form');
-    console.log(alternateForm);
     view = new CompoundMoleculeFormView({
       model: alternateForm
     });

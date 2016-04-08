@@ -10,7 +10,6 @@ CompoundMoleculeFormsListView = CardView.extend
 
   render: ->
 
-    console.log('render')
     @addAllAlternateForms()
 
     # until here, all the visible content has been rendered.
@@ -22,8 +21,6 @@ CompoundMoleculeFormsListView = CardView.extend
     @activateTooltips()
 
   addOneAlternateForm: (alternateForm) ->
-    console.log('oneAlternate form')
-    console.log(alternateForm)
     view = new CompoundMoleculeFormView({model: alternateForm});
     row = $(@el).find('#Bck-AlternateForms')
     row.append(view.render().el)
