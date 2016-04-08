@@ -54,7 +54,7 @@ CompoundFeaturesView = CardView.extend
     'chirality':
       '-1': ['', 'chirality_0', 'Chirality: Undefined', 'Chirality: Undefined', 'top']
       '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top']
-      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomner', 'Single Stereoisomner', 'top']
+      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomer', 'Single Stereoisomer', 'top']
       '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top']
     'prodrug':
       '-1': ['', 'prodrug', 'Prodrug: Undefined', 'Prodrug', 'top'],
