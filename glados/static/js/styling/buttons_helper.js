@@ -73,9 +73,8 @@ initCroppedContainers = function() {
       });
       if (overflow) {
         toggler = toggleCroppedContainerWrapper(activated, buttons);
-        return activator.click(toggler);
-      } else {
-        return activator.hide();
+        activator.click(toggler);
+        return activator.show();
       }
     });
   };

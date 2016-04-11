@@ -74,8 +74,7 @@ initCroppedContainers = ->
       if overflow
         toggler = toggleCroppedContainerWrapper(activated, buttons)
         activator.click(toggler)
-      else
-        activator.hide();
+        activator.show();
 
   _.debounce(f, 100)()
 
