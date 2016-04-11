@@ -2,10 +2,10 @@
 var initializeScrollSpyHelper;
 
 initializeScrollSpyHelper = function() {
-  var scrollspy_wrapper, win;
+  var pinScrollSpy, scrollspy_wrapper, win;
   win = $(window);
   scrollspy_wrapper = $(".scrollspy-wrapper");
-  return win.scroll(function() {
+  pinScrollSpy = function() {
     var startFixation, top;
     startFixation = 122;
     top = win.scrollTop();
@@ -16,5 +16,6 @@ initializeScrollSpyHelper = function() {
       scrollspy_wrapper.removeClass('pinned');
       return scrollspy_wrapper.addClass('pin-top');
     }
-  });
+  };
+  return win.scroll(_.throttle(pinScrollSpy, 200));
 };

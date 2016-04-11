@@ -6,7 +6,7 @@ initializeScrollSpyHelper = ->
   win = $(window)
   scrollspy_wrapper = $(".scrollspy-wrapper")
 
-  win.scroll ->
+  pinScrollSpy = ->
 
     # this is the sum of heights of the top menu bar and the banner.
     startFixation = 122
@@ -21,4 +21,8 @@ initializeScrollSpyHelper = ->
 
       scrollspy_wrapper.removeClass('pinned')
       scrollspy_wrapper.addClass('pin-top')
+
+  win.scroll _.throttle(pinScrollSpy, 200)
+
+
 
