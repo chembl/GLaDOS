@@ -8,13 +8,35 @@ ButtonsHelper = ->
   * @param {JQuery} elem button that triggers the download
   * @param {String} filename Name that you want for the downloaded file
   * @param {tolltip} Tooltip that you want for the button
-  * @return {String} data data that is going to be downloaded
+  * @param {String} data data that is going to be downloaded
 ###
 ButtonsHelper.initDownloadBtn = (elem, filename, tooltip, data)->
     elem.attr('download', filename,)
     elem.addClass('tooltipped')
     elem.attr('data-tooltip', tooltip)
     elem.attr('href', 'data:text/html,' + data)
+
+### *
+  * Handles the copy event
+  * it gets the information from the context, It doesn't use a closure to be faster
+###
+ButtonsHelper.handleCopy = ->
+
+  clipboard.copy($(@).attr('data-copy'));
+  tooltip_id = $(@).attr('data-tooltip-id')
+  tooltip = $('#' + tooltip_id).hide()
+  Materialize.toast('Copied!', 1000)
+  console.log('copied!')
+
+ButtonsHelper.initCopyButton = (elem, tooltip, data) ->
+
+  copy_btn = elem
+  copy_btn.addClass('tooltipped')
+  copy_btn.attr('data-tooltip', tooltip)
+  copy_btn.attr('data-copy', data )
+
+  copy_btn.click ButtonsHelper.handleCopy
+
 
 # ------------------------------------------------------------
 # Cropped container

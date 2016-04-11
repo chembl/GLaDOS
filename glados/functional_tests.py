@@ -25,6 +25,11 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.get(url)
     time.sleep(sleeptime)
 
+  def assert_copy_button(self, elem_id, tooltip, value):
+    copy_button = self.browser.find_element_by_id(elem_id)
+    self.assertEquals(copy_button.get_attribute('data-tooltip'), tooltip)
+    self.assertEquals(copy_button.get_attribute('data-copy'), value)
+
   def assert_compound_representation(self, elem_id, original_value):
     canonical_smiles_input = self.browser.find_element_by_id(elem_id)
     canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
@@ -122,6 +127,9 @@ class CompoundReportCardTest(unittest.TestCase):
                                           'Download SMILES file.',
                                           'data:text/html,CC(=O)Oc1ccccc1C(=O)O%20CHEMBL25')
 
+    self.assert_copy_button('CompReps-canonicalSmiles-copy', 'Copy to Clipboard', 'CC(=O)Oc1ccccc1C(=O)O')
+    self.assert_copy_button('CompReps-canonicalSmiles-small-copy', 'Copy to Clipboard', 'CC(=O)Oc1ccccc1C(=O)O')
+
     # normal standard inchi
     self.assert_compound_representation('CompReps-standardInchi',
                                         'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
@@ -131,6 +139,11 @@ class CompoundReportCardTest(unittest.TestCase):
                                           'data:text/html,InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
     self.assert_compound_rep_download_btn('CompReps-standardInchi-small-dnld', 'CHEMBL25-INCHI.txt', 'Download InChI.',
                                           'data:text/html,InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+
+
+    self.assert_copy_button('CompReps-standardInchi-copy', 'Copy to Clipboard', 'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+    self.assert_copy_button('CompReps-standardInchi-small-copy', 'Copy to Clipboard', 'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+
     # normal standard inchi key
     self.assert_compound_representation('CompReps-standardInchiKey', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     self.assert_compound_representation('CompReps-standardInchiKey-small', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
@@ -140,6 +153,10 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_compound_rep_download_btn('CompReps-standardInchiKey-small-dnld', 'CHEMBL25-INCHI_KEY.txt',
                                           'Download InChI Key.',
                                           'data:text/html,BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+
+
+    self.assert_copy_button('CompReps-standardInchiKey-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+    self.assert_copy_button('CompReps-standardInchiKey-small-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
