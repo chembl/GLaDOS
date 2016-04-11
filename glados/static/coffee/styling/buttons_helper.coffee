@@ -51,29 +51,34 @@ toggleCroppedContainerWrapper = (elem, buttons) ->
 ###
 initCroppedContainers = ->
 
-  $('.cropped-container').each ->
+  f = ->
 
-    activator = $(this).find('a[data-activates]')
-    activated = $('#' + activator.attr('data-activates'))
-    buttons = $(this).find('.cropped-container-btns')
+    $('.cropped-container').each ->
 
-    # don't bother to activate the buttons if no elements are overflowing
-    overflow = false
-    heightLimit = activated.offset().top + activated.height()
+      activator = $(this).find('a[data-activates]')
+      activated = $('#' + activator.attr('data-activates'))
+      buttons = $(this).find('.cropped-container-btns')
+
+      # don't bother to activate the buttons if no elements are overflowing
+      overflow = false
+      heightLimit = activated.offset().top + activated.height()
 
 
-    activated.children().each ->
+      activated.children().each ->
 
-      childHeightLimit = $(this).offset().top + $(this).height()
-      if childHeightLimit > heightLimit
-        overflow = true
-        return false
+        childHeightLimit = $(this).offset().top + $(this).height()
+        if childHeightLimit > heightLimit
+          overflow = true
+          return false
 
-    if overflow
-      toggler = toggleCroppedContainerWrapper(activated, buttons)
-      activator.click(toggler)
-    else
-      activator.hide();
+      if overflow
+        toggler = toggleCroppedContainerWrapper(activated, buttons)
+        activator.click(toggler)
+      else
+        activator.hide();
+
+  _.debounce(f, 100)()
+
 
 
 # ------------------------------------------------------------

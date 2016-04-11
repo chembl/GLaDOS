@@ -54,28 +54,32 @@ toggleCroppedContainerWrapper = function(elem, buttons) {
 
 
 initCroppedContainers = function() {
-  return $('.cropped-container').each(function() {
-    var activated, activator, buttons, heightLimit, overflow, toggler;
-    activator = $(this).find('a[data-activates]');
-    activated = $('#' + activator.attr('data-activates'));
-    buttons = $(this).find('.cropped-container-btns');
-    overflow = false;
-    heightLimit = activated.offset().top + activated.height();
-    activated.children().each(function() {
-      var childHeightLimit;
-      childHeightLimit = $(this).offset().top + $(this).height();
-      if (childHeightLimit > heightLimit) {
-        overflow = true;
-        return false;
+  var f;
+  f = function() {
+    return $('.cropped-container').each(function() {
+      var activated, activator, buttons, heightLimit, overflow, toggler;
+      activator = $(this).find('a[data-activates]');
+      activated = $('#' + activator.attr('data-activates'));
+      buttons = $(this).find('.cropped-container-btns');
+      overflow = false;
+      heightLimit = activated.offset().top + activated.height();
+      activated.children().each(function() {
+        var childHeightLimit;
+        childHeightLimit = $(this).offset().top + $(this).height();
+        if (childHeightLimit > heightLimit) {
+          overflow = true;
+          return false;
+        }
+      });
+      if (overflow) {
+        toggler = toggleCroppedContainerWrapper(activated, buttons);
+        return activator.click(toggler);
+      } else {
+        return activator.hide();
       }
     });
-    if (overflow) {
-      toggler = toggleCroppedContainerWrapper(activated, buttons);
-      return activator.click(toggler);
-    } else {
-      return activator.hide();
-    }
-  });
+  };
+  return _.debounce(f, 100)();
 };
 
 showExpandableMenu = function(activator, elem) {
