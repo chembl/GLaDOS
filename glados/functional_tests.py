@@ -25,6 +25,20 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.get(url)
     time.sleep(sleeptime)
 
+  def assert_compound_representation(self, elem_id, original_value):
+    canonical_smiles_input = self.browser.find_element_by_id(elem_id)
+    canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
+    self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), original_value)
+
+  def assert_compound_rep_download_btn(self, elem_id, curr_filename, curr_tooltip, data):
+    canonical_smiles_dwnld_btn = self.browser.find_element_by_id(elem_id)
+    filename = canonical_smiles_dwnld_btn.get_attribute('download')
+    self.assertEqual(filename, curr_filename)
+    tooltip = canonical_smiles_dwnld_btn.get_attribute('data-tooltip')
+    self.assertEqual(tooltip, curr_tooltip)
+    href = canonical_smiles_dwnld_btn.get_attribute('href')
+    self.assertEquals(href, data)
+
   def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip, mobile_description,
                               tooltip_position):
 
@@ -60,11 +74,16 @@ class CompoundReportCardTest(unittest.TestCase):
     actual_links = [card.find_element_by_class_name('chembl-card-title').find_element_by_tag_name('a') for card in
                     alternate_forms_cards]
     actual_links_hrefs = [link.get_attribute('href') for link in actual_links]
-    test_links_hrefs = ['http://glados-ebitest.rhcloud.com/compound_report_card/' + chembl_id + '/' for chembl_id in chembl_ids_list]
+    test_links_hrefs = ['http://glados-ebitest.rhcloud.com/compound_report_card/' + chembl_id + '/' for chembl_id in
+                        chembl_ids_list]
     self.assertEqual(sorted(actual_links_hrefs), sorted(test_links_hrefs))
 
     actual_links_texts = [link.text for link in actual_links]
     self.assertEqual(sorted(actual_links_texts), sorted(chembl_ids_list))
+
+  # --------------------------------------------------------------------------------------
+  # Scenarios
+  # --------------------------------------------------------------------------------------
 
   def test_compound_report_card_scenario_1(self):
 
@@ -95,36 +114,32 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # normal canonical smiles
-    canonical_smiles_input = self.browser.find_element_by_id('CompReps-canonicalSmiles')
-    canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), 'CC(=O)Oc1ccccc1C(=O)O')
-
-    canonical_smiles_input = self.browser.find_element_by_id('CompReps-canonicalSmiles-small')
-    canonical_smiles_div = canonical_smiles_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(canonical_smiles_div.get_attribute('data-original-value'), 'CC(=O)Oc1ccccc1C(=O)O')
+    self.assert_compound_representation('CompReps-canonicalSmiles', 'CC(=O)Oc1ccccc1C(=O)O')
+    self.assert_compound_representation('CompReps-canonicalSmiles-small', 'CC(=O)Oc1ccccc1C(=O)O')
+    self.assert_compound_rep_download_btn('CompReps-canonicalSmiles-dnld', 'CHEMBL25.smi', 'Download SMILES file.',
+                                          'data:text/html,CC(=O)Oc1ccccc1C(=O)O%20CHEMBL25')
+    self.assert_compound_rep_download_btn('CompReps-canonicalSmiles-small-dnld', 'CHEMBL25.smi',
+                                          'Download SMILES file.',
+                                          'data:text/html,CC(=O)Oc1ccccc1C(=O)O%20CHEMBL25')
 
     # normal standard inchi
-    standard_inchi_input = self.browser.find_element_by_id('CompReps-standardInchi')
-    standard_inchi_div = standard_inchi_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(standard_inchi_div.get_attribute('data-original-value'),
-                     'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
-
-    standard_inchi_input = self.browser.find_element_by_id('CompReps-standardInchi-small')
-    standard_inchi_div = standard_inchi_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(standard_inchi_div.get_attribute('data-original-value'),
-                     'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
-
+    self.assert_compound_representation('CompReps-standardInchi',
+                                        'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+    self.assert_compound_representation('CompReps-standardInchi-small',
+                                        'InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+    self.assert_compound_rep_download_btn('CompReps-standardInchi-dnld', 'CHEMBL25-INCHI.txt', 'Download InChI.',
+                                          'data:text/html,InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
+    self.assert_compound_rep_download_btn('CompReps-standardInchi-small-dnld', 'CHEMBL25-INCHI.txt', 'Download InChI.',
+                                          'data:text/html,InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)')
     # normal standard inchi key
-    standard_inchi_key_input = self.browser.find_element_by_id('CompReps-standardInchiKey')
-    standard_inchi_key_div = standard_inchi_key_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
-                     'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
-
-    standard_inchi_key_input = self.browser.find_element_by_id('CompReps-standardInchiKey-small')
-    standard_inchi_key_div = standard_inchi_key_input.find_element_by_xpath('../../../../../..')
-    self.assertEqual(standard_inchi_key_div.get_attribute('data-original-value'),
-                     'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
-
+    self.assert_compound_representation('CompReps-standardInchiKey', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+    self.assert_compound_representation('CompReps-standardInchiKey-small', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+    self.assert_compound_rep_download_btn('CompReps-standardInchiKey-dnld', 'CHEMBL25-INCHI_KEY.txt',
+                                          'Download InChI Key.',
+                                          'data:text/html,BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+    self.assert_compound_rep_download_btn('CompReps-standardInchiKey-small-dnld', 'CHEMBL25-INCHI_KEY.txt',
+                                          'Download InChI Key.',
+                                          'data:text/html,BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     # --------------------------------------
     # Molecule Features
     # --------------------------------------

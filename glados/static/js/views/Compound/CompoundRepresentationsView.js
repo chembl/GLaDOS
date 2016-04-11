@@ -24,12 +24,15 @@ CompoundRepresentationsView = CardView.extend({
     return afterRender();
   },
   renderCanonicalSmiles: function() {
-    return $(this.el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value', this.molecule_structures['canonical_smiles']);
+    $(this.el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value', this.molecule_structures['canonical_smiles']);
+    return ButtonsHelper.initDownloadBtn($(this.el).find('#CompReps-canonicalSmiles-dnld, #CompReps-canonicalSmiles-small-dnld'), CHEMBL_ID + '.smi', 'Download SMILES file.', this.molecule_structures['canonical_smiles'] + '%20' + this.model.get('molecule_chembl_id'));
   },
   renderStandardInchi: function() {
-    return $(this.el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value', this.molecule_structures['standard_inchi']);
+    $(this.el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value', this.molecule_structures['standard_inchi']);
+    return ButtonsHelper.initDownloadBtn($(this.el).find('#CompReps-standardInchi-dnld, #CompReps-standardInchi-small-dnld'), CHEMBL_ID + '-INCHI.txt', 'Download InChI.', this.molecule_structures['standard_inchi']);
   },
   renderStandardInchiKey: function() {
-    return $(this.el).find('#CompReps-standardInchiKey, #CompReps-standardInchiKey-small').attr('value', this.molecule_structures['standard_inchi_key']);
+    $(this.el).find('#CompReps-standardInchiKey, #CompReps-standardInchiKey-small').attr('value', this.molecule_structures['standard_inchi_key']);
+    return ButtonsHelper.initDownloadBtn($(this.el).find('#CompReps-standardInchiKey-dnld, #CompReps-standardInchiKey-small-dnld'), CHEMBL_ID + '-INCHI_KEY.txt', 'Download InChI Key.', this.molecule_structures['standard_inchi_key']);
   }
 });
