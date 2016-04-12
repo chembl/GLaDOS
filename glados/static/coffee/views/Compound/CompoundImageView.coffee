@@ -11,7 +11,6 @@ CompoundImageView = CardView.extend
 
 
   renderImage: ->
-
     if @model.get('structure_type') == 'NONE'
       img_url = '/static/img/structure_not_available.png'
     else if @model.get('structure_type') == 'SEQ'
@@ -30,8 +29,9 @@ CompoundImageView = CardView.extend
 
     img.attr('src', img_url)
 
-  initDownloadButtons: ->
+    $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
 
+  initDownloadButtons: ->
     img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
     $('.CNC-download-png').attr('href', img_url + '.png')
     $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
@@ -40,19 +40,41 @@ CompoundImageView = CardView.extend
     $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
 
   initZoomModal: ->
-
     modal = $(@el).find('#CNC-zoom-modal')
 
     title = modal.find('h3')
     title.text(@model.get('molecule_chembl_id'))
 
-    img = modal.find('img')
-    img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
+    img = modal.find('#Bck-Comp-Img-zoom')
+
+    img.load ->
+
+      $('#Bck-Comp-Img-zoom-preloader').hide()
+      $(@).show()
+
+    img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
   showVisibleContent: ->
-
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+
+  handleImgSwitch: (parentView) ->
+    return ->
+      img = $(parentView.el).find('#Bck-Comp-Img-zoom')
+      $('#Bck-Comp-Img-zoom-preloader').show()
+      img.hide()
+      img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
+
+
+  getParamsFromSwitches: ->
+    renderer = 'engine=' + if $('#Bck-Renderer-Switch').prop('checked') then 'indigo' else 'rdkit'
+    format = 'format=' + if $('#Bck-Format-Switch').prop('checked') then 'png' else 'svg'
+    coords = if $('#Bck-Coordinates-Switch').prop('checked') then 'ignoreCoords=1' else ''
+
+    return '?' + renderer + '&' + format + '&' + coords
+
+
+
 
 

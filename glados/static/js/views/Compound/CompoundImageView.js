@@ -24,7 +24,8 @@ CompoundImageView = CardView.extend({
     img.error(function() {
       return img.attr('src', '/static/img/structure_not_found.png');
     });
-    return img.attr('src', img_url);
+    img.attr('src', img_url);
+    return $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
   },
   initDownloadButtons: function() {
     var img_url;
@@ -39,12 +40,32 @@ CompoundImageView = CardView.extend({
     modal = $(this.el).find('#CNC-zoom-modal');
     title = modal.find('h3');
     title.text(this.model.get('molecule_chembl_id'));
-    img = modal.find('img');
-    img.attr('src', $(this.el).find('#Bck-COMP_IMG').attr('src'));
+    img = modal.find('#Bck-Comp-Img-zoom');
+    img.load(function() {
+      $('#Bck-Comp-Img-zoom-preloader').hide();
+      return $(this).show();
+    });
+    img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
     return img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
   },
   showVisibleContent: function() {
     $(this.el).children('.card-preolader-to-hide').hide();
     return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+  },
+  handleImgSwitch: function(parentView) {
+    return function() {
+      var img;
+      img = $(parentView.el).find('#Bck-Comp-Img-zoom');
+      $('#Bck-Comp-Img-zoom-preloader').show();
+      img.hide();
+      return img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches());
+    };
+  },
+  getParamsFromSwitches: function() {
+    var coords, format, renderer;
+    renderer = 'engine=' + ($('#Bck-Renderer-Switch').prop('checked') ? 'indigo' : 'rdkit');
+    format = 'format=' + ($('#Bck-Format-Switch').prop('checked') ? 'png' : 'svg');
+    coords = $('#Bck-Coordinates-Switch').prop('checked') ? 'ignoreCoords=1' : '';
+    return '?' + renderer + '&' + format + '&' + coords;
   }
 });

@@ -1,6 +1,9 @@
 from selenium import webdriver
 import unittest
 import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 HOST = 'http://127.0.0.1:8000'
 SLEEP_TIME = 1
@@ -502,7 +505,7 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: No', 'Prodrug', 'top')
 
-  def test_compound_report_card_scenario_13(self):
+  def test_compound_report_card_scenario_14(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL2106520/', SLEEP_TIME)
 
@@ -514,7 +517,7 @@ class CompoundReportCardTest(unittest.TestCase):
     self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: Yes', 'Prodrug', 'top')
 
-  def test_compound_report_card_scenario_14(self):
+  def test_compound_report_card_scenario_15(self):
 
     self.getURL(HOST + '/compound_report_card/CHEMBL35/', SLEEP_TIME)
 

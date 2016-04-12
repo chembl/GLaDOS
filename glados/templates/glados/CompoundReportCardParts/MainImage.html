@@ -10,11 +10,11 @@
       <img id="Bck-COMP_IMG" class="CNC-img" src="" alt="Compound Image">
                     <span class="CNC-img-btn">
 
-                      <a class="CNC-btn btn waves-effect waves-light teal hide-on-small-only"
+                      <a id="CNC-IMG-Options" class="CNC-btn btn waves-effect waves-light teal hide-on-small-only"
                          data-activates="CNC-expandable-bottom,CNC-expandable-top"><i
                         class="material-icons">add</i></a>
 
-                      <a class="CNC-btn btn waves-effect waves-light teal hide-on-med-and-up"
+                      <a id="CNC-IMG-Options-small" class="CNC-btn btn waves-effect waves-light teal hide-on-med-and-up"
                          data-activates="CNC-expandable-left,CNC-expandable-right"
                       ><i
                         class="material-icons">add</i></a>
@@ -27,7 +27,8 @@
 
       <div class="container">
 
-        <a class="hoverable waves-effect waves-light teal tooltipped modal-trigger" href="#CNC-zoom-modal"
+        <a id="CNC-IMG-Options-Zoom" class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
+           href="#CNC-zoom-modal"
            data-tooltip="Zoom">
           <p><i class="fa fa-search-plus"></i></p>
         </a>
@@ -120,7 +121,21 @@
       </div>
 
 
-      <img class="responsive-height-img" src="" alt="Compound Image">
+      <img id='Bck-Comp-Img-zoom' class="responsive-height-img" src="" alt="Compound Image" style="display: none">
+
+      <div id='Bck-Comp-Img-zoom-preloader' class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-teal-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
 
 
       <div class="img-zoom-menu grey lighten-2">
@@ -139,7 +154,7 @@
           <div class="switch">
             <label>
               RDKit
-              <input type="checkbox">
+              <input id='Bck-Renderer-Switch' type="checkbox">
               <span class="lever"></span>
               Indigo
             </label>
@@ -160,7 +175,7 @@
           <div class="switch">
             <label>
               SVG
-              <input type="checkbox">
+              <input id='Bck-Format-Switch' type="checkbox">
               <span class="lever"></span>
               PNG
             </label>
@@ -180,7 +195,7 @@
           <div class="switch">
             <label>
               Embedded
-              <input type="checkbox">
+              <input id='Bck-Coordinates-Switch' type="checkbox">
               <span class="lever"></span>
               Computed
             </label>
