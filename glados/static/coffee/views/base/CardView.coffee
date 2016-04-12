@@ -66,3 +66,5 @@ CardView = Backbone.View.extend
     $(@el).find('.modal-trigger').leanModal();
 
 
+
+

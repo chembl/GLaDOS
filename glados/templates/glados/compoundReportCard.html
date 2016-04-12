@@ -295,6 +295,7 @@
 <script type="text/javascript" src="/static/js/models/MechanismOfActionList.js"></script>
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundImageView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundRepresentationsView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundFeaturesView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundMoleculeFormView.js"></script>
@@ -317,6 +318,7 @@ var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
 var moleculeFormsList = initMoleculeFormsList(compound);
 
 var cncView = initCNCView(compound, $('#CNCCard'));
+var compImgView = initCompoundImageView(compound, $('#CNCImageCard'));
 var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
 var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
 var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));

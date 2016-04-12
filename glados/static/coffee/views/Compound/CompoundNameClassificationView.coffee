@@ -10,7 +10,6 @@ CompoundNameClassificationView = CardView.extend
 
   render: ->
 
-    @renderImage()
     @renderTitle()
     @renderPrefName()
     @renderMaxPhase()
@@ -23,8 +22,6 @@ CompoundNameClassificationView = CardView.extend
 
     @initEmbedModal('name_and_classification')
     @renderModalPreview()
-    @initDownloadButtons()
-    @initZoomModal()
     @activateTooltips()
     @activateModals()
 
@@ -96,24 +93,6 @@ CompoundNameClassificationView = CardView.extend
     else
       $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
 
-  renderImage: ->
-    if @model.get('structure_type') == 'NONE'
-      img_url = '/static/img/structure_not_available.png'
-    else if @model.get('structure_type') == 'SEQ'
-      img_url = '/static/img/protein_structure.png'
-    else
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + '.svg'
-
-    img = $(@el).find('#Bck-COMP_IMG')
-
-    # protein_structure is used when the molecule has a very complex structure that can not be shown in an image.
-    # not_available is when the compound has no structure to show.
-    # not_found is when there was an error loading the image
-    img.error ->
-      img.attr('src', '/static/img/structure_not_found.png')
-
-    img.attr('src', img_url)
-
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')
     unique_synonyms = {}
@@ -154,26 +133,6 @@ CompoundNameClassificationView = CardView.extend
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
 
-
-  initDownloadButtons: ->
-
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
-    $('.CNC-download-png').attr('href', img_url + '.png')
-    $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
-
-    $('.CNC-download-svg').attr('href', img_url + '.svg')
-    $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
-
-  initZoomModal: ->
-
-    modal = $(@el).find('#CNC-zoom-modal')
-
-    title = modal.find('h3')
-    title.text(@model.get('molecule_chembl_id'))
-
-    img = modal.find('img')
-    img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
-    img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
 
 

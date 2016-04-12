@@ -880,7 +880,7 @@ div#CompoundNameAndClassification .expanded {
 .CNC-expandable-content-bottom {
   background-color: rgba(158, 158, 158, 0.6);
   position: absolute;
-  z-index: 999;
+  z-index: 990;
   width: 100%;
   overflow: hidden;
   display: none;

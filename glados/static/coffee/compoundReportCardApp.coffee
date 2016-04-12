@@ -43,7 +43,7 @@ initMechanismOfActionList = (from_mol_chembl_id) ->
 # -------------------------------------------------------------
 
 ### *
-  * Initializes de CNCView
+  * Initializes the CNCView
   * @param {Compound} model, base model for the view
   * @param {JQuery} top_level_elem element that renders the model.
   * @return {CompoundNameClassificationView} the view that has been created
@@ -54,6 +54,21 @@ initCNCView = (model, top_level_elem) ->
     el: top_level_elem
 
   return cncView
+
+### *
+  * Initializes the Compound Image view, the one that is in charge of the compound main image
+  * and the buttons that allow the options for it
+  * @param {Compound} model, base model for the view
+  * @param {JQuery} top_level_elem element that renders the model.
+  * @return {CompoundNameClassificationView} the view that has been created
+###
+initCompoundImageView = (model, top_level_elem) ->
+
+  compImgView = new CompoundImageView
+    model: model
+    el: top_level_elem
+
+  return compImgView
 
 ### *
   * Initializes de Compound Representations View

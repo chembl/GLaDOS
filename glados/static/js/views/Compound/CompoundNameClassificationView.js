@@ -7,7 +7,6 @@ CompoundNameClassificationView = CardView.extend({
     return this.model.on('error', this.showCompoundErrorCard, this);
   },
   render: function() {
-    this.renderImage();
     this.renderTitle();
     this.renderPrefName();
     this.renderMaxPhase();
@@ -17,8 +16,6 @@ CompoundNameClassificationView = CardView.extend({
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('name_and_classification');
     this.renderModalPreview();
-    this.initDownloadButtons();
-    this.initZoomModal();
     this.activateTooltips();
     this.activateModals();
     return ChemJQ.autoCompile();
@@ -89,21 +86,6 @@ CompoundNameClassificationView = CardView.extend({
       return $(this.el).find('#Bck-MOLFORMULA').text(this.model.get('molecule_properties')['full_molformula']);
     }
   },
-  renderImage: function() {
-    var img, img_url;
-    if (this.model.get('structure_type') === 'NONE') {
-      img_url = '/static/img/structure_not_available.png';
-    } else if (this.model.get('structure_type') === 'SEQ') {
-      img_url = '/static/img/protein_structure.png';
-    } else {
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + '.svg';
-    }
-    img = $(this.el).find('#Bck-COMP_IMG');
-    img.error(function() {
-      return img.attr('src', '/static/img/structure_not_found.png');
-    });
-    return img.attr('src', img_url);
-  },
   renderSynonymsAndTradeNames: function() {
     var all_syns, syn_rendered, synonyms_source, tn_rendered, trade_names, unique_synonyms;
     all_syns = this.model.get('molecule_synonyms');
@@ -136,22 +118,5 @@ CompoundNameClassificationView = CardView.extend({
       });
       return $(this.el).find('#CompNameClass-tradenames').html(tn_rendered);
     }
-  },
-  initDownloadButtons: function() {
-    var img_url;
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
-    $('.CNC-download-png').attr('href', img_url + '.png');
-    $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
-    $('.CNC-download-svg').attr('href', img_url + '.svg');
-    return $('.CNC-download-svg').attr('download', this.model.get('molecule_chembl_id') + '.svg');
-  },
-  initZoomModal: function() {
-    var img, modal, title;
-    modal = $(this.el).find('#CNC-zoom-modal');
-    title = modal.find('h3');
-    title.text(this.model.get('molecule_chembl_id'));
-    img = modal.find('img');
-    img.attr('src', $(this.el).find('#Bck-COMP_IMG').attr('src'));
-    return img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
   }
 });

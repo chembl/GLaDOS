@@ -15,6 +15,7 @@
 <script type="text/javascript" src="/static/js/models/Compound.js"></script>
 <script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
 <script type="text/javascript" src="/static/js/views/Compound/CompoundNameClassificationView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundImageView.js"></script>
 <script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
 {% endblock %}
 
@@ -22,6 +23,7 @@
 
 var compound = initCompound(CHEMBL_ID);
 var cncView = initCNCView(compound, $('#CNCCard'));
+var compImgView = initCompoundImageView(compound, $('#CNCImageCard'));
 compound.fetch();
 
 initCroppedContainers();

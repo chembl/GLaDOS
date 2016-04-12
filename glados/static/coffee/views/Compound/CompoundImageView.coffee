@@ -1,0 +1,58 @@
+# View that renders the Image of the compound for the Compound Name and Classification Section
+CompoundImageView = CardView.extend
+
+  initialize: ->
+    @model.on 'change', @.render, @
+
+  render: ->
+    @renderImage()
+    @initDownloadButtons()
+    @initZoomModal()
+
+
+  renderImage: ->
+
+    if @model.get('structure_type') == 'NONE'
+      img_url = '/static/img/structure_not_available.png'
+    else if @model.get('structure_type') == 'SEQ'
+      img_url = '/static/img/protein_structure.png'
+    else
+      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + '.svg'
+
+    img = $(@el).find('#Bck-COMP_IMG')
+    img.load $.proxy(@showVisibleContent, @)
+
+    # protein_structure is used when the molecule has a very complex structure that can not be shown in an image.
+    # not_available is when the compound has no structure to show.
+    # not_found is when there was an error loading the image
+    img.error ->
+      img.attr('src', '/static/img/structure_not_found.png')
+
+    img.attr('src', img_url)
+
+  initDownloadButtons: ->
+
+    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
+    $('.CNC-download-png').attr('href', img_url + '.png')
+    $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
+
+    $('.CNC-download-svg').attr('href', img_url + '.svg')
+    $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
+
+  initZoomModal: ->
+
+    modal = $(@el).find('#CNC-zoom-modal')
+
+    title = modal.find('h3')
+    title.text(@model.get('molecule_chembl_id'))
+
+    img = modal.find('img')
+    img.attr('src', $(@el).find('#Bck-COMP_IMG').attr('src'))
+    img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
+
+  showVisibleContent: ->
+
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+
+
