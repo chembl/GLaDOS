@@ -24,8 +24,16 @@ ButtonsHelper.handleCopy = ->
 
   clipboard.copy($(@).attr('data-copy'));
   tooltip_id = $(@).attr('data-tooltip-id')
-  tooltip = $('#' + tooltip_id).hide()
-  Materialize.toast('Copied!', 1000)
+  tooltip = $('#' + tooltip_id)
+
+  if $( window ).width() <= MEDIUM_WIDTH
+    tooltip.hide()
+    console.log('small!')
+    Materialize.toast('Copied!', 1000)
+  else
+    tooltip.find('span').text('Copied!')
+    console.log('big!')
+
   console.log('copied!')
 
 ButtonsHelper.initCopyButton = (elem, tooltip, data) ->
