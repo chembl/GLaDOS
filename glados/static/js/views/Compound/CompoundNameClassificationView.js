@@ -15,7 +15,6 @@ CompoundNameClassificationView = CardView.extend({
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('name_and_classification');
-    this.renderModalPreview();
     this.activateTooltips();
     this.activateModals();
     return ChemJQ.autoCompile();

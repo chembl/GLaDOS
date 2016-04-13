@@ -22,7 +22,6 @@ CompoundRepresentationsView = CardView.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     @initEmbedModal('representations')
-    @renderModalPreview()
     @activateTooltips()
     @activateModals()
 

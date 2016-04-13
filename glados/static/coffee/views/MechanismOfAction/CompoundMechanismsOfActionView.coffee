@@ -21,7 +21,6 @@ CompoundMechanismsOfActionView = CardView.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     @initEmbedModal('mechanism_of_action')
-    @renderModalPreview()
     @activateTooltips()
     @activateModals()
 

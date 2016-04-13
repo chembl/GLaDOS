@@ -21,7 +21,6 @@ CompoundNameClassificationView = CardView.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     @initEmbedModal('name_and_classification')
-    @renderModalPreview()
     @activateTooltips()
     @activateModals()
 

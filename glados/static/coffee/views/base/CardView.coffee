@@ -33,9 +33,23 @@ CardView = Backbone.View.extend
     modal_id = 'embed-modal-for-' + $(@el).attr('id')
     modal.attr('id', modal_id)
     modal_trigger.attr('href', '#' + modal_id)
+    modal_trigger.attr('rendered', 'false')
+    modal_trigger.attr('data-embed-sect-name', section_name)
+
+    modal_trigger.click @renderModalPreview
+
+  # this function is to be used for the click event in the embed modal button.
+  # it can get all the information needed from the clicked element, no closure is needed.
+  renderModalPreview: ->
+
+    clicked = $(@)
+    if clicked.attr('rendered') == 'true'
+      return
+
+    section_name = clicked.attr('data-embed-sect-name')
+    modal = $(clicked.attr('href'))
 
     code_elem = modal.find('code')
-
     chembl_id = if @model? then @model.get('molecule_chembl_id') else CHEMBL_ID
 
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
@@ -43,15 +57,6 @@ CardView = Backbone.View.extend
       section_name: section_name
 
     code_elem.text(rendered)
-
-
-
-  renderModalPreview: ->
-
-    if EMBEDED?
-      return
-
-    modal = $(@el).find('.embed-modal')
     preview_elem = modal.find('.embed-preview')
 
     code_elem = modal.find('code')
@@ -59,11 +64,17 @@ CardView = Backbone.View.extend
 
     preview_elem.html(code_to_preview)
 
+
+    clicked.attr('rendered', 'true')
+
+
   activateTooltips: ->
     $(@el).find('.tooltipped').tooltip()
 
   activateModals: ->
     $(@el).find('.modal-trigger').leanModal();
+
+
 
 
 

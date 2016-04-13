@@ -17,7 +17,6 @@ CompoundMoleculeFormsListView = CardView.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     @initEmbedModal('alternate_forms')
-    @renderModalPreview()
     @activateTooltips()
     @activateModals()
 

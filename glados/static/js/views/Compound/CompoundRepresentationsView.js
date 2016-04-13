@@ -18,7 +18,6 @@ CompoundRepresentationsView = CardView.extend({
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('representations');
-    this.renderModalPreview();
     this.activateTooltips();
     this.activateModals();
     return afterRender();

@@ -11,7 +11,6 @@ CompoundMoleculeFormsListView = CardView.extend({
     $(this.el).children('.card-preolader-to-hide').hide();
     $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
     this.initEmbedModal('alternate_forms');
-    this.renderModalPreview();
     this.activateTooltips();
     return this.activateModals();
   },

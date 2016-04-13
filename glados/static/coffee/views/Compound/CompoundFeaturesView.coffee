@@ -23,7 +23,6 @@ CompoundFeaturesView = CardView.extend
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
 
     @initEmbedModal('molecule_features')
-    @renderModalPreview()
     @activateModals()
 
     @activateTooltips()
