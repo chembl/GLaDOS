@@ -2,29 +2,14 @@
 var PieView;
 
 PieView = Backbone.View.extend({
-  initialize: function() {
-    google.charts.load('current', {
-      'packages': ['corechart']
-    });
-    return $(window).resize(_.debounce($.proxy(this.drawPie, this), 250));
-  },
+  initialize: function() {},
   drawPie: function() {
-    var chart, data, options;
-    $('#Bck-BioactivitySummaryChart').empty();
-    if (!GRAHPS_LIBS_LOADED) {
-      setTimeout($.proxy(this.drawPie, this), 1000);
-      return;
-    }
-    data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
-    data.addRows([['Mushrooms', 3], ['Onions', 1], ['Olives', 1], ['Zucchini', 1], ['Pepperoni', 2]]);
-    options = {
-      'title': 'How Much Pizza I Ate Last Night',
-      'height': '400px'
+    var data;
+    data = {
+      labels: ['Bananas', 'Apples', 'Grapes'],
+      series: [20, 15, 40]
     };
-    chart = new google.visualization.PieChart(document.getElementById('Bck-BioactivitySummaryChart'));
-    return chart.draw(data, options);
+    return new Chartist.Pie('#Bck-BioactivitySummaryChart', data);
   },
   render: function() {
     this.drawPie();
