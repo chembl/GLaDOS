@@ -83,6 +83,13 @@ initCompRepsView = (model, top_level_elem) ->
 
   return compRepsView
 
+initCalcCompPropertiesView = (model, top_level_elem) ->
+  calcCompPropView = new CompoundCalculatedParentPropertiesView
+    model: model
+    el: top_level_elem
+
+  return calcCompPropView
+
 ### *
   * Initializes de MechanismOfActionRowView View, This view renders a row of a table
   * from the information on the mechanism of action.

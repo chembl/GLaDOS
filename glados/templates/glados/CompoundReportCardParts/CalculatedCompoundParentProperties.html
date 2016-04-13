@@ -2,7 +2,21 @@
 
   <div id='CalculatedParentPropertiesCard' class="card chembl-card grey lighten-5">
 
-    <div class="card-content">
+    <!-- modal trigger -->
+    {% block embed_button %}
+    {% include "glados/base/embed_button.html" %}
+    {% endblock %}
+
+    {% block card_loaders %}
+    {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
+
+    <!-- Embed Modal Structure -->
+    {% block embed_modal %}
+    {% include "glados/base/embed_modal.html" %}
+    {% endblock %}
+
+    <div class="card-content" style="display: none">
 
 
       <a class="white-text waves-effect waves-light teal btn-mini tooltipped hide-on-small-only" data-position="bottom"
@@ -23,34 +37,34 @@
           <ul class="collection with-header">
 
             <li class="collection-item">
-              <div>Mol. Weight: <span class="right teal-text"> 180.2</span></div>
+              <div>Mol. Weight: <span id='Bck-CalcCompProp-MolWt' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>MW. Monoisotopic: <span class="right teal-text"> 180.0423</span></div>
+              <div>MW. Monoisotopic: <span id='Bck-CalcCompProp-MolWtM' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>ALogP: <span class="right teal-text"> 1.23</span></div>
+              <div>ALogP: <span id='Bck-CalcCompProp-ALogP' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>#Rotatable Bonds: <span class="right teal-text"> 3</span></div>
+              <div>#Rotatable Bonds: <span id='Bck-CalcCompProp-RotBonds' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>Polar Surface Area:<span class="right teal-text"> 63.6</span></div>
+              <div>Polar Surface Area:<span id='Bck-CalcCompProp-PSA' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>Molecular Species: <span class="right teal-text"> ACID</span></div>
+              <div>Molecular Species: <span id='Bck-CalcCompProp-Msp' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>HBA: <span class="right teal-text"> 4</span></div>
+              <div>HBA: <span id='Bck-CalcCompProp-HBA' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>HDB: <span class="right teal-text"> 1</span></div>
+              <div>HDB: <span id='Bck-CalcCompProp-HBD' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>#Ro5 Violations:<span class="right teal-text"> 0</span></div>
+              <div>#Ro5 Violations:<span id='Bck-CalcCompProp-RO5' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>HBA (Lipinski): <span class="right teal-text"> 4</span></div>
+              <div>HBA (Lipinski): <span id='Bck-CalcCompProp-HBAL' class="right teal-text"> 4!!</span></div>
             </li>
 
           </ul>
@@ -62,31 +76,31 @@
           <ul class="collection with-header">
 
             <li class="collection-item">
-              <div>HBD (Lipinski): <span class="right teal-text"> 1</span></div>
+              <div>HBD (Lipinski): <span id='Bck-CalcCompProp-HBDL' class="right teal-text"> 1!!</span></div>
             </li>
             <li class="collection-item">
-              <div>#Ro5 Violations (Lipinski): <span class="right teal-text"> 0</span></div>
+              <div>#Ro5 Violations (Lipinski): <span id='Bck-CalcCompProp-ROL' class="right teal-text"> 0!!</span></div>
             </li>
             <li class="collection-item">
-              <div>ACD Acidic pKa: <span class="right teal-text"> 3.48</span></div>
+              <div>ACD Acidic pKa: <span id='Bck-CalcCompProp-APKA' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>ACD Basic pKa: <span class="right teal-text"> -</span></div>
+              <div>ACD Basic pKa: <span id='Bck-CalcCompProp-BPKA' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>#ACD LogP:<span class="right teal-text"> 1.4</span></div>
+              <div>#ACD LogP:<span id='Bck-CalcCompProp-ACDLogP' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>ACD LogD pH7.4:<span class="right teal-text"> -1.68</span></div>
+              <div>ACD LogD pH7.4:<span id='Bck-CalcCompProp-ACDLogD' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>Aromatic Rings:<span class="right teal-text"> 1</span></div>
+              <div>Aromatic Rings:<span id='Bck-CalcCompProp-AR' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>Heavy Atoms: <span class="right teal-text"> 13</span></div>
+              <div>Heavy Atoms: <span id='Bck-CalcCompProp-HA' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
             <li class="collection-item">
-              <div>QED Weighted:<span class="right teal-text"> 0.56</span></div>
+              <div>QED Weighted:<span id='Bck-CalcCompProp-QEDW' class="right teal-text"> <!-- Backbone --></span></div>
             </li>
 
           </ul>

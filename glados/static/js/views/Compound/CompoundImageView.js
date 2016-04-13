@@ -48,10 +48,6 @@ CompoundImageView = CardView.extend({
     img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
     return img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
   },
-  showVisibleContent: function() {
-    $(this.el).children('.card-preolader-to-hide').hide();
-    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
-  },
   handleImgSwitch: function(parentView) {
     return function() {
       var img;

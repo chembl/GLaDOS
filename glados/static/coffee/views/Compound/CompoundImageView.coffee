@@ -55,10 +55,6 @@ CompoundImageView = CardView.extend
     img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
-  showVisibleContent: ->
-    $(@el).children('.card-preolader-to-hide').hide()
-    $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
-
   handleImgSwitch: (parentView) ->
     return ->
       img = $(parentView.el).find('#Bck-Comp-Img-zoom')
