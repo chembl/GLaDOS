@@ -19,8 +19,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-Availability', 'availability_type')
 
     # until here, all the visible content has been rendered.
-    $(@el).children('.card-preolader-to-hide').hide()
-    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
+    @showVisibleContent()
 
     @initEmbedModal('molecule_features')
     @activateModals()

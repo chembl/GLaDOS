@@ -15,8 +15,7 @@ CompoundRepresentationsView = CardView.extend({
     this.renderCanonicalSmiles();
     this.renderStandardInchi();
     this.renderStandardInchiKey();
-    $(this.el).children('.card-preolader-to-hide').hide();
-    $(this.el).children(':not(.card-preolader-to-hide, .card-load-error)').show();
+    this.showVisibleContent();
     this.initEmbedModal('representations');
     this.activateTooltips();
     this.activateModals();

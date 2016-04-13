@@ -17,8 +17,7 @@ CompoundMechanismsOfActionView = CardView.extend
     @addAllMechanisms()
 
     # until here, all the visible content has been rendered.
-    $(@el).children('.card-preolader-to-hide').hide()
-    $(@el).children(':not(.card-preolader-to-hide, .card-load-error)').show()
+    @showVisibleContent()
 
     @initEmbedModal('mechanism_of_action')
     @activateTooltips()
