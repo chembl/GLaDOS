@@ -1,0 +1,28 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Calculated Compound Parent Properties{% endblock %}
+
+{% block content %}
+
+   <div id="CalculatedCompoundParentProperties" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
+   </div>
+
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="/static/js/models/Compound.js"></script>
+<script type="text/javascript" src="/static/js/models/CompoundList.js"></script>
+<script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
+<script type="text/javascript" src="/static/js/views/Compound/CompoundCalculatedParentPropertiesView.js"></script>
+<script type="text/javascript" src="/static/js/compoundReportCardApp.js"></script>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var compound = initCompound(CHEMBL_ID);
+var calcCompPropView = initCalcCompPropertiesView(compound, $('#CalculatedParentPropertiesCard'));
+compound.fetch();
+
+
+{% endblock %}

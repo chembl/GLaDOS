@@ -11,12 +11,12 @@ CompoundCalculatedParentPropertiesView = CardView.extend
     thisView = @
 
     $.each @mol_properties, ( key, elem_id ) ->
-
       value = thisView.model.get('molecule_properties')[key]
       value = '--' unless value?
       $('#' + elem_id).text(value)
 
-
+    @initEmbedModal('calculated_properties')
+    @activateModals()
     @showVisibleContent()
 
   mol_properties:

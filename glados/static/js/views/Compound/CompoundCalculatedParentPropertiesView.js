@@ -17,6 +17,8 @@ CompoundCalculatedParentPropertiesView = CardView.extend({
       }
       return $('#' + elem_id).text(value);
     });
+    this.initEmbedModal('calculated_properties');
+    this.activateModals();
     return this.showVisibleContent();
   },
   mol_properties: {
