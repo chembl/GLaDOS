@@ -24,8 +24,7 @@ CompoundImageView = CardView.extend({
     img.error(function() {
       return img.attr('src', '/static/img/structure_not_found.png');
     });
-    img.attr('src', img_url);
-    return $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
+    return img.attr('src', img_url);
   },
   initDownloadButtons: function() {
     var img_url;
@@ -37,6 +36,11 @@ CompoundImageView = CardView.extend({
   },
   initZoomModal: function() {
     var img, modal, title;
+    img = $(this.el).find('#Bck-COMP_IMG');
+    if (img.attr('src').indexOf('/static/') > -1) {
+      $('#CNC-IMG-Options-Zoom, #CNC-IMG-Options-Zoom-small').remove();
+      return;
+    }
     modal = $(this.el).find('#CNC-zoom-modal');
     title = modal.find('h3');
     title.text(this.model.get('molecule_chembl_id'));
@@ -46,7 +50,8 @@ CompoundImageView = CardView.extend({
       return $(this).show();
     });
     img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
-    return img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
+    img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
+    return $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
   },
   handleImgSwitch: function(parentView) {
     return function() {

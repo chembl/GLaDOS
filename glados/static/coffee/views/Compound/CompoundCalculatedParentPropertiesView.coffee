@@ -8,8 +8,11 @@ CompoundCalculatedParentPropertiesView = CardView.extend
 
   render: ->
 
-    thisView = @
+    if not @model.get('molecule_properties')?
+      $('#CalculatedCompoundParentProperties').hide()
+      return
 
+    thisView = @
     $.each @mol_properties, ( key, elem_id ) ->
       value = thisView.model.get('molecule_properties')[key]
       value = '--' unless value?

@@ -8,6 +8,10 @@ CompoundCalculatedParentPropertiesView = CardView.extend({
   },
   render: function() {
     var thisView;
+    if (!(this.model.get('molecule_properties') != null)) {
+      $('#CalculatedCompoundParentProperties').hide();
+      return;
+    }
     thisView = this;
     $.each(this.mol_properties, function(key, elem_id) {
       var value;

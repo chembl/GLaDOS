@@ -29,7 +29,6 @@ CompoundImageView = CardView.extend
 
     img.attr('src', img_url)
 
-    $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
 
   initDownloadButtons: ->
     img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
@@ -40,6 +39,13 @@ CompoundImageView = CardView.extend
     $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
 
   initZoomModal: ->
+
+    # If the image strcuture can't be shown, don't activate the zoom modal.
+    img = $(@el).find('#Bck-COMP_IMG')
+    if img.attr('src').indexOf('/static/') > -1
+      $('#CNC-IMG-Options-Zoom, #CNC-IMG-Options-Zoom-small').remove()
+      return
+
     modal = $(@el).find('#CNC-zoom-modal')
 
     title = modal.find('h3')
@@ -54,6 +60,8 @@ CompoundImageView = CardView.extend
 
     img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
+
+    $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
 
   handleImgSwitch: (parentView) ->
     return ->

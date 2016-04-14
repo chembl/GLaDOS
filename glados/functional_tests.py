@@ -1,9 +1,7 @@
 from selenium import webdriver
 import unittest
 import time
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 HOST = 'http://127.0.0.1:8000'
 SLEEP_TIME = 1
@@ -13,8 +11,7 @@ SLEEP_TIME = 1
 # - Compound with more alternate forms: CHEMBL1236196
 
 class CompoundReportCardTest(unittest.TestCase):
-  # tweak this if the web services are taking a bit longer to load the compound.
-  IMPLICIT_WAIT = 10
+  IMPLICIT_WAIT = 1
 
   def setUp(self):
     self.browser = webdriver.Firefox()
@@ -25,6 +22,8 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.quit()
 
   def getURL(self, url, sleeptime):
+    print('Scenario:')
+    print(url)
     self.browser.get(url)
     time.sleep(sleeptime)
 
@@ -476,6 +475,20 @@ class CompoundReportCardTest(unittest.TestCase):
     # Availability Type: Discontinued: 0
     self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_0.svg',
                                  'Availability: Discontinued', 'Discontinued', 'bottom')
+
+    #since no structure is available, the following buttons must not be found in the page
+    removed_ids = ['CNC-IMG-Options-Zoom', 'CNC-IMG-Options-Zoom-small']
+    for elem_id in removed_ids:
+      with self.assertRaises(NoSuchElementException):
+        self.browser.find_element_by_id(elem_id)
+
+    # --------------------------------------
+    # Calculated Compound Parent Properties
+    # --------------------------------------
+
+    #For this compound, the section must be hidden
+    calc_comp_par_props_div = self.browser.find_element_by_id('CalculatedCompoundParentProperties')
+    self.assertFalse(calc_comp_par_props_div.is_displayed())
 
   def test_compound_report_card_scenario_12(self):
 
