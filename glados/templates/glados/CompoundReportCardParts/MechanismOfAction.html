@@ -18,6 +18,11 @@
     {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
+    <!-- Embed Modal Structure -->
+    {% block embed_modal %}
+    {% include "glados/base/embed_modal.html" %}
+    {% endblock %}
+
     <div class="card-content" style="display:none">
 
       <table class="compact-table striped ebi-links hide-on-small-only">
@@ -43,11 +48,6 @@
       </ul>
 
     </div>
-
-    <!-- Embed Modal Structure -->
-    {% block embed_modal %}
-    {% include "glados/base/embed_modal.html" %}
-    {% endblock %}
 
   </div>
 

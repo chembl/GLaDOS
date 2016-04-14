@@ -14,6 +14,11 @@
       {% include "glados/base/card_loaders.html" %}
       {% endblock %}
 
+      <!-- Embed Modal Structure -->
+      {% block embed_modal %}
+      {% include "glados/base/embed_modal.html" %}
+      {% endblock %}
+
     <div class="card-content ebi-links" style="display: none">
 
       <div id='Bck-AlternateForms' class="row">
@@ -24,11 +29,6 @@
       </div>
 
     </div>
-
-    <!-- Embed Modal Structure -->
-    {% block embed_modal %}
-    {% include "glados/base/embed_modal.html" %}
-    {% endblock %}
 
   </div>
 

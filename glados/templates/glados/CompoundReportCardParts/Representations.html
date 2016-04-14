@@ -11,12 +11,12 @@
     {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
-    <div class="card-content" style="display: none">
+     <!-- Embed Modal Structure -->
+    {% block embed_modal %}
+    {% include "glados/base/embed_modal.html" %}
+    {% endblock %}
 
-      <!-- Embed Modal Structure -->
-      {% block embed_modal %}
-      {% include "glados/base/embed_modal.html" %}
-      {% endblock %}
+    <div class="card-content" style="display: none">
 
       <div class="row">
 
