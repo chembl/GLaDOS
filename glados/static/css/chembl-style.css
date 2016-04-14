@@ -1075,15 +1075,18 @@ div#CNC-zoom-modal {
 
 .ebi-links a {
   border-bottom: 0 none;
-  color: #0f2559;
+  /*#009688 teal*/
+  color: #009688;
 }
 
 .ebi-links a:hover {
-  color: #0e6a0e;
+  /*#00bfa5 teal accent-4*/
+  color: #00bfa5;
 }
 
 .ebi-links a:visited {
-  color: #666;
+  /*#9e9e9e grey*/
+  color: #9e9e9e;
 }
 
 .cropped-text-field {
