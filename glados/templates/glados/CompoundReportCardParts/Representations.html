@@ -39,7 +39,7 @@
               </div>
               <div class="inline-block">
 
-               {% block Reps-Molfile-dnld %}
+                {% block Reps-Molfile-dnld %}
                   {% with btn_id='Reps-Molfile-dnld'  %}
                     {% include "glados/base/btn_download_small_2_lines.html" %}
                   {% endwith %}
@@ -52,12 +52,13 @@
                   <p>Editor</p>
                 </a>
               </div>
-              <div class="inline-block">
-                <a class="waves-effect waves-light btn-small teal">
-                  <p><i class="fa fa-clipboard"></i></p>
-                  <p>Copy</p>
-                </a>
-              </div>
+
+               {% block Reps-Molfile-copy %}
+                  {% with btn_id='Reps-Molfile-copy'  %}
+                    {% include "glados/base/btn_copy_small_2_lines.html" %}
+                  {% endwith %}
+                {% endblock %}
+
             </td>
 
           </tr>
@@ -91,8 +92,13 @@
                           {% endwith %}
                         {% endblock %}
 
-                        <a id='CompReps-canonicalSmiles-copy' class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
+                        {% block CompReps-canonicalSmiles-copy %}
+                          {% with btn_id='CompReps-canonicalSmiles-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+
                       </div>
 
                     </td>
@@ -134,9 +140,12 @@
                           {% endwith %}
                         {% endblock %}
 
+                        {% block CompReps-standardInchi-copy %}
+                          {% with btn_id='CompReps-standardInchi-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
 
-                        <a id='CompReps-standardInchi-copy' class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -178,8 +187,13 @@
                           {% endwith %}
                         {% endblock %}
 
-                        <a id='CompReps-standardInchiKey-copy' class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-standardInchiKey-copy %}
+                          {% with btn_id='CompReps-standardInchiKey-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
                       </div>
 
                     </td>
@@ -232,12 +246,17 @@
                   <p>Editor</p>
                 </a>
               </div>
+
               <div class="inline-block">
-                <a class="waves-effect waves-light btn-small teal">
-                  <p><i class="fa fa-clipboard"></i></p>
-                  <p>Copy</p>
-                </a>
+
+               {% block Reps-Molfile-small-copy %}
+                  {% with btn_id='Reps-Molfile-small-copy'  %}
+                    {% include "glados/base/btn_copy_small_2_lines.html" %}
+                  {% endwith %}
+                {% endblock %}
+
               </div>
+
             </td>
 
           </tr>
@@ -265,15 +284,20 @@
 
                       <div class="cropped-text-field-btns">
 
-                         {% block CompReps-canonicalSmiles-small-dnld %}
+                        {% block CompReps-canonicalSmiles-small-dnld %}
                           {% with btn_id='CompReps-canonicalSmiles-small-dnld' %}
                             {% include "glados/base/btn_download_small.html" %}
                           {% endwith %}
                         {% endblock %}
 
+                        {% block CompReps-canonicalSmiles-small-copy %}
+                          {% with btn_id='CompReps-canonicalSmiles-small-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
 
-                        <a id='CompReps-canonicalSmiles-small-copy' class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
+
+
                       </div>
 
                     </td>
@@ -319,8 +343,12 @@
                         {% endblock %}
 
 
-                        <a id="CompReps-standardInchi-small-copy" class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
+                        {% block CompReps-standardInchi-small-copy %}
+                          {% with btn_id='CompReps-standardInchi-small-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
                       </div>
 
                     </td>
@@ -368,8 +396,12 @@
                           {% endwith %}
                         {% endblock %}
 
-                        <a id="CompReps-standardInchiKey-small-copy" class="waves-effect waves-light teal btn-mini"><i
-                          class="fa fa-clipboard"></i></a>
+                        {% block CompReps-standardInchiKey-small-copy %}
+                          {% with btn_id='CompReps-standardInchiKey-small-copy' %}
+                            {% include "glados/base/btn_copy_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
                       </div>
 
                     </td>
