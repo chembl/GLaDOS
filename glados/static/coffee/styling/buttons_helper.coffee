@@ -28,11 +28,9 @@ ButtonsHelper.handleCopy = ->
 
   if $( window ).width() <= MEDIUM_WIDTH
     tooltip.hide()
-    console.log('small!')
     Materialize.toast('Copied!', 1000)
   else
     tooltip.find('span').text('Copied!')
-    console.log('big!')
 
   console.log('copied!')
 
