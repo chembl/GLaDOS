@@ -11,7 +11,7 @@
     {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
-     <!-- Embed Modal Structure -->
+    <!-- Embed Modal Structure -->
     {% block embed_modal %}
     {% include "glados/base/embed_modal.html" %}
     {% endblock %}
@@ -38,10 +38,13 @@
                 </a>
               </div>
               <div class="inline-block">
-                <a class="waves-effect waves-light btn-small teal">
-                  <p><i class="fa fa-download"></i></p>
-                  <p>Download</p>
-                </a>
+
+               {% block Reps-Molfile-dnld %}
+                  {% with btn_id='Reps-Molfile-dnld'  %}
+                    {% include "glados/base/btn_download_small_2_lines.html" %}
+                  {% endwith %}
+                {% endblock %}
+
               </div>
               <div class="inline-block">
                 <a class="waves-effect waves-light btn-small teal">
@@ -81,9 +84,15 @@
                     <td class="cropped-text-field-btns-cell">
 
                       <div class="cropped-text-field-btns">
-                        <a id='CompReps-canonicalSmiles-dnld' class="waves-effect waves-light teal btn-mini download-text" ><i
-                          class="fa fa-download"></i></a>
-                        <a id='CompReps-canonicalSmiles-copy' class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-canonicalSmiles-dnld %}
+                          {% with btn_id='CompReps-canonicalSmiles-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+                        <a id='CompReps-canonicalSmiles-copy' class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -118,9 +127,16 @@
 
                     <td class="cropped-text-field-btns-cell">
                       <div class="cropped-text-field-btns">
-                        <a id='CompReps-standardInchi-dnld' class="waves-effect waves-light teal btn-mini download-text" ><i
-                          class="fa fa-download"></i></a>
-                        <a id='CompReps-standardInchi-copy' class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-standardInchi-dnld %}
+                          {% with btn_id='CompReps-standardInchi-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+
+                        <a id='CompReps-standardInchi-copy' class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -155,9 +171,15 @@
                     <td class="cropped-text-field-btns-cell">
 
                       <div class="cropped-text-field-btns">
-                        <a id='CompReps-standardInchiKey-dnld' class="waves-effect waves-light teal btn-mini download-text" ><i
-                          class="fa fa-download"></i></a>
-                        <a id='CompReps-standardInchiKey-copy' class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-standardInchiKey-dnld %}
+                          {% with btn_id='CompReps-standardInchiKey-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+                        <a id='CompReps-standardInchiKey-copy' class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -196,10 +218,13 @@
                 </a>
               </div>
               <div class="inline-block">
-                <a class="waves-effect waves-light btn-small teal">
-                  <p><i class="fa fa-download"></i></p>
-                  <p>Download</p>
-                </a>
+
+                {% block Reps-Molfile-small-dnld %}
+                  {% with btn_id='Reps-Molfile-small-dnld'  %}
+                    {% include "glados/base/btn_download_small_2_lines.html" %}
+                  {% endwith %}
+                {% endblock %}
+
               </div>
               <div class="inline-block">
                 <a class="waves-effect waves-light btn-small teal">
@@ -239,10 +264,16 @@
                     <td class="cropped-text-field-btns-cell">
 
                       <div class="cropped-text-field-btns">
-                        <a id="CompReps-canonicalSmiles-small-dnld" class="waves-effect waves-light teal btn-mini download-text"
-                           ><i
-                          class="fa fa-download"></i></a>
-                        <a id='CompReps-canonicalSmiles-small-copy' class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                         {% block CompReps-canonicalSmiles-small-dnld %}
+                          {% with btn_id='CompReps-canonicalSmiles-small-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+
+                        <a id='CompReps-canonicalSmiles-small-copy' class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -280,9 +311,16 @@
                     <td class="cropped-text-field-btns-cell">
 
                       <div class="cropped-text-field-btns">
-                        <a id="CompReps-standardInchi-small-dnld" class="waves-effect waves-light teal btn-mini download-text"><i
-                          class="fa fa-download"></i></a>
-                        <a id="CompReps-standardInchi-small-copy" class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-standardInchi-small-dnld %}
+                          {% with btn_id='CompReps-standardInchi-small-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+
+                        <a id="CompReps-standardInchi-small-copy" class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>
@@ -320,11 +358,18 @@
 
                     <td class="cropped-text-field-btns-cell">
 
+
+
                       <div class="cropped-text-field-btns">
-                        <a id="CompReps-standardInchiKey-small-dnld" class="waves-effect waves-light teal btn-mini download-text"
-                           ><i
-                          class="fa fa-download"></i></a>
-                        <a id="CompReps-standardInchiKey-small-copy" class="waves-effect waves-light teal btn-mini"><i class="fa fa-clipboard"></i></a>
+
+                        {% block CompReps-standardInchiKey-small-dnld %}
+                          {% with btn_id='CompReps-standardInchiKey-small-dnld' %}
+                            {% include "glados/base/btn_download_small.html" %}
+                          {% endwith %}
+                        {% endblock %}
+
+                        <a id="CompReps-standardInchiKey-small-copy" class="waves-effect waves-light teal btn-mini"><i
+                          class="fa fa-clipboard"></i></a>
                       </div>
 
                     </td>

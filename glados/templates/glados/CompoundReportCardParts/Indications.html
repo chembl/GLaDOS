@@ -22,16 +22,19 @@
 
           <div class="inications-dowload">
 
-            <a class="white-text waves-effect waves-light teal btn-mini tooltipped hide-on-small-only"
-               data-position="bottom"
-               data-tooltip="Download">
-              <i class="fa fa-download"></i>
-            </a>
+            {% block CalcIndications-dnld %}
+              {% with btn_id='CalcIndications-dnld' additional_classes='hide-on-small-only' %}
+                {% include "glados/base/btn_download_small.html" %}
+              {% endwith %}
+            {% endblock %}
 
-            <a class="waves-effect waves-light btn-small teal hide-on-med-and-up">
-              <p><i class="fa fa-download"></i></p>
-              <p>Download</p>
-            </a>
+            {% block CalcIndications-small-dnld %}
+              {% with btn_id='CalcIndications-small-dnld' additional_classes='hide-on-med-and-up' %}
+                {% include "glados/base/btn_download_small_2_lines.html" %}
+              {% endwith %}
+            {% endblock %}
+
+
 
           </div>
 
