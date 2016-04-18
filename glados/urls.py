@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from glados.utils import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
+from . import views
 
 urlpatterns = [
 
@@ -26,4 +27,7 @@ urlpatterns = [
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
+
+  # ex: /polls/5/
+  url(r'^acknowledgements/$', views.acks, name='ack_detail'),
 ]
