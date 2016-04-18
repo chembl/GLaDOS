@@ -87,6 +87,16 @@ html, body {
   overflow-x: hidden;
 }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1057,7 +1067,6 @@ div#CNC-zoom-modal {
   margin-left: 4px;
 }
 
-
 .inline-block {
   display: inline-block;
   margin-top: 2px;
@@ -1183,7 +1192,7 @@ div#CNC-zoom-modal {
   background-color: #009688;
 }
 
-.inications-dowload{
+.inications-dowload {
   margin-top: 14px;
 }
 
@@ -1215,7 +1224,7 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.ebi-breadcrumb{
+.ebi-breadcrumb {
   font-size: 80%;
 }
 
