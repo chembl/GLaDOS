@@ -22,7 +22,13 @@
       <div id="TargetNameAndClassification" class="section scrollspy">
         <h3>Target Name and Classification</h3>
 
-        <p>stuff</p>
+        <div class="row">
+
+        {% block tnc %}
+          {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+        {% endblock %}
+
+        </div>
 
 
       </div>
