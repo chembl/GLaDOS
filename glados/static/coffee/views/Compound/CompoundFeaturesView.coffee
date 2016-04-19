@@ -34,8 +34,7 @@ CompoundFeaturesView = CardView.extend
       active_class: @getMolFeatureDetails(property, 0)
       filename: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
-      description: @getMolFeatureDetails(property, 3)
-      tooltip_position: @getMolFeatureDetails(property, 4)
+      tooltip_position: @getMolFeatureDetails(property, 3)
 
   getMolFeatureDetails: (feature, position) ->
     return @molFeatures[feature][@model.get(feature)][position]
@@ -43,39 +42,39 @@ CompoundFeaturesView = CardView.extend
   # active class,filename, tooltip, mobile description, tooltip position
   molFeatures:
     'molecule_type':
-      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule', 'Small Molecule', 'top']
-      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'Antibody', 'top']
-      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'Enzyme', 'top']
+      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule','top']
+      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'top']
+      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'top']
     'first_in_class':
-      '-1': ['', 'first_in_class', 'First in Class: Undefined', 'First in Class', 'top']
-      '0': ['', 'first_in_class', 'First in Class: No', 'First in Class', 'top']
-      '1': ['active', 'first_in_class', 'First in Class: Yes', 'First in Class', 'top']
+      '-1': ['', 'first_in_class', 'First in Class: Undefined', 'top']
+      '0': ['', 'first_in_class', 'First in Class: No', 'top']
+      '1': ['active', 'first_in_class', 'First in Class: Yes', 'top']
     'chirality':
-      '-1': ['', 'chirality_0', 'Chirality: Undefined', 'Chirality: Undefined', 'top']
-      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top']
-      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomer', 'Single Stereoisomer', 'top']
-      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top']
+      '-1': ['', 'chirality_0', 'Chirality: Undefined', 'top']
+      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'top']
+      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomer', 'top']
+      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'top']
     'prodrug':
-      '-1': ['', 'prodrug', 'Prodrug: Undefined', 'Prodrug', 'top'],
-      '0': ['', 'prodrug', 'Prodrug: No', 'Prodrug', 'top']
-      '1': ['active', 'prodrug', 'Prodrug: Yes', 'Prodrug', 'top']
+      '-1': ['', 'prodrug', 'Prodrug: Undefined', 'top'],
+      '0': ['', 'prodrug', 'Prodrug: No', 'top']
+      '1': ['active', 'prodrug', 'Prodrug: Yes',  'top']
     'oral':
-      'true': ['active', 'oral', 'Oral: Yes', 'Oral', 'bottom']
-      'false': ['', 'oral', 'Oral: No', 'Oral', 'bottom']
+      'true': ['active', 'oral', 'Oral: Yes', 'bottom']
+      'false': ['', 'oral', 'Oral: No', 'bottom']
     'parenteral':
-      'true': ['active', 'parenteral', 'Parenteral: Yes', 'Parenteral', 'bottom']
-      'false': ['', 'parenteral', 'Parenteral: No', 'Parenteral', 'bottom']
+      'true': ['active', 'parenteral', 'Parenteral: Yes', 'bottom']
+      'false': ['', 'parenteral', 'Parenteral: No', 'bottom']
     'topical':
-      'true': ['active', 'topical', 'Topical: Yes', 'Topical', 'bottom']
-      'false': ['', 'topical', 'Topical: No', 'Topical', 'bottom']
+      'true': ['active', 'topical', 'Topical: Yes', 'bottom']
+      'false': ['', 'topical', 'Topical: No', 'bottom']
     'black_box_warning':
-      '0': ['', 'black_box', 'Black Box: No', 'Black Box', 'bottom']
-      '1': ['active', 'black_box', 'Black Box: Yes', 'Black Box', 'bottom']
+      '0': ['', 'black_box', 'Black Box: No', 'bottom']
+      '1': ['active', 'black_box', 'Black Box: Yes', 'bottom']
     'availability_type':
-      '-1': ['', 'availability_0', 'Availability: Undefined', 'Availability: Undefined', 'bottom']
-      '0': ['active', 'availability_0', 'Availability: Discontinued', 'Discontinued', 'bottom']
-      '1': ['active', 'availability_1', 'Availability: Prescription Only', 'Prescription Only', 'bottom']
-      '2': ['active', 'availability_2', 'Availability: Over the Counter', 'Over the Counter', 'bottom']
+      '-1': ['', 'availability_0', 'Availability: Undefined', 'bottom']
+      '0': ['active', 'availability_0', 'Availability: Discontinued', 'bottom']
+      '1': ['active', 'availability_1', 'Availability: Prescription Only', 'bottom']
+      '2': ['active', 'availability_2', 'Availability: Over the Counter', 'bottom']
     'ro5':
-      'true': ['active', 'rule_of_five', 'Rule Of Five: Yes', 'Rule Of Five', 'top']
-      'false': ['', 'rule_of_five', 'Rule Of Five: No', 'Rule Of Five', 'top']
+      'true': ['active', 'rule_of_five', 'Rule Of Five: Yes', 'top']
+      'false': ['', 'rule_of_five', 'Rule Of Five: No', 'top']

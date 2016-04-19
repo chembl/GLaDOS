@@ -46,7 +46,7 @@ class CompoundReportCardTest(unittest.TestCase):
     href = canonical_smiles_dwnld_btn.get_attribute('href')
     self.assertEquals(href, data)
 
-  def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip, mobile_description,
+  def assert_molecule_feature(self, elem_id, should_be_active, img_src, img_tooltip,
                               tooltip_position):
 
     molecule_type_div = self.browser.find_element_by_id(elem_id)
@@ -64,9 +64,6 @@ class CompoundReportCardTest(unittest.TestCase):
                      img_tooltip),
     self.assertEqual(molecule_type_img.get_attribute('data-position'),
                      tooltip_position)
-    molecule_type_p = molecule_type_div.find_element_by_class_name('mol-features-detail')
-    self.assertEqual(molecule_type_p.get_attribute('innerHTML'),
-                     mobile_description)
 
   def assert_alternate_forms(self, chembl_ids_list):
 
@@ -165,34 +162,34 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is a small molecule
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_small_molecule.svg',
-                                 'Molecule Type: small molecule', 'Small Molecule', 'top')
+                                 'Molecule Type: small molecule', 'top')
     # Rule of five: No. false
     self.assert_molecule_feature('Bck-RuleOfFive', True, HOST + '/static/img/molecule_features/rule_of_five.svg',
-                                 'Rule Of Five: Yes', 'Rule Of Five', 'top')
+                                 'Rule Of Five: Yes', 'top')
 
     # this compound is not first in class
     self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
-                                 'First in Class: No', 'First in Class', 'top')
+                                 'First in Class: No', 'top')
 
     # Chirality: single stereoisomer: 1
     self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_1.svg',
-                                 'Chirality: Single Stereoisomer', 'Single Stereoisomer', 'top')
+                                 'Chirality: Single Stereoisomer', 'top')
 
     # Ora yes: 'true'
     self.assert_molecule_feature('Bck-Oral', True, HOST + '/static/img/molecule_features/oral.svg',
-                                 'Oral: Yes', 'Oral', 'bottom')
+                                 'Oral: Yes', 'bottom')
 
     # Topical No: false
     self.assert_molecule_feature('Bck-Topical', False, HOST + '/static/img/molecule_features/topical.svg',
-                                 'Topical: No', 'Topical', 'bottom')
+                                 'Topical: No', 'bottom')
 
     # Black Box No: 0
     self.assert_molecule_feature('Bck-BlackBox', False, HOST + '/static/img/molecule_features/black_box.svg',
-                                 'Black Box: No', 'Black Box', 'bottom')
+                                 'Black Box: No',  'bottom')
 
     # Availability Type: Over the counter: 2
     self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_2.svg',
-                                 'Availability: Over the Counter', 'Over the Counter', 'bottom')
+                                 'Availability: Over the Counter', 'bottom')
 
     # --------------------------------------
     # Alternate Forms of Compound in ChEMBL
@@ -234,19 +231,19 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # First in class is undefined: -1
     self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
-                                 'First in Class: Undefined', 'First in Class', 'top')
+                                 'First in Class: Undefined', 'top')
 
     # Chirality Undefined: -1
     self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_0.svg',
-                                 'Chirality: Undefined', 'Chirality: Undefined', 'top')
+                                 'Chirality: Undefined', 'top')
 
     # Prodrug Undefined: -1
     self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
-                                 'Prodrug: Undefined', 'Prodrug', 'top')
+                                 'Prodrug: Undefined', 'top')
 
     # Availability Type is Undefined: -1
     self.assert_molecule_feature('Bck-Availability', False, HOST + '/static/img/molecule_features/availability_0.svg',
-                                 'Availability: Undefined', 'Availability: Undefined', 'bottom')
+                                 'Availability: Undefined', 'bottom')
 
   def test_compund_report_card_scenario_3(self):
 
@@ -266,7 +263,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is an Antibody
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_antibody.svg',
-                                 'Molecule Type: Antibody', 'Antibody', 'top')
+                                 'Molecule Type: Antibody', 'top')
 
   def test_compound_report_card_scenario_4(self):
 
@@ -318,7 +315,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Rule of five: No. false
     self.assert_molecule_feature('Bck-RuleOfFive', False, HOST + '/static/img/molecule_features/rule_of_five.svg',
-                                 'Rule Of Five: No', 'Rule Of Five', 'top')
+                                 'Rule Of Five: No', 'top')
 
   def test_compound_report_card_scenario_6(self):
 
@@ -383,27 +380,27 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Chirality: achiral molecule: 2
     self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_1.svg',
-                                 'Chirality: Achiral Molecule', 'Achiral Molecule', 'top')
+                                 'Chirality: Achiral Molecule', 'top')
 
     # Oral No: false
     self.assert_molecule_feature('Bck-Oral', False, HOST + '/static/img/molecule_features/oral.svg',
-                                 'Oral: No', 'Oral', 'bottom')
+                                 'Oral: No', 'bottom')
 
     # Parenteral Yes: true
     self.assert_molecule_feature('Bck-Parenteral', True, HOST + '/static/img/molecule_features/parenteral.svg',
-                                 'Parenteral: Yes', 'Parenteral', 'bottom')
+                                 'Parenteral: Yes', 'bottom')
 
     # Topical Yes: true
     self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
-                                 'Topical: Yes', 'Topical', 'bottom')
+                                 'Topical: Yes', 'bottom')
 
     # Black Box Warning No: 0
     self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
-                                 'Topical: Yes', 'Topical', 'bottom')
+                                 'Topical: Yes', 'bottom')
 
     # Availability Type: Prescription Only: 1
     self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_1.svg',
-                                 'Availability: Prescription Only', 'Prescription Only', 'bottom')
+                                 'Availability: Prescription Only', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
 
@@ -470,11 +467,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this is an Enzyme
     self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_enzyme.svg',
-                                 'Molecule Type: Enzyme', 'Enzyme', 'top')
+                                 'Molecule Type: Enzyme', 'top')
 
     # Availability Type: Discontinued: 0
     self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_0.svg',
-                                 'Availability: Discontinued', 'Discontinued', 'bottom')
+                                 'Availability: Discontinued', 'bottom')
 
     #since no structure is available, the following buttons must not be found in the page
     removed_ids = ['CNC-IMG-Options-Zoom', 'CNC-IMG-Options-Zoom-small']
@@ -500,7 +497,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # this compound is first in class
     self.assert_molecule_feature('Bck-FirstInClass', True, HOST + '/static/img/molecule_features/first_in_class.svg',
-                                 'First in Class: Yes', 'First in Class', 'top')
+                                 'First in Class: Yes', 'top')
 
   def test_compound_report_card_scenario_13(self):
 
@@ -512,11 +509,11 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Chirality: achiral molecule: 0
     self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_0.svg',
-                                 'Chirality: Racemic Mixture', 'Racemic Mixture', 'top')
+                                 'Chirality: Racemic Mixture', 'top')
 
     # Is no prodrug: 0
     self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
-                                 'Prodrug: No', 'Prodrug', 'top')
+                                 'Prodrug: No', 'top')
 
   def test_compound_report_card_scenario_14(self):
 
@@ -528,7 +525,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Is prodrug: 1
     self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
-                                 'Prodrug: Yes', 'Prodrug', 'top')
+                                 'Prodrug: Yes', 'top')
 
   def test_compound_report_card_scenario_15(self):
 
@@ -540,7 +537,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # Black Box No: 0
     self.assert_molecule_feature('Bck-BlackBox', True, HOST + '/static/img/molecule_features/black_box.svg',
-                                 'Black Box: Yes', 'Black Box', 'bottom')
+                                 'Black Box: Yes', 'bottom')
 
 
 if __name__ == '__main__':
