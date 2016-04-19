@@ -1,10 +1,26 @@
-<div class="col s12 m10 l12">
+{% extends "glados/base/basic_table_card.html" %}
 
-  <div id='CrossReferencesCard' class="card chembl-card grey lighten-5">
+{% block card_id %}CrossReferencesCard{% endblock %}
 
-    <div class="card-content">
+{% block buttons %}
 
-      <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable" >
+  {% block CrossRefs-dnld %}
+    {% with btn_id='CalcCompProps-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block CrossRefs-small-dnld %}
+    {% with btn_id='CalcCompProps-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block expandable %}
+
+<ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable" >
         <li>
           <div class="collapsible-header">
             <a href="http://www.whocc.no/atc_ddd_index/">
@@ -168,8 +184,4 @@
 
       </ul>
 
-    </div>
-
-  </div>
-
-</div>
+{% endblock %}
