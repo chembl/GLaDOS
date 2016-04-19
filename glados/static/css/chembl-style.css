@@ -2233,15 +2233,15 @@ div#CompoundNameAndClassification .CNC-img-btn {
 .td-oneline {
   white-space: nowrap; }
 
-div#CompoundNameAndClassification .CNC-table-lastrow {
-  border-bottom: 0; }
-
 div#CompoundNameAndClassification .CNC-table td {
   padding: 2px;
   font-size: 80%; }
 
-.fixed-width-column {
+.fixed-width-column-12 {
   width: 12em; }
+
+.fixed-width-column-11 {
+  width: 11em; }
 
 div#CompoundNameAndClassification .card-panel {
   padding: 5px;
