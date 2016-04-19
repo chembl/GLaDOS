@@ -1648,9 +1648,6 @@
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif; }
 
-body {
-  line-height: 20px; }
-
 h1 {
   color: #f7f7f7;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
@@ -1708,13 +1705,12 @@ main {
   border-bottom: 1px solid #d1d1d1;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   margin-bottom: 5%; }
-
 .side-nav li.menu-logo:hover {
   background-color: #207a7a; }
-
-.side-nav.fixed li.menu-logo {
+.side-nav li.menu-logo {
   height: 90px; }
 
+.side-nav.fixed,
 .side-nav li.menu-logo a {
   height: 100%;
   padding: 0px; }
@@ -1742,9 +1738,6 @@ main {
 .side-nav li {
   height: 34px;
   line-height: 34px; }
-
-.side-nav a {
-  padding-top: 2px; }
 
 .side-nav span.badge {
   position: relative;
