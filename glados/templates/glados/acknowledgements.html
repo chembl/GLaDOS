@@ -13,7 +13,7 @@
   <h3>Current Awards</h3>
 
   {% if current_acks %}
-  <ul>
+  <ul class="acks-list">
     {% for ack in current_acks %}
     <li><b>{{ ack.dates }}: </b>{{ ack.content }}</li>
     {% endfor %}
@@ -25,7 +25,7 @@
   <h3>Past Awards</h3>
 
   {% if old_acks %}
-  <ul>
+  <ul class="acks-list">
     {% for ack in old_acks %}
     <li><b>{{ ack.dates }}: </b>{{ ack.content }}</li>
     {% endfor %}

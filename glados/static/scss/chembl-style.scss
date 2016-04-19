@@ -1,6 +1,8 @@
 /*
 * ChEMBL custom style added to materialize
 */
+//- materialize colour
+@import "components/color";
 
 /**
 * Fonts
@@ -1226,4 +1228,17 @@ div#CNC-zoom-modal {
 
 .ebi-breadcrumb {
   font-size: 80%;
+}
+
+/**
+* Acknowledgements
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.acks-list {
+
+  li {
+    padding: 2px 0;
+  }
+
 }
