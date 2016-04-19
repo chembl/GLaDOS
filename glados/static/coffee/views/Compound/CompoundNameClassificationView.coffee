@@ -111,7 +111,7 @@ CompoundNameClassificationView = CardView.extend
 
     else
       synonyms_source = '{{#each items}}' +
-        ' <span class="CNC-chip-syn">{{ this }}</span> ' +
+        ' <span class="chip-syn">{{ this }}</span> ' +
         '{{/each}}'
 
       syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())

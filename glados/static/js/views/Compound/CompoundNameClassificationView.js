@@ -102,7 +102,7 @@ CompoundNameClassificationView = CardView.extend({
     if (Object.keys(unique_synonyms).length === 0) {
       $(this.el).find('#CompNameClass-synonyms').parent().parent().parent().hide();
     } else {
-      synonyms_source = '{{#each items}}' + ' <span class="CNC-chip-syn">{{ this }}</span> ' + '{{/each}}';
+      synonyms_source = '{{#each items}}' + ' <span class="chip-syn">{{ this }}</span> ' + '{{/each}}';
       syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())({
         items: Object.keys(unique_synonyms)
       });

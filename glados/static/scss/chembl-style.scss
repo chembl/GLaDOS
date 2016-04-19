@@ -43,6 +43,9 @@ $h4-color: #222;
 $h5-color: #222;
 $h6-color: #222;
 
+$synonyms-color:color('green', 'lighten-4');
+$tradenames-color: color('light-green', 'lighten-3');
+
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
 }
@@ -814,8 +817,8 @@ div#CompoundNameAndClassification .comp-phase-0 {
   background-color: #9e9e9e;
 }
 
-div#CompoundNameAndClassification .CNC-chip-tn,
-div#CompoundNameAndClassification .CNC-chip-syn {
+.chip-tn,
+.chip-syn {
   font-size: 100%;
   margin: 1px 0;
   line-height: 10px;
@@ -827,25 +830,25 @@ div#CompoundNameAndClassification .CNC-chip-syn {
   height: 20px;
 }
 
-div#CompoundNameAndClassification .CNC-chip-syn {
-  background-color: #c8e6c9;
+.chip-syn {
+  background-color: $synonyms-color;
 }
 
-div#CompoundNameAndClassification .CNC-chip-tn {
-  background-color: #c5e1a5;
+.chip-tn {
+  background-color: $tradenames-color;
 }
 
-div#CompoundNameAndClassification .CNC-btn {
+.CNC-btn {
   padding: 0 5px;
 }
 
-div#CompoundNameAndClassification .cropped {
+.cropped {
   overflow: hidden;
   max-height: 88px;
   max-width: 93%;
 }
 
-div#CompoundNameAndClassification .expanded {
+.expanded {
   overflow: visible;
   max-height: none;
   max-width: 100%;
