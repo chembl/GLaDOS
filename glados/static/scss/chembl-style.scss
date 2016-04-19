@@ -1,8 +1,9 @@
+/*colours from materialize*/
+@import "components/color";
+
 /*
 * ChEMBL custom style added to materialize
 */
-//- materialize colour
-@import "components/color";
 
 /**
 * Fonts
@@ -34,6 +35,7 @@
 * Typograhpy and colours
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
 
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
@@ -1084,20 +1086,23 @@ div#CNC-zoom-modal {
   padding: 5px;
 }
 
-.ebi-links a {
-  border-bottom: 0 none;
-  /*#009688 teal*/
-  color: #009688;
-}
+.ebi-links {
 
-.ebi-links a:hover {
-  /*#00bfa5 teal accent-4*/
-  color: #00bfa5;
-}
+  a {
+    border-bottom: 0 none;
+    color: color("teal", "base")
+  }
 
-.ebi-links a:visited {
-  /*#9e9e9e grey*/
-  color: #9e9e9e;
+  a:hover {
+
+    color: color("teal", "accent-4")
+  }
+
+  a:visited {
+
+    color: color("grey", "base")
+  }
+
 }
 
 .cropped-text-field {

@@ -26,6 +26,9 @@ urlpatterns = [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/calculated_properties/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
+  url(r'^target_report_card/$',
+      DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
+
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
 
   # ex: /polls/5/

@@ -1,0 +1,163 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound report card{% endblock %}
+
+{% block content %}
+
+<div class="container main-container">
+
+
+  {% block breadcrumb %}
+  {% include "glados/base/breadcrumb.html" %}
+  {% endblock %}
+
+  <div class="row">
+
+    <!-- the scrollspy disappears in medium and down -->
+    <div class="col m12 l10">
+
+      <h2>Target Report Card</h2>
+
+      <div class="divider"></div>
+      <div id="TargetNameAndClassification" class="section scrollspy">
+        <h3>Target Name and Classification</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetComponents" class="section scrollspy">
+        <h3>Target Components</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy">
+        <h3>Approved Drugs And Clinical Candidates</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetAssociatedAssays" class="section scrollspy">
+        <h3>Target Associated Assays</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetLigandEfficiencies" class="section scrollspy">
+        <h3>Target Ligand Efficiencies</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetAssociatedCompoundProperties" class="section scrollspy">
+        <h3>Target Associated Compound Properties</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetCrossReferencesGene" class="section scrollspy">
+        <h3>Target Cross References - Gene</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetCrossReferencesProtein" class="section scrollspy">
+        <h3>Target Cross References - Protein</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="TargetCrossReferencesDomain" class="section scrollspy">
+        <h3>Target Cross References - Domain</h3>
+
+        <p>stuff</p>
+
+
+      </div>
+
+
+    </div>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- Scrolspy -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <div class="col l2 hide-on-med-and-down">
+
+      <div class="scrollspy-wrapper pin-top">
+
+        <ul class="section table-of-contents">
+          <li><a href="#TargetNameAndClassification">
+            <small>Name And Classification</small>
+          </a></li>
+          <li><a href="#TargetComponents">
+            <small>Components</small>
+          </a></li>
+          <li><a href="#ApprovedDrugsAndClinicalCandidates">
+            <small>Drugs And Clinical Candidates</small>
+          </a></li>
+          <li><a href="#TargetAssociatedAssays">
+            <small>Associated Assays</small>
+          </a></li>
+          <li><a href="#TargetLigandEfficiencies">
+            <small>Ligand Efficiencies</small>
+          </a></li>
+          <li><a href="#TargetAssociatedCompoundProperties">
+            <small>Associated Compound Properties</small>
+          </a></li>
+          <li><a href="#TargetCrossReferencesGene">
+            <small>Gene Cross References</small>
+          </a></li>
+          <li><a href="#TargetCrossReferencesProtein">
+            <small>Protein Cross References</small>
+          </a></li>
+          <li><a href="#TargetCrossReferencesDomain">
+            <small>Domain Cross References</small>
+          </a></li>
+        </ul>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block custom_js %}
+<script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+$('.scrollspy').scrollSpy();
+initializeScrollSpyHelper();
+
+{% endblock %}
+
