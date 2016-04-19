@@ -51,7 +51,12 @@
       <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy">
         <h3>Approved Drugs And Clinical Candidates</h3>
 
-        <p>stuff</p>
+         <div class="row">
+        {% block adcc %}
+          {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
+        {% endblock %}
+
+        </div>
 
 
       </div>
