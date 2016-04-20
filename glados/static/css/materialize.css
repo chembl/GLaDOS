@@ -1797,8 +1797,7 @@ abbr[title] {
  */
 b,
 strong {
-  font-weight: bold;
-  color: #004a43; }
+  font-weight: bold; }
 
 /**
  * Address styling not present in Safari and Chrome.

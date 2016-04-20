@@ -1,5 +1,6 @@
 /*colours from materialize*/
 @import "components/color";
+@import "components/variables";
 
 /*
 * ChEMBL custom style added to materialize
@@ -84,6 +85,11 @@ h6 {
   color: $h5-color;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   font-size: 123.1%;
+}
+
+b,
+strong {
+  color: $primary-color-dark
 }
 
 /**
