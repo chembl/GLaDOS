@@ -92,7 +92,12 @@
       <div id="TargetCrossReferencesGene" class="section scrollspy">
         <h3>Target Cross References - Gene</h3>
 
-        <p>stuff</p>
+        <div class="row">
+        {% block gtcr %}
+          {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
+        {% endblock %}
+
+        </div>
 
 
       </div>
