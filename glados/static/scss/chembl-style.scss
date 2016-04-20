@@ -1001,6 +1001,21 @@ div#CNC-zoom-modal {
   right: 0;
 }
 
+.menu-close-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.menu-open-icon {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  bottom: 10px;
+}
+
 .img-zoom-menu {
   opacity: 0.8;
   position: absolute;

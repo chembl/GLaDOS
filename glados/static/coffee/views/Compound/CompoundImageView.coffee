@@ -63,12 +63,21 @@ CompoundImageView = CardView.extend
 
     $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
 
+    $('#Bck-Comp-Img-zoom-menuclose').click ->
+      $('#Bck-Comp-Img-zoom-menu').slideUp ->
+       $('#Bck-Comp-Img-zoom-menuopen').show()
+
+    $('#Bck-Comp-Img-zoom-menuopen').click ->
+      $('#Bck-Comp-Img-zoom-menu').slideDown()
+      $(@).hide()
+
   handleImgSwitch: (parentView) ->
     return ->
       img = $(parentView.el).find('#Bck-Comp-Img-zoom')
       $('#Bck-Comp-Img-zoom-preloader').show()
       img.hide()
       img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
+
 
 
   getParamsFromSwitches: ->

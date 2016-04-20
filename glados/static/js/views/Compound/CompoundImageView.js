@@ -51,7 +51,16 @@ CompoundImageView = CardView.extend({
     });
     img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
     img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
-    return $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
+    $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
+    $('#Bck-Comp-Img-zoom-menuclose').click(function() {
+      return $('#Bck-Comp-Img-zoom-menu').slideUp(function() {
+        return $('#Bck-Comp-Img-zoom-menuopen').show();
+      });
+    });
+    return $('#Bck-Comp-Img-zoom-menuopen').click(function() {
+      $('#Bck-Comp-Img-zoom-menu').slideDown();
+      return $(this).hide();
+    });
   },
   handleImgSwitch: function(parentView) {
     return function() {
