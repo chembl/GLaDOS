@@ -273,6 +273,22 @@ cropTextIfNecessary = (input_div)->
     input_field.value = originalInputValue
 
 
+# ------------------------------------------------------------
+# sidenav
+# ------------------------------------------------------------
+
+### *
+  *  This is necessary to fix the bug of the side nav not appearing correctly.
+###
+complementaryinitSideNav = ->
+
+  $('.button-collapse').each ->
+
+    currentBtn = $(this)
+    currentBtn.click ->
+
+      activated = $('#' + $(@).attr('data-activates'))
+      activated.show()
 
 
 

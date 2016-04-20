@@ -1781,7 +1781,8 @@ main {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .side-nav {
-  width: 160px; }
+  width: 160px;
+  transform: unset; }
   .side-nav li.menu-logo {
     text-align: center;
     height: 105px;
