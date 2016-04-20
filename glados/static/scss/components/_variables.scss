@@ -37,7 +37,7 @@ $primary-color: color("teal", "base") !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
-$secondary-color: color("light-green", "lighten-1") !default;
+$secondary-color: color("green", "lighten-1") !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 $link-color: color("teal", "base") !default;
@@ -239,7 +239,7 @@ $slider-indicator-color: color('green', 'base') !default;
 /* 16. Spinners | Loaders
    ========================================================================== */
 
-$spinner-default-color: $secondary-color !default;
+$spinner-default-color: $primary-color !default;
 
 
 /* 17. Tabs
@@ -306,4 +306,4 @@ $collection-link-color: $secondary-color !default;
 /* 24. Progress Bar
    ========================================================================== */
 
-$progress-bar-color: $secondary-color !default;
+$progress-bar-color: $primary-color !default;
