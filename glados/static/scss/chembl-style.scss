@@ -111,76 +111,75 @@ main {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.side-nav {
+$side-nav-width: 160px;
+$sidenav-links-side-padding: 8px;
+$sidenav-links-lineheight: 38px;
 
+.side-nav {
   li.menu-logo {
     text-align: center;
     height: 105px;
-    background-color: $h2-color;
+    background-color: #207a7a;
     border-bottom: 1px solid #d1d1d1;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     margin-bottom: 5%;
-  }
-
-  li.menu-logo:hover {
-    background-color: $h2-color;
-  }
-
-  li.menu-logo {
+    &:hover {
+      background-color: #207a7a;
+    }
     height: 90px;
   }
+  &.fixed {
+    height: 100%;
+    padding: 0px;
+  }
+  li.menu-logo {
+    a {
+      height: 100%;
+      padding: 0px;
+    }
+    img {
+      height: 90%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+  }
+  width: $side-nav-width;
 
+  &.fixed {
+    padding-top: 32px;
+    z-index: 960;
+
+    a {
+      padding: 0 $sidenav-links-side-padding;
+    }
+
+  }
+
+  li {
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    padding-left: 5px;
+    &:hover {
+      background-color: #b2dfdb;
+    }
+  }
+  a, li {
+    height: 34px;
+    line-height: $sidenav-links-lineheight;
+  }
+  span.badge {
+    position: relative;
+    padding: 3px;
+    border-radius: 4px;
+    text-align: center;
+    left: 5px;
+    bottom: 2px;
+  }
 }
 
-.side-nav.fixed,
-.side-nav li.menu-logo a {
-  height: 100%;
-  padding: 0px;
-}
-
-.side-nav li.menu-logo img {
-  height: 90%;
-  padding: 5px;
-  margin-top: 5px;
-}
-
-.side-nav {
-  width: 180px;
-}
-
-.side-nav.fixed {
-  padding-top: 32px;
-  z-index: 960;
-}
-
-.side-nav li {
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  padding-left: 5px;
-}
-
-.side-nav li:hover {
-  background-color: #b2dfdb;
-}
-
-.side-nav a,
-.side-nav li {
-  height: 34px;
-  line-height: 34px;
-}
-
-
-.side-nav span.badge {
-  position: relative;
-  padding: 3px;
-  border-radius: 4px;
-  text-align: center;
-  left: 5px;
-  bottom: 2px;
-}
 
 main {
   /* to prevent the side bar from overlapping the main contens */
-  padding-left: 180px;
+  padding-left: $side-nav-width;
 }
 
 /**

@@ -1698,58 +1698,52 @@ main {
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.side-nav li.menu-logo {
-  text-align: center;
-  height: 105px;
-  background-color: #207a7a;
-  border-bottom: 1px solid #d1d1d1;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  margin-bottom: 5%; }
-.side-nav li.menu-logo:hover {
-  background-color: #207a7a; }
-.side-nav li.menu-logo {
-  height: 90px; }
-
-.side-nav.fixed,
-.side-nav li.menu-logo a {
-  height: 100%;
-  padding: 0px; }
-
-.side-nav li.menu-logo img {
-  height: 90%;
-  padding: 5px;
-  margin-top: 5px; }
-
 .side-nav {
-  width: 180px; }
-
-.side-nav.fixed {
-  padding-top: 32px;
-  z-index: 960; }
-
-.side-nav li {
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  padding-left: 5px; }
-
-.side-nav li:hover {
-  background-color: #b2dfdb; }
-
-.side-nav a,
-.side-nav li {
-  height: 34px;
-  line-height: 34px; }
-
-.side-nav span.badge {
-  position: relative;
-  padding: 3px;
-  border-radius: 4px;
-  text-align: center;
-  left: 5px;
-  bottom: 2px; }
+  width: 160px; }
+  .side-nav li.menu-logo {
+    text-align: center;
+    height: 105px;
+    background-color: #207a7a;
+    border-bottom: 1px solid #d1d1d1;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 5%;
+    height: 90px; }
+    .side-nav li.menu-logo:hover {
+      background-color: #207a7a; }
+  .side-nav.fixed {
+    height: 100%;
+    padding: 0px; }
+  .side-nav li.menu-logo a {
+    height: 100%;
+    padding: 0px; }
+  .side-nav li.menu-logo img {
+    height: 90%;
+    padding: 5px;
+    margin-top: 5px; }
+  .side-nav.fixed {
+    padding-top: 32px;
+    z-index: 960; }
+    .side-nav.fixed a {
+      padding: 0 8px; }
+  .side-nav li {
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    padding-left: 5px; }
+    .side-nav li:hover {
+      background-color: #b2dfdb; }
+  .side-nav a, .side-nav li {
+    height: 34px;
+    line-height: 38px; }
+  .side-nav span.badge {
+    position: relative;
+    padding: 3px;
+    border-radius: 4px;
+    text-align: center;
+    left: 5px;
+    bottom: 2px; }
 
 main {
   /* to prevent the side bar from overlapping the main contens */
-  padding-left: 180px; }
+  padding-left: 160px; }
 
 /**
 * Chembl bar
