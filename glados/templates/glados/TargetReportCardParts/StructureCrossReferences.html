@@ -1,0 +1,69 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}StructureCrossReferencesCard{% endblock %}
+
+{% block buttons %}
+
+  {% block StructureCrossRefs-dnld %}
+    {% with btn_id='StructureCrossRefs-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block StructureCrossRefs-small-dnld %}
+    {% with btn_id='StructureCrossRefs-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block expandable %}
+<ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+
+  <li>
+    <div class="collapsible-header active">
+      <a href="http://www.ebi.ac.uk/pdbe/">
+        <i class="fa fa-link"></i>
+      </a>
+      PDBe
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://www.ebi.ac.uk/pdbe-srv/view/entry/3BRT">3BRT</a>
+        <a href="http://www.ebi.ac.uk/pdbe-srv/view/entry/3BRV">3BRV</a>
+        <a href="http://www.ebi.ac.uk/pdbe-srv/view/entry/4E3C">4E3C</a>
+        <a href="http://www.ebi.ac.uk/pdbe-srv/view/entry/4KIK">4KIK</a>
+
+      </p>
+
+    </div>
+
+  </li>
+
+  <li>
+    <div class="collapsible-header">
+      <a href="http://marid.bioc.cam.ac.uk/credo">
+        <i class="fa fa-link"></i>
+      </a>
+      CREDO
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://marid.bioc.cam.ac.uk/credo/structures/3BRT">3BRT</a>
+        <a href="http://marid.bioc.cam.ac.uk/credo/structures/3BRV">3BRV</a>
+        <a href="http://marid.bioc.cam.ac.uk/credo/structures/4E3C">4E3C</a>
+        <a href="http://marid.bioc.cam.ac.uk/credo/structures/4KIK">4KIK</a>
+
+      </p>
+
+    </div>
+
+  </li>
+
+</ul>
+{% endblock %}

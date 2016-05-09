@@ -154,6 +154,19 @@
 
       </div>
 
+      <div class="divider"></div>
+      <div id="TargetCrossReferencesStructure" class="section scrollspy">
+        <h3>Target Cross References - Structure</h3>
+
+        <div class="row">
+          {% block stcr %}
+            {% include "glados/TargetReportCardParts/StructureCrossReferences.html" %}
+          {% endblock %}
+        </div>
+
+
+      </div>
+
 
     </div>
 
@@ -198,6 +211,9 @@
           </a></li>
           <li><a href="#TargetCrossReferencesDomain">
             <small>Domain Cross References</small>
+          </a></li>
+          <li><a href="#TargetCrossReferencesStructure">
+            <small>Structure Cross References</small>
           </a></li>
         </ul>
 
