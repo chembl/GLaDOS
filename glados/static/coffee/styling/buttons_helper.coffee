@@ -1,294 +1,279 @@
-ButtonsHelper = ->
+class ButtonsHelper
 
-# ------------------------------------------------------------
-# Download buttons
-# ------------------------------------------------------------
+  # ------------------------------------------------------------
+  # Download buttons
+  # ------------------------------------------------------------
 
-### *
-  * @param {JQuery} elem button that triggers the download
-  * @param {String} filename Name that you want for the downloaded file
-  * @param {tolltip} Tooltip that you want for the button
-  * @param {String} data data that is going to be downloaded
-###
-ButtonsHelper.initDownloadBtn = (elem, filename, tooltip, data)->
-    elem.attr('download', filename,)
-    elem.addClass('tooltipped')
-    elem.attr('data-tooltip', tooltip)
-    elem.attr('href', 'data:text/html,' + data)
+  ### *
+    * @param {JQuery} elem button that triggers the download
+    * @param {String} filename Name that you want for the downloaded file
+    * @param {tolltip} Tooltip that you want for the button
+    * @param {String} data data that is going to be downloaded
+  ###
+  @initDownloadBtn = (elem, filename, tooltip, data)->
+      elem.attr('download', filename,)
+      elem.addClass('tooltipped')
+      elem.attr('data-tooltip', tooltip)
+      elem.attr('href', 'data:text/html,' + data)
 
-### *
-  * Handles the copy event
-  * it gets the information from the context, It doesn't use a closure to be faster
-###
-ButtonsHelper.handleCopy = ->
+  ### *
+    * Handles the copy event
+    * it gets the information from the context, It doesn't use a closure to be faster
+  ###
+  @handleCopy = ->
 
-  clipboard.copy($(@).attr('data-copy'));
-  tooltip_id = $(@).attr('data-tooltip-id')
-  tooltip = $('#' + tooltip_id)
+    clipboard.copy($(@).attr('data-copy'));
+    tooltip_id = $(@).attr('data-tooltip-id')
+    tooltip = $('#' + tooltip_id)
 
-  if $( window ).width() <= MEDIUM_WIDTH
-    tooltip.hide()
-    Materialize.toast('Copied!', 1000)
-  else
-    tooltip.find('span').text('Copied!')
-
-  console.log('copied!')
-
-ButtonsHelper.initCopyButton = (elem, tooltip, data) ->
-
-  copy_btn = elem
-  copy_btn.addClass('tooltipped')
-  copy_btn.attr('data-tooltip', tooltip)
-  copy_btn.attr('data-copy', data )
-
-  copy_btn.click ButtonsHelper.handleCopy
-
-
-# ------------------------------------------------------------
-# Cropped container
-# ------------------------------------------------------------
-
-expand = (elem) ->
-  elem.removeClass("cropped")
-  elem.addClass("expanded")
-
-contract = (elem) ->
-  elem.removeClass("expanded")
-  elem.addClass("cropped")
-
-setMoreText = (elem) ->
-  icon = $(elem).children('i')
-  icon.removeClass('fa-caret-up')
-  icon.addClass('fa-caret-down')
-
-setLessText = (elem) ->
-
-  icon = $(elem).children('i')
-  icon.removeClass('fa-caret-down')
-  icon.addClass('fa-caret-up')
-
-
-
-### *
-  * @param {JQuery} elem element that is going to be toggled
-  * @param {JQuery} buttons element that contains the buttons that activate this..
-  * @return {Function} function that toggles the cropped container
-###
-toggleCroppedContainerWrapper = (elem, buttons) ->
-
-
-  # this toggles the div elements to show or hide all the contents.
-  toggleCroppedContainer = ->
-
-    if elem.hasClass( "expanded" )
-      contract(elem)
-      setMoreText($(this))
-      buttons.removeClass('cropped-container-btns-exp')
+    if $( window ).width() <= MEDIUM_WIDTH
+      tooltip.hide()
+      Materialize.toast('Copied!', 1000)
     else
-      expand(elem)
-      setLessText($(this))
-      buttons.addClass('cropped-container-btns-exp')
+      tooltip.find('span').text('Copied!')
 
-  return toggleCroppedContainer
+    console.log('copied!')
 
+  @initCopyButton = (elem, tooltip, data) ->
 
-### *
-  * Initializes the cropped container on the elements of the class 'cropped-container'
-###
-initCroppedContainers = ->
+    copy_btn = elem
+    copy_btn.addClass('tooltipped')
+    copy_btn.attr('data-tooltip', tooltip)
+    copy_btn.attr('data-copy', data )
 
-  f = ->
-
-    $('.cropped-container').each ->
-
-      activator = $(this).find('a[data-activates]')
-      activated = $('#' + activator.attr('data-activates'))
-      buttons = $(this).find('.cropped-container-btns')
-
-      # don't bother to activate the buttons if no elements are overflowing
-      overflow = false
-      heightLimit = activated.offset().top + activated.height()
+    copy_btn.click ButtonsHelper.handleCopy
 
 
-      activated.children().each ->
+  # ------------------------------------------------------------
+  # Cropped container
+  # ------------------------------------------------------------
 
-        childHeightLimit = $(this).offset().top + $(this).height()
-        if childHeightLimit > heightLimit
-          overflow = true
-          return false
+  @expand = (elem) ->
+    elem.removeClass("cropped")
+    elem.addClass("expanded")
 
-      if overflow
-        toggler = toggleCroppedContainerWrapper(activated, buttons)
-        activator.click(toggler)
-        activator.show();
+  @contract = (elem) ->
+    elem.removeClass("expanded")
+    elem.addClass("cropped")
 
-  _.debounce(f, 100)()
+  @setMoreText = (elem) ->
+    icon = $(elem).children('i')
+    icon.removeClass('fa-caret-up')
+    icon.addClass('fa-caret-down')
+
+  @setLessText = (elem) ->
+
+    icon = $(elem).children('i')
+    icon.removeClass('fa-caret-down')
+    icon.addClass('fa-caret-up')
 
 
 
-# ------------------------------------------------------------
-# Expandable Menu
-# ------------------------------------------------------------
+  ### *
+    * @param {JQuery} elem element that is going to be toggled
+    * @param {JQuery} buttons element that contains the buttons that activate this..
+    * @return {Function} function that toggles the cropped container
+  ###
+  @toggleCroppedContainerWrapper = (elem, buttons) ->
 
-showExpandableMenu = (activator, elem) ->
 
-  activator.html('<i class="material-icons">remove</i>')
-  elem.slideDown(300)
+    # this toggles the div elements to show or hide all the contents.
+    toggleCroppedContainer = ->
 
-hideExpandableMenu = (activator, elem) ->
-
-  activator.html('<i class="material-icons">add</i>')
-  elem.slideUp(300)
-
-hideExpandableMenuWrapper = (activator, elem_id_list) ->
-
-  toggleExpandableMenu = ->
-
-    $.each elem_id_list, (index, elem_id) ->
-
-      elem = $('#' + elem_id)
-
-      hideExpandableMenu(activator, elem)
-
-  return toggleExpandableMenu
-
-### *
-* @param {JQuery} activator element that activates toggles the expandable menu
-  * @param {Array} elem_id_list list of menu elements that are going to be shown
-  * @return {Function} function that toggles the expandable menus
-###
-toggleExpandableMenuWrapper = (activator, elem_id_list) ->
-
-  toggleExpandableMenu = ->
-
-    $.each elem_id_list, (index, elem_id) ->
-
-      elem = $('#' + elem_id)
-
-      if elem.css('display') == 'none'
-        showExpandableMenu(activator, elem)
+      if elem.hasClass( "expanded" )
+        ButtonsHelper.contract(elem)
+        ButtonsHelper.setMoreText($(this))
+        buttons.removeClass('cropped-container-btns-exp')
       else
-        hideExpandableMenu(activator, elem)
+        ButtonsHelper.expand(elem)
+        ButtonsHelper.setLessText($(this))
+        buttons.addClass('cropped-container-btns-exp')
 
-  return toggleExpandableMenu
-
-### *
-  *  Initializes the cropped container on the elements of the class 'expandable-menu'
-###
-initExpendableMenus = ->
-
-  $('.expandable-menu').each ->
-
-    currentDiv = $(this)
-    activators = $(this).find('a[data-activates]')
-
-    activators.each ->
-
-      activator = $( this )
-      activated_list = activator.attr('data-activates').split(',')
-
-      toggler = toggleExpandableMenuWrapper(activator, activated_list)
-      activator.click(toggler)
-
-      #hide when click outside the menu
-      hider = hideExpandableMenuWrapper(activator, activated_list)
-      activated_list_selectors = ''
-      $.each activated_list, (index, elem_id) ->
-        activated_list_selectors += '#' + elem_id + ', '
+    return toggleCroppedContainer
 
 
-      $('body').click (e) ->
-        if not $.contains(currentDiv[0], e.target)
-          hider()
+  ### *
+    * Initializes the cropped container on the elements of the class 'cropped-container'
+  ###
+  @initCroppedContainers = ->
 
-      activator.click (event) ->
-        event.stopPropagation()
+    f = ->
 
+      $('.cropped-container').each ->
 
-# ------------------------------------------------------------
-# cropped text field
-# ------------------------------------------------------------
+        activator = $(this).find('a[data-activates]')
+        activated = $('#' + activator.attr('data-activates'))
+        buttons = $(this).find('.cropped-container-btns')
 
-
-### *
-  *  Initializes the cropped container on the elements of the class 'cropped-text-field'
-  * It is based on an input field to show the information
-###
-initCroppedTextFields = ->
-
-  $('.cropped-text-field').each ->
-
-    currentDiv = $(this)
-    input_field = $(this).find('input')
-    input_field.click ->
-      input_field.val(currentDiv.attr('data-original-value'))
-      input_field.select()
-
-    # this is to allow to easily modify the content of the input if it needs to be cropped
-    $(this).attr('data-original-value', input_field.attr('value'))
-
-    input_field.focusout ->
-      cropTextIfNecessary(currentDiv)
-
-    $( window ).resize ->
-
-      if currentDiv.is(':visible')
-        cropTextIfNecessary(currentDiv)
+        # don't bother to activate the buttons if no elements are overflowing
+        overflow = false
+        heightLimit = activated.offset().top + activated.height()
 
 
-    cropTextIfNecessary(currentDiv)
+        activated.children().each ->
 
-### *
-  * Decides if the input contained in the div is overlapping and the ellipsis must be shown.
-  * if it is overlapping, shows the ellipsis and crops the text, if not, it doesn't show the ellipsis
-  * and shows all the text in the input
-  * @param {JQuery} input_div element that contains the ellipsis and the input
-###
-cropTextIfNecessary = (input_div)->
+          childHeightLimit = $(this).offset().top + $(this).height()
+          if childHeightLimit > heightLimit
+            overflow = true
+            return false
 
-  input_field = input_div.find('input')[0]
+        if overflow
+          toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons)
+          activator.click(toggler)
+          activator.show();
 
-  originalInputValue = input_div.attr('data-original-value')
-  # don't bother to do anything if there is no text in the input.
-  if originalInputValue == undefined
-    return
-
-  input_field.value = originalInputValue
-
-  charLength = ( input_field.scrollWidth / originalInputValue.length )
-  numVisibleChars = Math.round(input_field.clientWidth / charLength)
+    _.debounce(f, 100)()
 
 
-  if input_field.scrollWidth > input_field.clientWidth
-    # overflow
-    partSize = ( numVisibleChars / 2 ) - 2
-    shownValue = originalInputValue.substring(0, partSize) + ' ... ' +
-                 originalInputValue.substring(
-                   originalInputValue.length - partSize + 2, originalInputValue.length)
 
-    # remember that the original value is stored in the input_div's 'data-original-value' attribute
-    input_field.value = shownValue
+  # ------------------------------------------------------------
+  # Expandable Menu
+  # ------------------------------------------------------------
 
-  else
+  @showExpandableMenu = (activator, elem) ->
+
+    activator.html('<i class="material-icons">remove</i>')
+    elem.slideDown(300)
+
+  @hideExpandableMenu = (activator, elem) ->
+
+    activator.html('<i class="material-icons">add</i>')
+    elem.slideUp(300)
+
+  @hideExpandableMenuWrapper = (activator, elem_id_list) ->
+
+    toggleExpandableMenu = ->
+
+      $.each elem_id_list, (index, elem_id) ->
+
+        elem = $('#' + elem_id)
+
+        ButtonsHelper.hideExpandableMenu(activator, elem)
+
+    return toggleExpandableMenu
+
+  ### *
+  * @param {JQuery} activator element that activates toggles the expandable menu
+    * @param {Array} elem_id_list list of menu elements that are going to be shown
+    * @return {Function} function that toggles the expandable menus
+  ###
+  @toggleExpandableMenuWrapper = (activator, elem_id_list) ->
+
+    toggleExpandableMenu = ->
+
+      $.each elem_id_list, (index, elem_id) ->
+
+        elem = $('#' + elem_id)
+
+        if elem.css('display') == 'none'
+          ButtonsHelper.showExpandableMenu(activator, elem)
+        else
+          ButtonsHelper.hideExpandableMenu(activator, elem)
+
+    return toggleExpandableMenu
+
+  ### *
+    *  Initializes the cropped container on the elements of the class 'expandable-menu'
+  ###
+  @initExpendableMenus = ->
+
+    $('.expandable-menu').each ->
+
+      currentDiv = $(this)
+      activators = $(this).find('a[data-activates]')
+
+      activators.each ->
+
+        activator = $( this )
+        activated_list = activator.attr('data-activates').split(',')
+
+        toggler = ButtonsHelper.toggleExpandableMenuWrapper(activator, activated_list)
+        activator.click(toggler)
+
+        #hide when click outside the menu
+        hider = ButtonsHelper.hideExpandableMenuWrapper(activator, activated_list)
+        activated_list_selectors = ''
+        $.each activated_list, (index, elem_id) ->
+          activated_list_selectors += '#' + elem_id + ', '
+
+
+        $('body').click (e) ->
+          if not $.contains(currentDiv[0], e.target)
+            hider()
+
+        activator.click (event) ->
+          event.stopPropagation()
+
+
+  # ------------------------------------------------------------
+  # cropped text field
+  # ------------------------------------------------------------
+
+
+  ### *
+    *  Initializes the cropped container on the elements of the class 'cropped-text-field'
+    * It is based on an input field to show the information
+  ###
+  @initCroppedTextFields = ->
+
+    $('.cropped-text-field').each ->
+
+      currentDiv = $(this)
+      input_field = $(this).find('input')
+      input_field.click ->
+        input_field.val(currentDiv.attr('data-original-value'))
+        input_field.select()
+
+      # this is to allow to easily modify the content of the input if it needs to be cropped
+      $(this).attr('data-original-value', input_field.attr('value'))
+
+      input_field.focusout ->
+        ButtonsHelper.cropTextIfNecessary(currentDiv)
+
+      $( window ).resize ->
+
+        if currentDiv.is(':visible')
+          ButtonsHelper.cropTextIfNecessary(currentDiv)
+
+
+      ButtonsHelper.cropTextIfNecessary(currentDiv)
+
+  ### *
+    * Decides if the input contained in the div is overlapping and the ellipsis must be shown.
+    * if it is overlapping, shows the ellipsis and crops the text, if not, it doesn't show the ellipsis
+    * and shows all the text in the input
+    * @param {JQuery} input_div element that contains the ellipsis and the input
+  ###
+  @cropTextIfNecessary = (input_div)->
+
+    input_field = input_div.find('input')[0]
+
+    originalInputValue = input_div.attr('data-original-value')
+    # don't bother to do anything if there is no text in the input.
+    if originalInputValue == undefined
+      return
+
     input_field.value = originalInputValue
 
+    charLength = ( input_field.scrollWidth / originalInputValue.length )
+    numVisibleChars = Math.round(input_field.clientWidth / charLength)
 
-# ------------------------------------------------------------
-# sidenav
-# ------------------------------------------------------------
 
-### *
-  *  This is necessary to fix the bug of the side nav not appearing correctly.
-###
-complementaryinitSideNav = ->
+    if input_field.scrollWidth > input_field.clientWidth
+      # overflow
+      partSize = ( numVisibleChars / 2 ) - 2
+      shownValue = originalInputValue.substring(0, partSize) + ' ... ' +
+                   originalInputValue.substring(
+                     originalInputValue.length - partSize + 2, originalInputValue.length)
 
-  $('.button-collapse').each ->
+      # remember that the original value is stored in the input_div's 'data-original-value' attribute
+      input_field.value = shownValue
 
-    currentBtn = $(this)
-    currentBtn.click ->
+    else
+      input_field.value = originalInputValue
 
-      activated = $('#' + $(@).attr('data-activates'))
-      activated.show()
+
+
 
 
 

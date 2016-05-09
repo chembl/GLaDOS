@@ -99,10 +99,10 @@
 
     // initialization of visualization code.
     // This controls the padding of the sidenav.
-    initializeTopMenuController();
+    SideMenuHelper.initializeTopMenuController();
     // collapse button, the one that shows the sidenav on mobile
     $(".button-collapse").sideNav();
-    complementaryinitSideNav();
+    ScrollSpyHelper.complementaryinitSideNav();
 
     {% block custom_js_inline %}{% endblock %}
 

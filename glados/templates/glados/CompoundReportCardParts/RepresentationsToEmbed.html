@@ -26,12 +26,12 @@ var compound = initCompound(CHEMBL_ID);
 var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
 compound.fetch();
 
-initCroppedContainers();
-initExpendableMenus();
+ButtonsHelper.initCroppedContainers();
+ButtonsHelper.initExpendableMenus();
 $('.modal-trigger').hide();
 
 {% endblock %}
 
 {% block custom_afterRender %}
-  initCroppedTextFields();
+  ButtonsHelper.initCroppedTextFields();
 {% endblock %}

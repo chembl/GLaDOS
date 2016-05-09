@@ -331,9 +331,9 @@ mechanismOfActionList.fetch({reset: true});
 moleculeFormsList.fetch({reset: true});
 
 $('.scrollspy').scrollSpy();
-initializeScrollSpyHelper();
-initCroppedContainers();
-initExpendableMenus();
+ScrollSpyHelper.initializeScrollSpyPinner();
+ButtonsHelper.initCroppedContainers();
+ButtonsHelper.initExpendableMenus();
 
 initPieView();
 
@@ -344,5 +344,5 @@ $('select').material_select();
 {% endblock %}
 
 {% block custom_afterRender %}
-initCroppedTextFields();
+ButtonsHelper.initCroppedTextFields();
 {% endblock %}
