@@ -48,10 +48,26 @@
       </div>
 
       <div class="divider"></div>
+      <div id="TargetRelations" class="section scrollspy">
+        <h3>Target Relations</h3>
+
+        <div class="row">
+
+         {% block tr %}
+            {% include "glados/TargetReportCardParts/Relations.html" %}
+          {% endblock %}
+
+        </div>
+
+
+      </div>
+
+      <div class="divider"></div>
       <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy">
         <h3>Approved Drugs And Clinical Candidates</h3>
 
          <div class="row">
+
         {% block adcc %}
           {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
         {% endblock %}
@@ -137,6 +153,9 @@
           </a></li>
           <li><a href="#TargetComponents">
             <small>Components</small>
+          </a></li>
+          <li><a href="#TargetRelations">
+            <small>Relations</small>
           </a></li>
           <li><a href="#ApprovedDrugsAndClinicalCandidates">
             <small>Drugs And Clinical Candidates</small>

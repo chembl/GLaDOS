@@ -1,0 +1,98 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}TRelationsCard{% endblock %}
+
+{% block buttons %}
+
+  {% block TRelations-dnld %}
+    {% with btn_id='TRelations-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block TRelations-small-dnld %}
+    {% with btn_id='TRelations-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block table %}
+
+    <table class="compact-table striped hide-on-small-only ebi-links">
+
+    <tr>
+
+      <th>Component Description</th>
+      <th>Relationship</th>
+      <th>Accession</th>
+
+    </tr>
+
+    <tr>
+
+      <td>Fatty-acid amide hydrolase 1</td>
+      <td>SINGLE PROTEIN</td>
+      <td><a href="http://www.uniprot.org/uniprot/O00519">O00519</a></td>
+
+    </tr>
+    <tr>
+
+      <td>Fatty-acid amide hydrolase 1</td>
+      <td>SINGLE PROTEIN</td>
+      <td><a href="http://www.uniprot.org/uniprot/O00519">O00519</a></td>
+
+    </tr>
+    <tr>
+
+      <td>Fatty-acid amide hydrolase 1</td>
+      <td>SINGLE PROTEIN</td>
+      <td><a href="http://www.uniprot.org/uniprot/O00519">O00519</a></td>
+
+    </tr>
+
+  </table>
+
+{% endblock %}
+
+
+{% block collection %}
+
+<ul class="collection hide-on-med-and-up">
+  <li class="collection-item">
+
+    <p>
+
+      <b>Component Description:</b> Fatty-acid amide hydrolase 1<br>
+      <b>Relationship:</b> SINGLE PROTEIN<br>
+      <b>Accession:</b> <a href="http://www.uniprot.org/uniprot/O00519">O00519</a><br>
+
+    </p>
+
+  </li>
+  <li class="collection-item">
+
+    <p>
+
+      <b>Component Description:</b> Fatty-acid amide hydrolase 1<br>
+      <b>Relationship:</b> SINGLE PROTEIN<br>
+      <b>Accession:</b> <a href="http://www.uniprot.org/uniprot/O00519">O00519</a><br>
+
+    </p>
+
+  </li>
+  <li class="collection-item">
+
+    <p>
+
+      <b>Component Description:</b> Fatty-acid amide hydrolase 1<br>
+      <b>Relationship:</b> SINGLE PROTEIN<br>
+      <b>Accession:</b> <a href="http://www.uniprot.org/uniprot/O00519">O00519</a><br>
+
+    </p>
+
+  </li>
+</ul>
+
+{% endblock %}
