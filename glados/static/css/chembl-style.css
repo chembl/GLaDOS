@@ -1781,6 +1781,8 @@ main {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .side-nav {
+  height: 100%;
+  padding: 0px;
   width: 160px;
   transform: unset; }
   .side-nav li.menu-logo {
@@ -1793,9 +1795,6 @@ main {
     height: 90px; }
     .side-nav li.menu-logo:hover {
       background-color: #207a7a; }
-  .side-nav.fixed {
-    height: 100%;
-    padding: 0px; }
   .side-nav li.menu-logo a {
     height: 100%;
     padding: 0px; }
@@ -1806,8 +1805,8 @@ main {
   .side-nav.fixed {
     padding-top: 32px;
     z-index: 960; }
-    .side-nav.fixed a {
-      padding: 0 8px; }
+  .side-nav a {
+    padding: 0 8px; }
   .side-nav li {
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     padding-left: 5px; }

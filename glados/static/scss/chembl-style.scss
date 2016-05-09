@@ -134,10 +134,10 @@ $sidenav-links-lineheight: 38px;
     }
     height: 90px;
   }
-  &.fixed {
-    height: 100%;
-    padding: 0px;
-  }
+
+  height: 100%;
+  padding: 0px;
+
   li.menu-logo {
     a {
       height: 100%;
@@ -154,11 +154,10 @@ $sidenav-links-lineheight: 38px;
   &.fixed {
     padding-top: 32px;
     z-index: 960;
+  }
 
-    a {
-      padding: 0 $sidenav-links-side-padding;
-    }
-
+  a {
+    padding: 0 $sidenav-links-side-padding;
   }
 
   li {
