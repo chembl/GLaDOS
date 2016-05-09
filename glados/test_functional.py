@@ -538,7 +538,3 @@ class CompoundReportCardTest(unittest.TestCase):
     # Black Box No: 0
     self.assert_molecule_feature('Bck-BlackBox', True, HOST + '/static/img/molecule_features/black_box.svg',
                                  'Black Box: Yes', 'bottom')
-
-
-if __name__ == '__main__':
-  unittest.main()

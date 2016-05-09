@@ -25,6 +25,8 @@ class Acknowledgement(models.Model):
   class Meta:
     db_table = 'acknowledgements'
 
+  def __str__(self):
+    return '%s: %s' % (self.dates, self.content)
 
 class FaqCategory(models.Model):
 
