@@ -18,3 +18,19 @@ class SideMenuHelper
         sidenav_fixed.css
           'paddingTop': maxPadding - top + 'px'
 
+  # ------------------------------------------------------------
+  # sidenav
+  # ------------------------------------------------------------
+
+  ### *
+    *  This is necessary to fix the bug of the side nav not appearing correctly.
+  ###
+  @complementaryinitSideNav = ->
+
+    $('.button-collapse').each ->
+
+      currentBtn = $(this)
+      currentBtn.click ->
+
+        activated = $('#' + $(@).attr('data-activates'))
+        activated.show()

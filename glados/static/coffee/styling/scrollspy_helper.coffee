@@ -26,21 +26,6 @@ class ScrollSpyHelper
     win.scroll _.throttle(pinScrollSpy, 200)
 
 
-  # ------------------------------------------------------------
-  # sidenav
-  # ------------------------------------------------------------
 
-  ### *
-    *  This is necessary to fix the bug of the side nav not appearing correctly.
-  ###
-  @complementaryinitSideNav = ->
-
-    $('.button-collapse').each ->
-
-      currentBtn = $(this)
-      currentBtn.click ->
-
-        activated = $('#' + $(@).attr('data-activates'))
-        activated.show()
 
 

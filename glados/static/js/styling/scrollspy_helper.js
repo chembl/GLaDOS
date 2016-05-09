@@ -24,23 +24,6 @@ ScrollSpyHelper = (function() {
     return win.scroll(_.throttle(pinScrollSpy, 200));
   };
 
-  /* *
-    *  This is necessary to fix the bug of the side nav not appearing correctly.
-  */
-
-
-  ScrollSpyHelper.complementaryinitSideNav = function() {
-    return $('.button-collapse').each(function() {
-      var currentBtn;
-      currentBtn = $(this);
-      return currentBtn.click(function() {
-        var activated;
-        activated = $('#' + $(this).attr('data-activates'));
-        return activated.show();
-      });
-    });
-  };
-
   return ScrollSpyHelper;
 
 })();
