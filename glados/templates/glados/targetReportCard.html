@@ -145,7 +145,11 @@
       <div id="TargetCrossReferencesDomain" class="section scrollspy">
         <h3>Target Cross References - Domain</h3>
 
-        <p>stuff</p>
+        <div class="row">
+          {% block dtcr %}
+            {% include "glados/TargetReportCardParts/DomainCrossReferences.html" %}
+          {% endblock %}
+        </div>
 
 
       </div>

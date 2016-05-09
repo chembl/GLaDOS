@@ -1,0 +1,102 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}ProteinCrossReferencesCard{% endblock %}
+
+{% block buttons %}
+
+  {% block ProtCrossRefs-dnld %}
+    {% with btn_id='CalcCompProps-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block ProtCrossRefs-small-dnld %}
+    {% with btn_id='CalcCompProps-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block expandable %}
+ <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+
+  <li>
+    <div class="collapsible-header active">
+      <a href="https://cansar.icr.ac.uk/">
+        <i class="fa fa-link"></i>
+      </a>
+      canSAR
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="https://cansar.icr.ac.uk/cansar/protein-targets/O14920/">O14920</a>
+
+      </p>
+
+    </div>
+
+  </li>
+
+  <li>
+    <div class="collapsible-header">
+      <a href="http://www.proteinatlas.org/">
+        <i class="fa fa-link"></i>
+      </a>
+      Human Protein Atlas
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://www.proteinatlas.org/ENSG00000104365">ENSG00000104365</a>
+
+      </p>
+
+    </div>
+
+  </li>
+
+  <li>
+    <div class="collapsible-header">
+      <a href="http://www.ebi.ac.uk/intact/">
+        <i class="fa fa-link"></i>
+      </a>
+      IntAct
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://www.ebi.ac.uk/intact/query/O14920">O14920</a>
+
+      </p>
+
+    </div>
+
+  </li>
+
+  <li>
+    <div class="collapsible-header">
+      <a href="http://www.guidetopharmacology.org/">
+        <i class="fa fa-link"></i>
+      </a>
+      Guide to Pharmacology
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://www.guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=2039">2039</a> (inhibitor of kappa light polypeptide gene enhancer in B-cells, kinase beta)<br>
+
+      </p>
+
+    </div>
+
+  </li>
+
+
+ </ul>
+{% endblock %}

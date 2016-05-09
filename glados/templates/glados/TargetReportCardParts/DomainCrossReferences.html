@@ -1,0 +1,71 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}DomainnCrossReferencesCard{% endblock %}
+
+{% block buttons %}
+
+  {% block DomainCrossRefs-dnld %}
+    {% with btn_id='DomainCrossRefs-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block DomainCrossRefs-small-dnld %}
+    {% with btn_id='DomainCrossRefs-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block expandable %}
+<ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+
+  <li>
+    <div class="collapsible-header active">
+      <a href="http://www.ebi.ac.uk/interpro/">
+        <i class="fa fa-link"></i>
+      </a>
+     InterPro
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR008271">IPR008271</a> (Ser/Thr_kinase_AS.)<br>
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR022007">IPR022007</a> (IKKbetaNEMObind.)<br>
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR000719">IPR000719</a> (Prot_kinase_dom.)<br>
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR029071">IPR029071</a> (Ubiquitin-rel_dom.)<br>
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR000626">IPR000626</a> (Ubiquitin_dom.)<br>
+        <a href="http://www.ebi.ac.uk/interpro/IEntry?ac=IPR011009">IPR011009</a> (Kinase-like_dom.)<br>
+
+
+      </p>
+
+    </div>
+
+  </li>
+
+   <li>
+    <div class="collapsible-header">
+      <a href="http://pfam.sanger.ac.uk/">
+        <i class="fa fa-link"></i>
+      </a>
+     Pfam
+    </div>
+    <div class="collapsible-body">
+
+      <p>
+
+        <a href="http://pfam.sanger.ac.uk/family/PF12179">PF12179</a> (IKKbetaNEMObind)<br>
+        <a href="http://pfam.sanger.ac.uk/family/PF00069">PF00069</a> (Pkinase)<br>
+
+      </p>
+
+    </div>
+
+  </li>
+
+</ul>
+{% endblock %}
