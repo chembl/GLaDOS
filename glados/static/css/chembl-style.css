@@ -1805,8 +1805,8 @@ main {
   .side-nav.fixed {
     padding-top: 32px;
     z-index: 960; }
-  .side-nav a {
-    padding: 0 8px; }
+    .side-nav.fixed a {
+      padding: 0 8px; }
   .side-nav li {
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     padding-left: 5px; }
@@ -1815,6 +1815,8 @@ main {
   .side-nav a, .side-nav li {
     height: 34px;
     line-height: 38px; }
+  .side-nav a {
+    padding: 0 8px; }
   .side-nav span.badge {
     position: relative;
     padding: 3px;

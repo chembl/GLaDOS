@@ -44,7 +44,7 @@ $h4-color: #222;
 $h5-color: #222;
 $h6-color: #222;
 
-$synonyms-color:color('green', 'lighten-4');
+$synonyms-color: color('green', 'lighten-4');
 $tradenames-color: color('light-green', 'lighten-3');
 
 html {
@@ -149,15 +149,15 @@ $sidenav-links-lineheight: 38px;
       margin-top: 5px;
     }
   }
+
   width: $side-nav-width;
 
   &.fixed {
     padding-top: 32px;
     z-index: 960;
-  }
-
-  a {
-    padding: 0 $sidenav-links-side-padding;
+    a {
+      padding: 0 $sidenav-links-side-padding;
+    }
   }
 
   li {
@@ -171,6 +171,10 @@ $sidenav-links-lineheight: 38px;
     height: 34px;
     line-height: $sidenav-links-lineheight;
   }
+  a {
+    padding: 0 $sidenav-links-side-padding;
+  }
+
   span.badge {
     position: relative;
     padding: 3px;
@@ -182,7 +186,6 @@ $sidenav-links-lineheight: 38px;
 
   transform: unset;
 }
-
 
 main {
   /* to prevent the side bar from overlapping the main contens */
