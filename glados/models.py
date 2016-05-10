@@ -12,9 +12,9 @@ class Acknowledgement(models.Model):
   NO = '0'
   NA = '-1'
   IS_CURRENT_CHOICES = (
-    (YES, 'Yes'),
-    (NO, 'No'),
-    (NA, 'N/A')
+    ('1', 'Yes'),
+    ('0', 'No'),
+    ('-1', 'N/A')
   )
 
   category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default=FUNDING)
@@ -35,6 +35,9 @@ class FaqCategory(models.Model):
   class Meta:
     db_table = 'faq_categories'
 
+  def __str__(self):
+    return '%s' % (self.category_name)
+
 
 class FaqSubcategory(models.Model):
 
@@ -43,11 +46,17 @@ class FaqSubcategory(models.Model):
   class Meta:
     db_table = 'faq_subcategories'
 
+  def __str__(self):
+    return '%s' % (self.subcategory_name)
+
 
 class Faq(models.Model):
 
   category = models.ForeignKey(FaqCategory, on_delete=models.CASCADE)
   subcategory = models.ForeignKey(FaqSubcategory, on_delete=models.CASCADE)
-  question = models.CharField(max_length=4000, blank=True, null=True)
-  answer = models.TextField(blank=True, null=True)
-  deleted = models.BigIntegerField(blank=True, null=True)
+  question = models.CharField(max_length=4000, blank=True, null=True, unique=True)
+  answer = models.TextField(blank=True, null=True, unique=True)
+  deleted = models.BooleanField(default=False)
+
+  def __str__(self):
+    return '%s' % (self.question)
