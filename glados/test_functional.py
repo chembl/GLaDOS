@@ -22,7 +22,7 @@ class CompoundReportCardTest(unittest.TestCase):
     self.browser.quit()
 
   def getURL(self, url, sleeptime):
-    print('Scenario:')
+    print('\nScenario:')
     print(url)
     self.browser.get(url)
     time.sleep(sleeptime)
