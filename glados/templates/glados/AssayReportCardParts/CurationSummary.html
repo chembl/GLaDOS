@@ -1,0 +1,46 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}ACurationSummaryCard{% endblock %}
+
+{% block buttons %}
+
+  {% block CurationSummary-dnld %}
+    {% with btn_id='CurationSummary-dnld' additional_classes='hide-on-small-only' %}
+      {% include "glados/base/btn_download_small.html" %}
+    {% endwith %}
+  {% endblock %}
+
+  {% block CurationSummary-small-dnld %}
+    {% with btn_id='CurationSummary-small-dnld' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_small_2_lines.html" %}
+    {% endwith %}
+  {% endblock %}
+
+{% endblock %}
+
+
+{% block table %}
+
+<table class="compact-table striped hide-on-small-only">
+
+  <tr>
+    <th>
+      Target
+    </th>
+     <th>
+      Target Type
+    </th>
+     <th>
+      Target Description
+    </th>
+  </tr>
+
+  <tr>
+    <td><a href="/chembl/target/inspect/102222">Plasma</a></td>
+    <td>TISSUE</td>
+    <td></td>
+  </tr>
+
+</table>
+
+{% endblock %}
