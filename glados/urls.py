@@ -31,6 +31,6 @@ urlpatterns = [
 
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
 
-  # ex: /polls/5/
-  url(r'^acknowledgements/$', views.acks, name='ack_detail'),
+  url(r'^acknowledgements/$', views.acks, name='acks'),
+  url(r'^faqs/$', views.faqs, name='faqs')
 ]

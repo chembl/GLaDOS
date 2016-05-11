@@ -31,6 +31,8 @@ class Acknowledgement(models.Model):
 class FaqCategory(models.Model):
 
   category_name = models.CharField(max_length=100, blank=True, null=True)
+  position = models.PositiveSmallIntegerField(default='0')
+  ordering = ['position']
 
   class Meta:
     db_table = 'faq_categories'

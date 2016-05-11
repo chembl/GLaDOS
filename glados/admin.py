@@ -9,9 +9,12 @@ class FaqAdmin(admin.ModelAdmin):
 
     list_display = ('question', 'category', 'subcategory', 'deleted')
 
+class FaqCategoryAdmin(admin.ModelAdmin):
+
+    list_display = ('category_name', 'position')
 
 admin.site.register(Faq, FaqAdmin)
-admin.site.register(FaqCategory)
+admin.site.register(FaqCategory, FaqCategoryAdmin)
 admin.site.register(FaqSubcategory)
 admin.site.register(Acknowledgement)
 
