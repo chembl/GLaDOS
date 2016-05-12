@@ -1,0 +1,105 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Document Report Card{% endblock %}
+
+{% block content %}
+<div class="container main-container">
+
+
+  {% block breadcrumb %}
+  {% include "glados/base/breadcrumb.html" %}
+  {% endblock %}
+
+  <div class="row">
+
+    <!-- the scrollspy disappears in medium and down -->
+    <div class="col m12 l10">
+
+      <h2>Document Report Card</h2>
+
+      <div class="divider"></div>
+      <div id="BasicInformation" class="section scrollspy">
+        <h3>Basic Information</h3>
+
+        <div class="row">
+
+          {% block dbi %}
+            {% include "glados/DocumentReportCardParts/BasicInformation.html" %}
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="RelatedDocuments" class="section scrollspy">
+        <h3>Related Documents</h3>
+
+        <div class="row">
+
+          {% block drd %}
+            {% include "glados/DocumentReportCardParts/RelatedDocuments.html" %}
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="ProteinTargetSummay" class="section scrollspy">
+        <h3>Protein Target Summay</h3>
+
+        <div class="row">
+
+          stuff
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="AssaySummary" class="section scrollspy">
+        <h3>Assay Summary</h3>
+
+        <div class="row">
+
+          stuff
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="BioactivitySummary" class="section scrollspy">
+        <h3>Bioactivity Summary</h3>
+
+        <div class="row">
+
+          stuff
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="CompoundSummaries" class="section scrollspy">
+        <h3>Compound Summaries</h3>
+
+        <div class="row">
+
+          stuff
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+</div>
+
+{% endblock %}
