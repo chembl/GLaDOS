@@ -35,6 +35,9 @@ urlpatterns = [
   url(r'^document_report_card/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
 
+  url(r'^cell_report_card/$',
+      DirectTemplateView.as_view(template_name="glados/cellReportCard.html"), ),
+
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
 
   url(r'^acknowledgements/$', views.acks, name='acks'),
