@@ -123,14 +123,10 @@
     {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
 
-    <div class="card grey lighten-4 z-depth-0">
-      <div class="card-content">
-        <span class="card-title">Tweets</span>
-        <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-      </div>
 
-    </div>
+    {% block tweets %}
+    {% include "glados/MainPageParts/tweets.html" %}
+    {% endblock %}
 
 
   </div>
