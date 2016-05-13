@@ -2713,6 +2713,7 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .search-bar {
+  position: relative;
   /* label underline focus color */
   border: 2px solid #009688;
   background-color: white;
@@ -2745,5 +2746,9 @@ div#CNC-zoom-modal {
   background-color: #009688; }
   .search-btn-wrapper a {
     color: white; }
+
+.search-bar-help {
+  position: absolute;
+  top: -25px; }
 
 /*# sourceMappingURL=chembl-style.css.map */

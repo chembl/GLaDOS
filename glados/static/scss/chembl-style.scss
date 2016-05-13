@@ -1285,6 +1285,8 @@ div#CNC-zoom-modal {
 
 .search-bar{
 
+  position: relative;
+
   .col{
     padding: 0
   }
@@ -1342,4 +1344,11 @@ $search-items-height:45px;
   a {
     color: white;
   }
+}
+
+.search-bar-help{
+
+  position: absolute;
+  top: -25px;
+
 }
