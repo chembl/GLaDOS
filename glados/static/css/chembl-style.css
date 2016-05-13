@@ -2749,6 +2749,7 @@ div#CNC-zoom-modal {
 
 .search-bar-help {
   position: absolute;
-  bottom: -25px; }
+  bottom: -25px;
+  left: 10px; }
 
 /*# sourceMappingURL=chembl-style.css.map */
