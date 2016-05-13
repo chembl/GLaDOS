@@ -2557,29 +2557,6 @@ div#CNC-zoom-modal {
 * Compound Representations
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.btn-small {
-  color: #ffffff;
-  border-radius: 3px;
-  padding: 10px 6px 6px 6px;
-  text-align: center;
-  width: 60px;
-  line-height: 9px;
-  font-size: 9px; }
-
-.btn-mini i,
-.btn-small i {
-  font-size: 180%; }
-
-.btn-mini {
-  color: #ffffff;
-  border-radius: 3px;
-  padding: 10px 3px 6px 3px;
-  text-align: center;
-  width: 30px;
-  line-height: 9px;
-  font-size: 9px;
-  margin-left: 4px; }
-
 .inline-block {
   display: inline-block;
   margin-top: 2px; }
@@ -2751,5 +2728,38 @@ div#CNC-zoom-modal {
   position: absolute;
   bottom: -25px;
   left: 10px; }
+
+/**
+* Buttons
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.btn-chembl {
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 10px 20px;
+  text-align: center; }
+
+.btn-small {
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 10px 6px 6px 6px;
+  text-align: center;
+  width: 60px;
+  line-height: 9px;
+  font-size: 9px; }
+
+.btn-mini i,
+.btn-small i {
+  font-size: 180%; }
+
+.btn-mini {
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 10px 3px 6px 3px;
+  text-align: center;
+  width: 30px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px; }
 
 /*# sourceMappingURL=chembl-style.css.map */

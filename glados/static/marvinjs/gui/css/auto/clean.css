@@ -1,0 +1,493 @@
+/**
+ * The reference theme can be used to determine when this style sheet has
+ * loaded.  Create a hidden div element with absolute position, assign the style
+ * name below, and attach it to the DOM.  Use a timer to detect when the
+ * element's height and width are set to 5px.
+ */
+.mjs-top .gwt-Reference-clean {
+  height: 5px;
+  width: 5px;
+  zoom: 1;
+}
+
+.mjs-top .gwt-Button {
+  margin: 0;
+  padding: 5px 7px;
+  text-decoration: none;
+  cursor: pointer;
+  cursor: hand;
+  font-size:small;
+  color: white;
+  background-image: none;
+  font-weight: normal;
+  text-align: center;
+  min-width: 80px;
+  border-radius: 1px;
+  border: 1px solid #3498db;
+  background-color: #3498db;
+
+}
+.mjs-top .gwt-Button[disabled] {
+  cursor: default;
+  color: #888;
+}
+.mjs-top .gwt-Button[disabled]:hover {
+  border: 1px outset #ccc;
+}
+
+.mjs-top .gwt-CheckBox {
+}
+.mjs-top .gwt-CheckBox-disabled {
+  color: #888;
+}
+
+.mjs-top .gwt-CheckBox input{
+	margin:3px 5px 0px 0px;
+}
+
+.mjs-top.gwt-DialogBox{ /* SPACE is missing for the widget is the same as the top level container*/
+	-webkit-box-shadow: 2px 2px 5px #888888;
+	-moz-box-shadow: 2px 2px 5px #888888;
+	box-shadow: 2px 2px 5px #888888;
+	border: none;
+}
+
+.mjs-top.gwt-DialogBox table { /* SPACE is missing for the widget is the same as the top level container*/
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+.mjs-top.gwt-DialogBox .dialogMiddleLeft,
+.mjs-top.gwt-DialogBox .dialogMiddleRight,
+.mjs-top.gwt-DialogBox .dialogBottomLeft,
+.mjs-top.gwt-DialogBox .dialogBottomCenter,
+.mjs-top.gwt-DialogBox .dialogBottomRight{ /* SPACE is missing for the widget is the same as the top level container*/
+	background-image: none;
+	background-color: white;
+}
+
+
+.mjs-top.gwt-DialogBox .dialogTopRight, 
+.mjs-top.gwt-DialogBox .dialogTopLeft{ /* SPACE is missing for the widget is the same as the top level container*/
+	background-image: none;
+	background-color: #f1f1f1;
+} 
+
+.mjs-top.gwt-DialogBox .dialogTopRightInner, 
+.mjs-top.gwt-DialogBox .dialogBottomRightInner  { /* SPACE is missing for the widget is the same as the top level container*/
+	width: 10px;
+}
+
+.mjs-top.gwt-DialogBox .Caption { /* SPACE is missing for the widget is the same as the top level container*/
+  background: #F1F1F1;
+  padding: 4px 8px 4px 4px;
+  cursor: default;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+  font-weight: bold;
+  width:100%;
+  border: 0px;
+}
+
+.mjs-top.gwt-DialogBox .Caption td{
+	vertical-align: middle;
+	color: #707070;
+    font-weight: bold;
+	font-size: 14px;
+}
+.mjs-top.gwt-DialogBox .dialogMiddleCenter { /* SPACE is missing for the widget is the same as the top level container*/
+  padding: 3px;
+  background: white;
+}
+
+.mjs-top.gwt-DialogBox .dialogTopLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 10px;
+  height: 8px;
+  zoom: 1;
+}
+.mjs-top.gwt-DialogBox .dialogTopRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 12px;
+  zoom: 1;
+}
+.mjs-top.gwt-DialogBox .dialogBottomLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 10px;
+  height: 12px;
+  zoom: 1;
+}
+.mjs-top.gwt-DialogBox .dialogBottomRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 12px;
+  height: 12px;
+  zoom: 1;
+}
+
+.mjs-top .gwt-DisclosurePanel .header,
+.mjs-top .gwt-DisclosurePanel .header a,
+.mjs-top .gwt-DisclosurePanel .header td {
+  text-decoration: none;  /* Remove underline from header */
+  color: black;
+  cursor: pointer;
+  cursor: hand;
+}
+.mjs-top .gwt-DisclosurePanel .content {
+  border-left: 3px solid #e7e7e7;
+  padding: 4px 0px 4px 8px;
+  margin-left: 6px;
+}
+
+.mjs-top .gwt-Frame {
+  border-top: 2px solid #666;
+  border-left: 2px solid #666;
+  border-right: 2px solid #bbb;
+  border-bottom: 2px solid #bbb;
+}
+
+.mjs-top .gwt-HTML {
+  padding: 0 0px;
+}
+
+.mjs-top .gwt-Hyperlink {
+  cursor: pointer;
+}
+
+.mjs-top .gwt-MenuBar {
+  cursor: default;
+}
+.mjs-top .gwt-MenuBar .gwt-MenuItem {
+  cursor: default;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+  padding-right: 3px;
+  white-space: nowrap;
+}
+.mjs-top .gwt-MenuBar .gwt-MenuItem-selected {
+  background: #E3E8F3;
+}
+.mjs-top .gwt-MenuBar-horizontal {
+  background: #e3e8f3;
+  border: 1px solid #e0e0e0;
+}
+.mjs-top .gwt-MenuBar-horizontal .gwt-MenuItem {
+  padding: 5px 10px;
+  vertical-align: bottom;
+  color: #000;
+  font-weight: bold;
+}
+.mjs-top .gwt-MenuBar-horizontal .gwt-MenuItemSeparator {
+  width: 1px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  border-left: 1px solid #ccc;
+  background: white;
+}
+.mjs-top .gwt-MenuBar-horizontal .gwt-MenuItemSeparator .menuSeparatorInner {
+  width: 1px;
+  height: 1px;
+  background: white;
+}
+.mjs-top .gwt-MenuBar-vertical {
+  margin-top: 0px;
+  margin-left: 0px;
+  background: white;
+}
+.mjs-top .gwt-MenuBar-vertical table {
+  border-collapse: collapse;
+}
+.mjs-top .gwt-MenuBar-vertical .gwt-MenuItem {
+  padding: 2px 40px 2px 1px;
+}
+.mjs-top .gwt-MenuBar-vertical .gwt-MenuItemSeparator {
+  padding: 2px 0px;
+}
+.mjs-top .gwt-MenuBar-vertical .gwt-MenuItemSeparator .menuSeparatorInner {
+  height: 1px;
+  padding: 0px;
+  border: 0px;
+  border-top: 1px solid #ccc;
+  overflow: hidden;
+}
+.mjs-top .gwt-MenuBar-vertical .subMenuIcon {
+  padding-right: 4px;
+}
+.mjs-top .gwt-MenuBar-vertical .subMenuIcon-selected {
+  background: #E3E8F3;
+}
+.mjs-top.gwt-MenuBarPopup .menuPopupTopLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 5px;
+  height: 5px;
+  zoom: 1;
+}
+.mjs-top.gwt-MenuBarPopup .menuPopupTopRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 8px;
+  height: 5px;
+  zoom: 1;
+}
+.mjs-top.gwt-MenuBarPopup .menuPopupBottomLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 5px;
+  height: 8px;
+  zoom: 1;
+}
+.mjs-top.gwt-MenuBarPopup .menuPopupBottomRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 8px;
+  height: 8px;
+  zoom: 1;
+}
+
+.mjs-top .gwt-PasswordTextBox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #999;
+  font-size: 100%;
+}
+.mjs-top .gwt-PasswordTextBox-readonly {
+  color: #888;
+}
+
+.mjs-top.gwt-PopupPanel { /* SPACE is missing for the widget is the same as the top level container*/
+  border: none;
+  padding: 3px;
+  background: white;
+  -moz-box-shadow:    1px 1px 5px 2px #ccc;
+  -webkit-box-shadow: 1px 1px 5px 2px #ccc;
+  box-shadow:         1px 1px 5px 2px #ccc;
+  padding: 0px;
+}
+
+.mjs-top.gwt-PopupPanelGlass { /* SPACE is missing for the widget is the same as the top level container*/
+  background-color: #000;
+  opacity: 0.3;
+  filter: literal("alpha(opacity=30)"); 
+}
+
+.mjs-top .gwt-PushButton-up,
+.mjs-top .gwt-PushButton-up-hovering,
+.mjs-top .gwt-PushButton-up-disabled,
+.mjs-top .gwt-PushButton-down,
+.mjs-top .gwt-PushButton-down-hovering,
+.mjs-top .gwt-PushButton-down-disabled {
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0;
+  text-decoration: none;
+  border: 1px solid white;
+  outline:none;
+}
+.mjs-top .gwt-PushButton-up,
+.mjs-top .gwt-PushButton-up-hovering,
+.mjs-top .gwt-PushButton-up-disabled {
+  padding: 0px;
+}
+.mjs-top .gwt-PushButton-up,
+.mjs-top .gwt-PushButton-up-hovering,
+.mjs-top .gwt-PushButton-down,
+.mjs-top .gwt-PushButton-down-hovering{
+  cursor: pointer;
+  cursor: hand;
+}
+.mjs-top .gwt-PushButton-up-disabled {
+  cursor: default;
+  opacity: .5;
+  filter: literal("alpha(opacity=45)"); 
+  zoom: 1;
+}
+.mjs-top .gwt-PushButton-down,
+.mjs-top .gwt-PushButton-down-hovering {
+  border: 1px solid #B6CDEF;
+  background-color: #B6CDEF;
+}
+
+.mjs-top .gwt-PushButton-down-disabled {
+  cursor: default;
+  opacity: 0.5;
+  filter: literal("alpha(opacity=45)"); 
+  zoom: 1;
+}
+
+.mjs-top .gwt-RadioButton {
+}
+.mjs-top .gwt-RadioButton-disabled {
+  color: #888;
+}
+
+.mjs-top .gwt-SuggestBox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #999;
+  font-size: 100%;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+}
+
+.mjs-top.gwt-SuggestBoxPopup {
+  background-color: white;
+ -moz-box-shadow:    2px 2px 3px 1px #ccc;
+  -webkit-box-shadow: 2px 2px 3px 1px #ccc;
+  box-shadow:         2px 2px 3px 1px #ccc;
+}
+
+.mjs-top.gwt-SuggestBoxPopup .item {
+  padding: 2px 6px;
+  color: #000;
+  cursor: default;
+  font-size: 110%;
+
+}
+.mjs-top.gwt-SuggestBoxPopup .item-selected { /* SPACE is missing for the widget is the same as the top level container*/
+  background: #D5E2FF;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupContent { /* SPACE is missing for the widget is the same as the top level container*/
+  background: white;
+} 
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopCenter { /* SPACE is missing for the widget is the same as the top level container*/
+  border-top: 1px solid #bbb;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomCenter { /* SPACE is missing for the widget is the same as the top level container*/
+  border-bottom: 1px solid #bbb;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopCenterInner,
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomCenterInner { /* SPACE is missing for the widget is the same as the top level container*/
+  height: 1px;
+  line-height: 1px;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupMiddleLeftInner,
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupMiddleRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 1px;
+  line-height: 1px;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 0px;
+  height: 0px;
+  zoom: 1;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 0px;
+  height: 0px;
+  zoom: 1;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomLeftInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 0px;
+  height: 0px;
+  zoom: 1;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomRightInner { /* SPACE is missing for the widget is the same as the top level container*/
+  width: 0px;
+  height: 0px;
+  zoom: 1;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopLeft { /* SPACE is missing for the widget is the same as the top level container*/
+  width:0px;
+  height:0px;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupTopRight { /* SPACE is missing for the widget is the same as the top level container*/
+  width:0px;
+  height:0px;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomLeft { /* SPACE is missing for the widget is the same as the top level container*/
+  width:0px;
+  height:0px;
+}
+.mjs-top.gwt-SuggestBoxPopup .suggestPopupBottomRight { /* SPACE is missing for the widget is the same as the top level container*/
+  width:0px;
+  height:0px;
+}
+
+.mjs-top .gwt-TabBar {
+  background: none repeat scroll 0% 0% white;
+  border-top: 2px solid white;
+  padding-top: 6px;
+}
+
+.mjs-top .gwt-TabBar .gwt-TabBarFirst {
+  width: 0px;  /* first tab distance from the left */
+}
+.mjs-top .gwt-TabBar .gwt-TabBarRest {
+}
+.mjs-top .gwt-TabBar .gwt-TabBarItem {
+  margin-left: 4px;
+  padding: 4px 8px 4px 8px;
+  cursor: pointer;
+  cursor: hand;
+  color: white;
+  font-weight: normal;
+  text-align: center;
+  background: #8E8E8E;
+}
+.mjs-top .gwt-TabBar .gwt-TabBarItem-selected {
+  cursor: default;
+  background: none repeat scroll 0% 0% #e4e4e4;
+  color: #333;
+  font-weight: bold;
+}
+
+.mjs-top .gwt-TabBar .gwt-TabBarItem-disabled {
+  cursor: default;
+  color: #999999;
+}
+
+.mjs-top .gwt-TabPanelBottom {
+  background-color: #e4e4e4;
+  border: none;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.mjs-top .gwt-TextArea {
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #666;
+  font-size: 100%;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+}
+.mjs-top .gwt-TextArea-readonly {
+  color: #888;
+}
+
+.mjs-top .gwt-TextBox {
+  padding: 5px 4px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #999;
+  font-size: small;
+  font-family: Arial Unicode MS, Arial, sans-serif;
+}
+.mjs-top .gwt-TextBox-readonly {
+  color: #888;
+}
+.mjs-top .gwt-ToggleButton-up,
+.mjs-top .gwt-ToggleButton-up-hovering,
+.mjs-top .gwt-ToggleButton-up-disabled,
+.mjs-top .gwt-ToggleButton-down,
+.mjs-top .gwt-ToggleButton-down-hovering,
+.mjs-top .gwt-ToggleButton-down-disabled {
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  padding: 0px;
+  text-decoration: none;
+  border: 1px solid white;
+  outline: none;
+}
+
+.mjs-top .gwt-ToggleButton-up,
+.mjs-top .gwt-ToggleButton-up-hovering,
+.mjs-top .gwt-ToggleButton-down,
+.mjs-top .gwt-ToggleButton-down-hovering {
+  cursor: pointer;
+  cursor: hand;
+}
+.mjs-top .gwt-ToggleButton-up-disabled {
+  cursor: default;
+  opacity: .5;
+  zoom: 1;
+  filter: literal("alpha(opacity=45)"); 
+}
+.mjs-top .gwt-ToggleButton-down,
+.mjs-top .gwt-ToggleButton-down-hovering {
+  border: 1px solid #B6CDEF;
+  background-color: #B6CDEF;
+}
+.mjs-top .gwt-ToggleButton-down-disabled {
+  cursor: default;
+  opacity: .5;
+  zoom: 1;
+  filter: literal("alpha(opacity=45)"); 
+}
