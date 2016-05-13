@@ -1,0 +1,105 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}ChEMBL{% endblock %}
+
+{% block content %}
+
+<div class="container main-container">
+
+
+  {% block breadcrumb %}
+  {% include "glados/base/breadcrumb.html" %}
+  {% endblock %}
+
+</div>
+
+<div class="hide-on-small-only">
+
+  <div class="card grey lighten-4 z-depth-0">
+    <div class="card-content">
+
+      <div class="section">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col m12">
+
+
+              <div class="search-bar full-height z-depth-2">
+
+                <div class="col m8">
+
+
+                  <div class="search-input-wrapper">
+                    <input type="search" placeholder="Search in ChEMBL" required>
+                  </div>
+
+
+                </div>
+
+                <div class="col m2">
+
+
+                  <div class="search-opts-wrapper valign-wrapper">
+
+
+                    <div class="valign calign">
+                      <a href="#"><i class="icon icon-generic" data-icon="("></i> Advanced</a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col m2">
+
+                  <div class="search-btn-wrapper valign-wrapper">
+                    <div class="valign calign">
+                      <a href=""><i class="icon icon-functional" data-icon="1"></i> Search</i></a>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="hide-on-med-and-up">
+
+  <nav>
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+  `
+</div>
+
+{% endblock %}

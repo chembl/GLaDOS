@@ -2708,4 +2708,42 @@ div#CNC-zoom-modal {
 .acks-list li {
   padding: 2px 0; }
 
+/**
+* Acknowledgements
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.search-bar {
+  /* label underline focus color */
+  border: 2px solid #009688;
+  background-color: white;
+  border-radius: 5px; }
+  .search-bar .col {
+    padding: 0; }
+  .search-bar input {
+    margin-left: 10px;
+    margin-bottom: 0px;
+    width: 95%;
+    border-bottom: 0px; }
+  .search-bar input:focus {
+    border-bottom: 0px; }
+  .search-bar input[type=search]:focus {
+    border-bottom: 0;
+    box-shadow: none; }
+
+.full-height:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
+  height: 45px; }
+
+.calign {
+  margin: auto; }
+
+.search-btn-wrapper {
+  background-color: #009688; }
+  .search-btn-wrapper a {
+    color: white; }
+
 /*# sourceMappingURL=chembl-style.css.map */
