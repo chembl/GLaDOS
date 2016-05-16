@@ -44,6 +44,9 @@ urlpatterns = [
   url(r'^$',
       DirectTemplateView.as_view(template_name="glados/mainPage.html"), ),
 
+  url(r'^marvin_search_fullscreen/$',
+      DirectTemplateView.as_view(template_name="glados/marvin_search_small.html"), ),
+
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
 
   url(r'^acknowledgements/$', views.acks, name='acks'),

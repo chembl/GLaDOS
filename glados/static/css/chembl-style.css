@@ -2779,4 +2779,24 @@ div#CNC-zoom-modal {
   margin-top: 0px;
   z-index: 999; }
 
+.marvin-search-options {
+  position: fixed;
+  bottom: 0;
+  width: 100%; }
+  .marvin-search-options .col {
+    background-color: #009688;
+    padding: 1px;
+    height: 9vh; }
+  .marvin-search-options .row {
+    margin: 0; }
+  .marvin-search-options a {
+    display: block;
+    background-color: #009688;
+    color: white;
+    padding: 2vh 5vw; }
+
+.marvin-search-fullscreen {
+  margin: 0;
+  height: 91vh; }
+
 /*# sourceMappingURL=chembl-style.css.map */

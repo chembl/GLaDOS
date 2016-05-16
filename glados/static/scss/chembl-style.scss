@@ -1385,6 +1385,8 @@ $search-items-height:45px;
 * Search bar
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$marvin-size-fullscreen: 91vh;
 .search-bar-small{
 
   background-color: $h2-color;
@@ -1394,4 +1396,38 @@ $search-items-height:45px;
   width: 100%;
   margin-top: 0px;
   z-index: 999;
+}
+
+.marvin-search-options{
+
+  position: fixed;
+  bottom: 0;
+
+
+  width: 100%;
+
+  .col{
+    background-color: $primary-color;
+    padding: 1px;
+    height: 100vh - $marvin-size-fullscreen;
+  }
+
+  .row{
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    background-color: $primary-color;
+    color: white;
+    padding: 2vh 5vw;
+
+  }
+
+}
+
+.marvin-search-fullscreen{
+  margin: 0;
+  height: $marvin-size-fullscreen;
+
 }
