@@ -2777,7 +2777,7 @@ div#CNC-zoom-modal {
   line-height: 56px;
   width: 100%;
   margin-top: 0px;
-  z-index: 999; }
+  z-index: 998; }
 
 .marvin-search-options {
   position: fixed;
