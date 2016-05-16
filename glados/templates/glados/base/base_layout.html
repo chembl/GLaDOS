@@ -103,6 +103,8 @@
     // collapse button, the one that shows the sidenav on mobile
     $(".button-collapse").sideNav();
     SideMenuHelper.complementaryinitSideNav();
+    // pinner for search bar
+     $('#search-bar-small').pushpin({ top: 106 });
 
     {% block custom_js_inline %}{% endblock %}
 

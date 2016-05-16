@@ -197,6 +197,8 @@ main {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+$chembl-nav-height: 56px;
+
 header .row {
   margin-bottom: 0;
 }
@@ -226,7 +228,7 @@ nav.top-nav a {
     background: $h2-color;
     margin-left: 0px;
     margin-top: 0px;
-    height: 56px;
+    height: $chembl-nav-height;
     line-height: 61px;
     padding-left: 0px;
   }
@@ -1377,4 +1379,19 @@ $search-items-height:45px;
 
 .chembl-version-wrapper{
 
+}
+
+/**
+* Search bar
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.search-bar-small{
+
+  background-color: $h2-color;
+  height: $chembl-nav-height;
+  color: white;
+  line-height: $chembl-nav-height;
+  width: 100%;
+  margin-top: 0px;
+  z-index: 999;
 }

@@ -2766,5 +2766,17 @@ div#CNC-zoom-modal {
 * Database statistics
 * ----------------------------------------------------------------------------------------------------------------------
 */
+/**
+* Search bar
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.search-bar-small {
+  background-color: #207a7a;
+  height: 56px;
+  color: white;
+  line-height: 56px;
+  width: 100%;
+  margin-top: 0px;
+  z-index: 999; }
 
 /*# sourceMappingURL=chembl-style.css.map */
