@@ -22,6 +22,10 @@
 
 </div>
 
+{% block search_small %}
+  {% include "glados/MainPageParts/search_bar_small.html" %}
+{% endblock %}
+
 <div class="row hide-on-small-only">
 
   <div class="col m8 l9 ">
@@ -49,5 +53,9 @@
 </div>
 
 
+{% endblock %}
 
+{% block custom_js_inline %}
+  // pinner for search bar
+  $('#search-bar-small').pushpin({ top: 106 });
 {% endblock %}
