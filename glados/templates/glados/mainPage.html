@@ -25,19 +25,10 @@
 
 <div class="hide-on-med-and-up">
 
-  <nav>
-    <div class="nav-wrapper">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search" required>
-          <label for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
+  {% block search_small %}
+    {% include "glados/MainPageParts/search_bar_small.html" %}
+  {% endblock %}
 
-  `
 </div>
 
 <div class="row hide-on-small-only">
