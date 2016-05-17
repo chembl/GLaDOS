@@ -2820,4 +2820,18 @@ div#CNC-zoom-modal {
   margin: 0;
   height: 91vh; }
 
+/**
+* Tweets
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.tweets .tweet {
+  border-bottom: 1px solid #00e3cd;
+  margin-bottom: 5px; }
+.tweets .row {
+  margin: 0; }
+.tweets .col {
+  padding: 2px; }
+.tweets .tweet-content {
+  font-size: 50%; }
+
 /*# sourceMappingURL=chembl-style.css.map */

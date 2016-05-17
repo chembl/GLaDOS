@@ -1462,3 +1462,28 @@ $marvin-size-fullscreen: 91vh;
   height: $marvin-size-fullscreen;
 
 }
+
+/**
+* Tweets
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.tweets{
+
+  .tweet{
+    border-bottom: 1px solid $primary-color-light;
+    margin-bottom: 5px;
+  }
+
+  .row{
+    margin: 0;
+  }
+
+  .col{
+    padding: 2px;
+  }
+
+  .tweet-content{
+    font-size: 50%;
+  }
+}
