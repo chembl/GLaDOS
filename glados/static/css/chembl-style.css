@@ -2825,13 +2825,15 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .tweets .tweet {
-  border-bottom: 1px solid #00e3cd;
-  margin-bottom: 5px; }
+  border-bottom: 1px solid #009688;
+  margin-bottom: 5px;
+  padding: 10px; }
 .tweets .row {
   margin: 0; }
 .tweets .col {
   padding: 2px; }
 .tweets .tweet-content {
-  font-size: 50%; }
+  font-size: 50%;
+  padding: 5px; }
 
 /*# sourceMappingURL=chembl-style.css.map */
