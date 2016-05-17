@@ -1471,8 +1471,9 @@ $marvin-size-fullscreen: 91vh;
 .tweets{
 
   .tweet{
-    border-bottom: 1px solid $primary-color-light;
+    border-bottom: 1px solid $primary-color;
     margin-bottom: 5px;
+    padding: 10px;
   }
 
   .row{
@@ -1485,5 +1486,6 @@ $marvin-size-fullscreen: 91vh;
 
   .tweet-content{
     font-size: 50%;
+    padding: 5px;
   }
 }
