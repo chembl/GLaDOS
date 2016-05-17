@@ -1838,7 +1838,6 @@ header .row {
 
 nav.top-nav {
   background-color: #207a7a;
-  background: linear-gradient(to right, #207a7a 60%, white);
   height: 90px;
   line-height: 100px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
@@ -1848,6 +1847,10 @@ nav.top-nav {
 nav.top-nav a {
   text-shadow: 1px 1px #000000;
   font-size: 3rem; }
+
+.donwload-database-btn {
+  position: absolute;
+  right: 5%; }
 
 /* responsive sizes */
 @media only screen and (max-width: 993px) {

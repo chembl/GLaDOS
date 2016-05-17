@@ -198,6 +198,7 @@ main {
 */
 
 $chembl-nav-height: 56px;
+$chembl-nav-line-height: 61px;
 
 header .row {
   margin-bottom: 0;
@@ -205,7 +206,6 @@ header .row {
 
 nav.top-nav {
   background-color: $h2-color;
-  background: linear-gradient(to right, $h2-color 60%, white);
   height: 90px;
   line-height: 100px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
@@ -216,6 +216,11 @@ nav.top-nav {
 nav.top-nav a {
   text-shadow: 1px 1px #000000;
   font-size: 3rem;
+}
+
+.donwload-database-btn {
+  position: absolute;
+  right: 5%;
 }
 
 /* responsive sizes */
@@ -229,13 +234,14 @@ nav.top-nav a {
     margin-left: 0px;
     margin-top: 0px;
     height: $chembl-nav-height;
-    line-height: 61px;
+    line-height: $chembl-nav-line-height;
     padding-left: 0px;
   }
 
   nav.top-nav a {
     font-size: 2rem;
   }
+
 }
 
 /**
