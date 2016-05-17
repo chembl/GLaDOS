@@ -28,7 +28,7 @@
 
 <div class="row hide-on-small-only">
 
-  <div class="col m8 l9 ">
+  <div class="col m12 l9 ">
 
     {% block marvin %}
     {% include "glados/MainPageParts/marvin_editor.html" %}
@@ -36,13 +36,14 @@
 
   </div>
 
-  <div class="col m4 l3">
+  <div class="col m6 l3">
 
     {% block database_info %}
     {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
+</div>
 
-
+   <div class="col m6 l3">
     {% block tweets %}
     {% include "glados/MainPageParts/tweets.html" %}
     {% endblock %}
