@@ -41,8 +41,7 @@ urlpatterns = [
   url(r'^tissue_report_card/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
 
-  url(r'^$',
-      DirectTemplateView.as_view(template_name="glados/mainPage.html"), ),
+  url(r'^$', views.main_page, name='main' ),
 
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_small.html"), ),

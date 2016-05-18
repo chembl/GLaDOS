@@ -3,6 +3,7 @@ from .models import Faq
 from .models import FaqCategory
 from .models import FaqSubcategory
 from django.shortcuts import render
+from twitter import *
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
@@ -17,7 +18,6 @@ def acks(request):
 # returns all Faqs grouped by category and subcategory
 def faqs(request):
 
-  print('------------------')
   #faqs_list = Faq.objects.all();
   # the categories are ordered by the position theu should have in the page
   categories = FaqCategory.objects.all();
@@ -44,13 +44,54 @@ def faqs(request):
       for q in questions_by_subcategory:
         faqs_in_this_subcategory ['items'].append(q)
 
-
-
-  print(faqs_structure)
-  print('^^^^')
-
-
   context = {'faqs_structure': faqs_structure}
 
 
   return render(request, 'glados/faqs.html', context)
+
+def get_latest_tweets():
+
+  print ('getting tweets!!!')
+
+  token='732582863107981312-dZ8OEZZdNCsltXtN2pTp3xShPMYHxkE'
+  token_key = 'NeyIr4Qol3iOYUMhXQlYbrY7MTpZAjYTiXa2aMjjxPFPP'
+
+  consumer_key='Icu63OEakLyDasHfykeVnABPkaFNnw3xYEiEf85VUGlbFCBWvE'
+
+  consumer_secret='du50tzw6Ixrk6skymWntOZXCS'
+
+  t = Twitter( auth=OAuth(token, token_key, consumer_secret, consumer_key))
+
+  tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
+  return tweets
+
+def main_page(request):
+
+  tweets = get_latest_tweets()
+
+  simplified_tweets = []
+
+  print(tweets[0])
+  print('^^^')
+
+  for t in tweets:
+    print ('---')
+    print("t['text']")
+    print(t['text'])
+    print("t['entities']")
+    print(t['entities'])
+    print("t['created_at']")
+    print(t['created_at'])
+    print("t['user']['profile_image_url']")
+    print(t['user']['profile_image_url'])
+    print("t['user']['screen_name']")
+    print(t['user']['screen_name'])
+    print("t['user']['name']")
+    print(t['user']['name'])
+
+    simp_tweet = {
+      'text': 'hola',
+      'created_at': 'date'
+    }
+
+  return render(request, 'glados/mainPage.html')
