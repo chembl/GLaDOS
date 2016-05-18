@@ -50,6 +50,7 @@ def faqs(request):
   return render(request, 'glados/faqs.html', context)
 
 def get_latest_tweets():
+  """Returns the latest tweets from chembl"""
 
   print ('getting tweets!!!')
 
@@ -65,6 +66,16 @@ def get_latest_tweets():
   tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
   return tweets
 
+def replace_urls_from_entinies(html, urls):
+  """
+  :return: the html with the corresponding links from the entities
+  """
+  for url in urls:
+    link = '<a href="%s">%s</a>' % (url['url'], url['display_url'])
+    html = html.replace(url['url'], link)
+
+  return html
+
 def main_page(request):
 
   tweets = get_latest_tweets()
@@ -72,26 +83,35 @@ def main_page(request):
   simplified_tweets = []
 
   print(tweets[0])
-  print('^^^')
 
   for t in tweets:
-    print ('---')
-    print("t['text']")
-    print(t['text'])
-    print("t['entities']")
-    print(t['entities'])
-    print("t['created_at']")
-    print(t['created_at'])
-    print("t['user']['profile_image_url']")
-    print(t['user']['profile_image_url'])
-    print("t['user']['screen_name']")
-    print(t['user']['screen_name'])
-    print("t['user']['name']")
-    print(t['user']['name'])
+
+    html = t['text']
+
+    for entity_type in t['entities']:
+      print(entity_type)
+
+      entities = t['entities'][entity_type]
+
+      if entity_type == 'urls':
+        html = replace_urls_from_entinies(html, entities)
+
 
     simp_tweet = {
-      'text': 'hola',
-      'created_at': 'date'
+      'id': t['id'],
+      'text': html,
+      'created_at': '-'.join(t['created_at'].split(' ')[2:0:-1]),
+
+      'user': {
+        'name': t['user']['name'],
+        'screen_name': t['user']['screen_name'],
+        'profile_image_url': t['user']['profile_image_url']
+      }
+
     }
 
-  return render(request, 'glados/mainPage.html')
+    simplified_tweets.append(simp_tweet)
+
+  context = {'tweets': simplified_tweets}
+
+  return render(request, 'glados/mainPage.html', context)

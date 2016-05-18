@@ -18,16 +18,22 @@
 
       <ul class="tweets-list">
 
+        {% if tweets %}
+
+        {% for tweet in tweets %}
+
         <li class="tweet grey lighten-5">
 
           <div class="row">
             <div class="col s2">
-              <img class="responsive-img" src="/static/img/chembl_logo.png" alt="" class="circle">
+              <img class="responsive-img" src="{{tweet.user.profile_image_url}}" alt="" class="circle">
             </div>
 
             <div class="col s9">
               <p><b>ChEMBL</b></p>
-              <p><small><a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a></small></p>
+              <p>
+                <small><a target="_blank" href="https://twitter.com/{{tweet.user.screen_name}}">@{{tweet.user.screen_name}}</a></small>
+              </p>
             </div>
 
             <div class="col s1">
@@ -41,8 +47,9 @@
             <div class="flow-text">
               <div class="tweet-content">
                 <p>
-                  Interested in attending a workshop on training needs for bimolecular modelling and simulation (3/4
-                  May)? <a href="https://t.co/ncpgbnd6Hv">http://www.ebi.ac.uk/traini...</a>
+                  {% autoescape off %}
+                    {{tweet.text}}
+                  {% endautoescape %}
                 </p>
               </div>
             </div>
@@ -51,123 +58,23 @@
 
           <div class="row">
             <div class="col s4">
-              <a href="#!"><i class="fa fa-heart" aria-hidden="true"></i></a>
+              <a href="https://twitter.com/intent/like?tweet_id={{tweet.id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
               <a href="#!"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
             </div>
 
 
             <div class="col s8 right-align">
-              <span>14-Apr</span>
+              <span>{{tweet.created_at}}</span>
             </div>
 
           </div>
 
 
+          {% endfor %}
 
-        </li>
-
-          <li class="tweet grey lighten-5">
-
-          <div class="row">
-            <div class="col s2">
-              <img class="responsive-img" src="/static/img/chembl_logo.png" alt="" class="circle">
-            </div>
-
-            <div class="col s9">
-              <p><b>ChEMBL</b></p>
-              <p><small><a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a></small></p>
-            </div>
-
-            <div class="col s1">
-              <a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-
-          </div>
-
-          <div class="row">
-
-            <div class="flow-text">
-              <div class="tweet-content">
-                <p>
-                  Interested in attending a workshop on training needs for bimolecular modelling and simulation (3/4
-                  May)? <a href="https://t.co/ncpgbnd6Hv">http://www.ebi.ac.uk/traini...</a>
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col s4">
-              <a href="#!"><i class="fa fa-heart" aria-hidden="true"></i></a>
-              <a href="#!"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
-            </div>
-
-
-            <div class="col s8 right-align">
-              <span>14-Apr</span>
-            </div>
-
-          </div>
-
-
-
-        </li>
-
-          <li class="tweet grey lighten-5">
-
-          <div class="row">
-            <div class="col s2">
-              <img class="responsive-img" src="/static/img/chembl_logo.png" alt="" class="circle">
-            </div>
-
-            <div class="col s9">
-              <p><b>ChEMBL</b></p>
-              <p><small><a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a></small></p>
-            </div>
-
-            <div class="col s1">
-              <a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-
-          </div>
-
-          <div class="row">
-
-            <div class="flow-text">
-              <div class="tweet-content">
-                <p>
-                  Interested in attending a workshop on training needs for bimolecular modelling and simulation (3/4
-                  May)? <a href="https://t.co/ncpgbnd6Hv">http://www.ebi.ac.uk/traini...</a>
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col s4">
-              <a href="#!"><i class="fa fa-heart" aria-hidden="true"></i></a>
-              <a href="#!"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
-            </div>
-
-
-            <div class="col s8 right-align">
-              <span>14-Apr</span>
-            </div>
-
-          </div>
-
-
-
-        </li>
-
-
-
-
-
-
-
+          {% else %}
+          <p>No Tweets are available.</p>
+          {% endif %}
 
 
       </ul>
