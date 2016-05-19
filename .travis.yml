@@ -10,7 +10,7 @@ before_script:
   - sleep 3 # give Web server some time to bind to sockets, etc
 script:
   - python setup.py test
-  - python tests/test_settings.py
+  - python tests/deployment_tests.py
 addons:
   apt:
     packages: memcached
