@@ -4,6 +4,8 @@ from .models import FaqCategory
 from .models import FaqSubcategory
 from django.shortcuts import render
 from twitter import *
+from django.conf import settings
+from utils import *
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
@@ -50,20 +52,39 @@ def faqs(request):
   return render(request, 'glados/faqs.html', context)
 
 def get_latest_tweets():
-  """Returns the latest tweets from chembl"""
+  """
+  Returns the latest tweets from chembl
+  :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
+  empty list.
+  """
 
   print ('getting tweets!!!')
 
-  token='732582863107981312-dZ8OEZZdNCsltXtN2pTp3xShPMYHxkE'
-  token_key = 'NeyIr4Qol3iOYUMhXQlYbrY7MTpZAjYTiXa2aMjjxPFPP'
+  access_token =''
+  access_token_secret = ''
+  consumer_key = ''
+  consumer_secret = ''
 
-  consumer_key='Icu63OEakLyDasHfykeVnABPkaFNnw3xYEiEf85VUGlbFCBWvE'
+  try:
 
-  consumer_secret='du50tzw6Ixrk6skymWntOZXCS'
+    access_token = settings.TWITTER_ACCESS_TOKEN
+    access_token_secret = settings.TWITTER_ACCESS_TOKEN_SECRET
+    consumer_key = settings.TWITTER_CONSUMER_KEY
+    consumer_secret = settings.TWITTER_CONSUMER_SECRET
 
-  t = Twitter( auth=OAuth(token, token_key, consumer_secret, consumer_key))
+  except AttributeError as e:
+    print_server_error(e)
+    return []
 
-  tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
+  t = Twitter( auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
+
+
+  try:
+    tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
+  except Exception as e:
+    print_server_error(e)
+    return []
+
   return tweets
 
 def replace_urls_from_entinies(html, urls):
@@ -79,10 +100,7 @@ def replace_urls_from_entinies(html, urls):
 def main_page(request):
 
   tweets = get_latest_tweets()
-
   simplified_tweets = []
-
-  print(tweets[0])
 
   for t in tweets:
 

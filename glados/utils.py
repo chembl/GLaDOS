@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-
+import traceback
 
 # This class allows to render template html files directly
 class DirectTemplateView(TemplateView):
@@ -14,3 +14,19 @@ class DirectTemplateView(TemplateView):
         else:
           context[key] = value
     return context
+
+
+def print_server_error(e):
+  """
+  prints the error to the logs
+  :param e: error to print
+  """
+
+  print('Error:')
+  print('>>>')
+  print(e)
+  print('^^^')
+  print('Traceback:\n\n')
+  traceback.print_exc()
+  print('^^^')
+  print('\n\n\n')
