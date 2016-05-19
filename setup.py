@@ -26,7 +26,7 @@ setup(
         'django>=1.9',
         'django-compressor>=2.0',
         'twitter',
-        'python-memcached'
+        'python3-memcached'
     ],
     include_package_data=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',

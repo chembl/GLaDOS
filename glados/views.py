@@ -6,6 +6,7 @@ from django.shortcuts import render
 from twitter import *
 from django.conf import settings
 from glados.utils import *
+from django.core.cache import cache
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
@@ -53,13 +54,21 @@ def faqs(request):
 
 def get_latest_tweets():
   """
-  Returns the latest tweets from chembl
+  Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter
   :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
   empty list.
   """
+  cache_key = 'latest_tweets'
+  cache_time = 3600 # time to live in seconds
 
-  print ('getting tweets!!!')
+  tweets = cache.get(cache_key)
 
+  # If they are found in the cache, just return them
+  if tweets:
+    print('Using cached tweets!')
+    return tweets
+
+  print('tweets not found in cache!')
   access_token =''
   access_token_secret = ''
   consumer_key = ''
@@ -85,6 +94,7 @@ def get_latest_tweets():
     print_server_error(e)
     return []
 
+  cache.set(cache_key, tweets, cache_time)
   return tweets
 
 def replace_urls_from_entinies(html, urls):
@@ -107,7 +117,6 @@ def main_page(request):
     html = t['text']
 
     for entity_type in t['entities']:
-      print(entity_type)
 
       entities = t['entities'][entity_type]
 

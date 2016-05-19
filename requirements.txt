@@ -2,4 +2,4 @@ django>=1.9
 django-compressor>=2.0
 selenium>=2.52
 twitter
-python-memcached
+python3-memcached
