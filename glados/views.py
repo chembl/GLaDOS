@@ -5,7 +5,7 @@ from .models import FaqSubcategory
 from django.shortcuts import render
 from twitter import *
 from django.conf import settings
-from utils import *
+from glados.utils import *
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
