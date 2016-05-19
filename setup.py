@@ -25,7 +25,8 @@ setup(
     install_requires=[
         'django>=1.9',
         'django-compressor>=2.0',
-        'twitter'
+        'twitter',
+        'python-memcached'
     ],
     include_package_data=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
