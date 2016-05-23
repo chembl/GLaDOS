@@ -2812,6 +2812,12 @@ div#CNC-zoom-modal {
   margin: 0;
   height: 91vh; }
 
+.search-banner {
+  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-color: #60bdc4 !important; }
+
 /**
 * Tweets
 * ----------------------------------------------------------------------------------------------------------------------
