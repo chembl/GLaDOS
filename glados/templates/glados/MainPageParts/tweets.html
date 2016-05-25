@@ -24,23 +24,24 @@
 
         <li class="tweet grey lighten-5">
 
-          <div class="row">
-            <div class="col s2">
-              <img class="responsive-img" src="{{tweet.user.profile_image_url}}" alt="" class="circle">
+          <a href="https://twitter.com/ChEMBL/status/{{tweet.id}}" target="_blank">
+
+            <div class="row">
+              <div class="col s2">
+                <img class="responsive-img" src="{{tweet.user.profile_image_url}}" alt="" class="circle">
+              </div>
+
+              <div class="col s5 ">
+                <p><b>ChEMBL</b></p>
+              </div>
+
+              <div class="col s5 right-align">
+                <span>{{tweet.created_at}}</span>
+              </div>
+
             </div>
 
-            <div class="col s9">
-              <p><b>ChEMBL</b></p>
-              <p>
-                <small><a target="_blank" href="https://twitter.com/{{tweet.user.screen_name}}">@{{tweet.user.screen_name}}</a></small>
-              </p>
-            </div>
-
-            <div class="col s1">
-              <a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
-
-          </div>
+          </a>
 
           <div class="row">
 
@@ -48,7 +49,7 @@
               <div class="tweet-content">
                 <p>
                   {% autoescape off %}
-                    {{tweet.text}}
+                  {{tweet.text}}
                   {% endautoescape %}
                 </p>
               </div>
@@ -58,14 +59,18 @@
 
           <div class="row">
             <div class="col s4">
-              <a href="https://twitter.com/intent/like?tweet_id={{tweet.id}}"><i class="fa fa-heart" aria-hidden="true"></i></a>
-              <a href="#!"><i class="fa fa-share-alt-square" aria-hidden="true"></i></a>
+
+              <a href="#"
+                 onclick="window.open('https://twitter.com/intent/like?tweet_id={{tweet.id}}','like {{tweet.id}}','width=600,height=400')"><i
+                class="fa fa-heart"
+                aria-hidden="true"></i></a>
+
+              <a href="#"
+                 onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{tweet.id}}','retweet {{tweet.id}','width=600,height=400')"><i
+                class="fa fa-retweet" aria-hidden="true"></i></a>
+
             </div>
 
-
-            <div class="col s8 right-align">
-              <span>{{tweet.created_at}}</span>
-            </div>
 
           </div>
 
