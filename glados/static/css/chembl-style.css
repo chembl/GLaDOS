@@ -2819,6 +2819,16 @@ div#CNC-zoom-modal {
     color: white;
     padding: 2vh 5vw; }
 
+.marvin-editor-wrapper {
+  position: relative; }
+  .marvin-editor-wrapper .marvin-editor-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%; }
+
 .marvin-search-fullscreen {
   margin: 0;
   height: 91vh; }

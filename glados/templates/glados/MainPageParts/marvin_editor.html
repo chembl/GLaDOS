@@ -1,37 +1,38 @@
-<div class="card teal lighten-5 z-depth-0">
-  <div class="card-content">
-    <span class="card-title"><i class="icon icon-conceptual icon-c6" data-icon="b"></i>Draw and Search</span>
+<div id="editor-search">
+
+  <span class="card-title"><i class="icon icon-conceptual icon-c6" data-icon="b"></i>Draw and Search</span>
 
 
-    <p>
-      <a href="/marvin_search_fullscreen">Open editor in full screen</a>
-    </p>
+  <p>
+    <a href="/marvin_search_fullscreen">Open editor in full screen</a>
+  </p>
+  <div class="row">
+
+    <div class="marvin-editor-wrapper">
+
+      <img class="marvin-editor-cover" src="/static/img/marvin_search_cover.svg"
+           onclick="this.style.display = 'none';">
+
+      <iframe id="sketch" src="/static/marvinjs/editor.html"
+              style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
+    </div>
+
+  </div>
+
+  <!-- editor buttons -->
+  <div class="container">
+
     <div class="row">
 
-      <div class="marvin-editor-wrapper">
-
-        <iframe id="sketch" src="/static/marvinjs/editor.html"
-                style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
+      <div class="col offset-s4 s4">
+        <a class="waves-effect waves-light btn-chembl teal"><i class="icon icon-functional"
+                                                               data-icon="1"></i>Search</a>
       </div>
 
     </div>
-
-    <!-- editor buttons -->
-    <div class="container">
-
-      <div class="row">
-
-        <div class="col offset-s4 s4">
-          <a class="waves-effect waves-light btn-chembl teal"><i class="icon icon-functional"
-                                                                 data-icon="1"></i>Search</a>
-        </div>
-
-      </div>
-
-    </div>
-
 
   </div>
 
 </div>
+
 

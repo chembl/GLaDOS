@@ -1472,6 +1472,18 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+.marvin-editor-wrapper {
+  position: relative;
+  .marvin-editor-cover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
 .marvin-search-fullscreen{
   margin: 0;
   height: $marvin-size-fullscreen;
