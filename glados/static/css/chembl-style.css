@@ -2821,7 +2821,8 @@ div#CNC-zoom-modal {
   background-position: right center;
   background-repeat: no-repeat;
   background-color: #60bdc4 !important;
-  margin-left: 0.75rem; }
+  margin-left: 0.75rem;
+  margin-right: 0.75rem; }
 
 /**
 * Tweets
