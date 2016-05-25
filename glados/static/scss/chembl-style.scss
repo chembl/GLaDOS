@@ -1383,6 +1383,9 @@ $search-items-height:45px;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+$max_chembl_logo_width: 60px;
+$max_chembl_logo_height: 60px;
+
 .database-info{
 
   .row{
@@ -1400,6 +1403,12 @@ $search-items-height:45px;
 
   .version-number-wrapper{
     position: relative;
+  }
+
+  .version-number-logo{
+
+    width: $max_chembl_logo_width;
+    width: $max_chembl_logo_height;
   }
 
 }

@@ -2779,6 +2779,9 @@ div#CNC-zoom-modal {
   font-size: 0.85rem; }
 .database-info .version-number-wrapper {
   position: relative; }
+.database-info .version-number-logo {
+  width: 60px;
+  width: 60px; }
 
 .database-stats {
   font-size: 0.85rem; }
