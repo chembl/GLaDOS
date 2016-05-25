@@ -1335,6 +1335,14 @@ $search-items-height:45px;
   bottom: -25px;
   left: 10px;
 
+  a{
+    color: white;
+  }
+
+  a:hover{
+    border-bottom: 1px dotted white;
+  }
+
 }
 
 /**

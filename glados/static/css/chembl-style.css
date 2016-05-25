@@ -2731,6 +2731,10 @@ div#CNC-zoom-modal {
   position: absolute;
   bottom: -25px;
   left: 10px; }
+  .search-bar-help a {
+    color: white; }
+  .search-bar-help a:hover {
+    border-bottom: 1px dotted white; }
 
 /**
 * Buttons
