@@ -2857,4 +2857,16 @@ div#CNC-zoom-modal {
   font-size: 50%;
   padding: 5px; }
 
+/**
+* Main Card
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.tabs-wrapper .row {
+  margin-bottom: 0px; }
+.tabs-wrapper .tab {
+  letter-spacing: normal;
+  line-height: 48px;
+  height: 48px;
+  text-transform: none; }
+
 /*# sourceMappingURL=chembl-style.css.map */

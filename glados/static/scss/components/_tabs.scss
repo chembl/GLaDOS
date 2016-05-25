@@ -37,7 +37,7 @@
       overflow: hidden;
       transition: color .28s ease;
       &:hover {
-        color: lighten($tabs-text-color, 20%);
+        color: lighten($tabs-text-color, 5%);
       }
     }
 

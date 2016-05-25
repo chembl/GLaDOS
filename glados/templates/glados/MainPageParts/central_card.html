@@ -1,28 +1,39 @@
-<div class="card teal lighten-5 z-depth-0">
-  <div class="card-content">
+<div class="card teal lighten-5">
+
+  <div class="tabs-wrapper">
 
 
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs grey lighten-4">
-          <li class="tab col s3"><a class="active" href="#editor-search">Ligand Search</a></li>
-          <li class="tab col s3"><a href="#test2">Test 2</a></li>
-          <li class="tab col s3"><a href="#test4">Test 4</a></li>
-        </ul>
-      </div>
+
+          <ul class="tabs teal lighten-5">
+            <li class="tab"><a class="active" href="#editor-search">Ligand Search</a></li>
+            <li class="tab"><a href="#db_schema">Database Schema</a></li>
+            <li class="tab"><a href="#test4">Tab 4</a></li>
+            <li class="tab"><a href="#test4">Tab 5</a></li>
+            <li class="tab"><a href="#test4">Tab 6</a></li>
+          </ul>
+
+
 
     </div>
+
+  <div class="card-content">
 
     <div id="editor-search">
 
       {% block marvin_search %}
-        {% include "glados/MainPageParts/marvin_editor.html" %}
+      {% include "glados/MainPageParts/marvin_editor.html" %}
       {% endblock %}
 
     </div>
 
 
-    <div id="test2" class="col s12">Test 2</div>
+    <div id="db_schema" >
+
+      {% block db_schema %}
+        {% include "glados/MainPageParts/database_schema.html" %}
+      {% endblock %}
+
+    </div>
     <div id="test4" class="col s12">Test 4</div>
 
 

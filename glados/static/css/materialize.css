@@ -3495,7 +3495,7 @@ small {
       overflow: hidden;
       transition: color .28s ease; }
       .tabs .tab a:hover {
-        color: #00fce4; }
+        color: #00b09f; }
     .tabs .tab.disabled a {
       color: #00fce4;
       cursor: default; }
@@ -3503,7 +3503,7 @@ small {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #00e3cd;
+    background-color: #004a43;
     will-change: left, right; }
 
 .material-tooltip {
