@@ -93,6 +93,20 @@
   font-style: normal;
 }
 
+
+/* Chembl font */
+@font-face {
+  font-family: 'EBI-ChEMBL';
+  src: url('../font/EBI-ChEMBL/EBI-ChEMBL.eot');
+  src: url('../font/EBI-ChEMBL/EBI-ChEMBL.eot?#iefix') format('embedded-opentype'),
+  url('../font/EBI-ChEMBL/EBI-ChEMBL.woff') format('woff'),
+  local('â˜º'),
+  url('../font/EBI-ChEMBL/EBI-ChEMBL.svg#EBI-Chemistry') format('svg'),
+  url('../font/EBI-ChEMBL/EBI-ChEMBL.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .icon {
   text-decoration: none;
   font-style: normal;
@@ -149,6 +163,13 @@
 
 .icon-chemistry:before {
   font-family: 'EBI-Chemistry';
+  font-size: 100%;
+  content: attr(data-icon);
+  margin: 0 0.3em 0 0;
+}
+
+.icon-chembl:before {
+  font-family: 'EBI-ChEMBL';
   font-size: 100%;
   content: attr(data-icon);
   margin: 0 0.3em 0 0;
