@@ -3503,7 +3503,7 @@ small {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #004a43;
+    background-color: #009688;
     will-change: left, right; }
 
 .material-tooltip {
