@@ -44,11 +44,15 @@ $h4-color: #222;
 $h5-color: #222;
 $h6-color: #222;
 
+
+
+
 $synonyms-color: color('green', 'lighten-4');
 $tradenames-color: color('light-green', 'lighten-3');
 
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  color: $primary-color-dark
 }
 
 h1 {

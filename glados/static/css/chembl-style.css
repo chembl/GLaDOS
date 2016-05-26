@@ -1724,7 +1724,8 @@
 * ----------------------------------------------------------------------------------------------------------------------
 */
 html {
-  font-family: "ChEMBL_Verdana", Verdana, sans-serif; }
+  font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  color: #004a43; }
 
 h1 {
   color: #f7f7f7;
