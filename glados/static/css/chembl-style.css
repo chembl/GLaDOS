@@ -2820,9 +2820,9 @@ div#CNC-zoom-modal {
     color: white;
     padding: 2vh 5vw; }
 
-.marvin-editor-wrapper {
+.iframe-cover-wrapper {
   position: relative; }
-  .marvin-editor-wrapper .marvin-editor-cover {
+  .iframe-cover-wrapper .iframe-cover {
     position: absolute;
     top: 0;
     left: 0;
