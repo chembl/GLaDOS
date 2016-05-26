@@ -1,0 +1,296 @@
+{
+	"nodeDataArray" : [
+      { "key": "assay", "text": "Assay" },
+	  { "key": "source", "text": "Source" },
+	  { "key": "cell_line", "text": "Cell Line" },
+	  { "key": "target", "text": "Target" },
+	  { "key": "document", "text": "Document" },
+	  { "key": "activity", "text": "Activity" },	  
+	  { "key": "molecule", "text": "Molecule" },	
+	  { "key": "biotherapeutic", "text": "Biotherapeutic" },
+	  { "key": "molecule_forms", "text": "Molecule Form" },
+	  { "key": "atc_class", "text": "ATC Class" },
+      { "key": "similarity", "text": "Similarity" },
+      { "key": "substructure", "text": "Substructure" },
+      { "key": "image", "text": "Image" },
+      { "key": "mechanism", "text": "Mechanism" },
+      { "key": "binding_site", "text": "Binding Site" },
+      { "key": "target_component", "text": "Target Component" },
+      { "key": "protein_class", "text": "Protein Class" },
+      { "key": "chembl_id_lookup", "text": "ChEMBL ID Lookup" }
+    ],
+
+    "linkDataArray" : [
+      { "from": "assay", "to": "source"},
+      { "from": "assay", "to": "cell_line"},
+      { "from": "assay", "to": "target"},
+      { "from": "assay", "to": "document"},
+      { "from": "activity", "to": "assay"},
+      { "from": "activity", "to": "document"},
+      { "from": "activity", "to": "molecule"},
+      { "from": "biotherapeutic", "to": "molecule"},
+      { "from": "molecule_forms", "to": "molecule"},
+      { "from": "atc_class", "to": "molecule"},
+      { "from": "similarity", "to": "molecule", "dash": [3, 2]},
+      { "from": "substructure", "to": "molecule", "dash": [3, 2]},
+      { "from": "image", "to": "molecule", "dash": [3, 2]},
+      { "from": "mechanism", "to": "molecule"},
+      { "from": "mechanism", "to": "binding_site"},
+      { "from": "mechanism", "to": "target"},
+      { "from": "target", "to": "target_component"},
+      { "from": "target_component", "to": "protein_class"}
+    ],
+
+    "columns": {
+      "activity":
+      [
+        { "data": "activity_comment", "title":"activity_comment", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "activity_id", "title":"activity_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_chembl_id", "title":"assay_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_description", "title":"assay_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_type", "title":"assay_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "bao_endpoint", "title":"bao_endpoint", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "bao_format", "title":"bao_format", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "canonical_smiles", "title":"canonical_smiles", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "data_validity_comment", "title":"data_validity_comment", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "document_chembl_id", "title":"document_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "document_journal", "title":"document_journal", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "document_year", "title":"document_year", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_chembl_id", "title":"molecule_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "pchembl_value", "title":"pchembl_value", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "potential_duplicate", "title":"potential_duplicate", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "published_relation", "title":"published_relation", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "published_type", "title":"published_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "published_units", "title":"published_units", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "published_value", "title":"published_value", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "qudt_units", "title":"qudt_units", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "record_id", "title":"record_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "standard_flag", "title":"standard_flag", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "standard_relation", "title":"standard_relation", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "standard_type", "title":"standard_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "standard_units", "title":"standard_units", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "standard_value", "title":"standard_value", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_chembl_id", "title":"target_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_organism", "title":"target_organism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_pref_name", "title":"target_pref_name", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "uo_units", "title":"uo_units", "orderable": true, "defaultContent": "<i>Not set</i>" }
+      ],
+
+    "assay":
+    [
+        { "data": "assay_category", "title":"assay_category", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_cell_type", "title":"assay_cell_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_chembl_id", "title":"assay_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_organism", "title":"assay_organism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_strain", "title":"assay_strain", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_subcellular_fraction", "title":"assay_subcellular_fraction", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_tax_id", "title":"assay_tax_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_test_type", "title":"assay_test_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_tissue", "title":"assay_tissue", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_type", "title":"assay_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "assay_type_description", "title":"assay_type_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "bao_format", "title":"bao_format", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_chembl_id", "title":"cell_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "confidence_description", "title":"confidence_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "confidence_score", "title":"confidence_score", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "description", "title":"description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "document_chembl_id", "title":"document_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "relationship_description", "title":"relationship_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "relationship_type", "title":"relationship_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "src_assay_id", "title":"src_assay_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "src_id", "title":"src_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_chembl_id", "title":"target_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "atc_class":
+    [
+        { "data": "level1", "title":"level1", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "level1_description", "title":"level1_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "level2", "title":"level2", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "level2_description", "title":"level2_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "level3", "title":"level3", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "level3_description", "title":"level3_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "level4", "title":"level4", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "level4_description", "title":"level4_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "level5", "title":"level5", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "who_id", "title":"who_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "who_name", "title":"who_name", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "binding_site":
+    [
+        { "data": "site_id", "title":"site_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "site_name", "title":"site_name", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "biotherapeutic":
+    [
+        { "data": "description", "title":"description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "helm_notation", "title":"helm_notation", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_chembl_id", "title":"molecule_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "cell_line":
+    [
+        { "data": "cell_chembl_id", "title":"cell_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_description", "title":"cell_description", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_id", "title":"cell_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_name", "title":"cell_name", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_source_organism", "title":"cell_source_organism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_source_tax_id", "title":"cell_source_tax_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cell_source_tissue", "title":"cell_source_tissue", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "cellosaurus_id", "title":"cellosaurus_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "clo_id", "title":"clo_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "efo_id", "title":"efo_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "chembl_id_lookup":
+    [
+        { "data": "chembl_id", "title":"chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "entity_type", "title":"entity_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "resource_url", "title":"resource_url", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "status", "title":"status", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "document":
+    [
+        { "data": "authors", "title":"authors", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "doc_type", "title":"doc_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "document_chembl_id", "title":"document_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "doi", "title":"doi", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "first_page", "title":"first_page", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "issue", "title":"issue", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "journal", "title":"journal", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "last_page", "title":"last_page", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "pubmed_id", "title":"pubmed_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "title", "title":"title", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "volume", "title":"volume", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "year", "title":"year", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "mechanism":
+    [
+        { "data": "action_type", "title":"action_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "binding_site_comment", "title":"binding_site_comment", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "direct_interaction", "title":"direct_interaction", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "disease_efficacy", "title":"disease_efficacy", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "mec_id", "title":"mec_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "mechanism_comment", "title":"mechanism_comment", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "mechanism_of_action", "title":"mechanism_of_action", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecular_mechanism", "title":"molecular_mechanism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_chembl_id", "title":"molecule_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "record_id", "title":"record_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "selectivity_comment", "title":"selectivity_comment", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "site_id", "title":"site_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_chembl_id", "title":"target_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "molecule":
+    [
+
+        { "data": "availability_type", "title":"availability_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "black_box_warning", "title":"black_box_warning", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "chebi_par_id", "title":"chebi_par_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "chirality", "title":"chirality", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "dosed_ingredient", "title":"dosed_ingredient", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "first_approval", "title":"first_approval", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "first_in_class", "title":"first_in_class", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "helm_notation", "title":"helm_notation", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "indication_class", "title":"indication_class", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "inorganic_flag", "title":"inorganic_flag", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "max_phase", "title":"max_phase", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_chembl_id", "title":"molecule_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_hierarchy.parent_chembl_id", "title":"parent_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.acd_logd", "title":"acd_logd", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.acd_logp", "title":"acd_logp", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.acd_most_apka", "title":"acd_most_apka", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.acd_most_bpka", "title":"acd_most_bpka", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.alogp", "title":"alogp", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.aromatic_rings", "title":"aromatic_rings", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.full_molformula", "title":"full_molformula", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.full_mwt", "title":"full_mwt", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.hba", "title":"hba", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.hbd", "title":"hbd", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.heavy_atoms", "title":"heavy_atoms", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.med_chem_friendly", "title":"med_chem_friendly", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.molecular_species", "title":"molecular_species", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.mw_freebase", "title":"mw_freebase", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.mw_monoisotopic", "title":"mw_monoisotopic", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.num_alerts", "title":"num_alerts", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.num_ro5_violations", "title":"num_ro5_violations", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.psa", "title":"psa", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.qed_weighted", "title":"qed_weighted", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.ro3_pass", "title":"ro3_pass", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_properties.rtb", "title":"rtb", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_structures.canonical_smiles", "title":"canonical_smiles", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_structures.standard_inchi", "title":"standard_inchi", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_structures.standard_inchi_key", "title":"standard_inchi_key", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "molecule_type", "title":"molecule_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "natural_product", "title":"natural_product", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "oral", "title":"oral", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "parenteral", "title":"parenteral", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "polymer_flag", "title":"polymer_flag", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "pref_name", "title":"pref_name", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "prodrug", "title":"prodrug", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "structure_type", "title":"structure_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "therapeutic_flag", "title":"therapeutic_flag", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "topical", "title":"topical", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "usan_stem", "title":"usan_stem", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "usan_stem_definition", "title":"usan_stem_definition", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "usan_substem", "title":"usan_substem", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "usan_year", "title":"usan_year", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "molecule_form":
+    [
+        { "data": "molecule_chembl_id", "title":"molecule_chembl_id", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "parent", "title":"parent", "orderable": false, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "protein_class":
+    [
+        { "data": "l1", "title":"l1", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l2", "title":"l2", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l3", "title":"l3", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l4", "title":"l4", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l5", "title":"l5", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l6", "title":"l6", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l7", "title":"l7", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "l8", "title":"l8", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "protein_class_id", "title":"protein_class_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "target":
+    [
+        { "data": "organism", "title":"organism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "pref_name", "title":"pref_name", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "species_group_flag", "title":"species_group_flag", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_chembl_id", "title":"target_chembl_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "target_type", "title":"target_type", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+    "target_component":
+    [
+        { "data": "accession", "title":"accession", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "component_id", "title":"component_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "component_type", "title":"component_type", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "description", "title":"description", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "organism", "title":"organism", "orderable": true, "defaultContent": "<i>Not set</i>" },
+        { "data": "sequence", "title":"sequence", "orderable": false, "defaultContent": "<i>Not set</i>" },
+        { "data": "tax_id", "title":"tax_id", "orderable": true, "defaultContent": "<i>Not set</i>" }
+    ],
+
+      "source": 
+            [
+            { "data": "src_description", "title":"src_description", "orderable": false, "defaultContent": "<i>Not set</i>" },
+            { "data": "src_id", "title":"src_id", "orderable": true, "defaultContent": "<i>Not set</i>" },
+            { "data": "src_short_name", "title":"src_short_name", "orderable": true, "defaultContent": "<i>Not set</i>" }
+      ]
+},
+   "plurals": 
+       {
+            "activity": "activities",
+            "atc_class": "atc",
+            "protein_class": "protein_classes"
+      }
+}

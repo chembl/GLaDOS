@@ -1,0 +1,1302 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-trilat", 
+        "major_class": "protease", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "endopeptidase inhibitors", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-caserin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "serotonin receptor agonists, primarily 5-HT2", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-serod", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "serotonin receptor antagonists and partial agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-ditan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antimigraine (5-HT1 receptor agonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-triptan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antimigraine agents (5-HT1 receptor agonists),sumatriptan derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-zotan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "5-HT1A receptor agonists/antagonists acting primarily as neuroprotectors", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-sonan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "5-HT1B receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-anserin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "serotonin 5-HT2 receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-denant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "adenosine 2A antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-denoson", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "adenosine A receptor agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-alol", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "combined alpha and beta receptors", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-oxan", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "alpha-adrenoceptor antagonists (benzodioxane derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-algron", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "alpha1- and alpha2-adrenoreceptor agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-olol", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "beta-blockers (propranolol type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-begron", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "beta 3 adrenoreceptor agonist", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-adol-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "analgesics (mixed opiate receptor agonists/antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-adol", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "analgesics (mixed opiate receptor agonists/antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-sartan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "angiotensin II receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tibant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antiasthmatics (bradykinin antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-ast", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antiasthmatics/antiallergics: leukotriene receptor antagonists", 
+        "subgroup": "-lukast"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-ast", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antiasthmatics/antiallergics: thromboxane A2 receptor antagonists", 
+        "subgroup": "-trodast"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": true, 
+        "stem": "-onidine", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "antihypertensive (clonidine derivative)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azosin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antihypertensives (prazosin type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-sidone", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antipsychotic with binding activity on serotonin (5HT2A) and dopamine (D2) receptors", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tiapine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antipsychotics (dibenzothiazepine derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-troline", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antipsychotics (dopamine D2 antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-peridol", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antipsychotics (haloperidol type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-peridone", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antipsychotics (risperidone type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-troban", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antithrombotics (thromboxane A2 receptor antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-spirone", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "anxiolytics (buspirone type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-terol", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "bronchodilators (phenethylamine derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-nab-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "cannabinol derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "nab-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Prefix", 
+        "annotation": "cannabinol derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-viroc", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "CCR5 antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-viroc", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "CCR5 antagonists: immunomodulators", 
+        "subgroup": "-criviroc"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azepide", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "cholecystokinin receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-glumide", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "CCK antagonists, antiulcer, anxiolytic agent", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "trop-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Prefix", 
+        "annotation": "atropine derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-rixin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "CXCR2 modulators", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-ixafor", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "CXCR4 antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-dopidine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "dopamine D2 receptor modulator", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "dore-", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Prefix", 
+        "annotation": "dopamine D2/D3 receptor modulator", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-dore", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "dopamine D2D3 receptor modulators", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-dopa", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "dopamine receptor agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": true, 
+        "stem": "-golide", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "dopamine receptor agonist (ergoline derivative)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-pamine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "dopaminergics (butopamine type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": true, 
+        "stem": "-opamine", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "dopamingeric (cardiac stimulant/antihypertensive/diuretic)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-entan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "endothelin receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-kef-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "enkephalin agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-golix", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "GnRH receptor antagonists (nonpeptide)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-astine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antihistaminics (histamine-H1 receptor antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-atadine", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "tricyclic antiasthmatics", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tadine", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "histamine H1 receptor antagonist (tricyclic loratadine derivative)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tidine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "H2-receptor antagonists (cimetidine type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-isant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "histamine H3 receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azoline", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antihistamines/local vasoconstrictors (antazoline type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-lubant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "leukotriene receptor antagonists (treatment of inflammatory skin disorders)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-clidine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "muscarinic receptor agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-fentanil", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "narcotic analgesics (fentanyl derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azocine", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "narcotic antagonists/agonists (6,7-benzomorphan derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-orph-", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Infix", 
+        "annotation": "narcotic antagonist/agonist (morphinan derivative)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-orphan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "narcotic antagonists/agonists (morphinan derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "nal-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Prefix", 
+        "annotation": "narcotic agonists/antagonists (normorphine type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-nertant", 
+        "major_class": "GPCR", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "neurotensin receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-neurin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "neurotensin receptor antagonists, neurotropins", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "tachykinin (neurokinin) receptor antagonists: NK1 receptor antagonists", 
+        "subgroup": "-pitant"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "tachykinin (neurokinin) receptor antagonists: NK2 receptor antagonists", 
+        "subgroup": "-dutant"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "tachykinin (neurokinin) receptor antagonists: NK3 receptor antagonists", 
+        "subgroup": "-netant"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tocin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "oxytocin derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-siban", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "oxytocin antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-plact", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "platelet factor 4 analogs and derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-pafant", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "platelet-activating factor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-prost-", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "prostaglandins", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-melteon", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "selective melatonin receptor agonist", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-pride", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "sulpiride derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-fylline", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "theophylline derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-relin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "prehormones or hormone-release stimulating peptides: thyrotropin releasing hormone analogues", 
+        "subgroup": "-tirelin"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-osuran", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "urotensin receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-pressin", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "vasoconstrictors (vasopressin derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-vaptan", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "vasopressin receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tide", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "peptides: GLP peptide analogs", 
+        "subgroup": "-glutide"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tide", 
+        "major_class": "GPCR", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "peptides: synthetic corticotropins", 
+        "subgroup": "-actide"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-setron", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "serotonin 5-HT3 antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-panel", 
+        "major_class": "ion channel", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "AMPA receptor antagonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azepam", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antianxiety agents (diazepam type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-barb-", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "barbituric acid derivatives", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-nil", 
+        "major_class": "ion channel", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "benzodiazepine receptor agonists, also partial or inverse (quinoline derivatives)", 
+        "subgroup": "-quinil"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-azenil", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "benzodiazepine receptor (agonists/antagonists)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-nil", 
+        "major_class": "ion channel", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "benzodiazepine receptor antagonists/agonists", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": true, 
+        "stem": "-carnil", 
+        "major_class": "ion channel", 
+        "downgraded": true, 
+        "stem_class": "Suffix", 
+        "annotation": "benzodiazepine receptor antagonist/agonist (carboline)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": true, 
+        "stem": "-cain-", 
+        "major_class": "ion channel", 
+        "downgraded": true, 
+        "stem_class": "Infix", 
+        "annotation": "class I antiarrythmic (procainamide and lidocaine derivative)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-aj-", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "antiarrhythmics (ajmaline derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-isomide", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antiarrhythmics (disopyramide derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-afenone", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antiarrhythmics (propafenone derivatives)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-arone", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "antirrhythmics", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-ilide", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "class III antiarrhythmic agents", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-tiazem", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "calcium channel blockers (diltiazem type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-pamil", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "coronary vasodilators (verapamil type)", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-gab-", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Infix", 
+        "annotation": "gabamimetics", 
+        "subgroup": "-"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.usanstems", 
+    "fields": {
+        "who_extra": false, 
+        "stem": "-capoc", 
+        "major_class": "ion channel", 
+        "downgraded": false, 
+        "stem_class": "Suffix", 
+        "annotation": "agonists of the Gardos channel, or the calcium activated potassium channel of intermediate conductance", 
+        "subgroup": "-"
+    }
+}
+]

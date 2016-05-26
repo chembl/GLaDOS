@@ -1,0 +1,1402 @@
+[
+{
+    "pk": 257, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050805_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-925", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-04-07", 
+        "patent_no": "8394406", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 258, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050805_001", 
+        "delist_flag": true, 
+        "patent_use_code": "U-925", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2016-08-30", 
+        "patent_no": "5919775", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 259, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_008", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1078", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-06-24", 
+        "patent_no": "8268804", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 260, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_007", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1078", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2027-03-07", 
+        "patent_no": "7919483", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 261, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_006", 
+        "delist_flag": false, 
+        "patent_use_code": "U-917", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2018-02-19", 
+        "patent_no": "5908838", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 262, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_006", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1078", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-06-24", 
+        "patent_no": "8268804", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 263, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_005", 
+        "delist_flag": false, 
+        "patent_use_code": "U-917", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2018-02-19", 
+        "patent_no": "5908838", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 264, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1078", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-06-24", 
+        "patent_no": "7790705", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 265, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050808_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-124", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-06-24", 
+        "patent_no": "8252776", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 266, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050810_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-709", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2017-11-04", 
+        "patent_no": "6159458", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 267, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050810_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-709", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2019-03-31", 
+        "patent_no": "7056893", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 268, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050819_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-124", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2029-06-03", 
+        "patent_no": "8663699", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 269, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050684_004", 
+        "delist_flag": false, 
+        "patent_use_code": "U-282", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-04-14", 
+        "patent_no": "6900184", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 270, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050684_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-282", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-04-14", 
+        "patent_no": "8133883", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 271, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050741_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2014-02-16", 
+        "patent_no": "5466446", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 272, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050750_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2019-02-22", 
+        "patent_no": "6207661", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 273, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050767_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2020-07-20", 
+        "patent_no": "6495157", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 274, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050777_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-919", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2014-09-09", 
+        "patent_no": "5665727", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 275, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050785_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-926", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2020-04-04", 
+        "patent_no": "7217430", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 276, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050785_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-926", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2020-04-04", 
+        "patent_no": "7250176", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 277, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050788_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2018-07-08", 
+        "patent_no": "6013657", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 278, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_050790_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1479", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2024-08-27", 
+        "patent_no": "8633162", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 279, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201277_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1119", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-11-09", 
+        "patent_no": "5980864", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 280, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201280_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1270", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2017-04-24", 
+        "patent_no": "6303661", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 281, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201280_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-493", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2019-02-02", 
+        "patent_no": "7459428", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 282, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201280_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1245", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2023-08-12", 
+        "patent_no": "8178541", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 283, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201281_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1039", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2019-02-02", 
+        "patent_no": "6890898", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 284, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201281_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1039", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2019-02-02", 
+        "patent_no": "7459428", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 285, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201281_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-802", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2023-08-12", 
+        "patent_no": "8119648", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 286, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201281_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1039", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2019-02-02", 
+        "patent_no": "6890898", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 287, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201655_004", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-11-20", 
+        "patent_no": "8309060", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 288, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201655_004", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-11-20", 
+        "patent_no": "8075872", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 289, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201655_004", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-02-04", 
+        "patent_no": "8309122", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 290, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201655_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-09-15", 
+        "patent_no": "8192722", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 291, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201655_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-02-04", 
+        "patent_no": "8329216", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 292, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201688_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2020-05-10", 
+        "patent_no": "7442388", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 293, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201699_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-07-31", 
+        "patent_no": "7378508", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 294, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201739_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-11-23", 
+        "patent_no": "8425462", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 295, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201922_005", 
+        "delist_flag": false, 
+        "patent_use_code": "U-124", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-06-24", 
+        "patent_no": "8268804", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 296, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201922_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-917", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2027-04-02", 
+        "patent_no": "7541347", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 297, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201922_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-124", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2027-03-07", 
+        "patent_no": "7919483", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 298, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_201922_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1376", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2018-02-19", 
+        "patent_no": "5908838", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 299, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202008_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1423", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-04-30", 
+        "patent_no": "8506929", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 300, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202008_003", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-04-30", 
+        "patent_no": "7687052", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 301, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202008_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-04-30", 
+        "patent_no": "7687052", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 302, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202022_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-04-14", 
+        "patent_no": "7638522", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 303, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200153_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1400", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-10-25", 
+        "patent_no": "RE42461", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 304, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200153_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2016-07-08", 
+        "patent_no": "5969156", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 305, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200153_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1400", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-10-25", 
+        "patent_no": "RE42461", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 306, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200175_004", 
+        "delist_flag": false, 
+        "patent_use_code": "U-3", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-04-25", 
+        "patent_no": "5616599", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 307, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_005", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1276", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-06-27", 
+        "patent_no": "7994364", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 308, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_005", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1276", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-11-20", 
+        "patent_no": "8309060", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 309, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_004", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1178", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2022-08-05", 
+        "patent_no": "RE39593", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 310, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1276", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-06-27", 
+        "patent_no": "7994364", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 311, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1276", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2022-08-05", 
+        "patent_no": "RE39593", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 312, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1276", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2022-08-05", 
+        "patent_no": "RE39593", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 313, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200533_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-11-20", 
+        "patent_no": "8075872", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 314, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200677_003", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-06-28", 
+        "patent_no": "6225284", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 315, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200677_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-07-29", 
+        "patent_no": "7473761", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 316, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200677_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2016-06-28", 
+        "patent_no": "6225284", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 317, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200796_002", 
+        "delist_flag": false, 
+        "patent_use_code": "U-3", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2014-06-06", 
+        "patent_no": "5958961", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 318, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_200796_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-3", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2013-12-10", 
+        "patent_no": "5583141", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 319, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-03-02", 
+        "patent_no": "7464706", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 320, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2014-09-30", 
+        "patent_no": "6906030", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 321, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2032-07-12", 
+        "patent_no": "8636001", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 322, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1538", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2031-03-08", 
+        "patent_no": "8227409", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 323, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1535", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2020-06-29", 
+        "patent_no": "6652885", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 324, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1536", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2014-09-30", 
+        "patent_no": "7276534", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 325, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2032-02-19", 
+        "patent_no": "8499757", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 326, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_022472_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2023-03-02", 
+        "patent_no": "7464706", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 327, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_204655_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1509", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2018-05-25", 
+        "patent_no": "6369085", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 328, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205787_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-11-23", 
+        "patent_no": "8425462", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 329, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205787_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2028-11-25", 
+        "patent_no": "8231573", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 330, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205787_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2029-11-02", 
+        "patent_no": "8021344", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 331, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205755_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2021-02-26", 
+        "patent_no": "7153964", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 332, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205060_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-02-07", 
+        "patent_no": "7960370", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 333, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_205637_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1521", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2020-01-22", 
+        "patent_no": "7579019", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 334, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202570_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2029-11-06", 
+        "patent_no": "8217057", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 335, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202611_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2018-10-15", 
+        "patent_no": "6346532", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 336, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202611_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2018-10-15", 
+        "patent_no": "6346532", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 337, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202714_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1260", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2025-04-14", 
+        "patent_no": "8207127", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 338, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202714_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2025-04-14", 
+        "patent_no": "8207125", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 339, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202714_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-12-07", 
+        "patent_no": "7737112", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 340, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202736_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-10-12", 
+        "patent_no": "8791153", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 341, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202736_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2018-05-22", 
+        "patent_no": "6103248", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 342, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_008", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7084245", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 343, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_008", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7414105", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 344, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_005", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7528104", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 345, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_004", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7528104", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 346, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7084245", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 347, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_003", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2026-06-02", 
+        "patent_no": "7550433", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 348, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_002", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7414105", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 349, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_001", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1238", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2026-06-02", 
+        "patent_no": "7550433", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 350, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202799_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-05-12", 
+        "patent_no": "7919118", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 351, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202810_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-04-13", 
+        "patent_no": "8617600", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 352, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202810_001", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2027-04-13", 
+        "patent_no": "8617600", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 353, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202811_002", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1516", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2031-06-20", 
+        "patent_no": "8748573", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 354, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202811_002", 
+        "delist_flag": false, 
+        "patent_use_code": "U-1515", 
+        "drug_product_flag": false, 
+        "patent_expire_date": "2031-06-20", 
+        "patent_no": "8748573", 
+        "in_products": 1, 
+        "drug_substance_flag": false
+    }
+},
+{
+    "pk": 355, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202811_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-01-28", 
+        "patent_no": "7704947", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+},
+{
+    "pk": 356, 
+    "model": "chembl_core_model.productpatents", 
+    "fields": {
+        "product": "PRODUCT_202811_002", 
+        "delist_flag": false, 
+        "patent_use_code": null, 
+        "drug_product_flag": true, 
+        "patent_expire_date": "2024-01-28", 
+        "patent_no": "7745409", 
+        "in_products": 1, 
+        "drug_substance_flag": true
+    }
+}
+]

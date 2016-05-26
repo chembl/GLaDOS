@@ -1,0 +1,1502 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme", 
+        "l8": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Adhesion", 
+        "protein_class_desc": "adhesion", 
+        "l8": null
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Secreted protein", 
+        "protein_class_desc": "secreted", 
+        "l8": null
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Structural protein", 
+        "protein_class_desc": "structural", 
+        "l8": null
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Other nuclear protein", 
+        "protein_class_desc": "nuclear other", 
+        "l8": null
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": "Kinase", 
+        "l3": null, 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  kinase", 
+        "l8": null
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Other membrane protein", 
+        "protein_class_desc": "membrane other", 
+        "l8": null
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Other cytosolic protein", 
+        "protein_class_desc": "cytosolic other", 
+        "l8": null
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Surface antigen", 
+        "protein_class_desc": "surface antigen", 
+        "l8": null
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": "Oxidoreductase", 
+        "l3": null, 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  reductase", 
+        "l8": null
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Membrane receptor", 
+        "protein_class_desc": "membrane receptor", 
+        "l8": null
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": null, 
+        "l3": null, 
+        "l1": "Transcription factor", 
+        "protein_class_desc": "transcription factor", 
+        "l8": null
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": null, 
+        "l5": null, 
+        "l2": "Cytochrome P450", 
+        "l3": "Cytochrome P450 CAM family", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  cytochrome p450  cyp_cam", 
+        "l8": null
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease PA clan", 
+        "l5": "Serine protease S6 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  pas  s6", 
+        "l8": null
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SB clan", 
+        "l5": "Serine protease S8A subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sb  s8a", 
+        "l8": null
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SB clan", 
+        "l5": "Serine protease S8B subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sb  s8b", 
+        "l8": null
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SC clan", 
+        "l5": "Serine protease S10 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sc  s10", 
+        "l8": null
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SC clan", 
+        "l5": "Serine protease S28 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sc  s28", 
+        "l8": null
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SC clan", 
+        "l5": "Serine protease S33 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sc  s33", 
+        "l8": null
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SC clan", 
+        "l5": "Serine protease S9A subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sc  s9a", 
+        "l8": null
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SC clan", 
+        "l5": "Serine protease S9B subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sc  s9b", 
+        "l8": null
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SE clan", 
+        "l5": "Serine protease S11 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  se  s11", 
+        "l8": null
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SE clan", 
+        "l5": "Serine protease S12 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  se  s12", 
+        "l8": null
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SE clan", 
+        "l5": "Serine protease S13 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  se  s13", 
+        "l8": null
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SH clan", 
+        "l5": "Serine protease S21 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sh  s21", 
+        "l8": null
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C2 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2", 
+        "l8": null
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M49 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m49", 
+        "l8": null
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease unclassified clan", 
+        "l5": "Metallo protease M79 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  m-  m79", 
+        "l8": null
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M1 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m1", 
+        "l8": null
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M2 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m2", 
+        "l8": null
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M4 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m4", 
+        "l8": null
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MF clan", 
+        "l5": "Metallo protease M17 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mf  m17", 
+        "l8": null
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MH clan", 
+        "l5": "Metallo protease M18 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m18", 
+        "l8": null
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MJ clan", 
+        "l5": "Metallo protease M19 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mj  m19", 
+        "l8": null
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease PA clan", 
+        "l5": "Serine protease S1A subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  pas  s1a", 
+        "l8": null
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease PA clan", 
+        "l5": "Serine protease S1B subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  pas  s1b", 
+        "l8": null
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease PA clan", 
+        "l5": "Serine protease S29 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  pas  s29", 
+        "l8": null
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SF clan", 
+        "l5": "Serine protease S26A subfamily", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sf  s26a", 
+        "l8": null
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease SR clan", 
+        "l5": "Serine protease S60 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  sr  s60", 
+        "l8": null
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Protease unclassified U family", 
+        "l5": "Protease unclassified U48 family", 
+        "l2": "Protease", 
+        "l3": "Protease unclassified", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  unknown  u-  u48", 
+        "l8": null
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Aspartic protease AA clan", 
+        "l5": "Aspartic protease A1A subfamily", 
+        "l2": "Protease", 
+        "l3": "Aspartic protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  aspartic  aa  a1a", 
+        "l8": null
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Aspartic protease AA clan", 
+        "l5": "Aspartic protease A2A subfamily", 
+        "l2": "Protease", 
+        "l3": "Aspartic protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  aspartic  aa  a2a", 
+        "l8": null
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CM clan", 
+        "l5": "Cysteine protease C18 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cm  c18", 
+        "l8": null
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C1A family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c1a", 
+        "l8": null
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C2A subfamily", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2a", 
+        "l8": null
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CD clan", 
+        "l5": "Cysteine protease C13 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c13", 
+        "l8": null
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CD clan", 
+        "l5": "Cysteine protease C14 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c14", 
+        "l8": null
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CD clan", 
+        "l5": "Cysteine protease C25 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c25", 
+        "l8": null
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M13 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m13", 
+        "l8": null
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M27 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m27", 
+        "l8": null
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MH clan", 
+        "l5": "Metallo protease M28 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28", 
+        "l8": null
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M34 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m34", 
+        "l8": null
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M9B subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m9b", 
+        "l8": null
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MC clan", 
+        "l5": "Metallo protease M14A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mc  m14a", 
+        "l8": null
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MC clan", 
+        "l5": "Metallo protease M14B subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mc  m14b", 
+        "l8": null
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MG clan", 
+        "l5": "Metallo protease M24A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mg  m24a", 
+        "l8": null
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MG clan", 
+        "l5": "Metallo protease M24B subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mg  m24b", 
+        "l8": null
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MH clan", 
+        "l5": "Metallo protease M20A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m20a", 
+        "l8": null
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": "Metallo protease M28A subfamily", 
+        "l7": null, 
+        "l4": "Metallo protease MH clan", 
+        "l5": "Metallo protease M28 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28  m28a", 
+        "l8": null
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": "Metallo protease M28B subfamily", 
+        "l7": null, 
+        "l4": "Metallo protease MH clan", 
+        "l5": "Metallo protease M28 family", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28  m28b", 
+        "l8": null
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Aspartic protease AD clan", 
+        "l5": "Aspartic protease A22A subfamily", 
+        "l2": "Protease", 
+        "l3": "Aspartic protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  aspartic  ad  a22a", 
+        "l8": null
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Aspartic protease AF clan", 
+        "l5": "Aspartic protease A26 family", 
+        "l2": "Protease", 
+        "l3": "Aspartic protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  aspartic  af  a26", 
+        "l8": null
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C12 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c12", 
+        "l8": null
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C19 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c19", 
+        "l8": null
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease CD clan", 
+        "l5": "Cysteine protease C11 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c11", 
+        "l8": null
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": "Cysteine protease C14A subfamily", 
+        "l7": null, 
+        "l4": "Cysteine protease CD clan", 
+        "l5": "Cysteine protease C14 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c14  c14a", 
+        "l8": null
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease PAC clan", 
+        "l5": "Cysteine protease C3A subfamily", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  pac  c3a", 
+        "l8": null
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Cysteine protease PCC clan", 
+        "l5": "Cysteine protease C26 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  pcc  c26", 
+        "l8": null
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Protease inhibitor unclassified clan", 
+        "l5": "Protease inhibitor I49 family", 
+        "l2": "Protease", 
+        "l3": "Protease inhibitor", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  inhibitor  i-  i49", 
+        "l8": null
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAE clan", 
+        "l5": "Metallo protease M48A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m48a", 
+        "l8": null
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAM clan", 
+        "l5": "Metallo protease M10A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m10a", 
+        "l8": null
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAM clan", 
+        "l5": "Metallo protease M12A subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m12a", 
+        "l8": null
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Metallo protease MAM clan", 
+        "l5": "Metallo protease M12B subfamily", 
+        "l2": "Protease", 
+        "l3": "Metallo protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m12b", 
+        "l8": null
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Threonine protease PBT clan", 
+        "l5": "Threonine protease T2 family", 
+        "l2": "Protease", 
+        "l3": "Threonine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  threonine  pbt  t2", 
+        "l8": null
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Threonine protease PBT clan", 
+        "l5": "Threonine protease T1A subfamily", 
+        "l2": "Protease", 
+        "l3": "Threonine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  threonine  pbt  t1a", 
+        "l8": null
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Serine protease unclassified", 
+        "l5": null, 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  unclassified", 
+        "l8": null
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": "Cysteine protease C2 regulatory subfamily", 
+        "l7": null, 
+        "l4": "Cysteine protease CA clan", 
+        "l5": "Cysteine protease C2 family", 
+        "l2": "Protease", 
+        "l3": "Cysteine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2  reg", 
+        "l8": null
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": "Serine protease S29 regulatory subfamily", 
+        "l7": null, 
+        "l4": "Serine protease PA clan", 
+        "l5": "Serine protease S29 family", 
+        "l2": "Protease", 
+        "l3": "Serine protease", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  protease  serine  pas  s29  reg", 
+        "l8": null
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 1A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 1", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1a", 
+        "l8": null
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 1B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 1", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1b", 
+        "l8": null
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 1C", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 1", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1c", 
+        "l8": null
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 2A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 2", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_2  pde_2a", 
+        "l8": null
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 3A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 3", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_3  pde_3a", 
+        "l8": null
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 3B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 3", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_3  pde_3b", 
+        "l8": null
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 4A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 4", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4a", 
+        "l8": null
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 4B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 4", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4b", 
+        "l8": null
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 4C", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 4", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4c", 
+        "l8": null
+    }
+},
+{
+    "pk": 103, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 4D", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 4", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4d", 
+        "l8": null
+    }
+},
+{
+    "pk": 104, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 5A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 5", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_5  pde_5a", 
+        "l8": null
+    }
+},
+{
+    "pk": 105, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6a", 
+        "l8": null
+    }
+},
+{
+    "pk": 106, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6b", 
+        "l8": null
+    }
+},
+{
+    "pk": 107, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6C", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6c", 
+        "l8": null
+    }
+},
+{
+    "pk": 108, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6D", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6d", 
+        "l8": null
+    }
+},
+{
+    "pk": 109, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6G", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6g", 
+        "l8": null
+    }
+},
+{
+    "pk": 110, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 6H", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 6", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6h", 
+        "l8": null
+    }
+},
+{
+    "pk": 111, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 7A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 7", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_7  pde_7a", 
+        "l8": null
+    }
+},
+{
+    "pk": 112, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 7B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 7", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_7  pde_7b", 
+        "l8": null
+    }
+},
+{
+    "pk": 113, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 8A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 8", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_8  pde_8a", 
+        "l8": null
+    }
+},
+{
+    "pk": 114, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 8B", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 8", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_8  pde_8b", 
+        "l8": null
+    }
+},
+{
+    "pk": 115, 
+    "model": "chembl_core_model.proteinfamilyclassification", 
+    "fields": {
+        "l6": null, 
+        "l7": null, 
+        "l4": "Phosphodiesterase 9A", 
+        "l5": null, 
+        "l2": "Phosphodiesterase", 
+        "l3": "Phosphodiesterase 9", 
+        "l1": "Enzyme", 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_9  pde_9a", 
+        "l8": null
+    }
+}
+]

@@ -1,0 +1,1702 @@
+[
+{
+    "pk": 470, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PEFURAZOATE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13D", 
+        "level5": "G13D3", 
+        "level4_description": "IMIDAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 471, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PROCHLORAZ", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13D", 
+        "level5": "G13D4", 
+        "level4_description": "IMIDAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 472, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TRIFLUMIZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13D", 
+        "level5": "G13D5", 
+        "level4_description": "IMIDAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 473, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "AZACONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E1", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 474, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BITERTANOL", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E2", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 475, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BROMUCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E3", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 476, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "CYPROCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E4", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 477, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DIFENOCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E5", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 478, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DINICONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E6", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 479, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "EPOXICONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E7", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 480, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ETACONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E8", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 481, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENBUCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E9", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 482, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUQUINCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E10", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 483, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUSILAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E11", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 484, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUTRIAFOL", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E12", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 485, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "HEXACONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E13", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 486, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "IMIBENCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E14", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 487, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "IPCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E15", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 488, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "METCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E16", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 489, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "MYCLOBUTANIL", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E17", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 490, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PENCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E18", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 491, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PROPICONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E19", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 492, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "SIMECONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E20", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 493, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TEBUCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E21", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 494, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TETRACONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E22", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 495, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TRIADIMEFON", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E23", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 496, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TRIADIMENOL", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E24", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 497, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TRITICONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13E", 
+        "level5": "G13E25", 
+        "level4_description": "TRIAZOLES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 498, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PROTHIOCONAZOLE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "3", 
+        "level1": "G", 
+        "level2": "G1", 
+        "level3": "G13", 
+        "level4": "G13F", 
+        "level5": "G13F1", 
+        "level4_description": "TRIAZOLINTHIONES", 
+        "level3_description": "DMI-FUNGICIDES (DEMETHYLATION INHIBITORS) (SBI: CLASS I)", 
+        "level2_description": "C14-DEMETHYLASE IN STEROL BIOSYNTHESIS (ERG11/CYP51)"
+    }
+},
+{
+    "pk": 499, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ALDIMORPH", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25A", 
+        "level5": "G25A1", 
+        "level4_description": "MORPHOLINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 500, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DODEMORPH", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25A", 
+        "level5": "G25A2", 
+        "level4_description": "MORPHOLINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 501, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENPROPIMORPH", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25A", 
+        "level5": "G25A3", 
+        "level4_description": "MORPHOLINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 502, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TRIDEMORPH", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25A", 
+        "level5": "G25A4", 
+        "level4_description": "MORPHOLINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 503, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENPROPIDIN", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25B", 
+        "level5": "G25B1", 
+        "level4_description": "PIPERIDINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 504, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PIPERALIN", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25B", 
+        "level5": "G25B2", 
+        "level4_description": "PIPERIDINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 505, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "SPIROXAMINE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "5", 
+        "level1": "G", 
+        "level2": "G2", 
+        "level3": "G25", 
+        "level4": "G25C", 
+        "level5": "G25C1", 
+        "level4_description": "SPIROKETAL-AMINES", 
+        "level3_description": "AMINES (\"MORPHOLINES\") (SBI: CLASS II)", 
+        "level2_description": "DELTA14-REDUCTASE AND (DELTA8 TO DELTA7)-ISOMERASE IN STEROL BIOSYNTHESIS (ERG24, ERG2)"
+    }
+},
+{
+    "pk": 506, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENHEXAMID", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "17", 
+        "level1": "G", 
+        "level2": "G3", 
+        "level3": "G317", 
+        "level4": "G317A", 
+        "level5": "G317A1", 
+        "level4_description": "HYDROXYANILIDES", 
+        "level3_description": "(SBI: CLASS III)", 
+        "level2_description": "3-KETO REDUCTASE, C4-DEMETHYLATION (ERG27)"
+    }
+},
+{
+    "pk": 507, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENPYRAZAMINE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "17", 
+        "level1": "G", 
+        "level2": "G3", 
+        "level3": "G317", 
+        "level4": "G317B", 
+        "level5": "G317B1", 
+        "level4_description": "AMINO-PYRAZOLINONE", 
+        "level3_description": "(SBI: CLASS III)", 
+        "level2_description": "3-KETO REDUCTASE, C4-DEMETHYLATION (ERG27)"
+    }
+},
+{
+    "pk": 508, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIBUTICARB", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "18", 
+        "level1": "G", 
+        "level2": "G4", 
+        "level3": "G418", 
+        "level4": "G418A", 
+        "level5": "G418A1", 
+        "level4_description": "THIOCARBAMATES", 
+        "level3_description": "(SBI CLASS IV)", 
+        "level2_description": "SQUALENE-EPOXIDASE IN STEROL BIOSYNTHESIS (ERG1)"
+    }
+},
+{
+    "pk": 509, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "NAFTIFINE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "18", 
+        "level1": "G", 
+        "level2": "G4", 
+        "level3": "G418", 
+        "level4": "G418B", 
+        "level5": "G418B1", 
+        "level4_description": "ALLYLAMINES", 
+        "level3_description": "(SBI CLASS IV)", 
+        "level2_description": "SQUALENE-EPOXIDASE IN STEROL BIOSYNTHESIS (ERG1)"
+    }
+},
+{
+    "pk": 510, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TERBINAFINE", 
+        "level1_description": "STEROL BIOSYNTHESIS IN MEMBRANES", 
+        "frac_code": "18", 
+        "level1": "G", 
+        "level2": "G4", 
+        "level3": "G418", 
+        "level4": "G418B", 
+        "level5": "G418B2", 
+        "level4_description": "ALLYLAMINES", 
+        "level3_description": "(SBI CLASS IV)", 
+        "level2_description": "SQUALENE-EPOXIDASE IN STEROL BIOSYNTHESIS (ERG1)"
+    }
+},
+{
+    "pk": 511, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "VALIDAMYCIN", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "26", 
+        "level1": "H", 
+        "level2": "H3", 
+        "level3": "H326", 
+        "level4": "H326A", 
+        "level5": "H326A1", 
+        "level4_description": "GLUCOPYRANOSYL ANTIBIOTIC", 
+        "level3_description": "GLUCOPYRANOSYL ANTIBIOTIC", 
+        "level2_description": "TREHALASE AND INOSITOL-BIOSYNTHESIS"
+    }
+},
+{
+    "pk": 512, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "POLYOXIN", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "19", 
+        "level1": "H", 
+        "level2": "H4", 
+        "level3": "H419", 
+        "level4": "H419A", 
+        "level5": "H419A1", 
+        "level4_description": "PEPTIDYL PYRIMIDINE NUCLEOSIDE", 
+        "level3_description": "POLYOXINS", 
+        "level2_description": "CHITIN SYNTHASE"
+    }
+},
+{
+    "pk": 513, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DIMETHOMORPH", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540A", 
+        "level5": "H540A1", 
+        "level4_description": "CINNAMIC ACID AMIDES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 514, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUMORPH", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540A", 
+        "level5": "H540A2", 
+        "level4_description": "CINNAMIC ACID AMIDES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 515, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIMORPH", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540A", 
+        "level5": "H540A3", 
+        "level4_description": "CINNAMIC ACID AMIDES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 516, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENTHIAVALICARB", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540B", 
+        "level5": "H540B1", 
+        "level4_description": "VALINAMIDE CARBAMATES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 517, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "IPROVALICARB", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540B", 
+        "level5": "H540B2", 
+        "level4_description": "VALINAMIDE CARBAMATES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 518, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "VALIFENALATE", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540B", 
+        "level5": "H540B3", 
+        "level4_description": "VALINAMIDE CARBAMATES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 519, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "MANDIPROPAMID", 
+        "level1_description": "CELL WALL BIOSYNTHESIS", 
+        "frac_code": "40", 
+        "level1": "H", 
+        "level2": "H5", 
+        "level3": "H540", 
+        "level4": "H540C", 
+        "level5": "H540C1", 
+        "level4_description": "MANDELIC ACID AMIDES", 
+        "level3_description": "CAA-FUNGICIDES (CARBOXYLIC ACID AMIDES)", 
+        "level2_description": "CELLULOSE SYNTHASE"
+    }
+},
+{
+    "pk": 520, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENALAXYL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14A", 
+        "level5": "A14A1", 
+        "level4_description": "ACYLALANINES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 521, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENALAXYL-M", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14A", 
+        "level5": "A14A2", 
+        "level4_description": "ACYLALANINES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 522, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FURALAXYL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14A", 
+        "level5": "A14A3", 
+        "level4_description": "ACYLALANINES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 523, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "METALAXYL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14A", 
+        "level5": "A14A4", 
+        "level4_description": "ACYLALANINES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 524, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "METALAXYL-M", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14A", 
+        "level5": "A14A5", 
+        "level4_description": "ACYLALANINES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 525, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "OXADIXYL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14B", 
+        "level5": "A14B1", 
+        "level4_description": "OXAZOLIDINONES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 526, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "OFURACE", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "4", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level4": "A14C", 
+        "level5": "A14C1", 
+        "level4_description": "BUTYROLACTONES", 
+        "level3_description": "PA - FUNGICIDES (PHENYLAMIDES)", 
+        "level2_description": "RNA POLYMERASE I"
+    }
+},
+{
+    "pk": 527, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BUPIRIMATE", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "8", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A28", 
+        "level4": "A28A", 
+        "level5": "A28A1", 
+        "level4_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level3_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level2_description": "ADENOSIN-DEAMINASE"
+    }
+},
+{
+    "pk": 528, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DIMETHIRIMOL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "8", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A28", 
+        "level4": "A28A", 
+        "level5": "A28A2", 
+        "level4_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level3_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level2_description": "ADENOSIN-DEAMINASE"
+    }
+},
+{
+    "pk": 529, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ETHIRIMOL", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "8", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A28", 
+        "level4": "A28A", 
+        "level5": "A28A3", 
+        "level4_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level3_description": "HYDROXY-(2-AMINO-)PYRIMIDINES", 
+        "level2_description": "ADENOSIN-DEAMINASE"
+    }
+},
+{
+    "pk": 530, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "HYMEXAZOLE", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "32", 
+        "level1": "A", 
+        "level2": "A3", 
+        "level3": "A332", 
+        "level4": "A332A", 
+        "level5": "A332A1", 
+        "level4_description": "ISOXAZOLES", 
+        "level3_description": "HETEROAROMATICS", 
+        "level2_description": "DNA/RNA SYNTHESIS (PROPOSED)"
+    }
+},
+{
+    "pk": 531, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "OCTHILINONE", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "32", 
+        "level1": "A", 
+        "level2": "A3", 
+        "level3": "A332", 
+        "level4": "A332B", 
+        "level5": "A332B1", 
+        "level4_description": "ISOTHIAZOLONES", 
+        "level3_description": "HETEROAROMATICS", 
+        "level2_description": "DNA/RNA SYNTHESIS (PROPOSED)"
+    }
+},
+{
+    "pk": 532, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "OXOLINIC ACID", 
+        "level1_description": "NUCLEIC ACID SYNTHESIS", 
+        "frac_code": "31", 
+        "level1": "A", 
+        "level2": "A4", 
+        "level3": "A431", 
+        "level4": "A431A", 
+        "level5": "A431A1", 
+        "level4_description": "CARBOXYLIC ACIDS", 
+        "level3_description": "CARBOXYLIC ACIDS", 
+        "level2_description": "DNA TOPOISOMERASE TYPE II (GYRASE)"
+    }
+},
+{
+    "pk": 533, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENOMYL", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11A", 
+        "level5": "B11A1", 
+        "level4_description": "BENZIMIDAZOLES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 534, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "CARBENDAZIM", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11A", 
+        "level5": "B11A2", 
+        "level4_description": "BENZIMIDAZOLES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 535, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FUBERIDAZOLE", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11A", 
+        "level5": "B11A3", 
+        "level4_description": "BENZIMIDAZOLES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 536, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "THIABENDAZOLE", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11A", 
+        "level5": "B11A4", 
+        "level4_description": "BENZIMIDAZOLES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 537, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "THIOPHANATE", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11B", 
+        "level5": "B11B1", 
+        "level4_description": "THIOPHANATES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 538, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "THIOPHANATE-METHYL", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "1", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level4": "B11B", 
+        "level5": "B11B2", 
+        "level4_description": "THIOPHANATES", 
+        "level3_description": "MBC - FUNGICIDES (METHYL BENZIMIDAZOLE CARBAMATES)", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 539, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DIETHOFENCARB", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "10", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B210", 
+        "level4": "B210A", 
+        "level5": "B210A1", 
+        "level4_description": "N-PHENYL CARBAMATES", 
+        "level3_description": "N-PHENYL CARBAMATES", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 540, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ZOXAMIDE", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "22", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B322", 
+        "level4": "B322A", 
+        "level5": "B322A1", 
+        "level4_description": "TOLUAMIDES", 
+        "level3_description": "BENZAMIDES", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 541, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ETHABOXAM", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "22", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B322", 
+        "level4": "B322B", 
+        "level5": "B322B1", 
+        "level4_description": "ETHYLAMINO-THIAZOLE CARBOXAMIDE", 
+        "level3_description": "THIAZOLE CARBOXAMIDE", 
+        "level2_description": "BETA-TUBULINE ASSEMBLY IN MITOSIS"
+    }
+},
+{
+    "pk": 542, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PENCYCURON", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "20", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B420", 
+        "level4": "B420A", 
+        "level5": "B420A1", 
+        "level4_description": "PHENYLUREAS", 
+        "level3_description": "PHENYLUREAS", 
+        "level2_description": "CELL DIVISION (PROPOSED)"
+    }
+},
+{
+    "pk": 543, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUOPICOLIDE", 
+        "level1_description": "MITOSIS AND CELL DIVISION", 
+        "frac_code": "43", 
+        "level1": "B", 
+        "level2": "B5", 
+        "level3": "B543", 
+        "level4": "B543A", 
+        "level5": "B543A1", 
+        "level4_description": "PYRIDINYLMETHYL-BENZAMIDES", 
+        "level3_description": "BENZAMIDES", 
+        "level2_description": "DELOCALISATION OF SPECTRIN-LIKE PROTEINS"
+    }
+},
+{
+    "pk": 544, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "DIFLUMETORIM", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "39", 
+        "level1": "C", 
+        "level2": "C1", 
+        "level3": "C139", 
+        "level4": "C139A", 
+        "level5": "C139A1", 
+        "level4_description": "PYRIMIDINAMINES", 
+        "level3_description": "PYRIMIDINAMINES", 
+        "level2_description": "COMPLEX I NADH OXIDO-REDUCTASE"
+    }
+},
+{
+    "pk": 545, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "TOLFENPYRAD", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "39", 
+        "level1": "C", 
+        "level2": "C1", 
+        "level3": "C139", 
+        "level4": "C139B", 
+        "level5": "C139B1", 
+        "level4_description": "PYRAZOLE-5-CARBOXAMIDES", 
+        "level3_description": "PYRAZOLE-MET1", 
+        "level2_description": "COMPLEX I NADH OXIDO-REDUCTASE"
+    }
+},
+{
+    "pk": 546, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENODANIL", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27A", 
+        "level5": "C27A1", 
+        "level4_description": "PHENYL-BENZAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 547, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUTOLANIL", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27A", 
+        "level5": "C27A2", 
+        "level4_description": "PHENYL-BENZAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 548, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "MEPRONIL", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27A", 
+        "level5": "C27A3", 
+        "level4_description": "PHENYL-BENZAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 549, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ISOFETAMID", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27B", 
+        "level5": "C27B1", 
+        "level4_description": "PHENYL-OXO-ETHYL THIOPHENE AMIDE", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 550, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUOPYRAM", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27C", 
+        "level5": "C27C1", 
+        "level4_description": "PYRIDINYL-ETHYL-BENZAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 551, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FENFURAM", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27D", 
+        "level5": "C27D1", 
+        "level4_description": "FURAN- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 552, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "CARBOXIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27E", 
+        "level5": "C27E1", 
+        "level4_description": "OXATHIIN- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 553, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "OXYCARBOXIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27E", 
+        "level5": "C27E2", 
+        "level4_description": "OXATHIIN- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 554, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "THIFLUZAMIDE", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27F", 
+        "level5": "C27F1", 
+        "level4_description": "THIAZOLE- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 555, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BENZOVINDIFLUPYR", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G1", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 556, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BIXAFEN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G2", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 557, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUXAPYROXAD", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G3", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 558, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FURAMETPYR", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G4", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 559, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ISOPYRAZAM", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G5", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 560, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PENFLUFEN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G6", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 561, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PENTHIOPYRAD", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G7", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 562, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "SEDAXANE", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27G", 
+        "level5": "C27G8", 
+        "level4_description": "PYRAZOLE-4- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 563, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "BOSCALID", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "7", 
+        "level1": "C", 
+        "level2": "C2", 
+        "level3": "C27", 
+        "level4": "C27H", 
+        "level5": "C27H1", 
+        "level4_description": "PYRIDINE- CARBOXAMIDES", 
+        "level3_description": "SDHI (SUCCINATE DEHYDROGENASE INHIBITORS)", 
+        "level2_description": "COMPLEX II: SUCCINATE-DEHYDROGENASE"
+    }
+},
+{
+    "pk": 564, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "AZOXYSTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A1", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+},
+{
+    "pk": 565, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "COUMOXYSTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A2", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+},
+{
+    "pk": 566, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "ENOXASTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A3", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+},
+{
+    "pk": 567, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "FLUFENOXYSTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A4", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+},
+{
+    "pk": 568, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PICOXYSTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A5", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+},
+{
+    "pk": 569, 
+    "model": "chembl_core_model.fracclassification", 
+    "fields": {
+        "active_ingredient": "PYRAOXYSTROBIN", 
+        "level1_description": "RESPIRATION", 
+        "frac_code": "11", 
+        "level1": "C", 
+        "level2": "C3", 
+        "level3": "C311", 
+        "level4": "C311A", 
+        "level5": "C311A6", 
+        "level4_description": "METHOXY-ACRYLATES", 
+        "level3_description": "QOI-FUNGICIDES (QUINONE OUTSIDE INHIBITORS)", 
+        "level2_description": "COMPLEX III: CYTOCHROME BC1 (UBIQUINOL OXIDASE) AT QO SITE (CYT B GENE)"
+    }
+}
+]

@@ -1,0 +1,802 @@
+[
+{
+    "pk": 2, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121951, 
+        "component": 6287
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121951, 
+        "component": 6288
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121907, 
+        "component": 6289
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121907, 
+        "component": 6290
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121879, 
+        "component": 6291
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121879, 
+        "component": 6292
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121882, 
+        "component": 6293
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121882, 
+        "component": 6294
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121933, 
+        "component": 6295
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121933, 
+        "component": 6296
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121854, 
+        "component": 6297
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121854, 
+        "component": 6298
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121881, 
+        "component": 6299
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121881, 
+        "component": 6300
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1381704, 
+        "component": 6301
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121878, 
+        "component": 6302
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121878, 
+        "component": 6303
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675588, 
+        "component": 6304
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675588, 
+        "component": 6305
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121949, 
+        "component": 6306
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121949, 
+        "component": 6307
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121924, 
+        "component": 6308
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121924, 
+        "component": 6309
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121891, 
+        "component": 6310
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121891, 
+        "component": 6311
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121871, 
+        "component": 6312
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121871, 
+        "component": 6313
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121953, 
+        "component": 6314
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121953, 
+        "component": 6315
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121916, 
+        "component": 6316
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121916, 
+        "component": 6317
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1380938, 
+        "component": 6318
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1380938, 
+        "component": 6319
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121868, 
+        "component": 6320
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121868, 
+        "component": 6321
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121908, 
+        "component": 6322
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121908, 
+        "component": 6323
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121923, 
+        "component": 6324
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121914, 
+        "component": 6325
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121914, 
+        "component": 6326
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121962, 
+        "component": 6327
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121962, 
+        "component": 6328
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121869, 
+        "component": 6320
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121869, 
+        "component": 6321
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121902, 
+        "component": 6329
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121902, 
+        "component": 6330
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121873, 
+        "component": 6331
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121873, 
+        "component": 6332
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675439, 
+        "component": 6333
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675439, 
+        "component": 6334
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121865, 
+        "component": 6335
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121865, 
+        "component": 6336
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121899, 
+        "component": 6337
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121899, 
+        "component": 6338
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121875, 
+        "component": 6339
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121875, 
+        "component": 6340
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121896, 
+        "component": 6341
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121896, 
+        "component": 6342
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121943, 
+        "component": 6343
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121943, 
+        "component": 6344
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121929, 
+        "component": 6345
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121929, 
+        "component": 6346
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121880, 
+        "component": 6347
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1380936, 
+        "component": 6348
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1380936, 
+        "component": 6349
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121898, 
+        "component": 6350
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121898, 
+        "component": 6351
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121870, 
+        "component": 6352
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121870, 
+        "component": 6353
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121910, 
+        "component": 6354
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121910, 
+        "component": 6355
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121956, 
+        "component": 6356
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121956, 
+        "component": 6357
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121861, 
+        "component": 6358
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121863, 
+        "component": 6359
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121912, 
+        "component": 6360
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121912, 
+        "component": 6361
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675480, 
+        "component": 6362
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675578, 
+        "component": 6363
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675578, 
+        "component": 6364
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675487, 
+        "component": 6365
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 675487, 
+        "component": 6366
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121959, 
+        "component": 6367
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121959, 
+        "component": 6368
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121919, 
+        "component": 6369
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121919, 
+        "component": 6370
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121955, 
+        "component": 6371
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121955, 
+        "component": 6372
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121938, 
+        "component": 6373
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121938, 
+        "component": 6374
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121872, 
+        "component": 6375
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121872, 
+        "component": 6376
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121877, 
+        "component": 6377
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121877, 
+        "component": 6378
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121935, 
+        "component": 6379
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121935, 
+        "component": 6380
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121890, 
+        "component": 6381
+    }
+},
+{
+    "pk": 103, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121890, 
+        "component": 6382
+    }
+},
+{
+    "pk": 104, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121950, 
+        "component": 6383
+    }
+},
+{
+    "pk": 105, 
+    "model": "chembl_core_model.biotherapeuticcomponents", 
+    "fields": {
+        "biotherapeutics": 1121950, 
+        "component": 6384
+    }
+}
+]

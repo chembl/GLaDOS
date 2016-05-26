@@ -1,0 +1,1502 @@
+[
+{
+    "pk": 0, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Root of the ChEMBL protein family classification", 
+        "class_level": 0, 
+        "short_name": "Protein class", 
+        "pref_name": "Protein class", 
+        "parent_id": null, 
+        "sort_order": null, 
+        "protein_class_desc": "protein class", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 1, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Biological molecules that possess catalytic activity. They may occur naturally or be synthetically created. Enzymes are usually proteins, however CATALYTIC RNA and CATALYTIC DNA molecules have also been identified. [MESH:D004798]", 
+        "class_level": 1, 
+        "short_name": "Enzyme", 
+        "pref_name": "Enzyme", 
+        "parent_id": 0, 
+        "sort_order": 1, 
+        "protein_class_desc": "enzyme", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Surface ligands, usually glycoproteins, that mediate cell-to-cell adhesion. Their functions include the assembly and interconnection of various vertebrate systems, as well as maintenance of tissue integration, wound healing, morphogenic movements, cellular migrations, and metastasis. [MESH:D015815]", 
+        "class_level": 1, 
+        "short_name": "Adhesion", 
+        "pref_name": "Adhesion", 
+        "parent_id": 0, 
+        "sort_order": 6, 
+        "protein_class_desc": "adhesion", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 1, 
+        "short_name": "Secreted", 
+        "pref_name": "Secreted protein", 
+        "parent_id": 0, 
+        "sort_order": 9, 
+        "protein_class_desc": "secreted", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 1, 
+        "short_name": "Structural", 
+        "pref_name": "Structural protein", 
+        "parent_id": 0, 
+        "sort_order": 10, 
+        "protein_class_desc": "structural", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 1, 
+        "short_name": "Nuclear other", 
+        "pref_name": "Other nuclear protein", 
+        "parent_id": 0, 
+        "sort_order": 14, 
+        "protein_class_desc": "nuclear other", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A rather large group of enzymes comprising not only those transferring phosphate but also diphosphate, nucleotidyl residues, and others. These have also been subdivided according to the acceptor group. (From Enzyme Nomenclature, 1992) EC 2.7. [MESH:D010770]", 
+        "class_level": 2, 
+        "short_name": "Kinase", 
+        "pref_name": "Kinase", 
+        "parent_id": 1, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  kinase", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 1, 
+        "short_name": "Membrane other", 
+        "pref_name": "Other membrane protein", 
+        "parent_id": 0, 
+        "sort_order": 13, 
+        "protein_class_desc": "membrane other", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 1, 
+        "short_name": "Cytosolic other", 
+        "pref_name": "Other cytosolic protein", 
+        "parent_id": 0, 
+        "sort_order": 12, 
+        "protein_class_desc": "cytosolic other", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Antigens on surfaces of cells, including infectious or foreign cells or viruses. They are usually protein-containing groups on cell membranes or walls and may be isolated. [MESH:D000954]", 
+        "class_level": 1, 
+        "short_name": "Surface antigen", 
+        "pref_name": "Surface antigen", 
+        "parent_id": 0, 
+        "sort_order": 11, 
+        "protein_class_desc": "surface antigen", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "The class of all enzymes catalyzing oxidoreduction reactions. The substrate that is oxidized is regarded as a hydrogen donor. The systematic name is based on donor:acceptor oxidoreductase. The recommended name will be dehydrogenase, wherever this is possible; as an alternative, reductase can be used. Oxidase is only used in cases where O2 is the acceptor. (Enzyme Nomenclature, 1992, p9) [MESH:D010088]", 
+        "class_level": 2, 
+        "short_name": "Reductase", 
+        "pref_name": "Oxidoreductase", 
+        "parent_id": 1, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  reductase", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Cell surface proteins that bind signalling molecules external to the cell with high affinity and convert this extracellular event into one or more intracellular signals that alter the behavior of the target cell (From Alberts, Molecular Biology of the Cell, 2nd ed, pp693-5). Cell surface receptors, unlike enzymes, do not chemically alter their ligands. [MESH:D011956]", 
+        "class_level": 1, 
+        "short_name": "Membrane receptor", 
+        "pref_name": "Membrane receptor", 
+        "parent_id": 0, 
+        "sort_order": 2, 
+        "protein_class_desc": "membrane receptor", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Endogenous substances, usually proteins, which are effective in the initiation, stimulation, or termination of the genetic transcription process. [MESH:D014157]", 
+        "class_level": 1, 
+        "short_name": "Transcription Factor", 
+        "pref_name": "Transcription factor", 
+        "parent_id": 0, 
+        "sort_order": 5, 
+        "protein_class_desc": "transcription factor", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A soluble cytochrome P-450 enzyme that catalyzes camphor monooxygenation in the presence of putidaredoxin, putidaredoxin reductase, and molecular oxygen. This enzyme, encoded by the CAMC gene also known as CYP101, has been crystallized from bacteria and the structure is well defined. Under anaerobic conditions, this enzyme reduces the polyhalogenated compounds bound at the camphor-binding site. [MESH:D019475]", 
+        "class_level": 3, 
+        "short_name": "CYP_CAM", 
+        "pref_name": "Cytochrome P450 CAM family", 
+        "parent_id": 1031, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  cytochrome p450  cyp_cam", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S6", 
+        "pref_name": "Serine protease S6 family", 
+        "parent_id": 1136, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  pas  s6", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A serine endopeptidase isolated from Bacillus subtilis. It hydrolyzes proteins with broad specificity for peptide bonds, and a preference for a large uncharged residue in P1. It also hydrolyzes peptide amides. (From Enzyme Nomenclature, 1992) EC 3.4.21.62. [MESH:D020860]", 
+        "class_level": 5, 
+        "short_name": "S8A", 
+        "pref_name": "Serine protease S8A subfamily", 
+        "parent_id": 1119, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sb  s8a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S8B", 
+        "pref_name": "Serine protease S8B subfamily", 
+        "parent_id": 1119, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sb  s8b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A carboxypeptidase that catalyzes the release of a C-terminal amino acid with a broad specificity. It also plays a role in the LYSOSOMES by protecting BETA-GALACTOSIDASE and NEURAMINIDASE from degradation. It was formerly classified as EC 3.4.12.1 and EC 3.4.21.13. [MESH:D043402]", 
+        "class_level": 5, 
+        "short_name": "S10", 
+        "pref_name": "Serine protease S10 family", 
+        "parent_id": 1120, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sc  s10", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S28", 
+        "pref_name": "Serine protease S28 family", 
+        "parent_id": 1120, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sc  s28", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S33", 
+        "pref_name": "Serine protease S33 family", 
+        "parent_id": 1120, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sc  s33", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S9A", 
+        "pref_name": "Serine protease S9A subfamily", 
+        "parent_id": 1120, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sc  s9a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A serine protease that catalyses the release of an N-terminal dipeptide. Several biologically-active peptides have been identified as dipeptidyl peptidase 4 substrates including INCRETINS; NEUROPEPTIDES; and CHEMOKINES. The protein is also found bound to ADENOSINE DEAMINASE on the T-CELL surface and is believed to play a role in T-cell activation. [MESH:D018819]", 
+        "class_level": 5, 
+        "short_name": "S9B", 
+        "pref_name": "Serine protease S9B subfamily", 
+        "parent_id": 1120, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sc  s9b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A carboxypeptidase that is specific for proteins that contain two ALANINE residues on their C-terminal. Enzymes in this class play an important role in bacterial CELL WALL biosynthesis. [MESH:D046929]", 
+        "class_level": 5, 
+        "short_name": "S11", 
+        "pref_name": "Serine protease S11 family", 
+        "parent_id": 1121, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  se  s11", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S12", 
+        "pref_name": "Serine protease S12 family", 
+        "parent_id": 1121, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  se  s12", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A carboxypeptidase that is specific for proteins that contain two ALANINE residues on their C-terminal. Enzymes in this class play an important role in bacterial CELL WALL biosynthesis. [MESH:D046929]", 
+        "class_level": 5, 
+        "short_name": "S13", 
+        "pref_name": "Serine protease S13 family", 
+        "parent_id": 1121, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  se  s13", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S21", 
+        "pref_name": "Serine protease S21 family", 
+        "parent_id": 1123, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sh  s21", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Cysteine proteinase found in many tissues. Hydrolyzes a variety of endogenous proteins including NEUROPEPTIDES; CYTOSKELETAL PROTEINS; proteins from SMOOTH MUSCLE; CARDIAC MUSCLE; liver; platelets; and erythrocytes. Two subclasses having high and low calcium sensitivity are known. Removes Z-discs and M-lines from myofibrils. Activates phosphorylase kinase and cyclic nucleotide-independent protein kinase. This enzyme was formerly listed as EC 3.4.22.4. [MESH:D002154]", 
+        "class_level": 5, 
+        "short_name": "C2", 
+        "pref_name": "Cysteine protease C2 family", 
+        "parent_id": 1110, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M49", 
+        "pref_name": "Metallo protease M49 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m49", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M79", 
+        "pref_name": "Metallo protease M79 family", 
+        "parent_id": 1113, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  m-  m79", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A subclass of EXOPEPTIDASES that act on the free N terminus end of a polypeptide liberating a single amino acid residue. EC 3.4.11. [MESH:D000626]", 
+        "class_level": 5, 
+        "short_name": "M1", 
+        "pref_name": "Metallo protease M1 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m1", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M2", 
+        "pref_name": "Metallo protease M2 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m2", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A thermostable extracellular metalloendopeptidase containing four calcium ions. (Enzyme Nomenclature, 1992) 3.4.24.27. [MESH:D013820]", 
+        "class_level": 5, 
+        "short_name": "M4", 
+        "pref_name": "Metallo protease M4 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m4", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A zinc containing enzyme of the hydrolase class that catalyzes the removal of the N-terminal amino acid from most L-peptides, particularly those with N-terminal leucine residues but not those with N-terminal lysine or arginine residues. This occurs in tissue cell cytosol, with high activity in the duodenum, liver, and kidney. The activity of this enzyme is commonly assayed using a leucine arylamide chromogenic substrate such as leucyl beta-naphthylamide. [MESH:D007931]", 
+        "class_level": 5, 
+        "short_name": "M17", 
+        "pref_name": "Metallo protease M17 family", 
+        "parent_id": 1115, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mf  m17", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A ZINC-dependent membrane-bound aminopeptidase that catalyzes the N-terminal peptide cleavage of GLUTAMATE (and to a lesser extent ASPARTATE). The enzyme appears to play a role in the catabolic pathway of the RENIN-ANGIOTENSIN SYSTEM. [MESH:D043384]", 
+        "class_level": 5, 
+        "short_name": "M18", 
+        "pref_name": "Metallo protease M18 family", 
+        "parent_id": 1117, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m18", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M19", 
+        "pref_name": "Metallo protease M19 family", 
+        "parent_id": 1118, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mj  m19", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A serine endopeptidase secreted by the pancreas as its zymogen, CHYMOTRYPSINOGEN and carried in the pancreatic juice to the duodenum where it is activated by TRYPSIN. It selectively cleaves aromatic amino acids on the carboxyl side. [MESH:D002918]", 
+        "class_level": 5, 
+        "short_name": "S1A", 
+        "pref_name": "Serine protease S1A subfamily", 
+        "parent_id": 1136, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  pas  s1a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S1B", 
+        "pref_name": "Serine protease S1B subfamily", 
+        "parent_id": 1136, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  pas  s1b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S29", 
+        "pref_name": "Serine protease S29 family", 
+        "parent_id": 1136, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  pas  s29", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "S26A", 
+        "pref_name": "Serine protease S26A subfamily", 
+        "parent_id": 1122, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sf  s26a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "An iron-binding protein that was originally characterized as a milk protein. It is widely distributed in secretory fluids and is found in the neutrophilic granules of LEUKOCYTES. The N-terminal part of lactoferrin possesses a serine protease which functions to inactivate the type III secretion system used by bacteria to export virulence proteins for host cell invasion. [MESH:D007781]", 
+        "class_level": 5, 
+        "short_name": "S60", 
+        "pref_name": "Serine protease S60 family", 
+        "parent_id": 1124, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  sr  s60", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "U48", 
+        "pref_name": "Protease unclassified U48 family", 
+        "parent_id": 1125, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  unknown  u-  u48", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "Ser", 
+        "pref_name": "Ser", 
+        "parent_id": 1100, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  kinase  protein kinase  ser", 
+        "replaced_by": 1100, 
+        "downgraded": true
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Formed from pig pepsinogen by cleavage of one peptide bond. The enzyme is a single polypeptide chain and is inhibited by methyl 2-diaazoacetamidohexanoate. It cleaves peptides preferentially at the carbonyl linkages of phenylalanine or leucine and acts as the principal digestive enzyme of gastric juice. [MESH:D010434]", 
+        "class_level": 5, 
+        "short_name": "A1A", 
+        "pref_name": "Aspartic protease A1A subfamily", 
+        "parent_id": 1106, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  aspartic  aa  a1a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "A2A", 
+        "pref_name": "Aspartic protease A2A subfamily", 
+        "parent_id": 1106, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  aspartic  aa  a2a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C18", 
+        "pref_name": "Cysteine protease C18 family", 
+        "parent_id": 1109, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cm  c18", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A proteolytic enzyme obtained from Carica papaya. It is also the name used for a purified mixture of papain and CHYMOPAPAIN that is used as a topical enzymatic debriding agent. EC 3.4.22.2. [MESH:D010206]", 
+        "class_level": 5, 
+        "short_name": "C1A", 
+        "pref_name": "Cysteine protease C1A family", 
+        "parent_id": 1110, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c1a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Cysteine proteinase found in many tissues. Hydrolyzes a variety of endogenous proteins including NEUROPEPTIDES; CYTOSKELETAL PROTEINS; proteins from SMOOTH MUSCLE; CARDIAC MUSCLE; liver; platelets; and erythrocytes. Two subclasses having high and low calcium sensitivity are known. Removes Z-discs and M-lines from myofibrils. Activates phosphorylase kinase and cyclic nucleotide-independent protein kinase. This enzyme was formerly listed as EC 3.4.22.4. [MESH:D002154]", 
+        "class_level": 5, 
+        "short_name": "C2A", 
+        "pref_name": "Cysteine protease C2A subfamily", 
+        "parent_id": 1110, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C13", 
+        "pref_name": "Cysteine protease C13 family", 
+        "parent_id": 1111, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c13", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A family of intracellular CYSTEINE ENDOPEPTIDASES that play a role in regulating INFLAMMATION and APOPTOSIS. They specifically cleave peptides at a CYSTEINE amino acid that follows an ASPARTIC ACID residue. Caspases are activated by proteolytic cleavage of a precursor form to yield large and small subunits that form the enzyme. Since the cleavage site within precursors matches the specificity of caspases, sequential activation of precursors by activated caspases can occur. [MESH:D020169]", 
+        "class_level": 5, 
+        "short_name": "C14", 
+        "pref_name": "Cysteine protease C14 family", 
+        "parent_id": 1111, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c14", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C25", 
+        "pref_name": "Cysteine protease C25 family", 
+        "parent_id": 1111, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c25", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Enzyme that is a major constituent of kidney brush-border membranes and is also present to a lesser degree in the brain and other tissues. It preferentially catalyzes cleavage at the amino group of hydrophobic residues of the B-chain of insulin as well as opioid peptides and other biologically active peptides. The enzyme is inhibited primarily by EDTA, phosphoramidon, and thiorphan and is reactivated by zinc. Neprilysin is identical to common acute lymphoblastic leukemia antigen (CALLA Antigen), an important marker in the diagnosis of human acute lymphocytic leukemia. There is no relationship with CALLA PLANT. [MESH:D015260]", 
+        "class_level": 5, 
+        "short_name": "M13", 
+        "pref_name": "Metallo protease M13 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m13", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M27", 
+        "pref_name": "Metallo protease M27 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m27", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M28", 
+        "pref_name": "Metallo protease M28 family", 
+        "parent_id": 1117, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M34", 
+        "pref_name": "Metallo protease M34 family", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m34", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A metalloproteinase which degrades helical regions of native collagen to small fragments. Preferred cleavage is -Gly in the sequence -Pro-Xaa-Gly-Pro-. Six forms (or 2 classes) have been isolated from Clostridium histolyticum that are immunologically cross-reactive but possess different sequences and different specificities. Other variants have been isolated from Bacillus cereus, Empedobacter collagenolyticum, Pseudomonas marinoglutinosa, and species of Vibrio and Streptomyces. EC 3.4.24.3. [MESH:D003012]", 
+        "class_level": 5, 
+        "short_name": "M9B", 
+        "pref_name": "Metallo protease M9B subfamily", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m9b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M14A", 
+        "pref_name": "Metallo protease M14A subfamily", 
+        "parent_id": 1114, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mc  m14a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M14B", 
+        "pref_name": "Metallo protease M14B subfamily", 
+        "parent_id": 1114, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mc  m14b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M24A", 
+        "pref_name": "Metallo protease M24A subfamily", 
+        "parent_id": 1116, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mg  m24a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M24B", 
+        "pref_name": "Metallo protease M24B subfamily", 
+        "parent_id": 1116, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mg  m24b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M20A", 
+        "pref_name": "Metallo protease M20A subfamily", 
+        "parent_id": 1117, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m20a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 6, 
+        "short_name": "M28A", 
+        "pref_name": "Metallo protease M28A subfamily", 
+        "parent_id": 59, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28  m28a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 6, 
+        "short_name": "M28B", 
+        "pref_name": "Metallo protease M28B subfamily", 
+        "parent_id": 59, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mh  m28  m28b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Integral membrane proteins and essential components of the gamma-secretase complex that catalyzes the cleavage of membrane proteins such as NOTCH RECEPTORS and AMYLOID BETA-PEPTIDES precursors. Mutations of presenilins lead to presenile ALZHEIMER DISEASE with onset before age 65 years. [MESH:D053763]", 
+        "class_level": 5, 
+        "short_name": "A22A", 
+        "pref_name": "Aspartic protease A22A subfamily", 
+        "parent_id": 1107, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  aspartic  ad  a22a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "A26", 
+        "pref_name": "Aspartic protease A26 family", 
+        "parent_id": 1108, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  aspartic  af  a26", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A thioester hydrolase which acts on esters formed between thiols such as DITHIOTHREITOL or GLUTATHIONE and the C-terminal glycine residue of UBIQUITIN. [MESH:D043222]", 
+        "class_level": 5, 
+        "short_name": "C12", 
+        "pref_name": "Cysteine protease C12 family", 
+        "parent_id": 1110, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c12", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C19", 
+        "pref_name": "Cysteine protease C19 family", 
+        "parent_id": 1110, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c19", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C11", 
+        "pref_name": "Cysteine protease C11 family", 
+        "parent_id": 1111, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c11", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A family of intracellular CYSTEINE ENDOPEPTIDASES that play a role in regulating INFLAMMATION and APOPTOSIS. They specifically cleave peptides at a CYSTEINE amino acid that follows an ASPARTIC ACID residue. Caspases are activated by proteolytic cleavage of a precursor form to yield large and small subunits that form the enzyme. Since the cleavage site within precursors matches the specificity of caspases, sequential activation of precursors by activated caspases can occur. [MESH:D020169]", 
+        "class_level": 6, 
+        "short_name": "C14A", 
+        "pref_name": "Cysteine protease C14A subfamily", 
+        "parent_id": 53, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  cd  c14  c14a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "C3A", 
+        "pref_name": "Cysteine protease C3A subfamily", 
+        "parent_id": 1135, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  pac  c3a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "Catalyzes the hydrolysis of pteroylpolyglutamic acids in gamma linkage to pterolylmonoglutamic acid and free glutamic acid. EC 3.4.19.9. [MESH:D011623]", 
+        "class_level": 5, 
+        "short_name": "C26", 
+        "pref_name": "Cysteine protease C26 family", 
+        "parent_id": 1138, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  pcc  c26", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "I49", 
+        "pref_name": "Protease inhibitor I49 family", 
+        "parent_id": 1112, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  inhibitor  i-  i49", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "M48A", 
+        "pref_name": "Metallo protease M48A subfamily", 
+        "parent_id": 1130, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mae  m48a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A member of the metalloproteinase family of enzymes that is principally responsible for cleaving FIBRILLAR COLLAGEN. It can degrade interstitial collagens, types I, II and III. [MESH:D020781]", 
+        "class_level": 5, 
+        "short_name": "M10A", 
+        "pref_name": "Metallo protease M10A subfamily", 
+        "parent_id": 1131, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m10a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A bone morphogenetic protein family member that includes an active tolloid-like metalloproteinase domain. The metalloproteinase activity of bone morphogenetic protein 1 is specific for the removal of the C-propeptide of PROCOLLAGEN and may act as a regulator of EXTRACELLULAR MATRIX deposition. Alternative splicing of MRNA for bone morphogenetic protein 1 results in the production of several PROTEIN ISOFORMS. [MESH:D055395]", 
+        "class_level": 5, 
+        "short_name": "M12A", 
+        "pref_name": "Metallo protease M12A subfamily", 
+        "parent_id": 1131, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m12a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A family of membrane-anchored glycoproteins that contain a disintegrin and metalloprotease domain. They are responsible for the proteolytic cleavage of many transmembrane proteins and the release of their extracellular domain. [MESH:D051722]", 
+        "class_level": 5, 
+        "short_name": "M12B", 
+        "pref_name": "Metallo protease M12B subfamily", 
+        "parent_id": 1131, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  metallo  mam  m12b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "T2", 
+        "pref_name": "Threonine protease T2 family", 
+        "parent_id": 1137, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  threonine  pbt  t2", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 5, 
+        "short_name": "T1A", 
+        "pref_name": "Threonine protease T1A subfamily", 
+        "parent_id": 1137, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  threonine  pbt  t1a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "Unclassified", 
+        "pref_name": "Serine protease unclassified", 
+        "parent_id": 1079, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  unclassified", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": "A group of enzymes that catalyzes the phosphorylation of serine or threonine residues in proteins, with ATP or other nucleotides as phosphate donors. [MESH:D017346]", 
+        "class_level": 4, 
+        "short_name": "Ser_Thr", 
+        "pref_name": "Ser_Thr", 
+        "parent_id": 1100, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  kinase  protein kinase  ser_thr", 
+        "replaced_by": 1100, 
+        "downgraded": true
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 6, 
+        "short_name": "Reg", 
+        "pref_name": "Cysteine protease C2 regulatory subfamily", 
+        "parent_id": 28, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  cysteine  ca  c2  reg", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 6, 
+        "short_name": "Reg", 
+        "pref_name": "Serine protease S29 regulatory subfamily", 
+        "parent_id": 41, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  protease  serine  pas  s29  reg", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_1A", 
+        "pref_name": "Phosphodiesterase 1A", 
+        "parent_id": 1061, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_1B", 
+        "pref_name": "Phosphodiesterase 1B", 
+        "parent_id": 1061, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_1C", 
+        "pref_name": "Phosphodiesterase 1C", 
+        "parent_id": 1061, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_1  pde_1c", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_2A", 
+        "pref_name": "Phosphodiesterase 2A", 
+        "parent_id": 1062, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_2  pde_2a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_3A", 
+        "pref_name": "Phosphodiesterase 3A", 
+        "parent_id": 1063, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_3  pde_3a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_3B", 
+        "pref_name": "Phosphodiesterase 3B", 
+        "parent_id": 1063, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_3  pde_3b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_4A", 
+        "pref_name": "Phosphodiesterase 4A", 
+        "parent_id": 1064, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_4B", 
+        "pref_name": "Phosphodiesterase 4B", 
+        "parent_id": 1064, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_4C", 
+        "pref_name": "Phosphodiesterase 4C", 
+        "parent_id": 1064, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4c", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 103, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_4D", 
+        "pref_name": "Phosphodiesterase 4D", 
+        "parent_id": 1064, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_4  pde_4d", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 104, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_5A", 
+        "pref_name": "Phosphodiesterase 5A", 
+        "parent_id": 1065, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_5  pde_5a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 105, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6A", 
+        "pref_name": "Phosphodiesterase 6A", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 106, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6B", 
+        "pref_name": "Phosphodiesterase 6B", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 107, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6C", 
+        "pref_name": "Phosphodiesterase 6C", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6c", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 108, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6D", 
+        "pref_name": "Phosphodiesterase 6D", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6d", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 109, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6G", 
+        "pref_name": "Phosphodiesterase 6G", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6g", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 110, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_6H", 
+        "pref_name": "Phosphodiesterase 6H", 
+        "parent_id": 1066, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_6  pde_6h", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 111, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_7A", 
+        "pref_name": "Phosphodiesterase 7A", 
+        "parent_id": 1067, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_7  pde_7a", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+},
+{
+    "pk": 112, 
+    "model": "chembl_core_model.proteinclassification", 
+    "fields": {
+        "definition": null, 
+        "class_level": 4, 
+        "short_name": "PDE_7B", 
+        "pref_name": "Phosphodiesterase 7B", 
+        "parent_id": 1067, 
+        "sort_order": null, 
+        "protein_class_desc": "enzyme  phosphodiesterase  pde_7  pde_7b", 
+        "replaced_by": null, 
+        "downgraded": false
+    }
+}
+]

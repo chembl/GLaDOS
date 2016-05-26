@@ -1,0 +1,902 @@
+[
+{
+    "pk": 458313, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABRB2", 
+        "component": 47, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458314, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit beta-2", 
+        "component": 47, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458315, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit beta-2", 
+        "component": 47, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458316, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra-1", 
+        "component": 48, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458317, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra1", 
+        "component": 48, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458318, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit alpha-1", 
+        "component": 48, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458319, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit alpha-1", 
+        "component": 48, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458320, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrb-3", 
+        "component": 49, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458321, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrb3", 
+        "component": 49, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458322, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit beta-3", 
+        "component": 49, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458323, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit beta-3", 
+        "component": 49, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458324, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrb-2", 
+        "component": 50, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458325, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrb2", 
+        "component": 50, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458326, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit beta-2", 
+        "component": 50, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458327, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit beta-2", 
+        "component": 50, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458328, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "CDKN5", 
+        "component": 51, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458329, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "CDK5", 
+        "component": 51, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458330, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Cyclin-dependent-like kinase 5", 
+        "component": 51, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458331, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Cell division protein kinase 5", 
+        "component": 51, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458332, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Serine/threonine-protein kinase PSSALRE", 
+        "component": 51, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458333, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Tau protein kinase II catalytic subunit", 
+        "component": 51, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458334, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "TPKII catalytic subunit", 
+        "component": 51, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458335, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "2.7.11.1", 
+        "component": 51, 
+        "syn_type": "EC_NUMBER"
+    }
+},
+{
+    "pk": 458336, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Grin2a", 
+        "component": 52, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458337, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 2A", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458338, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit epsilon-1", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458339, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl D-aspartate receptor subtype 2A", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458340, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN2A", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458341, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2A", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458342, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR2A", 
+        "component": 52, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458343, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Grin2b", 
+        "component": 53, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458344, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 2B", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458345, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit epsilon-2", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458346, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl D-aspartate receptor subtype 2B", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458347, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN2B", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458348, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2B", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458349, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR2B", 
+        "component": 53, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458350, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Grin2c", 
+        "component": 54, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458351, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 2C", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458352, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit epsilon-3", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458353, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl D-aspartate receptor subtype 2C", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458354, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN2C", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458355, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2C", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458356, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR2C", 
+        "component": 54, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458357, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "MDM2", 
+        "component": 55, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458358, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "E3 ubiquitin-protein ligase Mdm2", 
+        "component": 55, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458359, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Double minute 2 protein", 
+        "component": 55, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458360, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Oncoprotein Mdm2", 
+        "component": 55, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458361, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "p53-binding protein Mdm2", 
+        "component": 55, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458362, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Hdm2", 
+        "component": 55, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458363, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "6.3.2.-", 
+        "component": 55, 
+        "syn_type": "EC_NUMBER"
+    }
+},
+{
+    "pk": 458364, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR1", 
+        "component": 56, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458365, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GRIN1", 
+        "component": 56, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458366, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 1", 
+        "component": 56, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458367, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit zeta-1", 
+        "component": 56, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458368, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl-D-aspartate receptor subunit NR1", 
+        "component": 56, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458369, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN1", 
+        "component": 56, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458370, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMD-R1", 
+        "component": 56, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458371, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "ACHRD", 
+        "component": 57, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458372, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "CHRND", 
+        "component": 57, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458373, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Acetylcholine receptor subunit delta", 
+        "component": 57, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458374, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2A", 
+        "component": 58, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458375, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GRIN2A", 
+        "component": 58, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458376, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458377, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit epsilon-1", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458378, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl D-aspartate receptor subtype 2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458379, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458380, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458381, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458382, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "hNR2A", 
+        "component": 58, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458383, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2B", 
+        "component": 59, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458384, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GRIN2B", 
+        "component": 59, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458385, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate receptor ionotropic, NMDA 2B", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458386, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Glutamate [NMDA] receptor subunit epsilon-2", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458387, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl D-aspartate receptor subtype 2B", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458388, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "N-methyl-D-aspartate receptor subunit 3", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458389, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GluN2B", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458390, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NMDAR2B", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458391, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR2B", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458392, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "NR3", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458393, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "hNR3", 
+        "component": 59, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458394, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "CHRNB2", 
+        "component": 26, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458395, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Neuronal acetylcholine receptor subunit beta-2", 
+        "component": 26, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458396, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrd", 
+        "component": 27, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458397, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit delta", 
+        "component": 27, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458398, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit delta", 
+        "component": 27, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458399, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrg2", 
+        "component": 28, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458400, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit gamma-2", 
+        "component": 28, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458401, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit gamma-2", 
+        "component": 28, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458402, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra-5", 
+        "component": 29, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458403, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra5", 
+        "component": 29, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458404, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit alpha-5", 
+        "component": 29, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458405, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit alpha-5", 
+        "component": 29, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458406, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra-3", 
+        "component": 30, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458407, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabra3", 
+        "component": 30, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458408, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit alpha-3", 
+        "component": 30, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458409, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit alpha-3", 
+        "component": 30, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458410, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gabrg1", 
+        "component": 31, 
+        "syn_type": "GENE_SYMBOL"
+    }
+},
+{
+    "pk": 458411, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "Gamma-aminobutyric acid receptor subunit gamma-1", 
+        "component": 31, 
+        "syn_type": "UNIPROT"
+    }
+},
+{
+    "pk": 458412, 
+    "model": "chembl_core_model.componentsynonyms", 
+    "fields": {
+        "component_synonym": "GABA(A) receptor subunit gamma-1", 
+        "component": 31, 
+        "syn_type": "UNIPROT"
+    }
+}
+]

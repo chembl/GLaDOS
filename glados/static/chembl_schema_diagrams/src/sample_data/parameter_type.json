@@ -1,0 +1,359 @@
+[
+{
+    "pk": "ASSAY_TEST", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Phenotype or property being measured in the assay"
+    }
+},
+{
+    "pk": "CA_SOL_CONC", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Calcium concentration in bath solution in electrophysiology experiments"
+    }
+},
+{
+    "pk": "CA_SOL_CONC_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of CA_SOL_CONC"
+    }
+},
+{
+    "pk": "CONC", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Concentration used in an in vitro experiment"
+    }
+},
+{
+    "pk": "CONC_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Units of value in CONC"
+    }
+},
+{
+    "pk": "DATASET", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Type of assay_test (e.g. (histo)pathology, clinical chemistry, hematology, pharmacokinetics, metabolism)"
+    }
+},
+{
+    "pk": "DETECTION_METHOD", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Experimental method used for obtaining the measurement "
+    }
+},
+{
+    "pk": "DIETARY_STATUS", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Describes the dietary status of the test subjects, e.g. fasted, fed, fed a high-fat meal"
+    }
+},
+{
+    "pk": "DOSE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Amount of drug administered at one time or the total quantity administered, for in vivo studies. This is 0 in case of control groups."
+    }
+},
+{
+    "pk": "DOSED_COMPOUND_ID", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Record_id for the compound that has been dosed in an in vivo assay. This links to the record_id in the COMPOUND_RECORDS table in ChEMBL."
+    }
+},
+{
+    "pk": "DOSED_COMPOUND_NAME", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "The compound name of the administered drug in an in vivo assay"
+    }
+},
+{
+    "pk": "DOSE_LEVEL", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Level of the dose administrated within an experiment, i.e. the same compound, vehicle and route (e.g. low, m1, high)"
+    }
+},
+{
+    "pk": "DOSE_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of measurement for DOSE"
+    }
+},
+{
+    "pk": "FORMULATION", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Dosage form or brand name used (e.g. orally disintegrating tablet, film-coated tablets) e.g. in bioequivalence studies."
+    }
+},
+{
+    "pk": "GENDER", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Gender of the test subject"
+    }
+},
+{
+    "pk": "HEALTH_STATUS", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Describes the health status of the test subjects, e.g. healthy volunteers, breast cancer patients, arthritis patients etc."
+    }
+},
+{
+    "pk": "HOLDING_POTENTIAL", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "The voltage that the transmembrane potential is held at prior to applying the measurement voltage in electrophysiology experiments"
+    }
+},
+{
+    "pk": "HOLDING_POTENTIAL_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of HOLDING_POTENTIAL"
+    }
+},
+{
+    "pk": "INTERACT_CPD", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Compound that is co-administered or co-tested with a test substance in a drug-drug interaction assay"
+    }
+},
+{
+    "pk": "INTERACT_CPD_CONC", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Concentration of the co-tested compound in a drug-drug interaction assay (in vitro)"
+    }
+},
+{
+    "pk": "INTERACT_CPD_CONC_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of the co-tested compound concentration in a drug-drug interaction assay (in vitro)"
+    }
+},
+{
+    "pk": "INTERACT_CPD_DOSE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Dose of the co-administered compound (in vivo)"
+    }
+},
+{
+    "pk": "INTERACT_CPD_DOSE_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of the co-administered compound dose (in vivo)"
+    }
+},
+{
+    "pk": "MEAS_VOLT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "The voltage that the transmembrane potential is rapidly stepped during electrophysiology experiments"
+    }
+},
+{
+    "pk": "MEAS_VOLT_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of MEAS_VOLT"
+    }
+},
+{
+    "pk": "MET_CONVERSION", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Metabolic conversion of the substrate to the metabolite (e.g. glucuronidation, demethylation)"
+    }
+},
+{
+    "pk": "N", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Number of test subjects in the group"
+    }
+},
+{
+    "pk": "NORMALISED_BY", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Parameter to which the measurement in the ASSAY_TABS is normalised, e.g. AUC normalised to a certain dose would be 'NORMALISED_BY: Dose'"
+    }
+},
+{
+    "pk": "NORMALISED_TO", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Value of the parameter in NORMALISED_BY, e.g. 1 in case AUC is normalised to a dose of 1 mg/kg."
+    }
+},
+{
+    "pk": "NORMALISED_TO_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Units of value in NORMALISED_TO"
+    }
+},
+{
+    "pk": "NORMAL_RANGE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Reference ranges for the assay_test provided by the source"
+    }
+},
+{
+    "pk": "REAGENT_READOUT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": null
+    }
+},
+{
+    "pk": "REGIMEN", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Dose regimen (e.g. single, daily repeat)"
+    }
+},
+{
+    "pk": "ROUTE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Course by which the substance was administered in order to reach the site of action in the body (e.g. oral gavage, intravenous)"
+    }
+},
+{
+    "pk": "SAMPLING_TIME", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "The time in the study at which the sample is taken relative to when dosing started (in case of multiple-dose studies), e.g. day 15 or month 2, or relative to when the dose was given (ONLY in the case of single-dose studies), e.g. 2 hours. For multiple-dose studies, the SAMPLING_TIME1 is used for recording the time of interim sampling that happens before the end of the STUDY_DOSING_DURATION, e.g. for clinical chemistry or histopathology, or pharmacokinetics. In case examinations are done at the end of the complete dosing period, the SAMPLING_TIME1 will be equal to the STUDY_DOSING_DURATION, and SAMPLING_TIME1 is not a compulsory parameter. For single-dose studies, the SAMPLING_TIME1 can indicate the time between the administration of the dose and when the sample was taken, if applicable, e.g. 12 hours after a single dose blood samples for clinical chemistry were drawn. If a pre-dose measurement is taken, the SAMPLING_TIME1 is negative, e.g. -1 day to indicate the day before dosing."
+    }
+},
+{
+    "pk": "SAMPLING_TIME_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of SAMPLING_TIME"
+    }
+},
+{
+    "pk": "SOURCE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Source of the data"
+    }
+},
+{
+    "pk": "STUDY_DOSES", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "The doses included in the study as a whole, e.g. 0/100/200/500. Separate multiple doses by '/'. Do not include 0 if there was no control in the study, as in the case of many metabolism and pharmacokinetcs assays."
+    }
+},
+{
+    "pk": "STUDY_DOSES_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of the STUDY_DOSES"
+    }
+},
+{
+    "pk": "STUDY_DOSING_DUR", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Length of the dosing period in the study as a whole, not necessarily equal to the dosing duration of the individual sample, e.g. when sampling halfway the study. For sampling time see SAMPLING_TIME."
+    }
+},
+{
+    "pk": "STUDY_DOSING_DUR_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of STUDY_DOSING_DUR"
+    }
+},
+{
+    "pk": "STUDY_ID", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "ID of the experimental study, either provided by the source or created from other ids within the source"
+    }
+},
+{
+    "pk": "T1_PULSE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Duration of depolarising pulses applied in electrophysiology experiments"
+    }
+},
+{
+    "pk": "T1_PULSE_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of T1_PULSE"
+    }
+},
+{
+    "pk": "TEMP", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Temperature at which the experiment was conducted"
+    }
+},
+{
+    "pk": "TEMP_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of TEMP"
+    }
+},
+{
+    "pk": "TESTED_COMPOUND_ID", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Record_id for the compound that has been tested in an in vitro assay. May be corresponding to CONC. The record_id links to the record_id in the COMPOUND_RECORDS table in ChEMBL."
+    }
+},
+{
+    "pk": "TESTED_COMPOUND_NAME", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Compound name in supplied sdf/compound_tabs file for the compound that has been tested in an in vitro assay. May be corresponding to CONC."
+    }
+},
+{
+    "pk": "TIME", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Interval of time over which a course of doses occurs, or sacrifice time (DrugMatrix and TG-GATES respectively)"
+    }
+},
+{
+    "pk": "TIME_UNIT", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Unit of measurement for TIME"
+    }
+},
+{
+    "pk": "VEHICLE", 
+    "model": "chembl_core_model.parametertype", 
+    "fields": {
+        "description": "Carrier or inert medium used as a solvent (or diluent) in which a medicinally active agent is formulated and/or administered"
+    }
+}
+]

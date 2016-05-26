@@ -1,0 +1,1202 @@
+[
+{
+    "pk": 12800, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "PATIROMER CALCIUM", 
+        "record": 1695895, 
+        "canonical_synonym": "Patiromer Calcium", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12801, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "PATIROMER CALCIUM", 
+        "record": 1695895, 
+        "canonical_synonym": "Patiromer Calcium", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12802, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "RLY5016", 
+        "record": 1695895, 
+        "canonical_synonym": "RLY5016", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12803, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS 34273 MICRONIZED", 
+        "record": 1679369, 
+        "canonical_synonym": "LAS-34273 Micronized", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12804, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS 34273 MICRONIZED", 
+        "record": 1698990, 
+        "canonical_synonym": "LAS-34273 Micronized", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12805, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1679369, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12806, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1698990, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12807, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1679369, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12808, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1698990, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12809, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS W-330", 
+        "record": 1679369, 
+        "canonical_synonym": "LAS W-330", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12810, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS W-330", 
+        "record": 1698990, 
+        "canonical_synonym": "LAS W-330", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12811, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS 34273", 
+        "record": 1679369, 
+        "canonical_synonym": "LAS-34273", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12812, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "LAS 34273", 
+        "record": 1698990, 
+        "canonical_synonym": "LAS-34273", 
+        "removed": 0, 
+        "res_stem": 343
+    }
+},
+{
+    "pk": 12813, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "14115700", 
+        "record": 1679369, 
+        "canonical_synonym": "14115700", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12814, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "14115700", 
+        "record": 1698990, 
+        "canonical_synonym": "14115700", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12815, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "ACLIDINIUM", 
+        "record": 1679369, 
+        "canonical_synonym": "Aclidinium", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12816, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "ACLIDINIUM", 
+        "record": 1698990, 
+        "canonical_synonym": "Aclidinium", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12817, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1679369, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12818, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ACLIDINIUM BROMIDE", 
+        "record": 1698990, 
+        "canonical_synonym": "Aclidinium Bromide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12819, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "INCB 007839", 
+        "record": 1699739, 
+        "canonical_synonym": "INCB-007839", 
+        "removed": 0, 
+        "res_stem": 292
+    }
+},
+{
+    "pk": 12820, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ADERBASIB", 
+        "record": 1699739, 
+        "canonical_synonym": "Aderbasib", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12821, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ADERBASIB", 
+        "record": 1699739, 
+        "canonical_synonym": "Aderbasib", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12822, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ADIPIPLON", 
+        "record": 1699740, 
+        "canonical_synonym": "Adipiplon", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12823, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "NG2-73", 
+        "record": 1699740, 
+        "canonical_synonym": "NG2-73", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12824, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ADIPIPLON", 
+        "record": 1699740, 
+        "canonical_synonym": "Adipiplon", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12825, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_R_DB", 
+        "record_synonym": "APIPLON", 
+        "record": 1699740, 
+        "canonical_synonym": "Apiplon", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12826, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AGATOLIMOD", 
+        "record": 1699741, 
+        "canonical_synonym": "Agatolimod", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12827, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "AGATOLIMOD", 
+        "record": 1699741, 
+        "canonical_synonym": "Agatolimod", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12828, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "PF-3512676", 
+        "record": 1699742, 
+        "canonical_synonym": "PF-3512676", 
+        "removed": 0, 
+        "res_stem": 473
+    }
+},
+{
+    "pk": 12829, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AGATOLIMOD SODIUM", 
+        "record": 1699742, 
+        "canonical_synonym": "Agatolimod Sodium", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12830, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "GSK716155", 
+        "record": 1695896, 
+        "canonical_synonym": "GSK716155", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12831, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "ALBIGLUTIDE", 
+        "record": 1695896, 
+        "canonical_synonym": "Albiglutide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12832, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ALBIGLUTIDE", 
+        "record": 1695896, 
+        "canonical_synonym": "Albiglutide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12833, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ALBIGLUTIDE", 
+        "record": 1695896, 
+        "canonical_synonym": "Albiglutide", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12834, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ALBINTERFERON ALFA-2B", 
+        "record": 1695897, 
+        "canonical_synonym": "Albinterferon Alfa-2B", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12835, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ALBINTERFERON ALFA-2B", 
+        "record": 1695897, 
+        "canonical_synonym": "Albinterferon Alfa-2B", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12836, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "BN_USP_DB", 
+        "record_synonym": "ALBUFERON", 
+        "record": 1695897, 
+        "canonical_synonym": "Albuferon", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12837, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ALEGLITAZAR", 
+        "record": 1699743, 
+        "canonical_synonym": "Aleglitazar", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12838, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "RO0728804", 
+        "record": 1699743, 
+        "canonical_synonym": "Ro-0728804", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12839, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "R1439", 
+        "record": 1699743, 
+        "canonical_synonym": "R-1439", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12840, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "R00728804", 
+        "record": 1699743, 
+        "canonical_synonym": "Ro-0728804", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12841, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ALEGLITAZAR", 
+        "record": 1699743, 
+        "canonical_synonym": "Aleglitazar", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12842, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ALFERMINOGENE TADENOVEC", 
+        "record": 1695898, 
+        "canonical_synonym": "Alferminogene Tadenovec", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12843, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ALFERMINOGENE TADENOVEC", 
+        "record": 1695898, 
+        "canonical_synonym": "Alferminogene Tadenovec", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12844, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "BN_USP_DB", 
+        "record_synonym": "GENERX", 
+        "record": 1695898, 
+        "canonical_synonym": "Generx", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12845, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "SR58611", 
+        "record": 1699744, 
+        "canonical_synonym": "SR-58611", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12846, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "AMIBEGRON", 
+        "record": 1699744, 
+        "canonical_synonym": "Amibegron", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12847, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AMIBEGRON", 
+        "record": 1699744, 
+        "canonical_synonym": "Amibegron", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12848, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "SR58611A", 
+        "record": 1705218, 
+        "canonical_synonym": "SR-58611A", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12849, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AMIBEGRON HYDROCHLORIDE", 
+        "record": 1705218, 
+        "canonical_synonym": "Amibegron HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12850, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ANACETRAPIB", 
+        "record": 1699745, 
+        "canonical_synonym": "Anacetrapib", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12851, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ANACETRAPIB", 
+        "record": 1699745, 
+        "canonical_synonym": "Anacetrapib", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12852, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "RC-1291 HCL", 
+        "record": 1699746, 
+        "canonical_synonym": "RC-1291 HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12853, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ANAMORELIN HYDROCHLORIDE", 
+        "record": 1699746, 
+        "canonical_synonym": "Anamorelin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12854, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "ANAMORELIN", 
+        "record": 1699746, 
+        "canonical_synonym": "Anamorelin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12855, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB_PARENT", 
+        "record_synonym": "ANAMORELIN", 
+        "record": 1699746, 
+        "canonical_synonym": "Anamorelin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12856, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "IMA-638", 
+        "record": 1695899, 
+        "canonical_synonym": "IMA-638", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12857, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ANRUKINZUMAB", 
+        "record": 1695899, 
+        "canonical_synonym": "Anrukinzumab", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12858, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ANRUKINZUMAB", 
+        "record": 1695899, 
+        "canonical_synonym": "Anrukinzumab", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12859, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "BN_USP_DB", 
+        "record_synonym": "ATRYN", 
+        "record": 1695900, 
+        "canonical_synonym": "Atryn", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12860, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ANTITHROMBIN ALFA", 
+        "record": 1695900, 
+        "canonical_synonym": "Antithrombin Alfa", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12861, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ANTITHROMBIN ALFA", 
+        "record": 1695900, 
+        "canonical_synonym": "Antithrombin Alfa", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12862, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TACI-FC5", 
+        "record": 1695901, 
+        "canonical_synonym": "TACI-Fc5", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12863, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TACI-IG", 
+        "record": 1695901, 
+        "canonical_synonym": "TACI-Ig", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12864, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "ATACICEPT", 
+        "record": 1695901, 
+        "canonical_synonym": "Atacicept", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12865, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "ATACICEPT", 
+        "record": 1695901, 
+        "canonical_synonym": "Atacicept", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12866, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TAK-536", 
+        "record": 1699747, 
+        "canonical_synonym": "TAK-536", 
+        "removed": 0, 
+        "res_stem": 577
+    }
+},
+{
+    "pk": 12867, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "AZILSARTAN", 
+        "record": 1699747, 
+        "canonical_synonym": "Azilsartan", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12868, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AZILSARTAN", 
+        "record": 1699747, 
+        "canonical_synonym": "Azilsartan", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12869, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "AZILSARTAN KAMEDOXOMIL", 
+        "record": 1583655, 
+        "canonical_synonym": "Azilsartan Kamedoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12870, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "AZILSARTAN KAMEDOXOMIL", 
+        "record": 1699748, 
+        "canonical_synonym": "Azilsartan Kamedoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12871, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TAK-491", 
+        "record": 1583655, 
+        "canonical_synonym": "TAK-491", 
+        "removed": 0, 
+        "res_stem": 577
+    }
+},
+{
+    "pk": 12872, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TAK-491", 
+        "record": 1699748, 
+        "canonical_synonym": "TAK-491", 
+        "removed": 0, 
+        "res_stem": 577
+    }
+},
+{
+    "pk": 12873, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AZILSARTAN KAMEDOXOMIL", 
+        "record": 1583655, 
+        "canonical_synonym": "Azilsartan Kamedoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12874, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AZILSARTAN KAMEDOXOMIL", 
+        "record": 1699748, 
+        "canonical_synonym": "Azilsartan Kamedoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12875, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "AZILSARTAN MEDOXOMIL", 
+        "record": 1697952, 
+        "canonical_synonym": "Azilsartan Medoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12876, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "AZILSARTAN MEDOXOMIL", 
+        "record": 1697952, 
+        "canonical_synonym": "Azilsartan Medoxomil", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12877, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "BAMINERCEPT", 
+        "record": 1695902, 
+        "canonical_synonym": "Baminercept", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12878, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "BAMINERCEPT", 
+        "record": 1695902, 
+        "canonical_synonym": "Baminercept", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12879, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "TT-47", 
+        "record": 1695902, 
+        "canonical_synonym": "TT-47", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12880, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "BG 9924", 
+        "record": 1695902, 
+        "canonical_synonym": "BG-9924", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12881, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "WP744", 
+        "record": 1699749, 
+        "canonical_synonym": "WP744", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12882, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "BERUBICIN HYDROCHLORIDE", 
+        "record": 1699749, 
+        "canonical_synonym": "Berubicin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12883, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "BERUBICIN", 
+        "record": 1699749, 
+        "canonical_synonym": "Berubicin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12884, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB_PARENT", 
+        "record_synonym": "BERUBICIN", 
+        "record": 1699749, 
+        "canonical_synonym": "Berubicin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12885, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "RTA 744", 
+        "record": 1699749, 
+        "canonical_synonym": "RTA-744", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12886, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "SS734", 
+        "record": 1343564, 
+        "canonical_synonym": "SS-734", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12887, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "SS734", 
+        "record": 1698371, 
+        "canonical_synonym": "SS-734", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12888, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "BESIFLOXACIN HYDROCHLORIDE", 
+        "record": 1343564, 
+        "canonical_synonym": "Besifloxacin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12889, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "USAN_DB", 
+        "record_synonym": "BESIFLOXACIN HYDROCHLORIDE", 
+        "record": 1698371, 
+        "canonical_synonym": "Besifloxacin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12890, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "BOL-303224-A", 
+        "record": 1343564, 
+        "canonical_synonym": "BOL-303224-A", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12891, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "BOL-303224-A", 
+        "record": 1698371, 
+        "canonical_synonym": "BOL-303224-A", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12892, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "BESIFLOXACIN HYDROCHLORIDE", 
+        "record": 1343564, 
+        "canonical_synonym": "Besifloxacin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12893, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "FDA_DB", 
+        "record_synonym": "BESIFLOXACIN HYDROCHLORIDE", 
+        "record": 1698371, 
+        "canonical_synonym": "Besifloxacin HCl", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12894, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB_PARENT", 
+        "record_synonym": "BESIFLOXACIN", 
+        "record": 1343564, 
+        "canonical_synonym": "Besifloxacin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12895, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB_PARENT", 
+        "record_synonym": "BESIFLOXACIN", 
+        "record": 1698371, 
+        "canonical_synonym": "Besifloxacin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12896, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "BESIFLOXACIN", 
+        "record": 1343564, 
+        "canonical_synonym": "Besifloxacin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12897, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "PARENT_NAME_DB_PARENT", 
+        "record_synonym": "BESIFLOXACIN", 
+        "record": 1698371, 
+        "canonical_synonym": "Besifloxacin", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12898, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "INN_DB", 
+        "record_synonym": "BETRIXABAN", 
+        "record": 1699750, 
+        "canonical_synonym": "Betrixaban", 
+        "removed": 0, 
+        "res_stem": null
+    }
+},
+{
+    "pk": 12899, 
+    "model": "chembl_core_model.recordsynonyms", 
+    "fields": {
+        "syn_type": "RESEARCH_CODE_DB", 
+        "record_synonym": "PRT054021", 
+        "record": 1699750, 
+        "canonical_synonym": "Prt054021", 
+        "removed": 0, 
+        "res_stem": null
+    }
+}
+]

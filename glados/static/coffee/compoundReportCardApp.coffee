@@ -145,3 +145,16 @@ initPieView = ->
   pieview = new PieView
   console.log(pieview)
   pieview.render()
+
+### *
+  * Initializes an iframe lazy loader. This view knows hot to lazy load an iframe
+  * @param {Compound} model, base model for the view
+  * @param {JQuery} element that renders the model.
+  * @return {CompoundNameClassificationView} the view that has been created
+###
+initIFrameLazyLoader = (model, top_level_elem) ->
+  iFrameLazyLoader = new IFrameLazyLoader
+    model: model
+    el: top_level_elem
+
+  return iFrameLazyLoader

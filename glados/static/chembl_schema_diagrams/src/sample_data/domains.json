@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 2627, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "7tm_1", 
+        "source_domain_id": "PF00001", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2628, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "7tm_2", 
+        "source_domain_id": "PF00002", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2629, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "7tm_3", 
+        "source_domain_id": "PF00003", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2630, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "AAA", 
+        "source_domain_id": "PF00004", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2631, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ABC_tran", 
+        "source_domain_id": "PF00005", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2632, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ATP-synt_ab", 
+        "source_domain_id": "PF00006", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2633, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "EGF", 
+        "source_domain_id": "PF00008", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2634, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "GTP_EFTU", 
+        "source_domain_id": "PF00009", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2635, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "HLH", 
+        "source_domain_id": "PF00010", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2636, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "HSP20", 
+        "source_domain_id": "PF00011", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2637, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "HSP70", 
+        "source_domain_id": "PF00012", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2638, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "KH_1", 
+        "source_domain_id": "PF00013", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2639, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Kunitz_BPTI", 
+        "source_domain_id": "PF00014", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2640, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "SH2", 
+        "source_domain_id": "PF00017", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2641, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "SH3_1", 
+        "source_domain_id": "PF00018", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2642, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "TGF_beta", 
+        "source_domain_id": "PF00019", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2643, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "TNFR_c6", 
+        "source_domain_id": "PF00020", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2644, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "UPAR_LY6", 
+        "source_domain_id": "PF00021", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2645, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Actin", 
+        "source_domain_id": "PF00022", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2646, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Ank", 
+        "source_domain_id": "PF00023", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2647, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "PAN_1", 
+        "source_domain_id": "PF00024", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2648, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Arf", 
+        "source_domain_id": "PF00025", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2649, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Asp", 
+        "source_domain_id": "PF00026", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2650, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "cNMP_binding", 
+        "source_domain_id": "PF00027", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2651, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Cadherin", 
+        "source_domain_id": "PF00028", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2652, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Cystatin", 
+        "source_domain_id": "PF00031", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2653, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Cytochrom_B_C", 
+        "source_domain_id": "PF00032", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2654, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "dsrm", 
+        "source_domain_id": "PF00035", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2655, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "EF-hand_1", 
+        "source_domain_id": "PF00036", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2656, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Filament", 
+        "source_domain_id": "PF00038", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2657, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "fn1", 
+        "source_domain_id": "PF00039", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2658, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "fn2", 
+        "source_domain_id": "PF00040", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2659, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "fn3", 
+        "source_domain_id": "PF00041", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2660, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Globin", 
+        "source_domain_id": "PF00042", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2661, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "GST_C", 
+        "source_domain_id": "PF00043", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2662, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Gp_dh_N", 
+        "source_domain_id": "PF00044", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2663, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Hemopexin", 
+        "source_domain_id": "PF00045", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2664, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Homeobox", 
+        "source_domain_id": "PF00046", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2665, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ig", 
+        "source_domain_id": "PF00047", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2666, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "IL8", 
+        "source_domain_id": "PF00048", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2667, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Insulin", 
+        "source_domain_id": "PF00049", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2668, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Kringle", 
+        "source_domain_id": "PF00051", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2669, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Laminin_EGF", 
+        "source_domain_id": "PF00053", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2670, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Laminin_G_1", 
+        "source_domain_id": "PF00054", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2671, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Laminin_N", 
+        "source_domain_id": "PF00055", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2672, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Ldh_1_N", 
+        "source_domain_id": "PF00056", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2673, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Ldl_recept_a", 
+        "source_domain_id": "PF00057", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2674, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Ldl_recept_b", 
+        "source_domain_id": "PF00058", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2675, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Lectin_C", 
+        "source_domain_id": "PF00059", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2676, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Lig_chan", 
+        "source_domain_id": "PF00060", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2677, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Lipocalin", 
+        "source_domain_id": "PF00061", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2678, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Lys", 
+        "source_domain_id": "PF00062", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2679, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Myosin_head", 
+        "source_domain_id": "PF00063", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2680, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Neur", 
+        "source_domain_id": "PF00064", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2681, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "p450", 
+        "source_domain_id": "PF00067", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2682, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Phospholip_A2_1", 
+        "source_domain_id": "PF00068", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2683, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Pkinase", 
+        "source_domain_id": "PF00069", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2684, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Pyr_redox", 
+        "source_domain_id": "PF00070", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2685, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Ras", 
+        "source_domain_id": "PF00071", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2686, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Response_reg", 
+        "source_domain_id": "PF00072", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2687, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Rhv", 
+        "source_domain_id": "PF00073", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2688, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "RnaseA", 
+        "source_domain_id": "PF00074", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2689, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "RNase_H", 
+        "source_domain_id": "PF00075", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2690, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "RRM_1", 
+        "source_domain_id": "PF00076", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2691, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "RVP", 
+        "source_domain_id": "PF00077", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2692, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "RVT_1", 
+        "source_domain_id": "PF00078", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2693, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Serpin", 
+        "source_domain_id": "PF00079", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2694, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Sod_Cu", 
+        "source_domain_id": "PF00080", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2695, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Sod_Fe_N", 
+        "source_domain_id": "PF00081", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2696, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Peptidase_S8", 
+        "source_domain_id": "PF00082", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2697, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Sugar_tr", 
+        "source_domain_id": "PF00083", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2698, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Sushi", 
+        "source_domain_id": "PF00084", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2699, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Thioredoxin", 
+        "source_domain_id": "PF00085", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2700, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Thyroglobulin_1", 
+        "source_domain_id": "PF00086", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2701, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Trefoil", 
+        "source_domain_id": "PF00088", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2702, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Trypsin", 
+        "source_domain_id": "PF00089", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2703, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "TSP_1", 
+        "source_domain_id": "PF00090", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2704, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Tubulin", 
+        "source_domain_id": "PF00091", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2705, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "VWA", 
+        "source_domain_id": "PF00092", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2706, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "VWC", 
+        "source_domain_id": "PF00093", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2707, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "VWD", 
+        "source_domain_id": "PF00094", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2708, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "zf-C2H2", 
+        "source_domain_id": "PF00096", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2709, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "zf-C3HC4", 
+        "source_domain_id": "PF00097", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2710, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "zf-CCHC", 
+        "source_domain_id": "PF00098", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2711, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Y_phosphatase", 
+        "source_domain_id": "PF00102", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2712, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Hormone_recep", 
+        "source_domain_id": "PF00104", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2713, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "zf-C4", 
+        "source_domain_id": "PF00105", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2714, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "adh_short", 
+        "source_domain_id": "PF00106", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2715, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ADH_zinc_N", 
+        "source_domain_id": "PF00107", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2716, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Thiolase_N", 
+        "source_domain_id": "PF00108", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2717, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ketoacyl-synt", 
+        "source_domain_id": "PF00109", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2718, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "wnt", 
+        "source_domain_id": "PF00110", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2719, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Fer2", 
+        "source_domain_id": "PF00111", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2720, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Peptidase_C1", 
+        "source_domain_id": "PF00112", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2721, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Enolase_C", 
+        "source_domain_id": "PF00113", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2722, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "COX1", 
+        "source_domain_id": "PF00115", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2723, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "COX2", 
+        "source_domain_id": "PF00116", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2724, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "GATase", 
+        "source_domain_id": "PF00117", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2725, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "Cpn60_TCP1", 
+        "source_domain_id": "PF00118", 
+        "domain_description": null
+    }
+},
+{
+    "pk": 2726, 
+    "model": "chembl_core_model.domains", 
+    "fields": {
+        "domain_type": "Pfam-A", 
+        "domain_name": "ATP-synt_A", 
+        "source_domain_id": "PF00119", 
+        "domain_description": null
+    }
+}
+]

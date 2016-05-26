@@ -1,0 +1,210 @@
+[
+{
+    "pk": "ADMET", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is not applicable for an ADMET assay (e.g., physchem property)", 
+        "parent_type": "UNDEFINED"
+    }
+},
+{
+    "pk": "CELL-LINE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a specific cell-line", 
+        "parent_type": "NON-MOLECULAR"
+    }
+},
+{
+    "pk": "CHIMERIC PROTEIN", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a fusion of two different proteins, either a synthetic construct or naturally occurring fusion protein", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "MACROMOLECULE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a biological macromolecule (e.g., glycoproteins, hemozoin, hydroxyapatite)", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "METAL", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a metal e.g., iron", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "MOLECULAR", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target has been identified as a defined molecular entity (e.g., protein or nucleic acid)", 
+        "parent_type": null
+    }
+},
+{
+    "pk": "NO TARGET", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is not applicable for a screening assay (e.g., negative control/counterscreen)", 
+        "parent_type": "UNDEFINED"
+    }
+},
+{
+    "pk": "NON-MOLECULAR", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target has not been defined at a molecular level, only the non-molecular entity which is affected (e.g., organism, cell line etc)", 
+        "parent_type": null
+    }
+},
+{
+    "pk": "NUCLEIC-ACID", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is DNA, RNA or PNA", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "OLIGOSACCHARIDE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is an oligosaccharide (e.g., heparin, starch)", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "ORGANISM", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a complete organism", 
+        "parent_type": "NON-MOLECULAR"
+    }
+},
+{
+    "pk": "PHENOTYPE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a biological phenotype or process", 
+        "parent_type": "NON-MOLECULAR"
+    }
+},
+{
+    "pk": "PROTEIN", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a protein or group of proteins", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "PROTEIN COMPLEX", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a defined protein complex, consisting of multiple subunits", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "PROTEIN COMPLEX GROUP", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a poorly defined protein complex, where subunit composition is unclear (e.g., GABA-A receptor)", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "PROTEIN FAMILY", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a group of closely related proteins", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "PROTEIN NUCLEIC-ACID COMPLEX", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a complex consisting of both protein and nucleic-acid components (e.g., ribosome)", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "PROTEIN-PROTEIN INTERACTION", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is the disruption of a protein-protein interaction", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "SELECTIVITY GROUP", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a pair of proteins for which the selectivity has been assessed", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "SINGLE PROTEIN", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a single protein chain", 
+        "parent_type": "PROTEIN"
+    }
+},
+{
+    "pk": "SMALL MOLECULE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a small molecule such as an amino acid, sugar or metabolite)", 
+        "parent_type": "MOLECULAR"
+    }
+},
+{
+    "pk": "SUBCELLULAR", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a subcellular fraction", 
+        "parent_type": "NON-MOLECULAR"
+    }
+},
+{
+    "pk": "TISSUE", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target is a healthy or diseased tissue", 
+        "parent_type": "NON-MOLECULAR"
+    }
+},
+{
+    "pk": "UNCHECKED", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Target has not yet been assigned", 
+        "parent_type": "UNDEFINED"
+    }
+},
+{
+    "pk": "UNDEFINED", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "No target has been defined", 
+        "parent_type": null
+    }
+},
+{
+    "pk": "UNKNOWN", 
+    "model": "chembl_core_model.targettype", 
+    "fields": {
+        "target_desc": "Molecular identity of target is unknown (e.g., pharmacologically defined target)", 
+        "parent_type": "UNDEFINED"
+    }
+}
+]

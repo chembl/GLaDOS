@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 271, 
+        "molecule": 4361
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 232, 
+        "molecule": 13437
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 96, 
+        "molecule": 16509
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 90, 
+        "molecule": 16529
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 69, 
+        "molecule": 16544
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 181, 
+        "molecule": 41442
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 176, 
+        "molecule": 41443
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 3, 
+        "molecule": 51985
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 174, 
+        "molecule": 81712
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 16, 
+        "molecule": 93395
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 119, 
+        "molecule": 114105
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 107, 
+        "molecule": 121669
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 165, 
+        "molecule": 158327
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 184, 
+        "molecule": 172583
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 213, 
+        "molecule": 178297
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 272, 
+        "molecule": 178619
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 11, 
+        "molecule": 180769
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 9, 
+        "molecule": 180771
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 14, 
+        "molecule": 180856
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 236, 
+        "molecule": 291099
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 120, 
+        "molecule": 371606
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 225, 
+        "molecule": 381696
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 161, 
+        "molecule": 396839
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 239, 
+        "molecule": 412511
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 241, 
+        "molecule": 433937
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 102, 
+        "molecule": 453495
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 247, 
+        "molecule": 453535
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 114, 
+        "molecule": 453541
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 233, 
+        "molecule": 454017
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 113, 
+        "molecule": 454074
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 243, 
+        "molecule": 454216
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 242, 
+        "molecule": 454294
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 121, 
+        "molecule": 469606
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 41, 
+        "molecule": 496897
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 119, 
+        "molecule": 496901
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 238, 
+        "molecule": 573492
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 185, 
+        "molecule": 611896
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 91, 
+        "molecule": 612112
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 162, 
+        "molecule": 612260
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 135, 
+        "molecule": 612261
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 136, 
+        "molecule": 612262
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 95, 
+        "molecule": 612458
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 10, 
+        "molecule": 683895
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 110, 
+        "molecule": 688935
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 172, 
+        "molecule": 689509
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 22, 
+        "molecule": 692071
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 34, 
+        "molecule": 692099
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 45, 
+        "molecule": 692130
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 21, 
+        "molecule": 694141
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 80, 
+        "molecule": 696840
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 68, 
+        "molecule": 698124
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 29, 
+        "molecule": 702307
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 126, 
+        "molecule": 702415
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 177, 
+        "molecule": 705619
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 175, 
+        "molecule": 705620
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 170, 
+        "molecule": 705658
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 171, 
+        "molecule": 705659
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 173, 
+        "molecule": 705694
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 92, 
+        "molecule": 711613
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 106, 
+        "molecule": 744118
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 75, 
+        "molecule": 757073
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 104, 
+        "molecule": 780521
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 219, 
+        "molecule": 795234
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 190, 
+        "molecule": 798285
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 58, 
+        "molecule": 813555
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 196, 
+        "molecule": 818713
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 189, 
+        "molecule": 822920
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 263, 
+        "molecule": 831710
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 269, 
+        "molecule": 837578
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 188, 
+        "molecule": 838038
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 147, 
+        "molecule": 849879
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 53, 
+        "molecule": 871764
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 109, 
+        "molecule": 881377
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 164, 
+        "molecule": 909441
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 73, 
+        "molecule": 910408
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 98, 
+        "molecule": 916582
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 187, 
+        "molecule": 941309
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 87, 
+        "molecule": 946346
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 89, 
+        "molecule": 949589
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 191, 
+        "molecule": 989219
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 115, 
+        "molecule": 990929
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 94, 
+        "molecule": 992583
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 99, 
+        "molecule": 993810
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 163, 
+        "molecule": 993810
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 216, 
+        "molecule": 1213900
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 70, 
+        "molecule": 1224800
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 124, 
+        "molecule": 1239200
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 203, 
+        "molecule": 1016208
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 76, 
+        "molecule": 1029721
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 52, 
+        "molecule": 1044851
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 118, 
+        "molecule": 1048671
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 245, 
+        "molecule": 1062475
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 152, 
+        "molecule": 1203631
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 5, 
+        "molecule": 1205140
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 133, 
+        "molecule": 1205383
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 228, 
+        "molecule": 1206478
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 221, 
+        "molecule": 1206487
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 248, 
+        "molecule": 1206496
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 17, 
+        "molecule": 1207202
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.moleculehracclassification", 
+    "fields": {
+        "hrac_class": 40, 
+        "molecule": 1207662
+    }
+}
+]

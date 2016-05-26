@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1620, 
+        "activity": 470000
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1460, 
+        "activity": 640000
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1280, 
+        "activity": 39700
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 42600
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 53400
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 57600
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 66200
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1484, 
+        "activity": 76700
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 403, 
+        "activity": 77300
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 934, 
+        "activity": 112800
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 131000
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 751, 
+        "activity": 138900
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 139300
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 491, 
+        "activity": 149300
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 151700
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 916, 
+        "activity": 154500
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1163, 
+        "activity": 155400
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 916, 
+        "activity": 157000
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1143, 
+        "activity": 162000
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1048, 
+        "activity": 172100
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 916, 
+        "activity": 174000
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1246, 
+        "activity": 179500
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 391, 
+        "activity": 187000
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 859, 
+        "activity": 193000
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 977, 
+        "activity": 197800
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1349, 
+        "activity": 198600
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1349, 
+        "activity": 201200
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1484, 
+        "activity": 203200
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 44, 
+        "activity": 204000
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1274, 
+        "activity": 207600
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 590, 
+        "activity": 211900
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1046, 
+        "activity": 222300
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1364, 
+        "activity": 223600
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 86, 
+        "activity": 249300
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 589, 
+        "activity": 249700
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1015, 
+        "activity": 252000
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 277700
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1609, 
+        "activity": 279300
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 936, 
+        "activity": 284500
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 353, 
+        "activity": 291200
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1040, 
+        "activity": 299400
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 486, 
+        "activity": 306800
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 383, 
+        "activity": 309400
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1427, 
+        "activity": 310600
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1605, 
+        "activity": 312100
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1692, 
+        "activity": 314100
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 729, 
+        "activity": 316000
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1040, 
+        "activity": 316900
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 761, 
+        "activity": 332200
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 304, 
+        "activity": 347200
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 157, 
+        "activity": 347800
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 348800
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 82, 
+        "activity": 356200
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 480, 
+        "activity": 359100
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 82, 
+        "activity": 362900
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1201, 
+        "activity": 365200
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1238, 
+        "activity": 365500
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1430, 
+        "activity": 372500
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 372900
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 385600
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 792, 
+        "activity": 403100
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 799, 
+        "activity": 405600
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1697, 
+        "activity": 410300
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1605, 
+        "activity": 413500
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 228, 
+        "activity": 413900
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1562, 
+        "activity": 418900
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 426800
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 115, 
+        "activity": 430500
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1144, 
+        "activity": 434900
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 612, 
+        "activity": 450600
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 612, 
+        "activity": 459300
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 463000
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1034, 
+        "activity": 463500
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1517, 
+        "activity": 479800
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 268, 
+        "activity": 481200
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1460, 
+        "activity": 482700
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 348, 
+        "activity": 494100
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 388, 
+        "activity": 507300
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1609, 
+        "activity": 514300
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 384, 
+        "activity": 516700
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Manual", 
+        "confidence": "high", 
+        "site": 472, 
+        "activity": 518700
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 384, 
+        "activity": 519300
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 506, 
+        "activity": 523300
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1694, 
+        "activity": 525500
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 669, 
+        "activity": 527400
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 324, 
+        "activity": 531500
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1484, 
+        "activity": 532400
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 540300
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 506, 
+        "activity": 540600
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 384, 
+        "activity": 551700
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1154, 
+        "activity": 562200
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1259, 
+        "activity": 562300
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1529, 
+        "activity": 566600
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1575, 
+        "activity": 570800
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 391, 
+        "activity": 574000
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 196, 
+        "activity": 577200
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Multi domain", 
+        "confidence": "medium", 
+        "site": 1394, 
+        "activity": 579000
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1456, 
+        "activity": 579600
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1509, 
+        "activity": 580400
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.predictedbindingdomains", 
+    "fields": {
+        "prediction_method": "Single domain", 
+        "confidence": "high", 
+        "site": 1456, 
+        "activity": 589400
+    }
+}
+]

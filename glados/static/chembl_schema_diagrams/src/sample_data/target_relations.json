@@ -1,0 +1,902 @@
+[
+{
+    "pk": 15621, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105760, 
+        "target": 12734, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15622, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104764, 
+        "target": 10193, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15623, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104838, 
+        "target": 11974, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15624, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104301, 
+        "target": 11974, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15625, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 107894, 
+        "target": 12071, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15626, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 107893, 
+        "target": 12071, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15627, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104296, 
+        "target": 12071, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15628, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104709, 
+        "target": 12071, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15629, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104690, 
+        "target": 10569, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15630, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104749, 
+        "target": 10569, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15631, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104871, 
+        "target": 10569, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15632, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108129, 
+        "target": 10671, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15633, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108128, 
+        "target": 10671, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15634, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105508, 
+        "target": 10671, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15635, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 107887, 
+        "target": 10671, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15636, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105709, 
+        "target": 10639, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15637, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104828, 
+        "target": 12839, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15638, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105099, 
+        "target": 12502, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15639, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104833, 
+        "target": 247, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15640, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104726, 
+        "target": 179, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15641, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104868, 
+        "target": 42, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15642, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104788, 
+        "target": 42, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15643, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105737, 
+        "target": 54, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15644, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104841, 
+        "target": 227, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15645, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104992, 
+        "target": 227, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15646, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104784, 
+        "target": 227, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15647, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104798, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15648, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104293, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15649, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108134, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15650, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105103, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15651, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104936, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15652, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108124, 
+        "target": 34, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15653, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104951, 
+        "target": 12786, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15654, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104902, 
+        "target": 12376, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15655, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105830, 
+        "target": 310, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15656, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104984, 
+        "target": 51, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15657, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104841, 
+        "target": 51, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15658, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104779, 
+        "target": 280, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15659, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105024, 
+        "target": 280, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15660, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104790, 
+        "target": 280, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15661, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104806, 
+        "target": 280, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15662, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105036, 
+        "target": 244, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15663, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104765, 
+        "target": 129, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15664, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104734, 
+        "target": 129, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15665, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108398, 
+        "target": 129, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15666, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104741, 
+        "target": 129, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15667, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105683, 
+        "target": 269, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15668, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104870, 
+        "target": 100, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15669, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105759, 
+        "target": 100, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15670, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105045, 
+        "target": 100, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15671, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105760, 
+        "target": 10202, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15672, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104974, 
+        "target": 10646, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15673, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104841, 
+        "target": 10209, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15674, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104938, 
+        "target": 13024, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15675, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105736, 
+        "target": 10809, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15676, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105094, 
+        "target": 10709, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15677, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104963, 
+        "target": 12348, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15678, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105739, 
+        "target": 11579, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15679, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104823, 
+        "target": 11579, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15680, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105070, 
+        "target": 11942, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15681, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104713, 
+        "target": 12854, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15682, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105078, 
+        "target": 12854, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15683, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104699, 
+        "target": 12854, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15684, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104683, 
+        "target": 10901, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15685, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105761, 
+        "target": 10594, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15686, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104997, 
+        "target": 10594, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15687, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105708, 
+        "target": 12992, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15688, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105510, 
+        "target": 12992, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15689, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105758, 
+        "target": 12992, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15690, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104681, 
+        "target": 12443, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15691, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105033, 
+        "target": 10466, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15692, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104839, 
+        "target": 12516, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15693, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104797, 
+        "target": 11680, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15694, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104815, 
+        "target": 11680, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15695, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104715, 
+        "target": 12435, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15696, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104813, 
+        "target": 12247, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15697, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104683, 
+        "target": 12247, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15698, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104826, 
+        "target": 11864, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15699, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104906, 
+        "target": 11864, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15700, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 106175, 
+        "target": 12739, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15701, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104999, 
+        "target": 12739, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15702, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104696, 
+        "target": 12135, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15703, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104813, 
+        "target": 11636, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15704, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 108123, 
+        "target": 11636, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15705, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104683, 
+        "target": 11636, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15706, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105071, 
+        "target": 10495, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15707, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105091, 
+        "target": 10495, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15708, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105056, 
+        "target": 10495, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15709, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104958, 
+        "target": 10495, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15710, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105115, 
+        "target": 10495, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15711, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105066, 
+        "target": 11076, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15712, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104910, 
+        "target": 19904, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15713, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104890, 
+        "target": 19904, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15714, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104893, 
+        "target": 19904, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15715, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105116, 
+        "target": 19658, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15716, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105064, 
+        "target": 11494, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15717, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105021, 
+        "target": 11494, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15718, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104838, 
+        "target": 11494, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15719, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 105120, 
+        "target": 11494, 
+        "relationship": "SUBSET OF"
+    }
+},
+{
+    "pk": 15720, 
+    "model": "chembl_core_model.targetrelations", 
+    "fields": {
+        "related_target": 104752, 
+        "target": 11494, 
+        "relationship": "SUBSET OF"
+    }
+}
+]

@@ -1,0 +1,1802 @@
+[
+{
+    "pk": 6287, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Tigatuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYVMSWVRQAPGKGLEWVATISSGGSYTYYPDSVKGRFTISRDNAKNTLYLQMNSLRAEDTAVYYCARRGDSMITTDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "72c2e91eedf4fbbfbb8f9581fe8f50cc", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6288, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Tigatuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCKASQDVGTAVAWYQQKPGKAPKLLIYWASTRHTGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQQYSSYRTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "19b1591070d7f2a101ea4dbea681e46e", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6289, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Lexatumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGGGVERPGGSLRLSCAASGFTFDDYGMSWVRQAPGKGLEWVSGINWNGGSTGYADSVKGRVTISRDNAKNSLYLQMNSLRAEDTAVYYCAKILGAGRGWYFDLWGKGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6a0d47824302520092b9ae9c78c0c2bc", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6290, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Lexatumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "SSELTQDPAVSVALGQTVRITCQGDSLRSYYASWYQQKPGQAPVLVIYGKNNRPSGIPDRFSGSSSGNTASLTITGAQAEDEADYYCNSRDSSGNHVVFGGGTKLTVLGQPKAAPSVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADSSPVKAGVETTTPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPTECS", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "55440de58eb54efa0e88a50caccdce15", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6291, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Drozitumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGGGVERPGGSLRLSCAASGFTFDDYAMSWVRQAPGKGLEWVSGINWQGGSTGYADSVKGRVTISRDNAKNSLYLQMNSLRAEDTAVYYCAKILGAGRGWYFDYWGKGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b5dc836586a23f1e7b1739326d2ed2b7", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6292, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Drozitumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "SELTQDPAVSVALGQTVRITCSGDSLRSYYASWYQQKPGQAPVLVIYGANNRPSGIPDRFSGSSSGNTASLTITGAQAEDEADYYCNSADSSGNHVVFGGGTKLTVLGQPKAAPSVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADSSPVKAGVETTTPSKQSNNKYAASSYLSLTPEQWKSHKSYSCQVTHEGSTVEKTVAPTECS", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "00c98413e31b83afddb2f299c98666a6", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6293, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Enavatuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYWMSWVRQAPGKGLEWVAEIRLKSDNYATHYAESVKGRFTISRDDSKNSLYLQMNSLRAEDTAVYYCTGYYADAMDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a54c47ebb642b0597fb99b462ee644d0", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6294, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Enavatuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCRASQSVSTSSYSYMHWYQQKPGKAPKLLIKYASNLESGVPSRFSGSGSGTDFTLTISSLQPEDFATYYCQHSWEIPYTFGGGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a758f6dd8e919ec28c3717fe0a301c5d", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6295, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ramucirumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGGGLVKPGGSLRLSCAASGFTFSSYSMNWVRQAPGKGLEWVSSISSSSSYIYYADSVKGRFTISRDNAKNSLYLQMNSLRAEDTAVYYCARVTDAFDIWGQGTMVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b7313985c2131621f4e75a81788c2c82", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6296, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ramucirumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSVSASIGDRVTITCRASQGIDNWLGWYQQKPGKAPKLLIYDASNLDTGVPSRFSGSGSGTYFTLTISSLQAEDFAVYFCQQAKAFPPTFGGGTKVDIKGTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "d1faa390615baaaa9a7b1ab96df427a3", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6297, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Alacizumab pegol f(ab')2 fragment", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYGMSWVRQAPGKGLEWVATITSGGSYTYYVDSVKGRFTISRDNAKNTLYLQMNSLRAEDTAVYYCVRIGEDALDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCAA", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "492649be3baaaa97804b4f60a77a2118", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6298, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Alacizumab pegol light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCRASQDIAGSLNWLQQKPGKAIKRLIYATSSLDSGVPKRFSGSRSGSDYTLTISSLQPEDFATYYCLQYGSFPPTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6c682f17ba959b62d601da3ccaa799e0", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6299, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Elotuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFDFSRYWMSWVRQAPGKGLEWIGEINPDSSTINYAPSLKDKFIISRDNAKNSLYLQMNSLRAEDTAVYYCARPDGNYWYFDVWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "caf8fb4b263f051c08c9b5bd198ce3fe", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6300, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Elotuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCKASQDVGIAVAWYQQKPGKVPKLLIYWASTRHTGVPDRFSGSGSGTDFTLTISSLQPEDVATYYCQQYSSYPYTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c1fabaa62ec2748a00ebcae410d78001", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6301, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Solitomab", 
+        "component_type": "PROTEIN", 
+        "sequence": "ELVMTQSPSSLTVTAGEKVTMSCKSSQSLLNSGNQKNYLTWYQQKPGQPPKLLIYWASTRESGVPDRFTGSGSGTDFTLTISSVQAEDLAVYYCQNDYSYPLTFGAGTKLEIKGGGGSGGGGSGGGGSEVQLLEQSGAELVRPGTSVKISCKASGYAFTNYWLGWVKQRPGHGLEWIGDIFPGSGNIHYNEKFKGKATLTADKSSSTAYMQLSSLTFEDSAVYFCARLRNWDEPMDYWGQGTTVTVSSGGGGSDVQLVQSGAEVKKPGASVKVSCKASGYTFTRYTMHWVRQAPGQGLEWIGYINPSRGYTNYADSVKGRFTITTDKSTSTAYMELSSLRSEDTATYYCARYYDDHYCLDYWGQGTTVTVSSGEGTSTGSGGSGGSGGADDIVLTQSPATLSLSPGERATLSCRASQSVSYMNWYQQKPGKAPKRWIYDTSKVASGVPARFSGSGSGTDYSLTINSLEAEDAATYYCQQWSSNPLTFGGGTKVEIKHHHHHH", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a472e90a2e573d57ef844b25e36b2184", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6302, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Daratumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLLESGGGLVQPGGSLRLSCAVSGFTFNSFAMSWVRQAPGKGLEWVSAISGSGGGTYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYFCAKDKILWFGEPVFDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "0551c28c93b9ac5444f5e3985994de67", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6303, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Daratumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPATLSLSPGERATLSCRASQSVSSYLAWYQQKPGQAPRLLIYDASNRATGIPARFSGSGSGTDFTLTISSLEPEDFAVYYCQQRSNWPPTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "e76e6ff7d3b7cf433e998243edc01509", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6304, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Muromonab-CD3 heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGAELARPGASVKMSCKASGYTFTRYTMHWVKQRPGQGLEWIGYINPSRGYTNYNQKFKDKATLTTDKSSSTAYMQLSSLTSEDSAVYYCARYYDDHYCLDYWGQGTTLTVSSAKTTAPSVYPLAPVCGGTTGSSVTLGCLVKGYFPEPVTLTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVTSSTWPSQSITCNVAHPASSTKVDKKIEPRPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7c0fb051ce4d9189f91e1aa90c2bfbf1", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6305, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Muromonab-CD3 light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVLTQSPAIMSASPGEKVTMTCSASSSVSYMNWYQQKSGTSPKRWIYDTSKLASGVPAHFRGSGSGTSYSLTISGMEAEDAATYYCQQWSSNPFTFGSGTKLEINRADTAPTVSIFPPSSEQLTSGGASVVCFLNNFYPKDINVKWKIDGSERQNGVLNSWTDQDSKDSTYSMSSTLTLTKDEYERHNSYTCEATHKTSTSPIVKSFNRNEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f5689c0a03cc738c40fcd2b36af35795", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6306, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Teplizumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGGGVVQPGRSLRLSCKASGYTFTRYTMHWVRQAPGKGLEWIGYINPSRGYTNYNQKVKDRFTISRDNSKNTAFLQMDSLRPEDTGVYFCARYYDDHYCLDYWGQGTPVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPEAAGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c2b1760e3f92803fb78636fc922ccf03", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6307, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Teplizumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCSASSSVSYMNWYQQTPGKAPKRWIYDTSKLASGVPSRFSGSGSGTDYTFTISSLQPEDIATYYCQQWSSNPFTFGQGTKLQITRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "1f355e84e447ee88af5e152a52513bb4", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6308, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Otelixizumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLLESGGGLVQPGGSLRLSCAASGFTFSSFPMAWVRQAPGKGLEWVSTISTSGGRTYYRDSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCAKFRQYSGGFDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYASTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "923892ed40d59ec38ad11b42e507b643", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6309, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Otelixizumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQLTQPNSVSTSLGSTVKLSCTLSSGNIENNYVHWYQLYEGRSPTTMIYDDDKRPDGVPDRFSGSIDRSSNSAFLTIHNVAIEDEAIYFCHSYVSSFNVFGGGTKLTVLRQPKAAPSVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADSSPVKAGVETTTPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPTECS", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "fbc73bb2e4605bfcaf20ce94bdeb4cc2", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6310, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Foralumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVESGGGVVQPGRSLRLSCAASGFKFSGYGMHWVRQAPGKGLEWVAVIWYDGSKKYYVDSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARQMGYWHFDLWGRGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPEAEGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "fee9f82d8ea4d446187f7899716bee8f", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6311, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Foralumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPATLSLSPGERATLSCRASQSVSSYLAWYQQKPGQAPRLLIYDASNRATGIPARFSGSGSGTDFTLTISSLEPEDFAVYYCQQRSNWPPLTFGGGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7879f951e9a6a74e4448fa2133c7f3a2", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6312, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Citatuzumab bogatox heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "HHHHHHEVQLVQSGPGLVQPGGSVRISCAASGYTFTNYGMNWVKQAPGKGLEWMGWINTYTGESTYADSFKGRFTFSLDTSASAAYLQINSLRAEDTAVYYCARFAIKGDYWGQGTLLTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSC", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "47063f45b6b0aa75a25593c7bb0e245b", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6313, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Citatuzumab bogatox light chain-toxin", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCRSTKSLLHSNGITYLYWYQQKPGKAPKLLIYQMSNLASGVPSRFSSSGSGTDFTLTISSLQPEDFATYYCAQNLEIPRTFGQGTKVELKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGECTRHRQPRGWEQLYNTVSFNLGEAYEYPTFIQDLRNELAKGTPVCQLPVTLQTIADDKRFVLVDITTTSKKTVKVAIDVTDVYVVGYQDKWDGKDRAVFLDKVPTVATSKLFPGVTNRVTLTFDGSYQKLVNAAKADRKALELGVNKLEFSIEAIHGKTINGQEAAKFFLIVIQMVSEAARFKYIETEVVDRGLYGSFKPNFKVLNLENNWGDISDAIHKSSPQCTTINPALQLISPSNDPWVVNKVSQISPDMGILKFKSSK", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "dd27a55ab250286af271edc99d498f0e", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6314, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Trastuzumab emtansine heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRYADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPG", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6e2532447479b91319e9c9a31795ade7", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6315, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Trastuzumab emtansine light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASVGDRVTITCRASQDVNTAVAWYQQKPGKAPKLLIYSASFLYSGVPSRFSGSRSGTDFTLTISSLQPEDFATYYCQQHYTTPPTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "cae856ec5ed88043b029db076e99f48e", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6316, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Naptumomab estafenatox heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLQQSGPDLVKPGASVKISCKASGYSFTGYYMHWVKQSPGKGLEWIGRINPNNGVTLYNQKFKDKATLTVDKSSTTAYMELRSLTSEDSAVYYCARSTMITNYVMDYWGQGTSVTVSSAKTTPPSVYPLAPGSAAQTNSMVTLGCLVKGYFPEPVTVTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVPSSTWPSETVTCNVAHPASSTKVDKKIVPRDSGGPSEKSEEINEKDLRKKSELQGTALGNLKQIYYYNSKAITSSEKSADQFLTNTLLFKGFFTGHPWYNDLLVDLGSTAATSEYEGSSVDLYGAYYGYQCAGGTPNKTACMYGGVTLHDNNRLTEEKKVPINLWIDGKQTTVPIDKVKTSKKEVTVQELDLQARHYLHGKFGLYNSDSFGGKVQRGLIVFHSSEGSTVSYDLFDAQGQYPDTLLRIYRDNTTISSTSLSISLYLYTT", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7a04dfbc751d9adae3fff8cf54e0777c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6317, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Naptumomab estafenatox light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "SIVMTQTPTSLLVSAGDRVTITCKASQSVSNDVAWYQQKPGQSPKLLISYTSSRYAGVPDRFSGSGYGTDFTLTISSVQAEDAAVYFCQQDYNSPPTFGGGTKLEIKRADAAPTVSIFPPSSEQLTSGGASVVCFLNNFYPKDINVKWKIDGSERQNGVLNSWTDQDSKDSTYSMSSTLTLTKDEYERHNSYTCEATHKTSTSPIVKSFNRNES", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f62446afddd7e42a6ca118e85954c36a", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6318, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Vorsetuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGASVKVSCKASGYTFTNYGMNWVRQAPGQGLKWMGWINTYTGEPTYADAFKGRVTMTRDTSISTAYMELSRLRSDDTAVYYCARDYGDYGMDYWGQGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f74f0abea460489aa6dc5f3017a2af9d", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6319, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Vorsetuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQSPDSLAVSLGERATINCRASKSVSTSGYSFMHWYQQKPGQPPKLLIYLASNLESGVPDRFSGSGSGTDFTLTISSLQAEDVAVYYCQHSREVPWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "0663d5318e42890ba53824f82173bdcd", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6320, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Cantuzumab ravtansine heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGETVKISCKASDYTFTYYGMNWVKQAPGQGLKWMGWIDTTTGEPTYAQKFQGRIAFSLETSASTAYLQIKSLKSEDTATYFCARRGPYNWYFDVWGQGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a3628e2a9a933753a23c7abf9f89efc6", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6321, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Cantuzumab ravtansine light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQSPLSVPVTPGEPVSISCRSSKSLLHSNGNTYLYWFLQRPGQSPQLLIYRMSNLVSGVPDRFSGSGSGTAFTLRISRVEAEDVGVYYCLQHLEYPFTFGPGTKLELKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7491a133428e9680db8b12c4b2d298d0", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6322, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Lorvotuzumab mertansine heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVESGGGVVQPGRSLRLSCAASGFTFSSFGMHWVRQAPGKGLEWVAYISSGSFTIYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARMRKGYAMDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "3a0c1c58b9634d2727ab9c2665714b62", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6323, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Lorvotuzumab mertansine light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DVVMTQSPLSLPVTLGQPASISCRSSQIIIHSDGNTYLEWFQQRPGQSPRRLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCFQGSHVPHTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "610929dfa070e587db78fef57e0ccf57", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6324, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Oportuzumab monatox single chain variable fragment", 
+        "component_type": "PROTEIN", 
+        "sequence": "HHHHHHDIQMTQSPSSLSASVGDRVTITCRSTKSLLHSNGITYLYWYQQKPGKAPKLLIYQMSNLASGVPSRFSSSGSGTDFTLTISSLQPEDFATYYCAQNLEIPRTFGQGTKVELKRATPSHNSHQVPSAGGPTANSGTSGSEVQLVQSGPGLVQPGGSVRISCAASGYTFTNYGMNWVKQAPGKGLEWMGWINTYTGESTYADSFKGRFTFSLDTSASAAYLQINSLRAEDTAVYYCARFAIKGDYWGQGTLLTVSSEFGGAPEFPKPSTPPGSSGLEGGSLAALTAHQACHLPLETFTRHRQPRGWEQLEQCGYPVQRLVALYLAARLSWNQVDQVIRNALASPGSGGDLGEAIREQPEQARLALTLAAAESERFVRQGTGNDEAGAASADVVSLTCPVAAGECAGPADSGDALLERNYPTGAEFLGDGGDVSFSTRGTQNWTVERLLQAHRQLEERGYVFVGYHGTFLEAAQSIVFGGVRARSQDLDAIWRGFYIAGDPALAYGYAQDQEPDARGRIRNGALLRVYVPRSSLPGFYRTGLTLAAPEAAGEVERLIGHPLPLRLDAITGPEEEGGRLETILGWPLAERTVVIPSAIPTDPRNVGGDLDPSSIPDKEQAISALPDYASQPGKPPHHHHHHKDEL", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "0af7786d5416fc4e4de09c7ebe9dc625", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6325, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Moxetumomab pasudotox VH-PE38 chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "MEVQLVESGGGLVKPGGSLKLSCAASGFAFSIYDMSWVRQTPEKCLEWVAYISSGGGTTYYPDTVKGRFTISRDNAKNTLYLQMSSLKSEDTAMYYCARHSGYGTHWGVLFAYWGQGTLVTVSAKASGGPEGGSLAALTAHQACHLPLETFTRHRQPRGWEQLEQCGYPVQRLVALYLAARLSWNQVDQVIRNALASPGSGGDLGEAIREQPEQARLALTLAAAESERFVRQGTGNDEAGAANGPADSGDALLERNYPTGAEFLGDGGDVSFSTRGTQNWTVERLLQAHRQLEERGYVFVGYHGTFLEAAQSIVFGGVRARSQDLDAIWRGFYIAGDPALAYGYAQDQEPDARGRIRNGALLRVYVPRSSLPGFYRTSLTLAAPEAAGEVERLIGHPLPLRLDAITGPEEEGGRLETILGWPLAERTVVIPSAIPTDPRNVGGDLDPSSIPDKEQAISALPDYASQPGKPPREDLK", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "47da365b8af0ba41fbda6b0a1f92ed60", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6326, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Moxetumomab pasudotox light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "MDIQMTQTTSSLSASLGDRVTISCRASQDISNYLNWYQQKPDGTVKLLIYYTSILHSGVPSRFSGSGSGTDYSLTISNLEQEDFATYFCQQGNTLPWTFGCGTKLEIK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "abc174fe2a6752f86ca6c7b3373d979e", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6327, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Satumomab pendetide heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSDAELVKPGASVKISCKASGYTFTDHAIHWAKQKPEQGLEWIGYISPGNDDIKYNEKFKGKATLTADKSSSTAYMQLNSLTSEDSAVYFCKRSYYGHWGQGTTLTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTKTYTCNVDHKPSNTKVDKRVCPPCKCPAPNLLGGPSVFIFPPKIKDVLMISLSPIVTCVVVDVSEDDPDVQISWFVNNVEVHTAQTQTHREDYNSTLRVVSALPIQHQDWMSGKEFKCKVNNKDLPAPIERTISKPKGSVRAPQVYVLPPPEEEMTKKQVTLTCMVTDFMPEDIYVEWTNNGKTELNYKNTEPVLDSDGSYFMYSKLRVEKKNWVERNSYSCSVVHEGLHNHHTTKSFSR", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "5b1cdadd7b82dbadc4fb8fb3ba46d297", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6328, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Satumomab pendetide light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPASLSVSVGETVTITCRASENIYSNLAWYQQKQGKSPQLLVYAATNLADGVPSRFSGSGSGTQYSLKINSLQSEDFGSYYCQHFWGTPYTFGGGTRLEIKRADAAPTVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFN", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "d9e6727c5dfba3a5296124481bb3deba", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6329, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Indatuximab ravtansine heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGSELMMPGASVKISCKATGYTFSNYWIEWVKQRPGHGLEWIGEILPGTGRTIYNEKFKGKATFTADISSNTVQMQLSSLTSEDSAVYYCARRDYYGNFYYAMDYWGQGTSVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTKTYTCNVDHKPSNTKVDKRVESKYGPPCPSCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAKGQPREPQVYTLPPSQEEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSRLTVDKSRWQEGNVFSCSVMHEALHNHYTQKSLSLSLGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "950b70d336b499a07835f676bc674297", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6330, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Indatuximab ravtansine light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSTSSLSASLGDRVTISCSASQGINNYLNWYQQKPDGTVELLIYYTSTLQSGVPSRFSGSGSGTDYSLTISNLEPEDIGTYYCQQYSKLPRTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "48f06adc6e0aeb7ce583d8e6c1a6f131", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6331, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Clivatuzumab tetraxetan heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGAEVKKPGASVKVSCEASGYTFPSYVLHWVKQAPGQGLEWIGYINPYNDGTQYNEKFKGKATLTRDTSINTAYMELSRLRSDDTAVYYCARGFGGSYGFAYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c7f9b554f76a763ed378969375744316", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6332, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Clivatuzumab tetraxetan light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQLTQSPSSLSASVGDRVTMTCSASSSVSSSYLYWYQQKPGKAPKLWIYSTSNLASGVPARFSGSGSGTDFTLTISSLQPEDSASYFCHQWNRYPYTFGGGTRLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a1e71b835aabafa8f87c8630c20efe9c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6333, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ibritumomab tiuxetan heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QAYLQQSGAELVRPGASVKMSCKASGYTFTSYNMHWVKQTPRQGLEWIGAIYPGNGDTSYNQKFKGKATLTVDKSSSTAYMQLSSLTSEDSAVYFCARVVYYSNSYWYFDVWGTGTTVTVSAPSVYPLAPVCGDTTGSSVTLGCLVKGYFPEPVTLTWNSGSLSSGVHTFPAVLQSDLYTLSSSVTVTSSTWPSQSITCNVAHPASSTKVDKKIEPRGPTIKPCPPCKCPAPNLLGGPSVFIFPPKIKDVLMISLSPIVTCVVVDVSEDDPDVQISWFVNNVEVHTAQTQTHREDYNSTLRVVSALPIQHQDWMSGKEFKCKVNNKDLPAPIERTISKPKGSVRAPQVYVLPPPEEEMTKKQVTLTCMVTDFMPEDIYVEWTNNGKTELNYKNTEPVLDSDGSYFMYSKLRVEKKNWVERNSYSCSVVHEGLHNHHTTKSFSR", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "a86685c832832a3d70ee8aca847832dc", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6334, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ibritumomab tiuxetan light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVLSQSPAILSASPGEKVTMTCRASSSVSYMHWYQQKPGSSPKPWIYAPSNLASGVPARFSGSGSGTSYSLTISRVEAEDAATYYCQQWSFNPPTFGAGTKLELKRADAAPTVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFN", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c7a51d2620bb43fd3abc35941594b71c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6335, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Brentuximab vedotin heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIQLQQSGPEVVKPGASVKISCKASGYTFTDYYITWVKQKPGQGLEWIGWIYPGSGNTKYNEKFKGKATLTVDTSSSTAFMQLSSLTSEDTAVYFCANYGNYWFAYWGQGTQVTVSAASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPG", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7e1759ab880921e65e3c255c42e61d7c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6336, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Brentuximab vedotin light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVLTQSPASLAVSLGQRATISCKASQSVDFDGDSYMNWYQQKPGQPPKVLIYAASNLESGIPARFSGSGSGTDFTLNIHPVEEEDAATYYCQQSNEDPWTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6edcef23800dbab12508a6d64c8fe149", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6337, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Glembatumumab vedotin heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQESGPGLVKPSQTLSLTCTVSGGSISSFNYYWSWIRHHPGKGLEWIGYIYYSGSTYSNPSLKSRVTISVDTSKNQFSLTLSSVTAADTAVYYCARGYNWNYFDYWGQGTLVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSNFGTQTYTCNVDHKPSNTKVDKTVERKCCVECPPCPAPPVAGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTFRVVSVLTVVHQDWLNGKEYKCKVSNKGLPAPIEKTISKTKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPMLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "fbd9f8e8f416a2df2d395e72b33c767a", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6338, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Glembatumumab vedotin light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVMTQSPATLSVSPGERATLSCRASQSVDNNLVWYQQKPGQAPRLLIYGASTRATGIPARFSGSGSGTEFTLTISSLQSEDFAVYYCQQYNNWPPWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "ff579f5241788dc7b7c8d1a5ca8743d8", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6339, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Crenezumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFTFSSYGMSWVRQAPGKGLELVASINSNGGSTYYPDSVKGRFTISRDNAKNSLYLQMNSLRAEDTAVYYCASGDYWGQGTTVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTKTYTCNVDHKPSNTKVDKRVESKYGPPCPPCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAKGQPREPQVYTLPPSQEEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSRLTVDKSRWQEGNVFSCSVMHEALHNHYTQKSLSLSLG", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "eb3ac9db3d01a71654d6f863c180011d", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6340, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Crenezumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQSPLSLPVTPGEPASISCRSSQSLVYSNGDTYLHWYLQKPGQSPQLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCSQSTHVPWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "723b7351c181b7090c5af500aec572f8", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6341, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Gantenerumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVELVESGGGLVQPGGSLRLSCAASGFTFSSYAMSWVRQAPGKGLEWVSAINASGTRTYYADSVKGRFTISRDNSKNTLYLQMNSLRAEDTAVYYCARGKGNTHKPYGYVRYFDVWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "0797df076b5eeb2322254c7c11ed2511", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6342, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Gantenerumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVLTQSPATLSLSPGERATLSCRASQSVSSSYLAWYQQKPGQAPRLLIYGASSRATGVPARFSGSGSGTDFTLTISSLEPEDFATYYCLQIYNMPITFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "aa142774d38803b966ff63571faa3cec", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6343, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Solanezumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGGLVQPGGSLRLSCAASGFTFSRYSMSWVRQAPGKGLELVAQINSVGNSTYYPDTVKGRFTISRDNAKNTLYLQMNSLRAEDTAVYYCASGDYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "19ab6d76bb7fd8f29ef54f26d2225d62", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6344, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Solanezumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DVVMTQSPLSLPVTLGQPASISCRSSQSLIYSDGNAYLHWFLQKPGQSPRLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCSQSTHVPWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "fff55f141ea9b12998a29975e67fca19", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6345, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ponezumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGASVKVSCKASGYYTEAYYIHWVRQAPGQGLEWMGRIDPATGNTKYAPRLQDRVTMTRDTSTSTVYMELSSLRSEDTAVYYCASLYSLPVYWGQGTTVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSNFGTQTYTCNVDHKPSNTKVDKTVERKCCVECPPCPAPPVAGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTFRVVSVLTVVHQDWLNGKEYKCKVSNKGLPSSIEKTISKTKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPMLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "1a7d34cf1a60b53778f52368a3c2c866", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6346, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ponezumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DVVMTQSPLSLPVTLGQPASISCKSSQSLLYSDAKTYLNWFQQRPGQSPRRLIYQISRLDPGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCLQGTHYPVLFGQGTRLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "ac596f4cecf10eb9cf8e0384cdb21401", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6347, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Efungumab single chain variable fragment", 
+        "component_type": "PROTEIN", 
+        "sequence": "MAEVQLVESGAEVKKPGESLRISCKGSGCIISSYWISWVRQMPGKGLEWMGKIDPGDSYINYSPSFQGHVTISADKSINTAYLQWNSLKASDTAMYYCARGGRDFGDSFDYWGQGTLVTVSSGGGGSGGGGSGGGGSDVVMTQSPSFLSAFVGDRITITCRASSGISRYLAWYQQAPGKAPKLLIYAASTLQTGVPSRFSGSGSGTEFTLTINSLQPEDFATYYCQHLNSYPLTFGGGTKVDIKRAAALEHHHHHH", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c10471f4ff24c0869d9c5fa91788d3c9", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6348, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Bezlotoxumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGAEVKKSGESLKISCKGSGYSFTSYWIGWVRQMPGKGLEWMGIFYPGDSSTRYSPSFQGQVTISADKSVNTAYLQWSSLKASDTAMYYCARRRNWGNAFDIWGQGTMVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c6a59384ae931570adb320d399b52c5c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6349, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Bezlotoxumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPGTLSLSPGERATLSCRASQSVSSSYLAWYQQKPGQAPRLLIYGASSRATGIPDRFSGSGSGTDFTLTISRLEPEDFAVYYCQQYGSSTWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "9326f88eb4483fd1f3dd2a0840f76ae5", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6350, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Girentuximab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DVKLVESGGGLVKLGGSLKLSCAASGFTFSNYYMSWVRQTPEKRLELVAAINSDGGITYYLDTVKGRFTISRDNAKNTLYLQMSSLKSEDTALFYCARHRSGYFSMDYWGQGTSVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "c65ffd89f612194669ad3551d5a1eef2", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6351, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Girentuximab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQSQRFMSTTVGDRVSITCKASQNVVSAVAWYQQKPGQSPKLLIYSASNRYTGVPDRFTGSGSGTDFTLTISNMQSEDLADFFCQQYSNYPWTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b4bf2d11dc3d6ad2fa470567ffcdf094", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6352, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Carlumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYGISWVRQAPGQGLEWMGGIIPIFGTANYAQKFQGRVTITADESTSTAYMELSSLRSEDTAVYYCARYDGIYGELDFWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "8cc02270de835767c201e1c70ab1ffcc", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6353, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Carlumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPATLSLSPGERATLSCRASQSVSDAYLAWYQQKPGQAPRLLIYDASSRATGVPARFSGSGSGTDFTLTISSLEPEDFAVYYCHQYIQLHSFTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "797ef430166bf887192508bcd48bb466", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6354, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Mavrilimumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGASVKVSCKVSGYTLTELSIHWVRQAPGKGLEWMGGFDPEENEIVYAQRFQGRVTMTEDTSTDTAYMELSSLRSEDTAVYYCAIVGSFSPLTLGLWGQGTMVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTKTYTCNVDHKPSNTKVDKRVESKYGPPCPSCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAKGQPREPQVYTLPPSQEEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSRLTVDKSRWQEGNVFSCSVMHEALHNHYTQKSLSLSLGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "9540084109bf1b88f13448d71b9da072", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6355, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Mavrilimumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QSVLTQPPSVSGAPGQRVTISCTGSGSNIGAPYDVSWYQQLPGTAPKLLIYHNNKRPSGVPDRFSGSKSGTSASLAITGLQAEDEADYYCATVEAGLSGSVFGGGTKLTVLGQPKAAPSVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADSSPVKAGVETTTPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPTECS", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b8e800ecdbb85da27b4cc6516136454b", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6356, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Urelumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQWGAGLLKPSETLSLTCAVYGGSFSGYYWSWIRQSPEKGLEWIGEINHGGYVTYNPSLESRVTISVDTSKNQFSLKLSSVTAADTAVYYCARDYGPGNYDWYFDLWGRGTLVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTKTYTCNVDHKPSNTKVDKRVESKYGPPCPPCPAPEFLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAKGQPREPQVYTLPPSQEEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSRLTVDKSRWQEGNVFSCSVMHEALHNHYTQKSLSLSLGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "9cce7d0ec312b6cb7b2e1dd4658b8cd5", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6357, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Urelumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPATLSLSPGERATLSCRASQSVSSYLAWYQQKPGQAPRLLIYDASNRATGIPARFSGSGSGTDFTLTISSLEPEDFAVYYCQQRSNWPPALTFCGGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b43618b2f2476819c2a09d9e1f4226fe", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6358, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Belatacept fusion protein", 
+        "component_type": "PROTEIN", 
+        "sequence": "MHVAQPAVVLASSRGIASFVCEYASPGKYTEVRVTVLRQADSQVTEVCAATYMMGNELTFLDDSICTGTSSGNQVNLTIQGLRAMDTGLYICKVELMYPPPYYEGIGNGTQIYVIDPEPCPDSDQEPKSSDKTHTSPPSPAPELLGGSSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "260ab41b96aae5e387c8b4dce8eea8b2", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6359, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Blinatumumab single chain variable fragment fusion protein (bite)", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQLTQSPASLAVSLGQRATISCKASQSVDYDGDSYLNWYQQIPGQPPKLLIYDASNLVSGIPPRFSGSGSGTDFTLNIHPVEKVDAATYHCQQSTEDPWTFGGGTKLEIKGGGGSGGGGSGGGGSQVQLQQSGAELVRPGSSVKISCKASGYAFSSYWMNWVKQRPGQGLEWIGQIWPGDGDTNYNGKFKGKATLTADESSSTAYMQLSSLASEDSAVYFCARRETTTVGRYYYAMDYWGQGTTVTVSSGGGGSDIKLQQSGAELARPGASVKMSCKTSGYTFTRYTMHWVKQRPGQGLEWIGYINPSRGYTNYNQKFKDKATLTTDKSSSTAYMQLSSLTSEDSAVYYCARYYDDHYCLDYWGQGTTLTVSSVEGGSGGSGGSGGSGGVDDIQLTQSPAIMSASPGEKVTMTCRASSSVSYMNWYQQKSGTSPKRWIYDTSKVASGVPYRFSGSGSGTSYSLTISSMEAEDAATYYCQQWSSNPLTFGAGTKLELKHHHHHH", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b33e7f4bca02199d3413f3d06db3353c", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6360, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Mogamulizumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVESGGDLVQPGRSLRLSCAASGFIFSNYGMSWVRQAPGKGLEWVATISSASTYSYYPDSVKGRFTISRDNAKNSLYLQMNSLRVEDTALYYCGRHSDGNFAFGYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "21b14d4faa1ff472676254577ca74e0b", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6361, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Mogamulizumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DVLMTQSPLSLPVTPGEPASISCRSSRNIVHINGDTYLEWYLQKPGQSPQLLIYKVSNRFSGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCFQGSLLPWTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "331c04d1f34b62a14b556e5c0ffd2945", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6362, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Alefacept heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "CFSQQIYGVVYGNVTFHVPSNVPLKEVLWKKQKDKVAELENSEFRAFSSFKNRVYLDTVSGSLTIYNLTSSDEDEYEMESPNITDTMKFFLYVLESLPSPTLTCALTNGSIEVQCMIPEHYNSHRGLIMYSWDCPMEQCKRNSTSIYFKMENDLPQKIQCTLSNPLFNTTSSIILTTCIPSSGHSRHRYALIPIPLAVITTCIVLYMNGILKCDRKPDRTNSNRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPQVKFNWYVDGVQVHNAKTKPREQQYNSTYRVVSVLTVLHQNWLDGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "7910bfdd6c934bfd19eeb044c2bb3c0e", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6363, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Rituximab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQPGAELVKPGASVKMSCKASGYTFTSYNMHWVKQTPGRGLEWIGAIYPGNGDTSYNQKFKGKATLTADKSSSTAYMQLSSLTSEDSAVYYCARSTYYGGDWYFNVWGAGTTVTVSAASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "aee7023deb673030ae3a497ed7ff82d8", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6364, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Rituximab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVLSQSPAILSASPGEKVTMTCRASSSVSYIHWFQQKPGSSPKPWIYATSNLASGVPVRFSGSGSGTSYSLTISRVEAEDAATYYCQQWTSNPPTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "493c12d07a860b7a42cd17532e757b12", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6365, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Tositumomab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QAYLQQSGAELVRPGASVKMSCKASGYTFTSYNMHWVKQTPRQGLEWIGAIYPGNGDTSYNQKFKGKATLTVDKSSSTAYMQLSSLTSEDSAVYFCARVVYYSNSYWYFDVWGTGTTVTVSGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKAEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "8bf48e586a1975f690ebdbd23ea4d4e2", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6366, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Tositumomab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVLSQSPAILSASPGEKVTMTCRASSSVSYMHWYQQKPGSSPKPWIYAPSNLASGVPARFSGSGSGTSYSLTISRVEAEDAATYYCQQWSFNPPTFGAGTKLELKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNR", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "8664b50a9902534a0c5f7f92b3801334", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Mus musculus", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 6367, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Veltuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGAEVKKPGSSVKVSCKASGYTFTSYNMHWVKQAPGQGLEWIGAIYPGMGDTSYNQKFKGKATLTADESTNTAYMELSSLRSEDTAFYYCARSTYYGGDWYFDVWGQGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "12db29e997eb1bbf188157f92b40dffc", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6368, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Veltuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQLTQSPSSLSASVGDRVTMTCRASSSVSYIHWFQQKPGKAPKPWIYATSNLASGVPVRFSGSGSGTDYTFTISSLQPEDIATYYCQQWTSNPPTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "67b5132195c1f00dd4a92181396fdd85", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6369, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Obinutuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLVQSGAEVKKPGSSVKVSCKASGYAFSYSWINWVRQAPGQGLEWMGRIFPGDGDTDYNGKFKGRVTITADKSTSTAYMELSSLRSEDTAVYYCARNVFDGYWLVYWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "48c77ca907316190cd55211b622dba46", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6370, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Obinutuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQTPLSLPVTPGEPASISCRSSKSLLHSNGITYLYWYLQKPGQSPQLLIYQMSNLVSGVPDRFSGSGSGTDFTLKISRVEAEDVGVYYCAQNLELPYTFGGGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f9bd041f04e3636cff279af094e3eac0", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6371, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ublituxumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QAYLQQSGAELVRPGASVKMSCKASGYTFTSYNMHWVKQTPRQGLEWIGGIYPGNGDTSYNQKFKGKATLTVGKSSSTAYMQLSSLTSEDSAVYFCARYDYNYAMDYWGQGTSVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "46622ab579923d3836055256667bfb8f", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6372, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Ublituxumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVLSQSPAILSASPGEKVTMTCRASSSVSYMHWYQQKPGSSPKPWIYATSNLASGVPARFSGSGSGTSYSFTISRVEAEDAATYYCQQWTFNPPTFGGGTRLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "099cc58fb2fe54f133746197e43500ba", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6373, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Samalizumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGSELKKPGASVKISCKASGYSFTDYIILWVRQNPGKGLEWIGHIDPYYGSSNYNLKFKGRVTITADQSTTTAYMELSSLRSEDTAVYYCGRSKRDYFDYWGQGTTLTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSNFGTQTYTCNVDHKPSNTKVDKTVERKCCVECPPCPAPPVAGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSQEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKGLPSSIEKTISKAKGQPREPQVYTLPPSQEEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSRLTVDKSRWQEGNVFSCSVMHEALHNHYTQKSLSLSLG", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "b18238e189ba8e511873bd4a7304fcbd", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6374, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Samalizumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQSPSSLSASIGDRVTITCKASQDINSYLSWFQQKPGKAPKLLIYRANRLVDGVPSRFSGSGSGTDYTLTISSLQPEDFAVYYCLQYDEFPYTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6a944f637a8f89e9aac0cfd38277f2ea", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6375, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Cixutumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGAEVKKPGSSVKVSCKASGGTFSSYAISWVRQAPGQGLEWMGGIIPIFGTANYAQKFQGRVTITADKSTSTAYMELSSLRSEDTAVYYCARAPLRFLEWSTQDHYYYYYMDVWGKGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "ccd3d1d36e1b99cf902dcf17a2d52db7", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6376, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Cixutumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "SSELTQDPAVSVALGQTVRITCQGDSLRSYYATWYQQKPGQAPILVIYGENKRPSGIPDRFSGSSSGNTASLTITGAQAEDEADYYCKSRDGSGQHLVFGGGTKLTVLGQPKAAPSVTLFPPSSEELQANKATLVCLISDFYPGAVTVAWKADSSPVKAGVETTTPSKQSNNKYAASSYLSLTPEQWKSHRSYSCQVTHEGSTVEKTVAPAECS", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "89a098a8a43491101fc275d33940d6b0", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6377, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Dalotuzumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVQLQQSGPGLVKPSQTLSLTCTVSGWSISGGWLWNWIRQPPGKGLQWIGWISWDGTNNWKPSLKDRVTISVDTSKNQFSLKLSSVTAADTAVWWCARWGRVFFDWWGQGTLVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6febc99a48a18833d8eeab4ae91118b5", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6378, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Dalotuzumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIVMTQSPLSLPVTPGQPASISCRSSQSIVHSNGNTWLQWWLQKPGQSPQLLIWKVSNRLWGVPDRFSGSGSGTDFTLKISRVQAQDVGVWWCFQGSHVPWTFGQGTKVQIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f196dfaa7b9ed64192fb2aa71e13cc15", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6379, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Robatumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLVQSGGGLVKPGGSLRLSCAASGFTFSSFAMHWVRQAPGKGLEWISVIDTRGATYYADSVKGRFTISRDNAKNSLYLQMNSLRAEDTAVYYCARLGNFYYGMDVWGQGTTVTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "6bf92ea31ae3ee3f39d360194753e875", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6380, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Robatumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPGTLSVSPGERATLSCRASQSIGSSLHWYQQKPGQAPRLLIKYASQSLSGIPDRFSGSGSGTDFTLTISRLEPEDFAVYYCHQSSRLPHTFGQGTKVEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "80ad02acebf0718653989008573aedac", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6381, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Figitumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EVQLLESGGGLVQPGGSLRLSCTASGFTFSSYAMNWVRQAPGKGLEWVSAISGSGGTTFYADSVKGRFTISRDNSRTTLYLQMNSLRAEDTAVYYCAKDLGWSDSYYYYYGMDVWGQGTTVTVSSASTKGPSVFPLAPCSRSTSESTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSNFGTQTYTCNVDHKPSNTKVDKTVERKCCVECPPCPAPPVAGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVQFNWYVDGVEVHNAKTKPREEQFNSTFRVVSVLTVVHQDWLNGKEYKCKVSNKGLPAPIEKTISKTKGQPREPQVYTLPPSREEMTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPMLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPG", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "8598014b4b8e514d8c59d7d26b6c689a", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6382, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Figitumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "DIQMTQFPSSLSASVGDRVTITCRASQGIRNDLGWYQQKPGKAPKRLIYAASRLHRGVPSRFSGSGSGTEFTLTISSLQPEDFATYYCLQHNSYPCSFGQGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": "agaulton", 
+        "sequence_md5sum": "d541c037e5284966ed5c7ffdda0a0479", 
+        "db_source": "mAb candidates", 
+        "updated_on": "2014-07-10", 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6383, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Teprotumumab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QVELVESGGGVVQPGRSQRLSCAASGFTFSSYGMHWVRQAPGKGLEWVAIIWFDGSSTYYADSVRGRFTISRDNSKNTLYLQMNSLRAEDTAVYFCARELGRRYFDLWGRGTLVSVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKKVEPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "f1e96c698f5b3472b8685b8bd10fefab", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6384, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Teprotumumab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "EIVLTQSPATLSLSPGERATLSCRASQSVSSYLAWYQQKPGQAPRLLIYDASKRATGIPARFSGSGSGTDFTLTISSLEPEDFAVYYCQQRSKWPPWTFGQGTKVESKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGEC", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "de2aab505553e85164fa70ec75c5bc4f", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 6385, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Basiliximab heavy chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QLQQSGTVLARPGASVKMSCKASGYSFTRYWMHWIKQRPGQGLEWIGAIYPGNSDTSYNQKFEGKAKLTAVTSASTAYMELSSLTHEDSAVYYCSRDYGYYFDFWGQGTTLTVSSASTKGPSVFPLAPSSKSTSGGTAALGCLVKDYFPEPVTVSWNSGALTSGVHTFPAVLQSSGLYSLSSVVTVPSSSLGTQTYICNVNHKPSNTKVDKRVEPPKSCDKTHTCPPCPAPELLGGPSVFLFPPKPKDTLMISRTPEVTCVVVDVSHEDPEVKFNWYVDGVEVHNAKTKPREEQYNSTYRVVSVLTVLHQDWLNGKEYKCKVSNKALPAPIEKTISKAKGQPREPQVYTLPPSRDELTKNQVSLTCLVKGFYPSDIAVEWESNGQPENNYKTTPPVLDSDGSFFLYSKLTVDKSRWQQGNVFSCSVMHEALHNHYTQKSLSLSPGK", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "70bdfb2805dc06d8f47ffc9790fb6c7b", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+},
+{
+    "pk": 6386, 
+    "model": "chembl_core_model.biocomponentsequences", 
+    "fields": {
+        "insert_date": "2013-01-17", 
+        "db_version": "24_09_12", 
+        "description": "Basiliximab light chain", 
+        "component_type": "PROTEIN", 
+        "sequence": "QIVSTQSPAIMSASPGEKVTMTCSASSSRSYMQWYQQKPGTSPKRWIYDTSKLASGVPARFSGSGSGTSYSLTISSMEAEDAATYYCHQRSSYTFGGGTKLEIKRTVAAPSVFIFPPSDEQLKSGTASVVCLLNNFYPREAKVQWKVDNALQSGNSQESVTEQDSKDSTYSLSSTLTLSKADYEKHKVYACEVTHQGLSSPVTKSFNRGE", 
+        "accession": null, 
+        "updated_by": null, 
+        "sequence_md5sum": "0a407d4b0634f8fa863191382dd9ec39", 
+        "db_source": "mAb candidates", 
+        "updated_on": null, 
+        "organism": null, 
+        "tax_id": null
+    }
+}
+]

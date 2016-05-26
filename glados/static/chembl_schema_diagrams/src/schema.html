@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive ChEMBL DB schema diagram</title>
+  <!-- Copyright 1998-2015 by Northwoods Software Corporation. -->
+  <meta charset="UTF-8">
+  <script src="go.js"></script>
+  <script src="jquery-1.8.3.min.js"></script>
+  <script src="jquery-ui-1.9.2.custom.js"></script>
+  <link rel="stylesheet" href="jquery-ui-1.9.2.custom.css">
+  <style type="text/css">
+
+  #myOverview {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: aliceblue;
+    z-index: 300; /* make sure its in front */
+    border: solid 1px blue;
+
+    width:200px;
+    height:100px
+  }
+
+  #imageContols {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    z-index: 300; /* make sure its in front */
+    width:30px;
+    height:100px
+  }
+
+  #legend {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 300; /* make sure its in front */
+    width:130px;
+    padding: 15px;
+  }
+
+#controls{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    z-index: 300; /* make sure its in front */
+    width:190px;
+    padding: 0px;
+  }
+
+  #controls-body{
+    padding:10px;
+  }
+
+  .legend-icon{
+    width: 10px;
+    height: 10px;
+  }
+
+  .control_content{
+    margin-bottom: 15px;
+  }
+
+  .view-caption{
+    margin:0;
+    padding:0;
+    margin-bottom:5px;
+  }
+
+  .ui-panel{
+    padding: 5px;
+    padding-left:30px;
+    border-bottom: none;
+    position: relative;
+  }
+
+.ui-panel-icon {
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    margin-top: -8px;
+}
+
+  </style>  
+  <script id="code">
+
+    function download(filename, text) {
+        var pom = document.createElement('a');
+        pom.setAttribute('href', text);
+        pom.setAttribute('download', filename);
+
+        if (document.createEvent) {
+            var event = document.createEvent('MouseEvents');
+            event.initEvent('click', true, true);
+            pom.dispatchEvent(event);
+        }
+        else {
+            pom.click();
+        }
+    }
+
+    $(function() {
+      $("[type=radio][name=radio][value=critical]").attr("checked", "checked");
+      $("[type=radio][name=grid][value=off]").attr("checked", "checked");
+      $("[type=radio][name=group][value=on]").attr("checked", "checked");
+      $( "#radio" ).buttonset();
+      $( "#grid" ).buttonset();
+      $( "#group" ).buttonset();
+
+      $('#legend-header').click(function(){
+        $('#legend-body').toggle('fast');
+        $('#legend-header span').toggleClass('ui-icon-triangle-1-s, ui-icon-triangle-1-e');
+      });
+
+      $('#controls-header').click(function(){
+        $('#controls-body').toggle('fast');
+        $('#controls-header span').toggleClass('ui-icon-triangle-1-s, ui-icon-triangle-1-e');
+      });      
+
+      $( "#image_download" ).button({
+        icons: {
+          primary: "ui-icon-image"
+        },
+        text: false
+      });
+
+      $( "#svg_download" ).button({
+        icons: {
+          primary: "ui-icon-script"
+        },
+        text: false
+      });
+
+      $( "#reset_zoom" ).button({
+        icons: {
+          primary: "ui-icon-home"
+        },
+        text: false
+      });
+
+      $.get('schema.json').then(function(data){
+
+	console.log('data:')
+	console.log(data)
+      
+      $('#myDiagram').css({"height": $(window).height() - 20});
+
+      var _ = go.GraphObject.make;  // for conciseness in defining templates
+
+      myDiagram =
+        _(go.Diagram, "myDiagram",
+          {
+            initialContentAlignment: go.Spot.Center,
+            initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+            "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+            "grid.visible": false,  // display a background grid for the whole diagram         
+            validCycle: go.Diagram.CycleNotDirected,  // don't allow loops
+            "padding": 200, 
+            "undoManager.isEnabled": true
+          });
+
+      $( "#image_download" ).button().click(function(){
+        download('schema.png', myDiagram.makeImageData(window.chrome?{maxSize: new go.Size(2000,2000), size: new go.Size(2000,NaN)} :{maxSize: new go.Size(6000,6000), size: new go.Size(6000,NaN)}));
+      });
+
+      $( "#svg_download" ).button().click(function(){
+        var svg = myDiagram.makeSvg();
+        var markup = (new XMLSerializer()).serializeToString(svg);
+        svg = "data:image/svg+xml;base64," +  window.btoa(markup);
+        download('schema.svg', svg);
+      });
+
+      $( "#reset_zoom" ).button().click(function(){
+        myDiagram.alignDocument(go.Spot.Center, go.Spot.Center);
+        myDiagram.zoomToFit();
+      });      
+
+      $('input[type=radio][name=radio]').change(function() {
+        var value = this.value;
+        if (value == 'all'){
+          toggleVisible('critical', 1.0);
+          toggleVisible('non-critical', 1.0);
+        }
+        else if (value == 'critical'){
+          toggleVisible('critical', 1.0);
+          toggleVisible('non-critical', 0);
+        }
+        else{
+          toggleVisible('critical', 0);
+          toggleVisible('non-critical', 0);
+        }
+      });
+      $('input[type=radio][name=group]').change(function() {toggleVisible('groups', this.value=='on'?1.0:0);});
+      $('input[type=radio][name=grid]').change(function() {toggleGrid(this.value=='on');});
+
+      var forelayer = myDiagram.findLayer("Background");
+      var groups_layer = new go.Layer();
+      groups_layer.name = "groups";
+      var critial_links_layer = new go.Layer();
+      critial_links_layer.name = "critical";
+      var non_critial_links_layer = new go.Layer();
+      non_critial_links_layer.name = "non-critical";      
+      myDiagram.addLayerAfter(groups_layer, forelayer);
+      myDiagram.addLayerAfter(critial_links_layer, groups_layer);
+      myDiagram.addLayerAfter(non_critial_links_layer, critial_links_layer);
+      non_critial_links_layer.opacity = 0;
+
+      toggleVisible = function(layername, val) {
+        var layer = myDiagram.findLayer(layername);
+        if (layer !== null) layer.opacity = val;
+        else {console.log(layername + ' not found...' )}
+      };
+
+      toggleGrid = function(val) {
+        myDiagram.setProperties({
+            allowDelete: false,
+            "grid.visible": val,
+            "grid.gridCellSize": new go.Size(100, 100),
+        });
+      };      
+
+      myDiagram.groupTemplate.ungroupable = true;
+
+      // This template is a Panel that is used to represent each item in a Panel.itemArray.
+      // The Panel is data bound to the item object.
+      var fieldTemplate =
+        _(go.Panel, "TableRow",  // this Panel is a row in the containing Table
+          {
+            toolTip:  // define a tooltip for each link that displays its information
+              _(go.Adornment, "Auto",
+                _(go.Shape, { fill: "#EFEFCC" }),
+                _(go.TextBlock, { margin: 4 },
+                  new go.Binding("text", "info"))
+              )
+          },          
+          new go.Binding("portId", "name"),  // this Panel is a "port"
+          {
+            background: "transparent",  // so this port's background can be picked by the mouse
+            fromSpot: go.Spot.LeftRightSides,  // links only go from the right side to the left side
+            toSpot: go.Spot.LeftRightSides,
+            // allow drawing links from or to this port:
+            fromLinkable: false, toLinkable: false
+          },                 
+          _(go.Shape,
+            { width: 12, height: 12, column: 0, strokeWidth: 2, margin: 4,
+              // but disallow drawing links from or to this shape:
+              fromLinkable: false, toLinkable: false },
+            new go.Binding("figure", "figure"),
+            new go.Binding("fill", "color")),
+          _(go.TextBlock,
+            { margin: new go.Margin(0, 2), column: 1, font: "bold 13px sans-serif",
+              // and disallow drawing links from or to this text:
+              fromLinkable: false, toLinkable: false },
+            new go.Binding("text", "name"))
+        );
+
+
+  myDiagram.groupTemplate =
+    _(go.Group, "Position",
+      _(go.Panel, "Auto",
+        _(go.Shape, "Rectangle",  // surrounds the Placeholder
+          { parameter1: 14}, new go.Binding("fill", "fill")),
+        _(go.Placeholder,    // represents the area of all member parts,
+          { padding: 5})  // with some extra padding around them
+      ),
+      _(go.TextBlock,         // group title
+        { textAlign: "center", margin: 50, font: "Bold 25pt Sans-Serif" },
+        new go.Binding("text", "key")),
+      _("SubGraphExpanderButton"),
+          { // allow the user to select items -- the background color indicates whether "selected"
+            //?? maybe this should be more sophisticated than simple toggling of selection
+            layerName: "groups",
+            doubleClick: function(e, item) {
+              // assume "transparent" means not "selected", for items
+              myDiagram.commandHandler.ungroupSelection(item);
+            }
+          }      
+    );
+
+      // This template represents a whole "record".
+      var lightgrad = _(go.Brush, "Linear", { 1: "#E6E6FA", 0: "#FFFAF0" });
+      myDiagram.nodeTemplate =
+        _(go.Node, "Auto",
+          new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+          {isShadowed: true,
+          shadowColor: "#C5C1AA"},
+          // this rectangular shape surrounds the content of the node
+          _(go.Shape,
+            { fill: lightgrad }),
+          // the content consists of a header and a list of items
+          _(go.Panel, "Vertical",
+            // this is the header for the whole node
+            _(go.Panel, "Auto",
+              { stretch: go.GraphObject.Horizontal },  // as wide as the whole node
+              _(go.Shape,
+                { fill: "#1570A6", stroke: null }),
+              _(go.TextBlock,
+                {
+                  alignment: go.Spot.Center,
+                  margin: 3,
+                  stroke: "white",
+                  textAlign: "center",
+                  font: "bold 12pt sans-serif"
+                },
+                new go.Binding("text", "key")),
+                            _("PanelExpanderButton", "TABLE",  // the name of the element whose visibility this button toggles
+              { row: 0, alignment: go.Spot.TopRight })),
+            // this Panel holds a Panel for each item object in the itemArray;
+            // each item Panel is defined by the itemTemplate to be a TableRow in this Table
+            _(go.Panel, "Table",
+              {
+                name: "TABLE",
+                padding: 2,
+                minSize: new go.Size(1, 1),
+                defaultStretch: go.GraphObject.Horizontal,
+                itemTemplate: fieldTemplate
+              },
+              new go.Binding("itemArray", "fields")
+            )  // end Table Panel of items
+          )  // end Vertical Panel
+        );  // end Node
+
+      myDiagram.linkTemplate =
+        _(go.Link,
+          { routing: go.Link.AvoidsNodes, 
+            curve: go.Link.JumpOver, 
+            corner: 5, 
+            relinkableFrom: false, 
+            relinkableTo: false, 
+            toShortLength: 4},  // let user reconnect links
+          new go.Binding("layerName", "layer"),  
+          _(go.Shape, { strokeWidth: 1.5 }),
+          _(go.Shape,  // the "from" arrowhead
+            new go.Binding("fromArrow", "fromArrow"),
+            { scale: 1, fill: null }),
+          _(go.Shape,  // the "to" arrowhead
+            new go.Binding("toArrow", "toArrow"),
+            { scale: 1, fill: null })
+        );
+
+      myDiagram.model =
+        _(go.GraphLinksModel,
+          {
+            linkFromPortIdProperty: "fromPort",
+            linkToPortIdProperty: "toPort",
+            nodeDataArray: data.nodeDataArray,
+            linkDataArray: data.linkDataArray
+          });
+
+     // Overview
+      myOverview =
+      _(go.Overview, "myOverview",  // the HTML DIV element for the Overview
+        { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
+
+      // this is a bit inefficient, but should be OK for normal-sized graphs with reasonable numbers of items per node
+      function findAllSelectedItems() {
+        var items = [];
+        for (var nit = myDiagram.nodes; nit.next(); ) {
+          var node = nit.value;
+          var table = node.findObject("TABLE");
+          if (table) {
+            for (var iit = table.elements; iit.next(); ) {
+              var itempanel = iit.value;
+              if (itempanel.background !== "transparent") items.push(itempanel);
+            }
+          }
+        }
+        return items;
+      }
+
+      // Override the standard CommandHandler deleteSelection behavior.
+      // If there are any selected items, delete them instead of deleting any selected nodes or links.
+      myDiagram.commandHandler.canDeleteSelection = function() {
+        // true if there are any selected deletable nodes or links,
+        // or if there are any selected items within nodes
+        return false;
+      };
+
+      // automatically update the model that is shown on this page
+      myDiagram.model.addChangedListener(function(e) {
+        if (e.isTransactionFinished) showModel();
+      });
+
+      showModel();  // show the diagram's initial model
+
+      function showModel() {
+      }
+    });
+});
+  </script>
+</head>
+<body>
+<div id="sample">
+  <div id="myDiagram" style="border: solid 1px black; width:100%;"></div>
+  <div id="myOverview"></div>
+  <div id="imageContols">
+    <div style="margin-bottom:5px;">
+      <button id="image_download">Download image</button>
+    </div>
+    <div style="margin-bottom:5px;">  
+      <button id="svg_download">Download svg</button>
+    </div> 
+    <div >  
+      <button id="reset_zoom">Reset zoom</button>
+    </div>      
+  </div>
+  <div id="legend">
+  <div id="legend-header" class="ui-corner-top ui-widget ui-state-default ui-panel">
+    <span class="ui-panel-icon ui-icon ui-icon-triangle-1-e"></span> <strong>Legend:</strong>
+  </div>
+  <div id="legend-body" class="ui-widget ui-widget-content ui-state-default">    
+  <ul style="list-style-type: none; padding:0; padding-left:20px;">
+    <li> <img src="images/rectangle.png" class="legend-icon"> Foreign key</li>
+    <li> <img src="images/pentagon.png" class="legend-icon"> One to one</li>
+    <li> <img src="images/diamond.png" class="legend-icon"> Integer type</li>
+    <li><img src="images/star.png" class="legend-icon"> Decimal type</li>
+    <li><img src="images/cross.png" class="legend-icon"> Date type</li>
+    <li><img src="images/ellipse.png" class="legend-icon"> Text type</li>
+    <li><img src="images/triangle.png" class="legend-icon"> Boolean type</li>
+    <li><img src="images/heart.png" class="legend-icon"> Other type</li>
+  </ul>
+  </div>  
+  </div>
+</div>
+<div id="controls">
+  <div id="controls-header" class="ui-corner-top ui-widget ui-state-default ui-panel">
+    <span class="ui-panel-icon ui-icon ui-icon-triangle-1-e"></span><strong>Visibility options:</strong>
+  </div>  
+  <div id="controls-body" class="ui-widget ui-widget-content ui-state-default">
+  <div class="control_content">
+    <div class="view-caption">Links visibility:</div>
+    <div id="radio">
+      <input type="radio" id="radio1" name="radio" value="all" ><label for="radio1">All</label>
+      <input type="radio" id="radio2" name="radio" checked="checked" value="critical" ><label for="radio2">Critical</label>
+      <input type="radio" id="radio3" name="radio" value="off" ><label for="radio3">Off</label>
+    </div>
+  </div> 
+  <div class="control_content">
+    <div class="view-caption">Groups visibility:</div>
+     <div id="group">
+      <input type="radio" id="group1" name="group" checked="checked" value="on" ><label for="group1">On</label>
+      <input type="radio" id="group2" name="group" value="off" ><label for="group2">Off</label>
+    </div>
+  </div>
+  <div class="control_content">
+    <div class="view-caption">Grid visibility:</div>
+     <div id="grid">
+      <input type="radio" id="grid1" name="grid" value="on" ><label for="grid1">On</label>
+      <input type="radio" id="grid2" name="grid" checked="checked" value="off" ><label for="grid2">Off</label>
+    </div>
+  </div>      
+</div>
+</div>
+</div>  
+</body>
+</html>

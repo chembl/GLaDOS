@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 1, 
+        "active_molecule": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 2, 
+        "active_molecule": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 3, 
+        "active_molecule": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 4, 
+        "active_molecule": 4
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 5, 
+        "active_molecule": 5
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 6, 
+        "active_molecule": 6
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 7, 
+        "active_molecule": 7
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 8, 
+        "active_molecule": 8
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 9, 
+        "active_molecule": 9
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 10, 
+        "active_molecule": 10
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 11, 
+        "active_molecule": 11
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 12, 
+        "active_molecule": 12
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 13, 
+        "active_molecule": 13
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 14, 
+        "active_molecule": 14
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 15, 
+        "active_molecule": 15
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 16, 
+        "active_molecule": 16
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 17, 
+        "active_molecule": 17
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 18, 
+        "active_molecule": 18
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 19, 
+        "active_molecule": 19
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 20, 
+        "active_molecule": 20
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 21, 
+        "active_molecule": 21
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 22, 
+        "active_molecule": 22
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 23, 
+        "active_molecule": 23
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 24, 
+        "active_molecule": 24
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 25, 
+        "active_molecule": 25
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 26, 
+        "active_molecule": 26
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 27, 
+        "active_molecule": 27
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 28, 
+        "active_molecule": 28
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 29, 
+        "active_molecule": 29
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 30, 
+        "active_molecule": 30
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 31, 
+        "active_molecule": 31
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 32, 
+        "active_molecule": 32
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 33, 
+        "active_molecule": 33
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 34, 
+        "active_molecule": 34
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 35, 
+        "active_molecule": 35
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 36, 
+        "active_molecule": 36
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 37, 
+        "active_molecule": 37
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 38, 
+        "active_molecule": 38
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 39, 
+        "active_molecule": 39
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 40, 
+        "active_molecule": 40
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 41, 
+        "active_molecule": 41
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 42, 
+        "active_molecule": 42
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 43, 
+        "active_molecule": 43
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 44, 
+        "active_molecule": 44
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 45, 
+        "active_molecule": 45
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 46, 
+        "active_molecule": 46
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 47, 
+        "active_molecule": 47
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 48, 
+        "active_molecule": 48
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 49, 
+        "active_molecule": 49
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 50, 
+        "active_molecule": 50
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 51, 
+        "active_molecule": 51
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 52, 
+        "active_molecule": 52
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 53, 
+        "active_molecule": 53
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 54, 
+        "active_molecule": 54
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 55, 
+        "active_molecule": 55
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 56, 
+        "active_molecule": 56
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 58, 
+        "active_molecule": 58
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 59, 
+        "active_molecule": 59
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 60, 
+        "active_molecule": 60
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 61, 
+        "active_molecule": 61
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 62, 
+        "active_molecule": 62
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 63, 
+        "active_molecule": 63
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 64, 
+        "active_molecule": 64
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 65, 
+        "active_molecule": 65
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 66, 
+        "active_molecule": 66
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 67, 
+        "active_molecule": 67
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 68, 
+        "active_molecule": 68
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 69, 
+        "active_molecule": 69
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 70, 
+        "active_molecule": 70
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 71, 
+        "active_molecule": 71
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 72, 
+        "active_molecule": 72
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 73, 
+        "active_molecule": 73
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 74, 
+        "active_molecule": 74
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 75, 
+        "active_molecule": 75
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 76, 
+        "active_molecule": 76
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 77, 
+        "active_molecule": 77
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 78, 
+        "active_molecule": 78
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 79, 
+        "active_molecule": 79
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 80, 
+        "active_molecule": 80
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 81, 
+        "active_molecule": 81
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 82, 
+        "active_molecule": 82
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 83, 
+        "active_molecule": 83
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 84, 
+        "active_molecule": 84
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 85, 
+        "active_molecule": 85
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 86, 
+        "active_molecule": 86
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 87, 
+        "active_molecule": 87
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 88, 
+        "active_molecule": 88
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 89, 
+        "active_molecule": 89
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 90, 
+        "active_molecule": 90
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 91, 
+        "active_molecule": 91
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 92, 
+        "active_molecule": 92
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 93, 
+        "active_molecule": 93
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 94, 
+        "active_molecule": 94
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 95, 
+        "active_molecule": 95
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 96, 
+        "active_molecule": 96
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 97, 
+        "active_molecule": 97
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 98, 
+        "active_molecule": 98
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 99, 
+        "active_molecule": 99
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 100, 
+        "active_molecule": 100
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.moleculehierarchy", 
+    "fields": {
+        "parent_molecule": 101, 
+        "active_molecule": 101
+    }
+}
+]

@@ -1,0 +1,82 @@
+[
+{
+    "pk": 0, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Unassigned", 
+        "description": "Default value - Target unknown or has yet to be assigned"
+    }
+},
+{
+    "pk": 1, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Non-molecular", 
+        "description": "Target assigned is non-molecular"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Subcellular fraction", 
+        "description": "Target assigned is subcellular fraction"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Molecular (non-protein)", 
+        "description": "Target assigned is molecular non-protein target"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Multiple homologous proteins", 
+        "description": "Multiple homologous protein targets may be assigned"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Multiple proteins", 
+        "description": "Multiple direct protein targets may be assigned"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Homologous protein complex", 
+        "description": "Homologous protein complex subunits assigned"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Protein complex", 
+        "description": "Direct protein complex subunits assigned"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Homologous protein", 
+        "description": "Homologous single protein target assigned"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.confidencescorelookup", 
+    "fields": {
+        "target_mapping": "Protein", 
+        "description": "Direct single protein target assigned"
+    }
+}
+]

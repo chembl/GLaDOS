@@ -1,0 +1,702 @@
+[
+{
+    "pk": "U-1", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "PREVENTION OF PREGNANCY"
+    }
+},
+{
+    "pk": "U-10", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "DIAGNOSTIC METHOD FOR DISTINGUISHING BETWEEN HYPOTHALMIC MALFUNCTIONS OR LESIONS IN HUMANS"
+    }
+},
+{
+    "pk": "U-100", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING OCULAR INFLAMMATION"
+    }
+},
+{
+    "pk": "U-1000", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADJUNCTIVE THERAPY TO DIET IN PATIENTS WITH HYPERLIPIDEMIAS"
+    }
+},
+{
+    "pk": "U-1001", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR DELIVERING DRUG TO LUNG OF MAMMAL, COMPRISING ADMINISTERING DRUG PRODUCT BY INHALATION. TREATING A MAMMAL HAVING A CONDITION CAPABLE OF TREATMENT BY INHALATION, COMPRISING ADMINISTERING TO THE LUNG THE DRUG PRODUCT BY INHALATION"
+    }
+},
+{
+    "pk": "U-1002", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING INFLAMMATORY CONDITIONS"
+    }
+},
+{
+    "pk": "U-1003", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD OF MYOCARDIAL PERFUSION IMAGING AND INCREASING CORONARY BLOOD FLOW"
+    }
+},
+{
+    "pk": "U-1004", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF PATIENTS WITH RELAPSED OR REFRACTORY PERIPHERAL T-CELL LYMPHOMA"
+    }
+},
+{
+    "pk": "U-1005", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING A STAPHYLOCOCCAL INFECTION"
+    }
+},
+{
+    "pk": "U-1006", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "NEW COMBINATION PRODUCT FOR THE EARLY TREATMENT OF RECURRENT HERPES LABIALIS (COLD SORES) TO REDUCE THE LIKELIHOOD OF ULCERATIVE COLD SORES AND TO SHORTEN THE LESION HEALING TIME IN ADULTS AND ADOLESCENTS (12 YEARS OF AGE AND OLDER)"
+    }
+},
+{
+    "pk": "U-1007", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING GOUT FLARES"
+    }
+},
+{
+    "pk": "U-1008", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "APPLICATION OF ANTISEPTIC WITH MOISTURIZERS FOR SURGICAL AND HEALTHCARE PERSONNEL SKIN DISINFECTION"
+    }
+},
+{
+    "pk": "U-1009", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR ADMINISTRATION OF TESTOSTERONE"
+    }
+},
+{
+    "pk": "U-101", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADJUNCT TO CONVENTIONAL CT OR MRI IMAGING IN THE LOCALIZATION OF STROKE IN PATIENTS IN WHOM STROKE HAS ALREADY BEEN DIAGNOSED"
+    }
+},
+{
+    "pk": "U-1010", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TO REDUCE BLOOD PHENYLALANINE LEVELS IN PATIENTS WITH HYPERPHENYLALANINEMIA DUE TO TETRA HYDROBIOPTERIN RESPONSIVE PHENYLKETONURIA. KUVAN SHOULD BE TAKEN ORALLY WITH FOOD TO INCREASE ABSORPTION"
+    }
+},
+{
+    "pk": "U-1011", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF GRANISETRON TRANSDERMAL SYSTEM TO TREAT/PREVENT CHEMOTHERAPY INDUCED NAUSEA AND VOMITING"
+    }
+},
+{
+    "pk": "U-1012", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR TREATING INSOMNIA WHILE REDUCING THE RISK OF AN ADVERSE DRUG INTERACTION"
+    }
+},
+{
+    "pk": "U-1013", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF USING RIBAVIRIN IN COMBINATION WITH PEGYLATED INTERFERON ALPHA-2B TO TREAT PATIENTS WITH CHRONIC HEPATITIS C"
+    }
+},
+{
+    "pk": "U-1014", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF USING RIBAVIRIN IN COMBINATION WITH INTERFERON ALPHA-2B(PEGYLATED AND NONPEGYLATED) TO TREAT PATIENTS WITH CHRONIC HEPATITIS C"
+    }
+},
+{
+    "pk": "U-1015", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF PATIENTS WITH RELAPSED OR REFRACTORY PERIPHERAL T-CELL LYMPHOMA"
+    }
+},
+{
+    "pk": "U-1016", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "IN COMBINATION WITH OTHER ANTIRETROVIRAL AGENTS FOR THE TREATMENT OF HIV-1 INFECTION IN TREATMENT-EXPERIENCED ADULT PATIENTS, WHO HAVE EVIDENCE OF VIRAL REPLICATION AND HIV-1 STRAINS RESISTANT TO AN NNRTI AND OTHER ANTIRETROVIRAL AGENTS"
+    }
+},
+{
+    "pk": "U-1017", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD OF TREATING NASAL AND NON-NASAL SYMPTOMS OF SEASONAL ALLERGIC RHINITIS"
+    }
+},
+{
+    "pk": "U-1018", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF PULMONARY HYPERTENSION BY INHALATION"
+    }
+},
+{
+    "pk": "U-1019", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF PULMONARY HYPERTENSION"
+    }
+},
+{
+    "pk": "U-102", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF HORMONALLY TREATING MENOPAUSAL OR POST-MENOPAUSAL DISORDERS IN WOMEN"
+    }
+},
+{
+    "pk": "U-1020", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF USING COLCHICINE FOR THE PROPHYLAXIS OF GOUT FLARES"
+    }
+},
+{
+    "pk": "U-1021", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "SHORT-TERM TREATMENT (4-8 WEEKS) OF ACTIVE BENIGN GASTRIC ULCER"
+    }
+},
+{
+    "pk": "U-1022", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "FOR THE PREPARATION OF SKIN PRIOR TO SURGERY; HELPS REDUCE BACTERIA THAT CAN POTENTIALLY CAUSE SKIN INFECTION"
+    }
+},
+{
+    "pk": "U-1023", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF ATROPHIC VAGINITIS DUE TO MENOPAUSE"
+    }
+},
+{
+    "pk": "U-1024", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "REDUCTION OF ELEVATED INTRAOCULAR PRESSURE IN PATIENTS WITH GLAUCOMA OR OCULAR HYPERTENSION WHO REQUIRE ADJUNCTIVE OR REPLACEMENT THERAPY DUE TO INADEQUATELY CONTROLLED IOP"
+    }
+},
+{
+    "pk": "U-1025", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATING FREQUENT HEARTBURN"
+    }
+},
+{
+    "pk": "U-1026", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD OF TREATING HUMAN SUFFERING FROM OR SUSCEPTIBLE TO PSYCHOSIS."
+    }
+},
+{
+    "pk": "U-1027", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "REDUCTION OF ELEVATED PLASMA STEROL AND/OR STANOL LEVELS IN A MAMMAL"
+    }
+},
+{
+    "pk": "U-1028", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD OF DISTRIBUTING SODIUM OXYBATE UNDER CONTROL OF A CENTRAL PHARMACY"
+    }
+},
+{
+    "pk": "U-1029", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR TREATING ACUTE ELEVATIONS OF BLOOD PRESSURE IN HUMAN SUBJECT IN NEED THEREOF"
+    }
+},
+{
+    "pk": "U-103", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF OCULAR HYPERTENSION"
+    }
+},
+{
+    "pk": "U-1030", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "IMPROVEMENT OF WALKING IN PATIENTS WITH MULTIPLE SCLEROSIS (MS)"
+    }
+},
+{
+    "pk": "U-1031", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "IMPROVE RESPIRATORY SYMPTOMS IN CYSTIC FIBROSIS IN PATIENTS WITH PSEUDOMONAS AERUGINOSA"
+    }
+},
+{
+    "pk": "U-1032", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF ROSUVASTATIN CALCIUM FOR THE PRIMARY PREVENTION OF CARDIOVASCULAR DISEASE IN INDIVIDUALS WITHOUT CLINICALLY EVIDENT CORONARY HEART DISEASE BUT WITH INCREASED RISK FACTORS"
+    }
+},
+{
+    "pk": "U-1033", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TOPICAL TREATMENT OF ACNE VULGARIS"
+    }
+},
+{
+    "pk": "U-1034", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF ATTENTION DEFICIT HYPERACTIVITY DISORDER (ADHD) IN ADULTS"
+    }
+},
+{
+    "pk": "U-1035", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "NONSTEROIDAL ANTI-INFLAMMATORY DRUG INDICATED FOR RELIEF OF MILD TO MODERATE ACUTE PAIN"
+    }
+},
+{
+    "pk": "U-1036", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING TYPE 2 DIABETES MELLITUS BY ADMINISTERING A DIPEPTIDYL PEPTIDASE-4 INHIBITOR IN COMBINATION WITH INSULIN"
+    }
+},
+{
+    "pk": "U-1037", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING TYPE 2 DIABETES MELLITUS BY ADMINISTERING A DIPEPTIDYL PEPTIDASE-IV INHIBITOR IN COMBINATION WITH A PPAR-GAMMA AGONIST"
+    }
+},
+{
+    "pk": "U-1038", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING TYPE 2 DIABETES MELLITUS BY ADMINISTERING A DIPEPTIDYL PEPTIDASE-4 INHIBITOR IN COMBINATION WITH METFORMIN AND A PPAR-GAMMA AGONIST"
+    }
+},
+{
+    "pk": "U-1039", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING TYPE 2 DIABETES MELLITUS BY ADMINISTERING A DIPEPTIDYL PEPTIDASE-4 INHIBITOR IN COMBINATION WITH METFORMIN"
+    }
+},
+{
+    "pk": "U-104", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF AQUEOUS HUMOR FORMATION AND INTRAOCULAR PRESSURE"
+    }
+},
+{
+    "pk": "U-1040", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "INHIBITION OF THROMBIN IN A PATIENT"
+    }
+},
+{
+    "pk": "U-1041", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF DISORDERS RESPONSIVE TO GROWTH HORMONE"
+    }
+},
+{
+    "pk": "U-1042", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR STIMULATING CORONARY VASODILATION FOR PURPOSES OF IMAGING THE HEART"
+    }
+},
+{
+    "pk": "U-1043", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "MANAGEMENT OF MODERATE TO SEVERE PAIN"
+    }
+},
+{
+    "pk": "U-1044", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TOPICAL TREATMENT OF SCALP PSORIASIS"
+    }
+},
+{
+    "pk": "U-1045", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "MAINTENANCE TREATMENT IN PATIENTS WITH LOCALLY ADVANCED OR METASTATIC NSCLC WHO HAVE NOT PROGRESSED ON 1ST-LINE TREATMENT WTH PLATINUM-BASED CHEMOTHERAPY"
+    }
+},
+{
+    "pk": "U-1046", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "MAINTENANCE TREATMENT OF PATIENTS WITH LOCALLY ADVANCED OR METASTATIC NSCLC WHOSE DISEASE HAS NOT PROGRESSED AFTER FOUR CYCLES PLATINUM-BASED CHEMOTHERAPY"
+    }
+},
+{
+    "pk": "U-1047", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF BIOPSY-CONFIRMED, PRIMARY SUPERFICIAL BASAL CELL CARCINOMA (SBCC)"
+    }
+},
+{
+    "pk": "U-1048", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "WORKS THROUGH THE INDUCTION OF INTERFERON AND OTHER CYTOKINES"
+    }
+},
+{
+    "pk": "U-1049", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "PROPHYLAXIS OF ORGAN REJECTION IN ADULT PATIENTS AT LOW-MODERATE IMMUNOLOGIC RISK RECEIVING A RENAL TRANSPLANT"
+    }
+},
+{
+    "pk": "U-105", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "EMESIS"
+    }
+},
+{
+    "pk": "U-1050", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF METAXALONE FOR TREATMENT OF MUSCULSKELETAL CONDITIONS"
+    }
+},
+{
+    "pk": "U-1051", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF OROPHARYNGEAL CANDIDIASIS"
+    }
+},
+{
+    "pk": "U-1052", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "RELIEF OF SIGNS AND SYMPTOMS OF ARTHRITIS AND RISK-REDUCTION OF NSAID-ASSOCIATED GASTRIC ULCER"
+    }
+},
+{
+    "pk": "U-1053", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "RISK-REDUCTION OF NSAID-ASSOCIATED GASTRIC ULCER"
+    }
+},
+{
+    "pk": "U-1054", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ONYCHOMYCOSIS OF THE TOENAIL CAUSED BY TRICOPHYTON RUBRUM OR TRICHOPHYTON MENTAGROPHYTES, ONCE DAILY USE FOR 12 CONSECUTIVE WEEKS"
+    }
+},
+{
+    "pk": "U-1055", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "AN ADJUNCT TO DIET AND EXERCISE TO IMPROVE GLYCEMIC CONTROL IN ADULTS WITH TYPE 2 DIABETES MELLITUS WHO ARE ALREADY TREATED WITH A THIAZOLIDINEDIONE (TZD) AND METFORMIN OR WHO HAVE INADEQUATE GLYCEMIC CONTROL ON A TZD OR METFORMIN ALONE"
+    }
+},
+{
+    "pk": "U-1056", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF PAIN USING A NASAL SPRAY OF KETOROLAC TROMETHAMINE"
+    }
+},
+{
+    "pk": "U-1057", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF INFLAMMATION AND PAIN USING A NASAL SPRAY OF KETOROLAC TROMETHAMINE"
+    }
+},
+{
+    "pk": "U-1058", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF THALIDOMIDE IN COMBINATION WITH DEXAMETHASONE FOR THE TREATMENT OF PATIENTS WITH NEWLY DIAGNOSED MULTIPLE MYELOMA"
+    }
+},
+{
+    "pk": "U-1059", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADJUNCTIVE THERAPY TO DIET TO PATIENTS WITH HYPERTRIGLYCERIDEMIA"
+    }
+},
+{
+    "pk": "U-106", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF EPILEPSY"
+    }
+},
+{
+    "pk": "U-1060", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADJUNCTIVE THERAPY TO DIET IN PATIENTS WITH ELEVATED CHOLESTEROL AND/OR LIPID LEVELS"
+    }
+},
+{
+    "pk": "U-1061", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADJUNCTIVE THERAPY TO DIET IN PATIENTS WITH MIXED DYSLIPIDEMIA"
+    }
+},
+{
+    "pk": "U-1062", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ADMINISTRATION OF APPROVED PRODUCT FOR TREATMENT OF ALZHEIMER'S DISEASE"
+    }
+},
+{
+    "pk": "U-1063", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF ONLY INFLAMMATORY LESIONS (PAPULES AND PUSTULES) OF ROSACEA"
+    }
+},
+{
+    "pk": "U-1064", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF BIPOLAR DISORDER AND SCHIZOPHRENIA"
+    }
+},
+{
+    "pk": "U-1065", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING ANDROGEN RESPONSIVE OR MEDICATED CONDITION IN A MAMMAL BY ADMINISTERING A SAFE & EFFECTIVE AMOUNT OF DUTASTERIDE OR A PHARMACEUTICALLY ACCEPTABLE SOLVATE THEREOF.. CONDITIONS INCLUDE BENIGN PROSTATIC HYPERTROPHY"
+    }
+},
+{
+    "pk": "U-1066", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING AN ANDROGEN RESPONSE OR MEDIATED DISEASE IN A MAMMAL BY ADMININSTERING AN EFFECTIVE ANDROGEN RESPONSIVE OR MEDICATED DISEASE AMOUNT OF DUTASTERIDE..CONDITIONS INCLUDE BENIGN PROSTATIC HYPERPLASIA"
+    }
+},
+{
+    "pk": "U-1067", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF CANCER"
+    }
+},
+{
+    "pk": "U-1068", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF ASTHMA"
+    }
+},
+{
+    "pk": "U-1069", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD OF TREATING A PATIENT WITH A PRESCRIPTION DRUG USING AN EXCLUSIVE COMPUTER DATABASE IN A COMPUTER SYSTEM FOR DISTRIBUTION"
+    }
+},
+{
+    "pk": "U-107", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF HYPERTENSION AND ANGINA PECTORIS"
+    }
+},
+{
+    "pk": "U-1070", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "A METHOD TO CONTROL ABUSE OF A SENSITIVE DRUG BY CONTROLLING WITH A COMPUTER PROCESSOR THE DISTRIBUTION OF THE SENSITIVE DRUG VIA AN EXCLUSIVITY CENTRAL PHARMACY THAT MAINTAINS A CENTRAL DATABASE"
+    }
+},
+{
+    "pk": "U-1071", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD OF TREATING BLADDER DSYFUNCTION WITH ONCE A DAY TROSPIUM SALT FORMULATION"
+    }
+},
+{
+    "pk": "U-1072", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "THE MANAGEMENT OF MODERATE TO SEVERE CHRONIC PAIN IN PATIENTS REQUIRING A CONTINUOUS, AROUND-THE-CLOCK OPIOID ANALGESIC FOR AN EXTENDED PERIOD OF TIME"
+    }
+},
+{
+    "pk": "U-1073", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE FOR THE TREATMENT OF ASTHMA AND COPD"
+    }
+},
+{
+    "pk": "U-1074", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF EXENATIDE MAY RESULT IN REDUCTION IN BODY WEIGHT"
+    }
+},
+{
+    "pk": "U-1075", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE FOR THE TREATMENT OF ASTHMA"
+    }
+},
+{
+    "pk": "U-1076", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "REDUCE CHRONIC SEVERE DROOLING (I.E., SIALORRHEA) IN PATIENTS WITH NEUROLOGIC CONDITIONS ASSOCIATED WITH PROBLEM DROOLING"
+    }
+},
+{
+    "pk": "U-1077", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "PRETREATMENT OF PATIENTS WITH VITAMIN B12 AND FOLIC ACID PRIOR TO PEMETREXED DISODIUM ADMINISTRATION"
+    }
+},
+{
+    "pk": "U-1078", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF ACNE"
+    }
+},
+{
+    "pk": "U-1079", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "REVLIMID (LENALIDOMIDE) IS INDICATED FOR THE TREATMENT OF PATIENTS WITH TRANSFUSION-DEPENDENT ANEMIA IN MYELODYSPLASTIC SYNDROMES (MDS)"
+    }
+},
+{
+    "pk": "U-108", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "SHORT-TERM TREATMENT OF ACTIVE DUODENAL ULCER, GASTROESOPHAGEAL REFLUX DISEASE (GERD), SEVERE EROSIVE ESOPHAGITIS, POORLY RESPONSIVE SYMPTOMATIC GERD AND PATHOLOGIAL HYPERSECRETORY CONDITIONS AND MAINTENANCE HEALING OF EROSIVE ESOPHAGITIS"
+    }
+},
+{
+    "pk": "U-1080", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD TO TREAT PULMONARY HYPERTENSION BY ADMINISTERING AMBRISENTAN TO A PATIENT"
+    }
+},
+{
+    "pk": "U-1081", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "LUMIGAN IS A PROSTAGLANDIN ANALOG INDICATED FOR THE REDUCTION OF ELEVATED INTRAOCULAR PRESSURE IN PATIENTS WITH OPEN ANGLE GLAUCOMA OR OCULAR HYPERTENSION"
+    }
+},
+{
+    "pk": "U-1082", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "USE OF A COMBINATION OF TOBRAMYCIN AND DEXAMETHASONE TO TREAT OCULAR INFLAMMATION WHERE AN INFECTION OR RISK OF INFECTION EXISTS"
+    }
+},
+{
+    "pk": "U-1083", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "ACUTE TREATMENT OF MIGRAINE ATTACKS, WITH OR WITHOUT AURA, AND THE TREATMENT OF CLUSTER HEADACHE EPISODES"
+    }
+},
+{
+    "pk": "U-1084", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "RELIEF OF THE INFLAMMATORY AND PRURITIC MANIFESTATIONS OF CORTICOSTEROID RESPONSIVE DERMATOSES IN PATIENTS 12 YEARS OF AGE OR OLDER"
+    }
+},
+{
+    "pk": "U-1085", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "METHOD FOR TREATING IRRITABLE BOWEL SYNDROME AND METHOD FOR TREATING ABDOMINAL DISCOMFORT ASSOCIATED WITH IRRITABLE BOWEL SYNDROME"
+    }
+},
+{
+    "pk": "U-1086", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "TREATMENT OF AUTOIMMUNE DISEASE"
+    }
+},
+{
+    "pk": "U-1087", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "DETECTION OF NON-MUSCLE INVASIVE PAPILLARY CANCER OF THE BLADDER BY PHOTODYNAMIC CYSTOSCOPY"
+    }
+},
+{
+    "pk": "U-1088", 
+    "model": "chembl_core_model.patentusecodes", 
+    "fields": {
+        "definition": "RELIEF OF MUSCLE SPASM"
+    }
+}
+]

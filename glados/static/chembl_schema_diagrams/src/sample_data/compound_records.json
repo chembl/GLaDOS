@@ -1,0 +1,1802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798298, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "X", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "Bis(3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-13-methyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide)", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798410, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "V", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[11,14-Dibenzyl-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798299, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "IX", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-13-methyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798271, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "IV", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "11,14-Dibenzyl-2-isobutyl-8-methyl-5-(2-methylsulfanyl-ethyl)-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-ene-3,6,9,12,15,20-hexaone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798623, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XVI", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[17-Benzyl-14-(1H-indol-3-ylmethyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,18,23-heptaoxo-1,4,7,10,13,16,19-heptaaza-bicyclo[18.2.1]tricos-21-en-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798230, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XIX", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[5-Benzyl-8-(1H-indol-3-ylmethyl)-17-isobutyl-14-(2-methylsulfanyl-ethyl)-4,7,10,13,16,19-hexaoxo-octadecahydro-3a,6,9,12,15,18-hexaaza-cyclopentacyclooctadecen-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798624, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "III", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "11,14-Dibenzyl-2-isobutyl-5-(2-methylsulfanyl-ethyl)-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-ene-3,6,9,12,15,20-hexaone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798627, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "VII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "14-Benzyl-2-isobutyl-11-methyl-5-(2-methylsulfanyl-ethyl)-11-naphthalen-1-yl-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-ene-3,6,9,12,15,20-hexaone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798073, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[17,20-Dibenzyl-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,12,15,18,21,26-heptaoxo-1,4,7,13,16,19,22-heptaaza-tricyclo[21.2.1.0*7,11*]hexacos-24-en-14-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798122, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XIV", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[17-Benzyl-14-(4-hydroxy-benzyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,18,23-heptaoxo-1,4,7,10,13,16,19-heptaaza-bicyclo[18.2.1]tricos-21-en-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798231, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XVII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[8-Benzyl-5-(1H-indol-3-ylmethyl)-14-isobutyl-17-(2-methylsulfanyl-ethyl)-3,6,9,12,15,18-hexaoxo-1,4,7,10,13,16hexaaza-cyclooctadec-2-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798142, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XX", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[8-Benzyl-5-(1H-indol-3-ylmethyl)-11-isobutyl-14-(2-methylsulfanyl-ethyl)-3,6,9,12,15-pentaoxo-1,4,7,10,13pentaaza-cyclopentadec-2-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798601, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XVIII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[5-Benzyl-8-(1H-indol-3-ylmethyl)-17-isobutyl-14-(2-methylsulfanyl-ethyl)-4,7,10,13,16,19-hexaoxo-octadecahydro-3a,6,9,12,15,18-hexaaza-cyclopentacyclooctadecen-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798605, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XV", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[17-Benzyl-14-(1H-indol-3-ylmethyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,18,23-heptaoxo-1,4,7,10,13,16,19-heptaaza-bicyclo[18.2.1]tricos-21-en-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798183, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XIII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "19-Benzyl-16-(1H-indol-3-ylmethyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-1,4,7,15,18,21-hexaaza-bicyclo[20.2.1]pentacos-23-ene-3,6,14,17,20,25-hexaone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798606, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "XI", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[14,17-Dibenzyl-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,18,23-heptaoxo-1,4,7,10,13,16,19-heptaaza-bicyclo[18.2.1]tricos-21-en-11-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798294, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "VI", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[14-Benzyl-2-isobutyl-11-methyl-5-(2-methylsulfanyl-ethyl)-11-naphthalen-1-yl-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798609, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "II", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "11,14-Dibenzyl-2-isobutyl-8-methyl-5-(2-methylsulfanyl-ethyl)-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-ene-3,6,9,12,15,20-hexaone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798409, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "I", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11788, 
+        "molecule": 1798297, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "VIII", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 10, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "1", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1,14-diazonia-22,33-diazaheptacyclo[32.6.2.214,21.13,7.18,12.015,20.035,40]hexatetraconta-1(40),3,5,7(46),8(45),9,11,14,15,17,19,21(43),34,36,38,41-hexadecaene", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 39, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "1a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-{3-[3-(4-amino-1-quinoliniumylmethyl)phenyl]benzyl}-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": "L Bellis Cpmd_Name change", 
+        "doc": 2085, 
+        "molecule": 38, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "2", 
+        "src_compound_id": null, 
+        "updated_on": "2010-03-05", 
+        "compound_name": "Bis-quinolinium cyclophane analogue", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 53, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "2a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-{4-[4-(4-amino-1-quinoliniumylmethyl)phenyl]benzyl}-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 56, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "4a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-{4-[4-(4-amino-1-quinoliniumylmethyl)benzyl]benzyl}-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 46, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "5a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-{4-[4-(4-amino-1-quinoliniumylmethyl)phenethyl]benzyl}-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 47, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "6a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-{4-[2-[4-(4-amino-1-quinoliniumylmethyl)phenyl]-(Z)-1-ethenyl]benzyl}-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 48, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "7a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4N-[10-(1-benzyl-4-quinoliniumylamino)decyl]-1-benzyl-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": "L Bellis Cpmd_Name change", 
+        "doc": 2085, 
+        "molecule": 49, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "6", 
+        "src_compound_id": null, 
+        "updated_on": "2010-03-05", 
+        "compound_name": "Bis-quinolinium cyclophane analogue", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": "L Bellis Cpmd_Name change", 
+        "doc": 2085, 
+        "molecule": 50, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "5", 
+        "src_compound_id": null, 
+        "updated_on": "2010-03-05", 
+        "compound_name": "Bis-quinolinium cyclophane analogue", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": "L Bellis Cpmd_Name change", 
+        "doc": 2085, 
+        "molecule": 51, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "4", 
+        "src_compound_id": null, 
+        "updated_on": "2010-03-05", 
+        "compound_name": "Bis-quinolinium cyclophane analogue", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 52, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "3a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[7-(4-amino-1-quinoliniumylmethyl)-9H-2-fluorenylmethyl]-4-quinoliniumamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 2085, 
+        "molecule": 55, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/BMCL-1991-99", 
+        "compound_key": "3", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "21,35-diazonia-2,13-diazaoctacyclo[33.6.2.214,21.123,27.129,33.015,20.026,30.036,41]heptatetraconta-1(41),14(45),15,17,19,21,23,25,27(47),29,31,33(46),35,37,39,42-hexadecaene", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 8073, 
+        "molecule": 550170, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "5", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(3,4-Dimethoxy-phenyl)-3-fluoro-allylamine; hydrochloride", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11798, 
+        "molecule": 23, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "1a", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "6-Bromomethylene-3-naphthalen-1-yl-tetrahydro-pyran-2-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11798, 
+        "molecule": 24, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "1f", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "(E)-6-Iodomethylene-3-naphthalen-1-yl-tetrahydro-pyran-2-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11798, 
+        "molecule": 25, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "3", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "(E)-3-(naphthalen-1-yl)-6-(prop-2-yn-1-ylidene)tetrahydro-2H-pyran-2-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 11798, 
+        "molecule": 26, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1993-94", 
+        "compound_key": "1g", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "(Z)-6-(iodomethylene)-3-(naphthalen-1-yl)tetrahydro-2H-pyran-2-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 27, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "1", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Benzoyl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 28, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "35", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-{3-Chloro-4-[(4-chloro-phenyl)-hydroxy-methyl]-phenyl}-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 29, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "34", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(3-Benzoyl-4-chloro-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 30, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "36", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(Hydroxy-phenyl-methyl)-3-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 3, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "38", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-{4-[(4-Chloro-phenyl)-hydroxy-methyl]-3,5-dimethyl-phenyl}-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 4, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "16", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Methyl-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 32, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "18", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Methoxy-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 21, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "20", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[3-Chloro-4-(4-chloro-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 54, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "29", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(2,4-Dichloro-benzoyl)-3-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 1, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "28", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(2-Chloro-benzoyl)-3-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 2, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "27", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4-[4-(3,5-Dioxo-4,5-dihydro-3H-[1,2,4]triazin-2-yl)-2-methyl-benzoyl]-benzonitrile", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 5, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "26", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Chloro-benzoyl)-3-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 6, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "25", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Benzoyl-3-methyl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 7, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "24", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Bromo-2-methyl-benzoyl)-3-chloro-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 8, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "23", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[3-Chloro-4-(2,4-dichloro-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 9, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "22", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[3-Chloro-4-(4-methanesulfonyl-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 15, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "21", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[3-Chloro-4-(4-methylsulfanyl-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 90, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "43", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Butyryl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 91, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "42", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Acetyl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 92, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "41", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(7-Chloro-9-oxo-9H-xanthen-2-yl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 74, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "40", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(Thiophene-2-carbonyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 75, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "39", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Benzyl-3-methyl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 76, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "31", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[3-Chloro-4-(4-chloro-benzoyl)-5-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 77, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "33", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(3-Benzoyl-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 78, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "32", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Chloro-benzoyl)-3,5-dimethyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 79, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "30", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Chloro-2-methyl-benzoyl)-3-methyl-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 80, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "44", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Acetyl-3-chloro-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 81, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "19", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-(4-Benzoyl-3-chloro-phenyl)-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 82, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "17", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(2,4,6-Trimethyl-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 83, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "15", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-[4-(4-Chloro-benzoyl)-phenyl]-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 7792, 
+        "molecule": 84, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1980-84", 
+        "compound_key": "37", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "2-{4-[(4-Chloro-phenyl)-hydroxy-methyl]-3-methyl-phenyl}-2H-[1,2,4]triazine-3,5-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 68, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "24", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazine-1-carboxylic acid phenylamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 33, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "29", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "6,7-Dimethoxy-2-[4-(thiophene-2-sulfonyl)-piperazin-1-yl]-quinazolin-4-ylamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 62, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "30", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-bicyclo[2.2.1]hept-5-en-2-yl-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 63, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "3", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-hexa-2,4-dien-1-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 64, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "4", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-phenyl-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 65, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "5", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(4-fluoro-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 66, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "6", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(4-chloro-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 67, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "13", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "i1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-2-fluoro-3-phenyl-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 31, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "18", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-(2-phenyl-cyclopropyl)-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 70, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "21", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazine-1-carbothioic acid cyclohexylamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 71, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "31", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-bicyclo[2.2.2]octa-2,5-dien-2-yl-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 72, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "28", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "6,7-Dimethoxy-2-[4-(toluene-4-sulfonyl)-piperazin-1-yl]-quinazolin-4-ylamine", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 73, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "20", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazine-1-carbothioic acid phenylamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 59, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "14", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-phenyl-propan-1-one", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 60, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "9", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(4-methoxy-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 61, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "8", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(3-fluoro-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 89, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "7", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(4-bromo-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 97, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "1", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-furan-2-yl-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 98, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "2", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "6-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-6-oxo-hexa-2,4-dienoic acid methyl ester", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 104, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "10", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-(4-isothiocyanato-phenyl)-propenone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 105, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "11", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "N-(4-{3-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-oxo-propenyl}-phenyl)-2-bromo-acetamide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 101, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "17", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "i[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-naphthalen-2-yl-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 102, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "22", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazine-1-carbothioic acid (4-azido-phenyl)-amide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 103, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "25", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-(3-chloromethyl-phenyl)-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 58, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "27", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-(4-{5-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-5-oxo-pentyl}-phenylcarbamoyl)-acrylic acid methyl ester", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 93, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "26", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-(3-iodo-4-isothiocyanato-phenyl)-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 94, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "23", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "i4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazine-1-carbothioic acid {4-[(aziridine-1-carbothioyl)-amino]-phenyl}-amide", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 99, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "19", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-(3-phenyl-oxiranyl)-methanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 100, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "16", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-4-phenyl-but-2-ene-1,4-dione", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 112, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "15", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "1-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-2-phenoxy-ethanone", 
+        "removed": 0, 
+        "curated": false
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.compoundrecords", 
+    "fields": {
+        "src": 1, 
+        "src_compound_id_version": null, 
+        "updated_by": null, 
+        "doc": 9904, 
+        "molecule": 69, 
+        "filename": "/data/pharmacarta/starlite/data/GVK/delivery_5/JMC-1989-92", 
+        "compound_key": "12", 
+        "src_compound_id": null, 
+        "updated_on": null, 
+        "compound_name": "3-(4-{3-[4-(4-Amino-6,7-dimethoxy-quinazolin-2-yl)-piperazin-1-yl]-3-oxo-propenyl}-phenylcarbamoyl)-acrylic acid methyl ester", 
+        "removed": 0, 
+        "curated": false
+    }
+}
+]

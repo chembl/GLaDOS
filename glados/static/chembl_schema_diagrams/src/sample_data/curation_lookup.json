@@ -1,0 +1,23 @@
+[
+{
+    "pk": "Autocuration", 
+    "model": "chembl_core_model.curationlookup", 
+    "fields": {
+        "description": "Curated against extractor target assignment"
+    }
+},
+{
+    "pk": "Expert", 
+    "model": "chembl_core_model.curationlookup", 
+    "fields": {
+        "description": "Curated against ChEMBL target assignment from original publication"
+    }
+},
+{
+    "pk": "Intermediate", 
+    "model": "chembl_core_model.curationlookup", 
+    "fields": {
+        "description": "Curated against ChEMBL target assignment from assay description"
+    }
+}
+]

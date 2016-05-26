@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Interactive ChEMBL web services diagram</title>
+<!-- Copyright 1998-2015 by Northwoods Software Corporation. -->
+<meta charset="UTF-8">
+<script src="jquery-1.8.3.min.js"></script>
+<script src="jquery-ui-1.9.2.custom.js"></script>
+<script src="go.js"></script>
+<script type="text/javascript" src="datatables.js"></script>
+<link rel="stylesheet" href="jquery-ui-1.9.2.custom.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju/dt-1.10.9/datatables.min.css"/>
+<style type="text/css">
+
+  #myOverview {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: aliceblue;
+    z-index: 300; /* make sure its in front */
+    border: solid 1px blue;
+
+    width:200px;
+    height:100px
+  }
+
+  #imageContols {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    z-index: 300; /* make sure its in front */
+    width:30px;
+    height:100px
+  }
+
+  #legend {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 300; /* make sure its in front */
+    width:200px;
+    padding: 15px;
+  }
+
+  .legend-icon{
+    width: 10px;
+    height: 10px;
+  }
+
+  .ui-panel{
+    padding: 5px;
+    padding-left:30px;
+    border-bottom: none;
+    position: relative;
+  }
+
+.ui-panel-icon {
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    margin-top: -8px;
+}
+
+</style>  
+<script id="code">
+  // This variation on ForceDirectedLayout does not move any selected Nodes
+  // but does move all other nodes (vertexes).
+
+    function download(filename, text) {
+        var pom = document.createElement('a');
+        pom.setAttribute('href', text);
+        pom.setAttribute('download', filename);
+
+        if (document.createEvent) {
+            var event = document.createEvent('MouseEvents');
+            event.initEvent('click', true, true);
+            pom.dispatchEvent(event);
+        }
+        else {
+            pom.click();
+        }
+    }
+
+  function displayEndpointfunction(name, columns, plural){
+          plural = plural ? plural : name + 's';
+          var dial = $( "#dialog" );
+          var table = $('#results');
+          var initial_ordering = null;
+          var ordering = false;
+          for (var i=0; i < columns.length; i++){
+              if (columns[i].orderable){
+                  initial_ordering = [[i, 'asc']];
+                  ordering = true;
+                  break;
+              }
+          }
+          var dt = null;
+          table.empty();
+          dial.dialog({
+             minWidth: 700,
+             minHeight: 50,
+             modal: true,
+             title: name + " resource data",
+             position: { my: "top", at: "top", of: window },
+             create: function( event, ui ) {
+              dt = table.on('xhr.dt', function ( e, settings, json, xhr ) {
+                json.recordsTotal = json.page_meta.total_count;
+                json.recordsFiltered = json.page_meta.total_count;
+              } ).DataTable( {
+                  "processing": true,
+                  "ajax": function(data, callback, settings){
+                    var url = "https://www.ebi.ac.uk/chembl/api/data/" + name + ".json";
+                    var ajax_data = {};
+                    ajax_data.limit = data.length;
+                    ajax_data.offset = data.start;
+                    var order = data.order;
+                    if(order.length){
+                      ajax_data.order_by = [];
+                      for(var i = 0; i < order.length; i++){
+                        console.log(columns[order[i].column]);
+                        if (!columns[order[i].column].orderable){
+                            continue;
+                        }
+                        var ord = data.columns[order[i].column].data.replace(/\./g, '__');
+                        if(order[i].dir != 'asc'){
+                          ord = '-' + ord;
+                        }
+                        ajax_data.order_by.push(ord);
+                      }
+                    }
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: ajax_data,
+                        cache: false,
+                        headers: {'X-HTTP-Method-Override': 'GET'},
+                        contentType: 'application/x-www-form-urlencoded'
+                    }).then(callback); 
+                  },
+                  // "ajax": {
+                  //   "url": "https://www.ebi.ac.uk/chembl/api/data/" + name + ".json",
+                  //   "data": function(data){
+                  //     console.log('data function');
+                  //     console.log(data);
+                  //     data.limit = data.length;
+                  //     data.offset = data.start;
+                  //     var order = data.order;
+                  //     if(order.length){
+                  //       data.order_by = [];
+                  //       for(var i = 0; i < order.length; i++){
+                  //         var ord = data.columns[order[i].column].data.replace(/\./g, '__');
+                  //         if(order[i].dir != 'asc'){
+                  //           ord = '-' + ord;
+                  //         }
+                  //         data.order_by.push(ord);
+                  //       }
+                  //     }
+                  //   }
+                  // },
+                  "sAjaxDataProp": plural,
+                  "serverSide": true,
+                  "columns": columns,
+                  "order": initial_ordering,
+                  "ordering": ordering
+                });
+             },
+             close: function(event, ui)
+              {
+                dt.destroy();
+                $(this).dialog('destroy');
+              }
+           });
+        }
+
+  function ContinuousForceDirectedLayout() {
+    go.ForceDirectedLayout.call(this);
+    this._isObserving = false;
+  }
+  go.Diagram.inherit(ContinuousForceDirectedLayout, go.ForceDirectedLayout);
+
+  /** @override */
+  ContinuousForceDirectedLayout.prototype.isFixed = function(v) {
+    return v.node.isSelected;
+  };
+
+  // optimization: reuse the ForceDirectedNetwork rather than re-create it each time
+  /** @override */
+  ContinuousForceDirectedLayout.prototype.doLayout = function(coll) {
+    if (!this._isObserving) {
+      this._isObserving = true;
+      // cacheing the network means we need to recreate it if nodes or links have been added or removed or relinked,
+      // so we need to track structural model changes to discard the saved network.
+      var lay = this;
+      this.diagram.model.addChangedListener(function (e) {
+        // modelChanges include a few cases that we don't actually care about, such as
+        // "nodeCategory" or "linkToPortId", but we'll go ahead and recreate the network anyway
+        if (e.modelChange !== "") lay.network = null;
+      });
+    }
+    var net = this.network;
+    if (net === null) {  // the first time, just create the network as normal
+      this.network = net = this.makeNetwork(coll);
+    } else {  // but on reuse we need to update the LayoutVertex.bounds for selected nodes
+      this.diagram.nodes.each(function (n) {
+        var v = net.findVertex(n);
+        if (v !== null) v.bounds = n.actualBounds;
+      });
+    }
+    // now perform the normal layout
+    go.ForceDirectedLayout.prototype.doLayout.call(this, coll);
+    // doLayout normally discards the LayoutNetwork by setting Layout.network to null;
+    // here we remember it for next time
+    this.network = net;
+  };
+  // end ContinuousForceDirectedLayout
+
+
+  $(function() {
+      $.ajaxSettings.traditional = true;
+
+      $('#legend-header').click(function(){
+        $('#legend-body').toggle('fast');
+        $('#legend-header span').toggleClass('ui-icon-triangle-1-s, ui-icon-triangle-1-e');
+      });
+
+    $( "#image_download" ).button({
+        icons: {
+          primary: "ui-icon-image"
+        },
+        text: false
+      });
+
+      $( "#svg_download" ).button({
+        icons: {
+          primary: "ui-icon-script"
+        },
+        text: false
+      });
+
+      $( "#reset_zoom" ).button({
+        icons: {
+          primary: "ui-icon-home"
+        },
+        text: false
+      });
+
+      $.get('ws.json').then(function(data){
+        var columns = data.columns;
+        var plurals = data.plurals;
+    var _ = go.GraphObject.make;  // for conciseness in defining templates
+    $('#myDiagram').css({"height": $(window).height() - 20});
+
+    myDiagram =
+      _(go.Diagram, "myDiagram",  // must name or refer to the DIV HTML element
+        {
+          initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+          "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
+          "padding": 50, 
+          contentAlignment: go.Spot.Center,  // align document to the center of the viewport
+          layout:
+            _(ContinuousForceDirectedLayout,  // automatically spread nodes apart while dragging
+              { defaultSpringLength: 30, defaultElectricalCharge: 100 }),
+          // do an extra layout at the end of a move
+          "SelectionMoved": function(e) { e.diagram.layout.invalidateLayout(); }
+        });
+
+      $( "#image_download" ).button().click(function(){
+        download('schema.png', myDiagram.makeImageData(window.chrome?{maxSize: new go.Size(2000,2000), size: new go.Size(2000,NaN)} :{maxSize: new go.Size(6000,6000), size: new go.Size(6000,6000)}));
+      });
+
+      $( "#svg_download" ).button().click(function(){
+        var svg = myDiagram.makeSvg();
+        var markup = (new XMLSerializer()).serializeToString(svg);
+        svg = "data:image/svg+xml;base64," +  window.btoa(markup);
+        download('schema.svg', svg);
+      });
+
+      $( "#reset_zoom" ).button().click(function(){
+        myDiagram.alignDocument(go.Spot.Center, go.Spot.Center);
+        myDiagram.zoomToFit() ;
+      }); 
+
+    // dragging a node invalidates the Diagram.layout, causing a layout during the drag
+    myDiagram.toolManager.draggingTool.doMouseMove = function() {
+      go.DraggingTool.prototype.doMouseMove.call(this);
+      if (this.isActive) { this.diagram.layout.invalidateLayout(); }
+    };
+
+    // define each Node's appearance
+    myDiagram.nodeTemplate =
+      _(go.Node, "Auto",  // the whole node panel
+        {"click": function(a,b){
+          var resource_name = b.Cg.text.toLowerCase().replace(/ /g, '_');
+          var resource_columns = columns[resource_name];
+          displayEndpointfunction(resource_name, resource_columns, plurals[resource_name]);
+        }},
+        // define the node's outer shape, which will surround the TextBlock
+        _(go.Shape, "Circle",
+          { fill: "CornflowerBlue", stroke: "black", spot1: new go.Spot(0, 0, 5, 5), spot2: new go.Spot(1, 1, -5, -5) }),
+        _(go.TextBlock,
+          { font: "bold 10pt helvetica, bold arial, sans-serif", textAlign: "center", maxSize: new go.Size(100, NaN) },
+          new go.Binding("text", "text"))
+      );
+    // the rest of this app is the same as samples/conceptMap.html
+
+    // replace the default Link template in the linkTemplateMap
+    myDiagram.linkTemplate =
+      _(go.Link,  // the whole link panel
+        _(go.Shape,  // the link shape
+          { stroke: "black" },
+          new go.Binding("strokeDashArray", "dash")),
+        _(go.Shape,  // the arrowhead
+          { toArrow: "standard", stroke: null }),
+        _(go.Panel, "Auto",
+          _(go.TextBlock,  // the label
+            { textAlign: "center",
+              font: "10pt helvetica, arial, sans-serif",
+              stroke: "#555555",
+              margin: 4 },
+            new go.Binding("text", "text"))
+        )
+      );
+
+    myOverview =
+      _(go.Overview, "myOverview",  // the HTML DIV element for the Overview
+        { observed: myDiagram, contentAlignment: go.Spot.Center });   // tell it which Diagram to show and pan
+
+    myDiagram.model = new go.GraphLinksModel(data.nodeDataArray, data.linkDataArray);
+  });
+});
+</script>
+</head>
+<body>
+<div id="sample">
+  <div id="myDiagram" style="background-color: whitesmoke; border: solid 1px black; width: 100%;"></div>
+  <div id="myOverview"></div>
+</div>
+<div id="imageContols">
+  <div style="margin-bottom:5px;">
+    <button id="image_download">Download image</button>
+  </div>
+  <div style="margin-bottom:5px;">  
+    <button id="svg_download">Download svg</button>
+  </div> 
+  <div >  
+    <button id="reset_zoom">Reset zoom</button>
+  </div>      
+</div>
+  <div id="legend">
+  <div id="legend-header" class="ui-corner-top ui-widget ui-state-default ui-panel">
+    <span class="ui-panel-icon ui-icon ui-icon-triangle-1-e"></span> <strong>Legend:</strong>
+  </div>
+  <div id="legend-body" class="ui-widget ui-widget-content ui-state-default">    
+  <ul style="list-style-type: none; padding:0; padding-left:20px;">
+    <li> <img src="images/endpoint.png" class="legend-icon"> Endpoint </li>
+    <li> <img src="images/standard_rel.png" width=10 > Standard relation</li>
+    <li> <img src="images/special_rel.png" width=10 > Special relation (parameters required)</li>
+  </ul>
+  </div>  
+  </div>
+<div id="dialog" title="Resource data">
+  <table id="results" class="display" cellspacing="0" width="100%">
+   
+  </table>
+</div>
+</body>
+</html>

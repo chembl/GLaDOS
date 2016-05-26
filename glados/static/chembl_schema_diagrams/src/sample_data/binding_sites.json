@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Female germline-specific tumor suppressor gld-1, KH_1 domain", 
+        "target": 103735
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "UDP-glucuronosyltransferase 1-10, UDPGT domain", 
+        "target": 104088
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Mitogen-activated protein kinase 8, Pkinase domain", 
+        "target": 104254
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Inosine-5'-monophosphate dehydrogenase 1, IMPDH domain", 
+        "target": 84
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Dopamine D1 receptor, 7tm_1 domain", 
+        "target": 88
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "GABA transporter 1, SNF domain", 
+        "target": 113
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "LDL-associated phospholipase A2, PAF-AH_p_II domain", 
+        "target": 10138
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Purinergic receptor P2Y1, 7tm_1 domain", 
+        "target": 10544
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "3-phosphoinositide dependent protein kinase-1, Pkinase domain", 
+        "target": 10612
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Tyrosine-protein kinase CSK, Pkinase_Tyr domain", 
+        "target": 10844
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Carbonic anhydrase VA, Carb_anhydrase domain", 
+        "target": 11042
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Phosphodiesterase 3B, PDEase_I domain", 
+        "target": 11395
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Glycine transporter 2, SNF domain", 
+        "target": 11596
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "11-beta-hydroxysteroid dehydrogenase 1, adh_short domain", 
+        "target": 11862
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Monoamine oxidase B, Amino_oxidase domain", 
+        "target": 12127
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Lactase-glycosylceramidase, Glyco_hydro_1 domain", 
+        "target": 12390
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Mu opioid receptor, 7tm_1 domain", 
+        "target": 12471
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Thymidylate kinase, Thymidylate_kin domain", 
+        "target": 12538
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Excitatory amino acid transporter 2, SDF domain", 
+        "target": 12640
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Group IID secretory phospholipase A2, Phospholip_A2_1 domain", 
+        "target": 12652
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serotonin 2c (5-HT2c) receptor, 7tm_1 domain", 
+        "target": 12689
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Alpha-2a adrenergic receptor, 7tm_1 domain", 
+        "target": 12744
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Adenosine A2a receptor, 7tm_1 domain", 
+        "target": 17086
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Orotidine phosphate decarboxylase, OMPdecase domain", 
+        "target": 100780
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Mitogen-activated protein kinase 1, Pkinase domain", 
+        "target": 100895
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "NH(3)-dependent NAD(+) synthetase, NAD_synthase domain", 
+        "target": 101141
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serotonin 2a (5-HT2a) receptor, 7tm_1 domain", 
+        "target": 12687
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cytochrome P450 17A1, p450 domain", 
+        "target": 12949
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "ADAM17, Peptidase_M84 domain", 
+        "target": 17024
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "GABA receptor alpha-1 subunit, Neur_chan_LBD domain", 
+        "target": 19609
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Metabotropic glutamate receptor 1, ANF_receptor domain", 
+        "target": 19642
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cysteine proteinase B, Peptidase_C1 domain", 
+        "target": 20096
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serine/threonine-protein kinase PLK4, Pkinase domain", 
+        "target": 30003
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serine/threonine-protein kinase Aurora-A, Pkinase domain", 
+        "target": 100818
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Glycogen debranching enzyme, GDE_C domain", 
+        "target": 100905
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Dihydrofolate reductase, DHFR_1 domain", 
+        "target": 101140
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Fatty acid-binding protein, liver, Lipocalin domain", 
+        "target": 101528
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Mu-type opioid receptor, 7tm_1 domain", 
+        "target": 101562
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Diacylglycerol O-acyltransferase 1, MBOAT domain", 
+        "target": 102835
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Thyroid hormone receptor alpha, Hormone_recep domain", 
+        "target": 59
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Pyrimidinergic receptor P2Y6, 7tm_1 domain", 
+        "target": 10012
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Aldehyde dehydrogenase, Aldedh domain", 
+        "target": 30
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Histamine H2 receptor, 7tm_1 domain", 
+        "target": 102
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Alpha-2c adrenergic receptor, 7tm_1 domain", 
+        "target": 218
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Phosphodiesterase 1A, PDEase_I domain", 
+        "target": 10177
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Taq polymerase 1, DNA_pol_A domain", 
+        "target": 10454
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Beta-galactosidase, Glyco_hydro_35 domain", 
+        "target": 10675
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Sphingosine kinase 2, DAGK_cat domain", 
+        "target": 10900
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Dual specificity protein phosphatase 3, DSPc domain", 
+        "target": 11160
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cytochrome P450 51, p450 domain", 
+        "target": 11188
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Coagulation factor XI, Trypsin domain", 
+        "target": 11287
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cyclooxygenase-1, An_peroxidase domain", 
+        "target": 11343
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Phosphodiesterase 4C, PDEase_I domain", 
+        "target": 11396
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cholecystokinin B receptor, 7tm_1 domain", 
+        "target": 11522
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Hepatitis C virus NS5B RNA-dependent RNA polymerase, RdRP_3 domain", 
+        "target": 12097
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Tyrosine-protein kinase ZAP-70 , Pkinase_Tyr domain", 
+        "target": 12214
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Squalene synthetase, SQS_PSY domain", 
+        "target": 11120
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Histamine H3 receptor, 7tm_1 domain", 
+        "target": 11299
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Caspase-1, Peptidase_C14 domain", 
+        "target": 11810
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Acrosin, Trypsin domain", 
+        "target": 12029
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Monoamine oxidase B, Amino_oxidase domain", 
+        "target": 12232
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Glutamate (NMDA) receptor subunit zeta 1, ANF_receptor domain", 
+        "target": 12865
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cytidine deaminase, dCMP_cyt_deam_1 domain", 
+        "target": 12945
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Glutaminyl-peptide cyclotransferase, Peptidase_M28 domain", 
+        "target": 100450
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Betaine--homocysteine S-methyltransferase 1, S-methyl_trans domain", 
+        "target": 100787
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Tryptase alpha/beta-1, Trypsin domain", 
+        "target": 100795
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Carbonic anhydrase, Pro_CA domain", 
+        "target": 100954
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Egl nine homolog 3, 2OG-FeII_Oxy_3 domain", 
+        "target": 101510
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Hemagglutinin, Hemagglutinin domain", 
+        "target": 104401
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "D-alanyl-D-alanine carboxypeptidase, Peptidase_S13 domain", 
+        "target": 102386
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Lysine-specific histone demethylase 1, Amino_oxidase domain", 
+        "target": 102439
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Acyl-CoA:cholesterol acyltransferase, MBOAT domain", 
+        "target": 102444
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "5'-methylthioadenosine/S-adenosylhomocysteine nucleosidase, PNP_UDP_1 domain", 
+        "target": 102973
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cathepsin D, Asp domain", 
+        "target": 10003
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Cellular retinoic acid-binding protein I, Lipocalin domain", 
+        "target": 10354
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serotonin 5a (5-HT5a) receptor, 7tm_1 domain", 
+        "target": 10625
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Subtilisin/kexin type 7, Peptidase_S8 domain", 
+        "target": 11126
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Prenyl protein specific protease, Abi domain", 
+        "target": 11293
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Carboxylesterase, COesterase domain", 
+        "target": 11632
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Neuronal acetylcholine receptor protein alpha-7 subunit, Neur_chan_LBD domain", 
+        "target": 11749
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Sphingosine 1-phosphate receptor Edg-8, 7tm_1 domain", 
+        "target": 12023
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Phenylethanolamine N-methyltransferase, NNMT_PNMT_TEMT domain", 
+        "target": 12229
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Matrix metalloproteinase 9, Peptidase_M10 domain", 
+        "target": 12295
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Aldose reductase, Aldo_ket_red domain", 
+        "target": 12543
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Muscarinic acetylcholine receptor M3, 7tm_1 domain", 
+        "target": 12566
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Tyrosine-protein kinase TIE-2, Pkinase_Tyr domain", 
+        "target": 12913
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Phosphodiesterase 1A, PDEase_I domain", 
+        "target": 13049
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Sodium channel protein type VIII alpha subunit, Ion_trans domain", 
+        "target": 18079
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Ephrin type-A receptor 2, Pkinase_Tyr domain", 
+        "target": 30008
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serine/threonine-protein kinase NEK2, Pkinase domain", 
+        "target": 30017
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Chitinase, Glyco_hydro_18 domain", 
+        "target": 100326
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "ALK tyrosine kinase receptor, Pkinase_Tyr domain", 
+        "target": 100417
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Nuclear factor NF-kappa-B p65 subunit, RHD domain", 
+        "target": 100168
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "DNA polymerase lambda, DNA_pol_lambd_f domain", 
+        "target": 100934
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Heat shock 70 kDa protein 1, HSP70 domain", 
+        "target": 100986
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Muscle, skeletal receptor tyrosine protein kinase, Pkinase_Tyr domain", 
+        "target": 101282
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Monoglyceride lipase, Hydrolase_4 domain", 
+        "target": 101322
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Solute carrier family 22 member 6, Sugar_tr domain", 
+        "target": 103829
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Type-1 angiotensin II receptor, 7tm_1 domain", 
+        "target": 103900
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.bindingsites", 
+    "fields": {
+        "site_name": "Serine hydroxymethyltransferase, cytosolic, SHMT domain", 
+        "target": 104141
+    }
+}
+]

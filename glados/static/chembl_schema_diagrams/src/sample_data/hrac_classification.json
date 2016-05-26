@@ -1,0 +1,1302 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CLODINAFOP-PROPARGYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CYHALOFOP-BUTYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A12", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DICLOFOP-METHYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A13", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FENOXAPROP-P-ETHYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A14", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLUAZIFOP-P-BUTYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A15", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "HALOXYFOP-R-METHYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A16", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROPAQUIZAFOP", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A17", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "QUIZALOFOP-P-ETHYL", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A18", 
+        "level2_description": "ARYLOXYPHENOXY-PROPIONATE 'FOPS'"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ALLOXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A21", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "BUTROXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A22", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CLETHODIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A23", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CYCLOXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A24", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROFOXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A25", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "SETHOXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A26", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TEPRALOXYDIN", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A27", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRALKOXYDIM", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A2", 
+        "level3": "A28", 
+        "level2_description": "CYCLOHEXANEDIONE 'DIMS'"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PINOXADEN", 
+        "level1_description": "INHIBITION OF ACETYL COA CARBOXYLASE (ACCASE)", 
+        "hrac_code": "A", 
+        "level1": "A", 
+        "level2": "A3", 
+        "level3": "A31", 
+        "level2_description": "PHENYLPYRAZOLINE 'DEN'"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "AMIDOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B11", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "AZIMSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B12", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "BENSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B13", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CHLORIMURON-ETHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B14", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CHLORSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B15", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CINOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B16", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CYCLOSULFAMURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B17", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ETHAMETSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B18", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ETHOXYSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B19", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLAZASULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B110", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLUPYRSULFURON-METHYL-NA", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B111", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FORAMSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B112", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "HALOSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B113", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B114", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IODOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B115", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "MESOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B116", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "METSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B117", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "NICOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B118", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "OXASULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B119", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PRIMISULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B120", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B121", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRAZOSULFURON-ETHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B122", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "RIMSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B123", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "SULFOMETURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B124", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "SULFOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B125", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "THIFENSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B126", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRIASULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B127", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRIBENURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B128", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRIFLOXYSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B129", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRIFLUSULFURON-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B130", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRITOSULFURON", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B1", 
+        "level3": "B131", 
+        "level2_description": "SULFONYLUREA"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZAPIC", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B21", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZAMETHABENZ-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B22", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZAMOX", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B23", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZAPYR", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B24", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZAQUIN", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B25", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "IMAZETHAPYR", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B2", 
+        "level3": "B26", 
+        "level2_description": "IMIDAZOLINONE"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CLORANSULAM-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B31", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DICLOSULAM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B32", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLORASULAM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B33", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLUMETSULAM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B34", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "METOSULAM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B35", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PENOXSULAM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B3", 
+        "level3": "B36", 
+        "level2_description": "TRIAZOLOPYRIMIDINE"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "BISPYRIBAC-NA", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B41", 
+        "level2_description": "PYRIMIDINYL(THIO)BENZOATE"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIBENZOXIM", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B42", 
+        "level2_description": "PYRIMIDINYL(THIO)BENZOATE"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIFTALID", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B43", 
+        "level2_description": "PYRIMIDINYL(THIO)BENZOATE"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRITHIOBAC-NA", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B44", 
+        "level2_description": "PYRIMIDINYL(THIO)BENZOATE"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIMINOBAC-METHYL", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B4", 
+        "level3": "B45", 
+        "level2_description": "PYRIMIDINYL(THIO)BENZOATE"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLUCARBAZONE-NA", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B5", 
+        "level3": "B51", 
+        "level2_description": "SULFONYLAMINOCARBONYL-TRIAZOLINONE"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROPOXYCARBAZONE-NA", 
+        "level1_description": "INHIBITION OF ACETOLACTATE SYNTHASE ALS (ACETOHYDROXYACID SYNTHASE AHAS)", 
+        "hrac_code": "B", 
+        "level1": "B", 
+        "level2": "B5", 
+        "level3": "B52", 
+        "level2_description": "SULFONYLAMINOCARBONYL-TRIAZOLINONE"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "AMETRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C111", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ATRAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C112", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CYANAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C113", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DESMETRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C114", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DIMETHAMETRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C115", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROMETON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C116", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROMETRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C117", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PROPAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C118", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "SIMAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C119", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "SIMETRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C1110", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TERBUMETON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C1111", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TERBUTHYLAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C1112", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TERBUTRYNE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C1113", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TRIETAZINE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C11", 
+        "level3": "C1114", 
+        "level2_description": "TRIAZINE"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "HEXAZINONE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C12", 
+        "level3": "C121", 
+        "level2_description": "TRIAZINONE"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "METAMITRON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C12", 
+        "level3": "C122", 
+        "level2_description": "TRIAZINONE"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "METRIBUZIN", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C12", 
+        "level3": "C123", 
+        "level2_description": "TRIAZINONE"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "AMICARBAZONE", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C13", 
+        "level3": "C131", 
+        "level2_description": "TRIAZOLINONE"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "BROMACIL", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C14", 
+        "level3": "C141", 
+        "level2_description": "URACIL"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "LENACIL", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C14", 
+        "level3": "C142", 
+        "level2_description": "URACIL"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "TERBACIL", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C14", 
+        "level3": "C143", 
+        "level2_description": "URACIL"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PYRAZON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C15", 
+        "level3": "C151", 
+        "level2_description": "PYRIDAZINONE"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DESMEDIPHAM", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C16", 
+        "level3": "C161", 
+        "level2_description": "PHENYL-CARBAMATE"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "PHENMEDIPHAM", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C1", 
+        "level1": "C1", 
+        "level2": "C16", 
+        "level3": "C162", 
+        "level2_description": "PHENYL-CARBAMATE"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CHLOROBROMURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C211", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CHLOROTOLURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C212", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "CHLOROXURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C213", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DIMEFURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C214", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "DIURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C215", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ETHIDIMURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C216", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FENURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C217", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "FLUOMETURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C218", 
+        "level2_description": "UREA"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.hracclassification", 
+    "fields": {
+        "active_ingredient": "ISOPROTURON", 
+        "level1_description": "INHIBITION OF PHOTOSYNTHESIS AT PHOTOSYSTEM II", 
+        "hrac_code": "C2", 
+        "level1": "C2", 
+        "level2": "C21", 
+        "level3": "C219", 
+        "level2_description": "UREA"
+    }
+}
+]

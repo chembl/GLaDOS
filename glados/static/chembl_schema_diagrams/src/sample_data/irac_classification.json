@@ -1,0 +1,1502 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "HEXYTHIAZOX", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "10A", 
+        "level1": "C", 
+        "level2": "C10", 
+        "level3": "C1010A", 
+        "level4": "C1010A2", 
+        "level3_description": "CLOFENTEZINE, HEXYTHIAZOX, DIFLOVIDAZIN", 
+        "level2_description": "MITE GROWTH INHIBITORS"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "DIFLOVIDAZIN", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "10A", 
+        "level1": "C", 
+        "level2": "C10", 
+        "level3": "C1010A", 
+        "level4": "C1010A3", 
+        "level3_description": "CLOFENTEZINE, HEXYTHIAZOX, DIFLOVIDAZIN", 
+        "level2_description": "MITE GROWTH INHIBITORS"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ETOXAZOLE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "10B", 
+        "level1": "C", 
+        "level2": "C10", 
+        "level3": "C1010B", 
+        "level4": "C1010B1", 
+        "level3_description": "ETOXAZOLE", 
+        "level2_description": "MITE GROWTH INHIBITORS"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "DIAFENTHIURON", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12A", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212A", 
+        "level4": "D1212A1", 
+        "level3_description": "DIAFENTHIURON", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "AZOCYCLOTIN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12B", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212B", 
+        "level4": "D1212B1", 
+        "level3_description": "ORGANOTIN MITICIDES", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYHEXATIN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12B", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212B", 
+        "level4": "D1212B2", 
+        "level3_description": "ORGANOTIN MITICIDES", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FENBUTATIN OXIDE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12B", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212B", 
+        "level4": "D1212B3", 
+        "level3_description": "ORGANOTIN MITICIDES", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PROPARGITE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12C", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212C", 
+        "level4": "D1212C1", 
+        "level3_description": "PROPARGITE", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TETRADIFON", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "12D", 
+        "level1": "D", 
+        "level2": "D12", 
+        "level3": "D1212D", 
+        "level4": "D1212D1", 
+        "level3_description": "TETRADIFON", 
+        "level2_description": "INHIBITORS OF MITOCHONDRIAL ATP SYNTHASE"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CHLORFENAPYR", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "13", 
+        "level1": "D", 
+        "level2": "D13", 
+        "level3": "D1313A", 
+        "level4": "D1313A1", 
+        "level3_description": "CHLORFENAPYR, DNOC, SULFLURAMID", 
+        "level2_description": "UNCOUPLERS OF OXIDATIVE PHOSPHORYLATION VIA DISRUPTION OF THE PROTON GRADIENT"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "DNOC", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "13", 
+        "level1": "D", 
+        "level2": "D13", 
+        "level3": "D1313A", 
+        "level4": "D1313A2", 
+        "level3_description": "CHLORFENAPYR, DNOC, SULFLURAMID", 
+        "level2_description": "UNCOUPLERS OF OXIDATIVE PHOSPHORYLATION VIA DISRUPTION OF THE PROTON GRADIENT"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "SULFLURAMID", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "13", 
+        "level1": "D", 
+        "level2": "D13", 
+        "level3": "D1313A", 
+        "level4": "D1313A3", 
+        "level3_description": "CHLORFENAPYR, DNOC, SULFLURAMID", 
+        "level2_description": "UNCOUPLERS OF OXIDATIVE PHOSPHORYLATION VIA DISRUPTION OF THE PROTON GRADIENT"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BENSULTAP", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "14", 
+        "level1": "A", 
+        "level2": "A14", 
+        "level3": "A1414A", 
+        "level4": "A1414A1", 
+        "level3_description": "NEREISTOXIN ANALOGUES", 
+        "level2_description": "NICOTINIC ACETYLCHOLINE RECEPTOR (NACHR) CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CARTAP HYDROCHLORIDE", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "14", 
+        "level1": "A", 
+        "level2": "A14", 
+        "level3": "A1414A", 
+        "level4": "A1414A2", 
+        "level3_description": "NEREISTOXIN ANALOGUES", 
+        "level2_description": "NICOTINIC ACETYLCHOLINE RECEPTOR (NACHR) CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "THIOCYCLAM", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "14", 
+        "level1": "A", 
+        "level2": "A14", 
+        "level3": "A1414A", 
+        "level4": "A1414A3", 
+        "level3_description": "NEREISTOXIN ANALOGUES", 
+        "level2_description": "NICOTINIC ACETYLCHOLINE RECEPTOR (NACHR) CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "THIOSULTAP-SODIUM", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "14", 
+        "level1": "A", 
+        "level2": "A14", 
+        "level3": "A1414A", 
+        "level4": "A1414A4", 
+        "level3_description": "NEREISTOXIN ANALOGUES", 
+        "level2_description": "NICOTINIC ACETYLCHOLINE RECEPTOR (NACHR) CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BISTRIFLURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A1", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CHLORFLUAZURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A2", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "DIFLUBENZURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A3", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FLUCYCLOXURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A4", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FLUFENOXURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A5", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "HEXAFLUMURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A6", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "LUFENURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A7", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "NOVALURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A8", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "NOVIFLUMURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A9", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TEFLUBENZURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A10", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TRIFLUMURON", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "15", 
+        "level1": "C", 
+        "level2": "C15", 
+        "level3": "C1515A", 
+        "level4": "C1515A11", 
+        "level3_description": "BENZOYLUREAS", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 0"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BUPROFEZIN", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "16", 
+        "level1": "C", 
+        "level2": "C16", 
+        "level3": "C1616A", 
+        "level4": "C1616A1", 
+        "level3_description": "BUPROFEZIN", 
+        "level2_description": "INHIBITORS OF CHITIN BIOSYNTHESIS, TYPE 1"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYROMAZINE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "17", 
+        "level1": "C", 
+        "level2": "C17", 
+        "level3": "C1717A", 
+        "level4": "C1717A1", 
+        "level3_description": "CYROMAZINE", 
+        "level2_description": "MOULTING DISRUPTOR, DIPTERAN"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CHROMAFENOZIDE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "18", 
+        "level1": "C", 
+        "level2": "C18", 
+        "level3": "C1818A", 
+        "level4": "C1818A1", 
+        "level3_description": "DIACYLHYDRAZINES", 
+        "level2_description": "ECDYSONE RECEPTOR AGONISTS"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "HALOFENOZIDE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "18", 
+        "level1": "C", 
+        "level2": "C18", 
+        "level3": "C1818A", 
+        "level4": "C1818A2", 
+        "level3_description": "DIACYLHYDRAZINES", 
+        "level2_description": "ECDYSONE RECEPTOR AGONISTS"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "METHOXYFENOZIDE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "18", 
+        "level1": "C", 
+        "level2": "C18", 
+        "level3": "C1818A", 
+        "level4": "C1818A3", 
+        "level3_description": "DIACYLHYDRAZINES", 
+        "level2_description": "ECDYSONE RECEPTOR AGONISTS"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TEBUFENOZIDE", 
+        "level1_description": "GROWTH REGULATION", 
+        "irac_code": "18", 
+        "level1": "C", 
+        "level2": "C18", 
+        "level3": "C1818A", 
+        "level4": "C1818A4", 
+        "level3_description": "DIACYLHYDRAZINES", 
+        "level2_description": "ECDYSONE RECEPTOR AGONISTS"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "AMITRAZ", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "19", 
+        "level1": "A", 
+        "level2": "A19", 
+        "level3": "A1919A", 
+        "level4": "A1919A1", 
+        "level3_description": "AMITRAZ", 
+        "level2_description": "OCTOPAMINE RECEPTOR AGONISTS"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "HYDRAMETHYLNON", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "20A", 
+        "level1": "D", 
+        "level2": "D20", 
+        "level3": "D2020A", 
+        "level4": "D2020A1", 
+        "level3_description": "HYDRAMETHYLNON", 
+        "level2_description": "MITOCHONDRIAL COMPLEX III ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ACEQUINOCYL", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "20B", 
+        "level1": "D", 
+        "level2": "D20", 
+        "level3": "D2020B", 
+        "level4": "D2020B1", 
+        "level3_description": "ACEQUINOCYL", 
+        "level2_description": "MITOCHONDRIAL COMPLEX III ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FLUACRYPYRIM", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "20C", 
+        "level1": "D", 
+        "level2": "D20", 
+        "level3": "D2020C", 
+        "level4": "D2020C1", 
+        "level3_description": "FLUACRYPYRIM", 
+        "level2_description": "MITOCHONDRIAL COMPLEX III ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FENAZAQUIN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A1", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FENPYROXIMATE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A2", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIMIDIFEN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A3", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIDABEN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A4", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TEBUFENPYRAD", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A5", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "TOLFENPYRAD", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21A", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121A", 
+        "level4": "D2121A6", 
+        "level3_description": "METI ACARICIDES AND INSECTICIDES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ROTENONE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "21B", 
+        "level1": "D", 
+        "level2": "D21", 
+        "level3": "D2121B", 
+        "level4": "D2121B1", 
+        "level3_description": "ROTENONE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX I ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "INDOXACARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "22A", 
+        "level1": "A", 
+        "level2": "A22", 
+        "level3": "A2222A", 
+        "level4": "A2222A1", 
+        "level3_description": "INDOXACARB", 
+        "level2_description": "VOLTAGE-DEPENDENT SODIUM CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "METAFLUMIZONE", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "22B", 
+        "level1": "A", 
+        "level2": "A22", 
+        "level3": "A2222B", 
+        "level4": "A2222B1", 
+        "level3_description": "METAFLUMIZONE", 
+        "level2_description": "VOLTAGE-DEPENDENT SODIUM CHANNEL BLOCKERS"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "SPIRODICLOFEN", 
+        "level1_description": "LIPID SYNTHESIS, GROWTH REGULATION", 
+        "irac_code": "23", 
+        "level1": "E", 
+        "level2": "E23", 
+        "level3": "E2323A", 
+        "level4": "E2323A1", 
+        "level3_description": "TETRONIC AND TETRAMIC ACID DERIVATIVES", 
+        "level2_description": "INHIBITORS OF ACETYL COA CARBOXYLASE"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "SPIROMESIFEN", 
+        "level1_description": "LIPID SYNTHESIS, GROWTH REGULATION", 
+        "irac_code": "23", 
+        "level1": "E", 
+        "level2": "E23", 
+        "level3": "E2323A", 
+        "level4": "E2323A2", 
+        "level3_description": "TETRONIC AND TETRAMIC ACID DERIVATIVES", 
+        "level2_description": "INHIBITORS OF ACETYL COA CARBOXYLASE"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "SPIROTETRAMAT", 
+        "level1_description": "LIPID SYNTHESIS, GROWTH REGULATION", 
+        "irac_code": "23", 
+        "level1": "E", 
+        "level2": "E23", 
+        "level3": "E2323A", 
+        "level4": "E2323A3", 
+        "level3_description": "TETRONIC AND TETRAMIC ACID DERIVATIVES", 
+        "level2_description": "INHIBITORS OF ACETYL COA CARBOXYLASE"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ALUMINIUM PHOSPHIDE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "24A", 
+        "level1": "D", 
+        "level2": "D24", 
+        "level3": "D2424A", 
+        "level4": "D2424A1", 
+        "level3_description": "PHOSPHINE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX IV ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CALCIUM PHOSPHIDE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "24A", 
+        "level1": "D", 
+        "level2": "D24", 
+        "level3": "D2424A", 
+        "level4": "D2424A2", 
+        "level3_description": "PHOSPHINE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX IV ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PHOSPHINE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "24A", 
+        "level1": "D", 
+        "level2": "D24", 
+        "level3": "D2424A", 
+        "level4": "D2424A3", 
+        "level3_description": "PHOSPHINE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX IV ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ZINC PHOSPHIDE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "24A", 
+        "level1": "D", 
+        "level2": "D24", 
+        "level3": "D2424A", 
+        "level4": "D2424A4", 
+        "level3_description": "PHOSPHINE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX IV ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYANIDE", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "24B", 
+        "level1": "D", 
+        "level2": "D24", 
+        "level3": "D2424B", 
+        "level4": "D2424B1", 
+        "level3_description": "CYANIDE", 
+        "level2_description": "MITOCHONDRIAL COMPLEX IV ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYENOPYRAFEN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "25", 
+        "level1": "D", 
+        "level2": "D25", 
+        "level3": "D2525A", 
+        "level4": "D2525A1", 
+        "level3_description": "BETA-KETONITRILE DERIVATIVES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX II ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYFLUMETOFEN", 
+        "level1_description": "ENERGY METABOLISM", 
+        "irac_code": "25", 
+        "level1": "D", 
+        "level2": "D25", 
+        "level3": "D2525A", 
+        "level4": "D2525A2", 
+        "level3_description": "BETA-KETONITRILE DERIVATIVES", 
+        "level2_description": "MITOCHONDRIAL COMPLEX II ELECTRON TRANSPORT INHIBITORS"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CHLORANTRANILIPROLE", 
+        "level1_description": "NERVE AND MUSCLE ACTION", 
+        "irac_code": "28", 
+        "level1": "B", 
+        "level2": "B28", 
+        "level3": "B2828A", 
+        "level4": "B2828A1", 
+        "level3_description": "DIAMIDES", 
+        "level2_description": "RYANODINE RECEPTOR MODULATORS"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CYANTRANILIPROLE", 
+        "level1_description": "NERVE AND MUSCLE ACTION", 
+        "irac_code": "28", 
+        "level1": "B", 
+        "level2": "B28", 
+        "level3": "B2828A", 
+        "level4": "B2828A2", 
+        "level3_description": "DIAMIDES", 
+        "level2_description": "RYANODINE RECEPTOR MODULATORS"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FLUBENDIAMIDE", 
+        "level1_description": "NERVE AND MUSCLE ACTION", 
+        "irac_code": "28", 
+        "level1": "B", 
+        "level2": "B28", 
+        "level3": "B2828A", 
+        "level4": "B2828A3", 
+        "level3_description": "DIAMIDES", 
+        "level2_description": "RYANODINE RECEPTOR MODULATORS"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "AZADIRACHTIN", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNA", 
+        "level4": "UUNUNA1", 
+        "level3_description": "AZADIRACHTIN", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BENZOXIMATE", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNB", 
+        "level4": "UUNUNB1", 
+        "level3_description": "BENZOXIMATE", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BIFENAZATE", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNC", 
+        "level4": "UUNUNC1", 
+        "level3_description": "BIFENAZATE", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CHINOMETHIONAT", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUND", 
+        "level4": "UUNUND1", 
+        "level3_description": "CHINOMETHIONAT", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRYOLITE", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNE", 
+        "level4": "UUNUNE1", 
+        "level3_description": "CRYOLITE", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "DICOFOL", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNF", 
+        "level4": "UUNUNF1", 
+        "level3_description": "DICOFOL", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIDALYL", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNG", 
+        "level4": "UUNUNG1", 
+        "level3_description": "PYRIDALYL", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "PYRIFLUQUINAZON", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "UN", 
+        "level1": "U", 
+        "level2": "UUN", 
+        "level3": "UUNUNH", 
+        "level4": "UUNUNH1", 
+        "level3_description": "PYRIFLUQUINAZON", 
+        "level2_description": "COMPOUNDS OF UNKNOWN OR UNCERTAIN MOA"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "OTHER ALKYL HALIDES", 
+        "level1_description": "MISCELLANEOUS", 
+        "irac_code": "8A", 
+        "level1": "M", 
+        "level2": "M8", 
+        "level3": "M88A", 
+        "level4": "M88A2", 
+        "level3_description": "ALKYL HALIDES", 
+        "level2_description": "MISCELLANEOUS NONSPECIFIC (MULTI-SITE) INHIBITORS"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BACILLUS THURINGIENSIS SUBSP. ISRAELENSIS", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A1", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BACILLUS THURINGIENSIS SUBSP. AIZAWAI", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A2", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BACILLUS THURINGIENSIS SUBSP. KURSTAKI", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A3", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BACILLUS THURINGIENSIS SUBSP. TENEBRIONIS", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A4", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "B.T. CROP PROTEINS: CRY1AB", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A5", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY1AC", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A6", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY1FA", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A7", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY1A.105", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A8", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY2AB", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A9", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "VIP3A", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A10", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "MCRY3A", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A11", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY3AB", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A12", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY3BB", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A13", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CRY34AB1/CRY35AB1", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11A", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111A", 
+        "level4": "U1111A14", 
+        "level3_description": "BACILLUS THURINGIENSIS AND THE INSECTICIDAL PROTEINS THEY PRODUCE", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BACILLUS SPHAERICUS", 
+        "level1_description": "UNKNOWN", 
+        "irac_code": "11B", 
+        "level1": "U", 
+        "level2": "U11", 
+        "level3": "U1111B", 
+        "level4": "U1111B1", 
+        "level3_description": "BACILLUS SPHAERICUS", 
+        "level2_description": "MICROBIAL DISRUPTORS OF INSECT MIDGUT MEMBRANES"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ALANYCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A1", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ALDICARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A2", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BENDIOCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A3", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BENFURACARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A4", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BUTOCARBOXIM", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A5", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "BUTOXYCARBOXIM", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A6", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CARBARYL", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A7", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CARBOFURAN", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A8", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "CARBOSULFAN", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A9", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ETHIOFENCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A10", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FENOBUCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A11", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FORMETANATE", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A12", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "FURATHIOCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A13", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "ISOPROCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A14", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "METHIOCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A15", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "METHOMYL", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A16", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.iracclassification", 
+    "fields": {
+        "active_ingredient": "METOLCARB", 
+        "level1_description": "NERVE ACTION", 
+        "irac_code": "1A", 
+        "level1": "A", 
+        "level2": "A1", 
+        "level3": "A11A", 
+        "level4": "A11A17", 
+        "level3_description": "CARBAMATES", 
+        "level2_description": "ACETYLCHOLINESTERASE (ACHE) INHIBITORS"
+    }
+}
+]

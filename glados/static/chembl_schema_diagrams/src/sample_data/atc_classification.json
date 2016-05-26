@@ -1,0 +1,1602 @@
+[
+{
+    "pk": "A01AA01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0001", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "sodium fluoride", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AA02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0002", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "sodium monofluorophosphate", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AA03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0003", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "olaflur", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AA04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0004", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "stannous fluoride", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AA30", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0005", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "combinations", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AA51", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AA", 
+        "who_id": "who0006", 
+        "level4_description": "Caries prophylactic agents", 
+        "who_name": "sodium fluoride, combinations", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0007", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "hydrogen peroxide", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0008", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "chlorhexidine", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0009", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "amphotericin B", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0010", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "polynoxylin", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0011", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "domiphen", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0012", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "oxyquinoline", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB08", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0013", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "neomycin", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB09", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0014", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "miconazole", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB10", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0015", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "natamycin", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB11", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0016", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "various", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB12", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0017", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "hexetidine", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB13", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0018", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "tetracycline", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB14", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0019", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "benzoxonium chloride", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB15", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0020", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "tibezonium iodide", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB16", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0021", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "mepartricin", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB17", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0022", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "metronidazole", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB18", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0023", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "clotrimazole", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB19", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0024", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "sodium perborate", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB21", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0025", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "chlortetracycline", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB22", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0026", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "doxycycline", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AB23", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AB", 
+        "who_id": "who0027", 
+        "level4_description": "Antiinfectives and antiseptics for local oral treatment", 
+        "who_name": "minocycline", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AC01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AC", 
+        "who_id": "who0028", 
+        "level4_description": "Corticosteroids for local oral treatment", 
+        "who_name": "triamcinolone", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AC02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AC", 
+        "who_id": "who0029", 
+        "level4_description": "Corticosteroids for local oral treatment", 
+        "who_name": "dexamethasone", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AC03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AC", 
+        "who_id": "who0030", 
+        "level4_description": "Corticosteroids for local oral treatment", 
+        "who_name": "hydrocortisone", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AC54", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AC", 
+        "who_id": "who0031", 
+        "level4_description": "Corticosteroids for local oral treatment", 
+        "who_name": "prednisolone, combinations", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0032", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "epinephrine", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0033", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "benzydamine", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0034", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "acetylsalicylic acid", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0035", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "adrenalone", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0036", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "amlexanox", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD08", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0037", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "becaplermin", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A01AD11", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A01", 
+        "level3": "A01A", 
+        "level4": "A01AD", 
+        "who_id": "who0016", 
+        "level4_description": "Other agents for local oral treatment", 
+        "who_name": "various", 
+        "level3_description": "STOMATOLOGICAL PREPARATIONS", 
+        "level2_description": "STOMATOLOGICAL PREPARATIONS"
+    }
+},
+{
+    "pk": "A02AA01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0038", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "magnesium carbonate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AA02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0039", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "magnesium oxide", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AA03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0040", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "magnesium peroxide", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AA04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0041", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "magnesium hydroxide", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AA05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0042", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "magnesium silicate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AA10", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AA", 
+        "who_id": "who0005", 
+        "level4_description": "Magnesium compounds", 
+        "who_name": "combinations", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0043", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "aluminium hydroxide", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0044", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "algeldrate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0045", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "aluminium phosphate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0046", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "dihydroxialumini sodium carbonate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0047", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "aluminium acetoacetate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0048", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "aloglutamol", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0049", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "aluminium glycinate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AB10", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AB", 
+        "who_id": "who0005", 
+        "level4_description": "Aluminium compounds", 
+        "who_name": "combinations", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AC01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AC", 
+        "who_id": "who0050", 
+        "level4_description": "Calcium compounds", 
+        "who_name": "calcium carbonate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AC02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AC", 
+        "who_id": "who0051", 
+        "level4_description": "Calcium compounds", 
+        "who_name": "calcium silicate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AC10", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AC", 
+        "who_id": "who0005", 
+        "level4_description": "Calcium compounds", 
+        "who_name": "combinations", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AD01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AD", 
+        "who_id": "who0052", 
+        "level4_description": "Combinations and complexes of aluminium, calcium and magnesium compounds", 
+        "who_name": "ordinary salt combinations", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AD02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AD", 
+        "who_id": "who0053", 
+        "level4_description": "Combinations and complexes of aluminium, calcium and magnesium compounds", 
+        "who_name": "magaldrate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AD03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AD", 
+        "who_id": "who0054", 
+        "level4_description": "Combinations and complexes of aluminium, calcium and magnesium compounds", 
+        "who_name": "almagate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AD04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AD", 
+        "who_id": "who0055", 
+        "level4_description": "Combinations and complexes of aluminium, calcium and magnesium compounds", 
+        "who_name": "hydrotalcite", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AD05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AD", 
+        "who_id": "who0056", 
+        "level4_description": "Combinations and complexes of aluminium, calcium and magnesium compounds", 
+        "who_name": "almasilate", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AF01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AF", 
+        "who_id": "who0057", 
+        "level4_description": "Antacids with antiflatulents", 
+        "who_name": "magaldrate and antiflatulents", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02AF02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02A", 
+        "level4": "A02AF", 
+        "who_id": "who0058", 
+        "level4_description": "Antacids with antiflatulents", 
+        "who_name": "ordinary salt combinations and antiflatulents", 
+        "level3_description": "ANTACIDS", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0059", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "cimetidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0060", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "ranitidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0061", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "famotidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0062", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "nizatidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0063", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "niperotidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0064", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "roxatidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0065", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "ranitidine bismuth citrate", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA08", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0066", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "lafutidine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA51", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0067", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "cimetidine, combinations", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BA53", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BA", 
+        "who_id": "who0068", 
+        "level4_description": "H2-receptor antagonists", 
+        "who_name": "famotidine, combinations", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BB01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BB", 
+        "who_id": "who0069", 
+        "level4_description": "Prostaglandins", 
+        "who_name": "misoprostol", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BB02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BB", 
+        "who_id": "who0070", 
+        "level4_description": "Prostaglandins", 
+        "who_name": "enprostil", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who0071", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "omeprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who0072", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "pantoprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who0073", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "lansoprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who0074", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "rabeprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who0075", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "esomeprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who3737", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "dexlansoprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who3945", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "dexrabeprazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC53", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who4005", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "lansoprazole, combinations", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BC54", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BC", 
+        "who_id": "who3963", 
+        "level4_description": "Proton pump inhibitors", 
+        "who_name": "rabeprazole, combinations", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0076", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "omeprazole, amoxicillin and metronidazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0077", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "lansoprazole, tetracycline and metronidazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0078", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "lansoprazole, amoxicillin and metronidazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0079", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "pantoprazole, amoxicillin and clarithromycin", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0080", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "omeprazole, amoxicillin and clarithromycin", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0081", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "esomeprazole, amoxicillin and clarithromycin", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who0082", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "lansoprazole, amoxicillin and clarithromycin", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD08", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who3690", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "bismuth subcitrate, tetracycline and metronidazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD09", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who3970", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "lansoprazole, clarithromycin and tinidazole", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BD10", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BD", 
+        "who_id": "who3957", 
+        "level4_description": "Combinations for eradication of Helicobacter pylori", 
+        "who_name": "lansoprazole, amoxicillin and levofloxacin", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX01", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0083", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "carbenoxolone", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX02", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0084", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "sucralfate", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX03", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0085", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "pirenzepine", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX04", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0086", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "methiosulfonium chloride", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX05", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0087", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "bismuth subcitrate", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX06", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0088", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "proglumide", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+},
+{
+    "pk": "A02BX07", 
+    "model": "chembl_core_model.atcclassification", 
+    "fields": {
+        "level1_description": "ALIMENTARY TRACT AND METABOLISM", 
+        "level1": "A", 
+        "level2": "A02", 
+        "level3": "A02B", 
+        "level4": "A02BX", 
+        "who_id": "who0089", 
+        "level4_description": "Other drugs for peptic ulcer and gastro-oesophageal reflux disease (GORD)", 
+        "who_name": "gefarnate", 
+        "level3_description": "DRUGS FOR PEPTIC ULCER AND GASTRO-OESOPHAGEAL REFLUX DISEASE (GORD)", 
+        "level2_description": "DRUGS FOR ACID RELATED DISORDERS"
+    }
+}
+]

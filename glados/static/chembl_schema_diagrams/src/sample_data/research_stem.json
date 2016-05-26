@@ -1,0 +1,702 @@
+[
+{
+    "pk": 2, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "4SC"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "A"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AA"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AB"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ABI"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ABIO"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ABR"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ABT"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ABX"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AC"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ACC"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ACE"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ACH"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ACP"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ACT"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AD"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ADL"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ADR"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ADX"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AEZS"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AF"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AFN"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AG"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AGIX"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AGN"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AGS"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AH"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AHR"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AL"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ALKS"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ALTU"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ALXN"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AM"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AMA"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AME"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AMG"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AMI"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AN"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ANA"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AP"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "APD"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "APG"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "APO"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AR"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ARC"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ARD"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ARN"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ARQ"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ARRY"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AS"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ASK"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ASL"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ASP"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AT"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ATG"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "ATU"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AV"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AVE"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AVI"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AVL"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AW"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AWD"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AXL"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AXP"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AY"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AZ"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AZD"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "AZM"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "B"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BA"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BAL"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BAM"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BAS"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BAX"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BAY"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BB"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BBR"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BBT"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BC"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BCH"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BCI"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BCX"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BDF"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BEA"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BI"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BIM"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BIO"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BIW"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BL"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BLX"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BM"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BMN"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BMS"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BMY"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BN"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BNC"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BP"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BRI"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BRL"
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.researchstem", 
+    "fields": {
+        "research_stem": "BST"
+    }
+}
+]

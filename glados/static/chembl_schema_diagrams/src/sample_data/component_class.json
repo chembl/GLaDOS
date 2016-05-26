@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 1, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 2, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 3, 
+        "protein_class": 12
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 4, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 5, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 6, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 7, 
+        "protein_class": 323
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 8, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 9, 
+        "protein_class": 424
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 10, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 11, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 12, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 13, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 14, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 15, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 16, 
+        "protein_class": 406
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 17, 
+        "protein_class": 148
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 18, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 19, 
+        "protein_class": 406
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 20, 
+        "protein_class": 406
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 21, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 22, 
+        "protein_class": 8
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 23, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 24, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 25, 
+        "protein_class": 544
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 26, 
+        "protein_class": 406
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 27, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 28, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 29, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 30, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 31, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 32, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 33, 
+        "protein_class": 544
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 34, 
+        "protein_class": 8
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 35, 
+        "protein_class": 8
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 36, 
+        "protein_class": 323
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 37, 
+        "protein_class": 329
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 38, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 39, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 40, 
+        "protein_class": 329
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 41, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 42, 
+        "protein_class": 406
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 43, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 44, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 45, 
+        "protein_class": 544
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 46, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 47, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 48, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 49, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 50, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 51, 
+        "protein_class": 325
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 52, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 53, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 54, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 55, 
+        "protein_class": 5
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 56, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 57, 
+        "protein_class": 423
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 58, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 59, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 60, 
+        "protein_class": 129
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 61, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 62, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 63, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 64, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 65, 
+        "protein_class": 1150
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 66, 
+        "protein_class": 1
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 67, 
+        "protein_class": 8
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 68, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 69, 
+        "protein_class": 559
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 70, 
+        "protein_class": 25
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 71, 
+        "protein_class": 231
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 72, 
+        "protein_class": 644
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 73, 
+        "protein_class": 643
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 74, 
+        "protein_class": 3
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 75, 
+        "protein_class": 435
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 76, 
+        "protein_class": 500
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 77, 
+        "protein_class": 646
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 78, 
+        "protein_class": 10
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 79, 
+        "protein_class": 1173
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 80, 
+        "protein_class": 1024
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 81, 
+        "protein_class": 562
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 82, 
+        "protein_class": 243
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 83, 
+        "protein_class": 517
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 84, 
+        "protein_class": 407
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 85, 
+        "protein_class": 422
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 86, 
+        "protein_class": 1315
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 87, 
+        "protein_class": 646
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 88, 
+        "protein_class": 1
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 89, 
+        "protein_class": 567
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 90, 
+        "protein_class": 1028
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 91, 
+        "protein_class": 503
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 92, 
+        "protein_class": 38
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 93, 
+        "protein_class": 38
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 94, 
+        "protein_class": 648
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 95, 
+        "protein_class": 38
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 96, 
+        "protein_class": 449
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 97, 
+        "protein_class": 2
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 97, 
+        "protein_class": 11
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 98, 
+        "protein_class": 517
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.componentclass", 
+    "fields": {
+        "component": 99, 
+        "protein_class": 542
+    }
+}
+]

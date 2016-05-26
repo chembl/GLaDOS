@@ -1,0 +1,266 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Scientific Literature", 
+        "src_short_name": "LITERATURE"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "GSK Malaria Screening", 
+        "src_short_name": "GSK_TCMDC"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Novartis Malaria Screening", 
+        "src_short_name": "NOVARTIS"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "St Jude Malaria Screening", 
+        "src_short_name": "ST_JUDE"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Sanger Institute Genomics of Drug Sensitivity in Cancer", 
+        "src_short_name": "SANGER"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "PDBe Ligands", 
+        "src_short_name": "PDBE"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "PubChem BioAssays", 
+        "src_short_name": "PUBCHEM_BIOASSAY"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Clinical Candidates", 
+        "src_short_name": "CANDIDATES"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Orange Book", 
+        "src_short_name": "ORANGE_BOOK"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Guide to Receptors and Channels", 
+        "src_short_name": "GRAC"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Open TG-GATEs", 
+        "src_short_name": "TG_GATES"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Manually Added Drugs", 
+        "src_short_name": "DRUGS"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "USP Dictionary of USAN and International Drug Names", 
+        "src_short_name": "USP/USAN"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Drugs for Neglected Diseases Initiative (DNDi)", 
+        "src_short_name": "DNDI"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "DrugMatrix", 
+        "src_short_name": "DRUGMATRIX"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "GSK Published Kinase Inhibitor Set", 
+        "src_short_name": "GSK_PKIS"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "MMV Malaria Box", 
+        "src_short_name": "MMV_MBOX"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "TP-search Transporter Database", 
+        "src_short_name": "TP_TRANSPORTER"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Harvard Malaria Screening", 
+        "src_short_name": "HARVARD"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "WHO-TDR Malaria Screening", 
+        "src_short_name": "WHO_TDR"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Deposited Supplementary Bioactivity Data", 
+        "src_short_name": "SUPPLEMENTARY"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "GSK Tuberculosis Screening", 
+        "src_short_name": "GSK_TB"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Open Source Malaria Screening", 
+        "src_short_name": "OSM"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Millipore Kinase Screening", 
+        "src_short_name": "MILLIPORE"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "External Project Compounds", 
+        "src_short_name": "EXT. PROJECT CPDS"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Gene Expression Atlas Compounds", 
+        "src_short_name": "ATLAS"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "AstraZeneca Deposited Data", 
+        "src_short_name": "ASTRAZENECA"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "FDA Approval Packages", 
+        "src_short_name": "FDA_APPROVAL"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "GSK Kinetoplastid Screening", 
+        "src_short_name": "GSK_TCAKS"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "DONT USE, RESERVED FOR K4DD", 
+        "src_short_name": null
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Curated Drug Metabolism Pathways", 
+        "src_short_name": "METABOLISM"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "St Jude Leishmania Screening", 
+        "src_short_name": "ST_JUDE_LEISH"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.source", 
+    "fields": {
+        "src_description": "Gates Library compound collection", 
+        "src_short_name": "GATES_LIBRARY"
+    }
+}
+]

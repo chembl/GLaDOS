@@ -1,0 +1,66 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 8, 
+        "set_name": "Glaxo"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 4, 
+        "set_name": "Dundee"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 7, 
+        "set_name": "BMS"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 6, 
+        "set_name": "PAINS"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 5, 
+        "set_name": "SureChEMBL"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 3, 
+        "set_name": "MLSMR"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 1, 
+        "set_name": "Inpharmatica"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.structuralalertsets", 
+    "fields": {
+        "priority": 2, 
+        "set_name": "LINT"
+    }
+}
+]

@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 6738, 
+        "frac_class": 579
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 381700, 
+        "frac_class": 610
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 440200, 
+        "frac_class": 480
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 13725, 
+        "frac_class": 613
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 26590, 
+        "frac_class": 536
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 26722, 
+        "frac_class": 509
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 38856, 
+        "frac_class": 532
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 39585, 
+        "frac_class": 631
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 47984, 
+        "frac_class": 612
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 56831, 
+        "frac_class": 510
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 95026, 
+        "frac_class": 647
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 112258, 
+        "frac_class": 534
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 118976, 
+        "frac_class": 658
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 150887, 
+        "frac_class": 533
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 175969, 
+        "frac_class": 523
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 198725, 
+        "frac_class": 668
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 242393, 
+        "frac_class": 637
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 242394, 
+        "frac_class": 636
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 243586, 
+        "frac_class": 635
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 255935, 
+        "frac_class": 633
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 316299, 
+        "frac_class": 501
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 335813, 
+        "frac_class": 535
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 344695, 
+        "frac_class": 573
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 347123, 
+        "frac_class": 641
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 388388, 
+        "frac_class": 564
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 388389, 
+        "frac_class": 671
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 421157, 
+        "frac_class": 600
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 430452, 
+        "frac_class": 473
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 435442, 
+        "frac_class": 519
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 440243, 
+        "frac_class": 475
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442458, 
+        "frac_class": 608
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442664, 
+        "frac_class": 495
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442734, 
+        "frac_class": 615
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442735, 
+        "frac_class": 658
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442753, 
+        "frac_class": 547
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442754, 
+        "frac_class": 493
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442755, 
+        "frac_class": 616
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442756, 
+        "frac_class": 538
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 442758, 
+        "frac_class": 628
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 446779, 
+        "frac_class": 505
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 447057, 
+        "frac_class": 604
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 447058, 
+        "frac_class": 594
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 447059, 
+        "frac_class": 479
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 447060, 
+        "frac_class": 570
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 452466, 
+        "frac_class": 663
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 453582, 
+        "frac_class": 679
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 458929, 
+        "frac_class": 590
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 458931, 
+        "frac_class": 589
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 461931, 
+        "frac_class": 665
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 461960, 
+        "frac_class": 664
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 467422, 
+        "frac_class": 482
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 467479, 
+        "frac_class": 490
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 467481, 
+        "frac_class": 496
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 478977, 
+        "frac_class": 477
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 488114, 
+        "frac_class": 607
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 488115, 
+        "frac_class": 674
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 499374, 
+        "frac_class": 471
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 499441, 
+        "frac_class": 568
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 505935, 
+        "frac_class": 597
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 515306, 
+        "frac_class": 472
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 556852, 
+        "frac_class": 596
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 558576, 
+        "frac_class": 491
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 564534, 
+        "frac_class": 478
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 612388, 
+        "frac_class": 539
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 612825, 
+        "frac_class": 563
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 674690, 
+        "frac_class": 662
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 675145, 
+        "frac_class": 599
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 694017, 
+        "frac_class": 552
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 695142, 
+        "frac_class": 581
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 698522, 
+        "frac_class": 591
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 708407, 
+        "frac_class": 675
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 781511, 
+        "frac_class": 546
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 843943, 
+        "frac_class": 617
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 943211, 
+        "frac_class": 670
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 961603, 
+        "frac_class": 611
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 967667, 
+        "frac_class": 643
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 990518, 
+        "frac_class": 474
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1019749, 
+        "frac_class": 681
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1038106, 
+        "frac_class": 548
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1053502, 
+        "frac_class": 598
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1068884, 
+        "frac_class": 609
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1076168, 
+        "frac_class": 506
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1092788, 
+        "frac_class": 553
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1142493, 
+        "frac_class": 603
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1203455, 
+        "frac_class": 606
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1203528, 
+        "frac_class": 551
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1203657, 
+        "frac_class": 632
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1204003, 
+        "frac_class": 583
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1205569, 
+        "frac_class": 525
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1210434, 
+        "frac_class": 601
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1218838, 
+        "frac_class": 588
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1220258, 
+        "frac_class": 481
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1224083, 
+        "frac_class": 488
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1224390, 
+        "frac_class": 673
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1229612, 
+        "frac_class": 503
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1233596, 
+        "frac_class": 540
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1234484, 
+        "frac_class": 620
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1238054, 
+        "frac_class": 574
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1239431, 
+        "frac_class": 485
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.moleculefracclassification", 
+    "fields": {
+        "molecule": 1241093, 
+        "frac_class": 483
+    }
+}
+]

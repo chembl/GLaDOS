@@ -1,0 +1,802 @@
+[
+{
+    "pk": 13, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[dF].[dL].M.[dQ].W}$PEPTIDE1,PEPTIDE1,5:R2-1:R1$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[dP].L.[dM].Q.[dW].F}$PEPTIDE1,PEPTIDE1,6:R2-1:R1$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 197, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{A.L.Y.A.S.K.L.S.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 326, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[meR].K.P.W.[Tle].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 364, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X833].[dP].W.[Tle].[X454]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 365, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X12].[dP].W.[Tle].[X454]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 382, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.P.W.[Tle].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 391, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X12].[dP].W.I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 392, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X500].[dP].W.[Tle].[X454]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 395, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.F.Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 446, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{G.R.G.D.S.P}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 448, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X12].[dP].Y.[Tle].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 449, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X12].[dP].W.[Tle].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 450, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X833].[dP].W.[Tle].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1387, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{G.L.A.G.R.L.Q.R.L.L.Q.A.S.G.N.H.A.A.G.I.L.T.M}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1394, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{G.L.Q.G.R.L.Q.R.A.L.Q.A.S.G.N.H.A.A.G.I.L.T.M}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1427, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{G.L.Q.G.R.L.Q.R.L.L.Q.A.S.G.N.H.A.A.G.A.L.T.M}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1602, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X307].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1703, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1043].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1715, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[dGlp].E.[dP].[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1731, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1086].[dL].F.[dL].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1732, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X257].[dL].F.[dL].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1733, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1602].[dL].F.[dL].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1742, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1439].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1748, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X2338].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1794, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1590].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1863, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X802].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1868, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X2589].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1869, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X2443].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1873, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X455].[dL].F.[dL].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1874, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X876].[dL].F.[dL].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1909, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1107].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1930, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X456].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1944, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X2773].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 1966, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X607].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2005, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X91].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2025, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X2774].L.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2774, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].D.A.D.E.[X201].L.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2874, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].D.[X699].V.P.M.L.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2947, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].D.[X127].V.P.M.L.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 2955, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].D.[X201].V.P.M.L.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3036, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].D.A.D.E.[X699].L.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3239, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Me_Phg].P.R}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3253, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{F.P.S.K.P}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3254, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{S.A.L.R.H.Y.I.N.L.I.T.R.Q.R.Y}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3371, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{I.N.L.I.T.R.Q.R.Y}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3372, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.P.F.[dP].[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 3389, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.G.G.F.L}$$$$", 
+        "description": "ENKEPHALIN"
+    }
+},
+{
+    "pk": 3452, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{L.R.H.Y.I.N.L.I.T.R.Q.R.Y}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4350, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1178].P.[X2577].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4358, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Boc_K].[X2362].I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4392, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.P.Y.I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4393, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1178].P.Y.I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4394, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Boc_K].P.Y.I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 4408, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1178].[X2732].I.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 5991, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{C.R.L.A.Q.D.E.A.D.V.T.E.Y.C}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 7818, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.V.P.T.N.V.G.F.E.A.F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 7819, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{S.K.V.I.L.P}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 7918, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].[dE].A}|PEPTIDE2{E.K.[X556].R.K.L.F.D.I.I.[am]}$PEPTIDE2,PEPTIDE1,2:R3-2:R3|PEPTIDE1,PEPTIDE2,3:R2-1:R1$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 7972, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].[dE].A}|PEPTIDE2{E.K.N.R.K.L.[Cha].D.I.I.[am]}$PEPTIDE2,PEPTIDE1,2:R3-2:R3|PEPTIDE1,PEPTIDE2,3:R2-1:R1$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 8194, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].[dE].[dA]}|PEPTIDE2{E.K.N.R.K.L.[Cha].D.I.I.[am]}$PEPTIDE2,PEPTIDE1,2:R3-2:R3|PEPTIDE1,PEPTIDE2,3:R2-1:R1$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 8195, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{E.K.[X556].R.K.L.F.D.I.I.[am]}|PEPTIDE2{[ac].[dE].D}$PEPTIDE2,PEPTIDE1,3:R2-1:R1|PEPTIDE2,PEPTIDE1,2:R3-2:R3$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10283, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1126].K.A.L.R.R.Q.E.V.D.A.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10284, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X1126].[X154].A.L.R.R.Q.E.V.D.A.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10285, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Cbz_A].L.R.R.Q.E.A.V.D.A.L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10633, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{D.R.V.Y.V.H.P.F}$$$$", 
+        "description": "[Val5] - ANGIOTENSIN II"
+    }
+},
+{
+    "pk": 10804, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.Y.V.H.P.[dL]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10805, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.Y.V.H.P.[X1010]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10814, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.Y.V.H.P.[X305]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 10994, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.G.G.F.L.R.R.I.R.P.K.L.K.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 11056, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.[Aib].G.F.L.R.R.I.R.P.K.L.K.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12073, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].[X127].E.[X2320].[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12171, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12172, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12246, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{G.I.G.K.F.L.H.S.A.K.K.F.G.K.A.F.V.G.E.I.M.N.S}$$$$", 
+        "description": "MAGAININ 2"
+    }
+},
+{
+    "pk": 12261, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[ac].K.K.Y.I.K.V.F.V.F.K.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12262, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.K.Y.I.K.V.F.V.F.K.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12390, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12517, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{K.K.Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 12526, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{F.Y.C.N.G.K.R.V.C.V.C.R.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13027, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.[X56]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13033, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[X870].A.G.[dF].[dL]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13142, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.[Cha].L}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13229, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.[dF].[dL]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13264, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13275, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.[X803]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13283, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.[X56].[dL]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13316, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{A.R.V.[X172].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13321, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.[dF].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13323, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.[dY].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13325, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{D.R.V.[X172].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13333, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.[X172].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13334, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.[X867].I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13335, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{[Sar].R.V.F.I.H.[dP].F}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13364, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.M.G.F.P.[am]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13365, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.[meF].[X157]}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13432, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.G.G.F.M}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13433, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.G.G.F.M.T}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13434, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.S.G.F.L.T}$$$$", 
+        "description": null
+    }
+},
+{
+    "pk": 13558, 
+    "model": "chembl_core_model.biotherapeutics", 
+    "fields": {
+        "helm_notation": "PEPTIDE1{Y.A.G.F.L}$$$$", 
+        "description": null
+    }
+}
+]

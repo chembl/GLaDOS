@@ -1,0 +1,218 @@
+[
+{
+    "pk": "ACTIVATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Positively effects the normal functioning of the protein e.g., activation of an enzyme or cleaving a clotting protein precursor"
+    }
+},
+{
+    "pk": "AGONIST", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Binds to and activates a receptor, often mimicking the effect of the endogenous ligand"
+    }
+},
+{
+    "pk": "ALLOSTERIC ANTAGONIST", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Binds to a receptor at an allosteric site and prevents activation by a positive allosteric modulator at that site"
+    }
+},
+{
+    "pk": "ANTAGONIST", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Binds to a receptor and prevents activation by an agonist through competing for the binding site"
+    }
+},
+{
+    "pk": "ANTISENSE INHIBITOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Prevents translation of a complementary mRNA sequence through binding to it"
+    }
+},
+{
+    "pk": "BINDING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Binds to a substance such as a cell surface antigen, targetting a drug to that location, but not necessarily affecting the functioning of the substance itself"
+    }
+},
+{
+    "pk": "BLOCKER", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Negatively effects the normal functioning of an ion channel e.g., prevents or reduces transport of ions through the channel"
+    }
+},
+{
+    "pk": "CHELATING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Binds to a substance such as a metal, toxin or metabolite reducing its availability for further interactions"
+    }
+},
+{
+    "pk": "CROSS-LINKING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Induces cross-linking of proteins or nucleic acids"
+    }
+},
+{
+    "pk": "DISRUPTING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Destabilises or disrupts a protein complex, macromolecular assembly, cell membrane etc"
+    }
+},
+{
+    "pk": "HYDROLYTIC ENZYME", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Hydrolyses a substrate through enzymatic reaction"
+    }
+},
+{
+    "pk": "INHIBITOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Negatively effects (inhibits) the normal functioning of the protein e.g., prevention of enzymatic reaction or activation of downstream pathway"
+    }
+},
+{
+    "pk": "INVERSE AGONIST", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Binds to and inactivates a receptor"
+    }
+},
+{
+    "pk": "METHYLATING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Methylates or participates in methylation (e.g., through donation of a methyl group) of a substrate molecule"
+    }
+},
+{
+    "pk": "MODULATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Effects the normal functioning of a protein in some way e.g., mixed agonist/antagonist or unclear whether action is positive or negative"
+    }
+},
+{
+    "pk": "NEGATIVE ALLOSTERIC MODULATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Reduces or prevents the action of the endogenous ligand of a receptor through binding to a site distinct from that ligand (non-competitive inhibition)"
+    }
+},
+{
+    "pk": "NEGATIVE MODULATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Negatively effects the normal functioning of a protein e.g., receptor antagonist, inverse agonist or negative allosteric modulator"
+    }
+},
+{
+    "pk": "OPENER", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Positively effects the normal functioning of an ion channel e.g., facilitates transport of ions through the channel"
+    }
+},
+{
+    "pk": "OTHER", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Other action type, not clearly postively or negatively affecting the normal functioning of a protein e.g., chelation of substances, hydrolysis of substrate"
+    }
+},
+{
+    "pk": "OXIDATIVE ENZYME", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Oxidises a substrate through enzymatic reaction"
+    }
+},
+{
+    "pk": "PARTIAL AGONIST", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Binds to and only partially activates a receptor (relative to the response to a full agonist)"
+    }
+},
+{
+    "pk": "POSITIVE ALLOSTERIC MODULATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Enhances the action of the endogenous ligand of a receptor through binding to a site distinct from that ligand"
+    }
+},
+{
+    "pk": "POSITIVE MODULATOR", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "POSITIVE MODULATOR", 
+        "description": "Positively effects the normal functioning of a protein e.g., receptor agonist, positive allosteric modulator, ion channel activator"
+    }
+},
+{
+    "pk": "PROTEOLYTIC ENZYME", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Hydrolyses a protein substrate through enzymatic reaction"
+    }
+},
+{
+    "pk": "RELEASING AGENT", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "NEGATIVE MODULATOR", 
+        "description": "Reverses the normal functioning of a transporter, causing release of the substrate, rather than uptake"
+    }
+},
+{
+    "pk": "STABILISER", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Increases the conformational stability of a protein or complex"
+    }
+},
+{
+    "pk": "SUBSTRATE", 
+    "model": "chembl_core_model.actiontype", 
+    "fields": {
+        "parent_type": "OTHER", 
+        "description": "Carried by a transporter, possibly competing with the natural substrate for transport"
+    }
+}
+]

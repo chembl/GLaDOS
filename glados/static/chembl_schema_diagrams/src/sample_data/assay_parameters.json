@@ -1,0 +1,902 @@
+[
+{
+    "pk": 1536, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1144891, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1537, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1144891, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1538, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1144891, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1539, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1144891, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1540, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1144891, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1541, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1144891, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1542, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1144891, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1543, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "BUN (Blood Urea Nitrogen)", 
+        "assay": 1144891, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1544, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1144892, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1545, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1144892, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1546, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1144892, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1547, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1144892, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1548, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1144892, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1549, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1144892, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1550, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1144892, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1551, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1144892, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1552, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1144892, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1553, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1144892, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1554, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "CREAT (Creatinine)", 
+        "assay": 1144892, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1555, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1144893, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1556, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1144893, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1557, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1144893, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1558, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1144893, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1559, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1144893, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1560, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1144893, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1561, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1144893, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1562, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1144893, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1563, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1144893, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1564, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1144893, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1565, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "SODIUM (Sodium)", 
+        "assay": 1144893, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1566, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1144894, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1567, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1144894, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1568, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1144894, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1569, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1144894, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1570, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1144894, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1571, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1144894, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1572, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1144894, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1573, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1144894, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1574, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1144894, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1575, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1144894, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1576, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "POTASSIUM (Potassium)", 
+        "assay": 1144894, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1577, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1144895, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1578, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1144895, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1579, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1144895, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1580, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1144895, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1581, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1144895, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1582, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1144895, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1583, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1144895, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1584, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1144895, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1585, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1144895, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1586, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1144895, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1587, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "CHLORIDE (Chloride)", 
+        "assay": 1144895, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1588, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1145567, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1589, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1145567, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1590, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1145567, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1591, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1145567, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1592, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1145567, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1593, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1145567, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1594, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1145567, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1595, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1145567, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1596, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1145567, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1597, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1145567, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1598, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "CALCIUM (Calcium)", 
+        "assay": 1145567, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1599, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1145568, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1600, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1145568, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1601, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1145568, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1602, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1145568, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1603, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1145568, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1604, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1145568, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1605, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1145568, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1606, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1145568, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1607, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1145568, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1608, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1145568, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1609, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "PHOS (Phosphate)", 
+        "assay": 1145568, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1610, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1145569, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1611, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1145569, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1612, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1145569, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1613, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1145569, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1614, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1145569, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1615, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1145569, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1616, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1145569, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1617, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1145569, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1618, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1145569, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1619, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1145569, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1620, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "PROT (Protein)", 
+        "assay": 1145569, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1621, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1145570, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1622, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1145570, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1623, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1145570, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1624, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1145570, 
+        "parameter_type": "DOSE"
+    }
+},
+{
+    "pk": 1625, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "mg/kg", 
+        "assay": 1145570, 
+        "parameter_type": "DOSE_UNIT"
+    }
+},
+{
+    "pk": 1626, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "High", 
+        "assay": 1145570, 
+        "parameter_type": "DOSE_LEVEL"
+    }
+},
+{
+    "pk": 1627, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Single", 
+        "assay": 1145570, 
+        "parameter_type": "REGIMEN"
+    }
+},
+{
+    "pk": 1628, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "6", 
+        "assay": 1145570, 
+        "parameter_type": "TIME"
+    }
+},
+{
+    "pk": 1629, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "hr", 
+        "assay": 1145570, 
+        "parameter_type": "TIME_UNIT"
+    }
+},
+{
+    "pk": 1630, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Gavage", 
+        "assay": 1145570, 
+        "parameter_type": "ROUTE"
+    }
+},
+{
+    "pk": 1631, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "ALB (Albumin)", 
+        "assay": 1145570, 
+        "parameter_type": "ASSAY_TEST"
+    }
+},
+{
+    "pk": 1632, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Open TG-GATES", 
+        "assay": 1145571, 
+        "parameter_type": "SOURCE"
+    }
+},
+{
+    "pk": 1633, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "Biochemistry", 
+        "assay": 1145571, 
+        "parameter_type": "DATASET"
+    }
+},
+{
+    "pk": 1634, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "683/14", 
+        "assay": 1145571, 
+        "parameter_type": "STUDY_ID"
+    }
+},
+{
+    "pk": 1635, 
+    "model": "chembl_core_model.assayparameters", 
+    "fields": {
+        "parameter_value": "30", 
+        "assay": 1145571, 
+        "parameter_type": "DOSE"
+    }
+}
+]

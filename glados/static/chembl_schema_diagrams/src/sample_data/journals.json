@@ -1,0 +1,1402 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-2623 ", 
+        "issn_electronic": "1520-4804", 
+        "publication_start_year": 1963, 
+        "title": "Journal of medicinal chemistry", 
+        "nlm_id": "9716531", 
+        "iso_abbreviation": "J. Med. Chem.", 
+        "doc_journal": "J. Med. Chem.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0163-3864", 
+        "issn_electronic": "1520-6025", 
+        "publication_start_year": 1979, 
+        "title": "Journal of natural products", 
+        "nlm_id": "7906882", 
+        "iso_abbreviation": "J. Nat. Prod.", 
+        "doc_journal": "J. Nat. Prod.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0066-4804", 
+        "issn_electronic": "1098-6596", 
+        "publication_start_year": 1972, 
+        "title": "Antimicrobial agents and chemotherapy", 
+        "nlm_id": " 0315061", 
+        "iso_abbreviation": "Antimicrob. Agents Chemother.", 
+        "doc_journal": "Antimicrob. Agents Chemother.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0968-0896", 
+        "issn_electronic": "1464-3391", 
+        "publication_start_year": 1993, 
+        "title": "Bioorganic & medicinal chemistry", 
+        "nlm_id": "9413298", 
+        "iso_abbreviation": "Bioorg. Med. Chem.", 
+        "doc_journal": "Bioorg. Med. Chem.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0027-8424", 
+        "issn_electronic": "1091-6490", 
+        "publication_start_year": 1915, 
+        "title": "Proceedings of the National Academy of Sciences of the United States of America", 
+        "nlm_id": "7505876", 
+        "iso_abbreviation": "Proc. Natl. Acad. Sci. U.S.A.", 
+        "doc_journal": "Proc. Natl. Acad. Sci. U.S.A.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0036-8075", 
+        "issn_electronic": "1095-9203", 
+        "publication_start_year": 1880, 
+        "title": "Science", 
+        "nlm_id": "0404511", 
+        "iso_abbreviation": "Science", 
+        "doc_journal": "Science", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0264-6021", 
+        "issn_electronic": "1470-8728", 
+        "publication_start_year": 1906, 
+        "title": "The Biochemical journal", 
+        "nlm_id": "2984726R", 
+        "iso_abbreviation": "Biochem. J.", 
+        "doc_journal": "Biochem. J.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1549-1277", 
+        "issn_electronic": "1549-1676", 
+        "publication_start_year": 2004, 
+        "title": "PLoS medicine", 
+        "nlm_id": "101231360", 
+        "iso_abbreviation": "PLoS Med.", 
+        "doc_journal": "PLoS Med.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0090-9556", 
+        "issn_electronic": "1521-009X", 
+        "publication_start_year": 1973, 
+        "title": "Drug metabolism and disposition: the biological fate of chemicals", 
+        "nlm_id": "9421550", 
+        "iso_abbreviation": "Drug Metab. Dispos.", 
+        "doc_journal": "Drug Metab. Dispos.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0021-9258", 
+        "issn_electronic": "1083-351X", 
+        "publication_start_year": 1905, 
+        "title": "The Journal of biological chemistry", 
+        "nlm_id": "2985121R", 
+        "iso_abbreviation": "J. Biol. Chem.", 
+        "doc_journal": "J. Biol. Chem.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0006-2952", 
+        "issn_electronic": "1873-2968", 
+        "publication_start_year": 1958, 
+        "title": "Biochemical pharmacology", 
+        "nlm_id": "0101032", 
+        "iso_abbreviation": "Biochem. Pharmacol.", 
+        "doc_journal": "Biochem. Pharmacol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0960-894X", 
+        "issn_electronic": "1464-3405", 
+        "publication_start_year": 1991, 
+        "title": "Bioorganic & medicinal chemistry letters", 
+        "nlm_id": "9107377", 
+        "iso_abbreviation": "Bioorg. Med. Chem. Lett.", 
+        "doc_journal": "Bioorg. Med. Chem. Lett.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1087-0156", 
+        "issn_electronic": "1546-1696", 
+        "publication_start_year": 1996, 
+        "title": "Nature biotechnology", 
+        "nlm_id": "9604648", 
+        "iso_abbreviation": "Nat. Biotechnol.", 
+        "doc_journal": "Nat. Biotechnol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0223-5234", 
+        "issn_electronic": "1768-3254", 
+        "publication_start_year": 1974, 
+        "title": "European journal of medicinal chemistry", 
+        "nlm_id": "0420510", 
+        "iso_abbreviation": "Eur. J. Med. Chem.", 
+        "doc_journal": "Eur. J. Med. Chem.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0028-0836", 
+        "issn_electronic": "1476-4687", 
+        "publication_start_year": 1869, 
+        "title": "Nature", 
+        "nlm_id": " 0410462", 
+        "iso_abbreviation": "Nature", 
+        "doc_journal": "Nature", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1552-4450", 
+        "issn_electronic": "1552-4469", 
+        "publication_start_year": 2005, 
+        "title": "Nature Chemical Biology", 
+        "nlm_id": "101231976", 
+        "iso_abbreviation": "Nat. Chem. Biol.", 
+        "doc_journal": "Nat. Chem. Biol.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1550-7416", 
+        "issn_electronic": "1550-7416", 
+        "publication_start_year": 2004, 
+        "title": "The AAPS journal", 
+        "nlm_id": "101223209", 
+        "iso_abbreviation": "AAPS J", 
+        "doc_journal": "AAPS J", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0006-4971", 
+        "issn_electronic": "1528-0020", 
+        "publication_start_year": 1946, 
+        "title": "Blood", 
+        "nlm_id": "7603509", 
+        "iso_abbreviation": "Blood", 
+        "doc_journal": "Blood", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0008-5472", 
+        "issn_electronic": "1538-7445", 
+        "publication_start_year": 1941, 
+        "title": "Cancer research", 
+        "nlm_id": "2984705R", 
+        "iso_abbreviation": "Cancer Res.", 
+        "doc_journal": "Cancer Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1074-5521", 
+        "issn_electronic": "1879-1301", 
+        "publication_start_year": 1994, 
+        "title": "Chemistry & Biology", 
+        "nlm_id": "9500160", 
+        "iso_abbreviation": "Chem. Biol.", 
+        "doc_journal": "Chem. Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0014-2999", 
+        "issn_electronic": "1879-0712", 
+        "publication_start_year": 1967, 
+        "title": "European journal of pharmacology", 
+        "nlm_id": "1254354", 
+        "iso_abbreviation": "Eur. J. Pharmacol.", 
+        "doc_journal": "Eur. J. Pharmacol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1093-3263", 
+        "issn_electronic": "1873-4243", 
+        "publication_start_year": 1997, 
+        "title": "Journal of molecular graphics & modelling", 
+        "nlm_id": "9716237", 
+        "iso_abbreviation": "J. Mol. Graph. Model.", 
+        "doc_journal": "J. Mol. Graph. Model.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0165-6147", 
+        "issn_electronic": "1873-3735", 
+        "publication_start_year": 1979, 
+        "title": "Trends in pharmacological sciences", 
+        "nlm_id": "7906158", 
+        "iso_abbreviation": "Trends Pharmacol. Sci.", 
+        "doc_journal": "Trends Pharmacol. Sci.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0887-6924", 
+        "issn_electronic": "1476-5551", 
+        "publication_start_year": 1987, 
+        "title": "Leukemia", 
+        "nlm_id": "8704895", 
+        "iso_abbreviation": "Leukemia", 
+        "doc_journal": "Leukemia", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0007-1188", 
+        "issn_electronic": "1476-5381", 
+        "publication_start_year": 1968, 
+        "title": "British journal of pharmacology", 
+        "nlm_id": "7502536", 
+        "iso_abbreviation": "Br. J. Pharmacol.", 
+        "doc_journal": "Br. J. Pharmacol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0893-228X", 
+        "issn_electronic": "1520-5010", 
+        "publication_start_year": 1988, 
+        "title": "Chemical research in toxicology", 
+        "nlm_id": "8807448", 
+        "iso_abbreviation": "Chem. Res. Toxicol.", 
+        "doc_journal": "Chem. Res. Toxicol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-3549", 
+        "issn_electronic": "1520-6017", 
+        "publication_start_year": 1961, 
+        "title": "Journal of pharmaceutical sciences", 
+        "nlm_id": "2985195R", 
+        "iso_abbreviation": "J Pharm Sci", 
+        "doc_journal": "J Pharm Sci", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1613-4125", 
+        "issn_electronic": "1613-4133", 
+        "publication_start_year": 2004, 
+        "title": "Molecular nutrition  research", 
+        "nlm_id": "101231808", 
+        "iso_abbreviation": "Mol Nutr Food Res", 
+        "doc_journal": "Mol Nutr Food Res", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1543-8384", 
+        "issn_electronic": "1543-8392", 
+        "publication_start_year": 2004, 
+        "title": "Molecular pharmaceutics", 
+        "nlm_id": "101197791", 
+        "iso_abbreviation": "Mol. Pharm.", 
+        "doc_journal": "Mol. Pharm.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1537-6516", 
+        "issn_electronic": "1537-6524", 
+        "publication_start_year": 2002, 
+        "title": "Toxicology mechanisms and methods", 
+        "nlm_id": "101134521", 
+        "iso_abbreviation": "Toxicol. Mech. Methods", 
+        "doc_journal": "Toxicol. Mech. Methods", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0049-8254", 
+        "issn_electronic": "1366-5928", 
+        "publication_start_year": 1971, 
+        "title": "Xenobiotica; the fate of foreign compounds in biological systems", 
+        "nlm_id": "1306665", 
+        "iso_abbreviation": "Xenobiotica", 
+        "doc_journal": "Xenobiotica", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1570-1638", 
+        "issn_electronic": "1875-6220", 
+        "publication_start_year": 2004, 
+        "title": "Current drug discovery technologies", 
+        "nlm_id": "101157212", 
+        "iso_abbreviation": "Curr Drug Discov Technol", 
+        "doc_journal": "Curr Drug Discov Technol", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1549-9596", 
+        "issn_electronic": "1549-960X", 
+        "publication_start_year": 2005, 
+        "title": "Journal of chemical information and modelling", 
+        "nlm_id": "101230060", 
+        "iso_abbreviation": "J Chem Inf Model", 
+        "doc_journal": "J Chem Inf Model", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1948-5875", 
+        "issn_electronic": "1948-5875", 
+        "publication_start_year": 2010, 
+        "title": "ACS medicinal chemistry letters", 
+        "nlm_id": "101521073", 
+        "iso_abbreviation": "ACS Med Chem Lett", 
+        "doc_journal": "ACS Med. Chem. Lett.", 
+        "core_journal_flag": true
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1389-2002", 
+        "issn_electronic": "1875-5453", 
+        "publication_start_year": 2000, 
+        "title": "Current Drug Metabolism", 
+        "nlm_id": "100960533", 
+        "iso_abbreviation": "Curr. Drug Metab.", 
+        "doc_journal": "Curr. Drug Metab.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1474-1776", 
+        "issn_electronic": "1474-1784", 
+        "publication_start_year": 2002, 
+        "title": "Nature reviews. Drug discovery.", 
+        "nlm_id": "101124171", 
+        "iso_abbreviation": "Nat Rev Drug Discov", 
+        "doc_journal": "Nat Rev Drug Discov", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 506, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1554-8929", 
+        "issn_electronic": "1554-8937", 
+        "publication_start_year": 2006, 
+        "title": "ACS chemical biology[electronic resource]", 
+        "nlm_id": "101282906", 
+        "iso_abbreviation": "ACS Chem. Biol.", 
+        "doc_journal": "ACS Chem. Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 507, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0002-9440", 
+        "issn_electronic": "1525-2191", 
+        "publication_start_year": 1925, 
+        "title": "The American journal of pathology.", 
+        "nlm_id": "0370502", 
+        "iso_abbreviation": "Am. J. Pathol.", 
+        "doc_journal": "Am. J. Pathol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 508, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0142-2782", 
+        "issn_electronic": null, 
+        "publication_start_year": 1979, 
+        "title": "Biopharmaceutics &amp; drug disposition.", 
+        "nlm_id": "7911226", 
+        "iso_abbreviation": "Biopharm Drug Dispos", 
+        "doc_journal": "Biopharm. Drug Dispos.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 509, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0144-8463", 
+        "issn_electronic": "1573-4935", 
+        "publication_start_year": 1981, 
+        "title": "Bioscience reports.", 
+        "nlm_id": "8102797", 
+        "iso_abbreviation": "Biosci. Rep.", 
+        "doc_journal": "Biosci. Rep.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 510, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1065-6995", 
+        "issn_electronic": "1095-8355", 
+        "publication_start_year": 1993, 
+        "title": "Cell biology international.", 
+        "nlm_id": "9307129", 
+        "iso_abbreviation": "Cell Biol. Int.", 
+        "doc_journal": "Cell Biol. Int.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 511, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0305-1870", 
+        "issn_electronic": "1440-1681", 
+        "publication_start_year": 1974, 
+        "title": "Clinical and experimental pharmacology &amp; physiology.", 
+        "nlm_id": "0425076", 
+        "iso_abbreviation": "Clin. Exp. Pharmacol. Physiol.", 
+        "doc_journal": "Clin. Exp. Pharmacol. Physiol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 512, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0016-5085", 
+        "issn_electronic": "1528-0012", 
+        "publication_start_year": 1943, 
+        "title": "Gastroenterology.", 
+        "nlm_id": "0374630", 
+        "iso_abbreviation": "Gastroenterology", 
+        "doc_journal": "Gastroenterology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 513, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0378-1119", 
+        "issn_electronic": "1879-0038", 
+        "publication_start_year": 1976, 
+        "title": "Gene.", 
+        "nlm_id": "7706761", 
+        "iso_abbreviation": "Gene", 
+        "doc_journal": "Gene", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 514, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1357-2725", 
+        "issn_electronic": "1878-5875", 
+        "publication_start_year": 1995, 
+        "title": "The international journal of biochemistry &amp; cell biology.", 
+        "nlm_id": "9508482", 
+        "iso_abbreviation": "Int. J. Biochem. Cell Biol.", 
+        "doc_journal": "Int. J. Biochem. Cell Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 515, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0027-8874", 
+        "issn_electronic": "1460-2105", 
+        "publication_start_year": 1940, 
+        "title": "Journal of the National Cancer Institute.", 
+        "nlm_id": "7503089", 
+        "iso_abbreviation": "J. Natl. Cancer Inst.", 
+        "doc_journal": "J. Natl. Cancer Inst.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 516, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-3263", 
+        "issn_electronic": "1520-6904", 
+        "publication_start_year": 1936, 
+        "title": "The Journal of organic chemistry.", 
+        "nlm_id": "2985193", 
+        "iso_abbreviation": "J. Org. Chem.", 
+        "doc_journal": "J. Org. Chem.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 517, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1347-8613", 
+        "issn_electronic": "1347-8648", 
+        "publication_start_year": 2003, 
+        "title": "Journal of pharmacological sciences.", 
+        "nlm_id": "101167001", 
+        "iso_abbreviation": "J. Pharmacol. Sci.", 
+        "doc_journal": "J. Pharmacol. Sci.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 518, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": null, 
+        "publication_start_year": null, 
+        "title": null, 
+        "nlm_id": null, 
+        "iso_abbreviation": null, 
+        "doc_journal": "J. Physiol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 519, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": null, 
+        "publication_start_year": null, 
+        "title": null, 
+        "nlm_id": null, 
+        "iso_abbreviation": null, 
+        "doc_journal": "Jpn. Pharmacol. Ther.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 520, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0379-0355", 
+        "issn_electronic": "2013-0155", 
+        "publication_start_year": 1979, 
+        "title": "Methods and findings in experimental and clinical pharmacology.", 
+        "nlm_id": "7909595", 
+        "iso_abbreviation": "Methods Find Exp Clin Pharmacol", 
+        "doc_journal": "Methods Find. Exp. Clin. Pharmacol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 521, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0899-1987", 
+        "issn_electronic": "1098-2744", 
+        "publication_start_year": 1988, 
+        "title": "Molecular carcinogenesis.", 
+        "nlm_id": "8811105", 
+        "iso_abbreviation": "Mol. Carcinog.", 
+        "doc_journal": "Mol. Carcinog.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 522, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0270-7306", 
+        "issn_electronic": "1098-5549", 
+        "publication_start_year": 1981, 
+        "title": "Molecular and cellular biology.", 
+        "nlm_id": "8109087", 
+        "iso_abbreviation": "Mol. Cell. Biol.", 
+        "doc_journal": "Mol. Cell Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 523, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1879-3185", 
+        "publication_start_year": 1973, 
+        "title": "Toxicology.", 
+        "nlm_id": "0361055", 
+        "iso_abbreviation": "Toxicology", 
+        "doc_journal": "Toxicology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 524, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0742-2091", 
+        "issn_electronic": "1573-6822", 
+        "publication_start_year": 1984, 
+        "title": "Cell biology and toxicology.", 
+        "nlm_id": "8506639", 
+        "iso_abbreviation": "Cell Biol. Toxicol.", 
+        "doc_journal": "Cell Biol. Toxicol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 525, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0009-7322", 
+        "issn_electronic": "1524-4539", 
+        "publication_start_year": 1950, 
+        "title": "Circulation.", 
+        "nlm_id": "0147763", 
+        "iso_abbreviation": "Circulation", 
+        "doc_journal": "Circulation", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 526, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0888-7543", 
+        "issn_electronic": "1089-8646", 
+        "publication_start_year": 1987, 
+        "title": "Genomics.", 
+        "nlm_id": "8800135", 
+        "iso_abbreviation": "Genomics", 
+        "doc_journal": "Genomics", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 527, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0378-5173", 
+        "issn_electronic": "1873-3476", 
+        "publication_start_year": 1978, 
+        "title": "International journal of pharmaceutics.", 
+        "nlm_id": "7804127", 
+        "iso_abbreviation": "Int J Pharm", 
+        "doc_journal": "Int. J. Pharm.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 528, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1945-7197", 
+        "publication_start_year": 1952, 
+        "title": "The Journal of clinical endocrinology and metabolism.", 
+        "nlm_id": "0375362", 
+        "iso_abbreviation": "J. Clin. Endocrinol. Metab.", 
+        "doc_journal": "J. Clin. Endocrinol. Metab.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 529, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0953-8194", 
+        "issn_electronic": "1365-2826", 
+        "publication_start_year": 1989, 
+        "title": "Journal of neuroendocrinology.", 
+        "nlm_id": "8913461", 
+        "iso_abbreviation": "J. Neuroendocrinol.", 
+        "doc_journal": "J. Neuroendocrinol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 530, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0969-8051", 
+        "issn_electronic": "1872-9614", 
+        "publication_start_year": 1993, 
+        "title": "Nuclear medicine and biology.", 
+        "nlm_id": "9304420", 
+        "iso_abbreviation": "Nucl. Med. Biol.", 
+        "doc_journal": "Nucl. Med. Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 531, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1523-7060", 
+        "issn_electronic": "1523-7052", 
+        "publication_start_year": 1999, 
+        "title": "Organic letters.", 
+        "nlm_id": "100890393", 
+        "iso_abbreviation": "Org. Lett.", 
+        "doc_journal": "Org Lett", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 532, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1744-6872", 
+        "issn_electronic": "1744-6880", 
+        "publication_start_year": 2005, 
+        "title": "Pharmacogenetics and genomics.", 
+        "nlm_id": "101231005", 
+        "iso_abbreviation": "Pharmacogenet. Genomics", 
+        "doc_journal": "Pharmacogenet. Genomics", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 533, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0270-4137", 
+        "issn_electronic": "1097-0045", 
+        "publication_start_year": 1980, 
+        "title": "The Prostate.", 
+        "nlm_id": "8101368", 
+        "iso_abbreviation": "Prostate", 
+        "doc_journal": "Prostate", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 534, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0272-8087", 
+        "issn_electronic": "1098-8971", 
+        "publication_start_year": 1981, 
+        "title": "Seminars in liver disease.", 
+        "nlm_id": "8110297", 
+        "iso_abbreviation": "Semin. Liver Dis.", 
+        "doc_journal": "Semin. Liver Dis.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 535, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0065-2571", 
+        "issn_electronic": "1873-2437", 
+        "publication_start_year": 1963, 
+        "title": "Advances in enzyme regulation.", 
+        "nlm_id": "0044263", 
+        "iso_abbreviation": "Adv. Enzyme Regul.", 
+        "doc_journal": "Adv. Enzyme Regul.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 536, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1522-1466", 
+        "publication_start_year": 1997, 
+        "title": "American journal of physiology. Renal physiology.", 
+        "nlm_id": "100901990", 
+        "iso_abbreviation": "Am. J. Physiol. Renal Physiol.", 
+        "doc_journal": "Am. J. Physiol. Renal Physiol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 537, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0003-2697", 
+        "issn_electronic": "1096-0309", 
+        "publication_start_year": 1960, 
+        "title": "Analytical biochemistry.", 
+        "nlm_id": "0370535", 
+        "iso_abbreviation": "Anal. Biochem.", 
+        "doc_journal": "Anal. Biochem.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 538, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0007-0920", 
+        "issn_electronic": "1532-1827", 
+        "publication_start_year": 1947, 
+        "title": "British journal of cancer.", 
+        "nlm_id": "0370635", 
+        "iso_abbreviation": "Br. J. Cancer", 
+        "doc_journal": "Br. J. Cancer", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 539, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1078-0432", 
+        "issn_electronic": null, 
+        "publication_start_year": 1995, 
+        "title": "Clinical cancer research : an official journal of the American Association for", 
+        "nlm_id": "9502500", 
+        "iso_abbreviation": "Clin. Cancer Res.", 
+        "doc_journal": "Clin. Cancer Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 540, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0939-6411", 
+        "issn_electronic": "1873-3441", 
+        "publication_start_year": 1991, 
+        "title": "European journal of pharmaceutics and biopharmaceutics : official journal of", 
+        "nlm_id": "9109778", 
+        "iso_abbreviation": "Eur J Pharm Biopharm", 
+        "doc_journal": "Eur. J. Pharm. Biopharm.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 541, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1386-6346", 
+        "issn_electronic": null, 
+        "publication_start_year": 1997, 
+        "title": "Hepatology research : the official journal of the Japan Society of Hepatology.", 
+        "nlm_id": "9711801", 
+        "iso_abbreviation": "Hepatol. Res.", 
+        "doc_journal": "Hepatol. Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 542, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1559-7016", 
+        "publication_start_year": 1981, 
+        "title": "Journal of cerebral blood flow and metabolism : official journal of the", 
+        "nlm_id": "8112566", 
+        "iso_abbreviation": "J. Cereb. Blood Flow Metab.", 
+        "doc_journal": "J. Cereb. Blood Flow Metab.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 543, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-2275", 
+        "issn_electronic": null, 
+        "publication_start_year": 1959, 
+        "title": "Journal of lipid research.", 
+        "nlm_id": "0376606", 
+        "iso_abbreviation": "J. Lipid Res.", 
+        "doc_journal": "J. Lipid Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 544, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-3573", 
+        "issn_electronic": "2042-7158", 
+        "publication_start_year": 1949, 
+        "title": "The Journal of pharmacy and pharmacology.", 
+        "nlm_id": "0376363", 
+        "iso_abbreviation": "J. Pharm. Pharmacol.", 
+        "doc_journal": "J. Pharm. Pharmacol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 545, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1097-6256", 
+        "issn_electronic": "1546-1726", 
+        "publication_start_year": 1998, 
+        "title": "Nature neuroscience.", 
+        "nlm_id": "9809671", 
+        "iso_abbreviation": "Nat. Neurosci.", 
+        "doc_journal": "Nat. Neurosci.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 546, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": null, 
+        "publication_start_year": 1987, 
+        "title": "Neuropsychopharmacology : official publication of the American College of", 
+        "nlm_id": "8904907", 
+        "iso_abbreviation": "Neuropsychopharmacology", 
+        "doc_journal": "Neuropsychopharmacology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 547, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0965-0407", 
+        "issn_electronic": null, 
+        "publication_start_year": 1992, 
+        "title": "Oncology research.", 
+        "nlm_id": "9208097", 
+        "iso_abbreviation": "Oncol. Res.", 
+        "doc_journal": "Oncol. Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 548, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": null, 
+        "publication_start_year": null, 
+        "title": null, 
+        "nlm_id": null, 
+        "iso_abbreviation": null, 
+        "doc_journal": "PLOS Computational Biology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 549, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1935-2727", 
+        "issn_electronic": "1935-2735", 
+        "publication_start_year": 2007, 
+        "title": "PLoS neglected tropical diseases[electronic resource]", 
+        "nlm_id": "101291488", 
+        "iso_abbreviation": "PLoS Negl Trop Dis", 
+        "doc_journal": "PLoS Negl. Trop. Dis.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 550, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0724-8741", 
+        "issn_electronic": null, 
+        "publication_start_year": 1984, 
+        "title": "Pharmaceutical research.", 
+        "nlm_id": "8406521", 
+        "iso_abbreviation": "Pharm. Res.", 
+        "doc_journal": "Pharm. Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 551, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0193-1857", 
+        "issn_electronic": "1522-1547", 
+        "publication_start_year": 1980, 
+        "title": "American journal of physiology. Gastrointestinal and liver physiology.", 
+        "nlm_id": "100901227", 
+        "iso_abbreviation": "Am. J. Physiol. Gastrointest. Liver Physiol.", 
+        "doc_journal": "Am. J. Physiol. Gastrointest. Liver Physiol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 552, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0003-3022", 
+        "issn_electronic": "1528-1175", 
+        "publication_start_year": 1940, 
+        "title": "Anesthesiology.", 
+        "nlm_id": "1300217", 
+        "iso_abbreviation": "Anesthesiology", 
+        "doc_journal": "Anesthesiology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 553, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1090-2104", 
+        "publication_start_year": 1959, 
+        "title": "Biochemical and biophysical research communications.", 
+        "nlm_id": "0372516", 
+        "iso_abbreviation": "Biochem. Biophys. Res. Commun.", 
+        "doc_journal": "Biochem. Biophys. Res. Commun.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 554, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0006-3002", 
+        "issn_electronic": null, 
+        "publication_start_year": 1947, 
+        "title": "Biochimica et biophysica acta.", 
+        "nlm_id": "0217513", 
+        "iso_abbreviation": "Biochim. Biophys. Acta", 
+        "doc_journal": "Biochim. Biophys. Acta", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 555, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0143-3334", 
+        "issn_electronic": "1460-2180", 
+        "publication_start_year": 1980, 
+        "title": "Carcinogenesis.", 
+        "nlm_id": "8008055", 
+        "iso_abbreviation": "Carcinogenesis", 
+        "doc_journal": "Carcinogenesis", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 556, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1044-9523", 
+        "issn_electronic": null, 
+        "publication_start_year": 1990, 
+        "title": "Cell growth &amp; differentiation : the molecular biology journal of the American", 
+        "nlm_id": "9100024", 
+        "iso_abbreviation": "Cell Growth Differ.", 
+        "doc_journal": "Cell Growth Differ.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 557, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0898-6568", 
+        "issn_electronic": "1873-3913", 
+        "publication_start_year": 1989, 
+        "title": "Cellular signalling.", 
+        "nlm_id": "8904683", 
+        "iso_abbreviation": "Cell. Signal.", 
+        "doc_journal": "Cell Signal", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 558, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1044-5498", 
+        "issn_electronic": "1557-7430", 
+        "publication_start_year": 1990, 
+        "title": "DNA and cell biology.", 
+        "nlm_id": "9004522", 
+        "iso_abbreviation": "DNA Cell Biol.", 
+        "doc_journal": "DNA Cell Biol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 559, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0020-7136", 
+        "issn_electronic": "1097-0215", 
+        "publication_start_year": 1966, 
+        "title": "International journal of cancer. Journal international du cancer.", 
+        "nlm_id": "0042124", 
+        "iso_abbreviation": "Int. J. Cancer", 
+        "doc_journal": "Int. J. Cancer", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 560, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1019-6439", 
+        "issn_electronic": "1791-2423", 
+        "publication_start_year": 1992, 
+        "title": "International journal of oncology.", 
+        "nlm_id": "9306042", 
+        "iso_abbreviation": "Int. J. Oncol.", 
+        "doc_journal": "Int. J. Oncol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 561, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0022-0795", 
+        "issn_electronic": "1479-6805", 
+        "publication_start_year": 1939, 
+        "title": "The Journal of endocrinology.", 
+        "nlm_id": "0375363", 
+        "iso_abbreviation": "J. Endocrinol.", 
+        "doc_journal": "J. Endocrinol.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 562, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0024-3205", 
+        "issn_electronic": "1879-0631", 
+        "publication_start_year": 1973, 
+        "title": "Life sciences.", 
+        "nlm_id": "0375521", 
+        "iso_abbreviation": "Life Sci.", 
+        "doc_journal": "Life Sci.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 563, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "1535-7163", 
+        "issn_electronic": "1538-8514", 
+        "publication_start_year": 2001, 
+        "title": "Molecular cancer therapeutics.", 
+        "nlm_id": "101132535", 
+        "iso_abbreviation": "Mol. cancer ther.", 
+        "doc_journal": "Mol Cancer Ther", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 564, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0931-0509", 
+        "issn_electronic": "1460-2385", 
+        "publication_start_year": 1986, 
+        "title": "Nephrology, dialysis, transplantation : official publication of the European", 
+        "nlm_id": "8706402", 
+        "iso_abbreviation": "Nephrol Dial Transplant", 
+        "doc_journal": "Nephrol. Dial. Transplant", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 565, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0028-3908", 
+        "issn_electronic": "1873-7064", 
+        "publication_start_year": 1970, 
+        "title": "Neuropharmacology.", 
+        "nlm_id": "0236217", 
+        "iso_abbreviation": "Neuropharmacology", 
+        "doc_journal": "Neuropharmacology", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 566, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0304-3940", 
+        "issn_electronic": "1872-7972", 
+        "publication_start_year": 1975, 
+        "title": "Neuroscience letters.", 
+        "nlm_id": "7600130", 
+        "iso_abbreviation": "Neurosci. Lett.", 
+        "doc_journal": "Neurosci. Lett.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 567, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1099-1573", 
+        "publication_start_year": 1987, 
+        "title": "Phytotherapy research : PTR.", 
+        "nlm_id": "8904486", 
+        "iso_abbreviation": "Phytother Res", 
+        "doc_journal": "Phytother. Res.", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 568, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": "0143-4004", 
+        "issn_electronic": "1532-3102", 
+        "publication_start_year": 1980, 
+        "title": "Placenta.", 
+        "nlm_id": "8006349", 
+        "iso_abbreviation": "Placenta", 
+        "doc_journal": "Placenta", 
+        "core_journal_flag": false
+    }
+},
+{
+    "pk": 569, 
+    "model": "chembl_core_model.journals", 
+    "fields": {
+        "issn_print": null, 
+        "issn_electronic": "1096-0333", 
+        "publication_start_year": 1959, 
+        "title": "Toxicology and applied pharmacology.", 
+        "nlm_id": "0416575", 
+        "iso_abbreviation": "Toxicol. Appl. Pharmacol.", 
+        "doc_journal": "Toxicol. Appl. Pharmacol.", 
+        "core_journal_flag": false
+    }
+}
+]

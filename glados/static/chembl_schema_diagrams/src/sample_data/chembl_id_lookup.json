@@ -1,0 +1,902 @@
+[
+{
+    "pk": "CHEMBL1", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 517180, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL10", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 250, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL100", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 12356, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 111185, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL10000", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 7079, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL100000", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "INACTIVE", 
+        "entity_id": 166734, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000000", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551205, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000001", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551206, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000002", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551207, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000003", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551208, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000004", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551209, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000005", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551210, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000006", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551211, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000007", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551212, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000008", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 551213, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000009", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482746, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100001", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 167086, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000010", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482747, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000011", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482748, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000012", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482749, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000013", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482750, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000014", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482751, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000015", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482752, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000016", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482753, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000017", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482754, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000018", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482755, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000019", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482756, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100002", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "INACTIVE", 
+        "entity_id": 166045, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000020", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482757, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000021", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482758, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000022", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482759, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000023", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482760, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000024", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482761, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000025", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482762, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000026", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482763, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000027", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482764, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000028", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482765, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000029", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482766, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100003", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 165745, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000030", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482767, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000031", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482768, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000032", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482769, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000033", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482770, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000034", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482771, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000035", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482772, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000036", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482773, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000037", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482774, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000038", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482775, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000039", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482776, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100004", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 165746, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000040", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482777, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000041", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482778, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000042", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482779, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000043", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482780, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000044", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482781, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000045", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482782, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000046", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482783, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000047", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482784, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000048", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482785, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000049", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482786, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100005", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 166740, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000050", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482787, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000051", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 482788, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000052", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483251, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000053", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483252, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000054", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483253, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000055", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483254, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000056", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483255, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000057", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483256, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000058", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483257, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000059", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483258, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100006", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 165594, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000060", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483259, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000061", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483260, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000062", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483261, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000063", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483262, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000064", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483263, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000065", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483264, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000066", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483265, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000067", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483266, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000068", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483267, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000069", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483268, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100007", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 166900, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000070", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483269, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000071", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 483270, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000072", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481720, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000073", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481721, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000074", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481722, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000075", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481723, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000076", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481724, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000077", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481064, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000078", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481065, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000079", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481066, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL100008", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 166852, 
+        "entity_type": "COMPOUND"
+    }
+},
+{
+    "pk": "CHEMBL1000080", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481067, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000081", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481068, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000082", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481069, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000083", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481070, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000084", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481071, 
+        "entity_type": "ASSAY"
+    }
+},
+{
+    "pk": "CHEMBL1000085", 
+    "model": "chembl_core_model.chemblidlookup", 
+    "fields": {
+        "status": "ACTIVE", 
+        "entity_id": 481072, 
+        "entity_type": "ASSAY"
+    }
+}
+]

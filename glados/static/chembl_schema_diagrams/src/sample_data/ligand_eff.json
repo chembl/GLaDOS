@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 31864, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.26", 
+        "bei": "14.06", 
+        "lle": "1.59", 
+        "sei": "5.56"
+    }
+},
+{
+    "pk": 31866, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "9.69", 
+        "lle": "0.04", 
+        "sei": "4.23"
+    }
+},
+{
+    "pk": 31868, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.20", 
+        "bei": "9.94", 
+        "lle": "1.41", 
+        "sei": "5.08"
+    }
+},
+{
+    "pk": 31870, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.20", 
+        "bei": "10.18", 
+        "lle": "2.06", 
+        "sei": "4.49"
+    }
+},
+{
+    "pk": 31872, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.25", 
+        "bei": "13.05", 
+        "lle": "2.84", 
+        "sei": "6.35"
+    }
+},
+{
+    "pk": 31889, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.59", 
+        "bei": "17.52", 
+        "lle": "4.85", 
+        "sei": "5.52"
+    }
+},
+{
+    "pk": 31890, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.81", 
+        "bei": "24.00", 
+        "lle": "6.78", 
+        "sei": "7.57"
+    }
+},
+{
+    "pk": 31891, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.74", 
+        "bei": "21.96", 
+        "lle": "6.18", 
+        "sei": "6.92"
+    }
+},
+{
+    "pk": 31892, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.83", 
+        "bei": "24.49", 
+        "lle": "6.93", 
+        "sei": "7.72"
+    }
+},
+{
+    "pk": 31893, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.56", 
+        "bei": "24.52", 
+        "lle": "8.93", 
+        "sei": "4.05"
+    }
+},
+{
+    "pk": 31894, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.59", 
+        "bei": "25.94", 
+        "lle": "9.41", 
+        "sei": "4.28"
+    }
+},
+{
+    "pk": 31895, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.51", 
+        "bei": "22.12", 
+        "lle": "8.13", 
+        "sei": "3.65"
+    }
+},
+{
+    "pk": 31896, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.59", 
+        "bei": "25.94", 
+        "lle": "9.41", 
+        "sei": "4.28"
+    }
+},
+{
+    "pk": 31909, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.38", 
+        "bei": "20.33", 
+        "lle": "2.26", 
+        "sei": "4.53"
+    }
+},
+{
+    "pk": 31964, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.43", 
+        "bei": "23.22", 
+        "lle": "4.48", 
+        "sei": "13.99"
+    }
+},
+{
+    "pk": 31965, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.43", 
+        "bei": "23.15", 
+        "lle": "4.46", 
+        "sei": "13.95"
+    }
+},
+{
+    "pk": 31991, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.28", 
+        "bei": "15.45", 
+        "lle": "1.87", 
+        "sei": "6.53"
+    }
+},
+{
+    "pk": 32022, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.56", 
+        "bei": "28.10", 
+        "lle": "4.36", 
+        "sei": "9.63"
+    }
+},
+{
+    "pk": 32023, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.34", 
+        "bei": "17.73", 
+        "lle": "1.22", 
+        "sei": "7.90"
+    }
+},
+{
+    "pk": 32025, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "23.09", 
+        "lle": "2.58", 
+        "sei": "13.22"
+    }
+},
+{
+    "pk": 32027, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.41", 
+        "bei": "22.53", 
+        "lle": "2.54", 
+        "sei": "12.34"
+    }
+},
+{
+    "pk": 32034, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.17", 
+        "bei": "9.19", 
+        "lle": "8.04", 
+        "sei": "3.31"
+    }
+},
+{
+    "pk": 32036, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.15", 
+        "bei": "7.78", 
+        "lle": "6.91", 
+        "sei": "2.80"
+    }
+},
+{
+    "pk": 32038, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.16", 
+        "bei": "8.69", 
+        "lle": "7.64", 
+        "sei": "3.13"
+    }
+},
+{
+    "pk": 32049, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.30", 
+        "bei": "15.67", 
+        "lle": "5.41", 
+        "sei": "7.35"
+    }
+},
+{
+    "pk": 32060, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.26", 
+        "bei": "14.00", 
+        "lle": "2.26", 
+        "sei": "8.04"
+    }
+},
+{
+    "pk": 32083, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.50", 
+        "bei": "26.41", 
+        "lle": "5.48", 
+        "sei": "12.49"
+    }
+},
+{
+    "pk": 32088, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "23.23", 
+        "lle": "3.08", 
+        "sei": "18.35"
+    }
+},
+{
+    "pk": 32090, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.52", 
+        "bei": "26.11", 
+        "lle": "3.86", 
+        "sei": "9.46"
+    }
+},
+{
+    "pk": 32111, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.26", 
+        "bei": "14.63", 
+        "lle": "1.07", 
+        "sei": "15.53"
+    }
+},
+{
+    "pk": 32112, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.28", 
+        "bei": "15.34", 
+        "lle": "1.31", 
+        "sei": "16.28"
+    }
+},
+{
+    "pk": 32113, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.40", 
+        "bei": "22.48", 
+        "lle": "3.76", 
+        "sei": "23.87"
+    }
+},
+{
+    "pk": 32117, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.24", 
+        "bei": "12.68", 
+        "lle": "1.49", 
+        "sei": "6.05"
+    }
+},
+{
+    "pk": 32120, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.28", 
+        "bei": "14.71", 
+        "lle": "2.70", 
+        "sei": "5.49"
+    }
+},
+{
+    "pk": 32121, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.31", 
+        "bei": "16.34", 
+        "lle": "3.51", 
+        "sei": "6.10"
+    }
+},
+{
+    "pk": 32123, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.17", 
+        "bei": "8.90", 
+        "lle": "-0.29", 
+        "sei": "4.29"
+    }
+},
+{
+    "pk": 32124, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "9.48", 
+        "lle": "-4.32", 
+        "sei": "5.81"
+    }
+},
+{
+    "pk": 32125, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.14", 
+        "bei": "7.06", 
+        "lle": "-6.49", 
+        "sei": "4.32"
+    }
+},
+{
+    "pk": 32127, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "9.10", 
+        "lle": "2.29", 
+        "sei": "3.99"
+    }
+},
+{
+    "pk": 32130, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.23", 
+        "bei": "11.77", 
+        "lle": "7.42", 
+        "sei": "3.22"
+    }
+},
+{
+    "pk": 32131, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "9.44", 
+        "lle": "5.97", 
+        "sei": "2.59"
+    }
+},
+{
+    "pk": 32132, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "9.35", 
+        "lle": "5.91", 
+        "sei": "2.56"
+    }
+},
+{
+    "pk": 32133, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.22", 
+        "bei": "11.57", 
+        "lle": "7.30", 
+        "sei": "3.17"
+    }
+},
+{
+    "pk": 32134, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.44", 
+        "bei": "24.05", 
+        "lle": "3.66", 
+        "sei": "27.15"
+    }
+},
+{
+    "pk": 32135, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.58", 
+        "bei": "32.00", 
+        "lle": "5.89", 
+        "sei": "36.13"
+    }
+},
+{
+    "pk": 32143, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.21", 
+        "bei": "10.92", 
+        "lle": "-0.16", 
+        "sei": "5.83"
+    }
+},
+{
+    "pk": 32153, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.72", 
+        "bei": "34.66", 
+        "lle": "4.62", 
+        "sei": "31.26"
+    }
+},
+{
+    "pk": 32154, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.64", 
+        "bei": "31.07", 
+        "lle": "3.86", 
+        "sei": "28.02"
+    }
+},
+{
+    "pk": 32156, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.53", 
+        "bei": "26.37", 
+        "lle": "2.92", 
+        "sei": "34.59"
+    }
+},
+{
+    "pk": 32157, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.39", 
+        "bei": "19.24", 
+        "lle": "0.72", 
+        "sei": "25.24"
+    }
+},
+{
+    "pk": 32169, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.30", 
+        "bei": "15.97", 
+        "lle": "1.18", 
+        "sei": "9.23"
+    }
+},
+{
+    "pk": 32170, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.28", 
+        "bei": "13.96", 
+        "lle": "6.12", 
+        "sei": "5.41"
+    }
+},
+{
+    "pk": 32178, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.22", 
+        "bei": "10.60", 
+        "lle": "7.00", 
+        "sei": "2.46"
+    }
+},
+{
+    "pk": 32179, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.16", 
+        "bei": "8.69", 
+        "lle": "2.97", 
+        "sei": "2.94"
+    }
+},
+{
+    "pk": 32187, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.26", 
+        "bei": "14.35", 
+        "lle": "2.77", 
+        "sei": "8.53"
+    }
+},
+{
+    "pk": 32188, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.34", 
+        "bei": "18.40", 
+        "lle": "4.78", 
+        "sei": "10.93"
+    }
+},
+{
+    "pk": 32189, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.36", 
+        "bei": "19.80", 
+        "lle": "5.48", 
+        "sei": "11.77"
+    }
+},
+{
+    "pk": 32192, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.37", 
+        "bei": "19.35", 
+        "lle": "6.10", 
+        "sei": "6.17"
+    }
+},
+{
+    "pk": 32193, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.37", 
+        "bei": "19.35", 
+        "lle": "6.10", 
+        "sei": "6.17"
+    }
+},
+{
+    "pk": 32195, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.18", 
+        "bei": "8.25", 
+        "lle": "5.40", 
+        "sei": "1.74"
+    }
+},
+{
+    "pk": 32198, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.32", 
+        "bei": "17.16", 
+        "lle": "5.78", 
+        "sei": "7.45"
+    }
+},
+{
+    "pk": 32200, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.22", 
+        "bei": "12.13", 
+        "lle": "3.14", 
+        "sei": "5.26"
+    }
+},
+{
+    "pk": 32205, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.25", 
+        "bei": "13.20", 
+        "lle": "4.12", 
+        "sei": "4.86"
+    }
+},
+{
+    "pk": 32208, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "20.03", 
+        "lle": "5.17", 
+        "sei": "8.27"
+    }
+},
+{
+    "pk": 32209, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "20.03", 
+        "lle": "5.17", 
+        "sei": "8.27"
+    }
+},
+{
+    "pk": 32210, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.34", 
+        "bei": "16.78", 
+        "lle": "3.31", 
+        "sei": "11.75"
+    }
+},
+{
+    "pk": 32211, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.34", 
+        "bei": "16.77", 
+        "lle": "3.31", 
+        "sei": "11.75"
+    }
+},
+{
+    "pk": 32212, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "20.38", 
+        "lle": "4.83", 
+        "sei": "9.21"
+    }
+},
+{
+    "pk": 32213, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.42", 
+        "bei": "20.37", 
+        "lle": "4.83", 
+        "sei": "9.21"
+    }
+},
+{
+    "pk": 32223, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.36", 
+        "bei": "18.49", 
+        "lle": "1.15", 
+        "sei": "17.43"
+    }
+},
+{
+    "pk": 32224, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.35", 
+        "bei": "18.10", 
+        "lle": "0.98", 
+        "sei": "17.06"
+    }
+},
+{
+    "pk": 32225, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.35", 
+        "bei": "17.97", 
+        "lle": "0.92", 
+        "sei": "16.93"
+    }
+},
+{
+    "pk": 32226, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.22", 
+        "bei": "11.59", 
+        "lle": "-1.88", 
+        "sei": "10.92"
+    }
+},
+{
+    "pk": 32227, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.23", 
+        "bei": "11.96", 
+        "lle": "-1.71", 
+        "sei": "11.27"
+    }
+},
+{
+    "pk": 32243, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.29", 
+        "bei": "15.28", 
+        "lle": "3.22", 
+        "sei": "6.59"
+    }
+},
+{
+    "pk": 32244, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.29", 
+        "bei": "15.10", 
+        "lle": "3.12", 
+        "sei": "6.51"
+    }
+},
+{
+    "pk": 32253, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.17", 
+        "bei": "8.94", 
+        "lle": "1.94", 
+        "sei": "3.39"
+    }
+},
+{
+    "pk": 32254, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.37", 
+        "bei": "19.63", 
+        "lle": "4.20", 
+        "sei": "7.94"
+    }
+},
+{
+    "pk": 32260, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.37", 
+        "bei": "19.25", 
+        "lle": "2.92", 
+        "sei": "8.93"
+    }
+},
+{
+    "pk": 32262, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.24", 
+        "bei": "12.46", 
+        "lle": "0.31", 
+        "sei": "5.78"
+    }
+},
+{
+    "pk": 32267, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.27", 
+        "bei": "14.02", 
+        "lle": "3.05", 
+        "sei": "6.03"
+    }
+},
+{
+    "pk": 32276, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.44", 
+        "bei": "24.06", 
+        "lle": "4.68", 
+        "sei": "11.53"
+    }
+},
+{
+    "pk": 32277, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.30", 
+        "bei": "15.44", 
+        "lle": "2.76", 
+        "sei": "10.09"
+    }
+},
+{
+    "pk": 32291, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.22", 
+        "bei": "9.65", 
+        "lle": "2.33", 
+        "sei": "2.85"
+    }
+},
+{
+    "pk": 32294, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.21", 
+        "bei": "11.67", 
+        "lle": "-1.83", 
+        "sei": "9.07"
+    }
+},
+{
+    "pk": 32295, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.32", 
+        "bei": "17.34", 
+        "lle": "6.28", 
+        "sei": "6.29"
+    }
+},
+{
+    "pk": 32296, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.20", 
+        "bei": "10.87", 
+        "lle": "2.96", 
+        "sei": "3.94"
+    }
+},
+{
+    "pk": 32297, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.28", 
+        "bei": "15.11", 
+        "lle": "5.13", 
+        "sei": "5.48"
+    }
+},
+{
+    "pk": 32299, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.33", 
+        "bei": "18.02", 
+        "lle": "4.80", 
+        "sei": "8.36"
+    }
+},
+{
+    "pk": 32300, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.23", 
+        "bei": "12.56", 
+        "lle": "2.16", 
+        "sei": "5.83"
+    }
+},
+{
+    "pk": 32301, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.30", 
+        "bei": "16.15", 
+        "lle": "3.90", 
+        "sei": "7.50"
+    }
+},
+{
+    "pk": 32302, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.31", 
+        "bei": "17.08", 
+        "lle": "4.12", 
+        "sei": "8.15"
+    }
+},
+{
+    "pk": 32303, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.21", 
+        "bei": "11.35", 
+        "lle": "1.28", 
+        "sei": "5.42"
+    }
+},
+{
+    "pk": 32304, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.29", 
+        "bei": "15.88", 
+        "lle": "3.53", 
+        "sei": "7.58"
+    }
+},
+{
+    "pk": 32315, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.39", 
+        "bei": "19.86", 
+        "lle": "2.33", 
+        "sei": "20.42"
+    }
+},
+{
+    "pk": 32316, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.32", 
+        "bei": "16.53", 
+        "lle": "1.33", 
+        "sei": "17.00"
+    }
+},
+{
+    "pk": 32317, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.35", 
+        "bei": "17.91", 
+        "lle": "1.75", 
+        "sei": "18.41"
+    }
+},
+{
+    "pk": 32318, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.29", 
+        "bei": "14.65", 
+        "lle": "0.77", 
+        "sei": "15.06"
+    }
+},
+{
+    "pk": 32320, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.31", 
+        "bei": "16.16", 
+        "lle": "0.00", 
+        "sei": "20.48"
+    }
+},
+{
+    "pk": 32321, 
+    "model": "chembl_core_model.ligandeff", 
+    "fields": {
+        "le": "0.30", 
+        "bei": "15.63", 
+        "lle": "-0.19", 
+        "sei": "19.82"
+    }
+}
+]

@@ -1,0 +1,1702 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Maltase-glucoamylase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2074", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Sulfonylurea receptor 2", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1971", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Phosphodiesterase 5A", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1827", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Voltage-gated T-type calcium channel alpha-1H subunit", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1859", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Nicotinic acetylcholine receptor alpha subunit", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1884", 
+        "updated_on": null, 
+        "organism": "Ascaris suum", 
+        "downgraded": false, 
+        "tax_id": 6253
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dihydrofolate reductase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL202", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dihydrofolate reductase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1809", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Tyrosine-protein kinase ABL", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1862", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Epidermal growth factor receptor erbB1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL203", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA-directed RNA polymerase beta chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1852", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Thrombin", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL204", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Plasminogen", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1801", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Beta-lactamase TEM", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2065", 
+        "updated_on": null, 
+        "organism": "Escherichia coli", 
+        "downgraded": false, 
+        "tax_id": 562
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Adenosine deaminase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1910", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Carbonic anhydrase II", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL205", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Antithrombin-III", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1950", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Troponin C", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2066", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Penicillin-binding protein 1A", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1813", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Estrogen receptor alpha", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL206", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Neuraminidase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2051", 
+        "updated_on": null, 
+        "organism": "Influenza A virus (A/Puerto Rico/8/1934(H1N1))", 
+        "downgraded": false, 
+        "tax_id": 211044
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Influenza virus A matrix protein M2", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2052", 
+        "updated_on": null, 
+        "organism": "Influenza A virus (A/Udorn/307/1972(H3N2))", 
+        "downgraded": false, 
+        "tax_id": 381517
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Plasma kallikrein", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2000", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "HMG-CoA reductase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL402", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Glucocorticoid receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2034", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Peptidoglycan synthetase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1799", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": true, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Human herpesvirus 1 DNA polymerase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1872", 
+        "updated_on": null, 
+        "organism": "Herpes simplex virus (type 1 / strain 17)", 
+        "downgraded": false, 
+        "tax_id": 10299
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Thymidylate synthase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1952", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Sodium/potassium-transporting ATPase alpha-1 chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1807", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Aldehyde dehydrogenase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1935", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Integrin beta-3", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL207", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cytochrome P450 11A1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2033", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Tubulin beta-2 chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1848", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Fibronectin receptor beta", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1905", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Insulin receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1981", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Progesterone receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL208", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA gyrase subunit B", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1826", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Epoxide hydrolase 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1968", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Tyrosine 3-hydroxylase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1969", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Thyroid peroxidase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1839", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Alcohol dehydrogenase alpha chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1970", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Trypsin I", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL209", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Beta-2 adrenergic receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL210", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Ornithine decarboxylase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1797", 
+        "updated_on": null, 
+        "organism": "Trypanosoma brucei brucei", 
+        "downgraded": true, 
+        "tax_id": 5702
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "D-alanylalanine synthetase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1956", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Penicillin-binding protein 2", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1840", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Muscarinic acetylcholine receptor M2", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL211", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Mineralocorticoid receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1994", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Integrin alpha-IIb", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL212", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Beta-1 adrenergic receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL213", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Serotonin 1a (5-HT1a) receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL214", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Alpha-2a adrenergic receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1867", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA gyrase subunit A", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1858", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": false, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA polymerase alpha subunit", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1828", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Arachidonate 5-lipoxygenase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL215", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Androgen Receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1871", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Retinoic acid receptor alpha", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2055", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cytochrome P450 51", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1780", 
+        "updated_on": null, 
+        "organism": "Candida albicans (strain SC5314 / ATCC MYA-2876) (Yeast)", 
+        "downgraded": false, 
+        "tax_id": 237561
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Thyroid hormone receptor alpha", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1860", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Growth hormone receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1976", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Muscarinic acetylcholine receptor M1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL216", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA topoisomerase I", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1781", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DNA topoisomerase II alpha", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1806", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Vitamin D receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1977", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cytochrome P450 19A1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1978", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dihydropteroate synthase type I", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1979", 
+        "updated_on": null, 
+        "organism": "Escherichia coli", 
+        "downgraded": true, 
+        "tax_id": 562
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Adenine nucleotide translocator 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1879", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Inosine-5'-monophosphate dehydrogenase 2", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2002", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Angiotensin-converting enzyme", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1808", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dihydrofolate reductase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1939", 
+        "updated_on": null, 
+        "organism": "Plasmodium falciparum K1", 
+        "downgraded": false, 
+        "tax_id": 5839
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Farnesyl diphosphate synthase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1782", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dopamine D2 receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL217", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Tyrosinase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1973", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "GABA receptor alpha-1 subunit", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1962", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Urease beta subunit", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1891", 
+        "updated_on": null, 
+        "organism": "Helicobacter pylori (strain ATCC 700392 / 26695) (Campylobacterpylori)", 
+        "downgraded": true, 
+        "tax_id": 85962
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cytochrome P450 11B1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1908", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Pancreatic lipase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1812", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Thyroid stimulating hormone receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1963", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Steroid 5-alpha-reductase 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1787", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "FK506-binding protein 1A", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1902", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Myeloid cell surface antigen CD33 ", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1842", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Potassium-transporting ATPase alpha chain 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1802", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "DOPA decarboxylase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1843", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Inosine-5'-monophosphate dehydrogenase 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1822", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Tubulin beta chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1948", 
+        "updated_on": null, 
+        "organism": "Leishmania mexicana", 
+        "downgraded": true, 
+        "tax_id": 5665
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Monoamine oxidase A", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1951", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cannabinoid CB1 receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL218", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dopamine D1 receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2056", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Ryanodine receptor 1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1846", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Dopamine D4 receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL219", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Catechol O-methyltransferase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2023", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Acetylcholinesterase", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL220", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cytochrome P450 7A1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1851", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": true, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Luteinizing hormone/Choriogonadotropin receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1854", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cyclooxygenase-1", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL221", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Cyclophilin B", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2075", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Ribonucleoside-diphosphate reductase M1 chain", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1830", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Follicle stimulating hormone receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL2024", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Norepinephrine transporter", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL222", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Penicillin-binding protein 4", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1779", 
+        "updated_on": null, 
+        "organism": "Escherichia coli K-12", 
+        "downgraded": true, 
+        "tax_id": 83333
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.targetdictionary", 
+    "fields": {
+        "species_group_flag": false, 
+        "updated_by": null, 
+        "target_type": "SINGLE PROTEIN", 
+        "pref_name": "Histamine H2 receptor", 
+        "target_parent_type": "PROTEIN", 
+        "insert_date": null, 
+        "chembl": "CHEMBL1941", 
+        "updated_on": null, 
+        "organism": "Homo sapiens", 
+        "downgraded": false, 
+        "tax_id": 9606
+    }
+}
+]

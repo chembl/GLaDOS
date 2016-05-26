@@ -1,0 +1,902 @@
+[
+{
+    "pk": 33666, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Enzyme", 
+        "protein_class": 1, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33667, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Enzymes", 
+        "protein_class": 1, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33668, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Biocatalysts", 
+        "protein_class": 1, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33670, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Biocatalysts", 
+        "protein_class": 1, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33671, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Enzymes", 
+        "protein_class": 1, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33672, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:c525bb08-30c7-4e6d-ad69-80c569766d12", 
+        "protein_class": 1, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33673, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "MESH:D004798", 
+        "protein_class": 1, 
+        "syn_type": "MESH_XREF"
+    }
+},
+{
+    "pk": 33674, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Oxidoreductases", 
+        "protein_class": 10, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33675, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Dehydrogenases", 
+        "protein_class": 10, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33676, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Reductases", 
+        "protein_class": 10, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33677, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Dehydrogenase", 
+        "protein_class": 10, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33678, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Reductase", 
+        "protein_class": 10, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33680, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Dehydrogenases", 
+        "protein_class": 10, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33681, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Reductases", 
+        "protein_class": 10, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33682, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Reductase", 
+        "protein_class": 10, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33683, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Dehydrogenase", 
+        "protein_class": 10, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33684, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Oxidoreductases", 
+        "protein_class": 10, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33685, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:3ea331f8-c2e7-47d0-a8dd-ab178d221de7", 
+        "protein_class": 10, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33686, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "MESH:D010088", 
+        "protein_class": 10, 
+        "syn_type": "MESH_XREF"
+    }
+},
+{
+    "pk": 33687, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "cAMP-specific 3',5'-cyclic phosphodiesterase 4A", 
+        "protein_class": 100, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33688, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "phosphodiesterase 4A, cAMP-specific", 
+        "protein_class": 100, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33691, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:b56d88b0-350e-4245-becd-567ed0613e46", 
+        "protein_class": 100, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33692, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ion Channels", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33693, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Ionic", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33694, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ion Channel", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33695, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Membrane Channel", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33696, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Ion", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33697, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Membrane", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33698, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ionic Channels", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33699, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Membrane Channels", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33700, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Ion", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33701, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ionic Channel", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33702, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Ionic", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33703, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Membrane", 
+        "protein_class": 1005, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33705, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ion Channel", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33706, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Ionic", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33707, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Membrane Channel", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33708, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Ion", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33709, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Membrane", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33710, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ionic Channels", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33711, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Ion", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33712, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Membrane Channels", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33713, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, Ionic", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33714, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ionic Channel", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33715, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channels, Membrane", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33716, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Ion Channels", 
+        "protein_class": 1005, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33717, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:e629cc34-0b37-4e71-92e9-6119128f3630", 
+        "protein_class": 1005, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33718, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "MESH:D007473", 
+        "protein_class": 1005, 
+        "syn_type": "MESH_XREF"
+    }
+},
+{
+    "pk": 33719, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "cAMP-specific 3',5'-cyclic phosphodiesterase 4B", 
+        "protein_class": 101, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33720, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "phosphodiesterase 4B, cAMP-specific", 
+        "protein_class": 101, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33723, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:ee7b82fb-83dd-4c12-90b5-06c5fec89ab9", 
+        "protein_class": 101, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33724, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol 1,4,5-Trisphosphate Receptors", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33725, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Triphosphate Receptor, Inositol", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33726, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "1,4,5-INTP Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33727, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, Inositol Triphosphate", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33728, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INOSITOL TRISPHOSPHATE 01 04 05 RECEPTORS", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33729, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol-1,4,5-Triphosphate Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33730, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INSP3 Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33731, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, IP3", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33732, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, INSP3", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33734, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol 1,4,5-Triphosphate Receptors", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33735, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol Triphosphate Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33736, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INOSITOL TRIPHOSPHATE 01 04 05 RECEPTORS", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33737, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, Inositol-1,4,5-triphosphate", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33738, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "IP3 Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33739, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Triphosphate Receptor, Inositol", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33740, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "1,4,5-INTP Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33741, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, Inositol Triphosphate", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33742, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INOSITOL TRISPHOSPHATE 01 04 05 RECEPTORS", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33743, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol-1,4,5-Triphosphate Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33744, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INSP3 Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33745, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, IP3", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33746, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, INSP3", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33747, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol 1,4,5-Trisphosphate Receptors", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33748, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol 1,4,5-Triphosphate Receptors", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33749, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inositol Triphosphate Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33750, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INOSITOL TRIPHOSPHATE 01 04 05 RECEPTORS", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33751, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "IP3 Receptor", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33752, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Receptor, Inositol-1,4,5-triphosphate", 
+        "protein_class": 1014, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33753, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "ConceptWiki:26703450-0b21-404b-84d6-db861de5a6b1", 
+        "protein_class": 1014, 
+        "syn_type": "CW_XREF"
+    }
+},
+{
+    "pk": 33754, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "MESH:D053496", 
+        "protein_class": 1014, 
+        "syn_type": "MESH_XREF"
+    }
+},
+{
+    "pk": 33755, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Potassium Channels, Inwardly Rectifying", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33756, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inwardly Rectifying Potassium Channel", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33757, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "K CHANNEL INWARDLY RECTIFYING", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33758, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "IRK1 Channel", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33759, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, IRK1", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33760, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inward Rectifier Potassium Channel", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33761, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INWARDLY RECTIFYING K CHANNELS", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33762, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "K+ Channels, Inwardly Rectifying", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33763, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "K CHANNELS INWARDLY RECTIFYING", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33764, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inward Rectifier Potassium Channels", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33765, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Potassium Channel, Inwardly Rectifying", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33766, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "INWARDLY RECTIFYING K CHANNEL", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33768, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inward Rectifier K+ Channels", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33769, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inward Rectifier K+ Channel", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33770, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inwardly Rectifying Postassium Channels", 
+        "protein_class": 1015, 
+        "syn_type": "CONCEPT_WIKI"
+    }
+},
+{
+    "pk": 33771, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Inwardly Rectifying Potassium Channel", 
+        "protein_class": 1015, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33772, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "K CHANNEL INWARDLY RECTIFYING", 
+        "protein_class": 1015, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33773, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "IRK1 Channel", 
+        "protein_class": 1015, 
+        "syn_type": "UMLS"
+    }
+},
+{
+    "pk": 33774, 
+    "model": "chembl_core_model.proteinclasssynonyms", 
+    "fields": {
+        "protein_class_synonym": "Channel, IRK1", 
+        "protein_class": 1015, 
+        "syn_type": "UMLS"
+    }
+}
+]

@@ -1,0 +1,802 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 567624, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 567624, 
+        "alert": 1099
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469525, 
+        "alert": 63
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469450, 
+        "alert": 63
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469525, 
+        "alert": 1041
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469450, 
+        "alert": 1041
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469525, 
+        "alert": 1129
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 469450, 
+        "alert": 1129
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461175, 
+        "alert": 153
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461175, 
+        "alert": 962
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461175, 
+        "alert": 1037
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461175, 
+        "alert": 1220
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 110
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 113
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 980
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 1069
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 1072
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445980, 
+        "alert": 1147
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 460502, 
+        "alert": 133
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 460502, 
+        "alert": 1064
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 460502, 
+        "alert": 1123
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 490562, 
+        "alert": 56
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 490562, 
+        "alert": 238
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 490562, 
+        "alert": 1040
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 490562, 
+        "alert": 1079
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 490562, 
+        "alert": 1248
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 137
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 922
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 979
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 1028
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501410, 
+        "alert": 1040
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 93
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 192
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1029
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1040
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1078
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1144
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1211
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 501605, 
+        "alert": 1230
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 48
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 77
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 106
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 110
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 125
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 127
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 275
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 345
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 959
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 961
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1029
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1069
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1098
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1156
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1190
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1214
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1232
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 461095, 
+        "alert": 1235
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 32
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 63
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 234
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 245
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1029
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1039
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1040
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1041
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1136
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1229
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 505290, 
+        "alert": 1231
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445728, 
+        "alert": 243
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445728, 
+        "alert": 1028
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 445728, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 243
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 1028
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 1029
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 1147
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 1158
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 513316, 
+        "alert": 1159
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 497039, 
+        "alert": 1251
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 37
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 157
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 878
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 947
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1027
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1029
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1030
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1093
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1143
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 474715, 
+        "alert": 1240
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 63
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 66
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 964
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 1040
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 1041
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 1064
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 491996, 
+        "alert": 1199
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.compoundstructuralalerts", 
+    "fields": {
+        "molecule": 482569, 
+        "alert": 56
+    }
+}
+]

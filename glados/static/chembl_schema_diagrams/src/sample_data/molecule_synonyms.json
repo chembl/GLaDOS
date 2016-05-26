@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "CP-12299", 
+        "molecule": 97, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 152
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Prazosin", 
+        "molecule": 97, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Zomepirac sodium", 
+        "molecule": 111, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Habitrol", 
+        "molecule": 115, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Nicoderm CQ", 
+        "molecule": 115, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Nicotine", 
+        "molecule": 115, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Nicotine", 
+        "molecule": 115, 
+        "syn_type": "USAN", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Nicotrol", 
+        "molecule": 115, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Prostep", 
+        "molecule": 115, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Floxin", 
+        "molecule": 146, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Floxin otic", 
+        "molecule": 146, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "HOE-280", 
+        "molecule": 146, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 272
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ocuflox", 
+        "molecule": 146, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ofloxacin", 
+        "molecule": 146, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Nalidixic acid", 
+        "molecule": 147, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "TALAMPANEL", 
+        "molecule": 92577, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Neggram", 
+        "molecule": 147, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "WIN-18320", 
+        "molecule": 147, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 640
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Indo-lemmon", 
+        "molecule": 173, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Indocin", 
+        "molecule": 173, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Indocin SR", 
+        "molecule": 173, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Indomethacin", 
+        "molecule": 173, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "CP-45899", 
+        "molecule": 194, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 152
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Sulbactam", 
+        "molecule": 194, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "NEOPLANOCIN A", 
+        "molecule": 3998, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "SC-58272", 
+        "molecule": 198, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 523
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Piperacillin", 
+        "molecule": 33055, 
+        "syn_type": "USAN", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Pipracil", 
+        "molecule": 33055, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "NPA", 
+        "molecule": 3998, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "CL-298741", 
+        "molecule": 207, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 142
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Tazobactam", 
+        "molecule": 207, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "TULIPALINE A", 
+        "molecule": 4120, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "CI-934", 
+        "molecule": 223, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 137
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Merafloxacin", 
+        "molecule": 223, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "PD-117558", 
+        "molecule": 224, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 470
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Amifloxacin", 
+        "molecule": 237, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "BAY-Q-3939", 
+        "molecule": 241, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 76
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ciloxan", 
+        "molecule": 241, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Cipro", 
+        "molecule": 241, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "8-OH-DPAT", 
+        "molecule": 4149, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "8-HYDROXY-DPAT", 
+        "molecule": 4149, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ciprofloxacin", 
+        "molecule": 241, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "GYKI-52466", 
+        "molecule": 4164, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Chibroxin", 
+        "molecule": 246, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Noroxin", 
+        "molecule": 246, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "SB-203580", 
+        "molecule": 250, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 522
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "CGS-19281A", 
+        "molecule": 453, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 130
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-48-1220", 
+        "molecule": 463, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "BMS-182874", 
+        "molecule": 490, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 94
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Amphetamine", 
+        "molecule": 543, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "NAN-190", 
+        "molecule": 4181, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "GYKI-53655", 
+        "molecule": 4245, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "(+)-BUTACLAMOL", 
+        "molecule": 4259, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "OLEIC ACID", 
+        "molecule": 4361, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Tenamfetamine", 
+        "molecule": 592, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 103, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Lysergide", 
+        "molecule": 601, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 104, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Imipramine", 
+        "molecule": 605, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 106, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Janimine", 
+        "molecule": 605, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 107, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Pramine", 
+        "molecule": 605, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 108, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Presamine", 
+        "molecule": 605, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 109, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Tofranil", 
+        "molecule": 605, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 110, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Tofranil-PM", 
+        "molecule": 605, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 115, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Indapamide", 
+        "molecule": 619, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 118, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Lozol", 
+        "molecule": 619, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 119, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-15-1310", 
+        "molecule": 634, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 123, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Flumazenil", 
+        "molecule": 635, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 127, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-15-1788", 
+        "molecule": 635, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 128, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Romazicon", 
+        "molecule": 635, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 131, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "GR-92132X", 
+        "molecule": 666, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 253
+    }
+},
+{
+    "pk": 132, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Prelay", 
+        "molecule": 666, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 133, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Rezulin", 
+        "molecule": 666, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 138, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "WIN-54954", 
+        "molecule": 669, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 640
+    }
+},
+{
+    "pk": 143, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Casodex", 
+        "molecule": 102911, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 144, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "(Z)-OCTADEC-9-ENOIC ACID", 
+        "molecule": 4361, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 145, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diastat", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 146, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diastat acudial", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 151, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diazepam", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 154, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diazepam intensol", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 155, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Dizac", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 156, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Q-pam", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 157, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Valium", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 158, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Valrelease", 
+        "molecule": 721, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 160, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-15-4513", 
+        "molecule": 729, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 162, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-14-7527", 
+        "molecule": 760, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 163, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Enisoprost", 
+        "molecule": 775, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 164, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "LINOLENIC ACID", 
+        "molecule": 4370, 
+        "syn_type": "TRADE_NAME_OLD", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 165, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Lopressidone", 
+        "molecule": 789, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 168, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Metoprolol", 
+        "molecule": 789, 
+        "syn_type": "FDA_ALTERNATIVE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 171, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Toprol-XL", 
+        "molecule": 789, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 172, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Zidapamide", 
+        "molecule": 793, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 173, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Dimecamine", 
+        "molecule": 839, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 178, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diethylstilbestrol", 
+        "molecule": 860, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 179, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Diethylstilbestrol", 
+        "molecule": 860, 
+        "syn_type": "USAN", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 188, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Stilbestrol", 
+        "molecule": 860, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 189, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Stilbetin", 
+        "molecule": 860, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 194, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Ro-14-7437", 
+        "molecule": 868, 
+        "syn_type": "RESEARCH_CODE", 
+        "res_stem": 517
+    }
+},
+{
+    "pk": 199, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Carbachol", 
+        "molecule": 892, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 200, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Carbachol", 
+        "molecule": 892, 
+        "syn_type": "USAN", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 202, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Carbacholine chloride", 
+        "molecule": 892, 
+        "syn_type": "OTHER", 
+        "res_stem": null
+    }
+},
+{
+    "pk": 204, 
+    "model": "chembl_core_model.moleculesynonyms", 
+    "fields": {
+        "synonyms": "Carbastat", 
+        "molecule": 892, 
+        "syn_type": "TRADE_NAME", 
+        "res_stem": null
+    }
+}
+]

@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10030
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9593
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Bacteria", 
+        "l2": "Gram-Negative", 
+        "l3": "Acinetobacter", 
+        "tax_id": 470
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Fungi", 
+        "l2": "Saccharomycetes", 
+        "l3": null, 
+        "tax_id": 5475
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5660
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 5691
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9606
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Cryptosporidium", 
+        "tax_id": 237895
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Cryptosporidium", 
+        "tax_id": 5807
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 5800
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 5801
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 51314
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 5804
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 51315
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Eimeria", 
+        "tax_id": 5802
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5821
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5823
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5827
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5833
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 36329
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 186763
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5839
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 54757
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 5861
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 31274
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Plasmodium", 
+        "tax_id": 73239
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Other", 
+        "tax_id": 5875
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Apicomplexa", 
+        "l3": "Other", 
+        "tax_id": 5811
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10047
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 42414
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 39107
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10045
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10046
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10090
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10095
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10114
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10112
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 9995
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10036
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 69158
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10116
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 35658
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10026
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10029
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 10141
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Rodentia", 
+        "tax_id": 36483
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9527
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9479
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9521
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9545
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9598
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9557
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9480
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9515
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 100937
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9534
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9541
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9554
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Primates", 
+        "tax_id": 9544
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9378
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9913
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9685
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9825
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9940
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9796
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9615
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9669
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9986
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9823
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Mammalia", 
+        "l3": "Other", 
+        "tax_id": 9793
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Other", 
+        "tax_id": 5656
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5667
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5659
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5661
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5671
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5664
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5665
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5679
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 28847
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Leishmania", 
+        "tax_id": 5666
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 5690
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 5702
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 31285
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 31286
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 5693
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Kinetoplastida", 
+        "l3": "Trypanosoma", 
+        "tax_id": 5694
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3630
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3564
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 40922
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3702
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3818
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3704
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 4499
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 161934
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3716
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3823
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 4071
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3649
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 4058
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.organismclass", 
+    "fields": {
+        "l1": "Eukaryotes", 
+        "l2": "Viridiplantae", 
+        "l3": null, 
+        "tax_id": 3078
+    }
+}
+]

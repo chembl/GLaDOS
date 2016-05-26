@@ -1,0 +1,44 @@
+[
+{
+    "pk": "A", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "ADME"
+    }
+},
+{
+    "pk": "B", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "Binding"
+    }
+},
+{
+    "pk": "F", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "Functional"
+    }
+},
+{
+    "pk": "P", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "Physicochemical"
+    }
+},
+{
+    "pk": "T", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "Toxicity"
+    }
+},
+{
+    "pk": "U", 
+    "model": "chembl_core_model.assaytype", 
+    "fields": {
+        "assay_desc": "Unassigned"
+    }
+}
+]

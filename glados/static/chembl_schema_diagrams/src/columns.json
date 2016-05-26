@@ -1,0 +1,248 @@
+{
+	"activity":
+	[
+		{ "data": "activity_comment" },
+        { "data": "activity_id" },
+        { "data": "assay_chembl_id" },
+        { "data": "assay_description" },
+        { "data": "assay_type" },
+        { "data": "bao_endpoint" },
+        { "data": "bao_format" },
+        { "data": "canonical_smiles" },
+        { "data": "data_validity_comment" },
+        { "data": "document_chembl_id" },
+        { "data": "document_journal" },
+        { "data": "document_year" },
+        { "data": "molecule_chembl_id" },
+        { "data": "pchembl_value" },
+        { "data": "potential_duplicate" },
+        { "data": "published_relation" },
+        { "data": "published_type" },
+        { "data": "published_units" },
+        { "data": "published_value" },
+        { "data": "qudt_units" },
+        { "data": "record_id" },
+        { "data": "standard_flag" },
+        { "data": "standard_relation" },
+        { "data": "standard_type" },
+        { "data": "standard_units" },
+        { "data": "standard_value" },
+        { "data": "target_chembl_id" },
+        { "data": "target_organism" },
+        { "data": "target_pref_name" },
+        { "data": "uo_units" }
+	],
+
+    "assay":
+    [
+        { "data": "assay_category" },
+        { "data": "assay_cell_type" },
+        { "data": "assay_chembl_id" },
+        { "data": "assay_organism" },
+        { "data": "assay_strain" },
+        { "data": "assay_subcellular_fraction" },
+        { "data": "assay_tax_id" },
+        { "data": "assay_test_type" },
+        { "data": "assay_tissue" },
+        { "data": "assay_type" },
+        { "data": "assay_type_description" },
+        { "data": "bao_format" },
+        { "data": "cell_chembl_id" },
+        { "data": "confidence_description" },
+        { "data": "confidence_score" },
+        { "data": "description" },
+        { "data": "document_chembl_id" },
+        { "data": "relationship_description" },
+        { "data": "relationship_type" },
+        { "data": "src_assay_id" },
+        { "data": "src_id" },
+        { "data": "target_chembl_id" }
+    ],
+
+    "atc":
+    [
+        { "data": "level1" },
+        { "data": "level1_description" },
+        { "data": "level2" },
+        { "data": "level2_description" },
+        { "data": "level3" },
+        { "data": "level3_description" },
+        { "data": "level4" },
+        { "data": "level4_description" },
+        { "data": "level5" },
+        { "data": "who_id" },
+        { "data": "who_name" }
+    ],
+
+    "binding_site":
+    [
+        { "data": "site_id" },
+        { "data": "site_name" }
+    ],
+
+    "biotherapeutic":
+    [
+        { "data": "description" },
+        { "data": "helm_notation" },
+        { "data": "molecule_chembl_id" }
+    ],
+
+    "cell_line":
+    [
+        { "data": "cell_chembl_id" },
+        { "data": "cell_description" },
+        { "data": "cell_id" },
+        { "data": "cell_name" },
+        { "data": "cell_source_organism" },
+        { "data": "cell_source_tax_id" },
+        { "data": "cell_source_tissue" },
+        { "data": "cellosaurus_id" },
+        { "data": "clo_id" },
+        { "data": "efo_id" }
+    ],
+
+    "chembl_id_lookup":
+    [
+        { "data": "chembl_id" },
+        { "data": "entity_type" },
+        { "data": "resource_url" },
+        { "data": "status" }
+    ],
+
+    "document":
+    [
+        { "data": "authors" },
+        { "data": "doc_type" },
+        { "data": "document_chembl_id" },
+        { "data": "doi" },
+        { "data": "first_page" },
+        { "data": "issue" },
+        { "data": "journal" },
+        { "data": "last_page" },
+        { "data": "pubmed_id" },
+        { "data": "title" },
+        { "data": "volume" },
+        { "data": "year" }
+    ],
+
+    "mechanism":
+    [
+        { "data": "action_type" },
+        { "data": "binding_site_comment" },
+        { "data": "direct_interaction" },
+        { "data": "disease_efficacy" },
+        { "data": "mec_id" },
+        { "data": "mechanism_comment" },
+        { "data": "mechanism_of_action" },
+        { "data": "molecular_mechanism" },
+        { "data": "molecule_chembl_id" },
+        { "data": "record_id" },
+        { "data": "selectivity_comment" },
+        { "data": "site_id" },
+        { "data": "target_chembl_id" }
+    ],
+
+    "molecule":
+    [
+
+        { "data": "availability_type" },
+        { "data": "biotherapeutic" },
+        { "data": "black_box_warning" },
+        { "data": "chebi_par_id" },
+        { "data": "chirality" },
+        { "data": "dosed_ingredient" },
+        { "data": "first_approval" },
+        { "data": "first_in_class" },
+        { "data": "helm_notation" },
+        { "data": "indication_class" },
+        { "data": "inorganic_flag" },
+        { "data": "max_phase" },
+        { "data": "molecule_chembl_id" },
+        { "data": "molecule_hierarchy.molecule_chembl_id" },
+        { "data": "molecule_hierarchy.parent_chembl_id" },
+        { "data": "molecule_properties.acd_logd" },
+        { "data": "molecule_properties.acd_logp" },
+        { "data": "molecule_properties.acd_most_apka" },
+        { "data": "molecule_properties.acd_most_bpka" },
+        { "data": "molecule_properties.alogp" },
+        { "data": "molecule_properties.aromatic_rings" },
+        { "data": "molecule_properties.full_molformula" },
+        { "data": "molecule_properties.full_mwt" },
+        { "data": "molecule_properties.hba" },
+        { "data": "molecule_properties.hbd" },
+        { "data": "molecule_properties.heavy_atoms" },
+        { "data": "molecule_properties.med_chem_friendly" },
+        { "data": "molecule_properties.molecular_species" },
+        { "data": "molecule_properties.mw_freebase" },
+        { "data": "molecule_properties.mw_monoisotopic" },
+        { "data": "molecule_properties.num_alerts" },
+        { "data": "molecule_properties.num_ro5_violations" },
+        { "data": "molecule_properties.psa" },
+        { "data": "molecule_properties.qed_weighted" },
+        { "data": "molecule_properties.ro3_pass" },
+        { "data": "molecule_properties.rtb" },
+        { "data": "molecule_structures.canonical_smiles" },
+        { "data": "molecule_structures.standard_inchi" },
+        { "data": "molecule_structures.standard_inchi_key" },
+        { "data": "molecule_type" },
+        { "data": "natural_product" },
+        { "data": "oral" },
+        { "data": "parenteral" },
+        { "data": "polymer_flag" },
+        { "data": "pref_name" },
+        { "data": "prodrug" },
+        { "data": "structure_type" },
+        { "data": "therapeutic_flag" },
+        { "data": "topical" },
+        { "data": "usan_stem" },
+        { "data": "usan_stem_definition" },
+        { "data": "usan_substem" },
+        { "data": "usan_year" }
+    ],
+
+    "molecule_form":
+    [
+        { "data": "molecule_chembl_id" },
+        { "data": "parent" }
+    ],
+
+    "protein_class":
+    [
+        { "data": "l1" },
+        { "data": "l2" },
+        { "data": "l3" },
+        { "data": "l4" },
+        { "data": "l5" },
+        { "data": "l6" },
+        { "data": "l7" },
+        { "data": "l8" },
+        { "data": "protein_class_id" }
+    ],
+
+    "target":
+    [
+        { "data": "organism" },
+        { "data": "pref_name" },
+        { "data": "species_group_flag" },
+        { "data": "target_chembl_id" },
+        { "data": "target_type" }
+    ],
+
+    "target_component":
+    [
+        { "data": "accession" },
+        { "data": "component_id" },
+        { "data": "component_type" },
+        { "data": "description" },
+        { "data": "organism" },
+        { "data": "sequence" },
+        { "data": "tax_id" }
+    ],
+
+	"source": 
+		[
+        	{ "data": "src_description" },
+        	{ "data": "src_id" },
+        	{ "data": "src_short_name" }
+    	]
+}

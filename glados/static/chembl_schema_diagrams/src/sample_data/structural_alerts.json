@@ -1,0 +1,902 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[Br,Cl,I][CX4;CH,CH2]", 
+        "alert_name": "R1 Reactive alkyl halides"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[S,C](=[O,S])[F,Br,Cl,I]", 
+        "alert_name": "R2 Acid halides"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O=CN=[N+]=[N-]", 
+        "alert_name": "R3 Carbazides"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "COS(=O)O[C,c]", 
+        "alert_name": "R4 Sulphate esters"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "COS(=O)(=O)[C,c]", 
+        "alert_name": "R5 Sulphonates"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)OC(=O)", 
+        "alert_name": "R6 Acid anhydrides"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "OO", 
+        "alert_name": "R7 Peroxides"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)Oc1c(F)c(F)c(F)c(F)c1(F)", 
+        "alert_name": "R8 Pentafluorophenyl esters"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)Oc1ccc(N(=O)~[OX1])cc1", 
+        "alert_name": "R9 Paranitrophenyl esters"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)Onnn", 
+        "alert_name": "R10 esters of HOBT"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N=C=[S,O]", 
+        "alert_name": "R11 Isocyanates & Isothiocyanates"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "OS(=O)(=O)C(F)(F)F", 
+        "alert_name": "R12 Triflates"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "P(=S)(S)S", 
+        "alert_name": "R13 lawesson's reagent and derivatives"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "NP(=O)(N)N", 
+        "alert_name": "R14 phosphoramides"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "cN=[N+]=[N-]", 
+        "alert_name": "R15 Aromatic azides"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)C[N+,n+]", 
+        "alert_name": "R16 beta carbonyl quaternary Nitrogen"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[N;R0][N;R0]C(=O)", 
+        "alert_name": "R17 acylhydrazide"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[C+,Cl+,I+,P+,S+]", 
+        "alert_name": "R18 Quaternary C, Cl, I, P or S"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C=P", 
+        "alert_name": "R19 Phosphoranes"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[Cl]C([C&R0])=N", 
+        "alert_name": "R20 Chloramidines"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[N&D2](=O)", 
+        "alert_name": "R21 Nitroso"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[P,S][Cl,Br,F,I]", 
+        "alert_name": "R22 P/S Halides"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N=C=N", 
+        "alert_name": "R23 Carbodiimide"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[N+]#[C-]", 
+        "alert_name": "R24 Isonitrile"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C(=O)N(C(=O))OC(=O)", 
+        "alert_name": "R25 Triacyloximes"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N#CC[OH]", 
+        "alert_name": "R26 Cyanohydrins"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N#CC(=O)", 
+        "alert_name": "R27 Acyl cyanides"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "S(=O)(=O)C#N", 
+        "alert_name": "R28 Sulfonyl cyanides"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "P(OCC)(OCC)(=O)C#N", 
+        "alert_name": "R29 Cyanophosphonates"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[N;R0]=[N;R0]C#N", 
+        "alert_name": "R30 Azocyanamides"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[N;R0]=[N;R0]CC=O", 
+        "alert_name": "R31 Azoalkanals"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0]", 
+        "alert_name": "I1 Aliphatic methylene chains 7 or more long"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH].[C,S,P](=O)[OH]", 
+        "alert_name": "I2 Compounds with 4 or more acidic groups"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[O;R1][C;R1][C;R1][O;R1][C;R1][C;R1][O;R1]", 
+        "alert_name": "I3 Crown ethers"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "SS", 
+        "alert_name": "I4 Disulphides"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[SH]", 
+        "alert_name": "I5 Thiols"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C1[O,S,N]C1", 
+        "alert_name": "I6 Epoxides, Thioepoxides, Aziridines"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "c([OH])c([OH])c([OH])", 
+        "alert_name": "I7 2,4,5 trihydroxyphenyl"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "c([OH])c([OH])cc([OH])", 
+        "alert_name": "I8 2,3,4 trihydroxyphenyl"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N=NC(=S)N", 
+        "alert_name": "I9 Hydrazothiourea"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "SC#N", 
+        "alert_name": "I10 Thiocyanate"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "cC[N+]", 
+        "alert_name": "I11 Benzylic quaternary Nitrogen"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C[O,S;R0][C;R0](=S)", 
+        "alert_name": "I12 Thioesters"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N[CH2]C#N", 
+        "alert_name": "I13 Cyanamides"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C1(=O)OCC1", 
+        "alert_name": "I14 Four membered lactones"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "P(=O)([OH])OP(=O)[OH]", 
+        "alert_name": "I15 Di and Triphosphates"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "N1CCC1=O", 
+        "alert_name": "I16 Betalactams"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O=C1[#6]~[#6]C(=O)[#6]~[#6]1", 
+        "alert_name": "N1 Quinones"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C=CC=CC=CC=C", 
+        "alert_name": "N2 Polyenes"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O1CCCCC1OC2CCC3CCCCC3C2", 
+        "alert_name": "N3 Saponin derivatives"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O=C1NCC2CCCCC21", 
+        "alert_name": "N4 Cytochalasin derivatives"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O=C1CCCC(N1)=O", 
+        "alert_name": "N5 Cycloheximide derivatives"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "O1CCCCC1C2CCCO2", 
+        "alert_name": "N6 Monensin derivatives"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "[OH]c1cc([OH])cc2=[O+]C(=C([OH])Cc21)c3cc([OH])c([OH])cc3", 
+        "alert_name": "N7 Cyanidin derivatives"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 1, 
+        "smarts": "C12OCCC(O1)CC2", 
+        "alert_name": "N8 Squalestatin derivatives"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C(=O)O[C,H1].C(=O)O[C,H1].C(=O)O[C,H1]", 
+        "alert_name": "> 2 ester groups"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "n1c([F,Cl,Br,I])cccc1", 
+        "alert_name": "2-halo pyridine"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C(=O)[Cl,Br,I,F]", 
+        "alert_name": "acid halide"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C=[C!r]O", 
+        "alert_name": "acyclic C=C-O"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "N#CC(=O)", 
+        "alert_name": "acyl cyanide"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C(=O)N[NH2]", 
+        "alert_name": "acyl hydrazine"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CH1](=O)", 
+        "alert_name": "aldehyde"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[R0;D2][R0;D2][R0;D2][R0;D2]", 
+        "alert_name": "Aliphatic long chain"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CX4][Cl,Br,I]", 
+        "alert_name": "alkyl halide"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1nnnn1C=O", 
+        "alert_name": "amidotetrazole"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1cc([NH2])ccc1", 
+        "alert_name": "aniline"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CH2R2]1N[CH2R2][CH2R2][CH2R2][CH2R2][CH2R2]1", 
+        "alert_name": "azepane"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "N=[N+]=[N-]", 
+        "alert_name": "Azido group"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "N#N", 
+        "alert_name": "Azo group"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CH2R2]1N[CH2R2][CH2R2][CH2R2][CH2R2][CH2R2][CH2R2]1", 
+        "alert_name": "azocane"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[cR2]1[cR2][cR2]([Nv3X3,Nv4X4])[cR2][cR2][cR2]1[cR2]2[cR2][cR2][cR2]([Nv3X3,Nv4X4])[cR2][cR2]2", 
+        "alert_name": "benzidine"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[C,c](=O)[CX4,CR0X3,O][C,c](=O)", 
+        "alert_name": "beta-keto/anhydride"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C12C(NC(N1)=O)CSC2", 
+        "alert_name": "biotin analogue"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[C+,c+,C-,c-]", 
+        "alert_name": "Carbocation/anion"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1c([OH])c([OH,NH2,NH])ccc1", 
+        "alert_name": "catechol"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[O+,o+,S+,s+]", 
+        "alert_name": "charged oxygen or sulfur atoms"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C1(=[O,N])C=CC(=[O,N])C=C1", 
+        "alert_name": "chinone"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C1(=[O,N])C(=[O,N])C=CC=C1", 
+        "alert_name": "chinone"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C=[C!r]C#N", 
+        "alert_name": "conjugated nitrile group"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[OR2,NR2]@[CR2]@[CR2]@[OR2,NR2]@[CR2]@[CR2]@[OR2,NR2]", 
+        "alert_name": "crown ether"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1ccc2c(c1)ccc(=O)o2", 
+        "alert_name": "cumarine"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "N[CH2]C#N", 
+        "alert_name": "cyanamide"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[N,O,S]C#N", 
+        "alert_name": "cyanate/aminonitrile/thiocyanate"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "N#CC[OH]", 
+        "alert_name": "cyanohydrins"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CR2]1[CR2][CR2][CR2][CR2][CR2][CR2]1", 
+        "alert_name": "cycloheptane"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CR2]1[CR2][CR2]cc[CR2][CR2]1", 
+        "alert_name": "cycloheptane"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CR2]1[CR2][CR2][CR2][CR2][CR2][CR2][CR2]1", 
+        "alert_name": "cyclooctane"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CR2]1[CR2][CR2]cc[CR2][CR2][CR2]1", 
+        "alert_name": "cyclooctane"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[cR2]1[cR2]c([N+0X3R0,nX3R0])c([N+0X3R0,nX3R0])[cR2][cR2]1", 
+        "alert_name": "diaminobenzene"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[cR2]1[cR2]c([N+0X3R0,nX3R0])[cR2]c([N+0X3R0,nX3R0])[cR2]1", 
+        "alert_name": "diaminobenzene"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[cR2]1[cR2]c([N+0X3R0,nX3R0])[cR2][cR2]c1([N+0X3R0,nX3R0])", 
+        "alert_name": "diaminobenzene"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[N!R]=[N!R]", 
+        "alert_name": "diazo group"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[C,c](=O)[C,c](=O)", 
+        "alert_name": "diketo group"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "SS", 
+        "alert_name": "disulphide"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[CX2R0][NX3R0]", 
+        "alert_name": "enamine"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C(=O)Onnn", 
+        "alert_name": "ester of HOBT"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "C1(=O)OCC1", 
+        "alert_name": "four member lactones"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1cc([Cl,Br,I,F])cc([Cl,Br,I,F])c1[Cl,Br,I,F]", 
+        "alert_name": "halogenated ring"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "c1ccc([Cl,Br,I,F])c([Cl,Br,I,F])c1[Cl,Br,I,F]", 
+        "alert_name": "halogenated ring"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.structuralalerts", 
+    "fields": {
+        "alert_set": 2, 
+        "smarts": "[Hg,Fe,As,Sb,Zn,Se,se,Te,B,Si]", 
+        "alert_name": "heavy metal"
+    }
+}
+]

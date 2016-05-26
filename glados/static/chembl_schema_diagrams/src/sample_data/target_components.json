@@ -1,0 +1,1102 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3090, 
+        "target": 11004, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1038, 
+        "target": 11008, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 894, 
+        "target": 11025, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1166, 
+        "target": 11028, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1888, 
+        "target": 11037, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 540, 
+        "target": 11040, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1294, 
+        "target": 11043, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2159, 
+        "target": 11056, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 545, 
+        "target": 11064, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 546, 
+        "target": 11066, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 568, 
+        "target": 11099, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2873, 
+        "target": 11117, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3509, 
+        "target": 11118, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1659, 
+        "target": 11120, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1896, 
+        "target": 11125, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2441, 
+        "target": 11161, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3244, 
+        "target": 11165, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2455, 
+        "target": 11179, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 813, 
+        "target": 11191, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2319, 
+        "target": 11201, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1910, 
+        "target": 11214, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2560, 
+        "target": 11229, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 5022, 
+        "target": 11231, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1847, 
+        "target": 11243, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2876, 
+        "target": 11251, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 363, 
+        "target": 11261, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2877, 
+        "target": 11264, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1139, 
+        "target": 11270, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1197, 
+        "target": 11277, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 586, 
+        "target": 11297, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1584, 
+        "target": 11299, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 587, 
+        "target": 11308, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 883, 
+        "target": 11316, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2196, 
+        "target": 11335, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 4956, 
+        "target": 11337, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1979, 
+        "target": 11363, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2197, 
+        "target": 11365, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 483, 
+        "target": 11367, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1172, 
+        "target": 11400, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1907, 
+        "target": 11409, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 976, 
+        "target": 11422, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2500, 
+        "target": 11431, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 906, 
+        "target": 11452, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1611, 
+        "target": 11454, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2549, 
+        "target": 11461, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 4850, 
+        "target": 11463, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 41, 
+        "target": 11464, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 50, 
+        "target": 11468, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2550, 
+        "target": 11470, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1685, 
+        "target": 11476, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1240, 
+        "target": 11491, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1505, 
+        "target": 11512, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2370, 
+        "target": 11540, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2379, 
+        "target": 11548, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 4792, 
+        "target": 11584, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 4975, 
+        "target": 11594, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1518, 
+        "target": 11597, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2368, 
+        "target": 11600, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2382, 
+        "target": 11604, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1618, 
+        "target": 11658, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2374, 
+        "target": 11659, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 651, 
+        "target": 11661, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1375, 
+        "target": 11677, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1198, 
+        "target": 11680, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2243, 
+        "target": 11684, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2221, 
+        "target": 11689, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3301, 
+        "target": 11709, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2652, 
+        "target": 11717, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1433, 
+        "target": 11723, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1013, 
+        "target": 11769, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1274, 
+        "target": 11770, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2491, 
+        "target": 11781, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2050, 
+        "target": 11793, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1426, 
+        "target": 11802, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1027, 
+        "target": 11805, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3118, 
+        "target": 11810, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1547, 
+        "target": 11835, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2375, 
+        "target": 11867, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1722, 
+        "target": 11884, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2711, 
+        "target": 11886, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1782, 
+        "target": 11890, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1723, 
+        "target": 11912, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 720, 
+        "target": 11922, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1716, 
+        "target": 11930, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 661, 
+        "target": 11971, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 611, 
+        "target": 11972, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 63, 
+        "target": 11974, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 612, 
+        "target": 11979, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1379, 
+        "target": 11987, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 2311, 
+        "target": 12000, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1933, 
+        "target": 12001, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1107, 
+        "target": 12016, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 752, 
+        "target": 12020, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1074, 
+        "target": 12029, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1333, 
+        "target": 12030, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1075, 
+        "target": 12040, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1922, 
+        "target": 12050, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1580, 
+        "target": 12075, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 3142, 
+        "target": 12077, 
+        "relationship": "SINGLE PROTEIN"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.targetcomponents", 
+    "fields": {
+        "homologue": 0, 
+        "stoichiometry": 1, 
+        "component": 1581, 
+        "target": 12079, 
+        "relationship": "SINGLE PROTEIN"
+    }
+}
+]

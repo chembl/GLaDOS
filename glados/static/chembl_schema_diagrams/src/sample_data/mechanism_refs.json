@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 2, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/18336310", 
+        "mechanism": 13, 
+        "ref_id": "18336310"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=8e162b6d-8fa6-45f6-80d8-5132d94c1207", 
+        "mechanism": 13, 
+        "ref_id": "setid=8e162b6d-8fa6-45f6-80d8-5132d94c1207"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/1460006", 
+        "mechanism": 14, 
+        "ref_id": "1460006"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/10713865", 
+        "mechanism": 15, 
+        "ref_id": "10713865"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/18336310", 
+        "mechanism": 15, 
+        "ref_id": "18336310"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/18336310", 
+        "mechanism": 16, 
+        "ref_id": "18336310"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/10713865", 
+        "mechanism": 17, 
+        "ref_id": "10713865"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/18336310", 
+        "mechanism": 17, 
+        "ref_id": "18336310"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/18336310", 
+        "mechanism": 18, 
+        "ref_id": "18336310"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=8e162b6d-8fa6-45f6-80d8-5132d94c1207", 
+        "mechanism": 18, 
+        "ref_id": "setid=8e162b6d-8fa6-45f6-80d8-5132d94c1207"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/20855748", 
+        "mechanism": 19, 
+        "ref_id": "20855748"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=b426b6bf-f07e-4580-97ae-dfca1ddf5b8f#nlm34090-1", 
+        "mechanism": 19, 
+        "ref_id": "setid=b426b6bf-f07e-4580-97ae-dfca1ddf5b8f"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 20, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/704660", 
+        "mechanism": 20, 
+        "ref_id": "704660"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Tridihexethyl_chloride", 
+        "mechanism": 20, 
+        "ref_id": "Tridihexethyl_chloride"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 21, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5e29f133-270c-4e5a-8493-e038c163a891", 
+        "mechanism": 21, 
+        "ref_id": "setid=5e29f133-270c-4e5a-8493-e038c163a891"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Tolterodine#Pharmacology", 
+        "mechanism": 21, 
+        "ref_id": "Tolterodine#Pharmacology"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 22, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/3762265", 
+        "mechanism": 22, 
+        "ref_id": "3762265"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/4381291", 
+        "mechanism": 22, 
+        "ref_id": "4381291"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/13263156", 
+        "mechanism": 22, 
+        "ref_id": "13263156"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16080359", 
+        "mechanism": 22, 
+        "ref_id": "16080359"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 22, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 23, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/1907331", 
+        "mechanism": 23, 
+        "ref_id": "1907331"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 24, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/6345649", 
+        "mechanism": 24, 
+        "ref_id": "6345649"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/7122991", 
+        "mechanism": 24, 
+        "ref_id": "7122991"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 25, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/8075869", 
+        "mechanism": 25, 
+        "ref_id": "8075869"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/9183081", 
+        "mechanism": 25, 
+        "ref_id": "9183081"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 26, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/13478170", 
+        "mechanism": 26, 
+        "ref_id": "13478170"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 27, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=c56598d5-9cd1-4cce-b172-ac338775aec7", 
+        "mechanism": 27, 
+        "ref_id": "setid=c56598d5-9cd1-4cce-b172-ac338775aec7"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 28, 
+        "ref_id": "9780702034718 PP. 157"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/982732", 
+        "mechanism": 28, 
+        "ref_id": "982732"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 28, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Bethanechol", 
+        "mechanism": 28, 
+        "ref_id": "Bethanechol"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/353090", 
+        "mechanism": 29, 
+        "ref_id": "353090"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/4555460", 
+        "mechanism": 29, 
+        "ref_id": "4555460"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Anisotropine_Methylbromide", 
+        "mechanism": 29, 
+        "ref_id": "Anisotropine_Methylbromide"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "FDA", 
+        "ref_url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2004/17106s032lbl.pdf", 
+        "mechanism": 30, 
+        "ref_id": "label/2004/17106s032lbl.pdf"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 30, 
+        "ref_id": "9780702034718 PP. 159"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Atropine", 
+        "mechanism": 30, 
+        "ref_id": "Atropine"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "FDA", 
+        "ref_url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2004/17106s032lbl.pdf", 
+        "mechanism": 31, 
+        "ref_id": "label/2004/17106s032lbl.pdf"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 31, 
+        "ref_id": "9780702034718 PP. 159"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Atropine", 
+        "mechanism": 31, 
+        "ref_id": "Atropine"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 32, 
+        "ref_id": "9780702034718 PP. 153, 160"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/1111414", 
+        "mechanism": 32, 
+        "ref_id": "1111414"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/17579880", 
+        "mechanism": 32, 
+        "ref_id": "17579880"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 33, 
+        "ref_id": "9780702034718 PP. 160"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 33, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/19446545", 
+        "mechanism": 33, 
+        "ref_id": "19446545"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Solifenacin#Mechanism_of_action", 
+        "mechanism": 33, 
+        "ref_id": "Solifenacin#Mechanism_of_action"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 34, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=cec47488-ebad-4a3a-904c-e916b432e2cf", 
+        "mechanism": 34, 
+        "ref_id": "setid=cec47488-ebad-4a3a-904c-e916b432e2cf"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Expert", 
+        "ref_url": "http://chembl.blogspot.co.uk/search?q=ACLIDINIUM", 
+        "mechanism": 35, 
+        "ref_id": "ACLIDINIUM"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 36, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/20347047", 
+        "mechanism": 36, 
+        "ref_id": "20347047"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1cf82d42-5ad0-4b86-838e-9230c61cf3d4#nlm34090-1", 
+        "mechanism": 37, 
+        "ref_id": "setid=1cf82d42-5ad0-4b86-838e-9230c61cf3d4#nlm34090-1"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 38, 
+        "ref_id": "9780702034718 PP. 160"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/12076307", 
+        "mechanism": 38, 
+        "ref_id": "12076307"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/16465186", 
+        "mechanism": 38, 
+        "ref_id": "16465186"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5be745f0-8ae7-4c3c-9962-37d6263326f1", 
+        "mechanism": 38, 
+        "ref_id": "setid=5be745f0-8ae7-4c3c-9962-37d6263326f1"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 39, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/15506601", 
+        "mechanism": 39, 
+        "ref_id": "15506601"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 40, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/2912119", 
+        "mechanism": 40, 
+        "ref_id": "2912119"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 41, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/7065943", 
+        "mechanism": 41, 
+        "ref_id": "7065943"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/12628451", 
+        "mechanism": 41, 
+        "ref_id": "12628451"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Carbachol", 
+        "mechanism": 41, 
+        "ref_id": "Carbachol"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 42, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/970853", 
+        "mechanism": 42, 
+        "ref_id": "970853"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/23662958", 
+        "mechanism": 42, 
+        "ref_id": "23662958"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Pilocarpine", 
+        "mechanism": 42, 
+        "ref_id": "Pilocarpine"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 43, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/970853", 
+        "mechanism": 43, 
+        "ref_id": "970853"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/23662958", 
+        "mechanism": 43, 
+        "ref_id": "23662958"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Pilocarpine", 
+        "mechanism": 43, 
+        "ref_id": "Pilocarpine"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 44, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/23629427", 
+        "mechanism": 44, 
+        "ref_id": "23629427"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=773a19e8-4c3e-4414-99a6-aea98c9790ee#nlm34090-1", 
+        "mechanism": 44, 
+        "ref_id": "setid=773a19e8-4c3e-4414-99a6-aea98c9790ee#nlm34090-1"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 45, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a3e521be-bdd7-406d-9791-749f75399c38#nlm34090-1", 
+        "mechanism": 45, 
+        "ref_id": "setid=a3e521be-bdd7-406d-9791-749f75399c38#nlm34090-1"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "Wikipedia", 
+        "ref_url": "http://en.wikipedia.org/wiki/Muscarinic_acetylcholine_receptor", 
+        "mechanism": 45, 
+        "ref_id": "Muscarinic_acetylcholine_receptor"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 46, 
+        "ref_id": "9780702034718 PP. 160"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/8873558", 
+        "mechanism": 46, 
+        "ref_id": "8873558"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1eb2ffc4-d6d9-4efb-9f88-8434214d047e", 
+        "mechanism": 46, 
+        "ref_id": "setid=1eb2ffc4-d6d9-4efb-9f88-8434214d047e"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 47, 
+        "ref_id": "9780702034718 PP. 153"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "DailyMed", 
+        "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=46e661aa-b1bd-465e-a800-03bd3455d7d1#nlm34090-1", 
+        "mechanism": 47, 
+        "ref_id": "setid=46e661aa-b1bd-465e-a800-03bd3455d7d1#nlm34090-1"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 48, 
+        "ref_id": "9780702034718 PP. 160"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/17222678", 
+        "mechanism": 48, 
+        "ref_id": "17222678"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/19275276", 
+        "mechanism": 48, 
+        "ref_id": "19275276"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/19446545", 
+        "mechanism": 48, 
+        "ref_id": "19446545"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/20590605", 
+        "mechanism": 48, 
+        "ref_id": "20590605"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "ISBN", 
+        "ref_url": "http://www.isbnsearch.org/isbn/9780702034718", 
+        "mechanism": 49, 
+        "ref_id": "9780702034718 PP. 160"
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.mechanismrefs", 
+    "fields": {
+        "ref_type": "PubMed", 
+        "ref_url": "http://europepmc.org/abstract/MED/17222678", 
+        "mechanism": 49, 
+        "ref_id": "17222678"
+    }
+}
+]

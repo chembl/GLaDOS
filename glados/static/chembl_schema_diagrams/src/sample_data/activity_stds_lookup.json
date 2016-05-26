@@ -1,0 +1,1102 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% cytotoxicity", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "CC50"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Effective concentration for 50% activity", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "EC50"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% growth inhibition", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "GI50"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% inhibition", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "IC50"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Inhibition constant", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Ki"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Solubility ", 
+        "normal_range_min": "100.000000000000", 
+        "normal_range_max": "1000000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Solubility"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Solubility", 
+        "normal_range_min": "0.050000000000", 
+        "normal_range_max": "50000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "Solubility"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Half-life", 
+        "normal_range_min": "0.001000000000", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "hr", 
+        "standard_type": "T1/2"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Clearance", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "mL.min-1.g-1", 
+        "standard_type": "CL"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Clearance", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "mL.min-1.kg-1", 
+        "standard_type": "CL"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Renal clearance", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "mL.min-1.kg-1", 
+        "standard_type": "CL_renal"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Clearance/Bioavailability", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "mL.min-1.kg-1", 
+        "standard_type": "CL/F"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Calculated Log(Distribution Coefficient)", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "15.000000000000", 
+        "standard_units": "-", 
+        "standard_type": "CLogD"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Calculated Log(Distribution Coefficient) at pH7.4", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "15.000000000000", 
+        "standard_units": "-", 
+        "standard_type": "CLogD7.4"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Calculated Log(Partition Coefficient)", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "15.000000000000", 
+        "standard_units": "-", 
+        "standard_type": "CLogP"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Bioavailability", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "150.000000000000", 
+        "standard_units": "%", 
+        "standard_type": "F"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 95% inhibition", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "IC95"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Inhibition Frequency (promiscuity) Index", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "100.000000000000", 
+        "standard_units": "%", 
+        "standard_type": "IFI"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Inhibition", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "150.000000000000", 
+        "standard_units": "%", 
+        "standard_type": "Inhibition"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Log(Partition Coefficient)", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "15.000000000000", 
+        "standard_units": "-", 
+        "standard_type": "LogP"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Log(Apparent permeability)", 
+        "normal_range_min": "-10.000000000000", 
+        "normal_range_max": "15.000000000000", 
+        "standard_units": "-", 
+        "standard_type": "LogPapp"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Time for maximum concentration", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "hr", 
+        "standard_type": "Tmax"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Volume of Distribution", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "L.kg-1", 
+        "standard_type": "Vd"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Steady State Volume of Distribution", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "L.kg-1", 
+        "standard_type": "Vdss"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% effect", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "XC50"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Volume of distribution after non-intravenous administration", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "L.kg-1", 
+        "standard_type": "Vd/F"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Maximum concentration", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "Cmax"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Maximum concentration", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Cmax"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% inhibition", 
+        "normal_range_min": "0.000005000000", 
+        "normal_range_max": "50.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "IC50"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Mean residence time", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "hr", 
+        "standard_type": "MRT"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 90% inhibition", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "IC90"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 90% inhibition", 
+        "normal_range_min": "0.000005000000", 
+        "normal_range_max": "50.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "IC90"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum cytotoxic concentration", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "MCC"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum cytotoxic concentration", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MCC"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "MIC"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MIC"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dissociation constant", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Kd"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Volume of distribution at steady state after non-intravenous administration", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "L.kg-1", 
+        "standard_type": "Vdss/F"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% cytotoxicity", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "CC50"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Effective concentration for 50% activity", 
+        "normal_range_min": "0.000005000000", 
+        "normal_range_max": "50.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "EC50"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% growth inhibition", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "GI50"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 99% inhibition", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "IC99"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 99% inhibition", 
+        "normal_range_min": "0.000005000000", 
+        "normal_range_max": "50.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "IC99"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% lethality", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "LC50"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% lethality", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "LC50"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for total growth inhibition", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "TGI"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for total growth inhibition", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "TGI"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dose required for 50% lethality", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "mg.kg-1", 
+        "standard_type": "LD50"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dose required for 50% lethality", 
+        "normal_range_min": "0.001000000000", 
+        "normal_range_max": "10000.000000000000", 
+        "standard_units": "umol.kg-1", 
+        "standard_type": "LD50"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Michaelis constant", 
+        "normal_range_min": "10.000000000000", 
+        "normal_range_max": "100000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Km"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration or dose required to elicit a specific response", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "Potency"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Concentration required for 50% activity", 
+        "normal_range_min": "0.010000000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "AC50"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Effective dose for 50% activity", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "500.000000000000", 
+        "standard_units": "mg.kg-1", 
+        "standard_type": "ED50"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Zone of inhibition", 
+        "normal_range_min": "0E-12", 
+        "normal_range_max": "50.000000000000", 
+        "standard_units": "mm", 
+        "standard_type": "IZ"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 50% of population", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "MIC50"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 80% of population", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "MIC80"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 90% of population", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "nM", 
+        "standard_type": "MIC90"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 50% of population", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MIC50"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 80% of population", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MIC80"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 90% of population", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MIC90"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Minimum inhibitory concentration in 70% of population", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "5000.000000000000", 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MIC70"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dose required for 50% inhibition", 
+        "normal_range_min": "0.000500000000", 
+        "normal_range_max": "500.000000000000", 
+        "standard_units": "mg.kg-1", 
+        "standard_type": "ID50"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dose required for 50% inhibition", 
+        "normal_range_min": "0.001000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "umol.kg-1", 
+        "standard_type": "ID50"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Effective dose for 50% activity", 
+        "normal_range_min": "0.001000000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "umol.kg-1", 
+        "standard_type": "ED50"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Observed rate constant", 
+        "normal_range_min": "0.000001000000", 
+        "normal_range_max": "100000.000000000000", 
+        "standard_units": "s-1", 
+        "standard_type": "k_obs"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Association rate constant", 
+        "normal_range_min": "1.000000000000", 
+        "normal_range_max": "10000000.000000000000", 
+        "standard_units": "M-1.s-1", 
+        "standard_type": "k_on"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "Dissociation rate constant", 
+        "normal_range_min": "0.000001000000", 
+        "normal_range_max": "1000.000000000000", 
+        "standard_units": "s-1", 
+        "standard_type": "k_off"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the total creatine kinase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "U.L-1", 
+        "standard_type": "CK"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A blood clotting measurement that evaluates the extrinsic pathway of coagulation.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "s", 
+        "standard_type": "PT"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the albumin protein in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "ALB"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the alkaline phosphatase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "U.L-1", 
+        "standard_type": "ALP"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the alkaline phosphatase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "IU.L-1", 
+        "standard_type": "ALP"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the alanine aminotransferase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "U.L-1", 
+        "standard_type": "ALT"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the alanine aminotransferase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "IU.L-1", 
+        "standard_type": "ALT"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the aspartate aminotransferase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "U.L-1", 
+        "standard_type": "AST"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the aspartate aminotransferase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "IU.L-1", 
+        "standard_type": "AST"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the urea nitrogen in a blood specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "BUN"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the carbon dioxide gas in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "nM", 
+        "standard_type": "CO2"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the eosinophils in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "EOS"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the gamma glutamyl transferase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "IU.L-1", 
+        "standard_type": "GGT"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "The percentage of a whole blood specimen that is composed of red blood cells (erythrocytes).", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "%", 
+        "standard_type": "HCT"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the hemoglobin in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "HGB"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the lactate dehydrogenase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "U.L-1", 
+        "standard_type": "LDH"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the lactate dehydrogenase in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "IU.L-1", 
+        "standard_type": "LDH"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the lymphocytes in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "LYM"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A quantitative measurement of the mean amount of hemoglobin per erythrocyte in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "pg", 
+        "standard_type": "MCH"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A quantitative measurement of the mean volume of erythrocytes in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "fL", 
+        "standard_type": "MCV"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the total erythrocytes in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "RBC"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the leukocytes in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "WBC"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the length of time that it takes for clotting to occur when reagents are added to a plasma specimen. The test is partial due to the absence of tissue factor (Factor III) from the reaction mixture.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "s", 
+        "standard_type": "APTT"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the basophils in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "BASO"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the total bilirubin in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "BILI"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the cholesterol in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "CHOL"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the glucose in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "GLUC"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A quantitative measurement of the mean amount of hemoglobin per erythrocytes in a specified volume of a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "%", 
+        "standard_type": "MCHC"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A quantitative measurement of the mean amount of hemoglobin per erythrocytes in a specified volume of a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "MCHC"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the monocytes in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "MONO"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the phosphate in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "PHOS"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of the platelets (non-nucleated thrombocytes) in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "cells.uL-1", 
+        "standard_type": "PLAT"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.activitystdslookup", 
+    "fields": {
+        "definition": "A measurement of a group of complex organic macromolecules composed of one or more alpha-L-amino acid chains in a biological specimen.", 
+        "normal_range_min": null, 
+        "normal_range_max": null, 
+        "standard_units": "ug.mL-1", 
+        "standard_type": "PROT"
+    }
+}
+]

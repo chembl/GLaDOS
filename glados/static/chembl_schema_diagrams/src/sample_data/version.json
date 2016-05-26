@@ -1,0 +1,10 @@
+[
+{
+    "pk": "ChEMBL_20", 
+    "model": "chembl_core_model.version", 
+    "fields": {
+        "comments": "ChEMBL Release 20", 
+        "creation_date": "2015-01-09"
+    }
+}
+]

@@ -1,0 +1,1102 @@
+[
+{
+    "pk": 347, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343607, 
+        "product": "PRODUCT_072636_001", 
+        "strength": "EQ 2MG BASE", 
+        "molecule": 674977, 
+        "ingredient": "ALBUTEROL SULFATE"
+    }
+},
+{
+    "pk": 649, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344429, 
+        "product": "PRODUCT19729", 
+        "strength": null, 
+        "molecule": 675548, 
+        "ingredient": "OPRELVEKIN"
+    }
+},
+{
+    "pk": 1272, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344885, 
+        "product": "PRODUCT19733", 
+        "strength": null, 
+        "molecule": 675578, 
+        "ingredient": "RITUXIMAB"
+    }
+},
+{
+    "pk": 1273, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344371, 
+        "product": "PRODUCT19623", 
+        "strength": null, 
+        "molecule": 675437, 
+        "ingredient": "RSV IMMUNE GLOBULIN (HUMAN)"
+    }
+},
+{
+    "pk": 1617, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343581, 
+        "product": "PRODUCT_062216_003", 
+        "strength": "250MG", 
+        "molecule": 143284, 
+        "ingredient": "AMOXICILLIN"
+    }
+},
+{
+    "pk": 1709, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344312, 
+        "product": "PRODUCT_077260_002", 
+        "strength": "100MG/5ML (20MG/ML)", 
+        "molecule": 674463, 
+        "ingredient": "IRINOTECAN HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 1710, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344312, 
+        "product": "PRODUCT_077260_001", 
+        "strength": "40MG/2ML (20MG/ML)", 
+        "molecule": 674463, 
+        "ingredient": "IRINOTECAN HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 1941, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344619, 
+        "product": "PRODUCT19480", 
+        "strength": null, 
+        "molecule": 675406, 
+        "ingredient": "HUMAN SERUM ALBUMIN"
+    }
+},
+{
+    "pk": 1942, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343911, 
+        "product": "PRODUCT19575", 
+        "strength": null, 
+        "molecule": 675486, 
+        "ingredient": "IMMUNE GLOBULIN (HUMAN)"
+    }
+},
+{
+    "pk": 1943, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344789, 
+        "product": "PRODUCT19703", 
+        "strength": null, 
+        "molecule": 304390, 
+        "ingredient": "SODIUM CITRATE"
+    }
+},
+{
+    "pk": 1944, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344887, 
+        "product": "PRODUCT19584", 
+        "strength": null, 
+        "molecule": 675388, 
+        "ingredient": "RASBURICASE"
+    }
+},
+{
+    "pk": 2089, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079016_001", 
+        "strength": "10MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2528, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19694", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 2529, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19721", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 2530, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344928, 
+        "product": "PRODUCT19693", 
+        "strength": null, 
+        "molecule": 675456, 
+        "ingredient": "HUMAN INTERLEUKIN-2"
+    }
+},
+{
+    "pk": 2531, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344619, 
+        "product": "PRODUCT19692", 
+        "strength": null, 
+        "molecule": 675406, 
+        "ingredient": "HUMAN SERUM ALBUMIN"
+    }
+},
+{
+    "pk": 2905, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079016_007", 
+        "strength": "100MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2957, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343143, 
+        "product": "PRODUCT_040819_001", 
+        "strength": "100MG", 
+        "molecule": 674915, 
+        "ingredient": "AMITRIPTYLINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2958, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343143, 
+        "product": "PRODUCT_040815_001", 
+        "strength": "10MG", 
+        "molecule": 674915, 
+        "ingredient": "AMITRIPTYLINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2959, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343143, 
+        "product": "PRODUCT_040820_001", 
+        "strength": "150MG", 
+        "molecule": 674915, 
+        "ingredient": "AMITRIPTYLINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2961, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343143, 
+        "product": "PRODUCT_040817_001", 
+        "strength": "50MG", 
+        "molecule": 674915, 
+        "ingredient": "AMITRIPTYLINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 2962, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343143, 
+        "product": "PRODUCT_040818_001", 
+        "strength": "75MG", 
+        "molecule": 674915, 
+        "ingredient": "AMITRIPTYLINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3608, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_007", 
+        "strength": "100MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3609, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_001", 
+        "strength": "10MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3610, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_002", 
+        "strength": "18MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3611, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_003", 
+        "strength": "25MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3612, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_004", 
+        "strength": "40MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3613, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_005", 
+        "strength": "60MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 3614, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_078940_006", 
+        "strength": "80MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 4168, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_005", 
+        "strength": "60MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 4169, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_006", 
+        "strength": "80MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 4208, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_007", 
+        "strength": "100MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 4209, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_001", 
+        "strength": "10MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5001, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079021_005", 
+        "strength": "60MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5002, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079021_006", 
+        "strength": "80MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5003, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_007", 
+        "strength": "100MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5004, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_001", 
+        "strength": "10MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5005, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_002", 
+        "strength": "18MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5006, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_003", 
+        "strength": "25MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5007, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079018_004", 
+        "strength": "40MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5008, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_002", 
+        "strength": "18MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5009, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_003", 
+        "strength": "25MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5010, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_004", 
+        "strength": "40MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5011, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_005", 
+        "strength": "60MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5012, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079020_006", 
+        "strength": "80MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 5191, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344935, 
+        "product": "PRODUCT19092", 
+        "strength": null, 
+        "molecule": 675384, 
+        "ingredient": "HUMAN ALPHA-1-ANTITRYPSIN"
+    }
+},
+{
+    "pk": 5192, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344935, 
+        "product": "PRODUCT19093", 
+        "strength": null, 
+        "molecule": 675384, 
+        "ingredient": "HUMAN ALPHA-1-ANTITRYPSIN"
+    }
+},
+{
+    "pk": 5193, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343964, 
+        "product": "PRODUCT19094", 
+        "strength": null, 
+        "molecule": 675423, 
+        "ingredient": "DIGOXIN IMMUNE FAB (OVINE)"
+    }
+},
+{
+    "pk": 5194, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343964, 
+        "product": "PRODUCT19095", 
+        "strength": null, 
+        "molecule": 675423, 
+        "ingredient": "DIGOXIN IMMUNE FAB (OVINE)"
+    }
+},
+{
+    "pk": 5195, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344442, 
+        "product": "PRODUCT19097", 
+        "strength": null, 
+        "molecule": 675616, 
+        "ingredient": "PEGINTERFERON ALFA-2B"
+    }
+},
+{
+    "pk": 5196, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344443, 
+        "product": "PRODUCT19098", 
+        "strength": null, 
+        "molecule": 675493, 
+        "ingredient": "DARBEPOETIN ALFA"
+    }
+},
+{
+    "pk": 5197, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344696, 
+        "product": "PRODUCT19099", 
+        "strength": null, 
+        "molecule": 675361, 
+        "ingredient": "EPOETIN ALFA"
+    }
+},
+{
+    "pk": 5198, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343942, 
+        "product": "PRODUCT19100", 
+        "strength": null, 
+        "molecule": 675549, 
+        "ingredient": "PEGINTERFERON ALFA-2A"
+    }
+},
+{
+    "pk": 5199, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343942, 
+        "product": "PRODUCT19101", 
+        "strength": null, 
+        "molecule": 675549, 
+        "ingredient": "PEGINTERFERON ALFA-2A"
+    }
+},
+{
+    "pk": 5200, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344936, 
+        "product": "PRODUCT19102", 
+        "strength": null, 
+        "molecule": 675434, 
+        "ingredient": "FILGRASTIM"
+    }
+},
+{
+    "pk": 5201, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344211, 
+        "product": "PRODUCT19103", 
+        "strength": null, 
+        "molecule": 675577, 
+        "ingredient": "ANAKINRA"
+    }
+},
+{
+    "pk": 5202, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343435, 
+        "product": "PRODUCT19104", 
+        "strength": null, 
+        "molecule": 675558, 
+        "ingredient": "INTERFERON BETA-1B"
+    }
+},
+{
+    "pk": 5203, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343708, 
+        "product": "PRODUCT19105", 
+        "strength": null, 
+        "molecule": 675480, 
+        "ingredient": "ALEFACEPT"
+    }
+},
+{
+    "pk": 5204, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343709, 
+        "product": "PRODUCT19106", 
+        "strength": null, 
+        "molecule": 675613, 
+        "ingredient": "INTERFERON ALFACON-1"
+    }
+},
+{
+    "pk": 5205, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343710, 
+        "product": "PRODUCT19108", 
+        "strength": null, 
+        "molecule": 675521, 
+        "ingredient": "INTERFERON BETA-1A"
+    }
+},
+{
+    "pk": 5206, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343711, 
+        "product": "PRODUCT19110", 
+        "strength": null, 
+        "molecule": 675368, 
+        "ingredient": "INTERFERON ALFA-2B"
+    }
+},
+{
+    "pk": 5207, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344869, 
+        "product": "PRODUCT19119", 
+        "strength": null, 
+        "molecule": 675421, 
+        "ingredient": "HUMAN CF-IX"
+    }
+},
+{
+    "pk": 5208, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19126", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5209, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343436, 
+        "product": "PRODUCT19127", 
+        "strength": null, 
+        "molecule": 675385, 
+        "ingredient": "HUMAN FIBRINOGEN-A"
+    }
+},
+{
+    "pk": 5210, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344212, 
+        "product": "PRODUCT19127", 
+        "strength": null, 
+        "molecule": 675375, 
+        "ingredient": "HUMAN CF-II"
+    }
+},
+{
+    "pk": 5211, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19130", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5212, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19141", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5213, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19157", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5214, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344937, 
+        "product": "PRODUCT19158", 
+        "strength": null, 
+        "molecule": 240769, 
+        "ingredient": "CITRIC ACID"
+    }
+},
+{
+    "pk": 5215, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343286, 
+        "product": "PRODUCT19158", 
+        "strength": null, 
+        "molecule": 1037865, 
+        "ingredient": "DEXTROSE"
+    }
+},
+{
+    "pk": 5216, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344789, 
+        "product": "PRODUCT19160", 
+        "strength": null, 
+        "molecule": 304390, 
+        "ingredient": "SODIUM CITRATE"
+    }
+},
+{
+    "pk": 5217, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344938, 
+        "product": "PRODUCT19167", 
+        "strength": null, 
+        "molecule": 675583, 
+        "ingredient": "CROTALIDAE POLYVALENT IMMUNE FAB"
+    }
+},
+{
+    "pk": 5218, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19171", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5219, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19180", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5220, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19184", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5221, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344444, 
+        "product": "PRODUCT19186", 
+        "strength": null, 
+        "molecule": 675557, 
+        "ingredient": "HUMAN ALPHA-GALCTOSIDASE-A"
+    }
+},
+{
+    "pk": 5222, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19195", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5223, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19197", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5224, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344939, 
+        "product": "PRODUCT19199", 
+        "strength": null, 
+        "molecule": 675402, 
+        "ingredient": "BOVINE THROMBIN"
+    }
+},
+{
+    "pk": 5225, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19209", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5226, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343965, 
+        "product": "PRODUCT19210", 
+        "strength": null, 
+        "molecule": 675570, 
+        "ingredient": "HUMAN DNASE-1"
+    }
+},
+{
+    "pk": 5227, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19219", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5228, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344619, 
+        "product": "PRODUCT19226", 
+        "strength": null, 
+        "molecule": 675406, 
+        "ingredient": "HUMAN SERUM ALBUMIN"
+    }
+},
+{
+    "pk": 5229, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19233", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5230, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19240", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5231, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19242", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5232, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344938, 
+        "product": "PRODUCT19245", 
+        "strength": null, 
+        "molecule": 675583, 
+        "ingredient": "CROTALIDAE POLYVALENT IMMUNE FAB"
+    }
+},
+{
+    "pk": 5233, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19252", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5234, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344445, 
+        "product": "PRODUCT19255", 
+        "strength": null, 
+        "molecule": 675531, 
+        "ingredient": "BOVINE DNASE-1"
+    }
+},
+{
+    "pk": 5235, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344940, 
+        "product": "PRODUCT19255", 
+        "strength": null, 
+        "molecule": 675364, 
+        "ingredient": "BOVINE PLASMINOGEN"
+    }
+},
+{
+    "pk": 5236, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19260", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5237, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344619, 
+        "product": "PRODUCT19266", 
+        "strength": null, 
+        "molecule": 675406, 
+        "ingredient": "HUMAN SERUM ALBUMIN"
+    }
+},
+{
+    "pk": 5238, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19276", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5239, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343966, 
+        "product": "PRODUCT19285", 
+        "strength": null, 
+        "molecule": 675403, 
+        "ingredient": "HUMAN ANTICOAGULANT-C"
+    }
+},
+{
+    "pk": 5240, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19297", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5241, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344360, 
+        "product": "PRODUCT19299", 
+        "strength": null, 
+        "molecule": 675379, 
+        "ingredient": "HUMAN CF-VIII"
+    }
+},
+{
+    "pk": 5242, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1344446, 
+        "product": "PRODUCT19299", 
+        "strength": null, 
+        "molecule": 675390, 
+        "ingredient": "HUMAN VWF"
+    }
+},
+{
+    "pk": 6596, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079016_002", 
+        "strength": "18MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 6597, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079016_003", 
+        "strength": "25MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+},
+{
+    "pk": 6598, 
+    "model": "chembl_core_model.formulations", 
+    "fields": {
+        "record": 1343140, 
+        "product": "PRODUCT_079016_004", 
+        "strength": "40MG", 
+        "molecule": 547576, 
+        "ingredient": "ATOMOXETINE HYDROCHLORIDE"
+    }
+}
+]

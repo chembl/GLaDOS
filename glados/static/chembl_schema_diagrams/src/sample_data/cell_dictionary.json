@@ -1,0 +1,1702 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung", 
+        "cell_name": "DC3F", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307241", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": "CVCL_4704", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "DC3F"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002312", 
+        "cell_source_tissue": "Lyphoma", 
+        "cell_name": "P3HR-1", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-2024", 
+        "chembl": "CHEMBL3307242", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_2676", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008331", 
+        "cell_description": "P3HR-1"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Adenocarcinoma", 
+        "cell_name": "UCLA P-3", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307243", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "UCLA P-3"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Carcinoma", 
+        "cell_name": "UMSCC22B", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307244", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_7732", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "UMSCC22B"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002387", 
+        "cell_source_tissue": "Bladder Carcinoma", 
+        "cell_name": "UMUC3", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1721", 
+        "chembl": "CHEMBL3307245", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1783", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009487", 
+        "cell_description": "UMUC3"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung", 
+        "cell_name": "V79-4", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307246", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": "CVCL_2796", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009504", 
+        "cell_description": "V79-4"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "VCR100", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307247", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "VCR100"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Monocytic Carcinosarcoma", 
+        "cell_name": "W256", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307248", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_3537", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007335", 
+        "cell_description": "W256"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Macrophage", 
+        "cell_name": "WEHI265.1", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307249", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_3620", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009576", 
+        "cell_description": "WEHI265.1"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Colon Adenocarcinoma", 
+        "cell_name": "WiDr-NTR", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307250", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "WiDr-NTR"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Sarcoma", 
+        "cell_name": "XC", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307251", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_1891", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009645", 
+        "cell_description": "XC"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Neuroblastoma", 
+        "cell_name": "XF393", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307252", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "XF393"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Pancreas Carincoma", 
+        "cell_name": "YAPC", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1792", 
+        "chembl": "CHEMBL3307253", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1794", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009711", 
+        "cell_description": "YAPC"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Neuroblastoma", 
+        "cell_name": "YT-NU", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307254", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_H524", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "YT-NU"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Fibroblasts", 
+        "cell_name": "T6400", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307255", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "T6400"
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung", 
+        "cell_name": "T78-1", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307256", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "T78-1"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung", 
+        "cell_name": "T78-1 / T79-A3", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307257", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "T78-1 / T79-A3"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Mammary Carcinoma", 
+        "cell_name": "TA3", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307258", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_4315", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "TA3"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Osteosarcoma", 
+        "cell_name": "UMR106-06", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307259", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "UMR106-06"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lymphocyte", 
+        "cell_name": "AIK-T8", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308406", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "AIK-T8"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002179", 
+        "cell_source_tissue": "Kidney Wilm's tumor", 
+        "cell_name": "G-401", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1511", 
+        "chembl": "CHEMBL3308394", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0270", 
+        "downgraded": false, 
+        "clo_id": "CLO_0003434", 
+        "cell_description": "G-401"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "fibroblast sarcoma", 
+        "cell_name": "Jensen sarcoma", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307260", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_3531", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007018", 
+        "cell_description": "Jensen sarcoma"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Breast Adenocarcinoma", 
+        "cell_name": "MDA-MB-238", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307261", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MDA-MB-238"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Stomach Adenocarcinoma", 
+        "cell_name": "MKN-5 ", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307262", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MKN-5 "
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "MOLT-4F", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1031", 
+        "chembl": "CHEMBL3307263", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_2792", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MOLT-4F"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Hepatocyte", 
+        "cell_name": "N9", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307264", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "N9"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "NCI-H417", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307265", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1602", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NCI-H417"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Kidney ", 
+        "cell_name": "NRK", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307266", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_3758", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008195", 
+        "cell_description": "NRK"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "gastric lymph node, adenocarcinoma", 
+        "cell_name": "NUGC-4", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-2001", 
+        "chembl": "CHEMBL3307267", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_3082", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NUGC-4"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "P388/VCR", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307268", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "P388/VCR"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Panreatic Carcinoma", 
+        "cell_name": "PAXF546", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307269", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "PAXF546"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Hepatoma", 
+        "cell_name": "PLC", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307270", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "PLC"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Glioma", 
+        "cell_name": "RG-2", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308407", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "RG-2"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Squamous Carcinoma", 
+        "cell_name": "SCC-38", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307271", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "SCC-38"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Cervical Adenocarcinoma", 
+        "cell_name": "SISO", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1514", 
+        "chembl": "CHEMBL3307272", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_2193", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009021", 
+        "cell_description": "SISO"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "SK-MES", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1583", 
+        "chembl": "CHEMBL3308366", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_8913", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009048", 
+        "cell_description": "SK-MES"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002344", 
+        "cell_source_tissue": "Gastric Carcinoma", 
+        "cell_name": "SNU-16", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1889", 
+        "chembl": "CHEMBL3307273", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0076", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009095", 
+        "cell_description": "SNU-16"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002377", 
+        "cell_source_tissue": "Vulva Lymphoid Carcinoma", 
+        "cell_name": "SW 962", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307274", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1733", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009205", 
+        "cell_description": "SW 962"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002084", 
+        "cell_source_tissue": "Colon carcinoma", 
+        "cell_name": "T84", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1166", 
+        "chembl": "CHEMBL3307275", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0555", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009254", 
+        "cell_description": "T84"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lymphocyte", 
+        "cell_name": "AIK-T4", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307276", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "AIK-T4"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Neuroblastoma", 
+        "cell_name": "B104", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307277", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_0154", 
+        "downgraded": false, 
+        "clo_id": "CLO_0001783", 
+        "cell_description": "B104"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Fibroblast Sarcoma", 
+        "cell_name": "CCRF S-180", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307278", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_2874", 
+        "downgraded": false, 
+        "clo_id": "CLO_0002333", 
+        "cell_description": "CCRF S-180"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Blood", 
+        "cell_name": "CEM-TK(+)", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307279", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "CEM-TK(+)"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Colon adenocarcinoma", 
+        "cell_name": "COLO 480", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307280", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "COLO 480"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Pancreas adenocarcinoma", 
+        "cell_name": "DAN-G", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1734", 
+        "chembl": "CHEMBL3307281", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0243", 
+        "downgraded": false, 
+        "clo_id": "CLO_0002698", 
+        "cell_description": "DAN-G"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002866", 
+        "cell_source_tissue": "Oesteosarcoma", 
+        "cell_name": "HOS-TE85", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307282", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0439", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007814", 
+        "cell_description": "HOS-TE85"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "lymphoblast, lymphocytic, leukemia (DACH resistant", 
+        "cell_name": "L1210 (DACH)", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308408", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "L1210 (DACH)"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "colon adenocarcinoma", 
+        "cell_name": "MAC13", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307283", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MAC13"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Renal Carcinoma", 
+        "cell_name": "768-0", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307284", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "768-0"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Blood", 
+        "cell_name": "CEM-TK(-)", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307285", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "CEM-TK(-)"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Melanoma", 
+        "cell_name": "M96", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307286", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "M96"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002834", 
+        "cell_source_tissue": "Stomach Adenocarcinoma", 
+        "cell_name": "MKN-74", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307287", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_2791", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MKN-74"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002246", 
+        "cell_source_tissue": "Leukocyte/lymphoblastoid", 
+        "cell_name": "NAMALVA", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307288", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0067", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007939", 
+        "cell_description": "NAMALVA"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "NCI-H46", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307289", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NCI-H46"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "QG-95", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307290", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "QG-95"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Colon Carcinoma", 
+        "cell_name": "S1B1-20", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307291", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "S1B1-20"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002367", 
+        "cell_source_tissue": "Colon Carcinoma", 
+        "cell_name": "SW48", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1186", 
+        "chembl": "CHEMBL3307292", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1724", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009216", 
+        "cell_description": "SW48"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "UT7", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307293", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_2233", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009490", 
+        "cell_description": "UT7"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Bone marrow", 
+        "cell_name": "Detroit 98", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307294", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_8188", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "Detroit 98"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Ovary", 
+        "cell_name": "XRS6", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307295", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": "CVCL_4340", 
+        "downgraded": false, 
+        "clo_id": "CLO_0009692", 
+        "cell_description": "XRS6"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Kidney", 
+        "cell_name": "SV-28", 
+        "cell_source_tax_id": 10029, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307296", 
+        "cell_source_organism": "Cricetulus griseus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "SV-28"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Embryo Teratocarcinoma Epithelial Cells", 
+        "cell_name": "P19", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307297", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_2153", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008302", 
+        "cell_description": "P19"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Keratinocyte", 
+        "cell_name": "Balb/MK", 
+        "cell_source_tax_id": 9823, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307298", 
+        "cell_source_organism": "Sus scrofa", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "Balb/MK"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Breast Carcinoma", 
+        "cell_name": "MCF7-VP", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307299", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MCF7-VP"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0001211", 
+        "cell_source_tissue": "Breast Adenocarcinoma", 
+        "cell_name": "MDA-MB-361", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1468", 
+        "chembl": "CHEMBL3308405", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_0620", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007636", 
+        "cell_description": "MDA-MB-361"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Melanoma", 
+        "cell_name": "MM418", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307300", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_C843", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MM418"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Monocyte", 
+        "cell_name": "Mo/Ma", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307301", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "Mo/Ma"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "MOVP-3", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307302", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_N031", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MOVP-3"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Ovarian Carcinoma", 
+        "cell_name": "NAKAJIMA", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307303", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NAKAJIMA"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Colon Carcinoma", 
+        "cell_name": "OM-1", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307304", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "OM-1"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "P388/DDP", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307305", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "P388/DDP"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002844", 
+        "cell_source_tissue": "Lung Adenocarcinoma", 
+        "cell_name": "PC-14", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1656", 
+        "chembl": "CHEMBL3307306", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1640", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008394", 
+        "cell_description": "PC-14"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Ovary Adenocarcinoma", 
+        "cell_name": "ptx-10/22", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308409", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "ptx-10/22"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Bladder Carcinoma", 
+        "cell_name": "RT-112", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1716", 
+        "chembl": "CHEMBL3307307", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1670", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008890", 
+        "cell_description": "RT-112"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002854", 
+        "cell_source_tissue": "Small Cell Lung Cancer", 
+        "cell_name": "SBC-3", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1879", 
+        "chembl": "CHEMBL3307308", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1678", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "SBC-3"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Squamous Carcinoma", 
+        "cell_name": "SCC-7", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307309", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "SCC-7"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Hepatoma", 
+        "cell_name": "SNU-354", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307310", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_3947", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "SNU-354"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Breast Carcinoma", 
+        "cell_name": "MM46", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307311", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_B429", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MM46"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Monocyte", 
+        "cell_name": "MM6", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307312", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MM6"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Pituitary Adenoma", 
+        "cell_name": "MMQ", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307313", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_2117", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007804", 
+        "cell_description": "MMQ"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Monocyte", 
+        "cell_name": "MO/Mphi", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307314", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MO/Mphi"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lymphocyte", 
+        "cell_name": "MOH", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307315", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MOH"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Myeloma", 
+        "cell_name": "MOPC 315", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307316", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_2616", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007830", 
+        "cell_description": "MOPC 315"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Myeloma", 
+        "cell_name": "MPC-11", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307317", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_3857", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007854", 
+        "cell_description": "MPC-11"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Myeloma", 
+        "cell_name": "MR4", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307318", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MR4"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Fibroblasts", 
+        "cell_name": "MRC5CV1", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307319", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_E260", 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MRC5CV1"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Embryonic", 
+        "cell_name": "MRRL-CH1", 
+        "cell_source_tax_id": 7129, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307320", 
+        "cell_source_organism": "Manduca", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MRRL-CH1"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Breast Carcinoma", 
+        "cell_name": "MVLN", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307321", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "MVLN"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002247", 
+        "cell_source_tissue": "Lymphoblast", 
+        "cell_name": "NC-37", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-2057", 
+        "chembl": "CHEMBL3307322", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_3042", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007952", 
+        "cell_description": "NC-37"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "germ cell tumour", 
+        "cell_name": "NCC", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308410", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NCC"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Glioblastoma", 
+        "cell_name": "NCH82", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307323", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NCH82"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "NCI-H345", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1854", 
+        "chembl": "CHEMBL3307324", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1558", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008084", 
+        "cell_description": "NCI-H345"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Lung Carcinoma", 
+        "cell_name": "NCI-H84", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307325", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NCI-H84"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": "EFO_0002841", 
+        "cell_source_tissue": "Stomach Adenocarcinoma", 
+        "cell_name": "NCI-N87", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": "LCL-1886", 
+        "chembl": "CHEMBL3307326", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": "CVCL_1603", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008129", 
+        "cell_description": "NCI-N87"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Leukaemia", 
+        "cell_name": "NFS-60", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307327", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": "CVCL_3543", 
+        "downgraded": false, 
+        "clo_id": "CLO_0007812", 
+        "cell_description": "NFS-60"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Uterine Carcinoma", 
+        "cell_name": "NHIK3025", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307328", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NHIK3025"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Nasopharyngeal Carcinoma", 
+        "cell_name": "NPC-TW-039", 
+        "cell_source_tax_id": 10090, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307329", 
+        "cell_source_organism": "Mus musculus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NPC-TW-039"
+    }
+},
+{
+    "pk": 101, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Kidney Fibroblast", 
+        "cell_name": "NRK-49F", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3308395", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": "CVCL_2144", 
+        "downgraded": false, 
+        "clo_id": "CLO_0008197", 
+        "cell_description": "NRK-49F"
+    }
+},
+{
+    "pk": 102, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Kidney Epithelia", 
+        "cell_name": "NRKE", 
+        "cell_source_tax_id": 10116, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307330", 
+        "cell_source_organism": "Rattus norvegicus", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NRKE"
+    }
+},
+{
+    "pk": 103, 
+    "model": "chembl_core_model.celldictionary", 
+    "fields": {
+        "efo_id": null, 
+        "cell_source_tissue": "Gastric Carcinoma", 
+        "cell_name": "NUGC", 
+        "cell_source_tax_id": 9606, 
+        "cl_lincs_id": null, 
+        "chembl": "CHEMBL3307331", 
+        "cell_source_organism": "Homo sapiens", 
+        "cellosaurus_id": null, 
+        "downgraded": false, 
+        "clo_id": null, 
+        "cell_description": "NUGC"
+    }
+}
+]

@@ -1,0 +1,1102 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AA01", 
+        "ddd_value": "1.10", 
+        "ddd_comment": "0.5 mg Fluoride", 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AA03", 
+        "ddd_value": "1.10", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB02", 
+        "ddd_value": "60.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB03", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB04", 
+        "ddd_value": "40.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A01AB05", 
+        "ddd_value": "0.18", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB06", 
+        "ddd_value": "3.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB07", 
+        "ddd_value": "80.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A01AB09", 
+        "ddd_value": "0.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB10", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A01AB23", 
+        "ddd_value": "1.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02AA04", 
+        "ddd_value": "3.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02AB02", 
+        "ddd_value": "5.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02AC02", 
+        "ddd_value": "6.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": null, 
+        "atc_code": "A02AD01", 
+        "ddd_value": null, 
+        "ddd_comment": "Standard dose: 10 tablets or 50 ml mixt", 
+        "ddd_admr": null
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BA01", 
+        "ddd_value": "0.80", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BA02", 
+        "ddd_value": "0.30", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BA03", 
+        "ddd_value": "40.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BA04", 
+        "ddd_value": "0.30", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BA06", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BA07", 
+        "ddd_value": "0.80", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BA08", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BB01", 
+        "ddd_value": "0.80", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mcg", 
+        "atc_code": "A02BB02", 
+        "ddd_value": "70.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BC01", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BC02", 
+        "ddd_value": "40.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BC03", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BC04", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A02BC05", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BX01", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BX02", 
+        "ddd_value": "4.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BX03", 
+        "ddd_value": "0.10", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BX05", 
+        "ddd_value": "0.48", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A02BX06", 
+        "ddd_value": "1.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AA01", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AA03", 
+        "ddd_value": "0.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AA04", 
+        "ddd_value": "0.30", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AA05", 
+        "ddd_value": "0.60", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AA07", 
+        "ddd_value": "80.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB01", 
+        "ddd_value": "70.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB02", 
+        "ddd_value": "3.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB03", 
+        "ddd_value": "25.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB04", 
+        "ddd_value": "15.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB05", 
+        "ddd_value": "60.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB07", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB08", 
+        "ddd_value": "0.13", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB09", 
+        "ddd_value": "10.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB10", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB11", 
+        "ddd_value": "12.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB12", 
+        "ddd_value": "0.10", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB13", 
+        "ddd_value": "0.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AB14", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AB16", 
+        "ddd_value": "0.30", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AD01", 
+        "ddd_value": "0.10", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AD02", 
+        "ddd_value": "0.10", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AD30", 
+        "ddd_value": "50.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AE01", 
+        "ddd_value": "1.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A06AX06", 
+        "ddd_value": "12.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AX03", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AX04", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03AX13", 
+        "ddd_value": "0.50", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03AX30", 
+        "ddd_value": "50.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BA01", 
+        "ddd_value": "1.50", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BA03", 
+        "ddd_value": "1.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BA04", 
+        "ddd_value": "1.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BB01", 
+        "ddd_value": "60.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BB02", 
+        "ddd_value": "3.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BB03", 
+        "ddd_value": "12.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03BB04", 
+        "ddd_value": "60.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03FA01", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03FA02", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03FA03", 
+        "ddd_value": "30.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A03FA04", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A03FA05", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AA01", 
+        "ddd_value": "16.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AA02", 
+        "ddd_value": "2.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AA03", 
+        "ddd_value": "5.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A04AA04", 
+        "ddd_value": "0.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AA05", 
+        "ddd_value": "0.25", 
+        "ddd_comment": null, 
+        "ddd_admr": "P"
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AD05", 
+        "ddd_value": "15.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A04AD12", 
+        "ddd_value": "95.00", 
+        "ddd_comment": "expressed as fosaprepitant", 
+        "ddd_admr": "P"
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A05AA02", 
+        "ddd_value": "0.75", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AA01", 
+        "ddd_value": "15.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AA02", 
+        "ddd_value": "0.15", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A06AB01", 
+        "ddd_value": "10.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A06AB02", 
+        "ddd_value": "10.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A06AB03", 
+        "ddd_value": "50.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AB04", 
+        "ddd_value": "0.20", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AB05", 
+        "ddd_value": "20.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "mg", 
+        "atc_code": "A06AB08", 
+        "ddd_value": "5.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AB09", 
+        "ddd_value": "0.12", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC01", 
+        "ddd_value": "7.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC02", 
+        "ddd_value": "3.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC03", 
+        "ddd_value": "8.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC06", 
+        "ddd_value": "2.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC07", 
+        "ddd_value": "10.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AC08", 
+        "ddd_value": "2.50", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AD01", 
+        "ddd_value": "7.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AD02", 
+        "ddd_value": "7.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.defineddailydose", 
+    "fields": {
+        "ddd_units": "g", 
+        "atc_code": "A06AD04", 
+        "ddd_value": "7.00", 
+        "ddd_comment": null, 
+        "ddd_admr": "O"
+    }
+}
+]

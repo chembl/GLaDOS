@@ -1,0 +1,1002 @@
+[
+{
+    "pk": 1, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3172, 
+        "component": 4819, 
+        "site": 838, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2748, 
+        "component": 4968, 
+        "site": 1504, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 3, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2951, 
+        "component": 4800, 
+        "site": 1505, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 4, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2781, 
+        "component": 4909, 
+        "site": 2, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 5, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3139, 
+        "component": 4767, 
+        "site": 1507, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 6, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2702, 
+        "component": 3909, 
+        "site": 636, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 7, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3234, 
+        "component": 4512, 
+        "site": 217, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 8, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3916, 
+        "component": 4067, 
+        "site": 1299, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 9, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 3951, 
+        "site": 1300, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 10, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3463, 
+        "component": 5491, 
+        "site": 843, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 11, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2735, 
+        "component": 5364, 
+        "site": 1074, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 12, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3376, 
+        "component": 377, 
+        "site": 425, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 13, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3683, 
+        "component": 148, 
+        "site": 1508, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 14, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 3080, 
+        "site": 427, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 15, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 2461, 
+        "site": 1081, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 16, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 2337, 
+        "site": 1082, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 17, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3658, 
+        "component": 4, 
+        "site": 851, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 18, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2649, 
+        "component": 864, 
+        "site": 221, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 19, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3032, 
+        "component": 567, 
+        "site": 1084, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 20, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2805, 
+        "component": 2231, 
+        "site": 12, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 21, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 2933, 
+        "site": 1085, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 22, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2788, 
+        "component": 1388, 
+        "site": 13, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 23, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2874, 
+        "component": 3285, 
+        "site": 19, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 24, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2739, 
+        "component": 1319, 
+        "site": 437, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 25, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 940, 
+        "site": 23, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 26, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2712, 
+        "component": 1773, 
+        "site": 648, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 27, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3546, 
+        "component": 3569, 
+        "site": 26, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 28, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 3876, 
+        "site": 239, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 29, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3136, 
+        "component": 5262, 
+        "site": 242, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 30, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4377, 
+        "component": 4877, 
+        "site": 244, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 31, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 1185, 
+        "site": 448, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 32, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 995, 
+        "site": 246, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 33, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2720, 
+        "component": 2139, 
+        "site": 32, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 34, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 3376, 
+        "site": 1331, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 35, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3032, 
+        "component": 3348, 
+        "site": 1100, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 36, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 2254, 
+        "site": 876, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 37, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 3380, 
+        "site": 247, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 38, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 2106, 
+        "site": 33, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 39, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 552, 
+        "site": 34, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 40, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2928, 
+        "component": 3718, 
+        "site": 1104, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 41, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2928, 
+        "component": 4083, 
+        "site": 885, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 42, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4420, 
+        "component": 4019, 
+        "site": 460, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 43, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3235, 
+        "component": 4026, 
+        "site": 461, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 44, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 4436, 
+        "site": 889, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 45, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2753, 
+        "component": 4442, 
+        "site": 664, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 46, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2690, 
+        "component": 5195, 
+        "site": 1339, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 47, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3093, 
+        "component": 4547, 
+        "site": 1341, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 48, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3092, 
+        "component": 4739, 
+        "site": 1342, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 49, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 4787, 
+        "site": 1346, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 50, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2712, 
+        "component": 395, 
+        "site": 258, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 51, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 372, 
+        "site": 470, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 52, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 156, 
+        "site": 896, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 53, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3993, 
+        "component": 3145, 
+        "site": 1126, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 54, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 841, 
+        "site": 1127, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 55, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3683, 
+        "component": 986, 
+        "site": 473, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 56, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3280, 
+        "component": 861, 
+        "site": 47, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 57, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3092, 
+        "component": 1351, 
+        "site": 48, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 58, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 1299, 
+        "site": 1130, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 59, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3216, 
+        "component": 4996, 
+        "site": 474, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 60, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3132, 
+        "component": 1880, 
+        "site": 266, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 61, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 1131, 
+        "site": 1553, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 62, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2874, 
+        "component": 2706, 
+        "site": 1554, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 63, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 1202, 
+        "site": 1556, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 64, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 7, 
+        "site": 912, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 65, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2712, 
+        "component": 1690, 
+        "site": 482, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 66, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 1133, 
+        "site": 56, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 67, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4092, 
+        "component": 2560, 
+        "site": 485, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 68, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3658, 
+        "component": 752, 
+        "site": 490, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 69, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2702, 
+        "component": 1074, 
+        "site": 60, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 70, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3376, 
+        "component": 1089, 
+        "site": 61, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 71, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3676, 
+        "component": 1186, 
+        "site": 1365, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 72, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3216, 
+        "component": 44, 
+        "site": 62, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 73, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2711, 
+        "component": 1270, 
+        "site": 685, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 74, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2702, 
+        "component": 2607, 
+        "site": 687, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 75, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 2543, 
+        "site": 921, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 76, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 3212, 
+        "site": 1564, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 77, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 4003, 
+        "component": 2679, 
+        "site": 690, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 78, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 3222, 
+        "site": 1372, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 79, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2702, 
+        "component": 3065, 
+        "site": 66, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 80, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 2671, 
+        "site": 286, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 81, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2712, 
+        "component": 3890, 
+        "site": 1148, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 82, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2926, 
+        "component": 3633, 
+        "site": 67, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 83, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3679, 
+        "component": 4097, 
+        "site": 292, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 84, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2919, 
+        "component": 4912, 
+        "site": 498, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 85, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 5588, 
+        "site": 295, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 86, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3348, 
+        "component": 4755, 
+        "site": 1151, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 87, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3547, 
+        "component": 78, 
+        "site": 499, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 88, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2744, 
+        "component": 361, 
+        "site": 698, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 89, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3032, 
+        "component": 2094, 
+        "site": 504, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 90, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 4997, 
+        "site": 930, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 91, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 1953, 
+        "site": 1160, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 92, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 544, 
+        "site": 931, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 93, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 973, 
+        "site": 303, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 94, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3658, 
+        "component": 153, 
+        "site": 510, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 95, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 2268, 
+        "site": 512, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 96, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 2153, 
+        "site": 90, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 97, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3200, 
+        "component": 2997, 
+        "site": 710, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 98, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 3335, 
+        "component": 2859, 
+        "site": 940, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 99, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2683, 
+        "component": 3628, 
+        "site": 518, 
+        "site_residues": null
+    }
+},
+{
+    "pk": 100, 
+    "model": "chembl_core_model.sitecomponents", 
+    "fields": {
+        "domain": 2627, 
+        "component": 3312, 
+        "site": 1174, 
+        "site_residues": null
+    }
+}
+]

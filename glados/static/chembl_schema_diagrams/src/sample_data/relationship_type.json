@@ -1,0 +1,44 @@
+[
+{
+    "pk": "D", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Direct protein target assigned"
+    }
+},
+{
+    "pk": "H", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Homologous protein target assigned"
+    }
+},
+{
+    "pk": "M", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Molecular target other than protein assigned"
+    }
+},
+{
+    "pk": "N", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Non-molecular target assigned"
+    }
+},
+{
+    "pk": "S", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Subcellular target assigned"
+    }
+},
+{
+    "pk": "U", 
+    "model": "chembl_core_model.relationshiptype", 
+    "fields": {
+        "relationship_desc": "Default value - Target has yet to be curated"
+    }
+}
+]

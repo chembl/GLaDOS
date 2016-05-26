@@ -1,0 +1,3605 @@
+
+
+{
+  "class": "go.GraphLinksModel",
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+    {
+      "key": "GENERAL",
+      "fill": "rgba(128,128,128,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "SOURCE INFORMATION",
+      "fill": "rgba(0,128,128,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "COMPOUND INFORMATION",
+      "fill": "rgba(128,0,128,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "EXPERIMENTAL DATA",
+      "fill": "rgba(128,128,0,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "TARGET INFORMATION",
+      "fill": "rgba(0,0,128,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "BINDING-SITE INFORMATION",
+      "fill": "rgba(128,0,0,0.33)",
+      "isGroup": true,
+      "group": "TARGET INFORMATION"
+    },
+    {
+      "key": "MECHANISM/BINDING ANNOTATION",
+      "fill": "rgba(0,128,0,0.33)",
+      "isGroup": true
+    },
+    {
+      "key": "APPROVED DRUG/PESTICIDE DATA",
+      "fill": "rgba(28,64,120,0.33)",
+      "isGroup": true
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Primary key. Type of action of the drug e.g., agonist, antagonist",
+          "name": "action_type (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of how the action type is used",
+          "name": "description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Higher-level grouping of action types e.g., positive vs negative action",
+          "name": "parent_type"
+        }
+      ],
+      "key": "action_type",
+      "group": "MECHANISM/BINDING ANNOTATION",
+      "loc": "-325.37800711575915 -4860.310554503555"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for the activity row",
+          "name": "activity_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the assays table (containing the assay description)",
+          "name": "assay"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to documents table (for quick lookup of publication details - can also link to documents through compound_records or assays table)",
+          "name": "doc"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the compound_records table (containing information on the compound tested)",
+          "name": "record"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to compounds table (for quick lookup of compound structure - can also link to compounds through compound_records table)",
+          "name": "molregno"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Symbol constraining the activity value (e.g. >, <, =)",
+          "name": "standard_relation"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Datapoint value as it appears in the original publication.",
+          "name": "published_value"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Units of measurement as they appear in the original publication",
+          "name": "published_units"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Same as PUBLISHED_VALUE but transformed to common units: e.g. mM concentrations converted to nM.",
+          "name": "standard_value"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Selected 'Standard' units for data type: e.g. concentrations are in nM.",
+          "name": "standard_units"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Shows whether the standardised columns have been curated/set (1) or just default to the published data (0).",
+          "name": "standard_flag"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Standardised version of the published_activity_type (e.g. IC50 rather than Ic-50/Ic50/ic50/ic-50)",
+          "name": "standard_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Describes non-numeric activities i.e. 'Slighty active', 'Not determined'",
+          "name": "activity_comment"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of end-point measurement: e.g. IC50, LD50, %inhibition etc, as it appears in the original publication",
+          "name": "published_type"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Comment reflecting whether the values for this activity measurement are likely to be correct - one of 'Manually validated' (checked original paper and value is correct), 'Potential author error' (value looks incorrect but is as reported in the original paper), 'Outside typical range' (value seems too high/low to be correct e.g., negative IC50 value), 'Non standard unit type' (units look incorrect for this activity type).",
+          "name": "data_validity_comment"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the value is likely to be a repeat citation of a value reported in a previous ChEMBL paper, rather than a new, independent measurement.",
+          "name": "potential_duplicate"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Symbol constraining the activity value (e.g. >, <, =), as it appears in the original publication",
+          "name": "published_relation"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Negative log of selected concentration-response activity values (IC50/EC50/XC50/AC50/Ki/Kd/Potency)",
+          "name": "pchembl_value"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding result type in BioAssay Ontology (based on standard_type)",
+          "name": "bao_endpoint"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding unit in Unit Ontology (based on standard_units)",
+          "name": "uo_units"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding unit in QUDT Ontology (based on standard_units)",
+          "name": "qudt_units"
+        }
+      ],
+      "key": "activities",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "-354.4864938349192 -6187.99894732037"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "std_act_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The standard_type that other published_types in the activities table have been converted to.",
+          "name": "standard_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A description/definition of the standard_type.",
+          "name": "definition"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The units that are applied to this standard_type and to which other published_units are converted. Note a standard_type may have more than one allowable standard_unit and therefore multiple rows in this table.",
+          "name": "standard_units"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The lowest value for this activity type that is likely to be genuine. This is only an approximation, so lower genuine values may exist, but it may be desirable to validate these before using them. For a given standard_type/units, values in the activities table below this threshold are flagged with a data_validity_comment of 'Outside typical range'.",
+          "name": "normal_range_min"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The highest value for this activity type that is likely to be genuine. This is only an approximation, so higher genuine values may exist, but it may be desirable to validate these before using them. For a given standard_type/units, values in the activities table above this threshold are flagged with a data_validity_comment of 'Outside typical range'.",
+          "name": "normal_range_max"
+        }
+      ],
+      "key": "activity_stds_lookup",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "-341.41670022234894 -5664.301032787546"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Numeric primary key",
+          "name": "assay_param_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to assays table. The assay to which this parameter belongs",
+          "name": "assay"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to parameter_type table, defining the meaning of the parameter",
+          "name": "parameter_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The value of the particular parameter",
+          "name": "parameter_value"
+        }
+      ],
+      "key": "assay_parameters",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "152.73463745026106 -6311.9577049268455"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Single character representing assay type",
+          "name": "assay_type (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of assay type",
+          "name": "assay_desc"
+        }
+      ],
+      "key": "assay_type",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "94.44279258521715 -6092.768986707682"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for the assay",
+          "name": "assay_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to documents table",
+          "name": "doc"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the reported assay",
+          "name": "description"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Assay classification, e.g. B=Binding assay, A=ADME assay, F=Functional assay",
+          "name": "assay_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of assay system (i.e., in vivo or in vitro)",
+          "name": "assay_test_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "screening, confirmatory (ie: dose-response), summary, panel or other.",
+          "name": "assay_category"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of the organism for the assay system (e.g., the organism, tissue or cell line in which an assay was performed). May differ from the target organism (e.g., for a human protein expressed in non-human cells, or pathogen-infected human cells).",
+          "name": "assay_organism"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI tax ID for the assay organism.",
+          "name": "assay_tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of specific strain of the assay organism used (where known)",
+          "name": "assay_strain"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of tissue used in the assay system (e.g., for tissue-based assays) or from which the assay system was derived (e.g., for cell/subcellular fraction-based assays).",
+          "name": "assay_tissue"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of cell type or cell line used in the assay system (e.g., for cell-based assays).",
+          "name": "assay_cell_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of subcellular fraction used in the assay system (e.g., microsomes, mitochondria).",
+          "name": "assay_subcellular_fraction"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Target identifier to which this assay has been mapped. Foreign key to target_dictionary. From ChEMBL_15 onwards, an assay will have only a single target assigned.",
+          "name": "tid"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Flag indicating of the relationship between the reported target in the source document and the assigned target from TARGET_DICTIONARY. Foreign key to RELATIONSHIP_TYPE table.",
+          "name": "relationship_type"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Confidence score, indicating how accurately the assigned target(s) represents the actually assay target. Foreign key to CONFIDENCE_SCORE table. 0 means uncurated/unassigned, 1 = low confidence to 9 = high confidence.",
+          "name": "confidence_score"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Indicates the level of curation of the target assignment. Foreign key to curation_lookup table.",
+          "name": "curated_by"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to source table",
+          "name": "src"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Identifier for the assay in the source database/deposition (e.g., pubchem AID)",
+          "name": "src_assay_id"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ChEMBL identifier for this assay (for use on web interface etc)",
+          "name": "chembl"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to cell dictionary. The cell type or cell line used in the assay",
+          "name": "cell"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding format type in BioAssay Ontology (e.g., cell-based, biochemical, organism-based etc)",
+          "name": "bao_format"
+        }
+      ],
+      "key": "assays",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "-141.62543750354553 -6182.046399986344"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "WHO/INN name for the compound",
+          "name": "who_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "First level of classification",
+          "name": "level1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Second level of classification",
+          "name": "level2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Third level of classification",
+          "name": "level3"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Fourth level of classification",
+          "name": "level4"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Complete ATC code for compound",
+          "name": "level5 (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "WHO Identifier for compound",
+          "name": "who_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of first level of classification",
+          "name": "level1_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of second level of classification",
+          "name": "level2_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of third level of classification",
+          "name": "level3_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of fourth level of classification",
+          "name": "level4_description"
+        }
+      ],
+      "key": "atc_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-1391.959418274699 -4560.2249504062"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for a binding site in a given target.",
+          "name": "site_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name/label for the binding site.",
+          "name": "site_name"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to target_dictionary. Target on which the binding site is found.",
+          "name": "tid"
+        }
+      ],
+      "key": "binding_sites",
+      "group": "BINDING-SITE INFORMATION",
+      "loc": "936.3928898499623 -5231.913807724759"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for each of the molecular components of biotherapeutics in ChEMBL (e.g., antibody chains, recombinant proteins, synthetic peptides).",
+          "name": "component_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of molecular component (e.g., 'PROTEIN','DNA','RNA').",
+          "name": "component_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description/name of molecular component.",
+          "name": "description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Sequence of the biotherapeutic component.",
+          "name": "sequence"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "MD5 checksum of the sequence.",
+          "name": "sequence_md5sum"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI tax ID for the species from which the sequence is derived. May be null for humanized monoclonal antibodies, synthetic peptides etc.",
+          "name": "tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of the species from which the sequence is derived.",
+          "name": "organism"
+        }
+      ],
+      "key": "bio_component_sequences",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-1059.8450867788195 -5491.80049457869"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "biocomp_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the biotherapeutics table, indicating which biotherapeutic the component is part of.",
+          "name": "molregno"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the bio_component_sequences table, indicating which component is part of the biotherapeutic.",
+          "name": "component"
+        }
+      ],
+      "key": "biotherapeutic_components",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-1004.0981768837617 -5675.084381413491"
+    },
+    {
+      "fields": [
+        {
+          "color": "#D109F9",
+          "figure": "Pentagon",
+          "info": "Foreign key to molecule_dictionary",
+          "name": "molregno (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the biotherapeutic.",
+          "name": "description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Sequence notation generated according to the HELM standard (http://www.openhelm.org/home). Currently for peptides only",
+          "name": "helm_notation"
+        }
+      ],
+      "key": "biotherapeutics",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-1024.1106622906295 -5841.891830762594"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for each cell line in the target_dictionary.",
+          "name": "cell_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of each cell line (as used in the target_dicitonary pref_name).",
+          "name": "cell_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Longer description (where available) of the cell line.",
+          "name": "cell_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Tissue from which the cell line is derived, where known.",
+          "name": "cell_source_tissue"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of organism from which the cell line is derived.",
+          "name": "cell_source_organism"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI tax ID of the organism from which the cell line is derived.",
+          "name": "cell_source_tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding cell line in Cell Line Ontology",
+          "name": "clo_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding cell line in Experimental Factory Ontology",
+          "name": "efo_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ID for the corresponding cell line in Cellosaurus Ontology",
+          "name": "cellosaurus_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Cell ID used in LINCS (Library of Integrated Network-based Cellular Signatures)",
+          "name": "cl_lincs_id"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ChEMBL identifier for the cell (used in web interface etc)",
+          "name": "chembl"
+        }
+      ],
+      "key": "cell_dictionary",
+      "group": "TARGET INFORMATION",
+      "loc": "691.9357675669046 -5863.765255715737"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "ChEMBL identifier",
+          "name": "chembl_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of entity (e.g., COMPOUND, ASSAY, TARGET)",
+          "name": "entity_type"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key for that entity in corresponding table (e.g., molregno for compounds, tid for targets)",
+          "name": "entity_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates whether the status of the entity within the database - ACTIVE, INACTIVE (downgraded), OBS (obsolete/removed).",
+          "name": "status"
+        }
+      ],
+      "key": "chembl_id_lookup",
+      "group": "GENERAL",
+      "loc": "78.99594098631525 -6469.87766197472"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to component_sequences table.",
+          "name": "component"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the protein_classification table.",
+          "name": "protein_class"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "comp_class_id (PK)"
+        }
+      ],
+      "key": "component_class",
+      "group": "TARGET INFORMATION",
+      "loc": "1355.6897757162128 -6244.637157542629"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "compd_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the domains table, indicating the domain that is contained in the associated molecular component.",
+          "name": "domain"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the component_sequences table, indicating the molecular_component that has the given domain.",
+          "name": "component"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Start position of the domain within the sequence given in the component_sequences table.",
+          "name": "start_position"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "End position of the domain within the sequence given in the component_sequences table.",
+          "name": "end_position"
+        }
+      ],
+      "key": "component_domains",
+      "group": "BINDING-SITE INFORMATION",
+      "loc": "1493.756275699451 -5368.392280986345"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for the component.",
+          "name": "component_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of molecular component represented (e.g., 'PROTEIN','DNA','RNA').",
+          "name": "component_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Accession for the sequence in the source database from which it was taken (e.g., UniProt accession for proteins).",
+          "name": "accession"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A representative sequence for the molecular component, as given in the source sequence database (not necessarily the exact sequence used in the assay).",
+          "name": "sequence"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "MD5 checksum of the sequence.",
+          "name": "sequence_md5sum"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description/name for the molecular component, usually taken from the source sequence database.",
+          "name": "description"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI tax ID for the sequence in the source database (i.e., species that the protein/nucleic acid sequence comes from).",
+          "name": "tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of the organism the sequence comes from.",
+          "name": "organism"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The name of the source sequence database from which sequences/accessions are taken. For UniProt proteins, this field indicates whether the sequence is from SWISS-PROT or TREMBL.",
+          "name": "db_source"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The version of the source sequence database from which sequences/accession were last updated.",
+          "name": "db_version"
+        }
+      ],
+      "key": "component_sequences",
+      "group": "TARGET INFORMATION",
+      "loc": "1043.4705705563529 -6507.184257078449"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "compsyn_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the component_sequences table. The component to which this synonym applies.",
+          "name": "component"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The synonym for the component.",
+          "name": "component_synonym"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The type or origin of the synonym (e.g., GENE_SYMBOL).",
+          "name": "syn_type"
+        }
+      ],
+      "key": "component_synonyms",
+      "group": "TARGET INFORMATION",
+      "loc": "1301.4329841844572 -6777.138277885351"
+    },
+    {
+      "fields": [
+        {
+          "color": "#D109F9",
+          "figure": "Pentagon",
+          "info": "Foreign key to compounds table (compound structure)",
+          "name": "molregno (PK)"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Molecular weight of parent compound",
+          "name": "mw_freebase"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Calculated ALogP",
+          "name": "alogp"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number hydrogen bond acceptors",
+          "name": "hba"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number hydrogen bond donors",
+          "name": "hbd"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Polar surface area",
+          "name": "psa"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number rotatable bonds",
+          "name": "rtb"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates whether the compound passes the rule-of-three (mw < 300, logP < 3 etc)",
+          "name": "ro3_pass"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of violations of Lipinski's rule-of-five, using HBA and HBD definitions",
+          "name": "num_ro5_violations"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "DEPRECATED. Replaced by new structural alerts tables. Will be removed in future releases.",
+          "name": "med_chem_friendly"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The most acidic pKa calculated using ACDlabs v12.01",
+          "name": "acd_most_apka"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The most basic pKa calculated using ACDlabs v12.01",
+          "name": "acd_most_bpka"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The calculated octanol/water partition coefficient using ACDlabs v12.01",
+          "name": "acd_logp"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "The calculated octanol/water distribution coefficient at pH7.4 using ACDlabs v12.01",
+          "name": "acd_logd"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates whether the compound is an acid/base/neutral",
+          "name": "molecular_species"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Molecular weight of the full compound including any salts",
+          "name": "full_mwt"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of aromatic rings",
+          "name": "aromatic_rings"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of heavy (non-hydrogen) atoms",
+          "name": "heavy_atoms"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of structural alerts used for QED calculation (as defined by Brenk et al., ChemMedChem 2008)",
+          "name": "num_alerts"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Weighted quantitative estimate of drug likeness (as defined by Bickerton et al., Nature Chem 2012)",
+          "name": "qed_weighted"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Monoisotopic parent molecular weight",
+          "name": "mw_monoisotopic"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Molecular formula for the full compound (including any salt)",
+          "name": "full_molformula"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of hydrogen bond acceptors calculated according to Lipinski's original rules (i.e., N + O count))",
+          "name": "hba_lipinski"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of hydrogen bond donors calculated according to Lipinski's original rules (i.e., NH + OH count)",
+          "name": "hbd_lipinski"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Number of violations of Lipinski's rule of five using HBA_LIPINSKI and HBD_LIPINSKI counts",
+          "name": "num_lipinski_ro5_violations"
+        }
+      ],
+      "key": "compound_properties",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-1389.6205344068612 -6100.042335312838"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for a compound/record",
+          "name": "record_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to compounds table (compound structure)",
+          "name": "molregno"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to documents table",
+          "name": "doc"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Key text identifying this compound in the scientific document",
+          "name": "compound_key"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of this compound recorded in the scientific document",
+          "name": "compound_name"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to source table",
+          "name": "src"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Identifier for the compound in the source database (e.g., pubchem SID)",
+          "name": "src_compound_id"
+        }
+      ],
+      "key": "compound_records",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-610.9676816855401 -6273.548880361579"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "cpd_str_alert_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the molecule_dictionary. The compound for which the structural alert has been found.",
+          "name": "molregno"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the structural_alerts table. The particular alert that has been identified in this compound.",
+          "name": "alert"
+        }
+      ],
+      "key": "compound_structural_alerts",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-795.5787037523942 -5544.848963883705"
+    },
+    {
+      "fields": [
+        {
+          "color": "#D109F9",
+          "figure": "Pentagon",
+          "info": "Internal Primary Key for the compound structure and foreign key to molecule_dictionary table",
+          "name": "molregno (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "MDL Connection table representation of compound",
+          "name": "molfile"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "IUPAC standard InChI for the compound",
+          "name": "standard_inchi"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "IUPAC standard InChI key for the compound",
+          "name": "standard_inchi_key"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Canonical smiles, generated using pipeline pilot",
+          "name": "canonical_smiles"
+        }
+      ],
+      "key": "compound_structures",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-809.3518454934292 -5808.805562086288"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "0-9 score showing level of confidence in assignment of the precise molecular target of the assay",
+          "name": "confidence_score (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the target types assigned with each score",
+          "name": "description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Short description of the target types assigned with each score",
+          "name": "target_mapping"
+        }
+      ],
+      "key": "confidence_score_lookup",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "210.64476742724628 -5853.424981515214"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Short description of the level of curation",
+          "name": "curated_by (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Definition of terms in the curated_by field.",
+          "name": "description"
+        }
+      ],
+      "key": "curation_lookup",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "-111.63999824016241 -5654.885398414825"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Primary key. Short description of various types of errors/warnings applied to values in the activities table.",
+          "name": "data_validity_comment (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Definition of the terms in the data_validity_comment field.",
+          "name": "description"
+        }
+      ],
+      "key": "data_validity_lookup",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "-134.26802691387547 -5533.820937047894"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ATC code for the compound (foreign key to ATC_CLASSIFICATION table)",
+          "name": "atc_code"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Value of defined daily dose",
+          "name": "ddd_value"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Units of defined daily dose",
+          "name": "ddd_units"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Administration route for dose",
+          "name": "ddd_admr"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Comment",
+          "name": "ddd_comment"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Internal primary key",
+          "name": "ddd_id (PK)"
+        }
+      ],
+      "key": "defined_daily_dose",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-1132.9587867493208 -4416.650157774501"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for the document",
+          "name": "doc_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Abbreviated journal name for an article",
+          "name": "journal"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Year of journal article publication",
+          "name": "year"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Volume of journal article",
+          "name": "volume"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Issue of journal article",
+          "name": "issue"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "First page number of journal article",
+          "name": "first_page"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Last page number of journal article",
+          "name": "last_page"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NIH pubmed record ID, where available",
+          "name": "pubmed_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Digital object identifier for this reference",
+          "name": "doi"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ChEMBL identifier for this document (for use on web interface etc)",
+          "name": "chembl"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Document title (e.g., Publication title or description of dataset)",
+          "name": "title"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of the document (e.g., Publication, Deposited dataset)",
+          "name": "doc_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "For a deposited dataset, the authors carrying out the screening and/or submitting the dataset.",
+          "name": "authors"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "For a deposited dataset, a brief description of the dataset.",
+          "name": "abstract"
+        }
+      ],
+      "key": "docs",
+      "group": "SOURCE INFORMATION",
+      "loc": "-1386.7234668773676 -6683.717895009504"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for each domain.",
+          "name": "domain_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates the source of the domain (e.g., Pfam).",
+          "name": "domain_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Identifier for the domain in the source database (e.g., Pfam ID such as PF00001).",
+          "name": "source_domain_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name given to the domain in the source database (e.g., 7tm_1).",
+          "name": "domain_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Longer name or description for the domain.",
+          "name": "domain_description"
+        }
+      ],
+      "key": "domains",
+      "group": "BINDING-SITE INFORMATION",
+      "loc": "1489.9440675218045 -4907.457022598495"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key for each drug mechanism of action",
+          "name": "mec_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Record_id for the drug (foreign key to compound_records table)",
+          "name": "record"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Molregno for the drug (foreign key to molecule_dictionary table)",
+          "name": "molregno"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the mechanism of action e.g., 'Phosphodiesterase 5 inhibitor'",
+          "name": "mechanism_of_action"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Target associated with this mechanism of action (foreign key to target_dictionary table)",
+          "name": "tid"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Binding site for the drug within the target (where known) - foreign key to binding_sites table",
+          "name": "site"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Type of action of the drug on the target e.g., agonist/antagonist etc (foreign key to action_type table)",
+          "name": "action_type"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether the molecule is believed to interact directly with the target (1 = yes, 0 = no)",
+          "name": "direct_interaction"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether the mechanism of action describes the molecular target of the drug, rather than a higher-level physiological mechanism e.g., vasodilator (1 = yes, 0 = no)",
+          "name": "molecular_mechanism"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether the target assigned is believed to play a role in the efficacy of the drug in the indication(s) for which it is approved (1 = yes, 0 = no)",
+          "name": "disease_efficacy"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Additional comments regarding the mechanism of action",
+          "name": "mechanism_comment"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Additional comments regarding the selectivity of the drug",
+          "name": "selectivity_comment"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Additional comments regarding the binding site of the drug",
+          "name": "binding_site_comment"
+        }
+      ],
+      "key": "drug_mechanism",
+      "group": "MECHANISM/BINDING ANNOTATION",
+      "loc": "-350.0819722267727 -5237.752430272103"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Unique identifier of the product. FK to PRODUCTS",
+          "name": "product"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of the approved ingredient within the product",
+          "name": "ingredient"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Dose strength",
+          "name": "strength"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the compound_records table.",
+          "name": "record"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Unique identifier of the ingredient FK to MOLECULE_DICTIONARY",
+          "name": "molregno"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "formulation_id (PK)"
+        }
+      ],
+      "key": "formulations",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "621.5384357849612 -4722.724505337052"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique numeric primary key for each level5 code",
+          "name": "frac_class_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of active ingredient (fungicide) classified by FRAC",
+          "name": "active_ingredient"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Mechanism of action code assigned by FRAC",
+          "name": "level1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of mechanism of action",
+          "name": "level1_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Target site code assigned by FRAC",
+          "name": "level2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of target provided by FRAC",
+          "name": "level2_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Group number assigned by FRAC",
+          "name": "level3"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of group provided by FRAC",
+          "name": "level3_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Number denoting the chemical group (number not assigned by FRAC)",
+          "name": "level4"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Chemical group name provided by FRAC",
+          "name": "level4_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A unique code assigned to each ingredient (based on the level 1-4 FRAC classification, but not assigned by IRAC)",
+          "name": "level5"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The official FRAC classification code for the ingredient",
+          "name": "frac_code"
+        }
+      ],
+      "key": "frac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "422.0852818147507 -4529.678219705204"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique numeric primary key for each level3 code",
+          "name": "hrac_class_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of active ingredient (herbicide) classified by HRAC",
+          "name": "active_ingredient"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "HRAC group code - denoting mechanism of action of herbicide",
+          "name": "level1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of mechanism of action provided by HRAC",
+          "name": "level1_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates a chemical family within a particular HRAC group (number not assigned by HRAC)",
+          "name": "level2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of chemical family provided by HRAC",
+          "name": "level2_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A unique code assigned to each ingredient (based on the level 1 and 2 HRAC classification, but not assigned by HRAC)",
+          "name": "level3"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The official HRAC classification code for the ingredient",
+          "name": "hrac_code"
+        }
+      ],
+      "key": "hrac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-135.84965300377314 -4654.194661117916"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique numeric primary key for each level4 code",
+          "name": "irac_class_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of active ingredient (insecticide) classified by IRAC",
+          "name": "active_ingredient"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Class of action e.g., nerve action, energy metabolism (code not assigned by IRAC)",
+          "name": "level1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of class of action, as provided by IRAC",
+          "name": "level1_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "IRAC main group code denoting primary site/mechanism of action",
+          "name": "level2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of site/mechanism of action provided by IRAC",
+          "name": "level2_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "IRAC sub-group code denoting chemical class of insecticide",
+          "name": "level3"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of chemical class or exemplifying ingredient provided by IRAC",
+          "name": "level3_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A unique code assigned to each ingredient (based on the level 1, 2 and 3 IRAC classification, but not assigned by IRAC)",
+          "name": "level4"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The official IRAC classification code for the ingredient",
+          "name": "irac_code"
+        }
+      ],
+      "key": "irac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "214.07742106957608 -4667.7407937174385"
+    },
+    {
+      "fields": [
+        {
+          "color": "#D109F9",
+          "figure": "Pentagon",
+          "info": "Link key to activities table",
+          "name": "activity (PK)"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Binding Efficiency Index = p(XC50) *1000/MW_freebase",
+          "name": "bei"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Surface Efficiency Index = p(XC50)*100/PSA",
+          "name": "sei"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Ligand Efficiency = deltaG/heavy_atoms  [from the Hopkins DDT paper 2004]",
+          "name": "le"
+        },
+        {
+          "color": "#32A8D3",
+          "figure": "FivePointedStar",
+          "info": "Lipophilic Ligand Efficiency = -logKi-ALogP. [from Leeson NRDD 2007]",
+          "name": "lle"
+        }
+      ],
+      "key": "ligand_eff",
+      "group": "MECHANISM/BINDING ANNOTATION",
+      "loc": "-108.05584572857674 -5336.571188531215"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key",
+          "name": "mecref_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to drug_mechanism table - indicating the mechanism to which the references refer",
+          "name": "mec_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type/source of reference (e.g., 'PubMed','DailyMed')",
+          "name": "ref_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Identifier for the reference in the source (e.g., PubMed ID or DailyMed setid)",
+          "name": "ref_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Full URL linking to the reference",
+          "name": "ref_url"
+        }
+      ],
+      "key": "mechanism_refs",
+      "group": "MECHANISM/BINDING ANNOTATION",
+      "loc": "-95.79221517754831 -5030.563831906366"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key",
+          "name": "mol_atc_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ATC code (foreign key to atc_classification table)",
+          "name": "level5"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Drug to which the ATC code applies (foreign key to molecule_dictionary table)",
+          "name": "molregno"
+        }
+      ],
+      "key": "molecule_atc_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-1144.806280933349 -4640.643745278439"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Internal Primary Key for the molecule",
+          "name": "molregno (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Preferred name for the molecule",
+          "name": "pref_name"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ChEMBL identifier for this compound (for use on web interface etc)",
+          "name": "chembl"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Maximum phase of development reached for the compound (4 = approved). Null where max phase has not yet been assigned.",
+          "name": "max_phase"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates that a drug has a therapeutic application (as opposed to e.g., an imaging agent, additive etc).",
+          "name": "therapeutic_flag"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates that the drug is dosed in this form (e.g., a particular salt)",
+          "name": "dosed_ingredient"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indications whether the molecule has a small molecule structure or a protein sequence (MOL indicates an entry in the compound_structures table, SEQ indications an entry in the protein_therapeutics table, NONE indicates an entry in neither table, e.g., structure unknown)",
+          "name": "structure_type"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Preferred ChEBI ID for the compound (where different from assigned)",
+          "name": "chebi_par_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of molecule (Small molecule, Protein, Antibody, Oligosaccharide, Oligonucleotide, Cell, Unknown)",
+          "name": "molecule_type"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Earliest known approval year for the molecule",
+          "name": "first_approval"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the drug is known to be administered orally.",
+          "name": "oral"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the drug is known to be administered parenterally",
+          "name": "parenteral"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the drug is known to be administered topically.",
+          "name": "topical"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates that the drug has a black box warning",
+          "name": "black_box_warning"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the compound is natural product-derived (currently curated only for drugs)",
+          "name": "natural_product"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether this is known to be the first compound of its class (e.g., acting on a particular target).",
+          "name": "first_in_class"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Shows whether a drug is dosed as a racemic mixture (0), single stereoisomer (1) or is an achiral molecule (2)",
+          "name": "chirality"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates that the molecule is a pro-drug (see molecule hierarchy for active component, where known)",
+          "name": "prodrug"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether the molecule is inorganic (i.e., containing only metal atoms and <2 carbon atoms)",
+          "name": "inorganic_flag"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "The year in which the application for a USAN/INN name was made",
+          "name": "usan_year"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "The availability type for the drug (0 = discontinued, 1 = prescription only, 2 = over the counter)",
+          "name": "availability_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Where the compound has been assigned a USAN name, this indicates the stem, as described in the USAN_STEM table.",
+          "name": "usan_stem"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Indicates whether a molecule is a small molecule polymer (e.g., polistyrex)",
+          "name": "polymer_flag"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Where the compound has been assigned a USAN name, this indicates the substem",
+          "name": "usan_substem"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Definition of the USAN stem",
+          "name": "usan_stem_definition"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indication class(es) assigned to a drug in the USP dictionary",
+          "name": "indication_class"
+        }
+      ],
+      "key": "molecule_dictionary",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-605.8123365549986 -6019.485593407434"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "mol_frac_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to frac_classification table showing the mechanism of action classification of the compound.",
+          "name": "frac_class"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to molecule_dictionary, showing the compound to which the classification applies.",
+          "name": "molregno"
+        }
+      ],
+      "key": "molecule_frac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-362.96510487450337 -4432.019192548331"
+    },
+    {
+      "fields": [
+        {
+          "color": "#D109F9",
+          "figure": "Pentagon",
+          "info": "Foreign key to compounds table. This field holds a list of all of the ChEMBL compounds with associated data (e.g., activity information, approved drugs). Parent compounds that are generated only by removing salts, and which do not themselves have any associated data will not appear here.",
+          "name": "molregno (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Represents parent compound of molregno in first field (i.e., generated by removing salts). Where molregno and parent_molregno are same, the initial ChEMBL compound did not contain a salt component, or else could not be further processed for various reasons (e.g., inorganic mixture). Compounds which are only generated by removing salts will appear in this field only. Those which, themselves, have any associated data (e.g., activity data) or are launched drugs will also appear in the molregno field.",
+          "name": "parent_molregno"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Where a compound is a pro-drug, this represents the active metabolite of the 'dosed' compound given by parent_molregno. Where parent_molregno and active_molregno are the same, the compound is not currently known to be a pro-drug. ",
+          "name": "active_molregno"
+        }
+      ],
+      "key": "molecule_hierarchy",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-881.5225872463701 -6320.675605673053"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key",
+          "name": "mol_hrac_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to hrac_classification table showing the classification for the compound.",
+          "name": "hrac_class"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to molecule_dictionary, showing the compound to which this classification applies.",
+          "name": "molregno"
+        }
+      ],
+      "key": "molecule_hrac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-375.39243066283814 -4722.066552774549"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "mol_irac_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the irac_classification table showing the mechanism of action classification for the compound.",
+          "name": "irac_class"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the molecule_dictionary table, showing the compound to which the classification applies.",
+          "name": "molregno"
+        }
+      ],
+      "key": "molecule_irac_classification",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-366.2156843276873 -4573.579421539532"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to molecule_dictionary",
+          "name": "molregno"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Type of name/synonym (e.g., TRADE_NAME, RESEARCH_CODE, USAN)",
+          "name": "syn_type"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "molsyn_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the research_stem table. Where a synonym is a research code, this links to further information about the company associated with that code.",
+          "name": "res_stem"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Synonym for the compound",
+          "name": "synonyms"
+        }
+      ],
+      "key": "molecule_synonyms",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-507.31866438974475 -5054.215895706326"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Internal primary key",
+          "name": "oc_id (PK)"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI taxonomy ID for the organism (corresponding to tax_ids in assay2target and target_dictionary tables)",
+          "name": "tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Highest level classification (e.g., Eukaryotes, Bacteria, Fungi etc)",
+          "name": "l1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Second level classification",
+          "name": "l2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Third level classification",
+          "name": "l3"
+        }
+      ],
+      "key": "organism_class",
+      "group": "TARGET INFORMATION",
+      "loc": "860.8518595526584 -6165.324474156907"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Short name for the type of parameter associated with an assay",
+          "name": "parameter_type (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the parameter type",
+          "name": "description"
+        }
+      ],
+      "key": "parameter_type",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "228.92845552115455 -5993.465156079426"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Primary key. Patent use code from FDA Orange Book",
+          "name": "patent_use_code (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Definition for the patent use code, from FDA Orange Book.",
+          "name": "definition"
+        }
+      ],
+      "key": "patent_use_codes",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "1199.6019899327384 -4347.279776005509"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "predbind_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the activities table, indicating the compound/assay(+target) combination for which this prediction is made.",
+          "name": "activity"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the binding_sites table, indicating the binding site (domain) that the compound is predicted to bind to.",
+          "name": "site"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The method used to assign the binding domain (e.g., 'Single domain' where the protein has only 1 domain, 'Multi domain' where the protein has multiple domains, but only 1 is known to bind small molecules in other proteins).",
+          "name": "prediction_method"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The level of confidence assigned to the prediction (high where the protein has only 1 domain, medium where the compound has multiple domains, but only 1 known small molecule-binding domain).",
+          "name": "confidence"
+        }
+      ],
+      "key": "predicted_binding_domains",
+      "group": "MECHANISM/BINDING ANNOTATION",
+      "loc": "236.02530554242276 -5429.9446155653195"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key",
+          "name": "prod_pat_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to products table - FDA application number for the product",
+          "name": "product"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Patent numbers as submitted by the applicant holder for patents covered by the statutory provisions",
+          "name": "patent_no"
+        },
+        {
+          "color": "#BB1EC9",
+          "figure": "ThickCross",
+          "info": "Date the patent expires as submitted by the applicant holder including applicable extensions",
+          "name": "patent_expire_date"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Patents submitted on FDA Form 3542 and listed after August 18, 2003 may have a drug substance flag set to 1, indicating the sponsor submitted the patent as claiming the drug substance",
+          "name": "drug_substance_flag"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Patents submitted on FDA Form 3542 and listed after August 18, 2003 may have a drug product flag set to 1, indicating the sponsor submitted the patent as claiming the drug product",
+          "name": "drug_product_flag"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Code to designate a use patent that covers the approved indication or use of a drug product",
+          "name": "patent_use_code"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Sponsor has requested patent be delisted if set to 1.  This patent has remained listed because, under Section 505(j)(5)(D)(i) of the Act, a first applicant may retain eligibility for 180-day exclusivity based on a paragraph IV certification to this patent for a certain period.  Applicants under Section 505(b)(2) are not required to certify to patents where this flag is set to 1",
+          "name": "delist_flag"
+        }
+      ],
+      "key": "product_patents",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "1496.3521641120765 -4744.42162079801"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The dosage form of the product (e.g., tablet, capsule etc)",
+          "name": "dosage_form"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The administration route of the product (e.g., oral, injection etc)",
+          "name": "route"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The trade name for the product",
+          "name": "trade_name"
+        },
+        {
+          "color": "#BB1EC9",
+          "figure": "ThickCross",
+          "info": "The FDA approval date for the product (not necessarily first approval of the active ingredient)",
+          "name": "approval_date"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "RX = prescription, OTC = over the counter, DISCN = discontinued",
+          "name": "ad_type"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether product is orally delivered",
+          "name": "oral"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether product is topically delivered",
+          "name": "topical"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether product is parenterally delivered",
+          "name": "parenteral"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether the product label has a black box warning",
+          "name": "black_box_warning"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of the company applying for FDA approval",
+          "name": "applicant_full_name"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to show whether the applicant is the innovator of the product",
+          "name": "innovator_company"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "FDA application number for the product",
+          "name": "product_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "New Drug Application Type. The type of new drug application approval.  New Drug Applications (NDA or innovator)  are \"N\".   Abbreviated New Drug Applications (ANDA or generic) are \"A\".",
+          "name": "nda_type"
+        }
+      ],
+      "key": "products",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "856.7805968973346 -4727.420602855378"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "protclasssyn_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the PROTEIN_CLASSIFICATION table. The protein_class to which this synonym applies.",
+          "name": "protein_class"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The synonym for the protein class.",
+          "name": "protein_class_synonym"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The type or origin of the synonym (e.g., ChEMBL, Concept Wiki, UMLS).",
+          "name": "syn_type"
+        }
+      ],
+      "key": "protein_class_synonyms",
+      "group": "TARGET INFORMATION",
+      "loc": "1391.1887887224161 -5714.876359292233"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for each protein family classification.",
+          "name": "protein_class_id (PK)"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Protein_class_id for the parent of this protein family.",
+          "name": "parent_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Preferred/full name for this protein family.",
+          "name": "pref_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Short/abbreviated name for this protein family (not necessarily unique).",
+          "name": "short_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Concatenated description of each classification for searching purposes etc.",
+          "name": "protein_class_desc"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Definition of the protein family.",
+          "name": "definition"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Level of the class within the hierarchy (level 1 = top level classification)",
+          "name": "class_level"
+        }
+      ],
+      "key": "protein_classification",
+      "group": "TARGET INFORMATION",
+      "loc": "1188.2424542589326 -6008.270273024194"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for each classification.",
+          "name": "protein_class_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Concatenated description of each classification for searching purposes etc.",
+          "name": "protein_class_desc"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "First level classification (e.g., Enzyme, Transporter, Ion Channel).",
+          "name": "l1"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Second level classification.",
+          "name": "l2"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Third level classification.",
+          "name": "l3"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Fourth level classification.",
+          "name": "l4"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Fifth level classification.",
+          "name": "l5"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Sixth level classification.",
+          "name": "l6"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Seventh level classification.",
+          "name": "l7"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Eighth level classification.",
+          "name": "l8"
+        }
+      ],
+      "key": "protein_family_classification",
+      "group": "TARGET INFORMATION",
+      "loc": "626.1061380789861 -5486.348810112777"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Relationship_type flag used in the assay2target table",
+          "name": "relationship_type (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of relationship_type flags",
+          "name": "relationship_desc"
+        }
+      ],
+      "key": "relationship_type",
+      "group": "EXPERIMENTAL DATA",
+      "loc": "165.40181646625842 -5578.316834258567"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "co_stem_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to research_stem table.",
+          "name": "res_stem"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of current company associated with this research code stem.",
+          "name": "company"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Country in which the company uses this research code stem.",
+          "name": "country"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Previous name of the company associated with this research code stem (e.g., if the company has undergone acquisitions/mergers).",
+          "name": "previous_company"
+        }
+      ],
+      "key": "research_companies",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-1180.8287103423636 -4919.630103884708"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique ID for each research code stem.",
+          "name": "res_stem_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "The actual stem/prefix used in the research code.",
+          "name": "research_stem"
+        }
+      ],
+      "key": "research_stem",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-903.1775649121001 -4907.556957356444"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "sitecomp_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to binding_sites table.",
+          "name": "site"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the component_sequences table, indicating which molecular component of the target is involved in the binding site.",
+          "name": "component"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the domains table, indicating which domain of the given molecular component is involved in the binding site (where not known, the domain_id may be null).",
+          "name": "domain"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "List of residues from the given molecular component that make up the binding site (where not know, will be null).",
+          "name": "site_residues"
+        }
+      ],
+      "key": "site_components",
+      "group": "BINDING-SITE INFORMATION",
+      "loc": "976.4815869722902 -4990.353548122246"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Identifier for each source (used in compound_records and assays tables)",
+          "name": "src_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of the data source",
+          "name": "src_description"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A short name for each data source, for display purposes",
+          "name": "src_short_name"
+        }
+      ],
+      "key": "source",
+      "group": "SOURCE INFORMATION",
+      "loc": "-108.03215397518784 -6782.809715508774"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for the structural alert set",
+          "name": "alert_set_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name (or origin) of the structural alert set",
+          "name": "set_name"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Priority assigned to the structural alert set for display on the ChEMBL interface (priorities >=4 are shown by default).",
+          "name": "priority"
+        }
+      ],
+      "key": "structural_alert_sets",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-776.059058153312 -5190.295352339072"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key. Unique identifier for the structural alert",
+          "name": "alert_id (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to structural_alert_sets table indicating which set this particular alert comes from",
+          "name": "alert_set"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "A name for the structural alert",
+          "name": "alert_name"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "SMARTS defining the structural feature that is considered to be an alert",
+          "name": "smarts"
+        }
+      ],
+      "key": "structural_alerts",
+      "group": "COMPOUND INFORMATION",
+      "loc": "-781.98872442578 -5390.142479310624"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the target_dictionary, indicating the target to which the components belong.",
+          "name": "tid"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Foreign key to the component_sequences table, indicating which components belong to the target.",
+          "name": "component"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key.",
+          "name": "targcomp_id (PK)"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Indicates that the given component is a homologue of the correct component (e.g., from a different species) when set to 1. This may be the case if the sequence for the correct protein/nucleic acid cannot be found in sequence databases. A value of 2 indicates that the sequence given is a representative of a species group, e.g., an E. coli protein to represent the target of a broad-spectrum antibiotic.",
+          "name": "homologue"
+        }
+      ],
+      "key": "target_components",
+      "group": "TARGET INFORMATION",
+      "loc": "798.89761755575 -6560.19979442611"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Unique ID for the target",
+          "name": "tid (PK)"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Describes whether target is a protein, an organism, a tissue etc. Foreign key to TARGET_TYPE table.",
+          "name": "target_type"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Preferred target name: manually curated",
+          "name": "pref_name"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "NCBI taxonomy id of target",
+          "name": "tax_id"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Source organism of molecuar target or tissue, or the target organism if compound activity is reported in an organism rather than a protein or tissue",
+          "name": "organism"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "ChEMBL identifier for this target (for use on web interface etc)",
+          "name": "chembl"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Flag to indicate whether the target represents a group of species, rather than an individual species (e.g., 'Bacterial DHFR'). Where set to 1, indicates that any associated target components will be a representative, rather than a comprehensive set.",
+          "name": "species_group_flag"
+        }
+      ],
+      "key": "target_dictionary",
+      "group": "TARGET INFORMATION",
+      "loc": "431.7976699255589 -6414.432002590549"
+    },
+    {
+      "fields": [
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Identifier for target of interest (foreign key to target_dictionary table)",
+          "name": "tid"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Relationship between two targets (e.g., SUBSET OF, SUPERSET OF, OVERLAPS WITH)",
+          "name": "relationship"
+        },
+        {
+          "color": "#00BCF2",
+          "figure": "Rectangle",
+          "info": "Identifier for the target that is related to the target of interest (foreign key to target_dicitionary table)",
+          "name": "related_tid"
+        },
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Primary key",
+          "name": "targrel_id (PK)"
+        }
+      ],
+      "key": "target_relations",
+      "group": "TARGET INFORMATION",
+      "loc": "442.65865102528915 -6159.8671267507125"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Target type (as used in target dictionary)",
+          "name": "target_type (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of target type",
+          "name": "target_desc"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Higher level classification of target_type, allowing grouping of e.g., all 'PROTEIN' targets, all 'NON-MOLECULAR' targets etc.",
+          "name": "parent_type"
+        }
+      ],
+      "key": "target_type",
+      "group": "TARGET INFORMATION",
+      "loc": "548.6317988719719 -6665.940958961619"
+    },
+    {
+      "fields": [
+        {
+          "color": "#3EA524",
+          "figure": "Diamond",
+          "info": "Numeric primary key.",
+          "name": "usan_stem_id (PK)"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Stem defined for use in United States Adopted Names.",
+          "name": "stem"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "More specific subgroup of the stem defined for use in United States Adopted Names.",
+          "name": "subgroup"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Meaning of the stem (e.g., the class of compound it applies to).",
+          "name": "annotation"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Indicates whether stem is used as a Prefix/Infix/Suffix.",
+          "name": "stem_class"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Protein family targeted by compounds of this class (e.g., GPCR/Ion channel/Protease) where known/applicable.",
+          "name": "major_class"
+        },
+        {
+          "color": "#F9F570",
+          "figure": "Triangle",
+          "info": "Stem not represented in USAN list, but added from WHO INN stem list (where set to 1).",
+          "name": "who_extra"
+        }
+      ],
+      "key": "usan_stems",
+      "group": "APPROVED DRUG/PESTICIDE DATA",
+      "loc": "-800.9843532166913 -4480.864833717173"
+    },
+    {
+      "fields": [
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Name of release version",
+          "name": "name (PK)"
+        },
+        {
+          "color": "#BB1EC9",
+          "figure": "ThickCross",
+          "info": "Date database created",
+          "name": "creation_date"
+        },
+        {
+          "color": "#F7B84B",
+          "figure": "Ellipse",
+          "info": "Description of release version",
+          "name": "comments"
+        }
+      ],
+      "key": "version",
+      "group": "GENERAL",
+      "loc": "270.9900923670921 -6779.061806957157"
+    }
+  ],
+  "linkDataArray": [
+    {
+      "from": "activities",
+      "fromArrow": "BackwardFork",
+      "fromPort": "assay",
+      "to": "assays",
+      "toArrow": "Line",
+      "toPort": "assay_id",
+      "layer": "critical"
+    },
+    {
+      "from": "activities",
+      "fromArrow": "BackwardFork",
+      "fromPort": "doc",
+      "to": "docs",
+      "toArrow": "LineCircle",
+      "toPort": "doc_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "activities",
+      "fromArrow": "BackwardFork",
+      "fromPort": "record",
+      "to": "compound_records",
+      "toArrow": "Line",
+      "toPort": "record_id",
+      "layer": "critical"
+    },
+    {
+      "from": "activities",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "non-critical"
+    },
+    {
+      "from": "activities",
+      "fromArrow": "BackwardFork",
+      "fromPort": "data_validity_comment",
+      "to": "data_validity_lookup",
+      "toArrow": "LineCircle",
+      "toPort": "data_validity_comment",
+      "layer": "critical"
+    },
+    {
+      "from": "assay_parameters",
+      "fromArrow": "BackwardFork",
+      "fromPort": "assay",
+      "to": "assays",
+      "toArrow": "Line",
+      "toPort": "assay_id",
+      "layer": "critical"
+    },
+    {
+      "from": "assay_parameters",
+      "fromArrow": "BackwardFork",
+      "fromPort": "parameter_type",
+      "to": "parameter_type",
+      "toArrow": "Line",
+      "toPort": "parameter_type",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "doc",
+      "to": "docs",
+      "toArrow": "Line",
+      "toPort": "doc_id",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "assay_type",
+      "to": "assay_type",
+      "toArrow": "LineCircle",
+      "toPort": "assay_type",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "tid",
+      "to": "target_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "tid",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "relationship_type",
+      "to": "relationship_type",
+      "toArrow": "LineCircle",
+      "toPort": "relationship_type",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "confidence_score",
+      "to": "confidence_score_lookup",
+      "toArrow": "LineCircle",
+      "toPort": "confidence_score",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "curated_by",
+      "to": "curation_lookup",
+      "toArrow": "LineCircle",
+      "toPort": "curated_by",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "src",
+      "to": "source",
+      "toArrow": "Line",
+      "toPort": "src_id",
+      "layer": "critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "chembl",
+      "to": "chembl_id_lookup",
+      "toArrow": "Line",
+      "toPort": "chembl_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "assays",
+      "fromArrow": "BackwardFork",
+      "fromPort": "cell",
+      "to": "cell_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "cell_id",
+      "layer": "critical"
+    },
+    {
+      "from": "binding_sites",
+      "fromArrow": "BackwardFork",
+      "fromPort": "tid",
+      "to": "target_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "tid",
+      "layer": "critical"
+    },
+    {
+      "from": "biotherapeutic_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "biotherapeutics",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "biotherapeutic_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "bio_component_sequences",
+      "toArrow": "Line",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "biotherapeutics",
+      "fromArrow": "Line",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "DoubleLine",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "cell_dictionary",
+      "fromArrow": "BackwardFork",
+      "fromPort": "chembl",
+      "to": "chembl_id_lookup",
+      "toArrow": "LineCircle",
+      "toPort": "chembl_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "component_class",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "component_sequences",
+      "toArrow": "Line",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "component_class",
+      "fromArrow": "BackwardFork",
+      "fromPort": "protein_class",
+      "to": "protein_classification",
+      "toArrow": "Line",
+      "toPort": "protein_class_id",
+      "layer": "critical"
+    },
+    {
+      "from": "component_domains",
+      "fromArrow": "BackwardFork",
+      "fromPort": "domain",
+      "to": "domains",
+      "toArrow": "LineCircle",
+      "toPort": "domain_id",
+      "layer": "critical"
+    },
+    {
+      "from": "component_domains",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "component_sequences",
+      "toArrow": "Line",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "component_synonyms",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "component_sequences",
+      "toArrow": "Line",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_properties",
+      "fromArrow": "Line",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "DoubleLine",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_records",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_records",
+      "fromArrow": "BackwardFork",
+      "fromPort": "doc",
+      "to": "docs",
+      "toArrow": "Line",
+      "toPort": "doc_id",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_records",
+      "fromArrow": "BackwardFork",
+      "fromPort": "src",
+      "to": "source",
+      "toArrow": "Line",
+      "toPort": "src_id",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_structural_alerts",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_structural_alerts",
+      "fromArrow": "BackwardFork",
+      "fromPort": "alert",
+      "to": "structural_alerts",
+      "toArrow": "Line",
+      "toPort": "alert_id",
+      "layer": "critical"
+    },
+    {
+      "from": "compound_structures",
+      "fromArrow": "Line",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "DoubleLine",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "defined_daily_dose",
+      "fromArrow": "BackwardFork",
+      "fromPort": "atc_code",
+      "to": "atc_classification",
+      "toArrow": "Line",
+      "toPort": "level5",
+      "layer": "critical"
+    },
+    {
+      "from": "docs",
+      "fromArrow": "BackwardFork",
+      "fromPort": "chembl",
+      "to": "chembl_id_lookup",
+      "toArrow": "Line",
+      "toPort": "chembl_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "drug_mechanism",
+      "fromArrow": "BackwardFork",
+      "fromPort": "record",
+      "to": "compound_records",
+      "toArrow": "Line",
+      "toPort": "record_id",
+      "layer": "critical"
+    },
+    {
+      "from": "drug_mechanism",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "non-critical"
+    },
+    {
+      "from": "drug_mechanism",
+      "fromArrow": "BackwardFork",
+      "fromPort": "tid",
+      "to": "target_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "tid",
+      "layer": "critical"
+    },
+    {
+      "from": "drug_mechanism",
+      "fromArrow": "BackwardFork",
+      "fromPort": "site",
+      "to": "binding_sites",
+      "toArrow": "LineCircle",
+      "toPort": "site_id",
+      "layer": "critical"
+    },
+    {
+      "from": "drug_mechanism",
+      "fromArrow": "BackwardFork",
+      "fromPort": "action_type",
+      "to": "action_type",
+      "toArrow": "LineCircle",
+      "toPort": "action_type",
+      "layer": "critical"
+    },
+    {
+      "from": "formulations",
+      "fromArrow": "BackwardFork",
+      "fromPort": "product",
+      "to": "products",
+      "toArrow": "Line",
+      "toPort": "product_id",
+      "layer": "critical"
+    },
+    {
+      "from": "formulations",
+      "fromArrow": "BackwardFork",
+      "fromPort": "record",
+      "to": "compound_records",
+      "toArrow": "Line",
+      "toPort": "record_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "formulations",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "ligand_eff",
+      "fromArrow": "Line",
+      "fromPort": "activity",
+      "to": "activities",
+      "toArrow": "DoubleLine",
+      "toPort": "activity_id",
+      "layer": "critical"
+    },
+    {
+      "from": "mechanism_refs",
+      "fromArrow": "BackwardFork",
+      "fromPort": "mec_id",
+      "to": "drug_mechanism",
+      "toArrow": "Line",
+      "toPort": "mec_id",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_atc_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "level5",
+      "to": "atc_classification",
+      "toArrow": "Line",
+      "toPort": "level5",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_atc_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_dictionary",
+      "fromArrow": "BackwardFork",
+      "fromPort": "chembl",
+      "to": "chembl_id_lookup",
+      "toArrow": "Line",
+      "toPort": "chembl_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "molecule_frac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "frac_class",
+      "to": "frac_classification",
+      "toArrow": "Line",
+      "toPort": "frac_class_id",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_frac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_hierarchy",
+      "fromArrow": "Line",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "DoubleLine",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_hierarchy",
+      "fromArrow": "BackwardFork",
+      "fromPort": "parent_molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "non-critical"
+    },
+    {
+      "from": "molecule_hierarchy",
+      "fromArrow": "BackwardFork",
+      "fromPort": "active_molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "LineCircle",
+      "toPort": "molregno",
+      "layer": "non-critical"
+    },
+    {
+      "from": "molecule_hrac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "hrac_class",
+      "to": "hrac_classification",
+      "toArrow": "Line",
+      "toPort": "hrac_class_id",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_hrac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_irac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "irac_class",
+      "to": "irac_classification",
+      "toArrow": "Line",
+      "toPort": "irac_class_id",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_irac_classification",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_synonyms",
+      "fromArrow": "BackwardFork",
+      "fromPort": "molregno",
+      "to": "molecule_dictionary",
+      "toArrow": "Line",
+      "toPort": "molregno",
+      "layer": "critical"
+    },
+    {
+      "from": "molecule_synonyms",
+      "fromArrow": "BackwardFork",
+      "fromPort": "res_stem",
+      "to": "research_stem",
+      "toArrow": "LineCircle",
+      "toPort": "res_stem_id",
+      "layer": "critical"
+    },
+    {
+      "from": "predicted_binding_domains",
+      "fromArrow": "BackwardFork",
+      "fromPort": "activity",
+      "to": "activities",
+      "toArrow": "LineCircle",
+      "toPort": "activity_id",
+      "layer": "critical"
+    },
+    {
+      "from": "predicted_binding_domains",
+      "fromArrow": "BackwardFork",
+      "fromPort": "site",
+      "to": "binding_sites",
+      "toArrow": "LineCircle",
+      "toPort": "site_id",
+      "layer": "critical"
+    },
+    {
+      "from": "product_patents",
+      "fromArrow": "BackwardFork",
+      "fromPort": "product",
+      "to": "products",
+      "toArrow": "Line",
+      "toPort": "product_id",
+      "layer": "critical"
+    },
+    {
+      "from": "product_patents",
+      "fromArrow": "BackwardFork",
+      "fromPort": "patent_use_code",
+      "to": "patent_use_codes",
+      "toArrow": "LineCircle",
+      "toPort": "patent_use_code",
+      "layer": "critical"
+    },
+    {
+      "from": "protein_class_synonyms",
+      "fromArrow": "BackwardFork",
+      "fromPort": "protein_class",
+      "to": "protein_classification",
+      "toArrow": "Line",
+      "toPort": "protein_class_id",
+      "layer": "critical"
+    },
+    {
+      "from": "research_companies",
+      "fromArrow": "BackwardFork",
+      "fromPort": "res_stem",
+      "to": "research_stem",
+      "toArrow": "LineCircle",
+      "toPort": "res_stem_id",
+      "layer": "critical"
+    },
+    {
+      "from": "site_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "site",
+      "to": "binding_sites",
+      "toArrow": "Line",
+      "toPort": "site_id",
+      "layer": "critical"
+    },
+    {
+      "from": "site_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "component_sequences",
+      "toArrow": "LineCircle",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "site_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "domain",
+      "to": "domains",
+      "toArrow": "LineCircle",
+      "toPort": "domain_id",
+      "layer": "critical"
+    },
+    {
+      "from": "structural_alerts",
+      "fromArrow": "BackwardFork",
+      "fromPort": "alert_set",
+      "to": "structural_alert_sets",
+      "toArrow": "Line",
+      "toPort": "alert_set_id",
+      "layer": "critical"
+    },
+    {
+      "from": "target_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "tid",
+      "to": "target_dictionary",
+      "toArrow": "Line",
+      "toPort": "tid",
+      "layer": "critical"
+    },
+    {
+      "from": "target_components",
+      "fromArrow": "BackwardFork",
+      "fromPort": "component",
+      "to": "component_sequences",
+      "toArrow": "Line",
+      "toPort": "component_id",
+      "layer": "critical"
+    },
+    {
+      "from": "target_dictionary",
+      "fromArrow": "BackwardFork",
+      "fromPort": "target_type",
+      "to": "target_type",
+      "toArrow": "LineCircle",
+      "toPort": "target_type",
+      "layer": "critical"
+    },
+    {
+      "from": "target_dictionary",
+      "fromArrow": "BackwardFork",
+      "fromPort": "chembl",
+      "to": "chembl_id_lookup",
+      "toArrow": "Line",
+      "toPort": "chembl_id",
+      "layer": "non-critical"
+    },
+    {
+      "from": "target_relations",
+      "fromArrow": "BackwardFork",
+      "fromPort": "tid",
+      "to": "target_dictionary",
+      "toArrow": "Line",
+      "toPort": "tid",
+      "layer": "critical"
+    },
+    {
+      "from": "target_relations",
+      "fromArrow": "BackwardFork",
+      "fromPort": "related_tid",
+      "to": "target_dictionary",
+      "toArrow": "Line",
+      "toPort": "tid",
+      "layer": "non-critical"
+    }
+  ]
+}
+
