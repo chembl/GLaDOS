@@ -73,3 +73,6 @@ db.sqlite3
 
 # filre created in tests
 /__init__.py
+
+# pycharm 
+.idea
