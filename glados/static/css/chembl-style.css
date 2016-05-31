@@ -2883,4 +2883,13 @@ div#CNC-zoom-modal {
   height: 48px;
   text-transform: none; }
 
+/**
+* Download Menu
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.db-menu-option {
+  height: 280px; }
+  .db-menu-option .menu-icon {
+    padding: 20px; }
+
 /*# sourceMappingURL=chembl-style.css.map */
