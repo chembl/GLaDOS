@@ -145,7 +145,7 @@
 
       <div id='Bck-Comp-Img-zoom-menu' class="img-zoom-menu grey lighten-2">
 
-        <div id='Bck-Comp-Img-zoom-menuclose' class="menu-close-icon" >
+        <div id='Bck-Comp-Img-zoom-menuclose' class="menu-close-icon">
           <a><i class="fa fa-minus-square-o fa-lg" aria-hidden="true"></i></a>
         </div>
 
@@ -215,9 +215,9 @@
 
       </div>
 
-      <div class="modal-close-icon">
-        <a href="#!" class=" modal-action modal-close btn-flat"><i class="fa fa-times"></i></a>
-      </div>
+      {% block close_modal %}
+      {% include "glados/base/modals/close_modal_button.html" %}
+      {% endblock %}
 
     </div>
 
