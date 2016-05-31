@@ -49,6 +49,7 @@ $h6-color: #222;
 
 $synonyms-color: color('green', 'lighten-4');
 $tradenames-color: color('light-green', 'lighten-3');
+$default-btn-border-radius: 3px;
 
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
@@ -222,9 +223,29 @@ nav.top-nav a {
   font-size: 3rem;
 }
 
-.donwload-database-btn {
+.download-database-btn {
   position: absolute;
   right: 5%;
+  top: 0;
+  bottom: 0;
+
+  p {
+    margin: 0;
+  }
+
+  i {
+    font-size: 2rem;
+  }
+
+  a {
+    color: white;
+    padding: 10px 20px;
+    border-radius: $default-btn-border-radius;
+  }
+}
+
+.position-relative{
+  position: relative;
 }
 
 /* responsive sizes */
@@ -1354,10 +1375,9 @@ $search-items-height:45px;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-
 .btn-chembl {
   color: #ffffff;
-  border-radius: 3px;
+  border-radius: $default-btn-border-radius;
   padding: 10px 20px;
   text-align: center;
 }
@@ -1365,7 +1385,7 @@ $search-items-height:45px;
 
 .btn-small {
   color: #ffffff;
-  border-radius: 3px;
+  border-radius: $default-btn-border-radius;
   padding: 10px 6px 6px 6px;
   text-align: center;
   width: 60px;
@@ -1380,7 +1400,7 @@ $search-items-height:45px;
 
 .btn-mini {
   color: #ffffff;
-  border-radius: 3px;
+  border-radius: $default-btn-border-radius;
   padding: 10px 3px 6px 3px;
   text-align: center;
   width: 30px;

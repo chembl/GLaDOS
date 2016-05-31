@@ -1849,9 +1849,22 @@ nav.top-nav a {
   text-shadow: 1px 1px #000000;
   font-size: 3rem; }
 
-.donwload-database-btn {
+.download-database-btn {
   position: absolute;
-  right: 5%; }
+  right: 5%;
+  top: 0;
+  bottom: 0; }
+  .download-database-btn p {
+    margin: 0; }
+  .download-database-btn i {
+    font-size: 2rem; }
+  .download-database-btn a {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 3px; }
+
+.position-relative {
+  position: relative; }
 
 /* responsive sizes */
 @media only screen and (max-width: 993px) {
