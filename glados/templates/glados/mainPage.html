@@ -57,11 +57,6 @@
 {% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}
 {% endblock %}
 
-{% block download_db_menu %}
-{% include "glados/MainPageParts/download_db_menu.html" %}
-{% endblock %}
-
-
 {% endblock %}
 
 {% block custom_js %}
@@ -75,7 +70,6 @@
   $('#search-bar-small').pushpin({ top: 106 });
 
   LazyIFramesHelper.initLazyIFrames();
-  $('.modal-trigger').leanModal();
 
 {% endblock %}
 

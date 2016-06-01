@@ -50,6 +50,10 @@
 
   {% block content %}{% endblock %}
 
+  {% block download_db_menu %}
+    {% include "glados/MainPageParts/download_db_menu.html" %}
+  {% endblock %}
+
 </main>
 
 <!-- - - - - - - - - - - - - - - - - - - - -->
@@ -105,6 +109,8 @@
     SideMenuHelper.complementaryinitSideNav();
 
     {% block custom_js_inline %}{% endblock %}
+
+    $('.modal-trigger').leanModal();
 
   });
 </script>

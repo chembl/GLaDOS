@@ -2888,8 +2888,12 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .db-menu-option {
-  height: 280px; }
-  .db-menu-option .menu-icon {
-    padding: 20px; }
+  height: 220px; }
+  .db-menu-option .menu-link {
+    border-radius: 3px;
+    background-color: #009688;
+    padding: 5px; }
+    .db-menu-option .menu-link a {
+      color: white; }
 
 /*# sourceMappingURL=chembl-style.css.map */

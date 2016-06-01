@@ -7,107 +7,143 @@
 
     <div class="row">
 
-      <div class="col s12 m6 l4">
+      <div class="col s6 m4 l3">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-database fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>SQL Data</b></p>
+              <p><i class="fa fa-database fa-3x" aria-hidden="true"></i></p>
+              <p>SQL Data</p>
             </a>
-            <p>Download here our sql data.</p>
 
           </div>
+
+          <div class="card-content">
+             Download our sql data.
+          </div>
+
 
         </div>
 
       </div>
 
+      <div class="col s6 m4 l3">
 
-      <div class="col s12 m6 l4">
+        <div class="card z-depth-0 db-menu-option">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-cubes fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>Virtual Environment</b></p>
+              <p><i class="fa fa-cubes fa-3x" aria-hidden="true"></i></p>
+              <p>Virtual Environment</p>
             </a>
-            <p>ChEMBL Virtual machines.</p>
 
           </div>
+
+          <p>ChEMBL Virtual Machines.</p>
+
 
         </div>
 
       </div>
 
-      <div class="col s12 m6 l4">
+      <div class="col s6 m4 l3">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-sitemap fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>RDF</b></p>
+              <p><i class="fa fa-sitemap fa-3x" aria-hidden="true"></i></p>
+              <p>RDF</p>
             </a>
 
-
-            <p>Download the ChEMBL-RDF.</p>
-
-
           </div>
+
+          <p>Download the ChEMBL-RDF.</p>
+
 
         </div>
 
       </div>
 
-      <div class="col s12 m6 l4">
+      <div class="col s6 m4 l3">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-smile-o fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>UniChem</b></p>
+              <p><i class="fa fa-database fa-3x" aria-hidden="true"></i></p>
+              <p>UniChem</p>
             </a>
-            <p>Data dumps from UniChem.</p>
 
           </div>
+
+          <p>Data dumps from UniChem</p>
+
 
         </div>
 
       </div>
 
-      <div class="col s12 m6 l4">
+      <div class="col s6 m4 l3">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-smile-o fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>SureChEMBL</b></p>
+              <p><i class="fa fa-book fa-3x" aria-hidden="true"></i></p>
+              <p>Patents</p>
             </a>
-            <p>SureChEMBL compound exports.</p>
 
           </div>
+
+          <p>Patent information compound exports.</p>
+
 
         </div>
 
       </div>
 
-      <div class="col s12 m6 l4">
+      <div class="col s6 m4 l3">
 
-        <div class="card-panel z-depth-0 db-menu-option">
-          <div class="card-content">
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
 
             <a href="#">
-              <p class="menu-icon center-align"><i class="fa fa-smile-o fa-5x" aria-hidden="true"></i></p>
-              <p class="center-align"><b>Monomers</b></p>
+              <p><i class="fa fa-cubes fa-3x" aria-hidden="true"></i></p>
+              <p>Monomers</p>
             </a>
-            <p>Monomers data!</p>
 
           </div>
+
+          <p>ChEMBL Virtual Machines.</p>
+
+
+        </div>
+
+      </div>
+
+      <div class="col s6 m4 l3">
+
+        <div class="card z-depth-0 db-menu-option">
+
+          <div class="menu-link z-depth-1 center-align">
+
+            <a href="#">
+              <p><i class="fa fa-database fa-3x" aria-hidden="true"></i></p>
+              <p>SQL Data</p>
+            </a>
+
+          </div>
+
+          <p>Download your sql data.</p>
+
 
         </div>
 
@@ -118,18 +154,22 @@
 
     <div class="row">
 
-      <div class="col s12">
-        <a href="#" class="btn-chembl" >More...</a>
+      <div class="row">
+
+        <div class="col s12">
+          <a href="#" class="btn-chembl">More...</a>
+        </div>
+
       </div>
+
 
     </div>
 
 
+    {% block close_modal %}
+    {% include "glados/base/modals/close_modal_button.html" %}
+    {% endblock %}
+
   </div>
-
-
-  {% block close_modal %}
-  {% include "glados/base/modals/close_modal_button.html" %}
-  {% endblock %}
 
 </div>
