@@ -1583,6 +1583,7 @@ $marvin-size-fullscreen: 91vh;
 
   .menu-link{
 
+    height: 120px;
     border-radius: $default-btn-border-radius;
 
     background-color: $primary-color;
@@ -1590,6 +1591,11 @@ $marvin-size-fullscreen: 91vh;
 
     a{
       color: white;
+      width: 100%;
+
+      p {
+        margin: 5px 0;
+      }
 
     }
 

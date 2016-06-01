@@ -2890,10 +2890,14 @@ div#CNC-zoom-modal {
 .db-menu-option {
   height: 220px; }
   .db-menu-option .menu-link {
+    height: 120px;
     border-radius: 3px;
     background-color: #009688;
     padding: 5px; }
     .db-menu-option .menu-link a {
-      color: white; }
+      color: white;
+      width: 100%; }
+      .db-menu-option .menu-link a p {
+        margin: 5px 0; }
 
 /*# sourceMappingURL=chembl-style.css.map */
