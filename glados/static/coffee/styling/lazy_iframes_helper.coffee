@@ -1,6 +1,4 @@
 # Requires:
-# <script type="text/javascript" src="/static/js/models/IFrame.js"></script>
-# <script type="text/javascript" src="/static/js/views/IFrames/IFrameLazyLoader.js"></script>
 class LazyIFramesHelper
 
   # this initialises the links that you set up to load lazily an iframe

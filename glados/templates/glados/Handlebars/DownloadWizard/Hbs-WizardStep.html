@@ -1,0 +1,53 @@
+{% verbatim %}
+
+<script id="Handlebars-DownloadWizard-step" type="text/x-handlebars-template">
+
+  <h3>{{title}}</h3>
+
+  <div class="row">
+
+
+    {{#each options}}
+    <div class="col s6 m4 l3">
+
+      <div class="card z-depth-0 db-menu-option">
+
+        <div class="menu-link z-depth-1 valign-wrapper hoverable">
+
+          <a class="center-align valign waves-effect waves-light">
+            <p><i class="fa {{this.icon}} fa-2x" aria-hidden="true"></i></p>
+            <p>{{this.title}}</p>
+          </a>
+
+        </div>
+
+
+        <div class="db-menu-description">Download our sql data.</div>
+
+
+      </div>
+
+    </div>
+
+    {{/each}}
+
+  </div>
+
+  <div class="divider"></div>
+
+
+  <div class="row db-menu-last-row">
+
+    <div class="col s12">
+
+      <div class="right">
+        <a href="#">{{right_option}}</a>
+      </div>
+    </div>
+
+  </div>
+
+</script>
+
+
+{% endverbatim %}

@@ -1579,11 +1579,11 @@ $marvin-size-fullscreen: 91vh;
 
 .db-menu-option{
 
-  height: 220px;
+  height: 155px;
 
   .menu-link{
 
-    height: 120px;
+    height: 99px;
     border-radius: $default-btn-border-radius;
 
     background-color: $primary-color;
@@ -1601,10 +1601,13 @@ $marvin-size-fullscreen: 91vh;
 
   }
 
-
-
-  .title{
-
+  .db-menu-description{
+    font-size: 80%;
+    padding: 10px;
   }
 
+}
+
+.db-menu-last-row{
+  border-top: 1px solid $primary-color;
 }

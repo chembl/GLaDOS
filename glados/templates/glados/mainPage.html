@@ -71,5 +71,10 @@
 
   LazyIFramesHelper.initLazyIFrames();
 
+  var baseMenuItem = DownloadWizardApp.initWizardStep();
+  console.log('baseMenuItem');
+  console.log(baseMenuItem);
+  DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
+
 {% endblock %}
 
