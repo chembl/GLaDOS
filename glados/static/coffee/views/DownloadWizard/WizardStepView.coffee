@@ -15,7 +15,6 @@ WizardStepView = Backbone.View.extend
     @hidePreloader()
     $(this.el).html Handlebars.compile($('#Handlebars-DownloadWizard-step').html())
       title: @model.get('title')
-      options: @model.get('options')
       description: @model.get('description')
       previous_step: @model.get('previous_step')
       hide_previous_step: !@model.get('previous_step')?
@@ -23,6 +22,21 @@ WizardStepView = Backbone.View.extend
       hide_right_option: !@model.get('right_option')?
       left_option: @model.get('left_option')
       hide_left_option: !@model.get('left_option')?
+
+    for option in @model.get('options')
+      bckOption = new WizardOption
+        title: option.title
+        description: option.description
+        link: option.link
+        icon: option.icon
+        type: option.type
+
+      newElement = $('<div>')
+      wizardOprionView = new WizardOptionView
+        model: bckOption
+        el: newElement
+
+      $(@el).find('.db-menu-option-container').append(newElement)
 
   goToStep: (event) ->
 

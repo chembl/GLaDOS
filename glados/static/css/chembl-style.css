@@ -2899,6 +2899,8 @@ div#CNC-zoom-modal {
       width: 100%; }
       .db-menu-option .menu-link a p {
         margin: 5px 0; }
+    .db-menu-option .menu-link img {
+      max-height: 45px; }
   .db-menu-option .db-menu-description {
     font-size: 80%;
     padding: 10px; }

@@ -11,10 +11,10 @@ WizardStepView = Backbone.View.extend({
     "click .db-menu-link": "goToStep"
   },
   render: function() {
+    var bckOption, newElement, option, wizardOprionView, _i, _len, _ref, _results;
     this.hidePreloader();
-    return $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-step').html())({
+    $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-step').html())({
       title: this.model.get('title'),
-      options: this.model.get('options'),
       description: this.model.get('description'),
       previous_step: this.model.get('previous_step'),
       hide_previous_step: !(this.model.get('previous_step') != null),
@@ -23,6 +23,25 @@ WizardStepView = Backbone.View.extend({
       left_option: this.model.get('left_option'),
       hide_left_option: !(this.model.get('left_option') != null)
     }));
+    _ref = this.model.get('options');
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      option = _ref[_i];
+      bckOption = new WizardOption({
+        title: option.title,
+        description: option.description,
+        link: option.link,
+        icon: option.icon,
+        type: option.type
+      });
+      newElement = $('<div>');
+      wizardOprionView = new WizardOptionView({
+        model: bckOption,
+        el: newElement
+      });
+      _results.push($(this.el).find('.db-menu-option-container').append(newElement));
+    }
+    return _results;
   },
   goToStep: function(event) {
     var next_url;

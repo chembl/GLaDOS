@@ -156,15 +156,15 @@ def wizard_step_json(request, step_id):
   
     'title': 'Downloads',
     'options': [
-        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.', 'link':'select_db_engine' },
-        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.', 'link':'select_db_engine'},
-        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link':'select_db_engine'},
-        {'title':'UniChem', 'icon':'fa-smile-o', 'description': 'Data dumps from UniChem.', 'link':'select_db_engine'},
-        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.', 'link':'select_db_engine'},
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine'},
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine'},
+        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'UniChem', 'icon':None, 'image':'https://www.ebi.ac.uk/unichem/static/images/UniChem_logo2_255.png', 'description': 'Data dumps from UniChem.', 'link':'select_db_engine', 'type':'image' },
+        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon' },
       ],
-      'right_option': {'title':'More...', 'link':'#'},
+      'right_option': {'title':'More...', 'link':'#', 'type':'bottom' },
       'left_option': None,
       'previous_step': None,
       'identifier': 'first'
@@ -174,12 +174,12 @@ def wizard_step_json(request, step_id):
 
     'title': 'Select a Database Engine',
     'options': [
-        {'title':'PostgreSQL', 'icon':'fa-smile-o', 'description': '', 'link': ''},
-        {'title':'Oracle', 'icon':'fa-smile-o', 'description': '', 'link': 'select_oracle_version'},
-        {'title':'MySQL', 'icon':'fa-smile-o', 'description': '', 'link': ''},
-        {'title':'SQLite', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'PostgreSQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'Oracle', 'icon':'fa-smile-o', 'description': '', 'link': 'select_oracle_version', 'type':'icon' },
+        {'title':'MySQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'SQLite', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
       ],
-      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/'},
+      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/', 'type':'bottom' },
       'left_option': None,
       'previous_step': 'first',
       'identifier': 'select_db_engine'
@@ -190,11 +190,11 @@ def wizard_step_json(request, step_id):
 
     'title': 'Select Oracle Version',
     'options': [
-        {'title':'11g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
-        {'title':'10g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
-        {'title':'9g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'11g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'10g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'9g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
       ],
-      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/'},
+      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/', 'type':'bottom' },
       'left_option': None,
       'previous_step': 'select_db_engine',
       'identifier': 'select_oracle_version'
