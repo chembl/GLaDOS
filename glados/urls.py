@@ -49,5 +49,7 @@ urlpatterns = [
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
 
   url(r'^acknowledgements/$', views.acks, name='acks'),
-  url(r'^faqs/$', views.faqs, name='faqs')
+  url(r'^faqs/$', views.faqs, name='faqs'),
+
+  url(r'^download_wizard/first$', views.wizard_first_step_json, name='wizard_first_step_json')
 ]

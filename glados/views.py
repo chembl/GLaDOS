@@ -7,6 +7,7 @@ from twitter import *
 from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
+from django.http import JsonResponse
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
@@ -142,3 +143,26 @@ def main_page(request):
   context = {'tweets': simplified_tweets}
 
   return render(request, 'glados/mainPage.html', context)
+
+def wizard_first_step_json(request):
+  """
+  :param request: http request
+  :return: A json response with the information of the first wizard step
+  """
+
+  data = {
+  
+    'title': 'Downloads',
+    'options': [
+        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.'},
+        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.'},
+        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.'},
+        {'title':'UniChem', 'icon':'fa-smile-o', 'description': 'Data dumps from UniChem.'},
+        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.'},
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.'},
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.'},
+      ],
+      'right_option': 'More...'
+  }
+
+  return JsonResponse(data)

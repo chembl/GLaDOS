@@ -73,6 +73,9 @@
 
   var baseMenuItem = DownloadWizardApp.initWizardStep();
   DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
+  baseMenuItem.fetch();
+  console.log('after fetch')
+  console.log(baseMenuItem);
 
 {% endblock %}
 
