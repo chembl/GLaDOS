@@ -51,5 +51,5 @@ urlpatterns = [
   url(r'^acknowledgements/$', views.acks, name='acks'),
   url(r'^faqs/$', views.faqs, name='faqs'),
 
-  url(r'^download_wizard/first$', views.wizard_first_step_json, name='wizard_first_step_json')
+  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json')
 ]

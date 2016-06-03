@@ -44,9 +44,6 @@ $h4-color: #222;
 $h5-color: #222;
 $h6-color: #222;
 
-
-
-
 $synonyms-color: color('green', 'lighten-4');
 $tradenames-color: color('light-green', 'lighten-3');
 $default-btn-border-radius: 3px;
@@ -244,7 +241,7 @@ nav.top-nav a {
   }
 }
 
-.position-relative{
+.position-relative {
   position: relative;
 }
 
@@ -1290,15 +1287,15 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.search-bar{
+.search-bar {
 
   position: relative;
 
-  .col{
+  .col {
     padding: 0
   }
 
-  input{
+  input {
 
     margin-left: 10px;
     margin-bottom: 0px;
@@ -1306,18 +1303,17 @@ div#CNC-zoom-modal {
     border-bottom: 0px;
   }
 
-  input:focus{
+  input:focus {
 
     border-bottom: 0px;
 
   }
 
-   /* label underline focus color */
-   input[type=search]:focus {
-     border-bottom: 0;
-     box-shadow: none;
-   }
-
+  /* label underline focus color */
+  input[type=search]:focus {
+    border-bottom: 0;
+    box-shadow: none;
+  }
 
   border: 2px solid $primary-color;
   background-color: white;
@@ -1325,28 +1321,27 @@ div#CNC-zoom-modal {
 
 }
 
-.full-height:after{
+.full-height:after {
   content: "";
   display: table;
   clear: both;
 }
 
-$search-items-height:45px;
+$search-items-height: 45px;
 
-.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper{
+.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
 
   height: $search-items-height;
 
 }
 
-.calign{
+.calign {
 
   margin: auto;
 
 }
 
-
-.search-btn-wrapper{
+.search-btn-wrapper {
 
   background-color: $primary-color;
   a {
@@ -1354,17 +1349,17 @@ $search-items-height:45px;
   }
 }
 
-.search-bar-help{
+.search-bar-help {
 
   position: absolute;
   bottom: -25px;
   left: 10px;
 
-  a{
+  a {
     color: white;
   }
 
-  a:hover{
+  a:hover {
     border-bottom: 1px dotted white;
   }
 
@@ -1381,7 +1376,6 @@ $search-items-height:45px;
   padding: 10px 20px;
   text-align: center;
 }
-
 
 .btn-small {
   color: #ffffff;
@@ -1409,7 +1403,6 @@ $search-items-height:45px;
   margin-left: 4px;
 }
 
-
 /**
 * Database statistics
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1418,26 +1411,26 @@ $search-items-height:45px;
 $max_chembl_logo_width: 60px;
 $max_chembl_logo_height: 60px;
 
-.database-info{
+.database-info {
 
-  .row{
+  .row {
     margin: 0;
   }
-  .col{
+  .col {
     padding: 0;
   }
 
-  .rel-notes{
+  .rel-notes {
     display: inline-block;
     padding-left: 5px;
     font-size: 0.85rem;
   }
 
-  .version-number-wrapper{
+  .version-number-wrapper {
     position: relative;
   }
 
-  .version-number-logo{
+  .version-number-logo {
 
     width: $max_chembl_logo_width;
     width: $max_chembl_logo_height;
@@ -1445,11 +1438,9 @@ $max_chembl_logo_height: 60px;
 
 }
 
-.database-stats{
+.database-stats {
   font-size: 0.85rem;
 }
-
-
 
 /**
 * Search bar
@@ -1457,7 +1448,7 @@ $max_chembl_logo_height: 60px;
 */
 
 $marvin-size-fullscreen: 91vh;
-.search-bar-small{
+.search-bar-small {
 
   background-color: $h2-color;
   height: $chembl-nav-height;
@@ -1468,21 +1459,20 @@ $marvin-size-fullscreen: 91vh;
   z-index: 998;
 }
 
-.marvin-search-options{
+.marvin-search-options {
 
   position: fixed;
   bottom: 0;
 
-
   width: 100%;
 
-  .col{
+  .col {
     background-color: $primary-color;
     padding: 1px;
     height: 100vh - $marvin-size-fullscreen;
   }
 
-  .row{
+  .row {
     margin: 0;
   }
 
@@ -1508,13 +1498,13 @@ $marvin-size-fullscreen: 91vh;
   }
 }
 
-.marvin-search-fullscreen{
+.marvin-search-fullscreen {
   margin: 0;
   height: $marvin-size-fullscreen;
 
 }
 
-.search-banner{
+.search-banner {
   background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
   background-position: right center;
   background-repeat: no-repeat;
@@ -1528,23 +1518,23 @@ $marvin-size-fullscreen: 91vh;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.tweets{
+.tweets {
 
-  .tweet{
+  .tweet {
     border-bottom: 1px solid $primary-color;
     margin-bottom: 5px;
     padding: 10px;
   }
 
-  .row{
+  .row {
     margin: 0;
   }
 
-  .col{
+  .col {
     padding: 2px;
   }
 
-  .tweet-content{
+  .tweet-content {
     font-size: 50%;
     padding: 5px;
   }
@@ -1555,20 +1545,19 @@ $marvin-size-fullscreen: 91vh;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.tabs-wrapper{
+.tabs-wrapper {
 
-  .row{
+  .row {
     margin-bottom: 0px;
   }
 
-  .tab{
+  .tab {
     letter-spacing: normal;
     line-height: 48px;
     height: 48px;
     text-transform: none;
 
   }
-
 
 }
 
@@ -1577,11 +1566,11 @@ $marvin-size-fullscreen: 91vh;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.db-menu-option{
+.db-menu-option {
 
   height: 155px;
 
-  .menu-link{
+  .menu-link {
 
     height: 99px;
     border-radius: $default-btn-border-radius;
@@ -1589,7 +1578,7 @@ $marvin-size-fullscreen: 91vh;
     background-color: $primary-color;
     padding: 5px;
 
-    a{
+    a {
       color: white;
       width: 100%;
 
@@ -1601,13 +1590,29 @@ $marvin-size-fullscreen: 91vh;
 
   }
 
-  .db-menu-description{
+  .db-menu-description {
     font-size: 80%;
     padding: 10px;
   }
 
 }
 
-.db-menu-last-row{
-  border-top: 1px solid $primary-color;
+.wizard-modal {
+  height: 70%;
+
+  .modal-content {
+    height: 100%;
+
+    .step-content {
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  .db-menu-last-row {
+    border-top: 1px solid $primary-color;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
 }

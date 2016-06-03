@@ -14,7 +14,7 @@
 
         <div class="menu-link z-depth-1 valign-wrapper hoverable">
 
-          <a class="db-menu-link center-align valign waves-effect waves-light">
+          <a href="#{{this.link}}" class="db-menu-link center-align valign waves-effect waves-light">
             <p><i class="fa {{this.icon}} fa-2x" aria-hidden="true"></i></p>
             <p>{{this.title}}</p>
           </a>
@@ -22,7 +22,7 @@
         </div>
 
 
-        <div class="db-menu-description">Download our sql data.</div>
+        <div class="db-menu-description">{{description}}</div>
 
 
       </div>
@@ -33,19 +33,68 @@
 
   </div>
 
-  <div class="divider"></div>
+
+  <div class="db-menu-last-row">
+
+    <div class="row">
 
 
-  <div class="row db-menu-last-row">
+      <div class="col s12 center-align">
 
-    <div class="col s12">
+        <div class="left">
+          {{#unless hide_left_option}}
+            <a href="{{left_option.link}}">{{left_option.title}}</a>
+          {{/unless}}
+        </div>
 
-      <div class="right">
-        <a href="#">{{right_option}}</a>
+
+        {{#unless hide_previous_step}}
+          <a href="#{{previous_step}}" class="db-menu-link">Back</a>
+        {{/unless}}
+
+
+        <div class="right">
+          {{#unless hide_right_option}}
+            <a href="{{right_option.link}}">{{right_option.title}}</a>
+          {{/unless}}
+        </div>
+
       </div>
+
+
     </div>
 
   </div>
+
+</script>
+
+<script id="Handlebars-DownloadWizard-error" type="text/x-handlebars-template">
+
+  <h3>Error</h3>
+
+  <div class="row">
+    <i class="fa fa-exclamation-circle"></i> {{msg}}
+  </div>
+
+  <div class="db-menu-last-row">
+
+    <div class="row">
+
+
+      <div class="col s12 center-align">
+
+
+        <a href="#first" class="db-menu-link">Back</a>
+
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
 
 </script>
 

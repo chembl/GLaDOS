@@ -4,20 +4,42 @@ var WizardStepView;
 WizardStepView = Backbone.View.extend({
   initialize: function() {
     this.model.on('change', this.render, this);
-    return this.render();
+    this.model.on('error', this.showErrorMsg, this);
+    return this.setPreloader();
   },
   events: {
     "click .db-menu-link": "goToStep"
   },
   render: function() {
-    console.log(this.model.get('title'));
+    this.hidePreloader();
     return $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-step').html())({
       title: this.model.get('title'),
       options: this.model.get('options'),
-      right_option: this.model.get('right_option')
+      description: this.model.get('description'),
+      previous_step: this.model.get('previous_step'),
+      hide_previous_step: !(this.model.get('previous_step') != null),
+      right_option: this.model.get('right_option'),
+      hide_right_option: !(this.model.get('right_option') != null),
+      left_option: this.model.get('left_option'),
+      hide_left_option: !(this.model.get('left_option') != null)
     }));
   },
-  goToStep: function() {
-    return console.log('next step!');
+  goToStep: function(event) {
+    var next_url;
+    this.setPreloader();
+    next_url = '/download_wizard/' + $(event.currentTarget).attr('href').substring(1);
+    this.model.url = next_url;
+    return this.model.fetch();
+  },
+  hidePreloader: function() {
+    return $(this.el).find('.card-preolader-to-hide').hide();
+  },
+  setPreloader: function() {
+    return $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+  },
+  showErrorMsg: function() {
+    return $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-error').html())({
+      msg: 'There was an error loading the next step'
+    }));
   }
 });

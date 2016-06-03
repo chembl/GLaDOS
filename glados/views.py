@@ -8,6 +8,7 @@ from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse
+import time
 
 # Returns all acknowledgements grouped by current and old
 def acks(request):
@@ -144,25 +145,65 @@ def main_page(request):
 
   return render(request, 'glados/mainPage.html', context)
 
-def wizard_first_step_json(request):
+def wizard_step_json(request, step_id):
   """
   :param request: http request
   :return: A json response with the information of the first wizard step
   """
+  time.sleep(1)
 
   data = {
   
     'title': 'Downloads',
     'options': [
-        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.'},
-        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.'},
-        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.'},
-        {'title':'UniChem', 'icon':'fa-smile-o', 'description': 'Data dumps from UniChem.'},
-        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.'},
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.'},
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.'},
+        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.', 'link':'select_db_engine' },
+        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.', 'link':'select_db_engine'},
+        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link':'select_db_engine'},
+        {'title':'UniChem', 'icon':'fa-smile-o', 'description': 'Data dumps from UniChem.', 'link':'select_db_engine'},
+        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.', 'link':'select_db_engine'},
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine'},
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine'},
       ],
-      'right_option': 'More...'
+      'right_option': {'title':'More...', 'link':'#'},
+      'left_option': None,
+      'previous_step': None,
+      'identifier': 'first'
   }
 
-  return JsonResponse(data)
+  data2 = {
+
+    'title': 'Select a Database Engine',
+    'options': [
+        {'title':'PostgreSQL', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'Oracle', 'icon':'fa-smile-o', 'description': '', 'link': 'select_oracle_version'},
+        {'title':'MySQL', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'SQLite', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+      ],
+      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/'},
+      'left_option': None,
+      'previous_step': 'first',
+      'identifier': 'select_db_engine'
+
+  }
+
+  data3 = {
+
+    'title': 'Select Oracle Version',
+    'options': [
+        {'title':'11g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'10g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+        {'title':'9g', 'icon':'fa-smile-o', 'description': '', 'link': ''},
+      ],
+      'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/'},
+      'left_option': None,
+      'previous_step': 'select_db_engine',
+      'identifier': 'select_oracle_version'
+
+  }
+
+  if step_id == 'first':
+    return JsonResponse(data)
+  elif step_id == 'select_db_engine':
+    return JsonResponse(data2)
+  else:
+    return JsonResponse(data3)

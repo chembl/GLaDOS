@@ -2903,7 +2903,17 @@ div#CNC-zoom-modal {
     font-size: 80%;
     padding: 10px; }
 
-.db-menu-last-row {
-  border-top: 1px solid #009688; }
+.wizard-modal {
+  height: 70%; }
+  .wizard-modal .modal-content {
+    height: 100%; }
+    .wizard-modal .modal-content .step-content {
+      height: 100%;
+      position: relative; }
+  .wizard-modal .db-menu-last-row {
+    border-top: 1px solid #009688;
+    width: 100%;
+    position: absolute;
+    bottom: 0; }
 
 /*# sourceMappingURL=chembl-style.css.map */
