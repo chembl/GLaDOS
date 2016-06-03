@@ -6,6 +6,9 @@ WizardStepView = Backbone.View.extend
     @model.on 'change', @.render, @
     @render()
 
+  events:
+    "click .db-menu-link": "goToStep"
+
   render: ->
 
     console.log(@model.get('title'))
@@ -13,3 +16,6 @@ WizardStepView = Backbone.View.extend
       title: @model.get('title')
       options: @model.get('options')
       right_option: @model.get('right_option')
+
+  goToStep: ->
+    console.log('next step!')

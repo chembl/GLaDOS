@@ -6,6 +6,9 @@ WizardStepView = Backbone.View.extend({
     this.model.on('change', this.render, this);
     return this.render();
   },
+  events: {
+    "click .db-menu-link": "goToStep"
+  },
   render: function() {
     console.log(this.model.get('title'));
     return $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-step').html())({
@@ -13,5 +16,8 @@ WizardStepView = Backbone.View.extend({
       options: this.model.get('options'),
       right_option: this.model.get('right_option')
     }));
+  },
+  goToStep: function() {
+    return console.log('next step!');
   }
 });
