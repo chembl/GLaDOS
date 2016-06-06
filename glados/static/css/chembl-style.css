@@ -2888,9 +2888,9 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .db-menu-option {
-  height: 155px; }
+  height: 99px; }
   .db-menu-option .menu-link {
-    height: 99px;
+    height: 100%;
     border-radius: 3px;
     background-color: #009688;
     padding: 5px; }
@@ -2901,9 +2901,6 @@ div#CNC-zoom-modal {
         margin: 5px 0; }
     .db-menu-option .menu-link img {
       max-height: 45px; }
-  .db-menu-option .db-menu-description {
-    font-size: 80%;
-    padding: 10px; }
 
 .wizard-modal {
   height: 70%; }
@@ -2912,10 +2909,14 @@ div#CNC-zoom-modal {
     .wizard-modal .modal-content .step-content {
       height: 100%;
       position: relative; }
-  .wizard-modal .db-menu-last-row {
-    border-top: 1px solid #009688;
+  .wizard-modal .db-menu-foter {
     width: 100%;
     position: absolute;
     bottom: 0; }
+    .wizard-modal .db-menu-foter .db-menu-last-row {
+      border-top: 1px solid #009688; }
+    .wizard-modal .db-menu-foter .db-menu-description {
+      font-size: 80%;
+      padding: 10px; }
 
 /*# sourceMappingURL=chembl-style.css.map */

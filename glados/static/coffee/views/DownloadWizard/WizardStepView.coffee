@@ -9,6 +9,7 @@ WizardStepView = Backbone.View.extend
 
   events:
     "click .db-menu-link": "goToStep"
+    "mouseover .db-menu-option": "handleHover"
 
   render: ->
 
@@ -35,6 +36,7 @@ WizardStepView = Backbone.View.extend
       wizardOprionView = new WizardOptionView
         model: bckOption
         el: newElement
+        parentView: 'hola'
 
       $(@el).find('.db-menu-option-container').append(newElement)
 
@@ -44,6 +46,13 @@ WizardStepView = Backbone.View.extend
     next_url = '/download_wizard/' + $(event.currentTarget).attr('href').substring(1)
     @model.url = next_url
     @model.fetch()
+
+  handleHover: (event) ->
+    desc = $(event.currentTarget).attr('data-description')
+    $(@el).find('.db-menu-option-description').text(desc)
+
+  showDescription: ->
+    console.log('showing desc')
 
   hidePreloader: ->
     $(@el).find('.card-preolader-to-hide').hide()

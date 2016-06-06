@@ -10,9 +10,9 @@ WizardOptionView = Backbone.View.extend({
     template = this.typeToTemplate[this.model.get('type')];
     return $(this.el).html(Handlebars.compile($(template).html())({
       title: this.model.get('title'),
-      description: this.model.get('description'),
       link: this.model.get('link'),
-      icon: this.model.get('icon')
+      icon: this.model.get('icon'),
+      description: this.model.get('description')
     }));
   },
   typeToTemplate: {

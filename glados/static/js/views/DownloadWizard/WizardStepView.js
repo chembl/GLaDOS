@@ -8,7 +8,8 @@ WizardStepView = Backbone.View.extend({
     return this.setPreloader();
   },
   events: {
-    "click .db-menu-link": "goToStep"
+    "click .db-menu-link": "goToStep",
+    "mouseover .db-menu-option": "handleHover"
   },
   render: function() {
     var bckOption, newElement, option, wizardOprionView, _i, _len, _ref, _results;
@@ -37,7 +38,8 @@ WizardStepView = Backbone.View.extend({
       newElement = $('<div>');
       wizardOprionView = new WizardOptionView({
         model: bckOption,
-        el: newElement
+        el: newElement,
+        parentView: 'hola'
       });
       _results.push($(this.el).find('.db-menu-option-container').append(newElement));
     }
@@ -49,6 +51,14 @@ WizardStepView = Backbone.View.extend({
     next_url = '/download_wizard/' + $(event.currentTarget).attr('href').substring(1);
     this.model.url = next_url;
     return this.model.fetch();
+  },
+  handleHover: function(event) {
+    var desc;
+    desc = $(event.currentTarget).attr('data-description');
+    return $(this.el).find('.db-menu-option-description').text(desc);
+  },
+  showDescription: function() {
+    return console.log('showing desc');
   },
   hidePreloader: function() {
     return $(this.el).find('.card-preolader-to-hide').hide();

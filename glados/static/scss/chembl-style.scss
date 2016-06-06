@@ -1568,11 +1568,12 @@ $marvin-size-fullscreen: 91vh;
 
 .db-menu-option {
 
-  height: 155px;
+  height: 99px;
 
   .menu-link {
 
-    height: 99px;
+    height: 100%;
+
     border-radius: $default-btn-border-radius;
 
     background-color: $primary-color;
@@ -1588,18 +1589,14 @@ $marvin-size-fullscreen: 91vh;
 
     }
 
-    img{
+    img {
       max-height: 45px;
     }
 
   }
 
-  .db-menu-description {
-    font-size: 80%;
-    padding: 10px;
-  }
-
 }
+
 
 .wizard-modal {
   height: 70%;
@@ -1613,10 +1610,21 @@ $marvin-size-fullscreen: 91vh;
     }
   }
 
-  .db-menu-last-row {
-    border-top: 1px solid $primary-color;
+  .db-menu-foter {
     width: 100%;
     position: absolute;
     bottom: 0;
+
+    .db-menu-last-row {
+      border-top: 1px solid $primary-color;
+
+    }
+
+    .db-menu-description {
+      font-size: 80%;
+      padding: 10px;
+    }
+
   }
+
 }
