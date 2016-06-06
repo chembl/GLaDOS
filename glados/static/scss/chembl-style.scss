@@ -1593,6 +1593,10 @@ $marvin-size-fullscreen: 91vh;
       max-height: 45px;
     }
 
+    .only-text{
+      font-size: 2rem;
+    }
+
   }
 
 }
@@ -1621,6 +1625,7 @@ $marvin-size-fullscreen: 91vh;
 
     .db-menu-last-row {
       border-top: 1px solid $primary-color;
+      margin-bottom: 0px;
 
     }
 
@@ -1629,6 +1634,22 @@ $marvin-size-fullscreen: 91vh;
       padding: 10px;
     }
 
+  }
+
+  .license-text{
+    background-color: white;
+    height: 60%;
+    overflow-y: scroll;
+    padding: 10px;
+    margin-bottom: 1rem;
+
+  }
+
+  .input-field{
+    margin-top: 0;
+    input{
+      margin-bottom: 0;
+    }
   }
 
 }

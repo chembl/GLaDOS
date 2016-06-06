@@ -14,7 +14,8 @@ WizardStepView = Backbone.View.extend
   render: ->
 
     @hidePreloader()
-    $(this.el).html Handlebars.compile($('#Handlebars-DownloadWizard-step').html())
+    template = @typeToTemplate[@model.get('type')]
+    $(this.el).html Handlebars.compile($(template).html())
       title: @model.get('title')
       description: @model.get('description')
       previous_step: @model.get('previous_step')
@@ -23,6 +24,7 @@ WizardStepView = Backbone.View.extend
       hide_right_option: !@model.get('right_option')?
       left_option: @model.get('left_option')
       hide_left_option: !@model.get('left_option')?
+      license: @model.get('license')
 
     for option in @model.get('options')
       bckOption = new WizardOption
@@ -38,7 +40,6 @@ WizardStepView = Backbone.View.extend
       wizardOprionView = new WizardOptionView
         model: bckOption
         el: newElement
-        parentView: 'hola'
 
       $(@el).find('.db-menu-option-container').append(newElement)
 
@@ -66,6 +67,10 @@ WizardStepView = Backbone.View.extend
 
     $(this.el).html Handlebars.compile($('#Handlebars-DownloadWizard-error').html())
       msg: 'There was an error loading the next step'
+
+  typeToTemplate:
+    'normal': '#Handlebars-DownloadWizard-step'
+    'lic_agreement': '#Handlebars-DownloadWizard-step-licag'
 
 
 

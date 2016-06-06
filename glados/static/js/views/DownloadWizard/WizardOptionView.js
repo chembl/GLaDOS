@@ -19,6 +19,7 @@ WizardOptionView = Backbone.View.extend({
   },
   typeToTemplate: {
     'icon': '#Handlebars-DownloadWizard-option-icon',
-    'image': '#Handlebars-DownloadWizard-option-image'
+    'image': '#Handlebars-DownloadWizard-option-image',
+    'text': '#Handlebars-DownloadWizard-option-text'
   }
 });

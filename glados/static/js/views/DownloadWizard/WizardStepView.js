@@ -12,9 +12,10 @@ WizardStepView = Backbone.View.extend({
     "mouseover .db-menu-option": "handleHover"
   },
   render: function() {
-    var bckOption, newElement, option, wizardOprionView, _i, _len, _ref, _results;
+    var bckOption, newElement, option, template, wizardOprionView, _i, _len, _ref, _results;
     this.hidePreloader();
-    $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-step').html())({
+    template = this.typeToTemplate[this.model.get('type')];
+    $(this.el).html(Handlebars.compile($(template).html())({
       title: this.model.get('title'),
       description: this.model.get('description'),
       previous_step: this.model.get('previous_step'),
@@ -22,7 +23,8 @@ WizardStepView = Backbone.View.extend({
       right_option: this.model.get('right_option'),
       hide_right_option: !(this.model.get('right_option') != null),
       left_option: this.model.get('left_option'),
-      hide_left_option: !(this.model.get('left_option') != null)
+      hide_left_option: !(this.model.get('left_option') != null),
+      license: this.model.get('license')
     }));
     _ref = this.model.get('options');
     _results = [];
@@ -40,8 +42,7 @@ WizardStepView = Backbone.View.extend({
       newElement = $('<div>');
       wizardOprionView = new WizardOptionView({
         model: bckOption,
-        el: newElement,
-        parentView: 'hola'
+        el: newElement
       });
       _results.push($(this.el).find('.db-menu-option-container').append(newElement));
     }
@@ -72,5 +73,9 @@ WizardStepView = Backbone.View.extend({
     return $(this.el).html(Handlebars.compile($('#Handlebars-DownloadWizard-error').html())({
       msg: 'There was an error loading the next step'
     }));
+  },
+  typeToTemplate: {
+    'normal': '#Handlebars-DownloadWizard-step',
+    'lic_agreement': '#Handlebars-DownloadWizard-step-licag'
   }
 });
