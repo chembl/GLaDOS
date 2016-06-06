@@ -55,7 +55,6 @@
   <div class="license-text">
 
 
-
     {{license}}
 
   </div>
@@ -76,9 +75,9 @@
 
     </div>
 
-    </div>
+  </div>
 
-    <div class="row">
+  <div class="row">
 
     <div class="input-field col s6 offset-s3 center-align">
       <a href="#download-db-modal" class="modal-trigger-safe waves-effect waves-light btn-chembl teal"><i
@@ -92,26 +91,16 @@
 
   <div class="db-menu-foter">
 
-    <div class="row db-menu-last-row">
+    <div class="row">
 
       <div class="col s12 center-align">
 
         <div class="left">
-          {{#unless hide_left_option}}
-          <a href="{{left_option.link}}">{{left_option.title}}</a>
+
+          {{#unless hide_previous_step}}
+          <a href="#{{previous_step}}" class="db-menu-link">Back</a>
           {{/unless}}
-        </div>
 
-
-        {{#unless hide_previous_step}}
-        <a href="#{{previous_step}}" class="db-menu-link">Back</a>
-        {{/unless}}
-
-
-        <div class="right">
-          {{#unless hide_right_option}}
-          <a href="{{right_option.link}}">{{right_option.title}}</a>
-          {{/unless}}
         </div>
 
       </div>
