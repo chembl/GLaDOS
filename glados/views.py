@@ -156,13 +156,13 @@ def wizard_step_json(request, step_id):
   
     'title': 'Downloads',
     'options': [
-        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.', 'link':'select_db_engine', 'type':'icon' },
-        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.', 'link':'select_db_engine', 'type':'icon' },
-        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link':'select_db_engine', 'type':'icon' },
-        {'title':'UniChem', 'icon':None, 'image':'https://www.ebi.ac.uk/unichem/static/images/UniChem_logo2_255.png', 'description': 'Data dumps from UniChem.', 'link':'select_db_engine', 'type':'image' },
-        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.', 'link':'select_db_engine', 'type':'icon' },
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon' },
-        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon' },
+        {'title':'SQL Data', 'icon':'fa-database', 'description': 'Download our sql data.', 'link':'select_db_engine', 'type':'icon', 'is_default':'yes'},
+        {'title':'Virtual Environments', 'icon':'fa-cubes', 'description': 'ChEMBL Virtual Machines.', 'link':'select_db_engine', 'type':'icon', 'is_default':'no'},
+        {'title':'RDF', 'icon':'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link':'select_db_engine', 'type':'icon', 'is_default':'no'},
+        {'title':'UniChem', 'icon':None, 'image':'https://www.ebi.ac.uk/unichem/static/images/UniChem_logo2_255.png', 'description': 'Data dumps from UniChem.', 'link':'select_db_engine', 'type':'image', 'is_default':'no' },
+        {'title':'Patents', 'icon':'fa-book', 'description': 'Patent compound exports.', 'link':'select_db_engine', 'type':'icon', 'is_default':'no' },
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon', 'is_default':'no' },
+        {'title':'Monomers', 'icon':'fa-smile-o', 'description': 'Monomers.', 'link':'select_db_engine', 'type':'icon', 'is_default':'no' },
       ],
       'right_option': {'title':'More...', 'link':'#', 'type':'bottom' },
       'left_option': None,
@@ -174,10 +174,10 @@ def wizard_step_json(request, step_id):
 
     'title': 'Select a Database Engine',
     'options': [
-        {'title':'PostgreSQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
-        {'title':'Oracle', 'icon':'fa-smile-o', 'description': '', 'link': 'select_oracle_version', 'type':'icon' },
-        {'title':'MySQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
-        {'title':'SQLite', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'PostgreSQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'yes'},
+        {'title':'Oracle', 'icon':'fa-smile-o', 'description': '', 'link': 'select_oracle_version', 'type':'icon', 'is_default':'no'},
+        {'title':'MySQL', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'no'},
+        {'title':'SQLite', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'no'},
       ],
       'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/', 'type':'bottom' },
       'left_option': None,
@@ -190,9 +190,9 @@ def wizard_step_json(request, step_id):
 
     'title': 'Select Oracle Version',
     'options': [
-        {'title':'11g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
-        {'title':'10g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
-        {'title':'9g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon' },
+        {'title':'11g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'yes'},
+        {'title':'10g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'no'},
+        {'title':'9g', 'icon':'fa-smile-o', 'description': '', 'link': '', 'type':'icon', 'is_default':'no'},
       ],
       'right_option': {'title':'Browse FTP', 'link':'ftp://ftp.ebi.ac.uk/pub/databases/chembl/', 'type':'bottom' },
       'left_option': None,

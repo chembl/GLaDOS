@@ -13,7 +13,9 @@ WizardOptionView = Backbone.View.extend
       title: @model.get('title')
       link: @model.get('link')
       icon: @model.get('icon')
+      image: @model.get('image')
       description: @model.get('description')
+      db_menu_option_default: 'db-menu-option-default' unless @model.get('is_default') == 'no'
 
   typeToTemplate:
     'icon': '#Handlebars-DownloadWizard-option-icon'

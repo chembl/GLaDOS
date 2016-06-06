@@ -12,7 +12,9 @@ WizardOptionView = Backbone.View.extend({
       title: this.model.get('title'),
       link: this.model.get('link'),
       icon: this.model.get('icon'),
-      description: this.model.get('description')
+      image: this.model.get('image'),
+      description: this.model.get('description'),
+      db_menu_option_default: this.model.get('is_default') !== 'no' ? 'db-menu-option-default' : void 0
     }));
   },
   typeToTemplate: {

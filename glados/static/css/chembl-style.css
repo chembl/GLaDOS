@@ -2902,6 +2902,10 @@ div#CNC-zoom-modal {
     .db-menu-option .menu-link img {
       max-height: 45px; }
 
+.db-menu-option-default {
+  border: 2px solid #004a43;
+  border-radius: 5px; }
+
 .wizard-modal {
   height: 70%; }
   .wizard-modal .modal-content {

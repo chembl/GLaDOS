@@ -31,6 +31,8 @@ WizardStepView = Backbone.View.extend
         link: option.link
         icon: option.icon
         type: option.type
+        image: option.image
+        is_default: option.is_default
 
       newElement = $('<div>')
       wizardOprionView = new WizardOptionView

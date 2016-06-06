@@ -82,9 +82,9 @@
 
   <div class="col s6 m4 l3">
 
-    <div class="card z-depth-0 db-menu-option" data-description="{{description}}">
+    <div class="card z-depth-0 db-menu-option {{db_menu_option_default}}" data-description="{{description}}">
 
-      <div class="menu-link z-depth-1 valign-wrapper hoverable">
+      <div class="menu-link valign-wrapper hoverable">
 
         <a href="#{{link}}" class="db-menu-link center-align valign waves-effect waves-light">
           <p><i class="fa {{icon}} fa-2x" aria-hidden="true"></i></p>
@@ -103,12 +103,12 @@
 
   <div class="col s6 m4 l3">
 
-    <div class="card z-depth-0 db-menu-option" data-description="{{description}}">
+    <div class="card z-depth-0 db-menu-option {{db_menu_option_default}}" data-description="{{description}}">
 
-      <div class="menu-link z-depth-1 valign-wrapper hoverable">
+      <div class="menu-link valign-wrapper hoverable">
 
         <a href="#{{link}}" class="db-menu-link center-align valign waves-effect waves-light">
-          <p><img src="https://www.ebi.ac.uk/unichem/static/images/UniChem_logo2_255.png"></p>
+          <p><img src={{image}}></p>
           <p>{{title}}</p>
         </a>
 

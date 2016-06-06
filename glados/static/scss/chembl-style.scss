@@ -1597,6 +1597,10 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+.db-menu-option-default{
+  border: 2px solid $primary-color-dark;
+  border-radius: $default-btn-border-radius + 2px;
+}
 
 .wizard-modal {
   height: 70%;
