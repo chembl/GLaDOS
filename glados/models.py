@@ -62,3 +62,25 @@ class Faq(models.Model):
 
   def __str__(self):
     return '%s' % (self.question)
+
+class WizardStep(models.Model):
+
+  title = models.CharField(max_length=100)
+
+
+class WizardOptionType(models.Model):
+
+  name = models.CharField(max_length=20)
+
+class WizardOption(models.Model):
+
+  title = models.CharField(max_length=30)
+  icon = models.CharField(max_length=20)
+  description = models.CharField(max_length=40)
+  is_default = models.BooleanField(default=False)
+  parent_step = models.ForeignKey(WizardStep, on_delete=models.CASCADE)
+  type = models.ForeignKey(WizardOptionType)
+  image_url = models.CharField(max_length=400)
+
+
+
