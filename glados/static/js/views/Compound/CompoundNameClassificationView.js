@@ -16,6 +16,7 @@ CompoundNameClassificationView = CardView.extend({
     this.initEmbedModal('name_and_classification');
     this.activateTooltips();
     this.activateModals();
+    ChemJQ.autoCompile();
     return ChemJQ.autoCompile();
   },
   renderTitle: function() {

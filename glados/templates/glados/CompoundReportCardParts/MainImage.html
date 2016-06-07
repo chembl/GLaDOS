@@ -33,7 +33,9 @@
           <p><i class="fa fa-search-plus"></i></p>
         </a>
 
-        <a class="hoverable waves-effect waves-light teal tooltipped" data-tooltip="3D">
+        <a class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
+           href="#CNC-3d-modal"
+           data-tooltip="3D">
           <p><i class="fa fa-cube"></i></p>
         </a>
 
@@ -113,9 +115,12 @@
 
   <!-- Image zoom Modal Structure -->
   {% block img_zoom_modal %}
-    {% include "glados/base/CompoundReportCardParts/ImageZoomModal.html" %}
+    {% include "glados/CompoundReportCardParts/ImageZoomModal.html" %}
   {% endblock %}
 
+  {% block img_3d_view_modal %}
+    {% include "glados/CompoundReportCardParts/3DViewModal.html" %}
+  {% endblock %}
 
 
 
