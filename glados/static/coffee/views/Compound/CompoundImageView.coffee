@@ -9,6 +9,8 @@ CompoundImageView = CardView.extend
     @initDownloadButtons()
     @initZoomModal()
 
+  events: ->
+    "click #CNC-3d-modal-trigger": "init3DView"
 
   renderImage: ->
     if @model.get('structure_type') == 'NONE'
@@ -86,6 +88,11 @@ CompoundImageView = CardView.extend
     coords = if $('#Bck-Coordinates-Switch').prop('checked') then 'ignoreCoords=1' else ''
 
     return '?' + renderer + '&' + format + '&' + coords
+
+  init3DView: ->
+    console.log('init3d view!')
+    comp3DView = new Compound3DView
+      el: $('#BCK-compound-3dview')
 
 
 

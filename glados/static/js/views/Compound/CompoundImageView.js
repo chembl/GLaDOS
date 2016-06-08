@@ -10,6 +10,11 @@ CompoundImageView = CardView.extend({
     this.initDownloadButtons();
     return this.initZoomModal();
   },
+  events: function() {
+    return {
+      "click #CNC-3d-modal-trigger": "init3DView"
+    };
+  },
   renderImage: function() {
     var img, img_url;
     if (this.model.get('structure_type') === 'NONE') {
@@ -77,5 +82,12 @@ CompoundImageView = CardView.extend({
     format = 'format=' + ($('#Bck-Format-Switch').prop('checked') ? 'png' : 'svg');
     coords = $('#Bck-Coordinates-Switch').prop('checked') ? 'ignoreCoords=1' : '';
     return '?' + renderer + '&' + format + '&' + coords;
+  },
+  init3DView: function() {
+    var comp3DView;
+    console.log('init3d view!');
+    return comp3DView = new Compound3DView({
+      el: $('#BCK-compound-3dview')
+    });
   }
 });
