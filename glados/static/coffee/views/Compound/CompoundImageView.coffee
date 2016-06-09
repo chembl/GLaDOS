@@ -90,9 +90,10 @@ CompoundImageView = CardView.extend
     return '?' + renderer + '&' + format + '&' + coords
 
   init3DView: ->
-    console.log('init3d view!')
+
     comp3DView = new Compound3DView
       el: $('#BCK-compound-3dview')
+      model: @model
 
 
 

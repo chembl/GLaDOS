@@ -3,11 +3,31 @@ var Compound3DView;
 
 Compound3DView = Backbone.View.extend({
   initialize: function() {
-    return this.render();
+    this.model.on('change', this.render, this);
+    return this.getCoords();
   },
   render: function() {
-    var url;
-    url = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz/CiAgU2NpVGVnaWMwMTExMTYxMzQ0MkQKCiAxMyAxMyAgMCAgMCAgMCAgMCAgICAgICAgICAgIDk5OSBWMjAwMAogICAgMS4yOTkwICAgLTAuNzUwMCAgICAwLjAwMDAgQyAgIDAgIDAKICAgIDEuMjk5MCAgICAwLjc1MDAgICAgMC4wMDAwIEMgICAwICAwCiAgICAwLjAwMDAgICAgMS41MDAwICAgIDAuMDAwMCBDICAgMCAgMAogICAtMS4yOTkwICAgIDAuNzUwMCAgICAwLjAwMDAgQyAgIDAgIDAKICAgLTEuMjk5MCAgIC0wLjc1MDAgICAgMC4wMDAwIEMgICAwICAwCiAgICAwLjAwMDAgICAtMS41MDAwICAgIDAuMDAwMCBDICAgMCAgMAogICAgMC4wMDMxICAgLTMuMDAwOCAgICAwLjAwMDAgQyAgIDAgIDAKICAgLTEuMDM1MSAgIC0zLjYwMjYgICAgMC4wMDAwIE8gICAwICAwCiAgICAxLjA0MzIgICAtMy41OTkzICAgIDAuMDAwMCBPICAgMCAgMAogICAtMi42MDAzICAgLTEuNDk3OCAgICAwLjAwMDAgTyAgIDAgIDAKICAgLTMuODk5MCAgIC0wLjc0NTUgICAgMC4wMDAwIEMgICAwICAwCiAgIC0zLjg5NjkgICAgMC40NTQ1ICAgIDAuMDAwMCBDICAgMCAgMAogICAtNC45Mzk1ICAgLTEuMzQzNCAgICAwLjAwMDAgTyAgIDAgIDAKICAxICAyICAyICAwCiAgMiAgMyAgMSAgMAogIDMgIDQgIDIgIDAKICA0ICA1ICAxICAwCiAgNSAgNiAgMiAgMAogIDYgIDEgIDEgIDAKICA2ICA3ICAxICAwCiAgNyAgOCAgMSAgMAogIDcgIDkgIDIgIDAKICA1IDEwICAxICAwCiAxMCAxMSAgMSAgMAogMTEgMTIgIDEgIDAKIDExIDEzICAyICAwCk0gIEVORA==';
-    return MoleculeVisualisator.initVsualisation("render-container", "renderer-canvas", url);
+    return MoleculeVisualisator.initVsualisationFromData("render-container", "renderer-canvas", this.model.get('xyz'));
+  },
+  getCoords: function() {
+    var f, getXYZURL, getXZYcontent, molUrl, setXYZToModel, standardInchi, standardInchiB64;
+    standardInchi = this.model.get('molecule_structures')['standard_inchi'];
+    standardInchiB64 = window.btoa(standardInchi);
+    molUrl = 'https://www.ebi.ac.uk/chembl/api/utils/inchi2ctab/' + standardInchiB64;
+    getXYZURL = function(data) {
+      var ctabB64, xyzUrl;
+      ctabB64 = window.btoa(data);
+      xyzUrl = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz/' + ctabB64;
+      return xyzUrl;
+    };
+    getXZYcontent = function(url) {
+      return $.ajax(url);
+    };
+    setXYZToModel = function(xyzCoords) {
+      this.model.set('xyz', xyzCoords);
+      return console.log(this.model.get('xyz'));
+    };
+    f = $.proxy(setXYZToModel, this);
+    return $.when($.ajax(molUrl)).then(getXYZURL).then(getXZYcontent).then(f);
   }
 });

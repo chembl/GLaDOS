@@ -173,6 +173,13 @@ var MoleculeVisualisator = (function () {
 
   }
 
+  MoleculeVisualisator.initVsualisationFromData = function (rendererContainerId, rendererCanvasId, xyzData) {
+
+    startVisualisation(rendererContainerId, rendererCanvasId, xyzData);
+
+
+  }
+
   return MoleculeVisualisator;
 
 })();

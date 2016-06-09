@@ -85,9 +85,9 @@ CompoundImageView = CardView.extend({
   },
   init3DView: function() {
     var comp3DView;
-    console.log('init3d view!');
     return comp3DView = new Compound3DView({
-      el: $('#BCK-compound-3dview')
+      el: $('#BCK-compound-3dview'),
+      model: this.model
     });
   }
 });
