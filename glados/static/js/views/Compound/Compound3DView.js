@@ -24,8 +24,7 @@ Compound3DView = Backbone.View.extend({
       return $.ajax(url);
     };
     setXYZToModel = function(xyzCoords) {
-      this.model.set('xyz', xyzCoords);
-      return console.log(this.model.get('xyz'));
+      return this.model.set('xyz', xyzCoords);
     };
     f = $.proxy(setXYZToModel, this);
     return $.when($.ajax(molUrl)).then(getXYZURL).then(getXZYcontent).then(f);

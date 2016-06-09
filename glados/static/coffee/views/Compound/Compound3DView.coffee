@@ -30,7 +30,6 @@ Compound3DView = Backbone.View.extend
 
     setXYZToModel = (xyzCoords) ->
       @model.set('xyz', xyzCoords)
-      console.log(@model.get('xyz'))
 
     f = $.proxy(setXYZToModel, @)
 
