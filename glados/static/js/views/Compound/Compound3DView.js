@@ -7,10 +7,18 @@ Compound3DView = Backbone.View.extend({
     return this.getCoords();
   },
   render: function() {
+    $(this.el).html(Handlebars.compile($('#Handlebars-Compound-3D-speck').html())({
+      title: this.model.get('molecule_chembl_id')
+    }));
     return MoleculeVisualisator.initVsualisationFromData("render-container", "renderer-canvas", this.model.get('xyz'));
   },
+  showError: function() {
+    return $(this.el).html(Handlebars.compile($('#Handlebars-Compound-3D-error').html())({
+      msg: 'There was en error loading the data'
+    }));
+  },
   getCoords: function() {
-    var f, getXYZURL, getXZYcontent, molUrl, setXYZToModel, standardInchi, standardInchiB64;
+    var e, f, getCoords, getXYZURL, getXZYcontent, molUrl, setXYZToModel, standardInchi, standardInchiB64;
     standardInchi = this.model.get('molecule_structures')['standard_inchi'];
     standardInchiB64 = window.btoa(standardInchi);
     molUrl = 'https://www.ebi.ac.uk/chembl/api/utils/inchi2ctab/' + standardInchiB64;
@@ -27,6 +35,10 @@ Compound3DView = Backbone.View.extend({
       return this.model.set('xyz', xyzCoords);
     };
     f = $.proxy(setXYZToModel, this);
-    return $.when($.ajax(molUrl)).then(getXYZURL).then(getXZYcontent).then(f);
+    getCoords = $.ajax(molUrl).then(getXYZURL).then(getXZYcontent).then(f);
+    e = $.proxy(this.showError, this);
+    return getCoords.fail(function() {
+      return e();
+    });
   }
 });

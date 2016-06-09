@@ -2,15 +2,21 @@ Compound3DView = Backbone.View.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+
     @getCoords()
 
 
   render: ->
 
-    #url = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz/CiAgU2NpVGVnaWMwMTExMTYxMzQ0MkQKCiAxMyAxMyAgMCAgMCAgMCAgMCAgICAgICAgICAgIDk5OSBWMjAwMAogICAgMS4yOTkwICAgLTAuNzUwMCAgICAwLjAwMDAgQyAgIDAgIDAKICAgIDEuMjk5MCAgICAwLjc1MDAgICAgMC4wMDAwIEMgICAwICAwCiAgICAwLjAwMDAgICAgMS41MDAwICAgIDAuMDAwMCBDICAgMCAgMAogICAtMS4yOTkwICAgIDAuNzUwMCAgICAwLjAwMDAgQyAgIDAgIDAKICAgLTEuMjk5MCAgIC0wLjc1MDAgICAgMC4wMDAwIEMgICAwICAwCiAgICAwLjAwMDAgICAtMS41MDAwICAgIDAuMDAwMCBDICAgMCAgMAogICAgMC4wMDMxICAgLTMuMDAwOCAgICAwLjAwMDAgQyAgIDAgIDAKICAgLTEuMDM1MSAgIC0zLjYwMjYgICAgMC4wMDAwIE8gICAwICAwCiAgICAxLjA0MzIgICAtMy41OTkzICAgIDAuMDAwMCBPICAgMCAgMAogICAtMi42MDAzICAgLTEuNDk3OCAgICAwLjAwMDAgTyAgIDAgIDAKICAgLTMuODk5MCAgIC0wLjc0NTUgICAgMC4wMDAwIEMgICAwICAwCiAgIC0zLjg5NjkgICAgMC40NTQ1ICAgIDAuMDAwMCBDICAgMCAgMAogICAtNC45Mzk1ICAgLTEuMzQzNCAgICAwLjAwMDAgTyAgIDAgIDAKICAxICAyICAyICAwCiAgMiAgMyAgMSAgMAogIDMgIDQgIDIgIDAKICA0ICA1ICAxICAwCiAgNSAgNiAgMiAgMAogIDYgIDEgIDEgIDAKICA2ICA3ICAxICAwCiAgNyAgOCAgMSAgMAogIDcgIDkgIDIgIDAKICA1IDEwICAxICAwCiAxMCAxMSAgMSAgMAogMTEgMTIgIDEgIDAKIDExIDEzICAyICAwCk0gIEVORA=='
-
+    $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-speck').html())
+      title: @model.get('molecule_chembl_id')
 
     MoleculeVisualisator.initVsualisationFromData("render-container", "renderer-canvas", @model.get('xyz'));
+
+  showError: ->
+    $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
+      msg: 'There was en error loading the data'
+
 
   getCoords: ->
 
@@ -33,4 +39,10 @@ Compound3DView = Backbone.View.extend
 
     f = $.proxy(setXYZToModel, @)
 
-    $.when( $.ajax( molUrl ) ).then(getXYZURL).then(getXZYcontent).then(f)
+    getCoords = $.ajax( molUrl ).then(getXYZURL).then(getXZYcontent).then(f)
+
+    e = $.proxy(@showError, @)
+    getCoords.fail ->
+      e()
+
+

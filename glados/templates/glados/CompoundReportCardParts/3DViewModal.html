@@ -1,15 +1,22 @@
+{% block custom_handlebars %}
+  {% include "glados/Handlebars/CompoundReportCard/Hbs-3DViews.html" %}
+{% endblock %}
+
 <div id="CNC-3d-modal" class="modal" style="height: 70%">
 
-  <div class="modal-content" style="height: 80%;">
-    <h3>Chembl25</h3>
+  <div id='BCK-compound-3dview' class="modal-content" style="height: 80%;">
 
-    <div id="BCK-compound-3dview" style="width: 100%; height: 100%">
+    <!-- Backbone renders this -->
 
-      <div id="render-container" class="teal lighten-5">
-        <canvas id="renderer-canvas"></canvas>
-      </div>
+     <div class="card-preolader-to-hide">
 
-    </div>
+       <div class="progress">
+         <div class="indeterminate"></div>
+       </div>
+
+
+     </div>
+
 
 
   </div>
