@@ -94,6 +94,7 @@ CompoundImageView = CardView.extend
     comp3DView = new Compound3DView
       el: $('#BCK-compound-3dview')
       model: @model
+      type: 'reduced'
 
 
 

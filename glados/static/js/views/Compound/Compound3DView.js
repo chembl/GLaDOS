@@ -2,8 +2,9 @@
 var Compound3DView;
 
 Compound3DView = Backbone.View.extend({
-  initialize: function() {
+  initialize: function(options) {
     this.model.on('change', this.render, this);
+    this.type = options.type;
     return this.getCoords();
   },
   events: function() {
@@ -12,7 +13,7 @@ Compound3DView = Backbone.View.extend({
     };
   },
   render: function() {
-    $(this.el).html(Handlebars.compile($('#Handlebars-Compound-3D-speck').html())({
+    $(this.el).html(Handlebars.compile($(typeToTemplate[this.type]).html())({
       title: '3D View of ' + this.model.get('molecule_chembl_id')
     }));
     return this.molVis = new MoleculeVisualisator("render-container", "renderer-canvas", this.model.get('xyz'));
@@ -50,5 +51,8 @@ Compound3DView = Backbone.View.extend({
     var value;
     value = $(event.currentTarget).val();
     return this.molVis.changePreset(value);
+  },
+  typeToTemplate: {
+    'reduced': '#Handlebars-Compound-3D-speck'
   }
 });

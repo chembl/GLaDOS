@@ -1,7 +1,8 @@
 Compound3DView = Backbone.View.extend
 
-  initialize: ->
+  initialize: (options) ->
     @model.on 'change', @.render, @
+    @type = options.type
 
     @getCoords()
 
@@ -11,7 +12,7 @@ Compound3DView = Backbone.View.extend
 
   render: ->
 
-    $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-speck').html())
+    $(@el).html Handlebars.compile($(typeToTemplate[@type]).html())
       title: '3D View of ' + @model.get('molecule_chembl_id')
 
     @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
@@ -54,6 +55,8 @@ Compound3DView = Backbone.View.extend
     value = $(event.currentTarget).val()
     @molVis.changePreset(value);
 
+  typeToTemplate:
+    'reduced': '#Handlebars-Compound-3D-speck'
 
 
 
