@@ -13,7 +13,7 @@ Compound3DView = Backbone.View.extend({
     };
   },
   render: function() {
-    $(this.el).html(Handlebars.compile($(typeToTemplate[this.type]).html())({
+    $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
       title: '3D View of ' + this.model.get('molecule_chembl_id')
     }));
     return this.molVis = new MoleculeVisualisator("render-container", "renderer-canvas", this.model.get('xyz'));
