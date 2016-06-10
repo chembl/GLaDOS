@@ -6,12 +6,16 @@ Compound3DView = Backbone.View.extend
     @getCoords()
 
 
+  events: ->
+    'click #BCK-Compound-3d-speckpresets input': 'selectPreset'
+
   render: ->
 
     $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-speck').html())
-      title: @model.get('molecule_chembl_id')
+      title: '3D View of ' + @model.get('molecule_chembl_id')
 
-    MoleculeVisualisator.initVsualisationFromData("render-container", "renderer-canvas", @model.get('xyz'));
+    @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
+
 
   showError: ->
     $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
@@ -44,5 +48,13 @@ Compound3DView = Backbone.View.extend
     e = $.proxy(@showError, @)
     getCoords.fail ->
       e()
+
+
+  selectPreset: (event) ->
+    value = $(event.currentTarget).val()
+    @molVis.changePreset(value);
+
+
+
 
 

@@ -15958,11 +15958,11 @@ var startVisualisation = function (rendererContainerID, canvasID, data) {
 
   var imposterCanvas = document.getElementById(canvasID);
 
-  console.log('resolution:')
-  console.log(view.resolution)
-  console.log($('#' + canvasID).width())
-  //renderer = new Renderer(imposterCanvas, view.resolution, view.aoRes);
+  console.log('height:')
+  console.log($('#' + canvasID).height())
+  //renderer = new Renderer(imposterCanvas, view.resolution, view.aoRes, $('#' + canvasID).height());
   renderer = new Renderer(imposterCanvas, 400, view.aoRes);
+  //renderer = new Renderer(imposterCanvas, $('#' + canvasID).height(), view.aoRes);
 
   loadDataDirectly(data);
 
@@ -16043,20 +16043,30 @@ var startVisualisation = function (rendererContainerID, canvasID, data) {
 }
 
 
+
+
 var MoleculeVisualisator = (function () {
 
-  function MoleculeVisualisator() {
+  function MoleculeVisualisator(rendererContainerId, rendererCanvasId, xyzData) {
+    startVisualisation(rendererContainerId, rendererCanvasId, xyzData);
+
+    this.changePreset = function (newValue) {
+      View.override(view, presets[newValue]);
+      renderer.setSystem(system, view);
+      needReset = true;
+    }
+
   };
+
 
   MoleculeVisualisator.initVsualisation = function (rendererContainerId, rendererCanvasId, xyzUrl) {
 
-      $.ajax({
-        url: xyzUrl,
-        success: function (data) {
-          startVisualisation(rendererContainerId, rendererCanvasId, data);
-        }
-      });
-
+    $.ajax({
+      url: xyzUrl,
+      success: function (data) {
+        startVisualisation(rendererContainerId, rendererCanvasId, data);
+      }
+    });
 
 
   }
@@ -16107,7 +16117,7 @@ module.exports = {
         brightness: 0.5,
         outline: 0.0,
         spf: 32,
-        bonds: true,
+        bonds: false,
         bondThreshold: 1.2,
         bondShade: 0.5,
         atomShade: 0.5,
@@ -16840,8 +16850,8 @@ var newView = module.exports.new = function() {
             x: 0.0,
             y: 0.0
         },
-        atomScale: 0.24,
-        relativeAtomScale: 0.64,
+        atomScale: 0.6,
+        relativeAtomScale: 1.0,
         bondScale: 0.5,
         rotation: glm.mat4.create(),
         ao: 0.75,
@@ -16849,7 +16859,7 @@ var newView = module.exports.new = function() {
         brightness: 0.5,
         outline: 0.0,
         spf: 32,
-        bonds: true,
+        bonds: false,
         bondThreshold: 1.2,
         bondShade: 0.5,
         atomShade: 0.5,

@@ -70,11 +70,11 @@ var startVisualisation = function (rendererContainerID, canvasID, data) {
 
   var imposterCanvas = document.getElementById(canvasID);
 
-  console.log('resolution:')
-  console.log(view.resolution)
-  console.log($('#' + canvasID).width())
-  //renderer = new Renderer(imposterCanvas, view.resolution, view.aoRes);
+  console.log('height:')
+  console.log($('#' + canvasID).height())
+  //renderer = new Renderer(imposterCanvas, view.resolution, view.aoRes, $('#' + canvasID).height());
   renderer = new Renderer(imposterCanvas, 400, view.aoRes);
+  //renderer = new Renderer(imposterCanvas, $('#' + canvasID).height(), view.aoRes);
 
   loadDataDirectly(data);
 
@@ -155,20 +155,30 @@ var startVisualisation = function (rendererContainerID, canvasID, data) {
 }
 
 
+
+
 var MoleculeVisualisator = (function () {
 
-  function MoleculeVisualisator() {
+  function MoleculeVisualisator(rendererContainerId, rendererCanvasId, xyzData) {
+    startVisualisation(rendererContainerId, rendererCanvasId, xyzData);
+
+    this.changePreset = function (newValue) {
+      View.override(view, presets[newValue]);
+      renderer.setSystem(system, view);
+      needReset = true;
+    }
+
   };
+
 
   MoleculeVisualisator.initVsualisation = function (rendererContainerId, rendererCanvasId, xyzUrl) {
 
-      $.ajax({
-        url: xyzUrl,
-        success: function (data) {
-          startVisualisation(rendererContainerId, rendererCanvasId, data);
-        }
-      });
-
+    $.ajax({
+      url: xyzUrl,
+      success: function (data) {
+        startVisualisation(rendererContainerId, rendererCanvasId, data);
+      }
+    });
 
 
   }

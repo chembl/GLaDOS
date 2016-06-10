@@ -8,7 +8,7 @@ module.exports = {
         brightness: 0.5,
         outline: 0.0,
         spf: 32,
-        bonds: true,
+        bonds: false,
         bondThreshold: 1.2,
         bondShade: 0.5,
         atomShade: 0.5,
