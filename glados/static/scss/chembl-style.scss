@@ -1653,3 +1653,27 @@ $marvin-size-fullscreen: 91vh;
   }
 
 }
+
+.speck-fullscreen{
+
+  position: relative;
+
+  .visualisation{
+
+    width: 100vw;
+    height: 90vh;
+
+
+
+  }
+
+  .controls{
+
+    position: absolute;
+    bottom: 0;
+
+
+
+  }
+
+}

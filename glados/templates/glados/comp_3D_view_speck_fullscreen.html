@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>3D Visualisation</title>
+
+
+  {% load compress %}
+  <!-- Imports used by all the templates-->
+  {% block common_css %}
+  {% include "glados/base/css_imports_for_all.html" %}
+  {% endblock %}
+
+</head>
+
+<body>
+
+<div class="speck-fullscreen">
+
+  <div class="visualisation teal lighten-5">
+    Visualisation
+  </div>
+
+  <div class="controls">
+
+    <div class="container">
+
+      <div class="row">
+        Controls
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- - - - - - - - - - - - - - - - - - - - -->
+<!-- APIs -->
+<!-- - - - - - - - - - - - - - - - - - - - -->
+
+<!-- common imports for all templates -->
+{% compress js %}
+
+{% block common_js %}
+{% include "glados/base/js_imports_for_all.html" %}
+{% endblock %}
+
+{% endcompress %}
+
+<!-- inline javascript -->
+{% compress js %}
+<script type="text/javascript" charset="utf-8">
+
+  SMALL_WIDTH = 600
+  MEDIUM_WIDTH = 992
+
+  $(document).ready(function () {
+
+
+
+  });
+</script>
+{% endcompress%}
+
+
+</body>
+
+</html>

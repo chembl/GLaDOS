@@ -2936,4 +2936,13 @@ div#CNC-zoom-modal {
     .wizard-modal .input-field input {
       margin-bottom: 0; }
 
+.speck-fullscreen {
+  position: relative; }
+  .speck-fullscreen .visualisation {
+    width: 100vw;
+    height: 90vh; }
+  .speck-fullscreen .controls {
+    position: absolute;
+    bottom: 0; }
+
 /*# sourceMappingURL=chembl-style.css.map */
