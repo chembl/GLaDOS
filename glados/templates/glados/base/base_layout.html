@@ -126,6 +126,10 @@
 
     {% block custom_afterRender %}{% endblock %}
 
+    var baseMenuItem = DownloadWizardApp.initWizardStep();
+    DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
+    baseMenuItem.fetch();
+
   }
 
 </script>
