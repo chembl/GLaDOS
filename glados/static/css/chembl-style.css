@@ -2499,7 +2499,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
   right: 0px; }
 
 div#CNC-zoom-modal {
-  height: 70%;
+  height: 80%;
   overflow-y: hidden; }
 
 .img-zoom-container {
@@ -2909,7 +2909,7 @@ div#CNC-zoom-modal {
   border-radius: 5px; }
 
 .wizard-modal {
-  height: 70%; }
+  height: 80%; }
   .wizard-modal .modal-content {
     height: 100%; }
     .wizard-modal .modal-content .step-content {

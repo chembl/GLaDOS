@@ -114,6 +114,8 @@ main {
   flex: 1 0 auto;
 }
 
+$modals-height: 80%;
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1011,7 +1013,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
 }
 
 div#CNC-zoom-modal {
-  height: 70%;
+  height: $modals-height;
   overflow-y: hidden;
 }
 
@@ -1607,7 +1609,7 @@ $marvin-size-fullscreen: 91vh;
 }
 
 .wizard-modal {
-  height: 70%;
+  height: $modals-height;
 
   .modal-content {
     height: 100%;
