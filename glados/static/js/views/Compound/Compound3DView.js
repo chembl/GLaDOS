@@ -29,13 +29,19 @@ Compound3DView = Backbone.View.extend({
     standardInchiB64 = window.btoa(standardInchi);
     molUrl = 'https://www.ebi.ac.uk/chembl/api/utils/inchi2ctab/' + standardInchiB64;
     getXYZURL = function(data) {
-      var ctabB64, xyzUrl;
-      ctabB64 = window.btoa(data);
-      xyzUrl = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz/' + ctabB64;
-      return xyzUrl;
+      var url_and_data;
+      url_and_data = {};
+      url_and_data.url = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz';
+      url_and_data.data = data;
+      return url_and_data;
     };
-    getXZYcontent = function(url) {
-      return $.ajax(url);
+    getXZYcontent = function(url_and_data) {
+      var r;
+      return r = $.ajax({
+        type: "POST",
+        url: url_and_data.url,
+        data: url_and_data.data
+      });
     };
     setXYZToModel = function(xyzCoords) {
       return this.model.set('xyz', xyzCoords);

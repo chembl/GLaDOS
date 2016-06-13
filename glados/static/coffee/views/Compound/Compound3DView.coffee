@@ -32,12 +32,14 @@ Compound3DView = Backbone.View.extend
 
     # from a ctab value it returns the base64 url to get the xyz
     getXYZURL = (data) ->
-      ctabB64 = window.btoa(data)
-      xyzUrl = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz/' + ctabB64
-      return xyzUrl
+      url_and_data = {}
+      url_and_data.url = 'https://www.ebi.ac.uk/chembl/api/utils/ctab2xyz'
+      url_and_data.data = data
 
-    getXZYcontent = (url) ->
-      $.ajax( url )
+      return url_and_data
+
+    getXZYcontent = (url_and_data) ->
+      r = $.ajax( {type: "POST", url: url_and_data.url, data: url_and_data.data})
 
     setXYZToModel = (xyzCoords) ->
       @model.set('xyz', xyzCoords)
