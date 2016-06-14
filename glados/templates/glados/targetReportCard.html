@@ -230,12 +230,22 @@
 {% block custom_js %}
 <script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
+<script type="text/javascript" src="/static/js/models/Target.js"></script>
+<script type="text/javascript" src="/static/js/targetReportCardApp.js"></script>
+
 {% endblock %}
 
 {% block custom_js_inline %}
 
 $('.scrollspy').scrollSpy();
 ScrollSpyHelper.initializeScrollSpyPinner();
+
+var pathname = window.location.pathname;
+var pathnameParts = pathname.split('/')
+CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
+var target = TargetReportCardApp.initTarget(CHEMBL_ID);
+console.log(CHEMBL_ID)
+target.fetch();
 
 {% endblock %}
 

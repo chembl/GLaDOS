@@ -152,6 +152,7 @@ var startVisualisation = function (rendererContainerID, canvasID, data) {
 
   loop();
 
+
 }
 
 

@@ -1,0 +1,1 @@
+Target = Backbone.Model.extend({})

@@ -55,7 +55,7 @@ Compound3DView = Backbone.View.extend
 
   selectPreset: (event) ->
     value = $(event.currentTarget).val()
-    @molVis.changePreset(value);
+    @molVis.changePreset(value)
 
   typeToTemplate:
     'reduced': '#Handlebars-Compound-3D-speck'
