@@ -25,7 +25,9 @@
         <div class="row">
 
         {% block tnc %}
-          {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+          {% with is_dynamic=True  %}
+            {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+          {% endwith %}
         {% endblock %}
 
         </div>
@@ -232,6 +234,8 @@
 <script type="text/javascript" src="/static/js/styling/buttons_helper.js"></script>
 <script type="text/javascript" src="/static/js/models/Target.js"></script>
 <script type="text/javascript" src="/static/js/targetReportCardApp.js"></script>
+<script type="text/javascript" src="/static/js/views/base/CardView.js"></script>
+<script type="text/javascript" src="/static/js/views/Target/TargetNameAndClassificationView.js"></script>
 
 {% endblock %}
 
@@ -245,6 +249,9 @@ var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var target = TargetReportCardApp.initTarget(CHEMBL_ID);
 console.log(CHEMBL_ID)
+
+var TNCView = TargetReportCardApp.initTNCView(target, $('#TNameClassificationCard'));
+
 target.fetch();
 
 {% endblock %}

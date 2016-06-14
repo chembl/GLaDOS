@@ -1,45 +1,18 @@
 {% extends "glados/base/basic_table_card.html" %}
 
+{% block custom_handlebars %}
+  {% include "glados/Handlebars/TargetReportCard/Hbs-NameAndClassification.html" %}
+{% endblock %}
+
 {% block card_id %}TNameClassificationCard{% endblock %}
 
 {% block table %}
 
-<table class="compact-table striped hide-on-small-only">
-  <tr>
-    <td class="fixed-width-column-11"><b>ID:</b></td>
-    <td>CHEMBL2243</td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Type:</b></td>
-    <td>SINGLE PROTEIN</td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Preferred Name:</b></td>
-    <td>Anandamide amidohydrolase</td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Synonyms:</b></td>
-    <td>
-      <span class="chip-syn">Anandamide amidohydrolase 1</span>
-      <span class="chip-syn">FAAH</span>
-      <span class="chip-syn">FAAH1</span>
-      <span class="chip-syn">Fatty-acid amide hydrolase 1</span>
-      <span class="chip-syn">Oleamide hydrolase 1</span>
-    </td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Organism:</b></td>
-    <td> Homo sapiens</td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Species Group:</b></td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td class="fixed-width-column-11"><b>Protein Target Classification:</b></td>
-    <td>Enzyme</td>
-  </tr>
-</table>
+<div id="BCK-TNC-large" data-hb-template="Handlebars-Target-NameAndClassification-large">
+
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
 
 {% endblock %}
 

@@ -14,6 +14,23 @@ TargetReportCardApp = (function() {
     return target;
   };
 
+  /* *
+    * Initializes the TNCView (Target Name and Clasification View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {TargetNameClassificationView} the view that has been created
+  */
+
+
+  TargetReportCardApp.initTNCView = function(model, top_level_elem) {
+    var tncView;
+    tncView = new TargetNameAndClassificationView({
+      model: model,
+      el: top_level_elem
+    });
+    return tncView;
+  };
+
   return TargetReportCardApp;
 
 })();
