@@ -5,7 +5,8 @@ CompoundMoleculeFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'col s6 m4 l3',
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    return this.resource_type = 'Compound';
   },
   render: function() {
     var colour;

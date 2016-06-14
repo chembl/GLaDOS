@@ -5,6 +5,7 @@ CompoundRepresentationsView = CardView.extend
   initialize: ->
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Compound'
 
   render: ->
     @molecule_structures = @model.get('molecule_structures')

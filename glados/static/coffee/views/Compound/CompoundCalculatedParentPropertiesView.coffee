@@ -5,6 +5,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend
   initialize: ->
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Compound'
 
   render: ->
 

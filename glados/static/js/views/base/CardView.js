@@ -6,9 +6,15 @@ CardView = Backbone.View.extend({
     var error_msg, rendered;
     $(this.el).children('.card-preolader-to-hide').hide();
     if (xhr.status === 404) {
-      error_msg = 'No compound found with id ' + this.model.get('molecule_chembl_id');
+      switch (this.resource_type) {
+        case 'Compound':
+          error_msg = 'No compound found with id ' + this.model.get('molecule_chembl_id');
+          break;
+        case 'Target':
+          error_msg = 'No target found with id ' + this.model.get('target_chembl_id');
+      }
     } else {
-      error_msg = 'There was an error while loading the compound (' + xhr.status + ' ' + xhr.statusText + ')';
+      error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')';
     }
     rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())({
       msg: error_msg

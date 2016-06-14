@@ -7,6 +7,7 @@ CompoundMoleculeFormView = Backbone.View.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+    @resource_type = 'Compound'
 
   render: ->
 

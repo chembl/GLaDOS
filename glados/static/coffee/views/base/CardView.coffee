@@ -3,12 +3,17 @@
 CardView = Backbone.View.extend
 
   showCompoundErrorCard: (model, xhr, options) ->
+
     $(@el).children('.card-preolader-to-hide').hide()
 
     if xhr.status == 404
-      error_msg = 'No compound found with id ' + @model.get('molecule_chembl_id')
+
+      switch @resource_type
+        when 'Compound' then error_msg = 'No compound found with id ' + @model.get('molecule_chembl_id')
+        when 'Target' then error_msg = 'No target found with id ' + @model.get('target_chembl_id')
+
     else
-      error_msg = 'There was an error while loading the compound (' + xhr.status + ' ' + xhr.statusText + ')'
+      error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')'
 
     rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())
       msg: error_msg

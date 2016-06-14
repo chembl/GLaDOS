@@ -4,7 +4,8 @@ var CompoundMoleculeFormsListView;
 CompoundMoleculeFormsListView = CardView.extend({
   initialize: function() {
     this.collection.on('reset', this.render, this);
-    return this.collection.on('error', this.showCompoundErrorCard, this);
+    this.collection.on('error', this.showCompoundErrorCard, this);
+    return this.resource_type = 'Compound';
   },
   render: function() {
     this.addAllAlternateForms();

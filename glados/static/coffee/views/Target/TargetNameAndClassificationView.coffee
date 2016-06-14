@@ -7,6 +7,7 @@ TargetNameAndClassificationView = CardView.extend
   initialize: ->
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Target'
 
   render: ->
 

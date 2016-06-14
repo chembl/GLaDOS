@@ -5,6 +5,7 @@ CompoundFeaturesView = CardView.extend
   initialize: ->
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Compound'
 
   render: ->
     @renderProperty('Bck-MolType', 'molecule_type')

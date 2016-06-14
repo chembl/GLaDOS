@@ -4,7 +4,8 @@ var CompoundRepresentationsView;
 CompoundRepresentationsView = CardView.extend({
   initialize: function() {
     this.model.on('change', this.render, this);
-    return this.model.on('error', this.showCompoundErrorCard, this);
+    this.model.on('error', this.showCompoundErrorCard, this);
+    return this.resource_type = 'Compound';
   },
   render: function() {
     this.molecule_structures = this.model.get('molecule_structures');
