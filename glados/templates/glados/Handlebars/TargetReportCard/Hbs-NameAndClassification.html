@@ -45,4 +45,55 @@
 
 </script>
 
+<script id="Handlebars-Target-NameAndClassification-small" type="text/x-handlebars-template">
+
+  <ul class="collection hide-on-med-and-up">
+    <li id="Bck-Target_ID-small" class="collection-item">
+
+      <b >ID:</b> {{chembl_id}}
+
+    </li>
+    <li id="Bck-Target_Type-small" class="collection-item">
+
+      <b>Type:</b> {{type}}
+
+    </li>
+    <li id="Bck-Target_Pref_Name-small"  class="collection-item">
+
+      <b>Preferred Name:</b> {{pref_name}}
+
+    </li>
+    <li class="collection-item">
+
+      <b>Synonyms:</b>
+
+      {{#each synonyms}}
+      <span class="chip-syn">{{this}}</span>
+      {{else}}
+      ---
+      {{/each}}
+
+    </li>
+
+    <li id="Bck-Target_Organism-small" class="collection-item">
+
+      <b>Organism:</b> {{#if organism}} {{organism}} {{else}} --- {{/if}}
+
+    </li>
+
+    <li id="Bck-Target_SpecsGroup-small" class="collection-item">
+
+      <b>Species Group:</b> {{specs_group}}
+
+    </li>
+
+    <li class="collection-item">
+
+      <b>Protein Target Classification:</b> Enzyme
+
+    </li>
+  </ul>
+
+</script>
+
 {% endverbatim %}

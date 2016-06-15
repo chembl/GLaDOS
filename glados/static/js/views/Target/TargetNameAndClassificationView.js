@@ -9,11 +9,26 @@ TargetNameAndClassificationView = CardView.extend({
   },
   render: function() {
     this.render_for_large();
+    this.render_for_small();
     return this.showVisibleContent();
   },
   render_for_large: function() {
     var table_large, template;
     table_large = $(this.el).find('#BCK-TNC-large');
+    template = $('#' + table_large.attr('data-hb-template'));
+    return table_large.html(Handlebars.compile(template.html())({
+      chembl_id: this.model.get('target_chembl_id'),
+      type: this.model.get('target_type'),
+      pref_name: this.model.get('pref_name'),
+      synonyms: this.get_target_syonyms_list(this.model.get('target_components')),
+      organism: this.model.get('organism'),
+      specs_group: this.model.get('species_group_flag') ? 'Yes' : 'No',
+      prot_target_classification: 'Enzyme'
+    }));
+  },
+  render_for_small: function() {
+    var table_large, template;
+    table_large = $(this.el).find('#BCK-TNC-small');
     template = $('#' + table_large.attr('data-hb-template'));
     return table_large.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('target_chembl_id'),
@@ -40,7 +55,7 @@ TargetNameAndClassificationView = CardView.extend({
       _ref = component['target_component_synonyms'];
       for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
         syn_struc = _ref[_j];
-        if (syn_struc['syn_type'] !== 'EC_NUMBER') {
+        if (!(syn_struc['syn_type'] === 'EC_NUMBER' || !(syn_struc['component_synonym'] != null))) {
           synonyms.push(syn_struc['component_synonym']);
         }
       }
