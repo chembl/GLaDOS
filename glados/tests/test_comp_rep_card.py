@@ -1,31 +1,10 @@
-from selenium import webdriver
-import unittest
-import time
 from selenium.common.exceptions import NoSuchElementException
-
-HOST = 'http://127.0.0.1:8000'
-SLEEP_TIME = 0.5
-
+from report_card_tester import ReportCardTester
 
 # Cases for visualization:
 # - Compound with more alternate forms: CHEMBL1236196
 
-class CompoundReportCardTest(unittest.TestCase):
-  IMPLICIT_WAIT = 1
-
-  def setUp(self):
-    self.browser = webdriver.Firefox()
-    self.browser.set_window_size(1024, 768)
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
-
-  def tearDown(self):
-    self.browser.quit()
-
-  def getURL(self, url, sleeptime):
-    print('\nScenario:')
-    print(url)
-    self.browser.get(url)
-    time.sleep(sleeptime)
+class CompoundReportCardTest(ReportCardTester):
 
   def assert_copy_button(self, elem_id, tooltip, value):
     copy_button = self.browser.find_element_by_id(elem_id)
@@ -91,7 +70,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_1(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL25', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL25', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -112,6 +91,9 @@ class CompoundReportCardTest(unittest.TestCase):
     # Normal molecular formula (C9H8O4)
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     self.assertEqual('C9H8O4', molformula_td.text)
+
+    # Embed trigger
+    self.assert_embed_trigger('CNCCard', 'compound', 'name_and_classification', 'CHEMBL25')
 
     # --------------------------------------
     # Compound Representations
@@ -156,40 +138,54 @@ class CompoundReportCardTest(unittest.TestCase):
 
     self.assert_copy_button('CompReps-standardInchiKey-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     self.assert_copy_button('CompReps-standardInchiKey-small-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
+
+    # Embed trigger
+    self.assert_embed_trigger('CompRepsCard', 'compound', 'representations', 'CHEMBL25')
+
+    # --------------------------------------
+    # Calculated Compound Parent Properties
+    # --------------------------------------
+
+    # Embed trigger
+    self.assert_embed_trigger('CalculatedParentPropertiesCard', 'compound', 'calculated_properties', 'CHEMBL25')
+
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # this is a small molecule
-    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_small_molecule.svg',
+    self.assert_molecule_feature('Bck-MolType', True, self.HOST + '/static/img/molecule_features/mt_small_molecule.svg',
                                  'Molecule Type: small molecule', 'top')
     # Rule of five: No. false
-    self.assert_molecule_feature('Bck-RuleOfFive', True, HOST + '/static/img/molecule_features/rule_of_five.svg',
+    self.assert_molecule_feature('Bck-RuleOfFive', True, self.HOST + '/static/img/molecule_features/rule_of_five.svg',
                                  'Rule Of Five: Yes', 'top')
 
     # this compound is not first in class
-    self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
+    self.assert_molecule_feature('Bck-FirstInClass', False, self.HOST + '/static/img/molecule_features/first_in_class.svg',
                                  'First in Class: No', 'top')
 
     # Chirality: single stereoisomer: 1
-    self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_1.svg',
+    self.assert_molecule_feature('Bck-Chirality', True, self.HOST + '/static/img/molecule_features/chirality_1.svg',
                                  'Chirality: Single Stereoisomer', 'top')
 
     # Ora yes: 'true'
-    self.assert_molecule_feature('Bck-Oral', True, HOST + '/static/img/molecule_features/oral.svg',
+    self.assert_molecule_feature('Bck-Oral', True, self.HOST + '/static/img/molecule_features/oral.svg',
                                  'Oral: Yes', 'bottom')
 
     # Topical No: false
-    self.assert_molecule_feature('Bck-Topical', False, HOST + '/static/img/molecule_features/topical.svg',
+    self.assert_molecule_feature('Bck-Topical', False, self.HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: No', 'bottom')
 
     # Black Box No: 0
-    self.assert_molecule_feature('Bck-BlackBox', False, HOST + '/static/img/molecule_features/black_box.svg',
+    self.assert_molecule_feature('Bck-BlackBox', False, self.HOST + '/static/img/molecule_features/black_box.svg',
                                  'Black Box: No',  'bottom')
 
     # Availability Type: Over the counter: 2
-    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_2.svg',
+    self.assert_molecule_feature('Bck-Availability', True, self.HOST + '/static/img/molecule_features/availability_2.svg',
                                  'Availability: Over the Counter', 'bottom')
+
+     # Embed trigger
+    self.assert_embed_trigger('MoleculeFeaturesCard', 'compound', 'molecule_features', 'CHEMBL25')
 
     # --------------------------------------
     # Alternate Forms of Compound in ChEMBL
@@ -197,9 +193,12 @@ class CompoundReportCardTest(unittest.TestCase):
 
     self.assert_alternate_forms(['CHEMBL25', 'CHEMBL2296002', 'CHEMBL1697753'])
 
+    # Embed trigger
+    self.assert_embed_trigger('AlternateFormsCard', 'compound', 'alternate_forms', 'CHEMBL25')
+
   def test_compound_report_card_scenario_2(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL6963', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6963', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -207,7 +206,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # structure not available
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), HOST + '/static/img/structure_not_available.png')
+    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/structure_not_available.png')
 
     # Max Phase 0
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
@@ -230,24 +229,24 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # First in class is undefined: -1
-    self.assert_molecule_feature('Bck-FirstInClass', False, HOST + '/static/img/molecule_features/first_in_class.svg',
+    self.assert_molecule_feature('Bck-FirstInClass', False, self.HOST + '/static/img/molecule_features/first_in_class.svg',
                                  'First in Class: Undefined', 'top')
 
     # Chirality Undefined: -1
-    self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_0.svg',
+    self.assert_molecule_feature('Bck-Chirality', False, self.HOST + '/static/img/molecule_features/chirality_0.svg',
                                  'Chirality: Undefined', 'top')
 
     # Prodrug Undefined: -1
-    self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
+    self.assert_molecule_feature('Bck-Prodrug', False, self.HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: Undefined', 'top')
 
     # Availability Type is Undefined: -1
-    self.assert_molecule_feature('Bck-Availability', False, HOST + '/static/img/molecule_features/availability_0.svg',
+    self.assert_molecule_feature('Bck-Availability', False, self.HOST + '/static/img/molecule_features/availability_0.svg',
                                  'Availability: Undefined', 'bottom')
 
   def test_compund_report_card_scenario_3(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL2108680', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2108680', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -255,19 +254,19 @@ class CompoundReportCardTest(unittest.TestCase):
 
     # protein sctructure
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), HOST + '/static/img/protein_structure.png')
+    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/protein_structure.png')
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # this is an Antibody
-    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_antibody.svg',
+    self.assert_molecule_feature('Bck-MolType', True, self.HOST + '/static/img/molecule_features/mt_antibody.svg',
                                  'Molecule Type: Antibody', 'top')
 
   def test_compound_report_card_scenario_4(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL6939', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6939', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -284,7 +283,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_5(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL2109588', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2109588', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -314,12 +313,12 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # Rule of five: No. false
-    self.assert_molecule_feature('Bck-RuleOfFive', False, HOST + '/static/img/molecule_features/rule_of_five.svg',
+    self.assert_molecule_feature('Bck-RuleOfFive', False, self.HOST + '/static/img/molecule_features/rule_of_five.svg',
                                  'Rule Of Five: No', 'top')
 
   def test_compound_report_card_scenario_6(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL1742989', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742989', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -331,7 +330,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_7(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL1742987', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742987', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -343,7 +342,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_8(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL55/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL55/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -379,33 +378,33 @@ class CompoundReportCardTest(unittest.TestCase):
     # --------------------------------------
 
     # Chirality: achiral molecule: 2
-    self.assert_molecule_feature('Bck-Chirality', False, HOST + '/static/img/molecule_features/chirality_1.svg',
+    self.assert_molecule_feature('Bck-Chirality', False, self.HOST + '/static/img/molecule_features/chirality_1.svg',
                                  'Chirality: Achiral Molecule', 'top')
 
     # Oral No: false
-    self.assert_molecule_feature('Bck-Oral', False, HOST + '/static/img/molecule_features/oral.svg',
+    self.assert_molecule_feature('Bck-Oral', False, self.HOST + '/static/img/molecule_features/oral.svg',
                                  'Oral: No', 'bottom')
 
     # Parenteral Yes: true
-    self.assert_molecule_feature('Bck-Parenteral', True, HOST + '/static/img/molecule_features/parenteral.svg',
+    self.assert_molecule_feature('Bck-Parenteral', True, self.HOST + '/static/img/molecule_features/parenteral.svg',
                                  'Parenteral: Yes', 'bottom')
 
     # Topical Yes: true
-    self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
+    self.assert_molecule_feature('Bck-Topical', True, self.HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: Yes', 'bottom')
 
     # Black Box Warning No: 0
-    self.assert_molecule_feature('Bck-Topical', True, HOST + '/static/img/molecule_features/topical.svg',
+    self.assert_molecule_feature('Bck-Topical', True, self.HOST + '/static/img/molecule_features/topical.svg',
                                  'Topical: Yes', 'bottom')
 
     # Availability Type: Prescription Only: 1
-    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_1.svg',
+    self.assert_molecule_feature('Bck-Availability', True, self.HOST + '/static/img/molecule_features/availability_1.svg',
                                  'Availability: Prescription Only', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
 
     # this compound does not exist!
-    self.getURL(HOST + '/compound_report_card/CHEMBL7/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL7/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Compound Name and Classification
@@ -427,7 +426,7 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_10(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL17/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL17/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Mechanism of action
@@ -459,18 +458,18 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_11(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL1201822/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1201822/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # this is an Enzyme
-    self.assert_molecule_feature('Bck-MolType', True, HOST + '/static/img/molecule_features/mt_enzyme.svg',
+    self.assert_molecule_feature('Bck-MolType', True, self.HOST + '/static/img/molecule_features/mt_enzyme.svg',
                                  'Molecule Type: Enzyme', 'top')
 
     # Availability Type: Discontinued: 0
-    self.assert_molecule_feature('Bck-Availability', True, HOST + '/static/img/molecule_features/availability_0.svg',
+    self.assert_molecule_feature('Bck-Availability', True, self.HOST + '/static/img/molecule_features/availability_0.svg',
                                  'Availability: Discontinued', 'bottom')
 
     #since no structure is available, the following buttons must not be found in the page
@@ -489,52 +488,52 @@ class CompoundReportCardTest(unittest.TestCase):
 
   def test_compound_report_card_scenario_12(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL254328/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL254328/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # this compound is first in class
-    self.assert_molecule_feature('Bck-FirstInClass', True, HOST + '/static/img/molecule_features/first_in_class.svg',
+    self.assert_molecule_feature('Bck-FirstInClass', True, self.HOST + '/static/img/molecule_features/first_in_class.svg',
                                  'First in Class: Yes', 'top')
 
   def test_compound_report_card_scenario_13(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL6995/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6995/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # Chirality: achiral molecule: 0
-    self.assert_molecule_feature('Bck-Chirality', True, HOST + '/static/img/molecule_features/chirality_0.svg',
+    self.assert_molecule_feature('Bck-Chirality', True, self.HOST + '/static/img/molecule_features/chirality_0.svg',
                                  'Chirality: Racemic Mixture', 'top')
 
     # Is no prodrug: 0
-    self.assert_molecule_feature('Bck-Prodrug', False, HOST + '/static/img/molecule_features/prodrug.svg',
+    self.assert_molecule_feature('Bck-Prodrug', False, self.HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: No', 'top')
 
   def test_compound_report_card_scenario_14(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL2106520/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2106520/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # Is prodrug: 1
-    self.assert_molecule_feature('Bck-Prodrug', True, HOST + '/static/img/molecule_features/prodrug.svg',
+    self.assert_molecule_feature('Bck-Prodrug', True, self.HOST + '/static/img/molecule_features/prodrug.svg',
                                  'Prodrug: Yes', 'top')
 
   def test_compound_report_card_scenario_15(self):
 
-    self.getURL(HOST + '/compound_report_card/CHEMBL35/', SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL35/', self.SLEEP_TIME)
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
 
     # Black Box No: 0
-    self.assert_molecule_feature('Bck-BlackBox', True, HOST + '/static/img/molecule_features/black_box.svg',
+    self.assert_molecule_feature('Bck-BlackBox', True, self.HOST + '/static/img/molecule_features/black_box.svg',
                                  'Black Box: Yes', 'bottom')
