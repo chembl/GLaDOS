@@ -15,6 +15,8 @@ TargetNameAndClassificationView = CardView.extend
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()
+    @initEmbedModal('name_and_classification')
+    @activateModals()
 
 
 
@@ -47,12 +49,12 @@ TargetNameAndClassificationView = CardView.extend
       prot_target_classification: 'Enzyme'
 
 
-### *
-  * Give me the target_components list from the web services response and I will
-  * return a list with the synoyms only.
-  * @param {Array} target_components, array of objects from the response.
-  * @return {Array} array with the synonyms, if there are none the list will be empty
-###
+  ### *
+    * Give me the target_components list from the web services response and I will
+    * return a list with the synoyms only.
+    * @param {Array} target_components, array of objects from the response.
+    * @return {Array} array with the synonyms, if there are none the list will be empty
+  ###
   get_target_syonyms_list: (target_components) ->
     synonyms = []
     for component in target_components

@@ -11,6 +11,14 @@
       {% block card_loaders %}
         {% include "glados/base/card_loaders.html" %}
       {% endblock %}
+
+      {% block embed_button %}
+        {% include "glados/base/embed_button.html" %}
+      {% endblock %}
+
+      {% block embed_modal %}
+        {% include "glados/base/embed_modal.html" %}
+      {% endblock %}
     {% endif %}
 
     <div class="card-content" {% if is_dynamic %}style="display:none"{% endif %}>

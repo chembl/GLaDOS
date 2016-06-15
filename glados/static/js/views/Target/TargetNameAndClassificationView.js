@@ -10,7 +10,9 @@ TargetNameAndClassificationView = CardView.extend({
   render: function() {
     this.render_for_large();
     this.render_for_small();
-    return this.showVisibleContent();
+    this.showVisibleContent();
+    this.initEmbedModal('name_and_classification');
+    return this.activateModals();
   },
   render_for_large: function() {
     var table_large, template;
@@ -55,8 +57,10 @@ TargetNameAndClassificationView = CardView.extend({
       _ref = component['target_component_synonyms'];
       for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
         syn_struc = _ref[_j];
-        if (!(syn_struc['syn_type'] === 'EC_NUMBER' || !(syn_struc['component_synonym'] != null))) {
-          synonyms.push(syn_struc['component_synonym']);
+        if (syn_struc['component_synonym'] != null) {
+          if (syn_struc['syn_type'] !== 'EC_NUMBER') {
+            synonyms.push(syn_struc['component_synonym']);
+          }
         }
       }
     }
