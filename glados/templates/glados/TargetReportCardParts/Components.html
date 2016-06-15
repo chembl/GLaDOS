@@ -18,27 +18,17 @@
 
 {% endblock %}
 
+{% block custom_handlebars %}
+  {% include "glados/Handlebars/TargetReportCard/Hbs-Components.html" %}
+{% endblock %}
+
 {% block table %}
 
-    <table class="compact-table striped hide-on-small-only ebi-links">
+  <div id="BCK-Components-large" data-hb-template="Handlebars-Target-Components-large">
 
-    <tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-      <th>ChEMBL ID</th>
-      <th>Pref Name</th>
-      <th>Target Type</th>
-
-    </tr>
-
-    <tr>
-
-      <td><a href="/chembl/target/inspect/CHEMBL2111328">CHEMBL2111328</a></td>
-      <td>Inhibitor of NF-kappa-B kinase (IKK)</td>
-      <td>PROTEIN COMPLEX</td>
-
-    </tr>
-
-  </table>
+  </div>
 
 {% endblock %}
 

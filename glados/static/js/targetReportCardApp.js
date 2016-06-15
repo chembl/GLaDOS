@@ -31,6 +31,23 @@ TargetReportCardApp = (function() {
     return tncView;
   };
 
+  /* *
+    * Initializes the TComponentsView (Target Components View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {TargetComponentsView} the view that has been created
+  */
+
+
+  TargetReportCardApp.initTComponentsView = function(model, top_level_elem) {
+    var tcView;
+    tcView = new TargetComponentsView({
+      model: model,
+      el: top_level_elem
+    });
+    return tcView;
+  };
+
   return TargetReportCardApp;
 
 })();

@@ -27,3 +27,18 @@ class TargetReportCardApp
       el: top_level_elem
 
     return tncView
+
+
+  ### *
+    * Initializes the TComponentsView (Target Components View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {TargetComponentsView} the view that has been created
+  ###
+  @initTComponentsView = (model, top_level_elem) ->
+
+    tcView = new TargetComponentsView
+      model: model
+      el: top_level_elem
+
+    return tcView
