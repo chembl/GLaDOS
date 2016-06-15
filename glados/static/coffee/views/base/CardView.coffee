@@ -40,6 +40,7 @@ CardView = Backbone.View.extend
     modal_trigger.attr('href', '#' + modal_id)
     modal_trigger.attr('rendered', 'false')
     modal_trigger.attr('data-embed-sect-name', section_name)
+    modal_trigger.attr('data-resource-type', @resource_type.toLowerCase())
 
     modal_trigger.click @renderModalPreview
 
@@ -60,6 +61,7 @@ CardView = Backbone.View.extend
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
       chembl_id: chembl_id
       section_name: section_name
+      resource_type: clicked.attr('data-resource-type')
 
     code_elem.text(rendered)
     preview_elem = modal.find('.embed-preview')

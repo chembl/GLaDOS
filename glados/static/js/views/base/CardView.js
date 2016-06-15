@@ -37,6 +37,7 @@ CardView = Backbone.View.extend({
     modal_trigger.attr('href', '#' + modal_id);
     modal_trigger.attr('rendered', 'false');
     modal_trigger.attr('data-embed-sect-name', section_name);
+    modal_trigger.attr('data-resource-type', this.resource_type.toLowerCase());
     return modal_trigger.click(this.renderModalPreview);
   },
   renderModalPreview: function() {
@@ -51,7 +52,8 @@ CardView = Backbone.View.extend({
     chembl_id = this.model != null ? this.model.get('molecule_chembl_id') : CHEMBL_ID;
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())({
       chembl_id: chembl_id,
-      section_name: section_name
+      section_name: section_name,
+      resource_type: clicked.attr('data-resource-type')
     });
     code_elem.text(rendered);
     preview_elem = modal.find('.embed-preview');
