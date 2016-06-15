@@ -6,33 +6,35 @@
   <table class="compact-table striped hide-on-small-only">
     <tr>
       <td class="fixed-width-column-11"><b>ID:</b></td>
-      <td>{{chembl_id}}</td>
+      <td id="Bck-Target_ID">{{chembl_id}}</td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Type:</b></td>
-      <td>{{type}}</td>
+      <td id="Bck-Target_Type">{{type}}</td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Preferred Name:</b></td>
-      <td>{{pref_name}}</td>
+      <td id="Bck-Target_Pref_Name">{{pref_name}}</td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Synonyms:</b></td>
-      <td>
+      <td id="Bck-Target_Synonyms">
 
         {{#each synonyms}}
           <span class="chip-syn">{{this}}</span>
+        {{else}}
+          ---
         {{/each}}
 
       </td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Organism:</b></td>
-      <td>{{organism}}</td>
+      <td id="Bck-Target_Organism">{{#if organism}} {{organism}} {{else}} --- {{/if}}</td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Species Group:</b></td>
-      <td>{{specs_group}}</td>
+      <td id="Bck-Target_SpecsGroup">{{specs_group}}</td>
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Protein Target Classification:</b></td>

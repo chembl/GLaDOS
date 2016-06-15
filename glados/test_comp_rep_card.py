@@ -4,7 +4,7 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 
 HOST = 'http://127.0.0.1:8000'
-SLEEP_TIME = 1
+SLEEP_TIME = 0.5
 
 
 # Cases for visualization:

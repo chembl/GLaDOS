@@ -29,7 +29,7 @@ TargetNameAndClassificationView = CardView.extend({
     * Give me the target_components list from the web services response and I will
     * return a list with the synoyms only.
     * @param {Array} target_components, array of objects from the response.
-    * @return {Array} array with the synonyms, it can be empty if there are none
+    * @return {Array} array with the synonyms, if there are none the list will be empty
   */
 
   get_target_syonyms_list: function(target_components) {
