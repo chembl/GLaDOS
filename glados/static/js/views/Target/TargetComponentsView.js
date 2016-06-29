@@ -6,6 +6,12 @@ TargetComponentsView = CardView.extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
+    if (this.model.get('target_components').length === 0) {
+      $('#TargetComponents').hide();
+      $('#TargetComponents').next().hide();
+      $(this.el).hide();
+      return;
+    }
     this.render_for_large();
     return this.render_for_small();
   },

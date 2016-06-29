@@ -8,6 +8,13 @@ TargetComponentsView = CardView.extend
     @model.on 'change', @.render, @
 
   render: ->
+
+    if @model.get('target_components').length == 0
+      $('#TargetComponents').hide()
+      $('#TargetComponents').next().hide()
+      $(@el).hide()
+      return
+
     @render_for_large()
     @render_for_small()
 
