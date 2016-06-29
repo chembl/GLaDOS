@@ -1,0 +1,1 @@
+CellLine = Backbone.Model.extend({})

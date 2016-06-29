@@ -41,7 +41,7 @@ urlpatterns = [
   url(r'^document_report_card/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
 
-  url(r'^cell_line_report_card/$',
+  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
 
   url(r'^tissue_report_card/$',
