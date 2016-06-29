@@ -1,4 +1,5 @@
 from report_card_tester import ReportCardTester
+from selenium.webdriver.common.by import By
 
 
 
@@ -55,6 +56,18 @@ class TargetReportCardTest(ReportCardTester):
     specs_group = self.browser.find_element_by_id('Bck-Target_SpecsGroup')
     self.assertEqual(specs_group.text, 'Yes')
 
+    # --------------------------------------
+    # Target Components
+    # --------------------------------------
+    components_table = self.browser.find_element_by_id('BCK-Components-large')
+    rows = components_table.find_elements(By.TAG_NAME, "tr")[1::]
+    accessions_should_be = ['P0A7Z4', 'P0A8V2', 'P0A8T7', 'P0A800']
+
+    # Here we need to add the other lists for the other properties qhen they are available in the web services.
+    for row, accession in zip(rows, accessions_should_be):
+      accestion_td = row.find_element_by_class_name('Bck-Target-Component-Accession')
+      self.assertEqual(accestion_td.text, accession)
+
 
   def test_compound_report_card_scenario_3(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2363053', self.SLEEP_TIME)
@@ -71,4 +84,11 @@ class TargetReportCardTest(ReportCardTester):
     synonyms = self.browser.find_element_by_id('Bck-Target_Organism')
     self.assertEqual(synonyms.text,'---')
 
+    # --------------------------------------
+    # Target Components
+    # --------------------------------------
+
+    # There are no target components for this one
+    components_section = self.browser.find_element_by_id('TargetComponents')
+    self.assertEqual(components_section.value_of_css_property('display'), 'none')
 
