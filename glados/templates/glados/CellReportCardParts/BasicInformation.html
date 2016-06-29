@@ -1,62 +1,19 @@
 {% extends "glados/base/basic_table_card.html" %}
 
+{% block custom_handlebars %}
+  {% include "glados/Handlebars/CellReportCard/Hbs-BasicInformation.html" %}
+{% endblock %}
+
 {% block card_id %}CBasicInformation{% endblock %}
 
 {% block table %}
 
-<table class="compact-table striped hide-on-small-only">
+<div id="BCK-CBI-large" data-hb-template="Handlebars-CellLine-BasicInformation-large">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>ChEMMBL ID:</b></td>
-    <td>CHEMBL3307391</td>
-  </tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Name:</b></td>
-    <td>CC-1</td>
-  </tr>
+</div>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Description:</b></td>
-    <td>CC-1</td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Source Tissue:</b></td>
-    <td>Liver</td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Source Organism:</b></td>
-    <td>Rattus norvegicus</td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Source Taxid:</b></td>
-    <td>10116</td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Cell Line Ontology:</b></td>
-    <td><a href="http://purl.obolibrary.org/obo/CLO_0002215" target="_blank"> CLO_0002215</a></td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Experimental Factor Ontology:</b></td>
-    <td></td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>Cellosaurus:</b></td>
-    <td><a href="http://web.expasy.org/cellosaurus/CVCL_4141" target="_blank">CVCL_4141</a></td>
-  </tr>
-
-  <tr>
-    <td class="fixed-width-column-11"><b>LINCS Project:</b></td>
-    <td></td>
-  </tr>
-
-</table>
 {% endblock %}
 
 {% block collection %}

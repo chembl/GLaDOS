@@ -14,6 +14,23 @@ CellLineReportCardApp = (function() {
     return cell_line;
   };
 
+  /* *
+    * Initializes the CBIView (Cell Basic Information View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {CellBasicInformationViewView} the view that has been created
+  */
+
+
+  CellLineReportCardApp.initCBIView = function(model, top_level_elem) {
+    var cbiView;
+    cbiView = new CellLineBasicInformationView({
+      model: model,
+      el: top_level_elem
+    });
+    return cbiView;
+  };
+
   return CellLineReportCardApp;
 
 })();

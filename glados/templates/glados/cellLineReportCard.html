@@ -128,6 +128,8 @@ var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var cellLine = CellLineReportCardApp.initCellLine(CHEMBL_ID);
 
+var cbiView = CellLineReportCardApp.initCBIView(cellLine, $('#CBasicInformation'));
+
 cellLine.fetch();
 
 {% endblock %}
