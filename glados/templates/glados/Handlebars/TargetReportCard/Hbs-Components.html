@@ -2,25 +2,55 @@
 
 <script id="Handlebars-Target-Components-large" type="text/x-handlebars-template">
 
+
   <table class="compact-table striped hide-on-small-only ebi-links">
 
     <tr>
 
-      <th>ChEMBL ID</th>
-      <th>Pref Name</th>
-      <th>Target Type</th>
+      <th>Component Description</th>
+      <th>Relationship</th>
+      <th>Accession</th>
 
     </tr>
+
+    {{#each components}}
 
     <tr>
 
-      <td><a href="/chembl/target/inspect/CHEMBL2111328">CHEMBL2111328</a></td>
-      <td>Inhibitor of NF-kappa-B kinase (IKK)</td>
-      <td>PROTEIN COMPLEX</td>
+      <td>Fatty-acid amide hydrolase 1</td>
+      <td>SINGLE PROTEIN</td>
+      <td><a target="_blank" href="http://www.uniprot.org/uniprot/{{this.accession}}">{{this.accession}}</a></td>
 
     </tr>
 
+    {{/each}}
+
+
+
   </table>
+
+
+</script>
+
+<script id="Handlebars-Target-Components-small" type="text/x-handlebars-template">
+
+  <ul class="collection hide-on-med-and-up">
+
+    {{#each components}}
+    <li class="collection-item">
+
+      <p>
+
+        <b>Component Description:</b> Fatty-acid amide hydrolase 1<br>
+        <b>Relationship:</b> SINGLE PROTEIN<br>
+        <b>Accession:</b> <a href="http://www.uniprot.org/uniprot/{{this.accession}}">{{this.accession}}</a><br>
+
+      </p>
+
+    </li>
+    {{/each}}
+
+  </ul>
 
 
 </script>
