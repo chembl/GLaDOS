@@ -3,7 +3,9 @@ var TargetComponentsView;
 
 TargetComponentsView = CardView.extend({
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    this.model.on('error', this.showCompoundErrorCard, this);
+    return this.resource_type = 'Target';
   },
   render: function() {
     if (this.model.get('target_components').length === 0) {
@@ -13,7 +15,10 @@ TargetComponentsView = CardView.extend({
       return;
     }
     this.render_for_large();
-    return this.render_for_small();
+    this.render_for_small();
+    this.showVisibleContent();
+    this.initEmbedModal('components');
+    return this.activateModals();
   },
   render_for_large: function() {
     var table_large, template;

@@ -6,6 +6,8 @@ TargetComponentsView = CardView.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+    @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Target'
 
   render: ->
 
@@ -17,6 +19,11 @@ TargetComponentsView = CardView.extend
 
     @render_for_large()
     @render_for_small()
+
+    # until here, all the visible content has been rendered.
+    @showVisibleContent()
+    @initEmbedModal('components')
+    @activateModals()
 
   render_for_large: ->
 

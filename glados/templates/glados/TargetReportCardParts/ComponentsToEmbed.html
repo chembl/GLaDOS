@@ -1,0 +1,20 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Components{% endblock %}
+
+{% block content %}
+
+   <div id="TargetComponents" style="margin-top: 25px;">
+    {% include "glados/TargetReportCardParts/Components.html" %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var target = TargetReportCardApp.initTarget(CHEMBL_ID);
+var TNCView = TargetReportCardApp.initTComponentsView(target, $('#TComponentsCard'));
+target.fetch()
+
+{% endblock %}
