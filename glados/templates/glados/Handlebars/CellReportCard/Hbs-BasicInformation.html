@@ -6,47 +6,71 @@
 
   <tr>
     <td class="fixed-width-column-11"><b>ChEMMBL ID:</b></td>
-    <td>{{chembl_id}}</td>
+    <td id="Bck-CellLine_ID">{{chembl_id}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Name:</b></td>
-    <td>{{name}}</td>
+    <td id="Bck-CellLine_Name">{{name}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Description:</b></td>
-    <td>{{description}}</td>
+    <td id="Bck-CellLine_Desc">{{description}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Tissue:</b></td>
-    <td>{{tissue}}</td>
+    {{#if tissue}}
+      <td id="Bck-CellLine_SourceT">{{tissue}}</td>
+    {{else}}
+      <td id="Bck-CellLine_SourceT">---</td>
+    {{/if}}
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Organism:</b></td>
-    <td>{{organism}}</td>
+    {{#if organism}}
+      <td id="Bck-CellLine_SourceO">{{organism}}</td>
+    {{else}}
+      <td id="Bck-CellLine_SourceO">---</td>
+    {{/if}}
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Taxid:</b></td>
-    <td>{{tax_id}}</td>
+    {{#if tax_id}}
+      <td id="Bck-CellLine_SourceTx">{{tax_id}}</td>
+    {{else}}
+      <td id="Bck-CellLine_SourceTx">---</td>
+    {{/if}}
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Cell Line Ontology:</b></td>
-    <td><a href="http://purl.obolibrary.org/obo/{{clo_id}}" target="_blank">{{clo_id}}</a></td>
+    {{#if clo_id}}
+      <td id="Bck-CellLine_CLO"><a href="http://purl.obolibrary.org/obo/{{clo_id}}" target="_blank">{{clo_id}}</a></td>
+    {{else}}
+      <td id="Bck-CellLine_CLO">---</td>
+    {{/if}}
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Experimental Factor Ontology:</b></td>
-    <td><a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a></td>
+    {{#if efo_id}}
+      <td id="Bck-CellLine_EFO"><a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a></td>
+    {{else}}
+      <td id="Bck-CellLine_EFO">---</td>
+    {{/if}}
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Cellosaurus:</b></td>
-    <td><a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}" target="_blank">{{cellosaurus_id}}</a></td>
+    {{#if cellosaurus_id}}
+      <td id="Bck-CellLine_Cellosaurus"><a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}" target="_blank">{{cellosaurus_id}}</a></td>
+    {{else}}
+      <td id="Bck-CellLine_Cellosaurus">---</td>
+    {{/if}}
   </tr>
 
   <tr>
@@ -84,37 +108,37 @@
 
   <li class="collection-item">
 
-    <b>Source Tissue:</b> {{tissue}}
+    <b>Source Tissue:</b> {{#if tissue}} {{tissue}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Source Organism:</b> {{organism}}
+    <b>Source Organism:</b> {{#if organism}} {{organism}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Source Taxid:</b> {{tax_id}}
+    <b>Source Taxid:</b> {{#if tax_id}} {{tax_id}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Cell Line Ontology:</b> <a href="http://purl.obolibrary.org/obo/{{clo_id}}"> {{clo_id}}</a>
+    <b>Cell Line Ontology:</b> {{#if clo_id}} <a href="http://purl.obolibrary.org/obo/{{clo_id}}"> {{clo_id}}</a> {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Experimental Factor Ontology:</b> <a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a>
+    <b>Experimental Factor Ontology:</b> {{#if efo_id}} <a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a> {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Cellosaurus:</b> <a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}">{{cellosaurus_id}}</a>
+    <b>Cellosaurus:</b> {{#if cellosaurus_id}} <a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}">{{cellosaurus_id}}</a> {{else}} --- {{/if}}
 
   </li>
 
