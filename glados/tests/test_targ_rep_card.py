@@ -9,7 +9,7 @@ class TargetReportCardTest(ReportCardTester):
   # Scenarios
   # --------------------------------------------------------------------------------------
 
-  def test_compound_report_card_scenario_1(self):
+  def test_target_report_card_scenario_1(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME)
 
     # --------------------------------------
@@ -45,7 +45,7 @@ class TargetReportCardTest(ReportCardTester):
 
 
 
-  def test_compound_report_card_scenario_2(self):
+  def test_target_report_card_scenario_2(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2364672', self.SLEEP_TIME)
 
     # --------------------------------------
@@ -69,7 +69,7 @@ class TargetReportCardTest(ReportCardTester):
       self.assertEqual(accestion_td.text, accession)
 
 
-  def test_compound_report_card_scenario_3(self):
+  def test_target_report_card_scenario_3(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2363053', self.SLEEP_TIME)
 
     # --------------------------------------
