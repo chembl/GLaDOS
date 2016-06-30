@@ -11,6 +11,7 @@ CardView = Backbone.View.extend
       switch @resource_type
         when 'Compound' then error_msg = 'No compound found with id ' + @model.get('molecule_chembl_id')
         when 'Target' then error_msg = 'No target found with id ' + @model.get('target_chembl_id')
+        when 'Cell Line' then error_msg = 'No cell line found with id ' + @model.get('cell_chembl_id')
 
     else
       error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')'
@@ -40,7 +41,7 @@ CardView = Backbone.View.extend
     modal_trigger.attr('href', '#' + modal_id)
     modal_trigger.attr('rendered', 'false')
     modal_trigger.attr('data-embed-sect-name', section_name)
-    modal_trigger.attr('data-resource-type', @resource_type.toLowerCase())
+    modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
 
     modal_trigger.click @renderModalPreview
 

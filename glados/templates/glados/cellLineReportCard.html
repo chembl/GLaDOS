@@ -23,7 +23,9 @@
         <div class="row">
 
           {% block dbi %}
-          {% include "glados/CellReportCardParts/BasicInformation.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/CellReportCardParts/BasicInformation.html" %}
+            {% endwith %}
           {% endblock %}
 
         </div>

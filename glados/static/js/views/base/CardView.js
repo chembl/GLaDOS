@@ -12,6 +12,9 @@ CardView = Backbone.View.extend({
           break;
         case 'Target':
           error_msg = 'No target found with id ' + this.model.get('target_chembl_id');
+          break;
+        case 'Cell Line':
+          error_msg = 'No cell line found with id ' + this.model.get('cell_chembl_id');
       }
     } else {
       error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')';
@@ -37,7 +40,7 @@ CardView = Backbone.View.extend({
     modal_trigger.attr('href', '#' + modal_id);
     modal_trigger.attr('rendered', 'false');
     modal_trigger.attr('data-embed-sect-name', section_name);
-    modal_trigger.attr('data-resource-type', this.resource_type.toLowerCase());
+    modal_trigger.attr('data-resource-type', this.resource_type.toLowerCase().replace(' ', '_'));
     return modal_trigger.click(this.renderModalPreview);
   },
   renderModalPreview: function() {

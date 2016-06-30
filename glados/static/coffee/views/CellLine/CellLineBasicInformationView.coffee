@@ -6,10 +6,16 @@ CellLineBasicInformationView = CardView.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+    @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Cell Line'
 
   render: ->
     @render_for_large()
     @render_for_small()
+
+    @showVisibleContent()
+    @initEmbedModal('basic_information')
+    @activateModals()
 
   render_for_large: ->
 

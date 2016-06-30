@@ -3,11 +3,16 @@ var CellLineBasicInformationView;
 
 CellLineBasicInformationView = CardView.extend({
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    this.model.on('error', this.showCompoundErrorCard, this);
+    return this.resource_type = 'Cell Line';
   },
   render: function() {
     this.render_for_large();
-    return this.render_for_small();
+    this.render_for_small();
+    this.showVisibleContent();
+    this.initEmbedModal('basic_information');
+    return this.activateModals();
   },
   render_for_large: function() {
     var table_large, template;

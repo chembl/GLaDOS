@@ -72,3 +72,15 @@ class CellLineReportCardTest(ReportCardTester):
 
     source_efo_field = self.browser.find_element_by_id('Bck-CellLine_Cellosaurus')
     self.assertEqual(source_efo_field.text, '---')
+
+  def test_celline_report_card_scenario_3(self):
+
+    self.getURL(self.HOST + '/cell_line_report_card/NOT_EXISTS/', self.SLEEP_TIME)
+    # This one doesn't exist!
+
+    # --------------------------------------
+    # Basic Information
+    # --------------------------------------
+
+    error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
+    self.assertEquals(error_msg_p.text, 'No cell line found with id CHEMBL7')
