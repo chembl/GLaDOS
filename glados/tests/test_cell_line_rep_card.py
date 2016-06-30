@@ -82,5 +82,5 @@ class CellLineReportCardTest(ReportCardTester):
     # Basic Information
     # --------------------------------------
 
-    error_msg_p = self.browser.find_element_by_id('CNCCard').find_element_by_class_name('Bck-errormsg')
-    self.assertEquals(error_msg_p.text, 'No cell line found with id CHEMBL7')
+    error_msg_p = self.browser.find_element_by_id('CBasicInformation').find_element_by_class_name('Bck-errormsg')
+    self.assertEquals(error_msg_p.text, 'No cell line found with id NOT_EXISTS')
