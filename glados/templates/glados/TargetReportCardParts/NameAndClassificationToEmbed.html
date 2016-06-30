@@ -5,7 +5,9 @@
 {% block content %}
 
    <div id="TargetNameAndClassification" style="margin-top: 25px;">
-    {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+     {% with is_dynamic=True  %}
+       {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+     {% endwith %}
    </div>
 
 {% endblock %}
