@@ -9,6 +9,7 @@ CellLineBasicInformationView = CardView.extend
 
   render: ->
     @render_for_large()
+    @render_for_small()
 
   render_for_large: ->
 
@@ -16,3 +17,28 @@ CellLineBasicInformationView = CardView.extend
     template = $('#' + table_large.attr('data-hb-template'))
     
     table_large.html Handlebars.compile(template.html())
+      chembl_id: @model.get('cell_chembl_id')
+      name: @model.get('cell_name')
+      description: @model.get('cell_description')
+      tissue: @model.get('cell_source_tissue')
+      organism: @model.get('cell_source_organism')
+      tax_id: @model.get('cell_source_tax_id')
+      clo_id: @model.get('clo_id')
+      efo_id: @model.get('efo_id')
+      cellosaurus_id: @model.get('cellosaurus_id')
+
+  render_for_small: ->
+
+    table_large = $(@el).find('#BCK-CBI-small')
+    template = $('#' + table_large.attr('data-hb-template'))
+
+    table_large.html Handlebars.compile(template.html())
+      chembl_id: @model.get('cell_chembl_id')
+      name: @model.get('cell_name')
+      description: @model.get('cell_description')
+      tissue: @model.get('cell_source_tissue')
+      organism: @model.get('cell_source_organism')
+      tax_id: @model.get('cell_source_tax_id')
+      clo_id: @model.get('clo_id')
+      efo_id: @model.get('efo_id')
+      cellosaurus_id: @model.get('cellosaurus_id')

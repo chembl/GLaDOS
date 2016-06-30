@@ -6,57 +6,127 @@
 
   <tr>
     <td class="fixed-width-column-11"><b>ChEMMBL ID:</b></td>
-    <td>CHEMBL3307391</td>
+    <td>{{chembl_id}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Name:</b></td>
-    <td>CC-1</td>
+    <td>{{name}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Description:</b></td>
-    <td>CC-1</td>
+    <td>{{description}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Tissue:</b></td>
-    <td>Liver</td>
+    <td>{{tissue}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Organism:</b></td>
-    <td>Rattus norvegicus</td>
+    <td>{{organism}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Source Taxid:</b></td>
-    <td>10116</td>
+    <td>{{tax_id}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Cell Line Ontology:</b></td>
-    <td><a href="http://purl.obolibrary.org/obo/CLO_0002215" target="_blank"> CLO_0002215</a></td>
+    <td><a href="http://purl.obolibrary.org/obo/{{clo_id}}" target="_blank">{{clo_id}}</a></td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Experimental Factor Ontology:</b></td>
-    <td></td>
+    <td><a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a></td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Cellosaurus:</b></td>
-    <td><a href="http://web.expasy.org/cellosaurus/CVCL_4141" target="_blank">CVCL_4141</a></td>
+    <td><a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}" target="_blank">{{cellosaurus_id}}</a></td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>LINCS Project:</b></td>
-    <td></td>
+    <td>---</td>
   </tr>
 
 </table>
 
 
+
+</script>
+
+<script id="Handlebars-CellLine-BasicInformation-small" type="text/x-handlebars-template">
+
+<ul class="collection hide-on-med-and-up">
+
+  <li class="collection-item">
+
+    <b>ChEMMBL ID:</b> {{chembl_id}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Name:</b> {{name}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Description:</b> {{description}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Source Tissue:</b> {{tissue}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Source Organism:</b> {{organism}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Source Taxid:</b> {{tax_id}}
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Cell Line Ontology:</b> <a href="http://purl.obolibrary.org/obo/{{clo_id}}"> {{clo_id}}</a>
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Experimental Factor Ontology:</b> <a href="http://www.ebi.ac.uk/efo/{{efo_id}}" target="_blank">{{efo_id}}</a>
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>Cellosaurus:</b> <a href="http://web.expasy.org/cellosaurus/{{cellosaurus_id}}">{{cellosaurus_id}}</a>
+
+  </li>
+
+  <li class="collection-item">
+
+    <b>LINCS Project:</b> ---
+
+  </li>
+
+
+
+</ul>
 
 </script>
 
