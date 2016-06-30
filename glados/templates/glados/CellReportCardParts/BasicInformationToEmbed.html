@@ -1,0 +1,22 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Basic Information{% endblock %}
+
+{% block content %}
+
+   <div id="CellBasicInformation" style="margin-top: 25px;">
+     {% with is_dynamic=True  %}
+      {% include "glados/CellReportCardParts/BasicInformation.html" %}
+     {% endwith %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var cellLine = CellLineReportCardApp.initCellLine(CHEMBL_ID);
+var TNCView = CellLineReportCardApp.initCBIView(cellLine, $('#CBasicInformation'));
+cellLine.fetch()
+
+{% endblock %}
