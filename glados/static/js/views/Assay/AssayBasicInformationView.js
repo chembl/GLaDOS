@@ -10,7 +10,9 @@ AssayBasicInformationView = CardView.extend({
   render: function() {
     this.fill_template('BCK-ABI-large');
     this.fill_template('BCK-ABI-small');
-    return this.showVisibleContent();
+    this.showVisibleContent();
+    this.initEmbedModal('basic_information');
+    return this.activateModals();
   },
   fill_template: function(div_id) {
     var table_large, template;
