@@ -3,66 +3,81 @@
 {% block card_id %}ABasicInformation{% endblock %}
 
 {% block table %}
-<table class="compact-table striped hide-on-small-only">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Assay ID:</b></td>
-    <td>CHEMBL1025800</td>
-  </tr>
+<div id="BCK-ABI-large" data-hb-template="Handlebars-Assay-BasicInformation-large">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Type:</b></td>
-    <td>ADME</td>
-  </tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Description:</b></td>
-    <td>Stability in 30% human plasma assessed as half life of hydrolysis at pH 7.4 in presence of 20 uM
-      dubucaine-insensitive BuChE subtype inhibitor dibucaine
-    </td>
-  </tr>
+</div>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Format:</b></td>
-    <td>Unclassified (BAO_0000366)</td>
-  </tr>
+{% verbatim %}
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Journal:</b></td>
-    <td><a href="http://europepmc.org/abstract/MED/19049433" target="_blank">J. Med. Chem. (2008) 51:7991-7999</a></td>
-  </tr>
+<script id="Handlebars-Assay-BasicInformation-large" type="text/x-handlebars-template">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Organism:</b></td>
-    <td>Homo sapiens</td>
-  </tr>
+  <table class="compact-table striped hide-on-small-only">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Strain:</b></td>
-    <td></td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>Assay ID:</b></td>
+      <td>{{chembl_id}}</td>
+    </tr>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Tissue:</b></td>
-    <td>Plasma</td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>Type:</b></td>
+      <td>{{type}}</td>
+    </tr>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Cell Type:</b></td>
-    <td></td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>Description:</b></td>
+      <td>{{description}}
+      </td>
+    </tr>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Subcellular Fraction:</b></td>
-    <td></td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>Format:</b></td>
+      <td>{{format}}</td>
+    </tr>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>No of Bioactivities:</b></td>
-    <td>1</td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>Journal:</b></td>
+      <td><a href="http://europepmc.org/abstract/MED/19049433" target="_blank">J. Med. Chem. (2008) 51:7991-7999</a>
+      </td>
+    </tr>
 
-</table>
+    <tr>
+      <td class="fixed-width-column-11"><b>Organism:</b></td>
+      <td>{{#if organism}} {{organism}} {{else}} --- {{/if}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>Strain:</b></td>
+      <td>{{#if strain}} {{strain}} {{else}} --- {{/if}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>Tissue:</b></td>
+      <td>{{#if tissue}} {{tissue}} {{else}} --- {{/if}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>Cell Type:</b></td>
+      <td>{{#if cell_type}} {{cell_type}} {{else}} --- {{/if}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>Subcellular Fraction:</b></td>
+      <td>{{#if subcellular_fraction}} {{subcellular_fraction}} {{else}} --- {{/if}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>No of Bioactivities:</b></td>
+      <td>1</td>
+    </tr>
+
+  </table>
+
+</script>
+{% endverbatim %}
+
 {% endblock %}
 
 {% block collection %}
@@ -83,7 +98,7 @@
   <li class="collection-item">
 
     <b>Description:</b> Stability in 30% human plasma assessed as half life of hydrolysis at pH 7.4 in presence of 20 uM
-      dubucaine-insensitive BuChE subtype inhibitor dibucaine
+    dubucaine-insensitive BuChE subtype inhibitor dibucaine
 
   </li>
 
@@ -101,7 +116,8 @@
 
   <li class="collection-item">
 
-    <b>Journal:</b> <a href="http://europepmc.org/abstract/MED/19049433" target="_blank">J. Med. Chem. (2008) 51:7991-7999</a>
+    <b>Journal:</b> <a href="http://europepmc.org/abstract/MED/19049433" target="_blank">J. Med. Chem. (2008)
+    51:7991-7999</a>
 
   </li>
 
