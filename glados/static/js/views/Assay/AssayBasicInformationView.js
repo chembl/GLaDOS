@@ -23,7 +23,8 @@ AssayBasicInformationView = CardView.extend({
       format: this.model.get('bao_format'),
       organism: this.model.get('assay_organism'),
       strain: this.model.get('assay_strain'),
-      cell_type: this.model.get('cell_type'),
+      tissue: this.model.get('assay_tissue'),
+      cell_type: this.model.get('assay_cell_type'),
       subcellular_fraction: this.model.get('assay_subcellular_fraction')
     }));
   }

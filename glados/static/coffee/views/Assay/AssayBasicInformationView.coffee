@@ -28,5 +28,6 @@ AssayBasicInformationView = CardView.extend
       format: @model.get('bao_format')
       organism: @model.get('assay_organism')
       strain: @model.get('assay_strain')
-      cell_type: @model.get('cell_type')
+      tissue: @model.get('assay_tissue')
+      cell_type: @model.get('assay_cell_type')
       subcellular_fraction: @model.get('assay_subcellular_fraction')
