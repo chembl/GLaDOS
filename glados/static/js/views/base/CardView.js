@@ -15,6 +15,9 @@ CardView = Backbone.View.extend({
           break;
         case 'Cell Line':
           error_msg = 'No cell line found with id ' + this.model.get('cell_chembl_id');
+          break;
+        case 'Assay':
+          error_msg = 'No assay found with id ' + this.model.get('assay_chembl_id');
       }
     } else {
       error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')';

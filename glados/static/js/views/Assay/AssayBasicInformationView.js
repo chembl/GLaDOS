@@ -3,11 +3,14 @@ var AssayBasicInformationView;
 
 AssayBasicInformationView = CardView.extend({
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    this.model.on('error', this.showCompoundErrorCard, this);
+    return this.resource_type = 'Assay';
   },
   render: function() {
     this.fill_template('BCK-ABI-large');
-    return this.fill_template('BCK-ABI-small');
+    this.fill_template('BCK-ABI-small');
+    return this.showVisibleContent();
   },
   fill_template: function(div_id) {
     var table_large, template;

@@ -24,7 +24,9 @@
         <div class="row">
 
           {% block abi %}
-            {% include "glados/AssayReportCardParts/BasicInformation.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/AssayReportCardParts/BasicInformation.html" %}
+            {% endwith %}
           {% endblock %}
 
         </div>

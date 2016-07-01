@@ -6,12 +6,14 @@ AssayBasicInformationView = CardView.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+    @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Assay'
 
   render: ->
 
     @fill_template('BCK-ABI-large')
     @fill_template('BCK-ABI-small')
-
+    @showVisibleContent()
 
 
   fill_template: (div_id) ->
