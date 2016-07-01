@@ -7,6 +7,7 @@ CompoundMechanismsOfActionView = CardView.extend
   initialize: ->
     @collection.on 'reset', @render, @
     @collection.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Compound'
 
   render: ->
 

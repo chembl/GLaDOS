@@ -1,6 +1,3 @@
-{% block custom_handlebars %}
-{% include "glados/Handlebars/CompoundReportCard/Hbs-AlternateForms.html" %}
-{% endblock %}
 <div class="col s12 m10 l12">
 
   <div id='AlternateFormsCard' class="card grey lighten-5">
@@ -27,6 +24,23 @@
 
 
       </div>
+
+      {% verbatim %}
+
+        <script id="Handlebars-Compound-AlternateFormCard" type="text/x-handlebars-template">
+
+          <div class="card {{colour}} z-depth-0">
+            <div class="card-image hoverable">
+              <img src="https://www.ebi.ac.uk/chembl/api/data/image/{{molecule_chembl_id}}.svg" class="responsive-img" alt="Alternate Form Image">
+                    <span class="chembl-card-title"><a
+                      href="http://glados-ebitest.rhcloud.com/compound_report_card/{{molecule_chembl_id}}/">{{molecule_chembl_id}}</a></span>
+            </div>
+          </div>
+
+        </script>
+
+
+      {% endverbatim %}
 
     </div>
 
