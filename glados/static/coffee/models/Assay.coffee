@@ -1,0 +1,1 @@
+Assay = Backbone.Model.extend({})
