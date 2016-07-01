@@ -1,0 +1,22 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Basic Information{% endblock %}
+
+{% block content %}
+
+   <div id="AssayBasicInformation" style="margin-top: 25px;">
+     {% with is_dynamic=True  %}
+      {% include "glados/AssayReportCardParts/BasicInformation.html" %}
+     {% endwith %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var assay = AssayReportCardApp.initAssay(CHEMBL_ID);
+var abiView = AssayReportCardApp.initABIView(assay, $('#ABasicInformation'));
+assay.fetch()
+
+{% endblock %}

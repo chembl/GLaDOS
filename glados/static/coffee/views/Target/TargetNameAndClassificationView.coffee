@@ -10,22 +10,21 @@ TargetNameAndClassificationView = CardView.extend
     @resource_type = 'Target'
 
   render: ->
-    @render_for_large()
-    @render_for_small()
+
+    @fill_template('BCK-TNC-large')
+    @fill_template('BCK-TNC-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()
     @initEmbedModal('name_and_classification')
     @activateModals()
 
+  fill_template: (div_id) ->
 
+    div = $(@el).find('#' + div_id)
+    template = $('#' + div.attr('data-hb-template'))
 
-  render_for_large: ->
-    table_large = $(@el).find('#BCK-TNC-large')
-    template = $('#' + table_large.attr('data-hb-template'))
-
-
-    table_large.html Handlebars.compile(template.html())
+    div.html Handlebars.compile(template.html())
       chembl_id: @model.get('target_chembl_id')
       type: @model.get('target_type')
       pref_name: @model.get('pref_name')
@@ -33,21 +32,6 @@ TargetNameAndClassificationView = CardView.extend
       organism: @model.get('organism')
       specs_group: if @model.get('species_group_flag') then 'Yes' else 'No'
       prot_target_classification: 'Enzyme'
-
-  render_for_small: ->
-    table_large = $(@el).find('#BCK-TNC-small')
-    template = $('#' + table_large.attr('data-hb-template'))
-
-
-    table_large.html Handlebars.compile(template.html())
-      chembl_id: @model.get('target_chembl_id')
-      type: @model.get('target_type')
-      pref_name: @model.get('pref_name')
-      synonyms: @get_target_syonyms_list(@model.get('target_components'))
-      organism: @model.get('organism')
-      specs_group: if @model.get('species_group_flag') then 'Yes' else 'No'
-      prot_target_classification: 'Enzyme'
-
 
   ### *
     * Give me the target_components list from the web services response and I will

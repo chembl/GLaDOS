@@ -15,10 +15,10 @@ AssayBasicInformationView = CardView.extend({
     return this.activateModals();
   },
   fill_template: function(div_id) {
-    var table_large, template;
-    table_large = $(this.el).find('#' + div_id);
-    template = $('#' + table_large.attr('data-hb-template'));
-    return table_large.html(Handlebars.compile(template.html())({
+    var div, template;
+    div = $(this.el).find('#' + div_id);
+    template = $('#' + div.attr('data-hb-template'));
+    return div.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('assay_chembl_id'),
       type: this.model.get('assay_type_description'),
       description: this.model.get('description'),

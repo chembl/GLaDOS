@@ -14,25 +14,17 @@ TargetComponentsView = CardView.extend({
       $(this.el).hide();
       return;
     }
-    this.render_for_large();
-    this.render_for_small();
+    this.fill_template('BCK-Components-large');
+    this.fill_template('BCK-Components-small');
     this.showVisibleContent();
     this.initEmbedModal('components');
     return this.activateModals();
   },
-  render_for_large: function() {
-    var table_large, template;
-    table_large = $(this.el).find('#BCK-Components-large');
-    template = $('#' + table_large.attr('data-hb-template'));
-    return table_large.html(Handlebars.compile(template.html())({
-      components: this.model.get('target_components')
-    }));
-  },
-  render_for_small: function() {
-    var table_large, template;
-    table_large = $(this.el).find('#BCK-Components-small');
-    template = $('#' + table_large.attr('data-hb-template'));
-    return table_large.html(Handlebars.compile(template.html())({
+  fill_template: function(div_id) {
+    var div, template;
+    div = $(this.el).find('#' + div_id);
+    template = $('#' + div.attr('data-hb-template'));
+    return div.html(Handlebars.compile(template.html())({
       components: this.model.get('target_components')
     }));
   }

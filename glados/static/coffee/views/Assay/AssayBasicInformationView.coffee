@@ -21,10 +21,10 @@ AssayBasicInformationView = CardView.extend
 
   fill_template: (div_id) ->
 
-    table_large = $(@el).find('#' + div_id)
-    template = $('#' + table_large.attr('data-hb-template'))
+    div = $(@el).find('#' + div_id)
+    template = $('#' + div.attr('data-hb-template'))
 
-    table_large.html Handlebars.compile(template.html())
+    div.html Handlebars.compile(template.html())
       chembl_id: @model.get('assay_chembl_id')
       type: @model.get('assay_type_description')
       description: @model.get('description')

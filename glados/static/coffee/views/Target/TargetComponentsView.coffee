@@ -17,24 +17,18 @@ TargetComponentsView = CardView.extend
       $(@el).hide()
       return
 
-    @render_for_large()
-    @render_for_small()
+    @fill_template('BCK-Components-large')
+    @fill_template('BCK-Components-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()
     @initEmbedModal('components')
     @activateModals()
 
-  render_for_large: ->
+  fill_template: (div_id) ->
 
-    table_large = $(@el).find('#BCK-Components-large')
-    template = $('#' + table_large.attr('data-hb-template'))
-    table_large.html Handlebars.compile(template.html())
-      components: @model.get('target_components')
+    div = $(@el).find('#' + div_id)
+    template = $('#' + div.attr('data-hb-template'))
 
-  render_for_small: ->
-
-    table_large = $(@el).find('#BCK-Components-small')
-    template = $('#' + table_large.attr('data-hb-template'))
-    table_large.html Handlebars.compile(template.html())
+    div.html Handlebars.compile(template.html())
       components: @model.get('target_components')

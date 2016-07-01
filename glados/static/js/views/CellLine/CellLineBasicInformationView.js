@@ -8,33 +8,17 @@ CellLineBasicInformationView = CardView.extend({
     return this.resource_type = 'Cell Line';
   },
   render: function() {
-    this.render_for_large();
-    this.render_for_small();
+    this.fill_template('BCK-CBI-large');
+    this.fill_template('BCK-CBI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();
   },
-  render_for_large: function() {
-    var table_large, template;
-    table_large = $(this.el).find('#BCK-CBI-large');
-    template = $('#' + table_large.attr('data-hb-template'));
-    return table_large.html(Handlebars.compile(template.html())({
-      chembl_id: this.model.get('cell_chembl_id'),
-      name: this.model.get('cell_name'),
-      description: this.model.get('cell_description'),
-      tissue: this.model.get('cell_source_tissue'),
-      organism: this.model.get('cell_source_organism'),
-      tax_id: this.model.get('cell_source_tax_id'),
-      clo_id: this.model.get('clo_id'),
-      efo_id: this.model.get('efo_id'),
-      cellosaurus_id: this.model.get('cellosaurus_id')
-    }));
-  },
-  render_for_small: function() {
-    var table_large, template;
-    table_large = $(this.el).find('#BCK-CBI-small');
-    template = $('#' + table_large.attr('data-hb-template'));
-    return table_large.html(Handlebars.compile(template.html())({
+  fill_template: function(div_id) {
+    var div, template;
+    div = $(this.el).find('#' + div_id);
+    template = $('#' + div.attr('data-hb-template'));
+    return div.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('cell_chembl_id'),
       name: this.model.get('cell_name'),
       description: this.model.get('cell_description'),
