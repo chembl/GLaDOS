@@ -9,11 +9,14 @@ AssayBasicInformationView = CardView.extend
 
   render: ->
 
-    @render_for_large()
+    @fill_template('BCK-ABI-large')
+    @fill_template('BCK-ABI-small')
 
-  render_for_large: ->
 
-    table_large = $(@el).find('#BCK-ABI-large')
+
+  fill_template: (div_id) ->
+
+    table_large = $(@el).find('#' + div_id)
     template = $('#' + table_large.attr('data-hb-template'))
 
     table_large.html Handlebars.compile(template.html())

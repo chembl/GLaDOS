@@ -6,11 +6,12 @@ AssayBasicInformationView = CardView.extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
-    return this.render_for_large();
+    this.fill_template('BCK-ABI-large');
+    return this.fill_template('BCK-ABI-small');
   },
-  render_for_large: function() {
+  fill_template: function(div_id) {
     var table_large, template;
-    table_large = $(this.el).find('#BCK-ABI-large');
+    table_large = $(this.el).find('#' + div_id);
     template = $('#' + table_large.attr('data-hb-template'));
     return table_large.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('assay_chembl_id'),

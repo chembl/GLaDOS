@@ -82,37 +82,41 @@
 
 {% block collection %}
 
+{% verbatim %}
+
+<div id="BCK-ABI-small" data-hb-template="Handlebars-Assay-BasicInformation-small">
+
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
+<script id="Handlebars-Assay-BasicInformation-small" type="text/x-handlebars-template">
+
 <ul class="collection hide-on-med-and-up">
   <li class="collection-item">
 
-    <b>Assay ID:</b> CHEMBL1025800
+    <b>Assay ID:</b> {{chembl_id}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Type:</b> ADME
+    <b>Type:</b> {{type}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Description:</b> Stability in 30% human plasma assessed as half life of hydrolysis at pH 7.4 in presence of 20 uM
-    dubucaine-insensitive BuChE subtype inhibitor dibucaine
+    <b>Description:</b> {{description}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Format:</b> ADME
+    <b>Format:</b> {{format}}
 
   </li>
 
-  <li class="collection-item">
-
-    <b>Unclassified (BAO_0000366)</b> ADME
-
-  </li>
 
   <li class="collection-item">
 
@@ -123,31 +127,31 @@
 
   <li class="collection-item">
 
-    <b>Organism:</b> Homo sapiens
+    <b>Organism:</b> {{#if organism}} {{organism}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Strain:</b>
+    <b>Strain:</b> {{#if strain}} {{strain}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Tissue:</b> Plasma
+    <b>Tissue:</b> {{#if tissue}} {{tissue}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Cell Type:</b>
+    <b>Cell Type:</b> {{#if cell_type}} {{cell_type}} {{else}} --- {{/if}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Subcellular Fraction:</b>
+    <b>Subcellular Fraction:</b> {{#if subcellular_fraction}} {{subcellular_fraction}} {{else}} --- {{/if}}
 
   </li>
 
@@ -158,4 +162,9 @@
   </li>
 
 </ul>
+
+</script>
+
+{% endverbatim %}
+
 {% endblock %}
