@@ -5,7 +5,7 @@ from selenium import webdriver
 class ReportCardTester(unittest.TestCase):
 
   HOST = 'http://127.0.0.1:8000'
-  SLEEP_TIME = 0.5
+  SLEEP_TIME = 2
 
   IMPLICIT_WAIT = 1
 

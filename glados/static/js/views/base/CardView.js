@@ -18,6 +18,9 @@ CardView = Backbone.View.extend({
           break;
         case 'Assay':
           error_msg = 'No assay found with id ' + this.model.get('assay_chembl_id');
+          break;
+        case 'Document':
+          error_msg = 'No document found with id ' + this.model.get('document_chembl_id');
       }
     } else {
       error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')';
