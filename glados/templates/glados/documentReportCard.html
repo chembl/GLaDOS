@@ -145,12 +145,20 @@
 {% endblock %}
 
 {% block custom_js %}
-<script type="text/javascript" src="/static/js/styling/scrollspy_helper.js"></script>
 {% endblock %}
 
 {% block custom_js_inline %}
 
 $('.scrollspy').scrollSpy();
 ScrollSpyHelper.initializeScrollSpyPinner();
+
+var pathname = window.location.pathname;
+var pathnameParts = pathname.split('/')
+CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
+var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
+
+var abiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
+
+document.fetch();
 
 {% endblock %}

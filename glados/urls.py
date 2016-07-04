@@ -41,7 +41,7 @@ urlpatterns = [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/BasicInformationToEmbed.html")), ),
 
-  url(r'^document_report_card/$',
+  url(r'^document_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
 
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',

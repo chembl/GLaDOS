@@ -1,0 +1,1 @@
+Document = Backbone.Model.extend({})
