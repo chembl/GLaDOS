@@ -6,11 +6,17 @@ DocumentBasicInformationView = CardView.extend
 
   initialize: ->
     @model.on 'change', @.render, @
+    @model.on 'error', @.showCompoundErrorCard, @
+    @resource_type = 'Document'
 
   render: ->
 
     @fill_template('BCK-DBI-large')
     @fill_template('BCK-DBI-small')
+    @showVisibleContent()
+
+    @initEmbedModal('basic_information')
+    @activateModals()
 
   fill_template: (div_id) ->
 
