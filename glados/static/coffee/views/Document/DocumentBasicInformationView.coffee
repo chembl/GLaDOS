@@ -9,4 +9,20 @@ DocumentBasicInformationView = CardView.extend
 
   render: ->
 
-    console.log('render!')
+    @fill_template('BCK-DBI-large')
+    @fill_template('BCK-DBI-small')
+
+  fill_template: (div_id) ->
+
+    div = $(@el).find('#' + div_id)
+    template = $('#' + div.attr('data-hb-template'))
+
+    div.html Handlebars.compile(template.html())
+      doc_id: @model.get('document_chembl_id')
+      journal: @model.get('journal')
+      year: @model.get('year')
+      volume: @model.get('volume')
+      first_page: @model.get('first_page')
+      last_page: @model.get('last_page')
+      pubmed_id: @model.get('pubmed_id')
+      doi: @model.get('doi')

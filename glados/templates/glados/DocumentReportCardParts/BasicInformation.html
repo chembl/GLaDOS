@@ -4,16 +4,26 @@
 
 {% block table %}
 
+<div id="BCK-DBI-large" data-hb-template="Handlebars-Document-BasicInformation-large">
+
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
+{% verbatim %}
+
+<script id="Handlebars-Document-BasicInformation-large" type="text/x-handlebars-template">
+
 <table class="compact-table striped hide-on-small-only">
 
   <tr>
     <td class="fixed-width-column-11"><b>Doc ID:</b></td>
-    <td>CHEMBL1151960</td>
+    <td>{{doc_id}}</td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>Journal:</b></td>
-    <td>J. Med. Chem. (2009) 52:5058-5068</td>
+    <td>{{journal}} ({{year}}) {{volume}}:{{first_page}}-{{last_page}}</td>
   </tr>
 
   <tr>
@@ -39,31 +49,44 @@
 
   <tr>
     <td class="fixed-width-column-11"><b>CiteXplore:</b></td>
-    <td><a href="http://europepmc.org/abstract/MED/3928819" target="_blank">3928819</a></td>
+    <td><a href="http://europepmc.org/abstract/MED/{{pubmed_id}}" target="_blank">{{pubmed_id}}</a></td>
   </tr>
 
   <tr>
     <td class="fixed-width-column-11"><b>DOI:</b></td>
-    <td><a href="http://dx.doi.org/10.1021/np50039a003" target="_blank">10.1021/np50039a003</a></td>
+    <td><a href="http://dx.doi.org/{{doi}}" target="_blank">{{doi}}</a></td>
   </tr>
 
 </table>
+
+</script>
+{% endverbatim %}
 
 {% endblock %}
 
 {% block collection %}
 
+<div id="BCK-DBI-small" data-hb-template="Handlebars-Document-BasicInformation-small">
+
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
+{% verbatim %}
+
+<script id="Handlebars-Document-BasicInformation-small" type="text/x-handlebars-template">
+
 <ul class="collection hide-on-med-and-up">
 
   <li class="collection-item">
 
-    <b>Doc ID:</b> CHEMBL1151960
+    <b>Doc ID:</b> {{doc_id}}
 
   </li>
 
   <li class="collection-item">
 
-    <b>Journal:</b> J. Med. Chem. (2009) 52:5058-5068
+    <b>Journal:</b> {{journal}} ({{year}}) {{volume}}:{{first_page}}-{{last_page}}
 
   </li>
 
@@ -92,15 +115,19 @@
 
   <li class="collection-item">
 
-    <b>CiteXplore:</b> <a href="http://europepmc.org/abstract/MED/3928819" target="_blank">3928819</a>
+    <b>CiteXplore:</b> <a href="http://europepmc.org/abstract/MED/{{pubmed_id}}" >{{pubmed_id}}</a>
 
   </li>
 
   <li class="collection-item">
 
-    <b>DOI:</b> <a href="http://dx.doi.org/10.1021/np50039a003" target="_blank">10.1021/np50039a003</a>
+    <b>DOI:</b> <a href="http://dx.doi.org/10.1021/{{doi}}" target="_blank">{{doi}}</a>
 
   </li>
 
 </ul>
+
+</script>
+{% endverbatim %}
+
 {% endblock %}
