@@ -1,0 +1,22 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Basic Information{% endblock %}
+
+{% block content %}
+
+   <div id="DocumentBasicInformation" style="margin-top: 25px;">
+     {% with is_dynamic=True  %}
+      {% include "glados/DocumentReportCardParts/BasicInformation.html" %}
+     {% endwith %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
+var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
+document.fetch()
+
+{% endblock %}

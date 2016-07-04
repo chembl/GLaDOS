@@ -44,6 +44,9 @@ urlpatterns = [
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
 
+  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/BasicInformationToEmbed.html")), ),
+
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
 
