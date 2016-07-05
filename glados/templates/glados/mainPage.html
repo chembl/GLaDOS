@@ -71,5 +71,9 @@
 
   LazyIFramesHelper.initLazyIFrames();
 
+  var targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
+  var listView = TargetBrowserApp.initBrowserAsList(targetHierarchy, $('#BCK-TargetBrowserAsList'));
+
+
 {% endblock %}
 

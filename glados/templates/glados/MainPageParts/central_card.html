@@ -14,7 +14,7 @@
       <li class="tab">
         <a class="iframe-lazy-loader" href="#ws_diagram" data-if-id="if_ws_diagram"
            data-if-src="/static/chembl_schema_diagrams/src/ws.html">Web Services Diagram</a></li>
-      <li class="tab"><a href="#test4">Tab 5</a></li>
+      <li class="tab"><a href="#browse_targets">Browse Targets</a></li>
       <li class="tab"><a href="#test4">Tab 6</a></li>
     </ul>
 
@@ -41,8 +41,16 @@
     </div>
     <div id="ws_diagram">
 
-      {% block ws_diargam %}
+      {% block ws_diagram %}
       {% include "glados/MainPageParts/ws_diagram.html" %}
+      {% endblock %}
+
+    </div>
+
+    <div id="browse_targets">
+
+      {% block browse_targets %}
+      {% include "glados/MainPageParts/browse_targets.html" %}
       {% endblock %}
 
     </div>
