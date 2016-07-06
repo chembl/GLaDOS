@@ -6,7 +6,10 @@ BrowseTargetAsListView = Backbone.View.extend({
     return this.render();
   },
   render: function() {
-    $(this.el).find('.tree').treegrid();
+    var tree;
+    tree = $(this.el).find('.tree');
+    tree.treegrid();
+    tree.treegrid('collapseAll');
     return console.log('render!');
   }
 });

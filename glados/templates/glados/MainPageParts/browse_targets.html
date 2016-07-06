@@ -3,40 +3,139 @@
 <div class="divider"></div>
 <br>
 
-<div id="BCK-TargetBrowserAsList">
+<div id="BCK-TargetBrowserAsList" class="target-list-browser">
 
   <div class="row">
 
-    <input name="group1" type="radio" id="proteinTargetTree" checked/>
-    <label for="proteinTargetTree">Protein Target Tree</label>
+    <div class="col s12">
 
-    <input name="group1" type="radio" id="taxonomyTree"/>
-    <label for="taxonomyTree">Protein Target Tree</label>
+      <input name="group1" type="radio" id="proteinTargetTree" checked/>
+      <label for="proteinTargetTree">Protein Target Tree</label>
 
-    <input name="group1" type="radio" id="geneOntologyTree"/>
-    <label for="geneOntologyTree">Gene Ontology Tree</label>
+      <input name="group1" type="radio" id="taxonomyTree"/>
+      <label for="taxonomyTree">Taxonomy Tree</label>
+
+      <input name="group1" type="radio" id="geneOntologyTree"/>
+      <label for="geneOntologyTree">Gene Ontology Tree</label>
+
+    </div>
 
   </div>
 
+  <br>
+
+  <div class="row">
+
+    <div class="col s12 options">
+
+      <a href="#" class="btn-chembl teal">Clear Selections</a>
+      <a href="#" class="btn-chembl teal">Select All</a>
+      <a href="#" class="btn-chembl teal">Collapse All</a>
+      <a href="#" class="btn-chembl teal">Open All</a>
+      <a href="#" class="btn-chembl teal">Fetch selected</a>
+
+
+    </div>
+
+  </div>
+
+  <br>
   <div class="row">
 
     <table class="tree">
+
       <tr class="treegrid-1">
-        <td>Root node</td>
-        <td>Additional info</td>
+
+        <td>
+          Enzyme (3651)<input type="checkbox" id="Enzyme" class="filled-in"/>
+          <label for="Enzyme">&nbsp;</label>
+        </td>
+
       </tr>
+
       <tr class="treegrid-2 treegrid-parent-1">
-        <td>Node 1-1</td>
-        <td>Additional info</td>
+
+        <td>
+          Kinase (637)<input type="checkbox" id="kinase" class="filled-in"/>
+          <label for="kinase">&nbsp;</label>
+        </td>
+
       </tr>
-      <tr class="treegrid-3 treegrid-parent-1">
-        <td>Node 1-2</td>
-        <td>Additional info</td>
+
+       <tr class="treegrid-3 treegrid-parent-2">
+
+        <td>
+          Protein Kinase (628)<input type="checkbox" id="ProteinKinase" class="filled-in"/>
+          <label for="ProteinKinase">&nbsp;</label>
+        </td>
+
       </tr>
-      <tr class="treegrid-4 treegrid-parent-3">
-        <td>Node 1-2-1</td>
-        <td>Additional info</td>
+
+      <tr class="treegrid-3b treegrid-parent-2">
+
+        <td>
+          Protein kinase regulatory subunit(22)<input type="checkbox" id="ProteinKinaseRegulatorySubunit" class="filled-in"/>
+          <label for="ProteinKinaseRegulatorySubunit">&nbsp;</label>
+        </td>
+
       </tr>
+
+      <tr class="treegrid-2b treegrid-parent-1">
+
+        <td>
+          Protease (410)<input type="checkbox" id="Protease" class="filled-in"/>
+          <label for="Protease">&nbsp;</label>
+        </td>
+
+      </tr>
+
+      <tr class="treegrid-4 treegrid-parent-2b">
+
+        <td>
+          Serine protease (168)<input type="checkbox" id="SerineProtease" class="filled-in"/>
+          <label for="SerineProtease">&nbsp;</label>
+        </td>
+
+      </tr>
+
+
+      <tr class="treegrid-5">
+
+        <td>
+          Membrane receptor (885)<input type="checkbox" id="MembraneReceptor" class="filled-in"/>
+          <label for="MembraneReceptor">&nbsp;</label>
+        </td>
+
+      </tr>
+
+       <tr class="treegrid-5b treegrid-parent-5">
+
+        <td>
+          Family A G protein-coupled receptor (704)<input type="checkbox" id="FamilyAGProtein-coupledReceptor" class="filled-in"/>
+          <label for="FamilyAGProtein-coupledReceptor">&nbsp;</label>
+        </td>
+
+      </tr>
+
+       <tr class="treegrid-6">
+
+        <td>
+          Ion Channel (415)<input type="checkbox" id="IonChannel" class="filled-in"/>
+          <label for="IonChannel">&nbsp;</label>
+        </td>
+
+      </tr>
+
+      <tr class="treegrid-7 treegrid-parent-6">
+
+        <td>
+          Ligand-gated ion channel (230)<input type="checkbox" id="Ligand-gatedIonChannel" class="filled-in"/>
+          <label for="Ligand-gatedIonChannel">&nbsp;</label>
+        </td>
+
+      </tr>
+
+
     </table>
 
 

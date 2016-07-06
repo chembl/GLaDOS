@@ -1679,3 +1679,26 @@ $marvin-size-fullscreen: 91vh;
   }
 
 }
+
+/**
+* Target Browser
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.small-input-wrapper{
+  input{
+    margin: 0px;
+    height: 2rem;
+  }
+}
+
+.target-list-browser {
+
+  .options {
+    a {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  }
+
+
+}

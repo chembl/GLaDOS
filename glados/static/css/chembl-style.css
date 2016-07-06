@@ -2945,4 +2945,16 @@ div#CNC-zoom-modal {
     position: absolute;
     bottom: 0; }
 
+/**
+* Target Browser
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.small-input-wrapper input {
+  margin: 0px;
+  height: 2rem; }
+
+.target-list-browser .options a {
+  display: inline-block;
+  margin-bottom: 5px; }
+
 /*# sourceMappingURL=chembl-style.css.map */
