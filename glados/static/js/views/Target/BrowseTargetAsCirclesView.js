@@ -3,13 +3,34 @@ var BrowseTargetAsCirclesView;
 
 BrowseTargetAsCirclesView = Backbone.View.extend({
   initialize: function() {
-    return this.render();
+    var debounced_render, updateViewProxy;
+    this.showPreloader();
+    console.log('setting resize event');
+    debounced_render = _.debounce($.proxy(this.render, this), 300);
+    updateViewProxy = $.proxy(this.updateView, this, debounced_render);
+    return $(window).resize(function() {
+      return updateViewProxy();
+    });
+  },
+  showPreloader: function() {
+    return $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+  },
+  hidePreloader: function() {
+    return $(this.el).find('.card-preolader-to-hide').hide();
+  },
+  updateView: function(debounced_render) {
+    $(this.el).empty();
+    this.showPreloader();
+    return debounced_render();
   },
   render: function() {
     var color, diameter, elem_selector, margin, pack, svg;
+    this.hidePreloader();
     margin = 20;
     diameter = 400;
-    color = d3.scale.linear().domain([-1, 5]).range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"]).interpolate(d3.interpolateHcl);
+    console.log('elem width is:');
+    console.log($(this.el).width());
+    color = d3.scale.linear().domain([-1, 5]).range(["#e0f2f1", "rgb(0, 110, 156)"]).interpolate(d3.interpolateRgb);
     pack = d3.layout.pack().padding(2).size([diameter - margin, diameter - margin]).value(function(d) {
       return d.size;
     });

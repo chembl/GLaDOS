@@ -1,16 +1,45 @@
 BrowseTargetAsCirclesView = Backbone.View.extend
 
   initialize: ->
-    @render()
+    @showPreloader()
+    #@render()
+    console.log('setting resize event')
+
+
+    # the render function is debounced so it waits for the size of the
+    # element to be ready
+    debounced_render = _.debounce($.proxy(@render, @), 300)
+    updateViewProxy = $.proxy(@updateView, @, debounced_render)
+
+    $(window).resize ->
+      updateViewProxy()
+
+  showPreloader: ->
+
+    $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
+
+
+  hidePreloader: ->
+
+    $(@el).find('.card-preolader-to-hide').hide()
+
+  updateView: (debounced_render) ->
+    $(@el).empty()
+    @showPreloader()
+    debounced_render()
 
   render: ->
+
+    @hidePreloader()
     margin = 20
     diameter = 400;
+    console.log('elem width is:')
+    console.log($(@el).width())
 
     color = d3.scale.linear()
     .domain([-1, 5])
-    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);
+    .range(["#e0f2f1", "rgb(0, 110, 156)"])
+    .interpolate(d3.interpolateRgb);
 
     pack = d3.layout.pack()
     .padding(2)
