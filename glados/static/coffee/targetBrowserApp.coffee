@@ -20,3 +20,12 @@ class TargetBrowserApp
       el: top_level_elem
 
     return asListView
+
+  # This initialises the view of the tree as a circles
+  @initBrowserAsCircles = (model, top_level_elem) ->
+
+    asCirclesView = new BrowseTargetAsCirclesView
+      model: model
+      el: top_level_elem
+
+    return asCirclesView

@@ -24,6 +24,15 @@ TargetBrowserApp = (function() {
     return asListView;
   };
 
+  TargetBrowserApp.initBrowserAsCircles = function(model, top_level_elem) {
+    var asCirclesView;
+    asCirclesView = new BrowseTargetAsCirclesView({
+      model: model,
+      el: top_level_elem
+    });
+    return asCirclesView;
+  };
+
   return TargetBrowserApp;
 
 })();

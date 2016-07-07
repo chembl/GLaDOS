@@ -2953,8 +2953,12 @@ div#CNC-zoom-modal {
   margin: 0px;
   height: 2rem; }
 
-.target-list-browser .options a {
+.target-browser .options a {
   display: inline-block;
   margin-bottom: 5px; }
+.target-browser [type="checkbox"] + label {
+  padding-left: 20px;
+  height: unset;
+  line-height: unset; }
 
 /*# sourceMappingURL=chembl-style.css.map */

@@ -1691,13 +1691,19 @@ $marvin-size-fullscreen: 91vh;
   }
 }
 
-.target-list-browser {
+.target-browser {
 
   .options {
     a {
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
+
+  [type="checkbox"] + label{
+    padding-left: 20px;
+    height: unset;
+    line-height: unset;
   }
 
 
