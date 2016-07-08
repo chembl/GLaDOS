@@ -2960,5 +2960,20 @@ div#CNC-zoom-modal {
   padding-left: 20px;
   height: unset;
   line-height: unset; }
+.target-browser .browser-as-circles .node {
+  cursor: pointer; }
+.target-browser .browser-as-circles .node:hover {
+  stroke: #000;
+  stroke-width: 1.5px; }
+.target-browser .browser-as-circles .node--leaf {
+  fill: white; }
+.target-browser .browser-as-circles .label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; }
+.target-browser .browser-as-circles .label,
+.target-browser .browser-as-circles .node--root,
+.target-browser .browser-as-circles .node--leaf {
+  pointer-events: none; }
 
 /*# sourceMappingURL=chembl-style.css.map */

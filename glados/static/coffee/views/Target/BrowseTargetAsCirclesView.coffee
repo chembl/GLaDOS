@@ -51,13 +51,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json "static/data/flare.json", (error, root) ->
+    d3.json "static/data/sample_target_tree.json", (error, root) ->
       if error
         console.log(error)
 
       focus = root
       nodes = pack.nodes(root)
       view = undefined
+      console.log(nodes)
 
       circle = svg.selectAll('circle')
       .data(nodes).enter().append('circle')
@@ -79,7 +80,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
         if d.parent == root then 1 else 0)
       .style("display", (d) ->
         if d.parent == root then 'inline' else 'none')
-      .text((d) -> return d.name )
+      .text((d) -> return d.name + " (" + d.size + ")" )
 
       node = svg.selectAll("circle,text")
 

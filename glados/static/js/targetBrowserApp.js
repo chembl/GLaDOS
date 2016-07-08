@@ -12,6 +12,7 @@ TargetBrowserApp = (function() {
   TargetBrowserApp.initTargetHierarchyTree = function() {
     var targetTree;
     targetTree = new TargetHierarchyTree;
+    targetTree.url = 'static/data/sample_target_tree.json';
     return targetTree;
   };
 

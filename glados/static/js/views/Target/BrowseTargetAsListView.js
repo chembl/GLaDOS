@@ -3,13 +3,37 @@ var BrowseTargetAsListView;
 
 BrowseTargetAsListView = Backbone.View.extend({
   initialize: function() {
-    return this.render();
+    return this.model.on('change', this.render, this);
   },
   render: function() {
-    var tree;
-    tree = $(this.el).find('.tree');
-    tree.treegrid();
-    tree.treegrid('collapseAll');
-    return console.log('render as list!');
+    var addOneNode, curr_node, lvl_1_nodes, node, table, _i, _len;
+    lvl_1_nodes = this.model.get('children');
+    curr_node = lvl_1_nodes[0];
+    table = $(this.el).find('.tree');
+    addOneNode = function(curr_node, table, parent_id) {
+      var child, new_row, _i, _len, _ref, _results;
+      new_row = Handlebars.compile($('#Handlebars-TargetBrowser-AsList-item').html())({
+        id: curr_node.id,
+        name: curr_node.name,
+        size: curr_node.size,
+        parent_id: parent_id
+      });
+      table.append(new_row);
+      if (curr_node.children != null) {
+        _ref = curr_node.children;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          child = _ref[_i];
+          _results.push(addOneNode(child, table, curr_node.id));
+        }
+        return _results;
+      }
+    };
+    for (_i = 0, _len = lvl_1_nodes.length; _i < _len; _i++) {
+      node = lvl_1_nodes[_i];
+      addOneNode(node, table, void 0);
+    }
+    table.treegrid();
+    return table.treegrid('collapseAll');
   }
 });

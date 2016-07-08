@@ -1,5 +1,5 @@
 {
- "name": "flare",
+ "name": "root",
  "children": [
   {
    "name": "analytics",
@@ -7,7 +7,7 @@
     {
      "name": "cluster",
      "children": [
-      {"name": "AgglomerativeCluster", "size": 3938},
+      {"name": "AgglomerativeCluster", "size": 0, "id": 1},
       {"name": "CommunityStructure", "size": 3812},
       {"name": "HierarchicalCluster", "size": 6714},
       {"name": "MergeEdge", "size": 743}
