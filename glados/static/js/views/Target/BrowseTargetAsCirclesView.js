@@ -13,10 +13,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     });
   },
   showPreloader: function() {
-    return $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+    if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
+      $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+      return $(this.el).attr('data-loading', 'true');
+    }
   },
   hidePreloader: function() {
-    return $(this.el).find('.card-preolader-to-hide').hide();
+    $(this.el).find('.card-preolader-to-hide').hide();
+    return $(this.el).attr('data-loading', 'false');
   },
   updateView: function(debounced_render) {
     $(this.el).empty();
@@ -27,10 +31,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     var color, diameter, elem_selector, margin, pack, svg;
     this.hidePreloader();
     margin = 20;
-    diameter = 400;
-    console.log('elem width is:');
-    console.log($(this.el).width());
-    color = d3.scale.linear().domain([-1, 5]).range(["#e0f2f1", "rgb(0, 110, 156)"]).interpolate(d3.interpolateRgb);
+    diameter = $(this.el).width();
+    color = d3.scale.linear().domain([-1, 5]).range(["white", "rgb(0, 110, 156)"]).interpolate(d3.interpolateRgb);
     pack = d3.layout.pack().padding(2).size([diameter - margin, diameter - margin]).value(function(d) {
       return d.size;
     });

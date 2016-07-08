@@ -16,12 +16,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
   showPreloader: ->
 
-    $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
-
+    if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
+      $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
+      $(@el).attr('data-loading', 'true')
 
   hidePreloader: ->
 
     $(@el).find('.card-preolader-to-hide').hide()
+    $(@el).attr('data-loading', 'false')
 
   updateView: (debounced_render) ->
     $(@el).empty()
@@ -32,13 +34,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
     @hidePreloader()
     margin = 20
-    diameter = 400;
-    console.log('elem width is:')
-    console.log($(@el).width())
+    diameter = $(@el).width();
 
     color = d3.scale.linear()
     .domain([-1, 5])
-    .range(["#e0f2f1", "rgb(0, 110, 156)"])
+    .range(["white", "rgb(0, 110, 156)"])
     .interpolate(d3.interpolateRgb);
 
     pack = d3.layout.pack()
