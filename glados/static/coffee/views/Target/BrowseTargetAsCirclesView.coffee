@@ -2,9 +2,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
   initialize: ->
     @showPreloader()
-    #@render()
-    console.log('setting resize event')
-
 
     # the render function is debounced so it waits for the size of the
     # element to be ready

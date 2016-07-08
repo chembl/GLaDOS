@@ -3,7 +3,7 @@
 <div class="divider"></div>
 <br>
 
-<div class="row target-browser">
+<div id='BCK-TargetBrowserMain' class="row target-browser">
 
   <div class="row">
 
@@ -52,126 +52,17 @@
 
   <div class="col l6 m12">
 
-    <div id="BCK-TargetBrowserAsList">
-
-      <div class="row">
-
-        <table class="tree compact-table">
-
-          <tr class="treegrid-1">
-
-            <td>
-              <input type="checkbox" id="Enzyme" class="filled-in"/>
-              <label for="Enzyme">&nbsp;</label>Enzyme
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-2 treegrid-parent-1">
-
-            <td>
-              <input type="checkbox" id="kinase" class="filled-in"/>
-              <label for="kinase">&nbsp;</label>
-              Kinase (637)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-3 treegrid-parent-2">
-
-            <td>
-              <input type="checkbox" id="ProteinKinase" class="filled-in"/>
-              <label for="ProteinKinase">&nbsp;</label>
-              Protein Kinase (628)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-3b treegrid-parent-2">
-
-            <td>
-              <input type="checkbox" id="ProteinKinaseRegulatorySubunit" class="filled-in"/>
-              <label for="ProteinKinaseRegulatorySubunit">&nbsp;</label>
-              Protein kinase regulatory subunit(22)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-2b treegrid-parent-1">
-
-            <td>
-              <input type="checkbox" id="Protease" class="filled-in"/>
-              <label for="Protease">&nbsp;</label>
-              Protease (410)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-4 treegrid-parent-2b">
-
-            <td>
-              <input type="checkbox" id="SerineProtease" class="filled-in"/>
-              <label for="SerineProtease">&nbsp;</label>
-              Serine protease (168)
-            </td>
-
-          </tr>
-
-
-          <tr class="treegrid-5">
-
-            <td>
-              <input type="checkbox" id="MembraneReceptor" class="filled-in"/>
-              <label for="MembraneReceptor">&nbsp;</label>
-              Membrane receptor (885)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-5b treegrid-parent-5">
-
-            <td>
-              <input type="checkbox" id="FamilyAGProtein-coupledReceptor" class="filled-in"/>
-              <label for="FamilyAGProtein-coupledReceptor">&nbsp;</label>
-              Family A G protein-coupled receptor (704)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-6">
-
-            <td>
-              <input type="checkbox" id="IonChannel" class="filled-in"/>
-              <label for="IonChannel">&nbsp;</label>
-              Ion Channel (415)
-            </td>
-
-          </tr>
-
-          <tr class="treegrid-7 treegrid-parent-6">
-
-            <td>
-              <input type="checkbox" id="Ligand-gatedIonChannel" class="filled-in"/>
-              <label for="Ligand-gatedIonChannel">&nbsp;</label>
-              Ligand-gated ion channel (230)
-            </td>
-
-          </tr>
-
-
-        </table>
-
-
-      </div>
-
-    </div>
+    {% block browse_as_list %}
+      {% include "glados/MainPageParts/TargetBrowserParts/browse_as_list.html" %}
+    {% endblock %}
 
   </div>
 
   <div class="col l6 m12">
-    <div id="BCK-TargetBrowserAsCircles">
 
-    </div>
+    {% block browse_as_circles %}
+      {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+    {% endblock %}
 
   </div>
 

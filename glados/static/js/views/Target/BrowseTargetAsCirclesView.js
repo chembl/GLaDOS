@@ -5,7 +5,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
   initialize: function() {
     var debounced_render, updateViewProxy;
     this.showPreloader();
-    console.log('setting resize event');
     debounced_render = _.debounce($.proxy(this.render, this), 300);
     updateViewProxy = $.proxy(this.updateView, this, debounced_render);
     return $(window).resize(function() {

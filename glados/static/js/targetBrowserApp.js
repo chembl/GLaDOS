@@ -33,6 +33,15 @@ TargetBrowserApp = (function() {
     return asCirclesView;
   };
 
+  TargetBrowserApp.initBrowserMain = function(model, top_level_elem) {
+    var mainView;
+    mainView = new BrowseTargetMainView({
+      model: model,
+      el: top_level_elem
+    });
+    return mainView;
+  };
+
   return TargetBrowserApp;
 
 })();
