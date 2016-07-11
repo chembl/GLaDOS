@@ -2,29 +2,35 @@
 var TargetHierarchyTree;
 
 TargetHierarchyTree = Backbone.Model.extend({
+  defaults: {
+    'children': new TargetHierarchyChildren,
+    'all_nodes': new TargetHierarchyChildren
+  },
   initialize: function() {
     return this.on('change', this.initHierarhy, this);
   },
   initHierarhy: function() {
-    var addOneNode, children_col, node, _i, _len, _ref, _results;
+    var addOneNode, all_nodes, children_col, node, _i, _len, _ref, _results;
+    all_nodes = new TargetHierarchyChildren;
     children_col = new TargetHierarchyChildren;
-    addOneNode = function(node_obj, children_col, parent_id) {
-      var child_obj, grand_children_coll, node, _i, _len, _ref, _results;
+    addOneNode = function(node_obj, children_col, parent) {
+      var child_obj, grand_children_coll, new_node, _i, _len, _ref, _results;
       grand_children_coll = new TargetHierarchyChildren;
-      node = new TargetHierarchyNode({
+      new_node = new TargetHierarchyNode({
         name: node_obj.name,
         id: node_obj.id,
-        parent_id: parent_id,
+        parent: parent,
         children: grand_children_coll,
         size: node_obj.size
       });
-      children_col.add(node);
+      children_col.add(new_node);
+      all_nodes.add(new_node);
       if (node_obj.children != null) {
         _ref = node_obj.children;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           child_obj = _ref[_i];
-          _results.push(addOneNode(child_obj, grand_children_coll, node_obj.id));
+          _results.push(addOneNode(child_obj, grand_children_coll, new_node));
         }
         return _results;
       }
