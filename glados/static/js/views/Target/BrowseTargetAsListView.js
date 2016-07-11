@@ -6,9 +6,8 @@ BrowseTargetAsListView = Backbone.View.extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
-    var addOneNode, curr_node, lvl_1_nodes, node, table, _i, _len;
+    var addOneNode, lvl_1_nodes, node, table, _i, _len;
     lvl_1_nodes = this.model.get('children');
-    curr_node = lvl_1_nodes[0];
     table = $(this.el).find('.tree');
     addOneNode = function(curr_node, table, parent_id) {
       var child, new_row, _i, _len, _ref, _results;

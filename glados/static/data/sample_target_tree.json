@@ -1,0 +1,48 @@
+{
+ "name": "root",
+ "children": [
+  {
+    "name": "Enzyme",
+    "size": 3651,
+    "id": 1,
+
+   "children": [
+    {
+     "name": "Kinase",
+      "size": 637,
+      "id": 2,
+     "children": [
+      {"name": "Protein Kinase", "size": 628, "id": 3, "selected": "true"},
+      {"name": "Protein kinase regulatory subunit", "size": 22, "id":4}
+     ]
+    },{
+     "name": "Protease",
+      "size": 410,
+      "id": 5,
+     "children": [
+      {"name": "Serine protease", "size": 160, "id": 6},
+      {"name": "Metallo protease", "size": 120, "id": 7}
+     ]
+    }
+   ]
+  },
+   {
+     "name": "Membrane receptor",
+     "size": 885,
+     "id": 8,
+     "children": [
+       {"name": "Family A G protein-coupled receptor", "size": 704, "id": 9}
+     ]
+   },
+   {
+     "name": "Ion Channel",
+     "size": 415,
+     "id": 10,
+     "children": [
+       {"name": " Ligand-gated ion channel", "size": 230, "id": 11},
+       {"name": " Voltage-gated ion channel", "size": 153, "id": 12}
+     ]
+   }
+
+ ]
+}

@@ -5,10 +5,7 @@ BrowseTargetAsListView = Backbone.View.extend
 
   render: ->
 
-
     lvl_1_nodes = @model.get('children')
-
-    curr_node = lvl_1_nodes[0]
     table = $(@el).find('.tree')
 
     addOneNode = (curr_node, table, parent_id ) ->

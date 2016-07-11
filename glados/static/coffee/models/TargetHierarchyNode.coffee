@@ -1,0 +1,1 @@
+TargetHierarchyNode = Backbone.Model.extend({})
