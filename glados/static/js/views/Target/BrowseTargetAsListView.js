@@ -6,31 +6,24 @@ BrowseTargetAsListView = Backbone.View.extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
-    var addOneNode, lvl_1_nodes, node, table, _i, _len;
-    lvl_1_nodes = this.model.get('children');
+    var all_nodes, newView, new_elem, new_row, node, table, _i, _len, _ref;
+    all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
-    addOneNode = function(curr_node, table, parent_id) {
-      var child, new_row, _i, _len, _ref, _results;
+    _ref = all_nodes.models;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
       new_row = Handlebars.compile($('#Handlebars-TargetBrowser-AsList-item').html())({
-        id: curr_node.id,
-        name: curr_node.name,
-        size: curr_node.size,
-        parent_id: parent_id
+        id: node.get('id'),
+        name: node.get('name'),
+        size: node.get('size'),
+        parent_id: node.get('parent') != null ? node.get('parent').get('id') : void 0
       });
-      table.append(new_row);
-      if (curr_node.children != null) {
-        _ref = curr_node.children;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          child = _ref[_i];
-          _results.push(addOneNode(child, table, curr_node.id));
-        }
-        return _results;
-      }
-    };
-    for (_i = 0, _len = lvl_1_nodes.length; _i < _len; _i++) {
-      node = lvl_1_nodes[_i];
-      addOneNode(node, table, void 0);
+      new_elem = $(new_row);
+      table.append(new_elem);
+      newView = new BrowseTargetAsListNodeView({
+        model: node,
+        el: new_elem
+      });
     }
     table.treegrid();
     return table.treegrid('collapseAll');

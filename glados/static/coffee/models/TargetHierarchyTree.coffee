@@ -35,5 +35,9 @@ TargetHierarchyTree = Backbone.Model.extend
 
 
     for node in @.get('children')
-      addOneNode(node, children_col, undefined)
+      if node?
+        addOneNode(node, children_col, undefined)
 
+
+    @set('all_nodes', all_nodes)
+    @set('children', children_col)

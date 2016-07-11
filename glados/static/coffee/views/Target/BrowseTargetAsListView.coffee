@@ -5,26 +5,24 @@ BrowseTargetAsListView = Backbone.View.extend
 
   render: ->
 
-    lvl_1_nodes = @model.get('children')
+    all_nodes = @model.get('all_nodes')
     table = $(@el).find('.tree')
 
-    addOneNode = (curr_node, table, parent_id ) ->
+    for node in all_nodes.models
 
       new_row = Handlebars.compile($('#Handlebars-TargetBrowser-AsList-item').html())
-        id: curr_node.id
-        name: curr_node.name
-        size: curr_node.size
-        parent_id: parent_id
+        id: node.get('id')
+        name: node.get('name')
+        size: node.get('size')
+        parent_id: if node.get('parent')? then node.get('parent').get('id') else undefined
 
-      table.append(new_row)
+      new_elem = $(new_row)
+      table.append(new_elem)
 
-      if curr_node.children?
-        for child in curr_node.children
-          addOneNode(child, table, curr_node.id)
+      newView = new BrowseTargetAsListNodeView
+        model: node
+        el: new_elem
 
-
-    for node in lvl_1_nodes
-      addOneNode(node, table, undefined)
 
     table.treegrid()
     table.treegrid('collapseAll')
