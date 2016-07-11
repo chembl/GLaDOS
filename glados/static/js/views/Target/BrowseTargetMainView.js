@@ -3,13 +3,40 @@ var BrowseTargetMainView;
 
 BrowseTargetMainView = Backbone.View.extend({
   events: {
-    'click [type="checkbox"]': 'openAll'
+    'click .open-all': 'openAll',
+    'click .collapse-all': 'collapseAll',
+    'click .select-all': 'selectAll',
+    'click .clear-selections': 'clearSelections'
   },
   initialize: function() {
     this.listView = TargetBrowserApp.initBrowserAsList(this.model, $('#BCK-TargetBrowserAsList'));
     return this.circlesView = TargetBrowserApp.initBrowserAsCircles(this.model, $('#BCK-TargetBrowserAsCircles'));
   },
   openAll: function() {
-    return console.log('open all');
+    return this.listView.expandAll();
+  },
+  collapseAll: function() {
+    return this.listView.collapseAll();
+  },
+  selectAll: function() {
+    var node, _i, _len, _ref, _results;
+    this.openAll();
+    _ref = this.model.get('all_nodes').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      _results.push(node.set('selected', true));
+    }
+    return _results;
+  },
+  clearSelections: function() {
+    var node, _i, _len, _ref, _results;
+    _ref = this.model.get('all_nodes').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      _results.push(node.set('selected', false));
+    }
+    return _results;
   }
 });

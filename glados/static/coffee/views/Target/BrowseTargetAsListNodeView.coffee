@@ -8,11 +8,14 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
 
   clickInput: ->
-   @model.set('name', 'osin!!')
+   @model.set('selected', true)
 
-   console.log(@model)
-   console.log('input clicked!')
-   @model.trigger('change')
 
   changed: ->
-    console.log('changed!')
+
+    if @model.get('selected') == true
+      $(@el).find('[type="checkbox"]').prop('checked', true)
+    else
+      $(@el).find('[type="checkbox"]').prop('checked', false)
+
+

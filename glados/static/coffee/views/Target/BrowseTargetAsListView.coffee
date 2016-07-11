@@ -26,3 +26,10 @@ BrowseTargetAsListView = Backbone.View.extend
 
     table.treegrid()
     table.treegrid('collapseAll')
+
+
+  expandAll: ->
+    $(@el).find('.tree').treegrid('expandAll')
+
+  collapseAll: ->
+    $(@el).find('.tree').treegrid('collapseAll')

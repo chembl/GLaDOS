@@ -5,9 +5,11 @@ TargetHierarchyTree = Backbone.Model.extend
     'all_nodes': new TargetHierarchyChildren
 
   initialize: ->
-    @.on 'change', @initHierarhy, @
+    @on 'change', @initHierarhy, @
 
   initHierarhy: ->
+
+    console.log('changed to meeee!')
 
     all_nodes = new TargetHierarchyChildren
     children_col = new TargetHierarchyChildren
@@ -39,5 +41,5 @@ TargetHierarchyTree = Backbone.Model.extend
         addOneNode(node, children_col, undefined)
 
 
-    @set('all_nodes', all_nodes)
-    @set('children', children_col)
+    @set('all_nodes', all_nodes, {silent: true})
+    @set('children', children_col, {silent: true})
