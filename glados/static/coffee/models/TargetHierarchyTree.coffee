@@ -9,8 +9,6 @@ TargetHierarchyTree = Backbone.Model.extend
 
   initHierarhy: ->
 
-    console.log('changed to meeee!')
-
     all_nodes = new TargetHierarchyChildren
     children_col = new TargetHierarchyChildren
 

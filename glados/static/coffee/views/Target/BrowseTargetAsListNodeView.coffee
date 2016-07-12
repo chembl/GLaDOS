@@ -8,7 +8,11 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
 
   clickInput: ->
-   @model.set('selected', true)
+
+    if @model.get('selected') == true
+      @model.set('selected', false)
+    else
+      @model.set('selected', true)
 
 
   changed: ->

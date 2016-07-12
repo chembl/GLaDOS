@@ -11,7 +11,6 @@ TargetHierarchyTree = Backbone.Model.extend({
   },
   initHierarhy: function() {
     var addOneNode, all_nodes, children_col, node, _i, _len, _ref;
-    console.log('changed to meeee!');
     all_nodes = new TargetHierarchyChildren;
     children_col = new TargetHierarchyChildren;
     addOneNode = function(node_obj, children_col, parent) {

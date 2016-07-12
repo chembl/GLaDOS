@@ -9,7 +9,11 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     'click [type="checkbox"]': 'clickInput'
   },
   clickInput: function() {
-    return this.model.set('selected', true);
+    if (this.model.get('selected') === true) {
+      return this.model.set('selected', false);
+    } else {
+      return this.model.set('selected', true);
+    }
   },
   changed: function() {
     if (this.model.get('selected') === true) {
