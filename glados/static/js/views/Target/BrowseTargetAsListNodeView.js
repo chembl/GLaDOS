@@ -10,9 +10,9 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
   },
   clickInput: function() {
     if (this.model.get('selected') === true) {
-      return this.model.set('selected', false);
+      return this.model.unCheckMeAndMyDescendants();
     } else {
-      return this.model.set('selected', true);
+      return this.model.checkMeAndMyDescendants();
     }
   },
   changed: function() {

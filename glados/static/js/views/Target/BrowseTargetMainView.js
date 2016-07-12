@@ -20,7 +20,6 @@ BrowseTargetMainView = Backbone.View.extend({
   },
   selectAll: function() {
     var node, _i, _len, _ref, _results;
-    this.openAll();
     _ref = this.model.get('all_nodes').models;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

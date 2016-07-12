@@ -18,7 +18,7 @@ BrowseTargetMainView = Backbone.View.extend
     @listView.collapseAll()
 
   selectAll: ->
-    @openAll()
+    
     for node in @model.get('all_nodes').models
       node.set('selected', true)
 

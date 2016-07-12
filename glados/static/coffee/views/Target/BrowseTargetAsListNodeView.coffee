@@ -10,9 +10,9 @@ BrowseTargetAsListNodeView = Backbone.View.extend
   clickInput: ->
 
     if @model.get('selected') == true
-      @model.set('selected', false)
+      @model.unCheckMeAndMyDescendants()
     else
-      @model.set('selected', true)
+      @model.checkMeAndMyDescendants()
 
 
   changed: ->
