@@ -18,13 +18,15 @@ BrowseTargetMainView = Backbone.View.extend
     @listView.collapseAll()
 
   selectAll: ->
-    
+
     for node in @model.get('all_nodes').models
       node.set('selected', true)
+      node.set('incomplete', false)
 
   clearSelections: ->
     for node in @model.get('all_nodes').models
       node.set('selected', false)
+      node.set('incomplete', false)
 
 
 

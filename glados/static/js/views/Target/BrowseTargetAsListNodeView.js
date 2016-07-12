@@ -10,16 +10,23 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
   },
   clickInput: function() {
     if (this.model.get('selected') === true) {
-      return this.model.unCheckMeAndMyDescendants();
+      this.model.unCheckMeAndMyDescendants();
     } else {
-      return this.model.checkMeAndMyDescendants();
+      this.model.checkMeAndMyDescendants();
     }
+    return this.model.verifyMyAncestryIsComplete();
   },
   changed: function() {
     if (this.model.get('selected') === true) {
+      $(this.el).find('[type="checkbox"]').prop('checked', true);
+    } else {
+      $(this.el).find('[type="checkbox"]').prop('checked', false);
+    }
+    if (this.model.get('incomplete') === true) {
+      $(this.el).find('[type="checkbox"]').addClass('incomplete');
       return $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
-      return $(this.el).find('[type="checkbox"]').prop('checked', false);
+      return $(this.el).find('[type="checkbox"]').removeClass('incomplete');
     }
   }
 });

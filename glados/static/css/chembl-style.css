@@ -2956,10 +2956,13 @@ div#CNC-zoom-modal {
 .target-browser .options a {
   display: inline-block;
   margin-bottom: 5px; }
-.target-browser [type="checkbox"] + label {
+.target-browser [type="checkbox"].filled-in + label {
   padding-left: 20px;
   height: unset;
   line-height: unset; }
+.target-browser [type="checkbox"].incomplete:checked + label:before {
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent; }
 .target-browser .browser-as-circles .node {
   cursor: pointer; }
 .target-browser .browser-as-circles .node:hover {

@@ -5,6 +5,7 @@ TargetHierarchyNode = Backbone.Model.extend({
   checkMeAndMyDescendants: function() {
     var nodeModel, _i, _len, _ref, _results;
     this.set('selected', true);
+    this.set('incomplete', false);
     _ref = this.get('children').models;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -23,5 +24,32 @@ TargetHierarchyNode = Backbone.Model.extend({
       _results.push(nodeModel.unCheckMeAndMyDescendants());
     }
     return _results;
+  },
+  verifyMyAncestryIsComplete: function() {
+    if (this.get('parent') != null) {
+      return this.get('parent').checkMeAndMyAncestryIsComplete();
+    }
+  },
+  checkMeAndMyAncestryIsComplete: function() {
+    var num_children_incomplete, num_children_unchecked;
+    num_children_incomplete = _.filter(this.get('children').models, function(model) {
+      return model.get('incomplete') === true;
+    }).length;
+    num_children_unchecked = _.filter(this.get('children').models, function(model) {
+      return !model.get('selected') === true;
+    }).length;
+    if (num_children_unchecked === this.get('children').models.length && num_children_incomplete === 0) {
+      this.set('selected', false);
+      this.set('incomplete', false);
+    } else if (num_children_unchecked === 0 && num_children_incomplete === 0) {
+      this.set('incomplete', false);
+      this.set('selected', true);
+    } else {
+      this.set('incomplete', true);
+      this.set('selected', false);
+    }
+    if (this.get('parent') != null) {
+      return this.get('parent').checkMeAndMyAncestryIsComplete();
+    }
   }
 });

@@ -1696,11 +1696,21 @@ $marvin-size-fullscreen: 91vh;
     }
   }
 
-  [type="checkbox"] + label {
+  [type="checkbox"].filled-in + label {
     padding-left: 20px;
     height: unset;
     line-height: unset;
   }
+
+  [type="checkbox"].incomplete {
+    &:checked {
+      + label:before {
+        border-right: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+      }
+    }
+  }
+
 
   .browser-as-circles {
     .node {
@@ -1730,4 +1740,6 @@ $marvin-size-fullscreen: 91vh;
   }
 
 }
+
+
 

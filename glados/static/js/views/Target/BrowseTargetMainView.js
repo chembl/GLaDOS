@@ -24,7 +24,8 @@ BrowseTargetMainView = Backbone.View.extend({
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
-      _results.push(node.set('selected', true));
+      node.set('selected', true);
+      _results.push(node.set('incomplete', false));
     }
     return _results;
   },
@@ -34,7 +35,8 @@ BrowseTargetMainView = Backbone.View.extend({
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
-      _results.push(node.set('selected', false));
+      node.set('selected', false);
+      _results.push(node.set('incomplete', false));
     }
     return _results;
   }
