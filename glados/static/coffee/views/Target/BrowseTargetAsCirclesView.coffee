@@ -55,7 +55,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json "static/data/sample_target_tree.json", (error, root) ->
+    d3.json "static/data/taxonomy_target_tree.json", (error, root) ->
       if error
         console.log(error)
 
