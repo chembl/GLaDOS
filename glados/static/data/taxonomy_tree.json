@@ -1,0 +1,1313 @@
+{
+  "name": "root",
+  "children": [
+    {
+      "id": "1000004",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000017",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000088",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Primates",
+              "size": 4687
+            },
+            {
+              "id": "1000089",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Rodentia",
+              "size": 2394
+            },
+            {
+              "id": "1000169",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Cetartiodactyla",
+              "size": 374
+            },
+            {
+              "id": "1000106",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Lagomorpha",
+              "size": 98
+            },
+            {
+              "id": "1000095",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Carnivora",
+              "size": 58
+            },
+            {
+              "id": "1000166",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Perissodactyla",
+              "size": 7
+            },
+            {
+              "id": "1000053",
+              "parent_id": "1000017",
+              "children": [],
+              "name": "Other",
+              "size": 4
+            }
+          ],
+          "name": "Mammalia",
+          "size": 7622
+        },
+        {
+          "id": "1000037",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000161",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Eudicotyledons",
+              "size": 327
+            },
+            {
+              "id": "1000164",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Monocotyledons",
+              "size": 134
+            },
+            {
+              "id": "1000071",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Other",
+              "size": 66
+            },
+            {
+              "id": "1000123",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Chlorophyta",
+              "size": 10
+            },
+            {
+              "id": "1000133",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Magnoliidae",
+              "size": 5
+            },
+            {
+              "id": "1000110",
+              "parent_id": "1000037",
+              "children": [],
+              "name": "Marchantia",
+              "size": 1
+            }
+          ],
+          "name": "Viridiplantae",
+          "size": 543
+        },
+        {
+          "id": "1000028",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000132",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Lepidoptera",
+              "size": 80
+            },
+            {
+              "id": "1000064",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Other",
+              "size": 73
+            },
+            {
+              "id": "1000079",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Diptera",
+              "size": 56
+            },
+            {
+              "id": "1000098",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Hemiptera",
+              "size": 55
+            },
+            {
+              "id": "1000104",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Coleoptera",
+              "size": 43
+            },
+            {
+              "id": "1000094",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Arachnida",
+              "size": 20
+            },
+            {
+              "id": "1000131",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Hymenoptera",
+              "size": 14
+            },
+            {
+              "id": "1000112",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Orthoptera",
+              "size": 7
+            },
+            {
+              "id": "1000153",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Thysanoptera",
+              "size": 7
+            },
+            {
+              "id": "1000096",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Crustacea",
+              "size": 6
+            },
+            {
+              "id": "1000127",
+              "parent_id": "1000028",
+              "children": [],
+              "name": "Dictyoptera",
+              "size": 5
+            }
+          ],
+          "name": "Arthropoda",
+          "size": 366
+        },
+        {
+          "id": "1000030",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000113",
+              "parent_id": "1000030",
+              "children": [],
+              "name": "Plasmodium",
+              "size": 109
+            },
+            {
+              "id": "1000118",
+              "parent_id": "1000030",
+              "children": [],
+              "name": "Toxoplasma",
+              "size": 11
+            },
+            {
+              "id": "1000080",
+              "parent_id": "1000030",
+              "children": [],
+              "name": "Eimeria",
+              "size": 9
+            },
+            {
+              "id": "1000171",
+              "parent_id": "1000030",
+              "children": [],
+              "name": "Cryptosporidium",
+              "size": 9
+            },
+            {
+              "id": "1000065",
+              "parent_id": "1000030",
+              "children": [],
+              "name": "Other",
+              "size": 4
+            }
+          ],
+          "name": "Apicomplexa",
+          "size": 142
+        },
+        {
+          "id": "1000039",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000141",
+              "parent_id": "1000039",
+              "children": [],
+              "name": "Trypanosoma",
+              "size": 52
+            },
+            {
+              "id": "1000108",
+              "parent_id": "1000039",
+              "children": [],
+              "name": "Leishmania",
+              "size": 49
+            },
+            {
+              "id": "1000073",
+              "parent_id": "1000039",
+              "children": [],
+              "name": "Other",
+              "size": 5
+            }
+          ],
+          "name": "Kinetoplastida",
+          "size": 106
+        },
+        {
+          "id": "1000019",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000055",
+              "parent_id": "1000019",
+              "children": [],
+              "name": "Other",
+              "size": 35
+            },
+            {
+              "id": "1000116",
+              "parent_id": "1000019",
+              "children": [],
+              "name": "Rhabditida",
+              "size": 18
+            },
+            {
+              "id": "1000119",
+              "parent_id": "1000019",
+              "children": [],
+              "name": "Tylenchida",
+              "size": 16
+            },
+            {
+              "id": "1000102",
+              "parent_id": "1000019",
+              "children": [],
+              "name": "Spirurida",
+              "size": 3
+            }
+          ],
+          "name": "Nematoda",
+          "size": 72
+        },
+        {
+          "id": "1000011",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000047",
+              "parent_id": "1000011",
+              "children": [],
+              "name": "Other",
+              "size": 58
+            }
+          ],
+          "name": "Other",
+          "size": 58
+        },
+        {
+          "id": "1000006",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000042",
+              "parent_id": "1000006",
+              "children": [],
+              "name": "Other",
+              "size": 56
+            }
+          ],
+          "name": "Aves",
+          "size": 56
+        },
+        {
+          "id": "1000027",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000101",
+              "parent_id": "1000027",
+              "children": [],
+              "name": "Otomorpha",
+              "size": 13
+            },
+            {
+              "id": "1000063",
+              "parent_id": "1000027",
+              "children": [],
+              "name": "Other",
+              "size": 11
+            },
+            {
+              "id": "1000179",
+              "parent_id": "1000027",
+              "children": [],
+              "name": "Euteleosteomorpha",
+              "size": 3
+            }
+          ],
+          "name": "Teleostei",
+          "size": 27
+        },
+        {
+          "id": "1000026",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000062",
+              "parent_id": "1000026",
+              "children": [],
+              "name": "Other",
+              "size": 26
+            }
+          ],
+          "name": "Oomycetes",
+          "size": 26
+        },
+        {
+          "id": "1000032",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000067",
+              "parent_id": "1000032",
+              "children": [],
+              "name": "Other",
+              "size": 24
+            }
+          ],
+          "name": "Lepidosauria",
+          "size": 24
+        },
+        {
+          "id": "1000016",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000052",
+              "parent_id": "1000016",
+              "children": [],
+              "name": "Other",
+              "size": 21
+            }
+          ],
+          "name": "Amphibia",
+          "size": 21
+        },
+        {
+          "id": "1000018",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000054",
+              "parent_id": "1000018",
+              "children": [],
+              "name": "Other",
+              "size": 21
+            }
+          ],
+          "name": "Mollusca",
+          "size": 21
+        },
+        {
+          "id": "1000034",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000068",
+              "parent_id": "1000034",
+              "children": [],
+              "name": "Other",
+              "size": 16
+            }
+          ],
+          "name": "Echinodermata",
+          "size": 16
+        },
+        {
+          "id": "1000040",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000139",
+              "parent_id": "1000040",
+              "children": [],
+              "name": "Schistosoma",
+              "size": 7
+            },
+            {
+              "id": "1000074",
+              "parent_id": "1000040",
+              "children": [],
+              "name": "Other",
+              "size": 5
+            },
+            {
+              "id": "1000076",
+              "parent_id": "1000040",
+              "children": [],
+              "name": "Taenia",
+              "size": 3
+            }
+          ],
+          "name": "Platyhelminthes",
+          "size": 15
+        },
+        {
+          "id": "1000024",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000060",
+              "parent_id": "1000024",
+              "children": [],
+              "name": "Other",
+              "size": 3
+            }
+          ],
+          "name": "Fornicata",
+          "size": 3
+        },
+        {
+          "id": "1000022",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000058",
+              "parent_id": "1000022",
+              "children": [],
+              "name": "Other",
+              "size": 2
+            }
+          ],
+          "name": "Amoebozoa",
+          "size": 2
+        },
+        {
+          "id": "1000023",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000059",
+              "parent_id": "1000023",
+              "children": [],
+              "name": "Other",
+              "size": 2
+            }
+          ],
+          "name": "Annelida",
+          "size": 2
+        },
+        {
+          "id": "1000020",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000056",
+              "parent_id": "1000020",
+              "children": [],
+              "name": "Other",
+              "size": 1
+            }
+          ],
+          "name": "Rhizaria",
+          "size": 1
+        },
+        {
+          "id": "1000021",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000057",
+              "parent_id": "1000021",
+              "children": [],
+              "name": "Other",
+              "size": 1
+            }
+          ],
+          "name": "Alveolata",
+          "size": 1
+        },
+        {
+          "id": "1000031",
+          "parent_id": "1000004",
+          "children": [
+            {
+              "id": "1000066",
+              "parent_id": "1000031",
+              "children": [],
+              "name": "Other",
+              "size": 1
+            }
+          ],
+          "name": "Parabasalia",
+          "size": 1
+        }
+      ],
+      "name": "Eukaryotes",
+      "size": 9125
+    },
+    {
+      "id": "1000003",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000036",
+          "parent_id": "1000003",
+          "children": [
+            {
+              "id": "1000158",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Mycobacterium",
+              "size": 191
+            },
+            {
+              "id": "1000159",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Streptococcus",
+              "size": 179
+            },
+            {
+              "id": "1000168",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Staphylococcus",
+              "size": 155
+            },
+            {
+              "id": "1000070",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Other",
+              "size": 96
+            },
+            {
+              "id": "1000084",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Bacillus",
+              "size": 76
+            },
+            {
+              "id": "1000126",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Clostridium",
+              "size": 40
+            },
+            {
+              "id": "1000152",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Streptomyces",
+              "size": 28
+            },
+            {
+              "id": "1000148",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Enterococcus",
+              "size": 23
+            },
+            {
+              "id": "1000170",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Corynebacterium",
+              "size": 17
+            },
+            {
+              "id": "1000156",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Lactobacillus",
+              "size": 10
+            },
+            {
+              "id": "1000134",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Micrococcus",
+              "size": 8
+            },
+            {
+              "id": "1000129",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Geobacillus",
+              "size": 7
+            },
+            {
+              "id": "1000120",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Actinomyces",
+              "size": 5
+            },
+            {
+              "id": "1000182",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Peptostreptococcus",
+              "size": 4
+            },
+            {
+              "id": "1000138",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Rhodococcus",
+              "size": 2
+            },
+            {
+              "id": "1000086",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Listeria",
+              "size": 2
+            },
+            {
+              "id": "1000125",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Clavibacter",
+              "size": 1
+            },
+            {
+              "id": "1000143",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Arthrobacter",
+              "size": 1
+            },
+            {
+              "id": "1000087",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Nocardia",
+              "size": 1
+            },
+            {
+              "id": "1000163",
+              "parent_id": "1000036",
+              "children": [],
+              "name": "Lysinibacillus",
+              "size": 1
+            }
+          ],
+          "name": "Gram-Positive",
+          "size": 847
+        },
+        {
+          "id": "1000035",
+          "parent_id": "1000003",
+          "children": [
+            {
+              "id": "1000128",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Escherichia",
+              "size": 232
+            },
+            {
+              "id": "1000137",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Pseudomonas",
+              "size": 135
+            },
+            {
+              "id": "1000069",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Other",
+              "size": 130
+            },
+            {
+              "id": "1000077",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Vibrio",
+              "size": 25
+            },
+            {
+              "id": "1000105",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Klebsiella",
+              "size": 24
+            },
+            {
+              "id": "1000117",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Salmonella",
+              "size": 22
+            },
+            {
+              "id": "1000154",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Acinetobacter",
+              "size": 19
+            },
+            {
+              "id": "1000147",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Enterobacter",
+              "size": 16
+            },
+            {
+              "id": "1000092",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Yersinia",
+              "size": 16
+            },
+            {
+              "id": "1000100",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Neisseria",
+              "size": 11
+            },
+            {
+              "id": "1000130",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Haemophilus",
+              "size": 11
+            },
+            {
+              "id": "1000114",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Prevotella",
+              "size": 10
+            },
+            {
+              "id": "1000122",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Bacteroides",
+              "size": 10
+            },
+            {
+              "id": "1000142",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Xanthomonas",
+              "size": 10
+            },
+            {
+              "id": "1000184",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Alphaproteobacteria",
+              "size": 9
+            },
+            {
+              "id": "1000093",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Aeromonas",
+              "size": 9
+            },
+            {
+              "id": "1000181",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Betaproteobacteria",
+              "size": 8
+            },
+            {
+              "id": "1000090",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Serratia",
+              "size": 8
+            },
+            {
+              "id": "1000149",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Fusobacteria",
+              "size": 7
+            },
+            {
+              "id": "1000136",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Providencia",
+              "size": 7
+            },
+            {
+              "id": "1000083",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Proteus",
+              "size": 7
+            },
+            {
+              "id": "1000091",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Shigella",
+              "size": 6
+            },
+            {
+              "id": "1000124",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Citrobacter",
+              "size": 5
+            },
+            {
+              "id": "1000081",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Erwinia",
+              "size": 5
+            },
+            {
+              "id": "1000173",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Elizabethkingia",
+              "size": 4
+            },
+            {
+              "id": "1000185",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Epsilonproteobacteria",
+              "size": 3
+            },
+            {
+              "id": "1000155",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Cyanobacteria",
+              "size": 3
+            },
+            {
+              "id": "1000082",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Pantoea",
+              "size": 3
+            },
+            {
+              "id": "1000177",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Stenotrophomonas",
+              "size": 3
+            },
+            {
+              "id": "1000111",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Morganella",
+              "size": 2
+            },
+            {
+              "id": "1000107",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Legionella",
+              "size": 2
+            },
+            {
+              "id": "1000099",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Moraxella",
+              "size": 2
+            },
+            {
+              "id": "1000165",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Pectobacterium",
+              "size": 2
+            },
+            {
+              "id": "1000078",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Dickeya",
+              "size": 2
+            },
+            {
+              "id": "1000115",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Raoultella",
+              "size": 1
+            },
+            {
+              "id": "1000150",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Photorhabdus",
+              "size": 1
+            },
+            {
+              "id": "1000121",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Aquificales",
+              "size": 1
+            },
+            {
+              "id": "1000135",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Plesiomonas",
+              "size": 1
+            },
+            {
+              "id": "1000146",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Edwardsiella",
+              "size": 1
+            },
+            {
+              "id": "1000109",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Lysobacter",
+              "size": 1
+            },
+            {
+              "id": "1000145",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Burkholderia",
+              "size": 1
+            },
+            {
+              "id": "1000097",
+              "parent_id": "1000035",
+              "children": [],
+              "name": "Ewingella",
+              "size": 1
+            }
+          ],
+          "name": "Gram-Negative",
+          "size": 776
+        },
+        {
+          "id": "1000010",
+          "parent_id": "1000003",
+          "children": [
+            {
+              "id": "1000046",
+              "parent_id": "1000010",
+              "children": [],
+              "name": "Other",
+              "size": 24
+            }
+          ],
+          "name": "Other",
+          "size": 24
+        }
+      ],
+      "name": "Bacteria",
+      "size": 1647
+    },
+    {
+      "id": "1000000",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000029",
+          "parent_id": "1000000",
+          "children": [
+            {
+              "id": "1000180",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Saccharomycetales",
+              "size": 213
+            },
+            {
+              "id": "1000174",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Sordariomycetes",
+              "size": 132
+            },
+            {
+              "id": "1000162",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Eurotiomycetes",
+              "size": 103
+            },
+            {
+              "id": "1000172",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Dothideomycetes",
+              "size": 84
+            },
+            {
+              "id": "1000157",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Leotiomycetes",
+              "size": 24
+            },
+            {
+              "id": "1000178",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Taphrinomycotina",
+              "size": 7
+            },
+            {
+              "id": "1000186",
+              "parent_id": "1000029",
+              "children": [],
+              "name": "Mitosporic Ascomycota",
+              "size": 2
+            }
+          ],
+          "name": "Ascomycota",
+          "size": 565
+        },
+        {
+          "id": "1000007",
+          "parent_id": "1000000",
+          "children": [
+            {
+              "id": "1000043",
+              "parent_id": "1000007",
+              "children": [],
+              "name": "Other",
+              "size": 57
+            }
+          ],
+          "name": "Other",
+          "size": 57
+        },
+        {
+          "id": "1000033",
+          "parent_id": "1000000",
+          "children": [
+            {
+              "id": "1000160",
+              "parent_id": "1000033",
+              "children": [],
+              "name": "Agaricomycetes",
+              "size": 23
+            },
+            {
+              "id": "1000175",
+              "parent_id": "1000033",
+              "children": [],
+              "name": "Tremellomycetes",
+              "size": 17
+            },
+            {
+              "id": "1000176",
+              "parent_id": "1000033",
+              "children": [],
+              "name": "Pucciniomycotina",
+              "size": 14
+            },
+            {
+              "id": "1000183",
+              "parent_id": "1000033",
+              "children": [],
+              "name": "Ustilaginomycotina",
+              "size": 2
+            }
+          ],
+          "name": "Basidiomycota",
+          "size": 56
+        },
+        {
+          "id": "1000025",
+          "parent_id": "1000000",
+          "children": [
+            {
+              "id": "1000061",
+              "parent_id": "1000025",
+              "children": [],
+              "name": "Other",
+              "size": 9
+            }
+          ],
+          "name": "Mucorales",
+          "size": 9
+        }
+      ],
+      "name": "Fungi",
+      "size": 687
+    },
+    {
+      "id": "1000002",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000015",
+          "parent_id": "1000002",
+          "children": [
+            {
+              "id": "1000051",
+              "parent_id": "1000015",
+              "children": [],
+              "name": "Other",
+              "size": 152
+            },
+            {
+              "id": "1000188",
+              "parent_id": "1000015",
+              "children": [],
+              "name": "ssRNA positive-strand viruses",
+              "size": 33
+            },
+            {
+              "id": "1000187",
+              "parent_id": "1000015",
+              "children": [],
+              "name": "ssRNA negative-strand viruses",
+              "size": 11
+            }
+          ],
+          "name": "ssRNA",
+          "size": 196
+        },
+        {
+          "id": "1000013",
+          "parent_id": "1000002",
+          "children": [
+            {
+              "id": "1000049",
+              "parent_id": "1000013",
+              "children": [],
+              "name": "Other",
+              "size": 118
+            }
+          ],
+          "name": "dsDNA",
+          "size": 118
+        },
+        {
+          "id": "1000041",
+          "parent_id": "1000002",
+          "children": [
+            {
+              "id": "1000075",
+              "parent_id": "1000041",
+              "children": [],
+              "name": "Other",
+              "size": 78
+            }
+          ],
+          "name": "retro-transcribing",
+          "size": 78
+        },
+        {
+          "id": "1000014",
+          "parent_id": "1000002",
+          "children": [
+            {
+              "id": "1000050",
+              "parent_id": "1000014",
+              "children": [],
+              "name": "Other",
+              "size": 7
+            }
+          ],
+          "name": "dsRNA",
+          "size": 7
+        },
+        {
+          "id": "1000009",
+          "parent_id": "1000002",
+          "children": [
+            {
+              "id": "1000045",
+              "parent_id": "1000009",
+              "children": [],
+              "name": "Other",
+              "size": 3
+            }
+          ],
+          "name": "Other",
+          "size": 3
+        }
+      ],
+      "name": "Viruses",
+      "size": 402
+    },
+    {
+      "id": "1000001",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000008",
+          "parent_id": "1000001",
+          "children": [
+            {
+              "id": "1000044",
+              "parent_id": "1000008",
+              "children": [],
+              "name": "Other",
+              "size": 8
+            }
+          ],
+          "name": "Other",
+          "size": 8
+        }
+      ],
+      "name": "Archaea",
+      "size": 8
+    },
+    {
+      "id": "1000005",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1000012",
+          "parent_id": "1000005",
+          "children": [
+            {
+              "id": "1000048",
+              "parent_id": "1000012",
+              "children": [],
+              "name": "Other",
+              "size": 2
+            }
+          ],
+          "name": "Other",
+          "size": 2
+        }
+      ],
+      "name": "Unclassified",
+      "size": 2
+    }
+  ]
+}

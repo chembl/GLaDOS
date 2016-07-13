@@ -41,7 +41,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     });
     elem_selector = '#' + $(this.el).attr('id');
     svg = d3.select(elem_selector).append("svg").attr("width", diameter).attr("height", diameter).append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-    return d3.json("static/data/taxonomy_target_tree.json", function(error, root) {
+    return d3.json("static/data/gene_ontology_tree.json", function(error, root) {
       var circle, focus, node, nodes, text, view, zoom, zoomTo;
       if (error) {
         console.log(error);

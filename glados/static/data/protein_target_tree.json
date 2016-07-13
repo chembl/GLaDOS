@@ -1,0 +1,5639 @@
+{
+  "name": "root",
+  "children": [
+    {
+      "id": "1",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "6",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1100",
+              "parent_id": "6",
+              "children": [
+                {
+                  "id": "1285",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "141",
+                      "parent_id": "1285",
+                      "children": [
+                        {
+                          "id": "219",
+                          "parent_id": "141",
+                          "children": [],
+                          "name": "Tyrosine protein kinase Srm",
+                          "size": 2
+                        },
+                        {
+                          "id": "242",
+                          "parent_id": "141",
+                          "children": [],
+                          "name": "Tyrosine protein kinase SrcA",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Tyrosine protein kinase Src family",
+                      "size": 22
+                    },
+                    {
+                      "id": "160",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase VEGFR family",
+                      "size": 16
+                    },
+                    {
+                      "id": "159",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase PDGFR family",
+                      "size": 15
+                    },
+                    {
+                      "id": "135",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Eph family",
+                      "size": 14
+                    },
+                    {
+                      "id": "152",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase JakA family",
+                      "size": 13
+                    },
+                    {
+                      "id": "153",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase JakB family",
+                      "size": 13
+                    },
+                    {
+                      "id": "150",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase FGFR family",
+                      "size": 12
+                    },
+                    {
+                      "id": "149",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase EGFR family",
+                      "size": 9
+                    },
+                    {
+                      "id": "130",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Abl family",
+                      "size": 7
+                    },
+                    {
+                      "id": "136",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Fak family",
+                      "size": 7
+                    },
+                    {
+                      "id": "151",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase InsR family",
+                      "size": 7
+                    },
+                    {
+                      "id": "143",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Tec family",
+                      "size": 6
+                    },
+                    {
+                      "id": "146",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Trk family",
+                      "size": 5
+                    },
+                    {
+                      "id": "133",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Axl family",
+                      "size": 4
+                    },
+                    {
+                      "id": "134",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Csk family",
+                      "size": 4
+                    },
+                    {
+                      "id": "139",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Met family",
+                      "size": 4
+                    },
+                    {
+                      "id": "144",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Tie family",
+                      "size": 4
+                    },
+                    {
+                      "id": "142",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Syk family",
+                      "size": 3
+                    },
+                    {
+                      "id": "137",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Fer family",
+                      "size": 3
+                    },
+                    {
+                      "id": "132",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Alk family",
+                      "size": 2
+                    },
+                    {
+                      "id": "131",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Ack family",
+                      "size": 2
+                    },
+                    {
+                      "id": "1614",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase DDR family",
+                      "size": 2
+                    },
+                    {
+                      "id": "140",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Ret family",
+                      "size": 1
+                    },
+                    {
+                      "id": "1684",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Musk family",
+                      "size": 1
+                    },
+                    {
+                      "id": "1649",
+                      "parent_id": "1285",
+                      "children": [],
+                      "name": "Tyrosine protein kinase Sev family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "TK protein kinase group",
+                  "size": 157
+                },
+                {
+                  "id": "148",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "237",
+                      "parent_id": "148",
+                      "children": [
+                        {
+                          "id": "323",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDC2 subfamily",
+                          "size": 17
+                        },
+                        {
+                          "id": "325",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDK5 subfamily",
+                          "size": 6
+                        },
+                        {
+                          "id": "326",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDK7 subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "327",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDK8 subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "328",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDK9 subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "429",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase PCTAIRE",
+                          "size": 2
+                        },
+                        {
+                          "id": "430",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase PFTAIRE",
+                          "size": 2
+                        },
+                        {
+                          "id": "431",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase PITSLRE subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "497",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase unclassified CDK subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "324",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase CDK2",
+                          "size": 1
+                        },
+                        {
+                          "id": "388",
+                          "parent_id": "237",
+                          "children": [],
+                          "name": "CMGC protein kinase TAIRE subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "CMGC protein kinase CDK family",
+                      "size": 44
+                    },
+                    {
+                      "id": "249",
+                      "parent_id": "148",
+                      "children": [
+                        {
+                          "id": "332",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase p38 subfamily",
+                          "size": 12
+                        },
+                        {
+                          "id": "330",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase JNK subfamily",
+                          "size": 8
+                        },
+                        {
+                          "id": "329",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase ERK subfamily",
+                          "size": 6
+                        },
+                        {
+                          "id": "391",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase ERK1",
+                          "size": 5
+                        },
+                        {
+                          "id": "392",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase ERK3",
+                          "size": 2
+                        },
+                        {
+                          "id": "331",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase nmo subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "393",
+                          "parent_id": "249",
+                          "children": [],
+                          "name": "CMGC protein kinase ERK5",
+                          "size": 1
+                        }
+                      ],
+                      "name": "CMGC protein kinase MAPK family",
+                      "size": 36
+                    },
+                    {
+                      "id": "1669",
+                      "parent_id": "148",
+                      "children": [
+                        {
+                          "id": "390",
+                          "parent_id": "1669",
+                          "children": [],
+                          "name": "CMGC protein kinase HIPK subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "465",
+                          "parent_id": "1669",
+                          "children": [],
+                          "name": "CMGC protein kinase Dyrk1 subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "466",
+                          "parent_id": "1669",
+                          "children": [],
+                          "name": "CMGC protein kinase Dyrk2 subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "CMGC protein kinase DYRK family",
+                      "size": 9
+                    },
+                    {
+                      "id": "239",
+                      "parent_id": "148",
+                      "children": [],
+                      "name": "CMGC protein kinase GSK family",
+                      "size": 6
+                    },
+                    {
+                      "id": "297",
+                      "parent_id": "148",
+                      "children": [],
+                      "name": "CMGC protein kinase CLK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "248",
+                      "parent_id": "148",
+                      "children": [],
+                      "name": "CMGC protein kinase CDKL family",
+                      "size": 4
+                    },
+                    {
+                      "id": "250",
+                      "parent_id": "148",
+                      "children": [],
+                      "name": "CMGC protein kinase SRPK family",
+                      "size": 3
+                    },
+                    {
+                      "id": "1640",
+                      "parent_id": "148",
+                      "children": [
+                        {
+                          "id": "306",
+                          "parent_id": "1640",
+                          "children": [],
+                          "name": "CMGC protein kinase MAK",
+                          "size": 2
+                        }
+                      ],
+                      "name": "CMGC protein kinase RCK family",
+                      "size": 2
+                    },
+                    {
+                      "id": "211",
+                      "parent_id": "148",
+                      "children": [],
+                      "name": "CMGC protein kinase CK subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "CMGC protein kinase group",
+                  "size": 119
+                },
+                {
+                  "id": "1289",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "206",
+                      "parent_id": "1289",
+                      "children": [
+                        {
+                          "id": "317",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC alpha subfamily",
+                          "size": 15
+                        },
+                        {
+                          "id": "286",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC eta subfamily",
+                          "size": 9
+                        },
+                        {
+                          "id": "318",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC delta subfamily",
+                          "size": 7
+                        },
+                        {
+                          "id": "303",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC iota subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "490",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC unclassified",
+                          "size": 1
+                        },
+                        {
+                          "id": "304",
+                          "parent_id": "206",
+                          "children": [],
+                          "name": "AGC protein kinase PKC theta",
+                          "size": 1
+                        }
+                      ],
+                      "name": "AGC protein kinase PKC family",
+                      "size": 32
+                    },
+                    {
+                      "id": "205",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase PKA family",
+                      "size": 12
+                    },
+                    {
+                      "id": "1648",
+                      "parent_id": "1289",
+                      "children": [
+                        {
+                          "id": "289",
+                          "parent_id": "1648",
+                          "children": [],
+                          "name": "AGC protein kinase RSK subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "288",
+                          "parent_id": "1648",
+                          "children": [],
+                          "name": "AGC protein kinase p70 subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "287",
+                          "parent_id": "1648",
+                          "children": [],
+                          "name": "AGC protein kinase MSK subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "382",
+                          "parent_id": "1648",
+                          "children": [],
+                          "name": "AGC protein kinase RSKp70",
+                          "size": 1
+                        }
+                      ],
+                      "name": "AGC protein kinase RSK family",
+                      "size": 11
+                    },
+                    {
+                      "id": "1668",
+                      "parent_id": "1289",
+                      "children": [
+                        {
+                          "id": "315",
+                          "parent_id": "1668",
+                          "children": [],
+                          "name": "AGC protein kinase ROCK subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "301",
+                          "parent_id": "1668",
+                          "children": [],
+                          "name": "AGC protein kinase GEK subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "314",
+                          "parent_id": "1668",
+                          "children": [],
+                          "name": "AGC protein kinase CRIK subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "AGC protein kinase DMPK family",
+                      "size": 10
+                    },
+                    {
+                      "id": "203",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase AKT family",
+                      "size": 8
+                    },
+                    {
+                      "id": "1618",
+                      "parent_id": "1289",
+                      "children": [
+                        {
+                          "id": "283",
+                          "parent_id": "1618",
+                          "children": [],
+                          "name": "AGC protein kinase GRK subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "302",
+                          "parent_id": "1618",
+                          "children": [],
+                          "name": "AGC protein kinase BARK subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "AGC protein kinase GRK family",
+                      "size": 7
+                    },
+                    {
+                      "id": "1682",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase MAST family",
+                      "size": 5
+                    },
+                    {
+                      "id": "204",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase NDR family",
+                      "size": 4
+                    },
+                    {
+                      "id": "207",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase PKG family",
+                      "size": 4
+                    },
+                    {
+                      "id": "233",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase YANK family",
+                      "size": 3
+                    },
+                    {
+                      "id": "209",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase SGK family",
+                      "size": 3
+                    },
+                    {
+                      "id": "208",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase PKN family",
+                      "size": 2
+                    },
+                    {
+                      "id": "232",
+                      "parent_id": "1289",
+                      "children": [],
+                      "name": "AGC protein kinase PDK1 subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "AGC protein kinase group",
+                  "size": 102
+                },
+                {
+                  "id": "1339",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "1702",
+                      "parent_id": "1339",
+                      "children": [
+                        {
+                          "id": "409",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase AMPK subfamily",
+                          "size": 14
+                        },
+                        {
+                          "id": "412",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase MARK subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "384",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase QIK subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "415",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase NuaK subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "410",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase BRSK subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "414",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase NIM1 subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "416",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase PASK subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "411",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase CHK1 subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "413",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase MELK subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "383",
+                          "parent_id": "1702",
+                          "children": [],
+                          "name": "CAMK protein kinase LKB subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "CAMK protein kinase CAMK1 family",
+                      "size": 37
+                    },
+                    {
+                      "id": "269",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase CAMK2 family",
+                      "size": 13
+                    },
+                    {
+                      "id": "1690",
+                      "parent_id": "1339",
+                      "children": [
+                        {
+                          "id": "386",
+                          "parent_id": "1690",
+                          "children": [],
+                          "name": "CAMK protein kinase RSKb subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "385",
+                          "parent_id": "1690",
+                          "children": [],
+                          "name": "CAMK protein kinase MSKb subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "CAMK protein kinase RSKb family",
+                      "size": 7
+                    },
+                    {
+                      "id": "1713",
+                      "parent_id": "1339",
+                      "children": [
+                        {
+                          "id": "472",
+                          "parent_id": "1713",
+                          "children": [],
+                          "name": "CAMK protein kinase MAPKAPK subfamily",
+                          "size": 5
+                        },
+                        {
+                          "id": "428",
+                          "parent_id": "1713",
+                          "children": [],
+                          "name": "CAMK protein kinase MNK subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "CAMK protein kinase MAPKAPK family",
+                      "size": 7
+                    },
+                    {
+                      "id": "236",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase PKD family",
+                      "size": 5
+                    },
+                    {
+                      "id": "245",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase DAPK family",
+                      "size": 5
+                    },
+                    {
+                      "id": "246",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase MLCK family",
+                      "size": 5
+                    },
+                    {
+                      "id": "235",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase PIM family",
+                      "size": 4
+                    },
+                    {
+                      "id": "234",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase PHk family",
+                      "size": 3
+                    },
+                    {
+                      "id": "1710",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase DCAMK1 family",
+                      "size": 3
+                    },
+                    {
+                      "id": "247",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase TSSK family",
+                      "size": 2
+                    },
+                    {
+                      "id": "270",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase RAD53 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "1715",
+                      "parent_id": "1339",
+                      "children": [],
+                      "name": "CAMK protein kinase unique family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "CAMK protein kinase group",
+                  "size": 93
+                },
+                {
+                  "id": "158",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "256",
+                      "parent_id": "158",
+                      "children": [
+                        {
+                          "id": "395",
+                          "parent_id": "256",
+                          "children": [],
+                          "name": "Other protein kinase Nek1",
+                          "size": 1
+                        },
+                        {
+                          "id": "417",
+                          "parent_id": "256",
+                          "children": [],
+                          "name": "Other protein kinase Nek11",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Other protein kinase NEK family",
+                      "size": 11
+                    },
+                    {
+                      "id": "252",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase CK2 family",
+                      "size": 8
+                    },
+                    {
+                      "id": "258",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase ULK family",
+                      "size": 5
+                    },
+                    {
+                      "id": "251",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase AUR family",
+                      "size": 5
+                    },
+                    {
+                      "id": "257",
+                      "parent_id": "158",
+                      "children": [
+                        {
+                          "id": "397",
+                          "parent_id": "257",
+                          "children": [],
+                          "name": "Other protein kinase PLK2",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Other protein kinase PLK family",
+                      "size": 5
+                    },
+                    {
+                      "id": "1629",
+                      "parent_id": "158",
+                      "children": [
+                        {
+                          "id": "335",
+                          "parent_id": "1629",
+                          "children": [],
+                          "name": "Other protein kinase PEK subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "334",
+                          "parent_id": "1629",
+                          "children": [],
+                          "name": "Other protein kinase HRI",
+                          "size": 1
+                        },
+                        {
+                          "id": "336",
+                          "parent_id": "1629",
+                          "children": [],
+                          "name": "Other protein kinase PKR",
+                          "size": 1
+                        },
+                        {
+                          "id": "396",
+                          "parent_id": "1629",
+                          "children": [],
+                          "name": "Other protein kinase GCN2 subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Other protein kinase PEK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "253",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase IKK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "255",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase NAK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "259",
+                      "parent_id": "158",
+                      "children": [
+                        {
+                          "id": "398",
+                          "parent_id": "259",
+                          "children": [],
+                          "name": "Other protein kinase WEE1",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Other protein kinase WEE family",
+                      "size": 3
+                    },
+                    {
+                      "id": "260",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase Wnk family",
+                      "size": 3
+                    },
+                    {
+                      "id": "271",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase CDC7 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "272",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase NKF1 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "1657",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase TLK family",
+                      "size": 2
+                    },
+                    {
+                      "id": "1701",
+                      "parent_id": "158",
+                      "children": [
+                        {
+                          "id": "432",
+                          "parent_id": "1701",
+                          "children": [],
+                          "name": "Other protein kinase Meta subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "Other protein kinase CAMKK family",
+                      "size": 2
+                    },
+                    {
+                      "id": "292",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase Bud32 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "293",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase Haspin family",
+                      "size": 1
+                    },
+                    {
+                      "id": "273",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase TOPK family",
+                      "size": 1
+                    },
+                    {
+                      "id": "440",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase unique family",
+                      "size": 1
+                    },
+                    {
+                      "id": "1686",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase NKF4 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "254",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase MOS family",
+                      "size": 1
+                    },
+                    {
+                      "id": "308",
+                      "parent_id": "158",
+                      "children": [],
+                      "name": "Other protein kinase TTK family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Other protein kinase group",
+                  "size": 71
+                },
+                {
+                  "id": "1331",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "262",
+                      "parent_id": "1331",
+                      "children": [
+                        {
+                          "id": "341",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase KHS subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "345",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase TAO subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "346",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase YSK subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "342",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase MSN subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "343",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase MST subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "402",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase PAKB subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "401",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase PAKA subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "344",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase SLK subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "400",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase FRAY subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "420",
+                          "parent_id": "262",
+                          "children": [],
+                          "name": "STE protein kinase NinaC subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "STE protein kinase STE20 family",
+                      "size": 29
+                    },
+                    {
+                      "id": "298",
+                      "parent_id": "1331",
+                      "children": [],
+                      "name": "STE protein kinase STE7 family",
+                      "size": 10
+                    },
+                    {
+                      "id": "261",
+                      "parent_id": "1331",
+                      "children": [
+                        {
+                          "id": "340",
+                          "parent_id": "261",
+                          "children": [],
+                          "name": "STE protein kinase ASK",
+                          "size": 2
+                        },
+                        {
+                          "id": "419",
+                          "parent_id": "261",
+                          "children": [],
+                          "name": "STE protein kinase MEKK2",
+                          "size": 2
+                        }
+                      ],
+                      "name": "STE protein kinase STE11 family",
+                      "size": 9
+                    },
+                    {
+                      "id": "1714",
+                      "parent_id": "1331",
+                      "children": [],
+                      "name": "STE protein kinase unique family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "STE protein kinase group",
+                  "size": 49
+                },
+                {
+                  "id": "1334",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "1693",
+                      "parent_id": "1334",
+                      "children": [
+                        {
+                          "id": "404",
+                          "parent_id": "1693",
+                          "children": [],
+                          "name": "TKL protein kinase STKR Type 1 subfamily",
+                          "size": 7
+                        },
+                        {
+                          "id": "405",
+                          "parent_id": "1693",
+                          "children": [],
+                          "name": "TKL protein kinase STKR Type 2 subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "403",
+                          "parent_id": "1693",
+                          "children": [],
+                          "name": "TKL protein kinase STKR1",
+                          "size": 2
+                        }
+                      ],
+                      "name": "TKL protein kinase STKR family",
+                      "size": 13
+                    },
+                    {
+                      "id": "1623",
+                      "parent_id": "1334",
+                      "children": [
+                        {
+                          "id": "421",
+                          "parent_id": "1623",
+                          "children": [],
+                          "name": "TKL protein kinase MLK subfamily",
+                          "size": 4
+                        },
+                        {
+                          "id": "307",
+                          "parent_id": "1623",
+                          "children": [],
+                          "name": "TKL protein kinase TAK1 subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "294",
+                          "parent_id": "1623",
+                          "children": [],
+                          "name": "TKL protein kinase ILK subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "349",
+                          "parent_id": "1623",
+                          "children": [],
+                          "name": "TKL protein kinase HH498 subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "295",
+                          "parent_id": "1623",
+                          "children": [],
+                          "name": "TKL protein kinase LZK subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "TKL protein kinase MLK family",
+                      "size": 9
+                    },
+                    {
+                      "id": "241",
+                      "parent_id": "1334",
+                      "children": [],
+                      "name": "TKL protein kinase RIPK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "1638",
+                      "parent_id": "1334",
+                      "children": [],
+                      "name": "TKL protein kinase RAF family",
+                      "size": 4
+                    },
+                    {
+                      "id": "1678",
+                      "parent_id": "1334",
+                      "children": [
+                        {
+                          "id": "348",
+                          "parent_id": "1678",
+                          "children": [],
+                          "name": "TKL protein kinase LIMK subfamily",
+                          "size": 2
+                        },
+                        {
+                          "id": "441",
+                          "parent_id": "1678",
+                          "children": [],
+                          "name": "TKL protein kinase TESK subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "TKL protein kinase LISK family",
+                      "size": 3
+                    },
+                    {
+                      "id": "1674",
+                      "parent_id": "1334",
+                      "children": [],
+                      "name": "TKL protein kinase IRAK family",
+                      "size": 3
+                    },
+                    {
+                      "id": "240",
+                      "parent_id": "1334",
+                      "children": [],
+                      "name": "TKL protein kinase LRRK family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "TKL protein kinase group",
+                  "size": 37
+                },
+                {
+                  "id": "1301",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "210",
+                      "parent_id": "1301",
+                      "children": [
+                        {
+                          "id": "322",
+                          "parent_id": "210",
+                          "children": [],
+                          "name": "CK1 protein kinase CK1-g",
+                          "size": 1
+                        },
+                        {
+                          "id": "321",
+                          "parent_id": "210",
+                          "children": [],
+                          "name": "CK1 protein kinase CK1-a",
+                          "size": 1
+                        }
+                      ],
+                      "name": "CK1 protein kinase CK1 family",
+                      "size": 21
+                    }
+                  ],
+                  "name": "CK1 protein kinase group",
+                  "size": 21
+                },
+                {
+                  "id": "1452",
+                  "parent_id": "1100",
+                  "children": [
+                    {
+                      "id": "119",
+                      "parent_id": "1452",
+                      "children": [],
+                      "name": "Atypical protein kinase PDHK subfamily",
+                      "size": 10
+                    },
+                    {
+                      "id": "305",
+                      "parent_id": "1452",
+                      "children": [
+                        {
+                          "id": "450",
+                          "parent_id": "305",
+                          "children": [],
+                          "name": "Atypical protein kinase FRAP subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Atypical protein kinase PIKK family",
+                      "size": 4
+                    },
+                    {
+                      "id": "1647",
+                      "parent_id": "1452",
+                      "children": [
+                        {
+                          "id": "438",
+                          "parent_id": "1647",
+                          "children": [],
+                          "name": "Atypical protein kinase RIO2 subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "439",
+                          "parent_id": "1647",
+                          "children": [],
+                          "name": "Atypical protein kinase RIO3 subfamily",
+                          "size": 1
+                        },
+                        {
+                          "id": "437",
+                          "parent_id": "1647",
+                          "children": [],
+                          "name": "Atypical protein kinase RIO1 subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Atypical protein kinase RIO family",
+                      "size": 3
+                    },
+                    {
+                      "id": "291",
+                      "parent_id": "1452",
+                      "children": [],
+                      "name": "Atypical protein kinase BCR family",
+                      "size": 2
+                    },
+                    {
+                      "id": "1664",
+                      "parent_id": "1452",
+                      "children": [
+                        {
+                          "id": "471",
+                          "parent_id": "1664",
+                          "children": [],
+                          "name": "Atypical protein kinase ABC1-A subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Atypical protein kinase ABC1 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "320",
+                      "parent_id": "1452",
+                      "children": [],
+                      "name": "Atypical protein kinase alpha family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Atypical protein kinase group",
+                  "size": 21
+                }
+              ],
+              "name": "Protein Kinase",
+              "size": 664
+            },
+            {
+              "id": "129",
+              "parent_id": "6",
+              "children": [],
+              "name": "Protein kinase regulatory subunit",
+              "size": 35
+            }
+          ],
+          "name": "Kinase",
+          "size": 686
+        },
+        {
+          "id": "1028",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1079",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1136",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "38",
+                      "parent_id": "1136",
+                      "children": [],
+                      "name": "Serine protease S1A subfamily",
+                      "size": 102
+                    },
+                    {
+                      "id": "41",
+                      "parent_id": "1136",
+                      "children": [
+                        {
+                          "id": "93",
+                          "parent_id": "41",
+                          "children": [],
+                          "name": "Serine protease S29 regulatory subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "Serine protease S29 family",
+                      "size": 4
+                    },
+                    {
+                      "id": "14",
+                      "parent_id": "1136",
+                      "children": [],
+                      "name": "Serine protease S6 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "40",
+                      "parent_id": "1136",
+                      "children": [],
+                      "name": "Serine protease S1B subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Serine protease PA clan",
+                  "size": 108
+                },
+                {
+                  "id": "1120",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "22",
+                      "parent_id": "1120",
+                      "children": [],
+                      "name": "Serine protease S9B subfamily",
+                      "size": 11
+                    },
+                    {
+                      "id": "21",
+                      "parent_id": "1120",
+                      "children": [],
+                      "name": "Serine protease S9A subfamily",
+                      "size": 6
+                    },
+                    {
+                      "id": "20",
+                      "parent_id": "1120",
+                      "children": [],
+                      "name": "Serine protease S33 family",
+                      "size": 4
+                    },
+                    {
+                      "id": "19",
+                      "parent_id": "1120",
+                      "children": [],
+                      "name": "Serine protease S28 family",
+                      "size": 4
+                    },
+                    {
+                      "id": "18",
+                      "parent_id": "1120",
+                      "children": [],
+                      "name": "Serine protease S10 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Serine protease SC clan",
+                  "size": 25
+                },
+                {
+                  "id": "1119",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "15",
+                      "parent_id": "1119",
+                      "children": [],
+                      "name": "Serine protease S8A subfamily",
+                      "size": 8
+                    },
+                    {
+                      "id": "16",
+                      "parent_id": "1119",
+                      "children": [],
+                      "name": "Serine protease S8B subfamily",
+                      "size": 8
+                    }
+                  ],
+                  "name": "Serine protease SB clan",
+                  "size": 16
+                },
+                {
+                  "id": "90",
+                  "parent_id": "1079",
+                  "children": [],
+                  "name": "Serine protease unclassified",
+                  "size": 13
+                },
+                {
+                  "id": "1121",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "25",
+                      "parent_id": "1121",
+                      "children": [],
+                      "name": "Serine protease S13 family",
+                      "size": 7
+                    },
+                    {
+                      "id": "23",
+                      "parent_id": "1121",
+                      "children": [],
+                      "name": "Serine protease S11 family",
+                      "size": 5
+                    },
+                    {
+                      "id": "24",
+                      "parent_id": "1121",
+                      "children": [],
+                      "name": "Serine protease S12 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Serine protease SE clan",
+                  "size": 12
+                },
+                {
+                  "id": "1123",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "27",
+                      "parent_id": "1123",
+                      "children": [],
+                      "name": "Serine protease S21 family",
+                      "size": 5
+                    }
+                  ],
+                  "name": "Serine protease SH clan",
+                  "size": 5
+                },
+                {
+                  "id": "1122",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "43",
+                      "parent_id": "1122",
+                      "children": [],
+                      "name": "Serine protease S26A subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Serine protease SF clan",
+                  "size": 1
+                },
+                {
+                  "id": "1124",
+                  "parent_id": "1079",
+                  "children": [
+                    {
+                      "id": "44",
+                      "parent_id": "1124",
+                      "children": [],
+                      "name": "Serine protease S60 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Serine protease SR clan",
+                  "size": 1
+                }
+              ],
+              "name": "Serine protease",
+              "size": 187
+            },
+            {
+              "id": "1081",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1130",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "31",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M1 family",
+                      "size": 19
+                    },
+                    {
+                      "id": "55",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M13 family",
+                      "size": 10
+                    },
+                    {
+                      "id": "33",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M2 family",
+                      "size": 8
+                    },
+                    {
+                      "id": "34",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M4 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "29",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M49 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "60",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M34 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "57",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M27 family",
+                      "size": 2
+                    },
+                    {
+                      "id": "61",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M9B subfamily",
+                      "size": 1
+                    },
+                    {
+                      "id": "81",
+                      "parent_id": "1130",
+                      "children": [],
+                      "name": "Metallo protease M48A subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Metallo protease MAE clan",
+                  "size": 47
+                },
+                {
+                  "id": "1131",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "82",
+                      "parent_id": "1131",
+                      "children": [],
+                      "name": "Metallo protease M10A subfamily",
+                      "size": 31
+                    },
+                    {
+                      "id": "84",
+                      "parent_id": "1131",
+                      "children": [],
+                      "name": "Metallo protease M12B subfamily",
+                      "size": 14
+                    },
+                    {
+                      "id": "83",
+                      "parent_id": "1131",
+                      "children": [],
+                      "name": "Metallo protease M12A subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Metallo protease MAM clan",
+                  "size": 46
+                },
+                {
+                  "id": "1114",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "62",
+                      "parent_id": "1114",
+                      "children": [],
+                      "name": "Metallo protease M14A subfamily",
+                      "size": 11
+                    },
+                    {
+                      "id": "63",
+                      "parent_id": "1114",
+                      "children": [
+                        {
+                          "id": "116",
+                          "parent_id": "63",
+                          "children": [],
+                          "name": "Metallo protease M14B regulatory subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Metallo protease M14B subfamily",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Metallo protease MC clan",
+                  "size": 14
+                },
+                {
+                  "id": "1116",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "65",
+                      "parent_id": "1116",
+                      "children": [],
+                      "name": "Metallo protease M24A subfamily",
+                      "size": 6
+                    },
+                    {
+                      "id": "66",
+                      "parent_id": "1116",
+                      "children": [],
+                      "name": "Metallo protease M24B subfamily",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Metallo protease MG clan",
+                  "size": 10
+                },
+                {
+                  "id": "1117",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "59",
+                      "parent_id": "1117",
+                      "children": [
+                        {
+                          "id": "69",
+                          "parent_id": "59",
+                          "children": [],
+                          "name": "Metallo protease M28B subfamily",
+                          "size": 3
+                        },
+                        {
+                          "id": "68",
+                          "parent_id": "59",
+                          "children": [],
+                          "name": "Metallo protease M28A subfamily",
+                          "size": 1
+                        }
+                      ],
+                      "name": "Metallo protease M28 family",
+                      "size": 5
+                    },
+                    {
+                      "id": "36",
+                      "parent_id": "1117",
+                      "children": [],
+                      "name": "Metallo protease M18 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "67",
+                      "parent_id": "1117",
+                      "children": [],
+                      "name": "Metallo protease M20A subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Metallo protease MH clan",
+                  "size": 7
+                },
+                {
+                  "id": "1115",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "35",
+                      "parent_id": "1115",
+                      "children": [],
+                      "name": "Metallo protease M17 family",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Metallo protease MF clan",
+                  "size": 2
+                },
+                {
+                  "id": "1118",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "37",
+                      "parent_id": "1118",
+                      "children": [],
+                      "name": "Metallo protease M19 family",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Metallo protease MJ clan",
+                  "size": 2
+                },
+                {
+                  "id": "1113",
+                  "parent_id": "1081",
+                  "children": [
+                    {
+                      "id": "30",
+                      "parent_id": "1113",
+                      "children": [],
+                      "name": "Metallo protease M79 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Metallo protease unclassified clan",
+                  "size": 1
+                }
+              ],
+              "name": "Metallo protease",
+              "size": 129
+            },
+            {
+              "id": "1087",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1110",
+                  "parent_id": "1087",
+                  "children": [
+                    {
+                      "id": "50",
+                      "parent_id": "1110",
+                      "children": [],
+                      "name": "Cysteine protease C1A family",
+                      "size": 38
+                    },
+                    {
+                      "id": "28",
+                      "parent_id": "1110",
+                      "children": [
+                        {
+                          "id": "92",
+                          "parent_id": "28",
+                          "children": [],
+                          "name": "Cysteine protease C2 regulatory subfamily",
+                          "size": 4
+                        }
+                      ],
+                      "name": "Cysteine protease C2 family",
+                      "size": 14
+                    },
+                    {
+                      "id": "74",
+                      "parent_id": "1110",
+                      "children": [],
+                      "name": "Cysteine protease C19 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "73",
+                      "parent_id": "1110",
+                      "children": [],
+                      "name": "Cysteine protease C12 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "51",
+                      "parent_id": "1110",
+                      "children": [],
+                      "name": "Cysteine protease C2A subfamily",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cysteine protease CA clan",
+                  "size": 55
+                },
+                {
+                  "id": "1111",
+                  "parent_id": "1087",
+                  "children": [
+                    {
+                      "id": "53",
+                      "parent_id": "1111",
+                      "children": [
+                        {
+                          "id": "77",
+                          "parent_id": "53",
+                          "children": [],
+                          "name": "Cysteine protease C14A subfamily",
+                          "size": 4
+                        }
+                      ],
+                      "name": "Cysteine protease C14 family",
+                      "size": 15
+                    },
+                    {
+                      "id": "76",
+                      "parent_id": "1111",
+                      "children": [],
+                      "name": "Cysteine protease C11 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "54",
+                      "parent_id": "1111",
+                      "children": [],
+                      "name": "Cysteine protease C25 family",
+                      "size": 1
+                    },
+                    {
+                      "id": "52",
+                      "parent_id": "1111",
+                      "children": [],
+                      "name": "Cysteine protease C13 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cysteine protease CD clan",
+                  "size": 18
+                },
+                {
+                  "id": "1135",
+                  "parent_id": "1087",
+                  "children": [
+                    {
+                      "id": "78",
+                      "parent_id": "1135",
+                      "children": [],
+                      "name": "Cysteine protease C3A subfamily",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Cysteine protease PAC clan",
+                  "size": 2
+                },
+                {
+                  "id": "1138",
+                  "parent_id": "1087",
+                  "children": [
+                    {
+                      "id": "79",
+                      "parent_id": "1138",
+                      "children": [],
+                      "name": "Cysteine protease C26 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cysteine protease PCC clan",
+                  "size": 1
+                },
+                {
+                  "id": "1109",
+                  "parent_id": "1087",
+                  "children": [
+                    {
+                      "id": "49",
+                      "parent_id": "1109",
+                      "children": [],
+                      "name": "Cysteine protease C18 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cysteine protease CM clan",
+                  "size": 1
+                }
+              ],
+              "name": "Cysteine protease",
+              "size": 77
+            },
+            {
+              "id": "1085",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1106",
+                  "parent_id": "1085",
+                  "children": [
+                    {
+                      "id": "47",
+                      "parent_id": "1106",
+                      "children": [],
+                      "name": "Aspartic protease A1A subfamily",
+                      "size": 29
+                    },
+                    {
+                      "id": "48",
+                      "parent_id": "1106",
+                      "children": [],
+                      "name": "Aspartic protease A2A subfamily",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Aspartic protease AA clan",
+                  "size": 32
+                },
+                {
+                  "id": "1107",
+                  "parent_id": "1085",
+                  "children": [
+                    {
+                      "id": "71",
+                      "parent_id": "1107",
+                      "children": [
+                        {
+                          "id": "120",
+                          "parent_id": "71",
+                          "children": [],
+                          "name": "Aspartic protease A22A regulatory subfamily",
+                          "size": 2
+                        }
+                      ],
+                      "name": "Aspartic protease A22A subfamily",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Aspartic protease AD clan",
+                  "size": 4
+                },
+                {
+                  "id": "1108",
+                  "parent_id": "1085",
+                  "children": [
+                    {
+                      "id": "72",
+                      "parent_id": "1108",
+                      "children": [],
+                      "name": "Aspartic protease A26 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Aspartic protease AF clan",
+                  "size": 1
+                }
+              ],
+              "name": "Aspartic protease",
+              "size": 37
+            },
+            {
+              "id": "1091",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1137",
+                  "parent_id": "1091",
+                  "children": [
+                    {
+                      "id": "89",
+                      "parent_id": "1137",
+                      "children": [],
+                      "name": "Threonine protease T1A subfamily",
+                      "size": 8
+                    },
+                    {
+                      "id": "87",
+                      "parent_id": "1137",
+                      "children": [],
+                      "name": "Threonine protease T2 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Threonine protease PBT clan",
+                  "size": 9
+                }
+              ],
+              "name": "Threonine protease",
+              "size": 9
+            },
+            {
+              "id": "1084",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1125",
+                  "parent_id": "1084",
+                  "children": [
+                    {
+                      "id": "45",
+                      "parent_id": "1125",
+                      "children": [],
+                      "name": "Protease unclassified U48 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Protease unclassified U family",
+                  "size": 1
+                }
+              ],
+              "name": "Protease unclassified",
+              "size": 1
+            },
+            {
+              "id": "1090",
+              "parent_id": "1028",
+              "children": [
+                {
+                  "id": "1112",
+                  "parent_id": "1090",
+                  "children": [
+                    {
+                      "id": "80",
+                      "parent_id": "1112",
+                      "children": [],
+                      "name": "Protease inhibitor I49 family",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Protease inhibitor unclassified clan",
+                  "size": 1
+                }
+              ],
+              "name": "Protease inhibitor",
+              "size": 1
+            }
+          ],
+          "name": "Protease",
+          "size": 448
+        },
+        {
+          "id": "10",
+          "parent_id": "1",
+          "children": [],
+          "name": "Oxidoreductase",
+          "size": 84
+        },
+        {
+          "id": "1034",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1064",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "100",
+                  "parent_id": "1064",
+                  "children": [],
+                  "name": "Phosphodiesterase 4A",
+                  "size": 11
+                },
+                {
+                  "id": "101",
+                  "parent_id": "1064",
+                  "children": [],
+                  "name": "Phosphodiesterase 4B",
+                  "size": 10
+                },
+                {
+                  "id": "102",
+                  "parent_id": "1064",
+                  "children": [],
+                  "name": "Phosphodiesterase 4C",
+                  "size": 9
+                },
+                {
+                  "id": "103",
+                  "parent_id": "1064",
+                  "children": [],
+                  "name": "Phosphodiesterase 4D",
+                  "size": 9
+                }
+              ],
+              "name": "Phosphodiesterase 4",
+              "size": 21
+            },
+            {
+              "id": "1066",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "110",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6H",
+                  "size": 7
+                },
+                {
+                  "id": "108",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6D",
+                  "size": 6
+                },
+                {
+                  "id": "109",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6G",
+                  "size": 6
+                },
+                {
+                  "id": "106",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6B",
+                  "size": 6
+                },
+                {
+                  "id": "107",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6C",
+                  "size": 6
+                },
+                {
+                  "id": "105",
+                  "parent_id": "1066",
+                  "children": [],
+                  "name": "Phosphodiesterase 6A",
+                  "size": 6
+                }
+              ],
+              "name": "Phosphodiesterase 6",
+              "size": 17
+            },
+            {
+              "id": "1061",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "95",
+                  "parent_id": "1061",
+                  "children": [],
+                  "name": "Phosphodiesterase 1B",
+                  "size": 9
+                },
+                {
+                  "id": "94",
+                  "parent_id": "1061",
+                  "children": [],
+                  "name": "Phosphodiesterase 1A",
+                  "size": 9
+                },
+                {
+                  "id": "96",
+                  "parent_id": "1061",
+                  "children": [],
+                  "name": "Phosphodiesterase 1C",
+                  "size": 6
+                }
+              ],
+              "name": "Phosphodiesterase 1",
+              "size": 14
+            },
+            {
+              "id": "1063",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "99",
+                  "parent_id": "1063",
+                  "children": [],
+                  "name": "Phosphodiesterase 3B",
+                  "size": 8
+                },
+                {
+                  "id": "98",
+                  "parent_id": "1063",
+                  "children": [],
+                  "name": "Phosphodiesterase 3A",
+                  "size": 7
+                }
+              ],
+              "name": "Phosphodiesterase 3",
+              "size": 11
+            },
+            {
+              "id": "1065",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "104",
+                  "parent_id": "1065",
+                  "children": [],
+                  "name": "Phosphodiesterase 5A",
+                  "size": 10
+                }
+              ],
+              "name": "Phosphodiesterase 5",
+              "size": 10
+            },
+            {
+              "id": "1067",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "112",
+                  "parent_id": "1067",
+                  "children": [],
+                  "name": "Phosphodiesterase 7B",
+                  "size": 5
+                },
+                {
+                  "id": "111",
+                  "parent_id": "1067",
+                  "children": [],
+                  "name": "Phosphodiesterase 7A",
+                  "size": 4
+                }
+              ],
+              "name": "Phosphodiesterase 7",
+              "size": 7
+            },
+            {
+              "id": "1068",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "113",
+                  "parent_id": "1068",
+                  "children": [],
+                  "name": "Phosphodiesterase 8A",
+                  "size": 4
+                },
+                {
+                  "id": "114",
+                  "parent_id": "1068",
+                  "children": [],
+                  "name": "Phosphodiesterase 8B",
+                  "size": 3
+                }
+              ],
+              "name": "Phosphodiesterase 8",
+              "size": 5
+            },
+            {
+              "id": "1062",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "97",
+                  "parent_id": "1062",
+                  "children": [],
+                  "name": "Phosphodiesterase 2A",
+                  "size": 5
+                }
+              ],
+              "name": "Phosphodiesterase 2",
+              "size": 5
+            },
+            {
+              "id": "1069",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "115",
+                  "parent_id": "1069",
+                  "children": [],
+                  "name": "Phosphodiesterase 9A",
+                  "size": 2
+                }
+              ],
+              "name": "Phosphodiesterase 9",
+              "size": 2
+            },
+            {
+              "id": "1077",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "123",
+                  "parent_id": "1077",
+                  "children": [],
+                  "name": "Phosphodiesterase 10A",
+                  "size": 2
+                }
+              ],
+              "name": "Phosphodiesterase 10",
+              "size": 2
+            },
+            {
+              "id": "1078",
+              "parent_id": "1034",
+              "children": [
+                {
+                  "id": "124",
+                  "parent_id": "1078",
+                  "children": [],
+                  "name": "Phosphodiesterase 11A",
+                  "size": 1
+                }
+              ],
+              "name": "Phosphodiesterase 11",
+              "size": 1
+            }
+          ],
+          "name": "Phosphodiesterase",
+          "size": 79
+        },
+        {
+          "id": "646",
+          "parent_id": "1",
+          "children": [],
+          "name": "Hydrolase",
+          "size": 76
+        },
+        {
+          "id": "1030",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1103",
+              "parent_id": "1030",
+              "children": [
+                {
+                  "id": "156",
+                  "parent_id": "1103",
+                  "children": [
+                    {
+                      "id": "310",
+                      "parent_id": "156",
+                      "children": [],
+                      "name": "Receptor tyrosine-protein phosphatase",
+                      "size": 10
+                    }
+                  ],
+                  "name": "Tyrosine protein phosphatase",
+                  "size": 31
+                },
+                {
+                  "id": "222",
+                  "parent_id": "1103",
+                  "children": [],
+                  "name": "Serine/threonine protein phosphatase",
+                  "size": 24
+                },
+                {
+                  "id": "279",
+                  "parent_id": "1103",
+                  "children": [],
+                  "name": "Serine/threonine/tyrosine protein phosphatase",
+                  "size": 10
+                },
+                {
+                  "id": "154",
+                  "parent_id": "1103",
+                  "children": [],
+                  "name": "Protein phosphatase regulatory subunit",
+                  "size": 10
+                },
+                {
+                  "id": "155",
+                  "parent_id": "1103",
+                  "children": [],
+                  "name": "Serine protein phosphatase",
+                  "size": 1
+                }
+              ],
+              "name": "Protein Phosphatase",
+              "size": 76
+            }
+          ],
+          "name": "Phosphatase",
+          "size": 76
+        },
+        {
+          "id": "1031",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1055",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1183",
+                  "parent_id": "1055",
+                  "children": [
+                    {
+                      "id": "198",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C23",
+                      "size": 1
+                    },
+                    {
+                      "id": "195",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C11",
+                      "size": 1
+                    },
+                    {
+                      "id": "197",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C19",
+                      "size": 1
+                    },
+                    {
+                      "id": "176",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C9",
+                      "size": 1
+                    },
+                    {
+                      "id": "175",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C8",
+                      "size": 1
+                    },
+                    {
+                      "id": "196",
+                      "parent_id": "1183",
+                      "children": [],
+                      "name": "Cytochrome P450 2C18",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 2C",
+                  "size": 6
+                },
+                {
+                  "id": "1184",
+                  "parent_id": "1055",
+                  "children": [
+                    {
+                      "id": "199",
+                      "parent_id": "1184",
+                      "children": [],
+                      "name": "Cytochrome P450 2D18",
+                      "size": 1
+                    },
+                    {
+                      "id": "179",
+                      "parent_id": "1184",
+                      "children": [],
+                      "name": "Cytochrome P450 2D3",
+                      "size": 1
+                    },
+                    {
+                      "id": "178",
+                      "parent_id": "1184",
+                      "children": [],
+                      "name": "Cytochrome P450 2D2",
+                      "size": 1
+                    },
+                    {
+                      "id": "177",
+                      "parent_id": "1184",
+                      "children": [],
+                      "name": "Cytochrome P450 2D1",
+                      "size": 1
+                    },
+                    {
+                      "id": "180",
+                      "parent_id": "1184",
+                      "children": [],
+                      "name": "Cytochrome P450 2D6",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 2D",
+                  "size": 5
+                },
+                {
+                  "id": "1181",
+                  "parent_id": "1055",
+                  "children": [
+                    {
+                      "id": "170",
+                      "parent_id": "1181",
+                      "children": [],
+                      "name": "Cytochrome P450 2A2",
+                      "size": 1
+                    },
+                    {
+                      "id": "172",
+                      "parent_id": "1181",
+                      "children": [],
+                      "name": "Cytochrome P450 2A6",
+                      "size": 1
+                    },
+                    {
+                      "id": "171",
+                      "parent_id": "1181",
+                      "children": [],
+                      "name": "Cytochrome P450 2A5",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 2A",
+                  "size": 3
+                },
+                {
+                  "id": "1182",
+                  "parent_id": "1055",
+                  "children": [
+                    {
+                      "id": "174",
+                      "parent_id": "1182",
+                      "children": [],
+                      "name": "Cytochrome P450 2B6",
+                      "size": 1
+                    },
+                    {
+                      "id": "173",
+                      "parent_id": "1182",
+                      "children": [],
+                      "name": "Cytochrome P450 2B1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 2B",
+                  "size": 2
+                },
+                {
+                  "id": "1185",
+                  "parent_id": "1055",
+                  "children": [
+                    {
+                      "id": "181",
+                      "parent_id": "1185",
+                      "children": [],
+                      "name": "Cytochrome P450 2E1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 2E",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 2",
+              "size": 18
+            },
+            {
+              "id": "1070",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1219",
+                  "parent_id": "1070",
+                  "children": [
+                    {
+                      "id": "224",
+                      "parent_id": "1219",
+                      "children": [],
+                      "name": "Cytochrome P450 11B1",
+                      "size": 3
+                    },
+                    {
+                      "id": "225",
+                      "parent_id": "1219",
+                      "children": [],
+                      "name": "Cytochrome P450 11B2",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 11B",
+                  "size": 5
+                },
+                {
+                  "id": "1218",
+                  "parent_id": "1070",
+                  "children": [
+                    {
+                      "id": "223",
+                      "parent_id": "1218",
+                      "children": [],
+                      "name": "Cytochrome P450 11A1",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 11A",
+                  "size": 3
+                }
+              ],
+              "name": "Cytochrome P450 family 11",
+              "size": 8
+            },
+            {
+              "id": "1056",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1186",
+                  "parent_id": "1056",
+                  "children": [
+                    {
+                      "id": "184",
+                      "parent_id": "1186",
+                      "children": [],
+                      "name": "Cytochrome P450 3A4",
+                      "size": 3
+                    },
+                    {
+                      "id": "185",
+                      "parent_id": "1186",
+                      "children": [],
+                      "name": "Cytochrome P450 3A5",
+                      "size": 3
+                    },
+                    {
+                      "id": "182",
+                      "parent_id": "1186",
+                      "children": [],
+                      "name": "Cytochrome P450 3A1",
+                      "size": 1
+                    },
+                    {
+                      "id": "183",
+                      "parent_id": "1186",
+                      "children": [],
+                      "name": "Cytochrome P450 3A2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 3A",
+                  "size": 6
+                }
+              ],
+              "name": "Cytochrome P450 family 3",
+              "size": 6
+            },
+            {
+              "id": "1057",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1187",
+                  "parent_id": "1057",
+                  "children": [
+                    {
+                      "id": "186",
+                      "parent_id": "1187",
+                      "children": [],
+                      "name": "Cytochrome P450 4A1",
+                      "size": 1
+                    },
+                    {
+                      "id": "187",
+                      "parent_id": "1187",
+                      "children": [],
+                      "name": "Cytochrome P450 4A3",
+                      "size": 1
+                    },
+                    {
+                      "id": "188",
+                      "parent_id": "1187",
+                      "children": [],
+                      "name": "Cytochrome P450 4A4",
+                      "size": 1
+                    },
+                    {
+                      "id": "200",
+                      "parent_id": "1187",
+                      "children": [],
+                      "name": "Cytochrome P450 4A11",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 4A",
+                  "size": 4
+                },
+                {
+                  "id": "1188",
+                  "parent_id": "1057",
+                  "children": [
+                    {
+                      "id": "189",
+                      "parent_id": "1188",
+                      "children": [],
+                      "name": "Cytochrome P450 4F2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 4F",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 4",
+              "size": 5
+            },
+            {
+              "id": "1076",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1225",
+                  "parent_id": "1076",
+                  "children": [
+                    {
+                      "id": "231",
+                      "parent_id": "1225",
+                      "children": [],
+                      "name": "Cytochrome P450 51A1",
+                      "size": 5
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 51A",
+                  "size": 5
+                }
+              ],
+              "name": "Cytochrome P450 family 51",
+              "size": 5
+            },
+            {
+              "id": "1054",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1179",
+                  "parent_id": "1054",
+                  "children": [
+                    {
+                      "id": "167",
+                      "parent_id": "1179",
+                      "children": [],
+                      "name": "Cytochrome P450 1A1",
+                      "size": 2
+                    },
+                    {
+                      "id": "168",
+                      "parent_id": "1179",
+                      "children": [],
+                      "name": "Cytochrome P450 1A2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 1A",
+                  "size": 3
+                },
+                {
+                  "id": "1180",
+                  "parent_id": "1054",
+                  "children": [
+                    {
+                      "id": "169",
+                      "parent_id": "1180",
+                      "children": [],
+                      "name": "Cytochrome P450 1B1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 1B",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 1",
+              "size": 4
+            },
+            {
+              "id": "1059",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1190",
+                  "parent_id": "1059",
+                  "children": [
+                    {
+                      "id": "191",
+                      "parent_id": "1190",
+                      "children": [],
+                      "name": "Cytochrome P450 7A1",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 7A",
+                  "size": 3
+                }
+              ],
+              "name": "Cytochrome P450 family 7",
+              "size": 3
+            },
+            {
+              "id": "1058",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1189",
+                  "parent_id": "1058",
+                  "children": [
+                    {
+                      "id": "190",
+                      "parent_id": "1189",
+                      "children": [],
+                      "name": "Cytochrome P450 5A1",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 5A",
+                  "size": 2
+                }
+              ],
+              "name": "Cytochrome P450 family 5",
+              "size": 2
+            },
+            {
+              "id": "1072",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1221",
+                  "parent_id": "1072",
+                  "children": [
+                    {
+                      "id": "227",
+                      "parent_id": "1221",
+                      "children": [],
+                      "name": "Cytochrome P450 19A1",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 19A",
+                  "size": 2
+                }
+              ],
+              "name": "Cytochrome P450 family 19",
+              "size": 2
+            },
+            {
+              "id": "1071",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1220",
+                  "parent_id": "1071",
+                  "children": [
+                    {
+                      "id": "226",
+                      "parent_id": "1220",
+                      "children": [],
+                      "name": "Cytochrome P450 17A1",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 17A",
+                  "size": 2
+                }
+              ],
+              "name": "Cytochrome P450 family 17",
+              "size": 2
+            },
+            {
+              "id": "1060",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1191",
+                  "parent_id": "1060",
+                  "children": [
+                    {
+                      "id": "192",
+                      "parent_id": "1191",
+                      "children": [],
+                      "name": "Cytochrome P450 8A1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 8A",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 8",
+              "size": 1
+            },
+            {
+              "id": "13",
+              "parent_id": "1031",
+              "children": [],
+              "name": "Cytochrome P450 CAM family",
+              "size": 1
+            },
+            {
+              "id": "1074",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1223",
+                  "parent_id": "1074",
+                  "children": [
+                    {
+                      "id": "229",
+                      "parent_id": "1223",
+                      "children": [],
+                      "name": "Cytochrome P450 24A1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 24A",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 24",
+              "size": 1
+            },
+            {
+              "id": "1075",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1224",
+                  "parent_id": "1075",
+                  "children": [
+                    {
+                      "id": "230",
+                      "parent_id": "1224",
+                      "children": [],
+                      "name": "Cytochrome P450 26A1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 26A",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 26",
+              "size": 1
+            },
+            {
+              "id": "1073",
+              "parent_id": "1031",
+              "children": [
+                {
+                  "id": "1222",
+                  "parent_id": "1073",
+                  "children": [
+                    {
+                      "id": "228",
+                      "parent_id": "1222",
+                      "children": [],
+                      "name": "Cytochrome P450 21A2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Cytochrome P450 family 21A",
+                  "size": 1
+                }
+              ],
+              "name": "Cytochrome P450 family 21",
+              "size": 1
+            }
+          ],
+          "name": "Cytochrome P450",
+          "size": 60
+        },
+        {
+          "id": "643",
+          "parent_id": "1",
+          "children": [],
+          "name": "Transferase",
+          "size": 38
+        },
+        {
+          "id": "648",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "1264",
+              "parent_id": "648",
+              "children": [
+                {
+                  "id": "1315",
+                  "parent_id": "1264",
+                  "children": [],
+                  "name": "Receptor guanylate cyclase",
+                  "size": 6
+                },
+                {
+                  "id": "890",
+                  "parent_id": "1264",
+                  "children": [],
+                  "name": "Soluble guanylate cyclase",
+                  "size": 6
+                }
+              ],
+              "name": "Guanylate cyclase",
+              "size": 12
+            }
+          ],
+          "name": "Lyase",
+          "size": 30
+        },
+        {
+          "id": "644",
+          "parent_id": "1",
+          "children": [],
+          "name": "Isomerase",
+          "size": 21
+        },
+        {
+          "id": "645",
+          "parent_id": "1",
+          "children": [],
+          "name": "Ligase",
+          "size": 16
+        },
+        {
+          "id": "1035",
+          "parent_id": "1",
+          "children": [
+            {
+              "id": "496",
+              "parent_id": "1035",
+              "children": [],
+              "name": "Protein-glutamine glutamyl-transferase",
+              "size": 1
+            }
+          ],
+          "name": "Aminoacyltransferase",
+          "size": 1
+        }
+      ],
+      "name": "Enzyme",
+      "size": 4076
+    },
+    {
+      "id": "601",
+      "parent_id": "0",
+      "children": [],
+      "name": "Unclassified protein",
+      "size": 1299
+    },
+    {
+      "id": "11",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1020",
+          "parent_id": "11",
+          "children": [
+            {
+              "id": "1088",
+              "parent_id": "1020",
+              "children": [
+                {
+                  "id": "1266",
+                  "parent_id": "1088",
+                  "children": [
+                    {
+                      "id": "544",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Adrenergic receptor",
+                      "size": 69
+                    },
+                    {
+                      "id": "542",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Serotonin receptor",
+                      "size": 63
+                    },
+                    {
+                      "id": "535",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Dopamine receptor",
+                      "size": 38
+                    },
+                    {
+                      "id": "559",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Acetylcholine receptor",
+                      "size": 33
+                    },
+                    {
+                      "id": "541",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Histamine receptor",
+                      "size": 19
+                    },
+                    {
+                      "id": "550",
+                      "parent_id": "1266",
+                      "children": [],
+                      "name": "Trace amine receptor",
+                      "size": 8
+                    }
+                  ],
+                  "name": "Monoamine receptor",
+                  "size": 224
+                },
+                {
+                  "id": "1273",
+                  "parent_id": "1088",
+                  "children": [
+                    {
+                      "id": "565",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Prostanoid receptor",
+                      "size": 30
+                    },
+                    {
+                      "id": "549",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "EDG receptor",
+                      "size": 17
+                    },
+                    {
+                      "id": "567",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Leukotriene receptor",
+                      "size": 13
+                    },
+                    {
+                      "id": "566",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Cannabinoid receptor",
+                      "size": 10
+                    },
+                    {
+                      "id": "570",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Free fatty acid receptor",
+                      "size": 7
+                    },
+                    {
+                      "id": "573",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Steroid-like ligand receptor",
+                      "size": 4
+                    },
+                    {
+                      "id": "487",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "PAF receptor",
+                      "size": 4
+                    },
+                    {
+                      "id": "606",
+                      "parent_id": "1273",
+                      "children": [],
+                      "name": "Lysophosphatidylinositol receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Lipid-like ligand receptor (family A GPCR)",
+                  "size": 90
+                },
+                {
+                  "id": "1272",
+                  "parent_id": "1088",
+                  "children": [
+                    {
+                      "id": "563",
+                      "parent_id": "1272",
+                      "children": [],
+                      "name": "Adenosine receptor",
+                      "size": 34
+                    },
+                    {
+                      "id": "556",
+                      "parent_id": "1272",
+                      "children": [],
+                      "name": "Purine receptor",
+                      "size": 15
+                    }
+                  ],
+                  "name": "Nucleotide-like receptor (family A GPCR)",
+                  "size": 49
+                },
+                {
+                  "id": "616",
+                  "parent_id": "1088",
+                  "children": [
+                    {
+                      "id": "603",
+                      "parent_id": "616",
+                      "children": [],
+                      "name": "Hydroxycarboxylic acid receptor",
+                      "size": 8
+                    },
+                    {
+                      "id": "604",
+                      "parent_id": "616",
+                      "children": [],
+                      "name": "Kynurenic acid receptor",
+                      "size": 3
+                    },
+                    {
+                      "id": "605",
+                      "parent_id": "616",
+                      "children": [],
+                      "name": "Succinate receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "615",
+                      "parent_id": "616",
+                      "children": [],
+                      "name": "Oxoglutarate receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Carboxylic acid receptor",
+                  "size": 14
+                },
+                {
+                  "id": "1267",
+                  "parent_id": "1088",
+                  "children": [
+                    {
+                      "id": "551",
+                      "parent_id": "1267",
+                      "children": [],
+                      "name": "Melatonin receptor",
+                      "size": 10
+                    }
+                  ],
+                  "name": "Monoamine-derivative receptor (family A GPCR)",
+                  "size": 10
+                }
+              ],
+              "name": "Small molecule receptor (family A GPCR)",
+              "size": 387
+            },
+            {
+              "id": "1082",
+              "parent_id": "1020",
+              "children": [
+                {
+                  "id": "1253",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "479",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Opioid receptor",
+                      "size": 33
+                    },
+                    {
+                      "id": "517",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Somatostatin receptor",
+                      "size": 19
+                    },
+                    {
+                      "id": "562",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Vasopressin and oxytocin receptor",
+                      "size": 18
+                    },
+                    {
+                      "id": "515",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Melanocortin receptor",
+                      "size": 16
+                    },
+                    {
+                      "id": "500",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Endothelin receptor",
+                      "size": 15
+                    },
+                    {
+                      "id": "516",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neuropeptide receptor",
+                      "size": 14
+                    },
+                    {
+                      "id": "501",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neurokinin receptor",
+                      "size": 14
+                    },
+                    {
+                      "id": "507",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Angiotensin receptor",
+                      "size": 14
+                    },
+                    {
+                      "id": "540",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Cholecystokinin receptor",
+                      "size": 12
+                    },
+                    {
+                      "id": "508",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "GRP-related receptor",
+                      "size": 12
+                    },
+                    {
+                      "id": "499",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Bradykinin receptor",
+                      "size": 11
+                    },
+                    {
+                      "id": "534",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neuropeptide Y receptor",
+                      "size": 10
+                    },
+                    {
+                      "id": "509",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neurotensin receptor",
+                      "size": 8
+                    },
+                    {
+                      "id": "486",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "RF amide receptor",
+                      "size": 8
+                    },
+                    {
+                      "id": "480",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Orexin receptor",
+                      "size": 8
+                    },
+                    {
+                      "id": "460",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "MCH receptor",
+                      "size": 7
+                    },
+                    {
+                      "id": "483",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Galanin receptor",
+                      "size": 5
+                    },
+                    {
+                      "id": "468",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "GnRH receptor",
+                      "size": 4
+                    },
+                    {
+                      "id": "607",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neuromedin U receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "502",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Neuromedin receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "484",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Motilin receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "608",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Prolactin-releasing peptide receptor",
+                      "size": 1
+                    },
+                    {
+                      "id": "533",
+                      "parent_id": "1253",
+                      "children": [],
+                      "name": "Adrenomedullin receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Short peptide receptor (family A GPCR)",
+                  "size": 236
+                },
+                {
+                  "id": "1265",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "547",
+                      "parent_id": "1265",
+                      "children": [],
+                      "name": "CC chemokine receptor",
+                      "size": 31
+                    },
+                    {
+                      "id": "554",
+                      "parent_id": "1265",
+                      "children": [],
+                      "name": "CXC chemokine receptor",
+                      "size": 16
+                    },
+                    {
+                      "id": "558",
+                      "parent_id": "1265",
+                      "children": [],
+                      "name": "CX3C chemokine receptor",
+                      "size": 1
+                    },
+                    {
+                      "id": "548",
+                      "parent_id": "1265",
+                      "children": [],
+                      "name": "XC chemokine receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Chemokine receptor",
+                  "size": 49
+                },
+                {
+                  "id": "1269",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "528",
+                      "parent_id": "1269",
+                      "children": [],
+                      "name": "Anaphylatoxin receptor",
+                      "size": 6
+                    }
+                  ],
+                  "name": "Anaphylatoxin receptor family",
+                  "size": 6
+                },
+                {
+                  "id": "1274",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "571",
+                      "parent_id": "1274",
+                      "children": [],
+                      "name": "Protease-activated receptor",
+                      "size": 6
+                    }
+                  ],
+                  "name": "Protease-activated receptor",
+                  "size": 6
+                },
+                {
+                  "id": "1268",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "561",
+                      "parent_id": "1268",
+                      "children": [],
+                      "name": "Glycohormone receptor",
+                      "size": 5
+                    }
+                  ],
+                  "name": "Glycohormone receptor",
+                  "size": 5
+                },
+                {
+                  "id": "618",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "610",
+                      "parent_id": "618",
+                      "children": [],
+                      "name": "Relaxin receptor",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Relaxin-like peptide receptor (family A GPCR)",
+                  "size": 4
+                },
+                {
+                  "id": "506",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "574",
+                      "parent_id": "506",
+                      "children": [],
+                      "name": "N-formyl methionyl peptide receptor",
+                      "size": 3
+                    }
+                  ],
+                  "name": "N-formyl methionyl peptide receptor",
+                  "size": 4
+                },
+                {
+                  "id": "617",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "609",
+                      "parent_id": "617",
+                      "children": [],
+                      "name": "Prokineticin receptor",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Peptide growth factor receptor (family A GPCR)",
+                  "size": 3
+                },
+                {
+                  "id": "1270",
+                  "parent_id": "1082",
+                  "children": [
+                    {
+                      "id": "555",
+                      "parent_id": "1270",
+                      "children": [],
+                      "name": "Chemerin receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Chemokine receptor-like",
+                  "size": 2
+                }
+              ],
+              "name": "Peptide receptor (family A GPCR)",
+              "size": 314
+            },
+            {
+              "id": "621",
+              "parent_id": "1020",
+              "children": [
+                {
+                  "id": "611",
+                  "parent_id": "621",
+                  "children": [],
+                  "name": "Rhodopsin",
+                  "size": 1
+                }
+              ],
+              "name": "Opsin",
+              "size": 1
+            }
+          ],
+          "name": "Family A G protein-coupled receptor",
+          "size": 713
+        },
+        {
+          "id": "1021",
+          "parent_id": "11",
+          "children": [
+            {
+              "id": "1083",
+              "parent_id": "1021",
+              "children": [
+                {
+                  "id": "1256",
+                  "parent_id": "1083",
+                  "children": [
+                    {
+                      "id": "510",
+                      "parent_id": "1256",
+                      "children": [],
+                      "name": "Calcitonin gene-related peptide receptor",
+                      "size": 9
+                    },
+                    {
+                      "id": "202",
+                      "parent_id": "1256",
+                      "children": [],
+                      "name": "Calcitonin receptor",
+                      "size": 8
+                    }
+                  ],
+                  "name": "Calcitonin-like receptor",
+                  "size": 17
+                },
+                {
+                  "id": "1251",
+                  "parent_id": "1083",
+                  "children": [
+                    {
+                      "id": "435",
+                      "parent_id": "1251",
+                      "children": [],
+                      "name": "Glucagon-like peptide receptor",
+                      "size": 4
+                    },
+                    {
+                      "id": "165",
+                      "parent_id": "1251",
+                      "children": [],
+                      "name": "Glucagon receptor",
+                      "size": 3
+                    },
+                    {
+                      "id": "504",
+                      "parent_id": "1251",
+                      "children": [],
+                      "name": "Gastric inhibitory polypeptide receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "518",
+                      "parent_id": "1251",
+                      "children": [],
+                      "name": "Growth hormone-releasing hormone receptor",
+                      "size": 2
+                    },
+                    {
+                      "id": "166",
+                      "parent_id": "1251",
+                      "children": [],
+                      "name": "Secretin receptor receptor",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Glucagon-like receptor",
+                  "size": 12
+                },
+                {
+                  "id": "1278",
+                  "parent_id": "1083",
+                  "children": [
+                    {
+                      "id": "503",
+                      "parent_id": "1278",
+                      "children": [],
+                      "name": "Corticotropin releasing factor receptor",
+                      "size": 8
+                    }
+                  ],
+                  "name": "Corticotropin releasing factor receptor",
+                  "size": 8
+                },
+                {
+                  "id": "1277",
+                  "parent_id": "1083",
+                  "children": [
+                    {
+                      "id": "491",
+                      "parent_id": "1277",
+                      "children": [],
+                      "name": "Vasoactive intestinal peptide receptor",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Vasoactive intestinal peptide receptor",
+                  "size": 4
+                },
+                {
+                  "id": "1275",
+                  "parent_id": "1083",
+                  "children": [
+                    {
+                      "id": "407",
+                      "parent_id": "1275",
+                      "children": [],
+                      "name": "Parathyroid hormone receptor",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Parathyroid hormone receptor",
+                  "size": 3
+                }
+              ],
+              "name": "Peptide receptor (family B GPCR)",
+              "size": 44
+            }
+          ],
+          "name": "Family B G protein-coupled receptor",
+          "size": 44
+        },
+        {
+          "id": "1022",
+          "parent_id": "11",
+          "children": [
+            {
+              "id": "1089",
+              "parent_id": "1022",
+              "children": [
+                {
+                  "id": "1259",
+                  "parent_id": "1089",
+                  "children": [
+                    {
+                      "id": "446",
+                      "parent_id": "1259",
+                      "children": [],
+                      "name": "Metabotropic glutamate receptor",
+                      "size": 25
+                    },
+                    {
+                      "id": "147",
+                      "parent_id": "1259",
+                      "children": [],
+                      "name": "GABA-B receptor",
+                      "size": 6
+                    }
+                  ],
+                  "name": "Neurotransmitter receptor (family C GPCR)",
+                  "size": 31
+                }
+              ],
+              "name": "Small molecule receptor (family C GPCR)",
+              "size": 31
+            },
+            {
+              "id": "613",
+              "parent_id": "1022",
+              "children": [],
+              "name": "Taste receptor (family C GPCR)",
+              "size": 4
+            },
+            {
+              "id": "1038",
+              "parent_id": "1022",
+              "children": [
+                {
+                  "id": "1271",
+                  "parent_id": "1038",
+                  "children": [
+                    {
+                      "id": "281",
+                      "parent_id": "1271",
+                      "children": [],
+                      "name": "Calcium sensing receptor",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Calcium sensing receptor",
+                  "size": 3
+                }
+              ],
+              "name": "Ion receptor (family C GPCR)",
+              "size": 3
+            }
+          ],
+          "name": "Family C G protein-coupled receptor",
+          "size": 38
+        },
+        {
+          "id": "649",
+          "parent_id": "11",
+          "children": [],
+          "name": "Toll-like and Il-1 receptors",
+          "size": 9
+        },
+        {
+          "id": "619",
+          "parent_id": "11",
+          "children": [
+            {
+              "id": "612",
+              "parent_id": "619",
+              "children": [],
+              "name": "Smoothened receptor (frizzled family GPCR)",
+              "size": 3
+            }
+          ],
+          "name": "Frizzled family G protein-coupled receptor",
+          "size": 4
+        },
+        {
+          "id": "620",
+          "parent_id": "11",
+          "children": [
+            {
+              "id": "614",
+              "parent_id": "620",
+              "children": [],
+              "name": "Taste receptor (taste family GPCR)",
+              "size": 1
+            }
+          ],
+          "name": "Taste family G protein-coupled receptor",
+          "size": 1
+        }
+      ],
+      "name": "Membrane receptor",
+      "size": 921
+    },
+    {
+      "id": "1005",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1024",
+          "parent_id": "1005",
+          "children": [
+            {
+              "id": "1173",
+              "parent_id": "1024",
+              "children": [],
+              "name": "GABA-A receptor",
+              "size": 89
+            },
+            {
+              "id": "1126",
+              "parent_id": "1024",
+              "children": [
+                {
+                  "id": "422",
+                  "parent_id": "1126",
+                  "children": [],
+                  "name": "Nicotinic acetylcholine receptor alpha subunit",
+                  "size": 57
+                },
+                {
+                  "id": "406",
+                  "parent_id": "1126",
+                  "children": [],
+                  "name": "Nicotinic acetylcholine receptor beta subunit",
+                  "size": 45
+                },
+                {
+                  "id": "423",
+                  "parent_id": "1126",
+                  "children": [],
+                  "name": "Nicotinic acetylcholine receptor delta subunit",
+                  "size": 9
+                },
+                {
+                  "id": "424",
+                  "parent_id": "1126",
+                  "children": [],
+                  "name": "Nicotinic acetylcholine receptor gamma subunit",
+                  "size": 8
+                },
+                {
+                  "id": "442",
+                  "parent_id": "1126",
+                  "children": [],
+                  "name": "Nicotinic acetylcholine receptor epsilon subunit",
+                  "size": 5
+                }
+              ],
+              "name": "Nicotinic acetylcholine receptor",
+              "size": 85
+            },
+            {
+              "id": "1053",
+              "parent_id": "1024",
+              "children": [
+                {
+                  "id": "1150",
+                  "parent_id": "1053",
+                  "children": [],
+                  "name": "NMDA receptor",
+                  "size": 33
+                },
+                {
+                  "id": "1145",
+                  "parent_id": "1053",
+                  "children": [],
+                  "name": "AMPA receptor",
+                  "size": 16
+                },
+                {
+                  "id": "1226",
+                  "parent_id": "1053",
+                  "children": [],
+                  "name": "Kainate receptor",
+                  "size": 15
+                },
+                {
+                  "id": "664",
+                  "parent_id": "1053",
+                  "children": [],
+                  "name": "Ionotropic glutamate receptor-like",
+                  "size": 2
+                },
+                {
+                  "id": "1149",
+                  "parent_id": "1053",
+                  "children": [],
+                  "name": "Glutamate receptor ionotropic delta-1",
+                  "size": 2
+                }
+              ],
+              "name": "Ionotropic glutamate receptor",
+              "size": 67
+            },
+            {
+              "id": "1047",
+              "parent_id": "1024",
+              "children": [],
+              "name": "P2X receptor",
+              "size": 18
+            },
+            {
+              "id": "1016",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Ryanodine receptor",
+              "size": 16
+            },
+            {
+              "id": "1144",
+              "parent_id": "1024",
+              "children": [],
+              "name": "5HT3 receptor",
+              "size": 16
+            },
+            {
+              "id": "1014",
+              "parent_id": "1024",
+              "children": [],
+              "name": "IP3 receptor",
+              "size": 14
+            },
+            {
+              "id": "1127",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Glycine receptor",
+              "size": 9
+            },
+            {
+              "id": "1023",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Acid-sensing ion channel",
+              "size": 6
+            },
+            {
+              "id": "243",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Epithelial sodium channel",
+              "size": 4
+            },
+            {
+              "id": "663",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Glutamate-gated chloride channel (invertebrate)",
+              "size": 3
+            },
+            {
+              "id": "665",
+              "parent_id": "1024",
+              "children": [],
+              "name": "Zinc-activated channel",
+              "size": 1
+            }
+          ],
+          "name": "Ligand-gated ion channel",
+          "size": 334
+        },
+        {
+          "id": "1019",
+          "parent_id": "1005",
+          "children": [
+            {
+              "id": "667",
+              "parent_id": "1019",
+              "children": [
+                {
+                  "id": "118",
+                  "parent_id": "667",
+                  "children": [],
+                  "name": "Voltage-gated potassium channel",
+                  "size": 56
+                },
+                {
+                  "id": "1015",
+                  "parent_id": "667",
+                  "children": [],
+                  "name": "Inwardly rectifying potassium channel",
+                  "size": 21
+                },
+                {
+                  "id": "668",
+                  "parent_id": "667",
+                  "children": [],
+                  "name": "Calcium-activated potassium channel",
+                  "size": 17
+                },
+                {
+                  "id": "647",
+                  "parent_id": "667",
+                  "children": [],
+                  "name": "Two-pore domain potassium channel",
+                  "size": 7
+                }
+              ],
+              "name": "Potassium channels",
+              "size": 101
+            },
+            {
+              "id": "1583",
+              "parent_id": "1019",
+              "children": [],
+              "name": "Voltage-gated calcium channel",
+              "size": 35
+            },
+            {
+              "id": "1018",
+              "parent_id": "1019",
+              "children": [],
+              "name": "Transient receptor potential channel",
+              "size": 28
+            },
+            {
+              "id": "1590",
+              "parent_id": "1019",
+              "children": [],
+              "name": "Voltage-gated sodium channel",
+              "size": 28
+            },
+            {
+              "id": "1178",
+              "parent_id": "1019",
+              "children": [],
+              "name": "Cyclic nucleotide-regulated channel",
+              "size": 8
+            },
+            {
+              "id": "666",
+              "parent_id": "1019",
+              "children": [],
+              "name": "CatSper and Two-Pore channels",
+              "size": 1
+            }
+          ],
+          "name": "Voltage-gated ion channel",
+          "size": 201
+        },
+        {
+          "id": "670",
+          "parent_id": "1005",
+          "children": [
+            {
+              "id": "763",
+              "parent_id": "670",
+              "children": [
+                {
+                  "id": "768",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Ca2+ release-activated Ca2+ channel family",
+                  "size": 4
+                },
+                {
+                  "id": "767",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Bcl-2 family",
+                  "size": 4
+                },
+                {
+                  "id": "785",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Testis-enhanced gene transfer family",
+                  "size": 3
+                },
+                {
+                  "id": "783",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Presenilin ER Ca2+ leak channel family",
+                  "size": 3
+                },
+                {
+                  "id": "786",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Type A influenza virus matrix-2 channel family",
+                  "size": 2
+                },
+                {
+                  "id": "764",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "Sodium leak channel, non-selective",
+                  "size": 1
+                },
+                {
+                  "id": "770",
+                  "parent_id": "763",
+                  "children": [],
+                  "name": "CD20 Ca2+ channel family",
+                  "size": 1
+                }
+              ],
+              "name": "Miscellaneous ion channel",
+              "size": 18
+            },
+            {
+              "id": "676",
+              "parent_id": "670",
+              "children": [
+                {
+                  "id": "679",
+                  "parent_id": "676",
+                  "children": [],
+                  "name": "Epithelial chloride channel",
+                  "size": 5
+                },
+                {
+                  "id": "678",
+                  "parent_id": "676",
+                  "children": [],
+                  "name": "ClC chloride channel",
+                  "size": 3
+                },
+                {
+                  "id": "1146",
+                  "parent_id": "676",
+                  "children": [],
+                  "name": "Cystic fibrosis transmembrane conductance regulator",
+                  "size": 2
+                },
+                {
+                  "id": "677",
+                  "parent_id": "676",
+                  "children": [],
+                  "name": "Calcium-activated chloride channel",
+                  "size": 1
+                }
+              ],
+              "name": "Chloride channel",
+              "size": 11
+            },
+            {
+              "id": "787",
+              "parent_id": "670",
+              "children": [],
+              "name": "Pore-forming toxins (proteins and peptides)",
+              "size": 4
+            },
+            {
+              "id": "793",
+              "parent_id": "670",
+              "children": [],
+              "name": "Vesicle fusion pores",
+              "size": 3
+            },
+            {
+              "id": "688",
+              "parent_id": "670",
+              "children": [],
+              "name": "Annexin",
+              "size": 2
+            },
+            {
+              "id": "792",
+              "parent_id": "670",
+              "children": [],
+              "name": "Phospholemman family",
+              "size": 2
+            },
+            {
+              "id": "789",
+              "parent_id": "670",
+              "children": [
+                {
+                  "id": "790",
+                  "parent_id": "789",
+                  "children": [],
+                  "name": "Voltage-dependent anion-selective channel",
+                  "size": 1
+                }
+              ],
+              "name": "Mitochondrial and plastid porin family",
+              "size": 1
+            },
+            {
+              "id": "671",
+              "parent_id": "670",
+              "children": [
+                {
+                  "id": "675",
+                  "parent_id": "671",
+                  "children": [],
+                  "name": "Water-specific aquaporin",
+                  "size": 1
+                }
+              ],
+              "name": "Aquaporin",
+              "size": 1
+            }
+          ],
+          "name": "Other ion channel",
+          "size": 42
+        }
+      ],
+      "name": "Ion channel",
+      "size": 577
+    },
+    {
+      "id": "8",
+      "parent_id": "0",
+      "children": [],
+      "name": "Other cytosolic protein",
+      "size": 453
+    },
+    {
+      "id": "1006",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1032",
+          "parent_id": "1006",
+          "children": [
+            {
+              "id": "689",
+              "parent_id": "1032",
+              "children": [
+                {
+                  "id": "695",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC06 neurotransmitter transporter family",
+                  "size": 39
+                },
+                {
+                  "id": "710",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC22 family of organic cation and anion transporters",
+                  "size": 13
+                },
+                {
+                  "id": "690",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC01 family of amino acid transporters",
+                  "size": 10
+                },
+                {
+                  "id": "709",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC21/SLCO family of organic anion transporting polypeptides",
+                  "size": 9
+                },
+                {
+                  "id": "697",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC09 family of sodium/hydrogen exchangers",
+                  "size": 9
+                },
+                {
+                  "id": "706",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC18 family of vesicular amine transporters",
+                  "size": 8
+                },
+                {
+                  "id": "691",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC02 family of hexose and sugar alcohol transporters",
+                  "size": 8
+                },
+                {
+                  "id": "694",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC05 family of sodium-dependent glucose transporters",
+                  "size": 8
+                },
+                {
+                  "id": "716",
+                  "parent_id": "689",
+                  "children": [
+                    {
+                      "id": "743",
+                      "parent_id": "716",
+                      "children": [],
+                      "name": "SLC29 Facilitative nucleoside transporter family",
+                      "size": 4
+                    },
+                    {
+                      "id": "742",
+                      "parent_id": "716",
+                      "children": [],
+                      "name": "SLC28 Na+-coupled nucleoside transport family",
+                      "size": 3
+                    }
+                  ],
+                  "name": "SLC28 and SLC29 families of nucleoside transporters",
+                  "size": 7
+                },
+                {
+                  "id": "692",
+                  "parent_id": "689",
+                  "children": [
+                    {
+                      "id": "741",
+                      "parent_id": "692",
+                      "children": [],
+                      "name": "SLC07 Cationic amino acid transporter/glycoprotein-associated family",
+                      "size": 6
+                    }
+                  ],
+                  "name": "SLC03 and SLC07 families of heteromeric amino acid transporters (HATs)",
+                  "size": 6
+                },
+                {
+                  "id": "715",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC27 family of fatty acid transporters",
+                  "size": 4
+                },
+                {
+                  "id": "700",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC12 family of cation-coupled chloride transporters",
+                  "size": 4
+                },
+                {
+                  "id": "713",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC25 family of mitochondrial transporters",
+                  "size": 3
+                },
+                {
+                  "id": "704",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC16 family of monocarboxylate transporters",
+                  "size": 3
+                },
+                {
+                  "id": "703",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC15 family of peptide transporters",
+                  "size": 3
+                },
+                {
+                  "id": "698",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC10 family of sodium-bile acid co-transporters",
+                  "size": 3
+                },
+                {
+                  "id": "705",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC17 phosphate and organic anion transporter family",
+                  "size": 2
+                },
+                {
+                  "id": "707",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC19 family of vitamin transporters",
+                  "size": 2
+                },
+                {
+                  "id": "696",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC08 family of sodium/calcium exchangers",
+                  "size": 2
+                },
+                {
+                  "id": "699",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC11 family of proton-coupled metal ion transporters",
+                  "size": 2
+                },
+                {
+                  "id": "734",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC47 family of multidrug and toxin extrusion transporters",
+                  "size": 2
+                },
+                {
+                  "id": "723",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC36 family of proton-coupled amino acid transporters",
+                  "size": 1
+                },
+                {
+                  "id": "719",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC32 vesicular inhibitory amino acid transporter",
+                  "size": 1
+                },
+                {
+                  "id": "711",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC23 family of ascorbic acid transporters",
+                  "size": 1
+                },
+                {
+                  "id": "738",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC51 family of steroid-derived molecule transporters",
+                  "size": 1
+                },
+                {
+                  "id": "702",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC14 family of facilitative urea transporters",
+                  "size": 1
+                },
+                {
+                  "id": "730",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC43 family of large neutral amino acid transporters",
+                  "size": 1
+                },
+                {
+                  "id": "733",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC46 family of folate transporters",
+                  "size": 1
+                },
+                {
+                  "id": "724",
+                  "parent_id": "689",
+                  "children": [],
+                  "name": "SLC37 family of phosphosugar/phosphate exchangers",
+                  "size": 1
+                }
+              ],
+              "name": "SLC superfamily of solute carriers",
+              "size": 155
+            },
+            {
+              "id": "824",
+              "parent_id": "1032",
+              "children": [],
+              "name": "Vesicular neurotransmitter transporter family",
+              "size": 3
+            }
+          ],
+          "name": "Electrochemical transporter",
+          "size": 158
+        },
+        {
+          "id": "1027",
+          "parent_id": "1006",
+          "children": [
+            {
+              "id": "1098",
+              "parent_id": "1027",
+              "children": [
+                {
+                  "id": "494",
+                  "parent_id": "1098",
+                  "children": [],
+                  "name": "Sodium potassium ATPase",
+                  "size": 20
+                },
+                {
+                  "id": "449",
+                  "parent_id": "1098",
+                  "children": [],
+                  "name": "Hydrogen potassium ATPase",
+                  "size": 12
+                },
+                {
+                  "id": "1175",
+                  "parent_id": "1098",
+                  "children": [],
+                  "name": "Calcium ATPase",
+                  "size": 5
+                }
+              ],
+              "name": "P-type ATPase",
+              "size": 37
+            },
+            {
+              "id": "1104",
+              "parent_id": "1027",
+              "children": [
+                {
+                  "id": "1133",
+                  "parent_id": "1104",
+                  "children": [],
+                  "name": "ABCC subfamily",
+                  "size": 15
+                },
+                {
+                  "id": "1132",
+                  "parent_id": "1104",
+                  "children": [],
+                  "name": "ABCB subfamily",
+                  "size": 10
+                },
+                {
+                  "id": "746",
+                  "parent_id": "1104",
+                  "children": [],
+                  "name": "ABCA subfamily",
+                  "size": 1
+                },
+                {
+                  "id": "750",
+                  "parent_id": "1104",
+                  "children": [],
+                  "name": "ABCG subfamily",
+                  "size": 1
+                }
+              ],
+              "name": "ATP-binding cassette",
+              "size": 27
+            },
+            {
+              "id": "745",
+              "parent_id": "1027",
+              "children": [
+                {
+                  "id": "1235",
+                  "parent_id": "745",
+                  "children": [],
+                  "name": "V-type ATPase",
+                  "size": 6
+                },
+                {
+                  "id": "1096",
+                  "parent_id": "745",
+                  "children": [],
+                  "name": "F-type ATPase",
+                  "size": 3
+                }
+              ],
+              "name": "F-type and V-type ATPases",
+              "size": 9
+            },
+            {
+              "id": "744",
+              "parent_id": "1027",
+              "children": [],
+              "name": "Oxidoreduction-driven transporters",
+              "size": 2
+            },
+            {
+              "id": "813",
+              "parent_id": "1027",
+              "children": [],
+              "name": "Endoplasmic reticular retrotranslocon family",
+              "size": 1
+            }
+          ],
+          "name": "Primary active transporter",
+          "size": 76
+        },
+        {
+          "id": "797",
+          "parent_id": "1006",
+          "children": [],
+          "name": "Transmembrane 1-electron transfer carriers",
+          "size": 6
+        },
+        {
+          "id": "754",
+          "parent_id": "1006",
+          "children": [],
+          "name": "Group translocator",
+          "size": 3
+        }
+      ],
+      "name": "Transporter",
+      "size": 243
+    },
+    {
+      "id": "12",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "1033",
+          "parent_id": "12",
+          "children": [
+            {
+              "id": "1041",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1155",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "359",
+                      "parent_id": "1155",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group C member 3",
+                      "size": 10
+                    },
+                    {
+                      "id": "357",
+                      "parent_id": "1155",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group C member 1",
+                      "size": 5
+                    },
+                    {
+                      "id": "358",
+                      "parent_id": "1155",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group C member 2",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group C",
+                  "size": 17
+                },
+                {
+                  "id": "1159",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "363",
+                      "parent_id": "1159",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group I member 1",
+                      "size": 7
+                    },
+                    {
+                      "id": "364",
+                      "parent_id": "1159",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group I member 2",
+                      "size": 2
+                    },
+                    {
+                      "id": "365",
+                      "parent_id": "1159",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group I member 3",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group I",
+                  "size": 11
+                },
+                {
+                  "id": "1154",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "354",
+                      "parent_id": "1154",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group B member 1",
+                      "size": 6
+                    },
+                    {
+                      "id": "356",
+                      "parent_id": "1154",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group B member 3",
+                      "size": 5
+                    },
+                    {
+                      "id": "355",
+                      "parent_id": "1154",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group B member 2",
+                      "size": 4
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group B",
+                  "size": 11
+                },
+                {
+                  "id": "1158",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "360",
+                      "parent_id": "1158",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group H member 1",
+                      "size": 5
+                    },
+                    {
+                      "id": "361",
+                      "parent_id": "1158",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group H member 3",
+                      "size": 2
+                    },
+                    {
+                      "id": "362",
+                      "parent_id": "1158",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group H member 4",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group H",
+                  "size": 9
+                },
+                {
+                  "id": "1157",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "583",
+                      "parent_id": "1157",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group F member 1",
+                      "size": 2
+                    },
+                    {
+                      "id": "584",
+                      "parent_id": "1157",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group F member 3",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group F",
+                  "size": 5
+                },
+                {
+                  "id": "1153",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "353",
+                      "parent_id": "1153",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group A member 2",
+                      "size": 3
+                    },
+                    {
+                      "id": "352",
+                      "parent_id": "1153",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group A member 1",
+                      "size": 3
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group A",
+                  "size": 5
+                },
+                {
+                  "id": "1156",
+                  "parent_id": "1041",
+                  "children": [
+                    {
+                      "id": "582",
+                      "parent_id": "1156",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group D member 2",
+                      "size": 1
+                    },
+                    {
+                      "id": "581",
+                      "parent_id": "1156",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 1 group D member 1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 1 group D",
+                  "size": 2
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 1",
+              "size": 60
+            },
+            {
+              "id": "1043",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1167",
+                  "parent_id": "1043",
+                  "children": [
+                    {
+                      "id": "377",
+                      "parent_id": "1167",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group C member 3",
+                      "size": 6
+                    },
+                    {
+                      "id": "378",
+                      "parent_id": "1167",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group C member 4",
+                      "size": 4
+                    },
+                    {
+                      "id": "375",
+                      "parent_id": "1167",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group C member 1",
+                      "size": 3
+                    },
+                    {
+                      "id": "376",
+                      "parent_id": "1167",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group C member 2",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 3 group C",
+                  "size": 15
+                },
+                {
+                  "id": "1165",
+                  "parent_id": "1043",
+                  "children": [
+                    {
+                      "id": "370",
+                      "parent_id": "1165",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group A member 1",
+                      "size": 8
+                    },
+                    {
+                      "id": "371",
+                      "parent_id": "1165",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group A member 2",
+                      "size": 8
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 3 group A",
+                  "size": 12
+                },
+                {
+                  "id": "1166",
+                  "parent_id": "1043",
+                  "children": [
+                    {
+                      "id": "372",
+                      "parent_id": "1166",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group B member 1",
+                      "size": 2
+                    },
+                    {
+                      "id": "373",
+                      "parent_id": "1166",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group B member 2",
+                      "size": 1
+                    },
+                    {
+                      "id": "374",
+                      "parent_id": "1166",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 3 group B member 3",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 3 group B",
+                  "size": 4
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 3",
+              "size": 31
+            },
+            {
+              "id": "1042",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1161",
+                  "parent_id": "1042",
+                  "children": [
+                    {
+                      "id": "368",
+                      "parent_id": "1161",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group B member 3",
+                      "size": 6
+                    },
+                    {
+                      "id": "366",
+                      "parent_id": "1161",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group B member 1",
+                      "size": 6
+                    },
+                    {
+                      "id": "367",
+                      "parent_id": "1161",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group B member 2",
+                      "size": 5
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 2 group B",
+                  "size": 13
+                },
+                {
+                  "id": "1164",
+                  "parent_id": "1042",
+                  "children": [
+                    {
+                      "id": "590",
+                      "parent_id": "1164",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group F member 1",
+                      "size": 1
+                    },
+                    {
+                      "id": "592",
+                      "parent_id": "1164",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group F member 6",
+                      "size": 1
+                    },
+                    {
+                      "id": "591",
+                      "parent_id": "1164",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group F member 2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 2 group F",
+                  "size": 3
+                },
+                {
+                  "id": "1162",
+                  "parent_id": "1042",
+                  "children": [
+                    {
+                      "id": "588",
+                      "parent_id": "1162",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group C member 2",
+                      "size": 1
+                    },
+                    {
+                      "id": "587",
+                      "parent_id": "1162",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group C member 1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 2 group C",
+                  "size": 2
+                },
+                {
+                  "id": "1163",
+                  "parent_id": "1042",
+                  "children": [
+                    {
+                      "id": "369",
+                      "parent_id": "1163",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group E member 3",
+                      "size": 1
+                    },
+                    {
+                      "id": "589",
+                      "parent_id": "1163",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group E member 1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 2 group E",
+                  "size": 2
+                },
+                {
+                  "id": "1160",
+                  "parent_id": "1042",
+                  "children": [
+                    {
+                      "id": "586",
+                      "parent_id": "1160",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 2 group A member 2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 2 group A",
+                  "size": 1
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 2",
+              "size": 21
+            },
+            {
+              "id": "1045",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1169",
+                  "parent_id": "1045",
+                  "children": [
+                    {
+                      "id": "379",
+                      "parent_id": "1169",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 5 group A member 1",
+                      "size": 2
+                    },
+                    {
+                      "id": "380",
+                      "parent_id": "1169",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 5 group A member 2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 5 group A",
+                  "size": 3
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 5",
+              "size": 3
+            },
+            {
+              "id": "1044",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1168",
+                  "parent_id": "1044",
+                  "children": [
+                    {
+                      "id": "595",
+                      "parent_id": "1168",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 4 group A member 3",
+                      "size": 1
+                    },
+                    {
+                      "id": "593",
+                      "parent_id": "1168",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 4 group A member 1",
+                      "size": 1
+                    },
+                    {
+                      "id": "594",
+                      "parent_id": "1168",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 4 group A member 2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 4 group A",
+                  "size": 3
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 4",
+              "size": 3
+            },
+            {
+              "id": "1040",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1152",
+                  "parent_id": "1040",
+                  "children": [
+                    {
+                      "id": "597",
+                      "parent_id": "1152",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 0 group B member 1",
+                      "size": 1
+                    },
+                    {
+                      "id": "598",
+                      "parent_id": "1152",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 0 group B member 2",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 0 group B",
+                  "size": 2
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 0",
+              "size": 2
+            },
+            {
+              "id": "1046",
+              "parent_id": "1033",
+              "children": [
+                {
+                  "id": "1170",
+                  "parent_id": "1046",
+                  "children": [
+                    {
+                      "id": "596",
+                      "parent_id": "1170",
+                      "children": [],
+                      "name": "Nuclear hormone receptor subfamily 6 group A member 1",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Nuclear hormone receptor subfamily 6 group A",
+                  "size": 1
+                }
+              ],
+              "name": "Nuclear hormone receptor subfamily 6",
+              "size": 1
+            }
+          ],
+          "name": "Nuclear receptor",
+          "size": 132
+        }
+      ],
+      "name": "Transcription factor",
+      "size": 168
+    },
+    {
+      "id": "836",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "837",
+          "parent_id": "836",
+          "children": [
+            {
+              "id": "857",
+              "parent_id": "837",
+              "children": [],
+              "name": "Bromodomain",
+              "size": 29
+            },
+            {
+              "id": "858",
+              "parent_id": "837",
+              "children": [
+                {
+                  "id": "860",
+                  "parent_id": "858",
+                  "children": [],
+                  "name": "Tudor domain",
+                  "size": 8
+                },
+                {
+                  "id": "862",
+                  "parent_id": "858",
+                  "children": [],
+                  "name": "Chromodomain",
+                  "size": 7
+                },
+                {
+                  "id": "864",
+                  "parent_id": "858",
+                  "children": [],
+                  "name": "PWWP domain",
+                  "size": 6
+                },
+                {
+                  "id": "861",
+                  "parent_id": "858",
+                  "children": [],
+                  "name": "MBT domain",
+                  "size": 5
+                }
+              ],
+              "name": "Methyl-lysine/arginine binding protein",
+              "size": 26
+            },
+            {
+              "id": "859",
+              "parent_id": "837",
+              "children": [],
+              "name": "Plant homeodomain",
+              "size": 25
+            }
+          ],
+          "name": "Reader",
+          "size": 64
+        },
+        {
+          "id": "838",
+          "parent_id": "836",
+          "children": [
+            {
+              "id": "853",
+              "parent_id": "838",
+              "children": [
+                {
+                  "id": "856",
+                  "parent_id": "853",
+                  "children": [],
+                  "name": "SET domain",
+                  "size": 9
+                },
+                {
+                  "id": "854",
+                  "parent_id": "853",
+                  "children": [],
+                  "name": "Protein arginine methyltransferase",
+                  "size": 7
+                }
+              ],
+              "name": "Protein methyltransferase",
+              "size": 34
+            },
+            {
+              "id": "849",
+              "parent_id": "838",
+              "children": [
+                {
+                  "id": "886",
+                  "parent_id": "849",
+                  "children": [],
+                  "name": "SRC family",
+                  "size": 4
+                },
+                {
+                  "id": "852",
+                  "parent_id": "849",
+                  "children": [],
+                  "name": "p300/CBP family",
+                  "size": 3
+                },
+                {
+                  "id": "850",
+                  "parent_id": "849",
+                  "children": [],
+                  "name": "MYST family",
+                  "size": 2
+                },
+                {
+                  "id": "851",
+                  "parent_id": "849",
+                  "children": [],
+                  "name": "GNAT family",
+                  "size": 2
+                }
+              ],
+              "name": "Histone acetyltransferase",
+              "size": 11
+            },
+            {
+              "id": "889",
+              "parent_id": "838",
+              "children": [],
+              "name": "DNA methyltransferase",
+              "size": 6
+            }
+          ],
+          "name": "Writer",
+          "size": 51
+        },
+        {
+          "id": "839",
+          "parent_id": "836",
+          "children": [
+            {
+              "id": "840",
+              "parent_id": "839",
+              "children": [
+                {
+                  "id": "841",
+                  "parent_id": "840",
+                  "children": [],
+                  "name": "HDAC class I",
+                  "size": 9
+                },
+                {
+                  "id": "844",
+                  "parent_id": "840",
+                  "children": [],
+                  "name": "HDAC class III",
+                  "size": 7
+                },
+                {
+                  "id": "842",
+                  "parent_id": "840",
+                  "children": [],
+                  "name": "HDAC class IIa",
+                  "size": 6
+                },
+                {
+                  "id": "843",
+                  "parent_id": "840",
+                  "children": [],
+                  "name": "HDAC class IIb",
+                  "size": 3
+                },
+                {
+                  "id": "845",
+                  "parent_id": "840",
+                  "children": [],
+                  "name": "HDAC class IV",
+                  "size": 2
+                }
+              ],
+              "name": "Histone deacetylase",
+              "size": 23
+            },
+            {
+              "id": "846",
+              "parent_id": "839",
+              "children": [
+                {
+                  "id": "848",
+                  "parent_id": "846",
+                  "children": [],
+                  "name": "Jumonji domain-containing",
+                  "size": 15
+                },
+                {
+                  "id": "847",
+                  "parent_id": "846",
+                  "children": [],
+                  "name": "Lysine-specific demethylase",
+                  "size": 6
+                }
+              ],
+              "name": "Lysine demethylase",
+              "size": 20
+            }
+          ],
+          "name": "Eraser",
+          "size": 43
+        }
+      ],
+      "name": "Epigenetic regulator",
+      "size": 130
+    },
+    {
+      "id": "3",
+      "parent_id": "0",
+      "children": [],
+      "name": "Secreted protein",
+      "size": 82
+    },
+    {
+      "id": "4",
+      "parent_id": "0",
+      "children": [],
+      "name": "Structural protein",
+      "size": 38
+    },
+    {
+      "id": "825",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "830",
+          "parent_id": "825",
+          "children": [],
+          "name": "Fatty acid binding protein family",
+          "size": 12
+        },
+        {
+          "id": "834",
+          "parent_id": "825",
+          "children": [],
+          "name": "Calcium channel auxiliary subunit alpha2delta family",
+          "size": 11
+        },
+        {
+          "id": "831",
+          "parent_id": "825",
+          "children": [],
+          "name": "Calcium-activated potassium channel auxiliary subunit slowpoke-beta family",
+          "size": 5
+        },
+        {
+          "id": "835",
+          "parent_id": "825",
+          "children": [],
+          "name": "Sodium channel auxiliary subunit beta family",
+          "size": 4
+        },
+        {
+          "id": "833",
+          "parent_id": "825",
+          "children": [],
+          "name": "Calcium channel auxiliary subunit beta family",
+          "size": 3
+        },
+        {
+          "id": "829",
+          "parent_id": "825",
+          "children": [],
+          "name": "Slow voltage-gated potassium channel accessory protein family",
+          "size": 2
+        },
+        {
+          "id": "826",
+          "parent_id": "825",
+          "children": [],
+          "name": "Voltage-gated potassium channel beta-subunit family",
+          "size": 1
+        },
+        {
+          "id": "832",
+          "parent_id": "825",
+          "children": [],
+          "name": "Calcium channel auxiliary subunit gamma family",
+          "size": 1
+        }
+      ],
+      "name": "Auxiliary transport protein",
+      "size": 37
+    },
+    {
+      "id": "9",
+      "parent_id": "0",
+      "children": [],
+      "name": "Surface antigen",
+      "size": 35
+    },
+    {
+      "id": "7",
+      "parent_id": "0",
+      "children": [],
+      "name": "Other membrane protein",
+      "size": 20
+    },
+    {
+      "id": "2",
+      "parent_id": "0",
+      "children": [],
+      "name": "Adhesion",
+      "size": 17
+    },
+    {
+      "id": "5",
+      "parent_id": "0",
+      "children": [],
+      "name": "Other nuclear protein",
+      "size": 16
+    }
+  ]
+}

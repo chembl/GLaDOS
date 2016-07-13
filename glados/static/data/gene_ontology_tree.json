@@ -1,0 +1,2227 @@
+{
+  "name": "root",
+  "children": [
+    {
+      "id": "GO_0003674",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "GO_0003824",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0016787",
+              "parent_id": "GO_0003824",
+              "children": [
+                {
+                  "id": "GO_0016788",
+                  "parent_id": "GO_0016787",
+                  "children": [
+                    {
+                      "id": "GO_0016791",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Phosphatase activity",
+                      "size": 174
+                    },
+                    {
+                      "id": "GO_0016298",
+                      "parent_id": "GO_0016788",
+                      "children": [
+                        {
+                          "id": "GO_0004620",
+                          "parent_id": "GO_0016298",
+                          "children": [
+                            {
+                              "id": "GO_0004623",
+                              "parent_id": "GO_0004620",
+                              "children": [
+                                {
+                                  "id": "GO_0047499",
+                                  "parent_id": "GO_0004623",
+                                  "children": [],
+                                  "name": "Calcium-independent phospholipase A2 activity",
+                                  "size": 10
+                                }
+                              ],
+                              "name": "Phospholipase A2 activity",
+                              "size": 48
+                            },
+                            {
+                              "id": "GO_0004622",
+                              "parent_id": "GO_0004620",
+                              "children": [],
+                              "name": "Lysophospholipase activity",
+                              "size": 20
+                            },
+                            {
+                              "id": "GO_0008970",
+                              "parent_id": "GO_0004620",
+                              "children": [],
+                              "name": "Phosphatidylcholine 1-acylhydrolase activity",
+                              "size": 8
+                            },
+                            {
+                              "id": "GO_0004630",
+                              "parent_id": "GO_0004620",
+                              "children": [],
+                              "name": "Phospholipase D activity",
+                              "size": 6
+                            },
+                            {
+                              "id": "GO_0004767",
+                              "parent_id": "GO_0004620",
+                              "children": [],
+                              "name": "Sphingomyelin phosphodiesterase activity",
+                              "size": 4
+                            },
+                            {
+                              "id": "GO_0070290",
+                              "parent_id": "GO_0004620",
+                              "children": [],
+                              "name": "N-acylphosphatidylethanolamine-specific phospholipase D activity",
+                              "size": 4
+                            }
+                          ],
+                          "name": "Phospholipase activity",
+                          "size": 134
+                        },
+                        {
+                          "id": "GO_0004806",
+                          "parent_id": "GO_0016298",
+                          "children": [],
+                          "name": "Triglyceride lipase activity",
+                          "size": 19
+                        },
+                        {
+                          "id": "GO_0047372",
+                          "parent_id": "GO_0016298",
+                          "children": [],
+                          "name": "Acylglycerol lipase activity",
+                          "size": 17
+                        },
+                        {
+                          "id": "GO_0004771",
+                          "parent_id": "GO_0016298",
+                          "children": [],
+                          "name": "Sterol esterase activity",
+                          "size": 6
+                        }
+                      ],
+                      "name": "Lipase activity",
+                      "size": 160
+                    },
+                    {
+                      "id": "GO_0008081",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Phosphoric diester hydrolase activity",
+                      "size": 153
+                    },
+                    {
+                      "id": "GO_0004518",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Nuclease activity",
+                      "size": 95
+                    },
+                    {
+                      "id": "GO_0004104",
+                      "parent_id": "GO_0016788",
+                      "children": [
+                        {
+                          "id": "GO_0003990",
+                          "parent_id": "GO_0004104",
+                          "children": [],
+                          "name": "Acetylcholinesterase activity",
+                          "size": 23
+                        }
+                      ],
+                      "name": "Cholinesterase activity",
+                      "size": 27
+                    },
+                    {
+                      "id": "GO_0008474",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Palmitoyl-(protein) hydrolase activity",
+                      "size": 10
+                    },
+                    {
+                      "id": "GO_0003847",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "1-alkyl-2-acetylglycerophosphocholine esterase activity",
+                      "size": 10
+                    },
+                    {
+                      "id": "GO_0016290",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Palmitoyl-CoA hydrolase activity",
+                      "size": 8
+                    },
+                    {
+                      "id": "GO_0018738",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "S-formylglutathione hydrolase activity",
+                      "size": 3
+                    },
+                    {
+                      "id": "GO_0004453",
+                      "parent_id": "GO_0016788",
+                      "children": [],
+                      "name": "Juvenile-hormone esterase activity",
+                      "size": 2
+                    }
+                  ],
+                  "name": "Hydrolase activity, acting on ester bonds",
+                  "size": 615
+                },
+                {
+                  "id": "GO_0008233",
+                  "parent_id": "GO_0016787",
+                  "children": [
+                    {
+                      "id": "GO_0004252",
+                      "parent_id": "GO_0008233",
+                      "children": [],
+                      "name": "Serine-type endopeptidase activity",
+                      "size": 222
+                    }
+                  ],
+                  "name": "Peptidase activity",
+                  "size": 604
+                },
+                {
+                  "id": "GO_0017111",
+                  "parent_id": "GO_0016787",
+                  "children": [
+                    {
+                      "id": "GO_0016887",
+                      "parent_id": "GO_0017111",
+                      "children": [],
+                      "name": "ATPase activity",
+                      "size": 253
+                    },
+                    {
+                      "id": "GO_0003924",
+                      "parent_id": "GO_0017111",
+                      "children": [],
+                      "name": "GTPase activity",
+                      "size": 77
+                    },
+                    {
+                      "id": "GO_0004386",
+                      "parent_id": "GO_0017111",
+                      "children": [],
+                      "name": "Helicase activity",
+                      "size": 44
+                    }
+                  ],
+                  "name": "Nucleoside-triphosphatase activity",
+                  "size": 353
+                },
+                {
+                  "id": "GO_0016810",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "Hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds",
+                  "size": 242
+                },
+                {
+                  "id": "GO_0016798",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "Hydrolase activity, acting on glycosyl bonds",
+                  "size": 192
+                },
+                {
+                  "id": "GO_0004301",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "Epoxide hydrolase activity",
+                  "size": 11
+                },
+                {
+                  "id": "GO_0004170",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "DUTP diphosphatase activity",
+                  "size": 5
+                },
+                {
+                  "id": "GO_0004013",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "Adenosylhomocysteinase activity",
+                  "size": 5
+                },
+                {
+                  "id": "GO_0033961",
+                  "parent_id": "GO_0016787",
+                  "children": [],
+                  "name": "Cis-stilbene-oxide hydrolase activity",
+                  "size": 3
+                }
+              ],
+              "name": "Hydrolase activity",
+              "size": 2022
+            },
+            {
+              "id": "GO_0016740",
+              "parent_id": "GO_0003824",
+              "children": [
+                {
+                  "id": "GO_0016772",
+                  "parent_id": "GO_0016740",
+                  "children": [
+                    {
+                      "id": "GO_0016301",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "Kinase activity",
+                      "size": 1041
+                    },
+                    {
+                      "id": "GO_0016779",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "Nucleotidyltransferase activity",
+                      "size": 120
+                    },
+                    {
+                      "id": "GO_0008963",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "Phospho-N-acetylmuramoyl-pentapeptide-transferase activity",
+                      "size": 7
+                    },
+                    {
+                      "id": "GO_0051992",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "UDP-N-acetylmuramoyl-L-alanyl-D-glutamyl-meso-2,6-diaminopimelyl-D-alanyl-D-alanine:undecaprenyl-phosphate transferase activity",
+                      "size": 6
+                    },
+                    {
+                      "id": "GO_0003848",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "2-amino-4-hydroxy-6-hydroxymethyldihydropteridine diphosphokinase activity",
+                      "size": 3
+                    },
+                    {
+                      "id": "GO_0000215",
+                      "parent_id": "GO_0016772",
+                      "children": [],
+                      "name": "TRNA 2'-phosphotransferase activity",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Transferase activity, transferring phosphorus-containing groups",
+                  "size": 1178
+                },
+                {
+                  "id": "GO_0016746",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "Transferase activity, transferring acyl groups",
+                  "size": 185
+                },
+                {
+                  "id": "GO_0016757",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "Transferase activity, transferring glycosyl groups",
+                  "size": 165
+                },
+                {
+                  "id": "GO_0008168",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "Methyltransferase activity",
+                  "size": 124
+                },
+                {
+                  "id": "GO_0016765",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "Transferase activity, transferring alkyl or aryl (other than methyl) groups",
+                  "size": 107
+                },
+                {
+                  "id": "GO_0008146",
+                  "parent_id": "GO_0016740",
+                  "children": [
+                    {
+                      "id": "GO_0004062",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Aryl sulfotransferase activity",
+                      "size": 10
+                    },
+                    {
+                      "id": "GO_0050294",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Steroid sulfotransferase activity",
+                      "size": 6
+                    },
+                    {
+                      "id": "GO_0047894",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Flavonol 3-sulfotransferase activity",
+                      "size": 4
+                    },
+                    {
+                      "id": "GO_0047704",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Bile-salt sulfotransferase activity",
+                      "size": 2
+                    },
+                    {
+                      "id": "GO_0008476",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Protein-tyrosine sulfotransferase activity",
+                      "size": 1
+                    },
+                    {
+                      "id": "GO_0001517",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "N-acetylglucosamine 6-O-sulfotransferase activity",
+                      "size": 1
+                    },
+                    {
+                      "id": "GO_0004027",
+                      "parent_id": "GO_0008146",
+                      "children": [],
+                      "name": "Alcohol sulfotransferase activity",
+                      "size": 1
+                    }
+                  ],
+                  "name": "Sulfotransferase activity",
+                  "size": 19
+                },
+                {
+                  "id": "GO_0052656",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "L-isoleucine transaminase activity",
+                  "size": 3
+                },
+                {
+                  "id": "GO_0052654",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "L-leucine transaminase activity",
+                  "size": 3
+                },
+                {
+                  "id": "GO_0052655",
+                  "parent_id": "GO_0016740",
+                  "children": [],
+                  "name": "L-valine transaminase activity",
+                  "size": 3
+                }
+              ],
+              "name": "Transferase activity",
+              "size": 1868
+            },
+            {
+              "id": "GO_0016491",
+              "parent_id": "GO_0003824",
+              "children": [],
+              "name": "Oxidoreductase activity",
+              "size": 779
+            },
+            {
+              "id": "GO_0016829",
+              "parent_id": "GO_0003824",
+              "children": [],
+              "name": "Lyase activity",
+              "size": 257
+            },
+            {
+              "id": "GO_0016853",
+              "parent_id": "GO_0003824",
+              "children": [],
+              "name": "Isomerase activity",
+              "size": 183
+            },
+            {
+              "id": "GO_0016874",
+              "parent_id": "GO_0003824",
+              "children": [],
+              "name": "Ligase activity",
+              "size": 166
+            }
+          ],
+          "name": "Catalytic activity",
+          "size": 4819
+        },
+        {
+          "id": "GO_0005515",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0019899",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Enzyme binding",
+              "size": 1165
+            },
+            {
+              "id": "GO_0005102",
+              "parent_id": "GO_0005515",
+              "children": [
+                {
+                  "id": "GO_0035254",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Glutamate receptor binding",
+                  "size": 81
+                },
+                {
+                  "id": "GO_0005178",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Integrin binding",
+                  "size": 72
+                },
+                {
+                  "id": "GO_0005125",
+                  "parent_id": "GO_0005102",
+                  "children": [
+                    {
+                      "id": "GO_0008009",
+                      "parent_id": "GO_0005125",
+                      "children": [],
+                      "name": "Chemokine activity",
+                      "size": 9
+                    }
+                  ],
+                  "name": "Cytokine activity",
+                  "size": 55
+                },
+                {
+                  "id": "GO_0008083",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Growth factor activity",
+                  "size": 45
+                },
+                {
+                  "id": "GO_0005179",
+                  "parent_id": "GO_0005102",
+                  "children": [
+                    {
+                      "id": "GO_0005184",
+                      "parent_id": "GO_0005179",
+                      "children": [],
+                      "name": "Neuropeptide hormone activity",
+                      "size": 7
+                    }
+                  ],
+                  "name": "Hormone activity",
+                  "size": 32
+                },
+                {
+                  "id": "GO_0005154",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Epidermal growth factor receptor binding",
+                  "size": 18
+                },
+                {
+                  "id": "GO_0051428",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Peptide hormone receptor binding",
+                  "size": 15
+                },
+                {
+                  "id": "GO_0005109",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Frizzled binding",
+                  "size": 13
+                },
+                {
+                  "id": "GO_0005164",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Tumor necrosis factor receptor binding",
+                  "size": 12
+                },
+                {
+                  "id": "GO_0005123",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Death receptor binding",
+                  "size": 10
+                },
+                {
+                  "id": "GO_0005138",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Interleukin-6 receptor binding",
+                  "size": 8
+                },
+                {
+                  "id": "GO_0046789",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Host cell surface receptor binding",
+                  "size": 7
+                },
+                {
+                  "id": "GO_0048018",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Receptor agonist activity",
+                  "size": 6
+                },
+                {
+                  "id": "GO_0005153",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Interleukin-8 receptor binding",
+                  "size": 2
+                },
+                {
+                  "id": "GO_0005137",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Interleukin-5 receptor binding",
+                  "size": 2
+                },
+                {
+                  "id": "GO_0001515",
+                  "parent_id": "GO_0005102",
+                  "children": [],
+                  "name": "Opioid peptide activity",
+                  "size": 1
+                }
+              ],
+              "name": "Receptor binding",
+              "size": 924
+            },
+            {
+              "id": "GO_0042802",
+              "parent_id": "GO_0005515",
+              "children": [
+                {
+                  "id": "GO_0042803",
+                  "parent_id": "GO_0042802",
+                  "children": [],
+                  "name": "Protein homodimerization activity",
+                  "size": 542
+                }
+              ],
+              "name": "Identical protein binding",
+              "size": 897
+            },
+            {
+              "id": "GO_0032403",
+              "parent_id": "GO_0005515",
+              "children": [
+                {
+                  "id": "GO_0070628",
+                  "parent_id": "GO_0032403",
+                  "children": [],
+                  "name": "Proteasome binding",
+                  "size": 7
+                },
+                {
+                  "id": "GO_0019864",
+                  "parent_id": "GO_0032403",
+                  "children": [],
+                  "name": "IgG binding",
+                  "size": 4
+                }
+              ],
+              "name": "Protein complex binding",
+              "size": 519
+            },
+            {
+              "id": "GO_0046982",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Protein heterodimerization activity",
+              "size": 420
+            },
+            {
+              "id": "GO_0019904",
+              "parent_id": "GO_0005515",
+              "children": [
+                {
+                  "id": "GO_0051400",
+                  "parent_id": "GO_0019904",
+                  "children": [
+                    {
+                      "id": "GO_0051434",
+                      "parent_id": "GO_0051400",
+                      "children": [],
+                      "name": "BH3 domain binding",
+                      "size": 6
+                    }
+                  ],
+                  "name": "BH domain binding",
+                  "size": 9
+                },
+                {
+                  "id": "GO_0070976",
+                  "parent_id": "GO_0019904",
+                  "children": [],
+                  "name": "TIR domain binding",
+                  "size": 3
+                }
+              ],
+              "name": "Protein domain specific binding",
+              "size": 413
+            },
+            {
+              "id": "GO_0008092",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Cytoskeletal protein binding",
+              "size": 325
+            },
+            {
+              "id": "GO_0008134",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Transcription factor binding",
+              "size": 302
+            },
+            {
+              "id": "GO_0005516",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Calmodulin binding",
+              "size": 185
+            },
+            {
+              "id": "GO_0008022",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Protein C-terminus binding",
+              "size": 121
+            },
+            {
+              "id": "GO_0019838",
+              "parent_id": "GO_0005515",
+              "children": [
+                {
+                  "id": "GO_0005520",
+                  "parent_id": "GO_0019838",
+                  "children": [
+                    {
+                      "id": "GO_0031994",
+                      "parent_id": "GO_0005520",
+                      "children": [],
+                      "name": "Insulin-like growth factor I binding",
+                      "size": 23
+                    },
+                    {
+                      "id": "GO_0031995",
+                      "parent_id": "GO_0005520",
+                      "children": [],
+                      "name": "Insulin-like growth factor II binding",
+                      "size": 9
+                    }
+                  ],
+                  "name": "Insulin-like growth factor binding",
+                  "size": 25
+                }
+              ],
+              "name": "Growth factor binding",
+              "size": 112
+            },
+            {
+              "id": "GO_0044325",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Ion channel binding",
+              "size": 107
+            },
+            {
+              "id": "GO_0042393",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Histone binding",
+              "size": 87
+            },
+            {
+              "id": "GO_0051219",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Phosphoprotein binding",
+              "size": 66
+            },
+            {
+              "id": "GO_0001968",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Fibronectin binding",
+              "size": 46
+            },
+            {
+              "id": "GO_0051082",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Unfolded protein binding",
+              "size": 44
+            },
+            {
+              "id": "GO_0030674",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Protein binding, bridging",
+              "size": 41
+            },
+            {
+              "id": "GO_0043621",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Protein self-association",
+              "size": 40
+            },
+            {
+              "id": "GO_0000149",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "SNARE binding",
+              "size": 36
+            },
+            {
+              "id": "GO_0032182",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Ubiquitin-like protein binding",
+              "size": 33
+            },
+            {
+              "id": "GO_0017147",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Wnt-protein binding",
+              "size": 12
+            },
+            {
+              "id": "GO_0043008",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "ATP-dependent protein binding",
+              "size": 9
+            },
+            {
+              "id": "GO_0005484",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "SNAP receptor activity",
+              "size": 4
+            },
+            {
+              "id": "GO_0044183",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Protein binding involved in protein folding",
+              "size": 4
+            },
+            {
+              "id": "GO_0030881",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "Beta-2-microglobulin binding",
+              "size": 3
+            },
+            {
+              "id": "GO_0045569",
+              "parent_id": "GO_0005515",
+              "children": [],
+              "name": "TRAIL binding",
+              "size": 2
+            }
+          ],
+          "name": "Protein binding",
+          "size": 4129
+        },
+        {
+          "id": "GO_0043167",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Ion binding",
+          "size": 4015
+        },
+        {
+          "id": "GO_0000166",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0030554",
+              "parent_id": "GO_0000166",
+              "children": [],
+              "name": "Adenyl nucleotide binding",
+              "size": 1531
+            },
+            {
+              "id": "GO_0051287",
+              "parent_id": "GO_0000166",
+              "children": [],
+              "name": "NAD binding",
+              "size": 85
+            }
+          ],
+          "name": "Nucleotide binding",
+          "size": 2002
+        },
+        {
+          "id": "GO_0004871",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Signal transducer activity",
+          "size": 1833
+        },
+        {
+          "id": "GO_0004872",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0004930",
+              "parent_id": "GO_0004872",
+              "children": [],
+              "name": "G-protein coupled receptor activity",
+              "size": 871
+            },
+            {
+              "id": "GO_0001618",
+              "parent_id": "GO_0004872",
+              "children": [],
+              "name": "Virus receptor activity",
+              "size": 62
+            },
+            {
+              "id": "GO_0005044",
+              "parent_id": "GO_0004872",
+              "children": [],
+              "name": "Scavenger receptor activity",
+              "size": 12
+            },
+            {
+              "id": "GO_0042813",
+              "parent_id": "GO_0004872",
+              "children": [],
+              "name": "Wnt-activated receptor activity",
+              "size": 5
+            },
+            {
+              "id": "GO_0004873",
+              "parent_id": "GO_0004872",
+              "children": [],
+              "name": "Asialoglycoprotein receptor activity",
+              "size": 4
+            }
+          ],
+          "name": "Receptor activity",
+          "size": 1780
+        },
+        {
+          "id": "GO_0003676",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0003677",
+              "parent_id": "GO_0003676",
+              "children": [],
+              "name": "DNA binding",
+              "size": 654
+            },
+            {
+              "id": "GO_0003723",
+              "parent_id": "GO_0003676",
+              "children": [
+                {
+                  "id": "GO_0019843",
+                  "parent_id": "GO_0003723",
+                  "children": [],
+                  "name": "RRNA binding",
+                  "size": 226
+                },
+                {
+                  "id": "GO_0003729",
+                  "parent_id": "GO_0003723",
+                  "children": [],
+                  "name": "MRNA binding",
+                  "size": 74
+                },
+                {
+                  "id": "GO_0008135",
+                  "parent_id": "GO_0003723",
+                  "children": [],
+                  "name": "Translation factor activity, RNA binding",
+                  "size": 17
+                },
+                {
+                  "id": "GO_0030533",
+                  "parent_id": "GO_0003723",
+                  "children": [],
+                  "name": "Triplet codon-amino acid adaptor activity",
+                  "size": 0
+                }
+              ],
+              "name": "RNA binding",
+              "size": 585
+            }
+          ],
+          "name": "Nucleic acid binding",
+          "size": 1168
+        },
+        {
+          "id": "GO_0005215",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0022857",
+              "parent_id": "GO_0005215",
+              "children": [],
+              "name": "Transmembrane transporter activity",
+              "size": 1042
+            },
+            {
+              "id": "GO_0008565",
+              "parent_id": "GO_0005215",
+              "children": [],
+              "name": "Protein transporter activity",
+              "size": 43
+            }
+          ],
+          "name": "Transporter activity",
+          "size": 1143
+        },
+        {
+          "id": "GO_0008289",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Lipid binding",
+          "size": 451
+        },
+        {
+          "id": "GO_0005198",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0003735",
+              "parent_id": "GO_0005198",
+              "children": [],
+              "name": "Structural constituent of ribosome",
+              "size": 346
+            }
+          ],
+          "name": "Structural molecule activity",
+          "size": 445
+        },
+        {
+          "id": "GO_0030234",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Enzyme regulator activity",
+          "size": 350
+        },
+        {
+          "id": "GO_0042277",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0001540",
+              "parent_id": "GO_0042277",
+              "children": [],
+              "name": "Beta-amyloid binding",
+              "size": 24
+            }
+          ],
+          "name": "Peptide binding",
+          "size": 330
+        },
+        {
+          "id": "GO_0001071",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Nucleic acid binding transcription factor activity",
+          "size": 311
+        },
+        {
+          "id": "GO_0003682",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Chromatin binding",
+          "size": 249
+        },
+        {
+          "id": "GO_0000988",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Protein binding transcription factor activity",
+          "size": 198
+        },
+        {
+          "id": "GO_0030246",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0005537",
+              "parent_id": "GO_0030246",
+              "children": [],
+              "name": "Mannose binding",
+              "size": 16
+            }
+          ],
+          "name": "Carbohydrate binding",
+          "size": 161
+        },
+        {
+          "id": "GO_0042562",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0070324",
+              "parent_id": "GO_0042562",
+              "children": [],
+              "name": "Thyroid hormone binding",
+              "size": 10
+            }
+          ],
+          "name": "Hormone binding",
+          "size": 157
+        },
+        {
+          "id": "GO_0005085",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0005089",
+              "parent_id": "GO_0005085",
+              "children": [],
+              "name": "Rho guanyl-nucleotide exchange factor activity",
+              "size": 10
+            }
+          ],
+          "name": "Guanyl-nucleotide exchange factor activity",
+          "size": 126
+        },
+        {
+          "id": "GO_0005539",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Glycosaminoglycan binding",
+          "size": 90
+        },
+        {
+          "id": "GO_0050840",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Extracellular matrix binding",
+          "size": 43
+        },
+        {
+          "id": "GO_0003823",
+          "parent_id": "GO_0003674",
+          "children": [
+            {
+              "id": "GO_0042605",
+              "parent_id": "GO_0003823",
+              "children": [],
+              "name": "Peptide antigen binding",
+              "size": 10
+            }
+          ],
+          "name": "Antigen binding",
+          "size": 37
+        },
+        {
+          "id": "GO_0042056",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Chemoattractant activity",
+          "size": 16
+        },
+        {
+          "id": "GO_0030169",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Low-density lipoprotein particle binding",
+          "size": 9
+        },
+        {
+          "id": "GO_0016936",
+          "parent_id": "GO_0003674",
+          "children": [],
+          "name": "Galactoside binding",
+          "size": 7
+        }
+      ],
+      "name": "Molecular function",
+      "size": 7833
+    },
+    {
+      "id": "GO_0008150",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "GO_0008152",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0009058",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0006412",
+                  "parent_id": "GO_0009058",
+                  "children": [],
+                  "name": "Translation",
+                  "size": 435
+                }
+              ],
+              "name": "Biosynthetic process",
+              "size": 2754
+            },
+            {
+              "id": "GO_0034641",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0006259",
+                  "parent_id": "GO_0034641",
+                  "children": [],
+                  "name": "DNA metabolic process",
+                  "size": 423
+                },
+                {
+                  "id": "GO_0034655",
+                  "parent_id": "GO_0034641",
+                  "children": [],
+                  "name": "Nucleobase-containing compound catabolic process",
+                  "size": 142
+                },
+                {
+                  "id": "GO_0006399",
+                  "parent_id": "GO_0034641",
+                  "children": [],
+                  "name": "TRNA metabolic process",
+                  "size": 55
+                },
+                {
+                  "id": "GO_0006397",
+                  "parent_id": "GO_0034641",
+                  "children": [],
+                  "name": "MRNA processing",
+                  "size": 55
+                }
+              ],
+              "name": "Cellular nitrogen compound metabolic process",
+              "size": 2263
+            },
+            {
+              "id": "GO_0044281",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0006520",
+                  "parent_id": "GO_0044281",
+                  "children": [],
+                  "name": "Cellular amino acid metabolic process",
+                  "size": 366
+                }
+              ],
+              "name": "Small molecule metabolic process",
+              "size": 1878
+            },
+            {
+              "id": "GO_0006464",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Cellular protein modification process",
+              "size": 1697
+            },
+            {
+              "id": "GO_0016310",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Phosphorylation",
+              "size": 1294
+            },
+            {
+              "id": "GO_0009056",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0006914",
+                  "parent_id": "GO_0009056",
+                  "children": [],
+                  "name": "Autophagy",
+                  "size": 174
+                }
+              ],
+              "name": "Catabolic process",
+              "size": 1211
+            },
+            {
+              "id": "GO_0006629",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Lipid metabolic process",
+              "size": 1059
+            },
+            {
+              "id": "GO_0006508",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0016485",
+                  "parent_id": "GO_0006508",
+                  "children": [
+                    {
+                      "id": "GO_0031638",
+                      "parent_id": "GO_0016485",
+                      "children": [
+                        {
+                          "id": "GO_0031639",
+                          "parent_id": "GO_0031638",
+                          "children": [],
+                          "name": "Plasminogen activation",
+                          "size": 14
+                        }
+                      ],
+                      "name": "Zymogen activation",
+                      "size": 105
+                    },
+                    {
+                      "id": "GO_0016540",
+                      "parent_id": "GO_0016485",
+                      "children": [],
+                      "name": "Protein autoprocessing",
+                      "size": 22
+                    }
+                  ],
+                  "name": "Protein processing",
+                  "size": 231
+                }
+              ],
+              "name": "Proteolysis",
+              "size": 795
+            },
+            {
+              "id": "GO_0005975",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Carbohydrate metabolic process",
+              "size": 580
+            },
+            {
+              "id": "GO_0051186",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Cofactor metabolic process",
+              "size": 358
+            },
+            {
+              "id": "GO_0006091",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Generation of precursor metabolites and energy",
+              "size": 256
+            },
+            {
+              "id": "GO_0006790",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Sulfur compound metabolic process",
+              "size": 218
+            },
+            {
+              "id": "GO_0009308",
+              "parent_id": "GO_0008152",
+              "children": [
+                {
+                  "id": "GO_0009690",
+                  "parent_id": "GO_0009308",
+                  "children": [],
+                  "name": "Cytokinin metabolic process",
+                  "size": 2
+                }
+              ],
+              "name": "Amine metabolic process",
+              "size": 186
+            },
+            {
+              "id": "GO_0017144",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Drug metabolic process",
+              "size": 149
+            },
+            {
+              "id": "GO_0032259",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Methylation",
+              "size": 140
+            },
+            {
+              "id": "GO_0006805",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Xenobiotic metabolic process",
+              "size": 97
+            },
+            {
+              "id": "GO_0006457",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Protein folding",
+              "size": 74
+            },
+            {
+              "id": "GO_0019748",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Secondary metabolic process",
+              "size": 56
+            },
+            {
+              "id": "GO_0009820",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Alkaloid metabolic process",
+              "size": 21
+            },
+            {
+              "id": "GO_0071941",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Nitrogen cycle metabolic process",
+              "size": 19
+            },
+            {
+              "id": "GO_0051604",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Protein maturation",
+              "size": 17
+            },
+            {
+              "id": "GO_0070989",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Oxidative demethylation",
+              "size": 14
+            },
+            {
+              "id": "GO_0015979",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Photosynthesis",
+              "size": 12
+            },
+            {
+              "id": "GO_0008218",
+              "parent_id": "GO_0008152",
+              "children": [],
+              "name": "Bioluminescence",
+              "size": 8
+            }
+          ],
+          "name": "Metabolic process",
+          "size": 5851
+        },
+        {
+          "id": "GO_0007165",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Signal transduction",
+          "size": 3034
+        },
+        {
+          "id": "GO_0007275",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Multicellular organismal development",
+          "size": 2261
+        },
+        {
+          "id": "GO_0006950",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Response to stress",
+          "size": 2257
+        },
+        {
+          "id": "GO_0006810",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0055085",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Transmembrane transport",
+              "size": 1115
+            },
+            {
+              "id": "GO_0016192",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Vesicle-mediated transport",
+              "size": 554
+            },
+            {
+              "id": "GO_0006605",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Protein targeting",
+              "size": 144
+            },
+            {
+              "id": "GO_0006913",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Nucleocytoplasmic transport",
+              "size": 112
+            },
+            {
+              "id": "GO_0007034",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Vacuolar transport",
+              "size": 38
+            },
+            {
+              "id": "GO_0030705",
+              "parent_id": "GO_0006810",
+              "children": [],
+              "name": "Cytoskeleton-dependent intracellular transport",
+              "size": 37
+            }
+          ],
+          "name": "Transport",
+          "size": 2239
+        },
+        {
+          "id": "GO_0030154",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell differentiation",
+          "size": 1601
+        },
+        {
+          "id": "GO_0050790",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0043085",
+              "parent_id": "GO_0050790",
+              "children": [],
+              "name": "Positive regulation of catalytic activity",
+              "size": 1059
+            },
+            {
+              "id": "GO_0010951",
+              "parent_id": "GO_0050790",
+              "children": [],
+              "name": "Negative regulation of endopeptidase activity",
+              "size": 101
+            }
+          ],
+          "name": "Regulation of catalytic activity",
+          "size": 1406
+        },
+        {
+          "id": "GO_0042592",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Homeostatic process",
+          "size": 1299
+        },
+        {
+          "id": "GO_0002376",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Immune system process",
+          "size": 1120
+        },
+        {
+          "id": "GO_0022607",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0065003",
+              "parent_id": "GO_0022607",
+              "children": [
+                {
+                  "id": "GO_0006461",
+                  "parent_id": "GO_0065003",
+                  "children": [],
+                  "name": "Protein complex assembly",
+                  "size": 662
+                },
+                {
+                  "id": "GO_0022618",
+                  "parent_id": "GO_0065003",
+                  "children": [],
+                  "name": "Ribonucleoprotein complex assembly",
+                  "size": 68
+                }
+              ],
+              "name": "Macromolecular complex assembly",
+              "size": 757
+            }
+          ],
+          "name": "Cellular component assembly",
+          "size": 956
+        },
+        {
+          "id": "GO_0007267",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell-cell signaling",
+          "size": 928
+        },
+        {
+          "id": "GO_0050877",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Neurological system process",
+          "size": 852
+        },
+        {
+          "id": "GO_0048856",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0009790",
+              "parent_id": "GO_0048856",
+              "children": [],
+              "name": "Embryo development",
+              "size": 453
+            }
+          ],
+          "name": "Anatomical structure development",
+          "size": 827
+        },
+        {
+          "id": "GO_0040011",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0048870",
+              "parent_id": "GO_0040011",
+              "children": [],
+              "name": "Cell motility",
+              "size": 613
+            }
+          ],
+          "name": "Locomotion",
+          "size": 811
+        },
+        {
+          "id": "GO_0032880",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Regulation of protein localization",
+          "size": 760
+        },
+        {
+          "id": "GO_0000003",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Reproduction",
+          "size": 730
+        },
+        {
+          "id": "GO_0003013",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Circulatory system process",
+          "size": 683
+        },
+        {
+          "id": "GO_0008219",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell death",
+          "size": 647
+        },
+        {
+          "id": "GO_0009636",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0046677",
+              "parent_id": "GO_0009636",
+              "children": [],
+              "name": "Response to antibiotic",
+              "size": 245
+            }
+          ],
+          "name": "Response to toxic substance",
+          "size": 587
+        },
+        {
+          "id": "GO_0007049",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell cycle",
+          "size": 584
+        },
+        {
+          "id": "GO_0043065",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Positive regulation of apoptotic process",
+          "size": 503
+        },
+        {
+          "id": "GO_0048646",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Anatomical structure formation involved in morphogenesis",
+          "size": 491
+        },
+        {
+          "id": "GO_0007155",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell adhesion",
+          "size": 473
+        },
+        {
+          "id": "GO_0008283",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell proliferation",
+          "size": 452
+        },
+        {
+          "id": "GO_0051276",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Chromosome organization",
+          "size": 434
+        },
+        {
+          "id": "GO_0044403",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Symbiosis, encompassing mutualism through parasitism",
+          "size": 428
+        },
+        {
+          "id": "GO_0007568",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Aging",
+          "size": 385
+        },
+        {
+          "id": "GO_0040007",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Growth",
+          "size": 364
+        },
+        {
+          "id": "GO_0061024",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0007009",
+              "parent_id": "GO_0061024",
+              "children": [],
+              "name": "Plasma membrane organization",
+              "size": 88
+            }
+          ],
+          "name": "Membrane organization",
+          "size": 361
+        },
+        {
+          "id": "GO_0000902",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell morphogenesis",
+          "size": 357
+        },
+        {
+          "id": "GO_0007010",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cytoskeleton organization",
+          "size": 311
+        },
+        {
+          "id": "GO_0051301",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell division",
+          "size": 250
+        },
+        {
+          "id": "GO_0007005",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Mitochondrion organization",
+          "size": 246
+        },
+        {
+          "id": "GO_0007565",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Female pregnancy",
+          "size": 239
+        },
+        {
+          "id": "GO_0007017",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Microtubule-based process",
+          "size": 199
+        },
+        {
+          "id": "GO_0030198",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Extracellular matrix organization",
+          "size": 192
+        },
+        {
+          "id": "GO_0007586",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Digestion",
+          "size": 159
+        },
+        {
+          "id": "GO_0021700",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Developmental maturation",
+          "size": 137
+        },
+        {
+          "id": "GO_0007067",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Mitotic nuclear division",
+          "size": 125
+        },
+        {
+          "id": "GO_0035690",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cellular response to drug",
+          "size": 119
+        },
+        {
+          "id": "GO_0007059",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Chromosome segregation",
+          "size": 96
+        },
+        {
+          "id": "GO_0071554",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell wall organization or biogenesis",
+          "size": 95
+        },
+        {
+          "id": "GO_0042254",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Ribosome biogenesis",
+          "size": 89
+        },
+        {
+          "id": "GO_0034330",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Cell junction organization",
+          "size": 82
+        },
+        {
+          "id": "GO_0050821",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Protein stabilization",
+          "size": 59
+        },
+        {
+          "id": "GO_0009405",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Pathogenesis",
+          "size": 53
+        },
+        {
+          "id": "GO_0007585",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Respiratory gaseous exchange",
+          "size": 48
+        },
+        {
+          "id": "GO_0043473",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Pigmentation",
+          "size": 45
+        },
+        {
+          "id": "GO_0019835",
+          "parent_id": "GO_0008150",
+          "children": [
+            {
+              "id": "GO_0044179",
+              "parent_id": "GO_0019835",
+              "children": [],
+              "name": "Hemolysis in other organism",
+              "size": 11
+            }
+          ],
+          "name": "Cytolysis",
+          "size": 24
+        },
+        {
+          "id": "GO_0035634",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Response to stilbenoid",
+          "size": 9
+        },
+        {
+          "id": "GO_0015976",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Carbon utilization",
+          "size": 7
+        },
+        {
+          "id": "GO_0032196",
+          "parent_id": "GO_0008150",
+          "children": [],
+          "name": "Transposition",
+          "size": 0
+        }
+      ],
+      "name": "Biological process",
+      "size": 7772
+    },
+    {
+      "id": "GO_0005575",
+      "parent_id": "0",
+      "children": [
+        {
+          "id": "GO_0043226",
+          "parent_id": "GO_0005575",
+          "children": [
+            {
+              "id": "GO_0005634",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Nucleus",
+              "size": 1854
+            },
+            {
+              "id": "GO_0005783",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Endoplasmic reticulum",
+              "size": 891
+            },
+            {
+              "id": "GO_0005739",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Mitochondrion",
+              "size": 795
+            },
+            {
+              "id": "GO_0016023",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Cytoplasmic membrane-bounded vesicle",
+              "size": 640
+            },
+            {
+              "id": "GO_0005794",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Golgi apparatus",
+              "size": 607
+            },
+            {
+              "id": "GO_0005856",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Cytoskeleton",
+              "size": 564
+            },
+            {
+              "id": "GO_0005768",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Endosome",
+              "size": 439
+            },
+            {
+              "id": "GO_0005694",
+              "parent_id": "GO_0043226",
+              "children": [
+                {
+                  "id": "GO_0000228",
+                  "parent_id": "GO_0005694",
+                  "children": [],
+                  "name": "Nuclear chromosome",
+                  "size": 227
+                },
+                {
+                  "id": "GO_0000229",
+                  "parent_id": "GO_0005694",
+                  "children": [],
+                  "name": "Cytoplasmic chromosome",
+                  "size": 0
+                }
+              ],
+              "name": "Chromosome",
+              "size": 398
+            },
+            {
+              "id": "GO_0005773",
+              "parent_id": "GO_0043226",
+              "children": [
+                {
+                  "id": "GO_0005764",
+                  "parent_id": "GO_0005773",
+                  "children": [],
+                  "name": "Lysosome",
+                  "size": 326
+                }
+              ],
+              "name": "Vacuole",
+              "size": 369
+            },
+            {
+              "id": "GO_0005840",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Ribosome",
+              "size": 366
+            },
+            {
+              "id": "GO_0005730",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Nucleolus",
+              "size": 194
+            },
+            {
+              "id": "GO_0005929",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Cilium",
+              "size": 193
+            },
+            {
+              "id": "GO_0005777",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Peroxisome",
+              "size": 83
+            },
+            {
+              "id": "GO_0009536",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Plastid",
+              "size": 40
+            },
+            {
+              "id": "GO_0005811",
+              "parent_id": "GO_0043226",
+              "children": [],
+              "name": "Lipid particle",
+              "size": 39
+            }
+          ],
+          "name": "Organelle",
+          "size": 4796
+        },
+        {
+          "id": "GO_0016020",
+          "parent_id": "GO_0005575",
+          "children": [
+            {
+              "id": "GO_0005886",
+              "parent_id": "GO_0016020",
+              "children": [],
+              "name": "Plasma membrane",
+              "size": 3313
+            },
+            {
+              "id": "GO_0055036",
+              "parent_id": "GO_0016020",
+              "children": [],
+              "name": "Virion membrane",
+              "size": 61
+            }
+          ],
+          "name": "Membrane",
+          "size": 4490
+        },
+        {
+          "id": "GO_0005737",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Cytoplasm",
+          "size": 3254
+        },
+        {
+          "id": "GO_0016021",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Integral component of membrane",
+          "size": 2983
+        },
+        {
+          "id": "GO_0005622",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Intracellular",
+          "size": 2543
+        },
+        {
+          "id": "GO_0005623",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Cell",
+          "size": 2326
+        },
+        {
+          "id": "GO_0005829",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Cytosol",
+          "size": 2069
+        },
+        {
+          "id": "GO_0043234",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Protein complex",
+          "size": 1906
+        },
+        {
+          "id": "GO_0005576",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Extracellular region",
+          "size": 1793
+        },
+        {
+          "id": "GO_0005654",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Nucleoplasm",
+          "size": 949
+        },
+        {
+          "id": "GO_0005615",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Extracellular space",
+          "size": 636
+        },
+        {
+          "id": "GO_0005635",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Nuclear envelope",
+          "size": 265
+        },
+        {
+          "id": "GO_0005815",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Microtubule organizing center",
+          "size": 240
+        },
+        {
+          "id": "GO_0005578",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Proteinaceous extracellular matrix",
+          "size": 105
+        },
+        {
+          "id": "GO_0019012",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Virion",
+          "size": 75
+        },
+        {
+          "id": "GO_0030312",
+          "parent_id": "GO_0005575",
+          "children": [
+            {
+              "id": "GO_0005618",
+              "parent_id": "GO_0030312",
+              "children": [],
+              "name": "Cell wall",
+              "size": 64
+            }
+          ],
+          "name": "External encapsulating structure",
+          "size": 75
+        },
+        {
+          "id": "GO_0019031",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Viral envelope",
+          "size": 40
+        },
+        {
+          "id": "GO_0019028",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Viral capsid",
+          "size": 17
+        },
+        {
+          "id": "GO_0009579",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Thylakoid",
+          "size": 12
+        },
+        {
+          "id": "GO_0019013",
+          "parent_id": "GO_0005575",
+          "children": [],
+          "name": "Viral nucleocapsid",
+          "size": 11
+        }
+      ],
+      "name": "Cellular component",
+      "size": 7302
+    }
+  ]
+}
