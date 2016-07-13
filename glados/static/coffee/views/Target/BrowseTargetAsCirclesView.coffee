@@ -11,6 +11,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     $(window).resize ->
       updateViewProxy()
 
+    updateViewProxy()
+    
   showPreloader: ->
 
     if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
@@ -32,6 +34,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     @hidePreloader()
     margin = 20
     diameter = $(@el).width();
+
+    diameter = 300 unless diameter != 0;
 
     color = d3.scale.linear()
     .domain([-1, 5])

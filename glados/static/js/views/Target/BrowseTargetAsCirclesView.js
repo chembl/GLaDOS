@@ -7,9 +7,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     this.showPreloader();
     debounced_render = _.debounce($.proxy(this.render, this), 300);
     updateViewProxy = $.proxy(this.updateView, this, debounced_render);
-    return $(window).resize(function() {
+    $(window).resize(function() {
       return updateViewProxy();
     });
+    return updateViewProxy();
   },
   showPreloader: function() {
     if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
@@ -31,6 +32,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     this.hidePreloader();
     margin = 20;
     diameter = $(this.el).width();
+    if (diameter === 0) {
+      diameter = 300;
+    }
     color = d3.scale.linear().domain([-1, 5]).range(["white", "rgb(0, 110, 156)"]).interpolate(d3.interpolateRgb);
     pack = d3.layout.pack().padding(2).size([diameter - margin, diameter - margin]).value(function(d) {
       return d.size;
