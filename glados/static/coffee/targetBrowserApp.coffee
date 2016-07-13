@@ -8,7 +8,7 @@ class TargetBrowserApp
     targetTree = new TargetHierarchyTree
 
     # TODO: set up the correct url
-    targetTree.url = 'static/data/sample_target_tree.json'
+    targetTree.url = 'static/data/taxonomy_target_tree.json'
 
     return targetTree
 
