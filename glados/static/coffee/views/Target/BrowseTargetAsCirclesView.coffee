@@ -12,7 +12,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
       updateViewProxy()
 
     updateViewProxy()
-    
+
   showPreloader: ->
 
     if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
