@@ -29,7 +29,6 @@ BrowseTargetAsListView = Backbone.View.extend({
     }
     console.log('finish to create list views ' + new Date());
     console.log('start to collapse all ' + new Date());
-    table.treegrid();
     console.log('finish to collapse all ' + new Date());
     return console.log('finish to render list ' + new Date());
   },

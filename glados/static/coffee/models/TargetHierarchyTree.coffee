@@ -20,8 +20,12 @@ TargetHierarchyTree = Backbone.Model.extend
     all_nodes = new TargetHierarchyChildren
     children_col = new TargetHierarchyChildren
 
-    addOneNode = (node_obj, children_col, parent) ->
+    #the root has depth 0
+    @set('depth', 0, {silent: true})
 
+    addOneNode = (node_obj, children_col, parent, parent_depth) ->
+
+      my_depth = parent_depth + 1
       # new collection for the children of this children
       grand_children_coll = new TargetHierarchyChildren
 
@@ -31,6 +35,7 @@ TargetHierarchyTree = Backbone.Model.extend
         parent: parent
         children: grand_children_coll
         size: node_obj.size
+        depth: my_depth
 
       children_col.add(new_node)
 
@@ -39,12 +44,15 @@ TargetHierarchyTree = Backbone.Model.extend
 
       if node_obj.children?
         for child_obj in node_obj.children
-          addOneNode(child_obj, grand_children_coll, new_node)
+          addOneNode(child_obj, grand_children_coll, new_node, my_depth)
 
 
     for node in @.get('children')
       if node?
-        addOneNode(node, children_col, undefined)
+        addOneNode(node, children_col, undefined, 0)
+
+    console.log('tree!')
+    console.log(@)
 
 
     @set('all_nodes', all_nodes, {silent: true})

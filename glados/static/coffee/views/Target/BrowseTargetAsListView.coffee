@@ -30,7 +30,7 @@ BrowseTargetAsListView = Backbone.View.extend
 
 
     console.log('start to collapse all ' + new Date())
-    table.treegrid()
+    #table.treegrid()
 
     #table.treegrid('collapseAll')
     console.log('finish to collapse all ' + new Date())
