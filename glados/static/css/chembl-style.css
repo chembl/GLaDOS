@@ -2953,30 +2953,52 @@ div#CNC-zoom-modal {
   margin: 0px;
   height: 2rem; }
 
-.target-browser .options a {
-  display: inline-block;
-  margin-bottom: 5px; }
-.target-browser [type="checkbox"].filled-in + label {
-  padding-left: 20px;
-  height: unset;
-  line-height: unset; }
-.target-browser [type="checkbox"].incomplete:checked + label:before {
-  border-right: 2px solid transparent;
-  border-bottom: 2px solid transparent; }
-.target-browser .browser-as-circles .node {
-  cursor: pointer; }
-.target-browser .browser-as-circles .node:hover {
-  stroke: #000;
-  stroke-width: 1.5px; }
-.target-browser .browser-as-circles .node--leaf {
-  fill: white; }
-.target-browser .browser-as-circles .label {
-  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-anchor: middle;
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; }
-.target-browser .browser-as-circles .label,
-.target-browser .browser-as-circles .node--root,
-.target-browser .browser-as-circles .node--leaf {
-  pointer-events: none; }
+.target-browser {
+  /**
+  * Tree browser!
+  * ----------------------------------------------------------------------------------------------------------------------
+  */ }
+  .target-browser .options a {
+    display: inline-block;
+    margin-bottom: 5px; }
+  .target-browser [type="checkbox"].filled-in + label {
+    padding-left: 20px;
+    height: unset;
+    line-height: unset; }
+  .target-browser [type="checkbox"].incomplete:checked + label:before {
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent; }
+  .target-browser .browser-as-circles .node {
+    cursor: pointer; }
+  .target-browser .browser-as-circles .node:hover {
+    stroke: #000;
+    stroke-width: 1.5px; }
+  .target-browser .browser-as-circles .node--leaf {
+    fill: white; }
+  .target-browser .browser-as-circles .label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; }
+  .target-browser .browser-as-circles .label,
+  .target-browser .browser-as-circles .node--root,
+  .target-browser .browser-as-circles .node--leaf {
+    pointer-events: none; }
+  .target-browser .tree-indent {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative; }
+  .target-browser .tree-expander {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer; }
+  .target-browser .tree-expander-expanded:before {
+    font-family: 'EBI-Functional';
+    content: "8"; }
+  .target-browser .tree-expander-collapsed:before {
+    font-family: 'EBI-Functional';
+    content: "9"; }
 
 /*# sourceMappingURL=chembl-style.css.map */

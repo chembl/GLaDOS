@@ -1711,7 +1711,6 @@ $marvin-size-fullscreen: 91vh;
     }
   }
 
-
   .browser-as-circles {
     .node {
       cursor: pointer;
@@ -1739,8 +1738,41 @@ $marvin-size-fullscreen: 91vh;
     }
   }
 
-}
+  /**
+  * Tree browser!
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
 
+  .tree-indent {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .tree-expander {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .tree-expander-expanded:before {
+
+    font-family: 'EBI-Functional';
+    content: '8'
+
+  }
+
+  .tree-expander-collapsed:before {
+
+    font-family: 'EBI-Functional';
+    content: '9'
+
+  }
+
+}
 
 
 

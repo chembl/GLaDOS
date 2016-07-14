@@ -5,9 +5,16 @@
     {% verbatim %}
     <script id="Handlebars-TargetBrowser-AsList-item" type="text/x-handlebars-template">
 
-      <tr class="treegrid-{{id}} {{#if parent_id}} treegrid-parent-{{parent_id}} {{else}}{{/if}}">
+      <tr id='rowFor{{id}}' >
 
         <td>
+
+           {{#each indent}}
+              <span class="tree-indent"></span>
+           {{/each}}
+
+          <span class="tree-expander {{#unless is_leaf}}tree-expander-collapsed{{/unless}}"></span>
+
           <input type="checkbox" id="checkbox-{{id}}" class="filled-in"/>
           <label for="checkbox-{{id}}">&nbsp;</label>{{name}} ({{size}})
         </td>

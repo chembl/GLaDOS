@@ -6,7 +6,7 @@ BrowseTargetAsListView = Backbone.View.extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
-    var all_nodes, newView, new_elem, new_row, node, table, _i, _len, _ref;
+    var all_nodes, indentator, newView, new_elem, new_row, node, table, _i, _j, _len, _ref, _ref1, _results;
     console.log('start to render list ' + new Date());
     all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
@@ -14,14 +14,26 @@ BrowseTargetAsListView = Backbone.View.extend({
     _ref = all_nodes.models;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
+      indentator = (function() {
+        _results = [];
+        for (var _j = 1, _ref1 = node.get('depth'); 1 <= _ref1 ? _j <= _ref1 : _j >= _ref1; 1 <= _ref1 ? _j++ : _j--){ _results.push(_j); }
+        return _results;
+      }).apply(this);
+      indentator.pop();
       new_row = Handlebars.compile($('#Handlebars-TargetBrowser-AsList-item').html())({
         id: node.get('id'),
         name: node.get('name'),
         size: node.get('size'),
-        parent_id: node.get('parent') != null ? node.get('parent').get('id') : void 0
+        indent: indentator,
+        is_leaf: node.get('children').length === 0
       });
       new_elem = $(new_row).attr('id', 'rowFor' + node.get('id'));
       table.append(new_elem);
+      if (node.get('show') === true) {
+        new_elem.show();
+      } else {
+        new_elem.hide();
+      }
       newView = new BrowseTargetAsListNodeView({
         model: node,
         el: new_elem
@@ -33,9 +45,9 @@ BrowseTargetAsListView = Backbone.View.extend({
     return console.log('finish to render list ' + new Date());
   },
   expandAll: function() {
-    return $(this.el).find('.tree').treegrid('expandAll');
+    return this.model.expandAll();
   },
   collapseAll: function() {
-    return $(this.el).find('.tree').treegrid('collapseAll');
+    return this.model.collapseAll();
   }
 });

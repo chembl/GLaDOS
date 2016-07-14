@@ -5,6 +5,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   events:
    'click [type="checkbox"]': 'clickInput'
+   'click .tree-expander': 'toggleCollapsed'
 
 
   clickInput: ->
@@ -18,6 +19,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   changed: ->
 
+    console.log('changed!' + @model.get('name'))
     if @model.get('selected') == true
       $(@el).find('[type="checkbox"]').prop('checked', true)
     else
@@ -29,5 +31,17 @@ BrowseTargetAsListNodeView = Backbone.View.extend
       $(@el).find('[type="checkbox"]').prop('checked', true)
     else
       $(@el).find('[type="checkbox"]').removeClass('incomplete')
+
+    if @model.get('show') == true
+      $(@el).show()
+    else
+      $(@el).hide()
+
+  toggleCollapsed: ->
+
+    @model.toggleCollapsed()
+
+
+
 
 

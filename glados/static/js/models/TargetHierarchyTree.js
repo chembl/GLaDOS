@@ -10,7 +10,7 @@ TargetHierarchyTree = Backbone.Model.extend({
     return this.on('change', this.initHierarhy, this);
   },
   initHierarhy: function() {
-    var addOneNode, all_nodes, children_col, node, plain, _i, _len, _ref;
+    var addOneNode, all_nodes, child, children_col, node, plain, _i, _j, _len, _len1, _ref, _ref1;
     console.log('file loaded ' + new Date());
     plain = {};
     plain['name'] = this.get('name');
@@ -54,14 +54,45 @@ TargetHierarchyTree = Backbone.Model.extend({
         addOneNode(node, children_col, void 0, 0);
       }
     }
-    console.log('tree!');
-    console.log(this);
     this.set('all_nodes', all_nodes, {
       silent: true
     });
     this.set('children', children_col, {
       silent: true
     });
-    return console.log('structures loaded!' + new Date());
+    console.log('structures loaded!' + new Date());
+    console.log('start to collapse all!' + new Date());
+    _ref1 = this.get('children').models;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      child = _ref1[_j];
+      child.set('show', true, {
+        silent: true
+      });
+      child.set('collapsed', true, {
+        silent: true
+      });
+    }
+    this.collapseAll();
+    return console.log('end to collapse all!' + new Date());
+  },
+  collapseAll: function() {
+    var child, _i, _len, _ref, _results;
+    _ref = this.get('children').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      child = _ref[_i];
+      _results.push(child.collapseMeAndMyDescendants());
+    }
+    return _results;
+  },
+  expandAll: function() {
+    var child, _i, _len, _ref, _results;
+    _ref = this.get('children').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      child = _ref[_i];
+      _results.push(child.expandMeAndMyDescendants());
+    }
+    return _results;
   }
 });

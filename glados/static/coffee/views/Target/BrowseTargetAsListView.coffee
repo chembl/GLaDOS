@@ -13,14 +13,25 @@ BrowseTargetAsListView = Backbone.View.extend
     console.log('start create list views ' + new Date())
     for node in all_nodes.models
 
+      indentator = [1..node.get('depth')]
+      indentator.pop()
+
+
       new_row = Handlebars.compile($('#Handlebars-TargetBrowser-AsList-item').html())
         id: node.get('id')
         name: node.get('name')
         size: node.get('size')
-        parent_id: if node.get('parent')? then node.get('parent').get('id') else undefined
+        # this is because handlebars doesn't have simple for loops
+        indent: indentator
+        is_leaf: node.get('children').length == 0
 
       new_elem = $(new_row).attr('id', 'rowFor' + node.get('id'))
       table.append(new_elem)
+
+      if node.get('show') == true
+          new_elem.show()
+      else
+        new_elem.hide()
 
       newView = new BrowseTargetAsListNodeView
         model: node
@@ -39,7 +50,7 @@ BrowseTargetAsListView = Backbone.View.extend
 
 
   expandAll: ->
-    $(@el).find('.tree').treegrid('expandAll')
+    @model.expandAll()
 
   collapseAll: ->
-    $(@el).find('.tree').treegrid('collapseAll')
+    @model.collapseAll()

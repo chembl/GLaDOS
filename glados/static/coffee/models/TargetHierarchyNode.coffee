@@ -50,6 +50,50 @@ TargetHierarchyNode = Backbone.Model.extend
     if @get('parent')?
       @get('parent').checkMeAndMyAncestryIsComplete()
 
+  collapseMeAndMyDescendants: ->
+
+    @collapseMe()
+    for nodeModel in @get('children').models
+      nodeModel.collapseMeAndMyDescendants()
+
+  expandMeAndMyDescendants: ->
+
+    @expandMe()
+    for nodeModel in @get('children').models
+      nodeModel.expandMeAndMyDescendants()
+
+  expandMe: ->
+
+    @set('collapsed', false)
+    for nodeModel in @get('children').models
+      nodeModel.set('show', true)
+
+  collapseMe: ->
+
+    @set('collapsed', true)
+    for nodeModel in @get('children').models
+      nodeModel.set('show', false)
+
+
+  toggleCollapsed: ->
+
+    if @get('collapsed') == true
+
+      @set('collapsed', false)
+      console.log('expanding ' + @get('name'))
+      @expandMe()
+
+    else
+
+      @set('collapsed', true)
+      console.log('collapsing ' + @get('name'))
+      @collapseMeAndMyDescendants()
+
+
+
+
+
+
 
 
 

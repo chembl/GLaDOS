@@ -7,6 +7,7 @@ TargetHierarchyTree = Backbone.Model.extend
   initialize: ->
     @on 'change', @initHierarhy, @
 
+
   initHierarhy: ->
 
     console.log('file loaded ' + new Date())
@@ -51,13 +52,25 @@ TargetHierarchyTree = Backbone.Model.extend
       if node?
         addOneNode(node, children_col, undefined, 0)
 
-    console.log('tree!')
-    console.log(@)
-
 
     @set('all_nodes', all_nodes, {silent: true})
     @set('children', children_col, {silent: true})
 
     console.log('structures loaded!' + new Date())
 
+    console.log('start to collapse all!' + new Date())
+    for child in @get('children').models
+      child.set('show', true, {silent: true})
+      child.set('collapsed', true, {silent: true})
+    @collapseAll()
+    console.log('end to collapse all!' + new Date())
 
+  collapseAll: ->
+
+    for child in @get('children').models
+      child.collapseMeAndMyDescendants()
+
+  expandAll: ->
+
+    for child in @get('children').models
+      child.expandMeAndMyDescendants()

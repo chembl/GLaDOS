@@ -6,7 +6,8 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     return this.model.on('change', this.changed, this);
   },
   events: {
-    'click [type="checkbox"]': 'clickInput'
+    'click [type="checkbox"]': 'clickInput',
+    'click .tree-expander': 'toggleCollapsed'
   },
   clickInput: function() {
     if (this.model.get('selected') === true) {
@@ -17,6 +18,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     return this.model.verifyMyAncestryIsComplete();
   },
   changed: function() {
+    console.log('changed!' + this.model.get('name'));
     if (this.model.get('selected') === true) {
       $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
@@ -24,9 +26,17 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     }
     if (this.model.get('incomplete') === true) {
       $(this.el).find('[type="checkbox"]').addClass('incomplete');
-      return $(this.el).find('[type="checkbox"]').prop('checked', true);
+      $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
-      return $(this.el).find('[type="checkbox"]').removeClass('incomplete');
+      $(this.el).find('[type="checkbox"]').removeClass('incomplete');
     }
+    if (this.model.get('show') === true) {
+      return $(this.el).show();
+    } else {
+      return $(this.el).hide();
+    }
+  },
+  toggleCollapsed: function() {
+    return this.model.toggleCollapsed();
   }
 });
