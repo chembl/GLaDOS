@@ -7,8 +7,10 @@ BrowseTargetAsListView = Backbone.View.extend({
   },
   render: function() {
     var all_nodes, newView, new_elem, new_row, node, table, _i, _len, _ref;
+    console.log('start to render list ' + new Date());
     all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
+    console.log('start create list views ' + new Date());
     _ref = all_nodes.models;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
@@ -18,15 +20,18 @@ BrowseTargetAsListView = Backbone.View.extend({
         size: node.get('size'),
         parent_id: node.get('parent') != null ? node.get('parent').get('id') : void 0
       });
-      new_elem = $(new_row);
+      new_elem = $(new_row).attr('id', 'rowFor' + node.get('id'));
       table.append(new_elem);
       newView = new BrowseTargetAsListNodeView({
         model: node,
         el: new_elem
       });
     }
+    console.log('finish to create list views ' + new Date());
+    console.log('start to collapse all ' + new Date());
     table.treegrid();
-    return table.treegrid('collapseAll');
+    console.log('finish to collapse all ' + new Date());
+    return console.log('finish to render list ' + new Date());
   },
   expandAll: function() {
     return $(this.el).find('.tree').treegrid('expandAll');

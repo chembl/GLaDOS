@@ -12,7 +12,7 @@ TargetBrowserApp = (function() {
   TargetBrowserApp.initTargetHierarchyTree = function() {
     var targetTree;
     targetTree = new TargetHierarchyTree;
-    targetTree.url = 'static/data/gene_ontology_tree.json';
+    targetTree.url = 'static/data/protein_target_tree.json';
     return targetTree;
   };
 

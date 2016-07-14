@@ -10,7 +10,14 @@ TargetHierarchyTree = Backbone.Model.extend({
     return this.on('change', this.initHierarhy, this);
   },
   initHierarhy: function() {
-    var addOneNode, all_nodes, children_col, node, _i, _len, _ref;
+    var addOneNode, all_nodes, children_col, node, plain, _i, _len, _ref;
+    console.log('file loaded ' + new Date());
+    plain = {};
+    plain['name'] = this.get('name');
+    plain['children'] = this.get('children');
+    this.set('plain', plain, {
+      silent: true
+    });
     all_nodes = new TargetHierarchyChildren;
     children_col = new TargetHierarchyChildren;
     addOneNode = function(node_obj, children_col, parent) {
@@ -45,8 +52,9 @@ TargetHierarchyTree = Backbone.Model.extend({
     this.set('all_nodes', all_nodes, {
       silent: true
     });
-    return this.set('children', children_col, {
+    this.set('children', children_col, {
       silent: true
     });
+    return console.log('structures loaded!' + new Date());
   }
 });

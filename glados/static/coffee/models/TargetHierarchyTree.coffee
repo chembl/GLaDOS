@@ -9,6 +9,14 @@ TargetHierarchyTree = Backbone.Model.extend
 
   initHierarhy: ->
 
+    console.log('file loaded ' + new Date())
+
+    # save the plain object version before doing the modifications
+    plain = {}
+    plain['name'] = @get('name')
+    plain['children'] = @get('children')
+    @set('plain', plain, {silent: true})
+
     all_nodes = new TargetHierarchyChildren
     children_col = new TargetHierarchyChildren
 
@@ -41,3 +49,7 @@ TargetHierarchyTree = Backbone.Model.extend
 
     @set('all_nodes', all_nodes, {silent: true})
     @set('children', children_col, {silent: true})
+
+    console.log('structures loaded!' + new Date())
+
+
