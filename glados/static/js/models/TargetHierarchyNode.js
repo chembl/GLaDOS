@@ -3,27 +3,25 @@ var TargetHierarchyNode;
 
 TargetHierarchyNode = Backbone.Model.extend({
   checkMeAndMyDescendants: function() {
-    var nodeModel, _i, _len, _ref, _results;
+    var nodeModel, _i, _len, _ref;
     this.set('selected', true);
     this.set('incomplete', false);
     _ref = this.get('children').models;
-    _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       nodeModel = _ref[_i];
-      _results.push(nodeModel.checkMeAndMyDescendants());
+      nodeModel.checkMeAndMyDescendants();
     }
-    return _results;
+    return this.verifyMyAncestryIsComplete();
   },
   unCheckMeAndMyDescendants: function() {
-    var nodeModel, _i, _len, _ref, _results;
+    var nodeModel, _i, _len, _ref;
     this.set('selected', false);
     _ref = this.get('children').models;
-    _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       nodeModel = _ref[_i];
-      _results.push(nodeModel.unCheckMeAndMyDescendants());
+      nodeModel.unCheckMeAndMyDescendants();
     }
-    return _results;
+    return this.verifyMyAncestryIsComplete();
   },
   verifyMyAncestryIsComplete: function() {
     if (this.get('parent') != null) {

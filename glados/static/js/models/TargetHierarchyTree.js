@@ -10,7 +10,7 @@ TargetHierarchyTree = Backbone.Model.extend({
     return this.on('change', this.initHierarhy, this);
   },
   initHierarhy: function() {
-    var addOneNode, all_nodes, child, children_col, node, plain, _i, _j, _len, _len1, _ref, _ref1;
+    var addOneNode, all_nodes, all_nodes_dict, child, children_col, node, plain, _i, _j, _len, _len1, _ref, _ref1;
     console.log('file loaded ' + new Date());
     plain = {};
     plain['name'] = this.get('name');
@@ -20,6 +20,7 @@ TargetHierarchyTree = Backbone.Model.extend({
     });
     all_nodes = new TargetHierarchyChildren;
     children_col = new TargetHierarchyChildren;
+    all_nodes_dict = {};
     this.set('depth', 0, {
       silent: true
     });
@@ -34,10 +35,12 @@ TargetHierarchyTree = Backbone.Model.extend({
         children: grand_children_coll,
         size: node_obj.size,
         depth: my_depth,
-        is_leaf: node_obj.children.length === 0
+        is_leaf: node_obj.children.length === 0,
+        selected: false
       });
       children_col.add(new_node);
       all_nodes.add(new_node);
+      all_nodes_dict[node_obj.id] = new_node;
       if (node_obj.children != null) {
         _ref = node_obj.children;
         _results = [];
@@ -55,6 +58,9 @@ TargetHierarchyTree = Backbone.Model.extend({
         addOneNode(node, children_col, void 0, 0);
       }
     }
+    this.set('all_nodes_dict', all_nodes_dict, {
+      silent: true
+    });
     this.set('all_nodes', all_nodes, {
       silent: true
     });
@@ -93,6 +99,28 @@ TargetHierarchyTree = Backbone.Model.extend({
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       child = _ref[_i];
       _results.push(child.expandMeAndMyDescendants());
+    }
+    return _results;
+  },
+  selectAll: function() {
+    var node, _i, _len, _ref, _results;
+    _ref = this.get('all_nodes').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      node.set('selected', true);
+      _results.push(node.set('incomplete', false));
+    }
+    return _results;
+  },
+  clearSelections: function() {
+    var node, _i, _len, _ref, _results;
+    _ref = this.get('all_nodes').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      node.set('selected', false);
+      _results.push(node.set('incomplete', false));
     }
     return _results;
   }

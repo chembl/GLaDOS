@@ -11,11 +11,10 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
   },
   clickInput: function() {
     if (this.model.get('selected') === true) {
-      this.model.unCheckMeAndMyDescendants();
+      return this.model.unCheckMeAndMyDescendants();
     } else {
-      this.model.checkMeAndMyDescendants();
+      return this.model.checkMeAndMyDescendants();
     }
-    return this.model.verifyMyAncestryIsComplete();
   },
   changed: function() {
     console.log('changed!' + this.model.get('name'));

@@ -20,6 +20,7 @@ TargetHierarchyTree = Backbone.Model.extend
 
     all_nodes = new TargetHierarchyChildren
     children_col = new TargetHierarchyChildren
+    all_nodes_dict = {}
 
     #the root has depth 0
     @set('depth', 0, {silent: true})
@@ -38,11 +39,13 @@ TargetHierarchyTree = Backbone.Model.extend
         size: node_obj.size
         depth: my_depth
         is_leaf: node_obj.children.length == 0
+        selected: false
 
       children_col.add(new_node)
 
-      # add the reference to the new node to the all_nodes list
+      # add the reference to the new node to the all_nodes list and the dictionary
       all_nodes.add(new_node)
+      all_nodes_dict[node_obj.id] = new_node
 
       if node_obj.children?
         for child_obj in node_obj.children
@@ -54,6 +57,7 @@ TargetHierarchyTree = Backbone.Model.extend
         addOneNode(node, children_col, undefined, 0)
 
 
+    @set('all_nodes_dict', all_nodes_dict, {silent: true})
     @set('all_nodes', all_nodes, {silent: true})
     @set('children', children_col, {silent: true})
 
@@ -75,3 +79,16 @@ TargetHierarchyTree = Backbone.Model.extend
 
     for child in @get('children').models
       child.expandMeAndMyDescendants()
+
+  selectAll: ->
+
+    for node in @get('all_nodes').models
+      node.set('selected', true)
+      node.set('incomplete', false)
+
+  clearSelections: ->
+
+    for node in @get('all_nodes').models
+      node.set('selected', false)
+      node.set('incomplete', false)
+

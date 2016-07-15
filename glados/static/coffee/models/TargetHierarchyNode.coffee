@@ -8,6 +8,8 @@ TargetHierarchyNode = Backbone.Model.extend
     for nodeModel in @get('children').models
       nodeModel.checkMeAndMyDescendants()
 
+    @verifyMyAncestryIsComplete()
+
 
   unCheckMeAndMyDescendants: ->
 
@@ -15,6 +17,8 @@ TargetHierarchyNode = Backbone.Model.extend
 
     for nodeModel in @get('children').models
       nodeModel.unCheckMeAndMyDescendants()
+
+    @verifyMyAncestryIsComplete()
 
   verifyMyAncestryIsComplete: ->
 

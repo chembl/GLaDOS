@@ -49,5 +49,11 @@ BrowseTargetAsListView = Backbone.View.extend({
   },
   collapseAll: function() {
     return this.model.collapseAll();
+  },
+  selectAll: function() {
+    return this.model.selectAll();
+  },
+  clearSelections: function() {
+    return this.model.clearSelections();
   }
 });

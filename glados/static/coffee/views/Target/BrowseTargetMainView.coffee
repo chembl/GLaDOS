@@ -19,14 +19,12 @@ BrowseTargetMainView = Backbone.View.extend
 
   selectAll: ->
 
-    for node in @model.get('all_nodes').models
-      node.set('selected', true)
-      node.set('incomplete', false)
+    @listView.selectAll()
 
   clearSelections: ->
-    for node in @model.get('all_nodes').models
-      node.set('selected', false)
-      node.set('incomplete', false)
+
+    @listView.clearSelections()
+
 
 
 

@@ -54,3 +54,9 @@ BrowseTargetAsListView = Backbone.View.extend
 
   collapseAll: ->
     @model.collapseAll()
+
+  selectAll: ->
+    @model.selectAll()
+
+  clearSelections: ->
+    @model.clearSelections()

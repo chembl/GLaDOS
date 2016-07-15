@@ -19,25 +19,9 @@ BrowseTargetMainView = Backbone.View.extend({
     return this.listView.collapseAll();
   },
   selectAll: function() {
-    var node, _i, _len, _ref, _results;
-    _ref = this.model.get('all_nodes').models;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      node = _ref[_i];
-      node.set('selected', true);
-      _results.push(node.set('incomplete', false));
-    }
-    return _results;
+    return this.listView.selectAll();
   },
   clearSelections: function() {
-    var node, _i, _len, _ref, _results;
-    _ref = this.model.get('all_nodes').models;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      node = _ref[_i];
-      node.set('selected', false);
-      _results.push(node.set('incomplete', false));
-    }
-    return _results;
+    return this.listView.clearSelections();
   }
 });

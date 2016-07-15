@@ -15,8 +15,6 @@ BrowseTargetAsListNodeView = Backbone.View.extend
     else
       @model.checkMeAndMyDescendants()
 
-    @model.verifyMyAncestryIsComplete()
-
   changed: ->
 
     console.log('changed!' + @model.get('name'))
