@@ -81,7 +81,8 @@ TargetHierarchyNode = Backbone.Model.extend({
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       nodeModel = _ref[_i];
-      _results.push(nodeModel.set('show', true));
+      nodeModel.set('show', true);
+      _results.push(nodeModel.ensureMyDescendantsAreShown());
     }
     return _results;
   },
@@ -92,9 +93,34 @@ TargetHierarchyNode = Backbone.Model.extend({
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       nodeModel = _ref[_i];
-      _results.push(nodeModel.set('show', false));
+      _results.push(nodeModel.hideMeAndMyDescendants());
     }
     return _results;
+  },
+  hideMeAndMyDescendants: function() {
+    var nodeModel, _i, _len, _ref, _results;
+    this.set('show', false);
+    _ref = this.get('children').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      nodeModel = _ref[_i];
+      nodeModel.set('show', false);
+      _results.push(nodeModel.hideMeAndMyDescendants());
+    }
+    return _results;
+  },
+  ensureMyDescendantsAreShown: function() {
+    var nodeModel, _i, _len, _ref, _results;
+    if (!this.get('collapsed')) {
+      _ref = this.get('children').models;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        nodeModel = _ref[_i];
+        nodeModel.set('show', true);
+        _results.push(nodeModel.ensureMyDescendantsAreShown());
+      }
+      return _results;
+    }
   },
   toggleCollapsed: function() {
     if (this.get('collapsed') === true) {
@@ -104,7 +130,7 @@ TargetHierarchyNode = Backbone.Model.extend({
     } else {
       this.set('collapsed', true);
       console.log('collapsing ' + this.get('name'));
-      return this.collapseMeAndMyDescendants();
+      return this.collapseMe();
     }
   }
 });

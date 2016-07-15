@@ -37,6 +37,7 @@ TargetHierarchyTree = Backbone.Model.extend
         children: grand_children_coll
         size: node_obj.size
         depth: my_depth
+        is_leaf: node_obj.children.length == 0
 
       children_col.add(new_node)
 

@@ -19,18 +19,27 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
   },
   changed: function() {
     console.log('changed!' + this.model.get('name'));
-    if (this.model.get('selected') === true) {
+    if (this.model.get('selected')) {
       $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
       $(this.el).find('[type="checkbox"]').prop('checked', false);
     }
-    if (this.model.get('incomplete') === true) {
+    if (this.model.get('incomplete')) {
       $(this.el).find('[type="checkbox"]').addClass('incomplete');
       $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
       $(this.el).find('[type="checkbox"]').removeClass('incomplete');
     }
-    if (this.model.get('show') === true) {
+    if (!this.model.get('is_leaf')) {
+      if (this.model.get('collapsed')) {
+        $(this.el).find('.tree-expander').removeClass('tree-expander-expanded');
+        $(this.el).find('.tree-expander').addClass('tree-expander-collapsed');
+      } else {
+        $(this.el).find('.tree-expander').addClass('tree-expander-expanded');
+        $(this.el).find('.tree-expander').removeClass('tree-expander-collapsed');
+      }
+    }
+    if (this.model.get('show')) {
       return $(this.el).show();
     } else {
       return $(this.el).hide();

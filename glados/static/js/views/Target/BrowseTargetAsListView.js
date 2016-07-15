@@ -25,7 +25,7 @@ BrowseTargetAsListView = Backbone.View.extend({
         name: node.get('name'),
         size: node.get('size'),
         indent: indentator,
-        is_leaf: node.get('children').length === 0
+        is_leaf: node.get('is_leaf')
       });
       new_elem = $(new_row).attr('id', 'rowFor' + node.get('id'));
       table.append(new_elem);

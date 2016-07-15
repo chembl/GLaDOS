@@ -67,13 +67,29 @@ TargetHierarchyNode = Backbone.Model.extend
     @set('collapsed', false)
     for nodeModel in @get('children').models
       nodeModel.set('show', true)
+      nodeModel.ensureMyDescendantsAreShown()
 
   collapseMe: ->
 
     @set('collapsed', true)
     for nodeModel in @get('children').models
-      nodeModel.set('show', false)
+      nodeModel.hideMeAndMyDescendants()
 
+  hideMeAndMyDescendants: ->
+
+    @set('show', false)
+    for nodeModel in @get('children').models
+      nodeModel.set('show', false)
+      nodeModel.hideMeAndMyDescendants()
+
+  # If I am expanded I make sure that all my children are shown
+  ensureMyDescendantsAreShown: ->
+
+    if !@get('collapsed')
+
+      for nodeModel in @get('children').models
+        nodeModel.set('show', true)
+        nodeModel.ensureMyDescendantsAreShown()
 
   toggleCollapsed: ->
 
@@ -87,7 +103,7 @@ TargetHierarchyNode = Backbone.Model.extend
 
       @set('collapsed', true)
       console.log('collapsing ' + @get('name'))
-      @collapseMeAndMyDescendants()
+      @collapseMe()
 
 
 
