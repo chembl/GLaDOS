@@ -9,6 +9,7 @@
 
   {% load compress %}
   <!-- Imports used by all the templates-->
+  <!-- only use this if absolutely necessary, it can complicate the css imports -->
   {% block common_css %}
     {% include "glados/base/css_imports_for_all.html" %}
   {% endblock %}
@@ -80,6 +81,7 @@
 {% endcompress %}
 
 <!-- custom js imports that each template decides to load -->
+<!-- only use this if absolutely necessary, it can complicate the js imports -->
 {% compress js %}
    {% block custom_js %}{% endblock %}
 {% endcompress %}

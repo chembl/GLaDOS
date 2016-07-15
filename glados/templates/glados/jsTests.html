@@ -1,0 +1,24 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Javascript Tests for ChEMBL{% endblock %}
+
+{% block stylesheets %}
+
+<link rel="shortcut icon" type="image/png" href="/static/css/jasmine/jasmine_favicon.png">
+<link rel="stylesheet" type="text/css" href="/static/css/jasmine/jasmine.css">
+
+{% endblock %}
+
+{% block custom_js %}
+
+<script type="text/javascript" src="/static/js/api/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="/static/js/api/jasmine/jasmine-html.js"></script>
+<script type="text/javascript" src="/static/js/api/jasmine/boot.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+Wellcome to the Javascript tests page!
+
+{% endblock %}
