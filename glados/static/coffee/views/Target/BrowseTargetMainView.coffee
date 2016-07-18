@@ -39,6 +39,7 @@ BrowseTargetMainView = Backbone.View.extend
         @model.url = 'static/data/gene_ontology_tree.json'
 
     @listView.showPreloader()
+    @circlesView.showPreloader()
 
     @model.fetch()
 

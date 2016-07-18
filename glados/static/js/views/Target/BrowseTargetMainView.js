@@ -39,6 +39,7 @@ BrowseTargetMainView = Backbone.View.extend({
       }
     }).call(this);
     this.listView.showPreloader();
+    this.circlesView.showPreloader();
     return this.model.fetch();
   }
 });

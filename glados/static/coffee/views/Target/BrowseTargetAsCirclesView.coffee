@@ -12,7 +12,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     $(window).resize ->
       updateViewProxy()
 
-    updateViewProxy()
+    @model.on 'change', updateViewProxy, @
 
   showPreloader: ->
 
@@ -31,8 +31,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     debounced_render()
 
   render: ->
-
-
 
     @hidePreloader()
     margin = 20

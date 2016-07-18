@@ -10,7 +10,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     $(window).resize(function() {
       return updateViewProxy();
     });
-    return updateViewProxy();
+    return this.model.on('change', updateViewProxy, this);
   },
   showPreloader: function() {
     if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
