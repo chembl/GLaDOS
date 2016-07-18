@@ -24,3 +24,18 @@ class LazyIFramesHelper
           $(@).attr('data-if-loaded', true)
 
 
+  ### *
+    * Bind the element's click event to the fetch function of the backbone object
+    * this can be used when you need some data to be loaded only when a tab is opened.
+    * @param {Jquery} element for which the click event will be bound
+    * @param {Model} model to fetch
+    *
+  ###
+  @loadObjectOnceOnClick = (elem, obj) ->
+
+
+    elem.click ->
+     if !$(@).attr('data-loaded')?
+       obj.fetch()
+       $(@).attr('data-loaded', true)
+

@@ -20,6 +20,24 @@ LazyIFramesHelper = (function() {
     });
   };
 
+  /* *
+    * Bind the element's click event to the fetch function of the backbone object
+    * this can be used when you need some data to be loaded only when a tab is opened.
+    * @param {Jquery} element for which the click event will be bound
+    * @param {Model} model to fetch
+    *
+  */
+
+
+  LazyIFramesHelper.loadObjectOnceOnClick = function(elem, obj) {
+    return elem.click(function() {
+      if (!($(this).attr('data-loaded') != null)) {
+        obj.fetch();
+        return $(this).attr('data-loaded', true);
+      }
+    });
+  };
+
   return LazyIFramesHelper;
 
 })();

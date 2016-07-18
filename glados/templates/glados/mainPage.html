@@ -73,8 +73,8 @@
 
   var targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
   var targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'));
-  targetHierarchy.fetch();
 
+  LazyIFramesHelper.loadObjectOnceOnClick($('a[href="#browse_targets"]'), targetHierarchy);
 
 
 {% endblock %}
