@@ -6,22 +6,25 @@ BrowseTargetAsListView = Backbone.View.extend({
     return this.model.on('change', this.render, this);
   },
   showPreloader: function() {
-    if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
-      $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
-      return $(this.el).attr('data-loading', 'true');
-    }
+    var table;
+    $(this.el).find('.preloader-container').show();
+    table = $(this.el).find('.tree');
+    return table.hide();
   },
   hidePreloader: function() {
-    $(this.el).find('.card-preolader-to-hide').hide();
-    return $(this.el).attr('data-loading', 'false');
+    var table;
+    $(this.el).find('.preloader-container').hide();
+    table = $(this.el).find('.tree');
+    return table.show();
   },
   render: function() {
-    var all_nodes, indentator, newView, new_elem, new_row, node, table, _i, _j, _len, _ref, _ref1, _results;
-    console.log('start to render list ' + new Date());
+    var all_nodes, counter, indentator, newView, new_elem, new_row, node, num_nodes, percentage, percentage_toShow, table, _i, _j, _len, _ref, _ref1, _results;
+    this.setPreloaderWidth('30%');
     all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
     table.empty();
-    console.log('start create list views ' + new Date());
+    counter = 0;
+    num_nodes = all_nodes.models.length;
     _ref = all_nodes.models;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
@@ -49,11 +52,14 @@ BrowseTargetAsListView = Backbone.View.extend({
         model: node,
         el: new_elem
       });
+      counter++;
+      percentage = Math.round((counter / num_nodes) * 100);
+      if (percentage % 30 === 0) {
+        percentage_toShow = (percentage * 0.7) + 30;
+        this.setPreloaderWidth(percentage_toShow + '%');
+      }
     }
-    console.log('finish to create list views ' + new Date());
-    console.log('start to collapse all ' + new Date());
-    console.log('finish to collapse all ' + new Date());
-    return console.log('finish to render list ' + new Date());
+    return this.hidePreloader();
   },
   expandAll: function() {
     return this.model.expandAll();
@@ -66,5 +72,11 @@ BrowseTargetAsListView = Backbone.View.extend({
   },
   clearSelections: function() {
     return this.model.clearSelections();
+  },
+  setPreloaderWidth: function(width) {
+    var bar;
+    bar = $(this.el).find('.preloader-container').find('.determinate');
+    bar.attr('style', 'width:' + width);
+    return console.log(bar.css('width'));
   }
 });

@@ -32,7 +32,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
   render: ->
 
-    console.log('start render as circles ' + new Date())
+
 
     @hidePreloader()
     margin = 20
@@ -127,7 +127,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
     zoomTo([root.x, root.y, root.r * 2 + margin])
 
-    console.log('end render as circles ' + new Date())
 
 
 

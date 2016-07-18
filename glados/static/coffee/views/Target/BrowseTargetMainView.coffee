@@ -38,6 +38,7 @@ BrowseTargetMainView = Backbone.View.extend
       when 'radio-geneOntologyTree'
         @model.url = 'static/data/gene_ontology_tree.json'
 
+    @listView.showPreloader()
 
     @model.fetch()
 

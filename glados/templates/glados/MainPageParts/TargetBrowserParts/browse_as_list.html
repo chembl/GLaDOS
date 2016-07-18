@@ -5,13 +5,13 @@
     {% verbatim %}
     <script id="Handlebars-TargetBrowser-AsList-item" type="text/x-handlebars-template">
 
-      <tr id='rowFor{{id}}' >
+      <tr id='rowFor{{id}}'>
 
         <td>
 
-           {{#each indent}}
-              <span class="tree-indent"></span>
-           {{/each}}
+          {{#each indent}}
+          <span class="tree-indent"></span>
+          {{/each}}
 
           <span class="tree-expander {{#unless is_leaf}}tree-expander-collapsed{{/unless}}"></span>
 
@@ -23,12 +23,15 @@
 
     </script>
 
-    <script id="Handlebars-TargetBrowser-AsList-table" type="text/x-handlebars-template">
-
-
-    </script>
-
     {% endverbatim %}
+
+    <div class="preloader-container">
+
+      <div class="progress">
+        <div class="determinate" style="width: 0%"></div>
+      </div>
+
+    </div>
 
     <table class="tree compact-table">
 

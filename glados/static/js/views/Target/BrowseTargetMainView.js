@@ -38,6 +38,7 @@ BrowseTargetMainView = Backbone.View.extend({
           return this.model.url = 'static/data/gene_ontology_tree.json';
       }
     }).call(this);
+    this.listView.showPreloader();
     return this.model.fetch();
   }
 });

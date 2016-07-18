@@ -5,24 +5,33 @@ BrowseTargetAsListView = Backbone.View.extend
 
   showPreloader: ->
 
-    if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
-      $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
-      $(@el).attr('data-loading', 'true')
+    $(@el).find('.preloader-container').show()
+
+    table = $(@el).find('.tree')
+    table.hide()
 
   hidePreloader: ->
 
-    $(@el).find('.card-preolader-to-hide').hide()
-    $(@el).attr('data-loading', 'false')
+
+    $(@el).find('.preloader-container').hide()
+
+    table = $(@el).find('.tree')
+    table.show()
+
 
   render: ->
 
-    console.log('start to render list ' + new Date())
+
+    # we assume that 30% is getting the data from the server
+    @setPreloaderWidth('30%')
 
     all_nodes = @model.get('all_nodes')
     table = $(@el).find('.tree')
     table.empty()
 
-    console.log('start create list views ' + new Date())
+    counter = 0
+    num_nodes = all_nodes.models.length
+
     for node in all_nodes.models
 
       indentator = [1..node.get('depth')]
@@ -49,16 +58,16 @@ BrowseTargetAsListView = Backbone.View.extend
         model: node
         el: new_elem
 
-    console.log('finish to create list views ' + new Date())
+      counter++
+      percentage = Math.round((counter / num_nodes) * 100)
+      if percentage % 30 == 0
+        #percentage is minimum 30%
+        percentage_toShow = (percentage * 0.7) + 30
+        @setPreloaderWidth(percentage_toShow + '%')
 
 
-    console.log('start to collapse all ' + new Date())
-    #table.treegrid()
 
-    #table.treegrid('collapseAll')
-    console.log('finish to collapse all ' + new Date())
-
-    console.log('finish to render list ' + new Date())
+    @hidePreloader()
 
 
   expandAll: ->
@@ -72,3 +81,9 @@ BrowseTargetAsListView = Backbone.View.extend
 
   clearSelections: ->
     @model.clearSelections()
+
+  setPreloaderWidth: (width) ->
+
+    bar = $(@el).find('.preloader-container').find('.determinate')
+    bar.attr('style', 'width:' + width)
+    console.log(bar.css('width'))

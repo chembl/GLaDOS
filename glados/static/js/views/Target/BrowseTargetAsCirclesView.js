@@ -29,7 +29,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
   },
   render: function() {
     var circle, color, diameter, elem_selector, focus, margin, node, nodes, pack, root, svg, text, view, zoom, zoomTo;
-    console.log('start render as circles ' + new Date());
     this.hidePreloader();
     margin = 20;
     diameter = $(this.el).width();
@@ -128,7 +127,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
         }
       });
     };
-    zoomTo([root.x, root.y, root.r * 2 + margin]);
-    return console.log('end render as circles ' + new Date());
+    return zoomTo([root.x, root.y, root.r * 2 + margin]);
   }
 });
