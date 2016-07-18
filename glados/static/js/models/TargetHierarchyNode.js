@@ -130,5 +130,13 @@ TargetHierarchyNode = Backbone.Model.extend({
       console.log('collapsing ' + this.get('name'));
       return this.collapseMe();
     }
+  },
+  expandMyAncestors: function() {
+    var parent;
+    parent = this.get('parent');
+    if (parent != null) {
+      parent.expandMe();
+      return parent.expandMyAncestors();
+    }
   }
 });

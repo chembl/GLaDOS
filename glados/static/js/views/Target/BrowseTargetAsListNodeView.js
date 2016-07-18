@@ -17,7 +17,6 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     }
   },
   changed: function() {
-    console.log('changed!' + this.model.get('name'));
     if (this.model.get('selected')) {
       $(this.el).find('[type="checkbox"]').prop('checked', true);
     } else {
@@ -37,6 +36,11 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
         $(this.el).find('.tree-expander').addClass('tree-expander-expanded');
         $(this.el).find('.tree-expander').removeClass('tree-expander-collapsed');
       }
+    }
+    if (this.model.get('found')) {
+      $(this.el).addClass('green accent-1');
+    } else {
+      $(this.el).removeClass('green accent-1');
     }
     if (this.model.get('show')) {
       return $(this.el).show();

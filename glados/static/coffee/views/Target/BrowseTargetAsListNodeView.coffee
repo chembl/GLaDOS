@@ -17,7 +17,6 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   changed: ->
 
-    console.log('changed!' + @model.get('name'))
     if @model.get('selected')
       $(@el).find('[type="checkbox"]').prop('checked', true)
     else
@@ -39,6 +38,12 @@ BrowseTargetAsListNodeView = Backbone.View.extend
       else
         $(@el).find('.tree-expander').addClass('tree-expander-expanded')
         $(@el).find('.tree-expander').removeClass('tree-expander-collapsed')
+
+
+    if @model.get('found')
+      $(@el).addClass('green accent-1')
+    else
+      $(@el).removeClass('green accent-1')
 
 
     if @model.get('show')

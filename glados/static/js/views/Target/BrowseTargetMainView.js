@@ -7,7 +7,8 @@ BrowseTargetMainView = Backbone.View.extend({
     'click .collapse-all': 'collapseAll',
     'click .select-all': 'selectAll',
     'click .clear-selections': 'clearSelections',
-    'change input[name="selectTree"]': 'selectTree'
+    'change input[name="selectTree"]': 'selectTree',
+    'click .search-in-tree': 'searchInTree'
   },
   initialize: function() {
     this.listView = TargetBrowserApp.initBrowserAsList(this.model, $('#BCK-TargetBrowserAsList'));
@@ -41,5 +42,13 @@ BrowseTargetMainView = Backbone.View.extend({
     this.listView.showPreloader();
     this.circlesView.showPreloader();
     return this.model.fetch();
+  },
+  searchInTree: function() {
+    var numFound, searchTerms;
+    searchTerms = $(this.el).find('#search_terms').val();
+    numFound = this.model.searchInTree(searchTerms);
+    return $(this.el).find('#search_in_tree_summary').html(Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())({
+      num_results: numFound
+    }));
   }
 });

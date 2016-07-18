@@ -6,6 +6,7 @@ BrowseTargetMainView = Backbone.View.extend
    'click .select-all': 'selectAll'
    'click .clear-selections': 'clearSelections'
    'change input[name="selectTree"]': 'selectTree'
+   'click .search-in-tree': 'searchInTree'
 
   initialize: ->
 
@@ -43,6 +44,14 @@ BrowseTargetMainView = Backbone.View.extend
 
     @model.fetch()
 
+  searchInTree: ->
+
+    searchTerms = $(@el).find('#search_terms').val()
+
+    numFound = @model.searchInTree(searchTerms)
+
+    $(@el).find('#search_in_tree_summary').html Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())
+      num_results: numFound
 
 
 

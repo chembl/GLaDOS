@@ -10,8 +10,6 @@ TargetHierarchyTree = Backbone.Model.extend
 
   initHierarhy: ->
 
-    console.log('file loaded ' + new Date())
-
     # save the plain object version before doing the modifications
     plain = {}
     plain['name'] = @get('name')
@@ -61,14 +59,12 @@ TargetHierarchyTree = Backbone.Model.extend
     @set('all_nodes', all_nodes, {silent: true})
     @set('children', children_col, {silent: true})
 
-    console.log('structures loaded!' + new Date())
 
-    console.log('start to collapse all!' + new Date())
     for child in @get('children').models
       child.set('show', true, {silent: true})
       child.set('collapsed', true, {silent: true})
     @collapseAll()
-    console.log('end to collapse all!' + new Date())
+
 
   collapseAll: ->
 
@@ -91,4 +87,22 @@ TargetHierarchyTree = Backbone.Model.extend
     for node in @get('all_nodes').models
       node.set('selected', false)
       node.set('incomplete', false)
+
+  searchInTree: (terms) ->
+
+    @collapseAll()
+
+    termsUpper = terms.toUpperCase()
+    numFound = 0
+    for node in @get('all_nodes').models
+      node.set('found', false)
+
+      if node.get('name').toUpperCase().indexOf(termsUpper) != -1
+        node.set('found', true)
+        node.expandMyAncestors()
+        numFound++
+
+    return numFound
+
+
 

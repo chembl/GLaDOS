@@ -11,7 +11,6 @@ TargetHierarchyTree = Backbone.Model.extend({
   },
   initHierarhy: function() {
     var addOneNode, all_nodes, all_nodes_dict, child, children_col, node, plain, _i, _j, _len, _len1, _ref, _ref1;
-    console.log('file loaded ' + new Date());
     plain = {};
     plain['name'] = this.get('name');
     plain['children'] = this.get('children');
@@ -67,8 +66,6 @@ TargetHierarchyTree = Backbone.Model.extend({
     this.set('children', children_col, {
       silent: true
     });
-    console.log('structures loaded!' + new Date());
-    console.log('start to collapse all!' + new Date());
     _ref1 = this.get('children').models;
     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       child = _ref1[_j];
@@ -79,8 +76,7 @@ TargetHierarchyTree = Backbone.Model.extend({
         silent: true
       });
     }
-    this.collapseAll();
-    return console.log('end to collapse all!' + new Date());
+    return this.collapseAll();
   },
   collapseAll: function() {
     var child, _i, _len, _ref, _results;
@@ -123,5 +119,22 @@ TargetHierarchyTree = Backbone.Model.extend({
       _results.push(node.set('incomplete', false));
     }
     return _results;
+  },
+  searchInTree: function(terms) {
+    var node, numFound, termsUpper, _i, _len, _ref;
+    this.collapseAll();
+    termsUpper = terms.toUpperCase();
+    numFound = 0;
+    _ref = this.get('all_nodes').models;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      node.set('found', false);
+      if (node.get('name').toUpperCase().indexOf(termsUpper) !== -1) {
+        node.set('found', true);
+        node.expandMyAncestors();
+        numFound++;
+      }
+    }
+    return numFound;
   }
 });

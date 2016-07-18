@@ -41,19 +41,32 @@
     <div class="col s8 offset-s2 center-align">
 
       <div class="search-tree">
-        <input placeholder="Search in the hierarchy" id="first_name" type="text" class="validate">
-        <a href="#" class="btn-chembl teal">Search in tree</a>
+        <input placeholder="Search in the hierarchy" id="search_terms" type="text" class="validate">
+        <a href="#!" class="btn-chembl teal search-in-tree">Search in tree</a>
       </div>
 
     </div>
 
   </div>
 
+  <div class="row">
+    <div id="search_in_tree_summary" class="col s12 center-align">
+
+    </div>
+  </div>
+
+
+  {% verbatim %}
+  <script id="Handlebars-TargetBrowser-searchResults" type="text/x-handlebars-template">
+    {{num_results}} found
+  </script>
+  {% endverbatim %}
+
 
   <div class="col l6 m12">
 
     {% block browse_as_list %}
-      {% include "glados/MainPageParts/TargetBrowserParts/browse_as_list.html" %}
+    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_list.html" %}
     {% endblock %}
 
   </div>
@@ -61,7 +74,7 @@
   <div class="col l6 m12">
 
     {% block browse_as_circles %}
-      {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
     {% endblock %}
 
   </div>

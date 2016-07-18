@@ -109,6 +109,12 @@ TargetHierarchyNode = Backbone.Model.extend
       console.log('collapsing ' + @get('name'))
       @collapseMe()
 
+  expandMyAncestors: ->
+
+    parent = @get('parent')
+    if parent?
+      parent.expandMe()
+      parent.expandMyAncestors()
 
 
 
