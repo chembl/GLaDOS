@@ -2954,8 +2954,9 @@ div#CNC-zoom-modal {
   height: 2rem; }
 
 .target-browser {
+  padding-top: 20px;
   /**
-  * Tree browser!
+  * Tree as list browser
   * ----------------------------------------------------------------------------------------------------------------------
   */ }
   .target-browser .options a {
@@ -3000,5 +3001,7 @@ div#CNC-zoom-modal {
   .target-browser .tree-expander-collapsed:before {
     font-family: 'EBI-Functional';
     content: "9"; }
+  .target-browser .tree tr {
+    border-bottom: 1px solid #009688; }
 
 /*# sourceMappingURL=chembl-style.css.map */

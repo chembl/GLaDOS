@@ -1689,6 +1689,8 @@ $marvin-size-fullscreen: 91vh;
 
 .target-browser {
 
+  padding-top: 20px;
+
   .options {
     a {
       display: inline-block;
@@ -1739,7 +1741,7 @@ $marvin-size-fullscreen: 91vh;
   }
 
   /**
-  * Tree browser!
+  * Tree as list browser
   * ----------------------------------------------------------------------------------------------------------------------
   */
 
@@ -1770,6 +1772,12 @@ $marvin-size-fullscreen: 91vh;
     font-family: 'EBI-Functional';
     content: '9'
 
+  }
+
+  .tree{
+    tr{
+      border-bottom: 1px solid $primary-color;
+    }
   }
 
 }
