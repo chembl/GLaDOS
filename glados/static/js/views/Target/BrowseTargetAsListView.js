@@ -76,7 +76,6 @@ BrowseTargetAsListView = Backbone.View.extend({
   setPreloaderWidth: function(width) {
     var bar;
     bar = $(this.el).find('.preloader-container').find('.determinate');
-    bar.attr('style', 'width:' + width);
-    return console.log(bar.css('width'));
+    return bar.attr('style', 'width:' + width);
   }
 });

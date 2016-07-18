@@ -86,4 +86,3 @@ BrowseTargetAsListView = Backbone.View.extend
 
     bar = $(@el).find('.preloader-container').find('.determinate')
     bar.attr('style', 'width:' + width)
-    console.log(bar.css('width'))
