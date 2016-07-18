@@ -5,11 +5,22 @@ BrowseTargetAsListView = Backbone.View.extend({
   initialize: function() {
     return this.model.on('change', this.render, this);
   },
+  showPreloader: function() {
+    if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
+      $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+      return $(this.el).attr('data-loading', 'true');
+    }
+  },
+  hidePreloader: function() {
+    $(this.el).find('.card-preolader-to-hide').hide();
+    return $(this.el).attr('data-loading', 'false');
+  },
   render: function() {
     var all_nodes, indentator, newView, new_elem, new_row, node, table, _i, _j, _len, _ref, _ref1, _results;
     console.log('start to render list ' + new Date());
     all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
+    table.empty();
     console.log('start create list views ' + new Date());
     _ref = all_nodes.models;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

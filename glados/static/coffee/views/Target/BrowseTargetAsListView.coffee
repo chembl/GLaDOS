@@ -3,12 +3,24 @@ BrowseTargetAsListView = Backbone.View.extend
   initialize: ->
     @model.on 'change', @render, @
 
+  showPreloader: ->
+
+    if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
+      $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
+      $(@el).attr('data-loading', 'true')
+
+  hidePreloader: ->
+
+    $(@el).find('.card-preolader-to-hide').hide()
+    $(@el).attr('data-loading', 'false')
+
   render: ->
 
     console.log('start to render list ' + new Date())
 
     all_nodes = @model.get('all_nodes')
     table = $(@el).find('.tree')
+    table.empty()
 
     console.log('start create list views ' + new Date())
     for node in all_nodes.models

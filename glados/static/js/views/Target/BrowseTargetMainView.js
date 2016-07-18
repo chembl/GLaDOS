@@ -6,7 +6,8 @@ BrowseTargetMainView = Backbone.View.extend({
     'click .open-all': 'openAll',
     'click .collapse-all': 'collapseAll',
     'click .select-all': 'selectAll',
-    'click .clear-selections': 'clearSelections'
+    'click .clear-selections': 'clearSelections',
+    'change input[name="selectTree"]': 'selectTree'
   },
   initialize: function() {
     this.listView = TargetBrowserApp.initBrowserAsList(this.model, $('#BCK-TargetBrowserAsList'));
@@ -23,5 +24,20 @@ BrowseTargetMainView = Backbone.View.extend({
   },
   clearSelections: function() {
     return this.listView.clearSelections();
+  },
+  selectTree: function() {
+    var btnCheckedID, url;
+    btnCheckedID = $(this.el).find('input[name="selectTree"]:checked').attr('id');
+    url = (function() {
+      switch (btnCheckedID) {
+        case 'radio-proteinTargetTree':
+          return this.model.url = 'static/data/protein_target_tree.json';
+        case 'radio-taxonomyTree':
+          return this.model.url = 'static/data/taxonomy_target_tree.json';
+        case 'radio-geneOntologyTree':
+          return this.model.url = 'static/data/gene_ontology_tree.json';
+      }
+    }).call(this);
+    return this.model.fetch();
   }
 });

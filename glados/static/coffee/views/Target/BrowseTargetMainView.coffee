@@ -5,6 +5,7 @@ BrowseTargetMainView = Backbone.View.extend
    'click .collapse-all': 'collapseAll'
    'click .select-all': 'selectAll'
    'click .clear-selections': 'clearSelections'
+   'change input[name="selectTree"]': 'selectTree'
 
   initialize: ->
 
@@ -25,6 +26,20 @@ BrowseTargetMainView = Backbone.View.extend
 
     @listView.clearSelections()
 
+  selectTree: ->
+
+    btnCheckedID = $(@el).find('input[name="selectTree"]:checked').attr('id')
+
+    url = switch btnCheckedID
+      when 'radio-proteinTargetTree'
+        @model.url = 'static/data/protein_target_tree.json'
+      when 'radio-taxonomyTree'
+        @model.url = 'static/data/taxonomy_target_tree.json'
+      when 'radio-geneOntologyTree'
+        @model.url = 'static/data/gene_ontology_tree.json'
+
+
+    @model.fetch()
 
 
 

@@ -1,6 +1,7 @@
 BrowseTargetAsCirclesView = Backbone.View.extend
 
   initialize: ->
+
     @showPreloader()
 
     # the render function is debounced so it waits for the size of the
