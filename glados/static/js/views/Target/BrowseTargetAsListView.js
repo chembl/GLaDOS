@@ -18,13 +18,10 @@ BrowseTargetAsListView = Backbone.View.extend({
     return table.show();
   },
   render: function() {
-    var all_nodes, counter, indentator, newView, new_elem, new_row, node, num_nodes, percentage, percentage_toShow, table, _i, _j, _len, _ref, _ref1, _results;
-    this.setPreloaderWidth('30%');
+    var all_nodes, indentator, newView, new_elem, new_row, node, table, _i, _j, _len, _ref, _ref1, _results;
     all_nodes = this.model.get('all_nodes');
     table = $(this.el).find('.tree');
     table.empty();
-    counter = 0;
-    num_nodes = all_nodes.models.length;
     _ref = all_nodes.models;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       node = _ref[_i];
@@ -52,12 +49,6 @@ BrowseTargetAsListView = Backbone.View.extend({
         model: node,
         el: new_elem
       });
-      counter++;
-      percentage = Math.round((counter / num_nodes) * 100);
-      if (percentage % 30 === 0) {
-        percentage_toShow = (percentage * 0.7) + 30;
-        this.setPreloaderWidth(percentage_toShow + '%');
-      }
     }
     return this.hidePreloader();
   },
@@ -72,10 +63,5 @@ BrowseTargetAsListView = Backbone.View.extend({
   },
   clearSelections: function() {
     return this.model.clearSelections();
-  },
-  setPreloaderWidth: function(width) {
-    var bar;
-    bar = $(this.el).find('.preloader-container').find('.determinate');
-    return bar.attr('style', 'width:' + width);
   }
 });

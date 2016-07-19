@@ -21,16 +21,9 @@ BrowseTargetAsListView = Backbone.View.extend
 
   render: ->
 
-
-    # we assume that 30% is getting the data from the server
-    @setPreloaderWidth('30%')
-
     all_nodes = @model.get('all_nodes')
     table = $(@el).find('.tree')
     table.empty()
-
-    counter = 0
-    num_nodes = all_nodes.models.length
 
     for node in all_nodes.models
 
@@ -58,13 +51,6 @@ BrowseTargetAsListView = Backbone.View.extend
         model: node
         el: new_elem
 
-      counter++
-      percentage = Math.round((counter / num_nodes) * 100)
-      if percentage % 30 == 0
-        #percentage is minimum 30%
-        percentage_toShow = (percentage * 0.7) + 30
-        @setPreloaderWidth(percentage_toShow + '%')
-
 
 
     @hidePreloader()
@@ -82,7 +68,3 @@ BrowseTargetAsListView = Backbone.View.extend
   clearSelections: ->
     @model.clearSelections()
 
-  setPreloaderWidth: (width) ->
-
-    bar = $(@el).find('.preloader-container').find('.determinate')
-    bar.attr('style', 'width:' + width)
