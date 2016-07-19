@@ -136,5 +136,14 @@ TargetHierarchyTree = Backbone.Model.extend({
       }
     }
     return numFound;
+  },
+  resetSearch: function() {
+    var node, _i, _len, _ref;
+    _ref = this.get('all_nodes').models;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      node.set('found', false);
+    }
+    return this.collapseAll();
   }
 });

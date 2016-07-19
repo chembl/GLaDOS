@@ -94,6 +94,7 @@ TargetHierarchyTree = Backbone.Model.extend
 
     termsUpper = terms.toUpperCase()
     numFound = 0
+
     for node in @get('all_nodes').models
       node.set('found', false)
 
@@ -105,4 +106,9 @@ TargetHierarchyTree = Backbone.Model.extend
     return numFound
 
 
+  resetSearch: ->
 
+    for node in @get('all_nodes').models
+      node.set('found', false)
+
+    @collapseAll()

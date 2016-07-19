@@ -7,6 +7,7 @@ BrowseTargetMainView = Backbone.View.extend
    'click .clear-selections': 'clearSelections'
    'change input[name="selectTree"]': 'selectTree'
    'click .search-in-tree': 'searchInTree'
+   'click .reset-search': 'resetSearch'
 
   initialize: ->
 
@@ -47,13 +48,24 @@ BrowseTargetMainView = Backbone.View.extend
   searchInTree: ->
 
     searchTerms = $(@el).find('#search_terms').val()
+    search_summary = $(@el).find('#search_in_tree_summary')
+    search_summary.show()
+
+    if searchTerms.length < 2
+      search_summary.html 'You must enter at least to characters'
+      return
 
     numFound = @model.searchInTree(searchTerms)
 
-    $(@el).find('#search_in_tree_summary').html Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())
+    search_summary.html Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())
       num_results: numFound
 
 
+  resetSearch: ->
+
+    search_summary = $(@el).find('#search_in_tree_summary')
+    search_summary.hide()
+    @model.resetSearch()
 
 
 

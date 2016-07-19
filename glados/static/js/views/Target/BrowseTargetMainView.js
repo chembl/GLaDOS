@@ -8,7 +8,8 @@ BrowseTargetMainView = Backbone.View.extend({
     'click .select-all': 'selectAll',
     'click .clear-selections': 'clearSelections',
     'change input[name="selectTree"]': 'selectTree',
-    'click .search-in-tree': 'searchInTree'
+    'click .search-in-tree': 'searchInTree',
+    'click .reset-search': 'resetSearch'
   },
   initialize: function() {
     this.listView = TargetBrowserApp.initBrowserAsList(this.model, $('#BCK-TargetBrowserAsList'));
@@ -44,11 +45,23 @@ BrowseTargetMainView = Backbone.View.extend({
     return this.model.fetch();
   },
   searchInTree: function() {
-    var numFound, searchTerms;
+    var numFound, searchTerms, search_summary;
     searchTerms = $(this.el).find('#search_terms').val();
+    search_summary = $(this.el).find('#search_in_tree_summary');
+    search_summary.show();
+    if (searchTerms.length < 2) {
+      search_summary.html('You must enter at least to characters');
+      return;
+    }
     numFound = this.model.searchInTree(searchTerms);
-    return $(this.el).find('#search_in_tree_summary').html(Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())({
+    return search_summary.html(Handlebars.compile($('#Handlebars-TargetBrowser-searchResults').html())({
       num_results: numFound
     }));
+  },
+  resetSearch: function() {
+    var search_summary;
+    search_summary = $(this.el).find('#search_in_tree_summary');
+    search_summary.hide();
+    return this.model.resetSearch();
   }
 });
