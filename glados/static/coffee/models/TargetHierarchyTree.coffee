@@ -43,7 +43,7 @@ TargetHierarchyTree = Backbone.Model.extend
 
       # add the reference to the new node to the all_nodes list and the dictionary
       all_nodes.add(new_node)
-      all_nodes_dict[node_obj.id] = new_node
+      all_nodes_dict[node_obj.id.toString()] = new_node
 
       if node_obj.children?
         for child_obj in node_obj.children

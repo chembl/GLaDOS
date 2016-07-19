@@ -39,7 +39,7 @@ TargetHierarchyTree = Backbone.Model.extend({
       });
       children_col.add(new_node);
       all_nodes.add(new_node);
-      all_nodes_dict[node_obj.id] = new_node;
+      all_nodes_dict[node_obj.id.toString()] = new_node;
       if (node_obj.children != null) {
         _ref = node_obj.children;
         _results = [];

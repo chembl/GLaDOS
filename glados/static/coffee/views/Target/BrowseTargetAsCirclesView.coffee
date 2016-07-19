@@ -32,6 +32,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
   render: ->
 
+    console.log('nodes before')
+    console.log(@model.get('plain'))
+
     @hidePreloader()
     margin = 20
     diameter = $(@el).width();
@@ -64,12 +67,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     focus = root
     nodes = pack.nodes(root)
     view = undefined
+    console.log('nodes after')
     console.log(nodes)
 
     circle = svg.selectAll('circle')
     .data(nodes).enter().append('circle')
     .attr("class", (d) ->
       if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
+    .attr("id", (d) ->
+      if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
     .style("fill", (d) ->
       if d.children then color(d.depth) else null)
     .on("click", (d) ->
@@ -87,6 +93,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     .style("display", (d) ->
       if d.parent == root then 'inline' else 'none')
     .text((d) -> return d.name + " (" + d.size + ")" )
+
+    #Select circles to create the views
+    @createCircleViews()
 
     node = svg.selectAll("circle,text")
 
@@ -124,6 +133,29 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
 
     zoomTo([root.x, root.y, root.r * 2 + margin])
+
+  createCircleViews: ->
+
+    nodes_dict = @model.get('all_nodes_dict')
+
+    $(@el).find('circle').each ->
+
+      circle = $(@)
+      nodeModelID = circle.attr('id').replace('circleFor-', '')
+
+      #root node only exists in d3 contexts.
+      if nodeModelID == 'Root'
+        return
+
+      nodeModel = nodes_dict[nodeModelID]
+
+      nodeView = new BrowseTargetAsCirclesNodeView
+        model: nodeModel
+        el: circle
+
+
+
+
 
 
 

@@ -29,6 +29,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
   },
   render: function() {
     var circle, color, diameter, elem_selector, focus, margin, node, nodes, pack, root, svg, text, view, zoom, zoomTo;
+    console.log('nodes before');
+    console.log(this.model.get('plain'));
     this.hidePreloader();
     margin = 20;
     diameter = $(this.el).width();
@@ -45,6 +47,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     focus = root;
     nodes = pack.nodes(root);
     view = void 0;
+    console.log('nodes after');
     console.log(nodes);
     circle = svg.selectAll('circle').data(nodes).enter().append('circle').attr("class", function(d) {
       if (d.parent) {
@@ -55,6 +58,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
         }
       } else {
         return 'node node--root';
+      }
+    }).attr("id", function(d) {
+      if (d.parent) {
+        return 'circleFor-' + d.id;
+      } else {
+        return 'circleFor-Root';
       }
     }).style("fill", function(d) {
       if (d.children) {
@@ -83,6 +92,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     }).text(function(d) {
       return d.name + " (" + d.size + ")";
     });
+    this.createCircleViews();
     node = svg.selectAll("circle,text");
     d3.select(elem_selector).style("background", color(-1)).on("click", function() {
       return zoom(root);
@@ -128,5 +138,22 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
       });
     };
     return zoomTo([root.x, root.y, root.r * 2 + margin]);
+  },
+  createCircleViews: function() {
+    var nodes_dict;
+    nodes_dict = this.model.get('all_nodes_dict');
+    return $(this.el).find('circle').each(function() {
+      var circle, nodeModel, nodeModelID, nodeView;
+      circle = $(this);
+      nodeModelID = circle.attr('id').replace('circleFor-', '');
+      if (nodeModelID === 'Root') {
+        return;
+      }
+      nodeModel = nodes_dict[nodeModelID];
+      return nodeView = new BrowseTargetAsCirclesNodeView({
+        model: nodeModel,
+        el: circle
+      });
+    });
   }
 });
