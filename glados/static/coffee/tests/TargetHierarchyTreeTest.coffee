@@ -9,6 +9,7 @@ describe "Target hierarchy tree", ->
 
   afterEach ->
     targetTree.clearSelections()
+    targetTree.resetSearch()
     targetTree.collapseAll()
 
 
@@ -178,6 +179,34 @@ describe "Target hierarchy tree", ->
 
     done()
 
+  it "searches for a node", (done) ->
+
+    targetTree.searchInTree('Kinase')
+
+    shown_nodes = getShownNodesListStr()
+    found_nodes = getFoundNodesListStr()
+
+    expect(shown_nodes).toBe('1,10,2,3,4,5,8')
+    expect(found_nodes).toBe('2,3,4')
+
+
+    done()
+
+  it "resets a search", (done) ->
+
+    targetTree.searchInTree('Kinase')
+    targetTree.resetSearch()
+
+    shown_nodes = getShownNodesListStr()
+    found_nodes = getFoundNodesListStr()
+
+    expect(shown_nodes).toBe('1,10,8')
+    expect(found_nodes).toBe('')
+
+    done()
+
+
+
 
   # ------------------------------
   # Helpers
@@ -241,5 +270,13 @@ describe "Target hierarchy tree", ->
 
     return _.map(_.filter(all_nodes, (model) ->
       !model.get('show')),
+      (selected) ->selected.get('id')).sort().toString()
+
+  getFoundNodesListStr = () ->
+
+    all_nodes = targetTree.get('all_nodes').models
+
+    return _.map(_.filter(all_nodes, (model) ->
+      model.get('found')),
       (selected) ->selected.get('id')).sort().toString()
 
