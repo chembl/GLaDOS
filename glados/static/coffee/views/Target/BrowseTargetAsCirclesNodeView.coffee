@@ -10,12 +10,7 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend
 
   changed: ->
 
-
     d3.select(@elem_selector).classed('selected', @model.get('selected') == true)
-
-
-    console.log(@model.get('name') + ' changed')
-    console.log($(@el))
 
   clicked: ->
 

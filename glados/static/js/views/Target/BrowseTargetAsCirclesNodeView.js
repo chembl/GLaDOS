@@ -10,9 +10,7 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend({
     'click': 'clicked'
   },
   changed: function() {
-    d3.select(this.elem_selector).classed('selected', this.model.get('selected') === true);
-    console.log(this.model.get('name') + ' changed');
-    return console.log($(this.el));
+    return d3.select(this.elem_selector).classed('selected', this.model.get('selected') === true);
   },
   clicked: function() {
     return console.log('clicked ' + this.model.get('name'));

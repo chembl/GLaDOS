@@ -44,7 +44,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
     color = d3.scale.linear()
     .domain([-1, 5])
-    .range(["white", "rgb(0, 110, 156)"])
+    .range(["#eceff1", "#607d8b"])
     .interpolate(d3.interpolateRgb);
 
     pack = d3.layout.pack()

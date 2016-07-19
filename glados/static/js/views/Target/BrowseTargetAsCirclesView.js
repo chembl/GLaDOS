@@ -37,7 +37,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     if (diameter === 0) {
       diameter = 300;
     }
-    color = d3.scale.linear().domain([-1, 5]).range(["white", "rgb(0, 110, 156)"]).interpolate(d3.interpolateRgb);
+    color = d3.scale.linear().domain([-1, 5]).range(["#eceff1", "#607d8b"]).interpolate(d3.interpolateRgb);
     pack = d3.layout.pack().padding(2).size([diameter - margin, diameter - margin]).value(function(d) {
       return d.size;
     });
