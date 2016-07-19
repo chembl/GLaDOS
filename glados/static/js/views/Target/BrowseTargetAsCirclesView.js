@@ -94,7 +94,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend({
     });
     this.createCircleViews();
     node = svg.selectAll("circle,text");
-    d3.select(elem_selector).style("background", color(-1)).on("click", function() {
+    d3.select(elem_selector).on("click", function() {
       return zoom(root);
     });
     zoomTo = function(v) {

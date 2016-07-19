@@ -1738,6 +1738,12 @@ $marvin-size-fullscreen: 91vh;
     .node--leaf {
       pointer-events: none;
     }
+
+    .selected{
+        stroke: color('green', 'base');;
+        stroke-width: 2
+    }
+
   }
 
   /**

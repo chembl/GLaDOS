@@ -2984,6 +2984,9 @@ div#CNC-zoom-modal {
   .target-browser .browser-as-circles .node--root,
   .target-browser .browser-as-circles .node--leaf {
     pointer-events: none; }
+  .target-browser .browser-as-circles .selected {
+    stroke: #4CAF50;
+    stroke-width: 2; }
   .target-browser .tree-indent {
     width: 16px;
     height: 16px;

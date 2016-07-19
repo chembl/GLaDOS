@@ -1,5 +1,6 @@
 BrowseTargetAsCirclesView = Backbone.View.extend
 
+
   initialize: ->
 
     @showPreloader()
@@ -100,7 +101,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend
     node = svg.selectAll("circle,text")
 
     d3.select(elem_selector)
-    .style("background", color(-1))
     .on("click", () -> zoom(root) )
 
     zoomTo = (v) ->
