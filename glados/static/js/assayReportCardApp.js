@@ -10,7 +10,6 @@ AssayReportCardApp = (function() {
     assay = new Assay({
       assay_chembl_id: chembl_id
     });
-    assay.url = 'https://www.ebi.ac.uk/chembl/api/data/assay/' + chembl_id + '.json';
     return assay;
   };
 
