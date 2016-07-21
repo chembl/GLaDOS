@@ -47,12 +47,41 @@
     <tr>
       <td><a href="/target_report_card/{{target_chembl_id}}/" target="_blank">{{pref_name}}</a></td>
       <td>{{target_type}}</td>
-      <td>j</td>
+      <td></td>
     </tr>
 
   </table>
 
 </script>
+{% endverbatim %}
+
+{% endblock %}
+
+{% block collection %}
+
+<div id="BCK-ACS-small" data-hb-template="Handlebars-AssayCurationSummary-small">
+
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
+{% verbatim %}
+
+
+<script id="Handlebars-AssayCurationSummary-small" type="text/x-handlebars-template">
+
+<ul class="collection hide-on-med-and-up">
+  <li class="collection-item">
+
+    <b>Target:</b> <a href="/target_report_card/{{target_chembl_id}}/" >{{pref_name}}</a>
+    <b>Type:</b> {{target_type}}
+
+  </li>
+
+</ul>
+
+</script>
+
 {% endverbatim %}
 
 {% endblock %}

@@ -12,6 +12,7 @@ AssayCurationSummaryView = CardView.extend({
       target.on('change', this.render, this);
     }
     this.fill_template('BCK-ACS-large');
+    this.fill_template('BCK-ACS-small');
     return this.showVisibleContent();
   },
   fill_template: function(div_id) {
