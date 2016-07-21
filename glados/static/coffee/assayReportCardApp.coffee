@@ -18,7 +18,7 @@ class AssayReportCardApp
     * Initializes the ABIView (Assay Basic Information View)
     * @param {Compound} model, base model for the view
     * @param {JQuery} top_level_elem element that renders the model.
-    * @return {AssayBasicInformationViewView} the view that has been created
+    * @return {AssayBasicInformationView} the view that has been created
   ###
   @initABIView = (model, top_level_elem) ->
 
@@ -27,3 +27,17 @@ class AssayReportCardApp
       el: top_level_elem
 
     return abiView
+
+  ### *
+    * Initializes the ACSView (Assay Curation Summary View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {AssayBCurationSummaryView} the view that has been created
+  ###
+  @initACSView  = (model, top_level_elem) ->
+
+    aciView = new AssayCurationSummaryView
+      model: model
+      el: top_level_elem
+
+    return aciView

@@ -4,6 +4,12 @@ var Target;
 Target = Backbone.RelationalModel.extend({
   idAttribute: 'target_chembl_id',
   initialize: function() {
+    this.on('change', this.test, this);
     return this.url = 'https://www.ebi.ac.uk/chembl/api/data/target/' + this.get('target_chembl_id') + '.json';
+  },
+  test: function() {
+    console.log('target changed!');
+    console.log(this.toJSON());
+    return console.log('^^^');
   }
 });

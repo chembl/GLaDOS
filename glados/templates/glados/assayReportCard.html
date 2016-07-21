@@ -40,7 +40,9 @@
         <div class="row">
 
           {% block cs%}
-            {% include "glados/AssayReportCardParts/CurationSummary.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/AssayReportCardParts/CurationSummary.html" %}
+            {% endwith %}
           {% endblock %}
 
         </div>
@@ -139,6 +141,7 @@ CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var assay = AssayReportCardApp.initAssay(CHEMBL_ID);
 
 var abiView = AssayReportCardApp.initABIView(assay, $('#ABasicInformation'));
+var acsView = AssayReportCardApp.initACSView(assay, $('#ACurationSummaryCard'));
 
 assay.fetch();
 

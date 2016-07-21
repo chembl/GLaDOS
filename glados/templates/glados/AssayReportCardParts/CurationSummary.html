@@ -21,26 +21,38 @@
 
 {% block table %}
 
-<table class="compact-table striped hide-on-small-only">
+<div id="BCK-ACS-large" data-hb-template="Handlebars-AssayCurationSummary-large">
 
-  <tr>
-    <th>
-      Target
-    </th>
-     <th>
-      Target Type
-    </th>
-     <th>
-      Target Description
-    </th>
-  </tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-  <tr>
-    <td><a href="/chembl/target/inspect/102222">Plasma</a></td>
-    <td>TISSUE</td>
-    <td></td>
-  </tr>
+</div>
 
-</table>
+{% verbatim %}
+<script id="Handlebars-AssayCurationSummary-large" type="text/x-handlebars-template">
+
+  <table class="compact-table striped hide-on-small-only">
+
+    <tr>
+      <th>
+        Target
+      </th>
+       <th>
+        Target Type
+      </th>
+       <th>
+        Target Description
+      </th>
+    </tr>
+
+    <tr>
+      <td><a href="/target_report_card/{{target_chembl_id}}/" target="_blank">{{pref_name}}</a></td>
+      <td>{{target_type}}</td>
+      <td>j</td>
+    </tr>
+
+  </table>
+
+</script>
+{% endverbatim %}
 
 {% endblock %}

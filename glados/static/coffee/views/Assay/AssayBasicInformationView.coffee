@@ -1,7 +1,5 @@
 # View that renders the Assay basic information section
-# from the Assar report card
-# load CardView first!
-# also make sure the html can access the handlebars templates!
+# from the Assay report card
 AssayBasicInformationView = CardView.extend
 
   initialize: ->
