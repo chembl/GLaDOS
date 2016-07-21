@@ -49,7 +49,19 @@
     </tr>
     <tr>
       <td class="fixed-width-column-11"><b>Protein Target Classification:</b></td>
-      <td>{{prot_target_classification}}</td>
+      <td>
+
+        <ul>
+          {{#each prot_target_classifications}}
+
+            <li> {{this}}</li>
+
+          {{/each}}
+        </ul>
+
+
+
+      </td>
     </tr>
   </table>
 

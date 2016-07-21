@@ -8,16 +8,13 @@ Target = Backbone.RelationalModel.extend({
     return this.url = 'https://www.ebi.ac.uk/chembl/api/data/target/' + this.get('target_chembl_id') + '.json';
   },
   getProteinTargetClassification: function() {
-    var comp, comp_url, component_id, get_proxy, target_components, _i, _len, _results;
+    var comp, comp_url, component_id, target, target_components, _i, _len, _results;
     target_components = this.get('target_components');
-    console.log('changed!');
-    console.log(this);
-    if (target_components != null) {
+    if ((target_components != null) && !this.get('protein_classifications_loaded')) {
       this.set('protein_classifications', {}, {
         silent: true
       });
-      console.log('getProteinTargetClassification()!');
-      get_proxy = $.proxy(this.get, this);
+      target = this;
       _results = [];
       for (_i = 0, _len = target_components.length; _i < _len; _i++) {
         comp = target_components[_i];
@@ -30,20 +27,31 @@ Target = Backbone.RelationalModel.extend({
           for (_j = 0, _len1 = protein_classifications.length; _j < _len1; _j++) {
             prot_class = protein_classifications[_j];
             prot_class_id = prot_class['protein_classification_id'];
-            prot_class_dict = get_proxy('protein_classifications');
+            prot_class_dict = target.get('protein_classifications');
             if (!(prot_class_dict[prot_class_id] != null)) {
-              prot_class_dict[prot_class_id] = [];
+              prot_class_dict[prot_class_id] = "";
               prot_class_url = 'https://www.ebi.ac.uk/chembl/api/data/protein_class/' + prot_class_id + '.json';
+              console.log('getting:');
+              console.log(prot_class_url);
               _results1.push($.get(prot_class_url).done(function(data) {
                 var num;
-                return prot_class_dict[data['protein_class_id']] = (function() {
+                prot_class_dict[data['protein_class_id']] = ((function() {
                   var _k, _results2;
                   _results2 = [];
                   for (num = _k = 1; _k <= 8; num = ++_k) {
-                    _results2.push(data['l' + num]);
+                    if (data['l' + num] != null) {
+                      _results2.push(data['l' + num]);
+                    }
                   }
                   return _results2;
-                })();
+                })()).join(' > ');
+                console.log('setting:');
+                console.log(data['protein_class_id']);
+                console.log(prot_class_dict[data['protein_class_id']]);
+                target.set('protein_classifications_loaded', true, {
+                  silent: true
+                });
+                return target.trigger('change');
               }).fail(function() {
                 return console.log('failed2!');
               }));

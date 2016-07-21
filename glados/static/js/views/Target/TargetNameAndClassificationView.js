@@ -15,9 +15,16 @@ TargetNameAndClassificationView = CardView.extend({
     return this.activateModals();
   },
   fill_template: function(div_id) {
-    var div, template;
+    var div, target_classifications, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
+    target_classifications = $.map(this.model.get('protein_classifications'), function(val, key) {
+      return val;
+    });
+    console.log('render model ' + (new Date).getTime());
+    console.log(JSON.stringify(this.model.get('protein_classifications')));
+    console.log(target_classifications);
+    console.log('^^^');
     return div.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('target_chembl_id'),
       type: this.model.get('target_type'),
@@ -25,7 +32,7 @@ TargetNameAndClassificationView = CardView.extend({
       synonyms: this.get_target_syonyms_list(this.model.get('target_components')),
       organism: this.model.get('organism'),
       specs_group: this.model.get('species_group_flag') ? 'Yes' : 'No',
-      prot_target_classification: 'Enzyme'
+      prot_target_classifications: target_classifications
     }));
   },
   /* *

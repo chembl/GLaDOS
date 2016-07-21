@@ -24,6 +24,13 @@ TargetNameAndClassificationView = CardView.extend
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
 
+    target_classifications = $.map(@model.get('protein_classifications'), (val, key) -> val)
+
+    console.log('render model ' + (new Date).getTime() )
+    console.log(JSON.stringify(@model.get('protein_classifications')))
+    console.log(target_classifications)
+    console.log('^^^')
+
     div.html Handlebars.compile(template.html())
       chembl_id: @model.get('target_chembl_id')
       type: @model.get('target_type')
@@ -31,7 +38,7 @@ TargetNameAndClassificationView = CardView.extend
       synonyms: @get_target_syonyms_list(@model.get('target_components'))
       organism: @model.get('organism')
       specs_group: if @model.get('species_group_flag') then 'Yes' else 'No'
-      prot_target_classification: 'Enzyme'
+      prot_target_classifications: target_classifications
 
   ### *
     * Give me the target_components list from the web services response and I will
