@@ -4,18 +4,23 @@ AssayCurationSummaryView = CardView.extend
 
   initialize: ->
     @model.on 'change', @render, @
+    @resource_type = 'Assay'
 
   render: ->
 
     target = @model.get('target')
 
-    # listen for the target changes if it is ready
+    # listen for the target changes if it exists
     if target?
       target.on 'change', @render, @
 
     @fill_template('BCK-ACS-large')
     @fill_template('BCK-ACS-small')
     @showVisibleContent()
+
+
+    @initEmbedModal('curation_summary')
+    @activateModals()
 
   fill_template: (div_id) ->
 

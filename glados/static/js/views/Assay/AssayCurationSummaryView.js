@@ -3,7 +3,8 @@ var AssayCurationSummaryView;
 
 AssayCurationSummaryView = CardView.extend({
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    return this.resource_type = 'Assay';
   },
   render: function() {
     var target;
@@ -13,7 +14,9 @@ AssayCurationSummaryView = CardView.extend({
     }
     this.fill_template('BCK-ACS-large');
     this.fill_template('BCK-ACS-small');
-    return this.showVisibleContent();
+    this.showVisibleContent();
+    this.initEmbedModal('curation_summary');
+    return this.activateModals();
   },
   fill_template: function(div_id) {
     var div, target, template;

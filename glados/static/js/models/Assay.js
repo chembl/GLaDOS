@@ -15,10 +15,6 @@ Assay = Backbone.RelationalModel.extend({
     }
   ],
   fetchRelatedModels: function() {
-    console.log('assay changed!');
-    console.log(this.toJSON());
-    console.log('triggering fetch of target');
-    console.log('^^^');
     return this.getAsync('target');
   },
   parse: function(data) {
