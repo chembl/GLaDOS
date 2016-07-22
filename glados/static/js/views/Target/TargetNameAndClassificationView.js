@@ -18,8 +18,9 @@ TargetNameAndClassificationView = CardView.extend({
     var div, target_classifications, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
-    target_classifications = $.map(this.model.get('protein_classifications'), function(val, key) {
-      return val;
+    target_classifications = [];
+    $.map(this.model.get('protein_classifications'), function(val, key) {
+      return target_classifications.push(val);
     });
     console.log('render model ' + (new Date).getTime());
     console.log(JSON.stringify(this.model.get('protein_classifications')));

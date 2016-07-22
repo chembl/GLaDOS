@@ -47,7 +47,7 @@ Target = Backbone.RelationalModel.extend
                 $.get(prot_class_url).done(
                   (data) ->
                      # now that I have the data I save it
-                     prot_class_dict[data['protein_class_id']] = ( data['l' + num] for num in [1..8] when data['l' + num]?  ).join(' > ')
+                     prot_class_dict[data['protein_class_id']] = ( data['l' + num] for num in [1..8] when data['l' + num]?  )
                      console.log('setting:')
                      console.log(data['protein_class_id'])
                      console.log(prot_class_dict[data['protein_class_id']])

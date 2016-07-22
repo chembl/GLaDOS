@@ -51,14 +51,20 @@
       <td class="fixed-width-column-11"><b>Protein Target Classification:</b></td>
       <td>
 
-        <ul>
-          {{#each prot_target_classifications}}
+        {{#if prot_target_classifications}}
 
-            <li> {{this}}</li>
+          <ul>
+            {{#each prot_target_classifications}}
 
-          {{/each}}
-        </ul>
+              <li>- {{#each this}} <span class="chip-ptc">{{this}} {{#unless @last}} > {{/unless}}</span> {{/each}}</li>
 
+            {{/each}}
+          </ul>
+
+
+        {{else}}
+          Not Applicable
+        {{/if}}
 
 
       </td>
@@ -127,7 +133,22 @@
 
     <li class="collection-item">
 
-      <b>Protein Target Classification:</b> Enzyme
+      <b>Protein Target Classification:</b>
+
+      {{#if prot_target_classifications}}
+
+          <ul>
+          {{#each prot_target_classifications}}
+
+            <li>- {{this}}</li>
+
+
+         {{/each}}
+          </ul>
+
+      {{else}}
+        Not Applicable
+      {{/if}}
 
     </li>
   </ul>

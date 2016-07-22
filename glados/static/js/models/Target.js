@@ -35,7 +35,7 @@ Target = Backbone.RelationalModel.extend({
               console.log(prot_class_url);
               _results1.push($.get(prot_class_url).done(function(data) {
                 var num;
-                prot_class_dict[data['protein_class_id']] = ((function() {
+                prot_class_dict[data['protein_class_id']] = (function() {
                   var _k, _results2;
                   _results2 = [];
                   for (num = _k = 1; _k <= 8; num = ++_k) {
@@ -44,7 +44,7 @@ Target = Backbone.RelationalModel.extend({
                     }
                   }
                   return _results2;
-                })()).join(' > ');
+                })();
                 console.log('setting:');
                 console.log(data['protein_class_id']);
                 console.log(prot_class_dict[data['protein_class_id']]);

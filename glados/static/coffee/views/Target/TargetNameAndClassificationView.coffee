@@ -24,7 +24,9 @@ TargetNameAndClassificationView = CardView.extend
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
 
-    target_classifications = $.map(@model.get('protein_classifications'), (val, key) -> val)
+    target_classifications = []
+
+    $.map(@model.get('protein_classifications'), (val, key) -> target_classifications.push(val))
 
     console.log('render model ' + (new Date).getTime() )
     console.log(JSON.stringify(@model.get('protein_classifications')))
