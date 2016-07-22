@@ -28,11 +28,6 @@ TargetNameAndClassificationView = CardView.extend
 
     $.map(@model.get('protein_classifications'), (val, key) -> target_classifications.push(val))
 
-    console.log('render model ' + (new Date).getTime() )
-    console.log(JSON.stringify(@model.get('protein_classifications')))
-    console.log(target_classifications)
-    console.log('^^^')
-
     div.html Handlebars.compile(template.html())
       chembl_id: @model.get('target_chembl_id')
       type: @model.get('target_type')

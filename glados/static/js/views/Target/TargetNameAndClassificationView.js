@@ -22,10 +22,6 @@ TargetNameAndClassificationView = CardView.extend({
     $.map(this.model.get('protein_classifications'), function(val, key) {
       return target_classifications.push(val);
     });
-    console.log('render model ' + (new Date).getTime());
-    console.log(JSON.stringify(this.model.get('protein_classifications')));
-    console.log(target_classifications);
-    console.log('^^^');
     return div.html(Handlebars.compile(template.html())({
       chembl_id: this.model.get('target_chembl_id'),
       type: this.model.get('target_type'),

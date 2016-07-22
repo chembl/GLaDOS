@@ -31,8 +31,6 @@ Target = Backbone.RelationalModel.extend({
             if (!(prot_class_dict[prot_class_id] != null)) {
               prot_class_dict[prot_class_id] = "";
               prot_class_url = 'https://www.ebi.ac.uk/chembl/api/data/protein_class/' + prot_class_id + '.json';
-              console.log('getting:');
-              console.log(prot_class_url);
               _results1.push($.get(prot_class_url).done(function(data) {
                 var num;
                 prot_class_dict[data['protein_class_id']] = (function() {
@@ -45,9 +43,6 @@ Target = Backbone.RelationalModel.extend({
                   }
                   return _results2;
                 })();
-                console.log('setting:');
-                console.log(data['protein_class_id']);
-                console.log(prot_class_dict[data['protein_class_id']]);
                 target.set('protein_classifications_loaded', true, {
                   silent: true
                 });

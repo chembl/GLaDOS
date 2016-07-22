@@ -41,16 +41,11 @@ Target = Backbone.RelationalModel.extend
                 prot_class_dict[prot_class_id] = ""
                 prot_class_url = 'https://www.ebi.ac.uk/chembl/api/data/protein_class/' + prot_class_id + '.json'
 
-                console.log('getting:')
-                console.log(prot_class_url)
 
                 $.get(prot_class_url).done(
                   (data) ->
                      # now that I have the data I save it
                      prot_class_dict[data['protein_class_id']] = ( data['l' + num] for num in [1..8] when data['l' + num]?  )
-                     console.log('setting:')
-                     console.log(data['protein_class_id'])
-                     console.log(prot_class_dict[data['protein_class_id']])
                      # By setting this attribute, I prevent that I stay in an infinite loop making requests forever.
                      target.set('protein_classifications_loaded', true, {silent:true})
                      # I make sure to trigger a change event on the target, so the view(s) are informed.

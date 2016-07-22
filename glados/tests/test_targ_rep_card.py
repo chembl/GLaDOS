@@ -2,9 +2,7 @@ from report_card_tester import ReportCardTester
 from selenium.webdriver.common.by import By
 
 
-
 class TargetReportCardTest(ReportCardTester):
-
   # --------------------------------------------------------------------------------------
   # Scenarios
   # --------------------------------------------------------------------------------------
@@ -20,7 +18,6 @@ class TargetReportCardTest(ReportCardTester):
     id_field = self.browser.find_element_by_id('Bck-Target_ID')
     self.assertEqual(id_field.text, 'CHEMBL223')
 
-
     # Target Type is SINGLE PROTEIN
     target_type = self.browser.find_element_by_id('Bck-Target_Type')
     self.assertEqual(target_type.text, 'SINGLE PROTEIN')
@@ -31,7 +28,8 @@ class TargetReportCardTest(ReportCardTester):
 
     synonyms = self.browser.find_element_by_id('Bck-Target_Synonyms')
     self.assertEqual(synonyms.text,
-                     'ADRA1A ADRA1D Alpha-1A adrenergic receptor Alpha-1D adrenergic receptor Alpha-1D adrenoceptor Alpha-1D adrenoreceptor Alpha-adrenergic receptor 1a')
+                     'ADRA1A ADRA1D Alpha-1A adrenergic receptor Alpha-1D adrenergic receptor'
+                      ' Alpha-1D adrenoceptor Alpha-1D adrenoreceptor Alpha-adrenergic receptor 1a')
 
     organism = self.browser.find_element_by_id('Bck-Target_Organism')
     self.assertEqual(organism.text, 'Homo sapiens')
@@ -43,7 +41,17 @@ class TargetReportCardTest(ReportCardTester):
     # Embed trigger
     self.assert_embed_trigger('TNameClassificationCard', 'target', 'name_and_classification', 'CHEMBL223')
 
+    # Protein target classification
+    protein_target_classification = self.browser.find_element_by_id('Bck-Target-Classification')
+    self.assertEqual(protein_target_classification.text,
+                     '- Membrane receptor > Family A G protein-coupled receptor > '
+                     'Small molecule receptor (family A GPCR) > Monoamine receptor > Adrenergic receptor')
 
+    # --------------------------------------
+    # Target Components
+    # --------------------------------------
+    # Embed trigger
+    self.assert_embed_trigger('TComponentsCard', 'target', 'components', 'CHEMBL223')
 
   def test_target_report_card_scenario_2(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2364672', self.SLEEP_TIME)
@@ -68,7 +76,6 @@ class TargetReportCardTest(ReportCardTester):
       accestion_td = row.find_element_by_class_name('Bck-Target-Component-Accession')
       self.assertEqual(accestion_td.text, accession)
 
-
   def test_target_report_card_scenario_3(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2363053', self.SLEEP_TIME)
 
@@ -76,13 +83,18 @@ class TargetReportCardTest(ReportCardTester):
     # Target Name and Classification
     # --------------------------------------
 
-    #this has no synonyms
+    # this has no synonyms
     synonyms = self.browser.find_element_by_id('Bck-Target_Synonyms')
-    self.assertEqual(synonyms.text,'---')
+    self.assertEqual(synonyms.text, '---')
 
-    #this has no organism defined
+    # this has no organism defined
     synonyms = self.browser.find_element_by_id('Bck-Target_Organism')
-    self.assertEqual(synonyms.text,'---')
+    self.assertEqual(synonyms.text, '---')
+
+     # Protein target classification
+    protein_target_classification = self.browser.find_element_by_id('Bck-Target-Classification')
+    self.assertEqual(protein_target_classification.text,
+                     'Not Applicable')
 
     # --------------------------------------
     # Target Components
@@ -91,4 +103,16 @@ class TargetReportCardTest(ReportCardTester):
     # There are no target components for this one
     components_section = self.browser.find_element_by_id('TargetComponents')
     self.assertEqual(components_section.value_of_css_property('display'), 'none')
+
+  def test_target_report_card_scenario_4(self):
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME)
+
+    # Protein target classification
+    # This one has 60 target components (the highest number in the database), and it only has 2 classifications
+    protein_target_classification = self.browser.find_element_by_id('Bck-Target-Classification')
+    self.assertEqual(protein_target_classification.text,
+                     '- Other cytosolic protein\n'
+                     '- Unclassified protein')
+
+
 
