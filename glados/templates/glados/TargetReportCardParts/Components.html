@@ -46,8 +46,11 @@
 
       <td>Fatty-acid amide hydrolase 1</td>
       <td>SINGLE PROTEIN</td>
-      <td class="Bck-Target-Component-Accession"><a target="_blank"
-                                                    href="http://www.uniprot.org/uniprot/{{this.accession}}">{{this.accession}}</a>
+      <td class="Bck-Target-Component-Accession">
+        <a target="_blank"
+           {{#if this.accession}} href="http://www.uniprot.org/uniprot/{{this.accession}}"{{else}}{{/if}}>
+          {{#if this.accession}} {{this.accession}} {{else}} --- {{/if}}
+        </a>
       </td>
 
     </tr>
