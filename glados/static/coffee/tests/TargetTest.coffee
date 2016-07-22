@@ -1,0 +1,25 @@
+describe "Target", ->
+  target = TargetReportCardApp.initTarget('CHEMBL2363965')
+
+  beforeAll (done) ->
+    target.fetch()
+
+    # this timeout is to give time to get the
+    # target classification information, it happens after the fetch,
+    # there is a way to know that it loaded at least one classification: get('protein_classifications_loaded')
+    # but there is no way to know that it loaded all the classifications.
+    setTimeout ( ->
+      done()
+      return
+    ), 200
+
+  it "loads the protein target classification", (done) ->
+
+    classification = target.get('protein_classifications')
+    class1 = classification[8][0]
+    class2 = classification[601][0]
+    console.log('---')
+    expect(class1).toBe('Other cytosolic protein')
+    expect(class2).toBe('Unclassified protein')
+
+    done()
