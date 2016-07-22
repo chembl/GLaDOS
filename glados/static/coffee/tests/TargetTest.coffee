@@ -18,7 +18,6 @@ describe "Target", ->
     classification = target.get('protein_classifications')
     class1 = classification[8][0]
     class2 = classification[601][0]
-    console.log('---')
     expect(class1).toBe('Other cytosolic protein')
     expect(class2).toBe('Unclassified protein')
 
