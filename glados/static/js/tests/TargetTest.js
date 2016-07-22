@@ -6,8 +6,8 @@ describe("Target", function() {
   beforeAll(function(done) {
     target.fetch();
     return setTimeout((function() {
-      done();
-    }), 200);
+      return done();
+    }), 2000);
   });
   return it("loads the protein target classification", function(done) {
     var class1, class2, classification;
