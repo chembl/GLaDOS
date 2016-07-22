@@ -56,7 +56,7 @@
           <ul>
             {{#each prot_target_classifications}}
 
-              <li>- {{#each this}} <span class="chip-ptc">{{this}} {{#unless @last}} > {{/unless}}</span> {{/each}}</li>
+              <li>- {{#each this}} <span class="chip-ptc">{{this}} </span> {{#unless @last}} > {{/unless}} {{/each}}</li>
 
             {{/each}}
           </ul>
@@ -140,7 +140,7 @@
           <ul>
           {{#each prot_target_classifications}}
 
-            <li>- {{this}}</li>
+            <li>- {{#each this}} <span class="chip-ptc">{{this}}</span> {{#unless @last}} > {{/unless}} {{/each}}</li>
 
 
          {{/each}}
