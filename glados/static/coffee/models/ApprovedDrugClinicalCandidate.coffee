@@ -1,0 +1,1 @@
+ApprovedDrugClinicalCandidate = Backbone.Model.extend({})

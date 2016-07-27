@@ -1,0 +1,1 @@
+ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({})
