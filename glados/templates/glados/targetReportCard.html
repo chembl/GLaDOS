@@ -244,11 +244,13 @@ var pathname = window.location.pathname;
 var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var target = TargetReportCardApp.initTarget(CHEMBL_ID);
+var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands();
 
 var TNCView = TargetReportCardApp.initTNCView(target, $('#TNameClassificationCard'));
 var TComponentsView = TargetReportCardApp.initTComponentsView(target, $('#TComponentsCard'));
 
 target.fetch();
+appDrugsClinCandsList.fetch2();
 
 {% endblock %}
 

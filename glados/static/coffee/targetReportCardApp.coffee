@@ -9,6 +9,13 @@ class TargetReportCardApp
 
     return target
 
+  @initAppDrugClinCands = ->
+
+    appDrugCCList = new ApprovedDrugClinicalCandidateList
+
+    appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=CHEMBL4794&order_by=molecule_chembl_id'
+    return appDrugCCList
+
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------
