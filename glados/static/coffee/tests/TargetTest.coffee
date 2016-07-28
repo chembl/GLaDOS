@@ -10,7 +10,7 @@ describe "Target", ->
     # but there is no way to know that it loaded all the classifications.
     setTimeout ( ->
       done()
-    ), 2000
+    ), 1000
 
   it "loads the protein target classification", (done) ->
 

@@ -7,7 +7,7 @@ describe("Target", function() {
     target.fetch();
     return setTimeout((function() {
       return done();
-    }), 2000);
+    }), 1000);
   });
   return it("loads the protein target classification", function(done) {
     var class1, class2, classification;
