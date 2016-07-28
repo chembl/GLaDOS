@@ -4,7 +4,8 @@ var ApprovedDrugClinicalCandidateList;
 ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   model: ApprovedDrugClinicalCandidate,
   fetch2: function() {
-    var base_url2, drug_mechanisms, getDrugMechanisms;
+    var base_url2, collection, drug_mechanisms, getDrugMechanisms;
+    collection = this;
     drug_mechanisms = {};
     getDrugMechanisms = $.getJSON(this.url, function(data) {
       return drug_mechanisms = data.mechanisms;
@@ -35,7 +36,8 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
           drug_mechanisms[i].pref_name = mol.pref_name;
           i++;
         }
-        return console.log(drug_mechanisms);
+        collection.reset(drug_mechanisms);
+        return console.log(collection);
       });
       return getMoleculesInfo.fail(function() {
         return console.log('failed2');

@@ -4,6 +4,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   fetch2: ->
 
+    collection = @
     drug_mechanisms = {}
 
     # 1 first get list of drug mechanisms
@@ -37,7 +38,10 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
           i++
 
-        console.log(drug_mechanisms)
+        # here everything is ready
+        collection.reset(drug_mechanisms)
+        console.log(collection)
+
       )
 
       getMoleculesInfo.fail( ()->
