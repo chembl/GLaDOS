@@ -4,6 +4,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   fetch2: ->
 
+    console.log(@url)
     collection = @
     drug_mechanisms = {}
 
@@ -24,7 +25,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
       molecules_list = (dm.molecule_chembl_id for dm in drug_mechanisms).join(',')
       # order is very important to iterate in the same order as the first call
-      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id'
+      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000'
 
       getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, (data) ->
 
