@@ -7,12 +7,13 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   },
   render: function() {
     console.log('render!');
-    return this.fill_table_large();
+    this.fill_template('ADCCTable-large');
+    return this.fill_template('ADCCUL-small');
   },
-  fill_table_large: function() {
-    var adcc, new_row_cont, table, _i, _len, _ref, _results;
-    table = $(this.el).find('#ADCCTable-large');
-    console.log(table);
+  fill_template: function(div_id) {
+    var adcc, div, new_row_cont, template, _i, _len, _ref, _results;
+    div = $(this.el).find('#' + div_id);
+    template = $('#' + div.attr('data-hb-template'));
     console.log('models!');
     console.log(this.collection.models);
     _ref = this.collection.models;
@@ -20,13 +21,13 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       adcc = _ref[_i];
       console.log('adding row!');
-      new_row_cont = Handlebars.compile($('#Handlebars-Target-ADCCRow-large').html())({
+      new_row_cont = Handlebars.compile(template.html())({
         molecule_chembl_id: adcc.get('molecule_chembl_id'),
         pref_name: adcc.get('pref_name'),
         mechanism_of_action: adcc.get('mechanism_of_action'),
         max_phase: adcc.get('max_phase')
       });
-      _results.push(table.append($(new_row_cont)));
+      _results.push(div.append($(new_row_cont)));
     }
     return _results;
   }

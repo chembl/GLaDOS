@@ -9,12 +9,13 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
   render: ->
 
     console.log('render!')
-    @fill_table_large()
+    @fill_template('ADCCTable-large')
+    @fill_template('ADCCUL-small')
 
-  fill_table_large: ->
+  fill_template: (div_id) ->
 
-    table = $(@el).find('#ADCCTable-large')
-    console.log(table)
+    div = $(@el).find('#' + div_id)
+    template = $('#' + div.attr('data-hb-template'))
 
 
     console.log('models!')
@@ -23,11 +24,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     for adcc in @collection.models
 
       console.log('adding row!')
-      new_row_cont = Handlebars.compile( $('#Handlebars-Target-ADCCRow-large').html() )
+      new_row_cont = Handlebars.compile( template.html() )
         molecule_chembl_id: adcc.get('molecule_chembl_id')
         pref_name: adcc.get('pref_name')
         mechanism_of_action: adcc.get('mechanism_of_action')
         max_phase: adcc.get('max_phase')
 
-      table.append($(new_row_cont))
+      div.append($(new_row_cont))
 
