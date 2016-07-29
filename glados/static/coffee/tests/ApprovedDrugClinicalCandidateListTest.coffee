@@ -8,7 +8,7 @@ describe "Approved Drug and Clinical Candidate List", ->
 
     setTimeout ( ->
       done()
-    ), 1000
+    ), 2000
 
   it "loads the information correctly after the multiple calls", (done) ->
 

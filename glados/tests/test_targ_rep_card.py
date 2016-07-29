@@ -105,7 +105,7 @@ class TargetReportCardTest(ReportCardTester):
     self.assertEqual(components_section.value_of_css_property('display'), 'none')
 
   def test_target_report_card_scenario_4(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME * 2)
 
     # Protein target classification
     # This one has 60 target components (the highest number in the database), and it only has 2 classifications

@@ -7,7 +7,7 @@ describe("Approved Drug and Clinical Candidate List", function() {
     appDrugsClinCandsList.fetch2();
     return setTimeout((function() {
       return done();
-    }), 1000);
+    }), 2000);
   });
   return it("loads the information correctly after the multiple calls", function(done) {
     var i, model, model1, model2, model3, model4, models, _i;
