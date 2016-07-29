@@ -8,7 +8,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   render: ->
 
-    console.log('render!')
     @fill_template('ADCCTable-large')
     @fill_template('ADCCUL-small')
 
@@ -17,13 +16,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
 
-
-    console.log('models!')
-    console.log(@collection.models)
-
     for adcc in @collection.models
 
-      console.log('adding row!')
       new_row_cont = Handlebars.compile( template.html() )
         molecule_chembl_id: adcc.get('molecule_chembl_id')
         pref_name: adcc.get('pref_name')

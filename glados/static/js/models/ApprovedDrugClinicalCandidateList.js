@@ -36,8 +36,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
           drug_mechanisms[i].pref_name = mol.pref_name;
           i++;
         }
-        collection.reset(drug_mechanisms);
-        return console.log('reset!');
+        return collection.reset(drug_mechanisms);
       });
       return getMoleculesInfo.fail(function() {
         return console.log('failed2');

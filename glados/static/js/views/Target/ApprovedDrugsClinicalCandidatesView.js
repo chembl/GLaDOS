@@ -6,7 +6,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return this.collection.on('reset', this.render, this);
   },
   render: function() {
-    console.log('render!');
     this.fill_template('ADCCTable-large');
     return this.fill_template('ADCCUL-small');
   },
@@ -14,13 +13,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     var adcc, div, new_row_cont, template, _i, _len, _ref, _results;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
-    console.log('models!');
-    console.log(this.collection.models);
     _ref = this.collection.models;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       adcc = _ref[_i];
-      console.log('adding row!');
       new_row_cont = Handlebars.compile(template.html())({
         molecule_chembl_id: adcc.get('molecule_chembl_id'),
         pref_name: adcc.get('pref_name'),

@@ -40,7 +40,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
         # here everything is ready
         collection.reset(drug_mechanisms)
-        console.log('reset!')
 
       )
 
