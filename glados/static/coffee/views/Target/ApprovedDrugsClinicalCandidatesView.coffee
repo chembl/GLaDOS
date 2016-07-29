@@ -9,6 +9,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   render: ->
 
+    if @collection.size() == 0
+      $('#ApprovedDrugsAndClinicalCandidates').hide()
+      return
+
     @fill_template('ADCCTable-large')
     @fill_template('ADCCUL-small')
 

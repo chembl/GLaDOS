@@ -7,6 +7,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return this.resource_type = 'Target';
   },
   render: function() {
+    if (this.collection.size() === 0) {
+      $('#ApprovedDrugsAndClinicalCandidates').hide();
+      return;
+    }
     this.fill_template('ADCCTable-large');
     this.fill_template('ADCCUL-small');
     this.showVisibleContent();

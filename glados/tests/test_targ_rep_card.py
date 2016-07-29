@@ -53,6 +53,14 @@ class TargetReportCardTest(ReportCardTester):
     # Embed trigger
     self.assert_embed_trigger('TComponentsCard', 'target', 'components', 'CHEMBL223')
 
+    # --------------------------------------
+    # Approved Drugs and Clinical Candidates
+    # --------------------------------------
+
+    # for this one this section muse be hidden
+    adcc_div = self.browser.find_element_by_id('ApprovedDrugsAndClinicalCandidates')
+    self.assertFalse(adcc_div.is_displayed())
+
   def test_target_report_card_scenario_2(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2364672', self.SLEEP_TIME)
 
