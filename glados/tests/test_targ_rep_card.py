@@ -76,6 +76,24 @@ class TargetReportCardTest(ReportCardTester):
       accestion_td = row.find_element_by_class_name('Bck-Target-Component-Accession')
       self.assertEqual(accestion_td.text, accession)
 
+    # --------------------------------------
+    # Approved Drugs and Clinical Candidates
+    # --------------------------------------
+
+    adcc_table = self.browser.find_element_by_id('ADCCTable-large')
+    rows = adcc_table.find_elements(By.TAG_NAME, "tr")[1::]
+
+    texts_should_be = ['CHEMBL1617 RIFAXIMIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
+                       'CHEMBL1660 RIFAPENTINE Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
+                       'CHEMBL374478 RIFAMPICIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
+                       'CHEMBL444633 RIFABUTIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed']
+
+    for row, text in zip(rows, texts_should_be):
+       self.assertEqual(row.text, text)
+
+
+
+
   def test_target_report_card_scenario_3(self):
     self.getURL(self.HOST + '/target_report_card/CHEMBL2363053', self.SLEEP_TIME)
 
