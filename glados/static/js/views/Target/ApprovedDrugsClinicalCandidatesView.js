@@ -11,16 +11,18 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
       $('#ApprovedDrugsAndClinicalCandidates').hide();
       return;
     }
+    this.clearTable();
+    this.clearList();
     this.fill_template('ADCCTable-large');
     this.fill_template('ADCCUL-small');
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
-    var adcc, div, new_row_cont, template, _i, _len, _ref, _results;
-    div = $(this.el).find('#' + div_id);
-    template = $('#' + div.attr('data-hb-template'));
+  fill_template: function(elem_id) {
+    var adcc, elem, new_row_cont, template, _i, _len, _ref, _results;
+    elem = $(this.el).find('#' + elem_id);
+    template = $('#' + elem.attr('data-hb-template'));
     _ref = this.collection.models;
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -31,8 +33,14 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
         mechanism_of_action: adcc.get('mechanism_of_action'),
         max_phase: adcc.get('max_phase')
       });
-      _results.push(div.append($(new_row_cont)));
+      _results.push(elem.append($(new_row_cont)));
     }
     return _results;
+  },
+  clearTable: function() {
+    return $('#ADCCTable-large tr:gt(0)').remove();
+  },
+  clearList: function() {
+    return $('#ADCCUL-small').empty();
   }
 });

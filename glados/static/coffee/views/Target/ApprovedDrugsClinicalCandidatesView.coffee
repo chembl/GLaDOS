@@ -13,6 +13,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 
+    @clearTable()
+    @clearList()
+
     @fill_template('ADCCTable-large')
     @fill_template('ADCCUL-small')
 
@@ -20,10 +23,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
 
-  fill_template: (div_id) ->
 
-    div = $(@el).find('#' + div_id)
-    template = $('#' + div.attr('data-hb-template'))
+  fill_template: (elem_id) ->
+
+    elem = $(@el).find('#' + elem_id)
+    template = $('#' + elem.attr('data-hb-template'))
 
     for adcc in @collection.models
 
@@ -33,5 +37,16 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
         mechanism_of_action: adcc.get('mechanism_of_action')
         max_phase: adcc.get('max_phase')
 
-      div.append($(new_row_cont))
+      elem.append($(new_row_cont))
+
+  clearTable: ->
+
+    $('#ADCCTable-large tr:gt(0)').remove()
+
+  clearList: ->
+
+    $('#ADCCUL-small').empty()
+
+
+
 
