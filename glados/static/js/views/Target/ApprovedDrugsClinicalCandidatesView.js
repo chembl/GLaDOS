@@ -3,11 +3,13 @@ var ApprovedDrugsClinicalCandidatesView;
 
 ApprovedDrugsClinicalCandidatesView = CardView.extend({
   initialize: function() {
-    return this.collection.on('reset', this.render, this);
+    this.collection.on('reset', this.render, this);
+    return this.resource_type = 'Target';
   },
   render: function() {
     this.fill_template('ADCCTable-large');
-    return this.fill_template('ADCCUL-small');
+    this.fill_template('ADCCUL-small');
+    return this.showVisibleContent();
   },
   fill_template: function(div_id) {
     var adcc, div, new_row_cont, template, _i, _len, _ref, _results;

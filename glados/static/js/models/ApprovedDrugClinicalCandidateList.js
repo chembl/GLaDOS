@@ -11,7 +11,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
       return drug_mechanisms = data.mechanisms;
     });
     getDrugMechanisms.fail(function() {
-      return console.log('failed!');
+      return this.trigger('error');
     });
     base_url2 = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_chembl_id__in=';
     return getDrugMechanisms.done(function() {

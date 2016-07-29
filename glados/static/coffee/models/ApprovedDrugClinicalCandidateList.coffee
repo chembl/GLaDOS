@@ -14,7 +14,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
     getDrugMechanisms.fail( ()->
 
-      console.log('failed!')
+      @trigger('error')
 
     )
 

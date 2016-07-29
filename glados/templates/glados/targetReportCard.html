@@ -73,7 +73,9 @@
          <div class="row">
 
         {% block adcc %}
-          {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
+           {% with is_dynamic=True  %}
+            {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
+           {% endwith %}
         {% endblock %}
 
         </div>

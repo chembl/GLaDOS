@@ -25,7 +25,8 @@ CardView = Backbone.View.extend
 
     $(@el).children('.card-load-error').show()
 
-    $(@el).find('#Bck-CHEMBL_ID')
+    console.log('show error!!')
+
 
   initEmbedModal: (section_name) ->
 

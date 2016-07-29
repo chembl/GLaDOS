@@ -5,11 +5,14 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   initialize: ->
     @collection.on 'reset', @.render, @
+    @resource_type = 'Target'
 
   render: ->
 
     @fill_template('ADCCTable-large')
     @fill_template('ADCCUL-small')
+
+    @showVisibleContent()
 
   fill_template: (div_id) ->
 
