@@ -56,16 +56,16 @@ TargetReportCardApp = (function() {
 
   /* *
     * Initializes the ADCC View (Approved Drugs Clinical Candidates View)
-    * @param {Compound} model, base model for the view
+    * @param {Collection} adccList, the collection of approved drugs and clinical candidates
     * @param {JQuery} top_level_elem element that renders the model.
     * @return {TargetComponentsView} the view that has been created
   */
 
 
-  TargetReportCardApp.initADCC = function(model, top_level_elem) {
+  TargetReportCardApp.initADCC = function(adccList, top_level_elem) {
     var adccView;
     adccView = new ApprovedDrugsClinicalCandidatesView({
-      model: model,
+      collection: adccList,
       el: top_level_elem
     });
     return adccView;

@@ -51,14 +51,14 @@ class TargetReportCardApp
 
   ### *
     * Initializes the ADCC View (Approved Drugs Clinical Candidates View)
-    * @param {Compound} model, base model for the view
+    * @param {Collection} adccList, the collection of approved drugs and clinical candidates
     * @param {JQuery} top_level_elem element that renders the model.
     * @return {TargetComponentsView} the view that has been created
   ###
-  @initADCC = (model, top_level_elem) ->
+  @initADCC = (adccList, top_level_elem) ->
 
     adccView = new ApprovedDrugsClinicalCandidatesView
-      model: model
+      collection: adccList
       el: top_level_elem
 
     return adccView

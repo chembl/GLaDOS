@@ -20,7 +20,23 @@
 
 {% block table %}
 
-<table class="compact-table striped hide-on-small-only ebi-links">
+{% verbatim %}
+<script id="Handlebars-Target-ADCCRow-large" type="text/x-handlebars-template">
+
+  <tr>
+
+      <td><a href="/compound_report_card/{{molecule_chembl_id}}">{{molecule_chembl_id}}</a></td>
+      <td>{{pref_name}}</td>
+      <td>{{mechanism_of_action}}</td>
+      <td>{{max_phase}}</td>
+      <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
+
+  </tr>
+
+</script>
+{% endverbatim %}
+
+<table id='ADCCTable-large' class="compact-table striped hide-on-small-only ebi-links">
 
     <tr>
 
@@ -29,43 +45,6 @@
       <th>Mechanism of Action</th>
       <th>Max Phase</th>
       <th>References</th>
-
-    </tr>
-
-    <tr>
-
-      <td><a href="/chembl/compound/inspect/CHEMBL112">CHEMBL112</a></td>
-      <td>ACETAMINOPHEN</td>
-      <td>Anandamide amidohydrolase inhibitor</td>
-      <td>4</td>
-      <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
-
-    </tr>
-   <tr>
-
-      <td><a href="/chembl/compound/inspect/CHEMBL112">CHEMBL112</a></td>
-      <td>ACETAMINOPHEN</td>
-      <td>Anandamide amidohydrolase inhibitor</td>
-     <td>4</td>
-      <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
-
-    </tr>
-    <tr>
-
-      <td><a href="/chembl/compound/inspect/CHEMBL112">CHEMBL112</a></td>
-      <td>ACETAMINOPHEN</td>
-      <td>Anandamide amidohydrolase inhibitor</td>
-      <td>4</td>
-      <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
-
-    </tr>
-    <tr>
-
-      <td><a href="/chembl/compound/inspect/CHEMBL112">CHEMBL112</a></td>
-      <td>ACETAMINOPHEN</td>
-      <td>Anandamide amidohydrolase inhibitor</td>
-      <td>4</td>
-      <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
 
     </tr>
 

@@ -3,9 +3,31 @@ var ApprovedDrugsClinicalCandidatesView;
 
 ApprovedDrugsClinicalCandidatesView = CardView.extend({
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    return this.collection.on('reset', this.render, this);
   },
   render: function() {
-    return console.log('render');
+    console.log('render!');
+    return this.fill_table_large();
+  },
+  fill_table_large: function() {
+    var adcc, new_row_cont, table, _i, _len, _ref, _results;
+    table = $(this.el).find('#ADCCTable-large');
+    console.log(table);
+    console.log('models!');
+    console.log(this.collection.models);
+    _ref = this.collection.models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      adcc = _ref[_i];
+      console.log('adding row!');
+      new_row_cont = Handlebars.compile($('#Handlebars-Target-ADCCRow-large').html())({
+        molecule_chembl_id: adcc.get('molecule_chembl_id'),
+        pref_name: adcc.get('pref_name'),
+        mechanism_of_action: adcc.get('mechanism_of_action'),
+        max_phase: adcc.get('max_phase')
+      });
+      _results.push(table.append($(new_row_cont)));
+    }
+    return _results;
   }
 });

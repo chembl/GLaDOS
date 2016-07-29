@@ -248,7 +248,7 @@ var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands(CHEMBL_ID);
 
 var tNCView = TargetReportCardApp.initTNCView(target, $('#TNameClassificationCard'));
 var tComponentsView = TargetReportCardApp.initTComponentsView(target, $('#TComponentsCard'));
-var adccView = TargetReportCardApp.initADCC(target, '#TNameClassificationCard');
+var adccView = TargetReportCardApp.initADCC(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
 
 target.fetch();
 appDrugsClinCandsList.fetch2();
