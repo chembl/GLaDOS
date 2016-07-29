@@ -13,6 +13,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     @fill_template('ADCCUL-small')
 
     @showVisibleContent()
+    @initEmbedModal('approved_drugs_clinical_candidates')
+    @activateModals()
 
   fill_template: (div_id) ->
 

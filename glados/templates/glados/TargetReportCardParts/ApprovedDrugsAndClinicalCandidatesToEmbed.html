@@ -1,0 +1,22 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Approved Drugs And Clinical Candidates{% endblock %}
+
+{% block content %}
+
+   <div id="AppDrgusClinCands" style="margin-top: 25px;">
+     {% with is_dynamic=True  %}
+       {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
+     {% endwith %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands(CHEMBL_ID);
+var adccView = TargetReportCardApp.initADCC(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
+appDrugsClinCandsList.fetch2();
+
+{% endblock %}

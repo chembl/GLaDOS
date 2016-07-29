@@ -9,7 +9,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   render: function() {
     this.fill_template('ADCCTable-large');
     this.fill_template('ADCCUL-small');
-    return this.showVisibleContent();
+    this.showVisibleContent();
+    this.initEmbedModal('approved_drugs_clinical_candidates');
+    return this.activateModals();
   },
   fill_template: function(div_id) {
     var adcc, div, new_row_cont, template, _i, _len, _ref, _results;
