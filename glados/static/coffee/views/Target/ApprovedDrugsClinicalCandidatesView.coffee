@@ -21,6 +21,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     @fill_template('ADCCTable-large')
     @fill_template('ADCCUL-small')
+    @fillPaginator()
 
     @showVisibleContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
@@ -42,6 +43,17 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
       elem.append($(new_row_cont))
 
+  fillPaginator: ->
+
+    elem = $(@el).find('#ADCCUL-paginator')
+    template = $('#' + elem.attr('data-hb-template'))
+    console.log(@collection.getMeta('total_records'))
+
+    elem.html Handlebars.compile(template.html())
+      total_records: @collection.getMeta('total_records')
+
+    @activateCurrentPageButton()
+
   clearTable: ->
 
     $('#ADCCTable-large tr:gt(0)').remove()
@@ -50,23 +62,39 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     $('#ADCCUL-small').empty()
 
-  getPage: (event)->
+  getPage: (event) ->
 
     clicked = $(event.currentTarget)
-    page_num = clicked.attr('data-page')
-
+    requested_page_num = clicked.attr('data-page')
     current_page = @collection.getMeta('current_page')
 
+    console.log('current_page')
+    console.log(current_page)
     # Don't bother if the user requested the same page as the current one
-    if current_page == page_num
+    if current_page == requested_page_num
       return
 
-    current_page
-    $(@el).find('.page-selector').removeClass('active')
-    clicked.addClass('active')
+    if requested_page_num == "previous"
+      requested_page_num = current_page - 1
+    else if requested_page_num == "next"
+      requested_page_num = current_page + 1
 
-    @collection.fetchPage(page_num)
+    console.log('going to fetch')
+    console.log(requested_page_num)
+    @collection.fetchPage(requested_page_num)
     @showPreloader()
+
+  enableDisableNextLastButtons: ->
+
+  activateCurrentPageButton: ->
+
+    current_page = @collection.getMeta('current_page')
+    $(@el).find('.page-selector').removeClass('active')
+    $(@el).find("[data-page=" + current_page + "]").addClass('active')
+
+
+
+
     
 
 

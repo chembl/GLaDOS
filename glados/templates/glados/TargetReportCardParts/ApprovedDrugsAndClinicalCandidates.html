@@ -83,20 +83,33 @@
 
    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-
 </ul>
 
 {% endblock %}
 
 {% block pagination %}
-    <ul class="pagination">
-      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-      <li class="waves-effect page-selector active" data-page='1' ><a href="#!">1</a></li>
-      <li class="waves-effect page-selector" data-page='2' ><a href="#!">2</a></li>
-      <li class="waves-effect page-selector" data-page='3' ><a href="#!">3</a></li>
-      <li class="waves-effect page-selector" data-page='4' ><a href="#!">4</a></li>
-      <li class="waves-effect page-selector" data-page='5' ><a href="#!">5</a></li>
-      <li class="waves-effect "><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-      <li class="waves-effect">100 Records Found</li>
-    </ul>
+
+{% verbatim %}
+<script id="Handlebars-Target-ADCCPaginator" type="text/x-handlebars-template">
+
+  <ul class="pagination">
+    <li class="page-selector" data-page='previous'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    <li class="waves-effect page-selector active" data-page='1' ><a href="#!">1</a></li>
+    <li class="waves-effect page-selector" data-page='2' ><a href="#!">2</a></li>
+    <li class="waves-effect page-selector" data-page='3' ><a href="#!">3</a></li>
+    <li class="waves-effect page-selector" data-page='4' ><a href="#!">4</a></li>
+    <li class="waves-effect page-selector" data-page='5' ><a href="#!">5</a></li>
+    <li class="waves-effect page-selector" data-page='next' ><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    <li class="waves-effect">{{total_records}} Records Found</li>
+  </ul>
+
+</script>
+{% endverbatim %}
+
+<div id='ADCCUL-paginator' data-hb-template="Handlebars-Target-ADCCPaginator">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
 {% endblock %}

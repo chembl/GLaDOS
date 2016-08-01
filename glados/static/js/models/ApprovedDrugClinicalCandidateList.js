@@ -11,7 +11,8 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     this_collection = this;
     drug_mechanisms = {};
     getDrugMechanisms = $.getJSON(pag_url, function(data) {
-      return drug_mechanisms = data.mechanisms;
+      drug_mechanisms = data.mechanisms;
+      return this_collection.setMeta('total_records', data.page_meta.total_count);
     });
     getDrugMechanisms.fail(function() {
       console.log('error');

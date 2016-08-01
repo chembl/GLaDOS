@@ -18,6 +18,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     this.clearList();
     this.fill_template('ADCCTable-large');
     this.fill_template('ADCCUL-small');
+    this.fillPaginator();
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     return this.activateModals();
@@ -40,6 +41,16 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     }
     return _results;
   },
+  fillPaginator: function() {
+    var elem, template;
+    elem = $(this.el).find('#ADCCUL-paginator');
+    template = $('#' + elem.attr('data-hb-template'));
+    console.log(this.collection.getMeta('total_records'));
+    elem.html(Handlebars.compile(template.html())({
+      total_records: this.collection.getMeta('total_records')
+    }));
+    return this.activateCurrentPageButton();
+  },
   clearTable: function() {
     return $('#ADCCTable-large tr:gt(0)').remove();
   },
@@ -47,18 +58,30 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return $('#ADCCUL-small').empty();
   },
   getPage: function(event) {
-    var clicked, current_page, page_num;
+    var clicked, current_page, requested_page_num;
     clicked = $(event.currentTarget);
-    page_num = clicked.attr('data-page');
+    requested_page_num = clicked.attr('data-page');
     current_page = this.collection.getMeta('current_page');
-    if (current_page === page_num) {
+    console.log('current_page');
+    console.log(current_page);
+    if (current_page === requested_page_num) {
       return;
     }
-    current_page;
-
-    $(this.el).find('.page-selector').removeClass('active');
-    clicked.addClass('active');
-    this.collection.fetchPage(page_num);
+    if (requested_page_num === "previous") {
+      requested_page_num = current_page - 1;
+    } else if (requested_page_num === "next") {
+      requested_page_num = current_page + 1;
+    }
+    console.log('going to fetch');
+    console.log(requested_page_num);
+    this.collection.fetchPage(requested_page_num);
     return this.showPreloader();
+  },
+  enableDisableNextLastButtons: function() {},
+  activateCurrentPageButton: function() {
+    var current_page;
+    current_page = this.collection.getMeta('current_page');
+    $(this.el).find('.page-selector').removeClass('active');
+    return $(this.el).find("[data-page=" + current_page + "]").addClass('active');
   }
 });

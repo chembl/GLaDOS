@@ -13,6 +13,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     # 1 first get list of drug mechanisms
     getDrugMechanisms = $.getJSON(pag_url, (data) ->
       drug_mechanisms = data.mechanisms
+      this_collection.setMeta('total_records', data.page_meta.total_count)
     )
 
     getDrugMechanisms.fail( ()->
