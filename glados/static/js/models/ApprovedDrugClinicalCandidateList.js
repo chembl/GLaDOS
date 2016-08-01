@@ -43,8 +43,5 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
         return console.log('failed2');
       });
     });
-  },
-  initialise: function() {
-    return this.set('page_size', 20);
   }
 });

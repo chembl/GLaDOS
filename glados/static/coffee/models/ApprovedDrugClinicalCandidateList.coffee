@@ -53,9 +53,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
     )
 
-  initialise: ->
-    @set('page_size', 20)
-
 
 
 
