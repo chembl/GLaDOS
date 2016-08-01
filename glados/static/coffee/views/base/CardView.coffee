@@ -89,6 +89,11 @@ CardView = Backbone.View.extend
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
 
+  showPreloader: ->
+    $(@el).children('.card-preolader-to-hide').show()
+    $(@el).children(':not(.card-preolader-to-hide)').hide()
+
+
 
 
 

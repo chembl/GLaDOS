@@ -7,6 +7,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     @collection.on 'reset', @.render, @
     @resource_type = 'Target'
 
+  events:
+    'click .page-selector': 'getPage'
+
   render: ->
 
     if @collection.size() == 0
@@ -47,6 +50,24 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     $('#ADCCUL-small').empty()
 
+  getPage: (event)->
+
+    clicked = $(event.currentTarget)
+    page_num = clicked.attr('data-page')
+
+    current_page = @collection.getMeta('current_page')
+
+    # Don't bother if the user requested the same page as the current one
+    if current_page == page_num
+      return
+
+    current_page
+    $(@el).find('.page-selector').removeClass('active')
+    clicked.addClass('active')
+
+    @collection.fetchPage(page_num)
+    @showPreloader()
+    
 
 
 

@@ -6,6 +6,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     this.collection.on('reset', this.render, this);
     return this.resource_type = 'Target';
   },
+  events: {
+    'click .page-selector': 'getPage'
+  },
   render: function() {
     if (this.collection.size() === 0) {
       $('#ApprovedDrugsAndClinicalCandidates').hide();
@@ -42,5 +45,20 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   },
   clearList: function() {
     return $('#ADCCUL-small').empty();
+  },
+  getPage: function(event) {
+    var clicked, current_page, page_num;
+    clicked = $(event.currentTarget);
+    page_num = clicked.attr('data-page');
+    current_page = this.collection.getMeta('current_page');
+    if (current_page === page_num) {
+      return;
+    }
+    current_page;
+
+    $(this.el).find('.page-selector').removeClass('active');
+    clicked.addClass('active');
+    this.collection.fetchPage(page_num);
+    return this.showPreloader();
   }
 });

@@ -69,7 +69,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     page_str = 'offset=' + (current_page - 1) * page_size;
     return url + '&' + limit_str + '&' + page_str;
   },
-  fetchPage: function(page_num) {
+  fetchPage: function(page_num, force) {
     this.setMeta('current_page', page_num);
     return this.fetch();
   }

@@ -80,5 +80,9 @@ CardView = Backbone.View.extend({
   showVisibleContent: function() {
     $(this.el).children('.card-preolader-to-hide').hide();
     return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+  },
+  showPreloader: function() {
+    $(this.el).children('.card-preolader-to-hide').show();
+    return $(this.el).children(':not(.card-preolader-to-hide)').hide();
   }
 });

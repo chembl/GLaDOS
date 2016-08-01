@@ -81,7 +81,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     return url + '&' + limit_str + '&' + page_str
 
 
-  fetchPage: (page_num) ->
+  fetchPage: (page_num, force) ->
 
     @setMeta('current_page', page_num)
     @fetch()
