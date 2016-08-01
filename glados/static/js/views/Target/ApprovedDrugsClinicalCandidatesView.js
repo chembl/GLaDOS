@@ -7,7 +7,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return this.resource_type = 'Target';
   },
   events: {
-    'click .page-selector': 'getPage'
+    'click .page-selector': 'getPage',
+    'change .change-page-size': 'changePageSize'
   },
   render: function() {
     if (this.collection.size() === 0) {
@@ -21,7 +22,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     this.fillPaginator();
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
-    return this.activateModals();
+    this.activateModals();
+    return $('select').material_select();
   },
   fill_template: function(elem_id) {
     var adcc, elem, new_row_cont, template, _i, _len, _ref, _results;
@@ -66,6 +68,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
       records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records')
     }));
+    console.log('checkin buttons!');
+    console.log(current_page);
     this.activateCurrentPageButton();
     return this.enableDisableNextLastButtons();
   },
@@ -102,7 +106,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     var current_page, total_pages;
     current_page = this.collection.getMeta('current_page');
     total_pages = this.collection.getMeta('total_pages');
-    if (current_page === 1) {
+    if (current_page === 1 || current_page === '1') {
       $(this.el).find("[data-page='previous']").addClass('disabled');
     } else {
       $(this.el).find("[data-page='previous']").removeClass('disabled');
@@ -118,5 +122,13 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     current_page = this.collection.getMeta('current_page');
     $(this.el).find('.page-selector').removeClass('active');
     return $(this.el).find("[data-page=" + current_page + "]").addClass('active');
+  },
+  changePageSize: function(event) {
+    var new_page_size, selector;
+    selector = $(event.currentTarget);
+    console.log('change page size');
+    new_page_size = selector.val();
+    console.log(new_page_size);
+    return console.log(new_page_size === 25);
   }
 });

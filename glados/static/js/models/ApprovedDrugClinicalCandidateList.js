@@ -75,5 +75,8 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   fetchPage: function(page_num, force) {
     this.setMeta('current_page', page_num);
     return this.fetch();
+  },
+  resetPageSize: function(new_page_size) {
+    return this.setMeta('page_size', setMeta);
   }
 });

@@ -9,6 +9,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   events:
     'click .page-selector': 'getPage'
+    'change .change-page-size': 'changePageSize'
 
   render: ->
 
@@ -26,6 +27,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     @showVisibleContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
+
+    $('select').material_select();
 
 
   fill_template: (elem_id) ->
@@ -65,6 +68,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
       records_showing: first_record + '-' + last_page
       total_records: @collection.getMeta('total_records')
 
+    console.log('checkin buttons!')
+    console.log(current_page)
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
@@ -108,7 +113,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     current_page = @collection.getMeta('current_page')
     total_pages = @collection.getMeta('total_pages')
 
-    if current_page == 1
+    if current_page == 1 or current_page == '1'
       $(@el).find("[data-page='previous']").addClass('disabled')
     else
       $(@el).find("[data-page='previous']").removeClass('disabled')
@@ -124,6 +129,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     $(@el).find('.page-selector').removeClass('active')
     $(@el).find("[data-page=" + current_page + "]").addClass('active')
 
+  changePageSize: (event) ->
+
+    selector = $(event.currentTarget)
+    new_page_size = selector.val()
+    @collection.resetPageSize(new_page_size)
 
 
 

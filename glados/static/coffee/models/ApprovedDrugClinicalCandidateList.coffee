@@ -89,5 +89,9 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     @setMeta('current_page', page_num)
     @fetch()
 
+  resetPageSize: (new_page_size) ->
+    console.log('new page size')
+    console.log(new_page_size)
+    @setMeta('page_size', setMeta)
 
 

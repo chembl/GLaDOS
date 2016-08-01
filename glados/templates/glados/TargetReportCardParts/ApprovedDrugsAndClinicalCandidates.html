@@ -18,6 +18,19 @@
 
 {% endblock %}
 
+{% block menu %}
+
+<div >
+  <select class="change-page-size">
+    <option value="10" selected>10</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+  <label>Records per page:</label>
+</div>
+{% endblock %}
+
 {% block table %}
 
 {% verbatim %}
