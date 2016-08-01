@@ -2,20 +2,23 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   model: ApprovedDrugClinicalCandidate
 
-  fetch2: ->
+  fetch: ->
 
-    console.log(@url)
-    collection = @
+    pag_url = @getPaginatedURL(@url)
+    console.log('fetching:')
+    console.log(pag_url)
+    this_collection = @
     drug_mechanisms = {}
 
     # 1 first get list of drug mechanisms
-    getDrugMechanisms = $.getJSON(@url, (data) ->
+    getDrugMechanisms = $.getJSON(pag_url, (data) ->
       drug_mechanisms = data.mechanisms
     )
 
     getDrugMechanisms.fail( ()->
 
-      @trigger('error')
+      console.log('error')
+      this_collection.trigger('error')
 
     )
 
@@ -25,9 +28,11 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
       molecules_list = (dm.molecule_chembl_id for dm in drug_mechanisms).join(',')
       # order is very important to iterate in the same order as the first call
-      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000'
+      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id'
 
-      getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, (data) ->
+      getMoleculesInfoUrlPag = this_collection.getPaginatedURL(getMoleculesInfoUrl)
+
+      getMoleculesInfo = $.getJSON(getMoleculesInfoUrlPag, (data) ->
 
         molecules = data.molecules
         # Now I fill the missing information, both arrays are ordered by molecule_chembl_id
@@ -40,7 +45,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
           i++
 
         # here everything is ready
-        collection.reset(drug_mechanisms)
+        this_collection.reset(drug_mechanisms)
 
       )
 
@@ -52,6 +57,27 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
 
     )
+
+
+  initialize: ->
+    @meta =
+      page_size: 10
+
+  setMeta: (attr, value) ->
+    @meta[attr] = value
+    @trigger('meta-changed')
+
+  getMeta: (attr) ->
+    return @meta[attr]
+
+  getPaginatedURL: (url) ->
+
+    limit_str = 'limit=' + @getMeta('page_size')
+
+    return url + '&' + limit_str
+
+
+
 
 
 

@@ -3,20 +3,23 @@ var ApprovedDrugClinicalCandidateList;
 
 ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   model: ApprovedDrugClinicalCandidate,
-  fetch2: function() {
-    var base_url2, collection, drug_mechanisms, getDrugMechanisms;
-    console.log(this.url);
-    collection = this;
+  fetch: function() {
+    var base_url2, drug_mechanisms, getDrugMechanisms, pag_url, this_collection;
+    pag_url = this.getPaginatedURL(this.url);
+    console.log('fetching:');
+    console.log(pag_url);
+    this_collection = this;
     drug_mechanisms = {};
-    getDrugMechanisms = $.getJSON(this.url, function(data) {
+    getDrugMechanisms = $.getJSON(pag_url, function(data) {
       return drug_mechanisms = data.mechanisms;
     });
     getDrugMechanisms.fail(function() {
-      return this.trigger('error');
+      console.log('error');
+      return this_collection.trigger('error');
     });
     base_url2 = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_chembl_id__in=';
     return getDrugMechanisms.done(function() {
-      var dm, getMoleculesInfo, getMoleculesInfoUrl, molecules_list;
+      var dm, getMoleculesInfo, getMoleculesInfoUrl, getMoleculesInfoUrlPag, molecules_list;
       molecules_list = ((function() {
         var _i, _len, _results;
         _results = [];
@@ -26,8 +29,9 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
         }
         return _results;
       })()).join(',');
-      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000';
-      getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, function(data) {
+      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id';
+      getMoleculesInfoUrlPag = this_collection.getPaginatedURL(getMoleculesInfoUrl);
+      getMoleculesInfo = $.getJSON(getMoleculesInfoUrlPag, function(data) {
         var i, mol, molecules, _i, _len;
         molecules = data.molecules;
         i = 0;
@@ -37,11 +41,28 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
           drug_mechanisms[i].pref_name = mol.pref_name;
           i++;
         }
-        return collection.reset(drug_mechanisms);
+        return this_collection.reset(drug_mechanisms);
       });
       return getMoleculesInfo.fail(function() {
         return console.log('failed2');
       });
     });
+  },
+  initialize: function() {
+    return this.meta = {
+      page_size: 10
+    };
+  },
+  setMeta: function(attr, value) {
+    this.meta[attr] = value;
+    return this.trigger('meta-changed');
+  },
+  getMeta: function(attr) {
+    return this.meta[attr];
+  },
+  getPaginatedURL: function(url) {
+    var limit_str;
+    limit_str = 'limit=' + this.getMeta('page_size');
+    return url + '&' + limit_str;
   }
 });
