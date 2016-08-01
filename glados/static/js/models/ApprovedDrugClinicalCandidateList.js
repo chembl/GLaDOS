@@ -19,7 +19,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     });
     base_url2 = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_chembl_id__in=';
     return getDrugMechanisms.done(function() {
-      var dm, getMoleculesInfo, getMoleculesInfoUrl, getMoleculesInfoUrlPag, molecules_list;
+      var dm, getMoleculesInfo, getMoleculesInfoUrl, molecules_list;
       molecules_list = ((function() {
         var _i, _len, _results;
         _results = [];
@@ -29,9 +29,9 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
         }
         return _results;
       })()).join(',');
-      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id';
-      getMoleculesInfoUrlPag = this_collection.getPaginatedURL(getMoleculesInfoUrl);
-      getMoleculesInfo = $.getJSON(getMoleculesInfoUrlPag, function(data) {
+      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000';
+      console.log(getMoleculesInfoUrl);
+      getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, function(data) {
         var i, mol, molecules, _i, _len;
         molecules = data.molecules;
         i = 0;
@@ -50,7 +50,8 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   },
   initialize: function() {
     return this.meta = {
-      page_size: 10
+      page_size: 10,
+      current_page: 1
     };
   },
   setMeta: function(attr, value) {
@@ -61,8 +62,15 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     return this.meta[attr];
   },
   getPaginatedURL: function(url) {
-    var limit_str;
-    limit_str = 'limit=' + this.getMeta('page_size');
-    return url + '&' + limit_str;
+    var current_page, limit_str, page_size, page_str;
+    page_size = this.getMeta('page_size');
+    current_page = this.getMeta('current_page');
+    limit_str = 'limit=' + page_size;
+    page_str = 'offset=' + (current_page - 1) * page_size;
+    return url + '&' + limit_str + '&' + page_str;
+  },
+  fetchPage: function(page_num) {
+    this.setMeta('current_page', page_num);
+    return this.fetch();
   }
 });

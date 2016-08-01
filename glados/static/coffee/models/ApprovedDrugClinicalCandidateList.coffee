@@ -28,11 +28,10 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
       molecules_list = (dm.molecule_chembl_id for dm in drug_mechanisms).join(',')
       # order is very important to iterate in the same order as the first call
-      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id'
+      getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000'
+      console.log(getMoleculesInfoUrl)
 
-      getMoleculesInfoUrlPag = this_collection.getPaginatedURL(getMoleculesInfoUrl)
-
-      getMoleculesInfo = $.getJSON(getMoleculesInfoUrlPag, (data) ->
+      getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, (data) ->
 
         molecules = data.molecules
         # Now I fill the missing information, both arrays are ordered by molecule_chembl_id
@@ -62,6 +61,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
   initialize: ->
     @meta =
       page_size: 10
+      current_page: 1
 
   setMeta: (attr, value) ->
     @meta[attr] = value
@@ -72,18 +72,19 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   getPaginatedURL: (url) ->
 
-    limit_str = 'limit=' + @getMeta('page_size')
+    page_size = @getMeta('page_size')
+    current_page = @getMeta('current_page')
 
-    return url + '&' + limit_str
+    limit_str = 'limit=' + page_size
+    page_str = 'offset=' + (current_page - 1) * page_size
 
-
-
-
-
-
+    return url + '&' + limit_str + '&' + page_str
 
 
+  fetchPage: (page_num) ->
 
+    @setMeta('current_page', page_num)
+    @fetch()
 
 
 

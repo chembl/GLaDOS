@@ -253,7 +253,7 @@ var tComponentsView = TargetReportCardApp.initTComponentsView(target, $('#TCompo
 var adccView = TargetReportCardApp.initADCC(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
 
 target.fetch();
-appDrugsClinCandsList.fetch();
+appDrugsClinCandsList.fetchPage(2);
 
 {% endblock %}
 
