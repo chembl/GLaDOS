@@ -42,11 +42,19 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return _results;
   },
   fillPaginator: function() {
-    var elem, template;
+    var current_page, elem, first_record, last_page, page_size, records_in_page, template;
     elem = $(this.el).find('#ADCCUL-paginator');
     template = $('#' + elem.attr('data-hb-template'));
     console.log(this.collection.getMeta('total_records'));
+    current_page = this.collection.getMeta('current_page');
+    records_in_page = this.collection.getMeta('records_in_page');
+    console.log('records in page');
+    console.log(records_in_page);
+    page_size = this.collection.getMeta('page_size');
+    first_record = (current_page - 1) * page_size;
+    last_page = first_record + records_in_page;
     elem.html(Handlebars.compile(template.html())({
+      records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records')
     }));
     return this.activateCurrentPageButton();

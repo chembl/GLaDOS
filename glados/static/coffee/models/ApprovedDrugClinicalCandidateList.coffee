@@ -14,6 +14,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     getDrugMechanisms = $.getJSON(pag_url, (data) ->
       drug_mechanisms = data.mechanisms
       this_collection.setMeta('total_records', data.page_meta.total_count)
+      this_collection.setMeta('records_in_page', data.mechanisms.length)
     )
 
     getDrugMechanisms.fail( ()->
