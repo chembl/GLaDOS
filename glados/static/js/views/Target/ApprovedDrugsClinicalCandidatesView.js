@@ -42,7 +42,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return _results;
   },
   fillPaginator: function() {
-    var current_page, elem, first_record, last_page, page_size, records_in_page, template;
+    var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
     elem = $(this.el).find('#ADCCUL-paginator');
     template = $('#' + elem.attr('data-hb-template'));
     console.log(this.collection.getMeta('total_records'));
@@ -53,8 +53,16 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     page_size = this.collection.getMeta('page_size');
     first_record = (current_page - 1) * page_size;
     last_page = first_record + records_in_page;
+    pages = (function() {
+      var _i, _ref, _results;
+      _results = [];
+      for (num = _i = 1, _ref = this.collection.getMeta('total_pages'); 1 <= _ref ? _i <= _ref : _i >= _ref; num = 1 <= _ref ? ++_i : --_i) {
+        _results.push(num);
+      }
+      return _results;
+    }).call(this);
     elem.html(Handlebars.compile(template.html())({
-      total_pages: this.collection.getMeta('total_pages'),
+      pages: pages,
       records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records')
     }));

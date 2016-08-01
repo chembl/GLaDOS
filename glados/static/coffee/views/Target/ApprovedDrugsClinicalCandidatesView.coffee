@@ -58,8 +58,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     first_record = (current_page - 1) * page_size
     last_page = first_record + records_in_page
 
+    pages = (num for num in [1..@collection.getMeta('total_pages')])
+
     elem.html Handlebars.compile(template.html())
-      total_pages: @collection.getMeta('total_pages')
+      pages: pages
       records_showing: first_record + '-' + last_page
       total_records: @collection.getMeta('total_records')
 
@@ -78,7 +80,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     clicked = $(event.currentTarget)
 
-    # Don't bother if the link was disabled. 
+    # Don't bother if the link was disabled.
     if clicked.hasClass('disabled')
       return
 
