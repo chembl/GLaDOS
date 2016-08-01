@@ -59,10 +59,12 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     last_page = first_record + records_in_page
 
     elem.html Handlebars.compile(template.html())
+      total_pages: @collection.getMeta('total_pages')
       records_showing: first_record + '-' + last_page
       total_records: @collection.getMeta('total_records')
 
     @activateCurrentPageButton()
+    @enableDisableNextLastButtons()
 
   clearTable: ->
 
@@ -75,6 +77,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
   getPage: (event) ->
 
     clicked = $(event.currentTarget)
+
+    # Don't bother if the link was disabled. 
+    if clicked.hasClass('disabled')
+      return
+
     requested_page_num = clicked.attr('data-page')
     current_page = @collection.getMeta('current_page')
 
@@ -95,6 +102,19 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     @showPreloader()
 
   enableDisableNextLastButtons: ->
+
+    current_page = @collection.getMeta('current_page')
+    total_pages = @collection.getMeta('total_pages')
+
+    if current_page == 1
+      $(@el).find("[data-page='previous']").addClass('disabled')
+    else
+      $(@el).find("[data-page='previous']").removeClass('disabled')
+
+    if current_page == total_pages
+      $(@el).find("[data-page='next']").addClass('disabled')
+    else
+      $(@el).find("[data-page='next']").removeClass('disabled')
 
   activateCurrentPageButton: ->
 

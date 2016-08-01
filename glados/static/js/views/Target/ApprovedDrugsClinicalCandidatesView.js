@@ -54,10 +54,12 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     first_record = (current_page - 1) * page_size;
     last_page = first_record + records_in_page;
     elem.html(Handlebars.compile(template.html())({
+      total_pages: this.collection.getMeta('total_pages'),
       records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records')
     }));
-    return this.activateCurrentPageButton();
+    this.activateCurrentPageButton();
+    return this.enableDisableNextLastButtons();
   },
   clearTable: function() {
     return $('#ADCCTable-large tr:gt(0)').remove();
@@ -68,6 +70,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   getPage: function(event) {
     var clicked, current_page, requested_page_num;
     clicked = $(event.currentTarget);
+    if (clicked.hasClass('disabled')) {
+      return;
+    }
     requested_page_num = clicked.attr('data-page');
     current_page = this.collection.getMeta('current_page');
     console.log('current_page');
@@ -85,7 +90,21 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     this.collection.fetchPage(requested_page_num);
     return this.showPreloader();
   },
-  enableDisableNextLastButtons: function() {},
+  enableDisableNextLastButtons: function() {
+    var current_page, total_pages;
+    current_page = this.collection.getMeta('current_page');
+    total_pages = this.collection.getMeta('total_pages');
+    if (current_page === 1) {
+      $(this.el).find("[data-page='previous']").addClass('disabled');
+    } else {
+      $(this.el).find("[data-page='previous']").removeClass('disabled');
+    }
+    if (current_page === total_pages) {
+      return $(this.el).find("[data-page='next']").addClass('disabled');
+    } else {
+      return $(this.el).find("[data-page='next']").removeClass('disabled');
+    }
+  },
   activateCurrentPageButton: function() {
     var current_page;
     current_page = this.collection.getMeta('current_page');

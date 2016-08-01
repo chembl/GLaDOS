@@ -15,6 +15,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
       drug_mechanisms = data.mechanisms
       this_collection.setMeta('total_records', data.page_meta.total_count)
       this_collection.setMeta('records_in_page', data.mechanisms.length)
+      this_collection.setMeta('total_pages', Math.ceil(data.page_meta.total_count / data.page_meta.limit))
     )
 
     getDrugMechanisms.fail( ()->
