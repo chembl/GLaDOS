@@ -15,6 +15,12 @@ class TargetReportCardApp
     appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + (chembl_id) + '&order_by=molecule_chembl_id'
     return appDrugCCList
 
+  @initAppDrugClinCandsTest = (chembl_id) ->
+    appDrugCCList = new ApprovedDrugClinicalCandidateListTest
+
+    appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + (chembl_id) + '&order_by=molecule_chembl_id&limit=1000'
+    return appDrugCCList
+
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------
@@ -54,6 +60,13 @@ class TargetReportCardApp
   ###
   @initADCC = (adccList, top_level_elem) ->
     adccView = new ApprovedDrugsClinicalCandidatesView
+      collection: adccList
+      el: top_level_elem
+
+    return adccView
+
+  @initADCCTest = (adccList, top_level_elem) ->
+    adccView = new ApprovedDrugsClinicalCandidatesViewTest
       collection: adccList
       el: top_level_elem
 

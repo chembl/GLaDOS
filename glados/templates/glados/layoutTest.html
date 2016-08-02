@@ -271,6 +271,10 @@
 
 {% block custom_js_inline %}
 
+  var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCandsTest('CHEMBL2034');
+  var adccView = TargetReportCardApp.initADCCTest(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
+  appDrugsClinCandsList.fetch();
+
   $( '#example' ).DataTable({
     responsive: true
   });

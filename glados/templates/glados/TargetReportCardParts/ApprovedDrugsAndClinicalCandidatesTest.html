@@ -1,0 +1,199 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}ApprovedDrugsAndClinicalCandidatesCard{% endblock %}
+
+{% block buttons %}
+
+{% block CalcCompProps-dnld %}
+{% with btn_id='CalcCompProps-dnld' additional_classes='hide-on-small-only' %}
+{% include "glados/base/btn_download_small.html" %}
+{% endwith %}
+{% endblock %}
+
+{% block CalcCompProps-small-dnld %}
+{% with btn_id='CalcCompProps-small-dnld' additional_classes='hide-on-med-and-up' %}
+{% include "glados/base/btn_download_small_2_lines.html" %}
+{% endwith %}
+{% endblock %}
+
+{% endblock %}
+
+{% block table %}
+
+
+ <table id="example_target" class="display">
+        <thead>
+        <tr>
+          <th>Column 1</th>
+          <th>Column 2</th>
+          <th>Column 3</th>
+          <th>Column 4</th>
+          <th>Column 5</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Row 1 Data 1</td>
+          <td>Row 1 Data 2</td>
+          <td>Row 1 Data 3</td>
+          <td>Row 1 Data 4</td>
+          <td>Row 1 Data 5</td>
+        </tr>
+        <tr>
+          <td>Row 2 Data 1</td>
+          <td>Row 2 Data 2</td>
+          <td>Row 2 Data 3</td>
+          <td>Row 2 Data 4</td>
+          <td>Row 2 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 3 Data 1</td>
+          <td>Row 3 Data 2</td>
+          <td>Row 3 Data 3</td>
+          <td>Row 3 Data 4</td>
+          <td>Row 3 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 4 Data 1</td>
+          <td>Row 4 Data 2</td>
+          <td>Row 4 Data 3</td>
+          <td>Row 4 Data 4</td>
+          <td>Row 4 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 5 Data 1</td>
+          <td>Row 5 Data 2</td>
+          <td>Row 5 Data 3</td>
+          <td>Row 5 Data 4</td>
+          <td>Row 5 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 6 Data 1</td>
+          <td>Row 6 Data 2</td>
+          <td>Row 6 Data 3</td>
+          <td>Row 6 Data 4</td>
+          <td>Row 6 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 7 Data 1</td>
+          <td>Row 7 Data 2</td>
+          <td>Row 7 Data 3</td>
+          <td>Row 7 Data 4</td>
+          <td>Row 7 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 8 Data 1</td>
+          <td>Row 8 Data 2</td>
+          <td>Row 8 Data 3</td>
+          <td>Row 8 Data 4</td>
+          <td>Row 8 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 9 Data 1</td>
+          <td>Row 9 Data 2</td>
+          <td>Row 9 Data 3</td>
+          <td>Row 9 Data 4</td>
+          <td>Row 9 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 10 Data 1</td>
+          <td>Row 10 Data 2</td>
+          <td>Row 10 Data 3</td>
+          <td>Row 10 Data 4</td>
+          <td>Row 10 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 11 Data 1</td>
+          <td>Row 11 Data 2</td>
+          <td>Row 11 Data 3</td>
+          <td>Row 11 Data 4</td>
+          <td>Row 11 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 12 Data 1</td>
+          <td>Row 12 Data 2</td>
+          <td>Row 12 Data 3</td>
+          <td>Row 12 Data 4</td>
+          <td>Row 12 Data 5</td>
+        </tr>
+
+        <tr>
+          <td>Row 13 Data 1</td>
+          <td>Row 13 Data 2</td>
+          <td>Row 13 Data 3</td>
+          <td>Row 13 Data 4</td>
+          <td>Row 13 Data 5</td>
+        </tr>
+        </tbody>
+      </table>
+
+{% endblock %}
+
+
+{% block collection %}
+
+{% verbatim %}
+<script id="Handlebars-Target-ADCCLI-large" type="text/x-handlebars-template">
+
+  <li class="collection-item">
+
+    <p>
+
+      <b>ChEMBL ID:</b> <a href="/compound_report_card/{{molecule_chembl_id}}">{{molecule_chembl_id}}</a><br>
+      <b>Name:</b>{{pref_name}}<br>
+      <b>Mechanism of Action:</b>{{mechanism_of_action}}<br>
+      <b>Max Phase:</b> {{max_phase}}<br>
+      <b>References:</b> <a href="http://europepmc.org/abstract/MED/15987694">PubMed</a><br>
+
+    </p>
+
+  </li>
+
+</script>
+{% endverbatim %}
+
+
+<ul id='ADCCUL-small' class="collection hide-on-med-and-up" data-hb-template="Handlebars-Target-ADCCLI-large">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</ul>
+
+{% endblock %}
+
+{% block pagination %}
+
+{% verbatim %}
+<script id="Handlebars-Target-ADCCPaginator" type="text/x-handlebars-template">
+
+  <ul class="pagination">
+    <li class="page-selector" data-page='previous'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+
+      {{#each pages}}
+        <li class="waves-effect page-selector active" data-page='{{this}}' ><a href="#!">{{this}}</a></li>
+      {{/each}}
+
+    <li class="waves-effect page-selector" data-page='next' ><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    <li class="waves-effect">Showing {{records_showing}} out of {{total_records}} records</li>
+  </ul>
+
+</script>
+{% endverbatim %}
+
+<div id='ADCCUL-paginator' data-hb-template="Handlebars-Target-ADCCPaginator">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
+
+{% endblock %}

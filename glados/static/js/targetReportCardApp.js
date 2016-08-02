@@ -20,6 +20,13 @@ TargetReportCardApp = (function() {
     return appDrugCCList;
   };
 
+  TargetReportCardApp.initAppDrugClinCandsTest = function(chembl_id) {
+    var appDrugCCList;
+    appDrugCCList = new ApprovedDrugClinicalCandidateListTest;
+    appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + chembl_id + '&order_by=molecule_chembl_id&limit=1000';
+    return appDrugCCList;
+  };
+
   /* *
     * Initializes the TNCView (Target Name and Clasification View)
     * @param {Compound} model, base model for the view
@@ -65,6 +72,15 @@ TargetReportCardApp = (function() {
   TargetReportCardApp.initADCC = function(adccList, top_level_elem) {
     var adccView;
     adccView = new ApprovedDrugsClinicalCandidatesView({
+      collection: adccList,
+      el: top_level_elem
+    });
+    return adccView;
+  };
+
+  TargetReportCardApp.initADCCTest = function(adccList, top_level_elem) {
+    var adccView;
+    adccView = new ApprovedDrugsClinicalCandidatesViewTest({
       collection: adccList,
       el: top_level_elem
     });
