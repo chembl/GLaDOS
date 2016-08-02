@@ -4,7 +4,7 @@ describe "Approved Drug and Clinical Candidate List", ->
 
   beforeAll (done) ->
 
-    appDrugsClinCandsList.fetch2()
+    appDrugsClinCandsList.fetch()
 
     setTimeout ( ->
       done()

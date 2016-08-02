@@ -4,7 +4,7 @@ describe("Approved Drug and Clinical Candidate List", function() {
   var appDrugsClinCandsList;
   appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands('CHEMBL2364670');
   beforeAll(function(done) {
-    appDrugsClinCandsList.fetch2();
+    appDrugsClinCandsList.fetch();
     return setTimeout((function() {
       return done();
     }), 2000);

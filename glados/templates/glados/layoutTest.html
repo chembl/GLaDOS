@@ -255,6 +255,12 @@
 
       <h2>Approved Drugs clinical candidates:</h2>
 
+      {% block adcc %}
+       {% with is_dynamic=True  %}
+        {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesTest.html" %}
+       {% endwith %}
+      {% endblock %}
+
 
     </div>
   </div>
