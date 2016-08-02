@@ -3,7 +3,7 @@ var ApprovedDrugsClinicalCandidatesView;
 
 ApprovedDrugsClinicalCandidatesView = CardView.extend({
   initialize: function() {
-    this.collection.on('reset', this.render, this);
+    this.collection.on('reset do-repaint', this.render, this);
     return this.resource_type = 'Target';
   },
   events: {
@@ -11,6 +11,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     'change .change-page-size': 'changePageSize'
   },
   render: function() {
+    console.log('render');
     if (this.collection.size() === 0) {
       $('#ApprovedDrugsAndClinicalCandidates').hide();
       return;
@@ -29,7 +30,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     var adcc, elem, new_row_cont, template, _i, _len, _ref, _results;
     elem = $(this.el).find('#' + elem_id);
     template = $('#' + elem.attr('data-hb-template'));
-    _ref = this.collection.models;
+    _ref = this.collection.getCurrentPage();
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       adcc = _ref[_i];
@@ -87,8 +88,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     }
     requested_page_num = clicked.attr('data-page');
     current_page = this.collection.getMeta('current_page');
-    console.log('current_page');
-    console.log(current_page);
     if (current_page === requested_page_num) {
       return;
     }
@@ -97,10 +96,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     } else if (requested_page_num === "next") {
       requested_page_num = current_page + 1;
     }
-    console.log('going to fetch');
-    console.log(requested_page_num);
-    this.collection.fetchPage(requested_page_num);
-    return this.showPreloader();
+    return this.collection.setPage(requested_page_num);
   },
   enableDisableNextLastButtons: function() {
     var current_page, total_pages;

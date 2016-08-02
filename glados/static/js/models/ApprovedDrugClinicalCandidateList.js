@@ -4,17 +4,13 @@ var ApprovedDrugClinicalCandidateList;
 ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   model: ApprovedDrugClinicalCandidate,
   fetch: function() {
-    var base_url2, drug_mechanisms, getDrugMechanisms, pag_url, this_collection;
-    pag_url = this.getPaginatedURL(this.url);
+    var base_url2, drug_mechanisms, getDrugMechanisms, this_collection;
     console.log('fetching:');
-    console.log(pag_url);
+    console.log(this.url);
     this_collection = this;
     drug_mechanisms = {};
-    getDrugMechanisms = $.getJSON(pag_url, function(data) {
-      drug_mechanisms = data.mechanisms;
-      this_collection.setMeta('total_records', data.page_meta.total_count);
-      this_collection.setMeta('records_in_page', data.mechanisms.length);
-      return this_collection.setMeta('total_pages', Math.ceil(data.page_meta.total_count / data.page_meta.limit));
+    getDrugMechanisms = $.getJSON(this.url, function(data) {
+      return drug_mechanisms = data.mechanisms;
     });
     getDrugMechanisms.fail(function() {
       console.log('error');
@@ -52,17 +48,77 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     });
   },
   initialize: function() {
-    return this.meta = {
+    this.meta = {
       page_size: 10,
-      current_page: 1
+      current_page: 1,
+      to_show: []
     };
+    return this.on('reset', this.resetMeta, this);
   },
   setMeta: function(attr, value) {
-    this.meta[attr] = value;
+    this.meta[attr] = parseInt(value);
     return this.trigger('meta-changed');
   },
   getMeta: function(attr) {
     return this.meta[attr];
+  },
+  resetPageSize: function(new_page_size) {
+    if (new_page_size === '') {
+      return;
+    }
+    console.log('new page size');
+    console.log(new_page_size);
+    this.setMeta('page_size', new_page_size);
+    this.setMeta('current_page', 1);
+    this.calculateTotalPages();
+    this.calculateHowManyInCurrentPage();
+    return this.trigger('do-repaint');
+  },
+  resetMeta: function() {
+    console.log('resetting!');
+    this.setMeta('total_records', this.models.length);
+    this.setMeta('current_page', 1);
+    this.calculateTotalPages();
+    return this.calculateHowManyInCurrentPage();
+  },
+  calculateTotalPages: function() {
+    var total_pages;
+    total_pages = Math.ceil(this.models.length / this.getMeta('page_size'));
+    return this.setMeta('total_pages', total_pages);
+  },
+  calculateHowManyInCurrentPage: function() {
+    var current_page, page_size, total_pages, total_records;
+    current_page = this.getMeta('current_page');
+    total_pages = this.getMeta('total_pages');
+    total_records = this.getMeta('total_records');
+    page_size = this.getMeta('page_size');
+    if (current_page === total_pages) {
+      return this.setMeta('records_in_page', total_records % page_size);
+    } else {
+      return this.setMeta('records_in_page', this.getMeta('page_size'));
+    }
+  },
+  getCurrentPage: function() {
+    var current_page, end, page_size, records_in_page, start, to_show;
+    console.log('Returning current page ');
+    page_size = this.getMeta('page_size');
+    current_page = this.getMeta('current_page');
+    records_in_page = this.getMeta('records_in_page');
+    console.log('current page is: ', current_page);
+    console.log('page size is: ', page_size);
+    start = (current_page - 1) * page_size;
+    end = start + records_in_page;
+    console.log('start: ' + start);
+    console.log('end: ' + end);
+    to_show = this.models.slice(start, +end + 1 || 9e9);
+    this.setMeta('to_show', to_show);
+    return to_show;
+  },
+  setPage: function(page_num) {
+    console.log('changing to page: ' + page_num);
+    this.setMeta('current_page', page_num);
+    console.log('^^^');
+    return this.trigger('do-repaint');
   },
   getPaginatedURL: function(url) {
     var current_page, limit_str, page_size, page_str;
@@ -74,16 +130,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   },
   fetchPage: function(page_num, force) {
     this.setMeta('current_page', page_num);
-    return this.fetch();
-  },
-  resetPageSize: function(new_page_size) {
-    if (new_page_size === '') {
-      return;
-    }
-    console.log('new page size');
-    console.log(new_page_size);
-    this.setMeta('page_size', new_page_size);
-    this.setMeta('current_page', 1);
     return this.fetch();
   }
 });

@@ -4,7 +4,7 @@
 ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   initialize: ->
-    @collection.on 'reset', @.render, @
+    @collection.on 'reset do-repaint', @.render, @
     @resource_type = 'Target'
 
   events:
@@ -13,6 +13,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   render: ->
 
+    console.log('render')
     if @collection.size() == 0
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
@@ -36,7 +37,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     elem = $(@el).find('#' + elem_id)
     template = $('#' + elem.attr('data-hb-template'))
 
-    for adcc in @collection.models
+    for adcc in @collection.getCurrentPage()
 
       new_row_cont = Handlebars.compile( template.html() )
         molecule_chembl_id: adcc.get('molecule_chembl_id')
@@ -92,8 +93,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     requested_page_num = clicked.attr('data-page')
     current_page = @collection.getMeta('current_page')
 
-    console.log('current_page')
-    console.log(current_page)
     # Don't bother if the user requested the same page as the current one
     if current_page == requested_page_num
       return
@@ -103,10 +102,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     else if requested_page_num == "next"
       requested_page_num = current_page + 1
 
-    console.log('going to fetch')
-    console.log(requested_page_num)
-    @collection.fetchPage(requested_page_num)
-    @showPreloader()
+    @collection.setPage(requested_page_num)
 
   enableDisableNextLastButtons: ->
 

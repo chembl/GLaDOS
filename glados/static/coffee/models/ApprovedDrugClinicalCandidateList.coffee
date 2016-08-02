@@ -5,18 +5,15 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   fetch: ->
 
-    pag_url = @getPaginatedURL(@url)
+
     console.log('fetching:')
-    console.log(pag_url)
+    console.log(@url)
     this_collection = @
     drug_mechanisms = {}
 
     # 1 first get list of drug mechanisms
-    getDrugMechanisms = $.getJSON(pag_url, (data) ->
+    getDrugMechanisms = $.getJSON(@url, (data) ->
       drug_mechanisms = data.mechanisms
-      this_collection.setMeta('total_records', data.page_meta.total_count)
-      this_collection.setMeta('records_in_page', data.mechanisms.length)
-      this_collection.setMeta('total_pages', Math.ceil(data.page_meta.total_count / data.page_meta.limit))
     )
 
     getDrugMechanisms.fail( ()->
@@ -66,14 +63,90 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     @meta =
       page_size: 10
       current_page: 1
+      to_show: []
+
+    @on 'reset', @resetMeta, @
 
   setMeta: (attr, value) ->
-    @meta[attr] = value
+    @meta[attr] = parseInt(value)
     @trigger('meta-changed')
 
   getMeta: (attr) ->
     return @meta[attr]
 
+  resetPageSize: (new_page_size) ->
+
+    if new_page_size == ''
+      return
+
+    console.log('new page size')
+    console.log(new_page_size)
+    @setMeta('page_size', new_page_size)
+    @setMeta('current_page', 1)
+    @calculateTotalPages()
+    @calculateHowManyInCurrentPage()
+    @trigger('do-repaint')
+
+
+  # assuming that I have all the records.
+  resetMeta: ->
+
+    console.log('resetting!')
+    @setMeta('total_records', @models.length)
+    @setMeta('current_page', 1)
+    @calculateTotalPages()
+    @calculateHowManyInCurrentPage()
+
+  calculateTotalPages: ->
+
+    total_pages =  Math.ceil(@models.length / @getMeta('page_size'))
+
+    @setMeta('total_pages', total_pages)
+
+  calculateHowManyInCurrentPage: ->
+
+    current_page = @getMeta('current_page')
+    total_pages = @getMeta('total_pages')
+    total_records = @getMeta('total_records')
+    page_size = @getMeta('page_size')
+
+    if current_page == total_pages
+      @setMeta('records_in_page', total_records % page_size)
+    else
+      @setMeta('records_in_page', @getMeta('page_size'))
+
+
+
+  getCurrentPage: ->
+
+    console.log('Returning current page ')
+    page_size = @getMeta('page_size')
+    current_page = @getMeta('current_page')
+    records_in_page = @getMeta('records_in_page')
+    console.log('current page is: ', current_page)
+    console.log('page size is: ', page_size)
+
+    start = (current_page - 1) * page_size
+    end = start + records_in_page
+
+    console.log('start: ' + start)
+    console.log('end: ' + end)
+
+    to_show = @models[start..end]
+    @setMeta('to_show', to_show)
+    return to_show
+
+
+  setPage: (page_num) ->
+
+    console.log('changing to page: ' + page_num)
+    @setMeta('current_page', page_num)
+    console.log('^^^')
+    @trigger('do-repaint')
+
+
+
+  #
   getPaginatedURL: (url) ->
 
     page_size = @getMeta('page_size')
@@ -90,15 +163,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     @setMeta('current_page', page_num)
     @fetch()
 
-  resetPageSize: (new_page_size) ->
 
-    if new_page_size == ''
-      return
 
-    console.log('new page size')
-    console.log(new_page_size)
-    @setMeta('page_size', new_page_size)
-    @setMeta('current_page', 1)
-    @fetch()
 
 

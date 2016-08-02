@@ -16,7 +16,7 @@ TargetReportCardApp = (function() {
   TargetReportCardApp.initAppDrugClinCands = function(chembl_id) {
     var appDrugCCList;
     appDrugCCList = new ApprovedDrugClinicalCandidateList;
-    appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + chembl_id + '&order_by=molecule_chembl_id';
+    appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + chembl_id + '&order_by=molecule_chembl_id&limit=1000';
     return appDrugCCList;
   };
 
