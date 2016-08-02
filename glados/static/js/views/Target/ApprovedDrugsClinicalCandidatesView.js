@@ -104,9 +104,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   },
   enableDisableNextLastButtons: function() {
     var current_page, total_pages;
-    current_page = this.collection.getMeta('current_page');
-    total_pages = this.collection.getMeta('total_pages');
-    if (current_page === 1 || current_page === '1') {
+    current_page = parseInt(this.collection.getMeta('current_page'));
+    total_pages = parseInt(this.collection.getMeta('total_pages'));
+    if (current_page === 1) {
       $(this.el).find("[data-page='previous']").addClass('disabled');
     } else {
       $(this.el).find("[data-page='previous']").removeClass('disabled');
@@ -126,9 +126,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   changePageSize: function(event) {
     var new_page_size, selector;
     selector = $(event.currentTarget);
-    console.log('change page size');
     new_page_size = selector.val();
-    console.log(new_page_size);
-    return console.log(new_page_size === 25);
+    return this.collection.resetPageSize(new_page_size);
   }
 });

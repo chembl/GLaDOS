@@ -2,6 +2,7 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   model: ApprovedDrugClinicalCandidate
 
+
   fetch: ->
 
     pag_url = @getPaginatedURL(@url)
@@ -90,8 +91,14 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     @fetch()
 
   resetPageSize: (new_page_size) ->
+
+    if new_page_size == ''
+      return
+
     console.log('new page size')
     console.log(new_page_size)
-    @setMeta('page_size', setMeta)
+    @setMeta('page_size', new_page_size)
+    @setMeta('current_page', 1)
+    @fetch()
 
 
