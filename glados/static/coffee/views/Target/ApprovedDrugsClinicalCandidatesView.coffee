@@ -126,7 +126,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
 
-  sortCollection: ->
+  sortCollection: (event) ->
 
-    @collection.sortCollection()
+    order_icon = $(event.currentTarget)
+    comparator = order_icon.attr('data-comparator')
+    @collection.sortCollection(comparator)
 

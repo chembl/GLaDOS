@@ -120,7 +120,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     new_page_size = selector.val();
     return this.collection.resetPageSize(new_page_size);
   },
-  sortCollection: function() {
-    return this.collection.sortCollection();
+  sortCollection: function(event) {
+    var comparator, order_icon;
+    order_icon = $(event.currentTarget);
+    comparator = order_icon.attr('data-comparator');
+    return this.collection.sortCollection(comparator);
   }
 });

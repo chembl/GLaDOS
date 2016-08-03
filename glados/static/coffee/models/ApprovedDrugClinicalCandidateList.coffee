@@ -132,10 +132,10 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     @setMeta('current_page', page_num)
     @trigger('do-repaint')
 
-  sortCollection: ->
+  sortCollection: (comparator) ->
 
     console.log('sort')
-    @comparator = 'molecule_chembl_id'
+    @comparator = comparator
     @sort()
 
 

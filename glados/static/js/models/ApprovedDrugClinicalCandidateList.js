@@ -109,9 +109,9 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     this.setMeta('current_page', page_num);
     return this.trigger('do-repaint');
   },
-  sortCollection: function() {
+  sortCollection: function(comparator) {
     console.log('sort');
-    this.comparator = 'molecule_chembl_id';
+    this.comparator = comparator;
     return this.sort();
   },
   getPaginatedURL: function(url) {
