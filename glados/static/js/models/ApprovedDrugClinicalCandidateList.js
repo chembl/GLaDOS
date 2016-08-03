@@ -107,7 +107,8 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
-    return this.calculateHowManyInCurrentPage();
+    this.calculateHowManyInCurrentPage();
+    return this.resetSortData();
   },
   calculateTotalPages: function() {
     var total_pages;
@@ -142,9 +143,58 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     return this.trigger('do-repaint');
   },
   sortCollection: function(comparator) {
+    var col, columns, is_descending, _i, _len;
     console.log('sort');
     this.comparator = comparator;
-    return this.sort();
+    columns = this.getMeta('columns');
+    is_descending = false;
+    for (_i = 0, _len = columns.length; _i < _len; _i++) {
+      col = columns[_i];
+      if (col.comparator === comparator) {
+        col.is_sorting = (function() {
+          switch (col.is_sorting) {
+            case 0:
+              return 1;
+            default:
+              return -col.is_sorting;
+          }
+        })();
+        is_descending = col.is_sorting === -1;
+      } else {
+        col.is_sorting = 0;
+      }
+      col.sort_class = (function() {
+        switch (col.is_sorting) {
+          case -1:
+            return 'fa-sort-desc';
+          case 0:
+            return 'fa-sort';
+          case 1:
+            return 'fa-sort-asc';
+        }
+      })();
+    }
+    if (is_descending) {
+      this.sort({
+        silent: true
+      });
+      this.models = this.models.reverse();
+      return this.trigger('sort');
+    } else {
+      return this.sort();
+    }
+  },
+  resetSortData: function() {
+    var col, columns, _i, _len, _results;
+    this.comparator = void 0;
+    columns = this.getMeta('columns');
+    _results = [];
+    for (_i = 0, _len = columns.length; _i < _len; _i++) {
+      col = columns[_i];
+      col.is_sorting = 0;
+      _results.push(col.sort_class = 'fa-sort');
+    }
+    return _results;
   },
   getPaginatedURL: function(url) {
     var current_page, limit_str, page_size, page_str;
