@@ -30,7 +30,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
       molecules_list = (dm.molecule_chembl_id for dm in drug_mechanisms).join(',')
       # order is very important to iterate in the same order as the first call
       getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000'
-      console.log(getMoleculesInfoUrl)
 
       getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, (data) ->
 
@@ -79,8 +78,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
     if new_page_size == ''
       return
 
-    console.log('new page size')
-    console.log(new_page_size)
     @setMeta('page_size', new_page_size)
     @setMeta('current_page', 1)
     @calculateTotalPages()
@@ -91,7 +88,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
   # assuming that I have all the records.
   resetMeta: ->
 
-    console.log('resetting!')
     @setMeta('total_records', @models.length)
     @setMeta('current_page', 1)
     @calculateTotalPages()
@@ -119,18 +115,12 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   getCurrentPage: ->
 
-    console.log('Returning current page ')
     page_size = @getMeta('page_size')
     current_page = @getMeta('current_page')
     records_in_page = @getMeta('records_in_page')
-    console.log('current page is: ', current_page)
-    console.log('page size is: ', page_size)
 
     start = (current_page - 1) * page_size
     end = start + records_in_page
-
-    console.log('start: ' + start)
-    console.log('end: ' + end)
 
     to_show = @models[start..end]
     @setMeta('to_show', to_show)
@@ -139,10 +129,15 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
 
   setPage: (page_num) ->
 
-    console.log('changing to page: ' + page_num)
     @setMeta('current_page', page_num)
-    console.log('^^^')
     @trigger('do-repaint')
+
+  sortCollection: ->
+
+    console.log('sort')
+    @comparator = 'molecule_chembl_id'
+    @sort()
+
 
 
 

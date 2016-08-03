@@ -29,7 +29,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
         return _results;
       })()).join(',');
       getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000';
-      console.log(getMoleculesInfoUrl);
       getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, function(data) {
         var i, mol, molecules, _i, _len;
         molecules = data.molecules;
@@ -66,8 +65,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     if (new_page_size === '') {
       return;
     }
-    console.log('new page size');
-    console.log(new_page_size);
     this.setMeta('page_size', new_page_size);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
@@ -75,7 +72,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
     return this.trigger('do-repaint');
   },
   resetMeta: function() {
-    console.log('resetting!');
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
@@ -100,25 +96,23 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend({
   },
   getCurrentPage: function() {
     var current_page, end, page_size, records_in_page, start, to_show;
-    console.log('Returning current page ');
     page_size = this.getMeta('page_size');
     current_page = this.getMeta('current_page');
     records_in_page = this.getMeta('records_in_page');
-    console.log('current page is: ', current_page);
-    console.log('page size is: ', page_size);
     start = (current_page - 1) * page_size;
     end = start + records_in_page;
-    console.log('start: ' + start);
-    console.log('end: ' + end);
     to_show = this.models.slice(start, +end + 1 || 9e9);
     this.setMeta('to_show', to_show);
     return to_show;
   },
   setPage: function(page_num) {
-    console.log('changing to page: ' + page_num);
     this.setMeta('current_page', page_num);
-    console.log('^^^');
     return this.trigger('do-repaint');
+  },
+  sortCollection: function() {
+    console.log('sort');
+    this.comparator = 'molecule_chembl_id';
+    return this.sort();
   },
   getPaginatedURL: function(url) {
     var current_page, limit_str, page_size, page_str;

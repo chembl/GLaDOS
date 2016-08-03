@@ -3,15 +3,15 @@ var ApprovedDrugsClinicalCandidatesView;
 
 ApprovedDrugsClinicalCandidatesView = CardView.extend({
   initialize: function() {
-    this.collection.on('reset do-repaint', this.render, this);
+    this.collection.on('reset do-repaint sort', this.render, this);
     return this.resource_type = 'Target';
   },
   events: {
     'click .page-selector': 'getPage',
-    'change .change-page-size': 'changePageSize'
+    'change .change-page-size': 'changePageSize',
+    'click .sort': 'sortCollection'
   },
   render: function() {
-    console.log('render');
     if (this.collection.size() === 0) {
       $('#ApprovedDrugsAndClinicalCandidates').hide();
       return;
@@ -48,11 +48,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
     elem = $(this.el).find('#ADCCUL-paginator');
     template = $('#' + elem.attr('data-hb-template'));
-    console.log(this.collection.getMeta('total_records'));
     current_page = this.collection.getMeta('current_page');
     records_in_page = this.collection.getMeta('records_in_page');
-    console.log('records in page');
-    console.log(records_in_page);
     page_size = this.collection.getMeta('page_size');
     first_record = (current_page - 1) * page_size;
     last_page = first_record + records_in_page;
@@ -69,8 +66,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
       records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records')
     }));
-    console.log('checkin buttons!');
-    console.log(current_page);
     this.activateCurrentPageButton();
     return this.enableDisableNextLastButtons();
   },
@@ -124,5 +119,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     selector = $(event.currentTarget);
     new_page_size = selector.val();
     return this.collection.resetPageSize(new_page_size);
+  },
+  sortCollection: function() {
+    return this.collection.sortCollection();
   }
 });

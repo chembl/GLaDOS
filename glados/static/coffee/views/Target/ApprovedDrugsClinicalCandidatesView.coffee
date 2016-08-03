@@ -4,16 +4,16 @@
 ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   initialize: ->
-    @collection.on 'reset do-repaint', @.render, @
+    @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
 
   events:
     'click .page-selector': 'getPage'
     'change .change-page-size': 'changePageSize'
+    'click .sort': 'sortCollection'
 
   render: ->
 
-    console.log('render')
     if @collection.size() == 0
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
@@ -51,12 +51,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     elem = $(@el).find('#ADCCUL-paginator')
     template = $('#' + elem.attr('data-hb-template'))
-    console.log(@collection.getMeta('total_records'))
 
     current_page = @collection.getMeta('current_page')
     records_in_page = @collection.getMeta('records_in_page')
-    console.log('records in page')
-    console.log(records_in_page)
     page_size = @collection.getMeta('page_size')
 
     first_record = (current_page - 1) * page_size
@@ -69,8 +66,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
       records_showing: first_record + '-' + last_page
       total_records: @collection.getMeta('total_records')
 
-    console.log('checkin buttons!')
-    console.log(current_page)
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
@@ -130,3 +125,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     selector = $(event.currentTarget)
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
+
+  sortCollection: ->
+
+    @collection.sortCollection()
+
