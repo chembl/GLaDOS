@@ -11,6 +11,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     'click .page-selector': 'getPage'
     'change .change-page-size': 'changePageSize'
     'click .sort': 'sortCollection'
+    'input .search': 'setSearch'
 
   render: ->
 
@@ -141,4 +142,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
     order_icon = $(event.currentTarget)
     comparator = order_icon.attr('data-comparator')
     @collection.sortCollection(comparator)
+
+  setSearch: ->
+
+    console.log('search!')
 

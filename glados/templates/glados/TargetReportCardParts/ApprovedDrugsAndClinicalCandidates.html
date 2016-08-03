@@ -20,7 +20,9 @@
 
 {% block menu %}
 
-<div >
+<div class="row">
+
+<div class="col s4" >
   <select class="change-page-size">
     <option value="5" selected>5</option>
     <option value="10" selected>10</option>
@@ -30,6 +32,17 @@
   </select>
   <label>Records per page:</label>
 </div>
+
+<div class="col offset-s3 s4">
+
+  <div class="input-field">
+    <input placeholder="Search" id="first_name" type="text" class="validate search">
+  </div>
+
+</div>
+
+</div>
+
 {% endblock %}
 
 {% block table %}

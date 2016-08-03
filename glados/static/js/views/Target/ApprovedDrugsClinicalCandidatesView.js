@@ -9,7 +9,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
   events: {
     'click .page-selector': 'getPage',
     'change .change-page-size': 'changePageSize',
-    'click .sort': 'sortCollection'
+    'click .sort': 'sortCollection',
+    'input .search': 'setSearch'
   },
   render: function() {
     if (this.collection.size() === 0) {
@@ -132,5 +133,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     order_icon = $(event.currentTarget);
     comparator = order_icon.attr('data-comparator');
     return this.collection.sortCollection(comparator);
+  },
+  setSearch: function() {
+    return console.log('search!');
   }
 });

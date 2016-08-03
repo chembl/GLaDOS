@@ -133,7 +133,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
   calculateTotalPages: ->
 
     total_pages =  Math.ceil(@models.length / @getMeta('page_size'))
-
     @setMeta('total_pages', total_pages)
 
   calculateHowManyInCurrentPage: ->
@@ -147,8 +146,6 @@ ApprovedDrugClinicalCandidateList = Backbone.Collection.extend
       @setMeta('records_in_page', total_records % page_size)
     else
       @setMeta('records_in_page', @getMeta('page_size'))
-
-
 
   getCurrentPage: ->
 
