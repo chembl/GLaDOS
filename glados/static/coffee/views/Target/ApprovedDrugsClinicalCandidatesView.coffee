@@ -31,11 +31,21 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
     $('select').material_select();
 
-
   fill_template: (elem_id) ->
 
     elem = $(@el).find('#' + elem_id)
     template = $('#' + elem.attr('data-hb-template'))
+
+    if elem_id == 'ADCCTable-large'
+
+      header_template = $('#Handlebars-Target-TableHeader')
+      header_row_cont = Handlebars.compile( header_template.html() )
+        columns: @collection.getMeta('columns')
+
+
+      elem.append($(header_row_cont))
+
+
 
     for adcc in @collection.getCurrentPage()
 
@@ -71,7 +81,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend
 
   clearTable: ->
 
-    $('#ADCCTable-large tr:gt(0)').remove()
+    $('#ADCCTable-large').empty()
 
   clearList: ->
 

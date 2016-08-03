@@ -27,9 +27,16 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return $('select').material_select();
   },
   fill_template: function(elem_id) {
-    var adcc, elem, new_row_cont, template, _i, _len, _ref, _results;
+    var adcc, elem, header_row_cont, header_template, new_row_cont, template, _i, _len, _ref, _results;
     elem = $(this.el).find('#' + elem_id);
     template = $('#' + elem.attr('data-hb-template'));
+    if (elem_id === 'ADCCTable-large') {
+      header_template = $('#Handlebars-Target-TableHeader');
+      header_row_cont = Handlebars.compile(header_template.html())({
+        columns: this.collection.getMeta('columns')
+      });
+      elem.append($(header_row_cont));
+    }
     _ref = this.collection.getCurrentPage();
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -70,7 +77,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend({
     return this.enableDisableNextLastButtons();
   },
   clearTable: function() {
-    return $('#ADCCTable-large tr:gt(0)').remove();
+    return $('#ADCCTable-large').empty();
   },
   clearList: function() {
     return $('#ADCCUL-small').empty();
