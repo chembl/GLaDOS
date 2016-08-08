@@ -5,15 +5,44 @@
 
 <div id='BCK-DrugBrowserMain' class="row grey lighten-5">
 
-  <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
-         data-hb-template="Handlebars-Common-Paginated-Row-large"
-         data-hb-template-2="Handlebars-Common-Paginated-Header-large">
+  <div class="row">
 
-    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+    <div class="input-field col s4">
 
-  </table>
+      <select class="change-page-size">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      <label>Records per page:</label>
+    </div>
+
+  </div>
 
 
+  <div class="row">
+
+    <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
+           data-hb-template="Handlebars-Common-Paginated-Row-large"
+           data-hb-template-2="Handlebars-Common-Paginated-Header-large">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+    </table>
+
+  </div>
+
+  <div class="row">
+
+    <div id='DB-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+    </div>
+
+  </div>
 
 
 </div>

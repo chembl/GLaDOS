@@ -23,6 +23,7 @@ PaginatedCollection = Backbone.Collection.extend
   # assuming that I have all the records.
   resetMeta: ->
 
+    console.log('resetting meta')
     @setMeta('total_records', @models.length)
     @setMeta('current_page', 1)
     @calculateTotalPages()

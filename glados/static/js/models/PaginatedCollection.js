@@ -20,6 +20,7 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.trigger('do-repaint');
   },
   resetMeta: function() {
+    console.log('resetting meta');
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();

@@ -15,36 +15,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend({
     this.clearList();
     this.fill_template('ADCCTable-large');
     this.fill_template('ADCCUL-small');
-    this.fillPaginator();
+    this.fillPaginator('ADCCUL-paginator');
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
-    return $('select').material_select();
-  },
-  fillPaginator: function() {
-    var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
-    elem = $(this.el).find('#ADCCUL-paginator');
-    template = $('#' + elem.attr('data-hb-template'));
-    current_page = this.collection.getMeta('current_page');
-    records_in_page = this.collection.getMeta('records_in_page');
-    page_size = this.collection.getMeta('page_size');
-    first_record = (current_page - 1) * page_size;
-    last_page = first_record + records_in_page;
-    pages = (function() {
-      var _i, _ref, _results;
-      _results = [];
-      for (num = _i = 1, _ref = this.collection.getMeta('total_pages'); 1 <= _ref ? _i <= _ref : _i >= _ref; num = 1 <= _ref ? ++_i : --_i) {
-        _results.push(num);
-      }
-      return _results;
-    }).call(this);
-    elem.html(Handlebars.compile(template.html())({
-      pages: pages,
-      records_showing: first_record + '-' + last_page,
-      total_records: this.collection.getMeta('total_records')
-    }));
-    this.activateCurrentPageButton();
-    return this.enableDisableNextLastButtons();
+    return this.activatePageSelector();
   },
   clearTable: function() {
     return $('#ADCCTable-large').empty();

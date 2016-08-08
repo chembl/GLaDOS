@@ -8,7 +8,7 @@ DrugBrowserApp = (function() {
   DrugBrowserApp.initDrugList = function() {
     var drugList;
     drugList = new DrugList;
-    drugList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4';
+    drugList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4&limit=1000';
     return drugList;
   };
 

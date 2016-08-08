@@ -37,6 +37,31 @@ PaginatedViewExt = {
     }
     return _results;
   },
+  fillPaginator: function(elem_id) {
+    var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
+    elem = $(this.el).find('#' + elem_id);
+    template = $('#' + elem.attr('data-hb-template'));
+    current_page = this.collection.getMeta('current_page');
+    records_in_page = this.collection.getMeta('records_in_page');
+    page_size = this.collection.getMeta('page_size');
+    first_record = (current_page - 1) * page_size;
+    last_page = first_record + records_in_page;
+    pages = (function() {
+      var _i, _ref, _results;
+      _results = [];
+      for (num = _i = 1, _ref = this.collection.getMeta('total_pages'); 1 <= _ref ? _i <= _ref : _i >= _ref; num = 1 <= _ref ? ++_i : --_i) {
+        _results.push(num);
+      }
+      return _results;
+    }).call(this);
+    elem.html(Handlebars.compile(template.html())({
+      pages: pages,
+      records_showing: first_record + '-' + last_page,
+      total_records: this.collection.getMeta('total_records')
+    }));
+    this.activateCurrentPageButton();
+    return this.enableDisableNextLastButtons();
+  },
   getPage: function(event) {
     var clicked, current_page, requested_page_num;
     clicked = $(event.currentTarget);
@@ -90,5 +115,8 @@ PaginatedViewExt = {
     order_icon = $(event.currentTarget);
     comparator = order_icon.attr('data-comparator');
     return this.collection.sortCollection(comparator);
+  },
+  activatePageSelector: function() {
+    return $('select').material_select();
   }
 };

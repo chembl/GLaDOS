@@ -7,6 +7,9 @@ DrugList = PaginatedCollection.extend
     return data.molecules
 
   initialize: ->
+
+    @on 'reset', @resetMeta, @
+
     @meta =
       page_size: 10
       current_page: 1

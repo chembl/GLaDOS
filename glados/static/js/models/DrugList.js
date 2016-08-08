@@ -7,6 +7,7 @@ DrugList = PaginatedCollection.extend({
     return data.molecules;
   },
   initialize: function() {
+    this.on('reset', this.resetMeta, this);
     return this.meta = {
       page_size: 10,
       current_page: 1,
