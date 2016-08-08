@@ -72,8 +72,10 @@
   LazyIFramesHelper.initLazyIFrames();
 
   var targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
+  var drugList = DrugBrowserApp.initDrugList();
+
   var targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'));
-  var initDrugList = DrugBrowserApp.initDrugList();
+  var drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(drugList, $('#BCK-DrugBrowserMain'));
 
   LazyIFramesHelper.loadObjectOnceOnClick($('a[href="#browse_targets"]'), targetHierarchy);
 
