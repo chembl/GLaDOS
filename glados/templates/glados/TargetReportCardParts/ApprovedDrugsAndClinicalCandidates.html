@@ -47,26 +47,8 @@
 
 {% block table %}
 
-{% verbatim %}
-
-<script id="Handlebars-Target-Paginated-Row-large" type="text/x-handlebars-template">
-
-  <tr>
-
-    <td><a href="/compound_report_card/{{molecule_chembl_id}}" target="_blank">{{molecule_chembl_id}}</a></td>
-    <td>{{pref_name}}</td>
-    <td>{{mechanism_of_action}}</td>
-    <td>{{max_phase}}</td>
-    <td><a href="http://europepmc.org/abstract/MED/15987694">PubMed</a></td>
-
-  </tr>
-
-</script>
-
-{% endverbatim %}
-
 <table id='ADCCTable-large' class="compact-table striped hide-on-small-only ebi-links"
-       data-hb-template="Handlebars-Target-Paginated-Row-large"
+       data-hb-template="Handlebars-Common-Paginated-Row-large"
        data-hb-template-2="Handlebars-Common-Paginated-Header-large">
 
   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
@@ -78,28 +60,8 @@
 
 {% block collection %}
 
-{% verbatim %}
-<script id="Handlebars-Target-ADCCLI-large" type="text/x-handlebars-template">
 
-  <li class="collection-item">
-
-    <p>
-
-      <b>ChEMBL ID:</b> <a href="/compound_report_card/{{molecule_chembl_id}}">{{molecule_chembl_id}}</a><br>
-      <b>Name:</b>{{pref_name}}<br>
-      <b>Mechanism of Action:</b>{{mechanism_of_action}}<br>
-      <b>Max Phase:</b> {{max_phase}}<br>
-      <b>References:</b> <a href="http://europepmc.org/abstract/MED/15987694">PubMed</a><br>
-
-    </p>
-
-  </li>
-
-</script>
-{% endverbatim %}
-
-
-<ul id='ADCCUL-small' class="collection hide-on-med-and-up" data-hb-template="Handlebars-Target-ADCCLI-large">
+<ul id='ADCCUL-small' class="collection hide-on-med-and-up" data-hb-template="Handlebars-Common-Pagination-LI">
 
    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 

@@ -29,6 +29,27 @@
 <!-- -- -- -- Pagination -- -- -- -- -- -- -->
 <!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
 
+<script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
+
+    <tr>
+
+      {{#each columns}}
+
+        {{#if this.has_link}}
+
+          <td> <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          </td>
+
+        {{else}}
+          <td>{{this.value}}
+          </td>
+        {{/if}}
+      {{/each}}
+
+    </tr>
+
+  </script>
+
 
 <script id="Handlebars-Common-Paginated-Header-large" type="text/x-handlebars-template">
 
@@ -50,6 +71,30 @@
   </thead>
 
 </script>
+
+<script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
+
+  <li class="collection-item">
+
+    <p>
+
+      {{#each columns}}
+        <b>{{this.name_to_show}}:</b>
+        {{#if this.has_link}}
+          <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+        {{else}}
+          {{this.value}}
+        {{/if}}
+        <br>
+
+      {{/each}}
+
+    </p>
+
+  </li>
+
+</script>
+
 
 <script id="Handlebars-Common-Paginated-UL" type="text/x-handlebars-template">
 

@@ -26,32 +26,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend
 
     $('select').material_select();
 
-  fill_template: (elem_id) ->
-
-    elem = $(@el).find('#' + elem_id)
-    template = $('#' + elem.attr('data-hb-template'))
-
-    if elem.is('table')
-
-      header_template = $('#' + elem.attr('data-hb-template-2'))
-      header_row_cont = Handlebars.compile( header_template.html() )
-        columns: @collection.getMeta('columns')
-
-
-      elem.append($(header_row_cont))
-
-
-
-    for adcc in @collection.getCurrentPage()
-
-      new_row_cont = Handlebars.compile( template.html() )
-        molecule_chembl_id: adcc.get('molecule_chembl_id')
-        pref_name: adcc.get('pref_name')
-        mechanism_of_action: adcc.get('mechanism_of_action')
-        max_phase: adcc.get('max_phase')
-
-      elem.append($(new_row_cont))
-
   fillPaginator: ->
 
     elem = $(@el).find('#ADCCUL-paginator')

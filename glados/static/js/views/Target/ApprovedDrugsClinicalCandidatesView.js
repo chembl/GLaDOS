@@ -21,31 +21,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend({
     this.activateModals();
     return $('select').material_select();
   },
-  fill_template: function(elem_id) {
-    var adcc, elem, header_row_cont, header_template, new_row_cont, template, _i, _len, _ref, _results;
-    elem = $(this.el).find('#' + elem_id);
-    template = $('#' + elem.attr('data-hb-template'));
-    if (elem.is('table')) {
-      header_template = $('#' + elem.attr('data-hb-template-2'));
-      header_row_cont = Handlebars.compile(header_template.html())({
-        columns: this.collection.getMeta('columns')
-      });
-      elem.append($(header_row_cont));
-    }
-    _ref = this.collection.getCurrentPage();
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      adcc = _ref[_i];
-      new_row_cont = Handlebars.compile(template.html())({
-        molecule_chembl_id: adcc.get('molecule_chembl_id'),
-        pref_name: adcc.get('pref_name'),
-        mechanism_of_action: adcc.get('mechanism_of_action'),
-        max_phase: adcc.get('max_phase')
-      });
-      _results.push(elem.append($(new_row_cont)));
-    }
-    return _results;
-  },
   fillPaginator: function() {
     var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
     elem = $(this.el).find('#ADCCUL-paginator');

@@ -17,7 +17,8 @@ DrugList = PaginatedCollection.extend({
           'comparator': 'molecule_chembl_id',
           'sort_disabled': false,
           'is_sorting': 0,
-          'sort_class': 'fa-sort'
+          'sort_class': 'fa-sort',
+          'link_base': '/compound_report_card/$$$'
         }, {
           'name_to_show': 'Molecule Type',
           'comparator': 'molecule_type',

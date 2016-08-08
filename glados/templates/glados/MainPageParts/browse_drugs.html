@@ -5,26 +5,8 @@
 
 <div id='BCK-DrugBrowserMain' class="row grey lighten-5">
 
-
-  {% verbatim %}
-
-  <script id="Handlebars-Target-Paginated-Row-large" type="text/x-handlebars-template">
-
-    <tr>
-
-      <td><a href="/compound_report_card/{{molecule_chembl_id}}" target="_blank">{{molecule_chembl_id}}</a></td>
-      <td>{{molecule_type}}</td>
-      <td>{{pref_name}}</td>
-      <td>{{max_phase}}</td>
-
-    </tr>
-
-  </script>
-
-  {% endverbatim %}
-
   <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
-         data-hb-template="Handlebars-Target-Paginated-Row-large"
+         data-hb-template="Handlebars-Common-Paginated-Row-large"
          data-hb-template-2="Handlebars-Common-Paginated-Header-large">
 
     <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->

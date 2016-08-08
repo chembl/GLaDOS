@@ -8,6 +8,35 @@ PaginatedViewExt = {
     'click .sort': 'sortCollection',
     'input .search': 'setSearch'
   },
+  fill_template: function(elem_id) {
+    var columns_val, elem, header_row_cont, header_template, item, new_row_cont, template, _i, _len, _ref, _results;
+    elem = $(this.el).find('#' + elem_id);
+    template = $('#' + elem.attr('data-hb-template'));
+    if (elem.is('table')) {
+      header_template = $('#' + elem.attr('data-hb-template-2'));
+      header_row_cont = Handlebars.compile(header_template.html())({
+        columns: this.collection.getMeta('columns')
+      });
+      elem.append($(header_row_cont));
+    }
+    _ref = this.collection.getCurrentPage();
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      item = _ref[_i];
+      columns_val = this.collection.getMeta('columns').map(function(col) {
+        col['value'] = item.get(col.comparator);
+        col['has_link'] = col.link_base != null;
+        if (!!col['has_link']) {
+          return col['link_url'] = col['link_base'].replace('$$$', col['value']);
+        }
+      });
+      new_row_cont = Handlebars.compile(template.html())({
+        columns: this.collection.getMeta('columns')
+      });
+      _results.push(elem.append($(new_row_cont)));
+    }
+    return _results;
+  },
   getPage: function(event) {
     var clicked, current_page, requested_page_num;
     clicked = $(event.currentTarget);

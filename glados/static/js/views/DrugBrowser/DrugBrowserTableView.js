@@ -11,7 +11,7 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
     return this.fill_template('DBTable-large');
   },
   fill_template: function(elem_id) {
-    var drug, elem, header_row_cont, header_template, new_row_cont, template, _i, _len, _ref, _results;
+    var columns_val, elem, header_row_cont, header_template, item, new_row_cont, template, _i, _len, _ref, _results;
     elem = $(this.el).find('#' + elem_id);
     template = $('#' + elem.attr('data-hb-template'));
     if (elem.is('table')) {
@@ -21,19 +21,21 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
       });
       elem.append($(header_row_cont));
     }
-    console.log(this.collection);
     _ref = this.collection.getCurrentPage();
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      drug = _ref[_i];
-      new_row_cont = Handlebars.compile(template.html())({
-        molecule_chembl_id: drug.get('molecule_chembl_id'),
-        molecule_type: drug.get('molecule_type'),
-        pref_name: drug.get('pref_name'),
-        max_phase: drug.get('max_phase')
+      item = _ref[_i];
+      columns_val = this.collection.getMeta('columns').map(function(col) {
+        col['value'] = item.get(col.comparator);
+        col['has_link'] = col.link_base != null;
+        if (!!col['has_link']) {
+          return col['link_url'] = col['link_base'].replace('$$$', col['value']);
+        }
       });
-      elem.append($(new_row_cont));
-      _results.push(console.log('add row!'));
+      new_row_cont = Handlebars.compile(template.html())({
+        columns: this.collection.getMeta('columns')
+      });
+      _results.push(elem.append($(new_row_cont)));
     }
     return _results;
   },

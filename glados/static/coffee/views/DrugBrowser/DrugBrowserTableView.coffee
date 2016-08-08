@@ -22,20 +22,18 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
 
       elem.append($(header_row_cont))
 
+    for item in @collection.getCurrentPage()
 
-    console.log(@collection)
-
-    for drug in @collection.getCurrentPage()
+      columns_val = @collection.getMeta('columns').map (col) ->
+        col['value'] = item.get(col.comparator)
+        col['has_link'] = col.link_base?
+        col['link_url'] = col['link_base'].replace('$$$', col['value']) unless !col['has_link']
 
       new_row_cont = Handlebars.compile( template.html() )
-        molecule_chembl_id: drug.get('molecule_chembl_id')
-        molecule_type: drug.get('molecule_type')
-        pref_name: drug.get('pref_name')
-        max_phase: drug.get('max_phase')
+        columns: @collection.getMeta('columns')
 
       elem.append($(new_row_cont))
 
-      console.log('add row!')
 
   clearTable: ->
 
