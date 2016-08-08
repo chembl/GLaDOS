@@ -12,10 +12,10 @@ DrugBrowserApp = (function() {
     return drugList;
   };
 
-  DrugBrowserApp.initBrowserAsTable = function(model, top_level_elem) {
+  DrugBrowserApp.initBrowserAsTable = function(col, top_level_elem) {
     var asTableView;
     asTableView = new DrugBrowserTableView({
-      model: model,
+      collection: col,
       el: top_level_elem
     });
     return asTableView;

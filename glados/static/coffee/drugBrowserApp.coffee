@@ -14,10 +14,10 @@ class DrugBrowserApp
   # -------------------------------------------------------------
 
   # This initialises the view of the broswer as a table. 
-  @initBrowserAsTable = (model, top_level_elem) ->
+  @initBrowserAsTable = (col, top_level_elem) ->
 
     asTableView = new DrugBrowserTableView
-      model: model
+      collection: col
       el: top_level_elem
 
     return asTableView
