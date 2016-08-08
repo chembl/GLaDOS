@@ -2,6 +2,12 @@
 var PaginatedViewExt;
 
 PaginatedViewExt = {
+  events: {
+    'click .page-selector': 'getPage',
+    'change .change-page-size': 'changePageSize',
+    'click .sort': 'sortCollection',
+    'input .search': 'setSearch'
+  },
   getPage: function(event) {
     var clicked, current_page, requested_page_num;
     clicked = $(event.currentTarget);

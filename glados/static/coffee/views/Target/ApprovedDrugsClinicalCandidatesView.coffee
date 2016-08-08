@@ -7,12 +7,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
 
-  events:
-    'click .page-selector': 'getPage'
-    'change .change-page-size': 'changePageSize'
-    'click .sort': 'sortCollection'
-    'input .search': 'setSearch'
-
   render: ->
 
     if @collection.size() == 0

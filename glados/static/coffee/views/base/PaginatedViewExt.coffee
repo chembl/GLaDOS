@@ -3,6 +3,12 @@
 # this way allows to easily handle multiple inheritance in the models.
 PaginatedViewExt =
 
+  events:
+    'click .page-selector': 'getPage'
+    'change .change-page-size': 'changePageSize'
+    'click .sort': 'sortCollection'
+    'input .search': 'setSearch'
+
   getPage: (event) ->
 
     clicked = $(event.currentTarget)
