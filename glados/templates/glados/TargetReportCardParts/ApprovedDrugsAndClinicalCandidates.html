@@ -48,7 +48,8 @@
 {% block table %}
 
 {% verbatim %}
-<script id="Handlebars-Target-ADCCRow-large" type="text/x-handlebars-template">
+
+<script id="Handlebars-Target-Paginated-Row-large" type="text/x-handlebars-template">
 
   <tr>
 
@@ -62,31 +63,11 @@
 
 </script>
 
-<script id="Handlebars-Target-TableHeader" type="text/x-handlebars-template">
-
-
-  <thead>
-
-    <tr>
-
-      {{#each columns}}
-        <th>{{this.name_to_show}}
-          {{#unless this.sort_disabled}}
-          <i class="fa {{sort_class}} sort"
-             aria-hidden="true" data-comparator="{{this.comparator}}"></i>
-          {{/unless}} </th>
-      {{/each}}
-
-    </tr>
-
-  </thead>
-
-</script>
-
 {% endverbatim %}
 
 <table id='ADCCTable-large' class="compact-table striped hide-on-small-only ebi-links"
-       data-hb-template="Handlebars-Target-ADCCRow-large">
+       data-hb-template="Handlebars-Target-Paginated-Row-large"
+       data-hb-template-2="Handlebars-Common-Paginated-Header-large">
 
   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
@@ -128,24 +109,8 @@
 
 {% block pagination %}
 
-{% verbatim %}
-<script id="Handlebars-Target-ADCCPaginator" type="text/x-handlebars-template">
 
-  <ul class="pagination">
-    <li class="page-selector" data-page='previous'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-
-      {{#each pages}}
-        <li class="waves-effect page-selector active" data-page='{{this}}' ><a href="#!">{{this}}</a></li>
-      {{/each}}
-
-    <li class="waves-effect page-selector" data-page='next' ><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    <li class="waves-effect">Showing {{records_showing}} out of {{total_records}} records</li>
-  </ul>
-
-</script>
-{% endverbatim %}
-
-<div id='ADCCUL-paginator' data-hb-template="Handlebars-Target-ADCCPaginator">
+<div id='ADCCUL-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
 
    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 

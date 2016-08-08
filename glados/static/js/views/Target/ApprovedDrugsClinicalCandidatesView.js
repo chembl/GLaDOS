@@ -25,8 +25,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend({
     var adcc, elem, header_row_cont, header_template, new_row_cont, template, _i, _len, _ref, _results;
     elem = $(this.el).find('#' + elem_id);
     template = $('#' + elem.attr('data-hb-template'));
-    if (elem_id === 'ADCCTable-large') {
-      header_template = $('#Handlebars-Target-TableHeader');
+    if (elem.is('table')) {
+      header_template = $('#' + elem.attr('data-hb-template-2'));
       header_row_cont = Handlebars.compile(header_template.html())({
         columns: this.collection.getMeta('columns')
       });

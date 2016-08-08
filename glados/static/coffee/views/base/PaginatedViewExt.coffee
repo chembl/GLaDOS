@@ -9,6 +9,7 @@ PaginatedViewExt =
     'click .sort': 'sortCollection'
     'input .search': 'setSearch'
 
+
   getPage: (event) ->
 
     clicked = $(event.currentTarget)

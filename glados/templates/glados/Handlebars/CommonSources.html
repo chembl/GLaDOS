@@ -25,7 +25,46 @@
 
 </script>
 
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
+<!-- -- -- -- Pagination -- -- -- -- -- -- -->
+<!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
 
+
+<script id="Handlebars-Common-Paginated-Header-large" type="text/x-handlebars-template">
+
+
+  <thead>
+
+    <tr>
+
+      {{#each columns}}
+        <th>{{this.name_to_show}}
+          {{#unless this.sort_disabled}}
+          <i class="fa {{sort_class}} sort"
+             aria-hidden="true" data-comparator="{{this.comparator}}"></i>
+          {{/unless}} </th>
+      {{/each}}
+
+    </tr>
+
+  </thead>
+
+</script>
+
+<script id="Handlebars-Common-Paginated-UL" type="text/x-handlebars-template">
+
+  <ul class="pagination">
+    <li class="page-selector" data-page='previous'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+
+      {{#each pages}}
+        <li class="waves-effect page-selector active" data-page='{{this}}' ><a href="#!">{{this}}</a></li>
+      {{/each}}
+
+    <li class="waves-effect page-selector" data-page='next' ><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    <li class="waves-effect">Showing {{records_showing}} out of {{total_records}} records</li>
+  </ul>
+
+</script>
 
 
 

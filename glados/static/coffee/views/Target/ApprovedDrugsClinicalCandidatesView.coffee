@@ -31,9 +31,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend
     elem = $(@el).find('#' + elem_id)
     template = $('#' + elem.attr('data-hb-template'))
 
-    if elem_id == 'ADCCTable-large'
+    if elem.is('table')
 
-      header_template = $('#Handlebars-Target-TableHeader')
+      header_template = $('#' + elem.attr('data-hb-template-2'))
       header_row_cont = Handlebars.compile( header_template.html() )
         columns: @collection.getMeta('columns')
 
