@@ -38,26 +38,48 @@ PaginatedViewExt = {
     return _results;
   },
   fillPaginator: function(elem_id) {
-    var current_page, elem, first_record, last_page, num, page_size, pages, records_in_page, template;
+    var current_page, elem, first_page_to_show, first_record, last_page, last_page_to_show, num, num_pages, page_size, pages, records_in_page, show_next_ellipsis, show_previous_ellipsis, template;
     elem = $(this.el).find('#' + elem_id);
     template = $('#' + elem.attr('data-hb-template'));
     current_page = this.collection.getMeta('current_page');
     records_in_page = this.collection.getMeta('records_in_page');
     page_size = this.collection.getMeta('page_size');
+    num_pages = this.collection.getMeta('total_pages');
     first_record = (current_page - 1) * page_size;
     last_page = first_record + records_in_page;
+    show_previous_ellipsis = false;
+    show_next_ellipsis = false;
+    if (num_pages < 5) {
+      first_page_to_show = 1;
+      last_page_to_show = num_pages;
+    } else if (current_page + 2 <= 5) {
+      first_page_to_show = 1;
+      last_page_to_show = 5;
+      show_next_ellipsis = true;
+    } else if (current_page + 2 < num_pages) {
+      first_page_to_show = current_page - 2;
+      last_page_to_show = current_page + 2;
+      show_previous_ellipsis = true;
+      show_next_ellipsis = true;
+    } else {
+      first_page_to_show = num_pages - 4;
+      last_page_to_show = num_pages;
+      show_previous_ellipsis = true;
+    }
     pages = (function() {
-      var _i, _ref, _results;
+      var _i, _results;
       _results = [];
-      for (num = _i = 1, _ref = this.collection.getMeta('total_pages'); 1 <= _ref ? _i <= _ref : _i >= _ref; num = 1 <= _ref ? ++_i : --_i) {
+      for (num = _i = first_page_to_show; first_page_to_show <= last_page_to_show ? _i <= last_page_to_show : _i >= last_page_to_show; num = first_page_to_show <= last_page_to_show ? ++_i : --_i) {
         _results.push(num);
       }
       return _results;
-    }).call(this);
+    })();
     elem.html(Handlebars.compile(template.html())({
       pages: pages,
       records_showing: first_record + '-' + last_page,
-      total_records: this.collection.getMeta('total_records')
+      total_records: this.collection.getMeta('total_records'),
+      show_next_ellipsis: show_next_ellipsis,
+      show_previous_ellipsis: show_previous_ellipsis
     }));
     this.activateCurrentPageButton();
     return this.enableDisableNextLastButtons();

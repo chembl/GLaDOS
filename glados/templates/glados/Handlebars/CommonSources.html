@@ -101,11 +101,19 @@
   <ul class="pagination">
     <li class="page-selector" data-page='previous'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
 
+      {{#if show_previous_ellipsis}}
+        <li class="disabled" >...</li>
+      {{/if}}
+
       {{#each pages}}
         <li class="waves-effect page-selector active" data-page='{{this}}' ><a href="#!">{{this}}</a></li>
       {{/each}}
+      {{#if show_next_ellipsis}}
+        <li class="disabled" >...</li>
+      {{/if}}
 
     <li class="waves-effect page-selector" data-page='next' ><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+
     <li class="waves-effect">Showing {{records_showing}} out of {{total_records}} records</li>
   </ul>
 
