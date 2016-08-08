@@ -6,33 +6,31 @@
 <div id='BCK-DrugBrowserMain' class="row grey lighten-5">
 
 
-     <table>
-        <thead>
-          <tr>
-              <th data-field="id">Name</th>
-              <th data-field="name">Item Name</th>
-              <th data-field="price">Item Price</th>
-          </tr>
-        </thead>
+  {% verbatim %}
 
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-        </tbody>
-      </table>
+  <script id="Handlebars-Target-Paginated-Row-large" type="text/x-handlebars-template">
+
+    <tr>
+
+      <td><a href="/compound_report_card/{{molecule_chembl_id}}" target="_blank">{{molecule_chembl_id}}</a></td>
+      <td>{{molecule_type}}</td>
+      <td>{{pref_name}}</td>
+      <td>{{max_phase}}</td>
+
+    </tr>
+
+  </script>
+
+  {% endverbatim %}
+
+  <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
+         data-hb-template="Handlebars-Target-Paginated-Row-large"
+         data-hb-template-2="Handlebars-Common-Paginated-Header-large">
+
+    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+  </table>
+
 
 
 
