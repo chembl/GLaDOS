@@ -160,12 +160,6 @@ describe "Paginated Collection", ->
 
     it "fetches the 5th page correctly", (done) ->
 
-      to_show = drugList.getCurrentPage()
-      chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-
-      console.log('page content before!!')
-      console.log(chembl_ids)
-
       drugList.setPage(5)
       setTimeout ->
 

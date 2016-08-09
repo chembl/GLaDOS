@@ -1652,13 +1652,6 @@ describe("Paginated Collection", function() {
       return done();
     });
     return it("fetches the 5th page correctly", function(done) {
-      var chembl_ids, to_show;
-      to_show = drugList.getCurrentPage();
-      chembl_ids = _.map(to_show, function(o) {
-        return o.get('molecule_chembl_id');
-      });
-      console.log('page content before!!');
-      console.log(chembl_ids);
       drugList.setPage(5);
       return setTimeout(function() {
         assert_chembl_ids(drugList, ["CHEMBL1237061", "CHEMBL1200438", "CHEMBL1628502", "CHEMBL1628504", "CHEMBL1652442", "CHEMBL1429", "CHEMBL1628385", "CHEMBL1200980", "CHEMBL1628227", "CHEMBL1628233", "CHEMBL1628234", "CHEMBL1628240", "CHEMBL1201192", "CHEMBL1201495", "CHEMBL1201660", "CHEMBL1201718", "CHEMBL1237086", "CHEMBL564085", "CHEMBL1131", "CHEMBL1079604"]);
