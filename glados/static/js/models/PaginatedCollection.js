@@ -38,7 +38,9 @@ PaginatedCollection = Backbone.Collection.extend({
     total_pages = this.getMeta('total_pages');
     total_records = this.getMeta('total_records');
     page_size = this.getMeta('page_size');
-    if (current_page === total_pages) {
+    if (total_pages === 1) {
+      return this.setMeta('records_in_page', total_records);
+    } else if (current_page === total_pages) {
       return this.setMeta('records_in_page', total_records % page_size);
     } else {
       return this.setMeta('records_in_page', this.getMeta('page_size'));

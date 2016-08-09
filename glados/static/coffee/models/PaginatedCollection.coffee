@@ -42,7 +42,9 @@ PaginatedCollection = Backbone.Collection.extend
     total_records = @getMeta('total_records')
     page_size = @getMeta('page_size')
 
-    if current_page == total_pages
+    if total_pages == 1
+      @setMeta('records_in_page', total_records )
+    else if current_page == total_pages
       @setMeta('records_in_page', total_records % page_size)
     else
       @setMeta('records_in_page', @getMeta('page_size'))
