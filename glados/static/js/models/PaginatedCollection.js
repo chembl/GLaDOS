@@ -19,13 +19,13 @@ PaginatedCollection = Backbone.Collection.extend({
     this.calculateHowManyInCurrentPage();
     return this.trigger('do-repaint');
   },
-  resetMeta: function() {
+  resetMeta: function(page_meta) {
     console.log('resetting meta');
-    this.setMeta('total_records', this.models.length);
-    this.setMeta('current_page', 1);
-    this.calculateTotalPages();
-    this.calculateHowManyInCurrentPage();
-    return this.resetSortData();
+    if (this.getMeta('server_side') === true) {
+      return this.resetMetaSS(page_meta);
+    } else {
+      return this.resetMetaC();
+    }
   },
   calculateTotalPages: function() {
     var total_pages;
@@ -47,19 +47,18 @@ PaginatedCollection = Backbone.Collection.extend({
     }
   },
   getCurrentPage: function() {
-    var current_page, end, page_size, records_in_page, start, to_show;
-    page_size = this.getMeta('page_size');
-    current_page = this.getMeta('current_page');
-    records_in_page = this.getMeta('records_in_page');
-    start = (current_page - 1) * page_size;
-    end = start + records_in_page;
-    to_show = this.models.slice(start, +end + 1 || 9e9);
-    this.setMeta('to_show', to_show);
-    return to_show;
+    if (this.getMeta('server_side') === true) {
+      return this.getCurrentPageSS();
+    } else {
+      return this.getCurrentPageC();
+    }
   },
   setPage: function(page_num) {
-    this.setMeta('current_page', page_num);
-    return this.trigger('do-repaint');
+    if (this.getMeta('server_side') === true) {
+      return this.setPageSS(page_num);
+    } else {
+      return this.setPageC(page_num);
+    }
   },
   sortCollection: function(comparator) {
     var col, columns, is_descending, _i, _len;
@@ -115,12 +114,56 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return _results;
   },
-  getPaginatedURL: function(url) {
-    var current_page, limit_str, page_size, page_str;
+  resetMetaC: function() {
+    this.setMeta('total_records', this.models.length);
+    this.setMeta('current_page', 1);
+    this.calculateTotalPages();
+    this.calculateHowManyInCurrentPage();
+    return this.resetSortData();
+  },
+  getCurrentPageC: function() {
+    var current_page, end, page_size, records_in_page, start, to_show;
     page_size = this.getMeta('page_size');
     current_page = this.getMeta('current_page');
+    records_in_page = this.getMeta('records_in_page');
+    start = (current_page - 1) * page_size;
+    end = start + records_in_page;
+    to_show = this.models.slice(start, +end + 1 || 9e9);
+    this.setMeta('to_show', to_show);
+    return to_show;
+  },
+  setPageC: function(page_num) {
+    this.setMeta('current_page', page_num);
+    return this.trigger('do-repaint');
+  },
+  resetMetaSS: function(page_meta) {
+    console.log('reset meta server side!');
+    console.log(page_meta);
+    console.log('page_meta ^^^');
+    this.setMeta('total_records', page_meta.total_count);
+    this.setMeta('page_size', page_meta.limit);
+    this.setMeta('current_page', (page_meta.offset / page_meta.limit) + 1);
+    this.setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit));
+    this.setMeta('records_in_page', page_meta.records_in_page);
+    return console.log(this.meta);
+  },
+  getCurrentPageSS: function() {
+    return this.models;
+  },
+  setPageSS: function(page_num) {
+    var base_url, paginated_url;
+    console.log('fetching page!!');
+    console.log(page_num);
+    base_url = this.getMeta('base_url');
+    paginated_url = this.getPaginatedURL(base_url, page_num);
+    this.fetch();
+    return console.log(paginated_url);
+  },
+  getPaginatedURL: function(url, page_num) {
+    var limit_str, page_size, page_str;
+    page_size = this.getMeta('page_size');
     limit_str = 'limit=' + page_size;
-    page_str = 'offset=' + (current_page - 1) * page_size;
+    page_str = 'offset=' + (page_num - 1) * page_size;
     return url + '&' + limit_str + '&' + page_str;
   }
 });

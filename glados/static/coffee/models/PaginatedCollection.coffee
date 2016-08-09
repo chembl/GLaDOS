@@ -21,14 +21,21 @@ PaginatedCollection = Backbone.Collection.extend
     @trigger('do-repaint')
 
   # assuming that I have all the records.
-  resetMeta: ->
+  # Meta data is:
+  #  server_side -- true if you expect that each page is fetched on demand by the server.
+  #  total_records
+  #  current_page
+  #  total_pages
+  #  records_in_page -- How many records are in the current page
+  #  sorting data per column.
+  #
+  resetMeta: (page_meta) ->
 
     console.log('resetting meta')
-    @setMeta('total_records', @models.length)
-    @setMeta('current_page', 1)
-    @calculateTotalPages()
-    @calculateHowManyInCurrentPage()
-    @resetSortData()
+    if @getMeta('server_side') == true
+      @resetMetaSS(page_meta)
+    else
+      @resetMetaC()
 
   calculateTotalPages: ->
 
@@ -51,21 +58,17 @@ PaginatedCollection = Backbone.Collection.extend
 
   getCurrentPage: ->
 
-    page_size = @getMeta('page_size')
-    current_page = @getMeta('current_page')
-    records_in_page = @getMeta('records_in_page')
-
-    start = (current_page - 1) * page_size
-    end = start + records_in_page
-
-    to_show = @models[start..end]
-    @setMeta('to_show', to_show)
-    return to_show
+    if @getMeta('server_side') == true
+      @getCurrentPageSS()
+    else
+      @getCurrentPageC()
 
   setPage: (page_num) ->
 
-    @setMeta('current_page', page_num)
-    @trigger('do-repaint')
+    if @getMeta('server_side') == true
+      @setPageSS(page_num)
+    else
+      @setPageC(page_num)
 
   sortCollection: (comparator) ->
 
@@ -115,13 +118,72 @@ PaginatedCollection = Backbone.Collection.extend
       col.is_sorting = 0
       col.sort_class = 'fa-sort'
 
-  #
-  getPaginatedURL: (url) ->
+  # ------------------------------------------------------------
+  # -- Client Side!!!
+  # ------------------------------------------------------------
+
+  resetMetaC: ->
+
+    @setMeta('total_records', @models.length)
+    @setMeta('current_page', 1)
+    @calculateTotalPages()
+    @calculateHowManyInCurrentPage()
+    @resetSortData()
+
+  getCurrentPageC: ->
 
     page_size = @getMeta('page_size')
     current_page = @getMeta('current_page')
+    records_in_page = @getMeta('records_in_page')
+
+    start = (current_page - 1) * page_size
+    end = start + records_in_page
+
+    to_show = @models[start..end]
+    @setMeta('to_show', to_show)
+    return to_show
+
+  setPageC: (page_num) ->
+
+    @setMeta('current_page', page_num)
+    @trigger('do-repaint')
+
+  # ------------------------------------------------------------
+  # -- Server Side!!!
+  # ------------------------------------------------------------
+
+  resetMetaSS: (page_meta) ->
+
+    console.log('reset meta server side!')
+    console.log(page_meta)
+    console.log('page_meta ^^^')
+    @setMeta('total_records', page_meta.total_count)
+    @setMeta('page_size', page_meta.limit)
+    @setMeta('current_page', (page_meta.offset / page_meta.limit) + 1)
+    @setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit) )
+    @setMeta('records_in_page', page_meta.records_in_page )
+
+    console.log(@meta)
+
+  getCurrentPageSS: ->
+
+    # allways the models represent the current page
+    return @models
+
+  setPageSS: (page_num) ->
+
+    console.log('fetching page!!')
+    console.log(page_num)
+    base_url = @getMeta('base_url')
+    paginated_url = @getPaginatedURL(base_url, page_num)
+    @fetch()
+    console.log(paginated_url)
+
+  getPaginatedURL: (url, page_num) ->
+
+    page_size = @getMeta('page_size')
 
     limit_str = 'limit=' + page_size
-    page_str = 'offset=' + (current_page - 1) * page_size
+    page_str = 'offset=' + (page_num - 1) * page_size
 
     return url + '&' + limit_str + '&' + page_str

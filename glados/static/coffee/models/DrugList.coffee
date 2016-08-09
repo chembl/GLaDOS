@@ -4,13 +4,16 @@ DrugList = PaginatedCollection.extend
 
   parse: (data) ->
 
+    data.page_meta.records_in_page = data.molecules.length
+    @resetMeta(data.page_meta)
+
     return data.molecules
 
   initialize: ->
 
-    @on 'reset', @resetMeta, @
-
     @meta =
+      server_side: true
+      base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4'
       page_size: 10
       current_page: 1
       to_show: []

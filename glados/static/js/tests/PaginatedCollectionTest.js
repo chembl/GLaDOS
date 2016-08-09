@@ -2,7 +2,7 @@
 
 describe("Paginated Collection", function() {
   var assert_chembl_ids;
-  describe("For a 3 elements collection", function() {
+  describe("A 3 elements collection", function() {
     var appDrugCCList, dataSmall;
     appDrugCCList = new ApprovedDrugClinicalCandidateList;
     dataSmall = [
@@ -87,10 +87,11 @@ describe("Paginated Collection", function() {
       return assert_chembl_ids(appDrugCCList, ["CHEMBL1200526", "CHEMBL614", "CHEMBL2218913"]);
     });
   });
-  describe("For a 5 elements collection, having 5 elements per page", function() {
+  describe("A 5 elements collection, having 5 elements per page", function() {
     var data5, drugList;
     drugList = new DrugList;
     drugList.setMeta('page_size', 5);
+    drugList.setMeta('server_side', true);
     data5 = [
       {
         atc_classifications: [],
@@ -462,7 +463,7 @@ describe("Paginated Collection", function() {
       return assert_chembl_ids(drugList, ["CHEMBL6939", "CHEMBL22", "CHEMBL6941", "CHEMBL6942", "CHEMBL6944"]);
     });
   });
-  describe("For a 68 elements collection", function() {
+  describe("A 68 elements collection", function() {
     var appDrugCCList, dataBig;
     dataBig = [
       {
@@ -1589,7 +1590,7 @@ describe("Paginated Collection", function() {
       return expect(total_pages).toBe(14);
     });
     it("gives page 7 correctly with 5 per page", function() {
-      var chembl_ids, comparator, elem, expected_chembl_ids, to_show, _i, _len;
+      var chembl_ids, comparator, elem, expected_chembl_ids, to_show, _i, _len, _results;
       appDrugCCList.resetPageSize(5);
       appDrugCCList.setPage(7);
       to_show = appDrugCCList.getCurrentPage();
@@ -1598,11 +1599,12 @@ describe("Paginated Collection", function() {
       });
       expected_chembl_ids = ["CHEMBL1200975", "CHEMBL1200989", "CHEMBL1201012", "CHEMBL1201014", "CHEMBL1201064", "CHEMBL1201081"];
       comparator = _.zip(chembl_ids, expected_chembl_ids);
+      _results = [];
       for (_i = 0, _len = comparator.length; _i < _len; _i++) {
         elem = comparator[_i];
-        expect(elem[0]).toBe(elem[1]);
+        _results.push(expect(elem[0]).toBe(elem[1]));
       }
-      return console.log(chembl_ids);
+      return _results;
     });
     return it("gives last page correctly", function() {
       var chembl_ids, comparator, elem, expected_chembl_ids, to_show, _i, _len, _results;
@@ -1620,6 +1622,53 @@ describe("Paginated Collection", function() {
         _results.push(expect(elem[0]).toBe(elem[1]));
       }
       return _results;
+    });
+  });
+  describe("A server side collection", function() {
+    var drugList;
+    drugList = new DrugList;
+    drugList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4';
+    beforeAll(function(done) {
+      return drugList.fetch({
+        success: done
+      });
+    });
+    it("initialises correctly", function(done) {
+      var current_page, page_size, records_in_page, total_pages, total_records;
+      page_size = drugList.getMeta('page_size');
+      current_page = drugList.getMeta('current_page');
+      total_pages = drugList.getMeta('total_pages');
+      total_records = drugList.getMeta('total_records');
+      records_in_page = drugList.getMeta('records_in_page');
+      expect(page_size).toBe(20);
+      expect(current_page).toBe(1);
+      expect(total_pages).toBe(144);
+      expect(total_records).toBe(2879);
+      expect(records_in_page).toBe(20);
+      return done();
+    });
+    it("shows the first page correctly", function(done) {
+      assert_chembl_ids(drugList, ["CHEMBL113178", "CHEMBL1128", "CHEMBL1104", "CHEMBL1139", "CHEMBL1087", "CHEMBL64", "CHEMBL445", "CHEMBL490", "CHEMBL498", "CHEMBL271227", "CHEMBL264241", "CHEMBL435", "CHEMBL33", "CHEMBL42", "CHEMBL115", "CHEMBL1549", "CHEMBL422", "CHEMBL416", "CHEMBL1506", "CHEMBL1515"]);
+      return done();
+    });
+    return it("fetches the 5th page correctly", function(done) {
+      var chembl_ids, to_show;
+      to_show = drugList.getCurrentPage();
+      chembl_ids = _.map(to_show, function(o) {
+        return o.get('molecule_chembl_id');
+      });
+      console.log('page content before!!');
+      console.log(chembl_ids);
+      drugList.setPage(5);
+      return setTimeout(function() {
+        to_show = drugList.getCurrentPage();
+        chembl_ids = _.map(to_show, function(o) {
+          return o.get('molecule_chembl_id');
+        });
+        console.log('page content after!!');
+        console.log(chembl_ids);
+        return done();
+      }, 3);
     });
   });
   return assert_chembl_ids = function(collection, expected_chembl_ids) {

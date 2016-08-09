@@ -4,11 +4,14 @@ var DrugList;
 DrugList = PaginatedCollection.extend({
   model: Drug,
   parse: function(data) {
+    data.page_meta.records_in_page = data.molecules.length;
+    this.resetMeta(data.page_meta);
     return data.molecules;
   },
   initialize: function() {
-    this.on('reset', this.resetMeta, this);
     return this.meta = {
+      server_side: true,
+      base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4',
       page_size: 10,
       current_page: 1,
       to_show: [],
