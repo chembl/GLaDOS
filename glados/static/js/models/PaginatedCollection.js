@@ -10,14 +10,11 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.meta[attr];
   },
   resetPageSize: function(new_page_size) {
-    if (new_page_size === '') {
-      return;
+    if (this.getMeta('server_side') === true) {
+      return this.resetPageSizeSS(new_page_size);
+    } else {
+      return this.resetPageSizeC(new_page_size);
     }
-    this.setMeta('page_size', new_page_size);
-    this.setMeta('current_page', 1);
-    this.calculateTotalPages();
-    this.calculateHowManyInCurrentPage();
-    return this.trigger('do-repaint');
   },
   resetMeta: function(page_meta) {
     console.log('resetting meta');
@@ -136,6 +133,16 @@ PaginatedCollection = Backbone.Collection.extend({
     this.setMeta('current_page', page_num);
     return this.trigger('do-repaint');
   },
+  resetPageSizeC: function(new_page_size) {
+    if (new_page_size === '') {
+      return;
+    }
+    this.setMeta('page_size', new_page_size);
+    this.setMeta('current_page', 1);
+    this.calculateTotalPages();
+    this.calculateHowManyInCurrentPage();
+    return this.trigger('do-repaint');
+  },
   resetMetaSS: function(page_meta) {
     console.log('reset meta server side!');
     console.log(JSON.stringify(page_meta));
@@ -167,5 +174,12 @@ PaginatedCollection = Backbone.Collection.extend({
     limit_str = 'limit=' + page_size;
     page_str = 'offset=' + (page_num - 1) * page_size;
     return url + '&' + limit_str + '&' + page_str;
+  },
+  resetPageSizeSS: function(new_page_size) {
+    if (new_page_size === '') {
+      return;
+    }
+    this.setMeta('page_size', new_page_size);
+    return this.setPage(1);
   }
 });

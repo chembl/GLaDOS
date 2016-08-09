@@ -11,14 +11,13 @@ PaginatedCollection = Backbone.Collection.extend
 
   resetPageSize: (new_page_size) ->
 
-    if new_page_size == ''
-      return
+    if @getMeta('server_side') == true
+      @resetPageSizeSS(new_page_size)
+    else
+      @resetPageSizeC(new_page_size)
 
-    @setMeta('page_size', new_page_size)
-    @setMeta('current_page', 1)
-    @calculateTotalPages()
-    @calculateHowManyInCurrentPage()
-    @trigger('do-repaint')
+
+
 
   # assuming that I have all the records.
   # Meta data is:
@@ -148,6 +147,17 @@ PaginatedCollection = Backbone.Collection.extend
     @setMeta('current_page', page_num)
     @trigger('do-repaint')
 
+  resetPageSizeC: (new_page_size) ->
+
+    if new_page_size == ''
+      return
+
+    @setMeta('page_size', new_page_size)
+    @setMeta('current_page', 1)
+    @calculateTotalPages()
+    @calculateHowManyInCurrentPage()
+    @trigger('do-repaint')
+
   # ------------------------------------------------------------
   # -- Server Side!!!
   # ------------------------------------------------------------
@@ -189,3 +199,11 @@ PaginatedCollection = Backbone.Collection.extend
     page_str = 'offset=' + (page_num - 1) * page_size
 
     return url + '&' + limit_str + '&' + page_str
+
+  resetPageSizeSS: (new_page_size) ->
+
+    if new_page_size == ''
+      return
+
+    @setMeta('page_size', new_page_size)
+    @setPage(1)
