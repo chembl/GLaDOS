@@ -138,14 +138,15 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   resetMetaSS: function(page_meta) {
     console.log('reset meta server side!');
-    console.log(page_meta);
-    console.log('page_meta ^^^');
+    console.log(JSON.stringify(page_meta));
+    console.log("meta received!! ^^^");
     this.setMeta('total_records', page_meta.total_count);
     this.setMeta('page_size', page_meta.limit);
     this.setMeta('current_page', (page_meta.offset / page_meta.limit) + 1);
     this.setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit));
     this.setMeta('records_in_page', page_meta.records_in_page);
-    return console.log(this.meta);
+    console.log(JSON.stringify(this.meta));
+    return console.log("meta!! ^^^");
   },
   getCurrentPageSS: function() {
     return this.models;
@@ -156,6 +157,7 @@ PaginatedCollection = Backbone.Collection.extend({
     console.log(page_num);
     base_url = this.getMeta('base_url');
     paginated_url = this.getPaginatedURL(base_url, page_num);
+    this.url = paginated_url;
     this.fetch();
     return console.log(paginated_url);
   },

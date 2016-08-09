@@ -155,15 +155,16 @@ PaginatedCollection = Backbone.Collection.extend
   resetMetaSS: (page_meta) ->
 
     console.log('reset meta server side!')
-    console.log(page_meta)
-    console.log('page_meta ^^^')
+    console.log(JSON.stringify(page_meta) )
+    console.log("meta received!! ^^^")
     @setMeta('total_records', page_meta.total_count)
     @setMeta('page_size', page_meta.limit)
     @setMeta('current_page', (page_meta.offset / page_meta.limit) + 1)
     @setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit) )
     @setMeta('records_in_page', page_meta.records_in_page )
 
-    console.log(@meta)
+    console.log(JSON.stringify(@meta))
+    console.log("meta!! ^^^")
 
   getCurrentPageSS: ->
 
@@ -176,6 +177,7 @@ PaginatedCollection = Backbone.Collection.extend
     console.log(page_num)
     base_url = @getMeta('base_url')
     paginated_url = @getPaginatedURL(base_url, page_num)
+    @url = paginated_url
     @fetch()
     console.log(paginated_url)
 

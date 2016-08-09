@@ -169,16 +169,15 @@ describe "Paginated Collection", ->
       drugList.setPage(5)
       setTimeout ->
 
-        to_show = drugList.getCurrentPage()
-        chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-
-        console.log('page content after!!')
-        console.log(chembl_ids)
+        assert_chembl_ids(drugList, ["CHEMBL1237061", "CHEMBL1200438", "CHEMBL1628502", "CHEMBL1628504",
+          "CHEMBL1652442", "CHEMBL1429", "CHEMBL1628385", "CHEMBL1200980", "CHEMBL1628227", "CHEMBL1628233",
+          "CHEMBL1628234", "CHEMBL1628240", "CHEMBL1201192", "CHEMBL1201495", "CHEMBL1201660", "CHEMBL1201718",
+          "CHEMBL1237086", "CHEMBL564085", "CHEMBL1131", "CHEMBL1079604"])
 
         done()
 
 
-      , 3
+      , 5
 
 
 
