@@ -10,7 +10,8 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
     this.clearTable();
     this.fill_template('DBTable-large');
     this.fillPaginator('DB-paginator');
-    return this.activatePageSelector();
+    this.activatePageSelector();
+    return this.showVisibleContent();
   },
   fill_template: function(elem_id) {
     var columns_val, elem, header_row_cont, header_template, item, new_row_cont, template, _i, _len, _ref, _results;
@@ -43,5 +44,13 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
   },
   clearTable: function() {
     return $('#DBTable-large').empty();
+  },
+  showVisibleContent: function() {
+    $(this.el).find('#DB-MainContent').children('.card-preolader-to-hide').hide();
+    return $(this.el).find('#DB-MainContent').children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+  },
+  showPreloader: function() {
+    $(this.el).find('#DB-MainContent').children('.card-preolader-to-hide').show();
+    return $(this.el).find('#DB-MainContent').children(':not(.card-preolader-to-hide)').hide();
   }
 });

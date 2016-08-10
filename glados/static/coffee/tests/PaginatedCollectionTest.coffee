@@ -184,7 +184,7 @@ describe "Paginated Collection", ->
         chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
 
         assert_chembl_ids(drugList, ["CHEMBL113178", "CHEMBL1128", "CHEMBL1104", "CHEMBL1139", "CHEMBL1087"])
-        
+
         done()
 
       , 5

@@ -90,6 +90,9 @@ PaginatedViewExt = {
     if (clicked.hasClass('disabled')) {
       return;
     }
+    if (this.collection.getMeta('server_side') === true) {
+      this.showPreloader();
+    }
     requested_page_num = clicked.attr('data-page');
     current_page = this.collection.getMeta('current_page');
     if (current_page === requested_page_num) {
@@ -125,6 +128,9 @@ PaginatedViewExt = {
   },
   changePageSize: function(event) {
     var new_page_size, selector;
+    if (this.collection.getMeta('server_side') === true) {
+      this.showPreloader();
+    }
     selector = $(event.currentTarget);
     new_page_size = selector.val();
     return this.collection.resetPageSize(new_page_size);
@@ -134,11 +140,22 @@ PaginatedViewExt = {
   },
   sortCollection: function(event) {
     var comparator, order_icon;
+    if (this.collection.getMeta('server_side') === true) {
+      this.showPreloader();
+    }
     order_icon = $(event.currentTarget);
     comparator = order_icon.attr('data-comparator');
     return this.collection.sortCollection(comparator);
   },
   activatePageSelector: function() {
     return $('select').material_select();
+  },
+  showVisibleContent: function() {
+    $(this.el).children('.card-preolader-to-hide').hide();
+    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+  },
+  showPreloader: function() {
+    $(this.el).children('.card-preolader-to-hide').show();
+    return $(this.el).children(':not(.card-preolader-to-hide)').hide();
   }
 };

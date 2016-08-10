@@ -11,6 +11,7 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
     @fillPaginator('DB-paginator')
 
     @activatePageSelector()
+    @showVisibleContent()
 
   fill_template: (elem_id) ->
 
@@ -41,3 +42,11 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
   clearTable: ->
 
     $('#DBTable-large').empty()
+
+  showVisibleContent: ->
+    $(@el).find('#DB-MainContent').children('.card-preolader-to-hide').hide()
+    $(@el).find('#DB-MainContent').children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+
+  showPreloader: ->
+    $(@el).find('#DB-MainContent').children('.card-preolader-to-hide').show()
+    $(@el).find('#DB-MainContent').children(':not(.card-preolader-to-hide)').hide()

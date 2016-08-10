@@ -22,7 +22,11 @@
   </div>
 
 
-  <div class="row">
+  <div id='DB-MainContent' class="row" >
+
+    {% block card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
 
     <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
            data-hb-template="Handlebars-Common-Paginated-Row-large"
@@ -43,6 +47,7 @@
     </div>
 
   </div>
+
 
 
 </div>

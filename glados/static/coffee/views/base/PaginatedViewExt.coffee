@@ -87,6 +87,8 @@ PaginatedViewExt =
     if clicked.hasClass('disabled')
       return
 
+    @showPreloader() unless @collection.getMeta('server_side') != true
+
     requested_page_num = clicked.attr('data-page')
     current_page = @collection.getMeta('current_page')
 
@@ -124,6 +126,7 @@ PaginatedViewExt =
 
   changePageSize: (event) ->
 
+    @showPreloader() unless @collection.getMeta('server_side') != true
     selector = $(event.currentTarget)
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
@@ -132,9 +135,19 @@ PaginatedViewExt =
     console.log('search!!')
 
   sortCollection: (event) ->
+
+    @showPreloader() unless @collection.getMeta('server_side') != true
     order_icon = $(event.currentTarget)
     comparator = order_icon.attr('data-comparator')
     @collection.sortCollection(comparator)
 
   activatePageSelector: ->
     $('select').material_select();
+
+  showVisibleContent: ->
+    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+
+  showPreloader: ->
+    $(@el).children('.card-preolader-to-hide').show()
+    $(@el).children(':not(.card-preolader-to-hide)').hide()

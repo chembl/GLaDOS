@@ -58,10 +58,26 @@ PaginatedCollection = Backbone.Collection.extend({
     }
   },
   sortCollection: function(comparator) {
-    var col, columns, is_descending, _i, _len;
-    console.log('sort');
-    this.comparator = comparator;
+    if (this.getMeta('server_side') === true) {
+      return this.sortCollectionSS(comparator);
+    } else {
+      return this.sortCollectionC(comparator);
+    }
+  },
+  resetSortData: function() {
+    var col, columns, _i, _len, _results;
+    this.comparator = void 0;
     columns = this.getMeta('columns');
+    _results = [];
+    for (_i = 0, _len = columns.length; _i < _len; _i++) {
+      col = columns[_i];
+      col.is_sorting = 0;
+      _results.push(col.sort_class = 'fa-sort');
+    }
+    return _results;
+  },
+  setupColSorting: function(columns, comparator) {
+    var col, is_descending, _i, _len;
     is_descending = false;
     for (_i = 0, _len = columns.length; _i < _len; _i++) {
       col = columns[_i];
@@ -89,27 +105,7 @@ PaginatedCollection = Backbone.Collection.extend({
         }
       })();
     }
-    if (is_descending) {
-      this.sort({
-        silent: true
-      });
-      this.models = this.models.reverse();
-      return this.trigger('sort');
-    } else {
-      return this.sort();
-    }
-  },
-  resetSortData: function() {
-    var col, columns, _i, _len, _results;
-    this.comparator = void 0;
-    columns = this.getMeta('columns');
-    _results = [];
-    for (_i = 0, _len = columns.length; _i < _len; _i++) {
-      col = columns[_i];
-      col.is_sorting = 0;
-      _results.push(col.sort_class = 'fa-sort');
-    }
-    return _results;
+    return is_descending;
   },
   resetMetaC: function() {
     this.setMeta('total_records', this.models.length);
@@ -143,6 +139,22 @@ PaginatedCollection = Backbone.Collection.extend({
     this.calculateHowManyInCurrentPage();
     return this.trigger('do-repaint');
   },
+  sortCollectionC: function(comparator) {
+    var columns, is_descending;
+    console.log('sort');
+    this.comparator = comparator;
+    columns = this.getMeta('columns');
+    is_descending = this.setupColSorting(columns, comparator);
+    if (is_descending) {
+      this.sort({
+        silent: true
+      });
+      this.models = this.models.reverse();
+      return this.trigger('sort');
+    } else {
+      return this.sort();
+    }
+  },
   resetMetaSS: function(page_meta) {
     console.log('reset meta server side!');
     console.log(JSON.stringify(page_meta));
@@ -159,21 +171,34 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.models;
   },
   setPageSS: function(page_num) {
-    var base_url, paginated_url;
+    var base_url;
     console.log('fetching page!!');
     console.log(page_num);
     base_url = this.getMeta('base_url');
-    paginated_url = this.getPaginatedURL(base_url, page_num);
-    this.url = paginated_url;
+    this.url = this.getPaginatedURL(base_url, page_num);
     this.fetch();
-    return console.log(paginated_url);
+    return console.log(this.url);
   },
   getPaginatedURL: function(url, page_num) {
-    var limit_str, page_size, page_str;
+    var columns, comparator, field, full_url, limit_str, page_size, page_str, sorting, _i, _len;
     page_size = this.getMeta('page_size');
     limit_str = 'limit=' + page_size;
     page_str = 'offset=' + (page_num - 1) * page_size;
-    return url + '&' + limit_str + '&' + page_str;
+    full_url = url + '&' + limit_str + '&' + page_str;
+    columns = this.getMeta('columns');
+    console.log('---');
+    sorting = _.filter(columns, function(col) {
+      return col.is_sorting !== 0;
+    });
+    for (_i = 0, _len = sorting.length; _i < _len; _i++) {
+      field = sorting[_i];
+      comparator = field.comparator;
+      if (field.is_sorting !== 1) {
+        comparator = '-' + comparator;
+      }
+      full_url += '&order_by=' + comparator;
+    }
+    return full_url;
   },
   resetPageSizeSS: function(new_page_size) {
     if (new_page_size === '') {
@@ -181,5 +206,13 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     this.setMeta('page_size', new_page_size);
     return this.setPage(1);
+  },
+  sortCollectionSS: function(comparator) {
+    var columns;
+    console.log('sort from server!');
+    columns = this.getMeta('columns');
+    this.setupColSorting(columns, comparator);
+    this.url = this.getPaginatedURL(this.getMeta('base_url'), this.getMeta('current_page'));
+    return this.fetch();
   }
 });

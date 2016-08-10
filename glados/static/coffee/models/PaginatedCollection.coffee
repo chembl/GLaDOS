@@ -71,9 +71,24 @@ PaginatedCollection = Backbone.Collection.extend
 
   sortCollection: (comparator) ->
 
-    console.log('sort')
-    @comparator = comparator
+    if @getMeta('server_side') == true
+      @sortCollectionSS(comparator)
+    else
+      @sortCollectionC(comparator)
+
+
+  resetSortData: ->
+
+    @comparator = undefined
     columns = @getMeta('columns')
+    for col in columns
+      col.is_sorting = 0
+      col.sort_class = 'fa-sort'
+
+  # organises the information of the columns that are going to be sorted.
+  # returns true if the sorting needs to be descending, false otherwise.
+  setupColSorting: (columns, comparator) ->
+
     is_descending = false
 
     for col in columns
@@ -92,30 +107,16 @@ PaginatedCollection = Backbone.Collection.extend
         col.is_sorting = 0
 
       # now set the class for font-awesome
-      # this was the simplest way I found to fo it, handlebars doesn't provide a '==' expression
+      # this was the simplest way I found to do it, handlebars doesn't provide a '==' expression
 
       col.sort_class = switch col.is_sorting
         when -1 then 'fa-sort-desc'
         when 0 then 'fa-sort'
         when 1 then 'fa-sort-asc'
 
-
-    # check if sorting is descending
-    if is_descending
-      @sort({silent: true})
-      @models = @models.reverse()
-      @trigger('sort')
-    else
-      @sort()
+    return is_descending
 
 
-  resetSortData: ->
-
-    @comparator = undefined
-    columns = @getMeta('columns')
-    for col in columns
-      col.is_sorting = 0
-      col.sort_class = 'fa-sort'
 
   # ------------------------------------------------------------
   # -- Client Side!!!
@@ -158,6 +159,21 @@ PaginatedCollection = Backbone.Collection.extend
     @calculateHowManyInCurrentPage()
     @trigger('do-repaint')
 
+  sortCollectionC: (comparator) ->
+
+    console.log('sort')
+    @comparator = comparator
+    columns = @getMeta('columns')
+    is_descending = @setupColSorting(columns, comparator)
+
+    # check if sorting is descending
+    if is_descending
+      @sort({silent: true})
+      @models = @models.reverse()
+      @trigger('sort')
+    else
+      @sort()
+
   # ------------------------------------------------------------
   # -- Server Side!!!
   # ------------------------------------------------------------
@@ -186,10 +202,9 @@ PaginatedCollection = Backbone.Collection.extend
     console.log('fetching page!!')
     console.log(page_num)
     base_url = @getMeta('base_url')
-    paginated_url = @getPaginatedURL(base_url, page_num)
-    @url = paginated_url
+    @url = @getPaginatedURL(base_url, page_num)
     @fetch()
-    console.log(paginated_url)
+    console.log(@url)
 
   getPaginatedURL: (url, page_num) ->
 
@@ -197,8 +212,18 @@ PaginatedCollection = Backbone.Collection.extend
 
     limit_str = 'limit=' + page_size
     page_str = 'offset=' + (page_num - 1) * page_size
+    full_url = url + '&' + limit_str + '&' + page_str
 
-    return url + '&' + limit_str + '&' + page_str
+    columns = @getMeta('columns')
+
+    console.log('---')
+    sorting = _.filter(columns, (col) -> col.is_sorting != 0)
+    for field in sorting
+      comparator = field.comparator
+      comparator = '-' + comparator unless field.is_sorting == 1
+      full_url += '&order_by=' + comparator
+
+    return full_url
 
   resetPageSizeSS: (new_page_size) ->
 
@@ -207,3 +232,11 @@ PaginatedCollection = Backbone.Collection.extend
 
     @setMeta('page_size', new_page_size)
     @setPage(1)
+
+  sortCollectionSS: (comparator) ->
+
+    console.log('sort from server!')
+    columns = @getMeta('columns')
+    @setupColSorting(columns, comparator)
+    @url = @getPaginatedURL(@getMeta('base_url'), @getMeta('current_page'))
+    @fetch()
