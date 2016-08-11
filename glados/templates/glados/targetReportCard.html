@@ -58,7 +58,9 @@
         <div class="row">
 
          {% block tr %}
-            {% include "glados/TargetReportCardParts/Relations.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/TargetReportCardParts/Relations.html" %}
+            {% endwith %}
           {% endblock %}
 
         </div>

@@ -23,6 +23,9 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
     @fill_template('TR-UL-small')
     @fillPaginator('TR-paginator')
 
+    @showVisibleContent()
+    @activatePageSelector();
+
   clearTable: ->
 
     $('#TRTable-large').empty()
