@@ -45,6 +45,9 @@ class CellLineReportCardTest(ReportCardTester):
     source_efo_field = self.browser.find_element_by_id('Bck-CellLine_Cellosaurus')
     self.assertEqual(source_efo_field.text, 'CVCL_2676')
 
+    source_efo_field = self.browser.find_element_by_id('Bck-CellLine_lincs')
+    self.assertEqual(source_efo_field.text, 'LCL-2024')
+
 
   def test_celline_report_card_scenario_2(self):
 

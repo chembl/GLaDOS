@@ -88,7 +88,11 @@
 
   <tr>
     <td class="fixed-width-column-11"><b>LINCS Project:</b></td>
-    <td>---</td>
+    {{#if cl_lincs_id}}
+      <td id="Bck-CellLine_lincs"><a href="http://life.ccs.miami.edu/life/summary?mode=CellLine&source=LINCS&input={{cl_lincs_id}}" target="_blank">{{cl_lincs_id}}</a></td>
+    {{else}}
+      <td>---</td>
+    {{/if}}
   </tr>
 
 </table>

@@ -27,7 +27,8 @@ CellLineBasicInformationView = CardView.extend({
       tax_id: this.model.get('cell_source_tax_id'),
       clo_id: this.model.get('clo_id'),
       efo_id: this.model.get('efo_id'),
-      cellosaurus_id: this.model.get('cellosaurus_id')
+      cellosaurus_id: this.model.get('cellosaurus_id'),
+      cl_lincs_id: this.model.get('cl_lincs_id')
     }));
   }
 });

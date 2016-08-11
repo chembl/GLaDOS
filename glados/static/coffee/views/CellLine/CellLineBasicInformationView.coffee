@@ -33,4 +33,5 @@ CellLineBasicInformationView = CardView.extend
       clo_id: @model.get('clo_id')
       efo_id: @model.get('efo_id')
       cellosaurus_id: @model.get('cellosaurus_id')
+      cl_lincs_id: @model.get('cl_lincs_id')
 
