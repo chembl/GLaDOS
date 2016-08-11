@@ -1,0 +1,1 @@
+TargetRelation = Backbone.Model.extend({})
