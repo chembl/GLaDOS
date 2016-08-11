@@ -50,7 +50,7 @@ PaginatedViewExt =
     # this sets the window for showing the pages
     show_previous_ellipsis = false
     show_next_ellipsis = false
-    if num_pages < 5
+    if num_pages <= 5
       first_page_to_show = 1
       last_page_to_show = num_pages
     else if current_page + 2 <= 5
