@@ -27,6 +27,13 @@ TargetReportCardApp = (function() {
     return appDrugCCList;
   };
 
+  TargetReportCardApp.initTargetRelations = function(chembl_id) {
+    var targRelList;
+    targRelList = new TargetRelationList;
+    targRelList.url = 'https://wwwdev.ebi.ac.uk/chembl/api/data/target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
+    return targRelList;
+  };
+
   /* *
     * Initializes the TNCView (Target Name and Clasification View)
     * @param {Compound} model, base model for the view
@@ -85,6 +92,23 @@ TargetReportCardApp = (function() {
       el: top_level_elem
     });
     return adccView;
+  };
+
+  /* *
+    * Initializes the TRelationsView (Target Relations View)
+    * @param {Compound} rel_list, the collection of the relations of the target
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {TargetComponentsView} the view that has been created
+  */
+
+
+  TargetReportCardApp.initTRelationsView = function(rel_list, top_level_elem) {
+    var trelView;
+    trelView = new RelationsView({
+      collection: rel_list,
+      el: top_level_elem
+    });
+    return trelView;
   };
 
   return TargetReportCardApp;

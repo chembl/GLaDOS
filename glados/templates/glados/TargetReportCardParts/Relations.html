@@ -21,46 +21,35 @@
 {% block table %}
 
 
-  <table class="compact-table striped hide-on-small-only ebi-links">
+<table id='TRTable-large' class="compact-table striped hide-on-small-only ebi-links"
+       data-hb-template="Handlebars-Common-Paginated-Row-large"
+       data-hb-template-2="Handlebars-Common-Paginated-Header-large">
 
-    <tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-      <th>ChEMBL ID</th>
-      <th>Pref Name</th>
-      <th>Target Type</th>
-
-    </tr>
-
-    <tr>
-
-      <td><a href="/chembl/target/inspect/CHEMBL2111328">CHEMBL2111328</a></td>
-      <td>Inhibitor of NF-kappa-B kinase (IKK)</td>
-      <td>PROTEIN COMPLEX</td>
-
-    </tr>
-
-  </table>
+</table>
 
 {% endblock %}
 
 
 {% block collection %}
 
-<ul class="collection hide-on-med-and-up">
-  <li class="collection-item">
+<ul id='TR-UL-small' class="collection hide-on-med-and-up" data-hb-template="Handlebars-Common-Pagination-LI">
 
-    <p>
-
-      <b>ChEMBL ID:</b> <a href="/chembl/target/inspect/CHEMBL2111328">CHEMBL2111328</a><br>
-      <b>Pref Name:</b> Inhibitor of NF-kappa-B kinase (IKK)<br>
-      <b>Target Type:</b> PROTEIN COMPLEX<br>
-
-    </p>
-
-  </li>
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
 </ul>
 
 
+{% endblock %}
+
+{% block pagination %}
+
+
+<div id='TR-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</div>
 
 {% endblock %}

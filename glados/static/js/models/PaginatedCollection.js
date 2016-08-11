@@ -36,10 +36,13 @@ PaginatedCollection = Backbone.Collection.extend({
     total_records = this.getMeta('total_records');
     page_size = this.getMeta('page_size');
     if (total_pages === 1) {
-      return this.setMeta('records_in_page', total_records);
+      this.setMeta('records_in_page', total_records);
+      return console.log('CASE1');
     } else if (current_page === total_pages) {
+      console.log('CASE2');
       return this.setMeta('records_in_page', total_records % page_size);
     } else {
+      console.log('CASE3');
       return this.setMeta('records_in_page', this.getMeta('page_size'));
     }
   },
@@ -108,6 +111,7 @@ PaginatedCollection = Backbone.Collection.extend({
     return is_descending;
   },
   resetMetaC: function() {
+    console.log('reset meta client side!');
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
@@ -116,13 +120,28 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   getCurrentPageC: function() {
     var current_page, end, page_size, records_in_page, start, to_show;
+    console.log('---');
+    console.log('giving current page');
     page_size = this.getMeta('page_size');
     current_page = this.getMeta('current_page');
     records_in_page = this.getMeta('records_in_page');
     start = (current_page - 1) * page_size;
     end = start + records_in_page;
+    console.log('page_size');
+    console.log(page_size);
+    console.log('current_page');
+    console.log(current_page);
+    console.log('records_in_page');
+    console.log(records_in_page);
+    console.log('start');
+    console.log(start);
+    console.log('end');
+    console.log(end);
     to_show = this.models.slice(start, +end + 1 || 9e9);
     this.setMeta('to_show', to_show);
+    console.log('to_show');
+    console.log(to_show);
+    console.log('^^^');
     return to_show;
   },
   setPageC: function(page_num) {
@@ -141,7 +160,6 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   sortCollectionC: function(comparator) {
     var columns, is_descending;
-    console.log('sort');
     this.comparator = comparator;
     columns = this.getMeta('columns');
     is_descending = this.setupColSorting(columns, comparator);
@@ -156,28 +174,20 @@ PaginatedCollection = Backbone.Collection.extend({
     }
   },
   resetMetaSS: function(page_meta) {
-    console.log('reset meta server side!');
-    console.log(JSON.stringify(page_meta));
-    console.log("meta received!! ^^^");
     this.setMeta('total_records', page_meta.total_count);
     this.setMeta('page_size', page_meta.limit);
     this.setMeta('current_page', (page_meta.offset / page_meta.limit) + 1);
     this.setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit));
-    this.setMeta('records_in_page', page_meta.records_in_page);
-    console.log(JSON.stringify(this.meta));
-    return console.log("meta!! ^^^");
+    return this.setMeta('records_in_page', page_meta.records_in_page);
   },
   getCurrentPageSS: function() {
     return this.models;
   },
   setPageSS: function(page_num) {
     var base_url;
-    console.log('fetching page!!');
-    console.log(page_num);
     base_url = this.getMeta('base_url');
     this.url = this.getPaginatedURL(base_url, page_num);
-    this.fetch();
-    return console.log(this.url);
+    return this.fetch();
   },
   getPaginatedURL: function(url, page_num) {
     var columns, comparator, field, full_url, limit_str, page_size, page_str, sorting, _i, _len;
@@ -186,7 +196,6 @@ PaginatedCollection = Backbone.Collection.extend({
     page_str = 'offset=' + (page_num - 1) * page_size;
     full_url = url + '&' + limit_str + '&' + page_str;
     columns = this.getMeta('columns');
-    console.log('---');
     sorting = _.filter(columns, function(col) {
       return col.is_sorting !== 0;
     });
@@ -209,7 +218,6 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   sortCollectionSS: function(comparator) {
     var columns;
-    console.log('sort from server!');
     columns = this.getMeta('columns');
     this.setupColSorting(columns, comparator);
     this.url = this.getPaginatedURL(this.getMeta('base_url'), this.getMeta('current_page'));

@@ -21,6 +21,13 @@ class TargetReportCardApp
     appDrugCCList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?target_chembl_id=' + (chembl_id) + '&order_by=molecule_chembl_id&limit=1000'
     return appDrugCCList
 
+  @initTargetRelations = (chembl_id) ->
+
+    targRelList = new TargetRelationList
+
+    targRelList.url = 'https://wwwdev.ebi.ac.uk/chembl/api/data/target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
+    return targRelList
+
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------
@@ -52,6 +59,7 @@ class TargetReportCardApp
 
     return tcView
 
+
   ### *
     * Initializes the ADCC View (Approved Drugs Clinical Candidates View)
     * @param {Collection} adccList, the collection of approved drugs and clinical candidates
@@ -65,9 +73,24 @@ class TargetReportCardApp
 
     return adccView
 
+
   @initADCCTest = (adccList, top_level_elem) ->
     adccView = new ApprovedDrugsClinicalCandidatesViewTest
       collection: adccList
       el: top_level_elem
 
     return adccView
+
+  ### *
+    * Initializes the TRelationsView (Target Relations View)
+    * @param {Compound} rel_list, the collection of the relations of the target
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {TargetComponentsView} the view that has been created
+  ###
+  @initTRelationsView = (rel_list, top_level_elem) ->
+
+    trelView = new RelationsView
+      collection: rel_list
+      el: top_level_elem
+
+    return trelView

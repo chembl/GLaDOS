@@ -247,13 +247,16 @@ var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var target = TargetReportCardApp.initTarget(CHEMBL_ID);
 var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands(CHEMBL_ID);
+var targetRelations = TargetReportCardApp.initTargetRelations(CHEMBL_ID);
 
 var tNCView = TargetReportCardApp.initTNCView(target, $('#TNameClassificationCard'));
 var tComponentsView = TargetReportCardApp.initTComponentsView(target, $('#TComponentsCard'));
+var tRelView = TargetReportCardApp.initTRelationsView(targetRelations, $('#TRelationsCard'));
 var adccView = TargetReportCardApp.initADCC(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
 
 target.fetch();
 appDrugsClinCandsList.fetch();
+targetRelations.fetch({reset: true});
 
 {% endblock %}
 

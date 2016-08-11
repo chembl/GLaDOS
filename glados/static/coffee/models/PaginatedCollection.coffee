@@ -50,9 +50,12 @@ PaginatedCollection = Backbone.Collection.extend
 
     if total_pages == 1
       @setMeta('records_in_page', total_records )
+      console.log('CASE1')
     else if current_page == total_pages
+      console.log('CASE2')
       @setMeta('records_in_page', total_records % page_size)
     else
+      console.log('CASE3')
       @setMeta('records_in_page', @getMeta('page_size'))
 
   getCurrentPage: ->
@@ -124,6 +127,8 @@ PaginatedCollection = Backbone.Collection.extend
 
   resetMetaC: ->
 
+    console.log('reset meta client side!')
+
     @setMeta('total_records', @models.length)
     @setMeta('current_page', 1)
     @calculateTotalPages()
@@ -132,6 +137,8 @@ PaginatedCollection = Backbone.Collection.extend
 
   getCurrentPageC: ->
 
+    console.log '---'
+    console.log 'giving current page'
     page_size = @getMeta('page_size')
     current_page = @getMeta('current_page')
     records_in_page = @getMeta('records_in_page')
@@ -139,8 +146,26 @@ PaginatedCollection = Backbone.Collection.extend
     start = (current_page - 1) * page_size
     end = start + records_in_page
 
+    console.log 'page_size'
+    console.log page_size
+    console.log 'current_page'
+    console.log current_page
+    console.log 'records_in_page'
+    console.log records_in_page
+
+    console.log 'start'
+    console.log start
+    console.log 'end'
+    console.log end
+
     to_show = @models[start..end]
     @setMeta('to_show', to_show)
+
+    console.log 'to_show'
+    console.log to_show
+
+    console.log '^^^'
+
     return to_show
 
   setPageC: (page_num) ->
@@ -161,7 +186,6 @@ PaginatedCollection = Backbone.Collection.extend
 
   sortCollectionC: (comparator) ->
 
-    console.log('sort')
     @comparator = comparator
     columns = @getMeta('columns')
     is_descending = @setupColSorting(columns, comparator)
@@ -180,17 +204,11 @@ PaginatedCollection = Backbone.Collection.extend
 
   resetMetaSS: (page_meta) ->
 
-    console.log('reset meta server side!')
-    console.log(JSON.stringify(page_meta) )
-    console.log("meta received!! ^^^")
     @setMeta('total_records', page_meta.total_count)
     @setMeta('page_size', page_meta.limit)
     @setMeta('current_page', (page_meta.offset / page_meta.limit) + 1)
     @setMeta('total_pages', Math.ceil(page_meta.total_count / page_meta.limit) )
     @setMeta('records_in_page', page_meta.records_in_page )
-
-    console.log(JSON.stringify(@meta))
-    console.log("meta!! ^^^")
 
   getCurrentPageSS: ->
 
@@ -199,12 +217,9 @@ PaginatedCollection = Backbone.Collection.extend
 
   setPageSS: (page_num) ->
 
-    console.log('fetching page!!')
-    console.log(page_num)
     base_url = @getMeta('base_url')
     @url = @getPaginatedURL(base_url, page_num)
     @fetch()
-    console.log(@url)
 
   getPaginatedURL: (url, page_num) ->
 
@@ -216,7 +231,6 @@ PaginatedCollection = Backbone.Collection.extend
 
     columns = @getMeta('columns')
 
-    console.log('---')
     sorting = _.filter(columns, (col) -> col.is_sorting != 0)
     for field in sorting
       comparator = field.comparator
@@ -235,7 +249,6 @@ PaginatedCollection = Backbone.Collection.extend
 
   sortCollectionSS: (comparator) ->
 
-    console.log('sort from server!')
     columns = @getMeta('columns')
     @setupColSorting(columns, comparator)
     @url = @getPaginatedURL(@getMeta('base_url'), @getMeta('current_page'))
