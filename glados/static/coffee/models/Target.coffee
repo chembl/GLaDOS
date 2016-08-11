@@ -4,7 +4,7 @@ Target = Backbone.RelationalModel.extend
 
   initialize: ->
     @on 'change', @getProteinTargetClassification, @
-    @url = 'https://www.ebi.ac.uk/chembl/api/data/target/' + @get('target_chembl_id') + '.json'
+    @url = 'https://wwwdev.ebi.ac.uk/chembl/api/data/target/' + @get('target_chembl_id') + '.json'
 
   getProteinTargetClassification: ->
 

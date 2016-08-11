@@ -5,7 +5,7 @@ Target = Backbone.RelationalModel.extend({
   idAttribute: 'target_chembl_id',
   initialize: function() {
     this.on('change', this.getProteinTargetClassification, this);
-    return this.url = 'https://www.ebi.ac.uk/chembl/api/data/target/' + this.get('target_chembl_id') + '.json';
+    return this.url = 'https://wwwdev.ebi.ac.uk/chembl/api/data/target/' + this.get('target_chembl_id') + '.json';
   },
   getProteinTargetClassification: function() {
     var comp, comp_url, component_id, target, target_components, _i, _len, _results;
