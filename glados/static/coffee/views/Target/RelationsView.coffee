@@ -24,6 +24,9 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
     @fillPaginator('TR-paginator')
 
     @showVisibleContent()
+    @initEmbedModal('relations')
+    @activateModals()
+
     @activatePageSelector();
 
   clearTable: ->

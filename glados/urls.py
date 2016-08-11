@@ -35,6 +35,9 @@ urlpatterns = [
   url(r'^target_report_card/(?P<chembl_id>\w+)/embed/components/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/ComponentsToEmbed.html")), ),
 
+  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/relations/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/RelationsToEmbed.html")), ),
+
   url(r'^target_report_card/(?P<chembl_id>\w+)/embed/approved_drugs_clinical_candidates/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
 

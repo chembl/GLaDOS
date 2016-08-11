@@ -19,6 +19,12 @@
   {% block content %}
   {% endblock %}
 
+  <!-- handlebars templates -->
+{% block common_handlebars %}
+  {% include "glados/Handlebars/CommonSources.html" %}
+  {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
+{% endblock %}
+
 <!-- - - - - - - - - - - - - - - - - -->
 <!-- APIs -->
 <!-- - - - - - - - - - - - - - - - - -->

@@ -19,6 +19,8 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
     this.fill_template('TR-UL-small');
     this.fillPaginator('TR-paginator');
     this.showVisibleContent();
+    this.initEmbedModal('relations');
+    this.activateModals();
     return this.activatePageSelector();
   },
   clearTable: function() {
