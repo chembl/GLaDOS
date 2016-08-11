@@ -6,7 +6,7 @@ class JavascriptTest(ReportCardTester):
 
   def test_javascript_code_only(self):
 
-    self.getURL(self.HOST + '/js_tests/', self.SLEEP_TIME * 3)
+    self.getURL(self.HOST + '/js_tests/', self.SLEEP_TIME * 10)
 
     tests_summary = self.browser.find_element_by_class_name('jasmine-alert').find_element_by_class_name('jasmine-passed')
 

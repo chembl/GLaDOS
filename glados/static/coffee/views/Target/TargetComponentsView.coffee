@@ -31,4 +31,6 @@ TargetComponentsView = CardView.extend
     template = $('#' + div.attr('data-hb-template'))
 
     div.html Handlebars.compile(template.html())
+      component_description: @model.get('component_description')
+      relationship: @model.get('relationship')
       components: @model.get('target_components')

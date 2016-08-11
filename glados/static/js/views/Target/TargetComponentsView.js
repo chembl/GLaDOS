@@ -25,6 +25,8 @@ TargetComponentsView = CardView.extend({
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
     return div.html(Handlebars.compile(template.html())({
+      component_description: this.model.get('component_description'),
+      relationship: this.model.get('relationship'),
       components: this.model.get('target_components')
     }));
   }

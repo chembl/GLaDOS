@@ -1,6 +1,7 @@
 import unittest
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 class ReportCardTester(unittest.TestCase):
 
@@ -30,3 +31,9 @@ class ReportCardTester(unittest.TestCase):
     self.assertEqual(embed_trigger.get_attribute('href'), '%s/%s_report_card/%s/#embed-modal-for-%s' % (self.HOST, resource_type, chembl_id, card_id) )
     self.assertEqual(embed_trigger.get_attribute('data-embed-sect-name'), section_name)
     self.assertEqual(embed_trigger.get_attribute('data-resource-type'), resource_type)
+
+  def assert_table(self, table, texts_should_be):
+
+    rows = table.find_elements(By.TAG_NAME, "tr")[1::]
+    for row, text in zip(rows, texts_should_be):
+      self.assertEqual(row.text, text)

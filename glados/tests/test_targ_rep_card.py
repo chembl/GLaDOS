@@ -1,7 +1,6 @@
 from report_card_tester import ReportCardTester
 from selenium.webdriver.common.by import By
 
-
 class TargetReportCardTest(ReportCardTester):
   # --------------------------------------------------------------------------------------
   # Scenarios
@@ -75,29 +74,26 @@ class TargetReportCardTest(ReportCardTester):
     # --------------------------------------
     # Target Components
     # --------------------------------------
-    components_table = self.browser.find_element_by_id('BCK-Components-large')
-    rows = components_table.find_elements(By.TAG_NAME, "tr")[1::]
-    accessions_should_be = ['P0A7Z4', 'P0A8V2', 'P0A8T7', 'P0A800']
 
-    # Here we need to add the other lists for the other properties qhen they are available in the web services.
-    for row, accession in zip(rows, accessions_should_be):
-      accestion_td = row.find_element_by_class_name('Bck-Target-Component-Accession')
-      self.assertEqual(accestion_td.text, accession)
+    texts_should_be = ['DNA-directed RNA polymerase subunit alpha PROTEIN SUBUNIT P0A7Z4',
+                       'DNA-directed RNA polymerase subunit beta PROTEIN SUBUNIT P0A8V2',
+                       "DNA-directed RNA polymerase subunit beta' PROTEIN SUBUNIT P0A8T7",
+                       'DNA-directed RNA polymerase subunit omega PROTEIN SUBUNIT P0A800']
+
+    components_table = self.browser.find_element_by_id('BCK-Components-large')
+    self.assert_table(components_table, texts_should_be)
 
     # --------------------------------------
     # Approved Drugs and Clinical Candidates
     # --------------------------------------
 
     adcc_table = self.browser.find_element_by_id('ADCCTable-large')
-    rows = adcc_table.find_elements(By.TAG_NAME, "tr")[1::]
+    texts_should_be = ['CHEMBL1617 RIFAXIMIN Bacterial DNA-directed RNA polymerase inhibitor 4',
+                       'CHEMBL1660 RIFAPENTINE Bacterial DNA-directed RNA polymerase inhibitor 4',
+                       'CHEMBL374478 RIFAMPICIN Bacterial DNA-directed RNA polymerase inhibitor 4',
+                       'CHEMBL444633 RIFABUTIN Bacterial DNA-directed RNA polymerase inhibitor 4']
 
-    texts_should_be = ['CHEMBL1617 RIFAXIMIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
-                       'CHEMBL1660 RIFAPENTINE Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
-                       'CHEMBL374478 RIFAMPICIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed',
-                       'CHEMBL444633 RIFABUTIN Bacterial DNA-directed RNA polymerase inhibitor 4 PubMed']
-
-    for row, text in zip(rows, texts_should_be):
-       self.assertEqual(row.text, text)
+    self.assert_table(adcc_table, texts_should_be)
 
 
 
