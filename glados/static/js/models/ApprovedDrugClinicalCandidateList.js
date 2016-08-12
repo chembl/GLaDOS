@@ -5,8 +5,6 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend({
   model: ApprovedDrugClinicalCandidate,
   fetch: function() {
     var base_url2, drug_mechanisms, getDrugMechanisms, this_collection;
-    console.log('fetching:');
-    console.log(this.url);
     this_collection = this;
     drug_mechanisms = {};
     getDrugMechanisms = $.getJSON(this.url, function(data) {

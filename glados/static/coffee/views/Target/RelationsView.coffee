@@ -13,9 +13,6 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
       $('#TargetRelations').hide()
       return
 
-    console.log('render!')
-    console.log(@collection)
-
     @clearTable()
     @clearList()
 

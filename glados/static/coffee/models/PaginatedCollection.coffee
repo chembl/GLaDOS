@@ -30,7 +30,6 @@ PaginatedCollection = Backbone.Collection.extend
   #
   resetMeta: (page_meta) ->
 
-    console.log('resetting meta')
     if @getMeta('server_side') == true
       @resetMetaSS(page_meta)
     else
@@ -50,12 +49,9 @@ PaginatedCollection = Backbone.Collection.extend
 
     if total_pages == 1
       @setMeta('records_in_page', total_records )
-      console.log('CASE1')
     else if current_page == total_pages
-      console.log('CASE2')
       @setMeta('records_in_page', total_records % page_size)
     else
-      console.log('CASE3')
       @setMeta('records_in_page', @getMeta('page_size'))
 
   getCurrentPage: ->
@@ -127,8 +123,6 @@ PaginatedCollection = Backbone.Collection.extend
 
   resetMetaC: ->
 
-    console.log('reset meta client side!')
-
     @setMeta('total_records', @models.length)
     @setMeta('current_page', 1)
     @calculateTotalPages()
@@ -137,8 +131,6 @@ PaginatedCollection = Backbone.Collection.extend
 
   getCurrentPageC: ->
 
-    console.log '---'
-    console.log 'giving current page'
     page_size = @getMeta('page_size')
     current_page = @getMeta('current_page')
     records_in_page = @getMeta('records_in_page')
@@ -146,25 +138,8 @@ PaginatedCollection = Backbone.Collection.extend
     start = (current_page - 1) * page_size
     end = start + records_in_page
 
-    console.log 'page_size'
-    console.log page_size
-    console.log 'current_page'
-    console.log current_page
-    console.log 'records_in_page'
-    console.log records_in_page
-
-    console.log 'start'
-    console.log start
-    console.log 'end'
-    console.log end
-
     to_show = @models[start..end]
     @setMeta('to_show', to_show)
-
-    console.log 'to_show'
-    console.log to_show
-
-    console.log '^^^'
 
     return to_show
 

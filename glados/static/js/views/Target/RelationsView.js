@@ -11,8 +11,6 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
       $('#TargetRelations').hide();
       return;
     }
-    console.log('render!');
-    console.log(this.collection);
     this.clearTable();
     this.clearList();
     this.fill_template('TRTable-large');

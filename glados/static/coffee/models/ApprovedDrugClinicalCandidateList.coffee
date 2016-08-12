@@ -5,9 +5,6 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend
 
   fetch: ->
 
-
-    console.log('fetching:')
-    console.log(@url)
     this_collection = @
     drug_mechanisms = {}
 

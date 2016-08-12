@@ -49,3 +49,4 @@ DrugList = PaginatedCollection.extend
           'sort_class': 'fa-sort'
         }
       ]
+

@@ -17,7 +17,6 @@ PaginatedCollection = Backbone.Collection.extend({
     }
   },
   resetMeta: function(page_meta) {
-    console.log('resetting meta');
     if (this.getMeta('server_side') === true) {
       return this.resetMetaSS(page_meta);
     } else {
@@ -36,13 +35,10 @@ PaginatedCollection = Backbone.Collection.extend({
     total_records = this.getMeta('total_records');
     page_size = this.getMeta('page_size');
     if (total_pages === 1) {
-      this.setMeta('records_in_page', total_records);
-      return console.log('CASE1');
+      return this.setMeta('records_in_page', total_records);
     } else if (current_page === total_pages) {
-      console.log('CASE2');
       return this.setMeta('records_in_page', total_records % page_size);
     } else {
-      console.log('CASE3');
       return this.setMeta('records_in_page', this.getMeta('page_size'));
     }
   },
@@ -111,7 +107,6 @@ PaginatedCollection = Backbone.Collection.extend({
     return is_descending;
   },
   resetMetaC: function() {
-    console.log('reset meta client side!');
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
@@ -120,28 +115,13 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   getCurrentPageC: function() {
     var current_page, end, page_size, records_in_page, start, to_show;
-    console.log('---');
-    console.log('giving current page');
     page_size = this.getMeta('page_size');
     current_page = this.getMeta('current_page');
     records_in_page = this.getMeta('records_in_page');
     start = (current_page - 1) * page_size;
     end = start + records_in_page;
-    console.log('page_size');
-    console.log(page_size);
-    console.log('current_page');
-    console.log(current_page);
-    console.log('records_in_page');
-    console.log(records_in_page);
-    console.log('start');
-    console.log(start);
-    console.log('end');
-    console.log(end);
     to_show = this.models.slice(start, +end + 1 || 9e9);
     this.setMeta('to_show', to_show);
-    console.log('to_show');
-    console.log(to_show);
-    console.log('^^^');
     return to_show;
   },
   setPageC: function(page_num) {
