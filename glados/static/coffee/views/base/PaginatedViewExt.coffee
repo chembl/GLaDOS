@@ -21,6 +21,9 @@ PaginatedViewExt =
         columns: @collection.getMeta('columns')
 
       elem.append($(header_row_cont))
+      # make sure that the rows are appended to the tbody, otherwise the striped class won't work
+      elem.append($('<tbody>'))
+
 
     for item in @collection.getCurrentPage()
 

@@ -18,6 +18,7 @@ PaginatedViewExt = {
         columns: this.collection.getMeta('columns')
       });
       elem.append($(header_row_cont));
+      elem.append($('<tbody>'));
     }
     _ref = this.collection.getCurrentPage();
     _results = [];
