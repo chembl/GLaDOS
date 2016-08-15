@@ -10,6 +10,10 @@ describe "Paginated Collection", ->
     beforeAll ->
       appDrugCCList.reset(dataSmall)
 
+    afterAll: ->
+      appDrugCCList = new ApprovedDrugClinicalCandidateList
+      appDrugCCList.reset(dataSmall)
+
     it "initialises correctly", ->
 
       page_size = appDrugCCList.getMeta('page_size')
@@ -42,6 +46,12 @@ describe "Paginated Collection", ->
       appDrugCCList.sortCollection('pref_name')
 
       assert_chembl_ids(appDrugCCList, ["CHEMBL1200526", "CHEMBL614", "CHEMBL2218913"])
+
+    it "searches for a CHEMBL1200526", ->
+
+      appDrugCCList.setSearch('CHEMBL1200526')
+      assert_chembl_ids(appDrugCCList, ["CHEMBL1200526"])
+
 
   describe "A 5 elements collection, having 5 elements per page", ->
 

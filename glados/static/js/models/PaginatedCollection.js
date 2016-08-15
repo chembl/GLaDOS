@@ -3,7 +3,10 @@ var PaginatedCollection;
 
 PaginatedCollection = Backbone.Collection.extend({
   setMeta: function(attr, value) {
-    this.meta[attr] = parseInt(value);
+    if (_.isString(value)) {
+      value = parseInt(value);
+    }
+    this.meta[attr] = value;
     return this.trigger('meta-changed');
   },
   getMeta: function(attr) {
@@ -106,12 +109,39 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return is_descending;
   },
+  setSearch: function(term) {
+    if (this.getMeta('server_side') === true) {
+      return this.setSearchSS(term);
+    } else {
+      return this.setSearchC(term);
+    }
+  },
+  resetSearchStruct: function() {
+    var comparator, full_search_str, model, search_dict, _i, _j, _len, _len1, _ref, _ref1;
+    if (!(this.getMeta('original_models') != null)) {
+      this.setMeta('original_models', this.models);
+      search_dict = {};
+      _ref = this.models;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        model = _ref[_i];
+        full_search_str = '';
+        _ref1 = _.pluck(this.getMeta('columns'), 'comparator');
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          comparator = _ref1[_j];
+          full_search_str += ' ' + model.get(comparator);
+        }
+        search_dict[full_search_str.toUpperCase()] = model;
+      }
+      return this.setMeta('search_dict', search_dict);
+    }
+  },
   resetMetaC: function() {
     this.setMeta('total_records', this.models.length);
     this.setMeta('current_page', 1);
     this.calculateTotalPages();
     this.calculateHowManyInCurrentPage();
-    return this.resetSortData();
+    this.resetSortData();
+    return this.resetSearchStruct();
   },
   getCurrentPageC: function() {
     var current_page, end, page_size, records_in_page, start, to_show;
@@ -152,6 +182,25 @@ PaginatedCollection = Backbone.Collection.extend({
     } else {
       return this.sort();
     }
+  },
+  setSearchC: function(term) {
+    var answer, key, keys, model, new_models, original_models, search_dict, _i, _len;
+    this.setMeta('force_show', true);
+    term = term.toUpperCase();
+    original_models = this.getMeta('original_models');
+    search_dict = this.getMeta('search_dict');
+    keys = Object.keys(search_dict);
+    answer = [];
+    for (_i = 0, _len = keys.length; _i < _len; _i++) {
+      key = keys[_i];
+      model = search_dict[key];
+      model.set('show', key.indexOf(term) !== -1);
+    }
+    new_models = _.filter(original_models, function(item) {
+      return item.get('show');
+    });
+    this.models = new_models;
+    return this.reset(new_models);
   },
   resetMetaSS: function(page_meta) {
     this.setMeta('total_records', page_meta.total_count);
@@ -202,5 +251,8 @@ PaginatedCollection = Backbone.Collection.extend({
     this.setupColSorting(columns, comparator);
     this.url = this.getPaginatedURL(this.getMeta('base_url'), this.getMeta('current_page'));
     return this.fetch();
+  },
+  setSearchSS: function(term) {
+    return console.log('search to implement!');
   }
 });

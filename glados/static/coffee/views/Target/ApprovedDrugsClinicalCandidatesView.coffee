@@ -9,7 +9,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend
 
   render: ->
 
-    if @collection.size() == 0
+    if @collection.size() == 0 and !@collection.getMeta('force_show')
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 

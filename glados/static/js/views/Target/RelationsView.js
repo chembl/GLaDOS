@@ -7,7 +7,7 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
     return this.resource_type = 'Target';
   },
   render: function() {
-    if (this.collection.size() === 0) {
+    if (this.collection.size() === 0 && !this.collection.getMeta('force_show')) {
       $('#TargetRelations').hide();
       return;
     }

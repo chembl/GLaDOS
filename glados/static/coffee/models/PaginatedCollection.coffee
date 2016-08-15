@@ -3,7 +3,11 @@
 PaginatedCollection = Backbone.Collection.extend
 
   setMeta: (attr, value) ->
-    @meta[attr] = parseInt(value)
+
+    if _.isString(value)
+      value = parseInt(value)
+
+    @meta[attr] = value
     @trigger('meta-changed')
 
   getMeta: (attr) ->
@@ -15,9 +19,6 @@ PaginatedCollection = Backbone.Collection.extend
       @resetPageSizeSS(new_page_size)
     else
       @resetPageSizeC(new_page_size)
-
-
-
 
   # assuming that I have all the records.
   # Meta data is:
@@ -115,11 +116,38 @@ PaginatedCollection = Backbone.Collection.extend
 
     return is_descending
 
+  setSearch: (term)->
+
+    if @getMeta('server_side') == true
+      @setSearchSS(term)
+    else
+      @setSearchC(term)
+
 
 
   # ------------------------------------------------------------
   # -- Client Side!!!
   # ------------------------------------------------------------
+
+  resetSearchStruct: ->
+
+    # only set this once, when the collection is fresh from server
+    if !@getMeta('original_models')?
+      @setMeta('original_models', @models)
+
+      search_dict = {}
+      for model in @models
+
+        # very simple search to see if it works for now
+        full_search_str = ''
+        for comparator in _.pluck(@getMeta('columns'), 'comparator')
+          full_search_str += ' ' + model.get(comparator)
+
+        # this will end up ignoring duplicate rows
+        search_dict[full_search_str.toUpperCase()] = model
+
+      @setMeta('search_dict', search_dict)
+
 
   resetMetaC: ->
 
@@ -128,6 +156,7 @@ PaginatedCollection = Backbone.Collection.extend
     @calculateTotalPages()
     @calculateHowManyInCurrentPage()
     @resetSortData()
+    @resetSearchStruct()
 
   getCurrentPageC: ->
 
@@ -172,6 +201,27 @@ PaginatedCollection = Backbone.Collection.extend
       @trigger('sort')
     else
       @sort()
+
+  setSearchC: (term) ->
+
+    @setMeta('force_show', true)
+    term = term.toUpperCase()
+    original_models = @getMeta('original_models')
+
+    search_dict = @getMeta('search_dict')
+    keys = Object.keys(search_dict)
+
+    answer = []
+
+    for key in keys
+
+      model = search_dict[key]
+      model.set('show', key.indexOf(term) != -1)
+
+    new_models = _.filter(original_models, (item) -> item.get('show') )
+
+    @models = new_models
+    @reset(new_models)
 
   # ------------------------------------------------------------
   # -- Server Side!!!
@@ -228,3 +278,6 @@ PaginatedCollection = Backbone.Collection.extend
     @setupColSorting(columns, comparator)
     @url = @getPaginatedURL(@getMeta('base_url'), @getMeta('current_page'))
     @fetch()
+
+  setSearchSS: (term) ->
+    console.log('search to implement!')

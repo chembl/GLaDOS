@@ -135,7 +135,8 @@ PaginatedViewExt =
     @collection.resetPageSize(new_page_size)
 
   setSearch: ->
-    console.log('search!!')
+    term = $(@el).find('.search').val()
+    @collection.setSearch(term)
 
   sortCollection: (event) ->
 

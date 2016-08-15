@@ -137,7 +137,9 @@ PaginatedViewExt = {
     return this.collection.resetPageSize(new_page_size);
   },
   setSearch: function() {
-    return console.log('search!!');
+    var term;
+    term = $(this.el).find('.search').val();
+    return this.collection.setSearch(term);
   },
   sortCollection: function(event) {
     var comparator, order_icon;

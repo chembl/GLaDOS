@@ -59,6 +59,12 @@ describe("Paginated Collection", function() {
     beforeAll(function() {
       return appDrugCCList.reset(dataSmall);
     });
+    ({
+      afterAll: function() {
+        appDrugCCList = new ApprovedDrugClinicalCandidateList;
+        return appDrugCCList.reset(dataSmall);
+      }
+    });
     it("initialises correctly", function() {
       var current_page, page_size, records_in_page, total_pages, total_records;
       page_size = appDrugCCList.getMeta('page_size');
@@ -79,12 +85,16 @@ describe("Paginated Collection", function() {
       appDrugCCList.sortCollection('pref_name');
       return assert_chembl_ids(appDrugCCList, ["CHEMBL2218913", "CHEMBL614", "CHEMBL1200526"]);
     });
-    return it("sorts the collection by name (descending)", function() {
+    it("sorts the collection by name (descending)", function() {
       appDrugCCList.reset(dataSmall);
       appDrugCCList.resetMeta();
       appDrugCCList.sortCollection('pref_name');
       appDrugCCList.sortCollection('pref_name');
       return assert_chembl_ids(appDrugCCList, ["CHEMBL1200526", "CHEMBL614", "CHEMBL2218913"]);
+    });
+    return it("searches for a CHEMBL1200526", function() {
+      appDrugCCList.setSearch('CHEMBL1200526');
+      return assert_chembl_ids(appDrugCCList, ["CHEMBL1200526"]);
     });
   });
   describe("A 5 elements collection, having 5 elements per page", function() {
