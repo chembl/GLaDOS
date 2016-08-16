@@ -9,6 +9,50 @@
     <span class="card-title"><i class="icon icon-generic" data-icon="u"></i>Browse Drugs</span>
   </h2>
 
+  <div class="row">
+    <div class="col m6 s12">
+
+      <div class="input-field">
+        <input placeholder="Search" id="first_name" type="text" class="validate search">
+      </div>
+
+    </div>
+  </div>
+
+  {% verbatim %}
+
+  <script id="Handlebars-DrugBrowser-Card" type="text/x-handlebars-template">
+
+    <div class="col s12 m6 l4">
+      <div class="card grey lighten-5">
+
+        <div class="card-image">
+          <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg">
+        </div>
+        <div class="card-content">
+
+          {{#each columns}}
+
+            {{#if this.has_link}}
+
+              <p> <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+              </p>
+
+            {{else}}
+              <p>{{this.value}}
+              </p>
+            {{/if}}
+          {{/each}}
+
+        </div>
+      </div>
+
+    </div>
+    {% endverbatim %}
+
+  </script>
+
+
   <div id="DrugInfBrowser">
     <!-- Backbone fills this with the infinity browser view -->
   </div>
@@ -17,8 +61,10 @@
 {% endblock %}
 
 {% block custom_js_inline %}
+var drugList = DrugBrowserApp.initDrugList();
 
-infBrowser = DrugBrowserApp.initInfinityBrowserView($('DrugInfBrowser'));
-infBrowser.render();
+var infBrowser = DrugBrowserApp.initInfinityBrowserView(drugList, $('#DrugInfBrowser'));
+drugList.fetch({reset: true});
+
 
 {% endblock %}

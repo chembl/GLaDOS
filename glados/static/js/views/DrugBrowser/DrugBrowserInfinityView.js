@@ -2,7 +2,23 @@
 var DrugBrowserInfinityView;
 
 DrugBrowserInfinityView = Backbone.View.extend({
+  initialize: function() {
+    return this.collection.on('reset do-repaint sort', this.render, this);
+  },
   render: function() {
-    return console.log('render!');
+    var $newContent, $row, card_cont, model, _i, _len, _ref, _results;
+    $row = $('<div class="row">');
+    $(this.el).append($row);
+    _ref = this.collection.models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      model = _ref[_i];
+      card_cont = Handlebars.compile($('#Handlebars-DrugBrowser-Card').html())({
+        columns: this.collection.getMeta('columns')
+      });
+      $newContent = $(card_cont);
+      _results.push($row.append($newContent));
+    }
+    return _results;
   }
 });

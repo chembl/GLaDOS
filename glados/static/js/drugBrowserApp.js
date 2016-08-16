@@ -21,9 +21,11 @@ DrugBrowserApp = (function() {
     return asTableView;
   };
 
-  DrugBrowserApp.initInfinityBrowserView = function(top_level_elem) {
+  DrugBrowserApp.initInfinityBrowserView = function(col, top_level_elem) {
     var infView;
+    col.setMeta('page_size', 50);
     infView = new DrugBrowserInfinityView({
+      collection: col,
       el: top_level_elem
     });
     return infView;

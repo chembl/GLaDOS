@@ -23,9 +23,11 @@ class DrugBrowserApp
     return asTableView
 
   # This initialises the infinity view of the browser
-  @initInfinityBrowserView = (top_level_elem) ->
+  @initInfinityBrowserView = (col, top_level_elem) ->
 
+    col.setMeta('page_size', 50)
     infView = new DrugBrowserInfinityView
+      collection: col
       el: top_level_elem
 
     return infView

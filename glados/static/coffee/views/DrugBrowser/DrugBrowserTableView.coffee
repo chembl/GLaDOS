@@ -5,7 +5,6 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
     @collection.on 'reset do-repaint sort', @.render, @
 
   render: ->
-    console.log('render!')
     @clearTable()
     @fill_template('DBTable-large')
     @fillPaginator('DB-paginator')
