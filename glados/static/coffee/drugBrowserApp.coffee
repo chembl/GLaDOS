@@ -22,3 +22,12 @@ class DrugBrowserApp
 
     return asTableView
 
+  # This initialises the infinity view of the browser
+  @initInfinityBrowserView = (top_level_elem) ->
+
+    infView = new DrugBrowserInfinityView
+      el: top_level_elem
+
+    return infView
+
+

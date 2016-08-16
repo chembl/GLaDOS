@@ -8,6 +8,17 @@
   <h2>
     <span class="card-title"><i class="icon icon-generic" data-icon="u"></i>Browse Drugs</span>
   </h2>
+
+  <div id="DrugInfBrowser">
+    <!-- Backbone fills this with the infinity browser view -->
+  </div>
 </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+infBrowser = DrugBrowserApp.initInfinityBrowserView($('DrugInfBrowser'));
+infBrowser.render();
 
 {% endblock %}
