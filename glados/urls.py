@@ -80,5 +80,12 @@ urlpatterns = [
   url(r'^acknowledgements/$', views.acks, name='acks'),
   url(r'^faqs/$', views.faqs, name='faqs'),
 
-  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json')
+  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
+
+  #----------------------------------------------------------------------------------------
+  # Drug Browser
+  #----------------------------------------------------------------------------------------
+  url(r'^drug_browser_infinity/$',
+      DirectTemplateView.as_view(template_name="glados/MainPageParts/DrugBrowserParts/browse_drugs_infinity.html"), ),
+
 ]
