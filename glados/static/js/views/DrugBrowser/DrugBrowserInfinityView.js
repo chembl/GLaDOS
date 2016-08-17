@@ -4,7 +4,8 @@ var DrugBrowserInfinityView;
 DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
     this.collection.on('reset do-repaint sort', this.render, this);
-    return this.isInfinte = true;
+    this.isInfinte = true;
+    return $(this.el).find('select').material_select();
   },
   render: function() {
     this.fill_template('DrugInfBrowserCardsContainer');

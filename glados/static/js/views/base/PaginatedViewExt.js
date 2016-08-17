@@ -157,7 +157,7 @@ PaginatedViewExt = {
     return this.collection.sortCollection(comparator);
   },
   activatePageSelector: function() {
-    return $('select').material_select();
+    return $(this.el).find('select').material_select();
   },
   showVisibleContent: function() {
     $(this.el).children('.card-preolader-to-hide').hide();

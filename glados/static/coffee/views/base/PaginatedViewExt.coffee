@@ -155,7 +155,7 @@ PaginatedViewExt =
     @collection.sortCollection(comparator)
 
   activatePageSelector: ->
-    $('select').material_select();
+    $(@el).find('select').material_select();
 
   showVisibleContent: ->
     $(@el).children('.card-preolader-to-hide').hide()

@@ -15,6 +15,6 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend({
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
-    return $('select').material_select();
+    return this.activatePageSelector();
   }
 });

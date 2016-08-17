@@ -85,6 +85,7 @@ CardView = Backbone.View.extend
   activateModals: ->
     $(@el).find('.modal-trigger').leanModal();
 
+
   showVisibleContent: ->
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
