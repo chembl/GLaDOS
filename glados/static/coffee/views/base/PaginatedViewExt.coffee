@@ -9,33 +9,42 @@ PaginatedViewExt =
     'click .sort': 'sortCollection'
     'input .search': 'setSearch'
 
+  # fills a template with the contents of the collection's current page
+  # it handle the case when the items are shown as list, table, or infinite browser
   fill_template: (elem_id) ->
 
-    elem = $(@el).find('#' + elem_id)
-    template = $('#' + elem.attr('data-hb-template'))
+    $elem = $(@el).find('#' + elem_id)
+    $item_template = $('#' + $elem.attr('data-hb-template'))
+    $append_to = $elem
 
-    if elem.is('table')
+    # if it is a table, add the corresponding header
+    if $elem.is('table')
 
-      header_template = $('#' + elem.attr('data-hb-template-2'))
+      header_template = $('#' + $elem.attr('data-hb-template-2'))
       header_row_cont = Handlebars.compile( header_template.html() )
         columns: @collection.getMeta('columns')
 
-      elem.append($(header_row_cont))
+      $elem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
-      elem.append($('<tbody>'))
-
+      $elem.append($('<tbody>'))
 
     for item in @collection.getCurrentPage()
 
+      img_url = ''
+      # handlebars only allow very simple logic, we have to help the template here and
+      # give it everything as ready as possible
       columns_val = @collection.getMeta('columns').map (col) ->
         col['value'] = item.get(col.comparator)
         col['has_link'] = col.link_base?
         col['link_url'] = col['link_base'].replace('$$$', col['value']) unless !col['has_link']
+        if col['image_base_url']?
+          img_url = col['image_base_url'].replace('$$$', col['value'])
 
-      new_row_cont = Handlebars.compile( template.html() )
+      new_row_cont = Handlebars.compile( $item_template.html() )
+        img_url: img_url
         columns: @collection.getMeta('columns')
 
-      elem.append($(new_row_cont))
+      $append_to.append($(new_row_cont))
 
   fillPaginator: (elem_id) ->
 

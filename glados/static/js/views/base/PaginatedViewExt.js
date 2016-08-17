@@ -9,32 +9,38 @@ PaginatedViewExt = {
     'input .search': 'setSearch'
   },
   fill_template: function(elem_id) {
-    var columns_val, elem, header_row_cont, header_template, item, new_row_cont, template, _i, _len, _ref, _results;
-    elem = $(this.el).find('#' + elem_id);
-    template = $('#' + elem.attr('data-hb-template'));
-    if (elem.is('table')) {
-      header_template = $('#' + elem.attr('data-hb-template-2'));
+    var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_row_cont, _i, _len, _ref, _results;
+    $elem = $(this.el).find('#' + elem_id);
+    $item_template = $('#' + $elem.attr('data-hb-template'));
+    $append_to = $elem;
+    if ($elem.is('table')) {
+      header_template = $('#' + $elem.attr('data-hb-template-2'));
       header_row_cont = Handlebars.compile(header_template.html())({
         columns: this.collection.getMeta('columns')
       });
-      elem.append($(header_row_cont));
-      elem.append($('<tbody>'));
+      $elem.append($(header_row_cont));
+      $elem.append($('<tbody>'));
     }
     _ref = this.collection.getCurrentPage();
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       item = _ref[_i];
+      img_url = '';
       columns_val = this.collection.getMeta('columns').map(function(col) {
         col['value'] = item.get(col.comparator);
         col['has_link'] = col.link_base != null;
         if (!!col['has_link']) {
-          return col['link_url'] = col['link_base'].replace('$$$', col['value']);
+          col['link_url'] = col['link_base'].replace('$$$', col['value']);
+        }
+        if (col['image_base_url'] != null) {
+          return img_url = col['image_base_url'].replace('$$$', col['value']);
         }
       });
-      new_row_cont = Handlebars.compile(template.html())({
+      new_row_cont = Handlebars.compile($item_template.html())({
+        img_url: img_url,
         columns: this.collection.getMeta('columns')
       });
-      _results.push(elem.append($(new_row_cont)));
+      _results.push($append_to.append($(new_row_cont)));
     }
     return _results;
   },

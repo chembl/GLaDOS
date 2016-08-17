@@ -26,6 +26,7 @@ DrugList = PaginatedCollection.extend
           'is_sorting': 0
           'sort_class': 'fa-sort'
           'link_base': '/compound_report_card/$$$'
+          'image_base_url': 'https://www.ebi.ac.uk/chembl/api/data/image/$$$.svg'
         }
         {
           'name_to_show': 'Molecule Type'

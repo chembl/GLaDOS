@@ -9,52 +9,58 @@
     <span class="card-title"><i class="icon icon-generic" data-icon="u"></i>Browse Drugs</span>
   </h2>
 
-  <div class="row">
-    <div class="col m6 s12">
+  <div id="DrugInfBrowser">
 
-      <div class="input-field">
-        <input placeholder="Search" id="first_name" type="text" class="validate search">
-      </div>
+    <div class="row">
+      <div class="col m6 s12">
 
-    </div>
-  </div>
-
-  {% verbatim %}
-
-  <script id="Handlebars-DrugBrowser-Card" type="text/x-handlebars-template">
-
-    <div class="col s12 m6 l4">
-      <div class="card grey lighten-5">
-
-        <div class="card-image">
-          <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg">
+        <div class="input-field">
+          <input placeholder="Search" id="first_name" type="text" class="validate search">
         </div>
-        <div class="card-content">
 
-          {{#each columns}}
+      </div>
+    </div>
+
+    {% verbatim %}
+
+    <script id="Handlebars-DrugBrowser-Card" type="text/x-handlebars-template">
+
+      <div class="col s12 m6 l4">
+        <div class="card grey lighten-5">
+
+          <div class="card-image">
+            <img src="{{img_url}}">
+          </div>
+          <div class="card-content">
+
+            {{#each columns}}
 
             {{#if this.has_link}}
 
-              <p> <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-              </p>
+            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+            </p>
 
             {{else}}
-              <p>{{this.value}}
-              </p>
+            <small>
+              <p>{{this.value}}</p>
+            </small>
             {{/if}}
-          {{/each}}
+            {{/each}}
 
+          </div>
         </div>
+
       </div>
+      {% endverbatim %}
 
+    </script>
+
+
+    <div id="DrugInfBrowserCardsContainer" class='row' data-is-infinite="yes"
+         data-hb-template="Handlebars-DrugBrowser-Card">
+      <!-- Backbone fills this with the infinity browser view -->
     </div>
-    {% endverbatim %}
 
-  </script>
-
-
-  <div id="DrugInfBrowser">
-    <!-- Backbone fills this with the infinity browser view -->
   </div>
 </div>
 
