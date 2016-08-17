@@ -170,11 +170,15 @@ PaginatedViewExt = {
   hideInfiniteBrPreolader: function() {
     return $(this.el).children('.infinite-browse-preloader').hide();
   },
+  showInfiniteBrPreolader: function() {
+    return $(this.el).children('.infinite-browse-preloader').show();
+  },
   setUpLoadingWaypoint: function() {
     var advancer, cards, middleCard, waypoint;
     cards = $('#DrugInfBrowserCardsContainer').children();
     middleCard = cards[cards.length / 2];
     advancer = $.proxy(function() {
+      this.showInfiniteBrPreolader();
       return this.getPage('next');
     }, this);
     return waypoint = new Waypoint({

@@ -172,6 +172,10 @@ PaginatedViewExt =
 
     $(@el).children('.infinite-browse-preloader').hide()
 
+  showInfiniteBrPreolader: ->
+
+    $(@el).children('.infinite-browse-preloader').show()
+
   setUpLoadingWaypoint: ->
 
     cards = $('#DrugInfBrowserCardsContainer').children()
@@ -179,6 +183,7 @@ PaginatedViewExt =
 
     # the advancer function requests always the next page
     advancer = $.proxy ->
+      @showInfiniteBrPreolader()
       @getPage('next')
     , @
 
