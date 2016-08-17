@@ -164,3 +164,10 @@ PaginatedViewExt =
   showPreloader: ->
     $(@el).children('.card-preolader-to-hide').show()
     $(@el).children(':not(.card-preolader-to-hide)').hide()
+
+  #--------------------------------------------------------------------------------------
+  # Infinite Browser
+  #--------------------------------------------------------------------------------------
+  hideInfiniteBrPreolader: ->
+    
+    $(@el).find('.infinite-browse-preloader').hide()

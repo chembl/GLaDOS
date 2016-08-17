@@ -21,44 +21,14 @@
       </div>
     </div>
 
-    {% verbatim %}
-
-    <script id="Handlebars-DrugBrowser-Card" type="text/x-handlebars-template">
-
-      <div class="col s12 m6 l4">
-        <div class="card grey lighten-5">
-
-          <div class="card-image">
-            <img src="{{img_url}}">
-          </div>
-          <div class="card-content">
-
-            {{#each columns}}
-
-            {{#if this.has_link}}
-
-            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-            </p>
-
-            {{else}}
-            <small>
-              <p>{{this.value}}</p>
-            </small>
-            {{/if}}
-            {{/each}}
-
-          </div>
-        </div>
-
-      </div>
-      {% endverbatim %}
-
-    </script>
-
-
     <div id="DrugInfBrowserCardsContainer" class='row' data-is-infinite="yes"
-         data-hb-template="Handlebars-DrugBrowser-Card">
+         data-hb-template="Handlebars-Common-Paginated-Card">
       <!-- Backbone fills this with the infinity browser view -->
+
+      {% block preloaders %}
+        {% include "glados/base/infinite_browse_loaders.html" %}
+      {% endblock %}
+
     </div>
 
   </div>

@@ -6,3 +6,4 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
   render: ->
 
     @fill_template('DrugInfBrowserCardsContainer')
+    @hideInfiniteBrPreolader()
