@@ -9,7 +9,7 @@ PaginatedViewExt = {
     'input .search': 'setSearch'
   },
   fill_template: function(elem_id) {
-    var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_row_cont, _i, _len, _ref, _results;
+    var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
     $elem = $(this.el).find('#' + elem_id);
     $item_template = $('#' + $elem.attr('data-hb-template'));
     $append_to = $elem;
@@ -36,11 +36,11 @@ PaginatedViewExt = {
           return img_url = col['image_base_url'].replace('$$$', col['value']);
         }
       });
-      new_row_cont = Handlebars.compile($item_template.html())({
+      new_item_cont = Handlebars.compile($item_template.html())({
         img_url: img_url,
         columns: this.collection.getMeta('columns')
       });
-      _results.push($append_to.append($(new_row_cont)));
+      _results.push($append_to.append($(new_item_cont)));
     }
     return _results;
   },
@@ -97,7 +97,7 @@ PaginatedViewExt = {
     if (clicked.hasClass('disabled')) {
       return;
     }
-    if (this.collection.getMeta('server_side') === true) {
+    if (!(this.collection.getMeta('server_side') !== true || this.isInfinte)) {
       this.showPreloader();
     }
     requested_page_num = clicked.attr('data-page');
@@ -169,5 +169,21 @@ PaginatedViewExt = {
   },
   hideInfiniteBrPreolader: function() {
     return $(this.el).children('.infinite-browse-preloader').hide();
+  },
+  setUpLoadingWaypoint: function() {
+    var advancer, cards, middleCard, waypoint;
+    cards = $('#DrugInfBrowserCardsContainer').children();
+    middleCard = cards[cards.length / 2];
+    advancer = $.proxy(function() {
+      return this.getPage('next');
+    }, this);
+    return waypoint = new Waypoint({
+      element: middleCard,
+      handler: function(direction) {
+        if (direction === 'down') {
+          return advancer();
+        }
+      }
+    });
   }
 };

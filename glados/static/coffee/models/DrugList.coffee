@@ -4,7 +4,6 @@ DrugList = PaginatedCollection.extend
 
   parse: (data) ->
 
-    console.log('parsing!')
     data.page_meta.records_in_page = data.molecules.length
     @resetMeta(data.page_meta)
 

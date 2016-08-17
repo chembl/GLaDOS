@@ -4,7 +4,6 @@ var DrugList;
 DrugList = PaginatedCollection.extend({
   model: Drug,
   parse: function(data) {
-    console.log('parsing!');
     data.page_meta.records_in_page = data.molecules.length;
     this.resetMeta(data.page_meta);
     return data.molecules;

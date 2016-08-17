@@ -40,11 +40,11 @@ PaginatedViewExt =
         if col['image_base_url']?
           img_url = col['image_base_url'].replace('$$$', col['value'])
 
-      new_row_cont = Handlebars.compile( $item_template.html() )
+      new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url
         columns: @collection.getMeta('columns')
 
-      $append_to.append($(new_row_cont))
+      $append_to.append($(new_item_cont))
 
   fillPaginator: (elem_id) ->
 
@@ -99,7 +99,7 @@ PaginatedViewExt =
     if clicked.hasClass('disabled')
       return
 
-    @showPreloader() unless @collection.getMeta('server_side') != true
+    @showPreloader() unless @collection.getMeta('server_side') != true or @isInfinte
 
     requested_page_num = clicked.attr('data-page')
     current_page = @collection.getMeta('current_page')
@@ -171,3 +171,32 @@ PaginatedViewExt =
   hideInfiniteBrPreolader: ->
 
     $(@el).children('.infinite-browse-preloader').hide()
+
+  setUpLoadingWaypoint: ->
+
+    cards = $('#DrugInfBrowserCardsContainer').children()
+    middleCard = cards[cards.length / 2]
+
+    # the advancer function requests always the next page
+    advancer = $.proxy ->
+      @getPage('next')
+    , @
+
+    # take into account that the object itself is not being garbage collected
+    # so the waypoint remains. After some scrolling, there will be several waypoints
+    # (every page_size / 2 items).
+    # This means that if the user scrolls up and then down again, the load of the next page will be triggered even
+    # if it is not close to the end of the elements.
+    # In fact this can be useful to reduce the latency to the user, while the user is looking in detail to a section of
+    # list, it loads another page.
+    #
+    # If there is trouble with memory or performance this behaviour could be the cause, If it doesn't cause any trouble
+    # I will leave it like as is.
+    waypoint = new Waypoint(
+      element: middleCard
+      handler: (direction) ->
+
+        if direction == 'down'
+          advancer()
+
+    )
