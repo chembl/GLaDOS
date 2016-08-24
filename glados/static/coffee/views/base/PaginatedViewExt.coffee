@@ -168,6 +168,9 @@ PaginatedViewExt =
   #--------------------------------------------------------------------------------------
   # Infinite Browser
   #--------------------------------------------------------------------------------------
+  showControls: ->
+    $(@el).find('.controls').removeClass('hide')
+
   hideInfiniteBrPreolader: ->
 
     $(@el).children('.infinite-browse-preloader').hide()

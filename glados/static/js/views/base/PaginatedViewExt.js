@@ -167,6 +167,9 @@ PaginatedViewExt = {
     $(this.el).children('.card-preolader-to-hide').show();
     return $(this.el).children(':not(.card-preolader-to-hide)').hide();
   },
+  showControls: function() {
+    return $(this.el).find('.controls').removeClass('hide');
+  },
   hideInfiniteBrPreolader: function() {
     return $(this.el).children('.infinite-browse-preloader').hide();
   },
