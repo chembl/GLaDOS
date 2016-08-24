@@ -208,3 +208,28 @@ PaginatedViewExt =
           advancer()
 
     )
+
+  renderSortingSelector: ->
+
+    $selectSortContainer = $(@el).find('.select-sort-container')
+    $selectSortContainer.empty()
+
+    template = $('#' + $selectSortContainer.attr('data-hb-template'))
+    columns = @collection.getMeta('columns')
+
+    col_comparators = _.pluck(columns, 'comparator')
+    $selectSortContainer.html Handlebars.compile( template.html() )
+      columns: col_comparators
+
+    console.log(columns)
+    console.log(_.pluck(columns, 'is_sorting'))
+    current_sort_direction = _.reduce(_.pluck(columns, 'is_sorting'), ((a, b) -> a + b), 0)
+
+    console.log(current_sort_direction)
+
+
+
+
+
+
+

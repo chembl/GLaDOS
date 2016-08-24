@@ -4,12 +4,33 @@
 
 {% block content %}
 
+ {% verbatim %}
+
+      <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
+
+
+          <select class="select-sort">
+            <option value="" disabled selected>Choose your option</option>
+            {{#each columns}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+          <label>Sort by:</label>
+
+
+      </script>
+
+      {% endverbatim %}
+
+
 <div class="container">
   <h2>
     <span class="card-title"><i class="icon icon-generic" data-icon="u"></i>Browse Drugs</span>
   </h2>
 
   <div id="DrugInfBrowser">
+
+
 
     <div class="row controls hide">
       <div class="col m6 s12">
@@ -20,14 +41,10 @@
 
       </div>
 
-      <div class="input-field col s10 m4">
-        <select>
-          <option value="" disabled selected>Choose your option</option>
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-        </select>
-        <label>Sort by:</label>
+      <div class="input-field col s10 m4 select-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+
+          <!-- Backbone fills this with the infinity browser view -->
+
       </div>
 
       <div class="col s2 full-height">
