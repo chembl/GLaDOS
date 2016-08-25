@@ -150,10 +150,16 @@ PaginatedViewExt = {
     new_page_size = selector.val();
     return this.collection.resetPageSize(new_page_size);
   },
-  setSearch: function() {
-    var term;
-    term = $(this.el).find('.search').val();
-    return this.collection.setSearch(term);
+  setSearch: function(event) {
+    var $searchInput, column, term;
+    $searchInput = $(event.currentTarget);
+    term = $searchInput.val();
+    column = $searchInput.attr('data-column');
+    if (this.isInfinite) {
+      this.clearInfiniteContainer();
+      this.showInfiniteBrPreolader();
+    }
+    return this.collection.setSearch(term, column);
   },
   sortCollection: function(event) {
     var comparator, order_icon;

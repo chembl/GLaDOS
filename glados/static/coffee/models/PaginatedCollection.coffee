@@ -116,10 +116,15 @@ PaginatedCollection = Backbone.Collection.extend
 
     return is_descending
 
-  setSearch: (term)->
+  # sets the term to search in the collection
+  # when the collection is server side, the corresponding column is required.
+  # This is because the web services don't provide a search with OR
+  # for client side, it can be null, but for example for server side
+  # for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id'
+  setSearch: (term, column)->
 
     if @getMeta('server_side') == true
-      @setSearchSS(term)
+      @setSearchSS(term, column)
     else
       @setSearchC(term)
 
@@ -254,20 +259,28 @@ PaginatedCollection = Backbone.Collection.extend
   setPageSS: (page_num) ->
 
     base_url = @getMeta('base_url')
-    @url = @getPaginatedURL(base_url, page_num)
+    @setMeta('current_page', page_num)
+    @url = @getPaginatedURL()
     console.log('Getting page:')
     console.log(page_num)
     console.log('URL')
     console.log(@url)
     @fetch()
 
-  getPaginatedURL: (url, page_num) ->
+  getPaginatedURL: () ->
+
+    url = @getMeta('base_url')
+    page_num = @getMeta('current_page')
 
     page_size = @getMeta('page_size')
 
     limit_str = 'limit=' + page_size
     page_str = 'offset=' + (page_num - 1) * page_size
     full_url = url + '&' + limit_str + '&' + page_str
+
+    # ----------------------------------------------
+    # Sorting
+    # ----------------------------------------------
 
     columns = @getMeta('columns')
 
@@ -276,6 +289,22 @@ PaginatedCollection = Backbone.Collection.extend
       comparator = field.comparator
       comparator = '-' + comparator unless field.is_sorting == 1
       full_url += '&order_by=' + comparator
+
+    # ----------------------------------------------
+    # Search terms
+    # ----------------------------------------------
+    searchTerms = @getMeta('search_terms')
+
+    searchStr = ''
+    console.log('search_terms!')
+    console.log(searchTerms)
+
+    searchParts = []
+    for column,term of searchTerms
+      searchParts.push(column + "__contains=" + term)
+
+    searchStr = searchParts.join('&')
+    full_url += '&' + searchStr
 
     return full_url
 
@@ -291,10 +320,21 @@ PaginatedCollection = Backbone.Collection.extend
 
     columns = @getMeta('columns')
     @setupColSorting(columns, comparator)
-    @url = @getPaginatedURL(@getMeta('base_url'), @getMeta('current_page'))
+    @url = @getPaginatedURL()
     console.log('URL')
     console.log(@url)
     @fetch()
 
-  setSearchSS: (term) ->
-    console.log('search to implement!')
+  setSearchSS: (term, column) ->
+
+    # create the search term objects if it doesn't exist
+    @setMeta('search_terms', {}) unless @getMeta('search_terms')?
+
+    searchTerms = @getMeta('search_terms')
+    searchTerms[column] = term
+
+    @url = @getPaginatedURL()
+    console.log('URL')
+    console.log(@url)
+    @fetch()
+

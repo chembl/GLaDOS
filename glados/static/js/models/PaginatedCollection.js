@@ -109,9 +109,9 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return is_descending;
   },
-  setSearch: function(term) {
+  setSearch: function(term, column) {
     if (this.getMeta('server_side') === true) {
-      return this.setSearchSS(term);
+      return this.setSearchSS(term, column);
     } else {
       return this.setSearchC(term);
     }
@@ -227,15 +227,18 @@ PaginatedCollection = Backbone.Collection.extend({
   setPageSS: function(page_num) {
     var base_url;
     base_url = this.getMeta('base_url');
-    this.url = this.getPaginatedURL(base_url, page_num);
+    this.setMeta('current_page', page_num);
+    this.url = this.getPaginatedURL();
     console.log('Getting page:');
     console.log(page_num);
     console.log('URL');
     console.log(this.url);
     return this.fetch();
   },
-  getPaginatedURL: function(url, page_num) {
-    var columns, comparator, field, full_url, limit_str, page_size, page_str, sorting, _i, _len;
+  getPaginatedURL: function() {
+    var column, columns, comparator, field, full_url, limit_str, page_num, page_size, page_str, searchParts, searchStr, searchTerms, sorting, term, url, _i, _len;
+    url = this.getMeta('base_url');
+    page_num = this.getMeta('current_page');
     page_size = this.getMeta('page_size');
     limit_str = 'limit=' + page_size;
     page_str = 'offset=' + (page_num - 1) * page_size;
@@ -252,6 +255,17 @@ PaginatedCollection = Backbone.Collection.extend({
       }
       full_url += '&order_by=' + comparator;
     }
+    searchTerms = this.getMeta('search_terms');
+    searchStr = '';
+    console.log('search_terms!');
+    console.log(searchTerms);
+    searchParts = [];
+    for (column in searchTerms) {
+      term = searchTerms[column];
+      searchParts.push(column + "__contains=" + term);
+    }
+    searchStr = searchParts.join('&');
+    full_url += '&' + searchStr;
     return full_url;
   },
   resetPageSizeSS: function(new_page_size) {
@@ -265,12 +279,21 @@ PaginatedCollection = Backbone.Collection.extend({
     var columns;
     columns = this.getMeta('columns');
     this.setupColSorting(columns, comparator);
-    this.url = this.getPaginatedURL(this.getMeta('base_url'), this.getMeta('current_page'));
+    this.url = this.getPaginatedURL();
     console.log('URL');
     console.log(this.url);
     return this.fetch();
   },
-  setSearchSS: function(term) {
-    return console.log('search to implement!');
+  setSearchSS: function(term, column) {
+    var searchTerms;
+    if (this.getMeta('search_terms') == null) {
+      this.setMeta('search_terms', {});
+    }
+    searchTerms = this.getMeta('search_terms');
+    searchTerms[column] = term;
+    this.url = this.getPaginatedURL();
+    console.log('URL');
+    console.log(this.url);
+    return this.fetch();
   }
 });

@@ -154,9 +154,18 @@ PaginatedViewExt =
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
 
-  setSearch: ->
-    term = $(@el).find('.search').val()
-    @collection.setSearch(term)
+  setSearch: (event) ->
+    $searchInput = $(event.currentTarget)
+    term = $searchInput.val()
+    # if the collection is client side the column will be undefined and will be ignored.
+    column = $searchInput.attr('data-column')
+
+    if @isInfinite
+
+      @clearInfiniteContainer()
+      @showInfiniteBrPreolader()
+
+    @collection.setSearch(term, column)
 
   sortCollection: (event) ->
 
