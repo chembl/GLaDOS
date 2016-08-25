@@ -214,18 +214,35 @@ PaginatedViewExt =
     $selectSortContainer = $(@el).find('.select-sort-container')
     $selectSortContainer.empty()
 
-    template = $('#' + $selectSortContainer.attr('data-hb-template'))
+    $template = $('#' + $selectSortContainer.attr('data-hb-template'))
     columns = @collection.getMeta('columns')
 
-    col_comparators = _.pluck(columns, 'comparator')
-    $selectSortContainer.html Handlebars.compile( template.html() )
+    col_comparators = _.map(columns, (col) -> {comparator: col.comparator, selected: col.is_sorting != 0})
+    one_selected = _.reduce(col_comparators, ((a, b) -> a.selected or b.selected), 0 )
+
+    $selectSortContainer.html Handlebars.compile( $template.html() )
       columns: col_comparators
+      one_selected: one_selected
 
-    console.log(columns)
-    console.log(_.pluck(columns, 'is_sorting'))
-    current_sort_direction = _.reduce(_.pluck(columns, 'is_sorting'), ((a, b) -> a + b), 0)
+    $btnSortDirectionContainer = $(@el).find('.btn-sort-direction-container')
+    $btnSortDirectionContainer.empty()
 
-    console.log(current_sort_direction)
+    $template = $('#' + $btnSortDirectionContainer.attr('data-hb-template'))
+
+
+    # relates the sort direction with a class and a text for the template
+    sortClassAndText =
+      '-1': {sort_class: 'fa-sort-desc', text: 'Desc'},
+      '0': {sort_class: 'fa-sort', text: ''},
+      '1': {sort_class: 'fa-sort-asc', text: 'Asc'}
+
+    currentSortDirection = _.reduce(_.pluck(columns, 'is_sorting'), ((a, b) -> a + b), 0)
+    currentProps = sortClassAndText[currentSortDirection.toString()]
+
+    $btnSortDirectionContainer.html Handlebars.compile( $template.html() )
+      sort_class:  currentProps.sort_class
+      text: currentProps.text
+
 
 
 

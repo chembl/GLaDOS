@@ -4,23 +4,7 @@
 
 {% block content %}
 
- {% verbatim %}
 
-      <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
-
-
-          <select class="select-sort">
-            <option value="" disabled selected>Choose your option</option>
-            {{#each columns}}
-            <option value="{{this}}">{{this}}</option>
-            {{/each}}
-          </select>
-          <label>Sort by:</label>
-
-
-      </script>
-
-      {% endverbatim %}
 
 
 <div class="container">
@@ -47,8 +31,11 @@
 
       </div>
 
-      <div class="col s2 full-height">
-        <a class="waves-effect waves-light btn-mini teal">
+      <div class="col s2 full-height btn-sort-direction-container" data-hb-template="Handlebars-Common-SortDirectionBtn">
+
+         <!-- Backbone fills this with the infinity browser view -->
+
+        <a class="waves-effect waves-light btn-mini teal" >
           <i class="fa fa-sort-asc" aria-hidden="true"></i>
           Asc
         </a>
