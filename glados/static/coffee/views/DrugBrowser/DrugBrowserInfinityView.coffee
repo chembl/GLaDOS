@@ -2,14 +2,15 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
-    @isInfinte = true
+    @isInfinite = true
+    @containerID = 'DrugInfBrowserCardsContainer'
 
   render: ->
 
     @renderSortingSelector()
     @showControls()
     $(@el).find('select').material_select();
-    @fill_template('DrugInfBrowserCardsContainer')
+    @fill_template(@containerID)
     @hideInfiniteBrPreolader()
 
     @setUpLoadingWaypoint()

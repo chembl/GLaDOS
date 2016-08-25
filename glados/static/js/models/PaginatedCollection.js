@@ -116,6 +116,18 @@ PaginatedCollection = Backbone.Collection.extend({
       return this.setSearchC(term);
     }
   },
+  getCurrentSortingComparator: function() {
+    var columns, comp, sorVal;
+    columns = this.getMeta('columns');
+    sorVal = _.find(columns, function(col) {
+      return col.is_sorting !== 0;
+    });
+    comp = void 0;
+    if (!!(sorVal != null)) {
+      comp = sorVal.comparator;
+    }
+    return comp;
+  },
   resetSearchStruct: function() {
     var comparator, full_search_str, model, search_dict, _i, _j, _len, _len1, _ref, _ref1;
     if (!(this.getMeta('original_models') != null)) {
@@ -216,6 +228,10 @@ PaginatedCollection = Backbone.Collection.extend({
     var base_url;
     base_url = this.getMeta('base_url');
     this.url = this.getPaginatedURL(base_url, page_num);
+    console.log('Getting page:');
+    console.log(page_num);
+    console.log('URL');
+    console.log(this.url);
     return this.fetch();
   },
   getPaginatedURL: function(url, page_num) {
@@ -250,6 +266,8 @@ PaginatedCollection = Backbone.Collection.extend({
     columns = this.getMeta('columns');
     this.setupColSorting(columns, comparator);
     this.url = this.getPaginatedURL(this.getMeta('base_url'), this.getMeta('current_page'));
+    console.log('URL');
+    console.log(this.url);
     return this.fetch();
   },
   setSearchSS: function(term) {

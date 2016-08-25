@@ -4,13 +4,14 @@ var DrugBrowserInfinityView;
 DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
     this.collection.on('reset do-repaint sort', this.render, this);
-    return this.isInfinte = true;
+    this.isInfinite = true;
+    return this.containerID = 'DrugInfBrowserCardsContainer';
   },
   render: function() {
     this.renderSortingSelector();
     this.showControls();
     $(this.el).find('select').material_select();
-    this.fill_template('DrugInfBrowserCardsContainer');
+    this.fill_template(this.containerID);
     this.hideInfiniteBrPreolader();
     return this.setUpLoadingWaypoint();
   }

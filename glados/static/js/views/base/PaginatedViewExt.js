@@ -3,10 +3,12 @@ var PaginatedViewExt;
 
 PaginatedViewExt = {
   events: {
-    'click .page-selector': 'getPage',
+    'click .page-selector': 'getPageEvent',
     'change .change-page-size': 'changePageSize',
     'click .sort': 'sortCollection',
-    'input .search': 'setSearch'
+    'input .search': 'setSearch',
+    'change .select-sort': 'sortCollectionFormSelect',
+    'click .btn-sort-direction': 'changeSortOrderInf'
   },
   fill_template: function(elem_id) {
     var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
@@ -91,26 +93,32 @@ PaginatedViewExt = {
     this.activateCurrentPageButton();
     return this.enableDisableNextLastButtons();
   },
-  getPage: function(event) {
-    var clicked, current_page, requested_page_num;
+  getPageEvent: function(event) {
+    var clicked, pageNum;
     clicked = $(event.currentTarget);
     if (clicked.hasClass('disabled')) {
       return;
     }
-    if (!(this.collection.getMeta('server_side') !== true || this.isInfinte)) {
+    if (this.collection.getMeta('server_side') === true) {
       this.showPreloader();
     }
-    requested_page_num = clicked.attr('data-page');
+    pageNum = clicked.attr('data-page');
+    return this.requestPageInCollection(pageNum);
+  },
+  requestPageInCollection: function(pageNum) {
+    var current_page;
     current_page = this.collection.getMeta('current_page');
-    if (current_page === requested_page_num) {
+    console.log('view requested page:');
+    console.log(pageNum);
+    if (current_page === pageNum) {
       return;
     }
-    if (requested_page_num === "previous") {
-      requested_page_num = current_page - 1;
-    } else if (requested_page_num === "next") {
-      requested_page_num = current_page + 1;
+    if (pageNum === "previous") {
+      pageNum = current_page - 1;
+    } else if (pageNum === "next") {
+      pageNum = current_page + 1;
     }
-    return this.collection.setPage(requested_page_num);
+    return this.collection.setPage(pageNum);
   },
   enableDisableNextLastButtons: function() {
     var current_page, total_pages;
@@ -154,6 +162,13 @@ PaginatedViewExt = {
     }
     order_icon = $(event.currentTarget);
     comparator = order_icon.attr('data-comparator');
+    return this.triggerCollectionSort(comparator);
+  },
+  triggerCollectionSort: function(comparator) {
+    if (this.isInfinite) {
+      this.clearInfiniteContainer();
+      this.showInfiniteBrPreolader();
+    }
     return this.collection.sortCollection(comparator);
   },
   activatePageSelector: function() {
@@ -182,7 +197,7 @@ PaginatedViewExt = {
     middleCard = cards[cards.length / 2];
     advancer = $.proxy(function() {
       this.showInfiniteBrPreolader();
-      return this.getPage('next');
+      return this.requestPageInCollection('next');
     }, this);
     return waypoint = new Waypoint({
       element: middleCard,
@@ -235,7 +250,27 @@ PaginatedViewExt = {
     currentProps = sortClassAndText[currentSortDirection.toString()];
     return $btnSortDirectionContainer.html(Handlebars.compile($template.html())({
       sort_class: currentProps.sort_class,
-      text: currentProps.text
+      text: currentProps.text,
+      disabled: currentSortDirection === 0
     }));
+  },
+  clearInfiniteContainer: function() {
+    return $('#' + this.containerID).empty();
+  },
+  sortCollectionFormSelect: function(event) {
+    var comparator, selector;
+    selector = $(event.currentTarget);
+    comparator = selector.val();
+    if (comparator === '') {
+      return;
+    }
+    return this.triggerCollectionSort(comparator);
+  },
+  changeSortOrderInf: function() {
+    var comp;
+    comp = this.collection.getCurrentSortingComparator();
+    if (comp != null) {
+      return this.triggerCollectionSort(comp);
+    }
   }
 };

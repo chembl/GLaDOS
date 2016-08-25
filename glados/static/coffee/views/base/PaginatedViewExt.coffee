@@ -4,10 +4,12 @@
 PaginatedViewExt =
 
   events:
-    'click .page-selector': 'getPage'
+    'click .page-selector': 'getPageEvent'
     'change .change-page-size': 'changePageSize'
     'click .sort': 'sortCollection'
     'input .search': 'setSearch'
+    'change .select-sort': 'sortCollectionFormSelect'
+    'click .btn-sort-direction': 'changeSortOrderInf'
 
   # fills a template with the contents of the collection's current page
   # it handle the case when the items are shown as list, table, or infinite browser
@@ -91,7 +93,7 @@ PaginatedViewExt =
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
-  getPage: (event) ->
+  getPageEvent: (event) ->
 
     clicked = $(event.currentTarget)
 
@@ -99,21 +101,30 @@ PaginatedViewExt =
     if clicked.hasClass('disabled')
       return
 
-    @showPreloader() unless @collection.getMeta('server_side') != true or @isInfinte
+    @showPreloader() unless @collection.getMeta('server_side') != true
 
-    requested_page_num = clicked.attr('data-page')
+    pageNum = clicked.attr('data-page')
+    @requestPageInCollection(pageNum)
+
+
+  requestPageInCollection: (pageNum) ->
+
     current_page = @collection.getMeta('current_page')
 
+    console.log('view requested page:')
+    console.log(pageNum)
+
     # Don't bother if the user requested the same page as the current one
-    if current_page == requested_page_num
+    if current_page == pageNum
       return
 
-    if requested_page_num == "previous"
-      requested_page_num = current_page - 1
-    else if requested_page_num == "next"
-      requested_page_num = current_page + 1
+    if pageNum == "previous"
+      pageNum = current_page - 1
+    else if pageNum == "next"
+      pageNum = current_page + 1
 
-    @collection.setPage(requested_page_num)
+    @collection.setPage(pageNum)
+
 
   enableDisableNextLastButtons: ->
 
@@ -152,6 +163,16 @@ PaginatedViewExt =
     @showPreloader() unless @collection.getMeta('server_side') != true
     order_icon = $(event.currentTarget)
     comparator = order_icon.attr('data-comparator')
+
+    @triggerCollectionSort(comparator)
+
+  triggerCollectionSort: (comparator) ->
+
+    if @isInfinite
+
+      @clearInfiniteContainer()
+      @showInfiniteBrPreolader()
+
     @collection.sortCollection(comparator)
 
   activatePageSelector: ->
@@ -187,7 +208,7 @@ PaginatedViewExt =
     # the advancer function requests always the next page
     advancer = $.proxy ->
       @showInfiniteBrPreolader()
-      @getPage('next')
+      @requestPageInCollection('next')
     , @
 
     # take into account that the object itself is not being garbage collected
@@ -242,11 +263,25 @@ PaginatedViewExt =
     $btnSortDirectionContainer.html Handlebars.compile( $template.html() )
       sort_class:  currentProps.sort_class
       text: currentProps.text
+      disabled: currentSortDirection == 0
+
+  clearInfiniteContainer: ->
+    $('#' + @containerID).empty()
 
 
+  sortCollectionFormSelect: (event) ->
 
+    selector = $(event.currentTarget)
+    comparator = selector.val()
 
+    if comparator == ''
+      return
 
+    @triggerCollectionSort(comparator)
 
+  changeSortOrderInf: ->
 
+    comp = @collection.getCurrentSortingComparator()
+    if comp?
+      @triggerCollectionSort(comp)
 

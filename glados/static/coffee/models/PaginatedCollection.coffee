@@ -123,6 +123,17 @@ PaginatedCollection = Backbone.Collection.extend
     else
       @setSearchC(term)
 
+  # from all the comparators, returns the one that is being used for sorting.
+  # if none is being used for sorting returns undefined
+  getCurrentSortingComparator: () ->
+
+    columns = @getMeta('columns')
+    sorVal = _.find(columns, (col) -> col.is_sorting != 0 )
+
+    comp = undefined
+    comp = sorVal.comparator unless !sorVal?
+
+    return comp
 
 
   # ------------------------------------------------------------
@@ -244,6 +255,10 @@ PaginatedCollection = Backbone.Collection.extend
 
     base_url = @getMeta('base_url')
     @url = @getPaginatedURL(base_url, page_num)
+    console.log('Getting page:')
+    console.log(page_num)
+    console.log('URL')
+    console.log(@url)
     @fetch()
 
   getPaginatedURL: (url, page_num) ->
@@ -277,6 +292,8 @@ PaginatedCollection = Backbone.Collection.extend
     columns = @getMeta('columns')
     @setupColSorting(columns, comparator)
     @url = @getPaginatedURL(@getMeta('base_url'), @getMeta('current_page'))
+    console.log('URL')
+    console.log(@url)
     @fetch()
 
   setSearchSS: (term) ->
