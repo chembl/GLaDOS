@@ -50,3 +50,5 @@ DrugList = PaginatedCollection.extend
         }
       ]
 
+    @url = @getMeta('base_url')
+

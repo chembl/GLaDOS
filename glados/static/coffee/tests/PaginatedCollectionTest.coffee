@@ -138,8 +138,6 @@ describe "Paginated Collection", ->
 
     drugList = new DrugList
 
-    drugList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4'
-
     beforeAll (done) ->
       drugList.fetch
         success: done
@@ -154,17 +152,17 @@ describe "Paginated Collection", ->
 
       expect(page_size).toBe(20)
       expect(current_page).toBe(1)
-      expect(total_pages).toBe(144)
-      expect(total_records).toBe(2879)
+      expect(total_pages).toBe(79610)
+      expect(total_records).toBe(1592191)
       expect(records_in_page).toBe(20)
 
       done()
 
     it "shows the first page correctly", (done) ->
 
-      assert_chembl_ids(drugList, ["CHEMBL113178", "CHEMBL1128", "CHEMBL1104", "CHEMBL1139", "CHEMBL1087", "CHEMBL64",
-        "CHEMBL445", "CHEMBL490", "CHEMBL498", "CHEMBL271227", "CHEMBL264241", "CHEMBL435", "CHEMBL33", "CHEMBL42",
-        "CHEMBL115", "CHEMBL1549", "CHEMBL422", "CHEMBL416", "CHEMBL1506", "CHEMBL1515"])
+      assert_chembl_ids(drugList, ['CHEMBL6939','CHEMBL22','CHEMBL6941','CHEMBL6942','CHEMBL6944','CHEMBL6945',
+        'CHEMBL6946','CHEMBL6947','CHEMBL1163143','CHEMBL6948','CHEMBL6950','CHEMBL6951','CHEMBL6952','CHEMBL6954',
+        'CHEMBL6957','CHEMBL6960','CHEMBL1163144','CHEMBL6961','CHEMBL6962','CHEMBL6963'])
 
       done()
 
@@ -173,10 +171,9 @@ describe "Paginated Collection", ->
       drugList.setPage(5)
       setTimeout ->
 
-        assert_chembl_ids(drugList, ["CHEMBL1237061", "CHEMBL1200438", "CHEMBL1628502", "CHEMBL1628504",
-          "CHEMBL1652442", "CHEMBL1429", "CHEMBL1628385", "CHEMBL1200980", "CHEMBL1628227", "CHEMBL1628233",
-          "CHEMBL1628234", "CHEMBL1628240", "CHEMBL1201192", "CHEMBL1201495", "CHEMBL1201660", "CHEMBL1201718",
-          "CHEMBL1237086", "CHEMBL564085", "CHEMBL1131", "CHEMBL1079604"])
+        assert_chembl_ids(drugList, ['CHEMBL7060','CHEMBL7061','CHEMBL7063','CHEMBL7064','CHEMBL7065','CHEMBL7066',
+          'CHEMBL7067','CHEMBL7068','CHEMBL7069','CHEMBL7070','CHEMBL7071','CHEMBL7072','CHEMBL7074','CHEMBL7075',
+          'CHEMBL7077','CHEMBL7078','CHEMBL7079','CHEMBL7082','CHEMBL7083','CHEMBL1163160'])
 
         done()
 
@@ -193,7 +190,7 @@ describe "Paginated Collection", ->
         to_show = drugList.getCurrentPage()
         chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
 
-        assert_chembl_ids(drugList, ["CHEMBL113178", "CHEMBL1128", "CHEMBL1104", "CHEMBL1139", "CHEMBL1087"])
+        assert_chembl_ids(drugList, ['CHEMBL6939','CHEMBL22','CHEMBL6941','CHEMBL6942','CHEMBL6944'])
 
         done()
 

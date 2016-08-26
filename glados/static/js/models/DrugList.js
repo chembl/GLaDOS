@@ -9,7 +9,7 @@ DrugList = PaginatedCollection.extend({
     return data.molecules;
   },
   initialize: function() {
-    return this.meta = {
+    this.meta = {
       server_side: true,
       base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json',
       page_size: 10,
@@ -45,5 +45,6 @@ DrugList = PaginatedCollection.extend({
         }
       ]
     };
+    return this.url = this.getMeta('base_url');
   }
 });
