@@ -91,8 +91,6 @@ TargetRelationList = PaginatedCollection.extend
 
         # here everything is ready
         this_collection.reset(target_relations)
-        data = _.map(target_relations, (o)-> [o.target_chembl_id, o.pref_name])
-        console.log(JSON.stringify(data))
 
       )
 

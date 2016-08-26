@@ -79,11 +79,7 @@ TargetRelationList = PaginatedCollection.extend({
           target_relations[i].target_type = targ.target_type;
           i++;
         }
-        this_collection.reset(target_relations);
-        data = _.map(target_relations, function(o) {
-          return [o.target_chembl_id, o.pref_name];
-        });
-        return console.log(JSON.stringify(data));
+        return this_collection.reset(target_relations);
       });
       return getTargetsInfo.fail(function() {
         return console.log('failed2');
