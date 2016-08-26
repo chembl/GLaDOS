@@ -138,7 +138,9 @@ describe "Paginated Collection", ->
 
     drugList = new DrugList
 
-    beforeAll (done) ->
+    beforeEach (done) ->
+
+      drugList = new DrugList
       drugList.fetch
         success: done
 
@@ -196,6 +198,30 @@ describe "Paginated Collection", ->
 
       , 5
 
+    it "generates a correct paginated url (sorting)", ->
+
+      drugList.sortCollection('molecule_chembl_id')
+      url = drugList.getPaginatedURL()
+
+      expect(url).toContain('order_by=molecule_chembl_id')
+
+
+    it "generates a correct paginated url (pagination)", ->
+
+      drugList.setPage(5)
+      url = drugList.getPaginatedURL()
+
+      expect(url).toContain('limit=20&offset=80')
+
+    it "generates a correct paginated url (search)", ->
+
+      drugList.setSearch('25', 'molecule_chembl_id')
+      drugList.setSearch('ASP', 'pref_name')
+
+      url = drugList.getPaginatedURL()
+
+      expect(url).toContain('molecule_chembl_id__contains=25')
+      expect(url).toContain('pref_name__contains=ASP')
 
   # ------------------------------
   # Helpers

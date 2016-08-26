@@ -1637,7 +1637,8 @@ describe("Paginated Collection", function() {
   describe("A server side collection", function() {
     var drugList;
     drugList = new DrugList;
-    beforeAll(function(done) {
+    beforeEach(function(done) {
+      drugList = new DrugList;
       return drugList.fetch({
         success: done
       });
@@ -1667,7 +1668,7 @@ describe("Paginated Collection", function() {
         return done();
       }, 5);
     });
-    return it("switches to 5 items per page", function(done) {
+    it("switches to 5 items per page", function(done) {
       drugList.resetPageSize(5);
       return setTimeout(function() {
         var chembl_ids, to_show;
@@ -1678,6 +1679,26 @@ describe("Paginated Collection", function() {
         assert_chembl_ids(drugList, ['CHEMBL6939', 'CHEMBL22', 'CHEMBL6941', 'CHEMBL6942', 'CHEMBL6944']);
         return done();
       }, 5);
+    });
+    it("generates a correct paginated url (sorting)", function() {
+      var url;
+      drugList.sortCollection('molecule_chembl_id');
+      url = drugList.getPaginatedURL();
+      return expect(url).toContain('order_by=molecule_chembl_id');
+    });
+    it("generates a correct paginated url (pagination)", function() {
+      var url;
+      drugList.setPage(5);
+      url = drugList.getPaginatedURL();
+      return expect(url).toContain('limit=20&offset=80');
+    });
+    return it("generates a correct paginated url (search)", function() {
+      var url;
+      drugList.setSearch('25', 'molecule_chembl_id');
+      drugList.setSearch('ASP', 'pref_name');
+      url = drugList.getPaginatedURL();
+      expect(url).toContain('molecule_chembl_id__contains=25');
+      return expect(url).toContain('pref_name__contains=ASP');
     });
   });
   return assert_chembl_ids = function(collection, expected_chembl_ids) {
