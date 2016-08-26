@@ -62,7 +62,12 @@ PaginatedCollection = Backbone.Collection.extend
     else
       @getCurrentPageC()
 
+  # page num must be always a number
   setPage: (page_num) ->
+
+    # don't bother if the page requested is greater than the total number of pages
+    if page_num > @getMeta('total_pages')
+      return
 
     if @getMeta('server_side') == true
       @setPageSS(page_num)

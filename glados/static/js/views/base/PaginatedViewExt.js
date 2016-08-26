@@ -208,7 +208,13 @@ PaginatedViewExt = {
   setUpLoadingWaypoint: function() {
     var advancer, cards, middleCard, waypoint;
     cards = $('#DrugInfBrowserCardsContainer').children();
-    middleCard = cards[cards.length / 2];
+    middleCard = cards[Math.round(cards.length / 2)];
+    console.log('position');
+    console.log(cards.length / 2);
+    console.log('cards:');
+    console.log(cards);
+    console.log('middle card:');
+    console.log(middleCard);
     advancer = $.proxy(function() {
       this.showInfiniteBrPreolader();
       return this.requestPageInCollection('next');

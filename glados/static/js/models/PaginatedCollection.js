@@ -53,6 +53,9 @@ PaginatedCollection = Backbone.Collection.extend({
     }
   },
   setPage: function(page_num) {
+    if (page_num > this.getMeta('total_pages')) {
+      return;
+    }
     if (this.getMeta('server_side') === true) {
       return this.setPageSS(page_num);
     } else {
