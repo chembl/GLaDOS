@@ -201,22 +201,32 @@ PaginatedViewExt = {
     return $(this.el).find('.controls').removeClass('hide');
   },
   hideInfiniteBrPreolader: function() {
-    console.log('hiding preloader');
-    return $(this.el).children('.infinite-browse-preloader').hide();
+    $(this.el).children('.infinite-browse-preloader').hide();
+    return this.showNumResults();
   },
   showInfiniteBrPreolader: function() {
-    console.log('showing preloader');
-    return $(this.el).children('.infinite-browse-preloader').show();
+    $(this.el).children('.infinite-browse-preloader').show();
+    return this.hideNumResults();
+  },
+  showNumResults: function() {
+    return $(this.el).children('.num-results').show();
+  },
+  hideNumResults: function() {
+    return $(this.el).children('.num-results').hide();
   },
   setUpLoadingWaypoint: function() {
-    var advancer, cards, middleCard, waypoint;
-    cards = $('#DrugInfBrowserCardsContainer').children();
-    middleCard = cards[Math.round(cards.length / 2)];
+    var $cards, $middleCard, advancer, waypoint;
+    $cards = $('#DrugInfBrowserCardsContainer').children();
+    if ($cards.length === 0) {
+      return;
+    }
+    $middleCard = $cards[Math.round($cards.length / 2)];
     advancer = $.proxy(function() {
       return this.requestPageInCollection('next');
     }, this);
+    Waypoint.destroyAll();
     return waypoint = new Waypoint({
-      element: middleCard,
+      element: $middleCard,
       handler: function(direction) {
         if (direction === 'down') {
           return advancer();

@@ -210,36 +210,43 @@ PaginatedViewExt =
 
   hideInfiniteBrPreolader: ->
 
-    console.log('hiding preloader')
     $(@el).children('.infinite-browse-preloader').hide()
+    @showNumResults()
 
   showInfiniteBrPreolader: ->
 
-    console.log('showing preloader')
     $(@el).children('.infinite-browse-preloader').show()
+    @hideNumResults()
+
+  showNumResults: ->
+
+    $(@el).children('.num-results').show()
+
+  hideNumResults: ->
+
+    $(@el).children('.num-results').hide()
+
 
   setUpLoadingWaypoint: ->
 
-    cards = $('#DrugInfBrowserCardsContainer').children()
-    middleCard = cards[Math.round(cards.length / 2)]
+    $cards = $('#DrugInfBrowserCardsContainer').children()
+
+    # don't bother when there aren't any cards
+    if $cards.length == 0
+      return
+    
+    $middleCard = $cards[Math.round($cards.length / 2)]
 
     # the advancer function requests always the next page
     advancer = $.proxy ->
       @requestPageInCollection('next')
     , @
 
-    # take into account that the object itself is not being garbage collected
-    # so the waypoint remains. After some scrolling, there will be several waypoints
-    # (every page_size / 2 items).
-    # This means that if the user scrolls up and then down again, the load of the next page will be triggered even
-    # if it is not close to the end of the elements.
-    # In fact this can be useful to reduce the latency to the user, while the user is looking in detail to a section of
-    # list, it loads another page.
-    #
-    # If there is trouble with memory or performance this behaviour could be the cause, If it doesn't cause any trouble
-    # I will leave it like as is.
+    # destroy all waypoints before assigning the new one.
+    Waypoint.destroyAll()
+
     waypoint = new Waypoint(
-      element: middleCard
+      element: $middleCard
       handler: (direction) ->
 
         if direction == 'down'
