@@ -12,6 +12,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     this.showControls();
     $(this.el).find('select').material_select();
     this.fill_template(this.containerID);
+    this.fillNumResults();
     this.hideInfiniteBrPreolader();
     return this.setUpLoadingWaypoint();
   }

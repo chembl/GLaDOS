@@ -271,12 +271,13 @@ PaginatedCollection = Backbone.Collection.extend
 
     url = @getMeta('base_url')
     page_num = @getMeta('current_page')
-
     page_size = @getMeta('page_size')
+    params = []
 
     limit_str = 'limit=' + page_size
     page_str = 'offset=' + (page_num - 1) * page_size
-    full_url = url + '&' + limit_str + '&' + page_str
+    params.push(limit_str)
+    params.push(page_str)
 
     # ----------------------------------------------
     # Sorting
@@ -288,23 +289,20 @@ PaginatedCollection = Backbone.Collection.extend
     for field in sorting
       comparator = field.comparator
       comparator = '-' + comparator unless field.is_sorting == 1
-      full_url += '&order_by=' + comparator
+      params.push('order_by=' + comparator)
 
     # ----------------------------------------------
     # Search terms
     # ----------------------------------------------
     searchTerms = @getMeta('search_terms')
 
-    searchStr = ''
-    console.log('search_terms!')
-    console.log(searchTerms)
 
     searchParts = []
-    for column,term of searchTerms
-      searchParts.push(column + "__contains=" + term)
+    for column, term of searchTerms
+      params.push(column + "__contains=" + term) unless term == ''
+      searchParts.push(column + "__contains=" + term) unless term == ''
 
-    searchStr = searchParts.join('&')
-    full_url += '&' + searchStr
+    full_url = url + '?' + params.join('&')
 
     return full_url
 
@@ -318,6 +316,7 @@ PaginatedCollection = Backbone.Collection.extend
 
   sortCollectionSS: (comparator) ->
 
+    @setMeta('current_page', 1)
     columns = @getMeta('columns')
     @setupColSorting(columns, comparator)
     @url = @getPaginatedURL()

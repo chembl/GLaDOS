@@ -236,13 +236,15 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.fetch();
   },
   getPaginatedURL: function() {
-    var column, columns, comparator, field, full_url, limit_str, page_num, page_size, page_str, searchParts, searchStr, searchTerms, sorting, term, url, _i, _len;
+    var column, columns, comparator, field, full_url, limit_str, page_num, page_size, page_str, params, searchParts, searchTerms, sorting, term, url, _i, _len;
     url = this.getMeta('base_url');
     page_num = this.getMeta('current_page');
     page_size = this.getMeta('page_size');
+    params = [];
     limit_str = 'limit=' + page_size;
     page_str = 'offset=' + (page_num - 1) * page_size;
-    full_url = url + '&' + limit_str + '&' + page_str;
+    params.push(limit_str);
+    params.push(page_str);
     columns = this.getMeta('columns');
     sorting = _.filter(columns, function(col) {
       return col.is_sorting !== 0;
@@ -253,19 +255,20 @@ PaginatedCollection = Backbone.Collection.extend({
       if (field.is_sorting !== 1) {
         comparator = '-' + comparator;
       }
-      full_url += '&order_by=' + comparator;
+      params.push('order_by=' + comparator);
     }
     searchTerms = this.getMeta('search_terms');
-    searchStr = '';
-    console.log('search_terms!');
-    console.log(searchTerms);
     searchParts = [];
     for (column in searchTerms) {
       term = searchTerms[column];
-      searchParts.push(column + "__contains=" + term);
+      if (term !== '') {
+        params.push(column + "__contains=" + term);
+      }
+      if (term !== '') {
+        searchParts.push(column + "__contains=" + term);
+      }
     }
-    searchStr = searchParts.join('&');
-    full_url += '&' + searchStr;
+    full_url = url + '?' + params.join('&');
     return full_url;
   },
   resetPageSizeSS: function(new_page_size) {
@@ -277,6 +280,7 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   sortCollectionSS: function(comparator) {
     var columns;
+    this.setMeta('current_page', 1);
     columns = this.getMeta('columns');
     this.setupColSorting(columns, comparator);
     this.url = this.getPaginatedURL();

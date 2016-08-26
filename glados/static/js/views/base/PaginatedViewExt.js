@@ -93,6 +93,14 @@ PaginatedViewExt = {
     this.activateCurrentPageButton();
     return this.enableDisableNextLastButtons();
   },
+  fillNumResults: function() {
+    var $elem, $template;
+    $elem = $(this.el).find('.num-results');
+    $template = $('#' + $elem.attr('data-hb-template'));
+    return $elem.html(Handlebars.compile($template.html())({
+      num_results: this.collection.getMeta('total_records')
+    }));
+  },
   getPageEvent: function(event) {
     var clicked, pageNum;
     clicked = $(event.currentTarget);

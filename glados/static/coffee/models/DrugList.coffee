@@ -13,7 +13,7 @@ DrugList = PaginatedCollection.extend
 
     @meta =
       server_side: true
-      base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?max_phase=4'
+      base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
       page_size: 10
       current_page: 1
       to_show: []

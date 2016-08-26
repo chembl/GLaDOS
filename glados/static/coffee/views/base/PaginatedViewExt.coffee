@@ -93,6 +93,14 @@ PaginatedViewExt =
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
+  fillNumResults: ->
+    $elem = $(@el).find('.num-results')
+    $template = $('#' + $elem.attr('data-hb-template'))
+
+    $elem.html Handlebars.compile($template.html())
+      num_results: @collection.getMeta('total_records')
+
+
   getPageEvent: (event) ->
 
     clicked = $(event.currentTarget)
