@@ -8,12 +8,17 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     return this.containerID = 'DrugInfBrowserCardsContainer';
   },
   render: function() {
+    console.log('num items in collection: ', this.collection.models.length);
+    console.log('items: ', _.map(this.collection.models, function(item) {
+      return item.get('molecule_chembl_id');
+    }));
     this.renderSortingSelector();
     this.showControls();
     $(this.el).find('select').material_select();
     this.fill_template(this.containerID);
     this.fillNumResults();
     this.hideInfiniteBrPreolader();
-    return this.setUpLoadingWaypoint();
+    this.setUpLoadingWaypoint();
+    return console.log('num cards: ', $('#DrugInfBrowserCardsContainer').children().length);
   }
 });

@@ -7,6 +7,9 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
 
   render: ->
 
+    console.log 'num items in collection: ', @collection.models.length
+    console.log 'items: ', _.map(@collection.models, (item) -> item.get('molecule_chembl_id'))
+
     @renderSortingSelector()
     @showControls()
     $(@el).find('select').material_select();
@@ -14,3 +17,5 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
     @fillNumResults()
     @hideInfiniteBrPreolader()
     @setUpLoadingWaypoint()
+
+    console.log 'num cards: ', $('#DrugInfBrowserCardsContainer').children().length

@@ -117,18 +117,22 @@ PaginatedViewExt =
 
   requestPageInCollection: (pageNum) ->
 
-    current_page = @collection.getMeta('current_page')
-
-    # Don't bother if the user requested the same page as the current one
-    if current_page == pageNum
-      return
-
-    @showInfiniteBrPreolader() unless !@isInfinite
+    currentPage = @collection.getMeta('current_page')
+    totalPages = @collection.getMeta('total_pages')
 
     if pageNum == "previous"
-      pageNum = current_page - 1
+      pageNum = currentPage - 1
     else if pageNum == "next"
-      pageNum = current_page + 1
+      pageNum = currentPage + 1
+
+    # Don't bother if the user requested is greater than the max number of pages
+    if pageNum > totalPages
+      console.log('ignoring!')
+      return
+
+    console.log('waypoint2! ')
+    @showInfiniteBrPreolader() unless !@isInfinite
+
 
     @collection.setPage(pageNum)
 
@@ -215,6 +219,7 @@ PaginatedViewExt =
 
   showInfiniteBrPreolader: ->
 
+    console.log('show preloader!')
     $(@el).children('.infinite-browse-preloader').show()
     @hideNumResults()
 

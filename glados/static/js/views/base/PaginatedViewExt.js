@@ -114,18 +114,21 @@ PaginatedViewExt = {
     return this.requestPageInCollection(pageNum);
   },
   requestPageInCollection: function(pageNum) {
-    var current_page;
-    current_page = this.collection.getMeta('current_page');
-    if (current_page === pageNum) {
+    var currentPage, totalPages;
+    currentPage = this.collection.getMeta('current_page');
+    totalPages = this.collection.getMeta('total_pages');
+    if (pageNum === "previous") {
+      pageNum = currentPage - 1;
+    } else if (pageNum === "next") {
+      pageNum = currentPage + 1;
+    }
+    if (pageNum > totalPages) {
+      console.log('ignoring!');
       return;
     }
+    console.log('waypoint2! ');
     if (!!this.isInfinite) {
       this.showInfiniteBrPreolader();
-    }
-    if (pageNum === "previous") {
-      pageNum = current_page - 1;
-    } else if (pageNum === "next") {
-      pageNum = current_page + 1;
     }
     return this.collection.setPage(pageNum);
   },
@@ -205,6 +208,7 @@ PaginatedViewExt = {
     return this.showNumResults();
   },
   showInfiniteBrPreolader: function() {
+    console.log('show preloader!');
     $(this.el).children('.infinite-browse-preloader').show();
     return this.hideNumResults();
   },
