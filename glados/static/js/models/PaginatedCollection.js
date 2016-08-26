@@ -290,6 +290,7 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   setSearchSS: function(term, column) {
     var searchTerms;
+    this.setMeta('current_page', 1);
     if (this.getMeta('search_terms') == null) {
       this.setMeta('search_terms', {});
     }

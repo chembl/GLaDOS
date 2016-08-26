@@ -326,6 +326,7 @@ PaginatedCollection = Backbone.Collection.extend
 
   setSearchSS: (term, column) ->
 
+    @setMeta('current_page', 1)
     # create the search term objects if it doesn't exist
     @setMeta('search_terms', {}) unless @getMeta('search_terms')?
 
