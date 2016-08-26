@@ -116,10 +116,11 @@ PaginatedViewExt = {
   requestPageInCollection: function(pageNum) {
     var current_page;
     current_page = this.collection.getMeta('current_page');
-    console.log('view requested page:');
-    console.log(pageNum);
     if (current_page === pageNum) {
       return;
+    }
+    if (!!this.isInfinite) {
+      this.showInfiniteBrPreolader();
     }
     if (pageNum === "previous") {
       pageNum = current_page - 1;
@@ -200,23 +201,18 @@ PaginatedViewExt = {
     return $(this.el).find('.controls').removeClass('hide');
   },
   hideInfiniteBrPreolader: function() {
+    console.log('hiding preloader');
     return $(this.el).children('.infinite-browse-preloader').hide();
   },
   showInfiniteBrPreolader: function() {
+    console.log('showing preloader');
     return $(this.el).children('.infinite-browse-preloader').show();
   },
   setUpLoadingWaypoint: function() {
     var advancer, cards, middleCard, waypoint;
     cards = $('#DrugInfBrowserCardsContainer').children();
     middleCard = cards[Math.round(cards.length / 2)];
-    console.log('position');
-    console.log(cards.length / 2);
-    console.log('cards:');
-    console.log(cards);
-    console.log('middle card:');
-    console.log(middleCard);
     advancer = $.proxy(function() {
-      this.showInfiniteBrPreolader();
       return this.requestPageInCollection('next');
     }, this);
     return waypoint = new Waypoint({

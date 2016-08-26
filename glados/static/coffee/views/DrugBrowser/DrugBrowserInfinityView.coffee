@@ -7,6 +7,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
 
   render: ->
 
+    console.log('render!')
     @renderSortingSelector()
     @showControls()
     $(@el).find('select').material_select();

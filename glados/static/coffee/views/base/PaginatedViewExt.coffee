@@ -119,12 +119,11 @@ PaginatedViewExt =
 
     current_page = @collection.getMeta('current_page')
 
-    console.log('view requested page:')
-    console.log(pageNum)
-
     # Don't bother if the user requested the same page as the current one
     if current_page == pageNum
       return
+
+    @showInfiniteBrPreolader() unless !@isInfinite
 
     if pageNum == "previous"
       pageNum = current_page - 1
@@ -211,10 +210,12 @@ PaginatedViewExt =
 
   hideInfiniteBrPreolader: ->
 
+    console.log('hiding preloader')
     $(@el).children('.infinite-browse-preloader').hide()
 
   showInfiniteBrPreolader: ->
 
+    console.log('showing preloader')
     $(@el).children('.infinite-browse-preloader').show()
 
   setUpLoadingWaypoint: ->
@@ -222,16 +223,8 @@ PaginatedViewExt =
     cards = $('#DrugInfBrowserCardsContainer').children()
     middleCard = cards[Math.round(cards.length / 2)]
 
-    console.log('position')
-    console.log(cards.length / 2)
-    console.log('cards:')
-    console.log(cards)
-    console.log('middle card:')
-    console.log(middleCard)
-
     # the advancer function requests always the next page
     advancer = $.proxy ->
-      @showInfiniteBrPreolader()
       @requestPageInCollection('next')
     , @
 
