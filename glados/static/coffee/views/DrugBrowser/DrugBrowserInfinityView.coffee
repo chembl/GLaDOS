@@ -19,3 +19,25 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
     @setUpLoadingWaypoint()
 
     console.log 'num cards: ', $('#DrugInfBrowserCardsContainer').children().length
+
+    slider = document.getElementById('search_max_phase')
+
+    if $(slider).attr('initialised') == 'yes'
+      # ahhhh! >(
+      return
+
+    noUiSlider.create slider,
+      start: [
+        20
+        80
+      ]
+      connect: true
+      start: [0, 4]
+      step: 1
+      range:
+        'min': 0
+        'max': 4
+      format: wNumb(decimals: 0)
+
+    slider.noUiSlider.on 'update', @setNumericSearchWrapper($(slider))
+    $(slider).attr('initialised', 'yes')

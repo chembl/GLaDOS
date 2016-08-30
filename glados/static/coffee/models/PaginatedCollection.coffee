@@ -122,14 +122,15 @@ PaginatedCollection = Backbone.Collection.extend
     return is_descending
 
   # sets the term to search in the collection
-  # when the collection is server side, the corresponding column is required.
+  # when the collection is server side, the corresponding column and type are required.
   # This is because the web services don't provide a search with OR
   # for client side, it can be null, but for example for server side
-  # for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id'
-  setSearch: (term, column)->
+  # for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id', and type will be 'text'
+  # the url will be generated taking into account this terms.
+  setSearch: (term, column, type)->
 
     if @getMeta('server_side') == true
-      @setSearchSS(term, column)
+      @setSearchSS(term, column, type)
     else
       @setSearchC(term)
 
@@ -302,10 +303,23 @@ PaginatedCollection = Backbone.Collection.extend
     searchTerms = @getMeta('search_terms')
 
 
-    searchParts = []
-    for column, term of searchTerms
-      params.push(column + "__contains=" + term) unless term == ''
-      searchParts.push(column + "__contains=" + term) unless term == ''
+    for column, info of searchTerms
+
+      type = info[0]
+      term = info[1]
+
+      if type == 'text'
+
+        params.push(column + "__contains=" + term) unless term == ''
+
+      else if type == 'numeric'
+
+        values = term.split(',')
+        min = values[0]
+        max = values[1]
+
+        params.push(column + "__gte=" + min)
+        params.push(column + "__lte=" + max)
 
     full_url = url + '?' + params.join('&')
 
@@ -329,14 +343,14 @@ PaginatedCollection = Backbone.Collection.extend
     console.log(@url)
     @fetch()
 
-  setSearchSS: (term, column) ->
+  setSearchSS: (term, column, type) ->
 
     @setMeta('current_page', 1)
     # create the search term objects if it doesn't exist
     @setMeta('search_terms', {}) unless @getMeta('search_terms')?
 
     searchTerms = @getMeta('search_terms')
-    searchTerms[column] = term
+    searchTerms[column] = [type, term]
 
     @url = @getPaginatedURL()
     console.log('URL')

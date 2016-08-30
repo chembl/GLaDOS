@@ -165,18 +165,47 @@ PaginatedViewExt =
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
 
+  #--------------------------------------------------------------------------------------
+  # Search
+  #--------------------------------------------------------------------------------------
   setSearch: (event) ->
     $searchInput = $(event.currentTarget)
     term = $searchInput.val()
-    # if the collection is client side the column will be undefined and will be ignored.
+    # if the collection is client side the column and data type will be undefined and will be ignored.
     column = $searchInput.attr('data-column')
+    type = $searchInput.attr('data-column-type')
+
+    @triggerSearch(term, column, type)
+
+  # this closes the function setNumeric search with a jquery element, the idea is that
+  # you can get the attributes such as the column for the search
+  setNumericSearchWrapper: ($elem) ->
+
+    ctx = @
+    setNumericSearch = (values, handle) ->
+
+      term =  values.join(',')
+      column = $elem.attr('data-column')
+      type = $elem.attr('data-column-type')
+
+      ctx.triggerSearch(term, column, type)
+
+
+    return setNumericSearch
+
+  triggerSearch: (term, column, type) ->
 
     if @isInfinite
 
       @clearInfiniteContainer()
       @showInfiniteBrPreolader()
 
-    @collection.setSearch(term, column)
+    @collection.setSearch(term, column, type)
+
+
+  #--------------------------------------------------------------------------------------
+  # Sort
+  #--------------------------------------------------------------------------------------
 
   sortCollection: (event) ->
 
@@ -313,4 +342,5 @@ PaginatedViewExt =
     comp = @collection.getCurrentSortingComparator()
     if comp?
       @triggerCollectionSort(comp)
+
 

@@ -8,6 +8,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     return this.containerID = 'DrugInfBrowserCardsContainer';
   },
   render: function() {
+    var slider;
     console.log('num items in collection: ', this.collection.models.length);
     console.log('items: ', _.map(this.collection.models, function(item) {
       return item.get('molecule_chembl_id');
@@ -19,6 +20,25 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     this.fillNumResults();
     this.hideInfiniteBrPreolader();
     this.setUpLoadingWaypoint();
-    return console.log('num cards: ', $('#DrugInfBrowserCardsContainer').children().length);
+    console.log('num cards: ', $('#DrugInfBrowserCardsContainer').children().length);
+    slider = document.getElementById('search_max_phase');
+    if ($(slider).attr('initialised') === 'yes') {
+      return;
+    }
+    noUiSlider.create(slider, {
+      start: [20, 80],
+      connect: true,
+      start: [0, 4],
+      step: 1,
+      range: {
+        'min': 0,
+        'max': 4
+      },
+      format: wNumb({
+        decimals: 0
+      })
+    });
+    slider.noUiSlider.on('update', this.setNumericSearchWrapper($(slider)));
+    return $(slider).attr('initialised', 'yes');
   }
 });

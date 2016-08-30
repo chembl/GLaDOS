@@ -112,9 +112,9 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return is_descending;
   },
-  setSearch: function(term, column) {
+  setSearch: function(term, column, type) {
     if (this.getMeta('server_side') === true) {
-      return this.setSearchSS(term, column);
+      return this.setSearchSS(term, column, type);
     } else {
       return this.setSearchC(term);
     }
@@ -239,7 +239,7 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.fetch();
   },
   getPaginatedURL: function() {
-    var column, columns, comparator, field, full_url, limit_str, page_num, page_size, page_str, params, searchParts, searchTerms, sorting, term, url, _i, _len;
+    var column, columns, comparator, field, full_url, info, limit_str, max, min, page_num, page_size, page_str, params, searchTerms, sorting, term, type, url, values, _i, _len;
     url = this.getMeta('base_url');
     page_num = this.getMeta('current_page');
     page_size = this.getMeta('page_size');
@@ -261,14 +261,20 @@ PaginatedCollection = Backbone.Collection.extend({
       params.push('order_by=' + comparator);
     }
     searchTerms = this.getMeta('search_terms');
-    searchParts = [];
     for (column in searchTerms) {
-      term = searchTerms[column];
-      if (term !== '') {
-        params.push(column + "__contains=" + term);
-      }
-      if (term !== '') {
-        searchParts.push(column + "__contains=" + term);
+      info = searchTerms[column];
+      type = info[0];
+      term = info[1];
+      if (type === 'text') {
+        if (term !== '') {
+          params.push(column + "__contains=" + term);
+        }
+      } else if (type === 'numeric') {
+        values = term.split(',');
+        min = values[0];
+        max = values[1];
+        params.push(column + "__gte=" + min);
+        params.push(column + "__lte=" + max);
       }
     }
     full_url = url + '?' + params.join('&');
@@ -291,14 +297,14 @@ PaginatedCollection = Backbone.Collection.extend({
     console.log(this.url);
     return this.fetch();
   },
-  setSearchSS: function(term, column) {
+  setSearchSS: function(term, column, type) {
     var searchTerms;
     this.setMeta('current_page', 1);
     if (this.getMeta('search_terms') == null) {
       this.setMeta('search_terms', {});
     }
     searchTerms = this.getMeta('search_terms');
-    searchTerms[column] = term;
+    searchTerms[column] = [type, term];
     this.url = this.getPaginatedURL();
     console.log('URL');
     console.log(this.url);

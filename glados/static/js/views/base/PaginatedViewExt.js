@@ -163,15 +163,31 @@ PaginatedViewExt = {
     return this.collection.resetPageSize(new_page_size);
   },
   setSearch: function(event) {
-    var $searchInput, column, term;
+    var $searchInput, column, term, type;
     $searchInput = $(event.currentTarget);
     term = $searchInput.val();
     column = $searchInput.attr('data-column');
+    type = $searchInput.attr('data-column-type');
+    return this.triggerSearch(term, column, type);
+  },
+  setNumericSearchWrapper: function($elem) {
+    var ctx, setNumericSearch;
+    ctx = this;
+    setNumericSearch = function(values, handle) {
+      var column, term, type;
+      term = values.join(',');
+      column = $elem.attr('data-column');
+      type = $elem.attr('data-column-type');
+      return ctx.triggerSearch(term, column, type);
+    };
+    return setNumericSearch;
+  },
+  triggerSearch: function(term, column, type) {
     if (this.isInfinite) {
       this.clearInfiniteContainer();
       this.showInfiniteBrPreolader();
     }
-    return this.collection.setSearch(term, column);
+    return this.collection.setSearch(term, column, type);
   },
   sortCollection: function(event) {
     var comparator, order_icon;

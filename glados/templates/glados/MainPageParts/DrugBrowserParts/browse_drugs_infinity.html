@@ -42,23 +42,23 @@
     <div class="row">
 
       <div class="input-field col s6">
-        <input type="text" id="search1" class="search" data-column="molecule_chembl_id">
+        <input type="text" id="search1" class="search" data-column="molecule_chembl_id" data-column-type="text">
         <label for="search1">molecule_chembl_id</label>
       </div>
 
       <div class="input-field col s6">
-        <input type="text" id="search2" class="search" data-column="molecule_type">
+        <input type="text" id="search2" class="search" data-column="molecule_type" data-column-type="text">
         <label for="search2">molecule_type</label>
       </div>
 
       <div class="input-field col s6">
-        <input type="text" id="search3" class="search" data-column="pref_name">
+        <input type="text" id="search3" class="search" data-column="pref_name" data-column-type="text">
         <label for="search3">pref_name</label>
       </div>
 
       <div class="input-field col s6">
-        <input type="text" id="search4" class="search" data-column="max_phase">
-        <label for="search4">max_phase</label>
+        max_phase:
+        <div id="search_max_phase" class="numeric-search" data-column="max_phase" data-column-type="numeric"></div>
       </div>
 
     </div>
