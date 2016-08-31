@@ -8,6 +8,7 @@ PaginatedViewExt =
     'change .change-page-size': 'changePageSize'
     'click .sort': 'sortCollection'
     'input .search': 'setSearch'
+    'change .select-search' : 'setSearch'
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
 
@@ -174,6 +175,7 @@ PaginatedViewExt =
     # if the collection is client side the column and data type will be undefined and will be ignored.
     column = $searchInput.attr('data-column')
     type = $searchInput.attr('data-column-type')
+    console.log 'input!', $searchInput
 
     @triggerSearch(term, column, type)
 

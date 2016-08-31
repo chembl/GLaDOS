@@ -261,6 +261,7 @@ PaginatedCollection = Backbone.Collection.extend({
       params.push('order_by=' + comparator);
     }
     searchTerms = this.getMeta('search_terms');
+    console.log('search terms:', searchTerms);
     for (column in searchTerms) {
       info = searchTerms[column];
       type = info[0];
@@ -275,6 +276,10 @@ PaginatedCollection = Backbone.Collection.extend({
         max = values[1];
         params.push(column + "__gte=" + min);
         params.push(column + "__lte=" + max);
+      } else if (type === 'boolean') {
+        if (term !== 'any') {
+          params.push(column + "=" + term);
+        }
       }
     }
     full_url = url + '?' + params.join('&');
@@ -299,6 +304,9 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   setSearchSS: function(term, column, type) {
     var searchTerms;
+    if (term === '') {
+      return;
+    }
     this.setMeta('current_page', 1);
     if (this.getMeta('search_terms') == null) {
       this.setMeta('search_terms', {});

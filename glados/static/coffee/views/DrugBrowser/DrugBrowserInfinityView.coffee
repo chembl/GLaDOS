@@ -10,6 +10,8 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
     console.log 'num items in collection: ', @collection.models.length
     console.log 'items: ', _.map(@collection.models, (item) -> item.get('molecule_chembl_id'))
 
+
+
     @renderSortingSelector()
     @showControls()
     $(@el).find('select').material_select();
@@ -39,5 +41,5 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
         'max': 4
       format: wNumb(decimals: 0)
 
-    slider.noUiSlider.on 'update', @setNumericSearchWrapper($(slider))
+    slider.noUiSlider.on 'set', @setNumericSearchWrapper($(slider))
     $(slider).attr('initialised', 'yes')

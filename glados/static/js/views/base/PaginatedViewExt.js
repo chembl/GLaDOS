@@ -7,6 +7,7 @@ PaginatedViewExt = {
     'change .change-page-size': 'changePageSize',
     'click .sort': 'sortCollection',
     'input .search': 'setSearch',
+    'change .select-search': 'setSearch',
     'change .select-sort': 'sortCollectionFormSelect',
     'click .btn-sort-direction': 'changeSortOrderInf'
   },
@@ -168,6 +169,7 @@ PaginatedViewExt = {
     term = $searchInput.val();
     column = $searchInput.attr('data-column');
     type = $searchInput.attr('data-column-type');
+    console.log('input!', $searchInput);
     return this.triggerSearch(term, column, type);
   },
   setNumericSearchWrapper: function($elem) {

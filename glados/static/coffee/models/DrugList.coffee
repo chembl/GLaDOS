@@ -48,6 +48,13 @@ DrugList = PaginatedCollection.extend
           'is_sorting': 0
           'sort_class': 'fa-sort'
         }
+        {
+          'name_to_show': 'Dosed Ingredient:'
+          'comparator': 'dosed_ingredient'
+          'sort_disabled': false
+          'is_sorting': 0
+          'sort_class': 'fa-sort'
+        }
       ]
 
     @url = @getMeta('base_url')

@@ -303,6 +303,8 @@ PaginatedCollection = Backbone.Collection.extend
     searchTerms = @getMeta('search_terms')
 
 
+    console.log 'search terms:', searchTerms
+
     for column, info of searchTerms
 
       type = info[0]
@@ -320,6 +322,10 @@ PaginatedCollection = Backbone.Collection.extend
 
         params.push(column + "__gte=" + min)
         params.push(column + "__lte=" + max)
+
+      else if type == 'boolean'
+
+        params.push(column + "=" + term) unless term == 'any'
 
     full_url = url + '?' + params.join('&')
 
@@ -344,6 +350,10 @@ PaginatedCollection = Backbone.Collection.extend
     @fetch()
 
   setSearchSS: (term, column, type) ->
+
+    # it seems that sometimes materialize makes the event to be fired twice.
+    if term == ''
+      return
 
     @setMeta('current_page', 1)
     # create the search term objects if it doesn't exist

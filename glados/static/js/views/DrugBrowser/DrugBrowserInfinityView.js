@@ -38,7 +38,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
         decimals: 0
       })
     });
-    slider.noUiSlider.on('update', this.setNumericSearchWrapper($(slider)));
+    slider.noUiSlider.on('set', this.setNumericSearchWrapper($(slider)));
     return $(slider).attr('initialised', 'yes');
   }
 });
