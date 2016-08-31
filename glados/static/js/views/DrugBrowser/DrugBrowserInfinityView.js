@@ -13,6 +13,9 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     console.log('items: ', _.map(this.collection.models, function(item) {
       return item.get('molecule_chembl_id');
     }));
+    if (this.collection.getMeta('current_page') === 1) {
+      this.clearInfiniteContainer();
+    }
     this.renderSortingSelector();
     this.showControls();
     $(this.el).find('select').material_select();

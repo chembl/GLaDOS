@@ -10,6 +10,11 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
     console.log 'num items in collection: ', @collection.models.length
     console.log 'items: ', _.map(@collection.models, (item) -> item.get('molecule_chembl_id'))
 
+    if @collection.getMeta('current_page') == 1
+
+      # always clear the infinite container when receiving the first page, to avoid
+      # showing results from previous delayed requests.
+      @clearInfiniteContainer()
 
 
     @renderSortingSelector()
