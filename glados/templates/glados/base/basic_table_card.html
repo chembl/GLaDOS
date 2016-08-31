@@ -1,6 +1,6 @@
 {% block custom_handlebars %}{% endblock %}
 
-<!-- This is the base layout for a card that shous the information with expandables, tables and collections -->
+<!-- This is the base layout for a card that shows the information with expandables, tables and collections -->
 <div class="col s12 m10 l12">
 
   <div id='{% block card_id %}{% endblock %}' class="card chembl-card grey lighten-5" >
@@ -54,6 +54,9 @@
 
 
             {% block collection %}
+            {% endblock %}
+
+            {% block general_content %}
             {% endblock %}
 
         </div>

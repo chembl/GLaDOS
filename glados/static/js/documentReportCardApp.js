@@ -18,7 +18,7 @@ DocumentReportCardApp = (function() {
     * Initializes the DBIView (Document Basic Information View)
     * @param {Compound} model, base model for the view
     * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentBasicInformationViewView} the view that has been created
+    * @return {DocumentBasicInformationView} the view that has been created
   */
 
 
@@ -29,6 +29,22 @@ DocumentReportCardApp = (function() {
       el: top_level_elem
     });
     return dbiView;
+  };
+
+  /* *
+    * Initializes the DANView (Document Assay Network View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {DocumentAssayNetworkView} the view that has been created
+  */
+
+
+  DocumentReportCardApp.initDANView = function(top_level_elem) {
+    var danView;
+    danView = new DocumentAssayNetworkView({
+      el: top_level_elem
+    });
+    return danView;
   };
 
   return DocumentReportCardApp;

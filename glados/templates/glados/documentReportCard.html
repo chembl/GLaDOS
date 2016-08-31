@@ -48,6 +48,20 @@
       </div>
 
       <div class="divider"></div>
+      <div id="AssayNetwork" class="section scrollspy">
+        <h3>Assay Network</h3>
+
+        <div class="row">
+
+          {% block dan %}
+            {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
       <div id="ProteinTargetSummay" class="section scrollspy">
         <h3>Protein Target Summay</h3>
 
@@ -115,6 +129,10 @@
             <small>Related Documents</small>
           </a></li>
 
+          <li><a href="#AssayNetwork">
+            <small>Assay Network</small>
+          </a></li>
+
           <li><a href="#ProteinTargetSummay">
             <small>Protein Target Summay</small>
           </a></li>
@@ -159,7 +177,9 @@ var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
 
-var abiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
+var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
+var danView = DocumentReportCardApp.initDANView($('#DAssayNetwork'));
+danView.render();
 
 document.fetch();
 
