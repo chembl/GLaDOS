@@ -3,6 +3,72 @@ var DocumentAssayNetworkView;
 
 DocumentAssayNetworkView = CardView.extend({
   render: function() {
-    return console.log('render!');
+    var assays, height, margin, matrix, max, n, nodes, svg, total, width;
+    console.log('render!');
+    assays = {
+      "nodes": [
+        {
+          "name": "A",
+          "description": "this is node a"
+        }, {
+          "name": "B",
+          "description": "this is node a"
+        }, {
+          "name": "C",
+          "description": "this is node a"
+        }
+      ],
+      "links": [
+        {
+          "source": 0,
+          "target": 1,
+          "value": 10
+        }, {
+          "source": 0,
+          "target": 2,
+          "value": 20
+        }, {
+          "source": 1,
+          "target": 2,
+          "value": 30
+        }
+      ]
+    };
+    margin = {
+      top: 100,
+      right: 0,
+      bottom: 10,
+      left: 100
+    };
+    width = 600;
+    height = 600;
+    svg = d3.select('#AssayNetworkVisualisationContainer').append('svg').attr('width', width).attr('height', height);
+    matrix = [];
+    nodes = assays.nodes;
+    total = 0;
+    n = nodes.length;
+    nodes.forEach(function(node, i) {
+      node.index = i;
+      node.count = 0;
+      return matrix[i] = d3.range(n).map(function(j) {
+        return {
+          x: j,
+          y: i,
+          z: 0
+        };
+      });
+    });
+    assays.links.forEach(function(link) {
+      matrix[link.source][link.target].z = link.value;
+      matrix[link.target][link.source].z = link.value;
+      nodes[link.source].count += link.value;
+      nodes[link.target].count += link.value;
+      return total += link.value;
+    });
+    console.log('Matrix:');
+    console.log(matrix);
+    return max = d3.max(assays.links, function(d) {
+      return d.value;
+    });
   }
 });
