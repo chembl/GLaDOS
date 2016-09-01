@@ -4,6 +4,15 @@
 # also make sure the html can access the handlebars templates!
 DocumentAssayNetworkView = CardView.extend
 
+  initialize: ->
+
+
+
+  updateView: (debounced_render) ->
+    $(@el).empty()
+    @showPreloader()
+    debounced_render()
+
   render: ->
     console.log('render!')
 

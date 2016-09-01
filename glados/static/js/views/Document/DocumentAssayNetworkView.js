@@ -2,6 +2,12 @@
 var DocumentAssayNetworkView;
 
 DocumentAssayNetworkView = CardView.extend({
+  initialize: function() {},
+  updateView: function(debounced_render) {
+    $(this.el).empty();
+    this.showPreloader();
+    return debounced_render();
+  },
   render: function() {
     var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, orders, row, svg, tip, total, width, x, z;
     console.log('render!');

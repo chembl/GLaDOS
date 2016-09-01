@@ -1,4 +1,4 @@
-BrowseTargetAsCirclesView = Backbone.View.extend
+BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
   initialize: ->
@@ -7,29 +7,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend
 
     # the render function is debounced so it waits for the size of the
     # element to be ready
-    debounced_render = _.debounce($.proxy(@render, @), 300)
-    updateViewProxy = $.proxy(@updateView, @, debounced_render)
-
-    $(window).resize ->
-      updateViewProxy()
+    updateViewProxy = @setUpResponsiveRender()
 
     @model.on 'change', updateViewProxy, @
-
-  showPreloader: ->
-
-    if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
-      $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
-      $(@el).attr('data-loading', 'true')
 
   hidePreloader: ->
 
     $(@el).find('.card-preolader-to-hide').hide()
     $(@el).attr('data-loading', 'false')
-
-  updateView: (debounced_render) ->
-    $(@el).empty()
-    @showPreloader()
-    debounced_render()
 
   render: ->
 
