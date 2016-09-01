@@ -2,20 +2,19 @@
 # from the Document report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-DocumentAssayNetworkView = CardView.extend
+DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @$vis_elem = $('#AssayNetworkVisualisationContainer')
 
-
-  updateView: (debounced_render) ->
-    $(@el).empty()
-    @showPreloader()
-    debounced_render()
+    updateViewProxy = @setUpResponsiveRender()
 
   render: ->
     console.log('render!')
+    console.log($(@el))
 
+    @hidePreloader()
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -145,18 +144,18 @@ DocumentAssayNetworkView = CardView.extend
     # --------------------------------------
 
     margin =
-      top: 100
+      top: 50
       right: 0
       bottom: 10
-      left: 100
+      left: 50
 
-    width = 600
-    height = 600
+    width = $(@el).width() * 0.7
+    height = width
 
     x = d3.scale.ordinal().rangeBands([0, width])
     z = d3.scale.linear().domain([0, 4]).clamp(true)
 
-    svg = d3.select('#AssayNetworkVisualisationContainer')
+    svg = d3.select('#' + @$vis_elem.attr('id'))
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)

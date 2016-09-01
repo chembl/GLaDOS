@@ -178,7 +178,7 @@ CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
 var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
 
 var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
-var danView = DocumentReportCardApp.initDANView($('#DAssayNetwork'));
+var danView = DocumentReportCardApp.initDANView($('#DAssayNetworkCard'));
 danView.render();
 
 document.fetch();

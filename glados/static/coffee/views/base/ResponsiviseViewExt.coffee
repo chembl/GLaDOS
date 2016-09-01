@@ -6,7 +6,13 @@ ResponsiviseViewExt =
 
 
   updateView: (debounced_render) ->
-    $(@el).empty()
+
+    if @$vis_elem?
+      $to_empty = @$vis_elem
+    else
+      $to_empty = $(@el)
+
+    $to_empty.empty()
     @showPreloader()
     debounced_render()
 
@@ -26,6 +32,23 @@ ResponsiviseViewExt =
 
   showPreloader: ->
 
-    if $(@el).attr('data-loading') == 'false' or !$(@el).attr('data-loading')?
-      $(@el).html Handlebars.compile($('#Handlebars-Common-Preloader').html())
-      $(@el).attr('data-loading', 'true')
+    if @$vis_elem?
+      $base_elem = @$vis_elem
+    else
+      $base_elem = $(@el)
+
+
+    if $base_elem.attr('data-loading') == 'false' or !$base_elem.attr('data-loading')?
+      $base_elem.html Handlebars.compile($('#Handlebars-Common-Preloader').html())
+      $base_elem.attr('data-loading', 'true')
+
+  hidePreloader: ->
+
+    if @$vis_elem?
+      $base_elem = @$vis_elem
+    else
+      $base_elem = $(@el)
+
+
+    $base_elem.find('.card-preolader-to-hide').hide()
+    $base_elem.attr('data-loading', 'false')

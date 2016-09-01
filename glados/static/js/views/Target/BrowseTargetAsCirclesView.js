@@ -8,10 +8,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     updateViewProxy = this.setUpResponsiveRender();
     return this.model.on('change', updateViewProxy, this);
   },
-  hidePreloader: function() {
-    $(this.el).find('.card-preolader-to-hide').hide();
-    return $(this.el).attr('data-loading', 'false');
-  },
   render: function() {
     var circle, color, diameter, elem_selector, focus, margin, node, nodes, pack, root, svg, text, view, zoom, zoomTo;
     console.log('nodes before');

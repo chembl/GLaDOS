@@ -3,7 +3,13 @@ var ResponsiviseViewExt;
 
 ResponsiviseViewExt = {
   updateView: function(debounced_render) {
-    $(this.el).empty();
+    var $to_empty;
+    if (this.$vis_elem != null) {
+      $to_empty = this.$vis_elem;
+    } else {
+      $to_empty = $(this.el);
+    }
+    $to_empty.empty();
     this.showPreloader();
     return debounced_render();
   },
@@ -17,9 +23,25 @@ ResponsiviseViewExt = {
     return updateViewProxy;
   },
   showPreloader: function() {
-    if ($(this.el).attr('data-loading') === 'false' || !($(this.el).attr('data-loading') != null)) {
-      $(this.el).html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
-      return $(this.el).attr('data-loading', 'true');
+    var $base_elem;
+    if (this.$vis_elem != null) {
+      $base_elem = this.$vis_elem;
+    } else {
+      $base_elem = $(this.el);
     }
+    if ($base_elem.attr('data-loading') === 'false' || !($base_elem.attr('data-loading') != null)) {
+      $base_elem.html(Handlebars.compile($('#Handlebars-Common-Preloader').html()));
+      return $base_elem.attr('data-loading', 'true');
+    }
+  },
+  hidePreloader: function() {
+    var $base_elem;
+    if (this.$vis_elem != null) {
+      $base_elem = this.$vis_elem;
+    } else {
+      $base_elem = $(this.el);
+    }
+    $base_elem.find('.card-preolader-to-hide').hide();
+    return $base_elem.attr('data-loading', 'false');
   }
 };

@@ -11,10 +11,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @model.on 'change', updateViewProxy, @
 
-  hidePreloader: ->
-
-    $(@el).find('.card-preolader-to-hide').hide()
-    $(@el).attr('data-loading', 'false')
 
   render: ->
 
