@@ -14,6 +14,14 @@ DocumentReportCardApp = (function() {
     return document;
   };
 
+  DocumentReportCardApp.initDocumentAssayNetwork = function(doc_chembl_id) {
+    var dan;
+    dan = new DocumentAssayNetwork({
+      document_chembl_id: doc_chembl_id
+    });
+    return dan;
+  };
+
   /* *
     * Initializes the DBIView (Document Basic Information View)
     * @param {Compound} model, base model for the view

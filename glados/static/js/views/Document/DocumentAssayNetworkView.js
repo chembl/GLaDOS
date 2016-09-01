@@ -10,7 +10,6 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
   render: function() {
     var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, orders, row, svg, tip, total, width, x, z;
     console.log('render!');
-    console.log($(this.el));
     this.hidePreloader();
     assays = {
       "nodes": [

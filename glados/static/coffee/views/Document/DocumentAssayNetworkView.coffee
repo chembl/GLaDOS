@@ -12,7 +12,6 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
 
   render: ->
     console.log('render!')
-    console.log($(@el))
 
     @hidePreloader()
     # --------------------------------------

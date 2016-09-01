@@ -11,6 +11,13 @@ class DocumentReportCardApp
     document.url = 'https://www.ebi.ac.uk/chembl/api/data/document/' + chembl_id + '.json'
     return document
 
+  @initDocumentAssayNetwork = (doc_chembl_id) ->
+    dan = new DocumentAssayNetwork
+      document_chembl_id: doc_chembl_id
+
+    return dan
+
+
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------
