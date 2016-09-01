@@ -3,18 +3,27 @@ var DocumentAssayNetworkView;
 
 DocumentAssayNetworkView = CardView.extend({
   render: function() {
-    var assays, height, margin, matrix, max, n, nodes, svg, total, width;
+    var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, orders, row, svg, tip, total, width, x, z;
     console.log('render!');
     assays = {
       "nodes": [
         {
           "name": "A",
+          "assay_type": "A",
+          "assay_test_type": "assay_test_type",
+          "In vivo": "In vivo",
           "description": "this is node a"
         }, {
           "name": "B",
+          "assay_type": "F",
+          "assay_test_type": "assay_test_type",
+          "In vitro": "In vitro",
           "description": "this is node a"
         }, {
           "name": "C",
+          "assay_type": "B",
+          "assay_test_type": "assay_test_type",
+          "Ex vivo": "Ex vivo",
           "description": "this is node a"
         }
       ],
@@ -34,6 +43,102 @@ DocumentAssayNetworkView = CardView.extend({
         }
       ]
     };
+    color_value = 'solid';
+    assayType2Color = {
+      'A': Color({
+        r: 255,
+        g: 0,
+        b: 0
+      }),
+      'F': Color({
+        r: 0,
+        g: 255,
+        b: 0
+      }),
+      'B': Color({
+        r: 0,
+        g: 0,
+        b: 255
+      }),
+      "null": Color({
+        r: 0,
+        g: 0,
+        b: 0
+      })
+    };
+    assayTestType2Color = {
+      'In vivo': Color({
+        r: 255,
+        g: 0,
+        b: 0
+      }),
+      'In vitro': Color({
+        r: 0,
+        g: 255,
+        b: 0
+      }),
+      'Ex vivo': Color({
+        r: 0,
+        g: 0,
+        b: 255
+      }),
+      "null": Color({
+        r: 0,
+        g: 0,
+        b: 0
+      })
+    };
+    colorise = function(d) {
+      var as1, as2, color1, color2;
+      color1 = null;
+      color2 = null;
+      if (color_value === 'solid') {
+        return '#0000FF';
+      }
+      if (color_value === 'assay_type') {
+        as1 = nodes[d.x].assay_type;
+        as2 = nodes[d.y].assay_type;
+        color1 = assayType2Color[as1].clone();
+        color2 = assayType2Color[as2].clone();
+      } else {
+        as1 = nodes[d.x].assay_test_type;
+        as2 = nodes[d.y].assay_test_type;
+        color1 = assayTestType2Color[as1].clone();
+        color2 = assayTestType2Color[as2].clone();
+      }
+      if (color1.hexString() !== color2.hexString()) {
+        color1.mix(color2);
+      }
+      return color1.hexString();
+    };
+    tip = d3.tip().attr('class', 'd3-tip').html(function(d) {
+      if (typeof d === 'string' || d instanceof String) {
+        return d;
+      }
+      return d.z;
+    });
+    mouseover = function(p) {
+      tip.show(p);
+      d3.selectAll(".dan-row text").classed("active", function(d, i) {
+        return i === p.y;
+      });
+      return d3.selectAll(".dan-column text").classed("active", function(d, i) {
+        return i === p.x;
+      });
+    };
+    mouseout = function() {
+      tip.hide();
+      d3.selectAll("text").classed("active", false);
+      return d3.selectAll("text").classed("linked", false);
+    };
+    fillRow = function(row) {
+      var cell;
+      return cell = d3.select(this).selectAll(".dan-cell").data(row).enter().append("rect").attr("class", "cell").attr("x", function(d) {
+        return x(d.x);
+      }).attr("width", x.rangeBand()).attr("height", x.rangeBand()).style("fill-opacity", function(d) {
+        return d.z / max;
+      }).style("fill", colorise).on("mouseover", mouseover).on("mouseout", mouseout);
+    };
     margin = {
       top: 100,
       right: 0,
@@ -42,7 +147,10 @@ DocumentAssayNetworkView = CardView.extend({
     };
     width = 600;
     height = 600;
+    x = d3.scale.ordinal().rangeBands([0, width]);
+    z = d3.scale.linear().domain([0, 4]).clamp(true);
     svg = d3.select('#AssayNetworkVisualisationContainer').append('svg').attr('width', width).attr('height', height);
+    svg.call(tip);
     matrix = [];
     nodes = assays.nodes;
     total = 0;
@@ -65,10 +173,57 @@ DocumentAssayNetworkView = CardView.extend({
       nodes[link.target].count += link.value;
       return total += link.value;
     });
+    orders = {
+      group: d3.range(n).sort(function(a, b) {
+        return nodes[b].group - nodes[a].group;
+      }),
+      name: d3.range(n).sort(function(a, b) {
+        return d3.ascending(nodes[a].name, nodes[b].name);
+      }),
+      count: d3.range(n).sort(function(a, b) {
+        return nodes[b].count - nodes[a].count;
+      }),
+      assay_type: d3.range(n).sort(function(a, b) {
+        return d3.ascending(nodes[a].assay_type, nodes[b].assay_type);
+      }),
+      assay_test_type: d3.range(n).sort(function(a, b) {
+        return d3.ascending(nodes[a].assay_test_type, nodes[b].assay_test_type);
+      })
+    };
     console.log('Matrix:');
     console.log(matrix);
-    return max = d3.max(assays.links, function(d) {
+    console.log('Nodes:');
+    console.log(nodes);
+    console.log('Orders:');
+    console.log(orders);
+    max = d3.max(assays.links, function(d) {
       return d.value;
     });
+    x.domain(orders.count);
+    svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
+    row = svg.selectAll('.dan-row').data(matrix).enter().append('g').attr('class', 'dan-row').attr('transform', function(d, i) {
+      return 'translate(0,' + x(i) + ')';
+    }).each(fillRow);
+    row.append("line").attr("x2", width);
+    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").text(function(d, i) {
+      return nodes[i].name + '.' + nodes[i].assay_type;
+    }).on("mouseover", function(row, j) {
+      tip.show(nodes[j].description);
+      return d3.selectAll(".row text").classed("linked", function(d, i) {
+        return i === j;
+      });
+    }).on("mouseout", mouseout);
+    column = svg.selectAll(".dan-column").data(matrix).enter().append("g").attr("class", "dan-column").attr("transform", function(d, i) {
+      return "translate(" + x(i) + ")rotate(-90)";
+    });
+    column.append("line").attr("x1", -width);
+    return column.append("text").attr("x", 6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").text(function(d, i) {
+      return nodes[i].name + '.' + nodes[i].assay_type;
+    }).on("mouseover", function(col, j) {
+      tip.show(nodes[j].description);
+      return d3.selectAll(".column text").classed("linked", function(d, i) {
+        return i === j;
+      });
+    }).on("mouseout", mouseout);
   }
 });
