@@ -16,19 +16,19 @@ DocumentAssayNetworkView = CardView.extend
           "name": "A",
           "assay_type": "A",
           "assay_test_type", "In vivo",
-          "description": "this is node a"
+          "description": "desc node a"
         },
         {
           "name": "B",
           "assay_type": "F",
           "assay_test_type", "In vitro",
-          "description": "this is node a"
+          "description": "desc node b"
         },
         {
           "name": "C",
           "assay_type": "B",
           "assay_test_type", "Ex vivo",
-          "description": "this is node a"
+          "description": "desc node c"
         }
       ],
       "links": [
@@ -147,9 +147,12 @@ DocumentAssayNetworkView = CardView.extend
     x = d3.scale.ordinal().rangeBands([0, width])
     z = d3.scale.linear().domain([0, 4]).clamp(true)
 
-    svg = d3.select('#AssayNetworkVisualisationContainer').append('svg')
-            .attr('width', width)
-            .attr('height', height)
+    svg = d3.select('#AssayNetworkVisualisationContainer')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     svg.call(tip)
 
@@ -241,7 +244,7 @@ DocumentAssayNetworkView = CardView.extend
           d3.selectAll(".row text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-#      .on("click", function(d, i){window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name});
+      .on("click", (d, i) -> window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name)
 
     column = svg.selectAll(".dan-column")
       .data(matrix)
@@ -263,7 +266,7 @@ DocumentAssayNetworkView = CardView.extend
           d3.selectAll(".column text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-#      .on("click", function(d, i){window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name});
+      .on("click", (d, i) -> window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name)
 
 
 

@@ -12,19 +12,19 @@ DocumentAssayNetworkView = CardView.extend({
           "assay_type": "A",
           "assay_test_type": "assay_test_type",
           "In vivo": "In vivo",
-          "description": "this is node a"
+          "description": "desc node a"
         }, {
           "name": "B",
           "assay_type": "F",
           "assay_test_type": "assay_test_type",
           "In vitro": "In vitro",
-          "description": "this is node a"
+          "description": "desc node b"
         }, {
           "name": "C",
           "assay_type": "B",
           "assay_test_type": "assay_test_type",
           "Ex vivo": "Ex vivo",
-          "description": "this is node a"
+          "description": "desc node c"
         }
       ],
       "links": [
@@ -149,7 +149,7 @@ DocumentAssayNetworkView = CardView.extend({
     height = 600;
     x = d3.scale.ordinal().rangeBands([0, width]);
     z = d3.scale.linear().domain([0, 4]).clamp(true);
-    svg = d3.select('#AssayNetworkVisualisationContainer').append('svg').attr('width', width).attr('height', height);
+    svg = d3.select('#AssayNetworkVisualisationContainer').append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     svg.call(tip);
     matrix = [];
     nodes = assays.nodes;
@@ -212,7 +212,9 @@ DocumentAssayNetworkView = CardView.extend({
       return d3.selectAll(".row text").classed("linked", function(d, i) {
         return i === j;
       });
-    }).on("mouseout", mouseout);
+    }).on("mouseout", mouseout).on("click", function(d, i) {
+      return window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name;
+    });
     column = svg.selectAll(".dan-column").data(matrix).enter().append("g").attr("class", "dan-column").attr("transform", function(d, i) {
       return "translate(" + x(i) + ")rotate(-90)";
     });
@@ -224,6 +226,8 @@ DocumentAssayNetworkView = CardView.extend({
       return d3.selectAll(".column text").classed("linked", function(d, i) {
         return i === j;
       });
-    }).on("mouseout", mouseout);
+    }).on("mouseout", mouseout).on("click", function(d, i) {
+      return window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name;
+    });
   }
 });
