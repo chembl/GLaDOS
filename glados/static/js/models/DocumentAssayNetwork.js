@@ -3,27 +3,108 @@ var DocumentAssayNetwork;
 
 DocumentAssayNetwork = Backbone.Model.extend({
   fetch: function() {
-    var assaysUrl, docChemblId, triggerAssayRequest;
+    var activitiesListsReceived, activitiesListsRequested, allAssays, assaysUrl, checkIfAllInfoReady, docChemblId, links, triggerActivityRequest, triggerAssayRequest;
     docChemblId = this.get('document_chembl_id');
-    assaysUrl = 'https://www.ebi.ac.uk/chembl/api/data/assay.json?document_chembl_id=' + docChemblId + '&limit=10';
+    assaysUrl = 'https://www.ebi.ac.uk/chembl/api/data/assay.json?document_chembl_id=' + docChemblId + '&limit=1000';
+    allAssays = {};
+    activitiesListsRequested = 0;
+    activitiesListsReceived = 0;
     triggerAssayRequest = function(currentUrl) {
       var getAssaysGroup;
       getAssaysGroup = $.getJSON(currentUrl, function(response) {
         var newAssays, nextUrl;
-        console.log('response!');
-        console.log(response);
         newAssays = response.assays;
+        $.each(newAssays, function(index, newAssay) {
+          var currentActsUrl;
+          allAssays[newAssay.assay_chembl_id] = newAssay;
+          currentActsUrl = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000';
+          activitiesListsRequested++;
+          console.log('num activities lists requested: ', activitiesListsRequested);
+          return triggerActivityRequest(currentActsUrl);
+        });
         nextUrl = response.page_meta.next;
-        console.log('Next: ', response.page_meta.next != null);
-        console.log('Next url: ', nextUrl);
         if (nextUrl != null) {
           return triggerAssayRequest('https://www.ebi.ac.uk' + nextUrl);
+        } else {
+          console.log('ALL ASSAYS OBTAINED');
+          console.log(allAssays);
+          return console.log(_.pluck(allAssays, 'assay_chembl_id'));
         }
       });
       return getAssaysGroup.fail(function() {
-        return console.log('FAILED!');
+        return console.log('FAILED getting assays list!');
       });
     };
-    return triggerAssayRequest(assaysUrl);
+    triggerAssayRequest(assaysUrl);
+    triggerActivityRequest = function(currentActsUrl) {
+      var getActivityGroup;
+      console.log('requesting activities: ', currentActsUrl);
+      getActivityGroup = $.getJSON(currentActsUrl, function(response) {
+        var newActivities, nextUrl;
+        newActivities = response.activities;
+        $.each(newActivities, function(index, newActivity) {
+          var currentAssay;
+          console.log('new activity from assay: ', newActivity.assay_chembl_id, ' to molecule: ', newActivity.molecule_chembl_id);
+          currentAssay = allAssays[newActivity.assay_chembl_id];
+          if (currentAssay.compound_act_list == null) {
+            currentAssay.compound_act_list = {};
+          }
+          return currentAssay.compound_act_list[newActivity.molecule_chembl_id] = 1;
+        });
+        nextUrl = response.page_meta.next;
+        if (nextUrl != null) {
+          triggerActivityRequest('https://www.ebi.ac.uk' + nextUrl);
+          return console.log('requesting more activities');
+        } else {
+          activitiesListsReceived++;
+          console.log('num lists received: ', activitiesListsReceived);
+          return checkIfAllInfoReady();
+        }
+      });
+      return getActivityGroup.fail(function() {
+        return console.log('FAILED activities list!');
+      });
+    };
+    links = [];
+    return checkIfAllInfoReady = function() {
+      var i;
+      if (activitiesListsRequested === activitiesListsReceived) {
+        console.log('ALL READY!');
+        console.log(allAssays);
+        i = 0;
+        return $.each(allAssays, function(objIndex, assayI) {
+          var compoundsI, j;
+          console.log('I: ', i);
+          compoundsI = assayI.compound_act_list;
+          j = 0;
+          $.each(allAssays, function(objIndex, assayJ) {
+            var compoundsJ, molecule_chembl_id, numEqual, val;
+            if (i > j) {
+              return;
+            }
+            console.log('J: ', j);
+            compoundsJ = assayJ.compound_act_list;
+            console.log('comparing ', assayI.assay_chembl_id, ' with ', assayJ.assay_chembl_id);
+            console.log('lists: ', compoundsI, ' , ', compoundsJ);
+            numEqual = 0;
+            for (molecule_chembl_id in compoundsI) {
+              val = compoundsI[molecule_chembl_id];
+              if (compoundsJ[molecule_chembl_id] === 1) {
+                numEqual++;
+              }
+            }
+            links.push({
+              "source": i,
+              "target": j,
+              "value": numEqual
+            });
+            console.log(numEqual, ' are equal!');
+            console.log('^^^^');
+            return j++;
+          });
+          return i++;
+        });
+      }
+    };
   }
 });
