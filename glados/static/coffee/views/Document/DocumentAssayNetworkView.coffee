@@ -12,53 +12,63 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
     @model.on 'change', updateViewProxy, @
 
   render: ->
+
     console.log('render!')
 
     @hidePreloader()
     # --------------------------------------
     # Data
     # --------------------------------------
-    assays = {
-      "nodes": [
-        {
-          "name": "A",
-          "assay_type": "A",
-          "assay_test_type", "In vivo",
-          "description": "desc node a"
-        },
-        {
-          "name": "B",
-          "assay_type": "F",
-          "assay_test_type", "In vitro",
-          "description": "desc node b"
-        },
-        {
-          "name": "C",
-          "assay_type": "B",
-          "assay_test_type", "Ex vivo",
-          "description": "desc node c"
-        }
-      ],
-      "links": [
-        {
-          "source": 0,
-          "target": 1,
-          "value": 10
-        },
-        {
-          "source": 0,
-          "target": 2,
-          "value": 20
-        },
-        {
-          "source": 1,
-          "target": 2,
-          "value": 30
-        }
-      ]
-    }
+
+    #    assays = {
+    #      "nodes": [
+    #        {
+    #          "name": "A",
+    #          "assay_type": "A",
+    #          "assay_test_type", "In vivo",
+    #          "description": "desc node a"
+    #        },
+    #        {
+    #          "name": "B",
+    #          "assay_type": "F",
+    #          "assay_test_type", "In vitro",
+    #          "description": "desc node b"
+    #        },
+    #        {
+    #          "name": "C",
+    #          "assay_type": "B",
+    #          "assay_test_type", "Ex vivo",
+    #          "description": "desc node c"
+    #        }
+    #      ],
+    #      "links": [
+    #        {
+    #          "source": 0,
+    #          "target": 1,
+    #          "value": 10
+    #        },
+    #        {
+    #          "source": 0,
+    #          "target": 2,
+    #          "value": 20
+    #        },
+    #        {
+    #          "source": 1,
+    #          "target": 2,
+    #          "value": 30
+    #        }
+    #      ]
+    #    }
 
     assays = @model.get('graph')
+    numNodes = assays.nodes.length
+
+    console.log 'num nodes is: ', numNodes
+    console.log Handlebars.compile( $('#Handlebars-Document-DAN-NumResults').html() )
+      num_results: numNodes
+
+    $(@el).find('.num-results').html Handlebars.compile( $('#Handlebars-Document-DAN-NumResults').html() )
+      num_results: numNodes
 
     if !assays?
       #do something here!
@@ -149,12 +159,25 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
     margin =
-      top: 50
+      top: 70
       right: 0
       bottom: 10
-      left: 50
+      left: 90
 
-    width = $(@el).width() * 0.7
+
+    elemWidth = $(@el).width()
+
+    scaleWidthFor = d3.scale.linear()
+      .domain([1, 20])
+      .range([0.1 * elemWidth, 0.8 * elemWidth])
+      .clamp(true)
+
+    width = scaleWidthFor numNodes
+
+    console.log 'scale: ', scaleWidthFor
+    console.log 'width: ', width
+    console.log 'elem width: ', elemWidth
+
     height = width
 
     x = d3.scale.ordinal().rangeBands([0, width])
@@ -251,13 +274,14 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
       .attr("y", x.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
+      .attr('style', 'font-size:8px;')
       .text( (d, i) ->  nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (row, j) ->
           tip.show(nodes[j].description)
           d3.selectAll(".row text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-      .on("click", (d, i) -> window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name)
+      .on("click", (d, i) -> window.location = "/assay_report_card/" + nodes[i].name)
 
     column = svg.selectAll(".dan-column")
       .data(matrix)
@@ -269,17 +293,18 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
       .attr("x1", -width)
 
     column.append("text")
-      .attr("x", 6)
+      .attr("x", 0)
       .attr("y", x.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
+      .attr('style', 'font-size:8px;')
       .text((d, i) -> nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (col, j) ->
           tip.show(nodes[j].description)
           d3.selectAll(".column text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-      .on("click", (d, i) -> window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name)
+      .on("click", (d, i) -> window.location = "/assay_report_card/" + nodes[i].name)
 
 
 

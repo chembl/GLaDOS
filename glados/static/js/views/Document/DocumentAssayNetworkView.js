@@ -9,48 +9,18 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
     return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
-    var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, orders, row, svg, tip, total, width, x, z;
+    var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, elemWidth, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, numNodes, orders, row, scaleWidthFor, svg, tip, total, width, x, z;
     console.log('render!');
     this.hidePreloader();
-    assays = {
-      "nodes": [
-        {
-          "name": "A",
-          "assay_type": "A",
-          "assay_test_type": "assay_test_type",
-          "In vivo": "In vivo",
-          "description": "desc node a"
-        }, {
-          "name": "B",
-          "assay_type": "F",
-          "assay_test_type": "assay_test_type",
-          "In vitro": "In vitro",
-          "description": "desc node b"
-        }, {
-          "name": "C",
-          "assay_type": "B",
-          "assay_test_type": "assay_test_type",
-          "Ex vivo": "Ex vivo",
-          "description": "desc node c"
-        }
-      ],
-      "links": [
-        {
-          "source": 0,
-          "target": 1,
-          "value": 10
-        }, {
-          "source": 0,
-          "target": 2,
-          "value": 20
-        }, {
-          "source": 1,
-          "target": 2,
-          "value": 30
-        }
-      ]
-    };
     assays = this.model.get('graph');
+    numNodes = assays.nodes.length;
+    console.log('num nodes is: ', numNodes);
+    console.log(Handlebars.compile($('#Handlebars-Document-DAN-NumResults').html())({
+      num_results: numNodes
+    }));
+    $(this.el).find('.num-results').html(Handlebars.compile($('#Handlebars-Document-DAN-NumResults').html())({
+      num_results: numNodes
+    }));
     if (!(assays != null)) {
       return;
     }
@@ -151,12 +121,17 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
       }).style("fill", colorise).on("mouseover", mouseover).on("mouseout", mouseout);
     };
     margin = {
-      top: 50,
+      top: 70,
       right: 0,
       bottom: 10,
-      left: 50
+      left: 90
     };
-    width = $(this.el).width() * 0.7;
+    elemWidth = $(this.el).width();
+    scaleWidthFor = d3.scale.linear().domain([1, 20]).range([0.1 * elemWidth, 0.8 * elemWidth]).clamp(true);
+    width = scaleWidthFor(numNodes);
+    console.log('scale: ', scaleWidthFor);
+    console.log('width: ', width);
+    console.log('elem width: ', elemWidth);
     height = width;
     x = d3.scale.ordinal().rangeBands([0, width]);
     z = d3.scale.linear().domain([0, 4]).clamp(true);
@@ -216,7 +191,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
       return 'translate(0,' + x(i) + ')';
     }).each(fillRow);
     row.append("line").attr("x2", width);
-    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").text(function(d, i) {
+    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:8px;').text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(row, j) {
       tip.show(nodes[j].description);
@@ -224,13 +199,13 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
         return i === j;
       });
     }).on("mouseout", mouseout).on("click", function(d, i) {
-      return window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name;
+      return window.location = "/assay_report_card/" + nodes[i].name;
     });
     column = svg.selectAll(".dan-column").data(matrix).enter().append("g").attr("class", "dan-column").attr("transform", function(d, i) {
       return "translate(" + x(i) + ")rotate(-90)";
     });
     column.append("line").attr("x1", -width);
-    return column.append("text").attr("x", 6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").text(function(d, i) {
+    return column.append("text").attr("x", 0).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:8px;').text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(col, j) {
       tip.show(nodes[j].description);
@@ -238,7 +213,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
         return i === j;
       });
     }).on("mouseout", mouseout).on("click", function(d, i) {
-      return window.location = "https://www.ebi.ac.uk/chembl/assay/inspect/" + nodes[i].name;
+      return window.location = "/assay_report_card/" + nodes[i].name;
     });
   }
 });
