@@ -56,6 +56,23 @@ DocumentReportCardApp = (function() {
     return danView;
   };
 
+  /* *
+    * Initializes the DANFSView (Document Assay Network Full Screen View)
+    * @param {Compound} model, base model for the view
+    * @param {JQuery} top_level_elem element that renders the model.
+    * @return {DocumentAssayNetworkFSView} the view that has been created
+  */
+
+
+  DocumentReportCardApp.initDANFSView = function(model, top_level_elem) {
+    var danFSView;
+    danFSView = new DocumentAssayNetworkFSView({
+      el: top_level_elem,
+      model: model
+    });
+    return danFSView;
+  };
+
   return DocumentReportCardApp;
 
 })();

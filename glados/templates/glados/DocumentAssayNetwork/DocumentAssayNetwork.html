@@ -1,0 +1,52 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Document Assay Network{% endblock %}
+
+{% block content %}
+
+<div id='DAN-Main' class="container main-container">
+
+  <h2>
+    <span><i class="icon icon-conceptual icon-c8" data-icon="l"></i> Document Assay Network</span>
+  </h2>
+
+  <div class="row">
+
+
+    <div class="input-field col s6">
+      <select class="select-colours">
+        <option value="solid" selected="selected">Solid</option>
+        <option value="assay_type">by Assay Type</option>
+        <option value="assay_test_type">by Assay Test Type</option>
+      </select>
+      <label>Color:</label>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="legend-container"></div>
+
+  </div>
+
+  <div id="AssayNetworkVisualisationFSContainer">
+
+  </div>
+
+
+</div>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var pathname = window.location.pathname;
+var pathnameParts = pathname.split('/')
+CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
+
+var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork(CHEMBL_ID);
+var danFSView = DocumentReportCardApp.initDANFSView(documentAssayNetwork, $('#DAN-Main'));
+
+documentAssayNetwork.fetch();
+
+{% endblock %}

@@ -5,10 +5,21 @@
 {% block general_content %}
 
 {% verbatim %}
+<script id="Handlebars-Document-DAN-FullScreenLink" type="text/x-handlebars-template">
+
+  <a href="/document_assay_network/{{chembl_id}}" target="_blank">See in full screen</a>
+
+</script>
+{% endverbatim %}
+
+{% verbatim %}
 <script id="Handlebars-Document-DAN-NumResults" type="text/x-handlebars-template">
   {{num_results}} Assays found:
 </script>
 {% endverbatim %}
+
+<div class="fullscreen-link">
+</div>
 
 <div class="num-results">
 </div>

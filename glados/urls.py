@@ -5,6 +5,10 @@ from . import views
 
 urlpatterns = [
 
+  #----------------------------------------------------------------------------------------
+  # Compounds
+  #----------------------------------------------------------------------------------------
+
   url(r'^compound_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/compoundReportCard.html"), ),
 
@@ -26,6 +30,10 @@ urlpatterns = [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/calculated_properties/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
+  #----------------------------------------------------------------------------------------
+  # Targets
+  #----------------------------------------------------------------------------------------
+
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
 
@@ -41,6 +49,10 @@ urlpatterns = [
   url(r'^target_report_card/(?P<chembl_id>\w+)/embed/approved_drugs_clinical_candidates/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
 
+  #----------------------------------------------------------------------------------------
+  # Assays
+  #----------------------------------------------------------------------------------------
+
   url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/assayReportCard.html"), ),
 
@@ -50,11 +62,22 @@ urlpatterns = [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
 
+  #----------------------------------------------------------------------------------------
+  # Documents
+  #----------------------------------------------------------------------------------------
+
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
 
   url(r'^document_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/BasicInformationToEmbed.html")), ),
+
+  url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
+      DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
+
+  #----------------------------------------------------------------------------------------
+  # Cells
+  #----------------------------------------------------------------------------------------
 
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
