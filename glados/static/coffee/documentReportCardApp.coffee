@@ -43,9 +43,10 @@ class DocumentReportCardApp
     * @param {JQuery} top_level_elem element that renders the model.
     * @return {DocumentAssayNetworkView} the view that has been created
   ###
-  @initDANView = (top_level_elem) ->
+  @initDANView = (model, top_level_elem) ->
 
     danView = new DocumentAssayNetworkView
       el: top_level_elem
+      model: model
 
     return danView

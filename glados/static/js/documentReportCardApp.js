@@ -47,10 +47,11 @@ DocumentReportCardApp = (function() {
   */
 
 
-  DocumentReportCardApp.initDANView = function(top_level_elem) {
+  DocumentReportCardApp.initDANView = function(model, top_level_elem) {
     var danView;
     danView = new DocumentAssayNetworkView({
-      el: top_level_elem
+      el: top_level_elem,
+      model: model
     });
     return danView;
   };

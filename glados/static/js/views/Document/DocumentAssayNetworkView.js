@@ -5,7 +5,8 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
     this.$vis_elem = $('#AssayNetworkVisualisationContainer');
-    return updateViewProxy = this.setUpResponsiveRender();
+    updateViewProxy = this.setUpResponsiveRender();
+    return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
     var assayTestType2Color, assayType2Color, assays, color_value, colorise, column, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, orders, row, svg, tip, total, width, x, z;
@@ -49,6 +50,10 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend({
         }
       ]
     };
+    assays = this.model.get('graph');
+    if (!(assays != null)) {
+      return;
+    }
     color_value = 'solid';
     assayType2Color = {
       'A': Color({

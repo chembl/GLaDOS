@@ -74,27 +74,38 @@ DocumentAssayNetwork = Backbone.Model.extend
     # here I check if I got all the information I need
     # after this it what is required is to reorganise it to create the graphs
     # no more calls to the web services
+    nodes = []
     links = []
+    thisModel = @
+
     checkIfAllInfoReady = () ->
 
       if activitiesListsRequested == activitiesListsReceived
-        console.log 'ALL READY!'
-        console.log allAssays
 
-        i = 0
-        $.each allAssays, (objIndex, assayI) ->
+        # reorganise assays as list to make sure the output format is given correctly
+        $.each allAssays, (index, assay) ->
+
+          assay.name = assay.assay_chembl_id
+          nodes.push assay
+
+        console.log 'ALL READY!'
+        console.log nodes
+
+        $.each nodes, (i, assayI) ->
 
           console.log 'I: ', i
+          console.log 'I is: ', assayI.assay_chembl_id
+
           compoundsI = assayI.compound_act_list
 
-          j = 0
-          $.each allAssays, (objIndex, assayJ) ->
+          $.each nodes, (j, assayJ) ->
 
             # the matrix is symmetric, don't do the computing twice
             if i > j
               return
 
             console.log 'J: ', j
+            console.log 'J is: ', assayJ.assay_chembl_id
             compoundsJ = assayJ.compound_act_list
 
             console.log 'comparing ', assayI.assay_chembl_id, ' with ', assayJ.assay_chembl_id
@@ -109,9 +120,10 @@ DocumentAssayNetwork = Backbone.Model.extend
             console.log numEqual, ' are equal!'
             console.log '^^^^'
 
-            j++
+        console.log 'nodes: ', nodes
+        console.log 'links ', links
 
-          i++
+        console.log 'contxt: ', @
 
-
-
+        answer = {'nodes': nodes, 'links': links}
+        thisModel.set('graph', answer)

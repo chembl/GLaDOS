@@ -7,8 +7,9 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @$vis_elem = $('#AssayNetworkVisualisationContainer')
-
     updateViewProxy = @setUpResponsiveRender()
+
+    @model.on 'change', updateViewProxy, @
 
   render: ->
     console.log('render!')
@@ -57,6 +58,11 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend
       ]
     }
 
+    assays = @model.get('graph')
+
+    if !assays?
+      #do something here!
+      return
     # --------------------------------------
     # auxiliary functions
     # --------------------------------------

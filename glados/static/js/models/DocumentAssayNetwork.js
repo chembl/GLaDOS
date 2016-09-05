@@ -3,7 +3,7 @@ var DocumentAssayNetwork;
 
 DocumentAssayNetwork = Backbone.Model.extend({
   fetch: function() {
-    var activitiesListsReceived, activitiesListsRequested, allAssays, assaysUrl, checkIfAllInfoReady, docChemblId, links, triggerActivityRequest, triggerAssayRequest;
+    var activitiesListsReceived, activitiesListsRequested, allAssays, assaysUrl, checkIfAllInfoReady, docChemblId, links, nodes, thisModel, triggerActivityRequest, triggerAssayRequest;
     docChemblId = this.get('document_chembl_id');
     assaysUrl = 'https://www.ebi.ac.uk/chembl/api/data/assay.json?document_chembl_id=' + docChemblId + '&limit=1000';
     allAssays = {};
@@ -65,24 +65,30 @@ DocumentAssayNetwork = Backbone.Model.extend({
         return console.log('FAILED activities list!');
       });
     };
+    nodes = [];
     links = [];
+    thisModel = this;
     return checkIfAllInfoReady = function() {
-      var i;
+      var answer;
       if (activitiesListsRequested === activitiesListsReceived) {
+        $.each(allAssays, function(index, assay) {
+          assay.name = assay.assay_chembl_id;
+          return nodes.push(assay);
+        });
         console.log('ALL READY!');
-        console.log(allAssays);
-        i = 0;
-        return $.each(allAssays, function(objIndex, assayI) {
-          var compoundsI, j;
+        console.log(nodes);
+        $.each(nodes, function(i, assayI) {
+          var compoundsI;
           console.log('I: ', i);
+          console.log('I is: ', assayI.assay_chembl_id);
           compoundsI = assayI.compound_act_list;
-          j = 0;
-          $.each(allAssays, function(objIndex, assayJ) {
+          return $.each(nodes, function(j, assayJ) {
             var compoundsJ, molecule_chembl_id, numEqual, val;
             if (i > j) {
               return;
             }
             console.log('J: ', j);
+            console.log('J is: ', assayJ.assay_chembl_id);
             compoundsJ = assayJ.compound_act_list;
             console.log('comparing ', assayI.assay_chembl_id, ' with ', assayJ.assay_chembl_id);
             console.log('lists: ', compoundsI, ' , ', compoundsJ);
@@ -99,11 +105,17 @@ DocumentAssayNetwork = Backbone.Model.extend({
               "value": numEqual
             });
             console.log(numEqual, ' are equal!');
-            console.log('^^^^');
-            return j++;
+            return console.log('^^^^');
           });
-          return i++;
         });
+        console.log('nodes: ', nodes);
+        console.log('links ', links);
+        console.log('contxt: ', this);
+        answer = {
+          'nodes': nodes,
+          'links': links
+        };
+        return thisModel.set('graph', answer);
       }
     };
   }

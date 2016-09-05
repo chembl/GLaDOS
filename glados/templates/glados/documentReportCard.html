@@ -179,8 +179,7 @@ var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
 var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork(CHEMBL_ID);
 
 var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
-var danView = DocumentReportCardApp.initDANView($('#DAssayNetworkCard'));
-danView.render();
+var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
 
 document.fetch();
 documentAssayNetwork.fetch();
