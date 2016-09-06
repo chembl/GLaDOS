@@ -176,7 +176,7 @@ DANViewExt = {
       return 'translate(0,' + x(i) + ')';
     }).each(fillRow);
     row.append("line").attr("x2", width);
-    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:8px;').text(function(d, i) {
+    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(row, j) {
       tip.show(nodes[j].description);
@@ -190,7 +190,7 @@ DANViewExt = {
       return "translate(" + x(i) + ")rotate(-90)";
     });
     column.append("line").attr("x1", -width);
-    column.append("text").attr("x", 0).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:8px;').text(function(d, i) {
+    column.append("text").attr("x", 0).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(col, j) {
       tip.show(nodes[j].description);

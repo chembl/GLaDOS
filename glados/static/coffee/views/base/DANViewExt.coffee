@@ -253,6 +253,9 @@ DANViewExt =
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
       .attr('style', 'font-size:8px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .attr('fill', '#1b5e20')
       .text( (d, i) ->  nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (row, j) ->
           tip.show(nodes[j].description)
@@ -276,6 +279,9 @@ DANViewExt =
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
       .attr('style', 'font-size:8px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .attr('fill', '#1b5e20')
       .text((d, i) -> nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (col, j) ->
           tip.show(nodes[j].description)
@@ -322,7 +328,7 @@ DANViewExt =
       .style("fill", colorise)
 
     draw_legend = (data) ->
-      console.log('drawing legend');
+      console.log('drawing legend')
       legend = d3.selectAll(".legend-container").append("svg")
         .attr("class", "legend")
         .attr("width", 100)
@@ -342,6 +348,7 @@ DANViewExt =
         .attr("y", 9)
         .attr("dy", ".35em")
         .text( (d) -> d.label)
+
 
 
 
