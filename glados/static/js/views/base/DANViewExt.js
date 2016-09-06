@@ -26,6 +26,21 @@ DANViewExt = {
         g: 0,
         b: 255
       }),
+      'P': Color({
+        r: 0,
+        g: 255,
+        b: 255
+      }),
+      'T': Color({
+        r: 255,
+        g: 0,
+        b: 255
+      }),
+      'U': Color({
+        r: 125,
+        g: 125,
+        b: 255
+      }),
       "null": Color({
         r: 0,
         g: 0,
@@ -92,6 +107,7 @@ DANViewExt = {
       if (color_value === 'assay_type') {
         as1 = nodes[d.x].assay_type;
         as2 = nodes[d.y].assay_type;
+        console.log('as1: ', as1);
         color1 = assayType2Color[as1].clone();
         color2 = assayType2Color[as2].clone();
       } else {
@@ -176,10 +192,11 @@ DANViewExt = {
       return 'translate(0,' + x(i) + ')';
     }).each(fillRow);
     row.append("line").attr("x2", width);
-    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
+    row.append("text").attr("x", -6).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').attr('class', 'tooltipped').attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', function(d, i) {
+      return nodes[i].description;
+    }).text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(row, j) {
-      tip.show(nodes[j].description);
       return d3.selectAll(".row text").classed("linked", function(d, i) {
         return i === j;
       });
@@ -190,24 +207,24 @@ DANViewExt = {
       return "translate(" + x(i) + ")rotate(-90)";
     });
     column.append("line").attr("x1", -width);
-    column.append("text").attr("x", 0).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
+    column.append("text").attr("x", 0).attr("y", x.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:8px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').attr('class', 'tooltipped').attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', function(d, i) {
+      return nodes[i].description;
+    }).text(function(d, i) {
       return nodes[i].name + '.' + nodes[i].assay_type;
     }).on("mouseover", function(col, j) {
-      tip.show(nodes[j].description);
       return d3.selectAll(".column text").classed("linked", function(d, i) {
         return i === j;
       });
     }).on("mouseout", mouseout).on("click", function(d, i) {
       return window.location = "/assay_report_card/" + nodes[i].name;
     });
+    $('.tooltipped').tooltip();
     $(this.el).find(".select-colours").on("change", function() {
       var palette;
       if (!(this.value != null)) {
         return;
       }
       color_value = this.value;
-      console.log('changing color!');
-      console.log(color_value);
       color();
       $('.legend-container').empty();
       if (color_value === 'solid') {
@@ -229,7 +246,7 @@ DANViewExt = {
     return draw_legend = function(data) {
       var legend;
       console.log('drawing legend');
-      legend = d3.selectAll(".legend-container").append("svg").attr("class", "legend").attr("width", 100).attr("height", 100).selectAll("g").data($.map(data, function(val, key) {
+      legend = d3.selectAll(".legend-container").append("svg").attr("class", "legend").attr("width", 100).attr("height", 150).selectAll("g").data($.map(data, function(val, key) {
         return {
           label: key,
           color: val

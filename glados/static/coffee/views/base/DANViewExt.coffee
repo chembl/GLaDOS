@@ -61,9 +61,12 @@ DANViewExt =
     color_value = 'solid';
 
     assayType2Color =
-      'A': Color({r: 255, g: 0, b: 0})
-      'F': Color({r: 0, g: 255, b: 0})
-      'B': Color({r: 0, g: 0, b: 255})
+      'A': Color({r: 255, g: 0, b: 0}),
+      'F': Color({r: 0, g: 255, b: 0}),
+      'B': Color({r: 0, g: 0, b: 255}),
+      'P': Color({r: 0, g: 255, b: 255}),
+      'T': Color({r: 255, g: 0, b: 255}),
+      'U': Color({r: 125, g: 125, b: 255}),
       null: Color({r: 0, g: 0, b: 0})
 
     assayTestType2Color =
@@ -116,13 +119,14 @@ DANViewExt =
 
           as1 = nodes[d.x].assay_type
           as2 = nodes[d.y].assay_type
+          console.log 'as1: ', as1
           color1 = assayType2Color[as1].clone()
           color2 = assayType2Color[as2].clone()
 
       else
 
-          as1 = nodes[d.x].assay_test_type;
-          as2 = nodes[d.y].assay_test_type;
+          as1 = nodes[d.x].assay_test_type
+          as2 = nodes[d.y].assay_test_type
           color1 = assayTestType2Color[as1].clone()
           color2 = assayTestType2Color[as2].clone()
 
@@ -256,9 +260,12 @@ DANViewExt =
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .attr('fill', '#1b5e20')
+      .attr('class', 'tooltipped')
+      .attr('data-position', 'bottom')
+      .attr('data-delay', '50')
+      .attr('data-tooltip', (d, i) -> nodes[i].description )
       .text( (d, i) ->  nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (row, j) ->
-          tip.show(nodes[j].description)
           d3.selectAll(".row text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
@@ -282,14 +289,18 @@ DANViewExt =
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .attr('fill', '#1b5e20')
+      .attr('class', 'tooltipped')
+      .attr('data-position', 'bottom')
+      .attr('data-delay', '50')
+      .attr('data-tooltip', (d, i) -> nodes[i].description )
       .text((d, i) -> nodes[i].name + '.' + nodes[i].assay_type )
       .on("mouseover", (col, j) ->
-          tip.show(nodes[j].description)
           d3.selectAll(".column text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
       .on("click", (d, i) -> window.location = "/assay_report_card/" + nodes[i].name)
 
+    $('.tooltipped').tooltip()
 
     # --------------------------------------
     # Controls
@@ -305,8 +316,6 @@ DANViewExt =
         return
 
       color_value = @value
-      console.log 'changing color!'
-      console.log color_value
       color()
 
       $('.legend-container').empty()
@@ -332,7 +341,7 @@ DANViewExt =
       legend = d3.selectAll(".legend-container").append("svg")
         .attr("class", "legend")
         .attr("width", 100)
-        .attr("height", 100)
+        .attr("height", 150)
         .selectAll("g")
         .data($.map(data, (val, key) -> { label: key, color: val } ))
         .enter().append("g")
