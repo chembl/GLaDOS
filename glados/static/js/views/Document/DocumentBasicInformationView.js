@@ -2,6 +2,9 @@
 var DocumentBasicInformationView;
 
 DocumentBasicInformationView = CardView.extend({
+  events: {
+    'click .BCK-trigger-download': 'download'
+  },
   initialize: function() {
     this.model.on('change', this.render, this);
     this.model.on('error', this.showCompoundErrorCard, this);
@@ -28,5 +31,8 @@ DocumentBasicInformationView = CardView.extend({
       pubmed_id: this.model.get('pubmed_id'),
       doi: this.model.get('doi')
     }));
+  },
+  download: function() {
+    return this.model.download();
   }
 });

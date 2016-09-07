@@ -4,6 +4,10 @@
 # also make sure the html can access the handlebars templates!
 DocumentBasicInformationView = CardView.extend
 
+  events:
+    'click .BCK-trigger-download': 'download'
+
+
   initialize: ->
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
@@ -32,3 +36,6 @@ DocumentBasicInformationView = CardView.extend
       last_page: @model.get('last_page')
       pubmed_id: @model.get('pubmed_id')
       doi: @model.get('doi')
+
+  download: ->
+    @model.download()
