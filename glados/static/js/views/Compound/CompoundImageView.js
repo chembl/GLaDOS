@@ -22,7 +22,7 @@ CompoundImageView = CardView.extend({
     } else if (this.model.get('structure_type') === 'SEQ') {
       img_url = '/static/img/protein_structure.png';
     } else {
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + '.svg';
+      img_url = Settings.WS_BASE_URL + 'image/' + this.model.get('molecule_chembl_id') + '.svg';
     }
     img = $(this.el).find('#Bck-COMP_IMG');
     img.load($.proxy(this.showVisibleContent, this));
@@ -33,7 +33,7 @@ CompoundImageView = CardView.extend({
   },
   initDownloadButtons: function() {
     var img_url;
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id');
+    img_url = Settings.WS_BASE_URL + 'image/' + this.model.get('molecule_chembl_id');
     $('.CNC-download-png').attr('href', img_url + '.png');
     $('.CNC-download-png').attr('download', this.model.get('molecule_chembl_id') + '.png');
     $('.CNC-download-svg').attr('href', img_url + '.svg');
@@ -54,7 +54,7 @@ CompoundImageView = CardView.extend({
       $('#Bck-Comp-Img-zoom-preloader').hide();
       return $(this).show();
     });
-    img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
+    img.attr('src', Settings.WS_BASE_URL + 'image/' + this.model.get('molecule_chembl_id') + this.getParamsFromSwitches());
     img.attr('alt', 'Structure of ' + this.model.get('molecule_chembl_id'));
     $(this.el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click(this.handleImgSwitch(this));
     $('#Bck-Comp-Img-zoom-menuclose').click(function() {
@@ -73,7 +73,7 @@ CompoundImageView = CardView.extend({
       img = $(parentView.el).find('#Bck-Comp-Img-zoom');
       $('#Bck-Comp-Img-zoom-preloader').show();
       img.hide();
-      return img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches());
+      return img.attr('src', Settings.WS_BASE_URL + 'image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches());
     };
   },
   getParamsFromSwitches: function() {

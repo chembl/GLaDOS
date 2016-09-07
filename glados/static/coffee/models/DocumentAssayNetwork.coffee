@@ -3,7 +3,7 @@ DocumentAssayNetwork = Backbone.Model.extend
   fetch: ->
     docChemblId = @get('document_chembl_id')
 
-    assaysUrl = 'https://www.ebi.ac.uk/chembl/api/data/assay.json?document_chembl_id=' + docChemblId + '&limit=1000'
+    assaysUrl = Settings.WS_BASE_URL + 'assay.json?document_chembl_id=' + docChemblId + '&limit=1000'
 
     allAssays = {}
 
@@ -19,7 +19,7 @@ DocumentAssayNetwork = Backbone.Model.extend
 
         $.each newAssays, (index, newAssay) ->
           allAssays[newAssay.assay_chembl_id] = newAssay
-          currentActsUrl = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000'
+          currentActsUrl = Settings.WS_BASE_URL + 'activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000'
           activitiesListsRequested++
           console.log 'num activities lists requested: ', activitiesListsRequested
           triggerActivityRequest(currentActsUrl)
@@ -27,7 +27,7 @@ DocumentAssayNetwork = Backbone.Model.extend
         nextUrl = response.page_meta.next
 
         if nextUrl?
-          triggerAssayRequest('https://www.ebi.ac.uk' + nextUrl)
+          triggerAssayRequest(Settings.WS_HOSTNAME + nextUrl)
         # if there is no next I must have processed the last page
         else
           console.log 'ALL ASSAYS OBTAINED'
@@ -61,7 +61,7 @@ DocumentAssayNetwork = Backbone.Model.extend
         nextUrl = response.page_meta.next
 
         if nextUrl?
-          triggerActivityRequest('https://www.ebi.ac.uk' + nextUrl)
+          triggerActivityRequest(Settings.WS_HOSTNAME + nextUrl)
           console.log 'requesting more activities'
         else
           activitiesListsReceived++

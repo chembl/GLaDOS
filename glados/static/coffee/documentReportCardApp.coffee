@@ -8,7 +8,7 @@ class DocumentReportCardApp
     document = new Document
       document_chembl_id: chembl_id
 
-    document.url = 'https://www.ebi.ac.uk/chembl/api/data/document/' + chembl_id + '.json'
+    document.url = Settings.WS_BASE_URL + 'document/' + chembl_id + '.json'
     return document
 
   @initDocumentAssayNetwork = (doc_chembl_id) ->

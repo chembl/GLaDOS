@@ -6,7 +6,7 @@ Assay = Backbone.RelationalModel.extend
     # it seems that the autoFetch property doesn't work
     @on 'change', @fetchRelatedModels, @
 
-    @url = 'https://www.ebi.ac.uk/chembl/api/data/assay/' + @get('assay_chembl_id') + '.json'
+    @url = Settings.WS_BASE_URL + 'assay/' + @get('assay_chembl_id') + '.json'
 
   relations: [{
     type: Backbone.HasOne

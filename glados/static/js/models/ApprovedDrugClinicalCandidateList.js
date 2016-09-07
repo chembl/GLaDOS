@@ -14,7 +14,7 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend({
       console.log('error');
       return this_collection.trigger('error');
     });
-    base_url2 = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_chembl_id__in=';
+    base_url2 = Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in=';
     return getDrugMechanisms.done(function() {
       var dm, getMoleculesInfo, getMoleculesInfoUrl, molecules_list;
       molecules_list = ((function() {

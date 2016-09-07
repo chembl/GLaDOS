@@ -7,7 +7,7 @@ initCompound = (chembl_id) ->
   compound = new Compound
     molecule_chembl_id: chembl_id
 
-  compound.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule/' + chembl_id + '.json'
+  compound.url = Settings.WS_BASE_URL + 'molecule/' + chembl_id + '.json'
   return compound
 
 ### *
@@ -21,20 +21,20 @@ initMoleculeFormsList = (member_compound) ->
 
   compoundList.original_compound = member_compound
   compoundList.origin = 'molecule_forms'
-  compoundList.url = 'https://www.ebi.ac.uk/chembl/api/data/molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
+  compoundList.url = Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
   return compoundList
 
 initMechanismOfAction = (mechanism_id) ->
   mechanismOfAction = new MechanismOfAction
     mec_id: mechanism_id
 
-  mechanismOfAction.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism/' + mechanism_id + '.json'
+  mechanismOfAction.url = Settings.WS_BASE_URL + 'mechanism/' + mechanism_id + '.json'
   return mechanismOfAction
 
 initMechanismOfActionList = (from_mol_chembl_id) ->
   mechanismOfActionList = new MechanismOfActionList
 
-  mechanismOfActionList.url = 'https://www.ebi.ac.uk/chembl/api/data/mechanism.json?molecule_chembl_id=' + from_mol_chembl_id
+  mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + from_mol_chembl_id
   return mechanismOfActionList
 
 

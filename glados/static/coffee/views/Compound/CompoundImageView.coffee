@@ -18,7 +18,7 @@ CompoundImageView = CardView.extend
     else if @model.get('structure_type') == 'SEQ'
       img_url = '/static/img/protein_structure.png'
     else
-      img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + '.svg'
+      img_url = Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + '.svg'
 
     img = $(@el).find('#Bck-COMP_IMG')
     img.load $.proxy(@showVisibleContent, @)
@@ -33,7 +33,7 @@ CompoundImageView = CardView.extend
 
 
   initDownloadButtons: ->
-    img_url = 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id')
+    img_url = Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id')
     $('.CNC-download-png').attr('href', img_url + '.png')
     $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
 
@@ -60,7 +60,7 @@ CompoundImageView = CardView.extend
       $('#Bck-Comp-Img-zoom-preloader').hide()
       $(@).show()
 
-    img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
+    img.attr('src', Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
     $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
@@ -78,7 +78,7 @@ CompoundImageView = CardView.extend
       img = $(parentView.el).find('#Bck-Comp-Img-zoom')
       $('#Bck-Comp-Img-zoom-preloader').show()
       img.hide()
-      img.attr('src', 'https://www.ebi.ac.uk/chembl/api/data/image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
+      img.attr('src', Settings.WS_BASE_URL + 'image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
 
 
 

@@ -11,7 +11,7 @@ DrugList = PaginatedCollection.extend({
   initialize: function() {
     this.meta = {
       server_side: true,
-      base_url: 'https://www.ebi.ac.uk/chembl/api/data/molecule.json',
+      base_url: Settings.WS_BASE_URL + 'molecule.json',
       page_size: 10,
       current_page: 1,
       to_show: [],
@@ -23,7 +23,7 @@ DrugList = PaginatedCollection.extend({
           'is_sorting': 0,
           'sort_class': 'fa-sort',
           'link_base': '/compound_report_card/$$$',
-          'image_base_url': 'https://www.ebi.ac.uk/chembl/api/data/image/$$$.svg'
+          'image_base_url': Settings.WS_BASE_URL + 'image/$$$.svg'
         }, {
           'name_to_show': 'Molecule Type',
           'comparator': 'molecule_type',

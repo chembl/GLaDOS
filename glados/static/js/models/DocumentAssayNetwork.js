@@ -5,7 +5,7 @@ DocumentAssayNetwork = Backbone.Model.extend({
   fetch: function() {
     var activitiesListsReceived, activitiesListsRequested, allAssays, assaysUrl, checkIfAllInfoReady, docChemblId, links, nodes, thisModel, triggerActivityRequest, triggerAssayRequest;
     docChemblId = this.get('document_chembl_id');
-    assaysUrl = 'https://www.ebi.ac.uk/chembl/api/data/assay.json?document_chembl_id=' + docChemblId + '&limit=1000';
+    assaysUrl = Settings.WS_BASE_URL + 'assay.json?document_chembl_id=' + docChemblId + '&limit=1000';
     allAssays = {};
     activitiesListsRequested = 0;
     activitiesListsReceived = 0;
@@ -17,14 +17,14 @@ DocumentAssayNetwork = Backbone.Model.extend({
         $.each(newAssays, function(index, newAssay) {
           var currentActsUrl;
           allAssays[newAssay.assay_chembl_id] = newAssay;
-          currentActsUrl = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000';
+          currentActsUrl = Settings.WS_BASE_URL + 'activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000';
           activitiesListsRequested++;
           console.log('num activities lists requested: ', activitiesListsRequested);
           return triggerActivityRequest(currentActsUrl);
         });
         nextUrl = response.page_meta.next;
         if (nextUrl != null) {
-          return triggerAssayRequest('https://www.ebi.ac.uk' + nextUrl);
+          return triggerAssayRequest(Settings.WS_HOSTNAME + nextUrl);
         } else {
           console.log('ALL ASSAYS OBTAINED');
           console.log(allAssays);
@@ -53,7 +53,7 @@ DocumentAssayNetwork = Backbone.Model.extend({
         });
         nextUrl = response.page_meta.next;
         if (nextUrl != null) {
-          triggerActivityRequest('https://www.ebi.ac.uk' + nextUrl);
+          triggerActivityRequest(Settings.WS_HOSTNAME + nextUrl);
           return console.log('requesting more activities');
         } else {
           activitiesListsReceived++;

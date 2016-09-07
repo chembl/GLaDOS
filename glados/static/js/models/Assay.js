@@ -5,7 +5,7 @@ Assay = Backbone.RelationalModel.extend({
   idAttribute: 'assay_chembl_id',
   initialize: function() {
     this.on('change', this.fetchRelatedModels, this);
-    return this.url = 'https://www.ebi.ac.uk/chembl/api/data/assay/' + this.get('assay_chembl_id') + '.json';
+    return this.url = Settings.WS_BASE_URL + 'assay/' + this.get('assay_chembl_id') + '.json';
   },
   relations: [
     {

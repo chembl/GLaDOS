@@ -20,7 +20,7 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend
 
     )
 
-    base_url2 = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_chembl_id__in='
+    base_url2 = Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in='
     # after I have the drug mechanisms now I get the molecules
     getDrugMechanisms.done(() ->
 

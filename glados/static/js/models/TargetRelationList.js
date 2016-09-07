@@ -53,7 +53,7 @@ TargetRelationList = PaginatedCollection.extend({
       console.log('error');
       return this_collection.trigger('error');
     });
-    base_url2 = 'https://wwwdev.ebi.ac.uk/chembl/api/data/target.json?target_chembl_id__in=';
+    base_url2 = Settings.WS_BASE_URL + 'target.json?target_chembl_id__in=';
     return getTargetRelations.done(function() {
       var getTargetsInfo, getTargetssInfoUrl, t, targets_list;
       targets_list = ((function() {
