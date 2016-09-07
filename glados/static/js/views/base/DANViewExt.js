@@ -102,7 +102,7 @@ DANViewExt = {
       color1 = null;
       color2 = null;
       if (color_value === 'solid') {
-        return '#0000FF';
+        return '#4caf50';
       }
       if (color_value === 'assay_type') {
         as1 = nodes[d.x].assay_type;
