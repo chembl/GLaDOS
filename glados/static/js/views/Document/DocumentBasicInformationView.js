@@ -3,7 +3,8 @@ var DocumentBasicInformationView;
 
 DocumentBasicInformationView = CardView.extend({
   events: {
-    'click .BCK-trigger-download': 'download'
+    'click .BCK-trigger-download-JSON': 'triggerDownloadJSON',
+    'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
   },
   initialize: function() {
     this.model.on('change', this.render, this);
@@ -34,5 +35,14 @@ DocumentBasicInformationView = CardView.extend({
   },
   download: function() {
     return this.model.download();
+  },
+  showDownloadOptions: function() {
+    return console.log('show options');
+  },
+  triggerDownloadJSON: function() {
+    return this.model.downloadJSON();
+  },
+  triggerDownloadCSV: function() {
+    return this.model.downloadCSV();
   }
 });

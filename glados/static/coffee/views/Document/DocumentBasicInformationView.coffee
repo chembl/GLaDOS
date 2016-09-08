@@ -5,7 +5,8 @@
 DocumentBasicInformationView = CardView.extend
 
   events:
-    'click .BCK-trigger-download': 'download'
+    'click .BCK-trigger-download-JSON': 'triggerDownloadJSON'
+    'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
 
 
   initialize: ->
@@ -39,3 +40,12 @@ DocumentBasicInformationView = CardView.extend
 
   download: ->
     @model.download()
+
+  showDownloadOptions: ->
+    console.log 'show options'
+
+  triggerDownloadJSON: ->
+    @model.downloadJSON()
+
+  triggerDownloadCSV: ->
+    @model.downloadCSV()
