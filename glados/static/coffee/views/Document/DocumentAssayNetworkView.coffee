@@ -11,9 +11,6 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
     @model.on 'change', updateViewProxy, @
 
-    @csvFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
-    @jsonFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
-
   render: ->
 
     console.log('render!')
@@ -30,3 +27,16 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
     $(@el).find('.num-results').html Handlebars.compile( $('#Handlebars-Document-DAN-NumResults').html() )
       num_results: @model.get('graph').nodes.length
+
+  # --------------------------------------------------------------------
+  # Downloads
+  # --------------------------------------------------------------------
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
+    else if format == 'json'
+      return @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
+    else
+      return 'file.txt'

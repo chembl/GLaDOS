@@ -6,9 +6,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     var updateViewProxy;
     this.$vis_elem = $('#AssayNetworkVisualisationContainer');
     updateViewProxy = this.setUpResponsiveRender();
-    this.model.on('change', updateViewProxy, this);
-    this.csvFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
-    return this.jsonFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
+    return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
     console.log('render!');
@@ -23,5 +21,14 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     return $(this.el).find('.num-results').html(Handlebars.compile($('#Handlebars-Document-DAN-NumResults').html())({
       num_results: this.model.get('graph').nodes.length
     }));
+  },
+  getFilename: function(format) {
+    if (format === 'csv') {
+      return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
+    } else if (format === 'json') {
+      return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
+    } else {
+      return 'file.txt';
+    }
   }
 });

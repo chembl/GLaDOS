@@ -4,9 +4,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   initialize: ->
     @model.on 'change', @.render, @
 
-    @csvFilename = @model.get('molecule_chembl_id') + 'NameAndClassification.csv'
-    @jsonFilename = @model.get('molecule_chembl_id') + 'NameAndClassification.json'
-
   render: ->
     @renderImage()
     @initDownloadButtons()
@@ -101,6 +98,18 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       model: @model
       type: 'reduced'
 
+  # --------------------------------------------------------------------
+  # Downloads
+  # --------------------------------------------------------------------
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return @model.get('molecule_chembl_id') + 'NameAndClassification.csv'
+    else if format == 'json'
+      return @model.get('molecule_chembl_id') + 'NameAndClassification.json'
+    else
+      return 'file.txt'
 
 
 

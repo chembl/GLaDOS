@@ -12,9 +12,6 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     updateViewProxy = @setUpResponsiveRender()
     @model.on 'change', updateViewProxy, @
 
-    @csvFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
-    @jsonFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
-
   render: ->
 
     console.log 'render!'
@@ -24,5 +21,18 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
 
     @hidePreloader()
     @paintMatrix()
+
+  # --------------------------------------------------------------------
+  # Downloads
+  # --------------------------------------------------------------------
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
+    else if format == 'json'
+      return @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
+    else
+      return 'file.txt'
 
 

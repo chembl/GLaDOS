@@ -13,9 +13,12 @@ DownloadViewExt = {
     return console.log('show options');
   },
   triggerDownloadJSON: function() {
-    return this.model.downloadJSON(this.jsonFilename);
+    return this.model.downloadJSON(this.getFilename('json'), this.downloadParserFunction);
   },
   triggerDownloadCSV: function() {
-    return this.model.downloadCSV(this.csvFilename);
+    return this.model.downloadCSV(this.getFilename('csv'), this.downloadParserFunction);
+  },
+  getFilename: function(format) {
+    return 'file.txt';
   }
 };

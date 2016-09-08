@@ -11,7 +11,13 @@ DownloadViewExt =
     console.log 'show options'
 
   triggerDownloadJSON: ->
-    @model.downloadJSON(@jsonFilename)
+    #remember that downloadParserFunction can be null if you just want to use all the attributes for the download.
+    @model.downloadJSON(@getFilename('json'), @downloadParserFunction)
 
   triggerDownloadCSV: ->
-    @model.downloadCSV(@csvFilename)
+    @model.downloadCSV(@getFilename('csv'), @downloadParserFunction)
+
+  # overrride this function in your view to get your desired functionality
+  getFilename: (format) ->
+
+    return 'file.txt'

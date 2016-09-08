@@ -5,9 +5,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
   initialize: function() {
     this.model.on('change', this.render, this);
     this.model.on('error', this.showCompoundErrorCard, this);
-    this.resource_type = 'Document';
-    this.csvFilename = this.model.get('document_chembl_id') + 'DocumentBasicInformation.csv';
-    return this.jsonFilename = this.model.get('document_chembl_id') + 'DocumentBasicInformation.json';
+    return this.resource_type = 'Document';
   },
   render: function() {
     this.fill_template('BCK-DBI-large');
@@ -30,5 +28,14 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
       pubmed_id: this.model.get('pubmed_id'),
       doi: this.model.get('doi')
     }));
+  },
+  getFilename: function(format) {
+    if (format === 'csv') {
+      return this.model.get('document_chembl_id') + 'DocumentBasicInformation.csv';
+    } else if (format === 'json') {
+      return this.model.get('document_chembl_id') + 'DocumentBasicInformation.json';
+    } else {
+      return 'file.txt';
+    }
   }
 });

@@ -3,9 +3,7 @@ var CompoundImageView;
 
 CompoundImageView = CardView.extend(DownloadViewExt).extend({
   initialize: function() {
-    this.model.on('change', this.render, this);
-    this.csvFilename = this.model.get('molecule_chembl_id') + 'NameAndClassification.csv';
-    return this.jsonFilename = this.model.get('molecule_chembl_id') + 'NameAndClassification.json';
+    return this.model.on('change', this.render, this);
   },
   render: function() {
     this.renderImage();
@@ -92,5 +90,14 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
       model: this.model,
       type: 'reduced'
     });
+  },
+  getFilename: function(format) {
+    if (format === 'csv') {
+      return this.model.get('molecule_chembl_id') + 'NameAndClassification.csv';
+    } else if (format === 'json') {
+      return this.model.get('molecule_chembl_id') + 'NameAndClassification.json';
+    } else {
+      return 'file.txt';
+    }
   }
 });

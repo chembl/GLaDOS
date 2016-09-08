@@ -1,6 +1,6 @@
 # View that renders the Compound Calculated Properties Section
 # of the compound report card
-CompoundCalculatedParentPropertiesView = CardView.extend
+CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @model.on 'change', @.render, @
@@ -40,3 +40,20 @@ CompoundCalculatedParentPropertiesView = CardView.extend
     'aromatic_rings': 'Bck-CalcCompProp-AR'
     'heavy_atoms': 'Bck-CalcCompProp-HA'
     'qed_weighted': 'Bck-CalcCompProp-QEDW'
+
+  # -----------------------------------------------------------------
+  # ---- Downloads
+  # -----------------------------------------------------------------
+
+  downloadParserFunction: (attributes) ->
+
+    return attributes.molecule_properties
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return @model.get('molecule_chembl_id') + 'CalculatedParentProperties.csv'
+    else if format == 'json'
+      return @model.get('molecule_chembl_id') + 'CalculatedParentProperties.json'
+    else
+      return 'file.txt'

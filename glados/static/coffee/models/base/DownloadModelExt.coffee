@@ -8,42 +8,57 @@ DownloadModelExt =
   # CSV
   # --------------------------------------------------------------------
 
-  getCSVHeaderString: ->
+  getCSVHeaderString: (downloadObject) ->
 
     keys = []
-    for key, value of @attributes
+    for key, value of downloadObject
       keys.push(key)
 
     return keys.join(';')
 
-  getCSVContentString: ->
+  getCSVContentString: (downloadObject) ->
 
     values = []
-    for key, value of @attributes
-      values.push(JSON.stringify(@attributes[key]))
+    for key, value of downloadObject
+      values.push(JSON.stringify(downloadObject[key]))
 
     return values.join(';')
 
-  getFullCSVString: ->
+  getFullCSVString: (downloadObject) ->
 
-    header = @getCSVHeaderString()
-    content = @getCSVContentString()
+    header = @getCSVHeaderString(downloadObject)
+    content = @getCSVContentString(downloadObject)
     return header + '\n' + content
 
-  downloadCSV: (filename) ->
+  downloadCSV: (filename, downloadParserFunction) ->
 
-    blob = @getBlobToDownload @getFullCSVString()
+    if !downloadParserFunction?
+      downloadObject = @attributes
+    else
+      downloadObject = downloadParserFunction @attributes
+
+    blob = @getBlobToDownload @getFullCSVString(downloadObject)
     saveAs blob, filename
 
   # --------------------------------------------------------------------
   # json
   # --------------------------------------------------------------------
 
-  getJSONString: ->
+  getJSONString: (downloadObject) ->
 
-    JSON.stringify(@toJSON())
+    JSON.stringify(downloadObject)
 
-  downloadJSON: (filename) ->
 
-    blob = @getBlobToDownload @getJSONString()
+  # the download parser function determines what to to with the model's
+  # attributes to generate the object that is going to be used for
+  # generating the download.
+  downloadJSON: (filename, downloadParserFunction) ->
+
+    if !downloadParserFunction?
+      downloadObject = @attributes
+    else
+      downloadObject = downloadParserFunction @attributes
+
+    blob = @getBlobToDownload @getJSONString(downloadObject)
     saveAs blob, filename
+

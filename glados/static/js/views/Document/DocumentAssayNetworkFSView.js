@@ -7,9 +7,7 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     $(this.el).find('select').material_select();
     this.$vis_elem = $('#AssayNetworkVisualisationFSContainer');
     updateViewProxy = this.setUpResponsiveRender();
-    this.model.on('change', updateViewProxy, this);
-    this.csvFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
-    return this.jsonFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
+    return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
     console.log('render!');
@@ -18,5 +16,14 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     }));
     this.hidePreloader();
     return this.paintMatrix();
+  },
+  getFilename: function(format) {
+    if (format === 'csv') {
+      return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
+    } else if (format === 'json') {
+      return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
+    } else {
+      return 'file.txt';
+    }
   }
 });

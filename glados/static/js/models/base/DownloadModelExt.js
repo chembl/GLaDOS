@@ -7,43 +7,51 @@ DownloadModelExt = {
       type: 'text/plain;charset=utf-8'
     });
   },
-  getCSVHeaderString: function() {
-    var key, keys, value, _ref;
+  getCSVHeaderString: function(downloadObject) {
+    var key, keys, value;
     keys = [];
-    _ref = this.attributes;
-    for (key in _ref) {
-      value = _ref[key];
+    for (key in downloadObject) {
+      value = downloadObject[key];
       keys.push(key);
     }
     return keys.join(';');
   },
-  getCSVContentString: function() {
-    var key, value, values, _ref;
+  getCSVContentString: function(downloadObject) {
+    var key, value, values;
     values = [];
-    _ref = this.attributes;
-    for (key in _ref) {
-      value = _ref[key];
-      values.push(JSON.stringify(this.attributes[key]));
+    for (key in downloadObject) {
+      value = downloadObject[key];
+      values.push(JSON.stringify(downloadObject[key]));
     }
     return values.join(';');
   },
-  getFullCSVString: function() {
+  getFullCSVString: function(downloadObject) {
     var content, header;
-    header = this.getCSVHeaderString();
-    content = this.getCSVContentString();
+    header = this.getCSVHeaderString(downloadObject);
+    content = this.getCSVContentString(downloadObject);
     return header + '\n' + content;
   },
-  downloadCSV: function(filename) {
-    var blob;
-    blob = this.getBlobToDownload(this.getFullCSVString());
+  downloadCSV: function(filename, downloadParserFunction) {
+    var blob, downloadObject;
+    if (!(downloadParserFunction != null)) {
+      downloadObject = this.attributes;
+    } else {
+      downloadObject = downloadParserFunction(this.attributes);
+    }
+    blob = this.getBlobToDownload(this.getFullCSVString(downloadObject));
     return saveAs(blob, filename);
   },
-  getJSONString: function() {
-    return JSON.stringify(this.toJSON());
+  getJSONString: function(downloadObject) {
+    return JSON.stringify(downloadObject);
   },
-  downloadJSON: function(filename) {
-    var blob;
-    blob = this.getBlobToDownload(this.getJSONString());
+  downloadJSON: function(filename, downloadParserFunction) {
+    var blob, downloadObject;
+    if (!(downloadParserFunction != null)) {
+      downloadObject = this.attributes;
+    } else {
+      downloadObject = downloadParserFunction(this.attributes);
+    }
+    blob = this.getBlobToDownload(this.getJSONString(downloadObject));
     return saveAs(blob, filename);
   }
 };

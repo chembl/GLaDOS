@@ -9,9 +9,6 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Document'
 
-    @csvFilename = @model.get('document_chembl_id') + 'DocumentBasicInformation.csv'
-    @jsonFilename = @model.get('document_chembl_id') + 'DocumentBasicInformation.json'
-
   render: ->
 
     @fill_template('BCK-DBI-large')
@@ -35,3 +32,16 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
       last_page: @model.get('last_page')
       pubmed_id: @model.get('pubmed_id')
       doi: @model.get('doi')
+
+  # --------------------------------------------------------------------
+  # Downloads
+  # --------------------------------------------------------------------
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return @model.get('document_chembl_id') + 'DocumentBasicInformation.csv'
+    else if format == 'json'
+      return @model.get('document_chembl_id') + 'DocumentBasicInformation.json'
+    else
+      return 'file.txt'
