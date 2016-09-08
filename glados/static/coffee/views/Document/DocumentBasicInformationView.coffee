@@ -2,12 +2,7 @@
 # from the Document report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-DocumentBasicInformationView = CardView.extend
-
-  events:
-    'click .BCK-trigger-download-JSON': 'triggerDownloadJSON'
-    'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
-
+DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @model.on 'change', @.render, @
@@ -37,15 +32,3 @@ DocumentBasicInformationView = CardView.extend
       last_page: @model.get('last_page')
       pubmed_id: @model.get('pubmed_id')
       doi: @model.get('doi')
-
-  download: ->
-    @model.download()
-
-  showDownloadOptions: ->
-    console.log 'show options'
-
-  triggerDownloadJSON: ->
-    @model.downloadJSON()
-
-  triggerDownloadCSV: ->
-    @model.downloadCSV()

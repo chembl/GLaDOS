@@ -2,7 +2,7 @@
 # from the Document report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewExt).extend
+DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewExt).extend(DownloadViewExt).extend
 
   initialize: ->
 
