@@ -5,7 +5,9 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
   initialize: function() {
     this.model.on('change', this.render, this);
     this.model.on('error', this.showCompoundErrorCard, this);
-    return this.resource_type = 'Document';
+    this.resource_type = 'Document';
+    this.csvFilename = this.model.get('document_chembl_id') + 'DocumentBasicInformation.csv';
+    return this.jsonFilename = this.model.get('document_chembl_id') + 'DocumentBasicInformation.json';
   },
   render: function() {
     this.fill_template('BCK-DBI-large');

@@ -13,9 +13,9 @@ DownloadViewExt = {
     return console.log('show options');
   },
   triggerDownloadJSON: function() {
-    return this.model.downloadJSON();
+    return this.model.downloadJSON(this.jsonFilename);
   },
   triggerDownloadCSV: function() {
-    return this.model.downloadCSV();
+    return this.model.downloadCSV(this.csvFilename);
   }
 };

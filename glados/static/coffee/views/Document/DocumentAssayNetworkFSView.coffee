@@ -2,7 +2,7 @@
 # from the Document report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DANViewExt).extend
+DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DANViewExt).extend(DownloadViewExt).extend
 
   initialize: ->
 
@@ -11,6 +11,9 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     @$vis_elem = $('#AssayNetworkVisualisationFSContainer')
     updateViewProxy = @setUpResponsiveRender()
     @model.on 'change', updateViewProxy, @
+
+    @csvFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
+    @jsonFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
 
   render: ->
 

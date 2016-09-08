@@ -6,7 +6,9 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     var updateViewProxy;
     this.$vis_elem = $('#AssayNetworkVisualisationContainer');
     updateViewProxy = this.setUpResponsiveRender();
-    return this.model.on('change', updateViewProxy, this);
+    this.model.on('change', updateViewProxy, this);
+    this.csvFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
+    return this.jsonFilename = this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
   },
   render: function() {
     console.log('render!');

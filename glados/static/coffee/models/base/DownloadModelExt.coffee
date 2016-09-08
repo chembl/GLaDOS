@@ -30,10 +30,10 @@ DownloadModelExt =
     content = @getCSVContentString()
     return header + '\n' + content
 
-  downloadCSV: ->
+  downloadCSV: (filename) ->
 
     blob = @getBlobToDownload @getFullCSVString()
-    saveAs blob, @get('document_chembl_id') + 'DocumentBasicInformation.csv'
+    saveAs blob, filename
 
   # --------------------------------------------------------------------
   # json
@@ -43,7 +43,7 @@ DownloadModelExt =
 
     JSON.stringify(@toJSON())
 
-  downloadJSON: ->
+  downloadJSON: (filename) ->
 
     blob = @getBlobToDownload @getJSONString()
-    saveAs blob, @get('document_chembl_id') + 'DocumentBasicInformation.json'
+    saveAs blob, filename

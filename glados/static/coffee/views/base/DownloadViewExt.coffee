@@ -11,7 +11,7 @@ DownloadViewExt =
     console.log 'show options'
 
   triggerDownloadJSON: ->
-    @model.downloadJSON()
+    @model.downloadJSON(@jsonFilename)
 
   triggerDownloadCSV: ->
-    @model.downloadCSV()
+    @model.downloadCSV(@csvFilename)

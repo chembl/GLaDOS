@@ -33,17 +33,17 @@ DownloadModelExt = {
     content = this.getCSVContentString();
     return header + '\n' + content;
   },
-  downloadCSV: function() {
+  downloadCSV: function(filename) {
     var blob;
     blob = this.getBlobToDownload(this.getFullCSVString());
-    return saveAs(blob, this.get('document_chembl_id') + 'DocumentBasicInformation.csv');
+    return saveAs(blob, filename);
   },
   getJSONString: function() {
     return JSON.stringify(this.toJSON());
   },
-  downloadJSON: function() {
+  downloadJSON: function(filename) {
     var blob;
     blob = this.getBlobToDownload(this.getJSONString());
-    return saveAs(blob, this.get('document_chembl_id') + 'DocumentBasicInformation.json');
+    return saveAs(blob, filename);
   }
 };

@@ -11,6 +11,9 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
     @model.on 'change', updateViewProxy, @
 
+    @csvFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
+    @jsonFilename = @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
+
   render: ->
 
     console.log('render!')
