@@ -15,7 +15,7 @@ DownloadModelExt = {
       value = _ref[key];
       keys.push(key);
     }
-    return keys.join(',');
+    return keys.join(';');
   },
   getCSVContentString: function() {
     var key, value, values, _ref;
@@ -23,9 +23,9 @@ DownloadModelExt = {
     _ref = this.attributes;
     for (key in _ref) {
       value = _ref[key];
-      values.push(value);
+      values.push(JSON.stringify(this.attributes[key]));
     }
-    return values.join(',');
+    return values.join(';');
   },
   getFullCSVString: function() {
     var content, header;

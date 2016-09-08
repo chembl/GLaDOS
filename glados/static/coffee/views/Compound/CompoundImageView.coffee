@@ -1,8 +1,11 @@
 # View that renders the Image of the compound for the Compound Name and Classification Section
-CompoundImageView = CardView.extend
+CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @model.on 'change', @.render, @
+
+    @csvFilename = @model.get('molecule_chembl_id') + 'NameAndClassification.csv'
+    @jsonFilename = @model.get('molecule_chembl_id') + 'NameAndClassification.json'
 
   render: ->
     @renderImage()
@@ -10,7 +13,9 @@ CompoundImageView = CardView.extend
     @initZoomModal()
 
   events: ->
-    "click #CNC-3d-modal-trigger": "init3DView"
+    # aahhh!!! >(
+    return _.extend {}, DownloadViewExt.events,
+      "click #CNC-3d-modal-trigger": "init3DView"
 
   renderImage: ->
     if @model.get('structure_type') == 'NONE'

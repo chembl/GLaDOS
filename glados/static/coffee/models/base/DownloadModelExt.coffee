@@ -14,15 +14,15 @@ DownloadModelExt =
     for key, value of @attributes
       keys.push(key)
 
-    return keys.join(',')
+    return keys.join(';')
 
   getCSVContentString: ->
 
     values = []
     for key, value of @attributes
-      values.push(value)
+      values.push(JSON.stringify(@attributes[key]))
 
-    return values.join(',')
+    return values.join(';')
 
   getFullCSVString: ->
 

@@ -1,6 +1,6 @@
-Compound = Backbone.Model.extend
-  parse: (response) ->
+Compound = Backbone.Model.extend(DownloadModelExt).extend
 
+  parse: (response) ->
 
     # Calculate the rule of five from other properties
     if response.molecule_properties?
