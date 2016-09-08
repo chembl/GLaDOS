@@ -6,13 +6,19 @@
 
  {% block DBasicInformation-dnld %}
     {% with btn_id='DBasicInformation-dnld' additional_classes='hide-on-small-only' %}
-      {% include "glados/base/btn_download_small.html" %}
+      {% include "glados/base/btn_download_group.html" %}
     {% endwith %}
   {% endblock %}
 
-  {% block DBasicInformation-small-dnld %}
-    {% with btn_id='DBasicInformation-small-dnld' additional_classes='hide-on-med-and-up' %}
-      {% include "glados/base/btn_download_small_2_lines.html" %}
+  {% block DBasicInformation-small-dnld-csv %}
+    {% with btn_id='DBasicInformation-small-dnld-csv' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_csv.html" %}
+    {% endwith %}
+  {% endblock %}
+
+   {% block DBasicInformation-small-dnld-json %}
+    {% with btn_id='DBasicInformation-small-dnld-csv' additional_classes='hide-on-med-and-up' %}
+      {% include "glados/base/btn_download_json.html" %}
     {% endwith %}
   {% endblock %}
 
