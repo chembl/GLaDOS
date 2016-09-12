@@ -1,23 +1,42 @@
-<a id='{{btn_id}}'
-   class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped BCK-open-download-options"
-   data-position="bottom"
-   data-tooltip="Download">
-  <i class="fa fa-download"></i>
-</a>
+<div class='downloads-btn-wrapper'
+>
 
-<a
-  class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped BCK-open-download-options BCK-trigger-download-CSV"
-  data-position="bottom"
-  data-tooltip="CSV">
-  CSV
-</a>
 
-<a
-  class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped BCK-open-download-options center-align BCK-trigger-download-JSON"
-  data-position="bottom"
-  data-tooltip="JSON">
-  JSON
-</a>
+
+  <a id='{{btn_id}}'
+     onclick="
+
+     $elem = $(this);
+     if ($elem.attr('open') == 'open'){
+       $elem.parent().children('.downloads-btns').slideUp();
+       $elem.attr('open', false);
+     }else{
+       $elem.parent().children('.downloads-btns').slideDown();
+       $elem.attr('open', 'yes');
+      }
+     "
+     class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} BCK-open-download-options">
+    <i class="fa fa-download"></i>
+  </a>
+
+  <div class="downloads-btns" >
+    <a
+      class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped BCK-open-download-options BCK-trigger-download-CSV"
+      data-position="bottom"
+      data-tooltip="CSV">
+      CSV
+    </a>
+
+    <a
+      class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped BCK-open-download-options center-align BCK-trigger-download-JSON"
+      data-position="bottom"
+      data-tooltip="JSON">
+      JSON
+    </a>
+
+  </div>
+
+</div>
 
 
 

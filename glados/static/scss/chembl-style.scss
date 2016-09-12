@@ -1794,6 +1794,28 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+ /**
+  * Download buttons
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+
+.downloads-btn-wrapper{
+
+  position: relative;
+  display: inline-block;
+
+  .downloads-btns{
+
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 300px;
+    display: none;
+
+  }
+
+}
+
 
 
 

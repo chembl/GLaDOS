@@ -3011,4 +3011,18 @@ div#CNC-zoom-modal {
   .target-browser .tree tr {
     border-bottom: 1px solid #009688; }
 
+/**
+ * Download buttons
+ * ----------------------------------------------------------------------------------------------------------------------
+ */
+.downloads-btn-wrapper {
+  position: relative;
+  display: inline-block; }
+  .downloads-btn-wrapper .downloads-btns {
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 300px;
+    display: none; }
+
 /*# sourceMappingURL=chembl-style.css.map */
