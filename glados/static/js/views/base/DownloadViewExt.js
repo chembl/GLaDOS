@@ -4,7 +4,8 @@ var DownloadViewExt;
 DownloadViewExt = {
   events: {
     'click .BCK-trigger-download-JSON': 'triggerDownloadJSON',
-    'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
+    'click .BCK-trigger-download-CSV': 'triggerDownloadCSV',
+    'click .BCK-trigger-download-XLS': 'triggerDownloadXLS'
   },
   download: function() {
     return this.model.download();
@@ -20,5 +21,8 @@ DownloadViewExt = {
   },
   getFilename: function(format) {
     return 'file.txt';
+  },
+  triggerDownloadXLS: function() {
+    return this.model.downloadXLS(this.getFilename('xls'), this.downloadParserFunction);
   }
 };

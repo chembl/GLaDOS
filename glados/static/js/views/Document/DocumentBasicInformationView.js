@@ -34,6 +34,8 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
       return this.model.get('document_chembl_id') + 'DocumentBasicInformation.csv';
     } else if (format === 'json') {
       return this.model.get('document_chembl_id') + 'DocumentBasicInformation.json';
+    } else if (format === 'xls') {
+      return this.model.get('document_chembl_id') + 'DocumentBasicInformation.xls';
     } else {
       return 'file.txt';
     }

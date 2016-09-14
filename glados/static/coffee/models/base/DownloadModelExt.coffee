@@ -4,6 +4,16 @@ DownloadModelExt =
 
     return new Blob([contentStr], type: 'text/plain;charset=utf-8')
 
+  # This function returns the object that is going to be used to
+  # generate the download, if there is no special download parser
+  # function, the object will be simply the object's attributes
+  getDownloadObject: (downloadParserFunction) ->
+
+    if !downloadParserFunction?
+      return @attributes
+    else
+      return downloadParserFunction @attributes
+
   # --------------------------------------------------------------------
   # CSV
   # --------------------------------------------------------------------
@@ -32,10 +42,7 @@ DownloadModelExt =
 
   downloadCSV: (filename, downloadParserFunction) ->
 
-    if !downloadParserFunction?
-      downloadObject = @attributes
-    else
-      downloadObject = downloadParserFunction @attributes
+    downloadObject = @getDownloadObject(downloadParserFunction)
 
     blob = @getBlobToDownload @getFullCSVString(downloadObject)
     saveAs blob, filename
@@ -54,11 +61,24 @@ DownloadModelExt =
   # generating the download.
   downloadJSON: (filename, downloadParserFunction) ->
 
-    if !downloadParserFunction?
-      downloadObject = @attributes
-    else
-      downloadObject = downloadParserFunction @attributes
+    downloadObject = @getDownloadObject(downloadParserFunction)
 
     blob = @getBlobToDownload @getJSONString(downloadObject)
+    saveAs blob, filename
+
+  # --------------------------------------------------------------------
+  # xls
+  # --------------------------------------------------------------------
+
+  getXLSString: (downloadObject) ->
+
+    return 'XLSX'
+
+
+  downloadXLS: (filename, downloadParserFunction) ->
+
+    downloadObject = @getDownloadObject(downloadParserFunction)
+
+    blob = @getBlobToDownload @getXLSString(downloadObject)
     saveAs blob, filename
 

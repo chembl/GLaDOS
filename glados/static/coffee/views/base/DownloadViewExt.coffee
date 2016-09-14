@@ -3,6 +3,7 @@ DownloadViewExt =
   events:
     'click .BCK-trigger-download-JSON': 'triggerDownloadJSON'
     'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
+    'click .BCK-trigger-download-XLS': 'triggerDownloadXLS'
 
   download: ->
     @model.download()
@@ -21,3 +22,7 @@ DownloadViewExt =
   getFilename: (format) ->
 
     return 'file.txt'
+
+  triggerDownloadXLS: ->
+
+    @model.downloadXLS(@getFilename('xls'), @downloadParserFunction)

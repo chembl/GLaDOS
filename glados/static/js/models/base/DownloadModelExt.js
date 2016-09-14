@@ -7,6 +7,13 @@ DownloadModelExt = {
       type: 'text/plain;charset=utf-8'
     });
   },
+  getDownloadObject: function(downloadParserFunction) {
+    if (!(downloadParserFunction != null)) {
+      return this.attributes;
+    } else {
+      return downloadParserFunction(this.attributes);
+    }
+  },
   getCSVHeaderString: function(downloadObject) {
     var key, keys, value;
     keys = [];
@@ -33,11 +40,7 @@ DownloadModelExt = {
   },
   downloadCSV: function(filename, downloadParserFunction) {
     var blob, downloadObject;
-    if (!(downloadParserFunction != null)) {
-      downloadObject = this.attributes;
-    } else {
-      downloadObject = downloadParserFunction(this.attributes);
-    }
+    downloadObject = this.getDownloadObject(downloadParserFunction);
     blob = this.getBlobToDownload(this.getFullCSVString(downloadObject));
     return saveAs(blob, filename);
   },
@@ -46,12 +49,17 @@ DownloadModelExt = {
   },
   downloadJSON: function(filename, downloadParserFunction) {
     var blob, downloadObject;
-    if (!(downloadParserFunction != null)) {
-      downloadObject = this.attributes;
-    } else {
-      downloadObject = downloadParserFunction(this.attributes);
-    }
+    downloadObject = this.getDownloadObject(downloadParserFunction);
     blob = this.getBlobToDownload(this.getJSONString(downloadObject));
+    return saveAs(blob, filename);
+  },
+  getXLSString: function(downloadObject) {
+    return 'XLSX';
+  },
+  downloadXLS: function(filename, downloadParserFunction) {
+    var blob, downloadObject;
+    downloadObject = this.getDownloadObject(downloadParserFunction);
+    blob = this.getBlobToDownload(this.getXLSString(downloadObject));
     return saveAs(blob, filename);
   }
 };
