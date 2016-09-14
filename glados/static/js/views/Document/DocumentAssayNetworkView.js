@@ -27,6 +27,8 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
       return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.csv';
     } else if (format === 'json') {
       return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.json';
+    } else if (format === 'xlsx') {
+      return this.model.get('document_chembl_id') + 'DocumentAssayNetwork.xlsx';
     } else {
       return 'file.txt';
     }

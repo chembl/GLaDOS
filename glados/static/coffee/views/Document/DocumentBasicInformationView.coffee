@@ -43,7 +43,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
       return @model.get('document_chembl_id') + 'DocumentBasicInformation.csv'
     else if format == 'json'
       return @model.get('document_chembl_id') + 'DocumentBasicInformation.json'
-    else if format == 'xls'
-      return @model.get('document_chembl_id') + 'DocumentBasicInformation.xls'
+    else if format == 'xlsx'
+      return @model.get('document_chembl_id') + 'DocumentBasicInformation.xlsx'
     else
       return 'file.txt'

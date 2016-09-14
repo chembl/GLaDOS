@@ -55,5 +55,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
       return @model.get('molecule_chembl_id') + 'CalculatedParentProperties.csv'
     else if format == 'json'
       return @model.get('molecule_chembl_id') + 'CalculatedParentProperties.json'
+    else if format == 'xlsx'
+      return @model.get('molecule_chembl_id') + 'CalculatedParentProperties.xlsx'
     else
       return 'file.txt'

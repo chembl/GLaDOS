@@ -2,9 +2,12 @@
 var DownloadModelExt;
 
 DownloadModelExt = {
-  getBlobToDownload: function(contentStr) {
+  getBlobToDownload: function(contentStr, contentType) {
+    if (contentType == null) {
+      contentType = 'text/plain;charset=utf-8';
+    }
     return new Blob([contentStr], {
-      type: 'text/plain;charset=utf-8'
+      type: contentType
     });
   },
   getDownloadObject: function(downloadParserFunction) {
@@ -54,12 +57,86 @@ DownloadModelExt = {
     return saveAs(blob, filename);
   },
   getXLSString: function(downloadObject) {
-    return 'XLSX';
+    var Workbook, cellContent, cellNumber, cellVal, currentColumn, currentRow, key, range, s2ab, value, wb, wbout, ws;
+    Workbook = function() {
+      if (!(this instanceof Workbook)) {
+        return new Workbook;
+      }
+      this.SheetNames = [];
+      this.Sheets = {};
+    };
+    wb = new Workbook();
+    wb.SheetNames.push('sheet1');
+    ws = {};
+    currentRow = 0;
+    currentColumn = 0;
+    for (key in downloadObject) {
+      value = downloadObject[key];
+      cellNumber = XLSX.utils.encode_cell({
+        c: currentColumn,
+        r: currentRow
+      });
+      cellContent = {
+        v: key,
+        t: 's'
+      };
+      ws[cellNumber] = cellContent;
+      currentColumn++;
+    }
+    currentRow++;
+    currentColumn = 0;
+    for (key in downloadObject) {
+      value = downloadObject[key];
+      cellNumber = XLSX.utils.encode_cell({
+        c: currentColumn,
+        r: currentRow
+      });
+      if (value != null) {
+        cellVal = value;
+      } else {
+        cellVal = '---';
+      }
+      cellContent = {
+        v: String(cellVal),
+        t: 's'
+      };
+      ws[cellNumber] = cellContent;
+      currentColumn++;
+    }
+    range = {
+      s: {
+        c: 0,
+        r: 0
+      },
+      e: {
+        c: currentColumn - 1,
+        r: currentRow
+      }
+    };
+    ws['!ref'] = XLSX.utils.encode_range(range);
+    wb.Sheets['sheet1'] = ws;
+    wbout = XLSX.write(wb, {
+      bookType: 'xlsx',
+      bookSST: true,
+      type: 'binary'
+    });
+    s2ab = function(s) {
+      var buf, i, view;
+      buf = new ArrayBuffer(s.length);
+      view = new Uint8Array(buf);
+      i = 0;
+      while (i !== s.length) {
+        view[i] = s.charCodeAt(i) & 0xFF;
+        ++i;
+      }
+      return buf;
+    };
+    return s2ab(wbout);
   },
   downloadXLS: function(filename, downloadParserFunction) {
     var blob, downloadObject;
     downloadObject = this.getDownloadObject(downloadParserFunction);
-    blob = this.getBlobToDownload(this.getXLSString(downloadObject));
+    blob = this.getBlobToDownload(this.getXLSString(downloadObject), 'application/octet-stream');
     return saveAs(blob, filename);
   }
 };

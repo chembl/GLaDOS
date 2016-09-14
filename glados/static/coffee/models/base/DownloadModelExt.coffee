@@ -1,8 +1,9 @@
 DownloadModelExt =
 
-  getBlobToDownload: (contentStr) ->
+  getBlobToDownload: (contentStr, contentType) ->
 
-    return new Blob([contentStr], type: 'text/plain;charset=utf-8')
+    contentType = 'text/plain;charset=utf-8' unless contentType?
+    return new Blob([contentStr], type: contentType)
 
   # This function returns the object that is going to be used to
   # generate the download, if there is no special download parser
@@ -72,13 +73,70 @@ DownloadModelExt =
 
   getXLSString: (downloadObject) ->
 
-    return 'XLSX'
+    Workbook = ->
+      if !(this instanceof Workbook)
+        return new Workbook
+      @SheetNames = []
+      @Sheets = {}
+      return
+
+    wb = new Workbook()
+    wb.SheetNames.push('sheet1')
+
+    ws = {}
+
+    # add header row
+    currentRow = 0
+    currentColumn = 0
+    for key, value of downloadObject
+
+      cellNumber = XLSX.utils.encode_cell({c:currentColumn, r:currentRow})
+      cellContent = {v: key, t:'s' } # t is the type, for now everything is a string
+      ws[cellNumber] = cellContent
+
+      currentColumn++
+
+    # add data row
+    currentRow++
+    currentColumn = 0
+    for key, value of downloadObject
+
+      cellNumber = XLSX.utils.encode_cell({c:currentColumn, r:currentRow})
+      if value?
+       cellVal = value
+      else
+        cellVal = '---'
+
+      cellContent = {v: String(cellVal), t:'s' }
+      ws[cellNumber] = cellContent
+
+      currentColumn++
+
+    range = {s: {c:0, r:0}, e: {c:currentColumn - 1 , r:currentRow }}
+
+    ws['!ref'] = XLSX.utils.encode_range(range)
+
+    wb.Sheets['sheet1'] = ws
+
+
+    wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'})
+
+    s2ab = (s) ->
+      buf = new ArrayBuffer(s.length)
+      view = new Uint8Array(buf)
+      i = 0
+      while i != s.length
+        view[i] = s.charCodeAt(i) & 0xFF
+        ++i
+      buf
+
+    return s2ab(wbout)
 
 
   downloadXLS: (filename, downloadParserFunction) ->
 
     downloadObject = @getDownloadObject(downloadParserFunction)
 
-    blob = @getBlobToDownload @getXLSString(downloadObject)
+    blob = @getBlobToDownload @getXLSString(downloadObject), 'application/octet-stream'
     saveAs blob, filename
 

@@ -38,5 +38,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
       return @model.get('document_chembl_id') + 'DocumentAssayNetwork.csv'
     else if format == 'json'
       return @model.get('document_chembl_id') + 'DocumentAssayNetwork.json'
+    else if format == 'xlsx'
+      return @model.get('document_chembl_id') + 'DocumentAssayNetwork.xlsx'
     else
       return 'file.txt'

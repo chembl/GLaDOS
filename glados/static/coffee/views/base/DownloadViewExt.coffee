@@ -25,4 +25,4 @@ DownloadViewExt =
 
   triggerDownloadXLS: ->
 
-    @model.downloadXLS(@getFilename('xls'), @downloadParserFunction)
+    @model.downloadXLS(@getFilename('xlsx'), @downloadParserFunction)

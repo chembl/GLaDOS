@@ -96,6 +96,8 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
       return this.model.get('molecule_chembl_id') + 'NameAndClassification.csv';
     } else if (format === 'json') {
       return this.model.get('molecule_chembl_id') + 'NameAndClassification.json';
+    } else if (format === 'xlsx') {
+      return this.model.get('molecule_chembl_id') + 'NameAndClassification.xlsx';
     } else {
       return 'file.txt';
     }

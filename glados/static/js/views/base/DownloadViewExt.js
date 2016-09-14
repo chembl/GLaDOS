@@ -23,6 +23,6 @@ DownloadViewExt = {
     return 'file.txt';
   },
   triggerDownloadXLS: function() {
-    return this.model.downloadXLS(this.getFilename('xls'), this.downloadParserFunction);
+    return this.model.downloadXLS(this.getFilename('xlsx'), this.downloadParserFunction);
   }
 };

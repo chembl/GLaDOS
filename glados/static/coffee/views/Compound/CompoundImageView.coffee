@@ -108,6 +108,8 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       return @model.get('molecule_chembl_id') + 'NameAndClassification.csv'
     else if format == 'json'
       return @model.get('molecule_chembl_id') + 'NameAndClassification.json'
+    else if format == 'xlsx'
+      return @model.get('molecule_chembl_id') + 'NameAndClassification.xlsx'
     else
       return 'file.txt'
 
