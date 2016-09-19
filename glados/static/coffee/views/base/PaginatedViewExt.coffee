@@ -169,7 +169,8 @@ PaginatedViewExt =
   #--------------------------------------------------------------------------------------
   # Search
   #--------------------------------------------------------------------------------------
-  setSearch: (event) ->
+
+  setSearch: _.debounce( (event) ->
     $searchInput = $(event.currentTarget)
     term = $searchInput.val()
     # if the collection is client side the column and data type will be undefined and will be ignored.
@@ -179,32 +180,36 @@ PaginatedViewExt =
 
     @triggerSearch(term, column, type)
 
+  , 400)
+
   # this closes the function setNumeric search with a jquery element, the idea is that
-  # you can get the attributes such as the column for the search
+  # you can get the attributes such as the column for the search, and min and max values
+  # from the jquery element
   setNumericSearchWrapper: ($elem) ->
 
     ctx = @
-    setNumericSearch = (values, handle) ->
+    setNumericSearch = _.debounce( (values, handle) ->
 
       term =  values.join(',')
       column = $elem.attr('data-column')
       type = $elem.attr('data-column-type')
 
       ctx.triggerSearch(term, column, type)
+    , 400)
 
 
     return setNumericSearch
 
-  triggerSearch: (term, column, type) ->
 
-    if @isInfinite
+  triggerSearch:  (term, column, type) ->
 
-      @clearInfiniteContainer()
-      @showInfiniteBrPreolader()
+    thisView = @
+    if thisView.isInfinite
 
-    @collection.setSearch(term, column, type)
+      thisView.clearInfiniteContainer()
+      thisView.showInfiniteBrPreolader()
 
-
+    thisView.collection.setSearch(term, column, type)
   #--------------------------------------------------------------------------------------
   # Sort
   #--------------------------------------------------------------------------------------
