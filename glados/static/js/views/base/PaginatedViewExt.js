@@ -171,7 +171,7 @@ PaginatedViewExt = {
     type = $searchInput.attr('data-column-type');
     console.log('input!', $searchInput);
     return this.triggerSearch(term, column, type);
-  }, 400),
+  }, Settings['SEARCH_INPUT_DEBOUNCE_TIME']),
   setNumericSearchWrapper: function($elem) {
     var ctx, setNumericSearch;
     ctx = this;
@@ -181,7 +181,7 @@ PaginatedViewExt = {
       column = $elem.attr('data-column');
       type = $elem.attr('data-column-type');
       return ctx.triggerSearch(term, column, type);
-    }, 400);
+    }, Settings['SEARCH_INPUT_DEBOUNCE_TIME']);
     return setNumericSearch;
   },
   triggerSearch: function(term, column, type) {

@@ -170,6 +170,7 @@ PaginatedViewExt =
   # Search
   #--------------------------------------------------------------------------------------
 
+
   setSearch: _.debounce( (event) ->
     $searchInput = $(event.currentTarget)
     term = $searchInput.val()
@@ -180,7 +181,7 @@ PaginatedViewExt =
 
     @triggerSearch(term, column, type)
 
-  , 400)
+  , Settings['SEARCH_INPUT_DEBOUNCE_TIME'])
 
   # this closes the function setNumeric search with a jquery element, the idea is that
   # you can get the attributes such as the column for the search, and min and max values
@@ -195,7 +196,7 @@ PaginatedViewExt =
       type = $elem.attr('data-column-type')
 
       ctx.triggerSearch(term, column, type)
-    , 400)
+    , Settings['SEARCH_INPUT_DEBOUNCE_TIME'])
 
 
     return setNumericSearch
