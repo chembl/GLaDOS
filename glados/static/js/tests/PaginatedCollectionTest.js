@@ -1694,8 +1694,8 @@ describe("Paginated Collection", function() {
     });
     return it("generates a correct paginated url (search)", function() {
       var url;
-      drugList.setSearch('25', 'molecule_chembl_id');
-      drugList.setSearch('ASP', 'pref_name');
+      drugList.setSearch('25', 'molecule_chembl_id', 'text');
+      drugList.setSearch('ASP', 'pref_name', 'text');
       url = drugList.getPaginatedURL();
       expect(url).toContain('molecule_chembl_id__contains=25');
       return expect(url).toContain('pref_name__contains=ASP');

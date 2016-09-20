@@ -215,13 +215,16 @@ describe "Paginated Collection", ->
 
     it "generates a correct paginated url (search)", ->
 
-      drugList.setSearch('25', 'molecule_chembl_id')
-      drugList.setSearch('ASP', 'pref_name')
+      drugList.setSearch('25', 'molecule_chembl_id', 'text')
+      drugList.setSearch('ASP', 'pref_name', 'text')
 
       url = drugList.getPaginatedURL()
 
       expect(url).toContain('molecule_chembl_id__contains=25')
       expect(url).toContain('pref_name__contains=ASP')
+
+
+
 
   # ------------------------------
   # Helpers
