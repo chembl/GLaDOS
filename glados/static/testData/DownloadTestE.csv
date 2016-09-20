@@ -1,1 +1,2 @@
-﻿{"acd_logd":"-1.68","acd_logp":"1.40","acd_most_apka":"3.48","acd_most_bpka":null,"alogp":"1.23","aromatic_rings":1,"full_molformula":"C9H8O4","full_mwt":"180.16","hba":4,"hbd":1,"heavy_atoms":13,"molecular_species":"ACID","mw_freebase":"180.16","mw_monoisotopic":"180.0423","num_alerts":2,"num_ro5_violations":0,"psa":"63.60","qed_weighted":"0.56","ro3_pass":"N","rtb":3}
+﻿acd_logd;acd_logp;acd_most_apka;acd_most_bpka;alogp;aromatic_rings;full_molformula;full_mwt;hba;hbd;heavy_atoms;molecular_species;mw_freebase;mw_monoisotopic;num_alerts;num_ro5_violations;psa;qed_weighted;ro3_pass;rtb
+"-1.68";"1.40";"3.48";null;"1.23";1;"C9H8O4";"180.16";4;1;13;"ACID";"180.16";"180.0423";2;0;"63.60";"0.56";"N";3

@@ -12,28 +12,34 @@ DownloadModelExt = {
   },
   getDownloadObject: function(downloadParserFunction) {
     if (!(downloadParserFunction != null)) {
-      return this.attributes;
+      return [this.attributes];
     } else {
       return downloadParserFunction(this.attributes);
     }
   },
   getCSVHeaderString: function(downloadObject) {
-    var key, keys, value;
+    var key, keys, value, _ref;
     keys = [];
-    for (key in downloadObject) {
-      value = downloadObject[key];
+    _ref = downloadObject[0];
+    for (key in _ref) {
+      value = _ref[key];
       keys.push(key);
     }
     return keys.join(';');
   },
   getCSVContentString: function(downloadObject) {
-    var key, value, values;
-    values = [];
-    for (key in downloadObject) {
-      value = downloadObject[key];
-      values.push(JSON.stringify(downloadObject[key]));
+    var key, obj, rows, value, values, _i, _len;
+    rows = [];
+    for (_i = 0, _len = downloadObject.length; _i < _len; _i++) {
+      obj = downloadObject[_i];
+      values = [];
+      for (key in obj) {
+        value = obj[key];
+        values.push(JSON.stringify(obj[key]));
+      }
+      rows.push(values.join(';'));
     }
-    return values.join(';');
+    return rows.join('\n');
   },
   getFullCSVString: function(downloadObject) {
     var content, header;
@@ -61,7 +67,7 @@ DownloadModelExt = {
     return strContent;
   },
   getXLSString: function(downloadObject) {
-    var Workbook, cellContent, cellNumber, cellVal, currentColumn, currentRow, key, range, s2ab, value, wb, wbout, ws;
+    var Workbook, cellContent, cellNumber, cellVal, currentColumn, currentRow, key, obj, range, rows, s2ab, value, wb, wbout, ws, _i, _len, _ref;
     Workbook = function() {
       if (!(this instanceof Workbook)) {
         return new Workbook;
@@ -74,8 +80,9 @@ DownloadModelExt = {
     ws = {};
     currentRow = 0;
     currentColumn = 0;
-    for (key in downloadObject) {
-      value = downloadObject[key];
+    _ref = downloadObject[0];
+    for (key in _ref) {
+      value = _ref[key];
       cellNumber = XLSX.utils.encode_cell({
         c: currentColumn,
         r: currentRow
@@ -87,25 +94,29 @@ DownloadModelExt = {
       ws[cellNumber] = cellContent;
       currentColumn++;
     }
-    currentRow++;
-    currentColumn = 0;
-    for (key in downloadObject) {
-      value = downloadObject[key];
-      cellNumber = XLSX.utils.encode_cell({
-        c: currentColumn,
-        r: currentRow
-      });
-      if (value != null) {
-        cellVal = value;
-      } else {
-        cellVal = '---';
+    rows = [];
+    for (_i = 0, _len = downloadObject.length; _i < _len; _i++) {
+      obj = downloadObject[_i];
+      currentRow++;
+      currentColumn = 0;
+      for (key in obj) {
+        value = obj[key];
+        cellNumber = XLSX.utils.encode_cell({
+          c: currentColumn,
+          r: currentRow
+        });
+        if (value != null) {
+          cellVal = value;
+        } else {
+          cellVal = '---';
+        }
+        cellContent = {
+          v: String(cellVal),
+          t: 's'
+        };
+        ws[cellNumber] = cellContent;
+        currentColumn++;
       }
-      cellContent = {
-        v: String(cellVal),
-        t: 's'
-      };
-      ws[cellNumber] = cellContent;
-      currentColumn++;
     }
     range = {
       s: {

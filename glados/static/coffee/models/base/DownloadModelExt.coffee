@@ -17,15 +17,16 @@ DownloadModelExt =
   # ...}]
   # and the download functions will take care of handling it in order to generate the file
   #
-  # Note that this is a list of objects! because you can download only one item (one compound) or a list of items
+  # IT IS ALWAYS A LIST OF OBJECTS
+  # you can download only one item (one compound) or a list of items
   # (a list of compounds)
   #
   # if there is no special download parser
-  # function, the object will be simply the object's attributes
+  # function, the object will be a list of onw item consisting of the objects attributes.
   getDownloadObject: (downloadParserFunction) ->
 
     if !downloadParserFunction?
-      return @attributes
+      return [@attributes]
     else
       return downloadParserFunction @attributes
 
@@ -35,19 +36,23 @@ DownloadModelExt =
 
   getCSVHeaderString: (downloadObject) ->
 
+    #use first object to get header
     keys = []
-    for key, value of downloadObject
+    for key, value of downloadObject[0]
       keys.push(key)
 
     return keys.join(';')
 
   getCSVContentString: (downloadObject) ->
 
-    values = []
-    for key, value of downloadObject
-      values.push(JSON.stringify(downloadObject[key]))
+    rows = []
+    for obj in downloadObject
+      values = []
+      for key, value of obj
+        values.push(JSON.stringify(obj[key]))
+      rows.push(values.join(';'))
 
-    return values.join(';')
+    return rows.join('\n')
 
   getFullCSVString: (downloadObject) ->
 
@@ -82,7 +87,6 @@ DownloadModelExt =
     strContent = @getJSONString(downloadObject)
     blob = @getBlobToDownload strContent
     saveAs blob, filename
-
     return strContent
 
   # --------------------------------------------------------------------
@@ -103,10 +107,10 @@ DownloadModelExt =
 
     ws = {}
 
-    # add header row
+    # add header row from first object
     currentRow = 0
     currentColumn = 0
-    for key, value of downloadObject
+    for key, value of downloadObject[0]
 
       cellNumber = XLSX.utils.encode_cell({c:currentColumn, r:currentRow})
       cellContent = {v: key, t:'s' } # t is the type, for now everything is a string
@@ -114,21 +118,24 @@ DownloadModelExt =
 
       currentColumn++
 
-    # add data row
-    currentRow++
-    currentColumn = 0
-    for key, value of downloadObject
+    # add data rows
+    rows = []
+    for obj in downloadObject
 
-      cellNumber = XLSX.utils.encode_cell({c:currentColumn, r:currentRow})
-      if value?
-       cellVal = value
-      else
-        cellVal = '---'
+      currentRow++
+      currentColumn = 0
+      for key, value of obj
 
-      cellContent = {v: String(cellVal), t:'s' }
-      ws[cellNumber] = cellContent
+        cellNumber = XLSX.utils.encode_cell({c:currentColumn, r:currentRow})
+        if value?
+         cellVal = value
+        else
+          cellVal = '---'
 
-      currentColumn++
+        cellContent = {v: String(cellVal), t:'s' }
+        ws[cellNumber] = cellContent
+
+        currentColumn++
 
     range = {s: {c:0, r:0}, e: {c:currentColumn - 1 , r:currentRow }}
 

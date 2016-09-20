@@ -19,7 +19,7 @@ describe "Downloads", ->
   describe "A model with custom download object", ->
 
     downloadParserFunction = (attributes) ->
-      return attributes.molecule_properties
+      return [attributes.molecule_properties]
 
     it 'D. generates a correct json file', (done) ->
 
@@ -28,17 +28,22 @@ describe "Downloads", ->
 
     it 'E. generates a correct csv file', (done) ->
 
-      fileStrContent = aspirin.downloadJSON('DownloadTestE.csv', downloadParserFunction)
+      fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction)
       testTextFile(fileStrContent, '/static/testData/DownloadTestE.csv', done)
 
   testTextFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 
-        expect(currentContent).toBe(expectedFileContent)
-        done()
+      console.log 'currentContent'
+      console.log currentContent
+      console.log 'expectedFileContent'
+      console.log expectedFileContent
+      console.log '^^^'
+      expect(currentContent).toBe(expectedFileContent)
+      done()
 
   testJSONFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 
-        expect(currentContent).toBe(JSON.stringify(expectedFileContent))
-        done()
+      expect(currentContent).toBe(JSON.stringify(expectedFileContent))
+      done()

@@ -132,7 +132,7 @@ describe("Downloads", function() {
   describe("A model with custom download object", function() {
     var downloadParserFunction;
     downloadParserFunction = function(attributes) {
-      return attributes.molecule_properties;
+      return [attributes.molecule_properties];
     };
     it('D. generates a correct json file', function(done) {
       var fileStrContent;
@@ -141,12 +141,17 @@ describe("Downloads", function() {
     });
     return it('E. generates a correct csv file', function(done) {
       var fileStrContent;
-      fileStrContent = aspirin.downloadJSON('DownloadTestE.csv', downloadParserFunction);
+      fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction);
       return testTextFile(fileStrContent, '/static/testData/DownloadTestE.csv', done);
     });
   });
   testTextFile = function(currentContent, expectedFileUrl, done) {
     return $.get(expectedFileUrl, function(expectedFileContent) {
+      console.log('currentContent');
+      console.log(currentContent);
+      console.log('expectedFileContent');
+      console.log(expectedFileContent);
+      console.log('^^^');
       expect(currentContent).toBe(expectedFileContent);
       return done();
     });
