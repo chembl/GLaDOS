@@ -127,7 +127,6 @@ PaginatedViewExt = {
       console.log('ignoring!');
       return;
     }
-    console.log('waypoint2! ');
     if (!!this.isInfinite) {
       this.showInfiniteBrPreolader();
     }

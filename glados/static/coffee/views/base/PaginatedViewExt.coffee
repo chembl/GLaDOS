@@ -131,7 +131,6 @@ PaginatedViewExt =
       console.log('ignoring!')
       return
 
-    console.log('waypoint2! ')
     @showInfiniteBrPreolader() unless !@isInfinite
 
 
