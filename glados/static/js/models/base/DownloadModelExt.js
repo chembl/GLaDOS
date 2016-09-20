@@ -51,10 +51,12 @@ DownloadModelExt = {
     return JSON.stringify(downloadObject);
   },
   downloadJSON: function(filename, downloadParserFunction) {
-    var blob, downloadObject;
+    var blob, downloadObject, strContent;
     downloadObject = this.getDownloadObject(downloadParserFunction);
-    blob = this.getBlobToDownload(this.getJSONString(downloadObject));
-    return saveAs(blob, filename);
+    strContent = this.getJSONString(downloadObject);
+    blob = this.getBlobToDownload(strContent);
+    saveAs(blob, filename);
+    return strContent;
   },
   getXLSString: function(downloadObject) {
     var Workbook, cellContent, cellNumber, cellVal, currentColumn, currentRow, key, range, s2ab, value, wb, wbout, ws;

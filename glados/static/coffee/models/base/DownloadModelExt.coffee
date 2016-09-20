@@ -77,9 +77,11 @@ DownloadModelExt =
   downloadJSON: (filename, downloadParserFunction) ->
 
     downloadObject = @getDownloadObject(downloadParserFunction)
-
-    blob = @getBlobToDownload @getJSONString(downloadObject)
+    strContent = @getJSONString(downloadObject)
+    blob = @getBlobToDownload strContent
     saveAs blob, filename
+
+    return strContent
 
   # --------------------------------------------------------------------
   # xls
