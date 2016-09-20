@@ -63,7 +63,7 @@ TargetRelationList = PaginatedCollection.extend
 
     )
 
-    base_url2 = Settings.WS_BASE_URL + 'target.json?target_chembl_id__in='
+    base_url2 = Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in='
 
     # after I have the target relations now I get the actual targets
     getTargetRelations.done(() ->

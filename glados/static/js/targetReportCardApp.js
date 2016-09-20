@@ -30,7 +30,7 @@ TargetReportCardApp = (function() {
   TargetReportCardApp.initTargetRelations = function(chembl_id) {
     var targRelList;
     targRelList = new TargetRelationList;
-    targRelList.url = Settings.WS_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
+    targRelList.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
     return targRelList;
   };
 
