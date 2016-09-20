@@ -58,9 +58,11 @@ DownloadModelExt =
   downloadCSV: (filename, downloadParserFunction) ->
 
     downloadObject = @getDownloadObject(downloadParserFunction)
-
-    blob = @getBlobToDownload @getFullCSVString(downloadObject)
+    strContent = @getFullCSVString(downloadObject)
+    blob = @getBlobToDownload strContent
     saveAs blob, filename
+
+    return strContent
 
   # --------------------------------------------------------------------
   # json
@@ -152,7 +154,12 @@ DownloadModelExt =
   downloadXLS: (filename, downloadParserFunction) ->
 
     downloadObject = @getDownloadObject(downloadParserFunction)
+    strContent = @getXLSString(downloadObject)
 
-    blob = @getBlobToDownload @getXLSString(downloadObject), 'application/octet-stream'
+    blob = @getBlobToDownload strContent, 'application/octet-stream'
     saveAs blob, filename
 
+    ab2s= (buf) ->
+      String.fromCharCode.apply(null, new Uint8Array(buf));
+
+    return ab2s(strContent)

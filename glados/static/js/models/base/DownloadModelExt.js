@@ -42,10 +42,12 @@ DownloadModelExt = {
     return header + '\n' + content;
   },
   downloadCSV: function(filename, downloadParserFunction) {
-    var blob, downloadObject;
+    var blob, downloadObject, strContent;
     downloadObject = this.getDownloadObject(downloadParserFunction);
-    blob = this.getBlobToDownload(this.getFullCSVString(downloadObject));
-    return saveAs(blob, filename);
+    strContent = this.getFullCSVString(downloadObject);
+    blob = this.getBlobToDownload(strContent);
+    saveAs(blob, filename);
+    return strContent;
   },
   getJSONString: function(downloadObject) {
     return JSON.stringify(downloadObject);
@@ -136,9 +138,14 @@ DownloadModelExt = {
     return s2ab(wbout);
   },
   downloadXLS: function(filename, downloadParserFunction) {
-    var blob, downloadObject;
+    var ab2s, blob, downloadObject, strContent;
     downloadObject = this.getDownloadObject(downloadParserFunction);
-    blob = this.getBlobToDownload(this.getXLSString(downloadObject), 'application/octet-stream');
-    return saveAs(blob, filename);
+    strContent = this.getXLSString(downloadObject);
+    blob = this.getBlobToDownload(strContent, 'application/octet-stream');
+    saveAs(blob, filename);
+    ab2s = function(buf) {
+      return String.fromCharCode.apply(null, new Uint8Array(buf));
+    };
+    return ab2s(strContent);
   }
 };
