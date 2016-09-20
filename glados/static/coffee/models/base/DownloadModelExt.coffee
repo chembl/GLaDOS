@@ -6,7 +6,21 @@ DownloadModelExt =
     return new Blob([contentStr], type: contentType)
 
   # This function returns the object that is going to be used to
-  # generate the download, if there is no special download parser
+  # generate the download, The download object is a javascript object with the structure required from the download
+  # for example, to download a compound, the download object will be something like:
+  #
+  # [{"molecule_chembl_id":"CHEMBL25",
+  # "atc_classifications":["N02BA01","N02BA51","N02BA71","A01AD05","B01AC06"],
+  # "availability_type":"2",
+  # "biotherapeutic":null,
+  # "black_box_warning":"0","chebi_par_id":15365,"chirality":"1",
+  # ...}]
+  # and the download functions will take care of handling it in order to generate the file
+  #
+  # Note that this is a list of objects! because you can download only one item (one compound) or a list of items
+  # (a list of compounds)
+  #
+  # if there is no special download parser
   # function, the object will be simply the object's attributes
   getDownloadObject: (downloadParserFunction) ->
 
