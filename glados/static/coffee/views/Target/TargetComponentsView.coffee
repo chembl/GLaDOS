@@ -38,6 +38,9 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
   # -----------------------------------------------------------------
   # ---- Downloads
   # -----------------------------------------------------------------
+  downloadParserFunction: (attributes) ->
+
+    return attributes.target_components
 
   getFilename: (format) ->
 

@@ -30,6 +30,9 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend({
       components: this.model.get('target_components')
     }));
   },
+  downloadParserFunction: function(attributes) {
+    return attributes.target_components;
+  },
   getFilename: function(format) {
     if (format === 'csv') {
       return 'TargetComponents.csv';
