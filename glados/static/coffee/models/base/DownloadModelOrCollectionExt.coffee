@@ -27,10 +27,13 @@ DownloadModelOrCollectionExt =
   # function, the object will be a list of onw item consisting of the objects attributes or model list
   getDownloadObject: (downloadParserFunction) ->
 
-    content = if @attributes? then [@attributes] else (m.attributes for m in @models)
+    content = if @attributes? then @attributes else (m.attributes for m in @models)
 
     if !downloadParserFunction?
-      return content
+      if content instanceof Array
+        return content
+      else
+        return [content]
     else
       return downloadParserFunction content
 

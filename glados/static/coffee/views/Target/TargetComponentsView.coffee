@@ -2,7 +2,7 @@
 # from the target report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-TargetComponentsView = CardView.extend
+TargetComponentsView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @model.on 'change', @.render, @
@@ -34,3 +34,18 @@ TargetComponentsView = CardView.extend
       component_description: @model.get('component_description')
       relationship: @model.get('relationship')
       components: @model.get('target_components')
+
+  # -----------------------------------------------------------------
+  # ---- Downloads
+  # -----------------------------------------------------------------
+
+  getFilename: (format) ->
+
+    if format == 'csv'
+      return 'TargetComponents.csv'
+    else if format == 'json'
+      return 'TargetComponents.json'
+    else if format == 'xlsx'
+      return 'TargetComponents.xlsx'
+    else
+      return 'file.txt'

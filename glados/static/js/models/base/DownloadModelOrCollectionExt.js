@@ -12,7 +12,7 @@ DownloadModelOrCollectionExt = {
   },
   getDownloadObject: function(downloadParserFunction) {
     var content, m;
-    content = this.attributes != null ? [this.attributes] : (function() {
+    content = this.attributes != null ? this.attributes : (function() {
       var _i, _len, _ref, _results;
       _ref = this.models;
       _results = [];
@@ -23,7 +23,11 @@ DownloadModelOrCollectionExt = {
       return _results;
     }).call(this);
     if (!(downloadParserFunction != null)) {
-      return content;
+      if (content instanceof Array) {
+        return content;
+      } else {
+        return [content];
+      }
     } else {
       return downloadParserFunction(content);
     }

@@ -53,7 +53,7 @@ TargetReportCardApp = (function() {
 
   /* *
     * Initializes the TComponentsView (Target Components View)
-    * @param {Compound} model, base model for the view
+    * @param {Target} model, base model for the view
     * @param {JQuery} top_level_elem element that renders the model.
     * @return {TargetComponentsView} the view that has been created
   */
