@@ -7,6 +7,10 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
 
+  events: ->
+    # aahhh!!! >(
+    return _.extend {}, PaginatedViewExt.events, DownloadViewExt.events
+
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')

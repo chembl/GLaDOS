@@ -6,6 +6,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     this.collection.on('reset do-repaint sort', this.render, this);
     return this.resource_type = 'Target';
   },
+  events: function() {
+    return _.extend({}, PaginatedViewExt.events, DownloadViewExt.events);
+  },
   render: function() {
     if (this.collection.size() === 0 && !this.collection.getMeta('force_show')) {
       $('#ApprovedDrugsAndClinicalCandidates').hide();
