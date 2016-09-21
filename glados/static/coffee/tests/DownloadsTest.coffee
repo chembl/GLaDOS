@@ -34,11 +34,6 @@ describe "Downloads", ->
   testTextFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 
-      console.log 'currentContent'
-      console.log currentContent
-      console.log 'expectedFileContent'
-      console.log expectedFileContent
-      console.log '^^^'
       expect(currentContent).toBe(expectedFileContent)
       done()
 

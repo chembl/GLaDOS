@@ -10,7 +10,7 @@ describe "Approved Drug and Clinical Candidate List", ->
       done()
     ), 2000
 
-  it "loads the information correctly after the multiple calls", (done) ->
+  it "(SERVER DEPENDENT) loads the information correctly after the multiple calls", (done) ->
 
     models = []
 

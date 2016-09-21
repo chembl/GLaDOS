@@ -144,7 +144,7 @@ describe "Paginated Collection", ->
       drugList.fetch
         success: done
 
-    it "initialises correctly", (done) ->
+    it "(SERVER DEPENDENT) initialises correctly", (done) ->
 
       page_size = drugList.getMeta('page_size')
       current_page = drugList.getMeta('current_page')
@@ -160,7 +160,7 @@ describe "Paginated Collection", ->
 
       done()
 
-    it "shows the first page correctly", (done) ->
+    it "(SERVER DEPENDENT) shows the first page correctly", (done) ->
 
       assert_chembl_ids(drugList, ['CHEMBL6939','CHEMBL22','CHEMBL6941','CHEMBL6942','CHEMBL6944','CHEMBL6945',
         'CHEMBL6946','CHEMBL6947','CHEMBL1163143','CHEMBL6948','CHEMBL6950','CHEMBL6951','CHEMBL6952','CHEMBL6954',
@@ -168,7 +168,7 @@ describe "Paginated Collection", ->
 
       done()
 
-    it "fetches the 5th page correctly", (done) ->
+    it "(SERVER DEPENDENT) fetches the 5th page correctly", (done) ->
 
       drugList.setPage(5)
       setTimeout ->
@@ -183,7 +183,7 @@ describe "Paginated Collection", ->
       , 5
 
 
-    it "switches to 5 items per page", (done) ->
+    it "(SERVER DEPENDENT) switches to 5 items per page", (done) ->
 
       drugList.resetPageSize(5)
 

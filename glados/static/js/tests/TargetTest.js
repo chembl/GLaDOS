@@ -9,7 +9,7 @@ describe("Target", function() {
       return done();
     }), 2000);
   });
-  return it("loads the protein target classification", function(done) {
+  return it("(SERVER DEPENDENT) loads the protein target classification", function(done) {
     var class1, class2, classification;
     classification = target.get('protein_classifications');
     class1 = classification[8][0];

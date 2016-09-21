@@ -12,7 +12,7 @@ describe "Target", ->
       done()
     ), 2000
 
-  it "loads the protein target classification", (done) ->
+  it "(SERVER DEPENDENT) loads the protein target classification", (done) ->
 
     classification = target.get('protein_classifications')
     class1 = classification[8][0]

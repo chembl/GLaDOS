@@ -147,11 +147,6 @@ describe("Downloads", function() {
   });
   testTextFile = function(currentContent, expectedFileUrl, done) {
     return $.get(expectedFileUrl, function(expectedFileContent) {
-      console.log('currentContent');
-      console.log(currentContent);
-      console.log('expectedFileContent');
-      console.log(expectedFileContent);
-      console.log('^^^');
       expect(currentContent).toBe(expectedFileContent);
       return done();
     });

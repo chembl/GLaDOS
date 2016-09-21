@@ -1643,7 +1643,7 @@ describe("Paginated Collection", function() {
         success: done
       });
     });
-    it("initialises correctly", function(done) {
+    it("(SERVER DEPENDENT) initialises correctly", function(done) {
       var current_page, page_size, records_in_page, total_pages, total_records;
       page_size = drugList.getMeta('page_size');
       current_page = drugList.getMeta('current_page');
@@ -1657,18 +1657,18 @@ describe("Paginated Collection", function() {
       expect(records_in_page).toBe(20);
       return done();
     });
-    it("shows the first page correctly", function(done) {
+    it("(SERVER DEPENDENT) shows the first page correctly", function(done) {
       assert_chembl_ids(drugList, ['CHEMBL6939', 'CHEMBL22', 'CHEMBL6941', 'CHEMBL6942', 'CHEMBL6944', 'CHEMBL6945', 'CHEMBL6946', 'CHEMBL6947', 'CHEMBL1163143', 'CHEMBL6948', 'CHEMBL6950', 'CHEMBL6951', 'CHEMBL6952', 'CHEMBL6954', 'CHEMBL6957', 'CHEMBL6960', 'CHEMBL1163144', 'CHEMBL6961', 'CHEMBL6962', 'CHEMBL6963']);
       return done();
     });
-    it("fetches the 5th page correctly", function(done) {
+    it("(SERVER DEPENDENT) fetches the 5th page correctly", function(done) {
       drugList.setPage(5);
       return setTimeout(function() {
         assert_chembl_ids(drugList, ['CHEMBL7060', 'CHEMBL7061', 'CHEMBL7063', 'CHEMBL7064', 'CHEMBL7065', 'CHEMBL7066', 'CHEMBL7067', 'CHEMBL7068', 'CHEMBL7069', 'CHEMBL7070', 'CHEMBL7071', 'CHEMBL7072', 'CHEMBL7074', 'CHEMBL7075', 'CHEMBL7077', 'CHEMBL7078', 'CHEMBL7079', 'CHEMBL7082', 'CHEMBL7083', 'CHEMBL1163160']);
         return done();
       }, 5);
     });
-    it("switches to 5 items per page", function(done) {
+    it("(SERVER DEPENDENT) switches to 5 items per page", function(done) {
       drugList.resetPageSize(5);
       return setTimeout(function() {
         var chembl_ids, to_show;

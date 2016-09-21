@@ -9,7 +9,7 @@ describe("Approved Drug and Clinical Candidate List", function() {
       return done();
     }), 2000);
   });
-  return it("loads the information correctly after the multiple calls", function(done) {
+  return it("(SERVER DEPENDENT) loads the information correctly after the multiple calls", function(done) {
     var i, model, model1, model2, model3, model4, models, _i;
     models = [];
     model1 = appDrugsClinCandsList.get('CHEMBL1003');
