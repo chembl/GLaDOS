@@ -1,4 +1,4 @@
-ApprovedDrugClinicalCandidateList = PaginatedCollection.extend
+ApprovedDrugClinicalCandidateList = PaginatedCollection.extend(DownloadModelOrCollectionExt).extend
 
   model: ApprovedDrugClinicalCandidate
 

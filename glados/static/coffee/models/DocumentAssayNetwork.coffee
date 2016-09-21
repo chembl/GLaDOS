@@ -1,4 +1,4 @@
-DocumentAssayNetwork = Backbone.Model.extend(DownloadModelExt).extend
+DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   fetch: ->
     docChemblId = @get('document_chembl_id')

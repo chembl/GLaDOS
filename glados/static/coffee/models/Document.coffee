@@ -1,3 +1,3 @@
-Document = Backbone.Model.extend(DownloadModelExt).extend({})
+Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend({})
 
 

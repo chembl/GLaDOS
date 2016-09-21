@@ -5,24 +5,26 @@ DownloadViewExt =
     'click .BCK-trigger-download-CSV': 'triggerDownloadCSV'
     'click .BCK-trigger-download-XLS': 'triggerDownloadXLS'
 
-  download: ->
-    @model.download()
-
   showDownloadOptions: ->
     console.log 'show options'
 
   triggerDownloadJSON: ->
+
+    @modelOrCollection = if @model? then @model else @collection
     #remember that downloadParserFunction can be null if you just want to use all the attributes for the download.
-    @model.downloadJSON(@getFilename('json'), @downloadParserFunction)
+    @modelOrCollection.downloadJSON(@getFilename('json'), @downloadParserFunction)
 
   triggerDownloadCSV: ->
-    @model.downloadCSV(@getFilename('csv'), @downloadParserFunction)
+
+    @modelOrCollection = if @model? then @model else @collection
+    @modelOrCollection.downloadCSV(@getFilename('csv'), @downloadParserFunction)
+
+  triggerDownloadXLS: ->
+
+    @modelOrCollection = if @model? then @model else @collection
+    @modelOrCollection.downloadXLS(@getFilename('xlsx'), @downloadParserFunction)
 
   # overrride this function in your view to get your desired functionality
   getFilename: (format) ->
 
     return 'file.txt'
-
-  triggerDownloadXLS: ->
-
-    @model.downloadXLS(@getFilename('xlsx'), @downloadParserFunction)

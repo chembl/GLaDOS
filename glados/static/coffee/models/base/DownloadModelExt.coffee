@@ -1,4 +1,4 @@
-DownloadModelExt =
+DownloadModelOrCollectionExt =
 
   getBlobToDownload: (contentStr, contentType) ->
 
@@ -21,14 +21,18 @@ DownloadModelExt =
   # you can download only one item (one compound) or a list of items
   # (a list of compounds)
   #
+  # [compA, compB, compC]
+  # [{...}, {...}, {...}]
   # if there is no special download parser
-  # function, the object will be a list of onw item consisting of the objects attributes.
+  # function, the object will be a list of onw item consisting of the objects attributes or model list
   getDownloadObject: (downloadParserFunction) ->
 
+    content = if @attributes? then [@attributes] else (m.attributes for m in @models)
+
     if !downloadParserFunction?
-      return [@attributes]
+      return content
     else
-      return downloadParserFunction @attributes
+      return downloadParserFunction content
 
   # --------------------------------------------------------------------
   # CSV

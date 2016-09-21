@@ -1,4 +1,4 @@
-Compound = Backbone.Model.extend(DownloadModelExt).extend
+Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   parse: (response) ->
 
