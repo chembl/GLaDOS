@@ -47,7 +47,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
 
   downloadParserFunction: (attributes) ->
 
-    return attributes.molecule_properties
+    return [attributes.molecule_properties]
 
   getFilename: (format) ->
 

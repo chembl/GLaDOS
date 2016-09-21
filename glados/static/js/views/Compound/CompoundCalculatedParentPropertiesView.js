@@ -45,7 +45,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
     'qed_weighted': 'Bck-CalcCompProp-QEDW'
   },
   downloadParserFunction: function(attributes) {
-    return attributes.molecule_properties;
+    return [attributes.molecule_properties];
   },
   getFilename: function(format) {
     if (format === 'csv') {
