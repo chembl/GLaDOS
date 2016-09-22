@@ -111,4 +111,10 @@ urlpatterns = [
   url(r'^drug_browser_infinity/$',
       DirectTemplateView.as_view(template_name="glados/MainPageParts/DrugBrowserParts/browse_drugs_infinity.html"), ),
 
+  #----------------------------------------------------------------------------------------
+  # Search Results
+  #----------------------------------------------------------------------------------------
+  url(r'^search_results/$',
+      DirectTemplateView.as_view(template_name="glados/SearchResults.html"), ),
+
 ]
