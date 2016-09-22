@@ -27,6 +27,11 @@ Here you can find some informal diagrams that help to understand how some compon
 
 * [Client Side Downloads] (https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
 
+### Searching
+
+* [Search Basic Workflow] (https://docs.google.com/drawings/d/1eR5cyfc8pR5iDjD7qUQGzy-Nb8R0ixpmiva8pNEm5cU/edit?usp=sharing)
+
+
 
 
 
