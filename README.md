@@ -23,6 +23,10 @@ Here you can find some informal diagrams that help to understand how some compon
 * [Backbone Models](https://docs.google.com/drawings/d/1abSTgJUhJh3bEx_DdHCHOrI_T1ayY52rCkRq5Qtq3Hw/edit?usp=sharing)
 * [Backbone Views](https://docs.google.com/drawings/d/1XyLlojtV63AERXPHXmfzw-F0TYjDVZw_yt2ZcHXI-A0/edit?usp=sharing)
 
+### Downloads
+
+* [Client Side Downloads] (https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
+
 
 
 
