@@ -57,4 +57,4 @@ CompoundResultsList = PaginatedCollection.extend
         }
       ]
 
-    @url = @getMeta('base_url')
+    @initialiseSSUrl()

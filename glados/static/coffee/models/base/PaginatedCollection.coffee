@@ -20,9 +20,8 @@ PaginatedCollection = Backbone.Collection.extend
     else
       @resetPageSizeC(new_page_size)
 
-  # assuming that I have all the records.
   # Meta data is:
-  #  server_side -- true if you expect that each page is fetched on demand by the server.
+  #  server_side -- true if you expect that each page is fetched on demand from the server.
   #  total_records
   #  current_page
   #  total_pages
@@ -249,6 +248,9 @@ PaginatedCollection = Backbone.Collection.extend
   # -- Server Side!!!
   # ------------------------------------------------------------
 
+  initialiseSSUrl: ->
+    @url = @getPaginatedURL()
+
   resetMetaSS: (page_meta) ->
 
     @setMeta('total_records', page_meta.total_count)
@@ -329,6 +331,7 @@ PaginatedCollection = Backbone.Collection.extend
 
     full_url = url + '?' + params.join('&')
 
+    console.log 'URL: ', full_url
     return full_url
 
   resetPageSizeSS: (new_page_size) ->

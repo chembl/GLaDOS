@@ -1657,28 +1657,16 @@ describe("Paginated Collection", function() {
       expect(records_in_page).toBe(20);
       return done();
     });
-    it("(SERVER DEPENDENT) shows the first page correctly", function(done) {
-      assert_chembl_ids(drugList, ['CHEMBL6939', 'CHEMBL22', 'CHEMBL6941', 'CHEMBL6942', 'CHEMBL6944', 'CHEMBL6945', 'CHEMBL6946', 'CHEMBL6947', 'CHEMBL1163143', 'CHEMBL6948', 'CHEMBL6950', 'CHEMBL6951', 'CHEMBL6952', 'CHEMBL6954', 'CHEMBL6957', 'CHEMBL6960', 'CHEMBL1163144', 'CHEMBL6961', 'CHEMBL6962', 'CHEMBL6963']);
-      return done();
+    it("defines the initial url", function() {
+      return expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=0');
     });
-    it("(SERVER DEPENDENT) fetches the 5th page correctly", function(done) {
+    it("defines the url for the 5th page", function() {
       drugList.setPage(5);
-      return setTimeout(function() {
-        assert_chembl_ids(drugList, ['CHEMBL7060', 'CHEMBL7061', 'CHEMBL7063', 'CHEMBL7064', 'CHEMBL7065', 'CHEMBL7066', 'CHEMBL7067', 'CHEMBL7068', 'CHEMBL7069', 'CHEMBL7070', 'CHEMBL7071', 'CHEMBL7072', 'CHEMBL7074', 'CHEMBL7075', 'CHEMBL7077', 'CHEMBL7078', 'CHEMBL7079', 'CHEMBL7082', 'CHEMBL7083', 'CHEMBL1163160']);
-        return done();
-      }, 5);
+      return expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=80');
     });
-    it("(SERVER DEPENDENT) switches to 5 items per page", function(done) {
+    it("defines the url after switching to 5 items per page", function() {
       drugList.resetPageSize(5);
-      return setTimeout(function() {
-        var chembl_ids, to_show;
-        to_show = drugList.getCurrentPage();
-        chembl_ids = _.map(to_show, function(o) {
-          return o.get('molecule_chembl_id');
-        });
-        assert_chembl_ids(drugList, ['CHEMBL6939', 'CHEMBL22', 'CHEMBL6941', 'CHEMBL6942', 'CHEMBL6944']);
-        return done();
-      }, 5);
+      return expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=5&offset=0');
     });
     it("generates a correct paginated url (sorting)", function() {
       var url;

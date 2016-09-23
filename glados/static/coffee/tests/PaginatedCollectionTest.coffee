@@ -160,43 +160,20 @@ describe "Paginated Collection", ->
 
       done()
 
-    it "(SERVER DEPENDENT) shows the first page correctly", (done) ->
+    it "defines the initial url", ->
 
-      assert_chembl_ids(drugList, ['CHEMBL6939','CHEMBL22','CHEMBL6941','CHEMBL6942','CHEMBL6944','CHEMBL6945',
-        'CHEMBL6946','CHEMBL6947','CHEMBL1163143','CHEMBL6948','CHEMBL6950','CHEMBL6951','CHEMBL6952','CHEMBL6954',
-        'CHEMBL6957','CHEMBL6960','CHEMBL1163144','CHEMBL6961','CHEMBL6962','CHEMBL6963'])
+      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=0')
 
-      done()
 
-    it "(SERVER DEPENDENT) fetches the 5th page correctly", (done) ->
+    it "defines the url for the 5th page", ->
 
       drugList.setPage(5)
-      setTimeout ->
+      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=80')
 
-        assert_chembl_ids(drugList, ['CHEMBL7060','CHEMBL7061','CHEMBL7063','CHEMBL7064','CHEMBL7065','CHEMBL7066',
-          'CHEMBL7067','CHEMBL7068','CHEMBL7069','CHEMBL7070','CHEMBL7071','CHEMBL7072','CHEMBL7074','CHEMBL7075',
-          'CHEMBL7077','CHEMBL7078','CHEMBL7079','CHEMBL7082','CHEMBL7083','CHEMBL1163160'])
-
-        done()
-
-
-      , 5
-
-
-    it "(SERVER DEPENDENT) switches to 5 items per page", (done) ->
+    it "defines the url after switching to 5 items per page", ->
 
       drugList.resetPageSize(5)
-
-      setTimeout ->
-
-        to_show = drugList.getCurrentPage()
-        chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-
-        assert_chembl_ids(drugList, ['CHEMBL6939','CHEMBL22','CHEMBL6941','CHEMBL6942','CHEMBL6944'])
-
-        done()
-
-      , 5
+      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=5&offset=0')
 
     it "generates a correct paginated url (sorting)", ->
 

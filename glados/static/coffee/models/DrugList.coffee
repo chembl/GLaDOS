@@ -14,7 +14,7 @@ DrugList = PaginatedCollection.extend
     @meta =
       server_side: true
       base_url: Settings.WS_BASE_URL + 'molecule.json'
-      page_size: 10
+      page_size: 20
       current_page: 1
       to_show: []
       columns: [
@@ -57,4 +57,4 @@ DrugList = PaginatedCollection.extend
         }
       ]
 
-    @url = @getMeta('base_url')
+    @initialiseSSUrl()

@@ -33,6 +33,7 @@ var compoundResultsList = SearchResultsApp.initCompoundsResultsList();
 
 var compResListView = SearchResultsApp.initCompResultsListView(compoundResultsList, $('#BCK-CompoundSearchResults'));
 
+console.log('initial url: ', compoundResultsList.url);
 compoundResultsList.fetch({reset: true});
 
 {% endblock %}

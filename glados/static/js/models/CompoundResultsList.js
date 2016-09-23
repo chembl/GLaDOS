@@ -51,6 +51,6 @@ CompoundResultsList = PaginatedCollection.extend({
         }
       ]
     };
-    return this.url = this.getMeta('base_url');
+    return this.initialiseSSUrl();
   }
 });

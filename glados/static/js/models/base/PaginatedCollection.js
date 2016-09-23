@@ -217,6 +217,9 @@ PaginatedCollection = Backbone.Collection.extend({
     this.models = new_models;
     return this.reset(new_models);
   },
+  initialiseSSUrl: function() {
+    return this.url = this.getPaginatedURL();
+  },
   resetMetaSS: function(page_meta) {
     this.setMeta('total_records', page_meta.total_count);
     this.setMeta('page_size', page_meta.limit);
@@ -283,6 +286,7 @@ PaginatedCollection = Backbone.Collection.extend({
       }
     }
     full_url = url + '?' + params.join('&');
+    console.log('URL: ', full_url);
     return full_url;
   },
   resetPageSizeSS: function(new_page_size) {
