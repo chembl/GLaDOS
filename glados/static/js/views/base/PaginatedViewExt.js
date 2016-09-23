@@ -212,12 +212,18 @@ PaginatedViewExt = {
     return $(this.el).find('select').material_select();
   },
   showVisibleContent: function() {
-    $(this.el).children('.card-preolader-to-hide').hide();
-    return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+    var $contentCont, $preloaderCont;
+    $preloaderCont = this.$preloaderContainer != null ? this.$preloaderContainer : $(this.el);
+    $contentCont = this.$contentContainer != null ? this.$contentContainer : $(this.el);
+    $preloaderCont.children('.card-preolader-to-hide').hide();
+    return $contentCont.children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
   },
   showPreloader: function() {
-    $(this.el).children('.card-preolader-to-hide').show();
-    return $(this.el).children(':not(.card-preolader-to-hide)').hide();
+    var $contentCont, $preloaderCont;
+    $preloaderCont = this.$preloaderContainer != null ? this.$preloaderContainer : $(this.el);
+    $contentCont = this.$contentContainer != null ? this.$contentContainer : $(this.el);
+    $preloaderCont.children('.card-preolader-to-hide').show();
+    return $contentCont.children(':not(.card-preolader-to-hide)').hide();
   },
   showControls: function() {
     return $(this.el).find('.controls').removeClass('hide');

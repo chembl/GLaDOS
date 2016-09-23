@@ -3,13 +3,17 @@ var CompoundResultsListView;
 
 CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
-    return this.collection.on('reset do-repaint sort', this.render, this);
+    this.collection.on('reset do-repaint sort', this.render, this);
+    this.$preloaderContainer = $('#BCK-CompsPreoladerContainer');
+    return this.$contentContainer = $('#BCK-CompsCardsPageContainer');
   },
   render: function() {
     this.clearCardsPage();
-    return this.fill_template('BCK-CardsPageContainer');
+    this.fill_template('BCK-CompsCardsPageContainer');
+    this.fillPaginator('BCK-Cards-paginator');
+    return this.showVisibleContent();
   },
   clearCardsPage: function() {
-    return $('#BCK-CardsPageContainer').empty();
+    return this.$contentContainer.empty();
   }
 });

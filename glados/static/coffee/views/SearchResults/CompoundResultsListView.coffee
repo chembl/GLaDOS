@@ -3,11 +3,16 @@ CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
+    @$preloaderContainer = $('#BCK-CompsPreoladerContainer')
+    @$contentContainer = $('#BCK-CompsCardsPageContainer')
 
 
   render: ->
     @clearCardsPage()
-    @fill_template('BCK-CardsPageContainer')
+    @fill_template('BCK-CompsCardsPageContainer')
+    @fillPaginator('BCK-Cards-paginator')
+
+    @showVisibleContent()
 
   clearCardsPage: ->
-    $('#BCK-CardsPageContainer').empty()
+    @$contentContainer.empty()

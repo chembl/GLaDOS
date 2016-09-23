@@ -235,12 +235,20 @@ PaginatedViewExt =
     $(@el).find('select').material_select();
 
   showVisibleContent: ->
-    $(@el).children('.card-preolader-to-hide').hide()
-    $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+
+    $preloaderCont = if @$preloaderContainer? then @$preloaderContainer else $(@el)
+    $contentCont = if @$contentContainer? then @$contentContainer else $(@el)
+
+    $preloaderCont.children('.card-preolader-to-hide').hide()
+    $contentCont.children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
 
   showPreloader: ->
-    $(@el).children('.card-preolader-to-hide').show()
-    $(@el).children(':not(.card-preolader-to-hide)').hide()
+
+    $preloaderCont = if @$preloaderContainer? then @$preloaderContainer else $(@el)
+    $contentCont = if @$contentContainer? then @$contentContainer else $(@el)
+
+    $preloaderCont.children('.card-preolader-to-hide').show()
+    $contentCont.children(':not(.card-preolader-to-hide)').hide()
 
   #--------------------------------------------------------------------------------------
   # Infinite Browser

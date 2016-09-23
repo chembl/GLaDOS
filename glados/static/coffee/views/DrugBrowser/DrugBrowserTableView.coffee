@@ -3,6 +3,8 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
+    @$preloaderContainer = $('#DB-MainContent')
+    @$contentContainer = @$preloaderContainer
 
   render: ->
     @clearTable()
@@ -16,11 +18,3 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
   clearTable: ->
 
     $('#DBTable-large').empty()
-
-  showVisibleContent: ->
-    $(@el).find('#DB-MainContent').children('.card-preolader-to-hide').hide()
-    $(@el).find('#DB-MainContent').children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
-
-  showPreloader: ->
-    $(@el).find('#DB-MainContent').children('.card-preolader-to-hide').show()
-    $(@el).find('#DB-MainContent').children(':not(.card-preolader-to-hide)').hide()
