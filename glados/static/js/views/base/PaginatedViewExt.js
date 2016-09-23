@@ -36,7 +36,12 @@ PaginatedViewExt = {
           col['link_url'] = col['link_base'].replace('$$$', col['value']);
         }
         if (col['image_base_url'] != null) {
-          return img_url = col['image_base_url'].replace('$$$', col['value']);
+          img_url = col['image_base_url'].replace('$$$', col['value']);
+        }
+        if (col['custom_field_template'] != null) {
+          return col['custom_html'] = Handlebars.compile(col['custom_field_template'])({
+            val: col['value']
+          });
         }
       });
       new_item_cont = Handlebars.compile($item_template.html())({

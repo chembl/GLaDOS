@@ -167,6 +167,8 @@
           <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
           </p>
 
+          {{else if this.custom_html}}
+            {{{this.custom_html}}}
           {{else}}
           <small>
             <p>{{this.value}}</p>

@@ -28,7 +28,8 @@ DocumentResultsList = PaginatedCollection.extend({
           'comparator': 'title',
           'sort_disabled': false,
           'is_sorting': 0,
-          'sort_class': 'fa-sort'
+          'sort_class': 'fa-sort',
+          'custom_field_template': '<i>{{val}}</i>'
         }, {
           'name_to_show': 'Authors',
           'comparator': 'authors',

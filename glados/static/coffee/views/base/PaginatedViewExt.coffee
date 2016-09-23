@@ -42,6 +42,9 @@ PaginatedViewExt =
         col['link_url'] = col['link_base'].replace('$$$', col['value']) unless !col['has_link']
         if col['image_base_url']?
           img_url = col['image_base_url'].replace('$$$', col['value'])
+        if col['custom_field_template']?
+          col['custom_html'] = Handlebars.compile(col['custom_field_template'])
+            val: col['value']
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url
