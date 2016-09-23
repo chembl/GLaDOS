@@ -31,6 +31,9 @@ Here you can find some informal diagrams that help to understand how some compon
 
 * [Search Basic Workflow] (https://docs.google.com/drawings/d/1eR5cyfc8pR5iDjD7qUQGzy-Nb8R0ixpmiva8pNEm5cU/edit?usp=sharing)
 
+### Paginated Collections
+
+* [Item Columns](https://docs.google.com/drawings/d/1RjgbMwToiI1m2rX-UM2QRy5_gBUk0iHZJ2frL5v6OIE/edit?usp=sharing)
 
 
 
