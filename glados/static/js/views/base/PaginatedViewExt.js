@@ -225,6 +225,9 @@ PaginatedViewExt = {
     $preloaderCont.children('.card-preolader-to-hide').show();
     return $contentCont.children(':not(.card-preolader-to-hide)').hide();
   },
+  clearCardsPage: function() {
+    return this.$contentContainer.empty();
+  },
   showControls: function() {
     return $(this.el).find('.controls').removeClass('hide');
   },

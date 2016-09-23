@@ -10,10 +10,7 @@ CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
   render: function() {
     this.clearCardsPage();
     this.fill_template('BCK-CompsCardsPageContainer');
-    this.fillPaginator('BCK-Cards-paginator');
+    this.fillPaginator('BCK-Comps-Cards-paginator');
     return this.showVisibleContent();
-  },
-  clearCardsPage: function() {
-    return this.$contentContainer.empty();
   }
 });

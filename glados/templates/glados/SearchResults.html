@@ -16,7 +16,7 @@
     <h3>Compounds:</h3>
 
     <div id="BCK-CompsPreoladerContainer" class='row'>
-      {% block card_loaders %}
+      {% block comp_card_loaders %}
       {% include "glados/base/card_loaders.html" %}
       {% endblock %}
     </div>
@@ -29,7 +29,7 @@
 
     <div class="row">
 
-      <div id='BCK-Cards-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
+      <div id='BCK-Comps-Cards-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
 
         <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
@@ -39,11 +39,33 @@
 
   </div>
 
-   <div id="BCK-DocSearchResults">
+  <div id="BCK-DocSearchResults">
 
     <h3>Documents:</h3>
-     
-   </div>
+
+    <div id="BCK-DocsPreoladerContainer" class='row'>
+      {% block docs_card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+      {% endblock %}
+    </div>
+
+    <div id="BCK-DocsCardsPageContainer" class='row' data-hb-template="Handlebars-Common-Paginated-Card-Document">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+    </div>
+
+    <div class="row">
+
+      <div id='BCK-Docs-Cards-paginator' data-hb-template="Handlebars-Common-Paginated-UL">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
 {% endblock %}
@@ -52,10 +74,12 @@
 
 // this lists will come from the results of the search
 var compoundResultsList = SearchResultsApp.initCompoundsResultsList();
+var docsResultsList = SearchResultsApp.initDocsResultsList();
 
 var compResListView = SearchResultsApp.initCompResultsListView(compoundResultsList, $('#BCK-CompoundSearchResults'));
+var docsResListView = SearchResultsApp.initDocsResultsListView(docsResultsList, $('#BCK-DocSearchResults'));
 
-console.log('initial url: ', compoundResultsList.url);
 compoundResultsList.fetch({reset: true});
+docsResultsList.fetch({reset: true});
 
 {% endblock %}
