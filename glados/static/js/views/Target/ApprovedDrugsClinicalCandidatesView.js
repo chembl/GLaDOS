@@ -16,13 +16,13 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     }
     this.clearTable();
     this.clearList();
-    this.fill_template('ADCCTable-large');
-    this.fill_template('ADCCUL-small');
-    this.fillPaginator('ADCCUL-paginator');
+    this.fillTemplates('ADCCTable-large');
+    this.fillTemplates('ADCCUL-small');
+    this.fillPaginators();
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
-    this.fillPageSelector();
+    this.fillPageSelectors();
     return this.activateSelectors();
   },
   clearTable: function() {

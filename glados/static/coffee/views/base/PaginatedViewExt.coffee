@@ -14,7 +14,7 @@ PaginatedViewExt =
 
   # fills a template with the contents of the collection's current page
   # it handle the case when the items are shown as list, table, or infinite browser
-  fill_template: (elem_id) ->
+  fillTemplates: (elem_id) ->
 
     $elem = $(@el).find('#' + elem_id)
     $item_template = $('#' + $elem.attr('data-hb-template'))
@@ -52,10 +52,10 @@ PaginatedViewExt =
 
       $append_to.append($(new_item_cont))
 
-  fillPaginator: (elem_id) ->
+  fillPaginators: ->
 
-    elem = $(@el).find('#' + elem_id)
-    template = $('#' + elem.attr('data-hb-template'))
+    $elem = $(@el).find('.BCK-paginator-container')
+    template = $('#' + $elem.attr('data-hb-template'))
 
     current_page = @collection.getMeta('current_page')
     records_in_page = @collection.getMeta('records_in_page')
@@ -87,7 +87,7 @@ PaginatedViewExt =
 
     pages = (num for num in [first_page_to_show..last_page_to_show])
 
-    elem.html Handlebars.compile(template.html())
+    $elem.html Handlebars.compile(template.html())
       pages: pages
       records_showing: first_record + '-' + last_page
       total_records: @collection.getMeta('total_records')
@@ -372,7 +372,7 @@ PaginatedViewExt =
   # Page selector
   #--------------------------------------------------------------------------------------
 
-  fillPageSelector: ->
+  fillPageSelectors: ->
 
     $elem = $(@el).find('.BCK-select-page-size-container')
     $contentTemplate = $('#' + $elem.attr('data-hb-template'))

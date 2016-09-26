@@ -14,8 +14,8 @@ AssayCurationSummaryView = CardView.extend
     if target?
       target.on 'change', @render, @
 
-    @fill_template('BCK-ACS-large')
-    @fill_template('BCK-ACS-small')
+    @fillTemplates('BCK-ACS-large')
+    @fillTemplates('BCK-ACS-small')
     @showVisibleContent()
 
 

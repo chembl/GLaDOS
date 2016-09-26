@@ -8,8 +8,8 @@ CellLineBasicInformationView = CardView.extend({
     return this.resource_type = 'Cell Line';
   },
   render: function() {
-    this.fill_template('BCK-CBI-large');
-    this.fill_template('BCK-CBI-small');
+    this.fillTemplates('BCK-CBI-large');
+    this.fillTemplates('BCK-CBI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();

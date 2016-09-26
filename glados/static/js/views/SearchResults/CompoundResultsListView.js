@@ -9,9 +9,9 @@ CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
   },
   render: function() {
     this.clearCardsPage();
-    this.fill_template('BCK-CompsCardsPageContainer');
-    this.fillPaginator('BCK-Comps-Cards-paginator');
-    this.fillPageSelector();
+    this.fillTemplates('BCK-CompsCardsPageContainer');
+    this.fillPaginators();
+    this.fillPageSelectors();
     this.renderSortingSelector();
     this.activateSelectors();
     return this.showVisibleContent();

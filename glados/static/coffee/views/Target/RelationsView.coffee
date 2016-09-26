@@ -16,15 +16,15 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
     @clearTable()
     @clearList()
 
-    @fill_template('TRTable-large')
-    @fill_template('TR-UL-small')
-    @fillPaginator('TR-paginator')
+    @fillTemplates('TRTable-large')
+    @fillTemplates('TR-UL-small')
+    @fillPaginators()
 
     @showVisibleContent()
     @initEmbedModal('relations')
     @activateModals()
 
-    @fillPageSelector()
+    @fillPageSelectors()
     @activateSelectors()
 
   clearTable: ->

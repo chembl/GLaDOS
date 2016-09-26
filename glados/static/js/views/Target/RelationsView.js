@@ -13,13 +13,13 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
     }
     this.clearTable();
     this.clearList();
-    this.fill_template('TRTable-large');
-    this.fill_template('TR-UL-small');
-    this.fillPaginator('TR-paginator');
+    this.fillTemplates('TRTable-large');
+    this.fillTemplates('TR-UL-small');
+    this.fillPaginators();
     this.showVisibleContent();
     this.initEmbedModal('relations');
     this.activateModals();
-    this.fillPageSelector();
+    this.fillPageSelectors();
     return this.activateSelectors();
   },
   clearTable: function() {

@@ -8,8 +8,8 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
     return this.resource_type = 'Document';
   },
   render: function() {
-    this.fill_template('BCK-DBI-large');
-    this.fill_template('BCK-DBI-small');
+    this.fillTemplates('BCK-DBI-large');
+    this.fillTemplates('BCK-DBI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();

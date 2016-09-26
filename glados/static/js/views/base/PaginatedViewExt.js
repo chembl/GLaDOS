@@ -11,7 +11,7 @@ PaginatedViewExt = {
     'change .select-sort': 'sortCollectionFormSelect',
     'click .btn-sort-direction': 'changeSortOrderInf'
   },
-  fill_template: function(elem_id) {
+  fillTemplates: function(elem_id) {
     var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
     $elem = $(this.el).find('#' + elem_id);
     $item_template = $('#' + $elem.attr('data-hb-template'));
@@ -52,10 +52,10 @@ PaginatedViewExt = {
     }
     return _results;
   },
-  fillPaginator: function(elem_id) {
-    var current_page, elem, first_page_to_show, first_record, last_page, last_page_to_show, num, num_pages, page_size, pages, records_in_page, show_next_ellipsis, show_previous_ellipsis, template;
-    elem = $(this.el).find('#' + elem_id);
-    template = $('#' + elem.attr('data-hb-template'));
+  fillPaginators: function() {
+    var $elem, current_page, first_page_to_show, first_record, last_page, last_page_to_show, num, num_pages, page_size, pages, records_in_page, show_next_ellipsis, show_previous_ellipsis, template;
+    $elem = $(this.el).find('.BCK-paginator-container');
+    template = $('#' + $elem.attr('data-hb-template'));
     current_page = this.collection.getMeta('current_page');
     records_in_page = this.collection.getMeta('records_in_page');
     page_size = this.collection.getMeta('page_size');
@@ -89,7 +89,7 @@ PaginatedViewExt = {
       }
       return _results;
     })();
-    elem.html(Handlebars.compile(template.html())({
+    $elem.html(Handlebars.compile(template.html())({
       pages: pages,
       records_showing: first_record + '-' + last_page,
       total_records: this.collection.getMeta('total_records'),
@@ -333,7 +333,7 @@ PaginatedViewExt = {
       return this.triggerCollectionSort(comp);
     }
   },
-  fillPageSelector: function() {
+  fillPageSelectors: function() {
     var $contentTemplate, $elem, currentPageSize, item, pageSizesItems, size, _i, _len, _ref;
     $elem = $(this.el).find('.BCK-select-page-size-container');
     $contentTemplate = $('#' + $elem.attr('data-hb-template'));

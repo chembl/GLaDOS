@@ -11,8 +11,8 @@ TargetNameAndClassificationView = CardView.extend
 
   render: ->
 
-    @fill_template('BCK-TNC-large')
-    @fill_template('BCK-TNC-small')
+    @fillTemplates('BCK-TNC-large')
+    @fillTemplates('BCK-TNC-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()

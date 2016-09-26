@@ -11,8 +11,8 @@ CellLineBasicInformationView = CardView.extend
 
   render: ->
 
-    @fill_template('BCK-CBI-large')
-    @fill_template('BCK-CBI-small')
+    @fillTemplates('BCK-CBI-large')
+    @fillTemplates('BCK-CBI-small')
 
     @showVisibleContent()
     @initEmbedModal('basic_information')

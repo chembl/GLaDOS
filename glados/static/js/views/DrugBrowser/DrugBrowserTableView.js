@@ -9,9 +9,9 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
   },
   render: function() {
     this.clearTable();
-    this.fill_template('DBTable-large');
-    this.fillPaginator('DB-paginator');
-    this.fillPageSelector();
+    this.fillTemplates('DBTable-large');
+    this.fillPaginators('DB-paginator');
+    this.fillPageSelectors();
     this.activateSelectors();
     return this.showVisibleContent();
   },

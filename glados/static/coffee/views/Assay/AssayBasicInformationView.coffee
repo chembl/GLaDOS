@@ -9,8 +9,8 @@ AssayBasicInformationView = CardView.extend
 
   render: ->
 
-    @fill_template('BCK-ABI-large')
-    @fill_template('BCK-ABI-small')
+    @fillTemplates('BCK-ABI-large')
+    @fillTemplates('BCK-ABI-small')
     @showVisibleContent()
 
     @initEmbedModal('basic_information')

@@ -8,8 +8,8 @@ TargetNameAndClassificationView = CardView.extend({
     return this.resource_type = 'Target';
   },
   render: function() {
-    this.fill_template('BCK-TNC-large');
-    this.fill_template('BCK-TNC-small');
+    this.fillTemplates('BCK-TNC-large');
+    this.fillTemplates('BCK-TNC-small');
     this.showVisibleContent();
     this.initEmbedModal('name_and_classification');
     return this.activateModals();

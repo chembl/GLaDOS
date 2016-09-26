@@ -17,8 +17,8 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
       $(@el).hide()
       return
 
-    @fill_template('BCK-Components-large')
-    @fill_template('BCK-Components-small')
+    @fillTemplates('BCK-Components-large')
+    @fillTemplates('BCK-Components-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()

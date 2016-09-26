@@ -20,15 +20,15 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     @clearTable()
     @clearList()
 
-    @fill_template('ADCCTable-large')
-    @fill_template('ADCCUL-small')
-    @fillPaginator('ADCCUL-paginator')
+    @fillTemplates('ADCCTable-large')
+    @fillTemplates('ADCCUL-small')
+    @fillPaginators()
 
     @showVisibleContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
 
-    @fillPageSelector()
+    @fillPageSelectors()
     @activateSelectors()
 
   clearTable: ->

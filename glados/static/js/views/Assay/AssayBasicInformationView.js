@@ -8,8 +8,8 @@ AssayBasicInformationView = CardView.extend({
     return this.resource_type = 'Assay';
   },
   render: function() {
-    this.fill_template('BCK-ABI-large');
-    this.fill_template('BCK-ABI-small');
+    this.fillTemplates('BCK-ABI-large');
+    this.fillTemplates('BCK-ABI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();
