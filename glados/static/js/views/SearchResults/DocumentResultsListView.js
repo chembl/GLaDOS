@@ -11,9 +11,9 @@ DocumentResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
     this.clearCardsPage();
     this.fill_template('BCK-DocsCardsPageContainer');
     this.fillPaginator('BCK-Docs-Cards-paginator');
-    this.fillAndActivatePageSelector();
+    this.fillPageSelector();
     this.renderSortingSelector();
-    $(this.el).find('select').material_select();
+    this.activateSelectors();
     return this.showVisibleContent();
   }
 });

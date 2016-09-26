@@ -234,9 +234,6 @@ PaginatedViewExt =
 
     @collection.sortCollection(comparator)
 
-  activatePageSelector: ->
-    $(@el).find('select').material_select();
-
   showVisibleContent: ->
 
     $preloaderCont = if @$preloaderContainer? then @$preloaderContainer else $(@el)
@@ -375,7 +372,7 @@ PaginatedViewExt =
   # Page selector
   #--------------------------------------------------------------------------------------
 
-  fillAndActivatePageSelector: ->
+  fillPageSelector: ->
 
     $elem = $(@el).find('.BCK-select-page-size-container')
     $contentTemplate = $('#' + $elem.attr('data-hb-template'))
@@ -392,5 +389,7 @@ PaginatedViewExt =
     $elem.html Handlebars.compile( $contentTemplate.html() )
       items: pageSizesItems
 
-    @activatePageSelector()
+  activateSelectors: ->
+
+    $(@el).find('select').material_select()
 

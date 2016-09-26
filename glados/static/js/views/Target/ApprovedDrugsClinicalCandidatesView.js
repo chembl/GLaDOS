@@ -22,7 +22,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
-    return this.fillAndActivatePageSelector();
+    this.fillPageSelector();
+    return this.activateSelectors();
   },
   clearTable: function() {
     return $('#ADCCTable-large').empty();

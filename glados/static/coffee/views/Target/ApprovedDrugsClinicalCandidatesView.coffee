@@ -28,7 +28,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
 
-    @fillAndActivatePageSelector()
+    @fillPageSelector()
+    @activateSelectors()
 
   clearTable: ->
 

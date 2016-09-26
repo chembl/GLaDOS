@@ -18,7 +18,7 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend
     @showVisibleContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
-    @activatePageSelector()
+    @activateSelectors()
 
 
 

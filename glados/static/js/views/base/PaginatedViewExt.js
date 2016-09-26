@@ -213,9 +213,6 @@ PaginatedViewExt = {
     }
     return this.collection.sortCollection(comparator);
   },
-  activatePageSelector: function() {
-    return $(this.el).find('select').material_select();
-  },
   showVisibleContent: function() {
     var $contentCont, $preloaderCont;
     $preloaderCont = this.$preloaderContainer != null ? this.$preloaderContainer : $(this.el);
@@ -336,7 +333,7 @@ PaginatedViewExt = {
       return this.triggerCollectionSort(comp);
     }
   },
-  fillAndActivatePageSelector: function() {
+  fillPageSelector: function() {
     var $contentTemplate, $elem, currentPageSize, item, pageSizesItems, size, _i, _len, _ref;
     $elem = $(this.el).find('.BCK-select-page-size-container');
     $contentTemplate = $('#' + $elem.attr('data-hb-template'));
@@ -350,9 +347,11 @@ PaginatedViewExt = {
       item.is_selected = currentPageSize === size;
       pageSizesItems.push(item);
     }
-    $elem.html(Handlebars.compile($contentTemplate.html())({
+    return $elem.html(Handlebars.compile($contentTemplate.html())({
       items: pageSizesItems
     }));
-    return this.activatePageSelector();
+  },
+  activateSelectors: function() {
+    return $(this.el).find('select').material_select();
   }
 };

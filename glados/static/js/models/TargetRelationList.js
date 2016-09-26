@@ -10,6 +10,7 @@ TargetRelationList = PaginatedCollection.extend({
     this.meta = {
       page_size: 10,
       current_page: 1,
+      available_page_sizes: Settings.TABLE_PAGE_SIZES,
       to_show: [],
       columns: [
         {
