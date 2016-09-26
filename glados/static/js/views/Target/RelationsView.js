@@ -19,7 +19,7 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
     this.showVisibleContent();
     this.initEmbedModal('relations');
     this.activateModals();
-    return this.activatePageSelector();
+    return this.fillAndActivatePageSelector();
   },
   clearTable: function() {
     return $('#TRTable-large').empty();

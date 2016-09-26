@@ -367,4 +367,25 @@ PaginatedViewExt =
     if comp?
       @triggerCollectionSort(comp)
 
+  #--------------------------------------------------------------------------------------
+  # Page selector
+  #--------------------------------------------------------------------------------------
+
+  fillAndActivatePageSelector: ->
+
+    $elem = $(@el).find('.BCK-select-page-size-container')
+    $contentTemplate = $('#' + $elem.attr('data-hb-template'))
+
+    currentPageSize = @collection.getMeta('page_size')
+    pageSizesItems = []
+    for size in Settings.TABLE_PAGE_SIZES
+      item = {}
+      item.number = size
+      item.is_selected = currentPageSize == size
+      pageSizesItems.push(item)
+
+    $elem.html Handlebars.compile( $contentTemplate.html() )
+      items: pageSizesItems
+
+    @activatePageSelector()
 

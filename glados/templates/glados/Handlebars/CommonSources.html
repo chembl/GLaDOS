@@ -241,4 +241,23 @@
 </script>
 
 
+<script id="Handlebars-Common-SelectPageSizeContainer" type="text/x-handlebars-template">
+
+  <div class="input-field">
+
+      <select class="change-page-size">
+
+        {{#each items}}
+
+        <option value="{{this.number}}" {{#if this.is_selected}}selected{{/if}}>{{this.number}}</option>
+
+        {{/each}}
+
+      </select>
+      <label>Records per page:</label>
+    </div>
+
+</script>
+
+
 {% endverbatim %}

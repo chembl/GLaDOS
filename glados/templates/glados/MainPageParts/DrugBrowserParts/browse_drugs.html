@@ -8,34 +8,29 @@
 
 <div id='BCK-DrugBrowserMain' class="row grey lighten-5">
 
+
   <div class="row">
 
-    <div class="input-field col s4">
+    <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
 
-      <select class="change-page-size">
-        <option value="5">5</option>
-        <option value="10" selected>10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
-      <label>Records per page:</label>
+      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+
     </div>
 
   </div>
 
 
-  <div id='DB-MainContent' class="row" >
+  <div id='DB-MainContent' class="row">
 
     {% block card_loaders %}
-      {% include "glados/base/card_loaders.html" %}
+    {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
     <table id='DBTable-large' class="compact-table striped hide-on-small-only ebi-links"
            data-hb-template="Handlebars-Common-Paginated-Row-large"
            data-hb-template-2="Handlebars-Common-Paginated-Header-large">
 
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
 
     </table>
 
@@ -50,7 +45,6 @@
     </div>
 
   </div>
-
 
 
 </div>

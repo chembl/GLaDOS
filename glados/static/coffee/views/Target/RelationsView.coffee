@@ -24,7 +24,7 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
     @initEmbedModal('relations')
     @activateModals()
 
-    @activatePageSelector();
+    @fillAndActivatePageSelector()
 
   clearTable: ->
 

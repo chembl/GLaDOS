@@ -12,7 +12,7 @@ DrugList = PaginatedCollection.extend({
     this.meta = {
       server_side: true,
       base_url: Settings.WS_BASE_URL + 'molecule.json',
-      page_size: 20,
+      page_size: Settings.TABLE_PAGE_SIZES[2],
       current_page: 1,
       to_show: [],
       columns: [

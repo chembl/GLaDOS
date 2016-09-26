@@ -335,5 +335,24 @@ PaginatedViewExt = {
     if (comp != null) {
       return this.triggerCollectionSort(comp);
     }
+  },
+  fillAndActivatePageSelector: function() {
+    var $contentTemplate, $elem, currentPageSize, item, pageSizesItems, size, _i, _len, _ref;
+    $elem = $(this.el).find('.BCK-select-page-size-container');
+    $contentTemplate = $('#' + $elem.attr('data-hb-template'));
+    currentPageSize = this.collection.getMeta('page_size');
+    pageSizesItems = [];
+    _ref = Settings.TABLE_PAGE_SIZES;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      size = _ref[_i];
+      item = {};
+      item.number = size;
+      item.is_selected = currentPageSize === size;
+      pageSizesItems.push(item);
+    }
+    $elem.html(Handlebars.compile($contentTemplate.html())({
+      items: pageSizesItems
+    }));
+    return this.activatePageSelector();
   }
 };
