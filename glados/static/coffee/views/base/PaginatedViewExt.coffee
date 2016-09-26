@@ -312,6 +312,10 @@ PaginatedViewExt =
 
     )
 
+  #--------------------------------------------------------------------------------------
+  # sort selector
+  #--------------------------------------------------------------------------------------
+
   renderSortingSelector: ->
 
     $selectSortContainer = $(@el).find('.select-sort-container')

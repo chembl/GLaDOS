@@ -12,6 +12,8 @@ CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
     this.fill_template('BCK-CompsCardsPageContainer');
     this.fillPaginator('BCK-Comps-Cards-paginator');
     this.fillAndActivatePageSelector();
+    this.renderSortingSelector();
+    $(this.el).find('select').material_select();
     return this.showVisibleContent();
   }
 });
