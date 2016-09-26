@@ -15,6 +15,15 @@
 
     <h3>Compounds:</h3>
 
+    <div class="row">
+
+      <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+      </div>
+
+    </div>
+
     <div id="BCK-CompsPreoladerContainer" class='row'>
       {% block comp_card_loaders %}
       {% include "glados/base/card_loaders.html" %}
@@ -42,6 +51,15 @@
   <div id="BCK-DocSearchResults">
 
     <h3>Documents:</h3>
+
+    <div class="row">
+
+      <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+      </div>
+
+    </div>
 
     <div id="BCK-DocsPreoladerContainer" class='row'>
       {% block docs_card_loaders %}

@@ -10,4 +10,5 @@ DocumentResultsListView = Backbone.View.extend(PaginatedViewExt).extend
     @clearCardsPage()
     @fill_template('BCK-DocsCardsPageContainer')
     @fillPaginator('BCK-Docs-Cards-paginator')
+    @fillAndActivatePageSelector()
     @showVisibleContent()
