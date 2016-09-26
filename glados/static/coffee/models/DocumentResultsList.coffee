@@ -15,6 +15,7 @@ DocumentResultsList = PaginatedCollection.extend
       server_side: true
       base_url: Settings.WS_DEV_BASE_URL + 'document.json'
       page_size: 6
+      available_page_sizes: Settings.CARD_PAGE_SIZES
       current_page: 1
       to_show: []
       columns: [

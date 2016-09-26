@@ -342,7 +342,7 @@ PaginatedViewExt = {
     $contentTemplate = $('#' + $elem.attr('data-hb-template'));
     currentPageSize = this.collection.getMeta('page_size');
     pageSizesItems = [];
-    _ref = Settings.TABLE_PAGE_SIZES;
+    _ref = this.collection.getMeta('available_page_sizes');
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       size = _ref[_i];
       item = {};

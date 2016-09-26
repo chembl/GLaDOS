@@ -378,7 +378,8 @@ PaginatedViewExt =
 
     currentPageSize = @collection.getMeta('page_size')
     pageSizesItems = []
-    for size in Settings.TABLE_PAGE_SIZES
+
+    for size in @collection.getMeta('available_page_sizes')
       item = {}
       item.number = size
       item.is_selected = currentPageSize == size

@@ -15,6 +15,7 @@ DrugList = PaginatedCollection.extend
       server_side: true
       base_url: Settings.WS_BASE_URL + 'molecule.json'
       page_size: Settings.TABLE_PAGE_SIZES[2]
+      available_page_sizes: Settings.TABLE_PAGE_SIZES
       current_page: 1
       to_show: []
       columns: [
