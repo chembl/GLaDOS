@@ -9,15 +9,15 @@ AssayBasicInformationView = CardView.extend
 
   render: ->
 
-    @fillTemplates('BCK-ABI-large')
-    @fillTemplates('BCK-ABI-small')
+    @fillTemplate('BCK-ABI-large')
+    @fillTemplate('BCK-ABI-small')
     @showVisibleContent()
 
     @initEmbedModal('basic_information')
     @activateModals()
 
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))

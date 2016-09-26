@@ -14,15 +14,15 @@ AssayCurationSummaryView = CardView.extend
     if target?
       target.on 'change', @render, @
 
-    @fillTemplates('BCK-ACS-large')
-    @fillTemplates('BCK-ACS-small')
+    @fillTemplate('BCK-ACS-large')
+    @fillTemplate('BCK-ACS-small')
     @showVisibleContent()
 
 
     @initEmbedModal('curation_summary')
     @activateModals()
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     target = @model.get('target')
 

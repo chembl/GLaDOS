@@ -8,13 +8,13 @@ AssayBasicInformationView = CardView.extend({
     return this.resource_type = 'Assay';
   },
   render: function() {
-    this.fillTemplates('BCK-ABI-large');
-    this.fillTemplates('BCK-ABI-small');
+    this.fillTemplate('BCK-ABI-large');
+    this.fillTemplate('BCK-ABI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
+  fillTemplate: function(div_id) {
     var div, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));

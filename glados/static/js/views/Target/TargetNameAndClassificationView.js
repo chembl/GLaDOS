@@ -8,13 +8,13 @@ TargetNameAndClassificationView = CardView.extend({
     return this.resource_type = 'Target';
   },
   render: function() {
-    this.fillTemplates('BCK-TNC-large');
-    this.fillTemplates('BCK-TNC-small');
+    this.fillTemplate('BCK-TNC-large');
+    this.fillTemplate('BCK-TNC-small');
     this.showVisibleContent();
     this.initEmbedModal('name_and_classification');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
+  fillTemplate: function(div_id) {
     var div, target_classifications, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));

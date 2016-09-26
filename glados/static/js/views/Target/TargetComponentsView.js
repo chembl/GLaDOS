@@ -14,13 +14,13 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend({
       $(this.el).hide();
       return;
     }
-    this.fillTemplates('BCK-Components-large');
-    this.fillTemplates('BCK-Components-small');
+    this.fillTemplate('BCK-Components-large');
+    this.fillTemplate('BCK-Components-small');
     this.showVisibleContent();
     this.initEmbedModal('components');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
+  fillTemplate: function(div_id) {
     var div, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));

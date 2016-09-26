@@ -11,14 +11,14 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
 
   render: ->
 
-    @fillTemplates('BCK-DBI-large')
-    @fillTemplates('BCK-DBI-small')
+    @fillTemplate('BCK-DBI-large')
+    @fillTemplate('BCK-DBI-small')
     @showVisibleContent()
 
     @initEmbedModal('basic_information')
     @activateModals()
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))

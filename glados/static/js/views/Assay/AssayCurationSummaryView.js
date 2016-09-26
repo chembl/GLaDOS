@@ -12,13 +12,13 @@ AssayCurationSummaryView = CardView.extend({
     if (target != null) {
       target.on('change', this.render, this);
     }
-    this.fillTemplates('BCK-ACS-large');
-    this.fillTemplates('BCK-ACS-small');
+    this.fillTemplate('BCK-ACS-large');
+    this.fillTemplate('BCK-ACS-small');
     this.showVisibleContent();
     this.initEmbedModal('curation_summary');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
+  fillTemplate: function(div_id) {
     var div, target, template;
     target = this.model.get('target');
     div = $(this.el).find('#' + div_id);

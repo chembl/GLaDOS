@@ -17,15 +17,15 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
       $(@el).hide()
       return
 
-    @fillTemplates('BCK-Components-large')
-    @fillTemplates('BCK-Components-small')
+    @fillTemplate('BCK-Components-large')
+    @fillTemplate('BCK-Components-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()
     @initEmbedModal('components')
     @activateModals()
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))

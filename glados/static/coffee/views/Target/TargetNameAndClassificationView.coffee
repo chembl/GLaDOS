@@ -11,15 +11,15 @@ TargetNameAndClassificationView = CardView.extend
 
   render: ->
 
-    @fillTemplates('BCK-TNC-large')
-    @fillTemplates('BCK-TNC-small')
+    @fillTemplate('BCK-TNC-large')
+    @fillTemplate('BCK-TNC-small')
 
     # until here, all the visible content has been rendered.
     @showVisibleContent()
     @initEmbedModal('name_and_classification')
     @activateModals()
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
