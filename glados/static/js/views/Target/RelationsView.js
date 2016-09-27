@@ -11,21 +11,13 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
       $('#TargetRelations').hide();
       return;
     }
-    this.clearTable();
-    this.clearList();
-    this.fillTemplates('TRTable-large');
-    this.fillTemplates('TR-UL-small');
+    this.clearContentContainer();
+    this.fillTemplates();
     this.fillPaginators();
     this.showVisibleContent();
     this.initEmbedModal('relations');
     this.activateModals();
     this.fillPageSelectors();
     return this.activateSelectors();
-  },
-  clearTable: function() {
-    return $('#TRTable-large').empty();
-  },
-  clearList: function() {
-    return $('#TR-UL-small').empty();
   }
 });

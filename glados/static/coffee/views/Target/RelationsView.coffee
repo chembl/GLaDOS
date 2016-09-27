@@ -13,11 +13,9 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
       $('#TargetRelations').hide()
       return
 
-    @clearTable()
-    @clearList()
+    @clearContentContainer()
 
-    @fillTemplates('TRTable-large')
-    @fillTemplates('TR-UL-small')
+    @fillTemplates()
     @fillPaginators()
 
     @showVisibleContent()
@@ -26,13 +24,3 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
 
     @fillPageSelectors()
     @activateSelectors()
-
-  clearTable: ->
-
-    $('#TRTable-large').empty()
-
-  clearList: ->
-
-    $('#TR-UL-small').empty()
-
-

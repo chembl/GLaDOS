@@ -14,22 +14,27 @@ PaginatedViewExt =
 
   # fills a template with the contents of the collection's current page
   # it handle the case when the items are shown as list, table, or infinite browser
-  fillTemplates: (elem_id) ->
+  fillTemplates: ->
 
-    $elem = $(@el).find('#' + elem_id)
-    $item_template = $('#' + $elem.attr('data-hb-template'))
-    $append_to = $elem
+    $elem = $(@el).find('.BCK-items-container')
 
+    for i in [0..$elem.length - 1]
+      @sendDataToTemplate $($elem[i])
+
+  sendDataToTemplate: ($specificElem) ->
+
+    $item_template = $('#' + $specificElem.attr('data-hb-template'))
+    $append_to = $specificElem
     # if it is a table, add the corresponding header
-    if $elem.is('table')
+    if $specificElem.is('table')
 
-      header_template = $('#' + $elem.attr('data-hb-template-2'))
+      header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
         columns: @collection.getMeta('columns')
 
-      $elem.append($(header_row_cont))
+      $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
-      $elem.append($('<tbody>'))
+      $specificElem.append($('<tbody>'))
 
     for item in @collection.getCurrentPage()
 
@@ -179,7 +184,6 @@ PaginatedViewExt =
     # if the collection is client side the column and data type will be undefined and will be ignored.
     column = $searchInput.attr('data-column')
     type = $searchInput.attr('data-column-type')
-    console.log 'input!', $searchInput
 
     @triggerSearch(term, column, type)
 
@@ -234,27 +238,27 @@ PaginatedViewExt =
 
     @collection.sortCollection(comparator)
 
-  showVisibleContent: ->
+  #--------------------------------------------------------------------------------------
+  # Preloaders and content
+  #--------------------------------------------------------------------------------------
+  showContent: ->
 
-    $preloaderCont = if @$preloaderContainer? then @$preloaderContainer else $(@el)
-    $contentCont = if @$contentContainer? then @$contentContainer else $(@el)
+    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $contentCont =  $(@el).find('.BCK-items-container')
 
-    $preloaderCont.children('.card-preolader-to-hide').hide()
-    $contentCont.children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
+    $preloaderCont.hide()
+    $contentCont.show()
 
   showPreloader: ->
 
-    $preloaderCont = if @$preloaderContainer? then @$preloaderContainer else $(@el)
-    $contentCont = if @$contentContainer? then @$contentContainer else $(@el)
+    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $contentCont =  $(@el).find('.BCK-items-container')
 
-    $preloaderCont.children('.card-preolader-to-hide').show()
-    $contentCont.children(':not(.card-preolader-to-hide)').hide()
+    $preloaderCont.show()
+    $contentCont.hide()
 
-  #--------------------------------------------------------------------------------------
-  # Cards page browser
-  #--------------------------------------------------------------------------------------
-  clearCardsPage: ->
-    @$contentContainer.empty()
+  clearContentContainer: ->
+    $(@el).find('.BCK-items-container').empty()
 
   #--------------------------------------------------------------------------------------
   # Infinite Browser
@@ -269,7 +273,6 @@ PaginatedViewExt =
 
   showInfiniteBrPreolader: ->
 
-    console.log('show preloader!')
     $(@el).children('.infinite-browse-preloader').show()
     @hideNumResults()
 
@@ -353,6 +356,8 @@ PaginatedViewExt =
 
 
   sortCollectionFormSelect: (event) ->
+
+    @showPreloader()
 
     selector = $(event.currentTarget)
     comparator = selector.val()

@@ -17,11 +17,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 
-    @clearTable()
-    @clearList()
+    @clearContentContainer()
 
-    @fillTemplates('ADCCTable-large')
-    @fillTemplates('ADCCUL-small')
+    @fillTemplates()
     @fillPaginators()
 
     @showVisibleContent()
@@ -30,14 +28,6 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
 
     @fillPageSelectors()
     @activateSelectors()
-
-  clearTable: ->
-
-    $('#ADCCTable-large').empty()
-
-  clearList: ->
-
-    $('#ADCCUL-small').empty()
 
   # -----------------------------------------------------------------
   # ---- Downloads

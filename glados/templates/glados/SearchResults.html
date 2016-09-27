@@ -36,13 +36,13 @@
 
     </div>
 
-    <div id="BCK-CompsPreoladerContainer" class='row'>
+    <div class='BCK-PreoladerContainer row'>
       {% block comp_card_loaders %}
       {% include "glados/base/card_loaders.html" %}
       {% endblock %}
     </div>
 
-    <div id="BCK-CompsCardsPageContainer" class='row' data-hb-template="Handlebars-Common-Paginated-Card-Horizontal">
+    <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Horizontal">
 
       <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
@@ -85,13 +85,13 @@
 
     </div>
 
-    <div id="BCK-DocsPreoladerContainer" class='row'>
+    <div class='BCK-PreoladerContainer row'>
       {% block docs_card_loaders %}
       {% include "glados/base/card_loaders.html" %}
       {% endblock %}
     </div>
 
-    <div id="BCK-DocsCardsPageContainer" class='row' data-hb-template="Handlebars-Common-Paginated-Card-Document">
+    <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Document">
 
       <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 

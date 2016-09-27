@@ -3,17 +3,15 @@ var DocumentResultsListView;
 
 DocumentResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
-    this.collection.on('reset do-repaint sort', this.render, this);
-    this.$preloaderContainer = $('#BCK-DocsPreoladerContainer');
-    return this.$contentContainer = $('#BCK-DocsCardsPageContainer');
+    return this.collection.on('reset do-repaint sort', this.render, this);
   },
   render: function() {
-    this.clearCardsPage();
-    this.fillTemplates('BCK-DocsCardsPageContainer');
+    this.clearContentContainer();
+    this.fillTemplates();
     this.fillPaginators();
     this.fillPageSelectors();
     this.renderSortingSelector();
     this.activateSelectors();
-    return this.showVisibleContent();
+    return this.showContent();
   }
 });

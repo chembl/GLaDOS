@@ -11,18 +11,26 @@ PaginatedViewExt = {
     'change .select-sort': 'sortCollectionFormSelect',
     'click .btn-sort-direction': 'changeSortOrderInf'
   },
-  fillTemplates: function(elem_id) {
-    var $append_to, $elem, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
-    $elem = $(this.el).find('#' + elem_id);
-    $item_template = $('#' + $elem.attr('data-hb-template'));
-    $append_to = $elem;
-    if ($elem.is('table')) {
-      header_template = $('#' + $elem.attr('data-hb-template-2'));
+  fillTemplates: function() {
+    var $elem, i, _i, _ref, _results;
+    $elem = $(this.el).find('.BCK-items-container');
+    _results = [];
+    for (i = _i = 0, _ref = $elem.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      _results.push(this.sendDataToTemplate($($elem[i])));
+    }
+    return _results;
+  },
+  sendDataToTemplate: function($specificElem) {
+    var $append_to, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
+    $item_template = $('#' + $specificElem.attr('data-hb-template'));
+    $append_to = $specificElem;
+    if ($specificElem.is('table')) {
+      header_template = $('#' + $specificElem.attr('data-hb-header-template'));
       header_row_cont = Handlebars.compile(header_template.html())({
         columns: this.collection.getMeta('columns')
       });
-      $elem.append($(header_row_cont));
-      $elem.append($('<tbody>'));
+      $specificElem.append($(header_row_cont));
+      $specificElem.append($('<tbody>'));
     }
     _ref = this.collection.getCurrentPage();
     _results = [];
@@ -173,7 +181,6 @@ PaginatedViewExt = {
     term = $searchInput.val();
     column = $searchInput.attr('data-column');
     type = $searchInput.attr('data-column-type');
-    console.log('input!', $searchInput);
     return this.triggerSearch(term, column, type);
   }, Settings['SEARCH_INPUT_DEBOUNCE_TIME']),
   setNumericSearchWrapper: function($elem) {
@@ -213,22 +220,22 @@ PaginatedViewExt = {
     }
     return this.collection.sortCollection(comparator);
   },
-  showVisibleContent: function() {
+  showContent: function() {
     var $contentCont, $preloaderCont;
-    $preloaderCont = this.$preloaderContainer != null ? this.$preloaderContainer : $(this.el);
-    $contentCont = this.$contentContainer != null ? this.$contentContainer : $(this.el);
-    $preloaderCont.children('.card-preolader-to-hide').hide();
-    return $contentCont.children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
+    $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
+    $contentCont = $(this.el).find('.BCK-items-container');
+    $preloaderCont.hide();
+    return $contentCont.show();
   },
   showPreloader: function() {
     var $contentCont, $preloaderCont;
-    $preloaderCont = this.$preloaderContainer != null ? this.$preloaderContainer : $(this.el);
-    $contentCont = this.$contentContainer != null ? this.$contentContainer : $(this.el);
-    $preloaderCont.children('.card-preolader-to-hide').show();
-    return $contentCont.children(':not(.card-preolader-to-hide)').hide();
+    $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
+    $contentCont = $(this.el).find('.BCK-items-container');
+    $preloaderCont.show();
+    return $contentCont.hide();
   },
-  clearCardsPage: function() {
-    return this.$contentContainer.empty();
+  clearContentContainer: function() {
+    return $(this.el).find('.BCK-items-container').empty();
   },
   showControls: function() {
     return $(this.el).find('.controls').removeClass('hide');
@@ -238,7 +245,6 @@ PaginatedViewExt = {
     return this.showNumResults();
   },
   showInfiniteBrPreolader: function() {
-    console.log('show preloader!');
     $(this.el).children('.infinite-browse-preloader').show();
     return this.hideNumResults();
   },
@@ -319,6 +325,7 @@ PaginatedViewExt = {
   },
   sortCollectionFormSelect: function(event) {
     var comparator, selector;
+    this.showPreloader();
     selector = $(event.currentTarget);
     comparator = selector.val();
     if (comparator === '') {

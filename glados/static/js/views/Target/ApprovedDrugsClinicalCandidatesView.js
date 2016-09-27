@@ -14,22 +14,14 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
       $('#ApprovedDrugsAndClinicalCandidates').hide();
       return;
     }
-    this.clearTable();
-    this.clearList();
-    this.fillTemplates('ADCCTable-large');
-    this.fillTemplates('ADCCUL-small');
+    this.clearContentContainer();
+    this.fillTemplates();
     this.fillPaginators();
     this.showVisibleContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
     this.fillPageSelectors();
     return this.activateSelectors();
-  },
-  clearTable: function() {
-    return $('#ADCCTable-large').empty();
-  },
-  clearList: function() {
-    return $('#ADCCUL-small').empty();
   },
   getFilename: function(format) {
     if (format === 'csv') {
