@@ -3,19 +3,14 @@ var DrugBrowserTableView;
 
 DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
-    this.collection.on('reset do-repaint sort', this.render, this);
-    this.$preloaderContainer = $('#DB-MainContent');
-    return this.$contentContainer = this.$preloaderContainer;
+    return this.collection.on('reset do-repaint sort', this.render, this);
   },
   render: function() {
-    this.clearTable();
+    this.clearContentContainer();
     this.fillTemplates();
     this.fillPaginators();
     this.fillPageSelectors();
     this.activateSelectors();
-    return this.showVisibleContent();
-  },
-  clearTable: function() {
-    return $('.BCK-items-container').empty();
+    return this.showContent();
   }
 });

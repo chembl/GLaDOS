@@ -22,9 +22,11 @@
 
   <div id='DB-MainContent' class="row">
 
-    {% block card_loaders %}
-    {% include "glados/base/card_loaders.html" %}
-    {% endblock %}
+    <div class="BCK-PreoladerContainer">
+      {% block card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+      {% endblock %}
+    </div>
 
     <table class="BCK-items-container compact-table striped hide-on-small-only ebi-links"
            data-hb-template="Handlebars-Common-Paginated-Row-large"

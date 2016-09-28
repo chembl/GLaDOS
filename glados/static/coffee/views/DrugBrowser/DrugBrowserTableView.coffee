@@ -3,18 +3,11 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
-    @$preloaderContainer = $('#DB-MainContent')
-    @$contentContainer = @$preloaderContainer
 
   render: ->
-    @clearTable()
+    @clearContentContainer()
     @fillTemplates()
     @fillPaginators()
     @fillPageSelectors()
     @activateSelectors()
-    @showVisibleContent()
-
-
-  clearTable: ->
-
-    $('.BCK-items-container').empty()
+    @showContent()
