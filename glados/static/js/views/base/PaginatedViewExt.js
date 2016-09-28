@@ -7,7 +7,7 @@ PaginatedViewExt = {
     'change .change-page-size': 'changePageSize',
     'click .sort': 'sortCollection',
     'input .search': 'setSearch',
-    'change .select-search': 'setSearch',
+    'change select.select-search': 'setSearch',
     'change .select-sort': 'sortCollectionFormSelect',
     'click .btn-sort-direction': 'changeSortOrderInf'
   },
@@ -140,9 +140,6 @@ PaginatedViewExt = {
       console.log('ignoring!');
       return;
     }
-    if (!!this.isInfinite) {
-      this.showInfiniteBrPreolader();
-    }
     return this.collection.setPage(pageNum);
   },
   enableDisableNextLastButtons: function() {
@@ -196,13 +193,9 @@ PaginatedViewExt = {
     return setNumericSearch;
   },
   triggerSearch: function(term, column, type) {
-    var thisView;
-    thisView = this;
-    if (thisView.isInfinite) {
-      thisView.clearInfiniteContainer();
-      thisView.showInfiniteBrPreolader();
-    }
-    return thisView.collection.setSearch(term, column, type);
+    this.clearContentContainer();
+    this.showPreloader();
+    return this.collection.setSearch(term, column, type);
   },
   sortCollection: function(event) {
     var comparator, order_icon;
@@ -214,10 +207,8 @@ PaginatedViewExt = {
     return this.triggerCollectionSort(comparator);
   },
   triggerCollectionSort: function(comparator) {
-    if (this.isInfinite) {
-      this.clearInfiniteContainer();
-      this.showInfiniteBrPreolader();
-    }
+    this.clearContentContainer();
+    this.showPreloader();
     return this.collection.sortCollection(comparator);
   },
   showContent: function() {
@@ -234,19 +225,18 @@ PaginatedViewExt = {
     $preloaderCont.show();
     return $contentCont.hide();
   },
+  showPreloaderAndContent: function() {
+    var $contentCont, $preloaderCont;
+    $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
+    $contentCont = $(this.el).find('.BCK-items-container');
+    $preloaderCont.show();
+    return $contentCont.show();
+  },
   clearContentContainer: function() {
     return $(this.el).find('.BCK-items-container').empty();
   },
   showControls: function() {
     return $(this.el).find('.controls').removeClass('hide');
-  },
-  hideInfiniteBrPreolader: function() {
-    $(this.el).children('.infinite-browse-preloader').hide();
-    return this.showNumResults();
-  },
-  showInfiniteBrPreolader: function() {
-    $(this.el).children('.infinite-browse-preloader').show();
-    return this.hideNumResults();
   },
   showNumResults: function() {
     return $(this.el).children('.num-results').show();
@@ -256,12 +246,14 @@ PaginatedViewExt = {
   },
   setUpLoadingWaypoint: function() {
     var $cards, $middleCard, advancer, waypoint;
-    $cards = $('#DrugInfBrowserCardsContainer').children();
+    $cards = $('.BCK-items-container').children();
     if ($cards.length === 0) {
       return;
     }
     $middleCard = $cards[Math.round($cards.length / 2)];
     advancer = $.proxy(function() {
+      Waypoint.destroyAll();
+      this.showPreloaderAndContent();
       return this.requestPageInCollection('next');
     }, this);
     Waypoint.destroyAll();
@@ -319,9 +311,6 @@ PaginatedViewExt = {
       text: currentProps.text,
       disabled: currentSortDirection === 0
     }));
-  },
-  clearInfiniteContainer: function() {
-    return $('#' + this.containerID).empty();
   },
   sortCollectionFormSelect: function(event) {
     var comparator, selector;

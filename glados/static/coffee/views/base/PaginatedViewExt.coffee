@@ -8,7 +8,7 @@ PaginatedViewExt =
     'change .change-page-size': 'changePageSize'
     'click .sort': 'sortCollection'
     'input .search': 'setSearch'
-    'change .select-search' : 'setSearch'
+    'change select.select-search' : 'setSearch'
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
 
@@ -139,9 +139,6 @@ PaginatedViewExt =
       console.log('ignoring!')
       return
 
-    @showInfiniteBrPreolader() unless !@isInfinite
-
-
     @collection.setPage(pageNum)
 
 
@@ -179,6 +176,7 @@ PaginatedViewExt =
 
 
   setSearch: _.debounce( (event) ->
+
     $searchInput = $(event.currentTarget)
     term = $searchInput.val()
     # if the collection is client side the column and data type will be undefined and will be ignored.
@@ -210,13 +208,10 @@ PaginatedViewExt =
 
   triggerSearch:  (term, column, type) ->
 
-    thisView = @
-    if thisView.isInfinite
+    @clearContentContainer()
+    @showPreloader()
 
-      thisView.clearInfiniteContainer()
-      thisView.showInfiniteBrPreolader()
-
-    thisView.collection.setSearch(term, column, type)
+    @collection.setSearch(term, column, type)
   #--------------------------------------------------------------------------------------
   # Sort
   #--------------------------------------------------------------------------------------
@@ -231,10 +226,8 @@ PaginatedViewExt =
 
   triggerCollectionSort: (comparator) ->
 
-    if @isInfinite
-
-      @clearInfiniteContainer()
-      @showInfiniteBrPreolader()
+    @clearContentContainer()
+    @showPreloader()
 
     @collection.sortCollection(comparator)
 
@@ -257,6 +250,15 @@ PaginatedViewExt =
     $preloaderCont.show()
     $contentCont.hide()
 
+  # show the preloader making sure the content is also visible, useful for the infinite browser
+  showPreloaderAndContent: ->
+
+    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $contentCont =  $(@el).find('.BCK-items-container')
+
+    $preloaderCont.show()
+    $contentCont.show()
+
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
 
@@ -266,15 +268,6 @@ PaginatedViewExt =
   showControls: ->
     $(@el).find('.controls').removeClass('hide')
 
-  hideInfiniteBrPreolader: ->
-
-    $(@el).children('.infinite-browse-preloader').hide()
-    @showNumResults()
-
-  showInfiniteBrPreolader: ->
-
-    $(@el).children('.infinite-browse-preloader').show()
-    @hideNumResults()
 
   showNumResults: ->
 
@@ -287,7 +280,7 @@ PaginatedViewExt =
 
   setUpLoadingWaypoint: ->
 
-    $cards = $('#DrugInfBrowserCardsContainer').children()
+    $cards = $('.BCK-items-container').children()
 
     # don't bother when there aren't any cards
     if $cards.length == 0
@@ -297,6 +290,9 @@ PaginatedViewExt =
 
     # the advancer function requests always the next page
     advancer = $.proxy ->
+      #destroy waypoint to avoid issues with triggering more page requests.
+      Waypoint.destroyAll()
+      @showPreloaderAndContent()
       @requestPageInCollection('next')
     , @
 
@@ -350,9 +346,6 @@ PaginatedViewExt =
       sort_class:  currentProps.sort_class
       text: currentProps.text
       disabled: currentSortDirection == 0
-
-  clearInfiniteContainer: ->
-    $('#' + @containerID).empty()
 
 
   sortCollectionFormSelect: (event) ->

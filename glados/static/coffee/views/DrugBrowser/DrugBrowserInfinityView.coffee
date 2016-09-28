@@ -3,7 +3,6 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
   initialize: ->
     @collection.on 'sync', @.render, @
     @isInfinite = true
-    @containerID = 'DrugInfBrowserCardsContainer'
 
   render: ->
 
@@ -14,18 +13,18 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
 
       # always clear the infinite container when receiving the first page, to avoid
       # showing results from previous delayed requests.
-      @clearInfiniteContainer()
+      @clearContentContainer()
 
 
     @renderSortingSelector()
     @showControls()
     @activateSelectors()
-    @fillTemplates(@containerID)
+    @fillTemplates()
     @fillNumResults()
-    @hideInfiniteBrPreolader()
     @setUpLoadingWaypoint()
+    @showContent()
 
-    console.log 'num cards: ', $('#DrugInfBrowserCardsContainer').children().length
+    console.log 'num cards: ', $(@el).find('.BCK-items-container').children().length
 
     slider = document.getElementById('search_max_phase')
 
