@@ -1,5 +1,4 @@
-# View that renders the Document assay network section
-# from the Document report card
+# View that renders the Document assay in fullscreen mode
 # load CardView first!
 # also make sure the html can access the handlebars templates!
 DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DANViewExt).extend(DownloadViewExt).extend

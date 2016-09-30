@@ -37,7 +37,6 @@ ResponsiviseViewExt =
     else
       $base_elem = $(@el)
 
-
     if $base_elem.attr('data-loading') == 'false' or !$base_elem.attr('data-loading')?
       $base_elem.html Handlebars.compile($('#Handlebars-Common-Preloader').html())
       $base_elem.attr('data-loading', 'true')

@@ -35,6 +35,14 @@ SearchResultsApp = (function() {
     return docResView;
   };
 
+  SearchResultsApp.initCompTargMatrixView = function(topLevelElem) {
+    var compTargMatrixView;
+    compTargMatrixView = new CompoundTargetMatrixView({
+      el: topLevelElem
+    });
+    return compTargMatrixView;
+  };
+
   return SearchResultsApp;
 
 })();

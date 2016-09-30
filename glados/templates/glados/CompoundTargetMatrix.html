@@ -10,7 +10,22 @@
   <h2>
     <span><i class="icon icon-functional" data-icon="T"></i>Compound Targets Matrix</span>
   </h2>
-  
+
+  <div id='CompTargetMatrix'>
+
+    <div id="BCK-CompTargMatrixContainer">
+
+    </div>
+
+  </div>
+
 </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var compTargMatrixView = SearchResultsApp.initCompTargMatrixView($('#CompTargetMatrix'));
+compTargMatrixView.render();
 
 {% endblock %}

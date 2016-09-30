@@ -153,6 +153,8 @@ DANViewExt = {
         };
       });
     });
+    console.log('Matrix!:');
+    console.log(matrix);
     assays.links.forEach(function(link) {
       matrix[link.source][link.target].z = link.value;
       matrix[link.target][link.source].z = link.value;
@@ -177,8 +179,6 @@ DANViewExt = {
         return d3.ascending(nodes[a].assay_test_type, nodes[b].assay_test_type);
       })
     };
-    console.log('Matrix:');
-    console.log(matrix);
     console.log('Nodes:');
     console.log(nodes);
     console.log('Orders:');
@@ -187,6 +187,8 @@ DANViewExt = {
       return d.value;
     });
     x.domain(orders.count);
+    console.log('Orders count:');
+    console.log(orders);
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     row = svg.selectAll('.dan-row').data(matrix).enter().append('g').attr('class', 'dan-row').attr('transform', function(d, i) {
       return 'translate(0,' + x(i) + ')';

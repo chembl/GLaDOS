@@ -35,3 +35,10 @@ class SearchResultsApp
 
     return docResView
 
+  # this initalises the view that shows the compound vs target matrix view
+  @initCompTargMatrixView = (topLevelElem) ->
+
+    compTargMatrixView = new CompoundTargetMatrixView
+      el: topLevelElem
+
+    return compTargMatrixView

@@ -146,7 +146,6 @@ DANViewExt =
       bottom: 10
       left: 90
 
-
     elemWidth = $(@el).width()
 
     scaleWidthFor = d3.scale.linear()
@@ -170,7 +169,7 @@ DANViewExt =
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .append("g")
-              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     svg.call(tip)
 
@@ -194,6 +193,9 @@ DANViewExt =
           z: 0
         }
       )
+
+    console.log 'Matrix!:'
+    console.log matrix
 
     # Convert links to matrix; count character occurrences.
     assays.links.forEach (link) ->
@@ -220,9 +222,6 @@ DANViewExt =
         d3.ascending nodes[a].assay_test_type, nodes[b].assay_test_type
       )
 
-    console.log 'Matrix:'
-    console.log matrix
-
     console.log 'Nodes:'
     console.log nodes
 
@@ -233,6 +232,9 @@ DANViewExt =
 
     # The default sort order.
     x.domain(orders.count)
+
+    console.log 'Orders count:'
+    console.log orders
 
     svg.append("rect")
       .attr("class", "background")
