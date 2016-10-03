@@ -8,4 +8,4 @@ Settings =
   # Paginated Collections
   TABLE_PAGE_SIZES: [5, 10, 20, 25, 50, 100]
   CARD_PAGE_SIZES: [6, 12]
-  EMBED_BASE_URL: "0.0.0.0:8000/"
+  EMBED_BASE_URL: "http://glados-ebitest.rhcloud.com/"
