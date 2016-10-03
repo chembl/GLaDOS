@@ -58,17 +58,11 @@ ButtonsHelper = (function() {
   };
 
   ButtonsHelper.setMoreText = function(elem) {
-    var icon;
-    icon = $(elem).children('i');
-    icon.removeClass('fa-caret-up');
-    return icon.addClass('fa-caret-down');
+    return $(elem).text('more...');
   };
 
   ButtonsHelper.setLessText = function(elem) {
-    var icon;
-    icon = $(elem).children('i');
-    icon.removeClass('fa-caret-down');
-    return icon.addClass('fa-caret-up');
+    return $(elem).text('less...');
   };
 
   /* *
@@ -81,6 +75,7 @@ ButtonsHelper = (function() {
   ButtonsHelper.toggleCroppedContainerWrapper = function(elem, buttons) {
     var toggleCroppedContainer;
     toggleCroppedContainer = function() {
+      console.log('toggle cropped container!');
       if (elem.hasClass("expanded")) {
         ButtonsHelper.contract(elem);
         ButtonsHelper.setMoreText($(this));
@@ -101,7 +96,7 @@ ButtonsHelper = (function() {
 
   ButtonsHelper.initCroppedContainers = function() {
     var f;
-    f = function() {
+    f = _.debounce(function() {
       return $('.cropped-container').each(function() {
         var activated, activator, buttons, heightLimit, overflow, toggler;
         activator = $(this).find('a[data-activates]');
@@ -118,13 +113,21 @@ ButtonsHelper = (function() {
           }
         });
         if (overflow) {
-          toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons);
-          activator.click(toggler);
-          return activator.show();
+          if (!activator.hasClass('toggler-bound')) {
+            console.log('binding function');
+            toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons);
+            activator.addClass('toggler-bound');
+            activator.click(toggler);
+          }
+          activator.show();
+          return console.log('overflow!!!');
+        } else {
+          return activator.hide();
         }
       });
-    };
-    return _.debounce(f, 100)();
+    }, 300);
+    $(window).resize(f);
+    return f();
   };
 
   ButtonsHelper.showExpandableMenu = function(activator, elem) {

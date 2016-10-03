@@ -870,7 +870,6 @@ div#CompoundNameAndClassification .comp-phase-0 {
   padding: 5px;
   font-weight: 500;
   display: inline-block;
-
 }
 
 .chip-syn {
@@ -892,7 +891,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
 .cropped {
   overflow: hidden;
   max-height: 88px;
-  max-width: 93%;
+  max-width: 80%;
 }
 
 .expanded {
@@ -903,23 +902,17 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 .cropped-container {
   position: relative;
+
+  .toggle-more-less{
+    padding: 4px;
+  }
+
 }
 
 .cropped-container-btns {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  width: 5%;
-  min-width: 20px;
-}
-
-.cropped-container-btns a {
-  color: #ffffff;
-  padding: 0 4px;
-  border-radius: 3px;
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
 }
 
 .material-tooltip {
@@ -937,7 +930,6 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 .cropped-container-btns-exp {
   position: relative;
-  display: inline-block;
   float: right;
 }
 
@@ -1398,9 +1390,14 @@ $search-items-height: 45px;
   font-size: 9px;
 }
 
+
 .btn-mini i,
 .btn-small i {
   font-size: 180%;
+}
+
+.btn-micro i {
+  font-size: 150%;
 }
 
 .btn-mini {
@@ -1409,6 +1406,17 @@ $search-items-height: 45px;
   padding: 10px 3px 6px 3px;
   text-align: center;
   width: 30px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px;
+}
+
+.btn-micro {
+  color: #ffffff;
+  border-radius: $default-btn-border-radius;
+  padding: 8px 2px 4px 2px;
+  text-align: center;
+  width: 25px;
   line-height: 9px;
   font-size: 9px;
   margin-left: 4px;

@@ -57,15 +57,12 @@ class ButtonsHelper
     elem.addClass("cropped")
 
   @setMoreText = (elem) ->
-    icon = $(elem).children('i')
-    icon.removeClass('fa-caret-up')
-    icon.addClass('fa-caret-down')
+
+    $(elem).text('more...')
 
   @setLessText = (elem) ->
 
-    icon = $(elem).children('i')
-    icon.removeClass('fa-caret-down')
-    icon.addClass('fa-caret-up')
+    $(elem).text('less...')
 
 
 
@@ -79,6 +76,8 @@ class ButtonsHelper
 
     # this toggles the div elements to show or hide all the contents.
     toggleCroppedContainer = ->
+
+      console.log 'toggle cropped container!'
 
       if elem.hasClass( "expanded" )
         ButtonsHelper.contract(elem)
@@ -97,7 +96,7 @@ class ButtonsHelper
   ###
   @initCroppedContainers = ->
 
-    f = ->
+    f = _.debounce( ->
 
       $('.cropped-container').each ->
 
@@ -118,11 +117,22 @@ class ButtonsHelper
             return false
 
         if overflow
-          toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons)
-          activator.click(toggler)
-          activator.show();
 
-    _.debounce(f, 100)()
+          if !activator.hasClass('toggler-bound')
+            console.log 'binding function'
+            toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons)
+            activator.addClass('toggler-bound')
+            activator.click(toggler)
+
+          activator.show()
+          console.log 'overflow!!!'
+        else
+          activator.hide()
+    , 300)
+
+    $(window).resize f
+
+    f()
 
 
 
