@@ -1637,6 +1637,7 @@ describe("Paginated Collection", function() {
   describe("A server side collection", function() {
     var drugList;
     drugList = new DrugList;
+    drugList.setMeta('page_size', 20);
     beforeEach(function(done) {
       drugList = new DrugList;
       return drugList.fetch({
@@ -1652,8 +1653,8 @@ describe("Paginated Collection", function() {
       records_in_page = drugList.getMeta('records_in_page');
       expect(page_size).toBe(20);
       expect(current_page).toBe(1);
-      expect(total_pages).toBe(79610);
-      expect(total_records).toBe(1592191);
+      expect(total_pages).toBe(84335);
+      expect(total_records).toBe(1686695);
       expect(records_in_page).toBe(20);
       return done();
     });

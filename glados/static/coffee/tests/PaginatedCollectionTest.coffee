@@ -137,6 +137,7 @@ describe "Paginated Collection", ->
   describe "A server side collection", ->
 
     drugList = new DrugList
+    drugList.setMeta('page_size', 20)
 
     beforeEach (done) ->
 
@@ -154,8 +155,8 @@ describe "Paginated Collection", ->
 
       expect(page_size).toBe(20)
       expect(current_page).toBe(1)
-      expect(total_pages).toBe(79610)
-      expect(total_records).toBe(1592191)
+      expect(total_pages).toBe(84335)
+      expect(total_records).toBe(1686695)
       expect(records_in_page).toBe(20)
 
       done()
