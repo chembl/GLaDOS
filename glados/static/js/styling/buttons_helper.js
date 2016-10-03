@@ -173,7 +173,7 @@ ButtonsHelper = (function() {
   };
 
   /* *
-    *  Initializes the cropped container on the elements of the class 'expandable-menu'
+    *  Initializes the toggler on the elements of the class 'expandable-menu'
   */
 
 

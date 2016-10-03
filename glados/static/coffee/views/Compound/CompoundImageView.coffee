@@ -13,6 +13,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
     # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events,
       "click #CNC-3d-modal-trigger": "init3DView"
+      "click #CNC-3d-modal-trigger-small": "init3DView"
 
   renderImage: ->
     if @model.get('structure_type') == 'NONE'

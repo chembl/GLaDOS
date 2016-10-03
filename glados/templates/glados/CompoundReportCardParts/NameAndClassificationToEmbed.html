@@ -4,7 +4,7 @@
 
 {% block content %}
 
-   <div id="CompoundNameAndClassification" style="margin-top: 25px;">
+   <div id="CompoundNameAndClassification" style="margin-top: 25px; margin-bottom: 25px;">
     {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
    </div>
 
@@ -28,7 +28,6 @@ compound.fetch();
 
 ButtonsHelper.initCroppedContainers();
 ButtonsHelper.initExpendableMenus();
-$('.modal-trigger').hide();
 
 
 {% endblock %}

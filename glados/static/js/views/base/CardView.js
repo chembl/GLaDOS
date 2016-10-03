@@ -60,6 +60,8 @@ CardView = Backbone.View.extend({
     code_elem = modal.find('code');
     chembl_id = this.model != null ? this.model.get('molecule_chembl_id') : CHEMBL_ID;
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())({
+      base_url: Settings.EMBED_BASE_URL,
+      chembl_id: chembl_id,
       chembl_id: chembl_id,
       section_name: section_name,
       resource_type: clicked.attr('data-resource-type')

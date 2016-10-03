@@ -13,6 +13,7 @@ Compound3DView = Backbone.View.extend({
     };
   },
   render: function() {
+    console.log('render!');
     $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
       title: '3D View of ' + this.model.get('molecule_chembl_id')
     }));

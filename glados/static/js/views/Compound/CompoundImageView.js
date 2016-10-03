@@ -12,7 +12,8 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
   },
   events: function() {
     return _.extend({}, DownloadViewExt.events, {
-      "click #CNC-3d-modal-trigger": "init3DView"
+      "click #CNC-3d-modal-trigger": "init3DView",
+      "click #CNC-3d-modal-trigger-small": "init3DView"
     });
   },
   renderImage: function() {

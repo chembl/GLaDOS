@@ -63,6 +63,8 @@ CardView = Backbone.View.extend
     chembl_id = if @model? then @model.get('molecule_chembl_id') else CHEMBL_ID
 
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
+      base_url: Settings.EMBED_BASE_URL
+      chembl_id: chembl_id
       chembl_id: chembl_id
       section_name: section_name
       resource_type: clicked.attr('data-resource-type')
