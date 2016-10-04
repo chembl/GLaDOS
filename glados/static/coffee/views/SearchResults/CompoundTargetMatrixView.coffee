@@ -53,24 +53,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         #source Target
         0: {
           # destination Compound
-          0: 1 # this means target 0 is connected to compound 0 through
-          1: 0 # target 0 is NOT connected to compound 1
-          2: 1
+          0: {'pchembl': 1, 'num_bioactivities': 20} # this means target 0 is connected to compound 0 through an assay with a value of 1
+          1: {pchembl: 0}
+          2: {pchembl: 2}
         }
         1: {
-          0: 0
-          1: 1
-          2: 0
+          0: {pchembl: 0}
+          1: {pchembl: 3}
+          2: {pchembl: 0}
         }
         2: {
-          0: 1
-          1: 0
-          2: 0
+          0: {pchembl: 4}
+          1: {pchembl: 0}
+          2: {pchembl: 0}
         }
         3: {
-          0: 0
-          1: 0
-          2: 0
+          0: {pchembl: 0}
+          1: {pchembl: 0}
+          2: {pchembl: 5}
         }
 
 
@@ -81,6 +81,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # pre-configuration
     # --------------------------------------
+
+    currentProperty = 'pchembl'
 
     margin =
       top: 70
@@ -121,6 +123,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("width", width)
       .attr("height", height)
 
+    # --------------------------------------
+    # scales
+    # --------------------------------------
+
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
       .rangeBands([0, height])
@@ -129,10 +135,28 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..numColumns])
       .rangeBands([0, width])
 
+    minVal = Number.MAX_VALUE
+    maxVal = Number.MIN_VALUE
+    for rowNum, row of links
+      for colNum, cell of row
+        value = cell[currentProperty]
+        if value > maxVal
+          maxVal = value
+        if value < minVal
+          minVal = value
+
+    colourDomain = [minVal, maxVal]
+
+    console.log 'max value: ', maxVal
+    console.log 'min value: ', minVal
+
+    getCellColour = d3.scale.linear()
+      .domain(colourDomain)
+      .range(["#FFFFFF", Settings.EMBL_GREEN])
+
     # --------------------------------------
     # Add rows
     # --------------------------------------
-
 
 
     fillRow = (row, rowNumber) ->
@@ -155,10 +179,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return getXCoord(colNum) )
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
-        .style("fill", (d) ->
-          if d ==1
-            return '#009688'
-          else return 'white')
+        .style("fill", (d) -> getCellColour(d[currentProperty]) )
 
     rows = svg.selectAll('.vis-row')
       .data(compsTargets.rows)

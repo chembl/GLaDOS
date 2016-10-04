@@ -13,7 +13,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return this.hidePreloader();
   },
   paintMatrix: function() {
-    var columns, compsTargets, elemWidth, fillRow, getXCoord, getYCoord, height, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
+    var cell, colNum, colourDomain, columns, compsTargets, currentProperty, elemWidth, fillRow, getCellColour, getXCoord, getYCoord, height, links, margin, maxVal, minVal, numColumns, numRows, row, rowNum, rows, svg, value, width, _i, _j, _results, _results1;
     console.log('painting matrix');
     compsTargets = {
       "columns": [
@@ -38,27 +38,53 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       ],
       "links": {
         0: {
-          0: 1,
-          1: 0,
-          2: 1
+          0: {
+            'pchembl': 1,
+            'num_bioactivities': 20
+          },
+          1: {
+            pchembl: 0
+          },
+          2: {
+            pchembl: 2
+          }
         },
         1: {
-          0: 0,
-          1: 1,
-          2: 0
+          0: {
+            pchembl: 0
+          },
+          1: {
+            pchembl: 3
+          },
+          2: {
+            pchembl: 0
+          }
         },
         2: {
-          0: 1,
-          1: 0,
-          2: 0
+          0: {
+            pchembl: 4
+          },
+          1: {
+            pchembl: 0
+          },
+          2: {
+            pchembl: 0
+          }
         },
         3: {
-          0: 0,
-          1: 0,
-          2: 0
+          0: {
+            pchembl: 0
+          },
+          1: {
+            pchembl: 0
+          },
+          2: {
+            pchembl: 5
+          }
         }
       }
     };
+    currentProperty = 'pchembl';
     margin = {
       top: 70,
       right: 0,
@@ -86,8 +112,27 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
+    minVal = Number.MAX_VALUE;
+    maxVal = Number.MIN_VALUE;
+    for (rowNum in links) {
+      row = links[rowNum];
+      for (colNum in row) {
+        cell = row[colNum];
+        value = cell[currentProperty];
+        if (value > maxVal) {
+          maxVal = value;
+        }
+        if (value < minVal) {
+          minVal = value;
+        }
+      }
+    }
+    colourDomain = [minVal, maxVal];
+    console.log('max value: ', maxVal);
+    console.log('min value: ', minVal);
+    getCellColour = d3.scale.linear().domain(colourDomain).range(["#FFFFFF", Settings.EMBL_GREEN]);
     fillRow = function(row, rowNumber) {
-      var cells, dataList, key, value, _ref;
+      var cells, dataList, key, _ref;
       console.log('row: ', rowNumber);
       console.log('cells: ', links[rowNumber]);
       dataList = [];
@@ -103,11 +148,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         console.log(getXCoord(colNum));
         return getXCoord(colNum);
       }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", function(d) {
-        if (d === 1) {
-          return '#009688';
-        } else {
-          return 'white';
-        }
+        return getCellColour(d[currentProperty]);
       });
     };
     rows = svg.selectAll('.vis-row').data(compsTargets.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {

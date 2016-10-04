@@ -9,3 +9,5 @@ Settings =
   TABLE_PAGE_SIZES: [5, 10, 20, 25, 50, 100]
   CARD_PAGE_SIZES: [6, 12]
   EMBED_BASE_URL: "glados-ebitest.rhcloud.com/"
+  EMBL_GREEN: '#9fcc3b'
+  EMBL_BLUE: '#008cb5'
