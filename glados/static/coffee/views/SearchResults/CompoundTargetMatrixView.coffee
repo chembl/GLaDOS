@@ -23,7 +23,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
     compsTargets = {
-      "rows": [
+      "columns": [
         {
           "name": "C1",
         },
@@ -34,7 +34,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "name": "C3",
         }
       ],
-      "columns": [
+      "rows": [
         {
           "name": "T1",
         },
@@ -53,7 +53,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         #source Target
         0: {
           # destination Compound
-          0: 1 # this means target 0 is connected to compound 0
+          0: 1 # this means target 0 is connected to compound 0 through
           1: 0 # target 0 is NOT connected to compound 1
           2: 1
         }
@@ -67,7 +67,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           1: 0
           2: 0
         }
-        4: {
+        3: {
           0: 0
           1: 0
           2: 0
@@ -91,8 +91,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     height = width = 0.8 * elemWidth
 
-    getXCoord = d3.scale.ordinal().rangeBands([0, width])
-
     svg = d3.select('#' + @$vis_elem.attr('id'))
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -100,30 +98,109 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    # background rectangle
+    # --------------------------------------
+    # Work with data
+    # --------------------------------------
+    links = compsTargets.links
+    numColumns = compsTargets.columns.length
+    numRows = compsTargets.rows.length
+
+    console.log 'num rows:', numRows
+    console.log 'num columns:', numColumns
+
+    console.log 'links:'
+    console.log links
+
+    # --------------------------------------
+    # Add background rectangle
+    # --------------------------------------
+
     svg.append("rect")
       .attr("class", "background")
       .style("fill", "white")
       .attr("width", width)
       .attr("height", height)
 
-    # --------------------------------------
-    # Work with data
-    # --------------------------------------
-    matrix = []
-    rows = compsTargets.rows
-    columns = compsTargets.columns
+    getYCoord = d3.scale.ordinal()
+      .domain([0..numRows])
+      .rangeBands([0, height])
 
-    # compute indices of matrix as list of lists
-    columns.forEach (node, i) ->
-      node.index = i
-      matrix[i] = d3.range(rows.length).map((j) ->
-        {
-          col: j
-          row: i
-          z: compsTargets.links[i][j]
-        }
-      )
+    getXCoord = d3.scale.ordinal()
+      .domain([0..numColumns])
+      .rangeBands([0, width])
 
-    console.log 'Matrix:'
-    console.log matrix
+    # --------------------------------------
+    # Add rows
+    # --------------------------------------
+
+
+
+    fillRow = (row, rowNumber) ->
+
+      console.log 'row: ', rowNumber
+      console.log 'cells: ', links[rowNumber]
+      dataList = []
+      for key, value of links[rowNumber]
+        dataList.push(value)
+      console.log "dataList:", dataList
+      console.log 'g elem: ', @
+      # @ is the current g element
+      cells = d3.select(@).selectAll(".vis-cell")
+        .data(dataList)
+        .enter().append("rect")
+        .attr("class", "vis-cell")
+        .attr("x", (d, colNum) ->
+          console.log 'here!'
+          console.log getXCoord(colNum)
+          return getXCoord(colNum) )
+        .attr("width", getXCoord.rangeBand())
+        .attr("height", getYCoord.rangeBand())
+        .style("fill", (d) ->
+          if d ==1
+            return '#009688'
+          else return 'white')
+
+    rows = svg.selectAll('.vis-row')
+      .data(compsTargets.rows)
+      .enter()
+      .append('g').attr('class', 'vis-row')
+      .attr('transform', (d, rowNum) -> "translate(0, " + getYCoord(rowNum) + ")")
+      .each(fillRow)
+
+    rows.append("line")
+      .attr("x2", width)
+
+    rows.append("text")
+      .attr("x", -6)
+      .attr("y", getYCoord.rangeBand() / 2)
+      .attr("dy", ".32em")
+      .attr("text-anchor", "end")
+      .attr('style', 'font-size:12px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .attr('fill', '#1b5e20')
+      .text( (d, i) -> d.name )
+
+    # --------------------------------------
+    # Add columns
+    # --------------------------------------
+
+    columns = svg.selectAll(".vis-column")
+      .data(compsTargets.columns)
+      .enter().append("g")
+      .attr("class", "vis-column")
+      .attr("transform", (d, colNum) -> "translate(" + getXCoord(colNum) + ")rotate(-90)" )
+
+    columns.append("line")
+      .attr("x1", -width)
+
+    columns.append("text")
+      .attr("x", 0)
+      .attr("y", getXCoord.rangeBand() / 2)
+      .attr("dy", ".32em")
+      .attr("text-anchor", "start")
+      .attr('style', 'font-size:12px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .attr('fill', '#1b5e20')
+      .text((d, i) -> d.name )

@@ -91,6 +91,7 @@ DANViewExt = {
     };
     fillRow = function(row) {
       var cell;
+      console.log('g elem: ', this);
       return cell = d3.select(this).selectAll(".dan-cell").data(row).enter().append("rect").attr("class", "cell").attr("x", function(d) {
         return x(d.x);
       }).attr("width", x.rangeBand()).attr("height", x.rangeBand()).style("fill-opacity", function(d) {
@@ -186,6 +187,8 @@ DANViewExt = {
     max = d3.max(assays.links, function(d) {
       return d.value;
     });
+    console.log('orders counts:');
+    console.log(orders.count);
     x.domain(orders.count);
     console.log('Orders count:');
     console.log(orders);

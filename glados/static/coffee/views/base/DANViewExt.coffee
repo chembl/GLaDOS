@@ -95,6 +95,7 @@ DANViewExt =
 
 
     fillRow = (row) ->
+      console.log 'g elem: ', @
       cell = d3.select(this).selectAll(".dan-cell")
               .data(row)
               .enter().append("rect")
@@ -231,6 +232,8 @@ DANViewExt =
     max = d3.max assays.links, (d) -> d.value
 
     # The default sort order.
+    console.log 'orders counts:'
+    console.log orders.count
     x.domain(orders.count)
 
     console.log 'Orders count:'
@@ -247,8 +250,8 @@ DANViewExt =
           .enter()
           .append('g').attr('class', 'dan-row')
           .attr('transform', (d, i) ->
-            'translate(0,' + x(i) + ')'
-    ).each(fillRow)
+            'translate(0,' + x(i) + ')')
+          .each(fillRow)
 
     row.append("line")
       .attr("x2", width);

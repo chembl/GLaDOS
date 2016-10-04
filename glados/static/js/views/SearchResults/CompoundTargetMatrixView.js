@@ -13,10 +13,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return this.hidePreloader();
   },
   paintMatrix: function() {
-    var columns, compsTargets, elemWidth, getXCoord, height, margin, matrix, rows, svg, width;
+    var columns, compsTargets, elemWidth, fillRow, getXCoord, getYCoord, height, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
     console.log('painting matrix');
     compsTargets = {
-      "rows": [
+      "columns": [
         {
           "name": "C1"
         }, {
@@ -25,7 +25,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
           "name": "C3"
         }
       ],
-      "columns": [
+      "rows": [
         {
           "name": "T1"
         }, {
@@ -52,7 +52,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
           1: 0,
           2: 0
         },
-        4: {
+        3: {
           0: 0,
           1: 0,
           2: 0
@@ -67,23 +67,62 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     };
     elemWidth = $(this.el).width();
     height = width = 0.8 * elemWidth;
-    getXCoord = d3.scale.ordinal().rangeBands([0, width]);
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    links = compsTargets.links;
+    numColumns = compsTargets.columns.length;
+    numRows = compsTargets.rows.length;
+    console.log('num rows:', numRows);
+    console.log('num columns:', numColumns);
+    console.log('links:');
+    console.log(links);
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
-    matrix = [];
-    rows = compsTargets.rows;
-    columns = compsTargets.columns;
-    columns.forEach(function(node, i) {
-      node.index = i;
-      return matrix[i] = d3.range(rows.length).map(function(j) {
-        return {
-          col: j,
-          row: i,
-          z: compsTargets.links[i][j]
-        };
+    getYCoord = d3.scale.ordinal().domain((function() {
+      _results = [];
+      for (var _i = 0; 0 <= numRows ? _i <= numRows : _i >= numRows; 0 <= numRows ? _i++ : _i--){ _results.push(_i); }
+      return _results;
+    }).apply(this)).rangeBands([0, height]);
+    getXCoord = d3.scale.ordinal().domain((function() {
+      _results1 = [];
+      for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
+      return _results1;
+    }).apply(this)).rangeBands([0, width]);
+    fillRow = function(row, rowNumber) {
+      var cells, dataList, key, value, _ref;
+      console.log('row: ', rowNumber);
+      console.log('cells: ', links[rowNumber]);
+      dataList = [];
+      _ref = links[rowNumber];
+      for (key in _ref) {
+        value = _ref[key];
+        dataList.push(value);
+      }
+      console.log("dataList:", dataList);
+      console.log('g elem: ', this);
+      return cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
+        console.log('here!');
+        console.log(getXCoord(colNum));
+        return getXCoord(colNum);
+      }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", function(d) {
+        if (d === 1) {
+          return '#009688';
+        } else {
+          return 'white';
+        }
       });
+    };
+    rows = svg.selectAll('.vis-row').data(compsTargets.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
+      return "translate(0, " + getYCoord(rowNum) + ")";
+    }).each(fillRow);
+    rows.append("line").attr("x2", width);
+    rows.append("text").attr("x", -6).attr("y", getYCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
+      return d.name;
     });
-    console.log('Matrix:');
-    return console.log(matrix);
+    columns = svg.selectAll(".vis-column").data(compsTargets.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d, colNum) {
+      return "translate(" + getXCoord(colNum) + ")rotate(-90)";
+    });
+    columns.append("line").attr("x1", -width);
+    return columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
+      return d.name;
+    });
   }
 });
