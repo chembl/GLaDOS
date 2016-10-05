@@ -8,16 +8,18 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
     @$vis_elem = $('#AssayNetworkVisualisationContainer')
     updateViewProxy = @setUpResponsiveRender()
-
     @model.on 'change', updateViewProxy, @
+    @resource_type = 'Document'
 
   render: ->
 
-    console.log('render!')
-
+    @showVisibleContent()
     @hidePreloader()
     @addFSLinkAndInfo()
     @paintMatrix()
+
+    @initEmbedModal('assay_network')
+    @activateModals()
 
 
   addFSLinkAndInfo: ->

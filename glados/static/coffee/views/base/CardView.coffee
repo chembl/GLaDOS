@@ -48,6 +48,7 @@ CardView = Backbone.View.extend
 
     modal_trigger.click @renderModalPreview
 
+
   # this function is to be used for the click event in the embed modal button.
   # it can get all the information needed from the clicked element, no closure is needed.
   renderModalPreview: ->

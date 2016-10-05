@@ -54,7 +54,9 @@
         <div class="row">
 
           {% block dan %}
-            {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
+            {% endwith %}
           {% endblock %}
 
         </div>

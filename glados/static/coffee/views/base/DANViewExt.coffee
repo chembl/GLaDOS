@@ -149,9 +149,17 @@ DANViewExt =
 
     elemWidth = $(@el).width()
 
+    console.log 'ELEMENT WIDTH: ', elemWidth
+
+    # when it is embedded the visualization width must be taken based on the window size!
+    if EMBEDED?
+      baseWidth = window.innerWidth
+    else
+      baseWidth = elemWidth
+
     scaleWidthFor = d3.scale.linear()
       .domain([1, 20])
-      .range([0.1 * elemWidth, 0.8 * elemWidth])
+      .range([0.1 * baseWidth, 0.8 * baseWidth])
       .clamp(true)
 
     width = scaleWidthFor numNodes

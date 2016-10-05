@@ -3,7 +3,7 @@ var DANViewExt;
 
 DANViewExt = {
   paintMatrix: function() {
-    var assayTestType2Color, assayType2Color, assays, color, color_value, colorise, column, draw_legend, elemWidth, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, numNodes, orders, row, scaleWidthFor, svg, tip, total, width, x, z;
+    var assayTestType2Color, assayType2Color, assays, baseWidth, color, color_value, colorise, column, draw_legend, elemWidth, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, numNodes, orders, row, scaleWidthFor, svg, tip, total, width, x, z;
     assays = this.model.get('graph');
     numNodes = assays.nodes.length;
     if (!(assays != null)) {
@@ -129,7 +129,13 @@ DANViewExt = {
       left: 90
     };
     elemWidth = $(this.el).width();
-    scaleWidthFor = d3.scale.linear().domain([1, 20]).range([0.1 * elemWidth, 0.8 * elemWidth]).clamp(true);
+    console.log('ELEMENT WIDTH: ', elemWidth);
+    if (typeof EMBEDED !== "undefined" && EMBEDED !== null) {
+      baseWidth = window.innerWidth;
+    } else {
+      baseWidth = elemWidth;
+    }
+    scaleWidthFor = d3.scale.linear().domain([1, 20]).range([0.1 * baseWidth, 0.8 * baseWidth]).clamp(true);
     width = scaleWidthFor(numNodes);
     console.log('scale: ', scaleWidthFor);
     console.log('width: ', width);

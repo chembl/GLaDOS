@@ -6,13 +6,16 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     var updateViewProxy;
     this.$vis_elem = $('#AssayNetworkVisualisationContainer');
     updateViewProxy = this.setUpResponsiveRender();
-    return this.model.on('change', updateViewProxy, this);
+    this.model.on('change', updateViewProxy, this);
+    return this.resource_type = 'Document';
   },
   render: function() {
-    console.log('render!');
+    this.showVisibleContent();
     this.hidePreloader();
     this.addFSLinkAndInfo();
-    return this.paintMatrix();
+    this.paintMatrix();
+    this.initEmbedModal('assay_network');
+    return this.activateModals();
   },
   addFSLinkAndInfo: function() {
     $(this.el).find('.fullscreen-link').html(Handlebars.compile($('#Handlebars-Document-DAN-FullScreenLink').html())({

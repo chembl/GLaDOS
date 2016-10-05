@@ -1,0 +1,23 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Document Assay Network{% endblock %}
+
+{% block content %}
+
+  <div id="DocAssayNetwork" >
+   {% with is_dynamic=True  %}
+     {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
+   {% endwith %}
+
+  </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork(CHEMBL_ID);
+var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
+documentAssayNetwork.fetch();
+
+{% endblock %}
