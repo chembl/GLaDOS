@@ -10,10 +10,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
   render: function() {
     console.log('render!');
     this.paintMatrix();
-    return this.hidePreloader();
+    this.hidePreloader();
+    return $(this.el).find('select').material_select();
   },
   paintMatrix: function() {
-    var cell, colNum, colourDomain, columns, compsTargets, currentProperty, elemWidth, fillRow, getCellColour, getXCoord, getYCoord, height, links, margin, maxVal, minVal, numColumns, numRows, row, rowNum, rows, svg, value, width, _i, _j, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillRow, getCellColour, getXCoord, getYCoord, height, inferPropsType, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
     console.log('painting matrix');
     compsTargets = {
       "columns": [
@@ -40,51 +41,74 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         0: {
           0: {
             'pchembl': 1,
-            'num_bioactivities': 20
+            'num_bioactivities': 0,
+            'assay_type': 'U'
           },
           1: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 10,
+            'assay_type': 'P'
           },
           2: {
-            pchembl: 2
+            pchembl: 2,
+            'num_bioactivities': 0,
+            'assay_type': 'B'
           }
         },
         1: {
           0: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 0,
+            'assay_type': 'A'
           },
           1: {
-            pchembl: 3
+            pchembl: 3,
+            'num_bioactivities': 20,
+            'assay_type': 'T'
           },
           2: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 0,
+            'assay_type': 'F'
           }
         },
         2: {
           0: {
-            pchembl: 4
+            pchembl: 4,
+            'num_bioactivities': 0,
+            'assay_type': 'U'
           },
           1: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 30,
+            'assay_type': 'P'
           },
           2: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 0,
+            'assay_type': 'B'
           }
         },
         3: {
           0: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 0,
+            'assay_type': 'A'
           },
           1: {
-            pchembl: 0
+            pchembl: 0,
+            'num_bioactivities': 40,
+            'assay_type': 'T'
           },
           2: {
-            pchembl: 5
+            pchembl: 5,
+            'num_bioactivities': 0,
+            'assay_type': 'F'
           }
         }
       }
     };
-    currentProperty = 'pchembl';
+    currentProperty = 'assay_type';
     margin = {
       top: 70,
       right: 0,
@@ -112,27 +136,74 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
-    minVal = Number.MAX_VALUE;
-    maxVal = Number.MIN_VALUE;
-    for (rowNum in links) {
-      row = links[rowNum];
-      for (colNum in row) {
-        cell = row[colNum];
-        value = cell[currentProperty];
-        if (value > maxVal) {
-          maxVal = value;
-        }
-        if (value < minVal) {
-          minVal = value;
+    inferPropsType = function(links, currentProperty) {
+      var cell, colNum, datum, row, rowNum, type;
+      for (rowNum in links) {
+        row = links[rowNum];
+        for (colNum in row) {
+          cell = row[colNum];
+          datum = cell[currentProperty];
+          if (datum != null) {
+            type = typeof datum;
+            return type;
+          }
         }
       }
-    }
-    colourDomain = [minVal, maxVal];
-    console.log('max value: ', maxVal);
-    console.log('min value: ', minVal);
-    getCellColour = d3.scale.linear().domain(colourDomain).range(["#FFFFFF", Settings.EMBL_GREEN]);
+    };
+    buildNumericColourScale = function(links, currentProperty) {
+      var cell, colNum, colourDomain, maxVal, minVal, row, rowNum, scale, value;
+      minVal = Number.MAX_VALUE;
+      maxVal = Number.MIN_VALUE;
+      for (rowNum in links) {
+        row = links[rowNum];
+        for (colNum in row) {
+          cell = row[colNum];
+          value = cell[currentProperty];
+          if (value > maxVal) {
+            maxVal = value;
+          }
+          if (value < minVal) {
+            minVal = value;
+          }
+        }
+      }
+      colourDomain = [minVal, maxVal];
+      console.log('max value: ', maxVal);
+      console.log('min value: ', minVal);
+      scale = d3.scale.linear().domain(colourDomain).range(["#FFFFFF", Settings.EMBL_GREEN]);
+      return scale;
+    };
+    buildTextColourScale = function(links, currentProperty) {
+      var cell, colNum, domain, row, rowNum, scale;
+      domain = [];
+      for (rowNum in links) {
+        row = links[rowNum];
+        for (colNum in row) {
+          cell = row[colNum];
+          domain.push(cell[currentProperty]);
+        }
+      }
+      console.log('domain: ', domain);
+      scale = d3.scale.ordinal().domain(domain).range(d3.scale.category20().range());
+      return scale;
+    };
+    defineColourScale = function(links, currentProperty) {
+      var scale, type;
+      type = inferPropsType(links, currentProperty);
+      console.log('type is: ', type);
+      scale = (function() {
+        switch (false) {
+          case type !== 'number':
+            return buildNumericColourScale(links, currentProperty);
+          case type !== 'string':
+            return buildTextColourScale(links, currentProperty);
+        }
+      })();
+      return scale;
+    };
+    getCellColour = defineColourScale(links, currentProperty);
     fillRow = function(row, rowNumber) {
-      var cells, dataList, key, _ref;
+      var cells, dataList, key, value, _ref;
       console.log('row: ', rowNumber);
       console.log('cells: ', links[rowNumber]);
       dataList = [];
@@ -162,8 +233,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return "translate(" + getXCoord(colNum) + ")rotate(-90)";
     });
     columns.append("line").attr("x1", -width);
-    return columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
+    columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
+    });
+    return $(this.el).find(".select-property").on("change", function() {
+      var t;
+      if (!(this.value != null)) {
+        return;
+      }
+      currentProperty = this.value;
+      console.log('current property: ', currentProperty);
+      getCellColour = defineColourScale(links, currentProperty);
+      t = svg.transition().duration(2500);
+      return t.selectAll(".vis-cell").style("fill", function(d) {
+        return getCellColour(d[currentProperty]);
+      });
     });
   }
 });

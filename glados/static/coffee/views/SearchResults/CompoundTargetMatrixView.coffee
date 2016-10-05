@@ -14,6 +14,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintMatrix()
     @hidePreloader()
 
+    $(@el).find('select').material_select()
+
   paintMatrix: ->
 
     console.log 'painting matrix'
@@ -53,24 +55,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         #source Target
         0: {
           # destination Compound
-          0: {'pchembl': 1, 'num_bioactivities': 20} # this means target 0 is connected to compound 0 through an assay with a value of 1
-          1: {pchembl: 0}
-          2: {pchembl: 2}
+          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U'} # this means target 0 is connected to compound 0 through an assay with a value of 1
+          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P'}
+          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B'}
         }
         1: {
-          0: {pchembl: 0}
-          1: {pchembl: 3}
-          2: {pchembl: 0}
+          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
+          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T'}
+          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F'}
         }
         2: {
-          0: {pchembl: 4}
-          1: {pchembl: 0}
-          2: {pchembl: 0}
+          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U'}
+          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P'}
+          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B'}
         }
         3: {
-          0: {pchembl: 0}
-          1: {pchembl: 0}
-          2: {pchembl: 5}
+          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
+          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T'}
+          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F'}
         }
 
 
@@ -82,7 +84,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # pre-configuration
     # --------------------------------------
 
-    currentProperty = 'pchembl'
+    currentProperty = 'assay_type'
 
     margin =
       top: 70
@@ -135,30 +137,74 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..numColumns])
       .rangeBands([0, width])
 
-    minVal = Number.MAX_VALUE
-    maxVal = Number.MIN_VALUE
-    for rowNum, row of links
-      for colNum, cell of row
-        value = cell[currentProperty]
-        if value > maxVal
-          maxVal = value
-        if value < minVal
-          minVal = value
+    # infers type from the first non null/undefined value,
+    # this will be used to generate the correct scale.
+    inferPropsType = (links, currentProperty) ->
 
-    colourDomain = [minVal, maxVal]
+      for rowNum, row of links
+        for colNum, cell of row
+          datum = cell[currentProperty]
+          if datum?
+            type =  typeof datum
+            return type
 
-    console.log 'max value: ', maxVal
-    console.log 'min value: ', minVal
+    # generates a scale for when the data is numeric
+    buildNumericColourScale = (links, currentProperty) ->
 
-    getCellColour = d3.scale.linear()
-      .domain(colourDomain)
-      .range(["#FFFFFF", Settings.EMBL_GREEN])
+      minVal = Number.MAX_VALUE
+      maxVal = Number.MIN_VALUE
+      for rowNum, row of links
+        for colNum, cell of row
+          value = cell[currentProperty]
+          if value > maxVal
+            maxVal = value
+          if value < minVal
+            minVal = value
+
+      colourDomain = [minVal, maxVal]
+
+      console.log 'max value: ', maxVal
+      console.log 'min value: ', minVal
+
+      scale = d3.scale.linear()
+        .domain(colourDomain)
+        .range(["#FFFFFF", Settings.EMBL_GREEN])
+
+      return scale
+
+    # generates a scale for when the data is numeric
+    buildTextColourScale = (links, currentProperty) ->
+
+      domain = []
+
+      for rowNum, row of links
+        for colNum, cell of row
+          domain.push cell[currentProperty]
+
+      console.log 'domain: ', domain
+      scale = d3.scale.ordinal()
+        .domain(domain)
+        .range(d3.scale.category20().range())
+
+      return scale
+
+
+    defineColourScale = (links, currentProperty)->
+
+      type = inferPropsType links, currentProperty
+      console.log 'type is: ', type
+      scale = switch
+        when type == 'number' then buildNumericColourScale(links, currentProperty)
+        when type == 'string' then buildTextColourScale(links, currentProperty)
+
+      return scale
+
+
+    getCellColour = defineColourScale(links, currentProperty)
 
     # --------------------------------------
     # Add rows
     # --------------------------------------
-
-
     fillRow = (row, rowNumber) ->
 
       console.log 'row: ', rowNumber
@@ -225,3 +271,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .attr('fill', '#1b5e20')
       .text((d, i) -> d.name )
+
+    # --------------------------------------
+    # property selector
+    # --------------------------------------
+
+    $(@el).find(".select-property").on "change", () ->
+
+      if !@value?
+        return
+
+      currentProperty = @value
+      console.log 'current property: ', currentProperty
+
+      getCellColour = defineColourScale(links, currentProperty)
+
+      t = svg.transition().duration(2500)
+      t.selectAll(".vis-cell").style("fill", (d) -> getCellColour(d[currentProperty]) )
+
