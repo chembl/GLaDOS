@@ -91,7 +91,6 @@ DANViewExt = {
     };
     fillRow = function(row) {
       var cell;
-      console.log('g elem: ', this);
       return cell = d3.select(this).selectAll(".dan-cell").data(row).enter().append("rect").attr("class", "cell").attr("x", function(d) {
         return x(d.x);
       }).attr("width", x.rangeBand()).attr("height", x.rangeBand()).style("fill-opacity", function(d) {
@@ -108,7 +107,6 @@ DANViewExt = {
       if (color_value === 'assay_type') {
         as1 = nodes[d.x].assay_type;
         as2 = nodes[d.y].assay_type;
-        console.log('as1: ', as1);
         color1 = assayType2Color[as1].clone();
         color2 = assayType2Color[as2].clone();
       } else {
@@ -129,17 +127,14 @@ DANViewExt = {
       left: 90
     };
     elemWidth = $(this.el).width();
-    console.log('ELEMENT WIDTH: ', elemWidth);
     if (typeof EMBEDED !== "undefined" && EMBEDED !== null) {
       baseWidth = window.innerWidth;
     } else {
       baseWidth = elemWidth;
     }
+    console.log('BASE WIDTH: ', baseWidth);
     scaleWidthFor = d3.scale.linear().domain([1, 20]).range([0.1 * baseWidth, 0.8 * baseWidth]).clamp(true);
     width = scaleWidthFor(numNodes);
-    console.log('scale: ', scaleWidthFor);
-    console.log('width: ', width);
-    console.log('elem width: ', elemWidth);
     height = width;
     x = d3.scale.ordinal().rangeBands([0, width]);
     z = d3.scale.linear().domain([0, 4]).clamp(true);
@@ -160,8 +155,6 @@ DANViewExt = {
         };
       });
     });
-    console.log('Matrix!:');
-    console.log(matrix);
     assays.links.forEach(function(link) {
       matrix[link.source][link.target].z = link.value;
       matrix[link.target][link.source].z = link.value;
@@ -186,18 +179,10 @@ DANViewExt = {
         return d3.ascending(nodes[a].assay_test_type, nodes[b].assay_test_type);
       })
     };
-    console.log('Nodes:');
-    console.log(nodes);
-    console.log('Orders:');
-    console.log(orders);
     max = d3.max(assays.links, function(d) {
       return d.value;
     });
-    console.log('orders counts:');
-    console.log(orders.count);
     x.domain(orders.count);
-    console.log('Orders count:');
-    console.log(orders);
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     row = svg.selectAll('.dan-row').data(matrix).enter().append('g').attr('class', 'dan-row').attr('transform', function(d, i) {
       return 'translate(0,' + x(i) + ')';
@@ -256,7 +241,6 @@ DANViewExt = {
     };
     return draw_legend = function(data) {
       var legend;
-      console.log('drawing legend');
       legend = d3.selectAll(".legend-container").append("svg").attr("class", "legend").attr("width", 100).attr("height", 150).selectAll("g").data($.map(data, function(val, key) {
         return {
           label: key,

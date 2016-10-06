@@ -19,16 +19,11 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
           allAssays[newAssay.assay_chembl_id] = newAssay;
           currentActsUrl = Settings.WS_BASE_URL + 'activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000';
           activitiesListsRequested++;
-          console.log('num activities lists requested: ', activitiesListsRequested);
           return triggerActivityRequest(currentActsUrl);
         });
         nextUrl = response.page_meta.next;
         if (nextUrl != null) {
           return triggerAssayRequest(Settings.WS_HOSTNAME + nextUrl);
-        } else {
-          console.log('ALL ASSAYS OBTAINED');
-          console.log(allAssays);
-          return console.log(_.pluck(allAssays, 'assay_chembl_id'));
         }
       });
       return getAssaysGroup.fail(function() {
@@ -38,13 +33,11 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
     triggerAssayRequest(assaysUrl);
     triggerActivityRequest = function(currentActsUrl) {
       var getActivityGroup;
-      console.log('requesting activities: ', currentActsUrl);
       getActivityGroup = $.getJSON(currentActsUrl, function(response) {
         var newActivities, nextUrl;
         newActivities = response.activities;
         $.each(newActivities, function(index, newActivity) {
           var currentAssay;
-          console.log('new activity from assay: ', newActivity.assay_chembl_id, ' to molecule: ', newActivity.molecule_chembl_id);
           currentAssay = allAssays[newActivity.assay_chembl_id];
           if (currentAssay.compound_act_list == null) {
             currentAssay.compound_act_list = {};
@@ -53,11 +46,9 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
         });
         nextUrl = response.page_meta.next;
         if (nextUrl != null) {
-          triggerActivityRequest(Settings.WS_HOSTNAME + nextUrl);
-          return console.log('requesting more activities');
+          return triggerActivityRequest(Settings.WS_HOSTNAME + nextUrl);
         } else {
           activitiesListsReceived++;
-          console.log('num lists received: ', activitiesListsReceived);
           return checkIfAllInfoReady();
         }
       });
@@ -75,23 +66,15 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
           assay.name = assay.assay_chembl_id;
           return nodes.push(assay);
         });
-        console.log('ALL READY!');
-        console.log(nodes);
         $.each(nodes, function(i, assayI) {
           var compoundsI;
-          console.log('I: ', i);
-          console.log('I is: ', assayI.assay_chembl_id);
           compoundsI = assayI.compound_act_list;
           return $.each(nodes, function(j, assayJ) {
             var compoundsJ, molecule_chembl_id, numEqual, val;
             if (i > j) {
               return;
             }
-            console.log('J: ', j);
-            console.log('J is: ', assayJ.assay_chembl_id);
             compoundsJ = assayJ.compound_act_list;
-            console.log('comparing ', assayI.assay_chembl_id, ' with ', assayJ.assay_chembl_id);
-            console.log('lists: ', compoundsI, ' , ', compoundsJ);
             numEqual = 0;
             for (molecule_chembl_id in compoundsI) {
               val = compoundsI[molecule_chembl_id];
@@ -99,18 +82,13 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
                 numEqual++;
               }
             }
-            links.push({
+            return links.push({
               "source": i,
               "target": j,
               "value": numEqual
             });
-            console.log(numEqual, ' are equal!');
-            return console.log('^^^^');
           });
         });
-        console.log('nodes: ', nodes);
-        console.log('links ', links);
-        console.log('contxt: ', this);
         answer = {
           'nodes': nodes,
           'links': links

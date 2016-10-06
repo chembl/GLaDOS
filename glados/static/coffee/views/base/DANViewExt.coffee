@@ -95,7 +95,6 @@ DANViewExt =
 
 
     fillRow = (row) ->
-      console.log 'g elem: ', @
       cell = d3.select(this).selectAll(".dan-cell")
               .data(row)
               .enter().append("rect")
@@ -120,7 +119,6 @@ DANViewExt =
 
           as1 = nodes[d.x].assay_type
           as2 = nodes[d.y].assay_type
-          console.log 'as1: ', as1
           color1 = assayType2Color[as1].clone()
           color2 = assayType2Color[as2].clone()
 
@@ -149,13 +147,13 @@ DANViewExt =
 
     elemWidth = $(@el).width()
 
-    console.log 'ELEMENT WIDTH: ', elemWidth
-
     # when it is embedded the visualization width must be taken based on the window size!
     if EMBEDED?
       baseWidth = window.innerWidth
     else
       baseWidth = elemWidth
+
+    console.log 'BASE WIDTH: ', baseWidth
 
     scaleWidthFor = d3.scale.linear()
       .domain([1, 20])
@@ -163,10 +161,6 @@ DANViewExt =
       .clamp(true)
 
     width = scaleWidthFor numNodes
-
-    console.log 'scale: ', scaleWidthFor
-    console.log 'width: ', width
-    console.log 'elem width: ', elemWidth
 
     height = width
 
@@ -203,9 +197,6 @@ DANViewExt =
         }
       )
 
-    console.log 'Matrix!:'
-    console.log matrix
-
     # Convert links to matrix; count character occurrences.
     assays.links.forEach (link) ->
       matrix[link.source][link.target].z = link.value
@@ -231,21 +222,11 @@ DANViewExt =
         d3.ascending nodes[a].assay_test_type, nodes[b].assay_test_type
       )
 
-    console.log 'Nodes:'
-    console.log nodes
-
-    console.log 'Orders:'
-    console.log orders
 
     max = d3.max assays.links, (d) -> d.value
 
     # The default sort order.
-    console.log 'orders counts:'
-    console.log orders.count
     x.domain(orders.count)
-
-    console.log 'Orders count:'
-    console.log orders
 
     svg.append("rect")
       .attr("class", "background")
@@ -350,7 +331,6 @@ DANViewExt =
       .style("fill", colorise)
 
     draw_legend = (data) ->
-      console.log('drawing legend')
       legend = d3.selectAll(".legend-container").append("svg")
         .attr("class", "legend")
         .attr("width", 100)
