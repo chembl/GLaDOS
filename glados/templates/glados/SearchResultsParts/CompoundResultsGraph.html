@@ -1,0 +1,29 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound results graph{% endblock %}
+
+
+{% block content %}
+
+<div class="container main-container">
+
+  <h2>
+    <span><i class="icon icon-generic" data-icon="g"></i>Search Results Graph</span>
+  </h2>
+
+  <div id='CompResultsGraph'>
+
+    <div id="BCK-CompResultsGraphContainer">
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var compResGraphView = SearchResultsApp.initCompResultsGraphView($('#CompResultsGraph'));
+compResGraphView.render();
+
+{% endblock %}

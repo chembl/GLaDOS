@@ -4,6 +4,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @$vis_elem = $('#BCK-CompTargMatrixContainer')
+    #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
 
@@ -12,7 +13,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'render!'
 
     @paintMatrix()
-    @hidePreloader()
 
     $(@el).find('select').material_select()
 

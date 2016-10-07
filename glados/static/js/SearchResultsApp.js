@@ -43,6 +43,14 @@ SearchResultsApp = (function() {
     return compTargMatrixView;
   };
 
+  SearchResultsApp.initCompResultsGraphView = function(topLevelElem) {
+    var compResGraphView;
+    compResGraphView = new CompoundResultsGraphView({
+      el: topLevelElem
+    });
+    return compResGraphView;
+  };
+
   return SearchResultsApp;
 
 })();

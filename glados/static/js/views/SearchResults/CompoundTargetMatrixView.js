@@ -10,7 +10,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
   render: function() {
     console.log('render!');
     this.paintMatrix();
-    this.hidePreloader();
     return $(this.el).find('select').material_select();
   },
   paintMatrix: function() {
