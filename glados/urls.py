@@ -119,13 +119,11 @@ urlpatterns = [
   # Search Results
   #----------------------------------------------------------------------------------------
   url(r'^search_results/$',
-      DirectTemplateView.as_view(template_name="glados/SearchResults.html"), ),
+      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 
-  #----------------------------------------------------------------------------------------
   # Compound vs Target Matrix
-  #----------------------------------------------------------------------------------------
   url(r'^compound_target_matrix/$',
-      DirectTemplateView.as_view(template_name="glados/CompoundTargetMatrix.html"), ),
+      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrix.html"), ),
 
 
 ]
