@@ -143,7 +143,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Draw dots
     # --------------------------------------
-    svg.selectAll(".dot")
+    svg.selectAll("dot")
       .data(molecules)
       .enter().append("circle")
       .attr("class", "dot")
@@ -153,13 +153,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Draw texts
     # --------------------------------------
-    svg.selectAll(".label")
+    svg.selectAll("label")
       .data(molecules)
       .enter().append("text")
       .attr("class", "label")
-      .attr("x", (d) -> getXCoordFor(d[currentPropertyX]) + 5)
+      .attr("transform", (d) -> "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)" )
       .attr("font-size", "10px")
-      .text((d) -> d[labelerProperty] )
-
+      .text((d) -> d[labelerProperty] + ',' + d[currentPropertyX])
 
 

@@ -110,13 +110,13 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     getXCoordFor = buildLinearNumericScale(molecules, currentPropertyX);
     xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
     svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
-    svg.selectAll(".dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function(d) {
+    svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function(d) {
       return getXCoordFor(d[currentPropertyX]);
     });
-    return svg.selectAll(".label").data(molecules).enter().append("text").attr("class", "label").attr("x", function(d) {
-      return getXCoordFor(d[currentPropertyX]) + 5;
+    return svg.selectAll("label").data(molecules).enter().append("text").attr("class", "label").attr("transform", function(d) {
+      return "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)";
     }).attr("font-size", "10px").text(function(d) {
-      return d[labelerProperty];
+      return d[labelerProperty] + ',' + d[currentPropertyX];
     });
   }
 });
