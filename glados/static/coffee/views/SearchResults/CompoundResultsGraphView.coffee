@@ -89,10 +89,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     XAXIS = 'x-axis'
     YAXIS = 'y-axis'
+    COLOUR = 'colour'
 
     labelerProperty = 'molecule_chembl_id'
     currentPropertyX = 'mol_wt'
     currentPropertyY = 'mol_wt'
+    currentPropertyColour = 'mol_wt'
 
     elemWidth = $(@el).width()
     height = width = 0.8 * elemWidth
@@ -146,6 +148,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       range = switch
         when axis == XAXIS then [padding.left, width - padding.right]
         when axis == YAXIS then [height - padding.bottom, padding.top]
+        when axis == COLOUR then ['#ede7f6', '#311b92']
 
       console.log 'range: ', range
 
@@ -157,6 +160,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # when the data is string, range is 0 to canvas width,
     # taking into account the padding
     buildOrdinalStringScale = (dataList, axis) ->
+
+      if axis == COLOUR
+        return d3.scale.category20()
+          .domain(dataList)
 
       range = switch
         when axis == XAXIS then [padding.text_left, width - padding.right]
@@ -181,8 +188,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
     getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
-    console.log 'y scale domain: ', getYCoordFor.domain()
-    console.log 'y scale range: ', getYCoordFor.range()
+    getColourFor = getScaleForProperty(molecules, currentPropertyColour, COLOUR)
+
+    console.log 'color scale range: ', getColourFor.range()
+    console.log 'color scale domain: ', getColourFor.domain()
 
     # --------------------------------------
     # Add axes
@@ -218,9 +227,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(molecules)
       .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 5)
+      .attr("r", 10)
       .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
       .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
+      .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
+      .attr('stroke', 'black')
 
     # --------------------------------------
     # Draw texts
@@ -233,7 +244,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
         getYCoordFor(d[currentPropertyY]) + ")" )
       .attr("font-size", "10px")
-      .text((d) -> d[labelerProperty] + ',' + d[currentPropertyX])
+      .text((d) -> d[labelerProperty])
 
     # --------------------------------------
     # Axis selectors
@@ -285,6 +296,21 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("transform", (d) ->
           return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
           getYCoordFor(d[currentPropertyY]) + ")" )
+
+    $(@el).find(".select-colour").on "change", () ->
+
+      if !@value?
+        return
+
+      currentPropertyColour = @value
+      console.log 'colour axis: ', currentPropertyColour
+
+      getColourFor = getScaleForProperty(molecules, currentPropertyColour, COLOUR)
+
+      t = svg.transition().duration(1000)
+
+      t.selectAll("circle.dot")
+        .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
 
 
 
