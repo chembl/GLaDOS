@@ -9,6 +9,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
   render: ->
 
     @paintGraph()
+    $(@el).find('select').material_select()
 
   paintGraph: ->
 
@@ -130,11 +131,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
 
     svg.append("g")
-      .attr("class", "x axis")
+      .attr("class", "x-axis")
       .attr("transform", "translate(0," + (height - 20) + ")")
       .call(xAxis)
       .append("text")
-      .attr("class", "label")
+      .attr("class", "axis-label")
       .attr("x", width)
       .attr("y", -6)
       .style("text-anchor", "end")
@@ -153,12 +154,40 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Draw texts
     # --------------------------------------
-    svg.selectAll("label")
+    svg.selectAll("dot-label")
       .data(molecules)
       .enter().append("text")
-      .attr("class", "label")
+      .attr("class", "dot-label")
       .attr("transform", (d) -> "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)" )
       .attr("font-size", "10px")
       .text((d) -> d[labelerProperty] + ',' + d[currentPropertyX])
+
+    # --------------------------------------
+    # Axis selectors
+    # --------------------------------------
+
+    $(@el).find(".select-xaxis").on "change", () ->
+
+      if !@value?
+        return
+
+      currentPropertyX = @value
+      console.log 'x axis: ', currentPropertyX
+
+      getXCoordFor = buildLinearNumericScale( molecules, currentPropertyX)
+      xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
+
+      t = svg.transition().duration(1000)
+
+      t.selectAll("g.x-axis")
+        .call(xAxis)
+      t.selectAll('text.axis-label')
+        .text(currentPropertyX)
+      t.selectAll("circle.dot")
+        .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
+      t.selectAll("text.dot-label")
+        .attr("transform", (d) -> "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)" )
+
+
 
 

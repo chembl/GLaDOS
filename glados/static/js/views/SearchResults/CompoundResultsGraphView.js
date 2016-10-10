@@ -8,7 +8,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return updateViewProxy = this.setUpResponsiveRender();
   },
   render: function() {
-    return this.paintGraph();
+    this.paintGraph();
+    return $(this.el).find('select').material_select();
   },
   paintGraph: function() {
     var buildLinearNumericScale, currentPropertyX, elemWidth, getXCoordFor, height, labelerProperty, margin, molecules, svg, width, xAxis;
@@ -109,14 +110,33 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     };
     getXCoordFor = buildLinearNumericScale(molecules, currentPropertyX);
     xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
-    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
+    svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "axis-label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
     svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function(d) {
       return getXCoordFor(d[currentPropertyX]);
     });
-    return svg.selectAll("label").data(molecules).enter().append("text").attr("class", "label").attr("transform", function(d) {
+    svg.selectAll("dot-label").data(molecules).enter().append("text").attr("class", "dot-label").attr("transform", function(d) {
       return "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)";
     }).attr("font-size", "10px").text(function(d) {
       return d[labelerProperty] + ',' + d[currentPropertyX];
+    });
+    return $(this.el).find(".select-xaxis").on("change", function() {
+      var t;
+      if (!(this.value != null)) {
+        return;
+      }
+      currentPropertyX = this.value;
+      console.log('x axis: ', currentPropertyX);
+      getXCoordFor = buildLinearNumericScale(molecules, currentPropertyX);
+      xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
+      t = svg.transition().duration(1000);
+      t.selectAll("g.x-axis").call(xAxis);
+      t.selectAll('text.axis-label').text(currentPropertyX);
+      t.selectAll("circle.dot").attr("cx", function(d) {
+        return getXCoordFor(d[currentPropertyX]);
+      });
+      return t.selectAll("text.dot-label").attr("transform", function(d) {
+        return "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)";
+      });
     });
   }
 });
