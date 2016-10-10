@@ -12,7 +12,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $(this.el).find('select').material_select();
   },
   paintGraph: function() {
-    var buildLinearNumericScale, currentPropertyX, elemWidth, getXCoordFor, height, labelerProperty, margin, molecules, svg, width, xAxis;
+    var buildLinearNumericScale, buildOrdinalStringScale, currentPropertyX, elemWidth, getScaleForProperty, getXCoordFor, height, inferPropsType, labelerProperty, margin, molecules, padding, svg, width, xAxis;
     console.log('painting graph');
     molecules = [
       {
@@ -82,8 +82,13 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     margin = {
       top: 20,
       right: 20,
-      bottom: 30,
-      left: 40
+      bottom: 20,
+      left: 20
+    };
+    padding = {
+      right: 20,
+      left: 20,
+      text_left: 60
     };
     labelerProperty = 'molecule_chembl_id';
     currentPropertyX = 'mol_wt';
@@ -91,24 +96,51 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     height = width = 0.8 * elemWidth;
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", width);
-    buildLinearNumericScale = function(objectList, currentProperty) {
-      var maxVal, minVal, obj, scaleDomain, value, _i, _len;
+    inferPropsType = function(dataList) {
+      var datum, type, _i, _len;
+      for (_i = 0, _len = dataList.length; _i < _len; _i++) {
+        datum = dataList[_i];
+        if (datum != null) {
+          type = typeof datum;
+          return type;
+        }
+      }
+    };
+    buildLinearNumericScale = function(dataList) {
+      var datum, maxVal, minVal, scaleDomain, _i, _len;
       minVal = Number.MAX_VALUE;
       maxVal = Number.MIN_VALUE;
-      for (_i = 0, _len = objectList.length; _i < _len; _i++) {
-        obj = objectList[_i];
-        value = obj[currentProperty];
-        if (value > maxVal) {
-          maxVal = value;
+      for (_i = 0, _len = dataList.length; _i < _len; _i++) {
+        datum = dataList[_i];
+        if (datum > maxVal) {
+          maxVal = datum;
         }
-        if (value < minVal) {
-          minVal = value;
+        if (datum < minVal) {
+          minVal = datum;
         }
       }
       scaleDomain = [minVal, maxVal];
-      return d3.scale.linear().domain(scaleDomain).range([0, width]);
+      return d3.scale.linear().domain(scaleDomain).range([padding.left, width - padding.right]);
     };
-    getXCoordFor = buildLinearNumericScale(molecules, currentPropertyX);
+    buildOrdinalStringScale = function(dataList) {
+      return d3.scale.ordinal().domain(dataList).rangePoints([padding.text_left, width - padding.right]);
+    };
+    getScaleForProperty = function(molecules, property) {
+      var dataList, scale, type;
+      dataList = _.pluck(molecules, property);
+      type = inferPropsType(dataList);
+      console.log('type is: ', type);
+      scale = (function() {
+        switch (false) {
+          case type !== 'number':
+            return buildLinearNumericScale(dataList);
+          case type !== 'string':
+            return buildOrdinalStringScale(dataList);
+        }
+      })();
+      return scale;
+    };
+    getXCoordFor = getScaleForProperty(molecules, currentPropertyX);
     xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
     svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "axis-label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
     svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function(d) {
@@ -126,7 +158,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       currentPropertyX = this.value;
       console.log('x axis: ', currentPropertyX);
-      getXCoordFor = buildLinearNumericScale(molecules, currentPropertyX);
+      getXCoordFor = getScaleForProperty(molecules, currentPropertyX);
       xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
       t = svg.transition().duration(1000);
       t.selectAll("g.x-axis").call(xAxis);

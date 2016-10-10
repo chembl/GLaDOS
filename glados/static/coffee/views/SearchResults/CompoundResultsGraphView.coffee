@@ -77,8 +77,14 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     margin =
       top: 20
       right: 20
-      bottom: 30
-      left: 40
+      bottom: 20
+      left: 20
+
+    padding =
+      right:20
+      left: 20
+      text_left: 60
+
 
     labelerProperty = 'molecule_chembl_id'
     currentPropertyX = 'mol_wt'
@@ -105,25 +111,58 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # scales
     # --------------------------------------
-    buildLinearNumericScale = (objectList, currentProperty) ->
+    # infers type from the first non null/undefined value,
+    # this will be used to generate the correct scale.
+    inferPropsType = (dataList) ->
+
+      for datum in dataList
+        if datum?
+          type =  typeof datum
+          return type
+
+    # builds a linear scale to position the circles
+    # when the data is numeric, range is 0 to canvas width,
+    # taking into account the padding
+    buildLinearNumericScale = (dataList) ->
 
       minVal = Number.MAX_VALUE
       maxVal = Number.MIN_VALUE
 
-      for obj in objectList
-        value = obj[currentProperty]
-        if value > maxVal
-          maxVal = value
-        if value < minVal
-          minVal = value
+      for datum in dataList
+        if datum > maxVal
+          maxVal = datum
+        if datum < minVal
+          minVal = datum
 
       scaleDomain = [minVal, maxVal]
 
       return d3.scale.linear()
         .domain(scaleDomain)
-        .range([0, width])
+        .range([padding.left, width - padding.right])
 
-    getXCoordFor = buildLinearNumericScale( molecules, currentPropertyX)
+    # builds an ordinal scale to position the circles
+    # when the data is string, range is 0 to canvas width,
+    # taking into account the padding
+    buildOrdinalStringScale = (dataList) ->
+
+      return d3.scale.ordinal()
+        .domain(dataList)
+        .rangePoints([padding.text_left, width - padding.right])
+
+
+    getScaleForProperty = (molecules, property) ->
+
+      dataList = _.pluck(molecules, property)
+
+      type = inferPropsType(dataList)
+      console.log 'type is: ', type
+      scale = switch
+        when type == 'number' then buildLinearNumericScale(dataList)
+        when type == 'string' then buildOrdinalStringScale(dataList)
+
+      return scale
+
+    getXCoordFor = getScaleForProperty(molecules, currentPropertyX)
 
     # --------------------------------------
     # Add axes
@@ -174,7 +213,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentPropertyX = @value
       console.log 'x axis: ', currentPropertyX
 
-      getXCoordFor = buildLinearNumericScale( molecules, currentPropertyX)
+      getXCoordFor = getScaleForProperty( molecules, currentPropertyX)
       xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
 
       t = svg.transition().duration(1000)
