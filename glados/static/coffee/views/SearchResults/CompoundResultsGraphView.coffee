@@ -84,10 +84,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       right:20
       left: 20
       text_left: 60
+      bottom: 20
+      top: 20
 
+    XAXIS = 'x-axis'
+    YAXIS = 'y-axis'
 
     labelerProperty = 'molecule_chembl_id'
     currentPropertyX = 'mol_wt'
+    currentPropertyY = 'mol_wt'
 
     elemWidth = $(@el).width()
     height = width = 0.8 * elemWidth
@@ -123,7 +128,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # builds a linear scale to position the circles
     # when the data is numeric, range is 0 to canvas width,
     # taking into account the padding
-    buildLinearNumericScale = (dataList) ->
+    buildLinearNumericScale = (dataList, axis) ->
 
       minVal = Number.MAX_VALUE
       maxVal = Number.MIN_VALUE
@@ -136,49 +141,75 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       scaleDomain = [minVal, maxVal]
 
+      console.log 'axis: ', axis
+
+      range = switch
+        when axis == XAXIS then [padding.left, width - padding.right]
+        when axis == YAXIS then [height - padding.bottom, padding.top]
+
+      console.log 'range: ', range
+
       return d3.scale.linear()
         .domain(scaleDomain)
-        .range([padding.left, width - padding.right])
+        .range(range)
 
     # builds an ordinal scale to position the circles
     # when the data is string, range is 0 to canvas width,
     # taking into account the padding
-    buildOrdinalStringScale = (dataList) ->
+    buildOrdinalStringScale = (dataList, axis) ->
+
+      range = switch
+        when axis == XAXIS then [padding.text_left, width - padding.right]
+        when axis == YAXIS then [height - padding.bottom, padding.top]
 
       return d3.scale.ordinal()
         .domain(dataList)
-        .rangePoints([padding.text_left, width - padding.right])
+        .rangePoints(range)
 
 
-    getScaleForProperty = (molecules, property) ->
+    getScaleForProperty = (molecules, property, axis) ->
 
       dataList = _.pluck(molecules, property)
 
       type = inferPropsType(dataList)
       console.log 'type is: ', type
       scale = switch
-        when type == 'number' then buildLinearNumericScale(dataList)
-        when type == 'string' then buildOrdinalStringScale(dataList)
+        when type == 'number' then buildLinearNumericScale(dataList, axis)
+        when type == 'string' then buildOrdinalStringScale(dataList, axis)
 
       return scale
 
-    getXCoordFor = getScaleForProperty(molecules, currentPropertyX)
+    getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
+    getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
+    console.log 'y scale domain: ', getYCoordFor.domain()
+    console.log 'y scale range: ', getYCoordFor.range()
 
     # --------------------------------------
     # Add axes
     # --------------------------------------
-    xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
+    xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
 
     svg.append("g")
       .attr("class", "x-axis")
       .attr("transform", "translate(0," + (height - 20) + ")")
       .call(xAxis)
       .append("text")
-      .attr("class", "axis-label")
+      .attr("class", "x-axis-label")
       .attr("x", width)
       .attr("y", -6)
       .style("text-anchor", "end")
       .text(currentPropertyX)
+
+    yAxis = d3.svg.axis().scale(getYCoordFor).orient("left")
+
+    svg.append("g")
+      .attr("class", "y-axis")
+      .attr("transform", "translate(" + (padding.left - 5) + ", 0)")
+      .call(yAxis)
+      .append("text")
+      .attr("class", "y-axis-label")
+      .attr("x", 0)
+      .text(currentPropertyY)
 
     # --------------------------------------
     # Draw dots
@@ -187,8 +218,9 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(molecules)
       .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", 5)
       .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
+      .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
 
     # --------------------------------------
     # Draw texts
@@ -197,14 +229,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(molecules)
       .enter().append("text")
       .attr("class", "dot-label")
-      .attr("transform", (d) -> "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)" )
+      .attr("transform", (d) ->
+        return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
+        getYCoordFor(d[currentPropertyY]) + ")" )
       .attr("font-size", "10px")
       .text((d) -> d[labelerProperty] + ',' + d[currentPropertyX])
 
     # --------------------------------------
     # Axis selectors
     # --------------------------------------
-
     $(@el).find(".select-xaxis").on "change", () ->
 
       if !@value?
@@ -213,20 +246,45 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentPropertyX = @value
       console.log 'x axis: ', currentPropertyX
 
-      getXCoordFor = getScaleForProperty( molecules, currentPropertyX)
+      getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
       xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
 
       t = svg.transition().duration(1000)
 
       t.selectAll("g.x-axis")
         .call(xAxis)
-      t.selectAll('text.axis-label')
+      t.selectAll('text.x-axis-label')
         .text(currentPropertyX)
       t.selectAll("circle.dot")
         .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
       t.selectAll("text.dot-label")
-        .attr("transform", (d) -> "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)" )
+        .attr("transform", (d) ->
+          return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
+          getYCoordFor(d[currentPropertyY]) + ")" )
 
+    $(@el).find(".select-yaxis").on "change", () ->
+
+      if !@value?
+        return
+
+      currentPropertyY = @value
+      console.log 'y axis: ', currentPropertyY
+
+      getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
+      yAxis = d3.svg.axis().scale(getYCoordFor).orient("left")
+
+      t = svg.transition().duration(1000)
+
+      t.selectAll("g.y-axis")
+        .call(yAxis)
+      t.selectAll('text.y-axis-label')
+        .text(currentPropertyY)
+      t.selectAll("circle.dot")
+        .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
+      t.selectAll("text.dot-label")
+        .attr("transform", (d) ->
+          return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
+          getYCoordFor(d[currentPropertyY]) + ")" )
 
 
 

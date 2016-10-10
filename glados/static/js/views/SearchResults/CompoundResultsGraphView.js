@@ -12,7 +12,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $(this.el).find('select').material_select();
   },
   paintGraph: function() {
-    var buildLinearNumericScale, buildOrdinalStringScale, currentPropertyX, elemWidth, getScaleForProperty, getXCoordFor, height, inferPropsType, labelerProperty, margin, molecules, padding, svg, width, xAxis;
+    var XAXIS, YAXIS, buildLinearNumericScale, buildOrdinalStringScale, currentPropertyX, currentPropertyY, elemWidth, getScaleForProperty, getXCoordFor, getYCoordFor, height, inferPropsType, labelerProperty, margin, molecules, padding, svg, width, xAxis, yAxis;
     console.log('painting graph');
     molecules = [
       {
@@ -88,10 +88,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     padding = {
       right: 20,
       left: 20,
-      text_left: 60
+      text_left: 60,
+      bottom: 20,
+      top: 20
     };
+    XAXIS = 'x-axis';
+    YAXIS = 'y-axis';
     labelerProperty = 'molecule_chembl_id';
     currentPropertyX = 'mol_wt';
+    currentPropertyY = 'mol_wt';
     elemWidth = $(this.el).width();
     height = width = 0.8 * elemWidth;
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -106,8 +111,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
         }
       }
     };
-    buildLinearNumericScale = function(dataList) {
-      var datum, maxVal, minVal, scaleDomain, _i, _len;
+    buildLinearNumericScale = function(dataList, axis) {
+      var datum, maxVal, minVal, range, scaleDomain, _i, _len;
       minVal = Number.MAX_VALUE;
       maxVal = Number.MIN_VALUE;
       for (_i = 0, _len = dataList.length; _i < _len; _i++) {
@@ -120,12 +125,31 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
         }
       }
       scaleDomain = [minVal, maxVal];
-      return d3.scale.linear().domain(scaleDomain).range([padding.left, width - padding.right]);
+      console.log('axis: ', axis);
+      range = (function() {
+        switch (false) {
+          case axis !== XAXIS:
+            return [padding.left, width - padding.right];
+          case axis !== YAXIS:
+            return [height - padding.bottom, padding.top];
+        }
+      })();
+      console.log('range: ', range);
+      return d3.scale.linear().domain(scaleDomain).range(range);
     };
-    buildOrdinalStringScale = function(dataList) {
-      return d3.scale.ordinal().domain(dataList).rangePoints([padding.text_left, width - padding.right]);
+    buildOrdinalStringScale = function(dataList, axis) {
+      var range;
+      range = (function() {
+        switch (false) {
+          case axis !== XAXIS:
+            return [padding.text_left, width - padding.right];
+          case axis !== YAXIS:
+            return [height - padding.bottom, padding.top];
+        }
+      })();
+      return d3.scale.ordinal().domain(dataList).rangePoints(range);
     };
-    getScaleForProperty = function(molecules, property) {
+    getScaleForProperty = function(molecules, property, axis) {
       var dataList, scale, type;
       dataList = _.pluck(molecules, property);
       type = inferPropsType(dataList);
@@ -133,41 +157,67 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       scale = (function() {
         switch (false) {
           case type !== 'number':
-            return buildLinearNumericScale(dataList);
+            return buildLinearNumericScale(dataList, axis);
           case type !== 'string':
-            return buildOrdinalStringScale(dataList);
+            return buildOrdinalStringScale(dataList, axis);
         }
       })();
       return scale;
     };
-    getXCoordFor = getScaleForProperty(molecules, currentPropertyX);
+    getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS);
+    getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS);
+    console.log('y scale domain: ', getYCoordFor.domain());
+    console.log('y scale range: ', getYCoordFor.range());
     xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
-    svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "axis-label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
-    svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function(d) {
+    svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + (height - 20) + ")").call(xAxis).append("text").attr("class", "x-axis-label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
+    yAxis = d3.svg.axis().scale(getYCoordFor).orient("left");
+    svg.append("g").attr("class", "y-axis").attr("transform", "translate(" + (padding.left - 5) + ", 0)").call(yAxis).append("text").attr("class", "y-axis-label").attr("x", 0).text(currentPropertyY);
+    svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 5).attr("cx", function(d) {
       return getXCoordFor(d[currentPropertyX]);
+    }).attr("cy", function(d) {
+      return getYCoordFor(d[currentPropertyY]);
     });
     svg.selectAll("dot-label").data(molecules).enter().append("text").attr("class", "dot-label").attr("transform", function(d) {
-      return "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)";
+      return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
     }).attr("font-size", "10px").text(function(d) {
       return d[labelerProperty] + ',' + d[currentPropertyX];
     });
-    return $(this.el).find(".select-xaxis").on("change", function() {
+    $(this.el).find(".select-xaxis").on("change", function() {
       var t;
       if (!(this.value != null)) {
         return;
       }
       currentPropertyX = this.value;
       console.log('x axis: ', currentPropertyX);
-      getXCoordFor = getScaleForProperty(molecules, currentPropertyX);
+      getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS);
       xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom");
       t = svg.transition().duration(1000);
       t.selectAll("g.x-axis").call(xAxis);
-      t.selectAll('text.axis-label').text(currentPropertyX);
+      t.selectAll('text.x-axis-label').text(currentPropertyX);
       t.selectAll("circle.dot").attr("cx", function(d) {
         return getXCoordFor(d[currentPropertyX]);
       });
       return t.selectAll("text.dot-label").attr("transform", function(d) {
-        return "translate(" + getXCoordFor(d[currentPropertyX]) + ")rotate(45)";
+        return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
+      });
+    });
+    return $(this.el).find(".select-yaxis").on("change", function() {
+      var t;
+      if (!(this.value != null)) {
+        return;
+      }
+      currentPropertyY = this.value;
+      console.log('y axis: ', currentPropertyY);
+      getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS);
+      yAxis = d3.svg.axis().scale(getYCoordFor).orient("left");
+      t = svg.transition().duration(1000);
+      t.selectAll("g.y-axis").call(yAxis);
+      t.selectAll('text.y-axis-label').text(currentPropertyY);
+      t.selectAll("circle.dot").attr("cy", function(d) {
+        return getYCoordFor(d[currentPropertyY]);
+      });
+      return t.selectAll("text.dot-label").attr("transform", function(d) {
+        return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
       });
     });
   }
