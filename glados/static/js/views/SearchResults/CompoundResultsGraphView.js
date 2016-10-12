@@ -12,7 +12,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $(this.el).find('select').material_select();
   },
   paintGraph: function() {
-    var COLOUR, XAXIS, YAXIS, buildLinearNumericScale, buildOrdinalStringScale, currentPropertyColour, currentPropertyX, currentPropertyY, elemWidth, getColourFor, getScaleForProperty, getXCoordFor, getYCoordFor, gridHeight, gridWidth, height, inferPropsType, labelerProperty, mainContainer, margin, molecules, padding, svg, width, xAxis, yAxis;
+    var COLOUR, XAXIS, YAXIS, buildLinearNumericScale, buildOrdinalStringScale, calculateDotsCoordinates, calculateTextsCoordinates, currentPropertyColour, currentPropertyX, currentPropertyY, elemWidth, getColourFor, getScaleForProperty, getXCoordFor, getYCoordFor, gridHeight, gridWidth, handleZoom, height, inferPropsType, labelerProperty, mainContainer, molecules, padding, resetZoom, svg, width, xAxis, yAxis, zoom;
     console.log('painting graph');
     molecules = [
       {
@@ -79,14 +79,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
         mol_wt: 25.0
       }
     ];
-    margin = {
-      top: 20,
-      right: 20,
-      bottom: 20,
-      left: 20
-    };
     padding = {
-      right: 20,
+      right: 60,
       left: 60,
       text_left: 60,
       bottom: 40,
@@ -105,8 +99,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     gridWidth = width - padding.left - padding.right;
     mainContainer = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width).attr('height', height);
     mainContainer.append("rect").attr("class", "background").attr({
-      'fill': '#ddd'
-    }).attr("width", width).attr("height", height);
+      'fill': 'white'
+    }).attr("width", width).attr("height", height).attr('stroke', 'black');
     svg = mainContainer.append('svg').attr('width', width).attr('height', height).append("g");
     inferPropsType = function(dataList) {
       var datum, type, _i, _len;
@@ -185,18 +179,36 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     svg.append("g").attr("class", "x-axis").attr("transform", "translate(0," + (height - padding.bottom) + ")").call(xAxis).append("text").attr("class", "x-axis-label").attr("x", width).attr("y", -6).style("text-anchor", "end").text(currentPropertyX);
     yAxis = d3.svg.axis().scale(getYCoordFor).orient("left").innerTickSize(-gridWidth).tickPadding(padding.left / 3);
     svg.append("g").attr("class", "y-axis").attr("transform", "translate(" + padding.left + ", 0)").call(yAxis).append("text").attr("class", "y-axis-label").attr("x", 0).attr("y", padding.top - 6).text(currentPropertyY);
-    svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 10).attr("cx", function(d) {
-      return getXCoordFor(d[currentPropertyX]);
-    }).attr("cy", function(d) {
-      return getYCoordFor(d[currentPropertyY]);
-    }).attr("fill", function(d) {
-      return getColourFor(d[currentPropertyColour]);
-    });
-    svg.selectAll("dot-label").data(molecules).enter().append("text").attr("class", "dot-label").attr("transform", function(d) {
-      return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
-    }).attr("font-size", "10px").text(function(d) {
+    calculateDotsCoordinates = function() {
+      return svg.selectAll("circle.dot").attr("cx", function(d) {
+        return getXCoordFor(d[currentPropertyX]);
+      }).attr("cy", function(d) {
+        return getYCoordFor(d[currentPropertyY]);
+      }).attr("fill", function(d) {
+        return getColourFor(d[currentPropertyColour]);
+      });
+    };
+    svg.selectAll("dot").data(molecules).enter().append("circle").attr("class", "dot").attr("r", 10);
+    calculateDotsCoordinates();
+    calculateTextsCoordinates = function() {
+      return svg.selectAll("text.dot-label").attr("transform", function(d) {
+        return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
+      });
+    };
+    svg.selectAll("dot-label").data(molecules).enter().append("text").attr("class", "dot-label").attr("font-size", "10px").text(function(d) {
       return d[labelerProperty];
     });
+    calculateTextsCoordinates();
+    handleZoom = function() {
+      console.log('scale: ' + zoom.scale());
+      console.log('translation: ' + zoom.translate());
+      svg.select(".x-axis").call(xAxis);
+      svg.select(".y-axis").call(yAxis);
+      calculateDotsCoordinates();
+      return calculateTextsCoordinates();
+    };
+    zoom = d3.behavior.zoom().x(getXCoordFor).y(getYCoordFor).on("zoom", handleZoom);
+    mainContainer.call(zoom);
     $(this.el).find(".select-xaxis").on("change", function() {
       var t;
       if (!(this.value != null)) {
@@ -204,8 +216,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       currentPropertyX = this.value;
       console.log('x axis: ', currentPropertyX);
+      resetZoom();
       getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS);
       xAxis.scale(getXCoordFor);
+      zoom.x(getXCoordFor);
       t = svg.transition().duration(1000);
       t.selectAll("g.x-axis").call(xAxis);
       t.selectAll('text.x-axis-label').text(currentPropertyX);
@@ -223,8 +237,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       currentPropertyY = this.value;
       console.log('y axis: ', currentPropertyY);
+      resetZoom();
       getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS);
       yAxis.scale(getYCoordFor);
+      zoom.y(getYCoordFor);
       t = svg.transition().duration(1000);
       t.selectAll("g.y-axis").call(yAxis);
       t.selectAll('text.y-axis-label').text(currentPropertyY);
@@ -235,7 +251,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
         return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")";
       });
     });
-    return $(this.el).find(".select-colour").on("change", function() {
+    $(this.el).find(".select-colour").on("change", function() {
       var t;
       if (!(this.value != null)) {
         return;
@@ -247,6 +263,14 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return t.selectAll("circle.dot").attr("fill", function(d) {
         return getColourFor(d[currentPropertyColour]);
       });
+    });
+    resetZoom = function() {
+      zoom.scale(1);
+      zoom.translate([0, 0]);
+      return handleZoom();
+    };
+    return $(this.el).find(".reset-zoom-btn").click(function() {
+      return resetZoom();
     });
   }
 });

@@ -74,14 +74,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # pre-configuration
     # --------------------------------------
-    margin =
-      top: 20
-      right: 20
-      bottom: 20
-      left: 20
-
     padding =
-      right:20
+      right:60
       left: 60
       text_left: 60
       bottom: 40
@@ -112,9 +106,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     mainContainer.append("rect")
       .attr("class", "background")
-      .attr('fill': '#ddd')
+      .attr('fill': 'white')
       .attr("width", width)
       .attr("height", height)
+      .attr('stroke', 'black')
 
     # --------------------------------------
     # Add main canvas
@@ -241,27 +236,52 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Draw dots
     # --------------------------------------
+    calculateDotsCoordinates = ->
+      svg.selectAll("circle.dot")
+        .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
+        .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
+        .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
+
     svg.selectAll("dot")
       .data(molecules)
       .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 10)
-      .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
-      .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
-      .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
 
+    calculateDotsCoordinates()
     # --------------------------------------
     # Draw texts
     # --------------------------------------
+    calculateTextsCoordinates = ->
+      svg.selectAll("text.dot-label")
+        .attr("transform", (d) ->
+          return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' + getYCoordFor(d[currentPropertyY]) + ")" )
+
     svg.selectAll("dot-label")
       .data(molecules)
       .enter().append("text")
       .attr("class", "dot-label")
-      .attr("transform", (d) ->
-        return "translate(" + getXCoordFor(d[currentPropertyX]) + ',' +
-        getYCoordFor(d[currentPropertyY]) + ")" )
       .attr("font-size", "10px")
       .text((d) -> d[labelerProperty])
+
+    calculateTextsCoordinates()
+    # --------------------------------------
+    # Zoom
+    # --------------------------------------
+    handleZoom = ->
+      console.log 'scale: ' + zoom.scale()
+      console.log 'translation: ' + zoom.translate()
+      svg.select(".x-axis").call(xAxis)
+      svg.select(".y-axis").call(yAxis)
+      calculateDotsCoordinates()
+      calculateTextsCoordinates()
+
+    zoom = d3.behavior.zoom()
+      .x(getXCoordFor)
+      .y(getYCoordFor)
+      .on("zoom", handleZoom)
+
+    mainContainer.call(zoom)
 
     # --------------------------------------
     # Axes selectors
@@ -273,9 +293,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       currentPropertyX = @value
       console.log 'x axis: ', currentPropertyX
+      resetZoom()
 
       getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
       xAxis.scale(getXCoordFor)
+      zoom.x(getXCoordFor)
 
       t = svg.transition().duration(1000)
 
@@ -297,9 +319,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       currentPropertyY = @value
       console.log 'y axis: ', currentPropertyY
+      resetZoom()
 
       getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
       yAxis.scale(getYCoordFor)
+      zoom.y(getYCoordFor)
 
       t = svg.transition().duration(1000)
 
@@ -328,6 +352,18 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t.selectAll("circle.dot")
         .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
+
+    # --------------------------------------
+    # Reset zoom
+    # --------------------------------------
+    resetZoom = ->
+      zoom.scale(1)
+      zoom.translate([0,0])
+      handleZoom()
+
+    $(@el).find(".reset-zoom-btn").click ->
+
+      resetZoom()
 
 
 
