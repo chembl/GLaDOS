@@ -82,10 +82,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     padding =
       right:20
-      left: 20
+      left: 60
       text_left: 60
-      bottom: 20
-      top: 20
+      bottom: 40
+      top: 40
 
     XAXIS = 'x-axis'
     YAXIS = 'y-axis'
@@ -99,21 +99,30 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     height = width = 0.8 * elemWidth
 
-    svg = d3.select('#' + @$vis_elem.attr('id'))
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    gridHeight = (height - padding.bottom - padding.top)
+    gridWidth = (width - padding.left - padding.right)
+
+    mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
 
     # --------------------------------------
     # Add background rectangle
     # --------------------------------------
-    svg.append("rect")
+    mainContainer.append("rect")
       .attr("class", "background")
-      .style("fill", "white")
+      .attr('fill': '#ddd')
       .attr("width", width)
-      .attr("height", width)
+      .attr("height", height)
+
+    # --------------------------------------
+    # Add main canvas
+    # --------------------------------------
+    svg = mainContainer.append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .append("g")
 
     # --------------------------------------
     # scales
@@ -196,11 +205,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Add axes
     # --------------------------------------
-    xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
+    xAxis = d3.svg.axis()
+      .scale(getXCoordFor)
+      .orient("bottom")
+      .innerTickSize(-gridHeight)
+      .tickPadding(padding.bottom / 3)
 
     svg.append("g")
       .attr("class", "x-axis")
-      .attr("transform", "translate(0," + (height - 20) + ")")
+      .attr("transform", "translate(0," + (height - padding.bottom) + ")")
       .call(xAxis)
       .append("text")
       .attr("class", "x-axis-label")
@@ -209,15 +222,20 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("text-anchor", "end")
       .text(currentPropertyX)
 
-    yAxis = d3.svg.axis().scale(getYCoordFor).orient("left")
+    yAxis = d3.svg.axis()
+      .scale(getYCoordFor)
+      .orient("left")
+      .innerTickSize(-gridWidth)
+      .tickPadding(padding.left / 3)
 
     svg.append("g")
       .attr("class", "y-axis")
-      .attr("transform", "translate(" + (padding.left - 5) + ", 0)")
+      .attr("transform", "translate(" + (padding.left) + ", 0)")
       .call(yAxis)
       .append("text")
       .attr("class", "y-axis-label")
       .attr("x", 0)
+      .attr("y", padding.top - 6 )
       .text(currentPropertyY)
 
     # --------------------------------------
@@ -231,7 +249,6 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("cx", (d) -> getXCoordFor(d[currentPropertyX]))
       .attr("cy", (d) -> getYCoordFor(d[currentPropertyY]))
       .attr("fill", (d) -> getColourFor(d[currentPropertyColour]))
-      .attr('stroke', 'black')
 
     # --------------------------------------
     # Draw texts
@@ -247,7 +264,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .text((d) -> d[labelerProperty])
 
     # --------------------------------------
-    # Axis selectors
+    # Axes selectors
     # --------------------------------------
     $(@el).find(".select-xaxis").on "change", () ->
 
@@ -258,7 +275,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       console.log 'x axis: ', currentPropertyX
 
       getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
-      xAxis = d3.svg.axis().scale(getXCoordFor).orient("bottom")
+      xAxis.scale(getXCoordFor)
 
       t = svg.transition().duration(1000)
 
@@ -282,7 +299,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       console.log 'y axis: ', currentPropertyY
 
       getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
-      yAxis = d3.svg.axis().scale(getYCoordFor).orient("left")
+      yAxis.scale(getYCoordFor)
 
       t = svg.transition().duration(1000)
 

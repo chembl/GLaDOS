@@ -2,8 +2,24 @@
 
 {% block title %}Compound results graph{% endblock %}
 
+{% block stylesheets %}
+
+<style>
+
+.y-axis line,
+.x-axis line{
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 10,2;
+}
+
+</style>
+
+{% endblock %}
 
 {% block content %}
+
+
 
 <div class="container main-container">
 
