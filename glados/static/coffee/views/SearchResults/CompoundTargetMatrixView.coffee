@@ -4,6 +4,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @$vis_elem = $('#BCK-CompTargMatrixContainer')
+    #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
 
@@ -12,7 +13,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'render!'
 
     @paintMatrix()
-    @hidePreloader()
 
     $(@el).find('select').material_select()
 
@@ -286,6 +286,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       getCellColour = defineColourScale(links, currentProperty)
 
-      t = svg.transition().duration(2500)
+      t = svg.transition().duration(1000)
       t.selectAll(".vis-cell").style("fill", (d) -> getCellColour(d[currentProperty]) )
 

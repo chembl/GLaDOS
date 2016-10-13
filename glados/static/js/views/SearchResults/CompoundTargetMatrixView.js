@@ -10,7 +10,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
   render: function() {
     console.log('render!');
     this.paintMatrix();
-    this.hidePreloader();
     return $(this.el).find('select').material_select();
   },
   paintMatrix: function() {
@@ -244,7 +243,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       currentProperty = this.value;
       console.log('current property: ', currentProperty);
       getCellColour = defineColourScale(links, currentProperty);
-      t = svg.transition().duration(2500);
+      t = svg.transition().duration(1000);
       return t.selectAll(".vis-cell").style("fill", function(d) {
         return getCellColour(d[currentProperty]);
       });

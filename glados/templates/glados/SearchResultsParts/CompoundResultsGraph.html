@@ -1,0 +1,79 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound results graph{% endblock %}
+
+{% block stylesheets %}
+
+<style>
+
+.y-axis line,
+.x-axis line{
+  fill: none;
+  stroke: gray;
+  stroke-dasharray: 10,2;
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="container main-container">
+
+  <h2>
+    <span><i class="icon icon-generic" data-icon="g"></i>Search Results Graph</span>
+  </h2>
+
+  <div id='CompResultsGraph'>
+
+     <div class="row">
+
+      <div class="input-field col s6 m3">
+        <select class="select-xaxis">
+          <option value="mol_wt" selected>mol_wt</option>
+          <option value="max_phase">max_phase</option>
+          <option value="molecule_type">molecule_type</option>
+        </select>
+        <label>X axis:</label>
+      </div>
+
+       <div class="input-field col s6 m3">
+        <select class="select-yaxis">
+          <option value="mol_wt" selected>mol_wt</option>
+          <option value="max_phase">max_phase</option>
+        </select>
+        <label>Y axis:</label>
+      </div>
+
+       <div class="input-field col s6 m3">
+        <select class="select-colour">
+          <option value="mol_wt" selected>mol_wt</option>
+          <option value="max_phase">max_phase</option>
+          <option value="molecule_type">molecule_type</option>
+        </select>
+        <label>Colour by:</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <a class="reset-zoom-btn">reset zoom</a>
+      </div>
+
+    </div>
+
+    <div id="BCK-CompResultsGraphContainer">
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var compResGraphView = SearchResultsApp.initCompResultsGraphView($('#CompResultsGraph'));
+compResGraphView.render();
+
+{% endblock %}

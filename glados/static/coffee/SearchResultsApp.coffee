@@ -42,3 +42,11 @@ class SearchResultsApp
       el: topLevelElem
 
     return compTargMatrixView
+
+  # this initalises the view that shows the compound results graph view
+  @initCompResultsGraphView = (topLevelElem) ->
+
+    compResGraphView = new CompoundResultsGraphView
+      el: topLevelElem
+
+    return compResGraphView

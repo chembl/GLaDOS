@@ -22,7 +22,11 @@ ResponsiviseViewExt =
 
     # the render function is debounced so it waits for the size of the
     # element to be ready
-    debounced_render = _.debounce($.proxy(@render, @), 300)
+    reRender = ->
+      @render()
+      @hidePreloader()
+
+    debounced_render = _.debounce($.proxy(reRender, @), 300)
     updateViewProxy = $.proxy(@updateView, @, debounced_render)
 
     $(window).resize ->
