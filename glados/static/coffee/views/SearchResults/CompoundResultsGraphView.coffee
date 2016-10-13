@@ -84,6 +84,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     XAXIS = 'x-axis'
     YAXIS = 'y-axis'
     COLOUR = 'colour'
+    ORDINAL = 'ORDINAL'
+    LINEAR = 'LINEAR'
 
     labelerProperty = 'molecule_chembl_id'
     currentPropertyX = 'mol_wt'
@@ -156,9 +158,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       console.log 'range: ', range
 
-      return d3.scale.linear()
+      scale = d3.scale.linear()
         .domain(scaleDomain)
         .range(range)
+      scale.type = LINEAR
+
+      return scale
 
     # builds an ordinal scale to position the circles
     # when the data is string, range is 0 to canvas width,
@@ -173,9 +178,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         when axis == XAXIS then [padding.text_left, width - padding.right]
         when axis == YAXIS then [height - padding.bottom, padding.top]
 
-      return d3.scale.ordinal()
+      scale = d3.scale.ordinal()
         .domain(dataList)
         .rangePoints(range)
+      scale.type = ORDINAL
+
+      return scale
 
 
     getScaleForProperty = (molecules, property, axis) ->
@@ -296,6 +304,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       resetZoom()
 
       getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS)
+      console.log 'scale type: ', getXCoordFor.type
       xAxis.scale(getXCoordFor)
       zoom.x(getXCoordFor)
 
@@ -322,6 +331,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       resetZoom()
 
       getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS)
+      console.log 'scale type: ', getYCoordFor.type
       yAxis.scale(getYCoordFor)
       zoom.y(getYCoordFor)
 

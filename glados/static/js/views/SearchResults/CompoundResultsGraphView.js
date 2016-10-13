@@ -12,7 +12,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $(this.el).find('select').material_select();
   },
   paintGraph: function() {
-    var COLOUR, XAXIS, YAXIS, buildLinearNumericScale, buildOrdinalStringScale, calculateDotsCoordinates, calculateTextsCoordinates, currentPropertyColour, currentPropertyX, currentPropertyY, elemWidth, getColourFor, getScaleForProperty, getXCoordFor, getYCoordFor, gridHeight, gridWidth, handleZoom, height, inferPropsType, labelerProperty, mainContainer, molecules, padding, resetZoom, svg, width, xAxis, yAxis, zoom;
+    var COLOUR, LINEAR, ORDINAL, XAXIS, YAXIS, buildLinearNumericScale, buildOrdinalStringScale, calculateDotsCoordinates, calculateTextsCoordinates, currentPropertyColour, currentPropertyX, currentPropertyY, elemWidth, getColourFor, getScaleForProperty, getXCoordFor, getYCoordFor, gridHeight, gridWidth, handleZoom, height, inferPropsType, labelerProperty, mainContainer, molecules, padding, resetZoom, svg, width, xAxis, yAxis, zoom;
     console.log('painting graph');
     molecules = [
       {
@@ -89,6 +89,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
     XAXIS = 'x-axis';
     YAXIS = 'y-axis';
     COLOUR = 'colour';
+    ORDINAL = 'ORDINAL';
+    LINEAR = 'LINEAR';
     labelerProperty = 'molecule_chembl_id';
     currentPropertyX = 'mol_wt';
     currentPropertyY = 'mol_wt';
@@ -113,7 +115,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
     };
     buildLinearNumericScale = function(dataList, axis) {
-      var datum, maxVal, minVal, range, scaleDomain, _i, _len;
+      var datum, maxVal, minVal, range, scale, scaleDomain, _i, _len;
       minVal = Number.MAX_VALUE;
       maxVal = Number.MIN_VALUE;
       for (_i = 0, _len = dataList.length; _i < _len; _i++) {
@@ -138,10 +140,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
         }
       })();
       console.log('range: ', range);
-      return d3.scale.linear().domain(scaleDomain).range(range);
+      scale = d3.scale.linear().domain(scaleDomain).range(range);
+      scale.type = LINEAR;
+      return scale;
     };
     buildOrdinalStringScale = function(dataList, axis) {
-      var range;
+      var range, scale;
       if (axis === COLOUR) {
         return d3.scale.category20().domain(dataList);
       }
@@ -153,7 +157,9 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
             return [height - padding.bottom, padding.top];
         }
       })();
-      return d3.scale.ordinal().domain(dataList).rangePoints(range);
+      scale = d3.scale.ordinal().domain(dataList).rangePoints(range);
+      scale.type = ORDINAL;
+      return scale;
     };
     getScaleForProperty = function(molecules, property, axis) {
       var dataList, scale, type;
@@ -218,6 +224,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('x axis: ', currentPropertyX);
       resetZoom();
       getXCoordFor = getScaleForProperty(molecules, currentPropertyX, XAXIS);
+      console.log('scale type: ', getXCoordFor.type);
       xAxis.scale(getXCoordFor);
       zoom.x(getXCoordFor);
       t = svg.transition().duration(1000);
@@ -239,6 +246,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('y axis: ', currentPropertyY);
       resetZoom();
       getYCoordFor = getScaleForProperty(molecules, currentPropertyY, YAXIS);
+      console.log('scale type: ', getYCoordFor.type);
       yAxis.scale(getYCoordFor);
       zoom.y(getYCoordFor);
       t = svg.transition().duration(1000);
