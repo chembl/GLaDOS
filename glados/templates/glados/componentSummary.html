@@ -4,6 +4,7 @@
 
 {% block custom_handlebars %}
   {% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
+  {% include "glados/DocumentAssayNetwork/DocumentAssayNetworkHBS.html" %}
 {% endblock %}
 
 {% block content %}
@@ -32,9 +33,16 @@
 
   </div>
 
+
+  <div class="divider"></div>
+
   <h3>Document Assay Network:</h3>
 
-</div>
+
+  {% block assay_network %}
+  {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
+  {% endblock %}
+
 
 {% endblock %}
 
@@ -45,8 +53,11 @@ comp3DView = new Compound3DView({
   el: $('#BCK-compound-3dview'),
   model: compound,
   type: 'reduced'});
-
-console.log('fetching compound!');
 compound.fetch();
+
+var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork('CHEMBL1151960');
+var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
+documentAssayNetwork.fetch();
+
 
 {% endblock %}
