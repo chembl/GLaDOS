@@ -2,6 +2,10 @@
 
 {% block title %}Components list{% endblock %}
 
+{% block custom_handlebars %}
+  {% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
+{% endblock %}
+
 {% block content %}
 
 <div class="container main-container">
@@ -10,6 +14,39 @@
     <span><i class="icon icon-functional" data-icon="4"></i>Chembl Visual Components List</span>
   </h2>
 
+  <h3>Compound 3D View:</h3>
+
+  3DView for <a target="_blank" href="/compound_report_card/CHEMBL1163143">CHEMBL1163143</a>.
+  (Requires <a target="_blank" href="https://en.wikipedia.org/wiki/WebGL">WebGL</a>)
+
+  <div id='BCK-compound-3dview' style="height: 100%;">
+
+    <!-- Backbone renders this -->
+     <div class="card-preolader-to-hide">
+
+       <div class="progress">
+         <div class="indeterminate"></div>
+       </div>
+
+     </div>
+
+  </div>
+
+  <h3>Document Assay Network:</h3>
+
 </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+var compound = initCompound('CHEMBL1163143');
+comp3DView = new Compound3DView({
+  el: $('#BCK-compound-3dview'),
+  model: compound,
+  type: 'reduced'});
+
+console.log('fetching compound!');
+compound.fetch();
 
 {% endblock %}

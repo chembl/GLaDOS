@@ -99,6 +99,9 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       model: @model
       type: 'reduced'
 
+    # I can assume here that the model has already been fetched, because the button has been rendered.
+    comp3DView.render()
+
   # --------------------------------------------------------------------
   # Downloads
   # --------------------------------------------------------------------
