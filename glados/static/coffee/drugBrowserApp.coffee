@@ -12,7 +12,7 @@ class DrugBrowserApp
   # Views
   # -------------------------------------------------------------
 
-  # This initialises the view of the broswer as a table. 
+  # This initialises the view of the broswer as a table. No cards involved.
   @initBrowserAsTable = (col, top_level_elem) ->
 
     asTableView = new DrugBrowserTableView
@@ -30,5 +30,17 @@ class DrugBrowserApp
       el: top_level_elem
 
     return infView
+
+  # This initialises the view of the broswer as a table inside a card that is embeddable,
+  # and has all the characteristics of a card view.
+  @initBrowserAsTableCard = (col, top_level_elem) ->
+
+    asTableCardView = new DrugBrowserTableAsCardView
+      collection: col
+      el: top_level_elem
+
+    return asTableCardView
+
+
 
 

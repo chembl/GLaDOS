@@ -35,19 +35,26 @@
 
 
   <div class="divider"></div>
-
   <h3>Document Assay Network:</h3>
-
 
   {% block assay_network %}
   {% include "glados/DocumentReportCardParts/AssayNetwork.html" %}
   {% endblock %}
 
+  <div class="divider"></div>
+  <h3>Item Browsers:</h3>
+
+  <h4>As table:</h4>
+
+  {% block browseAsTable %}
+  {% include "glados/MainPageParts/DrugBrowserParts/BrowserTableAsCard.html" %}
+  {% endblock %}
 
 {% endblock %}
 
 {% block custom_js_inline %}
 
+// compound 3d view
 var compound = initCompound('CHEMBL1163143');
 comp3DView = new Compound3DView({
   el: $('#BCK-compound-3dview'),
@@ -55,9 +62,14 @@ comp3DView = new Compound3DView({
   type: 'reduced'});
 compound.fetch();
 
+// document assay network
 var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork('CHEMBL1151960');
 var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
 documentAssayNetwork.fetch();
 
+//browse as table.
+var drugList = DrugBrowserApp.initDrugList();
+var drugBrowserTableView = DrugBrowserApp.initBrowserAsTableCard(drugList, $('#BCK-BrowserAsTable'));
+drugList.fetch({reset: true});
 
 {% endblock %}
