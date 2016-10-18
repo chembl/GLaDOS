@@ -10,6 +10,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     return this.resource_type = 'Document';
   },
   render: function() {
+    console.log('render! DAN');
     this.showVisibleContent();
     this.hidePreloader();
     this.addFSLinkAndInfo();
