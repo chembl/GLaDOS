@@ -46,11 +46,15 @@
 
   <h4>As table:</h4>
 
-  {% block browseAsTable %}
+  {% block browse_as_table %}
   {% include "glados/MainPageParts/DrugBrowserParts/BrowserTableAsCard.html" %}
   {% endblock %}
 
   <h4>As cards pages:</h4>
+
+  {% block browse_as_card_pages %}
+    {% include "glados/SearchResultsParts/CompoundResultsAsCard.html" %}
+  {% endblock %}
 
 {% endblock %}
 
@@ -73,5 +77,13 @@ documentAssayNetwork.fetch();
 var drugList = DrugBrowserApp.initDrugList();
 var drugBrowserTableView = DrugBrowserApp.initBrowserAsTableCard(drugList, $('#BCK-BrowserAsTable'));
 drugList.fetch({reset: true});
+
+//sample list
+var compoundList = SearchResultsApp.initCompoundsResultsList();
+//browse as card pages
+var compResListAsCardView = SearchResultsApp.initCompResultsListAsCardView(compoundList, $('#BCK-ResultsCardPages'));
+compoundList.fetch();
+
+
 
 {% endblock %}
