@@ -1,14 +1,8 @@
-# This initializes the entities of the compound report card
+# This takes care of handling the compound report card.
 
 # -------------------------------------------------------------
 # Models
 # -------------------------------------------------------------
-initCompound = (chembl_id) ->
-  compound = new Compound
-    molecule_chembl_id: chembl_id
-
-  compound.url = Settings.WS_BASE_URL + 'molecule/' + chembl_id + '.json'
-  return compound
 
 ### *
   * Initializes a molecule forms list given a member compound (not necessarily the parent!)

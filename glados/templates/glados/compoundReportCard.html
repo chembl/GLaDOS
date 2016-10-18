@@ -292,7 +292,7 @@
 var pathname = window.location.pathname;
 var pathnameParts = pathname.split('/')
 CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-var compound = initCompound(CHEMBL_ID);
+var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
 var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
 var moleculeFormsList = initMoleculeFormsList(compound);
 

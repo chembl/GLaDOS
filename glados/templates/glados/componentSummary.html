@@ -61,7 +61,7 @@
 {% block custom_js_inline %}
 
 // compound 3d view
-var compound = initCompound('CHEMBL1163143');
+var compound = new Compound({molecule_chembl_id: 'CHEMBL1163143'});
 comp3DView = new Compound3DView({
   el: $('#BCK-compound-3dview'),
   model: compound,
