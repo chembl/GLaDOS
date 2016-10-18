@@ -5,7 +5,7 @@ Compound3DView = Backbone.View.extend({
   initialize: function(options) {
     this.model.on('change', this.render, this);
     this.type = options.type;
-    return this.getCoords();
+    return console.log(this.model);
   },
   events: function() {
     return {
@@ -17,15 +17,15 @@ Compound3DView = Backbone.View.extend({
     $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
       title: '3D View of ' + this.model.get('molecule_chembl_id')
     }));
-    return this.molVis = new MoleculeVisualisator("render-container", "renderer-canvas", this.model.get('xyz'));
+    return this.getCoordsAndPaint();
   },
   showError: function() {
     return $(this.el).html(Handlebars.compile($('#Handlebars-Compound-3D-error').html())({
       msg: 'There was en error loading the data'
     }));
   },
-  getCoords: function() {
-    var e, f, getCoords, getXYZURL, getXZYcontent, molUrl, setXYZToModel, standardInchi, standardInchiB64;
+  getCoordsAndPaint: function() {
+    var e, f, getCoords, getXYZURL, getXZYcontent, molUrl, setXYZToModelAndPaint, standardInchi, standardInchiB64;
     standardInchi = this.model.get('molecule_structures')['standard_inchi'];
     standardInchiB64 = window.btoa(standardInchi);
     molUrl = Settings.BEAKER_BASE_URL + 'inchi2ctab/' + standardInchiB64;
@@ -44,10 +44,13 @@ Compound3DView = Backbone.View.extend({
         data: url_and_data.data
       });
     };
-    setXYZToModel = function(xyzCoords) {
-      return this.model.set('xyz', xyzCoords);
+    setXYZToModelAndPaint = function(xyzCoords) {
+      this.model.set('xyz', xyzCoords, {
+        silent: true
+      });
+      return this.molVis = new MoleculeVisualisator("render-container", "renderer-canvas", this.model.get('xyz'));
     };
-    f = $.proxy(setXYZToModel, this);
+    f = $.proxy(setXYZToModelAndPaint, this);
     getCoords = $.ajax(molUrl).then(getXYZURL).then(getXZYcontent).then(f);
     e = $.proxy(this.showError, this);
     return getCoords.fail(function() {

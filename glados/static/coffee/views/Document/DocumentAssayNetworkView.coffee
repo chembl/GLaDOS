@@ -13,6 +13,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
   render: ->
 
+    console.log('render! DAN')
     @showVisibleContent()
     @hidePreloader()
     @addFSLinkAndInfo()

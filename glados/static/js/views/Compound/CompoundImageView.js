@@ -86,11 +86,12 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
   },
   init3DView: function() {
     var comp3DView;
-    return comp3DView = new Compound3DView({
+    comp3DView = new Compound3DView({
       el: $('#BCK-compound-3dview'),
       model: this.model,
       type: 'reduced'
     });
+    return comp3DView.render();
   },
   getFilename: function(format) {
     if (format === 'csv') {

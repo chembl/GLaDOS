@@ -30,6 +30,15 @@ DrugBrowserApp = (function() {
     return infView;
   };
 
+  DrugBrowserApp.initBrowserAsTableCard = function(col, top_level_elem) {
+    var asTableCardView;
+    asTableCardView = new DrugBrowserTableAsCardView({
+      collection: col,
+      el: top_level_elem
+    });
+    return asTableCardView;
+  };
+
   return DrugBrowserApp;
 
 })();
