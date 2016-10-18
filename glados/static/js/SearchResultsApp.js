@@ -5,22 +5,24 @@ SearchResultsApp = (function() {
 
   function SearchResultsApp() {}
 
-  SearchResultsApp.initCompoundsResultsList = function() {
-    var compsList;
-    compsList = new CompoundResultsList;
-    return compsList;
+  SearchResultsApp.init = function() {
+    SearchResultsApp.searchModel = null;
+    this.initCompResultsListView($('#BCK-CompoundSearchResults'));
+    this.initDocsResultsListView($('#BCK-DocSearchResults'));
+    return this.search();
   };
 
-  SearchResultsApp.initDocsResultsList = function() {
-    var docsList;
-    docsList = new DocumentResultsList;
-    return docsList;
+  SearchResultsApp.getSearchModel = function() {
+    if (!SearchResultsApp.searchModel) {
+      SearchResultsApp.searchModel = new SearchModel;
+    }
+    return SearchResultsApp.searchModel;
   };
 
-  SearchResultsApp.initCompResultsListView = function(col, top_level_elem) {
+  SearchResultsApp.initCompResultsListView = function(top_level_elem) {
     var compResView;
     compResView = new CompoundResultsListView({
-      collection: col,
+      collection: this.getSearchModel().getCompoundResultsList(),
       el: top_level_elem
     });
     return compResView;
@@ -35,10 +37,10 @@ SearchResultsApp = (function() {
     return compResAsCardView;
   };
 
-  SearchResultsApp.initDocsResultsListView = function(col, top_level_elem) {
+  SearchResultsApp.initDocsResultsListView = function(top_level_elem) {
     var docResView;
     docResView = new DocumentResultsListView({
-      collection: col,
+      collection: this.getSearchModel().getDocumentResultsList(),
       el: top_level_elem
     });
     return docResView;
@@ -58,6 +60,10 @@ SearchResultsApp = (function() {
       el: topLevelElem
     });
     return compResGraphView;
+  };
+
+  SearchResultsApp.search = function() {
+    return this.getSearchModel().search();
   };
 
   return SearchResultsApp;

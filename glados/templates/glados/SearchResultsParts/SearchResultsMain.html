@@ -37,13 +37,6 @@
 {% block custom_js_inline %}
 
 // this lists will come from the results of the search
-var compoundResultsList = SearchResultsApp.initCompoundsResultsList();
-var docsResultsList = SearchResultsApp.initDocsResultsList();
-
-var compResListView = SearchResultsApp.initCompResultsListView(compoundResultsList, $('#BCK-CompoundSearchResults'));
-var docsResListView = SearchResultsApp.initDocsResultsListView(docsResultsList, $('#BCK-DocSearchResults'));
-
-compoundResultsList.fetch({reset: true});
-docsResultsList.fetch({reset: true});
+SearchResultsApp.init();
 
 {% endblock %}
