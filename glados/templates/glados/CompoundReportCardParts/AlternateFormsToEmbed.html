@@ -22,10 +22,11 @@
 {% block custom_js_inline %}
 
 var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var moleculeFormsList = initMoleculeFormsList(compound);
-var compMoleculeFormsListView = initCompMoleculeFormsListView(moleculeFormsList, $('#AlternateFormsCard'));
+var moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound);
+new CompoundMoleculeFormsListView({
+    collection: moleculeFormsList,
+    el: $('#AlternateFormsCard')});
 moleculeFormsList.fetch({reset: true});
 
-console.log(moleculeFormsList)
 
 {% endblock %}

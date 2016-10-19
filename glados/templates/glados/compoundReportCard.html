@@ -289,20 +289,39 @@
 
 {% block custom_js_inline %}
 
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
+CHEMBL_ID = URLProcessor.getRequestedChemblID();
 var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
-var moleculeFormsList = initMoleculeFormsList(compound);
+var mechanismOfActionList = new MechanismOfActionList({});
+mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + CHEMBL_ID;
+var moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound);
 
-var cncView = initCNCView(compound, $('#CNCCard'));
-var compImgView = initCompoundImageView(compound, $('#CNCImageCard'));
-var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
-var calcCompPropView = initCalcCompPropertiesView(compound, $('#CalculatedParentPropertiesCard'));
-var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
-var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
-var compMoleculeFormsListView = initCompMoleculeFormsListView(moleculeFormsList, $('#AlternateFormsCard'))
+new CompoundNameClassificationView({
+    model: compound,
+    el: $('#CNCCard')});
+
+new CompoundImageView({
+    model: compound,
+    el: ('#CNCImageCard')});
+
+new CompoundRepresentationsView({
+    model: compound,
+    el: $('#CompRepsCard')});
+
+new CompoundCalculatedParentPropertiesView({
+    model: compound,
+    el: $('#CalculatedParentPropertiesCard')});
+
+new CompoundMechanismsOfActionView({
+    collection: mechanismOfActionList,
+    el: $('#MechOfActCard')});
+
+new CompoundFeaturesView({
+    model: compound,
+    el: $('#MoleculeFeaturesCard')});
+
+new CompoundMoleculeFormsListView({
+    collection: moleculeFormsList,
+    el: $('#AlternateFormsCard')});
 
 compound.fetch();
 mechanismOfActionList.fetch({reset: true});

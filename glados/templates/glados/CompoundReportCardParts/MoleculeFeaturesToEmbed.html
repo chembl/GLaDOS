@@ -20,7 +20,9 @@
 {% block custom_js_inline %}
 
 var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
+new CompoundFeaturesView({
+    model: compound,
+    el: $('#MoleculeFeaturesCard')});
 compound.fetch();
 
 {% endblock %}

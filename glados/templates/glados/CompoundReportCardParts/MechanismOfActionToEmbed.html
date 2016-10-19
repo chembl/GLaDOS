@@ -22,8 +22,11 @@
 
 {% block custom_js_inline %}
 
-var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
-var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
+var mechanismOfActionList = new MechanismOfActionList({});
+mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + CHEMBL_ID;
+new CompoundMechanismsOfActionView({
+    collection: mechanismOfActionList,
+    el: $('#MechOfActCard')});
 mechanismOfActionList.fetch({reset: true});
 
 {% endblock %}

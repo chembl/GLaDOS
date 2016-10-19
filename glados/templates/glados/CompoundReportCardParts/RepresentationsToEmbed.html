@@ -21,7 +21,9 @@
 {% block custom_js_inline %}
 
 var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
+compRepsView = new CompoundRepresentationsView({
+    model: compound,
+    el: $('#CompRepsCard')});
 compound.fetch();
 
 ButtonsHelper.initCroppedContainers();
