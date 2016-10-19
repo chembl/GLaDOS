@@ -62,17 +62,4 @@
 
 VisualComponentsSummaryApp.init();
 
-//browse as table.
-var drugList = DrugBrowserApp.initDrugList();
-var drugBrowserTableView = DrugBrowserApp.initBrowserAsTableCard(drugList, $('#BCK-BrowserAsTable'));
-drugList.fetch({reset: true});
-
-//sample list
-var compoundList = SearchResultsApp.initCompoundsResultsList();
-//browse as card pages
-var compResListAsCardView = SearchResultsApp.initCompResultsListAsCardView(compoundList, $('#BCK-ResultsCardPages'));
-compoundList.fetch();
-
-
-
 {% endblock %}

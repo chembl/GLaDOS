@@ -17,6 +17,15 @@ class VisualComponentsSummaryApp
     VisualComponentsSummaryApp.initSampleDANView( $('#DAssayNetworkCard'))
     documentAssayNetwork.fetch()
 
+    #browse as table.
+    sampleDrugList = new DrugList({})
+    VisualComponentsSummaryApp.sampleDrugList = sampleDrugList
+    VisualComponentsSummaryApp.initSampleBrowserAsTableInCardView($('#BCK-BrowserAsTable'))
+    sampleDrugList.fetch({reset: true})
+
+    #browse as Card pages
+    compResListAsCardView = VisualComponentsSummaryApp.initCSampleBrowserAsCPinCardView($('#BCK-ResultsCardPages'));
+
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -43,4 +52,23 @@ class VisualComponentsSummaryApp
       model: VisualComponentsSummaryApp.sampleDocumentAssayNetwork
 
     return danView
+
+   # This initialises the view of the broswer as a table inside a card that is embeddable,
+  # and has all the characteristics of a card view.
+  @initSampleBrowserAsTableInCardView = ($elem) ->
+
+    asTableInCardView = new DrugBrowserTableAsCardView
+      collection: VisualComponentsSummaryApp.sampleDrugList
+      el: $elem
+
+    return asTableInCardView
+
+  # This initialises the view that shows a sample of a card pages browser, embedded as card
+  @initCSampleBrowserAsCPinCardView = ($elem) ->
+
+    view = new CompoundResultsListAsCardView
+      collection: VisualComponentsSummaryApp.sampleDrugList
+      el: $elem
+
+    return view
 

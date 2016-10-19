@@ -6,7 +6,7 @@ VisualComponentsSummaryApp = (function() {
   function VisualComponentsSummaryApp() {}
 
   VisualComponentsSummaryApp.init = function() {
-    var documentAssayNetwork, sampleCompound;
+    var compResListAsCardView, documentAssayNetwork, sampleCompound, sampleDrugList;
     sampleCompound = new Compound({
       molecule_chembl_id: 'CHEMBL1163143'
     });
@@ -18,7 +18,14 @@ VisualComponentsSummaryApp = (function() {
     });
     VisualComponentsSummaryApp.sampleDocumentAssayNetwork = documentAssayNetwork;
     VisualComponentsSummaryApp.initSampleDANView($('#DAssayNetworkCard'));
-    return documentAssayNetwork.fetch();
+    documentAssayNetwork.fetch();
+    sampleDrugList = new DrugList({});
+    VisualComponentsSummaryApp.sampleDrugList = sampleDrugList;
+    VisualComponentsSummaryApp.initSampleBrowserAsTableInCardView($('#BCK-BrowserAsTable'));
+    sampleDrugList.fetch({
+      reset: true
+    });
+    return compResListAsCardView = VisualComponentsSummaryApp.initCSampleBrowserAsCPinCardView($('#BCK-ResultsCardPages'));
   };
 
   VisualComponentsSummaryApp.initSampleCompound3DView = function($elem) {
@@ -37,6 +44,24 @@ VisualComponentsSummaryApp = (function() {
       model: VisualComponentsSummaryApp.sampleDocumentAssayNetwork
     });
     return danView;
+  };
+
+  VisualComponentsSummaryApp.initSampleBrowserAsTableInCardView = function($elem) {
+    var asTableInCardView;
+    asTableInCardView = new DrugBrowserTableAsCardView({
+      collection: VisualComponentsSummaryApp.sampleDrugList,
+      el: $elem
+    });
+    return asTableInCardView;
+  };
+
+  VisualComponentsSummaryApp.initCSampleBrowserAsCPinCardView = function($elem) {
+    var view;
+    view = new CompoundResultsListAsCardView({
+      collection: VisualComponentsSummaryApp.sampleDrugList,
+      el: $elem
+    });
+    return view;
   };
 
   return VisualComponentsSummaryApp;

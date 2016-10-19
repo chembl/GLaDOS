@@ -28,15 +28,6 @@ SearchResultsApp = (function() {
     return compResView;
   };
 
-  SearchResultsApp.initCompResultsListAsCardView = function(col, top_level_elem) {
-    var compResAsCardView;
-    compResAsCardView = new CompoundResultsListAsCardView({
-      collection: col,
-      el: top_level_elem
-    });
-    return compResAsCardView;
-  };
-
   SearchResultsApp.initDocsResultsListView = function(top_level_elem) {
     var docResView;
     docResView = new DocumentResultsListView({
