@@ -4,7 +4,7 @@ class SearchResultsApp
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
 
-  @init = () ->
+  @init = ->
     SearchResultsApp.searchModel = null
     @initCompResultsListView($('#BCK-CompoundSearchResults'))
     @initDocsResultsListView($('#BCK-DocSearchResults'))

@@ -60,18 +60,7 @@
 
 {% block custom_js_inline %}
 
-// compound 3d view
-var compound = new Compound({molecule_chembl_id: 'CHEMBL1163143'});
-comp3DView = new Compound3DView({
-  el: $('#BCK-compound-3dview'),
-  model: compound,
-  type: 'reduced'});
-compound.fetch();
-
-// document assay network
-var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork('CHEMBL1151960');
-var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
-documentAssayNetwork.fetch();
+VisualComponentsSummaryApp.init();
 
 //browse as table.
 var drugList = DrugBrowserApp.initDrugList();
