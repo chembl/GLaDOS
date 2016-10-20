@@ -1,161 +1,172 @@
-# This initializes the entities of the compound report card
+# This takes care of handling the compound report card.
+class CompoundReportCardApp
 
-# -------------------------------------------------------------
-# Models
-# -------------------------------------------------------------
-initCompound = (chembl_id) ->
-  compound = new Compound
-    molecule_chembl_id: chembl_id
+  #This initializes all views and models necessary for the compound report card
+  @init = ->
 
-  compound.url = Settings.WS_BASE_URL + 'molecule/' + chembl_id + '.json'
-  return compound
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
-### *
-  * Initializes a molecule forms list given a member compound (not necessarily the parent!)
-  * For now, it lazy-loads each of the compounds
-  * @param {Compound} member_compound, the list of compounds
-  * @return {CompoundList} the list that has been created
-###
-initMoleculeFormsList = (member_compound) ->
-  compoundList = new CompoundList
+    compound = new Compound({molecule_chembl_id: GlobalVariables.CHEMBL_ID})
+    mechanismOfActionList = new MechanismOfActionList()
+    mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
+    moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
 
-  compoundList.original_compound = member_compound
-  compoundList.origin = 'molecule_forms'
-  compoundList.url = Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
-  return compoundList
+    new CompoundNameClassificationView
+      model: compound
+      el: $('#CNCCard')
 
-initMechanismOfAction = (mechanism_id) ->
-  mechanismOfAction = new MechanismOfAction
-    mec_id: mechanism_id
+    new CompoundImageView
+        model: compound
+        el: ('#CNCImageCard')
 
-  mechanismOfAction.url = Settings.WS_BASE_URL + 'mechanism/' + mechanism_id + '.json'
-  return mechanismOfAction
+    new CompoundRepresentationsView
+        model: compound
+        el: $('#CompRepsCard')
 
-initMechanismOfActionList = (from_mol_chembl_id) ->
-  mechanismOfActionList = new MechanismOfActionList
+    new CompoundCalculatedParentPropertiesView
+        model: compound
+        el: $('#CalculatedParentPropertiesCard')
 
-  mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + from_mol_chembl_id
-  return mechanismOfActionList
+    new CompoundMechanismsOfActionView
+        collection: mechanismOfActionList
+        el: $('#MechOfActCard')
+
+    new CompoundFeaturesView
+        model: compound
+        el: $('#MoleculeFeaturesCard')
+
+    new CompoundMoleculeFormsListView
+        collection: moleculeFormsList
+        el: $('#AlternateFormsCard')
+
+    compound.fetch()
+    mechanismOfActionList.fetch({reset: true})
+    moleculeFormsList.fetch({reset: true})
+
+    $('.scrollspy').scrollSpy()
+    ScrollSpyHelper.initializeScrollSpyPinner()
+    ButtonsHelper.initCroppedContainers()
+    ButtonsHelper.initExpendableMenus()
+
+    @initPieView()
+
+    # remeber to make it view-specific
+    $('select').material_select()
+
+  # -------------------------------------------------------------
+  # Specific section initialization
+  # this is functions only initialize a section of the report card
+  # -------------------------------------------------------------
+  @initNameAndClassification = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    compound = new Compound
+      molecule_chembl_id: GlobalVariables.CHEMBL_ID
+
+    console.log compound
+
+    new CompoundNameClassificationView({
+        model: compound,
+        el: $('#CNCCard')})
+    new CompoundImageView({
+        model: compound,
+        el: ('#CNCImageCard')})
+
+    compound.fetch()
+
+    ButtonsHelper.initCroppedContainers()
+    ButtonsHelper.initExpendableMenus()
 
 
-# -------------------------------------------------------------
-# Views
-# -------------------------------------------------------------
+  @initRepresentations = ->
 
-### *
-  * Initializes the CNCView
-  * @param {Compound} model, base model for the view
-  * @param {JQuery} top_level_elem element that renders the model.
-  * @return {CompoundNameClassificationView} the view that has been created
-###
-initCNCView = (model, top_level_elem) ->
-  cncView = new CompoundNameClassificationView
-    model: model
-    el: top_level_elem
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-  return cncView
+    compound = new Compound
+      molecule_chembl_id: CHEMBL_ID
 
-### *
-  * Initializes the Compound Image view, the one that is in charge of the compound main image
-  * and the buttons that allow the options for it
-  * @param {Compound} model, base model for the view
-  * @param {JQuery} top_level_elem element that renders the model.
-  * @return {CompoundNameClassificationView} the view that has been created
-###
-initCompoundImageView = (model, top_level_elem) ->
+    compRepsView = new CompoundRepresentationsView
+      model: compound
+      el: $('#CompRepsCard')
 
-  compImgView = new CompoundImageView
-    model: model
-    el: top_level_elem
+    compound.fetch()
 
-  return compImgView
+    ButtonsHelper.initCroppedContainers()
+    ButtonsHelper.initExpendableMenus()
 
-### *
-  * Initializes de Compound Representations View
-  * @param {Compound} model, base model for the view
-  * @param {JQuery} element that renders the model.
-  * @return {CompoundNameClassificationView} the view that has been created
-###
-initCompRepsView = (model, top_level_elem) ->
-  compRepsView = new CompoundRepresentationsView
-    model: model
-    el: top_level_elem
+  @initCalculatedCompoundParentProperties = ->
 
-  return compRepsView
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    compound = new Compound
+      molecule_chembl_id: CHEMBL_ID
 
-initCalcCompPropertiesView = (model, top_level_elem) ->
-  calcCompPropView = new CompoundCalculatedParentPropertiesView
-    model: model
-    el: top_level_elem
+    new CompoundCalculatedParentPropertiesView
+        model: compound
+        el: $('#CalculatedParentPropertiesCard')
 
-  return calcCompPropView
+    compound.fetch()
 
-### *
-  * Initializes de MechanismOfActionRowView View, This view renders a row of a table
-  * from the information on the mechanism of action.
-  * @param {Compound} model, base model for the view
-  * @return {MechanismOfActionRowView} the view that has been created
-###
-initMechanismOfActionRowView = (model) ->
-  mechanismOfActionRowView = new MechanismOfActionRowView
-    model: model
+  @initMechanismOfAction = ->
 
-  return mechanismOfActionRowView
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-### *
-  * Initializes de MechanismOfActionRowTable View, This view knows all the mechanisms of action from a compound
-  * @param {MechanismOfActionList} mech_of_act_list, list of mechanisms of action
-  * @param {JQuery} top_level_elem element that renders the model.
-  * @return {MechanismOfActionTableView} the view that has been created
-###
-initCompMechanismsOfActionView = (mech_of_action_list, top_level_elem) ->
-  compoundMechanismsOfActionView = new CompoundMechanismsOfActionView
-    collection: mech_of_action_list
-    el: top_level_elem
+    mechanismOfActionList = new MechanismOfActionList()
+    mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID;
+    new CompoundMechanismsOfActionView
+      collection: mechanismOfActionList
+      el: $('#MechOfActCard')
+    mechanismOfActionList.fetch({reset: true})
 
-  return compoundMechanismsOfActionView
+  @initMoleculeFeatures = ->
 
-### *
-  * Initializes de Compound Featues View
-  * @param {Compound} model, base model for the view
-  * @param {JQuery} element that renders the model.
-  * @return {CompoundNameClassificationView} the view that has been created
-###
-initCompFeaturesView = (model, top_level_elem) ->
-  compFeaturesView = new CompoundFeaturesView
-    model: model
-    el: top_level_elem
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-  return compFeaturesView
+    compound = new Compound
+      molecule_chembl_id: CHEMBL_ID
+    new CompoundFeaturesView
+      model: compound
+      el: $('#MoleculeFeaturesCard')
+    compound.fetch()
 
-### *
-  * Initializes de CompoundMoleculeFormsListView, This view knows all the alternate forms of a compound
-  * @param {CompoundList} compound_list, list of compounds
-  * @param {JQuery} top_level_elem element for this view.
-  * @return {CompoundMoleculeFormsListView} the view that has been created
-###
-initCompMoleculeFormsListView = (compound_list, top_level_elem) ->
-  compoundMoleculeFormsListView = new CompoundMoleculeFormsListView
-    collection: compound_list
-    el: top_level_elem
 
-  return compoundMoleculeFormsListView
+  @initAlternateForms = ->
 
-initPieView = ->
-  pieview = new PieView
-  console.log(pieview)
-  pieview.render()
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-### *
-  * Initializes an iframe lazy loader. This view knows hot to lazy load an iframe
-  * @param {Compound} model, base model for the view
-  * @param {JQuery} element that renders the model.
-  * @return {CompoundNameClassificationView} the view that has been created
-###
-initIFrameLazyLoader = (model, top_level_elem) ->
-  iFrameLazyLoader = new IFrameLazyLoader
-    model: model
-    el: top_level_elem
+    compound = new Compound
+      molecule_chembl_id: CHEMBL_ID
 
-  return iFrameLazyLoader
+    moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
+
+    new CompoundMoleculeFormsListView
+      collection: moleculeFormsList,
+      el: $('#AlternateFormsCard')
+
+    moleculeFormsList.fetch({reset: true})
+  # -------------------------------------------------------------
+  # Models
+  # -------------------------------------------------------------
+  ### *
+    * Initializes a molecule forms list given a member compound (not necessarily the parent!)
+    * For now, it lazy-loads each of the compounds
+    * @param {Compound} member_compound, the list of compounds
+    * @return {CompoundList} the list that has been created
+  ###
+  @initMoleculeFormsList = (member_compound) ->
+    compoundList = new CompoundList
+
+    compoundList.original_compound = member_compound
+    compoundList.origin = 'molecule_forms'
+    compoundList.url = Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
+    return compoundList
+
+
+  # -------------------------------------------------------------
+  # Views
+  # -------------------------------------------------------------
+
+  @initPieView = ->
+    pieview = new PieView
+    pieview.render()
 

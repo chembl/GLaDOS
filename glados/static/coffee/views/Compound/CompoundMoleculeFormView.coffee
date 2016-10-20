@@ -11,7 +11,7 @@ CompoundMoleculeFormView = Backbone.View.extend
 
   render: ->
 
-    colour = if @model.get('molecule_chembl_id') == CHEMBL_ID then 'teal lighten-5' else ''
+    colour = if @model.get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID then 'teal lighten-5' else ''
 
     $(this.el).html Handlebars.compile($('#Handlebars-Compound-AlternateFormCard').html())
       molecule_chembl_id: @model.get('molecule_chembl_id')

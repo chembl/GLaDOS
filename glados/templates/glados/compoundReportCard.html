@@ -289,34 +289,7 @@
 
 {% block custom_js_inline %}
 
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-var compound = initCompound(CHEMBL_ID);
-var mechanismOfActionList = initMechanismOfActionList(CHEMBL_ID);
-var moleculeFormsList = initMoleculeFormsList(compound);
-
-var cncView = initCNCView(compound, $('#CNCCard'));
-var compImgView = initCompoundImageView(compound, $('#CNCImageCard'));
-var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
-var calcCompPropView = initCalcCompPropertiesView(compound, $('#CalculatedParentPropertiesCard'));
-var mechOfActTableView = initCompMechanismsOfActionView(mechanismOfActionList, $('#MechOfActCard'));
-var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
-var compMoleculeFormsListView = initCompMoleculeFormsListView(moleculeFormsList, $('#AlternateFormsCard'))
-
-compound.fetch();
-mechanismOfActionList.fetch({reset: true});
-moleculeFormsList.fetch({reset: true});
-
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
-ButtonsHelper.initCroppedContainers();
-ButtonsHelper.initExpendableMenus();
-
-initPieView();
-
-// remeber to make it view-specific
-$('select').material_select();
+CompoundReportCardApp.init();
 
 
 {% endblock %}

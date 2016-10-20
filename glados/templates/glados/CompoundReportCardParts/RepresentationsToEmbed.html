@@ -20,15 +20,7 @@
 
 {% block custom_js_inline %}
 
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-var compound = initCompound(CHEMBL_ID);
-var compRepsView =  initCompRepsView(compound, $('#CompRepsCard'));
-compound.fetch();
-
-ButtonsHelper.initCroppedContainers();
-ButtonsHelper.initExpendableMenus();
-$('.modal-trigger').hide();
+CompoundReportCardApp.initRepresentations();
 
 {% endblock %}
 

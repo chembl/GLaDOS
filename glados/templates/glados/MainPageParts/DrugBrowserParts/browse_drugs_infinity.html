@@ -100,8 +100,7 @@
 {% endblock %}
 
 {% block custom_js_inline %}
-var drugList = DrugBrowserApp.initDrugList();
-
+var drugList = new DrugList({});
 var infBrowser = DrugBrowserApp.initInfinityBrowserView(drugList, $('#DrugInfBrowser'));
 drugList.fetch({reset: true});
 

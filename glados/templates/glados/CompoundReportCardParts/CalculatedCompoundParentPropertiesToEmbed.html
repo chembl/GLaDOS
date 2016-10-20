@@ -20,9 +20,7 @@
 
 {% block custom_js_inline %}
 
-var compound = initCompound(CHEMBL_ID);
-var calcCompPropView = initCalcCompPropertiesView(compound, $('#CalculatedParentPropertiesCard'));
-compound.fetch();
+CompoundReportCardApp.initCalculatedCompoundParentProperties();
 
 
 {% endblock %}

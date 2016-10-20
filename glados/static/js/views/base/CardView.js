@@ -58,7 +58,7 @@ CardView = Backbone.View.extend({
     section_name = clicked.attr('data-embed-sect-name');
     modal = $(clicked.attr('href'));
     code_elem = modal.find('code');
-    chembl_id = this.model != null ? this.model.get('molecule_chembl_id') : CHEMBL_ID;
+    chembl_id = this.model != null ? this.model.get('molecule_chembl_id') : GlobalVariables.CHEMBL_ID;
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())({
       base_url: Settings.EMBED_BASE_URL,
       chembl_id: chembl_id,

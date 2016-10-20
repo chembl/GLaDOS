@@ -16,7 +16,7 @@
 
 {% block custom_js_inline %}
 
-var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork(CHEMBL_ID);
+var documentAssayNetwork = new DocumentAssayNetwork({document_chembl_id: CHEMBL_ID});
 var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
 documentAssayNetwork.fetch();
 

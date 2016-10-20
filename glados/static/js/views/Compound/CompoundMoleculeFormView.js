@@ -10,7 +10,7 @@ CompoundMoleculeFormView = Backbone.View.extend({
   },
   render: function() {
     var colour;
-    colour = this.model.get('molecule_chembl_id') === CHEMBL_ID ? 'teal lighten-5' : '';
+    colour = this.model.get('molecule_chembl_id') === GlobalVariables.CHEMBL_ID ? 'teal lighten-5' : '';
     $(this.el).html(Handlebars.compile($('#Handlebars-Compound-AlternateFormCard').html())({
       molecule_chembl_id: this.model.get('molecule_chembl_id'),
       colour: colour

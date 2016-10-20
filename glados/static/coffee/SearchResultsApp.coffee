@@ -4,7 +4,7 @@ class SearchResultsApp
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
 
-  @init = () ->
+  @init = ->
     SearchResultsApp.searchModel = null
     @initCompResultsListView($('#BCK-CompoundSearchResults'))
     @initDocsResultsListView($('#BCK-DocSearchResults'))
@@ -32,15 +32,6 @@ class SearchResultsApp
       el: top_level_elem
 
     return compResView
-
-  # this initialises the view that shows the compounds section of the results, embedded as card
-  @initCompResultsListAsCardView = (col, top_level_elem) ->
-
-    compResAsCardView = new CompoundResultsListAsCardView
-      collection: col
-      el: top_level_elem
-
-    return compResAsCardView
 
   # this initialises the view that shows the documents section of the results
   @initDocsResultsListView = (top_level_elem) ->

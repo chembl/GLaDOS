@@ -61,7 +61,7 @@ CardView = Backbone.View.extend
     modal = $(clicked.attr('href'))
 
     code_elem = modal.find('code')
-    chembl_id = if @model? then @model.get('molecule_chembl_id') else CHEMBL_ID
+    chembl_id = if @model? then @model.get('molecule_chembl_id') else GlobalVariables.CHEMBL_ID
 
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
       base_url: Settings.EMBED_BASE_URL

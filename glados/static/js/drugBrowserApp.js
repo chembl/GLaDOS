@@ -5,12 +5,6 @@ DrugBrowserApp = (function() {
 
   function DrugBrowserApp() {}
 
-  DrugBrowserApp.initDrugList = function() {
-    var drugList;
-    drugList = new DrugList;
-    return drugList;
-  };
-
   DrugBrowserApp.initBrowserAsTable = function(col, top_level_elem) {
     var asTableView;
     asTableView = new DrugBrowserTableView({
@@ -28,15 +22,6 @@ DrugBrowserApp = (function() {
       el: top_level_elem
     });
     return infView;
-  };
-
-  DrugBrowserApp.initBrowserAsTableCard = function(col, top_level_elem) {
-    var asTableCardView;
-    asTableCardView = new DrugBrowserTableAsCardView({
-      collection: col,
-      el: top_level_elem
-    });
-    return asTableCardView;
   };
 
   return DrugBrowserApp;

@@ -19,8 +19,6 @@
 
 {% block custom_js_inline %}
 
-var compound = initCompound(CHEMBL_ID);
-var compFeaturesView = initCompFeaturesView(compound, $('#MoleculeFeaturesCard'));
-compound.fetch();
+CompoundReportCardApp.initMoleculeFeatures();
 
 {% endblock %}
