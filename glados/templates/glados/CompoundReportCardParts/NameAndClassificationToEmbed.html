@@ -13,20 +13,7 @@
 
 {% block custom_js_inline %}
 
-var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-
-new CompoundNameClassificationView({
-    model: compound,
-    el: $('#CNCCard')});
-new CompoundImageView({
-    model: compound,
-    el: ('#CNCImageCard')});
-
-compound.fetch();
-
-ButtonsHelper.initCroppedContainers();
-ButtonsHelper.initExpendableMenus();
-
+CompoundReportCardApp.initNameAndClassification();
 
 {% endblock %}
 

@@ -20,12 +20,7 @@
 
 {% block custom_js_inline %}
 
-var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-new CompoundCalculatedParentPropertiesView({
-    model: compound,
-    el: $('#CalculatedParentPropertiesCard')});
-
-compound.fetch();
+CompoundReportCardApp.initCalculatedCompoundParentProperties();
 
 
 {% endblock %}

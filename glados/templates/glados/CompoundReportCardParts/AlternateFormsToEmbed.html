@@ -21,12 +21,6 @@
 
 {% block custom_js_inline %}
 
-var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound);
-new CompoundMoleculeFormsListView({
-    collection: moleculeFormsList,
-    el: $('#AlternateFormsCard')});
-moleculeFormsList.fetch({reset: true});
-
+CompoundReportCardApp.initAlternateForms();
 
 {% endblock %}

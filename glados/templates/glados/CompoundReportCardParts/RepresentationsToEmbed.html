@@ -20,15 +20,7 @@
 
 {% block custom_js_inline %}
 
-var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-compRepsView = new CompoundRepresentationsView({
-    model: compound,
-    el: $('#CompRepsCard')});
-compound.fetch();
-
-ButtonsHelper.initCroppedContainers();
-ButtonsHelper.initExpendableMenus();
-$('.modal-trigger').hide();
+CompoundReportCardApp.initRepresentations();
 
 {% endblock %}
 

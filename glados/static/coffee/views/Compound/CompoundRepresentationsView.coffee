@@ -32,7 +32,7 @@ CompoundRepresentationsView = CardView.extend
       @molecule_structures['canonical_smiles'])
 
     ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-canonicalSmiles-dnld, #CompReps-canonicalSmiles-small-dnld'),
-      CHEMBL_ID + '.smi', 'Download SMILES file.',
+      GlobalVariables.CHEMBL_ID + '.smi', 'Download SMILES file.',
       @molecule_structures['canonical_smiles'] + '%20'+ @model.get('molecule_chembl_id'))
 
     copy_btn = $(@el).find('#CompReps-canonicalSmiles-copy, #CompReps-canonicalSmiles-small-copy')
@@ -43,7 +43,7 @@ CompoundRepresentationsView = CardView.extend
       @molecule_structures['standard_inchi'])
 
     ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-standardInchi-dnld, #CompReps-standardInchi-small-dnld'),
-      CHEMBL_ID + '-INCHI.txt', 'Download InChI.', @molecule_structures['standard_inchi'])
+      GlobalVariables.CHEMBL_ID + '-INCHI.txt', 'Download InChI.', @molecule_structures['standard_inchi'])
 
     copy_btn = $(@el).find('#CompReps-standardInchi-copy, #CompReps-standardInchi-small-copy')
     ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['standard_inchi'])
@@ -53,7 +53,7 @@ CompoundRepresentationsView = CardView.extend
       @molecule_structures['standard_inchi_key'])
 
     ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-standardInchiKey-dnld, #CompReps-standardInchiKey-small-dnld'),
-      CHEMBL_ID + '-INCHI_KEY.txt', 'Download InChI Key.', @molecule_structures['standard_inchi_key'])
+      GlobalVariables.CHEMBL_ID + '-INCHI_KEY.txt', 'Download InChI Key.', @molecule_structures['standard_inchi_key'])
 
     copy_btn = $(@el).find('#CompReps-standardInchiKey-copy, #CompReps-standardInchiKey-small-copy')
     ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['standard_inchi_key'])

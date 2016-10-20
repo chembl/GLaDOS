@@ -289,53 +289,7 @@
 
 {% block custom_js_inline %}
 
-CHEMBL_ID = URLProcessor.getRequestedChemblID();
-var compound = new Compound({molecule_chembl_id: CHEMBL_ID});
-var mechanismOfActionList = new MechanismOfActionList({});
-mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + CHEMBL_ID;
-var moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound);
-
-new CompoundNameClassificationView({
-    model: compound,
-    el: $('#CNCCard')});
-
-new CompoundImageView({
-    model: compound,
-    el: ('#CNCImageCard')});
-
-new CompoundRepresentationsView({
-    model: compound,
-    el: $('#CompRepsCard')});
-
-new CompoundCalculatedParentPropertiesView({
-    model: compound,
-    el: $('#CalculatedParentPropertiesCard')});
-
-new CompoundMechanismsOfActionView({
-    collection: mechanismOfActionList,
-    el: $('#MechOfActCard')});
-
-new CompoundFeaturesView({
-    model: compound,
-    el: $('#MoleculeFeaturesCard')});
-
-new CompoundMoleculeFormsListView({
-    collection: moleculeFormsList,
-    el: $('#AlternateFormsCard')});
-
-compound.fetch();
-mechanismOfActionList.fetch({reset: true});
-moleculeFormsList.fetch({reset: true});
-
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
-ButtonsHelper.initCroppedContainers();
-ButtonsHelper.initExpendableMenus();
-
-initPieView();
-
-// remeber to make it view-specific
-$('select').material_select();
+CompoundReportCardApp.init();
 
 
 {% endblock %}

@@ -12,6 +12,13 @@ URLProcessor = (function() {
     return pathnameParts[pathnameParts.length - 2];
   };
 
+  URLProcessor.getRequestedChemblIDWhenEmbedded = function() {
+    var pathname, pathnameParts;
+    pathname = window.location.pathname;
+    pathnameParts = pathname.split('/');
+    return pathnameParts[pathnameParts.length - 4];
+  };
+
   return URLProcessor;
 
 })();
