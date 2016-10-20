@@ -5,110 +5,92 @@ TargetReportCardApp = (function() {
 
   function TargetReportCardApp() {}
 
-  TargetReportCardApp.initTarget = function(chembl_id) {
-    var target;
+  TargetReportCardApp.init = function() {
+    var appDrugsClinCandsList, target, targetRelations;
+    $('.scrollspy').scrollSpy();
+    ScrollSpyHelper.initializeScrollSpyPinner();
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     target = new Target({
-      target_chembl_id: chembl_id
+      target_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return target;
-  };
-
-  TargetReportCardApp.initAppDrugClinCands = function(chembl_id) {
-    var appDrugCCList;
-    appDrugCCList = new ApprovedDrugClinicalCandidateList;
-    appDrugCCList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id + '&order_by=molecule_chembl_id&limit=1000';
-    return appDrugCCList;
-  };
-
-  TargetReportCardApp.initAppDrugClinCandsTest = function(chembl_id) {
-    var appDrugCCList;
-    appDrugCCList = new ApprovedDrugClinicalCandidateListTest;
-    appDrugCCList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id + '&order_by=molecule_chembl_id&limit=1000';
-    return appDrugCCList;
-  };
-
-  TargetReportCardApp.initTargetRelations = function(chembl_id) {
-    var targRelList;
-    targRelList = new TargetRelationList;
-    targRelList.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
-    return targRelList;
-  };
-
-  /* *
-    * Initializes the TNCView (Target Name and Clasification View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetNameClassificationView} the view that has been created
-  */
-
-
-  TargetReportCardApp.initTNCView = function(model, top_level_elem) {
-    var tncView;
-    tncView = new TargetNameAndClassificationView({
-      model: model,
-      el: top_level_elem
+    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList;
+    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + GlobalVariables.CHEMBL_ID;
+    +'&order_by=molecule_chembl_id&limit=1000';
+    targetRelations = new TargetRelationList;
+    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000';
+    new TargetNameAndClassificationView({
+      model: target,
+      el: $('#TNameClassificationCard')
     });
-    return tncView;
+    new TargetComponentsView({
+      model: target,
+      el: $('#TComponentsCard')
+    });
+    new RelationsView({
+      collection: targetRelations,
+      el: $('#TRelationsCard')
+    });
+    new ApprovedDrugsClinicalCandidatesView({
+      collection: appDrugsClinCandsList,
+      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
+    });
+    target.fetch();
+    appDrugsClinCandsList.fetch();
+    return targetRelations.fetch({
+      reset: true
+    });
   };
 
-  /* *
-    * Initializes the TComponentsView (Target Components View)
-    * @param {Target} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  */
-
-
-  TargetReportCardApp.initTComponentsView = function(model, top_level_elem) {
-    var tcView;
-    tcView = new TargetComponentsView({
-      model: model,
-      el: top_level_elem
+  TargetReportCardApp.initTargetNameAndClassification = function() {
+    var target;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    target = new Target({
+      target_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return tcView;
+    new TargetNameAndClassificationView({
+      model: target,
+      el: $('#TNameClassificationCard')
+    });
+    return target.fetch();
   };
 
-  /* *
-    * Initializes the ADCC View (Approved Drugs Clinical Candidates View)
-    * @param {Collection} adccList, the collection of approved drugs and clinical candidates
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  */
-
-
-  TargetReportCardApp.initADCC = function(adccList, top_level_elem) {
-    var adccView;
-    adccView = new ApprovedDrugsClinicalCandidatesView({
-      collection: adccList,
-      el: top_level_elem
+  TargetReportCardApp.initTargetComponents = function() {
+    var target;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    target = new Target({
+      target_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return adccView;
+    new TargetComponentsView({
+      model: target,
+      el: $('#TComponentsCard')
+    });
+    return target.fetch();
   };
 
-  TargetReportCardApp.initADCCTest = function(adccList, top_level_elem) {
-    var adccView;
-    adccView = new ApprovedDrugsClinicalCandidatesViewTest({
-      collection: adccList,
-      el: top_level_elem
+  TargetReportCardApp.initTargetRelations = function() {
+    var targetRelations;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    targetRelations = new TargetRelationList;
+    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000';
+    new RelationsView({
+      collection: targetRelations,
+      el: $('#TRelationsCard')
     });
-    return adccView;
+    return targetRelations.fetch({
+      reset: true
+    });
   };
 
-  /* *
-    * Initializes the TRelationsView (Target Relations View)
-    * @param {Compound} rel_list, the collection of the relations of the target
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  */
-
-
-  TargetReportCardApp.initTRelationsView = function(rel_list, top_level_elem) {
-    var trelView;
-    trelView = new RelationsView({
-      collection: rel_list,
-      el: top_level_elem
+  TargetReportCardApp.initApprovedDrugsClinicalCandidates = function() {
+    var appDrugsClinCandsList;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList;
+    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=molecule_chembl_id&limit=1000';
+    new ApprovedDrugsClinicalCandidatesView({
+      collection: appDrugsClinCandsList,
+      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
     });
-    return trelView;
+    return appDrugsClinCandsList.fetch();
   };
 
   return TargetReportCardApp;

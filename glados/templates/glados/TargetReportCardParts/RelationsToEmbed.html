@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var targetRelations = TargetReportCardApp.initTargetRelations(CHEMBL_ID);
-var tRelView = TargetReportCardApp.initTRelationsView(targetRelations, $('#TRelationsCard'));
-targetRelations.fetch({reset: true});
+TargetReportCardApp.initTargetRelations();
 
 {% endblock %}

@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var target = TargetReportCardApp.initTarget(CHEMBL_ID);
-var TNCView = TargetReportCardApp.initTNCView(target, $('#TNameClassificationCard'));
-target.fetch()
+TargetReportCardApp.initTargetNameAndClassification();
 
 {% endblock %}

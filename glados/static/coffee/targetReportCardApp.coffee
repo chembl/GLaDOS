@@ -1,96 +1,92 @@
 class TargetReportCardApp
 
   # -------------------------------------------------------------
-  # Models
+  # Initialisation
   # -------------------------------------------------------------
-  @initTarget = (chembl_id) ->
+  @init = ->
+    $('.scrollspy').scrollSpy()
+    ScrollSpyHelper.initializeScrollSpyPinner()
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
+
     target = new Target
-      target_chembl_id: chembl_id
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    return target
+    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList
+    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + (GlobalVariables.CHEMBL_ID)
+    +'&order_by=molecule_chembl_id&limit=1000'
 
-  @initAppDrugClinCands = (chembl_id) ->
-    appDrugCCList = new ApprovedDrugClinicalCandidateList
+    targetRelations = new TargetRelationList
+    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000'
 
-    appDrugCCList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + (chembl_id) + '&order_by=molecule_chembl_id&limit=1000'
-    return appDrugCCList
+    new TargetNameAndClassificationView
+      model: target
+      el: $('#TNameClassificationCard')
 
-  @initAppDrugClinCandsTest = (chembl_id) ->
-    appDrugCCList = new ApprovedDrugClinicalCandidateListTest
+    new TargetComponentsView
+      model: target
+      el: $('#TComponentsCard')
 
-    appDrugCCList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + (chembl_id) + '&order_by=molecule_chembl_id&limit=1000'
-    return appDrugCCList
+    new RelationsView
+      collection: targetRelations
+      el: $('#TRelationsCard')
 
-  @initTargetRelations = (chembl_id) ->
+    new ApprovedDrugsClinicalCandidatesView
+      collection: appDrugsClinCandsList
+      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
 
-    targRelList = new TargetRelationList
+    target.fetch()
+    appDrugsClinCandsList.fetch()
+    targetRelations.fetch({reset: true})
 
-    targRelList.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
-    return targRelList
+  @initTargetNameAndClassification = ->
 
-  # -------------------------------------------------------------
-  # Views
-  # -------------------------------------------------------------
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-  ### *
-    * Initializes the TNCView (Target Name and Clasification View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetNameClassificationView} the view that has been created
-  ###
-  @initTNCView = (model, top_level_elem) ->
-    tncView = new TargetNameAndClassificationView
-      model: model
-      el: top_level_elem
+    target = new Target
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    return tncView
+    new TargetNameAndClassificationView
+      model: target
+      el: $('#TNameClassificationCard')
+    target.fetch()
 
+  @initTargetComponents = ->
 
-  ### *
-    * Initializes the TComponentsView (Target Components View)
-    * @param {Target} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  ###
-  @initTComponentsView = (model, top_level_elem) ->
-    tcView = new TargetComponentsView
-      model: model
-      el: top_level_elem
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    return tcView
+    target = new Target
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    new TargetComponentsView
+      model: target
+      el: $('#TComponentsCard')
 
-  ### *
-    * Initializes the ADCC View (Approved Drugs Clinical Candidates View)
-    * @param {Collection} adccList, the collection of approved drugs and clinical candidates
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  ###
-  @initADCC = (adccList, top_level_elem) ->
-    adccView = new ApprovedDrugsClinicalCandidatesView
-      collection: adccList
-      el: top_level_elem
+    target.fetch()
 
-    return adccView
+  @initTargetRelations = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-  @initADCCTest = (adccList, top_level_elem) ->
-    adccView = new ApprovedDrugsClinicalCandidatesViewTest
-      collection: adccList
-      el: top_level_elem
+    targetRelations = new TargetRelationList
+    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000'
 
-    return adccView
+    new RelationsView
+      collection: targetRelations
+      el: $('#TRelationsCard')
 
-  ### *
-    * Initializes the TRelationsView (Target Relations View)
-    * @param {Compound} rel_list, the collection of the relations of the target
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {TargetComponentsView} the view that has been created
-  ###
-  @initTRelationsView = (rel_list, top_level_elem) ->
+    targetRelations.fetch({reset: true})
 
-    trelView = new RelationsView
-      collection: rel_list
-      el: top_level_elem
+  @initApprovedDrugsClinicalCandidates = ->
 
-    return trelView
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList
+    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=molecule_chembl_id&limit=1000'
+
+    new ApprovedDrugsClinicalCandidatesView
+      collection: appDrugsClinCandsList
+      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
+
+    appDrugsClinCandsList.fetch()
+
