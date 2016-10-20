@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands(CHEMBL_ID);
-var adccView = TargetReportCardApp.initADCC(appDrugsClinCandsList, $('#ApprovedDrugsAndClinicalCandidatesCard'));
-appDrugsClinCandsList.fetch();
+TargetReportCardApp.initApprovedDrugsClinicalCandidates();
 
 {% endblock %}
