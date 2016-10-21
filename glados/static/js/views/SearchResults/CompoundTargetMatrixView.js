@@ -15,18 +15,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillRow, getCellColour, getXCoord, getYCoord, height, inferPropsType, inferPropsType2, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellText, getXCoord, getYCoord, height, inferPropsType, inferPropsType2, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
     console.log('painting matrix');
     compsTargets = this.model.get('matrix');
     currentProperty = 'pchembl_value';
     margin = {
-      top: 140,
+      top: 150,
       right: 0,
       bottom: 10,
       left: 90
     };
     elemWidth = $(this.el).width();
-    height = width = 0.8 * elemWidth;
+    width = 0.8 * elemWidth;
+    height = width * 5;
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     links = compsTargets.links;
     numColumns = compsTargets.columns.length;
@@ -35,6 +36,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     console.log('num columns:', numColumns);
     console.log('links:');
     console.log(links);
+    getCellText = function(d) {
+      var txt;
+      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty];
+      return txt;
+    };
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
@@ -126,6 +132,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return scale;
     };
     getCellColour = defineColourScale(links, currentProperty);
+    fillColour = function(d) {
+      if (!(d[currentProperty] != null)) {
+        return '#9e9e9e';
+      }
+      return getCellColour(d[currentProperty]);
+    };
     fillRow = function(row, rowNumber) {
       var cells, dataList, key, value, _ref;
       console.log('row: ', rowNumber);
@@ -142,17 +154,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         console.log('here!');
         console.log(getXCoord(colNum));
         return getXCoord(colNum);
-      }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", function(d) {
-        console.log('value!');
-        console.log(d);
-        if (_.isEmpty(d)) {
-          return '#9e9e9e';
-        }
-        return getCellColour(d[currentProperty]);
-      });
-      return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', function(d) {
-        return currentProperty + ":" + d[currentProperty];
-      });
+      }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
+      return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellText);
     };
     rows = svg.selectAll('.vis-row').data(compsTargets.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
       return "translate(0, " + getYCoord(rowNum) + ")";
@@ -177,14 +180,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('current property: ', currentProperty);
       getCellColour = defineColourScale(links, currentProperty);
       t = svg.transition().duration(1000);
-      return t.selectAll(".vis-cell").style("fill", function(d) {
-        if (_.isEmpty(d)) {
-          return '#9e9e9e';
-        }
-        return getCellColour(d[currentProperty]);
-      }).attr('data-tooltip', function(d) {
-        return currentProperty + ":" + d[currentProperty];
-      });
+      return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellText);
     });
   }
 });

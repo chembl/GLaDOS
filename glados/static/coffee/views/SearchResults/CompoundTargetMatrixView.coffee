@@ -93,13 +93,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     currentProperty = 'pchembl_value'
 
     margin =
-      top: 140
+      top: 150
       right: 0
       bottom: 10
       left: 90
 
     elemWidth = $(@el).width()
-    height = width = 0.8 * elemWidth
+    width = 0.8 * elemWidth
+    height = width * 5
 
     svg = d3.select('#' + @$vis_elem.attr('id'))
             .append('svg')
@@ -120,6 +121,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     console.log 'links:'
     console.log links
+
+    getCellText = (d) ->
+
+      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty]
+
+      return txt
 
     # --------------------------------------
     # Add background rectangle
@@ -223,6 +230,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getCellColour = defineColourScale(links, currentProperty)
 
+    fillColour = (d) ->
+
+      if not d[currentProperty]?
+          return '#9e9e9e'
+      getCellColour(d[currentProperty])
+
     # --------------------------------------
     # Add rows
     # --------------------------------------
@@ -246,17 +259,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return getXCoord(colNum) )
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
-        .style("fill", (d) ->
-          console.log 'value!'
-          console.log d
-          if _.isEmpty(d)
-            return '#9e9e9e'
-          return getCellColour(d[currentProperty]) )
+        .style("fill", fillColour )
 
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
         .attr('data-delay', '50')
-        .attr('data-tooltip', (d) -> currentProperty + ":" + d[currentProperty] )
+        .attr('data-tooltip', getCellText )
 
 
     rows = svg.selectAll('.vis-row')
@@ -320,10 +328,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = svg.transition().duration(1000)
       t.selectAll(".vis-cell")
-        .style("fill", (d) ->
-          if _.isEmpty(d)
-            return '#9e9e9e'
-          getCellColour(d[currentProperty]) )
-        .attr('data-tooltip', (d) ->
-          currentProperty + ":" + d[currentProperty] )
+        .style("fill", fillColour)
+        .attr('data-tooltip', getCellText )
+
+
 
