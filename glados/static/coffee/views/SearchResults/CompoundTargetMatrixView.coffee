@@ -3,6 +3,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @model.on 'change', @render, @
+
     @$vis_elem = $('#BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
@@ -15,6 +17,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintMatrix()
 
     $(@el).find('select').material_select()
+    $('.tooltipped').tooltip()
 
   paintMatrix: ->
 
@@ -24,70 +27,73 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Data
     # --------------------------------------
 
-    compsTargets = {
-      "columns": [
-        {
-          "name": "C1",
-        },
-        {
-          "name": "C2",
-        },
-        {
-          "name": "C3",
-        }
-      ],
-      "rows": [
-        {
-          "name": "T1",
-        },
-        {
-          "name": "T2",
-        },
-        {
-          "name": "T3",
-        },
-        {
-          "name": "T4",
-        },
-      ],
-      "links": {
+# this can be used for testing, do not delete
+#    compsTargets = {
+#      "columns": [
+#        {
+#          "name": "C1",
+#        },
+#        {
+#          "name": "C2",
+#        },
+#        {
+#          "name": "C3",
+#        }
+#      ],
+#      "rows": [
+#        {
+#          "name": "T1",
+#        },
+#        {
+#          "name": "T2",
+#        },
+#        {
+#          "name": "T3",
+#        },
+#        {
+#          "name": "T4",
+#        },
+#      ],
+#      "links": {
+#
+#        #source Target
+#        0: {
+#          # destination Compound
+#          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U'} # this means target 0 is connected to compound 0 through an assay with a value of 1
+#          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P'}
+#          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B'}
+#        }
+#        1: {
+#          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
+#          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T'}
+#          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F'}
+#        }
+#        2: {
+#          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U'}
+#          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P'}
+#          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B'}
+#        }
+#        3: {
+#          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
+#          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T'}
+#          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F'}
+#        }
+#
+#
+#      }
+#
+#    }
 
-        #source Target
-        0: {
-          # destination Compound
-          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U'} # this means target 0 is connected to compound 0 through an assay with a value of 1
-          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P'}
-          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B'}
-        }
-        1: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
-          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T'}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F'}
-        }
-        2: {
-          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U'}
-          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P'}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B'}
-        }
-        3: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A'}
-          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T'}
-          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F'}
-        }
-
-
-      }
-
-    }
+    compsTargets = @model.get('matrix')
 
     # --------------------------------------
     # pre-configuration
     # --------------------------------------
 
-    currentProperty = 'assay_type'
+    currentProperty = 'pchembl_value'
 
     margin =
-      top: 70
+      top: 140
       right: 0
       bottom: 10
       left: 90
@@ -137,6 +143,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..numColumns])
       .rangeBands([0, width])
 
+
+    #this would become the standard way of infering types if the other method doesn't work
+    inferPropsType2 = (currentProperty) ->
+
+      propToType =
+        "assay_type": "string"
+        "pchembl_value": "number"
+        "published_value": "number"
+
+      return propToType[currentProperty]
+
     # infers type from the first non null/undefined value,
     # this will be used to generate the correct scale.
     inferPropsType = (links, currentProperty) ->
@@ -145,6 +162,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         for colNum, cell of row
           datum = cell[currentProperty]
           if datum?
+            if parseInt(datum) != NaN
+              return "number"
             type =  typeof datum
             return type
 
@@ -181,7 +200,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         for colNum, cell of row
           domain.push cell[currentProperty]
 
-      console.log 'domain: ', domain
       scale = d3.scale.ordinal()
         .domain(domain)
         .range(d3.scale.category20().range())
@@ -191,12 +209,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     defineColourScale = (links, currentProperty)->
 
-      type = inferPropsType links, currentProperty
+      type = inferPropsType2 currentProperty
       console.log 'type is: ', type
       scale = switch
         when type == 'number' then buildNumericColourScale(links, currentProperty)
         when type == 'string' then buildTextColourScale(links, currentProperty)
 
+      console.log 'Scale:'
+      console.log 'domain: ', scale.domain()
+      console.log 'range: ', scale.range()
       return scale
 
 
@@ -225,7 +246,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return getXCoord(colNum) )
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
-        .style("fill", (d) -> getCellColour(d[currentProperty]) )
+        .style("fill", (d) ->
+          console.log 'value!'
+          console.log d
+          if _.isEmpty(d)
+            return '#9e9e9e'
+          return getCellColour(d[currentProperty]) )
+
+      cells.classed('tooltipped', true)
+        .attr('data-position', 'bottom')
+        .attr('data-delay', '50')
+        .attr('data-tooltip', (d) -> currentProperty + ":" + d[currentProperty] )
+
 
     rows = svg.selectAll('.vis-row')
       .data(compsTargets.rows)
@@ -287,5 +319,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       getCellColour = defineColourScale(links, currentProperty)
 
       t = svg.transition().duration(1000)
-      t.selectAll(".vis-cell").style("fill", (d) -> getCellColour(d[currentProperty]) )
+      t.selectAll(".vis-cell")
+        .style("fill", (d) ->
+          if _.isEmpty(d)
+            return '#9e9e9e'
+          getCellColour(d[currentProperty]) )
+        .attr('data-tooltip', (d) ->
+          currentProperty + ":" + d[currentProperty] )
 
