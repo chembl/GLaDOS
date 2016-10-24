@@ -11,14 +11,14 @@ CellLineBasicInformationView = CardView.extend
 
   render: ->
 
-    @fillTemplates('BCK-CBI-large')
-    @fillTemplates('BCK-CBI-small')
+    @fillTemplate('BCK-CBI-large')
+    @fillTemplate('BCK-CBI-small')
 
     @showVisibleContent()
     @initEmbedModal('basic_information')
     @activateModals()
 
-  fill_template: (div_id) ->
+  fillTemplate: (div_id) ->
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
