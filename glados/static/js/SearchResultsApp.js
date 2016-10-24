@@ -53,6 +53,16 @@ SearchResultsApp = (function() {
     return compResGraphView;
   };
 
+  SearchResultsApp.initCompoundTargetMatrix = function() {
+    var ctm;
+    ctm = new CompoundTargetMatrix;
+    new CompoundTargetMatrixView({
+      model: ctm,
+      el: $('#CompTargetMatrix')
+    });
+    return ctm.fetch();
+  };
+
   SearchResultsApp.search = function() {
     return this.getSearchModel().search();
   };

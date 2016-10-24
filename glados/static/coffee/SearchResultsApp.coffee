@@ -58,6 +58,15 @@ class SearchResultsApp
 
     return compResGraphView
 
+  @initCompoundTargetMatrix = ->
+
+    ctm = new CompoundTargetMatrix
+    new CompoundTargetMatrixView
+      model: ctm
+      el: $('#CompTargetMatrix')
+    ctm.fetch()
+
+
   # --------------------------------------------------------------------------------------------------------------------
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
