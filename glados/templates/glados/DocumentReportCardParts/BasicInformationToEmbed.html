@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
-var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
-document.fetch()
+DocumentReportCardApp.initBasicInformation();
 
 {% endblock %}

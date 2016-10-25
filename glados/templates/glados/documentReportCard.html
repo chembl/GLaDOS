@@ -171,19 +171,6 @@
 
 {% block custom_js_inline %}
 
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
-
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-var document = DocumentReportCardApp.initDocument(CHEMBL_ID);
-var documentAssayNetwork = new DocumentAssayNetwork({document_chembl_id: CHEMBL_ID});
-
-var dbiView = DocumentReportCardApp.initDBIView(document, $('#DBasicInformation'));
-var danView = DocumentReportCardApp.initDANView(documentAssayNetwork, $('#DAssayNetworkCard'));
-
-document.fetch();
-documentAssayNetwork.fetch();
+DocumentReportCardApp.init();
 
 {% endblock %}
