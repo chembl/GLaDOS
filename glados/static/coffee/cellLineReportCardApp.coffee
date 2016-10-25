@@ -1,30 +1,37 @@
 class CellLineReportCardApp
 
   # -------------------------------------------------------------
-  # Models
+  # Initialisation
   # -------------------------------------------------------------
+  @init = ->
 
-  @initCellLine = (chembl_id) ->
-    cell_line = new CellLine
-      cell_chembl_id: chembl_id
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
-    cell_line.url = Settings.WS_BASE_URL + 'cell_line/' + chembl_id + '.json'
-    return cell_line
+    cellLine = new CellLine
+      cell_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new CellLineBasicInformationView
+      model: cellLine
+      el: $('#CBasicInformation')
+
+    cellLine.fetch()
+
+    $('.scrollspy').scrollSpy()
+    ScrollSpyHelper.initializeScrollSpyPinner()
 
   # -------------------------------------------------------------
-  # Views
+  # Specific section initialization
+  # this is functions only initialize a section of the report card
   # -------------------------------------------------------------
+  @initBasicInformation = ->
 
-  ### *
-    * Initializes the CBIView (Cell Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {CellBasicInformationViewView} the view that has been created
-  ###
-  @initCBIView = (model, top_level_elem) ->
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    cbiView = new CellLineBasicInformationView
-      model: model
-      el: top_level_elem
+    cellLine = new CellLine
+      cell_chembl_id: GlobalVariables.CHEMBL_ID
 
-    return cbiView
+    new CellLineBasicInformationView
+      model: cellLine
+      el: $('#CBasicInformation')
+
+    cellLine.fetch()

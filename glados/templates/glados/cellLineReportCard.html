@@ -122,16 +122,6 @@
 
 {% block custom_js_inline %}
 
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
-
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-var cellLine = CellLineReportCardApp.initCellLine(CHEMBL_ID);
-
-var cbiView = CellLineReportCardApp.initCBIView(cellLine, $('#CBasicInformation'));
-
-cellLine.fetch();
+CellLineReportCardApp.init();
 
 {% endblock %}
