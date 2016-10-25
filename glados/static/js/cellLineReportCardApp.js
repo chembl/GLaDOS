@@ -5,30 +5,32 @@ CellLineReportCardApp = (function() {
 
   function CellLineReportCardApp() {}
 
-  CellLineReportCardApp.initCellLine = function(chembl_id) {
-    var cell_line;
-    cell_line = new CellLine({
-      cell_chembl_id: chembl_id
+  CellLineReportCardApp.init = function() {
+    var cellLine;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
+    cellLine = new CellLine({
+      cell_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    cell_line.url = Settings.WS_BASE_URL + 'cell_line/' + chembl_id + '.json';
-    return cell_line;
+    new CellLineBasicInformationView({
+      model: cellLine,
+      el: $('#CBasicInformation')
+    });
+    cellLine.fetch();
+    $('.scrollspy').scrollSpy();
+    return ScrollSpyHelper.initializeScrollSpyPinner();
   };
 
-  /* *
-    * Initializes the CBIView (Cell Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {CellBasicInformationViewView} the view that has been created
-  */
-
-
-  CellLineReportCardApp.initCBIView = function(model, top_level_elem) {
-    var cbiView;
-    cbiView = new CellLineBasicInformationView({
-      model: model,
-      el: top_level_elem
+  CellLineReportCardApp.initBasicInformation = function() {
+    var cellLine;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    cellLine = new CellLine({
+      cell_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return cbiView;
+    new CellLineBasicInformationView({
+      model: cellLine,
+      el: $('#CBasicInformation')
+    });
+    return cellLine.fetch();
   };
 
   return CellLineReportCardApp;

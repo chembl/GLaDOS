@@ -4,118 +4,30 @@ var CompoundTargetMatrixView;
 CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
+    this.model.on('change', this.render, this);
     this.$vis_elem = $('#BCK-CompTargMatrixContainer');
     return updateViewProxy = this.setUpResponsiveRender();
   },
   render: function() {
     console.log('render!');
     this.paintMatrix();
-    return $(this.el).find('select').material_select();
+    $(this.el).find('select').material_select();
+    return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillRow, getCellColour, getXCoord, getYCoord, height, inferPropsType, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellText, getXCoord, getYCoord, height, inferPropsType, inferPropsType2, links, margin, numColumns, numRows, rows, svg, width, _i, _j, _results, _results1;
     console.log('painting matrix');
-    compsTargets = {
-      "columns": [
-        {
-          "name": "C1"
-        }, {
-          "name": "C2"
-        }, {
-          "name": "C3"
-        }
-      ],
-      "rows": [
-        {
-          "name": "T1"
-        }, {
-          "name": "T2"
-        }, {
-          "name": "T3"
-        }, {
-          "name": "T4"
-        }
-      ],
-      "links": {
-        0: {
-          0: {
-            'pchembl': 1,
-            'num_bioactivities': 0,
-            'assay_type': 'U'
-          },
-          1: {
-            pchembl: 0,
-            'num_bioactivities': 10,
-            'assay_type': 'P'
-          },
-          2: {
-            pchembl: 2,
-            'num_bioactivities': 0,
-            'assay_type': 'B'
-          }
-        },
-        1: {
-          0: {
-            pchembl: 0,
-            'num_bioactivities': 0,
-            'assay_type': 'A'
-          },
-          1: {
-            pchembl: 3,
-            'num_bioactivities': 20,
-            'assay_type': 'T'
-          },
-          2: {
-            pchembl: 0,
-            'num_bioactivities': 0,
-            'assay_type': 'F'
-          }
-        },
-        2: {
-          0: {
-            pchembl: 4,
-            'num_bioactivities': 0,
-            'assay_type': 'U'
-          },
-          1: {
-            pchembl: 0,
-            'num_bioactivities': 30,
-            'assay_type': 'P'
-          },
-          2: {
-            pchembl: 0,
-            'num_bioactivities': 0,
-            'assay_type': 'B'
-          }
-        },
-        3: {
-          0: {
-            pchembl: 0,
-            'num_bioactivities': 0,
-            'assay_type': 'A'
-          },
-          1: {
-            pchembl: 0,
-            'num_bioactivities': 40,
-            'assay_type': 'T'
-          },
-          2: {
-            pchembl: 5,
-            'num_bioactivities': 0,
-            'assay_type': 'F'
-          }
-        }
-      }
-    };
-    currentProperty = 'assay_type';
+    compsTargets = this.model.get('matrix');
+    currentProperty = 'pchembl_value';
     margin = {
-      top: 70,
+      top: 150,
       right: 0,
       bottom: 10,
       left: 90
     };
     elemWidth = $(this.el).width();
-    height = width = 0.8 * elemWidth;
+    width = 0.8 * elemWidth;
+    height = width * 5;
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     links = compsTargets.links;
     numColumns = compsTargets.columns.length;
@@ -124,6 +36,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     console.log('num columns:', numColumns);
     console.log('links:');
     console.log(links);
+    getCellText = function(d) {
+      var txt;
+      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty];
+      return txt;
+    };
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
@@ -135,6 +52,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
+    inferPropsType2 = function(currentProperty) {
+      var propToType;
+      propToType = {
+        "assay_type": "string",
+        "pchembl_value": "number",
+        "published_value": "number"
+      };
+      return propToType[currentProperty];
+    };
     inferPropsType = function(links, currentProperty) {
       var cell, colNum, datum, row, rowNum, type;
       for (rowNum in links) {
@@ -143,6 +69,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
           cell = row[colNum];
           datum = cell[currentProperty];
           if (datum != null) {
+            if (parseInt(datum) !== NaN) {
+              return "number";
+            }
             type = typeof datum;
             return type;
           }
@@ -182,13 +111,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
           domain.push(cell[currentProperty]);
         }
       }
-      console.log('domain: ', domain);
       scale = d3.scale.ordinal().domain(domain).range(d3.scale.category20().range());
       return scale;
     };
     defineColourScale = function(links, currentProperty) {
       var scale, type;
-      type = inferPropsType(links, currentProperty);
+      type = inferPropsType2(currentProperty);
       console.log('type is: ', type);
       scale = (function() {
         switch (false) {
@@ -198,9 +126,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             return buildTextColourScale(links, currentProperty);
         }
       })();
+      console.log('Scale:');
+      console.log('domain: ', scale.domain());
+      console.log('range: ', scale.range());
       return scale;
     };
     getCellColour = defineColourScale(links, currentProperty);
+    fillColour = function(d) {
+      if (!(d[currentProperty] != null)) {
+        return '#9e9e9e';
+      }
+      return getCellColour(d[currentProperty]);
+    };
     fillRow = function(row, rowNumber) {
       var cells, dataList, key, value, _ref;
       console.log('row: ', rowNumber);
@@ -213,13 +150,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       console.log("dataList:", dataList);
       console.log('g elem: ', this);
-      return cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
+      cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
         console.log('here!');
         console.log(getXCoord(colNum));
         return getXCoord(colNum);
-      }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", function(d) {
-        return getCellColour(d[currentProperty]);
-      });
+      }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
+      return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellText);
     };
     rows = svg.selectAll('.vis-row').data(compsTargets.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
       return "translate(0, " + getYCoord(rowNum) + ")";
@@ -244,9 +180,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('current property: ', currentProperty);
       getCellColour = defineColourScale(links, currentProperty);
       t = svg.transition().duration(1000);
-      return t.selectAll(".vis-cell").style("fill", function(d) {
-        return getCellColour(d[currentProperty]);
-      });
+      return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellText);
     });
   }
 });

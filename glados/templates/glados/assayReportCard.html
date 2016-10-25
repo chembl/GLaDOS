@@ -132,18 +132,9 @@
 
 {% block custom_js_inline %}
 
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
+AssayReportCardApp.init();
 
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-var assay = AssayReportCardApp.initAssay(CHEMBL_ID);
 
-var abiView = AssayReportCardApp.initABIView(assay, $('#ABasicInformation'));
-var acsView = AssayReportCardApp.initACSView(assay, $('#ACurationSummaryCard'));
-
-assay.fetch();
 
 
 {% endblock %}

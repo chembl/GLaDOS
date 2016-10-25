@@ -16,11 +16,10 @@
     <div class="row">
 
       <div class="input-field col s6">
-        <select class="select-property">
-          <option value="" disabled selected>Choose your option</option>
-          <option value="pchembl">pchembl</option>
-          <option value="num_bioactivities">num_bioactivities</option>
+        <select class="select-property"/>
+          <option value="pchembl_value" selected>pchembl_value</option>
           <option value="assay_type">assay_type</option>
+          <option value="published_value">published_value</option>
         </select>
         <label>Select property</label>
       </div>
@@ -39,7 +38,6 @@
 
 {% block custom_js_inline %}
 
-var compTargMatrixView = SearchResultsApp.initCompTargMatrixView($('#CompTargetMatrix'));
-compTargMatrixView.render();
+SearchResultsApp.initCompoundTargetMatrix();
 
 {% endblock %}

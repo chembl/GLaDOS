@@ -5,55 +5,53 @@ DocumentReportCardApp = (function() {
 
   function DocumentReportCardApp() {}
 
-  DocumentReportCardApp.initDocument = function(chembl_id) {
-    var document;
+  DocumentReportCardApp.init = function() {
+    var document, documentAssayNetwork;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     document = new Document({
-      document_chembl_id: chembl_id
+      document_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    document.url = Settings.WS_BASE_URL + 'document/' + chembl_id + '.json';
-    return document;
+    documentAssayNetwork = new DocumentAssayNetwork({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+    });
+    new DocumentBasicInformationView({
+      model: document,
+      el: $('#DBasicInformation')
+    });
+    new DocumentAssayNetworkView({
+      model: documentAssayNetwork,
+      el: $('#DAssayNetworkCard')
+    });
+    document.fetch();
+    documentAssayNetwork.fetch();
+    $('.scrollspy').scrollSpy();
+    return ScrollSpyHelper.initializeScrollSpyPinner();
   };
 
-  DocumentReportCardApp.initDocumentAssayNetwork = function(doc_chembl_id) {
-    var dan;
-    dan = new DocumentAssayNetwork({
-      document_chembl_id: doc_chembl_id
+  DocumentReportCardApp.initBasicInformation = function() {
+    var document;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    document = new Document({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return dan;
+    new DocumentBasicInformationView({
+      model: document,
+      el: $('#DBasicInformation')
+    });
+    return document.fetch();
   };
 
-  /* *
-    * Initializes the DBIView (Document Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentBasicInformationView} the view that has been created
-  */
-
-
-  DocumentReportCardApp.initDBIView = function(model, top_level_elem) {
-    var dbiView;
-    dbiView = new DocumentBasicInformationView({
-      model: model,
-      el: top_level_elem
+  DocumentReportCardApp.initAssayNetwork = function() {
+    var documentAssayNetwork;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    documentAssayNetwork = new DocumentAssayNetwork({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return dbiView;
-  };
-
-  /* *
-    * Initializes the DANView (Document Assay Network View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentAssayNetworkView} the view that has been created
-  */
-
-
-  DocumentReportCardApp.initDANView = function(model, top_level_elem) {
-    var danView;
-    danView = new DocumentAssayNetworkView({
-      el: top_level_elem,
-      model: model
+    new DocumentAssayNetworkView({
+      model: documentAssayNetwork,
+      el: $('#DAssayNetworkCard')
     });
-    return danView;
+    return documentAssayNetwork.fetch();
   };
 
   /* *

@@ -62,7 +62,7 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
         console.log 'FAILED activities list!'
 
     # here I check if I got all the information I need
-    # after this it what is required is to reorganise it to create the graphs
+    # Now, what is required is to reorganise it to create the graphs
     # no more calls to the web services
     nodes = []
     links = []
