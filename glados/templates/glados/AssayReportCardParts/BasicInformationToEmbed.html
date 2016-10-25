@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var assay = AssayReportCardApp.initAssay(CHEMBL_ID);
-var abiView = AssayReportCardApp.initABIView(assay, $('#ABasicInformation'));
-assay.fetch()
+AssayReportCardApp.initAssayBasicInformation();
 
 {% endblock %}

@@ -5,46 +5,49 @@ AssayReportCardApp = (function() {
 
   function AssayReportCardApp() {}
 
-  AssayReportCardApp.initAssay = function(chembl_id) {
+  AssayReportCardApp.init = function() {
     var assay;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     assay = new Assay({
-      assay_chembl_id: chembl_id
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return assay;
+    new AssayBasicInformationView({
+      model: assay,
+      el: $('#ABasicInformation')
+    });
+    new AssayCurationSummaryView({
+      model: assay,
+      el: $('#ACurationSummaryCard')
+    });
+    assay.fetch();
+    $('.scrollspy').scrollSpy();
+    return ScrollSpyHelper.initializeScrollSpyPinner();
   };
 
-  /* *
-    * Initializes the ABIView (Assay Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {AssayBasicInformationView} the view that has been created
-  */
-
-
-  AssayReportCardApp.initABIView = function(model, top_level_elem) {
-    var abiView;
-    abiView = new AssayBasicInformationView({
-      model: model,
-      el: top_level_elem
+  AssayReportCardApp.initAssayBasicInformation = function() {
+    var assay;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    assay = new Assay({
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return abiView;
+    new AssayBasicInformationView({
+      model: assay,
+      el: $('#ABasicInformation')
+    });
+    return assay.fetch();
   };
 
-  /* *
-    * Initializes the ACSView (Assay Curation Summary View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {AssayBCurationSummaryView} the view that has been created
-  */
-
-
-  AssayReportCardApp.initACSView = function(model, top_level_elem) {
-    var aciView;
-    aciView = new AssayCurationSummaryView({
-      model: model,
-      el: top_level_elem
+  AssayReportCardApp.initCurationSummary = function() {
+    var assay;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    assay = new Assay({
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return aciView;
+    new AssayCurationSummaryView({
+      model: assay,
+      el: $('#ACurationSummaryCard')
+    });
+    return assay.fetch();
   };
 
   return AssayReportCardApp;

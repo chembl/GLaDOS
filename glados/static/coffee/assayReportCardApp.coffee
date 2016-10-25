@@ -1,43 +1,56 @@
 class AssayReportCardApp
 
   # -------------------------------------------------------------
-  # Models
+  # Initialisation
   # -------------------------------------------------------------
+  @init = ->
 
-  @initAssay = (chembl_id) ->
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
+
     assay = new Assay
-      assay_chembl_id: chembl_id
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
 
-    return assay
+    new AssayBasicInformationView
+      model: assay
+      el: $('#ABasicInformation')
+
+    new AssayCurationSummaryView
+      model: assay
+      el: $('#ACurationSummaryCard')
+
+    assay.fetch();
+
+    $('.scrollspy').scrollSpy();
+    ScrollSpyHelper.initializeScrollSpyPinner();
 
   # -------------------------------------------------------------
-  # Views
+  # Specific section initialization
+  # this is functions only initialize a section of the report card
   # -------------------------------------------------------------
+  @initAssayBasicInformation = ->
 
-  ### *
-    * Initializes the ABIView (Assay Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {AssayBasicInformationView} the view that has been created
-  ###
-  @initABIView = (model, top_level_elem) ->
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    abiView = new AssayBasicInformationView
-      model: model
-      el: top_level_elem
+    assay = new Assay
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
 
-    return abiView
+    new AssayBasicInformationView
+      model: assay
+      el: $('#ABasicInformation')
 
-  ### *
-    * Initializes the ACSView (Assay Curation Summary View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {AssayBCurationSummaryView} the view that has been created
-  ###
-  @initACSView  = (model, top_level_elem) ->
+    assay.fetch()
 
-    aciView = new AssayCurationSummaryView
-      model: model
-      el: top_level_elem
+  @initCurationSummary = ->
 
-    return aciView
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    assay = new Assay
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new AssayCurationSummaryView
+      model: assay
+      el: $('#ACurationSummaryCard')
+
+    assay.fetch();
+
+
