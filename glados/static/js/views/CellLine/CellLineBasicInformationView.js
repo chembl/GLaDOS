@@ -8,13 +8,13 @@ CellLineBasicInformationView = CardView.extend({
     return this.resource_type = 'Cell Line';
   },
   render: function() {
-    this.fillTemplates('BCK-CBI-large');
-    this.fillTemplates('BCK-CBI-small');
+    this.fillTemplate('BCK-CBI-large');
+    this.fillTemplate('BCK-CBI-small');
     this.showVisibleContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();
   },
-  fill_template: function(div_id) {
+  fillTemplate: function(div_id) {
     var div, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));

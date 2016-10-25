@@ -13,18 +13,7 @@
 
 </div>
 
-<div class="hide-on-small-only">
-
-  {% block search_med_big %}
-    {% include "glados/MainPageParts/search_bar_med_and_up.html" %}
-  {% endblock %}
-
-
-</div>
-
-{% block search_small %}
-  {% include "glados/MainPageParts/search_bar_small.html" %}
-{% endblock %}
+{% include "glados/SearchResultsParts/SearchBar.html" %}
 
 <div class="row hide-on-small-only">
 
@@ -66,22 +55,8 @@
 {% endblock %}
 
 {% block custom_js_inline %}
-  // pinner for search bar
-  $('#search-bar-small').pushpin({ top: 106 });
 
-  LazyIFramesHelper.initLazyIFrames();
-
-  var targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
-  var drugList = new DrugList({});
-
-  var targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'));
-  var drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(drugList, $('#BCK-DrugBrowserMain'));
-
-  drugList.fetch({reset: true});
-
-  LazyIFramesHelper.loadObjectOnceOnClick($('a[href="#browse_targets"]'), targetHierarchy);
-  var barView = new SearchBarView();
-
+MainPageApp.init();
 
 {% endblock %}
 

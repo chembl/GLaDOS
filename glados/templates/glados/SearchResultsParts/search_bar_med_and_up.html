@@ -1,0 +1,80 @@
+{% verbatim %}
+<script id="Handlebars-SearchBar-med-and-up" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
+  <div class="card search-banner z-depth-0">
+    <div class="card-content">
+
+      <div class="section">
+        <div class="container">
+
+          <div class="row">
+
+            <div class="col m12">
+
+
+              <div class="search-bar full-height z-depth-2">
+                <form id="search_form" name="search_form" action="/search_results" method="get">
+
+                    <div class="search-bar-help">
+                      <small><b>Example:</b> <a href="/search_results?search_str=Dopamine">Dopamine</a>, <a href="#">Aspirine</a>, <a
+                        href="#">NCCc1ccc(O)c(O)c1</a>, <a href="#">Liver</a>
+                      </small>
+                    </div>
+
+                    <div class="col m8">
+
+
+                      <div class="search-input-wrapper">
+                        <input id="search_bar" type="search" name="search_str" placeholder="Search in ChEMBL" required>
+                          {{searchBarQueryStr}}
+                        </input>
+                      </div>
+
+
+                    </div>
+
+                    <div class="col m2">
+
+
+                      <div class="search-opts-wrapper valign-wrapper">
+
+
+                        <div class="valign calign">
+                          <a href="#"><i class="icon icon-generic" data-icon="("></i> Advanced</a>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col m2">
+
+                      <div class="search-btn-wrapper valign-wrapper">
+                        <div class="valign calign">
+                          <a href=""><i class="icon icon-functional" data-icon="1"></i> Search</a>
+                        </div>
+                      </div>
+
+
+                    </div>
+                </form>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</script>
+{% endverbatim %}

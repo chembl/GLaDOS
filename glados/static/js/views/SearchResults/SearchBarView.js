@@ -2,17 +2,44 @@
 var SearchBarView;
 
 SearchBarView = Backbone.View.extend({
-  initialize: searchModel(function() {
-    this.searchModel = searchModel;
+  el: $('#BCK-SRB-wrapper'),
+  initialize: function(searchModel) {
+    this.searchModel = SearchModel.getInstance();
     return this.showAdvanced = false;
-  }),
+  },
   events: {
-    'change input#search_bar': 'changeSearchBar'
+    'keyup #search_bar': 'searchBarKeyUp',
+    'change #search_bar': 'searchBarChange'
+  },
+  searchBarKeyUp: function(e) {
+    return console.log($(e.currentTarget).val());
+  },
+  searchBarChange: function(e) {
+    return console.log($(e.currentTarget).val());
   },
   switchShowAdvanced: function() {
     return this.showAdvanced = !this.showAdvanced;
   },
-  changeSearchBar: function(e) {
-    return console.log($(e.currentTarget).val());
+  render: function() {
+    this.fillTemplate('BCK-SRB-med-and-up');
+    this.fillTemplate('BCK-SRB-small');
+    return $(this.el).find('#search-bar-small').pushpin({
+      top: 106
+    });
+  },
+  fillTemplate: function(div_id) {
+    var div, template;
+    div = $(this.el).find('#' + div_id);
+    template = $('#' + div.attr('data-hb-template'));
+    console.log(div);
+    console.log(template);
+    if (div && template) {
+      return div.html(Handlebars.compile(template.html())({
+        searchBarQueryStr: this.searchModel.get('queryString'),
+        showAdvanced: this.showAdvanced
+      }));
+    } else {
+      return console.log("Error trying to render because the div or the template could not be found");
+    }
   }
 });

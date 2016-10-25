@@ -40,3 +40,12 @@ SearchModel = Backbone.Model.extend
     if @searchDocuments
       # TODO: pass query parameters to @getCompoundResultsList().search(queryString)
       @getDocumentResultsList().fetch({reset:true})
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Singleton pattern
+# ----------------------------------------------------------------------------------------------------------------------
+
+SearchModel.getInstance = () ->
+  if not SearchModel.__model_instance
+    SearchModel.__model_instance = new SearchModel
+  return SearchModel.__model_instance

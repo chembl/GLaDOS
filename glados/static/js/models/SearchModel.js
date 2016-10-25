@@ -32,3 +32,10 @@ SearchModel = Backbone.Model.extend({
     }
   }
 });
+
+SearchModel.getInstance = function() {
+  if (!SearchModel.__model_instance) {
+    SearchModel.__model_instance = new SearchModel;
+  }
+  return SearchModel.__model_instance;
+};
