@@ -1,55 +1,65 @@
 class DocumentReportCardApp
 
   # -------------------------------------------------------------
-  # Models
+  # Initialization
   # -------------------------------------------------------------
+  @init = ->
 
-  @initDocument = (chembl_id) ->
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
+
     document = new Document
-      document_chembl_id: chembl_id
+      document_chembl_id: GlobalVariables.CHEMBL_ID
 
-    document.url = Settings.WS_BASE_URL + 'document/' + chembl_id + '.json'
-    return document
+    documentAssayNetwork = new DocumentAssayNetwork
+      document_chembl_id: GlobalVariables.CHEMBL_ID
 
-  @initDocumentAssayNetwork = (doc_chembl_id) ->
-    dan = new DocumentAssayNetwork
-      document_chembl_id: doc_chembl_id
+    new DocumentBasicInformationView
+      model: document
+      el: $('#DBasicInformation')
 
-    return dan
+    new DocumentAssayNetworkView
+      model: documentAssayNetwork
+      el: $('#DAssayNetworkCard')
+
+    document.fetch()
+    documentAssayNetwork.fetch()
+
+    $('.scrollspy').scrollSpy()
+    ScrollSpyHelper.initializeScrollSpyPinner()
+
+  # -------------------------------------------------------------
+  # Specific section initialization
+  # this is functions only initialize a section of the report card
+  # -------------------------------------------------------------
+  @initBasicInformation = ->
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    document = new Document
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new DocumentBasicInformationView
+      model: document
+      el: $('#DBasicInformation')
+
+    document.fetch()
+
+  @initAssayNetwork = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    documentAssayNetwork = new DocumentAssayNetwork
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new DocumentAssayNetworkView
+      model: documentAssayNetwork
+      el: $('#DAssayNetworkCard')
+
+    documentAssayNetwork.fetch()
 
 
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------
-
-  ### *
-    * Initializes the DBIView (Document Basic Information View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentBasicInformationView} the view that has been created
-  ###
-  @initDBIView = (model, top_level_elem) ->
-
-    dbiView = new DocumentBasicInformationView
-      model: model
-      el: top_level_elem
-
-    return dbiView
-
-
-  ### *
-    * Initializes the DANView (Document Assay Network View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentAssayNetworkView} the view that has been created
-  ###
-  @initDANView = (model, top_level_elem) ->
-
-    danView = new DocumentAssayNetworkView
-      el: top_level_elem
-      model: model
-
-    return danView
 
 
   ### *

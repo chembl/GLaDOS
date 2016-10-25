@@ -15,8 +15,6 @@
 
 {% block custom_js_inline %}
 
-var cellLine = CellLineReportCardApp.initCellLine(CHEMBL_ID);
-var TNCView = CellLineReportCardApp.initCBIView(cellLine, $('#CBasicInformation'));
-cellLine.fetch()
+CellLineReportCardApp.initBasicInformation()
 
 {% endblock %}
