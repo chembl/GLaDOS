@@ -19,13 +19,6 @@
 
 {% block custom_js_inline %}
 
-var pathname = window.location.pathname;
-var pathnameParts = pathname.split('/')
-CHEMBL_ID = pathnameParts[pathnameParts.length - 2]
-
-var documentAssayNetwork = DocumentReportCardApp.initDocumentAssayNetwork(CHEMBL_ID);
-var danFSView = DocumentReportCardApp.initDANFSView(documentAssayNetwork, $('#DAN-Main'));
-
-documentAssayNetwork.fetch();
+DocumentReportCardApp.initAssayNetworkFS();
 
 {% endblock %}
