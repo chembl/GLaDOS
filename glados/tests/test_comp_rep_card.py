@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from report_card_tester import ReportCardTester
+from glados.tests.report_card_tester import ReportCardTester
 
 # Cases for visualization:
 # - Compound with more alternate forms: CHEMBL1236196

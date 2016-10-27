@@ -1,5 +1,6 @@
 describe "Target Relations", ->
-  targetRels = TargetReportCardApp.initTargetRelations('CHEMBL3559691')
+  targetRels = new TargetRelationList
+  targetRels.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + 'CHEMBL3559691'+ '&order_by=target_chembl_id&limit=1000'
 
   beforeAll (done) ->
     targetRels.fetch()

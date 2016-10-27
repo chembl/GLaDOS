@@ -2,7 +2,8 @@
 
 describe("Approved Drug and Clinical Candidate List", function() {
   var appDrugsClinCandsList;
-  appDrugsClinCandsList = TargetReportCardApp.initAppDrugClinCands('CHEMBL2364670');
+  appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList;
+  appDrugsClinCandsList.set_chembl_id('CHEMBL2364670');
   beforeAll(function(done) {
     appDrugsClinCandsList.fetch();
     return setTimeout((function() {
@@ -21,8 +22,8 @@ describe("Approved Drug and Clinical Candidate List", function() {
     model4 = appDrugsClinCandsList.get('CHEMBL2107817');
     models.push(model4);
     expect(model1.get('pref_name')).toBe('CLAVULANATE POTASSIUM');
-    expect(model2.get('pref_name')).toBe('TAZOBACTAM SODIUM');
-    expect(model3.get('pref_name')).toBe('SULBACTAM SODIUM');
+    expect(model2.get('pref_name')).toBe('SULBACTAM SODIUM');
+    expect(model3.get('pref_name')).toBe('TAZOBACTAM SODIUM');
     expect(model4.get('pref_name')).toBe('AVIBACTAM SODIUM');
     for (i = _i = 0; _i <= 3; i = ++_i) {
       model = models[i];

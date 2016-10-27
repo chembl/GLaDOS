@@ -5,7 +5,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend({
   idAttribute: 'target_chembl_id',
   initialize: function() {
     this.on('change', this.getProteinTargetClassification, this);
-    return this.url = Settings.WS_DEV_BASE_URL + 'target/' + this.get('target_chembl_id') + '.json';
+    return this.url = Settings.WS_BASE_URL + 'target/' + this.get('target_chembl_id') + '.json';
   },
   getProteinTargetClassification: function() {
     var comp, comp_url, component_id, target, target_components, _i, _len, _results;
@@ -19,7 +19,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend({
       for (_i = 0, _len = target_components.length; _i < _len; _i++) {
         comp = target_components[_i];
         component_id = comp['component_id'];
-        comp_url = Settings.WS_DEV_BASE_URL + 'target_component/' + component_id + '.json';
+        comp_url = Settings.WS_BASE_URL + 'target_component/' + component_id + '.json';
         _results.push($.get(comp_url).done(function(data) {
           var prot_class, prot_class_dict, prot_class_id, prot_class_url, protein_classifications, _j, _len1, _results1;
           protein_classifications = data['protein_classifications'];
@@ -30,7 +30,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend({
             prot_class_dict = target.get('protein_classifications');
             if (!(prot_class_dict[prot_class_id] != null)) {
               prot_class_dict[prot_class_id] = "";
-              prot_class_url = Settings.WS_DEV_BASE_URL + 'protein_class/' + prot_class_id + '.json';
+              prot_class_url = Settings.WS_BASE_URL + 'protein_class/' + prot_class_id + '.json';
               _results1.push($.get(prot_class_url).done(function(data) {
                 var num;
                 prot_class_dict[data['protein_class_id']] = (function() {

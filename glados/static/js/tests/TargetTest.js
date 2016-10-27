@@ -2,7 +2,9 @@
 
 describe("Target", function() {
   var target;
-  target = TargetReportCardApp.initTarget('CHEMBL2363965');
+  target = new Target({
+    target_chembl_id: 'CHEMBL2363965'
+  });
   beforeAll(function(done) {
     target.fetch();
     return setTimeout((function() {
@@ -11,6 +13,7 @@ describe("Target", function() {
   });
   return it("(SERVER DEPENDENT) loads the protein target classification", function(done) {
     var class1, class2, classification;
+    console.log(target);
     classification = target.get('protein_classifications');
     class1 = classification[8][0];
     class2 = classification[601][0];
