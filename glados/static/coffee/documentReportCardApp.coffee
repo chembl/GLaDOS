@@ -17,6 +17,10 @@ class DocumentReportCardApp
       model: document
       el: $('#DBasicInformation')
 
+    dWordCloudView = new DocumentWordCloudView
+      el: $('#BCK-DocWordCloud')
+    dWordCloudView.render()
+
     new DocumentAssayNetworkView
       model: documentAssayNetwork
       el: $('#DAssayNetworkCard')
