@@ -6,6 +6,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
   initialize: ->
 
+    #ResponsiviseViewExt
     @$vis_elem = $('#AssayNetworkVisualisationContainer')
     updateViewProxy = @setUpResponsiveRender()
     @model.on 'change', updateViewProxy, @
@@ -13,7 +14,6 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
   render: ->
 
-    console.log('render! DAN')
     @showVisibleContent()
     @hidePreloader()
     @addFSLinkAndInfo()

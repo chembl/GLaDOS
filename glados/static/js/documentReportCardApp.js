@@ -6,7 +6,7 @@ DocumentReportCardApp = (function() {
   function DocumentReportCardApp() {}
 
   DocumentReportCardApp.init = function() {
-    var document, documentAssayNetwork;
+    var dWordCloudView, document, documentAssayNetwork;
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     document = new Document({
       document_chembl_id: GlobalVariables.CHEMBL_ID
@@ -18,6 +18,10 @@ DocumentReportCardApp = (function() {
       model: document,
       el: $('#DBasicInformation')
     });
+    dWordCloudView = new DocumentWordCloudView({
+      el: $('#BCK-DocWordCloud')
+    });
+    dWordCloudView.render();
     new DocumentAssayNetworkView({
       model: documentAssayNetwork,
       el: $('#DAssayNetworkCard')
