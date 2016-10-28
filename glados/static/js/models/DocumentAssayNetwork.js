@@ -85,7 +85,9 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
             return links.push({
               "source": i,
               "target": j,
-              "value": numEqual
+              "value": numEqual,
+              "source_name": assayI.assay_chembl_id,
+              "target_name": assayJ.assay_chembl_id
             });
           });
         });
