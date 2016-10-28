@@ -6,7 +6,7 @@ DocumentReportCardApp = (function() {
   function DocumentReportCardApp() {}
 
   DocumentReportCardApp.init = function() {
-    var document, documentAssayNetwork;
+    var dWordCloudView, document, documentAssayNetwork;
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     document = new Document({
       document_chembl_id: GlobalVariables.CHEMBL_ID
@@ -18,6 +18,10 @@ DocumentReportCardApp = (function() {
       model: document,
       el: $('#DBasicInformation')
     });
+    dWordCloudView = new DocumentWordCloudView({
+      el: $('#BCK-DocWordCloud')
+    });
+    dWordCloudView.render();
     new DocumentAssayNetworkView({
       model: documentAssayNetwork,
       el: $('#DAssayNetworkCard')
@@ -54,21 +58,17 @@ DocumentReportCardApp = (function() {
     return documentAssayNetwork.fetch();
   };
 
-  /* *
-    * Initializes the DANFSView (Document Assay Network Full Screen View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentAssayNetworkFSView} the view that has been created
-  */
-
-
-  DocumentReportCardApp.initDANFSView = function(model, top_level_elem) {
-    var danFSView;
-    danFSView = new DocumentAssayNetworkFSView({
-      el: top_level_elem,
-      model: model
+  DocumentReportCardApp.initAssayNetworkFS = function() {
+    var danFSView, documentAssayNetwork;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
+    documentAssayNetwork = new DocumentAssayNetwork({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    return danFSView;
+    danFSView = new DocumentAssayNetworkFSView({
+      model: documentAssayNetwork,
+      el: $('#DAN-Main')
+    });
+    return documentAssayNetwork.fetch();
   };
 
   return DocumentReportCardApp;

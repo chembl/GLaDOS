@@ -48,6 +48,18 @@
       </div>
 
       <div class="divider"></div>
+      <div id="WordCloud" class="section scrollspy">
+        <h3>WordCloud</h3>
+
+        <div class="row">
+          {% block wc %}
+            {% include "glados/DocumentReportCardParts/WordCloud.html" %}
+          {% endblock %}
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
       <div id="AssayNetwork" class="section scrollspy">
         <h3>Assay Network</h3>
 
@@ -129,6 +141,10 @@
 
           <li><a href="#RelatedDocuments">
             <small>Related Documents</small>
+          </a></li>
+
+          <li><a href="#WordCloud">
+            <small>Word Cloud</small>
           </a></li>
 
           <li><a href="#AssayNetwork">

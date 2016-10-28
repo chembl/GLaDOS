@@ -17,6 +17,10 @@ class DocumentReportCardApp
       model: document
       el: $('#DBasicInformation')
 
+    dWordCloudView = new DocumentWordCloudView
+      el: $('#BCK-DocWordCloud')
+    dWordCloudView.render()
+
     new DocumentAssayNetworkView
       model: documentAssayNetwork
       el: $('#DAssayNetworkCard')
@@ -58,20 +62,17 @@ class DocumentReportCardApp
 
 
   # -------------------------------------------------------------
-  # Views
+  # Full Screen views
   # -------------------------------------------------------------
+  @initAssayNetworkFS = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
-  ### *
-    * Initializes the DANFSView (Document Assay Network Full Screen View)
-    * @param {Compound} model, base model for the view
-    * @param {JQuery} top_level_elem element that renders the model.
-    * @return {DocumentAssayNetworkFSView} the view that has been created
-  ###
-  @initDANFSView = (model, top_level_elem) ->
+    documentAssayNetwork = new DocumentAssayNetwork
+      document_chembl_id: GlobalVariables.CHEMBL_ID
 
     danFSView = new DocumentAssayNetworkFSView
-      el: top_level_elem
-      model: model
+      model: documentAssayNetwork
+      el: $('#DAN-Main')
 
-    return danFSView
+    documentAssayNetwork.fetch()
