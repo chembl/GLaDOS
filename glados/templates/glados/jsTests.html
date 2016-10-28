@@ -15,6 +15,9 @@
   <script type="text/javascript" src="/static/js/api/jasmine/jasmine.js"></script>
   <script type="text/javascript" src="/static/js/api/jasmine/jasmine-html.js"></script>
   <script type="text/javascript" src="/static/js/api/jasmine/boot.js"></script>
+  <script type="text/javascript">
+    jasmine.getEnv().defaultTimeoutInterval = 30000;
+  </script>
   <script type="text/javascript" src="/static/js/tests/TargetHierarchyTreeTest.js"></script>
   <script type="text/javascript" src="/static/js/tests/TargetTest.js"></script>
   <script type="text/javascript" src="/static/js/tests/TargetRelationsTest.js"></script>

@@ -326,7 +326,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # Max Phase 2
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
-    self.assertEqual('2 Phase II', phase_td.text)
+    self.assertEqual('3 Phase III', phase_td.text)
 
   def test_compound_report_card_scenario_7(self):
 
@@ -353,11 +353,11 @@ class CompoundReportCardTest(ReportCardTester):
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
 
     self.assertEqual(
-      'GNF-Pf-3680 MB-800 MB-800 [as isethionate] Pentamidine Pentamidine Isetionate RP-2512 RP-2512 [as isethionate]',
+      'GNF-Pf-3680 MB 800 [AS ISETHIONATE] MB-800 NEBUPENT [AS ISETHIONATE]',
       synonyms_td.text)
 
     self.assertEqual(
-      'Nebupent [as isethionate] Pentacarinat [as isethionate] Pentam 300 [as isethionate]',
+      '',
       tradenames_td.text)
 
     # Normal download buttons
@@ -469,8 +469,8 @@ class CompoundReportCardTest(ReportCardTester):
                                  'Molecule Type: Enzyme', 'top')
 
     # Availability Type: Discontinued: 0
-    self.assert_molecule_feature('Bck-Availability', True, self.HOST + '/static/img/molecule_features/availability_0.svg',
-                                 'Availability: Discontinued', 'bottom')
+    self.assert_molecule_feature('Bck-Availability', True, self.HOST + '/static/img/molecule_features/availability_1.svg',
+                                 'Availability: Prescription Only', 'bottom')
 
     #since no structure is available, the following buttons must not be found in the page
     removed_ids = ['CNC-IMG-Options-Zoom', 'CNC-IMG-Options-Zoom-small']
