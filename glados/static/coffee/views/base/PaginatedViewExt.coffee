@@ -118,7 +118,7 @@ PaginatedViewExt =
     if clicked.hasClass('disabled')
       return
 
-    @showPreloader() unless @collection.getMeta('server_side') != true
+    @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
 
     pageNum = clicked.attr('data-page')
     @requestPageInCollection(pageNum)
@@ -165,7 +165,7 @@ PaginatedViewExt =
 
   changePageSize: (event) ->
 
-    @showPreloader() unless @collection.getMeta('server_side') != true
+    @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
     selector = $(event.currentTarget)
     new_page_size = selector.val()
     @collection.resetPageSize(new_page_size)
@@ -207,7 +207,7 @@ PaginatedViewExt =
   triggerSearch:  (term, column, type) ->
 
     @clearContentContainer()
-    @showPreloader()
+    @showPaginatedViewPreloader()
 
     @collection.setSearch(term, column, type)
   #--------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ PaginatedViewExt =
 
   sortCollection: (event) ->
 
-    @showPreloader() unless @collection.getMeta('server_side') != true
+    @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
     order_icon = $(event.currentTarget)
     comparator = order_icon.attr('data-comparator')
 
@@ -225,14 +225,14 @@ PaginatedViewExt =
   triggerCollectionSort: (comparator) ->
 
     @clearContentContainer()
-    @showPreloader()
+    @showPaginatedViewPreloader()
 
     @collection.sortCollection(comparator)
 
   #--------------------------------------------------------------------------------------
   # Preloaders and content
   #--------------------------------------------------------------------------------------
-  showContent: ->
+  showPaginatedViewContent: ->
 
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
@@ -240,7 +240,7 @@ PaginatedViewExt =
     $preloaderCont.hide()
     $contentCont.show()
 
-  showPreloader: ->
+  showPaginatedViewPreloader: ->
 
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
@@ -249,7 +249,7 @@ PaginatedViewExt =
     $contentCont.hide()
 
   # show the preloader making sure the content is also visible, useful for the infinite browser
-  showPreloaderAndContent: ->
+  showPaginatedViewPreloaderAndContent: ->
 
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
@@ -290,7 +290,7 @@ PaginatedViewExt =
     advancer = $.proxy ->
       #destroy waypoint to avoid issues with triggering more page requests.
       Waypoint.destroyAll()
-      @showPreloaderAndContent()
+      @showPaginatedViewPreloaderAndContent()
       @requestPageInCollection('next')
     , @
 
@@ -348,7 +348,7 @@ PaginatedViewExt =
 
   sortCollectionFormSelect: (event) ->
 
-    @showPreloader()
+    @showPaginatedViewPreloader()
 
     selector = $(event.currentTarget)
     comparator = selector.val()

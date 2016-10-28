@@ -12,6 +12,6 @@ CompoundResultsListView = Backbone.View.extend(PaginatedViewExt).extend({
     this.fillPageSelectors();
     this.renderSortingSelector();
     this.activateSelectors();
-    return this.showContent();
+    return this.showPaginatedViewContent();
   }
 });

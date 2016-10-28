@@ -10,7 +10,7 @@ TargetNameAndClassificationView = CardView.extend({
   render: function() {
     this.fillTemplate('BCK-TNC-large');
     this.fillTemplate('BCK-TNC-small');
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('name_and_classification');
     return this.activateModals();
   },

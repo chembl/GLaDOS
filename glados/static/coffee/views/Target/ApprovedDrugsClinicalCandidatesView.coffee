@@ -22,7 +22,8 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     @fillTemplates()
     @fillPaginators()
 
-    @showVisibleContent()
+    @showCardContent()
+    @showPaginatedViewContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
 

@@ -10,8 +10,8 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     return this.resource_type = 'Document';
   },
   render: function() {
-    this.showVisibleContent();
-    this.hidePreloader();
+    this.showCardContent();
+    this.hideResponsiveViewPreloader();
     this.addFSLinkAndInfo();
     this.paintMatrix();
     this.initEmbedModal('assay_network');

@@ -13,7 +13,7 @@ CompoundMechanismsOfActionView = CardView.extend({
       return;
     }
     this.addAllMechanisms();
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('mechanism_of_action');
     this.activateTooltips();
     return this.activateModals();

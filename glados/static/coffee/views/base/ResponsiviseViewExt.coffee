@@ -13,7 +13,7 @@ ResponsiviseViewExt =
       $to_empty = $(@el)
 
     $to_empty.empty()
-    @showPreloader()
+    @showResponsiveViewPreloader()
     debounced_render()
 
 
@@ -24,7 +24,7 @@ ResponsiviseViewExt =
     # element to be ready
     reRender = ->
       @render()
-      @hidePreloader()
+      @hideResponsiveViewPreloader()
 
     debounced_render = _.debounce($.proxy(reRender, @), 300)
     updateViewProxy = $.proxy(@updateView, @, debounced_render)
@@ -34,7 +34,7 @@ ResponsiviseViewExt =
 
     return updateViewProxy
 
-  showPreloader: ->
+  showResponsiveViewPreloader: ->
 
     if @$vis_elem?
       $base_elem = @$vis_elem
@@ -45,7 +45,7 @@ ResponsiviseViewExt =
       $base_elem.html Handlebars.compile($('#Handlebars-Common-Preloader').html())
       $base_elem.attr('data-loading', 'true')
 
-  hidePreloader: ->
+  hideResponsiveViewPreloader: ->
 
     if @$vis_elem?
       $base_elem = @$vis_elem

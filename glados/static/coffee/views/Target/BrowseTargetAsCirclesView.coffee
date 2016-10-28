@@ -3,7 +3,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
-    @showPreloader()
+    @showResponsiveViewPreloader()
 
     # the render function is debounced so it waits for the size of the
     # element to be ready
@@ -17,7 +17,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log('nodes before')
     console.log(@model.get('plain'))
 
-    @hidePreloader()
+    @hideResponsiveViewPreloader()
     margin = 20
     diameter = $(@el).width();
 

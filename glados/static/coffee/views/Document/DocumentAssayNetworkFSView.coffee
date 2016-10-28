@@ -18,7 +18,7 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     $(@el).find('.vis-title').html Handlebars.compile( $('#Handlebars-Document-DAN-FS-title').html() )
       chembl_id: @model.get('document_chembl_id')
 
-    @hidePreloader()
+    @hideResponsiveViewPreloader()
     @paintMatrix()
 
   # --------------------------------------------------------------------

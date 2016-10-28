@@ -10,7 +10,7 @@ CellLineBasicInformationView = CardView.extend({
   render: function() {
     this.fillTemplate('BCK-CBI-large');
     this.fillTemplate('BCK-CBI-small');
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('basic_information');
     return this.activateModals();
   },

@@ -9,7 +9,7 @@ CompoundMoleculeFormsListView = CardView.extend({
   },
   render: function() {
     this.addAllAlternateForms();
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('alternate_forms');
     this.activateTooltips();
     return this.activateModals();

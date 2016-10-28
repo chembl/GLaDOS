@@ -22,7 +22,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend
     @fillTemplates()
     @fillNumResults()
     @setUpLoadingWaypoint()
-    @showContent()
+    @showPaginatedViewContent()
 
     console.log 'num cards: ', $(@el).find('.BCK-items-container').children().length
 

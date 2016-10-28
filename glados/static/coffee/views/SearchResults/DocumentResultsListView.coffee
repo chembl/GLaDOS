@@ -11,4 +11,4 @@ DocumentResultsListView = Backbone.View.extend(PaginatedViewExt).extend
     @fillPageSelectors()
     @renderSortingSelector()
     @activateSelectors()
-    @showContent()
+    @showPaginatedViewContent()

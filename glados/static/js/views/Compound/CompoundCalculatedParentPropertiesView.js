@@ -24,7 +24,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
     });
     this.initEmbedModal('calculated_properties');
     this.activateModals();
-    return this.showVisibleContent();
+    return this.showCardContent();
   },
   mol_properties: {
     'full_mwt': 'Bck-CalcCompProp-MolWt',

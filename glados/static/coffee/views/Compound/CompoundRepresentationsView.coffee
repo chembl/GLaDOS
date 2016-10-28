@@ -19,7 +19,7 @@ CompoundRepresentationsView = CardView.extend
     @renderStandardInchiKey()
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('representations')
     @activateTooltips()
