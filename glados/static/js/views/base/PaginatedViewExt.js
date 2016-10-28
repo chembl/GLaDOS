@@ -122,7 +122,7 @@ PaginatedViewExt = {
       return;
     }
     if (this.collection.getMeta('server_side') === true) {
-      this.showPreloader();
+      this.showPaginatedViewPreloader();
     }
     pageNum = clicked.attr('data-page');
     return this.requestPageInCollection(pageNum);
@@ -166,7 +166,7 @@ PaginatedViewExt = {
   changePageSize: function(event) {
     var new_page_size, selector;
     if (this.collection.getMeta('server_side') === true) {
-      this.showPreloader();
+      this.showPaginatedViewPreloader();
     }
     selector = $(event.currentTarget);
     new_page_size = selector.val();
@@ -194,13 +194,13 @@ PaginatedViewExt = {
   },
   triggerSearch: function(term, column, type) {
     this.clearContentContainer();
-    this.showPreloader();
+    this.showPaginatedViewPreloader();
     return this.collection.setSearch(term, column, type);
   },
   sortCollection: function(event) {
     var comparator, order_icon;
     if (this.collection.getMeta('server_side') === true) {
-      this.showPreloader();
+      this.showPaginatedViewPreloader();
     }
     order_icon = $(event.currentTarget);
     comparator = order_icon.attr('data-comparator');
@@ -208,24 +208,24 @@ PaginatedViewExt = {
   },
   triggerCollectionSort: function(comparator) {
     this.clearContentContainer();
-    this.showPreloader();
+    this.showPaginatedViewPreloader();
     return this.collection.sortCollection(comparator);
   },
-  showContent: function() {
+  showPaginatedViewContent: function() {
     var $contentCont, $preloaderCont;
     $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
     $contentCont = $(this.el).find('.BCK-items-container');
     $preloaderCont.hide();
     return $contentCont.show();
   },
-  showPreloader: function() {
+  showPaginatedViewPreloader: function() {
     var $contentCont, $preloaderCont;
     $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
     $contentCont = $(this.el).find('.BCK-items-container');
     $preloaderCont.show();
     return $contentCont.hide();
   },
-  showPreloaderAndContent: function() {
+  showPaginatedViewPreloaderAndContent: function() {
     var $contentCont, $preloaderCont;
     $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
     $contentCont = $(this.el).find('.BCK-items-container');
@@ -253,7 +253,7 @@ PaginatedViewExt = {
     $middleCard = $cards[Math.round($cards.length / 2)];
     advancer = $.proxy(function() {
       Waypoint.destroyAll();
-      this.showPreloaderAndContent();
+      this.showPaginatedViewPreloaderAndContent();
       return this.requestPageInCollection('next');
     }, this);
     Waypoint.destroyAll();
@@ -314,7 +314,7 @@ PaginatedViewExt = {
   },
   sortCollectionFormSelect: function(event) {
     var comparator, selector;
-    this.showPreloader();
+    this.showPaginatedViewPreloader();
     selector = $(event.currentTarget);
     comparator = selector.val();
     if (comparator === '') {

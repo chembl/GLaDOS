@@ -12,4 +12,4 @@ DrugBrowserTableAsCardView = CardView.extend(PaginatedViewExt).extend
     @fillPaginators()
     @fillPageSelectors()
     @activateSelectors()
-    @showContent()
+    @showPaginatedViewContent()

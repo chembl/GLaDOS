@@ -18,7 +18,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
     this.fillTemplates();
     this.fillPaginators();
     this.showCardContent();
-    this.showContent();
+    this.showPaginatedViewContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
     this.fillPageSelectors();

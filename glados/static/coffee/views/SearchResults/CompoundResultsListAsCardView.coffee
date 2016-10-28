@@ -13,4 +13,4 @@ CompoundResultsListAsCardView = CardView.extend(PaginatedViewExt).extend
     @fillPageSelectors()
     @renderSortingSelector()
     @activateSelectors()
-    @showContent()
+    @showPaginatedViewContent()

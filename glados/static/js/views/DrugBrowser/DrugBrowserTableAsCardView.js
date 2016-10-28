@@ -11,6 +11,6 @@ DrugBrowserTableAsCardView = CardView.extend(PaginatedViewExt).extend({
     this.fillPaginators();
     this.fillPageSelectors();
     this.activateSelectors();
-    return this.showContent();
+    return this.showPaginatedViewContent();
   }
 });
