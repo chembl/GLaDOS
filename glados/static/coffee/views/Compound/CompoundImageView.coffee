@@ -24,7 +24,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       img_url = Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + '.svg'
 
     img = $(@el).find('#Bck-COMP_IMG')
-    img.load $.proxy(@showVisibleContent, @)
+    img.load $.proxy(@showCardContent, @)
 
     # protein_structure is used when the molecule has a very complex structure that can not be shown in an image.
     # not_available is when the compound has no structure to show.

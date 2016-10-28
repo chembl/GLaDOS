@@ -21,7 +21,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
 
     @initEmbedModal('calculated_properties')
     @activateModals()
-    @showVisibleContent()
+    @showCardContent()
 
   mol_properties:
     'full_mwt': 'Bck-CalcCompProp-MolWt'

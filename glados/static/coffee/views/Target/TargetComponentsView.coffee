@@ -21,7 +21,7 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
     @fillTemplate('BCK-Components-small')
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
     @initEmbedModal('components')
     @activateModals()
 

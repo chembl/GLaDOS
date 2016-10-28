@@ -18,7 +18,7 @@ CompoundMechanismsOfActionView = CardView.extend
     @addAllMechanisms()
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('mechanism_of_action')
     @activateTooltips()

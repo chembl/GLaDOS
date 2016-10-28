@@ -13,7 +13,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
 
     @fillTemplate('BCK-DBI-large')
     @fillTemplate('BCK-DBI-small')
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('basic_information')
     @activateModals()

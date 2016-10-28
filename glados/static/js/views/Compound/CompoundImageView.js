@@ -26,7 +26,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
       img_url = Settings.WS_BASE_URL + 'image/' + this.model.get('molecule_chembl_id') + '.svg';
     }
     img = $(this.el).find('#Bck-COMP_IMG');
-    img.load($.proxy(this.showVisibleContent, this));
+    img.load($.proxy(this.showCardContent, this));
     img.error(function() {
       return img.attr('src', '/static/img/structure_not_found.png');
     });

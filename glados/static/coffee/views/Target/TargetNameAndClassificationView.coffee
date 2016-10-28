@@ -15,7 +15,7 @@ TargetNameAndClassificationView = CardView.extend
     @fillTemplate('BCK-TNC-small')
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
     @initEmbedModal('name_and_classification')
     @activateModals()
 

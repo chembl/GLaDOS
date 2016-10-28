@@ -18,7 +18,7 @@ CompoundFeaturesView = CardView.extend({
     this.renderProperty('Bck-Topical', 'topical');
     this.renderProperty('Bck-BlackBox', 'black_box_warning');
     this.renderProperty('Bck-Availability', 'availability_type');
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('molecule_features');
     this.activateModals();
     return this.activateTooltips();

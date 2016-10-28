@@ -18,7 +18,7 @@ CompoundNameClassificationView = CardView.extend
     @renderSynonymsAndTradeNames()
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('name_and_classification')
     @activateTooltips()

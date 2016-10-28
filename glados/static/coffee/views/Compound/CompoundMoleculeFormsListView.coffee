@@ -14,7 +14,7 @@ CompoundMoleculeFormsListView = CardView.extend
     @addAllAlternateForms()
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('alternate_forms')
     @activateTooltips()

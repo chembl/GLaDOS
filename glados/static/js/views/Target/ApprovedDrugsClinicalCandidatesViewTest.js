@@ -12,7 +12,7 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend({
       return;
     }
     $('#example_target').DataTable();
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('approved_drugs_clinical_candidates');
     this.activateModals();
     return this.activateSelectors();
