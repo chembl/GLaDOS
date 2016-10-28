@@ -11,7 +11,7 @@ describe "Target", ->
     # but there is no way to know that it loaded all the classifications.
     setTimeout ( ->
       done()
-    ), 2000
+    ), 10000
 
   it "(SERVER DEPENDENT) loads the protein target classification", (done) ->
     console.log(target)

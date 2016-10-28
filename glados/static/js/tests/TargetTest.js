@@ -9,7 +9,7 @@ describe("Target", function() {
     target.fetch();
     return setTimeout((function() {
       return done();
-    }), 2000);
+    }), 10000);
   });
   return it("(SERVER DEPENDENT) loads the protein target classification", function(done) {
     var class1, class2, classification;

@@ -11,7 +11,7 @@ describe "Target Relations", ->
     # but there is no way to know that it loaded all the classifications.
     setTimeout ( ->
       done()
-    ), 2000
+    ), 10000
 
   it "(SERVER DEPENDENT) fetches the information correctly for CHEMBL3559691", (done) ->
 

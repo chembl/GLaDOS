@@ -8,7 +8,7 @@ describe("Target Relations", function() {
     targetRels.fetch();
     return setTimeout((function() {
       return done();
-    }), 2000);
+    }), 10000);
   });
   it("(SERVER DEPENDENT) fetches the information correctly for CHEMBL3559691", function(done) {
     var data, dataMustBe;
