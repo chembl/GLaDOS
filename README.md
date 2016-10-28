@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/chembl/GLaDOS.svg?branch=master)](https://travis-ci.org/chembl/GLaDOS)
+
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
 
