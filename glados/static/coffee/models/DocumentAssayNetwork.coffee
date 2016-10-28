@@ -95,7 +95,12 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
               if compoundsJ[molecule_chembl_id] == 1
                 numEqual++
 
-            links.push({"source":i, "target": j, "value":numEqual})
+            links.push
+              "source":i
+              "target": j
+              "value":numEqual
+              "source_name": assayI.assay_chembl_id
+              "target_name": assayJ.assay_chembl_id
 
         answer = {'nodes': nodes, 'links': links}
         thisModel.set('graph', answer)

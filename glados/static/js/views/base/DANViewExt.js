@@ -3,8 +3,9 @@ var DANViewExt;
 
 DANViewExt = {
   paintMatrix: function() {
-    var assayTestType2Color, assayType2Color, assays, baseWidth, color, color_value, colorise, column, draw_legend, elemWidth, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, numNodes, orders, row, scaleWidthFor, svg, tip, total, width, x, z;
+    var assayTestType2Color, assayType2Color, assays, baseWidth, color, color_value, colorise, column, draw_legend, elemWidth, fillRow, height, margin, matrix, max, mouseout, mouseover, n, nodes, numNodes, order, orders, row, scaleWidthFor, svg, tip, total, width, x, z;
     assays = this.model.get('graph');
+    console.log('ASSAYS: ', assays);
     numNodes = assays.nodes.length;
     if (!(assays != null)) {
       return;
@@ -121,7 +122,7 @@ DANViewExt = {
       return color1.hexString();
     };
     margin = {
-      top: 70,
+      top: 90,
       right: 0,
       bottom: 10,
       left: 90
@@ -179,6 +180,7 @@ DANViewExt = {
         return d3.ascending(nodes[a].assay_test_type, nodes[b].assay_test_type);
       })
     };
+    console.log('ORDERS: ', orders);
     max = d3.max(assays.links, function(d) {
       return d.value;
     });
@@ -238,6 +240,33 @@ DANViewExt = {
       var t;
       t = svg.transition().duration(2500);
       return t.selectAll(".cell").style("fill", colorise);
+    };
+    $(this.el).find(".select-order").on("change", function() {
+      if (!(this.value != null)) {
+        return;
+      }
+      return order(this.value);
+    });
+    order = function(value) {
+      var t;
+      console.log('change order!');
+      console.log(orders[value]);
+      x.domain(orders[value]);
+      t = svg.transition().duration(2500);
+      t.selectAll(".dan-row").delay(function(d, i) {
+        return x(i) * 4;
+      }).attr("transform", function(d, i) {
+        return "translate(0," + x(i) + ")";
+      }).selectAll(".cell").delay(function(d) {
+        return x(d.x) * 4;
+      }).attr("x", function(d) {
+        return x(d.x);
+      });
+      return t.selectAll(".dan-column").delay(function(d, i) {
+        return x(i) * 4;
+      }).attr("transform", function(d, i) {
+        return "translate(" + x(i) + ")rotate(-90)";
+      });
     };
     return draw_legend = function(data) {
       var legend;
