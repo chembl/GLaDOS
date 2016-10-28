@@ -6,23 +6,16 @@ SearchResultsApp = (function() {
   function SearchResultsApp() {}
 
   SearchResultsApp.init = function() {
-    SearchResultsApp.searchModel = null;
+    this.searchModel = SearchModel.getInstance();
     this.initCompResultsListView($('#BCK-CompoundSearchResults'));
     this.initDocsResultsListView($('#BCK-DocSearchResults'));
     return this.search();
   };
 
-  SearchResultsApp.getSearchModel = function() {
-    if (!SearchResultsApp.searchModel) {
-      SearchResultsApp.searchModel = new SearchModel;
-    }
-    return SearchResultsApp.searchModel;
-  };
-
   SearchResultsApp.initCompResultsListView = function(top_level_elem) {
     var compResView;
     compResView = new CompoundResultsListView({
-      collection: this.getSearchModel().getCompoundResultsList(),
+      collection: this.searchModel.getCompoundResultsList(),
       el: top_level_elem
     });
     return compResView;
@@ -31,7 +24,7 @@ SearchResultsApp = (function() {
   SearchResultsApp.initDocsResultsListView = function(top_level_elem) {
     var docResView;
     docResView = new DocumentResultsListView({
-      collection: this.getSearchModel().getDocumentResultsList(),
+      collection: this.searchModel.getDocumentResultsList(),
       el: top_level_elem
     });
     return docResView;
@@ -61,10 +54,6 @@ SearchResultsApp = (function() {
       el: $('#CompTargetMatrix')
     });
     return ctm.fetch();
-  };
-
-  SearchResultsApp.search = function() {
-    return this.getSearchModel().search();
   };
 
   return SearchResultsApp;

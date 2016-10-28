@@ -2,12 +2,13 @@
 
 describe("Target Relations", function() {
   var assert_data, targetRels;
-  targetRels = TargetReportCardApp.initTargetRelations('CHEMBL3559691');
+  targetRels = new TargetRelationList;
+  targetRels.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + 'CHEMBL3559691' + '&order_by=target_chembl_id&limit=1000';
   beforeAll(function(done) {
     targetRels.fetch();
     return setTimeout((function() {
       return done();
-    }), 2000);
+    }), 10000);
   });
   it("(SERVER DEPENDENT) fetches the information correctly for CHEMBL3559691", function(done) {
     var data, dataMustBe;

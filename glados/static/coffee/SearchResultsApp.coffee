@@ -5,20 +5,10 @@ class SearchResultsApp
   # --------------------------------------------------------------------------------------------------------------------
 
   @init = ->
-    SearchResultsApp.searchModel = null
+    @searchModel = SearchModel.getInstance()
     @initCompResultsListView($('#BCK-CompoundSearchResults'))
     @initDocsResultsListView($('#BCK-DocSearchResults'))
     @search()
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Models
-  # --------------------------------------------------------------------------------------------------------------------
-
-  # Lazily initialized searchModel
-  @getSearchModel = ->
-    if not SearchResultsApp.searchModel
-      SearchResultsApp.searchModel = new SearchModel
-    return SearchResultsApp.searchModel
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
@@ -28,7 +18,7 @@ class SearchResultsApp
   @initCompResultsListView = (top_level_elem) ->
 
     compResView = new CompoundResultsListView
-      collection: @getSearchModel().getCompoundResultsList()
+      collection: @searchModel.getCompoundResultsList()
       el: top_level_elem
 
     return compResView
@@ -37,7 +27,7 @@ class SearchResultsApp
   @initDocsResultsListView = (top_level_elem) ->
 
     docResView = new DocumentResultsListView
-      collection: @getSearchModel().getDocumentResultsList()
+      collection: @searchModel.getDocumentResultsList()
       el: top_level_elem
 
     return docResView
@@ -66,11 +56,3 @@ class SearchResultsApp
       el: $('#CompTargetMatrix')
     ctm.fetch()
 
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Functions
-  # --------------------------------------------------------------------------------------------------------------------
-
-  @search = () ->
-    # TODO: load query parameters from html to model
-    @getSearchModel().search()

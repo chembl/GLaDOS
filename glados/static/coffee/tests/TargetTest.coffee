@@ -1,5 +1,6 @@
 describe "Target", ->
-  target = TargetReportCardApp.initTarget('CHEMBL2363965')
+  target = new Target
+      target_chembl_id: 'CHEMBL2363965'
 
   beforeAll (done) ->
     target.fetch()
@@ -10,10 +11,10 @@ describe "Target", ->
     # but there is no way to know that it loaded all the classifications.
     setTimeout ( ->
       done()
-    ), 2000
+    ), 10000
 
   it "(SERVER DEPENDENT) loads the protein target classification", (done) ->
-
+    console.log(target)
     classification = target.get('protein_classifications')
     class1 = classification[8][0]
     class2 = classification[601][0]

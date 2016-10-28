@@ -1,5 +1,6 @@
 describe "Target Relations", ->
-  targetRels = TargetReportCardApp.initTargetRelations('CHEMBL3559691')
+  targetRels = new TargetRelationList
+  targetRels.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + 'CHEMBL3559691'+ '&order_by=target_chembl_id&limit=1000'
 
   beforeAll (done) ->
     targetRels.fetch()
@@ -10,7 +11,7 @@ describe "Target Relations", ->
     # but there is no way to know that it loaded all the classifications.
     setTimeout ( ->
       done()
-    ), 2000
+    ), 10000
 
   it "(SERVER DEPENDENT) fetches the information correctly for CHEMBL3559691", (done) ->
 

@@ -2,6 +2,8 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend(DownloadModelOrCo
 
   model: ApprovedDrugClinicalCandidate
 
+  set_chembl_id: (chembl_id) ->
+    @url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
 
   fetch: ->
 

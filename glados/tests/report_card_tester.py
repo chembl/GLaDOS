@@ -2,6 +2,8 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import traceback
+import sys
 
 class ReportCardTester(unittest.TestCase):
 
@@ -11,9 +13,14 @@ class ReportCardTester(unittest.TestCase):
   IMPLICIT_WAIT = 1
 
   def setUp(self):
-    self.browser = webdriver.Firefox()
-    self.browser.set_window_size(1024, 768)
-    self.browser.implicitly_wait(self.IMPLICIT_WAIT)
+    try:
+      self.browser = webdriver.Firefox()
+      self.browser.set_window_size(1024, 768)
+      self.browser.implicitly_wait(self.IMPLICIT_WAIT)
+    except:
+      print("CRITICAL ERROR: It was not possible to start the Firefox Selenium driver due to:", file=sys.stderr)
+      traceback.print_exc();
+      sys.exit(1)
 
   def tearDown(self):
     self.browser.quit()
@@ -37,3 +44,8 @@ class ReportCardTester(unittest.TestCase):
     rows = table.find_elements(By.TAG_NAME, "tr")[1::]
     for row, text in zip(rows, texts_should_be):
       self.assertEqual(row.text, text)
+
+  def assert_table_any_order(self, table, texts_should_be):
+    rows = table.find_elements(By.TAG_NAME, "tr")[1::]
+    for row in rows:
+      self.assertIn(row.text, texts_should_be)
