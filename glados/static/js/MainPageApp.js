@@ -7,7 +7,6 @@ MainPageApp = (function() {
 
   MainPageApp.init = function() {
     this.searchBarView = new SearchBarView();
-    this.searchBarView.render();
     LazyIFramesHelper.initLazyIFrames();
     this.targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
     this.drugList = new DrugList({});

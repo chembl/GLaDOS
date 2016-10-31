@@ -11,3 +11,8 @@ Settings =
   EMBED_BASE_URL: "glados-ebitest.rhcloud.com/"
   EMBL_GREEN: '#9fcc3b'
   EMBL_BLUE: '#008cb5'
+
+# Application URLS
+
+Settings.ROOT_URL_PATH = "/"
+Settings.SEARCH_RESULTS_PAGE = Settings.ROOT_URL_PATH+'search_results'

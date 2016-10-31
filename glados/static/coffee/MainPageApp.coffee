@@ -8,7 +8,6 @@ class MainPageApp
   @init = ->
 
     @searchBarView = new SearchBarView()
-    @searchBarView.render()
 
     LazyIFramesHelper.initLazyIFrames()
 

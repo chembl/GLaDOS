@@ -121,7 +121,7 @@ urlpatterns = [
   #----------------------------------------------------------------------------------------
   # Search Results
   #----------------------------------------------------------------------------------------
-  url(r'^search_results/$',
+  url(r'^search_results/.*?\/?$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 
   # Compound results graph

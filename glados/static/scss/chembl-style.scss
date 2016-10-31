@@ -1332,7 +1332,7 @@ div#CNC-zoom-modal {
 
 $search-items-height: 45px;
 
-.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
+.search-input-wrapper, .search-opts-wrapper, .search-btn {
 
   height: $search-items-height;
 
@@ -1344,12 +1344,13 @@ $search-items-height: 45px;
 
 }
 
-.search-btn-wrapper {
-
+.search-btn {
+  background: none;
+  border: none;
+  vertical-align: middle;
+  text-align: center;
   background-color: $primary-color;
-  a {
-    color: white;
-  }
+  color: white;
 }
 
 .search-bar-help {

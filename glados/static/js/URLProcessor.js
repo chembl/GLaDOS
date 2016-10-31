@@ -19,6 +19,28 @@ URLProcessor = (function() {
     return pathnameParts[pathnameParts.length - 4];
   };
 
+  URLProcessor.isAtSearchResultsPage = function() {
+    var match, pattern, url_path;
+    url_path = window.location.pathname;
+    pattern = new RegExp('^' + Settings.SEARCH_RESULTS_PAGE + '\/(.*?)\/?$');
+    match = pattern.exec(url_path);
+    if (match) {
+      return true;
+    }
+    return false;
+  };
+
+  URLProcessor.getSearchQueryString = function() {
+    var match, pattern, url_path;
+    url_path = window.location.pathname;
+    pattern = new RegExp('^' + Settings.SEARCH_RESULTS_PAGE + '\/(.*?)\/?$');
+    match = pattern.exec(url_path);
+    if (match && match.length > 1) {
+      return match[1];
+    }
+    return "";
+  };
+
   return URLProcessor;
 
 })();

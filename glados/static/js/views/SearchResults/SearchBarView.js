@@ -4,18 +4,35 @@ var SearchBarView;
 SearchBarView = Backbone.View.extend({
   el: $('#BCK-SRB-wrapper'),
   initialize: function(searchModel) {
+    var urlQueryString;
     this.searchModel = SearchModel.getInstance();
-    return this.showAdvanced = false;
+    this.showAdvanced = false;
+    this.atResultsPage = URLProcessor.isAtSearchResultsPage();
+    if (this.atResultsPage) {
+      urlQueryString = URLProcessor.getSearchQueryString();
+      if (urlQueryString) {
+        this.searchModel.set('queryString', urlQueryString);
+        this.search();
+      }
+    }
+    return this.render();
   },
   events: {
+    'click #submit_search_1': 'search',
+    'click #submit_search_2': 'search',
     'keyup #search_bar': 'searchBarKeyUp',
     'change #search_bar': 'searchBarChange'
   },
   searchBarKeyUp: function(e) {
-    return console.log($(e.currentTarget).val());
+    if (e.which === 13) {
+      return this.search();
+    }
   },
   searchBarChange: function(e) {
     return console.log($(e.currentTarget).val());
+  },
+  search: function() {
+    return this.searchModel.search();
   },
   switchShowAdvanced: function() {
     return this.showAdvanced = !this.showAdvanced;
@@ -31,15 +48,13 @@ SearchBarView = Backbone.View.extend({
     var div, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
-    console.log(div);
-    console.log(template);
     if (div && template) {
       return div.html(Handlebars.compile(template.html())({
         searchBarQueryStr: this.searchModel.get('queryString'),
         showAdvanced: this.showAdvanced
       }));
     } else {
-      return console.log("Error trying to render because the div or the template could not be found");
+      return console.log("Error trying to render the SearchBarView because the div or the template could not be found");
     }
   }
 });

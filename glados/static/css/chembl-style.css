@@ -2727,16 +2727,19 @@ div#CNC-zoom-modal {
   display: table;
   clear: both; }
 
-.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
+.search-input-wrapper, .search-opts-wrapper, .search-btn {
   height: 45px; }
 
 .calign {
   margin: auto; }
 
-.search-btn-wrapper {
-  background-color: #009688; }
-  .search-btn-wrapper a {
-    color: white; }
+.search-btn {
+  background: none;
+  border: none;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #009688;
+  color: white; }
 
 .search-bar-help {
   position: absolute;
