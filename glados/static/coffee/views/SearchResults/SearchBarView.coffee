@@ -24,8 +24,9 @@ SearchBarView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   events:
-    'click #submit_search_1' : 'search'
-    'click #submit_search_2' : 'search'
+    'click .example_link' : 'searchExampleLink'
+    'click #submit_search' : 'search'
+    'click #search-opts' : 'searchAdvanced'
     'keyup #search_bar' : 'searchBarKeyUp',
     'change #search_bar' : 'searchBarChange'
 
@@ -37,15 +38,26 @@ SearchBarView = Backbone.View.extend
   searchBarChange: (e) ->
     console.log($(e.currentTarget).val())
 
+  searchExampleLink: (e) ->
+    exampleString = $(e.currentTarget).html()
+    @searchModel.set('queryString',exampleString)
+    @search()
+
   # --------------------------------------------------------------------------------------------------------------------
   # Additional Functionalities
   # --------------------------------------------------------------------------------------------------------------------
 
   search: () ->
-    if @atResultsPage:
+    if @atResultsPage
       @searchModel.search()
     else
       window.location.href = Settings.SEARCH_RESULTS_PAGE+"/"+@searchModel.get('queryString')
+
+  searchAdvanced: () ->
+    if @atResultsPage
+      @switchShowAdvanced()
+    else
+      window.location.href = Settings.SEARCH_RESULTS_PAGE+"/advanced/"+@searchModel.get('queryString')
 
   switchShowAdvanced: ->
     @showAdvanced = not @showAdvanced

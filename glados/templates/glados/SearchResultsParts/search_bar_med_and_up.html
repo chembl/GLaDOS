@@ -14,8 +14,11 @@
               <div class="search-bar full-height z-depth-2">
 
                 <div class="search-bar-help">
-                  <small><b>Example:</b> <a href="/search_results?search_str=Dopamine">Dopamine</a>, <a href="#">Aspirine</a>, <a
-                    href="#">NCCc1ccc(O)c(O)c1</a>, <a href="#">Liver</a>
+                  <small><b>Example:</b>
+                    <a href="#" class="example_link">Dopamine</a>,
+                    <a href="#" class="example_link">Aspirine</a>,
+                    <a href="#" class="example_link">NCCc1ccc(O)c(O)c1</a>,
+                    <a href="#" class="example_link">Liver</a>
                   </small>
                 </div>
 
@@ -23,9 +26,7 @@
 
 
                   <div class="search-input-wrapper">
-                    <input id="search_bar" type="search" name="search_str" placeholder="Search in ChEMBL" required>
-                      {{searchBarQueryStr}}
-                    </input>
+                    <input id="search_bar" type="search" value="{{searchBarQueryStr}}" name="search_str" placeholder="Search in ChEMBL" required/>
                   </div>
 
 
@@ -33,21 +34,18 @@
 
                 <div class="col m2">
 
+                  <button id="search-opts" onclick="this.blur();" class="search-opts col m12">
+                    <span>
+                      <i class="icon icon-generic" data-icon="("></i> Advanced
+                    </span>
+                  </button>
 
-                  <div class="search-opts-wrapper valign-wrapper">
-
-
-                    <div class="valign calign">
-                      <a id="submit_search_1"><i class="icon icon-generic" data-icon="("></i> Advanced</a>
-                    </div>
-
-                  </div>
 
                 </div>
 
                 <div class="col m2">
 
-                  <button id="submit_search_2" class="search-btn col m12">
+                  <button id="submit_search" onclick="this.blur();" class="search-btn col m12">
                     <span>
                       <i class="icon icon-functional" data-icon="1"></i> Search
                     </span>

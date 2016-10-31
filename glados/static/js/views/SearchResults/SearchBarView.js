@@ -13,13 +13,16 @@ SearchBarView = Backbone.View.extend({
       if (urlQueryString) {
         this.searchModel.set('queryString', urlQueryString);
         this.search();
+      } else {
+        this.showAdvanced = true;
       }
     }
     return this.render();
   },
   events: {
-    'click #submit_search_1': 'search',
-    'click #submit_search_2': 'search',
+    'click .example_link': 'searchExampleLink',
+    'click #submit_search': 'search',
+    'click #search-opts': 'searchAdvanced',
     'keyup #search_bar': 'searchBarKeyUp',
     'change #search_bar': 'searchBarChange'
   },
@@ -31,8 +34,25 @@ SearchBarView = Backbone.View.extend({
   searchBarChange: function(e) {
     return console.log($(e.currentTarget).val());
   },
+  searchExampleLink: function(e) {
+    var exampleString;
+    exampleString = $(e.currentTarget).html();
+    this.searchModel.set('queryString', exampleString);
+    return this.search();
+  },
   search: function() {
-    return this.searchModel.search();
+    if (this.atResultsPage) {
+      return this.searchModel.search();
+    } else {
+      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/" + this.searchModel.get('queryString');
+    }
+  },
+  searchAdvanced: function() {
+    if (this.atResultsPage) {
+      return this.switchShowAdvanced();
+    } else {
+      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/advanced/" + this.searchModel.get('queryString');
+    }
   },
   switchShowAdvanced: function() {
     return this.showAdvanced = !this.showAdvanced;
