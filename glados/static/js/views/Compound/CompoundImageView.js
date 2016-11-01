@@ -85,13 +85,13 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
     return '?' + renderer + '&' + format + '&' + coords;
   },
   init3DView: function() {
-    var comp3DView;
-    comp3DView = new Compound3DView({
-      el: $('#BCK-compound-3dview'),
+    var comp3DViewSpeck;
+    comp3DViewSpeck = new Compound3DViewSpeck({
+      el: $('#BCK-compound-3dview-Speck'),
       model: this.model,
       type: 'reduced'
     });
-    return comp3DView.render();
+    return comp3DViewSpeck.render();
   },
   getFilename: function(format) {
     if (format === 'csv') {

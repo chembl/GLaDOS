@@ -1,4 +1,4 @@
-Compound3DView = Backbone.View.extend
+Compound3DViewSpeck = Backbone.View.extend
 
   initialize: (options) ->
     @model.on 'change', @.render, @

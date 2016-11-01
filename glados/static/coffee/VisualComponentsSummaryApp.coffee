@@ -39,7 +39,7 @@ class VisualComponentsSummaryApp
   # this initialises the view that handles the 3d visualisation of a compound
   @initSampleCompound3DView = ($elem) ->
 
-    comp3DView = new Compound3DView
+    comp3DView = new Compound3DViewSpeck
       el: $elem,
       model: VisualComponentsSummaryApp.sampleCompound,
       type: 'reduced'

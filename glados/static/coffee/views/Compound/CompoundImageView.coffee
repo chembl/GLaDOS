@@ -94,13 +94,13 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   init3DView: ->
 
-    comp3DView = new Compound3DView
-      el: $('#BCK-compound-3dview')
+    comp3DViewSpeck = new Compound3DViewSpeck
+      el: $('#BCK-compound-3dview-Speck')
       model: @model
       type: 'reduced'
 
     # I can assume here that the model has already been fetched, because the button has been rendered.
-    comp3DView.render()
+    comp3DViewSpeck.render()
 
   # --------------------------------------------------------------------
   # Downloads
