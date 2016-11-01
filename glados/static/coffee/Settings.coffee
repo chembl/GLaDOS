@@ -15,4 +15,8 @@ Settings =
 # Application URLS
 
 Settings.ROOT_URL_PATH = "/"
+# the search url is expected to be search_results/[advanced/]:query_string
 Settings.SEARCH_RESULTS_PAGE = Settings.ROOT_URL_PATH+'search_results'
+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
+Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+Settings.SEARCH_RESULTS_PAGE+
+        '(/'+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')

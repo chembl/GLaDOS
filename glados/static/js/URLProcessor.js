@@ -22,7 +22,7 @@ URLProcessor = (function() {
   URLProcessor.isAtSearchResultsPage = function() {
     var match, pattern, url_path;
     url_path = window.location.pathname;
-    pattern = new RegExp('^' + Settings.SEARCH_RESULTS_PAGE + '\/(.*?)\/?$');
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP;
     match = pattern.exec(url_path);
     if (match) {
       return true;
@@ -30,13 +30,21 @@ URLProcessor = (function() {
     return false;
   };
 
+  URLProcessor.isAtAdvancedSearchResultsPage = function() {
+    var match, pattern, url_path;
+    url_path = window.location.pathname;
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP;
+    match = pattern.exec(url_path);
+    return match && match.length > 2 && match[1] === '/' + Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH;
+  };
+
   URLProcessor.getSearchQueryString = function() {
     var match, pattern, url_path;
     url_path = window.location.pathname;
-    pattern = new RegExp('^' + Settings.SEARCH_RESULTS_PAGE + '\/(.*?)\/?$');
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP;
     match = pattern.exec(url_path);
-    if (match && match.length > 1) {
-      return match[1];
+    if (match && match.length > 2) {
+      return match[2];
     }
     return "";
   };

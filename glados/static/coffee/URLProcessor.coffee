@@ -16,24 +16,31 @@ class URLProcessor
     pathnameParts = pathname.split('/')
     return pathnameParts[pathnameParts.length - 4]
 
+
   # Tells whether or not the url is at the search results page
-  # the url is expected to be search_results/:query_string\/?$
   @isAtSearchResultsPage = ->
 
     url_path = window.location.pathname;
-    pattern = new RegExp( '^'+Settings.SEARCH_RESULTS_PAGE+'\/(.*?)\/?$')
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match
       return true
     return false
 
+  # Tells whether or not the url is at the search results page with advanced filters
+  @isAtAdvancedSearchResultsPage = ->
+
+    url_path = window.location.pathname;
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    match = pattern.exec(url_path)
+    return match and match.length > 2 and match[1] == '/'+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
+
   # gets the query string for the search results page
-  # the url is expected to be search_results/:query_string\/?$
   @getSearchQueryString = ->
 
     url_path = window.location.pathname;
-    pattern = new RegExp( '^'+Settings.SEARCH_RESULTS_PAGE+'\/(.*?)\/?$')
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
-    if match and match.length > 1
-      return match[1]
+    if match and match.length > 2
+      return match[2]
     return ""

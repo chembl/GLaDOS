@@ -6,15 +6,13 @@ SearchBarView = Backbone.View.extend({
   initialize: function(searchModel) {
     var urlQueryString;
     this.searchModel = SearchModel.getInstance();
-    this.showAdvanced = false;
+    this.showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage();
     this.atResultsPage = URLProcessor.isAtSearchResultsPage();
     if (this.atResultsPage) {
       urlQueryString = URLProcessor.getSearchQueryString();
       if (urlQueryString) {
         this.searchModel.set('queryString', urlQueryString);
         this.search();
-      } else {
-        this.showAdvanced = true;
       }
     }
     return this.render();
@@ -51,11 +49,12 @@ SearchBarView = Backbone.View.extend({
     if (this.atResultsPage) {
       return this.switchShowAdvanced();
     } else {
-      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/advanced/" + this.searchModel.get('queryString');
+      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/" + Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH + "/" + this.searchModel.get('queryString');
     }
   },
   switchShowAdvanced: function() {
-    return this.showAdvanced = !this.showAdvanced;
+    this.showAdvanced = !this.showAdvanced;
+    return console.log(this.showAdvanced);
   },
   render: function() {
     this.fillTemplate('BCK-SRB-med-and-up');

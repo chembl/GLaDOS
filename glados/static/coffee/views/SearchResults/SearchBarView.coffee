@@ -8,15 +8,13 @@ SearchBarView = Backbone.View.extend
   el: $('#BCK-SRB-wrapper')
   initialize: (searchModel) ->
     @searchModel = SearchModel.getInstance()
-    @showAdvanced = false
+    @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
     @atResultsPage = URLProcessor.isAtSearchResultsPage()
     if @atResultsPage
       urlQueryString = URLProcessor.getSearchQueryString()
       if urlQueryString
         @searchModel.set('queryString',urlQueryString)
         @search()
-      else
-        @showAdvanced = true
     @render()
 
   # --------------------------------------------------------------------------------------------------------------------
@@ -57,10 +55,11 @@ SearchBarView = Backbone.View.extend
     if @atResultsPage
       @switchShowAdvanced()
     else
-      window.location.href = Settings.SEARCH_RESULTS_PAGE+"/advanced/"+@searchModel.get('queryString')
+      window.location.href = Settings.SEARCH_RESULTS_PAGE+"/"+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+"/"+@searchModel.get('queryString')
 
   switchShowAdvanced: ->
     @showAdvanced = not @showAdvanced
+    console.log(@showAdvanced)
 
   # --------------------------------------------------------------------------------------------------------------------
   # Component rendering

@@ -17,3 +17,7 @@ Settings = {
 Settings.ROOT_URL_PATH = "/";
 
 Settings.SEARCH_RESULTS_PAGE = Settings.ROOT_URL_PATH + 'search_results';
+
+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search';
+
+Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^' + Settings.SEARCH_RESULTS_PAGE + '(/' + Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH + ')?/(.*?)$');
