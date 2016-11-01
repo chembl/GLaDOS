@@ -10,14 +10,14 @@ ResponsiviseViewExt = {
       $to_empty = $(this.el);
     }
     $to_empty.empty();
-    this.showPreloader();
+    this.showResponsiveViewPreloader();
     return debounced_render();
   },
   setUpResponsiveRender: function() {
     var debounced_render, reRender, updateViewProxy;
     reRender = function() {
       this.render();
-      return this.hidePreloader();
+      return this.hideResponsiveViewPreloader();
     };
     debounced_render = _.debounce($.proxy(reRender, this), 300);
     updateViewProxy = $.proxy(this.updateView, this, debounced_render);
@@ -26,7 +26,7 @@ ResponsiviseViewExt = {
     });
     return updateViewProxy;
   },
-  showPreloader: function() {
+  showResponsiveViewPreloader: function() {
     var $base_elem;
     if (this.$vis_elem != null) {
       $base_elem = this.$vis_elem;
@@ -38,7 +38,7 @@ ResponsiviseViewExt = {
       return $base_elem.attr('data-loading', 'true');
     }
   },
-  hidePreloader: function() {
+  hideResponsiveViewPreloader: function() {
     var $base_elem;
     if (this.$vis_elem != null) {
       $base_elem = this.$vis_elem;

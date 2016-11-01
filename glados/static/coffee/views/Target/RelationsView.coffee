@@ -18,7 +18,8 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
     @fillTemplates()
     @fillPaginators()
 
-    @showVisibleContent()
+    @showCardContent()
+    @showPaginatedViewContent()
     @initEmbedModal('relations')
     @activateModals()
 

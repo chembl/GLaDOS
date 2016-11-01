@@ -29,8 +29,7 @@ CardView = Backbone.View.extend({
       msg: error_msg
     });
     $(this.el).children('.card-load-error').find('.Bck-errormsg').html(rendered);
-    $(this.el).children('.card-load-error').show();
-    return console.log('show error!!');
+    return $(this.el).children('.card-load-error').show();
   },
   initEmbedModal: function(section_name) {
     var modal, modal_id, modal_trigger;
@@ -79,11 +78,11 @@ CardView = Backbone.View.extend({
   activateModals: function() {
     return $(this.el).find('.modal-trigger').leanModal();
   },
-  showVisibleContent: function() {
+  showCardContent: function() {
     $(this.el).children('.card-preolader-to-hide').hide();
     return $(this.el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show();
   },
-  showPreloader: function() {
+  showCardPreloader: function() {
     $(this.el).children('.card-preolader-to-hide').show();
     return $(this.el).children(':not(.card-preolader-to-hide)').hide();
   }

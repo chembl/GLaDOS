@@ -14,8 +14,8 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
   render: ->
 
-    @showVisibleContent()
-    @hidePreloader()
+    @showCardContent()
+    @hideResponsiveViewPreloader()
     @addFSLinkAndInfo()
     @paintMatrix()
 

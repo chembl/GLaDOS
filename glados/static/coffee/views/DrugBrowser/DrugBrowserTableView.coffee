@@ -10,4 +10,4 @@ DrugBrowserTableView = Backbone.View.extend(PaginatedViewExt).extend
     @fillPaginators()
     @fillPageSelectors()
     @activateSelectors()
-    @showContent()
+    @showPaginatedViewContent()

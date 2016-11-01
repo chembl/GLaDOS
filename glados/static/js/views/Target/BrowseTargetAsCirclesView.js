@@ -4,7 +4,7 @@ var BrowseTargetAsCirclesView;
 BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
-    this.showPreloader();
+    this.showResponsiveViewPreloader();
     updateViewProxy = this.setUpResponsiveRender();
     return this.model.on('change', updateViewProxy, this);
   },
@@ -12,7 +12,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     var circle, color, diameter, elem_selector, focus, margin, node, nodes, pack, root, svg, text, view, zoom, zoomTo;
     console.log('nodes before');
     console.log(this.model.get('plain'));
-    this.hidePreloader();
+    this.hideResponsiveViewPreloader();
     margin = 20;
     diameter = $(this.el).width();
     if (diameter === 0) {

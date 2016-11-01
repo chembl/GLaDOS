@@ -13,7 +13,7 @@ CompoundNameClassificationView = CardView.extend({
     this.renderMaxPhase();
     this.renderMolFormula();
     this.renderSynonymsAndTradeNames();
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('name_and_classification');
     this.activateTooltips();
     this.activateModals();

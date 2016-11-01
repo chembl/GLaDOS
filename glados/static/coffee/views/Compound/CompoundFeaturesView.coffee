@@ -20,7 +20,7 @@ CompoundFeaturesView = CardView.extend
     @renderProperty('Bck-Availability', 'availability_type')
 
     # until here, all the visible content has been rendered.
-    @showVisibleContent()
+    @showCardContent()
 
     @initEmbedModal('molecule_features')
     @activateModals()

@@ -14,7 +14,7 @@ AssayCurationSummaryView = CardView.extend({
     }
     this.fillTemplate('BCK-ACS-large');
     this.fillTemplate('BCK-ACS-small');
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('curation_summary');
     return this.activateModals();
   },

@@ -14,7 +14,7 @@ DocumentAssayNetworkFSView = Backbone.View.extend(ResponsiviseViewExt).extend(DA
     $(this.el).find('.vis-title').html(Handlebars.compile($('#Handlebars-Document-DAN-FS-title').html())({
       chembl_id: this.model.get('document_chembl_id')
     }));
-    this.hidePreloader();
+    this.hideResponsiveViewPreloader();
     return this.paintMatrix();
   },
   getFilename: function(format) {

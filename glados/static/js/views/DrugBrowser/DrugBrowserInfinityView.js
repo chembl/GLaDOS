@@ -21,7 +21,7 @@ DrugBrowserInfinityView = Backbone.View.extend(PaginatedViewExt).extend({
     this.fillTemplates();
     this.fillNumResults();
     this.setUpLoadingWaypoint();
-    this.showContent();
+    this.showPaginatedViewContent();
     console.log('num cards: ', $(this.el).find('.BCK-items-container').children().length);
     slider = document.getElementById('search_max_phase');
     if ($(slider).attr('initialised') === 'yes') {

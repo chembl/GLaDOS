@@ -16,7 +16,7 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend({
     }
     this.fillTemplate('BCK-Components-large');
     this.fillTemplate('BCK-Components-small');
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('components');
     return this.activateModals();
   },

@@ -16,7 +16,7 @@ CompoundRepresentationsView = CardView.extend({
     this.renderCanonicalSmiles();
     this.renderStandardInchi();
     this.renderStandardInchiKey();
-    this.showVisibleContent();
+    this.showCardContent();
     this.initEmbedModal('representations');
     this.activateTooltips();
     this.activateModals();

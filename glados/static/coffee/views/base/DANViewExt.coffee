@@ -49,6 +49,7 @@ DANViewExt =
     #    }
 
     assays = @model.get('graph')
+    console.log 'ASSAYS: ', assays
     numNodes = assays.nodes.length
 
     if !assays?
@@ -140,7 +141,7 @@ DANViewExt =
     # --------------------------------------
 
     margin =
-      top: 70
+      top: 90
       right: 0
       bottom: 10
       left: 90
@@ -221,7 +222,7 @@ DANViewExt =
       assay_test_type: d3.range(n).sort((a, b) ->
         d3.ascending nodes[a].assay_test_type, nodes[b].assay_test_type
       )
-
+    console.log 'ORDERS: ', orders
 
     max = d3.max assays.links, (d) -> d.value
 
@@ -330,6 +331,36 @@ DANViewExt =
       t.selectAll(".cell")
       .style("fill", colorise)
 
+    # --------------------------------------
+    # Order selector
+    # --------------------------------------
+    $(@el).find(".select-order").on "change", () ->
+
+      if !@value?
+        return
+
+      order(@value)
+
+    order = (value) ->
+
+      console.log 'change order!'
+      console.log orders[value]
+      x.domain(orders[value])
+
+      t = svg.transition().duration(2500)
+
+      t.selectAll(".dan-row")
+          .delay((d, i) -> x(i) * 4 )
+          .attr("transform", (d, i) -> "translate(0," + x(i) + ")" )
+        .selectAll(".cell")
+          .delay((d) -> x(d.x) * 4)
+          .attr("x", (d) -> x(d.x))
+
+      t.selectAll(".dan-column")
+        .delay((d, i) -> x(i) * 4)
+        .attr("transform", (d, i) -> "translate(" + x(i) + ")rotate(-90)")
+
+
     draw_legend = (data) ->
       legend = d3.selectAll(".legend-container").append("svg")
         .attr("class", "legend")
@@ -350,6 +381,7 @@ DANViewExt =
         .attr("y", 9)
         .attr("dy", ".35em")
         .text( (d) -> d.label)
+
 
 
 

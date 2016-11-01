@@ -14,7 +14,8 @@ RelationsView = CardView.extend(PaginatedViewExt).extend({
     this.clearContentContainer();
     this.fillTemplates();
     this.fillPaginators();
-    this.showVisibleContent();
+    this.showCardContent();
+    this.showPaginatedViewContent();
     this.initEmbedModal('relations');
     this.activateModals();
     this.fillPageSelectors();

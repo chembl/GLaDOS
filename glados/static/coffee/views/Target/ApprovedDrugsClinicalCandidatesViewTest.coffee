@@ -15,7 +15,7 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend
 
     $('#example_target').DataTable()
 
-    @showVisibleContent()
+    @showCardContent()
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
     @activateSelectors()

@@ -16,7 +16,7 @@ AssayCurationSummaryView = CardView.extend
 
     @fillTemplate('BCK-ACS-large')
     @fillTemplate('BCK-ACS-small')
-    @showVisibleContent()
+    @showCardContent()
 
 
     @initEmbedModal('curation_summary')
