@@ -4,14 +4,11 @@ Compound3DView = Backbone.View.extend
     @model.on 'change', @.render, @
     @type = options.type
 
-    console.log @model
-
   events: ->
     'click #BCK-Compound-3d-speckpresets input': 'selectPreset'
 
   render: ->
 
-    console.log 'render!'
     $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
       title: '3D View of ' + @model.get('molecule_chembl_id')
 
@@ -22,6 +19,8 @@ Compound3DView = Backbone.View.extend
       msg: 'There was en error loading the data'
 
   getCoordsAndPaint: ->
+
+    $('#BCK-loadingcoords').show()
 
     standardInchi = @model.get('molecule_structures')['standard_inchi']
     standardInchiB64 = window.btoa(standardInchi)
@@ -40,12 +39,14 @@ Compound3DView = Backbone.View.extend
       r = $.ajax( {type: "POST", url: url_and_data.url, data: url_and_data.data})
 
     setXYZToModelAndPaint = (xyzCoords) ->
+      $('#BCK-loadingcoords').hide()
       @model.set('xyz', xyzCoords, {silent: true})
       @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
 
     f = $.proxy(setXYZToModelAndPaint, @)
 
-    getCoords = $.ajax( molUrl ).then(getXYZURL).then(getXZYcontent).then(f)
+    getCoords = $.ajax( molUrl ).then(getXYZURL).then(getXZYcontent)
+    getCoords.done(f)
 
     e = $.proxy(@showError, @)
     getCoords.fail ->
@@ -59,6 +60,4 @@ Compound3DView = Backbone.View.extend
   typeToTemplate:
     'reduced': '#Handlebars-Compound-3D-speck'
 
-
-
-
+  
