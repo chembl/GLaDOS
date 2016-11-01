@@ -4,19 +4,23 @@ Compound3DView = Backbone.View.extend
     @model.on 'change', @.render, @
     @type = options.type
 
+    @supportsWebGL =  @supportsWebGL()
+
   events: ->
     'click #BCK-Compound-3d-speckpresets input': 'selectPreset'
 
   render: ->
 
-    $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
-      title: '3D View of ' + @model.get('molecule_chembl_id')
+    if @supportsWebGL
+      $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
+        title: '3D View of ' + @model.get('molecule_chembl_id')
+      @getCoordsAndPaint()
+    else
+      @showError('WebGL does not seem to be available in this browser.')
 
-    @getCoordsAndPaint()
-
-  showError: ->
+  showError: (msg) ->
     $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
-      msg: 'There was en error loading the data'
+      msg: msg
 
   getCoordsAndPaint: ->
 
@@ -30,6 +34,7 @@ Compound3DView = Backbone.View.extend
     # from a ctab value it returns the base64 url to get the xyz
     getXYZURL = (data) ->
       url_and_data = {}
+      # Don't add the last slash, you will get the "No 'Access-Control-Allow-Origin' header" issue
       url_and_data.url = Settings.BEAKER_BASE_URL + 'ctab2xyz'
       url_and_data.data = data
 
@@ -50,7 +55,7 @@ Compound3DView = Backbone.View.extend
 
     e = $.proxy(@showError, @)
     getCoords.fail ->
-      e()
+      e('There was en error loading the data')
 
 
   selectPreset: (event) ->
@@ -60,4 +65,15 @@ Compound3DView = Backbone.View.extend
   typeToTemplate:
     'reduced': '#Handlebars-Compound-3D-speck'
 
-  
+  supportsWebGL: ->
+
+    try
+      canvas = document.createElement('canvas')
+      return window.WebGLRenderingContext? and (canvas.getContext('webgl')? or canvas.getContext('experimental-webgl'))?
+    catch e
+      return false
+
+
+
+
+

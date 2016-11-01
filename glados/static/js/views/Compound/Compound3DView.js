@@ -4,7 +4,8 @@ var Compound3DView;
 Compound3DView = Backbone.View.extend({
   initialize: function(options) {
     this.model.on('change', this.render, this);
-    return this.type = options.type;
+    this.type = options.type;
+    return this.supportsWebGL = this.supportsWebGL();
   },
   events: function() {
     return {
@@ -12,14 +13,18 @@ Compound3DView = Backbone.View.extend({
     };
   },
   render: function() {
-    $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
-      title: '3D View of ' + this.model.get('molecule_chembl_id')
-    }));
-    return this.getCoordsAndPaint();
+    if (this.supportsWebGL) {
+      $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
+        title: '3D View of ' + this.model.get('molecule_chembl_id')
+      }));
+      return this.getCoordsAndPaint();
+    } else {
+      return this.showError('WebGL does not seem to be available in this browser.');
+    }
   },
-  showError: function() {
+  showError: function(msg) {
     return $(this.el).html(Handlebars.compile($('#Handlebars-Compound-3D-error').html())({
-      msg: 'There was en error loading the data'
+      msg: msg
     }));
   },
   getCoordsAndPaint: function() {
@@ -55,7 +60,7 @@ Compound3DView = Backbone.View.extend({
     getCoords.done(f);
     e = $.proxy(this.showError, this);
     return getCoords.fail(function() {
-      return e();
+      return e('There was en error loading the data');
     });
   },
   selectPreset: function(event) {
@@ -65,5 +70,14 @@ Compound3DView = Backbone.View.extend({
   },
   typeToTemplate: {
     'reduced': '#Handlebars-Compound-3D-speck'
+  },
+  supportsWebGL: function() {
+    var canvas;
+    try {
+      canvas = document.createElement('canvas');
+      return (window.WebGLRenderingContext != null) && (((canvas.getContext('webgl') != null) || canvas.getContext('experimental-webgl')) != null);
+    } catch (e) {
+      return false;
+    }
   }
 });
