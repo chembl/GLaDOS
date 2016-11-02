@@ -50,7 +50,6 @@ Compound3DViewSpeck = Backbone.View.extend
       r = $.ajax( {type: "POST", url: url_and_data.url, data: url_and_data.data})
 
     setXYZToModelAndPaint = (xyzCoords) ->
-      console.log 'GOT COORDS!'
       $('#BCK-loadingcoords').hide()
       @model.set('xyz', xyzCoords, {silent: true})
       @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))

@@ -54,7 +54,6 @@ Compound3DViewSpeck = Backbone.View.extend({
       });
     };
     setXYZToModelAndPaint = function(xyzCoords) {
-      console.log('GOT COORDS!');
       $('#BCK-loadingcoords').hide();
       this.model.set('xyz', xyzCoords, {
         silent: true
