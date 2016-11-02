@@ -1,8 +1,13 @@
 # View that renders the Image of the compound for the Compound Name and Classification Section
 CompoundImageView = CardView.extend(DownloadViewExt).extend
 
+  RENDERER_3D_SPECK_NAME:  '3DSpeck'
+  RENDERER_3D_LITEMOL_NAME:  '3DLiteMol'
+
   initialize: ->
     @model.on 'change', @.render, @
+    $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
+    $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
 
   render: ->
     @renderImage()
@@ -12,8 +17,10 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   events: ->
     # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events,
-      "click #CNC-3d-modal-trigger": "init3DView"
-      "click #CNC-3d-modal-trigger-small": "init3DView"
+      "click #CNC-3d-modal-trigger": "initDefault3DView"
+      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
+      "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
+      "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
 
   renderImage: ->
     if @model.get('structure_type') == 'NONE'
@@ -92,15 +99,49 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
     return '?' + renderer + '&' + format + '&' + coords
 
-  init3DView: ->
+  initDefault3DView: ->
 
-    comp3DViewSpeck = new Compound3DViewSpeck
-      el: $('#BCK-compound-3dview-Speck')
-      model: @model
-      type: 'reduced'
+    #make sure the speck visualisation is selected, this triggers lazyInit3DView
+    $('ul.tabs').tabs('select_tab', 'BCK-compound-3dview-Speck')
 
-    # I can assume here that the model has already been fetched, because the button has been rendered.
-    comp3DViewSpeck.render()
+
+  lazyInit3DView: (e) ->
+
+    requiredRenderer = $(e.currentTarget).attr('data-renderer')
+    view = @get3DView requiredRenderer
+    # I can assume that the model has already been fetched, because the button that opens the modal has been rendered.
+    # the button is only rendered after the model has been fetched.
+    # this view doesn't render on change, if the user never opens the visualisation it never loads unnecessarily the 3D
+    # coordinates
+    view.render()
+
+
+  renderers3D: {}
+  # gets a 3D view depending on the renderer name, it makes sure that this parent view has only one instance of that
+  # 3d view
+  # rendererName is defined in GlobalVariables
+  get3DView: (rendererName) ->
+
+    # initialise if not already
+    if !@renderers3D[rendererName]?
+
+      switch rendererName
+        when @RENDERER_3D_SPECK_NAME
+
+          @renderers3D[rendererName] = new Compound3DViewSpeck
+            el: $('#BCK-compound-3dview-Speck')
+            model: @model
+            type: 'reduced'
+
+        when @RENDERER_3D_LITEMOL_NAME
+
+          @renderers3D[rendererName] = new Compound3DViewLiteMol
+            el: $('#BCK-compound-3dview-LiteMol')
+            model: @model
+    return @renderers3D[rendererName]
+
+
+
 
   # --------------------------------------------------------------------
   # Downloads

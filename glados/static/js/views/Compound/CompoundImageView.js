@@ -2,8 +2,12 @@
 var CompoundImageView;
 
 CompoundImageView = CardView.extend(DownloadViewExt).extend({
+  RENDERER_3D_SPECK_NAME: '3DSpeck',
+  RENDERER_3D_LITEMOL_NAME: '3DLiteMol',
   initialize: function() {
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    $(this.el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', this.RENDERER_3D_SPECK_NAME);
+    return $(this.el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', this.RENDERER_3D_LITEMOL_NAME);
   },
   render: function() {
     this.renderImage();
@@ -12,8 +16,10 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
   },
   events: function() {
     return _.extend({}, DownloadViewExt.events, {
-      "click #CNC-3d-modal-trigger": "init3DView",
-      "click #CNC-3d-modal-trigger-small": "init3DView"
+      "click #CNC-3d-modal-trigger": "initDefault3DView",
+      "click #CNC-3d-modal-trigger-small": "initDefault3DView",
+      "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView",
+      "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
     });
   },
   renderImage: function() {
@@ -84,14 +90,34 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend({
     coords = $('#Bck-Coordinates-Switch').prop('checked') ? 'ignoreCoords=1' : '';
     return '?' + renderer + '&' + format + '&' + coords;
   },
-  init3DView: function() {
-    var comp3DViewSpeck;
-    comp3DViewSpeck = new Compound3DViewSpeck({
-      el: $('#BCK-compound-3dview-Speck'),
-      model: this.model,
-      type: 'reduced'
-    });
-    return comp3DViewSpeck.render();
+  initDefault3DView: function() {
+    return $('ul.tabs').tabs('select_tab', 'BCK-compound-3dview-Speck');
+  },
+  lazyInit3DView: function(e) {
+    var requiredRenderer, view;
+    requiredRenderer = $(e.currentTarget).attr('data-renderer');
+    view = this.get3DView(requiredRenderer);
+    return view.render();
+  },
+  renderers3D: {},
+  get3DView: function(rendererName) {
+    if (!(this.renderers3D[rendererName] != null)) {
+      switch (rendererName) {
+        case this.RENDERER_3D_SPECK_NAME:
+          this.renderers3D[rendererName] = new Compound3DViewSpeck({
+            el: $('#BCK-compound-3dview-Speck'),
+            model: this.model,
+            type: 'reduced'
+          });
+          break;
+        case this.RENDERER_3D_LITEMOL_NAME:
+          this.renderers3D[rendererName] = new Compound3DViewLiteMol({
+            el: $('#BCK-compound-3dview-LiteMol'),
+            model: this.model
+          });
+      }
+    }
+    return this.renderers3D[rendererName];
   },
   getFilename: function(format) {
     if (format === 'csv') {
