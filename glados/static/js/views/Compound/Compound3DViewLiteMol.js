@@ -2,6 +2,9 @@
 var Compound3DViewLiteMol;
 
 Compound3DViewLiteMol = Backbone.View.extend({
+  initialize: function() {
+    return angular.bootstrap(document, ['pdb.component.library']);
+  },
   render: function() {
     return console.log('render litemol');
   }

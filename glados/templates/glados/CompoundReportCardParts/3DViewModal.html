@@ -2,6 +2,24 @@
   {% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
 {% endblock %}
 
+{% block custom_js %}
+
+<!-- PDBE -->
+<!-- https://www.ebi.ac.uk/pdbe/pdb-component-library/getting_started.html -->
+
+<!-- Complied & minified library css -->
+<link rel="stylesheet" href="//www.ebi.ac.uk/pdbe/pdb-component-library/v1.0/css/pdb.component.library.min-1.0.0.css" />
+
+<!-- Dependencey scripts (these can be skipped if already included in page) -->
+<script src="//www.ebi.ac.uk/pdbe/pdb-component-library/libs/d3.min.js"></script>
+<script src="//www.ebi.ac.uk/pdbe/pdb-component-library/libs/angular.1.4.7.min.js"></script>
+
+<!-- Complied & minified library JS -->
+<script src="//www.ebi.ac.uk/pdbe/pdb-component-library/v1.0/js/pdb.component.library.min-1.0.0.js"></script>
+
+{% endblock %}
+
+
 <div id="CNC-3d-modal" class="modal" >
 
 
@@ -28,8 +46,13 @@
 
   </div>
 
-  <div id="BCK-compound-3dview-LiteMol" class="modal-content">
-    LiteMol
+  <div id="BCK-compound-3dview-LiteMol" class="modal-content" style="height: 100%;">
+
+      <div style="position:relative;height:300px;width:100%;">
+          <pdb-lite-mol pdb-id="'1cbs'" load-ed-maps="true" hide-controls="true'"></pdb-lite-mol>
+      </div>
+
+
   </div>
 
   {% block close_modal %}
