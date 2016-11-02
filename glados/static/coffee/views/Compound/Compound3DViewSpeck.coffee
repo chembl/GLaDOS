@@ -14,7 +14,13 @@ Compound3DViewSpeck = Backbone.View.extend
     if @supportsWebGL
       $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
         title: '3D View of ' + @model.get('molecule_chembl_id')
-      @getCoordsAndPaint()
+
+      if !@model.get('xyz')?
+        @getCoordsAndPaint()
+      else
+        # TODO: check why it is required to re initialise the view after coming back to the tab
+        @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
+        $('#BCK-loadingcoords').hide()
     else
       @showError('WebGL does not seem to be available in this browser.')
 
@@ -44,6 +50,7 @@ Compound3DViewSpeck = Backbone.View.extend
       r = $.ajax( {type: "POST", url: url_and_data.url, data: url_and_data.data})
 
     setXYZToModelAndPaint = (xyzCoords) ->
+      console.log 'GOT COORDS!'
       $('#BCK-loadingcoords').hide()
       @model.set('xyz', xyzCoords, {silent: true})
       @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))

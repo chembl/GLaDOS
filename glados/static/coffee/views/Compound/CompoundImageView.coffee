@@ -138,6 +138,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
           @renderers3D[rendererName] = new Compound3DViewLiteMol
             el: $('#BCK-compound-3dview-LiteMol')
             model: @model
+
     return @renderers3D[rendererName]
 
 

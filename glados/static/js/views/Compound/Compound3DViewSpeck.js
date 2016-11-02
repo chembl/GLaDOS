@@ -17,7 +17,12 @@ Compound3DViewSpeck = Backbone.View.extend({
       $(this.el).html(Handlebars.compile($(this.typeToTemplate[this.type]).html())({
         title: '3D View of ' + this.model.get('molecule_chembl_id')
       }));
-      return this.getCoordsAndPaint();
+      if (!(this.model.get('xyz') != null)) {
+        return this.getCoordsAndPaint();
+      } else {
+        this.molVis = new MoleculeVisualisator("render-container", "renderer-canvas", this.model.get('xyz'));
+        return $('#BCK-loadingcoords').hide();
+      }
     } else {
       return this.showError('WebGL does not seem to be available in this browser.');
     }
@@ -49,6 +54,7 @@ Compound3DViewSpeck = Backbone.View.extend({
       });
     };
     setXYZToModelAndPaint = function(xyzCoords) {
+      console.log('GOT COORDS!');
       $('#BCK-loadingcoords').hide();
       this.model.set('xyz', xyzCoords, {
         silent: true
