@@ -2,35 +2,40 @@
 var BrowseTargetAsCirclesView;
 
 BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
+  events: {
+    'click .reset-zoom': 'resetZoom'
+  },
   initialize: function() {
     var updateViewProxy;
+    this.$vis_elem = $(this.el).find('.vis-container');
     this.showResponsiveViewPreloader();
     updateViewProxy = this.setUpResponsiveRender();
     return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
-    var circle, color, diameter, elem_selector, focus, margin, node, nodes, pack, root, svg, text, view, zoom, zoomTo;
+    var circles, color, container, focus, nodes, pack, showNodeMenu, svg, text, thisView;
+    thisView = this;
     console.log('nodes before');
     console.log(this.model.get('plain'));
     this.hideResponsiveViewPreloader();
-    margin = 20;
-    diameter = $(this.el).width();
-    if (diameter === 0) {
-      diameter = 300;
+    this.margin = 20;
+    this.diameter = $(this.el).width();
+    if (this.diameter === 0) {
+      this.diameter = 300;
     }
     color = d3.scale.linear().domain([-1, 5]).range(["#eceff1", "#607d8b"]).interpolate(d3.interpolateRgb);
-    pack = d3.layout.pack().padding(2).size([diameter - margin, diameter - margin]).value(function(d) {
+    pack = d3.layout.pack().padding(2).size([thisView.diameter - this.margin, thisView.diameter - this.margin]).value(function(d) {
       return d.size;
     });
-    elem_selector = '#' + $(this.el).attr('id');
-    svg = d3.select(elem_selector).append("svg").attr("width", diameter).attr("height", diameter).append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-    root = this.model.get('plain');
-    focus = root;
-    nodes = pack.nodes(root);
-    view = void 0;
+    container = this.$vis_elem[0];
+    svg = d3.select(container).append("svg").attr("width", thisView.diameter).attr("height", thisView.diameter).append("g").attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")");
+    this.root = this.model.get('plain');
+    focus = this.root;
+    nodes = pack.nodes(this.root);
+    this.currentViewFrame = void 0;
     console.log('nodes after');
     console.log(nodes);
-    circle = svg.selectAll('circle').data(nodes).enter().append('circle').attr("class", function(d) {
+    circles = svg.selectAll('circle').data(nodes).enter().append('circle').attr("class", function(d) {
       if (d.parent) {
         if (d.children) {
           return 'node';
@@ -54,18 +59,19 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
     }).on("click", function(d) {
       if (focus !== d) {
-        zoom(d);
+        thisView.focusTo(d);
+        showNodeMenu(d);
         d3.event.stopPropagation();
       }
     });
     text = svg.selectAll('text').data(nodes).enter().append('text').attr("class", "label").style("fill-opacity", function(d) {
-      if (d.parent === root) {
+      if (d.parent === thisView.root) {
         return 1;
       } else {
         return 0;
       }
     }).style("display", function(d) {
-      if (d.parent === root) {
+      if (d.parent === thisView.root) {
         return 'inline';
       } else {
         return 'none';
@@ -74,51 +80,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return d.name + " (" + d.size + ")";
     });
     this.createCircleViews();
-    node = svg.selectAll("circle,text");
-    d3.select(elem_selector).on("click", function() {
-      return zoom(root);
+    d3.select(container).on("click", function() {
+      return thisView.focusTo(thisView.root);
     });
-    zoomTo = function(v) {
-      var k;
-      k = diameter / v[2];
-      view = v;
-      node.attr("transform", function(d) {
-        return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")";
-      });
-      return circle.attr("r", function(d) {
-        return d.r * k;
-      });
+    this.zoomTo([this.root.x, this.root.y, this.root.r * 2 + this.margin]);
+    return showNodeMenu = function(node) {
+      console.log('Menu!');
+      console.log(node);
+      return console.log('---');
     };
-    zoom = function(d) {
-      var focus0, transition;
-      focus0 = focus;
-      focus = d;
-      transition = d3.transition().duration(d3.event.altKey ? 7500 : 750).tween("zoom", function(d) {
-        var i;
-        i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-        return function(t) {
-          return zoomTo(i(t));
-        };
-      });
-      return transition.selectAll("text").filter(function(d) {
-        return d.parent === focus || this.style.display === 'inline';
-      }).style('fill-opacity', function(d) {
-        if (d.parent === focus) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }).each('start', function(d) {
-        if (d.parent === focus) {
-          this.style.display = 'inline';
-        }
-      }).each('end', function(d) {
-        if (d.parent !== focus) {
-          this.style.display = 'none';
-        }
-      });
-    };
-    return zoomTo([root.x, root.y, root.r * 2 + margin]);
   },
   createCircleViews: function() {
     var nodes_dict;
@@ -135,6 +105,65 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
         model: nodeModel,
         el: circle
       });
+    });
+  },
+  toggleResetZoomBtn: function(focus) {
+    if (focus.name === 'root') {
+      return this.hideResetZoomBtn();
+    } else {
+      return this.showResetZoomBtn();
+    }
+  },
+  showResetZoomBtn: function() {
+    return $(this.el).find('.reset-zoom').show();
+  },
+  hideResetZoomBtn: function() {
+    return $(this.el).find('.reset-zoom').hide();
+  },
+  resetZoom: function() {
+    return this.focusTo(this.root);
+  },
+  zoomTo: function(newViewFrame) {
+    var circles, k, svg;
+    this.currentViewFrame = newViewFrame;
+    svg = d3.select("svg");
+    circles = svg.selectAll("circle,text");
+    k = this.diameter / newViewFrame[2];
+    circles.attr("transform", function(d) {
+      return "translate(" + (d.x - newViewFrame[0]) * k + "," + (d.y - newViewFrame[1]) * k + ")";
+    });
+    return circles.attr("r", function(d) {
+      return d.r * k;
+    });
+  },
+  focusTo: function(node) {
+    var focus, thisView, transition;
+    thisView = this;
+    focus = node;
+    this.toggleResetZoomBtn(focus);
+    transition = d3.transition().duration(1000).tween("zoom", function(d) {
+      var i;
+      i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin]);
+      return function(t) {
+        return thisView.zoomTo(i(t));
+      };
+    });
+    return transition.selectAll("text").filter(function(d) {
+      return d.parent === focus || this.style.display === 'inline';
+    }).style('fill-opacity', function(d) {
+      if (d.parent === focus) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }).each('start', function(d) {
+      if (d.parent === focus) {
+        this.style.display = 'inline';
+      }
+    }).each('end', function(d) {
+      if (d.parent !== focus) {
+        this.style.display = 'none';
+      }
     });
   }
 });

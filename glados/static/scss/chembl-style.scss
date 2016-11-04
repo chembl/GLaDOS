@@ -117,6 +117,11 @@ main {
 
 $modals-height: 80%;
 
+/** make sure all links hav the hand pointer even with no href */
+a:hover {
+ cursor:pointer;
+}
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1757,8 +1762,8 @@ $marvin-size-fullscreen: 91vh;
     }
 
     .selected{
-        stroke: color('green', 'base');;
-        stroke-width: 2
+        stroke: color('green', 'base');
+        stroke-width: 2;
     }
 
   }

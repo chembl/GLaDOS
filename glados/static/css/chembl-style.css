@@ -1777,6 +1777,10 @@ body {
 main {
   flex: 1 0 auto; }
 
+/** make sure all links hav the hand pointer even with no href */
+a:hover {
+  cursor: pointer; }
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------

@@ -50,7 +50,7 @@ BrowseTargetMainView = Backbone.View.extend({
     search_summary = $(this.el).find('#search_in_tree_summary');
     search_summary.show();
     if (searchTerms.length < 2) {
-      search_summary.html('You must enter at least to characters');
+      search_summary.html('You must enter at least 2 characters');
       return;
     }
     numFound = this.model.searchInTree(searchTerms);

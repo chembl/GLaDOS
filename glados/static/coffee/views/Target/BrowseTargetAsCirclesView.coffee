@@ -1,8 +1,11 @@
 BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
+  events:
+    'click .reset-zoom': 'resetZoom'
 
   initialize: ->
 
+    @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
 
     # the render function is debounced so it waits for the size of the
@@ -14,14 +17,16 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
+    thisView = @
+
     console.log('nodes before')
     console.log(@model.get('plain'))
 
     @hideResponsiveViewPreloader()
-    margin = 20
-    diameter = $(@el).width();
+    @margin = 20
+    @diameter = $(@el).width();
 
-    diameter = 300 unless diameter != 0;
+    @diameter = 300 unless @diameter != 0;
 
     color = d3.scale.linear()
     .domain([-1, 5])
@@ -30,29 +35,25 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     pack = d3.layout.pack()
     .padding(2)
-    .size([diameter - margin, diameter - margin])
+    .size([thisView.diameter - @margin, thisView.diameter - @margin])
     .value((d) -> return d.size)
 
-    elem_selector = '#' + $(@el).attr('id')
-
-    svg = d3.select(elem_selector).append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
+    container = @$vis_elem[0]
+    svg = d3.select(container).append("svg")
+    .attr("width", thisView.diameter)
+    .attr("height", thisView.diameter)
     .append("g")
-    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-
-
+    .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")");
 
     # use plain version
-    root = @model.get('plain')
-
-    focus = root
-    nodes = pack.nodes(root)
-    view = undefined
+    @root = @model.get('plain')
+    focus = @root
+    nodes = pack.nodes(@root)
+    @currentViewFrame = undefined
     console.log('nodes after')
     console.log(nodes)
 
-    circle = svg.selectAll('circle')
+    circles = svg.selectAll('circle')
     .data(nodes).enter().append('circle')
     .attr("class", (d) ->
       if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
@@ -62,7 +63,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d.children then color(d.depth) else null)
     .on("click", (d) ->
       if focus != d
-        zoom(d)
+        thisView.focusTo(d)
+        showNodeMenu(d)
         d3.event.stopPropagation()
       return)
 
@@ -71,49 +73,25 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .enter().append('text')
     .attr("class", "label")
     .style("fill-opacity", (d) ->
-      if d.parent == root then 1 else 0)
+      if d.parent == thisView.root then 1 else 0)
     .style("display", (d) ->
-      if d.parent == root then 'inline' else 'none')
+      if d.parent == thisView.root then 'inline' else 'none')
     .text((d) -> return d.name + " (" + d.size + ")" )
 
     #Select circles to create the views
     @createCircleViews()
 
-    node = svg.selectAll("circle,text")
-
-    d3.select(elem_selector)
-    .on("click", () -> zoom(root) )
-
-    zoomTo = (v) ->
-      k = diameter / v[2]; view = v;
-      node.attr("transform", (d) -> return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")" )
-      circle.attr("r", (d) -> return d.r * k )
-
-    zoom = (d) ->
-      focus0 = focus; focus = d;
-      transition = d3.transition()
-      .duration(if d3.event.altKey then 7500 else 750)
-      .tween("zoom", (d) ->
-          i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin])
-          return (t) -> zoomTo(i(t))
-      )
-
-      transition.selectAll("text")
-      .filter( (d) ->
-        d.parent == focus or @style.display == 'inline')
-      .style('fill-opacity', (d) ->
-        if d.parent == focus then 1 else 0)
-      .each('start', (d) ->
-        if d.parent == focus
-          @style.display = 'inline'
-        return )
-      .each('end', (d) ->
-        if d.parent != focus
-          @style.display = 'none'
-        return)
+    d3.select(container)
+    .on("click", () -> thisView.focusTo(thisView.root) )
 
 
-    zoomTo([root.x, root.y, root.r * 2 + margin])
+    @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
+
+    # Show node menu when user clicks on a circle
+    showNodeMenu = (node) ->
+      console.log 'Menu!'
+      console.log node
+      console.log '---'
 
   createCircleViews: ->
 
@@ -134,6 +112,72 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         model: nodeModel
         el: circle
 
+
+  #----------------------------------------------------------
+  # Reset zoom btn
+  #----------------------------------------------------------
+
+  toggleResetZoomBtn: (focus) ->
+
+    if focus.name == 'root'
+      @hideResetZoomBtn()
+    else
+      @showResetZoomBtn()
+
+  showResetZoomBtn: ->
+
+    $(@el).find('.reset-zoom').show()
+
+  hideResetZoomBtn: ->
+
+    $(@el).find('.reset-zoom').hide()
+
+  resetZoom: ->
+
+    @focusTo @root
+
+  #----------------------------------------------------------
+  # Zoom and focus
+  #----------------------------------------------------------
+  zoomTo: (newViewFrame) ->
+
+    @currentViewFrame = newViewFrame
+
+    svg = d3.select("svg")
+    circles = svg.selectAll("circle,text")
+
+    k = @diameter / newViewFrame[2];
+    circles.attr("transform", (d) -> return "translate(" + (d.x - newViewFrame[0]) * k + "," + (d.y - newViewFrame[1]) * k + ")" )
+    circles.attr("r", (d) -> return d.r * k )
+
+  focusTo: (node) ->
+    thisView = @
+    focus = node
+    @toggleResetZoomBtn(focus)
+    transition = d3.transition()
+    .duration(1000)
+    .tween("zoom", (d) ->
+        i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
+        return (t) -> thisView.zoomTo(i(t))
+    )
+
+    transition.selectAll("text")
+      .filter( (d) ->
+        d.parent == focus or @style.display == 'inline')
+      .style('fill-opacity', (d) ->
+        if d.parent == focus then 1 else 0)
+      .each('start', (d) ->
+        if d.parent == focus
+          @style.display = 'inline'
+        return )
+      .each('end', (d) ->
+        if d.parent != focus
+          @style.display = 'none'
+        return)
+
+
+
+  
 
 
 
