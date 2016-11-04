@@ -91,7 +91,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     };
   },
   createCircleViews: function() {
-    var nodes_dict;
+    var nodes_dict, thisView;
+    thisView = this;
     nodes_dict = this.model.get('all_nodes_dict');
     return $(this.el).find('circle').each(function() {
       var circle, nodeModel, nodeModelID, nodeView;
@@ -101,10 +102,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
         return;
       }
       nodeModel = nodes_dict[nodeModelID];
-      return nodeView = new BrowseTargetAsCirclesNodeView({
+      nodeView = new BrowseTargetAsCirclesNodeView({
         model: nodeModel,
         el: circle
       });
+      return nodeView.parentView = thisView;
     });
   },
   toggleResetZoomBtn: function(focus) {
@@ -138,6 +140,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
   },
   focusTo: function(node) {
     var focus, thisView, transition;
+    console.log('focus node: ', node);
     thisView = this;
     focus = node;
     this.toggleResetZoomBtn(focus);

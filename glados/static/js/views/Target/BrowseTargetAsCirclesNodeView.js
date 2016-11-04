@@ -4,7 +4,8 @@ var BrowseTargetAsCirclesNodeView;
 BrowseTargetAsCirclesNodeView = Backbone.View.extend({
   initialize: function() {
     this.elem_selector = '#' + $(this.el).attr('id');
-    return this.model.on('change', this.changed, this);
+    this.model.on('change', this.changed, this);
+    return this.model.on(TargetHierarchyNode.NODE_FOCUSED_EVT, this.focused, this);
   },
   events: {
     'click': 'clicked'
@@ -14,5 +15,8 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend({
   },
   clicked: function() {
     return console.log('clicked ' + this.model.get('name'));
+  },
+  focused: function() {
+    return this.parentView.focusTo(d3.select(this.elem_selector).data()[0]);
   }
 });

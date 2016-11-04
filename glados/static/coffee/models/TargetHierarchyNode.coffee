@@ -1,5 +1,7 @@
 TargetHierarchyNode = Backbone.Model.extend
 
+  NODE_FOCUSED_EVT: 'node-expanded'
+
   checkMeAndMyDescendants: ->
 
     @set('selected', true)
@@ -102,6 +104,7 @@ TargetHierarchyNode = Backbone.Model.extend
       @set('collapsed', false)
       console.log('expanding ' + @get('name'))
       @expandMe()
+      @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)
 
     else
 
@@ -115,14 +118,3 @@ TargetHierarchyNode = Backbone.Model.extend
     if parent?
       parent.expandMe()
       parent.expandMyAncestors()
-
-
-
-
-
-
-
-
-
-
-

@@ -17,6 +17,8 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   changed: ->
 
+    # handle change of a node from different perspectives
+
     if @model.get('selected')
       $(@el).find('[type="checkbox"]').prop('checked', true)
     else

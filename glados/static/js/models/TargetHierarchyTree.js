@@ -10,7 +10,7 @@ TargetHierarchyTree = Backbone.Model.extend({
     return this.on('change', this.initHierarhy, this);
   },
   initHierarhy: function() {
-    var addOneNode, all_nodes, all_nodes_dict, child, children_col, node, plain, _i, _j, _len, _len1, _ref, _ref1;
+    var addOneNode, all_nodes, all_nodes_dict, child, children_col, node, plain, treeBCK, _i, _j, _len, _len1, _ref, _ref1;
     plain = {};
     plain['name'] = this.get('name');
     plain['children'] = this.get('children');
@@ -23,6 +23,7 @@ TargetHierarchyTree = Backbone.Model.extend({
     this.set('depth', 0, {
       silent: true
     });
+    treeBCK = this;
     addOneNode = function(node_obj, children_col, parent, parent_depth) {
       var child_obj, grand_children_coll, my_depth, new_node, _i, _len, _ref, _results;
       my_depth = parent_depth + 1;
@@ -35,7 +36,8 @@ TargetHierarchyTree = Backbone.Model.extend({
         size: node_obj.size,
         depth: my_depth,
         is_leaf: node_obj.children.length === 0,
-        selected: false
+        selected: false,
+        tree: treeBCK
       });
       children_col.add(new_node);
       all_nodes.add(new_node);

@@ -2,6 +2,7 @@
 var TargetHierarchyNode;
 
 TargetHierarchyNode = Backbone.Model.extend({
+  NODE_FOCUSED_EVT: 'node-expanded',
   checkMeAndMyDescendants: function() {
     var nodeModel, _i, _len, _ref;
     this.set('selected', true);
@@ -124,7 +125,8 @@ TargetHierarchyNode = Backbone.Model.extend({
     if (this.get('collapsed') === true) {
       this.set('collapsed', false);
       console.log('expanding ' + this.get('name'));
-      return this.expandMe();
+      this.expandMe();
+      return this.trigger(TargetHierarchyNode.NODE_FOCUSED_EVT);
     } else {
       this.set('collapsed', true);
       console.log('collapsing ' + this.get('name'));

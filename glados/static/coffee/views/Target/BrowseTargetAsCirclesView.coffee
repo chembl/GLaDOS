@@ -95,6 +95,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   createCircleViews: ->
 
+    thisView = @
     nodes_dict = @model.get('all_nodes_dict')
 
     $(@el).find('circle').each ->
@@ -111,6 +112,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       nodeView = new BrowseTargetAsCirclesNodeView
         model: nodeModel
         el: circle
+
+      nodeView.parentView = thisView
 
 
   #----------------------------------------------------------
@@ -151,6 +154,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     circles.attr("r", (d) -> return d.r * k )
 
   focusTo: (node) ->
+    console.log 'focus node: ', node
     thisView = @
     focus = node
     @toggleResetZoomBtn(focus)
@@ -175,9 +179,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           @style.display = 'none'
         return)
 
-
-
-  
 
 
 
