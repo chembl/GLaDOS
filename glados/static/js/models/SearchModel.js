@@ -2,33 +2,33 @@
 var SearchModel;
 
 SearchModel = Backbone.Model.extend({
-  queryString: '',
-  searchCompounds: true,
-  searchDocuments: true,
-  compoundResultsList: null,
-  documentResultsList: null,
+  defaults: {
+    queryString: '',
+    searchCompounds: true,
+    searchDocuments: true,
+    compoundResultsList: null,
+    documentResultsList: null
+  },
   getCompoundResultsList: function() {
-    if (!this.compoundResultsList) {
-      this.compoundResultsList = new CompoundResultsList;
+    if (!this.has('compoundResultsList')) {
+      this.set('compoundResultsList', glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList());
     }
-    return this.compoundResultsList;
+    return this.get('compoundResultsList');
   },
   getDocumentResultsList: function() {
-    if (!this.documentResultsList) {
-      this.documentResultsList = new DocumentResultsList;
+    if (!this.has('documentResultsList')) {
+      this.set('documentResultsList', glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewDocumentResultsList());
     }
-    return this.documentResultsList;
+    return this.get('documentResultsList');
   },
   search: function() {
-    if (this.searchCompounds) {
-      this.getCompoundResultsList().fetch({
-        reset: true
-      });
+    if (this.get('searchCompounds')) {
+      this.getCompoundResultsList().setMeta('search_term', this.get('queryString'));
+      this.getCompoundResultsList().fetch();
     }
-    if (this.searchDocuments) {
-      return this.getDocumentResultsList().fetch({
-        reset: true
-      });
+    if (this.get('searchDocuments')) {
+      this.getDocumentResultsList().setMeta('search_term', this.get('queryString'));
+      return this.getDocumentResultsList().fetch();
     }
   }
 });

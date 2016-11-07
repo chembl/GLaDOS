@@ -22,11 +22,6 @@ Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
 Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+Settings.SEARCH_RESULTS_PAGE+
         '(/'+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')
 
-# elastic search config
-Settings.ES_BASE_URL = 'http://localhost:9200'
-Settings.ES_INDEXES = {}
-Settings.ES_INDEXES.COMPOUND = '/chembl_molecule'
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Name Space Utils
 # ----------------------------------------------------------------------------------------------------------------------

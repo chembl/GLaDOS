@@ -14,7 +14,6 @@ SearchBarView = Backbone.View.extend
       urlQueryString = URLProcessor.getSearchQueryString()
       if urlQueryString
         @searchModel.set('queryString',urlQueryString)
-        @search()
     @render()
 
   # --------------------------------------------------------------------------------------------------------------------
@@ -38,7 +37,7 @@ SearchBarView = Backbone.View.extend
 
   searchExampleLink: (e) ->
     exampleString = $(e.currentTarget).html()
-    @searchModel.set('queryString',exampleString)
+    $('#search_bar').val(exampleString)
     @search()
 
   # --------------------------------------------------------------------------------------------------------------------
@@ -46,6 +45,8 @@ SearchBarView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   search: () ->
+    console.log("SEARCHING FOR:"+$('#search_bar').val())
+    @searchModel.set('queryString',$('#search_bar').val())
     if @atResultsPage
       @searchModel.search()
     else

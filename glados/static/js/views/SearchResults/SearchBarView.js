@@ -12,7 +12,6 @@ SearchBarView = Backbone.View.extend({
       urlQueryString = URLProcessor.getSearchQueryString();
       if (urlQueryString) {
         this.searchModel.set('queryString', urlQueryString);
-        this.search();
       }
     }
     return this.render();
@@ -35,10 +34,12 @@ SearchBarView = Backbone.View.extend({
   searchExampleLink: function(e) {
     var exampleString;
     exampleString = $(e.currentTarget).html();
-    this.searchModel.set('queryString', exampleString);
+    $('#search_bar').val(exampleString);
     return this.search();
   },
   search: function() {
+    console.log("SEARCHING FOR:" + $('#search_bar').val());
+    this.searchModel.set('queryString', $('#search_bar').val());
     if (this.atResultsPage) {
       return this.searchModel.search();
     } else {

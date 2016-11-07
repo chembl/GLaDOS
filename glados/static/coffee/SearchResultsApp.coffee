@@ -9,6 +9,7 @@ class SearchResultsApp
     @searchBarView = new SearchBarView()
     @initCompResultsListView($('#BCK-CompoundSearchResults'))
     @initDocsResultsListView($('#BCK-DocSearchResults'))
+    @searchBarView.search()
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views

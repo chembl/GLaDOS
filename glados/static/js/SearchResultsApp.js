@@ -9,7 +9,8 @@ SearchResultsApp = (function() {
     this.searchModel = SearchModel.getInstance();
     this.searchBarView = new SearchBarView();
     this.initCompResultsListView($('#BCK-CompoundSearchResults'));
-    return this.initDocsResultsListView($('#BCK-DocSearchResults'));
+    this.initDocsResultsListView($('#BCK-DocSearchResults'));
+    return this.searchBarView.search();
   };
 
   SearchResultsApp.initCompResultsListView = function(top_level_elem) {
