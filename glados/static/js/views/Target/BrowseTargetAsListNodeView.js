@@ -10,11 +10,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
     'click .tree-expander': 'toggleCollapsed'
   },
   clickInput: function() {
-    if (this.model.get('selected') === true) {
-      return this.model.unCheckMeAndMyDescendants();
-    } else {
-      return this.model.checkMeAndMyDescendants();
-    }
+    return this.model.toggleSelection();
   },
   changed: function() {
     if (this.model.get('selected')) {

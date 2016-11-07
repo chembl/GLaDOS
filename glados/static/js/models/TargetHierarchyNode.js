@@ -3,6 +3,13 @@ var TargetHierarchyNode;
 
 TargetHierarchyNode = Backbone.Model.extend({
   NODE_FOCUSED_EVT: 'node-expanded',
+  toggleSelection: function() {
+    if (this.get('selected') === true) {
+      return this.unCheckMeAndMyDescendants();
+    } else {
+      return this.checkMeAndMyDescendants();
+    }
+  },
   checkMeAndMyDescendants: function() {
     var nodeModel, _i, _len, _ref;
     this.set('selected', true);

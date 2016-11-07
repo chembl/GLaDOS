@@ -43,7 +43,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("width", thisView.diameter)
     .attr("height", thisView.diameter)
     .append("g")
-    .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")");
+    .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")")
+
+
 
     # use plain version
     @root = @model.get('plain')
@@ -53,6 +55,21 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log('nodes after')
     console.log(nodes)
 
+    # -----------------------------------------
+    # Click handler function
+    # -----------------------------------------
+    handleClickOnNode = (d) ->
+
+      d3.event.stopPropagation()
+      # If the user is pressing the ctrl Key, the node is selected,
+      # I don't zoom, so it's not my responsibility
+      if d3.event.ctrlKey
+        return
+
+      if focus != d
+        thisView.focusTo(d)
+
+
     circles = svg.selectAll('circle')
     .data(nodes).enter().append('circle')
     .attr("class", (d) ->
@@ -61,12 +78,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
     .style("fill", (d) ->
       if d.children then color(d.depth) else null)
-    .on("click", (d) ->
-      if focus != d
-        thisView.focusTo(d)
-        showNodeMenu(d)
-        d3.event.stopPropagation()
-      return)
+    .on("click", handleClickOnNode)
 
     text = svg.selectAll('text')
     .data(nodes)
@@ -86,12 +98,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
-
-    # Show node menu when user clicks on a circle
-    showNodeMenu = (node) ->
-      console.log 'Menu!'
-      console.log node
-      console.log '---'
 
   createCircleViews: ->
 

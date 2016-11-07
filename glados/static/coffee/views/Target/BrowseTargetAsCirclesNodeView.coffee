@@ -13,9 +13,11 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend
 
     d3.select(@elem_selector).classed('selected', @model.get('selected') == true)
 
-  clicked: ->
+  clicked: (event) ->
 
-    console.log('clicked ' + @model.get('name'))
+    # if the user presses the ctrl key, I select the node I am responsible of
+    if event.ctrlKey
+      @model.toggleSelection()
 
   focused: ->
 

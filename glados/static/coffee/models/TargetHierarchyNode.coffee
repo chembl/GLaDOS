@@ -2,6 +2,13 @@ TargetHierarchyNode = Backbone.Model.extend
 
   NODE_FOCUSED_EVT: 'node-expanded'
 
+  toggleSelection: ->
+
+    if @get('selected') == true
+      @unCheckMeAndMyDescendants()
+    else
+      @checkMeAndMyDescendants()
+
   checkMeAndMyDescendants: ->
 
     @set('selected', true)

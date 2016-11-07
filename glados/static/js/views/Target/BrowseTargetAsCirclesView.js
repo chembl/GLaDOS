@@ -13,7 +13,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
-    var circles, color, container, focus, nodes, pack, showNodeMenu, svg, text, thisView;
+    var circles, color, container, focus, handleClickOnNode, nodes, pack, svg, text, thisView;
     thisView = this;
     console.log('nodes before');
     console.log(this.model.get('plain'));
@@ -35,6 +35,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     this.currentViewFrame = void 0;
     console.log('nodes after');
     console.log(nodes);
+    handleClickOnNode = function(d) {
+      d3.event.stopPropagation();
+      if (d3.event.ctrlKey) {
+        return;
+      }
+      if (focus !== d) {
+        return thisView.focusTo(d);
+      }
+    };
     circles = svg.selectAll('circle').data(nodes).enter().append('circle').attr("class", function(d) {
       if (d.parent) {
         if (d.children) {
@@ -57,13 +66,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
       } else {
         return null;
       }
-    }).on("click", function(d) {
-      if (focus !== d) {
-        thisView.focusTo(d);
-        showNodeMenu(d);
-        d3.event.stopPropagation();
-      }
-    });
+    }).on("click", handleClickOnNode);
     text = svg.selectAll('text').data(nodes).enter().append('text').attr("class", "label").style("fill-opacity", function(d) {
       if (d.parent === thisView.root) {
         return 1;
@@ -83,12 +86,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     d3.select(container).on("click", function() {
       return thisView.focusTo(thisView.root);
     });
-    this.zoomTo([this.root.x, this.root.y, this.root.r * 2 + this.margin]);
-    return showNodeMenu = function(node) {
-      console.log('Menu!');
-      console.log(node);
-      return console.log('---');
-    };
+    return this.zoomTo([this.root.x, this.root.y, this.root.r * 2 + this.margin]);
   },
   createCircleViews: function() {
     var nodes_dict, thisView;
