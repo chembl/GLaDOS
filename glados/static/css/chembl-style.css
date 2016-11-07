@@ -2984,10 +2984,11 @@ div#CNC-zoom-modal {
     border-right: 2px solid transparent;
     border-bottom: 2px solid transparent; }
   .target-browser .browser-as-circles .node {
-    cursor: pointer; }
+    cursor: pointer;
+    stroke-width: 0.5px;
+    stroke: gray; }
   .target-browser .browser-as-circles .node:hover {
-    stroke: #000;
-    stroke-width: 1.5px; }
+    stroke-width: 3; }
   .target-browser .browser-as-circles .node--leaf {
     fill: white; }
   .target-browser .browser-as-circles .label {
@@ -3001,6 +3002,10 @@ div#CNC-zoom-modal {
   .target-browser .browser-as-circles .selected {
     stroke: #4CAF50;
     stroke-width: 2; }
+  .target-browser .browser-as-circles .incomplete {
+    stroke: #4CAF50;
+    stroke-width: 2;
+    stroke-dasharray: 10; }
   .target-browser .tree-indent {
     width: 16px;
     height: 16px;

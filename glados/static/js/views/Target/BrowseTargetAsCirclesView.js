@@ -2,19 +2,25 @@
 var BrowseTargetAsCirclesView;
 
 BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
+  CTRL_KEY_NUMBER: 17,
   events: {
     'click .reset-zoom': 'resetZoom'
   },
   initialize: function() {
     var updateViewProxy;
+    $(document).on("keydown", $.proxy(this.handleKeyDown, this));
+    $(document).on("keyup", $.proxy(this.handleKeyUp, this));
+    this.initialiseInstructions();
+    $(this.el).on('keydown', this.handleKeyDown);
     this.$vis_elem = $(this.el).find('.vis-container');
     this.showResponsiveViewPreloader();
     updateViewProxy = this.setUpResponsiveRender();
     return this.model.on('change', updateViewProxy, this);
   },
   render: function() {
-    var circles, color, container, focus, handleClickOnNode, nodes, pack, svg, text, thisView;
+    var circles, color, container, focus, handleClickOnNode, handleNodeMouseOut, handleNodeMouseOver, nodes, pack, svg, text, thisView;
     thisView = this;
+    this.fillInstructionsTemplate(void 0);
     console.log('nodes before');
     console.log(this.model.get('plain'));
     this.hideResponsiveViewPreloader();
@@ -44,6 +50,16 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
         return thisView.focusTo(d);
       }
     };
+    handleNodeMouseOver = function(d) {
+      var isPressingCtrl;
+      thisView.currentHover = d.name;
+      isPressingCtrl = d3.event.ctrlKey;
+      return thisView.fillInstructionsTemplate(d.name, isPressingCtrl);
+    };
+    handleNodeMouseOut = function(d) {
+      thisView.currentHover = void 0;
+      return thisView.fillInstructionsTemplate(void 0);
+    };
     circles = svg.selectAll('circle').data(nodes).enter().append('circle').attr("class", function(d) {
       if (d.parent) {
         if (d.children) {
@@ -66,7 +82,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
       } else {
         return null;
       }
-    }).on("click", handleClickOnNode);
+    }).on("click", handleClickOnNode).on('mouseover', handleNodeMouseOver).on('mouseout', handleNodeMouseOut);
     text = svg.selectAll('text').data(nodes).enter().append('text').attr("class", "label").style("fill-opacity", function(d) {
       if (d.parent === thisView.root) {
         return 1;
@@ -86,7 +102,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
     d3.select(container).on("click", function() {
       return thisView.focusTo(thisView.root);
     });
-    return this.zoomTo([this.root.x, this.root.y, this.root.r * 2 + this.margin]);
+    this.zoomTo([this.root.x, this.root.y, this.root.r * 2 + this.margin]);
+    return $('.tooltipped').tooltip();
   },
   createCircleViews: function() {
     var nodes_dict, thisView;
@@ -166,5 +183,28 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
         this.style.display = 'none';
       }
     });
+  },
+  initialiseInstructions: function() {
+    this.$instructionsDiv = $(this.el).find('.instructions');
+    return this.$instructionsDivTmpl = $('#' + this.$instructionsDiv.attr('data-hb-template'));
+  },
+  fillInstructionsTemplate: function(nodeName, isPressingCtrl) {
+    var $div, template;
+    $div = $(this.el).find('.instructions');
+    template = $('#' + $div.attr('data-hb-template'));
+    return $div.html(Handlebars.compile(template.html())({
+      node_name: nodeName,
+      is_pressing_ctrl: isPressingCtrl
+    }));
+  },
+  handleKeyDown: function(event) {
+    if (event.which === this.CTRL_KEY_NUMBER) {
+      return this.fillInstructionsTemplate(this.currentHover, true);
+    }
+  },
+  handleKeyUp: function(event) {
+    if (event.which === this.CTRL_KEY_NUMBER) {
+      return this.fillInstructionsTemplate(this.currentHover, false);
+    }
   }
 });

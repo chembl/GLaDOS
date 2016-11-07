@@ -1738,11 +1738,12 @@ $marvin-size-fullscreen: 91vh;
   .browser-as-circles {
     .node {
       cursor: pointer;
+      stroke-width: 0.5px;
+      stroke: gray;
     }
 
     .node:hover {
-      stroke: #000;
-      stroke-width: 1.5px;
+      stroke-width: 3;
     }
 
     .node--leaf {
@@ -1762,8 +1763,14 @@ $marvin-size-fullscreen: 91vh;
     }
 
     .selected{
-        stroke: color('green', 'base');
-        stroke-width: 2;
+      stroke: color('green', 'base');
+      stroke-width: 2;
+    }
+
+    .incomplete{
+      stroke: color('green', 'base');
+      stroke-width: 2;
+      stroke-dasharray: 10;
     }
 
   }

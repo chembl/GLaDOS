@@ -5,4 +5,32 @@
     <!-- Backbone fills this with the BrowseTargetAsCirclesView -->
   </div>
 
+
+  {% verbatim %}
+    <script id="Handlebars-CriclesBrowser-instructions" type="text/x-handlebars-template">
+
+      {{#if node_name}}
+        {{#if is_pressing_ctrl}}
+          <i class="icon icon-functional" data-icon="/"></i><i class="icon icon-functional" data-icon="x"></i> Select/Unselect {{node_name}}
+        {{else}}
+          <i class="icon icon-functional" data-icon="3"></i> Focus on {{node_name}}
+        {{/if}}
+      {{/if}}
+
+      <ul class="collection">
+        <li class="collection-item">
+          <i>click:</i> focus on a node.
+        </li>
+        <li class="collection-item">
+          <i>ctrl + click:</i> select/unselect a node.
+        </li>
+      </ul>
+
+    </script>
+  {% endverbatim %}
+
+  <div class="instructions" data-hb-template="Handlebars-CriclesBrowser-instructions">
+
+  </div>
+
 </div>

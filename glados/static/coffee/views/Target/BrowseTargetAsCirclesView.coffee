@@ -1,9 +1,18 @@
 BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
+  # this may have to be improved depending If there are browser issues.
+  CTRL_KEY_NUMBER: 17
+
   events:
     'click .reset-zoom': 'resetZoom'
 
   initialize: ->
+
+    $(document).on("keydown", $.proxy(@handleKeyDown, @))
+    $(document).on("keyup", $.proxy(@handleKeyUp, @))
+
+    @initialiseInstructions()
+    $(@el).on 'keydown', @handleKeyDown
 
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
@@ -14,10 +23,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @model.on 'change', updateViewProxy, @
 
-
   render: ->
 
     thisView = @
+    @fillInstructionsTemplate undefined
 
     console.log('nodes before')
     console.log(@model.get('plain'))
@@ -56,7 +65,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log(nodes)
 
     # -----------------------------------------
-    # Click handler function
+    # Node click handler function
     # -----------------------------------------
     handleClickOnNode = (d) ->
 
@@ -69,16 +78,32 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if focus != d
         thisView.focusTo(d)
 
+    # -----------------------------------------
+    # Node hover handler function
+    # -----------------------------------------
+    handleNodeMouseOver = (d) ->
+
+      thisView.currentHover = d.name
+      isPressingCtrl = d3.event.ctrlKey
+      thisView.fillInstructionsTemplate d.name, isPressingCtrl
+
+    handleNodeMouseOut = (d) ->
+
+      thisView.currentHover = undefined
+      thisView.fillInstructionsTemplate undefined
+
 
     circles = svg.selectAll('circle')
-    .data(nodes).enter().append('circle')
-    .attr("class", (d) ->
-      if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
-    .attr("id", (d) ->
-      if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
-    .style("fill", (d) ->
-      if d.children then color(d.depth) else null)
-    .on("click", handleClickOnNode)
+      .data(nodes).enter().append('circle')
+      .attr("class", (d) ->
+        if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
+      .attr("id", (d) ->
+        if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
+      .style("fill", (d) ->
+        if d.children then color(d.depth) else null)
+      .on("click", handleClickOnNode)
+      .on('mouseover', handleNodeMouseOver)
+      .on('mouseout', handleNodeMouseOut)
 
     text = svg.selectAll('text')
     .data(nodes)
@@ -98,6 +123,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
+
+    $('.tooltipped').tooltip()
 
   createCircleViews: ->
 
@@ -185,6 +212,36 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           @style.display = 'none'
         return)
 
+
+  #----------------------------------------------------------
+  # Instructions
+  #----------------------------------------------------------
+  initialiseInstructions: ->
+
+    @$instructionsDiv = $(@el).find('.instructions')
+    @$instructionsDivTmpl = $('#' + @$instructionsDiv.attr('data-hb-template'))
+
+  fillInstructionsTemplate: (nodeName, isPressingCtrl) ->
+
+    $div = $(@el).find('.instructions')
+    template = $('#' + $div.attr('data-hb-template'))
+
+    $div.html Handlebars.compile(template.html())
+      node_name: nodeName
+      is_pressing_ctrl: isPressingCtrl
+
+
+  handleKeyDown: (event) ->
+
+    if event.which == @CTRL_KEY_NUMBER
+
+      @fillInstructionsTemplate @currentHover, true
+
+  handleKeyUp: (event) ->
+
+    if event.which == @CTRL_KEY_NUMBER
+
+      @fillInstructionsTemplate @currentHover, false
 
 
 
