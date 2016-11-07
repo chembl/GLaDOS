@@ -30,7 +30,7 @@ VisualComponentsSummaryApp = (function() {
 
   VisualComponentsSummaryApp.initSampleCompound3DView = function($elem) {
     var comp3DView;
-    return comp3DView = new Compound3DView({
+    return comp3DView = new Compound3DViewSpeck({
       el: $elem,
       model: VisualComponentsSummaryApp.sampleCompound,
       type: 'reduced'

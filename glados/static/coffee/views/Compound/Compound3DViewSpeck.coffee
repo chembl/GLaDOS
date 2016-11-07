@@ -1,27 +1,36 @@
-Compound3DView = Backbone.View.extend
+Compound3DViewSpeck = Backbone.View.extend
 
   initialize: (options) ->
     @model.on 'change', @.render, @
     @type = options.type
 
-    console.log @model
+    @supportsWebGL =  @supportsWebGL()
 
   events: ->
     'click #BCK-Compound-3d-speckpresets input': 'selectPreset'
 
   render: ->
 
-    console.log 'render!'
-    $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
-      title: '3D View of ' + @model.get('molecule_chembl_id')
+    if @supportsWebGL
+      $(@el).html Handlebars.compile($(@typeToTemplate[@type]).html())
+        title: '3D View of ' + @model.get('molecule_chembl_id')
 
-    @getCoordsAndPaint()
+      if !@model.get('xyz')?
+        @getCoordsAndPaint()
+      else
+        # TODO: check why it is required to re initialise the view after coming back to the tab
+        @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
+        $('#BCK-loadingcoords').hide()
+    else
+      @showError('WebGL does not seem to be available in this browser.')
 
-  showError: ->
+  showError: (msg) ->
     $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
-      msg: 'There was en error loading the data'
+      msg: msg
 
   getCoordsAndPaint: ->
+
+    $('#BCK-loadingcoords').show()
 
     standardInchi = @model.get('molecule_structures')['standard_inchi']
     standardInchiB64 = window.btoa(standardInchi)
@@ -31,6 +40,7 @@ Compound3DView = Backbone.View.extend
     # from a ctab value it returns the base64 url to get the xyz
     getXYZURL = (data) ->
       url_and_data = {}
+      # Don't add the last slash, you will get the "No 'Access-Control-Allow-Origin' header" issue
       url_and_data.url = Settings.BEAKER_BASE_URL + 'ctab2xyz'
       url_and_data.data = data
 
@@ -40,16 +50,18 @@ Compound3DView = Backbone.View.extend
       r = $.ajax( {type: "POST", url: url_and_data.url, data: url_and_data.data})
 
     setXYZToModelAndPaint = (xyzCoords) ->
+      $('#BCK-loadingcoords').hide()
       @model.set('xyz', xyzCoords, {silent: true})
       @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('xyz'))
 
     f = $.proxy(setXYZToModelAndPaint, @)
 
-    getCoords = $.ajax( molUrl ).then(getXYZURL).then(getXZYcontent).then(f)
+    getCoords = $.ajax( molUrl ).then(getXYZURL).then(getXZYcontent)
+    getCoords.done(f)
 
     e = $.proxy(@showError, @)
     getCoords.fail ->
-      e()
+      e('There was en error loading the data')
 
 
   selectPreset: (event) ->
@@ -58,6 +70,15 @@ Compound3DView = Backbone.View.extend
 
   typeToTemplate:
     'reduced': '#Handlebars-Compound-3D-speck'
+
+  supportsWebGL: ->
+
+    try
+      canvas = document.createElement('canvas')
+      return window.WebGLRenderingContext? and (canvas.getContext('webgl')? or canvas.getContext('experimental-webgl'))?
+    catch e
+      return false
+
 
 
 
