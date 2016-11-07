@@ -167,7 +167,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
       };
     });
     return transition.selectAll("text").filter(function(d) {
-      return d.parent === focus || this.style.display === 'inline';
+      return d === focus || d.parent === focus || this.style.display === 'inline';
     }).style('fill-opacity', function(d) {
       if (d.parent === focus) {
         return 1;
@@ -179,6 +179,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
         this.style.display = 'inline';
       }
     }).each('end', function(d) {
+      if (d === focus && !(d.children != null)) {
+        this.style.display = 'inline';
+        this.style['fill-opacity'] = 1;
+        return;
+      }
       if (d.parent !== focus) {
         this.style.display = 'none';
       }

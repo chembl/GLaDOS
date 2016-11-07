@@ -1743,6 +1743,7 @@ $marvin-size-fullscreen: 91vh;
     }
 
     .node:hover {
+      cursor: pointer;
       stroke-width: 3;
     }
 
@@ -1757,8 +1758,7 @@ $marvin-size-fullscreen: 91vh;
     }
 
     .label,
-    .node--root,
-    .node--leaf {
+    .node--root{
       pointer-events: none;
     }
 

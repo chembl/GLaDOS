@@ -33,9 +33,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @hideResponsiveViewPreloader()
     @margin = 20
-    @diameter = $(@el).width();
+    @diameter = $(@el).width()
 
-    @diameter = 300 unless @diameter != 0;
+    @diameter = 300 unless @diameter != 0
 
     color = d3.scale.linear()
     .domain([-1, 5])
@@ -200,7 +200,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     transition.selectAll("text")
       .filter( (d) ->
-        d.parent == focus or @style.display == 'inline')
+        d == focus or d.parent == focus or @style.display == 'inline')
       .style('fill-opacity', (d) ->
         if d.parent == focus then 1 else 0)
       .each('start', (d) ->
@@ -208,6 +208,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           @style.display = 'inline'
         return )
       .each('end', (d) ->
+
+        # if you focus a leaf I  won't hide the label
+        if d == focus and !d.children?
+          @style.display = 'inline'
+          @style['fill-opacity'] = 1
+          return
+
         if d.parent != focus
           @style.display = 'none'
         return)

@@ -2988,6 +2988,7 @@ div#CNC-zoom-modal {
     stroke-width: 0.5px;
     stroke: gray; }
   .target-browser .browser-as-circles .node:hover {
+    cursor: pointer;
     stroke-width: 3; }
   .target-browser .browser-as-circles .node--leaf {
     fill: white; }
@@ -2996,8 +2997,7 @@ div#CNC-zoom-modal {
     text-anchor: middle;
     text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; }
   .target-browser .browser-as-circles .label,
-  .target-browser .browser-as-circles .node--root,
-  .target-browser .browser-as-circles .node--leaf {
+  .target-browser .browser-as-circles .node--root {
     pointer-events: none; }
   .target-browser .browser-as-circles .selected {
     stroke: #4CAF50;
