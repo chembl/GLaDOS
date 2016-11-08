@@ -187,7 +187,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     circles.attr("r", (d) -> return d.r * k )
 
   focusTo: (node) ->
-    console.log 'focus node: ', node
+
+    # TODO: If it causes problems, make sure to not do the focus procedure when the focus is already in the node passed
+    # as parameter
     thisView = @
     focus = node
     @toggleResetZoomBtn(focus)

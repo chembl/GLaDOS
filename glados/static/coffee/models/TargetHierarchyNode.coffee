@@ -106,16 +106,16 @@ TargetHierarchyNode = Backbone.Model.extend
 
   toggleCollapsed: ->
 
-    # It doesn't matter if leaves are collapsed or expanded. 
+    # It doesn't matter if leaves are collapsed or expanded.
     if @get('is_leaf')
-      @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)
+      @triggerAndSetFocusEvent()
       return
 
     if @get('collapsed') == true
 
       @set('collapsed', false)
       @expandMe()
-      @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)
+      @triggerAndSetFocusEvent()
 
     else
 
@@ -128,3 +128,8 @@ TargetHierarchyNode = Backbone.Model.extend
     if parent?
       parent.expandMe()
       parent.expandMyAncestors()
+
+  triggerAndSetFocusEvent: ->
+    @get('tree').unFocusAll()
+    @set('focused', true)
+    @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)

@@ -3,7 +3,8 @@ var BrowseTargetAsListNodeView;
 
 BrowseTargetAsListNodeView = Backbone.View.extend({
   initialize: function() {
-    return this.model.on('change', this.changed, this);
+    this.model.on('change', this.changed, this);
+    return this.model.on(TargetHierarchyNode.NODE_FOCUSED_EVT, this.focused, this);
   },
   events: {
     'click [type="checkbox"]': 'clickInput',
@@ -40,12 +41,20 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
       $(this.el).removeClass('green accent-1');
     }
     if (this.model.get('show')) {
-      return $(this.el).show();
+      $(this.el).show();
     } else {
-      return $(this.el).hide();
+      $(this.el).hide();
+    }
+    if (this.model.get('focused')) {
+      return $(this.el).find('.node-being-focused').show();
+    } else {
+      return $(this.el).find('.node-being-focused').hide();
     }
   },
   toggleCollapsed: function() {
     return this.model.toggleCollapsed();
+  },
+  focused: function() {
+    return this.model.expandMyAncestors();
   }
 });

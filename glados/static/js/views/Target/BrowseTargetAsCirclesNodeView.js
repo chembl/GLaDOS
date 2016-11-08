@@ -16,8 +16,10 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend({
   },
   clicked: function(event) {
     if (event.ctrlKey) {
-      return this.model.toggleSelection();
+      this.model.toggleSelection();
+      return;
     }
+    return this.model.triggerAndSetFocusEvent();
   },
   focused: function() {
     return this.parentView.focusTo(d3.select(this.elem_selector).data()[0]);

@@ -219,6 +219,25 @@ describe "Target hierarchy tree", ->
     expect(leaf_node.get('collapsed')).toBe(true)
     leaf_node.on(TargetHierarchyNode.NODE_FOCUSED_EVT, done(), @)
 
+  it "expands a node's ancestry", (done) ->
+
+    leaf_node = getNodeFromID('9')
+    leaf_node.expandMyAncestors()
+
+    shown_nodes = getShownNodesListStr()
+    expect(shown_nodes).toBe('1,10,8,9')
+
+    done()
+
+  it "focuses only one node at a time", (done) ->
+
+    nodeA = getNodeFromID('6')
+    nodeB = getNodeFromID('7')
+
+    focusedNodes = getFocusedNodesListStr()
+    expect(focusedNodes).toBe('9')
+
+    done()
 
   # ------------------------------
   # Helpers
@@ -290,5 +309,13 @@ describe "Target hierarchy tree", ->
 
     return _.map(_.filter(all_nodes, (model) ->
       model.get('found')),
+      (selected) ->selected.get('id')).sort().toString()
+
+  getFocusedNodesListStr = () ->
+
+    all_nodes = targetTree.get('all_nodes').models
+
+    return _.map(_.filter(all_nodes, (model) ->
+      model.get('focused')),
       (selected) ->selected.get('id')).sort().toString()
 

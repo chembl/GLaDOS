@@ -116,3 +116,9 @@ TargetHierarchyTree = Backbone.Model.extend
 
     @collapseAll()
 
+  unFocusAll: ->
+
+    for node in @get('all_nodes').models
+      node.set('focused', false)
+
+

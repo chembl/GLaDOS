@@ -147,5 +147,15 @@ TargetHierarchyTree = Backbone.Model.extend({
       node.set('found', false);
     }
     return this.collapseAll();
+  },
+  unFocusAll: function() {
+    var node, _i, _len, _ref, _results;
+    _ref = this.get('all_nodes').models;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      node = _ref[_i];
+      _results.push(node.set('focused', false));
+    }
+    return _results;
   }
 });

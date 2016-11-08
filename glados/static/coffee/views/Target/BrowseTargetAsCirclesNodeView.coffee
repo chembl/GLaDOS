@@ -19,6 +19,10 @@ BrowseTargetAsCirclesNodeView = Backbone.View.extend
     # if the user presses the ctrl key, I select the node I am responsible of
     if event.ctrlKey
       @model.toggleSelection()
+      return
+
+    # if there is no ctrl key, I am being focused, I need to trigger this event in the model
+    @model.triggerAndSetFocusEvent()
 
   focused: ->
 

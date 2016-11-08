@@ -155,7 +155,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend({
   },
   focusTo: function(node) {
     var focus, thisView, transition;
-    console.log('focus node: ', node);
     thisView = this;
     focus = node;
     this.toggleResetZoomBtn(focus);

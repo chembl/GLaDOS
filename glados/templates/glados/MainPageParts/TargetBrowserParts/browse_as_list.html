@@ -16,7 +16,7 @@
           <span class="tree-expander {{#unless is_leaf}}tree-expander-collapsed{{/unless}}"></span>
 
           <input type="checkbox" id="checkbox-{{id}}" class="filled-in"/>
-          <label for="checkbox-{{id}}">&nbsp;</label>{{#if is_leaf}}<a class="focus-on-leaf">{{/if}}{{name}} ({{size}}){{#if is_leaf}}</a>{{/if}}
+          <label for="checkbox-{{id}}">&nbsp;</label>{{#if is_leaf}}<a class="focus-on-leaf">{{/if}}{{name}} ({{size}}){{#if is_leaf}}</a>{{/if}} <i class="icon icon-functional node-being-focused" data-icon="3" style="display:none;"></i>
         </td>
 
       </tr>

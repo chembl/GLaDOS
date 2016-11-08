@@ -2,6 +2,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   initialize: ->
     @model.on 'change', @changed, @
+    @model.on TargetHierarchyNode.NODE_FOCUSED_EVT, @focused, @
 
   events:
    'click [type="checkbox"]': 'clickInput'
@@ -52,9 +53,18 @@ BrowseTargetAsListNodeView = Backbone.View.extend
     else
       $(@el).hide()
 
-  toggleCollapsed: ->
+    if @model.get('focused')
+      $(@el).find('.node-being-focused').show()
+    else
+      $(@el).find('.node-being-focused').hide()
 
+
+  toggleCollapsed: ->
     @model.toggleCollapsed()
+
+  focused: ->
+    @model.expandMyAncestors()
+
 
 
 
