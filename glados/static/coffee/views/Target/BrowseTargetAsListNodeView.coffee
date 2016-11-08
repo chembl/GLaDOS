@@ -2,20 +2,21 @@ BrowseTargetAsListNodeView = Backbone.View.extend
 
   initialize: ->
     @model.on 'change', @changed, @
+    @model.on TargetHierarchyNode.NODE_FOCUSED_EVT, @focused, @
 
   events:
    'click [type="checkbox"]': 'clickInput'
    'click .tree-expander': 'toggleCollapsed'
+   'click .focus-on-leaf': 'toggleCollapsed'
 
 
   clickInput: ->
 
-    if @model.get('selected') == true
-      @model.unCheckMeAndMyDescendants()
-    else
-      @model.checkMeAndMyDescendants()
+    @model.toggleSelection()
 
   changed: ->
+
+    # handle change of a node from different perspectives
 
     if @model.get('selected')
       $(@el).find('[type="checkbox"]').prop('checked', true)
@@ -23,6 +24,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
       $(@el).find('[type="checkbox"]').prop('checked', false)
 
     # Visually, when it is incomplete it is also checked, NOT in the model!!!
+    # this is a trick to make the checkbox be filled without a check
     if @model.get('incomplete')
       $(@el).find('[type="checkbox"]').addClass('incomplete')
       $(@el).find('[type="checkbox"]').prop('checked', true)
@@ -51,9 +53,18 @@ BrowseTargetAsListNodeView = Backbone.View.extend
     else
       $(@el).hide()
 
-  toggleCollapsed: ->
+    if @model.get('focused')
+      $(@el).find('.node-being-focused').show()
+    else
+      $(@el).find('.node-being-focused').hide()
 
+
+  toggleCollapsed: ->
     @model.toggleCollapsed()
+
+  focused: ->
+    @model.expandMyAncestors()
+
 
 
 

@@ -2,6 +2,14 @@
 var TargetHierarchyNode;
 
 TargetHierarchyNode = Backbone.Model.extend({
+  NODE_FOCUSED_EVT: 'node-expanded',
+  toggleSelection: function() {
+    if (this.get('selected') === true) {
+      return this.unCheckMeAndMyDescendants();
+    } else {
+      return this.checkMeAndMyDescendants();
+    }
+  },
   checkMeAndMyDescendants: function() {
     var nodeModel, _i, _len, _ref;
     this.set('selected', true);
@@ -121,13 +129,16 @@ TargetHierarchyNode = Backbone.Model.extend({
     }
   },
   toggleCollapsed: function() {
+    if (this.get('is_leaf')) {
+      this.triggerAndSetFocusEvent();
+      return;
+    }
     if (this.get('collapsed') === true) {
       this.set('collapsed', false);
-      console.log('expanding ' + this.get('name'));
-      return this.expandMe();
+      this.expandMe();
+      return this.triggerAndSetFocusEvent();
     } else {
       this.set('collapsed', true);
-      console.log('collapsing ' + this.get('name'));
       return this.collapseMe();
     }
   },
@@ -138,5 +149,10 @@ TargetHierarchyNode = Backbone.Model.extend({
       parent.expandMe();
       return parent.expandMyAncestors();
     }
+  },
+  triggerAndSetFocusEvent: function() {
+    this.get('tree').unFocusAll();
+    this.set('focused', true);
+    return this.trigger(TargetHierarchyNode.NODE_FOCUSED_EVT);
   }
 });

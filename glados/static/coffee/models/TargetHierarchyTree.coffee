@@ -23,6 +23,7 @@ TargetHierarchyTree = Backbone.Model.extend
     #the root has depth 0
     @set('depth', 0, {silent: true})
 
+    treeBCK = @
     addOneNode = (node_obj, children_col, parent, parent_depth) ->
 
       my_depth = parent_depth + 1
@@ -38,6 +39,8 @@ TargetHierarchyTree = Backbone.Model.extend
         depth: my_depth
         is_leaf: node_obj.children.length == 0
         selected: false
+        # add a reference to the original tree
+        tree: treeBCK
 
       children_col.add(new_node)
 
@@ -112,3 +115,10 @@ TargetHierarchyTree = Backbone.Model.extend
       node.set('found', false)
 
     @collapseAll()
+
+  unFocusAll: ->
+
+    for node in @get('all_nodes').models
+      node.set('focused', false)
+
+
