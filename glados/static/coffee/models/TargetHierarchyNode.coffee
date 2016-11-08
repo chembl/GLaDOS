@@ -106,17 +106,20 @@ TargetHierarchyNode = Backbone.Model.extend
 
   toggleCollapsed: ->
 
+    # It doesn't matter if leaves are collapsed or expanded. 
+    if @get('is_leaf')
+      @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)
+      return
+
     if @get('collapsed') == true
 
       @set('collapsed', false)
-      console.log('expanding ' + @get('name'))
       @expandMe()
       @trigger(TargetHierarchyNode.NODE_FOCUSED_EVT)
 
     else
 
       @set('collapsed', true)
-      console.log('collapsing ' + @get('name'))
       @collapseMe()
 
   expandMyAncestors: ->

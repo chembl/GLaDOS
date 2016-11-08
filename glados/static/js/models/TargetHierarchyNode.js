@@ -129,14 +129,16 @@ TargetHierarchyNode = Backbone.Model.extend({
     }
   },
   toggleCollapsed: function() {
+    if (this.get('is_leaf')) {
+      this.trigger(TargetHierarchyNode.NODE_FOCUSED_EVT);
+      return;
+    }
     if (this.get('collapsed') === true) {
       this.set('collapsed', false);
-      console.log('expanding ' + this.get('name'));
       this.expandMe();
       return this.trigger(TargetHierarchyNode.NODE_FOCUSED_EVT);
     } else {
       this.set('collapsed', true);
-      console.log('collapsing ' + this.get('name'));
       return this.collapseMe();
     }
   },

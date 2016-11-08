@@ -7,7 +7,8 @@ BrowseTargetAsListNodeView = Backbone.View.extend({
   },
   events: {
     'click [type="checkbox"]': 'clickInput',
-    'click .tree-expander': 'toggleCollapsed'
+    'click .tree-expander': 'toggleCollapsed',
+    'click .focus-on-leaf': 'toggleCollapsed'
   },
   clickInput: function() {
     return this.model.toggleSelection();

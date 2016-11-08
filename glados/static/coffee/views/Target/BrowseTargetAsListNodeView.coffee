@@ -6,6 +6,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
   events:
    'click [type="checkbox"]': 'clickInput'
    'click .tree-expander': 'toggleCollapsed'
+   'click .focus-on-leaf': 'toggleCollapsed'
 
 
   clickInput: ->
@@ -22,6 +23,7 @@ BrowseTargetAsListNodeView = Backbone.View.extend
       $(@el).find('[type="checkbox"]').prop('checked', false)
 
     # Visually, when it is incomplete it is also checked, NOT in the model!!!
+    # this is a trick to make the checkbox be filled without a check
     if @model.get('incomplete')
       $(@el).find('[type="checkbox"]').addClass('incomplete')
       $(@el).find('[type="checkbox"]').prop('checked', true)

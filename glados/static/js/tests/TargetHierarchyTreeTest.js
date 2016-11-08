@@ -176,6 +176,20 @@ describe("Target hierarchy tree", function() {
     expect(found_nodes).toBe('');
     return done();
   });
+  it("triggers the NODE_FOCUSED_EVT when a node is expanded (only the first expanded node)", function(done) {
+    var enzyme_node;
+    enzyme_node = getNodeFromID('1');
+    enzyme_node.toggleCollapsed();
+    expect(enzyme_node.get('collapsed')).toBe(false);
+    return enzyme_node.on(TargetHierarchyNode.NODE_FOCUSED_EVT, done(), this);
+  });
+  it("triggers the NODE_FOCUSED_EVT when a leaf is focused", function(done) {
+    var leaf_node;
+    leaf_node = getNodeFromID('9');
+    leaf_node.toggleCollapsed();
+    expect(leaf_node.get('collapsed')).toBe(true);
+    return leaf_node.on(TargetHierarchyNode.NODE_FOCUSED_EVT, done(), this);
+  });
   getSelectedNodesListStr = function() {
     var all_nodes;
     all_nodes = targetTree.get('all_nodes').models;
