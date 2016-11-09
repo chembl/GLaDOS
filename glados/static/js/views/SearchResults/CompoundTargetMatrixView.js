@@ -15,34 +15,41 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellText, getColumnText, getRowText, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
         {
           "name": "C1",
-          "originalIndex": 0
+          "originalIndex": 0,
+          "currentPosition": 0
         }, {
           "name": "C2",
-          "originalIndex": 1
+          "originalIndex": 1,
+          "currentPosition": 1
         }, {
           "name": "C3",
-          "originalIndex": 2
+          "originalIndex": 2,
+          "currentPosition": 2
         }
       ],
       "rows": [
         {
           "name": "T1",
-          "originalIndex": 0
+          "originalIndex": 0,
+          "currentPosition": 0
         }, {
           "name": "T2",
-          "originalIndex": 1
+          "originalIndex": 1,
+          "currentPosition": 1
         }, {
           "name": "T3",
-          "originalIndex": 2
+          "originalIndex": 2,
+          "currentPosition": 2
         }, {
           "name": "T4",
-          "originalIndex": 3
+          "originalIndex": 3,
+          "currentPosition": 3
         }
       ],
       "links": {
@@ -316,12 +323,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       return getCellColour(d[currentProperty]);
     };
-    getCellText = function(d) {
+    getCellTooltip = function(d) {
       var txt;
       txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty];
       return txt;
     };
-    getRowText = function(d) {
+    getRowTooltip = function(d) {
       var txt;
       txt = "target: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
       return txt;
@@ -342,29 +349,29 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('g elem: ', this);
       cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
         console.log('here!');
-        console.log(getXCoord(colNum));
-        return getXCoord(colNum);
+        console.log(getXCoord(columnsList[colNum].currentPosition));
+        return getXCoord(columnsList[colNum].currentPosition);
       }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
-      return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellText);
+      return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellTooltip);
     };
-    rows = svg.selectAll('.vis-row').data(matrix.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
-      return "translate(0, " + getYCoord(rowNum) + ")";
+    rows = svg.selectAll('.vis-row').data(matrix.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d) {
+      return "translate(0, " + getYCoord(d.currentPosition) + ")";
     }).each(fillRow);
     rows.append("line").attr("x2", width);
     rows.append("text").attr("x", -6).attr("y", getYCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
-    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getRowText);
-    getColumnText = function(d) {
+    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getRowTooltip);
+    getColumnTooltip = function(d) {
       var txt;
       return txt = "molecule: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
     };
-    columns = svg.selectAll(".vis-column").data(matrix.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d, colNum) {
-      return "translate(" + getXCoord(colNum) + ")rotate(-90)";
+    columns = svg.selectAll(".vis-column").data(matrix.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d) {
+      return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
     });
     columns.append("line").attr("x1", -width);
     columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
-    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnText);
+    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnTooltip);
     $(this.el).find(".select-property").on("change", function() {
       var t;
       if (!(this.value != null)) {
@@ -374,14 +381,16 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log('current colour property: ', currentProperty);
       getCellColour = defineColourScale(links, currentProperty);
       t = svg.transition().duration(1000);
-      return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellText);
+      return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
-    return $(this.el).find(".select-sort").on("change", function() {
+    return $(this.el).find(".select-row-sort").on("change", function() {
       if (!(this.value != null)) {
         return;
       }
       currentProperty = this.value;
-      return console.log('current sort property: ', currentProperty);
+      console.log('current sort property: ', currentProperty);
+      matrix.rows = _.sortBy(matrix.rows, 'pchembl_value_sum').reverse();
+      return console.log(matrix);
     });
   }
 });

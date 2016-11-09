@@ -33,32 +33,39 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         {
           "name": "C1",
           "originalIndex": 0
+          "currentPosition": 0
         },
         {
           "name": "C2",
           "originalIndex": 1
+          "currentPosition": 1
         },
         {
           "name": "C3",
           "originalIndex": 2
+          "currentPosition": 2
         }
       ],
       "rows": [
         {
           "name": "T1",
           "originalIndex": 0
+          "currentPosition": 0
         },
         {
           "name": "T2",
           "originalIndex": 1
+          "currentPosition": 1
         },
         {
           "name": "T3",
           "originalIndex": 2
+          "currentPosition": 2
         },
         {
           "name": "T4",
           "originalIndex": 3
+          "currentPosition": 3
         },
       ],
       "links": {
@@ -257,13 +264,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Add rows
     # --------------------------------------
-    getCellText = (d) ->
+    getCellTooltip = (d) ->
 
       txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty]
 
       return txt
 
-    getRowText = (d) ->
+    getRowTooltip = (d) ->
 
       txt = "target: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
       return txt
@@ -289,8 +296,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("class", "vis-cell")
         .attr("x", (d, colNum) ->
           console.log 'here!'
-          console.log getXCoord(colNum)
-          return getXCoord(colNum) )
+          console.log getXCoord(columnsList[colNum].currentPosition)
+          return getXCoord(columnsList[colNum].currentPosition) )
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .style("fill", fillColour )
@@ -298,14 +305,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
         .attr('data-delay', '50')
-        .attr('data-tooltip', getCellText )
+        .attr('data-tooltip', getCellTooltip )
 
 
     rows = svg.selectAll('.vis-row')
       .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
-      .attr('transform', (d, rowNum) -> "translate(0, " + getYCoord(rowNum) + ")")
+      .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
       .each(fillRow)
 
     rows.append("line")
@@ -324,12 +331,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
-      .attr('data-tooltip', getRowText)
+      .attr('data-tooltip', getRowTooltip)
 
     # --------------------------------------
     # Add columns
     # --------------------------------------
-    getColumnText = (d) ->
+    getColumnTooltip = (d) ->
 
       txt = "molecule: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
 
@@ -337,7 +344,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(matrix.columns)
       .enter().append("g")
       .attr("class", "vis-column")
-      .attr("transform", (d, colNum) -> "translate(" + getXCoord(colNum) + ")rotate(-90)" )
+      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
     columns.append("line")
       .attr("x1", -width)
@@ -355,7 +362,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
-      .attr('data-tooltip', getColumnText)
+      .attr('data-tooltip', getColumnTooltip)
 
     # --------------------------------------
     # colour property selector
@@ -374,17 +381,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t = svg.transition().duration(1000)
       t.selectAll(".vis-cell")
         .style("fill", fillColour)
-        .attr('data-tooltip', getCellText )
+        .attr('data-tooltip', getCellTooltip )
 
 
     # --------------------------------------
     # sort property selector
     # --------------------------------------
-    $(@el).find(".select-sort").on "change", () ->
+    $(@el).find(".select-row-sort").on "change", () ->
 
-        if !@value?
-          return
+      if !@value?
+        return
 
-        currentProperty = @value
-        console.log 'current sort property: ', currentProperty
+      currentProperty = @value
+      console.log 'current sort property: ', currentProperty
+
+      matrix.rows = _.sortBy(matrix.rows, 'pchembl_value_sum').reverse()
+
+
+
+      console.log(matrix)
+
 
