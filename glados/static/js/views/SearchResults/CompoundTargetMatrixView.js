@@ -15,9 +15,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, compsTargets, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellText, getColumnText, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, numColumns, numRows, row, rows, sum, svg, width, _i, _j, _k, _len, _ref, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellText, getColumnText, getRowText, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
-    compsTargets = {
+    matrix = {
       "columns": [
         {
           "name": "C1",
@@ -175,14 +175,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     width = 0.8 * elemWidth;
     height = width;
     svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    links = compsTargets.links;
-    numColumns = compsTargets.columns.length;
-    numRows = compsTargets.rows.length;
+    links = matrix.links;
+    numColumns = matrix.columns.length;
+    numRows = matrix.rows.length;
     console.log('num rows:', numRows);
     console.log('num columns:', numColumns);
     console.log('links:');
     console.log(links);
-    _ref = compsTargets.columns;
+    _ref = matrix.columns;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       col = _ref[_i];
       j = col.originalIndex;
@@ -200,18 +200,34 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       });
       col['pchembl_value_sum'] = sum;
     }
-    console.log('AFTER COMPUTING SUMS:');
-    console.log(compsTargets);
-    console.log('^^^');
+    _ref1 = matrix.rows;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      row = _ref1[_j];
+      i = row.originalIndex;
+      sum = 0;
+      sum = _.reduce((function() {
+        var _ref2, _results;
+        _ref2 = links[i];
+        _results = [];
+        for (j in _ref2) {
+          col = _ref2[j];
+          _results.push(col['pchembl_value']);
+        }
+        return _results;
+      })(), function(initial, succesive) {
+        return initial + succesive;
+      });
+      row['pchembl_value_sum'] = sum;
+    }
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
-      for (var _j = 0; 0 <= numRows ? _j <= numRows : _j >= numRows; 0 <= numRows ? _j++ : _j--){ _results.push(_j); }
+      for (var _k = 0; 0 <= numRows ? _k <= numRows : _k >= numRows; 0 <= numRows ? _k++ : _k--){ _results.push(_k); }
       return _results;
     }).apply(this)).rangeBands([0, height]);
     getXCoord = d3.scale.ordinal().domain((function() {
       _results1 = [];
-      for (var _k = 0; 0 <= numColumns ? _k <= numColumns : _k >= numColumns; 0 <= numColumns ? _k++ : _k--){ _results1.push(_k); }
+      for (var _l = 0; 0 <= numColumns ? _l <= numColumns : _l >= numColumns; 0 <= numColumns ? _l++ : _l--){ _results1.push(_l); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
     inferPropsType2 = function(currentProperty) {
@@ -305,14 +321,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty];
       return txt;
     };
+    getRowText = function(d) {
+      var txt;
+      txt = "target: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
+      return txt;
+    };
     fillRow = function(row, rowNumber) {
-      var cells, columnsList, dataList, rowInMatrix, value, _l, _len1;
-      columnsList = compsTargets.columns;
-      rowInMatrix = compsTargets.rows[rowNumber];
+      var cells, columnsList, dataList, rowInMatrix, value, _len2, _m;
+      columnsList = matrix.columns;
+      rowInMatrix = matrix.rows[rowNumber];
       i = rowInMatrix.originalIndex;
       dataList = [];
-      for (_l = 0, _len1 = columnsList.length; _l < _len1; _l++) {
-        col = columnsList[_l];
+      for (_m = 0, _len2 = columnsList.length; _m < _len2; _m++) {
+        col = columnsList[_m];
         j = col.originalIndex;
         value = links[i][j];
         dataList.push(value);
@@ -326,25 +347,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
       return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellText);
     };
-    rows = svg.selectAll('.vis-row').data(compsTargets.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
+    rows = svg.selectAll('.vis-row').data(matrix.rows).enter().append('g').attr('class', 'vis-row').attr('transform', function(d, rowNum) {
       return "translate(0, " + getYCoord(rowNum) + ")";
     }).each(fillRow);
     rows.append("line").attr("x2", width);
     rows.append("text").attr("x", -6).attr("y", getYCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "end").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
-    });
+    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getRowText);
     getColumnText = function(d) {
       var txt;
       return txt = "molecule: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
     };
-    columns = svg.selectAll(".vis-column").data(compsTargets.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d, colNum) {
+    columns = svg.selectAll(".vis-column").data(matrix.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d, colNum) {
       return "translate(" + getXCoord(colNum) + ")rotate(-90)";
     });
     columns.append("line").attr("x1", -width);
     columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
-    });
-    columns.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnText);
+    }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnText);
     $(this.el).find(".select-property").on("change", function() {
       var t;
       if (!(this.value != null)) {

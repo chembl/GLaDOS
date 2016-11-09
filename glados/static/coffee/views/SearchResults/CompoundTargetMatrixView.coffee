@@ -28,7 +28,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
 # this can be used for testing, do not delete
-    compsTargets = {
+    matrix = {
       "columns": [
         {
           "name": "C1",
@@ -119,9 +119,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Work with data
     # --------------------------------------
-    links = compsTargets.links
-    numColumns = compsTargets.columns.length
-    numRows = compsTargets.rows.length
+    links = matrix.links
+    numColumns = matrix.columns.length
+    numRows = matrix.rows.length
 
     console.log 'num rows:', numRows
     console.log 'num columns:', numColumns
@@ -132,18 +132,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Precompute sums
     # --------------------------------------
-    for col in compsTargets.columns
+    for col in matrix.columns
 
       j = col.originalIndex
       sum = 0
       sum = _.reduce (row[j]['pchembl_value'] for i, row of links), (initial, succesive) -> initial + succesive
       col['pchembl_value_sum'] = sum
 
-    console.log 'AFTER COMPUTING SUMS:'
-    console.log compsTargets
-    console.log '^^^'
+    for row in matrix.rows
 
-
+      i = row.originalIndex
+      sum = 0
+      sum = _.reduce (col['pchembl_value'] for j, col of links[i]), (initial, succesive) -> initial + succesive
+      row['pchembl_value_sum'] = sum
 
     # --------------------------------------
     # Add background rectangle
@@ -262,10 +263,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       return txt
 
+    getRowText = (d) ->
+
+      txt = "target: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
+      return txt
+
     fillRow = (row, rowNumber) ->
 
-      columnsList = compsTargets.columns
-      rowInMatrix = compsTargets.rows[rowNumber]
+      columnsList = matrix.columns
+      rowInMatrix = matrix.rows[rowNumber]
       i = rowInMatrix.originalIndex
 
       dataList = []
@@ -296,7 +302,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     rows = svg.selectAll('.vis-row')
-      .data(compsTargets.rows)
+      .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
       .attr('transform', (d, rowNum) -> "translate(0, " + getYCoord(rowNum) + ")")
@@ -315,7 +321,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .attr('fill', '#1b5e20')
       .text( (d, i) -> d.name )
-
+      .classed('tooltipped', true)
+      .attr('data-position', 'bottom')
+      .attr('data-delay', '50')
+      .attr('data-tooltip', getRowText)
 
     # --------------------------------------
     # Add columns
@@ -325,7 +334,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       txt = "molecule: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
 
     columns = svg.selectAll(".vis-column")
-      .data(compsTargets.columns)
+      .data(matrix.columns)
       .enter().append("g")
       .attr("class", "vis-column")
       .attr("transform", (d, colNum) -> "translate(" + getXCoord(colNum) + ")rotate(-90)" )
@@ -343,11 +352,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .attr('fill', '#1b5e20')
       .text((d, i) -> d.name )
-
-    columns.classed('tooltipped', true)
-        .attr('data-position', 'bottom')
-        .attr('data-delay', '50')
-        .attr('data-tooltip', getColumnText)
+      .classed('tooltipped', true)
+      .attr('data-position', 'bottom')
+      .attr('data-delay', '50')
+      .attr('data-tooltip', getColumnText)
 
     # --------------------------------------
     # colour property selector
