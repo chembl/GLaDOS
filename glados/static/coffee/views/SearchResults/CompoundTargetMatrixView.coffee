@@ -116,7 +116,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     width = 0.8 * elemWidth
     height = width
 
-    svg = d3.select('#' + @$vis_elem.attr('id'))
+    mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+    svg = mainContainer
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
@@ -364,6 +365,40 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('data-tooltip', getColumnTooltip)
 
     # --------------------------------------
+    # Zoom
+    # --------------------------------------
+    handleZoom = ->
+      console.log 'scale: ' + zoom.scale()
+      console.log 'translation: ' + d3.event.translate
+
+      getYCoord.rangeBands([0, (height * zoom.scale())])
+      getXCoord.rangeBands([0, (width * zoom.scale())])
+
+      svg.selectAll('.vis-row')
+        .attr('transform', (d) ->
+          "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
+        .selectAll("text")
+        .attr("y", getYCoord.rangeBand() / (2) )
+
+      svg.selectAll(".vis-column")
+        .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
+        .selectAll("text")
+        .attr("y", getXCoord.rangeBand() / (2) )
+        # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
+        .attr('transform', (d) -> "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")")
+
+      svg.selectAll(".vis-cell")
+        .attr("width", getXCoord.rangeBand())
+        .attr("height", getYCoord.rangeBand())
+        .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
+
+
+    zoom = d3.behavior.zoom()
+      .on("zoom", handleZoom)
+
+    mainContainer.call zoom
+
+    # --------------------------------------
     # colour property selector
     # --------------------------------------
 
@@ -400,7 +435,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = svg.transition().duration(2500)
       t.selectAll('.vis-row')
-      .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
+      .attr('transform', (d) ->
+          "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
     $(@el).find(".select-column-sort").on "change", () ->
 

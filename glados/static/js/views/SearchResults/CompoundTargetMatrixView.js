@@ -15,7 +15,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, handleZoom, height, i, inferPropsType, inferPropsType2, j, links, mainContainer, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, zoom, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
@@ -181,7 +181,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     elemWidth = $(this.el).width();
     width = 0.8 * elemWidth;
     height = width;
-    svg = d3.select('#' + this.$vis_elem.attr('id')).append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    mainContainer = d3.select('#' + this.$vis_elem.attr('id'));
+    svg = mainContainer.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     links = matrix.links;
     numColumns = matrix.columns.length;
     numRows = matrix.rows.length;
@@ -372,6 +373,25 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     columns.append("text").attr("x", 0).attr("y", getXCoord.rangeBand() / 2).attr("dy", ".32em").attr("text-anchor", "start").attr('style', 'font-size:12px;').attr('text-decoration', 'underline').attr('cursor', 'pointer').attr('fill', '#1b5e20').text(function(d, i) {
       return d.name;
     }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnTooltip);
+    handleZoom = function() {
+      console.log('scale: ' + zoom.scale());
+      console.log('translation: ' + d3.event.translate);
+      getYCoord.rangeBands([0, height * zoom.scale()]);
+      getXCoord.rangeBands([0, width * zoom.scale()]);
+      svg.selectAll('.vis-row').attr('transform', function(d) {
+        return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
+      }).selectAll("text").attr("y", getYCoord.rangeBand() / 2.);
+      svg.selectAll(".vis-column").attr("transform", function(d) {
+        return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
+      }).selectAll("text").attr("y", getXCoord.rangeBand() / 2.).attr('transform', function(d) {
+        return "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")";
+      });
+      return svg.selectAll(".vis-cell").attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).attr("x", function(d, index) {
+        return getXCoord(matrix.columns[index % matrix.columns.length].currentPosition);
+      });
+    };
+    zoom = d3.behavior.zoom().on("zoom", handleZoom);
+    mainContainer.call(zoom);
     $(this.el).find(".select-property").on("change", function() {
       var t;
       if (!(this.value != null)) {
@@ -396,7 +416,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       t = svg.transition().duration(2500);
       return t.selectAll('.vis-row').attr('transform', function(d) {
-        return "translate(0, " + getYCoord(d.currentPosition) + ")";
+        return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
       });
     });
     return $(this.el).find(".select-column-sort").on("change", function() {
