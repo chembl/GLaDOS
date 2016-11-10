@@ -154,7 +154,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       row['pchembl_value_sum'] = sum
 
     rowsIndex = _.indexBy(matrix.rows, 'name')
-
+    columnsIndex = _.indexBy(matrix.columns, 'name')
     # --------------------------------------
     # Add background rectangle
     # --------------------------------------
@@ -296,10 +296,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .data(dataList)
         .enter().append("rect")
         .attr("class", "vis-cell")
-        .attr("x", (d, colNum) ->
-          console.log 'here!'
-          console.log getXCoord(columnsList[colNum].currentPosition)
-          return getXCoord(columnsList[colNum].currentPosition) )
+        .attr("x", (d, colNum) -> getXCoord(columnsList[colNum].currentPosition) )
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .style("fill", fillColour )
@@ -395,8 +392,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       currentProperty = @value
-      console.log 'current sort property: ', currentProperty
-
       newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum')
 
       for row, index in newOrders
@@ -406,6 +401,26 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t = svg.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
+
+    $(@el).find(".select-column-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      currentProperty = @value
+      newOrders = _.sortBy(matrix.columns, 'pchembl_value_sum')
+
+      for row, index in newOrders
+        columnsIndex[row.name].currentPosition = index
+
+      t = svg.transition().duration(2500)
+      t.selectAll(".vis-column")
+      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
+
+      # here I have to use the modulo to get the correct column index
+      # note that when the cells were being added it was not necessary because it was using the enter()
+      t.selectAll(".vis-cell")
+      .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
 
 
 

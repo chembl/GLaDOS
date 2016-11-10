@@ -15,7 +15,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
@@ -227,6 +227,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       row['pchembl_value_sum'] = sum;
     }
     rowsIndex = _.indexBy(matrix.rows, 'name');
+    columnsIndex = _.indexBy(matrix.columns, 'name');
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
@@ -349,8 +350,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       console.log("dataList:", dataList);
       console.log('g elem: ', this);
       cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
-        console.log('here!');
-        console.log(getXCoord(columnsList[colNum].currentPosition));
         return getXCoord(columnsList[colNum].currentPosition);
       }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
       return cells.classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getCellTooltip);
@@ -384,13 +383,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       t = svg.transition().duration(1000);
       return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
-    return $(this.el).find(".select-row-sort").on("change", function() {
+    $(this.el).find(".select-row-sort").on("change", function() {
       var index, newOrders, t, _len2, _m;
       if (!(this.value != null)) {
         return;
       }
       currentProperty = this.value;
-      console.log('current sort property: ', currentProperty);
       newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum');
       for (index = _m = 0, _len2 = newOrders.length; _m < _len2; index = ++_m) {
         row = newOrders[index];
@@ -399,6 +397,25 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       t = svg.transition().duration(2500);
       return t.selectAll('.vis-row').attr('transform', function(d) {
         return "translate(0, " + getYCoord(d.currentPosition) + ")";
+      });
+    });
+    return $(this.el).find(".select-column-sort").on("change", function() {
+      var index, newOrders, t, _len2, _m;
+      if (!(this.value != null)) {
+        return;
+      }
+      currentProperty = this.value;
+      newOrders = _.sortBy(matrix.columns, 'pchembl_value_sum');
+      for (index = _m = 0, _len2 = newOrders.length; _m < _len2; index = ++_m) {
+        row = newOrders[index];
+        columnsIndex[row.name].currentPosition = index;
+      }
+      t = svg.transition().duration(2500);
+      t.selectAll(".vis-column").attr("transform", function(d) {
+        return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
+      });
+      return t.selectAll(".vis-cell").attr("x", function(d, index) {
+        return getXCoord(matrix.columns[index % matrix.columns.length].currentPosition);
       });
     });
   }
