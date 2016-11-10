@@ -15,7 +15,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, height, i, inferPropsType, inferPropsType2, j, links, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
@@ -58,7 +58,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             'pchembl': 1,
             'num_bioactivities': 0,
             'assay_type': 'U',
-            'pchembl_value': 1,
+            'pchembl_value': 12,
             molecule_chembl_id: 'C1',
             target_chembl_id: 'T1',
             'published_value': 120
@@ -67,7 +67,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 10,
             'assay_type': 'P',
-            'pchembl_value': 2,
+            'pchembl_value': 11,
             molecule_chembl_id: 'C2',
             target_chembl_id: 'T1',
             'published_value': 80
@@ -76,7 +76,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 2,
             'num_bioactivities': 0,
             'assay_type': 'B',
-            'pchembl_value': 3,
+            'pchembl_value': 10,
             molecule_chembl_id: 'C3',
             target_chembl_id: 'T1',
             'published_value': 40
@@ -87,7 +87,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 0,
             'assay_type': 'A',
-            'pchembl_value': 4,
+            'pchembl_value': 9,
             molecule_chembl_id: 'C1',
             target_chembl_id: 'T2',
             'published_value': 110
@@ -96,7 +96,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 3,
             'num_bioactivities': 20,
             'assay_type': 'T',
-            'pchembl_value': 5,
+            'pchembl_value': 8,
             molecule_chembl_id: 'C2',
             target_chembl_id: 'T2',
             'published_value': 70
@@ -105,7 +105,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 0,
             'assay_type': 'F',
-            'pchembl_value': 6,
+            'pchembl_value': 7,
             molecule_chembl_id: 'C3',
             target_chembl_id: 'T2',
             'published_value': 30
@@ -116,7 +116,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 4,
             'num_bioactivities': 0,
             'assay_type': 'U',
-            'pchembl_value': 7,
+            'pchembl_value': 6,
             molecule_chembl_id: 'C1',
             target_chembl_id: 'T3',
             'published_value': 10
@@ -125,7 +125,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 30,
             'assay_type': 'P',
-            'pchembl_value': 8,
+            'pchembl_value': 5,
             molecule_chembl_id: 'C2',
             target_chembl_id: 'T3',
             'published_value': 60
@@ -134,7 +134,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 0,
             'assay_type': 'B',
-            'pchembl_value': 9,
+            'pchembl_value': 4,
             molecule_chembl_id: 'C3',
             target_chembl_id: 'T3',
             'published_value': 20
@@ -145,7 +145,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 0,
             'assay_type': 'A',
-            'pchembl_value': 10,
+            'pchembl_value': 3,
             molecule_chembl_id: 'C1',
             target_chembl_id: 'T4',
             'published_value': 90
@@ -154,7 +154,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 0,
             'num_bioactivities': 40,
             'assay_type': 'T',
-            'pchembl_value': 11,
+            'pchembl_value': 2,
             molecule_chembl_id: 'C2',
             target_chembl_id: 'T4',
             'published_value': 50
@@ -163,7 +163,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             pchembl: 5,
             'num_bioactivities': 0,
             'assay_type': 'F',
-            'pchembl_value': 12,
+            'pchembl_value': 1,
             molecule_chembl_id: 'C3',
             target_chembl_id: 'T4',
             'published_value': 100
@@ -226,6 +226,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       });
       row['pchembl_value_sum'] = sum;
     }
+    rowsIndex = _.indexBy(matrix.rows, 'name');
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
@@ -384,13 +385,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
     return $(this.el).find(".select-row-sort").on("change", function() {
+      var index, newOrders, t, _len2, _m;
       if (!(this.value != null)) {
         return;
       }
       currentProperty = this.value;
       console.log('current sort property: ', currentProperty);
-      matrix.rows = _.sortBy(matrix.rows, 'pchembl_value_sum').reverse();
-      return console.log(matrix);
+      newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum');
+      for (index = _m = 0, _len2 = newOrders.length; _m < _len2; index = ++_m) {
+        row = newOrders[index];
+        rowsIndex[row.name].currentPosition = index;
+      }
+      t = svg.transition().duration(2500);
+      return t.selectAll('.vis-row').attr('transform', function(d) {
+        return "translate(0, " + getYCoord(d.currentPosition) + ")";
+      });
     });
   }
 });

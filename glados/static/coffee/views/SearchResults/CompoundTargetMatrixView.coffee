@@ -73,24 +73,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         #source Target
         0: {
           # destination Compound
-          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 1, molecule_chembl_id: 'C1', target_chembl_id: 'T1', 'published_value': 120} # this means target 0 is connected to compound 0 through an assay with a value of 1
-          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P', 'pchembl_value': 2, molecule_chembl_id: 'C2', target_chembl_id: 'T1', 'published_value': 80}
-          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 3, molecule_chembl_id: 'C3', target_chembl_id: 'T1', 'published_value': 40}
+          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 12, molecule_chembl_id: 'C1', target_chembl_id: 'T1', 'published_value': 120} # this means target 0 is connected to compound 0 through an assay with a value of 1
+          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P', 'pchembl_value': 11, molecule_chembl_id: 'C2', target_chembl_id: 'T1', 'published_value': 80}
+          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 10, molecule_chembl_id: 'C3', target_chembl_id: 'T1', 'published_value': 40}
         }
         1: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 4, molecule_chembl_id: 'C1', target_chembl_id: 'T2', 'published_value': 110}
-          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T', 'pchembl_value': 5, molecule_chembl_id: 'C2', target_chembl_id: 'T2', 'published_value': 70}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 6, molecule_chembl_id: 'C3', target_chembl_id: 'T2', 'published_value': 30}
+          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 9, molecule_chembl_id: 'C1', target_chembl_id: 'T2', 'published_value': 110}
+          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T', 'pchembl_value': 8, molecule_chembl_id: 'C2', target_chembl_id: 'T2', 'published_value': 70}
+          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 7, molecule_chembl_id: 'C3', target_chembl_id: 'T2', 'published_value': 30}
         }
         2: {
-          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 7, molecule_chembl_id: 'C1', target_chembl_id: 'T3', 'published_value': 10}
-          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P', 'pchembl_value': 8, molecule_chembl_id: 'C2', target_chembl_id: 'T3', 'published_value': 60}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 9, molecule_chembl_id: 'C3', target_chembl_id: 'T3', 'published_value': 20}
+          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 6, molecule_chembl_id: 'C1', target_chembl_id: 'T3', 'published_value': 10}
+          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P', 'pchembl_value': 5, molecule_chembl_id: 'C2', target_chembl_id: 'T3', 'published_value': 60}
+          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 4, molecule_chembl_id: 'C3', target_chembl_id: 'T3', 'published_value': 20}
         }
         3: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 10, molecule_chembl_id: 'C1', target_chembl_id: 'T4', 'published_value': 90}
-          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T', 'pchembl_value': 11, molecule_chembl_id: 'C2', target_chembl_id: 'T4', 'published_value': 50}
-          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 12, molecule_chembl_id: 'C3', target_chembl_id: 'T4', 'published_value': 100}
+          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 3, molecule_chembl_id: 'C1', target_chembl_id: 'T4', 'published_value': 90}
+          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T', 'pchembl_value': 2, molecule_chembl_id: 'C2', target_chembl_id: 'T4', 'published_value': 50}
+          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 1, molecule_chembl_id: 'C3', target_chembl_id: 'T4', 'published_value': 100}
         }
 
 
@@ -137,7 +137,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log links
 
     # --------------------------------------
-    # Precompute sums
+    # Precompute sums and indexes
     # --------------------------------------
     for col in matrix.columns
 
@@ -152,6 +152,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       sum = 0
       sum = _.reduce (col['pchembl_value'] for j, col of links[i]), (initial, succesive) -> initial + succesive
       row['pchembl_value_sum'] = sum
+
+    rowsIndex = _.indexBy(matrix.rows, 'name')
 
     # --------------------------------------
     # Add background rectangle
@@ -395,10 +397,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentProperty = @value
       console.log 'current sort property: ', currentProperty
 
-      matrix.rows = _.sortBy(matrix.rows, 'pchembl_value_sum').reverse()
+      newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum')
 
+      for row, index in newOrders
+        #rowsIndex[row.name], ' has to be in position: ', index
+        rowsIndex[row.name].currentPosition = index
 
+      t = svg.transition().duration(2500)
+      t.selectAll('.vis-row')
+      .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
 
-      console.log(matrix)
 
 
