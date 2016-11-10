@@ -396,7 +396,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .on("zoom", handleZoom)
 
-    mainContainer.call zoom
+    svg.call zoom
 
     # --------------------------------------
     # colour property selector

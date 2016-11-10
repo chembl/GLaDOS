@@ -391,7 +391,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       });
     };
     zoom = d3.behavior.zoom().on("zoom", handleZoom);
-    mainContainer.call(zoom);
+    svg.call(zoom);
     $(this.el).find(".select-property").on("change", function() {
       var t;
       if (!(this.value != null)) {
