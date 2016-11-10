@@ -15,7 +15,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return $('.tooltipped').tooltip();
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, handleZoom, height, i, inferPropsType, inferPropsType2, j, links, mainContainer, margin, matrix, numColumns, numRows, row, rows, rowsIndex, sum, svg, width, zoom, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, currentProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, handleZoom, height, i, inferPropsType, inferPropsType2, j, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, row, rows, rowsIndex, sum, svg, width, zoom, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
@@ -375,7 +375,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnTooltip);
     handleZoom = function() {
       console.log('scale: ' + zoom.scale());
-      console.log('translation: ' + d3.event.translate);
+      console.log('translation: ' + zoom.translate());
       getYCoord.rangeBands([0, height * zoom.scale()]);
       getXCoord.rangeBands([0, width * zoom.scale()]);
       svg.selectAll('.vis-row').attr('transform', function(d) {
@@ -419,7 +419,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
       });
     });
-    return $(this.el).find(".select-column-sort").on("change", function() {
+    $(this.el).find(".select-column-sort").on("change", function() {
       var index, newOrders, t, _len2, _m;
       if (!(this.value != null)) {
         return;
@@ -437,6 +437,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return t.selectAll(".vis-cell").attr("x", function(d, index) {
         return getXCoord(matrix.columns[index % matrix.columns.length].currentPosition);
       });
+    });
+    resetZoom = function() {
+      zoom.scale(1);
+      zoom.translate([0, 0]);
+      return handleZoom();
+    };
+    return $(this.el).find(".reset-zoom-btn").click(function() {
+      return resetZoom();
     });
   }
 });

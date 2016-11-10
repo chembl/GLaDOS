@@ -369,7 +369,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     handleZoom = ->
       console.log 'scale: ' + zoom.scale()
-      console.log 'translation: ' + d3.event.translate
+      console.log 'translation: ' + zoom.translate()
 
       getYCoord.rangeBands([0, (height * zoom.scale())])
       getXCoord.rangeBands([0, (width * zoom.scale())])
@@ -457,6 +457,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       # note that when the cells were being added it was not necessary because it was using the enter()
       t.selectAll(".vis-cell")
       .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
+
+
+    # --------------------------------------
+    # Reset zoom
+    # --------------------------------------
+    resetZoom = ->
+      zoom.scale(1)
+      zoom.translate([0,0])
+      handleZoom()
+
+    $(@el).find(".reset-zoom-btn").click ->
+
+      resetZoom()
 
 
 
