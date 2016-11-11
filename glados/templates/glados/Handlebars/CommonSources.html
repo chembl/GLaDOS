@@ -217,13 +217,13 @@
 
 <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
 
-  <select class="select-sort">
+  <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
     <option value="" disabled {{#unless this.one_selected}} selected {{/unless}}>Choose a field</option>
     {{#each columns}}
       <option value="{{this.comparator}}" {{#if this.selected}} selected {{/if}}>{{this.comparator}}</option>
     {{/each}}
   </select>
-  <label>Sort by:</label>
+  <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>
 
 </script>
 

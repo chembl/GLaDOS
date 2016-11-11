@@ -6,6 +6,21 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     console.log @url
 
+    config = {
+      initial_colouring: 'assay_type'
+      colour_properties: ['pchembl_value', 'assay_type', 'published_value']
+      initial_row_sorting: 'assay_type'
+      row_sorting_properties: ['pchembl_value', 'published_value']
+      initial_col_sorting: 'published_value'
+      col_sorting_properties: ['pchembl_value', 'published_value']
+      propertyToType:
+        assay_type: "string"
+        pchembl_value: "number"
+        published_value: "number"
+    }
+
+    @set('config', config)
+
   parse: (response) ->
 
     activities = response.activities

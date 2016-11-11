@@ -14,10 +14,37 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     console.log 'render!'
 
+    @paintControls()
     @paintMatrix()
 
     $(@el).find('select').material_select()
     $('.tooltipped').tooltip()
+
+  paintControls: ->
+
+    config = @model.get('config')
+
+    @paintSelect('.select-colouring-container', config.colour_properties, config.initial_colouring, 'select-colour-property', 'Colour by:' )
+    @paintSelect('.select-row-sort-container', config.row_sorting_properties, config.initial_row_sorting, 'select-row-sort', 'Sort rows by:' )
+    @paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:' )
+
+  paintSelect: (elemSelector, propsList, defaultValue, customClass, label) ->
+
+    columns = _.map(propsList, (item) ->
+      {
+      comparator: item
+      selected: (item == defaultValue)
+      })
+
+    $select = $(@el).find(elemSelector)
+    $template = $('#' + $select.attr('data-hb-template'))
+    $select.html Handlebars.compile( $template.html() )
+      custom_class: customClass
+      columns: columns
+      custom_label: label
+
+
+
 
   paintMatrix: ->
 
@@ -73,24 +100,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         #source Target
         0: {
           # destination Compound
-          0: {'pchembl': 1, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 12, molecule_chembl_id: 'C1', target_chembl_id: 'T1', 'published_value': 120} # this means target 0 is connected to compound 0 through an assay with a value of 1
-          1: {pchembl: 0, 'num_bioactivities': 10, 'assay_type': 'P', 'pchembl_value': 11, molecule_chembl_id: 'C2', target_chembl_id: 'T1', 'published_value': 80}
-          2: {pchembl: 2, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 10, molecule_chembl_id: 'C3', target_chembl_id: 'T1', 'published_value': 40}
+          0: {'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 12, molecule_chembl_id: 'C1', target_chembl_id: 'T1', 'published_value': 120} # this means target 0 is connected to compound 0 through an assay with a value of 1
+          1: {'num_bioactivities': 10, 'assay_type': 'P', 'pchembl_value': 11, molecule_chembl_id: 'C2', target_chembl_id: 'T1', 'published_value': 80}
+          2: {'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 10, molecule_chembl_id: 'C3', target_chembl_id: 'T1', 'published_value': 40}
         }
         1: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 9, molecule_chembl_id: 'C1', target_chembl_id: 'T2', 'published_value': 110}
-          1: {pchembl: 3, 'num_bioactivities': 20, 'assay_type': 'T', 'pchembl_value': 8, molecule_chembl_id: 'C2', target_chembl_id: 'T2', 'published_value': 70}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 7, molecule_chembl_id: 'C3', target_chembl_id: 'T2', 'published_value': 30}
+          0: {'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 9, molecule_chembl_id: 'C1', target_chembl_id: 'T2', 'published_value': 110}
+          1: {'num_bioactivities': 20, 'assay_type': 'T', 'pchembl_value': 8, molecule_chembl_id: 'C2', target_chembl_id: 'T2', 'published_value': 70}
+          2: {'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 7, molecule_chembl_id: 'C3', target_chembl_id: 'T2', 'published_value': 30}
         }
         2: {
-          0: {pchembl: 4, 'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 6, molecule_chembl_id: 'C1', target_chembl_id: 'T3', 'published_value': 10}
-          1: {pchembl: 0, 'num_bioactivities': 30, 'assay_type': 'P', 'pchembl_value': 5, molecule_chembl_id: 'C2', target_chembl_id: 'T3', 'published_value': 60}
-          2: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 4, molecule_chembl_id: 'C3', target_chembl_id: 'T3', 'published_value': 20}
+          0: {'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 6, molecule_chembl_id: 'C1', target_chembl_id: 'T3', 'published_value': 10}
+          1: {'num_bioactivities': 30, 'assay_type': 'P', 'pchembl_value': 5, molecule_chembl_id: 'C2', target_chembl_id: 'T3', 'published_value': 60}
+          2: {'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 4, molecule_chembl_id: 'C3', target_chembl_id: 'T3', 'published_value': 20}
         }
         3: {
-          0: {pchembl: 0, 'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 3, molecule_chembl_id: 'C1', target_chembl_id: 'T4', 'published_value': 90}
-          1: {pchembl: 0, 'num_bioactivities': 40, 'assay_type': 'T', 'pchembl_value': 2, molecule_chembl_id: 'C2', target_chembl_id: 'T4', 'published_value': 50}
-          2: {pchembl: 5, 'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 1, molecule_chembl_id: 'C3', target_chembl_id: 'T4', 'published_value': 100}
+          0: {'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 3, molecule_chembl_id: 'C1', target_chembl_id: 'T4', 'published_value': 90}
+          1: {'num_bioactivities': 40, 'assay_type': 'T', 'pchembl_value': 2, molecule_chembl_id: 'C2', target_chembl_id: 'T4', 'published_value': 50}
+          2: {'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 1, molecule_chembl_id: 'C3', target_chembl_id: 'T4', 'published_value': 100}
         }
 
 
@@ -100,11 +127,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     #compsTargets = @model.get('matrix')
 
+    config = @model.get('config')
     # --------------------------------------
     # pre-configuration
     # --------------------------------------
 
-    currentProperty = 'pchembl_value'
+    currentColourProperty = config.initial_colouring
 
     margin =
       top: 150
@@ -178,30 +206,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..numColumns])
       .rangeBands([0, width])
 
-
-    #this would become the standard way of infering types if the other method doesn't work
-    inferPropsType2 = (currentProperty) ->
-
-      propToType =
-        "assay_type": "string"
-        "pchembl_value": "number"
-        "published_value": "number"
-
-      return propToType[currentProperty]
-
-    # infers type from the first non null/undefined value,
-    # this will be used to generate the correct scale.
-    inferPropsType = (links, currentProperty) ->
-
-      for rowNum, row of links
-        for colNum, cell of row
-          datum = cell[currentProperty]
-          if datum?
-            if parseInt(datum) != NaN
-              return "number"
-            type =  typeof datum
-            return type
-
     # generates a scale for when the data is numeric
     buildNumericColourScale = (links, currentProperty) ->
 
@@ -244,7 +248,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     defineColourScale = (links, currentProperty)->
 
-      type = inferPropsType2 currentProperty
+      type = config.propertyToType[currentProperty]
+
       console.log 'type is: ', type
       scale = switch
         when type == 'number' then buildNumericColourScale(links, currentProperty)
@@ -256,20 +261,20 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return scale
 
 
-    getCellColour = defineColourScale(links, currentProperty)
+    getCellColour = defineColourScale(links, currentColourProperty)
 
     fillColour = (d) ->
 
-      if not d[currentProperty]?
+      if not d[currentColourProperty]?
           return '#9e9e9e'
-      getCellColour(d[currentProperty])
+      getCellColour(d[currentColourProperty])
 
     # --------------------------------------
     # Add rows
     # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentProperty + ":" + d[currentProperty]
+      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
 
       return txt
 
@@ -402,15 +407,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # colour property selector
     # --------------------------------------
 
-    $(@el).find(".select-property").on "change", () ->
+    $(@el).find(".select-colour-property").on "change", () ->
 
       if !@value?
         return
 
-      currentProperty = @value
-      console.log 'current colour property: ', currentProperty
+      currentColourProperty = @value
+      console.log 'current colour property: ', currentColourProperty
 
-      getCellColour = defineColourScale(links, currentProperty)
+      getCellColour = defineColourScale(links, currentColourProperty)
 
       t = svg.transition().duration(1000)
       t.selectAll(".vis-cell")
@@ -426,7 +431,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentProperty = @value
+      currentColourProperty = @value
       newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum')
 
       for row, index in newOrders
@@ -438,12 +443,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
-    $(@el).find(".select-column-sort").on "change", () ->
+    $(@el).find(".select-col-sort").on "change", () ->
 
       if !@value?
         return
 
-      currentProperty = @value
+      currentColourProperty = @value
       newOrders = _.sortBy(matrix.columns, 'pchembl_value_sum')
 
       for row, index in newOrders

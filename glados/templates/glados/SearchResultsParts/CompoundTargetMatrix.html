@@ -15,31 +15,16 @@
 
     <div class="row">
 
-      <div class="input-field col s6 l3">
-        <select class="select-property"/>
-          <option value="pchembl_value" selected>pchembl_value</option>
-          <option value="assay_type">assay_type</option>
-          <option value="published_value">published_value</option>
-        </select>
-        <label>Colour by:</label>
+      <div class="input-field col s6 l3 select-colouring-container" data-hb-template="Handlebars-Common-SortSelect">
+        <!-- Backbone fills this in the CompoundTargetMatrixView -->
       </div>
 
-      <div class="input-field col s6 l3">
-        <select class="select-row-sort"/>
-          <option value="pchembl_value" selected>pchembl_value</option>
-          <option value="assay_type">assay_type</option>
-          <option value="published_value">published_value</option>
-        </select>
-        <label>Sort rows by:</label>
+      <div class="input-field col s6 l3 select-row-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+        <!-- Backbone fills this in the CompoundTargetMatrixView -->
       </div>
 
-      <div class="input-field col s6 l3">
-        <select class="select-column-sort"/>
-          <option value="pchembl_value" selected>pchembl_value</option>
-          <option value="assay_type">assay_type</option>
-          <option value="published_value">published_value</option>
-        </select>
-        <label>Sort columns by:</label>
+      <div class="input-field col s6 l3 select-col-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+        <!-- Backbone fills this in the CompoundTargetMatrixView -->
       </div>
 
       <div class="col s6 l3">
