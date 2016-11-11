@@ -9,7 +9,7 @@ CompoundTargetMatrix = Backbone.Model.extend({
     config = {
       initial_colouring: 'assay_type',
       colour_properties: ['pchembl_value', 'assay_type', 'published_value'],
-      initial_row_sorting: 'assay_type',
+      initial_row_sorting: 'pchembl_value',
       row_sorting_properties: ['pchembl_value', 'published_value'],
       initial_col_sorting: 'published_value',
       col_sorting_properties: ['pchembl_value', 'published_value'],

@@ -18,7 +18,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintMatrix()
 
     $(@el).find('select').material_select()
-    $('.tooltipped').tooltip()
+    $(@el).find('.tooltipped').tooltip()
 
   paintControls: ->
 
@@ -61,16 +61,22 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "name": "C1",
           "originalIndex": 0
           "currentPosition": 0
+          pchembl_value_sum: 30
+          published_value_sum: 330
         },
         {
           "name": "C2",
           "originalIndex": 1
           "currentPosition": 1
+          pchembl_value_sum: 26
+          published_value_sum: 260
         },
         {
           "name": "C3",
           "originalIndex": 2
           "currentPosition": 2
+          pchembl_value_sum: 22
+          published_value_sum: 190
         }
       ],
       "rows": [
@@ -78,21 +84,29 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "name": "T1",
           "originalIndex": 0
           "currentPosition": 0
+          pchembl_value_sum: 33
+          published_value_sum: 240
         },
         {
           "name": "T2",
           "originalIndex": 1
           "currentPosition": 1
+          pchembl_value_sum: 24
+          published_value_sum: 210
         },
         {
           "name": "T3",
           "originalIndex": 2
           "currentPosition": 2
+          pchembl_value_sum: 15
+          published_value_sum: 90
         },
         {
           "name": "T4",
           "originalIndex": 3
           "currentPosition": 3
+          pchembl_value_sum: 6
+          published_value_sum: 240
         },
       ],
       "links": {
@@ -166,24 +180,30 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log links
 
     # --------------------------------------
-    # Precompute sums and indexes
+    # Precompute indexes TODO: put it in model
     # --------------------------------------
-    for col in matrix.columns
-
-      j = col.originalIndex
-      sum = 0
-      sum = _.reduce (row[j]['pchembl_value'] for i, row of links), (initial, succesive) -> initial + succesive
-      col['pchembl_value_sum'] = sum
-
-    for row in matrix.rows
-
-      i = row.originalIndex
-      sum = 0
-      sum = _.reduce (col['pchembl_value'] for j, col of links[i]), (initial, succesive) -> initial + succesive
-      row['pchembl_value_sum'] = sum
-
     rowsIndex = _.indexBy(matrix.rows, 'name')
     columnsIndex = _.indexBy(matrix.columns, 'name')
+
+    # --------------------------------------
+    # Sort by default value
+    # --------------------------------------
+    sortMatrixRowsBy = (prop) ->
+
+      newOrders = _.sortBy(matrix.rows, prop)
+      for row, index in newOrders
+        rowsIndex[row.name].currentPosition = index
+
+    sortMatrixRowsBy config.initial_row_sorting + '_sum'
+
+    sortMatrixColsBy = (prop) ->
+
+      newOrders = _.sortBy(matrix.columns, prop)
+      for row, index in newOrders
+        columnsIndex[row.name].currentPosition = index
+
+    sortMatrixColsBy config.initial_col_sorting + '_sum'
+
     # --------------------------------------
     # Add background rectangle
     # --------------------------------------
@@ -195,9 +215,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("height", height)
 
     # --------------------------------------
+    # Sort properties
+    # --------------------------------------
+    currentRowSortingProperty = config.initial_row_sorting + '_sum'
+    currentColSortingProperty = config.initial_col_sorting + '_sum'
+
+    # --------------------------------------
     # scales
     # --------------------------------------
-
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
       .rangeBands([0, height])
@@ -280,7 +305,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getRowTooltip = (d) ->
 
-      txt = "target: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
+      txt = "target: " + d.name + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
@@ -343,7 +368,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getColumnTooltip = (d) ->
 
-      txt = "molecule: " + d.name + "\n" +  "pchembl_value_sum:" + d['pchembl_value_sum']
+      txt = "molecule: " + d.name + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
 
     columns = svg.selectAll(".vis-column")
       .data(matrix.columns)
@@ -413,8 +438,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       currentColourProperty = @value
-      console.log 'current colour property: ', currentColourProperty
-
       getCellColour = defineColourScale(links, currentColourProperty)
 
       t = svg.transition().duration(1000)
@@ -431,37 +454,42 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentColourProperty = @value
-      newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum')
-
-      for row, index in newOrders
-        #rowsIndex[row.name], ' has to be in position: ', index
-        rowsIndex[row.name].currentPosition = index
+      currentRowSortingProperty = @value + '_sum'
+      sortMatrixRowsBy currentRowSortingProperty
 
       t = svg.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
+      rowTexts = svg.selectAll('.vis-row').selectAll('text')
+      .attr('data-tooltip', getRowTooltip)
+
+      $(rowTexts).tooltip()
+
+
     $(@el).find(".select-col-sort").on "change", () ->
 
       if !@value?
         return
 
-      currentColourProperty = @value
-      newOrders = _.sortBy(matrix.columns, 'pchembl_value_sum')
-
-      for row, index in newOrders
-        columnsIndex[row.name].currentPosition = index
+      currentColSortingProperty = @value + '_sum'
+      sortMatrixColsBy currentColSortingProperty
 
       t = svg.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
+
       # here I have to use the modulo to get the correct column index
       # note that when the cells were being added it was not necessary because it was using the enter()
       t.selectAll(".vis-cell")
       .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
+
+      columnTexts = svg.selectAll(".vis-column").selectAll('text')
+      .attr('data-tooltip', getColumnTooltip)
+
+      $(columnTexts).tooltip()
 
 
     # --------------------------------------

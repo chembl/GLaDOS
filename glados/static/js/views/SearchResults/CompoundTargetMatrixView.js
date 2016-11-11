@@ -13,7 +13,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     this.paintControls();
     this.paintMatrix();
     $(this.el).find('select').material_select();
-    return $('.tooltipped').tooltip();
+    return $(this.el).find('.tooltipped').tooltip();
   },
   paintControls: function() {
     var config;
@@ -39,41 +39,55 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }));
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, col, columns, columnsIndex, config, currentColourProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, handleZoom, height, i, j, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, row, rows, rowsIndex, sum, svg, width, zoom, _i, _j, _k, _l, _len, _len1, _ref, _ref1, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getRowTooltip, getXCoord, getYCoord, handleZoom, height, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
         {
           "name": "C1",
           "originalIndex": 0,
-          "currentPosition": 0
+          "currentPosition": 0,
+          pchembl_value_sum: 30,
+          published_value_sum: 330
         }, {
           "name": "C2",
           "originalIndex": 1,
-          "currentPosition": 1
+          "currentPosition": 1,
+          pchembl_value_sum: 26,
+          published_value_sum: 260
         }, {
           "name": "C3",
           "originalIndex": 2,
-          "currentPosition": 2
+          "currentPosition": 2,
+          pchembl_value_sum: 22,
+          published_value_sum: 190
         }
       ],
       "rows": [
         {
           "name": "T1",
           "originalIndex": 0,
-          "currentPosition": 0
+          "currentPosition": 0,
+          pchembl_value_sum: 33,
+          published_value_sum: 240
         }, {
           "name": "T2",
           "originalIndex": 1,
-          "currentPosition": 1
+          "currentPosition": 1,
+          pchembl_value_sum: 24,
+          published_value_sum: 210
         }, {
           "name": "T3",
           "originalIndex": 2,
-          "currentPosition": 2
+          "currentPosition": 2,
+          pchembl_value_sum: 15,
+          published_value_sum: 90
         }, {
           "name": "T4",
           "originalIndex": 3,
-          "currentPosition": 3
+          "currentPosition": 3,
+          pchembl_value_sum: 6,
+          published_value_sum: 240
         }
       ],
       "links": {
@@ -203,58 +217,45 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     console.log('num columns:', numColumns);
     console.log('links:');
     console.log(links);
-    _ref = matrix.columns;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      col = _ref[_i];
-      j = col.originalIndex;
-      sum = 0;
-      sum = _.reduce((function() {
-        var _results;
-        _results = [];
-        for (i in links) {
-          row = links[i];
-          _results.push(row[j]['pchembl_value']);
-        }
-        return _results;
-      })(), function(initial, succesive) {
-        return initial + succesive;
-      });
-      col['pchembl_value_sum'] = sum;
-    }
-    _ref1 = matrix.rows;
-    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-      row = _ref1[_j];
-      i = row.originalIndex;
-      sum = 0;
-      sum = _.reduce((function() {
-        var _ref2, _results;
-        _ref2 = links[i];
-        _results = [];
-        for (j in _ref2) {
-          col = _ref2[j];
-          _results.push(col['pchembl_value']);
-        }
-        return _results;
-      })(), function(initial, succesive) {
-        return initial + succesive;
-      });
-      row['pchembl_value_sum'] = sum;
-    }
     rowsIndex = _.indexBy(matrix.rows, 'name');
     columnsIndex = _.indexBy(matrix.columns, 'name');
+    sortMatrixRowsBy = function(prop) {
+      var index, newOrders, row, _i, _len, _results;
+      newOrders = _.sortBy(matrix.rows, prop);
+      _results = [];
+      for (index = _i = 0, _len = newOrders.length; _i < _len; index = ++_i) {
+        row = newOrders[index];
+        _results.push(rowsIndex[row.name].currentPosition = index);
+      }
+      return _results;
+    };
+    sortMatrixRowsBy(config.initial_row_sorting + '_sum');
+    sortMatrixColsBy = function(prop) {
+      var index, newOrders, row, _i, _len, _results;
+      newOrders = _.sortBy(matrix.columns, prop);
+      _results = [];
+      for (index = _i = 0, _len = newOrders.length; _i < _len; index = ++_i) {
+        row = newOrders[index];
+        _results.push(columnsIndex[row.name].currentPosition = index);
+      }
+      return _results;
+    };
+    sortMatrixColsBy(config.initial_col_sorting + '_sum');
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
+    currentRowSortingProperty = config.initial_row_sorting + '_sum';
+    currentColSortingProperty = config.initial_col_sorting + '_sum';
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
-      for (var _k = 0; 0 <= numRows ? _k <= numRows : _k >= numRows; 0 <= numRows ? _k++ : _k--){ _results.push(_k); }
+      for (var _i = 0; 0 <= numRows ? _i <= numRows : _i >= numRows; 0 <= numRows ? _i++ : _i--){ _results.push(_i); }
       return _results;
     }).apply(this)).rangeBands([0, height]);
     getXCoord = d3.scale.ordinal().domain((function() {
       _results1 = [];
-      for (var _l = 0; 0 <= numColumns ? _l <= numColumns : _l >= numColumns; 0 <= numColumns ? _l++ : _l--){ _results1.push(_l); }
+      for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
     buildNumericColourScale = function(links, currentProperty) {
-      var cell, colNum, colourDomain, maxVal, minVal, rowNum, scale, value;
+      var cell, colNum, colourDomain, maxVal, minVal, row, rowNum, scale, value;
       minVal = Number.MAX_VALUE;
       maxVal = Number.MIN_VALUE;
       for (rowNum in links) {
@@ -277,7 +278,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return scale;
     };
     buildTextColourScale = function(links, currentProperty) {
-      var cell, colNum, domain, rowNum, scale;
+      var cell, colNum, domain, row, rowNum, scale;
       domain = [];
       for (rowNum in links) {
         row = links[rowNum];
@@ -320,17 +321,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     };
     getRowTooltip = function(d) {
       var txt;
-      txt = "target: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
+      txt = "target: " + d.name + "\n" + currentRowSortingProperty + ":" + d[currentRowSortingProperty];
       return txt;
     };
     fillRow = function(row, rowNumber) {
-      var cells, columnsList, dataList, rowInMatrix, value, _len2, _m;
+      var cells, col, columnsList, dataList, i, j, rowInMatrix, value, _k, _len;
       columnsList = matrix.columns;
       rowInMatrix = matrix.rows[rowNumber];
       i = rowInMatrix.originalIndex;
       dataList = [];
-      for (_m = 0, _len2 = columnsList.length; _m < _len2; _m++) {
-        col = columnsList[_m];
+      for (_k = 0, _len = columnsList.length; _k < _len; _k++) {
+        col = columnsList[_k];
         j = col.originalIndex;
         value = links[i][j];
         dataList.push(value);
@@ -351,7 +352,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getRowTooltip);
     getColumnTooltip = function(d) {
       var txt;
-      return txt = "molecule: " + d.name + "\n" + "pchembl_value_sum:" + d['pchembl_value_sum'];
+      return txt = "molecule: " + d.name + "\n" + currentColSortingProperty + ":" + d[currentColSortingProperty];
     };
     columns = svg.selectAll(".vis-column").data(matrix.columns).enter().append("g").attr("class", "vis-column").attr("transform", function(d) {
       return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
@@ -385,45 +386,40 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         return;
       }
       currentColourProperty = this.value;
-      console.log('current colour property: ', currentColourProperty);
       getCellColour = defineColourScale(links, currentColourProperty);
       t = svg.transition().duration(1000);
       return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
     $(this.el).find(".select-row-sort").on("change", function() {
-      var index, newOrders, t, _len2, _m;
+      var rowTexts, t;
       if (!(this.value != null)) {
         return;
       }
-      currentColourProperty = this.value;
-      newOrders = _.sortBy(matrix.rows, 'pchembl_value_sum');
-      for (index = _m = 0, _len2 = newOrders.length; _m < _len2; index = ++_m) {
-        row = newOrders[index];
-        rowsIndex[row.name].currentPosition = index;
-      }
+      currentRowSortingProperty = this.value + '_sum';
+      sortMatrixRowsBy(currentRowSortingProperty);
       t = svg.transition().duration(2500);
-      return t.selectAll('.vis-row').attr('transform', function(d) {
+      t.selectAll('.vis-row').attr('transform', function(d) {
         return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
       });
+      rowTexts = svg.selectAll('.vis-row').selectAll('text').attr('data-tooltip', getRowTooltip);
+      return $(rowTexts).tooltip();
     });
     $(this.el).find(".select-col-sort").on("change", function() {
-      var index, newOrders, t, _len2, _m;
+      var columnTexts, t;
       if (!(this.value != null)) {
         return;
       }
-      currentColourProperty = this.value;
-      newOrders = _.sortBy(matrix.columns, 'pchembl_value_sum');
-      for (index = _m = 0, _len2 = newOrders.length; _m < _len2; index = ++_m) {
-        row = newOrders[index];
-        columnsIndex[row.name].currentPosition = index;
-      }
+      currentColSortingProperty = this.value + '_sum';
+      sortMatrixColsBy(currentColSortingProperty);
       t = svg.transition().duration(2500);
       t.selectAll(".vis-column").attr("transform", function(d) {
         return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
       });
-      return t.selectAll(".vis-cell").attr("x", function(d, index) {
+      t.selectAll(".vis-cell").attr("x", function(d, index) {
         return getXCoord(matrix.columns[index % matrix.columns.length].currentPosition);
       });
+      columnTexts = svg.selectAll(".vis-column").selectAll('text').attr('data-tooltip', getColumnTooltip);
+      return $(columnTexts).tooltip();
     });
     resetZoom = function() {
       zoom.scale(1);
