@@ -165,7 +165,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .attr('height', height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
     # --------------------------------------
     # Work with data
     # --------------------------------------
@@ -223,6 +222,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # scales
     # --------------------------------------
+
+    #given a property, returns a list with all the values found in the links
+    getDomainForProperty = (prop) ->
+
+      domain = []
+
+      for rowNum, row of links
+        for colNum, cell of row
+          domain.push cell[prop]
+
+      return domain
+
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
       .rangeBands([0, height])
@@ -258,11 +269,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # generates a scale for when the data is numeric
     buildTextColourScale = (links, currentProperty) ->
 
-      domain = []
-
-      for rowNum, row of links
-        for colNum, cell of row
-          domain.push cell[currentProperty]
+      domain = getDomainForProperty currentProperty
 
       scale = d3.scale.ordinal()
         .domain(domain)
@@ -293,6 +300,34 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if not d[currentColourProperty]?
           return '#9e9e9e'
       getCellColour(d[currentColourProperty])
+
+    # --------------------------------------
+    # Leyend
+    # --------------------------------------
+    leyendContainer = d3.select('#BCK-ScaleContainer')
+    leyendWidth = $('#BCK-ScaleContainer').width()
+    leyendHeight = 50
+    leyendG = leyendContainer
+            .append('svg')
+            .attr('width', leyendWidth )
+            .attr('height', leyendHeight )
+            .append("g")
+
+
+
+    colourDataType = config.propertyToType[currentColourProperty]
+    # this is a scale to show the leyend
+    leyendScale = switch
+      when colourDataType == 'string'
+        d3.scale.ordinal()
+          .domain( getDomainForProperty currentColourProperty  )
+          .rangeBands([0, leyendWidth])
+
+    leyendAxis = d3.svg.axis()
+      .scale(leyendScale)
+      .orient("bottom")
+
+    leyendG.call(leyendAxis)
 
     # --------------------------------------
     # Add rows
