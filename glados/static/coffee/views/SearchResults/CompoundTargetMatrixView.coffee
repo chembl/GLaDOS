@@ -159,12 +159,23 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     height = width
 
     mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+
+    # --------------------------------------
+    # Leyend initialisation
+    # --------------------------------------
+    leyendWidth = (width / 2)
+    leyendHeight = 100
+    leyendSVG = mainContainer.append('svg')
+      .attr('width', leyendWidth )
+      .attr('height', leyendHeight )
+
     svg = mainContainer
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
     # --------------------------------------
     # Work with data
     # --------------------------------------
@@ -224,15 +235,31 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
     #given a property, returns a list with all the values found in the links
-    getDomainForProperty = (prop) ->
+    getDomainForOrdinalProperty = (prop) ->
 
       domain = []
 
-      for rowNum, row of links
+      for rowNum, row of matrix.links
         for colNum, cell of row
           domain.push cell[prop]
 
       return domain
+
+    # given a property, it gives a domain of the property, taking only the smallest and the biggest values.
+    getDomainForContinuousProperty = (prop) ->
+
+      minVal = Number.MAX_VALUE
+      maxVal = Number.MIN_VALUE
+      for rowNum, row of matrix.links
+        for colNum, cell of row
+          value = cell[prop]
+          if value > maxVal
+            maxVal = value
+          if value < minVal
+            minVal = value
+
+
+      return [minVal, maxVal]
 
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
@@ -243,22 +270,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .rangeBands([0, width])
 
     # generates a scale for when the data is numeric
-    buildNumericColourScale = (links, currentProperty) ->
+    buildNumericColourScale = (currentProperty) ->
 
-      minVal = Number.MAX_VALUE
-      maxVal = Number.MIN_VALUE
-      for rowNum, row of links
-        for colNum, cell of row
-          value = cell[currentProperty]
-          if value > maxVal
-            maxVal = value
-          if value < minVal
-            minVal = value
-
-      colourDomain = [minVal, maxVal]
-
-      console.log 'max value: ', maxVal
-      console.log 'min value: ', minVal
+      colourDomain = getDomainForContinuousProperty(currentProperty)
 
       scale = d3.scale.linear()
         .domain(colourDomain)
@@ -267,9 +281,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return scale
 
     # generates a scale for when the data is numeric
-    buildTextColourScale = (links, currentProperty) ->
+    buildTextColourScale = (currentProperty) ->
 
-      domain = getDomainForProperty currentProperty
+      domain = getDomainForOrdinalProperty currentProperty
 
       scale = d3.scale.ordinal()
         .domain(domain)
@@ -284,8 +298,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       console.log 'type is: ', type
       scale = switch
-        when type == 'number' then buildNumericColourScale(links, currentProperty)
-        when type == 'string' then buildTextColourScale(links, currentProperty)
+        when type == 'number' then buildNumericColourScale(currentProperty)
+        when type == 'string' then buildTextColourScale(currentProperty)
 
       console.log 'Scale:'
       console.log 'domain: ', scale.domain()
@@ -301,33 +315,80 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return '#9e9e9e'
       getCellColour(d[currentColourProperty])
 
+
     # --------------------------------------
-    # Leyend
+    # Fill leyend details
     # --------------------------------------
-    leyendContainer = d3.select('#BCK-ScaleContainer')
-    leyendWidth = $('#BCK-ScaleContainer').width()
-    leyendHeight = 50
-    leyendG = leyendContainer
-            .append('svg')
-            .attr('width', leyendWidth )
-            .attr('height', leyendHeight )
-            .append("g")
 
+    fillLeyendDetails = ->
 
+      leyendSVG.selectAll('g').remove()
+      leyendSVG.selectAll('text').remove()
 
-    colourDataType = config.propertyToType[currentColourProperty]
-    # this is a scale to show the leyend
-    leyendScale = switch
-      when colourDataType == 'string'
-        d3.scale.ordinal()
-          .domain( getDomainForProperty currentColourProperty  )
+      leyendG = leyendSVG.append('g')
+              .attr("transform", "translate(0," + (leyendHeight - 30) + ")");
+      leyendSVG.append('text').text('Leyend for: ' + currentColourProperty)
+        .attr("transform", "translate(10, 15)");
+
+      rectangleHeight = 50
+      colourDataType = config.propertyToType[currentColourProperty]
+
+      if colourDataType == 'string'
+
+        getXInLeyendFor = d3.scale.ordinal()
+          .domain( getDomainForOrdinalProperty currentColourProperty  )
           .rangeBands([0, leyendWidth])
 
-    leyendAxis = d3.svg.axis()
-      .scale(leyendScale)
-      .orient("bottom")
+        leyendAxis = d3.svg.axis()
+          .scale(getXInLeyendFor)
+          .orient("bottom")
 
-    leyendG.call(leyendAxis)
+        leyendG.selectAll('rect')
+          .data(getXInLeyendFor.domain())
+          .enter().append('rect')
+          .attr('height',rectangleHeight)
+          .attr('width', getXInLeyendFor.rangeBand())
+          .attr('x', (d) -> getXInLeyendFor d)
+          .attr('y', -rectangleHeight)
+          .attr('fill', (d) -> getCellColour d)
+
+        leyendG.call(leyendAxis)
+
+      else if colourDataType == 'number'
+
+        domain = getDomainForContinuousProperty currentColourProperty
+        linearScalePadding = 10
+        getXInLeyendFor = d3.scale.linear()
+          .domain(domain)
+          .range([linearScalePadding, (leyendWidth - linearScalePadding)])
+
+        leyendAxis = d3.svg.axis()
+          .scale(getXInLeyendFor)
+          .orient("bottom")
+
+        start = domain[0]
+        stop = domain[1]
+        numValues = 20
+        step = Math.abs(stop - start) / numValues
+        stepWidthInScale = Math.abs(getXInLeyendFor.range()[0] - getXInLeyendFor.range()[1]) / numValues
+        data = d3.range(domain[0], domain[1], step)
+
+        leyendG.selectAll('rect')
+          .data(data)
+          .enter().append('rect')
+          .attr('height',rectangleHeight)
+          .attr('width', stepWidthInScale + 5)
+          .attr('x', (d) -> getXInLeyendFor d)
+          .attr('y', -rectangleHeight)
+          .attr('fill', (d) -> getCellColour d)
+
+
+
+
+
+        leyendG.call(leyendAxis)
+
+    fillLeyendDetails()
 
     # --------------------------------------
     # Add rows
@@ -474,6 +535,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       currentColourProperty = @value
       getCellColour = defineColourScale(links, currentColourProperty)
+
+      fillLeyendDetails()
 
       t = svg.transition().duration(1000)
       t.selectAll(".vis-cell")

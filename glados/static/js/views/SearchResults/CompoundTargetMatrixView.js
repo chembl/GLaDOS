@@ -39,7 +39,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }));
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, colourDataType, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForProperty, getRowTooltip, getXCoord, getYCoord, handleZoom, height, leyendAxis, leyendContainer, leyendG, leyendHeight, leyendScale, leyendWidth, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillLeyendDetails, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForContinuousProperty, getDomainForOrdinalProperty, getRowTooltip, getXCoord, getYCoord, handleZoom, height, leyendHeight, leyendSVG, leyendWidth, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
     console.log('painting matrix');
     matrix = {
       "columns": [
@@ -209,6 +209,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     width = 0.8 * elemWidth;
     height = width;
     mainContainer = d3.select('#' + this.$vis_elem.attr('id'));
+    leyendWidth = width / 2;
+    leyendHeight = 100;
+    leyendSVG = mainContainer.append('svg').attr('width', leyendWidth).attr('height', leyendHeight);
     svg = mainContainer.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     links = matrix.links;
     numColumns = matrix.columns.length;
@@ -244,17 +247,38 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     currentRowSortingProperty = config.initial_row_sorting + '_sum';
     currentColSortingProperty = config.initial_col_sorting + '_sum';
-    getDomainForProperty = function(prop) {
-      var cell, colNum, domain, row, rowNum;
+    getDomainForOrdinalProperty = function(prop) {
+      var cell, colNum, domain, row, rowNum, _ref;
       domain = [];
-      for (rowNum in links) {
-        row = links[rowNum];
+      _ref = matrix.links;
+      for (rowNum in _ref) {
+        row = _ref[rowNum];
         for (colNum in row) {
           cell = row[colNum];
           domain.push(cell[prop]);
         }
       }
       return domain;
+    };
+    getDomainForContinuousProperty = function(prop) {
+      var cell, colNum, maxVal, minVal, row, rowNum, value, _ref;
+      minVal = Number.MAX_VALUE;
+      maxVal = Number.MIN_VALUE;
+      _ref = matrix.links;
+      for (rowNum in _ref) {
+        row = _ref[rowNum];
+        for (colNum in row) {
+          cell = row[colNum];
+          value = cell[prop];
+          if (value > maxVal) {
+            maxVal = value;
+          }
+          if (value < minVal) {
+            minVal = value;
+          }
+        }
+      }
+      return [minVal, maxVal];
     };
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
@@ -266,32 +290,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
     }).apply(this)).rangeBands([0, width]);
-    buildNumericColourScale = function(links, currentProperty) {
-      var cell, colNum, colourDomain, maxVal, minVal, row, rowNum, scale, value;
-      minVal = Number.MAX_VALUE;
-      maxVal = Number.MIN_VALUE;
-      for (rowNum in links) {
-        row = links[rowNum];
-        for (colNum in row) {
-          cell = row[colNum];
-          value = cell[currentProperty];
-          if (value > maxVal) {
-            maxVal = value;
-          }
-          if (value < minVal) {
-            minVal = value;
-          }
-        }
-      }
-      colourDomain = [minVal, maxVal];
-      console.log('max value: ', maxVal);
-      console.log('min value: ', minVal);
+    buildNumericColourScale = function(currentProperty) {
+      var colourDomain, scale;
+      colourDomain = getDomainForContinuousProperty(currentProperty);
       scale = d3.scale.linear().domain(colourDomain).range(["#FFFFFF", Settings.EMBL_GREEN]);
       return scale;
     };
-    buildTextColourScale = function(links, currentProperty) {
+    buildTextColourScale = function(currentProperty) {
       var domain, scale;
-      domain = getDomainForProperty(currentProperty);
+      domain = getDomainForOrdinalProperty(currentProperty);
       scale = d3.scale.ordinal().domain(domain).range(d3.scale.category20().range());
       return scale;
     };
@@ -302,9 +309,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       scale = (function() {
         switch (false) {
           case type !== 'number':
-            return buildNumericColourScale(links, currentProperty);
+            return buildNumericColourScale(currentProperty);
           case type !== 'string':
-            return buildTextColourScale(links, currentProperty);
+            return buildTextColourScale(currentProperty);
         }
       })();
       console.log('Scale:');
@@ -319,19 +326,43 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       return getCellColour(d[currentColourProperty]);
     };
-    leyendContainer = d3.select('#BCK-ScaleContainer');
-    leyendWidth = $('#BCK-ScaleContainer').width();
-    leyendHeight = 50;
-    leyendG = leyendContainer.append('svg').attr('width', leyendWidth).attr('height', leyendHeight).append("g");
-    colourDataType = config.propertyToType[currentColourProperty];
-    leyendScale = (function() {
-      switch (false) {
-        case colourDataType !== 'string':
-          return d3.scale.ordinal().domain(getDomainForProperty(currentColourProperty)).rangeBands([0, leyendWidth]);
+    fillLeyendDetails = function() {
+      var colourDataType, data, domain, getXInLeyendFor, leyendAxis, leyendG, linearScalePadding, numValues, rectangleHeight, start, step, stepWidthInScale, stop;
+      leyendSVG.selectAll('g').remove();
+      leyendSVG.selectAll('text').remove();
+      leyendG = leyendSVG.append('g').attr("transform", "translate(0," + (leyendHeight - 30) + ")");
+      leyendSVG.append('text').text('Leyend for: ' + currentColourProperty).attr("transform", "translate(10, 15)");
+      rectangleHeight = 50;
+      colourDataType = config.propertyToType[currentColourProperty];
+      if (colourDataType === 'string') {
+        getXInLeyendFor = d3.scale.ordinal().domain(getDomainForOrdinalProperty(currentColourProperty)).rangeBands([0, leyendWidth]);
+        leyendAxis = d3.svg.axis().scale(getXInLeyendFor).orient("bottom");
+        leyendG.selectAll('rect').data(getXInLeyendFor.domain()).enter().append('rect').attr('height', rectangleHeight).attr('width', getXInLeyendFor.rangeBand()).attr('x', function(d) {
+          return getXInLeyendFor(d);
+        }).attr('y', -rectangleHeight).attr('fill', function(d) {
+          return getCellColour(d);
+        });
+        return leyendG.call(leyendAxis);
+      } else if (colourDataType === 'number') {
+        domain = getDomainForContinuousProperty(currentColourProperty);
+        linearScalePadding = 10;
+        getXInLeyendFor = d3.scale.linear().domain(domain).range([linearScalePadding, leyendWidth - linearScalePadding]);
+        leyendAxis = d3.svg.axis().scale(getXInLeyendFor).orient("bottom");
+        start = domain[0];
+        stop = domain[1];
+        numValues = 20;
+        step = Math.abs(stop - start) / numValues;
+        stepWidthInScale = Math.abs(getXInLeyendFor.range()[0] - getXInLeyendFor.range()[1]) / numValues;
+        data = d3.range(domain[0], domain[1], step);
+        leyendG.selectAll('rect').data(data).enter().append('rect').attr('height', rectangleHeight).attr('width', stepWidthInScale + 5).attr('x', function(d) {
+          return getXInLeyendFor(d);
+        }).attr('y', -rectangleHeight).attr('fill', function(d) {
+          return getCellColour(d);
+        });
+        return leyendG.call(leyendAxis);
       }
-    })();
-    leyendAxis = d3.svg.axis().scale(leyendScale).orient("bottom");
-    leyendG.call(leyendAxis);
+    };
+    fillLeyendDetails();
     getCellTooltip = function(d) {
       var txt;
       txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentColourProperty + ":" + d[currentColourProperty];
@@ -405,6 +436,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       currentColourProperty = this.value;
       getCellColour = defineColourScale(links, currentColourProperty);
+      fillLeyendDetails();
       t = svg.transition().duration(1000);
       return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
