@@ -12,8 +12,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
-    console.log 'render!'
-
     @paintControls()
     @paintMatrix()
 
@@ -47,8 +45,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
   paintMatrix: ->
-
-    console.log 'painting matrix'
 
     # --------------------------------------
     # Data
@@ -139,7 +135,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     }
 
-    #compsTargets = @model.get('matrix')
+    matrix = @model.get('matrix')
 
     config = @model.get('config')
     # --------------------------------------
@@ -182,12 +178,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     links = matrix.links
     numColumns = matrix.columns.length
     numRows = matrix.rows.length
-
-    console.log 'num rows:', numRows
-    console.log 'num columns:', numColumns
-
-    console.log 'links:'
-    console.log links
 
     # --------------------------------------
     # Precompute indexes TODO: put it in model
@@ -261,13 +251,32 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       return [minVal, maxVal]
 
+
+    # define a minimum size so the rows are not to small,
+    # if there are too many rows, the range of the scale will be extended.
+    minRowHeight = minColWidth = 30
+    initialRowHeight = height / numRows
+    # is the row height going to be less than the minimum?
+    if initialRowHeight < minRowHeight
+      # if so, modify the range
+      rangeYEnd = minRowHeight * numRows
+    else
+      rangeYEnd = height
+
+    # do the same for column width
+    initialColWidth = width / numColumns
+    if initialColWidth < minColWidth
+      rangeXEnd = minColWidth * numColumns
+    else
+      rangeXEnd = width
+
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
-      .rangeBands([0, height])
+      .rangeBands([0, rangeYEnd])
 
     getXCoord = d3.scale.ordinal()
       .domain([0..numColumns])
-      .rangeBands([0, width])
+      .rangeBands([0, rangeXEnd])
 
     # generates a scale for when the data is numeric
     buildNumericColourScale = (currentProperty) ->
@@ -296,14 +305,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       type = config.propertyToType[currentProperty]
 
-      console.log 'type is: ', type
       scale = switch
         when type == 'number' then buildNumericColourScale(currentProperty)
         when type == 'string' then buildTextColourScale(currentProperty)
 
-      console.log 'Scale:'
-      console.log 'domain: ', scale.domain()
-      console.log 'range: ', scale.range()
       return scale
 
 
@@ -382,10 +387,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           .attr('y', -rectangleHeight)
           .attr('fill', (d) -> getCellColour d)
 
-
-
-
-
         leyendG.call(leyendAxis)
 
     fillLeyendDetails()
@@ -416,8 +417,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         value = links[i][j]
         dataList.push(value)
 
-      console.log "dataList:", dataList
-      console.log 'g elem: ', @
       # @ is the current g element
       cells = d3.select(@).selectAll(".vis-cell")
         .data(dataList)
@@ -494,11 +493,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Zoom
     # --------------------------------------
     handleZoom = ->
-      console.log 'scale: ' + zoom.scale()
-      console.log 'translation: ' + zoom.translate()
 
-      getYCoord.rangeBands([0, (height * zoom.scale())])
-      getXCoord.rangeBands([0, (width * zoom.scale())])
+      getYCoord.rangeBands([0, (rangeYEnd * zoom.scale())])
+      getXCoord.rangeBands([0, (rangeXEnd * zoom.scale())])
 
       svg.selectAll('.vis-row')
         .attr('transform', (d) ->

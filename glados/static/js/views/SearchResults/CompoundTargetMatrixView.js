@@ -9,7 +9,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     return updateViewProxy = this.setUpResponsiveRender();
   },
   render: function() {
-    console.log('render!');
     this.paintControls();
     this.paintMatrix();
     $(this.el).find('select').material_select();
@@ -39,8 +38,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }));
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillLeyendDetails, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForContinuousProperty, getDomainForOrdinalProperty, getRowTooltip, getXCoord, getYCoord, handleZoom, height, leyendHeight, leyendSVG, leyendWidth, links, mainContainer, margin, matrix, numColumns, numRows, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
-    console.log('painting matrix');
+    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillLeyendDetails, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForContinuousProperty, getDomainForOrdinalProperty, getRowTooltip, getXCoord, getYCoord, handleZoom, height, initialColWidth, initialRowHeight, leyendHeight, leyendSVG, leyendWidth, links, mainContainer, margin, matrix, minColWidth, minRowHeight, numColumns, numRows, rangeXEnd, rangeYEnd, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
     matrix = {
       "columns": [
         {
@@ -197,6 +195,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         }
       }
     };
+    matrix = this.model.get('matrix');
     config = this.model.get('config');
     currentColourProperty = config.initial_colouring;
     margin = {
@@ -216,10 +215,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     links = matrix.links;
     numColumns = matrix.columns.length;
     numRows = matrix.rows.length;
-    console.log('num rows:', numRows);
-    console.log('num columns:', numColumns);
-    console.log('links:');
-    console.log(links);
     rowsIndex = _.indexBy(matrix.rows, 'name');
     columnsIndex = _.indexBy(matrix.columns, 'name');
     sortMatrixRowsBy = function(prop) {
@@ -280,16 +275,29 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       return [minVal, maxVal];
     };
+    minRowHeight = minColWidth = 30;
+    initialRowHeight = height / numRows;
+    if (initialRowHeight < minRowHeight) {
+      rangeYEnd = minRowHeight * numRows;
+    } else {
+      rangeYEnd = height;
+    }
+    initialColWidth = width / numColumns;
+    if (initialColWidth < minColWidth) {
+      rangeXEnd = minColWidth * numColumns;
+    } else {
+      rangeXEnd = width;
+    }
     getYCoord = d3.scale.ordinal().domain((function() {
       _results = [];
       for (var _i = 0; 0 <= numRows ? _i <= numRows : _i >= numRows; 0 <= numRows ? _i++ : _i--){ _results.push(_i); }
       return _results;
-    }).apply(this)).rangeBands([0, height]);
+    }).apply(this)).rangeBands([0, rangeYEnd]);
     getXCoord = d3.scale.ordinal().domain((function() {
       _results1 = [];
       for (var _j = 0; 0 <= numColumns ? _j <= numColumns : _j >= numColumns; 0 <= numColumns ? _j++ : _j--){ _results1.push(_j); }
       return _results1;
-    }).apply(this)).rangeBands([0, width]);
+    }).apply(this)).rangeBands([0, rangeXEnd]);
     buildNumericColourScale = function(currentProperty) {
       var colourDomain, scale;
       colourDomain = getDomainForContinuousProperty(currentProperty);
@@ -305,7 +313,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     defineColourScale = function(links, currentProperty) {
       var scale, type;
       type = config.propertyToType[currentProperty];
-      console.log('type is: ', type);
       scale = (function() {
         switch (false) {
           case type !== 'number':
@@ -314,9 +321,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
             return buildTextColourScale(currentProperty);
         }
       })();
-      console.log('Scale:');
-      console.log('domain: ', scale.domain());
-      console.log('range: ', scale.range());
       return scale;
     };
     getCellColour = defineColourScale(links, currentColourProperty);
@@ -385,8 +389,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         value = links[i][j];
         dataList.push(value);
       }
-      console.log("dataList:", dataList);
-      console.log('g elem: ', this);
       cells = d3.select(this).selectAll(".vis-cell").data(dataList).enter().append("rect").attr("class", "vis-cell").attr("x", function(d, colNum) {
         return getXCoord(columnsList[colNum].currentPosition);
       }).attr("width", getXCoord.rangeBand()).attr("height", getYCoord.rangeBand()).style("fill", fillColour);
@@ -411,10 +413,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       return d.name;
     }).classed('tooltipped', true).attr('data-position', 'bottom').attr('data-delay', '50').attr('data-tooltip', getColumnTooltip);
     handleZoom = function() {
-      console.log('scale: ' + zoom.scale());
-      console.log('translation: ' + zoom.translate());
-      getYCoord.rangeBands([0, height * zoom.scale()]);
-      getXCoord.rangeBands([0, width * zoom.scale()]);
+      getYCoord.rangeBands([0, rangeYEnd * zoom.scale()]);
+      getXCoord.rangeBands([0, rangeXEnd * zoom.scale()]);
       svg.selectAll('.vis-row').attr('transform', function(d) {
         return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
       }).selectAll("text").attr("y", getYCoord.rangeBand() / 2.);
