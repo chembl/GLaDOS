@@ -29,10 +29,11 @@ glados.useNameSpace 'glados.models.elastic_search'
         min_score: 0.75
         query:
           bool:
-            must: [
+            should: [
               query_string:
                 default_field: "_all"
                 query: @getMeta('search_term')
+                analyzer: "english"
             ]
       esJSONRequest = JSON.stringify(esRequestData)
       # Uses POST to prevent result caching
