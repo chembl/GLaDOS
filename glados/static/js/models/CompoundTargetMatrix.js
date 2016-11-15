@@ -11,8 +11,10 @@ CompoundTargetMatrix = Backbone.Model.extend({
       initial_colouring: 'assay_type',
       colour_properties: ['pchembl_value', 'assay_type', 'published_value'],
       initial_row_sorting: 'pchembl_value',
+      initial_row_sorting_reverse: true,
       row_sorting_properties: ['pchembl_value', 'published_value'],
       initial_col_sorting: 'published_value',
+      initial_col_sorting_reverse: true,
       col_sorting_properties: ['pchembl_value', 'published_value'],
       propertyToType: {
         assay_type: "string",
@@ -27,6 +29,7 @@ CompoundTargetMatrix = Backbone.Model.extend({
     console.log('data received!');
     config = this.get('config');
     activities = response.activities;
+    console.log(activities.length + ' activities.');
     compoundsToPosition = {};
     targetsToPosition = {};
     links = {};

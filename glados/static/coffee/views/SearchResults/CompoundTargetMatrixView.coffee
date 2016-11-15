@@ -26,6 +26,25 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintSelect('.select-row-sort-container', config.row_sorting_properties, config.initial_row_sorting, 'select-row-sort', 'Sort rows by:' )
     @paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:' )
 
+    @paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row')
+    @paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col')
+
+  paintSortDirection: (elemSelector, reverse, target_property) ->
+
+    $sortDirectionBtn = $(@el).find(elemSelector)
+    $template = $('#' + $sortDirectionBtn.attr('data-hb-template'))
+
+    if reverse
+      $sortDirectionBtn.html Handlebars.compile( $template.html() )
+        sort_class: 'fa fa-sort-desc'
+        text: 'Desc'
+        target_property: target_property
+    else
+      $sortDirectionBtn.html Handlebars.compile( $template.html() )
+        sort_class: 'fa fa-sort-asc'
+        text: 'Asc'
+        target_property: target_property
+
   paintSelect: (elemSelector, propsList, defaultValue, customClass, label) ->
 
     columns = _.map(propsList, (item) ->
@@ -188,21 +207,23 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Sort by default value
     # --------------------------------------
-    sortMatrixRowsBy = (prop) ->
+    sortMatrixRowsBy = (prop, reverse) ->
 
       newOrders = _.sortBy(matrix.rows, prop)
+      newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
         rowsIndex[row.name].currentPosition = index
 
-    sortMatrixRowsBy config.initial_row_sorting + '_sum'
+    sortMatrixRowsBy config.initial_row_sorting + '_sum', config.initial_row_sorting_reverse
 
-    sortMatrixColsBy = (prop) ->
+    sortMatrixColsBy = (prop, reverse) ->
 
       newOrders = _.sortBy(matrix.columns, prop)
+      newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
         columnsIndex[row.name].currentPosition = index
 
-    sortMatrixColsBy config.initial_col_sorting + '_sum'
+    sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
 
     # --------------------------------------
     # Add background rectangle
@@ -218,7 +239,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Sort properties
     # --------------------------------------
     currentRowSortingProperty = config.initial_row_sorting + '_sum'
+    currentRowSortingPropertyReverse = config.initial_row_sorting_reverse
     currentColSortingProperty = config.initial_col_sorting + '_sum'
+    currentColSortingPropertyReverse = config.initial_row_sorting_reverse
 
     # --------------------------------------
     # scales
@@ -231,7 +254,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       for rowNum, row of matrix.links
         for colNum, cell of row
-          domain.push cell[prop]
+          value = cell[prop]
+          if value?
+            domain.push value
 
       return domain
 
@@ -242,7 +267,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       maxVal = Number.MIN_VALUE
       for rowNum, row of matrix.links
         for colNum, cell of row
-          value = cell[prop]
+          value = parseFloat(cell[prop])
           if value > maxVal
             maxVal = value
           if value < minVal
@@ -340,8 +365,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if colourDataType == 'string'
 
+        domain = getDomainForOrdinalProperty currentColourProperty
         getXInLeyendFor = d3.scale.ordinal()
-          .domain( getDomainForOrdinalProperty currentColourProperty  )
+          .domain( domain )
           .rangeBands([0, leyendWidth])
 
         leyendAxis = d3.svg.axis()
@@ -544,13 +570,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # sort property selector
     # --------------------------------------
-    $(@el).find(".select-row-sort").on "change", () ->
+    paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
+    thisView = @
 
-      if !@value?
-        return
-
-      currentRowSortingProperty = @value + '_sum'
-      sortMatrixRowsBy currentRowSortingProperty
+    triggerRowSortTransition = ->
 
       t = svg.transition().duration(2500)
       t.selectAll('.vis-row')
@@ -562,15 +585,41 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       $(rowTexts).tooltip()
 
+    handleSortDirClick = ->
 
-    $(@el).find(".select-col-sort").on "change", () ->
+      targetDimension = $(@).attr('data-target-property')
+      if targetDimension == 'row'
+
+        console.log 're-sort rows'
+        currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
+        sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
+        paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
+        triggerRowSortTransition()
+
+      else if targetDimension == 'col'
+
+        currentColSortingPropertyReverse = !currentColSortingPropertyReverse
+        sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
+        paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
+        triggerColSortTransition()
+
+      $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
+
+    $(@el).find('.btn-sort-direction').on 'click', handleSortDirClick
+
+    $(@el).find(".select-row-sort").on "change", () ->
 
       if !@value?
         return
 
-      currentColSortingProperty = @value + '_sum'
-      sortMatrixColsBy currentColSortingProperty
+      currentRowSortingProperty = @value + '_sum'
+      sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
+      paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
+      triggerRowSortTransition()
 
+
+
+    triggerColSortTransition = ->
       t = svg.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
@@ -585,6 +634,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('data-tooltip', getColumnTooltip)
 
       $(columnTexts).tooltip()
+
+
+    $(@el).find(".select-col-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      currentColSortingProperty = @value + '_sum'
+      sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
+
+      triggerColSortTransition()
+
 
 
     # --------------------------------------

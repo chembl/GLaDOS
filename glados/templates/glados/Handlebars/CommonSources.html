@@ -229,7 +229,8 @@
 
 <script id="Handlebars-Common-SortDirectionBtn" type="text/x-handlebars-template">
 
-  <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}>
+  <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}
+  data-target-property="{{target_property}}">
     <i class="fa {{sort_class}}" aria-hidden="true"></i>
     {{text}}
   </a>

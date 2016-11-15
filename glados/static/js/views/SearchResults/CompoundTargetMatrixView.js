@@ -19,7 +19,27 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     config = this.model.get('config');
     this.paintSelect('.select-colouring-container', config.colour_properties, config.initial_colouring, 'select-colour-property', 'Colour by:');
     this.paintSelect('.select-row-sort-container', config.row_sorting_properties, config.initial_row_sorting, 'select-row-sort', 'Sort rows by:');
-    return this.paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:');
+    this.paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:');
+    this.paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row');
+    return this.paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col');
+  },
+  paintSortDirection: function(elemSelector, reverse, target_property) {
+    var $sortDirectionBtn, $template;
+    $sortDirectionBtn = $(this.el).find(elemSelector);
+    $template = $('#' + $sortDirectionBtn.attr('data-hb-template'));
+    if (reverse) {
+      return $sortDirectionBtn.html(Handlebars.compile($template.html())({
+        sort_class: 'fa fa-sort-desc',
+        text: 'Desc',
+        target_property: target_property
+      }));
+    } else {
+      return $sortDirectionBtn.html(Handlebars.compile($template.html())({
+        sort_class: 'fa fa-sort-asc',
+        text: 'Asc',
+        target_property: target_property
+      }));
+    }
   },
   paintSelect: function(elemSelector, propsList, defaultValue, customClass, label) {
     var $select, $template, columns;
@@ -38,7 +58,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     }));
   },
   paintMatrix: function() {
-    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColourProperty, currentRowSortingProperty, defineColourScale, elemWidth, fillColour, fillLeyendDetails, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForContinuousProperty, getDomainForOrdinalProperty, getRowTooltip, getXCoord, getYCoord, handleZoom, height, initialColWidth, initialRowHeight, leyendHeight, leyendSVG, leyendWidth, links, mainContainer, margin, matrix, minColWidth, minRowHeight, numColumns, numRows, rangeXEnd, rangeYEnd, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, width, zoom, _i, _j, _results, _results1;
+    var buildNumericColourScale, buildTextColourScale, columns, columnsIndex, config, currentColSortingProperty, currentColSortingPropertyReverse, currentColourProperty, currentRowSortingProperty, currentRowSortingPropertyReverse, defineColourScale, elemWidth, fillColour, fillLeyendDetails, fillRow, getCellColour, getCellTooltip, getColumnTooltip, getDomainForContinuousProperty, getDomainForOrdinalProperty, getRowTooltip, getXCoord, getYCoord, handleSortDirClick, handleZoom, height, initialColWidth, initialRowHeight, leyendHeight, leyendSVG, leyendWidth, links, mainContainer, margin, matrix, minColWidth, minRowHeight, numColumns, numRows, paintSortDirectionProxy, rangeXEnd, rangeYEnd, resetZoom, rows, rowsIndex, sortMatrixColsBy, sortMatrixRowsBy, svg, thisView, triggerColSortTransition, triggerRowSortTransition, width, zoom, _i, _j, _results, _results1;
     matrix = {
       "columns": [
         {
@@ -217,9 +237,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
     numRows = matrix.rows.length;
     rowsIndex = _.indexBy(matrix.rows, 'name');
     columnsIndex = _.indexBy(matrix.columns, 'name');
-    sortMatrixRowsBy = function(prop) {
+    sortMatrixRowsBy = function(prop, reverse) {
       var index, newOrders, row, _i, _len, _results;
       newOrders = _.sortBy(matrix.rows, prop);
+      if (reverse) {
+        newOrders = newOrders.reverse();
+      }
       _results = [];
       for (index = _i = 0, _len = newOrders.length; _i < _len; index = ++_i) {
         row = newOrders[index];
@@ -227,10 +250,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       return _results;
     };
-    sortMatrixRowsBy(config.initial_row_sorting + '_sum');
-    sortMatrixColsBy = function(prop) {
+    sortMatrixRowsBy(config.initial_row_sorting + '_sum', config.initial_row_sorting_reverse);
+    sortMatrixColsBy = function(prop, reverse) {
       var index, newOrders, row, _i, _len, _results;
       newOrders = _.sortBy(matrix.columns, prop);
+      if (reverse) {
+        newOrders = newOrders.reverse();
+      }
       _results = [];
       for (index = _i = 0, _len = newOrders.length; _i < _len; index = ++_i) {
         row = newOrders[index];
@@ -238,19 +264,24 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       }
       return _results;
     };
-    sortMatrixColsBy(config.initial_col_sorting + '_sum');
+    sortMatrixColsBy(config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse);
     svg.append("rect").attr("class", "background").style("fill", "white").attr("width", width).attr("height", height);
     currentRowSortingProperty = config.initial_row_sorting + '_sum';
+    currentRowSortingPropertyReverse = config.initial_row_sorting_reverse;
     currentColSortingProperty = config.initial_col_sorting + '_sum';
+    currentColSortingPropertyReverse = config.initial_row_sorting_reverse;
     getDomainForOrdinalProperty = function(prop) {
-      var cell, colNum, domain, row, rowNum, _ref;
+      var cell, colNum, domain, row, rowNum, value, _ref;
       domain = [];
       _ref = matrix.links;
       for (rowNum in _ref) {
         row = _ref[rowNum];
         for (colNum in row) {
           cell = row[colNum];
-          domain.push(cell[prop]);
+          value = cell[prop];
+          if (value != null) {
+            domain.push(value);
+          }
         }
       }
       return domain;
@@ -264,7 +295,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
         row = _ref[rowNum];
         for (colNum in row) {
           cell = row[colNum];
-          value = cell[prop];
+          value = parseFloat(cell[prop]);
           if (value > maxVal) {
             maxVal = value;
           }
@@ -339,7 +370,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       rectangleHeight = 50;
       colourDataType = config.propertyToType[currentColourProperty];
       if (colourDataType === 'string') {
-        getXInLeyendFor = d3.scale.ordinal().domain(getDomainForOrdinalProperty(currentColourProperty)).rangeBands([0, leyendWidth]);
+        domain = getDomainForOrdinalProperty(currentColourProperty);
+        getXInLeyendFor = d3.scale.ordinal().domain(domain).rangeBands([0, leyendWidth]);
         leyendAxis = d3.svg.axis().scale(getXInLeyendFor).orient("bottom");
         leyendG.selectAll('rect').data(getXInLeyendFor.domain()).enter().append('rect').attr('height', rectangleHeight).attr('width', getXInLeyendFor.rangeBand()).attr('x', function(d) {
           return getXInLeyendFor(d);
@@ -440,27 +472,46 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       t = svg.transition().duration(1000);
       return t.selectAll(".vis-cell").style("fill", fillColour).attr('data-tooltip', getCellTooltip);
     });
-    $(this.el).find(".select-row-sort").on("change", function() {
+    paintSortDirectionProxy = $.proxy(this.paintSortDirection, this);
+    thisView = this;
+    triggerRowSortTransition = function() {
       var rowTexts, t;
-      if (!(this.value != null)) {
-        return;
-      }
-      currentRowSortingProperty = this.value + '_sum';
-      sortMatrixRowsBy(currentRowSortingProperty);
       t = svg.transition().duration(2500);
       t.selectAll('.vis-row').attr('transform', function(d) {
         return "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")";
       });
       rowTexts = svg.selectAll('.vis-row').selectAll('text').attr('data-tooltip', getRowTooltip);
       return $(rowTexts).tooltip();
-    });
-    $(this.el).find(".select-col-sort").on("change", function() {
-      var columnTexts, t;
+    };
+    handleSortDirClick = function() {
+      var targetDimension;
+      targetDimension = $(this).attr('data-target-property');
+      if (targetDimension === 'row') {
+        console.log('re-sort rows');
+        currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse;
+        sortMatrixRowsBy(currentRowSortingProperty, currentRowSortingPropertyReverse);
+        paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row');
+        triggerRowSortTransition();
+      } else if (targetDimension === 'col') {
+        currentColSortingPropertyReverse = !currentColSortingPropertyReverse;
+        sortMatrixColsBy(currentColSortingProperty, currentColSortingPropertyReverse);
+        paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col');
+        triggerColSortTransition();
+      }
+      return $(thisView.el).find('.btn-sort-direction').on('click', handleSortDirClick);
+    };
+    $(this.el).find('.btn-sort-direction').on('click', handleSortDirClick);
+    $(this.el).find(".select-row-sort").on("change", function() {
       if (!(this.value != null)) {
         return;
       }
-      currentColSortingProperty = this.value + '_sum';
-      sortMatrixColsBy(currentColSortingProperty);
+      currentRowSortingProperty = this.value + '_sum';
+      sortMatrixRowsBy(currentRowSortingProperty, currentRowSortingPropertyReverse);
+      paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col');
+      return triggerRowSortTransition();
+    });
+    triggerColSortTransition = function() {
+      var columnTexts, t;
       t = svg.transition().duration(2500);
       t.selectAll(".vis-column").attr("transform", function(d) {
         return "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)";
@@ -470,6 +521,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend({
       });
       columnTexts = svg.selectAll(".vis-column").selectAll('text').attr('data-tooltip', getColumnTooltip);
       return $(columnTexts).tooltip();
+    };
+    $(this.el).find(".select-col-sort").on("change", function() {
+      if (!(this.value != null)) {
+        return;
+      }
+      currentColSortingProperty = this.value + '_sum';
+      sortMatrixColsBy(currentColSortingProperty, currentColSortingPropertyReverse);
+      return triggerColSortTransition();
     });
     resetZoom = function() {
       zoom.scale(1);
