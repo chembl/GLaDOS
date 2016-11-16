@@ -11,3 +11,5 @@ Settings =
   EMBED_BASE_URL: "glados-ebitest.rhcloud.com/"
   EMBL_GREEN: '#9fcc3b'
   EMBL_BLUE: '#008cb5'
+  VISUALISATION_RED_MIN: '#f44336' # red lighten-5
+  VISUALISATION_RED_MAX: '#b71c1c' # red darken-4

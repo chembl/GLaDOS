@@ -11,5 +11,7 @@ Settings = {
   CARD_PAGE_SIZES: [6, 12],
   EMBED_BASE_URL: "glados-ebitest.rhcloud.com/",
   EMBL_GREEN: '#9fcc3b',
-  EMBL_BLUE: '#008cb5'
+  EMBL_BLUE: '#008cb5',
+  VISUALISATION_RED_MIN: '#f44336',
+  VISUALISATION_RED_MAX: '#b71c1c'
 };

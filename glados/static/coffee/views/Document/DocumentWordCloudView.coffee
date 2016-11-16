@@ -16,25 +16,25 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     K = 0.54
 
     wordList = [
-      ['Number', 24]
-      ['7-benzoylbenzofuran-5-ylacetic', 24]
-      ['Acid', 48]
-      ['Synthesize', 24]
-      ['Potent', 24]
-      ['Phenylbutazone', 24]
-      ['Rat', 48]
-      ['Paw', 48]
-      ['Antiinflammatory', 24]
-      ['Edema', 24]
-      ['Assay', 48]
-      ['analgetic', 24]
-      ['compound', 12]
-      ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24]
-      ['Aspirin', 24]
-      ['Mouse', 96]
-      ['Virtually', 12]
-      ['Gastric', 96]
-      ['Ulceration', 96]
+      ['Number', 24/1000]
+      ['7-benzoylbenzofuran-5-ylacetic', 24/1000]
+      ['Acid', 48/1000]
+      ['Synthesize', 24/1000]
+      ['Potent', 24/1000]
+      ['Phenylbutazone', 24/1000]
+      ['Rat', 48/1000]
+      ['Paw', 48/1000]
+      ['Antiinflammatory', 24/1000]
+      ['Edema', 24/1000]
+      ['Assay', 48/1000]
+      ['analgetic', 24/1000]
+      ['compound', 12/1000]
+      ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24/1000]
+      ['Aspirin', 24/1000]
+      ['Mouse', 96/1000]
+      ['Virtually', 12/1000]
+      ['Gastric', 96/1000]
+      ['Ulceration', 96/1000]
 
 
     ]
@@ -68,10 +68,17 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     # maxFontSize = desiredMaxWidth / (K * highestWordLength )
     maxFontSize = parseInt( desiredMaxWidth / (K * highestWordLength ) )
 
+    minFontSize = 10
+
     getFontSizeFor = d3.scale.linear()
       .domain([0, highestValue])
-      .range([10, maxFontSize])
+      .range([minFontSize, maxFontSize])
       .clamp(true)
+
+    getColourFor = d3.scale.linear()
+      .domain([minFontSize, maxFontSize])
+      .interpolate(d3.interpolateHcl)
+      .range([d3.rgb(Settings.VISUALISATION_RED_MIN), d3.rgb(Settings.VISUALISATION_RED_MAX)])
 
     #rescale values
     for wordVal in wordList
@@ -79,6 +86,13 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
 
     console.log wordList
 
+    config =
+      list: wordList
+      fontFamily: "Roboto Mono"
+      drawOutOfBound: true
+      color: (word, fontSize) ->
+        getColourFor fontSize
+      rotateRatio: 0.0
 
 
-    WordCloud(document.getElementById(elemID), { list: wordList, fontFamily: "Roboto Mono", drawOutOfBound: true } );
+    WordCloud(document.getElementById(elemID), config);
