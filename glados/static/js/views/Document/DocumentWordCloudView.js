@@ -4,18 +4,22 @@ var DocumentWordCloudView;
 DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
-    return updateViewProxy = this.setUpResponsiveRender();
+    updateViewProxy = this.setUpResponsiveRender();
+    return this.model.on('change', this.render, this);
   },
   render: function() {
-    var K, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    var K, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
     elemID = $(this.el).attr('id');
     elemWidth = $(this.el).width();
     $(this.el).height(elemWidth);
     K = 0.54;
-    wordList = [['Number', 24 / 1000], ['7-benzoylbenzofuran-5-ylacetic', 24 / 1000], ['Acid', 48 / 1000], ['Synthesize', 24 / 1000], ['Potent', 24 / 1000], ['Phenylbutazone', 24 / 1000], ['Rat', 48 / 1000], ['Paw', 48 / 1000], ['Antiinflammatory', 24 / 1000], ['Edema', 24 / 1000], ['Assay', 48 / 1000], ['analgetic', 24 / 1000], ['compound', 12 / 1000], ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24 / 1000], ['Aspirin', 24 / 1000], ['Mouse', 96 / 1000], ['Virtually', 12 / 1000], ['Gastric', 96 / 1000], ['Ulceration', 96 / 1000]];
+    wordList = this.model.get('word_list');
+    console.log('original list:');
+    console.log(JSON.stringify(wordList));
     highestValueWords = [];
     highestValue = 0;
     highestWordLength = 0;
+    lowestValue = Number.MAX_VALUE;
     for (_i = 0, _len = wordList.length; _i < _len; _i++) {
       wordVal = wordList[_i];
       word = wordVal[0];
@@ -31,12 +35,14 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
         if (wordSize > highestWordLength) {
           highestWordLength = wordSize;
         }
+      } else {
+        lowestValue = value;
       }
     }
-    desiredMaxWidth = 0.5 * elemWidth;
+    desiredMaxWidth = 0.8 * elemWidth;
     maxFontSize = parseInt(desiredMaxWidth / (K * highestWordLength));
     minFontSize = 10;
-    getFontSizeFor = d3.scale.linear().domain([0, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
+    getFontSizeFor = d3.scale.linear().domain([lowestValue, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
     getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_RED_MIN), d3.rgb(Settings.VISUALISATION_RED_MAX)]);
     for (_j = 0, _len1 = wordList.length; _j < _len1; _j++) {
       wordVal = wordList[_j];

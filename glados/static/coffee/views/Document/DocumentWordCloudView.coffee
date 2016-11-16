@@ -6,6 +6,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
+    @model.on 'change', @.render, @
+
   render: ->
 
     elemID = $(@el).attr('id')
@@ -15,34 +17,38 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     # charSize = fontSize * K
     K = 0.54
 
-    wordList = [
-      ['Number', 24/1000]
-      ['7-benzoylbenzofuran-5-ylacetic', 24/1000]
-      ['Acid', 48/1000]
-      ['Synthesize', 24/1000]
-      ['Potent', 24/1000]
-      ['Phenylbutazone', 24/1000]
-      ['Rat', 48/1000]
-      ['Paw', 48/1000]
-      ['Antiinflammatory', 24/1000]
-      ['Edema', 24/1000]
-      ['Assay', 48/1000]
-      ['analgetic', 24/1000]
-      ['compound', 12/1000]
-      ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24/1000]
-      ['Aspirin', 24/1000]
-      ['Mouse', 96/1000]
-      ['Virtually', 12/1000]
-      ['Gastric', 96/1000]
-      ['Ulceration', 96/1000]
-
-
-    ]
+    wordList = @model.get('word_list')
+    console.log 'original list:'
+    console.log JSON.stringify(wordList)
+#    wordList = [
+#      ['Number', 24/1000]
+#      ['7-benzoylbenzofuran-5-ylacetic', 24/1000]
+#      ['Acid', 48/1000]
+#      ['Synthesize', 24/1000]
+#      ['Potent', 24/1000]
+#      ['Phenylbutazone', 24/1000]
+#      ['Rat', 48/1000]
+#      ['Paw', 48/1000]
+#      ['Antiinflammatory', 24/1000]
+#      ['Edema', 24/1000]
+#      ['Assay', 48/1000]
+#      ['analgetic', 24/1000]
+#      ['compound', 12/1000]
+#      ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24/1000]
+#      ['Aspirin', 24/1000]
+#      ['Mouse', 96/1000]
+#      ['Virtually', 12/1000]
+#      ['Gastric', 96/1000]
+#      ['Ulceration', 96/1000]
+#
+#
+#    ]
 
     # Get the domain and range for the scale, the biggest words should be 50% of the element width
     highestValueWords = []
     highestValue = 0
     highestWordLength = 0
+    lowestValue = Number.MAX_VALUE
 
     for wordVal in wordList
 
@@ -60,18 +66,19 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         highestValueWords.push word
         if wordSize > highestWordLength
           highestWordLength = wordSize
+      else
+        lowestValue = value
 
 
-    desiredMaxWidth = 0.5 * elemWidth
+    desiredMaxWidth = 0.8 * elemWidth
     # wordSize = fontSize * K * numChars
     # desiredMaxWidth = maxFontSize * K * highestWordLength
     # maxFontSize = desiredMaxWidth / (K * highestWordLength )
     maxFontSize = parseInt( desiredMaxWidth / (K * highestWordLength ) )
-
     minFontSize = 10
 
     getFontSizeFor = d3.scale.linear()
-      .domain([0, highestValue])
+      .domain([lowestValue, highestValue])
       .range([minFontSize, maxFontSize])
       .clamp(true)
 

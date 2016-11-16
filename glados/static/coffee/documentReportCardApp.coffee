@@ -17,9 +17,13 @@ class DocumentReportCardApp
       model: document
       el: $('#DBasicInformation')
 
+    docTerms = new DocumentTerms
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+
     dWordCloudView = new DocumentWordCloudView
+      model: docTerms
       el: $('#BCK-DocWordCloud')
-    dWordCloudView.render()
+
 
     new DocumentAssayNetworkView
       model: documentAssayNetwork
@@ -27,6 +31,7 @@ class DocumentReportCardApp
 
     document.fetch()
     documentAssayNetwork.fetch()
+    docTerms.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()

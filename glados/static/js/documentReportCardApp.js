@@ -6,7 +6,7 @@ DocumentReportCardApp = (function() {
   function DocumentReportCardApp() {}
 
   DocumentReportCardApp.init = function() {
-    var dWordCloudView, document, documentAssayNetwork;
+    var dWordCloudView, docTerms, document, documentAssayNetwork;
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID();
     document = new Document({
       document_chembl_id: GlobalVariables.CHEMBL_ID
@@ -18,16 +18,20 @@ DocumentReportCardApp = (function() {
       model: document,
       el: $('#DBasicInformation')
     });
+    docTerms = new DocumentTerms({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+    });
     dWordCloudView = new DocumentWordCloudView({
+      model: docTerms,
       el: $('#BCK-DocWordCloud')
     });
-    dWordCloudView.render();
     new DocumentAssayNetworkView({
       model: documentAssayNetwork,
       el: $('#DAssayNetworkCard')
     });
     document.fetch();
     documentAssayNetwork.fetch();
+    docTerms.fetch();
     $('.scrollspy').scrollSpy();
     return ScrollSpyHelper.initializeScrollSpyPinner();
   };
