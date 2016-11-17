@@ -85,7 +85,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     getColourFor = d3.scale.linear()
       .domain([minFontSize, maxFontSize])
       .interpolate(d3.interpolateHcl)
-      .range([d3.rgb(Settings.VISUALISATION_RED_MIN), d3.rgb(Settings.VISUALISATION_RED_MAX)])
+      .range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)])
 
     #rescale values
     for wordVal in wordList
@@ -100,6 +100,21 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       color: (word, fontSize) ->
         getColourFor fontSize
       rotateRatio: 0.0
+      classes: 'wordcloud-word'
+      backgroundColor: Settings.VISUALISATION_CARD_GREY
 
 
-    WordCloud(document.getElementById(elemID), config);
+    canvasElem = document.getElementById(elemID)
+    WordCloud(canvasElem, config)
+
+    $(canvasElem).on 'wordcloudstop', ->
+
+      $(@).find('.wordcloud-word')
+      .addClass('tooltiped')
+      .attr('data-position', 'bottom')
+      .attr('data-tooltip',"Click to see other documents with this term")
+      .tooltip()
+
+
+
+

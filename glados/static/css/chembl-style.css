@@ -3040,4 +3040,13 @@ div#CNC-zoom-modal {
     width: 300px;
     display: none; }
 
+/**
+ * Word Cloud
+ * ----------------------------------------------------------------------------------------------------------------------
+ */
+.wordcloud-word:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold; }
+
 /*# sourceMappingURL=chembl-style.css.map */

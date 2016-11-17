@@ -8,7 +8,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     return this.model.on('change', this.render, this);
   },
   render: function() {
-    var K, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
     elemID = $(this.el).attr('id');
     elemWidth = $(this.el).width();
     $(this.el).height(elemWidth);
@@ -43,7 +43,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     maxFontSize = parseInt(desiredMaxWidth / (K * highestWordLength));
     minFontSize = 10;
     getFontSizeFor = d3.scale.linear().domain([lowestValue, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
-    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_RED_MIN), d3.rgb(Settings.VISUALISATION_RED_MAX)]);
+    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
     for (_j = 0, _len1 = wordList.length; _j < _len1; _j++) {
       wordVal = wordList[_j];
       wordVal[1] = getFontSizeFor(wordVal[1]);
@@ -56,8 +56,14 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       color: function(word, fontSize) {
         return getColourFor(fontSize);
       },
-      rotateRatio: 0.0
+      rotateRatio: 0.0,
+      classes: 'wordcloud-word',
+      backgroundColor: Settings.VISUALISATION_CARD_GREY
     };
-    return WordCloud(document.getElementById(elemID), config);
+    canvasElem = document.getElementById(elemID);
+    WordCloud(canvasElem, config);
+    return $(canvasElem).on('wordcloudstop', function() {
+      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', "Click to see other documents with this term").tooltip();
+    });
   }
 });
