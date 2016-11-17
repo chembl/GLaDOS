@@ -11,16 +11,20 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
 
   render: ->
 
+    $description = $(@el).find('.card-description')
+    $template = $('#' + $description.attr('data-hb-template'))
+    $description.html Handlebars.compile( $template.html() )
+      document_chembl_id: @model.get('document_chembl_id')
+
     @showCardContent()
     @initEmbedModal('word_cloud')
     @activateModals()
-
     @paintWordCloud()
 
   paintWordCloud: ->
     elemID = @$vis_elem.attr('id')
     elemWidth = @$vis_elem.width()
-    @$vis_elem.height(elemWidth)
+    @$vis_elem.height(elemWidth * 0.5)
     # wordSize = charSize * numChars
     # charSize = fontSize * K
     K = 0.54

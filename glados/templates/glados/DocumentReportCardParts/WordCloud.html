@@ -3,6 +3,15 @@
 {% block card_id %}DWordCloudCard{% endblock %}
 
 {% block general_content %}
+{% verbatim %}
+<script id="Handlebars-WordCloud-Description" type="text/x-handlebars-template">
+  Relevant terms in <a target="_blank" href="/document_report_card/{{document_chembl_id}}">{{document_chembl_id}}</a>:
+</script>
+{% endverbatim %}
+
+<div class="card-description" data-hb-template="Handlebars-WordCloud-Description">
+</div>
+
 <div id="BCK-DocWordCloud">
 </div>
 {% endblock %}

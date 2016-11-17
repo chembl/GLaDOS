@@ -10,6 +10,12 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     return this.$vis_elem = $('#BCK-DocWordCloud');
   },
   render: function() {
+    var $description, $template;
+    $description = $(this.el).find('.card-description');
+    $template = $('#' + $description.attr('data-hb-template'));
+    $description.html(Handlebars.compile($template.html())({
+      document_chembl_id: this.model.get('document_chembl_id')
+    }));
     this.showCardContent();
     this.initEmbedModal('word_cloud');
     this.activateModals();
@@ -19,7 +25,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
     elemID = this.$vis_elem.attr('id');
     elemWidth = this.$vis_elem.width();
-    this.$vis_elem.height(elemWidth);
+    this.$vis_elem.height(elemWidth * 0.5);
     K = 0.54;
     wordList = this.model.get('word_list');
     highestValueWords = [];
