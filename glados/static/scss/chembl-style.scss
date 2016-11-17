@@ -1846,7 +1846,8 @@ $marvin-size-fullscreen: 91vh;
 .wordcloud-word:hover{
   cursor: pointer;
   text-decoration: underline;
-  font-weight: bold;
+  color: black !important;
+
 }
 
 

@@ -3047,6 +3047,6 @@ div#CNC-zoom-modal {
 .wordcloud-word:hover {
   cursor: pointer;
   text-decoration: underline;
-  font-weight: bold; }
+  color: black !important; }
 
 /*# sourceMappingURL=chembl-style.css.map */
