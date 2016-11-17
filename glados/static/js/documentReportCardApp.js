@@ -23,7 +23,7 @@ DocumentReportCardApp = (function() {
     });
     dWordCloudView = new DocumentWordCloudView({
       model: docTerms,
-      el: $('#BCK-DocWordCloud')
+      el: $('#DWordCloudCard')
     });
     new DocumentAssayNetworkView({
       model: documentAssayNetwork,
@@ -60,6 +60,19 @@ DocumentReportCardApp = (function() {
       el: $('#DAssayNetworkCard')
     });
     return documentAssayNetwork.fetch();
+  };
+
+  DocumentReportCardApp.initWordCloud = function() {
+    var dWordCloudView, docTerms;
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
+    docTerms = new DocumentTerms({
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+    });
+    dWordCloudView = new DocumentWordCloudView({
+      model: docTerms,
+      el: $('#DWordCloudCard')
+    });
+    return docTerms.fetch();
   };
 
   DocumentReportCardApp.initAssayNetworkFS = function() {

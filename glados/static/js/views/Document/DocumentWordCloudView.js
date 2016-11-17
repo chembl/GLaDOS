@@ -5,17 +5,23 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
     updateViewProxy = this.setUpResponsiveRender();
-    return this.model.on('change', this.render, this);
+    this.model.on('change', this.render, this);
+    this.resource_type = 'Document';
+    return this.$vis_elem = $('#BCK-DocWordCloud');
   },
   render: function() {
+    this.showCardContent();
+    this.initEmbedModal('word_cloud');
+    this.activateModals();
+    return this.paintWordCloud();
+  },
+  paintWordCloud: function() {
     var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
-    elemID = $(this.el).attr('id');
-    elemWidth = $(this.el).width();
-    $(this.el).height(elemWidth);
+    elemID = this.$vis_elem.attr('id');
+    elemWidth = this.$vis_elem.width();
+    this.$vis_elem.height(elemWidth);
     K = 0.54;
     wordList = this.model.get('word_list');
-    console.log('original list:');
-    console.log(JSON.stringify(wordList));
     highestValueWords = [];
     highestValue = 0;
     highestWordLength = 0;

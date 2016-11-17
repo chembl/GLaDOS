@@ -53,7 +53,9 @@
 
         <div class="row">
           {% block wc %}
-            {% include "glados/DocumentReportCardParts/WordCloud.html" %}
+            {% with is_dynamic=True  %}
+              {% include "glados/DocumentReportCardParts/WordCloud.html" %}
+            {% endwith %}
           {% endblock %}
         </div>
 

@@ -22,7 +22,7 @@ class DocumentReportCardApp
 
     dWordCloudView = new DocumentWordCloudView
       model: docTerms
-      el: $('#BCK-DocWordCloud')
+      el: $('#DWordCloudCard')
 
 
     new DocumentAssayNetworkView
@@ -65,6 +65,18 @@ class DocumentReportCardApp
 
     documentAssayNetwork.fetch()
 
+  @initWordCloud = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    docTerms = new DocumentTerms
+      document_chembl_id: GlobalVariables.CHEMBL_ID
+
+    dWordCloudView = new DocumentWordCloudView
+      model: docTerms
+      el: $('#DWordCloudCard')
+
+    docTerms.fetch()
 
   # -------------------------------------------------------------
   # Full Screen views

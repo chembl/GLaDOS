@@ -5,21 +5,28 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
   initialize: ->
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
-
     @model.on 'change', @.render, @
+    @resource_type = 'Document'
+    @$vis_elem = $('#BCK-DocWordCloud')
 
   render: ->
 
-    elemID = $(@el).attr('id')
-    elemWidth = $(@el).width()
-    $(@el).height(elemWidth)
+    @showCardContent()
+    @initEmbedModal('word_cloud')
+    @activateModals()
+
+    @paintWordCloud()
+
+  paintWordCloud: ->
+    elemID = @$vis_elem.attr('id')
+    elemWidth = @$vis_elem.width()
+    @$vis_elem.height(elemWidth)
     # wordSize = charSize * numChars
     # charSize = fontSize * K
     K = 0.54
 
     wordList = @model.get('word_list')
-    console.log 'original list:'
-    console.log JSON.stringify(wordList)
+
 #    wordList = [
 #      ['Number', 24/1000]
 #      ['7-benzoylbenzofuran-5-ylacetic', 24/1000]
