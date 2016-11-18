@@ -72,7 +72,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       backgroundColor: Settings.VISUALISATION_CARD_GREY,
       click: function(item, dimension, event) {
         var termEncoded;
-        termEncoded = $('<div/>').text(item[0]).html();
+        termEncoded = decodeURIComponent(item[0]);
         return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
       }
     };

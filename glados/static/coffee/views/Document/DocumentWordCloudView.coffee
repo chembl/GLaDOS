@@ -88,7 +88,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       classes: 'wordcloud-word'
       backgroundColor: Settings.VISUALISATION_CARD_GREY
       click: (item, dimension, event) ->
-        termEncoded = $('<div/>').text(item[0]).html()
+        termEncoded = decodeURIComponent item[0]
         window.open('/documents_with_same_terms/' + termEncoded, '_blank')
 
 

@@ -4,6 +4,30 @@
 
 {% block content %}
 <div class="container main-container">
-hola
+
+    <div id="BCK-DocsWithTermResults">
+
+    {% verbatim %}
+    <script id="Handlebars-DocsFromTerm-Description" type="text/x-handlebars-template">
+      <h3>Documents with the term '{{term}}'</h3>
+    </script>
+    {% endverbatim %}
+
+    <div class="list-description" data-hb-template="Handlebars-DocsFromTerm-Description"></div>
+
+    <br>
+
+    {% block docs_cards_pages %}
+      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
+    {% endblock %}
+
+  </div>
+
 </div>
+{% endblock %}
+
+{% block custom_js_inline %}
+
+DocumentSearchByTermsApp.init();
+
 {% endblock %}
