@@ -1777,6 +1777,10 @@ body {
 main {
   flex: 1 0 auto; }
 
+/** make sure all links hav the hand pointer even with no href */
+a:hover {
+  cursor: pointer; }
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -3012,10 +3016,12 @@ div#CNC-zoom-modal {
     border-right: 2px solid transparent;
     border-bottom: 2px solid transparent; }
   .target-browser .browser-as-circles .node {
-    cursor: pointer; }
+    cursor: pointer;
+    stroke-width: 0.5px;
+    stroke: gray; }
   .target-browser .browser-as-circles .node:hover {
-    stroke: #000;
-    stroke-width: 1.5px; }
+    cursor: pointer;
+    stroke-width: 3; }
   .target-browser .browser-as-circles .node--leaf {
     fill: white; }
   .target-browser .browser-as-circles .label {
@@ -3023,12 +3029,15 @@ div#CNC-zoom-modal {
     text-anchor: middle;
     text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff; }
   .target-browser .browser-as-circles .label,
-  .target-browser .browser-as-circles .node--root,
-  .target-browser .browser-as-circles .node--leaf {
+  .target-browser .browser-as-circles .node--root {
     pointer-events: none; }
   .target-browser .browser-as-circles .selected {
     stroke: #4CAF50;
     stroke-width: 2; }
+  .target-browser .browser-as-circles .incomplete {
+    stroke: #4CAF50;
+    stroke-width: 2;
+    stroke-dasharray: 10; }
   .target-browser .tree-indent {
     width: 16px;
     height: 16px;

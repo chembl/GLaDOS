@@ -52,7 +52,7 @@ BrowseTargetMainView = Backbone.View.extend
     search_summary.show()
 
     if searchTerms.length < 2
-      search_summary.html 'You must enter at least to characters'
+      search_summary.html 'You must enter at least 2 characters'
       return
 
     numFound = @model.searchInTree(searchTerms)
