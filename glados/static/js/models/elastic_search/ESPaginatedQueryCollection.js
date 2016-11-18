@@ -20,18 +20,11 @@ glados.useNameSpace('glados.models.elastic_search', {
       esRequestData = {
         size: this.getMeta('page_size'),
         from: (this.getMeta('current_page') - 1) * this.getMeta('page_size'),
-        min_score: 0.75,
         query: {
-          bool: {
-            should: [
-              {
-                query_string: {
-                  default_field: "_all",
-                  query: this.getMeta('search_term'),
-                  analyzer: "english"
-                }
-              }
-            ]
+          multi_match: {
+            query: this.getMeta('search_term'),
+            type: "best_fields",
+            fields: ['*.eng_analyzed', '*.keyword']
           }
         }
       };

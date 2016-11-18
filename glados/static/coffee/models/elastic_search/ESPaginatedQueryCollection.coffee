@@ -26,15 +26,11 @@ glados.useNameSpace 'glados.models.elastic_search'
       esRequestData =
         size: @getMeta('page_size'),
         from: ((@getMeta('current_page')-1)*@getMeta('page_size'))
-        min_score: 0.75
         query:
-          bool:
-            should: [
-              query_string:
-                default_field: "_all"
-                query: @getMeta('search_term')
-                analyzer: "english"
-            ]
+          multi_match:
+            query: @getMeta('search_term')
+            type: "best_fields",
+            fields: ['*.eng_analyzed', '*.keyword']
       esJSONRequest = JSON.stringify(esRequestData)
       # Uses POST to prevent result caching
       fetchESOptions =
