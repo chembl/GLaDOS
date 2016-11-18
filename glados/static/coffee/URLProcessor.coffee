@@ -16,6 +16,13 @@ class URLProcessor
     pathnameParts = pathname.split('/')
     return pathnameParts[pathnameParts.length - 4]
 
+  # this gets the search terms from the url to search for documents with those terms
+  @getEncodedSearchTemsForDocuments = ->
+
+    pathname = window.location.pathname;
+    pathnameParts = pathname.split('/')
+
+    return pathnameParts[2]
 
   # Tells whether or not the url is at the search results page
   @isAtSearchResultsPage = ->

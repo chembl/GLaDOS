@@ -19,6 +19,13 @@ URLProcessor = (function() {
     return pathnameParts[pathnameParts.length - 4];
   };
 
+  URLProcessor.getEncodedSearchTemsForDocuments = function() {
+    var pathname, pathnameParts;
+    pathname = window.location.pathname;
+    pathnameParts = pathname.split('/');
+    return pathnameParts[2];
+  };
+
   URLProcessor.isAtSearchResultsPage = function() {
     var match, pattern, url_path;
     url_path = window.location.pathname;

@@ -2,6 +2,7 @@
 var Document;
 
 Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend({
+  idAttribute: 'document_chembl_id',
   initialize: function() {
     return this.url = Settings.WS_BASE_URL + 'document/' + this.get('document_chembl_id') + '.json';
   }

@@ -4,18 +4,34 @@ var DocumentWordCloudView;
 DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
-    return updateViewProxy = this.setUpResponsiveRender();
+    updateViewProxy = this.setUpResponsiveRender();
+    this.model.on('change', this.render, this);
+    this.resource_type = 'Document';
+    return this.$vis_elem = $('#BCK-DocWordCloud');
   },
   render: function() {
-    var K, desiredMaxWidth, elemID, elemWidth, getFontSizeFor, highestValue, highestValueWords, highestWordLength, maxFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
-    elemID = $(this.el).attr('id');
-    elemWidth = $(this.el).width();
-    $(this.el).height(elemWidth);
+    var $description, $template;
+    $description = $(this.el).find('.card-description');
+    $template = $('#' + $description.attr('data-hb-template'));
+    $description.html(Handlebars.compile($template.html())({
+      document_chembl_id: this.model.get('document_chembl_id')
+    }));
+    this.showCardContent();
+    this.initEmbedModal('word_cloud');
+    this.activateModals();
+    return this.paintWordCloud();
+  },
+  paintWordCloud: function() {
+    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    elemID = this.$vis_elem.attr('id');
+    elemWidth = this.$vis_elem.width();
+    this.$vis_elem.height(elemWidth * 0.5);
     K = 0.54;
-    wordList = [['Number', 24], ['7-benzoylbenzofuran-5-ylacetic', 24], ['Acid', 48], ['Synthesize', 24], ['Potent', 24], ['Phenylbutazone', 24], ['Rat', 48], ['Paw', 48], ['Antiinflammatory', 24], ['Edema', 24], ['Assay', 48], ['analgetic', 24], ['compound', 12], ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24], ['Aspirin', 24], ['Mouse', 96], ['Virtually', 12], ['Gastric', 96], ['Ulceration', 96]];
+    wordList = this.model.get('word_list');
     highestValueWords = [];
     highestValue = 0;
     highestWordLength = 0;
+    lowestValue = Number.MAX_VALUE;
     for (_i = 0, _len = wordList.length; _i < _len; _i++) {
       wordVal = wordList[_i];
       word = wordVal[0];
@@ -31,20 +47,39 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
         if (wordSize > highestWordLength) {
           highestWordLength = wordSize;
         }
+      } else {
+        lowestValue = value;
       }
     }
-    desiredMaxWidth = 0.5 * elemWidth;
+    desiredMaxWidth = 0.8 * elemWidth;
     maxFontSize = parseInt(desiredMaxWidth / (K * highestWordLength));
-    getFontSizeFor = d3.scale.linear().domain([0, highestValue]).range([10, maxFontSize]).clamp(true);
+    minFontSize = 10;
+    getFontSizeFor = d3.scale.linear().domain([lowestValue, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
+    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
     for (_j = 0, _len1 = wordList.length; _j < _len1; _j++) {
       wordVal = wordList[_j];
       wordVal[1] = getFontSizeFor(wordVal[1]);
     }
-    console.log(wordList);
-    return WordCloud(document.getElementById(elemID), {
+    config = {
       list: wordList,
       fontFamily: "Roboto Mono",
-      drawOutOfBound: true
+      drawOutOfBound: true,
+      color: function(word, fontSize) {
+        return getColourFor(fontSize);
+      },
+      rotateRatio: 0.0,
+      classes: 'wordcloud-word',
+      backgroundColor: Settings.VISUALISATION_CARD_GREY,
+      click: function(item, dimension, event) {
+        var termEncoded;
+        termEncoded = decodeURIComponent(item[0]);
+        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
+      }
+    };
+    canvasElem = document.getElementById(elemID);
+    WordCloud(canvasElem, config);
+    return $(canvasElem).on('wordcloudstop', function() {
+      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', "Click to see other documents with this term").tooltip();
     });
   }
 });
