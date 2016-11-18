@@ -81,6 +81,8 @@ urlpatterns = [
   url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
 
+  url(r'^documents_with_same_terms/(?P<doc_terms>.+)/$',
+    DirectTemplateView.as_view(template_name="glados/DocumentTerms/DocumentTermsSearch.html"), ),
 
   #----------------------------------------------------------------------------------------
   # Cells

@@ -60,7 +60,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       wordVal = wordList[_j];
       wordVal[1] = getFontSizeFor(wordVal[1]);
     }
-    console.log(wordList);
     config = {
       list: wordList,
       fontFamily: "Roboto Mono",
@@ -70,7 +69,12 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       },
       rotateRatio: 0.0,
       classes: 'wordcloud-word',
-      backgroundColor: Settings.VISUALISATION_CARD_GREY
+      backgroundColor: Settings.VISUALISATION_CARD_GREY,
+      click: function(item, dimension, event) {
+        var termEncoded;
+        termEncoded = $('<div/>').text(item[0]).html();
+        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
+      }
     };
     canvasElem = document.getElementById(elemID);
     WordCloud(canvasElem, config);

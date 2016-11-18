@@ -31,30 +31,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
 
     wordList = @model.get('word_list')
 
-#    wordList = [
-#      ['Number', 24/1000]
-#      ['7-benzoylbenzofuran-5-ylacetic', 24/1000]
-#      ['Acid', 48/1000]
-#      ['Synthesize', 24/1000]
-#      ['Potent', 24/1000]
-#      ['Phenylbutazone', 24/1000]
-#      ['Rat', 48/1000]
-#      ['Paw', 48/1000]
-#      ['Antiinflammatory', 24/1000]
-#      ['Edema', 24/1000]
-#      ['Assay', 48/1000]
-#      ['analgetic', 24/1000]
-#      ['compound', 12/1000]
-#      ['7-[4-(methylthio)-benzoyl]benzofuran-5-ylacetic', 24/1000]
-#      ['Aspirin', 24/1000]
-#      ['Mouse', 96/1000]
-#      ['Virtually', 12/1000]
-#      ['Gastric', 96/1000]
-#      ['Ulceration', 96/1000]
-#
-#
-#    ]
-
     # Get the domain and range for the scale, the biggest words should be 50% of the element width
     highestValueWords = []
     highestValue = 0
@@ -102,8 +78,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     for wordVal in wordList
       wordVal[1] = getFontSizeFor wordVal[1]
 
-    console.log wordList
-
     config =
       list: wordList
       fontFamily: "Roboto Mono"
@@ -113,6 +87,9 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       rotateRatio: 0.0
       classes: 'wordcloud-word'
       backgroundColor: Settings.VISUALISATION_CARD_GREY
+      click: (item, dimension, event) ->
+        termEncoded = $('<div/>').text(item[0]).html()
+        window.open('/documents_with_same_terms/' + termEncoded, '_blank')
 
 
     canvasElem = document.getElementById(elemID)
