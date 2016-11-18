@@ -1839,6 +1839,18 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+ /**
+  * Word Cloud
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+.wordcloud-word:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: black !important;
+
+}
+
+
 
 
 
