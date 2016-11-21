@@ -23,3 +23,31 @@ class URLProcessor
     pathnameParts = pathname.split('/')
 
     return pathnameParts[2]
+
+  # Tells whether or not the url is at the search results page
+  @isAtSearchResultsPage = ->
+
+    url_path = window.location.pathname;
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    match = pattern.exec(url_path)
+    if match
+      return true
+    return false
+
+  # Tells whether or not the url is at the search results page with advanced filters
+  @isAtAdvancedSearchResultsPage = ->
+
+    url_path = window.location.pathname;
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    match = pattern.exec(url_path)
+    return match and match.length > 2 and match[1] == '/'+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
+
+  # gets the query string for the search results page
+  @getSearchQueryString = ->
+
+    url_path = window.location.pathname;
+    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    match = pattern.exec(url_path)
+    if match and match.length > 2
+      return match[2]
+    return ""

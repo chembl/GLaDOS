@@ -2731,16 +2731,48 @@ div#CNC-zoom-modal {
   display: table;
   clear: both; }
 
-.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
+.search-input-wrapper, .search-opts, .search-btn {
   height: 45px; }
 
 .calign {
   margin: auto; }
 
-.search-btn-wrapper {
-  background-color: #009688; }
-  .search-btn-wrapper a {
-    color: white; }
+.clean-button, .search-opts, .search-btn {
+  background: none;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 3px !important; }
+  .clean-button:active, .search-opts:active, .search-btn:active, .clean-button:target, .search-opts:target, .search-btn:target {
+    background: none;
+    border: none;
+    outline: none !important;
+    font-size: 1.1em !important; }
+  .clean-button:focus, .search-opts:focus, .search-btn:focus {
+    background: none;
+    border: none;
+    outline-style: dashed !important;
+    outline-color: #00c9b6 !important;
+    outline-width: 2px !important; }
+  .clean-button:hover, .search-opts:hover, .search-btn:hover {
+    background: none;
+    border: none;
+    outline: none !important;
+    font-size: 1.05em; }
+
+.search-opts {
+  color: #009688; }
+
+.search-btn {
+  background-color: #009688;
+  color: white; }
+  .search-btn:active, .search-btn:target {
+    background-color: #00877a !important; }
+  .search-btn:focus {
+    background-color: #009688; }
+  .search-btn:hover {
+    background-color: #00a596; }
 
 .search-bar-help {
   position: absolute;

@@ -6,11 +6,12 @@ SearchModel = Backbone.Model.extend
   # Attributes
   # --------------------------------------------------------------------------------------------------------------------
 
-  queryString: ''
-  searchCompounds: true
-  searchDocuments: true
-  compoundResultsList: null
-  documentResultsList: null
+  defaults:
+    queryString: ''
+    searchCompounds: true
+    searchDocuments: true
+    compoundResultsList: null
+    documentResultsList: null
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -18,15 +19,17 @@ SearchModel = Backbone.Model.extend
 
   # Lazily initialized CompoundResultsList
   getCompoundResultsList: () ->
-    if not @compoundResultsList
-      @compoundResultsList = new CompoundResultsList
-    return @compoundResultsList
+    if not @has('compoundResultsList')
+      @set('compoundResultsList',
+          glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList())
+    return @get('compoundResultsList')
 
   # Lazily initialized DocumentResultsList
   getDocumentResultsList: () ->
-    if not @documentResultsList
-      @documentResultsList = new DocumentResultsList
-    return @documentResultsList
+    if not @has('documentResultsList')
+      @set('documentResultsList',
+          glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewDocumentResultsList())
+    return @get('documentResultsList')
 
   # --------------------------------------------------------------------------------------------------------------------
   # Functions
@@ -34,12 +37,12 @@ SearchModel = Backbone.Model.extend
 
   # coordinates the search across the different
   search: () ->
-    if @searchCompounds
-      # TODO: pass query parameters to @getCompoundResultsList().search(queryString)
-      @getCompoundResultsList().fetch({reset:true})
-    if @searchDocuments
-      # TODO: pass query parameters to @getCompoundResultsList().search(queryString)
-      @getDocumentResultsList().fetch({reset:true})
+    if @get('searchCompounds')
+      @getCompoundResultsList().setMeta('search_term',@get('queryString'))
+      @getCompoundResultsList().fetch()
+    if @get('searchDocuments')
+      @getDocumentResultsList().setMeta('search_term',@get('queryString'))
+      @getDocumentResultsList().fetch()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

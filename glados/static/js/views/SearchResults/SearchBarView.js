@@ -4,21 +4,58 @@ var SearchBarView;
 SearchBarView = Backbone.View.extend({
   el: $('#BCK-SRB-wrapper'),
   initialize: function(searchModel) {
+    var urlQueryString;
     this.searchModel = SearchModel.getInstance();
-    return this.showAdvanced = false;
+    this.showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage();
+    this.atResultsPage = URLProcessor.isAtSearchResultsPage();
+    if (this.atResultsPage) {
+      urlQueryString = URLProcessor.getSearchQueryString();
+      if (urlQueryString) {
+        this.searchModel.set('queryString', urlQueryString);
+      }
+    }
+    return this.render();
   },
   events: {
+    'click .example_link': 'searchExampleLink',
+    'click #submit_search': 'search',
+    'click #search-opts': 'searchAdvanced',
     'keyup #search_bar': 'searchBarKeyUp',
     'change #search_bar': 'searchBarChange'
   },
   searchBarKeyUp: function(e) {
-    return console.log($(e.currentTarget).val());
+    if (e.which === 13) {
+      return this.search();
+    }
   },
   searchBarChange: function(e) {
     return console.log($(e.currentTarget).val());
   },
+  searchExampleLink: function(e) {
+    var exampleString;
+    exampleString = $(e.currentTarget).html();
+    $('#search_bar').val(exampleString);
+    return this.search();
+  },
+  search: function() {
+    console.log("SEARCHING FOR:" + $('#search_bar').val());
+    this.searchModel.set('queryString', $('#search_bar').val());
+    if (this.atResultsPage) {
+      return this.searchModel.search();
+    } else {
+      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/" + this.searchModel.get('queryString');
+    }
+  },
+  searchAdvanced: function() {
+    if (this.atResultsPage) {
+      return this.switchShowAdvanced();
+    } else {
+      return window.location.href = Settings.SEARCH_RESULTS_PAGE + "/" + Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH + "/" + this.searchModel.get('queryString');
+    }
+  },
   switchShowAdvanced: function() {
-    return this.showAdvanced = !this.showAdvanced;
+    this.showAdvanced = !this.showAdvanced;
+    return console.log(this.showAdvanced);
   },
   render: function() {
     this.fillTemplate('BCK-SRB-med-and-up');
@@ -31,15 +68,13 @@ SearchBarView = Backbone.View.extend({
     var div, template;
     div = $(this.el).find('#' + div_id);
     template = $('#' + div.attr('data-hb-template'));
-    console.log(div);
-    console.log(template);
     if (div && template) {
       return div.html(Handlebars.compile(template.html())({
         searchBarQueryStr: this.searchModel.get('queryString'),
         showAdvanced: this.showAdvanced
       }));
     } else {
-      return console.log("Error trying to render because the div or the template could not be found");
+      return console.log("Error trying to render the SearchBarView because the div or the template could not be found");
     }
   }
 });

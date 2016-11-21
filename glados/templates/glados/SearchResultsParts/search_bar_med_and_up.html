@@ -12,52 +12,47 @@
 
 
               <div class="search-bar full-height z-depth-2">
-                <form id="search_form" name="search_form" action="/search_results" method="get">
 
-                    <div class="search-bar-help">
-                      <small><b>Example:</b> <a href="/search_results?search_str=Dopamine">Dopamine</a>, <a href="#">Aspirine</a>, <a
-                        href="#">NCCc1ccc(O)c(O)c1</a>, <a href="#">Liver</a>
-                      </small>
-                    </div>
+                <div class="search-bar-help">
+                  <small><b>Example:</b>
+                    <a href="#" class="example_link">Dopamine</a>,
+                    <a href="#" class="example_link">Aspirine</a>,
+                    <a href="#" class="example_link">NCCc1ccc(O)c(O)c1</a>,
+                    <a href="#" class="example_link">Liver</a>
+                  </small>
+                </div>
 
-                    <div class="col m8">
-
-
-                      <div class="search-input-wrapper">
-                        <input id="search_bar" type="search" name="search_str" placeholder="Search in ChEMBL" required>
-                          {{searchBarQueryStr}}
-                        </input>
-                      </div>
+                <div class="col m8">
 
 
-                    </div>
-
-                    <div class="col m2">
-
-
-                      <div class="search-opts-wrapper valign-wrapper">
+                  <div class="search-input-wrapper">
+                    <input id="search_bar" type="search" value="{{searchBarQueryStr}}" name="search_str" placeholder="Search in ChEMBL" required/>
+                  </div>
 
 
-                        <div class="valign calign">
-                          <a href="#"><i class="icon icon-generic" data-icon="("></i> Advanced</a>
+                </div>
 
-                        </div>
+                <div class="col m2">
 
-                      </div>
-
-                    </div>
-
-                    <div class="col m2">
-
-                      <div class="search-btn-wrapper valign-wrapper">
-                        <div class="valign calign">
-                          <a href=""><i class="icon icon-functional" data-icon="1"></i> Search</a>
-                        </div>
-                      </div>
+                  <button id="search-opts" onclick="this.blur();" class="search-opts col m12">
+                    <span>
+                      <i class="icon icon-generic" data-icon="("></i> Advanced
+                    </span>
+                  </button>
 
 
-                    </div>
-                </form>
+                </div>
+
+                <div class="col m2">
+
+                  <button id="submit_search" onclick="this.blur();" class="search-btn col m12">
+                    <span>
+                      <i class="icon icon-functional" data-icon="1"></i> Search
+                    </span>
+                  </button>
+
+
+                </div>
 
 
               </div>

@@ -1337,7 +1337,7 @@ div#CNC-zoom-modal {
 
 $search-items-height: 45px;
 
-.search-input-wrapper, .search-opts-wrapper, .search-btn-wrapper {
+.search-input-wrapper, .search-opts, .search-btn {
 
   height: $search-items-height;
 
@@ -1349,11 +1349,57 @@ $search-items-height: 45px;
 
 }
 
-.search-btn-wrapper {
+.clean-button{
+  background: none;
+  border: none;
+  outline: none;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: $default-btn-border-radius !important;
+  &:active, &:target {
+    background: none;
+    border: none;
+    outline: none !important;
+    font-size: 1.1em !important;
+  }
+  &:focus{
+    background: none;
+    border: none;
+    outline-style: dashed !important;
+    outline-color: lighten($primary-color,10%) !important;
+    outline-width: 2px !important;
+  }
+  &:hover{
+    background: none;
+    border: none;
+    outline: none !important;
+    font-size: 1.05em;
+  }
+}
 
+.search-opts {
+  @extend .clean-button;
+  color: $primary-color;
+  &:active, &:target{
+  }
+  &:focus{
+  }
+  &:hover{
+  }
+}
+
+.search-btn {
+  @extend .clean-button;
   background-color: $primary-color;
-  a {
-    color: white;
+  color: white;
+  &:active, &:target{
+    background-color: darken($primary-color,3%) !important;
+  }
+  &:focus{
+    background-color: $primary-color;
+  }
+  &:hover{
+    background-color: lighten($primary-color,3%);
   }
 }
 

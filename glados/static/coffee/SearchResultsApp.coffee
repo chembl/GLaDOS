@@ -6,9 +6,10 @@ class SearchResultsApp
 
   @init = ->
     @searchModel = SearchModel.getInstance()
+    @searchBarView = new SearchBarView()
     @initCompResultsListView($('#BCK-CompoundSearchResults'))
     @initDocsResultsListView($('#BCK-DocSearchResults'))
-    @search()
+    @searchBarView.search()
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
@@ -55,4 +56,3 @@ class SearchResultsApp
       model: ctm
       el: $('#CompTargetMatrix')
     ctm.fetch()
-
