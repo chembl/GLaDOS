@@ -22,7 +22,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     return this.paintWordCloud();
   },
   paintWordCloud: function() {
-    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordIndex, wordList, wordSize, wordVal, _i, _j, _len, _len1;
     elemID = this.$vis_elem.attr('id');
     elemWidth = this.$vis_elem.width();
     this.$vis_elem.height(elemWidth * 0.5);
@@ -60,6 +60,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       wordVal = wordList[_j];
       wordVal[1] = getFontSizeFor(wordVal[1]);
     }
+    wordIndex = _.indexBy(wordList, 0);
     config = {
       list: wordList,
       fontFamily: "Roboto Mono",
@@ -69,17 +70,21 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       },
       rotateRatio: 0.0,
       classes: 'wordcloud-word',
-      backgroundColor: Settings.VISUALISATION_CARD_GREY,
-      click: function(item, dimension, event) {
-        var termEncoded;
-        termEncoded = decodeURIComponent(item[0]);
-        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
-      }
+      backgroundColor: Settings.VISUALISATION_CARD_GREY
     };
     canvasElem = document.getElementById(elemID);
     WordCloud(canvasElem, config);
     return $(canvasElem).on('wordcloudstop', function() {
-      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', "Click to see other documents with this term").tooltip();
+      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', function() {
+        var text;
+        text = $(this).text();
+        value = wordIndex[text][1];
+        return 'Score: ' + Number(value).toFixed(2);
+      }).tooltip().click(function() {
+        var termEncoded;
+        termEncoded = decodeURIComponent($(this).text());
+        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
+      });
     });
   }
 });

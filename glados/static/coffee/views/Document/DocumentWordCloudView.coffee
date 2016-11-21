@@ -78,6 +78,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     for wordVal in wordList
       wordVal[1] = getFontSizeFor wordVal[1]
 
+    wordIndex = _.indexBy(wordList, 0)
+
     config =
       list: wordList
       fontFamily: "Roboto Mono"
@@ -87,10 +89,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       rotateRatio: 0.0
       classes: 'wordcloud-word'
       backgroundColor: Settings.VISUALISATION_CARD_GREY
-      click: (item, dimension, event) ->
-        termEncoded = decodeURIComponent item[0]
-        window.open('/documents_with_same_terms/' + termEncoded, '_blank')
-
 
     canvasElem = document.getElementById(elemID)
     WordCloud(canvasElem, config)
@@ -100,8 +98,19 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       $(@).find('.wordcloud-word')
       .addClass('tooltiped')
       .attr('data-position', 'bottom')
-      .attr('data-tooltip',"Click to see other documents with this term")
+      .attr('data-tooltip', ->
+        text = $(@).text()
+        value = wordIndex[text][1]
+        return 'Score: ' +  Number(value).toFixed(2)
+
+      )
       .tooltip()
+      .click( ->
+
+        termEncoded = decodeURIComponent $(@).text()
+        window.open('/documents_with_same_terms/' + termEncoded, '_blank')
+
+      )
 
 
 
