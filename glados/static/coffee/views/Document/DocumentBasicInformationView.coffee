@@ -32,6 +32,9 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
       last_page: @model.get('last_page')
       pubmed_id: @model.get('pubmed_id')
       doi: @model.get('doi')
+      title: @model.get('title')
+      abstract: @model.get('abstract')
+      authors: @model.get('authors')
 
   # --------------------------------------------------------------------
   # Downloads

@@ -26,7 +26,7 @@ ResponsiviseViewExt =
       @render()
       @hideResponsiveViewPreloader()
 
-    debounced_render = _.debounce($.proxy(reRender, @), 300)
+    debounced_render = _.debounce($.proxy(reRender, @), Settings.RESPONSIVE_REPAINT_WAIT, true)
     updateViewProxy = $.proxy(@updateView, @, debounced_render)
 
     $(window).resize ->

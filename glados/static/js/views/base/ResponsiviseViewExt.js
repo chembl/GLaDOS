@@ -19,7 +19,7 @@ ResponsiviseViewExt = {
       this.render();
       return this.hideResponsiveViewPreloader();
     };
-    debounced_render = _.debounce($.proxy(reRender, this), 300);
+    debounced_render = _.debounce($.proxy(reRender, this), Settings.RESPONSIVE_REPAINT_WAIT, true);
     updateViewProxy = $.proxy(this.updateView, this, debounced_render);
     $(window).resize(function() {
       return updateViewProxy();

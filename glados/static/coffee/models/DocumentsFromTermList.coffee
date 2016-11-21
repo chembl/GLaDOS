@@ -56,6 +56,14 @@ DocumentsFromTermList = PaginatedCollection.extend
       to_show: []
       columns: [
         {
+          'name_to_show': 'Score'
+          'comparator': 'score'
+          'sort_disabled': false
+          'is_sorting': 0
+          'sort_class': 'fa-sort'
+          'custom_field_template': '<b>Score: </b>{{val}}'
+        }
+        {
           'name_to_show': 'CHEMBL_ID'
           'comparator': 'document_chembl_id'
           'sort_disabled': false
@@ -84,6 +92,7 @@ DocumentsFromTermList = PaginatedCollection.extend
           'sort_disabled': false
           'is_sorting': 0
           'sort_class': 'fa-sort'
+
         }
       ]
 

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container main-container">
 
-    <div id="BCK-DocsWithTermResults">
+  <div id="BCK-DocsWithTermResults">
 
     {% verbatim %}
     <script id="Handlebars-DocsFromTerm-Description" type="text/x-handlebars-template">
@@ -17,9 +17,49 @@
 
     <br>
 
-    {% block docs_cards_pages %}
-      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-    {% endblock %}
+    <div class="row">
+
+      <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+      </div>
+
+      <div class="input-field col s4 m4 select-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+
+        <!-- Backbone fills this from the corresponding view-->
+
+      </div>
+
+      <div class="col s2 full-height btn-sort-direction-container"
+           data-hb-template="Handlebars-Common-SortDirectionBtn">
+
+        <!-- Backbone fills this from the corresponding view -->
+
+      </div>
+
+    </div>
+
+    <div class='BCK-PreoladerContainer row'>
+      {% block comp_card_loaders %}
+      {% include "glados/base/card_loaders.html" %}
+      {% endblock %}
+    </div>
+
+    <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Document">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+    </div>
+
+    <div class="row">
+
+      <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+      </div>
+
+    </div>
 
   </div>
 
