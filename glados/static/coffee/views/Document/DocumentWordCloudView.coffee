@@ -8,8 +8,16 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     @model.on 'change', updateViewProxy, @
     @resource_type = 'Document'
     @$vis_elem = $('#BCK-DocWordCloud')
+    @firstTimeRender = true
 
   render: ->
+
+    if @firstTimeRender
+      @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
+      @showCardContent()
+      @firstTimeRender = false
+      _.delay($.proxy(@render, @), Settings.RESPONSIVE_REPAINT_WAIT)
+      return
 
     $description = $(@el).find('.card-description')
     $template = $('#' + $description.attr('data-hb-template'))

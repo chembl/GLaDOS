@@ -7,10 +7,18 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     updateViewProxy = this.setUpResponsiveRender();
     this.model.on('change', updateViewProxy, this);
     this.resource_type = 'Document';
-    return this.$vis_elem = $('#BCK-DocWordCloud');
+    this.$vis_elem = $('#BCK-DocWordCloud');
+    return this.firstTimeRender = true;
   },
   render: function() {
     var $description, $template;
+    if (this.firstTimeRender) {
+      this.$vis_elem.html('<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>');
+      this.showCardContent();
+      this.firstTimeRender = false;
+      _.delay($.proxy(this.render, this), Settings.RESPONSIVE_REPAINT_WAIT);
+      return;
+    }
     $description = $(this.el).find('.card-description');
     $template = $('#' + $description.attr('data-hb-template'));
     $description.html(Handlebars.compile($template.html())({
