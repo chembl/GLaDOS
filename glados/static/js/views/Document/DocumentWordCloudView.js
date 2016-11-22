@@ -5,7 +5,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
     updateViewProxy = this.setUpResponsiveRender();
-    this.model.on('change', this.render, this);
+    this.model.on('change', updateViewProxy, this);
     this.resource_type = 'Document';
     return this.$vis_elem = $('#BCK-DocWordCloud');
   },
@@ -79,7 +79,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
         var text;
         text = $(this).text();
         value = wordIndex[text][1];
-        return 'Score: ' + Number(value).toFixed(2);
+        return 'Score: ' + getFontSizeFor.invert(Number(value)).toFixed(6);
       }).tooltip().click(function() {
         var termEncoded;
         termEncoded = decodeURIComponent($(this).text());

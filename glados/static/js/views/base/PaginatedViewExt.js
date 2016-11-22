@@ -111,9 +111,10 @@ PaginatedViewExt = {
     var $elem, $template;
     $elem = $(this.el).find('.num-results');
     $template = $('#' + $elem.attr('data-hb-template'));
-    return $elem.html(Handlebars.compile($template.html())({
+    $elem.html(Handlebars.compile($template.html())({
       num_results: this.collection.getMeta('total_records')
     }));
+    return console.log(this.collection.getMeta('total_records'));
   },
   getPageEvent: function(event) {
     var clicked, pageNum;
@@ -137,7 +138,6 @@ PaginatedViewExt = {
       pageNum = currentPage + 1;
     }
     if (pageNum > totalPages) {
-      console.log('ignoring!');
       return;
     }
     return this.collection.setPage(pageNum);
@@ -250,7 +250,7 @@ PaginatedViewExt = {
     if ($cards.length === 0) {
       return;
     }
-    $middleCard = $cards[Math.round($cards.length / 2)];
+    $middleCard = $cards[Math.floor($cards.length / 2)];
     advancer = $.proxy(function() {
       Waypoint.destroyAll();
       this.showPaginatedViewPreloaderAndContent();

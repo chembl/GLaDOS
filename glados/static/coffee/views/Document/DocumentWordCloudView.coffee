@@ -5,7 +5,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
   initialize: ->
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
-    @model.on 'change', @.render, @
+    @model.on 'change', updateViewProxy, @
     @resource_type = 'Document'
     @$vis_elem = $('#BCK-DocWordCloud')
 
@@ -101,7 +101,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       .attr('data-tooltip', ->
         text = $(@).text()
         value = wordIndex[text][1]
-        return 'Score: ' +  Number(value).toFixed(2)
+        return 'Score: ' +  getFontSizeFor.invert(Number(value)).toFixed(6)
 
       )
       .tooltip()

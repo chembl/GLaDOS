@@ -2,9 +2,9 @@
 # extend it to get a collection with the extra capabilities
 PaginatedCollection = Backbone.Collection.extend
 
-  setMeta: (attr, value) ->
+  setMeta: (attr, value, storeAsString) ->
 
-    if _.isString(value)
+    if _.isString(value) and !storeAsString
       value = parseInt(value)
 
     @meta[attr] = value
@@ -145,7 +145,6 @@ PaginatedCollection = Backbone.Collection.extend
 
     return comp
 
-
   # ------------------------------------------------------------
   # -- Client Side!!!
   # ------------------------------------------------------------
@@ -266,6 +265,7 @@ PaginatedCollection = Backbone.Collection.extend
 
   setPageSS: (page_num) ->
 
+    console.log 'getting page: ', page_num
     base_url = @getMeta('base_url')
     @setMeta('current_page', page_num)
     @url = @getPaginatedURL()
@@ -305,8 +305,6 @@ PaginatedCollection = Backbone.Collection.extend
     searchTerms = @getMeta('search_terms')
 
 
-    console.log 'search terms:', searchTerms
-
     for column, info of searchTerms
 
       type = info[0]
@@ -329,9 +327,9 @@ PaginatedCollection = Backbone.Collection.extend
 
         params.push(column + "=" + term) unless term == 'any'
 
-    full_url = url + '?' + params.join('&')
+    firstSeparator = if @getMeta('base_url').indexOf('?') != -1 then '&' else '?'
+    full_url = url + firstSeparator + params.join('&')
 
-    console.log 'URL: ', full_url
     return full_url
 
   resetPageSizeSS: (new_page_size) ->

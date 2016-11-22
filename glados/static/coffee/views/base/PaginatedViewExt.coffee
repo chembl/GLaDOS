@@ -109,6 +109,8 @@ PaginatedViewExt =
     $elem.html Handlebars.compile($template.html())
       num_results: @collection.getMeta('total_records')
 
+    console.log @collection.getMeta('total_records')
+
 
   getPageEvent: (event) ->
 
@@ -136,7 +138,6 @@ PaginatedViewExt =
 
     # Don't bother if the user requested is greater than the max number of pages
     if pageNum > totalPages
-      console.log('ignoring!')
       return
 
     @collection.setPage(pageNum)
@@ -283,8 +284,8 @@ PaginatedViewExt =
     # don't bother when there aren't any cards
     if $cards.length == 0
       return
-    
-    $middleCard = $cards[Math.round($cards.length / 2)]
+
+    $middleCard = $cards[Math.floor($cards.length / 2)]
 
     # the advancer function requests always the next page
     advancer = $.proxy ->
