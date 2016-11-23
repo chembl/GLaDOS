@@ -16,7 +16,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
       @showCardContent()
       @firstTimeRender = false
-      _.delay($.proxy(@render, @), Settings.RESPONSIVE_REPAINT_WAIT)
+      _.delay($.proxy(@render, @), Settings.RESPONSIVE_REPAINT_WAIT * 2)
       return
 
     $description = $(@el).find('.card-description')
