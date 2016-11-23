@@ -16,7 +16,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       this.$vis_elem.html('<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>');
       this.showCardContent();
       this.firstTimeRender = false;
-      _.delay($.proxy(this.render, this), Settings.RESPONSIVE_REPAINT_WAIT * 2);
+      _.delay($.proxy(this.render, this), Settings.RESPONSIVE_REPAINT_WAIT * 3);
       return;
     }
     $description = $(this.el).find('.card-description');

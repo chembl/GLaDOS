@@ -68,14 +68,14 @@ DocumentsFromTermList = PaginatedCollection.extend({
           'sort_disabled': false,
           'is_sorting': 0,
           'sort_class': 'fa-sort',
-          'custom_field_template': '<p><b>Score: </b>{{val}}</p>'
+          'custom_field_template': '<b>Score: </b>{{val}}'
         }, {
           'name_to_show': 'Title',
           'comparator': 'title',
           'sort_disabled': false,
           'is_sorting': 0,
           'sort_class': 'fa-sort',
-          'custom_field_template': '<p><i>{{val}}</i></p>'
+          'custom_field_template': '<i>{{val}}</i>'
         }, {
           'name_to_show': 'Authors',
           'comparator': 'authors',
