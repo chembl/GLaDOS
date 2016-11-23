@@ -30,7 +30,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     return this.paintWordCloud();
   },
   paintWordCloud: function() {
-    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordIndex, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    var K, canvasElem, config, currentRange, desiredMaxWidth, desiredPercentaje, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, itOverlaps, lowestValue, maxFontLimit, maxFontSize, minFont, minFontSize, value, word, wordCharNum, wordIndex, wordList, wordVal, _i, _j, _k, _len, _len1, _len2;
     elemID = this.$vis_elem.attr('id');
     elemWidth = this.$vis_elem.width();
     this.$vis_elem.height(elemWidth * 0.5);
@@ -43,29 +43,57 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     for (_i = 0, _len = wordList.length; _i < _len; _i++) {
       wordVal = wordList[_i];
       word = wordVal[0];
-      wordSize = word.length;
+      wordCharNum = word.length;
       value = wordVal[1];
       if (value > highestValue) {
         highestValue = value;
         highestValueWords = [];
         highestValueWords.push(word);
-        highestWordLength = wordSize;
+        highestWordLength = wordCharNum;
       } else if (value === highestValue) {
         highestValueWords.push(word);
-        if (wordSize > highestWordLength) {
-          highestWordLength = wordSize;
+        if (wordCharNum > highestWordLength) {
+          highestWordLength = wordCharNum;
         }
       } else {
         lowestValue = value;
       }
     }
-    desiredMaxWidth = 0.8 * elemWidth;
+    desiredPercentaje = 0.9;
+    desiredMaxWidth = desiredPercentaje * elemWidth;
     maxFontSize = parseInt(desiredMaxWidth / (K * highestWordLength));
     minFontSize = 10;
     getFontSizeFor = d3.scale.linear().domain([lowestValue, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
-    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
+    maxFontLimit = minFontSize * 2;
+    itOverlaps = function(wordVal) {
+      var assignedFontSize, numChars, wordSize;
+      word = wordVal[0];
+      value = wordVal[1];
+      assignedFontSize = getFontSizeFor(value);
+      numChars = word.length;
+      wordSize = assignedFontSize * K * numChars;
+      if (wordSize > elemWidth * desiredPercentaje) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     for (_j = 0, _len1 = wordList.length; _j < _len1; _j++) {
       wordVal = wordList[_j];
+      while (itOverlaps(wordVal)) {
+        currentRange = getFontSizeFor.range();
+        minFont = currentRange[0];
+        maxFontSize = 0.9 * maxFontSize;
+        if (maxFontSize < maxFontLimit) {
+          break;
+        }
+        getFontSizeFor.range([minFont, maxFontSize]);
+        console.log('reset');
+      }
+    }
+    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
+    for (_k = 0, _len2 = wordList.length; _k < _len2; _k++) {
+      wordVal = wordList[_k];
       wordVal[1] = getFontSizeFor(wordVal[1]);
     }
     wordIndex = _.indexBy(wordList, 0);
