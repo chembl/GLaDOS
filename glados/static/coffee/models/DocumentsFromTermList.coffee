@@ -4,26 +4,31 @@ DocumentsFromTermList = PaginatedCollection.extend
 
   initUrl: (term) ->
 
-    @url = Settings.WS_BASE_URL + 'document_term.json?limit=1000&term_text=' + term + '&order_by=-score'
-    console.log @url
+    @baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
+    @setMeta('base_url', @baseUrl, true)
+    @initialiseSSUrl()
 
   fetch: ->
 
+    @reset()
+    url = @getPaginatedURL()
     documents = []
     totalDocs = 0
     receivedDocs = 0
     # 1 first get list of documents
-    getDocuments = $.getJSON(@url)
+    getDocuments = $.getJSON(url)
 
     thisCollection = @
     # 3. check that everything is ready
     checkAllInfoReady = ->
       if receivedDocs == totalDocs
         console.log 'ALL READY!'
-        console.log thisCollection
-        thisCollection.trigger('reset')
+        thisCollection.trigger('do-repaint')
 
     getDocuments.done( (data) ->
+
+      data.page_meta.records_in_page = data.document_terms.length
+      thisCollection.resetMeta(data.page_meta)
 
       documents = data.document_terms
       totalDocs = documents.length
@@ -49,8 +54,9 @@ DocumentsFromTermList = PaginatedCollection.extend
   initialize: ->
 
     @meta =
-      server_side: false
-      page_size: 10
+      server_side: true
+      #base_url is set by initURL
+      page_size: 25
       current_page: 1
       available_page_sizes: Settings.TABLE_PAGE_SIZES
       to_show: []
@@ -62,6 +68,14 @@ DocumentsFromTermList = PaginatedCollection.extend
           'is_sorting': 0
           'sort_class': 'fa-sort'
           'link_base': '/document_report_card/$$$'
+        }
+        {
+          'name_to_show': 'Score'
+          'comparator': 'score'
+          'sort_disabled': false
+          'is_sorting': 0
+          'sort_class': 'fa-sort'
+          'custom_field_template': '<b>Score: </b>{{val}}'
         }
         {
           'name_to_show': 'Title'
@@ -84,8 +98,6 @@ DocumentsFromTermList = PaginatedCollection.extend
           'sort_disabled': false
           'is_sorting': 0
           'sort_class': 'fa-sort'
+
         }
       ]
-
-
-    @on 'reset', @resetMeta, @

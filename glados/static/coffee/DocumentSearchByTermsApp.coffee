@@ -15,6 +15,4 @@ class DocumentSearchByTermsApp
       collection: docsList
       el: $('#BCK-DocsWithTermResults')
 
-    console.log 'COLLECTION: ', docsList
-
     docsList.fetch()

@@ -4,25 +4,29 @@ var DocumentsFromTermList;
 DocumentsFromTermList = PaginatedCollection.extend({
   model: Document,
   initUrl: function(term) {
-    this.url = Settings.WS_BASE_URL + 'document_term.json?limit=1000&term_text=' + term + '&order_by=-score';
-    return console.log(this.url);
+    this.baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score';
+    this.setMeta('base_url', this.baseUrl, true);
+    return this.initialiseSSUrl();
   },
   fetch: function() {
-    var checkAllInfoReady, documents, getDocuments, receivedDocs, thisCollection, totalDocs;
+    var checkAllInfoReady, documents, getDocuments, receivedDocs, thisCollection, totalDocs, url;
+    this.reset();
+    url = this.getPaginatedURL();
     documents = [];
     totalDocs = 0;
     receivedDocs = 0;
-    getDocuments = $.getJSON(this.url);
+    getDocuments = $.getJSON(url);
     thisCollection = this;
     checkAllInfoReady = function() {
       if (receivedDocs === totalDocs) {
         console.log('ALL READY!');
-        console.log(thisCollection);
-        return thisCollection.trigger('reset');
+        return thisCollection.trigger('do-repaint');
       }
     };
     getDocuments.done(function(data) {
       var doc, docInfo, _i, _len, _results;
+      data.page_meta.records_in_page = data.document_terms.length;
+      thisCollection.resetMeta(data.page_meta);
       documents = data.document_terms;
       totalDocs = documents.length;
       _results = [];
@@ -44,9 +48,9 @@ DocumentsFromTermList = PaginatedCollection.extend({
     });
   },
   initialize: function() {
-    this.meta = {
-      server_side: false,
-      page_size: 10,
+    return this.meta = {
+      server_side: true,
+      page_size: 25,
       current_page: 1,
       available_page_sizes: Settings.TABLE_PAGE_SIZES,
       to_show: [],
@@ -58,6 +62,13 @@ DocumentsFromTermList = PaginatedCollection.extend({
           'is_sorting': 0,
           'sort_class': 'fa-sort',
           'link_base': '/document_report_card/$$$'
+        }, {
+          'name_to_show': 'Score',
+          'comparator': 'score',
+          'sort_disabled': false,
+          'is_sorting': 0,
+          'sort_class': 'fa-sort',
+          'custom_field_template': '<b>Score: </b>{{val}}'
         }, {
           'name_to_show': 'Title',
           'comparator': 'title',
@@ -80,6 +91,5 @@ DocumentsFromTermList = PaginatedCollection.extend({
         }
       ]
     };
-    return this.on('reset', this.resetMeta, this);
   }
 });

@@ -3,7 +3,8 @@ var DocumentsFromTermsView;
 
 DocumentsFromTermsView = Backbone.View.extend(PaginatedViewExt).extend({
   initialize: function() {
-    return this.collection.on('reset do-repaint sort', this.render, this);
+    this.collection.on('do-repaint', this.render, this);
+    return this.isInfinite = true;
   },
   render: function() {
     var $desc, $template;
@@ -12,12 +13,20 @@ DocumentsFromTermsView = Backbone.View.extend(PaginatedViewExt).extend({
     $desc.html(Handlebars.compile($template.html())({
       term: GlobalVariables.SEARCH_TERM_DECODED
     }));
-    this.clearContentContainer();
-    this.fillTemplates();
-    this.fillPaginators();
-    this.fillPageSelectors();
-    this.renderSortingSelector();
+    console.log('num items in collection: ', this.collection.models.length);
+    console.log('items: ', _.map(this.collection.models, function(item) {
+      return item.get('document_chembl_id');
+    }));
+    if (this.collection.getMeta('current_page') === 1) {
+      this.clearContentContainer();
+    }
+    this.showControls();
     this.activateSelectors();
-    return this.showPaginatedViewContent();
+    this.fillTemplates();
+    this.fillNumResults();
+    this.setUpLoadingWaypoint();
+    this.showPaginatedViewContent();
+    this.hidePreloaderIfNoNextItems();
+    return console.log('num cards: ', $(this.el).find('.BCK-items-container').children().length);
   }
 });

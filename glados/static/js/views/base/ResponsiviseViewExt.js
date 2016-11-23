@@ -14,13 +14,13 @@ ResponsiviseViewExt = {
     return debounced_render();
   },
   setUpResponsiveRender: function() {
-    var debounced_render, reRender, updateViewProxy;
+    var debouncedRender, reRender, updateViewProxy;
     reRender = function() {
       this.render();
       return this.hideResponsiveViewPreloader();
     };
-    debounced_render = _.debounce($.proxy(reRender, this), 300);
-    updateViewProxy = $.proxy(this.updateView, this, debounced_render);
+    debouncedRender = _.debounce($.proxy(reRender, this), Settings.RESPONSIVE_REPAINT_WAIT);
+    updateViewProxy = $.proxy(this.updateView, this, debouncedRender);
     $(window).resize(function() {
       return updateViewProxy();
     });

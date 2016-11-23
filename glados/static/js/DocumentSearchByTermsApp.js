@@ -15,7 +15,6 @@ DocumentSearchByTermsApp = (function() {
       collection: docsList,
       el: $('#BCK-DocsWithTermResults')
     });
-    console.log('COLLECTION: ', docsList);
     return docsList.fetch();
   };
 

@@ -109,6 +109,8 @@ PaginatedViewExt =
     $elem.html Handlebars.compile($template.html())
       num_results: @collection.getMeta('total_records')
 
+    console.log @collection.getMeta('total_records')
+
 
   getPageEvent: (event) ->
 
@@ -136,7 +138,6 @@ PaginatedViewExt =
 
     # Don't bother if the user requested is greater than the max number of pages
     if pageNum > totalPages
-      console.log('ignoring!')
       return
 
     @collection.setPage(pageNum)
@@ -260,12 +261,15 @@ PaginatedViewExt =
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
 
+  hidePreloaderOnly: ->
+    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont.hide()
+
   #--------------------------------------------------------------------------------------
   # Infinite Browser
   #--------------------------------------------------------------------------------------
   showControls: ->
     $(@el).find('.controls').removeClass('hide')
-
 
   showNumResults: ->
 
@@ -283,13 +287,16 @@ PaginatedViewExt =
     # don't bother when there aren't any cards
     if $cards.length == 0
       return
-    
-    $middleCard = $cards[Math.round($cards.length / 2)]
+
+    $middleCard = $cards[Math.floor($cards.length / 2)]
 
     # the advancer function requests always the next page
     advancer = $.proxy ->
       #destroy waypoint to avoid issues with triggering more page requests.
       Waypoint.destroyAll()
+      # dont' bother if already on last page
+      if @collection.currentlyOnLastPage()
+        return
       @showPaginatedViewPreloaderAndContent()
       @requestPageInCollection('next')
     , @
@@ -305,6 +312,12 @@ PaginatedViewExt =
           advancer()
 
     )
+
+  # checks if there are more page and hides the preloader if there are no more.
+  hidePreloaderIfNoNextItems: ->
+
+    if @collection.currentlyOnLastPage()
+      @hidePreloaderOnly()
 
   #--------------------------------------------------------------------------------------
   # sort selector

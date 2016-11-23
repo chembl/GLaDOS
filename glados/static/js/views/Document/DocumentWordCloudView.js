@@ -5,12 +5,20 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
   initialize: function() {
     var updateViewProxy;
     updateViewProxy = this.setUpResponsiveRender();
-    this.model.on('change', this.render, this);
+    this.model.on('change', updateViewProxy, this);
     this.resource_type = 'Document';
-    return this.$vis_elem = $('#BCK-DocWordCloud');
+    this.$vis_elem = $('#BCK-DocWordCloud');
+    return this.firstTimeRender = true;
   },
   render: function() {
     var $description, $template;
+    if (this.firstTimeRender) {
+      this.$vis_elem.html('<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>');
+      this.showCardContent();
+      this.firstTimeRender = false;
+      _.delay($.proxy(this.render, this), Settings.RESPONSIVE_REPAINT_WAIT * 3);
+      return;
+    }
     $description = $(this.el).find('.card-description');
     $template = $('#' + $description.attr('data-hb-template'));
     $description.html(Handlebars.compile($template.html())({
@@ -22,7 +30,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     return this.paintWordCloud();
   },
   paintWordCloud: function() {
-    var K, canvasElem, config, desiredMaxWidth, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, lowestValue, maxFontSize, minFontSize, value, word, wordList, wordSize, wordVal, _i, _j, _len, _len1;
+    var K, canvasElem, config, currentRange, desiredMaxWidth, desiredPercentaje, elemID, elemWidth, getColourFor, getFontSizeFor, highestValue, highestValueWords, highestWordLength, itOverlaps, lowestValue, maxFontLimit, maxFontSize, minFont, minFontSize, value, word, wordCharNum, wordIndex, wordList, wordVal, _i, _j, _k, _len, _len1, _len2;
     elemID = this.$vis_elem.attr('id');
     elemWidth = this.$vis_elem.width();
     this.$vis_elem.height(elemWidth * 0.5);
@@ -35,31 +43,60 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
     for (_i = 0, _len = wordList.length; _i < _len; _i++) {
       wordVal = wordList[_i];
       word = wordVal[0];
-      wordSize = word.length;
+      wordCharNum = word.length;
       value = wordVal[1];
       if (value > highestValue) {
         highestValue = value;
         highestValueWords = [];
         highestValueWords.push(word);
-        highestWordLength = wordSize;
+        highestWordLength = wordCharNum;
       } else if (value === highestValue) {
         highestValueWords.push(word);
-        if (wordSize > highestWordLength) {
-          highestWordLength = wordSize;
+        if (wordCharNum > highestWordLength) {
+          highestWordLength = wordCharNum;
         }
       } else {
         lowestValue = value;
       }
     }
-    desiredMaxWidth = 0.8 * elemWidth;
+    desiredPercentaje = 0.9;
+    desiredMaxWidth = desiredPercentaje * elemWidth;
     maxFontSize = parseInt(desiredMaxWidth / (K * highestWordLength));
     minFontSize = 10;
     getFontSizeFor = d3.scale.linear().domain([lowestValue, highestValue]).range([minFontSize, maxFontSize]).clamp(true);
-    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
+    maxFontLimit = minFontSize * 2;
+    itOverlaps = function(wordVal) {
+      var assignedFontSize, numChars, wordSize;
+      word = wordVal[0];
+      value = wordVal[1];
+      assignedFontSize = getFontSizeFor(value);
+      numChars = word.length;
+      wordSize = assignedFontSize * K * numChars;
+      if (wordSize > elemWidth * desiredPercentaje) {
+        return true;
+      } else {
+        return false;
+      }
+    };
     for (_j = 0, _len1 = wordList.length; _j < _len1; _j++) {
       wordVal = wordList[_j];
+      while (itOverlaps(wordVal)) {
+        currentRange = getFontSizeFor.range();
+        minFont = currentRange[0];
+        maxFontSize = 0.9 * maxFontSize;
+        if (maxFontSize < maxFontLimit) {
+          break;
+        }
+        getFontSizeFor.range([minFont, maxFontSize]);
+        console.log('reset');
+      }
+    }
+    getColourFor = d3.scale.linear().domain([minFontSize, maxFontSize]).interpolate(d3.interpolateHcl).range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)]);
+    for (_k = 0, _len2 = wordList.length; _k < _len2; _k++) {
+      wordVal = wordList[_k];
       wordVal[1] = getFontSizeFor(wordVal[1]);
     }
+    wordIndex = _.indexBy(wordList, 0);
     config = {
       list: wordList,
       fontFamily: "Roboto Mono",
@@ -69,17 +106,21 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend({
       },
       rotateRatio: 0.0,
       classes: 'wordcloud-word',
-      backgroundColor: Settings.VISUALISATION_CARD_GREY,
-      click: function(item, dimension, event) {
-        var termEncoded;
-        termEncoded = decodeURIComponent(item[0]);
-        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
-      }
+      backgroundColor: Settings.VISUALISATION_CARD_GREY
     };
     canvasElem = document.getElementById(elemID);
     WordCloud(canvasElem, config);
     return $(canvasElem).on('wordcloudstop', function() {
-      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', "Click to see other documents with this term").tooltip();
+      return $(this).find('.wordcloud-word').addClass('tooltiped').attr('data-position', 'bottom').attr('data-tooltip', function() {
+        var text;
+        text = $(this).text();
+        value = wordIndex[text][1];
+        return 'Score: ' + getFontSizeFor.invert(Number(value)).toFixed(6);
+      }).tooltip().click(function() {
+        var termEncoded;
+        termEncoded = decodeURIComponent($(this).text());
+        return window.open('/documents_with_same_terms/' + termEncoded, '_blank');
+      });
     });
   }
 });

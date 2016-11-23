@@ -26,7 +26,10 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend({
       first_page: this.model.get('first_page'),
       last_page: this.model.get('last_page'),
       pubmed_id: this.model.get('pubmed_id'),
-      doi: this.model.get('doi')
+      doi: this.model.get('doi'),
+      title: this.model.get('title'),
+      abstract: this.model.get('abstract'),
+      authors: this.model.get('authors')
     }));
   },
   getFilename: function(format) {

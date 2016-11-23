@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container main-container">
 
-    <div id="BCK-DocsWithTermResults">
+  <div id="BCK-DocsWithTermResults">
 
     {% verbatim %}
     <script id="Handlebars-DocsFromTerm-Description" type="text/x-handlebars-template">
@@ -17,9 +17,23 @@
 
     <br>
 
-    {% block docs_cards_pages %}
-      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-    {% endblock %}
+    <div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
+
+      <!-- Backbone fills this with the infinity browser view -->
+
+    </div>
+
+    <div class='BCK-items-container row' data-is-infinite="yes"
+         data-hb-template="Handlebars-Common-Paginated-Card-Document">
+      <!-- Backbone fills this with the infinity browser view -->
+
+    </div>
+
+    <div class="BCK-PreoladerContainer">
+      {% block preloaders %}
+        {% include "glados/base/infinite_browse_loaders.html" %}
+      {% endblock %}
+    </div>
 
   </div>
 

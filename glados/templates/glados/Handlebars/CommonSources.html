@@ -156,9 +156,9 @@
 
   <div class="col s12 m6 l4">
 
-    <div class="card grey lighten-5">
+    <div class="card grey lighten-5" >
 
-        <div class="card-content">
+        <div class="card-content" >
 
           {{#each columns}}
 
@@ -168,10 +168,14 @@
           </p>
 
           {{else if this.custom_html}}
-            {{{this.custom_html}}}
+            <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
+              {{{this.custom_html}}}
+            </p>
           {{else}}
           <small>
-            <p>{{this.value}}</p>
+            <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
+              {{this.value}}
+            </p>
           </small>
           {{/if}}
           {{/each}}
@@ -203,7 +207,9 @@
 
           {{else}}
           <small>
-            <p>{{this.name_to_show}}:{{this.value}}</p>
+            <p >
+              {{this.name_to_show}}:{{this.value}}
+            </p>
           </small>
           {{/if}}
           {{/each}}

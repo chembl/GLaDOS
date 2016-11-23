@@ -2,8 +2,8 @@
 var PaginatedCollection;
 
 PaginatedCollection = Backbone.Collection.extend({
-  setMeta: function(attr, value) {
-    if (_.isString(value)) {
+  setMeta: function(attr, value, storeAsString) {
+    if (_.isString(value) && !storeAsString) {
       value = parseInt(value);
     }
     this.meta[attr] = value;
@@ -131,6 +131,9 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return comp;
   },
+  currentlyOnLastPage: function() {
+    return this.getMeta('current_page') === this.getMeta('total_pages');
+  },
   resetSearchStruct: function() {
     var comparator, full_search_str, model, search_dict, _i, _j, _len, _len1, _ref, _ref1;
     if (!(this.getMeta('original_models') != null)) {
@@ -232,6 +235,7 @@ PaginatedCollection = Backbone.Collection.extend({
   },
   setPageSS: function(page_num) {
     var base_url;
+    console.log('getting page: ', page_num);
     base_url = this.getMeta('base_url');
     this.setMeta('current_page', page_num);
     this.url = this.getPaginatedURL();
@@ -242,7 +246,7 @@ PaginatedCollection = Backbone.Collection.extend({
     return this.fetch();
   },
   getPaginatedURL: function() {
-    var column, columns, comparator, field, full_url, info, limit_str, max, min, page_num, page_size, page_str, params, searchTerms, sorting, term, type, url, values, _i, _len;
+    var column, columns, comparator, field, firstSeparator, full_url, info, limit_str, max, min, page_num, page_size, page_str, params, searchTerms, sorting, term, type, url, values, _i, _len;
     url = this.getMeta('base_url');
     page_num = this.getMeta('current_page');
     page_size = this.getMeta('page_size');
@@ -264,7 +268,6 @@ PaginatedCollection = Backbone.Collection.extend({
       params.push('order_by=' + comparator);
     }
     searchTerms = this.getMeta('search_terms');
-    console.log('search terms:', searchTerms);
     for (column in searchTerms) {
       info = searchTerms[column];
       type = info[0];
@@ -285,8 +288,8 @@ PaginatedCollection = Backbone.Collection.extend({
         }
       }
     }
-    full_url = url + '?' + params.join('&');
-    console.log('URL: ', full_url);
+    firstSeparator = this.getMeta('base_url').indexOf('?') !== -1 ? '&' : '?';
+    full_url = url + firstSeparator + params.join('&');
     return full_url;
   },
   resetPageSizeSS: function(new_page_size) {

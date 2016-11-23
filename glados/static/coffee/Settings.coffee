@@ -18,6 +18,8 @@ Settings =
   VISUALISATION_GREY_BASE: '#9e9e9e' #grey
   VISUALISATION_CARD_GREY: '#fafafa' #fafafa grey lighten-5
   VISUALISATION_GREEN_MIN: '#e8f5e9' #e8f5e9 green lighten-5
+  # for a responsive visualisation, the time that it waits for the container size
+  RESPONSIVE_REPAINT_WAIT: 400
 
 # Application URLS
 
