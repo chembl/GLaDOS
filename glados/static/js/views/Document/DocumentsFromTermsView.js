@@ -26,6 +26,7 @@ DocumentsFromTermsView = Backbone.View.extend(PaginatedViewExt).extend({
     this.fillNumResults();
     this.setUpLoadingWaypoint();
     this.showPaginatedViewContent();
+    this.hidePreloaderIfNoNextItems();
     return console.log('num cards: ', $(this.el).find('.BCK-items-container').children().length);
   }
 });

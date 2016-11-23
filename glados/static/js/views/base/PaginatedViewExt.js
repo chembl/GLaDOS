@@ -235,6 +235,11 @@ PaginatedViewExt = {
   clearContentContainer: function() {
     return $(this.el).find('.BCK-items-container').empty();
   },
+  hidePreloaderOnly: function() {
+    var $preloaderCont;
+    $preloaderCont = $(this.el).find('.BCK-PreoladerContainer');
+    return $preloaderCont.hide();
+  },
   showControls: function() {
     return $(this.el).find('.controls').removeClass('hide');
   },
@@ -253,6 +258,9 @@ PaginatedViewExt = {
     $middleCard = $cards[Math.floor($cards.length / 2)];
     advancer = $.proxy(function() {
       Waypoint.destroyAll();
+      if (this.collection.currentlyOnLastPage()) {
+        return;
+      }
       this.showPaginatedViewPreloaderAndContent();
       return this.requestPageInCollection('next');
     }, this);
@@ -265,6 +273,11 @@ PaginatedViewExt = {
         }
       }
     });
+  },
+  hidePreloaderIfNoNextItems: function() {
+    if (this.collection.currentlyOnLastPage()) {
+      return this.hidePreloaderOnly();
+    }
   },
   renderSortingSelector: function() {
     var $btnSortDirectionContainer, $selectSortContainer, $template, col_comparators, columns, currentProps, currentSortDirection, one_selected, sortClassAndText;

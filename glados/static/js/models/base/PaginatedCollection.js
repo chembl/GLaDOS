@@ -131,6 +131,9 @@ PaginatedCollection = Backbone.Collection.extend({
     }
     return comp;
   },
+  currentlyOnLastPage: function() {
+    return this.getMeta('current_page') === this.getMeta('total_pages');
+  },
   resetSearchStruct: function() {
     var comparator, full_search_str, model, search_dict, _i, _j, _len, _len1, _ref, _ref1;
     if (!(this.getMeta('original_models') != null)) {

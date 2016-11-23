@@ -261,12 +261,15 @@ PaginatedViewExt =
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
 
+  hidePreloaderOnly: ->
+    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont.hide()
+
   #--------------------------------------------------------------------------------------
   # Infinite Browser
   #--------------------------------------------------------------------------------------
   showControls: ->
     $(@el).find('.controls').removeClass('hide')
-
 
   showNumResults: ->
 
@@ -291,6 +294,9 @@ PaginatedViewExt =
     advancer = $.proxy ->
       #destroy waypoint to avoid issues with triggering more page requests.
       Waypoint.destroyAll()
+      # dont' bother if already on last page
+      if @collection.currentlyOnLastPage()
+        return
       @showPaginatedViewPreloaderAndContent()
       @requestPageInCollection('next')
     , @
@@ -306,6 +312,12 @@ PaginatedViewExt =
           advancer()
 
     )
+
+  # checks if there are more page and hides the preloader if there are no more.
+  hidePreloaderIfNoNextItems: ->
+
+    if @collection.currentlyOnLastPage()
+      @hidePreloaderOnly()
 
   #--------------------------------------------------------------------------------------
   # sort selector

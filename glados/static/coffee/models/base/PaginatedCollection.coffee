@@ -145,6 +145,11 @@ PaginatedCollection = Backbone.Collection.extend
 
     return comp
 
+  # tells if the current page is the las page
+  currentlyOnLastPage: ->
+
+    @getMeta('current_page') == @getMeta('total_pages')
+
   # ------------------------------------------------------------
   # -- Client Side!!!
   # ------------------------------------------------------------
