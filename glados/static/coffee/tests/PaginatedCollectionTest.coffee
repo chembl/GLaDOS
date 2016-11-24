@@ -198,10 +198,10 @@ describe "Paginated Collection", ->
 
   describe "An elasticsearch collection", ->
 
-    esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
+    esList = glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
 
     beforeEach (done) ->
-      esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
+      esList = glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
       done()
 
     it "Sets initial parameters", ->

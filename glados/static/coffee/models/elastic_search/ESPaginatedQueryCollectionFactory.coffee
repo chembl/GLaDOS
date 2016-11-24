@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.elastic_search'
+glados.useNameSpace 'glados.models.paginated_collections'
   # --------------------------------------------------------------------------------------------------------------------
   # Factory for Elastic Search Generic Paginated Results List Collection
   # Creates a paginated collection based on:
@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.models.elastic_search'
 
     # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor : (esIndexSettings) ->
-      indexESPagQueryCollection = glados.models.elastic_search.ESPaginatedQueryCollection.extend
+      indexESPagQueryCollection = glados.models.paginated_collections.ESPaginatedQueryCollection.extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.models.elastic_search'
     # ------------------------------------------------------------------------------------------------------------------
 
     getNewCompoundResultsList: () ->
-      return @getNewESResultsListFor(glados.models.elastic_search.Settings.ES_INDEXES.COMPOUND)
+      return @getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.COMPOUND)
 
     getNewDocumentResultsList: () ->
-      return @getNewESResultsListFor(glados.models.elastic_search.Settings.ES_INDEXES.DOCUMENT)
+      return @getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.DOCUMENT)

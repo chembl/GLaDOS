@@ -1686,9 +1686,9 @@ describe("Paginated Collection", function() {
   });
   describe("An elasticsearch collection", function() {
     var esList;
-    esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList();
+    esList = glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList();
     beforeEach(function(done) {
-      esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList();
+      esList = glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList();
       return done();
     });
     it("Sets initial parameters", function() {

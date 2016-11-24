@@ -11,13 +11,13 @@ SearchModel = Backbone.Model.extend({
   },
   getCompoundResultsList: function() {
     if (!this.has('compoundResultsList')) {
-      this.set('compoundResultsList', glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList());
+      this.set('compoundResultsList', glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList());
     }
     return this.get('compoundResultsList');
   },
   getDocumentResultsList: function() {
     if (!this.has('documentResultsList')) {
-      this.set('documentResultsList', glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewDocumentResultsList());
+      this.set('documentResultsList', glados.models.paginated_collections.ESPaginatedQueryCollectionFactory.getNewDocumentResultsList());
     }
     return this.get('documentResultsList');
   },
