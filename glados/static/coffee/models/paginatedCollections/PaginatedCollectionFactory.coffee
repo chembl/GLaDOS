@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.models.paginated_collections'
   # - PATH: the index path in the elastic search server
   # - COLUMNS: a columns description  used for ordering and the views
   # --------------------------------------------------------------------------------------------------------------------
-  ESPaginatedQueryCollectionFactory:
+  PaginatedCollectionFactory:
 
     # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor : (esIndexSettings) ->
