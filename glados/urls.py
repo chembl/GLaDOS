@@ -1,13 +1,15 @@
 from django.conf.urls import url
+from django.conf.urls.static import static
 from glados.utils import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.conf import settings
 from . import views
 
 urlpatterns = [
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Compounds
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^compound_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/compoundReportCard.html"), ),
@@ -28,11 +30,12 @@ urlpatterns = [
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/AlternateFormsToEmbed.html")), ),
 
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/calculated_properties/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Targets
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
@@ -47,11 +50,12 @@ urlpatterns = [
     DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/RelationsToEmbed.html")), ),
 
   url(r'^target_report_card/(?P<chembl_id>\w+)/embed/approved_drugs_clinical_candidates/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
+    DirectTemplateView.as_view(
+      template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Assays
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/assayReportCard.html"), ),
@@ -62,9 +66,9 @@ urlpatterns = [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Documents
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
@@ -84,9 +88,9 @@ urlpatterns = [
   url(r'^documents_with_same_terms/(?P<doc_terms>.+)/$',
     DirectTemplateView.as_view(template_name="glados/DocumentTerms/DocumentTermsSearch.html"), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Cells
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
@@ -105,9 +109,9 @@ urlpatterns = [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Tests
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
   url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
   url(r'^components_summary/$', DirectTemplateView.as_view(template_name="glados/componentSummary.html"), ),
@@ -117,15 +121,15 @@ urlpatterns = [
 
   url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Drug Browser
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   url(r'^drug_browser_infinity/$',
       DirectTemplateView.as_view(template_name="glados/MainPageParts/DrugBrowserParts/browse_drugs_infinity.html"), ),
 
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Search Results
-  #----------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   url(r'^search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 
@@ -137,5 +141,10 @@ urlpatterns = [
   url(r'^compound_target_matrix/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrix.html"), ),
 
-
 ]
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Static Files
+# ----------------------------------------------------------------------------------------------------------------------
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

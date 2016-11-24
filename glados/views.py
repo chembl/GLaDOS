@@ -59,6 +59,8 @@ def get_latest_tweets():
   :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
   empty list.
   """
+  if not settings.TWITTER_ENABLED:
+    return []
   cache_key = 'latest_tweets'
   cache_time = 3600  # time to live in seconds
 

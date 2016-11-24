@@ -11,38 +11,42 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import sys
+import glados
+
+
+class RunEnvs(object):
+    DEV='DEV'
+    TEST='TEST'
+    PROD='PROD'
+
+RUN_ENV = RunEnvs.DEV
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-ON_OPENSHIFT = False
-if 'OPENSHIFT_REPO_DIR' in os.environ:
-  ON_OPENSHIFT = True
-
-if ON_OPENSHIFT:
-  GLADOS_ROOT = BASE_DIR + '/glados/'
-else:
-  GLADOS_ROOT = BASE_DIR + '/glados/glados/'
-
-
-sys.path.append(GLADOS_ROOT)
+GLADOS_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(glados.__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+# ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
+# ----------------------------------------------------------------------------------------------------------------------
 SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of the test.'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# ----------------------------------------------------------------------------------------------------------------------
+# Twitter
+# ----------------------------------------------------------------------------------------------------------------------
 
-if ON_OPENSHIFT:
-  DEBUG = False
+TWITTER_ENABLED = RUN_ENV == RunEnvs.PROD
+
+TWITTER_ACCESS_TOKEN = '<TWITTER_ACCESS_TOKEN>'
+TWITTER_ACCESS_TOKEN_SECRET = '<TWITTER_ACCESS_TOKEN_SECRET>'
+TWITTER_CONSUMER_KEY = '<TWITTER_CONSUMER_KEY>'
+TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = RUN_ENV == RunEnvs.DEV
 
 ALLOWED_HOSTS = ['127.0.0.1']
-
-COMPRESS_ENABLED = not DEBUG
 
 # Application definition
 
@@ -67,7 +71,7 @@ MIDDLEWARE_CLASSES = [
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'tests.urls'
+ROOT_URLCONF = 'glados.urls'
 
 TEMPLATES = [
   {
@@ -86,18 +90,22 @@ TEMPLATES = [
   },
 ]
 
+# ----------------------------------------------------------------------------------------------------------------------
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# ----------------------------------------------------------------------------------------------------------------------
 
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'NAME': os.path.join(GLADOS_ROOT, 'db.sqlite3'),
   }
 }
 
+# ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# ----------------------------------------------------------------------------------------------------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
   {
@@ -114,8 +122,10 @@ AUTH_PASSWORD_VALIDATORS = [
   },
 ]
 
+# ----------------------------------------------------------------------------------------------------------------------
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
+# ----------------------------------------------------------------------------------------------------------------------
 
 LANGUAGE_CODE = 'en-us'
 
@@ -127,21 +137,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# ----------------------------------------------------------------------------------------------------------------------
+# STATIC FILES (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+# ----------------------------------------------------------------------------------------------------------------------
 
 STATIC_URL = '/static/'
 
 COMPRESS_URL = STATIC_URL
 
-STATICFILES_DIRS = (
-  os.path.join(GLADOS_ROOT, 'static/'),
-)
-
-if ON_OPENSHIFT:
-  STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
-else:
-  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static')
 
 COMPRESS_ROOT = STATIC_ROOT
 
@@ -152,16 +157,23 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+# ----------------------------------------------------------------------------------------------------------------------
+# File Compression (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# ----------------------------------------------------------------------------------------------------------------------
+
+COMPRESS_ENABLED = not DEBUG
+
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
-COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR, 'tools/google_closure_compiler/compiler.jar')
+#COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR, 'tools/google_closure_compiler/compiler.jar')
 
-if ON_OPENSHIFT:
-  COMPRESS_OFFLINE = True
+#if ON_OPENSHIFT:
+#  COMPRESS_OFFLINE = True
 
-# -------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Cache
-# -------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 CACHES = {
     'default': {

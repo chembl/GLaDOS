@@ -62,6 +62,6 @@ setup(
                  'Operating System :: POSIX :: Linux',
                  'Programming Language :: Python :: 3.5',
                  'Topic :: Scientific/Engineering :: Chemistry'],
-    test_suite='glados.run_tests',
+    test_suite='glados.tests.run_tests',
     zip_safe=False,
 )
