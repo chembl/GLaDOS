@@ -184,13 +184,6 @@ describe "Paginated Collection", ->
       expect(url).toContain('order_by=molecule_chembl_id')
 
 
-    it "generates a correct paginated url (pagination)", ->
-
-      drugList.setPage(5)
-      url = drugList.getPaginatedURL()
-
-      expect(url).toContain('limit=20&offset=80')
-
     it "generates a correct paginated url (search)", ->
 
       drugList.setSearch('25', 'molecule_chembl_id', 'text')
@@ -201,6 +194,41 @@ describe "Paginated Collection", ->
       expect(url).toContain('molecule_chembl_id__contains=25')
       expect(url).toContain('pref_name__contains=ASP')
 
+
+
+  describe "An elasticsearch collection", ->
+
+    esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
+
+    beforeEach (done) ->
+      esList = glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList()
+      done()
+
+    it "Sets initial parameters", ->
+
+      expect(esList.getMeta('current_page')).toBe(1)
+      expect(esList.getMeta('index')).toBe('/chembl_molecule')
+      expect(esList.getMeta('page_size')).toBe(6)
+
+    it "Sets the request data to get the 5th page", ->
+
+      esList.setPage(5)
+      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search')
+
+      requestData = esList.getRequestData()
+      expect(requestData['from']).toBe(0)
+      expect(requestData['size']).toBe(6)
+
+    it "Sets the request data to switch to 10 items per page", ->
+
+      esList.resetPageSize(10)
+      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search')
+
+      requestData = esList.getRequestData()
+      expect(requestData['from']).toBe(0)
+      expect(requestData['size']).toBe(10)
+
+    #TODO: tests for sorting and filtering search
 
 
 

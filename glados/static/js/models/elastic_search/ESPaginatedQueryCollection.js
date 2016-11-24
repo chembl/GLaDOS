@@ -15,9 +15,21 @@ glados.useNameSpace('glados.models.elastic_search', {
       return jsonResultsList;
     },
     fetch: function(options) {
-      var esJSONRequest, esRequestData, fetchESOptions;
-      this.url = glados.models.elastic_search.Settings.ES_BASE_URL + this.getMeta('index') + '/_search';
-      esRequestData = {
+      var esJSONRequest, fetchESOptions;
+      this.url = this.getURL();
+      esJSONRequest = JSON.stringify(this.getRequestData());
+      fetchESOptions = {
+        data: esJSONRequest,
+        type: 'POST',
+        reset: true
+      };
+      if (!_.isUndefined(options) && _.isObject(options)) {
+        _.extend(fetchESOptions, options);
+      }
+      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions);
+    },
+    getRequestData: function() {
+      return {
         size: this.getMeta('page_size'),
         from: (this.getMeta('current_page') - 1) * this.getMeta('page_size'),
         query: {
@@ -28,16 +40,9 @@ glados.useNameSpace('glados.models.elastic_search', {
           }
         }
       };
-      esJSONRequest = JSON.stringify(esRequestData);
-      fetchESOptions = {
-        data: esJSONRequest,
-        type: 'POST',
-        reset: true
-      };
-      if (!_.isUndefined(options) && _.isObject(options)) {
-        _.extend(fetchESOptions, options);
-      }
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions);
+    },
+    getURL: function() {
+      return glados.models.elastic_search.Settings.ES_BASE_URL + this.getMeta('index') + '/_search';
     },
     setMeta: function(attr, value) {
       this.meta[attr] = value;

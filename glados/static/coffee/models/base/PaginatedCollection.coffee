@@ -1,5 +1,4 @@
-# This class implements the pagination, sorting and searching for a collection
-# extend it to get a collection with the extra capabilities
+# This object
 PaginatedCollection = Backbone.Collection.extend
 
   setMeta: (attr, value, storeAsString) ->
