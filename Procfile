@@ -1,1 +1,1 @@
-web: gunicorn glados.wsgi --log-file -
+web: python -m glados.manage runserver $PORT

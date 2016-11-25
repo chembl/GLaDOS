@@ -1,6 +1,6 @@
 django>=1.9
 django-compressor>=2.0
-gunicorn>=19.6.0
 selenium==2.52
 twitter
 python3-memcached
+-e ./
