@@ -25,19 +25,14 @@ glados.useNameSpace('glados.models.paginated_collections', {
         model: collectionSettings.MODEL,
         initialize: function() {
           this.meta = {
-            base_url: Settings.WS_BASE_URL + 'molecule.json',
-            page_size: Settings.TABLE_PAGE_SIZES[2],
-            available_page_sizes: Settings.TABLE_PAGE_SIZES,
+            base_url: collectionSettings.BASE_URL,
+            page_size: collectionSettings.DEFAULT_PAGE_SIZE,
+            available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES,
             current_page: 1,
             to_show: [],
             columns: collectionSettings.COLUMNS
           };
           return this.initialiseUrl();
-        },
-        parse: function(data) {
-          data.page_meta.records_in_page = data.molecules.length;
-          this.resetMeta(data.page_meta);
-          return data.molecules;
         }
       });
       return new wsPagCollection;
@@ -49,7 +44,64 @@ glados.useNameSpace('glados.models.paginated_collections', {
       return this.getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.DOCUMENT);
     },
     getNewDrugList: function() {
-      return this.getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST);
+      var list;
+      list = this.getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST);
+      list.parse = function(data) {
+        data.page_meta.records_in_page = data.molecules.length;
+        this.resetMeta(data.page_meta);
+        return data.molecules;
+      };
+      return list;
+    },
+    getNewDocumentsFromTermsList: function() {
+      var list;
+      list = this.getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST);
+      list.initUrl = function(term) {
+        this.baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score';
+        this.setMeta('base_url', this.baseUrl, true);
+        return this.initialiseUrl();
+      };
+      list.fetch = function() {
+        var checkAllInfoReady, documents, getDocuments, receivedDocs, thisCollection, totalDocs, url;
+        this.reset();
+        url = this.getPaginatedURL();
+        documents = [];
+        totalDocs = 0;
+        receivedDocs = 0;
+        getDocuments = $.getJSON(url);
+        thisCollection = this;
+        checkAllInfoReady = function() {
+          if (receivedDocs === totalDocs) {
+            console.log('ALL READY!');
+            console.log(thisCollection);
+            return thisCollection.trigger('do-repaint');
+          }
+        };
+        getDocuments.done(function(data) {
+          var doc, docInfo, _i, _len, _results;
+          data.page_meta.records_in_page = data.document_terms.length;
+          thisCollection.resetMeta(data.page_meta);
+          documents = data.document_terms;
+          totalDocs = documents.length;
+          _results = [];
+          for (_i = 0, _len = documents.length; _i < _len; _i++) {
+            docInfo = documents[_i];
+            doc = new Document(docInfo);
+            thisCollection.add(doc);
+            _results.push(doc.fetch({
+              success: function() {
+                receivedDocs += 1;
+                return checkAllInfoReady();
+              }
+            }));
+          }
+          return _results;
+        });
+        return getDocuments.fail(function() {
+          return console.log('ERROR!');
+        });
+      };
+      return list;
     }
   }
 });

@@ -21,7 +21,7 @@ PaginatedViewExt = {
     return _results;
   },
   sendDataToTemplate: function($specificElem) {
-    var $append_to, $item_template, columns_val, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
+    var $append_to, $item_template, columnsWithValues, header_row_cont, header_template, img_url, item, new_item_cont, _i, _len, _ref, _results;
     $item_template = $('#' + $specificElem.attr('data-hb-template'));
     $append_to = $specificElem;
     if ($specificElem.is('table')) {
@@ -37,7 +37,7 @@ PaginatedViewExt = {
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       item = _ref[_i];
       img_url = '';
-      columns_val = this.collection.getMeta('columns').map(function(col) {
+      columnsWithValues = this.collection.getMeta('columns').map(function(col) {
         col['value'] = item.get(col.comparator);
         col['has_link'] = col.link_base != null;
         if (!!col['has_link']) {

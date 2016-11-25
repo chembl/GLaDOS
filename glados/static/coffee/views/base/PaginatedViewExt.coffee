@@ -38,10 +38,11 @@ PaginatedViewExt =
 
     for item in @collection.getCurrentPage()
 
+
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
-      columns_val = @collection.getMeta('columns').map (col) ->
+      columnsWithValues = @collection.getMeta('columns').map (col) ->
         col['value'] = item.get(col.comparator)
         col['has_link'] = col.link_base?
         col['link_url'] = col['link_base'].replace('$$$', col['value']) unless !col['has_link']

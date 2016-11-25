@@ -32,28 +32,17 @@ glados.useNameSpace 'glados.models.paginated_collections'
         initialize: ->
 
           @meta =
-            base_url: Settings.WS_BASE_URL + 'molecule.json'
-            page_size: Settings.TABLE_PAGE_SIZES[2]
-            available_page_sizes: Settings.TABLE_PAGE_SIZES
+            base_url: collectionSettings.BASE_URL
+            page_size: collectionSettings.DEFAULT_PAGE_SIZE
+            available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
             columns: collectionSettings.COLUMNS
 
           @initialiseUrl()
 
-        parse: (data) ->
-
-          data.page_meta.records_in_page = data.molecules.length
-          @resetMeta(data.page_meta)
-
-          return data.molecules
 
       return new wsPagCollection
-
-
-
-
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Specific instantiation of paginated collections
@@ -66,4 +55,66 @@ glados.useNameSpace 'glados.models.paginated_collections'
       return @getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.DOCUMENT)
 
     getNewDrugList: ->
-      return @getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST)
+      list.parse = (data) ->
+
+          data.page_meta.records_in_page = data.molecules.length
+          @resetMeta(data.page_meta)
+
+          return data.molecules
+
+      return list
+
+    getNewDocumentsFromTermsList: ->
+
+      list =  @getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST)
+
+      list.initUrl = (term) ->
+
+        @baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+      list.fetch = ->
+
+        @reset()
+        url = @getPaginatedURL()
+        documents = []
+        totalDocs = 0
+        receivedDocs = 0
+        # 1 first get list of documents
+        getDocuments = $.getJSON(url)
+
+        thisCollection = @
+        # 3. check that everything is ready
+        checkAllInfoReady = ->
+          if receivedDocs == totalDocs
+            console.log 'ALL READY!'
+            console.log thisCollection
+            thisCollection.trigger('do-repaint')
+
+        getDocuments.done( (data) ->
+
+          data.page_meta.records_in_page = data.document_terms.length
+          thisCollection.resetMeta(data.page_meta)
+
+          documents = data.document_terms
+          totalDocs = documents.length
+
+          # 2. get details per document
+          for docInfo in documents
+
+            doc = new Document(docInfo)
+            thisCollection.add doc
+            doc.fetch
+              success: ->
+                receivedDocs += 1
+                checkAllInfoReady()
+
+        )
+
+        getDocuments.fail ->
+
+          console.log 'ERROR!'
+
+      return list
