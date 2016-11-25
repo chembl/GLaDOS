@@ -1,1 +1,1 @@
-web: python -m glados.manage runserver $HOST:$PORT
+web: python -m glados.manage runserver $HOSTNAME:$PORT
