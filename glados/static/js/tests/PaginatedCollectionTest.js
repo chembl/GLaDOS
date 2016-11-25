@@ -1636,10 +1636,10 @@ describe("Paginated Collection", function() {
   });
   describe("A server side collection", function() {
     var drugList;
-    drugList = new DrugList;
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 20);
     beforeEach(function(done) {
-      drugList = new DrugList;
+      drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
       return drugList.fetch({
         success: done
       });

@@ -136,12 +136,14 @@ describe "Paginated Collection", ->
 
   describe "A server side collection", ->
 
-    drugList = new DrugList
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+
+#    drugList = new DrugList
     drugList.setMeta('page_size', 20)
 
     beforeEach (done) ->
 
-      drugList = new DrugList
+      drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
       drugList.fetch
         success: done
 

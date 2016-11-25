@@ -19,11 +19,37 @@ glados.useNameSpace('glados.models.paginated_collections', {
       });
       return new indexESPagQueryCollection;
     },
+    getNewWSCollectionFor: function(collectionSettings) {
+      var wsPagCollection;
+      wsPagCollection = glados.models.paginated_collections.WSPaginatedCollection.extend({
+        model: collectionSettings.MODEL,
+        initialize: function() {
+          this.meta = {
+            base_url: Settings.WS_BASE_URL + 'molecule.json',
+            page_size: Settings.TABLE_PAGE_SIZES[2],
+            available_page_sizes: Settings.TABLE_PAGE_SIZES,
+            current_page: 1,
+            to_show: [],
+            columns: collectionSettings.COLUMNS
+          };
+          return this.initialiseUrl();
+        },
+        parse: function(data) {
+          data.page_meta.records_in_page = data.molecules.length;
+          this.resetMeta(data.page_meta);
+          return data.molecules;
+        }
+      });
+      return new wsPagCollection;
+    },
     getNewCompoundResultsList: function() {
       return this.getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.COMPOUND);
     },
     getNewDocumentResultsList: function() {
       return this.getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.DOCUMENT);
+    },
+    getNewDrugList: function() {
+      return this.getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST);
     }
   }
 });
