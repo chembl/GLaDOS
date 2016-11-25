@@ -19,7 +19,7 @@ VisualComponentsSummaryApp = (function() {
     VisualComponentsSummaryApp.sampleDocumentAssayNetwork = documentAssayNetwork;
     VisualComponentsSummaryApp.initSampleDANView($('#DAssayNetworkCard'));
     documentAssayNetwork.fetch();
-    sampleDrugList = new DrugList({});
+    sampleDrugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
     VisualComponentsSummaryApp.sampleDrugList = sampleDrugList;
     VisualComponentsSummaryApp.initSampleBrowserAsTableInCardView($('#BCK-BrowserAsTable'));
     sampleDrugList.fetch({
