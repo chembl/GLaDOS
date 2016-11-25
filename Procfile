@@ -1,1 +1,1 @@
-web: python -m glados.manage runserver $PORT
+web: gunicorn gettingstarted.wsgi --log-file -
