@@ -1,1 +1,1 @@
-web: gunicorn gettingstarted.wsgi --log-file -
+web: gunicorn glados.wsgi --log-file -
