@@ -15,9 +15,9 @@ import glados
 
 
 class RunEnvs(object):
-    DEV='DEV'
-    TEST='TEST'
-    PROD='PROD'
+    DEV = 'DEV'
+    TEST = 'TEST'
+    PROD = 'PROD'
 
 RUN_ENV = RunEnvs.DEV
 
@@ -46,7 +46,7 @@ TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = RUN_ENV == RunEnvs.DEV
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'glados-chembl.herokuapp.com']
 
 # Application definition
 
