@@ -99,7 +99,7 @@ describe("Paginated Collection", function() {
   });
   describe("A 5 elements collection, having 5 elements per page", function() {
     var data5, drugList;
-    drugList = new DrugList;
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 5);
     drugList.setMeta('server_side', true);
     data5 = [

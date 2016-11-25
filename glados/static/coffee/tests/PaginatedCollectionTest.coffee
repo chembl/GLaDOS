@@ -55,7 +55,7 @@ describe "Paginated Collection", ->
 
   describe "A 5 elements collection, having 5 elements per page", ->
 
-    drugList = new DrugList
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
     drugList.setMeta('page_size', 5)
     drugList.setMeta('server_side', true)
 
