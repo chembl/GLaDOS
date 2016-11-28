@@ -49,8 +49,6 @@ DocumentsFromTermList = PaginatedCollection.extend
 
       console.log 'ERROR!'
 
-
-
   initialize: ->
 
     @meta =

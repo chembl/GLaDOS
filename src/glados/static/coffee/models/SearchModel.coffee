@@ -21,14 +21,14 @@ SearchModel = Backbone.Model.extend
   getCompoundResultsList: () ->
     if not @has('compoundResultsList')
       @set('compoundResultsList',
-          glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewCompoundResultsList())
+          glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList())
     return @get('compoundResultsList')
 
   # Lazily initialized DocumentResultsList
   getDocumentResultsList: () ->
     if not @has('documentResultsList')
       @set('documentResultsList',
-          glados.models.elastic_search.ESPaginatedQueryCollectionFactory.getNewDocumentResultsList())
+          glados.models.paginated_collections.PaginatedCollectionFactory.getNewDocumentResultsList())
     return @get('documentResultsList')
 
   # --------------------------------------------------------------------------------------------------------------------

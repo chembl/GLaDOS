@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.elastic_search'
+glados.useNameSpace 'glados.models.paginated_collections'
 
   # --------------------------------------------------------------------------------------------------------------------
   # This class implements the pagination, sorting and searching for a collection in ElasticSearch
@@ -21,17 +21,9 @@ glados.useNameSpace 'glados.models.elastic_search'
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
-      @url = glados.models.elastic_search.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
+      @url = @getURL()
       # Creates the Elastic Search Query parameters and serializes them
-      esRequestData =
-        size: @getMeta('page_size'),
-        from: ((@getMeta('current_page')-1)*@getMeta('page_size'))
-        query:
-          multi_match:
-            query: @getMeta('search_term')
-            type: "best_fields",
-            fields: ['*.eng_analyzed', '*.keyword']
-      esJSONRequest = JSON.stringify(esRequestData)
+      esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -42,6 +34,23 @@ glados.useNameSpace 'glados.models.elastic_search'
         _.extend(fetchESOptions, options)
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+
+    # generates an object with the data necessary to do the ES request
+    getRequestData: ->
+      return {
+        size: @getMeta('page_size'),
+        from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
+        query:
+          multi_match:
+            query: @getMeta('search_term')
+            type: "best_fields",
+            fields: ['*.eng_analyzed', '*.keyword']
+      }
+
+    # builds the url to do the request
+    getURL: ->
+      glados.models.paginated_collections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination

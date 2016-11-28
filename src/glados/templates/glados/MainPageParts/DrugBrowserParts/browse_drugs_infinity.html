@@ -94,7 +94,8 @@
 {% endblock %}
 
 {% block custom_js_inline %}
-var drugList = new DrugList({});
+// TODO: use the new pattern
+var drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
 var infBrowser = DrugBrowserApp.initInfinityBrowserView(drugList, $('#DrugInfBrowser'));
 drugList.fetch({reset: true});
 

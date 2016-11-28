@@ -99,7 +99,7 @@ describe("Paginated Collection", function() {
   });
   describe("A 5 elements collection, having 5 elements per page", function() {
     var data5, drugList;
-    drugList = new DrugList;
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 5);
     drugList.setMeta('server_side', true);
     data5 = [
@@ -1636,10 +1636,10 @@ describe("Paginated Collection", function() {
   });
   describe("A server side collection", function() {
     var drugList;
-    drugList = new DrugList;
+    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 20);
     beforeEach(function(done) {
-      drugList = new DrugList;
+      drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
       return drugList.fetch({
         success: done
       });
@@ -1675,12 +1675,6 @@ describe("Paginated Collection", function() {
       url = drugList.getPaginatedURL();
       return expect(url).toContain('order_by=molecule_chembl_id');
     });
-    it("generates a correct paginated url (pagination)", function() {
-      var url;
-      drugList.setPage(5);
-      url = drugList.getPaginatedURL();
-      return expect(url).toContain('limit=20&offset=80');
-    });
     return it("generates a correct paginated url (search)", function() {
       var url;
       drugList.setSearch('25', 'molecule_chembl_id', 'text');
@@ -1688,6 +1682,35 @@ describe("Paginated Collection", function() {
       url = drugList.getPaginatedURL();
       expect(url).toContain('molecule_chembl_id__contains=25');
       return expect(url).toContain('pref_name__contains=ASP');
+    });
+  });
+  describe("An elasticsearch collection", function() {
+    var esList;
+    esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList();
+    beforeEach(function(done) {
+      esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList();
+      return done();
+    });
+    it("Sets initial parameters", function() {
+      expect(esList.getMeta('current_page')).toBe(1);
+      expect(esList.getMeta('index')).toBe('/chembl_molecule');
+      return expect(esList.getMeta('page_size')).toBe(6);
+    });
+    it("Sets the request data to get the 5th page", function() {
+      var requestData;
+      esList.setPage(5);
+      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search');
+      requestData = esList.getRequestData();
+      expect(requestData['from']).toBe(0);
+      return expect(requestData['size']).toBe(6);
+    });
+    return it("Sets the request data to switch to 10 items per page", function() {
+      var requestData;
+      esList.resetPageSize(10);
+      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search');
+      requestData = esList.getRequestData();
+      expect(requestData['from']).toBe(0);
+      return expect(requestData['size']).toBe(10);
     });
   });
   return assert_chembl_ids = function(collection, expected_chembl_ids) {
