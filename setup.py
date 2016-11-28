@@ -13,7 +13,7 @@ if sys.version_info < (3, 0, 0):
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # Source code root
-src_dir = './'
+src_dir = './src'
 
 
 # Walks recursively a directory in a module and its contents and list all the files in it in the format expected by
@@ -62,6 +62,6 @@ setup(
                  'Operating System :: POSIX :: Linux',
                  'Programming Language :: Python :: 3.5',
                  'Topic :: Scientific/Engineering :: Chemistry'],
-    test_suite='glados.run_tests',
+    test_suite='glados.tests.run_tests',
     zip_safe=False,
 )
