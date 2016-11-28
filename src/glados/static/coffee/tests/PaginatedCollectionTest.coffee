@@ -55,7 +55,7 @@ describe "Paginated Collection", ->
 
   describe "A 5 elements collection, having 5 elements per page", ->
 
-    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
     drugList.setMeta('page_size', 5)
     drugList.setMeta('server_side', true)
 
@@ -136,14 +136,14 @@ describe "Paginated Collection", ->
 
   describe "A server side collection", ->
 
-    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
 
 #    drugList = new DrugList
     drugList.setMeta('page_size', 20)
 
     beforeEach (done) ->
 
-      drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+      drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
       drugList.fetch
         success: done
 
@@ -200,10 +200,10 @@ describe "Paginated Collection", ->
 
   describe "An elasticsearch collection", ->
 
-    esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList()
+    esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewCompoundResultsList()
 
     beforeEach (done) ->
-      esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList()
+      esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewCompoundResultsList()
       done()
 
     it "Sets initial parameters", ->

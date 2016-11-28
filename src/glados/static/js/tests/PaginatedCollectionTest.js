@@ -99,7 +99,7 @@ describe("Paginated Collection", function() {
   });
   describe("A 5 elements collection, having 5 elements per page", function() {
     var data5, drugList;
-    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
+    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 5);
     drugList.setMeta('server_side', true);
     data5 = [
@@ -1636,10 +1636,10 @@ describe("Paginated Collection", function() {
   });
   describe("A server side collection", function() {
     var drugList;
-    drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
+    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList();
     drugList.setMeta('page_size', 20);
     beforeEach(function(done) {
-      drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
+      drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList();
       return drugList.fetch({
         success: done
       });
@@ -1686,9 +1686,9 @@ describe("Paginated Collection", function() {
   });
   describe("An elasticsearch collection", function() {
     var esList;
-    esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList();
+    esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewCompoundResultsList();
     beforeEach(function(done) {
-      esList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewCompoundResultsList();
+      esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewCompoundResultsList();
       return done();
     });
     it("Sets initial parameters", function() {

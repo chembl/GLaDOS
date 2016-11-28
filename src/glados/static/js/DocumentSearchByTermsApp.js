@@ -9,7 +9,7 @@ DocumentSearchByTermsApp = (function() {
     var docResView, docsList;
     GlobalVariables.SEARCH_TERM = URLProcessor.getEncodedSearchTemsForDocuments();
     GlobalVariables.SEARCH_TERM_DECODED = decodeURI(GlobalVariables.SEARCH_TERM);
-    docsList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDocumentsFromTermsList();
+    docsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDocumentsFromTermsList();
     docsList.initUrl(GlobalVariables.SEARCH_TERM);
     docResView = new DocumentsFromTermsView({
       collection: docsList,

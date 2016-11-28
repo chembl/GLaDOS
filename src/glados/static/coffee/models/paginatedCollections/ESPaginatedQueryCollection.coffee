@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginated_collections'
+glados.useNameSpace 'glados.models.paginatedCollections'
 
   # --------------------------------------------------------------------------------------------------------------------
   # This class implements the pagination, sorting and searching for a collection in ElasticSearch
@@ -49,7 +49,7 @@ glados.useNameSpace 'glados.models.paginated_collections'
 
     # builds the url to do the request
     getURL: ->
-      glados.models.paginated_collections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
+      glados.models.paginatedCollections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
 
 
     # ------------------------------------------------------------------------------------------------------------------

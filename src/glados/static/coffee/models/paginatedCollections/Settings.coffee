@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginated_collections'
+glados.useNameSpace 'glados.models.paginatedCollections'
   # --------------------------------------------------------------------------------------------------------------------
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------

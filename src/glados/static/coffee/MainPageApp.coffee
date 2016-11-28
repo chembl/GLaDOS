@@ -12,7 +12,7 @@ class MainPageApp
     LazyIFramesHelper.initLazyIFrames()
 
     @targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    @drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+    @drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
 
     @targetBrowserView = TargetBrowserApp.initBrowserMain(@targetHierarchy, $('#BCK-TargetBrowserMain'))
     @drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(@drugList, $('#BCK-DrugBrowserMain'))

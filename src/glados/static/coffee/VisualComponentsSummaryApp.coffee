@@ -18,7 +18,7 @@ class VisualComponentsSummaryApp
     documentAssayNetwork.fetch()
 
     #browse as table.
-    sampleDrugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList()
+    sampleDrugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
     VisualComponentsSummaryApp.sampleDrugList = sampleDrugList
     VisualComponentsSummaryApp.initSampleBrowserAsTableInCardView($('#BCK-BrowserAsTable'))
     sampleDrugList.fetch({reset: true})

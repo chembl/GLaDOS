@@ -9,7 +9,7 @@ MainPageApp = (function() {
     this.searchBarView = new SearchBarView();
     LazyIFramesHelper.initLazyIFrames();
     this.targetHierarchy = TargetBrowserApp.initTargetHierarchyTree();
-    this.drugList = glados.models.paginated_collections.PaginatedCollectionFactory.getNewDrugList();
+    this.drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList();
     this.targetBrowserView = TargetBrowserApp.initBrowserMain(this.targetHierarchy, $('#BCK-TargetBrowserMain'));
     this.drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(this.drugList, $('#BCK-DrugBrowserMain'));
     this.drugList.fetch({

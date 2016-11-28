@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginated_collections'
+glados.useNameSpace 'glados.models.paginatedCollections'
   # --------------------------------------------------------------------------------------------------------------------
   # Factory for Elastic Search Generic Paginated Results List Collection
   # Creates a paginated collection based on:
@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.models.paginated_collections'
 
     # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor : (esIndexSettings) ->
-      indexESPagQueryCollection = glados.models.paginated_collections.ESPaginatedQueryCollection.extend
+      indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection.extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginated_collections'
     # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings) ->
 
-      wsPagCollection = glados.models.paginated_collections.WSPaginatedCollection.extend
+      wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection.extend
         model: collectionSettings.MODEL
         initialize: ->
 
@@ -49,13 +49,13 @@ glados.useNameSpace 'glados.models.paginated_collections'
     # ------------------------------------------------------------------------------------------------------------------
 
     getNewCompoundResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.COMPOUND)
+      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND)
 
     getNewDocumentResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginated_collections.Settings.ES_INDEXES.DOCUMENT)
+      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT)
 
     getNewDrugList: ->
-      list =  @getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DRUG_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
       list.parse = (data) ->
 
           data.page_meta.records_in_page = data.molecules.length
@@ -67,7 +67,7 @@ glados.useNameSpace 'glados.models.paginated_collections'
 
     getNewDocumentsFromTermsList: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginated_collections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST)
 
       list.initUrl = (term) ->
 
