@@ -1,3 +1,1 @@
-install-glados: python setup.py install
-uninstall-glados: pip uninstall glados
-web: python -m glados.manage runserver $HOSTNAME:$PORT
+web: ./manage_glados_no_install.sh runserver $HOSTNAME:$PORT
