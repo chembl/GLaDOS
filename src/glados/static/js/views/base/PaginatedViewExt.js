@@ -255,7 +255,7 @@ PaginatedViewExt = {
     if ($cards.length === 0) {
       return;
     }
-    $middleCard = $cards[Math.floor($cards.length / 2)];
+    $middleCard = $cards[Math.floor($cards.length / 4)];
     advancer = $.proxy(function() {
       Waypoint.destroyAll();
       if (this.collection.currentlyOnLastPage()) {
