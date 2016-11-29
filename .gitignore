@@ -69,7 +69,7 @@ target/
 .python-version
 
 # database files
-db.sqlite3
+# db.sqlite3 - deployment branch can include the database file
 
 # filre created in tests
 /__init__.py
