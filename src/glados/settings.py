@@ -21,8 +21,8 @@ class RunEnvs(object):
 
 RUN_ENV = RunEnvs.DEV
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-GLADOS_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(glados.__file__)))
+# Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
+GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -98,7 +98,7 @@ TEMPLATES = [
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(GLADOS_ROOT, 'db.sqlite3'),
+    'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3'),
   }
 }
 
