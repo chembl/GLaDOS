@@ -169,6 +169,58 @@ glados.useNameSpace('glados.models.paginatedCollections', {
         });
       };
       return list;
+    },
+    getNewTargetRelationsList: function() {
+      var list;
+      list = this.getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST);
+      list.initURL = function(chembl_id) {
+        return this.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
+      };
+      list.fetch = function() {
+        var base_url2, getTargetRelations, target_relations, this_collection;
+        this_collection = this;
+        target_relations = {};
+        getTargetRelations = $.getJSON(this.url, function(data) {
+          return target_relations = data.target_relations;
+        });
+        getTargetRelations.fail(function() {
+          console.log('error');
+          return this_collection.trigger('error');
+        });
+        base_url2 = Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in=';
+        return getTargetRelations.done(function() {
+          var getTargetsInfo, getTargetssInfoUrl, t, targets_list;
+          targets_list = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = target_relations.length; _i < _len; _i++) {
+              t = target_relations[_i];
+              _results.push(t.target_chembl_id);
+            }
+            return _results;
+          })()).join(',');
+          getTargetssInfoUrl = base_url2 + targets_list + '&order_by=target_chembl_id&limit=1000';
+          getTargetsInfo = $.getJSON(getTargetssInfoUrl, function(data) {
+            var i, targ, targets, _i, _len;
+            targets = data.targets;
+            i = 0;
+            for (_i = 0, _len = targets.length; _i < _len; _i++) {
+              targ = targets[_i];
+              if (targ.target_chembl_id !== target_relations[i].target_chembl_id) {
+                i++;
+              }
+              target_relations[i].pref_name = targ.pref_name;
+              target_relations[i].target_type = targ.target_type;
+              i++;
+            }
+            return this_collection.reset(target_relations);
+          });
+          return getTargetsInfo.fail(function() {
+            return console.log('failed2');
+          });
+        });
+      };
+      return list;
     }
   }
 });

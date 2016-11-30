@@ -15,8 +15,8 @@ class TargetReportCardApp
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
     appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
 
-    targetRelations = new TargetRelationList
-    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000'
+    targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
+    targetRelations.initURL GlobalVariables.CHEMBL_ID
 
     new TargetNameAndClassificationView
       model: target
@@ -67,8 +67,8 @@ class TargetReportCardApp
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    targetRelations = new TargetRelationList
-    targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000'
+    targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
+    targetRelations.initURL GlobalVariables.CHEMBL_ID
 
     new RelationsView
       collection: targetRelations

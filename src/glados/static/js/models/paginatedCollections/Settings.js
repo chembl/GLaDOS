@@ -200,6 +200,39 @@ glados.useNameSpace('glados.models.paginatedCollections', {
             'is_sorting': 0
           }
         ]
+      },
+      TARGET_RELATIONS_LIST: {
+        MODEL: TargetRelation,
+        DEFAULT_PAGE_SIZE: 5,
+        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES,
+        COLUMNS: [
+          {
+            'name_to_show': 'ChEMBL ID',
+            'comparator': 'target_chembl_id',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort',
+            'link_base': '/target_report_card/$$$'
+          }, {
+            'name_to_show': 'Relationship',
+            'comparator': 'relationship',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }, {
+            'name_to_show': 'Pref Name',
+            'comparator': 'pref_name',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }, {
+            'name_to_show': 'Target Type',
+            'comparator': 'target_type',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }
+        ]
       }
     }
   }
