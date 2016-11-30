@@ -34,6 +34,7 @@ def add_data_dir_recursive_as_package_data(base_package_dir, data_dir, pkg_data)
 package_data_desc = {}
 add_data_dir_recursive_as_package_data('glados', 'db', package_data_desc)
 add_data_dir_recursive_as_package_data('glados', 'static', package_data_desc)
+add_data_dir_recursive_as_package_data('glados', 'static_root', package_data_desc)
 add_data_dir_recursive_as_package_data('glados', 'templates', package_data_desc)
 
 setup(
@@ -50,7 +51,11 @@ setup(
         'django>=1.9',
         'django-compressor>=2.0',
         'twitter',
-        'python3-memcached'
+        'python3-memcached',
+        'selenium==2.52',
+        'pyScss',
+        'watchdog',
+        'whitenoise'
     ],
     package_data=package_data_desc,
     include_package_data=True,

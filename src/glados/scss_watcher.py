@@ -2,6 +2,7 @@ import glados
 from watchdog import observers
 import os
 from scss import Compiler
+from django.conf import settings
 
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)

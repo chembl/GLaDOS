@@ -1,11 +1,19 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from glados.utils import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
+from django.contrib import admin
+
 
 urlpatterns = [
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Django Admin
+  # --------------------------------------------------------------------------------------------------------------------
+
+  url(r'^admin/', include(admin.site.urls)),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Compounds

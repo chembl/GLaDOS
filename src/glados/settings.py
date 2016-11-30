@@ -51,6 +51,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+  'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
   'django.contrib.sessions',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
   'django.contrib.staticfiles',
   'glados',
   'compressor',
+  'twitter'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -69,6 +71,7 @@ MIDDLEWARE_CLASSES = [
   'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'glados.urls'
@@ -144,11 +147,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-COMPRESS_URL = STATIC_URL
+STATICFILES_DIRS = (
+  os.path.join(GLADOS_ROOT, 'static/'),
+)
 
-STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static')
-
-COMPRESS_ROOT = STATIC_ROOT
+STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -157,19 +160,22 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # ----------------------------------------------------------------------------------------------------------------------
 # File Compression (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # ----------------------------------------------------------------------------------------------------------------------
 
-COMPRESS_ENABLED = not DEBUG
+COMPRESS_ENABLED = RUN_ENV == RunEnvs.PROD
 
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
-COMPRESS_JS_FILTERS = ['compressor.filters.closure.ClosureCompilerFilter']
-#COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR, 'tools/google_closure_compiler/compiler.jar')
-
-#if ON_OPENSHIFT:
-#  COMPRESS_OFFLINE = True
+if COMPRESS_ENABLED:
+    COMPRESS_OFFLINE = True
+    COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+    COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+    COMPRESS_URL = STATIC_URL
+    COMPRESS_ROOT = STATIC_ROOT
+    #COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR, 'tools/google_closure_compiler/compiler.jar')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Cache
