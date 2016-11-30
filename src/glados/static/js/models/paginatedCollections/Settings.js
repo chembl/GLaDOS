@@ -161,6 +161,46 @@ glados.useNameSpace('glados.models.paginatedCollections', {
           }
         ]
       }
+    },
+    CLIENT_SIDE_WS_COLLECTIONS: {
+      APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST: {
+        MODEL: ApprovedDrugClinicalCandidate,
+        DEFAULT_PAGE_SIZE: 5,
+        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES,
+        COLUMNS: [
+          {
+            'name_to_show': 'ChEMBL ID',
+            'comparator': 'molecule_chembl_id',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort',
+            'link_base': '/compound_report_card/$$$'
+          }, {
+            'name_to_show': 'Name',
+            'comparator': 'pref_name',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }, {
+            'name_to_show': 'Mechanism of Action',
+            'comparator': 'mechanism_of_action',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }, {
+            'name_to_show': 'Max Phase',
+            'comparator': 'max_phase',
+            'sort_disabled': false,
+            'is_sorting': 0,
+            'sort_class': 'fa-sort'
+          }, {
+            'name_to_show': 'References',
+            'comparator': 'references',
+            'sort_disabled': true,
+            'is_sorting': 0
+          }
+        ]
+      }
     }
   }
 });

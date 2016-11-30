@@ -3,7 +3,7 @@ var ApprovedDrugClinicalCandidateList;
 
 ApprovedDrugClinicalCandidateList = PaginatedCollection.extend(DownloadModelOrCollectionExt).extend({
   model: ApprovedDrugClinicalCandidate,
-  set_chembl_id: function(chembl_id) {
+  setURL: function(chembl_id) {
     return this.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id;
   },
   fetch: function() {

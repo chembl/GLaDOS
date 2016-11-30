@@ -13,9 +13,8 @@ TargetReportCardApp = (function() {
     target = new Target({
       target_chembl_id: GlobalVariables.CHEMBL_ID
     });
-    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList;
-    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + GlobalVariables.CHEMBL_ID;
-    +'&order_by=molecule_chembl_id&limit=1000';
+    appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList();
+    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID);
     targetRelations = new TargetRelationList;
     targetRelations.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=target_chembl_id&limit=1000';
     new TargetNameAndClassificationView({
@@ -84,8 +83,8 @@ TargetReportCardApp = (function() {
   TargetReportCardApp.initApprovedDrugsClinicalCandidates = function() {
     var appDrugsClinCandsList;
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded();
-    appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList;
-    appDrugsClinCandsList.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&order_by=molecule_chembl_id&limit=1000';
+    appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList();
+    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID);
     new ApprovedDrugsClinicalCandidatesView({
       collection: appDrugsClinCandsList,
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')

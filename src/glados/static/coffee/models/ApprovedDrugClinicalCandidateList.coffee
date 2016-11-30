@@ -2,7 +2,7 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend(DownloadModelOrCo
 
   model: ApprovedDrugClinicalCandidate
 
-  set_chembl_id: (chembl_id) ->
+  setURL: (chembl_id) ->
     @url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
 
   fetch: ->
@@ -19,7 +19,6 @@ ApprovedDrugClinicalCandidateList = PaginatedCollection.extend(DownloadModelOrCo
 
       console.log('error')
       this_collection.trigger('error')
-
     )
 
     base_url2 = Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in='
