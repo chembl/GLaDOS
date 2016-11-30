@@ -1,6 +1,6 @@
 describe "Target Relations", ->
-  targetRels = new TargetRelationList
-  targetRels.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + 'CHEMBL3559691'+ '&order_by=target_chembl_id&limit=1000'
+  targetRels = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
+  targetRels.initURL 'CHEMBL3559691'
 
   beforeAll (done) ->
     targetRels.fetch()
