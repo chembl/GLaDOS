@@ -9,7 +9,7 @@ class DocumentSearchByTermsApp
     GlobalVariables.SEARCH_TERM_DECODED = decodeURI GlobalVariables.SEARCH_TERM
 
     docsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDocumentsFromTermsList()
-    docsList.initUrl(GlobalVariables.SEARCH_TERM)
+    docsList.initURL(GlobalVariables.SEARCH_TERM)
 
     docResView = new DocumentsFromTermsView
       collection: docsList
