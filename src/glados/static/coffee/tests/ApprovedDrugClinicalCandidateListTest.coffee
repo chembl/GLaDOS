@@ -1,7 +1,7 @@
 describe "Approved Drug and Clinical Candidate List", ->
 
-  appDrugsClinCandsList = new ApprovedDrugClinicalCandidateList
-  appDrugsClinCandsList.set_chembl_id 'CHEMBL2364670'
+  appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+  appDrugsClinCandsList.initURL 'CHEMBL2364670'
 
   beforeAll (done) ->
 

@@ -177,7 +177,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate
-        DEFAULT_PAGE_SIZE: 5
+        DEFAULT_PAGE_SIZE: 10
         AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES
         COLUMNS: [
           {

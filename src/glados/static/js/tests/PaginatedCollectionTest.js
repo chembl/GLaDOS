@@ -4,7 +4,7 @@ describe("Paginated Collection", function() {
   var assert_chembl_ids;
   describe("A 3 elements collection", function() {
     var appDrugCCList, dataSmall;
-    appDrugCCList = new ApprovedDrugClinicalCandidateList;
+    appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList();
     dataSmall = [
       {
         "action_type": "INHIBITOR",
@@ -61,7 +61,7 @@ describe("Paginated Collection", function() {
     });
     ({
       afterAll: function() {
-        appDrugCCList = new ApprovedDrugClinicalCandidateList;
+        appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList();
         return appDrugCCList.reset(dataSmall);
       }
     });
@@ -1566,7 +1566,7 @@ describe("Paginated Collection", function() {
         "pref_name": "FLUOCINOLONE ACETONIDE"
       }
     ];
-    appDrugCCList = new ApprovedDrugClinicalCandidateList;
+    appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList();
     beforeAll(function() {
       return appDrugCCList.reset(dataBig);
     });
