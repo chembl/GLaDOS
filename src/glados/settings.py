@@ -162,6 +162,8 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV != RunEnvs.PROD
+
 # ----------------------------------------------------------------------------------------------------------------------
 # File Compression (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/

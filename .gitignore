@@ -24,6 +24,10 @@ var/
 .installed.cfg
 *.egg
 
+# Coffeescript and scss generated files
+src/glados/static/js/coffee-gen/*
+src/glados/static/css/scss-gen/*
+
 # STATIC_ROOT CACHE
 src/glados/static_root/*
 \!.gitkeep!
