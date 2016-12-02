@@ -37,6 +37,24 @@ glados.useNameSpace('glados.models.paginatedCollections', {
       });
       return new wsPagCollection;
     },
+    getNewClientSideWSCollectionFor: function(collectionSettings) {
+      var collection;
+      collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection.extend({
+        model: collectionSettings.MODEL,
+        initialize: function() {
+          this.meta = {
+            base_url: collectionSettings.BASE_URL,
+            page_size: collectionSettings.DEFAULT_PAGE_SIZE,
+            available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES,
+            current_page: 1,
+            to_show: [],
+            columns: collectionSettings.COLUMNS
+          };
+          return this.on('reset', this.resetMeta, this);
+        }
+      });
+      return new collection;
+    },
     getNewCompoundResultsList: function() {
       return this.getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND);
     },
@@ -56,7 +74,7 @@ glados.useNameSpace('glados.models.paginatedCollections', {
     getNewDocumentsFromTermsList: function() {
       var list;
       list = this.getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST);
-      list.initUrl = function(term) {
+      list.initURL = function(term) {
         this.baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score';
         this.setMeta('base_url', this.baseUrl, true);
         return this.initialiseUrl();
@@ -99,6 +117,107 @@ glados.useNameSpace('glados.models.paginatedCollections', {
         });
         return getDocuments.fail(function() {
           return console.log('ERROR!');
+        });
+      };
+      return list;
+    },
+    getNewApprovedDrugsClinicalCandidatesList: function() {
+      var list;
+      list = this.getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST);
+      list.initURL = function(chembl_id) {
+        return this.url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id;
+      };
+      list.fetch = function() {
+        var base_url2, drug_mechanisms, getDrugMechanisms, this_collection;
+        this_collection = this;
+        drug_mechanisms = {};
+        getDrugMechanisms = $.getJSON(this.url, function(data) {
+          return drug_mechanisms = data.mechanisms;
+        });
+        getDrugMechanisms.fail(function() {
+          console.log('error');
+          return this_collection.trigger('error');
+        });
+        base_url2 = Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in=';
+        return getDrugMechanisms.done(function() {
+          var dm, getMoleculesInfo, getMoleculesInfoUrl, molecules_list;
+          molecules_list = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = drug_mechanisms.length; _i < _len; _i++) {
+              dm = drug_mechanisms[_i];
+              _results.push(dm.molecule_chembl_id);
+            }
+            return _results;
+          })()).join(',');
+          getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000';
+          getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, function(data) {
+            var i, mol, molecules, _i, _len;
+            molecules = data.molecules;
+            i = 0;
+            for (_i = 0, _len = molecules.length; _i < _len; _i++) {
+              mol = molecules[_i];
+              drug_mechanisms[i].max_phase = mol.max_phase;
+              drug_mechanisms[i].pref_name = mol.pref_name;
+              i++;
+            }
+            return this_collection.reset(drug_mechanisms);
+          });
+          return getMoleculesInfo.fail(function() {
+            return console.log('failed2');
+          });
+        });
+      };
+      return list;
+    },
+    getNewTargetRelationsList: function() {
+      var list;
+      list = this.getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST);
+      list.initURL = function(chembl_id) {
+        return this.url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000';
+      };
+      list.fetch = function() {
+        var base_url2, getTargetRelations, target_relations, this_collection;
+        this_collection = this;
+        target_relations = {};
+        getTargetRelations = $.getJSON(this.url, function(data) {
+          return target_relations = data.target_relations;
+        });
+        getTargetRelations.fail(function() {
+          console.log('error');
+          return this_collection.trigger('error');
+        });
+        base_url2 = Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in=';
+        return getTargetRelations.done(function() {
+          var getTargetsInfo, getTargetssInfoUrl, t, targets_list;
+          targets_list = ((function() {
+            var _i, _len, _results;
+            _results = [];
+            for (_i = 0, _len = target_relations.length; _i < _len; _i++) {
+              t = target_relations[_i];
+              _results.push(t.target_chembl_id);
+            }
+            return _results;
+          })()).join(',');
+          getTargetssInfoUrl = base_url2 + targets_list + '&order_by=target_chembl_id&limit=1000';
+          getTargetsInfo = $.getJSON(getTargetssInfoUrl, function(data) {
+            var i, targ, targets, _i, _len;
+            targets = data.targets;
+            i = 0;
+            for (_i = 0, _len = targets.length; _i < _len; _i++) {
+              targ = targets[_i];
+              if (targ.target_chembl_id !== target_relations[i].target_chembl_id) {
+                i++;
+              }
+              target_relations[i].pref_name = targ.pref_name;
+              target_relations[i].target_type = targ.target_type;
+              i++;
+            }
+            return this_collection.reset(target_relations);
+          });
+          return getTargetsInfo.fail(function() {
+            return console.log('failed2');
+          });
         });
       };
       return list;
