@@ -24,11 +24,11 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   renderImage: ->
     if @model.get('structure_type') == 'NONE'
-      img_url = '/static/img/structure_not_available.png'
+      img_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
     else if @model.get('structure_type') == 'SEQ'
-      img_url = '/static/img/protein_structure.png'
+      img_url = glados.Settings.STATIC_URL+'img/protein_structure.png'
     else
-      img_url = Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + '.svg'
+      img_url = glados.Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + '.svg'
 
     img = $(@el).find('#Bck-COMP_IMG')
     img.load $.proxy(@showCardContent, @)
@@ -37,13 +37,13 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
     # not_available is when the compound has no structure to show.
     # not_found is when there was an error loading the image
     img.error ->
-      img.attr('src', '/static/img/structure_not_found.png')
+      img.attr('src', glados.Settings.STATIC_URL+'img/structure_not_found.png')
 
     img.attr('src', img_url)
 
 
   initDownloadButtons: ->
-    img_url = Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id')
+    img_url = glados.Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id')
     $('.CNC-download-png').attr('href', img_url + '.png')
     $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
 
@@ -54,7 +54,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
     # If the image strcuture can't be shown, don't activate the zoom modal.
     img = $(@el).find('#Bck-COMP_IMG')
-    if img.attr('src').indexOf('/static/') > -1
+    if img.attr('src').indexOf(glados.Settings.STATIC_URL+'') > -1
       $('#CNC-IMG-Options-Zoom, #CNC-IMG-Options-Zoom-small').remove()
       return
 
@@ -70,7 +70,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       $('#Bck-Comp-Img-zoom-preloader').hide()
       $(@).show()
 
-    img.attr('src', Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
+    img.attr('src', glados.Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + @getParamsFromSwitches())
     img.attr('alt', 'Structure of ' + @model.get('molecule_chembl_id'))
 
     $(@el).find('#Bck-Renderer-Switch, #Bck-Format-Switch, #Bck-Coordinates-Switch').click @handleImgSwitch(@)
@@ -88,7 +88,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       img = $(parentView.el).find('#Bck-Comp-Img-zoom')
       $('#Bck-Comp-Img-zoom-preloader').show()
       img.hide()
-      img.attr('src', Settings.WS_BASE_URL + 'image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
+      img.attr('src', glados.Settings.WS_BASE_URL + 'image/' + parentView.model.get('molecule_chembl_id') + parentView.getParamsFromSwitches())
 
 
 

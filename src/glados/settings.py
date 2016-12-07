@@ -87,6 +87,7 @@ TEMPLATES = [
         'django.template.context_processors.request',
         'django.contrib.auth.context_processors.auth',
         'django.contrib.messages.context_processors.messages',
+        'glados.settings_context.glados_settings_context_processor',
       ],
       'debug': DEBUG,
     },
@@ -141,9 +142,11 @@ USE_L10N = True
 USE_TZ = True
 
 # ----------------------------------------------------------------------------------------------------------------------
-# STATIC FILES (CSS, JavaScript, Images)
+# STATIC FILES (CSS, JavaScript, Images) and URL's
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # ----------------------------------------------------------------------------------------------------------------------
+
+USE_X_FORWARDED_HOST = True
 
 STATIC_URL = '/static/'
 
@@ -155,7 +158,7 @@ STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # other finders..
     'compressor.finders.CompressorFinder',
 )

@@ -8,7 +8,7 @@ class CompoundReportCardApp
 
     compound = new Compound({molecule_chembl_id: GlobalVariables.CHEMBL_ID})
     mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
+    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
 
     new CompoundNameClassificationView
@@ -112,7 +112,7 @@ class CompoundReportCardApp
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
     mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID;
+    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID;
     new CompoundMechanismsOfActionView
       collection: mechanismOfActionList
       el: $('#MechOfActCard')
@@ -158,7 +158,7 @@ class CompoundReportCardApp
 
     compoundList.original_compound = member_compound
     compoundList.origin = 'molecule_forms'
-    compoundList.url = Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
+    compoundList.url = glados.Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
     return compoundList
 
 

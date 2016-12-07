@@ -17,9 +17,10 @@
 
 <body>
 
+{% load static %}
 <div class="marvin-search-fullscreen row">
 
-  <iframe id="sketch" src="/static/marvinjs/editor.html"
+  <iframe id="sketch" src="{% static 'marvinjs/editor.html' %}"
           style="overflow: hidden; width: 100%; min-height: 100%; border: 1px solid darkgray;"></iframe>
 
 </div>
@@ -75,13 +76,7 @@
 <!-- - - - - - - - - - - - - - - - - - - - -->
 
 <!-- common imports for all templates -->
-{% compress js %}
-
-{% block common_js %}
 {% include "glados/base/js_imports_for_all.html" %}
-{% endblock %}
-
-{% endcompress %}
 
 <!-- inline javascript -->
 {% compress js %}

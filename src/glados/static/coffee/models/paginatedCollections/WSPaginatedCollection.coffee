@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginatedCollections'
+glados.useNameSpace 'glados.models.paginatedCollections',
 
   # --------------------------------------------------------------------------------------------------------------------
   # This class implements the pagination, sorting and searching for a collection using the Web Services

@@ -152,7 +152,31 @@ def wizard_step_json(request, step_id):
   :return: A json response with the information of the first wizard step
   """
 
-  lorem_ipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nulla sed nibh rutrum porta. In ultricies scelerisque lacinia. Nulla vulputate consectetur tempor. Morbi odio enim, faucibus eget tristique sit amet, tempus sed risus. Ut in libero sit amet arcu egestas fringilla id id ligula. Proin posuere sem a tempus volutpat. Quisque varius mauris in nisi condimentum efficitur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed accumsan, neque in mattis placerat, ligula velit rutrum velit, non porta massa neque eu lectus. Duis dictum malesuada eros eget dignissim. Quisque ultricies dolor felis, id scelerisque justo congue ut. Donec venenatis suscipit nulla in aliquam. Sed sit amet nisl et orci pellentesque suscipit sed feugiat eros. Donec ullamcorper magna ut justo egestas, vitae tristique velit convallis. Ut viverra eleifend felis, quis elementum lacus fringilla a. Integer at elit elit. Nullam commodo vitae orci eget sollicitudin. Fusce semper volutpat est, ut bibendum lorem ultrices sed. Ut molestie risus pellentesque, vulputate tortor eget, fermentum neque. Sed quis viverra sem. Cras cursus laoreet lorem eu rutrum. Donec eros mauris, tincidunt ac maximus sed, venenatis vitae dui. Aliquam quis elit tempor, blandit quam sed, rutrum sapien. Phasellus mattis ligula sit amet lacinia vulputate. Integer sapien libero, varius eget pharetra ut, viverra a massa. Fusce gravida sodales tellus sed malesuada. In in commodo lorem, posuere venenatis lorem. Fusce eu iaculis enim. Curabitur enim eros, rutrum id neque in, feugiat iaculis risus. Curabitur in elementum risus. Fusce eu venenatis diam, vitae convallis est. Phasellus in tellus vel augue imperdiet rhoncus vitae a odio. Fusce lorem enim, gravida vitae sollicitudin eget, faucibus eget felis. Sed vel orci quam. Donec ac placerat est, quis tincidunt diam. Fusce suscipit ante neque, consectetur sollicitudin enim hendrerit quis. Sed eu hendrerit nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque tellus ipsum, congue ut congue non, convallis at neque. Curabitur vel vestibulum tellus. Integer auctor ipsum vel magna molestie accumsan. Vivamus vitae sapien eu arcu congue elementum in vel turpis. In sollicitudin ex sodales enim lobortis, eu vulputate est tempor. Aenean lectus quam, vestibulum at maximus ut, interdum et odio.'
+  lorem_ipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nulla sed nibh rutrum porta. ' \
+                'In ultricies scelerisque lacinia. Nulla vulputate consectetur tempor. Morbi odio enim, faucibus ' \
+                'eget tristique sit amet, tempus sed risus. Ut in libero sit amet arcu egestas fringilla id id ' \
+                'ligula. Proin posuere sem a tempus volutpat. Quisque varius mauris in nisi condimentum efficitur. ' \
+                'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed ' \
+                'accumsan, neque in mattis placerat, ligula velit rutrum velit, non porta massa neque eu lectus. ' \
+                'Duis dictum malesuada eros eget dignissim. Quisque ultricies dolor felis, id scelerisque justo ' \
+                'congue ut. Donec venenatis suscipit nulla in aliquam. Sed sit amet nisl et orci pellentesque ' \
+                'suscipit sed feugiat eros. Donec ullamcorper magna ut justo egestas, vitae tristique velit ' \
+                'convallis. Ut viverra eleifend felis, quis elementum lacus fringilla a. Integer at elit elit. ' \
+                'Nullam commodo vitae orci eget sollicitudin. Fusce semper volutpat est, ut bibendum lorem ultrices ' \
+                'sed. Ut molestie risus pellentesque, vulputate tortor eget, fermentum neque. Sed quis viverra sem. ' \
+                'Cras cursus laoreet lorem eu rutrum. Donec eros mauris, tincidunt ac maximus sed, venenatis vitae ' \
+                'dui. Aliquam quis elit tempor, blandit quam sed, rutrum sapien. Phasellus mattis ligula sit amet ' \
+                'lacinia vulputate. Integer sapien libero, varius eget pharetra ut, viverra a massa. Fusce gravida ' \
+                'sodales tellus sed malesuada. In in commodo lorem, posuere venenatis lorem. Fusce eu iaculis enim. ' \
+                'Curabitur enim eros, rutrum id neque in, feugiat iaculis risus. Curabitur in elementum risus. ' \
+                'Fusce eu venenatis diam, vitae convallis est. Phasellus in tellus vel augue imperdiet rhoncus vitae ' \
+                'a odio. Fusce lorem enim, gravida vitae sollicitudin eget, faucibus eget felis. Sed vel orci quam. ' \
+                'Donec ac placerat est, quis tincidunt diam. Fusce suscipit ante neque, consectetur sollicitudin ' \
+                'enim hendrerit quis. Sed eu hendrerit nisi. Cum sociis natoque penatibus et magnis dis parturient ' \
+                'montes, nascetur ridiculus mus. Pellentesque tellus ipsum, congue ut congue non, convallis at ' \
+                'neque. Curabitur vel vestibulum tellus. Integer auctor ipsum vel magna molestie accumsan. Vivamus ' \
+                'vitae sapien eu arcu congue elementum in vel turpis. In sollicitudin ex sodales enim lobortis, eu ' \
+                'vulputate est tempor. Aenean lectus quam, vestibulum at maximus ut, interdum et odio.'
 
   data = {
 
@@ -164,7 +188,7 @@ def wizard_step_json(request, step_id):
        'link': 'select_db_engine', 'type': 'icon', 'is_default': 'no'},
       {'title': 'RDF', 'icon': 'fa-sitemap', 'description': 'Download the ChEMBL-RDF.', 'link': 'select_db_engine',
        'type': 'icon', 'is_default': 'no'},
-      {'title': 'UniChem', 'icon': None, 'image': '/static/img/logo_unichem.png',
+      {'title': 'UniChem', 'icon': None, 'image': settings.STATIC_URL+'img/logo_unichem.png',
        'description': 'Data dumps from UniChem.', 'link': 'select_db_engine', 'type': 'image', 'is_default': 'no'},
       {'title': 'Patents', 'icon': 'fa-book', 'description': 'Patent compound exports.', 'link': 'select_db_engine',
        'type': 'icon', 'is_default': 'no'},
@@ -184,13 +208,13 @@ def wizard_step_json(request, step_id):
 
     'title': 'Select a Database Engine',
     'options': [
-      {'title': 'PostgreSQL', 'icon': None, 'image': '/static/img/logo_postgresql.png', 'description': '', 'link': '',
+      {'title': 'PostgreSQL', 'icon': None, 'image': settings.STATIC_URL+'img/logo_postgresql.png', 'description': '', 'link': '',
        'type': 'image', 'is_default': 'yes'},
-      {'title': 'Oracle', 'icon': None, 'image': '/static/img/logo_oracle.png', 'description': '',
+      {'title': 'Oracle', 'icon': None, 'image': settings.STATIC_URL+'img/logo_oracle.png', 'description': '',
        'link': 'select_oracle_version', 'type': 'image', 'is_default': 'no'},
-      {'title': 'MySQL', 'icon': None, 'image': '/static/img/logo_mysql.png', 'description': '', 'link': '',
+      {'title': 'MySQL', 'icon': None, 'image': settings.STATIC_URL+'img/logo_mysql.png', 'description': '', 'link': '',
        'type': 'image', 'is_default': 'no'},
-      {'title': 'SQLite', 'icon': None, 'image': '/static/img/logo_sqlite.gif', 'description': '', 'link': '',
+      {'title': 'SQLite', 'icon': None, 'image': settings.STATIC_URL+'img/logo_sqlite.gif', 'description': '', 'link': '',
        'type': 'image', 'is_default': 'no'},
     ],
     'right_option': {'title': 'Browse FTP', 'link': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/', 'type': 'bottom'},

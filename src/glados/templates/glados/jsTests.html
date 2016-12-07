@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Javascript Tests for ChEMBL</title>
-
+  {% load static %}
   {% include "glados/base/css_imports_for_all.html" %}
 
-  <link rel="shortcut icon" type="image/png" href="/static/css/jasmine/jasmine_favicon.png">
-  <link rel="stylesheet" type="text/css" href="/static/css/jasmine/jasmine.css">
+  <link rel="shortcut icon" type="image/png" href="{% static 'css/jasmine/jasmine_favicon.png' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jasmine/jasmine.css' %}">
 
 
   {% include "glados/base/js_imports_for_all.html" %}
 
-  <script type="text/javascript" src="/static/js/api/jasmine/jasmine.js"></script>
-  <script type="text/javascript" src="/static/js/api/jasmine/jasmine-html.js"></script>
-  <script type="text/javascript" src="/static/js/api/jasmine/boot.js"></script>
+  <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine-html.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/api/jasmine/boot.js' %}"></script>
   <script type="text/javascript">
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
     jasmine.getEnv().defaultTimeoutInterval = 15000;
   </script>
-  <script type="text/javascript" src="/static/js/tests/TargetHierarchyTreeTest.js"></script>
-  <script type="text/javascript" src="/static/js/tests/TargetTest.js"></script>
-  <script type="text/javascript" src="/static/js/tests/TargetRelationsTest.js"></script>
-  <script type="text/javascript" src="/static/js/tests/ApprovedDrugClinicalCandidateListTest.js"></script>
-  <script type="text/javascript" src="/static/js/tests/PaginatedCollectionTest.js"></script>
-  <script type="text/javascript" src="/static/js/tests/DownloadsTest.js"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetHierarchyTreeTest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetTest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetRelationsTest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ApprovedDrugClinicalCandidateListTest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollectionTest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/DownloadsTest.js' %}"></script>
 
 </head>
 

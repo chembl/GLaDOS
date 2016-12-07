@@ -16,7 +16,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
       @showCardContent()
       @firstTimeRender = false
-      _.delay($.proxy(@render, @), Settings.RESPONSIVE_REPAINT_WAIT * 5)
+      _.delay($.proxy(@render, @), glados.Settings.RESPONSIVE_REPAINT_WAIT * 5)
       return
 
     $description = $(@el).find('.card-description')
@@ -111,7 +111,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     getColourFor = d3.scale.linear()
       .domain([minFontSize, maxFontSize])
       .interpolate(d3.interpolateHcl)
-      .range([d3.rgb(Settings.VISUALISATION_TEAL_MIN), d3.rgb(Settings.VISUALISATION_TEAL_MAX)])
+      .range([d3.rgb(glados.Settings.VISUALISATION_TEAL_MIN), d3.rgb(glados.Settings.VISUALISATION_TEAL_MAX)])
 
     #rescale values
     for wordVal in wordList
@@ -127,7 +127,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         getColourFor fontSize
       rotateRatio: 0.0
       classes: 'wordcloud-word'
-      backgroundColor: Settings.VISUALISATION_CARD_GREY
+      backgroundColor: glados.Settings.VISUALISATION_CARD_GREY
 
     canvasElem = document.getElementById(elemID)
     WordCloud(canvasElem, config)

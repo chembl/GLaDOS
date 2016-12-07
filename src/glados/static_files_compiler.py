@@ -3,24 +3,21 @@ import os
 import re
 import glados
 from concurrent import futures
-
 import scss
 import coffeescript
 
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 COFFEE_PATH = os.path.join(GLADOS_ROOT, 'static/coffee')
-COFFEE_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/js')
-# COFFEE_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/js/coffee-gen')
+COFFEE_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/js/coffee-gen')
+
+
 def compile_coffee_bare(file_path):
-    return coffeescript.compile_file(file_path,bare=True)
+    return coffeescript.compile_file(file_path, bare=True)
 
 COFFEE_COMPILE_FUNC = compile_coffee_bare
 
-
-
 SCSS_PATH = os.path.join(GLADOS_ROOT, 'static/scss')
-SCSS_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/css')
-# SCSS_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/css/scss-gen')
+SCSS_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/css/scss-gen')
 SCSS_COMPILE_FUNC = scss.Compiler().compile
 
 
@@ -78,8 +75,12 @@ class StaticFilesCompiler(object):
             tpe.shutdown(wait=True)
             print(time.time()-t_ini)
 
-comp = StaticFilesCompiler(COFFEE_COMPILE_FUNC, COFFEE_PATH, COFFEE_GEN_PATH, 'js')
-comp.compile_all()
 
-comp = StaticFilesCompiler(SCSS_COMPILE_FUNC, SCSS_PATH, SCSS_GEN_PATH, '.css', exclude_regex_str="^_.*")
-comp.compile_all()
+def compile_coffee():
+    comp = StaticFilesCompiler(COFFEE_COMPILE_FUNC, COFFEE_PATH, COFFEE_GEN_PATH, 'js')
+    comp.compile_all()
+
+
+def compile_scss():
+    comp = StaticFilesCompiler(SCSS_COMPILE_FUNC, SCSS_PATH, SCSS_GEN_PATH, '.css', exclude_regex_str="^_.*")
+    comp.compile_all()

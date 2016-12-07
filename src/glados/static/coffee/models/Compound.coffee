@@ -1,7 +1,7 @@
 Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   initialize: ->
-    @url = Settings.WS_BASE_URL + 'molecule/' + @get('molecule_chembl_id') + '.json'
+    @url = glados.Settings.WS_BASE_URL + 'molecule/' + @get('molecule_chembl_id') + '.json'
 
   parse: (response) ->
 

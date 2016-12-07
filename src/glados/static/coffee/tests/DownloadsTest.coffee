@@ -9,12 +9,12 @@ describe "Downloads", ->
     it 'A. generates a correct json file', (done) ->
 
       fileStrContent = aspirin.downloadJSON('DownloadTestA.json')
-      testJSONFile(fileStrContent, '/static/testData/DownloadTestA.json', done)
+      testJSONFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestA.json', done)
 
     it 'B. generates a correct csv file', (done) ->
 
       fileStrContent = aspirin.downloadCSV('DownloadTestB.csv')
-      testTextFile(fileStrContent, '/static/testData/DownloadTestB.csv', done)
+      testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestB.csv', done)
 
   describe "A model with custom download object", ->
 
@@ -24,12 +24,12 @@ describe "Downloads", ->
     it 'D. generates a correct json file', (done) ->
 
       fileStrContent = aspirin.downloadJSON('DownloadTestD.json', downloadParserFunction)
-      testJSONFile(fileStrContent, '/static/testData/DownloadTestD.json', done)
+      testJSONFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestD.json', done)
 
     it 'E. generates a correct csv file', (done) ->
 
       fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction)
-      testTextFile(fileStrContent, '/static/testData/DownloadTestE.csv', done)
+      testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestE.csv', done)
 
   testTextFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->

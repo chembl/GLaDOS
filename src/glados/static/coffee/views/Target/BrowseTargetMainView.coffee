@@ -34,11 +34,11 @@ BrowseTargetMainView = Backbone.View.extend
 
     url = switch btnCheckedID
       when 'radio-proteinTargetTree'
-        @model.url = 'static/data/protein_target_tree.json'
+        @model.url = glados.Settings.STATIC_URL+'data/protein_target_tree.json'
       when 'radio-taxonomyTree'
-        @model.url = 'static/data/taxonomy_target_tree.json'
+        @model.url = glados.Settings.STATIC_URL+'data/taxonomy_target_tree.json'
       when 'radio-geneOntologyTree'
-        @model.url = 'static/data/gene_ontology_tree.json'
+        @model.url = glados.Settings.STATIC_URL+'data/gene_ontology_tree.json'
 
     @listView.showPaginatedViewPreloader()
     @circlesView.showPaginatedViewPreloader()

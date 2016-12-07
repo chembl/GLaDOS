@@ -130,9 +130,10 @@ $dropdown-item-height: 50px !default;
 
 
 /* 9. Fonts
+ * NOTE: SCSS generated files are located under <static>/css/scss-gen
    ========================================================================== */
 
-$roboto-font-path: "../font/roboto/" !default;
+$roboto-font-path: "../../font/roboto/" !default;
 
 
 /* 10. Forms

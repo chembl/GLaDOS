@@ -21,7 +21,7 @@
 
                     </span>
     </div>
-
+    {% load static %}
     <!-- Expandable menu bottom -->
     <div id="CNC-expandable-bottom" class='CNC-expandable-content-bottom hide-on-small-only'>
 
@@ -48,7 +48,7 @@
         </a>
 
         <a class="hoverable waves-effect waves-light teal tooltipped BCK-trigger-download-XLS" data-tooltip="Download XLSX">
-          <p><img src="/static/img/download_xlsx.png" class="responsive-img"></p>
+          <p><img src="{% static 'img/download_xlsx.png' %}" class="responsive-img"></p>
         </a>
 
       </div>
@@ -125,7 +125,7 @@
         </a>
 
         <a class="hoverable waves-effect waves-light teal tooltipped BCK-trigger-download-XLS" data-tooltip="Download XLSX">
-          <p><img src="/static/img/download_xlsx.png" class="responsive-img"></p>
+          <p><img src="{% static 'img/download_xlsx.png' %}" class="responsive-img"></p>
         </a>
 
       </div>

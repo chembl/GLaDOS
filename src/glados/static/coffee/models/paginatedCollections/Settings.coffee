@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginatedCollections'
+glados.useNameSpace 'glados.models.paginatedCollections',
   # --------------------------------------------------------------------------------------------------------------------
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
             'is_sorting': 0
             'sort_class': 'fa-sort'
             'link_base': '/compound_report_card/$$$'
-            'image_base_url': Settings.WS_BASE_URL + 'image/$$$.svg'
+            'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
           }
           {
             'name_to_show': 'Molecule Type'
@@ -85,9 +85,9 @@ glados.useNameSpace 'glados.models.paginatedCollections'
     WS_COLLECTIONS:
       DRUG_LIST:
         MODEL: Drug
-        BASE_URL: Settings.WS_BASE_URL + 'molecule.json'
-        DEFAULT_PAGE_SIZE: Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES
+        BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: [
           {
             'name_to_show': 'ChEMBL ID'
@@ -96,7 +96,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
             'is_sorting': 0
             'sort_class': 'fa-sort'
             'link_base': '/compound_report_card/$$$'
-            'image_base_url': Settings.WS_BASE_URL + 'image/$$$.svg'
+            'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
           }
           {
             'name_to_show': 'Molecule Type'
@@ -130,8 +130,8 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       DOCS_BY_TERM_LIST:
         MODEL: Document
         BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: [
           {
             'name_to_show': 'CHEMBL_ID'
@@ -178,7 +178,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate
         DEFAULT_PAGE_SIZE: 10
-        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: [
           {
             'name_to_show': 'ChEMBL ID'
@@ -220,7 +220,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
         DEFAULT_PAGE_SIZE: 5
-        AVAILABLE_PAGE_SIZES: Settings.TABLE_PAGE_SIZES
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: [
           {
             'name_to_show': 'ChEMBL ID'

@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginatedCollections'
+glados.useNameSpace 'glados.models.paginatedCollections',
   # --------------------------------------------------------------------------------------------------------------------
   # Factory for Elastic Search Generic Paginated Results List Collection
   # Creates a paginated collection based on:
@@ -17,8 +17,8 @@ glados.useNameSpace 'glados.models.paginatedCollections'
 
           @meta =
             index: esIndexSettings.PATH
-            page_size: Settings.CARD_PAGE_SIZES[0]
-            available_page_sizes: Settings.CARD_PAGE_SIZES
+            page_size: glados.Settings.CARD_PAGE_SIZES[0]
+            available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []
             columns: esIndexSettings.COLUMNS
@@ -92,7 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
 
       list.initURL = (term) ->
 
-        @baseUrl = Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
+        @baseUrl = glados.Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
         @setMeta('base_url', @baseUrl, true)
         @initialiseUrl()
 
@@ -145,7 +145,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
 
       list.initURL = (chembl_id) ->
-        @url = Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
+        @url = glados.Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
 
       list.fetch = ->
 
@@ -164,7 +164,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
 
         )
 
-        base_url2 = Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in='
+        base_url2 = glados.Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in='
         # after I have the drug mechanisms now I get the molecules
         getDrugMechanisms.done(() ->
 
@@ -207,7 +207,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
       list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
       list.initURL = (chembl_id) ->
 
-        @url = Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
+        @url = glados.Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
 
       list.fetch = ->
 
@@ -226,7 +226,7 @@ glados.useNameSpace 'glados.models.paginatedCollections'
 
         )
 
-        base_url2 = Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in='
+        base_url2 = glados.Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in='
 
         # after I have the target relations now I get the actual targets
         getTargetRelations.done(() ->

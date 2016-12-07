@@ -33,6 +33,7 @@ CompoundFeaturesView = CardView.extend
 
     property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
       active_class: @getMolFeatureDetails(property, 0)
+      static_path: glados.Settings.STATIC_URL
       filename: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
       tooltip_position: @getMolFeatureDetails(property, 3)

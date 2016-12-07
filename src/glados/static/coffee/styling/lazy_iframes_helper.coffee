@@ -5,7 +5,7 @@ class LazyIFramesHelper
   # I need data-if-id and data-if-src, for example:
   #
   #  data-if-id="if_database_schema"
-  #  data-if-src="/static/chembl_schema_diagrams/src/schema.html
+  #  data-if-src=glados.Settings.STATIC_URL+"chembl_schema_diagrams/src/schema.html
   #
   # I also need that the element is of the class iframe-lazy-loader
   #

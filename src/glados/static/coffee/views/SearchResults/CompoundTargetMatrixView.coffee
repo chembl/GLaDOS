@@ -310,7 +310,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       scale = d3.scale.linear()
         .domain(colourDomain)
-        .range(["#FFFFFF", Settings.EMBL_GREEN])
+        .range(["#FFFFFF", glados.Settings.EMBL_GREEN])
 
       return scale
 
