@@ -53,6 +53,7 @@ setup(
         'twitter',
         'python3-memcached',
         'selenium==2.52',
+        'CoffeeScript',
         'pyScss',
         'watchdog',
         'whitenoise'

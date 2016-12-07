@@ -4,5 +4,6 @@ selenium==2.52
 twitter
 python3-memcached
 pyScss
+CoffeeScript
 watchdog
 whitenoise
