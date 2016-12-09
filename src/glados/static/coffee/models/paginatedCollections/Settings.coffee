@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------
   Settings:
-    ES_BASE_URL: 'http://localhost:9200'
+    ES_BASE_URL: 'http://ves-hx-5e.ebi.ac.uk:9200'
     ES_INDEXES:
       COMPOUND:
         PATH: '/chembl_molecule'
