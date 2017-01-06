@@ -28,7 +28,7 @@ class URLProcessor
   @isAtSearchResultsPage = ->
 
     url_path = window.location.pathname;
-    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match
       return true
@@ -38,15 +38,15 @@ class URLProcessor
   @isAtAdvancedSearchResultsPage = ->
 
     url_path = window.location.pathname;
-    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
-    return match and match.length > 2 and match[1] == '/'+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
+    return match and match.length > 2 and match[1] == '/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
 
   # gets the query string for the search results page
   @getSearchQueryString = ->
 
     url_path = window.location.pathname;
-    pattern = Settings.SEARCH_RESULT_URL_REGEXP
+    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match and match.length > 2
       return match[2]

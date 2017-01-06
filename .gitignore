@@ -24,9 +24,15 @@ var/
 .installed.cfg
 *.egg
 
+# Coffeescript and scss generated files
+src/glados/static/js/coffee-gen/*
+!src/glados/static/js/coffee-gen/.gitkeep
+src/glados/static/css/scss-gen/*
+!src/glados/static/css/scss-gen/.gitkeep
+
 # STATIC_ROOT CACHE
 src/glados/static_root/*
-\!.gitkeep!
+!src/glados/static_root/.gitkeep
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

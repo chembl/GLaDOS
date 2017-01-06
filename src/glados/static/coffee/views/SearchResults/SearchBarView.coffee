@@ -50,13 +50,14 @@ SearchBarView = Backbone.View.extend
     if @atResultsPage
       @searchModel.search()
     else
-      window.location.href = Settings.SEARCH_RESULTS_PAGE+"/"+@searchModel.get('queryString')
+      window.location.href = glados.Settings.SEARCH_RESULTS_PAGE+"/"+@searchModel.get('queryString')
 
   searchAdvanced: () ->
     if @atResultsPage
       @switchShowAdvanced()
     else
-      window.location.href = Settings.SEARCH_RESULTS_PAGE+"/"+Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+"/"+@searchModel.get('queryString')
+      window.location.href = glados.Settings.SEARCH_RESULTS_PAGE+"/"+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+
+              "/"+@searchModel.get('queryString')
 
   switchShowAdvanced: ->
     @showAdvanced = not @showAdvanced

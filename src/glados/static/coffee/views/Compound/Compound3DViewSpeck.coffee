@@ -35,13 +35,13 @@ Compound3DViewSpeck = Backbone.View.extend
     standardInchi = @model.get('molecule_structures')['standard_inchi']
     standardInchiB64 = window.btoa(standardInchi)
 
-    molUrl = Settings.BEAKER_BASE_URL + 'inchi2ctab/' + standardInchiB64
+    molUrl = glados.Settings.BEAKER_BASE_URL + 'inchi2ctab/' + standardInchiB64
 
     # from a ctab value it returns the base64 url to get the xyz
     getXYZURL = (data) ->
       url_and_data = {}
       # Don't add the last slash, you will get the "No 'Access-Control-Allow-Origin' header" issue
-      url_and_data.url = Settings.BEAKER_BASE_URL + 'ctab2xyz'
+      url_and_data.url = glados.Settings.BEAKER_BASE_URL + 'ctab2xyz'
       url_and_data.data = data
 
       return url_and_data

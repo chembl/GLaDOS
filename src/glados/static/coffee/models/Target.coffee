@@ -4,7 +4,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
 
   initialize: ->
     @on 'change', @getProteinTargetClassification, @
-    @url = Settings.WS_BASE_URL + 'target/' + @get('target_chembl_id') + '.json'
+    @url = glados.Settings.WS_BASE_URL + 'target/' + @get('target_chembl_id') + '.json'
 
   getProteinTargetClassification: ->
 
@@ -19,7 +19,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
       # step 1: I get the component id of each of the target components
       for comp in target_components
         component_id = comp['component_id']
-        comp_url = Settings.WS_BASE_URL + 'target_component/' + component_id + '.json'
+        comp_url = glados.Settings.WS_BASE_URL + 'target_component/' + component_id + '.json'
 
         # step 2: I request the details of the current component
         $.get(comp_url).done(
@@ -39,7 +39,7 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
                 # I don't have that protein classification, So I need to add it to the dictionary and make a
                 # call to get the details
                 prot_class_dict[prot_class_id] = ""
-                prot_class_url = Settings.WS_BASE_URL + 'protein_class/' + prot_class_id + '.json'
+                prot_class_url = glados.Settings.WS_BASE_URL + 'protein_class/' + prot_class_id + '.json'
 
 
                 $.get(prot_class_url).done(

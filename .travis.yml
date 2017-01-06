@@ -10,7 +10,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
   - python -m glados.manage migrate
   - python -m glados.manage runserver 8000 &
-  - sleep 3 # give Web server some time to bind to sockets, etc
+  - sleep 10 # give Web server some time to bind to sockets, etc
 script:
   - python setup.py test
 addons:

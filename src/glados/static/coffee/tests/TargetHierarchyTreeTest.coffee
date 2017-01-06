@@ -1,7 +1,7 @@
 describe "Target hierarchy tree", ->
   targetTree = TargetBrowserApp.initTargetHierarchyTree()
   #make sure url is the test url
-  targetTree.url = '/static/data/sample_target_tree.json'
+  targetTree.url = glados.Settings.STATIC_URL+'data/sample_target_tree.json'
 
   beforeAll (done) ->
     targetTree.fetch

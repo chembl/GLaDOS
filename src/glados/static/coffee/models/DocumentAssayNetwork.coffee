@@ -3,7 +3,7 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
   fetch: ->
     docChemblId = @get('document_chembl_id')
 
-    assaysUrl = Settings.WS_BASE_URL + 'assay.json?document_chembl_id=' + docChemblId + '&limit=1000'
+    assaysUrl = glados.Settings.WS_BASE_URL + 'assay.json?document_chembl_id=' + docChemblId + '&limit=1000'
 
     allAssays = {}
 
@@ -19,14 +19,14 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
 
         $.each newAssays, (index, newAssay) ->
           allAssays[newAssay.assay_chembl_id] = newAssay
-          currentActsUrl = Settings.WS_BASE_URL + 'activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000'
+          currentActsUrl = glados.Settings.WS_BASE_URL + 'activity.json?assay_chembl_id=' + newAssay.assay_chembl_id + '&limit=1000'
           activitiesListsRequested++
           triggerActivityRequest(currentActsUrl)
 
         nextUrl = response.page_meta.next
 
         if nextUrl?
-          triggerAssayRequest(Settings.WS_HOSTNAME + nextUrl)
+          triggerAssayRequest(glados.Settings.WS_HOSTNAME + nextUrl)
           # if there is no next I must have processed the last page
 
 
@@ -53,7 +53,7 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
         nextUrl = response.page_meta.next
 
         if nextUrl?
-          triggerActivityRequest(Settings.WS_HOSTNAME + nextUrl)
+          triggerActivityRequest(glados.Settings.WS_HOSTNAME + nextUrl)
         else
           activitiesListsReceived++
           checkIfAllInfoReady()

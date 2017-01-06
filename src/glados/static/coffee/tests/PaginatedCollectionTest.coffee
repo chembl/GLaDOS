@@ -215,7 +215,7 @@ describe "Paginated Collection", ->
     it "Sets the request data to get the 5th page", ->
 
       esList.setPage(5)
-      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search')
+      expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search')
 
       requestData = esList.getRequestData()
       expect(requestData['from']).toBe(0)
@@ -224,7 +224,7 @@ describe "Paginated Collection", ->
     it "Sets the request data to switch to 10 items per page", ->
 
       esList.resetPageSize(10)
-      expect(esList.getURL()).toBe('http://localhost:9200/chembl_molecule/_search')
+      expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search')
 
       requestData = esList.getRequestData()
       expect(requestData['from']).toBe(0)

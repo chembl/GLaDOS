@@ -1,3 +1,4 @@
+{% load static %}
 <div class="card teal lighten-5 z-depth-0">
 
   <div class="tabs-wrapper">
@@ -8,12 +9,12 @@
 
       <li class="tab">
         <a class="iframe-lazy-loader" data-if-id="if_database_schema"
-           data-if-src="/static/chembl_schema_diagrams/src/schema.html" href="#db_schema">Database Schema</a>
+           data-if-src="{% static 'chembl_schema_diagrams/src/schema.html' %}" href="#db_schema">Database Schema</a>
       </li>
 
       <li class="tab">
         <a class="iframe-lazy-loader" href="#ws_diagram" data-if-id="if_ws_diagram"
-           data-if-src="/static/chembl_schema_diagrams/src/ws.html">Web Services Diagram</a></li>
+           data-if-src="{% static 'chembl_schema_diagrams/src/ws.html' %}">Web Services Diagram</a></li>
       <li class="tab"><a href="#browse_targets">Browse Targets</a></li>
       <li class="tab"><a href="#browse_drugs">Browse Drugs</a></li>
     </ul>

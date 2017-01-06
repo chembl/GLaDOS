@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginatedCollections'
+glados.useNameSpace 'glados.models.paginatedCollections',
 
   # --------------------------------------------------------------------------------------------------------------------
   # This class implements the pagination, sorting and searching for a collection in ElasticSearch
@@ -41,10 +41,9 @@ glados.useNameSpace 'glados.models.paginatedCollections'
         size: @getMeta('page_size'),
         from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
         query:
-          multi_match:
+          query_string:
+            fields: ["*.std_analyzed", "*.eng_analyzed", "*.pref_name_analyzed", "*.keyword^10000"]
             query: @getMeta('search_term')
-            type: "best_fields",
-            fields: ['*.eng_analyzed', '*.keyword']
       }
 
     # builds the url to do the request

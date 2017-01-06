@@ -26,7 +26,7 @@ ResponsiviseViewExt =
       @render()
       @hideResponsiveViewPreloader()
 
-    debouncedRender = _.debounce($.proxy(reRender, @), Settings.RESPONSIVE_REPAINT_WAIT)
+    debouncedRender = _.debounce($.proxy(reRender, @), glados.Settings.RESPONSIVE_REPAINT_WAIT)
     updateViewProxy = $.proxy(@updateView, @, debouncedRender)
 
     $(window).resize ->
