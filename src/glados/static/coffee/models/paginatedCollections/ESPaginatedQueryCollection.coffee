@@ -42,7 +42,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
         query:
           query_string:
-            fields: ["*.std_analyzed", "*.eng_analyzed", "*.ngram_analyzed", "*.keyword^10000"]
+            fields: ["*.std_analyzed", "*.eng_analyzed", "*.pref_name_analyzed", "*.keyword^10000"]
             query: @getMeta('search_term')
       }
 
