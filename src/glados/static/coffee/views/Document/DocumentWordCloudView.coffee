@@ -16,7 +16,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
       @showCardContent()
       @firstTimeRender = false
-      _.delay($.proxy(@render, @), glados.Settings.RESPONSIVE_REPAINT_WAIT * 5)
+      _.delay($.proxy(@render, @), glados.Settings.RESPONSIVE_REPAINT_WAIT * 15)
       return
 
     $description = $(@el).find('.card-description')
@@ -28,6 +28,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     @initEmbedModal('word_cloud')
     @activateModals()
     @paintWordCloud()
+
+    $(@el).find('.instructions').removeClass('hide')
 
   paintWordCloud: ->
     elemID = @$vis_elem.attr('id')
