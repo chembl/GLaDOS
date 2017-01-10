@@ -7,31 +7,8 @@
 
 {% include "glados/SearchResultsParts/SearchBar.html" %}
 
-<div class="container main-container">
+<div class="container main-container" id="BCK-ESResultsLists">
 
-  <h2>
-    <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>
-  </h2>
-
-  <div id="BCK-CompoundSearchResults">
-
-    <h3>Compounds:</h3>
-
-    {% block comps_cards_pages %}
-      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-    {% endblock %}
-
-  </div>
-
-  <div id="BCK-DocSearchResults">
-
-    <h3>Documents:</h3>
-
-    {% block docs_cards_pages %}
-      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-    {% endblock %}
-
-  </div>
 </div>
 
 {% endblock %}

@@ -82,8 +82,9 @@ class StaticFilesCompiler(object):
             compiled_out_path = self.get_compiled_out_path(os.path.basename(event.src_path), compiled_dir_path)
             if compiled_out_path is not None:
                 print("COMPILING: {0}\nINTO: {1}\n...".format(event.src_path, compiled_out_path))
-                self.compile_and_save(event.src_path, compiled_out_path)
-                print("COMPILED: {0}".format(event.src_path))
+                success = self.compile_and_save(event.src_path, compiled_out_path)
+                if success:
+                    print("COMPILED: {0}".format(event.src_path))
 
     def start_watchers(self):
         self.observer.schedule(self.file_event_handler, self.src_path, recursive=True)
@@ -94,9 +95,11 @@ class StaticFilesCompiler(object):
             compile_result = self.compiler_function(file_in)
             with open(file_out, 'w') as file_out_i:
                 file_out_i.write(compile_result)
+            return True
         except Exception as e:
             print("WARNING: Failed to compile file: {0}".format(file_in))
             print(e)
+            return False
 
     def get_compiled_path(self, dir_path):
         rel_path = os.path.relpath(dir_path, self.src_path)
