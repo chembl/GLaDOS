@@ -108,7 +108,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         if maxFontSize < maxFontLimit
           break
         getFontSizeFor.range([minFont, maxFontSize])
-        console.log 'reset'
 
     getColourFor = d3.scale.linear()
       .domain([minFontSize, maxFontSize])
@@ -164,7 +163,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         outerWidth = $element.outerWidth()
 
         if termSize > outerWidth
-          console.log 'OVERFLOW!'
           $element.css('left', currentLeft * 0.3)
 
 
