@@ -268,4 +268,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewTargetComponentsList: ->
+
+      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
+
+      list.initURL = (chembl_id) ->
+
+        @url = glados.Settings.WS_DEV_BASE_URL + 'target/' + chembl_id + '.json'
+
+      list.parse = (response) ->
+
+        return response.target_components
+
+
+      return list
+
+
 
