@@ -22,7 +22,7 @@ Compound.COLUMNS_SETTINGS = {
       'is_sorting': 0
       'sort_class': 'fa-sort'
       'link_base': '/compound_report_card/$$$'
-      'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
+      'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg?engine=indigo'
     }
     {
       'name_to_show': 'Molecule Type'
