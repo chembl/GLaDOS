@@ -17,6 +17,7 @@ refer to its URL in your browser.</p>
 	<li>Web server</li>
 	<li>JChem Webservices (v14.7.21 or above) is optional (if you need <a href="dev/webservices.html">extended functionalities</a>)</li>
 </ul>
+<p>Please, consider that JChem Webservices (under version 15.10.26) requires Standardizer licence for the auto mapper functionality. From version 15.10.26 this web service is available with Marvin JS license.</p>
 
 <h3>Client side</h3>
 <ul>
@@ -26,8 +27,7 @@ refer to its URL in your browser.</p>
 <h2>License requirement</h2>
 <p>Marvin JS requires Marvin JS license. Consult with the sales team where you have to place the license file where your copy
 of Marvin JS package can access.</p>
-<p>Please, take care that JChem Webservices requires a separate license. Thus, you also setup a JChem Webservices for your site,
-you need JChem Webservices license too. Consult with its manual how to setup its license.</p>
+<p>JChem Webservices also accepts Marvin JS license, it is used by only Marvin JS. Consult with its manual how to setup its license.</p>
 
 <h2>Installation</h2>
 
@@ -53,8 +53,9 @@ to install both of them into the Tomcat Container. In this case, the web root ca
 <p>Marvin JS can communicate with other web service implementations that are compatible with the ChemAxon provided version.
 See the <a href="dev/webservices.html">required web service specifications</a></p>
 <ul>
-<li><a href="http://www.chemaxon.com/download/jchem-suite/#jcws">Download JChem Webservices</a> (v14.7.21 or above).<li>
-<li>Install the required web services under the same domain as the web server hosts.</li>
+<li><a href="http://www.chemaxon.com/download/jchem-suite/#jcws">Download ChemAxon JChem Webservices</a> (v14.7.21 or above).<li>
+<li>Install the required web services under the same domain as the web server hosts.<br/>
+Please consult with the appropriate installation guide of JChem Webservices. You can find the download link for the recommended webservice version on the Marvin JS download site.</li>
 <li>Marvin JS searches web services on the following URL: <code>/webservices2</code>.<br/> If your web service copy is available on a different URL,
 please, modify settings in Marvin JS.
 	<ul>
