@@ -69,11 +69,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Specific instantiation of paginated collections
     # ------------------------------------------------------------------------------------------------------------------
 
-    getNewCompoundResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND)
-
-    getNewDocumentResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT)
+    getAllESResultsListDict: () ->
+      res_lists_dict = {}
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+        res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
+      return res_lists_dict
 
     getNewDrugList: ->
       list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)

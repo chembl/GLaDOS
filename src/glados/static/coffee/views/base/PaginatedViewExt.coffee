@@ -18,8 +18,12 @@ PaginatedViewExt =
 
     $elem = $(@el).find('.BCK-items-container')
 
-    for i in [0..$elem.length - 1]
-      @sendDataToTemplate $($elem[i])
+    empty_list_message = "<h3>No records were found.</h3>"
+    if $elem.length > 0
+      for i in [0..$elem.length - 1]
+        @sendDataToTemplate $($elem[i])
+    else
+      $elem.html empty_list_message
 
   sendDataToTemplate: ($specificElem) ->
 
@@ -95,7 +99,7 @@ PaginatedViewExt =
 
     $elem.html Handlebars.compile(template.html())
       pages: pages
-      records_showing: first_record + '-' + last_page
+      records_showing: (first_record+1) + '-' + last_page
       total_records: @collection.getMeta('total_records')
       show_next_ellipsis: show_next_ellipsis
       show_previous_ellipsis: show_previous_ellipsis
@@ -265,6 +269,11 @@ PaginatedViewExt =
   hidePreloaderOnly: ->
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
     $preloaderCont.hide()
+
+  hideHeaderContainer: ->
+    $headerRow = $(@el).find('.BCK-header-container')
+    $headerRow.hide()
+
 
   #--------------------------------------------------------------------------------------
   # Infinite Browser

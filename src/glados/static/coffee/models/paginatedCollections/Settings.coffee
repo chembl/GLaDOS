@@ -6,82 +6,48 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     ES_BASE_URL: 'http://ves-hx-5e.ebi.ac.uk:9200'
     ES_INDEXES:
       COMPOUND:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESCompound'
+        LABEL: 'Compounds'
         PATH: '/chembl_molecule'
         MODEL: Compound
-        COLUMNS: [
-          {
-            'name_to_show': 'ChEMBL ID'
-            'comparator': 'molecule_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': '/compound_report_card/$$$'
-            'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
-          }
-          {
-            'name_to_show': 'Molecule Type'
-            'comparator': 'molecule_type'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Name'
-            'comparator': 'pref_name'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Max Phase'
-            'comparator': 'max_phase'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Dosed Ingredient:'
-            'comparator': 'dosed_ingredient'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-        ]
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      TARGET:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESTarget'
+        LABEL: 'Targets'
+        PATH:'/chembl_target'
+        MODEL: Target
+        COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      ASSAY:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESAssay'
+        LABEL: 'Assays'
+        PATH:'/chembl_assay'
+        MODEL: Assay
+        COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       DOCUMENT:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESDocument'
+        LABEL: 'Documents'
         PATH:'/chembl_document'
         MODEL: Document
-        COLUMNS: [
-          {
-            'name_to_show': 'CHEMBL_ID'
-            'comparator': 'document_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': '/document_report_card/$$$'
-          }
-          {
-            'name_to_show': 'Title'
-            'comparator': 'title'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'custom_field_template': '<i>{{val}}</i>'
-          }
-          {
-            'name_to_show': 'Authors'
-            'comparator': 'authors'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Year'
-            'comparator': 'year'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-        ]
+        COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      CELL_LINE:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESCellLine'
+        LABEL: 'Cells'
+        PATH:'/chembl_cell_line'
+        MODEL: CellLine
+        COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+# TODO: Tissue model is missing
+#      TISSUE:
+#        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+#        ID_NAME: 'ESTissue'
+#        LABEL: 'Tissues'
+#        PATH:'/chembl_tissue'
+#        MODEL: Tissue
+#        COLUMNS: Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
     WS_COLLECTIONS:
       DRUG_LIST:
         MODEL: Drug
@@ -281,3 +247,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'link_base': 'http://www.uniprot.org/uniprot/$$$'
           }
         ]
+
+# fills the KEY_NAME for the ES_INDEXES object
+for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+  val_i.KEY_NAME = key_i

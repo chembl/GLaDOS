@@ -24,3 +24,45 @@ Assay = Backbone.RelationalModel.extend
     parsed.target = data.target_chembl_id
 
     return parsed
+
+Assay.COLUMNS_SETTINGS = {
+  RESULTS_LIST_REPORT_CARD: [
+    {
+      'name_to_show': 'CHEMBL_ID'
+      'comparator': 'assay_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': '/assay_report_card/$$$'
+    }
+    {
+      'name_to_show': 'Strain'
+      'comparator': 'assay_strain'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'custom_field_template': '<i>{{val}}</i>'
+    }
+    {
+      'name_to_show': 'Description'
+      'comparator': 'description'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+    {
+      'name_to_show': 'Type'
+      'comparator': 'assay_type_description'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+    {
+      'name_to_show': 'Organism'
+      'comparator': 'assay_organism'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+  ]
+}
