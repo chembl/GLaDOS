@@ -7,7 +7,7 @@ class TargetReportCardTest(ReportCardTester):
   # --------------------------------------------------------------------------------------
 
   def test_target_report_card_scenario_1(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME*3)
 
     # --------------------------------------
     # Target Name and Classification
