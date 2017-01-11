@@ -58,14 +58,14 @@ class TargetReportCardApp
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    target = new Target
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+    targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
+    targetComponents.initURL GlobalVariables.CHEMBL_ID
 
     new TargetComponentsView
-      model: target
+      collection: targetComponents
       el: $('#TComponentsCard')
 
-    target.fetch()
+    targetComponents.fetch({reset: true})
 
   @initTargetRelations = ->
 
