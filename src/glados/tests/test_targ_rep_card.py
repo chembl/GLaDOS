@@ -7,7 +7,7 @@ class TargetReportCardTest(ReportCardTester):
   # --------------------------------------------------------------------------------------
 
   def test_target_report_card_scenario_1(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME*3)
 
     # --------------------------------------
     # Target Name and Classification
@@ -80,7 +80,7 @@ class TargetReportCardTest(ReportCardTester):
                        "DNA-directed RNA polymerase subunit beta' PROTEIN SUBUNIT P0A8T7",
                        'DNA-directed RNA polymerase subunit omega PROTEIN SUBUNIT P0A800']
 
-    components_table = self.browser.find_element_by_id('BCK-Components-large')
+    components_table = self.browser.find_element_by_id('BCK-TCompsTable-large')
     self.assert_table(components_table, texts_should_be)
 
     # --------------------------------------
@@ -126,7 +126,7 @@ class TargetReportCardTest(ReportCardTester):
     self.assertEqual(components_section.value_of_css_property('display'), 'none')
 
   def test_target_report_card_scenario_4(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME * 2)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME * 4)
 
     # Protein target classification
     # This one has 60 target components (the highest number in the database), and it only has 2 classifications

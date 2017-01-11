@@ -106,7 +106,7 @@ urlpatterns = [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CellReportCardParts/BasicInformationToEmbed.html")), ),
 
-  url(r'^tissue_report_card/$',
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
 
   url(r'^$', views.main_page, name='main'),
@@ -136,8 +136,16 @@ urlpatterns = [
       DirectTemplateView.as_view(template_name="glados/MainPageParts/DrugBrowserParts/browse_drugs_infinity.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
+  # Handlebars Templates
+  # --------------------------------------------------------------------------------------------------------------------
+
+  url(r'^templates/default_card_page_content.tmpl$',
+      DirectTemplateView.as_view(template_name='glados/base/PaginatedCollections/DefaultCardPageContent.html'), ),
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Search Results
   # --------------------------------------------------------------------------------------------------------------------
+
   url(r'^search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 

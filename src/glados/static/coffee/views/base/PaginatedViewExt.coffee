@@ -18,8 +18,15 @@ PaginatedViewExt =
 
     $elem = $(@el).find('.BCK-items-container')
 
-    for i in [0..$elem.length - 1]
-      @sendDataToTemplate $($elem[i])
+    if @collection.length > 0
+      for i in [0..$elem.length - 1]
+        @sendDataToTemplate $($elem[i])
+      @showFooterContainer()
+    else
+      @hideHeaderContainer()
+      @hideFooterContainer()
+      @hideContentContainer()
+      @showEmptyMessageContainer()
 
   sendDataToTemplate: ($specificElem) ->
 
@@ -95,7 +102,7 @@ PaginatedViewExt =
 
     $elem.html Handlebars.compile(template.html())
       pages: pages
-      records_showing: first_record + '-' + last_page
+      records_showing: (first_record+1) + '-' + last_page
       total_records: @collection.getMeta('total_records')
       show_next_ellipsis: show_next_ellipsis
       show_previous_ellipsis: show_previous_ellipsis
@@ -261,10 +268,41 @@ PaginatedViewExt =
 
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
+    @hideEmptyMessageContainer()
+    @showContentContainer()
 
   hidePreloaderOnly: ->
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
     $preloaderCont.hide()
+
+  hideHeaderContainer: ->
+    $headerRow = $(@el).find('.BCK-header-container')
+    $headerRow.hide()
+
+  hideFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.hide()
+
+  showFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.show()
+
+  hideContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.hide()
+
+  showContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.show()
+
+  hideEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.hide()
+
+  showEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.show()
+
 
   #--------------------------------------------------------------------------------------
   # Infinite Browser

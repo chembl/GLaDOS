@@ -16,7 +16,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
       @showCardContent()
       @firstTimeRender = false
-      _.delay($.proxy(@render, @), glados.Settings.RESPONSIVE_REPAINT_WAIT * 5)
+      _.delay($.proxy(@render, @), glados.Settings.RESPONSIVE_REPAINT_WAIT * 2)
       return
 
     $description = $(@el).find('.card-description')
@@ -28,6 +28,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     @initEmbedModal('word_cloud')
     @activateModals()
     @paintWordCloud()
+
+    $(@el).find('.instructions').removeClass('hide')
 
   paintWordCloud: ->
     elemID = @$vis_elem.attr('id')
@@ -106,7 +108,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         if maxFontSize < maxFontLimit
           break
         getFontSizeFor.range([minFont, maxFontSize])
-        console.log 'reset'
 
     getColourFor = d3.scale.linear()
       .domain([minFontSize, maxFontSize])
@@ -128,6 +129,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       rotateRatio: 0.0
       classes: 'wordcloud-word'
       backgroundColor: glados.Settings.VISUALISATION_CARD_GREY
+      shuffle: false
+      clearCanvas: true
 
     canvasElem = document.getElementById(elemID)
     WordCloud(canvasElem, config)
@@ -149,7 +152,23 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         termEncoded = decodeURIComponent $(@).text()
         window.open('/documents_with_same_terms/' + termEncoded, '_blank')
 
+      ).each( (index, item) ->
+
+        # make sure each element won't overlap that canvas
+        # the problem comes from the wordcloud2.js, this method seems to fix it.
+        $element = $(item)
+        currentLeft = parseFloat($element.css('left'))
+        fontSize = parseFloat($element.css('font-size'))
+        termSize = fontSize * K * $element.text().length
+        outerWidth = $element.outerWidth()
+
+        if termSize > outerWidth
+          $element.css('left', currentLeft * 0.3)
+
+
       )
+
+
 
 
 

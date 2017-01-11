@@ -18,90 +18,59 @@
 
 {% endblock %}
 
-{% block table %}
+{% block menu %}
 
-<div id="BCK-Components-large" data-hb-template="Handlebars-Target-Components-large">
+<div class="row">
 
-  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+  <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+
+  </div>
+
+  <div class="col offset-s3 s4">
+
+    <div class="input-field">
+      <input placeholder="Search" id="first_name" type="text" class="validate search">
+    </div>
+
+  </div>
 
 </div>
 
-{% verbatim %}
-<script id="Handlebars-Target-Components-large" type="text/x-handlebars-template">
+{% endblock %}
 
+{% block table %}
 
-  <table class="compact-table striped hide-on-small-only ebi-links">
+<table id="BCK-TCompsTable-large" class="BCK-items-container compact-table striped hide-on-small-only ebi-links"
+       data-hb-template="Handlebars-Common-Paginated-Row-large"
+       data-hb-header-template="Handlebars-Common-Paginated-Header-large">
 
-    <tr>
+  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-      <th>Component Description</th>
-      <th>Relationship</th>
-      <th>Accession</th>
-
-    </tr>
-
-    {{#each components}}
-
-    <tr>
-
-      <td>{{component_description}}</td>
-      <td>{{relationship}}</td>
-      <td class="Bck-Target-Component-Accession">
-        <a target="_blank"
-           {{#if this.accession}} href="http://www.uniprot.org/uniprot/{{this.accession}}"{{else}}{{/if}}>
-          {{#if this.accession}} {{this.accession}} {{else}} --- {{/if}}
-        </a>
-      </td>
-
-    </tr>
-
-    {{/each}}
-
-
-  </table>
-
-
-</script>
-
-{% endverbatim %}
+</table>
 
 {% endblock %}
 
 
 {% block collection %}
 
+<ul class="BCK-items-container collection hide-on-med-and-up" data-hb-template="Handlebars-Common-Pagination-LI">
 
-<div id="BCK-Components-small" data-hb-template="Handlebars-Target-Components-small">
-  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+</ul>
+
+{% endblock %}
+
+
+{% block pagination %}
+
+
+<div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
 </div>
-
-{% verbatim %}
-
-<script id="Handlebars-Target-Components-small" type="text/x-handlebars-template">
-
-  <ul class="collection hide-on-med-and-up">
-
-    {{#each components}}
-    <li class="collection-item">
-
-      <p>
-
-        <b>Component Description:</b> Fatty-acid amide hydrolase 1<br>
-        <b>Relationship:</b> SINGLE PROTEIN<br>
-        <b>Accession:</b> <a href="http://www.uniprot.org/uniprot/{{this.accession}}">{{this.accession}}</a><br>
-
-      </p>
-
-    </li>
-    {{/each}}
-
-  </ul>
-
-
-</script>
-
-{% endverbatim %}
-
 
 {% endblock %}
