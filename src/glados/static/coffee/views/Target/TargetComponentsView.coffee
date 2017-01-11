@@ -2,38 +2,35 @@
 # from the target report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-TargetComponentsView = CardView.extend(DownloadViewExt).extend
+TargetComponentsView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt).extend
 
   initialize: ->
-    @model.on 'change', @.render, @
-    @model.on 'error', @.showCompoundErrorCard, @
+    @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
+
+  events: ->
+    # aahhh!!! >(
+    return _.extend {}, PaginatedViewExt.events, DownloadViewExt.events
 
   render: ->
 
-    if @model.get('target_components').length == 0
+    if @collection.size() == 0 and !@collection.getMeta('force_show')
       $('#TargetComponents').hide()
-      $('#TargetComponents').next().hide()
-      $(@el).hide()
       return
 
-    @fillTemplate('BCK-Components-large')
-    @fillTemplate('BCK-Components-small')
+    @clearContentContainer()
 
-    # until here, all the visible content has been rendered.
+    @fillTemplates()
+    @fillPaginators()
+
     @showCardContent()
+    @showPaginatedViewContent()
     @initEmbedModal('components')
     @activateModals()
 
-  fillTemplate: (div_id) ->
+    @fillPageSelectors()
+    @activateSelectors()
 
-    div = $(@el).find('#' + div_id)
-    template = $('#' + div.attr('data-hb-template'))
-
-    div.html Handlebars.compile(template.html())
-      component_description: @model.get('component_description')
-      relationship: @model.get('relationship')
-      components: @model.get('target_components')
 
   # -----------------------------------------------------------------
   # ---- Downloads

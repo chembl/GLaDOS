@@ -219,6 +219,35 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           }
         ]
 
+      TARGET_COMPONENTS_LIST:
+        MODEL: TargetComponent
+        DEFAULT_PAGE_SIZE: 5
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: [
+          {
+            'name_to_show': 'Description'
+            'comparator': 'component_description'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+          {
+            'name_to_show': 'Relationship'
+            'comparator': 'relationship'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+          {
+            'name_to_show': 'Accession'
+            'comparator': 'accession'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+            'link_base': 'http://www.uniprot.org/uniprot/$$$'
+          }
+        ]
+
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
