@@ -201,12 +201,12 @@ describe "Paginated Collection", ->
   describe "An elasticsearch collection", ->
 
     esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[ \
-      glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
+      glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
     ]
 
     beforeEach (done) ->
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[ \
-        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
+        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
       done()
 
