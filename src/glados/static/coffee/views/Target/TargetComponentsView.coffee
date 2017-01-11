@@ -15,7 +15,7 @@ TargetComponentsView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt)
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-      $('#ApprovedDrugsAndClinicalCandidates').hide()
+      $('#TargetComponents').hide()
       return
 
     @clearContentContainer()
