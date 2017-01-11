@@ -75,12 +75,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
 
-    getNewCompoundResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND)
-
-    getNewDocumentResultsList: () ->
-      return @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT)
-
     getNewDrugList: ->
       list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
       list.parse = (data) ->
