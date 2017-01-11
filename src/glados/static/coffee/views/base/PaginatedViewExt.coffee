@@ -18,12 +18,15 @@ PaginatedViewExt =
 
     $elem = $(@el).find('.BCK-items-container')
 
-    empty_list_message = "<h3>No records were found.</h3>"
-    if $elem.length > 0
+    if @collection.length > 0
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i])
+      @showFooterContainer()
     else
-      $elem.html empty_list_message
+      @hideHeaderContainer()
+      @hideFooterContainer()
+      @hideContentContainer()
+      @showEmptyMessageContainer()
 
   sendDataToTemplate: ($specificElem) ->
 
@@ -265,6 +268,8 @@ PaginatedViewExt =
 
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
+    @hideEmptyMessageContainer()
+    @showContentContainer()
 
   hidePreloaderOnly: ->
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
@@ -273,6 +278,30 @@ PaginatedViewExt =
   hideHeaderContainer: ->
     $headerRow = $(@el).find('.BCK-header-container')
     $headerRow.hide()
+
+  hideFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.hide()
+
+  showFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.show()
+
+  hideContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.hide()
+
+  showContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.show()
+
+  hideEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.hide()
+
+  showEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.show()
 
 
   #--------------------------------------------------------------------------------------
