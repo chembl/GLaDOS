@@ -6,30 +6,35 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     ES_BASE_URL: 'http://ves-hx-5e.ebi.ac.uk:9200'
     ES_INDEXES:
       COMPOUND:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       TARGET:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
         PATH:'/chembl_target'
         MODEL: Target
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       ASSAY:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
         LABEL: 'Assays'
         PATH:'/chembl_assay'
         MODEL: Assay
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       DOCUMENT:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
         LABEL: 'Documents'
         PATH:'/chembl_document'
         MODEL: Document
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       CELL_LINE:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
         LABEL: 'Cells'
         PATH:'/chembl_cell_line'
@@ -37,6 +42,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
 # TODO: Tissue model is missing
 #      TISSUE:
+#        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
 #        ID_NAME: 'ESTissue'
 #        LABEL: 'Tissues'
 #        PATH:'/chembl_tissue'
@@ -212,3 +218,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_class': 'fa-sort'
           }
         ]
+
+# fills the KEY_NAME for the ES_INDEXES object
+for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+  val_i.KEY_NAME = key_i
