@@ -163,15 +163,27 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     currentColourProperty = config.initial_colouring
 
-    margin =
-      top: 150
-      right: 0
-      bottom: 10
-      left: 90
+    if GlobalVariables['IS_EMBEDED']
+
+      margin =
+        top: 120
+        right: 0
+        bottom: 10
+        left: 0
+    else
+
+      margin =
+        top: 150
+        right: 0
+        bottom: 10
+        left: 90
 
     elemWidth = $(@el).width()
     width = 0.8 * elemWidth
     height = width
+
+    console.log 'Element IS: ', $(@el).attr('id')
+    console.log 'WIDTH IS: ', width
 
     mainContainer = d3.select('#' + @$vis_elem.attr('id'))
 

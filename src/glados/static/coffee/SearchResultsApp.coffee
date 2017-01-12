@@ -71,4 +71,5 @@ class SearchResultsApp
     new CompoundTargetMatrixView
       model: ctm
       el: $('#CompTargetMatrix')
-      ctm.fetch()
+
+    ctm.fetch()
