@@ -23,6 +23,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     $template = $('#' + $description.attr('data-hb-template'))
     $description.html Handlebars.compile( $template.html() )
       document_chembl_id: @model.get('document_chembl_id')
+      report_card_url:  @model.get('report_card_url')
 
     @showCardContent()
     @initEmbedModal('word_cloud')

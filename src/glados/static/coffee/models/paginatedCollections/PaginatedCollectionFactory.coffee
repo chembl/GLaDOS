@@ -242,7 +242,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             i = 0
             for targ in targets
 
-              # ATENTION:
+              # TODO:
               # this is because the dev server is returning less values, this needs to be checked
               if targ.target_chembl_id != target_relations[i].target_chembl_id
                 i++;
