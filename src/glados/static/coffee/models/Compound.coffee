@@ -11,6 +11,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     else
       response.ro5 = false
 
+    # Computed Image and report card URL's for Compounds
     response.structure_image = false
     if response.structure_type == 'NONE'
       response.image_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
@@ -22,7 +23,12 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           + '.png?engine=indigo'
       response.structure_image = true
 
+    response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
+
     return response;
+
+Compound.get_report_card_url = (chembl_id)->
+  return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
 
 
 Compound.COLUMNS_SETTINGS = {
@@ -33,7 +39,7 @@ Compound.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      'link_base': '/compound_report_card/$$$'
+      'link_base': 'report_card_url'
       'image_base_url': 'image_url'
     }
     {

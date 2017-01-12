@@ -50,14 +50,14 @@ class CompoundReportCardTest(ReportCardTester):
     alternate_forms_cards = alternate_forms_row.find_elements_by_class_name('card')
 
     actual_srcs = [card.find_element_by_tag_name('img').get_attribute('src') for card in alternate_forms_cards]
-    test_srcs = ['https://www.ebi.ac.uk/chembl/api/data/image/' + chembl_id + '.svg' for chembl_id in chembl_ids_list]
+    test_srcs = ['https://www.ebi.ac.uk/chembl/api/data/image/' + chembl_id + '.svg?engine=indigo' for chembl_id in chembl_ids_list]
     self.assertEqual(sorted(actual_srcs), sorted(test_srcs))
 
     print('---')
     actual_links = [card.find_element_by_class_name('chembl-card-title').find_element_by_tag_name('a') for card in
                     alternate_forms_cards]
     actual_links_hrefs = [link.get_attribute('href') for link in actual_links]
-    test_links_hrefs = ['http://glados-ebitest.rhcloud.com/compound_report_card/' + chembl_id + '/' for chembl_id in
+    test_links_hrefs = ['/compound_report_card/' + chembl_id + '/' for chembl_id in
                         chembl_ids_list]
     self.assertEqual(sorted(actual_links_hrefs), sorted(test_links_hrefs))
 
@@ -78,7 +78,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # Normal structure image
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg')
+    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo')
 
     # Normal compound name
     name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
@@ -365,13 +365,13 @@ class CompoundReportCardTest(ReportCardTester):
       'CNC-download-png')
 
     for button in download_png_buttons:
-      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.png')
+      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.png?engine=indigo')
 
     download_svg_buttons = self.browser.find_elements_by_class_name(
       'CNC-download-svg')
 
     for button in download_svg_buttons:
-      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.svg')
+      self.assertEqual(button.get_attribute('href'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL55.svg?engine=indigo')
 
     # --------------------------------------
     # Molecule Features

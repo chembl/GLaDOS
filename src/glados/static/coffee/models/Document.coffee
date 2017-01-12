@@ -3,8 +3,15 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute:'document_chembl_id'
 
   initialize: ->
-
     @url = glados.Settings.WS_BASE_URL + 'document/' + @get('document_chembl_id') + '.json'
+
+  parse: (data) ->
+    parsed = data
+    parsed.report_card_url = Document.get_report_card_url(parsed.document_chembl_id)
+    return parsed;
+
+Document.get_report_card_url = (chembl_id)->
+  return glados.Settings.GLADOS_BASE_PATH_REL+'document_report_card/'+chembl_id
 
 Document.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
@@ -14,7 +21,7 @@ Document.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      'link_base': '/document_report_card/$$$'
+      'link_base': 'report_card_url'
     }
     {
       'name_to_show': 'Title'

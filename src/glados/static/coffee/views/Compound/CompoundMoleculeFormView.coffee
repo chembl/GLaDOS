@@ -15,6 +15,8 @@ CompoundMoleculeFormView = Backbone.View.extend
 
     $(this.el).html Handlebars.compile($('#Handlebars-Compound-AlternateFormCard').html())
       molecule_chembl_id: @model.get('molecule_chembl_id')
+      report_card_url: @model.get('report_card_url')
+      image_url: @model.get('image_url')
       colour: colour
 
     return @
