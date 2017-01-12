@@ -291,7 +291,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # define a minimum size so the rows are not to small,
     # if there are too many rows, the range of the scale will be extended.
-    minSideSize = 30
+    minSideSize = 40
     initialRowHeight = height / numRows
     initialColWidth = width / numColumns
 
