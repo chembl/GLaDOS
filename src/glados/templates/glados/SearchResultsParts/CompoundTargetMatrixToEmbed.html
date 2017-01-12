@@ -1,0 +1,26 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compounds vs Targets Matrix{% endblock %}
+
+{% block content %}
+
+
+<div class="card grey lighten-5">
+  <div class="card-content">
+
+    {% block matrix %}
+    {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+    {% endblock %}
+
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+
+SearchResultsApp.initCompoundTargetMatrix();
+
+{% endblock %}
