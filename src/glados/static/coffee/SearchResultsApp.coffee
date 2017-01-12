@@ -44,3 +44,31 @@ class SearchResultsApp
         cache: true
         success: success_cb
     })
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Graph Views
+  # --------------------------------------------------------------------------------------------------------------------
+
+  # this initialises the view that shows the compound vs target matrix view
+  @initCompTargMatrixView = (topLevelElem) ->
+
+    compTargMatrixView = new CompoundTargetMatrixView
+      el: topLevelElem
+
+    return compTargMatrixView
+
+  # this initialises the view that shows the compound results graph view
+  @initCompResultsGraphView = (topLevelElem) ->
+
+    compResGraphView = new CompoundResultsGraphView
+      el: topLevelElem
+
+    return compResGraphView
+
+  @initCompoundTargetMatrix = ->
+
+    ctm = new CompoundTargetMatrix
+    new CompoundTargetMatrixView
+      model: ctm
+      el: $('#CompTargetMatrix')
+      ctm.fetch()

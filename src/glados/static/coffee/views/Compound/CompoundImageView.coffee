@@ -23,12 +23,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
 
   renderImage: ->
-    if @model.get('structure_type') == 'NONE'
-      img_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
-    else if @model.get('structure_type') == 'SEQ'
-      img_url = glados.Settings.STATIC_URL+'img/protein_structure.png'
-    else
-      img_url = glados.Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id') + '.svg'
+    img_url = @model.get('image_url')
 
     img = $(@el).find('#Bck-COMP_IMG')
     img.load $.proxy(@showCardContent, @)
@@ -43,12 +38,20 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
 
   initDownloadButtons: ->
-    img_url = glados.Settings.WS_BASE_URL + 'image/' + @model.get('molecule_chembl_id')
-    $('.CNC-download-png').attr('href', img_url + '.png')
-    $('.CNC-download-png').attr('download', @model.get('molecule_chembl_id') + '.png')
+    $dwn_png = $('.CNC-download-png')
+    $dwn_svg = $('.CNC-download-svg')
+    if @model.get('structure_image')
+      $dwn_png.attr('href', @model.get('image_url_png'))
+      $dwn_png.attr('download', @model.get('molecule_chembl_id') + '.png')
 
-    $('.CNC-download-svg').attr('href', img_url + '.svg')
-    $('.CNC-download-svg').attr('download', @model.get('molecule_chembl_id') + '.svg')
+      $dwn_svg.attr('href', @model.get('image_url'))
+      $dwn_svg.attr('download', @model.get('molecule_chembl_id') + '.svg')
+    else
+      disable_func = (e) -> e.preventDefault()
+      $dwn_png.click(disable_func)
+      $dwn_png.attr('class', 'CNC-download-png disabled')
+      $dwn_svg.click(disable_func)
+      $dwn_svg.attr('class', 'CNC-download-svg disabled')
 
   initZoomModal: ->
 
