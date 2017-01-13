@@ -44,3 +44,16 @@ class SearchResultsApp
         cache: true
         success: success_cb
     })
+
+
+  @initSubstructureSearchResults = () ->
+
+    GlobalVariables.SEARCH_TERM = URLProcessor.getSubstructureSearchQueryString()
+    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
+    resultsList.initURL GlobalVariables.SEARCH_TERM
+
+    subResView = new WSInfinityView
+      collection: resultsList
+      el: $('#BCK-SubstructureSearchResults')
+
+    resultsList.fetch()

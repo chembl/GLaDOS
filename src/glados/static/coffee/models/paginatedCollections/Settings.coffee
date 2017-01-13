@@ -93,6 +93,51 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_class': 'fa-sort'
           }
         ]
+      SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST:
+        MODEL: Compound
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        #COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: [
+          {
+            'name_to_show': 'ChEMBL ID'
+            'comparator': 'molecule_chembl_id'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+            'link_base': '/compound_report_card/$$$'
+            'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
+          }
+          {
+            'name_to_show': 'Molecule Type'
+            'comparator': 'molecule_type'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+          {
+            'name_to_show': 'Name'
+            'comparator': 'pref_name'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+          {
+            'name_to_show': 'Max Phase'
+            'comparator': 'max_phase'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+          {
+            'name_to_show': 'Dosed Ingredient:'
+            'comparator': 'dosed_ingredient'
+            'sort_disabled': false
+            'is_sorting': 0
+            'sort_class': 'fa-sort'
+          }
+        ]
       DOCS_BY_TERM_LIST:
         MODEL: Document
         BASE_URL: 'base_url is set by initURL'

@@ -51,3 +51,10 @@ class URLProcessor
     if match and match.length > 2
       return match[2]
     return ""
+
+  # gets the query string for the substructure search results page
+  @getSubstructureSearchQueryString = ->
+
+    pathname = window.location.pathname
+    pathnameParts = pathname.split('/')
+    return pathnameParts[pathnameParts.length - 1]
