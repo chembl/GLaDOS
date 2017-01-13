@@ -57,9 +57,14 @@ class CompoundReportCardTest(ReportCardTester):
     actual_links = [card.find_element_by_class_name('chembl-card-title').find_element_by_tag_name('a') for card in
                     alternate_forms_cards]
     actual_links_hrefs = [link.get_attribute('href') for link in actual_links]
-    test_links_hrefs = ['/compound_report_card/' + chembl_id + '/' for chembl_id in
-                        chembl_ids_list]
-    self.assertEqual(sorted(actual_links_hrefs), sorted(test_links_hrefs))
+    for chembl_id_i in chembl_ids_list:
+      found = False
+      for link_i in actual_links_hrefs:
+        report_card_url_i = '/compound_report_card/' + chembl_id_i
+        if report_card_url_i in link_i:
+          found = True
+          break
+      self.assertTrue(found, msg="CHEMBLID:{0} was not found in the alternate forms links!".format(chembl_id_i))
 
     actual_links_texts = [link.text for link in actual_links]
     self.assertEqual(sorted(actual_links_texts), sorted(chembl_ids_list))
