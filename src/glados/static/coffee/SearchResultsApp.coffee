@@ -57,3 +57,19 @@ class SearchResultsApp
       el: $('#BCK-SubstructureSearchResults')
 
     resultsList.fetch()
+
+  @initSimilaritySearchResults = () ->
+
+    GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
+    GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
+
+    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
+
+    resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
+
+    subResView = new WSInfinityView
+      collection: resultsList
+      el: $('#BCK-SimilaritySearchResults')
+
+    resultsList.fetch()
+
