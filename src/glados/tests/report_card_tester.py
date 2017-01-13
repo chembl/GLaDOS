@@ -8,7 +8,7 @@ import sys
 class ReportCardTester(unittest.TestCase):
 
   HOST = 'http://127.0.0.1:8000'
-  SLEEP_TIME = 60
+  SLEEP_TIME = 10
 
   IMPLICIT_WAIT = 1
 

@@ -56,8 +56,7 @@ setup(
         'CoffeeScript',
         'pyScss',
         'watchdog',
-        'whitenoise',
-        'tblib'
+        'whitenoise'
     ],
     package_data=package_data_desc,
     include_package_data=True,

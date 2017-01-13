@@ -7,4 +7,3 @@ pyScss
 CoffeeScript
 watchdog
 whitenoise
-tblib
