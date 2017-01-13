@@ -92,7 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.initURL = (term) ->
 
-        @baseUrl = glados.Settings.WS_BASE_URL + 'substructure/' + term + '.json'
+        @baseUrl = glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL + term + '.json'
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @initialiseUrl()

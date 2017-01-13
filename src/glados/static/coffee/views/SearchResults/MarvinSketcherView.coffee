@@ -35,10 +35,6 @@ MarvinSketcherView = Backbone.View.extend
 
     $(@el).find('.messages-to-user').text('Processing structure...')
 
-    console.log 'MARVIN SEARCH!'
-
-    console.log 'supportedFormats: ', @marvinSketcherInstance.getSupportedFormats()
-
     thisView = @
     @marvinSketcherInstance.exportStructure('mol').then ((data) ->
       console.log 'structure received: ', data
@@ -52,7 +48,8 @@ MarvinSketcherView = Backbone.View.extend
 
         $(thisView.el).find('.messages-to-user').text('Searching...')
 
-        console.log( "Data Loaded: " + smiles );
+        searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+        window.location.href =  searchUrl
 
       )
 

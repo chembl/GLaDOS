@@ -84,9 +84,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.DEFAULT_CARD_PAGE_CONTENT_TEMPLATE_PATH = glados.Settings.GLADOS_BASE_PATH_REL+
           'templates/default_card_page_content.tmpl'
 
-  glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'substructure_search_results'
-  glados.Settings.SUBSTRUCTURE_RESULT_URL_REGEXP = new RegExp('^'+glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE +
-      '/(.*?)$')
+  glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'substructure_search_results/'
+  glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure/'
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
