@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------
   Settings:
-    ES_BASE_URL: 'http://ves-hx-5e.ebi.ac.uk:9200'
+    ES_BASE_URL: 'http://wwwdev.ebi.ac.uk/chembl/glados-es'
     ES_INDEXES:
       COMPOUND:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
