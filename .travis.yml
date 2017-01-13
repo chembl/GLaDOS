@@ -12,7 +12,7 @@ before_script:
   - python -m glados.manage runserver 8000 &
   - sleep 10 # give Web server some time to bind to sockets, etc
 script:
-  - sh ./run_tests_no_install.sh
+  - "./run_tests_no_install.sh"
 addons:
   apt:
     packages: memcached
