@@ -21,18 +21,37 @@
   </div>
 
   <!-- editor buttons -->
-  <div class="container">
 
-    <div class="row">
+  <div class="row">
+    <div class="col s5">
 
-      <div class="col offset-s4 s4 center-align">
-        <a class="waves-effect waves-light btn-chembl teal marvin-search-btn"><i class="icon icon-functional"
-                                                               data-icon="1"></i>Search</a>
+      <div class="input-field col s12">
+        <select>
+          <option value="1" selected>Substructure</option>
+          <option value="2">Similarity</option>
+        </select>
+        <label>Type of search</label>
       </div>
 
     </div>
+    <div class="col s6 offset-s1">
+      <div class="input-field">
+        <textarea id="marvin-insert-data" class="materialize-textarea"></textarea>
+        <label for="marvin-insert-data">Insert SMILES:</label>
+      </div>
+      <a class="marvin-insert-data-btn">Insert into editor</a> <span class="marvin-insert-info"></span>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col offset-s4 s4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal marvin-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Search</a>
+    </div>
 
   </div>
+
 
   <!-- messages to the user -->
 
@@ -41,8 +60,8 @@
       <div class="messages-to-user center-align"></div>
     </div>
   </div>
+
+
 </div>
-
-
 
 
