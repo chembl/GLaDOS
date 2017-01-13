@@ -24,6 +24,7 @@ MarvinSketcherView = Backbone.View.extend
   events:
     'click .marvin-search-btn': 'triggerMarvinSearch'
     'click .marvin-insert-data-btn': 'insertDataIntoEditor'
+    'change .select-type-of-search': 'selectSearchType'
 
   # --------------------------------------------------------------------------------------------------------------------
   # Sketcher Handling
@@ -82,3 +83,13 @@ MarvinSketcherView = Backbone.View.extend
       thisView.marvinSketcherInstance.importStructure('mol', mol).then ->
         $infoElem.text('Structure added!')
     )
+
+  selectSearchType: (event) ->
+
+    selector = $(event.currentTarget)
+    searchType = selector.val()
+
+    if searchType == ''
+      return
+
+    console.log 'search Type: ', searchType

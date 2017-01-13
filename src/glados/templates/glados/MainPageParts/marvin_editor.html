@@ -25,13 +25,25 @@
   <div class="row">
     <div class="col s5">
 
+      <p>
       <div class="input-field col s12">
-        <select>
-          <option value="1" selected>Substructure</option>
-          <option value="2">Similarity</option>
+        <select class="select-type-of-search">
+          <option value="substructure" selected>Substructure</option>
+          <option value="similarity">Similarity</option>
         </select>
         <label>Type of search</label>
       </div>
+      </p>
+
+      <p class="center-align">
+        >= 70%
+      </p>
+
+
+      <p class="range-field">
+        <input type="range" id="test5" min="70" max="100"/>
+      </p>
+
 
     </div>
     <div class="col s6 offset-s1">
