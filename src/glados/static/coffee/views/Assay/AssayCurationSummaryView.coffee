@@ -33,5 +33,5 @@ AssayCurationSummaryView = CardView.extend
       target_type: target.get('target_type')
       pref_name: target.get('pref_name')
       target_chembl_id: target.get('target_chembl_id')
-
+      report_card_url: target.get('report_card_url')
 

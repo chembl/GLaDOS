@@ -314,7 +314,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("font-size", "10px")
       .text((d) -> d[labelerProperty])
       .attr('cursor', 'pointer')
-      .on("click", (d) -> window.open("/compound_report_card/" + d.molecule_chembl_id) )
+      .on("click", (d) -> window.open(Compound.get_report_card_url(d.molecule_chembl_id)) )
 
     calculateTextsCoordinates()
     # --------------------------------------

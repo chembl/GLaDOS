@@ -1,3 +1,2 @@
-ApprovedDrugClinicalCandidate = Backbone.Model.extend
-
+ApprovedDrugClinicalCandidate = Compound.extend
   idAttribute: "molecule_chembl_id"

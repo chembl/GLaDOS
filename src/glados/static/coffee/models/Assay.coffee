@@ -15,15 +15,17 @@ Assay = Backbone.RelationalModel.extend
   }]
 
   fetchRelatedModels: ->
-
     @getAsync('target')
 
   parse: (data) ->
-
     parsed = data
     parsed.target = data.target_chembl_id
 
-    return parsed
+    parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
+    return parsed;
+
+Assay.get_report_card_url = (chembl_id)->
+  return glados.Settings.GLADOS_BASE_PATH_REL+'assay_report_card/'+chembl_id
 
 Assay.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
@@ -33,7 +35,7 @@ Assay.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      'link_base': '/assay_report_card/$$$'
+      'link_base': 'report_card_url'
     }
     {
       'name_to_show': 'Strain'

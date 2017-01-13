@@ -62,6 +62,14 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
           () -> console.log('failed!')
         )
 
+  parse: (data) ->
+    parsed = data
+    parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
+    return parsed;
+
+Target.get_report_card_url = (chembl_id)->
+  return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
+
 Target.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
     {
@@ -70,7 +78,7 @@ Target.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      'link_base': '/target_report_card/$$$'
+      'link_base': 'report_card_url'
     }
     {
       'name_to_show': 'Name'

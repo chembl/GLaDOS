@@ -264,7 +264,7 @@ DANViewExt =
           d3.selectAll(".row text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-      .on("click", (d, i) -> window.location = "/assay_report_card/" + nodes[i].name)
+      .on("click", (d, i) -> window.location = Assay.get_report_card_url(nodes[i].name))
 
     column = svg.selectAll(".dan-column")
       .data(matrix)
@@ -293,7 +293,7 @@ DANViewExt =
           d3.selectAll(".column text").classed("linked", (d, i) -> i == j)
       )
       .on("mouseout", mouseout)
-      .on("click", (d, i) -> window.location = "/assay_report_card/" + nodes[i].name)
+      .on("click", (d, i) -> window.location = Assay.get_report_card_url(nodes[i].name))
 
     $('.tooltipped').tooltip()
 
