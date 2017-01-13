@@ -163,26 +163,38 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     currentColourProperty = config.initial_colouring
 
-    margin =
-      top: 150
-      right: 0
-      bottom: 10
-      left: 90
+    if GlobalVariables['IS_EMBEDED']
+
+      margin =
+        top: 120
+        right: 0
+        bottom: 10
+        left: 0
+    else
+
+      margin =
+        top: 150
+        right: 0
+        bottom: 10
+        left: 90
 
     elemWidth = $(@el).width()
     width = 0.8 * elemWidth
     height = width
 
+    console.log 'Element IS: ', $(@el).attr('id')
+    console.log 'WIDTH IS: ', width
+
     mainContainer = d3.select('#' + @$vis_elem.attr('id'))
 
     # --------------------------------------
-    # Leyend initialisation
+    # Legend initialisation
     # --------------------------------------
-    leyendWidth = (width / 2)
-    leyendHeight = 100
-    leyendSVG = mainContainer.append('svg')
-      .attr('width', leyendWidth )
-      .attr('height', leyendHeight )
+    legendWidth = (width / 2)
+    legendHeight = 100
+    legendSVG = mainContainer.append('svg')
+      .attr('width', legendWidth )
+      .attr('height', legendHeight )
 
     svg = mainContainer
             .append('svg')
@@ -279,20 +291,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # define a minimum size so the rows are not to small,
     # if there are too many rows, the range of the scale will be extended.
-    minRowHeight = minColWidth = 30
+    minSideSize = 40
     initialRowHeight = height / numRows
+    initialColWidth = width / numColumns
+
     # is the row height going to be less than the minimum?
-    if initialRowHeight < minRowHeight
+    if initialRowHeight < minSideSize or initialColWidth < minSideSize
       # if so, modify the range
-      rangeYEnd = minRowHeight * numRows
+      rangeYEnd = minSideSize * numRows
+      rangeXEnd = minSideSize * numColumns
     else
       rangeYEnd = height
-
-    # do the same for column width
-    initialColWidth = width / numColumns
-    if initialColWidth < minColWidth
-      rangeXEnd = minColWidth * numColumns
-    else
       rangeXEnd = width
 
     getYCoord = d3.scale.ordinal()
@@ -347,17 +356,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     # --------------------------------------
-    # Fill leyend details
+    # Fill legend details
     # --------------------------------------
 
-    fillLeyendDetails = ->
+    fillLegendDetails = ->
 
-      leyendSVG.selectAll('g').remove()
-      leyendSVG.selectAll('text').remove()
+      legendSVG.selectAll('g').remove()
+      legendSVG.selectAll('text').remove()
 
-      leyendG = leyendSVG.append('g')
-              .attr("transform", "translate(0," + (leyendHeight - 30) + ")");
-      leyendSVG.append('text').text('Leyend for: ' + currentColourProperty)
+      legendG = legendSVG.append('g')
+              .attr("transform", "translate(0," + (legendHeight - 30) + ")");
+      legendSVG.append('text').text('Legend for: ' + currentColourProperty)
         .attr("transform", "translate(10, 15)");
 
       rectangleHeight = 50
@@ -366,56 +375,56 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if colourDataType == 'string'
 
         domain = getDomainForOrdinalProperty currentColourProperty
-        getXInLeyendFor = d3.scale.ordinal()
+        getXInLegendFor = d3.scale.ordinal()
           .domain( domain )
-          .rangeBands([0, leyendWidth])
+          .rangeBands([0, legendWidth])
 
-        leyendAxis = d3.svg.axis()
-          .scale(getXInLeyendFor)
+        legendAxis = d3.svg.axis()
+          .scale(getXInLegendFor)
           .orient("bottom")
 
-        leyendG.selectAll('rect')
-          .data(getXInLeyendFor.domain())
+        legendG.selectAll('rect')
+          .data(getXInLegendFor.domain())
           .enter().append('rect')
           .attr('height',rectangleHeight)
-          .attr('width', getXInLeyendFor.rangeBand())
-          .attr('x', (d) -> getXInLeyendFor d)
+          .attr('width', getXInLegendFor.rangeBand())
+          .attr('x', (d) -> getXInLegendFor d)
           .attr('y', -rectangleHeight)
           .attr('fill', (d) -> getCellColour d)
 
-        leyendG.call(leyendAxis)
+        legendG.call(legendAxis)
 
       else if colourDataType == 'number'
 
         domain = getDomainForContinuousProperty currentColourProperty
         linearScalePadding = 10
-        getXInLeyendFor = d3.scale.linear()
+        getXInLegendFor = d3.scale.linear()
           .domain(domain)
-          .range([linearScalePadding, (leyendWidth - linearScalePadding)])
+          .range([linearScalePadding, (legendWidth - linearScalePadding)])
 
-        leyendAxis = d3.svg.axis()
-          .scale(getXInLeyendFor)
+        legendAxis = d3.svg.axis()
+          .scale(getXInLegendFor)
           .orient("bottom")
 
         start = domain[0]
         stop = domain[1]
         numValues = 20
         step = Math.abs(stop - start) / numValues
-        stepWidthInScale = Math.abs(getXInLeyendFor.range()[0] - getXInLeyendFor.range()[1]) / numValues
+        stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
         data = d3.range(domain[0], domain[1], step)
 
-        leyendG.selectAll('rect')
+        legendG.selectAll('rect')
           .data(data)
           .enter().append('rect')
           .attr('height',rectangleHeight)
           .attr('width', stepWidthInScale + 5)
-          .attr('x', (d) -> getXInLeyendFor d)
+          .attr('x', (d) -> getXInLegendFor d)
           .attr('y', -rectangleHeight)
           .attr('fill', (d) -> getCellColour d)
 
-        leyendG.call(leyendAxis)
+        legendG.call(legendAxis)
 
-    fillLeyendDetails()
+    fillLegendDetails()
 
     # --------------------------------------
     # Add rows
@@ -559,7 +568,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentColourProperty = @value
       getCellColour = defineColourScale(links, currentColourProperty)
 
-      fillLeyendDetails()
+      fillLegendDetails()
 
       t = svg.transition().duration(1000)
       t.selectAll(".vis-cell")
