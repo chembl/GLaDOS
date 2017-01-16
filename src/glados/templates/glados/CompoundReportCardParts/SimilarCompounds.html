@@ -23,8 +23,20 @@
         Similar compounds to {{chembl_id}}:
       </script>
       {% endverbatim %}
+
+      {% verbatim %}
+      <script id="Handlebars-CompRepCard-SimmilarCompounds-Link" type="text/x-handlebars-template">
+        See <a target="_blank" href="/similarity_search_results/{{chembl_id}}/{{similarity_threshold}}">full list</a>
+      </script>
+      {% endverbatim %}
+
       <span class="similar-compounds-title">
       </span>
+      <br>
+      <span class="see-full-list-link">
+      </span>
+      <br>
+
 
       <!-- Backbone -->
 
@@ -61,7 +73,7 @@
         <h5>No records were found.</h5>
       </div>
 
-      <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Horizontal"
+      <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
            style="display: none">
 
         <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->

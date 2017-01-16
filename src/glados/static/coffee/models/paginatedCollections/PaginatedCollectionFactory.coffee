@@ -128,6 +128,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewSimilaritySearchResultsListForCarousel: ->
+
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST_COMPACT)
+
+      list.initURL = (term, percentage) ->
+
+        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL + term + '/' + percentage + '.json'
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+
+      list.parse = (data) ->
+
+          data.page_meta.records_in_page = data.molecules.length
+          @resetMeta(data.page_meta)
+
+          return data.molecules
+
+      return list
+
     getNewDocumentsFromTermsList: ->
 
       list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST)

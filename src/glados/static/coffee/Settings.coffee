@@ -53,6 +53,7 @@ glados.useNameSpace 'glados',
     # Paginated Collections
     TABLE_PAGE_SIZES: [5, 10, 20, 25, 50, 100]
     CARD_PAGE_SIZES: [6, 12]
+    DEFAULT_CARROUSEL_SIZES: [3]
     EMBL_GREEN: '#9fcc3b'
     EMBL_BLUE: '#008cb5'
     VISUALISATION_RED_MIN: '#f44336' # red lighten-5

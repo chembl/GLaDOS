@@ -71,4 +71,15 @@ Compound.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
     }
   ]
+  RESULTS_LIST_REPORT_CARD_COMPACT: [
+    {
+      'name_to_show': 'ChEMBL ID'
+      'comparator': 'molecule_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
+    }
+  ]
 }
