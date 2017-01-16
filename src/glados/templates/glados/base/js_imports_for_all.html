@@ -84,11 +84,12 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/GenericListViews/WSInfinityView.js' %}"></script>
 
     <!-- Drug Browser -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Drug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserInfinityView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableAsCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/drugBrowserApp.js' %}"></script>
+    <!-- Moved after compound to preserve the inheritance between Drug and Compound -->
+    <!--<script type="text/javascript" src="{% static 'js/coffee-gen/models/Drug.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableView.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserInfinityView.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableAsCardView.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/coffee-gen/drugBrowserApp.js' %}"></script>-->
 
     <!-- Report Cards -->
 
@@ -114,7 +115,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/compoundReportCardApp.js' %}"></script>
 
     <!-- Drug Browser -->
-    <!-- The drug.js file needs to be loaded after the Compound.js -->
+    <!-- The Drug.js file needs to be loaded after the Compound.js -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Drug.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserInfinityView.js' %}"></script>
