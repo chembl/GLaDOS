@@ -97,6 +97,21 @@
       </div>
 
       <div class="divider"></div>
+      <div id="SimilarCompounds" class="section scrollspy">
+        <h3>Similar Compounds</h3>
+
+        <div class="row">
+
+          {% block similarCompounds %}
+          {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
+          {% endblock %}
+
+        </div>
+
+
+      </div>
+
+      <div class="divider"></div>
       <div id="MoleculeFeatures" class="section scrollspy">
         <h3>Molecule Features</h3>
 
@@ -244,6 +259,9 @@
           </a></li>
           <li><a href="#Indications">
             <small>Indications</small>
+          </a></li>
+          <li><a href="#SimilarCompounds">
+            <small>Similar Compounds</small>
           </a></li>
           <li><a href="#MoleculeFeatures">
             <small>Molecule Features</small>

@@ -10,6 +10,8 @@ class CompoundReportCardApp
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, 70
 
     new CompoundNameClassificationView
       model: compound
@@ -39,9 +41,14 @@ class CompoundReportCardApp
         collection: moleculeFormsList
         el: $('#AlternateFormsCard')
 
+    new SimilarCompoundsView
+      collection: similarCompoundsList
+      el: $('#SimilarCompoundsCard')
+
     compound.fetch()
     mechanismOfActionList.fetch({reset: true})
     moleculeFormsList.fetch({reset: true})
+    similarCompoundsList.fetch({reset: true})
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
@@ -169,4 +176,3 @@ class CompoundReportCardApp
   @initPieView = ->
     pieview = new PieView
     pieview.render()
-

@@ -1,0 +1,86 @@
+<div class="col s12 m12 l12">
+
+  <div id='SimilarCompoundsCard' class="card grey lighten-5">
+
+    <!-- modal trigger -->
+    {% block embed_button %}
+    {% include "glados/base/embed_button.html" %}
+    {% endblock %}
+
+    {% block card_loaders %}
+    {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
+
+    <!-- Embed Modal Structure -->
+    {% block embed_modal %}
+    {% include "glados/base/embed_modal.html" %}
+    {% endblock %}
+
+    <div class="card-content ebi-links" style="display: none">
+
+      {% verbatim %}
+      <script id="Handlebars-CompRepCard-SimmilarCompounds-Title" type="text/x-handlebars-template">
+        Similar compounds to {{chembl_id}}:
+      </script>
+      {% endverbatim %}
+      <span class="similar-compounds-title">
+      </span>
+
+      <!-- Backbone -->
+
+      <div class="BCK-header-container row" style="display: none">
+
+        <div class="BCK-select-page-size-container col s4"
+             data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+
+          <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+        </div>
+
+        <div class="input-field col s4 m4 select-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+
+          <!-- Backbone fills this from the corresponding view-->
+
+        </div>
+
+        <div class="col s2 full-height btn-sort-direction-container"
+             data-hb-template="Handlebars-Common-SortDirectionBtn">
+
+          <!-- Backbone fills this from the corresponding view -->
+
+        </div>
+
+      </div>
+
+      <div class='BCK-PreoladerContainer row'>
+        {% block comp_card_loaders %}
+        {% include "glados/base/card_loaders.html" %}
+        {% endblock %}
+      </div>
+
+      <div class='BCK-EmptyListMessage row' style="display: none">
+        <h5>No records were found.</h5>
+      </div>
+
+      <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Horizontal"
+           style="display: none">
+
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+      </div>
+
+      <div class="BCK-footer-container row" style="display: none">
+
+        <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+
+          <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
