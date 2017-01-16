@@ -1,6 +1,10 @@
 # View that renders the marvin sketcher and handles all the communication with it.
 MarvinSketcherView = Backbone.View.extend
 
+  # Search types
+  SIMILARITY_SEARCH: 'similarity'
+  SUBSTRUCTURE_SEARCH: 'substructure'
+
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
@@ -24,6 +28,8 @@ MarvinSketcherView = Backbone.View.extend
   events:
     'click .marvin-search-btn': 'triggerMarvinSearch'
     'change .select-type-of-search': 'selectSearchType'
+    'input .similarity-search-threshold-input': 'updatePercentageField'
+    'change .similarity-search-threshold-input': 'updatePercentageField'
 
   # --------------------------------------------------------------------------------------------------------------------
   # Sketcher Handling
@@ -51,7 +57,12 @@ MarvinSketcherView = Backbone.View.extend
 
         $(thisView.el).find('.messages-to-user').text('Searching...')
 
-        searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+        if thisView.searchType == @SUBSTRUCTURE_SEARCH
+          searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+        else
+          percentage = $(thisView.el).find('.similarity-search-threshold-input').val()
+          searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim() + '/' + percentage
+
         window.location.href =  searchUrl
 
       )
@@ -68,4 +79,20 @@ MarvinSketcherView = Backbone.View.extend
     if searchType == ''
       return
 
-    console.log 'search Type: ', searchType
+    @searchType = searchType
+
+    if @searchType == @SIMILARITY_SEARCH
+      $(@el).find('.similarity-search-threshold').slideDown('Slow')
+    else
+      $(@el).find('.similarity-search-threshold').slideUp('Slow')
+
+  updatePercentageField: (event) ->
+
+    selector = $(event.currentTarget)
+    percentage = selector.val()
+
+    $(@el).find('.similarity-search-threshold-text').text Handlebars.compile( $('#Handlebars-Marvin-Similarity-Percentage').html() )
+      percentage: percentage
+
+
+

@@ -35,14 +35,21 @@
       </div>
       </p>
 
-      <div class="similarity-search-threshold hide">
-        <p class="center-align">
+      <div class="similarity-search-threshold" style="display: none">
+
+        {% verbatim %}
+        <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
+          >= {{percentage}}%
+        </script>
+        {% endverbatim %}
+
+        <p class="center-align similarity-search-threshold-text">
           >= 70%
         </p>
 
 
-        <p class="range-field">
-          <input type="range" id="test5" min="70" max="100"/>
+        <p class="range-field col s8 offset-s2">
+          <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="70"/>
         </p>
 
       </div>
