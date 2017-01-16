@@ -11,40 +11,9 @@
     <span><i class="icon icon-functional" data-icon="T"></i>Compound Targets Matrix</span>
   </h2>
 
-  <div id='CompTargetMatrix'>
-
-    <div class="row">
-
-      <div class="input-field col s6 l3 select-colouring-container" data-hb-template="Handlebars-Common-SortSelect">
-        <!-- Backbone fills this in the CompoundTargetMatrixView -->
-      </div>
-
-      <div class="input-field col s4 l2 select-row-sort-container" data-hb-template="Handlebars-Common-SortSelect">
-        <!-- Backbone fills this in the CompoundTargetMatrixView -->
-      </div>
-
-      <div class="col s2 l1 full-height btn-row-sort-direction-container" data-hb-template="Handlebars-Common-SortDirectionBtn">
-         <!-- Backbone fills this from the corresponding view -->
-      </div>
-
-      <div class="input-field col s4 l2 select-col-sort-container" data-hb-template="Handlebars-Common-SortSelect">
-        <!-- Backbone fills this in the CompoundTargetMatrixView -->
-      </div>
-
-      <div class="col s2 l1 full-height btn-col-sort-direction-container" data-hb-template="Handlebars-Common-SortDirectionBtn">
-         <!-- Backbone fills this from the corresponding view -->
-      </div>
-
-      <div class="col s6 l3">
-        <a class="reset-zoom-btn">Reset Zoom</a>
-      </div>
-    </div>
-
-    <div id="BCK-CompTargMatrixContainer">
-
-    </div>
-
-  </div>
+  {% block matrix %}
+    {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+  {% endblock %}
 
 </div>
 

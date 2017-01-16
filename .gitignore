@@ -86,3 +86,10 @@ db.sqlite3
 
 # pycharm 
 .idea
+
+# selenium gecko driver
+geckodriver.log
+gecko_bin/*
+
+# MAC OSX files
+.DS_Store

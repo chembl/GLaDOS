@@ -18,12 +18,15 @@ PaginatedViewExt =
 
     $elem = $(@el).find('.BCK-items-container')
 
-    empty_list_message = "<h3>No records were found.</h3>"
-    if $elem.length > 0
+    if @collection.length > 0
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i])
+      @showFooterContainer()
     else
-      $elem.html empty_list_message
+      @hideHeaderContainer()
+      @hideFooterContainer()
+      @hideContentContainer()
+      @showEmptyMessageContainer()
 
   sendDataToTemplate: ($specificElem) ->
 
@@ -48,11 +51,11 @@ PaginatedViewExt =
       # give it everything as ready as possible
       columnsWithValues = @collection.getMeta('columns').map (col) ->
         col['value'] = item.get(col.comparator)
-        col['has_link'] = col.link_base?
-        col['link_url'] = col['link_base'].replace('$$$', col['value']) unless !col['has_link']
-        if col['image_base_url']?
-          img_url = col['image_base_url'].replace('$$$', col['value'])
-        if col['custom_field_template']?
+        col['has_link'] = _.has(col, 'link_base')
+        col['link_url'] = item.get(col['link_base']) unless !col['has_link']
+        if _.has(col, 'image_base_url')
+          img_url = item.get(col['image_base_url'])
+        if _.has(col, 'custom_field_template')
           col['custom_html'] = Handlebars.compile(col['custom_field_template'])
             val: col['value']
 
@@ -265,6 +268,8 @@ PaginatedViewExt =
 
   clearContentContainer: ->
     $(@el).find('.BCK-items-container').empty()
+    @hideEmptyMessageContainer()
+    @showContentContainer()
 
   hidePreloaderOnly: ->
     $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
@@ -273,6 +278,30 @@ PaginatedViewExt =
   hideHeaderContainer: ->
     $headerRow = $(@el).find('.BCK-header-container')
     $headerRow.hide()
+
+  hideFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.hide()
+
+  showFooterContainer: ->
+    $headerRow = $(@el).find('.BCK-footer-container')
+    $headerRow.show()
+
+  hideContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.hide()
+
+  showContentContainer: ->
+    $headerRow = $(@el).find('.BCK-items-container')
+    $headerRow.show()
+
+  hideEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.hide()
+
+  showEmptyMessageContainer: ->
+    $headerRow = $(@el).find('.BCK-EmptyListMessage')
+    $headerRow.show()
 
 
   #--------------------------------------------------------------------------------------

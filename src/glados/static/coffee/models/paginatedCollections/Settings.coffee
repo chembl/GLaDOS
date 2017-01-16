@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------
   Settings:
-    ES_BASE_URL: 'http://ves-hx-5e.ebi.ac.uk:9200'
+    ES_BASE_URL: 'http://wwwdev.ebi.ac.uk/chembl/glados-es'
     ES_INDEXES:
       COMPOUND:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -61,8 +61,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_disabled': false
             'is_sorting': 0
             'sort_class': 'fa-sort'
-            'link_base': '/compound_report_card/$$$'
-            'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
+            'link_base': 'report_card_url'
+            'image_base_url': 'image_url'
           }
           {
             'name_to_show': 'Molecule Type'
@@ -112,7 +112,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_disabled': false
             'is_sorting': 0
             'sort_class': 'fa-sort'
-            'link_base': '/document_report_card/$$$'
+            'link_base': 'report_card_url'
           }
           {
             'name_to_show': 'Score'
@@ -159,7 +159,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_disabled': false
             'is_sorting': 0
             'sort_class': 'fa-sort'
-            'link_base': '/compound_report_card/$$$'
+            'link_base': 'report_card_url'
           }
           {
             'name_to_show': 'Name'
@@ -201,7 +201,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_disabled': false
             'is_sorting': 0
             'sort_class': 'fa-sort'
-            'link_base': '/target_report_card/$$$'
+            'link_base': 'report_card_url'
           }
           {
             'name_to_show': 'Relationship'
@@ -251,7 +251,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_disabled': false
             'is_sorting': 0
             'sort_class': 'fa-sort'
-            'link_base': 'http://www.uniprot.org/uniprot/$$$'
+            'link_base': 'accession_url'
           }
         ]
 

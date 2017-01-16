@@ -11,7 +11,25 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     else
       response.ro5 = false
 
+    # Computed Image and report card URL's for Compounds
+    response.structure_image = false
+    if response.structure_type == 'NONE'
+      response.image_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
+    else if response.structure_type == 'SEQ'
+      response.image_url = glados.Settings.STATIC_URL+'img/protein_structure.png'
+    else
+      response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
+      response.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id \
+          + '.png?engine=indigo'
+      response.structure_image = true
+
+    response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
+
     return response;
+
+Compound.get_report_card_url = (chembl_id)->
+  return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
+
 
 Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
@@ -21,8 +39,8 @@ Compound.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      'link_base': '/compound_report_card/$$$'
-      'image_base_url': glados.Settings.WS_BASE_URL + 'image/$$$.svg'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
     }
     {
       'name_to_show': 'Molecule Type'

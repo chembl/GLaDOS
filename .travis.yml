@@ -12,7 +12,8 @@ before_script:
   - python -m glados.manage runserver 8000 &
   - sleep 10 # give Web server some time to bind to sockets, etc
 script:
-  - python setup.py test
+  - "./run_tests_no_install.sh"
 addons:
+  firefox: latest
   apt:
     packages: memcached

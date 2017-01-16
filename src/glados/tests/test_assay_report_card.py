@@ -58,10 +58,10 @@ class AssayReportCardTest(ReportCardTester):
     # --------------------------------------
 
     target_name_td = self.browser.find_element_by_id('BCK-Assay-Target-Name')
-    self.assertEqual(target_name_td.text, 'Estradiol 17-beta-dehydrogenase 2')
+    self.assertEqual(target_name_td.text, 'Estradiol 17-beta-dehydrogenase 2 (CHEMBL2789)')
 
     target_name_link = target_name_td.find_element_by_tag_name('a')
-    self.assertEqual(target_name_link.get_attribute('href'), self.HOST + '/target_report_card/CHEMBL2789/')
+    self.assertEqual(target_name_link.get_attribute('href'), self.HOST + '/target_report_card/CHEMBL2789')
 
     target_assay_td = self.browser.find_element_by_id('BCK-Assay-Target-Type')
     self.assertEqual(target_assay_td.text, 'SINGLE PROTEIN')

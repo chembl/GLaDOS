@@ -132,18 +132,3 @@ CompoundNameClassificationView = CardView.extend
         items: Object.keys(trade_names)
 
       $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
