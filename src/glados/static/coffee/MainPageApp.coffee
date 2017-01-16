@@ -9,6 +9,9 @@ class MainPageApp
 
     @searchBarView = new SearchBarView()
 
+    # Marvin js skecther
+    @marvinSketcherView = new MarvinSketcherView()
+
     LazyIFramesHelper.initLazyIFrames()
 
     @targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()

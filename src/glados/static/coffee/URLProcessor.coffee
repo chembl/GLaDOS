@@ -51,3 +51,24 @@ class URLProcessor
     if match and match.length > 2
       return match[2]
     return ""
+
+  # gets the query string for the substructure search results page
+  @getSubstructureSearchQueryString = ->
+
+    pathname = window.location.pathname
+    pathnameParts = pathname.split('/')
+    return pathnameParts[pathnameParts.length - 1]
+
+  # gets the query string for the substructure search results page
+  @getSimilaritySearchQueryString = ->
+
+    pathname = window.location.pathname
+    pathnameParts = pathname.split('/')
+    return pathnameParts[pathnameParts.length - 2]
+
+  # gets the query string for the substructure search results page
+  @getSimilaritySearchPercentage = ->
+
+    pathname = window.location.pathname
+    pathnameParts = pathname.split('/')
+    return parseInt( pathnameParts[pathnameParts.length - 1])
