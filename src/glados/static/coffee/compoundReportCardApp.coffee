@@ -151,6 +151,20 @@ class CompoundReportCardApp
       el: $('#AlternateFormsCard')
 
     moleculeFormsList.fetch({reset: true})
+
+  @initSimilarCompounds = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, 70
+
+    new SimilarCompoundsView
+      collection: similarCompoundsList
+      el: $('#SimilarCompoundsCard')
+
+    similarCompoundsList.fetch({reset: true})
+
   # -------------------------------------------------------------
   # Models
   # -------------------------------------------------------------

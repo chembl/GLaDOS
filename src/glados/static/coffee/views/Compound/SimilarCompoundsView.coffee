@@ -4,7 +4,7 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
-    @resource_type = 'Target'
+    @resource_type = 'Compound'
 
   render: ->
 
@@ -22,7 +22,7 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
     @showCardContent()
     @showPaginatedViewContent()
-    @initEmbedModal('relations')
+    @initEmbedModal('similar')
     @activateModals()
 
     @fillPageSelectors()
