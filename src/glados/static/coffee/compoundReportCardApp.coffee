@@ -11,7 +11,7 @@ class CompoundReportCardApp
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
-    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, 70
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     new CompoundNameClassificationView
       model: compound
@@ -157,7 +157,7 @@ class CompoundReportCardApp
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
-    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, 70
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     new SimilarCompoundsView
       collection: similarCompoundsList

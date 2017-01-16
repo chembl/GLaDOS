@@ -66,6 +66,7 @@ glados.useNameSpace 'glados',
     RESPONSIVE_REPAINT_WAIT: 400
     # by default the debug is deactivated
     DEBUG: false
+    DEFAULT_SIMILARITY_THRESHOLD: 70
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
