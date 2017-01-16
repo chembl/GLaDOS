@@ -23,7 +23,7 @@
   <!-- editor buttons -->
 
   <div class="row">
-    <div class="col s5">
+    <div class="col s6 offset-s3">
 
       <p>
       <div class="input-field col s12">
@@ -35,24 +35,21 @@
       </div>
       </p>
 
-      <p class="center-align">
-        >= 70%
-      </p>
+      <div class="similarity-search-threshold hide">
+        <p class="center-align">
+          >= 70%
+        </p>
 
 
-      <p class="range-field">
-        <input type="range" id="test5" min="70" max="100"/>
-      </p>
+        <p class="range-field">
+          <input type="range" id="test5" min="70" max="100"/>
+        </p>
 
-
-    </div>
-    <div class="col s6 offset-s1">
-      <div class="input-field">
-        <textarea id="marvin-insert-data" class="materialize-textarea"></textarea>
-        <label for="marvin-insert-data">Insert SMILES:</label>
       </div>
-      <a class="marvin-insert-data-btn">Insert into editor</a> <span class="marvin-insert-info"></span>
+
     </div>
+
+
   </div>
 
   <div class="row">
