@@ -1,0 +1,39 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}ChEMBL{% endblock %}
+
+{% block content %}
+
+<div class="container main-container">
+
+  <div id="BCK-SubstructureSearchResults">
+
+    <h2>Substructure Search Results:</h2>
+
+    <div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
+      <!-- Backbone fills this with the infinity browser view -->
+    </div>
+
+
+    <div class='BCK-items-container row' data-is-infinite="yes"
+         data-hb-template="Handlebars-Common-Paginated-Card">
+      <!-- Backbone fills this with the infinity browser view -->
+    </div>
+
+    <div class="BCK-PreoladerContainer">
+      {% block preloaders %}
+      {% include "glados/base/infinite_browse_loaders.html" %}
+      {% endblock %}
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+SearchResultsApp.initSubstructureSearchResults();
+
+{% endblock %}

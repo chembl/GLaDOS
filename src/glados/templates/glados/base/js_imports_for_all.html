@@ -27,6 +27,11 @@
 
     <!-- App Settings and global variables object-->
     <script type="text/javascript" src="{% static 'js/coffee-gen/Settings.js' %}"></script>
+
+    <!-- Connection to MArvin JS-->
+    <script type="text/javascript" src="{% static 'marvinjs/gui/lib/promise-1.0.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'marvinjs/js/marvinjslauncher.js' %}"></script>
+
   {% endblock %}
 {% endcompress %}
 
@@ -74,6 +79,16 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsCirclesView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetMainView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/targetBrowserApp.js' %}"></script>
+
+    <!-- Generic List Views -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/GenericListViews/WSInfinityView.js' %}"></script>
+
+    <!-- Drug Browser -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Drug.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserInfinityView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableAsCardView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/drugBrowserApp.js' %}"></script>
 
     <!-- Report Cards -->
 
@@ -166,6 +181,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/SearchResultsApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/CompoundTargetMatrix.js' %}"></script>
 
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/MarvinSketcherView.js' %}"></script>
 
     <!-- Main Page -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>

@@ -149,6 +149,12 @@ urlpatterns = [
   url(r'^search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 
+  url(r'^substructure_search_results/.*?$',
+      DirectTemplateView.as_view(template_name="glados/SubstructureSearchResultsParts/SearchResultsMain.html"), ),
+
+  url(r'^similarity_search_results/.*?$',
+      DirectTemplateView.as_view(template_name="glados/SimilaritySearchResultsParts/SearchResultsMain.html"), ),
+
   # Compound results graph
   url(r'^compound_results_graph/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundResultsGraph.html"), ),

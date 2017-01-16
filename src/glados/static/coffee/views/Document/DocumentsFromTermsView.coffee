@@ -9,7 +9,6 @@ DocumentsFromTermsView = Backbone.View.extend(PaginatedViewExt).extend
 
     $desc = $(@el).find('.list-description')
     $template = $('#' + $desc.attr('data-hb-template'))
-
     $desc.html Handlebars.compile( $template.html() )
       term: GlobalVariables.SEARCH_TERM_DECODED
 

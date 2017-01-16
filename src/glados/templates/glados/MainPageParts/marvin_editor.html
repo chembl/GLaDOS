@@ -1,37 +1,83 @@
 {% load static %}
-<span class="card-title"><i class="icon icon-conceptual" data-icon="b"></i>Draw and Search</span>
+
+<div id="BCK-MarvinContainer">
+  <span class="card-title"><i class="icon icon-conceptual" data-icon="b"></i>Draw and Search</span>
 
 
-<p>
-  <a href="/marvin_search_fullscreen">Open editor in full screen</a>
-</p>
-<div class="row">
-
-  <div class="iframe-cover-wrapper">
-
-    <img class="iframe-cover" src="{% static 'img/iframe_cover.svg' %}"
-         onclick="this.style.display = 'none';">
-
-    <iframe id="sketch" src="{% static 'marvinjs/editor.html' %}"
-            style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
-  </div>
-
-</div>
-
-<!-- editor buttons -->
-<div class="container">
-
+  <p>
+    <a href="/marvin_search_fullscreen">Open editor in full screen</a>
+  </p>
   <div class="row">
 
-    <div class="col offset-s4 s4">
-      <a class="waves-effect waves-light btn-chembl teal"><i class="icon icon-functional"
-                                                             data-icon="1"></i>Search</a>
+    <div class="iframe-cover-wrapper">
+
+      <img class="iframe-cover" src="{% static 'img/iframe_cover.svg' %}"
+           onclick="this.style.display = 'none';">
+
+      <iframe id="sketch" src="{% static 'marvinjs/editor.html' %}"
+              style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
     </div>
 
   </div>
 
+  <!-- editor buttons -->
+
+  <div class="row">
+    <div class="col s6 offset-s3">
+
+      <p>
+      <div class="input-field col s12">
+        <select class="select-type-of-search">
+          <option value="substructure" selected>Substructure</option>
+          <option value="similarity">Similarity</option>
+        </select>
+        <label>Type of search</label>
+      </div>
+      </p>
+
+      <div class="similarity-search-threshold" style="display: none">
+
+        {% verbatim %}
+        <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
+          >= {{percentage}}%
+        </script>
+        {% endverbatim %}
+
+        <p class="center-align similarity-search-threshold-text">
+          >= 70%
+        </p>
+
+
+        <p class="range-field col s8 offset-s2">
+          <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="70"/>
+        </p>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="row">
+
+    <div class="col offset-s4 s4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal marvin-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Search</a>
+    </div>
+
+  </div>
+
+
+  <!-- messages to the user -->
+
+  <div class="container">
+    <div class="row">
+      <div class="messages-to-user center-align"></div>
+    </div>
+  </div>
+
+
 </div>
-
-
 
 
