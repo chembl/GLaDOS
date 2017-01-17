@@ -68,7 +68,7 @@ class SearchResultsApp
 
     resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
 
-    subResView = new WSInfinityView
+    subResView = new SimilaritySearchResultsView
       collection: resultsList
       el: $('#BCK-SimilaritySearchResults')
 
