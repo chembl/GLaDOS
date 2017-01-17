@@ -10,6 +10,7 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
     $(@el).find('.similar-compounds-title').html Handlebars.compile( $('#Handlebars-CompRepCard-SimmilarCompounds-Title').html() )
       chembl_id: GlobalVariables.CHEMBL_ID
+      similarity: glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     $(@el).find('.see-full-list-link').html Handlebars.compile( $('#Handlebars-CompRepCard-SimmilarCompounds-Link').html() )
       chembl_id: GlobalVariables.CHEMBL_ID
