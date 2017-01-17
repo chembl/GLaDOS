@@ -98,8 +98,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        #COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      COMPOUND_WS_RESULTS_LIST_CAROUSEL:
+        MODEL: Compound
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        IS_CAROUSEL: true
       DOCS_BY_TERM_LIST:
         MODEL: Document
         BASE_URL: 'base_url is set by initURL'

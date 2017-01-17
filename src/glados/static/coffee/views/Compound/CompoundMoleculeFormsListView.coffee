@@ -2,29 +2,24 @@
 # of the compound report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-CompoundMoleculeFormsListView = CardView.extend
+CompoundMoleculeFormsListView = CardView.extend(PaginatedViewExt).extend
 
   initialize: ->
-    @collection.on 'reset', @render, @
+    @collection.on 'reset do-repaint sort', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
 
   render: ->
 
-    @addAllAlternateForms()
+    @clearContentContainer()
 
-    # until here, all the visible content has been rendered.
+    @fillTemplates()
+    @fillPaginators()
+
     @showCardContent()
-
+    @showPaginatedViewContent()
     @initEmbedModal('alternate_forms')
-    @activateTooltips()
     @activateModals()
 
-  addOneAlternateForm: (alternateForm) ->
-    view = new CompoundMoleculeFormView({model: alternateForm});
-    row = $(@el).find('#Bck-AlternateForms')
-    row.append(view.render().el)
-
-
-  addAllAlternateForms: ->
-    @collection.forEach @addOneAlternateForm, @
+    @fillPageSelectors()
+    @activateSelectors()
