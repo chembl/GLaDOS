@@ -93,12 +93,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_class': 'fa-sort'
           }
         ]
-      SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST:
+      SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      SIMILARITY_RESULTS_LIST:
+        MODEL: Compound
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
