@@ -145,7 +145,8 @@ class CompoundReportCardApp
     compound = new Compound
       molecule_chembl_id: CHEMBL_ID
 
-    moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
+    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
+    moleculeFormsList.initURL GlobalVariables.CHEMBL_ID
 
     new CompoundMoleculeFormsListView
       collection: moleculeFormsList,
