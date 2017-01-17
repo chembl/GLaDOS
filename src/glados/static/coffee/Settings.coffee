@@ -37,6 +37,15 @@ glados.logNameSpaceTree = ()->
     console.log(loadedNS)
   return null
 
+# gets the screen type, LARGE, MEDIUM, or SMALL
+glados.getScreenType = ->
+
+  screenWidth = $( window ).width()
+
+  return switch
+    when screenWidth <= glados.Settings.SMALL_SCREEN_SIZE then glados.Settings.SMALL_SCREEN
+    when glados.Settings.SMALL_SCREEN_SIZE < screenWidth <= glados.Settings.LARGE_SCREEN_SIZE then glados.Settings.MEDIUM_SCREEN
+    when screenWidth > glados.Settings.LARGE_SCREEN_SIZE then glados.Settings.LARGE_SCREEN
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Application Settings
@@ -53,7 +62,6 @@ glados.useNameSpace 'glados',
     # Paginated Collections
     TABLE_PAGE_SIZES: [5, 10, 20, 25, 50, 100]
     CARD_PAGE_SIZES: [6, 12]
-    DEFAULT_CARROUSEL_SIZES: [3]
     EMBL_GREEN: '#9fcc3b'
     EMBL_BLUE: '#008cb5'
     VISUALISATION_RED_MIN: '#f44336' # red lighten-5
@@ -68,6 +76,16 @@ glados.useNameSpace 'glados',
     # by default the debug is deactivated
     DEBUG: false
     DEFAULT_SIMILARITY_THRESHOLD: 70
+    LARGE_SCREEN_SIZE: 992
+    SMALL_SCREEN_SIZE: 600
+    SMALL_SCREEN: 'SMALL_SCREEN'
+    MEDIUM_SCREEN: 'MEDIUM_SCREEN'
+    LARGE_SCREEN: 'LARGE_SCREEN'
+    DEFAULT_CAROUSEL_SIZES:
+      'SMALL_SCREEN': 1
+      'MEDIUM_SCREEN': 2
+      'LARGE_SCREEN': 3
+
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
@@ -103,3 +121,18 @@ glados.logGladosSettings = () ->
     glados.logNameSpaceTree()
     console.log("---END GLaDOS LOADED NAMESPACES------------------------------------------------------------------------")
     console.log("Play nice and there will be CAKE!\n.\n.\n.\nThe CAKE is real, I promise!")
+
+  GlobalVariables.CURRENT_SCREEN_TYPE = glados.getScreenType()
+  GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED = false
+
+  # update screen type when resizing
+  updateScreenType = ->
+    newSType = glados.getScreenType()
+    if newSType != GlobalVariables.CURRENT_SCREEN_TYPE
+      GlobalVariables.CURRENT_SCREEN_TYPE = newSType
+      GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED = true
+    else
+      GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED = false
+
+
+  $(window).resize updateScreenType

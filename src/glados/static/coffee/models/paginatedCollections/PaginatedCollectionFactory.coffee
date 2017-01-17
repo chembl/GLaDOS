@@ -38,6 +38,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             columns: collectionSettings.COLUMNS
+            is_carousel: collectionSettings.IS_CAROUSEL
+
 
           @initialiseUrl()
 
@@ -130,7 +132,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewSimilaritySearchResultsListForCarousel: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST_COMPACT)
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST_COMPACT
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+      list =  @getNewWSCollectionFor config
+
+      list.responsivisePageSize()
 
       list.initURL = (term, percentage) ->
 
