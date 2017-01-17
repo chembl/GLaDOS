@@ -90,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewSubstructureSearchResultsList: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
 
       list.initURL = (term) ->
 
@@ -111,7 +111,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewSimilaritySearchResultsList: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
 
       list.initURL = (term, percentage) ->
 
