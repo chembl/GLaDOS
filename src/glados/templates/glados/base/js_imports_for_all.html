@@ -34,9 +34,22 @@
 
     <!-- http://js.cytoscape.org/ -->
     <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape-qtip.js' %}"></script>
+
+    <!-- Metabolism Visualiser -->
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/cytoscape-dagre.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/MetabolismVisualizator.js' %}"></script>
+
 
   {% endblock %}
 {% endcompress %}
+
+<!-- Already compressed external files -->
+
+<!-- Metabolism Visualiser -->
+<script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/api/JQueryPlugins/jquery.qtip-3.0.0.min.js' %}"></script>
 
 <!-- NO COMPRESS: don't include this in the compress as it needs server variables defined by the request -->
 <!-- and can not be included in the COMPRESS_OFFLINE_CONTEXT -->
