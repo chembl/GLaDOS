@@ -18,7 +18,26 @@
 
     <div class="card-content ebi-links" style="display: none">
 
-      <div id="metabolism-visualisation-container" style="width:600px;height:400px">
+      {% verbatim %}
+        <script id="Handlebars-MetabolismVisualisation-Title" type="text/x-handlebars-template">
+          Metabolism Graph for {{chembl_id}}:
+        </script>
+      {% endverbatim %}
+
+      {% verbatim %}
+        <script id="Handlebars-MetabolismVisualisation-FSLink" type="text/x-handlebars-template">
+          See in <a target="_blank" href="/compound_metabolism/{{chembl_id}}">full screen</a>.
+        </script>
+      {% endverbatim %}
+
+      <span class="visualisation-title" ></span>
+      <br>
+      <br>
+      <span class="visualisation-fullscreen-link" ></span>
+      <br>
+      <br>
+
+      <div id="metabolism-visualisation-container" style="width:100%;height:75vh;" class="white">
       </div>
 
     </div>

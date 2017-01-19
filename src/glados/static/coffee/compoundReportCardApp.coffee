@@ -174,6 +174,30 @@ class CompoundReportCardApp
 
     similarCompoundsList.fetch({reset: true})
 
+  @initMetabolismFullScreen = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 0
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+
+    new CompoundMetabolismFSView
+      model: compoundMetabolism
+      el: $('#CompoundMetabolismMain')
+
+    compoundMetabolism.fetch()
+
+  @initMetabolism = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 3
+
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+
+    new CompoundMetabolismView
+      model: compoundMetabolism
+      el: $('#MetabolismCard')
+
+    compoundMetabolism.fetch()
 
   # -------------------------------------------------------------
   # Views

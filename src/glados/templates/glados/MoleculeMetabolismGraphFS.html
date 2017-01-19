@@ -1,13 +1,21 @@
 {% extends "glados/base/base_layout.html" %}
 
 {% block title %}Compound Metabolism{% endblock %}
+{% load static %}
 
 {% block content %}
 
-<div class="container main-container">
-  <h3>Metabolism Graph for CHEMBL25</h3>
+<div id='CompoundMetabolismMain' class="container main-container">
 
-  <div id="metabolism-visualisation-container" style="width:800px;height:400px;border: 1px solid black;" >
+  {% verbatim %}
+  <script id="Handlebars-MetabolismVisualisationFS-Title" type="text/x-handlebars-template">
+    Metabolism Graph for {{chembl_id}}:
+  </script>
+  {% endverbatim %}
+
+  <h3 class="visualisation-title" ></h3>
+
+  <div id="metabolism-visualisation-container" style="width:100%;height:75vh;border: 1px solid black;">
   </div>
 
 </div>
@@ -16,6 +24,6 @@
 
 {% block custom_js_inline %}
 
-MetabolismVisualizator._loadDataAndRender("metabolism-visualisation-container", glados.Settings.STATIC_URL+'testData/metabolismData2.json')
+CompoundReportCardApp.initMetabolismFullScreen()
 
 {% endblock %}

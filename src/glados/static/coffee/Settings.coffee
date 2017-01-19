@@ -110,6 +110,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'similarity_search_results/'
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity/'
 
+  glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
