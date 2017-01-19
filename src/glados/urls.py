@@ -45,6 +45,10 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/SimilarCompoundsToEmbed.html")), ),
 
+  url(r'^compound_metabolism/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/MoleculeMetabolismGraphFS.html")), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Targets
   # --------------------------------------------------------------------------------------------------------------------

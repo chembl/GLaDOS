@@ -13,6 +13,8 @@ class CompoundReportCardApp
     moleculeFormsList.initURL GlobalVariables.CHEMBL_ID
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
     similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
 
     new CompoundNameClassificationView
       model: compound
@@ -46,10 +48,15 @@ class CompoundReportCardApp
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
 
+    new CompoundMetabolismView
+      model: compoundMetabolism
+      el: $('#MetabolismCard')
+
     compound.fetch()
     mechanismOfActionList.fetch({reset: true})
     moleculeFormsList.fetch({reset: true})
     similarCompoundsList.fetch({reset: true})
+    compoundMetabolism.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()

@@ -1,0 +1,21 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound Metabolism{% endblock %}
+
+{% block content %}
+
+<div class="container main-container">
+  <h3>Metabolism Graph for CHEMBL25</h3>
+
+  <div id="metabolism-visualisation-container" style="width:800px;height:400px;border: 1px solid black;" >
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+MetabolismVisualizator._loadDataAndRender("metabolism-visualisation-container", glados.Settings.STATIC_URL+'testData/metabolismData2.json')
+
+{% endblock %}
