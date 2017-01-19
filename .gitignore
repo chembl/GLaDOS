@@ -16,6 +16,8 @@ downloads/
 eggs/
 .eggs/
 lib/
+#negate marvinjs lib path
+!src/glados/static/marvinjs/gui/lib/
 lib64/
 parts/
 sdist/
