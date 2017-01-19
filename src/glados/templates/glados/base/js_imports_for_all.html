@@ -1,4 +1,8 @@
 {% load static %}
+
+<!-- Already compressed external files -->
+
+
 {% load compress %}
 <!-- FIRST COMPRESS: loads java script external libraries and glados settings -->
 {% compress js %}
@@ -32,8 +36,20 @@
     <script type="text/javascript" src="{% static 'marvinjs/gui/lib/promise-1.0.0.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'marvinjs/js/marvinjslauncher.js' %}"></script>
 
+    <!-- Metabolism Visualiser -->
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/MetabolismVisualizatorTranspiled.js' %}"></script>
+    <!-- http://js.cytoscape.org/ -->
+    <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/cytoscape-dagre.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/JQueryPlugins/jquery.qtip-3.0.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape-qtip.js' %}"></script>
+
   {% endblock %}
 {% endcompress %}
+
+
 
 <!-- NO COMPRESS: don't include this in the compress as it needs server variables defined by the request -->
 <!-- and can not be included in the COMPRESS_OFFLINE_CONTEXT -->
@@ -98,6 +114,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/CompoundList.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/MechanismOfAction.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/MechanismOfActionList.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/CompoundMetabolism.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundNameClassificationView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundImageView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundRepresentationsView.js' %}"></script>
@@ -107,6 +124,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/Compound3DViewSpeck.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/Compound3DViewLiteMol.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/SimilarCompoundsView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundMetabolismView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundMetabolismFSView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Charts/PieView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionRowView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionCollItemView.js' %}"></script>
