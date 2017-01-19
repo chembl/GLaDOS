@@ -275,10 +275,10 @@ var MetabolismVisualizator = function () {
 
                 var img_link = n.data('has_structure') ? ws_img : backup_img;
 
-                var compound_link = ' <a target ="_blank" href = \'/chembl/compound/inspect/' + chembl_id + '\'> ' + chembl_id + ' </a>';
+                var compound_link = ' <a target ="_blank" href = \'/compound_report_card/' + chembl_id + '\'> ' + chembl_id + ' </a>';
                 var compound_img = '<img style=\'width: 100%\' src=\'' + img_link + '\'>';
                 var colour_class = 'qtip-bootstrap';
-                var text = ' <h1> ' + compound_link + '</h1> ' + compound_img;
+                var text = ' <h3> ' + compound_link + '</h3> ' + compound_img;
 
                 n.qtip({
 
