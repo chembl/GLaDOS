@@ -1,0 +1,29 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound Metabolism{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<div id='CompoundMetabolismMain' class="container main-container">
+
+  {% verbatim %}
+  <script id="Handlebars-MetabolismVisualisationFS-Title" type="text/x-handlebars-template">
+    Metabolism Graph for {{chembl_id}}:
+  </script>
+  {% endverbatim %}
+
+  <h3 class="visualisation-title" ></h3>
+
+  <div id="metabolism-visualisation-container" style="width:100%;height:75vh;border: 1px solid black;">
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+CompoundReportCardApp.initMetabolismFullScreen()
+
+{% endblock %}

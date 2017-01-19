@@ -1,0 +1,169 @@
+{
+  "nodes": [
+    {
+      "chembl_id": "CHEMBL424",
+      "molregno": "1362",
+      "pref_name": "SALICYLIC ACID",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL3544526",
+      "molregno": "1926372",
+      "pref_name": "SALICYLIC ACID PHENOL GLUCURONIDE",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL1461",
+      "molregno": "391501",
+      "pref_name": "GENTISIC ACID",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL3544527",
+      "molregno": "1926373",
+      "pref_name": "GENTISURIC ACID",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL1432",
+      "molregno": "370186",
+      "pref_name": "2,3-DIHYDROXYBENZOIC ACID",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL3544545",
+      "molregno": "1926391",
+      "pref_name": "2,3,5-TRIHYDROXYBENZOIC ACID",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL25",
+      "molregno": "1280",
+      "pref_name": "ASPIRIN",
+      "has_structure": true,
+      "is_current": true
+    },
+    {
+      "chembl_id": "CHEMBL3544525",
+      "molregno": "1926371",
+      "pref_name": "SALICYL ACID ACYL GLUCURONIDE",
+      "has_structure": true,
+      "is_current": false
+    },
+    {
+      "chembl_id": "CHEMBL586",
+      "molregno": "18667",
+      "pref_name": "SALICYLURIC ACID",
+      "has_structure": true,
+      "is_current": false
+    }
+  ],
+  "edges": [
+    {
+      "enzyme": "UGT1A6",
+      "source": 0,
+      "target": 1,
+      "met_conversion": "O-glucuronide conjugation to the hydroxyl group forming an ether",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL1743316",
+      "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
+    },
+    {
+      "enzyme": "Cytochrome P450s",
+      "source": 0,
+      "target": 2,
+      "met_conversion": "Ring hydroxylation para to the other hydroxyl",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
+    },
+    {
+      "enzyme": "UGT1A6",
+      "source": 2,
+      "target": 3,
+      "met_conversion": "Glycine conjugation to the carboxylic acid group",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL1743316",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
+    },
+    {
+      "enzyme": "Cytochrome P450s",
+      "source": 4,
+      "target": 5,
+      "met_conversion": "Ring hydroxylation para to one of the hydroxyls and meta to the other hydroxyl",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
+    },
+    {
+      "enzyme": "Cytochrome P450s",
+      "source": 0,
+      "target": 4,
+      "met_conversion": "Ring hydroxylation ortho to the other hydroxyl",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
+    },
+    {
+      "enzyme": "Esterases",
+      "source": 6,
+      "target": 0,
+      "met_conversion": "Ester hydrolysis, leaving a hydroxyl group substituent on the aromatic ring.",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
+    },
+    {
+      "enzyme": "UGT1A6",
+      "source": 0,
+      "target": 7,
+      "met_conversion": "O-glucuronide conjugation to the carboxylic acid group forming an ester",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL1743316",
+      "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
+    },
+    {
+      "enzyme": "UGT1A6",
+      "source": 0,
+      "target": 8,
+      "met_conversion": "Glycine conjugation to the carboxylic acid group",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL1743316",
+      "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
+    },
+    {
+      "enzyme": "Cytochrome P450s",
+      "source": 8,
+      "target": 3,
+      "met_conversion": "Ring hydroxylation para to the other hydroxyl group",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
+    },
+    {
+      "enzyme": "Cytochrome P450s",
+      "source": 2,
+      "target": 5,
+      "met_conversion": "Ring hydroxylation ortho to one of the hydroxyl groups and meta to the other hydroxyl group",
+      "organism": null,
+      "doc_chembl_id": "CHEMBL3544494",
+      "enzyme_chembl_id": "CHEMBL612545",
+      "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
+    }
+  ]
+}
