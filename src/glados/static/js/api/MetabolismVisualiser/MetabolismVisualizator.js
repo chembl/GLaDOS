@@ -96,6 +96,7 @@ class MetabolismVisualizator {
 
         let ans = {}
         ans.elems = []
+        ans.elems = []
         ans.stylesheet = []
 
         ans.stylesheet.push(nodes_style);
@@ -226,13 +227,13 @@ class MetabolismVisualizator {
             const enzyme = e.data('enzyme');
             const enzyme_chembl_id = e.data('enzyme_chembl_id');
             
-            const enzyme_text = enzyme_chembl_id != undefined ? `<a target ="_blank" href = '/chembl/target/inspect/${enzyme_chembl_id}'> ${enzyme_chembl_id}</a>`:"--";
+            const enzyme_text = enzyme_chembl_id != undefined ? `<a target ="_blank" href = '/target_report_card/${enzyme_chembl_id}'> ${enzyme_chembl_id}</a>`:"--";
             
             const met_conversion = e.data('met_conversion');
             const met_conversion_text = met_conversion != undefined ? met_conversion : "--";
             
             const doc_chembl_id = e.data('doc_chembl_id');
-            const doc_chembl_id_link = `<a target ="_blank" href = '/chembl/doc/inspect/${doc_chembl_id}'> ${doc_chembl_id}</a>`;
+            const doc_chembl_id_link = `<a target ="_blank" href = '/document_report_card/${doc_chembl_id}'> ${doc_chembl_id}</a>`;
             const organism = e.data('organism')
             const organism_text = organism != undefined ? ` <b> Organism: </b> ${organism}` : "--";
             
