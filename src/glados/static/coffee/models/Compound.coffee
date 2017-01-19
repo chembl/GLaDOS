@@ -71,4 +71,48 @@ Compound.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
     }
   ]
+  RESULTS_LIST_SIMILARITY:[
+    {
+      'name_to_show': 'ChEMBL ID'
+      'comparator': 'molecule_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
+    }
+    {
+      'name_to_show': 'Similarity:'
+      'comparator': 'similarity'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'custom_field_template': '<b>{{val}}</b>'
+    }
+    {
+      'name_to_show': 'Molecule Type'
+      'comparator': 'molecule_type'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+    {
+      'name_to_show': 'Name'
+      'comparator': 'pref_name'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+  ]
+  RESULTS_LIST_REPORT_CARD_CAROUSEL: [
+    {
+      'name_to_show': 'ChEMBL ID'
+      'comparator': 'molecule_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
+    }
+  ]
 }

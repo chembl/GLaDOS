@@ -41,6 +41,10 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/similar/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/SimilarCompoundsToEmbed.html")), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Targets
   # --------------------------------------------------------------------------------------------------------------------

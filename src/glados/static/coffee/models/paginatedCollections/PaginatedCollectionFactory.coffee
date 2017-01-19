@@ -38,6 +38,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             columns: collectionSettings.COLUMNS
+            is_carousel: collectionSettings.IS_CAROUSEL
+
 
           @initialiseUrl()
 
@@ -88,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewSubstructureSearchResultsList: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
 
       list.initURL = (term) ->
 
@@ -109,7 +111,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewSimilaritySearchResultsList: ->
 
-      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_OR_SIMILARITY_RESULTS_LIST)
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
 
       list.initURL = (term, percentage) ->
 
@@ -125,6 +127,55 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @resetMeta(data.page_meta)
 
           return data.molecules
+
+      return list
+
+    getNewSimilaritySearchResultsListForCarousel: ->
+
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.COMPOUND_WS_RESULTS_LIST_CAROUSEL
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+      list =  @getNewWSCollectionFor config
+
+      list.responsivisePageSize()
+
+      list.initURL = (term, percentage) ->
+
+        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL + term + '/' + percentage + '.json'
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+
+      list.parse = (data) ->
+
+          data.page_meta.records_in_page = data.molecules.length
+          @resetMeta(data.page_meta)
+
+          return data.molecules
+
+      return list
+
+    #this list is to get the alternate forms of a compound
+    getNewAlternateFormsListForCarousel: ->
+
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.COMPOUND_WS_RESULTS_LIST_CAROUSEL
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+      list =  @getNewWSCollectionFor config
+      list.responsivisePageSize()
+
+      list.parse = (data) ->
+
+        data.page_meta.records_in_page = data.molecule_forms.length
+        @resetMeta(data.page_meta)
+
+        return data.molecule_forms
+
+      list.initURL = (chemblID) ->
+
+        @baseUrl = glados.Settings.WS_BASE_URL + 'molecule_form/' + chemblID + '.json'
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
 
       return list
 

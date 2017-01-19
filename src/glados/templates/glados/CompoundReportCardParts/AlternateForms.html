@@ -18,29 +18,9 @@
 
     <div class="card-content ebi-links" style="display: none">
 
-      <div id='Bck-AlternateForms' class="row">
-
-        <!-- Backbone -->
-
-
-      </div>
-
-      {% verbatim %}
-
-        <script id="Handlebars-Compound-AlternateFormCard" type="text/x-handlebars-template">
-
-          <div class="card {{colour}} z-depth-0">
-            <div class="card-image hoverable">
-              <img src="{{image_url}}" class="responsive-img" alt="Alternate Form Image">
-                    <span class="chembl-card-title"><a
-                      href="{{report_card_url}}">{{molecule_chembl_id}}</a></span>
-            </div>
-          </div>
-
-        </script>
-
-
-      {% endverbatim %}
+      {% block carousel %}
+        {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
+      {% endblock %}
 
     </div>
 
