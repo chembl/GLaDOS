@@ -13,10 +13,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     # Computed Image and report card URL's for Compounds
     response.structure_image = false
-    if response.structure_type == 'NONE'
-      response.image_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
-    else if response.structure_type == 'SEQ'
-      response.image_url = glados.Settings.STATIC_URL+'img/protein_structure.png'
+    if response.structure_type == 'NONE' or response.structure_type == 'SEQ'
+      response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
       response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
       response.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id \

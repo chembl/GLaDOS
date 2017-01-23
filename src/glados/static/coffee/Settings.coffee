@@ -112,6 +112,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
 
+  glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
