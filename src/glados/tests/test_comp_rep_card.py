@@ -46,15 +46,14 @@ class CompoundReportCardTest(ReportCardTester):
 
   def assert_alternate_forms(self, chembl_ids_list):
 
-    alternate_forms_row = self.browser.find_element_by_id('Bck-AlternateForms')
+    alternate_forms_row = self.browser.find_element_by_id('AlternateFormsCard')
     alternate_forms_cards = alternate_forms_row.find_elements_by_class_name('card')
 
     actual_srcs = [card.find_element_by_tag_name('img').get_attribute('src') for card in alternate_forms_cards]
     test_srcs = ['https://www.ebi.ac.uk/chembl/api/data/image/' + chembl_id + '.svg?engine=indigo' for chembl_id in chembl_ids_list]
     self.assertEqual(sorted(actual_srcs), sorted(test_srcs))
 
-    print('---')
-    actual_links = [card.find_element_by_class_name('chembl-card-title').find_element_by_tag_name('a') for card in
+    actual_links = [card.find_element_by_class_name('card-content').find_element_by_tag_name('a') for card in
                     alternate_forms_cards]
     actual_links_hrefs = [link.get_attribute('href') for link in actual_links]
     for chembl_id_i in chembl_ids_list:
@@ -211,7 +210,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # structure not available
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/structure_not_available.png')
+    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/CHEMBL6963')
 
     # Max Phase 0
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
@@ -259,7 +258,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # protein sctructure
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/protein_structure.png')
+    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/CHEMBL2108680')
 
     # --------------------------------------
     # Molecule Features
