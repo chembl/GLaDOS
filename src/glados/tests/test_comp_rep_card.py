@@ -74,7 +74,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_1(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL25', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL25')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -202,7 +202,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_2(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL6963', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6963')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -250,7 +250,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compund_report_card_scenario_3(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL2108680', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2108680')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -270,7 +270,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_4(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL6939', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6939')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -287,7 +287,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_5(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL2109588', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2109588')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -322,7 +322,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_6(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742989', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742989')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -334,7 +334,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_7(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742987', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1742987')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -346,7 +346,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_8(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL55/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL55/')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -408,7 +408,7 @@ class CompoundReportCardTest(ReportCardTester):
   def test_compound_report_card_scenario_9(self):
 
     # this compound does not exist!
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL7/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL7/')
 
     # --------------------------------------
     # Compound Name and Classification
@@ -430,7 +430,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_10(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL17/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL17/')
 
     # --------------------------------------
     # Mechanism of action
@@ -462,7 +462,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_11(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL1201822/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1201822/')
 
     # --------------------------------------
     # Molecule Features
@@ -492,7 +492,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_12(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL254328/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL254328/')
 
     # --------------------------------------
     # Molecule Features
@@ -504,7 +504,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_13(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL6995/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL6995/')
 
     # --------------------------------------
     # Molecule Features
@@ -520,7 +520,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_14(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL2106520/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2106520/')
 
     # --------------------------------------
     # Molecule Features
@@ -532,7 +532,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_15(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL35/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL35/')
 
     # --------------------------------------
     # Molecule Features

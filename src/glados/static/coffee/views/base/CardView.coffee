@@ -9,11 +9,11 @@ CardView = Backbone.View.extend
     if xhr.status == 404
 
       switch @resource_type
-        when 'Compound' then error_msg = 'No compound found with id ' + @model.get('molecule_chembl_id')
-        when 'Target' then error_msg = 'No target found with id ' + @model.get('target_chembl_id')
-        when 'Cell Line' then error_msg = 'No cell line found with id ' + @model.get('cell_chembl_id')
-        when 'Assay' then error_msg = 'No assay found with id ' + @model.get('assay_chembl_id')
-        when 'Document' then error_msg = 'No document found with id ' + @model.get('document_chembl_id')
+        when 'Compound' then error_msg = 'No compound found with id ' + model.get('molecule_chembl_id')
+        when 'Target' then error_msg = 'No target found with id ' + model.get('target_chembl_id')
+        when 'Cell Line' then error_msg = 'No cell line found with id ' + model.get('cell_chembl_id')
+        when 'Assay' then error_msg = 'No assay found with id ' + model.get('assay_chembl_id')
+        when 'Document' then error_msg = 'No document found with id ' + model.get('document_chembl_id')
 
     else
       error_msg = 'There was an error while loading the data (' + xhr.status + ' ' + xhr.statusText + ')'

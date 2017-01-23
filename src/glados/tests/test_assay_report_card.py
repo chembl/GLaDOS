@@ -8,7 +8,7 @@ class AssayReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_1(self):
 
-    self.getURL(self.HOST + '/assay_report_card/NOT_EXISTS/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/assay_report_card/NOT_EXISTS/')
 
     # --------------------------------------
     # Basic Information
@@ -19,7 +19,7 @@ class AssayReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_2(self):
 
-    self.getURL(self.HOST + '/assay_report_card/CHEMBL615155/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/assay_report_card/CHEMBL615155/')
 
     # --------------------------------------
     # Basic Information
@@ -69,7 +69,7 @@ class AssayReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_3(self):
 
-    self.getURL(self.HOST + '/assay_report_card/CHEMBL931654/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/assay_report_card/CHEMBL931654/')
 
     # --------------------------------------
     # Basic Information
@@ -83,7 +83,7 @@ class AssayReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_4(self):
 
-    self.getURL(self.HOST + '/assay_report_card/CHEMBL615207/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/assay_report_card/CHEMBL615207/')
 
     # --------------------------------------
     # Basic Information
@@ -97,7 +97,7 @@ class AssayReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_5(self):
 
-    self.getURL(self.HOST + '/assay_report_card/CHEMBL615160/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/assay_report_card/CHEMBL615160/')
 
     # --------------------------------------
     # Basic Information

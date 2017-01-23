@@ -7,7 +7,7 @@ class TargetReportCardTest(ReportCardTester):
   # --------------------------------------------------------------------------------------
 
   def test_target_report_card_scenario_1(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL223', self.SLEEP_TIME*3)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL223')
 
     # --------------------------------------
     # Target Name and Classification
@@ -61,7 +61,7 @@ class TargetReportCardTest(ReportCardTester):
     self.assertFalse(adcc_div.is_displayed())
 
   def test_target_report_card_scenario_2(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL2364672', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2364672')
 
     # --------------------------------------
     # Target Name and Classification
@@ -98,7 +98,7 @@ class TargetReportCardTest(ReportCardTester):
 
 
   def test_target_report_card_scenario_3(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL2363053', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2363053')
 
     # --------------------------------------
     # Target Name and Classification
@@ -126,7 +126,7 @@ class TargetReportCardTest(ReportCardTester):
     self.assertEqual(components_section.value_of_css_property('display'), 'none')
 
   def test_target_report_card_scenario_4(self):
-    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965', self.SLEEP_TIME * 4)
+    self.getURL(self.HOST + '/target_report_card/CHEMBL2363965' * 4)
 
     # Protein target classification
     # This one has 60 target components (the highest number in the database), and it only has 2 classifications

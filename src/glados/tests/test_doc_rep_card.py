@@ -8,7 +8,7 @@ class DocumentReportCardTest(ReportCardTester):
 
   def test_document_report_card_scenario_1(self):
 
-    self.getURL(self.HOST + '/document_report_card/NOT_EXISTS/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/document_report_card/NOT_EXISTS/')
 
     # --------------------------------------
     # Basic Information
@@ -19,7 +19,7 @@ class DocumentReportCardTest(ReportCardTester):
 
   def test_assay_report_card_scenario_2(self):
 
-    self.getURL(self.HOST + '/document_report_card/CHEMBL1151960/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/document_report_card/CHEMBL1151960/')
 
     # --------------------------------------
     # Basic Information
