@@ -10,7 +10,7 @@ class ReportCardTester(unittest.TestCase):
   HOST = 'http://127.0.0.1:8000'
   DEFAULT_TIMEOUT = 60
 
-  IMPLICIT_WAIT = 1
+  IMPLICIT_WAIT = 3
 
   def setUp(self):
     try:
