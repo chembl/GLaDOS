@@ -140,3 +140,18 @@ glados.logGladosSettings = () ->
 
 
   $(window).resize updateScreenType
+
+# setups variables and functions to check whether or not the page has loaded
+glados.setupOnLoadAfterJS = () ->
+  js_ready_div = '<div id="GLaDOS-page-loaded" style="display: none;">NO</div>'
+  $('body').prepend(js_ready_div)
+  glados.ajax_count = 0
+  $(document).ajaxStart () ->
+    glados.ajax_count++
+    $('#GLaDOS-page-loaded').html('NO')
+  $(document).ajaxStop () ->
+    glados.ajax_count--
+    if glados.ajax_count == 0
+      $('#GLaDOS-page-loaded').html('YES')
+
+glados.setupOnLoadAfterJS()

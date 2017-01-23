@@ -57,7 +57,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
     # If the image strcuture can't be shown, don't activate the zoom modal.
     img = $(@el).find('#Bck-COMP_IMG')
-    if img.attr('src').indexOf(glados.Settings.STATIC_URL+'') > -1
+    if img.attr('src').indexOf(glados.Settings.STATIC_URL+'') > -1 or img.attr('src').indexOf(glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL) > -1
       $('#CNC-IMG-Options-Zoom, #CNC-IMG-Options-Zoom-small').remove()
       return
 

@@ -8,9 +8,9 @@ import sys
 class ReportCardTester(unittest.TestCase):
 
   HOST = 'http://127.0.0.1:8000'
-  SLEEP_TIME = 10
+  DEFAULT_TIMEOUT = 60
 
-  IMPLICIT_WAIT = 1
+  IMPLICIT_WAIT = 3
 
   def setUp(self):
     try:
@@ -25,11 +25,24 @@ class ReportCardTester(unittest.TestCase):
   def tearDown(self):
     self.browser.quit()
 
-  def getURL(self, url, sleeptime):
+  def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
     print(url)
     self.browser.get(url)
-    time.sleep(sleeptime)
+    start_time = time.time()
+    if wait_for_glados_ready:
+      loaded = False
+      while not loaded and time.time()-start_time < timeout:
+        try:
+          elem = self.browser.find_element_by_id("GLaDOS-page-loaded")
+          if elem.get_property('innerHTML') == 'YES':
+            loaded = True
+          else:
+            print("Loading '{0}' ...".format(url))
+        except:
+          self.fail("Error: Div element 'GLaDOS-page-loaded' is missing!")
+        time.sleep(1)
+      self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
   def assert_embed_trigger(self, card_id, resource_type, section_name, chembl_id):
 
