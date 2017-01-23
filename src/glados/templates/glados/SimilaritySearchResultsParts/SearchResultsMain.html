@@ -10,6 +10,18 @@
 
     <h2>Similarity Search Results:</h2>
 
+    {% verbatim %}
+      <script id="Handlebars-SimmilarCompoundsResults-Title" type="text/x-handlebars-template">
+        Compounds similar with at least {{similarity}}% similarity:
+      </script>
+    {% endverbatim %}
+
+    <span class="similar-compounds-title">
+    </span>
+
+    <br>
+    <br>
+
     <div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
       <!-- Backbone fills this with the infinity browser view -->
     </div>

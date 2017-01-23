@@ -1,0 +1,17 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compound Metabolism{% endblock %}
+
+{% block content2 %}
+
+   <div id="Compound Metabolism" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/Metabolism.html" %}
+   </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+CompoundReportCardApp.initMetabolism();
+
+{% endblock %}

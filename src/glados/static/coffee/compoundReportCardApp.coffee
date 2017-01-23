@@ -9,7 +9,12 @@ class CompoundReportCardApp
     compound = new Compound({molecule_chembl_id: GlobalVariables.CHEMBL_ID})
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
-    moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
+    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
+    moleculeFormsList.initURL GlobalVariables.CHEMBL_ID
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
 
     new CompoundNameClassificationView
       model: compound
@@ -39,9 +44,19 @@ class CompoundReportCardApp
         collection: moleculeFormsList
         el: $('#AlternateFormsCard')
 
+    new SimilarCompoundsView
+      collection: similarCompoundsList
+      el: $('#SimilarCompoundsCard')
+
+    new CompoundMetabolismView
+      model: compoundMetabolism
+      el: $('#MetabolismCard')
+
     compound.fetch()
     mechanismOfActionList.fetch({reset: true})
     moleculeFormsList.fetch({reset: true})
+    similarCompoundsList.fetch({reset: true})
+    compoundMetabolism.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
@@ -137,30 +152,52 @@ class CompoundReportCardApp
     compound = new Compound
       molecule_chembl_id: CHEMBL_ID
 
-    moleculeFormsList = CompoundReportCardApp.initMoleculeFormsList(compound)
+    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
+    moleculeFormsList.initURL GlobalVariables.CHEMBL_ID
 
     new CompoundMoleculeFormsListView
       collection: moleculeFormsList,
       el: $('#AlternateFormsCard')
 
     moleculeFormsList.fetch({reset: true})
-  # -------------------------------------------------------------
-  # Models
-  # -------------------------------------------------------------
-  ### *
-    * Initializes a molecule forms list given a member compound (not necessarily the parent!)
-    * For now, it lazy-loads each of the compounds
-    * @param {Compound} member_compound, the list of compounds
-    * @return {CompoundList} the list that has been created
-  ###
-  @initMoleculeFormsList = (member_compound) ->
-    compoundList = new CompoundList
 
-    compoundList.original_compound = member_compound
-    compoundList.origin = 'molecule_forms'
-    compoundList.url = glados.Settings.WS_BASE_URL + 'molecule_form/' + member_compound.get('molecule_chembl_id') + '.json'
-    return compoundList
+  @initSimilarCompounds = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
+    similarCompoundsList.initURL GlobalVariables.CHEMBL_ID, glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
+
+    new SimilarCompoundsView
+      collection: similarCompoundsList
+      el: $('#SimilarCompoundsCard')
+
+    similarCompoundsList.fetch({reset: true})
+
+  @initMetabolismFullScreen = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 0
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+
+    new CompoundMetabolismFSView
+      model: compoundMetabolism
+      el: $('#CompoundMetabolismMain')
+
+    compoundMetabolism.fetch()
+
+  @initMetabolism = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 3
+
+    compoundMetabolism = new CompoundMetabolism()
+    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+
+    new CompoundMetabolismView
+      model: compoundMetabolism
+      el: $('#MetabolismCard')
+
+    compoundMetabolism.fetch()
 
   # -------------------------------------------------------------
   # Views
@@ -169,4 +206,3 @@ class CompoundReportCardApp
   @initPieView = ->
     pieview = new PieView
     pieview.render()
-

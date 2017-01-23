@@ -125,7 +125,7 @@
 
     <div class="card horizontal grey lighten-5">
       <div class="white card-image" >
-        <img src="{{img_url}}" height="150px" >
+        <img src="{{img_url}}" height="150px" width="150px" >
       </div>
       <div class="card-stacked">
         <div class="card-content">
@@ -139,7 +139,7 @@
 
           {{else}}
           <small>
-            <p>{{this.value}}</p>
+            <p >{{this.value}}</p>
           </small>
           {{/if}}
           {{/each}}
@@ -193,7 +193,7 @@
     <div class="col s12 m6 l4">
       <div class="card grey lighten-5">
 
-        <div class="card-image">
+        <div class="white card-image">
           <img src="{{img_url}}" height="200px">
         </div>
         <div class="card-content">
@@ -220,6 +220,40 @@
     </div>
 
   </script>
+
+<script id="Handlebars-Common-Paginated-Card-Carousel" type="text/x-handlebars-template">
+
+    <div class="col s12 m6 l4">
+      <div class="card grey lighten-5">
+
+        <div class="white card-image">
+          <img src="{{img_url}}" height="200px">
+        </div>
+        <div class="card-content">
+
+          {{#each columns}}
+
+          {{#if this.has_link}}
+
+          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          </p>
+
+          {{else}}
+          <small>
+            <p >
+              {{this.name_to_show}}:{{this.value}}
+            </p>
+          </small>
+          {{/if}}
+          {{/each}}
+
+        </div>
+      </div>
+
+    </div>
+
+  </script>
+
 
 <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
 

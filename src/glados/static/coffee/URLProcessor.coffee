@@ -72,3 +72,11 @@ class URLProcessor
     pathname = window.location.pathname
     pathnameParts = pathname.split('/')
     return parseInt( pathnameParts[pathnameParts.length - 1])
+
+  # gets the sting in a specific position in the url after separating by '/'
+  # position starts at 0
+  @getUrlPartInReversePosition = (position) ->
+
+    pathname = window.location.pathname
+    pathnameParts = pathname.split('/')
+    return pathnameParts[pathnameParts.length - position - 1]

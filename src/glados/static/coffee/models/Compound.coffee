@@ -13,10 +13,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     # Computed Image and report card URL's for Compounds
     response.structure_image = false
-    if response.structure_type == 'NONE'
-      response.image_url = glados.Settings.STATIC_URL+'img/structure_not_available.png'
-    else if response.structure_type == 'SEQ'
-      response.image_url = glados.Settings.STATIC_URL+'img/protein_structure.png'
+    if response.structure_type == 'NONE' or response.structure_type == 'SEQ'
+      response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
       response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
       response.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id \
@@ -69,6 +67,50 @@ Compound.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+    }
+  ]
+  RESULTS_LIST_SIMILARITY:[
+    {
+      'name_to_show': 'ChEMBL ID'
+      'comparator': 'molecule_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
+    }
+    {
+      'name_to_show': 'Similarity:'
+      'comparator': 'similarity'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'custom_field_template': '<b>{{val}}</b>'
+    }
+    {
+      'name_to_show': 'Molecule Type'
+      'comparator': 'molecule_type'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+    {
+      'name_to_show': 'Name'
+      'comparator': 'pref_name'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+  ]
+  RESULTS_LIST_REPORT_CARD_CAROUSEL: [
+    {
+      'name_to_show': 'ChEMBL ID'
+      'comparator': 'molecule_chembl_id'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'link_base': 'report_card_url'
+      'image_base_url': 'image_url'
     }
   ]
 }

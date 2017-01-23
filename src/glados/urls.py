@@ -41,6 +41,19 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/similar/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/SimilarCompoundsToEmbed.html")), ),
+
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/metabolism/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/MetabolismToEmbed.html")), ),
+
+  url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/MoleculeMetabolismGraphFS.html")), ),
+
+
   # --------------------------------------------------------------------------------------------------------------------
   # Targets
   # --------------------------------------------------------------------------------------------------------------------

@@ -1,2 +1,2 @@
 # this model is going to be used for the drug browser
-Drug = Compound.extend({})
+Drug = Backbone.Model.extend({})
