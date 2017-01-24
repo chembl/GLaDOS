@@ -1,6 +1,6 @@
 django>=1.9
 django-compressor>=2.0
-selenium
+selenium==2.52
 twitter
 python3-memcached
 pyScss
