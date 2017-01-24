@@ -20,7 +20,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       #Oligosaccharide
       if response.molecule_type == 'Oligosaccharide'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
-        console.log 'SET IMAGE TO: ', response.image_url
+      else if response.molecule_type == 'Small molecule'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.png'
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
@@ -32,6 +33,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
     return response;
+
 
 Compound.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
