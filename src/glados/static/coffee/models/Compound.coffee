@@ -22,7 +22,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
       else if response.molecule_type == 'Small molecule'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.png'
-
+      else if response.molecule_type == 'Antibody'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.png'
+        
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
       response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
