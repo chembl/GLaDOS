@@ -56,6 +56,7 @@ class ReportCardTester(unittest.TestCase):
           elem = self.browser.find_element_by_id("GLaDOS-page-loaded")
           if elem.get_property('innerHTML') == 'YES':
             loaded = True
+          else:
             print("Loading {0} ...".format(url))
         except:
           pass
