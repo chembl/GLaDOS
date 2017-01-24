@@ -5,6 +5,11 @@ import time
 # This file automates the process of looking at the page and checking if it is correct
 class JavascriptTest(ReportCardTester):
 
+
+  def tearDown(self):
+    self.browser.quit()
+    ReportCardTester.SINGLETON_BROWSER = None
+
   def test_javascript_code_only(self):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)

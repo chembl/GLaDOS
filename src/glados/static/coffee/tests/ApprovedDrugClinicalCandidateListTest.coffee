@@ -5,8 +5,11 @@ describe "Approved Drug and Clinical Candidate List", ->
 
   beforeAll (done) ->
 
-    appDrugsClinCandsList.fetch({async:false})
-    done()
+    appDrugsClinCandsList.fetch()
+
+    setTimeout ( ->
+      done()
+    ), 5000
 
   it "(SERVER DEPENDENT) loads the information correctly after the multiple calls", (done) ->
 

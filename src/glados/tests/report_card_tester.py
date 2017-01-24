@@ -36,17 +36,13 @@ class ReportCardTester(unittest.TestCase):
       except:
         pass
 
-  def printBrowserLogs(self):
-    log_types = self.browser .log_types
-    for log_i in log_types:
-      print(self.browser.get_log(log_i))
-
-
   def setUp(self):
+    # instantiates the singleton browser
+    ReportCardTester.instantiateBrowser()
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    pass
+    self.browser.get("about:preferences")
 
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
@@ -65,8 +61,6 @@ class ReportCardTester(unittest.TestCase):
           pass
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
         time.sleep(1)
-      if not loaded:
-        self.printBrowserLogs()
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
   def assert_embed_trigger(self, card_id, resource_type, section_name, chembl_id):
@@ -87,6 +81,3 @@ class ReportCardTester(unittest.TestCase):
     rows = table.find_elements(By.TAG_NAME, "tr")[1::]
     for row in rows:
       self.assertIn(row.text, texts_should_be)
-
-# instantiates the singleton browser
-ReportCardTester.instantiateBrowser()
