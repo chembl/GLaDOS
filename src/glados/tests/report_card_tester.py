@@ -42,7 +42,8 @@ class ReportCardTester(unittest.TestCase):
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    self.browser.get(self.HOST+"/static/favicon.ico")
+    self.browser.get(self.HOST+"/layout_test")
+
 
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
