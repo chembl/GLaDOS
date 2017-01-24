@@ -15,8 +15,6 @@ class ReportCardTester(unittest.TestCase):
 
   SINGLETON_BROWSER = None
 
-  INSTANTIATE_CALLS = 0
-
   @staticmethod
   def instantiateBrowser():
     if ReportCardTester.SINGLETON_BROWSER is None:
@@ -38,6 +36,11 @@ class ReportCardTester(unittest.TestCase):
       except:
         pass
 
+  def printBrowserLogs(self):
+    log_types = self.browser .log_types
+    for log_i in log_types:
+      print(self.browser.get_log(log_i))
+
 
   def setUp(self):
     self.browser = ReportCardTester.SINGLETON_BROWSER
@@ -57,11 +60,13 @@ class ReportCardTester(unittest.TestCase):
           elem = self.browser.find_element_by_id("GLaDOS-page-loaded")
           if elem.get_property('innerHTML') == 'YES':
             loaded = True
-          else:
-            print("Loading '{0}' ...".format(url))
+            print("Loading {0} ...".format(url))
         except:
           pass
+          print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
         time.sleep(1)
+      if not loaded:
+        self.printBrowserLogs()
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
   def assert_embed_trigger(self, card_id, resource_type, section_name, chembl_id):
