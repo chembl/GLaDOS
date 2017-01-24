@@ -14,19 +14,8 @@ class DocumentReportCardTest(ReportCardTester):
     # --------------------------------------
     # Basic Information
     # --------------------------------------
-    loaded = False
-    start_time = time.time()
-    timeout = self.DEFAULT_TIMEOUT/3
-    while not loaded and time.time() - start_time < timeout:
-      try:
-        elem = self.browser.find_element_by_class_name('DBasicInformation')
-        loaded = True
-      except:
-        print("Loading '{0}', waiting on {1} ...".format(url, "DBasicInformation"))
-      time.sleep(1)
-    self.assertTrue(loaded, "{0} element was not found on {1}".format("DBasicInformation", url))
 
-    error_msg_p = self.browser.find_element_by_id('DBasicInformation').find_element_by_class_name('Bck-errormsg')
+    error_msg_p = self.browser.find_element_by_id('BasicInformation').find_element_by_class_name('Bck-errormsg')
     self.assertEquals(error_msg_p.text, 'No document found with id NOT_EXISTS')
 
   def test_assay_report_card_scenario_2(self):
