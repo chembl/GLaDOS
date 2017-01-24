@@ -14,7 +14,15 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     # Computed Image and report card URL's for Compounds
     response.structure_image = false
     if response.structure_type == 'NONE' or response.structure_type == 'SEQ'
-      response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
+      # see the cases here: https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?spaceKey=CHEMBL&title=ChEMBL+Interface
+      # in the section Placeholder Compound Images
+
+      #Oligosaccharide
+      if response.molecule_type == 'Oligosaccharide'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
+        console.log 'SET IMAGE TO: ', response.image_url
+
+      #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
       response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
       response.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id \

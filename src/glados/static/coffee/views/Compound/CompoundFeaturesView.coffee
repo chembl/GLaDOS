@@ -8,6 +8,8 @@ CompoundFeaturesView = CardView.extend
     @resource_type = 'Compound'
 
   render: ->
+    console.log 'rRENDER!'
+
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
     @renderProperty('Bck-FirstInClass', 'first_in_class')
@@ -28,7 +30,6 @@ CompoundFeaturesView = CardView.extend
     @activateTooltips()
 
   renderProperty: (div_id, property) ->
-
     property_div = $(@el).find('#' + div_id)
 
     property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
@@ -39,6 +40,7 @@ CompoundFeaturesView = CardView.extend
       tooltip_position: @getMolFeatureDetails(property, 3)
 
   getMolFeatureDetails: (feature, position) ->
+    console.log 'feature: ', feature
     return @molFeatures[feature][@model.get(feature)][position]
 
   # active class,filename, tooltip, mobile description, tooltip position
@@ -47,6 +49,7 @@ CompoundFeaturesView = CardView.extend
       'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule','top']
       'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'top']
       'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'top']
+      'Oligosaccharide': ['active', 'mt_oligosaccharide', 'Molecule Type: Oligosaccharide', 'top']
     'first_in_class':
       '-1': ['', 'first_in_class', 'First in Class: Undefined', 'top']
       '0': ['', 'first_in_class', 'First in Class: No', 'top']

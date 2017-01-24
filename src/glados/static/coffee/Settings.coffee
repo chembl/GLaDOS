@@ -96,6 +96,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.GLADOS_BASE_PATH_REL = app_root
   glados.Settings.GLADOS_BASE_URL_FULL = request_root+app_root
 
+  glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
+
   # the search url is expected to be search_results/[advanced/]:query_string
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'

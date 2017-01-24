@@ -18,6 +18,16 @@
 
     <div class="card-content ebi-links" style="display: none">
 
+      {% verbatim %}
+      <script id="Handlebars-CompRepCard-AlternateCompounds-Title" type="text/x-handlebars-template">
+        Alternate forms of {{chembl_id}}:
+      </script>
+      {% endverbatim %}
+
+      <span class="alternate-compounds-title">
+        hkhkhk
+      </span>
+
       {% block carousel %}
         {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
       {% endblock %}
