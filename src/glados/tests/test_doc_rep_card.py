@@ -1,4 +1,5 @@
 from glados.tests.report_card_tester import ReportCardTester
+import time
 
 class DocumentReportCardTest(ReportCardTester):
 
@@ -7,12 +8,23 @@ class DocumentReportCardTest(ReportCardTester):
   # --------------------------------------------------------------------------------------
 
   def test_document_report_card_scenario_1(self):
-
-    self.getURL(self.HOST + '/document_report_card/NOT_EXISTS/')
+    url = self.HOST + '/document_report_card/NOT_EXISTS/'
+    self.getURL(url)
 
     # --------------------------------------
     # Basic Information
     # --------------------------------------
+    loaded = False
+    start_time = time.time()
+    timeout = self.DEFAULT_TIMEOUT/3
+    while not loaded and time.time() - start_time < timeout:
+      try:
+        elem = self.browser.find_element_by_class_name('DBasicInformation')
+        loaded = True
+      except:
+        print("Loading '{0}', waiting on {1} ...".format(url, "DBasicInformation"))
+      time.sleep(1)
+    self.assertTrue(loaded, "{0} element was not found on {1}".format("DBasicInformation", url))
 
     error_msg_p = self.browser.find_element_by_id('DBasicInformation').find_element_by_class_name('Bck-errormsg')
     self.assertEquals(error_msg_p.text, 'No document found with id NOT_EXISTS')
