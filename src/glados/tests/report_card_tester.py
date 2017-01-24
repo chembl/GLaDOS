@@ -50,6 +50,7 @@ class ReportCardTester(unittest.TestCase):
     print(url)
     self.browser.get(url)
     start_time = time.time()
+    timeout_glados_page_load_elem = timeout/3
     if wait_for_glados_ready:
       loaded = False
       while not loaded and time.time()-start_time < timeout:
@@ -60,7 +61,8 @@ class ReportCardTester(unittest.TestCase):
           else:
             print("Loading '{0}' ...".format(url))
         except:
-          self.fail("Error: Div element 'GLaDOS-page-loaded' is missing!")
+          if time.time()-start_time > timeout_glados_page_load_elem:
+            self.fail("Error: Div element 'GLaDOS-page-loaded' is missing!")
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
