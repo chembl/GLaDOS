@@ -42,7 +42,7 @@ class ReportCardTester(unittest.TestCase):
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    pass
+    self.browser.get(self.HOST+"/static/favicon.ico")
 
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
@@ -63,6 +63,7 @@ class ReportCardTester(unittest.TestCase):
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
+      time.sleep(1)
 
   def assert_embed_trigger(self, card_id, resource_type, section_name, chembl_id):
 

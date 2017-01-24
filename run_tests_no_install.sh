@@ -45,3 +45,4 @@ echo "PATH:$PATH"
 export PYTHONPATH=${DIR}/src:${PYTHONPATH}
 echo "PYTHONPATH:$PYTHONPATH"
 python -m glados.tests.run_tests
+rc=$?; if [[ ${rc} != 0 ]]; then exit ${rc}; fi
