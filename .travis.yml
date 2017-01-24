@@ -14,5 +14,6 @@ before_script:
 script:
   - "./run_tests_no_install.sh"
 addons:
+  firefox: "44.0.2"
   apt:
     packages: memcached
