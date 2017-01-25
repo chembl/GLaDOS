@@ -9,7 +9,7 @@ describe "Approved Drug and Clinical Candidate List", ->
 
     setTimeout ( ->
       done()
-    ), 2000
+    ), 5000
 
   it "(SERVER DEPENDENT) loads the information correctly after the multiple calls", (done) ->
 

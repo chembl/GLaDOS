@@ -152,6 +152,10 @@ glados.setupOnLoadAfterJS = () ->
   $(document).ajaxStop () ->
     glados.ajax_count--
     if glados.ajax_count == 0
-      $('#GLaDOS-page-loaded').html('YES')
+      setTimeout(
+        () ->
+          $('#GLaDOS-page-loaded').html('YES')
+        , 1000
+      )
 
 glados.setupOnLoadAfterJS()
