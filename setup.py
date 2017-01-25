@@ -48,11 +48,11 @@ setup(
     packages=find_packages(src_dir),
     long_description=open('README.md').read(),
     install_requires=[
-        'django>=1.9',
+        'django==1.10.4',
         'django-compressor>=2.0',
         'twitter',
         'python3-memcached',
-        'selenium',
+        'selenium==3.0.2',
         'CoffeeScript',
         'pyScss',
         'watchdog',

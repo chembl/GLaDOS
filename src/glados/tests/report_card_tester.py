@@ -15,6 +15,8 @@ class ReportCardTester(unittest.TestCase):
 
   SINGLETON_BROWSER = None
 
+  SUITE = unittest.TestSuite()
+
   @staticmethod
   def instantiateBrowser():
     if ReportCardTester.SINGLETON_BROWSER is None:
@@ -44,7 +46,6 @@ class ReportCardTester(unittest.TestCase):
   def tearDown(self):
     self.browser.get(self.HOST+"/layout_test")
 
-
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
     print(url)
@@ -60,7 +61,6 @@ class ReportCardTester(unittest.TestCase):
           else:
             print("Loading {0} ...".format(url))
         except:
-          pass
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
