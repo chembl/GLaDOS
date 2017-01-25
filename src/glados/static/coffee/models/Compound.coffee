@@ -28,6 +28,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
       else if response.molecule_type == 'Oligonucleotide'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
+      else if response.molecule_type == 'Enzyme'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.png'
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
