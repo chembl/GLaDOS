@@ -64,11 +64,12 @@ class ReportCardTester(unittest.TestCase):
       while not loaded and time.time()-start_time < timeout:
         try:
           elem = self.browser.find_element_by_id("GLaDOS-page-loaded")
-          if elem.get_property('innerHTML') == 'YES':
+          if elem.get_attribute('innerHTML') == 'YES':
             loaded = True
           else:
             print("Loading {0} ...".format(url))
         except:
+          traceback.print_exc()
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
           if time.time() - start_time > timeout/3:
             print("Travis Firefox might be stalled ...")
