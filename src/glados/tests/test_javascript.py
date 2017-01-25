@@ -23,13 +23,14 @@ class JavascriptTest(ReportCardTester):
           .find_element_by_class_name('jasmine-failed')
         loaded = True
       except:
-        print("Loading '{0}' ...".format(url))
+        pass
       try:
         elem = self.browser.find_element_by_class_name('jasmine-alert')\
           .find_element_by_class_name('jasmine-passed')
         loaded = True
       except:
-        print("Loading '{0}' ...".format(url))
+        pass
+      print("Loading {0} ...".format(url))
       time.sleep(1)
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
     try:
