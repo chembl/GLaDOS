@@ -158,4 +158,4 @@ glados.setupOnLoadAfterJS = () ->
         , 1000
       )
 
-glados.setupOnLoadAfterJS()
+$( document ).ready(glados.setupOnLoadAfterJS)
