@@ -52,7 +52,7 @@ setup(
         'django-compressor>=2.0',
         'twitter',
         'python3-memcached',
-        'selenium==3.0.2',
+        'selenium==2.53',
         'CoffeeScript',
         'pyScss',
         'watchdog',
