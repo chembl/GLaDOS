@@ -40,13 +40,19 @@ CompoundFeaturesView = CardView.extend
       tooltip_position: @getMolFeatureDetails(property, 3)
 
   getMolFeatureDetails: (feature, position) ->
-    console.log 'feature: ', feature
-    return @molFeatures[feature][@model.get(feature)][position]
+    if feature == 'molecule_type' and @model.get('natural_product') == '1'
+      @molFeatures[feature]['Natural product'][position]
+    else if feature == 'molecule_type' and @model.get('polymer_flag') == true
+      @molFeatures[feature]['Small molecule polymer'][position]
+    else
+      return @molFeatures[feature][@model.get(feature)][position]
 
   # active class,filename, tooltip, mobile description, tooltip position
   molFeatures:
     'molecule_type':
       'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule','top']
+      'Natural product': ['active', 'mt_natural_product', 'Drug Type: natural product','top']
+      'Small molecule polymer': ['active', 'mt_smol_polymer', 'Drug Type: small molecule polymer','top']
       'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'top']
       'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'top']
       'Oligosaccharide': ['active', 'mt_oligosaccharide', 'Molecule Type: Oligosaccharide', 'top']
