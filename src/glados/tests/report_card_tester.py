@@ -70,16 +70,17 @@ class ReportCardTester(unittest.TestCase):
             print("Loading {0} ...".format(url))
         except:
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
-          print("Travis Firefox might be stalled ...")
-          print("Closing Firefox ...")
-          ReportCardTester.closeBrowser()
-          print("Giving travis some free relaxation time 30 secs ...")
-          time.sleep(30)
-          print("Starting Firefox ...")
-          ReportCardTester.instantiateBrowser()
-          self.browser = ReportCardTester.SINGLETON_BROWSER
-          self.getURL(url, timeout=timeout, wait_for_glados_ready=wait_for_glados_ready, retries=retries-1)
-          return
+          if time.time() - start_time > timeout/3:
+            print("Travis Firefox might be stalled ...")
+            print("Closing Firefox ...")
+            ReportCardTester.closeBrowser()
+            print("Giving travis some free relaxation time 30 secs ...")
+            time.sleep(30)
+            print("Starting Firefox ...")
+            ReportCardTester.instantiateBrowser()
+            self.browser = ReportCardTester.SINGLETON_BROWSER
+            self.getURL(url, timeout=timeout, wait_for_glados_ready=wait_for_glados_ready, retries=retries-1)
+            return
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
