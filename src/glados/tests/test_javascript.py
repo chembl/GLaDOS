@@ -14,7 +14,7 @@ class JavascriptTest(ReportCardTester):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
     tests_summary = None
-    timeout = ReportCardTester.DEFAULT_TIMEOUT*2
+    timeout = ReportCardTester.DEFAULT_TIMEOUT
     loaded = False
     start_time = time.time()
     while not loaded and time.time() - start_time < timeout:
@@ -23,13 +23,14 @@ class JavascriptTest(ReportCardTester):
           .find_element_by_class_name('jasmine-failed')
         loaded = True
       except:
-        print("Loading '{0}' ...".format(url))
+        pass
       try:
         elem = self.browser.find_element_by_class_name('jasmine-alert')\
           .find_element_by_class_name('jasmine-passed')
         loaded = True
       except:
-        print("Loading '{0}' ...".format(url))
+        pass
+      self.browser.get(url)
       time.sleep(1)
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
     try:

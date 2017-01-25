@@ -9,7 +9,7 @@ import atexit
 class ReportCardTester(unittest.TestCase):
 
   HOST = 'http://127.0.0.1:8000'
-  DEFAULT_TIMEOUT = 180
+  DEFAULT_TIMEOUT = 60
 
   IMPLICIT_WAIT = 1
 
@@ -45,9 +45,11 @@ class ReportCardTester(unittest.TestCase):
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    ReportCardTester.closeBrowser()
+    self.browser.get(self.HOST+"/layout_test")
 
-  def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
+  def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True, retries=3):
+    if retries == 0:
+      self.fail("ERROR: {0} failed to load after 3 retries.")
     print('\nScenario:')
     print(url)
     self.browser.get(url)
@@ -63,6 +65,16 @@ class ReportCardTester(unittest.TestCase):
             print("Loading {0} ...".format(url))
         except:
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
+          print("Travis Firefox might be stalled ...")
+          print("Closing Firefox ...")
+          ReportCardTester.closeBrowser()
+          print("Giving travis some free relaxation time 30 secs ...")
+          time.sleep(30)
+          print("Starting Firefox ...")
+          ReportCardTester.instantiateBrowser()
+          self.browser = ReportCardTester.SINGLETON_BROWSER
+          self.getURL(url, timeout=timeout, wait_for_glados_ready=wait_for_glados_ready, retries=retries-1)
+          return
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
       time.sleep(1)
