@@ -52,6 +52,7 @@ CompoundFeaturesView = CardView.extend
       'Oligosaccharide': ['active', 'mt_oligosaccharide', 'Molecule Type: Oligosaccharide', 'top']
       'Protein': ['active', 'mt_oligopeptide', 'Molecule Type: Oligopeptide', 'top']
       'Oligonucleotide': ['active', 'mt_oligonucleotide', 'Molecule Type: Oligonucleotide', 'top']
+      'Cell': ['active', 'mt_cell', 'Drug Type: Cell Based', 'top']
     'first_in_class':
       '-1': ['', 'first_in_class', 'First in Class: Undefined', 'top']
       '0': ['', 'first_in_class', 'First in Class: No', 'top']
