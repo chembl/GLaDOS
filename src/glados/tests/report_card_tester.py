@@ -37,6 +37,7 @@ class ReportCardTester(unittest.TestCase):
         ReportCardTester.SINGLETON_BROWSER.quit()
       except:
         pass
+      ReportCardTester.SINGLETON_BROWSER = None
 
   def setUp(self):
     # instantiates the singleton browser
@@ -44,7 +45,7 @@ class ReportCardTester(unittest.TestCase):
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    self.browser.get(self.HOST+"/layout_test")
+    ReportCardTester.closeBrowser()
 
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True):
     print('\nScenario:')
