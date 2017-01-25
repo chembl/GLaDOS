@@ -14,7 +14,7 @@ class JavascriptTest(ReportCardTester):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
     tests_summary = None
-    timeout = ReportCardTester.DEFAULT_TIMEOUT
+    timeout = ReportCardTester.DEFAULT_TIMEOUT*2
     loaded = False
     start_time = time.time()
     while not loaded and time.time() - start_time < timeout:
@@ -30,7 +30,7 @@ class JavascriptTest(ReportCardTester):
         loaded = True
       except:
         pass
-      self.browser.get(url)
+      print("Loading {0} ...".format(url))
       time.sleep(1)
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
     try:
