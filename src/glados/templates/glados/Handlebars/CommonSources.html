@@ -124,9 +124,11 @@
   <div class="col s12 m6 l4">
 
     <div class="card horizontal grey lighten-5">
-      <div class="white card-image" >
-        <img src="{{img_url}}" height="150px" width="150px" >
-      </div>
+      {{#if img_url}}
+        <div class="white card-image" >
+          <img src="{{img_url}}" height="150px" width="150px" >
+        </div>
+      {{/if}}
       <div class="card-stacked">
         <div class="card-content">
 
@@ -193,9 +195,11 @@
     <div class="col s12 m6 l4">
       <div class="card grey lighten-5">
 
-        <div class="white card-image">
-          <img src="{{img_url}}" height="200px">
-        </div>
+        {{#if img_url}}
+          <div class="white card-image">
+            <img src="{{img_url}}" height="200px">
+          </div>
+        {{/if}}
         <div class="card-content">
 
           {{#each columns}}
@@ -226,9 +230,11 @@
     <div class="col s12 m6 l4">
       <div class="card grey lighten-5">
 
-        <div class="white card-image">
-          <img src="{{img_url}}" height="200px">
-        </div>
+        {{#if img_url}}
+          <div class="white card-image">
+            <img src="{{img_url}}" height="200px">
+          </div>
+        {{/if}}
         <div class="card-content">
 
           {{#each columns}}
