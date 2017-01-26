@@ -28,10 +28,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 Compound.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
 
-
-Compound.COLUMNS_SETTINGS = {
-  RESULTS_LIST_REPORT_CARD: [
-    {
+Compound.COLUMNS = {
+  CHEMBL_ID: {
       'name_to_show': 'ChEMBL ID'
       'comparator': 'molecule_chembl_id'
       'sort_disabled': false
@@ -40,46 +38,35 @@ Compound.COLUMNS_SETTINGS = {
       'link_base': 'report_card_url'
       'image_base_url': 'image_url'
     }
-    {
-      'name_to_show': 'Molecule Type'
-      'comparator': 'molecule_type'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
+  PREF_NAME: {
       'name_to_show': 'Name'
       'comparator': 'pref_name'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
-    {
+  MOLECULE_TYPE: {
+      'name_to_show': 'Molecule Type'
+      'comparator': 'molecule_type'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
+  MAX_PHASE: {
       'name_to_show': 'Max Phase'
       'comparator': 'max_phase'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
-    {
+  DOSED_INGREDIENT: {
       'name_to_show': 'Dosed Ingredient:'
       'comparator': 'dosed_ingredient'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
-  ]
-  RESULTS_LIST_SIMILARITY:[
-    {
-      'name_to_show': 'ChEMBL ID'
-      'comparator': 'molecule_chembl_id'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'link_base': 'report_card_url'
-      'image_base_url': 'image_url'
-    }
-    {
+  SIMILARITY: {
       'name_to_show': 'Similarity:'
       'comparator': 'similarity'
       'sort_disabled': false
@@ -87,30 +74,23 @@ Compound.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>{{val}}</b>'
     }
-    {
-      'name_to_show': 'Molecule Type'
-      'comparator': 'molecule_type'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
-      'name_to_show': 'Name'
-      'comparator': 'pref_name'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
+}
+
+Compound.COLUMNS_SETTINGS = {
+  RESULTS_LIST_REPORT_CARD: [
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.MOLECULE_TYPE,
+    Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.MAX_PHASE,
+    Compound.COLUMNS.DOSED_INGREDIENT,
+  ]
+  RESULTS_LIST_SIMILARITY:[
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.SIMILARITY,
+    Compound.COLUMNS.MOLECULE_TYPE,
+    Compound.COLUMNS.PREF_NAME,
   ]
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
-    {
-      'name_to_show': 'ChEMBL ID'
-      'comparator': 'molecule_chembl_id'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'link_base': 'report_card_url'
-      'image_base_url': 'image_url'
-    }
+    Compound.COLUMNS.CHEMBL_ID,
   ]
 }
