@@ -49,7 +49,12 @@ PaginatedViewExt =
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
       columnsWithValues = @collection.getMeta('columns').map (col) ->
-        col['value'] = item.get(col.comparator)
+        col_value = item.get(col.comparator)
+        if _.isBoolean(col_value)
+          col['value'] = if col_value then 'Yes' else 'No'
+        else
+          col['value'] = col_value
+
         col['has_link'] = _.has(col, 'link_base')
         col['link_url'] = item.get(col['link_base']) unless !col['has_link']
         if _.has(col, 'image_base_url')

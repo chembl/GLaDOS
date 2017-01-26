@@ -108,14 +108,14 @@ Compound.COLUMNS = {
       'sort_class': 'fa-sort'
     }
   DOSED_INGREDIENT: {
-      'name_to_show': 'Dosed Ingredient:'
+      'name_to_show': 'Dosed Ingredient'
       'comparator': 'dosed_ingredient'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
   SIMILARITY: {
-      'name_to_show': 'Similarity:'
+      'name_to_show': 'Similarity'
       'comparator': 'similarity'
       'sort_disabled': false
       'is_sorting': 0
