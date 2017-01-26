@@ -43,8 +43,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         query:
           query_string:
             fields: [
-              "*.std_analyzed",
-              "*.eng_analyzed",
+              "*.std_analyzed^20",
+              "*.eng_analyzed^15",
               "*.pref_name_analyzed^1.1",
               "*.alt_name_analyzed",
               "*.keyword^100",
@@ -53,6 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               "*.chembl_id^10000",
               "*.chembl_id_reference^2"
             ]
+            minimum_should_match: "100%"
             query: @getMeta('search_term')
       }
 

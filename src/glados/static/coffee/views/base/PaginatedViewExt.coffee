@@ -42,7 +42,6 @@ PaginatedViewExt =
       $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
-
     for item in @collection.getCurrentPage()
 
 
@@ -50,7 +49,12 @@ PaginatedViewExt =
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
       columnsWithValues = @collection.getMeta('columns').map (col) ->
-        col['value'] = item.get(col.comparator)
+        col_value = item.get(col.comparator)
+        if _.isBoolean(col_value)
+          col['value'] = if col_value then 'Yes' else 'No'
+        else
+          col['value'] = col_value
+
         col['has_link'] = _.has(col, 'link_base')
         col['link_url'] = item.get(col['link_base']) unless !col['has_link']
         if _.has(col, 'image_base_url')
@@ -64,6 +68,24 @@ PaginatedViewExt =
         columns: @collection.getMeta('columns')
 
       $append_to.append($(new_item_cont))
+
+    if not $specificElem.is('table')
+      # JavaScript rendering can take a while to update the correct height of the cards
+      # Timeout zero will let other code execute while this waits on that code to setup
+      # correctly the height of each card
+      setTimeout(
+        ()->
+          max_h = 0
+          $cards = $append_to.find('.card')
+          $cards.each(
+            (index, elem)->
+              max_h = Math.max(max_h, $(elem).height())
+          )
+          console.log("MAX HEIGHT : "+max_h)
+          $cards.height(max_h)
+        , 0
+      )
+
 
   fillPaginators: ->
 
