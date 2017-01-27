@@ -258,7 +258,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # protein sctructure
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/antibody.png')
+    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/antibody.svg')
 
     # --------------------------------------
     # Molecule Features
