@@ -159,7 +159,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # this is a small molecule
     self.assert_molecule_feature('Bck-MolType', True, self.HOST + '/static/img/molecule_features/mt_small_molecule.svg',
-                                 'Molecule Type: small molecule', 'top')
+                                 'Drug Type: Synthetic Small Molecule', 'top')
     # Rule of five: No. false
     self.assert_molecule_feature('Bck-RuleOfFive', True, self.HOST + '/static/img/molecule_features/rule_of_five.svg',
                                  'Rule Of Five: Yes', 'top')
