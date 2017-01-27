@@ -96,6 +96,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.GLADOS_BASE_PATH_REL = app_root
   glados.Settings.GLADOS_BASE_URL_FULL = request_root+app_root
 
+  glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
+
   # the search url is expected to be search_results/[advanced/]:query_string
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
@@ -111,6 +113,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity/'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
+
+  glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
@@ -138,3 +142,22 @@ glados.logGladosSettings = () ->
 
 
   $(window).resize updateScreenType
+
+# setups variables and functions to check whether or not the page has loaded
+glados.setupOnLoadAfterJS = () ->
+  js_ready_div = '<div id="GLaDOS-page-loaded" style="display: none;">NO</div>'
+  $('body').prepend(js_ready_div)
+  glados.ajax_count = 0
+  $(document).ajaxStart () ->
+    glados.ajax_count++
+    $('#GLaDOS-page-loaded').html('NO')
+  $(document).ajaxStop () ->
+    glados.ajax_count--
+    if glados.ajax_count == 0
+      setTimeout(
+        () ->
+          $('#GLaDOS-page-loaded').html('YES')
+        , 1000
+      )
+
+$( "body" ).ready(glados.setupOnLoadAfterJS)

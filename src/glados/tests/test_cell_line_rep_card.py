@@ -9,7 +9,7 @@ class CellLineReportCardTest(ReportCardTester):
 
   def test_celline_report_card_scenario_1(self):
 
-    self.getURL(self.HOST + '/cell_line_report_card/CHEMBL3307242/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/cell_line_report_card/CHEMBL3307242/')
 
     # --------------------------------------
     # Basic Information
@@ -51,7 +51,7 @@ class CellLineReportCardTest(ReportCardTester):
 
   def test_celline_report_card_scenario_2(self):
 
-    self.getURL(self.HOST + '/cell_line_report_card/CHEMBL3307786/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/cell_line_report_card/CHEMBL3307786/')
 
     # --------------------------------------
     # Basic Information
@@ -78,7 +78,7 @@ class CellLineReportCardTest(ReportCardTester):
 
   def test_celline_report_card_scenario_3(self):
 
-    self.getURL(self.HOST + '/cell_line_report_card/NOT_EXISTS/', self.SLEEP_TIME)
+    self.getURL(self.HOST + '/cell_line_report_card/NOT_EXISTS/')
     # This one doesn't exist!
 
     # --------------------------------------

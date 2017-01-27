@@ -6,8 +6,14 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @model.on 'change', @.render, @
-    $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
-    $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
+
+    if not @model.get('structure_image')
+      $('#CNC-3d-modal-trigger').hide()
+      $('#CNC-3d-modal-trigger-small').hide()
+      return
+    else
+      $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
+      $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
 
   render: ->
     @renderImage()
@@ -57,7 +63,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
     # If the image strcuture can't be shown, don't activate the zoom modal.
     img = $(@el).find('#Bck-COMP_IMG')
-    if img.attr('src').indexOf(glados.Settings.STATIC_URL+'') > -1
+    if img.attr('src').indexOf(glados.Settings.STATIC_URL+'') > -1 or img.attr('src').indexOf(glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL) > -1
       $('#CNC-IMG-Options-Zoom, #CNC-IMG-Options-Zoom-small').remove()
       return
 

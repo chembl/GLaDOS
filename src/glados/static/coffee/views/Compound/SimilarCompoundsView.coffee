@@ -4,6 +4,10 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'error', @.showCompoundErrorCard, @
+
+    @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
+
     @resource_type = 'Compound'
 
   render: ->
