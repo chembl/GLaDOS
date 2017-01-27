@@ -548,7 +548,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this is an natural product
-    self.assert_molecule_feature('Bck-MolType', True, 'P',
+    self.assert_molecule_feature('Bck-MolType', True, 'R',
                                  'Drug Type: natural product', 'top')
 
   def test_compund_report_card_scenario_17(self):
