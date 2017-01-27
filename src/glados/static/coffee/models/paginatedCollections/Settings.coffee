@@ -40,59 +40,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_cell_line'
         MODEL: CellLine
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-# TODO: Tissue model is missing
-#      TISSUE:
-#        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
-#        ID_NAME: 'ESTissue'
-#        LABEL: 'Tissues'
-#        PATH:'/chembl_tissue'
-#        MODEL: Tissue
-#        COLUMNS: Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      TISSUE:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESTissue'
+        LABEL: 'Tissues'
+        PATH:'/chembl_tissue'
+        MODEL: glados.models.Tissue
+        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+
     WS_COLLECTIONS:
       DRUG_LIST:
-        MODEL: Drug
+        MODEL: Compound
         BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'ChEMBL ID'
-            'comparator': 'molecule_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-            'image_base_url': 'image_url'
-          }
-          {
-            'name_to_show': 'Molecule Type'
-            'comparator': 'molecule_type'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Name'
-            'comparator': 'pref_name'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Max Phase'
-            'comparator': 'max_phase'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Dosed Ingredient:'
-            'comparator': 'dosed_ingredient'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-        ]
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

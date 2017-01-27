@@ -1,14 +1,38 @@
 from glados.tests.report_card_tester import ReportCardTester
-import traceback
+import time
 
 # The tests for the javascript code only (not backbone views and DOM) can be seen just by browsing <host>/js_tests/
 # This file automates the process of looking at the page and checking if it is correct
 class JavascriptTest(ReportCardTester):
 
-  def test_javascript_code_only(self):
 
-    self.getURL(self.HOST + '/js_tests/', ReportCardTester.SLEEP_TIME * 20)
+  def tearDown(self):
+    self.browser.quit()
+    ReportCardTester.SINGLETON_BROWSER = None
+
+  def test_javascript_code_only(self):
+    url = self.HOST + '/js_tests/'
+    self.getURL(url, wait_for_glados_ready=False)
     tests_summary = None
+    timeout = ReportCardTester.DEFAULT_TIMEOUT*2
+    loaded = False
+    start_time = time.time()
+    while not loaded and time.time() - start_time < timeout:
+      try:
+        elem = self.browser.find_element_by_class_name('jasmine-alert')\
+          .find_element_by_class_name('jasmine-failed')
+        loaded = True
+      except:
+        pass
+      try:
+        elem = self.browser.find_element_by_class_name('jasmine-alert')\
+          .find_element_by_class_name('jasmine-passed')
+        loaded = True
+      except:
+        pass
+      print("Loading {0} ...".format(url))
+      time.sleep(1)
+    self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
     try:
       tests_summary = self.browser.find_element_by_class_name('jasmine-alert')\
         .find_element_by_class_name('jasmine-failed')

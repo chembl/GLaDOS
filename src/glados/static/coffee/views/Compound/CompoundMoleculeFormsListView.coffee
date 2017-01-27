@@ -10,6 +10,11 @@ CompoundMoleculeFormsListView = CardView.extend(PaginatedViewExt).extend
     @resource_type = 'Compound'
 
   render: ->
+    if @collection.length == 1 and @collection.at(0).get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID and not GlobalVariables['EMBEDED']
+      $('#AlternateFormsOfCompoundInChEMBL').hide()
+
+    $(@el).find('.alternate-compounds-title').html Handlebars.compile($('#Handlebars-CompRepCard-AlternateCompounds-Title').html())
+      chembl_id: GlobalVariables.CHEMBL_ID
 
     @clearContentContainer()
 

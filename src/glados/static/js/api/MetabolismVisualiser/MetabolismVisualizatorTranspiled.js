@@ -302,13 +302,13 @@ var MetabolismVisualizator = function () {
                 var enzyme = e.data('enzyme');
                 var enzyme_chembl_id = e.data('enzyme_chembl_id');
 
-                var enzyme_text = enzyme_chembl_id != undefined ? '<a target ="_blank" href = \'/chembl/target/inspect/' + enzyme_chembl_id + '\'> ' + enzyme_chembl_id + '</a>' : "--";
+                var enzyme_text = enzyme_chembl_id != undefined ? '<a target ="_blank" href = \'/target_report_card/' + enzyme_chembl_id + '\'> ' + enzyme_chembl_id + '</a>' : "--";
 
                 var met_conversion = e.data('met_conversion');
                 var met_conversion_text = met_conversion != undefined ? met_conversion : "--";
 
                 var doc_chembl_id = e.data('doc_chembl_id');
-                var doc_chembl_id_link = '<a target ="_blank" href = \'/chembl/doc/inspect/' + doc_chembl_id + '\'> ' + doc_chembl_id + '</a>';
+                var doc_chembl_id_link = '<a target ="_blank" href = \'/document_report_card/' + doc_chembl_id + '\'> ' + doc_chembl_id + '</a>';
                 var organism = e.data('organism');
                 var organism_text = organism != undefined ? ' <b> Organism: </b> ' + organism : "--";
 
