@@ -41,24 +41,24 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       else if response.molecule_type == 'Small molecule'
 
         if response.natural_product == '1'
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.png'
+          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.svg'
         else if response.polymer_flag == true
           response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
         else
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.png'
+          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.svg'
 
       else if response.molecule_type == 'Antibody'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.png'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.svg'
       else if response.molecule_type == 'Protein'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
       else if response.molecule_type == 'Oligonucleotide'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
       else if response.molecule_type == 'Enzyme'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.png'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.svg'
       else if response.molecule_type == 'Cell'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
       else #if response.molecule_type == 'Unclassified' or response.molecule_type = 'Unknown' or not response.molecule_type?
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.png'
+        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
 
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
