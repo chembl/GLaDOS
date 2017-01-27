@@ -49,11 +49,11 @@ CompoundFeaturesView = CardView.extend
   # active class,filename, tooltip, mobile description, tooltip position
   molFeatures:
     'molecule_type':
-      'Small molecule': ['active', 'l', 'Drug Type: Synthetic Small Molecule','top', 'icon-chembl']
-      'Natural product': ['active', 'P', 'Drug Type: natural product','top', 'icon-species']
+      'Small molecule': ['active', 'l', 'Drug Type: Synthetic Small Molecule','top', 'icon-chembl']#
+      'Natural product': ['active', 'P', 'Drug Type: natural product','top', 'icon-species']#
       'Small molecule polymer': ['active', 'A', 'Drug Type: small molecule polymer','top', 'icon-species']
-      'Antibody': ['active', 'a', 'Molecule Type: Antibody', 'top', 'icon-chembl']
-      'Enzyme': ['active', 'e', 'Molecule Type: Enzyme', 'top', 'icon-chembl']
+      'Antibody': ['active', 'a', 'Molecule Type: Antibody', 'top', 'icon-chembl']#
+      'Enzyme': ['active', 'e', 'Molecule Type: Enzyme', 'top', 'icon-chembl']#
       'Oligosaccharide': ['active', 'A', 'Molecule Type: Oligosaccharide', 'top', 'icon-species']
       'Protein': ['active', 'A', 'Molecule Type: Oligopeptide', 'top', 'icon-species']
       'Oligonucleotide': ['active', 'A', 'Molecule Type: Oligonucleotide', 'top', 'icon-species']

@@ -537,3 +537,29 @@ class CompoundReportCardTest(ReportCardTester):
     # Black Box No: 0
     self.assert_molecule_feature('Bck-BlackBox', True, 'b',
                                  'Black Box: Yes', 'bottom')
+
+  def test_compund_report_card_scenario_16(self):
+
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1201468')
+
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # this is an natural product
+    self.assert_molecule_feature('Bck-MolType', True, 'P',
+                                 'Drug Type: natural product', 'top')
+
+  def test_compund_report_card_scenario_17(self):
+
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL1201502')
+
+
+    # --------------------------------------
+    # Molecule Features
+    # --------------------------------------
+
+    # the molecule type is unknown
+    self.assert_molecule_feature('Bck-MolType', True, '?',
+                                 'Drug Type: Unknown', 'top')
