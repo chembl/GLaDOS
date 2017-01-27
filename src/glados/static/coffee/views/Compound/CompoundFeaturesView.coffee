@@ -8,7 +8,6 @@ CompoundFeaturesView = CardView.extend
     @resource_type = 'Compound'
 
   render: ->
-    console.log 'rRENDER!'
 
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
@@ -34,10 +33,10 @@ CompoundFeaturesView = CardView.extend
 
     property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
       active_class: @getMolFeatureDetails(property, 0)
-      static_path: glados.Settings.STATIC_URL
-      filename: @getMolFeatureDetails(property, 1)
+      data_icon: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
       tooltip_position: @getMolFeatureDetails(property, 3)
+      icon_class: @getMolFeatureDetails(property, 4)
 
   getMolFeatureDetails: (feature, position) ->
     if feature == 'molecule_type' and @model.get('natural_product') == '1'
@@ -50,47 +49,47 @@ CompoundFeaturesView = CardView.extend
   # active class,filename, tooltip, mobile description, tooltip position
   molFeatures:
     'molecule_type':
-      'Small molecule': ['active', 'mt_small_molecule', 'Molecule Type: small molecule','top']
-      'Natural product': ['active', 'mt_natural_product', 'Drug Type: natural product','top']
-      'Small molecule polymer': ['active', 'mt_smol_polymer', 'Drug Type: small molecule polymer','top']
-      'Antibody': ['active', 'mt_antibody', 'Molecule Type: Antibody', 'top']
-      'Enzyme': ['active', 'mt_enzyme', 'Molecule Type: Enzyme', 'top']
-      'Oligosaccharide': ['active', 'mt_oligosaccharide', 'Molecule Type: Oligosaccharide', 'top']
-      'Protein': ['active', 'mt_oligopeptide', 'Molecule Type: Oligopeptide', 'top']
-      'Oligonucleotide': ['active', 'mt_oligonucleotide', 'Molecule Type: Oligonucleotide', 'top']
-      'Cell': ['active', 'mt_cell', 'Drug Type: Cell Based', 'top']
-      'Unknown': ['active', 'mt_unknown', 'Drug Type: Unknown', 'top']
-      'Unclassified': ['active', 'mt_unknown', 'Drug Type: Unclassified', 'top']
+      'Small molecule': ['active', 'l', 'Drug Type: Synthetic Small Molecule','top', 'icon-chembl']#
+      'Natural product': ['active', 'P', 'Drug Type: natural product','top', 'icon-species']#
+      'Small molecule polymer': ['active', 'A', 'Drug Type: small molecule polymer','top', 'icon-species']
+      'Antibody': ['active', 'a', 'Molecule Type: Antibody', 'top', 'icon-chembl']#
+      'Enzyme': ['active', 'e', 'Molecule Type: Enzyme', 'top', 'icon-chembl']#
+      'Oligosaccharide': ['active', 'A', 'Molecule Type: Oligosaccharide', 'top', 'icon-species']
+      'Protein': ['active', 'A', 'Molecule Type: Oligopeptide', 'top', 'icon-species']
+      'Oligonucleotide': ['active', 'A', 'Molecule Type: Oligonucleotide', 'top', 'icon-species']
+      'Cell': ['active', 'A', 'Drug Type: Cell Based', 'top', 'icon-species']
+      'Unknown': ['active', '?', 'Drug Type: Unknown', 'top', 'icon-generic']
+      'Unclassified': ['active', '?', 'Drug Type: Unclassified', 'top', 'icon-generic']
     'first_in_class':
-      '-1': ['', 'first_in_class', 'First in Class: Undefined', 'top']
-      '0': ['', 'first_in_class', 'First in Class: No', 'top']
-      '1': ['active', 'first_in_class', 'First in Class: Yes', 'top']
+      '-1': ['', 'r', 'First in Class: Undefined', 'top', 'icon-chembl']
+      '0': ['', 'r', 'First in Class: No', 'top', 'icon-chembl']
+      '1': ['active', 'r', 'First in Class: Yes', 'top', 'icon-chembl']
     'chirality':
-      '-1': ['', 'chirality_0', 'Chirality: Undefined', 'top']
-      '0': ['active', 'chirality_0', 'Chirality: Racemic Mixture', 'top']
-      '1': ['active', 'chirality_1', 'Chirality: Single Stereoisomer', 'top']
-      '2': ['', 'chirality_1', 'Chirality: Achiral Molecule', 'top']
+      '-1': ['', '3', 'Chirality: Undefined', 'top', 'icon-chembl']
+      '0': ['active', '3', 'Chirality: Racemic Mixture', 'top', 'icon-chembl']
+      '1': ['active', 'o', 'Chirality: Single Stereoisomer', 'top', 'icon-chembl']
+      '2': ['', 'o', 'Chirality: Achiral Molecule', 'top', 'icon-chembl']
     'prodrug':
-      '-1': ['', 'prodrug', 'Prodrug: Undefined', 'top'],
-      '0': ['', 'prodrug', 'Prodrug: No', 'top']
-      '1': ['active', 'prodrug', 'Prodrug: Yes',  'top']
+      '-1': ['', 'c', 'Prodrug: Undefined', 'top', 'icon-chembl'],
+      '0': ['', 'c', 'Prodrug: No', 'top', 'icon-chembl']
+      '1': ['active', 'c', 'Prodrug: Yes',  'top', 'icon-chembl']
     'oral':
-      'true': ['active', 'oral', 'Oral: Yes', 'bottom']
-      'false': ['', 'oral', 'Oral: No', 'bottom']
+      'true': ['active', 'u', 'Oral: Yes', 'bottom', 'icon-chembl']
+      'false': ['', 'u', 'Oral: No', 'bottom', 'icon-chembl']
     'parenteral':
-      'true': ['active', 'parenteral', 'Parenteral: Yes', 'bottom']
-      'false': ['', 'parenteral', 'Parenteral: No', 'bottom']
+      'true': ['active', 's', 'Parenteral: Yes', 'bottom', 'icon-chembl']
+      'false': ['', 's', 'Parenteral: No', 'bottom', 'icon-chembl']
     'topical':
-      'true': ['active', 'topical', 'Topical: Yes', 'bottom']
-      'false': ['', 'topical', 'Topical: No', 'bottom']
+      'true': ['active', 'm', 'Topical: Yes', 'bottom', 'icon-chembl']
+      'false': ['', 'm', 'Topical: No', 'bottom', 'icon-chembl']
     'black_box_warning':
-      '0': ['', 'black_box', 'Black Box: No', 'bottom']
-      '1': ['active', 'black_box', 'Black Box: Yes', 'bottom']
+      '0': ['', 'b', 'Black Box: No', 'bottom', 'icon-chembl']
+      '1': ['active', 'b', 'Black Box: Yes', 'bottom', 'icon-chembl']
     'availability_type':
-      '-1': ['', 'availability_0', 'Availability: Undefined', 'bottom']
-      '0': ['active', 'availability_0', 'Availability: Discontinued', 'bottom']
-      '1': ['active', 'availability_1', 'Availability: Prescription Only', 'bottom']
-      '2': ['active', 'availability_2', 'Availability: Over the Counter', 'bottom']
+      '-1': ['', '1', 'Availability: Undefined', 'bottom', 'icon-chembl']
+      '0': ['active', '2', 'Availability: Discontinued', 'bottom', 'icon-chembl']
+      '1': ['active', '1', 'Availability: Prescription Only', 'bottom', 'icon-chembl']
+      '2': ['active', 't', 'Availability: Over the Counter', 'bottom', 'icon-chembl']
     'ro5':
-      'true': ['active', 'rule_of_five', 'Rule Of Five: Yes', 'top']
-      'false': ['', 'rule_of_five', 'Rule Of Five: No', 'top']
+      'true': ['active', '5', 'Rule Of Five: Yes', 'top', 'icon-chembl']
+      'false': ['', '5', 'Rule Of Five: No', 'top', 'icon-chembl']
