@@ -468,9 +468,6 @@ PaginatedViewExt =
   #--------------------------------------------------------------------------------------
   handleError: (model, xhr, options) ->
 
-    console.log 'PROCESSING ERROR!'
-    console.log xhr
-
     if xhr.responseJSON?
       message = xhr.responseJSON.error_message
       if not message?
