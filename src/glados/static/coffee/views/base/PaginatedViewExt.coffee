@@ -468,9 +468,16 @@ PaginatedViewExt =
   #--------------------------------------------------------------------------------------
   handleError: (model, xhr, options) ->
 
-    message = xhr.responseJSON.error_message
-    if not message?
-      message = xhr.responseJSON.error
+    console.log 'PROCESSING ERROR!'
+    console.log xhr
+
+    if xhr.responseJSON?
+      message = xhr.responseJSON.error_message
+      if not message?
+        message = xhr.responseJSON.error
+    else
+      message = 'There was an error while handling your request'
+
 
     $(@el).find('.BCK-PreoladerContainer').hide()
     $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
