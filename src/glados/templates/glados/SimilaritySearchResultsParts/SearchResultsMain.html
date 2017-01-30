@@ -22,21 +22,9 @@
     <br>
     <br>
 
-    <div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
-      <!-- Backbone fills this with the infinity browser view -->
-    </div>
-
-
-    <div class='BCK-items-container row' data-is-infinite="yes"
-         data-hb-template="Handlebars-Common-Paginated-Card">
-      <!-- Backbone fills this with the infinity browser view -->
-    </div>
-
-    <div class="BCK-PreoladerContainer">
-      {% block preloaders %}
-      {% include "glados/base/infinite_browse_loaders.html" %}
-      {% endblock %}
-    </div>
+    {% block browser_content %}
+      {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+    {% endblock %}
 
   </div>
 </div>

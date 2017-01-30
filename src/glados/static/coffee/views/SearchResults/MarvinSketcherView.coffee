@@ -4,6 +4,7 @@ MarvinSketcherView = Backbone.View.extend
   # Search types
   SIMILARITY_SEARCH: 'similarity'
   SUBSTRUCTURE_SEARCH: 'substructure'
+  FLEXMATCH_SEARCH: 'flexmatch'
 
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
@@ -26,7 +27,9 @@ MarvinSketcherView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   events:
-    'click .marvin-search-btn': 'triggerMarvinSearch'
+    'click .substructure-search-btn': 'triggerSubstructureSearch'
+    'click .similarity-search-btn': 'triggerSimilaritySearch'
+    'click .flexmatch-search-btn': 'triggerFlexmatchSearch'
     'change .select-type-of-search': 'selectSearchType'
     'input .similarity-search-threshold-input': 'updatePercentageField'
     'change .similarity-search-threshold-input': 'updatePercentageField'
@@ -36,7 +39,7 @@ MarvinSketcherView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   # gets the parameters and what the user drew in the sketcher to then perform a search with it.
-  triggerMarvinSearch: ->
+  triggerMarvinSearch: (searchType) ->
 
     if @marvinSketcherInstance.isEmpty()
       $(@el).find('.messages-to-user').text('Please draw a structure first!')
@@ -57,8 +60,10 @@ MarvinSketcherView = Backbone.View.extend
 
         $(thisView.el).find('.messages-to-user').text('Searching...')
 
-        if thisView.searchType == @SUBSTRUCTURE_SEARCH
+        if searchType == thisView.SUBSTRUCTURE_SEARCH
           searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+        else if searchType == thisView.FLEXMATCH_SEARCH
+          searchUrl = glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
         else
           percentage = $(thisView.el).find('.similarity-search-threshold-input').val()
           searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim() + '/' + percentage
@@ -71,20 +76,16 @@ MarvinSketcherView = Backbone.View.extend
     ), (error) ->
       $(@el).find('.messages-to-user').text('There was an error: ' + error)
 
-  selectSearchType: (event) ->
+  triggerSubstructureSearch: ->
 
-    selector = $(event.currentTarget)
-    searchType = selector.val()
+    @triggerMarvinSearch(@SUBSTRUCTURE_SEARCH)
 
-    if searchType == ''
-      return
+  triggerSimilaritySearch: ->
 
-    @searchType = searchType
+    @triggerMarvinSearch(@SIMILARITY_SEARCH)
 
-    if @searchType == @SIMILARITY_SEARCH
-      $(@el).find('.similarity-search-threshold').slideDown('Slow')
-    else
-      $(@el).find('.similarity-search-threshold').slideUp('Slow')
+  triggerFlexmatchSearch: ->
+    @triggerMarvinSearch(@FLEXMATCH_SEARCH)
 
   updatePercentageField: (event) ->
 

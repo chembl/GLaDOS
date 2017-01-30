@@ -168,6 +168,9 @@ urlpatterns = [
   url(r'^similarity_search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SimilaritySearchResultsParts/SearchResultsMain.html"), ),
 
+  url(r'^flexmatch_search_results/.*?$',
+      DirectTemplateView.as_view(template_name="glados/FlexmatchSearchResultsParts/SearchResultsMain.html"), ),
+
   # Compound results graph
   url(r'^compound_results_graph/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundResultsGraph.html"), ),

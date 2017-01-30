@@ -21,21 +21,30 @@
   </div>
 
   <!-- editor buttons -->
+  Search by:
+  <br><br>
+  <div class="row">
+    <div class="col s4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal substructure-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Substructure</a>
+    </div>
+    <div class="col s4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal similarity-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Similarity</a>
+    </div>
+    <div class="col s4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal flexmatch-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Flexmatch</a>
+    </div>
+
+  </div>
 
   <div class="row">
-    <div class="col s6 offset-s3">
 
-      <p>
-      <div class="input-field col s12">
-        <select class="select-type-of-search">
-          <option value="substructure" selected>Substructure</option>
-          <option value="similarity">Similarity</option>
-        </select>
-        <label>Type of search</label>
-      </div>
-      </p>
+    <div class="col offset-s4 s4" class="similarity-search-threshold">
 
-      <div class="similarity-search-threshold" style="display: none">
+
+      <div class="similarity-search-threshold">
 
         {% verbatim %}
         <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
@@ -56,21 +65,9 @@
 
     </div>
 
-
   </div>
-
-  <div class="row">
-
-    <div class="col offset-s4 s4 center-align">
-      <a class="waves-effect waves-light btn-chembl teal marvin-search-btn"><i class="icon icon-functional"
-                                                                               data-icon="1"></i>Search</a>
-    </div>
-
-  </div>
-
 
   <!-- messages to the user -->
-
   <div class="container">
     <div class="row">
       <div class="messages-to-user center-align"></div>
@@ -79,5 +76,3 @@
 
 
 </div>
-
-
