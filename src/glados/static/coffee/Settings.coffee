@@ -112,6 +112,9 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'similarity_search_results/'
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity/'
 
+  glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'flexmatch_search_results/'
+  glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?molecule_structures__canonical_smiles__flexmatch='
+
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
 
   glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
