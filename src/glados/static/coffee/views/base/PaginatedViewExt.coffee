@@ -463,3 +463,15 @@ PaginatedViewExt =
 
     $(@el).find('select').material_select()
 
+  #--------------------------------------------------------------------------------------
+  # Error handling
+  #--------------------------------------------------------------------------------------
+  handleError: (model, xhr, options) ->
+
+    message = xhr.responseJSON.error_message
+    if not message?
+      message = xhr.responseJSON.error
+
+    $(@el).find('.BCK-PreoladerContainer').hide()
+    $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+      msg: message
