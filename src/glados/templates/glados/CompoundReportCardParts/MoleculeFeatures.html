@@ -3,8 +3,10 @@
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
   <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
   <div class="feat-icon {{active_class}}">
-    <img src="{{static_path}}img/molecule_features/{{filename}}.svg" class="responsive-img tooltipped"
-         data-position="{{tooltip_position}}" data-tooltip="{{tooltip}}" alt="description">
+    <div class="valign-wrapper">
+      <i class="valign icon {{icon_class}} tooltipped" data-icon="{{data_icon}}" data-position="{{tooltip_position}}"
+            data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+    </div>
   </div>
 
 </script>
@@ -30,7 +32,6 @@
     {% endblock %}
 
     <div class="card-content" style="display: none">
-
 
       <div class="row">
 
@@ -74,7 +75,7 @@
 
               <div id='Bck-Oral' class="col s2 offset-s1">
 
-               <!-- Backbone -->
+                <!-- Backbone -->
 
               </div>
               <div id='Bck-Parenteral' class="col s2">
@@ -84,7 +85,7 @@
               </div>
               <div id='Bck-Topical' class="col s2">
 
-               <!-- Backbone -->
+                <!-- Backbone -->
 
               </div>
               <div id='Bck-BlackBox' class="col s2">

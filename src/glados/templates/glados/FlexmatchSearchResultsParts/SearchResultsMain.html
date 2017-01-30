@@ -3,25 +3,23 @@
 {% block title %}ChEMBL{% endblock %}
 
 {% block content %}
-
 <div class="container main-container">
 
   <div id="BCK-SubstructureSearchResults">
 
-    <h2>Substructure Search Results:</h2>
+    <h2>Flexmatch Search Results:</h2>
 
     {% block browser_content %}
       {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
     {% endblock %}
 
   </div>
+
 </div>
-
-
 {% endblock %}
 
 {% block custom_js_inline %}
 
-SearchResultsApp.initSubstructureSearchResults();
+SearchResultsApp.initFlexmatchSearchResults();
 
 {% endblock %}
