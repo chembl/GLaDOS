@@ -4,6 +4,7 @@ WSInfinityView = Backbone.View.extend(PaginatedViewExt).extend
 
   initialize: ->
     @collection.on 'do-repaint sync', @.render, @
+    @collection.on 'error', @handleError, @
     @isInfinite = true
 
   render: ->

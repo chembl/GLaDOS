@@ -56,6 +56,8 @@ MarvinSketcherView = Backbone.View.extend
       url_and_data.url = glados.Settings.BEAKER_BASE_URL + 'ctab2smiles'
       url_and_data.data = data
 
+      console.log 'URL: ', url_and_data.url
+
       $.post(url_and_data.url, url_and_data.data).done( (smiles) ->
 
         $(thisView.el).find('.messages-to-user').text('Searching...')
@@ -70,6 +72,8 @@ MarvinSketcherView = Backbone.View.extend
 
         window.location.href =  searchUrl
 
+      ).error( (error) ->
+        $(thisView.el).find('.messages-to-user').text('There was an error: ' + error)
       )
 
 
