@@ -1203,17 +1203,20 @@ div#CNC-zoom-modal {
   line-height: 1.5;
 }
 
-.mol-features-grid i {
-  font-size: 200%;
-}
+
 
 .mol-features-grid .mol-features-detail {
   font-size: 65%;
 }
 
 .mol-features-grid .feat-icon {
-  border-radius: 8px;
-  padding: 1px;
+
+
+  i {
+  font-size: 2em;
+  margin: auto;
+
+  }
 }
 
 .mol-features-grid .first-row .active {
@@ -1897,6 +1900,21 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+/**
+  * MarvinJS editor
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+.marvinjs-buttons{
 
+  .col{
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  a{
+    width: 100%;
+  }
+
+}
 
 

@@ -109,6 +109,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewFlexmatchSearchResultsList: ->
+
+      # this list has the same columns as the one used for substrucure
+      list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
+
+      list.initURL = (term) ->
+
+        @baseUrl = glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL + term
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+
+      list.parse = (data) ->
+
+          data.page_meta.records_in_page = data.molecules.length
+          @resetMeta(data.page_meta)
+
+          return data.molecules
+
+      return list
+
     getNewSimilaritySearchResultsList: ->
 
       list =  @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)

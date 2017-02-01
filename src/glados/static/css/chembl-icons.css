@@ -93,7 +93,6 @@
   font-style: normal;
 }
 
-
 /* Chembl font */
 @font-face {
   font-family: 'EBI-ChEMBL';
@@ -106,6 +105,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 
 .icon {
   text-decoration: none;
