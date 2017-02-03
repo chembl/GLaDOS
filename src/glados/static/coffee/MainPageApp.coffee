@@ -7,7 +7,7 @@ class MainPageApp
 
   @init = ->
 
-    @searchBarView = new SearchBarView()
+    @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
 
     # Marvin js skecther
     @marvinSketcherView = new MarvinSketcherView()
