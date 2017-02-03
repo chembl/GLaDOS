@@ -53,7 +53,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               "*.chembl_id^10000",
               "*.chembl_id_reference^2"
             ]
-            minimum_should_match: "100%"
             query: @getMeta('search_term')
       }
 
