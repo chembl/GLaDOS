@@ -39,7 +39,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             if _.has(srl_dict, key_i)
               container_html += ''+
                 '<div id="BCK-'+val_i.ID_NAME+'">\n'+
-                '  <h4>'+val_i.LABEL+':</h4>\n'+
+                '  <h3>'+val_i.LABEL+':</h3>\n'+
                 template+
                 '</div>\n'
           container.html(container_html)

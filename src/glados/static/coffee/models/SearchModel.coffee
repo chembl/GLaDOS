@@ -12,6 +12,7 @@ SearchModel = Backbone.Model.extend
     chembl_ids: []
     inchi_keys: []
     smiles: []
+    smiles_regex: /^([^J][0-9BCcOHNSOPrIFla@+\-\[\]\(\)\\\/%=#$~&!]{6,})$/g
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -54,14 +55,18 @@ SearchModel = Backbone.Model.extend
     final_cb = @__search.bind(@)
     terms = rawQueryString.split(" ")
     query_str = ""
-    parameterTransformCB = (term_resp, chmebl_id_resp)->
-      query_str += if chembl_id then chembl_id else term
+#    parameterTransformCB = (term_resp, chmebl_id_resp)->
+#      query_str += if chembl_id then chembl_id else term
 
     for term in terms
-      console.log(term)
-      @checkUniCHEM(term, )
+      if term.match(@smiles_regex)
+        query_str += '"'+term+'"'
+      else
+        query_str += term
+#      @checkUniCHEM(term, )
 #      query_str += " "
     @set('queryString', query_str)
+    final_cb()
 
   __search: ()->
     rls_dict = @getResultsListsDict()
