@@ -21,19 +21,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
-      @url = @getURL()
-      # Creates the Elastic Search Query parameters and serializes them
-      esJSONRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
-      # Use options if specified by caller
-      if not _.isUndefined(options) and _.isObject(options)
-        _.extend(fetchESOptions, options)
-      # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      if @getMeta('search_term')
+        @url = @getURL()
+        # Creates the Elastic Search Query parameters and serializes them
+        esJSONRequest = JSON.stringify(@getRequestData())
+        # Uses POST to prevent result caching
+        fetchESOptions =
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+        # Use options if specified by caller
+        if not _.isUndefined(options) and _.isObject(options)
+          _.extend(fetchESOptions, options)
+        # Call Backbone's fetch
+        return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      else
+        return @reset()
 
     # generates an object with the data necessary to do the ES request
     getRequestData: ->

@@ -11,8 +11,8 @@ glados.useNameSpace 'glados',
         'Cm|Bk|Cf|Es|Fm|Md|No|Lr)'
       aromatic_symbols: '(b|c|n|o|p|s|se|as)'
     InChI:
-      regex: /^(InChI=)([^J]|[0-9+\-\(\)\\\/,])+$/g
-      key_regex: /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/g
+      regex: /^(InChI=)([^J]|[0-9+\-\(\)\\\/,])+$/
+      key_regex: /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/
     UniChem:
       orphaned_id_url: 'https://www.ebi.ac.uk/unichem/rest/orphanIdMap/'
 
@@ -27,6 +27,6 @@ glados.ChemUtils.SMILES.valid_elements = '('+
 glados.ChemUtils.SMILES.regex_other_chars= /[0-9@+\-\[\]\(\)\\\/%=#$~&!]/
 
 glados.ChemUtils.SMILES.regex = new RegExp('^('+glados.ChemUtils.SMILES.valid_elements+
-  '|'+glados.ChemUtils.SMILES.regex_other_chars.source+'){4,}$','g'
+  '|'+glados.ChemUtils.SMILES.regex_other_chars.source+'){4,}$'
 )
 
