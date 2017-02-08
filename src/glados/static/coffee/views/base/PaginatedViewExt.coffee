@@ -81,7 +81,6 @@ PaginatedViewExt =
             (index, elem)->
               max_h = Math.max(max_h, $(elem).height())
           )
-          console.log("MAX HEIGHT : "+max_h)
           $cards.height(max_h)
         , 0
       )
@@ -265,7 +264,7 @@ PaginatedViewExt =
   #--------------------------------------------------------------------------------------
   showPaginatedViewContent: ->
 
-    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
 
     $preloaderCont.hide()
@@ -273,7 +272,7 @@ PaginatedViewExt =
 
   showPaginatedViewPreloader: ->
 
-    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
 
     $preloaderCont.show()
@@ -282,7 +281,7 @@ PaginatedViewExt =
   # show the preloader making sure the content is also visible, useful for the infinite browser
   showPaginatedViewPreloaderAndContent: ->
 
-    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
     $contentCont =  $(@el).find('.BCK-items-container')
 
     $preloaderCont.show()
@@ -293,8 +292,12 @@ PaginatedViewExt =
     @hideEmptyMessageContainer()
     @showContentContainer()
 
+  showPreloaderOnly: ->
+    $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
+    $preloaderCont.show()
+
   hidePreloaderOnly: ->
-    $preloaderCont = $(@el).find('.BCK-PreoladerContainer')
+    $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
     $preloaderCont.hide()
 
   hideHeaderContainer: ->
@@ -324,6 +327,13 @@ PaginatedViewExt =
   showEmptyMessageContainer: ->
     $headerRow = $(@el).find('.BCK-EmptyListMessage')
     $headerRow.show()
+
+  showPreloaderHideOthers: ->
+    @showPreloaderOnly()
+    @hideHeaderContainer()
+    @hideContentContainer()
+    @hideEmptyMessageContainer()
+    @hideFooterContainer()
 
 
   #--------------------------------------------------------------------------------------
@@ -476,6 +486,6 @@ PaginatedViewExt =
       message = 'There was an error while handling your request'
 
 
-    $(@el).find('.BCK-PreoladerContainer').hide()
+    $(@el).find('.BCK-PreloaderContainer').hide()
     $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
       msg: message

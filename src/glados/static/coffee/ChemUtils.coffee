@@ -15,6 +15,8 @@ glados.useNameSpace 'glados',
       key_regex: /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/
     UniChem:
       orphaned_id_url: 'https://www.ebi.ac.uk/unichem/rest/orphanIdMap/'
+    DOI:
+      regex: new RegExp('\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>|])\\S)+)\\b')
 
 glados.ChemUtils.SMILES.valid_elements = '('+
   glados.ChemUtils.SMILES.aliphatic_organic+'|'+
