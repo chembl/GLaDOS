@@ -21,19 +21,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
-      @url = @getURL()
-      # Creates the Elastic Search Query parameters and serializes them
-      esJSONRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
-      # Use options if specified by caller
-      if not _.isUndefined(options) and _.isObject(options)
-        _.extend(fetchESOptions, options)
-      # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      @trigger('before_fetch_elastic');
+      if @getMeta('search_term')
+        @url = @getURL()
+        # Creates the Elastic Search Query parameters and serializes them
+        esJSONRequest = JSON.stringify(@getRequestData())
+        # Uses POST to prevent result caching
+        fetchESOptions =
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+        # Use options if specified by caller
+        if not _.isUndefined(options) and _.isObject(options)
+          _.extend(fetchESOptions, options)
+        # Call Backbone's fetch
+        return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      else
+        return @reset()
 
     # generates an object with the data necessary to do the ES request
     getRequestData: ->
@@ -101,11 +105,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @calculateHowManyInCurrentPage()
 
     calculateHowManyInCurrentPage: ->
-      @setMeta('records_in_page',
-                if @getMeta('current_page')==@getMeta('total_pages')
-                then (@getMeta('total_records')%@getMeta('page_size'))
-                else @getMeta('page_size')
-              )
+      current_page = @getMeta('current_page')
+      total_pages = @getMeta('total_pages')
+      total_records = @getMeta('total_records')
+      page_size = @getMeta('page_size')
+
+      if total_records == 0
+        @setMeta('records_in_page', 0 )
+      else if current_page == total_pages and total_records % page_size != 0
+        @setMeta('records_in_page', total_records % page_size)
+      else
+        @setMeta('records_in_page', @getMeta('page_size'))
 
     getCurrentPage: ->
       return @models

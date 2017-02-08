@@ -59,15 +59,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('total_pages', total_pages)
 
     calculateHowManyInCurrentPage: ->
-
       current_page = @getMeta('current_page')
       total_pages = @getMeta('total_pages')
       total_records = @getMeta('total_records')
       page_size = @getMeta('page_size')
 
-      if total_pages == 1
-        @setMeta('records_in_page', total_records )
-      else if current_page == total_pages
+      if total_records == 0
+        @setMeta('records_in_page', 0 )
+      else if current_page == total_pages and total_records % page_size != 0
         @setMeta('records_in_page', total_records % page_size)
       else
         @setMeta('records_in_page', @getMeta('page_size'))
