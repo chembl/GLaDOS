@@ -16,11 +16,15 @@ glados.useNameSpace 'glados.views.SearchResults',
         @initResultsListsViews()
       @render()
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
-      if @atResultsPage
-        urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-        if urlQueryString
-          @searchModel.search(urlQueryString)
+      # Handles the popstate event to reload a search
+      window.onpopstate = @searchFromURL.bind(@)
+      @searchFromURL()
 
+    searchFromURL: ()->
+      if @atResultsPage
+          urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
+          if urlQueryString
+            @searchModel.search(urlQueryString)
     # --------------------------------------------------------------------------------------------------------------------
     # Views
     # --------------------------------------------------------------------------------------------------------------------
@@ -88,11 +92,15 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     search: () ->
       searchBarQueryString = $('#search_bar').val()
+      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+"/"+encodeURI(searchBarQueryString)
+      # Updates the navigation URL
+      window.history.pushState({}, 'ChEMBL: '+searchBarQueryString, search_url_for_query)
       console.log("SEARCHING FOR:"+searchBarQueryString)
       if @atResultsPage
         @searchModel.search(searchBarQueryString)
       else
-        window.location.href = glados.Settings.SEARCH_RESULTS_PAGE+"/"+encodeURI(searchBarQueryString)
+        # Navigates to the specified URL
+        window.location.href = search_url_for_query
 
     searchAdvanced: () ->
       searchBarQueryString = $('#search_bar').val()

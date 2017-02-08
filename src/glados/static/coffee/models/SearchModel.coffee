@@ -90,16 +90,15 @@ SearchModel = Backbone.Model.extend
       if (/^".*"$/).test(term)
         console.log("SKIPPED:"+term)
         continue
-      if glados.ChemUtils.InChI.regex.test(term) or glados.ChemUtils.InChI.key_regex.test(term)
-        console.log("'"+term+"'->InChI")
+      if glados.ChemUtils.DOI.regex.test(term)
+        terms_transform_in_order[index] = '"'+term+'"'
+      else if glados.ChemUtils.InChI.regex.test(term) or glados.ChemUtils.InChI.key_regex.test(term)
         terms_transform_in_order[index] = '"'+term+'"'
       else if glados.ChemUtils.SMILES.regex.test(term)
-        console.log("'"+term+"'->SMILES")
         terms_transform_in_order[index] = '"'+term+'"'
         smiles_promise = @canonicalizeSMILE(term,term_replacement_callback, index)
         jquery_promises.push(smiles_promise)
       else if term
-        console.log("'"+term+"'->OTHER")
         unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
         jquery_promises.push(unichem_promise)
     $.when(jquery_promises).done(
@@ -108,9 +107,11 @@ SearchModel = Backbone.Model.extend
 
 
   __search: ()->
+    console.log("MODEL SEARCH")
     rls_dict = @getResultsListsDict()
     for key_i, val_i of rls_dict
       val_i.setMeta('search_term',@get('queryString'))
+      val_i.setPage(1)
       val_i.fetch()
 
   # coordinates the search across the different results lists
