@@ -122,13 +122,13 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
-    console.log("---BEGIN GLaDOS JS ENVIRONMENT SETTINGS----------------------------------------------------------------")
+    console.log("---BEGIN GLaDOS JS ENVIRONMENT SETTINGS--------------------------------------------------------------")
     for keyI in _.keys(glados.Settings)
       console.log(keyI+":"+glados.Settings[keyI])
-    console.log("---END GLaDOS JS ENVIRONMENT SETTINGS------------------------------------------------------------------")
-    console.log("---BEGIN GLaDOS LOADED NAMESPACES----------------------------------------------------------------------")
+    console.log("---END GLaDOS JS ENVIRONMENT SETTINGS----------------------------------------------------------------")
+    console.log("---BEGIN GLaDOS LOADED NAMESPACES--------------------------------------------------------------------")
     glados.logNameSpaceTree()
-    console.log("---END GLaDOS LOADED NAMESPACES------------------------------------------------------------------------")
+    console.log("---END GLaDOS LOADED NAMESPACES----------------------------------------------------------------------")
     console.log("Play nice and there will be CAKE!\n.\n.\n.\nThe CAKE is real, I promise!")
 
   GlobalVariables.CURRENT_SCREEN_TYPE = glados.getScreenType()

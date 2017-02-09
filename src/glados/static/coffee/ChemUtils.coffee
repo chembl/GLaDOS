@@ -31,4 +31,3 @@ glados.ChemUtils.SMILES.regex_other_chars= /[0-9@+\-\[\]\(\)\\\/%=#$~&!]/
 glados.ChemUtils.SMILES.regex = new RegExp('^('+glados.ChemUtils.SMILES.valid_elements+
   '|'+glados.ChemUtils.SMILES.regex_other_chars.source+'){4,}$'
 )
-

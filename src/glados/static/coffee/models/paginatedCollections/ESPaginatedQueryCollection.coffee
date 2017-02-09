@@ -10,9 +10,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Backbone Override
     # ------------------------------------------------------------------------------------------------------------------
 
+    errorHandler: (collection, response, options)->
+      console.log("ERROR QUERYING ELASTIC SEARCH:",collection, response, options)
+      @reset()
+
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
-      @resetMeta(data.hits.total)
+      @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
@@ -22,7 +26,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
       @trigger('before_fetch_elastic');
-      if @getMeta('search_term')
+      if @getMeta('singular_terms') or @getMeta('exact_terms')
         @url = @getURL()
         # Creates the Elastic Search Query parameters and serializes them
         esJSONRequest = JSON.stringify(@getRequestData())
@@ -31,34 +35,64 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           data: esJSONRequest
           type: 'POST'
           reset: true
+          error: @errorHandler.bind(@)
         # Use options if specified by caller
         if not _.isUndefined(options) and _.isObject(options)
           _.extend(fetchESOptions, options)
         # Call Backbone's fetch
         return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
       else
+        console.log("EMPTY SEARCH")
         return @reset()
+
+
 
     # generates an object with the data necessary to do the ES request
     getRequestData: ->
-      return {
+      singular_terms = @getMeta('singular_terms')
+      exact_terms = @getMeta('exact_terms')
+      sing_terms_joined = singular_terms.join(' ')
+      exact_terms_joined = exact_terms.join(' ')
+      console.log(sing_terms_joined)
+      console.log(exact_terms_joined)
+      es_query = {
         size: @getMeta('page_size'),
         from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
         query:
-          query_string:
-            fields: [
-              "*.std_analyzed^20",
-              "*.eng_analyzed^15",
-              "*.pref_name_analyzed^1.1",
-              "*.alt_name_analyzed",
-              "*.keyword^100",
-              "*.entity_id^100000",
-              "*.id_reference^2",
-              "*.chembl_id^10000",
-              "*.chembl_id_reference^2"
-            ]
-            query: @getMeta('search_term')
+          bool:
+            must:
+              bool:
+                should:[
+                  {
+                    multi_match:
+                      type: "best_fields",
+                      fields: [
+                        "*.pref_name_analyzed^1.5",
+                        "*.alt_name_analyzed",
+                        "*.std_analyzed^30",
+                        "*.eng_analyzed^20"
+                      ],
+                      query: sing_terms_joined,
+                      minimum_should_match: "70%"
+                  }
+                  ,
+                  {
+                    query_string:
+                      fields: [
+                        "*.std_analyzed^30",
+                        "*.eng_analyzed^20",
+                        "*.keyword^1000",
+                        "*.entity_id^100000",
+                        "*.id_reference^1000",
+                        "*.chembl_id^10000",
+                        "*.chembl_id_reference^5000"
+                      ]
+                      query: exact_terms_joined
+                  }
+                ]
       }
+      console.log(es_query)
+      return es_query
 
     # builds the url to do the request
     getURL: ->
@@ -95,7 +129,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
     #  sorting data per column.
     #
-    resetMeta: (totalRecords) ->
+    resetMeta: (totalRecords, max_score) ->
+      @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)

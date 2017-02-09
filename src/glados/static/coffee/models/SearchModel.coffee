@@ -31,13 +31,14 @@ SearchModel = Backbone.Model.extend
   checkUniCHEM: (term, callback_response, index)->
     # TODO: Change when UniChem accepts the CORS headers
     callback_unichem = (uc_json_response)->
-      tmp_chembl_id = null
+      chembl_ids = []
       if _.has(uc_json_response, 'error')
         console.log('unichem: not found for '+term)
       else
-        tmp_chembl_id = uc_json_response[_.keys(uc_json_response)[0]][0].src_compound_id
-      if tmp_chembl_id
-        callback_response('"'+tmp_chembl_id+'"', index)
+        for key_i in _.keys(uc_json_response)
+          chembl_ids.push('"'+uc_json_response[key_i][0].src_compound_id+'"')
+      if chembl_ids
+        callback_response(chembl_ids.join(' '), index)
     # Hack to prevent all callbacks to point to the same function with overriden index position
     callback_unichem.index_pos = index
     unichem_cb_name = 'unichem_cb_'+index
@@ -55,16 +56,17 @@ SearchModel = Backbone.Model.extend
     )
     return jQueryPromise
 
-  canonicalizeSMILE: (term, callback_response, index)->
+  flexmatchSMILES: (term, callback_response, index)->
     jQueryPromise = $.ajax( {
-        type: 'POST'
-        url: glados.ChemUtils.SMILES.canonicalize_ws_url
-        data: term
+        type: 'GET'
+        url: glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL+term
         success: (data)->
-          if data
-            parts=data.split('\n')
-            if parts[1]
-              callback_response('"'+parts[1].trim()+'"', index)
+          if data and _.has(data,'molecules')
+            chembl_ids = []
+            for molecule_i in data.molecules
+              chembl_ids.push('"'+molecule_i.molecule_chembl_id+'"')
+            if chembl_ids
+              callback_response(chembl_ids.join(' '), index)
         error: ()->
           return
       }
@@ -77,9 +79,24 @@ SearchModel = Backbone.Model.extend
     terms = rawQueryString.split(" ")
 
     terms_transform_in_order = terms.slice(0)
+    chembl_ids = []
 
     final_cb = ()->
-      @set('queryString', terms_transform_in_order.join(' '))
+      singular_terms = []
+      exact_terms = []
+      search_str_page = ""
+      for term, index in terms_transform_in_order
+        if term.trim()
+          search_str_page += term
+          if (/^".*"$/).test(term)
+            exact_terms.push(term)
+          else
+            singular_terms.push(term)
+      console.log(singular_terms)
+      console.log(exact_terms)
+      @set("singular_terms",singular_terms)
+      @set("exact_terms",exact_terms)
+      @set('queryString', search_str_page)
       setTimeout(@__search.bind(@),10)
     final_cb = final_cb.bind(@)
 
@@ -96,7 +113,7 @@ SearchModel = Backbone.Model.extend
         terms_transform_in_order[index] = '"'+term+'"'
       else if glados.ChemUtils.SMILES.regex.test(term)
         terms_transform_in_order[index] = '"'+term+'"'
-        smiles_promise = @canonicalizeSMILE(term,term_replacement_callback, index)
+        smiles_promise = @flexmatchSMILES(term,term_replacement_callback, index)
         jquery_promises.push(smiles_promise)
       else if term
         unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
@@ -110,7 +127,8 @@ SearchModel = Backbone.Model.extend
     console.log("MODEL SEARCH")
     rls_dict = @getResultsListsDict()
     for key_i, val_i of rls_dict
-      val_i.setMeta('search_term',@get('queryString'))
+      val_i.setMeta('singular_terms',@get("singular_terms"))
+      val_i.setMeta('exact_terms',@get("exact_terms"))
       val_i.setPage(1)
       val_i.fetch()
 
