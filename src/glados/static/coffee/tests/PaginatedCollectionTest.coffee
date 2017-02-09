@@ -215,6 +215,8 @@ describe "Paginated Collection", ->
       expect(esList.getMeta('current_page')).toBe(1)
       expect(esList.getMeta('index')).toBe('/chembl_molecule')
       expect(esList.getMeta('page_size')).toBe(6)
+      esList.setMeta('singular_terms',['aspirin'])
+      esList.setMeta('exact_terms',['"CHEMBL59"'])
 
     it "Sets the request data to get the 5th page", ->
 
