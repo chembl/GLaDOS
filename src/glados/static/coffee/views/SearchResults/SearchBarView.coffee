@@ -23,8 +23,11 @@ glados.useNameSpace 'glados.views.SearchResults',
     searchFromURL: ()->
       if @atResultsPage
           urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-          if urlQueryString
+          if urlQueryString and urlQueryString != @lastURLQuery
+            $('#search_bar').val(urlQueryString)
             @searchModel.search(urlQueryString)
+            @lastURLQuery = urlQueryString
+
     # --------------------------------------------------------------------------------------------------------------------
     # Views
     # --------------------------------------------------------------------------------------------------------------------
