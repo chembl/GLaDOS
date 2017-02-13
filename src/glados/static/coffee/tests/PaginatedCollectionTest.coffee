@@ -210,6 +210,7 @@ describe "Paginated Collection", ->
       ]
       esList.setMeta('singular_terms',['aspirin'])
       esList.setMeta('exact_terms',['"CHEMBL59"'])
+      esList.setMeta('filter_terms',[])
       done()
 
     it "Sets initial parameters", ->
