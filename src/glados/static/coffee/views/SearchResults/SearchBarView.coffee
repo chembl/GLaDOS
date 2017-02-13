@@ -23,8 +23,11 @@ glados.useNameSpace 'glados.views.SearchResults',
     searchFromURL: ()->
       if @atResultsPage
           urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-          if urlQueryString
+          if urlQueryString and urlQueryString != @lastURLQuery
+            $('#search_bar').val(urlQueryString)
             @searchModel.search(urlQueryString)
+            @lastURLQuery = urlQueryString
+
     # --------------------------------------------------------------------------------------------------------------------
     # Views
     # --------------------------------------------------------------------------------------------------------------------
@@ -121,10 +124,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     render: () ->
       if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
         @fillTemplate('BCK-SRB-small')
+        $(@el).find('#search-bar-small').pushpin
+          top : 106
       else
         @fillTemplate('BCK-SRB-med-and-up')
-      $(@el).find('#search-bar-small').pushpin
-        top : 106
 
     fillTemplate: (div_id) ->
       div = $(@el).find('#' + div_id)
@@ -133,6 +136,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         div.html Handlebars.compile(template.html())
           searchBarQueryStr: @searchModel.get('queryString')
           showAdvanced: @showAdvanced
+        # Shows the central div of the page after the search bar loads
+        if not @atResultsPage
+          $('#MainPageCentralDiv').show()
       else
         console.log("Error trying to render the SearchBarView because the div or the template could not be found")
 

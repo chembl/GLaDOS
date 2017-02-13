@@ -123,12 +123,14 @@
 
   <div class="col s12 m6 l4">
 
+    {{#if img_url}}
     <div class="card horizontal grey lighten-5">
-      {{#if img_url}}
         <div class="white card-image" >
           <img src="{{img_url}}" height="150px" width="150px" >
         </div>
-      {{/if}}
+    {{else}}
+    <div class="card horizontal grey lighten-5 card-top-border">
+    {{/if}}
       <div class="card-stacked">
         <div class="card-content">
 

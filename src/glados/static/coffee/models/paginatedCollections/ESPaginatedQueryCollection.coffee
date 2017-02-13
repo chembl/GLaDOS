@@ -10,55 +10,131 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Backbone Override
     # ------------------------------------------------------------------------------------------------------------------
 
+    errorHandler: (collection, response, options)->
+      console.log("ERROR QUERYING ELASTIC SEARCH:",collection, response, options)
+      @resetMeta(0, 0)
+      @reset()
+
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
-      @resetMeta(data.hits.total)
+      @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
-
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
       @trigger('before_fetch_elastic');
-      if @getMeta('search_term')
-        @url = @getURL()
-        # Creates the Elastic Search Query parameters and serializes them
-        esJSONRequest = JSON.stringify(@getRequestData())
-        # Uses POST to prevent result caching
-        fetchESOptions =
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-        # Use options if specified by caller
-        if not _.isUndefined(options) and _.isObject(options)
-          _.extend(fetchESOptions, options)
-        # Call Backbone's fetch
-        return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
-      else
-        return @reset()
+      @url = @getURL()
+      # Creates the Elastic Search Query parameters and serializes them
+      esJSONRequest = JSON.stringify(@getRequestData())
+      # Uses POST to prevent result caching
+      fetchESOptions =
+        data: esJSONRequest
+        type: 'POST'
+        reset: true
+        error: @errorHandler.bind(@)
+      # Use options if specified by caller
+      if not _.isUndefined(options) and _.isObject(options)
+        _.extend(fetchESOptions, options)
+      # Call Backbone's fetch
+      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+
+
 
     # generates an object with the data necessary to do the ES request
     getRequestData: ->
-      return {
+      singular_terms = @getMeta('singular_terms')
+      exact_terms = @getMeta('exact_terms')
+      filter_terms = @getMeta("filter_terms")
+      exact_terms_joined = null
+      if singular_terms.length == 0 and exact_terms.length == 0
+        exact_terms_joined = '*'
+      else if exact_terms.length == 0
+        exact_terms_joined = ''
+      else
+        exact_terms_joined = exact_terms.join(' ')
+      by_term_query = {
+        bool:
+          minimum_should_match: "70%"
+          boost: 50
+          should: []
+      }
+      for term_i in singular_terms
+        term_i_query =
+          {
+            bool:
+              boost: 10
+              should:
+                [
+                  {
+                    multi_match:
+                      fields: [
+                        "*.std_analyzed^10",
+                        "*.eng_analyzed^5"
+                      ],
+                      query: term_i,
+                      boost: 1
+                      fuzziness: 'AUTO'
+                  }
+              ]
+          }
+        if term_i.length > 4
+          term_i_query.bool.should.push(
+            {
+              constant_score:
+                query:
+                  multi_match:
+                    fields: [
+                      "*.pref_name_analyzed^1.3",
+                      "*.alt_name_analyzed",
+                    ],
+                    query: term_i,
+                    minimum_should_match: "80%"
+                boost: 100
+            }
+          )
+        by_term_query.bool.should.push(term_i_query)
+      es_query = {
         size: @getMeta('page_size'),
         from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
         query:
-          query_string:
-            fields: [
-              "*.std_analyzed^20",
-              "*.eng_analyzed^15",
-              "*.pref_name_analyzed^1.1",
-              "*.alt_name_analyzed",
-              "*.keyword^100",
-              "*.entity_id^100000",
-              "*.id_reference^2",
-              "*.chembl_id^10000",
-              "*.chembl_id_reference^2"
-            ]
-            query: @getMeta('search_term')
+          bool:
+            must:
+              bool:
+                should:[
+                  {
+                    query_string:
+                      fields: [
+                        "*.std_analyzed^10",
+                        "*.keyword^1000",
+                        "*.entity_id^100000",
+                        "*.id_reference^1000",
+                        "*.chembl_id^10000",
+                        "*.chembl_id_reference^5000"
+                      ]
+                      fuzziness: 0
+                      query: exact_terms_joined
+                  }
+                ]
       }
+      if filter_terms.length > 0
+        filter_terms_joined = filter_terms.join(' ')
+        es_query.query.bool.filter =
+          [
+            {
+              query_string:
+                fields: [
+                  "*"
+                ]
+                fuzziness: 0
+                query: filter_terms_joined
+            }
+          ]
+      if singular_terms.length > 0
+        es_query.query.bool.must.bool.should.push(by_term_query)
+      return es_query
 
     # builds the url to do the request
     getURL: ->
@@ -95,7 +171,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
     #  sorting data per column.
     #
-    resetMeta: (totalRecords) ->
+    resetMeta: (totalRecords, max_score) ->
+      max_score = if _.isNumber(max_score) then max_score else 0
+      console.log(@getURL(), max_score)
+      @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)
