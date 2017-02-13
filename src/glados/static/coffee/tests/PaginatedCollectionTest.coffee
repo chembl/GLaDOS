@@ -208,6 +208,9 @@ describe "Paginated Collection", ->
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[ \
         glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
+      esList.setMeta('singular_terms',['aspirin'])
+      esList.setMeta('exact_terms',['"CHEMBL59"'])
+      esList.setMeta('filter_terms',[])
       done()
 
     it "Sets initial parameters", ->
