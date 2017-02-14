@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
-      @trigger('before_fetch_elastic');
+      @trigger('before_fetch_elastic')
       @url = @getURL()
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
@@ -58,14 +58,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       by_term_query = {
         bool:
           minimum_should_match: "70%"
-          boost: 50
+          boost: 100
           should: []
       }
       for term_i in singular_terms
         term_i_query =
           {
             bool:
-              boost: 10
               should:
                 [
                   {
@@ -92,7 +91,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                     ],
                     query: term_i,
                     minimum_should_match: "80%"
-                boost: 100
+                boost: 1
             }
           )
         by_term_query.bool.should.push(term_i_query)
@@ -173,8 +172,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #
     resetMeta: (totalRecords, max_score) ->
       max_score = if _.isNumber(max_score) then max_score else 0
-      console.log(@getURL(), max_score)
       @setMeta('max_score', max_score)
+      @trigger('score_update')
       @setMeta('total_records', parseInt(totalRecords))
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)

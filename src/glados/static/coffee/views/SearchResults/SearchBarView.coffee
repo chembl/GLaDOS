@@ -32,24 +32,70 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Views
     # --------------------------------------------------------------------------------------------------------------------
 
+    reorderCollections: ()->
+      sorted_scores = []
+      insert_score_in_order = (_score)->
+        inserted = false
+        for score_i, i in sorted_scores
+          if score_i < _score
+            sorted_scores.splice(i,0,_score)
+            inserted = true
+            break
+        if not inserted
+          sorted_scores.push(_score)
+      keys_by_score = {}
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+        srl_dict = @searchModel.getResultsListsDict()
+        if _.has(srl_dict, key_i)
+          score_i = srl_dict[key_i].getMeta("max_score")
+          total_records = srl_dict[key_i].getMeta("total_records")
+          if not score_i
+            score_i = 0
+          if not total_records
+            total_records = 0
+          # Boost compounds and targets to the top!
+          boost = 1
+          if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
+            boost = 100
+          else if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET.KEY_NAME
+            boost = 50
+          score_i *= boost
+
+          if not _.has(keys_by_score,score_i)
+            keys_by_score[score_i] = []
+          keys_by_score[score_i].push(key_i)
+          insert_score_in_order(score_i)
+      console.log(sorted_scores,keys_by_score)
+      lists_container = $('#BCK-ESResultsLists-lists')
+      for score_i in sorted_scores
+        for key_i in keys_by_score[score_i]
+          div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+          lists_container.append(div_key_i)
+
     initResultsListsViews: () ->
       success_cb = (template) ->
         @searchResultsViewsDict = {}
-        container = $('#BCK-ESResultsLists')
+        @container = $('#BCK-ESResultsLists')
         srl_dict = @searchModel.getResultsListsDict()
-        if container
+        if @container
           container_html = ''+
-            '<h3>\n'+
-            '  <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>\n'+
-            '</h3>\n'
+            '<div id="BCK-ESResultsLists-header">'+
+            '  <h3>\n'+
+            '    <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>\n'+
+            '  </h3>'+
+            '</div>\n'
+          container_html += '<div id="BCK-ESResultsLists-lists">'
           for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
             if _.has(srl_dict, key_i)
+              # event register for score update
+              srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
               container_html += ''+
                 '<div id="BCK-'+val_i.ID_NAME+'">\n'+
                 '  <h3>'+val_i.LABEL+':</h3>\n'+
                 template+
                 '</div>\n'
-          container.html(container_html)
+          container_html += '</div>'
+          @container.html(container_html)
           for key_i, val_i of srl_dict
             rl_view_i = new glados.views.SearchResults.ESResultsListView
               collection: val_i
