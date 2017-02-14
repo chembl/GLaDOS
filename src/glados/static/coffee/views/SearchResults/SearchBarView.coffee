@@ -13,6 +13,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @searchModel = SearchModel.getInstance()
       # Don't instantiate the ResultsLists if it is not necessary
       if @atResultsPage
+        @container = $('#BCK-ESResults')
+        @lists_container = $('#BCK-ESResults-lists')
         @initResultsListsViews()
       @render()
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
@@ -66,48 +68,37 @@ glados.useNameSpace 'glados.views.SearchResults',
           keys_by_score[score_i].push(key_i)
           insert_score_in_order(score_i)
       console.log(sorted_scores,keys_by_score)
-      lists_container = $('#BCK-ESResultsLists-lists')
-      for score_i in sorted_scores
-        for key_i in keys_by_score[score_i]
-          div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
-          lists_container.append(div_key_i)
+      if @lists_container
+        for score_i in sorted_scores
+          for key_i in keys_by_score[score_i]
+            div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+            @lists_container.append(div_key_i)
 
     initResultsListsViews: () ->
-      success_cb = (template) ->
-        @searchResultsViewsDict = {}
-        @container = $('#BCK-ESResultsLists')
-        srl_dict = @searchModel.getResultsListsDict()
-        if @container
-          container_html = ''+
-            '<div id="BCK-ESResultsLists-header">'+
-            '  <h3>\n'+
-            '    <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>\n'+
-            '  </h3>'+
-            '</div>\n'
-          container_html += '<div id="BCK-ESResultsLists-lists">'
-          for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-            if _.has(srl_dict, key_i)
-              # event register for score update
-              srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
-              container_html += ''+
-                '<div id="BCK-'+val_i.ID_NAME+'">\n'+
-                '  <h3>'+val_i.LABEL+':</h3>\n'+
-                template+
-                '</div>\n'
-          container_html += '</div>'
-          @container.html(container_html)
-          for key_i, val_i of srl_dict
-            rl_view_i = new glados.views.SearchResults.ESResultsListView
-              collection: val_i
-              el: '#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME
-            @searchResultsViewsDict[key_i] = rl_view_i
-      success_cb = success_cb.bind(@)
-      $.ajax({
-          type: 'GET'
-          url: glados.Settings.DEFAULT_CARD_PAGE_CONTENT_TEMPLATE_PATH
-          cache: true
-          success: success_cb
-      })
+      list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
+
+      @searchResultsViewsDict = {}
+      # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
+      # Share the same keys to access different objects
+      srl_dict = @searchModel.getResultsListsDict()
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+        if _.has(srl_dict, key_i)
+          es_results_list_id = 'BCK-'+val_i.ID_NAME
+          es_results_list_title = val_i.LABEL
+          @lists_container.append(
+            list_template(
+              es_results_list_id: es_results_list_id
+              es_results_list_title: es_results_list_title
+            )
+          )
+          # Instantiates the results list view for each ES entity and links them with the html component
+          es_rl_view_i = new glados.views.SearchResults.ESResultsListView
+            collection: srl_dict[key_i]
+            el: '#'+es_results_list_id
+          @searchResultsViewsDict[key_i] = es_rl_view_i
+          # event register for score update
+          srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
+      @container.show()
 
     # --------------------------------------------------------------------------------------------------------------------
     # Events Handling
