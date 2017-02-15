@@ -283,8 +283,54 @@ class ButtonsHelper
       input_field.value = originalInputValue
 
 
+  # ------------------------------------------------------------
+  # expandable text input
+  # ------------------------------------------------------------
 
 
+
+  @createExpandableInput = (input_element)->
+    if not input_element instanceof jQuery
+      $input_element = $(input_element)
+    else
+      $input_element = $(input_element)
+    expanded_area_id = $input_element.attr('id')+'-expanded'
+    if $input_element.is("input")
+      $input_element.after('<textarea id="'+expanded_area_id+'" style="z-index:1; display: none; position:relative; background: white">')
+      initial_width = $input_element.width()
+      $expandend_element = $('#'+expanded_area_id)
+      updateVals = ()->
+        cur_val = $input_element.val()
+        $expandend_element.html(cur_val)
+      isInputOverflowing = ()->
+        overflow = ($input_element[0].scrollWidth > initial_width)
+        return overflow
+
+      adjustExpandedHeight = ()->
+        max_height = $(window).height()*0.8
+        min_h = Math.min(max_height,$expandend_element[0].scrollHeight)
+        console.log($expandend_element[0].clientHeight,$expandend_element[0].scrollHeight,)
+        $expandend_element.height(min_h)
+
+      onkeyup = () ->
+        updateVals()
+        if isInputOverflowing()
+          $input_element.hide()
+          $expandend_element.show()
+          $expandend_element.focus()
+          adjustExpandedHeight()
+
+      expandedKeyup = ()->
+        adjustExpandedHeight()
+
+      onchange = ()->
+        return
+      $input_element.change(onchange)
+      $input_element.keyup(onkeyup)
+      $expandend_element.keyup(expandedKeyup)
+    else
+      console.log("WARNING: could not obtain a valid input element to create an expandable input. input_element:",
+        input_element)
 
 
 

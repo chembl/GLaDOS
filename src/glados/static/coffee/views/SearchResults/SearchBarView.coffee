@@ -176,6 +176,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Shows the central div of the page after the search bar loads
         if not @atResultsPage
           $('#MainPageCentralDiv').show()
+
+        # expandable search bar
+        ButtonsHelper.createExpandableInput($(@el).find('#search_bar'))
       else
         console.log("Error trying to render the SearchBarView because the div or the template could not be found")
 
