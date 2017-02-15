@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Views
     # --------------------------------------------------------------------------------------------------------------------
 
-    reorderCollections: ()->
+    sortResultsLists: ()->
       sorted_scores = []
       insert_score_in_order = (_score)->
         inserted = false
@@ -115,7 +115,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             el: '#'+es_results_list_id
           @searchResultsViewsDict[key_i] = es_rl_view_i
           # event register for score update
-          srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
+          srl_dict[key_i].on('score_update',@sortResultsLists.bind(@))
       @container.show()
 
     # --------------------------------------------------------------------------------------------------------------------
