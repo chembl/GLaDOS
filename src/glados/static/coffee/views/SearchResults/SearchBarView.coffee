@@ -99,6 +99,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       # Share the same keys to access different objects
       srl_dict = @searchModel.getResultsListsDict()
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
         if _.has(srl_dict, key_i)
           es_results_list_id = 'BCK-'+val_i.ID_NAME
           es_results_list_title = val_i.LABEL
