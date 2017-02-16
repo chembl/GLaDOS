@@ -39,7 +39,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Views
     # --------------------------------------------------------------------------------------------------------------------
 
-    reorderCollections: ()->
+    sortResultsListsViews: ()->
       sorted_scores = []
       insert_score_in_order = (_score)->
         inserted = false
@@ -72,7 +72,6 @@ glados.useNameSpace 'glados.views.SearchResults',
             keys_by_score[score_i] = []
           keys_by_score[score_i].push(key_i)
           insert_score_in_order(score_i)
-      console.log(sorted_scores,keys_by_score)
 
       if @lists_container
         for score_i in sorted_scores
@@ -88,7 +87,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           totalRecords = srl_dict[key_i].getMeta("total_records")
           resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
           chipStruct.push({total_records: totalRecords, label:resourceLabel})
-          console.log 'Got: ,', totalRecords, ',', resourceLabel
 
         $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
           chips: chipStruct
@@ -118,7 +116,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             el: '#'+es_results_list_id
           @searchResultsViewsDict[key_i] = es_rl_view_i
           # event register for score update
-          srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
+          srl_dict[key_i].on('score_and_records_update',@sortResultsListsViews.bind(@))
       @container.show()
 
     # --------------------------------------------------------------------------------------------------------------------
