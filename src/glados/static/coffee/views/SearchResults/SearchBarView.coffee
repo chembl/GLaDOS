@@ -13,8 +13,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       @searchModel = SearchModel.getInstance()
       # Don't instantiate the ResultsLists if it is not necessary
       if @atResultsPage
+        @container = $('#BCK-ESResults')
+        @lists_container = $('#BCK-ESResults-lists')
         @initResultsListsViews()
+      @expandable_search_bar = null # Assigned after render
+      @small_bar_id = 'BCK-SRB-small'
+      @med_andup_bar_id = 'BCK-SRB-med-and-up'
       @render()
+      # re-renders on widnow resize
+      $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
       # Handles the popstate event to reload a search
       window.onpopstate = @searchFromURL.bind(@)
@@ -24,7 +31,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @atResultsPage
           urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
           if urlQueryString and urlQueryString != @lastURLQuery
-            $('#search_bar').val(urlQueryString)
+            @expandable_search_bar.val(urlQueryString)
             @searchModel.search(urlQueryString)
             @lastURLQuery = urlQueryString
 
@@ -32,7 +39,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Views
     # --------------------------------------------------------------------------------------------------------------------
 
-    reorderCollections: ()->
+    sortResultsListsViews: ()->
       sorted_scores = []
       insert_score_in_order = (_score)->
         inserted = false
@@ -44,8 +51,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         if not inserted
           sorted_scores.push(_score)
       keys_by_score = {}
+      srl_dict = @searchModel.getResultsListsDict()
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-        srl_dict = @searchModel.getResultsListsDict()
         if _.has(srl_dict, key_i)
           score_i = srl_dict[key_i].getMeta("max_score")
           total_records = srl_dict[key_i].getMeta("total_records")
@@ -65,49 +72,52 @@ glados.useNameSpace 'glados.views.SearchResults',
             keys_by_score[score_i] = []
           keys_by_score[score_i].push(key_i)
           insert_score_in_order(score_i)
-      console.log(sorted_scores,keys_by_score)
-      lists_container = $('#BCK-ESResultsLists-lists')
-      for score_i in sorted_scores
-        for key_i in keys_by_score[score_i]
-          div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
-          lists_container.append(div_key_i)
+
+      if @lists_container
+        for score_i in sorted_scores
+          for key_i in keys_by_score[score_i]
+            $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+            @lists_container.append($div_key_i)
+
+
+        # generate chips for the results summary
+        chipStruct = []
+        for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+          totalRecords = srl_dict[key_i].getMeta("total_records")
+          resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
+          chipStruct.push({total_records: totalRecords, label:resourceLabel})
+
+        $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
+          chips: chipStruct
+
 
     initResultsListsViews: () ->
-      success_cb = (template) ->
-        @searchResultsViewsDict = {}
-        @container = $('#BCK-ESResultsLists')
-        srl_dict = @searchModel.getResultsListsDict()
-        if @container
-          container_html = ''+
-            '<div id="BCK-ESResultsLists-header">'+
-            '  <h3>\n'+
-            '    <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>\n'+
-            '  </h3>'+
-            '</div>\n'
-          container_html += '<div id="BCK-ESResultsLists-lists">'
-          for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-            if _.has(srl_dict, key_i)
-              # event register for score update
-              srl_dict[key_i].on('score_update',@reorderCollections.bind(@))
-              container_html += ''+
-                '<div id="BCK-'+val_i.ID_NAME+'">\n'+
-                '  <h3>'+val_i.LABEL+':</h3>\n'+
-                template+
-                '</div>\n'
-          container_html += '</div>'
-          @container.html(container_html)
-          for key_i, val_i of srl_dict
-            rl_view_i = new glados.views.SearchResults.ESResultsListView
-              collection: val_i
-              el: '#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME
-            @searchResultsViewsDict[key_i] = rl_view_i
-      success_cb = success_cb.bind(@)
-      $.ajax({
-          type: 'GET'
-          url: glados.Settings.DEFAULT_CARD_PAGE_CONTENT_TEMPLATE_PATH
-          cache: true
-          success: success_cb
-      })
+      list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
+
+      @searchResultsViewsDict = {}
+      # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
+      # Share the same keys to access different objects
+      srl_dict = @searchModel.getResultsListsDict()
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+        if _.has(srl_dict, key_i)
+          es_results_list_id = 'BCK-'+val_i.ID_NAME
+          es_results_list_title = val_i.LABEL
+          @lists_container.append(
+            list_template(
+              es_results_list_id: es_results_list_id
+              es_results_list_title: es_results_list_title
+            )
+          )
+          # Instantiates the results list view for each ES entity and links them with the html component
+          es_rl_view_i = new glados.views.SearchResults.ESResultsListView
+            collection: srl_dict[key_i]
+            el: '#'+es_results_list_id
+          @searchResultsViewsDict[key_i] = es_rl_view_i
+          # event register for score update
+          srl_dict[key_i].on('score_and_records_update',@sortResultsListsViews.bind(@))
+      @container.show()
 
     # --------------------------------------------------------------------------------------------------------------------
     # Events Handling
@@ -117,22 +127,14 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .example_link' : 'searchExampleLink'
       'click #submit_search' : 'search'
       'click #search-opts' : 'searchAdvanced'
-      'keyup #search_bar' : 'searchBarKeyUp',
-      'change #search_bar' : 'searchBarChange'
 
     updateSearchBarFromModel: (e) ->
-      $('#search_bar').val(@searchModel.get('queryString'))
-
-    searchBarKeyUp: (e) ->
-      if e.which == 13
-        @search()
-
-    searchBarChange: (e) ->
-      console.log($(e.currentTarget).val())
+      if @expandable_search_bar
+        @expandable_search_bar.val(@searchModel.get('queryString'))
 
     searchExampleLink: (e) ->
       exampleString = $(e.currentTarget).html()
-      $('#search_bar').val(exampleString)
+      @expandable_search_bar.val(exampleString)
       @search()
 
     # --------------------------------------------------------------------------------------------------------------------
@@ -140,7 +142,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # --------------------------------------------------------------------------------------------------------------------
 
     search: () ->
-      searchBarQueryString = $('#search_bar').val()
+      searchBarQueryString = @expandable_search_bar.val()
       search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+"/"+encodeURI(searchBarQueryString)
       # Updates the navigation URL
       window.history.pushState({}, 'ChEMBL: '+searchBarQueryString, search_url_for_query)
@@ -152,7 +154,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         window.location.href = search_url_for_query
 
     searchAdvanced: () ->
-      searchBarQueryString = $('#search_bar').val()
+      searchBarQueryString = @expandable_search_bar.val()
       if @atResultsPage
         @switchShowAdvanced()
       else
@@ -168,12 +170,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     # --------------------------------------------------------------------------------------------------------------------
 
     render: () ->
+      # on re-render cleans the drawn bar
+      $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
       if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
-        @fillTemplate('BCK-SRB-small')
+        @fillTemplate(@small_bar_id)
         $(@el).find('#search-bar-small').pushpin
           top : 106
       else
-        @fillTemplate('BCK-SRB-med-and-up')
+        @fillTemplate(@med_andup_bar_id)
 
     fillTemplate: (div_id) ->
       div = $(@el).find('#' + div_id)
@@ -185,6 +189,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Shows the central div of the page after the search bar loads
         if not @atResultsPage
           $('#MainPageCentralDiv').show()
+
+        # expandable search bar
+        @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('#search_bar'))
+        @expandable_search_bar.onEnter(@search.bind(@))
       else
         console.log("Error trying to render the SearchBarView because the div or the template could not be found")
 

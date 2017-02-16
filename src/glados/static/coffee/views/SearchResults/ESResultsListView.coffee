@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'before_fetch_elastic', @showPreloaderHideOthers, @
 
     render: ->
+      @initDownloadButtonIfContent()
       @hideHeaderContainer()
       @clearContentContainer()
       @fillTemplates()
