@@ -62,7 +62,7 @@ SearchModel = Backbone.Model.extend
   flexmatchSMILES: (term, callback_response, index)->
     jQueryPromise = $.ajax( {
         type: 'GET'
-        url: glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL+term
+        url: glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL+encodeURI(term)
         success: (data)->
           if data and _.has(data,'molecules')
             chembl_ids_terms = []

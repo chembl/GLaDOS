@@ -16,7 +16,12 @@ glados.useNameSpace 'glados.views.SearchResults',
         @container = $('#BCK-ESResults')
         @lists_container = $('#BCK-ESResults-lists')
         @initResultsListsViews()
+      @expandable_search_bar = null # Assigned after render
+      @small_bar_id = 'BCK-SRB-small'
+      @med_andup_bar_id = 'BCK-SRB-med-and-up'
       @render()
+      # re-renders on widnow resize
+      $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
       # Handles the popstate event to reload a search
       window.onpopstate = @searchFromURL.bind(@)
@@ -26,7 +31,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @atResultsPage
           urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
           if urlQueryString and urlQueryString != @lastURLQuery
-            $('#search_bar').val(urlQueryString)
+            @expandable_search_bar.val(urlQueryString)
             @searchModel.search(urlQueryString)
             @lastURLQuery = urlQueryString
 
@@ -89,8 +94,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           chips: chipStruct
 
 
-
-
     initResultsListsViews: () ->
       list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
@@ -126,22 +129,14 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .example_link' : 'searchExampleLink'
       'click #submit_search' : 'search'
       'click #search-opts' : 'searchAdvanced'
-      'keyup #search_bar' : 'searchBarKeyUp',
-      'change #search_bar' : 'searchBarChange'
 
     updateSearchBarFromModel: (e) ->
-      $('#search_bar').val(@searchModel.get('queryString'))
-
-    searchBarKeyUp: (e) ->
-      if e.which == 13
-        @search()
-
-    searchBarChange: (e) ->
-      console.log($(e.currentTarget).val())
+      if @expandable_search_bar
+        @expandable_search_bar.val(@searchModel.get('queryString'))
 
     searchExampleLink: (e) ->
       exampleString = $(e.currentTarget).html()
-      $('#search_bar').val(exampleString)
+      @expandable_search_bar.val(exampleString)
       @search()
 
     # --------------------------------------------------------------------------------------------------------------------
@@ -149,7 +144,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # --------------------------------------------------------------------------------------------------------------------
 
     search: () ->
-      searchBarQueryString = $('#search_bar').val()
+      searchBarQueryString = @expandable_search_bar.val()
       search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+"/"+encodeURI(searchBarQueryString)
       # Updates the navigation URL
       window.history.pushState({}, 'ChEMBL: '+searchBarQueryString, search_url_for_query)
@@ -161,7 +156,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         window.location.href = search_url_for_query
 
     searchAdvanced: () ->
-      searchBarQueryString = $('#search_bar').val()
+      searchBarQueryString = @expandable_search_bar.val()
       if @atResultsPage
         @switchShowAdvanced()
       else
@@ -177,12 +172,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     # --------------------------------------------------------------------------------------------------------------------
 
     render: () ->
+      # on re-render cleans the drawn bar
+      $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
       if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
-        @fillTemplate('BCK-SRB-small')
+        @fillTemplate(@small_bar_id)
         $(@el).find('#search-bar-small').pushpin
           top : 106
       else
-        @fillTemplate('BCK-SRB-med-and-up')
+        @fillTemplate(@med_andup_bar_id)
 
     fillTemplate: (div_id) ->
       div = $(@el).find('#' + div_id)
@@ -194,6 +191,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Shows the central div of the page after the search bar loads
         if not @atResultsPage
           $('#MainPageCentralDiv').show()
+
+        # expandable search bar
+        @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('#search_bar'))
+        @expandable_search_bar.onEnter(@search.bind(@))
       else
         console.log("Error trying to render the SearchBarView because the div or the template could not be found")
 
