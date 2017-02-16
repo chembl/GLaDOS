@@ -449,6 +449,19 @@ PaginatedViewExt =
       @triggerCollectionSort(comp)
 
   #--------------------------------------------------------------------------------------
+  # Download Buttons
+  #--------------------------------------------------------------------------------------
+  # if the collection is empty it hides the download button, it shows it otherwise
+  initDownloadButtonIfContent: ->
+
+    if @collection.getMeta('total_records') != 0
+
+      $btn = $(@el).find('.download-col-btn')
+      $btn.dropdown
+        constrainWidth: false
+      $btn.show()
+
+  #--------------------------------------------------------------------------------------
   # Page selector
   #--------------------------------------------------------------------------------------
 

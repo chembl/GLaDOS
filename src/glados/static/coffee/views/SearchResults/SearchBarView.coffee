@@ -46,8 +46,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         if not inserted
           sorted_scores.push(_score)
       keys_by_score = {}
+      srl_dict = @searchModel.getResultsListsDict()
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-        srl_dict = @searchModel.getResultsListsDict()
         if _.has(srl_dict, key_i)
           score_i = srl_dict[key_i].getMeta("max_score")
           total_records = srl_dict[key_i].getMeta("total_records")
@@ -68,11 +68,28 @@ glados.useNameSpace 'glados.views.SearchResults',
           keys_by_score[score_i].push(key_i)
           insert_score_in_order(score_i)
       console.log(sorted_scores,keys_by_score)
+
       if @lists_container
         for score_i in sorted_scores
           for key_i in keys_by_score[score_i]
-            div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
-            @lists_container.append(div_key_i)
+            $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+            @lists_container.append($div_key_i)
+
+
+        # generate chips for the results summary
+        chipStruct = []
+        for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+          totalRecords = srl_dict[key_i].getMeta("total_records")
+          resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
+          chipStruct.push({total_records: totalRecords, label:resourceLabel})
+          console.log 'Got: ,', totalRecords, ',', resourceLabel
+
+        $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
+          chips: chipStruct
+
+
+
 
     initResultsListsViews: () ->
       list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
@@ -82,6 +99,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       # Share the same keys to access different objects
       srl_dict = @searchModel.getResultsListsDict()
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
         if _.has(srl_dict, key_i)
           es_results_list_id = 'BCK-'+val_i.ID_NAME
           es_results_list_title = val_i.LABEL
