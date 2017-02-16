@@ -94,8 +94,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           chips: chipStruct
 
 
-
-
     initResultsListsViews: () ->
       list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
