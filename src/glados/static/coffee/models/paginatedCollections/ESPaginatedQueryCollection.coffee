@@ -44,7 +44,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
     # generates an object with the data necessary to do the ES request
-    getRequestData: ->
+    # set a customPage if you want a page different than the one set as current
+    getRequestData: (customPage) ->
+      page = if customPage? then customPage else @getMeta('current_page')
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       filter_terms = @getMeta("filter_terms")
@@ -97,7 +99,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         by_term_query.bool.should.push(term_i_query)
       es_query = {
         size: @getMeta('page_size'),
-        from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
+        from: ((page - 1) * @getMeta('page_size'))
         query:
           bool:
             must:
@@ -233,3 +235,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentSortingComparator: () ->
       #TODO implement sorting
 
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Download functions
+    # ------------------------------------------------------------------------------------------------------------------
+    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+    downloadAllItems: (format, $progressElement) ->
+
+      if $progressElement?
+        $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+          percentage: '0'
+
+      url = @getURL()
+      params = @getRequestParamsForRawJsonPage()
+      console.log 'params: ', JSON.stringify(params)
+
+    getRequestParamsForRawJsonPage: ->
+
+      # Creates the Elastic Search Query parameters and serializes them
+      esJSONRequest = JSON.stringify(@getRequestData())
+      # Uses POST to prevent result caching
+      fetchESOptions =
+        data: esJSONRequest
+        type: 'POST'
+
+      return fetchESOptions
