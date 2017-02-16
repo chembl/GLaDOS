@@ -2,13 +2,50 @@
 
 {% block title %}Results{% endblock %}
 
-
 {% block content %}
 
 {% include "glados/SearchResultsParts/SearchBar.html" %}
 
-<div class="container main-container" id="BCK-ESResultsLists">
+<!-- Handlebars Templates -->
+{% verbatim %}
+<script id="Handlebars-ESResults-Chips" type="text/x-handlebars-template">
+  Summary:
+  {{#each chips}}
+  <div class="chip">
+    {{this.total_records}} {{this.label}}
+  </div>
+  {{/each}}
+</script>
+{% endverbatim %}
 
+<script id="Handlebars-ESResultsListCards" type="text/x-handlebars-template">
+  {% verbatim %}
+  <div id="{{es_results_list_id}}">
+    <h3>{{es_results_list_title}}</h3>
+
+
+    {% endverbatim %}
+
+    {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
+  </div>
+</script>
+
+<!-- End of Handlebars Templates -->
+
+<div class="container main-container" id="BCK-ESResults" style="display: none">
+  <div id="BCK-ESResults-header">
+    <h3>
+      <span><i class="icon icon-functional" data-icon="b"></i>Browse Results</span>
+    </h3>
+
+    <div class="summary-chips-container">
+      <!-- this is filled by backbone after each list receives its data -->
+    </div>
+
+  </div>
+  <div id="BCK-ESResults-lists">
+    <!-- This content is rendered using handlebars templates -->
+  </div>
 </div>
 
 {% endblock %}

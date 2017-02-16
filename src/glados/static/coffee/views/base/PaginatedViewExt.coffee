@@ -75,13 +75,21 @@ PaginatedViewExt =
       # correctly the height of each card
       setTimeout(
         ()->
-          max_h = 0
+          cards_per_row = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+
           $cards = $append_to.find('.card')
-          $cards.each(
-            (index, elem)->
-              max_h = Math.max(max_h, $(elem).height())
-          )
-          $cards.height(max_h)
+          for i in [0..($cards.length/cards_per_row)]
+            # Gets the maximum height in a row
+            max_h = 0
+            for j in [0..cards_per_row]
+              cur_card_index = i*cards_per_row+j
+              if cur_card_index < $cards.length
+                max_h = Math.max(max_h, $($cards[cur_card_index]).height())
+            # Sets the cards in the row to the maximum height found
+            for j in [0..cards_per_row]
+              cur_card_index = i*cards_per_row+j
+              if cur_card_index < $cards.length
+                $($cards[cur_card_index]).height(max_h)
         , 0
       )
 
@@ -447,6 +455,19 @@ PaginatedViewExt =
     comp = @collection.getCurrentSortingComparator()
     if comp?
       @triggerCollectionSort(comp)
+
+  #--------------------------------------------------------------------------------------
+  # Download Buttons
+  #--------------------------------------------------------------------------------------
+  # if the collection is empty it hides the download button, it shows it otherwise
+  initDownloadButtonIfContent: ->
+
+    if @collection.getMeta('total_records') != 0
+
+      $btn = $(@el).find('.download-col-btn')
+      $btn.dropdown
+        constrainWidth: false
+      $btn.show()
 
   #--------------------------------------------------------------------------------------
   # Page selector

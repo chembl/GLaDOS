@@ -1,3 +1,20 @@
+<div class="row">
+  <div class="col s6">
+    <!-- Dropdown Trigger -->
+    <!-- It should be shown only when there is content -->
+    <a class='dropdown-button btn-chembl teal download-col-btn' style="display: none"
+       data-activates='download-btn-{{es_results_list_id}}'>Download</a>
+
+    <!-- Dropdown Structure -->
+    <ul id='download-btn-{{es_results_list_id}}' class='dropdown-content'>
+      <li><a>Colon Separated</a></li>
+      <li><a>Tab Separated</a></li>
+      <li><a>SDF</a></li>
+
+    </ul>
+  </div>
+</div>
+
 <div class="BCK-header-container row" style="display: none">
 
   <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
@@ -5,15 +22,15 @@
     <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
   </div>
 
-   <div class="input-field col s4 m4 select-sort-container" data-hb-template="Handlebars-Common-SortSelect">
+  <div class="input-field col s4 m4 select-sort-container" data-hb-template="Handlebars-Common-SortSelect">
 
-      <!-- Backbone fills this from the corresponding view-->
+    <!-- Backbone fills this from the corresponding view-->
 
   </div>
 
   <div class="col s2 full-height btn-sort-direction-container" data-hb-template="Handlebars-Common-SortDirectionBtn">
 
-     <!-- Backbone fills this from the corresponding view -->
+    <!-- Backbone fills this from the corresponding view -->
 
   </div>
 
