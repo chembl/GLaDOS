@@ -456,10 +456,17 @@ PaginatedViewExt =
 
     if @collection.getMeta('total_records') != 0
 
-      $btn = $(@el).find('.download-col-btn')
-      $btn.dropdown
-        constrainWidth: false
-      $btn.show()
+      $dropdownContainer = $(@el).find('.BCK-dropdown-container')
+      $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
+        list_id: @collection.getMeta('id_name')
+
+      $btn = $(@el).find('.BCK-download-col-btn')
+      $dropdownContent = $(@el).find('#' + $btn.attr('data-activates'))
+
+      $dropdownContent.html Handlebars.compile( $('#' + $dropdownContent.attr('data-hb-template')).html() )
+        formats: @collection.getMeta('download_formats')
+
+      $btn.dropdown()
 
   #--------------------------------------------------------------------------------------
   # Page selector

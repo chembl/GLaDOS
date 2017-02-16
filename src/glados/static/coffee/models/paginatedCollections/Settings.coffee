@@ -12,6 +12,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
@@ -19,6 +21,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_target'
         MODEL: Target
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
@@ -26,6 +30,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_assay'
         MODEL: Assay
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
       DOCUMENT:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
@@ -33,6 +39,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_document'
         MODEL: Document
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
       CELL_LINE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
@@ -40,6 +48,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_cell_line'
         MODEL: CellLine
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
       TISSUE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
@@ -47,6 +57,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
 
     WS_COLLECTIONS:
       DRUG_LIST:

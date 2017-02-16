@@ -312,4 +312,23 @@
   <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
 </script>
 
+<script id="Handlebars-Common-DownloadColDropdownContainer" type="text/x-handlebars-template">
+
+    <a class='dropdown-button btn-chembl teal BCK-download-col-btn'
+       data-activates='download-btn-{{list_id}}'>Download</a>
+
+    <ul id='download-btn-{{list_id}}' class='dropdown-content'
+        data-hb-template="Handlebars-Common-DownloadColDropdownContent">
+    </ul>
+
+</script>
+
+<script id="Handlebars-Common-DownloadColDropdownContent" type="text/x-handlebars-template">
+  {{#each formats}}
+  <li><a>{{this}}</a></li>
+  {{/each}}
+</script>
+
+
+
 {% endverbatim %}
