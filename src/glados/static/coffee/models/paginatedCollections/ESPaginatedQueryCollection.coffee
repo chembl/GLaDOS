@@ -173,8 +173,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetMeta: (totalRecords, max_score) ->
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
-      @trigger('score_update')
       @setMeta('total_records', parseInt(totalRecords))
+      @trigger('score_and_records_update')
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)
       if !@hasMeta('search_term')
