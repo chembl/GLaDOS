@@ -1299,7 +1299,7 @@ div#CNC-zoom-modal {
 }
 
 /**
-* Acknowledgements
+* Search Bar and inputs
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
@@ -1335,6 +1335,18 @@ div#CNC-zoom-modal {
   background-color: white;
   border-radius: 5px;
 
+}
+
+.buttons-helper-expandable-input {
+  color: $primary-color;
+  resize: none;
+  z-index:20;
+  line-height: 1.5;
+  display: none;
+  position:relative;
+  background: white;
+  border: 2px solid $primary-color;
+  border-radius: 5px;
 }
 
 .full-height:after {
@@ -1535,6 +1547,9 @@ $marvin-size-fullscreen: 91vh;
   width: 100%;
   margin-top: 0px;
   z-index: 998;
+  a{
+    color: white;
+  }
 }
 
 .marvin-search-options {
