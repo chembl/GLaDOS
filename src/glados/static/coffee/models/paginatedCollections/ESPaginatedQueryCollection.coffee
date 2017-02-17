@@ -242,21 +242,69 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, $progressElement) ->
 
+      #-----------------------------------------------Get All Items-------------------------------------------
+
+      totalRecords = @getMeta('total_records')
+      if totalRecords >= 1000
+        if $progressElement?
+          $progressElement.html 'It is still not supported to download 10000 items or more!'
+
+          # erase element contents after some milliseconds
+          setTimeout( ()->
+            $progressElement.html ''
+          , 3000)
+        return
+
       if $progressElement?
         $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
           percentage: '0'
 
       url = @getURL()
-      params = @getRequestParamsForRawJsonPage()
-      console.log 'params: ', JSON.stringify(params)
+      totalPages = @getMeta('total_pages')
+      pageSize = @getMeta('page_size')
+      #initialise the array in which all the items are going to be saved as they are received from the server
+      items = (undefined for num in [1..totalRecords])
+      itemsReceived = 0
 
-    getRequestParamsForRawJsonPage: ->
+      #this function knows how to get one page of results and add them in the corresponding positions in the all
+      # items array
+      thisCollection = @
+      getItemsFromPage = (currentPage) ->
 
-      # Creates the Elastic Search Query parameters and serializes them
-      esJSONRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esJSONRequest
-        type: 'POST'
+        data = JSON.stringify(thisCollection.getRequestData(currentPage))
 
-      return fetchESOptions
+        return $.post( url, data).done( (response) ->
+
+          #I know that I must be receiving currentPage.
+          newItems = (item._source for item in response.hits.hits)
+          # now I add them in the corresponding position in the items array
+          startingPosition = (currentPage - 1) * pageSize
+
+          for i in [0..(newItems.length-1)]
+            items[i + startingPosition] = newItems[i]
+            itemsReceived++
+
+          progress = parseInt((itemsReceived / totalRecords) * 100)
+
+          if $progressElement? and (progress % 10) == 0
+            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+              percentage: progress
+
+
+        )
+
+      deferreds = []
+      # Now I request all pages, I accumulate all the deferreds in a list
+      for page in [1..totalPages]
+        deferreds.push(getItemsFromPage page)
+
+      #-----------------------------------------------End Get All Items-------------------------------------------
+      # Here I know that everything is done
+      $.when.apply($, deferreds).done( () ->
+
+        console.log 'DONE!'
+        console.log 'allItems: ', items
+
+      )
+
+
