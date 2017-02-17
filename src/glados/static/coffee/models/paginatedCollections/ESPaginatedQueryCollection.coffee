@@ -45,8 +45,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
-    getRequestData: (customPage) ->
+    # the same for customPageSize
+    getRequestData: (customPage, customPageSize) ->
       page = if customPage? then customPage else @getMeta('current_page')
+      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       filter_terms = @getMeta("filter_terms")
@@ -98,8 +100,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           )
         by_term_query.bool.should.push(term_i_query)
       es_query = {
-        size: @getMeta('page_size'),
-        from: ((page - 1) * @getMeta('page_size'))
+        size: pageSize,
+        from: ((page - 1) * pageSize)
         query:
           bool:
             must:
@@ -245,6 +247,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       #-----------------------------------------------Get All Items-------------------------------------------
 
       totalRecords = @getMeta('total_records')
+      pageSize = if totalRecords <= 100 then totalRecords else 100
+
+
       if totalRecords >= 1000
         if $progressElement?
           $progressElement.html 'It is still not supported to download 10000 items or more!'
@@ -260,8 +265,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           percentage: '0'
 
       url = @getURL()
-      totalPages = @getMeta('total_pages')
-      pageSize = @getMeta('page_size')
+      totalPages = Math.ceil(totalRecords / pageSize)
+      console.log 'page size: ', pageSize
+      console.log 'totalPages: ', totalPages
+
       #initialise the array in which all the items are going to be saved as they are received from the server
       items = (undefined for num in [1..totalRecords])
       itemsReceived = 0
@@ -271,7 +278,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       getItemsFromPage = (currentPage) ->
 
-        data = JSON.stringify(thisCollection.getRequestData(currentPage))
+        data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
+        console.log 'data: ', data
 
         return $.post( url, data).done( (response) ->
 
