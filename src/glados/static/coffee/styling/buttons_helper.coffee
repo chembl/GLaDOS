@@ -282,10 +282,45 @@ class ButtonsHelper
     else
       input_field.value = originalInputValue
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Caret functions
+  # --------------------------------------------------------------------------------------------------------------------
 
-  # ------------------------------------------------------------
+  @setSelectionRange = (input, selectionStart, selectionEnd) ->
+    if input.setSelectionRange
+      input.focus()
+      input.setSelectionRange(selectionStart, selectionEnd)
+    else if input.createTextRange
+      range = input.createTextRange()
+      range.collapse(true)
+      range.moveEnd('character', selectionEnd)
+      range.moveStart('character', selectionStart)
+      range.select()
+
+  @setCaretToPos = (input, pos)->
+    ButtonsHelper.setSelectionRange(input, pos, pos)
+
+  @getCaret = (el)->
+    if el.selectionStart
+      return el.selectionStart
+    else if document.selection
+      el.focus()
+
+      r = document.selection.createRange()
+      if r == null
+        return 0
+
+      re = el.createTextRange()
+      rc = re.duplicate()
+      re.moveToBookmark(r.getBookmark())
+      rc.setEndPoint('EndToStart', re)
+
+      return rc.text.length
+    return 0
+
+  # --------------------------------------------------------------------------------------------------------------------
   # expandable text input
-  # ------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   class @ExpandableInput
 
@@ -304,6 +339,7 @@ class ButtonsHelper
       @initial_width = @$input_element.width()
       @initial_height = @$input_element.height()
       @$expandend_element = $('#'+@expanded_area_id)
+      @force_focus = false
       @$input_element.keyup(@onkeyup.bind(@))
       @$input_element.focus(@onfocus.bind(@))
       @$expandend_element.keyup(@expandedKeyup.bind(@))
@@ -365,11 +401,14 @@ class ButtonsHelper
     showIfInputOverflows: (select_all)->
       @updateVals(true)
       if @isInputOverflowing()
+        caret_pos = ButtonsHelper.getCaret(@$input_element[0])
         @$input_element.hide()
         @$expandend_element.show()
         @$expandend_element.focus()
         if select_all
           @$expandend_element[0].select()
+        else
+          ButtonsHelper.setCaretToPos(@$expandend_element[0],caret_pos)
         @adjustExpandedHeight()
 
     onkeyup: (e)->
@@ -378,8 +417,14 @@ class ButtonsHelper
       @showIfInputOverflows(false)
 
     onfocus: ()->
-      @decompressInput()
-      @showIfInputOverflows(true)
+      if not @force_focus
+        @decompressInput()
+        @showIfInputOverflows(true)
+        if @$input_element.is(":visible")
+          @force_focus = true
+          @$input_element.focus()
+      else
+        @force_focus = false
 
     expandedKeyup: (e)->
       @real_value = @$expandend_element.val()

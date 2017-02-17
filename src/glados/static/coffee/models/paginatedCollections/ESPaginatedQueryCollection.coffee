@@ -75,6 +75,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                       ],
                       query: term_i,
                       boost: 1
+                  },
+                  {
+                    multi_match:
+                      fields: [
+                        "*.std_analyzed^10",
+                        "*.eng_analyzed^5"
+                      ],
+                      query: term_i,
+                      boost: 0.1
                       fuzziness: 'AUTO'
                   }
               ]
