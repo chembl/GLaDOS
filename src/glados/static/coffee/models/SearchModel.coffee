@@ -170,9 +170,10 @@ SearchModel = Backbone.Model.extend
       else if term
         unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
         jquery_promises.push(unichem_promise)
-    $.when(jquery_promises).done(
-      setTimeout(final_cb,300)
-    )
+    if jquery_promises.length > 0
+      $.when.apply($,jquery_promises).always(final_cb)
+    else
+      final_cb()
 
 
   __search: ()->
