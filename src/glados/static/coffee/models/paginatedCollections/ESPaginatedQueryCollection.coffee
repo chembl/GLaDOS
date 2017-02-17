@@ -250,7 +250,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
 
-      if totalRecords >= 1000
+      if totalRecords >= 10000
         if $progressElement?
           $progressElement.html 'It is still not supported to download 10000 items or more!'
 
