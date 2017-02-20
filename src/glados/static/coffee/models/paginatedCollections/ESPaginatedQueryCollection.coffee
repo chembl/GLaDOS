@@ -41,8 +41,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
-
-
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
     # the same for customPageSize
@@ -266,8 +264,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       url = @getURL()
       totalPages = Math.ceil(totalRecords / pageSize)
-      console.log 'page size: ', pageSize
-      console.log 'totalPages: ', totalPages
 
       #initialise the array in which all the items are going to be saved as they are received from the server
       items = (undefined for num in [1..totalRecords])
@@ -279,7 +275,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getItemsFromPage = (currentPage) ->
 
         data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
-        console.log 'data: ', data
 
         return $.post( url, data).done( (response) ->
 
@@ -307,12 +302,73 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         deferreds.push(getItemsFromPage page)
 
       #-----------------------------------------------End Get All Items-------------------------------------------
-      # Here I know that everything is done
+      # Here I know that all the items have been obtainer, now I need to generate the file
       $.when.apply($, deferreds).done( () ->
 
-        console.log 'DONE!'
-        console.log 'allItems: ', items
+        if $progressElement?
+            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
+
+        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in items)
+        if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
+          DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
+        else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']
+          DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, true)
+        else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
+          idsList = (item.molecule_chembl_id for item in items)
+          # here I have the IDs, I have to request them to the server as SDF
+          thisCollection.generateSDFFromChemblIDs idsList
+
+
+        # erase progress element contents after some milliseconds
+        setTimeout( ()->
+          $progressElement.html ''
+        , 1000)
 
       )
+
+    generateSDFFromChemblIDs: (idsList) ->
+
+      fullSDFString = ''
+      totalItems = idsList.length
+      chunkSize = 1000
+      totalPages = Math.ceil(totalItems / chunkSize)
+
+      # this function paginates over the full list of ids to get the full sdf file from the list.
+      # this needs to be done because of the maximum number of items that the web services return is 1000
+      downloadSDF = (page) ->
+        url = glados.Settings.WS_BASE_URL + 'molecule.sdf?limit=' + chunkSize
+        start = (page - 1) * chunkSize
+        end = start + chunkSize - 1
+        if end >= idsList.length
+          end = idsList.length - 1
+
+        itemsToGet = idsList[start..end]
+
+        data = 'molecule_chembl_id__in=' + itemsToGet.join(',')
+
+        $.ajax(
+          url: url
+          data: data
+          headers:
+            'X-HTTP-Method-Override': 'GET'
+
+        ).done( (response) ->
+
+          fullSDFString += response
+
+          # check if I still have more pages to go
+          if page < totalPages
+            downloadSDF (page + 1)
+          else
+            # if not, I have finished! I can generate the download!
+            DownloadModelOrCollectionExt.downloadTextFile('results.sdf', fullSDFString)
+
+        )
+
+      # get everything from page 1
+      downloadSDF 1
+
+
+
 
 

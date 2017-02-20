@@ -41,36 +41,43 @@ DownloadModelOrCollectionExt =
   # CSV
   # --------------------------------------------------------------------
 
-  getCSVHeaderString: (downloadObject) ->
+  getCSVHeaderString: (downloadObject, isTabSeparated) ->
 
+    separator = if isTabSeparated then "\t" else ";"
     #use first object to get header
     keys = []
     for key, value of downloadObject[0]
       keys.push(key)
 
-    return keys.join(';')
+    return keys.join(separator)
 
-  getCSVContentString: (downloadObject) ->
+  getCSVContentString: (downloadObject, isTabSeparated) ->
+
+    separator = if isTabSeparated then "\t" else ";"
 
     rows = []
     for obj in downloadObject
       values = []
       for key, value of obj
         values.push(JSON.stringify(obj[key]))
-      rows.push(values.join(';'))
+      rows.push(values.join(separator))
 
     return rows.join('\n')
 
-  getFullCSVString: (downloadObject) ->
+  getFullCSVString: (downloadObject, isTabSeparated) ->
 
     header = @getCSVHeaderString(downloadObject)
     content = @getCSVContentString(downloadObject)
     return header + '\n' + content
 
-  downloadCSV: (filename, downloadParserFunction) ->
+  # the downloadParserFunction is a function that knows what modifications to do for the raw json data
+  # of the download. for example, if you only want the parent properties of a compound this is a function that
+  # given the raw json, it returns the "molecule_properties" property only
+  # if you want to use a json custom object without using the parser function schema, use customObject
+  downloadCSV: (filename, downloadParserFunction, customObject, isTabSeparated) ->
 
-    downloadObject = @getDownloadObject(downloadParserFunction)
-    strContent = @getFullCSVString(downloadObject)
+    downloadObject = if customObject? then customObject else @getDownloadObject(downloadParserFunction)
+    strContent = @getFullCSVString(downloadObject, isTabSeparated)
     blob = @getBlobToDownload strContent
     saveAs blob, filename
 
@@ -177,3 +184,13 @@ DownloadModelOrCollectionExt =
       String.fromCharCode.apply(null, new Uint8Array(buf));
 
     return ab2s(strContent)
+
+  # --------------------------------------------------------------------
+  # General
+  # --------------------------------------------------------------------
+  # Generates a download from a plain string, which is the file contents
+  downloadTextFile: (filename, strFileContent) ->
+
+    blob = @getBlobToDownload strFileContent
+    saveAs blob, filename
+    return strFileContent
