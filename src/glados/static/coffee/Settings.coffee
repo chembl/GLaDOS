@@ -85,6 +85,10 @@ glados.useNameSpace 'glados',
       'SMALL_SCREEN': 1
       'MEDIUM_SCREEN': 2
       'LARGE_SCREEN': 3
+    DEFAULT_FILE_FORMAT_NAMES:
+      'CSV': 'CSV'
+      'TSV': 'TSV'
+      'SDF': 'SDF'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

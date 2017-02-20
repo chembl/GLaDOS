@@ -31,6 +31,13 @@ describe "Downloads", ->
       fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction)
       testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestE.csv', done)
 
+  describe "A sdf download from a file list", ->
+
+    DownloadModelOrCollectionExt.generateSDFFromChemblIDs ['CHEMBL59', 'CHEMBL251624', 'CHEMBL327561', 'CHEMBL465586' ]
+    #TODO Finish this test! it neets to wait for the file to be built
+
+
+
   testTextFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 

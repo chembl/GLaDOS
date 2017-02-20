@@ -41,10 +41,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
-
-
     # generates an object with the data necessary to do the ES request
-    getRequestData: ->
+    # set a customPage if you want a page different than the one set as current
+    # the same for customPageSize
+    getRequestData: (customPage, customPageSize) ->
+      page = if customPage? then customPage else @getMeta('current_page')
+      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       filter_terms = @getMeta("filter_terms")
@@ -105,8 +107,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           )
         by_term_query.bool.should.push(term_i_query)
       es_query = {
-        size: @getMeta('page_size'),
-        from: ((@getMeta('current_page') - 1) * @getMeta('page_size'))
+        size: pageSize,
+        from: ((page - 1) * pageSize)
         query:
           bool:
             must:
@@ -243,4 +245,102 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # if none is being used for sorting returns undefined
     getCurrentSortingComparator: () ->
       #TODO implement sorting
+
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Download functions
+    # ------------------------------------------------------------------------------------------------------------------
+    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+    downloadAllItems: (format, $progressElement) ->
+
+      #-----------------------------------------------Get All Items-------------------------------------------
+
+      totalRecords = @getMeta('total_records')
+      pageSize = if totalRecords <= 100 then totalRecords else 100
+
+
+      if totalRecords >= 10000
+        if $progressElement?
+          $progressElement.html 'It is still not supported to download 10000 items or more!'
+
+          # erase element contents after some milliseconds
+          setTimeout( ()->
+            $progressElement.html ''
+          , 3000)
+        return
+
+      if $progressElement?
+        $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+          percentage: '0'
+
+      url = @getURL()
+      totalPages = Math.ceil(totalRecords / pageSize)
+
+      #initialise the array in which all the items are going to be saved as they are received from the server
+      items = (undefined for num in [1..totalRecords])
+      itemsReceived = 0
+
+      #this function knows how to get one page of results and add them in the corresponding positions in the all
+      # items array
+      thisCollection = @
+      getItemsFromPage = (currentPage) ->
+
+        data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
+
+        return $.post( url, data).done( (response) ->
+
+          #I know that I must be receiving currentPage.
+          newItems = (item._source for item in response.hits.hits)
+          # now I add them in the corresponding position in the items array
+          startingPosition = (currentPage - 1) * pageSize
+
+          for i in [0..(newItems.length-1)]
+            items[i + startingPosition] = newItems[i]
+            itemsReceived++
+
+          progress = parseInt((itemsReceived / totalRecords) * 100)
+
+          if $progressElement? and (progress % 10) == 0
+            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+              percentage: progress
+
+
+        )
+
+      deferreds = []
+      # Now I request all pages, I accumulate all the deferreds in a list
+      for page in [1..totalPages]
+        deferreds.push(getItemsFromPage page)
+
+      #-----------------------------------------------End Get All Items-------------------------------------------
+      # Here I know that all the items have been obtainer, now I need to generate the file
+      $.when.apply($, deferreds).done( () ->
+
+        if $progressElement?
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
+
+        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in items)
+        if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
+          DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
+          # erase progress element contents after some milliseconds
+          setTimeout( (()-> $progressElement.html ''), 1000)
+        else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']
+          DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, true)
+          # erase progress element contents after some milliseconds
+          setTimeout( (()-> $progressElement.html ''), 1000)
+        else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
+          idsList = (item.molecule_chembl_id for item in items)
+          # here I have the IDs, I have to request them to the server as SDF
+          DownloadModelOrCollectionExt.generateSDFFromChemblIDs idsList, $progressElement
+
+
+
+
+      )
+
+
+
+
+
+
 

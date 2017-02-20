@@ -103,6 +103,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
 
         totalRecords = srl_dict[key_i].getMeta("total_records")
+        if not totalRecords
+          totalRecords = 0
         resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
         chipStruct[0].total_records += totalRecords
         chipStruct.push({
