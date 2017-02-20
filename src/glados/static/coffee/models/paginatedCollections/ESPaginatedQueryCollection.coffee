@@ -77,6 +77,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                       ],
                       query: term_i,
                       boost: 1
+                  },
+                  {
+                    multi_match:
+                      fields: [
+                        "*.std_analyzed^10",
+                        "*.eng_analyzed^5"
+                      ],
+                      query: term_i,
+                      boost: 0.1
                       fuzziness: 'AUTO'
                   }
               ]
@@ -175,8 +184,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetMeta: (totalRecords, max_score) ->
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
-      @trigger('score_update')
       @setMeta('total_records', parseInt(totalRecords))
+      @trigger('score_and_records_update')
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)
       if !@hasMeta('search_term')

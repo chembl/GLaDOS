@@ -282,10 +282,167 @@ class ButtonsHelper
     else
       input_field.value = originalInputValue
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Caret functions
+  # --------------------------------------------------------------------------------------------------------------------
+
+  @setSelectionRange = (input, selectionStart, selectionEnd) ->
+    if input.setSelectionRange
+      input.focus()
+      input.setSelectionRange(selectionStart, selectionEnd)
+    else if input.createTextRange
+      range = input.createTextRange()
+      range.collapse(true)
+      range.moveEnd('character', selectionEnd)
+      range.moveStart('character', selectionStart)
+      range.select()
+
+  @setCaretToPos = (input, pos)->
+    ButtonsHelper.setSelectionRange(input, pos, pos)
+
+  @getCaret = (el)->
+    if el.selectionStart
+      return el.selectionStart
+    else if document.selection
+      el.focus()
+
+      r = document.selection.createRange()
+      if r == null
+        return 0
+
+      re = el.createTextRange()
+      rc = re.duplicate()
+      re.moveToBookmark(r.getBookmark())
+      rc.setEndPoint('EndToStart', re)
+
+      return rc.text.length
+    return 0
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # expandable text input
+  # --------------------------------------------------------------------------------------------------------------------
+
+  class @ExpandableInput
+
+    constructor:(input_element)->
+      if not input_element instanceof jQuery
+        @$input_element = $(input_element)
+      else
+        @$input_element = $(input_element)
+      @expanded_area_id = @$input_element.attr('id')+'-expanded'
+      if not @$input_element.is("input")
+        throw new Error("WARNING: could not obtain a valid input element to create an expandable input.")
+
+      @$input_element.after(
+        '<textarea id="'+@expanded_area_id+'" class="buttons-helper-expandable-input">'
+      )
+      @initial_width = @$input_element.width()
+      @initial_height = @$input_element.height()
+      @$expandend_element = $('#'+@expanded_area_id)
+      @$input_element.keyup(@onkeyup.bind(@))
+      @$input_element.focus(@onfocus.bind(@))
+      @$expandend_element.keyup(@expandedKeyup.bind(@))
+      @$expandend_element.blur(@expandedBlur.bind(@))
+      @real_value = null
+      @val(@$input_element.val())
+      # on enter callback
+      @on_enter_cb = null
+
+    val: (new_value)->
+      if _.isUndefined(new_value)
+        return @real_value
+      else
+        @real_value = new_value
+        @compressInput()
+
+    getCompressedString: ()->
+      if @isInputOverflowing()
+        char_length = ( @$input_element[0].scrollWidth/@real_value.length )
+        num_visible_chars = Math.round(@$input_element[0].clientWidth/char_length)
+        ellipsis = '  .  .  .  '
+        part_size = (num_visible_chars - ellipsis.length)/ 2
+        compressed = @real_value.substring(0, part_size) + ellipsis +
+          @real_value.substring(@real_value.length - part_size, @real_value.length)
+        return compressed
+
+      else
+        return @real_value
+
+    decompressInput: ()->
+      # This is required to reset the values of scrollWidth and clientWidth to check if text is overflowing
+      @$input_element.width(@initial_width)
+      @$input_element.val(@real_value)
+
+    compressInput: ()->
+      @decompressInput()
+      if @isInputOverflowing()
+        @$input_element.val(@getCompressedString())
+
+    updateVals: (toArea)->
+      if toArea
+        @$expandend_element.val(@real_value)
+      else
+        @$input_element.val(@real_value)
+
+    isInputOverflowing: ()->
+      return (@$input_element[0].scrollWidth > @initial_width)
+
+    adjustExpandedHeight: ()->
+      max_height = $(window).height()*0.8
+      # This is done to include the case in which by deleting text the scroll height remains larger than the actual
+      # text inside the text area
+      @$expandend_element.height(@initial_height)
+      text_h = @$expandend_element[0].scrollHeight-(@$expandend_element.innerHeight()-@$expandend_element.height())
+      min_h = Math.min(max_height,text_h)
+      @$expandend_element.height(min_h)
+
+    # This calculation works only if the input is being displayed if display:none is active it will not work
+    showIfInputOverflows: (select_all)->
+      @updateVals(true)
+      if @isInputOverflowing()
+        caret_pos = ButtonsHelper.getCaret(@$input_element[0])
+        @$input_element.hide()
+        @$expandend_element.show()
+        @$expandend_element.focus()
+        if select_all
+          @$expandend_element[0].select()
+        else
+          ButtonsHelper.setCaretToPos(@$expandend_element[0],caret_pos)
+        @adjustExpandedHeight()
+
+    onkeyup: (e)->
+      @real_value = @$input_element.val()
+      @handleEnter(e,false)
+      @showIfInputOverflows(false)
+
+    onfocus: ()->
+      @decompressInput()
+      @showIfInputOverflows(true)
+
+    expandedKeyup: (e)->
+      @real_value = @$expandend_element.val()
+      @handleEnter(e,true)
+      @adjustExpandedHeight()
+
+    expandedBlur: ()->
+      @updateVals(false)
+      @$expandend_element.hide()
+      @$input_element.show()
+      @compressInput()
+
+    onEnter:(callback)->
+      if not _.isUndefined(callback)
+        @on_enter_cb = callback
+
+    handleEnter: (event, blur_expanded)->
+      if event.which == 13 and @on_enter_cb
+        @on_enter_cb()
+      if event.which == 13 and blur_expanded
+        @$expandend_element.blur()
 
 
-
-
+  @createExpandableInput = (input_element)->
+    return new ButtonsHelper.ExpandableInput(input_element)
 
 
 

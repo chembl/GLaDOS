@@ -77,13 +77,23 @@ PaginatedViewExt =
       # correctly the height of each card
       setTimeout(
         ()->
-          max_h = 0
+          cards_per_row = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
           $cards = $append_to.find('.card')
-          $cards.each(
-            (index, elem)->
-              max_h = Math.max(max_h, $(elem).height())
-          )
-          $cards.height(max_h)
+          num_rows = $cards.length/cards_per_row
+          if $cards.length%cards_per_row
+            num_rows++
+          for i in [0..(num_rows)]
+            # Gets the maximum height in a row
+            max_h = 0
+            for j in [0..cards_per_row]
+              cur_card_index = i*cards_per_row+j
+              if cur_card_index < $cards.length
+                max_h = Math.max(max_h, $($cards[cur_card_index]).height())
+            # Sets the cards in the row to the maximum height found
+            for j in [0..cards_per_row]
+              cur_card_index = i*cards_per_row+j
+              if cur_card_index < $cards.length
+                $($cards[cur_card_index]).height(max_h)
         , 0
       )
 

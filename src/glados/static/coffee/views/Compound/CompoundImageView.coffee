@@ -7,15 +7,16 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   initialize: ->
     @model.on 'change', @.render, @
 
+
+  render: ->
+
     if not @model.get('structure_image')
       $('#CNC-3d-modal-trigger').hide()
       $('#CNC-3d-modal-trigger-small').hide()
-      return
     else
       $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
       $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
 
-  render: ->
     @renderImage()
     @initDownloadButtons()
     @initZoomModal()
