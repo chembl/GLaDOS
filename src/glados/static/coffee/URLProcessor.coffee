@@ -24,9 +24,13 @@ class URLProcessor
 
     return pathnameParts[2]
 
-  # Tells whether or not the url is at the search results page
-  @isAtSearchResultsPage = ->
+  # --------------------------------------------------------------------------------------------------------------------
+  # Search Results URL's
+  # --------------------------------------------------------------------------------------------------------------------
 
+
+  # Tells whether or not the url is at the search results page
+  @isAtSearchResultsPage = ()->
     url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
@@ -35,22 +39,34 @@ class URLProcessor
     return false
 
   # Tells whether or not the url is at the search results page with advanced filters
-  @isAtAdvancedSearchResultsPage = ->
-
+  @getSpecificSearchResultsPage = ()->
     url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
-    return match and match.length > 2 and match[1] == '/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
+    if match and match.length > 3 and match[1]
+      return match[1]
+    else
+      return null
+
+  # Tells whether or not the url is at the search results page with advanced filters
+  @isAtAdvancedSearchResultsPage = ()->
+    url_path = window.location.pathname;
+    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
+    match = pattern.exec(url_path)
+    return match and match.length > 3 and match[2] == '/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
 
   # gets the query string for the search results page
-  @getSearchQueryString = ->
-
+  @getSearchQueryString = ()->
     url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
-    if match and match.length > 2
-      return match[2]
+    if match and match.length > 3
+      return match[3]
     return ""
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Structure Search URL's
+  # --------------------------------------------------------------------------------------------------------------------
 
   # gets the query string for the substructure search results page
   @getSubstructureSearchQueryString = ->

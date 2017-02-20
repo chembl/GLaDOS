@@ -232,3 +232,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
+
+# Loads the Search results URL's including the ElasticSearch entities configuration
+glados.loadSearchResultsURLS()
