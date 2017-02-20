@@ -1,6 +1,6 @@
 .side-nav {
   position: fixed;
-  width: 300px;
+  width: 240px;
   left: 0;
   top: 0;
   margin: 0;
@@ -11,6 +11,7 @@
   padding-bottom: 60px;
   background-color: $sidenav-bg-color;
   z-index: 999;
+  backface-visibility: hidden;
   overflow-y: auto;
   will-change: transform;
   backface-visibility: hidden;
@@ -33,7 +34,7 @@
 
   li {
     float: none;
-    line-height: $sidenav-line-height;
+    line-height: $sidenav-item-height;
 
     &.active { background-color: rgba(0,0,0,.05); }
   }
@@ -41,11 +42,10 @@
   a {
     color: $sidenav-font-color;
     display: block;
-    font-size: $sidenav-font-size;
-    font-weight: 500;
+    font-size: 1rem;
     height: $sidenav-item-height;
-    line-height: $sidenav-line-height;
-    padding: 0 ($sidenav-padding * 2);
+    line-height: $sidenav-item-height;
+    padding: 0 $sidenav-padding-right;
 
     &:hover { background-color: rgba(0,0,0,.05);}
 
@@ -62,81 +62,6 @@
     &.btn-large:hover { background-color: lighten($button-raised-background, 5%); }
     &.btn-floating:hover { background-color: $button-raised-background; }
   }
-
-  li > a > i,
-  li > a > [class^="mdi-"], li > a > [class*="mdi-"],
-  li > a > i.material-icons {
-    float: left;
-    height: $sidenav-item-height;
-    line-height: $sidenav-line-height;
-    margin: 0 ($sidenav-padding * 2) 0 0;
-    width: $sidenav-item-height / 2;
-    color: rgba(0,0,0,.54);
-  }
-
-  .divider {
-    margin: ($sidenav-padding / 2) 0 0 0;
-  }
-
-  .subheader {
-    &:hover {
-      background-color: transparent;
-    }
-
-    cursor: initial;
-    pointer-events: none;
-    color: rgba(0,0,0,.54);
-    font-size: $sidenav-font-size;
-    font-weight: 500;
-    line-height: $sidenav-line-height;
-  }
-
-  .userView {
-    position: relative;
-    padding: ($sidenav-padding * 2) ($sidenav-padding * 2) 0;
-    margin-bottom: $sidenav-padding / 2;
-
-    & > a {
-      &:hover { background-color: transparent; }
-      height: auto;
-      padding: 0;
-    }
-
-    .background {
-      overflow: hidden;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    .circle, .name, .email {
-      display: block;
-    }
-
-    .circle {
-      height: 64px;
-      width: 64px;
-    }
-
-    .name,
-    .email {
-      font-size: $sidenav-font-size;
-      line-height: $sidenav-line-height / 2;
-    }
-
-    .name {
-      margin-top: 16px;
-      font-weight: 500;
-    }
-
-    .email {
-      padding-bottom: 16px;
-      font-weight: 400;
-    }
-  }
 }
 
 
@@ -147,6 +72,16 @@
   position: fixed;
   top: 0;
   z-index: 998;
+}
+
+
+// Hidden side-nav for all sizes
+.side-nav.fixed {
+  a {
+    display: block;
+    padding: 0 $sidenav-padding-right;
+    color: $sidenav-font-color;
+  }
 }
 
 
@@ -165,28 +100,18 @@
 
 // Fixed sideNav hide on smaller
 @media #{$medium-and-down} {
-  .side-nav {
-    &.fixed {
-      transform: translateX(-105%);
+  .side-nav.fixed {
+    transform: translateX(-105%);
 
-      &.right-aligned {
-        transform: translateX(105%);
-      }
-    }
-
-    a {
-      padding: 0 $sidenav-padding;
-    }
-
-    .userView {
-      padding: $sidenav-padding $sidenav-padding 0;
+    &.right-aligned {
+      transform: translateX(105%);
     }
   }
 }
 
 
-.side-nav .collapsible-body > ul:not(.collapsible) > li.active,
-.side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active {
+.side-nav .collapsible-body li.active,
+.side-nav.fixed .collapsible-body li.active {
   background-color: $primary-color;
   a {
     color: $sidenav-bg-color;

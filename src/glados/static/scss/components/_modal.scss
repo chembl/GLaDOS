@@ -7,7 +7,7 @@
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  max-height: 80%;
   width: 55%;
   margin: auto;
   overflow-y: auto;
@@ -43,19 +43,19 @@
     }
   }
 }
-.modal-overlay {
-  position: fixed;
-  z-index: 999;
-  top: -100px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 125%;
-  width: 100%;
-  background: #000;
-  display: none;
+.lean-overlay {
+    position: fixed;
+    z-index:999;
+    top: -100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 125%;
+    width: 100%;
+    background: #000;
+    display: none;
 
-  will-change: opacity;
+    will-change: opacity;
 }
 
 // Modal with fixed action footer

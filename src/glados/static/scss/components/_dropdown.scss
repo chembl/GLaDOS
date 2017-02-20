@@ -44,7 +44,7 @@
 
     & > span > label {
       top: 1px;
-      left: 0;
+      left: 3px;
       height: 18px;
     }
 
@@ -55,11 +55,3 @@
     }
   }
 }
-
-// Input field specificity bugfix
-.input-field.col .dropdown-content [type="checkbox"] + label {
-  top: 1px;
-  left: 0;
-  height: 18px;
-}
-

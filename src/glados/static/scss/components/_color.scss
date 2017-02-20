@@ -305,6 +305,10 @@ $brown: (
   "darken-4":   #3e2723
 );
 
+$black: (
+  "base":       #000000
+);
+
 $blue-grey: (
   "base":       #607d8b,
   "lighten-5":  #eceff1,
@@ -356,6 +360,7 @@ $colors: (
   "orange": $orange,
   "deep-orange": $deep-orange,
   "brown": $brown,
+  "black": $black,
   "blue-grey": $blue-grey,
   "grey": $grey,
   "shades": $shades
@@ -374,7 +379,7 @@ $colors: (
         color: $color_value !important;
       }
     }
-    @else if $color_name != "shades" {
+    @else {
       .#{$color_name}.#{$color_type} {
         background-color: $color_value !important;
       }
@@ -406,7 +411,7 @@ $colors: (
       @return map-get($curr_color, $type);
     }
   }
-  @warn "Unknown `#{name}` in $colors.";
+  @warn "Unknown `#{$color}` in $colors.";
   @return null;
 }
 
