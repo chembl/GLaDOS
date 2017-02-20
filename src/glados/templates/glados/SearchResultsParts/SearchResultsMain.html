@@ -12,7 +12,7 @@
   Summary:
   {{#each chips}}
   <div class="chip">
-    {{this.total_records}} {{this.label}}
+    <a href="{{this.url_path}}"><span class="teal-text">{{this.total_records}}</span>  {{this.label}}</a>
   </div>
   {{/each}}
 </script>

@@ -312,4 +312,42 @@
   <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
 </script>
 
+<script id="Handlebars-Common-DownloadColMessages0" type="text/x-handlebars-template">
+  <i class="fa fa-cog fa-spin fa-fw"></i> Collecting Items... {{percentage}}%
+</script>
+
+<script id="Handlebars-Common-DownloadColMessages1" type="text/x-handlebars-template">
+  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File...
+</script>
+
+<script id="Handlebars-Common-DownloadColMessages2" type="text/x-handlebars-template">
+  <i class="fa fa-cog fa-spin fa-fw"></i> Done! Final file has {{num_compounds}} compounds
+</script>
+
+<script id="Handlebars-Common-DownloadColMessages3" type="text/x-handlebars-template">
+  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
+</script>
+
+<script id="Handlebars-Common-DownloadColDropdownContainer" type="text/x-handlebars-template">
+
+    <a class='dropdown-button btn-chembl teal BCK-download-col-btn'
+       data-activates='download-btn-{{list_id}}'>Download</a>
+
+    <span class="download-messages-container">
+    </span>
+
+    <ul id='download-btn-{{list_id}}' class='dropdown-content'
+        data-hb-template="Handlebars-Common-DownloadColDropdownContent">
+    </ul>
+
+</script>
+
+<script id="Handlebars-Common-DownloadColDropdownContent" type="text/x-handlebars-template">
+  {{#each formats}}
+  <li class="download-btn-for-format" data-format="{{this}}" ><a>{{this}}</a></li>
+  {{/each}}
+</script>
+
+
+
 {% endverbatim %}
