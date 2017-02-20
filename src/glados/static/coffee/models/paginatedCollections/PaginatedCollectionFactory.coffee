@@ -22,6 +22,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             columns: esIndexSettings.COLUMNS
+            download_formats: esIndexSettings.DOWNLOAD_FORMATS
+            id_name: esIndexSettings.ID_NAME
+
       return new indexESPagQueryCollection
 
     # creates a new instance of a Paginated Collection from Web Services

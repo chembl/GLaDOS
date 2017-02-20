@@ -1,17 +1,6 @@
 <div class="row">
-  <div class="col s6">
-    <!-- Dropdown Trigger -->
-    <!-- It should be shown only when there is content -->
-    <a class='dropdown-button btn-chembl teal download-col-btn' style="display: none"
-       data-activates='download-btn-{{es_results_list_id}}'>Download</a>
-
-    <!-- Dropdown Structure -->
-    <ul id='download-btn-{{es_results_list_id}}' class='dropdown-content'>
-      <li><a>Colon Separated</a></li>
-      <li><a>Tab Separated</a></li>
-      <li><a>SDF</a></li>
-
-    </ul>
+  <div class="col s6 BCK-dropdown-container" data-hb-template="Handlebars-Common-DownloadColDropdownContainer">
+   <!-- backbone fills this -->
   </div>
 </div>
 
