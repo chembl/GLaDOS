@@ -34,11 +34,8 @@
       max-height: 60%;
       overflow: hidden;
     }
-    .card-image + .card-content {
-      max-height: 40%;
-    }
     .card-content {
-      max-height: 100%;
+      max-height: 40%;
       overflow: hidden;
     }
     .card-action {
@@ -61,7 +58,7 @@
     height: 500px;
   }
 
-  // Horizontal Cards
+    // Horizontal Cards
   &.horizontal {
     &.small, &.medium, &.large {
       .card-image {
@@ -110,9 +107,6 @@
     }
   }
 
-
-
-
   .card-image {
     position: relative;
 
@@ -133,9 +127,9 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      max-width: 100%;
       padding: $card-padding;
     }
+
   }
 
   .card-content {
@@ -147,13 +141,7 @@
       color: inherit;
     }
     .card-title {
-      display: block;
-      line-height: 32px;
-      margin-bottom: 8px;
-
-      i {
-        line-height: 32px;
-      }
+      line-height: 48px;
     }
   }
 
@@ -161,7 +149,8 @@
     position: relative;
     background-color: inherit;
     border-top: 1px solid rgba(160,160,160,.2);
-    padding: 16px $card-padding;
+    padding: $card-padding;
+    z-index: 2;
 
     a:not(.btn):not(.btn-large):not(.btn-floating) {
       color: $card-link-color;
@@ -171,6 +160,11 @@
 
       &:hover { color: $card-link-color-light; }
     }
+
+    & + .card-reveal {
+      z-index: 1;
+      padding-bottom: 64px;
+    }
   }
 
   .card-reveal {
@@ -179,7 +173,6 @@
     background-color: $card-bg-color;
     width: 100%;
     overflow-y: auto;
-    left: 0;
     top: 100%;
     height: 100%;
     z-index: 3;
