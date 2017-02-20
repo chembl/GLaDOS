@@ -19,8 +19,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @expandable_search_bar = null # Assigned after render
       @small_bar_id = 'BCK-SRB-small'
       @med_andup_bar_id = 'BCK-SRB-med-and-up'
-      @render()
       # re-renders on widnow resize
+      @last_screen_type_rendered = null
+      @render()
       $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
       # Handles the popstate event to reload a search
@@ -170,14 +171,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     # --------------------------------------------------------------------------------------------------------------------
 
     render: () ->
-      # on re-render cleans the drawn bar
-      $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
-      if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
-        @fillTemplate(@small_bar_id)
-        $(@el).find('#search-bar-small').pushpin
-          top : 106
-      else
-        @fillTemplate(@med_andup_bar_id)
+      if @last_screen_type_rendered != GlobalVariables.CURRENT_SCREEN_TYPE
+        # on re-render cleans the drawn bar
+        $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
+        if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
+          @fillTemplate(@small_bar_id)
+          $(@el).find('#search-bar-small').pushpin
+            top : 106
+        else
+          @fillTemplate(@med_andup_bar_id)
+        @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->
       div = $(@el).find('#' + div_id)

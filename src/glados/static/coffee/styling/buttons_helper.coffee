@@ -416,8 +416,6 @@ class ButtonsHelper
       @showIfInputOverflows(false)
 
     onfocus: ()->
-      if @$input_element.val().length < 10
-        return
       @decompressInput()
       @showIfInputOverflows(true)
 
