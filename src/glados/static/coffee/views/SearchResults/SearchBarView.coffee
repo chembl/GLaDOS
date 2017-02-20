@@ -11,11 +11,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       @searchModel = SearchModel.getInstance()
-      # Don't instantiate the ResultsLists if it is not necessary
-      if @atResultsPage
-        @container = $('#BCK-ESResults')
-        @lists_container = $('#BCK-ESResults-lists')
-        @initResultsListsViews()
+      @es_path = null
+      @selected_es_entity = null
+
       @expandable_search_bar = null # Assigned after render
       @small_bar_id = 'BCK-SRB-small'
       @med_andup_bar_id = 'BCK-SRB-med-and-up'
@@ -30,70 +28,96 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     searchFromURL: ()->
       if @atResultsPage
-          urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-          if urlQueryString and urlQueryString != @lastURLQuery
-            @expandable_search_bar.val(urlQueryString)
-            @searchModel.search(urlQueryString)
-            @lastURLQuery = urlQueryString
+        @es_path = URLProcessor.getSpecificSearchResultsPage()
+        @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
+          glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
+
+        # Don't instantiate the ResultsLists if it is not necessary
+        @container = $('#BCK-ESResults')
+        @lists_container = $('#BCK-ESResults-lists')
+        @renderResultsListsViews()
+        urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
+        if urlQueryString and urlQueryString != @lastURLQuery
+          @expandable_search_bar.val(urlQueryString)
+          @searchModel.search(urlQueryString, null)
+          @lastURLQuery = urlQueryString
 
     # --------------------------------------------------------------------------------------------------------------------
     # Views
     # --------------------------------------------------------------------------------------------------------------------
+
     sortResultsListsViews: ()->
-
-      sorted_scores = []
-      insert_score_in_order = (_score)->
-        inserted = false
-        for score_i, i in sorted_scores
-          if score_i < _score
-            sorted_scores.splice(i,0,_score)
-            inserted = true
-            break
-        if not inserted
-          sorted_scores.push(_score)
-      keys_by_score = {}
-      srl_dict = @searchModel.getResultsListsDict()
-      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-        if _.has(srl_dict, key_i)
-          score_i = srl_dict[key_i].getMeta("max_score")
-          total_records = srl_dict[key_i].getMeta("total_records")
-          if not score_i
-            score_i = 0
-          if not total_records
-            total_records = 0
-          # Boost compounds and targets to the top!
-          boost = 1
-          if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
-            boost = 100
-          else if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET.KEY_NAME
-            boost = 50
-          score_i *= boost
-
-          if not _.has(keys_by_score,score_i)
-            keys_by_score[score_i] = []
-          keys_by_score[score_i].push(key_i)
-          insert_score_in_order(score_i)
-
-      if @lists_container
-        for score_i in sorted_scores
-          for key_i in keys_by_score[score_i]
-            $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
-            @lists_container.append($div_key_i)
-
-
-        # generate chips for the results summary
-        chipStruct = []
+      # If an entity is selected the ordering is skipped
+      if not @selected_es_entity
+        sorted_scores = []
+        insert_score_in_order = (_score)->
+          inserted = false
+          for score_i, i in sorted_scores
+            if score_i < _score
+              sorted_scores.splice(i,0,_score)
+              inserted = true
+              break
+          if not inserted
+            sorted_scores.push(_score)
+        keys_by_score = {}
+        srl_dict = @searchModel.getResultsListsDict()
         for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+          if _.has(srl_dict, key_i)
+            score_i = srl_dict[key_i].getMeta("max_score")
+            total_records = srl_dict[key_i].getMeta("total_records")
+            if not score_i
+              score_i = 0
+            if not total_records
+              total_records = 0
+            # Boost compounds and targets to the top!
+            boost = 1
+            if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
+              boost = 100
+            else if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET.KEY_NAME
+              boost = 50
+            score_i *= boost
 
-          totalRecords = srl_dict[key_i].getMeta("total_records")
-          resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
-          chipStruct.push({total_records: totalRecords, label:resourceLabel})
+            if not _.has(keys_by_score,score_i)
+              keys_by_score[score_i] = []
+            keys_by_score[score_i].push(key_i)
+            insert_score_in_order(score_i)
 
-        $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
-          chips: chipStruct
+        if @lists_container
+          for score_i in sorted_scores
+            for key_i in keys_by_score[score_i]
+              $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+              @lists_container.append($div_key_i)
+
+    updateChips: ()->
+      # Always generate chips for the results summary
+      chipStruct = []
+      # Includes an All Results chip to go back to the general results
+      chipStruct.push({
+        total_records: 0
+        label: 'All Results'
+        url_path: @getSearchURLFor(null, @expandable_search_bar.val())
+      })
+
+      srl_dict = @searchModel.getResultsListsDict()
+
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+        totalRecords = srl_dict[key_i].getMeta("total_records")
+        if not totalRecords
+          totalRecords = 0
+        resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
+        chipStruct[0].total_records += totalRecords
+        chipStruct.push({
+          total_records: totalRecords
+          label:resourceLabel
+          url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
+        })
+
+      $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
+        chips: chipStruct
 
 
-    initResultsListsViews: () ->
+    renderResultsListsViews: () ->
       list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
       @searchResultsViewsDict = {}
@@ -116,10 +140,12 @@ glados.useNameSpace 'glados.views.SearchResults',
             collection: srl_dict[key_i]
             el: '#'+es_results_list_id
           @searchResultsViewsDict[key_i] = es_rl_view_i
-          # event register for score update
-
+          # If there is a selection skips the unselected views
+          if @selected_es_entity and @selected_es_entity != key_i
+            $('#'+es_results_list_id).hide()
+          # event register for score update and update chips
           srl_dict[key_i].on('score_and_records_update',@sortResultsListsViews.bind(@))
-
+          srl_dict[key_i].on('score_and_records_update',@updateChips.bind(@))
       @container.show()
 
     # --------------------------------------------------------------------------------------------------------------------
@@ -144,14 +170,24 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Additional Functionalities
     # --------------------------------------------------------------------------------------------------------------------
 
+    getSearchURLFor: (es_settings_key, search_str)->
+      selected_es_entity_path = if es_settings_key then \
+                                '/'+glados.Settings.ES_KEY_2_SEARCH_PATH[es_settings_key] else ''
+      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+\
+                              selected_es_entity_path+\
+                              '/'+encodeURI(search_str)
+      return search_url_for_query
+
+    getCurrentSearchURL: ()->
+      return @getSearchURLFor(@selected_es_entity, @expandable_search_bar.val())
+
     search: () ->
-      searchBarQueryString = @expandable_search_bar.val()
-      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+"/"+encodeURI(searchBarQueryString)
       # Updates the navigation URL
-      window.history.pushState({}, 'ChEMBL: '+searchBarQueryString, search_url_for_query)
-      console.log("SEARCHING FOR:"+searchBarQueryString)
+      search_url_for_query = @getCurrentSearchURL()
+      window.history.pushState({}, 'ChEMBL: '+@expandable_search_bar.val(), search_url_for_query)
+      console.log("SEARCHING FOR:"+@expandable_search_bar.val())
       if @atResultsPage
-        @searchModel.search(searchBarQueryString)
+        @searchModel.search(@expandable_search_bar.val(), null)
       else
         # Navigates to the specified URL
         window.location.href = search_url_for_query

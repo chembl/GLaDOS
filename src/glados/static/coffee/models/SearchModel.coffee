@@ -177,9 +177,11 @@ SearchModel = Backbone.Model.extend
 
 
   __search: ()->
-    console.log("MODEL SEARCH")
     rls_dict = @getResultsListsDict()
     for key_i, val_i of rls_dict
+      # Skips the search on non selected entities
+      if @selected_es_entity and @selected_es_entity != key_i
+        continue
       val_i.setMeta('singular_terms',@get("singular_terms"))
       val_i.setMeta('exact_terms',@get("exact_terms"))
       val_i.setMeta('filter_terms',@get("filter_terms"))
@@ -187,7 +189,8 @@ SearchModel = Backbone.Model.extend
       val_i.fetch()
 
   # coordinates the search across the different results lists
-  search: (rawQueryString) ->
+  search: (rawQueryString, selected_es_entity) ->
+    @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     @parseQueryString(rawQueryString, @__search.bind(@))
 
 # --------------------------------------------------------------------------------------------------------------------

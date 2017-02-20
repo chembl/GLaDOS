@@ -185,13 +185,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
-      @trigger('score_and_records_update')
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)
       if !@hasMeta('search_term')
         @setMeta('search_term','')
       @setMeta('total_pages', Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size'))))
       @calculateHowManyInCurrentPage()
+
+      #Triggers the event after the values have been updated
+      @trigger('score_and_records_update')
 
     calculateHowManyInCurrentPage: ->
       current_page = @getMeta('current_page')

@@ -90,7 +90,6 @@ glados.useNameSpace 'glados',
       'TSV': 'TSV'
       'SDF': 'SDF'
 
-
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
   if request_root[request_root.length-1] == '/'
@@ -101,12 +100,6 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.GLADOS_BASE_URL_FULL = request_root+app_root
 
   glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
-
-  # the search url is expected to be search_results/[advanced/]:query_string
-  glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'search_results'
-  glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
-  glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+glados.Settings.SEARCH_RESULTS_PAGE+
-          '(/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')
 
   glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'substructure_search_results/'
   glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure/'
@@ -120,6 +113,26 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
 
   glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
+
+# This function must be called after loadURLPaths and glados.models.paginatedCollections.Settings has loaded
+glados.loadSearchResultsURLS = ()->
+  # the search url is expected to be search_results/[(compounds|targets ... et al)/][advanced/]:query_string
+  elastic_search_paths = []
+  glados.Settings.SEARCH_PATH_2_ES_KEY = {}
+  glados.Settings.ES_KEY_2_SEARCH_PATH = {}
+  for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+    path_i = val_i.LABEL.toLowerCase()
+    elastic_search_paths.push(path_i)
+    glados.Settings.SEARCH_PATH_2_ES_KEY[path_i] = key_i
+    glados.Settings.ES_KEY_2_SEARCH_PATH[key_i] = path_i
+
+  glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX = '(?:/('+elastic_search_paths.join('|')+'))?'
+
+  glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'search_results'
+  glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
+  glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+glados.Settings.SEARCH_RESULTS_PAGE+
+          glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX+
+          '(/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
