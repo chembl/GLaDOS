@@ -339,7 +339,6 @@ class ButtonsHelper
       @initial_width = @$input_element.width()
       @initial_height = @$input_element.height()
       @$expandend_element = $('#'+@expanded_area_id)
-      @force_focus = false
       @$input_element.keyup(@onkeyup.bind(@))
       @$input_element.focus(@onfocus.bind(@))
       @$expandend_element.keyup(@expandedKeyup.bind(@))
@@ -417,14 +416,8 @@ class ButtonsHelper
       @showIfInputOverflows(false)
 
     onfocus: ()->
-      if not @force_focus
-        @decompressInput()
-        @showIfInputOverflows(true)
-        if @$input_element.is(":visible")
-          @force_focus = true
-          @$input_element.focus()
-      else
-        @force_focus = false
+      @decompressInput()
+      @showIfInputOverflows(true)
 
     expandedKeyup: (e)->
       @real_value = @$expandend_element.val()
