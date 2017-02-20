@@ -31,6 +31,8 @@ describe "Downloads", ->
       fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction)
       testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestE.csv', done)
 
+  describe "A SDF download from a paginated collection. ", ->
+
   testTextFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 

@@ -306,37 +306,39 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       $.when.apply($, deferreds).done( () ->
 
         if $progressElement?
-            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
         downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in items)
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
+          # erase progress element contents after some milliseconds
+          setTimeout( (()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']
           DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, true)
+          # erase progress element contents after some milliseconds
+          setTimeout( (()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
           idsList = (item.molecule_chembl_id for item in items)
           # here I have the IDs, I have to request them to the server as SDF
-          thisCollection.generateSDFFromChemblIDs idsList
+          thisCollection.generateSDFFromChemblIDs idsList, $progressElement
 
 
-        # erase progress element contents after some milliseconds
-        setTimeout( ()->
-          $progressElement.html ''
-        , 1000)
+
 
       )
 
-    generateSDFFromChemblIDs: (idsList) ->
+    generateSDFFromChemblIDs: (idsList, $progressElement) ->
 
       fullSDFString = ''
       totalItems = idsList.length
-      chunkSize = 1000
+      chunkSize = 500
       totalPages = Math.ceil(totalItems / chunkSize)
+
 
       # this function paginates over the full list of ids to get the full sdf file from the list.
       # this needs to be done because of the maximum number of items that the web services return is 1000
       downloadSDF = (page) ->
-        url = glados.Settings.WS_BASE_URL + 'molecule.sdf?limit=' + chunkSize
+        url = glados.Settings.WS_BASE_URL + 'molecule.sdf'
         start = (page - 1) * chunkSize
         end = start + chunkSize - 1
         if end >= idsList.length
@@ -344,9 +346,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         itemsToGet = idsList[start..end]
 
-        data = 'molecule_chembl_id__in=' + itemsToGet.join(',')
+        data = 'limit=' + chunkSize + '&' + 'molecule_chembl_id__in=' + itemsToGet.join(',')
 
         $.ajax(
+          type: 'POST'
           url: url
           data: data
           headers:
@@ -356,12 +359,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           fullSDFString += response
 
+          percentage = Math.ceil((page / totalPages) * 100)
+
+          if $progressElement?
+            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages3').html() )
+              percentage: percentage
+
           # check if I still have more pages to go
           if page < totalPages
             downloadSDF (page + 1)
           else
             # if not, I have finished! I can generate the download!
             DownloadModelOrCollectionExt.downloadTextFile('results.sdf', fullSDFString)
+
+            if $progressElement?
+              $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages2').html() )
+                num_compounds: (fullSDFString.match(new RegExp("CHEMBL", "g")) || []).length
+
+              setTimeout( (()-> $progressElement.html ''), 2000)
 
         )
 
