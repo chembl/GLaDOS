@@ -1611,6 +1611,26 @@ $marvin-size-fullscreen: 91vh;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+span.badge-primary-color-no-float {
+  min-width: 3rem;
+  padding: 0 6px;
+  text-align: center;
+  line-height: $badge-height;
+  height: $badge-height;
+  float: none;
+  box-sizing: border-box;
+
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: white;
+  background-color: $primary-color;
+  border-radius: 2px;
+
+  &[data-badge-caption]::after {
+    content: " " attr(data-badge-caption);
+  }
+}
+
 .chip-rl-summary{
   margin-bottom: 1px;
   margin-top: 1px;
@@ -1619,6 +1639,10 @@ $marvin-size-fullscreen: 91vh;
   background: $primary-color;
   a{
     color: white;
+    span.badge-primary-color-no-float{
+      color: $primary-color;
+      background-color: white;
+    }
   }
 }
 
