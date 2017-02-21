@@ -102,7 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                     ],
                     query: term_i,
                     minimum_should_match: "80%"
-                boost: 1
+                boost: 100
             }
           )
         by_term_query.bool.should.push(term_i_query)
