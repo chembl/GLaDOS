@@ -90,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                   }
               ]
           }
-        if term_i.length > 4
+        if term_i.length >= 4
           term_i_query.bool.should.push(
             {
               constant_score:
