@@ -96,6 +96,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         total_records: 0
         label: 'All Results'
         url_path: @getSearchURLFor(null, @expandable_search_bar.val())
+        selected: if @selected_es_entity then false else true
       })
 
       srl_dict = @searchModel.getResultsListsDict()
@@ -111,6 +112,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           total_records: totalRecords
           label:resourceLabel
           url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
+          selected: @selected_es_entity == key_i
         })
 
       $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())

@@ -11,8 +11,8 @@
 <script id="Handlebars-ESResults-Chips" type="text/x-handlebars-template">
   Summary:
   {{#each chips}}
-  <div class="chip">
-    <a href="{{this.url_path}}"><span class="teal-text">{{this.total_records}}</span>  {{this.label}}</a>
+  <div class="chip chip-rl-summary{{#if this.selected}} selected{{/if}}">
+    <a href="{{this.url_path}}">{{this.total_records}} {{this.label}}</a>
   </div>
   {{/each}}
 </script>
