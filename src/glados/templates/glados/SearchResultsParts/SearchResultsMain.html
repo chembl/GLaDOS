@@ -9,10 +9,13 @@
 <!-- Handlebars Templates -->
 {% verbatim %}
 <script id="Handlebars-ESResults-Chips" type="text/x-handlebars-template">
-  Summary:
+  <span class="hide-on-med-and-down">Summary:</span>
   {{#each chips}}
-  <div class="chip">
-    <a href="{{this.url_path}}"><span class="teal-text">{{this.total_records}}</span>  {{this.label}}</a>
+  {{#if this.prepend_br}}<br/>{{/if}}
+  <div class="chip chip-rl-summary{{#if this.selected}} selected{{/if}}">
+    <a href="{{this.url_path}}">
+      <span class="badge-primary-color-no-float">{{this.total_records}}</span> {{this.label}}
+    </a>
   </div>
   {{/each}}
 </script>
