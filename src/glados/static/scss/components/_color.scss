@@ -406,7 +406,10 @@ $colors: (
       @return map-get($curr_color, $type);
     }
   }
-  @warn "Unknown `#{name}` in $colors.";
+  @else if map-has-key($shades, $color){
+    @return map-get($shades, $color)
+  }
+  @warn "Unknown `#{$color}` in $colors.";
   @return null;
 }
 

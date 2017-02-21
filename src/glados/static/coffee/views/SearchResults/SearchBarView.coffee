@@ -93,9 +93,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       chipStruct = []
       # Includes an All Results chip to go back to the general results
       chipStruct.push({
+        prepend_br: false
         total_records: 0
         label: 'All Results'
         url_path: @getSearchURLFor(null, @expandable_search_bar.val())
+        selected: if @selected_es_entity then false else true
       })
 
       srl_dict = @searchModel.getResultsListsDict()
@@ -108,9 +110,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
         chipStruct[0].total_records += totalRecords
         chipStruct.push({
+          prepend_br: GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
           total_records: totalRecords
           label:resourceLabel
           url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
+          selected: @selected_es_entity == key_i
         })
 
       $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
@@ -218,6 +222,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             top : 106
         else
           @fillTemplate(@med_andup_bar_id)
+        @updateChips()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->
