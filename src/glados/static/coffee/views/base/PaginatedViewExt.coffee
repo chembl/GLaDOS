@@ -468,17 +468,9 @@ PaginatedViewExt =
 
     if @collection.getMeta('total_records') != 0
 
-      $dropdownContainer = $(@el).find('.BCK-dropdown-container')
-      $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
-        list_id: @collection.getMeta('id_name')
-
-      $btn = $(@el).find('.BCK-download-col-btn')
-      $dropdownContent = $(@el).find('#' + $btn.attr('data-activates'))
-
-      $dropdownContent.html Handlebars.compile( $('#' + $dropdownContent.attr('data-hb-template')).html() )
+      $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
+      $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
         formats: @collection.getMeta('download_formats')
-
-      $btn.dropdown()
 
   triggerAllItemsDownload: (event) ->
 

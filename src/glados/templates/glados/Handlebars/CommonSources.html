@@ -328,25 +328,16 @@
   <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
 </script>
 
-<script id="Handlebars-Common-DownloadColDropdownContainer" type="text/x-handlebars-template">
-
-    <a class='dropdown-button btn-chembl teal BCK-download-col-btn'
-       data-activates='download-btn-{{list_id}}'>Download</a>
-
-    <span class="download-messages-container">
-    </span>
-
-    <ul id='download-btn-{{list_id}}' class='dropdown-content'
-        data-hb-template="Handlebars-Common-DownloadColDropdownContent">
-    </ul>
-
-</script>
-
-<script id="Handlebars-Common-DownloadColDropdownContent" type="text/x-handlebars-template">
+<script id="Handlebars-Common-DownloadColButtons" type="text/x-handlebars-template">
   {{#each formats}}
-  <li class="download-btn-for-format" data-format="{{this}}" ><a>{{this}}</a></li>
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn download-btn-for-format"
+     data-format="{{this}}">
+    <p><i class="fa fa-download"></i></p>
+    <p>{{this}}</p>
+  </a>
   {{/each}}
 </script>
+
 
 
 
