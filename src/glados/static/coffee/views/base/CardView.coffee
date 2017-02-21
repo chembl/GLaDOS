@@ -84,7 +84,7 @@ CardView = Backbone.View.extend
     $(@el).find('.tooltipped').tooltip()
 
   activateModals: ->
-    $(@el).find('.modal-trigger').modal();
+    $(@el).find('.modal').modal()
 
 
   showCardContent: ->
