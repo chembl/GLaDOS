@@ -107,7 +107,7 @@
     {% block custom_js_inline %}{% endblock %}
 
     //the initialization of modals needs to be as specific as possible to avoid issues with all the other modals
-    $('.modal-trigger-safe').modal();
+    $('#download-db-modal').modal();
 
     var baseMenuItem = DownloadWizardApp.initWizardStep();
     DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
