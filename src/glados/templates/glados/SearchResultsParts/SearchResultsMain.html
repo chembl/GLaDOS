@@ -19,6 +19,18 @@
 {% endverbatim %}
 
 {% verbatim %}
+<script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
+  {{#each formats}}
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
+     data-format="{{this}}">
+    <p><i class="fa fa-download"></i></p>
+    <p>{{this}}</p>
+  </a>
+  {{/each}}
+</script>
+{% endverbatim %}
+
+{% verbatim %}
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
   <h3>{{es_results_list_title}}</h3>
 
@@ -26,8 +38,40 @@
 
     <div class="row">
 
-      <div class="col BCK-download-btns-container" data-hb-template="Handlebars-Common-DownloadColButtons">
+      <div class="col s12 m6  BCK-download-btns-container" data-hb-template="Handlebars-DownloadColButtons">
         <!-- backbone fills this -->
+      </div>
+
+      <div class="col s12 m6 right-align">
+
+        <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
+          data-view="matrix">
+          <p><i class="fa fa-th"></i></p>
+          <p>Matrix</p>
+        </a>
+
+        <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view">
+          <p><i class="fa fa-area-chart"></i></p>
+          <p>Graph</p>
+        </a>
+
+        <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view">
+          <p><i class="fa fa-table"></i></p>
+          <p>Table</p>
+        </a>
+
+        <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view">
+          <p><i class="fa fa-newspaper-o"></i></p>
+          <p>Cards</p>
+        </a>
+
+        <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view">
+          <p><i class="fa fa-ellipsis-v"></i></p>
+          <p>Infinite</p>
+        </a>
+
+
+
       </div>
 
     </div>

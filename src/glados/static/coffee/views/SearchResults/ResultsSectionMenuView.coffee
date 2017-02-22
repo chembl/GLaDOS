@@ -3,7 +3,8 @@ glados.useNameSpace 'glados.views.SearchResults',
   ResultsSectionMenuViewView: Backbone.View.extend
 
     events:
-      'click .download-btn-for-format': 'triggerAllItemsDownload'
+      'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
+      'click .BCK-btn-switch-view': 'switchResultsView'
 
     initialize: ->
       @collection.on 'reset do-repaint sort', @render, @
@@ -25,3 +26,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
       @collection.downloadAllItems(desiredFormat, $progressMessages)
+
+    switchResultsView: (event) ->
+
+      desiredView = $(event.currentTarget).attr('data-view')
+      console.log 'SWITCH TO VIEW: ', desiredView
