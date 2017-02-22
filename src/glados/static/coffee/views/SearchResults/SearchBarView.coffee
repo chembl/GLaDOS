@@ -85,7 +85,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         if @lists_container
           for score_i in sorted_scores
             for key_i in keys_by_score[score_i]
-              $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+              idToMove =  'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME + '-container'
+              $div_key_i = $('#' + idToMove)
               @lists_container.append($div_key_i)
 
     updateChips: ()->
@@ -118,7 +119,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
 
     renderResultsListsViews: () ->
-      list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
+      listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
+      listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
       @searchResultsViewsDict = {}
       # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -131,12 +133,20 @@ glados.useNameSpace 'glados.views.SearchResults',
         if _.has(resultsListsDict, resourceName)
           es_results_list_id = 'BCK-'+resultsList.ID_NAME
           es_results_list_title = resultsList.LABEL
-          @lists_container.append(
-            list_template(
-              es_results_list_id: es_results_list_id
-              es_results_list_title: es_results_list_title
-            )
-          )
+
+          $container = $('<div id="' + es_results_list_id + '-container">')
+
+          listTitleContent = listTitleAndMenuTemplate
+            es_results_list_id: es_results_list_id
+            es_results_list_title: es_results_list_title
+
+          listViewContent = listViewTemplate
+            es_results_list_id: es_results_list_id
+            es_results_list_title: es_results_list_title
+
+          $container.append(listTitleContent)
+          $container.append(listViewContent)
+          @lists_container.append($container)
           # Instantiates the results list view for each ES entity and links them with the html component
           es_rl_view_i = new glados.views.SearchResults.ESResultsListView
             collection: resultsListsDict[resourceName]
@@ -145,7 +155,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           # Initialises a Menu view which will be in charge of handling the menu bar
           resultsMenuView = new glados.views.SearchResults.ResultsSectionMenuViewView
             collection: resultsListsDict[resourceName]
-            el: '#'+es_results_list_id
+            el: '#' + es_results_list_id + '-menu'
 
           @searchResultsViewsDict[resourceName] = es_rl_view_i
           # If there is a selection skips the unselected views

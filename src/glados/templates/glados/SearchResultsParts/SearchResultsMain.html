@@ -18,15 +18,39 @@
 </script>
 {% endverbatim %}
 
+{% verbatim %}
+<script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
+  <h3>{{es_results_list_title}}</h3>
+
+  <div id ="{{es_results_list_id}}-menu">
+
+    <div class="row">
+
+      <div class="col BCK-download-btns-container" data-hb-template="Handlebars-Common-DownloadColButtons">
+        <!-- backbone fills this -->
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col" >
+        <span class="download-messages-container">
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</script>
+{% endverbatim %}
+
+
 <script id="Handlebars-ESResultsListCards" type="text/x-handlebars-template">
   {% verbatim %}
   <div id="{{es_results_list_id}}">
-    <h3>{{es_results_list_title}}</h3>
+      {% endverbatim %}
+      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
 
-
-    {% endverbatim %}
-
-    {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
   </div>
 </script>
 
