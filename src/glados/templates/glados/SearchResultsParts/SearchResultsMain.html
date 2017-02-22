@@ -22,6 +22,31 @@
 {% endverbatim %}
 
 {% verbatim %}
+<script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
+  {{#each formats}}
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
+     data-format="{{this}}">
+    <p><i class="fa fa-download"></i></p>
+    <p>{{this}}</p>
+  </a>
+  {{/each}}
+</script>
+{% endverbatim %}
+
+{% verbatim %}
+<script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
+  {{#each options}}
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
+    data-view="{{this.label}}">
+    <p><i class="fa {{this.icon_class}}"></i></p>
+    <p>{{this.label}}</p>
+  </a>
+  {{/each}}
+</script>
+{% endverbatim %}
+
+
+{% verbatim %}
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
   <h3>{{es_results_list_title}}</h3>
 
@@ -29,8 +54,14 @@
 
     <div class="row">
 
-      <div class="col BCK-download-btns-container" data-hb-template="Handlebars-Common-DownloadColButtons">
+      <div class="col s12 m6 BCK-download-btns-container" data-hb-template="Handlebars-DownloadColButtons">
         <!-- backbone fills this -->
+      </div>
+
+      <div class="col s12 m6 right-align BCK-changeView-btns-container" data-hb-template="Handlebars-SwitchColViewButtons">
+
+        <!-- backbone fills this -->
+
       </div>
 
     </div>
