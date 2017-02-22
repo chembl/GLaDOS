@@ -22,9 +22,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @render()
       $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
-      # Handles the popstate event to reload a search
-      window.onpopstate = @searchFromURL.bind(@)
       @searchFromURL()
+      @url_change_events_registered = false
+      @registerUrlChangeEvents()
 
     searchFromURL: ()->
       if @atResultsPage
@@ -41,6 +41,12 @@ glados.useNameSpace 'glados.views.SearchResults',
           @expandable_search_bar.val(urlQueryString)
           @searchModel.search(urlQueryString, null)
           @lastURLQuery = urlQueryString
+
+    registerUrlChangeEvents: ()->
+      if not @url_change_events_registered and @atResultsPage
+        # Handles the popstate event to reload a search
+        window.onpopstate = @searchFromURL.bind(@)
+        @url_change_events_registered = true
 
     # ------------------------------------------------------------------------------------------------------------------
     # Views
