@@ -11,7 +11,6 @@ PaginatedViewExt =
     'change select.select-search' : 'setSearch'
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
-    'click .download-btn-for-format': 'triggerAllItemsDownload'
 
 
   # fills a template with the contents of the collection's current page
@@ -471,23 +470,6 @@ PaginatedViewExt =
     if comp?
       @triggerCollectionSort(comp)
 
-  #--------------------------------------------------------------------------------------
-  # Download Buttons
-  #--------------------------------------------------------------------------------------
-  # if the collection is empty it hides the download button, it shows it otherwise
-  initDownloadButtonIfContent: ->
-
-    if @collection.getMeta('total_records') != 0
-
-      $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
-      $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
-        formats: @collection.getMeta('download_formats')
-
-  triggerAllItemsDownload: (event) ->
-
-    desiredFormat = $(event.currentTarget).attr('data-format')
-    $progressMessages = $(@el).find('.download-messages-container')
-    @collection.downloadAllItems(desiredFormat, $progressMessages)
 
   #--------------------------------------------------------------------------------------
   # Page selector

@@ -91,7 +91,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         if @lists_container
           for score_i in sorted_scores
             for key_i in keys_by_score[score_i]
-              $div_key_i = $('#BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME)
+              idToMove =  'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME + '-container'
+              $div_key_i = $('#' + idToMove)
               @lists_container.append($div_key_i)
 
     updateChips: ()->
@@ -128,34 +129,51 @@ glados.useNameSpace 'glados.views.SearchResults',
 
 
     renderResultsListsViews: () ->
-      list_template = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
+      listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
+      listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
       @searchResultsViewsDict = {}
       # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
-      srl_dict = @searchModel.getResultsListsDict()
-      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+      resultsListsDict = @searchModel.getResultsListsDict()
+      for resourceName, resultsList of glados.models.paginatedCollections.Settings.ES_INDEXES
 
-        if _.has(srl_dict, key_i)
-          es_results_list_id = 'BCK-'+val_i.ID_NAME
-          es_results_list_title = val_i.LABEL
-          @lists_container.append(
-            list_template(
-              es_results_list_id: es_results_list_id
-              es_results_list_title: es_results_list_title
-            )
-          )
+        console.log 'key: ', resourceName
+        console.log 'value: ', resultsList
+        if _.has(resultsListsDict, resourceName)
+          es_results_list_id = 'BCK-'+resultsList.ID_NAME
+          es_results_list_title = resultsList.LABEL
+
+          $container = $('<div id="' + es_results_list_id + '-container">')
+
+          listTitleContent = listTitleAndMenuTemplate
+            es_results_list_id: es_results_list_id
+            es_results_list_title: es_results_list_title
+
+          listViewContent = listViewTemplate
+            es_results_list_id: es_results_list_id
+            es_results_list_title: es_results_list_title
+
+          $container.append(listTitleContent)
+          $container.append(listViewContent)
+          @lists_container.append($container)
           # Instantiates the results list view for each ES entity and links them with the html component
           es_rl_view_i = new glados.views.SearchResults.ESResultsListView
-            collection: srl_dict[key_i]
+            collection: resultsListsDict[resourceName]
             el: '#'+es_results_list_id
-          @searchResultsViewsDict[key_i] = es_rl_view_i
+
+          # Initialises a Menu view which will be in charge of handling the menu bar
+          resultsMenuView = new glados.views.SearchResults.ResultsSectionMenuViewView
+            collection: resultsListsDict[resourceName]
+            el: '#' + es_results_list_id + '-menu'
+
+          @searchResultsViewsDict[resourceName] = es_rl_view_i
           # If there is a selection skips the unselected views
-          if @selected_es_entity and @selected_es_entity != key_i
+          if @selected_es_entity and @selected_es_entity != resourceName
             $('#'+es_results_list_id).hide()
           # event register for score update and update chips
-          srl_dict[key_i].on('score_and_records_update',@sortResultsListsViews.bind(@))
-          srl_dict[key_i].on('score_and_records_update',@updateChips.bind(@))
+          resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
+          resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
       @container.show()
 
     # ------------------------------------------------------------------------------------------------------------------
