@@ -2,9 +2,9 @@ glados.useNameSpace 'glados.views.SearchResults',
   # View that renders the search bar and advanced search components
   SearchBarView: Backbone.View.extend
 
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # Initialization
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     el: $('#BCK-SRB-wrapper')
     initialize: () ->
@@ -22,9 +22,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @render()
       $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
-      # Handles the popstate event to reload a search
-      window.onpopstate = @searchFromURL.bind(@)
       @searchFromURL()
+      @url_change_events_registered = false
+      @registerUrlChangeEvents()
 
     searchFromURL: ()->
       if @atResultsPage
@@ -42,9 +42,15 @@ glados.useNameSpace 'glados.views.SearchResults',
           @searchModel.search(urlQueryString, null)
           @lastURLQuery = urlQueryString
 
-    # --------------------------------------------------------------------------------------------------------------------
+    registerUrlChangeEvents: ()->
+      if not @url_change_events_registered and @atResultsPage
+        # Handles the popstate event to reload a search
+        window.onpopstate = @searchFromURL.bind(@)
+        @url_change_events_registered = true
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Views
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     sortResultsListsViews: ()->
       # If an entity is selected the ordering is skipped
@@ -152,9 +158,9 @@ glados.useNameSpace 'glados.views.SearchResults',
           srl_dict[key_i].on('score_and_records_update',@updateChips.bind(@))
       @container.show()
 
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     events:
       'click .example_link' : 'searchExampleLink'
@@ -170,9 +176,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @expandable_search_bar.val(exampleString)
       @search()
 
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # Additional Functionalities
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     getSearchURLFor: (es_settings_key, search_str)->
       selected_es_entity_path = if es_settings_key then \
@@ -208,9 +214,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showAdvanced = not @showAdvanced
       console.log(@showAdvanced)
 
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # Component rendering
-    # --------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     render: () ->
       if @last_screen_type_rendered != GlobalVariables.CURRENT_SCREEN_TYPE
@@ -222,7 +228,8 @@ glados.useNameSpace 'glados.views.SearchResults',
             top : 106
         else
           @fillTemplate(@med_andup_bar_id)
-        @updateChips()
+        if @atResultsPage
+          @updateChips()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->
