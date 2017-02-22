@@ -3,50 +3,65 @@ glados.useNameSpace 'glados.views.SearchResults',
   SearchBarView: Backbone.View.extend
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Initialization
+    # Initialization and navigation
     # ------------------------------------------------------------------------------------------------------------------
 
     el: $('#BCK-SRB-wrapper')
     initialize: () ->
-      @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       @searchModel = SearchModel.getInstance()
       @es_path = null
       @selected_es_entity = null
-
+      @showAdvanced = false
       @expandable_search_bar = null # Assigned after render
       @small_bar_id = 'BCK-SRB-small'
       @med_andup_bar_id = 'BCK-SRB-med-and-up'
       # re-renders on widnow resize
       @last_screen_type_rendered = null
+
+      # Render variables
+      @$searchResultsListsContainersDict = null
+      @searchResultsViewsDict = null
+      @searchResultsMenusViewsDict = null
+      @container = null
+      @lists_container = null
+
+      # Rendering and resize events
       @render()
       $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
-      @searchFromURL()
-      @url_change_events_registered = false
-      @registerUrlChangeEvents()
 
-    searchFromURL: ()->
+      @searchFromURL()
       if @atResultsPage
+        # Handles the popstate event to reload a search
+        window.onpopstate = @searchFromURL.bind(@)
+
+    parseURLData: () ->
+        @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
         @es_path = URLProcessor.getSpecificSearchResultsPage()
         @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
           glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
 
-        # Don't instantiate the ResultsLists if it is not necessary
-        @container = $('#BCK-ESResults')
-        @lists_container = $('#BCK-ESResults-lists')
-        @renderResultsListsViews()
+    searchFromURL: ()->
+      if @atResultsPage
+        @parseURLData()
+        @showSelectedResourceOnly()
         urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
         if urlQueryString and urlQueryString != @lastURLQuery
           @expandable_search_bar.val(urlQueryString)
           @searchModel.search(urlQueryString, null)
           @lastURLQuery = urlQueryString
+        @updateChips()
 
-    registerUrlChangeEvents: ()->
-      if not @url_change_events_registered and @atResultsPage
-        # Handles the popstate event to reload a search
-        window.onpopstate = @searchFromURL.bind(@)
-        @url_change_events_registered = true
+    navigateTo: (nav_url)->
+      if URLProcessor.isAtSearchResultsPage(nav_url)
+        window.history.pushState({}, 'ChEMBL: '+@expandable_search_bar.val(), nav_url)
+        @searchFromURL()
+      else
+        # Navigates to the specified URL
+        window.location.href = nav_url
+
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Views
@@ -127,22 +142,51 @@ glados.useNameSpace 'glados.views.SearchResults',
       $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
         chips: chipStruct
 
+      binded_nav_func = @navigateTo.bind(@)
+      get_event_handler = (key_up)->
+        handler = (event)->
+          # Disables link navigation by click or enter, unless it redirects to a non results page
+          if $(this).attr("target") != "_blank" and \
+            (not key_up or event.keyCode == 13) and \
+            not(event.ctrlKey or GlobalVariables.IS_COMMAND_KEY_DOWN)
+              event.preventDefault()
+              binded_nav_func($(this).attr("href"))
+
+        return handler
+
+      $('.summary-chips-container').find('a').click(get_event_handler(false))
+
+    showSelectedResourceOnly: ()->
+      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+        # if there is a selection and this container is not selected it gets hidden if else it shows all resources
+        if @selected_es_entity and @selected_es_entity != resourceName
+          @$searchResultsListsContainersDict[resourceName].hide()
+        else
+          @$searchResultsListsContainersDict[resourceName].show()
 
     renderResultsListsViews: () ->
+      console.log("RENDERING!!")
+      # Don't instantiate the ResultsLists if it is not necessary
+      @container = $('#BCK-ESResults')
+      @lists_container = $('#BCK-ESResults-lists')
       listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
       listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
       @searchResultsViewsDict = {}
+      @searchResultsMenusViewsDict = {}
+      @$searchResultsListsContainersDict = {}
       # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       resultsListsDict = @searchModel.getResultsListsDict()
-      for resourceName, resultsList of glados.models.paginatedCollections.Settings.ES_INDEXES
+      # Clears the container before redrawing
+      @lists_container.html('')
+      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
         console.log 'key: ', resourceName
-        console.log 'value: ', resultsList
+        console.log 'value: ', resultsListSettings
         if _.has(resultsListsDict, resourceName)
-          es_results_list_id = 'BCK-'+resultsList.ID_NAME
-          es_results_list_title = resultsList.LABEL
+          es_results_list_id = 'BCK-'+resultsListSettings.ID_NAME
+          es_results_list_title = resultsListSettings.LABEL
 
           $container = $('<div id="' + es_results_list_id + '-container">')
 
@@ -158,19 +202,19 @@ glados.useNameSpace 'glados.views.SearchResults',
           $container.append(listViewContent)
           @lists_container.append($container)
           # Instantiates the results list view for each ES entity and links them with the html component
-          es_rl_view_i = new glados.views.SearchResults.ESResultsListView
+          resultsListViewI = new glados.views.SearchResults.ESResultsListView
             collection: resultsListsDict[resourceName]
             el: '#'+es_results_list_id
 
           # Initialises a Menu view which will be in charge of handling the menu bar
-          resultsMenuView = new glados.views.SearchResults.ResultsSectionMenuViewView
+          resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuViewView
             collection: resultsListsDict[resourceName]
             el: '#' + es_results_list_id + '-menu'
 
-          @searchResultsViewsDict[resourceName] = es_rl_view_i
-          # If there is a selection skips the unselected views
-          if @selected_es_entity and @selected_es_entity != resourceName
-            $('#'+es_results_list_id).hide()
+          @searchResultsViewsDict[resourceName] = resultsListViewI
+          @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
+          @$searchResultsListsContainersDict[resourceName] = $container
+
           # event register for score update and update chips
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
           resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
@@ -246,7 +290,9 @@ glados.useNameSpace 'glados.views.SearchResults',
             top : 106
         else
           @fillTemplate(@med_andup_bar_id)
+        # Rendders the results lists and the chips
         if @atResultsPage
+          @renderResultsListsViews()
           @updateChips()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 

@@ -30,8 +30,9 @@ class URLProcessor
 
 
   # Tells whether or not the url is at the search results page
-  @isAtSearchResultsPage = ()->
-    url_path = window.location.pathname;
+  @isAtSearchResultsPage = (url_path)->
+    if _.isUndefined(url_path)
+      url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match
@@ -39,8 +40,9 @@ class URLProcessor
     return false
 
   # Tells whether or not the url is at the search results page with advanced filters
-  @getSpecificSearchResultsPage = ()->
-    url_path = window.location.pathname;
+  @getSpecificSearchResultsPage = (url_path)->
+    if _.isUndefined(url_path)
+      url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match and match.length > 3 and match[1]
@@ -49,15 +51,17 @@ class URLProcessor
       return null
 
   # Tells whether or not the url is at the search results page with advanced filters
-  @isAtAdvancedSearchResultsPage = ()->
-    url_path = window.location.pathname;
+  @isAtAdvancedSearchResultsPage = (url_path)->
+    if _.isUndefined(url_path)
+      url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     return match and match.length > 3 and match[2] == '/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
 
   # gets the query string for the search results page
-  @getSearchQueryString = ()->
-    url_path = window.location.pathname;
+  @getSearchQueryString = (url_path)->
+    if _.isUndefined(url_path)
+      url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match and match.length > 3
