@@ -1185,7 +1185,7 @@ div#CNC-zoom-modal {
 }
 
 .card-top-border {
-  border-top: 2px solid #94eae2;
+  border-top: 2px solid color('cyan','lighten-3');
 }
 
 /**
@@ -1613,7 +1613,7 @@ $marvin-size-fullscreen: 91vh;
 
 span.badge-primary-color-no-float {
   min-width: 3rem;
-  padding: 0 6px;
+  padding: 2px 5px;
   text-align: center;
   line-height: $badge-height;
   height: $badge-height;
@@ -1623,8 +1623,8 @@ span.badge-primary-color-no-float {
   font-weight: 300;
   font-size: 0.8rem;
   color: white;
-  background-color: $primary-color;
-  border-radius: 2px;
+  background-color: color($primary-color-name,'lighten-2');
+  border-radius: 7px;
 
   &[data-badge-caption]::after {
     content: " " attr(data-badge-caption);
@@ -1641,7 +1641,7 @@ span.badge-primary-color-no-float {
     color: white;
     span.badge-primary-color-no-float{
       color: $primary-color;
-      background-color: white;
+      background-color: $chip-bg-color;
     }
   }
 }
