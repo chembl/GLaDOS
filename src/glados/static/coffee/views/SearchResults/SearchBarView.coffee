@@ -165,14 +165,12 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[resourceName].show()
 
     renderResultsListsViews: () ->
-      console.log("RENDERING!!")
       # Don't instantiate the ResultsLists if it is not necessary
       @container = $('#BCK-ESResults')
       @lists_container = $('#BCK-ESResults-lists')
       listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
       listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
 
-      @searchResultsViewsDict = {}
       @searchResultsMenusViewsDict = {}
       @$searchResultsListsContainersDict = {}
       # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -182,38 +180,32 @@ glados.useNameSpace 'glados.views.SearchResults',
       @lists_container.html('')
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
-        console.log 'key: ', resourceName
-        console.log 'value: ', resultsListSettings
         if _.has(resultsListsDict, resourceName)
-          es_results_list_id = 'BCK-'+resultsListSettings.ID_NAME
+          resultsListViewID = 'BCK-'+resultsListSettings.ID_NAME
           es_results_list_title = resultsListSettings.LABEL
 
-          $container = $('<div id="' + es_results_list_id + '-container">')
+          $containerOfEverything = $('<div id="' + resultsListViewID + '-container">')
 
           listTitleContent = listTitleAndMenuTemplate
-            es_results_list_id: es_results_list_id
+            es_results_list_id: resultsListViewID
             es_results_list_title: es_results_list_title
 
           listViewContent = listViewTemplate
-            es_results_list_id: es_results_list_id
+            es_results_list_id: resultsListViewID
             es_results_list_title: es_results_list_title
 
-          $container.append(listTitleContent)
-          $container.append(listViewContent)
-          @lists_container.append($container)
-          # Instantiates the results list view for each ES entity and links them with the html component
-          resultsListViewI = new glados.views.SearchResults.ESResultsListView
-            collection: resultsListsDict[resourceName]
-            el: '#'+es_results_list_id
+          $containerOfEverything.append(listTitleContent)
+          $containerOfEverything.append(listViewContent)
+          @lists_container.append($containerOfEverything)
 
-          # Initialises a Menu view which will be in charge of handling the menu bar
+          # Initialises a Menu view which will be in charge of handling the menu bar,
+          # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
           resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuViewView
             collection: resultsListsDict[resourceName]
-            el: '#' + es_results_list_id + '-menu'
+            el: '#' + resultsListViewID + '-menu'
 
-          @searchResultsViewsDict[resourceName] = resultsListViewI
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-          @$searchResultsListsContainersDict[resourceName] = $container
+          @$searchResultsListsContainersDict[resourceName] = $containerOfEverything
 
           # event register for score update and update chips
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))

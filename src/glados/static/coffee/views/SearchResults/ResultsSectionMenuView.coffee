@@ -2,12 +2,18 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ResultsSectionMenuViewView: Backbone.View.extend
 
+    # This handles all the views this menu view handles, there is one view per view type, for example
+    # {'Table': <instance of table view>}
+    allResultsViews: {}
+
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
 
     initialize: ->
       @collection.on 'reset do-repaint sort', @render, @
+      @currentViewType = @collection.getMeta('default_view')
+      @showOrCreateView @currentViewType
 
     render: ->
       if @collection.getMeta('total_records') != 0
@@ -26,15 +32,32 @@ glados.useNameSpace 'glados.views.SearchResults',
 
 
 
-#--------------------------------------------------------------------------------------
-# Download Buttons
-#--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    # Download Buttons
+    #--------------------------------------------------------------------------------------
 
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
       @collection.downloadAllItems(desiredFormat, $progressMessages)
 
+    #--------------------------------------------------------------------------------------
+    # Switching Views
+    #--------------------------------------------------------------------------------------
     switchResultsView: (event) ->
       desiredView = $(event.currentTarget).attr('data-view')
       console.log 'SWITCH TO VIEW: ', desiredView
+
+    # if the view already exists, shows it, otherwise it creates it.
+    showOrCreateView: (viewType) ->
+
+      if !@allResultsViews[viewType]?
+        console.log 'view does not exist!', viewType
+        viewContainerID = $(@el).attr('id').replace('-menu', '')
+        console.log 'the container element must be ', viewContainerID
+
+        # Instantiates the results list view for each ES entity and links them with the html component
+        resultsListViewI = new glados.views.SearchResults.ESResultsListView
+          collection: @collection
+          el: '#' + viewContainerID
+
