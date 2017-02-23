@@ -70,43 +70,6 @@ PaginatedViewExt =
 
       $append_to.append($(new_item_cont))
 
-    if not $specificElem.is('table') and $specificElem.is(":visible")
-      @cards_container = $append_to
-      @adjustCardHeights()
-      if not @resize_func_attached
-        $(window).resize(@adjustCardHeights.bind(@))
-        @resize_func_attached = true
-
-  adjustCardHeights: ()->
-    callback = ()->
-      if @cards_container
-        cards_per_row = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-        $cards = @cards_container.find('.card')
-        num_rows = $cards.length/cards_per_row
-        if $cards.length%cards_per_row
-          num_rows++
-        for i in [0..(num_rows-1)]
-          # Gets the maximum height in a row
-          max_h = 0
-          for j in [0..cards_per_row-1]
-            cur_card_index = i*cards_per_row+j
-            if cur_card_index < $cards.length
-              $($cards[cur_card_index]).height('')
-              max_h = Math.max(max_h, $($cards[cur_card_index]).height())
-          # Sets the cards in the row to the maximum height found
-          for j in [0..cards_per_row-1]
-            cur_card_index = i*cards_per_row+j
-            if cur_card_index < $cards.length
-              $($cards[cur_card_index]).height(max_h)
-    callback = callback.bind(@)
-    # JavaScript rendering can take a while to update the correct height of the cards
-    # Timeout zero will let other code execute while this waits on that code to setup
-    # correctly the height of each card
-    setTimeout(
-      callback
-      , 0
-    )
-
 
   fillPaginators: ->
 

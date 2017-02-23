@@ -1180,8 +1180,18 @@ div#CNC-zoom-modal {
   width: 75px;
 }
 
+.cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  &:after {
+    content: "";
+    flex: auto;
+  }
+}
+
 .card {
   position: relative;
+  height: 90%;
 }
 
 .card-top-border {
@@ -1634,16 +1644,16 @@ span.badge-primary-color-no-float {
 .chip-rl-summary{
   margin-bottom: 1px;
   margin-top: 1px;
+  color: $primary-color;
 }
 .chip-rl-summary.selected{
   background: $primary-color;
-  a{
-    color: white;
-    span.badge-primary-color-no-float{
-      color: $primary-color;
-      background-color: $chip-bg-color;
-    }
+  color: white;
+  span.badge-primary-color-no-float{
+    color: $primary-color;
+    background-color: $chip-bg-color;
   }
+
 }
 
 /**
