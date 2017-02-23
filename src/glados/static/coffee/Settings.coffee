@@ -89,6 +89,18 @@ glados.useNameSpace 'glados',
       'CSV': 'CSV'
       'TSV': 'TSV'
       'SDF': 'SDF'
+    DEFAULT_RESULTS_VIEWS_NAMES:
+      'Matrix': 'Matrix'
+      'Graph': 'Graph'
+      'Table': 'Table'
+      'Cards': 'Cards'
+      'Infinite': 'Infinite'
+    DEFAULT_RESULTS_VIEWS_ICONS:
+      'Matrix': 'fa-th'
+      'Graph': 'fa-area-chart'
+      'Table': 'fa-table'
+      'Cards': 'fa-newspaper-o'
+      'Infinite': 'fa-ellipsis-v'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

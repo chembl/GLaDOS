@@ -34,6 +34,7 @@ Here you can find some informal diagrams that help to understand how some compon
 ### Searching
 
 * [Search Basic Workflow] (https://docs.google.com/drawings/d/1eR5cyfc8pR5iDjD7qUQGzy-Nb8R0ixpmiva8pNEm5cU/edit?usp=sharing)
+* [Elasticsearch Results Page Structure] (https://docs.google.com/drawings/d/1Q458fWY9gTtTlsxbbSLRqf246oBFQEe543rFDv1SbJg/edit?usp=sharing)
 
 ### Paginated Collections
 
