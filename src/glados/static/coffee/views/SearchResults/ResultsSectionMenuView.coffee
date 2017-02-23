@@ -2,6 +2,14 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ResultsSectionMenuView: Backbone.View.extend
 
+    DEFAULT_RESULTS_VIEWS_BY_TYPE:
+      'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
+      'Graph': glados.views.SearchResults.ESResultsListView
+      'Table': glados.views.SearchResults.ESResultsListView
+      'Cards': glados.views.SearchResults.ESResultsListView
+      'Infinite': glados.views.SearchResults.ESResultsListView
+
+
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
@@ -79,7 +87,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         $viewContainer.append($viewElement)
 
         # Instantiates the results list view for each ES entity and links them with the html component
-        resultsListView = new glados.views.SearchResults.ESResultsListView
+        resultsListView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
           collection: @collection
           el: $viewElement
 
