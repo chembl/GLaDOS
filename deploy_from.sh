@@ -38,7 +38,7 @@ check_last_call(){
 CURRENT_STEP=1
 run_step(){
     echo "Step ${CURRENT_STEP}: ----------> $1"
-
+    eval $1
     check_last_call
     let "CURRENT_STEP++"
 }
