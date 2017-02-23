@@ -155,6 +155,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return handler
 
       $('.summary-chips-container').find('a').click(get_event_handler(false))
+      $('.summary-chips-container').find('a').keyup(get_event_handler(true))
 
     showSelectedResourceOnly: ()->
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -211,6 +212,9 @@ glados.useNameSpace 'glados.views.SearchResults',
             collection: resultsListsDict[resourceName]
             el: '#' + es_results_list_id + '-menu'
 
+          resultsListViewI.render()
+          resultsMenuViewI.render()
+
           @searchResultsViewsDict[resourceName] = resultsListViewI
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
           @$searchResultsListsContainersDict[resourceName] = $container
@@ -219,6 +223,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
           resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
       @container.show()
+      @updateChips()
+      @showSelectedResourceOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
@@ -293,7 +299,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Rendders the results lists and the chips
         if @atResultsPage
           @renderResultsListsViews()
-          @updateChips()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->
