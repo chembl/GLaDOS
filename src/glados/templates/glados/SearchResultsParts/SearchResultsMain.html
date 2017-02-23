@@ -80,7 +80,17 @@
 </script>
 
 <script id="Handlebars-ESResultsListMatrixView" type="text/x-handlebars-template">
-Matrix
+<div class="card grey lighten-5">
+
+  <div class="card-content">
+    {% endverbatim %}
+      {% block matrix %}
+        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+      {% endblock %}
+    {% verbatim %}
+  </div>
+
+</div>
 </script>
 
 <script id="Handlebars-ESResultsListGraphView" type="text/x-handlebars-template">

@@ -5,3 +5,11 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
 
       console.log 'INITIALIZING MATRIX!'
+      # I need to make the collection load all items
+      
+      ctm = new CompoundTargetMatrix
+      new CompoundTargetMatrixView
+        model: ctm
+        el: $('#CompTargetMatrix')
+
+      ctm.fetch()
