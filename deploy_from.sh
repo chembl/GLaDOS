@@ -43,7 +43,8 @@ run_step(){
     let "CURRENT_STEP++"
 }
 
-
+run_step "git checkout master"
+run_step "git pull"
 run_step "git checkout -b ${BRANCH_NAME}"
 run_step "git pull ${FROM_UPSTREAM} master"
 run_step "git push --set-upstream origin ${BRANCH_NAME}"
