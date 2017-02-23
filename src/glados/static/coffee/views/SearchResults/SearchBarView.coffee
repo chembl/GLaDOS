@@ -169,7 +169,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @container = $('#BCK-ESResults')
       @lists_container = $('#BCK-ESResults-lists')
       listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
-      listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListCards").html())
+      listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListViewContainer").html())
 
       @searchResultsMenusViewsDict = {}
       @$searchResultsListsContainersDict = {}
@@ -200,7 +200,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           # Initialises a Menu view which will be in charge of handling the menu bar,
           # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
-          resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuViewView
+          resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuView
             collection: resultsListsDict[resourceName]
             el: '#' + resultsListViewID + '-menu'
 
