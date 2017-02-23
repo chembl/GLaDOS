@@ -2,10 +2,6 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ResultsSectionMenuViewView: Backbone.View.extend
 
-    # This handles all the views this menu view handles, there is one view per view type, for example
-    # {'Table': <instance of table view>}
-    allResultsViews: {}
-
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
@@ -13,6 +9,11 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
       @collection.on 'reset do-repaint sort', @render, @
       @currentViewType = @collection.getMeta('default_view')
+
+      # This handles all the views this menu view handles, there is one view per view type, for example
+      # {'Table': <instance of table view>}
+      @allViewsPerType = {}
+
       @showOrCreateView @currentViewType
 
     render: ->
@@ -51,13 +52,18 @@ glados.useNameSpace 'glados.views.SearchResults',
     # if the view already exists, shows it, otherwise it creates it.
     showOrCreateView: (viewType) ->
 
-      if !@allResultsViews[viewType]?
-        console.log 'view does not exist!', viewType
+      if !@allViewsPerType[viewType]?
+
         viewContainerID = $(@el).attr('id').replace('-menu', '')
         console.log 'the container element must be ', viewContainerID
 
         # Instantiates the results list view for each ES entity and links them with the html component
-        resultsListViewI = new glados.views.SearchResults.ESResultsListView
+        resultsListView = new glados.views.SearchResults.ESResultsListView
           collection: @collection
           el: '#' + viewContainerID
+
+        @allViewsPerType[viewType] = resultsListView
+
+
+
 

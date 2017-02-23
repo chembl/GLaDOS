@@ -184,7 +184,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsListViewID = 'BCK-'+resultsListSettings.ID_NAME
           es_results_list_title = resultsListSettings.LABEL
 
-          $containerOfEverything = $('<div id="' + resultsListViewID + '-container">')
+          $container = $('<div id="' + resultsListViewID + '-container">')
 
           listTitleContent = listTitleAndMenuTemplate
             es_results_list_id: resultsListViewID
@@ -194,9 +194,9 @@ glados.useNameSpace 'glados.views.SearchResults',
             es_results_list_id: resultsListViewID
             es_results_list_title: es_results_list_title
 
-          $containerOfEverything.append(listTitleContent)
-          $containerOfEverything.append(listViewContent)
-          @lists_container.append($containerOfEverything)
+          $container.append(listTitleContent)
+          $container.append(listViewContent)
+          @lists_container.append($container)
 
           # Initialises a Menu view which will be in charge of handling the menu bar,
           # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
@@ -205,7 +205,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             el: '#' + resultsListViewID + '-menu'
 
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-          @$searchResultsListsContainersDict[resourceName] = $containerOfEverything
+          @$searchResultsListsContainersDict[resourceName] = $container
 
           # event register for score update and update chips
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
