@@ -76,6 +76,6 @@ class SearchResultsApp
     ctm = new CompoundTargetMatrix
     new CompoundTargetMatrixView
       model: ctm
-      el: $('#CompTargetMatrix')
+      el: $('.BCK-CompTargetMatrix')
 
     ctm.fetch()

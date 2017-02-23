@@ -6,10 +6,21 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       console.log 'INITIALIZING MATRIX!'
       # I need to make the collection load all items
-      
-      ctm = new CompoundTargetMatrix
-      new CompoundTargetMatrixView
-        model: ctm
-        el: $('#CompTargetMatrix')
+      $progressElement = $($(@el).find('.load-messages-container'))
+      deferreds = @collection.getAllResults($progressElement)
 
-      ctm.fetch()
+      thisView = @
+      $.when.apply($, deferreds).done( () ->
+        #with all items loaded now I can generate the matrix
+
+        ctm = new CompoundTargetMatrix
+        ctm.set('molecule_chembl_ids', (item.molecule_chembl_id for item in thisView.collection.allResults) )
+        new CompoundTargetMatrixView
+          model: ctm
+          el: $(thisView.el).find('.BCK-CompTargetMatrix')
+          ctm.fetch()
+
+        setTimeout( (()-> $progressElement.html ''), 200)
+      )
+
+
