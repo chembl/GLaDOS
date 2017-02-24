@@ -52,13 +52,6 @@ class SearchResultsApp
   # Graph Views
   # --------------------------------------------------------------------------------------------------------------------
 
-  # this initialises the view that shows the compound vs target matrix view
-  @initCompTargMatrixView = (topLevelElem) ->
-    compTargMatrixView = new CompoundTargetMatrixView
-      el: topLevelElem
-
-    return compTargMatrixView
-
   # this initialises the view that shows the compound results graph view
   @initCompResultsGraphView = (topLevelElem) ->
     compResGraphView = new CompoundResultsGraphView

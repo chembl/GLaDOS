@@ -86,9 +86,9 @@
   <div class="card grey lighten-5">
     <div class="card-content">
       {% endverbatim %}
-        {% block matrix %}
-          {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
-        {% endblock %}
+
+        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+
       {% verbatim %}
     </div>
 
@@ -96,7 +96,20 @@
 </script>
 
 <script id="Handlebars-ESResultsListGraphView" type="text/x-handlebars-template">
-Graph
+
+  <span class="load-messages-container">
+  </span>
+
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      {% endverbatim %}
+
+        {% include "glados/SearchResultsParts/CompoundResultsGraphBase.html" %}
+
+      {% verbatim %}
+    </div>
+
+
 </script>
 
 <script id="Handlebars-ESResultsListTableView" type="text/x-handlebars-template">
