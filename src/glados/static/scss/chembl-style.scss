@@ -38,8 +38,18 @@
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+$chembl-teal: #207a7a;
+
+.chembl-teal{
+  background-color: $chembl-teal !important;
+}
+
+.chembl-teal-text{
+  color: $chembl-teal !important;
+}
+
 $h1-color: #f7f7f7;
-$h2-color: #207a7a;
+$h2-color: $chembl-teal;
 $h3-color: #996a44;
 $h4-color: #222;
 $h5-color: #222;
@@ -128,28 +138,30 @@ a:hover {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-$side-nav-width: 160px;
+$side-nav-width: 200px;
 $sidenav-links-side-padding: 8px;
-$sidenav-links-lineheight: 38px;
+$sidenav-links-lineheight: 1.1em;
+$sidenav-links-v-padding: 8px;
+$sidenav-badge-padding: 3px;
 
 .side-nav {
-  li.menu-logo {
-    text-align: center;
-    height: 105px;
-    background-color: #207a7a;
-    border-bottom: 1px solid #d1d1d1;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    margin-bottom: 5%;
-    &:hover {
-      background-color: #207a7a;
-    }
-    height: 90px;
-  }
-
+  border: none !important;
+  width: $side-nav-width;
   height: 100%;
   padding: 0px;
+  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
   li.menu-logo {
+    text-align: center;
+    background-color: $chembl-teal;
+    border-bottom: 1px solid #d1d1d1;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 0px;
+    margin-bottom: 1%;
+    &:hover {
+      background-color: $chembl-teal;
+    }
+    height: 90px;
     a {
       height: 100%;
       padding: 0px;
@@ -161,39 +173,47 @@ $sidenav-links-lineheight: 38px;
     }
   }
 
-  width: $side-nav-width;
+  a{
+    height:auto;
+  }
+
+
+  li{
+    div.collapsible-header {
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      min-height: inherit !important;
+      line-height: $sidenav-links-lineheight !important;
+      padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
+    }
+    div.collapsible-body {
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      min-height: inherit !important;
+      line-height: $sidenav-links-lineheight !important;
+      padding: 0px !important;
+      li a{
+        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+        min-height: inherit !important;
+        line-height: $sidenav-links-lineheight !important;
+        padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
+        padding-left: 2*$sidenav-links-side-padding !important;
+
+        span.badge {
+          margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
+          border-radius: 2*$sidenav-badge-padding;
+          padding: $sidenav-badge-padding;
+          &.new:after {
+            content: "" !important;
+          }
+        }
+      }
+    }
+  }
 
   &.fixed {
     padding-top: 32px;
     z-index: 960;
-    a {
-      padding: 0 $sidenav-links-side-padding;
-    }
   }
 
-  li {
-    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    padding-left: 5px;
-    &:hover {
-      background-color: #b2dfdb;
-    }
-  }
-  a, li {
-    height: 34px;
-    line-height: $sidenav-links-lineheight;
-  }
-  a {
-    padding: 0 $sidenav-links-side-padding;
-  }
-
-  span.badge {
-    position: relative;
-    padding: 3px;
-    border-radius: 4px;
-    text-align: center;
-    left: 5px;
-    bottom: 2px;
-  }
 
   transform: unset;
 }
@@ -405,7 +425,7 @@ div#global-masthead ul li#services a:active,
 div#global-masthead ul li#services a:focus,
 div#global-masthead ul li.active#services a,
 div#global-masthead ul li.active-trail#services a {
-  border-top-color: #207a7a
+  border-top-color: $chembl-teal
 }
 
 div#global-masthead ul li#research a:hover,
@@ -441,7 +461,7 @@ div#global-masthead ul li#about a:active,
 div#global-masthead ul li#about a:focus,
 div#global-masthead ul li#about.active a,
 div#global-masthead ul li#about.active-trail a {
-  border-top-color: #207a7a
+  border-top-color: $chembl-teal
 }
 
 div#global-masthead ul li#about-us a:hover,
@@ -449,7 +469,7 @@ div#global-masthead ul li#about-us a:active,
 div#global-masthead ul li#about-us a:focus,
 div#global-masthead ul li#about-us.active a,
 div#global-masthead ul li#about-us.active-trail a {
-  border-top-color: #207a7a
+  border-top-color: $chembl-teal
 }
 
 /**
@@ -711,7 +731,7 @@ div#global-footer img {
 #global-footer-small h3.services,
 #global-footer-medium h3.services,
 #global-footer h3.services {
-  border-bottom: 2px solid #207a7a
+  border-bottom: 2px solid $chembl-teal
 }
 
 #global-footer-small h3.research,
@@ -735,7 +755,7 @@ div#global-footer img {
 #global-footer-small h3.about,
 #global-footer-medium h3.about,
 #global-footer h3.about {
-  border-bottom: 2px solid #207a7a
+  border-bottom: 2px solid $chembl-teal
 }
 
 #global-footer-small h3:hover,

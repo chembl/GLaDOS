@@ -1,11 +1,11 @@
 <!-- This shows when the screen is large -->
-<ul class="side-nav fixed hide-on-med-and-down teal lighten-5">
+<ul class="collapsible collapsible-accordion side-nav fixed hide-on-med-and-down teal lighten-5">
  {% block links_large %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
 </ul>
 <!-- This shows when the screen is medium or smaller -->
-<ul id="slide-out" class="side-nav teal lighten-5" style="display: none">
+<ul id="slide-out" class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">
    {% block links_small %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}

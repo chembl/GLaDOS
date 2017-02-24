@@ -1,19 +1,47 @@
 {% load static %}
-  <li class="menu-logo"><a href="/"><img title="Go to the ChEMBL homepage" alt="ChEMBL logo"
-                                         src="{% static 'img/chembl_logo.png' %}"/></a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/unichem">UniChem</a></li>
-  <li><a class="waves-effect waves-teal" href="#">Malaria Data</a></li>
-  <li><a class="waves-effect waves-teal" href="#">ChEMBL-NTD</a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/admesarfari">ADME SARfari <span
-    class="new badge"></span></a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/sarfari/kinasesarfari">Kinase SARfari </a>
-  </li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/sarfari/gpcrsarfari">GPCR Sarfari</a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/drugebility/structure">DrugEBility</a></li>
-  <li><a class="waves-effect waves-teal" href="#">Web Services <span class="new badge"></span></a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.surechembl.org/">SureChEMBL <span
-    class="new badge"></span></a></li>
-  <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/rdf">EBI RDF Platform</a></li>
-  <li><a class="waves-effect waves-teal" href="{% url 'faqs' %}">FAQ</a></li>
-   <li><a class="waves-effect waves-teal" href="{% url 'acks' %}">Acknowledgements</a></li>
-  <li><a class="waves-effect waves-teal" href="#">Statistics</a></li>
+<li class="menu-logo">
+  <a href="{% url 'main' %}">
+    <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
+  </a>
+</li>
+<li class="no-padding">
+  <div class="collapsible-header chembl-teal white-text active">
+    <span>Navigation</span>
+  </div>
+  <div class="collapsible-body no-padding transparent">
+    <ul>
+      <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/unichem">UniChem</a></li>
+      <li><a class="waves-effect waves-teal" href="#">Malaria Data</a></li>
+      <li><a class="waves-effect waves-teal" href="#">ChEMBL-NTD</a></li>
+      <li>
+        <a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/admesarfari">
+          ADME SARfari<span class="new badge">new</span>
+        </a>
+      </li>
+      <li>
+        <a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/sarfari/kinasesarfari">
+          Kinase SARfari
+        </a>
+      </li>
+      <li>
+        <a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/sarfari/gpcrsarfari">GPCR Sarfari</a>
+      </li>
+      <li>
+        <a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/drugebility/structure">DrugEBility</a>
+      </li>
+      <li><a class="waves-effect waves-teal" href="#">Web Services <span class="new badge"></span>new</a></li>
+      <li>
+        <a class="waves-effect waves-teal" href="https://www.surechembl.org/">
+          SureChEMBL <span class="new badge">new</span>
+        </a>
+      </li>
+      <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/rdf">EBI RDF Platform</a></li>
+      <li><a class="waves-effect waves-teal" href="{% url 'faqs' %}">FAQ</a></li>
+       <li><a class="waves-effect waves-teal" href="{% url 'acks' %}">Acknowledgements</a></li>
+      <li><a class="waves-effect waves-teal" href="#">Statistics</a></li>
+    </ul>
+  </div>
+</li>
+<script>
+
+</script>
