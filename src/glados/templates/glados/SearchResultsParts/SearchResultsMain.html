@@ -19,9 +19,7 @@
   </div>
   {{/each}}
 </script>
-{% endverbatim %}
 
-{% verbatim %}
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
   {{#each formats}}
   <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
@@ -31,9 +29,7 @@
   </a>
   {{/each}}
 </script>
-{% endverbatim %}
 
-{% verbatim %}
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
   {{#each options}}
   <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
@@ -43,10 +39,8 @@
   </a>
   {{/each}}
 </script>
-{% endverbatim %}
 
 
-{% verbatim %}
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
   <h3>{{es_results_list_title}}</h3>
 
@@ -76,17 +70,67 @@
   </div>
 
 </script>
-{% endverbatim %}
 
 
-<script id="Handlebars-ESResultsListCards" type="text/x-handlebars-template">
-  {% verbatim %}
+<script id="Handlebars-ESResultsListViewContainer" type="text/x-handlebars-template">
+
   <div id="{{es_results_list_id}}">
-      {% endverbatim %}
-      {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
 
   </div>
 </script>
+
+<script id="Handlebars-ESResultsListMatrixView" type="text/x-handlebars-template">
+  <span class="load-messages-container">
+  </span>
+
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      {% endverbatim %}
+
+        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+
+      {% verbatim %}
+    </div>
+
+</div>
+</script>
+
+<script id="Handlebars-ESResultsListGraphView" type="text/x-handlebars-template">
+
+  <span class="load-messages-container">
+  </span>
+
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      {% endverbatim %}
+
+        {% include "glados/SearchResultsParts/CompoundResultsGraphBase.html" %}
+
+      {% verbatim %}
+    </div>
+
+
+</script>
+
+<script id="Handlebars-ESResultsListTableView" type="text/x-handlebars-template">
+Table
+</script>
+
+<script id="Handlebars-ESResultsListInfiniteView" type="text/x-handlebars-template">
+Infinite
+</script>
+
+{% endverbatim %}
+
+{% verbatim %}
+<script id="Handlebars-ESResultsListCardsView" type="text/x-handlebars-template">
+
+{% endverbatim %}
+    {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
+{% verbatim %}
+
+</script>
+{% endverbatim %}
 
 <!-- End of Handlebars Templates -->
 

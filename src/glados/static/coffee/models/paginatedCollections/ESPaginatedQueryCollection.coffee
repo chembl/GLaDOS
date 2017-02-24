@@ -250,10 +250,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
-    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
-    downloadAllItems: (format, $progressElement) ->
+    clearAllResults: ->
+      @allResults = undefined
 
-      #-----------------------------------------------Get All Items-------------------------------------------
+    # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
+    # but in the future it could be used to optimize the pagination after this has been called.
+    # it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
+    # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
+    # without requesting again to the server.
+    # you can use a progress element to show the progress if you want.
+    getAllResults: ($progressElement) ->
 
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
@@ -276,8 +282,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       url = @getURL()
       totalPages = Math.ceil(totalRecords / pageSize)
 
+      # check if I already have all the results
+      if @allResults?
+        return jQuery.Deferred().resolve()
+
       #initialise the array in which all the items are going to be saved as they are received from the server
-      items = (undefined for num in [1..totalRecords])
+      @allResults = (undefined for num in [1..totalRecords])
       itemsReceived = 0
 
       #this function knows how to get one page of results and add them in the corresponding positions in the all
@@ -295,7 +305,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           startingPosition = (currentPage - 1) * pageSize
 
           for i in [0..(newItems.length-1)]
-            items[i + startingPosition] = newItems[i]
+            thisCollection.allResults[i + startingPosition] = newItems[i]
             itemsReceived++
 
           progress = parseInt((itemsReceived / totalRecords) * 100)
@@ -312,14 +322,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      #-----------------------------------------------End Get All Items-------------------------------------------
+      return deferreds
+
+    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+    downloadAllItems: (format, $progressElement) ->
+
+      deferreds = @getAllResults($progressElement)
+
+      thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
       $.when.apply($, deferreds).done( () ->
 
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
-        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in items)
+        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in thisCollection.allResults)
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
           # erase progress element contents after some milliseconds
@@ -329,19 +346,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           # erase progress element contents after some milliseconds
           setTimeout( (()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
-          idsList = (item.molecule_chembl_id for item in items)
+          idsList = (item.molecule_chembl_id for item in thisCollection.allResults)
           # here I have the IDs, I have to request them to the server as SDF
           DownloadModelOrCollectionExt.generateSDFFromChemblIDs idsList, $progressElement
 
 
 
       )
-
-
-
-
-
-
-
-
-

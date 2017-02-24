@@ -25,6 +25,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             id_name: esIndexSettings.ID_NAME
             available_views: esIndexSettings.AVAILABLE_VIEWS
+            default_view: esIndexSettings.DEFAULT_VIEW
 
       return new indexESPagQueryCollection
 
