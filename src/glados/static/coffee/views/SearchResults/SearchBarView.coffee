@@ -208,6 +208,9 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsListViewI.render()
           resultsMenuViewI.render()
 
+          resultsListViewI.render()
+          resultsMenuViewI.render()
+
           @searchResultsViewsDict[resourceName] = resultsListViewI
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
           @$searchResultsListsContainersDict[resourceName] = $container

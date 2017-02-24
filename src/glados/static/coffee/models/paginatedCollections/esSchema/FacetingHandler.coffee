@@ -7,5 +7,3 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     get_query_aggs:()->
       return
-
-
