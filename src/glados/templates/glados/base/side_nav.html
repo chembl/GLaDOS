@@ -1,3 +1,30 @@
+<!-- this is the template for extra collapsible menus -->
+<script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
+  {% verbatim %}
+  <li class="no-padding">
+    <div class="collapsible-header chembl-teal white-text active">
+      {{title}}
+    </div>
+    <div class="collapsible-body no-padding transparent">
+      {{#if content}}
+        {{content}}
+      {{/if}}
+      {{#if links}}
+      <ul>
+        {{#each links}}
+        <li>
+          <a class="waves-effect waves-teal" href="{{this.href}}">
+            SureChEMBL {{#if this.badge}}<span class="new badge">{{this.badge}}</span>{{/if}}
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+  </li>
+  {% endverbatim %}
+</script>
+
 <!-- This shows when the screen is large -->
 <ul class="collapsible collapsible-accordion side-nav fixed hide-on-med-and-down teal lighten-5">
  {% block links_large %}

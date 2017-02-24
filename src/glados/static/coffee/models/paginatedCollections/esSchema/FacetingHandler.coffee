@@ -6,4 +6,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     constructor:(@es_test)->
 
     get_query_aggs:()->
-      return;
+      return
+
+
