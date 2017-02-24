@@ -12,7 +12,6 @@ class SearchResultsApp
   # --------------------------------------------------------------------------------------------------------------------
 
   @initSubstructureSearchResults = () ->
-
     GlobalVariables.SEARCH_TERM = URLProcessor.getSubstructureSearchQueryString()
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
@@ -24,7 +23,6 @@ class SearchResultsApp
     resultsList.fetch()
 
   @initSimilaritySearchResults = () ->
-
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
 
@@ -39,7 +37,6 @@ class SearchResultsApp
     resultsList.fetch()
 
   @initFlexmatchSearchResults = () ->
-
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
 
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
@@ -57,7 +54,6 @@ class SearchResultsApp
 
   # this initialises the view that shows the compound vs target matrix view
   @initCompTargMatrixView = (topLevelElem) ->
-
     compTargMatrixView = new CompoundTargetMatrixView
       el: topLevelElem
 
@@ -65,17 +61,18 @@ class SearchResultsApp
 
   # this initialises the view that shows the compound results graph view
   @initCompResultsGraphView = (topLevelElem) ->
-
     compResGraphView = new CompoundResultsGraphView
       el: topLevelElem
 
     return compResGraphView
 
   @initCompoundTargetMatrix = ->
-
     ctm = new CompoundTargetMatrix
+      'molecule_chembl_ids': ['CHEMBL554', 'CHEMBL212250', 'CHEMBL212201', 'CHEMBL212251', 'CHEMBL384407',
+      'CHEMBL387207', 'CHEMBL215814', 'CHEMBL383965', 'CHEMBL214487']
+
     new CompoundTargetMatrixView
       model: ctm
-      el: $('#CompTargetMatrix')
+      el: $('.BCK-CompTargetMatrix')
 
     ctm.fetch()

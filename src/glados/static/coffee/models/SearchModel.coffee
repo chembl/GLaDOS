@@ -185,6 +185,7 @@ SearchModel = Backbone.Model.extend
       val_i.setMeta('singular_terms',@get("singular_terms"))
       val_i.setMeta('exact_terms',@get("exact_terms"))
       val_i.setMeta('filter_terms',@get("filter_terms"))
+      val_i.clearAllResults()
       val_i.setPage(1)
       val_i.fetch()
 

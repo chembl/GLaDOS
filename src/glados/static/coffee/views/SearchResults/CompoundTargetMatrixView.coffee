@@ -5,18 +5,50 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @model.on 'change', @render, @
 
-    @$vis_elem = $('#BCK-CompTargMatrixContainer')
+    @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
 
   render: ->
 
-    @paintControls()
-    @paintMatrix()
+    # only bother if my element is visible
+    if $(@el).is(":visible")
 
-    $(@el).find('select').material_select()
-    $(@el).find('.tooltipped').tooltip()
+      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+      $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
+        message: 'Loading Visualisation...'
+
+      @clearVisualisation()
+      @paintControls()
+      @paintMatrix()
+
+      $(@el).find('select').material_select()
+      $(@el).find('.tooltipped').tooltip()
+
+      $messagesElement.html ''
+
+  clearVisualisation: ->
+
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
+      message: 'Waiting for results...'
+
+    @clearControls()
+    @clearMatrix()
+
+  clearControls: ->
+
+    $('.select-colouring-container').empty()
+    $('.select-row-sort-container').empty()
+    $('.select-col-sort-container').empty()
+
+    $('.btn-row-sort-direction-container').empty()
+    $('.btn-col-sort-direction-container').empty()
+
+  clearMatrix: ->
+
+    @$vis_elem.empty()
 
   paintControls: ->
 
@@ -60,11 +92,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       columns: columns
       custom_label: label
 
-
-
-
   paintMatrix: ->
 
+    console.log 'PAINT MATRIX!'
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -182,10 +212,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     width = 0.8 * elemWidth
     height = width
 
-    console.log 'Element IS: ', $(@el).attr('id')
+    console.log 'Element IS: ', $(@el)
     console.log 'WIDTH IS: ', width
 
-    mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+    mainContainer = d3.select(@$vis_elem.get(0))
 
     # --------------------------------------
     # Legend initialisation
