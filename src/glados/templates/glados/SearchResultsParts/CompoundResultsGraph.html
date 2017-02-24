@@ -27,61 +27,17 @@
     <span><i class="icon icon-generic" data-icon="g"></i>Search Results Graph</span>
   </h2>
 
-  <div id='CompResultsGraph'>
 
-     <div class="row">
+  {% include "glados/SearchResultsParts/CompoundResultsGraphBase.html" %}
 
-      <div class="input-field col s6 m3">
-        <select class="select-xaxis">
-          <option value="full_mwt" selected>full_mwt</option>
-          <option value="aromatic_rings">aromatic_rings</option>
-          <option value="heavy_atoms">heavy_atoms</option>
-          <option value="num_ro5_violations">num_ro5_violations</option>
-          <option value="max_phase">max_phase</option>
-        </select>
-        <label>X axis:</label>
-      </div>
 
-       <div class="input-field col s6 m3">
-        <select class="select-yaxis">
-          <option value="full_mwt" >full_mwt</option>
-          <option value="aromatic_rings" selected>aromatic_rings</option>
-          <option value="heavy_atoms">heavy_atoms</option>
-          <option value="num_ro5_violations">num_ro5_violations</option>
-          <option value="max_phase">max_phase</option>
-        </select>
-        <label>Y axis:</label>
-      </div>
-
-       <div class="input-field col s6 m3">
-        <select class="select-colour">
-          <option value="full_mwt">full_mwt</option>
-          <option value="aromatic_rings">aromatic_rings</option>
-          <option value="heavy_atoms" selected>heavy_atoms</option>
-          <option value="num_ro5_violations">num_ro5_violations</option>
-          <option value="structure_type">structure_type</option>
-          <option value="max_phase">max_phase</option>
-        </select>
-        <label>Colour by:</label>
-      </div>
-
-      <div class="input-field col s6 m3">
-        <a class="reset-zoom-btn">reset zoom</a>
-      </div>
-
-    </div>
-
-    <div id="BCK-CompResultsGraphContainer">
-    </div>
-
-  </div>
 </div>
 
 {% endblock %}
 
 {% block custom_js_inline %}
 
-var compResGraphView = SearchResultsApp.initCompResultsGraphView($('#CompResultsGraph'));
+var compResGraphView = SearchResultsApp.initCompResultsGraphView($('.CompResultsGraph'));
 compResGraphView.render();
 
 {% endblock %}

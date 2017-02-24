@@ -3,7 +3,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
-    @$vis_elem = $('#BCK-CompResultsGraphContainer')
+    @$vis_elem = $(@el).find('.BCK-CompResultsGraphContainer')
     updateViewProxy = @setUpResponsiveRender()
 
   render: ->
@@ -130,7 +130,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     gridHeight = (height - padding.bottom - padding.top)
     gridWidth = (width - padding.left - padding.right)
 
-    mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+    mainContainer = d3.select(@$vis_elem.get(0))
       .append('svg')
       .attr('width', width)
       .attr('height', height)
