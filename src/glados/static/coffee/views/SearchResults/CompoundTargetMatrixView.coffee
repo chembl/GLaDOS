@@ -12,18 +12,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
-    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
-    $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
-      message: 'Loading Visualisation...'
+    # only bother if my element is visible
+    if $(@el).is(":visible")
 
-    @clearVisualisation()
-    @paintControls()
-    @paintMatrix()
+      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+      $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
+        message: 'Loading Visualisation...'
 
-    $(@el).find('select').material_select()
-    $(@el).find('.tooltipped').tooltip()
+      @clearVisualisation()
+      @paintControls()
+      @paintMatrix()
 
-    $messagesElement.html ''
+      $(@el).find('select').material_select()
+      $(@el).find('.tooltipped').tooltip()
+
+      $messagesElement.html ''
 
   clearVisualisation: ->
 

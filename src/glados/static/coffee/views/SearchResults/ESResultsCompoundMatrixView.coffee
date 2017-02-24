@@ -23,11 +23,22 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       thisView = @
       $.when.apply($, deferreds).done( () ->
+
+        if !thisView.collection.allResults[0]?
+          # here the data has not been actually received, if this causes more trouble it needs to be investigated.
+          return
+
         #with all items loaded now I can generate the matrix
         thisView.ctm.set('molecule_chembl_ids', (item.molecule_chembl_id for item in thisView.collection.allResults), {silent:true} )
         thisView.ctm.fetch()
 
         setTimeout( (()-> $progressElement.html ''), 200)
       )
+
+
+    wakeUpView: ->
+
+      @ctmView.render()
+
 
 

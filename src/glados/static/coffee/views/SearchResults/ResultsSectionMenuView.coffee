@@ -87,16 +87,18 @@ glados.useNameSpace 'glados.views.SearchResults',
         $viewContainer.append($viewElement)
 
         # Instantiates the results list view for each ES entity and links them with the html component
-        resultsListView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
+        newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
           collection: @collection
           el: $viewElement
 
-        @allViewsPerType[viewType] = resultsListView
+        @allViewsPerType[viewType] = newView
 
       else
 
-        console.log 'view ', viewType, ' exist already!'
+        console.log 'view ', viewType, ' exists already! just need to wake it up'
         $('#' + viewElementID).show()
+        # wake up the view if necessary
+        @allViewsPerType[viewType].wakeUpView()
 
     hideView: (viewType) ->
 

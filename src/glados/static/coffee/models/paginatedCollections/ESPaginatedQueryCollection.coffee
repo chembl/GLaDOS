@@ -251,7 +251,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
     clearAllResults: ->
-      @allResults = undefined 
+      @allResults = undefined
 
     # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
     # but in the future it could be used to optimize the pagination after this has been called.
