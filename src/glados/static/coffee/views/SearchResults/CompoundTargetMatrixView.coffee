@@ -65,6 +65,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintMatrix: ->
 
+    console.log 'PAINT MATRIX!'
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -182,7 +183,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     width = 0.8 * elemWidth
     height = width
 
-    console.log 'Element IS: ', $(@el).attr('id')
+    console.log 'Element IS: ', $(@el)
     console.log 'WIDTH IS: ', width
 
     mainContainer = d3.select('#' + @$vis_elem.attr('id'))

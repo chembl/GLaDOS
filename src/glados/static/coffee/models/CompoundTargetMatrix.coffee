@@ -48,8 +48,10 @@ CompoundTargetMatrix = Backbone.Model.extend
     url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json'
     activities = []
     totalItems = idsList.length
-    chunkSize = 8
+    chunkSize = 100
     totalPages = Math.ceil(totalItems / chunkSize)
+    # temporarily limit the amount of items to get, the retrieval of the information needs more discussion
+    maxItems = 100
 
     thisModel = @
     getAllItemsJson = (page) ->
@@ -85,8 +87,8 @@ CompoundTargetMatrix = Backbone.Model.extend
         percentage = Math.ceil((page / totalPages) * 100)
         console.log 'downloaded: ', percentage, '%'
 
-        # check if I still have more pages to go
-        if page < totalPages
+        # check if I still have more pages to go, temporarily limit the ammount of items to get.
+        if activities.length < maxItems
           getAllItemsJson (page + 1)
         else
           # if not, I have finished!
@@ -94,7 +96,6 @@ CompoundTargetMatrix = Backbone.Model.extend
           console.log activities.length + ' activities.'
           console.log activities
           thisModel.set( thisModel.parse activities )
-          thisModel.trigger('change')
 
       )
 
