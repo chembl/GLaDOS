@@ -5,18 +5,47 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @model.on 'change', @render, @
 
-    @$vis_elem = $('#BCK-CompTargMatrixContainer')
+    @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
 
   render: ->
 
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
+      message: 'Loading Visualisation...'
+
+    @clearVisualisation()
     @paintControls()
     @paintMatrix()
 
     $(@el).find('select').material_select()
     $(@el).find('.tooltipped').tooltip()
+
+    $messagesElement.html ''
+
+  clearVisualisation: ->
+
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
+      message: 'Waiting for results...'
+
+    @clearControls()
+    @clearMatrix()
+
+  clearControls: ->
+
+    $('.select-colouring-container').empty()
+    $('.select-row-sort-container').empty()
+    $('.select-col-sort-container').empty()
+
+    $('.btn-row-sort-direction-container').empty()
+    $('.btn-col-sort-direction-container').empty()
+
+  clearMatrix: ->
+
+    @$vis_elem.empty()
 
   paintControls: ->
 
@@ -59,9 +88,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       custom_class: customClass
       columns: columns
       custom_label: label
-
-
-
 
   paintMatrix: ->
 
@@ -186,7 +212,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'Element IS: ', $(@el)
     console.log 'WIDTH IS: ', width
 
-    mainContainer = d3.select('#' + @$vis_elem.attr('id'))
+    mainContainer = d3.select(@$vis_elem.get(0))
 
     # --------------------------------------
     # Legend initialisation

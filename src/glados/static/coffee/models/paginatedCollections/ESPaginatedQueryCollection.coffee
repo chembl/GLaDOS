@@ -250,6 +250,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
+    clearAllResults: ->
+      @allResults = undefined 
+
     # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
     # but in the future it could be used to optimize the pagination after this has been called.
     # it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
