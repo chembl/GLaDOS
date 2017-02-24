@@ -18,3 +18,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @fillPageSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
+
+    # not necessary to do anything here
+    wakeUpView: ->
