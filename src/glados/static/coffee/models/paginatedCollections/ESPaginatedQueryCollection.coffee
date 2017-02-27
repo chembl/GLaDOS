@@ -171,6 +171,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     resetPageSize: (newPageSize) ->
       @setMeta('page_size', parseInt(newPageSize))
+      @setPage(1)
 
 
     # Meta data values are:

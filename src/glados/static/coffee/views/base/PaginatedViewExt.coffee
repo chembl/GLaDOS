@@ -220,6 +220,9 @@ PaginatedViewExt =
     @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
     selector = $(event.currentTarget)
     new_page_size = selector.val()
+    # this is an issue with materialise, it fires 2 times the event, one of which has an empty value
+    if new_page_size == ''
+      return
     @collection.resetPageSize(new_page_size)
 
   #--------------------------------------------------------------------------------------

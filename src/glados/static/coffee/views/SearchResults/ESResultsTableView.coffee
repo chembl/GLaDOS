@@ -11,7 +11,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     render: ->
 
-      console.log 'RENDER!'
       @clearContentContainer()
       @fillTemplates()
       @fillPaginators()
