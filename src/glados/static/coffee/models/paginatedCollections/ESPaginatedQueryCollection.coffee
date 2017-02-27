@@ -21,6 +21,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
+      if @meta.facets_requested and not _.isUndefined(data.aggregations)
+        for facet_key_i, facet_i of @meta.facets
+          facet_i.faceting_handler.parseESResults(data.aggregations)
+
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -144,7 +148,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           ]
       if singular_terms.length > 0
         es_query.query.bool.must.bool.should.push(by_term_query)
+      facets_query = @getFacetsAggsQuery()
+      @meta.facets_requested = false
+      if facets_query
+        es_query.aggs = facets_query
+        @meta.facets_requested = true
       return es_query
+
+    getFacetsAggsQuery: ()->
+      console.log @meta.facets
+      if @meta.facets
+        aggs_query = {}
+        for facet_key_i, facet_i of @meta.facets
+          facet_i.faceting_handler.addQueryAggs(aggs_query)
+        return aggs_query
+
 
     # builds the url to do the request
     getURL: ->
