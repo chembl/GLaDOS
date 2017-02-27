@@ -17,6 +17,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @fillPageSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
+      @initialiseColumnsModal()
 
     # not necessary to do anything here
     wakeUpView: ->

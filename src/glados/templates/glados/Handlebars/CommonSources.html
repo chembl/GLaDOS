@@ -308,6 +308,30 @@
 
 </script>
 
+<script id="Handlebars-Common-ShowHideColumnsDropdown" type="text/x-handlebars-template">
+
+  <!-- Dropdown Trigger -->
+    <a class='dropdown-button btn-chembl grey lighten-3 black-text' href="#{{modal_id}}">Show/Hide Columns</a>
+
+    <!-- Modal Structure -->
+    <div id="{{modal_id}}" class="modal bottom-sheet">
+      <div class="modal-content left-align">
+
+        {{#each columns}}
+        <span>
+          <input type="checkbox" class="filled-in" id="check-{{this.comparator}}" checked="checked" />
+          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+        </span>
+        {{/each}}
+
+
+      </div>
+
+    </div>
+
+</script>
+
+
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
   <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
 </script>

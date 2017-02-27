@@ -265,6 +265,19 @@ PaginatedViewExt =
     @showPaginatedViewPreloader()
 
     @collection.setSearch(term, column, type)
+
+  #--------------------------------------------------------------------------------------
+  # Add Remove Columns
+  #--------------------------------------------------------------------------------------
+  initialiseColumnsModal: ->
+
+    $dropdownContainer = $(@el).find('.BCK-show-hide-columns-container')
+    $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
+      modal_id: $(@el).attr('id') + '-select-columns-modal'
+      columns: @collection.getMeta('columns')
+
+    $(@el).find('.modal').modal()
+
   #--------------------------------------------------------------------------------------
   # Sort
   #--------------------------------------------------------------------------------------
