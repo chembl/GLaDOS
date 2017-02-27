@@ -22,6 +22,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             columns: esIndexSettings.COLUMNS
+            additional_columns: esIndexSettings.ADDITIONAL_COLUMNS
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             id_name: esIndexSettings.ID_NAME
             available_views: esIndexSettings.AVAILABLE_VIEWS

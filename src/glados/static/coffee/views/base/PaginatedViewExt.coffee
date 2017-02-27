@@ -275,7 +275,9 @@ PaginatedViewExt =
     $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
       modal_id: $(@el).attr('id') + '-select-columns-modal'
       columns: @collection.getMeta('columns')
+      additional_columns: @collection.getMeta('additional_columns')
 
+    console.log 'ADDITIONAL COLUMNS:', @collection.getMeta('additional_columns')
     $(@el).find('.modal').modal()
 
   #--------------------------------------------------------------------------------------

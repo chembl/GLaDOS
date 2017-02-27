@@ -122,6 +122,20 @@ Compound.COLUMNS = {
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>{{val}}</b>'
     }
+  STRUCTURE_TYPE:{
+    'name_to_show': 'Structure Type'
+    'comparator': 'structure_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  INORGANIC_FLAG:{
+    'name_to_show': 'Inorganic Flag'
+    'comparator': 'inorganic_flag'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 
 Compound.COLUMNS_SETTINGS = {
@@ -131,6 +145,10 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.PREF_NAME,
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.DOSED_INGREDIENT,
+  ]
+  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
+    Compound.COLUMNS.STRUCTURE_TYPE,
+    Compound.COLUMNS.INORGANIC_FLAG,
   ]
   RESULTS_LIST_SIMILARITY:[
     Compound.COLUMNS.CHEMBL_ID,

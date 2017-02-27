@@ -323,6 +323,12 @@
           <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
         </span>
         {{/each}}
+        {{#each additional_columns}}
+        <span>
+          <input type="checkbox" class="filled-in" id="check-{{this.comparator}}" />
+          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+        </span>
+        {{/each}}
 
 
       </div>

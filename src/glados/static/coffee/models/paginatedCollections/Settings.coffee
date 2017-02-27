@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Matrix'],
