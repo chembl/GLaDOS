@@ -15,7 +15,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         initialize: ->
           @meta =
             index: esIndexSettings.PATH
-            page_size: glados.Settings.CARD_PAGE_SIZES[0]
+            page_size: glados.Settings.CARD_PAGE_SIZES[2]
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []

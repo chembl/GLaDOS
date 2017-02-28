@@ -136,6 +136,84 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  ACD_LOGD:{
+    'name_to_show': 'ACD Logd'
+    'comparator': 'molecule_properties.acd_logd'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  ACD_LOGP:{
+    'name_to_show': 'ACD Logp'
+    'comparator': 'molecule_properties.acd_logp'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  AROMATIC_RINGS:{
+    'name_to_show': 'Aromatic Rings'
+    'comparator': 'molecule_properties.aromatic_rings'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  FULL_MOLFORMULA:{
+    'name_to_show': 'Full molformula'
+    'comparator': 'molecule_properties.full_molformula'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  FULL_MWT:{
+    'name_to_show': 'Molecular Weight'
+    'comparator': 'molecule_properties.full_mwt'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  HBA:{
+    'name_to_show': 'HBA'
+    'comparator': 'molecule_properties.hba'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  HBA_LIPINSKI:{
+    'name_to_show': 'HBA Lipinski'
+    'comparator': 'molecule_properties.hba_lipinski'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  HBD:{
+    'name_to_show': 'HBD'
+    'comparator': 'molecule_properties.hbd'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  HBD_LIPINSKI:{
+    'name_to_show': 'HBD Lipinski'
+    'comparator': 'molecule_properties.hbd_lipinski'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  HEAVY_ATOMS:{
+    'name_to_show': 'Heavy Atoms'
+    'comparator': 'molecule_properties.heavy_atoms'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  MOLECULAR_SPECIES:{
+    'name_to_show': 'Molecular Species'
+    'comparator': 'molecule_properties.molecular_species'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+
 }
 
 Compound.COLUMNS_SETTINGS = {
@@ -149,6 +227,17 @@ Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.STRUCTURE_TYPE,
     Compound.COLUMNS.INORGANIC_FLAG,
+    Compound.COLUMNS.ACD_LOGD,
+    Compound.COLUMNS.ACD_LOGP,
+    Compound.COLUMNS.AROMATIC_RINGS,
+    Compound.COLUMNS.FULL_MOLFORMULA,
+    Compound.COLUMNS.FULL_MWT,
+    Compound.COLUMNS.HBA,
+    Compound.COLUMNS.HBA_LIPINSKI,
+    Compound.COLUMNS.HBD,
+    Compound.COLUMNS.HBD_LIPINSKI,
+    Compound.COLUMNS.MOLECULAR_SPECIES,
+
   ]
   RESULTS_LIST_SIMILARITY:[
     Compound.COLUMNS.CHEMBL_ID,

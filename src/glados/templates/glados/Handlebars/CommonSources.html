@@ -317,20 +317,24 @@
     <div id="{{modal_id}}" class="modal bottom-sheet">
       <div class="modal-content left-align">
 
-        {{#each columns}}
-        <span>
-          <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                 data-comparator='{{this.comparator}}' checked="checked" />
-          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
-        </span>
-        {{/each}}
-        {{#each additional_columns}}
-        <span>
-          <input type="checkbox" class="BCK-show-hide-column filled-in"
-                 data-comparator='{{this.comparator}}' id="check-{{this.comparator}}" />
-          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
-        </span>
-        {{/each}}
+        <div class="row">
+          {{#each columns}}
+          <div class="col s6 m3 l2">
+
+            <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                   data-comparator='{{this.comparator}}' checked="checked" />
+            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+
+          </div>
+          {{/each}}
+          {{#each additional_columns}}
+          <div class="col s6 m3 l2">
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='{{this.comparator}}' id="check-{{this.comparator}}" />
+            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+          </div>
+          {{/each}}
+        </div>
 
 
       </div>

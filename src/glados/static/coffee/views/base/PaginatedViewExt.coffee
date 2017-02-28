@@ -54,16 +54,27 @@ PaginatedViewExt =
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
 
-      console.log 'VISIBLE COLUMNS!'
-      console.log visibleColumns
-
     for item in @collection.getCurrentPage()
 
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
       columnsWithValues = visibleColumns.map (col) ->
-        col_value = item.get(col.comparator)
+
+
+        # this is to support using dots for nested properties in the list settings
+        getNestedValue = (nestedObj, nestedComparatorsList) ->
+
+          if nestedComparatorsList.length == 1
+            return nestedObj[(nestedComparatorsList.shift())]
+          else
+            prop = nestedComparatorsList.shift()
+            getNestedValue(nestedObj[(prop)], nestedComparatorsList)
+
+
+        nestedComparatorsList = col.comparator.split('.')
+        col_value = getNestedValue(item.attributes, nestedComparatorsList)
+
         if _.isBoolean(col_value)
           col['value'] = if col_value then 'Yes' else 'No'
         else
