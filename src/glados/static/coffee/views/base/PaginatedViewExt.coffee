@@ -80,10 +80,15 @@ PaginatedViewExt =
         else
           col['value'] = col_value
 
+        if _.has(col, 'parse_function')
+
+          col['value'] = col['parse_function'](col_value)
+
         col['has_link'] = _.has(col, 'link_base')
         col['link_url'] = item.get(col['link_base']) unless !col['has_link']
         if _.has(col, 'image_base_url')
           img_url = item.get(col['image_base_url'])
+          col['img_url'] = img_url
         if _.has(col, 'custom_field_template')
           col['custom_html'] = Handlebars.compile(col['custom_field_template'])
             val: col['value']

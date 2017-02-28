@@ -86,6 +86,14 @@ Compound.COLUMNS = {
       'link_base': 'report_card_url'
       'image_base_url': 'image_url'
     }
+  SYNONYMS: {
+      'name_to_show': 'Synonyms'
+      'comparator': 'molecule_synonyms'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'parse_function': (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
+    }
   PREF_NAME: {
       'name_to_show': 'Name'
       'comparator': 'pref_name'
@@ -296,6 +304,7 @@ Compound.COLUMNS = {
 Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
     Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.SYNONYMS,
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP,
