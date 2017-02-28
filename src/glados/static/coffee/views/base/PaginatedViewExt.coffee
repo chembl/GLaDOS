@@ -11,7 +11,11 @@ PaginatedViewExt =
     'change select.select-search' : 'setSearch'
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
+    'click .BCK-show-hide-column': 'showHideColumn'
 
+
+  clearTemplates: ->
+    $(@el).find('.BCK-items-container').empty()
 
   # fills a template with the contents of the collection's current page
   # it handle the case when the items are shown as list, table, or infinite browser
@@ -33,23 +37,32 @@ PaginatedViewExt =
 
     $item_template = $('#' + $specificElem.attr('data-hb-template'))
     $append_to = $specificElem
+
+    defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
+    additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
+    visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
+
+
     # if it is a table, add the corresponding header
     if $specificElem.is('table')
 
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
-        columns: @collection.getMeta('columns')
+        columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
-    for item in @collection.getCurrentPage()
 
+      console.log 'VISIBLE COLUMNS!'
+      console.log visibleColumns
+
+    for item in @collection.getCurrentPage()
 
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
-      columnsWithValues = @collection.getMeta('columns').map (col) ->
+      columnsWithValues = visibleColumns.map (col) ->
         col_value = item.get(col.comparator)
         if _.isBoolean(col_value)
           col['value'] = if col_value then 'Yes' else 'No'
@@ -66,7 +79,7 @@ PaginatedViewExt =
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url
-        columns: @collection.getMeta('columns')
+        columns: visibleColumns
 
       $append_to.append($(new_item_cont))
 
@@ -277,8 +290,20 @@ PaginatedViewExt =
       columns: @collection.getMeta('columns')
       additional_columns: @collection.getMeta('additional_columns')
 
-    console.log 'ADDITIONAL COLUMNS:', @collection.getMeta('additional_columns')
     $(@el).find('.modal').modal()
+
+  showHideColumn: (event) ->
+
+
+    $checkbox = $(event.currentTarget)
+    colComparator = $checkbox.attr('data-comparator')
+    isChecked = $checkbox.is(':checked')
+
+    allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+    changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
+    changedColumn.show = isChecked
+    @clearTemplates()
+    @fillTemplates()
 
   #--------------------------------------------------------------------------------------
   # Sort
