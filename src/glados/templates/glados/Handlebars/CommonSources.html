@@ -61,11 +61,30 @@
     <tr>
 
       {{#each columns}}
-        <th>{{this.name_to_show}}
+        <th>
+
+           <table>
+            <thead>
+             <tr>
+               <th>
+
+          {{this.name_to_show}}
+               </th>
+               <th>
           {{#unless this.sort_disabled}}
-          <i class="fa {{sort_class}} sort"
+
+          <i class="fa {{sort_class}} sort grey-text"
              aria-hidden="true" data-comparator="{{this.comparator}}"></i>
-          {{/unless}} </th>
+
+          {{/unless}}
+
+                 </th>
+               <tr>
+              <thead>
+            </table>
+
+
+          </th>
       {{/each}}
 
     </tr>
@@ -338,6 +357,9 @@
           {{/each}}
         </div>
 
+        <div class="row">
+          You may need to scroll the table horizontally to see all columns. 
+        </div>
 
       </div>
 

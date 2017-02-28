@@ -101,6 +101,7 @@ glados.useNameSpace 'glados',
       'Table': 'fa-table'
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
+    DEFAULT_NULL_VALUE_LABEL: '---'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

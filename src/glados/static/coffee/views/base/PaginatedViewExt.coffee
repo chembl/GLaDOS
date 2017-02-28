@@ -69,7 +69,11 @@ PaginatedViewExt =
             return nestedObj[(nestedComparatorsList.shift())]
           else
             prop = nestedComparatorsList.shift()
-            getNestedValue(nestedObj[(prop)], nestedComparatorsList)
+            newObj = nestedObj[(prop)]
+            if !newObj?
+              return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+
+            return getNestedValue(newObj, nestedComparatorsList)
 
 
         nestedComparatorsList = col.comparator.split('.')
