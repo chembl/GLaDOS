@@ -1205,11 +1205,25 @@ div#CNC-zoom-modal {
 }
 
 .cards-container {
-  display: flex;
-  flex-flow: row wrap;
-  &:after {
-    content: "";
-    flex: auto;
+
+  @media #{$small-and-down}{
+      .col:nth-child(n+1) {
+          clear: left;
+      }
+  }
+  @media #{$medium-only}{
+      .col:nth-child(2n+1) {
+          clear: left;
+      }
+  }
+  @media #{$large-and-up} {
+      .col:nth-child(3n+1) {
+          clear: left;
+      }
+  }
+  .col{
+    .card{
+    }
   }
 }
 
