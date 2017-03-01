@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
       'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
       'Graph': glados.views.SearchResults.ESResultsGraphView
-      'Table': glados.views.SearchResults.ESResultsListView
+      'Table': glados.views.SearchResults.ESResultsTableView
       'Cards': glados.views.SearchResults.ESResultsListView
       'Infinite': glados.views.SearchResults.ESResultsListView
 
