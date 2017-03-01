@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
@@ -26,6 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_target'
         MODEL: Target
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -39,6 +41,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_assay'
         MODEL: Assay
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -52,6 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_document'
         MODEL: Document
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -65,6 +69,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_cell_line'
         MODEL: CellLine
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -78,6 +83,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -92,24 +98,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ADDITIONAL_COLUMNS:[]
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+        ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        ADDITIONAL_COLUMNS:[]
         IS_CAROUSEL: true
       DOCS_BY_TERM_LIST:
         MODEL: Document
@@ -157,6 +167,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           }
         ]
+        ADDITIONAL_COLUMNS:[]
     CLIENT_SIDE_WS_COLLECTIONS:
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
@@ -200,6 +211,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'is_sorting': 0
           }
         ]
+        ADDITIONAL_COLUMNS:[]
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
@@ -236,6 +248,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'sort_class': 'fa-sort'
           }
         ]
+        ADDITIONAL_COLUMNS:[]
 
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
@@ -265,6 +278,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'link_base': 'accession_url'
           }
         ]
+        ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES

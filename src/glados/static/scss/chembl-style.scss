@@ -1143,10 +1143,19 @@ div#CNC-zoom-modal {
   display: inline;
   margin-top: 2px;
 }
+.compact-table{
+  display: block;
+  overflow-x: auto;
+}
 
 .compact-table td {
   font-size: 80%;
   padding: 5px;
+
+}
+
+.compact-table th {
+  font-size: 85%;
 }
 
 .ebi-links {
@@ -1159,11 +1168,6 @@ div#CNC-zoom-modal {
   a:hover {
 
     color: color("teal", "accent-4")
-  }
-
-  a:visited {
-
-    color: color("grey", "base")
   }
 
 }

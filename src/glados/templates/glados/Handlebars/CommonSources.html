@@ -35,15 +35,17 @@
 
       {{#each columns}}
 
-        {{#if this.has_link}}
-
-          <td> <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </td>
-
-        {{else}}
-          <td>{{this.value}}
-          </td>
+        <td class="{{#if this.img_url}}center-align{{/if}}">
+        {{#if this.img_url}}
+          <img src="{{this.img_url}}" height="75px" width="75px" ><br>
         {{/if}}
+        {{#if this.has_link}}
+          <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+        {{else}}
+          {{this.value}}
+        {{/if}}
+
+        </td>
       {{/each}}
 
     </tr>
@@ -59,11 +61,30 @@
     <tr>
 
       {{#each columns}}
-        <th>{{this.name_to_show}}
+        <th>
+
+           <table>
+            <thead>
+             <tr>
+               <th>
+
+          {{this.name_to_show}}
+               </th>
+               <th>
           {{#unless this.sort_disabled}}
-          <i class="fa {{sort_class}} sort"
+
+          <i class="fa {{sort_class}} sort grey-text"
              aria-hidden="true" data-comparator="{{this.comparator}}"></i>
-          {{/unless}} </th>
+
+          {{/unless}}
+
+                 </th>
+               <tr>
+              <thead>
+            </table>
+
+
+          </th>
       {{/each}}
 
     </tr>
@@ -305,6 +326,45 @@
     </div>
 
 </script>
+
+<script id="Handlebars-Common-ShowHideColumnsDropdown" type="text/x-handlebars-template">
+
+  <!-- Dropdown Trigger -->
+    <a class='dropdown-button btn-chembl grey lighten-3 black-text' href="#{{modal_id}}">Show/Hide Columns</a>
+
+    <!-- Modal Structure -->
+    <div id="{{modal_id}}" class="modal bottom-sheet">
+      <div class="modal-content left-align">
+
+        <div class="row">
+          {{#each columns}}
+          <div class="col s6 m3 l2">
+
+            <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                   data-comparator='{{this.comparator}}' checked="checked" />
+            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+
+          </div>
+          {{/each}}
+          {{#each additional_columns}}
+          <div class="col s6 m3 l2">
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='{{this.comparator}}' id="check-{{this.comparator}}" />
+            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+          </div>
+          {{/each}}
+        </div>
+
+        <div class="row">
+          You may need to scroll the table horizontally to see all columns.
+        </div>
+
+      </div>
+
+    </div>
+
+</script>
+
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
   <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
