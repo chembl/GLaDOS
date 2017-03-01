@@ -163,6 +163,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           facet_i.faceting_handler.addQueryAggs(aggs_query)
         return aggs_query
 
+    getFacets:()->
+      return @meta.facets
 
     # builds the url to do the request
     getURL: ->
