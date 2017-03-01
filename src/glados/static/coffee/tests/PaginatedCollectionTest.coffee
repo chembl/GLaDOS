@@ -217,7 +217,7 @@ describe "Paginated Collection", ->
 
       expect(esList.getMeta('current_page')).toBe(1)
       expect(esList.getMeta('index')).toBe('/chembl_molecule')
-      expect(esList.getMeta('page_size')).toBe(6)
+      expect(esList.getMeta('page_size')).toBe(24)
 
     it "Sets the request data to get the 5th page", ->
 
@@ -226,7 +226,7 @@ describe "Paginated Collection", ->
 
       requestData = esList.getRequestData()
       expect(requestData['from']).toBe(0)
-      expect(requestData['size']).toBe(6)
+      expect(requestData['size']).toBe(24)
 
     it "Sets the request data to switch to 10 items per page", ->
 
