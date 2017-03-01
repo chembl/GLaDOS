@@ -11,7 +11,11 @@ PaginatedViewExt =
     'change select.select-search' : 'setSearch'
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
+    'click .BCK-show-hide-column': 'showHideColumn'
 
+
+  clearTemplates: ->
+    $(@el).find('.BCK-items-container').empty()
 
   # fills a template with the contents of the collection's current page
   # it handle the case when the items are shown as list, table, or infinite browser
@@ -33,40 +37,69 @@ PaginatedViewExt =
 
     $item_template = $('#' + $specificElem.attr('data-hb-template'))
     $append_to = $specificElem
+
+    defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
+    additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
+    visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
+
+
     # if it is a table, add the corresponding header
     if $specificElem.is('table')
 
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
-        columns: @collection.getMeta('columns')
+        columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
-    for item in @collection.getCurrentPage()
 
+    for item in @collection.getCurrentPage()
 
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
-      columnsWithValues = @collection.getMeta('columns').map (col) ->
-        col_value = item.get(col.comparator)
+      columnsWithValues = visibleColumns.map (col) ->
+
+
+        # this is to support using dots for nested properties in the list settings
+        getNestedValue = (nestedObj, nestedComparatorsList) ->
+
+          if nestedComparatorsList.length == 1
+            return nestedObj[(nestedComparatorsList.shift())]
+          else
+            prop = nestedComparatorsList.shift()
+            newObj = nestedObj[(prop)]
+            if !newObj?
+              return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+
+            return getNestedValue(newObj, nestedComparatorsList)
+
+
+        nestedComparatorsList = col.comparator.split('.')
+        col_value = getNestedValue(item.attributes, nestedComparatorsList)
+
         if _.isBoolean(col_value)
           col['value'] = if col_value then 'Yes' else 'No'
         else
           col['value'] = col_value
 
+        if _.has(col, 'parse_function')
+
+          col['value'] = col['parse_function'](col_value)
+
         col['has_link'] = _.has(col, 'link_base')
         col['link_url'] = item.get(col['link_base']) unless !col['has_link']
         if _.has(col, 'image_base_url')
           img_url = item.get(col['image_base_url'])
+          col['img_url'] = img_url
         if _.has(col, 'custom_field_template')
           col['custom_html'] = Handlebars.compile(col['custom_field_template'])
             val: col['value']
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url
-        columns: @collection.getMeta('columns')
+        columns: visibleColumns
 
       $append_to.append($(new_item_cont))
 
@@ -220,6 +253,9 @@ PaginatedViewExt =
     @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
     selector = $(event.currentTarget)
     new_page_size = selector.val()
+    # this is an issue with materialise, it fires 2 times the event, one of which has an empty value
+    if new_page_size == ''
+      return
     @collection.resetPageSize(new_page_size)
 
   #--------------------------------------------------------------------------------------
@@ -262,6 +298,33 @@ PaginatedViewExt =
     @showPaginatedViewPreloader()
 
     @collection.setSearch(term, column, type)
+
+  #--------------------------------------------------------------------------------------
+  # Add Remove Columns
+  #--------------------------------------------------------------------------------------
+  initialiseColumnsModal: ->
+
+    $dropdownContainer = $(@el).find('.BCK-show-hide-columns-container')
+    $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
+      modal_id: $(@el).attr('id') + '-select-columns-modal'
+      columns: @collection.getMeta('columns')
+      additional_columns: @collection.getMeta('additional_columns')
+
+    $(@el).find('.modal').modal()
+
+  showHideColumn: (event) ->
+
+
+    $checkbox = $(event.currentTarget)
+    colComparator = $checkbox.attr('data-comparator')
+    isChecked = $checkbox.is(':checked')
+
+    allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+    changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
+    changedColumn.show = isChecked
+    @clearTemplates()
+    @fillTemplates()
+
   #--------------------------------------------------------------------------------------
   # Sort
   #--------------------------------------------------------------------------------------

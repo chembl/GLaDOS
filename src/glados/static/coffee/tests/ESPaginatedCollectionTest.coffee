@@ -10,11 +10,11 @@ describe "ElasticSearch Paginated Collection", ->
     it "defines the parameters for the request to get the first page", ->
 
       parameters = collection.getRequestData()
-      expect(parameters.size).toBe(6)
+      expect(parameters.size).toBe(24)
       expect(parameters.from).toBe(0)
 
     it "defines the parameters for the request to get page 5", ->
 
       parameters = collection.getRequestData(5)
-      expect(parameters.size).toBe(6)
-      expect(parameters.from).toBe(24)
+      expect(parameters.size).toBe(24)
+      expect(parameters.from).toBe(96)

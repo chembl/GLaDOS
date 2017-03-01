@@ -95,11 +95,12 @@ class ReportCardTester(unittest.TestCase):
 
   def assert_table(self, table, texts_should_be):
 
-    rows = table.find_elements(By.TAG_NAME, "tr")[1::]
+    rows = table.find_elements(By.CSS_SELECTOR, "tbody tr")[1::]
     for row, text in zip(rows, texts_should_be):
+
       self.assertEqual(row.text, text)
 
   def assert_table_any_order(self, table, texts_should_be):
-    rows = table.find_elements(By.TAG_NAME, "tr")[1::]
+    rows = table.find_elements(By.TAG_NAME, " tbody tr")[1::]
     for row in rows:
       self.assertIn(row.text, texts_should_be)

@@ -1,15 +1,19 @@
 <div class="row">
 
-  <div class="BCK-select-page-size-container col s4" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+  <div class="BCK-select-page-size-container col m4 s12" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
 
     <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
 
   </div>
 
+  <div class="BCK-show-hide-columns-container col m4 offset-m4 s12 right-align" data-hb-template="Handlebars-Common-ShowHideColumnsDropdown">
+    <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+  </div>
+
 </div>
 
 
-<div id='DB-MainContent' class="row">
+<div class="row">
 
   <div class="BCK-PreloaderContainer">
     {% block card_loaders %}
@@ -24,6 +28,12 @@
     <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
 
   </table>
+
+  <ul class="BCK-items-container collection hide-on-med-and-up" data-hb-template="Handlebars-Common-Pagination-LI">
+
+   <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+  </ul>
 
 </div>
 
