@@ -11,7 +11,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Compounds'
         PATH: '/chembl_molecule'
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -26,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Targets'
         PATH:'/chembl_target'
         MODEL: Target
-        COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -40,7 +41,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Assays'
         PATH:'/chembl_assay'
         MODEL: Assay
-        COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -54,7 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Documents'
         PATH:'/chembl_document'
         MODEL: Document
-        COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -68,7 +69,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Cells'
         PATH:'/chembl_cell_line'
         MODEL: CellLine
-        COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -82,7 +83,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Tissues'
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
-        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS: glados.models.Tissue.COLUMNS
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
