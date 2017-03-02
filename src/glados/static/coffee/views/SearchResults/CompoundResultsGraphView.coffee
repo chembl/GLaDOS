@@ -80,7 +80,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     data = [trace1]
 
-    layout = {}
+    layout = {
+      xaxis: {title: currentPropertyX},
+      yaxis: {title: currentPropertyY}
+    }
 
     Plotly.newPlot(@$vis_elem.get(0), data, layout)
 
