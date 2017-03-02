@@ -200,7 +200,9 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     legendWidth = 0.8 * elemWidth
     legendHeight = 50
-    legendContainer = d3.select($(@el).find('.BCK-CompResultsGraphLegendContainer').get(0))
+    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendContainer.empty()
+    legendContainer = d3.select($legendContainer.get(0))
 
     legendSVG = legendContainer.append('svg')
       .attr('width', legendWidth )
