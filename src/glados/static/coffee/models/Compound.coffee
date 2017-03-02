@@ -152,7 +152,7 @@ Compound.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   FULL_MWT_CARD:{
-    'name_to_show': 'MWt:'
+    'name_to_show': 'MWt'
     'comparator': 'molecule_properties.full_mwt'
     'sort_disabled': false
     'is_sorting': 0
@@ -346,6 +346,7 @@ Compound.COLUMNS_SETTINGS = {
 
   ]
   RESULTS_LIST_REPORT_CARD:[
+    Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME,
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.FULL_MWT_CARD,
