@@ -151,6 +151,13 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  FULL_MWT_CARD:{
+    'name_to_show': 'MWt'
+    'comparator': 'molecule_properties.full_mwt'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
   ALOGP:{
     'name_to_show': 'ALogP'
     'comparator': 'molecule_properties.alogp'
@@ -193,6 +200,13 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  RO5_CARD:{
+    'name_to_show': '#RO5'
+    'comparator': 'molecule_properties.num_ro5_violations'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
   ROTATABLE_BONDS:{
     'name_to_show': '#Rotatable Bonds'
     'comparator': 'molecule_properties.rtb'
@@ -200,7 +214,21 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  ROTATABLE_BONDS_CARD:{
+    'name_to_show': '#RTB'
+    'comparator': 'molecule_properties.rtb'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
   RULE_OF_THREE_PASS:{
+    'name_to_show': 'Passes Rule of Three'
+    'comparator': 'molecule_properties.ro3_pass'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  RULE_OF_THREE_PASS_CARD:{
     'name_to_show': 'Passes Rule of Three'
     'comparator': 'molecule_properties.ro3_pass'
     'sort_disabled': false
@@ -302,7 +330,7 @@ Compound.COLUMNS = {
 }
 
 Compound.COLUMNS_SETTINGS = {
-  RESULTS_LIST_REPORT_CARD: [
+  RESULTS_LIST_TABLE: [
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.SYNONYMS,
     Compound.COLUMNS.MAX_PHASE,
@@ -316,6 +344,14 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED,
 
+  ]
+  RESULTS_LIST_REPORT_CARD:[
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.MAX_PHASE,
+    Compound.COLUMNS.FULL_MWT_CARD,
+    Compound.COLUMNS.RO5_CARD,
+    Compound.COLUMNS.ALOGP,
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,

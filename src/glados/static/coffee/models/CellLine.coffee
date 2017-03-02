@@ -12,7 +12,7 @@ CellLine.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'cell_line_report_card/'+chembl_id
 
 CellLine.COLUMNS_SETTINGS = {
-  RESULTS_LIST_REPORT_CARD: [
+  RESULTS_LIST_TABLE: [
     {
       'name_to_show': 'CHEMBL_ID'
       'comparator': 'cell_chembl_id'

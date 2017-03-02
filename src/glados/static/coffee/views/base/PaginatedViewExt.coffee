@@ -38,9 +38,13 @@ PaginatedViewExt =
     $item_template = $('#' + $specificElem.attr('data-hb-template'))
     $append_to = $specificElem
 
-    defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
-    additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-    visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
+    # use special configuration config for cards if available
+    if @isCards and @collection.getMeta('columns_card').length > 0
+      visibleColumns = @collection.getMeta('columns_card')
+    else
+      defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
+      additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
+      visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
 
 
     # if it is a table, add the corresponding header
