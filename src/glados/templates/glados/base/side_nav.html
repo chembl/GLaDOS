@@ -1,11 +1,38 @@
+<!-- this is the template for extra collapsible menus -->
+<script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
+  {% verbatim %}
+  <li class="no-padding">
+    <div class="collapsible-header chembl-teal white-text active">
+      {{title}}
+    </div>
+    <div class="collapsible-body no-padding transparent">
+      {{#if content}}
+        {{content}}
+      {{/if}}
+      {{#if links}}
+      <ul>
+        {{#each links}}
+        <li>
+          <a class="waves-effect waves-teal" href="{{this.href}}">
+            SureChEMBL {{#if this.badge}}<span class="new badge">{{this.badge}}</span>{{/if}}
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
+    </div>
+  </li>
+  {% endverbatim %}
+</script>
+
 <!-- This shows when the screen is large -->
-<ul class="side-nav fixed hide-on-med-and-down teal lighten-5">
+<ul class="collapsible collapsible-accordion side-nav fixed hide-on-med-and-down teal lighten-5">
  {% block links_large %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
 </ul>
 <!-- This shows when the screen is medium or smaller -->
-<ul id="slide-out" class="side-nav teal lighten-5" style="display: none">
+<ul id="slide-out" class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">
    {% block links_small %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}

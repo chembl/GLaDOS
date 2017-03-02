@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+        FACETS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Matrix'],
@@ -27,6 +28,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Target
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -40,6 +42,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Assay
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -53,6 +56,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Document
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -66,6 +70,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: CellLine
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -79,6 +84,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: glados.models.Tissue
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS: {}
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
