@@ -14,7 +14,7 @@ Document.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'document_report_card/'+chembl_id
 
 Document.COLUMNS_SETTINGS = {
-  RESULTS_LIST_REPORT_CARD: [
+  RESULTS_LIST_TABLE: [
     {
       'name_to_show': 'CHEMBL_ID'
       'comparator': 'document_chembl_id'
