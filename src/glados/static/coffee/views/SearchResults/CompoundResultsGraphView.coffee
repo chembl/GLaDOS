@@ -261,7 +261,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         start = domain[0]
         stop = domain[1]
-        numValues = 20
+        numValues = 100
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
         data = d3.range(domain[0], domain[1], step)
@@ -270,7 +270,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
           .data(data)
           .enter().append('rect')
           .attr('height',rectangleHeight)
-          .attr('width', stepWidthInScale + 5)
+          .attr('width', stepWidthInScale + 1)
           .attr('x', (d) -> getXInLegendFor d)
           .attr('y', -rectangleHeight)
           .attr('fill', (d) -> getColourFor d)
