@@ -65,23 +65,7 @@ PaginatedViewExt =
       # give it everything as ready as possible
       columnsWithValues = visibleColumns.map (col) ->
 
-
-        # this is to support using dots for nested properties in the list settings
-        getNestedValue = (nestedObj, nestedComparatorsList) ->
-
-          if nestedComparatorsList.length == 1
-            return nestedObj[(nestedComparatorsList.shift())]
-          else
-            prop = nestedComparatorsList.shift()
-            newObj = nestedObj[(prop)]
-            if !newObj?
-              return glados.Settings.DEFAULT_NULL_VALUE_LABEL
-
-            return getNestedValue(newObj, nestedComparatorsList)
-
-
-        nestedComparatorsList = col.comparator.split('.')
-        col_value = getNestedValue(item.attributes, nestedComparatorsList)
+        col_value = glados.Utils.getNestedValue(item.attributes, col.comparator)
 
         if _.isBoolean(col_value)
           col['value'] = if col_value then 'Yes' else 'No'
