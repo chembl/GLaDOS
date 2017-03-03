@@ -11,7 +11,7 @@
 <script id="Handlebars-ESResults-Chips" type="text/x-handlebars-template">
   <span class="hide-on-med-and-down">Summary:</span>
   {{#each chips}}
-  {{#if this.prepend_br}}<br/>{{/if}}
+    {{#if this.prepend_br}}<br class="hide-on-med-and-up"/>{{/if}}
     <a href="{{this.url_path}}" class="waves-effect waves-light chip chip-rl-summary{{#if this.selected}} selected{{/if}}">
       <span class="badge-primary-color-no-float">{{this.total_records}}</span> {{this.label}}
     </a>

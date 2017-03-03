@@ -87,7 +87,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Tissues'
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
-        COLUMNS: glados.models.Tissue.COLUMNS
+        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
         FACETS: {}
