@@ -198,7 +198,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Legend initialisation
     # --------------------------------------
     elemWidth = $(@el).width()
-    legendWidth = 0.8 * elemWidth
+    legendWidth = 0.4 * elemWidth
     legendHeight = 50
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     $legendContainer.empty()
