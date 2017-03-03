@@ -41,23 +41,35 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     config = {
       properties:
-        'molecule_chembl_id': 'molecule_chembl_id'
-        'full_mwt': 'full_mwt'
-        'aromatic_rings': 'aromatic_rings'
-        'heavy_atoms': 'heavy_atoms'
+        'molecule_chembl_id':
+          prop_name:'molecule_chembl_id'
+          type: 'string'
+          label: 'CHEMBL_ID'
+        'full_mwt':
+          prop_name:'full_mwt'
+          type: 'number'
+          label: 'Molecular Weight'
+        'aromatic_rings':
+          prop_name:'aromatic_rings'
+          type: 'number'
+          label: '#Aromatic rings'
+        'heavy_atoms':
+          prop_name:'heavy_atoms'
+          type: 'number'
+          label: '#Heavy Atoms'
 
-      propertyToType:
-        assay_type: "string"
-        pchembl_value: "number"
-        published_value: "number"
-        heavy_atoms: "number"
+      id_property: 'molecule_chembl_id'
+      labeler_property: 'molecule_chembl_id'
+      initial_property_x: 'full_mwt'
+      initial_property_y: 'aromatic_rings'
+      initial_property_colour: 'heavy_atoms'
     }
 
-    idProperty = config.properties['molecule_chembl_id']
-    labelerProperty = config.properties['molecule_chembl_id']
-    currentPropertyX = config.properties['full_mwt']
-    currentPropertyY = config.properties['aromatic_rings']
-    currentPropertyColour = config.properties['heavy_atoms']
+    idProperty = config.properties[config.id_property].prop_name
+    labelerProperty = config.properties[config.labeler_property].prop_name
+    currentPropertyX = config.properties[config.initial_property_x].prop_name
+    currentPropertyY = config.properties[config.initial_property_y].prop_name
+    currentPropertyColour = config.properties[config.initial_property_colour].prop_name
     thisView = @
 
      # use real values if not being used by test version
@@ -83,15 +95,6 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # scales
     # --------------------------------------
-    # infers type from the first non null/undefined value,
-    # this will be used to generate the correct scale.
-    inferPropsType = (dataList) ->
-
-      for datum in dataList
-        if datum?
-          type =  typeof datum
-          return type
-
     # builds a linear scale to position the circles
     # when the data is numeric, range is 0 to canvas width,
     # taking into account the padding
@@ -145,7 +148,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       dataList = _.pluck(molecules, property)
 
-      type = inferPropsType(dataList)
+      type = config.properties[property].type
       console.log 'type is: ', type
       scale = switch
         when type == 'number' then buildLinearNumericScale(dataList, axis)
@@ -155,12 +158,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getColourFor = getScaleForProperty(molecules, currentPropertyColour, @COLOUR)
 
-    xValues = _.pluck(molecules, currentPropertyX)
-    yValues = _.pluck(molecules, currentPropertyY)
-    labels = _.pluck(molecules, labelerProperty)
-    ids = _.pluck(molecules, idProperty)
-    colours = (getColourFor(mol[currentPropertyColour]) for mol in molecules)
-    console.log 'COLOURS: ', colours
+    xValues = (glados.Utils.getNestedValue(mol, currentPropertyX) for mol in molecules)
+    yValues = (glados.Utils.getNestedValue(mol, currentPropertyY) for mol in molecules)
+    labels = (glados.Utils.getNestedValue(mol, labelerProperty) for mol in molecules)
+    ids = (glados.Utils.getNestedValue(mol, idProperty) for mol in molecules)
+    colours = (getColourFor(glados.Utils.getNestedValue(mol, currentPropertyColour)) for mol in molecules)
 
     trace1 = {
       x: xValues,
@@ -181,8 +183,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     data = [trace1]
 
     layout = {
-      xaxis: {title: currentPropertyX}
-      yaxis: {title: currentPropertyY}
+      xaxis: {title: config.properties[currentPropertyX].label}
+      yaxis: {title: config.properties[currentPropertyY].label}
       hovermode: 'closest'
     }
 
@@ -219,11 +221,11 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       legendG = legendSVG.append('g')
               .attr("transform", "translate(0," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text(currentPropertyColour)
+      legendSVG.append('text').text(config.properties[currentPropertyColour].label)
         .attr("transform", "translate(10, 15)");
 
       rectangleHeight = 50
-      colourDataType = config.propertyToType[currentPropertyColour]
+      colourDataType = config.properties[currentPropertyColour].type
 
       if colourDataType == 'string'
 
