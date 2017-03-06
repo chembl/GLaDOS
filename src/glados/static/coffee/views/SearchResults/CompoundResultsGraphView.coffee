@@ -237,9 +237,10 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       text: labels,
       textposition: 'top center',
       marker: {
+        opacity: 0.8
         size: 12
         color: colours
-        line:{width:0.5, color:'#000000'}
+        line:{width:0.5, color:getColourFor.range()[1]}
       }
     }
 
