@@ -15,9 +15,7 @@ class DocumentReportCardTest(ReportCardTester):
     # --------------------------------------
 
     error_msg_p = self.browser.find_element_by_id('DBasicInformation').find_element_by_class_name('Bck-errormsg')
-    # Phantom JS might not provide the correct fail code 404/400/500/etc
-    self.assertIn(error_msg_p.text,
-                  ['There was an error while loading the data (0 error)', 'No document found with id NOT_EXISTS'])
+    self.assertEquals(error_msg_p.text, 'No document found with id NOT_EXISTS')
 
   def test_assay_report_card_scenario_2(self):
 
