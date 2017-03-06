@@ -1,9 +1,20 @@
 <!-- this is the template for extra collapsible menus -->
 <script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
   {% verbatim %}
-  <li class="no-padding">
-    <div class="collapsible-header chembl-teal white-text active">
-      {{title}}
+  <li class="no-padding{{#if menu_class}} {{menu_class}}{{/if}}">
+    <div class="collapsible-header chembl-teal white-text">
+      <table class="no-padding">
+        <tr class="no-padding">
+          <td class="no-padding">
+            {{title}}
+          </td>
+          {{#if title_badge}}
+            <td class="no-padding">
+              <span class="new badge">{{title_badge}}</span>
+            </td>
+          {{/if}}
+        </tr>
+      </table>
     </div>
     <div class="collapsible-body no-padding transparent">
       {{#if content}}
@@ -14,7 +25,18 @@
         {{#each links}}
         <li>
           <a class="waves-effect waves-teal" href="{{this.href}}">
-            SureChEMBL {{#if this.badge}}<span class="new badge">{{this.badge}}</span>{{/if}}
+            <table class="no-padding">
+              <tr class="no-padding">
+                <td class="no-padding">
+                  {{this.label}}
+                </td>
+                {{#if this.badge}}
+                  <td class="no-padding">
+                    <span class="new badge">{{this.badge}}</span>
+                  </td>
+                {{/if}}
+              </tr>
+            </table>
           </a>
         </li>
         {{/each}}

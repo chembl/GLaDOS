@@ -10,22 +10,22 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @getNewCategoryFacetingHandler = (es_property)->
       return new FacetingHandler(es_property, FacetingHandler.CATEGORY_FACETING)
 
-    constructor:(@property, @faceting_type)->
+    constructor:(@es_property_name, @faceting_type)->
       @faceting_keys_inorder = null
       @faceting_data = null
 
     addQueryAggs:(es_query_aggs)->
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
-        es_query_aggs[@property] = {
+        es_query_aggs[@es_property_name] = {
           terms:
-            field: @property
+            field: @es_property_name
         }
 
     parseESResults: (es_aggregations_data)->
       @faceting_keys_inorder = []
       @faceting_data = {}
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
-        aggregated_data = es_aggregations_data[@property]
+        aggregated_data = es_aggregations_data[@es_property_name]
         if aggregated_data
           if not _.isUndefined(aggregated_data.buckets)
             for bucket_i in aggregated_data.buckets
@@ -35,17 +35,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if not _.isUndefined(aggregated_data.sum_other_doc_count) and aggregated_data.sum_other_doc_count > 0
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
               @faceting_data[FacetingHandler.OTHERS_CATEGORY] = aggregated_data.sum_other_doc_count
-          console.log('FACETS!',@faceting_keys_inorder)
-          console.log('FACETS!',@faceting_data)
 
     getQueryFilterTermsForFacetIndex: (facet_index)->
       filter_terms = []
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
         facet_key = @faceting_keys_inorder[facet_index]
         if facet_key != FacetingHandler.OTHERS_CATEGORY
-          filter_terms.push('+'+@property+':'+facet_key)
+          filter_terms.push('+'+@es_property_name+':'+facet_key)
         else
           for key_i in @faceting_keys_inorder
             if key_i != FacetingHandler.OTHERS_CATEGORY
-              filter_terms.push('-'+@property+':'+key_i)
+              filter_terms.push('-'+@es_property_name+':'+key_i)
       return filter_terms

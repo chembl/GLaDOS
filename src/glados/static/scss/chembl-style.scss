@@ -172,6 +172,9 @@ $sidenav-badge-padding: 3px;
       margin-top: 5px;
     }
   }
+  li{
+    margin-bottom: 1%;
+  }
 
   a{
     height:auto;
@@ -184,6 +187,15 @@ $sidenav-badge-padding: 3px;
       min-height: inherit !important;
       line-height: $sidenav-links-lineheight !important;
       padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
+
+      span.badge {
+        margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
+        border-radius: 2*$sidenav-badge-padding;
+        padding: $sidenav-badge-padding;
+        &.new:after {
+          content: "" !important;
+        }
+      }
     }
     div.collapsible-body {
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
