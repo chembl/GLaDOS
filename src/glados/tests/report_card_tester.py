@@ -23,13 +23,13 @@ class ReportCardTester(unittest.TestCase):
   def instantiateBrowser():
     if ReportCardTester.SINGLETON_BROWSER is None:
       try:
-        ReportCardTester.SINGLETON_BROWSER = webdriver.Firefox()
+        ReportCardTester.SINGLETON_BROWSER = webdriver.PhantomJS()
         ReportCardTester.SINGLETON_BROWSER.set_window_size(1024, 768)
         ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
         ReportCardTester.NUM_BROWSER_CALLS = 0
       except:
-        print("CRITICAL ERROR: It was not possible to start the Firefox Selenium driver due to:", file=sys.stderr)
-        traceback.print_exc();
+        print("CRITICAL ERROR: It was not possible to start the PhantomJS Selenium driver due to:", file=sys.stderr)
+        traceback.print_exc()
         sys.exit(1)
 
   @staticmethod
@@ -71,17 +71,6 @@ class ReportCardTester(unittest.TestCase):
         except:
           traceback.print_exc()
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
-          if time.time() - start_time > timeout/3:
-            print("Travis Firefox might be stalled ...")
-            print("Closing Firefox ...")
-            ReportCardTester.closeBrowser()
-            print("Giving travis some free relaxation time 30 secs ...")
-            time.sleep(30)
-            print("Starting Firefox ...")
-            ReportCardTester.instantiateBrowser()
-            self.browser = ReportCardTester.SINGLETON_BROWSER
-            self.getURL(url, timeout=timeout, wait_for_glados_ready=wait_for_glados_ready, retries=retries-1)
-            return
         time.sleep(1)
       self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 

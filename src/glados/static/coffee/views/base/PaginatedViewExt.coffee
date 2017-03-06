@@ -58,38 +58,51 @@ PaginatedViewExt =
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
 
+
     for item in @collection.getCurrentPage()
 
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
-      columnsWithValues = visibleColumns.map (col) ->
 
-        col_value = glados.Utils.getNestedValue(item.attributes, col.comparator)
+      columnsWithValues = visibleColumns.map (col_desc) ->
+        return_col = {}
+        return_col.name_to_show = col_desc['name_to_show']
+        
+        col_value = glados.Utils.getNestedValue(item.attributes, col_desc.comparator)
 
         if _.isBoolean(col_value)
-          col['value'] = if col_value then 'Yes' else 'No'
+          return_col['value'] = if col_value then 'Yes' else 'No'
         else
-          col['value'] = col_value
+          return_col['value'] = col_value
 
-        if _.has(col, 'parse_function')
+        if _.has(col_desc, 'parse_function')
+          return_col['value'] = col_desc['parse_function'](col_value)
 
-          col['value'] = col['parse_function'](col_value)
+        return_col['has_link'] = _.has(col_desc, 'link_base')
+        return_col['link_url'] = item.get(col_desc['link_base']) unless !return_col['has_link']
+        if _.has(col_desc, 'image_base_url')
+          img_url = item.get(col_desc['image_base_url'])
+          return_col['img_url'] = img_url
+        if _.has(col_desc, 'custom_field_template')
+          return_col['custom_html'] = Handlebars.compile(col_desc['custom_field_template'])
+            val: return_col['value']
 
-        col['has_link'] = _.has(col, 'link_base')
-        col['link_url'] = item.get(col['link_base']) unless !col['has_link']
-        if _.has(col, 'image_base_url')
-          img_url = item.get(col['image_base_url'])
-          col['img_url'] = img_url
-        if _.has(col, 'custom_field_template')
-          col['custom_html'] = Handlebars.compile(col['custom_field_template'])
-            val: col['value']
+        # This method should return a value based on the parameter, not modify the parameter
+        return return_col
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url
-        columns: visibleColumns
+        columns: columnsWithValues
 
       $append_to.append($(new_item_cont))
+
+    # This code completes rows for grids of 2 or 3 columns in the flex box css display
+    total_cards = @collection.getCurrentPage().length
+    while total_cards%6 != 0
+      $append_to.append('<div class="col s12 m6 l4"/>')
+      total_cards++
+
 
 
   fillPaginators: ->

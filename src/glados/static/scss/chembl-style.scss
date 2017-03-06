@@ -1143,10 +1143,17 @@ div#CNC-zoom-modal {
   display: inline;
   margin-top: 2px;
 }
+
+
 .compact-table{
-  display: block;
-  overflow-x: auto;
+  display: table;
+  overflow-x: inherit;
+  &.scrollable{
+    display: block;
+    overflow-x: auto;
+  }
 }
+
 
 .compact-table td {
   font-size: 80%;
@@ -1221,15 +1228,18 @@ div#CNC-zoom-modal {
           clear: left;
       }
   }
+
+  display: flex;
+  flex-flow: row wrap;
   .col{
     .card{
+      height: 91.5% !important;
     }
   }
 }
 
 .card {
   position: relative;
-  height: 90%;
 }
 
 .card-top-border {
@@ -1683,15 +1693,14 @@ span.badge-primary-color-no-float {
   margin-bottom: 1px;
   margin-top: 1px;
   color: $primary-color;
-}
-.chip-rl-summary.selected{
-  background: $primary-color;
-  color: white;
-  span.badge-primary-color-no-float{
-    color: $primary-color;
-    background-color: $chip-bg-color;
+  &.selected{
+    background: $primary-color;
+    color: white;
+    span.badge-primary-color-no-float{
+      color: $primary-color;
+      background-color: $chip-bg-color;
+    }
   }
-
 }
 
 /**

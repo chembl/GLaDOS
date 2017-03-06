@@ -20,8 +20,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @last_screen_type_rendered = null
 
       # Render variables
+      @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
-      @searchResultsViewsDict = null
       @searchResultsMenusViewsDict = null
       @container = null
       @lists_container = null
@@ -132,14 +132,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
         chipStruct[0].total_records += totalRecords
         chipStruct.push({
-          prepend_br: GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
+          prepend_br: true
           total_records: totalRecords
           label:resourceLabel
           url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
           selected: @selected_es_entity == key_i
         })
 
-      $('.summary-chips-container').html Handlebars.compile($('#' + 'Handlebars-ESResults-Chips').html())
+      $('.summary-chips-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
         chips: chipStruct
 
       binded_nav_func = @navigateTo.bind(@)
@@ -167,55 +167,57 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     renderResultsListsViews: () ->
       # Don't instantiate the ResultsLists if it is not necessary
-      @container = $('#BCK-ESResults')
-      @lists_container = $('#BCK-ESResults-lists')
-      listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
-      listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListViewContainer").html())
+      if @atResultsPage and not @resultsListsViewsRendered
+        @container = $('#BCK-ESResults')
+        @lists_container = $('#BCK-ESResults-lists')
+        listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
+        listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListViewContainer").html())
 
-      @searchResultsMenusViewsDict = {}
-      @$searchResultsListsContainersDict = {}
-      # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
-      # Share the same keys to access different objects
-      resultsListsDict = @searchModel.getResultsListsDict()
-      # Clears the container before redrawing
-      @lists_container.html('')
-      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+        @searchResultsMenusViewsDict = {}
+        @$searchResultsListsContainersDict = {}
+        # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
+        # Share the same keys to access different objects
+        resultsListsDict = @searchModel.getResultsListsDict()
+        # Clears the container before redrawing
+        @lists_container.html('')
+        for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
-        if _.has(resultsListsDict, resourceName)
-          resultsListViewID = 'BCK-'+resultsListSettings.ID_NAME
-          es_results_list_title = resultsListSettings.LABEL
+          if _.has(resultsListsDict, resourceName)
+            resultsListViewID = 'BCK-'+resultsListSettings.ID_NAME
+            es_results_list_title = resultsListSettings.LABEL
 
-          $container = $('<div id="' + resultsListViewID + '-container">')
+            $container = $('<div id="' + resultsListViewID + '-container">')
 
-          listTitleContent = listTitleAndMenuTemplate
-            es_results_list_id: resultsListViewID
-            es_results_list_title: es_results_list_title
+            listTitleContent = listTitleAndMenuTemplate
+              es_results_list_id: resultsListViewID
+              es_results_list_title: es_results_list_title
 
-          listViewContent = listViewTemplate
-            es_results_list_id: resultsListViewID
-            es_results_list_title: es_results_list_title
+            listViewContent = listViewTemplate
+              es_results_list_id: resultsListViewID
+              es_results_list_title: es_results_list_title
 
-          $container.append(listTitleContent)
-          $container.append(listViewContent)
-          @lists_container.append($container)
+            $container.append(listTitleContent)
+            $container.append(listViewContent)
+            @lists_container.append($container)
 
-          # Initialises a Menu view which will be in charge of handling the menu bar,
-          # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
-          resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuView
-            collection: resultsListsDict[resourceName]
-            el: '#' + resultsListViewID + '-menu'
+            # Initialises a Menu view which will be in charge of handling the menu bar,
+            # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
+            resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuView
+              collection: resultsListsDict[resourceName]
+              el: '#' + resultsListViewID + '-menu'
 
-          resultsMenuViewI.render()
+            resultsMenuViewI.render()
 
-          @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-          @$searchResultsListsContainersDict[resourceName] = $container
+            @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
+            @$searchResultsListsContainersDict[resourceName] = $container
 
-          # event register for score update and update chips
-          resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
-          resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
-      @container.show()
-      @updateChips()
-      @showSelectedResourceOnly()
+            # event register for score update and update chips
+            resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
+            resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
+        @container.show()
+        @updateChips()
+        @showSelectedResourceOnly()
+        @resultsListsViewsRendered = true
 
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
@@ -288,8 +290,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         else
           @fillTemplate(@med_andup_bar_id)
         # Rendders the results lists and the chips
-        if @atResultsPage
-          @renderResultsListsViews()
+        @renderResultsListsViews()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->
