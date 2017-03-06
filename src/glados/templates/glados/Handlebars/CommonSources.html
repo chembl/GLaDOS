@@ -391,4 +391,13 @@
 </script>
 
 
+
+  <script id="Handlebars-Common-ESResultsPlot-axesOptions" type="text/x-handlebars-template">
+    <span class="hide-on-med-and-down">Summary:</span>
+    {{#each options}}
+    <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+    {{/each}}
+  </script>
+
+
 {% endverbatim %}
