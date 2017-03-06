@@ -71,6 +71,10 @@ glados.useNameSpace 'glados',
     VISUALISATION_GREY_BASE: '#9e9e9e' #grey
     VISUALISATION_CARD_GREY: '#fafafa' #fafafa grey lighten-5
     VISUALISATION_GREEN_MIN: '#e8f5e9' #e8f5e9 green lighten-5
+    VISUALISATION_BLUE_MIN: '#e3f2fd' # blue lighten-5
+    VISUALISATION_BLUE_MAX: '#0d47a1' # blue darken-4
+    VISUALISATION_LIGHT_BLUE_MIN: '#e1f5fe' # light-blue lighten-5
+    VISUALISATION_LIGHT_BLUE_MAX: '#01579b' # light-blue darken-4
     # for a responsive visualisation, the time that it waits for the container size
     RESPONSIVE_REPAINT_WAIT: 400
     # by default the debug is deactivated
