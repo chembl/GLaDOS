@@ -74,6 +74,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentPropertyY = @config.properties[@config.initial_property_y]
     @currentPropertyColour = @config.properties[@config.initial_property_colour]
 
+    @paintSelectors()
 
   render: ->
 
@@ -85,7 +86,6 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
 
-      @paintSelectors()
       @clearVisualisation()
       @paintGraph()
       $(@el).find('select').material_select()
@@ -95,6 +95,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
   paintSelectors: ->
 
     $xAxisSelector = $(@el).find('.BCK-ESResultsPlot-selectXAxis')
+
     $xAxisSelector.html Handlebars.compile($('#' + $xAxisSelector.attr('data-hb-template')).html())
       options: ($.extend(@config.properties[opt], {id:opt, selected: opt == @config.initial_property_x}) for opt in @config.x_axis_options)
 
@@ -167,18 +168,23 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       minVal = Number.MAX_VALUE
       maxVal = Number.MIN_VALUE
 
+      i = 0
       for datum in dataList
+
+        datum = parseFloat(datum)
+
+        if datum == glados.Settings.DEFAULT_NULL_VALUE_LABEL or !datum?
+          continue
+
         if datum > maxVal
           maxVal = datum
         if datum < minVal
           minVal = datum
 
+
       scaleDomain = [minVal, maxVal]
 
-      range = switch
-        when axis == thisView.XAXIS then [padding.left, width - padding.right]
-        when axis == thisView.YAXIS then [height - padding.bottom, padding.top]
-        when axis == thisView.COLOUR then [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
+      range = [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
 
       scale = d3.scale.linear()
         .domain(scaleDomain)
@@ -322,6 +328,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         getXInLegendFor = d3.scale.linear()
           .domain(domain)
           .range([linearScalePadding, (legendWidth - linearScalePadding)])
+
+        getXInLegendFor.ticks(3)
 
         legendAxis = d3.svg.axis()
           .scale(getXInLegendFor)
