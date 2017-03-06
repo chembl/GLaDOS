@@ -64,26 +64,12 @@ PaginatedViewExt =
       img_url = ''
       # handlebars only allow very simple logic, we have to help the template here and
       # give it everything as ready as possible
+
       columnsWithValues = visibleColumns.map (col_desc) ->
         return_col = {}
         return_col.name_to_show = col_desc['name_to_show']
-
-        # this is to support using dots for nested properties in the list settings
-        getNestedValue = (nestedObj, nestedComparatorsList) ->
-
-          if nestedComparatorsList.length == 1
-            return nestedObj[(nestedComparatorsList.shift())]
-          else
-            prop = nestedComparatorsList.shift()
-            newObj = nestedObj[(prop)]
-            if !newObj?
-              return glados.Settings.DEFAULT_NULL_VALUE_LABEL
-
-            return getNestedValue(newObj, nestedComparatorsList)
-
-
-        nestedComparatorsList = col_desc.comparator.split('.')
-        col_value = getNestedValue(item.attributes, nestedComparatorsList)
+        
+        col_value = glados.Utils.getNestedValue(item.attributes, col_desc.comparator)
 
         if _.isBoolean(col_value)
           return_col['value'] = if col_value then 'Yes' else 'No'

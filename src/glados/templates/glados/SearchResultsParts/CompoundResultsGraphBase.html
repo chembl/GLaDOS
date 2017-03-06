@@ -5,45 +5,28 @@
 
    <div class="row">
 
-    <div class="input-field col s6 m4">
-      <select class="select-xaxis">
-        <option value="full_mwt" selected>full_mwt</option>
-        <option value="aromatic_rings">aromatic_rings</option>
-        <option value="heavy_atoms">heavy_atoms</option>
-        <option value="num_ro5_violations">num_ro5_violations</option>
-        <option value="max_phase">max_phase</option>
+    <div class="input-field col s6 m4" >
+      <select class="select-xaxis BCK-ESResultsPlot-selectXAxis" data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions">
       </select>
       <label>X axis:</label>
     </div>
 
      <div class="input-field col s6 m4">
-      <select class="select-yaxis">
-        <option value="full_mwt" >full_mwt</option>
-        <option value="aromatic_rings" selected>aromatic_rings</option>
-        <option value="heavy_atoms">heavy_atoms</option>
-        <option value="num_ro5_violations">num_ro5_violations</option>
-        <option value="max_phase">max_phase</option>
+      <select class="select-yaxis BCK-ESResultsPlot-selectYAxis" data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions">
       </select>
       <label>Y axis:</label>
     </div>
 
      <div class="input-field col s6 m4">
-      <select class="select-colour">
-        <option value="full_mwt">full_mwt</option>
-        <option value="aromatic_rings">aromatic_rings</option>
-        <option value="heavy_atoms" selected>heavy_atoms</option>
-        <option value="num_ro5_violations">num_ro5_violations</option>
-        <option value="structure_type">structure_type</option>
-        <option value="max_phase">max_phase</option>
+      <select class="select-colour BCK-ESResultsPlot-selectColour" data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions">
       </select>
       <label>Colour by:</label>
     </div>
 
   </div>
-
-  <div class="row BCK-CompResultsGraphLegendContainer">
-  </div>
   <div class="BCK-CompResultsGraphContainer">
+  </div>
+  <div class="row BCK-CompResultsGraphLegendContainer center-align">
   </div>
 
 </div>
