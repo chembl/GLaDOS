@@ -264,14 +264,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Legend initialisation
     # --------------------------------------
     elemWidth = $(@el).width()
+    horizontalPadding = 10
     legendWidth = 0.4 * elemWidth
-    legendHeight = 50
+    legendHeight = 100
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     $legendContainer.empty()
     legendContainer = d3.select($legendContainer.get(0))
 
     legendSVG = legendContainer.append('svg')
-      .attr('width', legendWidth )
+      .attr('width', legendWidth + 2 * horizontalPadding )
       .attr('height', legendHeight )
 
     # --------------------------------------
@@ -284,11 +285,12 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendSVG.selectAll('text').remove()
 
       legendG = legendSVG.append('g')
-              .attr("transform", "translate(0," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text(thisView.currentPropertyColour.label)
-        .attr("transform", "translate(10, 15)");
+              .attr("transform", "translate(" + horizontalPadding + "," + (legendHeight - 30) + ")")
 
-      rectangleHeight = 50
+      legendSVG.append('text').text(thisView.currentPropertyColour.label)
+        .attr("transform", "translate(10, 35)");
+
+      rectangleHeight = 20
       colourDataType = thisView.currentPropertyColour.type
 
       if colourDataType == 'string'
@@ -327,7 +329,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         start = domain[0]
         stop = domain[1]
-        numValues = 100
+        numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
         data = d3.range(domain[0], domain[1], step)
@@ -344,3 +346,5 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         legendG.call(legendAxis)
 
     fillLegendDetails()
+    #customize legend styles
+    $legendContainer.find('line, path').css('fill', 'none')
