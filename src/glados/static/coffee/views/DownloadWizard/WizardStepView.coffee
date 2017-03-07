@@ -32,6 +32,7 @@ WizardStepView = Backbone.View.extend
         description: option.description
         link: option.link
         icon: option.icon
+        data_icon: option.data_icon
         type: option.type
         image: option.image
         is_default: option.is_default

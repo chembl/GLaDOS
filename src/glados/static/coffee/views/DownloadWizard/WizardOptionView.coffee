@@ -13,6 +13,7 @@ WizardOptionView = Backbone.View.extend
       title: @model.get('title')
       link: @model.get('link')
       icon: @model.get('icon')
+      data_icon: @model.get('data_icon')
       image: @model.get('image')
       description: @model.get('description')
       db_menu_option_default: 'db-menu-option-default' unless @model.get('is_default') == 'no'
@@ -21,3 +22,4 @@ WizardOptionView = Backbone.View.extend
     'icon': '#Handlebars-DownloadWizard-option-icon'
     'image': '#Handlebars-DownloadWizard-option-image'
     'text': '#Handlebars-DownloadWizard-option-text'
+    'ebi-icon': '#Handlebars-DownloadWizard-option-ebi-icon'
