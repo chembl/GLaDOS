@@ -1836,6 +1836,12 @@ span.badge-primary-color-no-float {
     .step-content {
       height: 100%;
       position: relative;
+
+      .db-menu-option{
+        .icon-chembl{
+          font-size: 220%;
+        }
+      }
     }
   }
 
