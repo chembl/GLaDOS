@@ -16,7 +16,7 @@
         </tr>
       </table>
     </div>
-    <div class="collapsible-body no-padding transparent">
+    <div class="collapsible-body{{#if menu_class}} {{menu_class}}{{/if}} no-padding transparent">
       {{#if content}}
         {{content}}
       {{/if}}
@@ -27,7 +27,7 @@
           <a class="waves-effect waves-teal" href="{{this.href}}">
             <table class="no-padding">
               <tr class="no-padding">
-                <td class="no-padding">
+                <td class="no-padding" style="max-width: 117px; word-wrap: break-word;">
                   {{this.label}}
                 </td>
                 {{#if this.badge}}
@@ -48,14 +48,14 @@
 </script>
 
 <!-- This shows when the screen is large -->
-<ul class="collapsible collapsible-accordion side-nav fixed hide-on-med-and-down teal lighten-5">
- {% block links_large %}
+<ul id="slide-out" class="collapsible collapsible-accordion side-nav fixed teal lighten-5">
+ {% block menu_links %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
 </ul>
 <!-- This shows when the screen is medium or smaller -->
-<ul id="slide-out" class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">
-   {% block links_small %}
-    {% include "glados/base/left_menu_links.html" %}
-  {% endblock %}
-</ul>
+<!--<ul  class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">-->
+   <!--{% block links_small %}-->
+    <!--{% include "glados/base/left_menu_links.html" %}-->
+  <!--{% endblock %}-->
+<!--</ul>-->
