@@ -22,7 +22,7 @@
 <body>
 
 <header>
-  <div class="row">
+  <div id="masthead-contaniner" class="row">
 
     {% block header %}
       {% include "glados/base/header.html" %}
@@ -30,7 +30,7 @@
 
   </div>
 
-  <div class="row">
+  <div id="chembl-header-container" class="row">
    {% block chembl_header %}
       {% include "glados/base/chembl_header.html" %}
     {% endblock %}
@@ -97,12 +97,7 @@
 
   $(document).ready(function () {
 
-    // initialization of visualization code.
-    // This controls the padding of the sidenav.
-    SideMenuHelper.initializeTopMenuController();
-    // collapse button, the one that shows the sidenav on mobile
-    $(".button-collapse").sideNav();
-    SideMenuHelper.complementaryinitSideNav();
+    SideMenuHelper.initializeSideMenu();
 
     {% block custom_js_inline %}{% endblock %}
 

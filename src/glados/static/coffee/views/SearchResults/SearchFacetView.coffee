@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: () ->
       # @collection - must be provided in the constructor call
       @el = $('.collapsible.collapsible-accordion.side-nav')
-      @handlebars_template = Handlebars.compile($('#Handlebars-SideBar-CollapsibleMenu').html())
       @collection.on 'reset do-repaint sort', @render, @
 
     render: (collection)->
@@ -25,18 +24,15 @@ glados.useNameSpace 'glados.views.SearchResults',
               link_facet_i.badge = faceting_handler_i.faceting_data[key_i]
               facet_total += faceting_handler_i.faceting_data[key_i]
               links_data.push(link_facet_i)
-            $(@el).find('.faceting_menu_'+facet_key_i).remove()
-            html_menu = @handlebars_template(
-              menu_class: 'faceting_menu_'+facet_key_i
-              title: facet_i.label
-              title_badge: facet_total
-              links: links_data
-            )
-            $(@el).append(html_menu)
-          $(@el).find('li').removeClass('active')
-          $(@el).find('.collapsible-header').removeClass('active')
-          li_tiem = $(@el).find('.collapsible-header')
-          $(li_tiem[1]).trigger('click')
-
-      else
-        $(@el).find('.navigation-menu').find('.collapsible-header').addClass('active')
+            menu_key = 'faceting_menu_'+facet_key_i
+            if facet_total
+              SideMenuHelper.addMenu(menu_key,
+                {
+                  title: facet_i.label
+                  title_badge: facet_total
+                  links: links_data
+                }
+              )
+            else
+              SideMenuHelper.removeMenu(menu_key)
+          SideMenuHelper.renderMenus()
