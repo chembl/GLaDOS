@@ -319,20 +319,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return [minVal, maxVal]
 
 
-    # define a minimum size so the rows are not to small,
-    # if there are too many rows, the range of the scale will be extended.
-    minSideSize = 40
-    initialRowHeight = height / numRows
-    initialColWidth = width / numColumns
-
-    # is the row height going to be less than the minimum?
-    if initialRowHeight < minSideSize or initialColWidth < minSideSize
-      # if so, modify the range
-      rangeYEnd = minSideSize * numRows
-      rangeXEnd = minSideSize * numColumns
-    else
-      rangeYEnd = height
-      rangeXEnd = width
+    # make sure all intersections are squared
+    sideSize = 20
+    rangeXEnd = sideSize * numColumns
+    rangeYEnd = sideSize * numRows
 
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
