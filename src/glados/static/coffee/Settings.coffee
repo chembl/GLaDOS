@@ -78,6 +78,8 @@ glados.useNameSpace 'glados',
     VISUALISATION_GRID_EXTERNAL_BORDER: '#D2D2D2'
     VISUALISATION_GRID_DIVIDER_LINES: '#FFFFFF'
     VISUALISATION_GRID_UNDEFINED: '#F9F9F9'
+    VISUALISATION_LEGEND_HEIGHT: 100
+    VISUALISATION_LEGEND_RECT_HEIGHT: 20
     # for a responsive visualisation, the time that it waits for the container size
     RESPONSIVE_REPAINT_WAIT: 400
     # by default the debug is deactivated

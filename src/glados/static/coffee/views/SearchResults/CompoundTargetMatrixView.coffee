@@ -232,15 +232,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mainContainer = d3.select(@$vis_elem.get(0))
 
-    # --------------------------------------
-    # Legend initialisation
-    # --------------------------------------
-    legendWidth = (width / 2)
-    legendHeight = 100
-    legendSVG = mainContainer.append('svg')
-      .attr('width', legendWidth )
-      .attr('height', legendHeight )
-
     totalVisualisationWidth = width + margin.left + margin.right
     totalVisualisationHeight = height + margin.top + margin.bottom
 
@@ -257,6 +248,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'WIDTH IS: ', totalVisualisationWidth
     console.log 'HEIGHT IS: ', totalVisualisationHeight
 
+    # --------------------------------------
+    # Legend initialisation
+    # --------------------------------------
+    legendWidth = 0.4 * width
+    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
+
+    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendContainer.empty()
+    legendContainer = d3.select($legendContainer.get(0))
+
+    legendSVG = legendContainer.append('svg')
+      .attr('width', legendWidth )
+      .attr('height', legendHeight )
 
 
 
@@ -407,10 +411,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       legendG = legendSVG.append('g')
               .attr("transform", "translate(0," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text('Legend for: ' + currentColourProperty)
-        .attr("transform", "translate(10, 15)");
+      legendSVG.append('text').text(currentColourProperty)
+        .attr("transform", "translate(10, 35)");
 
-      rectangleHeight = 50
+      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = config.propertyToType[currentColourProperty]
 
       if colourDataType == 'string'
@@ -466,6 +470,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         legendG.call(legendAxis)
 
     fillLegendDetails()
+    #customize legend styles
+    $legendContainer.find('line, path').css('fill', 'none')
 
     # --------------------------------------
     # Add rows
