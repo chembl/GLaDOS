@@ -206,7 +206,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         top: 150
         right: 0
         bottom: 10
-        left: 90
+        left: 150
 
     elemWidth = $(@el).width()
     width = 0.8 * elemWidth
@@ -273,23 +273,25 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
 
      # make sure all intersections are squared
-    sideSize = 20
-    rangeXEnd = sideSize * numColumns
-    rangeYEnd = sideSize * numRows
+    SIDE_SIZE = 20
+    RANGE_X_END = SIDE_SIZE * numColumns
+    RANGE_Y_END = SIDE_SIZE * numRows
 
     getYCoord = d3.scale.ordinal()
       .domain([0..numRows])
-      .rangeBands([0, rangeYEnd])
+      .rangeBands([0, RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
       .domain([0..numColumns])
-      .rangeBands([0, rangeXEnd])
+      .rangeBands([0, RANGE_X_END])
+
+    LABELS_PADDING = 6
 
     # --------------------------------------
     # Add background MATRIX rectangle
     # --------------------------------------
-    backRectWitdh = rangeXEnd - sideSize + 1
-    backRectHeight = rangeYEnd - sideSize + 2
+    backRectWitdh = RANGE_X_END - SIDE_SIZE + 1
+    backRectHeight = RANGE_Y_END - SIDE_SIZE + 2
 
     svg.append("rect")
       .attr("class", "background")
@@ -512,7 +514,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
     rows.append("text")
-      .attr("x", -6)
+      .attr("x", -LABELS_PADDING)
       .attr("y", getYCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
@@ -539,7 +541,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
     columns.append("text")
-      .attr("x", 0)
+      .attr("x", LABELS_PADDING)
       .attr("y", getXCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
@@ -567,8 +569,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     handleZoom = ->
 
-      getYCoord.rangeBands([0, (rangeYEnd * zoom.scale())])
-      getXCoord.rangeBands([0, (rangeXEnd * zoom.scale())])
+      getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
+      getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
       svg.selectAll('.background')
         .style("fill", "white")
