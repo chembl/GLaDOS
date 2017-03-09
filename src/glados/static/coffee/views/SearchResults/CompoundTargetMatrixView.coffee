@@ -287,6 +287,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     LABELS_PADDING = 12
     LABELS_ROTATION = 45
+    BASE_LABELS_SIZE = 10
 
     # --------------------------------------
     # Add background MATRIX rectangle
@@ -519,7 +520,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("y", getYCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
-      .attr('style', 'font-size:10px;')
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .text( (d, i) -> d.label )
@@ -546,7 +547,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("y", getXCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
-      .attr('style', 'font-size:10px;')
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
@@ -585,6 +586,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
         .selectAll("text")
         .attr("y", getYCoord.rangeBand() / (2) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
 
       svg.selectAll('.vis-row')
         .selectAll('.dividing-line')
@@ -594,10 +596,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
         .selectAll("text")
         .attr("y", getXCoord.rangeBand() / (2) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
         # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
         .attr('transform', (d) ->
           "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" +
-          "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
+          "rotate(" + LABELS_ROTATION + " " + (LABELS_PADDING*zoom.scale()) + "," + (LABELS_PADDING*zoom.scale()) + ")")
 
       svg.selectAll(".vis-column")
         .selectAll('.dividing-line')
