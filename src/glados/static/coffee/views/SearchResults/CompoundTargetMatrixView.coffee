@@ -103,21 +103,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     matrix = {
       "columns": [
         {
-          "name": "C1",
+          "label": "C1",
           "originalIndex": 0
           "currentPosition": 0
           pchembl_value_sum: 30
           published_value_sum: 330
         },
         {
-          "name": "C2",
+          "label": "C2",
           "originalIndex": 1
           "currentPosition": 1
           pchembl_value_sum: 26
           published_value_sum: 260
         },
         {
-          "name": "C3",
+          "label": "C3",
           "originalIndex": 2
           "currentPosition": 2
           pchembl_value_sum: 22
@@ -126,28 +126,28 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       ],
       "rows": [
         {
-          "name": "T1",
+          "label": "T1",
           "originalIndex": 0
           "currentPosition": 0
           pchembl_value_sum: 33
           published_value_sum: 240
         },
         {
-          "name": "T2",
+          "label": "T2",
           "originalIndex": 1
           "currentPosition": 1
           pchembl_value_sum: 24
           published_value_sum: 210
         },
         {
-          "name": "T3",
+          "label": "T3",
           "originalIndex": 2
           "currentPosition": 2
           pchembl_value_sum: 15
           published_value_sum: 90
         },
         {
-          "name": "T4",
+          "label": "T4",
           "originalIndex": 3
           "currentPosition": 3
           pchembl_value_sum: 6
@@ -203,10 +203,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
 
       margin =
-        top: 150
+        top: 170
         right: 0
         bottom: 10
-        left: 150
+        left: 110
 
     elemWidth = $(@el).width()
     width = 0.8 * elemWidth
@@ -248,8 +248,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Precompute indexes TODO: put it in model
     # --------------------------------------
-    rowsIndex = _.indexBy(matrix.rows, 'name')
-    columnsIndex = _.indexBy(matrix.columns, 'name')
+    rowsIndex = _.indexBy(matrix.rows, 'label')
+    columnsIndex = _.indexBy(matrix.columns, 'label')
 
     # --------------------------------------
     # Sort by default value
@@ -259,7 +259,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       newOrders = _.sortBy(matrix.rows, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        rowsIndex[row.name].currentPosition = index
+        rowsIndex[row.label].currentPosition = index
 
     sortMatrixRowsBy config.initial_row_sorting + '_sum', config.initial_row_sorting_reverse
 
@@ -268,7 +268,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       newOrders = _.sortBy(matrix.columns, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        columnsIndex[row.name].currentPosition = index
+        columnsIndex[row.label].currentPosition = index
 
     sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
 
@@ -285,7 +285,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..numColumns])
       .rangeBands([0, RANGE_X_END])
 
-    LABELS_PADDING = 6
+    LABELS_PADDING = 12
+    LABELS_ROTATION = 45
 
     # --------------------------------------
     # Add background MATRIX rectangle
@@ -469,7 +470,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getRowTooltip = (d) ->
 
-      txt = "target: " + d.name + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
+      txt = "target: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
@@ -521,7 +522,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('style', 'font-size:10px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .text( (d, i) -> d.name )
+      .text( (d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
@@ -532,7 +533,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getColumnTooltip = (d) ->
 
-      txt = "molecule: " + d.name + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
+      txt = "molecule: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
 
     columns = svg.selectAll(".vis-column")
       .data(matrix.columns)
@@ -548,7 +549,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('style', 'font-size:10px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .text((d, i) -> d.name )
+      .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
+      .text((d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
@@ -593,7 +595,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .selectAll("text")
         .attr("y", getXCoord.rangeBand() / (2) )
         # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
-        .attr('transform', (d) -> "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")")
+        .attr('transform', (d) ->
+          "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" +
+          "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
 
       svg.selectAll(".vis-column")
         .selectAll('.dividing-line')

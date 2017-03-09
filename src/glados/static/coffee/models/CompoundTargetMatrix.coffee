@@ -122,6 +122,8 @@ CompoundTargetMatrix = Backbone.Model.extend
     for act in activities
       currentCompound = act.molecule_chembl_id
       currentTarget = act.target_chembl_id
+      currentTargetName = act.target_pref_name.slice(0,20) + '...' + ' (' + act.target_chembl_id + ')'
+      console.log 'NAME: ', currentTargetName
 
       targPos = targetsToPosition[currentTarget]
       compPos = compoundsToPosition[currentCompound]
@@ -131,7 +133,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       # It doesn't exist? create a new one.
       if not compPos?
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newCompoundObj = {name: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
+        newCompoundObj = {label: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
 
         # this is a new one, initialise it with the first value
         for property in config.col_sorting_properties
@@ -156,7 +158,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       #-----
       # add target
       if not targPos?
-        newTargetObj = {name: currentTarget, originalIndex: latestTargPos, currentPosition: latestTargPos}
+        newTargetObj = {label: currentTargetName, originalIndex: latestTargPos, currentPosition: latestTargPos}
         targetsList.push newTargetObj
         targetsToPosition[currentTarget] = latestTargPos
         latestTargPos++
