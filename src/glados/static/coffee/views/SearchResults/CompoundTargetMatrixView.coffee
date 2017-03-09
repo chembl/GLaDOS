@@ -226,10 +226,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', legendWidth )
       .attr('height', legendHeight )
 
+    totalVisualisationWidth = width + margin.left + margin.right
+    totalVisualisationHeight = height + margin.top + margin.bottom
+
     svg = mainContainer
             .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
+            .attr('class', 'mainSVGContainer')
+            .attr('width', totalVisualisationWidth)
+            .attr('height', totalVisualisationHeight)
+            .attr('style', 'background-color: white;')
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
@@ -267,15 +272,32 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
 
+     # make sure all intersections are squared
+    sideSize = 20
+    rangeXEnd = sideSize * numColumns
+    rangeYEnd = sideSize * numRows
+
+    getYCoord = d3.scale.ordinal()
+      .domain([0..numRows])
+      .rangeBands([0, rangeYEnd])
+
+    getXCoord = d3.scale.ordinal()
+      .domain([0..numColumns])
+      .rangeBands([0, rangeXEnd])
+
     # --------------------------------------
-    # Add background rectangle
+    # Add background MATRIX rectangle
     # --------------------------------------
+    backRectWitdh = rangeXEnd - sideSize + 1
+    backRectHeight = rangeYEnd - sideSize + 2
 
     svg.append("rect")
       .attr("class", "background")
       .style("fill", "white")
-      .attr("width", width)
-      .attr("height", height)
+      .attr("width", backRectWitdh )
+      .attr("height", backRectHeight )
+      .attr('stroke', 'black')
+      .attr('stroke-width', 4)
 
     # --------------------------------------
     # Sort properties
@@ -319,18 +341,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return [minVal, maxVal]
 
 
-    # make sure all intersections are squared
-    sideSize = 20
-    rangeXEnd = sideSize * numColumns
-    rangeYEnd = sideSize * numRows
-
-    getYCoord = d3.scale.ordinal()
-      .domain([0..numRows])
-      .rangeBands([0, rangeYEnd])
-
-    getXCoord = d3.scale.ordinal()
-      .domain([0..numColumns])
-      .rangeBands([0, rangeXEnd])
 
     # generates a scale for when the data is numeric
     buildNumericColourScale = (currentProperty) ->
@@ -496,7 +506,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .each(fillRow)
 
     rows.append("line")
-      .attr("x2", width)
+      .attr("x2", backRectWitdh)
+      .attr("stroke", 'red')
 
     rows.append("text")
       .attr("x", -6)
@@ -526,9 +537,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("class", "vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
-    columns.append("line")
-      .attr("x1", -width)
-
     columns.append("text")
       .attr("x", 0)
       .attr("y", getXCoord.rangeBand() / 2)
@@ -543,6 +551,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
       .attr('data-tooltip', getColumnTooltip)
+
+    #divisory lines
+    columns.append("line")
+      .attr("x1", -(backRectHeight))
+      .attr("stroke", 'red')
+
 
     # --------------------------------------
     # Zoom
