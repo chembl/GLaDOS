@@ -188,8 +188,20 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     config = @model.get('config')
     # --------------------------------------
-    # pre-configuration
+    # variable initialisation
     # --------------------------------------
+
+    links = matrix.links
+    NUM_COLUMNS = matrix.columns.length
+    NUM_ROWS = matrix.rows.length
+
+    # make sure all intersections are squared
+    SIDE_SIZE = 20
+    RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
+    RANGE_Y_END = SIDE_SIZE * NUM_ROWS
+    LABELS_PADDING = 12
+    LABELS_ROTATION = 45
+    BASE_LABELS_SIZE = 10
 
     currentColourProperty = config.initial_colouring
 
@@ -210,10 +222,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     elemWidth = $(@el).width()
     width = 0.8 * elemWidth
-    height = width
+    #since I know the side size and how many rows I have, I can calculate which should be the height of the container
+    height = SIDE_SIZE * NUM_ROWS
+    # Anyway, I have to limit it so it is not too long.
+    if height > width
+      height = width
 
-    console.log 'Element IS: ', $(@el)
-    console.log 'WIDTH IS: ', width
+
 
     mainContainer = d3.select(@$vis_elem.get(0))
 
@@ -238,12 +253,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    # --------------------------------------
-    # Work with data
-    # --------------------------------------
-    links = matrix.links
-    numColumns = matrix.columns.length
-    numRows = matrix.rows.length
+    console.log 'Element IS: ', mainContainer
+    console.log 'WIDTH IS: ', totalVisualisationWidth
+    console.log 'HEIGHT IS: ', totalVisualisationHeight
+
+
+
 
     # --------------------------------------
     # Precompute indexes TODO: put it in model
@@ -272,22 +287,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
 
-     # make sure all intersections are squared
-    SIDE_SIZE = 20
-    RANGE_X_END = SIDE_SIZE * numColumns
-    RANGE_Y_END = SIDE_SIZE * numRows
-
     getYCoord = d3.scale.ordinal()
-      .domain([0..numRows])
+      .domain([0..NUM_ROWS])
       .rangeBands([0, RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
-      .domain([0..numColumns])
+      .domain([0..NUM_COLUMNS])
       .rangeBands([0, RANGE_X_END])
 
-    LABELS_PADDING = 12
-    LABELS_ROTATION = 45
-    BASE_LABELS_SIZE = 10
 
     # --------------------------------------
     # Add background MATRIX rectangle

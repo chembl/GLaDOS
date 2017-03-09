@@ -122,8 +122,11 @@ CompoundTargetMatrix = Backbone.Model.extend
     for act in activities
       currentCompound = act.molecule_chembl_id
       currentTarget = act.target_chembl_id
-      currentTargetName = act.target_pref_name.slice(0,20) + '...' + ' (' + act.target_chembl_id + ')'
-      console.log 'NAME: ', currentTargetName
+
+      if act.target_pref_name.length > 20
+        currentTargetName = act.target_pref_name.slice(0,20) + '...' + ' (' + act.target_chembl_id + ')'
+      else
+        currentTargetName = act.target_pref_name + ' (' + act.target_chembl_id + ')'
 
       targPos = targetsToPosition[currentTarget]
       compPos = compoundsToPosition[currentCompound]
