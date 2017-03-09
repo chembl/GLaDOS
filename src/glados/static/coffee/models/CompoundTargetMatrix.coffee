@@ -48,10 +48,10 @@ CompoundTargetMatrix = Backbone.Model.extend
     url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json'
     activities = []
     totalItems = idsList.length
-    chunkSize = 100
+    chunkSize = 400
     totalPages = Math.ceil(totalItems / chunkSize)
     # temporarily limit the amount of items to get, the retrieval of the information needs more discussion
-    maxItems = 100
+    maxItems = 400
 
     thisModel = @
     getAllItemsJson = (page) ->
@@ -123,6 +123,11 @@ CompoundTargetMatrix = Backbone.Model.extend
       currentCompound = act.molecule_chembl_id
       currentTarget = act.target_chembl_id
 
+      if act.target_pref_name.length > 20
+        currentTargetName = act.target_pref_name.slice(0,20) + '...' + ' (' + act.target_chembl_id + ')'
+      else
+        currentTargetName = act.target_pref_name + ' (' + act.target_chembl_id + ')'
+
       targPos = targetsToPosition[currentTarget]
       compPos = compoundsToPosition[currentCompound]
 
@@ -131,7 +136,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       # It doesn't exist? create a new one.
       if not compPos?
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newCompoundObj = {name: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
+        newCompoundObj = {label: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
 
         # this is a new one, initialise it with the first value
         for property in config.col_sorting_properties
@@ -156,7 +161,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       #-----
       # add target
       if not targPos?
-        newTargetObj = {name: currentTarget, originalIndex: latestTargPos, currentPosition: latestTargPos}
+        newTargetObj = {label: currentTargetName, originalIndex: latestTargPos, currentPosition: latestTargPos}
         targetsList.push newTargetObj
         targetsToPosition[currentTarget] = latestTargPos
         latestTargPos++

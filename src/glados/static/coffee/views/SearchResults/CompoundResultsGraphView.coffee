@@ -272,7 +272,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     horizontalPadding = 10
     legendWidth = 0.4 * elemWidth
-    legendHeight = 100
+    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     $legendContainer.empty()
     legendContainer = d3.select($legendContainer.get(0))
@@ -296,7 +296,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendSVG.append('text').text(thisView.currentPropertyColour.label)
         .attr("transform", "translate(10, 35)");
 
-      rectangleHeight = 20
+      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = thisView.currentPropertyColour.type
 
       if colourDataType == 'string'
