@@ -48,10 +48,10 @@ CompoundTargetMatrix = Backbone.Model.extend
     url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json'
     activities = []
     totalItems = idsList.length
-    chunkSize = 100
+    chunkSize = 400
     totalPages = Math.ceil(totalItems / chunkSize)
     # temporarily limit the amount of items to get, the retrieval of the information needs more discussion
-    maxItems = 100
+    maxItems = 400
 
     thisModel = @
     getAllItemsJson = (page) ->

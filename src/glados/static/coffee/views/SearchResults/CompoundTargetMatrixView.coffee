@@ -296,7 +296,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", "white")
       .attr("width", backRectWitdh )
       .attr("height", backRectHeight )
-      .attr('stroke', 'black')
+      .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
       .attr('stroke-width', 4)
 
     # --------------------------------------
@@ -381,7 +381,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     fillColour = (d) ->
 
       if not d[currentColourProperty]?
-          return '#9e9e9e'
+          return glados.Settings.VISUALISATION_GRID_UNDEFINED
       getCellColour(d[currentColourProperty])
 
 
@@ -506,18 +506,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .each(fillRow)
 
     rows.append("line")
+      .attr('class', 'dividing-line')
       .attr("x2", backRectWitdh)
-      .attr("stroke", 'red')
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
     rows.append("text")
       .attr("x", -6)
       .attr("y", getYCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
-      .attr('style', 'font-size:12px;')
+      .attr('style', 'font-size:10px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .attr('fill', '#1b5e20')
       .text( (d, i) -> d.name )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
@@ -542,20 +543,23 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("y", getXCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
-      .attr('style', 'font-size:12px;')
+      .attr('style', 'font-size:10px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .attr('fill', '#1b5e20')
       .text((d, i) -> d.name )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
       .attr('data-tooltip', getColumnTooltip)
 
+    columnsWithDivLines = svg.selectAll(".vis-column")
+
     #divisory lines
     columns.append("line")
+      .attr('class', 'dividing-line')
       .attr("x1", -(backRectHeight))
-      .attr("stroke", 'red')
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
 
     # --------------------------------------
@@ -566,18 +570,33 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       getYCoord.rangeBands([0, (rangeYEnd * zoom.scale())])
       getXCoord.rangeBands([0, (rangeXEnd * zoom.scale())])
 
+      svg.selectAll('.background')
+        .style("fill", "white")
+        .attr("width", backRectWitdh * zoom.scale())
+        .attr("height", backRectHeight * zoom.scale())
+        .attr('transform', "translate(" + zoom.translate()[0] + ", " + zoom.translate()[1] + ")")
+
       svg.selectAll('.vis-row')
         .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
         .selectAll("text")
         .attr("y", getYCoord.rangeBand() / (2) )
 
+      svg.selectAll('.vis-row')
+        .selectAll('.dividing-line')
+        .attr("x2", backRectWitdh * zoom.scale())
+      
       svg.selectAll(".vis-column")
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
         .selectAll("text")
         .attr("y", getXCoord.rangeBand() / (2) )
         # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
         .attr('transform', (d) -> "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")")
+
+      svg.selectAll(".vis-column")
+        .selectAll('.dividing-line')
+        .attr("x1", -(backRectHeight * zoom.scale()))
+        .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
 
       svg.selectAll(".vis-cell")
         .attr("width", getXCoord.rangeBand())
@@ -625,6 +644,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       rowTexts = svg.selectAll('.vis-row').selectAll('text')
       .attr('data-tooltip', getRowTooltip)
+
+      svg.selectAll(".vis-row")
+        .selectAll('.dividing-line')
+        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
       $(rowTexts).tooltip()
 
@@ -675,6 +698,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       columnTexts = svg.selectAll(".vis-column").selectAll('text')
       .attr('data-tooltip', getColumnTooltip)
+
+      svg.selectAll(".vis-column")
+        .selectAll('.dividing-line')
+        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
       $(columnTexts).tooltip()
 
