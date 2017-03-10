@@ -54,6 +54,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       filter_terms = @getMeta("filter_terms")
+      filter_queries = @getMeta("filter_queries")
       exact_terms_joined = null
       if singular_terms.length == 0 and exact_terms.length == 0
         exact_terms_joined = '*'
@@ -146,6 +147,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 query: filter_terms_joined
             }
           ]
+      if filter_queries
+        es_query.query.bool.filter = []
+#        es_facets_queries =
+        for filter_query_i in filter_queries
+          es_query.query.bool.filter.push(filter_query_i)
+#        console.log(es_facets_queries)
+#        es_query.query.bool.filter.push(es_facets_queries)
+#        console.log(es_query)
+
+
       if singular_terms.length > 0
         es_query.query.bool.must.bool.should.push(by_term_query)
       facets_query = @getFacetsAggsQuery()

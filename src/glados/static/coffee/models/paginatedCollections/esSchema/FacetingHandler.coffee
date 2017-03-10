@@ -52,13 +52,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
               @faceting_data[FacetingHandler.OTHERS_CATEGORY] = aggregated_data.sum_other_doc_count
 
-    getFacetId:(key_i)->
-      return @es_property_name+"_"+key_i.replace(FacetingHandler.KEY_REGEX_REPLACE,'_')
+    getFacetId:(facet_key)->
+      return @es_property_name+"_"+facet_key.replace(FacetingHandler.KEY_REGEX_REPLACE,'_')
 
-    getFilterQueryForFacetIndex: (facet_index)->
+    getFilterQueryForFacetKey: (facet_key)->
       filter_terms_query = null
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
-        facet_key = @faceting_keys_inorder[facet_index]
         if facet_key != FacetingHandler.OTHERS_CATEGORY
           filter_terms_query = {term: {}}
           filter_terms_query.term[@es_property_name] = facet_key

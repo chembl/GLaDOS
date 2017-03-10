@@ -227,6 +227,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
             facet_view_res = new glados.views.SearchResults.SearchFacetView
               collection: resultsListsDict[resourceName]
+              search_bar_view: @
 
         @container.show()
         @updateChips()
