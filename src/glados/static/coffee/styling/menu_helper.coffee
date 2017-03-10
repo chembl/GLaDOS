@@ -53,10 +53,18 @@ class SideMenuHelper
     # Shows all the headers and hides all the bodies
     SideMenuHelper.$side_menu.find('.collapsible-header').show()
     SideMenuHelper.$side_menu.find('.collapsible-body').hide()
+
     for menu_key_i, menu_data_i of SideMenuHelper.additional_menus
       $(SideMenuHelper.$side_menu).find('.'+menu_key_i).remove()
       html_menu = SideMenuHelper.handlebars_template(menu_data_i)
       $(SideMenuHelper.$side_menu).append(html_menu)
+    # Linking selection events
+    for menu_key_i, menu_data_i of SideMenuHelper.additional_menus
+      for link_i in menu_data_i.links
+        if link_i.select_callback and link_i.link_id
+          console.log('Linking menu link', link_i.link_id, @$side_menu.find('#'+link_i.link_id).length )
+          @$side_menu.find('#'+link_i.link_id).click(link_i.select_callback)
+
     if SideMenuHelper.$side_menu.find('.collapsible-header').length == 1
       SideMenuHelper.$side_menu.find('.collapsible-header').hide()
       SideMenuHelper.$side_menu.find('.collapsible-body').show()

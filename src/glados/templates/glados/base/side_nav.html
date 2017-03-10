@@ -24,7 +24,7 @@
       <ul>
         {{#each links}}
         <li>
-          <a class="waves-effect waves-teal" href="{{this.href}}">
+          <a {{#if this.link_id}}id="{{this.link_id}}" {{/if}}class="waves-effect waves-teal"{{#if this.href}} href="{{this.href}}"{{/if}}>
             <table class="no-padding">
               <tr class="no-padding">
                 <td class="no-padding" style="max-width: 117px; word-wrap: break-word;">

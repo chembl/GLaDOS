@@ -7,6 +7,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @el = $('.collapsible.collapsible-accordion.side-nav')
       @collection.on 'reset do-repaint sort', @render, @
 
+    toggleSelectFacet: (facet_key) ->
+      console.log("HI!", facet_key)
+
     render: (collection)->
       # removes the non main menus of the sidebar
       if @collection
@@ -18,8 +21,8 @@ glados.useNameSpace 'glados.views.SearchResults',
             facet_total = 0
             for key_i in faceting_handler_i.faceting_keys_inorder
               link_facet_i = {}
-              filter_val = key_i
-              link_facet_i.href = window.location.href+encodeURI(' +'+faceting_handler_i.es_property_name+':'+key_i+'')
+              link_facet_i.select_callback = @toggleSelectFacet.bind(@,key_i)
+              link_facet_i.link_id = faceting_handler_i.getFacetId(key_i)
               link_facet_i.label = key_i
               link_facet_i.badge = faceting_handler_i.faceting_data[key_i]
               facet_total += faceting_handler_i.faceting_data[key_i]
