@@ -469,9 +469,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         legendG.call(legendAxis)
 
+      #customize legend styles
+      $legendContainer.find('line, path').css('fill', 'none')
+
     fillLegendDetails()
-    #customize legend styles
-    $legendContainer.find('line, path').css('fill', 'none')
 
     # --------------------------------------
     # Add rows
@@ -536,6 +537,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text( (d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
@@ -564,6 +566,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text((d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
@@ -600,6 +603,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .selectAll("text")
         .attr("y", getYCoord.rangeBand() / (2) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
+        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
       svg.selectAll('.vis-row')
         .selectAll('.dividing-line')
@@ -614,6 +618,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('transform', (d) ->
           "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" +
           "rotate(" + LABELS_ROTATION + " " + (LABELS_PADDING*zoom.scale()) + "," + (LABELS_PADDING*zoom.scale()) + ")")
+        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
       svg.selectAll(".vis-column")
         .selectAll('.dividing-line')
