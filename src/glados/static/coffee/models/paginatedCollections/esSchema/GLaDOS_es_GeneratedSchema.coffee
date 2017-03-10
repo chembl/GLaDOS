@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.models.paginatedCollections.esSchema'
+glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # The contents of this file were generated from the GLaDOS-es project
   GLaDOS_es_GeneratedSchema:
     chembl_activity:

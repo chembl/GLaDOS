@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @INTERVAL_FACETING = 'INTERVAL'
 
     @OTHERS_CATEGORY = 'Others'
+    @KEY_REGEX_REPLACE = /[^A-Z0-9]/gi
 
     @getNewFacetingHandler = (es_index, es_property)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
@@ -18,14 +19,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       if not property_type.aggregatable
         console.log("ERROR! "+es_property+" for elastic index "+es_index+" is not aggregatable")
       if property_type.type == String or property_type.type == Boolean
-        return new FacetingHandler(es_property, FacetingHandler.CATEGORY_FACETING)
+        return new FacetingHandler(es_property, property_type.type, FacetingHandler.CATEGORY_FACETING)
       else if property_type.type == Number
-        return new FacetingHandler(es_property, FacetingHandler.INTERVAL_FACETING)
+        return new FacetingHandler(es_property, property_type.type, FacetingHandler.INTERVAL_FACETING)
       else
         console.log("ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
             +" does not have a defined faceting type")
 
-    constructor:(@es_property_name, @faceting_type)->
+    constructor:(@es_property_name, @js_type, @faceting_type)->
       @faceting_keys_inorder = null
       @faceting_data = null
 
@@ -51,14 +52,25 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
               @faceting_data[FacetingHandler.OTHERS_CATEGORY] = aggregated_data.sum_other_doc_count
 
-    getQueryFilterTermsForFacetIndex: (facet_index)->
-      filter_terms = []
+    getFacetId:(key_i)->
+      return @es_property_name+"_"+key_i.replace(FacetingHandler.KEY_REGEX_REPLACE,'_')
+
+    getFilterQueryForFacetIndex: (facet_index)->
+      filter_terms_query = null
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
         facet_key = @faceting_keys_inorder[facet_index]
         if facet_key != FacetingHandler.OTHERS_CATEGORY
-          filter_terms.push('+'+@es_property_name+':'+facet_key)
+          filter_terms_query = {term: {}}
+          filter_terms_query.term[@es_property_name] = facet_key
         else
-          for key_i in @faceting_keys_inorder
-            if key_i != FacetingHandler.OTHERS_CATEGORY
-              filter_terms.push('-'+@es_property_name+':'+key_i)
-      return filter_terms
+          # For the others query we need to negate the non other category facet keys
+          filter_terms_query = {
+            not:[]
+          }
+          for facet_key_i in @faceting_keys_inorder
+            if facet_key_i != FacetingHandler.OTHERS_CATEGORY
+              key_i_term_query = {term: {}}
+              key_i_term_query.term[@es_property_name] = facet_key_i
+              filter_terms_query.not.push(key_i_term_query)
+      console.log filter_terms_query
+      return filter_terms_query

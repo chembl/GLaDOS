@@ -6,16 +6,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     FACETS:
       molecule_type:
         label: 'Molecule Type'
-        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewCategoryFacetingHandler(
-          'molecule_type.keyword'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','molecule_type'
         )
       indication_class:
         label: 'Indication Class'
-        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewCategoryFacetingHandler(
-          'indication_class.keyword'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','indication_class'
         )
       max_phase:
         label: 'Max Phase'
-        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewCategoryFacetingHandler(
-          'max_phase'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','max_phase'
         )
