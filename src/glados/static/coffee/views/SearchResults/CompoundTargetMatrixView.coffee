@@ -216,13 +216,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
 
       margin =
-        top: 170
-        right: 0
+        top: 190
+        right: 160
         bottom: 10
-        left: 110
+        left: 130
 
     elemWidth = $(@el).width()
-    width = 0.8 * elemWidth
+    width = elemWidth
     #since I know the side size and how many rows I have, I can calculate which should be the height of the container
     height = SIDE_SIZE * NUM_ROWS
     # Anyway, I have to limit it so it is not too long.
@@ -233,8 +233,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mainContainer = d3.select(@$vis_elem.get(0))
 
-    totalVisualisationWidth = width + margin.left + margin.right
-    totalVisualisationHeight = height + margin.top + margin.bottom
+    totalVisualisationWidth = width
+    totalVisualisationHeight = height
 
     svg = mainContainer
             .append('svg')
@@ -243,7 +243,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .attr('height', totalVisualisationHeight)
             .attr('style', 'background-color: white;')
             .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr('class', 'mainGContainer')
 
     console.log 'Element IS: ', mainContainer
     console.log 'WIDTH IS: ', totalVisualisationWidth
@@ -797,18 +797,30 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       triggerColSortTransition()
 
 
-
     # --------------------------------------
     # Reset zoom
     # --------------------------------------
+    adjustVisHeight = ->
+
+      currentBackRectHeight = svg.selectAll('.background').attr('height')
+      desiredVisHeight = currentBackRectHeight + margin.top + margin.bottom
+
+      console.log 'height should be:', desiredVisHeight
+
     resetZoom = ->
-      zoom.scale(1)
-      zoom.translate([0,0])
+
+      # get an initial zoom scale so all the matrix is visible.
+      matrixWidth = margin.left + backRectWitdh + margin.right
+      initialZoomScale = totalVisualisationWidth / matrixWidth
+      zoom.scale(initialZoomScale)
+      zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])
       handleZoom()
 
     $(@el).find(".reset-zoom-btn").click ->
 
       resetZoom()
 
+    resetZoom()
+    adjustVisHeight()
 
 
