@@ -32,7 +32,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
-      message: 'Waiting for results...'
+      message: 'Generating Visualisation...'
 
     @clearControls()
     @clearMatrix()
@@ -194,6 +194,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     links = matrix.links
     NUM_COLUMNS = matrix.columns.length
     NUM_ROWS = matrix.rows.length
+    TOTAL_NUM_CELLS = NUM_COLUMNS * NUM_ROWS
 
     # make sure all intersections are squared
     SIDE_SIZE = 20
@@ -262,8 +263,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', legendWidth )
       .attr('height', legendHeight )
 
-
-
     # --------------------------------------
     # Precompute indexes TODO: put it in model
     # --------------------------------------
@@ -304,15 +303,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Add background MATRIX rectangle
     # --------------------------------------
     backRectWitdh = RANGE_X_END - SIDE_SIZE + 1
-    backRectHeight = RANGE_Y_END - SIDE_SIZE + 2
+    backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
+    BACK_RECT_TRANS_X = -1
+    BACK_RECT_TRANS_Y = -1
 
     svg.append("rect")
       .attr("class", "background")
-      .style("fill", "white")
+      .style("fill", "black")
       .attr("width", backRectWitdh )
       .attr("height", backRectHeight )
       .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
-      .attr('stroke-width', 4)
+      .attr('stroke-width', 1)
+      .attr('transform', "translate(" + BACK_RECT_TRANS_X + ", " + BACK_RECT_TRANS_Y + ")")
 
     # --------------------------------------
     # Sort properties
@@ -410,7 +412,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendSVG.selectAll('text').remove()
 
       legendG = legendSVG.append('g')
-              .attr("transform", "translate(0," + (legendHeight - 30) + ")");
+        .attr("transform", "translate(0," + (legendHeight - 30) + ")");
       legendSVG.append('text').text(currentColourProperty)
         .attr("transform", "translate(10, 35)");
 
@@ -474,6 +476,53 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     fillLegendDetails()
 
+     # --------------------------------------
+    # Hover
+    # --------------------------------------
+    # index to identify the cells and speed up some operations, for a row id, there is a list of cells that belong to
+    # that row. the same for columns.
+    visCellRowsIndex = {}
+    visCellColsIndex = {}
+    numCellsProcesed = 0
+    addVisCellToIndex = (cell, data) ->
+
+      if !visCellRowsIndex[data.row_id]?
+        visCellRowsIndex[data.row_id] = []
+
+      visCellRowsIndex[data.row_id].push(cell)
+
+      if !visCellColsIndex[data.col_id]?
+        visCellColsIndex[data.col_id] = []
+
+      visCellColsIndex[data.col_id].push(cell)
+
+    hoverCellsAndColumnsForCell = (cellData) ->
+
+      cellsToHoverRow = visCellRowsIndex[cellData[0].row_id]
+      cellsToHoverCol = visCellColsIndex[cellData[0].col_id]
+      for cell in cellsToHoverRow
+        console.log('cell: ', cell)
+
+
+    handleCellMouseover = () ->
+
+      selectedElement = d3.select(@)
+      x = selectedElement.attr('x')
+      y = selectedElement.attr('y')
+      height = selectedElement.attr('height')
+      width = selectedElement.attr('width')
+
+      selectedElement.attr('opacity', 0.6)
+
+#      hoverCellsAndColumnsForCell selectedElement.data()
+
+    handleCellMouseout = () ->
+
+      selectedElement = d3.select(@)
+      selectedElement.attr('opacity', 1)
+      console.log 'OUT'
+
+
     # --------------------------------------
     # Add rows
     # --------------------------------------
@@ -509,6 +558,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .style("fill", fillColour )
+        .on("mouseover", handleCellMouseover)
+        .on("mouseout", handleCellMouseout)
+        .each((d) -> addVisCellToIndex(@, d))
 
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
@@ -583,6 +635,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
 
+
     # --------------------------------------
     # Zoom
     # --------------------------------------
@@ -592,10 +645,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
       svg.selectAll('.background')
-        .style("fill", "white")
         .attr("width", backRectWitdh * zoom.scale())
         .attr("height", backRectHeight * zoom.scale())
-        .attr('transform', "translate(" + zoom.translate()[0] + ", " + zoom.translate()[1] + ")")
+        .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
+          ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
 
       svg.selectAll('.vis-row')
         .attr('transform', (d) ->
