@@ -4,11 +4,26 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   FacetingHandler: class FacetingHandler
     @CATEGORY_FACETING = 'CATEGORY'
+    @INTERVAL_FACETING = 'INTERVAL'
 
     @OTHERS_CATEGORY = 'Others'
 
-    @getNewCategoryFacetingHandler = (es_property)->
-      return new FacetingHandler(es_property, FacetingHandler.CATEGORY_FACETING)
+    @getNewFacetingHandler = (es_index, es_property)->
+      es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
+      if not es_index_schema
+        console.log("ERROR! unknown elastic index "+es_index)
+      property_type = es_index_schema[es_property]
+      if not property_type
+        console.log("ERROR! unknown "+es_property+" for elastic index "+es_index)
+      if not property_type.aggregatable
+        console.log("ERROR! "+es_property+" for elastic index "+es_index+" is not aggregatable")
+      if property_type.type == String or property_type.type == Boolean
+        return new FacetingHandler(es_property, FacetingHandler.CATEGORY_FACETING)
+      else if property_type.type == Number
+        return new FacetingHandler(es_property, FacetingHandler.INTERVAL_FACETING)
+      else
+        console.log("ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
+            +" does not have a defined faceting type")
 
     constructor:(@es_property_name, @faceting_type)->
       @faceting_keys_inorder = null
