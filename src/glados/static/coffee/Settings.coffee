@@ -67,6 +67,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_RED_MIN: '#f44336' # red lighten-5
     VISUALISATION_RED_MAX: '#b71c1c' # red darken-4
     VISUALISATION_TEAL_MIN: '#e0f2f1' #teal lighten-5
+    VISUALISATION_TEAL_BASE: '#009688' #teal
     VISUALISATION_TEAL_MAX: '#004d40' #teal darken-4
     VISUALISATION_GREY_BASE: '#9e9e9e' #grey
     VISUALISATION_CARD_GREY: '#fafafa' #fafafa grey lighten-5

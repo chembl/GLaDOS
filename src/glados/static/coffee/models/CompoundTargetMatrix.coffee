@@ -187,6 +187,8 @@ CompoundTargetMatrix = Backbone.Model.extend
       if not links[compPos]?
         links[compPos] = {}
 
+      act['row_id'] = act.molecule_chembl_id
+      act['col_id'] = act.target_chembl_id
       links[compPos][targPos] = act
 
     # fill missing values with {}
@@ -201,6 +203,8 @@ CompoundTargetMatrix = Backbone.Model.extend
           links[i][j] = {
             molecule_chembl_id: links[compPos][targPos]['molecule_chembl_id']
             target_chembl_id: links[compPos][targPos]['target_chembl_id']
+            row_id: links[compPos][targPos]['molecule_chembl_id']
+            col_id: links[compPos][targPos]['target_chembl_id']
           }
 
     result =
