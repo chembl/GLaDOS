@@ -61,6 +61,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row')
     @paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col')
 
+    @paintZoomButtons()
+
+  paintZoomButtons: ->
+
+    zoomOptsContent = Handlebars.compile( $('#Handlebars-Common-ESResultsMatrix-ZoomOptions').html() )()
+
+    @$vis_elem.append(zoomOptsContent)
+
   paintSortDirection: (elemSelector, reverse, target_property) ->
 
     $sortDirectionBtn = $(@el).find(elemSelector)
@@ -684,7 +692,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
 
 
+    MIN_ZOOM_SCALE = 0.2
+    MAX_ZOOM_SCALE = 2
+    ZOOM_STEP = 0.2
     zoom = d3.behavior.zoom()
+      .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
       .on("zoom", handleZoom)
 
     svg.call zoom
@@ -798,7 +810,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     # --------------------------------------
-    # Reset zoom
+    #  initial zoom
     # --------------------------------------
     adjustVisHeight = ->
 
@@ -817,9 +829,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])
       handleZoom()
 
-    $(@el).find(".reset-zoom-btn").click ->
+    # --------------------------------------
+    #  Zoom events
+    # --------------------------------------
+
+    $(@el).find(".BCK-reset-zoom-btn").click ->
 
       resetZoom()
+
+    $(@el).find(".BCK-zoom-in-btn").click ->
+      zoom.scale( zoom.scale() + ZOOM_STEP )
+      svg.call zoom.event
+
+    $(@el).find(".BCK-zoom-out-btn").click ->
+      zoom.scale( zoom.scale() - ZOOM_STEP )
+      svg.call zoom.event
 
     resetZoom()
     adjustVisHeight()
