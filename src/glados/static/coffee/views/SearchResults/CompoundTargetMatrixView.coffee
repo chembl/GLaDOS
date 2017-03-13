@@ -489,31 +489,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
      # --------------------------------------
     # Hover
     # --------------------------------------
-    # index to identify the cells and speed up some operations, for a row id, there is a list of cells that belong to
-    # that row. the same for columns.
-    visCellRowsIndex = {}
-    visCellColsIndex = {}
-    numCellsProcesed = 0
-    addVisCellToIndex = (cell, data) ->
-
-      if !visCellRowsIndex[data.row_id]?
-        visCellRowsIndex[data.row_id] = []
-
-      visCellRowsIndex[data.row_id].push(cell)
-
-      if !visCellColsIndex[data.col_id]?
-        visCellColsIndex[data.col_id] = []
-
-      visCellColsIndex[data.col_id].push(cell)
-
-    hoverCellsAndColumnsForCell = (cellData) ->
-
-      cellsToHoverRow = visCellRowsIndex[cellData[0].row_id]
-      cellsToHoverCol = visCellColsIndex[cellData[0].col_id]
-      for cell in cellsToHoverRow
-        console.log('cell: ', cell)
-
-
     handleCellMouseover = () ->
 
       selectedElement = d3.select(@)
@@ -524,7 +499,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       selectedElement.attr('opacity', 0.6)
 
-#      hoverCellsAndColumnsForCell selectedElement.data()
 
     handleCellMouseout = () ->
 
@@ -570,7 +544,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .style("fill", fillColour )
         .on("mouseover", handleCellMouseover)
         .on("mouseout", handleCellMouseout)
-        .each((d) -> addVisCellToIndex(@, d))
 
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
