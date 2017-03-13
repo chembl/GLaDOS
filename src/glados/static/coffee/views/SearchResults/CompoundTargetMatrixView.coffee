@@ -802,10 +802,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     adjustVisHeight = ->
 
-      currentBackRectHeight = svg.selectAll('.background').attr('height')
-      desiredVisHeight = currentBackRectHeight + margin.top + margin.bottom
+      currentBackRectHeight = parseInt(svg.select('.background').attr('height'))
+      desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
 
-      console.log 'height should be:', desiredVisHeight
+      mainContainer.select('.mainSVGContainer')
+        .attr('height', desiredVisHeight)
 
     resetZoom = ->
 
