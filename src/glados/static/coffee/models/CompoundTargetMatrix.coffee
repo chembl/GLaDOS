@@ -1,25 +1,24 @@
 CompoundTargetMatrix = Backbone.Model.extend
 
   initialize: ->
-
     @url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=1000&molecule_chembl_id__in=CHEMBL554,CHEMBL212250,CHEMBL212201,CHEMBL212251,CHEMBL384407,CHEMBL387207,CHEMBL215814,CHEMBL383965,CHEMBL214487,CHEMBL212954,CHEMBL213342,CHEMBL215716,CHEMBL213818,CHEMBL212965,CHEMBL214023,CHEMBL265367,CHEMBL215171,CHEMBL214419,CHEMBL384711,CHEMBL380247,CHEMBL215993,CHEMBL377437,CHEMBL214689,CHEMBL213822,CHEMBL215033,CHEMBL445572,CHEMBL377250,CHEMBL490062,CHEMBL588324,CHEMBL528983,CHEMBL529972,CHEMBL528234,CHEMBL532686,CHEMBL546497,CHEMBL548563,CHEMBL1630107,CHEMBL1630111,CHEMBL1630113,CHEMBL1630117,CHEMBL1794063,CHEMBL2347565,CHEMBL2347566,CHEMBL2347567,CHEMBL2407820,CHEMBL3040455,CHEMBL3040543,CHEMBL3040548,CHEMBL3040566,CHEMBL3040597,CHEMBL3344208,CHEMBL3344209,CHEMBL3344210,CHEMBL3344211,CHEMBL3344212,CHEMBL3344213,CHEMBL3344214,CHEMBL3344215,CHEMBL3344216,CHEMBL3344217,CHEMBL3344218,CHEMBL3344219,CHEMBL3344220,CHEMBL3344221,CHEMBL3526263,CHEMBL3526326,CHEMBL3526479,CHEMBL3526480,CHEMBL3526609,CHEMBL3526763,CHEMBL3526764,CHEMBL3526765,CHEMBL3527094,CHEMBL3527095,CHEMBL3542267,CHEMBL3542268,CHEMBL3546948,CHEMBL3546949,CHEMBL3546966,CHEMBL3546967,CHEMBL3546968,CHEMBL3546969,CHEMBL3546976,CHEMBL3666714,CHEMBL3706535'
-#   @url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=100&molecule_chembl_id__in=CHEMBL554,CHEMBL212250,CHEMBL212201,CHEMBL212251,CHEMBL384407,CHEMBL387207,CHEMBL215814,CHEMBL383965,CHEMBL214487,CHEMBL212954,CHEMBL213342,CHEMBL215716,CHEMBL213818,CHEMBL212965,CHEMBL214023,CHEMBL265367,CHEMBL215171,CHEMBL214419,CHEMBL384711,CHEMBL380247,CHEMBL215993,CHEMBL377437,CHEMBL214689,CHEMBL213822,CHEMBL215033,CHEMBL445572,CHEMBL377250,CHEMBL490062,CHEMBL588324,CHEMBL528983,CHEMBL529972,CHEMBL528234,CHEMBL532686,CHEMBL546497,CHEMBL548563,CHEMBL1630111,CHEMBL1630113,CHEMBL1630117,CHEMBL1794063,CHEMBL2347565,CHEMBL2347566,CHEMBL2347567,CHEMBL2407820,CHEMBL3040455,CHEMBL3040543,CHEMBL3040548,CHEMBL3040566,CHEMBL3040597,CHEMBL3344208,CHEMBL3344209,CHEMBL3344210,CHEMBL3344211,CHEMBL3344212,CHEMBL3344213,CHEMBL3344214,CHEMBL3344215,CHEMBL3344216,CHEMBL3344217,CHEMBL3344218,CHEMBL3344219,CHEMBL3344220,CHEMBL3344221,CHEMBL3526263,CHEMBL3526326,CHEMBL3526479,CHEMBL3526480,CHEMBL3526609,CHEMBL3526763,CHEMBL3526764,CHEMBL3526765,CHEMBL3527094,CHEMBL3527095,CHEMBL3542267,CHEMBL3542268,CHEMBL3546948,CHEMBL3546949,CHEMBL3546966,CHEMBL3546967,CHEMBL3546968,CHEMBL3546969,CHEMBL3546976,CHEMBL3666714,CHEMBL3706535'
+    #   @url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=100&molecule_chembl_id__in=CHEMBL554,CHEMBL212250,CHEMBL212201,CHEMBL212251,CHEMBL384407,CHEMBL387207,CHEMBL215814,CHEMBL383965,CHEMBL214487,CHEMBL212954,CHEMBL213342,CHEMBL215716,CHEMBL213818,CHEMBL212965,CHEMBL214023,CHEMBL265367,CHEMBL215171,CHEMBL214419,CHEMBL384711,CHEMBL380247,CHEMBL215993,CHEMBL377437,CHEMBL214689,CHEMBL213822,CHEMBL215033,CHEMBL445572,CHEMBL377250,CHEMBL490062,CHEMBL588324,CHEMBL528983,CHEMBL529972,CHEMBL528234,CHEMBL532686,CHEMBL546497,CHEMBL548563,CHEMBL1630111,CHEMBL1630113,CHEMBL1630117,CHEMBL1794063,CHEMBL2347565,CHEMBL2347566,CHEMBL2347567,CHEMBL2407820,CHEMBL3040455,CHEMBL3040543,CHEMBL3040548,CHEMBL3040566,CHEMBL3040597,CHEMBL3344208,CHEMBL3344209,CHEMBL3344210,CHEMBL3344211,CHEMBL3344212,CHEMBL3344213,CHEMBL3344214,CHEMBL3344215,CHEMBL3344216,CHEMBL3344217,CHEMBL3344218,CHEMBL3344219,CHEMBL3344220,CHEMBL3344221,CHEMBL3526263,CHEMBL3526326,CHEMBL3526479,CHEMBL3526480,CHEMBL3526609,CHEMBL3526763,CHEMBL3526764,CHEMBL3526765,CHEMBL3527094,CHEMBL3527095,CHEMBL3542267,CHEMBL3542268,CHEMBL3546948,CHEMBL3546949,CHEMBL3546966,CHEMBL3546967,CHEMBL3546968,CHEMBL3546969,CHEMBL3546976,CHEMBL3666714,CHEMBL3706535'
 
     console.log @url
 
     # config used for testing
-#    config = {
-#      initial_colouring: 'assay_type'
-#      colour_properties: ['pchembl_value', 'assay_type', 'published_value']
-#      initial_row_sorting: 'pchembl_value'
-#      row_sorting_properties: ['pchembl_value', 'published_value']
-#      initial_col_sorting: 'published_value'
-#      col_sorting_properties: ['pchembl_value', 'published_value']
-#      propertyToType:
-#        assay_type: "string"
-#        pchembl_value: "number"
-#        published_value: "number"
-#    }
+    #    config = {
+    #      initial_colouring: 'assay_type'
+    #      colour_properties: ['pchembl_value', 'assay_type', 'published_value']
+    #      initial_row_sorting: 'pchembl_value'
+    #      row_sorting_properties: ['pchembl_value', 'published_value']
+    #      initial_col_sorting: 'published_value'
+    #      col_sorting_properties: ['pchembl_value', 'published_value']
+    #      propertyToType:
+    #        assay_type: "string"
+    #        pchembl_value: "number"
+    #        published_value: "number"
+    #    }
 
     config = {
       initial_colouring: 'assay_type'
@@ -38,10 +37,9 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     @set('config', config)
 
-  # This fetch uses a post to get the information, to avoid any issue with the lenght of the url due to the ammount of
-  # compounds
+# This fetch uses a post to get the information, to avoid any issue with the lenght of the url due to the ammount of
+# compounds
   fetch: (options) ->
-
     @fetch2(options)
 
     idsList = @get('molecule_chembl_ids')
@@ -57,7 +55,6 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     thisModel = @
     getAllItemsJson = (page) ->
-
       start = (page - 1) * chunkSize
       end = start + chunkSize - 1
       if end >= idsList.length
@@ -78,9 +75,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         data: data
         headers:
           'X-HTTP-Method-Override': 'GET'
-
-      ).done( (response) ->
-
+      ).done((response) ->
         for newActivity in response.activities
           activities.push newActivity
         console.log 'response!'
@@ -93,23 +88,20 @@ CompoundTargetMatrix = Backbone.Model.extend
         if activities.length < maxItems
           getAllItemsJson (page + 1)
         else
-          # if not, I have finished!
+# if not, I have finished!
           console.log 'finished!'
           console.log activities.length + ' activities.'
           console.log activities
-          thisModel.set( thisModel.parse activities )
-
+          thisModel.set(thisModel.parse activities)
       )
 
     # get everything from page 1
     getAllItemsJson 1
 
   parse: (activities) ->
-
     console.log 'data received!'
 
     config = @get('config')
-    activities = activities
     console.log activities.length + ' activities.'
 
     compoundsToPosition = {}
@@ -126,7 +118,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       currentTarget = act.target_chembl_id
 
       if act.target_pref_name.length > 10
-        currentTargetName = act.target_pref_name.slice(0,10) + '...' + ' (' + act.target_chembl_id + ')'
+        currentTargetName = act.target_pref_name.slice(0, 10) + '...' + ' (' + act.target_chembl_id + ')'
       else
         currentTargetName = act.target_pref_name + ' (' + act.target_chembl_id + ')'
 
@@ -137,7 +129,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
       # It doesn't exist? create a new one.
       if not compPos?
-        # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
+# remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
         newCompoundObj = {label: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
 
         # this is a new one, initialise it with the first value
@@ -151,9 +143,8 @@ CompoundTargetMatrix = Backbone.Model.extend
         compoundsToPosition[currentCompound] = latestCompPos
         latestCompPos++
 
-      # it does exist, get it and sum the sorting properties
+# it does exist, get it and sum the sorting properties
       else
-
         compObj = compoundsList[compPos]
         # this is an existing one, sum the property!
         for property in config.col_sorting_properties
@@ -175,7 +166,6 @@ CompoundTargetMatrix = Backbone.Model.extend
           else
             newTargetObj[(property + '_sum')] = 0
       else
-
         targObj = targetsList[targPos]
         for property in config.row_sorting_properties
           if act[property]?
@@ -215,5 +205,63 @@ CompoundTargetMatrix = Backbone.Model.extend
     return {"matrix": result}
 
   fetch2: (options) ->
-
     console.log 'FETCH 2'
+    @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
+    console.log @url
+    # Creates the Elastic Search Query parameters and serializes them
+    esJSONRequest = JSON.stringify(@getRequestData())
+    console.log esJSONRequest
+    fetchESOptions =
+      url: @url
+      data: esJSONRequest
+      type: 'POST'
+      reset: true
+
+    console.log 'going to make request:', fetchESOptions
+    $.ajax(fetchESOptions).done((data) ->
+      console.log '(FETCH 2) data received: ', data
+    )
+
+  getRequestData: ->
+    return {
+      "query": {
+        "query_string": {
+          "analyze_wildcard": true,
+          "query": "molecule_chembl_id:(CHEMBL8 OR CHEMBL59 OR CHEMBL138921 OR CHEMBL138040 OR CHEMBL457419 OR CHEMBL1557 OR CHEMBL250711 OR CHEMBL141970 OR CHEMBL456176 OR CHEMBL1256484 OR CHEMBL456817)"
+        }
+      },
+      "size": 0,
+      "aggs": {
+        "molecule_chembl_id_agg": {
+          "terms": {
+            "field": "molecule_chembl_id",
+            size: 100,
+            "order": {
+              "_count": "desc"
+            }
+          },
+          "aggs": {
+            "target_chembl_id_agg": {
+              "terms": {
+                "field": "target_chembl_id",
+                "size": 900,
+                "order": {
+                  "_count": "desc"
+                }
+              },
+              aggs:
+                pchembl_value_avg:
+                  avg:
+                    field: "pchembl_value"
+                pchembl_value_max:
+                  max:
+                    field: "pchembl_value"
+                assay_type_agg:
+                  terms:
+                    field: "assay_type"
+                    size: 100
+            }
+          }
+        }
+      }
+    }
