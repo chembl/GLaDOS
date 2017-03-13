@@ -244,7 +244,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     totalVisualisationWidth = width
     totalVisualisationHeight = height
 
-    svg = mainContainer
+    g = mainContainer
             .append('svg')
             .attr('class', 'mainSVGContainer')
             .attr('width', totalVisualisationWidth)
@@ -252,6 +252,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .attr('style', 'background-color: white;')
             .append("g")
             .attr('class', 'mainGContainer')
+
+    mainSVGContainer = mainContainer.select('.mainSVGContainer')
 
     console.log 'Element IS: ', mainContainer
     console.log 'WIDTH IS: ', totalVisualisationWidth
@@ -315,7 +317,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     BACK_RECT_TRANS_X = -1
     BACK_RECT_TRANS_Y = -1
 
-    svg.append("rect")
+    g.append("rect")
       .attr("class", "background")
       .style("fill", "black")
       .attr("width", backRectWitdh )
@@ -576,7 +578,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('data-tooltip', getCellTooltip )
 
 
-    rows = svg.selectAll('.vis-row')
+    rows = g.selectAll('.vis-row')
       .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
@@ -611,7 +613,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       txt = "molecule: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
 
-    columns = svg.selectAll(".vis-column")
+    columns = g.selectAll(".vis-column")
       .data(matrix.columns)
       .enter().append("g")
       .attr("class", "vis-column")
@@ -633,7 +635,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('data-delay', '50')
       .attr('data-tooltip', getColumnTooltip)
 
-    columnsWithDivLines = svg.selectAll(".vis-column")
+    columnsWithDivLines = g.selectAll(".vis-column")
 
     #divisory lines
     columns.append("line")
@@ -649,16 +651,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     handleZoom = ->
 
+      if not ZOOM_ACTIVATED
+        return
+
       getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
-      svg.selectAll('.background')
+      g.selectAll('.background')
         .attr("width", backRectWitdh * zoom.scale())
         .attr("height", backRectHeight * zoom.scale())
         .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
           ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
 
-      svg.selectAll('.vis-row')
+      g.selectAll('.vis-row')
         .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
         .selectAll("text")
@@ -666,11 +671,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
-      svg.selectAll('.vis-row')
+      g.selectAll('.vis-row')
         .selectAll('.dividing-line')
         .attr("x2", backRectWitdh * zoom.scale())
       
-      svg.selectAll(".vis-column")
+      g.selectAll(".vis-column")
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
         .selectAll("text")
         .attr("y", getXCoord.rangeBand() / (2) )
@@ -681,12 +686,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "rotate(" + LABELS_ROTATION + " " + (LABELS_PADDING*zoom.scale()) + "," + (LABELS_PADDING*zoom.scale()) + ")")
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
-      svg.selectAll(".vis-column")
+      g.selectAll(".vis-column")
         .selectAll('.dividing-line')
         .attr("x1", -(backRectHeight * zoom.scale()))
         .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
 
-      svg.selectAll(".vis-cell")
+      g.selectAll(".vis-cell")
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
@@ -695,11 +700,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_ZOOM_SCALE = 0.2
     MAX_ZOOM_SCALE = 2
     ZOOM_STEP = 0.2
+    ZOOM_ACTIVATED = true
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
       .on("zoom", handleZoom)
 
-    svg.call zoom
+    mainSVGContainer.call zoom
 
     # --------------------------------------
     # colour property selector
@@ -715,7 +721,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       fillLegendDetails()
 
-      t = svg.transition().duration(1000)
+      t = g.transition().duration(1000)
       t.selectAll(".vis-cell")
         .style("fill", fillColour)
         .attr('data-tooltip', getCellTooltip )
@@ -729,15 +735,15 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     triggerRowSortTransition = ->
 
-      t = svg.transition().duration(2500)
+      t = g.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
-      rowTexts = svg.selectAll('.vis-row').selectAll('text')
+      rowTexts = g.selectAll('.vis-row').selectAll('text')
       .attr('data-tooltip', getRowTooltip)
 
-      svg.selectAll(".vis-row")
+      g.selectAll(".vis-row")
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -778,7 +784,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     triggerColSortTransition = ->
-      t = svg.transition().duration(2500)
+      t = g.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
@@ -788,10 +794,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll(".vis-cell")
       .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
 
-      columnTexts = svg.selectAll(".vis-column").selectAll('text')
+      columnTexts = g.selectAll(".vis-column").selectAll('text')
       .attr('data-tooltip', getColumnTooltip)
 
-      svg.selectAll(".vis-column")
+      g.selectAll(".vis-column")
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -814,10 +820,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     adjustVisHeight = ->
 
-      currentBackRectHeight = parseInt(svg.select('.background').attr('height'))
+      currentBackRectHeight = parseInt(g.select('.background').attr('height'))
       desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
 
-      mainContainer.select('.mainSVGContainer')
+      mainSVGContainer
         .attr('height', desiredVisHeight)
 
     resetZoom = ->
@@ -835,17 +841,60 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $(@el).find(".BCK-reset-zoom-btn").click ->
 
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
       resetZoom()
 
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
     $(@el).find(".BCK-zoom-in-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
       zoom.scale( zoom.scale() + ZOOM_STEP )
-      svg.call zoom.event
+      mainSVGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
 
     $(@el).find(".BCK-zoom-out-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
       zoom.scale( zoom.scale() - ZOOM_STEP )
-      svg.call zoom.event
+      mainSVGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+    $(@el).find('.BCK-toggle-grab').click ->
+
+      $targetBtnIcon = $(@)
+      console.log 'target:', $(@)
+
+      if ZOOM_ACTIVATED
+        ZOOM_ACTIVATED = false
+
+        $targetBtnIcon.removeClass 'fa-hand-rock-o'
+        $targetBtnIcon.addClass 'fa-hand-paper-o'
+
+      else
+
+        ZOOM_ACTIVATED = true
+
+        $targetBtnIcon.removeClass 'fa-hand-paper-o'
+        $targetBtnIcon.addClass 'fa-hand-rock-o'
 
     resetZoom()
     adjustVisHeight()
+    ZOOM_ACTIVATED = false
 
 
