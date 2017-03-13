@@ -2083,3 +2083,21 @@ span.badge-primary-color-no-float {
 
 }
 
+/**
+  * Matrix visualisation
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+.es-results-matrix{
+  position: relative;
+}
+.matrix-vis-options{
+  position: absolute;
+  left:0;
+  top:0;
+  padding: 5px;
+  opacity: 0.8;
+
+  a:hover{
+    color: color("teal", "accent-4");
+  }
+}
