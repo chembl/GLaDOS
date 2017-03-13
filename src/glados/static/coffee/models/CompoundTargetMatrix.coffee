@@ -42,6 +42,8 @@ CompoundTargetMatrix = Backbone.Model.extend
   # compounds
   fetch: (options) ->
 
+    @fetch2(options)
+
     idsList = @get('molecule_chembl_ids')
     console.log 'IDS list: ', idsList
 
@@ -200,7 +202,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       for j in [0..(targetsList.length - 1)]
         cell = links[i][j]
         if not cell?
-          links[i][j] = undefined
+          continue
 
     result =
       "columns": targetsList
@@ -211,3 +213,7 @@ CompoundTargetMatrix = Backbone.Model.extend
     console.log 'result: ', result
 
     return {"matrix": result}
+
+  fetch2: (options) ->
+
+    console.log 'FETCH 2'

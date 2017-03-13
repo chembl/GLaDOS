@@ -810,6 +810,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       currentBackRectHeight = parseInt(g.select('.background').attr('height'))
       desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
+      if desiredVisHeight < MIN_VIS_HEIGHT
+        desiredVisHeight = MIN_VIS_HEIGHT
 
       mainSVGContainer
         .attr('height', desiredVisHeight)
@@ -882,6 +884,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $targetBtnIcon.addClass 'fa-hand-rock-o'
 
     resetZoom()
+    MIN_VIS_HEIGHT = 300
     adjustVisHeight()
     ZOOM_ACTIVATED = false
 
