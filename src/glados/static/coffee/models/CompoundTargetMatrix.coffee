@@ -123,8 +123,8 @@ CompoundTargetMatrix = Backbone.Model.extend
       currentCompound = act.molecule_chembl_id
       currentTarget = act.target_chembl_id
 
-      if act.target_pref_name.length > 20
-        currentTargetName = act.target_pref_name.slice(0,20) + '...' + ' (' + act.target_chembl_id + ')'
+      if act.target_pref_name.length > 10
+        currentTargetName = act.target_pref_name.slice(0,10) + '...' + ' (' + act.target_chembl_id + ')'
       else
         currentTargetName = act.target_pref_name + ' (' + act.target_chembl_id + ')'
 
