@@ -312,15 +312,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Add background MATRIX rectangle
     # --------------------------------------
-    backRectWitdh = RANGE_X_END - SIDE_SIZE + 1
+    backRectWidth = RANGE_X_END - SIDE_SIZE + 1
     backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
+
+    backLineWidth = backRectWidth - 3
+    backLineHeight = backRectHeight - 3
+
     BACK_RECT_TRANS_X = -1
     BACK_RECT_TRANS_Y = -1
 
     g.append("rect")
       .attr("class", "background")
-      .style("fill", "black")
-      .attr("width", backRectWitdh )
+      .style("fill", glados.Settings.VISUALISATION_GRID_UNDEFINED)
+      .attr("width", backRectWidth )
       .attr("height", backRectHeight )
       .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
       .attr('stroke-width', 1)
@@ -345,6 +349,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = cell[prop]
           if value?
             domain.push value
@@ -358,6 +366,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       maxVal = Number.MIN_VALUE
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = parseFloat(cell[prop])
           if value > maxVal
             maxVal = value
@@ -531,7 +543,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       for col in columnsList
         j = col.originalIndex
         value = links[i][j]
-        dataList.push(value)
+        if value?
+          dataList.push(value)
+
+      console.log 'dataList: ', dataList
 
       # @ is the current g element
       cells = d3.select(@).selectAll(".vis-cell")
@@ -560,7 +575,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rows.append("line")
       .attr('class', 'dividing-line')
-      .attr("x2", backRectWitdh)
+      .attr("x2", backLineWidth)
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -613,7 +628,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     #divisory lines
     columns.append("line")
       .attr('class', 'dividing-line')
-      .attr("x1", -(backRectHeight))
+      .attr("x1", -(backLineHeight))
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -631,7 +646,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
       g.selectAll('.background')
-        .attr("width", backRectWitdh * zoom.scale())
+        .attr("width", backRectWidth * zoom.scale())
         .attr("height", backRectHeight * zoom.scale())
         .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
           ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
@@ -646,7 +661,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       g.selectAll('.vis-row')
         .selectAll('.dividing-line')
-        .attr("x2", backRectWitdh * zoom.scale())
+        .attr("x2", backLineWidth * zoom.scale())
       
       g.selectAll(".vis-column")
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
@@ -661,7 +676,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       g.selectAll(".vis-column")
         .selectAll('.dividing-line')
-        .attr("x1", -(backRectHeight * zoom.scale()))
+        .attr("x1", -(backLineHeight * zoom.scale()))
         .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
 
       g.selectAll(".vis-cell")
@@ -802,7 +817,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     resetZoom = ->
 
       # get an initial zoom scale so all the matrix is visible.
-      matrixWidth = margin.left + backRectWitdh + margin.right
+      matrixWidth = margin.left + backRectWidth + margin.right
       initialZoomScale = totalVisualisationWidth / matrixWidth
       zoom.scale(initialZoomScale)
       zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])

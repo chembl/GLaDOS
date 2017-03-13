@@ -200,12 +200,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       for j in [0..(targetsList.length - 1)]
         cell = links[i][j]
         if not cell?
-          links[i][j] = {
-            molecule_chembl_id: links[compPos][targPos]['molecule_chembl_id']
-            target_chembl_id: links[compPos][targPos]['target_chembl_id']
-            row_id: links[compPos][targPos]['molecule_chembl_id']
-            col_id: links[compPos][targPos]['target_chembl_id']
-          }
+          links[i][j] = undefined
 
     result =
       "columns": targetsList
