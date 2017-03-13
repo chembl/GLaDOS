@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'reset do-repaint sort', @render, @
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
-      facets_groups = @collection.getFacets()
+      facets_groups = @collection.getFacetsGroups()
       faceting_handler = facets_groups[facet_group_key].faceting_handler
       faceting_handler.toggleKeySelection(facet_key)
 
@@ -19,7 +19,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         faceting_handler.getFacetId(facet_key),
         faceting_handler.faceting_data[facet_key].selected
       )
-#      @collection.fetch()
+      @collection.setMeta('facets_filtered', true)
+      @collection.fetch()
 
     getMenuKey:(facet_group_key)->
       return 'faceting_menu_'+facet_group_key
@@ -27,7 +28,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     render: (collection)->
       # removes the non main menus of the sidebar
       if @collection
-        facets_groups = collection.getFacets()
+        facets_groups = collection.getFacetsGroups()
         if facets_groups
           for facet_group_key, facet_group of facets_groups
             links_data = []

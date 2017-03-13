@@ -225,7 +225,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
             resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
 
-            facet_view_res = new glados.views.SearchResults.SearchFacetView
+            res_facet_view = new glados.views.SearchResults.SearchFacetView
               collection: resultsListsDict[resourceName]
               search_bar_view: @
 

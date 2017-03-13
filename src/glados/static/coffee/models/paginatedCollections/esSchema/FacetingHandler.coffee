@@ -3,11 +3,26 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # Elastic Search Faceting Handler
   # --------------------------------------------------------------------------------------------------------------------
   FacetingHandler: class FacetingHandler
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Class Context
+    # ------------------------------------------------------------------------------------------------------------------
+
     @CATEGORY_FACETING = 'CATEGORY'
     @INTERVAL_FACETING = 'INTERVAL'
 
     @OTHERS_CATEGORY = 'Others'
     @KEY_REGEX_REPLACE = /[^A-Z0-9]/gi
+
+    @getAllFacetGroupsSelectedQuery: (faceting_handlers_list)->
+      all_facets_query = { bool:{ must:[] }}
+      for faceting_handler_i in faceting_handlers_list
+        fh_query_i = faceting_handler_i.getSelectedFacetsFilterQuery()
+        if fh_query_i
+          all_facets_query.bool.must.push(fh_query_i)
+      if all_facets_query.bool.must.length == 0
+        return null
+      return all_facets_query
 
     @getNewFacetingHandler = (es_index, es_property)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
@@ -25,6 +40,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else
         console.log("ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
             +" does not have a defined faceting type")
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Instance Context
+    # ------------------------------------------------------------------------------------------------------------------
 
     constructor:(@es_property_name, @js_type, @faceting_type)->
       @faceting_keys_inorder = null
@@ -60,6 +79,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               }
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
 
+    getSelectedFacetsFilterQuery: ()->
+      selected_query = {
+        bool:{ should:[] }
+      }
+      for facet_key, facet_data of @faceting_data
+        if facet_data.selected
+          selected_query.bool.should.push(@getFilterQueryForFacetKey(facet_key))
+      if selected_query.bool.should.length ==0
+        return null
+      return selected_query
+
     toggleKeySelection: (facet_key)->
       @faceting_data[facet_key].selected = not @faceting_data[facet_key].selected
       return @faceting_data[facet_key].selected
@@ -76,12 +106,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         else
           # For the others query we need to negate the non other category facet keys
           filter_terms_query = {
-            not:[]
+            bool:{ mustNot:[] }
           }
           for facet_key_i in @faceting_keys_inorder
             if facet_key_i != FacetingHandler.OTHERS_CATEGORY
               key_i_term_query = {term: {}}
               key_i_term_query.term[@es_property_name] = facet_key_i
-              filter_terms_query.not.push(key_i_term_query)
+              filter_terms_query.bool.mustNot.push(key_i_term_query)
       console.log filter_terms_query
       return filter_terms_query

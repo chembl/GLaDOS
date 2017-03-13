@@ -49,7 +49,6 @@ class SideMenuHelper
     SideMenuHelper.$side_menu.find('.'+menu_key).show()
 
   @findMenuLink: (menu_key, link_class_key)->
-    console.log('Searching menu link', link_class_key, @$side_menu.find('.'+menu_key).find('.'+link_class_key).length )
     return @$side_menu.find('.'+menu_key).find('.'+link_class_key)
 
   @updateSelectedLink: (menu_key, link_class_key, selected)->

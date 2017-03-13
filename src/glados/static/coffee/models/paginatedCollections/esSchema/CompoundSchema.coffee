@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # Elastic Search Compound Schema
   # --------------------------------------------------------------------------------------------------------------------
   CompoundSchema:
-    FACETS:
+    FACETS_GROUPS:
       molecule_type:
         label: 'Molecule Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(

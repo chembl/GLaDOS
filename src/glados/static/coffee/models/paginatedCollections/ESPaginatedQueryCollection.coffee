@@ -22,8 +22,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
       if @meta.facets_requested and not _.isUndefined(data.aggregations)
-        for facet_key_i, facet_i of @meta.facets
-          facet_i.faceting_handler.parseESResults(data.aggregations)
+        for facet_group_key, facet_group of @meta.facets_groups
+          facet_group.faceting_handler.parseESResults(data.aggregations)
 
       return jsonResultsList
 
@@ -48,14 +48,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, facets_filtered) ->
-      facets_filtered = if _.isUndefined(facets_filtered) then true else facets_filtered
+    getRequestData: (customPage, customPageSize) ->
+      facets_filtered = @getMeta('facets_filtered')
+      facets_filtered = if _.isUndefined(facets_filtered) then false else facets_filtered
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
-      filter_terms = @getMeta("filter_terms")
-      filter_queries = @getMeta("filter_queries")
       exact_terms_joined = null
       if singular_terms.length == 0 and exact_terms.length == 0
         exact_terms_joined = '*'
@@ -135,10 +134,36 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                   }
                 ]
       }
-      if filter_terms.length > 0
+      # Includes the filter query by query filter terms and selected facets
+      filter_query = @getFilterQuery(facets_filtered)
+      if filter_query
+        es_query.query.bool.filter = [filter_query]
+
+      if singular_terms.length > 0
+        es_query.query.bool.must.bool.should.push(by_term_query)
+
+      if not facets_filtered
+        facets_query = @getFacetsGroupsAggsQuery()
+        @meta.facets_requested = false
+        if facets_query
+          es_query.aggs = facets_query
+          @meta.facets_requested = true
+      return es_query
+
+    getFacetsGroupsAggsQuery: ()->
+      if @meta.facets_groups
+        aggs_query = {}
+        for facet_group_key, facet_group of @meta.facets_groups
+          facet_group.faceting_handler.addQueryAggs(aggs_query)
+        return aggs_query
+
+    getFilterQuery: (facets_filtered) ->
+      filter_query = {bool:{ must:[] }}
+
+      filter_terms = @getMeta("filter_terms")
+      if filter_terms and filter_terms.length > 0
         filter_terms_joined = filter_terms.join(' ')
-        es_query.query.bool.filter =
-          [
+        filter_query.bool.must.push(
             {
               query_string:
                 fields: [
@@ -147,39 +172,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 fuzziness: 0
                 query: filter_terms_joined
             }
-          ]
-      if filter_queries
-        es_query.query.bool.filter = []
-#        es_facets_queries =
-        for filter_query_i in filter_queries
-          es_query.query.bool.filter.push(filter_query_i)
-#        console.log(es_facets_queries)
-#        es_query.query.bool.filter.push(es_facets_queries)
-#        console.log(es_query)
+        )
+      if facets_filtered
+        faceting_handlers = (@meta.facets_groups[facet_group_key] for facet_group_key in @meta.facets_groups)
+        facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
+          .getAllFacetGroupsSelectedQuery(faceting_handlers)
+        if facets_groups_query
+          filter_query.bool.must.push facets_groups_query
+      if filter_query.bool.must.length == 0
+        return null
+      return filter_query
 
 
-      if singular_terms.length > 0
-        es_query.query.bool.must.bool.should.push(by_term_query)
-      facets_query = @getFacetsAggsQuery()
-      @meta.facets_requested = false
-      if facets_query
-        es_query.aggs = facets_query
-        @meta.facets_requested = true
-      return es_query
-
-    getFacetsAggsQuery: ()->
-      console.log @meta.facets
-      if @meta.facets
-        aggs_query = {}
-        for facet_key_i, facet_i of @meta.facets
-          facet_i.faceting_handler.addQueryAggs(aggs_query)
-        return aggs_query
-
-    getSelectedFacetsQuery: () ->
 
 
-    getFacets:()->
-      return @meta.facets
+    getFacetsGroups:()->
+      return @meta.facets_groups
 
     # builds the url to do the request
     getURL: ->
