@@ -2,7 +2,7 @@
 <script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
   {% verbatim %}
   <li class="no-padding{{#if menu_class}} {{menu_class}}{{/if}}">
-    <div class="collapsible-header chembl-teal white-text">
+    <div class="collapsible-header{{#if menu_class}} {{menu_class}}{{/if}} chembl-teal white-text">
       <table class="no-padding">
         <tr class="no-padding">
           <td class="no-padding">
@@ -24,7 +24,8 @@
       <ul>
         {{#each links}}
         <li>
-          <a {{#if this.link_id}}id="{{this.link_id}}" {{/if}}class="waves-effect waves-teal"{{#if this.href}} href="{{this.href}}"{{/if}}>
+          <a  class="waves-effect waves-teal{{#if this.selected}} selected{{/if}}{{#if this.link_class_key}} {{this.link_class_key}}{{/if}}"
+              {{#if this.href}} href="{{this.href}}"{{/if}}>
             <table class="no-padding">
               <tr class="no-padding">
                 <td class="no-padding" style="max-width: 117px; word-wrap: break-word;">

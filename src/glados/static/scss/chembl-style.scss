@@ -212,6 +212,16 @@ $sidenav-badge-padding: 3px;
       line-height: $sidenav-links-lineheight !important;
       padding: 0px !important;
       li a{
+
+        &.selected{
+          background: $primary-color;
+          color: white;
+          span.badge{
+            color: $primary-color;
+            background-color: $chip-bg-color;
+          }
+        }
+
         font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
         min-height: inherit !important;
         line-height: $sidenav-links-lineheight !important;

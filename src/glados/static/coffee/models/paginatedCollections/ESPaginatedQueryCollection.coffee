@@ -48,7 +48,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize) ->
+    getRequestData: (customPage, customPageSize, facets_filtered) ->
+      facets_filtered = if _.isUndefined(facets_filtered) then true else facets_filtered
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
@@ -173,6 +174,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for facet_key_i, facet_i of @meta.facets
           facet_i.faceting_handler.addQueryAggs(aggs_query)
         return aggs_query
+
+    getSelectedFacetsQuery: () ->
+
 
     getFacets:()->
       return @meta.facets

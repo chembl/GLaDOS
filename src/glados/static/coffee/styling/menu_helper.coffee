@@ -48,6 +48,16 @@ class SideMenuHelper
     SideMenuHelper.$side_menu.find('.collapsible-body').hide()
     SideMenuHelper.$side_menu.find('.'+menu_key).show()
 
+  @findMenuLink: (menu_key, link_class_key)->
+    console.log('Searching menu link', link_class_key, @$side_menu.find('.'+menu_key).find('.'+link_class_key).length )
+    return @$side_menu.find('.'+menu_key).find('.'+link_class_key)
+
+  @updateSelectedLink: (menu_key, link_class_key, selected)->
+    $link = SideMenuHelper.findMenuLink(menu_key, link_class_key)
+    if selected
+      $link.addClass('selected')
+    else
+      $link.removeClass('selected')
 
   @renderMenus = (select_after_render)->
     # Shows all the headers and hides all the bodies
@@ -61,9 +71,8 @@ class SideMenuHelper
     # Linking selection events
     for menu_key_i, menu_data_i of SideMenuHelper.additional_menus
       for link_i in menu_data_i.links
-        if link_i.select_callback and link_i.link_id
-          console.log('Linking menu link', link_i.link_id, @$side_menu.find('#'+link_i.link_id).length )
-          @$side_menu.find('#'+link_i.link_id).click(link_i.select_callback)
+        if link_i.select_callback and link_i.link_class_key
+          SideMenuHelper.findMenuLink(menu_key_i, link_i.link_class_key).click(link_i.select_callback)
 
     if SideMenuHelper.$side_menu.find('.collapsible-header').length == 1
       SideMenuHelper.$side_menu.find('.collapsible-header').hide()

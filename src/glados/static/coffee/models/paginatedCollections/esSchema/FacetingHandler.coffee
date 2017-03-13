@@ -45,15 +45,27 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         if aggregated_data
           if not _.isUndefined(aggregated_data.buckets)
             for bucket_i in aggregated_data.buckets
+              @faceting_data[bucket_i.key] = {
+                index: @faceting_keys_inorder.length
+                count: bucket_i.doc_count
+                selected: false
+              }
               @faceting_keys_inorder.push(bucket_i.key)
-              @faceting_data[bucket_i.key] = bucket_i.doc_count
 
           if not _.isUndefined(aggregated_data.sum_other_doc_count) and aggregated_data.sum_other_doc_count > 0
+              @faceting_data[FacetingHandler.OTHERS_CATEGORY] = {
+                index: @faceting_keys_inorder.length
+                count: aggregated_data.sum_other_doc_count
+                selected: false
+              }
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
-              @faceting_data[FacetingHandler.OTHERS_CATEGORY] = aggregated_data.sum_other_doc_count
+
+    toggleKeySelection: (facet_key)->
+      @faceting_data[facet_key].selected = not @faceting_data[facet_key].selected
+      return @faceting_data[facet_key].selected
 
     getFacetId:(facet_key)->
-      return @es_property_name+"_"+facet_key.replace(FacetingHandler.KEY_REGEX_REPLACE,'_')
+      return @es_property_name+"-facet-"+@faceting_data[facet_key].index
 
     getFilterQueryForFacetKey: (facet_key)->
       filter_terms_query = null

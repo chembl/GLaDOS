@@ -9,11 +9,20 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'reset do-repaint sort', @render, @
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
-        facets_groups = @collection.getFacets()
-        faceting_handler = facets_groups[facet_group_key].faceting_handler
+      facets_groups = @collection.getFacets()
+      faceting_handler = facets_groups[facet_group_key].faceting_handler
+      faceting_handler.toggleKeySelection(facet_key)
 
-        @collection.setMeta('filter_queries', [faceting_handler.getFilterQueryForFacetKey(facet_key)])
-        @collection.fetch()
+      menu_key = @getMenuKey(facet_group_key)
+      SideMenuHelper.updateSelectedLink(
+        menu_key,
+        faceting_handler.getFacetId(facet_key),
+        faceting_handler.faceting_data[facet_key].selected
+      )
+#      @collection.fetch()
+
+    getMenuKey:(facet_group_key)->
+      return 'faceting_menu_'+facet_group_key
 
     render: (collection)->
       # removes the non main menus of the sidebar
@@ -27,12 +36,13 @@ glados.useNameSpace 'glados.views.SearchResults',
             for facet_key in faceting_handler_i.faceting_keys_inorder
               link_facet_i = {}
               link_facet_i.select_callback = @toggleSelectFacet.bind(@, facet_group_key, facet_key)
-              link_facet_i.link_id = faceting_handler_i.getFacetId(facet_key)
+              link_facet_i.link_class_key = faceting_handler_i.getFacetId(facet_key)
               link_facet_i.label = facet_key
-              link_facet_i.badge = faceting_handler_i.faceting_data[facet_key]
-              facet_total += faceting_handler_i.faceting_data[facet_key]
+              link_facet_i.selected = faceting_handler_i.faceting_data[facet_key].selected
+              link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
+              facet_total += faceting_handler_i.faceting_data[facet_key].count
               links_data.push(link_facet_i)
-            menu_key = 'faceting_menu_'+facet_group_key
+            menu_key = @getMenuKey(facet_group_key)
             if facet_total
               SideMenuHelper.addMenu(menu_key,
                 {
