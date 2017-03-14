@@ -102,7 +102,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintMatrix: ->
 
-    console.log 'PAINT MATRIX!'
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -114,22 +113,22 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "label": "C1",
           "originalIndex": 0
           "currentPosition": 0
-          pchembl_value_sum: 30
-          published_value_sum: 330
+          pchembl_value: 30
+          published_value: 330
         },
         {
           "label": "C2",
           "originalIndex": 1
           "currentPosition": 1
-          pchembl_value_sum: 26
-          published_value_sum: 260
+          pchembl_value: 26
+          published_value: 260
         },
         {
           "label": "C3",
           "originalIndex": 2
           "currentPosition": 2
-          pchembl_value_sum: 22
-          published_value_sum: 190
+          pchembl_value: 22
+          published_value: 190
         }
       ],
       "rows": [
@@ -137,29 +136,29 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           "label": "T1",
           "originalIndex": 0
           "currentPosition": 0
-          pchembl_value_sum: 33
-          published_value_sum: 240
+          pchembl_value: 33
+          published_value: 240
         },
         {
           "label": "T2",
           "originalIndex": 1
           "currentPosition": 1
-          pchembl_value_sum: 24
-          published_value_sum: 210
+          pchembl_value: 24
+          published_value: 210
         },
         {
           "label": "T3",
           "originalIndex": 2
           "currentPosition": 2
-          pchembl_value_sum: 15
-          published_value_sum: 90
+          pchembl_value: 15
+          published_value: 90
         },
         {
           "label": "T4",
           "originalIndex": 3
           "currentPosition": 3
-          pchembl_value_sum: 6
-          published_value_sum: 240
+          pchembl_value: 6
+          published_value: 240
         },
       ],
       "links": {
@@ -255,10 +254,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
 
-    console.log 'Element IS: ', mainContainer
-    console.log 'WIDTH IS: ', totalVisualisationWidth
-    console.log 'HEIGHT IS: ', totalVisualisationHeight
-
     # --------------------------------------
     # Legend initialisation
     # --------------------------------------
@@ -273,11 +268,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', legendWidth )
       .attr('height', legendHeight )
 
-    # --------------------------------------
-    # Precompute indexes TODO: put it in model
-    # --------------------------------------
-    rowsIndex = _.indexBy(matrix.rows, 'label')
-    columnsIndex = _.indexBy(matrix.columns, 'label')
 
     # --------------------------------------
     # Sort by default value
@@ -287,18 +277,18 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       newOrders = _.sortBy(matrix.rows, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        rowsIndex[row.label].currentPosition = index
+        matrix.rows_index[row.label].currentPosition = index
 
-    sortMatrixRowsBy config.initial_row_sorting + '_sum', config.initial_row_sorting_reverse
+    sortMatrixRowsBy config.initial_row_sorting, config.initial_row_sorting_reverse
 
     sortMatrixColsBy = (prop, reverse) ->
 
       newOrders = _.sortBy(matrix.columns, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        columnsIndex[row.label].currentPosition = index
+        matrix.columns_index[row.label].currentPosition = index
 
-    sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
+    sortMatrixColsBy config.initial_col_sorting, config.initial_col_sorting_reverse
 
     getYCoord = d3.scale.ordinal()
       .domain([0..NUM_ROWS])
@@ -312,15 +302,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Add background MATRIX rectangle
     # --------------------------------------
-    backRectWitdh = RANGE_X_END - SIDE_SIZE + 1
+    backRectWidth = RANGE_X_END - SIDE_SIZE + 1
     backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
+
+    backLineWidth = backRectWidth - 3
+    backLineHeight = backRectHeight - 3
+
     BACK_RECT_TRANS_X = -1
     BACK_RECT_TRANS_Y = -1
 
     g.append("rect")
       .attr("class", "background")
-      .style("fill", "black")
-      .attr("width", backRectWitdh )
+      .style("fill", glados.Settings.VISUALISATION_GRID_UNDEFINED)
+      .attr("width", backRectWidth )
       .attr("height", backRectHeight )
       .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
       .attr('stroke-width', 1)
@@ -329,9 +323,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Sort properties
     # --------------------------------------
-    currentRowSortingProperty = config.initial_row_sorting + '_sum'
+    currentRowSortingProperty = config.initial_row_sorting
     currentRowSortingPropertyReverse = config.initial_row_sorting_reverse
-    currentColSortingProperty = config.initial_col_sorting + '_sum'
+    currentColSortingProperty = config.initial_col_sorting
     currentColSortingPropertyReverse = config.initial_row_sorting_reverse
 
     # --------------------------------------
@@ -345,6 +339,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = cell[prop]
           if value?
             domain.push value
@@ -358,6 +356,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       maxVal = Number.MIN_VALUE
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = parseFloat(cell[prop])
           if value > maxVal
             maxVal = value
@@ -376,7 +378,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       scale = d3.scale.linear()
         .domain(colourDomain)
-        .range(["#FFFFFF", glados.Settings.EMBL_GREEN])
+        .range([glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX])
 
       return scale
 
@@ -489,31 +491,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
      # --------------------------------------
     # Hover
     # --------------------------------------
-    # index to identify the cells and speed up some operations, for a row id, there is a list of cells that belong to
-    # that row. the same for columns.
-    visCellRowsIndex = {}
-    visCellColsIndex = {}
-    numCellsProcesed = 0
-    addVisCellToIndex = (cell, data) ->
-
-      if !visCellRowsIndex[data.row_id]?
-        visCellRowsIndex[data.row_id] = []
-
-      visCellRowsIndex[data.row_id].push(cell)
-
-      if !visCellColsIndex[data.col_id]?
-        visCellColsIndex[data.col_id] = []
-
-      visCellColsIndex[data.col_id].push(cell)
-
-    hoverCellsAndColumnsForCell = (cellData) ->
-
-      cellsToHoverRow = visCellRowsIndex[cellData[0].row_id]
-      cellsToHoverCol = visCellColsIndex[cellData[0].col_id]
-      for cell in cellsToHoverRow
-        console.log('cell: ', cell)
-
-
     handleCellMouseover = () ->
 
       selectedElement = d3.select(@)
@@ -524,13 +501,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       selectedElement.attr('opacity', 0.6)
 
-#      hoverCellsAndColumnsForCell selectedElement.data()
 
     handleCellMouseout = () ->
 
       selectedElement = d3.select(@)
       selectedElement.attr('opacity', 1)
-      console.log 'OUT'
 
 
     # --------------------------------------
@@ -538,39 +513,33 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
+      txt = d.row_id + "\n" + d.col_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
 
       return txt
 
     getRowTooltip = (d) ->
 
-      txt = "target: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
+      txt = "Compound: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
 
       columnsList = matrix.columns
-      rowInMatrix = matrix.rows[rowNumber]
-      i = rowInMatrix.originalIndex
+      i = row.originalIndex
 
-      dataList = []
-      for col in columnsList
-        j = col.originalIndex
-        value = links[i][j]
-        dataList.push(value)
+      dataList = ( value for key, value of links[i])
 
       # @ is the current g element
       cells = d3.select(@).selectAll(".vis-cell")
         .data(dataList)
         .enter().append("rect")
         .attr("class", "vis-cell")
-        .attr("x", (d, colNum) -> getXCoord(columnsList[colNum].currentPosition) )
+        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition))
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .style("fill", fillColour )
         .on("mouseover", handleCellMouseover)
         .on("mouseout", handleCellMouseout)
-        .each((d) -> addVisCellToIndex(@, d))
 
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
@@ -587,7 +556,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rows.append("line")
       .attr('class', 'dividing-line')
-      .attr("x2", backRectWitdh)
+      .attr("x2", backLineWidth)
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -611,7 +580,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getColumnTooltip = (d) ->
 
-      txt = "molecule: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
+      txt = "Target: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
 
     columns = g.selectAll(".vis-column")
       .data(matrix.columns)
@@ -640,7 +609,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     #divisory lines
     columns.append("line")
       .attr('class', 'dividing-line')
-      .attr("x1", -(backRectHeight))
+      .attr("x1", -(backLineHeight))
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
@@ -658,7 +627,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
       g.selectAll('.background')
-        .attr("width", backRectWitdh * zoom.scale())
+        .attr("width", backRectWidth * zoom.scale())
         .attr("height", backRectHeight * zoom.scale())
         .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
           ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
@@ -673,7 +642,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       g.selectAll('.vis-row')
         .selectAll('.dividing-line')
-        .attr("x2", backRectWitdh * zoom.scale())
+        .attr("x2", backLineWidth * zoom.scale())
       
       g.selectAll(".vis-column")
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
@@ -688,13 +657,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       g.selectAll(".vis-column")
         .selectAll('.dividing-line')
-        .attr("x1", -(backRectHeight * zoom.scale()))
+        .attr("x1", -(backLineHeight * zoom.scale()))
         .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
 
       g.selectAll(".vis-cell")
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
-        .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
+        .attr("x", (d, index) -> getXCoord(matrix.columns_index[d.col_id].currentPosition) )
 
 
     MIN_ZOOM_SCALE = 0.2
@@ -754,7 +723,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       targetDimension = $(@).attr('data-target-property')
       if targetDimension == 'row'
 
-        console.log 're-sort rows'
         currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
         sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
         paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
@@ -776,7 +744,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentRowSortingProperty = @value + '_sum'
+      currentRowSortingProperty = @value
       sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
       paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
       triggerRowSortTransition()
@@ -809,7 +777,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentColSortingProperty = @value + '_sum'
+      currentColSortingProperty = @value
       sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
 
       triggerColSortTransition()
@@ -822,6 +790,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       currentBackRectHeight = parseInt(g.select('.background').attr('height'))
       desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
+      if desiredVisHeight < MIN_VIS_HEIGHT
+        desiredVisHeight = MIN_VIS_HEIGHT
 
       mainSVGContainer
         .attr('height', desiredVisHeight)
@@ -829,7 +799,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     resetZoom = ->
 
       # get an initial zoom scale so all the matrix is visible.
-      matrixWidth = margin.left + backRectWitdh + margin.right
+      matrixWidth = margin.left + backRectWidth + margin.right
       initialZoomScale = totalVisualisationWidth / matrixWidth
       zoom.scale(initialZoomScale)
       zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])
@@ -878,7 +848,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $(@el).find('.BCK-toggle-grab').click ->
 
       $targetBtnIcon = $(@)
-      console.log 'target:', $(@)
 
       if ZOOM_ACTIVATED
         ZOOM_ACTIVATED = false
@@ -894,6 +863,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $targetBtnIcon.addClass 'fa-hand-rock-o'
 
     resetZoom()
+    MIN_VIS_HEIGHT = 300
     adjustVisHeight()
     ZOOM_ACTIVATED = false
 
