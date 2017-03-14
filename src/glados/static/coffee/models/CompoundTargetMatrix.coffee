@@ -318,10 +318,13 @@ CompoundTargetMatrix = Backbone.Model.extend
     console.log 'targetsList', targetsList
     console.log 'links', links
 
+
     result =
-      "columns": targetsList
-      "rows": compoundsList
-      "links": links
+      columns: targetsList
+      rows: compoundsList
+      links: links
+      rows_index: _.indexBy(compoundsList, 'label')
+      columns_index: _.indexBy(targetsList, 'label')
 
     console.log 'result: ', result
 
