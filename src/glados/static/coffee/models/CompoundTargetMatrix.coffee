@@ -35,12 +35,30 @@ CompoundTargetMatrix = Backbone.Model.extend
         published_value: "number"
     }
 
+    config = {
+      initial_colouring: 'activity_count'
+      colour_properties: ['activity_count', 'pchembl_value_avg']
+      initial_row_sorting: 'activity_count'
+      initial_row_sorting_reverse: true
+      row_sorting_properties: ['activity_count', 'pchembl_value_max']
+      initial_col_sorting: 'activity_count'
+      initial_col_sorting_reverse: true
+      col_sorting_properties: ['activity_count', 'pchembl_value_max']
+      propertyToType:
+        activity_count: "number"
+        pchembl_value_avg: "number"
+        pchembl_value_max: "number"
+    }
+
+
+
     @set('config', config)
 
 # This fetch uses a post to get the information, to avoid any issue with the lenght of the url due to the ammount of
 # compounds
   fetch: (options) ->
     @fetch2(options)
+    return
 
     idsList = @get('molecule_chembl_ids')
     console.log 'IDS list: ', idsList
@@ -183,17 +201,6 @@ CompoundTargetMatrix = Backbone.Model.extend
       act['col_id'] = act.target_chembl_id
       links[compPos][targPos] = act
 
-    # fill missing values with {}
-    for i in [0..(compoundsList.length - 1)]
-      row = links[i]
-      if not row?
-        links[i] = {}
-
-      for j in [0..(targetsList.length - 1)]
-        cell = links[i][j]
-        if not cell?
-          continue
-
     result =
       "columns": targetsList
       "rows": compoundsList
@@ -218,37 +225,139 @@ CompoundTargetMatrix = Backbone.Model.extend
       reset: true
 
     console.log 'going to make request:', fetchESOptions
+    thisModel = @
     $.ajax(fetchESOptions).done((data) ->
-      console.log '(FETCH 2) data received: ', data
+      thisModel.set(thisModel.parse2 data)
     )
 
+  parse2: (data) ->
+
+    console.log 'parse new data!'
+    console.log data
+
+    compoundsToPosition = {}
+    targetsToPosition = {}
+    links = {}
+
+    compoundsList = []
+    latestCompPos = 0
+    targetsList = []
+    latestTargPos = 0
+
+    rowsIndex = {}
+    columnsIndex = {}
+
+    # start with the list of molecules from the aggregation
+    molsBuckets = data.aggregations.molecule_chembl_id_agg.buckets
+
+    for moleculeBucket in molsBuckets
+
+      # what do I know now? I am seeing a new compound
+      compLabel = moleculeBucket.key
+
+      # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
+      newCompoundObj =
+        label: compLabel
+        originalIndex: latestCompPos
+        currentPosition: latestCompPos
+        activity_count: moleculeBucket.doc_count
+        pchembl_value_max: moleculeBucket.pchembl_value_max.value
+
+      compoundsList.push newCompoundObj
+      compoundsToPosition[compLabel] = latestCompPos
+      latestCompPos++
+
+      # now check the targets for this molecule
+      targBuckets = moleculeBucket.target_chembl_id_agg.buckets
+      for targetBucket in targBuckets
+
+        # what do I know now? there is a target, it could be new or repeated
+        targLabel = 'Targ: ' + targetBucket.key
+        targPos = targetsToPosition[targLabel]
+
+        # it is new!
+        if not targPos?
+
+          newTargetObj =
+            label: targLabel
+            originalIndex: latestTargPos
+            currentPosition: latestTargPos
+            activity_count: targetBucket.doc_count
+            pchembl_value_max: targetBucket.pchembl_value_max.value
+
+          targetsList.push newTargetObj
+          targetsToPosition[targLabel] = latestTargPos
+          latestTargPos++
+
+        # it is not new, I just need to update the row properties
+        else
+
+           targObj = targetsList[targPos]
+           targObj.activity_count += targetBucket.doc_count
+           targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
+
+        # now I know that there is a new intersection!
+        activities =
+          row_id: compLabel
+          col_id: targLabel
+          activity_count: targetBucket.doc_count
+          pchembl_value_avg: targetBucket.pchembl_value_avg.value
+
+
+        # here the compound and target must exist in the lists, recalculate the positions
+        compPos = compoundsToPosition[compLabel]
+        targPos = targetsToPosition[targLabel]
+
+        # create object for storing columns if not yet there
+        if not links[compPos]?
+          links[compPos] = {}
+
+        links[compPos][targPos] = activities
+
+    console.log 'compoundsList', compoundsList
+    console.log 'targetsList', targetsList
+    console.log 'links', links
+
+    result =
+      "columns": targetsList
+      "rows": compoundsList
+      "links": links
+
+    console.log 'result: ', result
+
+    return {"matrix": result}
+
+
   getRequestData: ->
+
+    # just limit for now the ammount of data received
+    if @get('molecule_chembl_ids').length < 1000
+      idsList = @get('molecule_chembl_ids')
+    else
+      idsList = @get('molecule_chembl_ids')[0..1000]
+
     return {
-      "query": {
-        "query_string": {
-          "analyze_wildcard": true,
-          "query": "molecule_chembl_id:(CHEMBL8 OR CHEMBL59 OR CHEMBL138921 OR CHEMBL138040 OR CHEMBL457419 OR CHEMBL1557 OR CHEMBL250711 OR CHEMBL141970 OR CHEMBL456176 OR CHEMBL1256484 OR CHEMBL456817)"
-        }
-      },
-      "size": 0,
-      "aggs": {
-        "molecule_chembl_id_agg": {
-          "terms": {
-            "field": "molecule_chembl_id",
-            size: 100,
-            "order": {
-              "_count": "desc"
-            }
-          },
-          "aggs": {
-            "target_chembl_id_agg": {
-              "terms": {
-                "field": "target_chembl_id",
-                "size": 900,
-                "order": {
-                  "_count": "desc"
-                }
-              },
+      query:
+        terms:
+          molecule_chembl_id: idsList
+      size: 0
+      aggs:
+        molecule_chembl_id_agg:
+          terms:
+            field: "molecule_chembl_id",
+            size: 5,
+            order:
+              _count: "desc"
+          aggs:
+            pchembl_value_max:
+              max:
+                field: "pchembl_value"
+            target_chembl_id_agg:
+              terms:
+                field: "target_chembl_id",
+                size: 5,
+                order:
+                  _count: "desc"
               aggs:
                 pchembl_value_avg:
                   avg:
@@ -260,8 +369,5 @@ CompoundTargetMatrix = Backbone.Model.extend
                   terms:
                     field: "assay_type"
                     size: 100
-            }
-          }
-        }
-      }
+
     }
