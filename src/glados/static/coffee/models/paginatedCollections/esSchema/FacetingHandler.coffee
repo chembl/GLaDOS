@@ -11,6 +11,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @CATEGORY_FACETING = 'CATEGORY'
     @INTERVAL_FACETING = 'INTERVAL'
 
+    @NUM_INTERVALS = 6
+
     @OTHERS_CATEGORY = 'Others'
     @KEY_REGEX_REPLACE = /[^A-Z0-9]/gi
 
@@ -48,15 +50,48 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     constructor:(@es_property_name, @js_type, @faceting_type)->
       @faceting_keys_inorder = null
       @faceting_data = null
+      @min_value = null
+      @max_value = null
+      @intervals_size = null
 
-    addQueryAggs:(es_query_aggs)->
+    # ------------------------------------------------------------------------------------------------------------------
+    # Query and Parse Facets to/from Elasticsearch
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # Interval aggregations require 2 calls to find out first the min/max range
+    # and then create an histogram of n columns
+    addQueryAggs:(es_query_aggs, first_call)->
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
-        es_query_aggs[@es_property_name] = {
-          terms:
-            field: @es_property_name
-        }
+        if first_call
+          es_query_aggs[@es_property_name] = {
+            terms:
+              field: @es_property_name
+          }
+      else if @faceting_type == FacetingHandler.INTERVAL_FACETING
+        if first_call
+          es_query_aggs[@es_property_name+'_MIN'] = {
+            min:
+              field: @es_property_name
+          }
+          es_query_aggs[@es_property_name+'_MAX'] = {
+            max:
+              field: @es_property_name
+          }
+        else
+          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
+            console.log("ERROR! The minimum and maximum have not been requested yet!")
+          else
+            round_diff = Math.floor(@max_value-@min_value+1)
+            @intervals_size = (@max_value-@min_value)/FacetingHandler.NUM_INTERVALS
+            if round_diff < FacetingHandler.NUM_INTERVALS
+              @intervals_size = round_diff + 1
+            es_query_aggs[@es_property_name] = {
+              histogram:
+                field: @es_property_name
+                interval: @intervals_size
+            }
 
-    parseESResults: (es_aggregations_data)->
+    parseESResults: (es_aggregations_data, first_call)->
       @faceting_keys_inorder = []
       @faceting_data = {}
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
@@ -78,6 +113,30 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 selected: false
               }
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
+      else if @faceting_type == FacetingHandler.INTERVAL_FACETING
+        if first_call
+          @min_value = es_aggregations_data[@es_property_name+'_MIN'].value
+          @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
+        else
+          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
+            console.log("ERROR! The minimum and maximum have not been requested yet!")
+            return
+          aggregated_data = es_aggregations_data[@es_property_name]
+          if aggregated_data
+            if not _.isUndefined(aggregated_data.buckets)
+              for bucket_i in aggregated_data.buckets
+                @faceting_data["["+bucket_i.key+" - "+(bucket_i.key+@intervals_size)+")"] = {
+                  min: bucket_i.key
+                  max: bucket_i.key + @intervals_size
+                  index: @faceting_keys_inorder.length
+                  count: bucket_i.doc_count
+                  selected: false
+                }
+                @faceting_keys_inorder.push(bucket_i.key)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Facets Functions
+    # ------------------------------------------------------------------------------------------------------------------
 
     getSelectedFacetsFilterQuery: ()->
       selected_query = {
@@ -113,5 +172,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               key_i_term_query = {term: {}}
               key_i_term_query.term[@es_property_name] = facet_key_i
               filter_terms_query.bool.mustNot.push(key_i_term_query)
-      console.log filter_terms_query
+      else if @faceting_type == FacetingHandler.INTERVAL_FACETING
+        filter_terms_query = {range: {}}
+        filter_terms_query.range[@es_property_name] = {
+          'gte': @faceting_data[facet_key].min
+          'lt': @faceting_data[facet_key].max
+        }
+
       return filter_terms_query

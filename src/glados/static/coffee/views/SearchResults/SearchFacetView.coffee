@@ -4,7 +4,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: () ->
       # @collection - must be provided in the constructor call
-      # @search_bar_view - must be provided in the constructor call
+      console.log arguments
+      @search_bar_view = arguments[0].search_bar_view
+      @collection_container = arguments[0].collection_container
+      console.log 'HOLA'
+      console.log @collection_container
       @el = $('.collapsible.collapsible-accordion.side-nav')
       @collection.on 'reset do-repaint sort', @render, @
 
@@ -21,13 +25,17 @@ glados.useNameSpace 'glados.views.SearchResults',
       )
       @collection.setMeta('facets_filtered', true)
       @collection.fetch()
+      goto_callback = ()->
+        console.log('Scrolling')
+        $(window).scrollTop(@collection_container.offset().top)
+
+      setTimeout( goto_callback.bind(@), 1000)
 
     getMenuKey:(facet_group_key)->
       return 'faceting_menu_'+facet_group_key
 
     render: (collection)->
-      # removes the non main menus of the sidebar
-      if @collection
+      if @collection and @collection.meta.facets_requested
         facets_groups = collection.getFacetsGroups()
         if facets_groups
           for facet_group_key, facet_group of facets_groups

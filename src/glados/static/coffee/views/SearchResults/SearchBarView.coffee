@@ -219,7 +219,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             resultsMenuViewI.render()
 
             @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-            @$searchResultsListsContainersDict[resourceName] = $container
+            @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
 
             # event register for score update and update chips
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
@@ -228,6 +228,7 @@ glados.useNameSpace 'glados.views.SearchResults',
             res_facet_view = new glados.views.SearchResults.SearchFacetView
               collection: resultsListsDict[resourceName]
               search_bar_view: @
+              collection_container: @$searchResultsListsContainersDict[resourceName]
 
         @container.show()
         @updateChips()
