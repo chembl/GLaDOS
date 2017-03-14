@@ -54,186 +54,24 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     @set('config', config)
 
-# This fetch uses a post to get the information, to avoid any issue with the lenght of the url due to the ammount of
-# compounds
   fetch: (options) ->
-    @fetch2(options)
-    return
 
-    idsList = @get('molecule_chembl_ids')
-    console.log 'IDS list: ', idsList
-
-    url = 'https://www.ebi.ac.uk/chembl/api/data/activity.json'
-    activities = []
-    totalItems = idsList.length
-    chunkSize = 400
-    totalPages = Math.ceil(totalItems / chunkSize)
-    # temporarily limit the amount of items to get, the retrieval of the information needs more discussion
-    maxItems = 400
-
-    thisModel = @
-    getAllItemsJson = (page) ->
-      start = (page - 1) * chunkSize
-      end = start + chunkSize - 1
-      if end >= idsList.length
-        end = idsList.length - 1
-
-      itemsToGet = idsList[start..end]
-
-      data = 'limit=' + chunkSize + '&' + 'molecule_chembl_id__in=' + itemsToGet.join(',')
-
-      console.log 'FETCHING'
-      console.log 'totalPages: ', totalPages
-      console.log 'totalItems: ', totalItems
-      console.log 'data: ', totalItems
-
-      $.ajax(
-        type: 'POST'
-        url: url
-        data: data
-        headers:
-          'X-HTTP-Method-Override': 'GET'
-      ).done((response) ->
-        for newActivity in response.activities
-          activities.push newActivity
-        console.log 'response!'
-        console.log response
-
-        percentage = Math.ceil((page / totalPages) * 100)
-        console.log 'downloaded: ', percentage, '%'
-
-        # check if I still have more pages to go, temporarily limit the ammount of items to get.
-        if activities.length < maxItems
-          getAllItemsJson (page + 1)
-        else
-# if not, I have finished!
-          console.log 'finished!'
-          console.log activities.length + ' activities.'
-          console.log activities
-          thisModel.set(thisModel.parse activities)
-      )
-
-    # get everything from page 1
-    getAllItemsJson 1
-
-  parse: (activities) ->
-    console.log 'data received!'
-
-    config = @get('config')
-    console.log activities.length + ' activities.'
-
-    compoundsToPosition = {}
-    targetsToPosition = {}
-    links = {}
-
-    compoundsList = []
-    latestCompPos = 0
-    targetsList = []
-    latestTargPos = 0
-
-    for act in activities
-      currentCompound = act.molecule_chembl_id
-      currentTarget = act.target_chembl_id
-
-      if act.target_pref_name.length > 10
-        currentTargetName = act.target_pref_name.slice(0, 10) + '...' + ' (' + act.target_chembl_id + ')'
-      else
-        currentTargetName = act.target_pref_name + ' (' + act.target_chembl_id + ')'
-
-      targPos = targetsToPosition[currentTarget]
-      compPos = compoundsToPosition[currentCompound]
-
-      # add compound
-
-      # It doesn't exist? create a new one.
-      if not compPos?
-# remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newCompoundObj = {label: currentCompound, originalIndex: latestCompPos, currentPosition: latestCompPos}
-
-        # this is a new one, initialise it with the first value
-        for property in config.col_sorting_properties
-          if act[property]?
-            newCompoundObj[(property + '_sum')] = parseFloat(act[property])
-          else
-            newCompoundObj[(property + '_sum')] = 0
-
-        compoundsList.push newCompoundObj
-        compoundsToPosition[currentCompound] = latestCompPos
-        latestCompPos++
-
-# it does exist, get it and sum the sorting properties
-      else
-        compObj = compoundsList[compPos]
-        # this is an existing one, sum the property!
-        for property in config.col_sorting_properties
-          if act[property]?
-            compObj[(property + '_sum')] += parseFloat(act[property])
-
-      #-----
-      # add target
-      if not targPos?
-        newTargetObj = {label: currentTargetName, originalIndex: latestTargPos, currentPosition: latestTargPos}
-        targetsList.push newTargetObj
-        targetsToPosition[currentTarget] = latestTargPos
-        latestTargPos++
-
-        # this is a new one, initialise it with the first value
-        for property in config.row_sorting_properties
-          if act[property]?
-            newTargetObj[(property + '_sum')] = parseFloat(act[property])
-          else
-            newTargetObj[(property + '_sum')] = 0
-      else
-        targObj = targetsList[targPos]
-        for property in config.row_sorting_properties
-          if act[property]?
-            targObj[(property + '_sum')] += parseFloat(act[property])
-
-
-      # here the compound and target must exist in the lists, recalculate the positions
-      compPos = compoundsToPosition[currentCompound]
-      targPos = targetsToPosition[currentTarget]
-
-      if not links[compPos]?
-        links[compPos] = {}
-
-      act['row_id'] = act.molecule_chembl_id
-      act['col_id'] = act.target_chembl_id
-      links[compPos][targPos] = act
-
-    result =
-      "columns": targetsList
-      "rows": compoundsList
-      "links": links
-
-    console.log 'data processed!'
-    console.log 'result: ', result
-
-    return {"matrix": result}
-
-  fetch2: (options) ->
-    console.log 'FETCH 2'
     @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
-    console.log @url
     # Creates the Elastic Search Query parameters and serializes them
     esJSONRequest = JSON.stringify(@getRequestData())
-    console.log esJSONRequest
+
     fetchESOptions =
       url: @url
       data: esJSONRequest
       type: 'POST'
       reset: true
 
-    console.log 'going to make request:', fetchESOptions
     thisModel = @
     $.ajax(fetchESOptions).done((data) ->
-      thisModel.set(thisModel.parse2 data)
+      thisModel.set(thisModel.parse data)
     )
 
-  parse2: (data) ->
-
-    console.log 'parse new data!'
-    console.log data
+  parse: (data) ->
 
     compoundsToPosition = {}
     targetsToPosition = {}
