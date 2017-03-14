@@ -102,7 +102,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintMatrix: ->
 
-    console.log 'PAINT MATRIX!'
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -254,10 +253,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             .attr('class', 'mainGContainer')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
-
-    console.log 'Element IS: ', mainContainer
-    console.log 'WIDTH IS: ', totalVisualisationWidth
-    console.log 'HEIGHT IS: ', totalVisualisationHeight
 
     # --------------------------------------
     # Legend initialisation
@@ -511,7 +506,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       selectedElement = d3.select(@)
       selectedElement.attr('opacity', 1)
-      console.log 'OUT'
 
 
     # --------------------------------------
@@ -534,9 +528,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       i = row.originalIndex
 
       dataList = ( value for key, value of links[i])
-
-      console.log 'dataList: ', dataList
-      console.log 'columns index: ', matrix.columns_index
 
       # @ is the current g element
       cells = d3.select(@).selectAll(".vis-cell")
@@ -732,7 +723,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       targetDimension = $(@).attr('data-target-property')
       if targetDimension == 'row'
 
-        console.log 're-sort rows'
         currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
         sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
         paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
@@ -858,7 +848,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $(@el).find('.BCK-toggle-grab').click ->
 
       $targetBtnIcon = $(@)
-      console.log 'target:', $(@)
 
       if ZOOM_ACTIVATED
         ZOOM_ACTIVATED = false
