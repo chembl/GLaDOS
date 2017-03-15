@@ -60,6 +60,9 @@ $tradenames-color: color('light-green', 'lighten-3');
 $prot-target-class-color: color('blue-grey', 'lighten-4');
 $default-btn-border-radius: 3px;
 
+$global-masthead-large-height : 32px;
+$global-masthead-small-med-height : 49px;
+
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
   color: $primary-color-dark
@@ -151,6 +154,12 @@ $sidenav-badge-padding: 3px;
   padding: 0px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
+  &:after{
+    content: "   ";
+    display: block;
+    height: 100px;
+  }
+
   li.menu-logo {
     text-align: center;
     background-color: $chembl-teal;
@@ -221,16 +230,26 @@ $sidenav-badge-padding: 3px;
     }
   }
 
-  &.fixed {
-    padding-top: 32px;
-    z-index: 960;
+  @media #{$medium-and-down}{
+    padding-top: $global-masthead-small-med-height;
   }
-
+  @media #{$large-and-up} {
+    padding-top: $global-masthead-large-height;
+  }
 
   transform: unset;
 }
 
-main {
+footer{
+  @media #{$large-and-up} {
+    &.page-footer{
+      padding-top: 0px;
+    }
+    z-index: 1000;
+  }
+}
+
+main, #chembl-header-container{
   /* to prevent the side bar from overlapping the main contens */
   padding-left: $side-nav-width;
 }
@@ -253,12 +272,12 @@ nav.top-nav {
   line-height: 100px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   border-bottom: 1px solid #d1d1d1;
-  padding-left: 50px;
 }
 
 nav.top-nav a {
   text-shadow: 1px 1px #000000;
   font-size: 3rem;
+  padding-left: 0px;
 }
 
 .download-database-btn {
@@ -287,8 +306,8 @@ nav.top-nav a {
 }
 
 /* responsive sizes */
-@media only screen and (max-width: 993px) {
-  header, main, footer {
+@media #{$medium-and-down} {
+  header, main, footer, #chembl-header-container{
     padding-left: 0px;
   }
 
@@ -314,10 +333,10 @@ nav.top-nav a {
 
 div#global-masthead,
 div#global-masthead nav {
-  height: auto;
+  height: $global-masthead-large-height;
   background-color: #333333;
   position: relative;
-  z-index: 970;
+  z-index: 1000;
   line-height: 1px;
   border-bottom: 1px solid #e3e3e3
 }
@@ -490,10 +509,10 @@ div#global-masthead ul li#about-us.active-trail a {
 */
 
 div#global-masthead-small nav {
-  height: 49px;
+  height: $global-masthead-small-med-height;
   background-color: #333333;
   position: relative;
-  z-index: 970;
+  z-index: 1000;
   line-height: 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1224,21 +1243,21 @@ div#CNC-zoom-modal {
 }
 
 .cards-container {
-
+  // Arrange materialize floating elements just in case flex does not work
   @media #{$small-and-down}{
-      .col:nth-child(n+1) {
-          clear: left;
-      }
+    .col:nth-child(n+1) {
+        clear: left;
+    }
   }
   @media #{$medium-only}{
-      .col:nth-child(2n+1) {
-          clear: left;
-      }
+    .col:nth-child(2n+1) {
+        clear: left;
+    }
   }
   @media #{$large-and-up} {
-      .col:nth-child(3n+1) {
-          clear: left;
-      }
+    .col:nth-child(3n+1) {
+        clear: left;
+    }
   }
 
   display: flex;
@@ -2064,3 +2083,21 @@ span.badge-primary-color-no-float {
 
 }
 
+/**
+  * Matrix visualisation
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+.es-results-matrix{
+  position: relative;
+}
+.matrix-vis-options{
+  position: absolute;
+  left:0;
+  top:0;
+  padding: 5px;
+  opacity: 0.8;
+
+  a:hover{
+    color: color("teal", "accent-4");
+  }
+}

@@ -31,27 +31,37 @@ glados.useNameSpace 'glados.views.SearchResults',
       $(window).resize(@render.bind(@))
       @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
 
-      @searchFromURL()
       if @atResultsPage
         # Handles the popstate event to reload a search
-        window.onpopstate = @searchFromURL.bind(@)
+        @last_location_url = window.location.href
+        window.onpopstate = @popStateHandler.bind(@)
+        @searchFromURL()
+
+    popStateHandler: ()->
+      @atResultsPage = URLProcessor.isAtSearchResultsPage()
+      if window.location.href != @last_location_url
+        @last_location_url = window.location.href
+        if @atResultsPage
+          @searchFromURL()
+        else
+          $(window).scrollTop(0)
+          window.location.reload()
 
     parseURLData: () ->
-        @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
-        @es_path = URLProcessor.getSpecificSearchResultsPage()
-        @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
-          glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
+      @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
+      @es_path = URLProcessor.getSpecificSearchResultsPage()
+      @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
+        glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
 
     searchFromURL: ()->
-      if @atResultsPage
-        @parseURLData()
-        @showSelectedResourceOnly()
-        urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-        if urlQueryString and urlQueryString != @lastURLQuery
-          @expandable_search_bar.val(urlQueryString)
-          @searchModel.search(urlQueryString, null)
-          @lastURLQuery = urlQueryString
-        @updateChips()
+      @parseURLData()
+      @showSelectedResourceOnly()
+      urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
+      if urlQueryString and urlQueryString != @lastURLQuery
+        @expandable_search_bar.val(urlQueryString)
+        @searchModel.search(urlQueryString, null)
+        @lastURLQuery = urlQueryString
+      @updateChips()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)

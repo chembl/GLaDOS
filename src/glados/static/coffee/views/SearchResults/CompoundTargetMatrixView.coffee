@@ -32,7 +32,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
-      message: 'Waiting for results...'
+      message: 'Generating Visualisation...'
 
     @clearControls()
     @clearMatrix()
@@ -60,6 +60,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row')
     @paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col')
+
+    @paintZoomButtons()
+
+  paintZoomButtons: ->
+
+    zoomOptsContent = Handlebars.compile( $('#Handlebars-Common-ESResultsMatrix-ZoomOptions').html() )()
+
+    @$vis_elem.append(zoomOptsContent)
 
   paintSortDirection: (elemSelector, reverse, target_property) ->
 
@@ -94,7 +102,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintMatrix: ->
 
-    console.log 'PAINT MATRIX!'
     # --------------------------------------
     # Data
     # --------------------------------------
@@ -103,55 +110,55 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     matrix = {
       "columns": [
         {
-          "name": "C1",
+          "label": "C1",
           "originalIndex": 0
           "currentPosition": 0
-          pchembl_value_sum: 30
-          published_value_sum: 330
+          pchembl_value: 30
+          published_value: 330
         },
         {
-          "name": "C2",
+          "label": "C2",
           "originalIndex": 1
           "currentPosition": 1
-          pchembl_value_sum: 26
-          published_value_sum: 260
+          pchembl_value: 26
+          published_value: 260
         },
         {
-          "name": "C3",
+          "label": "C3",
           "originalIndex": 2
           "currentPosition": 2
-          pchembl_value_sum: 22
-          published_value_sum: 190
+          pchembl_value: 22
+          published_value: 190
         }
       ],
       "rows": [
         {
-          "name": "T1",
+          "label": "T1",
           "originalIndex": 0
           "currentPosition": 0
-          pchembl_value_sum: 33
-          published_value_sum: 240
+          pchembl_value: 33
+          published_value: 240
         },
         {
-          "name": "T2",
+          "label": "T2",
           "originalIndex": 1
           "currentPosition": 1
-          pchembl_value_sum: 24
-          published_value_sum: 210
+          pchembl_value: 24
+          published_value: 210
         },
         {
-          "name": "T3",
+          "label": "T3",
           "originalIndex": 2
           "currentPosition": 2
-          pchembl_value_sum: 15
-          published_value_sum: 90
+          pchembl_value: 15
+          published_value: 90
         },
         {
-          "name": "T4",
+          "label": "T4",
           "originalIndex": 3
           "currentPosition": 3
-          pchembl_value_sum: 6
-          published_value_sum: 240
+          pchembl_value: 6
+          published_value: 240
         },
       ],
       "links": {
@@ -188,8 +195,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     config = @model.get('config')
     # --------------------------------------
-    # pre-configuration
+    # variable initialisation
     # --------------------------------------
+
+    links = matrix.links
+    NUM_COLUMNS = matrix.columns.length
+    NUM_ROWS = matrix.rows.length
+    TOTAL_NUM_CELLS = NUM_COLUMNS * NUM_ROWS
+
+    # make sure all intersections are squared
+    SIDE_SIZE = 20
+    RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
+    RANGE_Y_END = SIDE_SIZE * NUM_ROWS
+    LABELS_PADDING = 12
+    LABELS_ROTATION = 45
+    BASE_LABELS_SIZE = 10
 
     currentColourProperty = config.initial_colouring
 
@@ -203,48 +223,51 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
 
       margin =
-        top: 150
-        right: 0
+        top: 190
+        right: 160
         bottom: 10
-        left: 90
+        left: 130
 
     elemWidth = $(@el).width()
-    width = 0.8 * elemWidth
-    height = width
+    width = elemWidth
+    #since I know the side size and how many rows I have, I can calculate which should be the height of the container
+    height = SIDE_SIZE * NUM_ROWS
+    # Anyway, I have to limit it so it is not too long.
+    if height > width
+      height = width
 
-    console.log 'Element IS: ', $(@el)
-    console.log 'WIDTH IS: ', width
+
 
     mainContainer = d3.select(@$vis_elem.get(0))
+
+    totalVisualisationWidth = width
+    totalVisualisationHeight = height
+
+    g = mainContainer
+            .append('svg')
+            .attr('class', 'mainSVGContainer')
+            .attr('width', totalVisualisationWidth)
+            .attr('height', totalVisualisationHeight)
+            .attr('style', 'background-color: white;')
+            .append("g")
+            .attr('class', 'mainGContainer')
+
+    mainSVGContainer = mainContainer.select('.mainSVGContainer')
 
     # --------------------------------------
     # Legend initialisation
     # --------------------------------------
-    legendWidth = (width / 2)
-    legendHeight = 100
-    legendSVG = mainContainer.append('svg')
+    legendWidth = 0.4 * width
+    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
+
+    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendContainer.empty()
+    legendContainer = d3.select($legendContainer.get(0))
+
+    legendSVG = legendContainer.append('svg')
       .attr('width', legendWidth )
       .attr('height', legendHeight )
 
-    svg = mainContainer
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-    # --------------------------------------
-    # Work with data
-    # --------------------------------------
-    links = matrix.links
-    numColumns = matrix.columns.length
-    numRows = matrix.rows.length
-
-    # --------------------------------------
-    # Precompute indexes TODO: put it in model
-    # --------------------------------------
-    rowsIndex = _.indexBy(matrix.rows, 'name')
-    columnsIndex = _.indexBy(matrix.columns, 'name')
 
     # --------------------------------------
     # Sort by default value
@@ -254,35 +277,55 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       newOrders = _.sortBy(matrix.rows, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        rowsIndex[row.name].currentPosition = index
+        matrix.rows_index[row.label].currentPosition = index
 
-    sortMatrixRowsBy config.initial_row_sorting + '_sum', config.initial_row_sorting_reverse
+    sortMatrixRowsBy config.initial_row_sorting, config.initial_row_sorting_reverse
 
     sortMatrixColsBy = (prop, reverse) ->
 
       newOrders = _.sortBy(matrix.columns, prop)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
-        columnsIndex[row.name].currentPosition = index
+        matrix.columns_index[row.label].currentPosition = index
 
-    sortMatrixColsBy config.initial_col_sorting + '_sum', config.initial_col_sorting_reverse
+    sortMatrixColsBy config.initial_col_sorting, config.initial_col_sorting_reverse
+
+    getYCoord = d3.scale.ordinal()
+      .domain([0..NUM_ROWS])
+      .rangeBands([0, RANGE_Y_END])
+
+    getXCoord = d3.scale.ordinal()
+      .domain([0..NUM_COLUMNS])
+      .rangeBands([0, RANGE_X_END])
+
 
     # --------------------------------------
-    # Add background rectangle
+    # Add background MATRIX rectangle
     # --------------------------------------
+    backRectWidth = RANGE_X_END - SIDE_SIZE + 1
+    backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
 
-    svg.append("rect")
+    backLineWidth = backRectWidth - 3
+    backLineHeight = backRectHeight - 3
+
+    BACK_RECT_TRANS_X = -1
+    BACK_RECT_TRANS_Y = -1
+
+    g.append("rect")
       .attr("class", "background")
-      .style("fill", "white")
-      .attr("width", width)
-      .attr("height", height)
+      .style("fill", glados.Settings.VISUALISATION_GRID_UNDEFINED)
+      .attr("width", backRectWidth )
+      .attr("height", backRectHeight )
+      .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
+      .attr('stroke-width', 1)
+      .attr('transform', "translate(" + BACK_RECT_TRANS_X + ", " + BACK_RECT_TRANS_Y + ")")
 
     # --------------------------------------
     # Sort properties
     # --------------------------------------
-    currentRowSortingProperty = config.initial_row_sorting + '_sum'
+    currentRowSortingProperty = config.initial_row_sorting
     currentRowSortingPropertyReverse = config.initial_row_sorting_reverse
-    currentColSortingProperty = config.initial_col_sorting + '_sum'
+    currentColSortingProperty = config.initial_col_sorting
     currentColSortingPropertyReverse = config.initial_row_sorting_reverse
 
     # --------------------------------------
@@ -296,6 +339,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = cell[prop]
           if value?
             domain.push value
@@ -309,6 +356,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       maxVal = Number.MIN_VALUE
       for rowNum, row of matrix.links
         for colNum, cell of row
+
+          if !cell?
+            continue
+
           value = parseFloat(cell[prop])
           if value > maxVal
             maxVal = value
@@ -319,28 +370,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return [minVal, maxVal]
 
 
-    # define a minimum size so the rows are not to small,
-    # if there are too many rows, the range of the scale will be extended.
-    minSideSize = 40
-    initialRowHeight = height / numRows
-    initialColWidth = width / numColumns
-
-    # is the row height going to be less than the minimum?
-    if initialRowHeight < minSideSize or initialColWidth < minSideSize
-      # if so, modify the range
-      rangeYEnd = minSideSize * numRows
-      rangeXEnd = minSideSize * numColumns
-    else
-      rangeYEnd = height
-      rangeXEnd = width
-
-    getYCoord = d3.scale.ordinal()
-      .domain([0..numRows])
-      .rangeBands([0, rangeYEnd])
-
-    getXCoord = d3.scale.ordinal()
-      .domain([0..numColumns])
-      .rangeBands([0, rangeXEnd])
 
     # generates a scale for when the data is numeric
     buildNumericColourScale = (currentProperty) ->
@@ -349,7 +378,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       scale = d3.scale.linear()
         .domain(colourDomain)
-        .range(["#FFFFFF", glados.Settings.EMBL_GREEN])
+        .range([glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX])
 
       return scale
 
@@ -381,7 +410,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     fillColour = (d) ->
 
       if not d[currentColourProperty]?
-          return '#9e9e9e'
+          return glados.Settings.VISUALISATION_GRID_UNDEFINED
       getCellColour(d[currentColourProperty])
 
 
@@ -395,11 +424,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendSVG.selectAll('text').remove()
 
       legendG = legendSVG.append('g')
-              .attr("transform", "translate(0," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text('Legend for: ' + currentColourProperty)
-        .attr("transform", "translate(10, 15)");
+        .attr("transform", "translate(0," + (legendHeight - 30) + ")");
+      legendSVG.append('text').text(currentColourProperty)
+        .attr("transform", "translate(10, 35)");
 
-      rectangleHeight = 50
+      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = config.propertyToType[currentColourProperty]
 
       if colourDataType == 'string'
@@ -454,43 +483,63 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         legendG.call(legendAxis)
 
+      #customize legend styles
+      $legendContainer.find('line, path').css('fill', 'none')
+
     fillLegendDetails()
+
+     # --------------------------------------
+    # Hover
+    # --------------------------------------
+    handleCellMouseover = () ->
+
+      selectedElement = d3.select(@)
+      x = selectedElement.attr('x')
+      y = selectedElement.attr('y')
+      height = selectedElement.attr('height')
+      width = selectedElement.attr('width')
+
+      selectedElement.attr('opacity', 0.6)
+
+
+    handleCellMouseout = () ->
+
+      selectedElement = d3.select(@)
+      selectedElement.attr('opacity', 1)
+
 
     # --------------------------------------
     # Add rows
     # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = "molecule: " + d.molecule_chembl_id + "\n" + "target: " + d.target_chembl_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
+      txt = d.row_id + "\n" + d.col_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
 
       return txt
 
     getRowTooltip = (d) ->
 
-      txt = "target: " + d.name + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
+      txt = "Compound: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
 
       columnsList = matrix.columns
-      rowInMatrix = matrix.rows[rowNumber]
-      i = rowInMatrix.originalIndex
+      i = row.originalIndex
 
-      dataList = []
-      for col in columnsList
-        j = col.originalIndex
-        value = links[i][j]
-        dataList.push(value)
+      dataList = ( value for key, value of links[i])
 
       # @ is the current g element
       cells = d3.select(@).selectAll(".vis-cell")
         .data(dataList)
         .enter().append("rect")
         .attr("class", "vis-cell")
-        .attr("x", (d, colNum) -> getXCoord(columnsList[colNum].currentPosition) )
+        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition))
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
         .style("fill", fillColour )
+        .on("mouseover", handleCellMouseover)
+        .on("mouseout", handleCellMouseout)
 
       cells.classed('tooltipped', true)
         .attr('data-position', 'bottom')
@@ -498,7 +547,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('data-tooltip', getCellTooltip )
 
 
-    rows = svg.selectAll('.vis-row')
+    rows = g.selectAll('.vis-row')
       .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
@@ -506,18 +555,21 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .each(fillRow)
 
     rows.append("line")
-      .attr("x2", width)
+      .attr('class', 'dividing-line')
+      .attr("x2", backLineWidth)
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
     rows.append("text")
-      .attr("x", -6)
+      .attr("x", -LABELS_PADDING)
       .attr("y", getYCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "end")
-      .attr('style', 'font-size:12px;')
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .attr('fill', '#1b5e20')
-      .text( (d, i) -> d.name )
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .text( (d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
@@ -528,63 +580,101 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getColumnTooltip = (d) ->
 
-      txt = "molecule: " + d.name + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
+      txt = "Target: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
 
-    columns = svg.selectAll(".vis-column")
+    columns = g.selectAll(".vis-column")
       .data(matrix.columns)
       .enter().append("g")
       .attr("class", "vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
-    columns.append("line")
-      .attr("x1", -width)
-
     columns.append("text")
-      .attr("x", 0)
+      .attr("x", LABELS_PADDING)
       .attr("y", getXCoord.rangeBand() / 2)
       .attr("dy", ".32em")
       .attr("text-anchor", "start")
-      .attr('style', 'font-size:12px;')
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .attr('fill', '#1b5e20')
-      .text((d, i) -> d.name )
+      .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .text((d, i) -> d.label )
       .classed('tooltipped', true)
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
       .attr('data-tooltip', getColumnTooltip)
+
+    columnsWithDivLines = g.selectAll(".vis-column")
+
+    #divisory lines
+    columns.append("line")
+      .attr('class', 'dividing-line')
+      .attr("x1", -(backLineHeight))
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
+
+
 
     # --------------------------------------
     # Zoom
     # --------------------------------------
     handleZoom = ->
 
-      getYCoord.rangeBands([0, (rangeYEnd * zoom.scale())])
-      getXCoord.rangeBands([0, (rangeXEnd * zoom.scale())])
+      if not ZOOM_ACTIVATED
+        return
 
-      svg.selectAll('.vis-row')
+      getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
+      getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
+
+      g.selectAll('.background')
+        .attr("width", backRectWidth * zoom.scale())
+        .attr("height", backRectHeight * zoom.scale())
+        .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
+          ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
+
+      g.selectAll('.vis-row')
         .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
         .selectAll("text")
         .attr("y", getYCoord.rangeBand() / (2) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
+        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
-      svg.selectAll(".vis-column")
+      g.selectAll('.vis-row')
+        .selectAll('.dividing-line')
+        .attr("x2", backLineWidth * zoom.scale())
+      
+      g.selectAll(".vis-column")
         .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
         .selectAll("text")
         .attr("y", getXCoord.rangeBand() / (2) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
         # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
-        .attr('transform', (d) -> "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")")
+        .attr('transform', (d) ->
+          "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" +
+          "rotate(" + LABELS_ROTATION + " " + (LABELS_PADDING*zoom.scale()) + "," + (LABELS_PADDING*zoom.scale()) + ")")
+        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
-      svg.selectAll(".vis-cell")
+      g.selectAll(".vis-column")
+        .selectAll('.dividing-line')
+        .attr("x1", -(backLineHeight * zoom.scale()))
+        .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
+
+      g.selectAll(".vis-cell")
         .attr("width", getXCoord.rangeBand())
         .attr("height", getYCoord.rangeBand())
-        .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
+        .attr("x", (d, index) -> getXCoord(matrix.columns_index[d.col_id].currentPosition) )
 
 
+    MIN_ZOOM_SCALE = 0.2
+    MAX_ZOOM_SCALE = 2
+    ZOOM_STEP = 0.2
+    ZOOM_ACTIVATED = true
     zoom = d3.behavior.zoom()
+      .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
       .on("zoom", handleZoom)
 
-    svg.call zoom
+    mainSVGContainer.call zoom
 
     # --------------------------------------
     # colour property selector
@@ -600,7 +690,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       fillLegendDetails()
 
-      t = svg.transition().duration(1000)
+      t = g.transition().duration(1000)
       t.selectAll(".vis-cell")
         .style("fill", fillColour)
         .attr('data-tooltip', getCellTooltip )
@@ -614,13 +704,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     triggerRowSortTransition = ->
 
-      t = svg.transition().duration(2500)
+      t = g.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
-      rowTexts = svg.selectAll('.vis-row').selectAll('text')
+      rowTexts = g.selectAll('.vis-row').selectAll('text')
       .attr('data-tooltip', getRowTooltip)
+
+      g.selectAll(".vis-row")
+        .selectAll('.dividing-line')
+        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
       $(rowTexts).tooltip()
 
@@ -629,7 +723,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       targetDimension = $(@).attr('data-target-property')
       if targetDimension == 'row'
 
-        console.log 're-sort rows'
         currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
         sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
         paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
@@ -651,7 +744,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentRowSortingProperty = @value + '_sum'
+      currentRowSortingProperty = @value
       sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
       paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
       triggerRowSortTransition()
@@ -659,7 +752,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     triggerColSortTransition = ->
-      t = svg.transition().duration(2500)
+      t = g.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
@@ -669,8 +762,12 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll(".vis-cell")
       .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
 
-      columnTexts = svg.selectAll(".vis-column").selectAll('text')
+      columnTexts = g.selectAll(".vis-column").selectAll('text')
       .attr('data-tooltip', getColumnTooltip)
+
+      g.selectAll(".vis-column")
+        .selectAll('.dividing-line')
+        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
       $(columnTexts).tooltip()
 
@@ -680,24 +777,94 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentColSortingProperty = @value + '_sum'
+      currentColSortingProperty = @value
       sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
 
       triggerColSortTransition()
 
 
+    # --------------------------------------
+    #  initial zoom
+    # --------------------------------------
+    adjustVisHeight = ->
 
-    # --------------------------------------
-    # Reset zoom
-    # --------------------------------------
+      currentBackRectHeight = parseInt(g.select('.background').attr('height'))
+      desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
+      if desiredVisHeight < MIN_VIS_HEIGHT
+        desiredVisHeight = MIN_VIS_HEIGHT
+
+      mainSVGContainer
+        .attr('height', desiredVisHeight)
+
     resetZoom = ->
-      zoom.scale(1)
-      zoom.translate([0,0])
+
+      # get an initial zoom scale so all the matrix is visible.
+      matrixWidth = margin.left + backRectWidth + margin.right
+      initialZoomScale = totalVisualisationWidth / matrixWidth
+      zoom.scale(initialZoomScale)
+      zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])
       handleZoom()
 
-    $(@el).find(".reset-zoom-btn").click ->
+    # --------------------------------------
+    #  Zoom events
+    # --------------------------------------
+
+    $(@el).find(".BCK-reset-zoom-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
 
       resetZoom()
 
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+    $(@el).find(".BCK-zoom-in-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
+      zoom.scale( zoom.scale() + ZOOM_STEP )
+      mainSVGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+
+    $(@el).find(".BCK-zoom-out-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
+      zoom.scale( zoom.scale() - ZOOM_STEP )
+      mainSVGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+    $(@el).find('.BCK-toggle-grab').click ->
+
+      $targetBtnIcon = $(@)
+
+      if ZOOM_ACTIVATED
+        ZOOM_ACTIVATED = false
+
+        $targetBtnIcon.removeClass 'fa-hand-rock-o'
+        $targetBtnIcon.addClass 'fa-hand-paper-o'
+
+      else
+
+        ZOOM_ACTIVATED = true
+
+        $targetBtnIcon.removeClass 'fa-hand-paper-o'
+        $targetBtnIcon.addClass 'fa-hand-rock-o'
+
+    resetZoom()
+    MIN_VIS_HEIGHT = 300
+    adjustVisHeight()
+    ZOOM_ACTIVATED = false
 
 
