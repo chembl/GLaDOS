@@ -21,33 +21,19 @@ CompoundTargetMatrix = Backbone.Model.extend
     #    }
 
     config = {
-      initial_colouring: 'assay_type'
-      colour_properties: ['pchembl_value', 'assay_type', 'published_value']
-      initial_row_sorting: 'pchembl_value'
-      initial_row_sorting_reverse: true
-      row_sorting_properties: ['pchembl_value', 'published_value']
-      initial_col_sorting: 'published_value'
-      initial_col_sorting_reverse: true
-      col_sorting_properties: ['pchembl_value', 'published_value']
-      propertyToType:
-        assay_type: "string"
-        pchembl_value: "number"
-        published_value: "number"
-    }
-
-    config = {
-      initial_colouring: 'activity_count'
+      initial_colouring: 'pchembl_value_avg'
       colour_properties: ['activity_count', 'pchembl_value_avg']
       initial_row_sorting: 'activity_count'
       initial_row_sorting_reverse: true
-      row_sorting_properties: ['activity_count', 'pchembl_value_max']
+      row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
       initial_col_sorting: 'activity_count'
       initial_col_sorting_reverse: true
-      col_sorting_properties: ['activity_count', 'pchembl_value_max']
+      col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
       propertyToType:
         activity_count: "number"
         pchembl_value_avg: "number"
         pchembl_value_max: "number"
+        hit_count: "number"
     }
 
 
@@ -100,6 +86,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         currentPosition: latestCompPos
         activity_count: moleculeBucket.doc_count
         pchembl_value_max: moleculeBucket.pchembl_value_max.value
+        hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
       compoundsList.push newCompoundObj
       compoundsToPosition[compLabel] = latestCompPos
@@ -122,6 +109,8 @@ CompoundTargetMatrix = Backbone.Model.extend
             currentPosition: latestTargPos
             activity_count: targetBucket.doc_count
             pchembl_value_max: targetBucket.pchembl_value_max.value
+            hit_count: 1
+
 
           targetsList.push newTargetObj
           targetsToPosition[targLabel] = latestTargPos
@@ -133,6 +122,7 @@ CompoundTargetMatrix = Backbone.Model.extend
            targObj = targetsList[targPos]
            targObj.activity_count += targetBucket.doc_count
            targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
+           targObj.hit_count++
 
         # now I know that there is a new intersection!
         activities =
@@ -151,11 +141,6 @@ CompoundTargetMatrix = Backbone.Model.extend
           links[compPos] = {}
 
         links[compPos][targPos] = activities
-
-    console.log 'compoundsList', compoundsList
-    console.log 'targetsList', targetsList
-    console.log 'links', links
-
 
     result =
       columns: targetsList
@@ -186,7 +171,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         molecule_chembl_id_agg:
           terms:
             field: "molecule_chembl_id",
-            size: 50,
+            size: 20,
             order:
               _count: "desc"
           aggs:
@@ -196,7 +181,7 @@ CompoundTargetMatrix = Backbone.Model.extend
             target_chembl_id_agg:
               terms:
                 field: "target_chembl_id",
-                size: 50,
+                size: 10,
                 order:
                   _count: "desc"
               aggs:
