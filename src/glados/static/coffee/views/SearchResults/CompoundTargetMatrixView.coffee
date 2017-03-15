@@ -485,14 +485,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        data = d3.range(domain[0], domain[1], step)
+        legendData = d3.range(domain[0], domain[1], step)
 
         legendAxis.tickValues([
-          data[0]
-          data[parseInt(data.length * 0.25)],
-          data[parseInt(data.length * 0.5)],
-          data[parseInt(data.length * 0.75)],
-          data[data.length - 1],
+          legendData[0]
+          legendData[parseInt(legendData.length * 0.25)],
+          legendData[parseInt(legendData.length * 0.5)],
+          legendData[parseInt(legendData.length * 0.75)],
+          legendData[legendData.length - 1],
         ])
 
         #Add the null value rect
@@ -509,7 +509,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           .text('null')
 
         legendG.selectAll('rect')
-          .data(data)
+          .data(legendData)
           .enter().append('rect')
           .attr('height',rectangleHeight)
           .attr('width', stepWidthInScale + 5)

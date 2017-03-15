@@ -250,7 +250,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       }
     }
 
-    data = [trace1]
+    legendData = [trace1]
     layout = {
       xaxis: {title: @currentPropertyX.label}
       yaxis: {title: @currentPropertyY.label}
@@ -258,7 +258,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
     console.log 'visual element: ', @$vis_elem
 
-    Plotly.newPlot(@$vis_elem.get(0), data, layout)
+    Plotly.newPlot(@$vis_elem.get(0), legendData, layout)
 
     @$vis_elem.get(0).on('plotly_click', (eventInfo) ->
       pointNumber = eventInfo.points[0].pointNumber
@@ -348,10 +348,18 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        data = d3.range(domain[0], domain[1], step)
+        legendData = d3.range(domain[0], domain[1], step)
+
+        legendAxis.tickValues([
+          legendData[0]
+          legendData[parseInt(legendData.length * 0.25)],
+          legendData[parseInt(legendData.length * 0.5)],
+          legendData[parseInt(legendData.length * 0.75)],
+          legendData[legendData.length - 1],
+        ])
 
         legendG.selectAll('rect')
-          .data(data)
+          .data(legendData)
           .enter().append('rect')
           .attr('height',rectangleHeight)
           .attr('width', stepWidthInScale + 1)
