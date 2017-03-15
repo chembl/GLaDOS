@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []
-            facets: esIndexSettings.FACETS
+            facets_groups: esIndexSettings.FACETS_GROUPS
             # set by default columns with show: true, and additional with show: false
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
             #columns specific for cards view

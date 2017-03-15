@@ -2,7 +2,7 @@
 <script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
   {% verbatim %}
   <li class="no-padding{{#if menu_class}} {{menu_class}}{{/if}}">
-    <div class="collapsible-header chembl-teal white-text">
+    <div class="collapsible-header{{#if menu_class}} {{menu_class}}{{/if}} chembl-teal white-text">
       <table class="no-padding">
         <tr class="no-padding">
           <td class="no-padding">
@@ -24,7 +24,8 @@
       <ul>
         {{#each links}}
         <li>
-          <a class="waves-effect waves-teal" href="{{this.href}}">
+          <a  class="waves-effect waves-teal{{#if this.selected}} selected{{/if}}{{#if this.link_class_key}} {{this.link_class_key}}{{/if}}"
+              {{#if this.href}} href="{{this.href}}"{{/if}}>
             <table class="no-padding">
               <tr class="no-padding">
                 <td class="no-padding" style="max-width: 117px; word-wrap: break-word;">
@@ -48,14 +49,8 @@
 </script>
 
 <!-- This shows when the screen is large -->
-<ul id="slide-out" class="collapsible collapsible-accordion side-nav fixed teal lighten-5">
+<ul id="slide-out" class="collapsible side-nav fixed teal lighten-5" data-collapsible="expandable">
  {% block menu_links %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
 </ul>
-<!-- This shows when the screen is medium or smaller -->
-<!--<ul  class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">-->
-   <!--{% block links_small %}-->
-    <!--{% include "glados/base/left_menu_links.html" %}-->
-  <!--{% endblock %}-->
-<!--</ul>-->

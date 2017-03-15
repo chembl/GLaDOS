@@ -15,16 +15,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @resetMeta(0, 0)
       @reset()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Parse/Fetch Collection data
+    # ------------------------------------------------------------------------------------------------------------------
+
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
-      if @meta.facets_requested and not _.isUndefined(data.aggregations)
-        for facet_key_i, facet_i of @meta.facets
-          facet_i.faceting_handler.parseESResults(data.aggregations)
-
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -43,17 +43,70 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
       # Call Backbone's fetch
+      @loadFacetGroups()
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Parse/Fetch Facets Groups data
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # Parses the facets groups aggregations data
+    parseFacetsGroups: (facets_data)->
+      if _.isUndefined(facets_data.aggregations)
+        for facet_group_key, facet_group of @meta.facets_groups
+          facet_group.faceting_handler.parseESResults(facets_data.aggregations)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Elastic Search Query structure
+    # ------------------------------------------------------------------------------------------------------------------
+
+    getSingleTermQuery: (single_term)->
+      single_term_query = {bool:{should:[]}}
+      single_term_query.bool.should. push {
+          multi_match:
+            fields: [
+              "*.std_analyzed^10",
+              "*.eng_analyzed^5"
+            ],
+            query: single_term,
+            boost: 1
+        }
+      single_term_query.bool.should. push {
+          multi_match:
+            fields: [
+              "*.std_analyzed^10",
+              "*.eng_analyzed^5"
+            ],
+            query: single_term,
+            boost: 0.1
+            fuzziness: 'AUTO'
+        }
+      if single_term.length >= 4
+        single_term_query.bool.should.push {
+            constant_score:
+              query:
+                multi_match:
+                  fields: [
+                    "*.pref_name_analyzed^1.3",
+                    "*.alt_name_analyzed",
+                  ],
+                  query: single_term,
+                  minimum_should_match: "80%"
+              boost: 100
+          }
+      return single_term_query
 
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize) ->
+    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
+      request_facets = if _.isUndefined(request_facets) then false else request_facets
+      # If facets are requested the facet filters are excluded from the query
+      facets_filtered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
-      filter_terms = @getMeta("filter_terms")
       exact_terms_joined = null
       if singular_terms.length == 0 and exact_terms.length == 0
         exact_terms_joined = '*'
@@ -68,48 +121,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           should: []
       }
       for term_i in singular_terms
-        term_i_query =
-          {
-            bool:
-              should:
-                [
-                  {
-                    multi_match:
-                      fields: [
-                        "*.std_analyzed^10",
-                        "*.eng_analyzed^5"
-                      ],
-                      query: term_i,
-                      boost: 1
-                  },
-                  {
-                    multi_match:
-                      fields: [
-                        "*.std_analyzed^10",
-                        "*.eng_analyzed^5"
-                      ],
-                      query: term_i,
-                      boost: 0.1
-                      fuzziness: 'AUTO'
-                  }
-              ]
-          }
-        if term_i.length >= 4
-          term_i_query.bool.should.push(
-            {
-              constant_score:
-                query:
-                  multi_match:
-                    fields: [
-                      "*.pref_name_analyzed^1.3",
-                      "*.alt_name_analyzed",
-                    ],
-                    query: term_i,
-                    minimum_should_match: "80%"
-                boost: 100
-            }
-          )
+        term_i_query = @getSingleTermQuery(term_i)
         by_term_query.bool.should.push(term_i_query)
+
+      # Base Elastic query
       es_query = {
         size: pageSize,
         from: ((page - 1) * pageSize)
@@ -133,10 +148,29 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                   }
                 ]
       }
-      if filter_terms.length > 0
+      # Includes the filter query by query filter terms and selected facets
+      filter_query = @getFilterQuery(facets_filtered)
+      if filter_query
+        es_query.query.bool.filter = [filter_query]
+
+      if singular_terms.length > 0
+        es_query.query.bool.must.bool.should.push(by_term_query)
+
+      if request_facets
+        if _.isUndefined(facets_first_call)
+          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
+        facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
+        if facets_query
+          es_query.aggs = facets_query
+      return es_query
+
+    getFilterQuery: (facets_filtered) ->
+      filter_query = {bool:{ must:[] }}
+
+      filter_terms = @getMeta("filter_terms")
+      if filter_terms and filter_terms.length > 0
         filter_terms_joined = filter_terms.join(' ')
-        es_query.query.bool.filter =
-          [
+        filter_query.bool.must.push(
             {
               query_string:
                 fields: [
@@ -145,26 +179,63 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 fuzziness: 0
                 query: filter_terms_joined
             }
-          ]
-      if singular_terms.length > 0
-        es_query.query.bool.must.bool.should.push(by_term_query)
-      facets_query = @getFacetsAggsQuery()
-      @meta.facets_requested = false
-      if facets_query
-        es_query.aggs = facets_query
-        @meta.facets_requested = true
-      return es_query
+        )
+      if facets_filtered
+        faceting_handlers = []
+        for facet_group_key, facet_group of @meta.facets_groups
+          faceting_handlers.push(facet_group.faceting_handler)
+        facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
+          .getAllFacetGroupsSelectedQuery(faceting_handlers)
+        if facets_groups_query
+          filter_query.bool.must.push facets_groups_query
+      if filter_query.bool.must.length == 0
+        return null
+      return filter_query
 
-    getFacetsAggsQuery: ()->
-      console.log @meta.facets
-      if @meta.facets
+    getFacetsGroupsAggsQuery: (facets_first_call)->
+      non_selected_facets_groups = @getFacetsGroups(false)
+      if non_selected_facets_groups
         aggs_query = {}
-        for facet_key_i, facet_i of @meta.facets
-          facet_i.faceting_handler.addQueryAggs(aggs_query)
+        for facet_group_key, facet_group of non_selected_facets_groups
+          facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
 
-    getFacets:()->
-      return @meta.facets
+    requestFacetsGroupsData: (first_call)->
+      es_url = @getURL()
+      # Creates the Elastic Search Query parameters and serializes them
+      # Includes the request for the faceting data
+      esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
+      # Uses POST to prevent result caching
+      ajax_deferred = $.post(es_url, esJSONRequestData)
+      return ajax_deferred
+
+    loadFacetGroups: (first_call)->
+      non_selected_facets_groups = @getFacetsGroups(false)
+      if _.keys(non_selected_facets_groups).length == 0
+        return
+      first_call = if _.isUndefined(first_call) then true else first_call
+      ajax_deferred = @requestFacetsGroupsData(first_call)
+      done_callback = (es_data)->
+        if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
+          throw "ERROR! The aggregations data is missing in the elastic search response!"
+        for facet_group_key, facet_group of non_selected_facets_groups
+          facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+        if first_call
+          @loadFacetGroups(false)
+        else
+          @trigger('facets-changed')
+      ajax_deferred.done(done_callback.bind(@))
+
+    getFacetsGroups:(selected)->
+      if _.isUndefined(selected) or _.isNull(selected)
+        return @meta.facets_groups
+      else
+        sub_facet_groups = {}
+        for facet_group_key, facet_group of @meta.facets_groups
+          if selected == facet_group.faceting_handler.hasSelection()
+            sub_facet_groups[facet_group_key] = facet_group
+        return sub_facet_groups
+
 
     # builds the url to do the request
     getURL: ->
@@ -184,6 +255,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     hasMeta: (attr) ->
       return attr in _.keys(@meta)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Search functions
+    # ------------------------------------------------------------------------------------------------------------------
+
+    search: (singular_terms, exact_terms, filter_terms)->
+      singular_terms = if _.isUndefined(singular_terms) then [] else singular_terms
+      exact_terms = if _.isUndefined(exact_terms) then [] else exact_terms
+      filter_terms = if _.isUndefined(filter_terms) then [] else filter_terms
+      @setMeta('singular_terms', singular_terms)
+      @setMeta('exact_terms', exact_terms)
+      @setMeta('filter_terms', filter_terms)
+      @clearAllResults()
+      @setPage(1)
+      @fetch()
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions
@@ -267,10 +354,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentSortingComparator: () ->
       #TODO implement sorting
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
+
     clearAllResults: ->
       @allResults = undefined
 

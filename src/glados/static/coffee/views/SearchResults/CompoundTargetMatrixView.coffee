@@ -431,8 +431,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       legendG = legendSVG.append('g')
         .attr("transform", "translate(" + nullValSpace + "," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text(currentColourProperty)
-        .attr("transform", "translate(10, 35)");
+
+
+      legendSVG.append('text')
+        .text(currentColourProperty)
+        .attr("class", 'matrix-colour-legend-title')
+
+      # center legend title
+      textWidth = d3.select('.matrix-colour-legend-title').node().getBBox().width
+      xTrans = (legendWidth - textWidth) / 2
+      legendSVG.select('.matrix-colour-legend-title')
+        .attr("transform", "translate(" + xTrans + ", 35)");
 
       rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = config.propertyToType[currentColourProperty]
@@ -476,14 +485,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        data = d3.range(domain[0], domain[1], step)
+        legendData = d3.range(domain[0], domain[1], step)
 
         legendAxis.tickValues([
-          data[0]
-          data[parseInt(data.length * 0.25)],
-          data[parseInt(data.length * 0.5)],
-          data[parseInt(data.length * 0.75)],
-          data[data.length - 1],
+          legendData[0]
+          legendData[parseInt(legendData.length * 0.25)],
+          legendData[parseInt(legendData.length * 0.5)],
+          legendData[parseInt(legendData.length * 0.75)],
+          legendData[legendData.length - 1],
         ])
 
         #Add the null value rect
@@ -500,7 +509,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           .text('null')
 
         legendG.selectAll('rect')
-          .data(data)
+          .data(legendData)
           .enter().append('rect')
           .attr('height',rectangleHeight)
           .attr('width', stepWidthInScale + 5)
