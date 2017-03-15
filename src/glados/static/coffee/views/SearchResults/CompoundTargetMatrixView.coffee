@@ -313,7 +313,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     g.append("rect")
       .attr("class", "background")
-      .style("fill", glados.Settings.VISUALISATION_GRID_UNDEFINED)
+      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .attr("width", backRectWidth )
       .attr("height", backRectHeight )
       .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
@@ -420,11 +420,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     fillLegendDetails = ->
 
+      # make a space for the null value
+      nullValSpace = 20
+
       legendSVG.selectAll('g').remove()
       legendSVG.selectAll('text').remove()
 
+      nullValG = legendSVG.append('g')
+        .attr("transform", "translate(0," +(legendHeight - 30) + ")")
+
       legendG = legendSVG.append('g')
-        .attr("transform", "translate(0," + (legendHeight - 30) + ")");
+        .attr("transform", "translate(" + nullValSpace + "," + (legendHeight - 30) + ")");
       legendSVG.append('text').text(currentColourProperty)
         .attr("transform", "translate(10, 35)");
 
@@ -436,7 +442,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         domain = getDomainForOrdinalProperty currentColourProperty
         getXInLegendFor = d3.scale.ordinal()
           .domain( domain )
-          .rangeBands([0, legendWidth])
+          .rangeBands([0, legendWidth - nullValSpace])
 
         legendAxis = d3.svg.axis()
           .scale(getXInLegendFor)
@@ -456,10 +462,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       else if colourDataType == 'number'
 
         domain = getDomainForContinuousProperty currentColourProperty
-        linearScalePadding = 10
+        linearScalePadding = 30
         getXInLegendFor = d3.scale.linear()
           .domain(domain)
-          .range([linearScalePadding, (legendWidth - linearScalePadding)])
+          .range([linearScalePadding, (legendWidth - nullValSpace - linearScalePadding)])
 
         legendAxis = d3.svg.axis()
           .scale(getXInLegendFor)
@@ -467,10 +473,31 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         start = domain[0]
         stop = domain[1]
-        numValues = 20
+        numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
         data = d3.range(domain[0], domain[1], step)
+
+        legendAxis.tickValues([
+          data[0]
+          data[parseInt(data.length * 0.25)],
+          data[parseInt(data.length * 0.5)],
+          data[parseInt(data.length * 0.75)],
+          data[data.length - 1],
+        ])
+
+        #Add the null value rect
+        nullValG.append('rect')
+          .attr('height',rectangleHeight)
+          .attr('width', stepWidthInScale + 5)
+          .attr('x', 0)
+          .attr('y', -rectangleHeight)
+          .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
+
+        nullValG.append('text')
+           .attr('x', 0)
+          .attr('y', 20)
+          .text('null')
 
         legendG.selectAll('rect')
           .data(data)
