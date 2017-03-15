@@ -140,22 +140,21 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
      # use real values if not being used by test version
     molecules = @collection.allResults if @collection?
 
-    # --------------------------------------
-    # prepare data
-    # --------------------------------------
+    # ignore molecules for which any value on any of the axes is null, they are not shown by plotly and they
+    # can mess the axes range
+    molecules = _.reject(molecules, (mol) ->
 
-    preprocessMolProperties = (molecules) ->
+      for prop in [thisView.currentPropertyX.prop_name,
+        thisView.currentPropertyY.prop_name,
+        thisView.currentPropertyColour.prop_name]
 
-      for mol in molecules
+        value = glados.Utils.getNestedValue(mol, prop)
 
-        properties = mol.molecule_properties
-        for key, value of properties
+        if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+          return true
 
-          value = parseFloat(value)
-          value = 0 if isNaN(value)
-          mol[key] = parseFloat(value)
-
-    preprocessMolProperties(molecules)
+      return false
+    )
 
     # --------------------------------------
     # scales
@@ -224,6 +223,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         when type == 'string' then buildOrdinalStringScale(dataList, axis)
 
       return scale
+
 
     getColourFor = getScaleForProperty(molecules, @currentPropertyColour, @COLOUR)
 
