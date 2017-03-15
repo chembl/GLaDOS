@@ -140,22 +140,21 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
      # use real values if not being used by test version
     molecules = @collection.allResults if @collection?
 
-    # --------------------------------------
-    # prepare data
-    # --------------------------------------
+    # ignore molecules for which any value on any of the axes is null, they are not shown by plotly and they
+    # can mess the axes range
+    molecules = _.reject(molecules, (mol) ->
 
-    preprocessMolProperties = (molecules) ->
+      for prop in [thisView.currentPropertyX.prop_name,
+        thisView.currentPropertyY.prop_name,
+        thisView.currentPropertyColour.prop_name]
 
-      for mol in molecules
+        value = glados.Utils.getNestedValue(mol, prop)
 
-        properties = mol.molecule_properties
-        for key, value of properties
+        if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+          return true
 
-          value = parseFloat(value)
-          value = 0 if isNaN(value)
-          mol[key] = parseFloat(value)
-
-    preprocessMolProperties(molecules)
+      return false
+    )
 
     # --------------------------------------
     # scales
@@ -225,6 +224,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       return scale
 
+
     getColourFor = getScaleForProperty(molecules, @currentPropertyColour, @COLOUR)
 
     xValues = (glados.Utils.getNestedValue(mol, @currentPropertyX.prop_name) for mol in molecules)
@@ -250,7 +250,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       }
     }
 
-    data = [trace1]
+    legendData = [trace1]
     layout = {
       xaxis: {title: @currentPropertyX.label}
       yaxis: {title: @currentPropertyY.label}
@@ -258,7 +258,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
     console.log 'visual element: ', @$vis_elem
 
-    Plotly.newPlot(@$vis_elem.get(0), data, layout)
+    Plotly.newPlot(@$vis_elem.get(0), legendData, layout)
 
     @$vis_elem.get(0).on('plotly_click', (eventInfo) ->
       pointNumber = eventInfo.points[0].pointNumber
@@ -272,7 +272,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     horizontalPadding = 10
     legendWidth = 0.4 * elemWidth
-    legendHeight = 100
+    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     $legendContainer.empty()
     legendContainer = d3.select($legendContainer.get(0))
@@ -293,10 +293,18 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendG = legendSVG.append('g')
               .attr("transform", "translate(" + horizontalPadding + "," + (legendHeight - 30) + ")")
 
-      legendSVG.append('text').text(thisView.currentPropertyColour.label)
-        .attr("transform", "translate(10, 35)");
+      legendSVG.append('text')
+        .text(thisView.currentPropertyColour.label)
+        .attr("class", 'plot-colour-legend-title')
 
-      rectangleHeight = 20
+      # center legend title
+      textWidth = d3.select('.plot-colour-legend-title').node().getBBox().width
+      xTrans = (legendWidth - textWidth) / 2
+
+      legendSVG.select('.plot-colour-legend-title')
+        .attr("transform", "translate(" + xTrans + ", 35)")
+
+      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = thisView.currentPropertyColour.type
 
       if colourDataType == 'string'
@@ -340,10 +348,18 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        data = d3.range(domain[0], domain[1], step)
+        legendData = d3.range(domain[0], domain[1], step)
+
+        legendAxis.tickValues([
+          legendData[0]
+          legendData[parseInt(legendData.length * 0.25)],
+          legendData[parseInt(legendData.length * 0.5)],
+          legendData[parseInt(legendData.length * 0.75)],
+          legendData[legendData.length - 1],
+        ])
 
         legendG.selectAll('rect')
-          .data(data)
+          .data(legendData)
           .enter().append('rect')
           .attr('height',rectangleHeight)
           .attr('width', stepWidthInScale + 1)
