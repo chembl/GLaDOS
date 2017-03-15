@@ -49,14 +49,8 @@
 </script>
 
 <!-- This shows when the screen is large -->
-<ul id="slide-out" class="collapsible collapsible-accordion side-nav fixed teal lighten-5">
+<ul id="slide-out" class="collapsible side-nav fixed teal lighten-5" data-collapsible="expandable">
  {% block menu_links %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
 </ul>
-<!-- This shows when the screen is medium or smaller -->
-<!--<ul  class="collapsible collapsible-accordion side-nav teal lighten-5" style="display: none">-->
-   <!--{% block links_small %}-->
-    <!--{% include "glados/base/left_menu_links.html" %}-->
-  <!--{% endblock %}-->
-<!--</ul>-->

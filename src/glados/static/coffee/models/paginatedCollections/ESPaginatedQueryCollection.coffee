@@ -43,6 +43,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
       # Call Backbone's fetch
+      @loadFacetGroups()
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -101,7 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
       request_facets = if _.isUndefined(request_facets) then false else request_facets
       # If facets are requested the facet filters are excluded from the query
-      facets_filtered = not request_facets
+      facets_filtered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
       singular_terms = @getMeta('singular_terms')
@@ -192,9 +193,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return filter_query
 
     getFacetsGroupsAggsQuery: (facets_first_call)->
-      if @meta.facets_groups
+      non_selected_facets_groups = @getFacetsGroups(false)
+      if non_selected_facets_groups
         aggs_query = {}
-        for facet_group_key, facet_group of @meta.facets_groups
+        for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
 
@@ -208,26 +210,32 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return ajax_deferred
 
     loadFacetGroups: (first_call)->
-      if _.keys(@meta.facets_groups).length == 0
-        console.log("WARNING! no facets defined for "+@getURL())
+      non_selected_facets_groups = @getFacetsGroups(false)
+      if _.keys(non_selected_facets_groups).length == 0
         return
       first_call = if _.isUndefined(first_call) then true else first_call
       ajax_deferred = @requestFacetsGroupsData(first_call)
       done_callback = (es_data)->
         if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
           throw "ERROR! The aggregations data is missing in the elastic search response!"
-        console.log(first_call, es_data.aggregations)
-        for facet_group_key, facet_group of @meta.facets_groups
+        for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
         if first_call
           @loadFacetGroups(false)
         else
           @trigger('facets-changed')
-          console.log('TRIGGERED!')
       ajax_deferred.done(done_callback.bind(@))
 
     getFacetsGroups:(selected)->
-      return @meta.facets_groups
+      if _.isUndefined(selected) or _.isNull(selected)
+        return @meta.facets_groups
+      else
+        sub_facet_groups = {}
+        for facet_group_key, facet_group of @meta.facets_groups
+          if selected == facet_group.faceting_handler.hasSelection()
+            sub_facet_groups[facet_group_key] = facet_group
+        return sub_facet_groups
+
 
     # builds the url to do the request
     getURL: ->
@@ -262,7 +270,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @clearAllResults()
       @setPage(1)
       @fetch()
-      @loadFacetGroups()
 
 
     # ------------------------------------------------------------------------------------------------------------------

@@ -117,7 +117,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
           @min_value = es_aggregations_data[@es_property_name+'_MIN'].value
+          if not @min_value
+            @min_value = 0
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
+          if not @max_value
+            @max_value = 0
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
@@ -138,6 +142,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # ------------------------------------------------------------------------------------------------------------------
     # Facets Functions
     # ------------------------------------------------------------------------------------------------------------------
+
+    hasSelection: ()->
+      for facet_key, facet_data of @faceting_data
+        if facet_data.selected
+          return true
+      return false
 
     getSelectedFacetsFilterQuery: ()->
       selected_query = {

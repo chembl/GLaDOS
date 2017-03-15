@@ -6,13 +6,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       # @collection - must be provided in the constructor call
       @search_bar_view = arguments[0].search_bar_view
       @collection_container = arguments[0].collection_container
-      @el = $('.collapsible.collapsible-accordion.side-nav')
       @collection.on 'facets-changed', @render, @
       @render()
 
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
-      console.log(facet_group_key. facet_key)
       facets_groups = @collection.getFacetsGroups()
       faceting_handler = facets_groups[facet_group_key].faceting_handler
       faceting_handler.toggleKeySelection(facet_key)
@@ -26,7 +24,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.setMeta('facets_filtered', true)
       @collection.fetch()
       goto_callback = ()->
-        console.log('Scrolling')
         $(window).scrollTop(@collection_container.offset().top)
 
       setTimeout( goto_callback.bind(@), 1000)
@@ -49,7 +46,7 @@ glados.useNameSpace 'glados.views.SearchResults',
               link_facet_i.label = facet_key
               link_facet_i.selected = faceting_handler_i.faceting_data[facet_key].selected
               link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
-              facet_total += faceting_handler_i.faceting_data[facet_key].count
+              facet_total += 1
               links_data.push(link_facet_i)
           menu_key = @getMenuKey(facet_group_key)
           if facet_total
@@ -58,6 +55,7 @@ glados.useNameSpace 'glados.views.SearchResults',
                 title: facet_group.label
                 title_badge: facet_total
                 links: links_data
+                show_on_render: faceting_handler_i.hasSelection()
               }
             )
           else
