@@ -98,7 +98,8 @@ PaginatedViewExt =
       $append_to.append($(new_item_cont))
 
     # After adding everything, if the element is a table I now set up the top scroller
-    if $specificElem.is('table')
+    # also set up the automatic header fixation
+    if $specificElem.is('table') and $specificElem.hasClass('scrollable')
 
       $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
       $firstTableRow = $specificElem.find('tr').first()
@@ -116,10 +117,13 @@ PaginatedViewExt =
       # bind the scroll functions if not done yet
       if !$specificElem.attr('data-scroll-setup')
 
-        $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-        $scrollContainer.scroll( -> $specificElem.scrollLeft($scrollContainer.scrollLeft()))
-        $specificElem.scroll( -> $scrollContainer.scrollLeft($specificElem.scrollLeft()))
-        $specificElem.attr('data-scroll-setup', true)
+        @setUpTopTableScroller($specificElem)
+
+      # now set up tha header fixation
+      if !$specificElem.attr('data-header-pinner-setup')
+
+
+        $specificElem.attr('data-header-pinner-setup', true)
 
     # This code completes rows for grids of 2 or 3 columns in the flex box css display
     total_cards = @collection.getCurrentPage().length
@@ -127,6 +131,21 @@ PaginatedViewExt =
       $append_to.append('<div class="col s12 m6 l4"/>')
       total_cards++
 
+  #---------------------------------------------------------------
+  # Table scroller
+  #---------------------------------------------------------------
+  # this sets up dor a table the additional scroller on top of the table
+  setUpTopTableScroller: ($table) ->
+
+    $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+    $scrollContainer.scroll( -> $table.scrollLeft($scrollContainer.scrollLeft()))
+    $table.scroll( -> $scrollContainer.scrollLeft($table.scrollLeft()))
+    $table.attr('data-scroll-setup', true)
+
+  #---------------------------------------------------------------
+  # Table header pinner
+  #---------------------------------------------------------------
+  setUpTableHeaderPinner: ($table) ->
 
 
   fillPaginators: ->
