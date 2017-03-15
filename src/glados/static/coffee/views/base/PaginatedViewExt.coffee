@@ -97,6 +97,30 @@ PaginatedViewExt =
 
       $append_to.append($(new_item_cont))
 
+    # After adding everything, if the element is a table I now set up the top scroller
+    if $specificElem.is('table')
+
+      $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
+      $firstTableRow = $specificElem.find('tr').first()
+      firstRowWidth = $firstTableRow.width()
+      tableWidth = $specificElem.width()
+      $topScrollerDummy.width(firstRowWidth)
+
+      # make the scroller be shown if necessary
+      hasToScroll = tableWidth < firstRowWidth
+      if hasToScroll
+        $topScrollerDummy.height(20)
+      else
+        $topScrollerDummy.height(0)
+
+      # bind the scroll functions if not done yet
+      if !$specificElem.attr('data-scroll-setup')
+
+        $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+        $scrollContainer.scroll( -> $specificElem.scrollLeft($scrollContainer.scrollLeft()))
+        $specificElem.scroll( -> $scrollContainer.scrollLeft($specificElem.scrollLeft()))
+        $specificElem.attr('data-scroll-setup', true)
+
     # This code completes rows for grids of 2 or 3 columns in the flex box css display
     total_cards = @collection.getCurrentPage().length
     while total_cards%6 != 0
