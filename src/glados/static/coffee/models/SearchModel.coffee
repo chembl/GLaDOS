@@ -178,16 +178,11 @@ SearchModel = Backbone.Model.extend
 
   __search: ()->
     rls_dict = @getResultsListsDict()
-    for key_i, val_i of rls_dict
+    for resource_name, resource_es_collection of rls_dict
       # Skips the search on non selected entities
-      if @selected_es_entity and @selected_es_entity != key_i
+      if @selected_es_entity and @selected_es_entity != resource_name
         continue
-      val_i.setMeta('singular_terms',@get("singular_terms"))
-      val_i.setMeta('exact_terms',@get("exact_terms"))
-      val_i.setMeta('filter_terms',@get("filter_terms"))
-      val_i.clearAllResults()
-      val_i.setPage(1)
-      val_i.fetch()
+      resource_es_collection.search(@get("singular_terms"), @get("exact_terms"), @get("filter_terms"))
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->

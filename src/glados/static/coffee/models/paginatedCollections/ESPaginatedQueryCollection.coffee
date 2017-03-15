@@ -98,7 +98,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # generates an object with the data necessary to do the ES request
     # set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets) ->
+    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
       request_facets = if _.isUndefined(request_facets) then false else request_facets
       # If facets are requested the facet filters are excluded from the query
       facets_filtered = not request_facets
@@ -156,20 +156,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         es_query.query.bool.must.bool.should.push(by_term_query)
 
       if request_facets
-        facets_query = @getFacetsGroupsAggsQuery()
+        if _.isUndefined(facets_first_call)
+          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
+        facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
       return es_query
-
-    queryFacetsGroups: ()->
-
-
-    getFacetsGroupsAggsQuery: ()->
-      if @meta.facets_groups
-        aggs_query = {}
-        for facet_group_key, facet_group of @meta.facets_groups
-          facet_group.faceting_handler.addQueryAggs(aggs_query)
-        return aggs_query
 
     getFilterQuery: (facets_filtered) ->
       filter_query = {bool:{ must:[] }}
@@ -199,10 +191,42 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return null
       return filter_query
 
+    getFacetsGroupsAggsQuery: (facets_first_call)->
+      if @meta.facets_groups
+        aggs_query = {}
+        for facet_group_key, facet_group of @meta.facets_groups
+          facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
+        return aggs_query
 
+    requestFacetsGroupsData: (first_call)->
+      es_url = @getURL()
+      # Creates the Elastic Search Query parameters and serializes them
+      # Includes the request for the faceting data
+      esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
+      # Uses POST to prevent result caching
+      ajax_deferred = $.post(es_url, esJSONRequestData)
+      return ajax_deferred
 
+    loadFacetGroups: (first_call)->
+      if _.keys(@meta.facets_groups).length == 0
+        console.log("WARNING! no facets defined for "+@getURL())
+        return
+      first_call = if _.isUndefined(first_call) then true else first_call
+      ajax_deferred = @requestFacetsGroupsData(first_call)
+      done_callback = (es_data)->
+        if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
+          throw "ERROR! The aggregations data is missing in the elastic search response!"
+        console.log(first_call, es_data.aggregations)
+        for facet_group_key, facet_group of @meta.facets_groups
+          facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+        if first_call
+          @loadFacetGroups(false)
+        else
+          @trigger('facets-changed')
+          console.log('TRIGGERED!')
+      ajax_deferred.done(done_callback.bind(@))
 
-    getFacetsGroups:()->
+    getFacetsGroups:(selected)->
       return @meta.facets_groups
 
     # builds the url to do the request
@@ -223,6 +247,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     hasMeta: (attr) ->
       return attr in _.keys(@meta)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Search functions
+    # ------------------------------------------------------------------------------------------------------------------
+
+    search: (singular_terms, exact_terms, filter_terms)->
+      singular_terms = if _.isUndefined(singular_terms) then [] else singular_terms
+      exact_terms = if _.isUndefined(exact_terms) then [] else exact_terms
+      filter_terms = if _.isUndefined(filter_terms) then [] else filter_terms
+      @setMeta('singular_terms', singular_terms)
+      @setMeta('exact_terms', exact_terms)
+      @setMeta('filter_terms', filter_terms)
+      @clearAllResults()
+      @setPage(1)
+      @fetch()
+      @loadFacetGroups()
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions
@@ -306,10 +347,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentSortingComparator: () ->
       #TODO implement sorting
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
+
     clearAllResults: ->
       @allResults = undefined
 

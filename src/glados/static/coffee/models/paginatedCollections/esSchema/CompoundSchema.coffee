@@ -19,3 +19,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_molecule','max_phase'
         )
+      full_mwt:
+        label: 'Molecular Weight'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','molecule_properties.full_mwt'
+        )
+      hba:
+        label: 'H.B.Acceptors'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','molecule_properties.hba'
+        )
+      hbd:
+        label: 'H.B. Donors'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','molecule_properties.hbd'
+        )
