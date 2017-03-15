@@ -431,8 +431,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       legendG = legendSVG.append('g')
         .attr("transform", "translate(" + nullValSpace + "," + (legendHeight - 30) + ")");
-      legendSVG.append('text').text(currentColourProperty)
-        .attr("transform", "translate(10, 35)");
+
+
+      legendSVG.append('text')
+        .text(currentColourProperty)
+        .attr("class", 'matrix-colour-legend-title')
+
+      # center legend title
+      textWidth = d3.select('.matrix-colour-legend-title').node().getBBox().width
+      xTrans = (legendWidth - textWidth) / 2
+      legendSVG.select('.matrix-colour-legend-title')
+        .attr("transform", "translate(" + xTrans + ", 35)");
 
       rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
       colourDataType = config.propertyToType[currentColourProperty]
