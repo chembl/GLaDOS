@@ -46,8 +46,10 @@ run_step(){
 run_step "git checkout master"
 run_step "git pull"
 run_step "git checkout -b ${BRANCH_NAME}"
-run_step "git pull ${FROM_UPSTREAM} master"
+run_step "git pull --commit --no-edit ${FROM_UPSTREAM} master"
 run_step "git push --set-upstream origin ${BRANCH_NAME}"
 run_step "git checkout master"
+run_step "git pull --commit --no-edit origin ${BRANCH_NAME}"
+run_step "git push"
 run_step "git branch -d ${BRANCH_NAME}"
 return_to_origin_dir
