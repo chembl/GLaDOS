@@ -196,30 +196,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'Description'
-            'comparator': 'component_description'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Relationship'
-            'comparator': 'relationship'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Accession'
-            'comparator': 'accession'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'accession_url'
-          }
-        ]
+        ID_COLUMN: TargetComponent.ID_COLUMN
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object
