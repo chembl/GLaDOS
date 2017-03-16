@@ -151,43 +151,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: ApprovedDrugClinicalCandidate
         DEFAULT_PAGE_SIZE: 10
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'ChEMBL ID'
-            'comparator': 'molecule_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-          }
-          {
-            'name_to_show': 'Name'
-            'comparator': 'pref_name'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Mechanism of Action'
-            'comparator': 'mechanism_of_action'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Max Phase'
-            'comparator': 'max_phase'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'References'
-            'comparator': 'references'
-            'sort_disabled': true
-            'is_sorting': 0
-          }
-        ]
+        ID_COLUMN: ApprovedDrugClinicalCandidate.ID_COLUMN
+        COLUMNS: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
       # used for targets
       TARGET_RELATIONS_LIST:
