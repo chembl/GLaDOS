@@ -33,6 +33,10 @@
 
     <tr>
 
+      <td>
+        hola
+      </td>
+
       {{#each columns}}
 
         <td class="{{#if this.img_url}}center-align{{/if}}">
@@ -59,6 +63,11 @@
   <thead>
 
     <tr>
+
+      <th>
+          <input type="checkbox" class="filled-in" id="{{base_check_id}}-selectAll" />
+          <label for="{{base_check_id}}-selectAll"></label>
+      </th>
 
       {{#each columns}}
         <th>

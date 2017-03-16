@@ -50,8 +50,16 @@ PaginatedViewExt =
     # if it is a table, add the corresponding header
     if $specificElem.is('table')
 
+      baseCheckID = $(@el).attr('id')
+      # Parent element should always have an id, if for some reason it hasn't we generate a random number for the id
+      # we need this to avoid conflicts with other tables on the page that will have also a header and a "select all"
+      # option
+      if !baseCheckID?
+        baseCheckID = Math.floor((Math.random() * 1000) + 1)
+
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
+        base_check_id: baseCheckID
         columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
@@ -90,6 +98,8 @@ PaginatedViewExt =
 
         # This method should return a value based on the parameter, not modify the parameter
         return return_col
+
+      #checkID =
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url

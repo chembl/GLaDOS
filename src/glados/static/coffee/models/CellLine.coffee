@@ -11,9 +11,8 @@ CellLine = Backbone.Model.extend
 CellLine.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'cell_line_report_card/'+chembl_id
 
-CellLine.COLUMNS_SETTINGS = {
-  RESULTS_LIST_TABLE: [
-    {
+CellLine.COLUMNS = {
+  CHEMBL_ID:{
       'name_to_show': 'CHEMBL_ID'
       'comparator': 'cell_chembl_id'
       'sort_disabled': false
@@ -21,6 +20,13 @@ CellLine.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
     }
+}
+
+CellLine.ID_COLUMN = CellLine.COLUMNS.CHEMBL_ID
+
+CellLine.COLUMNS_SETTINGS = {
+  RESULTS_LIST_TABLE: [
+    CellLine.COLUMNS.CHEMBL_ID
     {
       'name_to_show': 'Name'
       'comparator': 'cell_name'
