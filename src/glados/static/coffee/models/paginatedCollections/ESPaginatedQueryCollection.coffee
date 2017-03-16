@@ -222,15 +222,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if first_call
         @loading_facets = true
         @loading_facets_t_ini = call_time
+        @needs_second_call = false
+        for group_key, facet_group of non_selected_facets_groups
+          if facet_group.faceting_handler.needsSecondRequest()
+            @needs_second_call = true
 
       ajax_deferred = @requestFacetsGroupsData(first_call)
       done_callback = (es_data)->
-        if _.isUndefined(es_data)
-          throw "ERROR! The aggregations response is missing!"
-        if not _.isUndefined(es_data.aggregations)
-          for facet_group_key, facet_group of non_selected_facets_groups
-            facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
-        if first_call
+        if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
+          throw "ERROR! The aggregations data in the response is missing!"
+        for facet_group_key, facet_group of non_selected_facets_groups
+          facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+        if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
           @trigger('facets-changed')
@@ -251,11 +254,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for facet_group_key, facet_group of @meta.facets_groups
         facet_group.faceting_handler.clearFacets()
 
-
     # builds the url to do the request
     getURL: ->
       glados.models.paginatedCollections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination

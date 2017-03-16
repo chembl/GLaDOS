@@ -4,12 +4,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   TargetSchema:
     FACETS_GROUPS:
-      molecule_type:
+      organism:
         label: 'Organism'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_target','organism'
         )
-      indication_class:
+      target_type:
         label: 'Target Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_target','target_type'

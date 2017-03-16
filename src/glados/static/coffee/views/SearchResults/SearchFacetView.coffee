@@ -23,10 +23,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       )
       @collection.setMeta('facets_filtered', true)
       @collection.fetch()
-      goto_callback = ()->
-        $(window).scrollTop(@collection_container.offset().top)
-
-      setTimeout( goto_callback.bind(@), 1000)
 
     getMenuKey:(facet_group_key)->
       return 'faceting_menu_'+facet_group_key
@@ -37,6 +33,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         for facet_group_key, facet_group of facets_groups
           links_data = []
           faceting_handler_i = facet_group.faceting_handler
+          faceting_handler_id = faceting_handler_i.getFacetingHandlerId()
           facet_total = 0
           if faceting_handler_i.faceting_keys_inorder
             for facet_key in faceting_handler_i.faceting_keys_inorder
@@ -48,7 +45,7 @@ glados.useNameSpace 'glados.views.SearchResults',
               link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
               facet_total += 1
               links_data.push(link_facet_i)
-          menu_key = @getMenuKey(facet_group_key)
+          menu_key = @getMenuKey(faceting_handler_id)
           if facet_total > 1 and @collection.meta.key_name == @search_bar_view.selected_es_entity
             SideMenuHelper.addMenu(menu_key,
               {

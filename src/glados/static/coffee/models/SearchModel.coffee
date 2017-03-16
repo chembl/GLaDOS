@@ -168,6 +168,7 @@ SearchModel = Backbone.Model.extend
         smiles_promise = @flexmatchSMILES(term,term_replacement_callback, index)
         jquery_promises.push(smiles_promise)
       else if term
+        terms_transform_in_order.push(term)
         unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
         jquery_promises.push(unichem_promise)
     if jquery_promises.length > 0
