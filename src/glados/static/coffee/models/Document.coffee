@@ -22,6 +22,28 @@ Document.COLUMNS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
   }
+  TITLE: {
+      'name_to_show': 'Title'
+      'comparator': 'title'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'custom_field_template': '<i>{{val}}</i>'
+  }
+  AUTHORS: {
+      'name_to_show': 'Authors'
+      'comparator': 'authors'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+  }
+  YEAR:{
+      'name_to_show': 'Year'
+      'comparator': 'year'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -29,27 +51,8 @@ Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 Document.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Document.COLUMNS.CHEMBL_ID
-    {
-      'name_to_show': 'Title'
-      'comparator': 'title'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<i>{{val}}</i>'
-    }
-    {
-      'name_to_show': 'Authors'
-      'comparator': 'authors'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
-      'name_to_show': 'Year'
-      'comparator': 'year'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
+    Document.COLUMNS.TITLE
+    Document.COLUMNS.AUTHORS
+    Document.COLUMNS.YEAR
   ]
 }

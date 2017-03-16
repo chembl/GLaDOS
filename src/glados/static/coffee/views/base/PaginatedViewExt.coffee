@@ -99,7 +99,8 @@ PaginatedViewExt =
         # This method should return a value based on the parameter, not modify the parameter
         return return_col
 
-      #checkID =
+      checkID = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+      console.log 'CHECK ID: ', checkID
 
       new_item_cont = Handlebars.compile( $item_template.html() )
         img_url: img_url

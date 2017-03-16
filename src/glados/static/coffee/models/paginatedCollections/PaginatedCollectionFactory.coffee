@@ -20,6 +20,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             facets: esIndexSettings.FACETS
+            id_column: esIndexSettings.ID_COLUMN
             # set by default columns with show: true, and additional with show: false
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
             #columns specific for cards view
@@ -43,6 +44,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
+            id_column: collectionSettings.ID_COLUMN
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
             is_carousel: collectionSettings.IS_CAROUSEL
@@ -65,6 +67,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
+            id_column: collectionSettings.ID_COLUMN
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
 

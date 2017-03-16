@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS
@@ -27,6 +28,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Targets'
         PATH:'/chembl_target'
         MODEL: Target
+        ID_COLUMN: Target.ID_COLUMN
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -42,6 +44,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Assays'
         PATH:'/chembl_assay'
         MODEL: Assay
+        ID_COLUMN: Assay.ID_COLUMN
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -57,6 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Documents'
         PATH:'/chembl_document'
         MODEL: Document
+        ID_COLUMN: Document.ID_COLUMN
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -72,6 +76,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Cells'
         PATH:'/chembl_cell_line'
         MODEL: CellLine
+        ID_COLUMN: CellLine.ID_COLUMN
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -87,6 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Tissues'
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
+        ID_COLUMN: glados.models.Tissue.ID_COLUMN
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -104,6 +110,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
@@ -111,6 +118,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
@@ -118,6 +126,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
@@ -125,6 +134,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         IS_CAROUSEL: true
       DOCS_BY_TERM_LIST:
@@ -132,6 +142,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        ID_COLUMN: Document.ID_COLUMN
         COLUMNS: [
           {
             'name_to_show': 'CHEMBL_ID'
