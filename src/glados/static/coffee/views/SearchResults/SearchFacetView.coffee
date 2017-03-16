@@ -49,7 +49,7 @@ glados.useNameSpace 'glados.views.SearchResults',
               facet_total += 1
               links_data.push(link_facet_i)
           menu_key = @getMenuKey(facet_group_key)
-          if facet_total
+          if facet_total > 1 and @collection.meta.key_name == @search_bar_view.selected_es_entity
             SideMenuHelper.addMenu(menu_key,
               {
                 title: facet_group.label

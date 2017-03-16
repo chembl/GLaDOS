@@ -143,10 +143,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Facets Functions
     # ------------------------------------------------------------------------------------------------------------------
 
+    clearFacets: ()->
+      @faceting_keys_inorder = []
+      @faceting_data = {}
+
+
     hasSelection: ()->
-      for facet_key, facet_data of @faceting_data
-        if facet_data.selected
-          return true
+      if @faceting_data
+        for facet_key, facet_data of @faceting_data
+          if facet_data.selected
+            return true
       return false
 
     getSelectedFacetsFilterQuery: ()->

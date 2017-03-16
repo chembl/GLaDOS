@@ -23,7 +23,9 @@ class SideMenuHelper
     win.resize ->
       top = win.scrollTop()
       maxPadding = $('#masthead-contaniner').height()
+      footer_h = $('footer').height()
       $sidenav.css
+        'paddingBottom': footer_h + 'px'
         'paddingTop': maxPadding - top + 'px'
     win.scroll ->
       top = win.scrollTop()

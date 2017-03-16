@@ -30,7 +30,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
-        FACETS_GROUPS: {}
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
