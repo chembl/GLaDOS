@@ -122,7 +122,8 @@ PaginatedViewExt =
       # now set up tha header fixation
       if !$specificElem.attr('data-header-pinner-setup')
 
-
+        # delay this to wait for
+        @setUpTableHeaderPinner($specificElem)
         $specificElem.attr('data-header-pinner-setup', true)
 
     # This code completes rows for grids of 2 or 3 columns in the flex box css display
@@ -147,6 +148,24 @@ PaginatedViewExt =
   #---------------------------------------------------------------
   setUpTableHeaderPinner: ($table) ->
 
+    console.log 'setting up table header pinner'
+
+    #use the top scroller to trigger the pin
+    $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+    $firstTableRow = $table.find('tr').first()
+
+    $win = $(window)
+    topTrigger = $scrollContainer.offset().top
+
+    pinUnpinTableHeader = ->
+
+      # don't bother if table is not shown
+      if !$table.is(":visible")
+        return
+
+      #TODO: complete this function!
+
+    $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
   fillPaginators: ->
 
