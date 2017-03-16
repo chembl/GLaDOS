@@ -143,47 +143,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: [
-          {
-            'name_to_show': 'CHEMBL_ID'
-            'comparator': 'document_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-          }
-          {
-            'name_to_show': 'Score'
-            'comparator': 'score'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'custom_field_template': '<b>Score: </b>{{val}}'
-          }
-          {
-            'name_to_show': 'Title'
-            'comparator': 'title'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'custom_field_template': '<i>{{val}}</i>'
-          }
-          {
-            'name_to_show': 'Authors'
-            'comparator': 'authors'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Year'
-            'comparator': 'year'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-
-          }
-        ]
+        COLUMNS: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
         ADDITIONAL_COLUMNS:[]
     CLIENT_SIDE_WS_COLLECTIONS:
       # used for targets

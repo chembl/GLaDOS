@@ -44,6 +44,15 @@ Document.COLUMNS = {
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
+  # this is shown when searching documents by terms.
+  SCORE: {
+      'name_to_show': 'Score'
+      'comparator': 'score'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'custom_field_template': '<b>Score: </b>{{val}}'
+  }
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -51,6 +60,13 @@ Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 Document.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Document.COLUMNS.CHEMBL_ID
+    Document.COLUMNS.TITLE
+    Document.COLUMNS.AUTHORS
+    Document.COLUMNS.YEAR
+  ]
+  SEARCH_BY_TERM_RESULTS: [
+    Document.COLUMNS.CHEMBL_ID
+    Document.COLUMNS.SCORE
     Document.COLUMNS.TITLE
     Document.COLUMNS.AUTHORS
     Document.COLUMNS.YEAR
