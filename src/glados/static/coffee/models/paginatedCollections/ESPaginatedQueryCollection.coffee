@@ -42,8 +42,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Use options if specified by caller
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
-      # Call Backbone's fetch
       @loadFacetGroups()
+      # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -213,17 +213,31 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       non_selected_facets_groups = @getFacetsGroups(false)
       if _.keys(non_selected_facets_groups).length == 0
         return
+
       first_call = if _.isUndefined(first_call) then true else first_call
+      call_time = new Date().getTime()
+      if first_call and @loading_facets and call_time-@loading_facets_t_ini < 5000
+        console.log "WARNING! Facets requested again before they finished loading!", @getURL()
+        return
+      if first_call
+        @loading_facets = true
+        @loading_facets_t_ini = call_time
+        @needs_second_call = false
+        for group_key, facet_group of non_selected_facets_groups
+          if facet_group.faceting_handler.needsSecondRequest()
+            @needs_second_call = true
+
       ajax_deferred = @requestFacetsGroupsData(first_call)
       done_callback = (es_data)->
         if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
-          throw "ERROR! The aggregations data is missing in the elastic search response!"
+          throw "ERROR! The aggregations data in the response is missing!"
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
-        if first_call
+        if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
           @trigger('facets-changed')
+          @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 
     getFacetsGroups:(selected)->
@@ -236,11 +250,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sub_facet_groups[facet_group_key] = facet_group
         return sub_facet_groups
 
+    clearAllFacetsGroups:()->
+      for facet_group_key, facet_group of @meta.facets_groups
+        facet_group.faceting_handler.clearFacets()
 
     # builds the url to do the request
     getURL: ->
       glados.models.paginatedCollections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
@@ -268,7 +284,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('exact_terms', exact_terms)
       @setMeta('filter_terms', filter_terms)
       @clearAllResults()
-      @setPage(1)
+      @clearAllFacetsGroups()
+      @setPage(1, false)
       @fetch()
 
 
@@ -319,9 +336,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum) ->
+    setPage: (newPageNum, fetch) ->
       newPageNum =  parseInt(newPageNum)
-      if 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
+      fetch = if _.isUndefined(fetch) then true else fetch
+      if fetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 

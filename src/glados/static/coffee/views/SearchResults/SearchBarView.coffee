@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
       @searchResultsMenusViewsDict = null
+      @searchFacetsViews = null
       @container = null
       @lists_container = null
 
@@ -62,6 +63,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
       @updateChips()
+      @updateFacets()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)
@@ -71,11 +73,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Navigates to the specified URL
         window.location.href = nav_url
 
-
-
     # ------------------------------------------------------------------------------------------------------------------
     # Views
     # ------------------------------------------------------------------------------------------------------------------
+
+    updateFacets:()->
+      if @searchFacetsViews
+        for res_name, facets_wiew of @searchFacetsViews
+          facets_wiew.render()
 
     sortResultsListsViews: ()->
       # If an entity is selected the ordering is skipped
@@ -185,6 +190,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         @searchResultsMenusViewsDict = {}
         @$searchResultsListsContainersDict = {}
+        @searchFacetsViews = {}
         # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
         # Share the same keys to access different objects
         resultsListsDict = @searchModel.getResultsListsDict()
@@ -229,6 +235,8 @@ glados.useNameSpace 'glados.views.SearchResults',
               collection: resultsListsDict[resourceName]
               search_bar_view: @
               collection_container: @$searchResultsListsContainersDict[resourceName]
+
+            @searchFacetsViews[resourceName] = res_facet_view
 
         @container.show()
         @updateChips()
