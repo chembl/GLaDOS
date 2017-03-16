@@ -26,6 +26,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
             additional_columns: ( $.extend(col, {show: false}) for col in esIndexSettings.ADDITIONAL_COLUMNS)
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
+            key_name: esIndexSettings.KEY_NAME
             id_name: esIndexSettings.ID_NAME
             available_views: esIndexSettings.AVAILABLE_VIEWS
             default_view: esIndexSettings.DEFAULT_VIEW

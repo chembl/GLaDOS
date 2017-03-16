@@ -36,9 +36,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       if not property_type.aggregatable
         throw "ERROR! "+es_property+" for elastic index "+es_index+" is not aggregatable"
       if property_type.type == String or property_type.type == Boolean
-        return new FacetingHandler(es_property, property_type.type, FacetingHandler.CATEGORY_FACETING)
+        return new FacetingHandler(es_index, es_property, property_type.type, FacetingHandler.CATEGORY_FACETING)
       else if property_type.type == Number
-        return new FacetingHandler(es_property, property_type.type, FacetingHandler.INTERVAL_FACETING)
+        return new FacetingHandler(es_index, es_property, property_type.type, FacetingHandler.INTERVAL_FACETING)
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
             +" does not have a defined faceting type"
@@ -47,7 +47,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor:(@es_property_name, @js_type, @faceting_type)->
+    constructor:(@es_index, @es_property_name, @js_type, @faceting_type)->
       @faceting_keys_inorder = null
       @faceting_data = null
       @min_value = null
@@ -139,14 +139,22 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 }
                 @faceting_keys_inorder.push(facet_key)
 
+    needsSecondRequest:()->
+      return @faceting_type == FacetingHandler.INTERVAL_FACETING
+
     # ------------------------------------------------------------------------------------------------------------------
     # Facets Functions
     # ------------------------------------------------------------------------------------------------------------------
 
+    clearFacets: ()->
+      @faceting_keys_inorder = []
+      @faceting_data = {}
+
     hasSelection: ()->
-      for facet_key, facet_data of @faceting_data
-        if facet_data.selected
-          return true
+      if @faceting_data
+        for facet_key, facet_data of @faceting_data
+          if facet_data.selected
+            return true
       return false
 
     getSelectedFacetsFilterQuery: ()->
@@ -163,6 +171,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     toggleKeySelection: (facet_key)->
       @faceting_data[facet_key].selected = not @faceting_data[facet_key].selected
       return @faceting_data[facet_key].selected
+
+    getFacetingHandlerId:()->
+      return (@es_index+"_"+@es_property_name).replace(FacetingHandler.KEY_REGEX_REPLACE,"__")
 
     getFacetId:(facet_key)->
       return (@es_property_name+"_facet_"+@faceting_data[facet_key].index)\

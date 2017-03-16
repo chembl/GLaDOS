@@ -23,7 +23,9 @@ class SideMenuHelper
     win.resize ->
       top = win.scrollTop()
       maxPadding = $('#masthead-contaniner').height()
+      footer_h = $('footer').height()
       $sidenav.css
+        'paddingBottom': footer_h + 'px'
         'paddingTop': maxPadding - top + 'px'
     win.scroll ->
       top = win.scrollTop()
@@ -75,7 +77,6 @@ class SideMenuHelper
           SideMenuHelper.findMenuLink(menu_key_i, link_i.link_class_key).click(link_i.select_callback)
       # Open on render
       if menu_data_i.show_on_render
-        console.log(menu_key_i,SideMenuHelper.$side_menu.find('.collapsible-body.'+menu_key_i).lenght)
         SideMenuHelper.$side_menu.find('.collapsible-body.'+menu_key_i).show()
 
     if SideMenuHelper.$side_menu.find('.collapsible-header').length == 1
