@@ -5,12 +5,12 @@
     <div class="collapsible-header{{#if menu_class}} {{menu_class}}{{/if}} chembl-teal white-text">
       <table class="no-padding">
         <tr class="no-padding">
-          <td class="no-padding">
+          <td class="no-padding" style="width: 80%; word-wrap: break-word;">
             {{title}}
           </td>
           {{#if title_badge}}
-            <td class="no-padding">
-              <span class="new badge">{{title_badge}}</span>
+            <td class="no-padding" style="text-align: center;">
+              <span class="badge-primary-color-no-float">{{title_badge}}</span>
             </td>
           {{/if}}
         </tr>
@@ -28,12 +28,12 @@
               {{#if this.href}} href="{{this.href}}"{{/if}}>
             <table class="no-padding">
               <tr class="no-padding">
-                <td class="no-padding" style="max-width: 117px; word-wrap: break-word;">
+                <td class="no-padding" style="width: 80%; word-wrap: break-word;">
                   {{this.label}}
                 </td>
                 {{#if this.badge}}
-                  <td class="no-padding">
-                    <span class="new badge">{{this.badge}}</span>
+                  <td class="no-padding" style="text-align: center;">
+                    <span class="badge-primary-color-no-float">{{this.badge}}</span>
                   </td>
                 {{/if}}
               </tr>
