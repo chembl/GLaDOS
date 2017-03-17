@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      @collection.on 'reset do-repaint sort', @render, @
+      @collection.on 'reset selection-changed do-repaint sort', @render, @
       # The before_fetch trigger has only been defined in ESPaginatedQueryCollection
       @collection.on 'before_fetch_elastic', @showPreloaderHideOthers, @
 

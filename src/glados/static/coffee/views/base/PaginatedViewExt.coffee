@@ -19,8 +19,11 @@ PaginatedViewExt =
   # Selection
   #---------------------------------------------------------------
   toggleSelectAll: ->
-    console.log 'TOGGLE SELECT ALL'
+    @collection.toggleSelectAll()
 
+  #---------------------------------------------------------------
+  # Fill templates
+  #---------------------------------------------------------------
   clearTemplates: ->
     $(@el).find('.BCK-items-container').empty()
 
@@ -59,12 +62,16 @@ PaginatedViewExt =
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
         base_check_box_id: @getBaseSelectAllCheckBoxID()
+        all_items_selected: @collection.getMeta('all_items_selected')
         columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
 
+
+    selectionExceptions = @collection.getMeta('selection_exceptions')
+    allAreSelected =  @collection.getMeta('all_items_selected')
 
     for item in @collection.getCurrentPage()
 
@@ -98,10 +105,13 @@ PaginatedViewExt =
         # This method should return a value based on the parameter, not modify the parameter
         return return_col
 
-      baseCheckBoxID = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+      isColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
+      isSelectionException =  selectionExceptions[isColumnValue]?
 
       new_item_cont = Handlebars.compile( $item_template.html() )
-        base_check_box_id: baseCheckBoxID
+        base_check_box_id: isColumnValue
+        is_selected: isSelectionException != allAreSelected
         img_url: img_url
         columns: columnsWithValues
 

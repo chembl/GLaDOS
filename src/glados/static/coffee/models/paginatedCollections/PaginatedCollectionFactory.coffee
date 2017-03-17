@@ -30,6 +30,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_name: esIndexSettings.ID_NAME
             available_views: esIndexSettings.AVAILABLE_VIEWS
             default_view: esIndexSettings.DEFAULT_VIEW
+            all_items_selected: false
+            selection_exceptions: {}
 
       return new indexESPagQueryCollection
 

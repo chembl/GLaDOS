@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # extend it to get a collection with the extra capabilities
   # --------------------------------------------------------------------------------------------------------------------
   ESPaginatedQueryCollection: Backbone.Collection.extend
-
     # ------------------------------------------------------------------------------------------------------------------
     # Backbone Override
     # ------------------------------------------------------------------------------------------------------------------
@@ -170,6 +169,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getURL: ->
       glados.models.paginatedCollections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Items Selection
+    # ------------------------------------------------------------------------------------------------------------------
+    toggleSelectAll: ->
+      @setMeta('all_items_selected', !@getMeta('all_items_selected'))
+      @trigger('selection-changed')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
