@@ -1720,7 +1720,6 @@ span.badge-primary-color-no-float {
   // Padding to make Verdana font look centered
   padding: 1px 5px 3px 5px !important;
   text-align: center;
-  vertical-align: middle;
   line-height: $badge-height;
   height: $badge-height;
   float: none;
@@ -1729,9 +1728,6 @@ span.badge-primary-color-no-float {
   color: white;
   background-color: color($primary-color-name,'lighten-2');
   border-radius: 7px;
-  *{
-    vertical-align: middle;
-  }
 }
 
 .chip-rl-summary{
