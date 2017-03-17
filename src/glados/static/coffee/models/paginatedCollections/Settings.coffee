@@ -168,7 +168,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetComponent.ID_COLUMN
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object
