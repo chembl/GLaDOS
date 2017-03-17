@@ -12,7 +12,14 @@ PaginatedViewExt =
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
     'click .BCK-show-hide-column': 'showHideColumn'
+    'click .BCK-toggle-select-all': 'toggleSelectAll'
 
+
+  #---------------------------------------------------------------
+  # Selection
+  #---------------------------------------------------------------
+  toggleSelectAll: ->
+    console.log 'TOGGLE SELECT ALL'
 
   clearTemplates: ->
     $(@el).find('.BCK-items-container').empty()

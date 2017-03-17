@@ -26,7 +26,8 @@
 </script>
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
-  <input type="checkbox" class="filled-in" id="BCK-list-{{base_check_box_id}}-selectAll" />
+  <input type="checkbox" class="filled-in BCK-toggle-select-all"
+         id="BCK-list-{{base_check_box_id}}-selectAll" />
   <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
 </script>
 
@@ -67,14 +68,15 @@
     <tr>
 
       <th>
-          <input type="checkbox" class="filled-in" id="BCK-table-{{base_check_box_id}}-selectAll" />
+          <input type="checkbox" class="filled-in BCK-toggle-select-all"
+                 id="BCK-table-{{base_check_box_id}}-selectAll" />
           <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
       </th>
 
       {{#each columns}}
         <th>
 
-           <table>
+           <table class="headers-table">
             <thead>
              <tr>
                <th>
