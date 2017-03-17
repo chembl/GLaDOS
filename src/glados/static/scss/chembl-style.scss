@@ -1183,6 +1183,12 @@ div#CNC-zoom-modal {
     display: block;
     overflow-x: auto;
   }
+
+  [type="checkbox"]+ label {
+    left: 10px;
+    top: 5px;
+  }
+
 }
 .table-top-scroller-container{
   overflow-x: auto;
