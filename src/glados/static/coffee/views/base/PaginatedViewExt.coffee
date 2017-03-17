@@ -46,20 +46,12 @@ PaginatedViewExt =
       additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
       visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
 
-
     # if it is a table, add the corresponding header
     if $specificElem.is('table')
 
-      baseCheckBoxID = $(@el).attr('id')
-      # Parent element should always have an id, if for some reason it hasn't we generate a random number for the id
-      # we need this to avoid conflicts with other tables on the page that will have also a header and a "select all"
-      # option
-      if !baseCheckBoxID?
-        baseCheckBoxID = Math.floor((Math.random() * 1000) + 1)
-
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
-        base_check_box_id: baseCheckBoxID
+        base_check_box_id: @getBaseSelectAllCheckBoxID()
         columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
@@ -223,15 +215,27 @@ PaginatedViewExt =
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
+  getBaseSelectAllCheckBoxID: ->
+
+    baseCheckBoxID = $(@el).attr('id')
+    # Parent element should always have an id, if for some reason it hasn't we generate a random number for the id
+    # we need this to avoid conflicts with other tables on the page that will have also a header and a "select all"
+    # option
+    if !baseCheckBoxID?
+      baseCheckBoxID = Math.floor((Math.random() * 1000) + 1)
+
+    return baseCheckBoxID
+
+
+  fillSelectAllContainer: ->
+
+    glados.Utils.fillContentForElement $(@el).find('.BCK-selectAll-container'),
+      base_check_box_id: @getBaseSelectAllCheckBoxID()
+
   fillNumResults: ->
-    $elem = $(@el).find('.num-results')
-    $template = $('#' + $elem.attr('data-hb-template'))
 
-    $elem.html Handlebars.compile($template.html())
+    glados.Utils.fillContentForElement $elem,
       num_results: @collection.getMeta('total_records')
-
-    console.log @collection.getMeta('total_records')
-
 
   getPageEvent: (event) ->
 

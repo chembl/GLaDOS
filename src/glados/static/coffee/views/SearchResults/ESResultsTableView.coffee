@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @clearContentContainer()
       @fillTemplates()
+      @fillSelectAllContainer()
       @fillPaginators()
       @fillPageSelectors()
       @activateSelectors()

@@ -20,3 +20,8 @@ glados.useNameSpace 'glados',
           return glados.Settings.DEFAULT_NULL_VALUE_LABEL
 
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
+
+    # the element must define a data-hb-template, which is the id of the handlebars template to be used
+    fillContentForElement: ($element, paramsObj)->
+
+      $element.html Handlebars.compile($('#' + $element.attr('data-hb-template')).html())(paramsObj)
