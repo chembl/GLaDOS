@@ -34,7 +34,7 @@ TargetComponent.COLUMNS = {
 
 TargetComponent.ID_COLUMN = TargetComponent.COLUMNS.DESCRIPTION
 
-Compound.COLUMNS_SETTINGS = {
+TargetComponent.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     TargetComponent.COLUMNS.DESCRIPTION
     TargetComponent.COLUMNS.RELATIONSHIP
