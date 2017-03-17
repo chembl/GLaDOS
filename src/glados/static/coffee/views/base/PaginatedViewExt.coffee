@@ -110,9 +110,8 @@ PaginatedViewExt =
       tableWidth = $specificElem.width()
       $topScrollerDummy.width(firstRowWidth)
 
-      # make the scroller be shown if necessary
       hasToScroll = tableWidth < firstRowWidth
-      if hasToScroll
+      if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
         $topScrollerDummy.height(20)
       else
         $topScrollerDummy.height(0)
@@ -121,6 +120,7 @@ PaginatedViewExt =
       if !$specificElem.attr('data-scroll-setup')
 
         @setUpTopTableScroller($specificElem)
+        $specificElem.attr('data-scroll-setup', true)
 
       # now set up tha header fixation
       if !$specificElem.attr('data-header-pinner-setup')
@@ -144,7 +144,7 @@ PaginatedViewExt =
     $scrollContainer = $(@el).find('.BCK-top-scroller-container')
     $scrollContainer.scroll( -> $table.scrollLeft($scrollContainer.scrollLeft()))
     $table.scroll( -> $scrollContainer.scrollLeft($table.scrollLeft()))
-    $table.attr('data-scroll-setup', true)
+
 
   #---------------------------------------------------------------
   # Table header pinner
