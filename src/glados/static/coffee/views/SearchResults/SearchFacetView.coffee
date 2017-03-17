@@ -34,6 +34,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           links_data = []
           faceting_handler_i = facet_group.faceting_handler
           faceting_handler_id = faceting_handler_i.getFacetingHandlerId()
+          menu_key = @getMenuKey(faceting_handler_id)
+          SideMenuHelper.removeMenu(menu_key)
           facet_total = 0
           if faceting_handler_i.faceting_keys_inorder
             for facet_key in faceting_handler_i.faceting_keys_inorder
@@ -43,10 +45,9 @@ glados.useNameSpace 'glados.views.SearchResults',
               link_facet_i.label = facet_key
               link_facet_i.selected = faceting_handler_i.faceting_data[facet_key].selected
               link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
-              facet_total += 1
+              facet_total++
               links_data.push(link_facet_i)
-          menu_key = @getMenuKey(faceting_handler_id)
-          if facet_total > 1 and @collection.meta.key_name == @search_bar_view.selected_es_entity
+          if facet_total > 0 and @collection.meta.key_name == @search_bar_view.selected_es_entity
             SideMenuHelper.addMenu(menu_key,
               {
                 title: facet_group.label
@@ -55,6 +56,4 @@ glados.useNameSpace 'glados.views.SearchResults',
                 show_on_render: faceting_handler_i.hasSelection()
               }
             )
-          else
-            SideMenuHelper.removeMenu(menu_key)
         SideMenuHelper.renderMenus()

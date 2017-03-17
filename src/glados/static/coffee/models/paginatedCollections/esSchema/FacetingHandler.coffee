@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     @NUM_INTERVALS = 6
 
+    @EMPTY_CATEGORY = 'Unknown'
     @OTHERS_CATEGORY = 'Others'
     @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
 
@@ -66,6 +67,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_query_aggs[@es_property_name] = {
             terms:
               field: @es_property_name
+              missing: FacetingHandler.EMPTY_CATEGORY
           }
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
@@ -182,19 +184,24 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     getFilterQueryForFacetKey: (facet_key)->
       filter_terms_query = null
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
-        if facet_key != FacetingHandler.OTHERS_CATEGORY
-          filter_terms_query = {term: {}}
-          filter_terms_query.term[@es_property_name] = facet_key
-        else
+        if facet_key == FacetingHandler.OTHERS_CATEGORY
           # For the others query we need to negate the non other category facet keys
           filter_terms_query = {
-            bool:{ mustNot:[] }
+            bool:{ must_not:[] }
           }
           for facet_key_i in @faceting_keys_inorder
             if facet_key_i != FacetingHandler.OTHERS_CATEGORY
-              key_i_term_query = {term: {}}
-              key_i_term_query.term[@es_property_name] = facet_key_i
-              filter_terms_query.bool.mustNot.push(key_i_term_query)
+              filter_terms_query.bool.must_not.push(@getFilterQueryForFacetKey(facet_key_i))
+        else if facet_key == FacetingHandler.EMPTY_CATEGORY
+          filter_terms_query = {
+              bool:
+                must_not:
+                  exists:
+                    field: @es_property_name
+            }
+        else
+          filter_terms_query = {term: {}}
+          filter_terms_query.term[@es_property_name] = facet_key
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         filter_terms_query = {range: {}}
         filter_terms_query.range[@es_property_name] = {
