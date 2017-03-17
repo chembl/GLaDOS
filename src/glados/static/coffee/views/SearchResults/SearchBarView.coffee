@@ -58,7 +58,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @parseURLData()
       @showSelectedResourceOnly()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-      if urlQueryString and urlQueryString != @lastURLQuery
+      if urlQueryString != @lastURLQuery
         @expandable_search_bar.val(urlQueryString)
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
