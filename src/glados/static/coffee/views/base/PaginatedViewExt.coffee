@@ -234,8 +234,10 @@ PaginatedViewExt =
 
   fillNumResults: ->
 
-    glados.Utils.fillContentForElement $elem,
+    glados.Utils.fillContentForElement $(@el).find('.num-results'),
       num_results: @collection.getMeta('total_records')
+
+
 
   getPageEvent: (event) ->
 
