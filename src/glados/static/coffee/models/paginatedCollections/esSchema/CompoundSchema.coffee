@@ -9,6 +9,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_molecule','molecule_type'
         )
+      therapeutic_flag:
+        label: 'Therapeutic'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','therapeutic_flag'
+        )
       indication_class:
         label: 'Indication Class'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(

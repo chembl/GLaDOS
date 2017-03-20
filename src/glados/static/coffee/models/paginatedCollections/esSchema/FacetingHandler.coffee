@@ -67,8 +67,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_query_aggs[@es_property_name] = {
             terms:
               field: @es_property_name
-              missing: FacetingHandler.EMPTY_CATEGORY
           }
+          # Elastic search has a bug for terms aggregation in booleans with missing values
+          if @js_type != Boolean
+            es_query_aggs[@es_property_name].terms.missing = FacetingHandler.EMPTY_CATEGORY
+          console.log('QUERY! --- ', @es_property_name, es_query_aggs[@es_property_name])
+
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
           es_query_aggs[@es_property_name+'_MIN'] = {
