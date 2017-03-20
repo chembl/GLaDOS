@@ -50,7 +50,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
             is_carousel: collectionSettings.IS_CAROUSEL
-
+            all_items_selected: false
+            selection_exceptions: {}
 
           @initialiseUrl()
 
@@ -72,6 +73,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_column: collectionSettings.ID_COLUMN
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            all_items_selected: false
+            selection_exceptions: {}
 
           @on 'reset', @resetMeta, @
 

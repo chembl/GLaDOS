@@ -27,6 +27,8 @@ describe "Paginated Collection", ->
       expect(total_pages).toBe(1)
       expect(total_records).toBe(3)
       expect(records_in_page).toBe(3)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      expect( Object.keys(appDrugCCList.getMeta('selection_exceptions')).length ).toBe(0)
 
     it "gives the first page correctly", ->
 
@@ -160,6 +162,8 @@ describe "Paginated Collection", ->
       expect(total_pages).toBe(84335)
       expect(total_records).toBe(1686695)
       expect(records_in_page).toBe(20)
+      expect(drugList.getMeta('all_items_selected')).toBe(false)
+      expect( Object.keys(drugList.getMeta('selection_exceptions')).length ).toBe(0)
 
       done()
 
@@ -204,6 +208,8 @@ describe "Paginated Collection", ->
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
     ]
 
+
+
     beforeEach (done) ->
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[ \
         glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
@@ -211,6 +217,10 @@ describe "Paginated Collection", ->
       esList.setMeta('singular_terms',['aspirin'])
       esList.setMeta('exact_terms',['"CHEMBL59"'])
       esList.setMeta('filter_terms',[])
+
+#      $.get glados.Settings.STATIC_URL + 'testData/ESCollectionTestData1.json', (testData) ->
+#        testData
+#
       done()
 
     it "Sets initial parameters", ->
@@ -218,6 +228,8 @@ describe "Paginated Collection", ->
       expect(esList.getMeta('current_page')).toBe(1)
       expect(esList.getMeta('index')).toBe('/chembl_molecule')
       expect(esList.getMeta('page_size')).toBe(24)
+      expect(esList.getMeta('all_items_selected')).toBe(false)
+      expect( Object.keys(esList.getMeta('selection_exceptions')).length ).toBe(0)
 
     it "Sets the request data to get the 5th page", ->
 
@@ -254,6 +266,7 @@ describe "Paginated Collection", ->
     for elem in comparator
       expect(elem[0]).toBe(elem[1])
 
+#    simulateDataESList
 
 
 

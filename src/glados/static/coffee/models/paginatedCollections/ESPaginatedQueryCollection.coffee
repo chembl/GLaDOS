@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
+      console.log 'PARSING DATA:', JSON.stringify(data)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
