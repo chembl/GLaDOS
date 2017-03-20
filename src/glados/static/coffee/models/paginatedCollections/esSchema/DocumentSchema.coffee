@@ -1,21 +1,31 @@
 glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
-  # Elastic Search Target Schema
+  # Elastic Search Document Schema
   # --------------------------------------------------------------------------------------------------------------------
-  TargetSchema:
+  DocumentSchema:
     FACETS_GROUPS:
-      organism:
-        label: 'Organism'
+      doc_type:
+        label: 'Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','organism'
+          'chembl_document','doc_type'
         )
-      target_type:
-        label: 'Target Type'
+      journal:
+        label: 'Journal'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','target_type'
+          'chembl_document','journal'
         )
-      target_components_component_type:
-        label: 'Component Type'
+      year:
+        label: 'Year'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','target_components.component_type'
+          'chembl_document','year'
+        )
+      issue:
+        label: 'Issue'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_document','issue'
+        )
+      volume:
+        label: 'Volume'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_document','volume'
         )

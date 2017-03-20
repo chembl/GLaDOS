@@ -1,41 +1,51 @@
 glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
-  # Elastic Search Compound Schema
+  # Elastic Search Assay Schema
   # --------------------------------------------------------------------------------------------------------------------
-  CompoundSchema:
+  AssaySchema:
     FACETS_GROUPS:
-      molecule_type:
-        label: 'Molecule Type'
+      assay_type:
+        label: 'Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_type'
+          'chembl_assay','assay_type'
         )
-      therapeutic_flag:
-        label: 'Therapeutic'
+      assay_category:
+        label: 'Category'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','therapeutic_flag'
+          'chembl_assay','assay_category'
         )
-      indication_class:
-        label: 'Indication Class'
+      assay_cell_type:
+        label: 'Cell Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','indication_class'
+          'chembl_assay','assay_cell_type'
         )
-      max_phase:
-        label: 'Max Phase'
+      assay_organism:
+        label: 'Organism'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','max_phase'
+          'chembl_assay','assay_organism'
         )
-      full_mwt:
-        label: 'Molecular Weight'
+      assay_strain:
+        label: 'Strain'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.full_mwt'
+          'chembl_assay','assay_strain'
         )
-      hba:
-        label: 'H.B.Acceptors'
+      assay_tissue:
+        label: 'Tissue'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.hba'
+          'chembl_assay','assay_tissue'
         )
-      hbd:
-        label: 'H.B. Donors'
+      bao_format:
+        label: 'BAO Format'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.hbd'
+          'chembl_assay','bao_format'
+        )
+      confidence_score:
+        label: 'Confidence Score'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_assay','confidence_score'
+        )
+      src_id:
+        label: 'Source'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_assay','src_id'
         )

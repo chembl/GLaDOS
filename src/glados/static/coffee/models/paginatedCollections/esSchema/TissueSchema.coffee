@@ -2,20 +2,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   # Elastic Search Target Schema
   # --------------------------------------------------------------------------------------------------------------------
-  TargetSchema:
+  TissueSchema:
     FACETS_GROUPS:
-      organism:
-        label: 'Organism'
+      efo_id:
+        label: 'EFO ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','organism'
+          'chembl_tissue','efo_id'
         )
-      target_type:
-        label: 'Target Type'
+      uberon_id:
+        label: 'UBERON ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','target_type'
-        )
-      target_components_component_type:
-        label: 'Component Type'
-        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','target_components.component_type'
+          'chembl_tissue','uberon_id'
         )

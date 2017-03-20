@@ -45,7 +45,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
-        FACETS_GROUPS: {}
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -60,7 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
-        FACETS_GROUPS: {}
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -75,7 +75,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
-        FACETS_GROUPS: {}
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -90,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
-        FACETS_GROUPS: {}
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
