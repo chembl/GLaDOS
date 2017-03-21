@@ -40,7 +40,12 @@
 
 
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
-  <h3>{{es_results_list_title}}</h3>
+  <h3>{{es_results_list_title}}
+    <small><small>
+      <a id ="{{es_results_list_id}}-filter-link" href="{{es_results_url_path}}" style="display: none">Filter {{es_results_list_title}} results</a>
+      <a id ="{{es_results_list_id}}-all-link" href="{{es_all_results_url_path}}" style="display: none">Explore All Results</a>
+    </small></small>
+  </h3>
 
   <div id ="{{es_results_list_id}}-menu">
 

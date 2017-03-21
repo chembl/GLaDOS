@@ -21,7 +21,31 @@ glados.useNameSpace 'glados',
 
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 
+
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj)->
 
       $element.html Handlebars.compile($('#' + $element.attr('data-hb-template')).html())(paramsObj)
+
+    # Helper function to prevent links from navigating to an url that is inside the same js page
+    # If key_up is true will override for enter listening on links
+    # If key_up is false will override for click listening on links
+    # callback should be a function that receives the href of the link and knows how to handle it
+    getNavigateOnlyOnNewTabLinkEventHandler: (key_up, callback)->
+      handler = (event)->
+        # Disables link navigation by click or enter, unless it redirects to a non results page
+        if $(this).attr("target") != "_blank" and \
+          (not key_up or event.keyCode == 13) and \
+          not(event.ctrlKey or GlobalVariables.IS_COMMAND_KEY_DOWN)
+            event.preventDefault()
+            callback($(this).attr("href"))
+      return handler
+
+    overrideHrefNavigationUnlessTargetBlank: ($jquery_element, callback)->
+      $jquery_element.click(
+        glados.Utils.getNavigateOnlyOnNewTabLinkEventHandler(false, callback)
+      )
+      $jquery_element.keyup(
+        glados.Utils.getNavigateOnlyOnNewTabLinkEventHandler(true, callback)
+      )
+

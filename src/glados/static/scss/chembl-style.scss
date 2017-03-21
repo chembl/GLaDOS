@@ -38,7 +38,7 @@
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-$chembl-teal: #207a7a;
+$chembl-teal: color("teal", "darken-3");
 
 .chembl-teal{
   background-color: $chembl-teal !important;
@@ -200,7 +200,7 @@ $sidenav-badge-padding: 3px;
       span.badge {
         margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
         border-radius: 2*$sidenav-badge-padding;
-        padding: $sidenav-badge-padding;
+        padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
         &.new:after {
           content: "" !important;
         }
@@ -212,6 +212,16 @@ $sidenav-badge-padding: 3px;
       line-height: $sidenav-links-lineheight !important;
       padding: 0px !important;
       li a{
+
+        &.selected{
+          background: $primary-color;
+          color: white;
+          span.badge-primary-color-no-float{
+            color: $primary-color;
+            background-color: $chip-bg-color;
+          }
+        }
+
         font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
         min-height: inherit !important;
         line-height: $sidenav-links-lineheight !important;
@@ -221,7 +231,7 @@ $sidenav-badge-padding: 3px;
         span.badge {
           margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
           border-radius: 2*$sidenav-badge-padding;
-          padding: $sidenav-badge-padding;
+          padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
           &.new:after {
             content: "" !important;
           }
@@ -1713,23 +1723,20 @@ $marvin-size-fullscreen: 91vh;
 */
 
 span.badge-primary-color-no-float {
-  min-width: 3rem;
-  padding: 2px 5px;
+  font-family: "ChEMBL_Verdana";
+  display: inline-block;
+  min-width: 2rem;
+  // Padding to make Verdana font look centered
+  padding: 1px 5px 3px 5px !important;
   text-align: center;
   line-height: $badge-height;
   height: $badge-height;
   float: none;
-  box-sizing: border-box;
-
   font-weight: 300;
   font-size: 0.8rem;
   color: white;
   background-color: color($primary-color-name,'lighten-2');
   border-radius: 7px;
-
-  &[data-badge-caption]::after {
-    content: " " attr(data-badge-caption);
-  }
 }
 
 .chip-rl-summary{

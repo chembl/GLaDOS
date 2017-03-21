@@ -1,41 +1,41 @@
 glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
-  # Elastic Search Compound Schema
+  # Elastic Search Target Schema
   # --------------------------------------------------------------------------------------------------------------------
-  CompoundSchema:
+  CellLineSchema:
     FACETS_GROUPS:
-      molecule_type:
-        label: 'Molecule Type'
+      cell_source_organism:
+        label: 'Source Organism'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_type'
+          'chembl_cell_line','cell_source_organism'
         )
-      therapeutic_flag:
-        label: 'Therapeutic'
+      cell_source_tax_id:
+        label: 'Tax ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','therapeutic_flag'
+          'chembl_cell_line','cell_source_tax_id'
         )
-      indication_class:
-        label: 'Indication Class'
+      cell_source_tissue:
+        label: 'Source Tissue'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','indication_class'
+          'chembl_cell_line','cell_source_tissue'
         )
-      max_phase:
-        label: 'Max Phase'
+      cellosaurus_id:
+        label: 'Cellosaurus ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','max_phase'
+          'chembl_cell_line','cellosaurus_id'
         )
-      full_mwt:
-        label: 'Molecular Weight'
+      cl_lincs_id:
+        label: 'CL Lincs ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.full_mwt'
+          'chembl_cell_line','cl_lincs_id'
         )
-      hba:
-        label: 'H.B.Acceptors'
+      clo_id:
+        label: 'CLO ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.hba'
+          'chembl_cell_line','clo_id'
         )
-      hbd:
-        label: 'H.B. Donors'
+      efo_id:
+        label: 'EFO ID'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_molecule','molecule_properties.hbd'
+          'chembl_cell_line','efo_id'
         )

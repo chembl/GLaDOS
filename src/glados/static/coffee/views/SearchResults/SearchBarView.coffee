@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
       @searchResultsMenusViewsDict = null
+      @searchFacetsViews = null
       @container = null
       @lists_container = null
 
@@ -57,11 +58,12 @@ glados.useNameSpace 'glados.views.SearchResults',
       @parseURLData()
       @showSelectedResourceOnly()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-      if urlQueryString and urlQueryString != @lastURLQuery
+      if urlQueryString != @lastURLQuery
         @expandable_search_bar.val(urlQueryString)
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
       @updateChips()
+      @updateFacets()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)
@@ -71,11 +73,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Navigates to the specified URL
         window.location.href = nav_url
 
-
-
     # ------------------------------------------------------------------------------------------------------------------
     # Views
     # ------------------------------------------------------------------------------------------------------------------
+
+    updateFacets:()->
+      if @searchFacetsViews
+        for res_name, facets_wiew of @searchFacetsViews
+          facets_wiew.render()
 
     sortResultsListsViews: ()->
       # If an entity is selected the ordering is skipped
@@ -90,7 +95,7 @@ glados.useNameSpace 'glados.views.SearchResults',
               break
           if not inserted
             sorted_scores.push(_score)
-        keys_by_score = {}
+        resources_names_by_score = {}
         srl_dict = @searchModel.getResultsListsDict()
         for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
           if _.has(srl_dict, key_i)
@@ -108,15 +113,15 @@ glados.useNameSpace 'glados.views.SearchResults',
               boost = 50
             score_i *= boost
 
-            if not _.has(keys_by_score,score_i)
-              keys_by_score[score_i] = []
-            keys_by_score[score_i].push(key_i)
+            if not _.has(resources_names_by_score,score_i)
+              resources_names_by_score[score_i] = []
+            resources_names_by_score[score_i].push(key_i)
             insert_score_in_order(score_i)
 
         if @lists_container
           for score_i in sorted_scores
-            for key_i in keys_by_score[score_i]
-              idToMove =  'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].ID_NAME + '-container'
+            for resource_name in resources_names_by_score[score_i]
+              idToMove =  @getBCKBaseID(resource_name) + '-container'
               $div_key_i = $('#' + idToMove)
               @lists_container.append($div_key_i)
 
@@ -152,20 +157,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       $('.summary-chips-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
         chips: chipStruct
 
-      binded_nav_func = @navigateTo.bind(@)
-      get_event_handler = (key_up)->
-        handler = (event)->
-          # Disables link navigation by click or enter, unless it redirects to a non results page
-          if $(this).attr("target") != "_blank" and \
-            (not key_up or event.keyCode == 13) and \
-            not(event.ctrlKey or GlobalVariables.IS_COMMAND_KEY_DOWN)
-              event.preventDefault()
-              binded_nav_func($(this).attr("href"))
-
-        return handler
-
-      $('.summary-chips-container').find('a').click(get_event_handler(false))
-      $('.summary-chips-container').find('a').keyup(get_event_handler(true))
+      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
+        $('.summary-chips-container').find('a'), @navigateTo.bind(@)
+      )
 
     showSelectedResourceOnly: ()->
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -173,7 +167,15 @@ glados.useNameSpace 'glados.views.SearchResults',
         if @selected_es_entity and @selected_es_entity != resourceName
           @$searchResultsListsContainersDict[resourceName].hide()
         else
-          @$searchResultsListsContainersDict[resourceName].show()
+          @$searchResultsListsContainersDict[resourceName].hide()
+          @$searchResultsListsContainersDict[resourceName].show(300)
+          if @selected_es_entity == resourceName
+            $('#'+@getBCKBaseID(resourceName)+'-filter-link').hide()
+            $('#'+@getBCKBaseID(resourceName)+'-all-link').show()
+          else
+            $('#'+@getBCKBaseID(resourceName)+'-filter-link').show()
+            $('#'+@getBCKBaseID(resourceName)+'-all-link').hide()
+
 
     renderResultsListsViews: () ->
       # Don't instantiate the ResultsLists if it is not necessary
@@ -185,6 +187,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         @searchResultsMenusViewsDict = {}
         @$searchResultsListsContainersDict = {}
+        @searchFacetsViews = {}
         # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
         # Share the same keys to access different objects
         resultsListsDict = @searchModel.getResultsListsDict()
@@ -193,22 +196,32 @@ glados.useNameSpace 'glados.views.SearchResults',
         for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
           if _.has(resultsListsDict, resourceName)
-            resultsListViewID = 'BCK-'+resultsListSettings.ID_NAME
+            resultsListViewID = @getBCKBaseID(resourceName)
             es_results_list_title = resultsListSettings.LABEL
-
+            es_results_url_path = @getSearchURLFor(resourceName, @expandable_search_bar.val())
+            es_all_results_url_path = @getSearchURLFor(null, @expandable_search_bar.val())
             $container = $('<div id="' + resultsListViewID + '-container">')
 
             listTitleContent = listTitleAndMenuTemplate
               es_results_list_id: resultsListViewID
               es_results_list_title: es_results_list_title
+              es_results_url_path: es_results_url_path
+              es_all_results_url_path: es_all_results_url_path
 
             listViewContent = listViewTemplate
               es_results_list_id: resultsListViewID
-              es_results_list_title: es_results_list_title
+              es_results_url_path: es_results_url_path
 
             $container.append(listTitleContent)
             $container.append(listViewContent)
             @lists_container.append($container)
+            # Link events for links
+            glados.Utils.overrideHrefNavigationUnlessTargetBlank(
+              $('#'+resultsListViewID+'-filter-link'), @navigateTo.bind(@)
+            )
+            glados.Utils.overrideHrefNavigationUnlessTargetBlank(
+              $('#'+resultsListViewID+'-all-link'), @navigateTo.bind(@)
+            )
 
             # Initialises a Menu view which will be in charge of handling the menu bar,
             # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
@@ -219,14 +232,18 @@ glados.useNameSpace 'glados.views.SearchResults',
             resultsMenuViewI.render()
 
             @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-            @$searchResultsListsContainersDict[resourceName] = $container
+            @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
 
             # event register for score update and update chips
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
             resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
 
-            facet_view_res = new glados.views.SearchResults.SearchFacetView
+            res_facet_view = new glados.views.SearchResults.SearchFacetView
               collection: resultsListsDict[resourceName]
+              search_bar_view: @
+              collection_container: @$searchResultsListsContainersDict[resourceName]
+
+            @searchFacetsViews[resourceName] = res_facet_view
 
         @container.show()
         @updateChips()
@@ -254,6 +271,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Additional Functionalities
     # ------------------------------------------------------------------------------------------------------------------
+
+    getBCKBaseID: (resourceName)->
+      return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
 
     getSearchURLFor: (es_settings_key, search_str)->
       selected_es_entity_path = if es_settings_key then \
