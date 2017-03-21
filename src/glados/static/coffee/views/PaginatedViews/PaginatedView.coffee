@@ -3,16 +3,34 @@
 # this way allows to easily handle multiple inheritance in the models.
 PaginatedView = Backbone.View.extend
 
-  @CARDS_TYPE : 'CARDS'
-  @TABLE_TYPE: 'TABLE'
-
+  # --------------------------------------------------------------------------------------------------------------------
+  # Initialisation
+  # --------------------------------------------------------------------------------------------------------------------
 
   initialize: () ->
     # @collection - must be provided in the constructor call
-    @search_bar_view = arguments[0].search_bar_view
-    @collection_container = arguments[0].collection_container
-    @collection.on 'facets-changed', @render, @
+    @type = arguments[0].type
+
+    @collection.on 'reset do-repaint sort', @render, @
+    @collection.on 'selection-changed', @selectionChangedHandler, @
+
     @render()
+
+  isCards: ()->
+    return @type == PaginatedView.CARDS_TYPE
+
+  isCarousel: ()->
+    return @type == PaginatedView.CAROUSEL_TYPE
+
+  isInfinite: ()->
+    return @type == PaginatedView.INFINITE_TYPE
+
+  isTable: ()->
+    return @type == PaginatedView.TABLE_TYPE
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # events 
+  # --------------------------------------------------------------------------------------------------------------------
 
   events:
     'click .page-selector': 'getPageEvent'
@@ -26,15 +44,35 @@ PaginatedView = Backbone.View.extend
     'click .BCK-toggle-select-all': 'toggleSelectAll'
 
 
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Selection
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   toggleSelectAll: ->
     @collection.toggleSelectAll()
 
-  #---------------------------------------------------------------
+  selectionChangedHandler: (elemId)->
+    return
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Render
+  # --------------------------------------------------------------------------------------------------------------------
+
+  render: ->
+
+    @clearContentContainer()
+    @fillTemplates()
+    @fillSelectAllContainer()
+    @fillPaginators()
+    @fillPageSelectors()
+    @activateSelectors()
+    @showPaginatedViewContent()
+    @initialiseColumnsModal()
+
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Fill templates
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
+
   clearTemplates: ->
     $(@el).find('.BCK-items-container').empty()
 
@@ -60,7 +98,7 @@ PaginatedView = Backbone.View.extend
     $append_to = $specificElem
 
     # use special configuration config for cards if available
-    if @isCards and @collection.getMeta('columns_card').length > 0
+    if @isCards() and @collection.getMeta('columns_card').length > 0
       visibleColumns = @collection.getMeta('columns_card')
     else
       defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
@@ -163,9 +201,9 @@ PaginatedView = Backbone.View.extend
       $append_to.append('<div class="col s12 m6 l4"/>')
       total_cards++
 
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Table scroller
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # this sets up dor a table the additional scroller on top of the table
   setUpTopTableScroller: ($table) ->
 
@@ -174,9 +212,9 @@ PaginatedView = Backbone.View.extend
     $table.scroll( -> $scrollContainer.scrollLeft($table.scrollLeft()))
 
 
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Table header pinner
-  #---------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   setUpTableHeaderPinner: ($table) ->
 
     console.log 'setting up table header pinner'
@@ -256,8 +294,10 @@ PaginatedView = Backbone.View.extend
 
 
   fillSelectAllContainer: ->
-
-    glados.Utils.fillContentForElement $(@el).find('.BCK-selectAll-container'),
+    $selectAllContainer = $(@el).find('.BCK-selectAll-container')
+    if $selectAllContainer.length == 0
+      return
+    glados.Utils.fillContentForElement $selectAllContainer,
       base_check_box_id: @getBaseSelectAllCheckBoxID()
 
   fillNumResults: ->
@@ -327,9 +367,9 @@ PaginatedView = Backbone.View.extend
       return
     @collection.resetPageSize(new_page_size)
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Search
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   setSearch: _.debounce( (event) ->
 
     $searchInput = $(event.currentTarget)
@@ -368,12 +408,15 @@ PaginatedView = Backbone.View.extend
 
     @collection.setSearch(term, column, type)
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Add Remove Columns
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   initialiseColumnsModal: ->
 
     $dropdownContainer = $(@el).find('.BCK-show-hide-columns-container')
+
+    if $dropdownContainer.length == 0
+      return
     $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
       modal_id: $(@el).attr('id') + '-select-columns-modal'
       columns: @collection.getMeta('columns')
@@ -394,9 +437,9 @@ PaginatedView = Backbone.View.extend
     @clearTemplates()
     @fillTemplates()
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Sort
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   sortCollection: (event) ->
 
@@ -413,9 +456,9 @@ PaginatedView = Backbone.View.extend
 
     @collection.sortCollection(comparator)
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Preloaders and content
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   showPaginatedViewContent: ->
 
     $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
@@ -490,9 +533,9 @@ PaginatedView = Backbone.View.extend
     @hideFooterContainer()
 
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Infinite Browser
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   showControls: ->
     $(@el).find('.controls').removeClass('hide')
 
@@ -544,9 +587,9 @@ PaginatedView = Backbone.View.extend
     if @collection.currentlyOnLastPage()
       @hidePreloaderOnly()
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # sort selector
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   renderSortingSelector: ->
 
@@ -603,9 +646,9 @@ PaginatedView = Backbone.View.extend
       @triggerCollectionSort(comp)
 
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Page selector
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
 
   fillPageSelectors: ->
 
@@ -628,9 +671,9 @@ PaginatedView = Backbone.View.extend
 
     $(@el).find('select').material_select()
 
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   # Error handling
-  #--------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
   handleError: (model, xhr, options) ->
 
     if xhr.responseJSON?
@@ -644,3 +687,19 @@ PaginatedView = Backbone.View.extend
     $(@el).find('.BCK-PreloaderContainer').hide()
     $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
       msg: message
+
+
+# --------------------------------------------------------------------------------------------------------------------
+# Class Context
+# --------------------------------------------------------------------------------------------------------------------
+
+PaginatedView.CARDS_TYPE = 'CARDS_TYPE'
+PaginatedView.CAROUSEL_TYPE = 'CAROUSEL_TYPE'
+PaginatedView.INFINITE_TYPE = 'INFINITE_TYPE'
+PaginatedView.TABLE_TYPE = 'TABLE_TYPE'
+
+PaginatedView.getNewTablePaginatedView = (collection, el)->
+  return new PaginatedView
+    collection: collection
+    el: el
+    type: PaginatedView.TABLE_TYPE
