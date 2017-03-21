@@ -12,8 +12,18 @@ PaginatedViewExt =
     'change .select-sort': 'sortCollectionFormSelect'
     'click .btn-sort-direction': 'changeSortOrderInf'
     'click .BCK-show-hide-column': 'showHideColumn'
+    'click .BCK-toggle-select-all': 'toggleSelectAll'
 
 
+  #---------------------------------------------------------------
+  # Selection
+  #---------------------------------------------------------------
+  toggleSelectAll: ->
+    @collection.toggleSelectAll()
+
+  #---------------------------------------------------------------
+  # Fill templates
+  #---------------------------------------------------------------
   clearTemplates: ->
     $(@el).find('.BCK-items-container').empty()
 
@@ -46,18 +56,22 @@ PaginatedViewExt =
       additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
       visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
 
-
     # if it is a table, add the corresponding header
     if $specificElem.is('table')
 
       header_template = $('#' + $specificElem.attr('data-hb-header-template'))
       header_row_cont = Handlebars.compile( header_template.html() )
+        base_check_box_id: @getBaseSelectAllCheckBoxID()
+        all_items_selected: @collection.getMeta('all_items_selected')
         columns: visibleColumns
 
       $specificElem.append($(header_row_cont))
       # make sure that the rows are appended to the tbody, otherwise the striped class won't work
       $specificElem.append($('<tbody>'))
 
+
+    selectionExceptions = @collection.getMeta('selection_exceptions')
+    allAreSelected =  @collection.getMeta('all_items_selected')
 
     for item in @collection.getCurrentPage()
 
@@ -91,14 +105,21 @@ PaginatedViewExt =
         # This method should return a value based on the parameter, not modify the parameter
         return return_col
 
+      isColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
+      isSelectionException =  selectionExceptions[isColumnValue]?
+
       new_item_cont = Handlebars.compile( $item_template.html() )
+        base_check_box_id: isColumnValue
+        is_selected: isSelectionException != allAreSelected
         img_url: img_url
         columns: columnsWithValues
 
       $append_to.append($(new_item_cont))
 
     # After adding everything, if the element is a table I now set up the top scroller
-    if $specificElem.is('table')
+    # also set up the automatic header fixation
+    if $specificElem.is('table') and $specificElem.hasClass('scrollable')
 
       $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
       $firstTableRow = $specificElem.find('tr').first()
@@ -106,9 +127,8 @@ PaginatedViewExt =
       tableWidth = $specificElem.width()
       $topScrollerDummy.width(firstRowWidth)
 
-      # make the scroller be shown if necessary
       hasToScroll = tableWidth < firstRowWidth
-      if hasToScroll
+      if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
         $topScrollerDummy.height(20)
       else
         $topScrollerDummy.height(0)
@@ -116,10 +136,15 @@ PaginatedViewExt =
       # bind the scroll functions if not done yet
       if !$specificElem.attr('data-scroll-setup')
 
-        $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-        $scrollContainer.scroll( -> $specificElem.scrollLeft($scrollContainer.scrollLeft()))
-        $specificElem.scroll( -> $scrollContainer.scrollLeft($specificElem.scrollLeft()))
+        @setUpTopTableScroller($specificElem)
         $specificElem.attr('data-scroll-setup', true)
+
+      # now set up tha header fixation
+      if !$specificElem.attr('data-header-pinner-setup')
+
+        # delay this to wait for
+        @setUpTableHeaderPinner($specificElem)
+        $specificElem.attr('data-header-pinner-setup', true)
 
     # This code completes rows for grids of 2 or 3 columns in the flex box css display
     total_cards = @collection.getCurrentPage().length
@@ -127,7 +152,40 @@ PaginatedViewExt =
       $append_to.append('<div class="col s12 m6 l4"/>')
       total_cards++
 
+  #---------------------------------------------------------------
+  # Table scroller
+  #---------------------------------------------------------------
+  # this sets up dor a table the additional scroller on top of the table
+  setUpTopTableScroller: ($table) ->
 
+    $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+    $scrollContainer.scroll( -> $table.scrollLeft($scrollContainer.scrollLeft()))
+    $table.scroll( -> $scrollContainer.scrollLeft($table.scrollLeft()))
+
+
+  #---------------------------------------------------------------
+  # Table header pinner
+  #---------------------------------------------------------------
+  setUpTableHeaderPinner: ($table) ->
+
+    console.log 'setting up table header pinner'
+
+    #use the top scroller to trigger the pin
+    $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+    $firstTableRow = $table.find('tr').first()
+
+    $win = $(window)
+    topTrigger = $scrollContainer.offset().top
+
+    pinUnpinTableHeader = ->
+
+      # don't bother if table is not shown
+      if !$table.is(":visible")
+        return
+
+      #TODO: complete this function!
+
+    $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
   fillPaginators: ->
 
@@ -174,15 +232,27 @@ PaginatedViewExt =
     @activateCurrentPageButton()
     @enableDisableNextLastButtons()
 
+  getBaseSelectAllCheckBoxID: ->
+
+    baseCheckBoxID = $(@el).attr('id')
+    # Parent element should always have an id, if for some reason it hasn't we generate a random number for the id
+    # we need this to avoid conflicts with other tables on the page that will have also a header and a "select all"
+    # option
+    if !baseCheckBoxID?
+      baseCheckBoxID = Math.floor((Math.random() * 1000) + 1)
+
+    return baseCheckBoxID
+
+
+  fillSelectAllContainer: ->
+
+    glados.Utils.fillContentForElement $(@el).find('.BCK-selectAll-container'),
+      base_check_box_id: @getBaseSelectAllCheckBoxID()
+
   fillNumResults: ->
-    $elem = $(@el).find('.num-results')
-    $template = $('#' + $elem.attr('data-hb-template'))
 
-    $elem.html Handlebars.compile($template.html())
+    glados.Utils.fillContentForElement $(@el).find('.num-results'),
       num_results: @collection.getMeta('total_records')
-
-    console.log @collection.getMeta('total_records')
-
 
   getPageEvent: (event) ->
 

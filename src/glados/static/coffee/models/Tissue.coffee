@@ -47,6 +47,8 @@ glados.models.Tissue.COLUMNS = {
     }
 }
 
+glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
+
 glados.models.Tissue.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
     glados.models.Tissue.COLUMNS.CHEMBL_ID,

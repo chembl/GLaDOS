@@ -25,13 +25,21 @@
 
 </script>
 
-<!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
-<!-- -- -- -- Pagination -- -- -- -- -- -- -->
-<!-- -- -- -- -- -- -- -- -- -- -- -- -- -->
+<script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
+  <input type="checkbox" class="filled-in BCK-toggle-select-all"
+         id="BCK-list-{{base_check_box_id}}-selectAll" />
+  <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
+</script>
 
 <script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
 
     <tr>
+
+      <td>
+        <input type="checkbox" class="filled-in" id="BCK-table-{{base_check_box_id}}-select"
+          {{#if is_selected}}checked="checked"{{/if}}/>
+          <label for="BCK-table-{{base_check_box_id}}-select"></label>
+      </td>
 
       {{#each columns}}
 
@@ -60,10 +68,17 @@
 
     <tr>
 
+      <th>
+          <input type="checkbox" class="filled-in BCK-toggle-select-all"
+                 id="BCK-table-{{base_check_box_id}}-selectAll"
+                 {{#if all_items_selected}}checked="checked"{{/if}}/>
+          <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
+      </th>
+
       {{#each columns}}
         <th>
 
-           <table>
+           <table class="headers-table">
             <thead>
              <tr>
                <th>
@@ -96,6 +111,11 @@
 <script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
 
   <li class="collection-item">
+
+    <p>
+      <input type="checkbox" class="filled-in" id="BCK-list-{{base_check_box_id}}-select" />
+      <label for="BCK-list-{{base_check_box_id}}-select"></label>
+    </p>
 
     <p>
 

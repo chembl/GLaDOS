@@ -329,6 +329,8 @@ Compound.COLUMNS = {
 
 }
 
+Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
+
 Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Compound.COLUMNS.CHEMBL_ID,

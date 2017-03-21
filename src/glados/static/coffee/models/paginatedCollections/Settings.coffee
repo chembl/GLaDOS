@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PATH: '/chembl_molecule'
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
@@ -27,6 +28,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Targets'
         PATH:'/chembl_target'
         MODEL: Target
+        ID_COLUMN: Target.ID_COLUMN
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -42,6 +44,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Assays'
         PATH:'/chembl_assay'
         MODEL: Assay
+        ID_COLUMN: Assay.ID_COLUMN
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -57,6 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Documents'
         PATH:'/chembl_document'
         MODEL: Document
+        ID_COLUMN: Document.ID_COLUMN
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -72,6 +76,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Cells'
         PATH:'/chembl_cell_line'
         MODEL: CellLine
+        ID_COLUMN: CellLine.ID_COLUMN
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -87,6 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Tissues'
         PATH:'/chembl_tissue'
         MODEL: glados.models.Tissue
+        ID_COLUMN: glados.models.Tissue.ID_COLUMN
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
@@ -104,6 +110,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
@@ -111,6 +118,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
@@ -118,6 +126,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
@@ -125,6 +134,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         IS_CAROUSEL: true
       DOCS_BY_TERM_LIST:
@@ -132,47 +142,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'CHEMBL_ID'
-            'comparator': 'document_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-          }
-          {
-            'name_to_show': 'Score'
-            'comparator': 'score'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'custom_field_template': '<b>Score: </b>{{val}}'
-          }
-          {
-            'name_to_show': 'Title'
-            'comparator': 'title'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'custom_field_template': '<i>{{val}}</i>'
-          }
-          {
-            'name_to_show': 'Authors'
-            'comparator': 'authors'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Year'
-            'comparator': 'year'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-
-          }
-        ]
+        ID_COLUMN: Document.ID_COLUMN
+        COLUMNS: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
         ADDITIONAL_COLUMNS:[]
     CLIENT_SIDE_WS_COLLECTIONS:
       # used for targets
@@ -180,110 +151,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: ApprovedDrugClinicalCandidate
         DEFAULT_PAGE_SIZE: 10
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'ChEMBL ID'
-            'comparator': 'molecule_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-          }
-          {
-            'name_to_show': 'Name'
-            'comparator': 'pref_name'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Mechanism of Action'
-            'comparator': 'mechanism_of_action'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Max Phase'
-            'comparator': 'max_phase'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'References'
-            'comparator': 'references'
-            'sort_disabled': true
-            'is_sorting': 0
-          }
-        ]
+        ID_COLUMN: ApprovedDrugClinicalCandidate.ID_COLUMN
+        COLUMNS: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'ChEMBL ID'
-            'comparator': 'target_chembl_id'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'report_card_url'
-          }
-          {
-            'name_to_show': 'Relationship'
-            'comparator': 'relationship'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Pref Name'
-            'comparator': 'pref_name'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Target Type'
-            'comparator': 'target_type'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-        ]
+        ID_COLUMN: TargetRelation.ID_COLUMN
+        COLUMNS: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
 
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: [
-          {
-            'name_to_show': 'Description'
-            'comparator': 'component_description'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Relationship'
-            'comparator': 'relationship'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-          }
-          {
-            'name_to_show': 'Accession'
-            'comparator': 'accession'
-            'sort_disabled': false
-            'is_sorting': 0
-            'sort_class': 'fa-sort'
-            'link_base': 'accession_url'
-          }
-        ]
+        ID_COLUMN: TargetComponent.ID_COLUMN
+        COLUMNS: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object
