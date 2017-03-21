@@ -13,7 +13,7 @@ RelationsView = CardView.extend
     if @collection.size() == 0 and !@collection.getMeta('force_show')
       $('#TargetRelations').hide()
       return
-      
+
     @showCardContent()
     @initEmbedModal('relations')
     @activateModals()
