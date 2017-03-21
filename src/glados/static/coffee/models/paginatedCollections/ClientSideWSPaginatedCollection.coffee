@@ -41,6 +41,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Item Selection
     # ------------------------------------------------------------------------------------------------------------------
+    toggleSelectAll: ->
+
+      if @getMeta('all_items_selected')
+        @unSelectAll()
+      else
+        @selectAll()
+
+
+
     selectItem: (itemID) ->
 
       if !@getMeta('all_items_selected')
@@ -72,6 +81,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setMeta('all_items_selected', false)
       @setMeta('selection_exceptions', {})
+      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_SELECTED)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination
