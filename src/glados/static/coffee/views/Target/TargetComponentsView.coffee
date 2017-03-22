@@ -9,6 +9,9 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
     @resource_type = 'Target'
     @paginatedView = PaginatedView.getNewTablePaginatedView(@collection, @el)
 
+    @initEmbedModal('components')
+    @activateModals()
+
   events: ->
     # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events
@@ -20,10 +23,6 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
       return
 
     @showCardContent()
-    @initEmbedModal('components')
-    @activateModals()
-
-
 
   # -----------------------------------------------------------------
   # ---- Downloads
