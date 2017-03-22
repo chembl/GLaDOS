@@ -26,5 +26,5 @@ CompoundMoleculeFormsListView = CardView.extend(PaginatedViewExt).extend
     @initEmbedModal('alternate_forms')
     @activateModals()
 
-    @fillPageSelectors()
+    @fillPageSizeSelectors()
     @activateSelectors()

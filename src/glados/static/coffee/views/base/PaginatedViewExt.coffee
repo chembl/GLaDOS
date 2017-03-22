@@ -596,7 +596,7 @@ PaginatedViewExt =
   # Page selector
   #--------------------------------------------------------------------------------------
 
-  fillPageSelectors: ->
+  fillPageSizeSelectors: ->
 
     $elem = $(@el).find('.BCK-select-page-size-container')
     $contentTemplate = $('#' + $elem.attr('data-hb-template'))

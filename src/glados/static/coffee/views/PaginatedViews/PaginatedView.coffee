@@ -11,10 +11,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initialize: () ->
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
-  
-      @collection.on 'reset do-repaint sort', @render, @
+
       @collection.on 'selection-changed', @selectionChangedHandler, @
-  
+
+      if @isInfinite()
+
+        @collection.on 'sync', @.render, @
+      else
+        @collection.on 'reset do-repaint sort', @render, @
+
       @render()
   
     isCards: ()->
@@ -52,19 +57,32 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.toggleSelectAll()
   
     selectionChangedHandler: (elemId)->
-      return
+      console.log('TODO: DAVID THE GREAT MUST IMPLEMENT THIS!')
   
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
   
     render: ->
-  
-      @clearContentContainer()
+
+      if @isInfinite() and @collection.getMeta('current_page') == 1
+        # always clear the infinite container when receiving the first page, to avoid
+        # showing results from previous delayed requests.
+        @clearContentContainer()
+        @renderSortingSelector()
+        @fillNumResults()
+      else if not @isInfinite()
+        @clearContentContainer()
+
       @fillTemplates()
+
+      if @isInfinite()
+        @setUpLoadingWaypoint()
+        @hidePreloaderIfNoNextItems()
+
       @fillSelectAllContainer()
       @fillPaginators()
-      @fillPageSelectors()
+      @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
       @initialiseColumnsModal()
@@ -242,6 +260,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillPaginators: ->
   
       $elem = $(@el).find('.BCK-paginator-container')
+      if $elem.length == 0
+        return
       template = $('#' + $elem.attr('data-hb-template'))
   
       current_page = @collection.getMeta('current_page')
@@ -595,6 +615,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderSortingSelector: ->
   
       $selectSortContainer = $(@el).find('.select-sort-container')
+      if $selectSortContainer.length == 0
+        return
       $selectSortContainer.empty()
   
       $template = $('#' + $selectSortContainer.attr('data-hb-template'))
@@ -608,6 +630,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         one_selected: one_selected
   
       $btnSortDirectionContainer = $(@el).find('.btn-sort-direction-container')
+      if $btnSortDirectionContainer.length == 0
+        return
       $btnSortDirectionContainer.empty()
   
       $template = $('#' + $btnSortDirectionContainer.attr('data-hb-template'))
@@ -651,9 +675,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Page selector
     # ------------------------------------------------------------------------------------------------------------------
   
-    fillPageSelectors: ->
+    fillPageSizeSelectors: ->
   
       $elem = $(@el).find('.BCK-select-page-size-container')
+      if $elem.length == 0
+        return
       $contentTemplate = $('#' + $elem.attr('data-hb-template'))
   
       currentPageSize = @collection.getMeta('page_size')
@@ -699,11 +725,18 @@ glados.views.PaginatedViews.PaginatedView.CAROUSEL_TYPE = 'CAROUSEL_TYPE'
 glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE = 'INFINITE_TYPE'
 glados.views.PaginatedViews.PaginatedView.TABLE_TYPE = 'TABLE_TYPE'
 
+glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collection, el)->
+  return new glados.views.PaginatedViews.PaginatedView
+    collection: collection
+    el: el
+    type: glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
+
 glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
+
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
   tmp_constructor = ()->

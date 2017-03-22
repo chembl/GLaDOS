@@ -35,5 +35,5 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
     @initEmbedModal('similar')
     @activateModals()
 
-    @fillPageSelectors()
+    @fillPageSizeSelectors()
     @activateSelectors()
