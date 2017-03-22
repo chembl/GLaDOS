@@ -6,6 +6,11 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
+    @paginatedView = PaginatedView.getNewTablePaginatedView(@collection, @el)
+
+    @initEmbedModal('approved_drugs_clinical_candidates')
+    @activateModals()
+
 
   events: ->
     # aahhh!!! >(
@@ -17,18 +22,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-    @initEmbedModal('approved_drugs_clinical_candidates')
-    @activateModals()
-
-    @fillPageSelectors()
-    @activateSelectors()
 
   # -----------------------------------------------------------------
   # ---- Downloads
