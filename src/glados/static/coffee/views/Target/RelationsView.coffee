@@ -8,6 +8,9 @@ RelationsView = CardView.extend
     @resource_type = 'Target'
     @paginatedView = PaginatedView.getNewTablePaginatedView(@collection, @el)
 
+    @initEmbedModal('relations')
+    @activateModals()
+
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
@@ -15,5 +18,3 @@ RelationsView = CardView.extend
       return
 
     @showCardContent()
-    @initEmbedModal('relations')
-    @activateModals()
