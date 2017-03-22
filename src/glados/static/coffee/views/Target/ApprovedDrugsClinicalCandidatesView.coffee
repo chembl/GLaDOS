@@ -1,7 +1,7 @@
 # View that renders the Approved drugs and clinical candidates section
 # from the target report card
 # load CardView first!
-ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt).extend
+ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
