@@ -5,7 +5,7 @@
 TargetComponentsView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
-    @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'reset', @.render, @
     @resource_type = 'Target'
     @paginatedView = PaginatedView.getNewTablePaginatedView(@collection, @el)
 

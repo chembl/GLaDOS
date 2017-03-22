@@ -7,6 +7,9 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend
     @collection.on 'reset', @.render, @
     @resource_type = 'Target'
 
+    @initEmbedModal('approved_drugs_clinical_candidates')
+    @activateModals()
+
   render: ->
 
     if @collection.size() == 0
@@ -14,11 +17,7 @@ ApprovedDrugsClinicalCandidatesViewTest = CardView.extend
       return
 
     $('#example_target').DataTable()
-
     @showCardContent()
-    @initEmbedModal('approved_drugs_clinical_candidates')
-    @activateModals()
-    @activateSelectors()
 
 
 
