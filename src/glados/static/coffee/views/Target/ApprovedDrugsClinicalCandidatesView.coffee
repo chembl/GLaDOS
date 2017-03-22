@@ -6,7 +6,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
-    @paginatedView = PaginatedView.getNewTablePaginatedView(@collection, @el)
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
 
     @initEmbedModal('approved_drugs_clinical_candidates')
     @activateModals()
@@ -14,7 +14,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
 
   events: ->
     # aahhh!!! >(
-    return _.extend {}, PaginatedViewExt.events, DownloadViewExt.events
+    return _.extend {}, DownloadViewExt.events
 
   render: ->
 
