@@ -12,9 +12,7 @@ class DrugBrowserApp
   # the colection must be a drug list
   @initBrowserAsTable = (col, top_level_elem) ->
 
-    asTableView = new DrugBrowserTableView
-      collection: col
-      el: top_level_elem
+    asTableView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(col, top_level_elem)
 
     return asTableView
 
