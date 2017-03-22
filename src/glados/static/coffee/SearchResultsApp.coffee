@@ -16,9 +16,8 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-    subResView = new WSInfinityView
-      collection: resultsList
-      el: $('#BCK-SubstructureSearchResults')
+    glados.views.PaginatedViews.PaginatedView\
+    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
 
     resultsList.fetch()
 
@@ -42,9 +41,8 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-    fmResView = new WSInfinityView
-      collection: resultsList
-      el: $('#BCK-SubstructureSearchResults')
+    glados.views.PaginatedViews.PaginatedView\
+    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
 
     resultsList.fetch()
 

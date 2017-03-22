@@ -20,6 +20,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @collection.on 'reset do-repaint sort', @render, @
 
+      @collection.on 'error', @handleError, @
       @render()
   
     isCards: ()->
