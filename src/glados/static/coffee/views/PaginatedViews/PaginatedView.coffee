@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
+      @renderAtInit = arguments[0].render_at_init
 
       @collection.on 'selection-changed', @selectionChangedHandler, @
 
@@ -23,6 +24,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.on 'reset do-repaint sort', @render, @
 
       @collection.on 'error', @handleError, @
+
+      if @renderAtInit
+        @render()
   
     isCards: ()->
       return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
@@ -734,12 +738,12 @@ glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collect
     type: glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
     custom_render_evts: customRenderEvents
 
-glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el)->
+glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
-
+    custom_render_evts: customRenderEvents
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
   tmp_constructor = ()->

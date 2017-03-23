@@ -90,6 +90,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
           collection: @collection
           el: $viewElement
+          custom_render_evts: undefined
+          render_at_init: true
+
 
         @allViewsPerType[viewType] = newView
 
