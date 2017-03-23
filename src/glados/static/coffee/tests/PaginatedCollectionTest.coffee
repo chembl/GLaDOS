@@ -205,6 +205,29 @@ describe "Paginated Collection", ->
         expect(selectedItemsGot).not.toContain(item)
         expect(appDrugCCList.itemIsSelected(item)).toBe(false)
 
+    it 'toggles an unselected item', ->
+
+      numToggles = 10
+      for i in [1..10]
+        appDrugCCList.toggleSelectItem('CHEMBL1091')
+        if i%2 != 0
+          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
+        else
+          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
+
+    it 'toggles a selected item', ->
+
+      numToggles = 10
+      appDrugCCList.selectItem('CHEMBL1091')
+
+      for i in [1..10]
+        appDrugCCList.toggleSelectItem('CHEMBL1091')
+        if i%2 != 0
+          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
+        else
+          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
+
+
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
 

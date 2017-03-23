@@ -50,16 +50,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @selectAll()
       console.log '^^^'
 
+    toggleSelectItem: (itemID) ->
+
+      console.log 'collection: toogle select one item!'
+      if @itemIsSelected(itemID)
+        @unSelectItem(itemID)
+      else
+        @selectItem(itemID)
+
     selectItem: (itemID) ->
 
       if !@getMeta('all_items_selected')
         @getMeta('selection_exceptions')[itemID] = true
+      else
+        delete @getMeta('selection_exceptions')[itemID]
+
+      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
+      console.log 'collection: One item was selected!'
 
     itemIsSelected: (itemID) ->
 
       isSelectionException = @getMeta('selection_exceptions')[itemID]?
       allAreSelected = @getMeta('all_items_selected')
 
+      console.log itemID, 'is currently selected?', isSelectionException != allAreSelected
       return isSelectionException != allAreSelected
 
     getSelectedItemsIDs: ->
@@ -78,6 +92,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if @getMeta('all_items_selected')
         @getMeta('selection_exceptions')[itemID] = true
+      else
+        delete @getMeta('selection_exceptions')[itemID]
+
+      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
+      console.log 'collection: One item was un selected!'
 
     unSelectAll: ->
 

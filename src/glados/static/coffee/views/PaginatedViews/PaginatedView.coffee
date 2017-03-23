@@ -54,6 +54,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .btn-sort-direction': 'changeSortOrderInf'
       'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
+      'click .BCK-select-one-item': 'toggleSelectOneItem'
   
   
     # ------------------------------------------------------------------------------------------------------------------
@@ -62,18 +63,39 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     toggleSelectAll: ->
       console.log 'toggle select all!'
       @collection.toggleSelectAll()
-  
-    selectionChangedHandler: (detail)->
 
-      if detail == glados.Events.Collections.Params.ALL_SELECTED
+    toggleSelectOneItem: (event) ->
+
+      console.log 'toggle select one item!'
+      #for id structure the elem id must always be in the third position
+      elemID = $(event.currentTarget).attr('id').split('-')[2]
+      @collection.toggleSelectItem(elemID)
+
+    selectionChangedHandler: (action, itemID)->
+
+      console.log 'SELECTION EVENT'
+      if action == glados.Events.Collections.Params.ALL_SELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
         console.log('select all painted as checked')
 
-      else if detail == glados.Events.Collections.Params.ALL_UNSELECTED
+      else if action == glados.Events.Collections.Params.ALL_UNSELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
         console.log('select all painted as NOT checked')
+
+      else if action == glados.Events.Collections.Params.SELECTED
+
+        endingID = itemID + '-select'
+        $(@el).find('[id$=' + endingID + ']').prop('checked', true)
+        console.log('one item was selected, need to paint that: ', action, itemID + '-select')
+
+      else if action == glados.Events.Collections.Params.UNSELECTED
+
+        endingID = itemID + '-select'
+        $(@el).find('[id$=' + endingID + ']').prop('checked', false)
+        console.log('one item was UNselected, need to paint that: ', action, itemID + '-select')
+
   
     # ------------------------------------------------------------------------------------------------------------------
     # Render
