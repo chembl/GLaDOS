@@ -10,5 +10,3 @@ SimilaritySearchResultsView = Backbone.View.extend
 
     glados.Utils.fillContentForElement $(@el).find('.similar-compounds-title'),
       similarity: GlobalVariables.SIMILARITY_PERCENTAGE
-
-    @paginatedView.render()

@@ -11,17 +11,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initialize: () ->
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
+      @customRenderEvents = arguments[0].custom_render_evts
 
       @collection.on 'selection-changed', @selectionChangedHandler, @
 
-      if @isInfinite()
-
+      if @customRenderEvents?
+        @collection.on @customRenderEvents, @.render, @
+      else if @isInfinite()
         @collection.on 'sync', @.render, @
       else
         @collection.on 'reset do-repaint sort', @render, @
 
       @collection.on 'error', @handleError, @
-      @render()
   
     isCards: ()->
       return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
@@ -726,11 +727,12 @@ glados.views.PaginatedViews.PaginatedView.CAROUSEL_TYPE = 'CAROUSEL_TYPE'
 glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE = 'INFINITE_TYPE'
 glados.views.PaginatedViews.PaginatedView.TABLE_TYPE = 'TABLE_TYPE'
 
-glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collection, el)->
+glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collection, el, customRenderEvents)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
+    custom_render_evts: customRenderEvents
 
 glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el)->
   return new glados.views.PaginatedViews.PaginatedView
