@@ -75,13 +75,16 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/styling/buttons_helper.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/styling/menu_helper.js' %}"></script>
 
+
     <!-- Backbone -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/CardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/PaginatedViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DANViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
+
+    <!-- Generic List Views -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedView.js' %}"></script>
 
     <!-- Download Wizard -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/WizardStep.js' %}"></script>
@@ -100,8 +103,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetMainView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/targetBrowserApp.js' %}"></script>
 
-    <!-- Generic List Views -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/GenericListViews/WSInfinityView.js' %}"></script>
 
     <!-- Report Cards -->
 
@@ -136,9 +137,6 @@
     <!-- Drug Browser -->
     <!-- The Drug.js file needs to be loaded after the Compound.js -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Drug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserInfinityView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/DrugBrowser/DrugBrowserTableAsCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/drugBrowserApp.js' %}"></script>
 
     <!-- 3D Visualization of compounds -->
@@ -202,8 +200,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchFacetView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchBarView.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsListView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsTableView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsCompoundMatrixView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsGraphView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ResultsSectionMenuView.js' %}"></script>
@@ -217,9 +213,6 @@
 
     <!-- Main Page -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
-
-    <!-- Visual components summary -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/VisualComponentsSummaryApp.js' %}"></script>
 
     <!-- Settings -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/Settings.js' %}"></script>

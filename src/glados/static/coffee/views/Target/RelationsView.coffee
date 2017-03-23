@@ -1,11 +1,15 @@
 # View that renders the Target relations section
 # from the target report card
 # load CardView first!
-RelationsView = CardView.extend(PaginatedViewExt).extend
+RelationsView = CardView.extend
 
   initialize: ->
-    @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'reset', @.render, @
     @resource_type = 'Target'
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
+
+    @initEmbedModal('relations')
+    @activateModals()
 
   render: ->
 
@@ -13,15 +17,4 @@ RelationsView = CardView.extend(PaginatedViewExt).extend
       $('#TargetRelations').hide()
       return
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-    @initEmbedModal('relations')
-    @activateModals()
-
-    @fillPageSelectors()
-    @activateSelectors()
