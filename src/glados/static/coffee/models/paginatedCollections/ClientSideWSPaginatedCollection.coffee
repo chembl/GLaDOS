@@ -60,13 +60,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     selectItem: (itemID) ->
 
-      if !@getMeta('all_items_selected')
-        @getMeta('selection_exceptions')[itemID] = true
-      else
-        delete @getMeta('selection_exceptions')[itemID]
+      selectionExceptions = @getMeta('selection_exceptions')
 
-      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
-      console.log 'collection: One item was selected!'
+      if !@getMeta('all_items_selected')
+        selectionExceptions[itemID] = true
+      else
+        delete selectionExceptions[itemID]
+
+      if Object.keys(selectionExceptions).length == @models.length
+        @selectAll()
+      else
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
+        console.log 'collection: One item was selected!'
 
     itemIsSelected: (itemID) ->
 
@@ -90,13 +95,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     unSelectItem: (itemID) ->
 
-      if @getMeta('all_items_selected')
-        @getMeta('selection_exceptions')[itemID] = true
-      else
-        delete @getMeta('selection_exceptions')[itemID]
+      selectionExceptions = @getMeta('selection_exceptions')
 
-      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
-      console.log 'collection: One item was un selected!'
+      if @getMeta('all_items_selected')
+        selectionExceptions[itemID] = true
+      else
+        delete selectionExceptions[itemID]
+
+      if Object.keys(selectionExceptions).length == @models.length
+        @unSelectAll()
+      else
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
+        console.log 'collection: One item was un selected!'
 
     unSelectAll: ->
 

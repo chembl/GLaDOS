@@ -227,6 +227,32 @@ describe "Paginated Collection", ->
         else
           expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
 
+    it "goes to a select all state when all items are manually selected", ->
+
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      lastItemID = allItemsIDs[allItemsIDs.length - 1]
+      allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
+
+      for itemID in allItemsIDsExceptLast
+        appDrugCCList.selectItem(itemID)
+
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      appDrugCCList.selectItem(lastItemID)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+
+    it "goes to a unselect all state when all items are manually unselected", ->
+
+      appDrugCCList.selectAll()
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      lastItemID = allItemsIDs[allItemsIDs.length - 1]
+      allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
+
+      for itemID in allItemsIDsExceptLast
+        appDrugCCList.unSelectItem(itemID)
+
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+      appDrugCCList.unSelectItem(lastItemID)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
 
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
