@@ -5,26 +5,19 @@
 CompoundMoleculeFormsListView = CardView.extend(PaginatedViewExt).extend
 
   initialize: ->
-    @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
+
+    @initEmbedModal('alternate_forms')
+    @activateModals()
 
   render: ->
     if @collection.length == 1 and @collection.at(0).get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID and not GlobalVariables['EMBEDED']
       $('#AlternateFormsOfCompoundInChEMBL').hide()
 
-    $(@el).find('.alternate-compounds-title').html Handlebars.compile($('#Handlebars-CompRepCard-AlternateCompounds-Title').html())
+    glados.Utils.fillContentForElement $(@el).find('.alternate-compounds-title'),
       chembl_id: GlobalVariables.CHEMBL_ID
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-    @initEmbedModal('alternate_forms')
-    @activateModals()
-
-    @fillPageSizeSelectors()
-    @activateSelectors()
