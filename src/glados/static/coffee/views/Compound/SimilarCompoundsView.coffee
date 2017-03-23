@@ -1,6 +1,6 @@
 # View that renders the similar compounds section
 # from the compound report card
-SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
+SimilarCompoundsView = CardView.extend
 
   initialize: ->
     @collection.on 'reset', @.render, @
@@ -8,6 +8,7 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
     @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
     @resource_type = 'Compound'
 
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewCardsPaginatedView(@collection, @el)
 
     @initEmbedModal('similar')
     @activateModals()
@@ -26,14 +27,4 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
       $('#TargetRelations').hide()
       return
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-
-
-    @fillPageSizeSelectors()
-    @activateSelectors()

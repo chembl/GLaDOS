@@ -119,6 +119,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SIMILARITY_RESULTS_LIST:
