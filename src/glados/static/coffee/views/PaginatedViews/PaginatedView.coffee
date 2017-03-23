@@ -335,6 +335,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
       glados.Utils.fillContentForElement $selectAllContainer,
         base_check_box_id: @getBaseSelectAllCheckBoxID()
+        all_items_selected: @collection.getMeta('all_items_selected')
   
     fillNumResults: ->
   

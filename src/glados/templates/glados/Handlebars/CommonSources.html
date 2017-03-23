@@ -27,7 +27,8 @@
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
   <input type="checkbox" class="filled-in BCK-toggle-select-all"
-         id="BCK-list-{{base_check_box_id}}-selectAll" />
+         id="BCK-list-{{base_check_box_id}}-selectAll"
+    {{#if all_items_selected}}checked="checked"{{/if}}/>
   <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
 </script>
 
