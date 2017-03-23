@@ -752,6 +752,10 @@ glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
   tmp_constructor.prototype = glados.views.PaginatedViews.PaginatedView.prototype
   return tmp_constructor
 
+glados.views.PaginatedViews.PaginatedView.getCardsConstructor = ()->
+  return glados.views.PaginatedViews.PaginatedView\
+    .getTypeConstructor(glados.views.PaginatedViews.PaginatedView.CARDS_TYPE)
+
 glados.views.PaginatedViews.PaginatedView.getTableConstructor = ()->
   return glados.views.PaginatedViews.PaginatedView\
     .getTypeConstructor(glados.views.PaginatedViews.PaginatedView.TABLE_TYPE)

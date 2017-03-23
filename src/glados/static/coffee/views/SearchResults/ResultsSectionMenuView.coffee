@@ -6,8 +6,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
       'Graph': glados.views.SearchResults.ESResultsGraphView
       'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
-      'Cards': glados.views.SearchResults.ESResultsListView
-      'Infinite': glados.views.SearchResults.ESResultsListView
+      'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
+      'Infinite': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
 
 
     events:
