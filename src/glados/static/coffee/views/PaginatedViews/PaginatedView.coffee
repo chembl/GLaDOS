@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
 
-      @collection.on 'selection-changed', @selectionChangedHandler, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
       if @customRenderEvents?
         @collection.on @customRenderEvents, @.render, @
@@ -60,10 +60,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Selection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectAll: ->
+      console.log 'toggle select all!'
       @collection.toggleSelectAll()
   
-    selectionChangedHandler: (elemId)->
-      console.log('TODO: DAVID THE GREAT MUST IMPLEMENT THIS!')
+    selectionChangedHandler: (detail)->
+
+      if detail == glados.Events.Collections.Params.ALL_SELECTED
+
+        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
+        console.log('select all painted as checked')
+
+      else if detail == glados.Events.Collections.Params.ALL_UNSELECTED
+
+        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
+        console.log('select all painted as NOT checked')
   
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -92,10 +102,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @activateSelectors()
       @showPaginatedViewContent()
       @initialiseColumnsModal()
-  
-  
-  
-  
+
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
