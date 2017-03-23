@@ -3,23 +3,24 @@
 SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
   initialize: ->
-    @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
-
     @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
-
     @resource_type = 'Compound'
+
+
+    @initEmbedModal('similar')
+    @activateModals()
 
   render: ->
 
-    $(@el).find('.similar-compounds-title').html Handlebars.compile( $('#Handlebars-CompRepCard-SimmilarCompounds-Title').html() )
+    glados.Utils.fillContentForElement $(@el).find('.similar-compounds-title'),
       chembl_id: GlobalVariables.CHEMBL_ID
       similarity: glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
-    $(@el).find('.see-full-list-link').html Handlebars.compile( $('#Handlebars-CompRepCard-SimmilarCompounds-Link').html() )
+    glados.Utils.fillContentForElement $(@el).find('.see-full-list-link'),
       chembl_id: GlobalVariables.CHEMBL_ID
       similarity_threshold: glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
-
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
       $('#TargetRelations').hide()
@@ -32,8 +33,7 @@ SimilarCompoundsView = CardView.extend(PaginatedViewExt).extend
 
     @showCardContent()
     @showPaginatedViewContent()
-    @initEmbedModal('similar')
-    @activateModals()
+
 
     @fillPageSizeSelectors()
     @activateSelectors()

@@ -731,6 +731,13 @@ glados.views.PaginatedViews.PaginatedView.CAROUSEL_TYPE = 'CAROUSEL_TYPE'
 glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE = 'INFINITE_TYPE'
 glados.views.PaginatedViews.PaginatedView.TABLE_TYPE = 'TABLE_TYPE'
 
+glados.views.PaginatedViews.PaginatedView.getNewCardsPaginatedView = (collection, el, customRenderEvents)->
+  return new glados.views.PaginatedViews.PaginatedView
+    collection: collection
+    el: el
+    type: glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
+    custom_render_evts: customRenderEvents
+
 glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collection, el, customRenderEvents)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
@@ -744,6 +751,7 @@ glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
     custom_render_evts: customRenderEvents
+
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
   tmp_constructor = ()->

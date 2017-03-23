@@ -2,13 +2,13 @@
 # of the compound report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-CompoundMoleculeFormsListView = CardView.extend(PaginatedViewExt).extend
+CompoundMoleculeFormsListView = CardView.extend
 
   initialize: ->
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
-    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewCardsPaginatedView(@collection, @el)
 
     @initEmbedModal('alternate_forms')
     @activateModals()

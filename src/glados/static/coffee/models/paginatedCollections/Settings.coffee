@@ -110,6 +110,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       SUBSTRUCTURE_RESULTS_LIST:
@@ -126,6 +127,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+        COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
@@ -134,6 +136,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         IS_CAROUSEL: true
@@ -144,6 +147,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Document.ID_COLUMN
         COLUMNS: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
+        COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
     CLIENT_SIDE_WS_COLLECTIONS:
       # used for targets
