@@ -1,5 +1,5 @@
 # View that renders a list of resulting documents as paginated cards.
-DocumentsFromTermsView = Backbone.View.extend(PaginatedViewExt).extend
+DocumentsFromTermsView = Backbone.View.extend
 
   initialize: ->
     @collection.on 'sync', @.render, @
