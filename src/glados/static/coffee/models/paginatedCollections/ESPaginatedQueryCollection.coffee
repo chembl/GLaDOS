@@ -392,7 +392,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
     # without requesting again to the server.
     # you can use a progress element to show the progress if you want.
-    getAllResults: ($progressElement) ->
+    getAllSelectedResults: ($progressElement) ->
 
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
@@ -460,7 +460,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, $progressElement) ->
 
-      deferreds = @getAllResults($progressElement)
+      deferreds = @getAllSelectedResults($progressElement)
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
