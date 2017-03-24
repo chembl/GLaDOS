@@ -174,9 +174,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $specificElem.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
         $specificElem.append($('<tbody>'))
-  
-  
-      selectionExceptions = @collection.getMeta('selection_exceptions')
+
       allAreSelected =  @collection.getMeta('all_items_selected')
   
       for item in @collection.getCurrentPage()
@@ -211,13 +209,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           # This method should return a value based on the parameter, not modify the parameter
           return return_col
   
-        isColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
-  
-        isSelectionException =  selectionExceptions[isColumnValue]?
-  
+        idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
         new_item_cont = Handlebars.compile( $item_template.html() )
-          base_check_box_id: isColumnValue
-          is_selected: isSelectionException != allAreSelected
+          base_check_box_id: idColumnValue
+          is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: img_url
           columns: columnsWithValues
   
