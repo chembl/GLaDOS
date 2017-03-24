@@ -507,8 +507,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           i--
         i++
 
+    getDownloadObject: (columns) ->
+      console.log 'need to get these columns: ', columns
+
+      downloadObj = []
+
+      for item in @allResults
+
+        row = {}
+        for col in columns
+          colLabel = col.name_to_show
+          colValue = glados.Utils.getNestedValue(item, col.comparator)
+          row[colLabel] = colValue
+
+        downloadObj.push row
+
+      console.log 'downloadObj2: ', downloadObj
+
+      return downloadObj
+
     # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
-    downloadAllItems: (format, $progressElement) ->
+    downloadAllItems: (format, columns, $progressElement) ->
 
       deferreds = @getAllSelectedResults($progressElement)
 
@@ -517,10 +536,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       $.when.apply($, deferreds).done( () ->
 
         console.log 'thisCollection.allResults: ', thisCollection.allResults
+
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
-        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in thisCollection.allResults)
+        downloadObject = thisCollection.getDownloadObject.call(thisCollection, columns)
+
+
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
           # erase progress element contents after some milliseconds

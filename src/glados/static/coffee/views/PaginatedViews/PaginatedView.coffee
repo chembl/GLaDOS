@@ -148,20 +148,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
-  
+
+    getVisibleColumns: ->
+
+      # use special configuration config for cards if available
+      if @isCards() and @collection.getMeta('columns_card').length > 0
+        return @collection.getMeta('columns_card')
+      else
+        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
+        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
+        return _.union(defaultVisibleColumns, additionalVisibleColumns)
+
     sendDataToTemplate: ($specificElem) ->
   
       $item_template = $('#' + $specificElem.attr('data-hb-template'))
       $append_to = $specificElem
-  
-      # use special configuration config for cards if available
-      if @isCards() and @collection.getMeta('columns_card').length > 0
-        visibleColumns = @collection.getMeta('columns_card')
-      else
-        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
-        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-        visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
-  
+      visibleColumns = @getVisibleColumns()
+
       # if it is a table, add the corresponding header
       if $specificElem.is('table')
   
