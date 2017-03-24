@@ -168,7 +168,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         header_template = $('#' + $specificElem.attr('data-hb-header-template'))
         header_row_cont = Handlebars.compile( header_template.html() )
           base_check_box_id: @getBaseSelectAllCheckBoxID()
-          all_items_selected: @collection.getMeta('all_items_selected')
+          all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
           columns: visibleColumns
   
         $specificElem.append($(header_row_cont))
@@ -354,7 +354,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
       glados.Utils.fillContentForElement $selectAllContainer,
         base_check_box_id: @getBaseSelectAllCheckBoxID()
-        all_items_selected: @collection.getMeta('all_items_selected')
+        all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
   
     fillNumResults: ->
   
