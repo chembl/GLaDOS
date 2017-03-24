@@ -39,6 +39,51 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @resetSearchStruct()
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Item Selection
+    # ------------------------------------------------------------------------------------------------------------------
+    toggleSelectAll: ->
+
+      if @getMeta('all_items_selected')
+        @unSelectAll()
+      else
+        @selectAll()
+
+
+
+    selectItem: (itemID) ->
+
+      if !@getMeta('all_items_selected')
+        @getMeta('selection_exceptions')[itemID] = true
+
+    itemIsSelected: (itemID) ->
+
+      isSelectionException = @getMeta('selection_exceptions')[itemID]?
+      allAreSelected = @getMeta('all_items_selected')
+
+      return isSelectionException != allAreSelected
+
+    getSelectedItemsIDs: ->
+
+      idProperty = @getMeta('id_column').comparator
+      return (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+
+    selectAll: ->
+
+      @setMeta('all_items_selected', true)
+      @setMeta('selection_exceptions', {})
+
+    unSelectItem: (itemID) ->
+
+      if @getMeta('all_items_selected')
+        @getMeta('selection_exceptions')[itemID] = true
+
+    unSelectAll: ->
+
+      @setMeta('all_items_selected', false)
+      @setMeta('selection_exceptions', {})
+      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_SELECTED)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Pagination
     # ------------------------------------------------------------------------------------------------------------------
 

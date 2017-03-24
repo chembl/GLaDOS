@@ -52,7 +52,7 @@ glados.getScreenType = ->
 # ----------------------------------------------------------------------------------------------------------------------
 
 glados.useNameSpace 'glados',
-  Settings :
+  Settings:
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
     BEAKER_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/utils/'
@@ -117,6 +117,11 @@ glados.useNameSpace 'glados',
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
     DEFAULT_NULL_VALUE_LABEL: '---'
+  Events:
+    Collections:
+      SELECTION_UPDATED: 'selection-changed'
+      Params:
+        ALL_SELECTED:'all-selected'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

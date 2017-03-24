@@ -5,9 +5,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
       'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
       'Graph': glados.views.SearchResults.ESResultsGraphView
-      'Table': glados.views.SearchResults.ESResultsTableView
-      'Cards': glados.views.SearchResults.ESResultsListView
-      'Infinite': glados.views.SearchResults.ESResultsListView
+      'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
+      'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
+      'Infinite': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
 
 
     events:
@@ -90,6 +90,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
           collection: @collection
           el: $viewElement
+          custom_render_evts: undefined
+          render_at_init: true
+
 
         @allViewsPerType[viewType] = newView
 
@@ -98,7 +101,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         console.log 'view ', viewType, ' exists already! just need to wake it up'
         $('#' + viewElementID).show()
         # wake up the view if necessary
-        @allViewsPerType[viewType].wakeUpView()
+        if @allViewsPerType[viewType].wakeUpView?
+          @allViewsPerType[viewType].wakeUpView()
 
     hideView: (viewType) ->
 

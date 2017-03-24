@@ -2,15 +2,19 @@
 # from the target report card
 # load CardView first!
 # also make sure the html can access the handlebars templates!
-TargetComponentsView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt).extend
+TargetComponentsView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
-    @collection.on 'reset do-repaint sort', @.render, @
+    @collection.on 'reset', @.render, @
     @resource_type = 'Target'
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
+
+    @initEmbedModal('components')
+    @activateModals()
 
   events: ->
     # aahhh!!! >(
-    return _.extend {}, PaginatedViewExt.events, DownloadViewExt.events
+    return _.extend {}, DownloadViewExt.events
 
   render: ->
 
@@ -18,19 +22,7 @@ TargetComponentsView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt)
       $('#TargetComponents').hide()
       return
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-    @initEmbedModal('components')
-    @activateModals()
-
-    @fillPageSelectors()
-    @activateSelectors()
-
 
   # -----------------------------------------------------------------
   # ---- Downloads

@@ -1,10 +1,10 @@
 class SideMenuHelper
 
-  @$side_menu = $('.side-nav')
-  @additional_menus = {}
-  @handlebars_template = Handlebars.compile($('#Handlebars-SideBar-CollapsibleMenu').html())
-
   @initializeSideMenu = ()->
+
+    SideMenuHelper.$side_menu = $('.side-nav')
+    SideMenuHelper.additional_menus = {}
+    SideMenuHelper.handlebars_template = Handlebars.compile($('#Handlebars-SideBar-CollapsibleMenu').html())
     # initialization of visualization code.
     # This controls the padding of the sidenav.
     SideMenuHelper.initializeTopMenuController()

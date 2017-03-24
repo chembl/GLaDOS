@@ -1,15 +1,20 @@
 # View that renders the Approved drugs and clinical candidates section
 # from the target report card
 # load CardView first!
-ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(DownloadViewExt).extend
+ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@collection, @el)
+
+    @initEmbedModal('approved_drugs_clinical_candidates')
+    @activateModals()
+
 
   events: ->
     # aahhh!!! >(
-    return _.extend {}, PaginatedViewExt.events, DownloadViewExt.events
+    return _.extend {}, DownloadViewExt.events
 
   render: ->
 
@@ -17,18 +22,7 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(PaginatedViewExt).extend(D
       $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 
-    @clearContentContainer()
-
-    @fillTemplates()
-    @fillPaginators()
-
     @showCardContent()
-    @showPaginatedViewContent()
-    @initEmbedModal('approved_drugs_clinical_candidates')
-    @activateModals()
-
-    @fillPageSelectors()
-    @activateSelectors()
 
   # -----------------------------------------------------------------
   # ---- Downloads

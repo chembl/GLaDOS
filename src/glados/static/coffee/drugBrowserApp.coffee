@@ -12,9 +12,7 @@ class DrugBrowserApp
   # the colection must be a drug list
   @initBrowserAsTable = (col, top_level_elem) ->
 
-    asTableView = new DrugBrowserTableView
-      collection: col
-      el: top_level_elem
+    asTableView = glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(col, top_level_elem)
 
     return asTableView
 
@@ -22,9 +20,7 @@ class DrugBrowserApp
   @initInfinityBrowserView = (col, top_level_elem) ->
 
     col.setMeta('page_size', 50)
-    infView = new DrugBrowserInfinityView
-      collection: col
-      el: top_level_elem
+    infView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(col, top_level_elem)
 
     return infView
 

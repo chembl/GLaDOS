@@ -70,9 +70,8 @@ Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
 Target.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
 
-Target.COLUMNS_SETTINGS = {
-  RESULTS_LIST_TABLE: [
-    {
+Target.COLUMNS = {
+  CHEMBL_ID: {
       'name_to_show': 'CHEMBL_ID'
       'comparator': 'target_chembl_id'
       'sort_disabled': false
@@ -80,6 +79,12 @@ Target.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
     }
+}
+Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
+
+Target.COLUMNS_SETTINGS = {
+  RESULTS_LIST_TABLE: [
+    Target.COLUMNS.CHEMBL_ID
     {
       'name_to_show': 'Name'
       'comparator': 'pref_name'

@@ -21,6 +21,12 @@ glados.useNameSpace 'glados',
 
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 
+
+    # the element must define a data-hb-template, which is the id of the handlebars template to be used
+    fillContentForElement: ($element, paramsObj)->
+
+      $element.html Handlebars.compile($('#' + $element.attr('data-hb-template')).html())(paramsObj)
+
     # Helper function to prevent links from navigating to an url that is inside the same js page
     # If key_up is true will override for enter listening on links
     # If key_up is false will override for click listening on links
@@ -42,3 +48,4 @@ glados.useNameSpace 'glados',
       $jquery_element.keyup(
         glados.Utils.getNavigateOnlyOnNewTabLinkEventHandler(true, callback)
       )
+

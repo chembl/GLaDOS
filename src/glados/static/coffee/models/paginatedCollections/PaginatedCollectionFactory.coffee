@@ -19,6 +19,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []
+            facets: esIndexSettings.FACETS
+            id_column: esIndexSettings.ID_COLUMN
             facets_groups: esIndexSettings.FACETS_GROUPS
             # set by default columns with show: true, and additional with show: false
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
@@ -30,6 +32,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_name: esIndexSettings.ID_NAME
             available_views: esIndexSettings.AVAILABLE_VIEWS
             default_view: esIndexSettings.DEFAULT_VIEW
+            all_items_selected: false
+            selection_exceptions: {}
 
       return new indexESPagQueryCollection
 
@@ -44,10 +48,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
+            id_column: collectionSettings.ID_COLUMN
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
+            #columns specific for cards view
+            columns_card: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS_CARD)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
             is_carousel: collectionSettings.IS_CAROUSEL
-
+            all_items_selected: false
+            selection_exceptions: {}
 
           @initialiseUrl()
 
@@ -66,8 +74,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
+            id_column: collectionSettings.ID_COLUMN
             columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            all_items_selected: false
+            selection_exceptions: {}
 
           @on 'reset', @resetMeta, @
 
