@@ -94,6 +94,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         endingID = itemID + '-select'
         $(@el).find('[id$=' + endingID + ']').prop('checked', false)
+        $(@el).find('.BCK-toggle-select-all').prop('checked', false)
         console.log('one item was UNselected, need to paint that: ', action, itemID + '-select')
 
   

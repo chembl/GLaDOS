@@ -67,11 +67,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         delete selectionExceptions[itemID]
 
-      if Object.keys(selectionExceptions).length == @models.length
+      if Object.keys(selectionExceptions).length == @models.length or Object.keys(selectionExceptions).length == 0
         @selectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
         console.log 'collection: One item was selected!'
+
+    thereAreExceptions: ->
+
+      return Object.keys(@getMeta('selection_exceptions')).length > 0
 
     itemIsSelected: (itemID) ->
 
@@ -102,7 +106,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         delete selectionExceptions[itemID]
 
-      if Object.keys(selectionExceptions).length == @models.length
+      if Object.keys(selectionExceptions).length == @models.length or Object.keys(selectionExceptions).length == 0
         @unSelectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
