@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
         console.log 'collection: One item was selected!'
 
-    : ->
+    thereAreExceptions: ->
 
       return Object.keys(@getMeta('selection_exceptions')).length > 0
 
