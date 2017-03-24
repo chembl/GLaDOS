@@ -140,7 +140,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
      # use real values if not being used by test version
     molecules = @collection.allResults if @collection?
-
+    rejectedMolecules = []
     # ignore molecules for which any value on any of the axes is null, they are not shown by plotly and they
     # can mess the axes range
     molecules = _.reject(molecules, (mol) ->
@@ -152,11 +152,15 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         value = glados.Utils.getNestedValue(mol, prop)
 
         if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+          rejectedMolecules.push glados.Utils.getNestedValue(mol, thisView.labelerProperty.prop_name)
           return true
 
       return false
     )
 
+    if rejectedMolecules.length
+      glados.Utils.fillContentForElement $(@el).find('.BCK-CompResultsGraphRejectedResults'),
+        rejected: rejectedMolecules
     # --------------------------------------
     # scales
     # --------------------------------------

@@ -422,6 +422,15 @@
   {{/each}}
 </script>
 
+<script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
+  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
+  because in any of the shown axes their value is null: <br>
+  {{#each rejected}}
+    {{this}}
+  {{/each}}
+</script>
+
+
 <script id="Handlebars-Common-ESResultsMatrix-ZoomOptions" type="text/x-handlebars-template">
     <div class="matrix-vis-options grey lighten-3">
         <a><i class="fa fa-lg fa-home tooltipped BCK-reset-zoom-btn" aria-hidden="true" href=""
