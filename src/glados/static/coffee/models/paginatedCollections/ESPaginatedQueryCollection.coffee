@@ -95,8 +95,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           }
       return single_term_query
 
+    # given a list of chembl ids, it gives the request data to query for only those ids
+    getRequestDataForChemblIDs: (page, pageSize, idsList) ->
+      return {
+        size: pageSize,
+        from: ((page - 1) * pageSize)
+        query:
+          terms:
+            molecule_chembl_id: idsList
+      }
+
     # generates an object with the data necessary to do the ES request
-    # set a customPage if you want a page different than the one set as current
+    # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
     getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
       request_facets = if _.isUndefined(request_facets) then false else request_facets
@@ -392,11 +402,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
     # without requesting again to the server.
     # you can use a progress element to show the progress if you want.
-    getAllResults: ($progressElement) ->
+    getAllSelectedResults: ($progressElement) ->
 
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
+      getEverything = not @thereAreExceptions()
+      getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
+      getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
+
+      console.log 'getEverything: ', getEverything
+      console.log 'getEverythingExceptSome: ', getEverythingExceptSome
+      console.log 'getOnlySome: ', getOnlySome
 
       if totalRecords >= 10000
         if $progressElement?
@@ -420,7 +437,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return jQuery.Deferred().resolve()
 
       #initialise the array in which all the items are going to be saved as they are received from the server
-      @allResults = (undefined for num in [1..totalRecords])
+      if getOnlySome
+        idsList = Object.keys(@getMeta('selection_exceptions'))
+        @allResults = (undefined for num in [1..idsList.length])
+      else
+        @allResults = (undefined for num in [1..totalRecords])
       itemsReceived = 0
 
       #this function knows how to get one page of results and add them in the corresponding positions in the all
@@ -428,7 +449,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       getItemsFromPage = (currentPage) ->
 
-        data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
+        if getOnlySome
+          console.log 'only need to get this list: ', idsList
+          data = JSON.stringify(thisCollection.getRequestDataForChemblIDs(currentPage, pageSize, idsList))
+        else
+          data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
 
         return $.post( url, data).done( (response) ->
 
@@ -438,7 +463,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           startingPosition = (currentPage - 1) * pageSize
 
           for i in [0..(newItems.length-1)]
-            thisCollection.allResults[i + startingPosition] = newItems[i]
+
+            currentItem = newItems[i]
+            console.log 'received item: ', currentItem
+            console.log 'getEverythingExceptSome: ', getEverythingExceptSome
+            if getEverythingExceptSome
+              itemID = glados.Utils.getNestedValue(currentItem, thisCollection.getMeta('id_column').comparator)
+              console.log 'checking item:', itemID
+              if not thisCollection.itemIsSelected(itemID)
+                console.log 'not selected, continuing'
+                continue
+
+            thisCollection.allResults[i + startingPosition] = currentItem
             itemsReceived++
 
           progress = parseInt((itemsReceived / totalRecords) * 100)
@@ -455,21 +491,58 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
+      if getEverythingExceptSome
+        f = $.proxy(@removeHolesInAllResults, @)
+        $.when.apply($, deferreds).done -> f()
+
       return deferreds
 
-    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
-    downloadAllItems: (format, $progressElement) ->
+    removeHolesInAllResults: ->
 
-      deferreds = @getAllResults($progressElement)
+      i = 0
+      while i < @allResults.length
+        currentItem = @allResults[i]
+        if not currentItem?
+          @allResults.splice(i, 1)
+          i--
+        i++
+
+    getDownloadObject: (columns) ->
+      console.log 'need to get these columns: ', columns
+
+      downloadObj = []
+
+      for item in @allResults
+
+        row = {}
+        for col in columns
+          colLabel = col.name_to_show
+          colValue = glados.Utils.getNestedValue(item, col.comparator)
+          row[colLabel] = colValue
+
+        downloadObj.push row
+
+      console.log 'downloadObj2: ', downloadObj
+
+      return downloadObj
+
+    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+    downloadAllItems: (format, columns, $progressElement) ->
+
+      deferreds = @getAllSelectedResults($progressElement)
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
       $.when.apply($, deferreds).done( () ->
 
+        console.log 'thisCollection.allResults: ', thisCollection.allResults
+
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
-        downloadObject = ({'molecule_chembl_id':item.molecule_chembl_id} for item in thisCollection.allResults)
+        downloadObject = thisCollection.getDownloadObject.call(thisCollection, columns)
+
+
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
           # erase progress element contents after some milliseconds

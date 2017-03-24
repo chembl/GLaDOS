@@ -27,7 +27,8 @@
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
   <input type="checkbox" class="filled-in BCK-toggle-select-all"
-         id="BCK-list-{{base_check_box_id}}-selectAll" />
+         id="BCK-list-{{base_check_box_id}}-selectAll"
+    {{#if all_items_selected}}checked="checked"{{/if}}/>
   <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
 </script>
 
@@ -36,8 +37,8 @@
     <tr>
 
       <td>
-        <input type="checkbox" class="filled-in" id="BCK-table-{{base_check_box_id}}-select"
-          {{#if is_selected}}checked="checked"{{/if}}/>
+        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
+           {{#if is_selected}}checked="checked"{{/if}}/>
           <label for="BCK-table-{{base_check_box_id}}-select"></label>
       </td>
 
@@ -113,7 +114,9 @@
   <li class="collection-item">
 
     <p>
-      <input type="checkbox" class="filled-in" id="BCK-list-{{base_check_box_id}}-select" />
+      <input type="checkbox" class="filled-in BCK-select-one-item"
+             id="BCK-list-{{base_check_box_id}}-select"
+      {{#if is_selected}}checked="checked"{{/if}}/>
       <label for="BCK-list-{{base_check_box_id}}-select"></label>
     </p>
 
@@ -418,6 +421,15 @@
   <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
   {{/each}}
 </script>
+
+<script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
+  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
+  because in any of the shown axes their value is null: <br>
+  {{#each rejected}}
+    {{this}}
+  {{/each}}
+</script>
+
 
 <script id="Handlebars-Common-ESResultsMatrix-ZoomOptions" type="text/x-handlebars-template">
     <div class="matrix-vis-options grey lighten-3">

@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
 
-      @collection.on 'selection-changed', @selectionChangedHandler, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
       if @customRenderEvents?
         @collection.on @customRenderEvents, @.render, @
@@ -54,16 +54,49 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .btn-sort-direction': 'changeSortOrderInf'
       'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
+      'click .BCK-select-one-item': 'toggleSelectOneItem'
   
   
     # ------------------------------------------------------------------------------------------------------------------
     # Selection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectAll: ->
+      console.log 'toggle select all!'
       @collection.toggleSelectAll()
-  
-    selectionChangedHandler: (elemId)->
-      console.log('TODO: DAVID THE GREAT MUST IMPLEMENT THIS!')
+
+    toggleSelectOneItem: (event) ->
+
+      console.log 'toggle select one item!'
+      #for id structure the elem id must always be in the third position
+      elemID = $(event.currentTarget).attr('id').split('-')[2]
+      @collection.toggleSelectItem(elemID)
+
+    selectionChangedHandler: (action, itemID)->
+
+      console.log 'SELECTION EVENT'
+      if action == glados.Events.Collections.Params.ALL_SELECTED
+
+        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
+        console.log('select all painted as checked')
+
+      else if action == glados.Events.Collections.Params.ALL_UNSELECTED
+
+        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
+        console.log('select all painted as NOT checked')
+
+      else if action == glados.Events.Collections.Params.SELECTED
+
+        endingID = itemID + '-select'
+        $(@el).find('[id$=' + endingID + ']').prop('checked', true)
+        console.log('one item was selected, need to paint that: ', action, itemID + '-select')
+
+      else if action == glados.Events.Collections.Params.UNSELECTED
+
+        endingID = itemID + '-select'
+        $(@el).find('[id$=' + endingID + ']').prop('checked', false)
+        $(@el).find('.BCK-toggle-select-all').prop('checked', false)
+        console.log('one item was UNselected, need to paint that: ', action, itemID + '-select')
+
   
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -92,10 +125,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @activateSelectors()
       @showPaginatedViewContent()
       @initialiseColumnsModal()
-  
-  
-  
-  
+
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
@@ -118,35 +148,36 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
-  
+
+    getVisibleColumns: ->
+
+      # use special configuration config for cards if available
+      if @isCards() and @collection.getMeta('columns_card').length > 0
+        return @collection.getMeta('columns_card')
+      else
+        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
+        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
+        return _.union(defaultVisibleColumns, additionalVisibleColumns)
+
     sendDataToTemplate: ($specificElem) ->
   
       $item_template = $('#' + $specificElem.attr('data-hb-template'))
       $append_to = $specificElem
-  
-      # use special configuration config for cards if available
-      if @isCards() and @collection.getMeta('columns_card').length > 0
-        visibleColumns = @collection.getMeta('columns_card')
-      else
-        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
-        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-        visibleColumns = _.union(defaultVisibleColumns, additionalVisibleColumns)
-  
+      visibleColumns = @getVisibleColumns()
+
       # if it is a table, add the corresponding header
       if $specificElem.is('table')
   
         header_template = $('#' + $specificElem.attr('data-hb-header-template'))
         header_row_cont = Handlebars.compile( header_template.html() )
           base_check_box_id: @getBaseSelectAllCheckBoxID()
-          all_items_selected: @collection.getMeta('all_items_selected')
+          all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
           columns: visibleColumns
   
         $specificElem.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
         $specificElem.append($('<tbody>'))
-  
-  
-      selectionExceptions = @collection.getMeta('selection_exceptions')
+
       allAreSelected =  @collection.getMeta('all_items_selected')
   
       for item in @collection.getCurrentPage()
@@ -181,13 +212,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           # This method should return a value based on the parameter, not modify the parameter
           return return_col
   
-        isColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
-  
-        isSelectionException =  selectionExceptions[isColumnValue]?
-  
+        idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
         new_item_cont = Handlebars.compile( $item_template.html() )
-          base_check_box_id: isColumnValue
-          is_selected: isSelectionException != allAreSelected
+          base_check_box_id: idColumnValue
+          is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: img_url
           columns: columnsWithValues
   
@@ -328,6 +357,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
       glados.Utils.fillContentForElement $selectAllContainer,
         base_check_box_id: @getBaseSelectAllCheckBoxID()
+        all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
   
     fillNumResults: ->
   

@@ -45,6 +45,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
           prop_name:'molecule_properties.num_ro5_violations'
           type: 'number'
           label: '#RO5 Violations'
+          default_domain: [0, 4]
         PSA:
           prop_name:'molecule_properties.psa'
           type: 'number'
@@ -139,7 +140,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
      # use real values if not being used by test version
     molecules = @collection.allResults if @collection?
-
+    rejectedMolecules = []
     # ignore molecules for which any value on any of the axes is null, they are not shown by plotly and they
     # can mess the axes range
     molecules = _.reject(molecules, (mol) ->
@@ -151,37 +152,44 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         value = glados.Utils.getNestedValue(mol, prop)
 
         if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+          rejectedMolecules.push glados.Utils.getNestedValue(mol, thisView.labelerProperty.prop_name)
           return true
 
       return false
     )
 
+    if rejectedMolecules.length
+      glados.Utils.fillContentForElement $(@el).find('.BCK-CompResultsGraphRejectedResults'),
+        rejected: rejectedMolecules
     # --------------------------------------
     # scales
     # --------------------------------------
     # builds a linear scale to position the circles
     # when the data is numeric, range is 0 to canvas width,
     # taking into account the padding
-    buildLinearNumericScale = (dataList, axis) ->
+    buildLinearNumericScale = (dataList, axis, defaultDomain) ->
 
-      minVal = Number.MAX_VALUE
-      maxVal = Number.MIN_VALUE
+      if defaultDomain
+        scaleDomain = defaultDomain
+      else
+        minVal = Number.MAX_VALUE
+        maxVal = Number.MIN_VALUE
 
-      i = 0
-      for datum in dataList
+        i = 0
+        for datum in dataList
 
-        datum = parseFloat(datum)
+          datum = parseFloat(datum)
 
-        if datum == glados.Settings.DEFAULT_NULL_VALUE_LABEL or !datum?
-          continue
+          if datum == glados.Settings.DEFAULT_NULL_VALUE_LABEL or !datum?
+            continue
 
-        if datum > maxVal
-          maxVal = datum
-        if datum < minVal
-          minVal = datum
+          if datum > maxVal
+            maxVal = datum
+          if datum < minVal
+            minVal = datum
 
 
-      scaleDomain = [minVal, maxVal]
+        scaleDomain = [minVal, maxVal]
 
       range = [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
 
@@ -219,7 +227,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       type = thisView.currentPropertyColour.type
       console.log 'type is: ', type
       scale = switch
-        when type == 'number' then buildLinearNumericScale(dataList, axis)
+        when type == 'number' then buildLinearNumericScale(dataList, axis, thisView.currentPropertyColour.default_domain)
         when type == 'string' then buildOrdinalStringScale(dataList, axis)
 
       return scale
@@ -348,7 +356,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
         numValues = 50
         step = Math.abs(stop - start) / numValues
         stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        legendData = d3.range(domain[0], domain[1], step)
+
+        legendData = d3.range(start, stop, step)
 
         legendAxis.tickValues([
           legendData[0]

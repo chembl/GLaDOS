@@ -48,7 +48,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
-      @collection.downloadAllItems(desiredFormat, $progressMessages)
+      @collection.downloadAllItems(desiredFormat, @getCurrentViewInstance().getVisibleColumns(), $progressMessages)
 
     #--------------------------------------------------------------------------------------
     # Switching Views
@@ -110,6 +110,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       console.log 'hiding view:', viewElementID
       $('#' + viewElementID).hide()
 
+    getCurrentViewInstance: -> @allViewsPerType[@currentViewType]
 
 
 
