@@ -12,7 +12,10 @@ glados.useNameSpace 'glados',
 
       nestedComparatorsList = nestedComparatorsStr.split('.')
       if nestedComparatorsList.length == 1
-        return nestedObj[(nestedComparatorsList.shift())]
+        value = nestedObj[(nestedComparatorsList.shift())]
+        if not value?
+          return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        return value
       else
         prop = nestedComparatorsList.shift()
         newObj = nestedObj[(prop)]
