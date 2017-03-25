@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @ctmView.clearVisualisation()
 
       $progressElement = $($(@el).find('.load-messages-container'))
-      deferreds = @collection.getAllResults($progressElement)
+      deferreds = @collection.getAllSelectedResults($progressElement)
 
       thisView = @
       $.when.apply($, deferreds).done( () ->

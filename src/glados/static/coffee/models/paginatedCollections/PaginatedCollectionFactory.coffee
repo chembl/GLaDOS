@@ -9,7 +9,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor: (esIndexSettings) ->
-      indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection.extend
+      indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
+      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -39,7 +40,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings) ->
-      wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection.extend
+      wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
+      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
+
         model: collectionSettings.MODEL
         initialize: ->
           @meta =
@@ -64,7 +67,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # creates a new instance of a Client Side Paginated Collection from Web Services, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
     getNewClientSideWSCollectionFor: (collectionSettings) ->
-      collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection.extend
+      collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection\
+      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
+
         model: collectionSettings.MODEL
 
         initialize: ->

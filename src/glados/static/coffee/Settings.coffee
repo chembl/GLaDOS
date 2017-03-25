@@ -122,6 +122,9 @@ glados.useNameSpace 'glados',
       SELECTION_UPDATED: 'selection-changed'
       Params:
         ALL_SELECTED:'all-selected'
+        ALL_UNSELECTED: 'all-unselected'
+        SELECTED: 'select'
+        UNSELECTED: 'unselect'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
