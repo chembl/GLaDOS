@@ -42,6 +42,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
       @loadFacetGroups()
+      if @getMeta('facets_filtered')
+        @invalidateAllDownloadedResults()
+        @unSelectAll()
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
@@ -300,6 +303,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('singular_terms', singular_terms)
       @setMeta('exact_terms', exact_terms)
       @setMeta('filter_terms', filter_terms)
+      @invalidateAllDownloadedResults()
+      @unSelectAll()
       @clearAllResults()
       @clearAllFacetsGroups()
       @setPage(1, false)
@@ -416,6 +421,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getEverything = not @thereAreExceptions()
       getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
       getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
+      console.log 'getEverything: ', getEverything
+      console.log 'getEverythingExceptSome: ', getEverythingExceptSome
+      console.log 'getOnlySome: ', getOnlySome
 
       if totalRecords >= 10000
         if $progressElement?

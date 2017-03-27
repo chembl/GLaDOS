@@ -24,8 +24,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       thisView = @
       $.when.apply($, deferreds).done( () ->
 
-        if !thisView.collection.allResults[0]?
-          # here the data has not been actually received, if this causes more trouble it needs to be investigated.
+        # here the data has not been actually received, if this causes more trouble it needs to be investigated.
+        if not thisView.collection?
+          return
+        if not thisView.collection.allResults[0]?
           return
 
         #with all items loaded now I can generate the matrix
