@@ -31,7 +31,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         thisView.compResGraphView.render()
       )
 
+    getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
 
-    wakeUpView: ->
-
-      @compResGraphView.render()
+    wakeUpView: -> @compResGraphView.render()

@@ -392,6 +392,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
+    DOWNLOADED_ITEMS_ARE_VALID: false
 
     clearAllResults: ->
       @allResults = undefined
@@ -403,6 +404,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # without requesting again to the server.
     # you can use a progress element to show the progress if you want.
     getAllSelectedResults: ($progressElement) ->
+
+      # check if I already have all the results and they are valid
+      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+        console.log 'already have all the results'
+        return jQuery.Deferred().resolve()
 
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
@@ -431,10 +437,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       url = @getURL()
       totalPages = Math.ceil(totalRecords / pageSize)
-
-      # check if I already have all the results
-      if @allResults?
-        return jQuery.Deferred().resolve()
 
       #initialise the array in which all the items are going to be saved as they are received from the server
       if getOnlySome

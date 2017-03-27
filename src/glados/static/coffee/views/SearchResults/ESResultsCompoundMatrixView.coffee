@@ -35,10 +35,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         setTimeout( (()-> $progressElement.html ''), 200)
       )
 
+    getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
 
-    wakeUpView: ->
-
-      @ctmView.render()
+    wakeUpView: -> @ctmView.render()
 
 
 
