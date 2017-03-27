@@ -158,9 +158,13 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
       return false
     )
 
+    $rejectedReslutsInfo = $(@el).find('.BCK-CompResultsGraphRejectedResults')
     if rejectedMolecules.length
-      glados.Utils.fillContentForElement $(@el).find('.BCK-CompResultsGraphRejectedResults'),
+      glados.Utils.fillContentForElement $rejectedReslutsInfo,
         rejected: rejectedMolecules
+    else
+      $rejectedReslutsInfo.html('')
+
     # --------------------------------------
     # scales
     # --------------------------------------
