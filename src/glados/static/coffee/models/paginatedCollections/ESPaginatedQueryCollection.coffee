@@ -417,10 +417,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
       getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
 
-      console.log 'getEverything: ', getEverything
-      console.log 'getEverythingExceptSome: ', getEverythingExceptSome
-      console.log 'getOnlySome: ', getOnlySome
-
       if totalRecords >= 10000
         if $progressElement?
           $progressElement.html 'It is still not supported to download 10000 items or more!'
@@ -452,7 +448,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getItemsFromPage = (currentPage) ->
 
         if getOnlySome
-          console.log 'only need to get this list: ', idsList
           data = JSON.stringify(thisCollection.getRequestDataForChemblIDs(currentPage, pageSize, idsList))
         else
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
@@ -467,13 +462,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           for i in [0..(newItems.length-1)]
 
             currentItem = newItems[i]
-            console.log 'received item: ', currentItem
-            console.log 'getEverythingExceptSome: ', getEverythingExceptSome
+
             if getEverythingExceptSome
               itemID = glados.Utils.getNestedValue(currentItem, thisCollection.getMeta('id_column').comparator)
-              console.log 'checking item:', itemID
+
               if not thisCollection.itemIsSelected(itemID)
-                console.log 'not selected, continuing'
                 continue
 
             thisCollection.allResults[i + startingPosition] = currentItem
@@ -510,7 +503,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         i++
 
     getDownloadObject: (columns) ->
-      console.log 'need to get these columns: ', columns
 
       downloadObj = []
 
@@ -527,8 +519,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         downloadObj.push row
 
-      console.log 'downloadObj2: ', downloadObj
-
       return downloadObj
 
     # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
@@ -539,8 +529,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
       $.when.apply($, deferreds).done( () ->
-
-        console.log 'thisCollection.allResults: ', thisCollection.allResults
 
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()

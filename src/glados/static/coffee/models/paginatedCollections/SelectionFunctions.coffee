@@ -4,16 +4,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     toggleSelectAll: ->
 
-      console.log 'collection: toogle select all!'
       if @getMeta('all_items_selected')
         @unSelectAll()
       else
         @selectAll()
-      console.log '^^^'
 
     toggleSelectItem: (itemID) ->
 
-      console.log 'collection: toogle select one item!'
       if @itemIsSelected(itemID)
         @unSelectItem(itemID)
       else
@@ -32,7 +29,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @selectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
-        console.log 'collection: One item was selected!'
 
     thereAreExceptions: ->
 
@@ -42,8 +38,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       isSelectionException = @getMeta('selection_exceptions')[itemID]?
       allAreSelected = @getMeta('all_items_selected')
-
-      console.log itemID, 'is currently selected?', isSelectionException != allAreSelected
       return isSelectionException != allAreSelected
 
     getSelectedItemsIDs: ->
@@ -56,7 +50,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('all_items_selected', true)
       @setMeta('selection_exceptions', {})
       @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_SELECTED)
-      console.log 'collection: ALL ITEMS WERE SELECTED!'
 
     unSelectItem: (itemID) ->
 
@@ -71,11 +64,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @unSelectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
-        console.log 'collection: One item was un selected!'
 
     unSelectAll: ->
 
       @setMeta('all_items_selected', false)
       @setMeta('selection_exceptions', {})
       @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
-      console.log 'collection: ALL ITEMS WERE UNSELECTED!'
