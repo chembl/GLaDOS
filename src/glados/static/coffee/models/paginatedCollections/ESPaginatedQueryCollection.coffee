@@ -497,7 +497,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       f0 = $.proxy( (-> @DOWNLOADED_ITEMS_ARE_VALID = true), @)
       $.when.apply($, deferreds).done -> f0()
 
-      if getEverythingExceptSome
+      if getEverythingExceptSome or getOnlySome
         f = $.proxy(@removeHolesInAllResults, @)
         $.when.apply($, deferreds).done -> f()
 
