@@ -77,7 +77,19 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @paintSelectors()
 
+  renderWhenError: ->
+
+    @clearVisualisation()
+    $(@el).find('select').material_select('destroy');
+
+    @$vis_elem.html Handlebars.compile($('#Handlebars-Common-PlotError').html())
+      static_images_url: glados.Settings.STATIC_IMAGES_URL
+
   render: ->
+
+    if @collection.DOWNLOAD_ERROR_STATE
+      @renderWhenError()
+      return
 
     # only bother if my element is visible
     if $(@el).is(":visible")
@@ -111,6 +123,8 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   clearVisualisation: ->
 
+     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+     $legendContainer.empty()
      @$vis_elem.empty()
 
   changeAxis: (event) ->

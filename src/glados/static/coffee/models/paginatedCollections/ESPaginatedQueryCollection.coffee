@@ -398,6 +398,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
     DOWNLOADED_ITEMS_ARE_VALID: false
+    DOWNLOAD_ERROR_STATE: false
     invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
     clearAllResults: -> @allResults = undefined
 
@@ -427,16 +428,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if totalRecords >= 10000 and not getOnlySome
         console.log 'TOO MANy ELEMENTS!'
-        msg = 'It is still not supported to download 10000 items or more! ('+ totalRecords + ' requested)'
+        msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
+        @DOWNLOAD_ERROR_STATE = true
         return [jQuery.Deferred().reject(msg)]
-#        if $progressElement?
-#          $progressElement.html 'It is still not supported to download 10000 items or more!'
-#
-#          # erase element contents after some milliseconds
-#          setTimeout( ()->
-#            $progressElement.html ''
-#          , 3000)
-#        return
 
       if $progressElement?
         $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
@@ -498,7 +492,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      f0 = $.proxy( (-> @DOWNLOADED_ITEMS_ARE_VALID = true), @)
+      f0 = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true;@DOWNLOAD_ERROR_STATE = false), @)
       $.when.apply($, deferreds).done -> f0()
 
       if getEverythingExceptSome or getOnlySome
