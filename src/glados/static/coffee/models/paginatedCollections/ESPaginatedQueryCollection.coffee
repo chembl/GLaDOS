@@ -518,7 +518,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for col in columns
           colLabel = col.name_to_show
           colValue = glados.Utils.getNestedValue(item, col.comparator)
-          row[colLabel] = colValue
+          if col.parse_function?
+            row[colLabel] = col.parse_function(colValue)
+          else
+            row[colLabel] = colValue
 
         downloadObj.push row
 
