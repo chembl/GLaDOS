@@ -168,6 +168,13 @@
   <div class="col s12 m6 l4">
 
     <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}}">
+
+      <div class='checkbox-container'>
+        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
+           {{#if is_selected}}checked="checked"{{/if}}/>
+          <label for="BCK-cards-{{base_check_box_id}}-select"></label>
+      </div>
+
       {{#if img_url}}
         <div class="white card-image" >
           <img src="{{img_url}}" height="150px" width="150px" >

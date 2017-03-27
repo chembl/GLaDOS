@@ -144,7 +144,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @sendDataToTemplate $($elem[i])
         @showFooterContainer()
       else
-        @hideHeaderContainer()
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
