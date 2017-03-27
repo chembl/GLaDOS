@@ -37,7 +37,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
 
-    wakeUpView: -> @ctmView.render()
+    wakeUpView: ->
+
+      if @collection.DOWNLOADED_ITEMS_ARE_VALID
+        @ctmView.render()
+      else
+        @fetchInfoForMatrix()
 
 
 

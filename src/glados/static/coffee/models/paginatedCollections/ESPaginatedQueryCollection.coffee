@@ -393,9 +393,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
     DOWNLOADED_ITEMS_ARE_VALID: false
-
-    clearAllResults: ->
-      @allResults = undefined
+    invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
+    clearAllResults: -> @allResults = undefined
 
     # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
     # but in the future it could be used to optimize the pagination after this has been called.
@@ -407,9 +406,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
-        console.log 'already have all the results'
+        console.log ' the downloaded are valid!'
         return jQuery.Deferred().resolve()
 
+      console.log ' the downloaded are NOT valid!'
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
@@ -485,6 +485,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Now I request all pages, I accumulate all the deferreds in a list
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
+
+      f0 = $.proxy( (-> @DOWNLOADED_ITEMS_ARE_VALID = true), @)
+      $.when.apply($, deferreds).done -> f0()
 
       if getEverythingExceptSome
         f = $.proxy(@removeHolesInAllResults, @)
