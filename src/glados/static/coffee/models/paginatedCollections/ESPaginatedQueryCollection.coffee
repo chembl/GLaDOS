@@ -412,7 +412,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
         console.log ' the downloaded are valid!'
-        return jQuery.Deferred().resolve()
+        return [jQuery.Deferred().resolve()]
 
       console.log ' the downloaded are NOT valid!'
       totalRecords = @getMeta('total_records')
@@ -425,29 +425,33 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'getEverythingExceptSome: ', getEverythingExceptSome
       console.log 'getOnlySome: ', getOnlySome
 
-      if totalRecords >= 10000
-        if $progressElement?
-          $progressElement.html 'It is still not supported to download 10000 items or more!'
-
-          # erase element contents after some milliseconds
-          setTimeout( ()->
-            $progressElement.html ''
-          , 3000)
-        return
+      if totalRecords >= 10000 and not getOnlySome
+        console.log 'TOO MANy ELEMENTS!'
+        msg = 'It is still not supported to download 10000 items or more! ('+ totalRecords + ' requested)'
+        return [jQuery.Deferred().reject(msg)]
+#        if $progressElement?
+#          $progressElement.html 'It is still not supported to download 10000 items or more!'
+#
+#          # erase element contents after some milliseconds
+#          setTimeout( ()->
+#            $progressElement.html ''
+#          , 3000)
+#        return
 
       if $progressElement?
         $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
           percentage: '0'
 
       url = @getURL()
-      totalPages = Math.ceil(totalRecords / pageSize)
 
       #initialise the array in which all the items are going to be saved as they are received from the server
       if getOnlySome
         idsList = Object.keys(@getMeta('selection_exceptions'))
         @allResults = (undefined for num in [1..idsList.length])
+        totalPages = Math.ceil(idsList.length / pageSize)
       else
         @allResults = (undefined for num in [1..totalRecords])
+        totalPages = Math.ceil(totalRecords / pageSize)
       itemsReceived = 0
 
       #this function knows how to get one page of results and add them in the corresponding positions in the all
@@ -536,16 +540,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     downloadAllItems: (format, columns, $progressElement) ->
 
       deferreds = @getAllSelectedResults($progressElement)
+      console.log 'deferreds: ', deferreds
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
-      $.when.apply($, deferreds).done( () ->
+      $.when.apply($, deferreds).done( ->
 
+        console.log 'GENERATING FILE!'
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
         downloadObject = thisCollection.getDownloadObject.call(thisCollection, columns)
-
 
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
@@ -562,4 +567,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
 
+      ).fail( (msg) ->
+
+        if $progressElement?
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+            msg: msg
       )
