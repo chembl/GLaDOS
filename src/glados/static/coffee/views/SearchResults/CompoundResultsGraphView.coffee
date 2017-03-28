@@ -126,6 +126,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
      $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
      $legendContainer.empty()
      @$vis_elem.empty()
+     $(@el).find('.BCK-CompResultsGraphRejectedResults').empty()
 
   changeAxis: (event) ->
 
