@@ -35,6 +35,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         thisView.ctm.fetch()
 
         setTimeout( (()-> $progressElement.html ''), 200)
+      ).fail( (msg) ->
+
+        if $progressElement?
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+            msg: msg
+
+        thisView.ctmView.renderWhenError()
       )
 
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))

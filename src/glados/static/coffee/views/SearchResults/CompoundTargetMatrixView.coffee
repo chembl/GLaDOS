@@ -9,6 +9,16 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
+  renderWhenError: ->
+
+    @clearVisualisation()
+#    $(@el).find('select').material_select('destroy');
+
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    $messagesElement.html ''
+
+    @$vis_elem.html Handlebars.compile($('#Handlebars-Common-MatrixError').html())
+      static_images_url: glados.Settings.STATIC_IMAGES_URL
 
   render: ->
 
@@ -36,6 +46,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @clearControls()
     @clearMatrix()
+
+    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendContainer.empty()
 
   clearControls: ->
 
