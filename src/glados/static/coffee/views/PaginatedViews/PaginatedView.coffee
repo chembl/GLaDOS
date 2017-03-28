@@ -133,8 +133,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.length > 0
         for i in [0..$elem.length - 1]
           @sendDataToTemplate $($elem[i])
+        @showHeaderContainer()
         @showFooterContainer()
       else
+        @hideHeaderContainer()
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
@@ -543,9 +545,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     hidePreloaderOnly: ->
       $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
       $preloaderCont.hide()
-  
+
+    showHeaderContainer: ->
+      $headerRow = $(@el).find('.BCK-header-container,.BCK-top-scroller-container')
+      $headerRow.show()
+
     hideHeaderContainer: ->
-      $headerRow = $(@el).find('.BCK-header-container')
+      $headerRow = $(@el).find('.BCK-header-container,.BCK-top-scroller-container')
       $headerRow.hide()
   
     hideFooterContainer: ->
@@ -555,7 +561,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     showFooterContainer: ->
       $headerRow = $(@el).find('.BCK-footer-container')
       $headerRow.show()
-  
+
     hideContentContainer: ->
       $headerRow = $(@el).find('.BCK-items-container')
       $headerRow.hide()
