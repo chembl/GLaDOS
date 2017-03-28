@@ -30,6 +30,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options) ->
       @trigger('before_fetch_elastic')
       @url = @getURL()
+
+      if @getMeta('facets_filtered')
+        @invalidateAllDownloadedResults()
+        @unSelectAll()
+        @setMeta('current_page', 1)
+
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
@@ -42,9 +48,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
       @loadFacetGroups()
-      if @getMeta('facets_filtered')
-        @invalidateAllDownloadedResults()
-        @unSelectAll()
+
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
