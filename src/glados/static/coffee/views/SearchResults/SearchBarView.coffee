@@ -307,7 +307,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     switchShowAdvanced: ->
       @showAdvanced = not @showAdvanced
-      console.log(@showAdvanced)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Component rendering
