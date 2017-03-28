@@ -435,6 +435,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
         return [jQuery.Deferred().reject(msg)]
+      else if totalRecords == 0
+        msg = 'There are no items to process'
+        return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
         $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )

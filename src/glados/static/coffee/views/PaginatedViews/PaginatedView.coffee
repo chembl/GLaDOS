@@ -547,11 +547,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $preloaderCont.hide()
 
     showHeaderContainer: ->
-      $headerRow = $(@el).find('.BCK-header-container')
+      $headerRow = $(@el).find('.BCK-header-container,.BCK-top-scroller-container')
       $headerRow.show()
 
     hideHeaderContainer: ->
-      $headerRow = $(@el).find('.BCK-header-container')
+      $headerRow = $(@el).find('.BCK-header-container,.BCK-top-scroller-container')
       $headerRow.hide()
   
     hideFooterContainer: ->
