@@ -244,7 +244,6 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       dataList = (glados.Utils.getNestedValue(mol, property.prop_name) for mol in molecules)
       type = thisView.currentPropertyColour.type
-      console.log 'type is: ', type
       scale = switch
         when type == 'number' then buildLinearNumericScale(dataList, axis, thisView.currentPropertyColour.default_domain)
         when type == 'string' then buildOrdinalStringScale(dataList, axis)

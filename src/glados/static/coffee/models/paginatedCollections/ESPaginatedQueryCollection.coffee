@@ -418,22 +418,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         $progressElement.empty()
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
-        console.log ' the downloaded are valid!'
         return [jQuery.Deferred().resolve()]
 
-      console.log ' the downloaded are NOT valid!'
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
       getEverything = not @thereAreExceptions()
       getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
       getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
-      console.log 'getEverything: ', getEverything
-      console.log 'getEverythingExceptSome: ', getEverythingExceptSome
-      console.log 'getOnlySome: ', getOnlySome
 
       if totalRecords >= 10000 and not getOnlySome
-        console.log 'TOO MANy ELEMENTS!'
         msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
         errorModalID = 'error-' + parseInt(Math.random() * 1000)
@@ -551,13 +545,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     downloadAllItems: (format, columns, $progressElement) ->
 
       deferreds = @getAllSelectedResults($progressElement)
-      console.log 'deferreds: ', deferreds
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
       $.when.apply($, deferreds).done( ->
 
-        console.log 'GENERATING FILE!'
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
