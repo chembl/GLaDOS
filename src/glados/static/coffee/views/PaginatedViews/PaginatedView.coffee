@@ -61,43 +61,34 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Selection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectAll: ->
-      console.log 'toggle select all!'
       @collection.toggleSelectAll()
 
     toggleSelectOneItem: (event) ->
 
-      console.log 'toggle select one item!'
       #for id structure the elem id must always be in the third position
       elemID = $(event.currentTarget).attr('id').split('-')[2]
       @collection.toggleSelectItem(elemID)
 
     selectionChangedHandler: (action, itemID)->
 
-      console.log 'SELECTION EVENT'
       if action == glados.Events.Collections.Params.ALL_SELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
-        console.log('select all painted as checked')
 
       else if action == glados.Events.Collections.Params.ALL_UNSELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
-        console.log('select all painted as NOT checked')
 
       else if action == glados.Events.Collections.Params.SELECTED
-
         endingID = itemID + '-select'
         $(@el).find('[id$=' + endingID + ']').prop('checked', true)
-        console.log('one item was selected, need to paint that: ', action, itemID + '-select')
 
       else if action == glados.Events.Collections.Params.UNSELECTED
 
         endingID = itemID + '-select'
         $(@el).find('[id$=' + endingID + ']').prop('checked', false)
         $(@el).find('.BCK-toggle-select-all').prop('checked', false)
-        console.log('one item was UNselected, need to paint that: ', action, itemID + '-select')
 
-  
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -144,7 +135,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @sendDataToTemplate $($elem[i])
         @showFooterContainer()
       else
-        @hideHeaderContainer()
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
@@ -272,8 +262,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Table header pinner
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
-  
-      console.log 'setting up table header pinner'
   
       #use the top scroller to trigger the pin
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')

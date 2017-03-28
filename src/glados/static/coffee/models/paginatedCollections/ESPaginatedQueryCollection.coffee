@@ -30,6 +30,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options) ->
       @trigger('before_fetch_elastic')
       @url = @getURL()
+
+      if @getMeta('facets_filtered')
+        @invalidateAllDownloadedResults()
+        @unSelectAll()
+        @setMeta('current_page', 1)
+
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
@@ -42,6 +48,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
       @loadFacetGroups()
+
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
@@ -300,6 +307,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('singular_terms', singular_terms)
       @setMeta('exact_terms', exact_terms)
       @setMeta('filter_terms', filter_terms)
+      @invalidateAllDownloadedResults()
+      @unSelectAll()
       @clearAllResults()
       @clearAllFacetsGroups()
       @setPage(1, false)
@@ -392,9 +401,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
-
-    clearAllResults: ->
-      @allResults = undefined
+    DOWNLOADED_ITEMS_ARE_VALID: false
+    DOWNLOAD_ERROR_STATE: false
+    invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
+    clearAllResults: -> @allResults = undefined
 
     # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
     # but in the future it could be used to optimize the pagination after this has been called.
@@ -404,44 +414,42 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # you can use a progress element to show the progress if you want.
     getAllSelectedResults: ($progressElement) ->
 
+      # check if I already have all the results and they are valid
+      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+        console.log ' the downloaded are valid!'
+        return [jQuery.Deferred().resolve()]
+
+      console.log ' the downloaded are NOT valid!'
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
       getEverything = not @thereAreExceptions()
       getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
       getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
-
       console.log 'getEverything: ', getEverything
       console.log 'getEverythingExceptSome: ', getEverythingExceptSome
       console.log 'getOnlySome: ', getOnlySome
 
-      if totalRecords >= 10000
-        if $progressElement?
-          $progressElement.html 'It is still not supported to download 10000 items or more!'
-
-          # erase element contents after some milliseconds
-          setTimeout( ()->
-            $progressElement.html ''
-          , 3000)
-        return
+      if totalRecords >= 10000 and not getOnlySome
+        console.log 'TOO MANy ELEMENTS!'
+        msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
+        @DOWNLOAD_ERROR_STATE = true
+        return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
         $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
           percentage: '0'
 
       url = @getURL()
-      totalPages = Math.ceil(totalRecords / pageSize)
-
-      # check if I already have all the results
-      if @allResults?
-        return jQuery.Deferred().resolve()
 
       #initialise the array in which all the items are going to be saved as they are received from the server
       if getOnlySome
         idsList = Object.keys(@getMeta('selection_exceptions'))
         @allResults = (undefined for num in [1..idsList.length])
+        totalPages = Math.ceil(idsList.length / pageSize)
       else
         @allResults = (undefined for num in [1..totalRecords])
+        totalPages = Math.ceil(totalRecords / pageSize)
       itemsReceived = 0
 
       #this function knows how to get one page of results and add them in the corresponding positions in the all
@@ -450,7 +458,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getItemsFromPage = (currentPage) ->
 
         if getOnlySome
-          console.log 'only need to get this list: ', idsList
           data = JSON.stringify(thisCollection.getRequestDataForChemblIDs(currentPage, pageSize, idsList))
         else
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
@@ -465,13 +472,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           for i in [0..(newItems.length-1)]
 
             currentItem = newItems[i]
-            console.log 'received item: ', currentItem
-            console.log 'getEverythingExceptSome: ', getEverythingExceptSome
+
             if getEverythingExceptSome
               itemID = glados.Utils.getNestedValue(currentItem, thisCollection.getMeta('id_column').comparator)
-              console.log 'checking item:', itemID
+
               if not thisCollection.itemIsSelected(itemID)
-                console.log 'not selected, continuing'
                 continue
 
             thisCollection.allResults[i + startingPosition] = currentItem
@@ -491,7 +496,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      if getEverythingExceptSome
+      f0 = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true;@DOWNLOAD_ERROR_STATE = false), @)
+      $.when.apply($, deferreds).done -> f0()
+
+      if getEverythingExceptSome or getOnlySome
         f = $.proxy(@removeHolesInAllResults, @)
         $.when.apply($, deferreds).done -> f()
 
@@ -508,7 +516,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         i++
 
     getDownloadObject: (columns) ->
-      console.log 'need to get these columns: ', columns
 
       downloadObj = []
 
@@ -518,11 +525,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for col in columns
           colLabel = col.name_to_show
           colValue = glados.Utils.getNestedValue(item, col.comparator)
-          row[colLabel] = colValue
+          if col.parse_function?
+            row[colLabel] = col.parse_function(colValue)
+          else
+            row[colLabel] = colValue
 
         downloadObj.push row
-
-      console.log 'downloadObj2: ', downloadObj
 
       return downloadObj
 
@@ -530,18 +538,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     downloadAllItems: (format, columns, $progressElement) ->
 
       deferreds = @getAllSelectedResults($progressElement)
+      console.log 'deferreds: ', deferreds
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
-      $.when.apply($, deferreds).done( () ->
+      $.when.apply($, deferreds).done( ->
 
-        console.log 'thisCollection.allResults: ', thisCollection.allResults
-
+        console.log 'GENERATING FILE!'
         if $progressElement?
           $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
 
         downloadObject = thisCollection.getDownloadObject.call(thisCollection, columns)
-
 
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
@@ -558,4 +565,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
 
+      ).fail( (msg) ->
+
+        if $progressElement?
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+            msg: msg
       )

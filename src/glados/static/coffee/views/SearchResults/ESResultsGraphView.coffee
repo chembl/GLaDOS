@@ -29,9 +29,20 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         $progressElement.html ''
         thisView.compResGraphView.render()
+      ).fail( (msg) ->
+
+        if $progressElement?
+          $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+            msg: msg
+
+        thisView.compResGraphView.renderWhenError()
       )
 
+    getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
 
     wakeUpView: ->
 
-      @compResGraphView.render()
+      if @collection.DOWNLOADED_ITEMS_ARE_VALID
+        @compResGraphView.render()
+      else
+        @fetchInfoForGraph()
