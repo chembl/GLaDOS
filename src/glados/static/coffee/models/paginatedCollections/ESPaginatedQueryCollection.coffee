@@ -414,6 +414,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # you can use a progress element to show the progress if you want.
     getAllSelectedResults: ($progressElement) ->
 
+      if $progressElement?
+        $progressElement.empty()
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
         console.log ' the downloaded are valid!'
@@ -434,6 +436,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'TOO MANy ELEMENTS!'
         msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
+        errorModalID = 'error-' + parseInt(Math.random() * 1000)
+        $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
+          modal_id: errorModalID
+          msg: msg
+        )
+        $('#BCK-GeneratedModalsContainer').append($newModal)
+        $newModal.modal()
+        $newModal.modal('open')
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'
@@ -499,8 +509,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      f0 = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true;@DOWNLOAD_ERROR_STATE = false), @)
-      $.when.apply($, deferreds).done -> f0()
+      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true;@DOWNLOAD_ERROR_STATE = false), @)
+      $.when.apply($, deferreds).done -> setValidDownload()
 
       if getEverythingExceptSome or getOnlySome
         f = $.proxy(@removeHolesInAllResults, @)
