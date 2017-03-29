@@ -14,7 +14,6 @@ describe "Target", ->
     ), 10000
 
   it "(SERVER DEPENDENT) loads the protein target classification", (done) ->
-    console.log(target)
     classification = target.get('protein_classifications')
     class1 = classification[8][0]
     class2 = classification[601][0]

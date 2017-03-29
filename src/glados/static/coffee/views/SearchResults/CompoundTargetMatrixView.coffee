@@ -609,6 +609,25 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
+
+    setUpTooltip = ->
+
+      $clickedElem = $(@)
+      console.log 'elem was clicked'
+      if not $clickedElem.attr('data-qtip-configured')
+        console.log 'configuring tooltip'
+        $clickedElem.qtip
+         content:
+          text:'hola'
+          button: 'close'
+         show:
+          event: 'click'
+          solo: true
+         hide: 'click'
+
+        $clickedElem.qtip('api').show()
+        $clickedElem.attr('data-qtip-configured', true)
+
     rows.append("text")
       .attr("x", -LABELS_PADDING)
       .attr("y", getYCoord.rangeBand() / 2)
@@ -619,10 +638,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text( (d, i) -> d.label )
-      .classed('tooltipped', true)
-      .attr('data-position', 'bottom')
-      .attr('data-delay', '50')
-      .attr('data-tooltip', getRowTooltip)
+      .on('click', setUpTooltip)
 
     # --------------------------------------
     # Add columns
@@ -636,6 +652,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter().append("g")
       .attr("class", "vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
+
+    openColLink = $.proxy(((label) -> window.open(@model.getLinkForColHeader(label))), @)
 
     columns.append("text")
       .attr("x", LABELS_PADDING)
@@ -652,6 +670,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('data-position', 'bottom')
       .attr('data-delay', '50')
       .attr('data-tooltip', getColumnTooltip)
+      .on('click', (d) -> openColLink d.label)
 
     columnsWithDivLines = g.selectAll(".vis-column")
 
