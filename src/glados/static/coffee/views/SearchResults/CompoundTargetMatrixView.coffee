@@ -617,7 +617,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
 
-    testRowHTML = '<div class="card horizontal grey lighten-5 z-depth-0">
+    testRowHTML = '<div><div class="card horizontal grey lighten-5 z-depth-0">
 
         <div class="white card-image">
           <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL59.svg?engine=indigo" height="150px" width="150px">
@@ -651,18 +651,20 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           </small>
 
         </div>
-    </div>'
+    </div></div>'
 
 
-    setUpRowTooltip = ->
+    setUpRowTooltip = (d) ->
 
       $clickedElem = $(@)
-      console.log 'elem was clicked'
+      chemblID = d.label
       if not $clickedElem.attr('data-qtip-configured')
+        miniRepCardID = 'BCK-MiniReportCard-' + chemblID
         console.log 'configuring tooltip'
+
         $clickedElem.qtip
          content:
-          text:testRowHTML
+          text: '<div id="' + miniRepCardID + '"></div>'
           button: 'close'
          show:
           event: 'click'
@@ -673,6 +675,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         $clickedElem.qtip('api').show()
         $clickedElem.attr('data-qtip-configured', true)
+
+        $newMiniReportCardContainer = $('#' + miniRepCardID)
+        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
     rows.append("text")
       .attr("x", -LABELS_PADDING)
