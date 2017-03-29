@@ -615,7 +615,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         <div class="white card-image">
           <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL59.svg?engine=indigo" height="150px" width="150px">
         </div>
-      <div class="card-stacked">
         <div class="card-content">
 
 
@@ -645,7 +644,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           </small>
 
         </div>
-      </div>
     </div>'
 
 
@@ -697,7 +695,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     testColHTML = '<div class="card horizontal grey lighten-5">
 
-      <div class="card-stacked">
         <div class="card-content">
 
           <p><a href="/target_report_card/CHEMBL2331075" target="_blank">CHEMBL2331075</a>
@@ -717,7 +714,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           </small>
 
         </div>
-      </div>
     </div>'
 
     setUpColTooltip = ->
@@ -735,7 +731,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           solo: true
          hide: 'click'
          style:
-          classes:'matrix-qtip qtip-light qtip-shadow'
+          classes:'matrix-qtip qtip-light qtip-shadow flow-text'
+         position:
+          my: 'top left'
+          at: 'bottom left'
 
         $clickedElem.qtip('api').show()
         $clickedElem.attr('data-qtip-configured', true)

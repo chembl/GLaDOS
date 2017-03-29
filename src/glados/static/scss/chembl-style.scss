@@ -2118,11 +2118,16 @@ span.badge-primary-color-no-float {
 }
 
 .matrix-qtip {
-  .qtip-content{
+
+  .qtip-content {
     padding: 0;
+    font-size: 120%;
   }
-  .card{
+  .card {
     margin: 0;
+    .card-content{
+      padding: 12px;
+    }
   }
 }
 
