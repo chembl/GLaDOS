@@ -106,6 +106,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     hideView: (viewType) ->
 
+      if @allViewsPerType[viewType].sleepView?
+          @allViewsPerType[viewType].sleepView()
+
       viewElementID = @viewContainerID + '-' + viewType
       console.log 'hiding view:', viewElementID
       $('#' + viewElementID).hide()

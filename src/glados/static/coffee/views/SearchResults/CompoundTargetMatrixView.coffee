@@ -38,12 +38,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       $messagesElement.html ''
 
+  destroyAllTooltips: ->
+
+    $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
+    $elemsWithToolTip.each (index, elem) ->
+      $(elem).qtip('destroy', true)
+
   clearVisualisation: ->
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
       message: 'Generating Visualisation...'
 
+    @destroyAllTooltips()
     @clearControls()
     @clearMatrix()
 
