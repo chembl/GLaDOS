@@ -610,7 +610,46 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
 
-    setUpTooltip = ->
+    testRowHTML = '<div class="card horizontal grey lighten-5 z-depth-0">
+
+        <div class="white card-image">
+          <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL59.svg?engine=indigo" height="150px" width="150px">
+        </div>
+      <div class="card-stacked">
+        <div class="card-content">
+
+
+
+          <p><a href="/compound_report_card/CHEMBL59" target="_blank">CHEMBL59</a>
+          </p>
+
+
+          <small>
+            <p><b>Name:</b> DOPAMINE</p>
+          </small>
+
+          <small>
+            <p><b>Max Phase:</b> 4</p>
+          </small>
+
+          <small>
+            <p><b>MWt:</b> 153.18</p>
+          </small>
+
+          <small>
+            <p><b>#RO5:</b> 0</p>
+          </small>
+
+          <small>
+            <p><b>ALogP:</b> 0.77</p>
+          </small>
+
+        </div>
+      </div>
+    </div>'
+
+
+    setUpRowTooltip = ->
 
       $clickedElem = $(@)
       console.log 'elem was clicked'
@@ -618,12 +657,14 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         console.log 'configuring tooltip'
         $clickedElem.qtip
          content:
-          text:'hola'
+          text:testRowHTML
           button: 'close'
          show:
           event: 'click'
           solo: true
          hide: 'click'
+         style:
+          classes:'matrix-qtip qtip-light qtip-shadow'
 
         $clickedElem.qtip('api').show()
         $clickedElem.attr('data-qtip-configured', true)
@@ -638,7 +679,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text( (d, i) -> d.label )
-      .on('click', setUpTooltip)
+      .on('click', setUpRowTooltip)
 
     # --------------------------------------
     # Add columns
@@ -653,7 +694,52 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("class", "vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
-    openColLink = $.proxy(((label) -> window.open(@model.getLinkForColHeader(label))), @)
+
+    testColHTML = '<div class="card horizontal grey lighten-5">
+
+      <div class="card-stacked">
+        <div class="card-content">
+
+          <p><a href="/target_report_card/CHEMBL2331075" target="_blank">CHEMBL2331075</a>
+          </p>
+
+
+          <small>
+            <p><b>Name:</b> D2-like dopamine receptor</p>
+          </small>
+
+          <small>
+            <p><b>Type:</b> PROTEIN FAMILY</p>
+          </small>
+
+          <small>
+            <p><b>Organism:</b> Homo sapiens</p>
+          </small>
+
+        </div>
+      </div>
+    </div>'
+
+    setUpColTooltip = ->
+
+      $clickedElem = $(@)
+      console.log 'elem was clicked'
+      if not $clickedElem.attr('data-qtip-configured')
+        console.log 'configuring tooltip'
+        $clickedElem.qtip
+         content:
+          text:testColHTML
+          button: 'close'
+         show:
+          event: 'click'
+          solo: true
+         hide: 'click'
+         style:
+          classes:'matrix-qtip qtip-light qtip-shadow'
+
+        $clickedElem.qtip('api').show()
+        $clickedElem.attr('data-qtip-configured', true)
+
 
     columns.append("text")
       .attr("x", LABELS_PADDING)
@@ -666,11 +752,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text((d, i) -> d.label )
-      .classed('tooltipped', true)
-      .attr('data-position', 'bottom')
-      .attr('data-delay', '50')
-      .attr('data-tooltip', getColumnTooltip)
-      .on('click', (d) -> openColLink d.label)
+      .on('click', setUpColTooltip)
 
     columnsWithDivLines = g.selectAll(".vis-column")
 
