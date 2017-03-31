@@ -381,3 +381,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.CHEMBL_ID,
   ]
 }
+
+Compound.MINI_REPORT_CARD =
+  LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
+  TEMPLATE: 'Handlebars-Common-MiniReportCard'

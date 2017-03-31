@@ -1,6 +1,14 @@
 CompoundMiniReportCardView = Backbone.View.extend
 
-  LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   initialize: ->
+    @model.on 'change', @.render, @
+    templateCont = $('#' + Compound.MINI_REPORT_CARD.LOADING_TEMPLATE).html()
+    $(@el).html Handlebars.compile(templateCont)()
 
-    $(@el).html Handlebars.compile($('#' + @LOADING_TEMPLATE).html())()
+  render: ->
+
+    console.log 'LOADED!'
+    $(@el).html 'loaded!'
+
+
+
