@@ -173,43 +173,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       allAreSelected =  @collection.getMeta('all_items_selected')
   
       for item in @collection.getCurrentPage()
-  
-        img_url = ''
-        # handlebars only allow very simple logic, we have to help the template here and
-        # give it everything as ready as possible
-  
-        columnsWithValues = visibleColumns.map (col_desc) ->
-          return_col = {}
-          return_col.name_to_show = col_desc['name_to_show']
-          
-          col_value = glados.Utils.getNestedValue(item.attributes, col_desc.comparator)
-  
-          if _.isBoolean(col_value)
-            return_col['value'] = if col_value then 'Yes' else 'No'
-          else
-            return_col['value'] = col_value
-  
-          if _.has(col_desc, 'parse_function')
-            return_col['value'] = col_desc['parse_function'](col_value)
-  
-          return_col['has_link'] = _.has(col_desc, 'link_base')
-          return_col['link_url'] = item.get(col_desc['link_base']) unless !return_col['has_link']
-          if _.has(col_desc, 'image_base_url')
-            img_url = item.get(col_desc['image_base_url'])
-            return_col['img_url'] = img_url
-          if _.has(col_desc, 'custom_field_template')
-            return_col['custom_html'] = Handlebars.compile(col_desc['custom_field_template'])
-              val: return_col['value']
-  
-          # This method should return a value based on the parameter, not modify the parameter
-          return return_col
-  
+
+        columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
         new_item_cont = Handlebars.compile( $item_template.html() )
           base_check_box_id: idColumnValue
           is_selected: @collection.itemIsSelected(idColumnValue)
-          img_url: img_url
+          img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
   
         $append_to.append($(new_item_cont))

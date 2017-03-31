@@ -199,6 +199,15 @@ class CompoundReportCardApp
 
     compoundMetabolism.fetch()
 
+  @initMiniCompoundReportCard = ($containerElem, chemblID)->
+
+    compound = new Compound({molecule_chembl_id: chemblID})
+    new MiniReportCardView
+      el: $containerElem
+      model: compound
+      entity: Compound
+    compound.fetch()
+
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------

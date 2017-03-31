@@ -109,3 +109,8 @@ Target.COLUMNS_SETTINGS = {
     }
   ]
 }
+
+Target.MINI_REPORT_CARD =
+  LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
+  TEMPLATE: 'Handlebars-Common-MiniReportCard'
+  COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE

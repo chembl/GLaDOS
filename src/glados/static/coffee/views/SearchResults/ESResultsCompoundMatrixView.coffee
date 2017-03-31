@@ -54,4 +54,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @fetchInfoForMatrix()
 
 
+    sleepView: ->
+      
+      @ctmView.destroyAllTooltips()
 

@@ -93,3 +93,12 @@ class TargetReportCardApp
 
     appDrugsClinCandsList.fetch()
 
+  @initMiniTargetReportCard = ($containerElem, chemblID) ->
+
+    target = new Target({target_chembl_id: chemblID})
+    new MiniReportCardView
+      el: $containerElem
+      model: target
+      entity: Target
+    target.fetch()
+
