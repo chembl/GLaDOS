@@ -25,6 +25,47 @@ glados.useNameSpace 'glados',
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 
 
+    # given an model and a list of columns to show, it gives an object ready to be passed to a
+    # handlebars template, with the corresponding values for each column
+    # handlebars only allow very simple logic, we have to help the template here and
+    # give it everything as ready as possible
+    getColumnsWithValues: (columns, model) ->
+
+      return columns.map (colDescription) ->
+
+        returnCol = {}
+        returnCol.name_to_show = colDescription['name_to_show']
+
+        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
+
+        if _.isBoolean(col_value)
+          returnCol['value'] = if col_value then 'Yes' else 'No'
+        else
+          returnCol['value'] = col_value
+
+        if _.has(colDescription, 'parse_function')
+          returnCol['value'] = colDescription['parse_function'](col_value)
+
+        returnCol['has_link'] = _.has(colDescription, 'link_base')
+        returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
+        if _.has(colDescription, 'image_base_url')
+          img_url = model.get(colDescription['image_base_url'])
+          returnCol['img_url'] = img_url
+        if _.has(colDescription, 'custom_field_template')
+          returnCol['custom_html'] = Handlebars.compile(colDescription['custom_field_template'])
+            val: returnCol['value']
+
+        # This method should return a value based on the parameter, not modify the parameter
+        return returnCol
+
+    #gets the image url from the first column with values that has a 'img_url'
+    getImgURL: (columnsWithValues) ->
+
+      for col in columnsWithValues
+        if col['img_url']?
+          return col['img_url']
+      return null
+
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj)->
 
