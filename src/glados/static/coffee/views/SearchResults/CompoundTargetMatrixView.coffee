@@ -616,30 +616,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
-    setUpRowTooltip = (d) ->
-
-      $clickedElem = $(@)
-      chemblID = d.label
-      if not $clickedElem.attr('data-qtip-configured')
-        miniRepCardID = 'BCK-MiniReportCard-' + chemblID
-        console.log 'configuring tooltip'
-
-        $clickedElem.qtip
-         content:
-          text: '<div id="' + miniRepCardID + '"></div>'
-          button: 'close'
-         show:
-          event: 'click'
-          solo: true
-         hide: 'click'
-         style:
-          classes:'matrix-qtip qtip-light qtip-shadow'
-
-        $clickedElem.qtip('api').show()
-        $clickedElem.attr('data-qtip-configured', true)
-
-        $newMiniReportCardContainer = $('#' + miniRepCardID)
-        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+    setUpRowTooltip = @generateTooltipFunction('Compound')
 
     rows.append("text")
       .attr("x", -LABELS_PADDING)
@@ -669,52 +646,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
 
-    testColHTML = '<div class="card horizontal grey lighten-5">
-
-        <div class="card-content">
-
-          <p><a href="/target_report_card/CHEMBL2331075" target="_blank">CHEMBL2331075</a>
-          </p>
-
-
-          <small>
-            <p><b>Name:</b> D2-like dopamine receptor</p>
-          </small>
-
-          <small>
-            <p><b>Type:</b> PROTEIN FAMILY</p>
-          </small>
-
-          <small>
-            <p><b>Organism:</b> Homo sapiens</p>
-          </small>
-
-        </div>
-    </div>'
-
-    setUpColTooltip = ->
-
-      $clickedElem = $(@)
-      console.log 'elem was clicked'
-      if not $clickedElem.attr('data-qtip-configured')
-        console.log 'configuring tooltip'
-        $clickedElem.qtip
-         content:
-          text:testColHTML
-          button: 'close'
-         show:
-          event: 'click'
-          solo: true
-         hide: 'click'
-         style:
-          classes:'matrix-qtip qtip-light qtip-shadow flow-text'
-         position:
-          my: 'top left'
-          at: 'bottom left'
-
-        $clickedElem.qtip('api').show()
-        $clickedElem.attr('data-qtip-configured', true)
-
+    setUpColTooltip = @generateTooltipFunction('Target')
 
     columns.append("text")
       .attr("x", LABELS_PADDING)
@@ -876,8 +808,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
       triggerRowSortTransition()
 
-
-
     triggerColSortTransition = ->
       t = g.transition().duration(2500)
       t.selectAll(".vis-column")
@@ -993,5 +923,51 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_VIS_HEIGHT = 300
     adjustVisHeight()
     ZOOM_ACTIVATED = false
+
+  generateTooltipFunction: (entityName) ->
+
+    return (d) ->
+
+      $clickedElem = $(@)
+      if entityName == 'Target'
+        chemblID = d.label.replace('Targ: ', '')
+      else
+        chemblID = d.label
+      if $clickedElem.attr('data-qtip-configured')
+        return
+
+      miniRepCardID = 'BCK-MiniReportCard-' + chemblID
+      console.log 'configuring tooltip'
+
+      qtipConfig =
+        content:
+          text: '<div id="' + miniRepCardID + '"></div>'
+          button: 'close'
+        show:
+          event: 'click'
+          solo: true
+        hide: 'click'
+        style:
+          classes:'matrix-qtip qtip-light qtip-shadow'
+
+      if entityName == 'Target'
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom left'
+
+
+      $clickedElem.qtip qtipConfig
+
+      $clickedElem.qtip('api').show()
+      $clickedElem.attr('data-qtip-configured', true)
+
+      $newMiniReportCardContainer = $('#' + miniRepCardID)
+
+      if entityName == 'Target'
+        TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
+      else
+        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+
+
 
 
