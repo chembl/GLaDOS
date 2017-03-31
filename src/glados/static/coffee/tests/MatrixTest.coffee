@@ -4,7 +4,6 @@ describe "Compounds vs Target Matrix", ->
 
   beforeAll (done) ->
     simulateDataMatrix(ctm, glados.Settings.STATIC_URL + 'testData/MatrixTestData0.json', done)
-    done()
 
   it 'Gives the correct link for a column', ->
     expect(ctm.getLinkForRowHeader('CHEMBL59')).toBe('/compound_report_card/CHEMBL59')

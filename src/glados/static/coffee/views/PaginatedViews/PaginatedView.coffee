@@ -177,34 +177,64 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         img_url = ''
         # handlebars only allow very simple logic, we have to help the template here and
         # give it everything as ready as possible
-  
-        columnsWithValues = visibleColumns.map (col_desc) ->
+        getColumnsWithValues = (columns, object ) ->
+
+          columnsWithValues = visibleColumns.map (colDescription) ->
+
+            returnCol = {}
+            returnCol.name_to_show = colDescription['name_to_show']
+
+            col_value = glados.Utils.getNestedValue(item.attributes, colDescription.comparator)
+
+            if _.isBoolean(col_value)
+              returnCol['value'] = if col_value then 'Yes' else 'No'
+            else
+              returnCol['value'] = col_value
+
+            if _.has(colDescription, 'parse_function')
+              returnCol['value'] = colDescription['parse_function'](col_value)
+
+            returnCol['has_link'] = _.has(colDescription, 'link_base')
+            returnCol['link_url'] = item.get(colDescription['link_base']) unless !returnCol['has_link']
+            if _.has(colDescription, 'image_base_url')
+              img_url = item.get(colDescription['image_base_url'])
+              returnCol['img_url'] = img_url
+            if _.has(colDescription, 'custom_field_template')
+              returnCol['custom_html'] = Handlebars.compile(colDescription['custom_field_template'])
+                val: returnCol['value']
+
+            # This method should return a value based on the parameter, not modify the parameter
+            return returnCol
+
+        columnsWithValues = visibleColumns.map (colDescription) ->
           return_col = {}
-          return_col.name_to_show = col_desc['name_to_show']
+          return_col.name_to_show = colDescription['name_to_show']
           
-          col_value = glados.Utils.getNestedValue(item.attributes, col_desc.comparator)
+          col_value = glados.Utils.getNestedValue(item.attributes, colDescription.comparator)
   
           if _.isBoolean(col_value)
             return_col['value'] = if col_value then 'Yes' else 'No'
           else
             return_col['value'] = col_value
   
-          if _.has(col_desc, 'parse_function')
-            return_col['value'] = col_desc['parse_function'](col_value)
+          if _.has(colDescription, 'parse_function')
+            return_col['value'] = colDescription['parse_function'](col_value)
   
-          return_col['has_link'] = _.has(col_desc, 'link_base')
-          return_col['link_url'] = item.get(col_desc['link_base']) unless !return_col['has_link']
-          if _.has(col_desc, 'image_base_url')
-            img_url = item.get(col_desc['image_base_url'])
+          return_col['has_link'] = _.has(colDescription, 'link_base')
+          return_col['link_url'] = item.get(colDescription['link_base']) unless !return_col['has_link']
+          if _.has(colDescription, 'image_base_url')
+            img_url = item.get(colDescription['image_base_url'])
             return_col['img_url'] = img_url
-          if _.has(col_desc, 'custom_field_template')
-            return_col['custom_html'] = Handlebars.compile(col_desc['custom_field_template'])
+          if _.has(colDescription, 'custom_field_template')
+            return_col['custom_html'] = Handlebars.compile(colDescription['custom_field_template'])
               val: return_col['value']
   
           # This method should return a value based on the parameter, not modify the parameter
           return return_col
   
         idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
+        console.log 'columnsWithValues: ', columnsWithValues
 
         new_item_cont = Handlebars.compile( $item_template.html() )
           base_check_box_id: idColumnValue
