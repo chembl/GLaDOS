@@ -312,7 +312,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewTargetRelationsList: ->
       list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
       list.initURL = (chembl_id) ->
-        @url = glados.Settings.WS_DEV_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
+        @url = glados.Settings.WS_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
 
       list.fetch = ->
         this_collection = @
@@ -367,7 +367,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
 
       list.initURL = (chembl_id) ->
-        @url = glados.Settings.WS_DEV_BASE_URL + 'target/' + chembl_id + '.json'
+        @url = glados.Settings.WS_BASE_URL + 'target/' + chembl_id + '.json'
 
       list.parse = (response) ->
         return response.target_components

@@ -38,12 +38,19 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       $messagesElement.html ''
 
+  destroyAllTooltips: ->
+
+    $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
+    $elemsWithToolTip.each (index, elem) ->
+      $(elem).qtip('destroy', true)
+
   clearVisualisation: ->
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
       message: 'Generating Visualisation...'
 
+    @destroyAllTooltips()
     @clearControls()
     @clearMatrix()
 
@@ -609,6 +616,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
+    setUpRowTooltip = @generateTooltipFunction('Compound')
+
     rows.append("text")
       .attr("x", -LABELS_PADDING)
       .attr("y", getYCoord.rangeBand() / 2)
@@ -619,10 +628,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text( (d, i) -> d.label )
-      .classed('tooltipped', true)
-      .attr('data-position', 'bottom')
-      .attr('data-delay', '50')
-      .attr('data-tooltip', getRowTooltip)
+      .on('click', setUpRowTooltip)
+      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
+      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
     # --------------------------------------
     # Add columns
@@ -637,6 +645,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("class", "vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
+
+    setUpColTooltip = @generateTooltipFunction('Target')
+
     columns.append("text")
       .attr("x", LABELS_PADDING)
       .attr("y", getXCoord.rangeBand() / 2)
@@ -648,10 +659,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .text((d, i) -> d.label )
-      .classed('tooltipped', true)
-      .attr('data-position', 'bottom')
-      .attr('data-delay', '50')
-      .attr('data-tooltip', getColumnTooltip)
+      .on('click', setUpColTooltip)
+      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
+      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
     columnsWithDivLines = g.selectAll(".vis-column")
 
@@ -798,8 +808,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
       triggerRowSortTransition()
 
-
-
     triggerColSortTransition = ->
       t = g.transition().duration(2500)
       t.selectAll(".vis-column")
@@ -915,5 +923,51 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_VIS_HEIGHT = 300
     adjustVisHeight()
     ZOOM_ACTIVATED = false
+
+  generateTooltipFunction: (entityName) ->
+
+    return (d) ->
+
+      $clickedElem = $(@)
+      if entityName == 'Target'
+        chemblID = d.label.replace('Targ: ', '')
+      else
+        chemblID = d.label
+      if $clickedElem.attr('data-qtip-configured')
+        return
+
+      miniRepCardID = 'BCK-MiniReportCard-' + chemblID
+      console.log 'configuring tooltip'
+
+      qtipConfig =
+        content:
+          text: '<div id="' + miniRepCardID + '"></div>'
+          button: 'close'
+        show:
+          event: 'click'
+          solo: true
+        hide: 'click'
+        style:
+          classes:'matrix-qtip qtip-light qtip-shadow'
+
+      if entityName == 'Target'
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom left'
+
+
+      $clickedElem.qtip qtipConfig
+
+      $clickedElem.qtip('api').show()
+      $clickedElem.attr('data-qtip-configured', true)
+
+      $newMiniReportCardContainer = $('#' + miniRepCardID)
+
+      if entityName == 'Target'
+        TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
+      else
+        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+
+
 
 

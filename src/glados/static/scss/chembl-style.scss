@@ -2117,6 +2117,20 @@ span.badge-primary-color-no-float {
   position: relative;
 }
 
+.matrix-qtip {
+
+  .qtip-content {
+    padding: 0;
+    font-size: 120%;
+  }
+  .card {
+    margin: 0;
+    .card-content{
+      padding: 12px;
+    }
+  }
+}
+
 .matrix-vis-options {
   position: absolute;
   left: 0;

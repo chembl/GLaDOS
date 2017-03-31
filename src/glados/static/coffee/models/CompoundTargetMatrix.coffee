@@ -57,6 +57,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       thisModel.set(thisModel.parse data)
     )
 
+
   parse: (data) ->
 
     compoundsToPosition = {}
@@ -153,6 +154,11 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     return {"matrix": result}
 
+  getLinkForColHeader: (itemID) ->
+    return Target.get_report_card_url itemID.replace('Targ: ', '')
+
+  getLinkForRowHeader: (itemID) ->
+    return Compound.get_report_card_url(itemID)
 
   getRequestData: ->
 

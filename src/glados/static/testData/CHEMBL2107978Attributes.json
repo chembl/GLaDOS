@@ -1,0 +1,54 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "-1",
+  "biotherapeutic": null,
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": null,
+  "inorganic_flag": "0",
+  "max_phase": 0,
+  "molecule_chembl_id": "CHEMBL2107978",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL2107978",
+    "parent_chembl_id": "CHEMBL2107978"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Peppermint Spirit",
+      "syn_type": "OTHER_DB",
+      "synonyms": "PEPPERMINT SPIRIT"
+    },
+    {
+      "molecule_synonym": "Peppermint Spirit",
+      "syn_type": "USP_DB",
+      "synonyms": "PEPPERMINT SPIRIT"
+    }
+  ],
+  "molecule_type": "Unknown",
+  "natural_product": "0",
+  "oral": false,
+  "parenteral": false,
+  "polymer_flag": false,
+  "pref_name": "PEPPERMINT SPIRIT",
+  "prodrug": "0",
+  "structure_type": "NONE",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": null,
+  "usan_stem_definition": null,
+  "usan_substem": null,
+  "usan_year": null,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}
