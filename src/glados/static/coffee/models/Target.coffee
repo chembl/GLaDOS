@@ -4,6 +4,10 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   initialize: ->
     @on 'change', @getProteinTargetClassification, @
+    @initURL()
+
+  initURL: ->
+
     @url = glados.Settings.WS_BASE_URL + 'target/' + @get('target_chembl_id') + '.json'
 
   getProteinTargetClassification: ->
@@ -66,6 +70,22 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     parsed = data
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
     return parsed;
+
+  fetchFromAssayChemblID: ->
+
+    assayUrl = glados.Settings.WS_BASE_URL + 'assay/' + @get('assay_chembl_id') + '.json'
+
+    thisTarget = @
+    $.get(assayUrl).done( (response) ->
+      thisTarget.set('target_chembl_id', response.target_chembl_id)
+      thisTarget.initURL()
+      thisTarget.fetch()
+    ).fail(
+      () -> console.log('failed!')
+    )
+
+
+
 
 Target.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
