@@ -7,8 +7,12 @@ CompoundMiniReportCardView = Backbone.View.extend
 
   render: ->
 
-    console.log 'LOADED!'
-    $(@el).html 'loaded!'
+    templateCont = $('#' + Compound.MINI_REPORT_CARD.TEMPLATE).html()
+    valuesObject = glados.Utils.getColumnsWithValues(Compound.MINI_REPORT_CARD.COLUMNS, @model)
+    imgUrl = glados.Utils.getImgURL(valuesObject)
+    $(@el).html Handlebars.compile(templateCont)
+      img_url: imgUrl
+      columns: valuesObject
 
 
 

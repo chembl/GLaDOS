@@ -616,44 +616,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
-
-    testRowHTML = '<div><div class="card horizontal grey lighten-5 z-depth-0">
-
-        <div class="white card-image">
-          <img src="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL59.svg?engine=indigo" height="150px" width="150px">
-        </div>
-        <div class="card-content">
-
-
-
-          <p><a href="/compound_report_card/CHEMBL59" target="_blank">CHEMBL59</a>
-          </p>
-
-
-          <small>
-            <p><b>Name:</b> DOPAMINE</p>
-          </small>
-
-          <small>
-            <p><b>Max Phase:</b> 4</p>
-          </small>
-
-          <small>
-            <p><b>MWt:</b> 153.18</p>
-          </small>
-
-          <small>
-            <p><b>#RO5:</b> 0</p>
-          </small>
-
-          <small>
-            <p><b>ALogP:</b> 0.77</p>
-          </small>
-
-        </div>
-    </div></div>'
-
-
     setUpRowTooltip = (d) ->
 
       $clickedElem = $(@)
