@@ -202,9 +202,10 @@ class CompoundReportCardApp
   @initMiniCompoundReportCard = ($containerElem, chemblID)->
 
     compound = new Compound({molecule_chembl_id: chemblID})
-    new CompoundMiniReportCardView
+    new MiniReportCardView
       el: $containerElem
       model: compound
+      entity: Compound
     compound.fetch()
 
   # -------------------------------------------------------------
