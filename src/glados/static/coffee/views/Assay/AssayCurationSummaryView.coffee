@@ -8,30 +8,20 @@ AssayCurationSummaryView = CardView.extend
 
   render: ->
 
-    target = @model.get('target')
-
-    # listen for the target changes if it exists
-    if target?
-      target.on 'change', @render, @
-
     @fillTemplate('BCK-ACS-large')
     @fillTemplate('BCK-ACS-small')
     @showCardContent()
-
 
     @initEmbedModal('curation_summary')
     @activateModals()
 
   fillTemplate: (div_id) ->
 
-    target = @model.get('target')
+    $elem = $(@el).find('#' + div_id)
+    glados.Utils.fillContentForElement $elem,
+      target_type: @model.get('target_type')
+      pref_name: @model.get('pref_name')
+      target_chembl_id: @model.get('target_chembl_id')
+      report_card_url: @model.get('report_card_url')
 
-    div = $(@el).find('#' + div_id)
-    template = $('#' + div.attr('data-hb-template'))
-
-    div.html Handlebars.compile(template.html())
-      target_type: target.get('target_type')
-      pref_name: target.get('pref_name')
-      target_chembl_id: target.get('target_chembl_id')
-      report_card_url: target.get('report_card_url')
 

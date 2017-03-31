@@ -14,11 +14,15 @@ class AssayReportCardApp
       model: assay
       el: $('#ABasicInformation')
 
+    target = new Target
+      assay_chembl_id: GlobalVariables.CHEMBL_ID
+
     new AssayCurationSummaryView
-      model: assay
+      model: target
       el: $('#ACurationSummaryCard')
 
     assay.fetch();
+    target.fetchFromAssayChemblID();
 
     $('.scrollspy').scrollSpy();
     ScrollSpyHelper.initializeScrollSpyPinner();
@@ -44,13 +48,13 @@ class AssayReportCardApp
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    assay = new Assay
+    target = new Target
       assay_chembl_id: GlobalVariables.CHEMBL_ID
 
     new AssayCurationSummaryView
-      model: assay
+      model: target
       el: $('#ACurationSummaryCard')
 
-    assay.fetch();
+    target.fetchFromAssayChemblID();
 
 

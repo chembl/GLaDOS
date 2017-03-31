@@ -19,10 +19,9 @@ AssayBasicInformationView = CardView.extend
 
   fillTemplate: (div_id) ->
 
-    div = $(@el).find('#' + div_id)
-    template = $('#' + div.attr('data-hb-template'))
+    $elem = $(@el).find('#' + div_id)
 
-    div.html Handlebars.compile(template.html())
+    glados.Utils.fillContentForElement $elem,
       chembl_id: @model.get('assay_chembl_id')
       type: @model.get('assay_type_description')
       description: @model.get('description')
