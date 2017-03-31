@@ -1,4 +1,4 @@
-Target = Backbone.RelationalModel.extend(DownloadModelOrCollectionExt).extend
+Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'target_chembl_id'
 
