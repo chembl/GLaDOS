@@ -41,8 +41,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   destroyAllTooltips: ->
 
     $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
-    $elemsWithToolTip.each (index, elem) ->
-      $(elem).qtip('destroy', true)
+    $elemsWithToolTip.each (index, elem) -> $(elem).qtip('destroy', true)
 
   clearVisualisation: ->
 
@@ -763,6 +762,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     triggerRowSortTransition = ->
 
+      thisView.destroyAllTooltips()
       t = g.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) ->
@@ -809,6 +809,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       triggerRowSortTransition()
 
     triggerColSortTransition = ->
+
+      thisView.destroyAllTooltips()
       t = g.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
