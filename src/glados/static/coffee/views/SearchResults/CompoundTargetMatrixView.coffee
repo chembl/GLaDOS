@@ -778,8 +778,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
-      $(rowTexts).tooltip()
-
     handleSortDirClick = ->
 
       targetDimension = $(@).attr('data-target-property')
@@ -827,8 +825,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       g.selectAll(".vis-column")
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
-
-      $(columnTexts).tooltip()
 
 
     $(@el).find(".select-col-sort").on "change", () ->
