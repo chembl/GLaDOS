@@ -687,6 +687,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       thisView.destroyAllTooltips()
 
+      if thisView.bugWillHappen
+        zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        thisView.bugWillHappen = false
+
       getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
 
@@ -767,6 +771,10 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
 
     triggerRowSortTransition = ->
+
+      if thisView.bugWillHappen
+        zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        thisView.bugWillHappen = false
 
       thisView.destroyAllTooltips()
       t = g.transition().duration(2500)
@@ -921,6 +929,11 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_VIS_HEIGHT = 300
     adjustVisHeight()
     ZOOM_ACTIVATED = false
+
+    @initialTransX = zoom.translate()[0]
+    @initialTransY = zoom.translate()[1]
+    @bugWillHappen = true
+
 
   generateTooltipFunction: (entityName, matrixView) ->
 
