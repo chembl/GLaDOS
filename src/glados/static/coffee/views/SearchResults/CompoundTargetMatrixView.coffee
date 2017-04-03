@@ -1,6 +1,8 @@
 # this view is in charge of showing the compound vs target matrix
 CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
+  REVERSE_POSITION_TOOLTIP_TH: 0.8
+
   initialize: ->
 
     @model.on 'change', @render, @
@@ -43,6 +45,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
     $elemsWithToolTip.each (index, elem) ->
       $(elem).qtip('destroy', true)
+      $(elem).attr('data-qtip-configured', null )
 
   clearVisualisation: ->
 
@@ -616,7 +619,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
-    setUpRowTooltip = @generateTooltipFunction('Compound')
+    setUpRowTooltip = @generateTooltipFunction('Compound', @)
 
     rows.append("text")
       .attr("x", -LABELS_PADDING)
@@ -646,7 +649,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
 
 
-    setUpColTooltip = @generateTooltipFunction('Target')
+    setUpColTooltip = @generateTooltipFunction('Target', @)
 
     columns.append("text")
       .attr("x", LABELS_PADDING)
@@ -681,6 +684,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if not ZOOM_ACTIVATED
         return
+
+      thisView.destroyAllTooltips()
+
+      if thisView.bugWillHappen
+        zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        zoom.scale(thisView.initialScale)
+        thisView.bugWillHappen = false
 
       getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
       getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
@@ -763,19 +773,20 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     triggerRowSortTransition = ->
 
+      if thisView.bugWillHappen
+        zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        zoom.scale(thisView.initialScale)
+        thisView.bugWillHappen = false
+
+      thisView.destroyAllTooltips()
       t = g.transition().duration(2500)
       t.selectAll('.vis-row')
       .attr('transform', (d) ->
           "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
 
-      rowTexts = g.selectAll('.vis-row').selectAll('text')
-      .attr('data-tooltip', getRowTooltip)
-
       g.selectAll(".vis-row")
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
-
-      $(rowTexts).tooltip()
 
     handleSortDirClick = ->
 
@@ -809,6 +820,8 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       triggerRowSortTransition()
 
     triggerColSortTransition = ->
+
+      thisView.destroyAllTooltips()
       t = g.transition().duration(2500)
       t.selectAll(".vis-column")
       .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
@@ -819,14 +832,9 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll(".vis-cell")
       .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
 
-      columnTexts = g.selectAll(".vis-column").selectAll('text')
-      .attr('data-tooltip', getColumnTooltip)
-
       g.selectAll(".vis-column")
         .selectAll('.dividing-line')
         .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
-
-      $(columnTexts).tooltip()
 
 
     $(@el).find(".select-col-sort").on "change", () ->
@@ -924,7 +932,13 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     adjustVisHeight()
     ZOOM_ACTIVATED = false
 
-  generateTooltipFunction: (entityName) ->
+    @initialTransX = zoom.translate()[0]
+    @initialTransY = zoom.translate()[1]
+    @initialScale = zoom.scale()
+    @bugWillHappen = true
+
+
+  generateTooltipFunction: (entityName, matrixView) ->
 
     return (d) ->
 
@@ -937,7 +951,6 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       miniRepCardID = 'BCK-MiniReportCard-' + chemblID
-      console.log 'configuring tooltip'
 
       qtipConfig =
         content:
@@ -951,10 +964,17 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           classes:'matrix-qtip qtip-light qtip-shadow'
 
       if entityName == 'Target'
-        qtipConfig.position =
-          my: 'top left'
-          at: 'bottom left'
 
+        numCols = matrixView.model.get('matrix').columns.length
+
+        if d.currentPosition > numCols * matrixView.REVERSE_POSITION_TOOLTIP_TH
+          qtipConfig.position =
+            my: 'top right'
+            at: 'bottom left'
+        else
+          qtipConfig.position =
+            my: 'top left'
+            at: 'bottom left'
 
       $clickedElem.qtip qtipConfig
 
