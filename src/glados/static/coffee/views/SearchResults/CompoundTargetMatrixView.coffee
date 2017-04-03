@@ -689,6 +689,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if thisView.bugWillHappen
         zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        zoom.scale(thisView.initialScale)
         thisView.bugWillHappen = false
 
       getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
@@ -774,6 +775,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if thisView.bugWillHappen
         zoom.translate([thisView.initialTransX, thisView.initialTransY])
+        zoom.scale(thisView.initialScale)
         thisView.bugWillHappen = false
 
       thisView.destroyAllTooltips()
@@ -932,6 +934,7 @@ CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @initialTransX = zoom.translate()[0]
     @initialTransY = zoom.translate()[1]
+    @initialScale = zoom.scale()
     @bugWillHappen = true
 
 
