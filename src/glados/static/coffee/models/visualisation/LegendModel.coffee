@@ -1,0 +1,1 @@
+LegendModel =  Backbone.View.extend({})
