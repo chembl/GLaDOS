@@ -9,8 +9,7 @@ glados.useNameSpace 'glados.models.visualisation',
         RO5:
           propName:'molecule_properties.num_ro5_violations'
           label: '#RO5 Violations'
-          domain: [0, 4]
-          tickValues: [0, 1, 2, 3, 4]
+          domain: [0, 1, 2, 3, 4]
         FULL_MWT:
           prop_name:'molecule_properties.full_mwt'
           label: 'Parent Molecular Weight'
