@@ -1,5 +1,5 @@
-# this view is in charge of showing the results of a compound search as a graph
-CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
+# this view is in charge of showing a collection of elements as a plot
+PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   events:
     'change .select-xaxis,.select-yaxis,.select-colour': 'changeAxis'
@@ -399,3 +399,7 @@ CompoundResultsGraphView = Backbone.View.extend(ResponsiviseViewExt).extend
     fillLegendDetails()
     #customize legend styles
     $legendContainer.find('line, path').css('fill', 'none')
+
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
+    legendModel = new glados.models.visualisation.LegendModel
+      property: prop

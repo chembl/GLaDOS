@@ -52,7 +52,7 @@ class SearchResultsApp
 
   # this initialises the view that shows the compound results graph view
   @initCompResultsGraphView = (topLevelElem) ->
-    compResGraphView = new CompoundResultsGraphView
+    compResGraphView = new PlotView
       el: topLevelElem
 
     return compResGraphView
