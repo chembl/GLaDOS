@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
       @ctm = new CompoundTargetMatrix
-      @ctmView = new CompoundTargetMatrixView
+      @ctmView = new MatrixView
           model: @ctm
           el: $(@el).find('.BCK-CompTargetMatrix')
 

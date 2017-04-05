@@ -1,5 +1,5 @@
-# this view is in charge of showing the compound vs target matrix
-CompoundTargetMatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
+# this view is in charge of rendering a matrix
+MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   REVERSE_POSITION_TOOLTIP_TH: 0.8
 
