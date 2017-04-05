@@ -6,6 +6,14 @@ glados.useNameSpace 'glados.models.visualisation',
         ALogP:
           propName: 'molecule_properties.alogp'
           label: 'ALogP'
+        RO5:
+          propName:'molecule_properties.num_ro5_violations'
+          label: '#RO5 Violations'
+          domain: [0, 4]
+          tickValues: [0, 1, 2, 3, 4]
+        FULL_MWT:
+          prop_name:'molecule_properties.full_mwt'
+          label: 'Parent Molecular Weight'
 
 glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName, propertyID) ->
 
