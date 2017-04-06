@@ -53,6 +53,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .scale(getXInLegendFor)
       .orient("bottom")
 
+    getColourFor = d3.scale.ordinal()
+        .domain( @model.get('domain') )
+        .range( @model.get('colour-range') )
+
     legendG.selectAll('rect')
       .data(getXInLegendFor.domain())
       .enter().append('rect')
@@ -60,6 +64,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', getXInLegendFor.rangeBand())
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', -@LEGEND_RECT_HEIGHT)
-#      .attr('fill', (d) -> getColourFor d)
+      .attr('fill', (d) -> getColourFor d)
 
     legendG.call(legendAxis)

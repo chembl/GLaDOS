@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.visualisation',
         if defaultDomain.length > 2
           @set('type', glados.models.visualisation.LegendModel.DISCRETE)
           @set('ticks', defaultDomain)
+          @set('colour-range', @.get('property').coloursRange)
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
 

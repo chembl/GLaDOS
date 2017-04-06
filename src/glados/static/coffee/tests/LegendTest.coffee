@@ -18,3 +18,9 @@ describe "Legend Model", ->
         i++
         
       expect(legendModel.get('type')).toBe(glados.models.visualisation.LegendModel.DISCRETE)
+      range = legendModel.get('colour-range')
+      rangeShouldBe = ['#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
+
+      for comparison in _.zip(range, rangeShouldBe)
+        expect(comparison[0]).toBe(comparison[1])
+
