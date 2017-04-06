@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.models.visualisation',
           propName:'molecule_properties.num_ro5_violations'
           label: '#RO5 Violations'
           domain: [0, 1, 2, 3, 4]
+          coloursRange: ['#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
         FULL_MWT:
           prop_name:'molecule_properties.full_mwt'
           label: 'Parent Molecular Weight'
