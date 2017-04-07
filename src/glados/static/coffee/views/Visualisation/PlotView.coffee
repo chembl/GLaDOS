@@ -77,6 +77,8 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @paintSelectors()
 
+  selectItems: (idsList) -> @collection.selectItems(idsList)
+
   renderWhenError: ->
 
     @clearVisualisation()
@@ -284,13 +286,17 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
     console.log 'visual element: ', @$vis_elem
 
-    Plotly.newPlot(@$vis_elem.get(0), legendData, layout)
+    graphDiv = @$vis_elem.get(0)
 
-    @$vis_elem.get(0).on('plotly_click', (eventInfo) ->
+    Plotly.newPlot(graphDiv, legendData, layout)
+
+    graphDiv.on('plotly_click', (eventInfo) ->
       pointNumber = eventInfo.points[0].pointNumber
       clickedChemblID = eventInfo.points[0].data.ids[pointNumber]
       window.open(Compound.get_report_card_url(clickedChemblID))
     )
+
+    graphDiv.on('plotly_selected', (eventData) -> thisView.selectItems(_.pluck(eventData.points, 'id')))
 
     # --------------------------------------
     # Legend initialisation

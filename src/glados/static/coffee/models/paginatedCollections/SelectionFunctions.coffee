@@ -30,9 +30,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
 
-    thereAreExceptions: ->
+    selectItems: (idsList) ->
 
-      return Object.keys(@getMeta('selection_exceptions')).length > 0
+      idsListLength = idsList.length
+      thresholdLength = Math.floor(@.models.length / 2) + 1
+
+      if idsListLength == 0
+        return
+
+      @setMeta('all_items_selected', false)
+      exceptions = @getMeta('selection_exceptions')
+      for id in idsList
+        exceptions[id] = true
+      @setMeta('selection_exceptions', exceptions)
+
+      if Object.keys(exceptions).length == @models.length
+        @selectAll()
+
+    thereAreExceptions: -> return Object.keys(@getMeta('selection_exceptions')).length > 0
 
     itemIsSelected: (itemID) ->
 
@@ -40,6 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
+    # warning: this is intended to work only when the list has all the elements in the client, not with server side lists
     getSelectedItemsIDs: ->
 
       idProperty = @getMeta('id_column').comparator
