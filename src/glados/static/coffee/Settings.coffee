@@ -64,6 +64,7 @@ glados.useNameSpace 'glados',
     CARD_PAGE_SIZES: [6, 12, 24, 48, 96]
     EMBL_GREEN: '#9fcc3b'
     EMBL_BLUE: '#008cb5'
+    VISUALISATION_SELECTED: '#4caf50' #4caf50 green
     VISUALISATION_RED_MIN: '#f44336' # red lighten-5
     VISUALISATION_RED_MAX: '#b71c1c' # red darken-4
     VISUALISATION_LIGHT_GREEN_MIN: '#f1f8e9' # green lighten-5

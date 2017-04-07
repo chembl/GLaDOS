@@ -32,7 +32,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     selectItems: (idsList) ->
 
-      console.log 'bulk selecting ', idsList
       idsListLength = idsList.length
       thresholdLength = Math.floor(@.models.length / 2) + 1
 

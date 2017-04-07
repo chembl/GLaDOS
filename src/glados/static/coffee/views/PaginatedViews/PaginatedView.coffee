@@ -71,7 +71,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     selectionChangedHandler: (action, detail)->
 
-      console.log 'selection changed!'
       if action == glados.Events.Collections.Params.ALL_SELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)

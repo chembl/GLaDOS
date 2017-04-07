@@ -12,6 +12,8 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @ORDINAL = 'ORDINAL'
     @LINEAR = 'LINEAR'
 
+    @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
+
     @$vis_elem = $(@el).find('.BCK-CompResultsGraphContainer')
     updateViewProxy = @setUpResponsiveRender()
 
@@ -76,6 +78,10 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentPropertyColour = @config.properties[@config.initial_property_colour]
 
     @paintSelectors()
+
+  selectionChangedHandler: ->
+
+    console.log 'PLOT HANDLING selection changed!'
 
   selectItems: (idsList) -> @collection.selectItems(idsList)
 
@@ -261,6 +267,16 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     ids = (glados.Utils.getNestedValue(mol, @idProperty.prop_name) for mol in molecules)
     colours = (getColourFor(glados.Utils.getNestedValue(mol, @currentPropertyColour.prop_name)) for mol in molecules)
 
+    borderColours = molecules.map (mol) ->
+      if thisView.collection.itemIsSelected(glados.Utils.getNestedValue(mol, thisView.idProperty.prop_name))
+        return glados.Settings.VISUALISATION_SELECTED
+      else return getColourFor.range()[1]
+
+    borderWidths = molecules.map (mol) ->
+      if thisView.collection.itemIsSelected(glados.Utils.getNestedValue(mol, thisView.idProperty.prop_name))
+        return 2
+      else return 0.5
+
     trace1 = {
       x: xValues,
       y: yValues,
@@ -274,7 +290,9 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
         opacity: 0.8
         size: 12
         color: colours
-        line:{width:0.5, color:getColourFor.range()[1]}
+        line:
+          width: borderWidths
+          color: borderColours
       }
     }
 
