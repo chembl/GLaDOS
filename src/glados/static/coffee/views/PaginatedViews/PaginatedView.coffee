@@ -69,8 +69,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       elemID = $(event.currentTarget).attr('id').split('-')[2]
       @collection.toggleSelectItem(elemID)
 
-    selectionChangedHandler: (action, itemID)->
+    selectionChangedHandler: (action, detail)->
 
+      console.log 'selection changed!'
       if action == glados.Events.Collections.Params.ALL_SELECTED
 
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
@@ -80,14 +81,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
 
       else if action == glados.Events.Collections.Params.SELECTED
-        endingID = itemID + '-select'
+
+        endingID = detail + '-select'
         $(@el).find('[id$=' + endingID + ']').prop('checked', true)
 
       else if action == glados.Events.Collections.Params.UNSELECTED
 
-        endingID = itemID + '-select'
+        endingID = detail + '-select'
         $(@el).find('[id$=' + endingID + ']').prop('checked', false)
         $(@el).find('.BCK-toggle-select-all').prop('checked', false)
+
+      else if action == glados.Events.Collections.Params.BULK_SELECTED
+
+        for itemID in detail
+          endingID = itemID + '-select'
+          $(@el).find('[id$=' + endingID + ']').prop('checked', true)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render

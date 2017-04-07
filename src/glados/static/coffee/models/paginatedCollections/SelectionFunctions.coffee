@@ -32,6 +32,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     selectItems: (idsList) ->
 
+      console.log 'bulk selecting ', idsList
       idsListLength = idsList.length
       thresholdLength = Math.floor(@.models.length / 2) + 1
 
@@ -46,6 +47,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if Object.keys(exceptions).length == @models.length
         @selectAll()
+      else
+        console.log 'triggering event!'
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_SELECTED, idsList)
 
     thereAreExceptions: -> return Object.keys(@getMeta('selection_exceptions')).length > 0
 
