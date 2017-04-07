@@ -1,24 +1,24 @@
 glados.useNameSpace 'glados.models.paginatedCollections',
 
-  # --------------------------------------------------------------------------------------------------------------------
-  # This class implements the pagination, sorting and searching for a collection in ElasticSearch
-  # extend it to get a collection with the extra capabilities
-  # --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
+# This class implements the pagination, sorting and searching for a collection in ElasticSearch
+# extend it to get a collection with the extra capabilities
+# --------------------------------------------------------------------------------------------------------------------
   ESPaginatedQueryCollection: Backbone.Collection.extend
-    # ------------------------------------------------------------------------------------------------------------------
-    # Backbone Override
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Backbone Override
+# ------------------------------------------------------------------------------------------------------------------
 
     errorHandler: (collection, response, options)->
-      console.log("ERROR QUERYING ELASTIC SEARCH:",collection, response, options)
+      console.log("ERROR QUERYING ELASTIC SEARCH:", collection, response, options)
       @resetMeta(0, 0)
       @reset()
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Parse/Fetch Collection data
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Parse/Fetch Collection data
+# ------------------------------------------------------------------------------------------------------------------
 
-    # Parses the Elastic Search Response and resets the pagination metadata
+# Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
@@ -26,7 +26,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         jsonResultsList.push(hitI._source)
       return jsonResultsList
 
-    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+# Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options) ->
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -52,57 +52,57 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Parse/Fetch Facets Groups data
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Parse/Fetch Facets Groups data
+# ------------------------------------------------------------------------------------------------------------------
 
-    # Parses the facets groups aggregations data
+# Parses the facets groups aggregations data
     parseFacetsGroups: (facets_data)->
       if _.isUndefined(facets_data.aggregations)
         for facet_group_key, facet_group of @meta.facets_groups
           facet_group.faceting_handler.parseESResults(facets_data.aggregations)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Elastic Search Query structure
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Elastic Search Query structure
+# ------------------------------------------------------------------------------------------------------------------
 
     getSingleTermQuery: (single_term)->
-      single_term_query = {bool:{should:[]}}
-      single_term_query.bool.should. push {
-          multi_match:
-            fields: [
-              "*.std_analyzed^10",
-              "*.eng_analyzed^5"
-            ],
-            query: single_term,
-            boost: 1
-        }
-      single_term_query.bool.should. push {
-          multi_match:
-            fields: [
-              "*.std_analyzed^10",
-              "*.eng_analyzed^5"
-            ],
-            query: single_term,
-            boost: 0.1
-            fuzziness: 'AUTO'
-        }
+      single_term_query = {bool: {should: []}}
+      single_term_query.bool.should.push {
+        multi_match:
+          fields: [
+            "*.std_analyzed^10",
+            "*.eng_analyzed^5"
+          ],
+          query: single_term,
+          boost: 1
+      }
+      single_term_query.bool.should.push {
+        multi_match:
+          fields: [
+            "*.std_analyzed^10",
+            "*.eng_analyzed^5"
+          ],
+          query: single_term,
+          boost: 0.1
+          fuzziness: 'AUTO'
+      }
       if single_term.length >= 4
         single_term_query.bool.should.push {
-            constant_score:
-              query:
-                multi_match:
-                  fields: [
-                    "*.pref_name_analyzed^1.3",
-                    "*.alt_name_analyzed",
-                  ],
-                  query: single_term,
-                  minimum_should_match: "80%"
-              boost: 100
-          }
+          constant_score:
+            query:
+              multi_match:
+                fields: [
+                  "*.pref_name_analyzed^1.3",
+                  "*.alt_name_analyzed",
+                ],
+                query: single_term,
+                minimum_should_match: "80%"
+            boost: 100
+        }
       return single_term_query
 
-    # given a list of chembl ids, it gives the request data to query for only those ids
+# given a list of chembl ids, it gives the request data to query for only those ids
     getRequestDataForChemblIDs: (page, pageSize, idsList) ->
       return {
         size: pageSize,
@@ -112,9 +112,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             molecule_chembl_id: idsList
       }
 
-    # generates an object with the data necessary to do the ES request
-    # customPage: set a customPage if you want a page different than the one set as current
-    # the same for customPageSize
+# generates an object with the data necessary to do the ES request
+# customPage: set a customPage if you want a page different than the one set as current
+# the same for customPageSize
     getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
       request_facets = if _.isUndefined(request_facets) then false else request_facets
       # If facets are requested the facet filters are excluded from the query
@@ -148,7 +148,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           bool:
             must:
               bool:
-                should:[
+                should: [
                   {
                     query_string:
                       fields: [
@@ -181,27 +181,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return es_query
 
     getFilterQuery: (facets_filtered) ->
-      filter_query = {bool:{ must:[] }}
+      filter_query = {bool: {must: []}}
 
       filter_terms = @getMeta("filter_terms")
       if filter_terms and filter_terms.length > 0
         filter_terms_joined = filter_terms.join(' ')
         filter_query.bool.must.push(
-            {
-              query_string:
-                fields: [
-                  "*"
-                ]
-                fuzziness: 0
-                query: filter_terms_joined
-            }
+          {
+            query_string:
+              fields: [
+                "*"
+              ]
+              fuzziness: 0
+              query: filter_terms_joined
+          }
         )
       if facets_filtered
         faceting_handlers = []
         for facet_group_key, facet_group of @meta.facets_groups
           faceting_handlers.push(facet_group.faceting_handler)
         facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
-          .getAllFacetGroupsSelectedQuery(faceting_handlers)
+        .getAllFacetGroupsSelectedQuery(faceting_handlers)
         if facets_groups_query
           filter_query.bool.must.push facets_groups_query
       if filter_query.bool.must.length == 0
@@ -232,7 +232,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       first_call = if _.isUndefined(first_call) then true else first_call
       call_time = new Date().getTime()
-      if first_call and @loading_facets and call_time-@loading_facets_t_ini < 5000
+      if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
         console.log "WARNING! Facets requested again before they finished loading!", @getURL()
         return
       if first_call
@@ -256,7 +256,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 
-    getFacetsGroups:(selected)->
+    getFacetsGroups: (selected)->
       if _.isUndefined(selected) or _.isNull(selected)
         return @meta.facets_groups
       else
@@ -266,25 +266,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sub_facet_groups[facet_group_key] = facet_group
         return sub_facet_groups
 
-    clearAllFacetsGroups:()->
+    clearAllFacetsGroups: ()->
       for facet_group_key, facet_group of @meta.facets_groups
         facet_group.faceting_handler.clearFacets()
 
-    # builds the url to do the request
+# builds the url to do the request
     getURL: ->
-      glados.models.paginatedCollections.Settings.ES_BASE_URL+@getMeta('index')+'/_search'
+      glados.models.paginatedCollections.Settings.ES_BASE_URL + @getMeta('index') + '/_search'
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Items Selection
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Items Selection
+# ------------------------------------------------------------------------------------------------------------------
     toggleSelectAll: ->
       @setMeta('all_items_selected', !@getMeta('all_items_selected'))
       @trigger('selection-changed')
 
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Metadata Handlers for query and pagination
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Metadata Handlers for query and pagination
+# ------------------------------------------------------------------------------------------------------------------
 
     setMeta: (attr, value) ->
       @meta[attr] = value
@@ -296,9 +296,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     hasMeta: (attr) ->
       return attr in _.keys(@meta)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Search functions
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Search functions
+# ------------------------------------------------------------------------------------------------------------------
 
     search: (singular_terms, exact_terms, filter_terms)->
       singular_terms = if _.isUndefined(singular_terms) then [] else singular_terms
@@ -315,23 +315,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @fetch()
 
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Pagination functions
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Pagination functions
+# ------------------------------------------------------------------------------------------------------------------
 
     resetPageSize: (newPageSize) ->
       @setMeta('page_size', parseInt(newPageSize))
       @setPage(1)
 
 
-    # Meta data values are:
-    #  total_records
-    #  current_page
-    #  total_pages
-    #  page_size
-    #  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
-    #  sorting data per column.
-    #
+# Meta data values are:
+#  total_records
+#  current_page
+#  total_pages
+#  page_size
+#  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
+#  sorting data per column.
+#
     resetMeta: (totalRecords, max_score) ->
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
@@ -339,7 +339,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if !@hasMeta('current_page')
         @setMeta('current_page', 1)
       if !@hasMeta('search_term')
-        @setMeta('search_term','')
+        @setMeta('search_term', '')
       @setMeta('total_pages', Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size'))))
       @calculateHowManyInCurrentPage()
 
@@ -353,7 +353,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       page_size = @getMeta('page_size')
 
       if total_records == 0
-        @setMeta('records_in_page', 0 )
+        @setMeta('records_in_page', 0)
       else if current_page == total_pages and total_records % page_size != 0
         @setMeta('records_in_page', total_records % page_size)
       else
@@ -363,59 +363,82 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, fetch) ->
-      newPageNum =  parseInt(newPageNum)
+      newPageNum = parseInt(newPageNum)
       fetch = if _.isUndefined(fetch) then true else fetch
       if fetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Sorting functions
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Sorting functions
+# ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
-      #TODO implement sorting
+#TODO implement sorting
 
     resetSortData: ->
-      #TODO implement sorting
+#TODO implement sorting
 
-    # organises the information of the columns that are going to be sorted.
-    # returns true if the sorting needs to be descending, false otherwise.
+# organises the information of the columns that are going to be sorted.
+# returns true if the sorting needs to be descending, false otherwise.
     setupColSorting: (columns, comparator) ->
-      #TODO implement sorting
+#TODO implement sorting
 
-    # sets the term to search in the collection
-    # when the collection is server side, the corresponding column and type are required.
-    # This is because the web services don't provide a search with OR
-    # for client side, it can be null, but for example for server side
-    # for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id', and type will be 'text'
-    # the url will be generated taking into account this terms.
+# sets the term to search in the collection
+# when the collection is server side, the corresponding column and type are required.
+# This is because the web services don't provide a search with OR
+# for client side, it can be null, but for example for server side
+# for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id', and type will be 'text'
+# the url will be generated taking into account this terms.
     setSearch: (term, column, type)->
-      #TODO Check if this is required
+#TODO Check if this is required
 
-    # from all the comparators, returns the one that is being used for sorting.
-    # if none is being used for sorting returns undefined
+# from all the comparators, returns the one that is being used for sorting.
+# if none is being used for sorting returns undefined
     getCurrentSortingComparator: () ->
-      #TODO implement sorting
+#TODO implement sorting
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Download functions
-    # ------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
+# Download functions
+# ------------------------------------------------------------------------------------------------------------------
     DOWNLOADED_ITEMS_ARE_VALID: false
     DOWNLOAD_ERROR_STATE: false
     invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
     clearAllResults: -> @allResults = undefined
+    clearSelectedResults: -> @selectedResults = undefined
 
-    # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
-    # but in the future it could be used to optimize the pagination after this has been called.
-    # it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
-    # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
-    # without requesting again to the server.
-    # you can use a progress element to show the progress if you want.
-    getAllSelectedResults: ($progressElement) ->
-
+# this function iterates over all the pages and downloads all the results. This is independent of the pagination,
+# but in the future it could be used to optimize the pagination after this has been called.
+# it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
+# I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
+# without requesting again to the server.
+# you can use a progress element to show the progress if you want.
+    getAllResults: ($progressElement, askingForOnlySelected = false) ->
       if $progressElement?
         $progressElement.empty()
+
+      thisCollection = @
+
+      if askingForOnlySelected
+        iNeedToGetEverything = not @thereAreExceptions()
+        iNeedToGetEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
+        iNeedToGetOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
+      else
+        iNeedToGetEverything = true
+        iNeedToGetEverythingExceptSome = false
+        iNeedToGetOnlySome = false
+
+      #if they want the selected ones only, and I already have them all just pick them from the list
+      if askingForOnlySelected and @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+        if not @thereAreExceptions()
+          @selectedResults = @allResults
+        else
+          @selectedResults = _.filter(thisCollection.allResults, (item) ->
+            itemID = glados.Utils.getNestedValue(item, thisCollection.getMeta('id_column').comparator)
+            return thisCollection.itemIsSelected(itemID)
+          )
+        return [jQuery.Deferred().resolve()]
+
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
         return [jQuery.Deferred().resolve()]
@@ -423,12 +446,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       totalRecords = @getMeta('total_records')
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
-      getEverything = not @thereAreExceptions()
-      getEverythingExceptSome = @getMeta('all_items_selected') and @thereAreExceptions()
-      getOnlySome = not @getMeta('all_items_selected') and @thereAreExceptions()
-
-      if totalRecords >= 10000 and not getOnlySome
-        msg = 'It is still not supported to process 10000 items or more! ('+ totalRecords + ' requested)'
+      if totalRecords >= 10000 and not iNeedToGetOnlySome
+        msg = 'It is still not supported to process 10000 items or more! (' + totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
         errorModalID = 'error-' + parseInt(Math.random() * 1000)
         $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
@@ -444,58 +463,60 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
-        $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+        $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
           percentage: '0'
 
       url = @getURL()
 
       #initialise the array in which all the items are going to be saved as they are received from the server
-      if getOnlySome
+      if iNeedToGetOnlySome
         idsList = Object.keys(@getMeta('selection_exceptions'))
-        @allResults = (undefined for num in [1..idsList.length])
+        @selectedResults = (undefined for num in [1..idsList.length])
         totalPages = Math.ceil(idsList.length / pageSize)
       else
         @allResults = (undefined for num in [1..totalRecords])
+        @selectedResults = (undefined for num in [1..totalRecords])
         totalPages = Math.ceil(totalRecords / pageSize)
+
       itemsReceived = 0
 
       #this function knows how to get one page of results and add them in the corresponding positions in the all
       # items array
-      thisCollection = @
       getItemsFromPage = (currentPage) ->
-
-        if getOnlySome
+        if iNeedToGetOnlySome
           data = JSON.stringify(thisCollection.getRequestDataForChemblIDs(currentPage, pageSize, idsList))
         else
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
 
-        return $.post( url, data).done( (response) ->
+        return $.post(url, data).done((response) ->
 
           #I know that I must be receiving currentPage.
           newItems = (item._source for item in response.hits.hits)
           # now I add them in the corresponding position in the items array
           startingPosition = (currentPage - 1) * pageSize
 
-          for i in [0..(newItems.length-1)]
+          for i in [0..(newItems.length - 1)]
 
             currentItem = newItems[i]
 
-            if getEverythingExceptSome
+            if iNeedToGetEverythingExceptSome
               itemID = glados.Utils.getNestedValue(currentItem, thisCollection.getMeta('id_column').comparator)
+              thisCollection.allResults[i + startingPosition] = currentItem
+              if thisCollection.itemIsSelected(itemID)
+                thisCollection.selectedResults[i + startingPosition] = currentItem
 
-              if not thisCollection.itemIsSelected(itemID)
-                continue
+            else if iNeedToGetOnlySome
+              thisCollection.selectedResults[i + startingPosition] = currentItem
+            else if iNeedToGetEverything
+              thisCollection.allResults[i + startingPosition] = currentItem
 
-            thisCollection.allResults[i + startingPosition] = currentItem
-            itemsReceived++
+             itemsReceived++
 
           progress = parseInt((itemsReceived / totalRecords) * 100)
 
           if $progressElement? and (progress % 10) == 0
-            $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages0').html() )
+            $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
               percentage: progress
-
-
         )
 
       deferreds = []
@@ -503,17 +524,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true;@DOWNLOAD_ERROR_STATE = false), @)
+      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
       $.when.apply($, deferreds).done -> setValidDownload()
 
-      if getEverythingExceptSome or getOnlySome
-        f = $.proxy(@removeHolesInAllResults, @)
+      if iNeedToGetEverythingExceptSome
+        f = $.proxy((->
+          @removeHolesInAllResults
+          @removeHolesInSelectedResults()
+        ), @)
         $.when.apply($, deferreds).done -> f()
 
       return deferreds
 
     removeHolesInAllResults: ->
-
       i = 0
       while i < @allResults.length
         currentItem = @allResults[i]
@@ -522,11 +545,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           i--
         i++
 
-    getDownloadObject: (columns) ->
+    removeHolesInSelectedResults: ->
+      i = 0
+      while i < @selectedResults.length
+        currentItem = @selectedResults[i]
+        if not currentItem?
+          @selectedResults.splice(i, 1)
+          i--
+        i++
 
+    getDownloadObject: (columns) ->
       downloadObj = []
 
-      for item in @allResults
+      for item in @selectedResults
 
         row = {}
         for col in columns
@@ -541,38 +572,32 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return downloadObj
 
-    # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+# you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, columns, $progressElement) ->
-
-      deferreds = @getAllSelectedResults($progressElement)
+      deferreds = @getAllResults($progressElement, true)
 
       thisCollection = @
       # Here I know that all the items have been obtainer, now I need to generate the file
-      $.when.apply($, deferreds).done( ->
-
+      $.when.apply($, deferreds).done(->
         if $progressElement?
-          $progressElement.html Handlebars.compile( $('#Handlebars-Common-DownloadColMessages1').html() )()
+          $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages1').html())()
 
         downloadObject = thisCollection.getDownloadObject.call(thisCollection, columns)
 
         if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV']
           DownloadModelOrCollectionExt.downloadCSV('results.csv', null, downloadObject)
           # erase progress element contents after some milliseconds
-          setTimeout( (()-> $progressElement.html ''), 1000)
+          setTimeout((()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']
           DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, true)
           # erase progress element contents after some milliseconds
-          setTimeout( (()-> $progressElement.html ''), 1000)
+          setTimeout((()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
-          idsList = (item.molecule_chembl_id for item in thisCollection.allResults)
+          idsList = (item.molecule_chembl_id for item in thisCollection.selectedResults)
           # here I have the IDs, I have to request them to the server as SDF
           DownloadModelOrCollectionExt.generateSDFFromChemblIDs idsList, $progressElement
-
-
-
-      ).fail( (msg) ->
-
+      ).fail((msg) ->
         if $progressElement?
-          $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+          $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
             msg: msg
       )
