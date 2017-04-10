@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @collection.on 'reset do-repaint', @fetchInfoForGraph, @
 
-      @compResGraphView = new CompoundResultsGraphView
+      @compResGraphView = new PlotView
         el: $(@el).find('.BCK-CompResultsGraph')
         collection: @collection
 
@@ -17,7 +17,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @compResGraphView.clearVisualisation()
 
       $progressElement = $($(@el).find('.load-messages-container'))
-      deferreds = @collection.getAllSelectedResults($progressElement)
+      deferreds = @collection.getAllResults($progressElement)
 
       thisView = @
       #REMINDER, THIS COULD BE A NEW EVENT, it could help for future cases.

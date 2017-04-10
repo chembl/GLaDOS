@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
       @ctm = new CompoundTargetMatrix
-      @ctmView = new CompoundTargetMatrixView
+      @ctmView = new MatrixView
           model: @ctm
           el: $(@el).find('.BCK-CompTargetMatrix')
 
@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @ctmView.clearVisualisation()
 
       $progressElement = $($(@el).find('.load-messages-container'))
-      deferreds = @collection.getAllSelectedResults($progressElement)
+      deferreds = @collection.getAllResults($progressElement)
 
       thisView = @
       $.when.apply($, deferreds).done( () ->

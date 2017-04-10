@@ -52,7 +52,7 @@ class SearchResultsApp
 
   # this initialises the view that shows the compound results graph view
   @initCompResultsGraphView = (topLevelElem) ->
-    compResGraphView = new CompoundResultsGraphView
+    compResGraphView = new PlotView
       el: topLevelElem
 
     return compResGraphView
@@ -62,7 +62,7 @@ class SearchResultsApp
       'molecule_chembl_ids': ['CHEMBL554', 'CHEMBL212250', 'CHEMBL212201', 'CHEMBL212251', 'CHEMBL384407',
       'CHEMBL387207', 'CHEMBL215814', 'CHEMBL383965', 'CHEMBL214487']
 
-    new CompoundTargetMatrixView
+    new MatrixView
       model: ctm
       el: $('.BCK-CompTargetMatrix')
 
