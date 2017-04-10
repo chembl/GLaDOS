@@ -254,6 +254,48 @@ describe "Paginated Collection", ->
       appDrugCCList.unSelectItem(lastItemID)
       expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
 
+    it 'selects a selection list with no items', ->
+
+      itemsToSelect = []
+      appDrugCCList.selectItems(itemsToSelect)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      expect(appDrugCCList.thereAreExceptions()).toBe(false)
+
+    it 'selects a from a list of items to select', ->
+
+      # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      itemsToSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
+      appDrugCCList.selectItems(itemsToSelect)
+
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+
+      for itemID in itemsToSelect
+        expect(selectedItemsGot).toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
+    it 'goes to a select all state when all the items are in the selection lists', ->
+
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      itemsToSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
+      itemsToSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
+
+      appDrugCCList.selectItems(itemsToSelectA)
+      appDrugCCList.selectItems(itemsToSelectB)
+
+      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+      expect(appDrugCCList.thereAreExceptions()).toBe(false)
+
+      for itemID in itemsToSelectA
+        expect(selectedItemsGot).toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
+      for itemID in itemsToSelectB
+        expect(selectedItemsGot).toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
 

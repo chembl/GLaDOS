@@ -15,8 +15,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         initialize: ->
 
-          @on(glados.Events.Collections.SELECTION_UPDATED, @invalidateAllDownloadedResults)
-
           @meta =
             index: esIndexSettings.PATH
             page_size: glados.Settings.CARD_PAGE_SIZES[2]

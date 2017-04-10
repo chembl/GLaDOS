@@ -516,7 +516,7 @@ class CompoundReportCardTest(ReportCardTester):
 
   def test_compound_report_card_scenario_14(self):
 
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL2106520/')
+    self.getURL(self.HOST + '/compound_report_card/CHEMBL2106520/', timeout=ReportCardTester.DEFAULT_TIMEOUT*5)
 
     # --------------------------------------
     # Molecule Features
