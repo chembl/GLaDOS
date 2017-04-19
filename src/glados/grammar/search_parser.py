@@ -11,7 +11,7 @@ def single_term():
 
 
 def search_terms():
-    return OneOrMore(single_term, [_(r'\s+'), EOF])
+    return Optional(_(r'\s+')), OneOrMore(single_term, [_(r'\s+'), EOF])
 
 
 parser = ParserPython(search_terms, skipws=False)
@@ -39,9 +39,20 @@ class TermsVisitor(PTNodeVisitor):
         return list(filter(lambda x: len(x.strip()) > 0, children))
 
 
-parser_tree = parser.parse('[H]-[He]')
+parser_tree = parser.parse('[H]-2([He])')
 result = arpeggio.visit_parse_tree(parser_tree, TermsVisitor())
 print(result)
 parser_tree = parser.parse('[12H]-[He] [He]  [Cu]-[Zn]')
+result = arpeggio.visit_parse_tree(parser_tree, TermsVisitor())
+print(result)
+
+parser_tree = parser.parse(
+    """
+    CCc1nn(C)c2c(=O)[nH]c(nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4
+    Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13
+    CC(C)(N)Cc1ccccc1
+    CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
+    """
+)
 result = arpeggio.visit_parse_tree(parser_tree, TermsVisitor())
 print(result)

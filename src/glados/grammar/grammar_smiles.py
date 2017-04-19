@@ -1,4 +1,4 @@
-from arpeggio import Not, Optional, OneOrMore
+from arpeggio import Not, Optional, OneOrMore, ZeroOrMore, EOF
 from arpeggio import RegExMatch as _
 import arpeggio
 import glados.grammar.grammar_common as common
@@ -9,7 +9,7 @@ def aliphatic_organic():
 
 
 def aromatic_organic():
-    return _(common.reverse_regex_or_clause(r'b|c|n|o|s|p)'))
+    return _(common.reverse_regex_or_clause(r'b|c|n|o|s|p'))
 
 
 def element_symbol():
@@ -76,12 +76,53 @@ def bracket_atom():
       http://opensmiles.org/opensmiles.html
       bracket_atom ::= '[' isotope? symbol chiral? hcount? charge? class? ']'
     """
-    return r'[', Optional(common.integer_number), bracket_atom_symbol, r']'
+    return r'[', Optional(common.integer_number), bracket_atom_symbol, \
+           Optional(chiral), Optional(h_count), Optional(charge), Optional(atom_class), r']'
 
 
 def atom():
-    return [bracket_atom, aliphatic_organic, aromatic_organic, r'*']
+    return [bracket_atom, aliphatic_organic, aromatic_organic, '*']
+
+
+def dot():
+    return '.'
+
+
+def bond():
+    return ['-', '=', '#', '$', ':', '/', '\\']
+
+
+def branched_atom():
+    return atom, ZeroOrMore(ring_bond), ZeroOrMore(branch)
+
+
+def ring_bond():
+    return Optional(bond), Optional('%'), common.digit, Optional(common.digit)
+
+
+def chain():
+    return \
+        (
+            branched_atom, Optional(
+                (
+                    Optional([bond, dot]), chain
+                )
+            )
+        )
+
+
+def branch():
+    return \
+        [
+            ('(', chain, ')'),
+            ('(', bond, chain, ')'),
+            ('(', dot, chain, ')')
+        ]
+
+
+def terminator():
+    return ['\s', EOF]
 
 
 def smiles():
-    return OneOrMore(atom, Optional(r'-'))
+    return chain
