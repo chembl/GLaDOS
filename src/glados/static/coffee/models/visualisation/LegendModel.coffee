@@ -16,6 +16,8 @@ glados.useNameSpace 'glados.models.visualisation',
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
 
+    selectByPropertyValue: (value) -> @get('collection').selectByPropertyValue(@.get('property').propName, value)
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context
 # ----------------------------------------------------------------------------------------------------------------------

@@ -89,3 +89,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('all_items_selected', false)
       @setMeta('selection_exceptions', {})
       @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
+
+    selectByPropertyValue: (propName, value) ->
+
+      idProperty = @getMeta('id_column').comparator
+      idsToSelect = (model.attributes[idProperty] for model in @models \
+        when glados.Utils.getNestedValue(model.attributes, propName) == value)
+
+      @selectItems(idsToSelect)

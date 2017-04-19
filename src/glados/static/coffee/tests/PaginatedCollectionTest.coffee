@@ -296,6 +296,24 @@ describe "Paginated Collection", ->
         expect(selectedItemsGot).toContain(itemID)
         expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
 
+    it 'selects item based on a property value', ->
+
+      propName = 'max_phase'
+      propValue = 4
+
+      selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
+      selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
+
+      appDrugCCList.selectByPropertyValue(propName, propValue)
+
+      for itemID in selectedValuesShouldBe
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
+      for itemID in selectedValuesShouldNotBe
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
 

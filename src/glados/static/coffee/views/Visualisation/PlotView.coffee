@@ -451,6 +451,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
     legendModel = new glados.models.visualisation.LegendModel
       property: prop
+      collection: @collection
 
     $legendContainer2 = $(@el).find('.BCK-CompResultsGraphLegendContainer2')
     legendView = new LegendView
