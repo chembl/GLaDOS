@@ -65,5 +65,18 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
+      .style('stroke-width', 2)
+      .style('stroke', glados.Settings.VISUALISATION_GREY_BASE)
+      .on('mouseover', @mouseOverRectangle)
+      .on('mouseout', @mouseOutRectangle)
 
     legendG.call(legendAxis)
+
+  mouseOverRectangle: (d) ->
+    d3.select(this).style('stroke', glados.Settings.VISUALISATION_TEAL_ACCENT_4)
+
+  mouseOutRectangle: (d) ->
+    d3.select(this).style('stroke', glados.Settings.VISUALISATION_GREY_BASE)
+
+
+
