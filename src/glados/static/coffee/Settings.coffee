@@ -188,6 +188,7 @@ glados.logGladosSettings = () ->
     console.log("---END GLaDOS LOADED NAMESPACES----------------------------------------------------------------------")
     console.log("Play nice and there will be CAKE!\n.\n.\n.\nThe CAKE is real, I promise!")
     console.log("♫ ♬ Searching compounds, all day long, searching compounds while I sing this song... ♫ ♬")
+    console.log("Studying hard to pass the Turing test!")
     console.log("What are you looking at, human?")
 
   GlobalVariables.CURRENT_SCREEN_TYPE = glados.getScreenType()

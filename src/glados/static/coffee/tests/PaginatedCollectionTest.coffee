@@ -62,6 +62,9 @@ describe "Paginated Collection", ->
     beforeAll (done) ->
       simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
+    beforeEach ->
+      appDrugCCList.unSelectAll()
+
     it "initialises correctly", ->
       page_size = appDrugCCList.getMeta('page_size')
       current_page = appDrugCCList.getMeta('current_page')
