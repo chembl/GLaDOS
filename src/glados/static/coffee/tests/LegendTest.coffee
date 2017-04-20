@@ -24,3 +24,16 @@ describe "Legend Model", ->
       for comparison in _.zip(range, rangeShouldBe)
         expect(comparison[0]).toBe(comparison[1])
 
+    it 'selects a value', ->
+
+      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
+      legendModel = new glados.models.visualisation.LegendModel
+        property: prop
+        #collection is not important for this test, can be anything
+        collection: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+      legendModel.selectByPropertyValue(0)
+      expect(legendModel.isValueSelected(0)).toBe(true)
+
+
+

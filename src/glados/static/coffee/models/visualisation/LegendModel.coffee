@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.visualisation',
 
     initialize: ->
 
-      defaultDomain = @.get('property').domain
+      defaultDomain = @get('property').domain
       if defaultDomain?
         @set('domain', defaultDomain)
 
@@ -12,11 +12,21 @@ glados.useNameSpace 'glados.models.visualisation',
         if defaultDomain.length > 2
           @set('type', glados.models.visualisation.LegendModel.DISCRETE)
           @set('ticks', defaultDomain)
-          @set('colour-range', @.get('property').coloursRange)
+          @set('colour-range', @get('property').coloursRange)
+
+      if @isDiscrete()
+        @set('selected-values', [])
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
 
-    selectByPropertyValue: (value) -> @get('collection').selectByPropertyValue(@.get('property').propName, value)
+    selectByPropertyValue: (value) ->
+
+      @get('collection').selectByPropertyValue(@get('property').propName, value)
+      @get('selected-values').push(value)
+      @trigger(glados.Events.Legend.VALUE_SELECTED, value)
+      
+
+    isValueSelected: (value) -> _.contains(@get('selected-values'), value)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context

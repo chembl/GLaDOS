@@ -8,10 +8,17 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el)
     updateViewProxy = @setUpResponsiveRender()
     @render()
+    @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
     $(@el).find('line, path').css('fill', 'none')
+
+  valueSelectedHandler: (value) ->
+    rectClassSelector = '.legend-rect-' + value
+    d3.select($(@el).find(rectClassSelector)[0])
+      .style('stroke', glados.Settings.VISUALISATION_SELECTED)
+      .attr('data-is-selected', true)
 
   render: ->
 
@@ -61,6 +68,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendG.selectAll('rect')
       .data(getXInLegendFor.domain())
       .enter().append('rect')
+      .attr('class', (d) -> 'legend-rect-' + d)
       .attr('height', @LEGEND_RECT_HEIGHT)
       .attr('width', getXInLegendFor.rangeBand() - rectanglePadding)
       .attr('x', (d) -> getXInLegendFor d)
@@ -75,7 +83,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   mouseOverRectangle: (d) -> d3.select(this).style('stroke', glados.Settings.VISUALISATION_TEAL_ACCENT_4)
 
-  mouseOutRectangle: (d) -> d3.select(this).style('stroke', 'none')
+  mouseOutRectangle: (d) ->
+    if !$(@).attr('data-is-selected')
+      d3.select(@).style('stroke', 'none')
 
   clickRectangle: (d) ->
     @model.selectByPropertyValue(d)
