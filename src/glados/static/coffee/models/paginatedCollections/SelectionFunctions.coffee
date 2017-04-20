@@ -40,13 +40,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if @getMeta('all_items_selected')
         if not @thereAreExceptions()
           return
-        else
-          @reverseExceptions()
-          console.log 'exceptions after reverse: ', @getMeta('selection_exceptions')
-
-      exceptions = @getMeta('selection_exceptions')
+        else @reverseExceptions()
 
       @setMeta('all_items_selected', false)
+      exceptions = @getMeta('selection_exceptions')
+
       for id in idsList
         exceptions[id] = true
       @setMeta('selection_exceptions', exceptions)
@@ -74,6 +72,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if idsListLength == 0
         return
+
+      if not @getMeta('all_items_selected')
+        if not @thereAreExceptions()
+          return
+        else @reverseExceptions()
 
       @setMeta('all_items_selected', true)
       exceptions = @getMeta('selection_exceptions')
