@@ -339,6 +339,61 @@ describe "Paginated Collection", ->
         expect(selectedItemsGot).not.toContain(itemID)
         expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
 
+    it 'accumulates previous selections (bulk selection)', ->
+
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+
+      itemsToSelectA = allItemsIDs[0..4]
+      itemsToSelectB = allItemsIDs[2..6]
+
+      appDrugCCList.selectItems(itemsToSelectA)
+      appDrugCCList.selectItems(itemsToSelectB)
+
+      selectedItemsShouldBe = _.union(itemsToSelectA, itemsToSelectB)
+      for itemID in selectedItemsShouldBe
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
+      appDrugCCList.unSelectAll()
+      appDrugCCList.selectAll()
+      appDrugCCList.selectItems(itemsToSelectA)
+      for itemID in allItemsIDs
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+      expect(appDrugCCList.thereAreExceptions()).toBe(false)
+
+      # try to mess with the sate of the selections by selecting all except for a small set
+      appDrugCCList.unSelectAll()
+      appDrugCCList.selectAll()
+
+      for itemID in itemsToSelectA
+        appDrugCCList.unSelectItem(itemID)
+
+      appDrugCCList.selectItems(itemsToSelectB)
+      unSelectedItemsShouldBe = _.difference(itemsToSelectA, itemsToSelectB)
+      selectedItemsShouldBe = _.difference(allItemsIDs, unSelectedItemsShouldBe)
+
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      expect(appDrugCCList.thereAreExceptions()).toBe(true)
+      for itemID in unSelectedItemsShouldBe
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      for itemID in selectedItemsShouldBe
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+
+    it 'reverses exceptions', ->
+
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      itemsToSelect = allItemsIDs[0..4]
+      unSelectedItems = _.difference(allItemsIDs, itemsToSelect)
+      for itemID in itemsToSelect
+        appDrugCCList.selectItem(itemID)
+
+      appDrugCCList.reverseExceptions()
+      exceptions = appDrugCCList.getMeta('selection_exceptions')
+      for itemID in itemsToSelect
+        expect(exceptions[itemID]?).toBe(false)
+      for itemID in unSelectedItems
+        expect(exceptions[itemID]?).toBe(true)
+
     it 'selects items based on a property value', ->
 
       propName = 'max_phase'

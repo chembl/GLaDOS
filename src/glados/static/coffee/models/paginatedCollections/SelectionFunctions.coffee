@@ -30,15 +30,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
 
-    selectItems: (idsList) ->
+    selectItems: (idsList, ignorePreviousSelections=false) ->
 
       idsListLength = idsList.length
 
       if idsListLength == 0
         return
 
-      @setMeta('all_items_selected', false)
+      if @getMeta('all_items_selected')
+        if not @thereAreExceptions()
+          return
+        else
+          @reverseExceptions()
+          console.log 'exceptions after reverse: ', @getMeta('selection_exceptions')
+
       exceptions = @getMeta('selection_exceptions')
+
+      @setMeta('all_items_selected', false)
       for id in idsList
         exceptions[id] = true
       @setMeta('selection_exceptions', exceptions)
@@ -48,7 +56,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_SELECTED, idsList)
 
-    unSelectItems: (idsList) ->
+    reverseExceptions: ->
+
+      exceptions = @getMeta('selection_exceptions')
+      reversedExceptions = {}
+      idProperty = @getMeta('id_column').comparator
+      newItemsIDs = (model.attributes[idProperty] for model in @models \
+        when !exceptions[model.attributes[idProperty]]?)
+      for itemID in newItemsIDs
+        reversedExceptions[itemID] = true
+
+      @setMeta('selection_exceptions', reversedExceptions)
+
+    unSelectItems: (idsList, ignorePreviousSelections=false) ->
 
       idsListLength = idsList.length
 
