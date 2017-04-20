@@ -311,6 +311,34 @@ describe "Paginated Collection", ->
         expect(selectedItemsGot).not.toContain(itemID)
         expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
 
+    it 'bulk unselects a selection list with no items', ->
+
+      itemsToUnSelect = []
+      appDrugCCList.unSelectItems(itemsToUnSelect)
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      expect(appDrugCCList.thereAreExceptions()).toBe(false)
+
+    it 'goes to a select none state when all the items are in the unselection lists', ->
+
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      itemsToUnSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
+      itemsToUnSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
+
+      appDrugCCList.unSelectItems(itemsToUnSelectA)
+      appDrugCCList.unSelectItems(itemsToUnSelectB)
+
+      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+      expect(appDrugCCList.thereAreExceptions()).toBe(false)
+
+      for itemID in itemsToUnSelectA
+        expect(selectedItemsGot).not.toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+
+      for itemID in itemsToUnSelectB
+        expect(selectedItemsGot).not.toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+
     it 'selects items based on a property value', ->
 
       propName = 'max_phase'

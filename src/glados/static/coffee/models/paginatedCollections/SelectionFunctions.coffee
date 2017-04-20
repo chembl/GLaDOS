@@ -62,7 +62,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('selection_exceptions', exceptions)
 
       if Object.keys(exceptions).length == @models.length
-        @selectAll()
+        @unSelectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_UNSELECTED, idsList)
 
