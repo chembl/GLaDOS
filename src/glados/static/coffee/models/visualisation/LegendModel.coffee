@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.models.visualisation',
       @get('collection').selectByPropertyValue(@get('property').propName, value)
       @get('selected-values').push(value)
       @trigger(glados.Events.Legend.VALUE_SELECTED, value)
-      
+
 
     isValueSelected: (value) -> _.contains(@get('selected-values'), value)
 

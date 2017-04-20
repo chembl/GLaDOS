@@ -75,17 +75,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
       .style('stroke-width', 2)
-      .on('mouseover', @mouseOverRectangle)
-      .on('mouseout', @mouseOutRectangle)
+      .classed('legend-rect', true)
       .on('click', $.proxy(@clickRectangle, @))
 
     legendG.call(legendAxis)
-
-  mouseOverRectangle: (d) -> d3.select(this).style('stroke', glados.Settings.VISUALISATION_TEAL_ACCENT_4)
-
-  mouseOutRectangle: (d) ->
-    if !$(@).attr('data-is-selected')
-      d3.select(@).style('stroke', 'none')
 
   clickRectangle: (d) ->
     @model.selectByPropertyValue(d)

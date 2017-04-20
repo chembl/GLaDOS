@@ -254,14 +254,14 @@ describe "Paginated Collection", ->
       appDrugCCList.unSelectItem(lastItemID)
       expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
 
-    it 'selects a selection list with no items', ->
+    it 'bulk selects a selection list with no items', ->
 
       itemsToSelect = []
       appDrugCCList.selectItems(itemsToSelect)
       expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
       expect(appDrugCCList.thereAreExceptions()).toBe(false)
 
-    it 'selects a from a list of items to select', ->
+    it 'bulk selects a from a list of items to select', ->
 
       # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
       allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
@@ -296,7 +296,22 @@ describe "Paginated Collection", ->
         expect(selectedItemsGot).toContain(itemID)
         expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
 
-    it 'selects item based on a property value', ->
+    it 'bulk unselects a from a list of items to select', ->
+
+      # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
+      appDrugCCList.selectAll()
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+      itemsToUnSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
+      appDrugCCList.unSelectItems(itemsToUnSelect)
+
+      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+
+      for itemID in itemsToUnSelect
+        expect(selectedItemsGot).not.toContain(itemID)
+        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+
+    it 'selects items based on a property value', ->
 
       propName = 'max_phase'
       propValue = 4
@@ -313,6 +328,24 @@ describe "Paginated Collection", ->
 
       for itemID in selectedValuesShouldNotBe
         expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+
+#    it 'unselects items based on a property value', ->
+#
+#      propName = 'max_phase'
+#      propValue = 4
+#
+#      selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+#        when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
+#      selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+#        when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
+#
+#      appDrugCCList.unSelectByPropertyValue(propName, propValue)
+#
+#      for itemID in selectedValuesShouldBe
+#        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+#
+#      for itemID in selectedValuesShouldNotBe
+#        expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
 
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()

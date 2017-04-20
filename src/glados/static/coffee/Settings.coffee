@@ -128,6 +128,7 @@ glados.useNameSpace 'glados',
         SELECTED: 'select'
         UNSELECTED: 'unselect'
         BULK_SELECTED: 'bulk-selected'
+        BULK_UNSELECTED: 'bulk-unselected'
     Legend:
       VALUE_SELECTED: 'value-selected'
 

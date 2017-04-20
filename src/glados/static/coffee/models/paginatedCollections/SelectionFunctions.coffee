@@ -33,7 +33,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     selectItems: (idsList) ->
 
       idsListLength = idsList.length
-      thresholdLength = Math.floor(@.models.length / 2) + 1
 
       if idsListLength == 0
         return
@@ -47,8 +46,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if Object.keys(exceptions).length == @models.length
         @selectAll()
       else
-        console.log 'triggering event!'
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_SELECTED, idsList)
+
+    unSelectItems: (idsList) ->
+
+      idsListLength = idsList.length
+
+      if idsListLength == 0
+        return
+
+      @setMeta('all_items_selected', true)
+      exceptions = @getMeta('selection_exceptions')
+      for id in idsList
+        exceptions[id] = true
+      @setMeta('selection_exceptions', exceptions)
+
+      if Object.keys(exceptions).length == @models.length
+        @selectAll()
+      else
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_UNSELECTED, idsList)
 
     thereAreExceptions: -> return Object.keys(@getMeta('selection_exceptions')).length > 0
 
