@@ -1,7 +1,6 @@
-from arpeggio import Not, Optional, OneOrMore, ZeroOrMore, EOF
+from arpeggio import Optional, ZeroOrMore, And, EOF
 from arpeggio import RegExMatch as _
-import arpeggio
-import glados.grammar.grammar_common as common
+import glados.grammar.common as common
 
 
 def aliphatic_organic():
@@ -100,17 +99,6 @@ def ring_bond():
     return Optional(bond), Optional('%'), common.digit, Optional(common.digit)
 
 
-def chain():
-    return \
-        (
-            branched_atom, Optional(
-                (
-                    Optional([bond, dot]), chain
-                )
-            )
-        )
-
-
 def branch():
     return \
         [
@@ -120,9 +108,18 @@ def branch():
         ]
 
 
-def terminator():
-    return ['\s', EOF]
+def chain():
+    return \
+        (
+            branched_atom,
+            Optional(
+                (
+                    Optional([bond, dot]), chain
+                )
+            )
+        )
 
 
 def smiles():
-    return chain
+    return chain, common.term_end_lookahead
+
