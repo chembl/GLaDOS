@@ -1,4 +1,4 @@
-from arpeggio import Optional, PTNodeVisitor, OneOrMore, EOF
+from arpeggio import Optional, PTNodeVisitor, ZeroOrMore, EOF
 from arpeggio import ParserPython
 import arpeggio
 
@@ -8,16 +8,12 @@ import glados.grammar.inchi as inchi
 import re
 
 
-def single_term():
-    return [smiles.smiles, inchi.inchi_key, inchi.inchi]
-
-
 def expression_term():
-    return [parenthesised_expression, single_term]
+    return [parenthesised_expression, smiles.smiles, inchi.inchi_key, inchi.inchi]
 
 
 def parenthesised_expression():
-    return '(', expression, ')'
+    return '(', expression, ')', common.term_end_lookahead
 
 
 def expression():
@@ -25,27 +21,25 @@ def expression():
         (
             Optional(common.space_sequence),
             expression_term,
-            OneOrMore(
+            ZeroOrMore(
                 Optional(
                     (common.space_sequence, ['and', 'or'])
                 ),
                 common.space_sequence,
                 expression_term,
                 common.term_end_lookahead
-            )
+            ),
+            Optional(common.space_sequence)
         )
 
 
-parser = ParserPython(expression, skipws=False)
+parser = ParserPython(expression, skipws=False, debug=True)
 
 
 class TermsVisitor(PTNodeVisitor):
 
     def __init__(self):
         super().__init__()
-        self.smiles = []
-        self.inchi = []
-        self.inchi_key = []
 
     def visit__default__(self, node, children):
         """
@@ -63,21 +57,24 @@ class TermsVisitor(PTNodeVisitor):
     # def visit_single_term(self, node, children):
     #     return ''.join(list(map(lambda x: str(x), children)))
 
+    def visit_expression_term(self, node, children):
+        return children[0]
+
+    def visit_parenthesised_expression(self, node, children):
+        return children[1]
+
     def visit_expression(self, node, children):
-        return {
-            'smiles': self.smiles,
-            'inchi': self.inchi,
-            'inchi_key': self.inchi_key
-        }
+        print(children)
+        return children
 
     def visit_smiles(self, node, children):
-        self.smiles.append(''.join(children))
+        return ''.join(children)
 
     def visit_inchi(self, node, children):
-        self.inchi.append(''.join(children))
+        return ''.join(children)
 
     def visit_inchi_key(self, node, children):
-        self.inchi_key.append(''.join(children))
+        return ''.join(children)
 
 
 def parse_query_str(query_string: str):
@@ -90,10 +87,10 @@ def parse_query_str(query_string: str):
 
 parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
 
+
 parse_query_str(
-    """    InChI=1/BrH/h1H/i1-1
-    (CCc1nn(C)c2c(=O)[nH]c(nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4 or
-    Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 and CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13)
+    """    (InChI=1/BrH/h1H/i1-1 )
+    ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 c ccc cs)
     CC(C)(N)Cc1ccccc1
     CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
 
@@ -104,3 +101,6 @@ parse_query_str(
 
     """
 )
+
+
+print('C'*14+'-'+'C'*10+'-C')

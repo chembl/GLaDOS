@@ -100,12 +100,7 @@ def ring_bond():
 
 
 def branch():
-    return \
-        [
-            ('(', chain, ')'),
-            ('(', bond, chain, ')'),
-            ('(', dot, chain, ')')
-        ]
+    return '(', Optional([bond, dot]), chain, ')'
 
 
 def chain():
