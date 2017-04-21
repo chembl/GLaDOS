@@ -64,8 +64,12 @@ class TermsVisitor(PTNodeVisitor):
         return children[1]
 
     def visit_expression(self, node, children):
-        print(children)
-        return children
+        exp = {'or': []}
+        for child_i in children:
+            str_child_i = str(child_i).strip()
+            if len(str_child_i) > 0:
+                exp['or'].append(str_child_i)
+        return exp
 
     def visit_smiles(self, node, children):
         return ''.join(children)
