@@ -13,7 +13,7 @@ describe "Selection Functions", ->
     expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
     expect(appDrugCCList.itemIsSelected('CHEMBL1152')).toBe(false)
     expect(appDrugCCList.getSelectedItemsIDs()).toContain('CHEMBL1091')
-    
+
   it "selects all items", ->
     appDrugCCList.selectAll()
     expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
@@ -38,6 +38,62 @@ describe "Selection Functions", ->
     for item in selectedItemsShouldNotBe
       expect(selectedItemsGot).not.toContain(item)
       expect(appDrugCCList.itemIsSelected(item)).toBe(false)
+
+  it 'gives the number of selected items after selecting none', ->
+
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(0)
+
+  it 'gives the number of selected items after selecting some', ->
+
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    itemsToSelect = allItemsIDs[0..5]
+
+    for itemID in itemsToSelect
+      appDrugCCList.selectItem(itemID)
+
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(itemsToSelect.length)
+
+  it 'gives the number of selected items after selecting all', ->
+
+    appDrugCCList.selectAll()
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(appDrugCCList.models.length)
+
+  it 'gives the number of selected items after selecting all and then unselecting one', ->
+
+    appDrugCCList.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    [..., itemToSelect] = allItemsIDs
+    appDrugCCList.unSelectItem(itemToSelect)
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(appDrugCCList.models.length - 1)
+
+  it 'gives the number of selected items after unselecting some', ->
+
+    appDrugCCList.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    itemsToUnSelect = allItemsIDs[0..5]
+
+    for itemID in itemsToUnSelect
+      appDrugCCList.unSelectItem(itemID)
+
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(allItemsIDs.length - itemsToUnSelect.length)
+
+  it 'gives the number of selected items after unselecting all', ->
+
+    appDrugCCList.selectAll()
+    appDrugCCList.unSelectAll()
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(0)
+
+  it 'gives the number of selected items after unselecting all and then selecting one', ->
+
+    appDrugCCList.selectAll()
+    appDrugCCList.unSelectAll()
+
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    [..., itemToSelect] = allItemsIDs
+    appDrugCCList.selectItem(itemToSelect)
+
+    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(1)
+
 
   it "selects all items, except one", ->
 
@@ -344,8 +400,6 @@ describe "Selection Functions", ->
 
     for itemID in selectedValuesShouldNotBe
       expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
-
-
 
   # ------------------------------
   # Helpers

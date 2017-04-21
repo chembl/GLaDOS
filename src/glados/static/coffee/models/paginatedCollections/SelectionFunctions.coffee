@@ -136,3 +136,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         when glados.Utils.getNestedValue(model.attributes, propName) == value)
 
       @selectItems(idsToSelect)
+
+    getNumberOfSelectedItems: ->
+
+      selectionExceptions = @getMeta('selection_exceptions')
+      console.log 'selection exceptions:', selectionExceptions
+      if @getMeta('all_items_selected')
+        if not @thereAreExceptions()
+          return @models.length
+        else return @models.length - Object.keys(selectionExceptions).length
+
+      return Object.keys(selectionExceptions).length
