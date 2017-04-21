@@ -38,6 +38,14 @@
   {{/each}}
 </script>
 
+<script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">
+  <table class="compact-table">
+    <tr><td>{{num_selected}}/{{total_items}} Selected</td></tr>
+    <tr><td class="td-oneline"><a class="BCK-select-all">Select All</a> -
+      <a class="BCK-unSelect-all">Clear Selections</a></td>
+    </tr>
+  </table>
+</script>
 
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
   <h3>{{es_results_list_title}}
@@ -55,17 +63,12 @@
         <!-- backbone fills this -->
       </div>
 
-      <div class="col s12 m6 l3" data-hb-template="Handlebars-DownloadColButtons">
-        <table class="compact-table">
-          <tr><td>12/100 Selected</td></tr>
-          <tr><td class="td-oneline"><a>Select All</a> - <a>Clear Selections</a></td></tr>
-        </table>
+      <div class="col s12 m6 l3 BCK-selection-menu-container" data-hb-template="Handlebars-SelectionMenu">
+        <!-- backbone fills this -->
       </div>
 
       <div class="col s12 m6 l5 right-align BCK-changeView-btns-container" data-hb-template="Handlebars-SwitchColViewButtons">
-
         <!-- backbone fills this -->
-
       </div>
 
     </div>

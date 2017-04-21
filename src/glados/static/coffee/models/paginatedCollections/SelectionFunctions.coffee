@@ -140,10 +140,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNumberOfSelectedItems: ->
 
       selectionExceptions = @getMeta('selection_exceptions')
-      console.log 'selection exceptions:', selectionExceptions
       if @getMeta('all_items_selected')
         if not @thereAreExceptions()
-          return @models.length
-        else return @models.length - Object.keys(selectionExceptions).length
+          return @getMeta('total_records')
+        else return @getMeta('total_records') - Object.keys(selectionExceptions).length
 
       return Object.keys(selectionExceptions).length

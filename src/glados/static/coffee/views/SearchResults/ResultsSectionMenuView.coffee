@@ -13,9 +13,13 @@ glados.useNameSpace 'glados.views.SearchResults',
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
+      'click .BCK-select-all': 'selectAll'
+      'click .BCK-unSelect-all': 'unSelectAll'
 
     initialize: ->
       @collection.on 'reset do-repaint sort', @render, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @renderSelectionMenu, @
+
       @currentViewType = @collection.getMeta('default_view')
 
       # This handles all the views this menu view handles, there is one view per view type, for example
@@ -32,6 +36,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
+        @renderSelectionMenu()
         $changeViewBtnsContainer = $(@el).find('.BCK-changeView-btns-container')
         $changeViewBtnsContainer.html Handlebars.compile($('#' + $changeViewBtnsContainer.attr('data-hb-template')).html())
           options: ( {
@@ -40,6 +45,19 @@ glados.useNameSpace 'glados.views.SearchResults',
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
+
+    #--------------------------------------------------------------------------------------
+    # Selections
+    #--------------------------------------------------------------------------------------
+    renderSelectionMenu: ->
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      glados.Utils.fillContentForElement $selectionMenuContainer,
+        num_selected: @collection.getNumberOfSelectedItems()
+        total_items: @collection.getMeta('total_records')
+
+    selectAll: -> @collection.selectAll()
+    unSelectAll: -> @collection.unSelectAll()
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
