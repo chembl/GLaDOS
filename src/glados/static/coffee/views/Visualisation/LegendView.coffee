@@ -1,8 +1,9 @@
 # this view is in charge of painting legends
 LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
-  LEGEND_HEIGHT: 100
+  LEGEND_HEIGHT: 110
   LEGEND_RECT_HEIGHT: 20
+  LEGEND_TEXT_Y: -25
 
   initialize: ->
     @$vis_elem = $(@el)
@@ -77,6 +78,18 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke-width', 2)
       .classed('legend-rect', true)
       .on('click', $.proxy(@clickRectangle, @))
+
+    legendG.selectAll('text')
+      .data(getXInLegendFor.domain())
+      .enter().append('text')
+      .text('hola')
+      .attr('x', (d) -> getXInLegendFor d)
+      .attr('y', @LEGEND_TEXT_Y)
+      .style('font-size', '65%')
+      .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
+      .attr('text-anchor', 'middle')
+      .attr("transform", "translate(" + getXInLegendFor.rangeBand()/2 + ")")
+
 
     legendG.call(legendAxis)
 
