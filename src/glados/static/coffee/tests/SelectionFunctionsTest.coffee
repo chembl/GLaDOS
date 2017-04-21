@@ -3,7 +3,7 @@ describe "Selection Functions", ->
   appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
   beforeAll (done) ->
-    simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+    TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
   beforeEach ->
     appDrugCCList.unSelectAll()
@@ -400,11 +400,3 @@ describe "Selection Functions", ->
 
     for itemID in selectedValuesShouldNotBe
       expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
-
-  # ------------------------------
-  # Helpers
-  # ------------------------------
-  simulateDataWSClientList = (list, dataURL, done) ->
-    $.get dataURL, (testData) ->
-      list.reset(testData)
-      done()

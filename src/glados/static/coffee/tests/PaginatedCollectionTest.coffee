@@ -3,11 +3,11 @@ describe "Paginated Collection", ->
     appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
 
     afterAll: (done) ->
       appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
 
     it "initialises correctly", ->
       page_size = appDrugCCList.getMeta('page_size')
@@ -50,7 +50,7 @@ describe "Paginated Collection", ->
     drugList.setMeta('server_side', true)
 
     beforeAll (done) ->
-      simulateDataWSClientList(drugList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData1.json', done)
+      TestsUtils.simulateDataWSClientList(drugList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData1.json', done)
 
     it "gives the first page correctly", ->
       assert_chembl_ids(drugList, ["CHEMBL6939", "CHEMBL22", "CHEMBL6941", "CHEMBL6942", "CHEMBL6944"])
@@ -60,7 +60,7 @@ describe "Paginated Collection", ->
     appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
     beforeEach ->
       appDrugCCList.unSelectAll()
@@ -231,16 +231,3 @@ describe "Paginated Collection", ->
     comparator = _.zip(chembl_ids, expected_chembl_ids)
     for elem in comparator
       expect(elem[0]).toBe(elem[1])
-
-  simulateDataWSClientList = (list, dataURL, done) ->
-    $.get dataURL, (testData) ->
-      list.reset(testData)
-      done()
-
-
-
-
-
-
-
-
