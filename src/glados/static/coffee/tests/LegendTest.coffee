@@ -2,11 +2,17 @@ describe "Legend Model", ->
 
   describe "Categorical", ->
 
-    it 'initialises from a default domain and tick values', ->
+    prop = undefined
+    legendModel = undefined
+
+    beforeEach ->
 
       prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
       legendModel = new glados.models.visualisation.LegendModel
         property: prop
+        collection: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+    it 'initialises from a default domain and tick values', ->
 
       domain = legendModel.get('domain')
       ticks = legendModel.get('ticks')
@@ -24,13 +30,10 @@ describe "Legend Model", ->
       for comparison in _.zip(range, rangeShouldBe)
         expect(comparison[0]).toBe(comparison[1])
 
-    it 'selects a value', ->
+    it 'initialises the amount of items per category', ->
 
-      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
-      legendModel = new glados.models.visualisation.LegendModel
-        property: prop
-        #collection is not important for this test, can be anything
-        collection: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+    it 'selects a value', ->
 
       legendModel.selectByPropertyValue(0)
       expect(legendModel.isValueSelected(0)).toBe(true)
