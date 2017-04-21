@@ -4,16 +4,23 @@ describe "Legend Model", ->
 
     prop = undefined
     legendModel = undefined
+    collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+    beforeAll (done) ->
+       TestsUtils.simulateDataWSClientList(
+         collection, glados.Settings.STATIC_URL + 'testData/SearchResultsDopamineTestData.json', done)
 
     beforeEach ->
 
       prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
       legendModel = new glados.models.visualisation.LegendModel
         property: prop
-        collection: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+        collection: collection
 
     it 'initialises from a default domain and tick values', ->
 
+      allItemsIDs = (model.attributes.molecule_chembl_id for model in collection.models)
+      console.log 'allItemsIDs: ', allItemsIDs
       domain = legendModel.get('domain')
       ticks = legendModel.get('ticks')
 
