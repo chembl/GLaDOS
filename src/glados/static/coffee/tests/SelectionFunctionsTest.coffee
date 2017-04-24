@@ -1,402 +1,468 @@
 describe "Selection Functions", ->
 
-  appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+  # -------------------------------------------------------------------------------------------------
+  # Generic Test Functions
+  # -------------------------------------------------------------------------------------------------
 
-  beforeAll (done) ->
-    TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+  testSelectsOneItem = (list) ->
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToSelect = allItemsIDs[0]
+    itemNotSelected = allItemsIDs[1]
 
-  beforeEach ->
-    appDrugCCList.unSelectAll()
+    list.selectItem(itemToSelect)
+    expect(list.itemIsSelected(itemToSelect)).toBe(true)
+    expect(list.itemIsSelected(itemNotSelected)).toBe(false)
+    expect(list.getSelectedItemsIDs()).toContain(itemToSelect)
 
-  it "selects one item", ->
-    appDrugCCList.selectItem('CHEMBL1091')
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-    expect(appDrugCCList.itemIsSelected('CHEMBL1152')).toBe(false)
-    expect(appDrugCCList.getSelectedItemsIDs()).toContain('CHEMBL1091')
-
-  it "selects all items", ->
-    appDrugCCList.selectAll()
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+  testSelectsAllItems = (list) ->
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    list.selectAll()
+    selectedItemsShouldBe = allItemsIDs
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldBe
       expect(selectedItemsGot).toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(true)
+      expect(list.itemIsSelected(item)).toBe(true)
 
-  it "unselects one item", ->
-    appDrugCCList.unSelectItem('CHEMBL1091')
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-    expect(appDrugCCList.getSelectedItemsIDs()).not.toContain('CHEMBL1091')
+  testUnselectsOneItem = (list) ->
 
-  it "unselects all items", ->
-    appDrugCCList.unSelectAll()
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-    selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToUnselect = allItemsIDs[0]
+
+    list.unSelectItem(itemToUnselect)
+    expect(list.itemIsSelected(itemToUnselect)).toBe(false)
+    expect(list.getSelectedItemsIDs()).not.toContain(itemToUnselect)
+
+  testUnselectsAllItems = (list) ->
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+
+    list.unSelectAll()
+    selectedItemsShouldNotBe = allItemsIDs
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldNotBe
       expect(selectedItemsGot).not.toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(false)
+      expect(list.itemIsSelected(item)).toBe(false)
 
-  it 'gives the number of selected items after selecting none', ->
+  testGivesNumberOfSelectedItemsAfterSelectingNone = (list) ->
+    expect(list.getNumberOfSelectedItems()).toBe(0)
 
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(0)
+  testGivesNumberOfSelectedItemsAfterSelectingSome = (list) ->
 
-  it 'gives the number of selected items after selecting some', ->
-
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToSelect = allItemsIDs[0..5]
 
     for itemID in itemsToSelect
-      appDrugCCList.selectItem(itemID)
+      list.selectItem(itemID)
 
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(itemsToSelect.length)
+    expect(list.getNumberOfSelectedItems()).toBe(itemsToSelect.length)
 
-  it 'gives the number of selected items after selecting all', ->
+  testGivesNumberOfSelectedItemsAfterSelectingAll = (list) ->
+    list.selectAll()
+    expect(list.getNumberOfSelectedItems()).toBe(list.models.length)
 
-    appDrugCCList.selectAll()
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(appDrugCCList.models.length)
-
-  it 'gives the number of selected items after selecting all and then unselecting one', ->
-
-    appDrugCCList.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+  testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne = (list) ->
+    list.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     [..., itemToSelect] = allItemsIDs
-    appDrugCCList.unSelectItem(itemToSelect)
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(appDrugCCList.models.length - 1)
+    list.unSelectItem(itemToSelect)
+    expect(list.getNumberOfSelectedItems()).toBe(list.models.length - 1)
 
-  it 'gives the number of selected items after unselecting some', ->
-
-    appDrugCCList.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+  testGivesNumberOfSelectedItemsAfterUnselectingSome = (list) ->
+    list.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToUnSelect = allItemsIDs[0..5]
 
     for itemID in itemsToUnSelect
-      appDrugCCList.unSelectItem(itemID)
+      list.unSelectItem(itemID)
 
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(allItemsIDs.length - itemsToUnSelect.length)
+    expect(list.getNumberOfSelectedItems()).toBe(allItemsIDs.length - itemsToUnSelect.length)
 
-  it 'gives the number of selected items after unselecting all', ->
+  testGivesNumberOfSelectedItemsAfterUnselectingAll = (list) ->
 
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectAll()
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(0)
+    list.selectAll()
+    list.unSelectAll()
+    expect(list.getNumberOfSelectedItems()).toBe(0)
 
-  it 'gives the number of selected items after unselecting all and then selecting one', ->
+  testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne = (list) ->
 
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectAll()
+    list.selectAll()
+    list.unSelectAll()
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     [..., itemToSelect] = allItemsIDs
-    appDrugCCList.selectItem(itemToSelect)
+    list.selectItem(itemToSelect)
 
-    expect(appDrugCCList.getNumberOfSelectedItems()).toBe(1)
+    expect(list.getNumberOfSelectedItems()).toBe(1)
 
+  testSelectsAllItemsExceptOne = (list) ->
 
-  it "selects all items, except one", ->
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
 
-    exception = 'CHEMBL1152'
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectItem(exception)
-    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models when model.attributes.molecule_chembl_id != exception)
+    [..., exception] = allItemsIDs
+    list.selectAll()
+    list.unSelectItem(exception)
+    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models\
+      when model.attributes.molecule_chembl_id != exception)
 
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldBe
       expect(selectedItemsGot).toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(true)
+      expect(list.itemIsSelected(item)).toBe(true)
 
     expect(selectedItemsGot).not.toContain(exception)
-    expect(appDrugCCList.itemIsSelected(exception)).toBe(false)
+    expect(list.itemIsSelected(exception)).toBe(false)
 
-  it "unselects all items, except one", ->
+  testUnselectsAllItemsExceptOne = (list) ->
 
-    exception = 'CHEMBL1152'
-    appDrugCCList.unSelectAll()
-    appDrugCCList.selectItem(exception)
-    selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models when model.attributes.molecule_chembl_id != exception)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
 
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    [..., exception] = allItemsIDs
+    list.unSelectAll()
+    list.selectItem(exception)
+    selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in list.models\
+      when model.attributes.molecule_chembl_id != exception)
+
+    selectedItemsGot = list.getSelectedItemsIDs()
     for item in selectedItemsShouldNOTBe
       expect(selectedItemsGot).not.toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(false)
+      expect(list.itemIsSelected(item)).toBe(false)
 
     expect(selectedItemsGot).toContain(exception)
-    expect(appDrugCCList.itemIsSelected(exception)).toBe(true)
+    expect(list.itemIsSelected(exception)).toBe(true)
 
-  it "selects all items, then selects one item", ->
+  testSelectsAllItemsThenSelectsOneItem = (list) ->
 
-    appDrugCCList.selectAll()
-    appDrugCCList.selectItem('CHEMBL1091')
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToSelect = allItemsIDs[0]
+    list.selectAll()
+    list.selectItem(allItemsIDs)
 
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    expect(list.itemIsSelected(allItemsIDs)).toBe(true)
+    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models)
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldBe
       expect(selectedItemsGot).toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(true)
+      expect(list.itemIsSelected(item)).toBe(true)
 
-  it "unselects all items, then unselects one item", ->
+  testUnselectsAllItemsThenUnselectsOneItem = (list) ->
 
-    appDrugCCList.unSelectAll()
-    appDrugCCList.unSelectItem('CHEMBL1091')
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToUnselect = allItemsIDs[0]
+    list.unSelectAll()
+    list.unSelectItem(itemToUnselect)
 
-    expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
+    expect(list.itemIsSelected(itemToUnselect)).toBe(false)
 
-    selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models)
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldNotBe
       expect(selectedItemsGot).not.toContain(item)
-      expect(appDrugCCList.itemIsSelected(item)).toBe(false)
+      expect(list.itemIsSelected(item)).toBe(false)
 
-  it 'toggles an unselected item', ->
+  testTogglesAnUnselectedItem = (list) ->
+
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToToggle = allItemsIDs[0]
 
     numToggles = 10
     for i in [1..10]
-      appDrugCCList.toggleSelectItem('CHEMBL1091')
+      list.toggleSelectItem(itemToToggle)
       if i%2 != 0
-        expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
+        expect(list.itemIsSelected(itemToToggle)).toBe(true)
       else
-        expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
+        expect(list.itemIsSelected(itemToToggle)).toBe(false)
 
-  it 'toggles a selected item', ->
+  testTogglesASelectedItem = (list) ->
+
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    itemToToggle = allItemsIDs[0]
 
     numToggles = 10
-    appDrugCCList.selectItem('CHEMBL1091')
+    list.selectItem(itemToToggle)
 
     for i in [1..10]
-      appDrugCCList.toggleSelectItem('CHEMBL1091')
+      list.toggleSelectItem(itemToToggle)
       if i%2 != 0
-        expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
+        expect(list.itemIsSelected(itemToToggle)).toBe(false)
       else
-        expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
+        expect(list.itemIsSelected(itemToToggle)).toBe(true)
 
-  it "goes to a select all state when all items are manually selected", ->
+  testGoesToASelectAllStateWhenAllItemsAreManuallySelected = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     lastItemID = allItemsIDs[allItemsIDs.length - 1]
     allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
 
     for itemID in allItemsIDsExceptLast
-      appDrugCCList.selectItem(itemID)
+      list.selectItem(itemID)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    appDrugCCList.selectItem(lastItemID)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    list.selectItem(lastItemID)
+    expect(list.getMeta('all_items_selected')).toBe(true)
 
-  it "goes to a unselect all state when all items are manually unselected", ->
+  testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected = (list) ->
 
-    appDrugCCList.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    list.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     lastItemID = allItemsIDs[allItemsIDs.length - 1]
     allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
 
     for itemID in allItemsIDsExceptLast
-      appDrugCCList.unSelectItem(itemID)
+      list.unSelectItem(itemID)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-    appDrugCCList.unSelectItem(lastItemID)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
+    expect(list.getMeta('all_items_selected')).toBe(true)
+    list.unSelectItem(lastItemID)
+    expect(list.getMeta('all_items_selected')).toBe(false)
 
-  it 'bulk selects a selection list with no items', ->
+  testBulkSelectsFromASelectionListWithNoItems = (list) ->
 
     itemsToSelect = []
-    appDrugCCList.selectItems(itemsToSelect)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+    list.selectItems(itemsToSelect)
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    expect(list.thereAreExceptions()).toBe(false)
 
-  it 'bulk selects a from a list of items to select', ->
+  testBulkSelectsFromAListOfItemsToSelect = (list) ->
 
     # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
-    appDrugCCList.selectItems(itemsToSelect)
+    list.selectItems(itemsToSelect)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for itemID in itemsToSelect
       expect(selectedItemsGot).toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
-  it 'goes to a select all state when all the items are in the selection lists', ->
+  testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
     itemsToSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
 
-    appDrugCCList.selectItems(itemsToSelectA)
-    appDrugCCList.selectItems(itemsToSelectB)
+    list.selectItems(itemsToSelectA)
+    list.selectItems(itemsToSelectB)
 
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+    selectedItemsGot = list.getSelectedItemsIDs()
+    expect(list.getMeta('all_items_selected')).toBe(true)
+    expect(list.thereAreExceptions()).toBe(false)
 
     for itemID in itemsToSelectA
       expect(selectedItemsGot).toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
     for itemID in itemsToSelectB
       expect(selectedItemsGot).toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
-  it 'bulk unselects a from a list of items to select', ->
+  testUnselectsFromAListOfItemsToUnselect = (list) ->
 
     # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
-    appDrugCCList.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    list.selectAll()
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToUnSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
-    appDrugCCList.unSelectItems(itemsToUnSelect)
+    list.unSelectItems(itemsToUnSelect)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
+    expect(list.getMeta('all_items_selected')).toBe(true)
+    selectedItemsGot = list.getSelectedItemsIDs()
 
     for itemID in itemsToUnSelect
       expect(selectedItemsGot).not.toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
 
-  it 'bulk unselects a selection list with no items', ->
+  testUnselectsASelectionListWithNoItems = (list) ->
 
     itemsToUnSelect = []
-    appDrugCCList.unSelectItems(itemsToUnSelect)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+    list.unSelectItems(itemsToUnSelect)
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    expect(list.thereAreExceptions()).toBe(false)
 
-  it 'goes to a select none state when all the items are in the unselection lists', ->
+  testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToUnSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
     itemsToUnSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
 
-    appDrugCCList.unSelectItems(itemsToUnSelectA)
-    appDrugCCList.unSelectItems(itemsToUnSelectB)
+    list.unSelectItems(itemsToUnSelectA)
+    list.unSelectItems(itemsToUnSelectB)
 
-    selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+    selectedItemsGot = list.getSelectedItemsIDs()
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    expect(list.thereAreExceptions()).toBe(false)
 
-    for itemID in itemsToUnSelectA
-      expect(selectedItemsGot).not.toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+  testReversesExceptions = (list) ->
 
-    for itemID in itemsToUnSelectB
-      expect(selectedItemsGot).not.toContain(itemID)
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
-
-  it 'reverses exceptions', ->
-
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
     itemsToSelect = allItemsIDs[0..4]
     unSelectedItems = _.difference(allItemsIDs, itemsToSelect)
     for itemID in itemsToSelect
-      appDrugCCList.selectItem(itemID)
+      list.selectItem(itemID)
 
-    appDrugCCList.reverseExceptions()
-    exceptions = appDrugCCList.getMeta('selection_exceptions')
+    list.reverseExceptions()
+    exceptions = list.getMeta('selection_exceptions')
     for itemID in itemsToSelect
       expect(exceptions[itemID]?).toBe(false)
     for itemID in unSelectedItems
       expect(exceptions[itemID]?).toBe(true)
 
-  it 'accumulates previous selections (bulk selection)', ->
+  testAccumulatesPreviousSelectionsForSelections = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
 
     itemsToSelectA = allItemsIDs[0..4]
     itemsToSelectB = allItemsIDs[2..6]
 
-    appDrugCCList.selectItems(itemsToSelectA)
-    appDrugCCList.selectItems(itemsToSelectB)
+    list.selectItems(itemsToSelectA)
+    list.selectItems(itemsToSelectB)
 
     selectedItemsShouldBe = _.union(itemsToSelectA, itemsToSelectB)
     for itemID in selectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
-    appDrugCCList.unSelectAll()
-    appDrugCCList.selectAll()
-    appDrugCCList.selectItems(itemsToSelectA)
+    list.unSelectAll()
+    list.selectAll()
+    list.selectItems(itemsToSelectA)
     for itemID in allItemsIDs
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(true)
+    expect(list.getMeta('all_items_selected')).toBe(true)
+    expect(list.thereAreExceptions()).toBe(false)
 
     # try to mess with the sate of the selections by selecting all except for a small set
-    appDrugCCList.unSelectAll()
-    appDrugCCList.selectAll()
+    list.unSelectAll()
+    list.selectAll()
 
     for itemID in itemsToSelectA
-      appDrugCCList.unSelectItem(itemID)
+      list.unSelectItem(itemID)
 
-    appDrugCCList.selectItems(itemsToSelectB)
+    list.selectItems(itemsToSelectB)
     unSelectedItemsShouldBe = _.difference(itemsToSelectA, itemsToSelectB)
     selectedItemsShouldBe = _.difference(allItemsIDs, unSelectedItemsShouldBe)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    expect(appDrugCCList.thereAreExceptions()).toBe(true)
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    expect(list.thereAreExceptions()).toBe(true)
     for itemID in unSelectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
     for itemID in selectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
-  it 'accumulates previous selections (bulk UNselection)', ->
+  testAccumulatesPreviousSelectionsForUnselections = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
+    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
 
     itemsToUnSelectA = allItemsIDs[0..4]
     itemsToUnSelectB = allItemsIDs[2..6]
 
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectItems(itemsToUnSelectA)
-    appDrugCCList.unSelectItems(itemsToUnSelectB)
+    list.selectAll()
+    list.unSelectItems(itemsToUnSelectA)
+    list.unSelectItems(itemsToUnSelectB)
 
     unSelectedItemsShouldBe = _.union(itemsToUnSelectA, itemsToUnSelectB)
     for itemID in unSelectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
 
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectAll()
-    appDrugCCList.unSelectItems(itemsToUnSelectA)
+    list.selectAll()
+    list.unSelectAll()
+    list.unSelectItems(itemsToUnSelectA)
     for itemID in allItemsIDs
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-    expect(appDrugCCList.thereAreExceptions()).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
+    expect(list.getMeta('all_items_selected')).toBe(false)
+    expect(list.thereAreExceptions()).toBe(false)
 
     # try to mess with the sate of the selections by selecting all except for a small set
-    appDrugCCList.selectAll()
-    appDrugCCList.unSelectAll()
+    list.selectAll()
+    list.unSelectAll()
 
     for itemID in itemsToUnSelectA
-      appDrugCCList.selectItem(itemID)
+      list.selectItem(itemID)
 
-    appDrugCCList.unSelectItems(itemsToUnSelectB)
+    list.unSelectItems(itemsToUnSelectB)
     selectedItemsShouldBe = _.difference(itemsToUnSelectA, itemsToUnSelectB)
     unSelectedItemsShouldBe = _.difference(allItemsIDs, selectedItemsShouldBe)
 
-    expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-    expect(appDrugCCList.thereAreExceptions()).toBe(true)
+    expect(list.getMeta('all_items_selected')).toBe(true)
+    expect(list.thereAreExceptions()).toBe(true)
     for itemID in unSelectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
     for itemID in selectedItemsShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
-  it 'selects items based on a property value', ->
+  testSelectsItemsBasedOnAPropertyValue = (list) ->
 
     propName = 'max_phase'
     propValue = 4
 
-    selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+    selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in list.models \
       when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
-    selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models \
+    selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models \
       when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
 
-    appDrugCCList.selectByPropertyValue(propName, propValue)
+    list.selectByPropertyValue(propName, propValue)
 
     for itemID in selectedValuesShouldBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
+      expect(list.itemIsSelected(itemID)).toBe(true)
 
     for itemID in selectedValuesShouldNotBe
-      expect(appDrugCCList.itemIsSelected(itemID)).toBe(false)
+      expect(list.itemIsSelected(itemID)).toBe(false)
+
+  # -------------------------------------------------------------------------------------------------
+  # Actual Tests
+  # -------------------------------------------------------------------------------------------------
+  describe "Client Side Collections", ->
+
+    appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+    allItemsIDs = []
+
+    beforeAll (done) ->
+      TestsUtils.simulateDataWSClientList(appDrugCCList,
+        glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+
+    beforeEach ->
+      appDrugCCList.unSelectAll()
+
+    it "selects one item", -> testSelectsOneItem(appDrugCCList)
+    it "selects all items", -> testSelectsAllItems(appDrugCCList)
+    it "unselects one item", -> testUnselectsOneItem(appDrugCCList)
+    it "unselects all items", -> testUnselectsAllItems(appDrugCCList)
+    it 'gives the number of selected items after selecting none', ->
+      testGivesNumberOfSelectedItemsAfterSelectingNone(appDrugCCList)
+    it 'gives the number of selected items after selecting some', ->
+      testGivesNumberOfSelectedItemsAfterSelectingSome(appDrugCCList)
+    it 'gives the number of selected items after selecting all', ->
+      testGivesNumberOfSelectedItemsAfterSelectingAll(appDrugCCList)
+    it 'gives the number of selected items after selecting all and then unselecting one', ->
+      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(appDrugCCList)
+    it 'gives the number of selected items after unselecting some', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingSome(appDrugCCList)
+    it 'gives the number of selected items after unselecting all', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingAll(appDrugCCList)
+    it 'gives the number of selected items after unselecting all and then selecting one', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(appDrugCCList)
+    it "selects all items, except one", -> testSelectsAllItemsExceptOne(appDrugCCList)
+    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(appDrugCCList)
+    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(appDrugCCList)
+    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(appDrugCCList)
+    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(appDrugCCList)
+    it 'toggles a selected item', -> testTogglesASelectedItem(appDrugCCList)
+    it "goes to a select all state when all items are manually selected", ->
+      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(appDrugCCList)
+    it "goes to a unselect all state when all items are manually unselected", ->
+      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(appDrugCCList)
+    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(appDrugCCList)
+    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(appDrugCCList)
+    it 'goes to a select all state when all the items are in the selection lists', ->
+      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(appDrugCCList)
+    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(appDrugCCList)
+    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(appDrugCCList)
+    it 'goes to a select none state when all the items are in the unselection lists', ->
+      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(appDrugCCList)
+    it 'reverses exceptions', -> testReversesExceptions(appDrugCCList)
+    it 'accumulates previous selections (bulk selection)', ->
+      testAccumulatesPreviousSelectionsForSelections(appDrugCCList)
+    it 'accumulates previous selections (bulk UNselection)', ->
+      testAccumulatesPreviousSelectionsForUnselections(appDrugCCList)
+    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(appDrugCCList)
