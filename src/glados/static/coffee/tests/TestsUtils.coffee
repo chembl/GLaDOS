@@ -4,3 +4,5 @@ class TestsUtils
       $.get dataURL, (testData) ->
         list.reset(testData)
         done()
+
+    @getAllItemsIDs = (list) -> (model.attributes.molecule_chembl_id for model in list.models)

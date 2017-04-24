@@ -5,7 +5,7 @@ describe "Selection Functions", ->
   # -------------------------------------------------------------------------------------------------
 
   testSelectsOneItem = (list) ->
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToSelect = allItemsIDs[0]
     itemNotSelected = allItemsIDs[1]
 
@@ -15,7 +15,7 @@ describe "Selection Functions", ->
     expect(list.getSelectedItemsIDs()).toContain(itemToSelect)
 
   testSelectsAllItems = (list) ->
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     list.selectAll()
     selectedItemsShouldBe = allItemsIDs
     selectedItemsGot = list.getSelectedItemsIDs()
@@ -26,7 +26,7 @@ describe "Selection Functions", ->
 
   testUnselectsOneItem = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToUnselect = allItemsIDs[0]
 
     list.unSelectItem(itemToUnselect)
@@ -34,7 +34,7 @@ describe "Selection Functions", ->
     expect(list.getSelectedItemsIDs()).not.toContain(itemToUnselect)
 
   testUnselectsAllItems = (list) ->
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
     list.unSelectAll()
     selectedItemsShouldNotBe = allItemsIDs
@@ -49,7 +49,7 @@ describe "Selection Functions", ->
 
   testGivesNumberOfSelectedItemsAfterSelectingSome = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToSelect = allItemsIDs[0..5]
 
     for itemID in itemsToSelect
@@ -63,14 +63,14 @@ describe "Selection Functions", ->
 
   testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne = (list) ->
     list.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     [..., itemToSelect] = allItemsIDs
     list.unSelectItem(itemToSelect)
     expect(list.getNumberOfSelectedItems()).toBe(list.models.length - 1)
 
   testGivesNumberOfSelectedItemsAfterUnselectingSome = (list) ->
     list.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToUnSelect = allItemsIDs[0..5]
 
     for itemID in itemsToUnSelect
@@ -89,7 +89,7 @@ describe "Selection Functions", ->
     list.selectAll()
     list.unSelectAll()
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     [..., itemToSelect] = allItemsIDs
     list.selectItem(itemToSelect)
 
@@ -97,7 +97,7 @@ describe "Selection Functions", ->
 
   testSelectsAllItemsExceptOne = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
     [..., exception] = allItemsIDs
     list.selectAll()
@@ -116,7 +116,7 @@ describe "Selection Functions", ->
 
   testUnselectsAllItemsExceptOne = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
     [..., exception] = allItemsIDs
     list.unSelectAll()
@@ -134,7 +134,7 @@ describe "Selection Functions", ->
 
   testSelectsAllItemsThenSelectsOneItem = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToSelect = allItemsIDs[0]
     list.selectAll()
     list.selectItem(allItemsIDs)
@@ -149,7 +149,7 @@ describe "Selection Functions", ->
 
   testUnselectsAllItemsThenUnselectsOneItem = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToUnselect = allItemsIDs[0]
     list.unSelectAll()
     list.unSelectItem(itemToUnselect)
@@ -165,7 +165,7 @@ describe "Selection Functions", ->
 
   testTogglesAnUnselectedItem = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToToggle = allItemsIDs[0]
 
     numToggles = 10
@@ -178,7 +178,7 @@ describe "Selection Functions", ->
 
   testTogglesASelectedItem = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToToggle = allItemsIDs[0]
 
     numToggles = 10
@@ -193,7 +193,7 @@ describe "Selection Functions", ->
 
   testGoesToASelectAllStateWhenAllItemsAreManuallySelected = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     lastItemID = allItemsIDs[allItemsIDs.length - 1]
     allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
 
@@ -207,7 +207,7 @@ describe "Selection Functions", ->
   testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected = (list) ->
 
     list.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     lastItemID = allItemsIDs[allItemsIDs.length - 1]
     allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
 
@@ -228,7 +228,7 @@ describe "Selection Functions", ->
   testBulkSelectsFromAListOfItemsToSelect = (list) ->
 
     # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
     list.selectItems(itemsToSelect)
 
@@ -241,7 +241,7 @@ describe "Selection Functions", ->
 
   testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
     itemsToSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
 
@@ -264,7 +264,7 @@ describe "Selection Functions", ->
 
     # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
     list.selectAll()
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToUnSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
     list.unSelectItems(itemsToUnSelect)
 
@@ -284,7 +284,7 @@ describe "Selection Functions", ->
 
   testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToUnSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
     itemsToUnSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
 
@@ -297,7 +297,7 @@ describe "Selection Functions", ->
 
   testReversesExceptions = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemsToSelect = allItemsIDs[0..4]
     unSelectedItems = _.difference(allItemsIDs, itemsToSelect)
     for itemID in itemsToSelect
@@ -312,7 +312,7 @@ describe "Selection Functions", ->
 
   testAccumulatesPreviousSelectionsForSelections = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
     itemsToSelectA = allItemsIDs[0..4]
     itemsToSelectB = allItemsIDs[2..6]
@@ -352,7 +352,7 @@ describe "Selection Functions", ->
 
   testAccumulatesPreviousSelectionsForUnselections = (list) ->
 
-    allItemsIDs = (model.attributes.molecule_chembl_id for model in list.models)
+    allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
     itemsToUnSelectA = allItemsIDs[0..4]
     itemsToUnSelectB = allItemsIDs[2..6]
