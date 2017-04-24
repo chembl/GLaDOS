@@ -37,9 +37,9 @@ def bracket_atom_symbol():
 
 def chiral():
     return [
-                '@', '@@', '@TH1', '@TH2', '@AL1', '@AL2', '@SP1', '@SP2', '@SP3',
+                '@@', '@TH1', '@TH2', '@AL1', '@AL2', '@SP1', '@SP2', '@SP3',
                 ('@TB', common.digit, Optional(common.digit)),
-                ('@OH', common.digit, Optional(common.digit))
+                ('@OH', common.digit, Optional(common.digit)), '@'
             ]
 
 
@@ -107,9 +107,9 @@ def chain():
     return \
         (
             branched_atom,
-            Optional(
+            ZeroOrMore(
                 (
-                    Optional([bond, dot]), chain
+                    Optional([bond, dot]), branched_atom
                 )
             )
         )
