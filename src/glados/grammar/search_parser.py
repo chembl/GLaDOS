@@ -6,7 +6,7 @@ import glados.grammar.common as common
 import glados.grammar.smiles as smiles
 import glados.grammar.inchi as inchi
 import re
-
+import json
 
 def expression_term():
     return [parenthesised_expression, smiles.smiles, inchi.inchi_key, inchi.inchi]
@@ -65,10 +65,22 @@ class TermsVisitor(PTNodeVisitor):
 
     def visit_expression(self, node, children):
         exp = {'or': []}
+        last_was_and = False
         for child_i in children:
             str_child_i = str(child_i).strip()
             if len(str_child_i) > 0:
-                exp['or'].append(str_child_i)
+                if str_child_i == 'and':
+                    last_was_and = True
+                elif str_child_i != 'or':
+                    if last_was_and:
+                        if type(exp['or'][-1]) == dict and 'and' in exp['or'][-1]:
+                            exp['or'][-1]['and'].append(str_child_i)
+                        else:
+                            exp['or'][-1] = {'and': [exp['or'][-1], str_child_i]}
+
+                        last_was_and = False
+                    else:
+                        exp['or'].append(str_child_i)
         return exp
 
     def visit_smiles(self, node, children):
@@ -86,15 +98,16 @@ def parse_query_str(query_string: str):
     print(query_string)
     pt = parser.parse(query_string)
     result = arpeggio.visit_parse_tree(pt, TermsVisitor())
-    print(result)
+    json_result = json.dumps(result, indent=4)
+    print(json_result)
 
 
 parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
 
 
 parse_query_str(
-    """    (InChI=1/BrH/h1H/i1-1 )
-    ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 c ccc cs)
+    """    (InChI=1/BrH/h1H/i1[-]1)
+    ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 and c and ccc cs or ccs or InChI=1s/BrH and c)
     CC(C)(N)Cc1ccccc1
     CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
 

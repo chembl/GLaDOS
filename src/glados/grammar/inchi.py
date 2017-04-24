@@ -8,7 +8,7 @@ def version():
 
 
 def layer():
-    return '/', common.not_space_sequence
+    return '/', common.correctly_parenthesised_non_space_char_sequence
 
 
 def inchi():

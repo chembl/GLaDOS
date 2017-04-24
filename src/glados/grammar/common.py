@@ -1,5 +1,5 @@
 from arpeggio import RegExMatch as _
-from arpeggio import And, EOF
+from arpeggio import And, OneOrMore, ZeroOrMore, EOF
 
 
 def reverse_regex_or_clause(regex_or_clause: str) -> str:
@@ -19,6 +19,7 @@ def term_end_lookahead():
 
 def space():
     return _(r'\s')
+
 
 def space_sequence():
     return _(r'\s+')
@@ -50,3 +51,18 @@ def digit():
 
 def float_number():
     return _(r'\d+\.\d+')
+
+
+def non_space_or_parenthesis_sequence():
+    return _(r'[^\s()\[\]]')
+
+
+def correctly_parenthesised_non_space_char_sequence():
+    return (
+        OneOrMore([
+                non_space_or_parenthesis_sequence,
+                ('(', correctly_parenthesised_non_space_char_sequence, ')'),
+                ('[', correctly_parenthesised_non_space_char_sequence, ']')
+            ]
+        )
+    )
