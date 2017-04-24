@@ -510,7 +510,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             else if iNeedToGetEverything
               thisCollection.allResults[i + startingPosition] = currentItem
 
-             itemsReceived++
+            itemsReceived++
 
           progress = parseInt((itemsReceived / totalRecords) * 100)
 

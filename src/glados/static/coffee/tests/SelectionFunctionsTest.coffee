@@ -59,14 +59,14 @@ describe "Selection Functions", ->
 
   testGivesNumberOfSelectedItemsAfterSelectingAll = (list) ->
     list.selectAll()
-    expect(list.getNumberOfSelectedItems()).toBe(list.models.length)
+    expect(list.getNumberOfSelectedItems()).toBe(list.getMeta('total_records'))
 
   testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne = (list) ->
     list.selectAll()
     allItemsIDs = TestsUtils.getAllItemsIDs(list)
     [..., itemToSelect] = allItemsIDs
     list.unSelectItem(itemToSelect)
-    expect(list.getNumberOfSelectedItems()).toBe(list.models.length - 1)
+    expect(list.getNumberOfSelectedItems()).toBe(list.getMeta('total_records') - 1)
 
   testGivesNumberOfSelectedItemsAfterUnselectingSome = (list) ->
     list.selectAll()
@@ -102,8 +102,13 @@ describe "Selection Functions", ->
     [..., exception] = allItemsIDs
     list.selectAll()
     list.unSelectItem(exception)
-    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models\
-      when model.attributes.molecule_chembl_id != exception)
+
+    if list.allResults?
+      selectedItemsShouldBe = (model.molecule_chembl_id for model in list.allResults\
+        when model.molecule_chembl_id != exception)
+    else
+      selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models\
+        when model.attributes.molecule_chembl_id != exception)
 
     selectedItemsGot = list.getSelectedItemsIDs()
 
@@ -121,8 +126,13 @@ describe "Selection Functions", ->
     [..., exception] = allItemsIDs
     list.unSelectAll()
     list.selectItem(exception)
-    selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in list.models\
-      when model.attributes.molecule_chembl_id != exception)
+
+    if list.allResults?
+      selectedItemsShouldNOTBe = (model.molecule_chembl_id for model in list.allResults\
+        when model.molecule_chembl_id != exception)
+    else
+      selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in list.models\
+        when model.attributes.molecule_chembl_id != exception)
 
     selectedItemsGot = list.getSelectedItemsIDs()
     for item in selectedItemsShouldNOTBe
@@ -140,7 +150,7 @@ describe "Selection Functions", ->
     list.selectItem(allItemsIDs)
 
     expect(list.itemIsSelected(allItemsIDs)).toBe(true)
-    selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models)
+    selectedItemsShouldBe = allItemsIDs
     selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldBe
@@ -156,7 +166,7 @@ describe "Selection Functions", ->
 
     expect(list.itemIsSelected(itemToUnselect)).toBe(false)
 
-    selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models)
+    selectedItemsShouldNotBe = allItemsIDs
     selectedItemsGot = list.getSelectedItemsIDs()
 
     for item in selectedItemsShouldNotBe
@@ -396,10 +406,16 @@ describe "Selection Functions", ->
     propName = 'max_phase'
     propValue = 4
 
-    selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in list.models \
-      when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
-    selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models \
-      when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
+    if list.allResults?
+      selectedValuesShouldBe = (model.molecule_chembl_id for model in list.allResults \
+        when glados.Utils.getNestedValue(model, propName) == propValue)
+      selectedValuesShouldNotBe = (model.molecule_chembl_id for model in list.allResults \
+        when glados.Utils.getNestedValue(model, propName) != propValue)
+    else
+      selectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in list.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
+      selectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
 
     list.selectByPropertyValue(propName, propValue)
 
@@ -414,8 +430,8 @@ describe "Selection Functions", ->
   # -------------------------------------------------------------------------------------------------
   describe "Client Side Collections", ->
 
-    appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    allItemsIDs = []
+    appDrugCCList = glados.models.paginatedCollections\
+    .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
       TestsUtils.simulateDataWSClientList(appDrugCCList,
@@ -466,3 +482,59 @@ describe "Selection Functions", ->
     it 'accumulates previous selections (bulk UNselection)', ->
       testAccumulatesPreviousSelectionsForUnselections(appDrugCCList)
     it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(appDrugCCList)
+
+  describe 'Elasticsearch Results Collections', ->
+
+    searchResList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+      glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
+    )
+
+    beforeAll (done) ->
+      TestsUtils.simulateDataESList(searchResList,
+        glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+
+    beforeEach ->
+      searchResList.unSelectAll()
+
+    it "selects one item", -> testSelectsOneItem(searchResList)
+    it "selects all items", -> testSelectsAllItems(searchResList)
+    it "unselects one item", -> testUnselectsOneItem(searchResList)
+    it "unselects all items", -> testUnselectsAllItems(searchResList)
+    it 'gives the number of selected items after selecting none', ->
+      testGivesNumberOfSelectedItemsAfterSelectingNone(searchResList)
+    it 'gives the number of selected items after selecting some', ->
+      testGivesNumberOfSelectedItemsAfterSelectingSome(searchResList)
+    it 'gives the number of selected items after selecting all', ->
+      testGivesNumberOfSelectedItemsAfterSelectingAll(searchResList)
+    it 'gives the number of selected items after selecting all and then unselecting one', ->
+      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(searchResList)
+    it 'gives the number of selected items after unselecting some', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingSome(searchResList)
+    it 'gives the number of selected items after unselecting all', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingAll(searchResList)
+    it 'gives the number of selected items after unselecting all and then selecting one', ->
+      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(searchResList)
+    it "selects all items, except one", -> testSelectsAllItemsExceptOne(searchResList)
+    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(searchResList)
+    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(searchResList)
+    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(searchResList)
+    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(searchResList)
+    it 'toggles a selected item', -> testTogglesASelectedItem(searchResList)
+    it "goes to a select all state when all items are manually selected", ->
+      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(searchResList)
+    it "goes to a unselect all state when all items are manually unselected", ->
+      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(searchResList)
+    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(searchResList)
+    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(searchResList)
+    it 'goes to a select all state when all the items are in the selection lists', ->
+      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(searchResList)
+    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(searchResList)
+    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(searchResList)
+    it 'goes to a select none state when all the items are in the unselection lists', ->
+      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(searchResList)
+    it 'reverses exceptions', -> testReversesExceptions(searchResList)
+    it 'accumulates previous selections (bulk selection)', ->
+      testAccumulatesPreviousSelectionsForSelections(searchResList)
+    it 'accumulates previous selections (bulk UNselection)', ->
+      testAccumulatesPreviousSelectionsForUnselections(searchResList)
+    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(searchResList)

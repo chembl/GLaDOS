@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         delete selectionExceptions[itemID]
 
-      if Object.keys(selectionExceptions).length == @models.length or Object.keys(selectionExceptions).length == 0
+      if Object.keys(selectionExceptions).length == @getMeta('total_records') or Object.keys(selectionExceptions).length == 0
         @selectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.SELECTED, itemID)
@@ -49,7 +49,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         exceptions[id] = true
       @setMeta('selection_exceptions', exceptions)
 
-      if Object.keys(exceptions).length == @models.length
+      if Object.keys(exceptions).length == @getMeta('total_records')
         @selectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_SELECTED, idsList)
@@ -59,8 +59,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       exceptions = @getMeta('selection_exceptions')
       reversedExceptions = {}
       idProperty = @getMeta('id_column').comparator
-      newItemsIDs = (model.attributes[idProperty] for model in @models \
-        when !exceptions[model.attributes[idProperty]]?)
+
+      if @allResults?
+        newItemsIDs = (model[idProperty] for model in @allResults \
+          when !exceptions[model[idProperty]]?)
+      else
+        newItemsIDs = (model.attributes[idProperty] for model in @models \
+          when !exceptions[model.attributes[idProperty]]?)
+
       for itemID in newItemsIDs
         reversedExceptions[itemID] = true
 
@@ -84,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         exceptions[id] = true
       @setMeta('selection_exceptions', exceptions)
 
-      if Object.keys(exceptions).length == @models.length
+      if Object.keys(exceptions).length == @getMeta('total_records')
         @unSelectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_UNSELECTED, idsList)
@@ -101,7 +107,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getSelectedItemsIDs: ->
 
       idProperty = @getMeta('id_column').comparator
-      return (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+
+      if @allResults?
+        return (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+      else
+        return (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
 
     selectAll: ->
 
@@ -118,7 +128,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         delete selectionExceptions[itemID]
 
-      if Object.keys(selectionExceptions).length == @models.length or Object.keys(selectionExceptions).length == 0
+      if Object.keys(selectionExceptions).length == @getMeta('total_records') or Object.keys(selectionExceptions).length == 0
         @unSelectAll()
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
@@ -132,8 +142,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     selectByPropertyValue: (propName, value) ->
 
       idProperty = @getMeta('id_column').comparator
-      idsToSelect = (model.attributes[idProperty] for model in @models \
-        when glados.Utils.getNestedValue(model.attributes, propName) == value)
+
+      if @allResults?
+        idsToSelect = (model[idProperty] for model in @allResults \
+          when glados.Utils.getNestedValue(model, propName) == value)
+      else
+        idsToSelect = (model.attributes[idProperty] for model in @models \
+          when glados.Utils.getNestedValue(model.attributes, propName) == value)
 
       @selectItems(idsToSelect)
 
