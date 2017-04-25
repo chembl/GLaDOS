@@ -503,7 +503,7 @@
   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
   because in any of the shown axes their value is null: <br>
   {{#each rejected}}
-    <a href="/compound_report_card/{{this}}" target="_blank">{{this}}</a>
+    <a href="/compound_report_card/{{this}}" target="_blank" {{#if selected}}class="green lighten-5"{{/if}}>{{id}}</a>
   {{/each}}
 </script>
 

@@ -95,6 +95,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     Plotly.restyle(@$vis_elem.get(0), update, 0)
+    @renderRejectedElements()
 
   selectItems: (idsList) -> @collection.selectItems(idsList)
 
@@ -183,6 +184,22 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
         return 2.5
       else return 0.5
 
+  fillRejectedItemsSelection: (items) ->
+
+    thisView = @
+    return items.map (item) ->
+      item.selected = thisView.collection.itemIsSelected(item.id)
+
+  renderRejectedElements: ->
+
+    @fillRejectedItemsSelection(@rejectedElements)
+    $rejectedReslutsInfo = $(@el).find('.BCK-CompResultsGraphRejectedResults')
+    $rejectedReslutsInfo.empty()
+    if @rejectedElements.length
+      glados.Utils.fillContentForElement $rejectedReslutsInfo,
+        rejected: @rejectedElements
+    else
+      $rejectedReslutsInfo.html('')
 
   paintGraph: ->
 
@@ -203,19 +220,13 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
         thisView.currentPropertyColour.prop_name]
         value = glados.Utils.getNestedValue(mol, prop)
         if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
-          thisView.rejectedElements.push glados.Utils.getNestedValue(mol, thisView.labelerProperty.prop_name)
+          thisView.rejectedElements.push
+            id: glados.Utils.getNestedValue(mol, thisView.labelerProperty.prop_name)
           return true
 
       return false
     )
-
-    $rejectedReslutsInfo = $(@el).find('.BCK-CompResultsGraphRejectedResults')
-    if @rejectedElements.length
-      glados.Utils.fillContentForElement $rejectedReslutsInfo,
-        rejected: @rejectedElements
-    else
-      $rejectedReslutsInfo.html('')
-
+    @renderRejectedElements()
     # --------------------------------------
     # scales
     # --------------------------------------
