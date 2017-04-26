@@ -78,6 +78,12 @@ describe "Legend Model", ->
       for value in domain
         expect(legendModel.isValueSelected(value)).toBe(false)
 
+    testSelectsAllValues = (legendModel) ->
+
+      legendModel.selectAllValues()
+      domain = legendModel.get('domain')
+      for value in domain
+        expect(legendModel.isValueSelected(value)).toBe(true)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Actual tests
@@ -106,6 +112,7 @@ describe "Legend Model", ->
       it 'unselects a value', -> testUnselectsAValue(legendModel)
       it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
       it 'unselects all values', -> testUnselectsAllValues(legendModel)
+      it 'selects all values', -> testSelectsAllValues(legendModel)
 
     describe "with an elasticsearch collection", ->
 
@@ -133,3 +140,4 @@ describe "Legend Model", ->
       it 'unselects a value', -> testUnselectsAValue(legendModel)
       it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
       it 'unselects all values', -> testUnselectsAllValues(legendModel)
+      it 'selects all values', -> testSelectsAllValues(legendModel)

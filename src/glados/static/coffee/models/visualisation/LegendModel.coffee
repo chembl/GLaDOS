@@ -47,7 +47,15 @@ glados.useNameSpace 'glados.models.visualisation',
       if not @get('values-selection')[value]?
         return false
       return @get('values-selection')[value]
-      
+
+    selectAllValues: ->
+
+      valuesSelection =  @get('values-selection')
+      domain = @get('domain')
+      for value in domain
+        valuesSelection[value] = true
+        @trigger(glados.Events.Legend.VALUE_SELECTED, value)
+
     unSelectAllValues: ->
       
       valuesSelection =  @get('values-selection')
@@ -85,6 +93,8 @@ glados.useNameSpace 'glados.models.visualisation',
     handleCollSelectionChanged: (param) ->
       if param == glados.Events.Collections.Params.ALL_UNSELECTED
         @unSelectAllValues()
+      else if param == glados.Events.Collections.Params.ALL_SELECTED
+        @selectAllValues()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context
