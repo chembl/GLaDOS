@@ -1,17 +1,32 @@
 # this view is in charge of painting legends
 LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
-  LEGEND_HEIGHT: 100
+  LEGEND_HEIGHT: 110
   LEGEND_RECT_HEIGHT: 20
+  LEGEND_TEXT_Y: -25
 
   initialize: ->
     @$vis_elem = $(@el)
     updateViewProxy = @setUpResponsiveRender()
     @render()
+    @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
+    @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
     $(@el).find('line, path').css('fill', 'none')
+
+  valueSelectedHandler: (value) ->
+    rectClassSelector = '.legend-rect-' + value
+    d3.select($(@el).find(rectClassSelector)[0])
+      .style('stroke', glados.Settings.VISUALISATION_SELECTED)
+      .attr('data-is-selected', true)
+
+  valueUnselectedHandler: (value) ->
+    rectClassSelector = '.legend-rect-' + value
+    d3.select($(@el).find(rectClassSelector)[0])
+      .style('stroke', 'none')
+      .attr('data-is-selected', false)
 
   render: ->
 
@@ -45,6 +60,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintDiscreteLegend: (legendG) ->
 
+    rectanglePadding = 1
     getXInLegendFor = d3.scale.ordinal()
       .domain( @model.get('domain') )
       .rangeBands([0, @legendWidth])
@@ -60,10 +76,33 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendG.selectAll('rect')
       .data(getXInLegendFor.domain())
       .enter().append('rect')
+      .attr('class', (d) -> 'legend-rect-' + d)
       .attr('height', @LEGEND_RECT_HEIGHT)
-      .attr('width', getXInLegendFor.rangeBand())
+      .attr('width', getXInLegendFor.rangeBand() - rectanglePadding)
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
+      .style('stroke-width', 2)
+      .classed('legend-rect', true)
+      .on('click', $.proxy(@clickRectangle, @))
+
+    legendG.selectAll('text')
+      .data(getXInLegendFor.domain())
+      .enter().append('text')
+      .text($.proxy(@getTextAmountPerValue, @))
+      .attr('x', (d) -> getXInLegendFor d)
+      .attr('y', @LEGEND_TEXT_Y)
+      .style('font-size', '65%')
+      .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
+      .attr('text-anchor', 'middle')
+      .attr("transform", "translate(" + getXInLegendFor.rangeBand()/2 + ")")
+
 
     legendG.call(legendAxis)
+
+  getTextAmountPerValue: (value) -> '(' + @model.getTextAmountPerValue(value) + ')'
+
+  clickRectangle: (d) -> @model.toggleValueSelection(d)
+
+
+

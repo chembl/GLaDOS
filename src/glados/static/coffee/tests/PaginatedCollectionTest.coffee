@@ -3,11 +3,11 @@ describe "Paginated Collection", ->
     appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
 
     afterAll: (done) ->
       appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData0.json', done)
 
     it "initialises correctly", ->
       page_size = appDrugCCList.getMeta('page_size')
@@ -50,7 +50,7 @@ describe "Paginated Collection", ->
     drugList.setMeta('server_side', true)
 
     beforeAll (done) ->
-      simulateDataWSClientList(drugList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData1.json', done)
+      TestsUtils.simulateDataWSClientList(drugList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData1.json', done)
 
     it "gives the first page correctly", ->
       assert_chembl_ids(drugList, ["CHEMBL6939", "CHEMBL22", "CHEMBL6941", "CHEMBL6942", "CHEMBL6944"])
@@ -60,7 +60,10 @@ describe "Paginated Collection", ->
     appDrugCCList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
-      simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+      TestsUtils.simulateDataWSClientList(appDrugCCList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+
+    beforeEach ->
+      appDrugCCList.unSelectAll()
 
     it "initialises correctly", ->
       page_size = appDrugCCList.getMeta('page_size')
@@ -115,186 +118,6 @@ describe "Paginated Collection", ->
       comparator = _.zip(chembl_ids, expected_chembl_ids)
       for elem in comparator
         expect(elem[0]).toBe(elem[1])
-
-    it "selects one item", ->
-      appDrugCCList.selectItem('CHEMBL1091')
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-      expect(appDrugCCList.itemIsSelected('CHEMBL1152')).toBe(false)
-      expect(appDrugCCList.getSelectedItemsIDs()).toContain('CHEMBL1091')
-
-    it "selects all items", ->
-      appDrugCCList.selectAll()
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-      selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for item in selectedItemsShouldBe
-        expect(selectedItemsGot).toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(true)
-
-    it "unselects one item", ->
-      appDrugCCList.unSelectItem('CHEMBL1091')
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-      expect(appDrugCCList.getSelectedItemsIDs()).not.toContain('CHEMBL1091')
-
-    it "unselects all items", ->
-      appDrugCCList.unSelectAll()
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-      selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for item in selectedItemsShouldNotBe
-        expect(selectedItemsGot).not.toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(false)
-
-    it "selects all items, except one", ->
-
-      exception = 'CHEMBL1152'
-      appDrugCCList.selectAll()
-      appDrugCCList.unSelectItem(exception)
-      selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models when model.attributes.molecule_chembl_id != exception)
-
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for item in selectedItemsShouldBe
-        expect(selectedItemsGot).toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(true)
-
-      expect(selectedItemsGot).not.toContain(exception)
-      expect(appDrugCCList.itemIsSelected(exception)).toBe(false)
-
-    it "unselects all items, except one", ->
-
-      exception = 'CHEMBL1152'
-      appDrugCCList.unSelectAll()
-      appDrugCCList.selectItem(exception)
-      selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models when model.attributes.molecule_chembl_id != exception)
-
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-      for item in selectedItemsShouldNOTBe
-        expect(selectedItemsGot).not.toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(false)
-
-      expect(selectedItemsGot).toContain(exception)
-      expect(appDrugCCList.itemIsSelected(exception)).toBe(true)
-
-    it "selects all items, then selects one item", ->
-
-      appDrugCCList.selectAll()
-      appDrugCCList.selectItem('CHEMBL1091')
-
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-      selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for item in selectedItemsShouldBe
-        expect(selectedItemsGot).toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(true)
-
-    it "unselects all items, then unselects one item", ->
-
-      appDrugCCList.unSelectAll()
-      appDrugCCList.unSelectItem('CHEMBL1091')
-
-      expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-
-      selectedItemsShouldNotBe = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for item in selectedItemsShouldNotBe
-        expect(selectedItemsGot).not.toContain(item)
-        expect(appDrugCCList.itemIsSelected(item)).toBe(false)
-
-    it 'toggles an unselected item', ->
-
-      numToggles = 10
-      for i in [1..10]
-        appDrugCCList.toggleSelectItem('CHEMBL1091')
-        if i%2 != 0
-          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-        else
-          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-
-    it 'toggles a selected item', ->
-
-      numToggles = 10
-      appDrugCCList.selectItem('CHEMBL1091')
-
-      for i in [1..10]
-        appDrugCCList.toggleSelectItem('CHEMBL1091')
-        if i%2 != 0
-          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(false)
-        else
-          expect(appDrugCCList.itemIsSelected('CHEMBL1091')).toBe(true)
-
-    it "goes to a select all state when all items are manually selected", ->
-
-      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      lastItemID = allItemsIDs[allItemsIDs.length - 1]
-      allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
-
-      for itemID in allItemsIDsExceptLast
-        appDrugCCList.selectItem(itemID)
-
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-      appDrugCCList.selectItem(lastItemID)
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-
-    it "goes to a unselect all state when all items are manually unselected", ->
-
-      appDrugCCList.selectAll()
-      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      lastItemID = allItemsIDs[allItemsIDs.length - 1]
-      allItemsIDsExceptLast = allItemsIDs[0..allItemsIDs.length - 2]
-
-      for itemID in allItemsIDsExceptLast
-        appDrugCCList.unSelectItem(itemID)
-
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-      appDrugCCList.unSelectItem(lastItemID)
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-
-    it 'selects a selection list with no items', ->
-
-      itemsToSelect = []
-      appDrugCCList.selectItems(itemsToSelect)
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-      expect(appDrugCCList.thereAreExceptions()).toBe(false)
-
-    it 'selects a from a list of items to select', ->
-
-      # the idea was to optimize it reversing the exceptions but it is still not feasible for server side collections
-      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      itemsToSelect = allItemsIDs[0..Math.floor(allItemsIDs.length / 2) - 1]
-      appDrugCCList.selectItems(itemsToSelect)
-
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(false)
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-
-      for itemID in itemsToSelect
-        expect(selectedItemsGot).toContain(itemID)
-        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
-
-    it 'goes to a select all state when all the items are in the selection lists', ->
-
-      allItemsIDs = (model.attributes.molecule_chembl_id for model in appDrugCCList.models)
-      itemsToSelectA = allItemsIDs[0..Math.floor(allItemsIDs.length / 2)]
-      itemsToSelectB = allItemsIDs[Math.floor(allItemsIDs.length / 2)..allItemsIDs.length]
-
-      appDrugCCList.selectItems(itemsToSelectA)
-      appDrugCCList.selectItems(itemsToSelectB)
-
-      selectedItemsGot = appDrugCCList.getSelectedItemsIDs()
-      expect(appDrugCCList.getMeta('all_items_selected')).toBe(true)
-      expect(appDrugCCList.thereAreExceptions()).toBe(false)
-
-      for itemID in itemsToSelectA
-        expect(selectedItemsGot).toContain(itemID)
-        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
-
-      for itemID in itemsToSelectB
-        expect(selectedItemsGot).toContain(itemID)
-        expect(appDrugCCList.itemIsSelected(itemID)).toBe(true)
 
   describe "A server side collection", ->
     drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
@@ -408,16 +231,3 @@ describe "Paginated Collection", ->
     comparator = _.zip(chembl_ids, expected_chembl_ids)
     for elem in comparator
       expect(elem[0]).toBe(elem[1])
-
-  simulateDataWSClientList = (list, dataURL, done) ->
-    $.get dataURL, (testData) ->
-      list.reset(testData)
-      done()
-
-
-
-
-
-
-
-
