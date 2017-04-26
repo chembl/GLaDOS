@@ -25,7 +25,29 @@ describe "Legend Model", ->
         expect(comparison[0]).toBe(comparison[1])
 
     testInitialisesAmountOfItemsPerCategory = (legendModel) ->
+
+      domain = legendModel.get('domain')
+      collection = legendModel.get('collection')
+      prop = legendModel.get('property')
+
+      if collection.allResults?
+        allItemsObjs = collection.allResults
+      else
+        allItemsObjs = (model.attributes for model in collection.models)
+
+      amountsPerValueMustBe = {}
+      for obj in allItemsObjs
+        value = glados.Utils.getNestedValue(obj, prop.propName)
+        if not amountsPerValueMustBe[value]?
+          amountsPerValueMustBe[value] = 0
+        amountsPerValueMustBe[value]++
+
       amountsPerValue = legendModel.get('amounts-per-value')
+      totalItemsGot = 0
+      for value, amount of amountsPerValueMustBe
+        expect(amountsPerValue[value]).toBe(amount)
+        totalItemsGot += amount
+      expect(totalItemsGot).toBe(collection.getMeta('total_records'))
 
     testSelectsAValue = (legendModel) ->
 
@@ -68,7 +90,7 @@ describe "Legend Model", ->
 
       beforeAll (done) ->
         TestsUtils.simulateDataESList(collection,
-          glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
+          glados.Settings.STATIC_URL + 'testData/SearchResultsAspirinTestData.json', done)
 
       beforeEach ->
 

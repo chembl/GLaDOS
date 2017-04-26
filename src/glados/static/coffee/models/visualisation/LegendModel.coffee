@@ -16,9 +16,13 @@ glados.useNameSpace 'glados.models.visualisation',
 
       if @isDiscrete()
         @set('selected-values', [])
+        @fillAmountPerValue()
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
 
+    # ----------------------------------------------------------------------------------------------------------------------
+    # Categorical
+    # ----------------------------------------------------------------------------------------------------------------------
     selectByPropertyValue: (value) ->
 
       @get('collection').selectByPropertyValue(@get('property').propName, value)
@@ -27,6 +31,23 @@ glados.useNameSpace 'glados.models.visualisation',
 
 
     isValueSelected: (value) -> _.contains(@get('selected-values'), value)
+
+    fillAmountPerValue: ->
+      collection = @get('collection')
+      if collection.allResults?
+        allItemsObjs = collection.allResults
+      else
+        allItemsObjs = (model.attributes for model in collection.models)
+
+      amountsPerValue = {}
+      prop = @get('property')
+      for obj in allItemsObjs
+        value = glados.Utils.getNestedValue(obj, prop.propName)
+        if not amountsPerValue[value]?
+          amountsPerValue[value] = 0
+        amountsPerValue[value]++
+
+      @set('amounts-per-value', amountsPerValue)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context
