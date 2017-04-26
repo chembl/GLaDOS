@@ -33,7 +33,14 @@ glados.useNameSpace 'glados.models.visualisation',
 
       @get('collection').unselectByPropertyValue(@get('property').propName, value)
       @get('selected-values')[value] = false
-      @trigger(glados.Events.Legend.VALUE_SELECTED, value)
+      @trigger(glados.Events.Legend.VALUE_UNSELECTED, value)
+
+    toggleValueSelection: (value) ->
+
+      if @isValueSelected(value)
+        @unselectByPropertyValue(value)
+      else
+        @selectByPropertyValue(value)
 
     isValueSelected: (value) ->
       if not @get('selected-values')[value]?

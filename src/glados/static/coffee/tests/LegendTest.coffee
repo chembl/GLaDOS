@@ -50,13 +50,26 @@ describe "Legend Model", ->
 
     testSelectsAValue = (legendModel) ->
 
-      legendModel.selectByPropertyValue(0)
-      expect(legendModel.isValueSelected(0)).toBe(true)
+      value = 0
+      legendModel.selectByPropertyValue(value)
+      expect(legendModel.isValueSelected(value)).toBe(true)
 
     testUnselectsAValue = (legendModel) ->
 
-      legendModel.unselectByPropertyValue(0)
-      expect(legendModel.isValueSelected(0)).toBe(false)
+      value = 0
+      legendModel.unselectByPropertyValue(value)
+      expect(legendModel.isValueSelected(value)).toBe(false)
+
+    togglesAValueSelection = (legendModel) ->
+
+      value = 0
+      numToggles = 10
+      for i in [1..numToggles]
+        legendModel.toggleValueSelection(value)
+        if i%2 != 0
+          expect(legendModel.isValueSelected(value)).toBe(true)
+        else
+          expect(legendModel.isValueSelected(value)).toBe(false)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -83,8 +96,8 @@ describe "Legend Model", ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
-#      it 'unselects a value', -> testUnselectsAValue(legendModel)
-
+      it 'unselects a value', -> testUnselectsAValue(legendModel)
+      it 'toggles a value selection', -> togglesAValueSelection(legendModel)
 
     describe "with an elasticsearch collection", ->
 
@@ -109,7 +122,8 @@ describe "Legend Model", ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
-#      it 'unselects a value', -> testUnselectsAValue(legendModel)
+      it 'unselects a value', -> testUnselectsAValue(legendModel)
+      it 'toggles a value selection', -> togglesAValueSelection(legendModel)
 
 
 

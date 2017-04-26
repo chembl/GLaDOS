@@ -10,6 +10,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     updateViewProxy = @setUpResponsiveRender()
     @render()
     @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
+    @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
@@ -20,6 +21,12 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     d3.select($(@el).find(rectClassSelector)[0])
       .style('stroke', glados.Settings.VISUALISATION_SELECTED)
       .attr('data-is-selected', true)
+
+  valueUnselectedHandler: (value) ->
+    rectClassSelector = '.legend-rect-' + value
+    d3.select($(@el).find(rectClassSelector)[0])
+      .style('stroke', 'none')
+      .attr('data-is-selected', false)
 
   render: ->
 
@@ -95,7 +102,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   getTextAmountPerValue: (value) -> '(' + @model.getTextAmountPerValue(value) + ')'
 
-  clickRectangle: (d) -> @model.selectByPropertyValue(d)
+  clickRectangle: (d) -> @model.toggleValueSelection(d)
 
 
 

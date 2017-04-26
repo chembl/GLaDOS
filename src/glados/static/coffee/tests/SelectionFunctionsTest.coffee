@@ -179,7 +179,7 @@ describe "Selection Functions", ->
     itemToToggle = allItemsIDs[0]
 
     numToggles = 10
-    for i in [1..10]
+    for i in [1..numToggles]
       list.toggleSelectItem(itemToToggle)
       if i%2 != 0
         expect(list.itemIsSelected(itemToToggle)).toBe(true)
@@ -194,7 +194,7 @@ describe "Selection Functions", ->
     numToggles = 10
     list.selectItem(itemToToggle)
 
-    for i in [1..10]
+    for i in [1..numToggles]
       list.toggleSelectItem(itemToToggle)
       if i%2 != 0
         expect(list.itemIsSelected(itemToToggle)).toBe(false)
