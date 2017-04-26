@@ -76,6 +76,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_TEAL_MAX: '#004d40' #teal darken-4
     VISUALISATION_TEAL_ACCENT_4: '#00bfa5' #teal accent-4
     VISUALISATION_GREY_BASE: '#9e9e9e' #grey
+    VISUALISATION_DARKEN_2: '#616161' #grey darken-2
     VISUALISATION_CARD_GREY: '#fafafa' #fafafa grey lighten-5
     VISUALISATION_GREEN_MIN: '#e8f5e9' #e8f5e9 green lighten-5
     VISUALISATION_BLUE_MIN: '#e3f2fd' # blue lighten-5
@@ -128,6 +129,10 @@ glados.useNameSpace 'glados',
         SELECTED: 'select'
         UNSELECTED: 'unselect'
         BULK_SELECTED: 'bulk-selected'
+        BULK_UNSELECTED: 'bulk-unselected'
+    Legend:
+      VALUE_SELECTED: 'value-selected'
+      VALUE_UNSELECTED: 'value-unselected'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
@@ -185,6 +190,7 @@ glados.logGladosSettings = () ->
     console.log("---END GLaDOS LOADED NAMESPACES----------------------------------------------------------------------")
     console.log("Play nice and there will be CAKE!\n.\n.\n.\nThe CAKE is real, I promise!")
     console.log("♫ ♬ Searching compounds, all day long, searching compounds while I sing this song... ♫ ♬")
+    console.log("Studying hard to pass the Turing test!")
     console.log("What are you looking at, human?")
 
   GlobalVariables.CURRENT_SCREEN_TYPE = glados.getScreenType()
