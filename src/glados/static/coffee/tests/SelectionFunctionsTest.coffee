@@ -425,116 +425,143 @@ describe "Selection Functions", ->
     for itemID in selectedValuesShouldNotBe
       expect(list.itemIsSelected(itemID)).toBe(false)
 
+  testUnselectsItemsBasedOnAPropertyValue = (list) ->
+
+    list.selectAll()
+    propName = 'max_phase'
+    propValue = 4
+
+    if list.allResults?
+      unselectedValuesShouldBe = (model.molecule_chembl_id for model in list.allResults \
+        when glados.Utils.getNestedValue(model, propName) == propValue)
+      unselectedValuesShouldNotBe = (model.molecule_chembl_id for model in list.allResults \
+        when glados.Utils.getNestedValue(model, propName) != propValue)
+    else
+      unselectedValuesShouldBe = (model.attributes.molecule_chembl_id for model in list.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) == propValue)
+      unselectedValuesShouldNotBe = (model.attributes.molecule_chembl_id for model in list.models \
+        when glados.Utils.getNestedValue(model.attributes, propName) != propValue)
+
+    list.unselectByPropertyValue(propName, propValue)
+
+    for itemID in unselectedValuesShouldBe
+      expect(list.itemIsSelected(itemID)).toBe(false)
+
+    for itemID in unselectedValuesShouldNotBe
+      expect(list.itemIsSelected(itemID)).toBe(true)
+
   # -------------------------------------------------------------------------------------------------
   # Actual Tests
   # -------------------------------------------------------------------------------------------------
   describe "Client Side Collections", ->
 
-    appDrugCCList = glados.models.paginatedCollections\
+    list = glados.models.paginatedCollections\
     .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
     beforeAll (done) ->
-      TestsUtils.simulateDataWSClientList(appDrugCCList,
+      TestsUtils.simulateDataWSClientList(list,
         glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
     beforeEach ->
-      appDrugCCList.unSelectAll()
+      list.unSelectAll()
 
-    it "selects one item", -> testSelectsOneItem(appDrugCCList)
-    it "selects all items", -> testSelectsAllItems(appDrugCCList)
-    it "unselects one item", -> testUnselectsOneItem(appDrugCCList)
-    it "unselects all items", -> testUnselectsAllItems(appDrugCCList)
+    it "selects one item", -> testSelectsOneItem(list)
+    it "selects all items", -> testSelectsAllItems(list)
+    it "unselects one item", -> testUnselectsOneItem(list)
+    it "unselects all items", -> testUnselectsAllItems(list)
     it 'gives the number of selected items after selecting none', ->
-      testGivesNumberOfSelectedItemsAfterSelectingNone(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterSelectingNone(list)
     it 'gives the number of selected items after selecting some', ->
-      testGivesNumberOfSelectedItemsAfterSelectingSome(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterSelectingSome(list)
     it 'gives the number of selected items after selecting all', ->
-      testGivesNumberOfSelectedItemsAfterSelectingAll(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterSelectingAll(list)
     it 'gives the number of selected items after selecting all and then unselecting one', ->
-      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(list)
     it 'gives the number of selected items after unselecting some', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingSome(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterUnselectingSome(list)
     it 'gives the number of selected items after unselecting all', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingAll(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterUnselectingAll(list)
     it 'gives the number of selected items after unselecting all and then selecting one', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(appDrugCCList)
-    it "selects all items, except one", -> testSelectsAllItemsExceptOne(appDrugCCList)
-    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(appDrugCCList)
-    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(appDrugCCList)
-    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(appDrugCCList)
-    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(appDrugCCList)
-    it 'toggles a selected item', -> testTogglesASelectedItem(appDrugCCList)
+      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(list)
+    it "selects all items, except one", -> testSelectsAllItemsExceptOne(list)
+    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(list)
+    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(list)
+    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(list)
+    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(list)
+    it 'toggles a selected item', -> testTogglesASelectedItem(list)
     it "goes to a select all state when all items are manually selected", ->
-      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(appDrugCCList)
+      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(list)
     it "goes to a unselect all state when all items are manually unselected", ->
-      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(appDrugCCList)
-    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(appDrugCCList)
-    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(appDrugCCList)
+      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(list)
+    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(list)
+    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(list)
     it 'goes to a select all state when all the items are in the selection lists', ->
-      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(appDrugCCList)
-    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(appDrugCCList)
-    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(appDrugCCList)
+      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(list)
+    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(list)
+    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(list)
     it 'goes to a select none state when all the items are in the unselection lists', ->
-      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(appDrugCCList)
-    it 'reverses exceptions', -> testReversesExceptions(appDrugCCList)
+      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(list)
+    it 'reverses exceptions', -> testReversesExceptions(list)
     it 'accumulates previous selections (bulk selection)', ->
-      testAccumulatesPreviousSelectionsForSelections(appDrugCCList)
+      testAccumulatesPreviousSelectionsForSelections(list)
     it 'accumulates previous selections (bulk UNselection)', ->
-      testAccumulatesPreviousSelectionsForUnselections(appDrugCCList)
-    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(appDrugCCList)
+      testAccumulatesPreviousSelectionsForUnselections(list)
+    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(list)
+    it 'unselects items based on a property value', -> testUnselectsItemsBasedOnAPropertyValue(list)
 
   describe 'Elasticsearch Results Collections', ->
 
-    searchResList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
     )
 
     beforeAll (done) ->
-      TestsUtils.simulateDataESList(searchResList,
+      TestsUtils.simulateDataESList(list,
         glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
     beforeEach ->
-      searchResList.unSelectAll()
+      list.unSelectAll()
 
-    it "selects one item", -> testSelectsOneItem(searchResList)
-    it "selects all items", -> testSelectsAllItems(searchResList)
-    it "unselects one item", -> testUnselectsOneItem(searchResList)
-    it "unselects all items", -> testUnselectsAllItems(searchResList)
+    it "selects one item", -> testSelectsOneItem(list)
+    it "selects all items", -> testSelectsAllItems(list)
+    it "unselects one item", -> testUnselectsOneItem(list)
+    it "unselects all items", -> testUnselectsAllItems(list)
     it 'gives the number of selected items after selecting none', ->
-      testGivesNumberOfSelectedItemsAfterSelectingNone(searchResList)
+      testGivesNumberOfSelectedItemsAfterSelectingNone(list)
     it 'gives the number of selected items after selecting some', ->
-      testGivesNumberOfSelectedItemsAfterSelectingSome(searchResList)
+      testGivesNumberOfSelectedItemsAfterSelectingSome(list)
     it 'gives the number of selected items after selecting all', ->
-      testGivesNumberOfSelectedItemsAfterSelectingAll(searchResList)
+      testGivesNumberOfSelectedItemsAfterSelectingAll(list)
     it 'gives the number of selected items after selecting all and then unselecting one', ->
-      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(searchResList)
+      testGivesNumberOfSelectedItemsAfterSelectingAllAndThenUnselectingOne(list)
     it 'gives the number of selected items after unselecting some', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingSome(searchResList)
+      testGivesNumberOfSelectedItemsAfterUnselectingSome(list)
     it 'gives the number of selected items after unselecting all', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingAll(searchResList)
+      testGivesNumberOfSelectedItemsAfterUnselectingAll(list)
     it 'gives the number of selected items after unselecting all and then selecting one', ->
-      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(searchResList)
-    it "selects all items, except one", -> testSelectsAllItemsExceptOne(searchResList)
-    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(searchResList)
-    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(searchResList)
-    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(searchResList)
-    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(searchResList)
-    it 'toggles a selected item', -> testTogglesASelectedItem(searchResList)
+      testGivesNumberOfSelectedItemsAfterUnselectingAllAndThenSelectingOne(list)
+    it "selects all items, except one", -> testSelectsAllItemsExceptOne(list)
+    it "unselects all items, except one", -> testUnselectsAllItemsExceptOne(list)
+    it "selects all items, then selects one item", -> testSelectsAllItemsThenSelectsOneItem(list)
+    it "unselects all items, then unselects one item", -> testUnselectsAllItemsThenUnselectsOneItem(list)
+    it 'toggles an unselected item', -> testTogglesAnUnselectedItem(list)
+    it 'toggles a selected item', -> testTogglesASelectedItem(list)
     it "goes to a select all state when all items are manually selected", ->
-      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(searchResList)
+      testGoesToASelectAllStateWhenAllItemsAreManuallySelected(list)
     it "goes to a unselect all state when all items are manually unselected", ->
-      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(searchResList)
-    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(searchResList)
-    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(searchResList)
+      testGoesToAUnselectAllStateWhenAllItemsAreManuallyUnselected(list)
+    it 'bulk selects a selection list with no items', -> testBulkSelectsFromASelectionListWithNoItems(list)
+    it 'bulk selects a from a list of items to select', -> testBulkSelectsFromAListOfItemsToSelect(list)
     it 'goes to a select all state when all the items are in the selection lists', ->
-      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(searchResList)
-    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(searchResList)
-    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(searchResList)
+      testGoesToASelectAllStateWhenAllTheItemsAreInTheSelectionLists(list)
+    it 'bulk unselects a from a list of items to select', -> testUnselectsFromAListOfItemsToUnselect(list)
+    it 'bulk unselects a selection list with no items', -> testUnselectsASelectionListWithNoItems(list)
     it 'goes to a select none state when all the items are in the unselection lists', ->
-      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(searchResList)
-    it 'reverses exceptions', -> testReversesExceptions(searchResList)
+      testGoesToASelectNoneStateWhenAllTheItemsAreInTheUnselectionLists(list)
+    it 'reverses exceptions', -> testReversesExceptions(list)
     it 'accumulates previous selections (bulk selection)', ->
-      testAccumulatesPreviousSelectionsForSelections(searchResList)
+      testAccumulatesPreviousSelectionsForSelections(list)
     it 'accumulates previous selections (bulk UNselection)', ->
-      testAccumulatesPreviousSelectionsForUnselections(searchResList)
-    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(searchResList)
+      testAccumulatesPreviousSelectionsForUnselections(list)
+    it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(list)
+    it 'unselects items based on a property value', -> testUnselectsItemsBasedOnAPropertyValue(list)

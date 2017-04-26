@@ -15,7 +15,7 @@ glados.useNameSpace 'glados.models.visualisation',
           @set('colour-range', @get('property').coloursRange)
 
       if @isDiscrete()
-        @set('selected-values', [])
+        @set('selected-values', {})
         @fillAmountPerValue()
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
@@ -26,11 +26,19 @@ glados.useNameSpace 'glados.models.visualisation',
     selectByPropertyValue: (value) ->
 
       @get('collection').selectByPropertyValue(@get('property').propName, value)
-      @get('selected-values').push(value)
+      @get('selected-values')[value] = true
       @trigger(glados.Events.Legend.VALUE_SELECTED, value)
 
+    unselectByPropertyValue: (value) ->
 
-    isValueSelected: (value) -> _.contains(@get('selected-values'), value)
+      @get('collection').unselectByPropertyValue(@get('property').propName, value)
+      @get('selected-values')[value] = false
+      @trigger(glados.Events.Legend.VALUE_SELECTED, value)
+
+    isValueSelected: (value) ->
+      if not @get('selected-values')[value]?
+        return false
+      return @get('selected-values')[value]
 
     fillAmountPerValue: ->
       collection = @get('collection')

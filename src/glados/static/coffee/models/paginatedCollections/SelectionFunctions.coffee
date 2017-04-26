@@ -152,6 +152,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @selectItems(idsToSelect)
 
+    unselectByPropertyValue: (propName, value) ->
+
+      idProperty = @getMeta('id_column').comparator
+
+      if @allResults?
+        idsToSelect = (model[idProperty] for model in @allResults \
+          when glados.Utils.getNestedValue(model, propName) == value)
+      else
+        idsToSelect = (model.attributes[idProperty] for model in @models \
+          when glados.Utils.getNestedValue(model.attributes, propName) == value)
+
+      @unSelectItems(idsToSelect)
+
     getNumberOfSelectedItems: ->
 
       selectionExceptions = @getMeta('selection_exceptions')

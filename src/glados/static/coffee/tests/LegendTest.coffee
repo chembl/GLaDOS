@@ -53,6 +53,12 @@ describe "Legend Model", ->
       legendModel.selectByPropertyValue(0)
       expect(legendModel.isValueSelected(0)).toBe(true)
 
+    testUnselectsAValue = (legendModel) ->
+
+      legendModel.unselectByPropertyValue(0)
+      expect(legendModel.isValueSelected(0)).toBe(false)
+
+
     # ------------------------------------------------------------------------------------------------------------------
     # Actual tests
     # ------------------------------------------------------------------------------------------------------------------
@@ -77,6 +83,7 @@ describe "Legend Model", ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
+#      it 'unselects a value', -> testUnselectsAValue(legendModel)
 
 
     describe "with an elasticsearch collection", ->
@@ -102,7 +109,7 @@ describe "Legend Model", ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
-
+#      it 'unselects a value', -> testUnselectsAValue(legendModel)
 
 
 
