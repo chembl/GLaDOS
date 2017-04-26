@@ -45,13 +45,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", "translate(" + horizontalPadding + "," + (legendHeight - 30) + ")")
 
     legendSVG.append('text')
-        .text(@model.get('property').label)
-        .attr("class", 'plot-colour-legend-title')
-    # center legend title
-    textWidth = d3.select('.plot-colour-legend-title').node().getBBox().width
-    xTrans = (@legendWidth - textWidth) / 2
-    legendSVG.select('.plot-colour-legend-title')
-      .attr("transform", "translate(" + xTrans + ", 35)")
+      .text(@model.get('property').label)
+      .attr("class", 'plot-colour-legend-title')
+      .attr('text-anchor', 'middle')
+      .attr("transform", "translate(" + (@legendWidth / 2) + ", 35)")
 
     if @model.isDiscrete()
       @paintDiscreteLegend(legendG)
