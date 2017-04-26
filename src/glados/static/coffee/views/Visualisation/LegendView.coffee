@@ -82,7 +82,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendG.selectAll('text')
       .data(getXInLegendFor.domain())
       .enter().append('text')
-      .text('hola')
+      .text($.proxy(@getTextAmountPerValue, @))
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', @LEGEND_TEXT_Y)
       .style('font-size', '65%')
@@ -93,8 +93,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     legendG.call(legendAxis)
 
-  clickRectangle: (d) ->
-    @model.selectByPropertyValue(d)
+  getTextAmountPerValue: (value) -> '(' + @model.getTextAmountPerValue(value) + ')'
+
+  clickRectangle: (d) -> @model.selectByPropertyValue(d)
 
 
 

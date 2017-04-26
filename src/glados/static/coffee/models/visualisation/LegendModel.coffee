@@ -49,6 +49,13 @@ glados.useNameSpace 'glados.models.visualisation',
 
       @set('amounts-per-value', amountsPerValue)
 
+    getTextAmountPerValue: (value) ->
+      ans = @get('amounts-per-value')[value]
+      if not ans?
+        return 0
+      return ans
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context
 # ----------------------------------------------------------------------------------------------------------------------

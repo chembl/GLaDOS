@@ -42,10 +42,9 @@ describe "Legend Model", ->
           amountsPerValueMustBe[value] = 0
         amountsPerValueMustBe[value]++
 
-      amountsPerValue = legendModel.get('amounts-per-value')
       totalItemsGot = 0
       for value, amount of amountsPerValueMustBe
-        expect(amountsPerValue[value]).toBe(amount)
+        expect(legendModel.getTextAmountPerValue(value)).toBe(amount)
         totalItemsGot += amount
       expect(totalItemsGot).toBe(collection.getMeta('total_records'))
 
