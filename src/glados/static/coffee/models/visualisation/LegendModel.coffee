@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.models.visualisation',
 
     initialize: ->
 
+      @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
       defaultDomain = @get('property').domain
       if defaultDomain?
         @set('domain', defaultDomain)
@@ -15,24 +16,24 @@ glados.useNameSpace 'glados.models.visualisation',
           @set('colour-range', @get('property').coloursRange)
 
       if @isDiscrete()
-        @set('selected-values', {})
+        @set('values-selection', {})
         @fillAmountPerValue()
 
     isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
 
-    # ----------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # Categorical
-    # ----------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     selectByPropertyValue: (value) ->
 
       @get('collection').selectByPropertyValue(@get('property').propName, value)
-      @get('selected-values')[value] = true
+      @get('values-selection')[value] = true
       @trigger(glados.Events.Legend.VALUE_SELECTED, value)
 
     unselectByPropertyValue: (value) ->
 
       @get('collection').unselectByPropertyValue(@get('property').propName, value)
-      @get('selected-values')[value] = false
+      @get('values-selection')[value] = false
       @trigger(glados.Events.Legend.VALUE_UNSELECTED, value)
 
     toggleValueSelection: (value) ->
@@ -43,9 +44,17 @@ glados.useNameSpace 'glados.models.visualisation',
         @selectByPropertyValue(value)
 
     isValueSelected: (value) ->
-      if not @get('selected-values')[value]?
+      if not @get('values-selection')[value]?
         return false
-      return @get('selected-values')[value]
+      return @get('values-selection')[value]
+      
+    unSelectAllValues: ->
+      
+      valuesSelection =  @get('values-selection')
+      domain = @get('domain')
+      for value in domain
+        valuesSelection[value] = false
+        @trigger(glados.Events.Legend.VALUE_UNSELECTED, value)
 
     fillAmountPerValue: ->
       collection = @get('collection')
@@ -70,6 +79,12 @@ glados.useNameSpace 'glados.models.visualisation',
         return 0
       return ans
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Handle Selections in collection
+    # ------------------------------------------------------------------------------------------------------------------
+    handleCollSelectionChanged: (param) ->
+      if param == glados.Events.Collections.Params.ALL_UNSELECTED
+        @unSelectAllValues()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Class Context

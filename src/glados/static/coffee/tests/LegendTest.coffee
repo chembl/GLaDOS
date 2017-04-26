@@ -60,7 +60,7 @@ describe "Legend Model", ->
       legendModel.unselectByPropertyValue(value)
       expect(legendModel.isValueSelected(value)).toBe(false)
 
-    togglesAValueSelection = (legendModel) ->
+    testTogglesAValueSelection = (legendModel) ->
 
       value = 0
       numToggles = 10
@@ -70,6 +70,13 @@ describe "Legend Model", ->
           expect(legendModel.isValueSelected(value)).toBe(true)
         else
           expect(legendModel.isValueSelected(value)).toBe(false)
+
+    testUnselectsAllValues = (legendModel) ->
+
+      legendModel.unSelectAllValues()
+      domain = legendModel.get('domain')
+      for value in domain
+        expect(legendModel.isValueSelected(value)).toBe(false)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -97,7 +104,8 @@ describe "Legend Model", ->
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
       it 'unselects a value', -> testUnselectsAValue(legendModel)
-      it 'toggles a value selection', -> togglesAValueSelection(legendModel)
+      it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
+      it 'unselects all values', -> testUnselectsAllValues(legendModel)
 
     describe "with an elasticsearch collection", ->
 
@@ -123,7 +131,5 @@ describe "Legend Model", ->
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
       it 'unselects a value', -> testUnselectsAValue(legendModel)
-      it 'toggles a value selection', -> togglesAValueSelection(legendModel)
-
-
-
+      it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
+      it 'unselects all values', -> testUnselectsAllValues(legendModel)
