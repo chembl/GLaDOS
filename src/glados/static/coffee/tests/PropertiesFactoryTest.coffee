@@ -12,9 +12,12 @@ describe "Properties Factory for visualisation", ->
   describe 'with a default domain ', ->
 
     describe 'categorical', ->
-      it 'generates the configuration', ->
 
-        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
+      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5',
+          withColourScale=true)
+
+      it 'generates the basic configuration', ->
+
         expect(prop.aggregatable).toBe(true)
         expect(prop.label).toBe("#RO5 Violations")
         expect(prop.propName).toBe("molecule_properties.num_ro5_violations")
@@ -23,9 +26,6 @@ describe "Properties Factory for visualisation", ->
         expect(prop.coloursRange?).toBe(true)
 
       it 'generates a colour scale when requested', ->
-
-        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5',
-          withColourScale=true)
 
         scale = prop.colourScale
         domainMustBe = [glados.Settings.DEFAULT_NULL_VALUE_LABEL, 0, 1, 2, 3, 4]
@@ -37,4 +37,39 @@ describe "Properties Factory for visualisation", ->
           expect(domainGot[i]).toBe(domainMustBe[i])
         for i in [0..rangeMustBe.length - 1]
           expect(rangeGot[i]).toBe(rangeMustBe[i])
+
+  describe 'with a unknown domain ', ->
+
+    describe 'continuous', ->
+
+      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+
+      testGeneratesTheDomainFromAListOfValues = (prop) ->
+        minVal = (Math.random() * 1000) - 500
+        maxVal = minVal + (Math.random() * 1000)
+        numItems = 10
+
+        values = ((Math.random() * (maxVal - minVal)) + minVal  for i in [1..10])
+        values.push(minVal)
+        values.push(maxVal)
+        values = _.shuffle(values)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        expect(prop.domain[0]).toBe(minVal)
+        expect(prop.domain[1]).toBe(maxVal)
+
+      it 'generates the basic configuration', ->
+
+        expect(prop.aggregatable).toBe(true)
+        expect(prop.label).toBe("Parent Molecular Weight")
+        expect(prop.propName).toBe("molecule_properties.full_mwt")
+        expect(prop.type).toBe(Number)
+        expect(prop.domain?).toBe(false)
+        expect(prop.coloursRange?).toBe(false)
+
+      it 'generates the domain from a list of values', ->
+        for i in [1..10]
+          testGeneratesTheDomainFromAListOfValues(prop)
+
+
+
 

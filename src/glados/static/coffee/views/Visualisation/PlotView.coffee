@@ -355,7 +355,6 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     $legendContainer.find('line, path').css('fill', 'none')
 
     prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
-    console.log 'prop: ', prop
     legendModel = new glados.models.visualisation.LegendModel
       property: prop
       collection: @collection

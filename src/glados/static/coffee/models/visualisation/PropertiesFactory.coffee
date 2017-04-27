@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.models.visualisation',
         FULL_MWT:
           propName:'molecule_properties.full_mwt'
           label: 'Parent Molecular Weight'
+          colourScaleType: glados.Visualisation.CONTINUOUS
         PSA:
           propName:'molecule_properties.psa'
           type: 'number'
@@ -32,6 +33,32 @@ glados.useNameSpace 'glados.models.visualisation',
           type: 'number'
           label: 'Hydrogen Bond Donnors'
 
+    # Generic functions
+    generateColourScale: (prop, scaleType) ->
+
+      if scaleType == glados.Visualisation.CATEGORICAL
+        prop.colourScale = d3.scale.ordinal()
+        .domain(prop.domain)
+        .range(prop.coloursRange)
+
+    generateContinuousDomainFromValues: (prop, values) ->
+
+      minVal = Number.MAX_VALUE
+      maxVal = -Number.MAX_VALUE
+
+      for val in values
+
+        val = parseFloat(val)
+        if val == glados.Settings.DEFAULT_NULL_VALUE_LABEL or !val?
+            continue
+
+        if val > maxVal
+          maxVal = val
+        if val < minVal
+          minVal = val
+
+      prop.domain = [minVal, maxVal]
+
 glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName, propertyID, withColourScale=false) ->
 
   esIndex = glados.models.visualisation.PropertiesFactory[entityName].esIndex
@@ -41,9 +68,6 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
   prop = $.extend({}, baseConfig, customConfig)
 
   if withColourScale
-    if prop.colourScaleType == glados.Visualisation.CATEGORICAL
-      prop.colourScale = d3.scale.ordinal()
-      .domain(prop.domain)
-      .range(prop.coloursRange)
+    glados.models.visualisation.PropertiesFactory.generateColourScale(prop, prop.colourScaleType)
 
   return prop
