@@ -6,11 +6,10 @@ glados.useNameSpace 'glados.models.visualisation',
 
       @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
       @set('domain', @get('property').domain)
+      @set('colour-range', @get('property').coloursRange)
 
       if @isDiscrete()
-        @set('type', glados.models.visualisation.LegendModel.DISCRETE)
         @set('ticks', @get('property').domain)
-        @set('colour-range', @get('property').coloursRange)
         @set('values-selection', {})
         @fillAmountPerValue()
 
