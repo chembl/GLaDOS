@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.models.visualisation',
         FULL_MWT:
           propName:'molecule_properties.full_mwt'
           label: 'Parent Molecular Weight'
+          coloursRange: [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
           colourScaleType: glados.Visualisation.CONTINUOUS
         PSA:
           propName:'molecule_properties.psa'
@@ -34,10 +35,14 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Hydrogen Bond Donnors'
 
     # Generic functions
-    generateColourScale: (prop, scaleType) ->
+    generateColourScale: (prop) ->
 
-      if scaleType == glados.Visualisation.CATEGORICAL
+      if prop.colourScaleType == glados.Visualisation.CATEGORICAL
         prop.colourScale = d3.scale.ordinal()
+        .domain(prop.domain)
+        .range(prop.coloursRange)
+      else if prop.colourScaleType == glados.Visualisation.CONTINUOUS
+        prop.colourScale = d3.scale.linear()
         .domain(prop.domain)
         .range(prop.coloursRange)
 
@@ -68,6 +73,6 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
   prop = $.extend({}, baseConfig, customConfig)
 
   if withColourScale
-    glados.models.visualisation.PropertiesFactory.generateColourScale(prop, prop.colourScaleType)
+    glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
 
   return prop

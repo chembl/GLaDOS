@@ -20,3 +20,10 @@ class TestsUtils
       list.allResults = testData
       list.setMeta('total_records', testData.length)
       done()
+
+  @generateListOfRandomValues = (minVal, maxVal) ->
+
+    values = ((Math.random() * (maxVal - minVal)) + minVal  for i in [1..10])
+    values.push(minVal)
+    values.push(maxVal)
+    values = _.shuffle(values)

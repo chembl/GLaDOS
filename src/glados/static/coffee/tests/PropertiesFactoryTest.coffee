@@ -42,17 +42,15 @@ describe "Properties Factory for visualisation", ->
 
     describe 'continuous', ->
 
-      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      prop = undefined
+      beforeEach ->
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
 
       testGeneratesTheDomainFromAListOfValues = (prop) ->
+
         minVal = (Math.random() * 1000) - 500
         maxVal = minVal + (Math.random() * 1000)
-        numItems = 10
-
-        values = ((Math.random() * (maxVal - minVal)) + minVal  for i in [1..10])
-        values.push(minVal)
-        values.push(maxVal)
-        values = _.shuffle(values)
+        values = TestsUtils.generateListOfRandomValues(minVal, maxVal)
         glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
         expect(prop.domain[0]).toBe(minVal)
         expect(prop.domain[1]).toBe(maxVal)
@@ -64,12 +62,27 @@ describe "Properties Factory for visualisation", ->
         expect(prop.propName).toBe("molecule_properties.full_mwt")
         expect(prop.type).toBe(Number)
         expect(prop.domain?).toBe(false)
-        expect(prop.coloursRange?).toBe(false)
+        expect(prop.coloursRange?).toBe(true)
 
       it 'generates the domain from a list of values', ->
         for i in [1..10]
           testGeneratesTheDomainFromAListOfValues(prop)
 
+      it 'generates a colour scale when requested after generating domain', ->
 
+        minVal = (Math.random() * 1000) - 500
+        maxVal = minVal + (Math.random() * 1000)
+        values = TestsUtils.generateListOfRandomValues(minVal, maxVal)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
 
+        scale = prop.colourScale
+        domainMustBe = [minVal, maxVal]
+        rangeMustBe = [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
+        domainGot = scale.domain()
+        rangeGot = scale.range()
 
+        for i in [0..domainMustBe.length - 1]
+          expect(domainGot[i]).toBe(domainMustBe[i])
+        for i in [0..rangeMustBe.length - 1]
+          expect(rangeGot[i]).toBe(rangeMustBe[i])
