@@ -39,7 +39,7 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
   baseConfig = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[esIndex][customConfig.propName]
 
   prop = $.extend({}, baseConfig, customConfig)
-  
+
   if withColourScale
     if prop.colourScaleType == glados.Visualisation.CATEGORICAL
       prop.colourScale = d3.scale.ordinal()
