@@ -48,6 +48,7 @@ setup(
     packages=find_packages(src_dir),
     long_description=open('README.md').read(),
     install_requires=[
+        'Arpeggio',
         'django==1.10.4',
         'django-compressor>=2.0',
         'twitter',
