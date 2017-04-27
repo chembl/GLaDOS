@@ -193,8 +193,14 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     )
     @renderRejectedElements()
 
+    if not @currentPropertyColour.colourScale?
+      if not @currentPropertyColour.domain?
+        values = (glados.Utils.getNestedValue(mol, @currentPropertyColour.propName) for mol in @shownElements)
+        console.log 'generating domain!'
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(@currentPropertyColour, values)
+      glados.models.visualisation.PropertiesFactory.generateColourScale(@currentPropertyColour)
+
     @getColourFor = @currentPropertyColour.colourScale
-    console.log '@getColourFor: ', @getColourFor
 
     xValues = (glados.Utils.getNestedValue(mol, @currentPropertyX.propName) for mol in @shownElements)
     yValues = (glados.Utils.getNestedValue(mol, @currentPropertyY.propName) for mol in @shownElements)
@@ -229,7 +235,6 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
       yaxis: {title: @currentPropertyY.label}
       hovermode: 'closest'
     }
-    console.log 'visual element: ', @$vis_elem
 
     graphDiv = @$vis_elem.get(0)
 
@@ -354,12 +359,16 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     #customize legend styles
     $legendContainer.find('line, path').css('fill', 'none')
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5')
-    legendModel = new glados.models.visualisation.LegendModel
-      property: prop
-      collection: @collection
+    # Generate legend model and view lazily
+    if not @currentPropertyColour.legendModel?
+      @currentPropertyColour.legendModel = new glados.models.visualisation.LegendModel
+        property: @currentPropertyColour
+        collection: @collection
 
-    $legendContainer2 = $(@el).find('.BCK-CompResultsGraphLegendContainer')
-    legendView = new LegendView
-      model: legendModel
-      el: $legendContainer2
+    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    if not @currentPropertyColour.legendView?
+      @currentPropertyColour.legendView = new LegendView
+        model: @currentPropertyColour.legendModel
+        el: $legendContainer
+    else
+      @currentPropertyColour.legendView.render()
