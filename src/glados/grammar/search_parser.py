@@ -8,6 +8,19 @@ import glados.grammar.inchi as inchi
 import re
 import json
 
+
+def word_term():
+    return
+
+
+def property_term():
+    return
+
+
+def exact_match_term():
+    return
+
+
 def expression_term():
     return [parenthesised_expression, smiles.smiles, inchi.inchi_key, inchi.inchi]
 
