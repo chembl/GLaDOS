@@ -5,21 +5,16 @@ glados.useNameSpace 'glados.models.visualisation',
     initialize: ->
 
       @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
-      defaultDomain = @get('property').domain
-      if defaultDomain?
-        @set('domain', defaultDomain)
-
-        # if domain has more than 2 values, I assume that it is discrete
-        if defaultDomain.length > 2
-          @set('type', glados.models.visualisation.LegendModel.DISCRETE)
-          @set('ticks', defaultDomain)
-          @set('colour-range', @get('property').coloursRange)
+      @set('domain', @get('property').domain)
 
       if @isDiscrete()
+        @set('type', glados.models.visualisation.LegendModel.DISCRETE)
+        @set('ticks', @get('property').domain)
+        @set('colour-range', @get('property').coloursRange)
         @set('values-selection', {})
         @fillAmountPerValue()
 
-    isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
+    isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
@@ -95,9 +90,3 @@ glados.useNameSpace 'glados.models.visualisation',
         @unSelectAllValues()
       else if param == glados.Events.Collections.Params.ALL_SELECTED
         @selectAllValues()
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Class Context
-# ----------------------------------------------------------------------------------------------------------------------
-glados.models.visualisation.LegendModel.CONTINUOUS = 'CONTINUOUS'
-glados.models.visualisation.LegendModel.DISCRETE = 'DISCRETE'

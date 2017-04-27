@@ -9,7 +9,7 @@ describe "Properties Factory for visualisation", ->
     expect(prop.propName).toBe("molecule_properties.alogp")
     expect(prop.type).toBe(Number)
 
-  describe 'with a default domain ', ->
+  describe 'with a default domain', ->
 
     describe 'categorical', ->
 
@@ -38,7 +38,7 @@ describe "Properties Factory for visualisation", ->
         for i in [0..rangeMustBe.length - 1]
           expect(rangeGot[i]).toBe(rangeMustBe[i])
 
-  describe 'with a unknown domain ', ->
+  describe 'with a unknown domain', ->
 
     describe 'continuous', ->
 

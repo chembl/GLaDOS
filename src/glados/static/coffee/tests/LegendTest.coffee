@@ -92,7 +92,8 @@ describe "Legend Model", ->
 
       prop = undefined
       legendModel = undefined
-      collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+      collection = glados.models.paginatedCollections\
+        .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
       beforeAll (done) ->
          TestsUtils.simulateDataWSClientList(
@@ -105,7 +106,7 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from a default domain and tick values', ->
+      it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
@@ -133,7 +134,7 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from a default domain and tick values', ->
+      it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
