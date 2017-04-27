@@ -65,6 +65,9 @@ class URLProcessor
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match and match.length > 3
+      # todo add more?
+      if match[3] == 'GLaDOS'
+        alert('Believe me, I am still alive!')
       return match[3]
     return ""
 
