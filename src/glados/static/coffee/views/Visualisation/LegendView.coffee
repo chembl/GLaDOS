@@ -4,6 +4,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   LEGEND_HEIGHT: 110
   LEGEND_RECT_HEIGHT: 20
   LEGEND_TEXT_Y: -25
+  RANGE_SELECTOR_WIDTH: 2
+  RANGE_SELECTOR_FILL: 'white'
+  RANGE_SELECTOR_STROKE_WIDTH: 1
+  RANGE_SELECTOR_STROKE: 'black'
 
   initialize: ->
     @$vis_elem = $(@el)
@@ -92,6 +96,25 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
+
+    rangeSelector1G = legendG.append('g')
+      .attr("transform", "translate(" + (getXInLegendFor start) + "," + -@LEGEND_RECT_HEIGHT + ")")
+      .attr('x', getXInLegendFor start)
+      .attr('y', -@LEGEND_RECT_HEIGHT)
+
+    rangeSelector1G.append('rect')
+      .attr('stroke', @RANGE_SELECTOR_STROKE)
+      .attr('stroke-width', @RANGE_SELECTOR_STROKE_WIDTH)
+      .attr('fill', @RANGE_SELECTOR_FILL)
+      .attr('height', @LEGEND_RECT_HEIGHT)
+      .attr('width', @RANGE_SELECTOR_WIDTH)
+
+    rangeSelector1G.append('text')
+      .text(start)
+      .attr('text-anchor', 'middle')
+      .style('font-size', '65%')
+      .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
+      .attr("transform", 'translate(0,-10)')
 
     legendG.call(legendAxis)
 
