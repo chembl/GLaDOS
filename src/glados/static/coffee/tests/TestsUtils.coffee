@@ -13,6 +13,14 @@ class TestsUtils
     else
       return (model.attributes.molecule_chembl_id for model in list.models)
 
+  @pluckFromListItems = (list, propertyName) ->
+
+    if list.allResults?
+      return (glados.Utils.getNestedValue(model, propertyName) for model in list.allResults)
+    else
+      return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
+
+
   # simulates only the data inside, nothing related with the elasticsearch query,
   # initialises all results list only
   @simulateDataESList = (list, dataURL, done) ->

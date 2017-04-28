@@ -148,24 +148,28 @@ describe "Legend Model", ->
     # ------------------------------------------------------------------------------------------------------------------
     # Generic Test Functions
     # ------------------------------------------------------------------------------------------------------------------
-    testInitialisesFromADefaultDomainAndTickValues = (legendModel) ->
+    testInitialisesFromProperty = (legendModel) ->
 
       domain = legendModel.get('domain')
+      range = legendModel.get('colour-range')
       ticks = legendModel.get('ticks')
 
-#      expect(domain[0]).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
-#      i = 1
-#      while i < 6
-#        expect(domain[i]).toBe(i - 1)
-#        expect(ticks[i]).toBe(i - 1)
-#        i++
-#
-#      expect(legendModel.get('type')).toBe(glados.models.visualisation.LegendModel.DISCRETE)
-#      range = legendModel.get('colour-range')
-#      rangeShouldBe = [glados.Settings.VISUALISATION_GREY_BASE, '#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
-#
-#      for comparison in _.zip(range, rangeShouldBe)
-#        expect(comparison[0]).toBe(comparison[1])
+      domainMustBe = legendModel.get('property').domain
+      for i in [0..domainMustBe.length - 1]
+        expect(domain[i]).toBe(domainMustBe[i])
+      rangeMustBe = legendModel.get('property').coloursRange
+      for i in [0..rangeMustBe.length - 1]
+        expect(range[i]).toBe(rangeMustBe[i])
+
+      numTicks = legendModel.get('property').ticksNumber
+      start = domain[0]
+      stop = domain[1]
+      step = Math.abs(stop - start) / (numTicks - 1)
+      ticksMustBe = d3.range(start, stop, step)
+      ticksMustBe.push(stop)
+
+      for i in [0..ticksMustBe.length - 1]
+        expect(ticks[i]).toBe(ticksMustBe[i])
 
     # ------------------------------------------------------------------------------------------------------------------
     # Actual tests
@@ -178,15 +182,44 @@ describe "Legend Model", ->
         .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
       beforeAll (done) ->
-         TestsUtils.simulateDataWSClientList(
-           collection, glados.Settings.STATIC_URL + 'testData/SearchResultsDopamineTestData.json', done)
+        TestsUtils.simulateDataWSClientList(
+         collection, glados.Settings.STATIC_URL + 'testData/SearchResultsDopamineTestData.json', done)
 
       beforeEach ->
 
         prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        values = glados.Utils.pluckFromListItems(collection, prop.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
         legendModel = new glados.models.visualisation.LegendModel
           property: prop
           collection: collection
 
       it 'initialises from the property', ->
-        testInitialisesFromADefaultDomainAndTickValues(legendModel)
+        testInitialisesFromProperty(legendModel)
+
+    describe "with an elasticsearch collection", ->
+
+      prop = undefined
+      legendModel = undefined
+      collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
+      )
+
+      beforeAll (done) ->
+        TestsUtils.simulateDataESList(collection,
+          glados.Settings.STATIC_URL + 'testData/SearchResultsAspirinTestData.json', done)
+
+      beforeEach ->
+
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        values = (glados.Utils.getNestedValue(item, prop.propName) for item in collection.allResults)
+        values = glados.Utils.pluckFromListItems(collection, prop.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
+        legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+          collection: collection
+
+      it 'initialises from the property', ->
+        testInitialisesFromProperty(legendModel)

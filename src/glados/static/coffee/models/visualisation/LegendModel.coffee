@@ -12,8 +12,21 @@ glados.useNameSpace 'glados.models.visualisation',
         @set('ticks', @get('property').domain)
         @set('values-selection', {})
         @fillAmountPerValue()
+      else
+        @setTicks()
 
     isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
+    # ------------------------------------------------------------------------------------------------------------------
+    # Continuous
+    # ------------------------------------------------------------------------------------------------------------------
+    setTicks: ->
+      numTicks = @get('property').ticksNumber
+      start = @get('domain')[0]
+      stop = @get('domain')[1]
+      step = Math.abs(stop - start) / (numTicks - 1)
+      ticks = d3.range(start, stop, step)
+      ticks.push(stop)
+      @set('ticks', ticks)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
