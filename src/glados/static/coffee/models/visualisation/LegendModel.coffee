@@ -99,6 +99,8 @@ glados.useNameSpace 'glados.models.visualisation',
     # ------------------------------------------------------------------------------------------------------------------
     handleCollSelectionChanged: (param) ->
       if param == glados.Events.Collections.Params.ALL_UNSELECTED
-        @unSelectAllValues()
+        if @isDiscrete()
+          @unSelectAllValues()
       else if param == glados.Events.Collections.Params.ALL_SELECTED
-        @selectAllValues()
+        if @isDiscrete()
+          @selectAllValues()
