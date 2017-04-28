@@ -55,6 +55,16 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @addExtraCss()
 
+  # ------------------------------------------------------------------------------------------------------------------
+  # Continuous
+  # ------------------------------------------------------------------------------------------------------------------
+  paintContinuousLegend: (legendG) ->
+
+
+
+  # ------------------------------------------------------------------------------------------------------------------
+  # Categorical
+  # ------------------------------------------------------------------------------------------------------------------
   paintDiscreteLegend: (legendG) ->
 
     rectanglePadding = 1
@@ -66,9 +76,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .scale(getXInLegendFor)
       .orient("bottom")
 
-    getColourFor = d3.scale.ordinal()
-        .domain( @model.get('domain') )
-        .range( @model.get('colour-range') )
+    getColourFor = @model.get('property').colourScale
 
     legendG.selectAll('rect')
       .data(getXInLegendFor.domain())
