@@ -98,9 +98,16 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('fill', (d) -> getColourFor d)
 
     rangeSelector1G = legendG.append('g')
-      .attr("transform", "translate(" + (getXInLegendFor start) + "," + -@LEGEND_RECT_HEIGHT + ")")
+      .attr("transform", "translate(" + (getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
       .attr('x', getXInLegendFor start)
       .attr('y', -@LEGEND_RECT_HEIGHT)
+
+    thisView = @
+    drag = d3.behavior.drag().on('drag', ->
+      x = d3.event.x
+      d3.select(@).attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
+      console.log x)
+    rangeSelector1G.call(drag)
 
     rangeSelector1G.append('rect')
       .attr('stroke', @RANGE_SELECTOR_STROKE)
