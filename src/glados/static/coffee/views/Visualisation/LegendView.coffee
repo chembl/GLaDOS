@@ -52,6 +52,8 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if @model.isDiscrete()
       @paintDiscreteLegend(legendG)
+    else
+      @paintContinuousLegend(legendG)
 
     @addExtraCss()
 
@@ -60,7 +62,38 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   # ------------------------------------------------------------------------------------------------------------------
   paintContinuousLegend: (legendG) ->
 
+    domain = @model.get('domain')
+    ticks = @model.get('ticks')
 
+    linearScalePadding = 10
+    getXInLegendFor = d3.scale.linear()
+      .domain(domain)
+      .range([linearScalePadding, (@legendWidth - linearScalePadding)])
+
+    legendAxis = d3.svg.axis()
+      .scale(getXInLegendFor)
+      .orient("bottom")
+      .tickValues(ticks)
+
+    start = domain[0]
+    stop = domain[1]
+    numValues = 50
+    step = Math.abs(stop - start) / numValues
+    stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
+    legendData = d3.range(start, stop, step)
+
+    getColourFor = @model.get('property').colourScale
+
+    legendG.selectAll('rect')
+      .data(legendData)
+      .enter().append('rect')
+      .attr('height',@LEGEND_RECT_HEIGHT)
+      .attr('width', stepWidthInScale + 1)
+      .attr('x', (d) -> getXInLegendFor d)
+      .attr('y', -@LEGEND_RECT_HEIGHT)
+      .attr('fill', (d) -> getColourFor d)
+
+    legendG.call(legendAxis)
 
   # ------------------------------------------------------------------------------------------------------------------
   # Categorical
