@@ -142,3 +142,51 @@ describe "Legend Model", ->
       it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
       it 'unselects all values', -> testUnselectsAllValues(legendModel)
       it 'selects all values', -> testSelectsAllValues(legendModel)
+
+  describe "Continuous", ->
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Generic Test Functions
+    # ------------------------------------------------------------------------------------------------------------------
+    testInitialisesFromADefaultDomainAndTickValues = (legendModel) ->
+
+      domain = legendModel.get('domain')
+      ticks = legendModel.get('ticks')
+
+#      expect(domain[0]).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
+#      i = 1
+#      while i < 6
+#        expect(domain[i]).toBe(i - 1)
+#        expect(ticks[i]).toBe(i - 1)
+#        i++
+#
+#      expect(legendModel.get('type')).toBe(glados.models.visualisation.LegendModel.DISCRETE)
+#      range = legendModel.get('colour-range')
+#      rangeShouldBe = [glados.Settings.VISUALISATION_GREY_BASE, '#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
+#
+#      for comparison in _.zip(range, rangeShouldBe)
+#        expect(comparison[0]).toBe(comparison[1])
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Actual tests
+    # ------------------------------------------------------------------------------------------------------------------
+    describe "with a client side collection", ->
+
+      prop = undefined
+      legendModel = undefined
+      collection = glados.models.paginatedCollections\
+        .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+      beforeAll (done) ->
+         TestsUtils.simulateDataWSClientList(
+           collection, glados.Settings.STATIC_URL + 'testData/SearchResultsDopamineTestData.json', done)
+
+      beforeEach ->
+
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+          collection: collection
+
+      it 'initialises from the property', ->
+        testInitialisesFromADefaultDomainAndTickValues(legendModel)
