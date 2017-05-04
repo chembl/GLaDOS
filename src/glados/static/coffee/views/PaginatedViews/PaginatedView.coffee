@@ -160,8 +160,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElem) ->
   
-      $item_template = $('#' + $specificElem.attr('data-hb-template'))
-      $append_to = $specificElem
+      applyTemplate = Handlebars.compile($('#' + $specificElem.attr('data-hb-template')).html())
+      appendTo = $specificElem
       visibleColumns = @getVisibleColumns()
 
       # if it is a table, add the corresponding header
@@ -177,20 +177,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
         $specificElem.append($('<tbody>'))
 
-      allAreSelected =  @collection.getMeta('all_items_selected')
-  
+
       for item in @collection.getCurrentPage()
 
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
-        new_item_cont = Handlebars.compile( $item_template.html() )
+        newItemContent = applyTemplate
           base_check_box_id: idColumnValue
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
   
-        $append_to.append($(new_item_cont))
+        appendTo.append($(newItemContent))
   
       # After adding everything, if the element is a table I now set up the top scroller
       # also set up the automatic header fixation
@@ -224,7 +223,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       # This code completes rows for grids of 2 or 3 columns in the flex box css display
       total_cards = @collection.getCurrentPage().length
       while total_cards%6 != 0
-        $append_to.append('<div class="col s12 m6 l4"/>')
+        appendTo.append('<div class="col s12 m6 l4"/>')
         total_cards++
   
     # ------------------------------------------------------------------------------------------------------------------
