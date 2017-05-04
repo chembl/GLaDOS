@@ -174,7 +174,7 @@ WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV != RunEnvs.PROD
 
 COMPRESS_ENABLED = RUN_ENV == RunEnvs.PROD
 
-if COMPRESS_NABLED:
+if COMPRESS_ENABLED:
     COMPRESS_OFFLINE = True
     COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
                             'compressor.filters.cssmin.CSSMinFilter']
