@@ -1,4 +1,5 @@
 import unittest
+
 import glados.tests.utils as utils
 import glados.grammar.smiles as smiles
 import glados.grammar.inchi as inchi
@@ -8,10 +9,10 @@ from arpeggio import ParserPython
 class GrammarTester(unittest.TestCase):
 
     def setUp(self):
-        pass
+        print('Running Test: {0}'.format(self._testMethodName))
 
     def tearDown(self):
-        pass
+        print('Test {0}'.format('Passed!' if self._outcome.success else 'Failed!'))
 
     def try_parsing(self, parser: ParserPython, text_to_parse: str):
         # noinspection PyBroadException
@@ -53,3 +54,10 @@ class GrammarTester(unittest.TestCase):
         if parser:
             for inchi_key_i in utils.INCHI_KEY_EXAMPLES:
                 self.try_parsing(parser, inchi_key_i)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Simple Grammars Tests
+    # ------------------------------------------------------------------------------------------------------------------
+
+    def test_parenthesization(self):
+        pass
