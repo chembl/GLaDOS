@@ -101,12 +101,18 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("transform", "translate(" + (getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
       .attr('x', getXInLegendFor start)
       .attr('y', -@LEGEND_RECT_HEIGHT)
+      .classed('legend-range-selector', true)
 
     thisView = @
     drag = d3.behavior.drag().on('drag', ->
       x = d3.event.x
-      d3.select(@).attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
-      console.log x)
+      if x < linearScalePadding then return
+      if x > thisView.legendWidth - linearScalePadding then return
+      draggedG = d3.select(@)
+      draggedG.attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
+      draggedG.select('text')
+        .text(getXInLegendFor.invert(x).toFixed(2))
+      )
     rangeSelector1G.call(drag)
 
     rangeSelector1G.append('rect')
