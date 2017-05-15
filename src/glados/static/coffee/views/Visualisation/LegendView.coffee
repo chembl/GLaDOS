@@ -103,8 +103,14 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .classed('legend-range-selector', true)
 
+    rangeSelector2G = legendG.append('g')
+      .attr("transform", "translate(" + (getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
+      .attr('x', getXInLegendFor start)
+      .attr('y', -@LEGEND_RECT_HEIGHT)
+      .classed('legend-range-selector', true)
+
     thisView = @
-    drag = d3.behavior.drag().on('drag', ->
+    dragListener = d3.behavior.drag().on('drag', ->
       x = d3.event.x
       if x < linearScalePadding then return
       if x > thisView.legendWidth - linearScalePadding then return
@@ -113,23 +119,28 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       draggedG.select('text')
         .text(getXInLegendFor.invert(x).toFixed(2))
       )
-    rangeSelector1G.call(drag)
+    rangeSelector1G.call(dragListener)
+    rangeSelector2G.call(dragListener)
+    @paintRangeSelector(rangeSelector1G, start)
+    @paintRangeSelector(rangeSelector2G, stop)
+    legendG.call(legendAxis)
 
-    rangeSelector1G.append('rect')
+  paintRangeSelector: (selectorG, initialText) ->
+
+    selectorG.append('rect')
       .attr('stroke', @RANGE_SELECTOR_STROKE)
       .attr('stroke-width', @RANGE_SELECTOR_STROKE_WIDTH)
       .attr('fill', @RANGE_SELECTOR_FILL)
       .attr('height', @LEGEND_RECT_HEIGHT)
       .attr('width', @RANGE_SELECTOR_WIDTH)
 
-    rangeSelector1G.append('text')
-      .text(start)
+    selectorG.append('text')
+      .text(initialText)
       .attr('text-anchor', 'middle')
       .style('font-size', '65%')
       .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
       .attr("transform", 'translate(0,-10)')
 
-    legendG.call(legendAxis)
 
   # ------------------------------------------------------------------------------------------------------------------
   # Categorical
