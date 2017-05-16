@@ -103,6 +103,12 @@ glados.useNameSpace 'glados.models.visualisation',
       @set('values-selection-min', minValue)
       @set('values-selection-max', maxValue)
       @get('collection').selectByPropertyRange(@get('property').propName, minValue, maxValue)
+      @trigger(glados.Events.Legend.RANGE_SELECTED)
+
+    selectFullRange: ->
+      @set('values-selection-min', @get('domain')[0])
+      @set('values-selection-max', @get('domain')[1])
+      @trigger(glados.Events.Legend.RANGE_SELECTED)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Handle Selections in collection
@@ -114,3 +120,5 @@ glados.useNameSpace 'glados.models.visualisation',
       else if param == glados.Events.Collections.Params.ALL_SELECTED
         if @isDiscrete()
           @selectAllValues()
+        else
+          @selectFullRange()

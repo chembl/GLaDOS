@@ -15,24 +15,30 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @render()
     @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
     @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
+    @model.on(glados.Events.Legend.RANGE_SELECTED, @rangeSelectedHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
     $(@el).find('line, path').css('fill', 'none')
 
   valueSelectedHandler: (value) ->
-    console.log 'handling selection for: ', @model.get('property').propName
     rectClassSelector = '.legend-rect-' + value
-    d3.select($(@el).find(rectClassSelector)[0])
-      .style('stroke', glados.Settings.VISUALISATION_SELECTED)
-      .attr('data-is-selected', true)
+    $(@el).find(rectClassSelector).addClass('selected')
 
   valueUnselectedHandler: (value) ->
-    console.log 'handling un selection for: ', @model.get('property').propName
     rectClassSelector = '.legend-rect-' + value
-    d3.select($(@el).find(rectClassSelector)[0])
-      .style('stroke', 'none')
-      .attr('data-is-selected', false)
+    $(@el).find(rectClassSelector).removeClass('selected')
+
+  rangeSelectedHandler: ->
+    rectClassSelector = '.legend-range-selector .legend-rect'
+    $(@el).find(rectClassSelector).addClass('selected')
+    $rangeSelectors = $(@el).find('.legend-range-selector')
+    [selector1G, selector2G] = [d3.select($rangeSelectors[0]), d3.select($rangeSelectors[1])]
+    [minValue, maxValue] = [@model.get('values-selection-min'), @model.get('values-selection-max')]
+    [xmin, xmax] = [@getXInLegendFor(minValue), @getXInLegendFor(maxValue)]
+
+    @moveRangeSelectorToValue(selector1G, xmin, minValue)
+    @moveRangeSelectorToValue(selector2G, xmax, maxValue)
 
   render: ->
 
@@ -73,12 +79,12 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     linearScalePadding = 10
     #this gives space for the null rectangle
     leftMargin = 35
-    getXInLegendFor = d3.scale.linear()
+    @getXInLegendFor = d3.scale.linear()
       .domain(domain)
       .range([leftMargin + linearScalePadding, (@legendWidth - linearScalePadding)])
 
     legendAxis = d3.svg.axis()
-      .scale(getXInLegendFor)
+      .scale(@getXInLegendFor)
       .orient("bottom")
       .tickValues(ticks)
 
@@ -86,27 +92,28 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     stop = domain[1]
     numValues = 50
     step = Math.abs(stop - start) / numValues
-    stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
+    stepWidthInScale = Math.abs(@getXInLegendFor.range()[0] - @getXInLegendFor.range()[1]) / numValues
     legendData = d3.range(start, stop, step)
 
     getColourFor = @model.get('property').colourScale
 
+    thisView = @
     legendG.selectAll('rect')
       .data(legendData)
       .enter().append('rect')
       .attr('height',@LEGEND_RECT_HEIGHT)
       .attr('width', stepWidthInScale + 1)
-      .attr('x', (d) -> getXInLegendFor d)
+      .attr('x', (d) -> thisView.getXInLegendFor d)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
 
     rangeSelector1G = legendG.append('g')
-      .attr("transform", "translate(" + (getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
+      .attr("transform", "translate(" + (thisView.getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
       .classed('legend-range-selector', true)
       .attr('data-range-value', start)
 
     rangeSelector2G = legendG.append('g')
-      .attr("transform", "translate(" + (getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
+      .attr("transform", "translate(" + (thisView.getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
       .classed('legend-range-selector', true)
       .attr('data-range-value', stop)
 
@@ -119,10 +126,8 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
       .classed('legend-rect', true)
       .classed('legend-rect-' + glados.Settings.DEFAULT_NULL_VALUE_LABEL, true)
-      .on('click', $.proxy( (->
-        console.log 'click', @
-        @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL))
-      , @))
+      .style('stroke-width', 2)
+      .on('click', $.proxy( (-> @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL)), @))
 
     nullSelectorG.append('text')
       .attr('y', 2 * @LEGEND_RECT_HEIGHT)
@@ -136,12 +141,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         x = d3.event.x
         if x < leftMargin + linearScalePadding then return
         if x > thisView.legendWidth - linearScalePadding then return
-        value = getXInLegendFor.invert(x).toFixed(2)
+        value = thisView.getXInLegendFor.invert(x).toFixed(2)
         draggedG = d3.select(@)
-        draggedG.attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
-          .attr('data-range-value', value)
-        draggedG.select('text')
-          .text(value)
+        thisView.moveRangeSelectorToValue(draggedG, x, value, thisView)
       ).on('dragend', $.proxy(@selectRange, @))
 
     rangeSelector1G.call(dragBehaviour)
@@ -149,6 +151,13 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @paintRangeSelector(rangeSelector1G, start)
     @paintRangeSelector(rangeSelector2G, stop)
     legendG.call(legendAxis)
+
+  moveRangeSelectorToValue: (draggedG, x, value, ctx=@) ->
+
+    draggedG.attr("transform", 'translate(' + x + ',' + -ctx.LEGEND_RECT_HEIGHT + ')')
+      .attr('data-range-value', value)
+    draggedG.select('text')
+      .text(value)
 
   paintRangeSelector: (selectorG, initialText) ->
 
@@ -158,6 +167,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('fill', @RANGE_SELECTOR_FILL)
       .attr('height', @LEGEND_RECT_HEIGHT)
       .attr('width', @RANGE_SELECTOR_WIDTH)
+      .classed('legend-rect', true)
 
     selectorG.append('text')
       .text(initialText)
