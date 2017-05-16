@@ -174,3 +174,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         else return @getMeta('total_records') - Object.keys(selectionExceptions).length
 
       return Object.keys(selectionExceptions).length
+
+    selectByPropertyRange: (propName, minValue, maxValue) ->
+
+      idProperty = @getMeta('id_column').comparator
+      allResults = if @allResults? then @allResults else (model.attributes for model in @models)
+      idsToSelect = (model[idProperty] for model in allResults \
+        when minValue <= parseFloat(glados.Utils.getNestedValue(model, propName)) <= maxValue)
+      @selectItems(idsToSelect)

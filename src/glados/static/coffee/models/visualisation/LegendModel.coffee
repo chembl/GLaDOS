@@ -95,6 +95,14 @@ glados.useNameSpace 'glados.models.visualisation',
       return ans
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Categorical
+    # ------------------------------------------------------------------------------------------------------------------
+    selectRange: (minValue, maxValue) ->
+      @set('values-selection-min', minValue)
+      @set('values-selection-max', maxValue)
+      @get('collection').selectByPropertyRange(@get('property').propName, minValue, maxValue)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Handle Selections in collection
     # ------------------------------------------------------------------------------------------------------------------
     handleCollSelectionChanged: (param) ->

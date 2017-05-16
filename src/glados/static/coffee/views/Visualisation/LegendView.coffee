@@ -102,25 +102,31 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('x', getXInLegendFor start)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .classed('legend-range-selector', true)
+      .attr('data-range-value', start)
 
     rangeSelector2G = legendG.append('g')
       .attr("transform", "translate(" + (getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
       .attr('x', getXInLegendFor start)
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .classed('legend-range-selector', true)
+      .attr('data-range-value', stop)
 
     thisView = @
-    dragListener = d3.behavior.drag().on('drag', ->
-      x = d3.event.x
-      if x < linearScalePadding then return
-      if x > thisView.legendWidth - linearScalePadding then return
-      draggedG = d3.select(@)
-      draggedG.attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
-      draggedG.select('text')
-        .text(getXInLegendFor.invert(x).toFixed(2))
-      )
-    rangeSelector1G.call(dragListener)
-    rangeSelector2G.call(dragListener)
+    dragBehaviour = d3.behavior.drag()
+      .on('drag', ->
+        x = d3.event.x
+        if x < linearScalePadding then return
+        if x > thisView.legendWidth - linearScalePadding then return
+        value = getXInLegendFor.invert(x).toFixed(2)
+        draggedG = d3.select(@)
+        draggedG.attr("transform", 'translate(' + x + ',' + -thisView.LEGEND_RECT_HEIGHT + ')')
+          .attr('data-range-value', value)
+        draggedG.select('text')
+          .text(value)
+      ).on('dragend', $.proxy(@selectRange, @))
+
+    rangeSelector1G.call(dragBehaviour)
+    rangeSelector2G.call(dragBehaviour)
     @paintRangeSelector(rangeSelector1G, start)
     @paintRangeSelector(rangeSelector2G, stop)
     legendG.call(legendAxis)
@@ -141,7 +147,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
       .attr("transform", 'translate(0,-10)')
 
-
+  selectRange: ->
+    values = (parseFloat($(elem).attr('data-range-value')) for elem in $(@el).find('.legend-range-selector')).sort()
+    @model.selectRange(values[0], values[1])
   # ------------------------------------------------------------------------------------------------------------------
   # Categorical
   # ------------------------------------------------------------------------------------------------------------------

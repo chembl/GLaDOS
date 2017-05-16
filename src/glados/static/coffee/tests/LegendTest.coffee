@@ -171,6 +171,13 @@ describe "Legend Model", ->
       for i in [0..ticksMustBe.length - 1]
         expect(ticks[i]).toBe(ticksMustBe[i])
 
+    testSelectsByRange = (legendModel) ->
+      minValue = 0
+      maxValue = 1
+      legendModel.selectRange(minValue, maxValue)
+      expect(legendModel.get('values-selection-min')).toBe(minValue)
+      expect(legendModel.get('values-selection-max')).toBe(maxValue)
+
     # ------------------------------------------------------------------------------------------------------------------
     # Actual tests
     # ------------------------------------------------------------------------------------------------------------------
@@ -195,8 +202,8 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from the property', ->
-        testInitialisesFromProperty(legendModel)
+      it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
+      it 'selects a range', -> testSelectsByRange(legendModel)
 
     describe "with an elasticsearch collection", ->
 
@@ -221,5 +228,5 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from the property', ->
-        testInitialisesFromProperty(legendModel)
+      it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
+      it 'selects a range', -> testSelectsByRange(legendModel)
