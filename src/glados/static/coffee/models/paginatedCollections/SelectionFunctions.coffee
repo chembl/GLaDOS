@@ -177,6 +177,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     selectByPropertyRange: (propName, minValue, maxValue) ->
 
+      @unSelectAll()
       idProperty = @getMeta('id_column').comparator
       allResults = if @allResults? then @allResults else (model.attributes for model in @models)
       idsToSelect = (model[idProperty] for model in allResults \
