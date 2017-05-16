@@ -13,6 +13,8 @@ glados.useNameSpace 'glados.models.visualisation',
         @set('values-selection', {})
         @fillAmountPerValue()
       else
+       # only used  for undefined value
+        @set('values-selection', {})
         @setTicks()
 
     isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
