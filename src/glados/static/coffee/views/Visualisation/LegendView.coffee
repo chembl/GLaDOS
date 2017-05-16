@@ -16,6 +16,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
     @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
     @model.on(glados.Events.Legend.RANGE_SELECTED, @rangeSelectedHandler, @)
+    @model.on(glados.Events.RANGE_SELECTION_INVALID, @rangeInvalidHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
@@ -39,6 +40,19 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @moveRangeSelectorToValue(selector1G, xmin, minValue)
     @moveRangeSelectorToValue(selector2G, xmax, maxValue)
+
+  rangeInvalidHandler: ->
+
+    rectClassSelector = '.legend-range-selector .legend-rect'
+    $(@el).find(rectClassSelector).removeClass('selected')
+    $rangeSelectors = $(@el).find('.legend-range-selector')
+    [selector1G, selector2G] = [d3.select($rangeSelectors[0]), d3.select($rangeSelectors[1])]
+    [minValue, maxValue] = [@model.get('domain')[0], @model.get('domain')[1]]
+    [xmin, xmax] = [@getXInLegendFor(minValue), @getXInLegendFor(maxValue)]
+
+    @moveRangeSelectorToValue(selector1G, xmin, minValue)
+    @moveRangeSelectorToValue(selector2G, xmax, maxValue)
+
 
   render: ->
 

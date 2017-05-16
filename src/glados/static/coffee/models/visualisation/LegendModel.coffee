@@ -117,6 +117,8 @@ glados.useNameSpace 'glados.models.visualisation',
       if param == glados.Events.Collections.Params.ALL_UNSELECTED
         if @isDiscrete()
           @unSelectAllValues()
+        else
+          @trigger(glados.Events.RANGE_SELECTION_INVALID)
       else if param == glados.Events.Collections.Params.ALL_SELECTED
         if @isDiscrete()
           @selectAllValues()
