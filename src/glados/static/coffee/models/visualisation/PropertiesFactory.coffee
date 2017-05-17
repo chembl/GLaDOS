@@ -24,15 +24,12 @@ glados.useNameSpace 'glados.models.visualisation',
           ticksNumber: 5
         PSA:
           propName:'molecule_properties.psa'
-          type: 'number'
           label: 'Polar Surface Area'
         HBA:
           propName:'molecule_properties.hba'
-          type: 'number'
           label: 'Hydrogen Bond Acceptors'
         HBD:
           propName:'molecule_properties.hbd'
-          type: 'number'
           label: 'Hydrogen Bond Donnors'
 
     # Generic functions
