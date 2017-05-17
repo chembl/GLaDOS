@@ -133,6 +133,11 @@ glados.useNameSpace 'glados',
     Legend:
       VALUE_SELECTED: 'value-selected'
       VALUE_UNSELECTED: 'value-unselected'
+      RANGE_SELECTED: 'range-selected'
+      RANGE_SELECTION_INVALID: 'range-selected-invalid'
+  Visualisation:
+    CATEGORICAL:'CATEGORICAL'
+    CONTINUOUS:'CONTINUOUS'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

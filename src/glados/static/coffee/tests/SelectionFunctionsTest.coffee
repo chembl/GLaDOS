@@ -450,6 +450,28 @@ describe "Selection Functions", ->
     for itemID in unselectedValuesShouldNotBe
       expect(list.itemIsSelected(itemID)).toBe(true)
 
+  testSelectItemsByRange = (list) ->
+
+    propName = 'full_mwt'
+    allResults = if list.allResults? then list.allResults else (model.attributes for model in list.models)
+    allResults = _.sortBy(allResults, (item) -> parseFloat(item[propName]))
+
+    rangeStart = Math.round(allResults.length * 0.25)
+    rangeEnd = Math.round(allResults.length * 0.75)
+    minValue = allResults[rangeStart][propName]
+    maxValue = allResults[rangeEnd][propName]
+
+    selectedItemsShouldBe = (model.molecule_chembl_id for model in allResults[rangeStart..rangeEnd])
+    selectedItemsShouldNotBe = (model.molecule_chembl_id for model in \
+       _.union(allResults[0..rangeStart-1], allResults[rangeEnd+1..allResults.length-1]))
+
+    list.selectByPropertyRange(propName, minValue, maxValue)
+
+    for itemID in selectedItemsShouldBe
+      expect(list.itemIsSelected(itemID)).toBe(true)
+
+    for itemID in selectedItemsShouldNotBe
+      expect(list.itemIsSelected(itemID)).toBe(false)
   # -------------------------------------------------------------------------------------------------
   # Actual Tests
   # -------------------------------------------------------------------------------------------------
@@ -508,6 +530,7 @@ describe "Selection Functions", ->
       testAccumulatesPreviousSelectionsForUnselections(list)
     it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(list)
     it 'unselects items based on a property value', -> testUnselectsItemsBasedOnAPropertyValue(list)
+    it 'selects items based on a property range', -> testSelectItemsByRange(list)
 
   describe 'Elasticsearch Results Collections', ->
 
@@ -565,3 +588,4 @@ describe "Selection Functions", ->
       testAccumulatesPreviousSelectionsForUnselections(list)
     it 'selects items based on a property value', -> testSelectsItemsBasedOnAPropertyValue(list)
     it 'unselects items based on a property value', -> testUnselectsItemsBasedOnAPropertyValue(list)
+    it 'selects items based on a property range', -> testSelectItemsByRange(list)

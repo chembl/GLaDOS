@@ -92,7 +92,8 @@ describe "Legend Model", ->
 
       prop = undefined
       legendModel = undefined
-      collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+      collection = glados.models.paginatedCollections\
+        .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
 
       beforeAll (done) ->
          TestsUtils.simulateDataWSClientList(
@@ -105,7 +106,7 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from a default domain and tick values', ->
+      it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
@@ -133,7 +134,7 @@ describe "Legend Model", ->
           property: prop
           collection: collection
 
-      it 'initialises from a default domain and tick values', ->
+      it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
       it 'initialises the amount of items per category', -> testInitialisesAmountOfItemsPerCategory(legendModel)
       it 'selects a value', -> testSelectsAValue(legendModel)
@@ -141,3 +142,91 @@ describe "Legend Model", ->
       it 'toggles a value selection', -> testTogglesAValueSelection(legendModel)
       it 'unselects all values', -> testUnselectsAllValues(legendModel)
       it 'selects all values', -> testSelectsAllValues(legendModel)
+
+  describe "Continuous", ->
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Generic Test Functions
+    # ------------------------------------------------------------------------------------------------------------------
+    testInitialisesFromProperty = (legendModel) ->
+
+      domain = legendModel.get('domain')
+      range = legendModel.get('colour-range')
+      ticks = legendModel.get('ticks')
+
+      domainMustBe = legendModel.get('property').domain
+      for i in [0..domainMustBe.length - 1]
+        expect(domain[i]).toBe(domainMustBe[i])
+      rangeMustBe = legendModel.get('property').coloursRange
+      for i in [0..rangeMustBe.length - 1]
+        expect(range[i]).toBe(rangeMustBe[i])
+
+      numTicks = legendModel.get('property').ticksNumber
+      start = domain[0]
+      stop = domain[1]
+      step = Math.abs(stop - start) / (numTicks - 1)
+      ticksMustBe = d3.range(start, stop, step)
+      ticksMustBe.push(stop)
+
+      for i in [0..ticksMustBe.length - 1]
+        expect(ticks[i]).toBe(ticksMustBe[i])
+
+    testSelectsByRange = (legendModel) ->
+      minValue = 0
+      maxValue = 1
+      legendModel.selectRange(minValue, maxValue)
+      expect(legendModel.get('values-selection-min')).toBe(minValue)
+      expect(legendModel.get('values-selection-max')).toBe(maxValue)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Actual tests
+    # ------------------------------------------------------------------------------------------------------------------
+    describe "with a client side collection", ->
+
+      prop = undefined
+      legendModel = undefined
+      collection = glados.models.paginatedCollections\
+        .PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
+
+      beforeAll (done) ->
+        TestsUtils.simulateDataWSClientList(
+         collection, glados.Settings.STATIC_URL + 'testData/SearchResultsDopamineTestData.json', done)
+
+      beforeEach ->
+
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        values = glados.Utils.pluckFromListItems(collection, prop.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
+        legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+          collection: collection
+
+      it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
+      it 'selects a range', -> testSelectsByRange(legendModel)
+
+    describe "with an elasticsearch collection", ->
+
+      prop = undefined
+      legendModel = undefined
+      collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
+      )
+
+      beforeAll (done) ->
+        TestsUtils.simulateDataESList(collection,
+          glados.Settings.STATIC_URL + 'testData/SearchResultsAspirinTestData.json', done)
+
+      beforeEach ->
+
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        values = (glados.Utils.getNestedValue(item, prop.propName) for item in collection.allResults)
+        values = glados.Utils.pluckFromListItems(collection, prop.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, values)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
+        legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+          collection: collection
+
+      it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
+      it 'selects a range', -> testSelectsByRange(legendModel)

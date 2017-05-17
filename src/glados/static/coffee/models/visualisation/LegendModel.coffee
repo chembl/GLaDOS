@@ -5,21 +5,30 @@ glados.useNameSpace 'glados.models.visualisation',
     initialize: ->
 
       @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
-      defaultDomain = @get('property').domain
-      if defaultDomain?
-        @set('domain', defaultDomain)
-
-        # if domain has more than 2 values, I assume that it is discrete
-        if defaultDomain.length > 2
-          @set('type', glados.models.visualisation.LegendModel.DISCRETE)
-          @set('ticks', defaultDomain)
-          @set('colour-range', @get('property').coloursRange)
+      @set('domain', @get('property').domain)
+      @set('colour-range', @get('property').coloursRange)
 
       if @isDiscrete()
+        @set('ticks', @get('property').domain)
         @set('values-selection', {})
         @fillAmountPerValue()
+      else
+       # only used  for undefined value
+        @set('values-selection', {})
+        @setTicks()
 
-    isDiscrete: -> @get('type') == glados.models.visualisation.LegendModel.DISCRETE
+    isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
+    # ------------------------------------------------------------------------------------------------------------------
+    # Continuous
+    # ------------------------------------------------------------------------------------------------------------------
+    setTicks: ->
+      numTicks = @get('property').ticksNumber
+      start = @get('domain')[0]
+      stop = @get('domain')[1]
+      step = Math.abs(stop - start) / (numTicks - 1)
+      ticks = d3.range(start, stop, step)
+      ticks.push(stop)
+      @set('ticks', ticks)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
@@ -88,16 +97,30 @@ glados.useNameSpace 'glados.models.visualisation',
       return ans
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Categorical
+    # ------------------------------------------------------------------------------------------------------------------
+    selectRange: (minValue, maxValue) ->
+      @set('values-selection-min', minValue)
+      @set('values-selection-max', maxValue)
+      @get('collection').selectByPropertyRange(@get('property').propName, minValue, maxValue)
+      @trigger(glados.Events.Legend.RANGE_SELECTED)
+
+    selectFullRange: ->
+      @set('values-selection-min', @get('domain')[0])
+      @set('values-selection-max', @get('domain')[1])
+      @trigger(glados.Events.Legend.RANGE_SELECTED)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Handle Selections in collection
     # ------------------------------------------------------------------------------------------------------------------
     handleCollSelectionChanged: (param) ->
       if param == glados.Events.Collections.Params.ALL_UNSELECTED
-        @unSelectAllValues()
+        if @isDiscrete()
+          @unSelectAllValues()
+        else
+          @trigger(glados.Events.RANGE_SELECTION_INVALID)
       else if param == glados.Events.Collections.Params.ALL_SELECTED
-        @selectAllValues()
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Class Context
-# ----------------------------------------------------------------------------------------------------------------------
-glados.models.visualisation.LegendModel.CONTINUOUS = 'CONTINUOUS'
-glados.models.visualisation.LegendModel.DISCRETE = 'DISCRETE'
+        if @isDiscrete()
+          @selectAllValues()
+        else
+          @selectFullRange()

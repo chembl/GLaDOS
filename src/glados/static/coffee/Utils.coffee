@@ -93,3 +93,11 @@ glados.useNameSpace 'glados',
         glados.Utils.getNavigateOnlyOnNewTabLinkEventHandler(true, callback)
       )
 
+    # for server side collections, it assumes that all the results are already on the client
+    pluckFromListItems: (list, propertyName) ->
+
+      if list.allResults?
+        return (glados.Utils.getNestedValue(model, propertyName) for model in list.allResults)
+      else
+        return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
+

@@ -13,6 +13,14 @@ class TestsUtils
     else
       return (model.attributes.molecule_chembl_id for model in list.models)
 
+  @pluckFromListItems = (list, propertyName) ->
+
+    if list.allResults?
+      return (glados.Utils.getNestedValue(model, propertyName) for model in list.allResults)
+    else
+      return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
+
+
   # simulates only the data inside, nothing related with the elasticsearch query,
   # initialises all results list only
   @simulateDataESList = (list, dataURL, done) ->
@@ -20,3 +28,10 @@ class TestsUtils
       list.allResults = testData
       list.setMeta('total_records', testData.length)
       done()
+
+  @generateListOfRandomValues = (minVal, maxVal) ->
+
+    values = ((Math.random() * (maxVal - minVal)) + minVal  for i in [1..10])
+    values.push(minVal)
+    values.push(maxVal)
+    values = _.shuffle(values)
