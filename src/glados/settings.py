@@ -19,7 +19,7 @@ class RunEnvs(object):
     TEST = 'TEST'
     PROD = 'PROD'
 
-RUN_ENV = RunEnvs.DEV
+RUN_ENV = RunEnvs.PROD
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
@@ -38,10 +38,10 @@ SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of
 
 TWITTER_ENABLED = RUN_ENV == RunEnvs.PROD
 
-TWITTER_ACCESS_TOKEN = '<TWITTER_ACCESS_TOKEN>'
-TWITTER_ACCESS_TOKEN_SECRET = '<TWITTER_ACCESS_TOKEN_SECRET>'
-TWITTER_CONSUMER_KEY = '<TWITTER_CONSUMER_KEY>'
-TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
+TWITTER_ACCESS_TOKEN = '732582863107981312-dZ8OEZZdNCsltXtN2pTp3xShPMYHxkE'
+TWITTER_ACCESS_TOKEN_SECRET = 'NeyIr4Qol3iOYUMhXQlYbrY7MTpZAjYTiXa2aMjjxPFPP'
+TWITTER_CONSUMER_KEY = 'BQFmlwCsCc2Amai4ELLDSe8DY'
+TWITTER_CONSUMER_SECRET ='Gn8ZuoI6yBl1BEACPBQvgtQP7ZmTe0pseh9RiwSEjnpdHZyvwO'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = RUN_ENV == RunEnvs.DEV
@@ -189,8 +189,8 @@ if COMPRESS_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
+  'default': {
+      'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+      'LOCATION': 'cache',
+  }
 }
