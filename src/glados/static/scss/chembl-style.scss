@@ -2151,4 +2151,22 @@ span.badge-primary-color-no-float {
   .legend-rect:hover{
     stroke:color('teal', 'accent-4');
   }
+  .legend-rect.selected{
+    stroke:color('green', 'base');
+  }
+  .legend-range-selector:hover{
+    cursor: -webkit-grab;
+    cursor: grab;
+    .legend-rect{
+      stroke:color('teal', 'accent-4');
+    }
+  }
+  .legend-range-selector:active{
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+    .legend-rect{
+      stroke:color('teal', 'accent-4');
+    }
+  }
+
 }
