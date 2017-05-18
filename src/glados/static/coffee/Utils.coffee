@@ -66,10 +66,19 @@ glados.useNameSpace 'glados',
           return col['img_url']
       return null
 
+    cachedTemplateFunctions: {}
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj)->
 
-      $element.html Handlebars.compile($('#' + $element.attr('data-hb-template')).html())(paramsObj)
+      templateSelector = '#' + $element.attr('data-hb-template')
+
+      if not glados.Utils.cachedTemplateFunctions[templateSelector]?
+        templateFunction = Handlebars.compile($(templateSelector).html())
+        glados.Utils.cachedTemplateFunctions[templateSelector] = templateFunction
+      else
+        templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
+
+      $element.html templateFunction(paramsObj)
 
     # Helper function to prevent links from navigating to an url that is inside the same js page
     # If key_up is true will override for enter listening on links
