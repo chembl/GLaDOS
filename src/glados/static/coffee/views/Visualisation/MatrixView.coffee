@@ -536,8 +536,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
 
-
-
+    # --------------------------------------
+    # Legend
+    # --------------------------------------
+    @$legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@currentPropertyColour, undefined, @$legendContainer)
     # --------------------------------------
     # Zoom
     # --------------------------------------
@@ -632,6 +635,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .style("fill", fillColour)
         .attr('data-tooltip', getCellTooltip )
 
+      glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer)
 
     # --------------------------------------
     # sort property selector
