@@ -13,10 +13,12 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el)
     updateViewProxy = @setUpResponsiveRender()
     @render()
-    @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
-    @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
-    @model.on(glados.Events.Legend.RANGE_SELECTED, @rangeSelectedHandler, @)
-    @model.on(glados.Events.RANGE_SELECTION_INVALID, @rangeInvalidHandler, @)
+
+    if @model.get('selection-enabled')
+      @model.on(glados.Events.Legend.VALUE_SELECTED, @valueSelectedHandler, @)
+      @model.on(glados.Events.Legend.VALUE_UNSELECTED, @valueUnselectedHandler, @)
+      @model.on(glados.Events.Legend.RANGE_SELECTED, @rangeSelectedHandler, @)
+      @model.on(glados.Events.RANGE_SELECTION_INVALID, @rangeInvalidHandler, @)
 
   clearLegend: -> $(@el).empty()
   addExtraCss: ->
@@ -121,34 +123,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', -@LEGEND_RECT_HEIGHT)
       .attr('fill', (d) -> getColourFor d)
 
-    rangeSelector1G = legendG.append('g')
-      .attr("transform", "translate(" + (thisView.getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
-      .classed('legend-range-selector', true)
-      .attr('data-range-value', start)
-
-    rangeSelector2G = legendG.append('g')
-      .attr("transform", "translate(" + (thisView.getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
-      .classed('legend-range-selector', true)
-      .attr('data-range-value', stop)
-
-    nullSelectorG = legendG.append('g')
-      .attr("transform", 'translate(0,' + -@LEGEND_RECT_HEIGHT + ")")
-
-    nullSelectorG.append('rect')
-      .attr('height',@LEGEND_RECT_HEIGHT)
-      .attr('width', @LEGEND_RECT_HEIGHT)
-      .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
-      .classed('legend-rect', true)
-      .classed('legend-rect-' + glados.Settings.DEFAULT_NULL_VALUE_LABEL, true)
-      .style('stroke-width', 2)
-      .on('click', $.proxy( (-> @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL)), @))
-
-    nullSelectorG.append('text')
-      .attr('y', 2 * @LEGEND_RECT_HEIGHT)
-      .attr('x', @LEGEND_RECT_HEIGHT / 2)
-      .text(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
-      .attr('text-anchor', 'middle')
-
     thisView = @
     dragBehaviour = d3.behavior.drag()
       .on('drag', ->
@@ -160,10 +134,40 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         thisView.moveRangeSelectorToValue(draggedG, x, value, thisView)
       ).on('dragend', $.proxy(@selectRange, @))
 
-    rangeSelector1G.call(dragBehaviour)
-    rangeSelector2G.call(dragBehaviour)
-    @paintRangeSelector(rangeSelector1G, start)
-    @paintRangeSelector(rangeSelector2G, stop)
+    if @model.get('selection-enabled')
+      rangeSelector1G = legendG.append('g')
+        .attr("transform", "translate(" + (thisView.getXInLegendFor start) + ',' + -@LEGEND_RECT_HEIGHT + ")")
+        .classed('legend-range-selector', true)
+        .attr('data-range-value', start)
+
+      rangeSelector2G = legendG.append('g')
+        .attr("transform", "translate(" + (thisView.getXInLegendFor stop) + ',' + -@LEGEND_RECT_HEIGHT + ")")
+        .classed('legend-range-selector', true)
+        .attr('data-range-value', stop)
+
+      rangeSelector1G.call(dragBehaviour)
+      rangeSelector2G.call(dragBehaviour)
+      @paintRangeSelector(rangeSelector1G, start)
+      @paintRangeSelector(rangeSelector2G, stop)
+
+    nullSelectorG = legendG.append('g')
+      .attr("transform", 'translate(0,' + -@LEGEND_RECT_HEIGHT + ")")
+
+    nullSelectorG.append('rect')
+      .attr('height',@LEGEND_RECT_HEIGHT)
+      .attr('width', @LEGEND_RECT_HEIGHT)
+      .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
+      .classed('legend-rect', @model.get('selection-enabled'))
+      .classed('legend-rect-' + glados.Settings.DEFAULT_NULL_VALUE_LABEL, true)
+      .style('stroke-width', 2)
+      .on('click', $.proxy( (-> @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL)), @))
+
+    nullSelectorG.append('text')
+      .attr('y', 2 * @LEGEND_RECT_HEIGHT)
+      .attr('x', @LEGEND_RECT_HEIGHT / 2)
+      .text(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
+      .attr('text-anchor', 'middle')
+
     legendG.call(legendAxis)
 
   moveRangeSelectorToValue: (draggedG, x, value, ctx=@) ->

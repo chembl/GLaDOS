@@ -51,6 +51,8 @@ glados.useNameSpace 'glados.models.visualisation',
 
     toggleValueSelection: (value) ->
 
+      return unless @get('selection-enabled')
+
       if @isValueSelected(value)
         @unselectByPropertyValue(value)
       else
