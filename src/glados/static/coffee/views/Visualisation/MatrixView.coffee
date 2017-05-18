@@ -430,15 +430,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label
-      + ":" + d[thisView.currentPropertyColour.propName]
+      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label +
+        ":" + d[thisView.currentPropertyColour.propName]
 
       return txt
 
     getRowTooltip = (d) ->
 
-      txt = "Compound: " + d.label + "\n" +  thisView.currentRowSortingProperty + ":"
-      + d[thisView.currentRowSortingProperty]
+      txt = "Compound: " + d.label + "\n" +  thisView.currentRowSortingProperty + ":" +
+        d[thisView.currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
