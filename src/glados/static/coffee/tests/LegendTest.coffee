@@ -230,3 +230,25 @@ describe "Legend Model", ->
 
       it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
       it 'selects a range', -> testSelectsByRange(legendModel)
+
+    describe "with no collection (and no selection)", ->
+
+      prop = undefined
+      legendModel = undefined
+      ctm = new CompoundTargetMatrix
+      beforeAll (done) ->
+        TestsUtils.simulateDataMatrix(ctm, glados.Settings.STATIC_URL + 'testData/MatrixTestData0.json', done)
+
+      beforeEach ->
+
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_AVG')
+
+        colourValues = ctm.getValuesListForProperty(prop.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(prop, colourValues)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
+
+        legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+
+      it 'initialises from the property', -> testInitialisesFromProperty(legendModel)

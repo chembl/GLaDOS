@@ -35,3 +35,9 @@ class TestsUtils
     values.push(minVal)
     values.push(maxVal)
     values = _.shuffle(values)
+
+  @simulateDataMatrix = (matrix, dataURL, done) ->
+    $.get dataURL, (testData) ->
+      matrix.set('config', testData.config)
+      matrix.set('matrix', testData.matrix)
+      done()
