@@ -59,7 +59,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @clearLegend()
     elemWidth = $(@el).width()
     horizontalPadding = 10
-    @legendWidth = 0.4 * elemWidth
+    @legendWidth = 0.95 * elemWidth
     legendHeight = @LEGEND_HEIGHT
 
     legendContainer = d3.select($(@el).get(0))
