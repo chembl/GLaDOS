@@ -38,6 +38,20 @@ glados.useNameSpace 'glados.models.visualisation',
           type: Number
           coloursRange: [glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX]
           colourScaleType: glados.Visualisation.CONTINUOUS
+        PCHEMBL_VALUE_MAX:
+          propName: 'pchembl_value_max'
+          label: 'PChEMBL Value Max'
+          type: Number
+        ACTIVITY_COUNT:
+          propName: 'activity_count'
+          label: 'Activity Count'
+          type: Number
+          coloursRange: [glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX]
+          colourScaleType: glados.Visualisation.CONTINUOUS
+        HIT_COUNT:
+          propName: 'hit_count'
+          label: 'Hit Count'
+          type: Number
 
     # Generic functions
     generateColourScale: (prop) ->

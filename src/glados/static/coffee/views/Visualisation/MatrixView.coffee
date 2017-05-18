@@ -5,6 +5,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = {
+      properties:
+        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_AVG')
+        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'ACTIVITY_COUNT')
+        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'HIT_COUNT')
+        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_MAX')
+      initial_colouring: 'pchembl_value_avg'
+      colour_properties: ['activity_count', 'pchembl_value_avg']
+      initial_row_sorting: 'activity_count'
+      initial_row_sorting_reverse: true
+      row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      initial_col_sorting: 'activity_count'
+      initial_col_sorting_reverse: true
+      col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      propertyToType:
+        activity_count: "number"
+        pchembl_value_avg: "number"
+        pchembl_value_max: "number"
+        hit_count: "number"
+    }
+
     @model.on 'change', @render, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
@@ -75,14 +100,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintControls: ->
 
-    config = @model.get('config')
+    @paintSelect('.select-colouring-container',
+      (@config.properties[propID] for propID in @config.colour_properties),
+      @config.initial_colouring,
+      'select-colour-property',
+      'Colour by:' )
 
-    @paintSelect('.select-colouring-container', config.colour_properties, config.initial_colouring, 'select-colour-property', 'Colour by:' )
-    @paintSelect('.select-row-sort-container', config.row_sorting_properties, config.initial_row_sorting, 'select-row-sort', 'Sort rows by:' )
-    @paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:' )
+    @paintSelect('.select-row-sort-container',
+      (@config.properties[propID] for propID in @config.row_sorting_properties),
+      @config.initial_row_sorting,
+      'select-row-sort',
+      'Sort rows by:' )
 
-    @paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row')
-    @paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col')
+    @paintSelect('.select-col-sort-container',
+      (@config.properties[propID] for propID in @config.col_sorting_properties)
+      @config.initial_col_sorting,
+      'select-col-sort',
+      'Sort columns by:' )
+
+    @paintSortDirection('.btn-row-sort-direction-container',
+      @config.initial_row_sorting_reverse,
+      'row')
+    @paintSortDirection('.btn-col-sort-direction-container',
+      @config.initial_col_sorting_reverse,
+      'col')
 
     @paintZoomButtons()
 
@@ -110,15 +151,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintSelect: (elemSelector, propsList, defaultValue, customClass, label) ->
 
+
     columns = _.map(propsList, (item) ->
       {
-      comparator: item
-      selected: (item == defaultValue)
+        comparator: item.propName
+        selected: (item.propName == defaultValue)
+        label: item.label
       })
 
     $select = $(@el).find(elemSelector)
-    $template = $('#' + $select.attr('data-hb-template'))
-    $select.html Handlebars.compile( $template.html() )
+    glados.Utils.fillContentForElement $select,
       custom_class: customClass
       columns: columns
       custom_label: label
@@ -215,8 +257,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     matrix = @model.get('matrix')
+    thisView = @
 
-    config = @model.get('config')
     # --------------------------------------
     # variable initialisation
     # --------------------------------------
@@ -233,8 +275,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     LABELS_PADDING = 12
     LABELS_ROTATION = 45
     BASE_LABELS_SIZE = 10
-
-    currentColourProperty = config.initial_colouring
 
     if GlobalVariables['IS_EMBEDED']
 
@@ -259,21 +299,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     if height > width
       height = width
 
-
-
     mainContainer = d3.select(@$vis_elem.get(0))
 
     totalVisualisationWidth = width
     totalVisualisationHeight = height
 
     g = mainContainer
-            .append('svg')
-            .attr('class', 'mainSVGContainer')
-            .attr('width', totalVisualisationWidth)
-            .attr('height', totalVisualisationHeight)
-            .attr('style', 'background-color: white;')
-            .append("g")
-            .attr('class', 'mainGContainer')
+      .append('svg')
+      .attr('class', 'mainSVGContainer')
+      .attr('width', totalVisualisationWidth)
+      .attr('height', totalVisualisationHeight)
+      .attr('style', 'background-color: white;')
+      .append("g")
+      .attr('class', 'mainGContainer')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
 
@@ -291,27 +329,35 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', legendWidth )
       .attr('height', legendHeight )
 
+    # --------------------------------------
+    # Sort properties
+    # --------------------------------------
+    @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
+    @currentRowSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
+    @currentColSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentPropertyColour = @config.properties[@config.initial_colouring]
 
     # --------------------------------------
     # Sort by default value
     # --------------------------------------
-    sortMatrixRowsBy = (prop, reverse) ->
+    sortMatrixRowsBy = (propName, reverse) ->
 
-      newOrders = _.sortBy(matrix.rows, prop)
+      newOrders = _.sortBy(matrix.rows, propName)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
         matrix.rows_index[row.label].currentPosition = index
 
-    sortMatrixRowsBy config.initial_row_sorting, config.initial_row_sorting_reverse
+    sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
 
-    sortMatrixColsBy = (prop, reverse) ->
+    sortMatrixColsBy = (propName, reverse) ->
 
-      newOrders = _.sortBy(matrix.columns, prop)
+      newOrders = _.sortBy(matrix.columns, propName)
       newOrders = newOrders.reverse() if reverse
       for row, index in newOrders
         matrix.columns_index[row.label].currentPosition = index
 
-    sortMatrixColsBy config.initial_col_sorting, config.initial_col_sorting_reverse
+    sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
 
     getYCoord = d3.scale.ordinal()
       .domain([0..NUM_ROWS])
@@ -320,7 +366,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     getXCoord = d3.scale.ordinal()
       .domain([0..NUM_COLUMNS])
       .rangeBands([0, RANGE_X_END])
-
 
     # --------------------------------------
     # Add background MATRIX rectangle
@@ -343,211 +388,24 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('stroke-width', 1)
       .attr('transform', "translate(" + BACK_RECT_TRANS_X + ", " + BACK_RECT_TRANS_Y + ")")
 
-    # --------------------------------------
-    # Sort properties
-    # --------------------------------------
-    currentRowSortingProperty = config.initial_row_sorting
-    currentRowSortingPropertyReverse = config.initial_row_sorting_reverse
-    currentColSortingProperty = config.initial_col_sorting
-    currentColSortingPropertyReverse = config.initial_row_sorting_reverse
 
-    # --------------------------------------
-    # scales
-    # --------------------------------------
+    if not @currentPropertyColour.colourScale?
+      if not @currentPropertyColour.domain?
+        colourValues = @model.getValuesListForProperty(@currentPropertyColour.propName)
+        glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(@currentPropertyColour,
+          colourValues)
+      glados.models.visualisation.PropertiesFactory.generateColourScale(@currentPropertyColour)
 
-    #given a property, returns a list with all the values found in the links
-    getDomainForOrdinalProperty = (prop) ->
-
-      domain = []
-
-      for rowNum, row of matrix.links
-        for colNum, cell of row
-
-          if !cell?
-            continue
-
-          value = cell[prop]
-          if value?
-            domain.push value
-
-      return domain
-
-    # given a property, it gives a domain of the property, taking only the smallest and the biggest values.
-    getDomainForContinuousProperty = (prop) ->
-
-      minVal = Number.MAX_VALUE
-      maxVal = Number.MIN_VALUE
-      for rowNum, row of matrix.links
-        for colNum, cell of row
-
-          if !cell?
-            continue
-
-          value = parseFloat(cell[prop])
-          if value > maxVal
-            maxVal = value
-          if value < minVal
-            minVal = value
-
-
-      return [minVal, maxVal]
-
-
-
-    # generates a scale for when the data is numeric
-    buildNumericColourScale = (currentProperty) ->
-
-      colourDomain = getDomainForContinuousProperty(currentProperty)
-
-      scale = d3.scale.linear()
-        .domain(colourDomain)
-        .range([glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX])
-
-      return scale
-
-    # generates a scale for when the data is numeric
-    buildTextColourScale = (currentProperty) ->
-
-      domain = getDomainForOrdinalProperty currentProperty
-
-      scale = d3.scale.ordinal()
-        .domain(domain)
-        .range(d3.scale.category20().range())
-
-      return scale
-
-
-    defineColourScale = (links, currentProperty)->
-
-      type = config.propertyToType[currentProperty]
-
-      scale = switch
-        when type == 'number' then buildNumericColourScale(currentProperty)
-        when type == 'string' then buildTextColourScale(currentProperty)
-
-      return scale
-
-
-    getCellColour = defineColourScale(links, currentColourProperty)
+    @getCellColour = @currentPropertyColour.colourScale
 
     fillColour = (d) ->
 
-      if not d[currentColourProperty]?
+      if not d[thisView.currentPropertyColour.propName]?
           return glados.Settings.VISUALISATION_GRID_UNDEFINED
-      getCellColour(d[currentColourProperty])
+      thisView.getCellColour(d[thisView.currentPropertyColour.propName])
 
 
     # --------------------------------------
-    # Fill legend details
-    # --------------------------------------
-
-    fillLegendDetails = ->
-
-      # make a space for the null value
-      nullValSpace = 20
-
-      legendSVG.selectAll('g').remove()
-      legendSVG.selectAll('text').remove()
-
-      nullValG = legendSVG.append('g')
-        .attr("transform", "translate(0," +(legendHeight - 30) + ")")
-
-      legendG = legendSVG.append('g')
-        .attr("transform", "translate(" + nullValSpace + "," + (legendHeight - 30) + ")");
-
-
-      legendSVG.append('text')
-        .text(currentColourProperty)
-        .attr("class", 'matrix-colour-legend-title')
-
-      # center legend title
-      textWidth = d3.select('.matrix-colour-legend-title').node().getBBox().width
-      xTrans = (legendWidth - textWidth) / 2
-      legendSVG.select('.matrix-colour-legend-title')
-        .attr("transform", "translate(" + xTrans + ", 35)");
-
-      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
-      colourDataType = config.propertyToType[currentColourProperty]
-
-      if colourDataType == 'string'
-
-        domain = getDomainForOrdinalProperty currentColourProperty
-        getXInLegendFor = d3.scale.ordinal()
-          .domain( domain )
-          .rangeBands([0, legendWidth - nullValSpace])
-
-        legendAxis = d3.svg.axis()
-          .scale(getXInLegendFor)
-          .orient("bottom")
-
-        legendG.selectAll('rect')
-          .data(getXInLegendFor.domain())
-          .enter().append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', getXInLegendFor.rangeBand())
-          .attr('x', (d) -> getXInLegendFor d)
-          .attr('y', -rectangleHeight)
-          .attr('fill', (d) -> getCellColour d)
-
-        legendG.call(legendAxis)
-
-      else if colourDataType == 'number'
-
-        domain = getDomainForContinuousProperty currentColourProperty
-        linearScalePadding = 30
-        getXInLegendFor = d3.scale.linear()
-          .domain(domain)
-          .range([linearScalePadding, (legendWidth - nullValSpace - linearScalePadding)])
-
-        legendAxis = d3.svg.axis()
-          .scale(getXInLegendFor)
-          .orient("bottom")
-
-        start = domain[0]
-        stop = domain[1]
-        numValues = 50
-        step = Math.abs(stop - start) / numValues
-        stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        legendData = d3.range(domain[0], domain[1], step)
-
-        legendAxis.tickValues([
-          legendData[0]
-          legendData[parseInt(legendData.length * 0.25)],
-          legendData[parseInt(legendData.length * 0.5)],
-          legendData[parseInt(legendData.length * 0.75)],
-          legendData[legendData.length - 1],
-        ])
-
-        #Add the null value rect
-        nullValG.append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', stepWidthInScale + 5)
-          .attr('x', 0)
-          .attr('y', -rectangleHeight)
-          .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
-
-        nullValG.append('text')
-           .attr('x', 0)
-          .attr('y', 20)
-          .text('null')
-
-        legendG.selectAll('rect')
-          .data(legendData)
-          .enter().append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', stepWidthInScale + 5)
-          .attr('x', (d) -> getXInLegendFor d)
-          .attr('y', -rectangleHeight)
-          .attr('fill', (d) -> getCellColour d)
-
-        legendG.call(legendAxis)
-
-      #customize legend styles
-      $legendContainer.find('line, path').css('fill', 'none')
-
-    fillLegendDetails()
-
-     # --------------------------------------
     # Hover
     # --------------------------------------
     handleCellMouseover = () ->
@@ -572,13 +430,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = d.row_id + "\n" + d.col_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
+      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label
+      + ":" + d[thisView.currentPropertyColour.propName]
 
       return txt
 
     getRowTooltip = (d) ->
 
-      txt = "Compound: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
+      txt = "Compound: " + d.label + "\n" +  thisView.currentRowSortingProperty + ":"
+      + d[thisView.currentRowSortingProperty]
       return txt
 
     fillRow = (row, rowNumber) ->
@@ -640,7 +500,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     getColumnTooltip = (d) ->
 
-      txt = "Target: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
+      txt = "Target: " + d.label + "\n" +  thisView.currentColSortingProperty + ":"
+      + d[thisView.currentColSortingProperty]
 
     columns = g.selectAll(".vis-column")
       .data(matrix.columns)
@@ -754,10 +615,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentColourProperty = @value
-      getCellColour = defineColourScale(links, currentColourProperty)
+      thisView.currentPropertyColour = thisView.config.properties[@value]
 
-      fillLegendDetails()
+      if not thisView.currentPropertyColour.colourScale?
+        if not thisView.currentPropertyColour.domain?
+          colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
+          glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(
+            thisView.currentPropertyColour,
+            colourValues)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
+
+      thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
       t = g.transition().duration(1000)
       t.selectAll(".vis-cell")
@@ -769,7 +637,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # sort property selector
     # --------------------------------------
     paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
-    thisView = @
 
     triggerRowSortTransition = ->
 
@@ -793,16 +660,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       targetDimension = $(@).attr('data-target-property')
       if targetDimension == 'row'
 
-        currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
-        sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
-        paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
+        thisView.currentRowSortingPropertyReverse = !thisView.currentRowSortingPropertyReverse
+        sortMatrixRowsBy thisView.currentRowSortingProperty, thisView.currentRowSortingPropertyReverse
+        paintSortDirectionProxy('.btn-row-sort-direction-container', thisView.currentRowSortingPropertyReverse, 'row')
         triggerRowSortTransition()
 
       else if targetDimension == 'col'
 
-        currentColSortingPropertyReverse = !currentColSortingPropertyReverse
-        sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
-        paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
+        thisView.currentColSortingPropertyReverse = !thisView.currentColSortingPropertyReverse
+        sortMatrixColsBy thisView.currentColSortingProperty, thisView.currentColSortingPropertyReverse
+        paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
         triggerColSortTransition()
 
       $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
@@ -814,9 +681,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentRowSortingProperty = @value
-      sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
-      paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
+      thisView.currentRowSortingProperty = @value
+      sortMatrixRowsBy thisView.currentRowSortingProperty, thisView.currentRowSortingPropertyReverse
+      paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
       triggerRowSortTransition()
 
     triggerColSortTransition = ->
@@ -842,8 +709,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if !@value?
         return
 
-      currentColSortingProperty = @value
-      sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
+      thisView.currentColSortingProperty = @value
+      sortMatrixColsBy thisView.currentColSortingProperty, thisView.currentColSortingPropertyReverse
 
       triggerColSortTransition()
 

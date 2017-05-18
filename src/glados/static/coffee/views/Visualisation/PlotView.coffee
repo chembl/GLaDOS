@@ -196,7 +196,6 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     if not @currentPropertyColour.colourScale?
       if not @currentPropertyColour.domain?
         values = (glados.Utils.getNestedValue(mol, @currentPropertyColour.propName) for mol in @shownElements)
-        console.log 'generating domain!'
         glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(@currentPropertyColour, values)
       glados.models.visualisation.PropertiesFactory.generateColourScale(@currentPropertyColour)
 
