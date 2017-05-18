@@ -355,19 +355,5 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         legendG.call(legendAxis)
 
-    #customize legend styles
-    $legendContainer.find('line, path').css('fill', 'none')
-
-    # Generate legend model and view lazily
-    if not @currentPropertyColour.legendModel?
-      @currentPropertyColour.legendModel = new glados.models.visualisation.LegendModel
-        property: @currentPropertyColour
-        collection: @collection
-
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
-    if not @currentPropertyColour.legendView?
-      @currentPropertyColour.legendView = new LegendView
-        model: @currentPropertyColour.legendModel
-        el: $legendContainer
-    else
-      @currentPropertyColour.legendView.render()
+    glados.Utils.renderLegendForProperty(@currentPropertyColour, @collection, $legendContainer)

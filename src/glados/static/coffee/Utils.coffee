@@ -110,3 +110,19 @@ glados.useNameSpace 'glados',
       else
         return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
 
+    renderLegendForProperty: (property, collection, $legendContainer) ->
+
+      if not property.legendModel?
+        property.legendModel = new glados.models.visualisation.LegendModel
+          property: property
+          collection: collection
+
+      if not property.legendView?
+        property.legendView = new LegendView
+          model: property.legendModel
+          el: $legendContainer
+      else
+        property.legendView.render()
+
+      $legendContainer.find('line, path').css('fill', 'none')
+
