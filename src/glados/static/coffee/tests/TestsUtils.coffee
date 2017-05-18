@@ -38,6 +38,5 @@ class TestsUtils
 
   @simulateDataMatrix = (matrix, dataURL, done) ->
     $.get dataURL, (testData) ->
-      matrix.set('config', testData.config)
       matrix.set('matrix', testData.matrix)
       done()

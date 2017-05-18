@@ -316,20 +316,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
 
     # --------------------------------------
-    # Legend initialisation
-    # --------------------------------------
-    legendWidth = 0.4 * width
-    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
-
-    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
-    $legendContainer.empty()
-    legendContainer = d3.select($legendContainer.get(0))
-
-    legendSVG = legendContainer.append('svg')
-      .attr('width', legendWidth )
-      .attr('height', legendHeight )
-
-    # --------------------------------------
     # Sort properties
     # --------------------------------------
     @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
@@ -798,9 +784,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $targetBtnIcon.removeClass 'fa-hand-paper-o'
         $targetBtnIcon.addClass 'fa-hand-rock-o'
 
-    resetZoom()
+#    resetZoom()
     MIN_VIS_HEIGHT = 300
-    adjustVisHeight()
+#    adjustVisHeight()
     ZOOM_ACTIVATED = false
 
     @initialTransX = zoom.translate()[0]

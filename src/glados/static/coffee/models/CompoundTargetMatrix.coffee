@@ -124,8 +124,7 @@ CompoundTargetMatrix = Backbone.Model.extend
     for rowIndex, row of @get('matrix').links
       for colIndex, cell of row
         value = cell[propName]
-        if value?
-          values.push(value)
+        values.push(value) unless not value?
 
     return values
 
@@ -152,7 +151,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         molecule_chembl_id_agg:
           terms:
             field: "molecule_chembl_id",
-            size: 20,
+            size: 10,
             order:
               _count: "desc"
           aggs:
