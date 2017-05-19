@@ -272,7 +272,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     SIDE_SIZE = 20
     COLS_HEADER_WIDTH = 100
     COLS_FOOTER_WIDTH = 50
-    ROWS_HEADER_HEIGHT = 50
+    ROWS_HEADER_HEIGHT = 120
     ROWS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
@@ -428,6 +428,43 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('height', ROWS_HEADER_HEIGHT)
       .attr('width', RANGE_X_END)
       .style('fill', 'orange')
+
+    colsHeaders = colsHeaderG.selectAll(".vis-column")
+      .data(matrix.columns)
+      .enter().append("g")
+      .attr("class", "vis-column")
+      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) +
+        ")rotate(30 " + getXCoord.rangeBand() + " " + ROWS_HEADER_HEIGHT + ")" )
+
+    colsHeaders.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', getXCoord.rangeBand())
+      .style('fill', 'none')
+      .style('fill-opacity', 0.5)
+
+    colsHeaders.append('line')
+      .attr('x1', getXCoord.rangeBand())
+      .attr('y1', ROWS_HEADER_HEIGHT )
+      .attr('x2', getXCoord.rangeBand())
+      .attr('y2', 0)
+      .style('stroke-width', 1)
+      .style('stroke', 'black')
+
+    setUpColTooltip = @generateTooltipFunction('Target', @)
+
+    colsHeaders.append('text')
+      .text('hola')
+      .attr('transform', 'rotate(-90)')
+      .attr("y", (getXCoord.rangeBand() * (2/3) ) )
+      .attr('x', -ROWS_HEADER_HEIGHT)
+      .text((d) -> d.label)
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .on('click', setUpColTooltip)
+      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
+      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
      # --------------------------------------
     # Rows Footer Container
