@@ -113,7 +113,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       rows_index: _.indexBy(compoundsList, 'label')
       columns_index: _.indexBy(targetsList, 'label')
 
-    console.log 'result: ', result
+    console.log 'result: ', JSON.stringify(result)
 
     return {"matrix": result}
 
@@ -133,6 +133,27 @@ CompoundTargetMatrix = Backbone.Model.extend
 
   getLinkForRowHeader: (itemID) ->
     return Compound.get_report_card_url(itemID)
+
+  sortMatrixRowsBy: (propName, reverse=false) ->
+
+    matrix = @get('matrix')
+    newOrders = _.sortBy(matrix.rows, propName)
+    newOrders = newOrders.reverse() if reverse
+    #avoid issues with inconsistency of the objects pointed
+    matrix.rows = []
+    for row, index in newOrders
+      matrix.rows_index[row.label].currentPosition = index
+      matrix.rows.push(matrix.rows_index[row.label])
+
+  sortMatrixColsBy: (propName, reverse=false) ->
+
+    matrix = @get('matrix')
+    newOrders = _.sortBy(matrix.columns, propName)
+    newOrders = newOrders.reverse() if reverse
+    matrix.columns = []
+    for col, index in newOrders
+      matrix.columns_index[col.label].currentPosition = index
+      matrix.columns.push(matrix.columns_index[col.label])
 
   getRequestData: ->
 

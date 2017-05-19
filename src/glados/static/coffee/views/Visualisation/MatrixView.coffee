@@ -327,23 +327,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Sort by default value
     # --------------------------------------
-    sortMatrixRowsBy = (propName, reverse) ->
-
-      newOrders = _.sortBy(matrix.rows, propName)
-      newOrders = newOrders.reverse() if reverse
-      for row, index in newOrders
-        matrix.rows_index[row.label].currentPosition = index
-
-    sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
-
-    sortMatrixColsBy = (propName, reverse) ->
-
-      newOrders = _.sortBy(matrix.columns, propName)
-      newOrders = newOrders.reverse() if reverse
-      for row, index in newOrders
-        matrix.columns_index[row.label].currentPosition = index
-
-    sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+    @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+    @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
 
     getYCoord = d3.scale.ordinal()
       .domain([0..NUM_ROWS])
