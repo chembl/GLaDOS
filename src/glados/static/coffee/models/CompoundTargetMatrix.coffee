@@ -113,7 +113,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       rows_index: _.indexBy(compoundsList, 'label')
       columns_index: _.indexBy(targetsList, 'label')
 
-    console.log 'result: ', JSON.stringify(result)
+    console.log 'result: ', result
 
     return {"matrix": result}
 

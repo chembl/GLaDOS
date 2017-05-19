@@ -277,6 +277,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
 
+    BASE_X_TRANS_ATT = 'baseXTrans'
+    BASE_Y_TRANS_ATT = 'baseYTrans'
+    MOVE_X_ATT = 'moveX'
+    MOVE_Y_ATT = 'moveY'
+    YES = 'yes'
+    NO = 'no'
+#    MAX_Y_TRANSLATE =
+
     CONTAINER_Y_PADDING = 40
     CONTAINER_X_PADDING = 0
 
@@ -321,69 +329,84 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
     # --------------------------------------
+    # Base translations
+    # --------------------------------------
+    applyTranslation = (elem, translateX=0, translateY=0) ->
+
+      moveX = elem.attr(MOVE_X_ATT)
+      moveY = elem.attr(MOVE_Y_ATT)
+      translateX = 0 if moveX == NO
+      translateY = 0 if moveY == NO
+
+      newTransX = parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX
+      newTransY = parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY
+      elem.attr('transform', 'translate(' + newTransX + ',' + newTransY + ')')
+    # --------------------------------------
     # Add background MATRIX g
     # --------------------------------------
     mainGContainer = mainSVGContainer.append("g")
       .attr('class', 'mainGContainer')
       .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
-    # --------------------------------------
-    # Square 1
-    # --------------------------------------
-    corner1G = mainGContainer.append('g')
-    corner1G.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
-      .style('fill', 'blue')
-
-    # --------------------------------------
-    # Cols Header Container
-    # --------------------------------------
-    colsHeaderG = mainGContainer.append('g')
-      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH) + ')')
-
-    colsHeaderG.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', RANGE_X_END)
-      .style('fill', 'orange')
-
-    # --------------------------------------
-    # Square 2
-    # --------------------------------------
-    corner2G = mainGContainer.append('g')
-      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ')')
-
-    corner2G.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
-      .style('fill', 'blue')
-
-    # --------------------------------------
-    # Rows Header Container
-    # --------------------------------------
-    rowsHeaderG = mainGContainer.append('g')
-      .attr('transform', 'translate(0,' + (ROWS_HEADER_HEIGHT) + ')')
-
-    rowsHeaderG.append('rect')
-      .attr('height', RANGE_Y_END)
-      .attr('width', COLS_HEADER_WIDTH)
-      .style('fill', 'yellow')
 
     # --------------------------------------
     # Cells container
     # --------------------------------------
-    cellsContainerG =  mainGContainer.append('g')
-      .attr('transform', 'translate(' + COLS_HEADER_WIDTH + ',' + ROWS_HEADER_HEIGHT + ')')
+    cellsContainerG = mainGContainer.append('g')
+      .attr('data-section-name', 'cellsContainerG')
+      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, YES)
 
+    applyTranslation(cellsContainerG)
     cellsContainerG.append('rect')
       .attr('height', RANGE_Y_END)
       .attr('width', RANGE_X_END)
       .style('fill', 'red')
 
     # --------------------------------------
+    # Rows Header Container
+    # --------------------------------------
+    rowsHeaderG = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, YES)
+
+    applyTranslation(rowsHeaderG)
+
+    rowsHeaderG.append('rect')
+      .attr('height', RANGE_Y_END)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'yellow')
+
+
+    # --------------------------------------
+    # Cols Header Container
+    # --------------------------------------
+    colsHeaderG = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+
+    applyTranslation(colsHeaderG)
+
+    colsHeaderG.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', RANGE_X_END)
+      .style('fill', 'orange')
+
+     # --------------------------------------
     # Rows Footer Container
     # --------------------------------------
     rowsFooterG = mainGContainer.append('g')
-      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ',' + ROWS_HEADER_HEIGHT + ')')
+      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, YES)
+
+    applyTranslation(rowsFooterG)
 
     rowsFooterG.append('rect')
       .attr('height', RANGE_Y_END)
@@ -391,21 +414,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', 'yellow')
 
     # --------------------------------------
-    # Square 3
-    # --------------------------------------
-    corner3G = mainGContainer.append('g')
-      .attr('transform', 'translate(0,' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
-
-    corner3G.append('rect')
-      .attr('height', ROWS_FOOTER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
-      .style('fill', 'blue')
-
-    # --------------------------------------
     # Cols Footer Container
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
-      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH) + ',' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
+      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, YES)
+
+    applyTranslation(colsFooterG)
 
     colsFooterG.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
@@ -413,16 +430,100 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', 'orange')
 
     # --------------------------------------
+    # Square 1
+    # --------------------------------------
+    corner1G = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+
+    applyTranslation(corner1G)
+
+    corner1G.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+
+    # --------------------------------------
+    # Square 2
+    # --------------------------------------
+    corner2G = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+
+    applyTranslation(corner2G)
+
+    corner2G.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+    # --------------------------------------
+    # Square 3
+    # --------------------------------------
+    corner3G = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, YES)
+
+    applyTranslation(corner3G)
+
+    corner3G.append('rect')
+      .attr('height', ROWS_FOOTER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+    # --------------------------------------
     # Square 4
     # --------------------------------------
     corner4G = mainGContainer.append('g')
-      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ',' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
+      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, YES)
+
+    applyTranslation(corner4G)
 
     corner4G.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
       .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'blue')
 
+    # --------------------------------------
+    # Zoom
+    # --------------------------------------
+    handleZoom = ->
+
+      translateX = zoom.translate()[0]
+      translateY = zoom.translate()[1]
+
+      console.log 'handle zoom'
+      console.log 'translateX: ', translateX
+      console.log 'translateY: ', translateY
+
+      applyTranslation(corner1G, translateX, translateY)
+      applyTranslation(colsHeaderG, translateX, translateY)
+      applyTranslation(corner2G, translateX, translateY)
+      applyTranslation(rowsHeaderG, translateX, translateY)
+      applyTranslation(cellsContainerG, translateX, translateY)
+      applyTranslation(rowsFooterG, translateX, translateY)
+      applyTranslation(corner3G, translateX, translateY)
+      applyTranslation(colsFooterG, translateX, translateY)
+      applyTranslation(corner4G, translateX, translateY)
+
+    MIN_ZOOM_SCALE = 0.2
+    MAX_ZOOM_SCALE = 2
+    ZOOM_STEP = 0.2
+    zoom = d3.behavior.zoom()
+      .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
+      .on("zoom", handleZoom)
+
+    mainGContainer.call zoom
 
     return
     # --------------------------------------
