@@ -270,7 +270,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # make sure all intersections are squared
     SIDE_SIZE = 20
-    COLS_HEADER_WIDTH = 50
+    COLS_HEADER_WIDTH = 100
     COLS_FOOTER_WIDTH = 50
     ROWS_HEADER_HEIGHT = 50
     ROWS_FOOTER_HEIGHT = 50
@@ -283,10 +283,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MOVE_Y_ATT = 'moveY'
     YES = 'yes'
     NO = 'no'
-#    MAX_Y_TRANSLATE =
 
     CONTAINER_Y_PADDING = 40
     CONTAINER_X_PADDING = 0
+
+    getYCoord = d3.scale.ordinal()
+      .domain([0..NUM_ROWS])
+      .rangeBands([0, RANGE_Y_END])
+
+    getXCoord = d3.scale.ordinal()
+      .domain([0..NUM_COLUMNS])
+      .rangeBands([0, RANGE_X_END])
 
     LABELS_PADDING = 12
     LABELS_ROTATION = 45
@@ -380,6 +387,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'yellow')
 
+    rowHeaders = rowsHeaderG.selectAll('.vis-row')
+      .data(matrix.rows)
+      .enter()
+      .append('g').attr('class', 'vis-row')
+        .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
+
+    rowHeaders.append('rect')
+      .attr('y', 0)
+      .attr('height', getYCoord.rangeBand())
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'white')
+      .style('stroke-width', 1)
+      .style('stroke', 'black')
+
+    setUpRowTooltip = @generateTooltipFunction('Compound', @)
+    rowHeaders.append('text')
+      .attr("y", (getYCoord.rangeBand() * (2/3) ) )
+      .text((d) -> d.label)
+      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
+      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
+      .on('click', setUpRowTooltip)
 
     # --------------------------------------
     # Cols Header Container
@@ -459,7 +491,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.append('rect')
       .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
+      .attr('width', COLS_FOOTER_WIDTH)
       .style('fill', 'blue')
 
     # --------------------------------------
@@ -491,7 +523,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner4G.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
+      .attr('width', COLS_FOOTER_WIDTH)
       .style('fill', 'blue')
 
     # --------------------------------------
@@ -541,13 +573,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
     @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
 
-    getYCoord = d3.scale.ordinal()
-      .domain([0..NUM_ROWS])
-      .rangeBands([0, RANGE_Y_END])
 
-    getXCoord = d3.scale.ordinal()
-      .domain([0..NUM_COLUMNS])
-      .rangeBands([0, RANGE_X_END])
 
     # --------------------------------------
     # Add background MATRIX g
