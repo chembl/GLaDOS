@@ -270,8 +270,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # make sure all intersections are squared
     SIDE_SIZE = 20
+    COLS_HEADER_WIDTH = 50
+    COLS_FOOTER_WIDTH = 50
+    ROWS_HEADER_HEIGHT = 50
+    ROWS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
+
+    CONTAINER_Y_PADDING = 40
+    CONTAINER_X_PADDING = 0
+
     LABELS_PADDING = 12
     LABELS_ROTATION = 45
     BASE_LABELS_SIZE = 10
@@ -302,19 +310,121 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainContainer = d3.select(@$vis_elem.get(0))
 
     totalVisualisationWidth = width
-    totalVisualisationHeight = height
+    totalVisualisationHeight = 500
 
-    g = mainContainer
+    mainSVGContainer = mainContainer
       .append('svg')
       .attr('class', 'mainSVGContainer')
       .attr('width', totalVisualisationWidth)
       .attr('height', totalVisualisationHeight)
       .attr('style', 'background-color: white;')
-      .append("g")
-      .attr('class', 'mainGContainer')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
+    # --------------------------------------
+    # Add background MATRIX g
+    # --------------------------------------
+    mainGContainer = mainSVGContainer.append("g")
+      .attr('class', 'mainGContainer')
+      .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
+    # --------------------------------------
+    # Square 1
+    # --------------------------------------
+    corner1G = mainGContainer.append('g')
+    corner1G.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
 
+    # --------------------------------------
+    # Cols Header Container
+    # --------------------------------------
+    colsHeaderG = mainGContainer.append('g')
+      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH) + ')')
+
+    colsHeaderG.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', RANGE_X_END)
+      .style('fill', 'orange')
+
+    # --------------------------------------
+    # Square 2
+    # --------------------------------------
+    corner2G = mainGContainer.append('g')
+      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ')')
+
+    corner2G.append('rect')
+      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+    # --------------------------------------
+    # Rows Header Container
+    # --------------------------------------
+    rowsHeaderG = mainGContainer.append('g')
+      .attr('transform', 'translate(0,' + (ROWS_HEADER_HEIGHT) + ')')
+
+    rowsHeaderG.append('rect')
+      .attr('height', RANGE_Y_END)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'yellow')
+
+    # --------------------------------------
+    # Cells container
+    # --------------------------------------
+    cellsContainerG =  mainGContainer.append('g')
+      .attr('transform', 'translate(' + COLS_HEADER_WIDTH + ',' + ROWS_HEADER_HEIGHT + ')')
+
+    cellsContainerG.append('rect')
+      .attr('height', RANGE_Y_END)
+      .attr('width', RANGE_X_END)
+      .style('fill', 'red')
+
+    # --------------------------------------
+    # Rows Footer Container
+    # --------------------------------------
+    rowsFooterG = mainGContainer.append('g')
+      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ',' + ROWS_HEADER_HEIGHT + ')')
+
+    rowsFooterG.append('rect')
+      .attr('height', RANGE_Y_END)
+      .attr('width', COLS_FOOTER_WIDTH)
+      .style('fill', 'yellow')
+
+    # --------------------------------------
+    # Square 3
+    # --------------------------------------
+    corner3G = mainGContainer.append('g')
+      .attr('transform', 'translate(0,' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
+
+    corner3G.append('rect')
+      .attr('height', ROWS_FOOTER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+    # --------------------------------------
+    # Cols Footer Container
+    # --------------------------------------
+    colsFooterG = mainGContainer.append('g')
+      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH) + ',' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
+
+    colsFooterG.append('rect')
+      .attr('height', ROWS_FOOTER_HEIGHT)
+      .attr('width', RANGE_X_END)
+      .style('fill', 'orange')
+
+    # --------------------------------------
+    # Square 4
+    # --------------------------------------
+    corner4G = mainGContainer.append('g')
+      .attr('transform', 'translate(' + (COLS_HEADER_WIDTH + RANGE_X_END) + ',' + (ROWS_HEADER_HEIGHT + RANGE_Y_END) + ')')
+
+    corner4G.append('rect')
+      .attr('height', ROWS_FOOTER_HEIGHT)
+      .attr('width', COLS_HEADER_WIDTH)
+      .style('fill', 'blue')
+
+
+    return
     # --------------------------------------
     # Sort properties
     # --------------------------------------
@@ -339,8 +449,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .rangeBands([0, RANGE_X_END])
 
     # --------------------------------------
-    # Add background MATRIX rectangle
+    # Add background MATRIX g
     # --------------------------------------
+
     backRectWidth = RANGE_X_END - SIDE_SIZE + 1
     backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
 
@@ -358,6 +469,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
       .attr('stroke-width', 1)
       .attr('transform', "translate(" + BACK_RECT_TRANS_X + ", " + BACK_RECT_TRANS_Y + ")")
+
+
 
 
     if not @currentPropertyColour.colourScale?
