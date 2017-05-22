@@ -295,7 +295,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .domain([0..NUM_COLUMNS])
       .rangeBands([0, RANGE_X_END])
 
-    LABELS_PADDING = 12
+    LABELS_PADDING = 8
     LABELS_ROTATION = 45
     BASE_LABELS_SIZE = 10
 
@@ -382,12 +382,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(rowsHeaderG)
-
     rowsHeaderG.append('rect')
-      .attr('height', RANGE_Y_END)
-      .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'yellow')
+      .classed('background-rect', true)
 
     rowHeaders = rowsHeaderG.selectAll('.vis-row')
       .data(matrix.rows)
@@ -397,17 +394,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowHeaders.append('rect')
       .attr('y', 0)
-      .attr('height', getYCoord.rangeBand())
-      .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'white')
       .style('stroke-width', 1)
       .style('stroke', 'black')
+      .classed('headers-background-rect', true)
 
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
     rowHeaders.append('text')
-      .attr("y", (getYCoord.rangeBand() * (2/3) ) )
+      .classed('headers-text', true)
       .text((d) -> d.label)
-      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -415,6 +410,26 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
       .on('click', setUpRowTooltip)
 
+    rowsHeaderG.scaleSizes = (zoomScale) ->
+
+      rowsHeaderG.select('.background-rect')
+        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+
+      rowsHeaderG.selectAll('.vis-row')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
+
+      rowsHeaderG.selectAll('.headers-background-rect')
+        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+
+      rowsHeaderG.selectAll('.headers-text')
+        .attr('x', (LABELS_PADDING * zoomScale))
+        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
+
+
+    applyZoomAndTranslation(rowsHeaderG)
     # --------------------------------------
     # Cols Header Container
     # --------------------------------------
@@ -546,12 +561,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
 
-    applyZoomAndTranslation(corner2G)
-
     corner2G.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', COLS_FOOTER_WIDTH)
       .style('fill', 'blue')
+
+    corner2G.scaleSizes = (zoomScale) ->
+      corner2G.select('rect')
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (COLS_FOOTER_WIDTH *zoomScale))
+
+    applyZoomAndTranslation(corner2G)
 
     # --------------------------------------
     # Square 3
