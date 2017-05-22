@@ -338,16 +338,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Base translations
     # --------------------------------------
-    applyTranslation = (elem, translateX=0, translateY=0) ->
+    applyZoomAndTranslation = (elem, translateX=0, translateY=0, zoomScale=1) ->
 
       moveX = elem.attr(MOVE_X_ATT)
       moveY = elem.attr(MOVE_Y_ATT)
       translateX = 0 if moveX == NO
       translateY = 0 if moveY == NO
 
-      newTransX = parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX
-      newTransY = parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY
+      newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
+      newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
       elem.attr('transform', 'translate(' + newTransX + ',' + newTransY + ')')
+
+      elem.scaleSizes(zoomScale) unless not elem.scaleSizes?
     # --------------------------------------
     # Add background MATRIX g
     # --------------------------------------
@@ -365,7 +367,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(cellsContainerG)
+    applyZoomAndTranslation(cellsContainerG)
     cellsContainerG.append('rect')
       .attr('height', RANGE_Y_END)
       .attr('width', RANGE_X_END)
@@ -380,7 +382,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(rowsHeaderG)
+    applyZoomAndTranslation(rowsHeaderG)
 
     rowsHeaderG.append('rect')
       .attr('height', RANGE_Y_END)
@@ -422,49 +424,67 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
 
-    applyTranslation(colsHeaderG)
-
     colsHeaderG.append('rect')
       .attr('height', ROWS_HEADER_HEIGHT)
       .attr('width', RANGE_X_END)
       .style('fill', 'orange')
+      .classed('background-rect', true)
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(matrix.columns)
       .enter().append("g")
-      .attr("class", "vis-column")
-      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) +
-        ")rotate(30 " + getXCoord.rangeBand() + " " + ROWS_HEADER_HEIGHT + ")" )
+      .classed('vis-column', true)
 
     colsHeaders.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', getXCoord.rangeBand())
       .style('fill', 'none')
       .style('fill-opacity', 0.5)
+      .classed('headers-background-rect', true)
 
     colsHeaders.append('line')
-      .attr('x1', getXCoord.rangeBand())
-      .attr('y1', ROWS_HEADER_HEIGHT )
-      .attr('x2', getXCoord.rangeBand())
-      .attr('y2', 0)
       .style('stroke-width', 1)
       .style('stroke', 'black')
+      .classed('headers-divisory-line', true)
 
     setUpColTooltip = @generateTooltipFunction('Target', @)
 
     colsHeaders.append('text')
-      .text('hola')
+      .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .attr("y", (getXCoord.rangeBand() * (2/3) ) )
-      .attr('x', -ROWS_HEADER_HEIGHT)
       .text((d) -> d.label)
-      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
       .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
+
+    colsHeaderG.scaleSizes = (zoomScale) ->
+
+      colsHeaderG.select('.background-rect')
+        .attr('height', ROWS_HEADER_HEIGHT * zoomScale)
+        .attr('width', RANGE_X_END * zoomScale)
+
+      colsHeaderG.selectAll('.vis-column')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(30 " + (getXCoord.rangeBand() * zoomScale) + " " + (ROWS_HEADER_HEIGHT * zoomScale) + ")" ))
+
+      colsHeaderG.selectAll('.headers-background-rect')
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale) )
+        .attr('width', (getXCoord.rangeBand() * zoomScale))
+
+      colsHeaderG.selectAll('.headers-divisory-line')
+        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('y1', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('y2', 0)
+
+      colsHeaderG.selectAll('.headers-text')
+        .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
+        .attr('x', (-ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+
+
+    applyZoomAndTranslation(colsHeaderG)
 
      # --------------------------------------
     # Rows Footer Container
@@ -475,7 +495,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(rowsFooterG)
+    applyZoomAndTranslation(rowsFooterG)
 
     rowsFooterG.append('rect')
       .attr('height', RANGE_Y_END)
@@ -491,7 +511,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(colsFooterG)
+    applyZoomAndTranslation(colsFooterG)
 
     colsFooterG.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
@@ -507,13 +527,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
 
-    applyTranslation(corner1G)
-
     corner1G.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'blue')
 
+    corner1G.scaleSizes = (zoomScale) ->
+      corner1G.select('rect')
+        .attr('height', ROWS_HEADER_HEIGHT * zoomScale)
+        .attr('width', COLS_HEADER_WIDTH * zoomScale)
+
+    applyZoomAndTranslation(corner1G)
 
     # --------------------------------------
     # Square 2
@@ -524,7 +546,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
 
-    applyTranslation(corner2G)
+    applyZoomAndTranslation(corner2G)
 
     corner2G.append('rect')
       .attr('height', ROWS_HEADER_HEIGHT)
@@ -540,7 +562,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(corner3G)
+    applyZoomAndTranslation(corner3G)
 
     corner3G.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
@@ -556,7 +578,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyTranslation(corner4G)
+    applyZoomAndTranslation(corner4G)
 
     corner4G.append('rect')
       .attr('height', ROWS_FOOTER_HEIGHT)
@@ -570,29 +592,75 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
+      zoomScale = zoom.scale()
 
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
       console.log 'translateY: ', translateY
+      console.log zoomScale
 
-      applyTranslation(corner1G, translateX, translateY)
-      applyTranslation(colsHeaderG, translateX, translateY)
-      applyTranslation(corner2G, translateX, translateY)
-      applyTranslation(rowsHeaderG, translateX, translateY)
-      applyTranslation(cellsContainerG, translateX, translateY)
-      applyTranslation(rowsFooterG, translateX, translateY)
-      applyTranslation(corner3G, translateX, translateY)
-      applyTranslation(colsFooterG, translateX, translateY)
-      applyTranslation(corner4G, translateX, translateY)
+      applyZoomAndTranslation(corner1G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsHeaderG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner2G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(rowsHeaderG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(cellsContainerG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(rowsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
 
     MIN_ZOOM_SCALE = 0.2
     MAX_ZOOM_SCALE = 2
-    ZOOM_STEP = 0.2
+    ZOOM_STEP = 0.1
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
       .on("zoom", handleZoom)
 
     mainGContainer.call zoom
+
+    # --------------------------------------
+    # Zoom Events
+    # --------------------------------------
+    resetZoom = ->
+      zoom.scale(1)
+      zoom.translate([0, 0])
+      handleZoom()
+
+    $(@el).find(".BCK-reset-zoom-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
+      resetZoom()
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+    $(@el).find(".BCK-zoom-in-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
+      zoom.scale( zoom.scale() + ZOOM_STEP )
+      mainGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
+
+
+    $(@el).find(".BCK-zoom-out-btn").click ->
+
+      #this buttons will always work
+      wasDeactivated = not ZOOM_ACTIVATED
+      ZOOM_ACTIVATED = true
+
+      zoom.scale( zoom.scale() - ZOOM_STEP )
+      mainGContainer.call zoom.event
+
+      if wasDeactivated
+        ZOOM_ACTIVATED = false
 
     return
     # --------------------------------------
