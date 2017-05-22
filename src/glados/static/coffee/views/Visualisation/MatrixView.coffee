@@ -367,11 +367,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(cellsContainerG)
     cellsContainerG.append('rect')
-      .attr('height', RANGE_Y_END)
-      .attr('width', RANGE_X_END)
       .style('fill', 'red')
+      .classed('background-rect', true)
+
+    cellsContainerG.scaleSizes = (zoomScale) ->
+
+      cellsContainerG.select('.background-rect')
+        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('width', (RANGE_X_END * zoomScale))
+
+    applyZoomAndTranslation(cellsContainerG)
 
     # --------------------------------------
     # Rows Header Container
