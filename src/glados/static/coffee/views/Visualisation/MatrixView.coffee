@@ -516,12 +516,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(rowsFooterG)
-
     rowsFooterG.append('rect')
-      .attr('height', RANGE_Y_END)
-      .attr('width', COLS_FOOTER_WIDTH)
       .style('fill', 'yellow')
+      .classed('background-rect', true)
+
+    rowsFooterG.scaleSizes = (zoomScale) ->
+
+      rowsFooterG.select('.background-rect')
+        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('width', (COLS_FOOTER_WIDTH * zoomScale))
+
+    applyZoomAndTranslation(rowsFooterG)
 
     # --------------------------------------
     # Cols Footer Container
@@ -532,12 +537,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(colsFooterG)
-
     colsFooterG.append('rect')
-      .attr('height', ROWS_FOOTER_HEIGHT)
-      .attr('width', RANGE_X_END)
       .style('fill', 'orange')
+      .classed('background-rect', true)
+
+    colsFooterG.scaleSizes = (zoomScale) ->
+
+      colsFooterG.select('.background-rect')
+        .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (RANGE_X_END * zoomScale))
+
+    applyZoomAndTranslation(colsFooterG)
 
     # --------------------------------------
     # Square 1
@@ -586,12 +596,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(corner3G)
-
     corner3G.append('rect')
-      .attr('height', ROWS_FOOTER_HEIGHT)
-      .attr('width', COLS_HEADER_WIDTH)
       .style('fill', 'blue')
+      .classed('background-rect', true)
+
+    corner3G.scaleSizes = (zoomScale) ->
+
+      corner3G.select('.background-rect')
+      .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
+      .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+
+    applyZoomAndTranslation(corner3G)
 
     # --------------------------------------
     # Square 4
@@ -602,12 +617,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
-    applyZoomAndTranslation(corner4G)
-
     corner4G.append('rect')
-      .attr('height', ROWS_FOOTER_HEIGHT)
-      .attr('width', COLS_FOOTER_WIDTH)
       .style('fill', 'blue')
+      .classed('background-rect', true)
+
+    corner4G.scaleSizes = (zoomScale) ->
+
+      corner4G.select('.background-rect')
+      .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
+      .attr('width', (COLS_FOOTER_WIDTH * zoomScale))
+
+    applyZoomAndTranslation(corner4G)
 
     # --------------------------------------
     # Zoom
