@@ -61,7 +61,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       @paintMatrix()
 
       $(@el).find('select').material_select()
-      $(@el).find('.tooltipped').tooltip()
 
       $messagesElement.html ''
 
@@ -317,21 +316,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     BASE_LABELS_SIZE = 10
     GRID_STROKE_WIDTH = 1
     CELLS_PADDING = GRID_STROKE_WIDTH
-
-    if GlobalVariables['IS_EMBEDED']
-
-      margin =
-        top: 120
-        right: 0
-        bottom: 10
-        left: 0
-    else
-
-      margin =
-        top: 190
-        right: 160
-        bottom: 10
-        left: 130
+    TRANSITIONS_DURATION = 1000
 
     elemWidth = $(@el).width()
     width = elemWidth
@@ -416,6 +401,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('vis-cell', true)
       .attr('stroke-width', GRID_STROKE_WIDTH)
 
+    cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      if transitionDuration == 0
+        cellsContainerG.selectAll(".vis-cell")
+          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+      else
+        t = cellsContainerG.transition().duration(transitionDuration)
+        t.selectAll(".vis-cell")
+          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
@@ -434,9 +429,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
         .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
 
+      cellsContainerG.positionRows(zoomScale)
+
       cellsContainerG.selectAll(".vis-cell")
         .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
-        .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
         .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .classed('tooltipped', true)
@@ -458,7 +454,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       return txt
 
-    colourCells = ->
+    colourCells = (transitionDuration=0)->
 
       console.log 'CURRENT PROPERTY COLOUR: ', thisView.currentPropertyColour
       console.log 'COLOURING CELLS'
@@ -472,8 +468,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
       cellsContainerG.selectAll(".vis-cell")
-        .style("fill", fillColour)
         .attr('data-tooltip', getCellTooltip)
+
+      t = cellsContainerG.transition().duration(transitionDuration)
+      t.selectAll(".vis-cell")
+        .style("fill", fillColour)
+
+      $(thisView.el).find('.tooltipped').tooltip('remove')
+      $(thisView.el).find('.tooltipped').tooltip()
 
       thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer)
@@ -515,14 +517,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
       .on('click', setUpRowTooltip)
 
+    rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      t = rowsHeaderG.transition().duration(transitionDuration)
+      t.selectAll('.vis-row')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
+
     rowsHeaderG.scaleSizes = (zoomScale) ->
 
       rowsHeaderG.select('.background-rect')
         .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
-      rowsHeaderG.selectAll('.vis-row')
-        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
+      rowsHeaderG.positionRows(zoomScale)
 
       rowsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
@@ -633,8 +640,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowFooters.append('text')
       .classed('footers-text', true)
       .attr('text-anchor', 'end')
-      .text((d) -> d[thisView.currentRowSortingProperty.propName])
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+
+    rowsFooterG.asignTexts = (transitionDuration=0) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.footers-text')
+        .text((d) -> d[thisView.currentRowSortingProperty.propName])
+
+    rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.vis-row-footer')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")" )
 
     rowsFooterG.scaleSizes = (zoomScale) ->
 
@@ -642,8 +660,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
 
-      rowsFooterG.selectAll('.vis-row-footer')
-        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")" )
+      rowsFooterG.positionRows(zoomScale)
+      rowsFooterG.asignTexts()
 
       rowsFooterG.selectAll('.footers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
@@ -873,6 +891,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if wasDeactivated
         ZOOM_ACTIVATED = false
+
+    # --------------------------------------
+    # colour property selector
+    # --------------------------------------
+
+    $(@el).find(".select-colour-property").on "change", () ->
+
+      if !@value?
+        return
+
+      thisView.currentPropertyColour = thisView.config.properties[@value]
+      colourCells(TRANSITIONS_DURATION)
+
+    $(@el).find(".select-row-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      thisView.currentRowSortingProperty = thisView.config.properties[@value]
+      thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
+
+      rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsFooterG.asignTexts TRANSITIONS_DURATION
+      cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
 
     return
 
