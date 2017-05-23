@@ -290,9 +290,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     COLS_HEADER_HEIGHT = 120
     COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
-    ROWS_HEADER_HEIGHT = RANGE_X_END - SIDE_SIZE
-
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
+    ROWS_HEADER_HEIGHT = RANGE_Y_END - SIDE_SIZE
 
     BASE_X_TRANS_ATT = 'baseXTrans'
     BASE_Y_TRANS_ATT = 'baseYTrans'
@@ -401,7 +400,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
-        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (RANGE_X_END * zoomScale))
 
       cellsContainerG.selectAll('.grid-horizontal-rect')
@@ -452,7 +451,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsHeaderG.scaleSizes = (zoomScale) ->
 
       rowsHeaderG.select('.background-rect')
-        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.vis-row')
@@ -573,7 +572,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsFooterG.scaleSizes = (zoomScale) ->
 
       rowsFooterG.select('.background-rect')
-        .attr('height', (RANGE_Y_END * zoomScale))
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.selectAll('.vis-row-footer')
@@ -595,7 +594,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -694,7 +693,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     corner3G = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
@@ -715,7 +714,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     corner4G = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
