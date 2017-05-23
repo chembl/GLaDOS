@@ -414,7 +414,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(dataList)
       .enter().append("rect")
       .classed('vis-cell', true)
-      .style("fill", 'grey' )
       .attr('stroke-width', GRID_STROKE_WIDTH)
 
     cellsContainerG.scaleSizes = (zoomScale) ->
@@ -442,6 +441,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
     applyZoomAndTranslation(cellsContainerG)
+
+    fillColour = (d) ->
+
+      if not d[thisView.currentPropertyColour.propName]?
+          return glados.Settings.VISUALISATION_GRID_UNDEFINED
+      thisView.getCellColour(d[thisView.currentPropertyColour.propName])
+
+    colourCells = ->
+
+      console.log 'CURRENT PROPERTY COLOUR: ', thisView.currentPropertyColour
+      console.log 'COLOURING CELLS'
+      if not thisView.currentPropertyColour.colourScale?
+        if not thisView.currentPropertyColour.domain?
+          colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
+          glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(thisView.currentPropertyColour,
+            colourValues)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
+
+      thisView.getCellColour = thisView.currentPropertyColour.colourScale
+
+      cellsContainerG.selectAll(".vis-cell")
+        .style("fill", (d) -> fillColour d )
+
+    colourCells()
 
     # --------------------------------------
     # Rows Header Container
