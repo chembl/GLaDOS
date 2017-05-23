@@ -609,9 +609,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', COLS_HEADER_WIDTH * zoomScale)
 
       colsHeaderG.positionCols(zoomScale)
-#      colsHeaderG.selectAll('.vis-column')
-#        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-#        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
       colsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
@@ -816,11 +813,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', 'blue')
       .classed('background-rect', true)
 
+    corner3G.append('rect')
+      .style('fill', 'white')
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', 'black')
+      .classed('col-sort-property-rect', true)
+
     corner3G.scaleSizes = (zoomScale) ->
 
       corner3G.select('.background-rect')
       .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
       .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+
+      corner3G.select('.col-sort-property-rect')
+        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
     applyZoomAndTranslation(corner3G)
 
