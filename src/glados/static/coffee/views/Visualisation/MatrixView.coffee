@@ -439,6 +439,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
         .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .classed('tooltipped', true)
+        .attr('data-position', 'bottom')
+        .attr('data-delay', '50')
 
     applyZoomAndTranslation(cellsContainerG)
 
@@ -447,6 +450,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if not d[thisView.currentPropertyColour.propName]?
           return glados.Settings.VISUALISATION_GRID_UNDEFINED
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])
+
+    getCellTooltip = (d) ->
+
+      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label +
+        ":" + d[thisView.currentPropertyColour.propName]
+
+      return txt
 
     colourCells = ->
 
@@ -462,7 +472,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
       cellsContainerG.selectAll(".vis-cell")
-        .style("fill", (d) -> fillColour d )
+        .style("fill", fillColour)
+        .attr('data-tooltip', getCellTooltip)
+
+      thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+      glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer)
 
     colourCells()
 
