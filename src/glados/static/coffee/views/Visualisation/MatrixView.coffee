@@ -260,6 +260,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
 
     # --------------------------------------
+    # Sort properties
+    # --------------------------------------
+    @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
+    @currentRowSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
+    @currentColSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentPropertyColour = @config.properties[@config.initial_colouring]
+
+    # --------------------------------------
+    # Sort by default value
+    # --------------------------------------
+    @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+    @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+
+    # --------------------------------------
     # variable initialisation
     # --------------------------------------
 
@@ -270,10 +285,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # make sure all intersections are squared
     SIDE_SIZE = 20
-    COLS_HEADER_WIDTH = 100
-    COLS_FOOTER_WIDTH = 50
-    ROWS_HEADER_HEIGHT = 120
-    ROWS_FOOTER_HEIGHT = 50
+    ROWS_HEADER_WIDTH = 100
+    ROWS_FOOTER_WIDTH = 50
+    COLS_HEADER_HEIGHT = 120
+    COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
 
@@ -362,8 +377,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     cellsContainerG = mainGContainer.append('g')
       .attr('data-section-name', 'cellsContainerG')
-      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -384,7 +399,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     rowsHeaderG = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
@@ -396,10 +411,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
-        .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
 
     rowHeaders.append('rect')
-      .attr('y', 0)
       .style('fill', 'white')
       .style('stroke-width', 1)
       .style('stroke', 'black')
@@ -420,14 +433,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       rowsHeaderG.select('.background-rect')
         .attr('height', (RANGE_Y_END * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.vis-row')
         .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
 
       rowsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.headers-text')
         .attr('x', (LABELS_PADDING * zoomScale))
@@ -440,13 +453,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Header Container
     # --------------------------------------
     colsHeaderG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
 
     colsHeaderG.append('rect')
-      .attr('height', ROWS_HEADER_HEIGHT)
+      .attr('height', COLS_HEADER_HEIGHT)
       .attr('width', RANGE_X_END)
       .style('fill', 'orange')
       .classed('background-rect', true)
@@ -482,37 +495,37 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaderG.scaleSizes = (zoomScale) ->
 
       colsHeaderG.select('.background-rect')
-        .attr('height', ROWS_HEADER_HEIGHT * zoomScale)
+        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
         .attr('width', RANGE_X_END * zoomScale)
 
       colsHeaderG.selectAll('.vis-column')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(30 " + (getXCoord.rangeBand() * zoomScale) + " " + (ROWS_HEADER_HEIGHT * zoomScale) + ")" ))
+        ")rotate(30 " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
       colsHeaderG.selectAll('.headers-background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale) )
+        .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
         .attr('width', (getXCoord.rangeBand() * zoomScale))
 
       colsHeaderG.selectAll('.headers-divisory-line')
         .attr('x1', (getXCoord.rangeBand() * zoomScale))
-        .attr('y1', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('y1', (COLS_HEADER_HEIGHT * zoomScale))
         .attr('x2', (getXCoord.rangeBand() * zoomScale))
         .attr('y2', 0)
 
       colsHeaderG.selectAll('.headers-text')
         .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
-        .attr('x', (-ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('x', (-COLS_HEADER_HEIGHT * zoomScale))
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
     applyZoomAndTranslation(colsHeaderG)
 
-     # --------------------------------------
+    # --------------------------------------
     # Rows Footer Container
     # --------------------------------------
     rowsFooterG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
-      .attr(BASE_Y_TRANS_ATT, ROWS_HEADER_HEIGHT)
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -520,11 +533,40 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', 'yellow')
       .classed('background-rect', true)
 
+    rowFooters = rowsFooterG.selectAll('.vis-row-footer')
+      .data(matrix.rows)
+      .enter()
+      .append('g').attr('class', 'vis-row-footer')
+
+    rowFooters.append('rect')
+      .style('fill', 'white')
+      .style('stroke-width', 1)
+      .style('stroke', 'black')
+      .classed('footers-background-rect', true)
+
+    rowFooters.append('text')
+      .classed('footers-text', true)
+      .attr('text-anchor', 'end')
+      .text((d) -> d[thisView.currentRowSortingProperty.propName])
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+
     rowsFooterG.scaleSizes = (zoomScale) ->
 
       rowsFooterG.select('.background-rect')
         .attr('height', (RANGE_Y_END * zoomScale))
-        .attr('width', (COLS_FOOTER_WIDTH * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.selectAll('.vis-row-footer')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")" )
+
+      rowsFooterG.selectAll('.footers-background-rect')
+        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.selectAll('.footers-text')
+        .attr('x', ((ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
+        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
     applyZoomAndTranslation(rowsFooterG)
 
@@ -532,8 +574,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Footer Container
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, COLS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -544,7 +586,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsFooterG.scaleSizes = (zoomScale) ->
 
       colsFooterG.select('.background-rect')
-        .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (RANGE_X_END * zoomScale))
 
     applyZoomAndTranslation(colsFooterG)
@@ -563,8 +605,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner1G.scaleSizes = (zoomScale) ->
       corner1G.select('rect')
-        .attr('height', ROWS_HEADER_HEIGHT * zoomScale)
-        .attr('width', COLS_HEADER_WIDTH * zoomScale)
+        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('width', ROWS_HEADER_WIDTH * zoomScale)
 
     applyZoomAndTranslation(corner1G)
 
@@ -572,7 +614,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Square 2
     # --------------------------------------
     corner2G = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
@@ -582,8 +624,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.scaleSizes = (zoomScale) ->
       corner2G.select('rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (COLS_FOOTER_WIDTH *zoomScale))
+        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH *zoomScale))
 
     applyZoomAndTranslation(corner2G)
 
@@ -592,7 +634,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     corner3G = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
@@ -603,8 +645,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner3G.scaleSizes = (zoomScale) ->
 
       corner3G.select('.background-rect')
-      .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
-      .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+      .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+      .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
     applyZoomAndTranslation(corner3G)
 
@@ -612,8 +654,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Square 4
     # --------------------------------------
     corner4G = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (COLS_HEADER_WIDTH + RANGE_X_END))
-      .attr(BASE_Y_TRANS_ATT, (ROWS_HEADER_HEIGHT + RANGE_Y_END))
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + RANGE_Y_END))
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -624,8 +666,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner4G.scaleSizes = (zoomScale) ->
 
       corner4G.select('.background-rect')
-      .attr('height', (ROWS_FOOTER_HEIGHT * zoomScale))
-      .attr('width', (COLS_FOOTER_WIDTH * zoomScale))
+      .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+      .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
 
     applyZoomAndTranslation(corner4G)
 
@@ -707,22 +749,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         ZOOM_ACTIVATED = false
 
     return
-    # --------------------------------------
-    # Sort properties
-    # --------------------------------------
-    @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
-    @currentRowSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
-    @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
-    @currentColSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
-    @currentPropertyColour = @config.properties[@config.initial_colouring]
-
-    # --------------------------------------
-    # Sort by default value
-    # --------------------------------------
-    @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
-    @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
-
-
 
     # --------------------------------------
     # Add background MATRIX g
