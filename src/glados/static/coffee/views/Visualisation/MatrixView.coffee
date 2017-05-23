@@ -397,6 +397,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("stroke", 'black')
         .attr('fill', 'white')
 
+    cellsContainerG.selectAll('grid-vertical-line')
+      .data(matrix.columns)
+      .enter()
+      .append("line")
+        .classed('grid-vertical-line', true)
+        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .attr("stroke", 'black')
 
     cellsContainerG.scaleSizes = (zoomScale) ->
 
@@ -409,8 +416,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
         .attr("width", COLS_HEADER_WIDTH * zoomScale)
         .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
-        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr("stroke", 'black')
+
+      cellsContainerG.selectAll('.grid-vertical-line')
+        .attr("x1", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("y1", 0)
+        .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
 
     applyZoomAndTranslation(cellsContainerG)
 
