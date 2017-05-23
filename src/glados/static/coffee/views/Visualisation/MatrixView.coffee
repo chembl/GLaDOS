@@ -311,7 +311,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .rangeBands([0, RANGE_X_END])
 
     LABELS_PADDING = 8
-    LABELS_ROTATION = 45
+    COLS_LABELS_ROTATION = 30
     BASE_LABELS_SIZE = 10
 
     if GlobalVariables['IS_EMBEDED']
@@ -500,7 +500,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsHeaderG.selectAll('.vis-column')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(30 " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
       colsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
@@ -583,11 +583,51 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', 'orange')
       .classed('background-rect', true)
 
+    colsFooters = colsFooterG.selectAll(".vis-column-footer")
+      .data(matrix.columns)
+      .enter().append("g")
+      .classed('vis-column-footer', true)
+
+    colsFooters.append('rect')
+      .style('fill', 'none')
+      .style('fill-opacity', 0.5)
+      .classed('footers-background-rect', true)
+
+    colsFooters.append('line')
+      .style('stroke-width', 1)
+      .style('stroke', 'black')
+      .classed('footers-divisory-line', true)
+
+    colsFooters.append('text')
+      .classed('footers-text', true)
+      .text((d) -> d[thisView.currentColSortingProperty.propName] )
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('transform', 'rotate(90)')
+
     colsFooterG.scaleSizes = (zoomScale) ->
 
       colsFooterG.select('.background-rect')
         .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (RANGE_X_END * zoomScale))
+
+      colsFooterG.selectAll('.vis-column-footer')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (getXCoord.rangeBand() * zoomScale) + " 0)" ))
+
+      colsFooterG.selectAll('.footers-background-rect')
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (getXCoord.rangeBand() * zoomScale))
+
+      colsFooterG.selectAll('.footers-divisory-line')
+        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('y1',0)
+        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('y2', (COLS_FOOTER_HEIGHT * zoomScale) )
+
+      colsFooterG.selectAll('.footers-text')
+        .attr("y", (-getXCoord.rangeBand() * (1/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+
 
     applyZoomAndTranslation(colsFooterG)
 
