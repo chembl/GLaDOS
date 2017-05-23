@@ -262,9 +262,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Sort properties
     # --------------------------------------
     @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
-    @currentRowSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentRowSortingPropertyReverse = @config.initial_row_sorting_reverse
     @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
-    @currentColSortingPropertyReverse = @config.properties[@config.initial_row_sorting_reverse]
+    @currentColSortingPropertyReverse = @config.initial_row_sorting_reverse
     @currentPropertyColour = @config.properties[@config.initial_colouring]
 
     # --------------------------------------
@@ -904,18 +904,47 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.currentPropertyColour = thisView.config.properties[@value]
       colourCells(TRANSITIONS_DURATION)
 
+    # --------------------------------------
+    # row sorting
+    # --------------------------------------
+    paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
+    triggerRowSorting = ->
+
+      thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
+      rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsFooterG.asignTexts TRANSITIONS_DURATION
+      cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+
+    handleSortDirClick
     $(@el).find(".select-row-sort").on "change", () ->
 
       if !@value?
         return
 
       thisView.currentRowSortingProperty = thisView.config.properties[@value]
-      thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
+      triggerRowSorting()
 
-      rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
-      rowsFooterG.asignTexts TRANSITIONS_DURATION
-      cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
-      rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+    handleSortDirClick = ->
+
+      targetDimension = $(@).attr('data-target-property')
+      if targetDimension == 'row'
+
+        thisView.currentRowSortingPropertyReverse = !thisView.currentRowSortingPropertyReverse
+        triggerRowSorting()
+        paintSortDirectionProxy('.btn-row-sort-direction-container', thisView.currentRowSortingPropertyReverse, 'row')
+
+
+      else if targetDimension == 'col'
+
+        thisView.currentColSortingPropertyReverse = !thisView.currentColSortingPropertyReverse
+        sortMatrixColsBy thisView.currentColSortingProperty, thisView.currentColSortingPropertyReverse
+        paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
+        triggerColSortTransition()
+
+      $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
+
+    $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
 
     return
 
