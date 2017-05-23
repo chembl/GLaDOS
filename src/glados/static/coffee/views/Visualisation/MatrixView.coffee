@@ -315,6 +315,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     LABELS_PADDING = 8
     COLS_LABELS_ROTATION = 30
     BASE_LABELS_SIZE = 10
+    GRID_STROKE_WIDTH = 1
+    CELLS_PADDING = GRID_STROKE_WIDTH
 
     if GlobalVariables['IS_EMBEDED']
 
@@ -404,6 +406,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('grid-vertical-line', true)
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .attr("stroke", 'black')
+        .attr('stroke-width', GRID_STROKE_WIDTH)
 
     dataList = @model.getDataList()
 
@@ -412,6 +415,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter().append("rect")
       .classed('vis-cell', true)
       .style("fill", 'grey' )
+      .attr('stroke-width', GRID_STROKE_WIDTH)
 
     cellsContainerG.scaleSizes = (zoomScale) ->
 
@@ -432,10 +436,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.selectAll(".vis-cell")
-        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition) * zoomScale)
-        .attr("y", (d) -> getYCoord(matrix.rows_index[d.row_id].currentPosition) * zoomScale)
-        .attr("width", getXCoord.rangeBand() * zoomScale)
-        .attr("height", getYCoord.rangeBand() * zoomScale)
+        .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+        .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+        .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
     applyZoomAndTranslation(cellsContainerG)
 
@@ -459,7 +463,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowHeaders.append('rect')
       .style('fill', 'white')
-      .style('stroke-width', 1)
+      .style('stroke-width', GRID_STROKE_WIDTH)
       .style('stroke', 'black')
       .classed('headers-background-rect', true)
 
@@ -520,7 +524,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('headers-background-rect', true)
 
     colsHeaders.append('line')
-      .style('stroke-width', 1)
+      .style('stroke-width', GRID_STROKE_WIDTH)
       .style('stroke', 'black')
       .classed('headers-divisory-line', true)
 
@@ -585,7 +589,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowFooters.append('rect')
       .style('fill', 'white')
-      .style('stroke-width', 1)
+      .style('stroke-width', GRID_STROKE_WIDTH)
       .style('stroke', 'black')
       .classed('footers-background-rect', true)
 
@@ -639,7 +643,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-background-rect', true)
 
     colsFooters.append('line')
-      .style('stroke-width', 1)
+      .style('stroke-width', GRID_STROKE_WIDTH)
       .style('stroke', 'black')
       .classed('footers-divisory-line', true)
 
