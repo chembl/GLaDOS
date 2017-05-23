@@ -155,6 +155,16 @@ CompoundTargetMatrix = Backbone.Model.extend
       matrix.columns_index[col.label].currentPosition = index
       matrix.columns.push(matrix.columns_index[col.label])
 
+  #returns a list with all the links
+  getDataList: ->
+
+    dataList = []
+    for rowID, row of @get('matrix').links
+      for colID, cell of row
+        dataList.push cell
+
+    return dataList
+
   getRequestData: ->
 
     # just limit for now the ammount of data received
