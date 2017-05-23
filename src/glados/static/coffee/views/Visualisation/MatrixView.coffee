@@ -292,16 +292,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END - SIDE_SIZE
     COLS_HEADER_WIDTH = RANGE_X_END - SIDE_SIZE
-
     BASE_X_TRANS_ATT = 'baseXTrans'
     BASE_Y_TRANS_ATT = 'baseYTrans'
     MOVE_X_ATT = 'moveX'
     MOVE_Y_ATT = 'moveY'
     YES = 'yes'
     NO = 'no'
-
     CONTAINER_Y_PADDING = 40
     CONTAINER_X_PADDING = 0
+    ZOOM_ACTIVATED = false
 
     getYCoord = d3.scale.ordinal()
       .domain([0..NUM_ROWS])
@@ -851,6 +850,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     handleZoom = ->
 
+      if not ZOOM_ACTIVATED
+        return
+
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
       zoomScale = zoom.scale()
@@ -923,6 +925,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if wasDeactivated
         ZOOM_ACTIVATED = false
 
+    # --------------------------------------
+    # Activate zoom and drag
+    # --------------------------------------
+    $(@el).find('.BCK-toggle-grab').click ->
+
+      $targetBtnIcon = $(@)
+      if ZOOM_ACTIVATED
+        ZOOM_ACTIVATED = false
+        $targetBtnIcon.removeClass 'fa-hand-rock-o'
+        $targetBtnIcon.addClass 'fa-hand-paper-o'
+      else
+        ZOOM_ACTIVATED = true
+        $targetBtnIcon.removeClass 'fa-hand-paper-o'
+        $targetBtnIcon.addClass 'fa-hand-rock-o'
     # --------------------------------------
     # colour property selector
     # --------------------------------------
