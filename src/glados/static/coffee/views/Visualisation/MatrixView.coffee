@@ -411,6 +411,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         t.selectAll(".vis-cell")
           .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
 
+    cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
+
+      if transitionDuration == 0
+        cellsContainerG.selectAll(".vis-cell")
+        .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+      else
+        t = cellsContainerG.transition().duration(transitionDuration)
+        t.selectAll(".vis-cell")
+          .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
@@ -430,9 +440,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
+      cellsContainerG.positionCols(zoomScale)
 
       cellsContainerG.selectAll(".vis-cell")
-        .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
         .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .classed('tooltipped', true)
@@ -585,15 +595,24 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
+    colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
+
+      t = colsHeaderG.transition().duration(transitionDuration)
+      t.selectAll('.vis-column')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) +
+        " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+
     colsHeaderG.scaleSizes = (zoomScale) ->
 
       colsHeaderG.select('.background-rect')
         .attr('height', COLS_HEADER_HEIGHT * zoomScale)
         .attr('width', COLS_HEADER_WIDTH * zoomScale)
 
-      colsHeaderG.selectAll('.vis-column')
-        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+      colsHeaderG.positionCols(zoomScale)
+#      colsHeaderG.selectAll('.vis-column')
+#        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+#        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) + " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
       colsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
@@ -642,11 +661,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
 
-    rowsFooterG.asignTexts = (transitionDuration=0) ->
+    rowsFooterG.assignTexts = (transitionDuration=0) ->
 
       t = rowsFooterG.transition().duration(transitionDuration)
       t.selectAll('.footers-text')
-        .text((d) -> d[thisView.currentRowSortingProperty.propName])
+        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName))
 
     rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -661,7 +680,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.positionRows(zoomScale)
-      rowsFooterG.asignTexts()
+      rowsFooterG.assignTexts()
 
       rowsFooterG.selectAll('.footers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
@@ -704,9 +723,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colsFooters.append('text')
       .classed('footers-text', true)
-      .text((d) -> d[thisView.currentColSortingProperty.propName] )
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
+
+
+    colsFooterG.positionCols = (zoomScale, transitionDuration=0) ->
+
+      t = colsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.vis-column-footer')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (getXCoord.rangeBand() * zoomScale) + " 0)" ))
+
+    colsFooterG.assignTexts = (transitionDuration=0) ->
+
+      t = colsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.footers-text')
+        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentColSortingProperty.propName))
 
     colsFooterG.scaleSizes = (zoomScale) ->
 
@@ -714,9 +746,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (COLS_HEADER_WIDTH * zoomScale))
 
-      colsFooterG.selectAll('.vis-column-footer')
-        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (getXCoord.rangeBand() * zoomScale) + " 0)" ))
+      colsFooterG.positionCols(zoomScale)
 
       colsFooterG.selectAll('.footers-background-rect')
         .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
@@ -734,6 +764,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     applyZoomAndTranslation(colsFooterG)
+    colsFooterG.assignTexts()
 
     # --------------------------------------
     # Square 1
@@ -912,11 +943,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
       rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
-      rowsFooterG.asignTexts TRANSITIONS_DURATION
+      rowsFooterG.assignTexts TRANSITIONS_DURATION
       cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
       rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
 
-    handleSortDirClick
+    triggerColSorting = ->
+
+      thisView.model.sortMatrixColsBy thisView.currentColSortingProperty.propName, thisView.currentColSortingPropertyReverse
+      colsFooterG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      colsFooterG.assignTexts TRANSITIONS_DURATION
+      cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
+
     $(@el).find(".select-row-sort").on "change", () ->
 
       if !@value?
@@ -924,6 +962,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       thisView.currentRowSortingProperty = thisView.config.properties[@value]
       triggerRowSorting()
+
+    $(@el).find(".select-col-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      thisView.currentColSortingProperty = thisView.config.properties[@value]
+      triggerColSorting()
 
     handleSortDirClick = ->
 
@@ -934,13 +980,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         triggerRowSorting()
         paintSortDirectionProxy('.btn-row-sort-direction-container', thisView.currentRowSortingPropertyReverse, 'row')
 
-
       else if targetDimension == 'col'
 
+
         thisView.currentColSortingPropertyReverse = !thisView.currentColSortingPropertyReverse
-        sortMatrixColsBy thisView.currentColSortingProperty, thisView.currentColSortingPropertyReverse
+        triggerColSorting()
         paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
-        triggerColSortTransition()
 
       $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
 
@@ -948,6 +993,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     return
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     # --------------------------------------
     # Add background MATRIX g
     # --------------------------------------
