@@ -405,30 +405,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .attr("stroke", 'black')
 
-##    dataList = (value for key, value of links[i])
-#
-#    cells = cellsContainerG.selectAll(".vis-cell")
-##      .data(dataList)
-##      .enter().append("rect")
-#
-#
-#
-#      # @ is the current g element
-#      cells = d3.select(@).selectAll(".vis-cell")
-#        .data(dataList)
-#        .enter().append("rect")
-#        .attr("class", "vis-cell")
-#        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition))
-#        .attr("width", getXCoord.rangeBand())
-#        .attr("height", getYCoord.rangeBand())
-#        .style("fill", fillColour )
-#        .on("mouseover", handleCellMouseover)
-#        .on("mouseout", handleCellMouseout)
-#
-#      cells.classed('tooltipped', true)
-#        .attr('data-position', 'bottom')
-#        .attr('data-delay', '50')
-#        .attr('data-tooltip', getCellTooltip )
+    dataList = @model.getDataList()
+
+    cells = cellsContainerG.selectAll(".vis-cell")
+      .data(dataList)
+      .enter().append("rect")
+      .classed('vis-cell', true)
+      .style("fill", 'grey' )
 
     cellsContainerG.scaleSizes = (zoomScale) ->
 
@@ -447,6 +430,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y1", 0)
         .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
         .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
+
+      cellsContainerG.selectAll(".vis-cell")
+        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition) * zoomScale)
+        .attr("y", (d) -> getYCoord(matrix.rows_index[d.row_id].currentPosition) * zoomScale)
+        .attr("width", getXCoord.rangeBand() * zoomScale)
+        .attr("height", getYCoord.rangeBand() * zoomScale)
 
     applyZoomAndTranslation(cellsContainerG)
 
