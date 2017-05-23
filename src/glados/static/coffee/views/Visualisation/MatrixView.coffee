@@ -292,6 +292,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END - SIDE_SIZE
+    COLS_HEADER_WIDTH = RANGE_X_END - SIDE_SIZE
 
     BASE_X_TRANS_ATT = 'baseXTrans'
     BASE_Y_TRANS_ATT = 'baseYTrans'
@@ -401,12 +402,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       cellsContainerG.select('.background-rect')
         .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (RANGE_X_END * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
 
       cellsContainerG.selectAll('.grid-horizontal-rect')
         .attr("x", 0)
         .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
-        .attr("width", RANGE_X_END * zoomScale)
+        .attr("width", COLS_HEADER_WIDTH * zoomScale)
         .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .attr("stroke", 'black')
@@ -515,7 +516,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsHeaderG.select('.background-rect')
         .attr('height', COLS_HEADER_HEIGHT * zoomScale)
-        .attr('width', RANGE_X_END * zoomScale)
+        .attr('width', COLS_HEADER_WIDTH * zoomScale)
 
       colsHeaderG.selectAll('.vis-column')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
@@ -543,7 +544,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Rows Footer Container
     # --------------------------------------
     rowsFooterG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH))
       .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
@@ -627,7 +628,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsFooterG.select('.background-rect')
         .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (RANGE_X_END * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
 
       colsFooterG.selectAll('.vis-column-footer')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
@@ -673,7 +674,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Square 2
     # --------------------------------------
     corner2G = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH))
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
@@ -713,7 +714,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Square 4
     # --------------------------------------
     corner4G = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + RANGE_X_END))
+      .attr(BASE_X_TRANS_ATT, (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH))
       .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
