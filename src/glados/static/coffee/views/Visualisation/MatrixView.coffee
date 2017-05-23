@@ -290,6 +290,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     COLS_HEADER_HEIGHT = 120
     COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
+    ROWS_HEADER_HEIGHT = RANGE_X_END - SIDE_SIZE
+
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
 
     BASE_X_TRANS_ATT = 'baseXTrans'
@@ -383,14 +385,32 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_Y_ATT, YES)
 
     cellsContainerG.append('rect')
-      .style('fill', 'red')
+      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
+
+    cellsContainerG.selectAll('grid-horizontal-rect')
+      .data(matrix.rows)
+      .enter()
+      .append("rect")
+        .classed('grid-horizontal-rect', true)
+        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .attr("stroke", 'black')
+        .attr('fill', 'white')
+
 
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
         .attr('height', (RANGE_Y_END * zoomScale))
         .attr('width', (RANGE_X_END * zoomScale))
+
+      cellsContainerG.selectAll('.grid-horizontal-rect')
+        .attr("x", 0)
+        .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
+        .attr("width", RANGE_X_END * zoomScale)
+        .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
+        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .attr("stroke", 'black')
 
     applyZoomAndTranslation(cellsContainerG)
 
