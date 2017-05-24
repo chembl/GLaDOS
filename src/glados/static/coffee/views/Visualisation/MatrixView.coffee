@@ -295,8 +295,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
     MOVE_Y_ATT = 'glados-moveY'
-    FIXED_TO_LEFT = 'glados-fixedToLeft'
+    FIXED_TO_LEFT_ATT = 'glados-fixedToLeft'
+    FIXED_TO_BOTTOM_ATT = 'glados-fixedToBottom'
     BASE_WIDTH_ATT = 'glados-baseWidth'
+    BASE_HEIGHT_ATT = 'glados-baseHeight'
     YES = 'yes'
     NO = 'no'
     CONTAINER_Y_PADDING = 0
@@ -329,7 +331,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainContainer = d3.select(@$vis_elem.get(0))
 
     VISUALISATION_WIDTH = width
-    totalVisualisationHeight = 500
+    VISUALISATION_HEIGHT = 500
+
+    MIN_COLUMNS_SEEN = 10
     #the initial zoom scale is a scale that makes all the matrix to be seen at once
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
     INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
@@ -337,7 +341,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_ZOOM = INITIAL_ZOOM
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
     # initial zoom
-    MIN_COLUMNS_SEEN = 10
     MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
     MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
 
@@ -345,7 +348,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('svg')
       .attr('class', 'mainSVGContainer')
       .attr('width', VISUALISATION_WIDTH)
-      .attr('height', totalVisualisationHeight)
+      .attr('height', VISUALISATION_HEIGHT)
       .attr('style', 'background-color: white;')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
@@ -360,7 +363,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       moveY = elem.attr(MOVE_Y_ATT)
       translateX = 0 if moveX == NO
       translateY = 0 if moveY == NO
-      fixedToLeft = elem.attr(FIXED_TO_LEFT) == YES
+      fixedToLeft = elem.attr(FIXED_TO_LEFT_ATT) == YES
+      fixedToBottom = elem.attr(FIXED_TO_BOTTOM_ATT) == YES
 
       if fixedToLeft
         baseWidth = elem.attr(BASE_WIDTH_ATT)
@@ -368,7 +372,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       else
         newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
 
-      newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
+      if fixedToBottom
+        baseHeight = elem.attr(BASE_HEIGHT_ATT)
+        newTransY = VISUALISATION_HEIGHT - (baseHeight * zoomScale)
+      else
+        newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
 
 
       elem.attr('transform', 'translate(' + newTransX + ',' + newTransY + ')')
@@ -654,7 +662,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
-      .attr(FIXED_TO_LEFT, YES)
+      .attr(FIXED_TO_LEFT_ATT, YES)
       .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
 
     rowsFooterG.append('rect')
@@ -714,9 +722,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, YES)
-      .attr(MOVE_Y_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
 
     colsFooterG.append('rect')
       .style('fill', 'orange')
@@ -808,7 +817,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
-      .attr(FIXED_TO_LEFT, YES)
+      .attr(FIXED_TO_LEFT_ATT, YES)
       .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
 
     corner2G.append('rect')
@@ -826,9 +835,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     corner3G = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
 
     corner3G.append('rect')
       .style('fill', 'blue')
@@ -856,11 +866,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Square 4
     # --------------------------------------
     corner4G = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, (COLS_HEADER_HEIGHT + ROWS_HEADER_HEIGHT))
       .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, YES)
-      .attr(FIXED_TO_LEFT, YES)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
       .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, (COLS_FOOTER_HEIGHT))
 
     corner4G.append('rect')
       .style('fill', 'blue')
