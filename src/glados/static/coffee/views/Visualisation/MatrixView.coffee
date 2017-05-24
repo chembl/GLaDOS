@@ -289,8 +289,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
-    ROWS_HEADER_HEIGHT = RANGE_Y_END - SIDE_SIZE
-    COLS_HEADER_WIDTH = RANGE_X_END - SIDE_SIZE
+    ROWS_HEADER_HEIGHT = RANGE_Y_END
+    COLS_HEADER_WIDTH = RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
@@ -306,11 +306,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     ZOOM_ACTIVATED = false
 
     getYCoord = d3.scale.ordinal()
-      .domain([0..NUM_ROWS])
+      .domain([0..(NUM_ROWS-1)])
       .rangeBands([0, RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
-      .domain([0..NUM_COLUMNS])
+      .domain([0..(NUM_COLUMNS-1)])
       .rangeBands([0, RANGE_X_END])
 
     LABELS_PADDING = 8
@@ -334,16 +334,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     #this is a initial valur, it will be changed after organising everything
     VISUALISATION_HEIGHT = 500
 
-    MIN_COLUMNS_SEEN = 10
-    #the initial zoom scale is a scale that makes all the matrix to be seen at once
-    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
-    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
-    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
-    MIN_ZOOM = INITIAL_ZOOM
+    MIN_COLUMNS_SEEN = 20
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
     # initial zoom
     MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
     MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
+    #the initial zoom scale is a scale that makes all the matrix to be seen at once
+    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
+    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
+    INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
+    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
+    MIN_ZOOM = INITIAL_ZOOM
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -493,8 +494,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colourCells = (transitionDuration=0)->
 
-      console.log 'CURRENT PROPERTY COLOUR: ', thisView.currentPropertyColour
-      console.log 'COLOURING CELLS'
       if not thisView.currentPropertyColour.colourScale?
         if not thisView.currentPropertyColour.domain?
           colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
