@@ -39,7 +39,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   renderWhenError: ->
 
     @clearVisualisation()
-#    $(@el).find('select').material_select('destroy');
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html ''
@@ -331,6 +330,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     VISUALISATION_WIDTH = width
     totalVisualisationHeight = 500
+    #the initial zoom scale is a scale that makes all the matrix to be seen at once
+    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
+    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
+    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
+    MIN_ZOOM = INITIAL_ZOOM
+    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
+    # initial zoom
+    MIN_COLUMNS_SEEN = 10
+    MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
+    MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -868,9 +877,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Zoom
     # --------------------------------------
-    handleZoom = ->
+    handleZoom = (ingoreActivation=false) ->
 
-      if not ZOOM_ACTIVATED
+      if not ZOOM_ACTIVATED and not ingoreActivation
         return
 
       translateX = zoom.translate()[0]
@@ -892,33 +901,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
       applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
 
-    MIN_ZOOM_SCALE = 0.2
-    MAX_ZOOM_SCALE = 2
     ZOOM_STEP = 0.1
     zoom = d3.behavior.zoom()
-      .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
+      .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
 
     mainGContainer.call zoom
-
     # --------------------------------------
     # Zoom Events
     # --------------------------------------
     resetZoom = ->
-      zoom.scale(1)
+
+      console.log 'reseting zoom'
+      console.log 'INITIAL_ZOOM:', INITIAL_ZOOM
+      zoom.scale(INITIAL_ZOOM)
       zoom.translate([0, 0])
-      handleZoom()
+      handleZoom(ingoreActivation=true)
 
-    $(@el).find(".BCK-reset-zoom-btn").click ->
+    resetZoom()
 
-      #this buttons will always work
-      wasDeactivated = not ZOOM_ACTIVATED
-      ZOOM_ACTIVATED = true
+    $(@el).find(".BCK-reset-zoom-btn").click resetZoom
 
-      resetZoom()
-
-      if wasDeactivated
-        ZOOM_ACTIVATED = false
 
     $(@el).find(".BCK-zoom-in-btn").click ->
 
