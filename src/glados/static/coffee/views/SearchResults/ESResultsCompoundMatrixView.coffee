@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
+      @MAX_COMPOUNDS_FOR_MATRIX = 30
       @ctm = new CompoundTargetMatrix
       @ctmView = new MatrixView
           model: @ctm
@@ -19,7 +20,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @ctmView.clearVisualisation()
 
       $progressElement = $($(@el).find('.load-messages-container'))
-      deferreds = @collection.getAllResults($progressElement)
+      deferreds = @collection.getAllResults($progressElement, askingForOnlySelected=true)
 
       thisView = @
       $.when.apply($, deferreds).done( () ->
@@ -27,11 +28,16 @@ glados.useNameSpace 'glados.views.SearchResults',
         # here the data has not been actually received, if this causes more trouble it needs to be investigated.
         if not thisView.collection?
           return
-        if not thisView.collection.allResults[0]?
+        if thisView.collection.selectedResults.length > thisView.MAX_COMPOUNDS_FOR_MATRIX
+          thisView.ctmView.renderWhenError()
+          if $progressElement?
+            $progressElement.html Handlebars.compile( $('#Handlebars-Common-CollectionErrorMsg').html() )
+              msg: 'PLease select up to ' + thisView.MAX_COMPOUNDS_FOR_MATRIX + ' compounds first'
           return
 
         #with all items loaded now I can generate the matrix
-        thisView.ctm.set('molecule_chembl_ids', (item.molecule_chembl_id for item in thisView.collection.allResults), {silent:true} )
+        moleculeIDs = (item.molecule_chembl_id for item in thisView.collection.selectedResults)
+        thisView.ctm.set('molecule_chembl_ids', moleculeIDs, {silent:true} )
         thisView.ctm.fetch()
 
         setTimeout( (()-> $progressElement.html ''), 200)
@@ -48,13 +54,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     wakeUpView: ->
 
-      if @collection.DOWNLOADED_ITEMS_ARE_VALID
-        @ctmView.render()
-      else
-        @fetchInfoForMatrix()
+      # I should check later if selection has changed or not.
+      @fetchInfoForMatrix()
 
 
     sleepView: ->
       
       @ctmView.destroyAllTooltips()
+
 

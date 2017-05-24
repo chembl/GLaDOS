@@ -414,6 +414,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # without requesting again to the server.
 # you can use a progress element to show the progress if you want.
     getAllResults: ($progressElement, askingForOnlySelected = false) ->
+
       if $progressElement?
         $progressElement.empty()
 
