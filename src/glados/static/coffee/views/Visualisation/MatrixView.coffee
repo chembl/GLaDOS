@@ -331,6 +331,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainContainer = d3.select(@$vis_elem.get(0))
 
     VISUALISATION_WIDTH = width
+    #this is a initial valur, it will be changed after organising everything
     VISUALISATION_HEIGHT = 500
 
     MIN_COLUMNS_SEEN = 10
@@ -930,6 +931,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       handleZoom(ingoreActivation=true)
 
     resetZoom()
+
+    adjustVisHeight = ->
+
+      translateX = zoom.translate()[0]
+      translateY = zoom.translate()[1]
+      zoomScale = zoom.scale()
+
+      VISUALISATION_HEIGHT = $(window).height() * 0.6
+      mainSVGContainer
+        .attr('height', VISUALISATION_HEIGHT)
+
+      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
+
+    adjustVisHeight()
 
     $(@el).find(".BCK-reset-zoom-btn").click resetZoom
 
