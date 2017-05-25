@@ -359,9 +359,8 @@ class CompoundReportCardTest(ReportCardTester):
     self.assertEqual(
       'GNF-Pf-3680 MB 800 [AS ISETHIONATE] MB-800 PENTAMIDINE PENTAMIDINE ISETIONATE',
       synonyms_td.text)
-
     self.assertEqual(
-      '',
+      'NEBUPENT [AS ISETHIONATE] PENTACARINAT [AS ISETHIONATE] PENTAM 300 [AS ISETHIONATE]',
       tradenames_td.text)
 
     # Normal download buttons
