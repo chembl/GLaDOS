@@ -98,6 +98,14 @@ class TargetReportCardApp
 
     appDrugsClinCandsList.fetch()
 
+  @initBioactivities = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    v = new TargetAssociatedBioactivitiesView
+      el: $('#TAssociatedBioactivitiesCard')
+
+    v.render()
+
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
     target = new Target({target_chembl_id: chemblID})
