@@ -86,3 +86,16 @@ describe "Properties Factory for visualisation", ->
           expect(domainGot[i]).toBe(domainMustBe[i])
         for i in [0..rangeMustBe.length - 1]
           expect(rangeGot[i]).toBe(rangeMustBe[i])
+
+      describe 'property without esIndex', ->
+
+        prop = undefined
+        beforeEach ->
+          prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_AVG')
+
+        it 'generates the basic configuration', ->
+
+          expect(prop.label).toBe("PChEMBL Value Avg")
+          expect(prop.propName).toBe("pchembl_value_avg")
+          expect(prop.type).toBe(Number)

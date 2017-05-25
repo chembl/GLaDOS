@@ -364,7 +364,7 @@
   <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
     <option value="" disabled {{#unless this.one_selected}} selected {{/unless}}>Choose a field</option>
     {{#each columns}}
-      <option value="{{this.comparator}}" {{#if this.selected}} selected {{/if}}>{{this.comparator}}</option>
+      <option value="{{this.comparator}}" {{#if this.selected}} selected {{/if}}>{{this.label}}</option>
     {{/each}}
   </select>
   <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>

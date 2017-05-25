@@ -150,8 +150,8 @@ describe "Paginated Collection", ->
 
       expect(page_size).toBe(20)
       expect(current_page).toBe(1)
-      expect(total_pages).toBe(84335)
-      expect(total_records).toBe(1686695)
+      expect(total_pages).toBe(86773)
+      expect(total_records).toBe(1735442)
       expect(records_in_page).toBe(20)
       expect(drugList.getMeta('all_items_selected')).toBe(false)
       expect(Object.keys(drugList.getMeta('selection_exceptions')).length).toBe(0)
