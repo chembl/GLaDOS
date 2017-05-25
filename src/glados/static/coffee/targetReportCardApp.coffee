@@ -37,6 +37,11 @@ class TargetReportCardApp
       collection: appDrugsClinCandsList
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
 
+    v = new TargetAssociatedBioactivitiesView
+      el: $('#TAssociatedBioactivitiesCard')
+
+    v.render()
+
     target.fetch()
     appDrugsClinCandsList.fetch()
     targetRelations.fetch({reset: true})
