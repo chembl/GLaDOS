@@ -1,5 +1,10 @@
 describe "Utils", ->
 
+  it 'converts radians to degrees', ->
+
+    expect(glados.Utils.getDegreesFromRadians(Math.PI)).toBe(180)
+    expect(glados.Utils.getDegreesFromRadians(Math.PI/2)).toBe(90)
+
   describe "Nested values", ->
 
     describe "When all data is available", ->

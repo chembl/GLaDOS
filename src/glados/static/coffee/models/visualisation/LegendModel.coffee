@@ -4,17 +4,21 @@ glados.useNameSpace 'glados.models.visualisation',
 
     initialize: ->
 
-      @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
+      if @get('collection')?
+        @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
+
+      @set('selection-enabled', @get('collection')?)
+
       @set('domain', @get('property').domain)
       @set('colour-range', @get('property').coloursRange)
 
       if @isDiscrete()
         @set('ticks', @get('property').domain)
-        @set('values-selection', {})
+        @set('values-selection', {}) unless not @get('selection-enabled')
         @fillAmountPerValue()
       else
        # only used  for undefined value
-        @set('values-selection', {})
+        @set('values-selection', {}) unless not @get('selection-enabled')
         @setTicks()
 
     isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
@@ -46,6 +50,8 @@ glados.useNameSpace 'glados.models.visualisation',
       @trigger(glados.Events.Legend.VALUE_UNSELECTED, value)
 
     toggleValueSelection: (value) ->
+
+      return unless @get('selection-enabled')
 
       if @isValueSelected(value)
         @unselectByPropertyValue(value)

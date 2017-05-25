@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.models.visualisation',
       Properties:
         CHEMBL_ID:
           propName:'molecule_chembl_id'
-          type: 'string'
           label: 'CHEMBL_ID'
         ALogP:
           propName: 'molecule_properties.alogp'
@@ -24,16 +23,37 @@ glados.useNameSpace 'glados.models.visualisation',
           ticksNumber: 5
         PSA:
           propName:'molecule_properties.psa'
-          type: 'number'
           label: 'Polar Surface Area'
         HBA:
           propName:'molecule_properties.hba'
-          type: 'number'
           label: 'Hydrogen Bond Acceptors'
         HBD:
           propName:'molecule_properties.hbd'
-          type: 'number'
           label: 'Hydrogen Bond Donnors'
+    CompoundTargetMatrix:
+      Properties:
+        PCHEMBL_VALUE_AVG:
+          propName: 'pchembl_value_avg'
+          label: 'PChEMBL Value Avg'
+          type: Number
+          coloursRange: [glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX]
+          colourScaleType: glados.Visualisation.CONTINUOUS
+          ticksNumber: 5
+        PCHEMBL_VALUE_MAX:
+          propName: 'pchembl_value_max'
+          label: 'PChEMBL Value Max'
+          type: Number
+        ACTIVITY_COUNT:
+          propName: 'activity_count'
+          label: 'Activity Count'
+          type: Number
+          coloursRange: [glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX]
+          colourScaleType: glados.Visualisation.CONTINUOUS
+          ticksNumber: 5
+        HIT_COUNT:
+          propName: 'hit_count'
+          label: 'Hit Count'
+          type: Number
 
     # Generic functions
     generateColourScale: (prop) ->
@@ -69,7 +89,8 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
 
   esIndex = glados.models.visualisation.PropertiesFactory[entityName].esIndex
   customConfig = glados.models.visualisation.PropertiesFactory[entityName].Properties[propertyID]
-  baseConfig = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[esIndex][customConfig.propName]
+  baseConfig = if not esIndex? \
+    then {} else glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[esIndex][customConfig.propName]
 
   prop = $.extend({}, baseConfig, customConfig)
 
