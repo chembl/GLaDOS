@@ -747,7 +747,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
 
     colsFooterG.append('rect')
-      .style('fill', 'orange')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
     colsFooters = colsFooterG.selectAll(".vis-column-footer")
@@ -757,12 +757,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colsFooters.append('rect')
       .style('fill', 'none')
-      .style('fill-opacity', 0.5)
       .classed('footers-background-rect', true)
 
     colsFooters.append('line')
       .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', 'black')
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('footers-divisory-line', true)
 
     colsFooters.append('text')
