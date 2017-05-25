@@ -7,4 +7,18 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'INTIALISE PIE!'
     console.log '@$vis_elem: ', @$vis_elem
   render: ->
-    console.log 'RENDER PIE!'
+
+    data1 =
+      values: [19, 26, 55]
+      labels: ['Residential', 'Non-Residential', 'Utility']
+      type: 'pie'
+
+    data = [data1]
+
+    width = @$vis_elem.width()
+    layout =
+      height: width * (2/3)
+      width: width
+
+    pieDiv = @$vis_elem.get(0)
+    Plotly.newPlot pieDiv, data, layout
