@@ -89,8 +89,9 @@
       <div id="TargetAssociatedBioactivities" class="section scrollspy">
         <h3>Target Associated Bioactivities</h3>
 
-        <p>stuff</p>
-
+         {% with is_dynamic=True  %}
+          {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
+         {% endwith %}
 
       </div>
 
