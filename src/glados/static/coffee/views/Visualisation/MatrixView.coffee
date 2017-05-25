@@ -408,9 +408,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter()
       .append("rect")
         .classed('grid-horizontal-rect', true)
-        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr("stroke", 'black')
-        .attr('fill', 'white')
+        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
 
     cellsContainerG.selectAll('grid-vertical-line')
       .data(matrix.columns)
@@ -418,7 +417,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append("line")
         .classed('grid-vertical-line', true)
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr("stroke", 'black')
         .attr('stroke-width', GRID_STROKE_WIDTH)
 
     dataList = @model.getDataList()
@@ -528,7 +526,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_Y_ATT, YES)
 
     rowsHeaderG.append('rect')
-      .style('fill', 'yellow')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
     rowHeaders = rowsHeaderG.selectAll('.vis-row')
@@ -537,9 +535,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('g').attr('class', 'vis-row')
 
     rowHeaders.append('rect')
-      .style('fill', 'white')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', 'black')
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
@@ -578,6 +576,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     applyZoomAndTranslation(rowsHeaderG)
+
+    # --------------------------------------
+    # Square 2
+    # --------------------------------------
+    corner2G = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+
+    corner2G.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+
+    corner2G.scaleSizes = (zoomScale) ->
+      corner2G.select('rect')
+        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH *zoomScale))
+
+    applyZoomAndTranslation(corner2G)
+
     # --------------------------------------
     # Cols Header Container
     # --------------------------------------
@@ -590,7 +609,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaderG.append('rect')
       .attr('height', COLS_HEADER_HEIGHT)
       .attr('width', RANGE_X_END)
-      .style('fill', 'orange')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
@@ -605,7 +624,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colsHeaders.append('line')
       .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', 'black')
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-divisory-line', true)
 
     setUpColTooltip = @generateTooltipFunction('Target', @)
@@ -666,7 +685,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
 
     rowsFooterG.append('rect')
-      .style('fill', 'yellow')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
     rowFooters = rowsFooterG.selectAll('.vis-row-footer')
@@ -675,9 +694,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('g').attr('class', 'vis-row-footer')
 
     rowFooters.append('rect')
-      .style('fill', 'white')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', 'black')
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('footers-background-rect', true)
 
     rowFooters.append('text')
@@ -801,7 +820,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_Y_ATT, NO)
 
     corner1G.append('rect')
-      .style('fill', 'blue')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
 
     corner1G.scaleSizes = (zoomScale) ->
       corner1G.select('rect')
@@ -809,26 +828,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', ROWS_HEADER_WIDTH * zoomScale)
 
     applyZoomAndTranslation(corner1G)
-
-    # --------------------------------------
-    # Square 2
-    # --------------------------------------
-    corner2G = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, 0)
-      .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, NO)
-      .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
-
-    corner2G.append('rect')
-      .style('fill', 'blue')
-
-    corner2G.scaleSizes = (zoomScale) ->
-      corner2G.select('rect')
-        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_FOOTER_WIDTH *zoomScale))
-
-    applyZoomAndTranslation(corner2G)
 
     # --------------------------------------
     # Square 3

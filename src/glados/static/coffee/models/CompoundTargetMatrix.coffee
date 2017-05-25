@@ -61,7 +61,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       for targetBucket in targBuckets
 
         # what do I know now? there is a target, it could be new or repeated
-        targLabel = 'Targ: ' + targetBucket.key
+        targLabel = targetBucket.key
         targPos = targetsToPosition[targLabel]
 
         # it is new!
