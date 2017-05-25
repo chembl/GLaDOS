@@ -28,6 +28,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         # here the data has not been actually received, if this causes more trouble it needs to be investigated.
         if not thisView.collection?
           return
+
+        console.log 'selectedResults: ', thisView.collection.selectedResults
         if thisView.collection.selectedResults.length > thisView.MAX_COMPOUNDS_FOR_MATRIX
           thisView.ctmView.renderWhenError()
           if $progressElement?
@@ -37,6 +39,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         #with all items loaded now I can generate the matrix
         moleculeIDs = (item.molecule_chembl_id for item in thisView.collection.selectedResults)
+        console.log 'moleculeIDs: ', moleculeIDs
         thisView.ctm.set('molecule_chembl_ids', moleculeIDs, {silent:true} )
         thisView.ctm.fetch()
 

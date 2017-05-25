@@ -535,6 +535,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ), @)
         $.when.apply($, deferreds).done -> f()
 
+      if iNeedToGetEverything and askingForOnlySelected
+        f = $.proxy(@makeSelectedSameAsAllResults, @)
+        $.when.apply($, deferreds).done -> f()
+        console.log 'got everything!'
       return deferreds
 
     removeHolesInAllResults: ->
@@ -554,6 +558,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @selectedResults.splice(i, 1)
           i--
         i++
+
+    makeSelectedSameAsAllResults: -> @selectedResults = @allResults
 
     getDownloadObject: (columns) ->
       downloadObj = []
