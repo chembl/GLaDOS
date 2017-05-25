@@ -908,7 +908,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_HEIGHT_ATT, (COLS_FOOTER_HEIGHT))
 
     corner4G.append('rect')
-      .style('fill', 'blue')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
     corner4G.scaleSizes = (zoomScale) ->
