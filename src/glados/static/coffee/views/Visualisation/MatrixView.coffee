@@ -821,11 +821,44 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner1G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    corner1G.append('line')
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('diagonal-line', true)
+
+    corner1G.append('text')
+      .text('Targets')
+      .classed('columns-text', true)
+      .attr('text-anchor', 'middle')
+
+    corner1G.append('text')
+      .text('Compounds')
+      .classed('rows-text', true)
+      .attr('text-anchor', 'middle')
+
+    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / ROWS_HEADER_WIDTH))
 
     corner1G.scaleSizes = (zoomScale) ->
-      corner1G.select('rect')
+
+      corner1G.select('.background-rect')
         .attr('height', COLS_HEADER_HEIGHT * zoomScale)
         .attr('width', ROWS_HEADER_WIDTH * zoomScale)
+
+      corner1G.select('.diagonal-line')
+        .attr('x2', ROWS_HEADER_WIDTH * zoomScale)
+        .attr('y2', COLS_HEADER_HEIGHT * zoomScale)
+
+      corner1G.select('.columns-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
+          (COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+
+      corner1G.select('.rows-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
+          (COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
     applyZoomAndTranslation(corner1G)
 
@@ -840,27 +873,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
 
     corner3G.append('rect')
-      .style('fill', 'blue')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    corner3G.append('rect')
-      .style('fill', 'white')
-      .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', 'black')
-      .classed('col-sort-property-rect', true)
+    corner3G.append('text')
+      .attr('x', LABELS_PADDING)
+      .attr('y', getYCoord.rangeBand())
+      .classed('cols-sort-text', true)
+
+    corner3G.assignTexts = ->
+
+      corner3G.select('.cols-sort-text')
+        .text(thisView.currentColSortingProperty.label + ':')
 
     corner3G.scaleSizes = (zoomScale) ->
 
       corner3G.select('.background-rect')
-      .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-      .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
-
-      corner3G.select('.col-sort-property-rect')
-        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
 
-    applyZoomAndTranslation(corner3G)
+      corner3G.select('.cols-sort-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (3/4) * zoomScale) + 'px;')
 
+    applyZoomAndTranslation(corner3G)
+    corner3G.assignTexts()
     # --------------------------------------
     # Square 4
     # --------------------------------------
@@ -1019,6 +1055,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       colsFooterG.assignTexts TRANSITIONS_DURATION
       cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
       colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      corner3G.assignTexts()
 
     $(@el).find(".select-row-sort").on "change", () ->
 
