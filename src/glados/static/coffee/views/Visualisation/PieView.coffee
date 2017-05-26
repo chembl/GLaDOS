@@ -25,6 +25,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       values: values
       labels: labels
       type: 'pie'
+      textinfo:'none'
 
     data = [data1]
 
