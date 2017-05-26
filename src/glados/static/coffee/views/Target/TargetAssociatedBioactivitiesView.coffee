@@ -2,10 +2,12 @@ TargetAssociatedBioactivitiesView = CardView.extend
 
   initialize: ->
 
+    @model.on 'change', @render, @
     @resource_type = 'Target'
     @paginatedView = new PieView
+      model: @model
       el: @el
-    @paginatedView.render()
+
     @initEmbedModal('bioactivities')
     @activateModals()
 

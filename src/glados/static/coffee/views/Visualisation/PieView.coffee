@@ -2,15 +2,28 @@
 PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
+
+    @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
     console.log 'INTIALISE PIE!'
     console.log '@$vis_elem: ', @$vis_elem
+
   render: ->
 
+    buckets =  @model.get('pie-data')
+    values = []
+    labels = []
+    for bucket in buckets
+      values.push bucket.doc_count
+      labels.push bucket.key
+
+    console.log 'buckets: ', buckets
+    console.log 'values: ', values
+    console.log 'labels: ', labels
     data1 =
-      values: [19, 26, 55]
-      labels: ['Residential', 'Non-Residential', 'Utility']
+      values: values
+      labels: labels
       type: 'pie'
 
     data = [data1]
