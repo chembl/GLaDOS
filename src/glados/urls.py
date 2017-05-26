@@ -179,6 +179,12 @@ urlpatterns = [
   url(r'^compound_target_matrix/embed/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrixToEmbed.html"), ),
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Activities
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^activities/$',
+      DirectTemplateView.as_view(template_name="glados/browseActivities.html"), ),
+
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------
