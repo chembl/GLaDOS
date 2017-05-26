@@ -13,6 +13,8 @@ Activity.COLUMNS = {
   }
 }
 
-Compound.COLUMNS_SETTINGS = {
+Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
+
+Activity.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [Activity.COLUMNS.ACTIVITY_ID]
 }

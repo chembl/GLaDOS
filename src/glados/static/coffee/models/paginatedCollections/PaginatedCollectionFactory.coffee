@@ -101,6 +101,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
 
+    getNewActivitiesList: ->
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST)
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.activities.length
+        @resetMeta(data.page_meta)
+        return data.activities
+
+      return list
+
     getNewDrugList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
       list.parse = (data) ->
