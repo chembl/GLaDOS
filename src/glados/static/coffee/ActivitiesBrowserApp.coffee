@@ -2,7 +2,8 @@ class ActivitiesBrowserApp
 
   @init = ->
 
-    actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList()
+    filter = URLProcessor.getFilter()
+    actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
     $elem = $('#BCK-ActivitiesSearchResults')
     infView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(actsList, $elem)
     actsList.fetch()

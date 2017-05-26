@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # URL handling
     # ------------------------------------------------------------------------------------------------------------------
     initialiseUrl: ->
+      console.log 'setting url'
       @url = @getPaginatedURL()
 
     getPaginatedURL: ->
@@ -75,6 +76,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       firstSeparator = if @getMeta('base_url').indexOf('?') != -1 then '&' else '?'
       full_url = url + firstSeparator + params.join('&')
+      customFilter = @getMeta('custom_filter')
+      full_url += '&' + customFilter unless not customFilter?
 
       return full_url
 
@@ -89,7 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #  records_in_page -- How many records are in the current page
     #  sorting data per column.
 
-    setMeta: (attr, value, storeAsString) ->
+    setMeta: (attr, value, storeAsString=false) ->
 
       if _.isString(value) and !storeAsString
         value = parseInt(value)

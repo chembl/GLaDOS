@@ -44,6 +44,13 @@ Activity.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  STANDARD_TYPE: {
+    'name_to_show': 'Standard Type'
+    'comparator': 'standard_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
@@ -53,8 +60,8 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
     Activity.COLUMNS.ACTIVITY_ID,
     Activity.COLUMNS.ASSAY_CHEMBL_ID,
-    Activity.COLUMNS.ASSAY_DESCRIPTION,
     Activity.COLUMNS.MOLECULE_CHEMBL_ID,
-    Activity.COLUMNS.TARGET_CHEMBL_ID
+    Activity.COLUMNS.TARGET_CHEMBL_ID,
+    Activity.COLUMNS.STANDARD_TYPE
   ]
 }
