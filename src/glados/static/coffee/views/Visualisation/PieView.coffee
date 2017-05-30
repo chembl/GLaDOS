@@ -44,8 +44,5 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       clickedLabel = eventInfo.points[0].label
       labelFilter = 'standard_type=' + clickedLabel
       filter = 'target_chembl_id=' + thisView.model.get('target_chembl_id') + '&' + labelFilter
-      url = 'http://0.0.0.0:8000/activities/filter/' + filter
-      console.log 'url: ', url
-#      window.open(Compound.get_report_card_url(clickedChemblID))
-      window.open(url)
+      window.open(Activity.getActivitiesListURL(filter))
     )

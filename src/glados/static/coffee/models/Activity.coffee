@@ -65,3 +65,10 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.STANDARD_TYPE
   ]
 }
+
+Activity.getActivitiesListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities/filter/' + filter
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities'
