@@ -113,6 +113,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_CARD: []
         ID_COLUMN: Activity.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
+      ASSAYS_LIST:
+        MODEL: Activity
+        BASE_URL: glados.Settings.WS_BASE_URL + 'activity.json'
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS_CARD: []
+        ID_COLUMN: Activity.ID_COLUMN
+        ADDITIONAL_COLUMNS:[]
       DRUG_LIST:
         MODEL: Compound
         BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'

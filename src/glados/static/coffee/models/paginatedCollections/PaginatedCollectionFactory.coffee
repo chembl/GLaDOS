@@ -102,6 +102,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
 
+    getNewAssaysList: (filter='') ->
+
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
+
+      return list
+
     getNewActivitiesList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
