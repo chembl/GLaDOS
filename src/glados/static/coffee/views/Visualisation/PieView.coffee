@@ -25,14 +25,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       values: values
       labels: labels
       type: 'pie'
-      textinfo:'none'
+      textinfo:'value'
 
     data = [data1]
-
     width = @$vis_elem.width()
     layout =
       height: width * (2/3)
       width: width
+      title: 'ChEMBL Activity types for target ' + @model.get('target_chembl_id')
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
