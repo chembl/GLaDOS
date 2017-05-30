@@ -77,7 +77,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       firstSeparator = if @getMeta('base_url').indexOf('?') != -1 then '&' else '?'
       full_url = url + firstSeparator + params.join('&')
       customFilter = @getMeta('custom_filter')
-      full_url += '&' + customFilter unless not customFilter?
+      full_url += '&' + customFilter unless not customFilter? or customFilter == ''
 
       return full_url
 
