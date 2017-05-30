@@ -15,6 +15,13 @@ Assay = Backbone.Model.extend
 Assay.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'assay_report_card/'+chembl_id
 
+Assay.getAssaysListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays/filter/' + filter
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays'
+
 Assay.COLUMNS = {
 
   CHEMBL_ID:{

@@ -32,7 +32,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     layout =
       height: width * (2/3)
       width: width
-      title: 'ChEMBL Activity types for target ' + @model.get('target_chembl_id')
+      title: @model.get('title')
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
@@ -41,8 +41,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'target:'
     console.log @model.get('target_chembl_id')
     pieDiv.on('plotly_click', (eventInfo) ->
-      clickedLabel = eventInfo.points[0].label
-      labelFilter = 'standard_type=' + clickedLabel
-      filter = 'target_chembl_id=' + thisView.model.get('target_chembl_id') + '&' + labelFilter
-      window.open(Activity.getActivitiesListURL(filter))
+#      clickedLabel = eventInfo.points[0].label
+#      labelFilter = 'standard_type=' + clickedLabel
+#      filter = 'target_chembl_id=' + thisView.model.get('target_chembl_id') + '&' + labelFilter
+#      window.open(Activity.getActivitiesListURL(filter))
+
+      console.log 'CLICK'
+      console.log eventInfo
     )

@@ -25,6 +25,9 @@ class TargetReportCardApp
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    AssociatedAssays = new TargetAssociatedAssays
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -50,6 +53,7 @@ class TargetReportCardApp
     targetRelations.fetch({reset: true})
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
+    AssociatedAssays.fetch()
 
   @initTargetNameAndClassification = ->
 
