@@ -104,7 +104,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewAssaysList: (filter='') ->
 
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.assays.length
+        @resetMeta(data.page_meta)
+        return data.assays
 
       return list
 
