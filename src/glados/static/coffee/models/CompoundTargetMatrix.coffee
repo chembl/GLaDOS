@@ -16,10 +16,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       reset: true
 
     thisModel = @
-    $.ajax(fetchESOptions).done((data) ->
-      thisModel.set(thisModel.parse data)
-    )
-
+    $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
 
   parse: (data) ->
 

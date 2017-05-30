@@ -40,7 +40,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return new indexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
-    getNewWSCollectionFor: (collectionSettings) ->
+    getNewWSCollectionFor: (collectionSettings, filter='') ->
       wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions).extend
 
@@ -60,6 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             is_carousel: collectionSettings.IS_CAROUSEL
             all_items_selected: false
             selection_exceptions: {}
+            custom_filter: filter
 
           @initialiseUrl()
 
@@ -100,6 +101,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
+
+    getNewActivitiesList: (filter='') ->
+
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.activities.length
+        @resetMeta(data.page_meta)
+        return data.activities
+
+      return list
 
     getNewDrugList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
