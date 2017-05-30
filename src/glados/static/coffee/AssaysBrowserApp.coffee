@@ -2,7 +2,8 @@ class AssaysBrowserApp
 
   @init = ->
 
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAssaysList()
-    console.log 'init assay browser app!'
-    console.log 'list: ', list
+    filter = URLProcessor.getFilter()
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAssaysList(filter)
+    $elem = $('#BCK-AssaysSearchResults')
+    glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(list, $elem)
     list.fetch()

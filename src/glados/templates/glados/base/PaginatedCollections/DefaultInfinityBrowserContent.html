@@ -4,7 +4,11 @@
 
 
 <div class='BCK-items-container row' data-is-infinite="yes"
-     data-hb-template="Handlebars-Common-Paginated-Card">
+     {% if custom_item_template %}
+      data-hb-template="{{custom_item_template}}"
+     {% else %}
+      data-hb-template="Handlebars-Common-Paginated-Card"
+     {% endif %} >
   <!-- Backbone fills this with the infinity browser view -->
 </div>
 

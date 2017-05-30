@@ -47,6 +47,13 @@ Assay.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  ASSAY_TYPE:{
+    'name_to_show': 'Assay type'
+    'comparator': 'assay_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -63,5 +70,6 @@ Assay.COLUMNS_SETTINGS = {
     Assay.COLUMNS.STRAIN
     Assay.COLUMNS.DESCRIPTION
     Assay.COLUMNS.ORGANISM
+    Assay.COLUMNS.ASSAY_TYPE
   ]
 }
