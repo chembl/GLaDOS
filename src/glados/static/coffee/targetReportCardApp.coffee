@@ -122,6 +122,18 @@ class TargetReportCardApp
 
     bioactivities.fetch()
 
+  @initAssociatedAssays = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    associatedAssays = new TargetAssociatedAssays
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new TargetAssociatedAssaysView
+      model: associatedAssays
+      el: $('#TAssociatedAssaysCard')
+
+    associatedAssays.fetch()
+
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
     target = new Target({target_chembl_id: chemblID})

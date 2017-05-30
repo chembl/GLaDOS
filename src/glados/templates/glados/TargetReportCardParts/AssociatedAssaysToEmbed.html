@@ -1,0 +1,16 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Associated Assays{% endblock %}
+
+{% block content2 %}
+
+   <div id="TargetAssays" style="margin-top: 25px;">
+    {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+TargetReportCardApp.initAssociatedAssays();
+{% endblock %}
