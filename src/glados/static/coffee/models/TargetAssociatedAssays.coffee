@@ -33,6 +33,7 @@ TargetAssociatedAssays = Backbone.Model.extend
     return  {
       'pie-data': buckets
       'title': title
+      'buckets_index': _.indexBy(buckets, 'key')
     }
 
   getRequestData: ->
