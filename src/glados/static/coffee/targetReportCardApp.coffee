@@ -28,6 +28,11 @@ class TargetReportCardApp
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    filter = 'target_chembl_id=CHEMBL2096905&standard_type__in=IC50,Ki,EC50,Kd'
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+    console.log 'LIST CREATED!'
+    console.log list
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
