@@ -11,4 +11,7 @@ glados.useNameSpace 'glados.views.Target',
 
     fetchInfoForGraph: ->
 
+      $progressElement = $(@el).find('.load-messages-container')
+      deferreds = @collection.getAllResults($progressElement)
+
       console.log 'FETCHING INFO FOR PLOT!'

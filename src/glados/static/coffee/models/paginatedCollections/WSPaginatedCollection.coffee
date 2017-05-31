@@ -22,11 +22,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'setting url'
       @url = @getPaginatedURL()
 
-    getPaginatedURL: ->
+    getPaginatedURL: (customPageSize, customPageNum) ->
 
       url = @getMeta('base_url')
-      page_num = @getMeta('current_page')
-      page_size = @getMeta('page_size')
+      page_num = if customPageNum? then customPageNum else @getMeta('current_page')
+      page_size = if customPageSize? then customPageSize else @getMeta('page_size')
       params = []
 
       limit_str = 'limit=' + page_size
@@ -257,3 +257,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return comp
 
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Download functions
+    # ------------------------------------------------------------------------------------------------------------------
+    DOWNLOADED_ITEMS_ARE_VALID: false
+    DOWNLOAD_ERROR_STATE: false
+    invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
+    clearAllResults: -> @allResults = undefined
+    clearSelectedResults: -> @selectedResults = undefined
+
+    # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
+    # but in the future it could be used to optimize the pagination after this has been called.
+    # it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
+    # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
+    # without requesting again to the server.
+    # you can use a progress element to show the progress if you want.
+    getAllResults: ($progressElement, askingForOnlySelected = false) ->
+
+      console.log 'getting all results!'
+      console.log 'baseURL: ', @getPaginatedURL()
