@@ -29,9 +29,7 @@ class TargetReportCardApp
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
     filter = 'target_chembl_id=CHEMBL2096905&standard_type__in=IC50,Ki,EC50,Kd'
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
-    console.log 'LIST CREATED!'
-    console.log list
+    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
 
     new TargetNameAndClassificationView
       model: target
@@ -56,6 +54,10 @@ class TargetReportCardApp
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
+
+    new glados.views.Target.LigandEfficienciesView
+      collection: ligandEfficiencies
+      el: $('#TLigandEfficienciesCard')
 
     target.fetch()
     appDrugsClinCandsList.fetch()
