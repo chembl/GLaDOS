@@ -14,11 +14,32 @@ def word_term():
 
 
 def property_term():
+    return(
+        Optional(['+', '-']),
+        json_property_path_segment, ZeroOrMore('.', json_property_path_segment), ':'
+        [
+           ('"', _('[^"]'), '"'),
+           ("'", _("[^']"), "'")
+        ],
+        common.term_end_lookahead
+    )
+
+def number_value():
     return
 
+
+def json_property_path_segment():
+    return _(r'[a-zA-Z0-9_\-]')
 
 def exact_match_term():
-    return
+    return (
+        Optional(['+', '-']),
+        [
+           ('"', _('[^"]'), '"'),
+           ("'", _("[^']"), "'")
+        ],
+        common.term_end_lookahead
+    )
 
 
 def expression_term():
