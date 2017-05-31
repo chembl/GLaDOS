@@ -14,4 +14,10 @@ glados.useNameSpace 'glados.views.Target',
       $progressElement = $(@el).find('.load-messages-container')
       deferreds = @collection.getAllResults($progressElement)
 
+      thisView = @
+      $.when.apply($, deferreds).done( ->
+        console.log 'got all data!'
+        console.log thisView.collection.allResults
+      )
+
       console.log 'FETCHING INFO FOR PLOT!'

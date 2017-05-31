@@ -538,6 +538,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if iNeedToGetEverything and askingForOnlySelected
         f = $.proxy(@makeSelectedSameAsAllResults, @)
         $.when.apply($, deferreds).done -> f()
+
       return deferreds
 
     removeHolesInAllResults: ->

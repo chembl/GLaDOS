@@ -275,5 +275,51 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # you can use a progress element to show the progress if you want.
     getAllResults: ($progressElement, askingForOnlySelected = false) ->
 
-      console.log 'getting all results!'
-      console.log 'baseURL: ', @getPaginatedURL()
+      # check if I already have all the results and they are valid
+      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+        return [jQuery.Deferred().resolve()]
+
+      if $progressElement?
+        $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
+          percentage: '0'
+
+      customPageNum = 1
+      # 1000 is the maximun page size allowed by the ws
+      customPageSize = 1000
+      firstURL = @getPaginatedURL(customPageSize, customPageNum)
+      baseURL = firstURL.split('/chembl/')[0]
+
+      # this is to keep the same strucutre as the function for the elasticsearch collections
+      baseDeferred = jQuery.Deferred()
+      deferreds = [baseDeferred]
+      @allResults = []
+      thisView = @
+
+      getPage = (url) ->
+        $.get(url).done((response) ->
+          itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
+          totalRecords = response.page_meta.total_count
+
+          for item in response[itemsKeyName]
+            thisView.allResults.push(item)
+          itemsReceived = thisView.allResults.length
+          progress = parseInt((itemsReceived / totalRecords) * 100)
+          if $progressElement? and (progress % 10) == 0
+            $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
+              percentage: progress
+
+          nextUrl = response.page_meta.next
+          if nextUrl?
+            nextUrl = baseURL + nextUrl
+            getPage nextUrl
+          else
+            baseDeferred.resolve()
+        )
+      getPage(firstURL)
+
+      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
+      $.when.apply($, deferreds).done ->
+        setValidDownload()
+        setTimeout( (()-> $progressElement.html ''), 200)
+
+      return deferreds
