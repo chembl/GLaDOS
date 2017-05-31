@@ -158,48 +158,47 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
         return _.union(defaultVisibleColumns, additionalVisibleColumns)
 
-    sendDataToTemplate: ($specificElem) ->
+    sendDataToTemplate: ($specificElemContainer) ->
   
-      $item_template = $('#' + $specificElem.attr('data-hb-template'))
-      $append_to = $specificElem
+      applyTemplate = Handlebars.compile($('#' + $specificElemContainer.attr('data-hb-template')).html())
+      $appendTo = $specificElemContainer
       visibleColumns = @getVisibleColumns()
 
       # if it is a table, add the corresponding header
-      if $specificElem.is('table')
+      if $specificElemContainer.is('table')
   
-        header_template = $('#' + $specificElem.attr('data-hb-header-template'))
+        header_template = $('#' + $specificElemContainer.attr('data-hb-header-template'))
         header_row_cont = Handlebars.compile( header_template.html() )
           base_check_box_id: @getBaseSelectAllCheckBoxID()
           all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
           columns: visibleColumns
   
-        $specificElem.append($(header_row_cont))
+        $specificElemContainer.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
-        $specificElem.append($('<tbody>'))
+        $specificElemContainer.append($('<tbody>'))
 
-      allAreSelected =  @collection.getMeta('all_items_selected')
-  
+
       for item in @collection.getCurrentPage()
 
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
-        new_item_cont = Handlebars.compile( $item_template.html() )
+        newItemContent = applyTemplate
           base_check_box_id: idColumnValue
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
   
-        $append_to.append($(new_item_cont))
+        $appendTo.append($(newItemContent))
   
       # After adding everything, if the element is a table I now set up the top scroller
       # also set up the automatic header fixation
-      if $specificElem.is('table') and $specificElem.hasClass('scrollable')
+      if $specificElemContainer.is('table') and $specificElemContainer.hasClass('scrollable')
   
         $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
-        $firstTableRow = $specificElem.find('tr').first()
+        $firstTableRow = $specificElemContainer.find('tr').first()
         firstRowWidth = $firstTableRow.width()
-        tableWidth = $specificElem.width()
+        tableWidth = $specificElemContainer.width()
         $topScrollerDummy.width(firstRowWidth)
   
         hasToScroll = tableWidth < firstRowWidth
@@ -209,22 +208,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           $topScrollerDummy.height(0)
   
         # bind the scroll functions if not done yet
-        if !$specificElem.attr('data-scroll-setup')
+        if !$specificElemContainer.attr('data-scroll-setup')
   
-          @setUpTopTableScroller($specificElem)
-          $specificElem.attr('data-scroll-setup', true)
+          @setUpTopTableScroller($specificElemContainer)
+          $specificElemContainer.attr('data-scroll-setup', true)
   
         # now set up tha header fixation
-        if !$specificElem.attr('data-header-pinner-setup')
+        if !$specificElemContainer.attr('data-header-pinner-setup')
   
           # delay this to wait for
-          @setUpTableHeaderPinner($specificElem)
-          $specificElem.attr('data-header-pinner-setup', true)
+          @setUpTableHeaderPinner($specificElemContainer)
+          $specificElemContainer.attr('data-header-pinner-setup', true)
   
       # This code completes rows for grids of 2 or 3 columns in the flex box css display
       total_cards = @collection.getCurrentPage().length
       while total_cards%6 != 0
-        $append_to.append('<div class="col s12 m6 l4"/>')
+        $appendTo.append('<div class="col s12 m6 l4"/>')
         total_cards++
   
     # ------------------------------------------------------------------------------------------------------------------

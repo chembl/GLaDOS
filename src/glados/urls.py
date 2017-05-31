@@ -74,6 +74,14 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
 
+  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/TargetReportCardParts/AssociatedBioactivitiesToEmbed.html")), ),
+
+  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/associated_assays/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/TargetReportCardParts/AssociatedAssaysToEmbed.html")), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
   # --------------------------------------------------------------------------------------------------------------------
@@ -86,6 +94,9 @@ urlpatterns = [
 
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
+
+  url(r'^assays/(filter/[\S]+)?$',
+      DirectTemplateView.as_view(template_name="glados/browseAssays.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Documents
@@ -174,6 +185,12 @@ urlpatterns = [
   # Embedded Compound vs Target Matrix
   url(r'^compound_target_matrix/embed/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrixToEmbed.html"), ),
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Activities
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^activities/(filter/[\S]+)?$',
+      DirectTemplateView.as_view(template_name="glados/browseActivities.html"), ),
 
 ]
 

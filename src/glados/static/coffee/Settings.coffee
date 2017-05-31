@@ -84,9 +84,10 @@ glados.useNameSpace 'glados',
     VISUALISATION_LIGHT_BLUE_MIN: '#e1f5fe' # light-blue lighten-5
     VISUALISATION_LIGHT_BLUE_MAX: '#01579b' # light-blue darken-4
     VISUALISATION_GRID_EXTERNAL_BORDER: '#D2D2D2'
-    VISUALISATION_GRID_DIVIDER_LINES: '#FFFFFF'
+    VISUALISATION_GRID_DIVIDER_LINES: '#bdbdbd' #grey lighten-1
     VISUALISATION_GRID_UNDEFINED: '#9e9e9e' #grey
-    VISUALISATION_GRID_NO_DATA: '#F9F9F9'
+    VISUALISATION_GRID_NO_DATA: '#eeeeee' #grey lighten-3
+    VISUALISATION_GRID_PANELS: 'white' #grey lighten-4
     VISUALISATION_LEGEND_HEIGHT: 100
     VISUALISATION_LEGEND_RECT_HEIGHT: 20
     # for a responsive visualisation, the time that it waits for the container size
@@ -133,6 +134,11 @@ glados.useNameSpace 'glados',
     Legend:
       VALUE_SELECTED: 'value-selected'
       VALUE_UNSELECTED: 'value-unselected'
+      RANGE_SELECTED: 'range-selected'
+      RANGE_SELECTION_INVALID: 'range-selected-invalid'
+  Visualisation:
+    CATEGORICAL:'CATEGORICAL'
+    CONTINUOUS:'CONTINUOUS'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->

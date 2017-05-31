@@ -65,9 +65,6 @@ class CompoundReportCardApp
 
     @initPieView()
 
-    # remeber to make it view-specific
-    $('select').material_select()
-
   # -------------------------------------------------------------
   # Specific section initialization
   # this is functions only initialize a section of the report card

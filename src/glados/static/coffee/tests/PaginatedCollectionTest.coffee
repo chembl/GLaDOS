@@ -81,12 +81,11 @@ describe "Paginated Collection", ->
     it "gives 5 records per page correctly", ->
       appDrugCCList.resetPageSize(5)
 
+      allItemsIDs = (model.get('molecule_chembl_id') for model in appDrugCCList.models)
       to_show = appDrugCCList.getCurrentPage()
-      chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-      expected_chembl_ids = ["CHEMBL1091", "CHEMBL1152", "CHEMBL1159650", "CHEMBL1161", "CHEMBL1200342",
-        "CHEMBL1200376"]
-
-      comparator = _.zip(chembl_ids, expected_chembl_ids)
+      shownIDs = (model.get('molecule_chembl_id') for model in to_show)
+      expected_chembl_ids = allItemsIDs[0..4]
+      comparator = _.zip(shownIDs, expected_chembl_ids)
       for elem in comparator
         expect(elem[0]).toBe(elem[1])
 
@@ -94,28 +93,40 @@ describe "Paginated Collection", ->
       expect(total_pages).toBe(14)
 
     it "gives page 7 correctly with 5 per page", ->
-      appDrugCCList.resetPageSize(5)
-      appDrugCCList.setPage(7)
+      pageSize = 5
+      pageNum = 7
+      appDrugCCList.resetPageSize(pageSize)
+      appDrugCCList.setPage(pageNum)
 
+      allItemsIDs = (model.get('molecule_chembl_id') for model in appDrugCCList.models)
+      start = (pageNum - 1) * pageSize
+      stop = start + pageSize - 1
+      expectedChEMBLIDs = allItemsIDs[start..stop]
       to_show = appDrugCCList.getCurrentPage()
-      chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-      expected_chembl_ids = ["CHEMBL1200975", "CHEMBL1200989", "CHEMBL1201012", "CHEMBL1201014", "CHEMBL1201064",
-        "CHEMBL1201081"]
+      shownIDs = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
 
-      comparator = _.zip(chembl_ids, expected_chembl_ids)
+      comparator = _.zip(shownIDs, expectedChEMBLIDs)
       for elem in comparator
         expect(elem[0]).toBe(elem[1])
 
 
     it "gives last page correctly", ->
-      appDrugCCList.resetPageSize(5)
-      appDrugCCList.setPage(14)
+
+      pageSize = 5
+      pageNum = 14
+
+      appDrugCCList.resetPageSize(pageSize)
+      appDrugCCList.setPage(pageNum)
+
+      allItemsIDs = (model.get('molecule_chembl_id') for model in appDrugCCList.models)
 
       to_show = appDrugCCList.getCurrentPage()
-      chembl_ids = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
-      expected_chembl_ids = ["CHEMBL635", "CHEMBL650", "CHEMBL989"]
+      shownIDs = _.map(to_show, (o)-> o.get('molecule_chembl_id'))
+      start = (pageNum - 1) * pageSize
+      stop = allItemsIDs.length - 1
+      expectedChEMBLIDs = allItemsIDs[start..stop]
 
-      comparator = _.zip(chembl_ids, expected_chembl_ids)
+      comparator = _.zip(shownIDs, expectedChEMBLIDs)
       for elem in comparator
         expect(elem[0]).toBe(elem[1])
 
@@ -139,8 +150,8 @@ describe "Paginated Collection", ->
 
       expect(page_size).toBe(20)
       expect(current_page).toBe(1)
-      expect(total_pages).toBe(84335)
-      expect(total_records).toBe(1686695)
+      expect(total_pages).toBe(86773)
+      expect(total_records).toBe(1735442)
       expect(records_in_page).toBe(20)
       expect(drugList.getMeta('all_items_selected')).toBe(false)
       expect(Object.keys(drugList.getMeta('selection_exceptions')).length).toBe(0)
@@ -219,6 +230,15 @@ describe "Paginated Collection", ->
 
   #TODO: tests for sorting and filtering search
 
+  describe "A WS collection initialised with a filter", ->
+
+    filter = 'target_chembl_id=CHEMBL2096905&standard_type=Ki'
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+
+    it 'generates the initial url', ->
+
+      urlMustBe = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
+      expect(list.url).toBe(urlMustBe)
 
   # ------------------------------
   # Helpers

@@ -5,6 +5,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = {
+      properties:
+        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_AVG')
+        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'ACTIVITY_COUNT')
+        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'HIT_COUNT')
+        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+            'PCHEMBL_VALUE_MAX')
+      initial_colouring: 'pchembl_value_avg'
+      colour_properties: ['activity_count', 'pchembl_value_avg']
+      initial_row_sorting: 'activity_count'
+      initial_row_sorting_reverse: true
+      row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      initial_col_sorting: 'activity_count'
+      initial_col_sorting_reverse: true
+      col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      propertyToType:
+        activity_count: "number"
+        pchembl_value_avg: "number"
+        pchembl_value_max: "number"
+        hit_count: "number"
+    }
+
     @model.on 'change', @render, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
@@ -14,7 +39,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   renderWhenError: ->
 
     @clearVisualisation()
-#    $(@el).find('select').material_select('destroy');
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
     $messagesElement.html ''
@@ -36,7 +60,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       @paintMatrix()
 
       $(@el).find('select').material_select()
-      $(@el).find('.tooltipped').tooltip()
 
       $messagesElement.html ''
 
@@ -75,14 +98,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintControls: ->
 
-    config = @model.get('config')
+    @paintSelect('.select-colouring-container',
+      (@config.properties[propID] for propID in @config.colour_properties),
+      @config.initial_colouring,
+      'select-colour-property',
+      'Colour by:' )
 
-    @paintSelect('.select-colouring-container', config.colour_properties, config.initial_colouring, 'select-colour-property', 'Colour by:' )
-    @paintSelect('.select-row-sort-container', config.row_sorting_properties, config.initial_row_sorting, 'select-row-sort', 'Sort rows by:' )
-    @paintSelect('.select-col-sort-container', config.col_sorting_properties, config.initial_col_sorting, 'select-col-sort', 'Sort columns by:' )
+    @paintSelect('.select-row-sort-container',
+      (@config.properties[propID] for propID in @config.row_sorting_properties),
+      @config.initial_row_sorting,
+      'select-row-sort',
+      'Sort rows by:' )
 
-    @paintSortDirection('.btn-row-sort-direction-container', config.initial_row_sorting_reverse, 'row')
-    @paintSortDirection('.btn-col-sort-direction-container', config.initial_col_sorting_reverse, 'col')
+    @paintSelect('.select-col-sort-container',
+      (@config.properties[propID] for propID in @config.col_sorting_properties)
+      @config.initial_col_sorting,
+      'select-col-sort',
+      'Sort columns by:' )
+
+    @paintSortDirection('.btn-row-sort-direction-container',
+      @config.initial_row_sorting_reverse,
+      'row')
+    @paintSortDirection('.btn-col-sort-direction-container',
+      @config.initial_col_sorting_reverse,
+      'col')
 
     @paintZoomButtons()
 
@@ -110,15 +149,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   paintSelect: (elemSelector, propsList, defaultValue, customClass, label) ->
 
+
     columns = _.map(propsList, (item) ->
       {
-      comparator: item
-      selected: (item == defaultValue)
+        comparator: item.propName
+        selected: (item.propName == defaultValue)
+        label: item.label
       })
 
     $select = $(@el).find(elemSelector)
-    $template = $('#' + $select.attr('data-hb-template'))
-    $select.html Handlebars.compile( $template.html() )
+    glados.Utils.fillContentForElement $select,
       custom_class: customClass
       columns: columns
       custom_label: label
@@ -215,8 +255,23 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     matrix = @model.get('matrix')
+    thisView = @
 
-    config = @model.get('config')
+    # --------------------------------------
+    # Sort properties
+    # --------------------------------------
+    @currentRowSortingProperty = @config.properties[@config.initial_row_sorting]
+    @currentRowSortingPropertyReverse = @config.initial_row_sorting_reverse
+    @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
+    @currentColSortingPropertyReverse = @config.initial_row_sorting_reverse
+    @currentPropertyColour = @config.properties[@config.initial_colouring]
+
+    # --------------------------------------
+    # Sort by default value
+    # --------------------------------------
+    @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+    @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+
     # --------------------------------------
     # variable initialisation
     # --------------------------------------
@@ -228,28 +283,42 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # make sure all intersections are squared
     SIDE_SIZE = 20
+    ROWS_HEADER_WIDTH = 100
+    ROWS_FOOTER_WIDTH = 50
+    COLS_HEADER_HEIGHT = 120
+    COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
-    LABELS_PADDING = 12
-    LABELS_ROTATION = 45
+    ROWS_HEADER_HEIGHT = RANGE_Y_END
+    COLS_HEADER_WIDTH = RANGE_X_END
+    BASE_X_TRANS_ATT = 'glados-baseXTrans'
+    BASE_Y_TRANS_ATT = 'glados-baseYTrans'
+    MOVE_X_ATT = 'glados-moveX'
+    MOVE_Y_ATT = 'glados-moveY'
+    FIXED_TO_LEFT_ATT = 'glados-fixedToLeft'
+    FIXED_TO_BOTTOM_ATT = 'glados-fixedToBottom'
+    BASE_WIDTH_ATT = 'glados-baseWidth'
+    BASE_HEIGHT_ATT = 'glados-baseHeight'
+    YES = 'yes'
+    NO = 'no'
+    CONTAINER_Y_PADDING = 0
+    CONTAINER_X_PADDING = 0
+    ZOOM_ACTIVATED = false
+
+    getYCoord = d3.scale.ordinal()
+      .domain([0..(NUM_ROWS-1)])
+      .rangeBands([0, RANGE_Y_END])
+
+    getXCoord = d3.scale.ordinal()
+      .domain([0..(NUM_COLUMNS-1)])
+      .rangeBands([0, RANGE_X_END])
+
+    LABELS_PADDING = 8
+    COLS_LABELS_ROTATION = 30
     BASE_LABELS_SIZE = 10
-
-    currentColourProperty = config.initial_colouring
-
-    if GlobalVariables['IS_EMBEDED']
-
-      margin =
-        top: 120
-        right: 0
-        bottom: 10
-        left: 0
-    else
-
-      margin =
-        top: 190
-        right: 160
-        bottom: 10
-        left: 130
+    GRID_STROKE_WIDTH = 1
+    CELLS_PADDING = GRID_STROKE_WIDTH
+    TRANSITIONS_DURATION = 1000
 
     elemWidth = $(@el).width()
     width = elemWidth
@@ -259,631 +328,661 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     if height > width
       height = width
 
-
-
     mainContainer = d3.select(@$vis_elem.get(0))
 
-    totalVisualisationWidth = width
-    totalVisualisationHeight = height
+    VISUALISATION_WIDTH = width
+    #this is a initial valur, it will be changed after organising everything
+    VISUALISATION_HEIGHT = 500
 
-    g = mainContainer
-            .append('svg')
-            .attr('class', 'mainSVGContainer')
-            .attr('width', totalVisualisationWidth)
-            .attr('height', totalVisualisationHeight)
-            .attr('style', 'background-color: white;')
-            .append("g")
-            .attr('class', 'mainGContainer')
+    MIN_COLUMNS_SEEN = 20
+    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
+    # initial zoom
+    MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
+    MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
+    #the initial zoom scale is a scale that makes all the matrix to be seen at once
+    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
+    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
+    INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
+    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
+    MIN_ZOOM = INITIAL_ZOOM
+
+    mainSVGContainer = mainContainer
+      .append('svg')
+      .attr('class', 'mainSVGContainer')
+      .attr('width', VISUALISATION_WIDTH)
+      .attr('height', VISUALISATION_HEIGHT)
+      .attr('style', 'background-color: white;')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
+    # --------------------------------------
+    # Base translations
+    # --------------------------------------
+    applyZoomAndTranslation = (elem, translateX=0, translateY=0, zoomScale=1) ->
+
+      elem.scaleSizes(zoomScale) unless not elem.scaleSizes?
+
+      moveX = elem.attr(MOVE_X_ATT)
+      moveY = elem.attr(MOVE_Y_ATT)
+      translateX = 0 if moveX == NO
+      translateY = 0 if moveY == NO
+      fixedToLeft = elem.attr(FIXED_TO_LEFT_ATT) == YES
+      fixedToBottom = elem.attr(FIXED_TO_BOTTOM_ATT) == YES
+
+      if fixedToLeft
+        baseWidth = elem.attr(BASE_WIDTH_ATT)
+        newTransX = VISUALISATION_WIDTH - (baseWidth * zoomScale)
+      else
+        newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
+
+      if fixedToBottom
+        baseHeight = elem.attr(BASE_HEIGHT_ATT)
+        newTransY = VISUALISATION_HEIGHT - (baseHeight * zoomScale)
+      else
+        newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
+
+
+      elem.attr('transform', 'translate(' + newTransX + ',' + newTransY + ')')
+    # --------------------------------------
+    # Add background MATRIX g
+    # --------------------------------------
+    mainGContainer = mainSVGContainer.append("g")
+      .attr('class', 'mainGContainer')
+      .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
 
     # --------------------------------------
-    # Legend initialisation
+    # Cells container
     # --------------------------------------
-    legendWidth = 0.4 * width
-    legendHeight = glados.Settings.VISUALISATION_LEGEND_HEIGHT
+    cellsContainerG = mainGContainer.append('g')
+      .attr('data-section-name', 'cellsContainerG')
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, YES)
 
-    $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
-    $legendContainer.empty()
-    legendContainer = d3.select($legendContainer.get(0))
-
-    legendSVG = legendContainer.append('svg')
-      .attr('width', legendWidth )
-      .attr('height', legendHeight )
-
-
-    # --------------------------------------
-    # Sort by default value
-    # --------------------------------------
-    sortMatrixRowsBy = (prop, reverse) ->
-
-      newOrders = _.sortBy(matrix.rows, prop)
-      newOrders = newOrders.reverse() if reverse
-      for row, index in newOrders
-        matrix.rows_index[row.label].currentPosition = index
-
-    sortMatrixRowsBy config.initial_row_sorting, config.initial_row_sorting_reverse
-
-    sortMatrixColsBy = (prop, reverse) ->
-
-      newOrders = _.sortBy(matrix.columns, prop)
-      newOrders = newOrders.reverse() if reverse
-      for row, index in newOrders
-        matrix.columns_index[row.label].currentPosition = index
-
-    sortMatrixColsBy config.initial_col_sorting, config.initial_col_sorting_reverse
-
-    getYCoord = d3.scale.ordinal()
-      .domain([0..NUM_ROWS])
-      .rangeBands([0, RANGE_Y_END])
-
-    getXCoord = d3.scale.ordinal()
-      .domain([0..NUM_COLUMNS])
-      .rangeBands([0, RANGE_X_END])
-
-
-    # --------------------------------------
-    # Add background MATRIX rectangle
-    # --------------------------------------
-    backRectWidth = RANGE_X_END - SIDE_SIZE + 1
-    backRectHeight = RANGE_Y_END - SIDE_SIZE + 1
-
-    backLineWidth = backRectWidth - 3
-    backLineHeight = backRectHeight - 3
-
-    BACK_RECT_TRANS_X = -1
-    BACK_RECT_TRANS_Y = -1
-
-    g.append("rect")
-      .attr("class", "background")
+    cellsContainerG.append('rect')
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
-      .attr("width", backRectWidth )
-      .attr("height", backRectHeight )
-      .attr('stroke', glados.Settings.VISUALISATION_GRID_EXTERNAL_BORDER)
-      .attr('stroke-width', 1)
-      .attr('transform', "translate(" + BACK_RECT_TRANS_X + ", " + BACK_RECT_TRANS_Y + ")")
+      .classed('background-rect', true)
 
-    # --------------------------------------
-    # Sort properties
-    # --------------------------------------
-    currentRowSortingProperty = config.initial_row_sorting
-    currentRowSortingPropertyReverse = config.initial_row_sorting_reverse
-    currentColSortingProperty = config.initial_col_sorting
-    currentColSortingPropertyReverse = config.initial_row_sorting_reverse
+    cellsContainerG.selectAll('grid-horizontal-rect')
+      .data(matrix.rows)
+      .enter()
+      .append("rect")
+        .classed('grid-horizontal-rect', true)
+        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
 
-    # --------------------------------------
-    # scales
-    # --------------------------------------
+    cellsContainerG.selectAll('grid-vertical-line')
+      .data(matrix.columns)
+      .enter()
+      .append("line")
+        .classed('grid-vertical-line', true)
+        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+        .attr('stroke-width', GRID_STROKE_WIDTH)
 
-    #given a property, returns a list with all the values found in the links
-    getDomainForOrdinalProperty = (prop) ->
+    dataList = @model.getDataList()
 
-      domain = []
+    cells = cellsContainerG.selectAll(".vis-cell")
+      .data(dataList)
+      .enter().append("rect")
+      .classed('vis-cell', true)
+      .attr('stroke-width', GRID_STROKE_WIDTH)
 
-      for rowNum, row of matrix.links
-        for colNum, cell of row
+    cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
-          if !cell?
-            continue
+      if transitionDuration == 0
+        cellsContainerG.selectAll(".vis-cell")
+          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+      else
+        t = cellsContainerG.transition().duration(transitionDuration)
+        t.selectAll(".vis-cell")
+          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
 
-          value = cell[prop]
-          if value?
-            domain.push value
+    cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
 
-      return domain
+      if transitionDuration == 0
+        cellsContainerG.selectAll(".vis-cell")
+        .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+      else
+        t = cellsContainerG.transition().duration(transitionDuration)
+        t.selectAll(".vis-cell")
+          .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
 
-    # given a property, it gives a domain of the property, taking only the smallest and the biggest values.
-    getDomainForContinuousProperty = (prop) ->
+    cellsContainerG.scaleSizes = (zoomScale) ->
 
-      minVal = Number.MAX_VALUE
-      maxVal = Number.MIN_VALUE
-      for rowNum, row of matrix.links
-        for colNum, cell of row
+      cellsContainerG.select('.background-rect')
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
 
-          if !cell?
-            continue
+      cellsContainerG.selectAll('.grid-horizontal-rect')
+        .attr("x", 0)
+        .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
+        .attr("width", COLS_HEADER_WIDTH * zoomScale)
+        .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
 
-          value = parseFloat(cell[prop])
-          if value > maxVal
-            maxVal = value
-          if value < minVal
-            minVal = value
+      cellsContainerG.selectAll('.grid-vertical-line')
+        .attr("x1", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("y1", 0)
+        .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
 
+      cellsContainerG.positionRows(zoomScale)
+      cellsContainerG.positionCols(zoomScale)
 
-      return [minVal, maxVal]
+      cellsContainerG.selectAll(".vis-cell")
+        .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .classed('tooltipped', true)
+        .attr('data-position', 'bottom')
+        .attr('data-delay', '50')
 
-
-
-    # generates a scale for when the data is numeric
-    buildNumericColourScale = (currentProperty) ->
-
-      colourDomain = getDomainForContinuousProperty(currentProperty)
-
-      scale = d3.scale.linear()
-        .domain(colourDomain)
-        .range([glados.Settings.VISUALISATION_LIGHT_GREEN_MIN, glados.Settings.VISUALISATION_LIGHT_GREEN_MAX])
-
-      return scale
-
-    # generates a scale for when the data is numeric
-    buildTextColourScale = (currentProperty) ->
-
-      domain = getDomainForOrdinalProperty currentProperty
-
-      scale = d3.scale.ordinal()
-        .domain(domain)
-        .range(d3.scale.category20().range())
-
-      return scale
-
-
-    defineColourScale = (links, currentProperty)->
-
-      type = config.propertyToType[currentProperty]
-
-      scale = switch
-        when type == 'number' then buildNumericColourScale(currentProperty)
-        when type == 'string' then buildTextColourScale(currentProperty)
-
-      return scale
-
-
-    getCellColour = defineColourScale(links, currentColourProperty)
+    applyZoomAndTranslation(cellsContainerG)
 
     fillColour = (d) ->
 
-      if not d[currentColourProperty]?
+      if not d[thisView.currentPropertyColour.propName]?
           return glados.Settings.VISUALISATION_GRID_UNDEFINED
-      getCellColour(d[currentColourProperty])
+      thisView.getCellColour(d[thisView.currentPropertyColour.propName])
 
-
-    # --------------------------------------
-    # Fill legend details
-    # --------------------------------------
-
-    fillLegendDetails = ->
-
-      # make a space for the null value
-      nullValSpace = 20
-
-      legendSVG.selectAll('g').remove()
-      legendSVG.selectAll('text').remove()
-
-      nullValG = legendSVG.append('g')
-        .attr("transform", "translate(0," +(legendHeight - 30) + ")")
-
-      legendG = legendSVG.append('g')
-        .attr("transform", "translate(" + nullValSpace + "," + (legendHeight - 30) + ")");
-
-
-      legendSVG.append('text')
-        .text(currentColourProperty)
-        .attr("class", 'matrix-colour-legend-title')
-
-      # center legend title
-      textWidth = d3.select('.matrix-colour-legend-title').node().getBBox().width
-      xTrans = (legendWidth - textWidth) / 2
-      legendSVG.select('.matrix-colour-legend-title')
-        .attr("transform", "translate(" + xTrans + ", 35)");
-
-      rectangleHeight = glados.Settings.VISUALISATION_LEGEND_RECT_HEIGHT
-      colourDataType = config.propertyToType[currentColourProperty]
-
-      if colourDataType == 'string'
-
-        domain = getDomainForOrdinalProperty currentColourProperty
-        getXInLegendFor = d3.scale.ordinal()
-          .domain( domain )
-          .rangeBands([0, legendWidth - nullValSpace])
-
-        legendAxis = d3.svg.axis()
-          .scale(getXInLegendFor)
-          .orient("bottom")
-
-        legendG.selectAll('rect')
-          .data(getXInLegendFor.domain())
-          .enter().append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', getXInLegendFor.rangeBand())
-          .attr('x', (d) -> getXInLegendFor d)
-          .attr('y', -rectangleHeight)
-          .attr('fill', (d) -> getCellColour d)
-
-        legendG.call(legendAxis)
-
-      else if colourDataType == 'number'
-
-        domain = getDomainForContinuousProperty currentColourProperty
-        linearScalePadding = 30
-        getXInLegendFor = d3.scale.linear()
-          .domain(domain)
-          .range([linearScalePadding, (legendWidth - nullValSpace - linearScalePadding)])
-
-        legendAxis = d3.svg.axis()
-          .scale(getXInLegendFor)
-          .orient("bottom")
-
-        start = domain[0]
-        stop = domain[1]
-        numValues = 50
-        step = Math.abs(stop - start) / numValues
-        stepWidthInScale = Math.abs(getXInLegendFor.range()[0] - getXInLegendFor.range()[1]) / numValues
-        legendData = d3.range(domain[0], domain[1], step)
-
-        legendAxis.tickValues([
-          legendData[0]
-          legendData[parseInt(legendData.length * 0.25)],
-          legendData[parseInt(legendData.length * 0.5)],
-          legendData[parseInt(legendData.length * 0.75)],
-          legendData[legendData.length - 1],
-        ])
-
-        #Add the null value rect
-        nullValG.append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', stepWidthInScale + 5)
-          .attr('x', 0)
-          .attr('y', -rectangleHeight)
-          .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
-
-        nullValG.append('text')
-           .attr('x', 0)
-          .attr('y', 20)
-          .text('null')
-
-        legendG.selectAll('rect')
-          .data(legendData)
-          .enter().append('rect')
-          .attr('height',rectangleHeight)
-          .attr('width', stepWidthInScale + 5)
-          .attr('x', (d) -> getXInLegendFor d)
-          .attr('y', -rectangleHeight)
-          .attr('fill', (d) -> getCellColour d)
-
-        legendG.call(legendAxis)
-
-      #customize legend styles
-      $legendContainer.find('line, path').css('fill', 'none')
-
-    fillLegendDetails()
-
-     # --------------------------------------
-    # Hover
-    # --------------------------------------
-    handleCellMouseover = () ->
-
-      selectedElement = d3.select(@)
-      x = selectedElement.attr('x')
-      y = selectedElement.attr('y')
-      height = selectedElement.attr('height')
-      width = selectedElement.attr('width')
-
-      selectedElement.attr('opacity', 0.6)
-
-
-    handleCellMouseout = () ->
-
-      selectedElement = d3.select(@)
-      selectedElement.attr('opacity', 1)
-
-
-    # --------------------------------------
-    # Add rows
-    # --------------------------------------
     getCellTooltip = (d) ->
 
-      txt = d.row_id + "\n" + d.col_id + "\n" + currentColourProperty + ":" + d[currentColourProperty]
+      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label +
+        ":" + d[thisView.currentPropertyColour.propName]
 
       return txt
 
-    getRowTooltip = (d) ->
+    colourCells = (transitionDuration=0)->
 
-      txt = "Compound: " + d.label + "\n" +  currentRowSortingProperty + ":" + d[currentRowSortingProperty]
-      return txt
+      if not thisView.currentPropertyColour.colourScale?
+        if not thisView.currentPropertyColour.domain?
+          colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
+          glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(thisView.currentPropertyColour,
+            colourValues)
+        glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
 
-    fillRow = (row, rowNumber) ->
+      thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
-      columnsList = matrix.columns
-      i = row.originalIndex
+      cellsContainerG.selectAll(".vis-cell")
+        .attr('data-tooltip', getCellTooltip)
 
-      dataList = ( value for key, value of links[i])
+      t = cellsContainerG.transition().duration(transitionDuration)
+      t.selectAll(".vis-cell")
+        .style("fill", fillColour)
 
-      # @ is the current g element
-      cells = d3.select(@).selectAll(".vis-cell")
-        .data(dataList)
-        .enter().append("rect")
-        .attr("class", "vis-cell")
-        .attr("x", (d) -> getXCoord(matrix.columns_index[d.col_id].currentPosition))
-        .attr("width", getXCoord.rangeBand())
-        .attr("height", getYCoord.rangeBand())
-        .style("fill", fillColour )
-        .on("mouseover", handleCellMouseover)
-        .on("mouseout", handleCellMouseout)
+      $(thisView.el).find('.tooltipped').tooltip('remove')
+      $(thisView.el).find('.tooltipped').tooltip()
 
-      cells.classed('tooltipped', true)
-        .attr('data-position', 'bottom')
-        .attr('data-delay', '50')
-        .attr('data-tooltip', getCellTooltip )
+      thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+      glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer)
 
+    colourCells()
 
-    rows = g.selectAll('.vis-row')
+    # --------------------------------------
+    # Rows Header Container
+    # --------------------------------------
+    rowsHeaderG = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, YES)
+
+    rowsHeaderG.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    rowHeaders = rowsHeaderG.selectAll('.vis-row')
       .data(matrix.rows)
       .enter()
       .append('g').attr('class', 'vis-row')
-      .attr('transform', (d) -> "translate(0, " + getYCoord(d.currentPosition) + ")")
-      .each(fillRow)
 
-    rows.append("line")
-      .attr('class', 'dividing-line')
-      .attr("x2", backLineWidth)
-      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
+    rowHeaders.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('headers-background-rect', true)
 
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
-
-    rows.append("text")
-      .attr("x", -LABELS_PADDING)
-      .attr("y", getYCoord.rangeBand() / 2)
-      .attr("dy", ".32em")
-      .attr("text-anchor", "end")
-      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
+    rowHeaders.append('text')
+      .classed('headers-text', true)
+      .text((d) -> d.label)
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .text( (d, i) -> d.label )
-      .on('click', setUpRowTooltip)
       .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
+      .on('click', setUpRowTooltip)
+
+    rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      t = rowsHeaderG.transition().duration(transitionDuration)
+      t.selectAll('.vis-row')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
+
+    rowsHeaderG.scaleSizes = (zoomScale) ->
+
+      rowsHeaderG.select('.background-rect')
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+
+      rowsHeaderG.positionRows(zoomScale)
+
+      rowsHeaderG.selectAll('.headers-background-rect')
+        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+
+      rowsHeaderG.selectAll('.headers-text')
+        .attr('x', (LABELS_PADDING * zoomScale))
+        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
+
+
+    applyZoomAndTranslation(rowsHeaderG)
 
     # --------------------------------------
-    # Add columns
+    # Square 2
     # --------------------------------------
-    getColumnTooltip = (d) ->
+    corner2G = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
 
-      txt = "Target: " + d.label + "\n" +  currentColSortingProperty + ":" + d[currentColSortingProperty]
+    corner2G.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
 
-    columns = g.selectAll(".vis-column")
+    corner2G.scaleSizes = (zoomScale) ->
+      corner2G.select('rect')
+        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH *zoomScale))
+
+    applyZoomAndTranslation(corner2G)
+
+    # --------------------------------------
+    # Cols Header Container
+    # --------------------------------------
+    colsHeaderG = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+
+    colsHeaderG.append('rect')
+      .attr('height', COLS_HEADER_HEIGHT)
+      .attr('width', RANGE_X_END)
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(matrix.columns)
       .enter().append("g")
-      .attr("class", "vis-column")
-      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
+      .classed('vis-column', true)
 
+    colsHeaders.append('rect')
+      .style('fill', 'none')
+      .style('fill-opacity', 0.5)
+      .classed('headers-background-rect', true)
+
+    colsHeaders.append('line')
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('headers-divisory-line', true)
 
     setUpColTooltip = @generateTooltipFunction('Target', @)
 
-    columns.append("text")
-      .attr("x", LABELS_PADDING)
-      .attr("y", getXCoord.rangeBand() / 2)
-      .attr("dy", ".32em")
-      .attr("text-anchor", "start")
-      .attr('style', 'font-size:' + BASE_LABELS_SIZE + 'px;')
+    colsHeaders.append('text')
+      .classed('headers-text', true)
+      .attr('transform', 'rotate(-90)')
+      .text((d) -> d.label)
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
-      .attr("transform", "rotate(" + LABELS_ROTATION + " " + LABELS_PADDING + "," + LABELS_PADDING + ")")
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .text((d, i) -> d.label )
       .on('click', setUpColTooltip)
       .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
       .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
-    columnsWithDivLines = g.selectAll(".vis-column")
+    colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
-    #divisory lines
-    columns.append("line")
-      .attr('class', 'dividing-line')
-      .attr("x1", -(backLineHeight))
-      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
+      t = colsHeaderG.transition().duration(transitionDuration)
+      t.selectAll('.vis-column')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) +
+        " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+
+    colsHeaderG.scaleSizes = (zoomScale) ->
+
+      colsHeaderG.select('.background-rect')
+        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('width', COLS_HEADER_WIDTH * zoomScale)
+
+      colsHeaderG.positionCols(zoomScale)
+
+      colsHeaderG.selectAll('.headers-background-rect')
+        .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
+        .attr('width', (getXCoord.rangeBand() * zoomScale))
+
+      colsHeaderG.selectAll('.headers-divisory-line')
+        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('y1', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('y2', 0)
+
+      colsHeaderG.selectAll('.headers-text')
+        .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
+        .attr('x', (-COLS_HEADER_HEIGHT * zoomScale))
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
+    applyZoomAndTranslation(colsHeaderG)
+
+    # --------------------------------------
+    # Rows Footer Container
+    # --------------------------------------
+    rowsFooterG = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, YES)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+
+    rowsFooterG.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    rowFooters = rowsFooterG.selectAll('.vis-row-footer')
+      .data(matrix.rows)
+      .enter()
+      .append('g').attr('class', 'vis-row-footer')
+
+    rowFooters.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('footers-background-rect', true)
+
+    rowFooters.append('text')
+      .classed('footers-text', true)
+      .attr('text-anchor', 'end')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+
+    rowsFooterG.assignTexts = (transitionDuration=0) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.footers-text')
+        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName))
+
+    rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.vis-row-footer')
+        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")" )
+
+    rowsFooterG.scaleSizes = (zoomScale) ->
+
+      rowsFooterG.select('.background-rect')
+        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.positionRows(zoomScale)
+      rowsFooterG.assignTexts()
+
+      rowsFooterG.selectAll('.footers-background-rect')
+        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.selectAll('.footers-text')
+        .attr('x', ((ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
+        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
+
+    applyZoomAndTranslation(rowsFooterG)
+
+    # --------------------------------------
+    # Cols Footer Container
+    # --------------------------------------
+    colsFooterG = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(MOVE_X_ATT, YES)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+
+    colsFooterG.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    colsFooters = colsFooterG.selectAll(".vis-column-footer")
+      .data(matrix.columns)
+      .enter().append("g")
+      .classed('vis-column-footer', true)
+
+    colsFooters.append('rect')
+      .style('fill', 'none')
+      .classed('footers-background-rect', true)
+
+    colsFooters.append('line')
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('footers-divisory-line', true)
+
+    colsFooters.append('text')
+      .classed('footers-text', true)
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('transform', 'rotate(90)')
+
+
+    colsFooterG.positionCols = (zoomScale, transitionDuration=0) ->
+
+      t = colsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.vis-column-footer')
+        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (getXCoord.rangeBand() * zoomScale) + " 0)" ))
+
+    colsFooterG.assignTexts = (transitionDuration=0) ->
+
+      t = colsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.footers-text')
+        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentColSortingProperty.propName))
+
+    colsFooterG.scaleSizes = (zoomScale) ->
+
+      colsFooterG.select('.background-rect')
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+
+      colsFooterG.positionCols(zoomScale)
+
+      colsFooterG.selectAll('.footers-background-rect')
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (getXCoord.rangeBand() * zoomScale))
+
+      colsFooterG.selectAll('.footers-divisory-line')
+        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('y1',0)
+        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('y2', (COLS_FOOTER_HEIGHT * zoomScale) )
+
+      colsFooterG.selectAll('.footers-text')
+        .attr("y", (-getXCoord.rangeBand() * (1/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+
+
+    applyZoomAndTranslation(colsFooterG)
+    colsFooterG.assignTexts()
+
+    # --------------------------------------
+    # Square 1
+    # --------------------------------------
+    corner1G = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+
+    corner1G.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    corner1G.append('line')
+      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('diagonal-line', true)
+
+    corner1G.append('text')
+      .text('Targets')
+      .classed('columns-text', true)
+      .attr('text-anchor', 'middle')
+
+    corner1G.append('text')
+      .text('Compounds')
+      .classed('rows-text', true)
+      .attr('text-anchor', 'middle')
+
+    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / ROWS_HEADER_WIDTH))
+
+    corner1G.scaleSizes = (zoomScale) ->
+
+      corner1G.select('.background-rect')
+        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('width', ROWS_HEADER_WIDTH * zoomScale)
+
+      corner1G.select('.diagonal-line')
+        .attr('x2', ROWS_HEADER_WIDTH * zoomScale)
+        .attr('y2', COLS_HEADER_HEIGHT * zoomScale)
+
+      corner1G.select('.columns-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
+          (COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+
+      corner1G.select('.rows-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
+          (COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+
+    applyZoomAndTranslation(corner1G)
+
+    # --------------------------------------
+    # Square 3
+    # --------------------------------------
+    corner3G = mainGContainer.append('g')
+      .attr(BASE_X_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+
+    corner3G.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    corner3G.append('text')
+      .attr('x', LABELS_PADDING)
+      .attr('y', getYCoord.rangeBand())
+      .classed('cols-sort-text', true)
+
+    corner3G.assignTexts = ->
+
+      corner3G.select('.cols-sort-text')
+        .text(thisView.currentColSortingProperty.label + ':')
+
+    corner3G.scaleSizes = (zoomScale) ->
+
+      corner3G.select('.background-rect')
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+
+      corner3G.select('.cols-sort-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (3/4) * zoomScale) + 'px;')
+
+    applyZoomAndTranslation(corner3G)
+    corner3G.assignTexts()
+    # --------------------------------------
+    # Square 4
+    # --------------------------------------
+    corner4G = mainGContainer.append('g')
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+      .attr(FIXED_TO_BOTTOM_ATT, YES)
+      .attr(BASE_HEIGHT_ATT, (COLS_FOOTER_HEIGHT))
+
+    corner4G.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .classed('background-rect', true)
+
+    corner4G.scaleSizes = (zoomScale) ->
+
+      corner4G.select('.background-rect')
+        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+
+    applyZoomAndTranslation(corner4G)
 
     # --------------------------------------
     # Zoom
     # --------------------------------------
-    handleZoom = ->
+    handleZoom = (ingoreActivation=false) ->
 
-      if not ZOOM_ACTIVATED
+      if not ZOOM_ACTIVATED and not ingoreActivation
         return
 
-      thisView.destroyAllTooltips()
+      translateX = zoom.translate()[0]
+      translateY = zoom.translate()[1]
+      zoomScale = zoom.scale()
 
-      if thisView.bugWillHappen
-        zoom.translate([thisView.initialTransX, thisView.initialTransY])
-        zoom.scale(thisView.initialScale)
-        thisView.bugWillHappen = false
+      console.log 'handle zoom'
+      console.log 'translateX: ', translateX
+      console.log 'translateY: ', translateY
+      console.log zoomScale
 
-      getYCoord.rangeBands([0, (RANGE_Y_END * zoom.scale())])
-      getXCoord.rangeBands([0, (RANGE_X_END * zoom.scale())])
+      applyZoomAndTranslation(corner1G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsHeaderG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner2G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(rowsHeaderG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(cellsContainerG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(rowsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
 
-      g.selectAll('.background')
-        .attr("width", backRectWidth * zoom.scale())
-        .attr("height", backRectHeight * zoom.scale())
-        .attr('transform', "translate(" + (zoom.translate()[0] + BACK_RECT_TRANS_X) +
-          ", " + (zoom.translate()[1] + BACK_RECT_TRANS_Y) + ")")
-
-      g.selectAll('.vis-row')
-        .attr('transform', (d) ->
-          "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
-        .selectAll("text")
-        .attr("y", getYCoord.rangeBand() / (2) )
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
-        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-
-      g.selectAll('.vis-row')
-        .selectAll('.dividing-line')
-        .attr("x2", backLineWidth * zoom.scale())
-      
-      g.selectAll(".vis-column")
-        .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
-        .selectAll("text")
-        .attr("y", getXCoord.rangeBand() / (2) )
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoom.scale()) + 'px;')
-        # remember that the columns texts are rotated -90 degrees,that is why the translation does Y,X instead of X,Y
-        .attr('transform', (d) ->
-          "translate( " + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" +
-          "rotate(" + LABELS_ROTATION + " " + (LABELS_PADDING*zoom.scale()) + "," + (LABELS_PADDING*zoom.scale()) + ")")
-        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-
-      g.selectAll(".vis-column")
-        .selectAll('.dividing-line')
-        .attr("x1", -(backLineHeight * zoom.scale()))
-        .attr("transform", "translate(" + (-zoom.translate()[1]) + ", " + zoom.translate()[0] + ")" )
-
-      g.selectAll(".vis-cell")
-        .attr("width", getXCoord.rangeBand())
-        .attr("height", getYCoord.rangeBand())
-        .attr("x", (d, index) -> getXCoord(matrix.columns_index[d.col_id].currentPosition) )
-
-
-    MIN_ZOOM_SCALE = 0.2
-    MAX_ZOOM_SCALE = 2
-    ZOOM_STEP = 0.2
-    ZOOM_ACTIVATED = true
+    ZOOM_STEP = 0.1
     zoom = d3.behavior.zoom()
-      .scaleExtent([MIN_ZOOM_SCALE, MAX_ZOOM_SCALE])
+      .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
 
-    mainSVGContainer.call zoom
-
+    mainGContainer.call zoom
     # --------------------------------------
-    # colour property selector
+    # Zoom Events
     # --------------------------------------
-
-    $(@el).find(".select-colour-property").on "change", () ->
-
-      if !@value?
-        return
-
-      currentColourProperty = @value
-      getCellColour = defineColourScale(links, currentColourProperty)
-
-      fillLegendDetails()
-
-      t = g.transition().duration(1000)
-      t.selectAll(".vis-cell")
-        .style("fill", fillColour)
-        .attr('data-tooltip', getCellTooltip )
-
-
-    # --------------------------------------
-    # sort property selector
-    # --------------------------------------
-    paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
-    thisView = @
-
-    triggerRowSortTransition = ->
-
-      if thisView.bugWillHappen
-        zoom.translate([thisView.initialTransX, thisView.initialTransY])
-        zoom.scale(thisView.initialScale)
-        thisView.bugWillHappen = false
-
-      thisView.destroyAllTooltips()
-      t = g.transition().duration(2500)
-      t.selectAll('.vis-row')
-      .attr('transform', (d) ->
-          "translate(" + zoom.translate()[0] + ", " + (getYCoord(d.currentPosition) + zoom.translate()[1]) + ")")
-
-      g.selectAll(".vis-row")
-        .selectAll('.dividing-line')
-        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
-
-    handleSortDirClick = ->
-
-      targetDimension = $(@).attr('data-target-property')
-      if targetDimension == 'row'
-
-        currentRowSortingPropertyReverse = !currentRowSortingPropertyReverse
-        sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
-        paintSortDirectionProxy('.btn-row-sort-direction-container', currentRowSortingPropertyReverse, 'row')
-        triggerRowSortTransition()
-
-      else if targetDimension == 'col'
-
-        currentColSortingPropertyReverse = !currentColSortingPropertyReverse
-        sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
-        paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
-        triggerColSortTransition()
-
-      $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
-
-    $(@el).find('.btn-sort-direction').on 'click', handleSortDirClick
-
-    $(@el).find(".select-row-sort").on "change", () ->
-
-      if !@value?
-        return
-
-      currentRowSortingProperty = @value
-      sortMatrixRowsBy currentRowSortingProperty, currentRowSortingPropertyReverse
-      paintSortDirectionProxy('.btn-col-sort-direction-container', currentColSortingPropertyReverse, 'col')
-      triggerRowSortTransition()
-
-    triggerColSortTransition = ->
-
-      thisView.destroyAllTooltips()
-      t = g.transition().duration(2500)
-      t.selectAll(".vis-column")
-      .attr("transform", (d) -> "translate(" + getXCoord(d.currentPosition) + ")rotate(-90)" )
-
-
-      # here I have to use the modulo to get the correct column index
-      # note that when the cells were being added it was not necessary because it was using the enter()
-      t.selectAll(".vis-cell")
-      .attr("x", (d, index) -> getXCoord(matrix.columns[(index % matrix.columns.length)].currentPosition) )
-
-      g.selectAll(".vis-column")
-        .selectAll('.dividing-line')
-        .attr("stroke-width", (d) -> if d.currentPosition == 0 then 0 else 1 )
-
-
-    $(@el).find(".select-col-sort").on "change", () ->
-
-      if !@value?
-        return
-
-      currentColSortingProperty = @value
-      sortMatrixColsBy currentColSortingProperty, currentColSortingPropertyReverse
-
-      triggerColSortTransition()
-
-
-    # --------------------------------------
-    #  initial zoom
-    # --------------------------------------
-    adjustVisHeight = ->
-
-      currentBackRectHeight = parseInt(g.select('.background').attr('height'))
-      desiredVisHeight = currentBackRectHeight + zoom.scale() * (margin.top + margin.bottom)
-      if desiredVisHeight < MIN_VIS_HEIGHT
-        desiredVisHeight = MIN_VIS_HEIGHT
-
-      mainSVGContainer
-        .attr('height', desiredVisHeight)
-
     resetZoom = ->
 
-      # get an initial zoom scale so all the matrix is visible.
-      matrixWidth = margin.left + backRectWidth + margin.right
-      initialZoomScale = totalVisualisationWidth / matrixWidth
-      zoom.scale(initialZoomScale)
-      zoom.translate([initialZoomScale * margin.left, initialZoomScale * margin.top])
-      handleZoom()
+      console.log 'reseting zoom'
+      console.log 'INITIAL_ZOOM:', INITIAL_ZOOM
+      zoom.scale(INITIAL_ZOOM)
+      zoom.translate([0, 0])
+      handleZoom(ingoreActivation=true)
 
-    # --------------------------------------
-    #  Zoom events
-    # --------------------------------------
+    resetZoom()
 
-    $(@el).find(".BCK-reset-zoom-btn").click ->
+    adjustVisHeight = ->
 
-      #this buttons will always work
-      wasDeactivated = not ZOOM_ACTIVATED
-      ZOOM_ACTIVATED = true
+      translateX = zoom.translate()[0]
+      translateY = zoom.translate()[1]
+      zoomScale = zoom.scale()
 
-      resetZoom()
+      VISUALISATION_HEIGHT = $(window).height() * 0.6
+      mainSVGContainer
+        .attr('height', VISUALISATION_HEIGHT)
 
-      if wasDeactivated
-        ZOOM_ACTIVATED = false
+      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
+
+    adjustVisHeight()
+
+    $(@el).find(".BCK-reset-zoom-btn").click resetZoom
+
 
     $(@el).find(".BCK-zoom-in-btn").click ->
 
@@ -892,7 +991,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       ZOOM_ACTIVATED = true
 
       zoom.scale( zoom.scale() + ZOOM_STEP )
-      mainSVGContainer.call zoom.event
+      mainGContainer.call zoom.event
 
       if wasDeactivated
         ZOOM_ACTIVATED = false
@@ -905,39 +1004,96 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       ZOOM_ACTIVATED = true
 
       zoom.scale( zoom.scale() - ZOOM_STEP )
-      mainSVGContainer.call zoom.event
+      mainGContainer.call zoom.event
 
       if wasDeactivated
         ZOOM_ACTIVATED = false
 
+    # --------------------------------------
+    # Activate zoom and drag
+    # --------------------------------------
     $(@el).find('.BCK-toggle-grab').click ->
 
       $targetBtnIcon = $(@)
-
       if ZOOM_ACTIVATED
         ZOOM_ACTIVATED = false
-
         $targetBtnIcon.removeClass 'fa-hand-rock-o'
         $targetBtnIcon.addClass 'fa-hand-paper-o'
-
       else
-
         ZOOM_ACTIVATED = true
-
         $targetBtnIcon.removeClass 'fa-hand-paper-o'
         $targetBtnIcon.addClass 'fa-hand-rock-o'
+    # --------------------------------------
+    # colour property selector
+    # --------------------------------------
 
-    resetZoom()
-    MIN_VIS_HEIGHT = 300
-    adjustVisHeight()
-    ZOOM_ACTIVATED = false
+    $(@el).find(".select-colour-property").on "change", () ->
 
-    @initialTransX = zoom.translate()[0]
-    @initialTransY = zoom.translate()[1]
-    @initialScale = zoom.scale()
-    @bugWillHappen = true
+      if !@value?
+        return
+
+      thisView.currentPropertyColour = thisView.config.properties[@value]
+      colourCells(TRANSITIONS_DURATION)
+
+    # --------------------------------------
+    # row sorting
+    # --------------------------------------
+    paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
+    triggerRowSorting = ->
+
+      thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
+      rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsFooterG.assignTexts TRANSITIONS_DURATION
+      cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+
+    triggerColSorting = ->
+
+      thisView.model.sortMatrixColsBy thisView.currentColSortingProperty.propName, thisView.currentColSortingPropertyReverse
+      colsFooterG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      colsFooterG.assignTexts TRANSITIONS_DURATION
+      cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
+      corner3G.assignTexts()
+
+    $(@el).find(".select-row-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      thisView.currentRowSortingProperty = thisView.config.properties[@value]
+      triggerRowSorting()
+
+    $(@el).find(".select-col-sort").on "change", () ->
+
+      if !@value?
+        return
+
+      thisView.currentColSortingProperty = thisView.config.properties[@value]
+      triggerColSorting()
+
+    handleSortDirClick = ->
+
+      targetDimension = $(@).attr('data-target-property')
+      if targetDimension == 'row'
+
+        thisView.currentRowSortingPropertyReverse = !thisView.currentRowSortingPropertyReverse
+        triggerRowSorting()
+        paintSortDirectionProxy('.btn-row-sort-direction-container', thisView.currentRowSortingPropertyReverse, 'row')
+
+      else if targetDimension == 'col'
 
 
+        thisView.currentColSortingPropertyReverse = !thisView.currentColSortingPropertyReverse
+        triggerColSorting()
+        paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
+
+      $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
+
+    $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
+
+    return
+    
   generateTooltipFunction: (entityName, matrixView) ->
 
     return (d) ->

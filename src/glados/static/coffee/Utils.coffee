@@ -66,10 +66,19 @@ glados.useNameSpace 'glados',
           return col['img_url']
       return null
 
+    cachedTemplateFunctions: {}
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj)->
 
-      $element.html Handlebars.compile($('#' + $element.attr('data-hb-template')).html())(paramsObj)
+      templateSelector = '#' + $element.attr('data-hb-template')
+
+      if not glados.Utils.cachedTemplateFunctions[templateSelector]?
+        templateFunction = Handlebars.compile($(templateSelector).html())
+        glados.Utils.cachedTemplateFunctions[templateSelector] = templateFunction
+      else
+        templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
+
+      $element.html templateFunction(paramsObj)
 
     # Helper function to prevent links from navigating to an url that is inside the same js page
     # If key_up is true will override for enter listening on links
@@ -93,3 +102,28 @@ glados.useNameSpace 'glados',
         glados.Utils.getNavigateOnlyOnNewTabLinkEventHandler(true, callback)
       )
 
+    # for server side collections, it assumes that all the results are already on the client
+    pluckFromListItems: (list, propertyName) ->
+
+      if list.allResults?
+        return (glados.Utils.getNestedValue(model, propertyName) for model in list.allResults)
+      else
+        return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
+
+    renderLegendForProperty: (property, collection, $legendContainer) ->
+
+      if not property.legendModel?
+        property.legendModel = new glados.models.visualisation.LegendModel
+          property: property
+          collection: collection
+
+      if not property.legendView?
+        property.legendView = new LegendView
+          model: property.legendModel
+          el: $legendContainer
+      else
+        property.legendView.render()
+
+      $legendContainer.find('line, path').css('fill', 'none')
+
+    getDegreesFromRadians: (radians) -> radians * 180 / Math.PI

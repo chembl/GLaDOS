@@ -52,10 +52,10 @@
   $(document).ready(function () {
 
     var pathname = window.location.pathname;
-    var pathnameParts = pathname.split('/')
-    CHEMBL_ID = pathnameParts[pathnameParts.length - 4]
-    EMBEDED = $.inArray('embed', pathnameParts) != -1
-    GlobalVariables['EMBEDED'] = EMBEDED
+    var pathnameParts = pathname.split('/');
+    CHEMBL_ID = pathnameParts[pathnameParts.length - 4];
+    EMBEDED = $.inArray('embed', pathnameParts) != -1;
+    GlobalVariables['EMBEDED'] = EMBEDED;
     {% block custom_js_inline %}{% endblock %}
 
   });

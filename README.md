@@ -40,6 +40,10 @@ Here you can find some informal diagrams that help to understand how some compon
 
 * [Item Columns](https://docs.google.com/drawings/d/1RjgbMwToiI1m2rX-UM2QRy5_gBUk0iHZJ2frL5v6OIE/edit?usp=sharing)
 
+### Visualisations
+
+* [Matrix (heatmap)](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
+
 
 
 

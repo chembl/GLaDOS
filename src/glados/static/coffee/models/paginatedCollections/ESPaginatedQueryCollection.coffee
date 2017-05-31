@@ -414,6 +414,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # without requesting again to the server.
 # you can use a progress element to show the progress if you want.
     getAllResults: ($progressElement, askingForOnlySelected = false) ->
+
       if $progressElement?
         $progressElement.empty()
 
@@ -534,6 +535,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ), @)
         $.when.apply($, deferreds).done -> f()
 
+      if iNeedToGetEverything and askingForOnlySelected
+        f = $.proxy(@makeSelectedSameAsAllResults, @)
+        $.when.apply($, deferreds).done -> f()
+        console.log 'got everything!'
       return deferreds
 
     removeHolesInAllResults: ->
@@ -553,6 +558,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @selectedResults.splice(i, 1)
           i--
         i++
+
+    makeSelectedSameAsAllResults: -> @selectedResults = @allResults
 
     getDownloadObject: (columns) ->
       downloadObj = []

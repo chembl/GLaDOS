@@ -80,7 +80,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       start = (current_page - 1) * page_size
       end = start + records_in_page
 
-      to_show = @models[start..end]
+      to_show = @models[start..end-1]
       @setMeta('to_show', to_show)
 
       return to_show
