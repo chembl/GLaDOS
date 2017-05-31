@@ -1,4 +1,9 @@
 glados.useNameSpace 'glados.views.Target',
-  LigandEfficienciesView: Backbone.View.extend
+  LigandEfficienciesView: CardView.extend
 
-    initialize: -> console.log 'initialize LigandEfficienciesView!'
+    initialize: ->
+      @showCardContent()
+      @fetchInfoForGraph()
+
+    fetchInfoForGraph: ->
+      console.log 'FETCHING INFO FOR PLOT!'

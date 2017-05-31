@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @compResGraphView.clearVisualisation()
 
-      $progressElement = $($(@el).find('.load-messages-container'))
+      $progressElement = $(@el).find('.load-messages-container')
       deferreds = @collection.getAllResults($progressElement)
 
       thisView = @
