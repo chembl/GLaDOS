@@ -25,6 +25,9 @@ class TargetReportCardApp
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    associatedAssays = new TargetAssociatedAssays
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -45,11 +48,16 @@ class TargetReportCardApp
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
 
+    new TargetAssociatedAssaysView
+      model: associatedAssays
+      el: $('#TAssociatedAssaysCard')
+
     target.fetch()
     appDrugsClinCandsList.fetch()
     targetRelations.fetch({reset: true})
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
+    associatedAssays.fetch()
 
   @initTargetNameAndClassification = ->
 
@@ -113,6 +121,18 @@ class TargetReportCardApp
       el: $('#TAssociatedBioactivitiesCard')
 
     bioactivities.fetch()
+
+  @initAssociatedAssays = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    associatedAssays = new TargetAssociatedAssays
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
+    new TargetAssociatedAssaysView
+      model: associatedAssays
+      el: $('#TAssociatedAssaysCard')
+
+    associatedAssays.fetch()
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 

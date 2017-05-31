@@ -230,6 +230,15 @@ describe "Paginated Collection", ->
 
   #TODO: tests for sorting and filtering search
 
+  describe "A WS collection initialised with a filter", ->
+
+    filter = 'target_chembl_id=CHEMBL2096905&standard_type=Ki'
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+
+    it 'generates the initial url', ->
+
+      urlMustBe = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
+      expect(list.url).toBe(urlMustBe)
 
   # ------------------------------
   # Helpers
