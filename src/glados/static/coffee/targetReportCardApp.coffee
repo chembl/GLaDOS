@@ -141,6 +141,15 @@ class TargetReportCardApp
 
     associatedAssays.fetch()
 
+  @initLigandEfficiencies = ->
+
+    filter = 'target_chembl_id=CHEMBL2096905&standard_type__in=IC50,Ki,EC50,Kd'
+    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+
+    new glados.views.Target.LigandEfficienciesView
+      collection: ligandEfficiencies
+      el: $('#TLigandEfficienciesCard')
+
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
     target = new Target({target_chembl_id: chemblID})
