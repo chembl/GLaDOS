@@ -24,9 +24,7 @@ glados.useNameSpace 'glados.views.Target',
         initial_property_x: 'ALogP'
         initial_property_y: 'FULL_MWT'
         initial_property_colour: 'RO5'
-        x_axis_options:['ALogP', 'FULL_MWT', 'PSA', 'HBA', 'HBD', 'RO5']
-        y_axis_options:['ALogP', 'FULL_MWT', 'PSA', 'HBA', 'HBD', 'RO5']
-        colour_options:['RO5', 'FULL_MWT']
+        disable_axes_selectors: true
       }
 
       @scatterPlotView = new PlotView

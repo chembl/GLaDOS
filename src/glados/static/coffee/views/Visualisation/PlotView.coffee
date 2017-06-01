@@ -25,8 +25,10 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentPropertyY = @config.properties[@config.initial_property_y]
     @currentPropertyColour = @config.properties[@config.initial_property_colour]
 
-    console.log 'initialisng plot!'
-    @paintSelectors()
+    if @config.disable_axes_selectors
+      @hideSelectors()
+    else
+      @paintSelectors()
 
   selectionChangedHandler: ->
 
@@ -72,9 +74,10 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       @clearVisualisation()
       @paintGraph()
-      $(@el).find('select').material_select()
 
       $messagesElement.html ''
+
+  hideSelectors: -> $(@el).find('.BCK-AxesSelectorContainer').hide()
 
   paintSelectors: ->
 
@@ -91,6 +94,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     $colourSelector.html Handlebars.compile($('#' + $colourSelector.attr('data-hb-template')).html())
       options: ($.extend(@config.properties[opt], {id:opt, selected: opt == @config.initial_property_colour}) for opt in @config.colour_options)
 
+    $(@el).find('select').material_select()
 
   clearVisualisation: ->
 
