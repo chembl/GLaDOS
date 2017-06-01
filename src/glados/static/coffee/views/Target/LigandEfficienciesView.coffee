@@ -42,6 +42,8 @@ glados.useNameSpace 'glados.views.Target',
       $.when.apply($, deferreds).done( ->
         console.log 'got all data!'
         console.log thisView.collection.allResults
+        $progressElement.html ''
+        thisView.scatterPlotView.render()
       )
 
       console.log 'FETCHING INFO FOR PLOT!'

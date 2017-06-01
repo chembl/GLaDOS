@@ -30,6 +30,8 @@ glados.useNameSpace 'glados.models.visualisation',
         HBD:
           propName:'molecule_properties.hbd'
           label: 'Hydrogen Bond Donnors'
+    Activity:
+      esIndex:'chembl_activity'
     CompoundTargetMatrix:
       Properties:
         PCHEMBL_VALUE_AVG:

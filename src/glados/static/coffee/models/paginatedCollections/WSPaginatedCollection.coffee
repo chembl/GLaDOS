@@ -314,6 +314,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             getPage nextUrl
           else
             baseDeferred.resolve()
+        ).fail( (xhr, status, error) ->
+          baseDeferred.reject(xhr, status, error)
         )
       getPage(firstURL)
 
@@ -321,5 +323,31 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       $.when.apply($, deferreds).done ->
         setValidDownload()
         setTimeout( (()-> $progressElement.html ''), 200)
+
+      baseDeferred.fail (xhr, status, error) ->
+
+        console.log 'xhr ', xhr
+        console.log 'status ', status
+        console.log 'error ', error
+
+        if $progressElement?
+          $progressElement.html 'There was an error while loading the data'
+
+      if $progressElement?
+
+        numDots = 0
+        firstWaitTime = 10000
+        secondWaitTime = 2000
+        generateWaitingToolongMsg = (waitTime) ->
+
+
+          setTimeout( ( ->
+            msg = 'Generating the data' + ( '.' for dot in [0..numDots]).join('')
+            numDots++
+            if baseDeferred.state() == 'pending'
+              $progressElement.html msg
+              generateWaitingToolongMsg(secondWaitTime)
+          ),waitTime)
+        generateWaitingToolongMsg(firstWaitTime)
 
       return deferreds
