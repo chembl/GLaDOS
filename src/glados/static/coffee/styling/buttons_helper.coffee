@@ -6,15 +6,45 @@ class ButtonsHelper
 
   ### *
     * @param {JQuery} elem button that triggers the download
+    * @param {String} Tooltip that you want for the button
+    * @param {function} function to be called on click
+  ###
+  @initLinkButton = (elem, tooltip, click_cb) ->
+    elem.addClass('tooltipped')
+    elem.attr('data-tooltip', tooltip)
+    elem.click( click_cb )
+
+
+  ### *
+    * @param {JQuery} elem button that triggers the download
     * @param {String} filename Name that you want for the downloaded file
-    * @param {tolltip} Tooltip that you want for the button
+    * @param {String} Tooltip that you want for the button
     * @param {String} data data that is going to be downloaded
   ###
   @initDownloadBtn = (elem, filename, tooltip, data)->
-      elem.attr('download', filename,)
-      elem.addClass('tooltipped')
-      elem.attr('data-tooltip', tooltip)
-      elem.attr('href', 'data:text/html,' + data)
+    elem.attr('download', filename,)
+    elem.addClass('tooltipped')
+    elem.attr('data-tooltip', tooltip)
+    elem.attr('href', 'data:text/html,' + data)
+
+  ### *
+    * Handles the copy event receiving the data to be copied as a parameter
+    * it gets the information from the context, It doesn't use a closure to be faster
+  ###
+  @handleCopyDynamic = (elem, data)->
+    clipboard.copy(data)
+    tooltip_id = elem.attr('data-tooltip-id')
+    if tooltip_id
+      tooltip = $('#' + tooltip_id)
+      if $( window ).width() <= glados.SMALL_SCREEN_SIZE
+        tooltip.hide()
+        Materialize.toast('Copied!', 1000)
+      else
+        prev_text = tooltip.find('span').text()
+        tooltip.find('span').text('Copied!')
+        reset_text = ->
+          tooltip.find('span').text(prev_text)
+        setTimeout(reset_text, 1000)
 
   ### *
     * Handles the copy event
@@ -22,17 +52,20 @@ class ButtonsHelper
   ###
   @handleCopy = ->
 
-    clipboard.copy($(@).attr('data-copy'));
+    clipboard.copy($(@).attr('data-copy'))
     tooltip_id = $(@).attr('data-tooltip-id')
     tooltip = $('#' + tooltip_id)
 
-    if $( window ).width() <= MEDIUM_WIDTH
+    if $( window ).width() <= glados.SMALL_SCREEN_SIZE
       tooltip.hide()
       Materialize.toast('Copied!', 1000)
     else
+      prev_text = tooltip.find('span').text()
       tooltip.find('span').text('Copied!')
+      reset_text = ->
+        tooltip.find('span').text(prev_text)
+      setTimeout(reset_text, 1000)
 
-    console.log('copied!')
 
   @initCopyButton = (elem, tooltip, data) ->
 

@@ -32,10 +32,21 @@
 
             <td>
               <div class="inline-block">
-                <a class="waves-effect waves-light btn-small teal">
+                <a id="Reps-Molfile-rawview" href="#SDF-raw-modal" class="waves-effect waves-light btn-small teal modal-trigger">
                   <p><i class="fa fa-code"></i></p>
                   <p>View Raw</p>
                 </a>
+              </div>
+              <div id="SDF-raw-modal" class="modal">
+                <div class="sdf-raw-container">
+                  <h3 id="SDF-raw-modal-title"></h3>
+                  <div id="SDF-raw-modal-content">
+
+                  </div>
+                  {% block close_modal %}
+                  {% include "glados/base/modals/close_modal_button.html" %}
+                  {% endblock %}
+                </div>
               </div>
               <div class="inline-block">
 
