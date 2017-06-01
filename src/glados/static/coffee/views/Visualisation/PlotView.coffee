@@ -170,10 +170,14 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
         if !value? or value == glados.Settings.DEFAULT_NULL_VALUE_LABEL
           thisView.rejectedElements.push
             id: glados.Utils.getNestedValue(mol, thisView.labelerProperty.propName)
+          console.log 'rejected ', glados.Utils.getNestedValue(mol, thisView.idProperty.propName)
+          console.log 'because ', propName, 'is ', value
           return true
 
       return false
     )
+    console.log 'shownElements: ', @shownElements
+    console.log 'rejectedElements: ', @rejectedElements
     @renderRejectedElements()
 
     if not @currentPropertyColour.colourScale?

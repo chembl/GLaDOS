@@ -32,6 +32,28 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Hydrogen Bond Donnors'
     Activity:
       esIndex:'chembl_activity'
+      Properties:
+        LIGAND_EFFICIENCY_SEI:
+          propName: 'ligand_efficiency.sei'
+          label: 'Surface Efficieny index (SEI)'
+          type: Number
+        LIGAND_EFFICIENCY_BEI:
+          propName: 'ligand_efficiency.bei'
+          label: 'Binding Efficieny index (BEI)'
+          type: Number
+        STANDARD_VALUE:
+          propName: 'standard_value'
+          label: 'Standard Value nM'
+          coloursRange: [glados.Settings.VISUALISATION_GREEN_BASE, glados.Settings.VISUALISATION_RED_BASE]
+          colourScaleType: glados.Visualisation.CONTINUOUS
+          ticksNumber: 5
+        MOLECULE_CHEMBL_ID:
+          propName: 'molecule_chembl_id'
+          label: 'Compound'
+          type: String
+        ACTIVITY_ID:
+          propName: 'activity_id'
+          label: 'Activity id'
     CompoundTargetMatrix:
       Properties:
         PCHEMBL_VALUE_AVG:

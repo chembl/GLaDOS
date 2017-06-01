@@ -28,7 +28,8 @@ class TargetReportCardApp
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd'
+    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
+    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
 
     new TargetNameAndClassificationView
@@ -143,7 +144,8 @@ class TargetReportCardApp
 
   @initLigandEfficiencies = ->
 
-    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd'
+    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
+    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
 
     new glados.views.Target.LigandEfficienciesView

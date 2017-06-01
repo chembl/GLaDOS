@@ -11,19 +11,16 @@ glados.useNameSpace 'glados.views.Target',
 
       config = {
         properties:
-          molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'CHEMBL_ID')
-          ALogP: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'ALogP')
-          FULL_MWT: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
-          RO5: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RO5',
-            withColourScale = true)
-          PSA: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'PSA')
-          HBA: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'HBA')
-          HBD: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'HBD')
-        id_property: 'molecule_chembl_id'
+          ligand_efficienfy_sei: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'LIGAND_EFFICIENCY_SEI')
+          ligand_efficienfy_bei: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'LIGAND_EFFICIENCY_BEI')
+          standard_value: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE')
+          molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'MOLECULE_CHEMBL_ID')
+          activity_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'ACTIVITY_ID')
+        id_property: 'activity_id'
         labeler_property: 'molecule_chembl_id'
-        initial_property_x: 'ALogP'
-        initial_property_y: 'FULL_MWT'
-        initial_property_colour: 'RO5'
+        initial_property_x: 'ligand_efficienfy_sei'
+        initial_property_y: 'ligand_efficienfy_bei'
+        initial_property_colour: 'standard_value'
         disable_axes_selectors: true
       }
 
