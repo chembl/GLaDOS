@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       }
 
       @compResGraphView = new PlotView
-        el: $(@el).find('.BCK-CompResultsGraph')
+        el: $(@el).find('.BCK-MainPlotContainer')
         collection: @collection
         config: config
 

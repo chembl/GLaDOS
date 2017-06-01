@@ -25,6 +25,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentPropertyY = @config.properties[@config.initial_property_y]
     @currentPropertyColour = @config.properties[@config.initial_property_colour]
 
+    console.log 'initialisng plot!'
     @paintSelectors()
 
   selectionChangedHandler: ->
