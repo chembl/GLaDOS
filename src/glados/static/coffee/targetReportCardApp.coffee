@@ -59,6 +59,7 @@ class TargetReportCardApp
     new glados.views.Target.LigandEfficienciesView
       collection: ligandEfficiencies
       el: $('#TLigandEfficienciesCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     target.fetch()
     appDrugsClinCandsList.fetch()
@@ -139,6 +140,7 @@ class TargetReportCardApp
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     associatedAssays.fetch()
 

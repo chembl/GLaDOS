@@ -219,6 +219,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     layout = {
       xaxis: {title: @currentPropertyX.label}
       yaxis: {title: @currentPropertyY.label}
+      title: @config.plot_title
       hovermode: 'closest'
     }
 

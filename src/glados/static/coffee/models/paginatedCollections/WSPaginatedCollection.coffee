@@ -288,6 +288,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       customPageSize = 1000
       firstURL = @getPaginatedURL(customPageSize, customPageNum)
       baseURL = firstURL.split('/chembl/')[0]
+      console.log(firstURL)
 
       # this is to keep the same strucutre as the function for the elasticsearch collections
       baseDeferred = jQuery.Deferred()
