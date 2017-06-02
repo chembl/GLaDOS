@@ -193,8 +193,12 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     labels = (glados.Utils.getNestedValue(mol, @labelerProperty.propName) for mol in @shownElements)
     ids = (glados.Utils.getNestedValue(mol, @idProperty.propName) for mol in @shownElements)
     colours = (@getColourFor(glados.Utils.getNestedValue(mol, @currentPropertyColour.propName)) for mol in @shownElements)
-    borderColours = @getBorderColours(@shownElements, @getColourFor)
+    if @config.markers_border == PlotView.MAX_COLOUR
+      borderColours = @getBorderColours(@shownElements, @getColourFor)
+    else
+      borderColours = 'black'
     borderWidths = @getBorderWidths(@shownElements)
+    console.log 'markers_border: ', @config.markers_border
 
     trace1 = {
       x: xValues,
@@ -249,3 +253,5 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     glados.Utils.renderLegendForProperty(@currentPropertyColour, @collection, $legendContainer, not @config.disable_selection)
+
+PlotView.MAX_COLOUR = 'MAX_COLOUR'

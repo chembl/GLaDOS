@@ -24,6 +24,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         x_axis_options:['ALogP', 'FULL_MWT', 'PSA', 'HBA', 'HBD', 'RO5']
         y_axis_options:['ALogP', 'FULL_MWT', 'PSA', 'HBA', 'HBD', 'RO5']
         colour_options:['RO5', 'FULL_MWT']
+        markers_border: PlotView.MAX_COLOUR
       }
 
       @compResGraphView = new PlotView
