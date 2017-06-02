@@ -240,9 +240,24 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem.append($totalItems)
 
     graphDiv.on('plotly_click', (eventInfo) ->
+
+      $tooltipContainer = $('<div>').addClass('tooltip-container')
+      $tooltipBackground = $('<div>').addClass('tooltip-background')
+      $tooltip = $('<div>').addClass('tooltip-item')
+
+      $tooltipContainer.append($tooltipBackground)
+      $tooltipContainer.append($tooltip)
+      thisView.$vis_elem.append($tooltipContainer)
+
+      $tooltipBackground.click ->
+        $tooltipContainer.remove()
+      $tooltip.click ->
+        console.log 'clicked tooltip!'
+
       pointNumber = eventInfo.points[0].pointNumber
-      clickedChemblID = eventInfo.points[0].data.ids[pointNumber]
-      window.open(Compound.get_report_card_url(clickedChemblID))
+      clickedChemblID = eventInfo.points[0].data.text[pointNumber]
+      CompoundReportCardApp.initMiniCompoundReportCard($tooltip, clickedChemblID)
+
     )
 
     graphDiv.on('plotly_selected', (eventData) ->
