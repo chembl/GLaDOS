@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.Target',
         initial_property_colour: 'standard_value'
         disable_axes_selectors: true
         plot_title: 'ChEMBL Ligand Efficiency Plot for Target ' + arguments[0].target_chembl_id
+        disable_selection: true
       }
 
       @scatterPlotView = new PlotView

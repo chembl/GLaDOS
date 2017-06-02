@@ -344,4 +344,4 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
         legendG.call(legendAxis)
 
     $legendContainer = $(@el).find('.BCK-CompResultsGraphLegendContainer')
-    glados.Utils.renderLegendForProperty(@currentPropertyColour, @collection, $legendContainer)
+    glados.Utils.renderLegendForProperty(@currentPropertyColour, @collection, $legendContainer, not @config.disable_selection)
