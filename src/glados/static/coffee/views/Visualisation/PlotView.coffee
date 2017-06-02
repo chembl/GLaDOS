@@ -227,6 +227,14 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     Plotly.newPlot(graphDiv, legendData, layout)
 
+    $totalItems = $('<div>').attr('data-hb-template', 'Handlebars-Common-totalItems')
+      .addClass('total-items')
+
+    glados.Utils.fillContentForElement($totalItems,
+      num_items: @shownElements.length
+    )
+    @$vis_elem.append($totalItems)
+
     graphDiv.on('plotly_click', (eventInfo) ->
       pointNumber = eventInfo.points[0].pointNumber
       clickedChemblID = eventInfo.points[0].data.ids[pointNumber]

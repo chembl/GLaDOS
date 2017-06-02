@@ -2175,3 +2175,18 @@ span.badge-primary-color-no-float {
   }
 
 }
+
+/**
+  * Scatter plot
+  * ----------------------------------------------------------------------------------------------------------------------
+  */
+.plot{
+  .plot-container{
+    position: relative;
+  }
+  .total-items{
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+  }
+}
