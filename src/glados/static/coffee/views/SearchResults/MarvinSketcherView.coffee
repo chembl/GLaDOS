@@ -80,6 +80,9 @@ MarvinSketcherView = Backbone.View.extend
     ), (error) ->
       $(@el).find('.messages-to-user').text('There was an error: ' + error)
 
+  loadSDF: (sdf_string)->
+    @marvinSketcherInstance.pasteStructure(null, sdf_string)
+
   triggerSubstructureSearch: ->
 
     @triggerMarvinSearch(@SUBSTRUCTURE_SEARCH)

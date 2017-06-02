@@ -33,18 +33,19 @@ class ButtonsHelper
   ###
   @handleCopyDynamic = (elem, data)->
     clipboard.copy(data)
-    tooltip_id = elem.attr('data-tooltip-id')
-    if tooltip_id
-      tooltip = $('#' + tooltip_id)
-      if $( window ).width() <= glados.SMALL_SCREEN_SIZE
-        tooltip.hide()
-        Materialize.toast('Copied!', 1000)
-      else
-        prev_text = tooltip.find('span').text()
-        tooltip.find('span').text('Copied!')
-        reset_text = ->
-          tooltip.find('span').text(prev_text)
-        setTimeout(reset_text, 1000)
+    if elem
+      tooltip_id = elem.attr('data-tooltip-id')
+      if tooltip_id
+        tooltip = $('#' + tooltip_id)
+        if $( window ).width() <= glados.SMALL_SCREEN_SIZE
+          tooltip.hide()
+          Materialize.toast('Copied!', 1000)
+        else
+          prev_text = tooltip.find('span').text()
+          tooltip.find('span').text('Copied!')
+          reset_text = ->
+            tooltip.find('span').text(prev_text)
+          setTimeout(reset_text, 1000)
 
   ### *
     * Handles the copy event
