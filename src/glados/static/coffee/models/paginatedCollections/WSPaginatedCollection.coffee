@@ -22,11 +22,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'setting url'
       @url = @getPaginatedURL()
 
-    getPaginatedURL: ->
+    getPaginatedURL: (customPageSize, customPageNum) ->
 
       url = @getMeta('base_url')
-      page_num = @getMeta('current_page')
-      page_size = @getMeta('page_size')
+      page_num = if customPageNum? then customPageNum else @getMeta('current_page')
+      page_size = if customPageSize? then customPageSize else @getMeta('page_size')
       params = []
 
       limit_str = 'limit=' + page_size
@@ -257,3 +257,98 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return comp
 
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Download functions
+    # ------------------------------------------------------------------------------------------------------------------
+    DOWNLOADED_ITEMS_ARE_VALID: false
+    DOWNLOAD_ERROR_STATE: false
+    invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
+    clearAllResults: -> @allResults = undefined
+    clearSelectedResults: -> @selectedResults = undefined
+
+    # this function iterates over all the pages and downloads all the results. This is independent of the pagination,
+    # but in the future it could be used to optimize the pagination after this has been called.
+    # it returns a list of deferreds which are the requests to the server, when the deferreds are done it means that
+    # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
+    # without requesting again to the server.
+    # you can use a progress element to show the progress if you want.
+    getAllResults: ($progressElement, askingForOnlySelected = false) ->
+
+      # check if I already have all the results and they are valid
+      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+        return [jQuery.Deferred().resolve()]
+
+      if $progressElement?
+        $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
+          percentage: '0'
+
+      customPageNum = 1
+      # 1000 is the maximun page size allowed by the ws
+      customPageSize = 1000
+      firstURL = @getPaginatedURL(customPageSize, customPageNum)
+      baseURL = firstURL.split('/chembl/')[0]
+      console.log(firstURL)
+
+      # this is to keep the same strucutre as the function for the elasticsearch collections
+      baseDeferred = jQuery.Deferred()
+      deferreds = [baseDeferred]
+      @allResults = []
+      thisView = @
+
+      getPage = (url) ->
+        $.get(url).done((response) ->
+          itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
+          totalRecords = response.page_meta.total_count
+
+          for item in response[itemsKeyName]
+            thisView.allResults.push(item)
+          itemsReceived = thisView.allResults.length
+          progress = parseInt((itemsReceived / totalRecords) * 100)
+          if $progressElement? and (progress % 10) == 0
+            $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
+              percentage: progress
+
+          nextUrl = response.page_meta.next
+          if nextUrl?
+            nextUrl = baseURL + nextUrl
+            getPage nextUrl
+          else
+            baseDeferred.resolve()
+        ).fail( (xhr, status, error) ->
+          baseDeferred.reject(xhr, status, error)
+        )
+      getPage(firstURL)
+
+      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
+      $.when.apply($, deferreds).done ->
+        setValidDownload()
+        setTimeout( (()-> $progressElement.html ''), 200)
+
+      baseDeferred.fail (xhr, status, error) ->
+
+        console.log 'xhr ', xhr
+        console.log 'status ', status
+        console.log 'error ', error
+
+        if $progressElement?
+          $progressElement.html 'There was an error while loading the data'
+
+      if $progressElement?
+
+        numDots = 0
+        firstWaitTime = 10000
+        secondWaitTime = 2000
+        generateWaitingToolongMsg = (waitTime) ->
+
+
+          setTimeout( ( ->
+            msg = 'Generating the data' + ( '.' for dot in [0..numDots]).join('')
+            numDots++
+            if baseDeferred.state() == 'pending'
+              $progressElement.html msg
+              generateWaitingToolongMsg(secondWaitTime)
+          ),waitTime)
+        generateWaitingToolongMsg(firstWaitTime)
+
+      return deferreds

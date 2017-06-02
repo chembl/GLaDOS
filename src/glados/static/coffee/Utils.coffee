@@ -68,7 +68,7 @@ glados.useNameSpace 'glados',
 
     cachedTemplateFunctions: {}
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
-    fillContentForElement: ($element, paramsObj)->
+    fillContentForElement: ($element, paramsObj={})->
 
       templateSelector = '#' + $element.attr('data-hb-template')
 
@@ -110,12 +110,13 @@ glados.useNameSpace 'glados',
       else
         return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
 
-    renderLegendForProperty: (property, collection, $legendContainer) ->
+    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true) ->
 
       if not property.legendModel?
         property.legendModel = new glados.models.visualisation.LegendModel
           property: property
           collection: collection
+          enable_selection: enableSelection
 
       if not property.legendView?
         property.legendView = new LegendView
