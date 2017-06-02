@@ -66,10 +66,12 @@ glados.useNameSpace 'glados',
     EMBL_BLUE: '#008cb5'
     VISUALISATION_SELECTED: '#4caf50' #4caf50 green
     VISUALISATION_RED_MIN: '#f44336' # red lighten-5
+    VISUALISATION_RED_BASE: '#f44336' # red
     VISUALISATION_RED_MAX: '#b71c1c' # red darken-4
     VISUALISATION_LIGHT_GREEN_MIN: '#f1f8e9' # green lighten-5
     VISUALISATION_LIGHT_GREEN_MAX: '#33691e' # green darken-4
     VISUALISATION_GREEN_MIN: '#e8f5e9' # green lighten-5
+    VISUALISATION_GREEN_BASE: '#4caf50' # green
     VISUALISATION_GREEN_MAX: '#1b5e20' # green darken-4
     VISUALISATION_TEAL_MIN: '#e0f2f1' #teal lighten-5
     VISUALISATION_TEAL_BASE: '#009688' #teal

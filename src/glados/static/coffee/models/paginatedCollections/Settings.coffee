@@ -106,7 +106,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
-        BASE_URL: glados.Settings.WS_BASE_URL + 'activity.json'
+        BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD

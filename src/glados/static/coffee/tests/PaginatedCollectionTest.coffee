@@ -170,6 +170,13 @@ describe "Paginated Collection", ->
       drugList.resetPageSize(5)
       expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=5&offset=0')
 
+    it "generates a url from custom parameters", ->
+
+      customPageSize = 50
+      customPageNum = 10
+      url = drugList.getPaginatedURL(customPageSize, customPageNum)
+      expect(url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=50&offset=450')
+
     it "generates a correct paginated url (sorting)", ->
       drugList.sortCollection('molecule_chembl_id')
       url = drugList.getPaginatedURL()
