@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.models.visualisation',
       if @get('collection')?
         @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
 
-      @set('selection-enabled', @get('collection')?)
+      @set('selection-enabled', arguments[0].enable_selection)
 
       @set('domain', @get('property').domain)
       @set('colour-range', @get('property').coloursRange)

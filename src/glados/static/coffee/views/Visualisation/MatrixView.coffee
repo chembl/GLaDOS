@@ -512,7 +512,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $(thisView.el).find('.tooltipped').tooltip()
 
       thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-      glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer)
+      glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
+        enableSelection=false)
 
     colourCells()
 
