@@ -99,7 +99,7 @@ urlpatterns = [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
 
-  url(r'^assays/(filter/[\S]+)?$',
+  url(r'^assays/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/browseAssays.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ urlpatterns = [
   # --------------------------------------------------------------------------------------------------------------------
   # Activities
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^activities/(filter/[\S]+)?$',
+  url(r'^activities/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/browseActivities.html"), ),
 
 ]
