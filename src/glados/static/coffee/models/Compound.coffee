@@ -5,6 +5,14 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   parse: (response) ->
 
+    # Lazy definition for sdf content retrieving
+    response.sdf_url = glados.Settings.WS_BASE_URL + 'molecule/' + response.molecule_chembl_id + '.sdf'
+    response.sdf_promise = null
+    response.get_sdf_content_promise = ->
+      if not response.sdf_promise
+        response.sdf_promise = $.ajax(response.sdf_url)
+      return response.sdf_promise
+
     containsMetals = (molformula) ->
 
       nonMetals = ['H', 'C', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I']

@@ -1103,6 +1103,36 @@ div#CNC-zoom-modal {
   margin-top: 10px;
 }
 
+#SDF-raw-modal{
+  display: inline-block;
+}
+
+.sdf-raw-container {
+  height: 95%;
+  width: 95%;
+  text-align: center;
+  margin: 2% auto 2% auto;
+}
+
+.SDF-raw-modal-title-container {
+  position: absolute;
+  top: 0;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.SDF-raw-modal-content-container{
+  width: 95%;
+  text-align: center;
+  margin: 35px auto 2% auto;
+}
+
+#SDF-raw-modal-content{
+  display: inline-block;
+  font-family: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+  text-align: left;
+}
+
 .modal-close-icon {
   position: absolute;
   top: 5px;

@@ -153,6 +153,9 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
 
+  # Marvin full screen URL
+  glados.Settings.MARVIN_FULL_SCREEN_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'marvin_search_fullscreen/'
+
   glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'substructure_search_results/'
   glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure/'
 
