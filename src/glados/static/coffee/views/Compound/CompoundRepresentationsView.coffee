@@ -13,7 +13,7 @@ CompoundRepresentationsView = CardView.extend
     if not @molecule_structures?
       $('#CompoundRepresentations').hide()
       return
-
+    @renderButtons()
     @renderCanonicalSmiles()
     @renderStandardInchi()
     @renderStandardInchiKey()
@@ -26,6 +26,52 @@ CompoundRepresentationsView = CardView.extend
     @activateModals()
 
     afterRender()
+
+  renderButtons: ->
+    compound_model = @model
+    # Requests the ajax here to avoid conflict with the copy to clipboard
+    @model.get('get_sdf_content_promise')().done( )
+
+    # View Raw button/link
+    raw_modal = $(@el).find('#SDF-raw-modal')
+    raw_modal_title = $(@el).find('#SDF-raw-modal-title')
+    raw_modal_content = $(@el).find('#SDF-raw-modal-content')
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-rawview,#Reps-Molfile-rawview-small'), 'View Raw SDF File', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        raw_modal_title.text(compound_model.get('molecule_chembl_id'))
+        raw_modal_content.html(molfile_data.replace(/[\n\r]/g,'<br/>'))
+    )
+    # Download button/link
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-dnld,#Reps-Molfile-dnld-small'), 'Download SDF File', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        blob = new Blob([molfile_data], {type: "chemical/x-mdl-sdfile;charset=utf-8"})
+        saveAs(blob, compound_model.get('molecule_chembl_id')+'.sdf')
+    )
+
+    # Editor button/link
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        marvinSketcherView = new MarvinSketcherView({sdf_smiles_to_load_on_ready:molfile_data})
+        marvin_iframe = $('#sketch')
+        $('#sketch', marvin_iframe.contents()).addClass('border')
+    )
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        window.sessionStorage.setItem('molfile_data',molfile_data)
+        window.location.href = glados.Settings.MARVIN_FULL_SCREEN_PAGE
+    )
+
+    # Copy to clipboard button/link
+    copy_button_elem = $(@el).find('#Reps-Molfile-copy')
+    ButtonsHelper.initLinkButton(copy_button_elem, 'Copy SDF File to clipboard', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        ButtonsHelper.handleCopyDynamic(copy_button_elem, molfile_data)
+    )
+    copy_button_elem_small = $(@el).find('#Reps-Molfile-copy-small')
+    ButtonsHelper.initLinkButton(copy_button_elem_small, 'Copy SDF File to clipboard', ->
+      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
+        ButtonsHelper.handleCopyDynamic(copy_button_elem_small, molfile_data)
+    )
 
   renderCanonicalSmiles: ->
     $(@el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value',

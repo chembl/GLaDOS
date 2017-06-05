@@ -105,6 +105,7 @@ describe "Legend Model", ->
         legendModel = new glados.models.visualisation.LegendModel
           property: prop
           collection: collection
+          enable_selection: true
 
       it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
@@ -133,6 +134,7 @@ describe "Legend Model", ->
         legendModel = new glados.models.visualisation.LegendModel
           property: prop
           collection: collection
+          enable_selection: true
 
       it 'initialises from a domain and tick values', ->
         testInitialisesFromADefaultDomainAndTickValues(legendModel)
@@ -201,6 +203,7 @@ describe "Legend Model", ->
         legendModel = new glados.models.visualisation.LegendModel
           property: prop
           collection: collection
+          enable_selection: true
 
       it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
       it 'selects a range', -> testSelectsByRange(legendModel)
@@ -227,6 +230,7 @@ describe "Legend Model", ->
         legendModel = new glados.models.visualisation.LegendModel
           property: prop
           collection: collection
+          enable_selection: true
 
       it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
       it 'selects a range', -> testSelectsByRange(legendModel)
