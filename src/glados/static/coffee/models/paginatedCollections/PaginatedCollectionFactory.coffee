@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # --------------------------------------------------------------------------------------------------------------------
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
-    getNewESResultsListFor: (esIndexSettings) ->
+    getNewESResultsListFor: (esIndexSettings, customQueryString='') ->
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions).extend
         model: esIndexSettings.MODEL
@@ -36,6 +36,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             default_view: esIndexSettings.DEFAULT_VIEW
             all_items_selected: false
             selection_exceptions: {}
+            custom_query_string: customQueryString
 
       return new indexESPagQueryCollection
 
@@ -101,6 +102,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
+
+    getNewESActivitiesList: (customQueryString='') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.ACTIVITY, customQueryString)
+      return list
 
     getNewAssaysList: (filter='') ->
 

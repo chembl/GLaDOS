@@ -102,7 +102,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
-
+      ACTIVITY:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESActivitity'
+        LABEL: 'Activities'
+        PATH: '/chembl_activity'
+        MODEL: Activity
+        ID_COLUMN: Activity.ID_COLUMN
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS_CARD: []
+        ADDITIONAL_COLUMNS:[]
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity

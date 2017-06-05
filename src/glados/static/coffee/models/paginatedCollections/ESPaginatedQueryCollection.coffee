@@ -176,7 +176,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
-      if not _.isUndefined(customQueryString)
+      if customQueryString? and customQueryString != ''
         es_query.query.bool.must = {
           query_string:
             analyze_wildcard: true
