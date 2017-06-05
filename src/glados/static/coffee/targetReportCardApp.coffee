@@ -28,6 +28,10 @@ class TargetReportCardApp
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
+    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
+    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -51,6 +55,11 @@ class TargetReportCardApp
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
+
+    new glados.views.Target.LigandEfficienciesView
+      collection: ligandEfficiencies
+      el: $('#TLigandEfficienciesCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     target.fetch()
     appDrugsClinCandsList.fetch()
@@ -131,8 +140,19 @@ class TargetReportCardApp
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     associatedAssays.fetch()
+
+  @initLigandEfficiencies = ->
+
+    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
+    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
+    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+
+    new glados.views.Target.LigandEfficienciesView
+      collection: ligandEfficiencies
+      el: $('#TLigandEfficienciesCard')
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 

@@ -2,11 +2,8 @@ TargetAssociatedAssays = Backbone.Model.extend
 
   initialize: ->
     @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_assay/_search'
-    console.log 'init target associated assays: ', @url
 
   fetch: ->
-    console.log 'going to fetch ', @url
-    console.log 'for: ', @get('target_chembl_id')
     esJSONRequest = JSON.stringify(@getRequestData())
 
     fetchESOptions =
@@ -27,9 +24,7 @@ TargetAssociatedAssays = Backbone.Model.extend
       filter = 'target_chembl_id=' + @get('target_chembl_id') + '&' + labelFilter
       bucket.link = Assay.getAssaysListURL(filter)
 
-    console.log 'buckets for assays: ', buckets
     title = 'ChEMBL Assays for Target ' + @get('target_chembl_id')
-    console.log '^^^'
     return  {
       'pie-data': buckets
       'title': title
