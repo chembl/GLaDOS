@@ -112,15 +112,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             molecule_chembl_id: idsList
       }
 
-# generates an object with the data necessary to do the ES request
-# customPage: set a customPage if you want a page different than the one set as current
-# the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
-      request_facets = if _.isUndefined(request_facets) then false else request_facets
-      # If facets are requested the facet filters are excluded from the query
-      facets_filtered = true
-      page = if customPage? then customPage else @getMeta('current_page')
-      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
+    getNormalSearchQuery: ()->
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       exact_terms_joined = null
@@ -140,37 +132,65 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         term_i_query = @getSingleTermQuery(term_i)
         by_term_query.bool.should.push(term_i_query)
 
+
+      search_query ={
+        bool:
+          should: [
+            {
+              query_string:
+                fields: [
+                  "*.std_analyzed^10",
+                  "*.keyword^1000",
+                  "*.entity_id^100000",
+                  "*.id_reference^1000",
+                  "*.chembl_id^10000",
+                  "*.chembl_id_reference^5000"
+                ]
+                fuzziness: 0
+                query: exact_terms_joined
+            }
+          ]
+      }
+      if singular_terms.length > 0
+        search_query.bool.should.push(by_term_query)
+      return search_query
+
+# generates an object with the data necessary to do the ES request
+# customPage: set a customPage if you want a page different than the one set as current
+# the same for customPageSize
+    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
+      request_facets = if _.isUndefined(request_facets) then false else request_facets
+      # If facets are requested the facet filters are excluded from the query
+      facets_filtered = true
+      page = if customPage? then customPage else @getMeta('current_page')
+      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
+
       # Base Elastic query
       es_query = {
         size: pageSize,
         from: ((page - 1) * pageSize)
         query:
           bool:
-            must:
-              bool:
-                should: [
-                  {
-                    query_string:
-                      fields: [
-                        "*.std_analyzed^10",
-                        "*.keyword^1000",
-                        "*.entity_id^100000",
-                        "*.id_reference^1000",
-                        "*.chembl_id^10000",
-                        "*.chembl_id_reference^5000"
-                      ]
-                      fuzziness: 0
-                      query: exact_terms_joined
-                  }
-                ]
+            must: null
       }
+
+      # Custom query String query
+      customQueryString = @getMeta('custom_query_string')
+      if not _.isUndefined(customQueryString)
+        es_query.query.bool.must = {
+          query_string:
+            analyze_wildcard: true
+            query: customQueryString
+        }
+      # Normal Search query
+      else
+        es_query.query.bool.must = @getNormalSearchQuery()
+
       # Includes the filter query by query filter terms and selected facets
       filter_query = @getFilterQuery(facets_filtered)
       if filter_query
         es_query.query.bool.filter = [filter_query]
 
-      if singular_terms.length > 0
-        es_query.query.bool.must.bool.should.push(by_term_query)
 
       if request_facets
         if _.isUndefined(facets_first_call)
