@@ -31,6 +31,7 @@ CompoundRepresentationsView = CardView.extend
     compound_model = @model
     # Requests the ajax here to avoid conflict with the copy to clipboard
     @model.get('get_sdf_content_promise')().done( )
+
     # View Raw button/link
     raw_modal = $(@el).find('#SDF-raw-modal')
     raw_modal_title = $(@el).find('#SDF-raw-modal-title')
@@ -48,12 +49,11 @@ CompoundRepresentationsView = CardView.extend
     )
 
     # Editor button/link
-    marvinSketcherView = new MarvinSketcherView()
-    marvin_iframe = $('iframe')
-    $('#sketch', marvin_iframe.contents()).addClass('border')
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-        marvinSketcherView.loadSDF(molfile_data)
+        marvinSketcherView = new MarvinSketcherView({sdf_smiles_to_load_on_ready:molfile_data})
+        marvin_iframe = $('#sketch')
+        $('#sketch', marvin_iframe.contents()).addClass('border')
     )
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->

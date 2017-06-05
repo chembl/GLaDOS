@@ -12,11 +12,18 @@ MarvinSketcherView = Backbone.View.extend
 
   el: $('#BCK-MarvinContainer')
 
-  initialize: ->
-    thisView = @
+  sdf_smiles_to_load_on_ready: null
 
+  initialize: (options)->
+    @preloader = $(@el).find('#marvin-preloader')
+    @marvin_iframe = $(@el).find('#sketch')
+    if options
+      @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
+    thisView = @
     MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
       thisView.marvinSketcherInstance = sketcherInstance
+      if thisView.sdf_smiles_to_load_on_ready
+        thisView.loadSDF(thisView.sdf_smiles_to_load_on_ready)
     ), (error) ->
       alert 'Loading of the sketcher failed' + error
 
@@ -81,7 +88,14 @@ MarvinSketcherView = Backbone.View.extend
       $(@el).find('.messages-to-user').text('There was an error: ' + error)
 
   loadSDF: (sdf_string)->
-    @marvinSketcherInstance.pasteStructure(null, sdf_string)
+    @marvin_iframe.hide()
+    @preloader.show()
+    load_structure = ->
+        @marvinSketcherInstance.pasteStructure('mol', sdf_string)
+        @preloader.hide()
+        @marvin_iframe.show()
+
+    setTimeout(load_structure.bind(@), 1000)
 
   triggerSubstructureSearch: ->
 

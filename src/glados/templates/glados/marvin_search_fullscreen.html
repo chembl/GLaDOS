@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
   <title>Marvin Search</title>
 
   <!-- google graphs loader -->
@@ -17,9 +19,12 @@
 
 <body id="BCK-MarvinContainer">
 
-{% load static %}
+  <div id="marvin-preloader" class="row" style="display: none">
+    {% block preloader %}
+    {% include "glados/base/infinite_browse_loaders.html" %}
+    {% endblock %}
+  </div>
   <div class="marvin-search-fullscreen row">
-
     <iframe id="sketch" src="{% static 'marvinjs/editor.html' %}"
             style="overflow: hidden; width: 100%; min-height: 100%; border: 1px solid darkgray;"></iframe>
 
