@@ -244,7 +244,7 @@ describe "Paginated Collection", ->
 
     it 'generates the initial url', ->
 
-      urlMustBe = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
+      urlMustBe = 'https://wwwdev.ebi.ac.uk/chembl/api/data/activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
       expect(list.url).toBe(urlMustBe)
 
   # ------------------------------
