@@ -63,6 +63,9 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @collection.DOWNLOAD_ERROR_STATE
       @renderWhenError()
       return
+    console.log 'COLLECTION: ', @collection
+    if @collection.getMeta('total_items') == 0
+      console.log 'NO DATA!'
 
     # only bother if my element is visible
     if $(@el).is(":visible")
