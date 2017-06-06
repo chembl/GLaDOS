@@ -38,6 +38,37 @@ describe "Properties Factory for visualisation", ->
         for i in [0..rangeMustBe.length - 1]
           expect(rangeGot[i]).toBe(rangeMustBe[i])
 
+    describe 'Threshold', ->
+
+      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',
+        withColourScale=true)
+
+      it 'generates the basic configuration', ->
+
+        expect(prop.aggregatable).toBe(true)
+        expect(prop.label).toBe("Standard Value nM")
+        expect(prop.propName).toBe("standard_value")
+        expect(prop.type).toBe(Number)
+        expect(prop.domain?).toBe(true)
+        expect(prop.coloursRange?).toBe(true)
+
+      it 'generates a colour scale when requested', ->
+
+        scale = prop.colourScale
+        domain = prop.domain
+        range = prop.coloursRange
+        bottom = -Number.MAX_VALUE
+        top = Number.MAX_VALUE
+        domainForTest = _.union([bottom], domain, [top])
+        for i in [0..domain.length]
+          a = domainForTest[i]
+          b = domainForTest[i+1]
+          testVal = (Math.random() * (b - a)) + a
+          expect(scale(testVal)).toBe(range[i])
+
+
+
+
   describe 'with a unknown domain', ->
 
     describe 'continuous', ->
