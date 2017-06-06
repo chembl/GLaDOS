@@ -66,9 +66,6 @@ describe "Properties Factory for visualisation", ->
           testVal = (Math.random() * (b - a)) + a
           expect(scale(testVal)).toBe(range[i])
 
-
-
-
   describe 'with a unknown domain', ->
 
     describe 'continuous', ->

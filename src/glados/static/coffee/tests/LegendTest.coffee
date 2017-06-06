@@ -256,3 +256,39 @@ describe "Legend Model", ->
           property: prop
 
       it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
+
+  describe "Threshold", ->
+
+     # ------------------------------------------------------------------------------------------------------------------
+    # Generic Test Functions
+    # ------------------------------------------------------------------------------------------------------------------
+    testInitialisesFromProperty = (legendModel) ->
+
+      domain = legendModel.get('domain')
+      range = legendModel.get('colour-range')
+      ticks = legendModel.get('ticks')
+
+      domainMustBe = legendModel.get('property').domain
+      for i in [0..domainMustBe.length - 1]
+        expect(domain[i]).toBe(domainMustBe[i])
+      rangeMustBe = legendModel.get('property').coloursRange
+      for i in [0..rangeMustBe.length - 1]
+        expect(range[i]).toBe(rangeMustBe[i])
+
+      console.log 'ticks: ', ticks
+
+
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',
+        withColourScale=true)
+    collection = glados.models.paginatedCollections\
+      .PaginatedCollectionFactory.getNewESActivitiesList()
+    legendModel = new glados.models.visualisation.LegendModel
+          property: prop
+          collection: collection
+          enable_selection: false
+
+    beforeAll (done) ->
+        TestsUtils.simulateDataESList(collection,
+          glados.Settings.STATIC_URL + 'testData/ActivitiesTestData.json', done)
+
+    it 'initializes from the property', -> testInitialisesFromProperty(legendModel)
