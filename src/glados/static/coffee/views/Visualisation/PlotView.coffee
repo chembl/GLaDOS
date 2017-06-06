@@ -60,18 +60,21 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+
     if @collection.DOWNLOAD_ERROR_STATE
       @renderWhenError()
       return
-    console.log 'COLLECTION: ', @collection
-    if @collection.getMeta('total_items') == 0
-      console.log 'NO DATA!'
+
+    if @collection.getMeta('total_records') == 0
+      $messagesElement.html('There is no data to show for this plot. ' +
+        (if @config.plot_title? then @config.plot_title else ''))
+      return
 
     # only bother if my element is visible
     if $(@el).is(":visible")
 
       console.log 'RENDER GRAPH!'
-      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
 

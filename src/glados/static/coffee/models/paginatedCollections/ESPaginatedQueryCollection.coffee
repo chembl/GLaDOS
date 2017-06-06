@@ -467,14 +467,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if not totalRecords?
         url = @getURL()
-        # here I need to get
         requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
-        console.log 'NEED TOTAL RECORDS!'
-        console.log thisCollection.getRequestData(1, 1)
-        console.log requestData
-
         $.post(url, requestData).done((response) ->
-          console.log 'got toal records: ', response
           thisCollection.setMeta('total_records', response.hits.total)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
         )
@@ -496,6 +490,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'
+        @setValidDownload()
         return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
@@ -560,11 +555,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      setValidDownload = $.proxy((->
-        @DOWNLOADED_ITEMS_ARE_VALID = true
-        @DOWNLOAD_ERROR_STATE = false
-        @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
-      ), @)
+      setValidDownload = $.proxy(@setValidDownload, @)
       $.when.apply($, deferreds).done -> setValidDownload()
 
       if iNeedToGetEverythingExceptSome
@@ -579,6 +570,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         $.when.apply($, deferreds).done -> f()
 
       return deferreds
+
+    setValidDownload: ->
+      @DOWNLOADED_ITEMS_ARE_VALID = true
+      @DOWNLOAD_ERROR_STATE = false
+      @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
 
     removeHolesInAllResults: ->
       i = 0
