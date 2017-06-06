@@ -3,7 +3,11 @@ glados.useNameSpace 'glados.views.Target',
 
     initialize: ->
       @showCardContent()
-      @fetchInfoForGraph()
+
+      @collection.on glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @renderPlot, @
+
+      @$progressElement = $(@el).find('.load-messages-container')
+      @collection.getAllResults(@$progressElement)
 
       @resource_type = 'Target'
       @initEmbedModal('ligand_efficiencies')
@@ -32,23 +36,8 @@ glados.useNameSpace 'glados.views.Target',
         config: config
 
 
-    fetchInfoForGraph: ->
+    renderPlot: ->
+      console.log 'going to render plot!'
+      @$progressElement.html ''
+      @scatterPlotView.render()
 
-      $progressElement = $(@el).find('.load-messages-container')
-      deferreds = @collection.getAllResults($progressElement)
-
-      thisView = @
-      $.when.apply($, deferreds).done( ->
-
-        console.log 'got all data!'
-        console.log thisView.collection.allResults
-
-        if !thisView.collection.allResults[0]?
-          # here the data has not been actually received, if this causes more trouble it needs to be investigated.
-          return
-
-        $progressElement.html ''
-        thisView.scatterPlotView.render()
-      )
-
-      console.log 'FETCHING INFO FOR PLOT!'

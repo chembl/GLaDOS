@@ -28,14 +28,10 @@ class TargetReportCardApp
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
-    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
-
-    customQueryString = 'target_chembl_id:CHEMBL2093868 AND ' +
-      'standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
+    customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
+      ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
-
-#    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+    console.log 'query string: ', customQueryString
 
     new TargetNameAndClassificationView
       model: target
@@ -151,9 +147,9 @@ class TargetReportCardApp
 
   @initLigandEfficiencies = ->
 
-    filter = 'target_chembl_id=' + GlobalVariables.CHEMBL_ID + '&standard_type__in=IC50,Ki,EC50,Kd' +
-    '&standard_value__isnull=false&ligand_efficiency__isnull=false'
-    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
+    customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
+      ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
+    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
 
     new glados.views.Target.LigandEfficienciesView
       collection: ligandEfficiencies

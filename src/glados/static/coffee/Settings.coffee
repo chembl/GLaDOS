@@ -125,6 +125,7 @@ glados.useNameSpace 'glados',
     DEFAULT_NULL_VALUE_LABEL: '---'
   Events:
     Collections:
+      ALL_ITEMS_DOWNLOADED: 'ALL_ITEMS_DOWNLOADED'
       SELECTION_UPDATED: 'selection-changed'
       Params:
         ALL_SELECTED:'all-selected'

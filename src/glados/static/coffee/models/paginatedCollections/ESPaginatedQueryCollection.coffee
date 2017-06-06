@@ -466,7 +466,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       totalRecords = @getMeta('total_records')
 
       if not totalRecords?
+        url = @getURL()
+        # here I need to get
+        requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
         console.log 'NEED TOTAL RECORDS!'
+        console.log thisCollection.getRequestData(1, 1)
+        console.log requestData
+
+        $.post(url, requestData).done((response) ->
+          console.log 'got toal records: ', response
+          thisCollection.setMeta('total_records', response.hits.total)
+          thisCollection.getAllResults($progressElement, askingForOnlySelected)
+        )
+        return
 
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
@@ -501,8 +513,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @allResults = (undefined for num in [1..totalRecords])
         @selectedResults = (undefined for num in [1..totalRecords])
         totalPages = Math.ceil(totalRecords / pageSize)
-        console.log 'totalRecords:', totalRecords
-        console.log 'totalPages', totalPages
 
       itemsReceived = 0
 
@@ -550,7 +560,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
+      setValidDownload = $.proxy((->
+        @DOWNLOADED_ITEMS_ARE_VALID = true
+        @DOWNLOAD_ERROR_STATE = false
+        @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
+      ), @)
       $.when.apply($, deferreds).done -> setValidDownload()
 
       if iNeedToGetEverythingExceptSome
@@ -603,6 +617,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         downloadObj.push row
 
       return downloadObj
+
+
 
 # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, columns, $progressElement) ->
