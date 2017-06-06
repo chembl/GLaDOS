@@ -37,7 +37,6 @@ glados.useNameSpace 'glados.views.Target',
 
 
     renderPlot: ->
-      console.log JSON.stringify(@collection.allResults)
       console.log 'going to render plot!'
       @$progressElement.html ''
       @scatterPlotView.render()

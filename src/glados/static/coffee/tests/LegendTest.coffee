@@ -267,6 +267,7 @@ describe "Legend Model", ->
       domain = legendModel.get('domain')
       range = legendModel.get('colour-range')
       ticks = legendModel.get('ticks')
+      expect(legendModel.isThreshold()).toBe(true)
 
       domainMustBe = legendModel.get('property').domain
       for i in [0..domainMustBe.length - 1]
@@ -275,8 +276,14 @@ describe "Legend Model", ->
       for i in [0..rangeMustBe.length - 1]
         expect(range[i]).toBe(rangeMustBe[i])
 
-      console.log 'ticks: ', ticks
+      # this test could be better if there is time
+      ticksMustBe = ["<1", "[1,100)", "[100,1000)", ">=1000"]
+      for i in [0..ticksMustBe.length - 1]
+        expect(ticks[i]).toBe(ticksMustBe[i])
 
+    testGetsAmountPerRange = (legendModel) ->
+
+      console.log 'gets amount per range'
 
     prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',
         withColourScale=true)
@@ -292,3 +299,4 @@ describe "Legend Model", ->
           glados.Settings.STATIC_URL + 'testData/ActivitiesTestData.json', done)
 
     it 'initializes from the property', -> testInitialisesFromProperty(legendModel)
+    it 'gets the amount per range', -> testGetsAmountPerRange(legendModel)

@@ -16,23 +16,47 @@ glados.useNameSpace 'glados.models.visualisation',
         @set('ticks', @get('property').domain)
         @set('values-selection', {}) unless not @get('selection-enabled')
         @fillAmountPerValue()
+      else if @isThreshold()
+        @set('values-selection', {}) unless not @get('selection-enabled')
+        @setTicks()
       else
        # only used  for undefined value
         @set('values-selection', {}) unless not @get('selection-enabled')
         @setTicks()
 
     isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
-    # ------------------------------------------------------------------------------------------------------------------
-    # Continuous
-    # ------------------------------------------------------------------------------------------------------------------
+    isThreshold: -> @get('property').colourScaleType == glados.Visualisation.THRESHOLD
+    isContinuous: -> @get('property').colourScaleType == glados.Visualisation.CONTINUOUS
+
     setTicks: ->
-      numTicks = @get('property').ticksNumber
-      start = @get('domain')[0]
-      stop = @get('domain')[1]
-      step = Math.abs(stop - start) / (numTicks - 1)
-      ticks = d3.range(start, stop, step)
-      ticks.push(stop)
-      @set('ticks', ticks)
+      if @isContinuous()
+        numTicks = @get('property').ticksNumber
+        start = @get('domain')[0]
+        stop = @get('domain')[1]
+        step = Math.abs(stop - start) / (numTicks - 1)
+        ticks = d3.range(start, stop, step)
+        ticks.push(stop)
+        @set('ticks', ticks)
+      else if @isThreshold()
+        domain = @get('domain')
+        ticks = []
+        for i in [-1..domain.length-1]
+          a = domain[i]
+          b = domain[i+1]
+
+          if not a?
+            ticks.push('<' + b)
+          else if not b?
+            ticks.push('>=' + a)
+          else
+            ticks.push('[' + a + ',' + b + ')')
+
+        @set('ticks', ticks)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Threshold
+    # ------------------------------------------------------------------------------------------------------------------
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
