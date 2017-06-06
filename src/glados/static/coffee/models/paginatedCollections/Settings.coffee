@@ -102,6 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
+    ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESActivitity'
@@ -208,6 +209,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
-
+for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
+  val_i.KEY_NAME = key_i
 # Loads the Search results URL's including the ElasticSearch entities configuration
 glados.loadSearchResultsURLS()

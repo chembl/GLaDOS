@@ -39,8 +39,14 @@ glados.useNameSpace 'glados.views.Target',
 
       thisView = @
       $.when.apply($, deferreds).done( ->
+
         console.log 'got all data!'
         console.log thisView.collection.allResults
+
+        if !thisView.collection.allResults[0]?
+          # here the data has not been actually received, if this causes more trouble it needs to be investigated.
+          return
+
         $progressElement.html ''
         thisView.scatterPlotView.render()
       )

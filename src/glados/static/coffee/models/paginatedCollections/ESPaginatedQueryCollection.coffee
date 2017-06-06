@@ -382,10 +382,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, fetch) ->
+    setPage: (newPageNum, doFetch=true) ->
       newPageNum = parseInt(newPageNum)
-      fetch = if _.isUndefined(fetch) then true else fetch
-      if fetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
+      if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 
@@ -465,6 +464,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().resolve()]
 
       totalRecords = @getMeta('total_records')
+
+      if not totalRecords?
+        console.log 'NEED TOTAL RECORDS!'
+
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
       if totalRecords >= 10000 and not iNeedToGetOnlySome
@@ -498,6 +501,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @allResults = (undefined for num in [1..totalRecords])
         @selectedResults = (undefined for num in [1..totalRecords])
         totalPages = Math.ceil(totalRecords / pageSize)
+        console.log 'totalRecords:', totalRecords
+        console.log 'totalPages', totalPages
 
       itemsReceived = 0
 
