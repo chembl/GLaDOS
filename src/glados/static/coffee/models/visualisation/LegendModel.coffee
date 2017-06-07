@@ -16,23 +16,88 @@ glados.useNameSpace 'glados.models.visualisation',
         @set('ticks', @get('property').domain)
         @set('values-selection', {}) unless not @get('selection-enabled')
         @fillAmountPerValue()
+      else if @isThreshold()
+        @set('values-selection', {}) unless not @get('selection-enabled')
+        @setTicks()
+        @fillAmountPerRange()
       else
        # only used  for undefined value
         @set('values-selection', {}) unless not @get('selection-enabled')
         @setTicks()
 
     isDiscrete: -> @get('property').colourScaleType == glados.Visualisation.CATEGORICAL
-    # ------------------------------------------------------------------------------------------------------------------
-    # Continuous
-    # ------------------------------------------------------------------------------------------------------------------
+    isThreshold: -> @get('property').colourScaleType == glados.Visualisation.THRESHOLD
+    isContinuous: -> @get('property').colourScaleType == glados.Visualisation.CONTINUOUS
+
     setTicks: ->
-      numTicks = @get('property').ticksNumber
-      start = @get('domain')[0]
-      stop = @get('domain')[1]
-      step = Math.abs(stop - start) / (numTicks - 1)
-      ticks = d3.range(start, stop, step)
-      ticks.push(stop)
-      @set('ticks', ticks)
+      if @isContinuous()
+        numTicks = @get('property').ticksNumber
+        start = @get('domain')[0]
+        stop = @get('domain')[1]
+        step = Math.abs(stop - start) / (numTicks - 1)
+        ticks = d3.range(start, stop, step)
+        ticks.push(stop)
+        @set('ticks', ticks)
+      else if @isThreshold()
+        domain = @get('domain')
+        ticks = []
+        for i in [-1..domain.length-1]
+          a = domain[i]
+          b = domain[i+1]
+
+          if not a?
+            ticks.push('<' + b)
+          else if not b?
+            ticks.push('>=' + a)
+          else
+            ticks.push('[' + a + ',' + b + ')')
+
+        @set('ticks', ticks)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Threshold
+    # ------------------------------------------------------------------------------------------------------------------
+    fillAmountPerRange: ->
+
+
+      timeStart = (new Date()).getTime()
+      collection = @get('collection')
+      if collection.allResults?
+        allItemsObjs = collection.allResults
+      else
+        allItemsObjs = (model.attributes for model in collection.models)
+
+      domain = @get('domain')
+      prop = @get('property')
+      ticks = @get('ticks')
+
+      amountsPerRange = {}
+      for tick in ticks
+        amountsPerRange[tick] = 0
+
+      sortedItemsObjs = _.sortBy(allItemsObjs, (obj) -> glados.Utils.getNestedValue(obj, prop.propName, forceAsNumber=true))
+      rangeNum = 0
+      rangeNumLimit = domain[rangeNum]
+      for obj in sortedItemsObjs
+        value = glados.Utils.getNestedValue(obj, prop.propName, forceAsNumber=true)
+        if value < rangeNumLimit
+          amountsPerRange[ticks[rangeNum]]++
+        else
+          rangeNum++
+          amountsPerRange[ticks[rangeNum]]++
+          #the case of the last range
+          if rangeNum == domain.length
+            rangeNumLimit = Number.MAX_VALUE
+          else
+            rangeNumLimit = domain[rangeNum]
+
+      timeEnd = (new Date()).getTime()
+
+      @set('amounts-per-range', amountsPerRange)
+
+    getTextAmountPerRange: (value) ->
+      ans = @get('amounts-per-range')[value]
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
