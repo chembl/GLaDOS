@@ -77,7 +77,7 @@ class URLProcessor
   @getFilter = ->
     filterWord = '/filter/'
     pathname = window.location.pathname
-    filter = pathname.split(filterWord)[1]
+    filter = decodeURI(pathname.split(filterWord)[1])
     return if filter? then filter else ''
   # --------------------------------------------------------------------------------------------------------------------
   # Structure Search URL's
