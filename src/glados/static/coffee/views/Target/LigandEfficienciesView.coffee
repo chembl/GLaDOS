@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Target',
 
       @$progressElement = $(@el).find('.load-messages-container')
       @collection.getAllResults(@$progressElement)
+      @target_chembl_id = arguments[0].target_chembl_id
 
       @resource_type = 'Target'
       @initEmbedModal('ligand_efficiencies')
@@ -26,7 +27,7 @@ glados.useNameSpace 'glados.views.Target',
         initial_property_y: 'ligand_efficienfy_bei'
         initial_property_colour: 'standard_value'
         disable_axes_selectors: true
-        plot_title: 'ChEMBL Ligand Efficiency Plot for Target ' + arguments[0].target_chembl_id
+        plot_title: 'ChEMBL Ligand Efficiency Plot for Target ' + @target_chembl_id
         disable_selection: true
       }
 
@@ -40,4 +41,10 @@ glados.useNameSpace 'glados.views.Target',
       console.log 'going to render plot!'
       @$progressElement.html ''
       @scatterPlotView.render()
+
+      if @collection.getMeta('total_records') > 0
+        $linkToActivities = $(@el).find('.BCK-bioactivities-link')
+        glados.Utils.fillContentForElement $linkToActivities,
+          target_chembl_id: @target_chembl_id
+          url: Activity.getActivitiesListURL(@collection.getMeta('custom_query_string'))
 
