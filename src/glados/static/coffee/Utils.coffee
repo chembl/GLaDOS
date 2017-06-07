@@ -8,19 +8,24 @@ glados.useNameSpace 'glados',
     #       }
     #     }
     # you can use the function like this getNestedValue(a, 'b.c'.split('.'))
-    getNestedValue: (nestedObj, nestedComparatorsStr) ->
+    getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false) ->
+
+      nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else glados.Settings.DEFAULT_NULL_VALUE_LABEL
 
       nestedComparatorsList = nestedComparatorsStr.split('.')
       if nestedComparatorsList.length == 1
         value = nestedObj[(nestedComparatorsList.shift())]
         if not value?
-          return glados.Settings.DEFAULT_NULL_VALUE_LABEL
-        return value
+          return nullReturnVal
+        if forceAsNumber
+          return parseFloat(value)
+        else
+          return value
       else
         prop = nestedComparatorsList.shift()
         newObj = nestedObj[(prop)]
         if !newObj?
-          return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+          return nullReturnVal
 
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 

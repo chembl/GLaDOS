@@ -58,9 +58,46 @@ glados.useNameSpace 'glados.models.visualisation',
     # Threshold
     # ------------------------------------------------------------------------------------------------------------------
     fillAmountPerRange: ->
-      console.log 'filling amount per range'
+
+
+      timeStart = (new Date()).getTime()
+      collection = @get('collection')
+      if collection.allResults?
+        allItemsObjs = collection.allResults
+      else
+        allItemsObjs = (model.attributes for model in collection.models)
+
       domain = @get('domain')
-      console.log 'domain: ', domain
+      prop = @get('property')
+      ticks = @get('ticks')
+
+      amountsPerRange = {}
+      for tick in ticks
+        amountsPerRange[tick] = 0
+
+      sortedItemsObjs = _.sortBy(allItemsObjs, (obj) -> glados.Utils.getNestedValue(obj, prop.propName, forceAsNumber=true))
+      rangeNum = 0
+      rangeNumLimit = domain[rangeNum]
+      for obj in sortedItemsObjs
+        value = glados.Utils.getNestedValue(obj, prop.propName, forceAsNumber=true)
+        if value < rangeNumLimit
+          amountsPerRange[ticks[rangeNum]]++
+        else
+          rangeNum++
+          amountsPerRange[ticks[rangeNum]]++
+          #the case of the last range
+          if rangeNum == domain.length
+            rangeNumLimit = Number.MAX_VALUE
+          else
+            rangeNumLimit = domain[rangeNum]
+
+      timeEnd = (new Date()).getTime()
+
+      @set('amounts-per-range', amountsPerRange)
+
+    getTextAmountPerRange: (value) ->
+      ans = @get('amounts-per-range')[value]
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical

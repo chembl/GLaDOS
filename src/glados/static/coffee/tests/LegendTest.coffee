@@ -205,6 +205,7 @@ describe "Legend Model", ->
           collection: collection
           enable_selection: true
 
+
       it 'initialises from the property', -> testInitialisesFromProperty(legendModel)
       it 'selects a range', -> testSelectsByRange(legendModel)
 
@@ -264,6 +265,8 @@ describe "Legend Model", ->
     # ------------------------------------------------------------------------------------------------------------------
     testInitialisesFromProperty = (legendModel) ->
 
+      timeStart = (new Date()).getTime()
+
       domain = legendModel.get('domain')
       range = legendModel.get('colour-range')
       ticks = legendModel.get('ticks')
@@ -283,28 +286,60 @@ describe "Legend Model", ->
 
     testGetsAmountPerRange = (legendModel) ->
 
+      timeStart = (new Date()).getTime()
       domain = legendModel.get('domain')
-      ticks = []
-      for i in [-1..domain.length-1]
-        a = domain[i]
-        b = domain[i+1]
-        console.log 'a:', a
-        console.log 'b:', -b
+      ticks = legendModel.get('ticks')
 
-      console.log 'gets amount per range'
+      collection = legendModel.get('collection')
+      if collection.allResults?
+        allItemsObjs = collection.allResults
+      else
+        allItemsObjs = (model.attributes for model in collection.models)
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',
-        withColourScale=true)
+      amountsPerRangeMustBe = {}
+
+      for tick in ticks
+        amountsPerRangeMustBe[tick] = 0
+
+      for obj in allItemsObjs
+        value = glados.Utils.getNestedValue(obj, prop.propName, forceAsNumber=true)
+
+        for i in [-1..domain.length-1]
+          lower = domain[i]
+          upper = domain[i+1]
+          if i < 0
+            lower = -Number.MAX_VALUE
+          if i == domain.length - 1
+            upper = Number.MAX_VALUE
+          if lower <= value < upper
+            amountsPerRangeMustBe[ticks[i+1]]++
+            break
+
+      timeEnd = (new Date()).getTime()
+      amountsPerRangeGot = legendModel.get('amounts-per-range')
+      for range, amount of amountsPerRangeMustBe
+        expect(amountsPerRangeGot[range]).toBe(amountsPerRangeGot[range])
+
+    prop = undefined
+    legendModel = undefined
     collection = glados.models.paginatedCollections\
       .PaginatedCollectionFactory.getNewESActivitiesList()
-    legendModel = new glados.models.visualisation.LegendModel
-          property: prop
-          collection: collection
-          enable_selection: false
 
     beforeAll (done) ->
-        TestsUtils.simulateDataESList(collection,
-          glados.Settings.STATIC_URL + 'testData/ActivitiesTestData.json', done)
+      TestsUtils.simulateDataESList(collection,
+        glados.Settings.STATIC_URL + 'testData/ActivitiesTestData.json', done)
+
+    beforeEach ->
+
+      prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',
+      withColourScale=true)
+
+      legendModel = new glados.models.visualisation.LegendModel
+        property: prop
+        collection: collection
+        enable_selection: false
+
+      console.log 'LIST INITIALISED'
 
     it 'initializes from the property', -> testInitialisesFromProperty(legendModel)
     it 'gets the amount per range', -> testGetsAmountPerRange(legendModel)

@@ -280,8 +280,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendG.selectAll('text')
       .data(getXInLegendFor.domain())
       .enter().append('text')
-      .text('hola')
-#      .text($.proxy(@getTextAmountPerValue, @))
+      .text($.proxy(@getTextAmountPerRange, @))
       .attr('x', (d) -> getXInLegendFor d)
       .attr('y', @LEGEND_TEXT_Y)
       .style('font-size', '65%')
@@ -292,6 +291,8 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendG.call(legendAxis)
 
     console.log 'paint threshold legend!'
+
+  getTextAmountPerRange: (value) -> '(' + @model.getTextAmountPerRange(value) + ')'
 
 
 
