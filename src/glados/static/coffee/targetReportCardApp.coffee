@@ -65,6 +65,9 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    new glados.views.Target.AssociatedCompoundsView
+      el: $('#TAssociatedCompoundProperties')
+
     target.fetch()
     appDrugsClinCandsList.fetch()
     targetRelations.fetch({reset: true})
