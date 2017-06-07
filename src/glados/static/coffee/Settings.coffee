@@ -69,6 +69,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_RED_BASE: '#f44336' # red
     VISUALISATION_RED_MAX: '#b71c1c' # red darken-4
     VISUALISATION_LIGHT_GREEN_MIN: '#f1f8e9' # green lighten-5
+    VISUALISATION_LIGHT_GREEN_BASE: '#8bc34a' # light-green base
     VISUALISATION_LIGHT_GREEN_MAX: '#33691e' # green darken-4
     VISUALISATION_GREEN_MIN: '#e8f5e9' # green lighten-5
     VISUALISATION_GREEN_BASE: '#4caf50' # green
@@ -85,6 +86,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_BLUE_MAX: '#0d47a1' # blue darken-4
     VISUALISATION_LIGHT_BLUE_MIN: '#e1f5fe' # light-blue lighten-5
     VISUALISATION_LIGHT_BLUE_MAX: '#01579b' # light-blue darken-4
+    VISUALISATION_AMBER_BASE: '#ffc107' # amber
     VISUALISATION_GRID_EXTERNAL_BORDER: '#D2D2D2'
     VISUALISATION_GRID_DIVIDER_LINES: '#bdbdbd' #grey lighten-1
     VISUALISATION_GRID_UNDEFINED: '#9e9e9e' #grey
@@ -125,6 +127,7 @@ glados.useNameSpace 'glados',
     DEFAULT_NULL_VALUE_LABEL: '---'
   Events:
     Collections:
+      ALL_ITEMS_DOWNLOADED: 'ALL_ITEMS_DOWNLOADED'
       SELECTION_UPDATED: 'selection-changed'
       Params:
         ALL_SELECTED:'all-selected'
@@ -141,6 +144,7 @@ glados.useNameSpace 'glados',
   Visualisation:
     CATEGORICAL:'CATEGORICAL'
     CONTINUOUS:'CONTINUOUS'
+    THRESHOLD:'THRESHOLD'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
@@ -152,6 +156,9 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.GLADOS_BASE_URL_FULL = request_root+app_root
 
   glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
+
+  # Marvin full screen URL
+  glados.Settings.MARVIN_FULL_SCREEN_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'marvin_search_fullscreen/'
 
   glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'substructure_search_results/'
   glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure/'

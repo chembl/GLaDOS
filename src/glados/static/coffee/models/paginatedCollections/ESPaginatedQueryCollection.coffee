@@ -112,15 +112,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             molecule_chembl_id: idsList
       }
 
-# generates an object with the data necessary to do the ES request
-# customPage: set a customPage if you want a page different than the one set as current
-# the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
-      request_facets = if _.isUndefined(request_facets) then false else request_facets
-      # If facets are requested the facet filters are excluded from the query
-      facets_filtered = true
-      page = if customPage? then customPage else @getMeta('current_page')
-      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
+    getNormalSearchQuery: ()->
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
       exact_terms_joined = null
@@ -140,37 +132,65 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         term_i_query = @getSingleTermQuery(term_i)
         by_term_query.bool.should.push(term_i_query)
 
+
+      search_query ={
+        bool:
+          should: [
+            {
+              query_string:
+                fields: [
+                  "*.std_analyzed^10",
+                  "*.keyword^1000",
+                  "*.entity_id^100000",
+                  "*.id_reference^1000",
+                  "*.chembl_id^10000",
+                  "*.chembl_id_reference^5000"
+                ]
+                fuzziness: 0
+                query: exact_terms_joined
+            }
+          ]
+      }
+      if singular_terms.length > 0
+        search_query.bool.should.push(by_term_query)
+      return search_query
+
+# generates an object with the data necessary to do the ES request
+# customPage: set a customPage if you want a page different than the one set as current
+# the same for customPageSize
+    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
+      request_facets = if _.isUndefined(request_facets) then false else request_facets
+      # If facets are requested the facet filters are excluded from the query
+      facets_filtered = true
+      page = if customPage? then customPage else @getMeta('current_page')
+      pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
+
       # Base Elastic query
       es_query = {
         size: pageSize,
         from: ((page - 1) * pageSize)
         query:
           bool:
-            must:
-              bool:
-                should: [
-                  {
-                    query_string:
-                      fields: [
-                        "*.std_analyzed^10",
-                        "*.keyword^1000",
-                        "*.entity_id^100000",
-                        "*.id_reference^1000",
-                        "*.chembl_id^10000",
-                        "*.chembl_id_reference^5000"
-                      ]
-                      fuzziness: 0
-                      query: exact_terms_joined
-                  }
-                ]
+            must: null
       }
+
+      # Custom query String query
+      customQueryString = @getMeta('custom_query_string')
+      if customQueryString? and customQueryString != ''
+        es_query.query.bool.must = {
+          query_string:
+            analyze_wildcard: true
+            query: customQueryString
+        }
+      # Normal Search query
+      else
+        es_query.query.bool.must = @getNormalSearchQuery()
+
       # Includes the filter query by query filter terms and selected facets
       filter_query = @getFilterQuery(facets_filtered)
       if filter_query
         es_query.query.bool.filter = [filter_query]
 
-      if singular_terms.length > 0
-        es_query.query.bool.must.bool.should.push(by_term_query)
 
       if request_facets
         if _.isUndefined(facets_first_call)
@@ -362,10 +382,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, fetch) ->
+    setPage: (newPageNum, doFetch=true) ->
       newPageNum = parseInt(newPageNum)
-      fetch = if _.isUndefined(fetch) then true else fetch
-      if fetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
+      if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 
@@ -445,6 +464,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().resolve()]
 
       totalRecords = @getMeta('total_records')
+
+      if not totalRecords?
+        url = @getURL()
+        requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
+        $.post(url, requestData).done((response) ->
+          thisCollection.setMeta('total_records', response.hits.total)
+          thisCollection.getAllResults($progressElement, askingForOnlySelected)
+        )
+        return
+
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
       if totalRecords >= 10000 and not iNeedToGetOnlySome
@@ -461,6 +490,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'
+        @setValidDownload()
         return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
@@ -525,7 +555,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
+      setValidDownload = $.proxy(@setValidDownload, @)
       $.when.apply($, deferreds).done -> setValidDownload()
 
       if iNeedToGetEverythingExceptSome
@@ -540,6 +570,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         $.when.apply($, deferreds).done -> f()
 
       return deferreds
+
+    setValidDownload: ->
+      @DOWNLOADED_ITEMS_ARE_VALID = true
+      @DOWNLOAD_ERROR_STATE = false
+      @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
 
     removeHolesInAllResults: ->
       i = 0
@@ -578,6 +613,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         downloadObj.push row
 
       return downloadObj
+
+
 
 # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, columns, $progressElement) ->
