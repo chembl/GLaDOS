@@ -283,6 +283,14 @@ describe "Legend Model", ->
 
     testGetsAmountPerRange = (legendModel) ->
 
+      domain = legendModel.get('domain')
+      ticks = []
+      for i in [-1..domain.length-1]
+        a = domain[i]
+        b = domain[i+1]
+        console.log 'a:', a
+        console.log 'b:', -b
+
       console.log 'gets amount per range'
 
     prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_VALUE',

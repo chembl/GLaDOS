@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.models.visualisation',
       else if @isThreshold()
         @set('values-selection', {}) unless not @get('selection-enabled')
         @setTicks()
+        @fillAmountPerRange()
       else
        # only used  for undefined value
         @set('values-selection', {}) unless not @get('selection-enabled')
@@ -56,7 +57,10 @@ glados.useNameSpace 'glados.models.visualisation',
     # ------------------------------------------------------------------------------------------------------------------
     # Threshold
     # ------------------------------------------------------------------------------------------------------------------
-
+    fillAmountPerRange: ->
+      console.log 'filling amount per range'
+      domain = @get('domain')
+      console.log 'domain: ', domain
 
     # ------------------------------------------------------------------------------------------------------------------
     # Categorical
