@@ -44,9 +44,14 @@ glados.useNameSpace 'glados.models.visualisation',
         STANDARD_VALUE:
           propName: 'standard_value'
           label: 'Standard Value nM'
-          coloursRange: [glados.Settings.VISUALISATION_GREEN_BASE, glados.Settings.VISUALISATION_RED_BASE]
-          colourScaleType: glados.Visualisation.CONTINUOUS
-          ticksNumber: 5
+          domain:[1, 100, 1000]
+          coloursRange: [
+            glados.Settings.VISUALISATION_GREEN_BASE
+            glados.Settings.VISUALISATION_LIGHT_GREEN_BASE
+            glados.Settings.VISUALISATION_AMBER_BASE
+            glados.Settings.VISUALISATION_RED_BASE
+          ]
+          colourScaleType: glados.Visualisation.THRESHOLD
         MOLECULE_CHEMBL_ID:
           propName: 'molecule_chembl_id'
           label: 'Compound'
@@ -84,12 +89,11 @@ glados.useNameSpace 'glados.models.visualisation',
 
       if prop.colourScaleType == glados.Visualisation.CATEGORICAL
         prop.colourScale = d3.scale.ordinal()
-        .domain(prop.domain)
-        .range(prop.coloursRange)
       else if prop.colourScaleType == glados.Visualisation.CONTINUOUS
         prop.colourScale = d3.scale.linear()
-        .domain(prop.domain)
-        .range(prop.coloursRange)
+      else if prop.colourScaleType == glados.Visualisation.THRESHOLD
+        prop.colourScale = d3.scale.threshold()
+      prop.colourScale.domain(prop.domain).range(prop.coloursRange)
 
     generateContinuousDomainFromValues: (prop, values) ->
 

@@ -79,6 +79,8 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if @model.isDiscrete()
       @paintDiscreteLegend(legendG)
+    else if @model.isThreshold()
+      @paintThresholdLegend(legendG)
     else
       @paintContinuousLegend(legendG)
 
@@ -243,6 +245,55 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   getTextAmountPerValue: (value) -> '(' + @model.getTextAmountPerValue(value) + ')'
 
   clickRectangle: (d) -> @model.toggleValueSelection(d)
+
+  # ------------------------------------------------------------------------------------------------------------------
+  # Threshold
+  # ------------------------------------------------------------------------------------------------------------------
+  paintThresholdLegend: (legendG) ->
+
+    rectanglePadding = 1
+    getXInLegendFor = d3.scale.ordinal()
+      .domain( @model.get('ticks') )
+      .rangeBands([0, @legendWidth])
+
+    legendAxis = d3.svg.axis()
+      .scale(getXInLegendFor)
+      .orient("bottom")
+
+    getColourFor = d3.scale.ordinal()
+      .domain( @model.get('ticks'))
+      .range(@model.get('property').coloursRange)
+
+    legendG.selectAll('rect')
+      .data(getXInLegendFor.domain())
+      .enter().append('rect')
+      .attr('class', (d) -> 'legend-rect-' + d)
+      .attr('height', @LEGEND_RECT_HEIGHT)
+      .attr('width', getXInLegendFor.rangeBand() - rectanglePadding)
+      .attr('x', (d) -> getXInLegendFor d)
+      .attr('y', -@LEGEND_RECT_HEIGHT)
+      .attr('fill', (d) -> getColourFor d)
+      .style('stroke-width', 2)
+      .classed('legend-rect', true)
+      .on('click', $.proxy(@clickRectangle, @))
+
+    legendG.selectAll('text')
+      .data(getXInLegendFor.domain())
+      .enter().append('text')
+      .text($.proxy(@getTextAmountPerRange, @))
+      .attr('x', (d) -> getXInLegendFor d)
+      .attr('y', @LEGEND_TEXT_Y)
+      .style('font-size', '65%')
+      .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
+      .attr('text-anchor', 'middle')
+      .attr("transform", "translate(" + getXInLegendFor.rangeBand()/2 + ")")
+
+    legendG.call(legendAxis)
+
+    console.log 'paint threshold legend!'
+
+  getTextAmountPerRange: (value) -> '(' + @model.getTextAmountPerRange(value) + ')'
+
 
 
 

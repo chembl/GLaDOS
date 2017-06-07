@@ -27,6 +27,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @allViewsPerType = {}
       @viewContainerID = $(@el).attr('id').replace('-menu', '')
 
+      console.log 'view id: ', $(@el).attr('id')
+      console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
     render: ->

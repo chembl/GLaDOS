@@ -176,7 +176,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
-      if not _.isUndefined(customQueryString)
+      if customQueryString? and customQueryString != ''
         es_query.query.bool.must = {
           query_string:
             analyze_wildcard: true
@@ -382,10 +382,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, fetch) ->
+    setPage: (newPageNum, doFetch=true) ->
       newPageNum = parseInt(newPageNum)
-      fetch = if _.isUndefined(fetch) then true else fetch
-      if fetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
+      if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 
@@ -465,6 +464,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().resolve()]
 
       totalRecords = @getMeta('total_records')
+
+      if not totalRecords?
+        url = @getURL()
+        requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
+        $.post(url, requestData).done((response) ->
+          thisCollection.setMeta('total_records', response.hits.total)
+          thisCollection.getAllResults($progressElement, askingForOnlySelected)
+        )
+        return
+
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
       if totalRecords >= 10000 and not iNeedToGetOnlySome
@@ -481,6 +490,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'
+        @setValidDownload()
         return [jQuery.Deferred().reject(msg)]
 
       if $progressElement?
@@ -545,7 +555,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for page in [1..totalPages]
         deferreds.push(getItemsFromPage page)
 
-      setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
+      setValidDownload = $.proxy(@setValidDownload, @)
       $.when.apply($, deferreds).done -> setValidDownload()
 
       if iNeedToGetEverythingExceptSome
@@ -560,6 +570,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         $.when.apply($, deferreds).done -> f()
 
       return deferreds
+
+    setValidDownload: ->
+      @DOWNLOADED_ITEMS_ARE_VALID = true
+      @DOWNLOAD_ERROR_STATE = false
+      @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
 
     removeHolesInAllResults: ->
       i = 0
@@ -598,6 +613,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         downloadObj.push row
 
       return downloadObj
+
+
 
 # you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, columns, $progressElement) ->

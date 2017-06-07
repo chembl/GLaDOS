@@ -6,7 +6,7 @@ TargetAssociatedBioactivitiesView = CardView.extend
     @resource_type = 'Target'
     @paginatedView = new PieView
       model: @model
-      el: @el
+      el: $(@el).find('.BCK-Main-Pie-container')
 
     @initEmbedModal('bioactivities')
     @activateModals()
