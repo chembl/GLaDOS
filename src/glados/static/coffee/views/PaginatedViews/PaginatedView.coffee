@@ -711,6 +711,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     handleError: (model, xhr, options) ->
   
       if xhr.responseJSON?
+        console.log 'error getting list!'
+        console.log xhr
         message = xhr.responseJSON.error_message
         if not message?
           message = xhr.responseJSON.error
