@@ -150,6 +150,7 @@ class TargetReportCardApp
 
   @initLigandEfficiencies = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
       ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
