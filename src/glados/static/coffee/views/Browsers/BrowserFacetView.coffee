@@ -1,6 +1,6 @@
-glados.useNameSpace 'glados.views.SearchResults',
+glados.useNameSpace 'glados.views.Browsers',
   # View that renders the search facet to filter results
-  SearchFacetView: Backbone.View.extend
+  BrowserFacetView: Backbone.View.extend
 
     initialize: () ->
       # @collection - must be provided in the constructor call
