@@ -20,8 +20,8 @@ TargetAssociatedBioactivities = Backbone.Model.extend
 
     buckets = data.aggregations.types.buckets
     for bucket in buckets
-      labelFilter = 'standard_type=' + bucket.key
-      filter = 'target_chembl_id=' + @get('target_chembl_id') + '&' + labelFilter
+      labelFilter = 'standard_type:"' + bucket.key + '"'
+      filter = 'target_chembl_id:' + @get('target_chembl_id') + ' AND ' + labelFilter
       bucket.link = Activity.getActivitiesListURL(filter)
     return  {
       'pie-data': buckets

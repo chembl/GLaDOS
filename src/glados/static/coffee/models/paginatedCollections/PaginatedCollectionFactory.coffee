@@ -353,7 +353,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           this_collection.trigger('error')
         )
 
-        base_url2 = glados.Settings.WS_DEV_BASE_URL + 'target.json?target_chembl_id__in='
+        base_url2 = glados.Settings.WS_BASE_URL + 'target.json?target_chembl_id__in='
 
         # after I have the target relations now I get the actual targets
         getTargetRelations.done(() ->

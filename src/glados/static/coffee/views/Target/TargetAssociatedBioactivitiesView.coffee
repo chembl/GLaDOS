@@ -2,6 +2,7 @@ TargetAssociatedBioactivitiesView = CardView.extend
 
   initialize: ->
 
+    @target_chembl_id = arguments[0].target_chembl_id
     @model.on 'change', @render, @
     @resource_type = 'Target'
     @paginatedView = new PieView
@@ -11,4 +12,14 @@ TargetAssociatedBioactivitiesView = CardView.extend
     @initEmbedModal('bioactivities')
     @activateModals()
 
-  render: -> @showCardContent()
+  render: ->
+
+    @showCardContent()
+    buckets = @model.get('pie-data')
+
+    if buckets?
+      if buckets.length > 0
+        $linkToActivities = $(@el).find('.BCK-bioactivities-link')
+        glados.Utils.fillContentForElement $linkToActivities,
+          target_chembl_id: @target_chembl_id
+          url: Activity.getActivitiesListURL('target_chembl_id:' + @target_chembl_id)
