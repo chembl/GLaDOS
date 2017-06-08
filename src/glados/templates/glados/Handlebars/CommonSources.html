@@ -291,7 +291,7 @@
 <script id="Handlebars-Common-Paginated-Card" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-      <div class="card grey lighten-5">
+      <div class="card grey lighten-5 hoverable">
 
         {{#if img_url}}
           <div class="white card-image">
@@ -304,8 +304,13 @@
 
           {{#if this.has_link}}
 
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
+            {{#if this.is_secondary_link}}
+              <small>
+                <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+              </small>
+            {{else}}
+              <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            {{/if}}
 
           {{else}}
           <small>
@@ -525,6 +530,110 @@
 <small>
   Total items: {{num_items}}
 </small>
+</script>
+
+<script id="Handlebars-Common-BioactivitiesOfTargetLink" type="text/x-handlebars-template">
+<a target='_blank' href="{{url}}" > See all bioactivities for target {{target_chembl_id}} used in this visualisation</a>
+</script>
+
+<script id="Handlebars-Common-ESResultsListInfiniteView" type="text/x-handlebars-template">
+{% endverbatim %}
+  {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+{% verbatim %}
+</script>
+
+<script id="Handlebars-Common-ESResultsListGraphView" type="text/x-handlebars-template">
+
+  <span class="load-messages-container">
+  </span>
+
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      {% endverbatim %}
+
+        {% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
+
+      {% verbatim %}
+    </div>
+
+
+</script>
+
+<script id="Handlebars-Common-ESResultsListTableView" type="text/x-handlebars-template">
+
+  {% endverbatim %}
+    {% include "glados/base/PaginatedCollections/DefaultTableContent.html" %}
+  {% verbatim %}
+
+</script>
+
+{% endverbatim %}
+
+{% verbatim %}
+<script id="Handlebars-Common-ESResultsListCardsView" type="text/x-handlebars-template">
+
+{% endverbatim %}
+    {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
+{% verbatim %}
+</script>
+
+<script id="Handlebars-Common-ESResultsListMatrixView" type="text/x-handlebars-template">
+  <span class="load-messages-container">
+  </span>
+
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      {% endverbatim %}
+        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+      {% verbatim %}
+    </div>
+
+</div>
+</script>
+
+<script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
+  {{#each formats}}
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
+     data-format="{{this}}">
+    <p><i class="fa fa-download"></i></p>
+    <p>{{this}}</p>
+  </a>
+  {{/each}}
+</script>
+
+<script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
+  {{#each options}}
+  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
+    data-view="{{this.label}}">
+    <p><i class="fa {{this.icon_class}}"></i></p>
+    <p>{{this.label}}</p>
+  </a>
+  {{/each}}
+</script>
+
+<script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">
+  <table class="compact-table">
+    <tr><td>{{num_selected}}/{{total_items}} Selected</td></tr>
+    <tr><td class="td-oneline"><a class="BCK-select-all">Select All</a> -
+      <a class="BCK-unSelect-all">Clear Selections</a></td>
+    </tr>
+  </table>
+</script>
+
+<script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
+  <h3>{{es_results_list_title}}
+    <small><small>
+      <a id ="{{es_results_list_id}}-filter-link" href="{{es_results_url_path}}" style="display: none">Filter {{es_results_list_title}} results</a>
+      <a id ="{{es_results_list_id}}-all-link" href="{{es_all_results_url_path}}" style="display: none">Explore All Results</a>
+    </small></small>
+  </h3>
+
+  <div id ="{{es_results_list_id}}-menu">
+    {% endverbatim %}
+      {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
+    {% verbatim %}
+  </div>
+
 </script>
 
 {% endverbatim %}

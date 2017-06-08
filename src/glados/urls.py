@@ -194,7 +194,7 @@ urlpatterns = [
   # Activities
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^activities/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/browseActivities.html"), ),
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseActivities.html"), ),
 
 ]
 

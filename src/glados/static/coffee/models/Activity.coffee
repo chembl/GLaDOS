@@ -5,6 +5,9 @@ Activity = Backbone.Model.extend
 
   parse: (response) ->
     response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
+    response.molecule_link = Compound.get_report_card_url(response.molecule_chembl_id )
+    response.target_link = Target.get_report_card_url(response.target_chembl_id)
+    response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
     return response
 
 Activity.COLUMNS = {
@@ -21,6 +24,8 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'link_base':'assay_link'
+    'secondary_link': true
   }
   ASSAY_DESCRIPTION: {
     'name_to_show': 'Assay Description'
@@ -36,6 +41,8 @@ Activity.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'image_base_url': 'image_url'
+    'link_base':'molecule_link'
+    'secondary_link': true
   }
   TARGET_CHEMBL_ID: {
     'name_to_show': 'Target'
@@ -43,10 +50,19 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'link_base':'target_link'
+    'secondary_link': true
   }
   STANDARD_TYPE: {
     'name_to_show': 'Standard Type'
     'comparator': 'standard_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  TARGET_ORGANISM: {
+    'name_to_show': 'Target Organism'
+    'comparator': 'target_organism'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
@@ -63,6 +79,7 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.MOLECULE_CHEMBL_ID,
     Activity.COLUMNS.TARGET_CHEMBL_ID,
     Activity.COLUMNS.STANDARD_TYPE
+    Activity.COLUMNS.TARGET_ORGANISM
   ]
 }
 

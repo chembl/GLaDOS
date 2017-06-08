@@ -18,72 +18,6 @@
   {{/each}}
 </script>
 
-<script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
-  {{#each formats}}
-  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
-     data-format="{{this}}">
-    <p><i class="fa fa-download"></i></p>
-    <p>{{this}}</p>
-  </a>
-  {{/each}}
-</script>
-
-<script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
-  {{#each options}}
-  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
-    data-view="{{this.label}}">
-    <p><i class="fa {{this.icon_class}}"></i></p>
-    <p>{{this.label}}</p>
-  </a>
-  {{/each}}
-</script>
-
-<script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">
-  <table class="compact-table">
-    <tr><td>{{num_selected}}/{{total_items}} Selected</td></tr>
-    <tr><td class="td-oneline"><a class="BCK-select-all">Select All</a> -
-      <a class="BCK-unSelect-all">Clear Selections</a></td>
-    </tr>
-  </table>
-</script>
-
-<script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
-  <h3>{{es_results_list_title}}
-    <small><small>
-      <a id ="{{es_results_list_id}}-filter-link" href="{{es_results_url_path}}" style="display: none">Filter {{es_results_list_title}} results</a>
-      <a id ="{{es_results_list_id}}-all-link" href="{{es_all_results_url_path}}" style="display: none">Explore All Results</a>
-    </small></small>
-  </h3>
-
-  <div id ="{{es_results_list_id}}-menu">
-
-    <div class="row">
-
-      <div class="col s12 m6 l4 BCK-download-btns-container" data-hb-template="Handlebars-DownloadColButtons">
-        <!-- backbone fills this -->
-      </div>
-
-      <div class="col s12 m6 l3 BCK-selection-menu-container" data-hb-template="Handlebars-SelectionMenu">
-        <!-- backbone fills this -->
-      </div>
-
-      <div class="col s12 m6 l5 right-align BCK-changeView-btns-container" data-hb-template="Handlebars-SwitchColViewButtons">
-        <!-- backbone fills this -->
-      </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col" >
-        <span class="download-messages-container">
-        </span>
-      </div>
-    </div>
-
-  </div>
-
-</script>
-
 
 <script id="Handlebars-ESResultsListViewContainer" type="text/x-handlebars-template">
 
@@ -92,61 +26,6 @@
   </div>
 </script>
 
-<script id="Handlebars-ESResultsListMatrixView" type="text/x-handlebars-template">
-  <span class="load-messages-container">
-  </span>
-
-  <div class="card grey lighten-5">
-    <div class="card-content">
-      {% endverbatim %}
-
-        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
-
-      {% verbatim %}
-    </div>
-
-</div>
-</script>
-
-<script id="Handlebars-ESResultsListGraphView" type="text/x-handlebars-template">
-
-  <span class="load-messages-container">
-  </span>
-
-  <div class="card grey lighten-5">
-    <div class="card-content">
-      {% endverbatim %}
-
-        {% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
-
-      {% verbatim %}
-    </div>
-
-
-</script>
-
-<script id="Handlebars-ESResultsListTableView" type="text/x-handlebars-template">
-
-  {% endverbatim %}
-    {% include "glados/base/PaginatedCollections/DefaultTableContent.html" %}
-  {% verbatim %}
-
-</script>
-
-<script id="Handlebars-ESResultsListInfiniteView" type="text/x-handlebars-template">
-Infinite
-</script>
-
-{% endverbatim %}
-
-{% verbatim %}
-<script id="Handlebars-ESResultsListCardsView" type="text/x-handlebars-template">
-
-{% endverbatim %}
-    {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-{% verbatim %}
-
-</script>
 {% endverbatim %}
 
 <!-- End of Handlebars Templates -->

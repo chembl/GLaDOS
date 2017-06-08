@@ -167,9 +167,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @fetch()
 
     # tells if the current page is the las page
-    currentlyOnLastPage: ->
-
-      @getMeta('current_page') == @getMeta('total_pages')
+    currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Sorting

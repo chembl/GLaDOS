@@ -52,6 +52,7 @@ class TargetReportCardApp
     new TargetAssociatedBioactivitiesView
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     new TargetAssociatedAssaysView
       model: associatedAssays
