@@ -1,6 +1,6 @@
 # this view is in charge of handling the menu bar that appears on top of the results
-glados.useNameSpace 'glados.views.SearchResults',
-  ResultsSectionMenuView: Backbone.View.extend
+glados.useNameSpace 'glados.views.Browsers',
+  BrowserMenuView: Backbone.View.extend
 
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
       'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
