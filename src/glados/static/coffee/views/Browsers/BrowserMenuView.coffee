@@ -17,6 +17,8 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-unSelect-all': 'unSelectAll'
 
     initialize: ->
+
+      @standaloneMode = arguments[0].standalone_mode == true
       @collection.on 'reset do-repaint sort', @render, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @renderSelectionMenu, @
 
@@ -25,9 +27,12 @@ glados.useNameSpace 'glados.views.Browsers',
       # This handles all the views this menu view handles, there is one view per view type, for example
       # {'Table': <instance of table view>}
       @allViewsPerType = {}
-      @viewContainerID = $(@el).attr('id').replace('-menu', '')
-
-      console.log 'view id: ', $(@el).attr('id')
+      if @standaloneMode
+        @viewContainerID = @collection.getMeta('id_name')
+        @$viewContainer = $(@el).find('.BCK-BrowserCurrentViewContainer').attr('id', @viewContainerID)
+      else
+        @viewContainerID = $(@el).attr('id').replace('-menu', '')
+        console.log 'view id: ', $(@el).attr('id')
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
@@ -35,6 +40,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
+        console.log 'DOWNLOAD BUTTONS TEMPLATE: ', $downloadBtnsContainer.attr('data-hb-template')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
@@ -102,7 +108,7 @@ glados.useNameSpace 'glados.views.Browsers',
         console.log 'view ', viewType, ' did not exist'
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID)
-        templateName = 'Handlebars-ESResultsList' + viewType + 'View'
+        templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
 
@@ -112,7 +118,6 @@ glados.useNameSpace 'glados.views.Browsers',
           el: $viewElement
           custom_render_evts: undefined
           render_at_init: true
-
 
         @allViewsPerType[viewType] = newView
 

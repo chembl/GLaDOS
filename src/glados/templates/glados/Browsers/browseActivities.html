@@ -8,9 +8,19 @@
     Browse Activities
   </h2>
 
-  <div id="BCK-ActivitiesSearchResults">
-      {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+  <div class="BCK-BrowserContainer">
+
+    <div class="BCK-MenuContainer">
+        {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
+    </div>
+
+    <div class="BCK-BrowserCurrentViewContainer">
+
+    </div>
+
+
   </div>
+
 
 </div>
 {% endblock %}

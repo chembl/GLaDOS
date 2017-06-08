@@ -4,6 +4,13 @@ class ActivitiesBrowserApp
 
     filter = URLProcessor.getFilter()
     actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(filter)
-    $elem = $('#BCK-ActivitiesSearchResults')
-    infView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(actsList, $elem)
+
+    menuView = new glados.views.Browsers.BrowserMenuView
+      collection: actsList
+      el: $('.BCK-BrowserContainer')
+      standalone_mode: true
+
+
+#    $elem = $('#BCK-ActivitiesSearchResults')
+#    infView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(actsList, $elem)
     actsList.fetch()
