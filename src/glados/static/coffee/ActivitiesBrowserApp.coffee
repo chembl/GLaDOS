@@ -10,7 +10,4 @@ class ActivitiesBrowserApp
       el: $('.BCK-BrowserContainer')
       standalone_mode: true
 
-
-#    $elem = $('#BCK-ActivitiesSearchResults')
-#    infView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(actsList, $elem)
     actsList.fetch()

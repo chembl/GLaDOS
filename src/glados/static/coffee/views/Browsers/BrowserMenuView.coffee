@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'Graph': glados.views.SearchResults.ESResultsGraphView
       'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
-      'Infinite': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
+      'Infinite': glados.views.PaginatedViews.PaginatedView.getInfiniteConstructor()
 
 
     events:
@@ -111,6 +111,7 @@ glados.useNameSpace 'glados.views.Browsers',
         templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
+        console.log '$viewElement: ', $viewElement
 
         # Instantiates the results list view for each ES entity and links them with the html component
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
