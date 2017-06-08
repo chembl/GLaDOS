@@ -1,13 +1,13 @@
 # this view is in charge of handling the menu bar that appears on top of the results
-glados.useNameSpace 'glados.views.SearchResults',
-  ResultsSectionMenuView: Backbone.View.extend
+glados.useNameSpace 'glados.views.Browsers',
+  BrowserMenuView: Backbone.View.extend
 
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
       'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
       'Graph': glados.views.SearchResults.ESResultsGraphView
       'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
-      'Infinite': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
+      'Infinite': glados.views.PaginatedViews.PaginatedView.getInfiniteConstructor()
 
 
     events:
@@ -17,6 +17,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .BCK-unSelect-all': 'unSelectAll'
 
     initialize: ->
+
+      @standaloneMode = arguments[0].standalone_mode == true
       @collection.on 'reset do-repaint sort', @render, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @renderSelectionMenu, @
 
@@ -25,9 +27,12 @@ glados.useNameSpace 'glados.views.SearchResults',
       # This handles all the views this menu view handles, there is one view per view type, for example
       # {'Table': <instance of table view>}
       @allViewsPerType = {}
-      @viewContainerID = $(@el).attr('id').replace('-menu', '')
-
-      console.log 'view id: ', $(@el).attr('id')
+      if @standaloneMode
+        @viewContainerID = @collection.getMeta('id_name')
+        @$viewContainer = $(@el).find('.BCK-BrowserCurrentViewContainer').attr('id', @viewContainerID)
+      else
+        @viewContainerID = $(@el).attr('id').replace('-menu', '')
+        console.log 'view id: ', $(@el).attr('id')
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
@@ -35,6 +40,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
+        console.log 'DOWNLOAD BUTTONS TEMPLATE: ', $downloadBtnsContainer.attr('data-hb-template')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
@@ -102,9 +108,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         console.log 'view ', viewType, ' did not exist'
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID)
-        templateName = 'Handlebars-ESResultsList' + viewType + 'View'
+        templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
+        console.log '$viewElement: ', $viewElement
 
         # Instantiates the results list view for each ES entity and links them with the html component
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
@@ -112,7 +119,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           el: $viewElement
           custom_render_evts: undefined
           render_at_init: true
-
 
         @allViewsPerType[viewType] = newView
 

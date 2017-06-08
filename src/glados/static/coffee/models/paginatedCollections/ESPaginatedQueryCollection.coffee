@@ -37,7 +37,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
 
       # Creates the Elastic Search Query parameters and serializes them
+      requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
+      console.log 'request data: ', requestData
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -176,7 +178,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
-      if customQueryString? and customQueryString != ''
+      console.log 'custom query string: ', customQueryString
+      if @getMeta('use_custom_query_string')
         es_query.query.bool.must = {
           query_string:
             analyze_wildcard: true
@@ -383,11 +386,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, doFetch=true) ->
+      console.log 'requesting page: ', newPageNum
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         @fetch()
 
+     # tells if the current page is the las page
+    currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')
 # ------------------------------------------------------------------------------------------------------------------
 # Sorting functions
 # ------------------------------------------------------------------------------------------------------------------

@@ -52,6 +52,7 @@ glados.useNameSpace 'glados',
           returnCol['value'] = colDescription['parse_function'](col_value)
 
         returnCol['has_link'] = _.has(colDescription, 'link_base')
+        returnCol['is_secondary_link'] = colDescription.secondary_link == true
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])

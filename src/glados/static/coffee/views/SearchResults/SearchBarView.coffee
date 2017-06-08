@@ -225,7 +225,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
             # Initialises a Menu view which will be in charge of handling the menu bar,
             # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
-            resultsMenuViewI = new glados.views.SearchResults.ResultsSectionMenuView
+            resultsMenuViewI = new glados.views.Browsers.BrowserMenuView
               collection: resultsListsDict[resourceName]
               el: '#' + resultsListViewID + '-menu'
 

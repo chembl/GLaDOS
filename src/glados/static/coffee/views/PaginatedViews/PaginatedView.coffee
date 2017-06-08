@@ -102,6 +102,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
     render: ->
 
+      if @isInfinite() and not $(@el).is(":visible")
+        return
+
       if @isInfinite() and @collection.getMeta('current_page') == 1
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
@@ -124,6 +127,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
       @initialiseColumnsModal()
 
+    sleepView: ->
+      # destroy loading waypoints when I sleep to avoid triggering next pages when hidden
+      if @isInfinite()
+        @destroyAllWaypoints()
+
+    wakeUpView: ->
+      @collection.setPage(1)
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
@@ -327,7 +337,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
   
     fillNumResults: ->
-  
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
         num_results: @collection.getMeta('total_records')
   
@@ -568,7 +577,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
   
     showNumResults: ->
-  
+
       $(@el).children('.num-results').show()
   
     hideNumResults: ->
@@ -608,7 +617,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             advancer()
   
       )
-  
+
+    destroyAllWaypoints: -> Waypoint.destroyAll()
     # checks if there are more page and hides the preloader if there are no more.
     hidePreloaderIfNoNextItems: ->
   
@@ -711,6 +721,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     handleError: (model, xhr, options) ->
   
       if xhr.responseJSON?
+        console.log 'error getting list!'
+        console.log xhr
         message = xhr.responseJSON.error_message
         if not message?
           message = xhr.responseJSON.error
@@ -768,3 +780,7 @@ glados.views.PaginatedViews.PaginatedView.getCardsConstructor = ()->
 glados.views.PaginatedViews.PaginatedView.getTableConstructor = ()->
   return glados.views.PaginatedViews.PaginatedView\
     .getTypeConstructor(glados.views.PaginatedViews.PaginatedView.TABLE_TYPE)
+
+glados.views.PaginatedViews.PaginatedView.getInfiniteConstructor = ()->
+  return glados.views.PaginatedViews.PaginatedView\
+    .getTypeConstructor(glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE)
