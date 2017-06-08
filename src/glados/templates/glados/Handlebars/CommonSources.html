@@ -291,7 +291,7 @@
 <script id="Handlebars-Common-Paginated-Card" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-      <div class="card grey lighten-5">
+      <div class="card grey lighten-5 hoverable">
 
         {{#if img_url}}
           <div class="white card-image">
@@ -304,8 +304,13 @@
 
           {{#if this.has_link}}
 
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
+            {{#if this.is_secondary_link}}
+              <small>
+                <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+              </small>
+            {{else}}
+              <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            {{/if}}
 
           {{else}}
           <small>
