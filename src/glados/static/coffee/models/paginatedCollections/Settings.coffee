@@ -113,8 +113,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: []
+        COLUMNS_CARD: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
