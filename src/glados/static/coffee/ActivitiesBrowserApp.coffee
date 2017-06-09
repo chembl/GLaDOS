@@ -5,9 +5,13 @@ class ActivitiesBrowserApp
     filter = URLProcessor.getFilter()
     actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(filter)
 
-    menuView = new glados.views.Browsers.BrowserMenuView
+    new glados.views.Browsers.BrowserMenuView
       collection: actsList
       el: $('.BCK-BrowserContainer')
+      standalone_mode: true
+
+    new glados.views.Browsers.BrowserFacetView
+      collection: actsList
       standalone_mode: true
 
     actsList.fetch()

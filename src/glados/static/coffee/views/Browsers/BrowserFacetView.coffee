@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: () ->
       # @collection - must be provided in the constructor call
       @search_bar_view = arguments[0].search_bar_view
+      @standaloneMode = arguments[0].standalone_mode == true
       @collection.on 'facets-changed', @render, @
       @render()
 
@@ -25,7 +26,8 @@ glados.useNameSpace 'glados.views.Browsers',
     getMenuKey:(facet_group_key)->
       return 'faceting_menu_'+facet_group_key
 
-    render: ()->
+    render: ->
+      console.log 'RENDER FACET VIEW!'
       facets_groups = @collection.getFacetsGroups()
       if facets_groups
         for facet_group_key, facet_group of facets_groups
@@ -45,10 +47,13 @@ glados.useNameSpace 'glados.views.Browsers',
               link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
               facet_total++
               links_data.push(link_facet_i)
-          console.log 'MISTERY!'
-          console.log '@search_bar_view.selected_es_entity: ', @search_bar_view.selected_es_entity
-          console.log '^^^'
-          if facet_total > 0 and @collection.meta.key_name == @search_bar_view.selected_es_entity
+
+          if @standaloneMode
+            paintThisFacetGroup = true
+          else
+            paintThisFacetGroup = (@collection.meta.key_name == @search_bar_view.selected_es_entity)
+
+          if facet_total > 0 and paintThisFacetGroup
             SideMenuHelper.addMenu(menu_key,
               {
                 title: facet_group.label

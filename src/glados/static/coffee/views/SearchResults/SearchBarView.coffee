@@ -241,7 +241,6 @@ glados.useNameSpace 'glados.views.SearchResults',
             res_facet_view = new glados.views.Browsers.BrowserFacetView
               collection: resultsListsDict[resourceName]
               search_bar_view: @
-              collection_container: @$searchResultsListsContainersDict[resourceName]
 
             @searchFacetsViews[resourceName] = res_facet_view
 
