@@ -5,10 +5,8 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: () ->
       # @collection - must be provided in the constructor call
       @search_bar_view = arguments[0].search_bar_view
-      @collection_container = arguments[0].collection_container
       @collection.on 'facets-changed', @render, @
       @render()
-
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
       facets_groups = @collection.getFacetsGroups()
@@ -47,6 +45,9 @@ glados.useNameSpace 'glados.views.Browsers',
               link_facet_i.badge = faceting_handler_i.faceting_data[facet_key].count
               facet_total++
               links_data.push(link_facet_i)
+          console.log 'MISTERY!'
+          console.log '@search_bar_view.selected_es_entity: ', @search_bar_view.selected_es_entity
+          console.log '^^^'
           if facet_total > 0 and @collection.meta.key_name == @search_bar_view.selected_es_entity
             SideMenuHelper.addMenu(menu_key,
               {

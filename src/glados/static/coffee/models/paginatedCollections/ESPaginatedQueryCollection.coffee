@@ -279,7 +279,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred.done(done_callback.bind(@))
 
     getFacetsGroups: (selected)->
-      if _.isUndefined(selected) or _.isNull(selected)
+      if not selected?
         return @meta.facets_groups
       else
         sub_facet_groups = {}

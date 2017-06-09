@@ -115,6 +115,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],

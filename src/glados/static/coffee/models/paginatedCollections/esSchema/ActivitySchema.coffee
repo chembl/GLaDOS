@@ -1,0 +1,11 @@
+glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
+  # --------------------------------------------------------------------------------------------------------------------
+  # Elastic Search Activity Schema
+  # --------------------------------------------------------------------------------------------------------------------
+  ActivitySchema:
+    FACETS_GROUPS:
+      standard_type:
+        label: 'Standard Type'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_activity','standard_type'
+        )
