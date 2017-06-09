@@ -595,14 +595,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
     setUpLoadingWaypoint: ->
 
-      console.log 'SETTING UP LOADING WAYPOINT!'
-      $cards = $('.BCK-items-container').children()
+      $cards = $(@el).find('.BCK-items-container').children()
   
       # don't bother when there aren't any cards
       if $cards.length == 0
         return
-  
-      $middleCard = $cards[Math.floor($cards.length / 4)]
+
+      pageSize = @collection.getMeta('page_size')
+      $wayPointCard = $cards[$cards.length - @collection.getMeta('page_size')]
   
       # the advancer function requests always the next page
       advancer = $.proxy ->
@@ -619,7 +619,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       Waypoint.destroyAll()
   
       waypoint = new Waypoint(
-        element: $middleCard
+        element: $wayPointCard
         handler: (direction) ->
   
           if direction == 'down'
