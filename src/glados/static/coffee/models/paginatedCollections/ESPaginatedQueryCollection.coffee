@@ -160,8 +160,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # generates an object with the data necessary to do the ES request
 # customPage: set a customPage if you want a page different than the one set as current
 # the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
-      request_facets = if _.isUndefined(request_facets) then false else request_facets
+    getRequestData: (customPage, customPageSize, request_facets=false, facets_first_call) ->
       # If facets are requested the facet filters are excluded from the query
       facets_filtered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -205,20 +204,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getFilterQuery: (facets_filtered) ->
       filter_query = {bool: {must: []}}
-
-      filter_terms = @getMeta("filter_terms")
-      if filter_terms and filter_terms.length > 0
-        filter_terms_joined = filter_terms.join(' ')
-        filter_query.bool.must.push(
-          {
-            query_string:
-              fields: [
-                "*"
-              ]
-              fuzziness: 0
-              query: filter_terms_joined
-          }
-        )
+# TODO: UPDATE TO GRAMMAR HANDLING OF SEARCH  EXACT TERMS
+#      filter_terms = @getMeta("filter_terms")
+#      if filter_terms and filter_terms.length > 0
+#        filter_terms_joined = filter_terms.join(' ')
+#        filter_query.bool.must.push(
+#          {
+#            query_string:
+#              fields: [
+#                "*"
+#              ]
+#              fuzziness: 0
+#              query: filter_terms_joined
+#          }
+#        )
       if facets_filtered
         faceting_handlers = []
         for facet_group_key, facet_group of @meta.facets_groups

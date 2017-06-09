@@ -13,17 +13,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     @NUM_INTERVALS = 6
 
-    @EMPTY_CATEGORY = 'Unknown'
-    @OTHERS_CATEGORY = 'Others'
+    @EMPTY_CATEGORY = 'Not Defined in CHEMBL'
+    @OTHERS_CATEGORY = 'Other Categories'
     @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
 
     @getAllFacetGroupsSelectedQuery: (faceting_handlers_list)->
-      all_facets_query = { bool:{ must:[] }}
+      all_facets_query = []
       for faceting_handler_i in faceting_handlers_list
         fh_query_i = faceting_handler_i.getSelectedFacetsFilterQuery()
         if fh_query_i
-          all_facets_query.bool.must.push(fh_query_i)
-      if all_facets_query.bool.must.length == 0
+          all_facets_query.push(fh_query_i)
+      if all_facets_query.length == 0
         return null
       return all_facets_query
 
