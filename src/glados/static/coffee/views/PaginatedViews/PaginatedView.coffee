@@ -229,13 +229,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
-  
-      # This code completes rows for grids of 2 or 3 columns in the flex box css display
-      total_cards = @collection.getCurrentPage().length
-      while total_cards%6 != 0
-        $appendTo.append('<div class="col s12 m6 l4"/>')
-        total_cards++
-  
+
+      @fixCardHeight($appendTo)
+
+    fixCardHeight: ($appendTo) ->
+
+      if @isInfinite()
+        $cards = $(@el).find('.BCK-items-container').children()
+        $cards.height $(_.max($cards, (card) -> $(card).height())).height() + 'px'
+      else
+        # This code completes rows for grids of 2 or 3 columns in the flex box css display
+        total_cards = @collection.getCurrentPage().length
+        while total_cards%6 != 0
+          $appendTo.append('<div class="col s12 m6 l4"/>')
+          total_cards++
+
     # ------------------------------------------------------------------------------------------------------------------
     # Table scroller
     # ------------------------------------------------------------------------------------------------------------------
@@ -586,7 +594,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
   
     setUpLoadingWaypoint: ->
-  
+
+      console.log 'SETTING UP LOADING WAYPOINT!'
       $cards = $('.BCK-items-container').children()
   
       # don't bother when there aren't any cards
