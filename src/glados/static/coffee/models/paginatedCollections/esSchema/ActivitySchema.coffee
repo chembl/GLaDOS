@@ -9,3 +9,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_activity','standard_type'
         )
+      target_organism:
+        label: 'Target Organism'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_activity','target_organism'
+        )
