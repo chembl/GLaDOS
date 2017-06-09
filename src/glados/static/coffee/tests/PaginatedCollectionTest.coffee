@@ -235,6 +235,36 @@ describe "Paginated Collection", ->
       expect(requestData['from']).toBe(0)
       expect(requestData['size']).toBe(10)
 
+    testIteratesPages = (esList, pageSize, totalPages) ->
+      for pageNumber in [1..totalPages]
+        requestData = esList.setPage(pageNumber, doFetch=true, testMode=true)
+        expect(requestData['from']).toBe(pageSize * (pageNumber - 1))
+        expect(requestData['size']).toBe(pageSize)
+
+    it 'updates the request data as the pagination moves', ->
+
+      totalRecords = 100
+      esList.setMeta('total_records', totalRecords)
+      pageSize = 10
+      esList.setMeta('page_size', pageSize)
+      totalPages = Math.ceil(totalRecords / pageSize)
+      esList.setMeta('total_pages', totalPages)
+      testIteratesPages(esList, pageSize, totalPages)
+
+    it 'updates the request data as the pagination moves, with different pager sizes', ->
+
+      totalRecords = 100
+      esList.setMeta('total_records', totalRecords)
+
+      for pageSize in [1..totalRecords]
+        esList.setMeta('page_size', pageSize)
+        totalPages = Math.ceil(totalRecords / pageSize)
+        esList.setMeta('total_pages', totalPages)
+        testIteratesPages(esList, pageSize)
+
+      #so it doesn't give the warning
+      expect(true).toBe(true)
+
   #TODO: tests for sorting and filtering search
   describe "An elasticsearch collection initialised from a custom querystring", ->
 

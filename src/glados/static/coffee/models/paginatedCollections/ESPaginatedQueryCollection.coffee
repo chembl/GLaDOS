@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return jsonResultsList
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
-    fetch: (options) ->
+    fetch: (options, testMode=false) ->
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -39,7 +39,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'request data: ', requestData
+      console.log 'request data to fetch: ', requestData
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -52,7 +52,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @loadFacetGroups()
 
       # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      Backbone.Collection.prototype.fetch.call(this, fetchESOptions) unless testMode
+      return requestData
 
 # ------------------------------------------------------------------------------------------------------------------
 # Parse/Fetch Facets Groups data
@@ -384,12 +385,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, doFetch=true) ->
-      console.log 'requesting page: ', newPageNum
+    setPage: (newPageNum, doFetch=true, testMode=false) ->
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
-        @fetch()
+        @fetch(options=undefined, testMode)
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')
