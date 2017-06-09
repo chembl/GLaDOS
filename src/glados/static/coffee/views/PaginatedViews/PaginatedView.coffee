@@ -602,7 +602,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
       pageSize = @collection.getMeta('page_size')
-      $wayPointCard = $cards[$cards.length - @collection.getMeta('page_size')]
+      wayPointCard = $cards[$cards.length - @collection.getMeta('page_size')]
   
       # the advancer function requests always the next page
       advancer = $.proxy ->
@@ -619,7 +619,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       Waypoint.destroyAll()
   
       waypoint = new Waypoint(
-        element: $wayPointCard
+        element: wayPointCard
         handler: (direction) ->
   
           if direction == 'down'
