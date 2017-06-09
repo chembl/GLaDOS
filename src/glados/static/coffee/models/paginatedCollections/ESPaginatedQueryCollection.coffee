@@ -247,12 +247,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
 
-    loadFacetGroups: (first_call)->
+    loadFacetGroups: (first_call=true)->
       non_selected_facets_groups = @getFacetsGroups(false)
       if _.keys(non_selected_facets_groups).length == 0
         return
 
-      first_call = if _.isUndefined(first_call) then true else first_call
       call_time = new Date().getTime()
       if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
         console.log "WARNING! Facets requested again before they finished loading!", @getURL()
@@ -274,12 +273,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
+          console.log 'TRIGGERING FACETS CHANGED!'
           @trigger('facets-changed')
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 
     getFacetsGroups: (selected)->
-      if _.isUndefined(selected) or _.isNull(selected)
+      if not selected?
         return @meta.facets_groups
       else
         sub_facet_groups = {}

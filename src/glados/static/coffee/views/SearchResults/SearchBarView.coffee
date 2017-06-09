@@ -238,10 +238,9 @@ glados.useNameSpace 'glados.views.SearchResults',
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
             resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
 
-            res_facet_view = new glados.views.SearchResults.SearchFacetView
+            res_facet_view = new glados.views.Browsers.BrowserFacetView
               collection: resultsListsDict[resourceName]
               search_bar_view: @
-              collection_container: @$searchResultsListsContainersDict[resourceName]
 
             @searchFacetsViews[resourceName] = res_facet_view
 
