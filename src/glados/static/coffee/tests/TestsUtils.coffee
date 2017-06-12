@@ -29,6 +29,21 @@ class TestsUtils
       list.setMeta('total_records', testData.length)
       done()
 
+  # simulates facet groups received for the list
+  # it is meant to work only for a ES compound list
+  @simulateFacetsESList = (list, dataURL, done) ->
+
+    $.get dataURL, (testData) ->
+
+      for item in testData
+        aggData = item.aggData
+        firstCall = item.firstCall
+        for facetGroupKey, facetGroup of list.getFacetsGroups()
+
+          facetGroup.faceting_handler.parseESResults(aggData, firstCall)
+
+      done()
+
   @generateListOfRandomValues = (minVal, maxVal) ->
 
     values = ((Math.random() * (maxVal - minVal)) + minVal  for i in [1..10])

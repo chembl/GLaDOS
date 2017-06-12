@@ -20,7 +20,7 @@ glados.useNameSpace 'glados.views.Browsers',
         faceting_handler.getFacetId(facet_key),
         faceting_handler.faceting_data[facet_key].selected
       )
-      @collection.setMeta('facets_filtered', true)
+      @collection.setMeta('facets_changed', true)
       @collection.fetch()
 
     getMenuKey:(facet_group_key)->
