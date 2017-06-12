@@ -27,19 +27,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return jsonResultsList
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
-    fetch: (options) ->
+    fetch: (options, testMode=false) ->
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
-      if @getMeta('facets_filtered')
+      if @getMeta('facets_changed')
         @invalidateAllDownloadedResults()
         @unSelectAll()
         @setMeta('current_page', 1)
+        @setMeta('facets_changed', false)
 
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'request data: ', requestData
+      console.log 'request data to fetch: ', requestData
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -49,10 +50,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Use options if specified by caller
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
-      @loadFacetGroups()
 
+      @loadFacetGroups() unless testMode
       # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      Backbone.Collection.prototype.fetch.call(this, fetchESOptions) unless testMode
+      return requestData
 
 # ------------------------------------------------------------------------------------------------------------------
 # Parse/Fetch Facets Groups data
@@ -160,8 +162,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # generates an object with the data necessary to do the ES request
 # customPage: set a customPage if you want a page different than the one set as current
 # the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets, facets_first_call) ->
-      request_facets = if _.isUndefined(request_facets) then false else request_facets
+    getRequestData: (customPage, customPageSize, request_facets=false, facets_first_call) ->
       # If facets are requested the facet filters are excluded from the query
       facets_filtered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -205,20 +206,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getFilterQuery: (facets_filtered) ->
       filter_query = {bool: {must: []}}
-
-      filter_terms = @getMeta("filter_terms")
-      if filter_terms and filter_terms.length > 0
-        filter_terms_joined = filter_terms.join(' ')
-        filter_query.bool.must.push(
-          {
-            query_string:
-              fields: [
-                "*"
-              ]
-              fuzziness: 0
-              query: filter_terms_joined
-          }
-        )
+# TODO: UPDATE TO GRAMMAR HANDLING OF SEARCH  EXACT TERMS
+#      filter_terms = @getMeta("filter_terms")
+#      if filter_terms and filter_terms.length > 0
+#        filter_terms_joined = filter_terms.join(' ')
+#        filter_query.bool.must.push(
+#          {
+#            query_string:
+#              fields: [
+#                "*"
+#              ]
+#              fuzziness: 0
+#              query: filter_terms_joined
+#          }
+#        )
       if facets_filtered
         faceting_handlers = []
         for facet_group_key, facet_group of @meta.facets_groups
@@ -248,12 +249,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
 
-    loadFacetGroups: (first_call)->
+    loadFacetGroups: (first_call=true)->
       non_selected_facets_groups = @getFacetsGroups(false)
       if _.keys(non_selected_facets_groups).length == 0
         return
 
-      first_call = if _.isUndefined(first_call) then true else first_call
       call_time = new Date().getTime()
       if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
         console.log "WARNING! Facets requested again before they finished loading!", @getURL()
@@ -275,12 +275,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
+          console.log 'TRIGGERING FACETS CHANGED!'
           @trigger('facets-changed')
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 
     getFacetsGroups: (selected)->
-      if _.isUndefined(selected) or _.isNull(selected)
+      if not selected?
         return @meta.facets_groups
       else
         sub_facet_groups = {}
@@ -385,12 +386,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, doFetch=true) ->
-      console.log 'requesting page: ', newPageNum
+    setPage: (newPageNum, doFetch=true, testMode=false) ->
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
-        @fetch()
+        @fetch(options=undefined, testMode)
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')

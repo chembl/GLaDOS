@@ -13,17 +13,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     @NUM_INTERVALS = 6
 
-    @EMPTY_CATEGORY = 'Unknown'
-    @OTHERS_CATEGORY = 'Others'
+    @EMPTY_CATEGORY = 'Not Defined in CHEMBL'
+    @OTHERS_CATEGORY = 'Other Categories'
     @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
 
     @getAllFacetGroupsSelectedQuery: (faceting_handlers_list)->
-      all_facets_query = { bool:{ must:[] }}
+      all_facets_query = []
       for faceting_handler_i in faceting_handlers_list
         fh_query_i = faceting_handler_i.getSelectedFacetsFilterQuery()
         if fh_query_i
-          all_facets_query.bool.must.push(fh_query_i)
-      if all_facets_query.bool.must.length == 0
+          all_facets_query.push(fh_query_i)
+      if all_facets_query.length == 0
         return null
       return all_facets_query
 
@@ -86,10 +86,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
           else
-            round_diff = Math.ceil(@max_value-@min_value)
-            @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
-            if round_diff < FacetingHandler.NUM_INTERVALS
-              @intervals_size = 1
             es_query_aggs[@es_property_name] = {
               histogram:
                 field: @es_property_name
@@ -97,6 +93,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             }
 
     parseESResults: (es_aggregations_data, first_call)->
+
       if first_call
         @faceting_keys_inorder = []
         @faceting_data = {}
@@ -127,6 +124,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
           if not @max_value
             @max_value = 0
+          round_diff = Math.ceil(@max_value-@min_value)
+          @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
+          if round_diff < FacetingHandler.NUM_INTERVALS
+            @intervals_size = 1
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
