@@ -1,0 +1,196 @@
+[
+  {
+    "aggData": {
+      "molecule_type": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "Small molecule",
+            "doc_count": 28
+          },
+          {
+            "key": "Unknown",
+            "doc_count": 2
+          }
+        ]
+      },
+      "molecule_properties.hbd_MAX": {
+        "value": 8
+      },
+      "indication_class": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "Not Defined in CHEMBL",
+            "doc_count": 24
+          },
+          {
+            "key": "Adrenergic",
+            "doc_count": 2
+          },
+          {
+            "key": "Analgesic; Antirheumatic; Antipyretic",
+            "doc_count": 1
+          },
+          {
+            "key": "Antibacterial; Antineoplastic",
+            "doc_count": 1
+          },
+          {
+            "key": "Antipsychotic",
+            "doc_count": 1
+          },
+          {
+            "key": "Pharmaceutic Aid (solvent and source of ammonia),Radioactive Agent; Diagnostic Aid (cardiac imaging); Diagnostic Aid (liver imaging)",
+            "doc_count": 1
+          }
+        ]
+      },
+      "molecule_properties.full_mwt_MAX": {
+        "value": 622.92
+      },
+      "molecule_properties.hbd_MIN": {
+        "value": 0
+      },
+      "therapeutic_flag": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": 0,
+            "key_as_string": "false",
+            "doc_count": 26
+          },
+          {
+            "key": 1,
+            "key_as_string": "true",
+            "doc_count": 4
+          }
+        ]
+      },
+      "molecule_properties.hba_MAX": {
+        "value": 14
+      },
+      "max_phase_MAX": {
+        "value": 4
+      },
+      "molecule_properties.full_mwt_MIN": {
+        "value": 17.03
+      },
+      "molecule_properties.hba_MIN": {
+        "value": 1
+      },
+      "max_phase_MIN": {
+        "value": 0
+      }
+    },
+    "firstCall": true
+  },
+  {
+    "aggData": {
+      "molecule_properties.hba": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 1
+          },
+          {
+            "key": 3,
+            "doc_count": 14
+          },
+          {
+            "key": 6,
+            "doc_count": 9
+          },
+          {
+            "key": 9,
+            "doc_count": 1
+          },
+          {
+            "key": 12,
+            "doc_count": 1
+          }
+        ]
+      },
+      "max_phase": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 24
+          },
+          {
+            "key": 1,
+            "doc_count": 0
+          },
+          {
+            "key": 2,
+            "doc_count": 0
+          },
+          {
+            "key": 3,
+            "doc_count": 0
+          },
+          {
+            "key": 4,
+            "doc_count": 6
+          }
+        ]
+      },
+      "molecule_properties.full_mwt": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 2
+          },
+          {
+            "key": 122,
+            "doc_count": 5
+          },
+          {
+            "key": 244,
+            "doc_count": 9
+          },
+          {
+            "key": 366,
+            "doc_count": 7
+          },
+          {
+            "key": 488,
+            "doc_count": 3
+          },
+          {
+            "key": 610,
+            "doc_count": 2
+          }
+        ]
+      },
+      "molecule_properties.hbd": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 16
+          },
+          {
+            "key": 2,
+            "doc_count": 9
+          },
+          {
+            "key": 4,
+            "doc_count": 0
+          },
+          {
+            "key": 6,
+            "doc_count": 0
+          },
+          {
+            "key": 8,
+            "doc_count": 1
+          }
+        ]
+      }
+    },
+    "firstCall": false
+  }
+]

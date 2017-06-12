@@ -86,10 +86,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
           else
-            round_diff = Math.ceil(@max_value-@min_value)
-            @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
-            if round_diff < FacetingHandler.NUM_INTERVALS
-              @intervals_size = 1
             es_query_aggs[@es_property_name] = {
               histogram:
                 field: @es_property_name
@@ -97,6 +93,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             }
 
     parseESResults: (es_aggregations_data, first_call)->
+
       if first_call
         @faceting_keys_inorder = []
         @faceting_data = {}
@@ -127,6 +124,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
           if not @max_value
             @max_value = 0
+          round_diff = Math.ceil(@max_value-@min_value)
+          @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
+          if round_diff < FacetingHandler.NUM_INTERVALS
+            @intervals_size = 1
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
