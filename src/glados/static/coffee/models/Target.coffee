@@ -99,6 +99,13 @@ Target.COLUMNS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
     }
+  BIOACTIVITIES_NUMBER: {
+    'name_to_show': 'Bioactivities'
+    'comparator': 'num_bioactivities'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -126,7 +133,9 @@ Target.COLUMNS_SETTINGS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      'custom_field_template': 'hola'
     }
+    Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
 }
 
