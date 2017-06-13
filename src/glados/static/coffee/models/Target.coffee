@@ -105,10 +105,10 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
-    'on_click': -> console.log 'CLICKED ME!', @
+    'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
     'function_parameters': ['target_chembl_id', 'pref_name']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
-    # or probably not, depending on how this evolves.
+    # or probably not, depending on how this evolves
     'function_key': 'bioactivities'
     'function_link': true
   }

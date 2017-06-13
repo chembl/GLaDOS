@@ -165,3 +165,25 @@ class TargetReportCardApp
       entity: Target
     target.fetch()
 
+  @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
+
+    bioactivities = new TargetAssociatedBioactivities
+      target_chembl_id: chemblID
+
+    new MiniHistogramView
+      model: bioactivities
+      el: $containerElem
+
+    bioactivities.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+    $clickedLink = $(@)
+    paramsList = $(@).attr('data-function-paramaters').split(',')
+    targetChemblID = paramsList[0]
+    $containerElem = $clickedLink.parent()
+
+    glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
+
+    TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+
+
