@@ -106,36 +106,44 @@ Target.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  PREF_NAME: {
+    'name_to_show': 'Name'
+    'comparator': 'pref_name'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'custom_field_template': '<i>{{val}}</i>'
+  }
+  TYPE: {
+    'name_to_show': 'Type'
+    'comparator': 'target_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  ORGANISM:{
+    'name_to_show': 'Organism'
+    'comparator': 'organism'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
 Target.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Target.COLUMNS.CHEMBL_ID
-    {
-      'name_to_show': 'Name'
-      'comparator': 'pref_name'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<i>{{val}}</i>'
-    }
-    {
-      'name_to_show': 'Type'
-      'comparator': 'target_type'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
-      'name_to_show': 'Organism'
-      'comparator': 'organism'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': 'hola'
-    }
+    Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.TYPE
+    Target.COLUMNS.ORGANISM
     Target.COLUMNS.BIOACTIVITIES_NUMBER
+  ]
+  RESULTS_LIST_REPORT_CARD:[
+    Target.COLUMNS.CHEMBL_ID
+    Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.TYPE
+    Target.COLUMNS.ORGANISM
   ]
 }
 
