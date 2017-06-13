@@ -47,6 +47,7 @@ glados.useNameSpace 'glados',
 
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
 
+
         if _.isBoolean(col_value)
           returnCol['value'] = if col_value then 'Yes' else 'No'
         else
@@ -57,6 +58,12 @@ glados.useNameSpace 'glados',
 
         returnCol['has_link'] = _.has(colDescription, 'link_base')
         returnCol['is_secondary_link'] = colDescription.secondary_link == true
+        returnCol['is_function_link'] = colDescription.function_link == true
+        if returnCol['is_function_link']
+          returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
+          for paramComp in colDescription.function_parameters).join(',')
+          returnCol['function_key'] = colDescription.function_key
+
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
@@ -67,6 +74,7 @@ glados.useNameSpace 'glados',
 
         # This method should return a value based on the parameter, not modify the parameter
         return returnCol
+
 
     #gets the image url from the first column with values that has a 'img_url'
     getImgURL: (columnsWithValues) ->
