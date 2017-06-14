@@ -27,6 +27,7 @@ TargetAssociatedBioactivities = Backbone.Model.extend
       'pie-data': buckets
       'title': 'ChEMBL Activity types for target ' + @get('target_chembl_id')
       'buckets_index': _.indexBy(buckets, 'key')
+      'link_to_all': Activity.getActivitiesListURL('target_chembl_id:' + @get('target_chembl_id'))
     }
 
   getRequestData: ->
