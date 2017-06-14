@@ -51,6 +51,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     TITLE_Y = 10
+    BARS_MIN_HEIGHT = 2
     BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -74,9 +75,9 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
     getXForBucket = d3.scale.ordinal()
       .domain(bucketNames)
       .rangeBands([0,VISUALISATION_WIDTH], 0.1)
-    getYForBucket = d3.scale.linear()
+    getHeightForBucket = d3.scale.linear()
       .domain([0, _.max(bucketSizes)])
-      .range([0, BARS_CONTAINER_HEIGHT])
+      .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
     barGroups = barsContainerG.selectAll('.bar-group')
       .data(buckets)
       .enter()
@@ -90,9 +91,9 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('background-bar', true)
 
     barGroups.append('rect')
-      .attr('height', (b) -> getYForBucket(b.doc_count))
+      .attr('height', (b) -> getHeightForBucket(b.doc_count))
       .attr('width', getXForBucket.rangeBand())
-      .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getYForBucket(b.doc_count) )
+      .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getHeightForBucket(b.doc_count) )
       .classed('value-bar', true)
 
     barGroups.append('rect')

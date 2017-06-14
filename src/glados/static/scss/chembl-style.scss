@@ -2257,7 +2257,6 @@ span.badge-primary-color-no-float {
 */
 .mini-histogram{
   .mainSVGContainer{
-    background-color: red;
   }
   .title{
     text-decoration: underline;
@@ -2265,14 +2264,16 @@ span.badge-primary-color-no-float {
     font-size: 80%;
   }
   .title:hover{
-    stroke:color('teal', 'accent-4');
+    fill: color('teal', 'accent-4');
   }
   .bars-background{
-    fill: blue;
+    fill: white;
+    opacity: 0;
   }
   .bar-group{
     .background-bar{
-      fill: yellow;
+      fill: white;
+      opacity: 0;
     }
     .value-bar{
       fill: orange;
