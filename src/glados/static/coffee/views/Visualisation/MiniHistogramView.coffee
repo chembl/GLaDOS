@@ -1,6 +1,8 @@
 MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
+    @maxCategories = arguments[0].max_categories
+    console.log 'max categories:', @maxCategories
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-mini-histogram-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -8,9 +10,28 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   showPreloader: -> glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
 
+  # returns the buckets that are going to be used for the visualisation
+  # actual buckets may be merged into "other" depending on @maxCategories
+  getBucketsForView: ->
+    buckets =  @model.get('pie-data')
+
+    if buckets.length > @maxCategories
+      start = @maxCategories - 1
+      stop = buckets.length - 1
+      bucketsToMerge = buckets[start..stop]
+      othersBucket =
+        doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+        key: glados.Visualisation.Activity.OTHERS_LABEL
+        link: 'TODO'
+
+      buckets = buckets[0..start-1]
+      buckets.push(othersBucket)
+
+    return buckets
+
   render: ->
     @$vis_elem.empty()
-    buckets =  @model.get('pie-data')
+    buckets = @getBucketsForView()
 
     if buckets.length == 0
       $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')

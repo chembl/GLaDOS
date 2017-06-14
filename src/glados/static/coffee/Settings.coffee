@@ -145,6 +145,8 @@ glados.useNameSpace 'glados',
     CATEGORICAL:'CATEGORICAL'
     CONTINUOUS:'CONTINUOUS'
     THRESHOLD:'THRESHOLD'
+    Activity:
+      OTHERS_LABEL:'Other'
 
 # SERVER LOADED URLS / must be defined by the server configuration
 glados.loadURLPaths = (request_root, app_root, static_root)->
