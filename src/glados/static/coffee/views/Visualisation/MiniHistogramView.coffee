@@ -19,7 +19,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     console.log 'RENDER VIEW!', buckets
     VISUALISATION_WIDTH = $(@el).width()
-    VISUALISATION_HEIGHT = 70
+    VISUALISATION_HEIGHT = 60
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -73,6 +73,11 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', getXForBucket.rangeBand())
       .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getYForBucket(b.doc_count) )
       .classed('value-bar', true)
+
+    barGroups.append('rect')
+      .attr('height', BARS_CONTAINER_HEIGHT)
+      .attr('width', getXForBucket.rangeBand())
+      .classed('front-bar', true)
 
 
     #-------------------------------------------------------------------------------------------------------------------
