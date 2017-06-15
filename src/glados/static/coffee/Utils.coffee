@@ -149,3 +149,29 @@ glados.useNameSpace 'glados',
       $legendContainer.find('line, path').css('fill', 'none')
 
     getDegreesFromRadians: (radians) -> radians * 180 / Math.PI
+
+    Buckets:
+      mergeBuckets: (buckets, maxCategories, model) ->
+
+        if buckets.length > maxCategories
+          start = maxCategories - 1
+          stop = buckets.length - 1
+          bucketsToMerge = buckets[start..stop]
+
+          if model?
+            mergedLink = model.getMergedLink(bucketsToMerge)
+          else
+            mergedLink = ''
+
+          othersBucket =
+            doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+            key: glados.Visualisation.Activity.OTHERS_LABEL
+            link: mergedLink
+
+          buckets = buckets[0..start-1]
+          buckets.push(othersBucket)
+
+        return buckets
+
+
+

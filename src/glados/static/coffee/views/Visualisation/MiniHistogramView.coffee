@@ -17,16 +17,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
     maxCategories = @config.max_categories
 
     if buckets.length > maxCategories
-      start = maxCategories - 1
-      stop = buckets.length - 1
-      bucketsToMerge = buckets[start..stop]
-      othersBucket =
-        doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
-        key: glados.Visualisation.Activity.OTHERS_LABEL
-        link: @model.getMergedLink(bucketsToMerge)
-
-      buckets = buckets[0..start-1]
-      buckets.push(othersBucket)
+      buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model)
 
     return buckets
 
