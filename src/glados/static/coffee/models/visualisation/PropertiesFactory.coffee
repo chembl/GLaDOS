@@ -59,6 +59,9 @@ glados.useNameSpace 'glados.models.visualisation',
         ACTIVITY_ID:
           propName: 'activity_id'
           label: 'Activity id'
+        STANDARD_TYPE:
+          propName: 'standard_type'
+          label: 'Standard Type'
     CompoundTargetMatrix:
       Properties:
         PCHEMBL_VALUE_AVG:
