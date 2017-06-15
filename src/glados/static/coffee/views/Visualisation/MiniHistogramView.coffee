@@ -2,6 +2,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
     @maxCategories = arguments[0].max_categories
+    @barsColourScale = arguments[0].bars_colour_scale
     console.log 'max categories:', @maxCategories
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-mini-histogram-container')
@@ -51,14 +52,15 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     TITLE_Y = 10
+    TITLE_Y_PADDING = 5
     BARS_MIN_HEIGHT = 2
-    BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y
+    BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING
 
     #-------------------------------------------------------------------------------------------------------------------
     # add histogram bars container
     #-------------------------------------------------------------------------------------------------------------------
     barsContainerG = mainSVGContainer.append('g')
-      .attr('transform', 'translate(0,' + TITLE_Y + ')')
+      .attr('transform', 'translate(0,' + (TITLE_Y + TITLE_Y_PADDING) + ')')
     barsContainerG.append('rect')
       .attr('height', BARS_CONTAINER_HEIGHT)
       .attr('width', VISUALISATION_WIDTH)
@@ -90,11 +92,17 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', getXForBucket.rangeBand())
       .classed('background-bar', true)
 
-    barGroups.append('rect')
+    valueBars = barGroups.append('rect')
       .attr('height', (b) -> getHeightForBucket(b.doc_count))
       .attr('width', getXForBucket.rangeBand())
       .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getHeightForBucket(b.doc_count) )
       .classed('value-bar', true)
+
+    if @barsColourScale?
+      valueBars.attr('fill', (b) -> thisView.barsColourScale(b.key))
+    else
+      #2196f3 blue
+      valueBars.attr('fill', '#2196f3')
 
     barGroups.append('rect')
       .attr('height', BARS_CONTAINER_HEIGHT)

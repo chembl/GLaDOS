@@ -170,10 +170,14 @@ class TargetReportCardApp
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: chemblID
 
+    barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true).colourScale
+    console.log 'barsColourScale: ', barsColourScale
     new MiniHistogramView
       model: bioactivities
       el: $containerElem
       max_categories: 8
+      bars_colour_scale: barsColourScale
 
     bioactivities.fetch()
 
