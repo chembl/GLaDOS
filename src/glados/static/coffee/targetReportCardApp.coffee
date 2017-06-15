@@ -176,6 +176,7 @@ class TargetReportCardApp
     config =
       max_categories: 8
       bars_colour_scale: barsColourScale
+      fixed_bar_width: true
 
     new MiniHistogramView
       model: bioactivities

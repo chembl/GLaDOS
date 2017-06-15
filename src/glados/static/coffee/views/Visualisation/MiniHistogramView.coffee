@@ -74,12 +74,19 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'bucketSizes: ', bucketSizes
     console.log 'max:', _.max(bucketSizes)
 
+    if @config.fixed_bar_width
+      barWidth = VISUALISATION_WIDTH / @config.max_categories
+      xRangeEnd = barWidth * buckets.length
+    else
+      fixed_bar_width = VISUALISATION_WIDTH
+
     getXForBucket = d3.scale.ordinal()
       .domain(bucketNames)
-      .rangeBands([0,VISUALISATION_WIDTH], 0.1)
+      .rangeBands([0,xRangeEnd], 0.1)
     getHeightForBucket = d3.scale.linear()
       .domain([0, _.max(bucketSizes)])
       .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
+
     barGroups = barsContainerG.selectAll('.bar-group')
       .data(buckets)
       .enter()
