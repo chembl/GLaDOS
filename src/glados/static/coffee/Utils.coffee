@@ -10,6 +10,10 @@ glados.useNameSpace 'glados',
     # you can use the function like this getNestedValue(a, 'b.c'.split('.'))
     getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false) ->
 
+      # temporary hack for target bioactivities
+      if nestedComparatorsStr == 'num_bioactivities'
+        return 'NUMBER'
+
       nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else glados.Settings.DEFAULT_NULL_VALUE_LABEL
 
       nestedComparatorsList = nestedComparatorsStr.split('.')
@@ -43,6 +47,7 @@ glados.useNameSpace 'glados',
 
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
 
+
         if _.isBoolean(col_value)
           returnCol['value'] = if col_value then 'Yes' else 'No'
         else
@@ -53,6 +58,12 @@ glados.useNameSpace 'glados',
 
         returnCol['has_link'] = _.has(colDescription, 'link_base')
         returnCol['is_secondary_link'] = colDescription.secondary_link == true
+        returnCol['is_function_link'] = colDescription.function_link == true
+        if returnCol['is_function_link']
+          returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
+          for paramComp in colDescription.function_parameters).join(',')
+          returnCol['function_key'] = colDescription.function_key
+
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
@@ -64,6 +75,7 @@ glados.useNameSpace 'glados',
         # This method should return a value based on the parameter, not modify the parameter
         return returnCol
 
+
     #gets the image url from the first column with values that has a 'img_url'
     getImgURL: (columnsWithValues) ->
 
@@ -74,9 +86,12 @@ glados.useNameSpace 'glados',
 
     cachedTemplateFunctions: {}
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
-    fillContentForElement: ($element, paramsObj={})->
+    fillContentForElement: ($element, paramsObj={}, customTemplate)->
 
-      templateSelector = '#' + $element.attr('data-hb-template')
+      if customTemplate?
+        templateSelector = '#' + customTemplate
+      else
+        templateSelector = '#' + $element.attr('data-hb-template')
 
       if not glados.Utils.cachedTemplateFunctions[templateSelector]?
         templateFunction = Handlebars.compile($(templateSelector).html())
@@ -134,3 +149,29 @@ glados.useNameSpace 'glados',
       $legendContainer.find('line, path').css('fill', 'none')
 
     getDegreesFromRadians: (radians) -> radians * 180 / Math.PI
+
+    Buckets:
+      mergeBuckets: (buckets, maxCategories, model) ->
+
+        if buckets.length > maxCategories
+          start = maxCategories - 1
+          stop = buckets.length - 1
+          bucketsToMerge = buckets[start..stop]
+
+          if model?
+            mergedLink = model.getMergedLink(bucketsToMerge)
+          else
+            mergedLink = ''
+
+          othersBucket =
+            doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+            key: glados.Visualisation.Activity.OTHERS_LABEL
+            link: mergedLink
+
+          buckets = buckets[0..start-1]
+          buckets.push(othersBucket)
+
+        return buckets
+
+
+

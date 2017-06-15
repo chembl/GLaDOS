@@ -2248,8 +2248,43 @@ span.badge-primary-color-no-float {
       transform: translate(50%, 50%);
 
     }
-
   }
 
+}
+/**
+* Mini histograms
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.mini-histogram{
+  .mainSVGContainer{
+  }
+  .title{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 80%;
+  }
+  .title:hover{
+    fill: color('teal', 'accent-4');
+  }
+  .bars-background{
+    fill: white;
+    opacity: 0;
+  }
+  .bar-group{
+    .background-bar{
+      fill: white;
+      opacity: 0;
+    }
+    .front-bar{
+      opacity: 0;
+      cursor: pointer;
+    }
 
+    .front-bar:hover{
+      stroke-width: 1;
+      stroke: black;
+      fill:black;
+      opacity: 0.2;
+    }
+  }
 }

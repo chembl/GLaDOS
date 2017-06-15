@@ -165,3 +165,34 @@ class TargetReportCardApp
       entity: Target
     target.fetch()
 
+  @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
+
+    bioactivities = new TargetAssociatedBioactivities
+      target_chembl_id: chemblID
+
+    barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true).colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+
+    new MiniHistogramView
+      model: bioactivities
+      el: $containerElem
+      config: config
+
+    bioactivities.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+    $clickedLink = $(@)
+    paramsList = $(@).attr('data-function-paramaters').split(',')
+    targetChemblID = paramsList[0]
+    $containerElem = $clickedLink.parent()
+
+    glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
+
+    TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+
+

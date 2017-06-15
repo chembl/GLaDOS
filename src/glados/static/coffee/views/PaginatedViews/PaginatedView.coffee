@@ -150,6 +150,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.length > 0
         for i in [0..$elem.length - 1]
           @sendDataToTemplate $($elem[i])
+        @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
       else
@@ -157,6 +158,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
+
+    bindFunctionLinks: ->
+      $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
+      visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
+      $linksToBind.each (i, link) ->
+        $currentLink = $(@)
+        alreadyBound = $currentLink.attr('data-already-function-bound')?
+        if not alreadyBound
+          functionKey = $currentLink.attr('data-function-key')
+          functionToBind = visibleColumnsIndex[functionKey].on_click
+          $currentLink.click functionToBind
+          $currentLink.attr('data-already-function-bound', 'yes')
 
     getVisibleColumns: ->
 
@@ -198,7 +211,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
-  
+
         $appendTo.append($(newItemContent))
   
       # After adding everything, if the element is a table I now set up the top scroller
