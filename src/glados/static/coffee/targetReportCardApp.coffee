@@ -172,12 +172,15 @@ class TargetReportCardApp
 
     barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true).colourScale
-    console.log 'barsColourScale: ', barsColourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+
     new MiniHistogramView
       model: bioactivities
       el: $containerElem
-      max_categories: 8
-      bars_colour_scale: barsColourScale
+      config: config
 
     bioactivities.fetch()
 

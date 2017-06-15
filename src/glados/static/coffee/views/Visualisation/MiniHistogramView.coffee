@@ -1,9 +1,8 @@
 MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
-    @maxCategories = arguments[0].max_categories
-    @barsColourScale = arguments[0].bars_colour_scale
-    console.log 'max categories:', @maxCategories
+    @config = arguments[0].config
+
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-mini-histogram-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -15,9 +14,10 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
   # actual buckets may be merged into "other" depending on @maxCategories
   getBucketsForView: ->
     buckets =  @model.get('pie-data')
+    maxCategories = @config.max_categories
 
-    if buckets.length > @maxCategories
-      start = @maxCategories - 1
+    if buckets.length > maxCategories
+      start = maxCategories - 1
       stop = buckets.length - 1
       bucketsToMerge = buckets[start..stop]
       othersBucket =
@@ -98,8 +98,9 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getHeightForBucket(b.doc_count) )
       .classed('value-bar', true)
 
-    if @barsColourScale?
-      valueBars.attr('fill', (b) -> thisView.barsColourScale(b.key))
+    barsColourScale = @config.bars_colour_scale
+    if barsColourScale?
+      valueBars.attr('fill', (b) -> barsColourScale(b.key))
     else
       #2196f3 blue
       valueBars.attr('fill', '#2196f3')
