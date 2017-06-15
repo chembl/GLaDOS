@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
       'Infinite': glados.views.PaginatedViews.PaginatedView.getInfiniteConstructor()
-
+      'Bioactivity': glados.views.SearchResults.ESResultsBioactivitySummaryView
 
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
@@ -109,6 +109,7 @@ glados.useNameSpace 'glados.views.Browsers',
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID)
         templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
+        console.log 'TEMPLATE NAME: ', templateName
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
         console.log '$viewElement: ', $viewElement

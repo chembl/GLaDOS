@@ -118,12 +118,14 @@ glados.useNameSpace 'glados',
       'Table': 'Table'
       'Cards': 'Cards'
       'Infinite': 'Infinite'
+      Bioactivity: 'Bioactivity'
     DEFAULT_RESULTS_VIEWS_ICONS:
       'Matrix': 'fa-th'
       'Graph': 'fa-area-chart'
       'Table': 'fa-table'
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
+      Bioactivity: 'fa-connectdevelop'
     DEFAULT_NULL_VALUE_LABEL: '---'
   Events:
     Collections:
