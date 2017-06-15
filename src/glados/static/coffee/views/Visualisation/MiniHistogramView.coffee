@@ -23,7 +23,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       othersBucket =
         doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
         key: glados.Visualisation.Activity.OTHERS_LABEL
-        link: 'TODO'
+        link: @model.getMergedLink(bucketsToMerge)
 
       buckets = buckets[0..start-1]
       buckets.push(othersBucket)
@@ -116,6 +116,7 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('height', BARS_CONTAINER_HEIGHT)
       .attr('width', getXForBucket.rangeBand())
       .classed('front-bar', true)
+      .on('click', (b) -> window.open(b.link) )
 
     #-------------------------------------------------------------------------------------------------------------------
     # add qtips

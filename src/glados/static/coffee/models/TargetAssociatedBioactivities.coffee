@@ -30,6 +30,12 @@ TargetAssociatedBioactivities = Backbone.Model.extend
       'link_to_all': Activity.getActivitiesListURL('target_chembl_id:' + @get('target_chembl_id'))
     }
 
+  getMergedLink: (bucketsToMerge) ->
+    allKeys = _.map(_.pluck(bucketsToMerge, 'key'), (k) -> '"' + k + '"')
+    labelFilter = 'standard_type:(' + allKeys.join(' OR ') + ')'
+    filter = 'target_chembl_id:' + @get('target_chembl_id') + ' AND ' + labelFilter
+    return Activity.getActivitiesListURL(filter)
+
   getRequestData: ->
 
     return {
