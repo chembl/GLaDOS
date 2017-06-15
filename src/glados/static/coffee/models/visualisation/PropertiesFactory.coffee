@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Standard Type'
           domain: ['Potency','GI50','IC50','Activity','Inhibition','Ki','MIC','EC50','AC50','ED50','Kd','Ratio',
             'Residual Activity','IZ','Tissue Severity Score','GI','CC50','Ratio IC50','T1/2','LC50','Other']
-          coloursRange: d3.scale.category20b().range().concat([glados.Settings.VISUALISATION_GREY_BASE])
+          coloursRange: d3.scale.category20().range().concat([glados.Settings.VISUALISATION_GREY_BASE])
           colourScaleType: glados.Visualisation.CATEGORICAL
     CompoundTargetMatrix:
       Properties:
