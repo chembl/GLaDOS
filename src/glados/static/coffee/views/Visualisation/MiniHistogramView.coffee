@@ -121,10 +121,15 @@ MiniHistogramView = Backbone.View.extend(ResponsiviseViewExt).extend
     # add qtips
     #-------------------------------------------------------------------------------------------------------------------
     barGroups.each (d) ->
-      text = d.key + ":" + d.doc_count
+      text = '<b>' + d.key + '</b>' + ":" + d.doc_count
       $(@).qtip
         content:
           text: text
+        style:
+          classes:'qtip-light'
+        position:
+          my: 'top center'
+          at: 'bottom center'
 
     #-------------------------------------------------------------------------------------------------------------------
     # add title
