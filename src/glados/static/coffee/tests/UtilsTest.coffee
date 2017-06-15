@@ -73,3 +73,32 @@ describe "Utils", ->
       colsWithVals = glados.Utils.getColumnsWithValues(columns, testCompound)
 
       expect(glados.Utils.getImgURL(colsWithVals)).toBe("https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo")
+
+  describe "Buckets", ->
+
+    generateRandomBuckets = (numBuckets) ->
+
+      buckets = []
+      for i in [1..numBuckets]
+        buckets.push
+          key: 'bucket' + i
+          doc_count: parseInt(Math.random() * 1000)
+
+      return buckets
+
+    it 'merges buckets with from a maximum number of categories', ->
+
+      numBuckets = 10
+      padding = 5
+
+      # for now it is not necessary that it works with maxbuckets = 1
+      for maxBuckets in [2..numBuckets+padding]
+        testBuckets = generateRandomBuckets(numBuckets)
+        newBuckets = glados.Utils.Buckets.mergeBuckets(testBuckets, maxBuckets)
+
+        totalCountMustBe = _.reduce(_.pluck(testBuckets, 'doc_count'), ((a, b) -> a + b))
+        totalCountGot = _.reduce(_.pluck(newBuckets, 'doc_count'), ((a, b) -> a + b))
+        expect(totalCountMustBe).toBe(totalCountGot)
+
+        totalBucketsGot = newBuckets.length
+        expect(totalBucketsGot <= maxBuckets).toBe(true)

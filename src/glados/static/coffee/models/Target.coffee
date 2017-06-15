@@ -99,34 +99,57 @@ Target.COLUMNS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
     }
+  BIOACTIVITIES_NUMBER: {
+    'name_to_show': 'Bioactivities'
+    'comparator': 'num_bioactivities'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
+    'function_parameters': ['target_chembl_id', 'pref_name']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    'function_key': 'bioactivities'
+    'function_link': true
+  }
+  PREF_NAME: {
+    'name_to_show': 'Name'
+    'comparator': 'pref_name'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'custom_field_template': '<i>{{val}}</i>'
+  }
+  TYPE: {
+    'name_to_show': 'Type'
+    'comparator': 'target_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  ORGANISM:{
+    'name_to_show': 'Organism'
+    'comparator': 'organism'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
 Target.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Target.COLUMNS.CHEMBL_ID
-    {
-      'name_to_show': 'Name'
-      'comparator': 'pref_name'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<i>{{val}}</i>'
-    }
-    {
-      'name_to_show': 'Type'
-      'comparator': 'target_type'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
-      'name_to_show': 'Organism'
-      'comparator': 'organism'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
+    Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.TYPE
+    Target.COLUMNS.ORGANISM
+    Target.COLUMNS.BIOACTIVITIES_NUMBER
+  ]
+  RESULTS_LIST_REPORT_CARD:[
+    Target.COLUMNS.CHEMBL_ID
+    Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.TYPE
+    Target.COLUMNS.ORGANISM
   ]
 }
 
