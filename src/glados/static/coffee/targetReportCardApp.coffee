@@ -173,7 +173,7 @@ class TargetReportCardApp
     new MiniHistogramView
       model: bioactivities
       el: $containerElem
-      max_categories: 6
+      max_categories: 8
 
     bioactivities.fetch()
 
