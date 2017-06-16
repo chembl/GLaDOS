@@ -339,6 +339,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings\
         .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
 
+      defaultComparators = ['target_chembl_id', 'target_organism', 'standard_type']
+      list.setMeta('default_comparators', defaultComparators)
+      list.setMeta('current_comparators', defaultComparators)
+
       list.getRequestData = ->
 
         aggregations = ['target_chembl_id', 'target_organism', 'standard_type']

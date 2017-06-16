@@ -3,17 +3,15 @@ glados.useNameSpace 'glados.views.SearchResults',
   ESResultsBioactivitySummaryView: Backbone.View.extend
 
     MAX_AGGREGATIONS: 3
-    DEFAULT_COMPARATORS: ['target_chembl_id', 'target_organism', 'standard_type']
 
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
-      list.fetch()
-      @paintFieldsSelectors()
+      @ActivitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+      @ActivitiesSummarylist.fetch()
+      @paintFieldsSelectors(@ActivitiesSummarylist.getMeta('default_comparators'))
 
-    paintFieldsSelectors: (currentComparators=@DEFAULT_COMPARATORS) ->
+    paintFieldsSelectors: (currentComparators) ->
       $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
-
       columnsDescriptions = []
 
       for i in [0..@MAX_AGGREGATIONS-1]
@@ -30,7 +28,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           option =
             is_selected: field.comparator == selectedComparator
-            comparator: field.comparator
+            value: i + '-' + field.comparator
             name_to_show: field.name_to_show
 
           availableOptions.push option
@@ -45,4 +43,17 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $(@el).find('select').material_select()
 
+      handleColumnFieldChangeProxy = $.proxy(@handleColumnFieldChange, @)
+      $(@el).find('.BCK-Bioactivity-column-select').change ->
+        if @value?
+          handleColumnFieldChangeProxy @value
 
+    handleColumnFieldChange: (selectedValue) ->
+
+      valueParts = selectedValue.split('-')
+      colNum = valueParts[0]
+      comparator = valueParts[1]
+      currentComparators = @ActivitiesSummarylist.getMeta('current_comparators')
+      currentComparators[colNum] = comparator
+      @ActivitiesSummarylist.setMeta('current_comparators', currentComparators)
+      @paintFieldsSelectors(currentComparators)
