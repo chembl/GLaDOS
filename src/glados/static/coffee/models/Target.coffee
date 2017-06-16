@@ -101,7 +101,7 @@ Target.COLUMNS = {
     }
   BIOACTIVITIES_NUMBER: {
     'name_to_show': 'Bioactivities'
-    'comparator': 'num_bioactivities'
+    'comparator': '_metadata.activity_count'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
@@ -150,6 +150,7 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.PREF_NAME
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
+    Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
 }
 
