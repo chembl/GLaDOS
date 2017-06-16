@@ -345,7 +345,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.getRequestData = ->
 
-        aggregations = ['target_chembl_id', 'target_organism', 'standard_type']
+        aggregations = @getMeta('current_comparators')
 
         requestData =
           query:
@@ -384,7 +384,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             size: 1000
             order:
               _count: 'desc'
-            aggs: {}
 
           placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
           placeToPutAgg.aggs[aggName] = newAgg

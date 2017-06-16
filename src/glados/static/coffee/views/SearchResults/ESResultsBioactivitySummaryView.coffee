@@ -57,3 +57,4 @@ glados.useNameSpace 'glados.views.SearchResults',
       currentComparators[colNum] = comparator
       @ActivitiesSummarylist.setMeta('current_comparators', currentComparators)
       @paintFieldsSelectors(currentComparators)
+      @ActivitiesSummarylist.fetch()
