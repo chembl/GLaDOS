@@ -68,9 +68,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return new wsPagCollection
 
-# creates a new instance of a Client Side Paginated Collection from Web Services, This means that
+# creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
-    getNewClientSideWSCollectionFor: (collectionSettings) ->
+    getNewClientSideCollectionFor: (collectionSettings) ->
       collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions).extend
 
@@ -287,7 +287,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewApprovedDrugsClinicalCandidatesList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
 
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
@@ -336,7 +336,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewBioactivitiesSummaryList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings\
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings\
         .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
 
       list.fetch = ->
@@ -347,7 +347,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
     getNewTargetRelationsList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
 
@@ -401,7 +401,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewTargetComponentsList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
 
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'target/' + chembl_id + '.json'
