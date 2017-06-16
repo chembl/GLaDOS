@@ -2,18 +2,46 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ESResultsBioactivitySummaryView: Backbone.View.extend
 
+    MAX_AGGREGATIONS: 3
+    DEFAULT_COMPARATORS: ['target_chembl_id', 'target_organism', 'standard_type']
+
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
       list.fetch()
+      @paintFieldsSelectors()
 
+    paintFieldsSelectors: (currentComparators=@DEFAULT_COMPARATORS) ->
       $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
-      glados.Utils.fillContentForElement($columnsSelectorContainer)
-      esIndexName = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY.PATH.replace('/','')
-      console.log 'es index name: ', esIndexName
-      activityColumns = Activity.COLUMNS
-      console.log 'activityColumns: ', activityColumns
 
+      columnsDescriptions = []
+
+      for i in [0..@MAX_AGGREGATIONS-1]
+        selectedComparator = currentComparators[i]
+        alreadyChosenComparatos = _.without(currentComparators, selectedComparator)
+        availableOptions = []
+
+        for key, field of Activity.COLUMNS
+
+          if not field.use_in_summary
+            continue
+          if _.contains(alreadyChosenComparatos, field.comparator)
+            continue
+
+          option =
+            is_selected: field.comparator == selectedComparator
+            comparator: field.comparator
+            name_to_show: field.name_to_show
+
+          availableOptions.push option
+
+        currentColumnOptions =
+          columnNumber: (i + 1)
+          fields: availableOptions
+        columnsDescriptions.push(currentColumnOptions)
+
+      glados.Utils.fillContentForElement $columnsSelectorContainer,
+        columnsDescriptions: columnsDescriptions
 
       $(@el).find('select').material_select()
 

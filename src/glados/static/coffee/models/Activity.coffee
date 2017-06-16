@@ -17,6 +17,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   ACTIVITY_ID: {
     'name_to_show': 'Activity id'
@@ -33,6 +34,7 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
     'link_base':'assay_link'
     'secondary_link': true
+    'use_in_summary': true
   }
   ASSAY_DESCRIPTION: {
     'name_to_show': 'Assay Description'
@@ -42,11 +44,12 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   ASSAY_TYPE: {
-    'name_to_show': 'Type'
+    'name_to_show': 'Assay Type'
     'comparator': 'assay_type'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   BAO_FORMAT: {
     'name_to_show': 'BAO Format'
@@ -54,6 +57,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   CANONICAL_SMILES: {
     'name_to_show': 'Canonical Smiles'
@@ -70,11 +74,12 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   DOCUMENT_CHEMBL_ID: {
-    'name_to_show': 'Document ChEMBL ID'
+    'name_to_show': 'Document'
     'comparator': 'document_chembl_id'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   DOCUMENT_JOURNAL: {
     'name_to_show': 'Document Journal'
@@ -99,6 +104,7 @@ Activity.COLUMNS = {
     'image_base_url': 'image_url'
     'link_base':'molecule_link'
     'secondary_link': true
+    'use_in_summary': true
   }
   STANDARD_TYPE: {
     'name_to_show': 'Standard Type'
@@ -106,6 +112,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   PCHEMBL_VALUE: {
     'name_to_show': 'PchEMBL Value'
@@ -120,6 +127,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   PUBLISHED_RELATION: {
     'name_to_show': 'Published Relation'
@@ -190,6 +198,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   STANDARD_UNITS: {
     'name_to_show': 'Standard Units'
@@ -213,6 +222,7 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
     'link_base':'target_link'
     'secondary_link': true
+    'use_in_summary': true
   }
   TARGET_ORGANISM: {
     'name_to_show': 'Target Organism'
@@ -220,13 +230,15 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   TARGET_PREF_NAME: {
-    'name_to_show': 'Target Preferred Name'
+    'name_to_show': 'Target Pref. Name'
     'comparator': 'target_pref_name'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   UO_UNITS: {
     'name_to_show': 'UO Units'
