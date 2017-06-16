@@ -335,6 +335,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewBioactivitiesSummaryList: ->
+      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings\
+        .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
+
+      list.fetch = ->
+        console.log 'FETCHING LIST!!'
+
+      console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
+      console.log 'list: ', list
+
+
     getNewTargetRelationsList: ->
       list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
       list.initURL = (chembl_id) ->

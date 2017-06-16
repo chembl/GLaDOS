@@ -4,5 +4,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+      list.fecth()
 
 

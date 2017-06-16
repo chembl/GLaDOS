@@ -204,13 +204,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: TargetRelation.ID_COLUMN
         COLUMNS: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
-
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetComponent.ID_COLUMN
         COLUMNS: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ADDITIONAL_COLUMNS:[]
+    CLIENT_SIDE_ES_COLLECTIONS:
+      BIOACTIVITY_SUMMARY_LIST:
+        MODEL: Activity
+        DEFAULT_PAGE_SIZE: 5
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        ID_COLUMN: Activity.ID_COLUMN
+        COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object
