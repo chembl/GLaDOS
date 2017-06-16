@@ -9,7 +9,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
       glados.Utils.fillContentForElement($columnsSelectorContainer)
-      console.log '$columnsSelectorContainer: ', $columnsSelectorContainer
+      esIndexName = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY.PATH.replace('/','')
+      console.log 'es index name: ', esIndexName
+      activityColumns = Activity.COLUMNS
+      console.log 'activityColumns: ', activityColumns
+
+
       $(@el).find('select').material_select()
 
 
