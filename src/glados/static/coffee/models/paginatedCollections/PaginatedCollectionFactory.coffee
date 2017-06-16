@@ -345,6 +345,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
 
+      return list
+
 
     getNewTargetRelationsList: ->
       list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
