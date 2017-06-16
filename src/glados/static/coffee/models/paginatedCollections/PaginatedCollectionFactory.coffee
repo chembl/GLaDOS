@@ -339,11 +339,68 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings\
         .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
 
+      list.getRequestData = ->
+
+        aggregations = ['target_chembl_id', 'target_organism', 'standard_type']
+
+        requestData =
+          query:
+            query_string:
+              analyze_wildcard: true,
+              query: 'target_chembl_id:("CHEMBL2096905" OR "CHEMBL2095396")'
+          size: 0
+#          aggs:
+#            target_chembl_id_agg:
+#              terms:
+#                field: 'target_chembl_id'
+#                size: 5
+#                order:
+#                  _count: 'desc'
+#              aggs:
+#                target_organism_agg:
+#                  terms:
+#                    field: 'target_organism'
+#                    size: 1000
+#                    order:
+#                      _count: 'desc'
+#                  aggs:
+#                    standard_type_agg:
+#                      terms:
+#                        field: 'standard_type',
+#                        size: 1000
+#                        order:
+#                          _count: 'desc'
+
+        placeToPutAgg = requestData
+        for i in [0..aggregations.length-1]
+          currentField = aggregations[i]
+          aggName = currentField + '_agg'
+          newAgg =
+            field: currentField
+            size: 1000
+            order:
+              _count: 'desc'
+            aggs: {}
+
+          placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
+          placeToPutAgg.aggs[aggName] = newAgg
+          placeToPutAgg = placeToPutAgg.aggs[aggName]
+
+
+          console.log 'currentField: ', currentField
+          console.log 'i: ', i
+          console.log 'new agg: ', newAgg
+
+        return requestData
+
       list.fetch = ->
         console.log 'FETCHING LIST!!'
+        console.log 'request data: ', @getRequestData()
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
+
+
 
       return list
 
