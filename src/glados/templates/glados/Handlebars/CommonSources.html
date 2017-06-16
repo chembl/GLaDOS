@@ -599,7 +599,9 @@
 
 <script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
 
-Bioactivity!!!
+{% endverbatim %}
+  {% include "glados/SearchResultsParts/BioactivitySummaryBase.html" %}
+{% verbatim %}
 
 </script>
 
@@ -651,6 +653,18 @@ Bioactivity!!!
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">
   <div class="BCK-VisualisationMessages"></div>
   <div class="BCK-mini-histogram-container mini-histogram"></div>
+</script>
+
+<script id="Handlebars-Common-Bioactivity-Columns-Selector-Container" type="text/x-handlebars-template">
+  <div class="input-field col s12">
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select>
+    <label>Materialize Select</label>
+  </div>
 </script>
 
 {% endverbatim %}

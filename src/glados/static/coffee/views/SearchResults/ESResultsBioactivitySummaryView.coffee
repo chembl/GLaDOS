@@ -7,4 +7,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
       list.fetch()
 
+      $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
+      glados.Utils.fillContentForElement($columnsSelectorContainer)
+      console.log '$columnsSelectorContainer: ', $columnsSelectorContainer
+      $(@el).find('select').material_select()
+
 
