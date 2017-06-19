@@ -343,6 +343,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list.setMeta('default_comparators', defaultComparators)
       list.setMeta('current_comparators', defaultComparators)
 
+      list.url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
+
       list.getRequestData = ->
 
         aggregations = @getMeta('current_comparators')
@@ -380,10 +382,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           currentField = aggregations[i]
           aggName = currentField + '_agg'
           newAgg =
-            field: currentField
-            size: 1000
-            order:
-              _count: 'desc'
+            terms:
+              field: currentField
+              size: 1000
+              order:
+                _count: 'desc'
 
           placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
           placeToPutAgg.aggs[aggName] = newAgg
@@ -397,8 +400,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return requestData
 
       list.fetch = ->
+
         console.log 'FETCHING LIST!!'
         console.log 'request data: ', @getRequestData()
+        esJSONRequest = JSON.stringify(@getRequestData())
+        console.log 'esJSONRequest: ', esJSONRequest
+
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+
+        thisModel = @
+        $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
+
+      list.parse = (data) ->
+        console.log 'parsing ', data
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
