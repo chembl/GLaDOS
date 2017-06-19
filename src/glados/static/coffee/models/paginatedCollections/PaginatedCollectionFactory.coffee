@@ -355,27 +355,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               analyze_wildcard: true,
               query: 'target_chembl_id:("CHEMBL2096905" OR "CHEMBL2095396")'
           size: 0
-#          aggs:
-#            target_chembl_id_agg:
-#              terms:
-#                field: 'target_chembl_id'
-#                size: 5
-#                order:
-#                  _count: 'desc'
-#              aggs:
-#                target_organism_agg:
-#                  terms:
-#                    field: 'target_organism'
-#                    size: 1000
-#                    order:
-#                      _count: 'desc'
-#                  aggs:
-#                    standard_type_agg:
-#                      terms:
-#                        field: 'standard_type',
-#                        size: 1000
-#                        order:
-#                          _count: 'desc'
 
         placeToPutAgg = requestData
         for i in [0..aggregations.length-1]
@@ -391,11 +370,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
           placeToPutAgg.aggs[aggName] = newAgg
           placeToPutAgg = placeToPutAgg.aggs[aggName]
-
-
-          console.log 'currentField: ', currentField
-          console.log 'i: ', i
-          console.log 'new agg: ', newAgg
 
         return requestData
 
@@ -417,6 +391,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         console.log 'parsing ', data
+
+        # the data that ir receives form elastic is like a tree, this is like listing all leaves of the tree while
+        # inlcuding data from their ancestry
+        getInfoFromBuckets = (bucket) ->
+
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list

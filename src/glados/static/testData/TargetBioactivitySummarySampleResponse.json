@@ -1,0 +1,130 @@
+{
+    "took": 5,
+    "timed_out": false,
+    "_shards": {
+        "total": 7,
+        "successful": 7,
+        "failed": 0
+    },
+    "hits": {
+        "total": 466,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "target_chembl_id_agg": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+                {
+                    "key": "CHEMBL2095396",
+                    "doc_count": 360,
+                    "target_organism_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 0,
+                        "buckets": [
+                            {
+                                "key": "Homo sapiens",
+                                "doc_count": 360,
+                                "standard_type_agg": {
+                                    "doc_count_error_upper_bound": 0,
+                                    "sum_other_doc_count": 0,
+                                    "buckets": [
+                                        {
+                                            "key": "Ratio",
+                                            "doc_count": 173
+                                        },
+                                        {
+                                            "key": "Selectivity ratio",
+                                            "doc_count": 89
+                                        },
+                                        {
+                                            "key": "Selectivity",
+                                            "doc_count": 60
+                                        },
+                                        {
+                                            "key": "Ki ratio",
+                                            "doc_count": 20
+                                        },
+                                        {
+                                            "key": "Ki",
+                                            "doc_count": 16
+                                        },
+                                        {
+                                            "key": "Ratio Ki",
+                                            "doc_count": 2
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL2096905",
+                    "doc_count": 106,
+                    "target_organism_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 0,
+                        "buckets": [
+                            {
+                                "key": "Homo sapiens",
+                                "doc_count": 106,
+                                "standard_type_agg": {
+                                    "doc_count_error_upper_bound": 0,
+                                    "sum_other_doc_count": 0,
+                                    "buckets": [
+                                        {
+                                            "key": "Ki",
+                                            "doc_count": 35
+                                        },
+                                        {
+                                            "key": "Kb",
+                                            "doc_count": 19
+                                        },
+                                        {
+                                            "key": "AD50",
+                                            "doc_count": 16
+                                        },
+                                        {
+                                            "key": "EC50",
+                                            "doc_count": 9
+                                        },
+                                        {
+                                            "key": "IC50",
+                                            "doc_count": 7
+                                        },
+                                        {
+                                            "key": "pKa",
+                                            "doc_count": 6
+                                        },
+                                        {
+                                            "key": "Inhibition",
+                                            "doc_count": 4
+                                        },
+                                        {
+                                            "key": "Total binding inhibited",
+                                            "doc_count": 4
+                                        },
+                                        {
+                                            "key": "ID50",
+                                            "doc_count": 3
+                                        },
+                                        {
+                                            "key": "Activity",
+                                            "doc_count": 2
+                                        },
+                                        {
+                                            "key": "Displacement",
+                                            "doc_count": 1
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

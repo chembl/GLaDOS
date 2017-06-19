@@ -2,9 +2,17 @@ describe "BioactivitySummary", ->
 
   describe "From a selection of targets", ->
 
-    it 'Generates the request data', ->
+    activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+    sampleResponse = undefined
 
-      activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+    beforeAll (done) ->
+      console.log 'loading sample response'
+      dataURL = glados.Settings.STATIC_URL + 'testData/TargetBioactivitySummarySampleResponse.json'
+      $.get dataURL, (testData) ->
+        sampleResponse = testData
+        done()
+
+    it 'Generates the request data', ->
 
       possibleComparators = ['cvkwe', "trbde", "xcysj", "kocnf", "tfaed", "isjxd", "vzvkx", "ukaum", "gsqki", "awxeq",
         "ktxmj"]
@@ -22,3 +30,8 @@ describe "BioactivitySummary", ->
         expect(currentAgg[currentAggNameShouldBe]?).toBe(true)
         expect(currentAgg[currentAggNameShouldBe].terms.field).toBe(currentComparator)
         currentAgg = currentAgg[currentAggNameShouldBe].aggs
+
+    it 'loads the list form an elasticsearch response', ->
+
+      activitiesSummarylist.parse(sampleResponse)
+
