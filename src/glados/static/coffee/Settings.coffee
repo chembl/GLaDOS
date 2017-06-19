@@ -125,7 +125,7 @@ glados.useNameSpace 'glados',
       'Table': 'fa-table'
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
-      Bioactivity: 'fa-connectdevelop'
+      Bioactivity: 'fa-tachometer'
     DEFAULT_NULL_VALUE_LABEL: '---'
   Events:
     Collections:
