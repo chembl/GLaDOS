@@ -99,7 +99,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
-  
+
     render: ->
 
       if @isInfinite() and not $(@el).is(":visible")
@@ -127,6 +127,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
       @initialiseColumnsModal()
 
+      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
+        @showSuggestedLabel()
+      else
+        @hideSuggestedLabel()
+
     sleepView: ->
       # destroy loading waypoints when I sleep to avoid triggering next pages when hidden
       if @isInfinite()
@@ -137,7 +142,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
-  
+
     clearTemplates: ->
       $(@el).find('.BCK-items-container').empty()
   
@@ -515,6 +520,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Preloaders and content
     # ------------------------------------------------------------------------------------------------------------------
+
+    showSuggestedLabel: () ->
+      suggestedLabel = $(@el).find('.BCK-SuggestedLabel')
+      suggestedLabel.show()
+
+    hideSuggestedLabel: () ->
+      suggestedLabel = $(@el).find('.BCK-SuggestedLabel')
+      suggestedLabel.hide()
+
     showPaginatedViewContent: ->
   
       $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
@@ -591,6 +605,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @hideContentContainer()
       @hideEmptyMessageContainer()
       @hideFooterContainer()
+      @hideSuggestedLabel()
   
   
     # ------------------------------------------------------------------------------------------------------------------
