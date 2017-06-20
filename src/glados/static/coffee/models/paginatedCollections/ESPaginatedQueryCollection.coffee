@@ -20,6 +20,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
+      @setMeta('fuzzy-results', false)
+      if @getMeta('fuzzy-search') == false and data.hits.total == 0
+        @setMeta('fuzzy-search', true)
+        @fetch()
+        return []
+      else if @getMeta('fuzzy-search') == true
+        @setMeta('fuzzy-search', false)
+        if data.hits.total > 0
+          @setMeta('fuzzy-results', true)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
@@ -28,6 +37,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
+      fuzzySearch = @getMeta('fuzzy-search')
+      if not fuzzySearch?
+        @setMeta('fuzzy-search', false)
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -88,8 +100,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             "*.eng_analyzed^5"
           ],
           query: single_term,
-          boost: 0.1
-          fuzziness: 'AUTO'
+          boost: 0.1,
+          fuzziness : (if @getMeta('fuzzy-search')? and @getMeta('fuzzy-search') == true then 'AUTO'  else 0)
       }
       if single_term.length >= 4
         single_term_query.bool.should.push {
@@ -258,9 +270,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return
 
       call_time = new Date().getTime()
-      if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
-        console.log "WARNING! Facets requested again before they finished loading!", @getURL()
-        return
+      # TODO: CHECK HOW TO HANDLE REPETITIVE QUERIES SUBMISSIONS MORE EFFICIENTLY
+#      if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
+#        console.log "WARNING! Facets requested again before they finished loading!", @getMeta('index')
+#        return
       if first_call
         @loading_facets = true
         @loading_facets_t_ini = call_time
@@ -278,7 +291,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
-          console.log 'TRIGGERING FACETS CHANGED!'
+          console.log 'TRIGGERING FACETS CHANGED!', @getMeta('index')
           @trigger('facets-changed')
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
