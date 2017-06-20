@@ -172,6 +172,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       es_query = {
         size: pageSize,
         from: ((page - 1) * pageSize)
+        _source:
+          includes: [ '*', '_metadata.*']
+          excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
         query:
           bool:
             must: null
