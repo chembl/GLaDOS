@@ -7,9 +7,15 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
       @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+      @activitiesSummarylist.on 'reset do-repaint sort', @setVisualisationMessageAfterLoad, @
 
       glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
         $(@el).find('.BCK-summary-table-container'))
+
+      @setProgressMessage('loading data...')
+      console.log 'es results collection is: ', @collection
+      console.log 'request data is: ', @collection.getRequestData()
+      console.log 'numSelected Items is: ', @collection.getNumberOfSelectedItems()
 
       @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))
       @activitiesSummarylist.fetch()
@@ -62,3 +68,16 @@ glados.useNameSpace 'glados.views.SearchResults',
       @activitiesSummarylist.setMeta('current_comparators', currentComparators)
       @paintFieldsSelectors(currentComparators)
       @activitiesSummarylist.fetch()
+
+    setProgressMessage: (msg, hideCog=false) ->
+
+      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+      glados.Utils.fillContentForElement $messagesElement,
+        message: msg
+        hide_cog: hideCog
+
+    setVisualisationMessageAfterLoad: ->
+
+      console.log 'DATA RECEIVED!!'
+      @setProgressMessage('Showing activity data for all the targets. ' +
+          'You can also select some targets to filter the activities.', hideCog=true)

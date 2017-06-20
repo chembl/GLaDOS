@@ -16,11 +16,16 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-select-all': 'selectAll'
       'click .BCK-unSelect-all': 'unSelectAll'
 
+    # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
+    # ranges include both numbers
+    VIEW_SELECTION_THRESHOLDS:
+      'Bioactivity': [1,10000]
+
     initialize: ->
 
       @standaloneMode = arguments[0].standalone_mode == true
       @collection.on 'reset do-repaint sort', @render, @
-      @collection.on glados.Events.Collections.SELECTION_UPDATED, @renderSelectionMenu, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
       @currentViewType = @collection.getMeta('default_view')
 
@@ -44,25 +49,48 @@ glados.useNameSpace 'glados.views.Browsers',
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
-        @renderSelectionMenu()
+        @handleSelection()
         $changeViewBtnsContainer = $(@el).find('.BCK-changeView-btns-container')
-        $changeViewBtnsContainer.html Handlebars.compile($('#' + $changeViewBtnsContainer.attr('data-hb-template')).html())
+        glados.Utils.fillContentForElement $changeViewBtnsContainer,
           options: ( {
             label: viewLabel,
             icon_class: glados.Settings.DEFAULT_RESULTS_VIEWS_ICONS[viewLabel]
+            is_disabled: @checkIfViewMustBeDisabled(viewLabel)
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
 
+      @addRemoveQtipToButtons()
+
     #--------------------------------------------------------------------------------------
     # Selections
     #--------------------------------------------------------------------------------------
-    renderSelectionMenu: ->
+    checkIfViewMustBeDisabled: (viewLabel) ->
+
+      if @VIEW_SELECTION_THRESHOLDS[viewLabel]?
+        numSelectedItems = @collection.getNumberOfSelectedItems()
+        threshold = @VIEW_SELECTION_THRESHOLDS[viewLabel]
+        if threshold[0] <= numSelectedItems <= threshold[1]
+          console.log 'VIEW MUST BE ENABLED: ', viewLabel
+          return false
+        else
+          console.log 'VIEW MUST BE DISABLED: ', viewLabel
+          return true
+
+      return false
+
+    handleSelection: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       glados.Utils.fillContentForElement $selectionMenuContainer,
         num_selected: @collection.getNumberOfSelectedItems()
         total_items: @collection.getMeta('total_records')
+
+      for viewLabel in @collection.getMeta('available_views')
+        if @checkIfViewMustBeDisabled(viewLabel)
+          @disableButton(viewLabel)
+        else
+          @enableButton(viewLabel)
 
     selectAll: -> @collection.selectAll()
     unSelectAll: -> @collection.unSelectAll()
@@ -79,16 +107,51 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     # Switching Views
     #--------------------------------------------------------------------------------------
+    addRemoveQtipToButtons: ->
+      $allButtons = $(@el).find('.BCK-btn-switch-view')
+      $allButtons.qtip('destroy', true)
+      $disabledButtons = $allButtons.filter('.disabled')
+      thisView = @
+      $($disabledButtons).each ->
+
+        $currentElem = $(@)
+        viewLabel = $currentElem.attr('data-view')
+        threshold = 'some'
+        if thisView.VIEW_SELECTION_THRESHOLDS[viewLabel]?
+          thresholdNum = thisView.VIEW_SELECTION_THRESHOLDS[viewLabel]
+          threshold = 'from ' + thresholdNum[0] + ' to ' + thresholdNum[1]
+
+        $currentElem.qtip
+          content:
+            text: 'Select ' + threshold + ' items to activate this view.'
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'top right'
+            at: 'bottom middle'
+
     unSelectAllButtons: ->
-
       $(@el).find('.BCK-btn-switch-view').removeClass('accent-4')
-
     selectButton: (type) ->
-
       $(@el).find('[data-view=' + type + ']').addClass('accent-4')
 
+    disableButton: (type) ->
+      $buttonToDisable = $(@el).find('[data-view=' + type + ']')
+      $buttonToDisable.addClass('disabled')
+      @addRemoveQtipToButtons()
+
+    enableButton: (type) ->
+      $buttonToEnable = $(@el).find('[data-view=' + type + ']')
+      $buttonToEnable.removeClass('disabled')
+      @addRemoveQtipToButtons()
+
     switchResultsView: (event) ->
-      desiredViewType = $(event.currentTarget).attr('data-view')
+      $clickedElem = $(event.currentTarget)
+
+      if $clickedElem.hasClass('disabled')
+        return
+
+      desiredViewType = $clickedElem.attr('data-view')
       console.log 'SWITCH TO VIEW: ', desiredViewType
 
       @unSelectAllButtons()
