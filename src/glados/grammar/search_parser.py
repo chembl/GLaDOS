@@ -1,4 +1,5 @@
-from arpeggio import Optional, PTNodeVisitor, ZeroOrMore, EOF
+from arpeggio import Optional, PTNodeVisitor, OneOrMore, ZeroOrMore, EOF
+from arpeggio import RegExMatch as _
 from arpeggio import ParserPython
 import arpeggio
 
@@ -9,41 +10,49 @@ import re
 import json
 
 
-def word_term():
-    return
-
-
 def property_term():
     return(
         Optional(['+', '-']),
-        json_property_path_segment, ZeroOrMore('.', json_property_path_segment), ':'
+        json_property_path_segment, ZeroOrMore('.', json_property_path_segment), ':',
         [
-           ('"', _('[^"]'), '"'),
-           ("'", _("[^']"), "'")
+           ('"', _('[^"]+'), '"'),
+           ("'", _("[^']+"), "'"),
+           ("(", _("[^\(\)]+"), ")"),
+           common.correctly_parenthesised_non_space_char_sequence
         ],
         common.term_end_lookahead
     )
 
-def number_value():
-    return
-
 
 def json_property_path_segment():
-    return _(r'[a-zA-Z0-9_\-]')
+    return OneOrMore(_(r'[a-zA-Z0-9_\-]'))
+
+
+def single_term():
+    return common.correctly_parenthesised_non_space_char_sequence, common.term_end_lookahead
+
 
 def exact_match_term():
     return (
-        Optional(['+', '-']),
         [
-           ('"', _('[^"]'), '"'),
-           ("'", _("[^']"), "'")
+            (
+              Optional(['+', '-']),
+              [
+                 ('"', _('[^"]+'), '"'),
+                 ("'", _("[^']+"), "'")
+              ]
+            ),
+            (
+              ['+', '-'], common.correctly_parenthesised_non_space_char_sequence
+            )
         ],
         common.term_end_lookahead
     )
 
 
 def expression_term():
-    return [parenthesised_expression, smiles.smiles, inchi.inchi_key, inchi.inchi]
+    return [parenthesised_expression, smiles.smiles, inchi.inchi_key, inchi.inchi, property_term, exact_match_term,
+            json_property_path_segment]
 
 
 def parenthesised_expression():
@@ -126,6 +135,12 @@ class TermsVisitor(PTNodeVisitor):
     def visit_inchi_key(self, node, children):
         return 'inchi_key:'+''.join(children)
 
+    def visit_property_term(self, node, children):
+        return 'property_term:'+''.join(children)
+
+    def visit_exact_match_term(self, node, children):
+        return 'exact_match_term:'+''.join(children)
+
 
 def parse_query_str(query_string: str):
     query_string = re.sub(r'\s+', ' ', query_string)
@@ -180,6 +195,11 @@ CC(C)C[C@H](NC(=O)[C@@H](NC(=O)[C@H](Cc1c[nH]c2ccccc12)NC(=O)[C@H]3CCCN3C(=O)C(C
     CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
 
     VYFYYTLLBUKUHU-UHFFFAOYSA-N
+    
+    +json.port:\" asda asda asd \"
+    _metadata.api.json:>=10
+    _metadata.api.json:( 789 )
+    +US-68921(123) 'yes search for this mofo!! () ' aspirin eugenol ester
 
 
     InChI=1/BrH/h1H/i1+1
