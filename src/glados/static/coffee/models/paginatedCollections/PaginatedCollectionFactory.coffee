@@ -429,10 +429,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
         @reset(models)
+        @setMetadataAfterParse()
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
 
+      list.setMetadataAfterParse = ->
+
+        currentComparators = @getMeta('current_comparators')
+        columnsIndex = _.indexBy(Activity.COLUMNS, 'comparator')
+        columnsToShow = []
+        for comp in currentComparators
+          columnsToShow.push columnsIndex[comp]
+        list.setMeta('columns', columnsToShow)
+        @resetMeta()
+
+      # ----------------------------------------------------------------------------------
+      # -- End of custom functions for bioactivity summary list
+      # ----------------------------------------------------------------------------------
 
       return list
 

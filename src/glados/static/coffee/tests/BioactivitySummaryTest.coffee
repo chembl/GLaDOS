@@ -50,7 +50,6 @@ describe "BioactivitySummary", ->
             for currentBucket in currentAggData.buckets
               numToAdd += getProportionsFromBucket(currentBucket, aggKey, proportions)
 
-
         currentPropertyName = if keyName.search('_agg$') != -1 then keyName.split('_agg')[0] else keyName
         currentPropertyValue = bucket.key
 
@@ -80,4 +79,11 @@ describe "BioactivitySummary", ->
             proportionGot = (groupedValues[propValue].length/models.length)
             expect(proportionGot).toBe(expectedProportion)
 
+    it 'sets the correct columns after loading from response', ->
+
+      activitiesSummarylist.parse(sampleResponse)
+      currentComparators = activitiesSummarylist.getMeta('current_comparators')
+      columns = activitiesSummarylist.getMeta('columns')
+      for i in [0..currentComparators.length-1]
+        expect(currentComparators[i]).toBe(columns[i].comparator)
 
