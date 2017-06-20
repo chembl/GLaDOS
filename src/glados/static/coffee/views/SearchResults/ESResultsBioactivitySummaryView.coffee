@@ -6,9 +6,13 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
-      @ActivitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
-      @ActivitiesSummarylist.fetch()
-      @paintFieldsSelectors(@ActivitiesSummarylist.getMeta('default_comparators'))
+      @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+
+      glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
+        $(@el).find('.BCK-summary-table-container'))
+
+      @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))
+      @activitiesSummarylist.fetch()
 
     paintFieldsSelectors: (currentComparators) ->
       $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
@@ -53,8 +57,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       valueParts = selectedValue.split('-')
       colNum = valueParts[0]
       comparator = valueParts[1]
-      currentComparators = @ActivitiesSummarylist.getMeta('current_comparators')
+      currentComparators = @activitiesSummarylist.getMeta('current_comparators')
       currentComparators[colNum] = comparator
-      @ActivitiesSummarylist.setMeta('current_comparators', currentComparators)
+      @activitiesSummarylist.setMeta('current_comparators', currentComparators)
       @paintFieldsSelectors(currentComparators)
-      @ActivitiesSummarylist.fetch()
+      @activitiesSummarylist.fetch()

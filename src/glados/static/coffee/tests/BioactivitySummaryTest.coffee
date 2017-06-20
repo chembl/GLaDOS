@@ -2,10 +2,15 @@ describe "BioactivitySummary", ->
 
   describe "From a selection of targets", ->
 
-    activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+    activitiesSummarylist = undefined
     sampleResponse = undefined
 
+    beforeEach ->
+
+      activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
+
     beforeAll (done) ->
+
       dataURL = glados.Settings.STATIC_URL + 'testData/TargetBioactivitySummarySampleResponse.json'
       $.get dataURL, (testData) ->
         sampleResponse = testData
@@ -84,6 +89,11 @@ describe "BioactivitySummary", ->
       activitiesSummarylist.parse(sampleResponse)
       currentComparators = activitiesSummarylist.getMeta('current_comparators')
       columns = activitiesSummarylist.getMeta('columns')
-      for i in [0..currentComparators.length-1]
-        expect(currentComparators[i]).toBe(columns[i].comparator)
+      for i in [0..currentComparators.length]
+        # check that last is count!
+        if i == currentComparators.length
+          expect(columns[i].comparator).toBe('doc_count')
+        else
+          expect(currentComparators[i]).toBe(columns[i].comparator)
+          expect(columns[i].show).toBe(true)
 

@@ -428,8 +428,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           rootBucket[aggKey] = value
 
         models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
-        @reset(models)
         @setMetadataAfterParse()
+        @reset(models)
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
@@ -437,10 +437,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list.setMetadataAfterParse = ->
 
         currentComparators = @getMeta('current_comparators')
+        console.log 'currentComparators: ', currentComparators
         columnsIndex = _.indexBy(Activity.COLUMNS, 'comparator')
         columnsToShow = []
         for comp in currentComparators
-          columnsToShow.push columnsIndex[comp]
+          currentColumn = columnsIndex[comp]
+          currentColumn.show = true
+          columnsToShow.push currentColumn
+        # also add count!
+        countColumn = Activity.COLUMNS.DOC_COUNT
+        countColumn.show = true
+        columnsToShow.push countColumn
         list.setMeta('columns', columnsToShow)
         @resetMeta()
 
