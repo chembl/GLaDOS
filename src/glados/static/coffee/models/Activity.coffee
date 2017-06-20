@@ -247,6 +247,20 @@ Activity.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  DOC_COUNT: {
+    'name_to_show': 'Count'
+    'comparator': 'doc_count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  IS_AGGREGATION: {
+    'name_to_show': 'Is aggregation'
+    'comparator': 'is_aggregation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID

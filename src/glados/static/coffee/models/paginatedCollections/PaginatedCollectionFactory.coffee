@@ -393,13 +393,45 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'parsing ', data
 
         # the data that ir receives form elastic is like a tree, this is like listing all leaves of the tree while
-        # inlcuding data from their ancestry
-        getInfoFromBuckets = (bucket) ->
+        # including data from their ancestry
+        getInfoFromBuckets = (bucket, keyName) ->
 
+          aggregations = _.filter(Object.keys(bucket), (key) -> key.search('_agg$') != -1)
+          actsList = []
+
+          if aggregations.length == 0
+            # I am at the base case return a new activity. in a one item list to ease concatenating.
+            act = new Activity
+            act.set(Activity.COLUMNS.DOC_COUNT.comparator, bucket.doc_count)
+            actsList = [act]
+          else
+            #recursive case, I need to check my children and add their answers to mine.
+
+            for aggKey in aggregations
+              currentAggData = bucket[aggKey]
+              for currentBucket in currentAggData.buckets
+                actsToAdd = getInfoFromBuckets(currentBucket, aggKey)
+                actsList = actsList.concat(actsToAdd)
+
+          # in either case, assign the value of the current aggregation field to every activity.
+          currentPropertyName = if keyName.search('_agg$') != -1 then keyName.split('_agg')[0] else keyName
+          currentPropertyValue = bucket.key
+
+          for act in actsList
+            act.set(currentPropertyName, currentPropertyValue)
+
+          return actsList
+
+        models = []
+        rootBucket = {key: true}
+        for aggKey, value of data.aggregations
+          rootBucket[aggKey] = value
+
+        models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
+        @reset(models)
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
       console.log 'list: ', list
-
 
 
       return list
