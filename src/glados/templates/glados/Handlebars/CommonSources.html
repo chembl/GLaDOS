@@ -65,9 +65,10 @@
         {{#if this.has_link}}
           <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
         {{else if this.is_function_link}}
+          {{this.value}}
           <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
              data-function-key="{{this.function_key}}">
-            {{this.value}}
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
           </a>
         {{else}}
           {{this.value}}
@@ -475,7 +476,10 @@
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i> {{message}}
+  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw">{{/unless}}</i> {{message}}
+  {{#if link_url}}
+    <a target="_blank" href="{{link_url}}">{{link_text}}</a>
+  {{/if}}
 </script>
 
 <script id="Handlebars-Common-PlotError" type="text/x-handlebars-template">
@@ -596,6 +600,14 @@
 </div>
 </script>
 
+<script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
+
+{% endverbatim %}
+  {% include "glados/SearchResultsParts/BioactivitySummaryBase.html" %}
+{% verbatim %}
+
+</script>
+
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
   {{#each formats}}
   <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
@@ -608,7 +620,8 @@
 
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
   {{#each options}}
-  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-btn-switch-view"
+  <a class="waves-effect waves-light btn-small es-collection-download-btn BCK-btn-switch-view
+    {{#if this.is_disabled}}disabled{{/if}}"
     data-view="{{this.label}}">
     <p><i class="fa {{this.icon_class}}"></i></p>
     <p>{{this.label}}</p>
@@ -644,6 +657,23 @@
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">
   <div class="BCK-VisualisationMessages"></div>
   <div class="BCK-mini-histogram-container mini-histogram"></div>
+</script>
+
+<script id="Handlebars-Common-Bioactivity-Columns-Selector-Container" type="text/x-handlebars-template">
+
+  {{#each columnsDescriptions}}
+    <div class="input-field col l3 m4 s6">
+      <b>Column {{this.columnNumber}}:</b> <br>
+      <select class="browser-default BCK-Bioactivity-column-select">
+        {{#each this.fields}}
+          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}} >
+            {{this.name_to_show}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+  {{/each}}
+
 </script>
 
 {% endverbatim %}

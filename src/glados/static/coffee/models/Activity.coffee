@@ -11,6 +11,14 @@ Activity = Backbone.Model.extend
     return response
 
 Activity.COLUMNS = {
+  COMMENT: {
+    'name_to_show': 'Activity Comment'
+    'comparator': 'activity_comment'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
   ACTIVITY_ID: {
     'name_to_show': 'Activity id'
     'comparator': 'activity_id'
@@ -26,10 +34,63 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
     'link_base':'assay_link'
     'secondary_link': true
+    'use_in_summary': true
   }
   ASSAY_DESCRIPTION: {
     'name_to_show': 'Assay Description'
     'comparator': 'assay_description'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  ASSAY_TYPE: {
+    'name_to_show': 'Assay Type'
+    'comparator': 'assay_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  BAO_FORMAT: {
+    'name_to_show': 'BAO Format'
+    'comparator': 'bao_format'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  CANONICAL_SMILES: {
+    'name_to_show': 'Canonical Smiles'
+    'comparator': 'canonical_smiles'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  DATA_VALIDITY_COMMENT: {
+    'name_to_show': 'Data Validity Comment'
+    'comparator': 'data_validity_comment'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  DOCUMENT_CHEMBL_ID: {
+    'name_to_show': 'Document'
+    'comparator': 'document_chembl_id'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  DOCUMENT_JOURNAL: {
+    'name_to_show': 'Document Journal'
+    'comparator': 'document_journal'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  DOCUMENT_YEAR: {
+    'name_to_show': 'Document Year'
+    'comparator': 'document_year'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
@@ -43,6 +104,115 @@ Activity.COLUMNS = {
     'image_base_url': 'image_url'
     'link_base':'molecule_link'
     'secondary_link': true
+    'use_in_summary': true
+  }
+  STANDARD_TYPE: {
+    'name_to_show': 'Standard Type'
+    'comparator': 'standard_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  PCHEMBL_VALUE: {
+    'name_to_show': 'PchEMBL Value'
+    'comparator': 'pchembl_value'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  POTENTIAL_DUPLICATE: {
+    'name_to_show': 'Potential Duplicate'
+    'comparator': 'potential_duplicate'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  PUBLISHED_RELATION: {
+    'name_to_show': 'Published Relation'
+    'comparator': 'published_relation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  PUBLISHED_TYPE: {
+    'name_to_show': 'Published Type'
+    'comparator': 'published_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  PUBLISHED_UNITS: {
+    'name_to_show': 'Published Units'
+    'comparator': 'published_units'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  PUBLISHED_VALUE: {
+    'name_to_show': 'Published Units'
+    'comparator': 'published_value'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  QUDT_UNITS: {
+    'name_to_show': 'QUDT Units'
+    'comparator': 'qudt_units'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  RECORD_ID: {
+    'name_to_show': 'Record ID'
+    'comparator': 'record_id'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  SRC_ID: {
+    'name_to_show': 'SRC ID'
+    'comparator': 'src_id'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  STANDARD_FLAG: {
+    'name_to_show': 'Standard Flag'
+    'comparator': 'standard_flag'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  STANDARD_RELATION: {
+    'name_to_show': 'Standard Relation'
+    'comparator': 'standard_relation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  STANDARD_TYPE: {
+    'name_to_show': 'Standard Type'
+    'comparator': 'standard_type'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  STANDARD_UNITS: {
+    'name_to_show': 'Standard Units'
+    'comparator': 'standard_units'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  STANDARD_VALUE: {
+    'name_to_show': 'Standard Value'
+    'comparator': 'standard_value'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
   }
   TARGET_CHEMBL_ID: {
     'name_to_show': 'Target'
@@ -52,17 +222,41 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
     'link_base':'target_link'
     'secondary_link': true
-  }
-  STANDARD_TYPE: {
-    'name_to_show': 'Standard Type'
-    'comparator': 'standard_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
+    'use_in_summary': true
   }
   TARGET_ORGANISM: {
     'name_to_show': 'Target Organism'
     'comparator': 'target_organism'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  TARGET_PREF_NAME: {
+    'name_to_show': 'Target Pref. Name'
+    'comparator': 'target_pref_name'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'use_in_summary': true
+  }
+  UO_UNITS: {
+    'name_to_show': 'UO Units'
+    'comparator': 'uo_units'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  DOC_COUNT: {
+    'name_to_show': 'Count'
+    'comparator': 'doc_count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
+  IS_AGGREGATION: {
+    'name_to_show': 'Is aggregation'
+    'comparator': 'is_aggregation'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
