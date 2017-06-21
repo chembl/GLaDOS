@@ -48,6 +48,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if not previousList? and not currentList?
         return false
+      else if previousList? != currentList?
+        return true
+      else if previousList.length != currentList.length
+        return true
+      else
+        for i in [1..previousList.length-1]
+          itemA = previousList[i]
+          itemB = currentList[i]
+          if itemA != itemB
+            return true
+        return false
+
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination
     # ------------------------------------------------------------------------------------------------------------------

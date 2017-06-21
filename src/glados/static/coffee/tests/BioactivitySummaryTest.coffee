@@ -19,10 +19,28 @@ describe "BioactivitySummary", ->
     it 'tells if the origin ids have changed', ->
 
       attrName = 'metaListHasChanged'
-      console.log 'ATTR HAS HANGED: ', activitiesSummarylist.metaListHasChanged(attrName)
-      console.log 'list: ', activitiesSummarylist
-      idsList1 = undefined
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(false)
+      idsList1 = ['a','b','c']
+      idsList2 = ['a','b','c', 'd', 'e']
+      idsList3 = ['a','b','d']
 
+      activitiesSummarylist.setMeta(attrName, idsList1, undefined, trackPreviousValue=true)
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(true)
+
+      activitiesSummarylist.setMeta(attrName, undefined, undefined, trackPreviousValue=true)
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(true)
+
+      activitiesSummarylist.setMeta(attrName, idsList1, undefined, trackPreviousValue=true)
+      activitiesSummarylist.setMeta(attrName, idsList2, undefined, trackPreviousValue=true)
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(true)
+
+      activitiesSummarylist.setMeta(attrName, idsList1, undefined, trackPreviousValue=true)
+      activitiesSummarylist.setMeta(attrName, idsList3, undefined, trackPreviousValue=true)
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(true)
+
+      activitiesSummarylist.setMeta(attrName, idsList1, undefined, trackPreviousValue=true)
+      activitiesSummarylist.setMeta(attrName, idsList1, undefined, trackPreviousValue=true)
+      expect(activitiesSummarylist.metaListHasChanged(attrName)).toBe(false)
 
     it 'Generates the request data', ->
 
