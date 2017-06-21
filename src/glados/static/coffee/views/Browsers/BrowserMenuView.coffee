@@ -16,11 +16,6 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-select-all': 'selectAll'
       'click .BCK-unSelect-all': 'unSelectAll'
 
-    # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
-    # ranges include both numbers
-    VIEW_SELECTION_THRESHOLDS:
-      'Bioactivity': [1,10000]
-
     initialize: ->
 
       @standaloneMode = arguments[0].standalone_mode == true
@@ -67,14 +62,12 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     checkIfViewMustBeDisabled: (viewLabel) ->
 
-      if @VIEW_SELECTION_THRESHOLDS[viewLabel]?
+      if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
         numSelectedItems = @collection.getNumberOfSelectedItems()
-        threshold = @VIEW_SELECTION_THRESHOLDS[viewLabel]
+        threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
         if threshold[0] <= numSelectedItems <= threshold[1]
-          console.log 'VIEW MUST BE ENABLED: ', viewLabel
           return false
         else
-          console.log 'VIEW MUST BE DISABLED: ', viewLabel
           return true
 
       return false
@@ -117,8 +110,8 @@ glados.useNameSpace 'glados.views.Browsers',
         $currentElem = $(@)
         viewLabel = $currentElem.attr('data-view')
         threshold = 'some'
-        if thisView.VIEW_SELECTION_THRESHOLDS[viewLabel]?
-          thresholdNum = thisView.VIEW_SELECTION_THRESHOLDS[viewLabel]
+        if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
+          thresholdNum = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
           threshold = 'from ' + thresholdNum[0] + ' to ' + thresholdNum[1]
 
         $currentElem.qtip

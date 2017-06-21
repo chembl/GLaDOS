@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # a Client Side collection means that all the information is in the client all the time. it is downloaded in one single
   # call, the pagination is made by limiting the access to the collection items
   # --------------------------------------------------------------------------------------------------------------------
-  ClientSideWSPaginatedCollection: Backbone.Collection.extend
+  ClientSidePaginatedCollection: Backbone.Collection.extend
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers
@@ -18,10 +18,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #  records_in_page -- How many records are in the current page
     #  sorting data per column.
     #
-    setMeta: (attr, value, storeAsString) ->
+    setMeta: (attr, value, storeAsString, trackPreviousVale=false) ->
 
       if _.isString(value) and !storeAsString
         value = parseInt(value)
+
+      if trackPreviousVale
+        @meta[attr + '_previous'] = @meta[attr]
 
       @meta[attr] = value
       @trigger('meta-changed')
@@ -38,6 +41,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @resetSortData()
       @resetSearchStruct()
 
+    metaListHasChanged: (attr) ->
+
+      previousList = @getMeta(attr + '_previous')
+      currentList = @getMeta(attr)
+
+      if not previousList? and not currentList?
+        return false
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination
     # ------------------------------------------------------------------------------------------------------------------

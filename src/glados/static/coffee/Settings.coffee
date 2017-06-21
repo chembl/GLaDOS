@@ -127,6 +127,10 @@ glados.useNameSpace 'glados',
       'Infinite': 'fa-ellipsis-v'
       Bioactivity: 'fa-tachometer'
     DEFAULT_NULL_VALUE_LABEL: '---'
+     # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
+    # ranges include both numbers
+    VIEW_SELECTION_THRESHOLDS:
+      'Bioactivity': [1,10000]
   Events:
     Collections:
       ALL_ITEMS_DOWNLOADED: 'ALL_ITEMS_DOWNLOADED'

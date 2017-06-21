@@ -16,15 +16,31 @@ describe "BioactivitySummary", ->
         sampleResponse = testData
         done()
 
+    it 'tells if the origin ids have changed', ->
+
+      attrName = 'metaListHasChanged'
+      console.log 'ATTR HAS HANGED: ', activitiesSummarylist.metaListHasChanged(attrName)
+      console.log 'list: ', activitiesSummarylist
+      idsList1 = undefined
+
+
     it 'Generates the request data', ->
+
+      originChemblIDs = ["CHEMBL2111342","CHEMBL2111341","CHEMBL3102","CHEMBL2111359","CHEMBL2331075","CHEMBL3427","CHEMBL2304406","CHEMBL2097165","CHEMBL2095169","CHEMBL2096970","CHEMBL2093868","CHEMBL4702","CHEMBL2096910","CHEMBL3138","CHEMBL3071","CHEMBL2281","CHEMBL2096905","CHEMBL2095396","CHEMBL1850","CHEMBL339","CHEMBL3998","CHEMBL265","CHEMBL2368","CHEMBL3361"]
+      activitiesSummarylist.setMeta('origin_chembl_ids', originChemblIDs)
 
       possibleComparators = ['cvkwe', "trbde", "xcysj", "kocnf", "tfaed", "isjxd", "vzvkx", "ukaum", "gsqki", "awxeq",
         "ktxmj"]
-
       testComparators = _.sample(possibleComparators, 3)
       activitiesSummarylist.setMeta('default_comparators', testComparators)
       activitiesSummarylist.setMeta('current_comparators', testComparators)
       requestData = activitiesSummarylist.getRequestData()
+
+      chemblIDsInQuery = requestData.query.query_string.query.split('target_chembl_id:')[1]\
+        .replace('(', '').replace(')', '').replace(/\"/g, '').split(' OR ')
+
+      for i in [0..originChemblIDs.length-1]
+        expect(chemblIDsInQuery[i]).toBe(originChemblIDs[i])
 
       numLevels = testComparators.length
       currentAgg = requestData.aggs

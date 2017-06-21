@@ -7,18 +7,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
       @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
-      @activitiesSummarylist.on 'reset do-repaint sort', @setVisualisationMessageAfterLoad, @
+      @activitiesSummarylist.on 'reset do-repaint sort', @showVisualisationStatus, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @showVisualisationStatus, @
 
       glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
         $(@el).find('.BCK-summary-table-container'))
 
-      @setProgressMessage('loading data...')
-      console.log 'es results collection is: ', @collection
-      console.log 'request data is: ', @collection.getRequestData()
-      console.log 'numSelected Items is: ', @collection.getNumberOfSelectedItems()
-
+      @showVisualisationStatus()
       @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))
-      @activitiesSummarylist.fetch()
 
     paintFieldsSelectors: (currentComparators) ->
       $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
@@ -76,8 +72,26 @@ glados.useNameSpace 'glados.views.SearchResults',
         message: msg
         hide_cog: hideCog
 
-    setVisualisationMessageAfterLoad: ->
+    showVisualisationStatus: ->
 
-      console.log 'DATA RECEIVED!!'
-      @setProgressMessage('Showing activity data for all the targets. ' +
-          'You can also select some targets to filter the activities.', hideCog=true)
+      numSelectedItems = @collection.getNumberOfSelectedItems()
+      threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
+
+      if numSelectedItems < threshold[0]
+        @setProgressMessage('Please select at least ' + threshold[0] + ' item to show this visualisation.',
+          hideCog=true)
+        return
+
+      if numSelectedItems > threshold[1]
+        @setProgressMessage('Please select less than ' + threshold[1] + ' items to show this visualisation.',
+          hideCog=true)
+        return
+
+      @setProgressMessage('Filtering activities...')
+      selectedIDs = @collection.getSelectedItemsIDs()
+      console.log 'selectedIDs: ', selectedIDs
+      console.log 'selectedIDs: ', JSON.stringify(selectedIDs)
+
+      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs)
+      @activitiesSummarylist.fetch()
+

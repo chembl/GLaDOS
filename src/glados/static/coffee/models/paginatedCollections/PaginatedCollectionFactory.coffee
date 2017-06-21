@@ -71,7 +71,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
     getNewClientSideCollectionFor: (collectionSettings) ->
-      collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection\
+
+      collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions).extend
 
         model: collectionSettings.MODEL
@@ -348,12 +349,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list.getRequestData = ->
 
         aggregations = @getMeta('current_comparators')
+        originChemblIDs = @getMeta('origin_chembl_ids')
+        chemblIdsTexts = ('"' + id + '"' for id in originChemblIDs)
 
         requestData =
           query:
             query_string:
               analyze_wildcard: true,
-              query: 'target_chembl_id:("CHEMBL2096905" OR "CHEMBL2095396")'
+              query: 'target_chembl_id:(' + chemblIdsTexts.join(' OR ')+ ')'
           size: 0
 
         placeToPutAgg = requestData
