@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
+      @disableColumnsSelection = arguments[0].disable_columns_selection
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
@@ -125,7 +126,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
-      @initialiseColumnsModal()
+
+      @initialiseColumnsModal() unless @disableColumnsSelection
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
         @showSuggestedLabel()
@@ -802,12 +804,14 @@ glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collect
     type: glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
     custom_render_evts: customRenderEvents
 
-glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents)->
+glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents,
+  disableColumnsSelection=false)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
     custom_render_evts: customRenderEvents
+    disable_columns_selection: disableColumnsSelection
 
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
