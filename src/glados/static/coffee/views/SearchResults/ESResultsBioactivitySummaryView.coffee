@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
 
       glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
-        $(@el).find('.BCK-summary-table-container'), undefined, disableColumnsSelection=true)
+        $(@el).find('.BCK-summary-table-container'), undefined, disableColumnsSelection=true, disableItemSelection=true)
 
       @handleVisualisationStatus()
       @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))

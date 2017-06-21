@@ -291,7 +291,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if first_call and @needs_second_call
           @loadFacetGroups(false)
         else
-          console.log 'TRIGGERING FACETS CHANGED!', @getMeta('index')
           @trigger('facets-changed')
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))

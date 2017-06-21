@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
+      @disableItemsSelection = arguments[0].disable_items_selection
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
@@ -121,7 +122,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @setUpLoadingWaypoint()
         @hidePreloaderIfNoNextItems()
 
-      @fillSelectAllContainer()
+      @fillSelectAllContainer() unless @disableItemsSelection
+
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
@@ -202,6 +204,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           base_check_box_id: @getBaseSelectAllCheckBoxID()
           all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
           columns: visibleColumns
+          selection_disabled: @disableItemsSelection
   
         $specificElemContainer.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
@@ -218,6 +221,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
+          selection_disabled: @disableItemsSelection
 
         $appendTo.append($(newItemContent))
   
@@ -232,6 +236,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $topScrollerDummy.width(firstRowWidth)
   
         hasToScroll = tableWidth < firstRowWidth
+
+        console.log'CHECKING IF TABLE HAS TO SCROLL'
+
         if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
           $topScrollerDummy.height(20)
         else
@@ -805,13 +812,14 @@ glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collect
     custom_render_evts: customRenderEvents
 
 glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents,
-  disableColumnsSelection=false)->
+  disableColumnsSelection=false, disableItemSelection=true)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
     custom_render_evts: customRenderEvents
     disable_columns_selection: disableColumnsSelection
+    disable_items_selection: disableItemSelection
 
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->
