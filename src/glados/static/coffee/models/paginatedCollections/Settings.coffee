@@ -214,7 +214,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     CLIENT_SIDE_ES_COLLECTIONS:
       BIOACTIVITY_SUMMARY_LIST:
         MODEL: Activity
-        DEFAULT_PAGE_SIZE: 5
+        DEFAULT_PAGE_SIZE: 20
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Activity.ID_COLUMN
         COLUMNS: []

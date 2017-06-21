@@ -107,11 +107,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getSelectedItemsIDs: ->
 
       idProperty = @getMeta('id_column').comparator
+      itemsList = []
 
       if @allResults?
-        return (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+        itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
       else
-        return (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+        itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+
+      if itemsList.length != @getNumberOfSelectedItems()
+        return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+
+      return itemsList
 
     selectAll: ->
 
