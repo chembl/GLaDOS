@@ -14,6 +14,8 @@ class TargetReportCardApp
 
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
     appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
+    
+    console.log 'appDrugsClinCandsList: ', appDrugsClinCandsList
 
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
     targetRelations.initURL GlobalVariables.CHEMBL_ID

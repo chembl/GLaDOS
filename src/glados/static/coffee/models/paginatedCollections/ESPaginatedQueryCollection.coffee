@@ -321,7 +321,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('all_items_selected', !@getMeta('all_items_selected'))
       @trigger('selection-changed')
 
-
 # ------------------------------------------------------------------------------------------------------------------
 # Metadata Handlers for query and pagination
 # ------------------------------------------------------------------------------------------------------------------

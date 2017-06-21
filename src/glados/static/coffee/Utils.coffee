@@ -10,10 +10,6 @@ glados.useNameSpace 'glados',
     # you can use the function like this getNestedValue(a, 'b.c'.split('.'))
     getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false) ->
 
-      # temporary hack for target bioactivities
-      if nestedComparatorsStr == 'num_bioactivities'
-        return 'NUMBER'
-
       nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else glados.Settings.DEFAULT_NULL_VALUE_LABEL
 
       nestedComparatorsList = nestedComparatorsStr.split('.')

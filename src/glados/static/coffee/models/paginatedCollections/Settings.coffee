@@ -36,7 +36,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -203,13 +204,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: TargetRelation.ID_COLUMN
         COLUMNS: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ADDITIONAL_COLUMNS:[]
-
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetComponent.ID_COLUMN
         COLUMNS: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ADDITIONAL_COLUMNS:[]
+    CLIENT_SIDE_ES_COLLECTIONS:
+      BIOACTIVITY_SUMMARY_LIST:
+        MODEL: Activity
+        DEFAULT_PAGE_SIZE: 20
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        ID_COLUMN: Activity.ID_COLUMN
+        COLUMNS: []
         ADDITIONAL_COLUMNS:[]
 
 # fills the KEY_NAME for the ES_INDEXES object

@@ -2133,11 +2133,17 @@ span.badge-primary-color-no-float {
   */
 .es-collection-download-btn {
 
+  background-color: color('teal', 'base');
+
   p {
     margin-top: 0px;
     margin-bottom: 0px;
   }
 
+}
+.es-collection-download-btn.disabled{
+  background-color: color('grey', 'lighten-2');
+  color: color('grey', 'base')
 }
 
 /**

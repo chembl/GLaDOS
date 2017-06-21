@@ -68,10 +68,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return new wsPagCollection
 
-# creates a new instance of a Client Side Paginated Collection from Web Services, This means that
+# creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
-    getNewClientSideWSCollectionFor: (collectionSettings) ->
-      collection = glados.models.paginatedCollections.ClientSideWSPaginatedCollection\
+    getNewClientSideCollectionFor: (collectionSettings) ->
+
+      collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions).extend
 
         model: collectionSettings.MODEL
@@ -287,7 +288,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewApprovedDrugsClinicalCandidatesList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
 
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'mechanism.json?target_chembl_id=' + chembl_id
@@ -335,8 +336,133 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewBioactivitiesSummaryList: ->
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings\
+        .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
+
+      defaultComparators = ['target_chembl_id', 'target_organism', 'standard_type']
+      list.setMeta('default_comparators', defaultComparators)
+      list.setMeta('current_comparators', defaultComparators)
+
+      list.url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
+
+      list.getRequestData = ->
+
+        aggregations = @getMeta('current_comparators')
+        originChemblIDs = @getMeta('origin_chembl_ids')
+        chemblIdsTexts = ('"' + id + '"' for id in originChemblIDs)
+
+        requestData =
+          query:
+            query_string:
+              analyze_wildcard: true,
+              query: 'target_chembl_id:(' + chemblIdsTexts.join(' OR ')+ ')'
+          size: 0
+
+        placeToPutAgg = requestData
+        for i in [0..aggregations.length-1]
+          currentField = aggregations[i]
+          aggName = currentField + '_agg'
+          newAgg =
+            terms:
+              field: currentField
+              size: 1000
+              order:
+                _count: 'desc'
+
+          placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
+          placeToPutAgg.aggs[aggName] = newAgg
+          placeToPutAgg = placeToPutAgg.aggs[aggName]
+
+        return requestData
+
+      list.fetch = ->
+
+        console.log 'FETCHING LIST!!'
+        console.log 'request data: ', @getRequestData()
+        esJSONRequest = JSON.stringify(@getRequestData())
+        console.log 'esJSONRequest: ', esJSONRequest
+
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+
+        thisModel = @
+        $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
+
+      list.parse = (data) ->
+        console.log 'parsing ', data
+
+        # the data that ir receives form elastic is like a tree, this is like listing all leaves of the tree while
+        # including data from their ancestry
+        getInfoFromBuckets = (bucket, keyName) ->
+
+          aggregations = _.filter(Object.keys(bucket), (key) -> key.search('_agg$') != -1)
+          actsList = []
+
+          if aggregations.length == 0
+            # I am at the base case return a new activity. in a one item list to ease concatenating.
+            act = new Activity
+            act.set(Activity.COLUMNS.DOC_COUNT.comparator, bucket.doc_count)
+            actsList = [act]
+          else
+            #recursive case, I need to check my children and add their answers to mine.
+
+            for aggKey in aggregations
+              currentAggData = bucket[aggKey]
+              for currentBucket in currentAggData.buckets
+                actsToAdd = getInfoFromBuckets(currentBucket, aggKey)
+                actsList = actsList.concat(actsToAdd)
+
+          # in either case, assign the value of the current aggregation field to every activity.
+          currentPropertyName = if keyName.search('_agg$') != -1 then keyName.split('_agg')[0] else keyName
+          currentPropertyValue = bucket.key
+
+          for act in actsList
+            act.set(currentPropertyName, currentPropertyValue)
+
+          return actsList
+
+        models = []
+        rootBucket = {key: true}
+        for aggKey, value of data.aggregations
+          rootBucket[aggKey] = value
+
+        models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
+        @setMetadataAfterParse()
+        @reset(models)
+
+      console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
+      console.log 'list: ', list
+
+      list.setMetadataAfterParse = ->
+
+        currentComparators = @getMeta('current_comparators')
+        console.log 'currentComparators: ', currentComparators
+        columnsIndex = _.indexBy(Activity.COLUMNS, 'comparator')
+        columnsToShow = []
+        for comp in currentComparators
+          currentColumn = columnsIndex[comp]
+          currentColumn.show = true
+          columnsToShow.push currentColumn
+        # also add count!
+        countColumn = Activity.COLUMNS.DOC_COUNT
+        countColumn.show = true
+        columnsToShow.push countColumn
+        list.setMeta('columns', columnsToShow)
+        @resetMeta()
+
+      # ----------------------------------------------------------------------------------
+      # -- End of custom functions for bioactivity summary list
+      # ----------------------------------------------------------------------------------
+
+      return list
+
+
     getNewTargetRelationsList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_RELATIONS_LIST)
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'target_relation.json?related_target_chembl_id=' + chembl_id + '&order_by=target_chembl_id&limit=1000'
 
@@ -390,7 +516,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewTargetComponentsList: ->
-      list = @getNewClientSideWSCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
+      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_COMPONENTS_LIST)
 
       list.initURL = (chembl_id) ->
         @url = glados.Settings.WS_BASE_URL + 'target/' + chembl_id + '.json'
