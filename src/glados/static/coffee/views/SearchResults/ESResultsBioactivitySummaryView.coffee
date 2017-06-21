@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     MAX_AGGREGATIONS: 3
 
     initialize: ->
-      console.log 'ESResultsBioactivitySummaryView initialised!!'
       @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
       @activitiesSummarylist.on 'reset do-repaint sort', @handleVisualisationStatus, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
@@ -63,6 +62,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       currentComparators[colNum] = comparator
       @activitiesSummarylist.setMeta('current_comparators', currentComparators)
       @paintFieldsSelectors(currentComparators)
+      @setProgressMessage('loading... ')
       @hideTable()
       @activitiesSummarylist.fetch()
 
@@ -88,13 +88,13 @@ glados.useNameSpace 'glados.views.SearchResults',
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
 
       if numSelectedItems < threshold[0]
-        @setProgressMessage('Please select at least ' + threshold[0] + ' item to show this visualisation.',
+        @setProgressMessage('Please select at least ' + threshold[0] + ' target to show this visualisation.',
           hideCog=true)
         @hideTable()
         return
 
       if numSelectedItems > threshold[1]
-        @setProgressMessage('Please select less than ' + threshold[1] + ' items to show this visualisation.',
+        @setProgressMessage('Please select less than ' + threshold[1] + ' targets to show this visualisation.',
           hideCog=true)
         @hideTable()
         return
@@ -105,8 +105,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       IDsListAttrName = 'origin_chembl_ids'
       originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
       @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
-
-      console.log 'origin list changed: ', @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
 
       if originChemblIDS? and not @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
         filter = 'target_chembl_id:(' + ('"' + id + '"' for id in originChemblIDS).join(' OR ') + ')'
