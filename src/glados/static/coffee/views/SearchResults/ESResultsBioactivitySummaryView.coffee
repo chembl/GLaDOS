@@ -7,13 +7,13 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
       console.log 'ESResultsBioactivitySummaryView initialised!!'
       @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
-      @activitiesSummarylist.on 'reset do-repaint sort', @showVisualisationStatus, @
-      @collection.on glados.Events.Collections.SELECTION_UPDATED, @showVisualisationStatus, @
+      @activitiesSummarylist.on 'reset do-repaint sort', @handleVisualisationStatus, @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
 
       glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
         $(@el).find('.BCK-summary-table-container'))
 
-      @showVisualisationStatus()
+      @handleVisualisationStatus()
       @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))
 
     paintFieldsSelectors: (currentComparators) ->
@@ -63,6 +63,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       currentComparators[colNum] = comparator
       @activitiesSummarylist.setMeta('current_comparators', currentComparators)
       @paintFieldsSelectors(currentComparators)
+      @hideTable()
       @activitiesSummarylist.fetch()
 
     setProgressMessage: (msg, hideCog=false, linkUrl, linkText) ->
@@ -74,7 +75,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         link_url: linkUrl
         link_text: linkText
 
-    showVisualisationStatus: ->
+    wakeUpView: ->
+      @handleVisualisationStatus()
+
+    handleVisualisationStatus: ->
+
+      # only bother if my element is visible
+      if not $(@el).is(":visible")
+        return
 
       numSelectedItems = @collection.getNumberOfSelectedItems()
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
@@ -82,26 +90,34 @@ glados.useNameSpace 'glados.views.SearchResults',
       if numSelectedItems < threshold[0]
         @setProgressMessage('Please select at least ' + threshold[0] + ' item to show this visualisation.',
           hideCog=true)
+        @hideTable()
         return
 
       if numSelectedItems > threshold[1]
         @setProgressMessage('Please select less than ' + threshold[1] + ' items to show this visualisation.',
           hideCog=true)
+        @hideTable()
         return
+
+
+      selectedIDs = @collection.getSelectedItemsIDs()
 
       IDsListAttrName = 'origin_chembl_ids'
       originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
+      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
+
+      console.log 'origin list changed: ', @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
+
       if originChemblIDS? and not @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
         filter = 'target_chembl_id:(' + ('"' + id + '"' for id in originChemblIDS).join(' OR ') + ')'
         url = Activity.getActivitiesListURL(filter)
 
         @setProgressMessage('Showing results for the selected targets ' + '(' + numSelectedItems + ').',
           hideCog=true, linkURL=url, linkText='Browse all activities for those targets.')
+        @showTable()
         return
 
       @setProgressMessage('Filtering activities...')
-      selectedIDs = @collection.getSelectedItemsIDs()
-      console.log 'selectedIDs: ', selectedIDs
 
       @setTargetChemblIDsAndFetch(selectedIDs)
 
@@ -120,4 +136,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
       @activitiesSummarylist.fetch()
+
+    hideTable: -> $(@el).find('.BCK-summary-table-container').hide()
+    showTable: -> $(@el).find('.BCK-summary-table-container').show()
 
