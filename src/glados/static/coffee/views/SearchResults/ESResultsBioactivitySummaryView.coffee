@@ -65,12 +65,14 @@ glados.useNameSpace 'glados.views.SearchResults',
       @paintFieldsSelectors(currentComparators)
       @activitiesSummarylist.fetch()
 
-    setProgressMessage: (msg, hideCog=false) ->
+    setProgressMessage: (msg, hideCog=false, linkUrl, linkText) ->
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       glados.Utils.fillContentForElement $messagesElement,
         message: msg
         hide_cog: hideCog
+        link_url: linkUrl
+        link_text: linkText
 
     showVisualisationStatus: ->
 
@@ -87,11 +89,18 @@ glados.useNameSpace 'glados.views.SearchResults',
           hideCog=true)
         return
 
+      IDsListAttrName = 'origin_chembl_ids'
+      originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
+      if originChemblIDS? and not @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
+        filter = 'target_chembl_id:(' + ('"' + id + '"' for id in originChemblIDS).join(' OR ') + ')'
+        url = Activity.getActivitiesListURL(filter)
+
+        @setProgressMessage('Showing results for the selected targets ' + '(' + numSelectedItems + ').',
+          hideCog=true, linkURL=url, linkText='Browse all activities for those targets.')
+        return
+
       @setProgressMessage('Filtering activities...')
       selectedIDs = @collection.getSelectedItemsIDs()
-      console.log 'selectedIDs: ', selectedIDs
-      console.log 'selectedIDs: ', JSON.stringify(selectedIDs)
-
-      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs)
+      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
       @activitiesSummarylist.fetch()
 
