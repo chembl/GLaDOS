@@ -13,6 +13,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
+      @disableColumnsSelection = arguments[0].disable_columns_selection
+      @disableItemsSelection = arguments[0].disable_items_selection
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
@@ -25,6 +27,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
+      @numVisibleColumnsList = []
       if @renderAtInit
         @render()
   
@@ -120,12 +123,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @setUpLoadingWaypoint()
         @hidePreloaderIfNoNextItems()
 
-      @fillSelectAllContainer()
+      @fillSelectAllContainer() unless @disableItemsSelection
+
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
-      @initialiseColumnsModal()
+
+      @initialiseColumnsModal() unless @disableColumnsSelection
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
         @showSuggestedLabel()
@@ -151,10 +156,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
   
       $elem = $(@el).find('.BCK-items-container')
-  
+      visibleColumns = @getVisibleColumns()
+      @numVisibleColumnsList.push visibleColumns.length
+
       if @collection.length > 0
         for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i])
+          @sendDataToTemplate $($elem[i]), visibleColumns
+          @checkIfTableNeedsToScroll $($elem[i])
         @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
@@ -186,11 +194,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
         return _.union(defaultVisibleColumns, additionalVisibleColumns)
 
-    sendDataToTemplate: ($specificElemContainer) ->
-  
+    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+
       applyTemplate = Handlebars.compile($('#' + $specificElemContainer.attr('data-hb-template')).html())
       $appendTo = $specificElemContainer
-      visibleColumns = @getVisibleColumns()
 
       # if it is a table, add the corresponding header
       if $specificElemContainer.is('table')
@@ -200,6 +207,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           base_check_box_id: @getBaseSelectAllCheckBoxID()
           all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
           columns: visibleColumns
+          selection_disabled: @disableItemsSelection
   
         $specificElemContainer.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
@@ -216,39 +224,60 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
+          selection_disabled: @disableItemsSelection
 
         $appendTo.append($(newItemContent))
-  
-      # After adding everything, if the element is a table I now set up the top scroller
+
+      @fixCardHeight($appendTo)
+
+    checkIfTableNeedsToScroll: ($specificElemContainer) ->
+
+      if not $specificElemContainer.is(":visible")
+        return
+
+       # After adding everything, if the element is a table I now set up the top scroller
       # also set up the automatic header fixation
       if $specificElemContainer.is('table') and $specificElemContainer.hasClass('scrollable')
-  
+
         $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
         $firstTableRow = $specificElemContainer.find('tr').first()
-        firstRowWidth = $firstTableRow.width()
+        containerWidth = $specificElemContainer.parent().width()
         tableWidth = $specificElemContainer.width()
-        $topScrollerDummy.width(firstRowWidth)
-  
-        hasToScroll = tableWidth < firstRowWidth
+        $topScrollerDummy.width(tableWidth)
+
+
+        console.log "$specificElemContainer.hasClass('scrolling')", $specificElemContainer.hasClass('scrolling')
+        if $specificElemContainer.hasClass('scrolling')
+
+          $specificElemContainer.removeClass('scrolling')
+          currentContainer = $specificElemContainer
+          f = $.proxy(@checkIfTableNeedsToScroll, @)
+          setTimeout((-> f(currentContainer)), glados.Settings.RESPONSIVE_REPAINT_WAIT)
+          return
+
+        else
+          hasToScroll = tableWidth > containerWidth
+
         if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
+          $specificElemContainer.addClass('scrolling')
           $topScrollerDummy.height(20)
         else
+          $specificElemContainer.removeClass('scrolling')
           $topScrollerDummy.height(0)
-  
+
         # bind the scroll functions if not done yet
         if !$specificElemContainer.attr('data-scroll-setup')
-  
+
           @setUpTopTableScroller($specificElemContainer)
           $specificElemContainer.attr('data-scroll-setup', true)
-  
+
         # now set up tha header fixation
         if !$specificElemContainer.attr('data-header-pinner-setup')
-  
+
           # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
 
-      @fixCardHeight($appendTo)
 
     fixCardHeight: ($appendTo) ->
 
@@ -802,12 +831,15 @@ glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView = (collect
     type: glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
     custom_render_evts: customRenderEvents
 
-glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents)->
+glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView = (collection, el, customRenderEvents,
+  disableColumnsSelection=false, disableItemSelection=true)->
   return new glados.views.PaginatedViews.PaginatedView
     collection: collection
     el: el
     type: glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
     custom_render_evts: customRenderEvents
+    disable_columns_selection: disableColumnsSelection
+    disable_items_selection: disableItemSelection
 
 
 glados.views.PaginatedViews.PaginatedView.getTypeConstructor = (pagViewType)->

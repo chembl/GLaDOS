@@ -111,6 +111,7 @@ Target.COLUMNS = {
     # or probably not, depending on how this evolves
     'function_key': 'bioactivities'
     'function_link': true
+    'format_as_number': true
   }
   PREF_NAME: {
     'name_to_show': 'Name'
@@ -134,6 +135,13 @@ Target.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  ACCESSION:{
+    'name_to_show': 'UniProt Acession'
+    'comparator': 'target_components.accession'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -141,6 +149,7 @@ Target.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     Target.COLUMNS.CHEMBL_ID
     Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
     Target.COLUMNS.BIOACTIVITIES_NUMBER
@@ -148,6 +157,7 @@ Target.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD:[
     Target.COLUMNS.CHEMBL_ID
     Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
     Target.COLUMNS.BIOACTIVITIES_NUMBER
