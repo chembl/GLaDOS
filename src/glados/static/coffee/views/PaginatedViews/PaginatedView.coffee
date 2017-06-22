@@ -27,6 +27,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
+      @numVisibleColumnsList = []
       if @renderAtInit
         @render()
   
@@ -155,10 +156,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
   
       $elem = $(@el).find('.BCK-items-container')
-  
+      visibleColumns = @getVisibleColumns()
+      @numVisibleColumnsList.push visibleColumns.length
+
       if @collection.length > 0
         for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i])
+          @sendDataToTemplate $($elem[i]), visibleColumns
+          @checkIfTableNeedsToScroll $($elem[i])
         @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
@@ -190,11 +194,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
         return _.union(defaultVisibleColumns, additionalVisibleColumns)
 
-    sendDataToTemplate: ($specificElemContainer) ->
-  
+    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+
       applyTemplate = Handlebars.compile($('#' + $specificElemContainer.attr('data-hb-template')).html())
       $appendTo = $specificElemContainer
-      visibleColumns = @getVisibleColumns()
 
       # if it is a table, add the corresponding header
       if $specificElemContainer.is('table')
@@ -224,40 +227,57 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           selection_disabled: @disableItemsSelection
 
         $appendTo.append($(newItemContent))
-  
-      # After adding everything, if the element is a table I now set up the top scroller
+
+      @fixCardHeight($appendTo)
+
+    checkIfTableNeedsToScroll: ($specificElemContainer) ->
+
+      if not $specificElemContainer.is(":visible")
+        return
+
+       # After adding everything, if the element is a table I now set up the top scroller
       # also set up the automatic header fixation
       if $specificElemContainer.is('table') and $specificElemContainer.hasClass('scrollable')
-  
+
         $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
         $firstTableRow = $specificElemContainer.find('tr').first()
-        firstRowWidth = $firstTableRow.width()
+        containerWidth = $specificElemContainer.parent().width()
         tableWidth = $specificElemContainer.width()
-        $topScrollerDummy.width(firstRowWidth)
-  
-        hasToScroll = tableWidth < firstRowWidth
+        $topScrollerDummy.width(tableWidth)
 
-        console.log'CHECKING IF TABLE HAS TO SCROLL'
+
+        console.log "$specificElemContainer.hasClass('scrolling')", $specificElemContainer.hasClass('scrolling')
+        if $specificElemContainer.hasClass('scrolling')
+
+          $specificElemContainer.removeClass('scrolling')
+          currentContainer = $specificElemContainer
+          f = $.proxy(@checkIfTableNeedsToScroll, @)
+          setTimeout((-> f(currentContainer)), glados.Settings.RESPONSIVE_REPAINT_WAIT)
+          return
+
+        else
+          hasToScroll = tableWidth > containerWidth
 
         if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
+          $specificElemContainer.addClass('scrolling')
           $topScrollerDummy.height(20)
         else
+          $specificElemContainer.removeClass('scrolling')
           $topScrollerDummy.height(0)
-  
+
         # bind the scroll functions if not done yet
         if !$specificElemContainer.attr('data-scroll-setup')
-  
+
           @setUpTopTableScroller($specificElemContainer)
           $specificElemContainer.attr('data-scroll-setup', true)
-  
+
         # now set up tha header fixation
         if !$specificElemContainer.attr('data-header-pinner-setup')
-  
+
           # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
 
-      @fixCardHeight($appendTo)
 
     fixCardHeight: ($appendTo) ->
 

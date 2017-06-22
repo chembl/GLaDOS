@@ -1218,8 +1218,10 @@ div#CNC-zoom-modal {
   display: table;
   overflow-x: inherit;
   &.scrollable {
-    display: block;
     overflow-x: auto;
+  }
+  &.scrolling {
+    display: block;
   }
 
   [type="checkbox"] + label {
