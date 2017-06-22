@@ -1588,12 +1588,11 @@ $search-items-height: 45px;
   bottom: -25px;
   left: 10px;
 
-  a {
-    color: white;
+  a{
+    color: white
   }
-
   a:hover {
-    border-bottom: 1px dotted white;
+    border-bottom: 1px solid white;
   }
 
 }
@@ -1756,12 +1755,12 @@ $marvin-size-fullscreen: 91vh;
 }
 
 .search-banner {
-  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  background-position: right center;
-  background-repeat: no-repeat;
 
+  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
+  background-color: color('teal', 'lighten-5');
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+
 }
 
 /**
