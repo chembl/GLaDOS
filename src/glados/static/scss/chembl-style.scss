@@ -1231,6 +1231,23 @@ div#CNC-zoom-modal {
   .headers-table {
     border-collapse: separate;
   }
+  td {
+
+    font-size: 80%;
+    padding: 5px;
+
+    &.number-cell{
+      text-align: right;
+    }
+    &.vis-cell{
+      width: 150px;
+    }
+
+  }
+
+  th {
+    font-size: 85%;
+  }
 
 }
 
@@ -1238,15 +1255,6 @@ div#CNC-zoom-modal {
   overflow-x: auto;
 }
 
-.compact-table td {
-  font-size: 80%;
-  padding: 5px;
-
-}
-
-.compact-table th {
-  font-size: 85%;
-}
 
 .ebi-links {
 

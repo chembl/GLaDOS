@@ -60,6 +60,8 @@ glados.useNameSpace 'glados',
           for paramComp in colDescription.function_parameters).join(',')
           returnCol['function_key'] = colDescription.function_key
 
+        returnCol['format_as_number'] = colDescription.format_as_number
+
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
