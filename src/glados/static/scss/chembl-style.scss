@@ -1218,8 +1218,10 @@ div#CNC-zoom-modal {
   display: table;
   overflow-x: inherit;
   &.scrollable {
-    display: block;
     overflow-x: auto;
+  }
+  &.scrolling {
+    display: block;
   }
 
   [type="checkbox"] + label {
@@ -1229,6 +1231,23 @@ div#CNC-zoom-modal {
   .headers-table {
     border-collapse: separate;
   }
+  td {
+
+    font-size: 80%;
+    padding: 5px;
+
+    &.number-cell{
+      text-align: right;
+    }
+    &.vis-cell{
+      width: 150px;
+    }
+
+  }
+
+  th {
+    font-size: 85%;
+  }
 
 }
 
@@ -1236,15 +1255,6 @@ div#CNC-zoom-modal {
   overflow-x: auto;
 }
 
-.compact-table td {
-  font-size: 80%;
-  padding: 5px;
-
-}
-
-.compact-table th {
-  font-size: 85%;
-}
 
 .ebi-links {
 
@@ -1578,12 +1588,11 @@ $search-items-height: 45px;
   bottom: -25px;
   left: 10px;
 
-  a {
-    color: white;
+  a{
+    color: white
   }
-
   a:hover {
-    border-bottom: 1px dotted white;
+    border-bottom: 1px solid white;
   }
 
 }
@@ -1746,12 +1755,15 @@ $marvin-size-fullscreen: 91vh;
 }
 
 .search-banner {
+
   background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  background-position: right center;
+  background-color: color('teal', 'lighten-5');
+  backgroground-position: right center;
   background-repeat: no-repeat;
-  background-color: rgb(96, 189, 196) !important;
+  background-size: cover;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+
 }
 
 /**
@@ -1771,24 +1783,33 @@ span.badge-primary-color-no-float {
   float: none;
   font-weight: 300;
   font-size: 0.8rem;
-  color: white;
-  background-color: color($primary-color-name, 'lighten-2');
+  color: color('black', 'base');
+  background-color: color('grey', 'lighten-3');
   border-radius: 7px;
 }
 
-.chip-rl-summary {
-  margin-bottom: 1px;
-  margin-top: 1px;
-  color: $primary-color;
-  &.selected {
-    background: $primary-color;
-    color: white;
-    span.badge-primary-color-no-float {
-      color: $primary-color;
-      background-color: $chip-bg-color;
+.summary-tabs{
+  .results-section-item {
+
+    padding: 10px 10px;
+    margin: 0px 0px;
+    color: color('grey', 'darken-1');
+    display: inline-block;
+
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+    }
+    &:not(.selected):hover{
+      color: color('grey', 'darken-3');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
+
+  border-bottom: 1px solid color('grey', 'lighten-1');
+
 }
+
 
 /**
 * Tweets

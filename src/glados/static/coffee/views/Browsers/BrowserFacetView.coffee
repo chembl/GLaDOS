@@ -27,7 +27,6 @@ glados.useNameSpace 'glados.views.Browsers',
       return 'faceting_menu_'+facet_group_key
 
     render: ->
-      console.log 'RENDER FACET VIEW!'
       facets_groups = @collection.getFacetsGroups()
       if facets_groups
         for facet_group_key, facet_group of facets_groups

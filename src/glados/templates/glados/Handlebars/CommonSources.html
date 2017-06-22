@@ -49,16 +49,17 @@
 <script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
 
     <tr>
-
+      {{#unless selection_disabled}}
       <td>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
            {{#if is_selected}}checked="checked"{{/if}}/>
           <label for="BCK-table-{{base_check_box_id}}-select"></label>
       </td>
+      {{/unless}}
 
       {{#each columns}}
 
-        <td class="{{#if this.img_url}}center-align{{/if}}">
+        <td class="{{#if this.img_url}}center-align{{/if}} {{#if this.format_as_number}}number-cell{{/if}}" >
         {{#if this.img_url}}
           <img src="{{this.img_url}}" height="75px" width="75px" ><br>
         {{/if}}
@@ -89,12 +90,14 @@
 
     <tr>
 
+      {{#unless selection_disabled}}
       <th>
           <input type="checkbox" class="filled-in BCK-toggle-select-all"
                  id="BCK-table-{{base_check_box_id}}-selectAll"
                  {{#if all_items_selected}}checked="checked"{{/if}}/>
           <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
       </th>
+      {{/unless}}
 
       {{#each columns}}
         <th>
@@ -133,12 +136,14 @@
 
   <li class="collection-item">
 
+    {{#unless selection_disabled}}
     <p>
       <input type="checkbox" class="filled-in BCK-select-one-item"
              id="BCK-list-{{base_check_box_id}}-select"
       {{#if is_selected}}checked="checked"{{/if}}/>
       <label for="BCK-list-{{base_check_box_id}}-select"></label>
     </p>
+    {{/unless}}
 
     <p>
 

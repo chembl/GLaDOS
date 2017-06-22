@@ -40,7 +40,6 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
-        console.log 'DOWNLOAD BUTTONS TEMPLATE: ', $downloadBtnsContainer.attr('data-hb-template')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 

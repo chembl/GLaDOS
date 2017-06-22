@@ -230,7 +230,7 @@ Compound.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   RULE_OF_THREE_PASS:{
-    'name_to_show': 'Passes Rule of Three'
+    'name_to_show': 'RO3'
     'comparator': 'molecule_properties.ro3_pass'
     'sort_disabled': false
     'is_sorting': 0
