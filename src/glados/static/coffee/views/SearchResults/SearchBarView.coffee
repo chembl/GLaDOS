@@ -154,11 +154,11 @@ glados.useNameSpace 'glados.views.SearchResults',
           selected: @selected_es_entity == key_i
         })
 
-      $('.summary-chips-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
+      $('.BCK-summary-tabs-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
         chips: chipStruct
 
       glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-        $('.summary-chips-container').find('a'), @navigateTo.bind(@)
+        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
       )
 
     showSelectedResourceOnly: ()->

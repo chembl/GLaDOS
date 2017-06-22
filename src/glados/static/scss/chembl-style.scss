@@ -1781,24 +1781,33 @@ span.badge-primary-color-no-float {
   float: none;
   font-weight: 300;
   font-size: 0.8rem;
-  color: white;
-  background-color: color($primary-color-name, 'lighten-2');
+  color: color('black', 'base');
+  background-color: color('grey', 'lighten-3');
   border-radius: 7px;
 }
 
-.chip-rl-summary {
-  margin-bottom: 1px;
-  margin-top: 1px;
-  color: $primary-color;
-  &.selected {
-    background: $primary-color;
-    color: white;
-    span.badge-primary-color-no-float {
-      color: $primary-color;
-      background-color: $chip-bg-color;
+.summary-tabs{
+  .results-section-item {
+
+    padding: 10px 10px;
+    margin: 0px 0px;
+    color: color('grey', 'darken-1');
+    display: inline-block;
+
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+    }
+    &:not(.selected):hover{
+      color: color('grey', 'darken-3');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
+
+  border-bottom: 1px solid color('grey', 'lighten-1');
+
 }
+
 
 /**
 * Tweets
