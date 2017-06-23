@@ -614,18 +614,24 @@
 </script>
 
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
-  {{#each formats}}
-  <a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"
-     data-format="{{this}}">
-    <p><i class="fa fa-download"></i></p>
-    <p>{{this}}</p>
-  </a>
-  {{/each}}
+
+  <div class="title">Download:</div>
+
+  <div class="buttons-container">
+    {{#each formats}}
+    <a class="menu-button BCK-download-btn-for-format"><i class="fa fa-download" data-format="{{this}}"></i> {{this}}</a>
+    {{/each}}
+  </div>
+  <!--{{#each formats}}-->
+  <!--<a class="waves-effect waves-light btn-small teal es-collection-download-btn BCK-download-btn-for-format"-->
+     <!--data-format="{{this}}">-->
+    <!--<p><i class="fa fa-download"></i></p>-->
+    <!--<p>{{this}}</p>-->
+  <!--</a>-->
+  <!--{{/each}}-->
 </script>
 
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
-
-  <div class="title">Views:</div>
 
   {{#each options}}
   <a class="section-item BCK-btn-switch-view" data-view="{{this.label}}">
@@ -634,14 +640,6 @@
   </a>
   {{/each}}
 
-  <!--{{#each options}}-->
-  <!--<a class="waves-effect waves-light btn-small es-collection-download-btn BCK-btn-switch-view-->
-    <!--{{#if this.is_disabled}}disabled{{/if}}"-->
-    <!--data-view="{{this.label}}">-->
-    <!--<p><i class="fa {{this.icon_class}}"></i></p>-->
-    <!--<p>{{this.label}}</p>-->
-  <!--</a>-->
-  <!--{{/each}}-->
 </script>
 
 <script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">

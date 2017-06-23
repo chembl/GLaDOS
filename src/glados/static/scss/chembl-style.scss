@@ -1258,22 +1258,10 @@ div#CNC-zoom-modal {
   .buttons-container {
     margin-top: 20px;
     margin-bottom: 10px;
-    .menu-button {
-      background-color: color('grey', 'lighten-5');
-      padding: 8px;
-      color: $primary-color-dark;
-      border: 1px solid $primary-color-dark;
-      font-size: 0.7em;
-
-      &:hover {
-        background-color: color('grey', 'lighten-4');
-        color: $primary-color;
-        border: 1px solid $primary-color;
-      }
-
-    }
   }
 }
+
+
 
 .table-top-scroller-container {
   overflow-x: auto;
@@ -1847,22 +1835,31 @@ span.badge-primary-color-no-float {
   .view-menu{
     border-right: 1px solid color('grey', 'lighten-1');
     position: relative;
-    .title{
+  }
+  .download-menu{
+    border-left: 1px solid color('grey', 'lighten-1');
+    position: relative;
+    height: 60px;
+    .buttons-container{
+      margin: auto;
+    }
+  }
+  .title{
       position: absolute;
       left: 50%;
       top: -5px;
       transform: translate(-50%, 0);
       color: $primary-color-dark;
-      font-size: 0.6em;
+      font-size: 0.7em;
+      text-decoration: underline;
     }
-  }
   .section-item{
     padding: 10px 6px;
     display: inline-block;
     color: color('grey', 'darken-1');
     text-align: center;
     .label{
-      font-size: 0.7em;
+      font-size: 0.8em;
       margin: 0;
     }
     .icon{
@@ -1877,6 +1874,21 @@ span.badge-primary-color-no-float {
       border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
+}
+
+.menu-button {
+  background-color: color('grey', 'lighten-5');
+  padding: 8px;
+  color: $primary-color-dark;
+  border: 1px solid $primary-color-dark;
+  font-size: 0.7em;
+
+  &:hover {
+    background-color: color('grey', 'lighten-4');
+    color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
 }
 
 /**
