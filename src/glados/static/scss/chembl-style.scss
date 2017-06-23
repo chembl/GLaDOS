@@ -1255,6 +1255,24 @@ div#CNC-zoom-modal {
   &.row{
     margin-bottom: 0;
   }
+  .buttons-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    .menu-button {
+      background-color: color('grey', 'lighten-5');
+      padding: 8px;
+      color: $primary-color-dark;
+      border: 1px solid $primary-color-dark;
+      font-size: 0.7em;
+
+      &:hover {
+        background-color: color('grey', 'lighten-4');
+        color: $primary-color;
+        border: 1px solid $primary-color;
+      }
+
+    }
+  }
 }
 
 .table-top-scroller-container {
