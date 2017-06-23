@@ -1251,6 +1251,12 @@ div#CNC-zoom-modal {
 
 }
 
+.table-header-menu{
+  &.row{
+    margin-bottom: 0;
+  }
+}
+
 .table-top-scroller-container {
   overflow-x: auto;
 }
