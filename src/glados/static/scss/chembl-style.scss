@@ -1279,27 +1279,6 @@ div#CNC-zoom-modal {
   overflow-x: auto;
 }
 
-.browser-menu{
-  border-bottom: 1px solid color('grey', 'lighten-1');
-  &.row{
-    margin-bottom: 2px;
-  }
-  .view-menu{
-    position: relative;
-    .title{
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, 0);
-      color: $primary-color-dark;
-      font-size: 0.8em;
-    }
-  }
-}
-
-.view-menu{
-  border-right: 1px solid color('grey', 'lighten-1');
-}
-
 
 .ebi-links {
 
@@ -1855,6 +1834,50 @@ span.badge-primary-color-no-float {
 
 }
 
+/**
+* Browser Menus
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.browser-menu{
+  border-bottom: 1px solid color('grey', 'lighten-1');
+  &.row{
+    margin-bottom: 2px;
+  }
+  .view-menu{
+    border-right: 1px solid color('grey', 'lighten-1');
+    position: relative;
+    .title{
+      position: absolute;
+      left: 50%;
+      top: -5px;
+      transform: translate(-50%, 0);
+      color: $primary-color-dark;
+      font-size: 0.6em;
+    }
+  }
+  .section-item{
+    padding: 10px 6px;
+    display: inline-block;
+    color: color('grey', 'darken-1');
+    text-align: center;
+    .label{
+      font-size: 0.7em;
+      margin: 0;
+    }
+    .icon{
+      margin: 0;
+    }
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+    }
+    &:not(.selected):hover{
+      color: color('grey', 'darken-3');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+    }
+  }
+}
 
 /**
 * Tweets

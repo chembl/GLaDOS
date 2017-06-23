@@ -123,9 +123,9 @@ glados.useNameSpace 'glados.views.Browsers',
             at: 'bottom middle'
 
     unSelectAllButtons: ->
-      $(@el).find('.BCK-btn-switch-view').removeClass('accent-4')
+      $(@el).find('.BCK-btn-switch-view').removeClass('selected')
     selectButton: (type) ->
-      $(@el).find('[data-view=' + type + ']').addClass('accent-4')
+      $(@el).find('[data-view=' + type + ']').addClass('selected')
 
     disableButton: (type) ->
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
