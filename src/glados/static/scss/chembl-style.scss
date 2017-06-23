@@ -1279,6 +1279,13 @@ div#CNC-zoom-modal {
   overflow-x: auto;
 }
 
+.browser-menu{
+  border-bottom: 1px solid color('grey', 'lighten-1');
+  &.row{
+    margin-bottom: 2px;
+  }
+}
+
 
 .ebi-links {
 
