@@ -1284,6 +1284,20 @@ div#CNC-zoom-modal {
   &.row{
     margin-bottom: 2px;
   }
+  .view-menu{
+    position: relative;
+    .title{
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+      color: $primary-color-dark;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.view-menu{
+  border-right: 1px solid color('grey', 'lighten-1');
 }
 
 
