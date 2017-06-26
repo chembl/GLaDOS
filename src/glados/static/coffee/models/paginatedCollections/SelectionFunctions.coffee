@@ -16,6 +16,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @selectItem(itemID)
 
+    toggleClearSelections: ->
+      if not @getMeta('all_items_selected') and not @thereAreExceptions()
+        @selectAll()
+      else
+        @unSelectAll()
+
     selectItem: (itemID) ->
 
       selectionExceptions = @getMeta('selection_exceptions')
