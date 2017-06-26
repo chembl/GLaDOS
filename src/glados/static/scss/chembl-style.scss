@@ -1251,6 +1251,18 @@ div#CNC-zoom-modal {
 
 }
 
+.table-header-menu{
+  &.row{
+    margin-bottom: 0;
+  }
+  .buttons-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+
+
 .table-top-scroller-container {
   overflow-x: auto;
 }
@@ -1793,7 +1805,7 @@ span.badge-primary-color-no-float {
 
     padding: 10px 10px;
     margin: 0px 0px;
-    color: color('grey', 'darken-1');
+    color: color('grey', 'darken-2');
     display: inline-block;
 
     &.selected {
@@ -1801,7 +1813,7 @@ span.badge-primary-color-no-float {
       border-bottom: 2px solid color($primary-color-name, 'base');
     }
     &:not(.selected):hover{
-      color: color('grey', 'darken-3');
+      color: color('grey', 'darken-4');
       border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
@@ -1810,6 +1822,88 @@ span.badge-primary-color-no-float {
 
 }
 
+/**
+* Browser Menus
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.browser-menu{
+  border-bottom: 1px solid color('grey', 'lighten-1');
+  &.row{
+    margin-bottom: 2px;
+  }
+  .view-menu{
+    position: relative;
+  }
+  .download-menu{
+    position: relative;
+    height: 55px;
+    .buttons-container{
+      margin: auto;
+    }
+  }
+  .selection-menu{
+
+    @media #{$small-and-down} {
+      margin-bottom: 10px;
+    }
+    text-align: center;
+    .selection-information{
+      font-size: 0.8em;
+    }
+    .selection-button-container{
+      .menu-button{
+        padding: 4px 8px;
+      }
+      }
+
+  }
+  .title{
+      position: absolute;
+      left: 50%;
+      top: -5px;
+      transform: translate(-50%, 0);
+      color: $primary-color-dark;
+      font-size: 0.7em;
+      text-decoration: underline;
+    }
+  .section-item{
+    padding: 10px 6px;
+    display: inline-block;
+    color: color('grey', 'darken-2');
+    text-align: center;
+    .label{
+      font-size: 0.8em;
+      margin: 0;
+    }
+    .icon{
+      margin: 0;
+    }
+    &.disabled{
+      color: color('grey', 'lighten-1');
+    }
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+    }
+    &:not(.selected):not(.disabled):hover{
+      color: color('grey', 'darken-4');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+    }
+  }
+}
+
+.menu-button {
+  background-color: color($primary-color-name, 'base');
+  padding: 8px;
+  color: white;
+  font-size: 0.7em;
+  border-radius: 3px;
+  &:hover {
+    background-color: color($primary-color-name, 'accent-4');
+  }
+
+}
 
 /**
 * Tweets

@@ -13,8 +13,7 @@ glados.useNameSpace 'glados.views.Browsers',
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
-      'click .BCK-select-all': 'selectAll'
-      'click .BCK-unSelect-all': 'unSelectAll'
+      'click .BCK-toggle-clear-selections': 'toggleClearSelections'
 
     initialize: ->
 
@@ -74,9 +73,13 @@ glados.useNameSpace 'glados.views.Browsers',
     handleSelection: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      numSelectedItems = @collection.getNumberOfSelectedItems()
       glados.Utils.fillContentForElement $selectionMenuContainer,
-        num_selected: @collection.getNumberOfSelectedItems()
+        num_selected: numSelectedItems
+        hide_num_selected: numSelectedItems == 0
         total_items: @collection.getMeta('total_records')
+        entity_label: @collection.getMeta('label')
+        none_is_selected: not @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
 
       for viewLabel in @collection.getMeta('available_views')
         if @checkIfViewMustBeDisabled(viewLabel)
@@ -84,8 +87,7 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-    selectAll: -> @collection.selectAll()
-    unSelectAll: -> @collection.unSelectAll()
+    toggleClearSelections: -> @collection.toggleClearSelections()
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
@@ -123,16 +125,20 @@ glados.useNameSpace 'glados.views.Browsers',
             at: 'bottom middle'
 
     unSelectAllButtons: ->
-      $(@el).find('.BCK-btn-switch-view').removeClass('accent-4')
+      $(@el).find('.BCK-btn-switch-view').removeClass('selected')
+
     selectButton: (type) ->
-      $(@el).find('[data-view=' + type + ']').addClass('accent-4')
+      $(@el).find('[data-view=' + type + ']').addClass('selected')
 
     disableButton: (type) ->
+      console.log 'DISABLING BUTTON!', type
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
+      console.log '$buttonToDisable: ', $buttonToDisable
       $buttonToDisable.addClass('disabled')
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
+      console.log 'ENABLING BUTTON!', type
       $buttonToEnable = $(@el).find('[data-view=' + type + ']')
       $buttonToEnable.removeClass('disabled')
       @addRemoveQtipToButtons()

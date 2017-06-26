@@ -260,7 +260,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
           $specificElemContainer.addClass('scrolling')
-          $topScrollerDummy.height(20)
+          $topScrollerDummy.height(1)
         else
           $specificElemContainer.removeClass('scrolling')
           $topScrollerDummy.height(0)

@@ -32,6 +32,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             key_name: esIndexSettings.KEY_NAME
             id_name: esIndexSettings.ID_NAME
+            label: esIndexSettings.LABEL
             available_views: esIndexSettings.AVAILABLE_VIEWS
             default_view: esIndexSettings.DEFAULT_VIEW
             all_items_selected: false
