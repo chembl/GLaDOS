@@ -131,11 +131,14 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
     disableButton: (type) ->
+      console.log 'DISABLING BUTTON!', type
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
+      console.log '$buttonToDisable: ', $buttonToDisable
       $buttonToDisable.addClass('disabled')
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
+      console.log 'ENABLING BUTTON!', type
       $buttonToEnable = $(@el).find('[data-view=' + type + ']')
       $buttonToEnable.removeClass('disabled')
       @addRemoveQtipToButtons()

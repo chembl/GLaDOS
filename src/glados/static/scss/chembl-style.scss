@@ -1805,7 +1805,7 @@ span.badge-primary-color-no-float {
 
     padding: 10px 10px;
     margin: 0px 0px;
-    color: color('grey', 'darken-1');
+    color: color('grey', 'darken-2');
     display: inline-block;
 
     &.selected {
@@ -1813,7 +1813,7 @@ span.badge-primary-color-no-float {
       border-bottom: 2px solid color($primary-color-name, 'base');
     }
     &:not(.selected):hover{
-      color: color('grey', 'darken-3');
+      color: color('grey', 'darken-4');
       border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
@@ -1868,7 +1868,7 @@ span.badge-primary-color-no-float {
   .section-item{
     padding: 10px 6px;
     display: inline-block;
-    color: color('grey', 'darken-1');
+    color: color('grey', 'darken-2');
     text-align: center;
     .label{
       font-size: 0.8em;
@@ -1877,12 +1877,15 @@ span.badge-primary-color-no-float {
     .icon{
       margin: 0;
     }
+    &.disabled{
+      color: color('grey', 'lighten-1');
+    }
     &.selected {
       color: color('black', 'base');
       border-bottom: 2px solid color($primary-color-name, 'base');
     }
-    &:not(.selected):hover{
-      color: color('grey', 'darken-3');
+    &:not(.selected):not(.disabled):hover{
+      color: color('grey', 'darken-4');
       border-bottom: 2px solid color($primary-color-name, 'lighten-3');
     }
   }
