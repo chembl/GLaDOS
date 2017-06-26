@@ -1840,12 +1840,15 @@ span.badge-primary-color-no-float {
     height: 55px;
     .buttons-container{
       margin: 20px auto 0 auto;
+      @media #{$small-and-down} {
+        margin: auto;
+      }
     }
   }
   .selection-menu{
 
     @media #{$small-and-down} {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     text-align: center;
     .selection-information{
