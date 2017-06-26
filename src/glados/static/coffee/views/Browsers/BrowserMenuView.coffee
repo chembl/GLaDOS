@@ -94,6 +94,8 @@ glados.useNameSpace 'glados.views.Browsers',
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
+      console.log 'TRIGGERING DOWNLOAD'
+      console.log 'desiredFormat: ', desiredFormat
       @collection.downloadAllItems(desiredFormat, @getCurrentViewInstance().getVisibleColumns(), $progressMessages)
 
     #--------------------------------------------------------------------------------------
