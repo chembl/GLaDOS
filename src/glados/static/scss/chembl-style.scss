@@ -1851,9 +1851,6 @@ span.badge-primary-color-no-float {
     .selection-information{
       font-size: 0.8em;
     }
-    .selection-button-container{
-      margin-top: 10px;
-    }
 
   }
   .title{
@@ -1897,6 +1894,7 @@ span.badge-primary-color-no-float {
   color: white;
   font-size: 0.7em;
   border-radius: 3px;
+  display: inline-block;
   &:hover {
     background-color: color($primary-color-name, 'accent-4');
   }
@@ -1904,8 +1902,10 @@ span.badge-primary-color-no-float {
     padding: 10px 8px;
     font-size: 0.8em;
   }
-
-
+  &.mini{
+    padding: 4px 8px;
+    font-size: 0.65em;
+  }
 }
 
 /**
