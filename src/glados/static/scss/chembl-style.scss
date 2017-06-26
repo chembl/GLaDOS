@@ -1839,7 +1839,7 @@ span.badge-primary-color-no-float {
     position: relative;
     height: 55px;
     .buttons-container{
-      margin: auto;
+      margin: 20px auto 0 auto;
     }
   }
   .selection-menu{
@@ -1852,10 +1852,8 @@ span.badge-primary-color-no-float {
       font-size: 0.8em;
     }
     .selection-button-container{
-      .menu-button{
-        padding: 4px 8px;
-      }
-      }
+      margin-top: 10px;
+    }
 
   }
   .title{
@@ -1902,6 +1900,11 @@ span.badge-primary-color-no-float {
   &:hover {
     background-color: color($primary-color-name, 'accent-4');
   }
+  &.big{
+    padding: 10px 8px;
+    font-size: 0.8em;
+  }
+
 
 }
 
