@@ -637,12 +637,34 @@
 </script>
 
 <script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">
-  <table class="compact-table">
-    <tr><td>{{num_selected}}/{{total_items}} Selected</td></tr>
-    <tr><td class="td-oneline"><a class="BCK-select-all">Select All</a> -
-      <a class="BCK-unSelect-all">Clear Selections</a></td>
-    </tr>
-  </table>
+
+  <div class="selection-menu">
+    <div class="selection-information">
+
+      <b>{{total_items}} {{entity_label}}</b><br>
+      {{#unless hide_num_selected}}
+        {{num_selected}} Selected
+      {{/unless}}
+    </div>
+
+    <div class="selection-button-container">
+      <a class="menu-button">
+        {{#if none_is_selected}}
+        Select All
+        {{else}}
+        Clear Selections
+        {{/if}}
+      </a>
+    </div>
+
+  </div>
+
+  <!--<table class="compact-table">-->
+    <!--<tr><td>{{num_selected}}/{{total_items}} Selected</td></tr>-->
+    <!--<tr><td class="td-oneline"><a class="BCK-select-all">Select All</a> - -->
+      <!--<a class="BCK-unSelect-all">Clear Selections</a></td>-->
+    <!--</tr>-->
+  <!--</table>-->
 </script>
 
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">

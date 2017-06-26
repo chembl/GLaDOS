@@ -1833,16 +1833,27 @@ span.badge-primary-color-no-float {
     margin-bottom: 2px;
   }
   .view-menu{
-    border-right: 1px solid color('grey', 'lighten-1');
     position: relative;
   }
   .download-menu{
-    border-left: 1px solid color('grey', 'lighten-1');
     position: relative;
     height: 60px;
     .buttons-container{
       margin: auto;
     }
+  }
+  .selection-menu{
+
+    text-align: center;
+    .selection-information{
+      font-size: 0.8em;
+    }
+    .selection-button-container{
+      .menu-button{
+        padding: 4px 8px;
+      }
+      }
+
   }
   .title{
       position: absolute;

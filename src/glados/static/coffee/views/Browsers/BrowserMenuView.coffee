@@ -74,9 +74,13 @@ glados.useNameSpace 'glados.views.Browsers',
     handleSelection: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      numSelectedItems = @collection.getNumberOfSelectedItems()
       glados.Utils.fillContentForElement $selectionMenuContainer,
-        num_selected: @collection.getNumberOfSelectedItems()
+        num_selected: numSelectedItems
+        hide_num_selected: numSelectedItems == 0
         total_items: @collection.getMeta('total_records')
+        entity_label: @collection.getMeta('label')
+        none_is_selected: not @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
 
       for viewLabel in @collection.getMeta('available_views')
         if @checkIfViewMustBeDisabled(viewLabel)
@@ -94,8 +98,6 @@ glados.useNameSpace 'glados.views.Browsers',
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
-      console.log 'TRIGGERING DOWNLOAD'
-      console.log 'desiredFormat: ', desiredFormat
       @collection.downloadAllItems(desiredFormat, @getCurrentViewInstance().getVisibleColumns(), $progressMessages)
 
     #--------------------------------------------------------------------------------------
