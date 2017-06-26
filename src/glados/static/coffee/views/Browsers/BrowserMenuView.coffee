@@ -13,8 +13,7 @@ glados.useNameSpace 'glados.views.Browsers',
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
       'click .BCK-btn-switch-view': 'switchResultsView'
-      'click .BCK-select-all': 'selectAll'
-      'click .BCK-unSelect-all': 'unSelectAll'
+      'click .BCK-toggle-clear-selections': 'toggleClearSelections'
 
     initialize: ->
 
@@ -88,8 +87,7 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-    selectAll: -> @collection.selectAll()
-    unSelectAll: -> @collection.unSelectAll()
+    toggleClearSelections: -> @collection.toggleClearSelections()
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
@@ -128,6 +126,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     unSelectAllButtons: ->
       $(@el).find('.BCK-btn-switch-view').removeClass('selected')
+
     selectButton: (type) ->
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
