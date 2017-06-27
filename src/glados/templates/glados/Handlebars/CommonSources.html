@@ -615,11 +615,9 @@
 
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
 
-  <div class="title">Download:</div>
-
   <div class="buttons-container">
     {{#each formats}}
-    <a class="menu-button BCK-download-btn-for-format" data-format="{{this}}"><i class="fa fa-download"></i> {{this}}</a>
+    <a class="menu-button big BCK-download-btn-for-format" data-format="{{this}}"><i class="fa fa-download"></i> {{this}}</a>
     {{/each}}
   </div>
 
@@ -642,13 +640,11 @@
     <div class="selection-information">
 
       <b>{{total_items}} {{entity_label}}</b><br>
-      {{#unless hide_num_selected}}
-        {{num_selected}} Selected
-      {{/unless}}
+      {{num_selected}} Selected
     </div>
 
     <div class="selection-button-container">
-      <a class="menu-button BCK-toggle-clear-selections">
+      <a class="menu-button mini BCK-toggle-clear-selections">
         {{#if none_is_selected}}
         Select All
         {{else}}

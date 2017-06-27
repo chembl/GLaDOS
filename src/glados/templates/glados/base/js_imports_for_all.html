@@ -8,6 +8,7 @@
 {% compress js %}
   {% block common_js_libs %}
     <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/materialize.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/underscore.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/backbone.js' %}"></script>
@@ -228,6 +229,9 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/MarvinSketcherView.js' %}"></script>
 
     <!-- Main Page -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/DatabaseSummaryInfo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/DatabaseSummaryView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
 
     <!-- Marvin Full Screen Page -->

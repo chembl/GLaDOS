@@ -9,20 +9,18 @@ class MainPageApp
 
     @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
 
-    # Marvin js skecther
-    @marvinSketcherView = new MarvinSketcherView()
+    new glados.views.MainPage.CentralCardView
+      el: $('.BCK-Central-Card')
 
-    LazyIFramesHelper.initLazyIFrames()
+    databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
 
-    @targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    @drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
+    new glados.views.MainPage.DatabaseSummaryView
+      model: databaseInfo
+      el: $('.BCK-Database-summary-info')
 
-    @targetBrowserView = TargetBrowserApp.initBrowserMain(@targetHierarchy, $('#BCK-TargetBrowserMain'))
-    @drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(@drugList, $('#BCK-DrugBrowserMain'))
+    databaseInfo.fetch()
 
-    @drugList.fetch({reset: true})
 
-    LazyIFramesHelper.loadObjectOnceOnClick($('a[href="#browse_targets"]'), @targetHierarchy)
 
 
 
