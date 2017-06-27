@@ -11,6 +11,7 @@ glados.useNameSpace 'glados.views.MainPage',
       glados.Utils.fillContentForElement $contentElement,
         chembl_db_version: @model.get('chembl_db_version')
         chembl_release_date: @model.get('chembl_release_date')
+        num_targets: $.number(@model.get('num_targets'))
 
 
       console.log "@model.get('chembl_db_version')", @model.get('chembl_db_version')
