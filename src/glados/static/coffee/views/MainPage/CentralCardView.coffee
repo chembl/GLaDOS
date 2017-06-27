@@ -18,7 +18,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       @drugList.fetch({reset: true})
 
-      LazyIFramesHelper.loadObjectOnceOnClick($('a[href="#browse_targets"]'), @targetHierarchy)
+      LazyIFramesHelper.loadObjectOnceOnClick($('a[data-target="#browse_targets"]'), @targetHierarchy)
 
       @showHideDivs()
 
