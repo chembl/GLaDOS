@@ -6,6 +6,16 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: ->
       console.log 'RENDER DATABASE SUMMARY'
+
+      $contentElement = $(@el).find('.BCK-content')
+      glados.Utils.fillContentForElement $contentElement,
+        chembl_db_version: @model.get('chembl_db_version')
+        chembl_release_date: @model.get('chembl_release_date')
+
+
+      console.log "@model.get('chembl_db_version')", @model.get('chembl_db_version')
+      console.log @model
+
       @showContent()
 
     showContent: ->

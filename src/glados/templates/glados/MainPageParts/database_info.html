@@ -1,17 +1,8 @@
 {% load static %}
-<div class="BCK-Database-summary-info card teal lighten-5 z-depth-0">
+{% verbatim %}
+<script id="Handlebars-DatabaseInfo" type="text/x-handlebars-template">
 
-  <div class="card-preolader-to-hide">
-
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
-
-  </div>
-
-  <div class="BCK-content database-info" style="display: none">
-
-    <div class="card-content">
+  <div class="card-content">
 
       <div class="row valign-wrapper">
 
@@ -19,9 +10,9 @@
         <div class="col s4">
 
           <div class="version-number-logo">
-
+            {% endverbatim %}
             <img src="{% static 'img/chembl_logo.png' %}" class="responsive-img">
-
+            {% verbatim %}
           </div>
 
         </div>
@@ -29,8 +20,8 @@
         <div class="col s8">
 
           <div class="row">
-            <p><b>DB Version: 21</b></p>
-            <p>3 March 2016</p>
+            <p><b>DB: {{chembl_db_version}}</b></p>
+            <p>{{chembl_release_date}}</p>
           </div>
 
         </div>
@@ -75,6 +66,21 @@
       </div>
 
     </div>
+
+</script>
+{% endverbatim %}
+
+<div class="BCK-Database-summary-info card teal lighten-5 z-depth-0">
+
+  <div class="card-preolader-to-hide">
+
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
+  </div>
+
+  <div class="BCK-content database-info" style="display: none" data-hb-template="Handlebars-DatabaseInfo">
 
   </div>
 
