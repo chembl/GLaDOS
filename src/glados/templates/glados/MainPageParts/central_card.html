@@ -1,23 +1,17 @@
 {% load static %}
-<div class="card teal lighten-5 z-depth-0">
+<div class="BCK-Central-Card card teal lighten-5 z-depth-0">
 
-  <div class="tabs-wrapper">
+  <div class="summary-tabs scrollable white">
 
 
-    <ul class="tabs teal lighten-4">
-      <li class="tab"><a class="active" href="#editor-search">Ligand Search</a></li>
+    <a class="results-section-item selected" data-target="#editor-search">Ligand Search</a>
 
-      <li class="tab">
-        <a class="iframe-lazy-loader" data-if-id="if_database_schema"
-           data-if-src="{% static 'chembl_schema_diagrams/src/schema.html' %}" href="#db_schema">Database Schema</a>
-      </li>
-
-      <li class="tab">
-        <a class="iframe-lazy-loader" href="#ws_diagram" data-if-id="if_ws_diagram"
-           data-if-src="{% static 'chembl_schema_diagrams/src/ws.html' %}">Web Services Diagram</a></li>
-      <li class="tab"><a href="#browse_targets">Browse Targets</a></li>
-      <li class="tab"><a href="#browse_drugs">Browse Drugs</a></li>
-    </ul>
+    <a class="results-section-item iframe-lazy-loader" data-if-id="if_database_schema"
+           data-if-src="{% static 'chembl_schema_diagrams/src/schema.html' %}" data-target="#db_schema">Database Schema</a>
+    <a class="results-section-item iframe-lazy-loader" data-target="#ws_diagram" data-if-id="if_ws_diagram"
+           data-if-src="{% static 'chembl_schema_diagrams/src/ws.html' %}">Web Services Diagram</a>
+    <a class="results-section-item" data-target="#browse_targets">Browse Targets</a>
+    <a class="results-section-item" data-target="#browse_drugs">Browse Drugs</a>
 
 
   </div>

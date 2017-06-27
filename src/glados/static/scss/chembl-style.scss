@@ -1820,6 +1820,10 @@ span.badge-primary-color-no-float {
 
   border-bottom: 1px solid color('grey', 'lighten-1');
 
+  &.scrollable{
+    white-space: nowrap;
+    overflow-x: auto;
+  }
 }
 
 /**
@@ -1839,23 +1843,21 @@ span.badge-primary-color-no-float {
     position: relative;
     height: 55px;
     .buttons-container{
-      margin: auto;
+      margin: 20px auto 0 auto;
+      @media #{$small-and-down} {
+        margin: auto;
+      }
     }
   }
   .selection-menu{
 
     @media #{$small-and-down} {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
     text-align: center;
     .selection-information{
       font-size: 0.8em;
     }
-    .selection-button-container{
-      .menu-button{
-        padding: 4px 8px;
-      }
-      }
 
   }
   .title{
@@ -1899,10 +1901,18 @@ span.badge-primary-color-no-float {
   color: white;
   font-size: 0.7em;
   border-radius: 3px;
+  display: inline-block;
   &:hover {
     background-color: color($primary-color-name, 'accent-4');
   }
-
+  &.big{
+    padding: 10px 8px;
+    font-size: 0.8em;
+  }
+  &.mini{
+    padding: 4px 8px;
+    font-size: 0.65em;
+  }
 }
 
 /**
