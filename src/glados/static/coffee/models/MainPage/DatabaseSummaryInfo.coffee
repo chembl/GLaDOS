@@ -1,7 +1,7 @@
 glados.useNameSpace 'glados.models.MainPage',
   DatabaseSummaryInfo: Backbone.Model.extend
 
-    @ERROR_LABEL: 'Error'
+    ERROR_LABEL: '(Error loading data)'
     initialize: ->
 
       config =
