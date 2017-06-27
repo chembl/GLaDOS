@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       $contentElement = $(@el).find('.BCK-content')
       glados.Utils.fillContentForElement $contentElement,
-        chembl_db_version: chemblDBVersion
+        chembl_db_version: chemblDBVersion.replace('_', ' ')
         chembl_release_date: @model.get('chembl_release_date')
         num_targets: $.number(@model.get('num_targets'))
         num_compound_records: $.number(@model.get('num_compound_records'))
