@@ -12,6 +12,12 @@ class MainPageApp
     new glados.views.MainPage.CentralCardView
       el: $('.BCK-Central-Card')
 
+    databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
+
+    databaseInfo.fetch()
+
+
+
 
 
 
