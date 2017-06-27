@@ -4,14 +4,14 @@
   <div class="summary-tabs scrollable white">
 
 
-    <a class="results-section-item selected" href="#editor-search">Ligand Search</a>
+    <a class="results-section-item selected" data-target="#editor-search">Ligand Search</a>
 
     <a class="results-section-item iframe-lazy-loader" data-if-id="if_database_schema"
-           data-if-src="{% static 'chembl_schema_diagrams/src/schema.html' %}" href="#db_schema">Database Schema</a>
-    <a class="results-section-item iframe-lazy-loader" href="#ws_diagram" data-if-id="if_ws_diagram"
+           data-if-src="{% static 'chembl_schema_diagrams/src/schema.html' %}" data-target="#db_schema">Database Schema</a>
+    <a class="results-section-item iframe-lazy-loader" data-target="#ws_diagram" data-if-id="if_ws_diagram"
            data-if-src="{% static 'chembl_schema_diagrams/src/ws.html' %}">Web Services Diagram</a>
-    <a class="results-section-item" href="#browse_targets">Browse Targets</a>
-    <a class="results-section-item" href="#browse_drugs">Browse Drugs</a>
+    <a class="results-section-item" data-target="#browse_targets">Browse Targets</a>
+    <a class="results-section-item" data-target="#browse_drugs">Browse Drugs</a>
 
 
   </div>
