@@ -1820,6 +1820,10 @@ span.badge-primary-color-no-float {
 
   border-bottom: 1px solid color('grey', 'lighten-1');
 
+  &.scrollable{
+    white-space: nowrap;
+    overflow-x: auto;
+  }
 }
 
 /**
