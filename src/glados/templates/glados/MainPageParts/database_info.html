@@ -1,7 +1,15 @@
 {% load static %}
-<div class="card teal lighten-5 z-depth-0">
+<div class="BCK-Database-summary-info card teal lighten-5 z-depth-0">
 
-  <div class="database-info">
+  <div class="card-preolader-to-hide">
+
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
+  </div>
+
+  <div class="BCK-content database-info" style="display: none">
 
     <div class="card-content">
 
@@ -54,7 +62,8 @@
         <div class="col s12 center-align">
 
 
-          <a href="#download-db-modal" class="modal-trigger-safe waves-effect waves-light btn-chembl teal"><i class="fa fa-download" aria-hidden="true"></i>
+          <a href="#download-db-modal" class="modal-trigger-safe waves-effect waves-light btn-chembl teal"><i
+            class="fa fa-download" aria-hidden="true"></i>
             Download</a>
 
           <a class="rel-notes" href="#">Release Notes</a>

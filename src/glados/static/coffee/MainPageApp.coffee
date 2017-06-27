@@ -14,6 +14,10 @@ class MainPageApp
 
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
 
+    new glados.views.MainPage.DatabaseSummaryView
+      model: databaseInfo
+      el: $('.BCK-Database-summary-info')
+
     databaseInfo.fetch()
 
 

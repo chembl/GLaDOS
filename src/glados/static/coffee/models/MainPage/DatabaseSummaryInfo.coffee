@@ -1,6 +1,7 @@
 glados.useNameSpace 'glados.models.MainPage',
   DatabaseSummaryInfo: Backbone.Model.extend
 
+    @ERROR_LABEL: 'Error'
     initialize: ->
 
       config =
@@ -52,13 +53,18 @@ glados.useNameSpace 'glados.models.MainPage',
 
         genParse = (itemName) ->
           (data) ->
-
             for key, property of config[itemName].properties_to_read
               propName = property.prop_name
               propLabel = property.prop_label
               propValue = glados.Utils.getNestedValue(data, propName)
               thisModel.set(propLabel, propValue)
 
+        genError = (itemName) ->
+          ->
+            for key, property of config[itemName].properties_to_read
+              propName = property.prop_name
+              propLabel = property.prop_label
+              thisModel.set(propLabel, thisModel.ERROR_LABEL)
 
         thisModel = @
-        $.getJSON(item.url).done(genParse(key))
+        $.getJSON(item.url).done(genParse(key)).fail(genError(key))
