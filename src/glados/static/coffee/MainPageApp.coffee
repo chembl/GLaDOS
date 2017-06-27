@@ -9,6 +9,9 @@ class MainPageApp
 
     @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
 
+    new glados.views.MainPage.CentralCardView
+      el: $('.BCK-Central-Card')
+
     # Marvin js skecther
     @marvinSketcherView = new MarvinSketcherView()
 
