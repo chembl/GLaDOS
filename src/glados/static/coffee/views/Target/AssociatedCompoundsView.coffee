@@ -37,6 +37,18 @@ glados.useNameSpace 'glados.views.Target',
       withColourScale=true).colourScale
 
       config =
+        big_size: true
+        paint_axes_selectors: true
+        properties:
+          mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+          alogp: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'ALogP')
+          psa: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'PSA')
+        initial_property_x: 'mwt'
+        x_axis_options: ['mwt', 'alogp', 'psa']
+        x_axis_min_columns: 1
+        x_axis_max_columns: 20
+        x_axis_initial_columns: 10
+
         max_categories: 8
         bars_colour_scale: barsColourScale
         fixed_bar_width: true
@@ -44,6 +56,6 @@ glados.useNameSpace 'glados.views.Target',
       @histogramView = new glados.views.Visualisation.HistogramView
         el: $(@el).find('.BCK-MainHistogramContainer')
         config: config
-        model:bioactivities
+        model: bioactivities
 
       bioactivities.fetch()

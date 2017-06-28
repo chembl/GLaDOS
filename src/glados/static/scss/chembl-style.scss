@@ -2388,11 +2388,21 @@ span.badge-primary-color-no-float {
 */
 .histogram{
   .mainSVGContainer{
+    background-color: white;
   }
+
+  &.mini{
+    .mainSVGContainer {
+      background-color: transparent;
+    }
+    .title{
+      font-size: 80%;
+    }
+  }
+
   .title{
     text-decoration: underline;
     cursor: pointer;
-    font-size: 80%;
   }
   .title:hover{
     fill: color('teal', 'accent-4');

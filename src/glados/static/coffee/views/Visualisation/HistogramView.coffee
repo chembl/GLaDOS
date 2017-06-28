@@ -7,9 +7,28 @@ glados.useNameSpace 'glados.views.Visualisation',
       @model.on 'change', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       updateViewProxy = @setUpResponsiveRender()
+      if @config.paint_axes_selectors
+        @paintAxesSelectors()
       @showPreloader()
 
-    showPreloader: -> glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
+    showPreloader: ->
+      if @config.big_size
+        glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-Preloader')
+      else
+        glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
+
+    paintAxesSelectors: ->
+      $xAxisSelector = $(@el).find('.BCK-ESResultsPlot-selectXAxis')
+      glados.Utils.fillContentForElement $xAxisSelector,
+        options: ($.extend(@config.properties[opt], {id:opt, selected: opt == @config.initial_property_x}) for opt in @config.x_axis_options)
+
+      $xAxisNumBarsRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-numBars')
+      glados.Utils.fillContentForElement $xAxisNumBarsRange,
+        current_value: @config.x_axis_initial_columns
+        min_value: @config.x_axis_min_columns
+        max_value: @config.x_axis_max_columns
+
+      $(@el).find('select').material_select()
 
     # returns the buckets that are going to be used for the visualisation
     # actual buckets may be merged into "other" depending on @maxCategories
