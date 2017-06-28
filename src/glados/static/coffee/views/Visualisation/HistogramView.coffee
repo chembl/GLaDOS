@@ -65,18 +65,22 @@ glados.useNameSpace 'glados.views.Visualisation',
       TITLE_Y = if @config.big_size then 30 else 10
       TITLE_Y_PADDING = if @config.big_size then 15 else 5
       BARS_MIN_HEIGHT = 2
+
       X_AXIS_HEIGHT = if @config.big_size then 60 else 0
+      Y_AXIS_WIDTH = if @config.big_size then 60 else 0
+
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
+      BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
       #-------------------------------------------------------------------------------------------------------------------
       barsContainerG = mainSVGContainer.append('g')
-        .attr('transform', 'translate(0,' + (TITLE_Y + TITLE_Y_PADDING) + ')')
+        .attr('transform', 'translate('+ Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
       barsContainerG.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', VISUALISATION_WIDTH)
+        .attr('width', BARS_CONTAINER_WIDTH)
         .classed('bars-background', true)
 
       #-------------------------------------------------------------------------------------------------------------------
@@ -88,10 +92,10 @@ glados.useNameSpace 'glados.views.Visualisation',
       console.log 'max:', _.max(bucketSizes)
 
       if @config.fixed_bar_width
-        barWidth = VISUALISATION_WIDTH / @config.max_categories
+        barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
         xRangeEnd = barWidth * buckets.length
       else
-        fixed_bar_width = VISUALISATION_WIDTH
+        fixed_bar_width = BARS_CONTAINER_WIDTH
 
       getXForBucket = d3.scale.ordinal()
         .domain(bucketNames)
@@ -166,11 +170,11 @@ glados.useNameSpace 'glados.views.Visualisation',
       # add Axes when is big size
       #-----------------------------------------------------------------------------------------------------------------
       xAxisContainerG = mainSVGContainer.append('g')
-        .attr('transform', 'translate(0,' + X_AXIS_TRANS_Y + ')')
+        .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + X_AXIS_TRANS_Y + ')')
         .classed('x-axis', true)
 
       xAxisContainerG.append('line')
-        .attr('x2', VISUALISATION_WIDTH)
+        .attr('x2', BARS_CONTAINER_WIDTH)
         .classed('axis-line', true)
 
       xAxis = d3.svg.axis()
