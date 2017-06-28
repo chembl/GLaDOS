@@ -65,12 +65,13 @@ glados.useNameSpace 'glados.views.Visualisation',
       TITLE_Y = if @config.big_size then 30 else 10
       TITLE_Y_PADDING = if @config.big_size then 15 else 5
       BARS_MIN_HEIGHT = 2
+      RIGHT_PADDING = if @config.big_size then 20 else 0
 
       X_AXIS_HEIGHT = if @config.big_size then 60 else 0
       Y_AXIS_WIDTH = if @config.big_size then 60 else 0
 
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
-      BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH
+      BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
       #-------------------------------------------------------------------------------------------------------------------
