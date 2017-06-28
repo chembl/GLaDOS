@@ -65,7 +65,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       TITLE_Y = if @config.big_size then 30 else 10
       TITLE_Y_PADDING = if @config.big_size then 15 else 5
       BARS_MIN_HEIGHT = 2
-      BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING
+      X_AXIS_HEIGHT = if @config.big_size then 60 else 0
+      BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
+      X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
@@ -120,7 +122,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       if barsColourScale?
         valueBars.attr('fill', (b) -> barsColourScale(b.key))
       else
-        #2196f3 blue
         valueBars.attr('fill', glados.Settings.VISUALISATION_BLUE_BASE)
 
       barGroups.append('rect')
@@ -129,9 +130,9 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('front-bar', true)
         .on('click', (b) -> window.open(b.link) )
 
-      #-------------------------------------------------------------------------------------------------------------------
+      #-----------------------------------------------------------------------------------------------------------------
       # add qtips
-      #-------------------------------------------------------------------------------------------------------------------
+      #-----------------------------------------------------------------------------------------------------------------
       barGroups.each (d) ->
         text = '<b>' + d.key + '</b>' + ":" + d.doc_count
         $(@).qtip
@@ -143,9 +144,9 @@ glados.useNameSpace 'glados.views.Visualisation',
             my: if thisView.config.big_size then 'bottom center' else 'top center'
             at: 'bottom center'
 
-      #-------------------------------------------------------------------------------------------------------------------
+      #-----------------------------------------------------------------------------------------------------------------
       # add title
-      #-------------------------------------------------------------------------------------------------------------------
+      #-----------------------------------------------------------------------------------------------------------------
       totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
       totalItemsTxt = '(' + totalItems + ')'
       titleBase = if @config.title? then @config.title else 'Browse All'
@@ -158,3 +159,21 @@ glados.useNameSpace 'glados.views.Visualisation',
         .on('click', ->
           window.open(thisView.model.get('link_to_all'))
       )
+
+      if not @config.big_size
+        return
+      #-----------------------------------------------------------------------------------------------------------------
+      # add Axes when is big size
+      #-----------------------------------------------------------------------------------------------------------------
+      xAxisContainerG = mainSVGContainer.append('g')
+        .attr('transform', 'translate(0,' + X_AXIS_TRANS_Y + ')')
+        .classed('x-axis', true)
+
+      xAxisContainerG.append('line')
+        .attr('x2', VISUALISATION_WIDTH)
+        .classed('axis-line', true)
+
+      xAxis = d3.svg.axis()
+        .scale(getXForBucket)
+
+      xAxisContainerG.call(xAxis)

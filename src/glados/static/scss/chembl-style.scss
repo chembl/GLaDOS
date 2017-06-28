@@ -2429,4 +2429,14 @@ span.badge-primary-color-no-float {
       opacity: 0.2;
     }
   }
+
+  .x-axis{
+    path{
+      display: none;
+    }
+    .axis-line{
+      stroke-width: 1;
+      stroke: black;
+    }
+  }
 }
