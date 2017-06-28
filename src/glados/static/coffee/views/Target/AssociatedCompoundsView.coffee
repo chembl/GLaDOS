@@ -41,6 +41,9 @@ glados.useNameSpace 'glados.views.Target',
         bars_colour_scale: barsColourScale
         fixed_bar_width: true
 
-#      @histogramView = new glados.views.Visualisation.HistogramView
-#        el: $(@el).find('.BCK-MainHistogramContainer')
-#        config: config
+      @histogramView = new glados.views.Visualisation.HistogramView
+        el: $(@el).find('.BCK-MainHistogramContainer')
+        config: config
+        model:bioactivities
+
+      bioactivities.fetch()

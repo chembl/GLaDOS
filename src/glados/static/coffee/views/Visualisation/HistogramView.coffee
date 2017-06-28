@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       @config = arguments[0].config
 
       @model.on 'change', @render, @
-      @$vis_elem = $(@el).find('.BCK-mini-histogram-container')
+      @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       updateViewProxy = @setUpResponsiveRender()
       @showPreloader()
 
