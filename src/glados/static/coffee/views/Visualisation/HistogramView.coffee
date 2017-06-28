@@ -190,3 +190,18 @@ glados.useNameSpace 'glados.views.Visualisation',
         .scale(getXForBucket)
 
       xAxisContainerG.call(xAxis)
+
+      yAxisContainerG = mainSVGContainer.append('g')
+        .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
+        .classed('y-axis', true)
+
+      # reverse the original scale range to get correct number order
+      scaleForYAxis = d3.scale.linear()
+        .domain(getHeightForBucket.domain())
+        .range([getHeightForBucket.range()[1], getHeightForBucket.range()[0]])
+
+      yAxis = d3.svg.axis()
+        .scale(scaleForYAxis)
+        .orient('left')
+
+      yAxisContainerG.call(yAxis)
