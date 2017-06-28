@@ -161,6 +161,7 @@ class TargetReportCardApp
     new glados.views.Target.LigandEfficienciesView
       collection: ligandEfficiencies
       el: $('#TLigandEfficienciesCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
