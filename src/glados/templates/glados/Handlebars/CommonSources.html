@@ -518,6 +518,13 @@
   {{/each}}
 </script>
 
+<script id="Handlebars-Common-Histogram-numbars" type="text/x-handlebars-template">
+  <p><small>Number of columns: {{current_value}}</small></p></p>
+  <p class="range-field">
+    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+  </p>
+</script>
+
 <script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
   because in any of the shown axes their value is null: <br>

@@ -15,7 +15,9 @@ glados.useNameSpace 'glados.views.Target',
           psa: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'PSA')
         initial_property_x: 'mwt'
         x_axis_options: ['mwt', 'alogp', 'psa']
-
+        x_axis_min_columns: 1
+        x_axis_max_columns: 20
+        x_axis_initial_columns: 10
 
       @histogramView = new glados.views.Visualisation.HistogramView
         el: $(@el).find('.BCK-MainHistogramContainer')
