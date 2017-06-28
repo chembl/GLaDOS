@@ -33,9 +33,6 @@ glados.useNameSpace 'glados.views.Target',
       bioactivities = new TargetAssociatedBioactivities
         target_chembl_id: 'CHEMBL2111342'
 
-      barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
-      withColourScale=true).colourScale
-
       config =
         big_size: true
         paint_axes_selectors: true
@@ -50,7 +47,6 @@ glados.useNameSpace 'glados.views.Target',
         x_axis_initial_columns: 10
 
         max_categories: 8
-        bars_colour_scale: barsColourScale
         fixed_bar_width: true
 
       @histogramView = new glados.views.Visualisation.HistogramView
@@ -59,3 +55,4 @@ glados.useNameSpace 'glados.views.Target',
         model: bioactivities
 
       bioactivities.fetch()
+      console.log 'bioactivities: ', bioactivities

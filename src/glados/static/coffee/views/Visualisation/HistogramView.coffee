@@ -121,7 +121,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         valueBars.attr('fill', (b) -> barsColourScale(b.key))
       else
         #2196f3 blue
-        valueBars.attr('fill', '#2196f3')
+        valueBars.attr('fill', glados.Settings.VISUALISATION_BLUE_BASE)
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
