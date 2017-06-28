@@ -86,6 +86,10 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/TargetReportCardParts/LigandEfficienciesToEmbed.html")), ),
 
+  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/TargetReportCardParts/AssociatedCompoundsToEmbed.html")), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
   # --------------------------------------------------------------------------------------------------------------------

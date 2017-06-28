@@ -163,6 +163,12 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+  @initAssociatedCompounds = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    new glados.views.Target.AssociatedCompoundsView
+      el: $('#TAssociatedCompoundProperties')
+
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
     target = new Target({target_chembl_id: chemblID})

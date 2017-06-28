@@ -3,3 +3,7 @@ glados.useNameSpace 'glados.views.Target',
 
     initialize: ->
       @showCardContent()
+
+      @resource_type = 'Target'
+      @initEmbedModal('associated_compounds')
+      @activateModals()
