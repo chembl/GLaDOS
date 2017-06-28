@@ -19,6 +19,28 @@ glados.useNameSpace 'glados.views.Target',
         x_axis_max_columns: 20
         x_axis_initial_columns: 10
 
-      @histogramView = new glados.views.Visualisation.HistogramView
-        el: $(@el).find('.BCK-MainHistogramContainer')
-        config: config
+      buckets = [
+        {"key":"Ratio","doc_count":94,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Ratio\""},
+        {"key":"Ki","doc_count":32,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Ki\""},
+        {"key":"IC50","doc_count":18,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"IC50\""},
+        {"key":"EC50","doc_count":5,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"EC50\""},
+        {"key":"Emax","doc_count":5,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Emax\""},
+        {"key":"Change","doc_count":4,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Change\""},
+        {"key":"Bmax","doc_count":2,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Bmax\""},
+        {"key":"Kd","doc_count":2,"link":"/activities/filter/target_chembl_id:CHEMBL2111342 AND standard_type:\"Kd\""}
+      ]
+
+      bioactivities = new TargetAssociatedBioactivities
+        target_chembl_id: 'CHEMBL2111342'
+
+      barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true).colourScale
+
+      config =
+        max_categories: 8
+        bars_colour_scale: barsColourScale
+        fixed_bar_width: true
+
+#      @histogramView = new glados.views.Visualisation.HistogramView
+#        el: $(@el).find('.BCK-MainHistogramContainer')
+#        config: config

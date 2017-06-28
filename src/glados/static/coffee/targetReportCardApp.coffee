@@ -191,7 +191,7 @@ class TargetReportCardApp
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
 
-    new MiniHistogramView
+    new glados.views.Visualisation.HistogramView
       model: bioactivities
       el: $containerElem
       config: config
