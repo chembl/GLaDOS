@@ -52,7 +52,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       console.log 'RENDER VIEW!', buckets
       VISUALISATION_WIDTH = $(@el).width()
-      VISUALISATION_HEIGHT = 60
+      VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
 
       mainContainer = d3.select(@$vis_elem.get(0))
       mainSVGContainer = mainContainer
@@ -62,8 +62,8 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', VISUALISATION_HEIGHT)
 
       thisView = @
-      TITLE_Y = 10
-      TITLE_Y_PADDING = 5
+      TITLE_Y = if @config.big_size then 30 else 10
+      TITLE_Y_PADDING = if @config.big_size then 15 else 5
       BARS_MIN_HEIGHT = 2
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING
 
@@ -140,16 +140,17 @@ glados.useNameSpace 'glados.views.Visualisation',
           style:
             classes:'qtip-light'
           position:
-            my: 'top center'
+            my: if thisView.config.big_size then 'bottom center' else 'top center'
             at: 'bottom center'
 
       #-------------------------------------------------------------------------------------------------------------------
       # add title
       #-------------------------------------------------------------------------------------------------------------------
-      totalBioactivities = _.reduce(bucketSizes, ((a, b) -> a + b))
-      console.log 'totalBioactivities: ', totalBioactivities
+      totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
+      totalItemsTxt = '(' + totalItems + ')'
+      titleBase = if @config.title? then @config.title else 'Browse All'
       mainSVGContainer.append('text')
-        .text('Browse All (' + totalBioactivities + ')')
+        .text(titleBase + ' ' + totalItemsTxt)
         .attr('x', VISUALISATION_WIDTH/2)
         .attr('y', TITLE_Y)
         .attr('text-anchor', 'middle')
