@@ -7,3 +7,6 @@ glados.useNameSpace 'glados.views.Target',
       @resource_type = 'Target'
       @initEmbedModal('associated_compounds')
       @activateModals()
+
+      @histogramView = new glados.views.Visualisation.HistogramView
+        el: $(@el).find('.BCK-MainHistogramContainer')
