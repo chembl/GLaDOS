@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       $xAxisNumBarsRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-numBars')
       glados.Utils.fillContentForElement $xAxisNumBarsRange,
-        current_value: @config.x_axis_initial_columns
+        current_value: @config.x_axis_initial_num_columns
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
 
@@ -74,6 +74,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
+      currentXAxisProperty = @config.properties[@config.initial_property_x]
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
       #-------------------------------------------------------------------------------------------------------------------
@@ -177,6 +178,13 @@ glados.useNameSpace 'glados.views.Visualisation',
       xAxisContainerG.append('line')
         .attr('x2', BARS_CONTAINER_WIDTH)
         .classed('axis-line', true)
+
+      xAxisContainerG.append('text')
+        .text(currentXAxisProperty.label)
+        .attr('text-anchor', 'middle')
+        .attr('x', BARS_CONTAINER_WIDTH/2)
+        .attr('y', X_AXIS_HEIGHT*(3/4))
+        .classed('property-label', true)
 
       xAxis = d3.svg.axis()
         .scale(getXForBucket)

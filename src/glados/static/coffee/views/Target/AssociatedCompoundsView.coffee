@@ -44,7 +44,7 @@ glados.useNameSpace 'glados.views.Target',
         x_axis_options: ['mwt', 'alogp', 'psa']
         x_axis_min_columns: 1
         x_axis_max_columns: 20
-        x_axis_initial_columns: 10
+        x_axis_initial_num_columns: 10
         title: 'Associated Compounds for Target CHEMBL2111342'
 
         max_categories: 8
