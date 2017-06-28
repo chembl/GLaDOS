@@ -74,7 +74,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
-      currentXAxisProperty = @config.properties[@config.initial_property_x]
+      if @config.initial_property_x
+        currentXAxisProperty = @config.properties[@config.initial_property_x]
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
       #-------------------------------------------------------------------------------------------------------------------
@@ -128,7 +129,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       if barsColourScale?
         valueBars.attr('fill', (b) -> barsColourScale(b.key))
       else
-        valueBars.attr('fill', glados.Settings.VISUALISATION_BLUE_BASE)
+        valueBars.attr('fill', glados.Settings.VISUALISATION_TEAL_BASE)
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
@@ -195,6 +196,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
         .classed('y-axis', true)
 
+      yAxisContainerG.append('line')
+        .attr('y2', BARS_CONTAINER_HEIGHT)
+        .classed('axis-line', true)
+
       # reverse the original scale range to get correct number order
       scaleForYAxis = d3.scale.linear()
         .domain(getHeightForBucket.domain())
@@ -202,6 +207,12 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       yAxis = d3.svg.axis()
         .scale(scaleForYAxis)
+        .tickSize(-BARS_CONTAINER_WIDTH, 0)
         .orient('left')
 
       yAxisContainerG.call(yAxis)
+      yAxisContainerG.selectAll('.tick line')
+        .attr("stroke-dasharray", "4,10")
+      # remove first tick line, was not able to do it with css
+      yAxisContainerG.select('.tick line').style('display', 'none')
+

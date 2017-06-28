@@ -2430,10 +2430,7 @@ span.badge-primary-color-no-float {
     }
   }
 
-  .x-axis{
-    path{
-      display: none;
-    }
+  .x-axis, .y-axis{
     .axis-line{
       stroke-width: 1;
       stroke: black;
@@ -2445,5 +2442,19 @@ span.badge-primary-color-no-float {
     .tick{
       font-size: 80%;
     }
+    path{
+      display: none;
+    }
   }
+
+
+  .y-axis {
+    .tick{
+      line{
+        stroke-width: 1;
+        stroke: color('grey', 'lighten-1');
+      }
+    }
+  }
+
 }
