@@ -29,6 +29,8 @@ glados.useNameSpace 'glados.models.Target',
 
     fetchMinMax: ->
 
+      $progressElem = @get('progress_elem')
+
       console.log 'FETCHING MIN MAX'
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
@@ -41,14 +43,7 @@ glados.useNameSpace 'glados.models.Target',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parseMinMax data, {silent:true})
-      ).fail( (jqXHR, textStatus, errorThrown) ->
-        $progressElem = thisModel.get('progress_elem')
-        $progressElem.html 'Error loading data'
-        console.log 'ERROR:'
-        console.log 'jqXHR: ', jqXHR
-        console.log 'textStatus: ', textStatus
-        console.log 'errorThrown: ', errorThrown
-      )
+      ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
 
     parse: (data) ->

@@ -171,5 +171,12 @@ glados.useNameSpace 'glados',
 
         return buckets
 
+    ErrorMessages:
+      showLoadingErrorMessageGen: ($progressElem) ->
+        return (jqXHR, textStatus, errorThrown) ->
+          errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+          $progressElem.html 'Error loading data (' + errorDetails + ')'
+
+
 
 
