@@ -101,7 +101,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
         xRangeEnd = barWidth * buckets.length
       else
-        fixed_bar_width = BARS_CONTAINER_WIDTH
+        xRangeEnd = BARS_CONTAINER_WIDTH
 
       getXForBucket = d3.scale.ordinal()
         .domain(bucketNames)
