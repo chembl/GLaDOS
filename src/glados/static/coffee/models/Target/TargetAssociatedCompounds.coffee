@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.models.Target',
       console.log 'INITIALISING TARGET ASSOCIATED COMPOUNDS!'
 
     fetch: ->
+      console.log 'FETCHING ASSOC COMPS!'
       @set(@parse())
 
     parse: (data) ->
@@ -25,3 +26,32 @@ glados.useNameSpace 'glados.models.Target',
         'buckets': buckets
       }
 
+    getRequestData: ->
+
+      return {
+
+      }
+
+    getRequestMinMaxData: ->
+
+      return {
+        size: 0,
+        query: {
+          query_string: {
+            analyze_wildcard: true,
+            query: "*"
+          }
+        },
+        aggs: {
+          min_agg: {
+            min: {
+              field: "molecule_properties.full_mwt"
+            }
+          },
+          max_agg: {
+            max: {
+              field: "molecule_properties.full_mwt"
+            }
+          }
+        }
+      }
