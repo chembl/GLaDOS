@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.models.Target',
 
     initialize: ->
 
-      console.log 'INITIALISING TARGET ASSOCIATED COMPOUNDS!'
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_search'
       @set('state', @INITIAL_STATE, {silent:true})
 
     fetch: ->
@@ -24,7 +24,8 @@ glados.useNameSpace 'glados.models.Target',
         return
 
 
-
+      console.log 'ALREADY GOT MIN MAX'
+      return
       @set(@parse())
 
     fetchMinMax: ->
@@ -42,7 +43,10 @@ glados.useNameSpace 'glados.models.Target',
 
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
-        thisModel.set(thisModel.parseMinMax data, {silent:true})
+        thisModel.set(thisModel.parseMinMax(data), {silent:true})
+        thisModel.set('state', @LOADING_BUCKETS, {silent:true})
+        console.log 'GOT MIN AND MAX'
+        thisModel.fetch()
       ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
 
@@ -94,16 +98,8 @@ glados.useNameSpace 'glados.models.Target',
       }
 
     parseMinMax: (data) ->
-
-      parsedObj = {
+      console.log 'PARSING MIN MAX'
+      return {
         max_value: data.aggregations.max_agg.value
         min_value: data.aggregations.min_agg.value
       }
-      state = @get('state')
-      console.log 'PARSED MIN AND MAX'
-      if state == @LOADING_MIN_MAX
-        @set('state', @LOADING_BUCKETS, {silent:true})
-        console.log 'GOT MIN AND MAX'
-        @fetch()
-
-      return parsedObj

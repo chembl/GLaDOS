@@ -27,6 +27,8 @@ glados.useNameSpace 'glados.views.Target',
         max_categories: 8
         fixed_bar_width: true
 
+      @model.set('current_xaxis_property', config.properties[config.initial_property_x].propName)
+
       @histogramView = new glados.views.Visualisation.HistogramView
         el: $(@el).find('.BCK-MainHistogramContainer')
         config: config

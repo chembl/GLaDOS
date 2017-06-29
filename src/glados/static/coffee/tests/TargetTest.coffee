@@ -34,7 +34,7 @@ describe "Target", ->
     beforeAll (done) ->
 
       associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-          target_chembl_id: 'CHEMBL2111342'
+        target_chembl_id: 'CHEMBL2111342'
 
       currentXAxisProperty = 'molecule_properties.full_mwt'
       associatedCompounds.set('current_xaxis_property', currentXAxisProperty)

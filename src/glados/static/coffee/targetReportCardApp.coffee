@@ -36,7 +36,7 @@ class TargetReportCardApp
     console.log 'query string: ', customQueryString
 
     associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-        target_chembl_id: 'CHEMBL2111342'
+      target_chembl_id: 'CHEMBL2111342'
 
     new TargetNameAndClassificationView
       model: target
