@@ -3,6 +3,8 @@ glados.useNameSpace 'glados.views.Target',
 
     initialize: ->
       @model.on 'change', @render, @
+      $progressElem = $(@el).find('.load-messages-container')
+      @model.set('progress_elem', $progressElem)
 
       @resource_type = 'Target'
       @initEmbedModal('associated_compounds')

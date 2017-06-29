@@ -1,13 +1,55 @@
 glados.useNameSpace 'glados.models.Target',
   TargetAssociatedCompounds: Backbone.Model.extend
 
+    INITIAL_STATE: 'INITIAL_STATE'
+    LOADING_MIN_MAX: 'LOADING_MIN_MAX'
+    LOADING_BUCKETS: 'LOADING_BUCKETS'
+
     initialize: ->
 
       console.log 'INITIALISING TARGET ASSOCIATED COMPOUNDS!'
+      @set('state', @INITIAL_STATE, {silent:true})
 
     fetch: ->
-      console.log 'FETCHING ASSOC COMPS!'
+      console.log 'FETCHING!'
+      $progressElem = @get('progress_elem')
+      state = @get('state')
+
+      if not @get('min_value')? or not @get('max_value')? or state == @INITIAL_STATE
+        if $progressElem?
+          $progressElem.html 'Loading minimun and maximum values...'
+        @set('state', @LOADING_MIN_MAX, {silent:true})
+        console.log 'GOING TO FETCH MIN MAX'
+        @fetchMinMax()
+        return
+
+
+
       @set(@parse())
+
+    fetchMinMax: ->
+
+      console.log 'FETCHING MIN MAX'
+      esJSONRequest = JSON.stringify(@getRequestMinMaxData())
+
+      fetchESOptions =
+        url: @url
+        data: esJSONRequest
+        type: 'POST'
+        reset: true
+
+      thisModel = @
+      $.ajax(fetchESOptions).done((data) ->
+        thisModel.set(thisModel.parseMinMax data, {silent:true})
+      ).fail( (jqXHR, textStatus, errorThrown) ->
+        $progressElem = thisModel.get('progress_elem')
+        $progressElem.html 'Error loading data'
+        console.log 'ERROR:'
+        console.log 'jqXHR: ', jqXHR
+        console.log 'textStatus: ', textStatus
+        console.log 'errorThrown: ', errorThrown
+      )
+
 
     parse: (data) ->
 
@@ -58,7 +100,15 @@ glados.useNameSpace 'glados.models.Target',
 
     parseMinMax: (data) ->
 
-      return {
+      parsedObj = {
         max_value: data.aggregations.max_agg.value
         min_value: data.aggregations.min_agg.value
       }
+      state = @get('state')
+      console.log 'PARSED MIN AND MAX'
+      if state == @LOADING_MIN_MAX
+        @set('state', @LOADING_BUCKETS, {silent:true})
+        console.log 'GOT MIN AND MAX'
+        @fetch()
+
+      return parsedObj
