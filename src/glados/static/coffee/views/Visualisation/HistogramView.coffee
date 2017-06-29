@@ -33,7 +33,7 @@ glados.useNameSpace 'glados.views.Visualisation',
     # returns the buckets that are going to be used for the visualisation
     # actual buckets may be merged into "other" depending on @maxCategories
     getBucketsForView: ->
-      buckets =  @model.get('pie-data')
+      buckets =  @model.get('buckets')
       maxCategories = @config.max_categories
 
       if buckets.length > maxCategories
@@ -43,7 +43,10 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
       @$vis_elem.empty()
-      buckets = @getBucketsForView()
+      if @config.numerical_mode
+        buckets = @model.get('buckets')
+      else
+        buckets = @getBucketsForView()
 
       if buckets.length == 0
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
