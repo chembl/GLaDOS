@@ -35,6 +35,9 @@ class TargetReportCardApp
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
     console.log 'query string: ', customQueryString
 
+    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
+        target_chembl_id: 'CHEMBL2111342'
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -67,6 +70,7 @@ class TargetReportCardApp
 
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
+      model: associatedCompounds
 
     target.fetch()
     appDrugsClinCandsList.fetch()
@@ -74,6 +78,7 @@ class TargetReportCardApp
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
+    associatedCompounds.fetch()
 
   @initTargetNameAndClassification = ->
 
@@ -165,9 +170,15 @@ class TargetReportCardApp
 
   @initAssociatedCompounds = ->
 
+    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
+        target_chembl_id: 'CHEMBL2111342'
+
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
+      model: associatedCompounds
+
+    associatedCompounds.fetch()
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
