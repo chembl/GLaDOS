@@ -29,8 +29,9 @@ describe "Target", ->
 
     associatedCompounds = undefined
     currentXAxisProperty = undefined
+    minMaxTestData = undefined
 
-    beforeAll ->
+    beforeAll (done) ->
 
       associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
           target_chembl_id: 'CHEMBL2111342'
@@ -38,12 +39,21 @@ describe "Target", ->
       currentXAxisProperty = 'molecule_properties.full_mwt'
       associatedCompounds.set('current_xaxis_property', currentXAxisProperty)
 
+      $.get (glados.Settings.STATIC_URL + 'testData/AssociatedCompundsMinMaxSampleResponse.json'), (testData) ->
+        minMaxTestData = testData
+        done()
+
 
     it 'Generates the request data to get min and max', ->
 
       requestData = associatedCompounds.getRequestMinMaxData()
       expect(requestData.aggs.max_agg.max.field).toBe(currentXAxisProperty)
       expect(requestData.aggs.min_agg.min.field).toBe(currentXAxisProperty)
+
+    it 'Parses the min and max data', ->
+      parsedObj = associatedCompounds.parseMinMax(minMaxTestData)
+      expect(parsedObj.max_value).toBe(13020.3)
+      expect(parsedObj.min_value).toBe(4)
 
     it 'Generates the request data', ->
       console.log 'GENERATING REQUEST DATA!'

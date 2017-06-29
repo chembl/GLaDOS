@@ -45,13 +45,20 @@ glados.useNameSpace 'glados.models.Target',
         aggs: {
           min_agg: {
             min: {
-              field: "molecule_properties.full_mwt"
+              field: @get('current_xaxis_property')
             }
           },
           max_agg: {
             max: {
-              field: "molecule_properties.full_mwt"
+              field: @get('current_xaxis_property')
             }
           }
         }
+      }
+
+    parseMinMax: (data) ->
+
+      return {
+        max_value: data.aggregations.max_agg.value
+        min_value: data.aggregations.min_agg.value
       }
