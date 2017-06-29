@@ -30,6 +30,7 @@ describe "Target", ->
     associatedCompounds = undefined
     currentXAxisProperty = undefined
     minMaxTestData = undefined
+    bucketsTestData = undefined
     numberOfColumns = 10
 
     beforeAll (done) ->
@@ -45,6 +46,11 @@ describe "Target", ->
         minMaxTestData = testData
         done()
 
+    beforeAll (done) ->
+
+      $.get (glados.Settings.STATIC_URL + 'testData/AssociatedCompoundsBucketsSampleResponse.json'), (testData) ->
+        bucketsTestData = testData
+        done()
 
     it 'Generates the request data to get min and max', ->
 
@@ -70,3 +76,13 @@ describe "Target", ->
 
       intervalShouldBe = Math.ceil((maxValue - minValue) / numColumns) + 1
       expect(requestData.aggs.x_axis_agg.histogram.interval).toBe(intervalShouldBe)
+
+    it 'parses the bucket data', ->
+
+      parsedObj = associatedCompounds.parse(bucketsTestData)
+      bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
+      bucketsGot = parsedObj.buckets
+
+      for i in [0..bucketsShouldBe.length-1]
+        expect(bucketsGot[i].key).toBe(bucketsShouldBe[i].key)
+        expect(bucketsGot[i].doc_count).toBe(bucketsShouldBe[i].doc_count)
