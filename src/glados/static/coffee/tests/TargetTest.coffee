@@ -30,6 +30,7 @@ describe "Target", ->
     associatedCompounds = undefined
     currentXAxisProperty = undefined
     minMaxTestData = undefined
+    numberOfColumns = 10
 
     beforeAll (done) ->
 
@@ -38,6 +39,7 @@ describe "Target", ->
 
       currentXAxisProperty = 'molecule_properties.full_mwt'
       associatedCompounds.set('current_xaxis_property', currentXAxisProperty)
+      associatedCompounds.set('num_columns', numberOfColumns)
 
       $.get (glados.Settings.STATIC_URL + 'testData/AssociatedCompundsMinMaxSampleResponse.json'), (testData) ->
         minMaxTestData = testData
@@ -56,4 +58,15 @@ describe "Target", ->
       expect(parsedObj.min_value).toBe(4)
 
     it 'Generates the request data', ->
-      console.log 'GENERATING REQUEST DATA!'
+
+      associatedCompounds.set('min_value', 4)
+      associatedCompounds.set('max_value', 13020.3)
+      requestData = associatedCompounds.getRequestData()
+      expect(requestData.aggs.x_axis_agg.histogram.field).toBe(currentXAxisProperty)
+
+      minValue = associatedCompounds.get('min_value')
+      maxValue = associatedCompounds.get('max_value')
+      numColumns = associatedCompounds.get('num_columns')
+
+      intervalShouldBe = Math.ceil((maxValue - minValue) / numColumns) + 1
+      expect(requestData.aggs.x_axis_agg.histogram.interval).toBe(intervalShouldBe)

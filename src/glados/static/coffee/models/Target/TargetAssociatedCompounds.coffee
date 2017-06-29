@@ -15,7 +15,7 @@ glados.useNameSpace 'glados.models.Target',
       $progressElem = @get('progress_elem')
       state = @get('state')
 
-      if not @get('min_value')? or not @get('max_value')? or state == @INITIAL_STATE
+      if not @get('min_value')? or not @get('max_value')?
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
         @set('state', @LOADING_MIN_MAX, {silent:true})
@@ -25,6 +25,9 @@ glados.useNameSpace 'glados.models.Target',
 
 
       console.log 'ALREADY GOT MIN MAX'
+      if $progressElem?
+          $progressElem.html 'Fetching Compound Data...'
+
       return
       @set(@parse())
 
@@ -69,32 +72,38 @@ glados.useNameSpace 'glados.models.Target',
 
     getRequestData: ->
 
-      return {
+      xaxisProperty = @get('current_xaxis_property')
+      interval = Math.ceil((@get('max_value') - @get('min_value')) / @get('num_columns')) + 1
 
+      return {
+        size: 0,
+        query:
+          query_string:
+            "analyze_wildcard": true,
+            "query": "*"
+        aggs:
+          x_axis_agg:
+            histogram:
+              field: xaxisProperty,
+              interval: interval,
+              min_doc_count: 1
       }
 
     getRequestMinMaxData: ->
 
       return {
         size: 0,
-        query: {
-          query_string: {
+        query:
+          query_string:
             analyze_wildcard: true,
             query: "*"
-          }
-        },
-        aggs: {
-          min_agg: {
-            min: {
+        aggs:
+          min_agg:
+            min:
               field: @get('current_xaxis_property')
-            }
-          },
-          max_agg: {
-            max: {
+          max_agg:
+            max:
               field: @get('current_xaxis_property')
-            }
-          }
-        }
       }
 
     parseMinMax: (data) ->
