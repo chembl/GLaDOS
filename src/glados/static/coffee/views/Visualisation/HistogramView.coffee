@@ -224,6 +224,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .scale(getXForBucket)
 
       xAxisContainerG.call(xAxis)
+      @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)
 
       yAxisContainerG = mainSVGContainer.append('g')
         .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
@@ -248,4 +249,29 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr("stroke-dasharray", "4,10")
       # remove first tick line, was not able to do it with css
       yAxisContainerG.select('.tick line').style('display', 'none')
+
+    rotateXAxisTicksIfNeeded: (xAxisContainerG, getXForBucket) ->
+      # check if ticks are too big
+      xAxisTexts = xAxisContainerG.selectAll('.tick text')
+      xAxisRangeBand = getXForBucket.rangeBand()
+
+      maxWidth = 0
+      xAxisTexts.each (d) ->
+        currentWidth = @getBBox().width
+        if currentWidth > maxWidth
+          maxWidth = currentWidth
+
+      if maxWidth > xAxisRangeBand
+        #https://drive.google.com/file/d/0BzECtlZ_ur1Ca0Q0TnJKOFNEMnM/view?usp=sharing
+        # remember that text anchor is in the middle
+        alpha = Math.acos(xAxisRangeBand/maxWidth)
+        h = (xAxisRangeBand/2) * Math.tan(alpha)
+        alphaDeg = glados.Utils.getDegreesFromRadians(alpha)
+        xAxisTexts.attr('transform', 'translate(0,'+ h + ')rotate(' + alphaDeg + ')')
+
+        ticksContainerGs = xAxisContainerG.selectAll('.tick')
+        ticksContainerGs.append('line')
+          .classed('axis-helper-line', true)
+          .attr('y2', h)
+
 

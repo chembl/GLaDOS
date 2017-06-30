@@ -147,6 +147,7 @@ glados.useNameSpace 'glados',
       $legendContainer.find('line, path').css('fill', 'none')
 
     getDegreesFromRadians: (radians) -> radians * 180 / Math.PI
+    getRadiansFromDegrees: (degrees) -> (degrees * Math.PI) / 180
 
     Buckets:
       mergeBuckets: (buckets, maxCategories, model) ->

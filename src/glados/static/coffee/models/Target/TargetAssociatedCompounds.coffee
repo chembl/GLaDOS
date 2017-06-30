@@ -19,7 +19,6 @@ glados.useNameSpace 'glados.models.Target',
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
         @set('state', @LOADING_MIN_MAX, {silent:true})
-        console.log 'GOING TO FETCH MIN MAX'
         @fetchMinMax()
         return
 

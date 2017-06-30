@@ -2441,6 +2441,10 @@ span.badge-primary-color-no-float {
     }
     .tick{
       font-size: 80%;
+      .axis-helper-line{
+        stroke-width: 1;
+        stroke: color('grey', 'lighten-1');
+      }
     }
     path{
       display: none;
