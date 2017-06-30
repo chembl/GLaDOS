@@ -8,11 +8,14 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       updateViewProxy = @setUpResponsiveRender()
       if @config.paint_axes_selectors
+        @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
+        @paintNumBarsRange()
       @showPreloader()
 
     events:
       'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
+      'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
 
     showPreloader: ->
       if @config.big_size
@@ -28,13 +31,15 @@ glados.useNameSpace 'glados.views.Visualisation',
       glados.Utils.fillContentForElement $xAxisSelector,
         options: ($.extend(@config.properties[opt], {id:opt, selected: opt == @config.initial_property_x}) for opt in @config.x_axis_options)
 
+      $(@el).find('select').material_select()
+
+    paintNumBarsRange: (currentValue=@config.x_axis_initial_num_columns) ->
+
       $xAxisNumBarsRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-numBars')
       glados.Utils.fillContentForElement $xAxisNumBarsRange,
-        current_value: @config.x_axis_initial_num_columns
+        current_value: currentValue
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
-
-      $(@el).find('select').material_select()
 
     handleXAxisPropertyChange: (event) ->
 
@@ -47,6 +52,12 @@ glados.useNameSpace 'glados.views.Visualisation',
       @model.set('current_xaxis_property', newPropertyComparator)
       @model.fetch()
 
+    handleNumColumnsChange: (event) ->
+
+      newColsNum = $(event.currentTarget).val()
+      @model.set('num_columns', newColsNum)
+      @paintNumBarsRange(newColsNum)
+      @model.fetch()
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -98,8 +109,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
-      if @config.initial_property_x and not @currentXAxisProperty?
-        @currentXAxisProperty = @config.properties[@config.initial_property_x]
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
       #-------------------------------------------------------------------------------------------------------------------
