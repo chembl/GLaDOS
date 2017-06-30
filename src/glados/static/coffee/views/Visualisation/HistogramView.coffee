@@ -11,12 +11,18 @@ glados.useNameSpace 'glados.views.Visualisation',
         @paintAxesSelectors()
       @showPreloader()
 
+    events:
+      'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
+
     showPreloader: ->
       if @config.big_size
         glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-Preloader')
       else
         glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # axes selectors
+    # ------------------------------------------------------------------------------------------------------------------
     paintAxesSelectors: ->
       $xAxisSelector = $(@el).find('.BCK-ESResultsPlot-selectXAxis')
       glados.Utils.fillContentForElement $xAxisSelector,
@@ -29,6 +35,21 @@ glados.useNameSpace 'glados.views.Visualisation',
         max_value: @config.x_axis_max_columns
 
       $(@el).find('select').material_select()
+
+    handleXAxisPropertyChange: (event) ->
+
+      newProperty = $(event.currentTarget).val()
+      if newProperty == ''
+        return
+
+      @currentXAxisProperty = @config.properties[newProperty]
+      newPropertyComparator = @currentXAxisProperty.propName
+      @model.set('current_xaxis_property', newPropertyComparator)
+      @model.fetch()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Render
+    # ------------------------------------------------------------------------------------------------------------------
 
     # returns the buckets that are going to be used for the visualisation
     # actual buckets may be merged into "other" depending on @maxCategories
@@ -77,8 +98,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
-      if @config.initial_property_x
-        currentXAxisProperty = @config.properties[@config.initial_property_x]
+      if @config.initial_property_x and not @currentXAxisProperty?
+        @currentXAxisProperty = @config.properties[@config.initial_property_x]
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
       #-------------------------------------------------------------------------------------------------------------------
@@ -184,7 +205,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('axis-line', true)
 
       xAxisContainerG.append('text')
-        .text(currentXAxisProperty.label)
+        .text(@currentXAxisProperty.label)
         .attr('text-anchor', 'middle')
         .attr('x', BARS_CONTAINER_WIDTH/2)
         .attr('y', X_AXIS_HEIGHT*(3/4))

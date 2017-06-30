@@ -11,11 +11,11 @@ glados.useNameSpace 'glados.models.Target',
       @set('state', @INITIAL_STATE, {silent:true})
 
     fetch: ->
-      console.log 'FETCHING!'
+      
       $progressElem = @get('progress_elem')
       state = @get('state')
 
-      if not @get('min_value')? or not @get('max_value')?
+      if state == @INITIAL_STATE
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
         @set('state', @LOADING_MIN_MAX, {silent:true})
@@ -23,8 +23,6 @@ glados.useNameSpace 'glados.models.Target',
         @fetchMinMax()
         return
 
-
-      console.log 'ALREADY GOT MIN MAX'
       if $progressElem?
         $progressElem.html 'Fetching Compound Data...'
 
@@ -42,7 +40,7 @@ glados.useNameSpace 'glados.models.Target',
           $progressElem.html ''
 
         thisModel.set(thisModel.parse(data))
-        thisModel.set('state', @INITIAL_STATE, {silent:true})
+        thisModel.set('state', thisModel.INITIAL_STATE, {silent:true})
 
       ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
@@ -52,8 +50,6 @@ glados.useNameSpace 'glados.models.Target',
     fetchMinMax: ->
 
       $progressElem = @get('progress_elem')
-
-      console.log 'FETCHING MIN MAX'
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
       fetchESOptions =
@@ -65,16 +61,14 @@ glados.useNameSpace 'glados.models.Target',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parseMinMax(data), {silent:true})
-        thisModel.set('state', @LOADING_BUCKETS, {silent:true})
+        thisModel.set('state', thisModel.LOADING_BUCKETS, {silent:true})
         thisModel.fetch()
       ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
 
     parse: (data) ->
 
-      console.log 'parsing ', data
       buckets = data.aggregations.x_axis_agg.buckets
-
       return {
         'buckets': buckets
       }
@@ -83,6 +77,7 @@ glados.useNameSpace 'glados.models.Target',
 
       xaxisProperty = @get('current_xaxis_property')
       interval = Math.ceil((@get('max_value') - @get('min_value')) / @get('num_columns')) + 1
+      console.log 'interval: ', interval
 
       return {
         size: 0,
