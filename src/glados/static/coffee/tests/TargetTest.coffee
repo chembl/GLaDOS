@@ -77,6 +77,22 @@ describe "Target", ->
       intervalShouldBe = Math.ceil((maxValue - minValue) / numColumns) + 1
       expect(requestData.aggs.x_axis_agg.histogram.interval).toBe(intervalShouldBe)
 
+    it 'Generates the request data for different intervals', ->
+
+      associatedCompounds.set('min_value', 4)
+      associatedCompounds.set('max_value', 13020.3)
+
+      for i in [1..10]
+        associatedCompounds.set('num_columns', i)
+        requestData = associatedCompounds.getRequestData()
+
+        minValue = associatedCompounds.get('min_value')
+        maxValue = associatedCompounds.get('max_value')
+        numColumns = associatedCompounds.get('num_columns')
+
+        intervalShouldBe = Math.ceil((maxValue - minValue) / numColumns ) + minValue
+        expect(requestData.aggs.x_axis_agg.histogram.interval).toBe(intervalShouldBe)
+
     it 'parses the bucket data', ->
 
       parsedObj = associatedCompounds.parse(bucketsTestData)

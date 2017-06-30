@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.models.Target',
       @set('state', @INITIAL_STATE, {silent:true})
 
     fetch: ->
-      
+
       $progressElem = @get('progress_elem')
       state = @get('state')
 
@@ -76,8 +76,7 @@ glados.useNameSpace 'glados.models.Target',
     getRequestData: ->
 
       xaxisProperty = @get('current_xaxis_property')
-      interval = Math.ceil((@get('max_value') - @get('min_value')) / @get('num_columns')) + 1
-      console.log 'interval: ', interval
+      interval = Math.ceil((@get('max_value') - @get('min_value')) / @get('num_columns')) + @get('min_value')
 
       return {
         size: 0,
