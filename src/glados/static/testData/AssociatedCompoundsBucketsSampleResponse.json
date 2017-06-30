@@ -1,60 +1,70 @@
 {
-  "took": 1,
-  "timed_out": false,
-  "_shards": {
-    "total": 3,
-    "successful": 3,
-    "failed": 0
-  },
-  "hits": {
-    "total": 1735442,
-    "max_score": 0,
-    "hits": []
-  },
-  "aggregations": {
-    "x_axis_agg": {
-      "buckets": [
-        {
-          "key": 0,
-          "doc_count": 1714019
-        },
-        {
-          "key": 1303,
-          "doc_count": 13311
-        },
-        {
-          "key": 2606,
-          "doc_count": 2227
-        },
-        {
-          "key": 3909,
-          "doc_count": 1215
-        },
-        {
-          "key": 5212,
-          "doc_count": 187
-        },
-        {
-          "key": 6515,
-          "doc_count": 127
-        },
-        {
-          "key": 7818,
-          "doc_count": 21
-        },
-        {
-          "key": 9121,
-          "doc_count": 9
-        },
-        {
-          "key": 10424,
-          "doc_count": 4
-        },
-        {
-          "key": 11727,
-          "doc_count": 3
+    "took": 77,
+    "timed_out": false,
+    "_shards": {
+        "total": 3,
+        "successful": 3,
+        "failed": 0
+    },
+    "hits": {
+        "total": 1735442,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "x_axis_agg": {
+            "buckets": {
+                "4.0-1305.7": {
+                    "from": 4,
+                    "to": 1305.7,
+                    "doc_count": 1714074
+                },
+                "1305.7-2607.4": {
+                    "from": 1305.7,
+                    "to": 2607.4,
+                    "doc_count": 13259
+                },
+                "2607.4-3909.1": {
+                    "from": 2607.4,
+                    "to": 3909.1,
+                    "doc_count": 2224
+                },
+                "3909.1-5210.8": {
+                    "from": 3909.1,
+                    "to": 5210.8,
+                    "doc_count": 1215
+                },
+                "5210.8-6512.5": {
+                    "from": 5210.8,
+                    "to": 6512.5,
+                    "doc_count": 187
+                },
+                "6512.5-7814.2": {
+                    "from": 6512.5,
+                    "to": 7814.2,
+                    "doc_count": 127
+                },
+                "7814.2-9115.9": {
+                    "from": 7814.2,
+                    "to": 9115.9,
+                    "doc_count": 21
+                },
+                "9115.9-10417.6": {
+                    "from": 9115.9,
+                    "to": 10417.6,
+                    "doc_count": 9
+                },
+                "10417.6-11719.3": {
+                    "from": 10417.6,
+                    "to": 11719.3,
+                    "doc_count": 4
+                },
+                "11719.3-13021.0": {
+                    "from": 11719.3,
+                    "to": 13021,
+                    "doc_count": 3
+                }
+            }
         }
-      ]
     }
-  }
 }

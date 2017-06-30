@@ -26,6 +26,7 @@ glados.useNameSpace 'glados.models.Target',
       if $progressElem?
         $progressElem.html 'Fetching Compound Data...'
 
+      console.log 'request data: ', @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
 
       fetchESOptions =
@@ -68,6 +69,7 @@ glados.useNameSpace 'glados.models.Target',
 
     parse: (data) ->
 
+      console.log 'data: ', data
       buckets = data.aggregations.x_axis_agg.buckets
       return {
         'buckets': buckets
@@ -76,20 +78,38 @@ glados.useNameSpace 'glados.models.Target',
     getRequestData: ->
 
       xaxisProperty = @get('current_xaxis_property')
-      interval = Math.ceil((@get('max_value') - @get('min_value')) / @get('num_columns')) + @get('min_value')
+      minValue = @get('min_value')
+      maxValue = @get('max_value')
+      numCols = @get('num_columns')
+
+      # probably the number of digits will have to be set depending on the property
+      interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+
+      ranges = []
+      from = minValue
+      to = minValue + interval
+      for col in [0..numCols-1]
+        from = parseFloat(from.toFixed(2))
+        to = parseFloat(to.toFixed(2))
+        ranges.push
+          from: from
+          to: to
+
+        from += interval
+        to += interval
 
       return {
-        size: 0,
+        size: 0
         query:
           query_string:
-            "analyze_wildcard": true,
+            "analyze_wildcard": true
             "query": "*"
         aggs:
           x_axis_agg:
-            histogram:
-              field: xaxisProperty,
-              interval: interval,
-              min_doc_count: 1
+            range:
+              field: xaxisProperty
+              ranges: ranges
+              keyed: true
       }
 
     getRequestMinMaxData: ->
