@@ -104,9 +104,9 @@ glados.useNameSpace 'glados.models.Target',
       return {
         size: 0
         query:
-          query_string:
-            "analyze_wildcard": true
-            "query": "*"
+          multi_match:
+            query: @get('target_chembl_id')
+            fields: ["_metadata.related_targets.chembl_ids.*"]
         aggs:
           x_axis_agg:
             range:
@@ -120,9 +120,9 @@ glados.useNameSpace 'glados.models.Target',
       return {
         size: 0,
         query:
-          query_string:
-            analyze_wildcard: true,
-            query: "*"
+          multi_match:
+            query: @get('target_chembl_id')
+            fields: ["_metadata.related_targets.chembl_ids.*"]
         aggs:
           min_agg:
             min:

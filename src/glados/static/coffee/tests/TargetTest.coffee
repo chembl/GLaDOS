@@ -32,11 +32,12 @@ describe "Target", ->
     minMaxTestData = undefined
     bucketsTestData = undefined
     numberOfColumns = 10
+    targetChemblID = 'CHEMBL2111342'
 
     beforeAll (done) ->
 
       associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-        target_chembl_id: 'CHEMBL2111342'
+        target_chembl_id: targetChemblID
 
       currentXAxisProperty = 'molecule_properties.full_mwt'
       associatedCompounds.set('current_xaxis_property', currentXAxisProperty)
@@ -58,6 +59,10 @@ describe "Target", ->
       requestData = associatedCompounds.getRequestMinMaxData()
       expect(requestData.aggs.max_agg.max.field).toBe(currentXAxisProperty)
       expect(requestData.aggs.min_agg.min.field).toBe(currentXAxisProperty)
+
+      chemblIDis = requestData.query.multi_match.query
+      chemblIDMustBe = associatedCompounds.get('target_chembl_id')
+      expect(chemblIDis).toBe(chemblIDMustBe)
 
     it 'Parses the min and max data', ->
       parsedObj = associatedCompounds.parseMinMax(minMaxTestData)
@@ -82,6 +87,10 @@ describe "Target", ->
       expect(firstRangeFrom).toBe(minValue)
       lastRangeTo = ranges[ranges.length-1].to
       expect(lastRangeTo >= maxValue).toBe(true)
+
+      chemblIDis = requestData.query.multi_match.query
+      chemblIDMustBe = associatedCompounds.get('target_chembl_id')
+      expect(chemblIDis).toBe(chemblIDMustBe)
 
     it 'parses the bucket data', ->
 
