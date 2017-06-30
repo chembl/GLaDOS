@@ -69,8 +69,11 @@ glados.useNameSpace 'glados.models.Target',
 
     parse: (data) ->
 
-      console.log 'data: ', data
-      buckets = data.aggregations.x_axis_agg.buckets
+      buckets = []
+      for key, bucket of data.aggregations.x_axis_agg.buckets
+        bucket.key = key
+        buckets.push bucket
+
       return {
         'buckets': buckets
       }

@@ -48,6 +48,7 @@ describe "Target", ->
 
     beforeAll (done) ->
 
+      console.log 'URL: ', glados.Settings.STATIC_URL + 'testData/AssociatedCompoundsBucketsSampleResponse.json'
       $.get (glados.Settings.STATIC_URL + 'testData/AssociatedCompoundsBucketsSampleResponse.json'), (testData) ->
         bucketsTestData = testData
         done()
@@ -85,10 +86,10 @@ describe "Target", ->
     it 'parses the bucket data', ->
 
       parsedObj = associatedCompounds.parse(bucketsTestData)
-      console.log 'parsedObj: ', parsedObj
-#      bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
-#      bucketsGot = parsedObj.buckets
-#
-#      for i in [0..bucketsShouldBe.length-1]
-#        expect(bucketsGot[i].key).toBe(bucketsShouldBe[i].key)
-#        expect(bucketsGot[i].doc_count).toBe(bucketsShouldBe[i].doc_count)
+      bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
+      bucketsGot = parsedObj.buckets
+
+      for key, bucket of bucketsGot
+        keyGot = bucket.key
+        bucketShouldBe = bucketsShouldBe[keyGot]
+        expect(bucketShouldBe?).toBe(true)
