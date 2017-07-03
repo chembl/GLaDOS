@@ -102,7 +102,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_MIN_HEIGHT = 2
       RIGHT_PADDING = if @config.big_size then 20 else 0
 
-      X_AXIS_HEIGHT = if @config.big_size then 60 else 0
+      X_AXIS_HEIGHT = if @config.big_size then 100 else 0
       Y_AXIS_WIDTH = if @config.big_size then 60 else 0
 
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
@@ -262,6 +262,15 @@ glados.useNameSpace 'glados.views.Visualisation',
           maxWidth = currentWidth
 
       if maxWidth > xAxisRangeBand
+        # make texts smaller
+        xAxisTexts.classed('rotated', true)
+        # and calculate again the max width
+        maxWidth = 0
+        xAxisTexts.each (d) ->
+          currentWidth = @getBBox().width
+          if currentWidth > maxWidth
+            maxWidth = currentWidth
+        
         #https://drive.google.com/file/d/0BzECtlZ_ur1Ca0Q0TnJKOFNEMnM/view?usp=sharing
         # remember that text anchor is in the middle
         alpha = Math.acos(xAxisRangeBand/maxWidth)
@@ -273,5 +282,8 @@ glados.useNameSpace 'glados.views.Visualisation',
         ticksContainerGs.append('line')
           .classed('axis-helper-line', true)
           .attr('y2', h)
+
+
+
 
 
