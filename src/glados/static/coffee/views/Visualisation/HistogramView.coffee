@@ -148,8 +148,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-------------------------------------------------------------------------------------------------------------------
       bucketNames = (b.key for b in buckets)
       bucketSizes = (b.doc_count for b in buckets)
-      console.log 'bucketSizes: ', bucketSizes
-      console.log 'max:', _.max(bucketSizes)
 
       if @config.fixed_bar_width
         barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
@@ -302,17 +300,18 @@ glados.useNameSpace 'glados.views.Visualisation',
           if currentWidth > maxWidth
             maxWidth = currentWidth
 
-        #https://drive.google.com/file/d/0BzECtlZ_ur1Ca0Q0TnJKOFNEMnM/view?usp=sharing
-        # remember that text anchor is in the middle
-        alpha = Math.acos(xAxisRangeBand/maxWidth)
-        h = (xAxisRangeBand/2) * Math.tan(alpha)
-        alphaDeg = glados.Utils.getDegreesFromRadians(alpha)
-        xAxisTexts.attr('transform', 'translate(0,'+ h + ')rotate(' + alphaDeg + ')')
+        if maxWidth > xAxisRangeBand
+          #https://drive.google.com/file/d/0BzECtlZ_ur1Ca0Q0TnJKOFNEMnM/view?usp=sharing
+          # remember that text anchor is in the middle
+          alpha = Math.acos(xAxisRangeBand/maxWidth)
+          h = (xAxisRangeBand/2) * Math.tan(alpha)
+          alphaDeg = glados.Utils.getDegreesFromRadians(alpha)
+          xAxisTexts.attr('transform', 'translate(0,'+ h + ')rotate(' + alphaDeg + ')')
 
-        ticksContainerGs = xAxisContainerG.selectAll('.tick')
-        ticksContainerGs.append('line')
-          .classed('axis-helper-line', true)
-          .attr('y2', h)
+          ticksContainerGs = xAxisContainerG.selectAll('.tick')
+          ticksContainerGs.append('line')
+            .classed('axis-helper-line', true)
+            .attr('y2', h)
 
 
 

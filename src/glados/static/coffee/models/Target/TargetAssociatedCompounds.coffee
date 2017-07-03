@@ -89,11 +89,11 @@ glados.useNameSpace 'glados.models.Target',
       customIntervalSize = @get('custom_interval_size')
       if customIntervalSize?
         interval = parseFloat(customIntervalSize)
+        numCols = Math.ceil(Math.abs(maxValue - minValue) / interval)
       else
         # probably the number of digits will have to be set depending on the property
         interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
 
-      console.log 'INTERVAL IS: ', customIntervalSize
       @set('bin_size', interval, {silent:true})
 
       ranges = []
