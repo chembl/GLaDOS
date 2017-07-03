@@ -36,7 +36,7 @@ class TargetReportCardApp
     console.log 'query string: ', customQueryString
 
     associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-      target_chembl_id: 'CHEMBL2111342'
+      target_chembl_id: GlobalVariables.CHEMBL_ID
 
     new TargetNameAndClassificationView
       model: target
@@ -170,8 +170,10 @@ class TargetReportCardApp
 
   @initAssociatedCompounds = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
     associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-        target_chembl_id: 'CHEMBL2111342'
+        target_chembl_id: GlobalVariables.CHEMBL_ID
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     new glados.views.Target.AssociatedCompoundsView
