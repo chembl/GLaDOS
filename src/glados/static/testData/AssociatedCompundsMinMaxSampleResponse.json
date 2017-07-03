@@ -1,0 +1,22 @@
+{
+    "took": 84,
+    "timed_out": false,
+    "_shards": {
+        "total": 3,
+        "successful": 3,
+        "failed": 0
+    },
+    "hits": {
+        "total": 1735442,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "max_agg": {
+            "value": 13020.3
+        },
+        "min_agg": {
+            "value": 4
+        }
+    }
+}

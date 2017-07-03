@@ -15,7 +15,7 @@ TargetAssociatedBioactivitiesView = CardView.extend
   render: ->
 
     @showCardContent()
-    buckets = @model.get('pie-data')
+    buckets = @model.get('buckets')
 
     if buckets?
       if buckets.length > 0

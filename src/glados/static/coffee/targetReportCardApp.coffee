@@ -35,6 +35,9 @@ class TargetReportCardApp
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
     console.log 'query string: ', customQueryString
 
+    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -65,12 +68,17 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
+    new glados.views.Target.AssociatedCompoundsView
+      el: $('#TAssociatedCompoundProperties')
+      model: associatedCompounds
+
     target.fetch()
     appDrugsClinCandsList.fetch()
     targetRelations.fetch({reset: true})
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
+    associatedCompounds.fetch()
 
   @initTargetNameAndClassification = ->
 
@@ -150,6 +158,7 @@ class TargetReportCardApp
 
   @initLigandEfficiencies = ->
 
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
       ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
@@ -157,6 +166,21 @@ class TargetReportCardApp
     new glados.views.Target.LigandEfficienciesView
       collection: ligandEfficiencies
       el: $('#TLigandEfficienciesCard')
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+
+  @initAssociatedCompounds = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+
+    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
+        target_chembl_id: GlobalVariables.CHEMBL_ID
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    new glados.views.Target.AssociatedCompoundsView
+      el: $('#TAssociatedCompoundProperties')
+      model: associatedCompounds
+
+    associatedCompounds.fetch()
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
@@ -180,7 +204,7 @@ class TargetReportCardApp
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
 
-    new MiniHistogramView
+    new glados.views.Visualisation.HistogramView
       model: bioactivities
       el: $containerElem
       config: config

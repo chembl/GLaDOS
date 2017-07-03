@@ -26,7 +26,7 @@ TargetAssociatedAssays = Backbone.Model.extend
 
     title = 'ChEMBL Assays for Target ' + @get('target_chembl_id')
     return  {
-      'pie-data': buckets
+      'buckets': buckets
       'title': title
       'buckets_index': _.indexBy(buckets, 'key')
     }
