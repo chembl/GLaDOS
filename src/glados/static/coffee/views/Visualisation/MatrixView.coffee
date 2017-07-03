@@ -333,17 +333,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     VISUALISATION_WIDTH = width
     VISUALISATION_HEIGHT = $(window).height() * 0.6
 
-    MIN_COLUMNS_SEEN = 20
+    MIN_COLUMNS_SEEN = 10
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
     # initial zoom
     MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
     MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
     #the initial zoom scale is a scale that makes all the matrix to be seen at once
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
-    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
+    INITIAL_ZOOM = 1
     INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
-    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
-    MIN_ZOOM = INITIAL_ZOOM
+    MIN_ZOOM = 0.5
 
     mainSVGContainer = mainContainer
       .append('svg')
