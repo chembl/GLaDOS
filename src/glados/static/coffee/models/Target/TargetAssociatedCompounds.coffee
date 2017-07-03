@@ -86,6 +86,7 @@ glados.useNameSpace 'glados.models.Target',
 
       # probably the number of digits will have to be set depending on the property
       interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+      @set('bin_size', interval, {silent:true})
 
       ranges = []
       from = minValue
@@ -132,7 +133,21 @@ glados.useNameSpace 'glados.models.Target',
       }
 
     parseMinMax: (data) ->
+      maxValue = data.aggregations.max_agg.value
+      minValue = data.aggregations.min_agg.value
+
+      minColumns = @get('x_axis_min_columns')
+      maxColumns = @get('x_axis_max_columns')
+
+      maxBinSize = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / minColumns).toFixed(2))
+      minBinSize = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / maxColumns).toFixed(2))
+
+      console.log 'minBinSize: ', minBinSize
+      console.log 'maxBinSize: ', maxBinSize
+
       return {
-        max_value: data.aggregations.max_agg.value
-        min_value: data.aggregations.min_agg.value
+        max_value: maxValue
+        min_value: minValue
+        max_bin_size: maxBinSize
+        min_bin_size: minBinSize
       }

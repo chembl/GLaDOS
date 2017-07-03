@@ -65,10 +65,19 @@ describe "Target", ->
       expect(chemblIDis).toBe(chemblIDMustBe)
 
     it 'Parses the min and max data', ->
-      parsedObj = associatedCompounds.parseMinMax(minMaxTestData)
-      expect(parsedObj.max_value).toBe(13020.3)
-      expect(parsedObj.min_value).toBe(4)
 
+      minValue = 4
+      maxValue = 13020.3
+      minColumns = 1
+      maxColumns = 20
+      associatedCompounds.set('x_axis_min_columns', minColumns)
+      associatedCompounds.set('x_axis_max_columns', maxColumns)
+
+      parsedObj = associatedCompounds.parseMinMax(minMaxTestData)
+      expect(parsedObj.max_value).toBe(maxValue)
+      expect(parsedObj.min_value).toBe(minValue)
+      expect(parsedObj.max_bin_size).toBe(parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / minColumns).toFixed(2)))
+      expect(parsedObj.min_bin_size).toBe(parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / maxColumns).toFixed(2)))
 
     it 'Generates the request data', ->
 

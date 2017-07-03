@@ -41,6 +41,14 @@ glados.useNameSpace 'glados.views.Visualisation',
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
 
+    paintBinSizeRange: ->
+
+      $xAxisBinSizeRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-binSize')
+      glados.Utils.fillContentForElement $xAxisBinSizeRange,
+        current_value: @model.get('bin_size')
+        min_value: @model.get('min_bin_size')
+        max_value: @model.get('max_bin_size')
+
     handleXAxisPropertyChange: (event) ->
 
       newProperty = $(event.currentTarget).val()
@@ -74,7 +82,10 @@ glados.useNameSpace 'glados.views.Visualisation',
       return buckets
 
     render: ->
+
       @$vis_elem.empty()
+      @paintBinSizeRange()
+
       if @config.range_categories
         buckets = @model.get('buckets')
       else

@@ -28,6 +28,8 @@ glados.useNameSpace 'glados.views.Target',
 
       @model.set('current_xaxis_property', config.properties[config.initial_property_x].propName)
       @model.set('num_columns', config.x_axis_initial_num_columns)
+      @model.set('x_axis_min_columns', config.x_axis_min_columns)
+      @model.set('x_axis_max_columns', config.x_axis_max_columns)
 
       @histogramView = new glados.views.Visualisation.HistogramView
         el: $(@el).find('.BCK-MainHistogramContainer')
