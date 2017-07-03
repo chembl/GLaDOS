@@ -75,7 +75,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
       @$vis_elem.empty()
-      if @config.numerical_mode
+      if @config.range_categories
         buckets = @model.get('buckets')
       else
         buckets = @getBucketsForView()
@@ -174,7 +174,14 @@ glados.useNameSpace 'glados.views.Visualisation',
       # add qtips
       #-----------------------------------------------------------------------------------------------------------------
       barGroups.each (d) ->
-        text = '<b>' + d.key + '</b>' + ":" + d.doc_count
+
+        if thisView.config.range_categories
+          rangeText = '[' + d.key.replace('-', ',') + ')'
+        else
+          rangeText = d.key
+
+        text = '<b>' + rangeText + '</b>' + ":" + d.doc_count
+
         $(@).qtip
           content:
             text: text
@@ -270,7 +277,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           currentWidth = @getBBox().width
           if currentWidth > maxWidth
             maxWidth = currentWidth
-        
+
         #https://drive.google.com/file/d/0BzECtlZ_ur1Ca0Q0TnJKOFNEMnM/view?usp=sharing
         # remember that text anchor is in the middle
         alpha = Math.acos(xAxisRangeBand/maxWidth)
