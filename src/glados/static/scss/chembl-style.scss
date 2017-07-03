@@ -2386,13 +2386,24 @@ span.badge-primary-color-no-float {
 * Mini histograms
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.mini-histogram{
+.histogram{
   .mainSVGContainer{
+    background-color: white;
   }
+
+  &.mini{
+    .mainSVGContainer {
+      background-color: transparent;
+    }
+    .title{
+      text-decoration: underline;
+      font-size: 80%;
+    }
+  }
+
   .title{
-    text-decoration: underline;
     cursor: pointer;
-    font-size: 80%;
+    font-size: 110%;
   }
   .title:hover{
     fill: color('teal', 'accent-4');
@@ -2418,4 +2429,39 @@ span.badge-primary-color-no-float {
       opacity: 0.2;
     }
   }
+
+  .x-axis, .y-axis{
+    .axis-line{
+      stroke-width: 1;
+      stroke: black;
+    }
+    .property-label{
+      font-weight: bold;
+      font-size: 80%;
+    }
+    .tick{
+      font-size: 80%;
+      .axis-helper-line{
+        stroke-width: 1;
+        stroke: color('grey', 'lighten-1');
+      }
+      .rotated{
+        font-size: 70%;
+      }
+    }
+    path{
+      display: none;
+    }
+  }
+
+
+  .y-axis {
+    .tick{
+      line{
+        stroke-width: 1;
+        stroke: color('grey', 'lighten-1');
+      }
+    }
+  }
+
 }

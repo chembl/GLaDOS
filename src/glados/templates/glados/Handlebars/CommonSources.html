@@ -518,6 +518,20 @@
   {{/each}}
 </script>
 
+<script id="Handlebars-Common-Histogram-numbars" type="text/x-handlebars-template">
+  <p><small>Number of bins: <b>{{current_value}}</b></small></p></p>
+  <p class="range-field">
+    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+  </p>
+</script>
+
+<script id="Handlebars-Common-Histogram-binsize" type="text/x-handlebars-template">
+  <p><small>Bin size: <b>{{current_value}}</b></small></p></p>
+  <p class="range-field">
+    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+  </p>
+</script>
+
 <script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
   because in any of the shown axes their value is null: <br>
@@ -675,7 +689,7 @@
 
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">
   <div class="BCK-VisualisationMessages"></div>
-  <div class="BCK-mini-histogram-container mini-histogram"></div>
+  <div class="BCK-HistogramContainer histogram mini"></div>
 </script>
 
 <script id="Handlebars-Common-Bioactivity-Columns-Selector-Container" type="text/x-handlebars-template">

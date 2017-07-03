@@ -9,7 +9,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
-    buckets =  @model.get('pie-data')
+    buckets =  @model.get('buckets')
     if buckets.length == 0
       $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
       $visualisationMessages.html('There is no data to show. ' + @model.get('title'))
