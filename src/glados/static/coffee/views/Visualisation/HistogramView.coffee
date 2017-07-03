@@ -96,8 +96,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       console.log 'RENDER HISTOGRAM!'
       @$vis_elem.empty()
-      @paintBinSizeRange()
-      @paintNumBarsRange(@model.get('num_columns'))
 
       if @config.range_categories
         buckets = @model.get('buckets')
@@ -106,10 +104,14 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       if buckets.length == 0
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
-        $visualisationMessages.html('No data.')
+        noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
+        $visualisationMessages.html(noDataMsg)
         return
 
-      console.log 'RENDER VIEW!', buckets
+      if @config.big_size
+        @paintBinSizeRange()
+        @paintNumBarsRange(@model.get('num_columns'))
+
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
 

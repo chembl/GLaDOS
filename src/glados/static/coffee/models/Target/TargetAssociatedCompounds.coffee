@@ -4,6 +4,10 @@ glados.useNameSpace 'glados.models.Target',
     INITIAL_STATE: 'INITIAL_STATE'
     LOADING_MIN_MAX: 'LOADING_MIN_MAX'
     LOADING_BUCKETS: 'LOADING_BUCKETS'
+    NO_DATA_FOUND_STATE: 'NO_DATA_FOUND'
+
+    defaults:
+     buckets: []
 
     initialize: ->
 
@@ -15,7 +19,7 @@ glados.useNameSpace 'glados.models.Target',
       $progressElem = @get('progress_elem')
       state = @get('state')
 
-      if state == @INITIAL_STATE
+      if state == @INITIAL_STATE or state == @NO_DATA_FOUND_STATE
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
         @set('state', @LOADING_MIN_MAX, {silent:true})
@@ -62,6 +66,9 @@ glados.useNameSpace 'glados.models.Target',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parseMinMax(data), {silent:true})
+        if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
+          $progressElem.html ''
+          return
         thisModel.set('state', thisModel.LOADING_BUCKETS, {silent:true})
         thisModel.fetch()
       ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
@@ -141,6 +148,13 @@ glados.useNameSpace 'glados.models.Target',
       }
 
     parseMinMax: (data) ->
+
+      numHits = data.hits.total
+      # here I now that there is no data!
+      if numHits == 0
+        @set('state', @NO_DATA_FOUND_STATE)
+        return
+
       maxValue = data.aggregations.max_agg.value
       minValue = data.aggregations.min_agg.value
 
