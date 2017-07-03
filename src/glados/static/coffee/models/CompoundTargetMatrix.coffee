@@ -164,7 +164,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
   getRequestData: ->
 
-    # just limit for now the ammount of data received
+    # just limit for now the amount of data received
     if @get('molecule_chembl_ids').length < 1000
       idsList = @get('molecule_chembl_ids')
     else
