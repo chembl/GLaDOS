@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Visualisation',
     events:
       'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
       'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
+      'change .BCK-ESResultsPlot-selectXAxis-binSize input': 'handleBinSizeChange'
 
     showPreloader: ->
       if @config.big_size
@@ -41,11 +42,12 @@ glados.useNameSpace 'glados.views.Visualisation',
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
 
-    paintBinSizeRange: ->
+    paintBinSizeRange: (currentBinSize=@model.get('bin_size')) ->
 
+      console.log 'painting range with: ', currentBinSize
       $xAxisBinSizeRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-binSize')
       glados.Utils.fillContentForElement $xAxisBinSizeRange,
-        current_value: @model.get('bin_size')
+        current_value: currentBinSize
         min_value: @model.get('min_bin_size')
         max_value: @model.get('max_bin_size')
 
@@ -66,6 +68,15 @@ glados.useNameSpace 'glados.views.Visualisation',
       @model.set('num_columns', newColsNum)
       @paintNumBarsRange(newColsNum)
       @model.fetch()
+
+    handleBinSizeChange: (event) ->
+
+      newBinSize = $(event.currentTarget).val()
+      @paintBinSizeRange(newBinSize)
+      console.log 'new bin size: ', newBinSize
+      @model.set('custom_interval_size', newBinSize)
+      @model.fetch()
+
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -83,8 +94,10 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
+      console.log 'RENDER HISTOGRAM!'
       @$vis_elem.empty()
       @paintBinSizeRange()
+      @paintNumBarsRange(@model.get('num_columns'))
 
       if @config.range_categories
         buckets = @model.get('buckets')

@@ -41,6 +41,7 @@ glados.useNameSpace 'glados.models.Target',
 
         thisModel.set(thisModel.parse(data))
         thisModel.set('state', thisModel.INITIAL_STATE, {silent:true})
+        thisModel.set('custom_interval_size', undefined , {silent:true})
 
       ).fail( glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
@@ -75,6 +76,7 @@ glados.useNameSpace 'glados.models.Target',
 
       return {
         'buckets': buckets
+        'num_columns': buckets.length
       }
 
     getRequestData: ->
@@ -84,8 +86,14 @@ glados.useNameSpace 'glados.models.Target',
       maxValue = @get('max_value')
       numCols = @get('num_columns')
 
-      # probably the number of digits will have to be set depending on the property
-      interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+      customIntervalSize = @get('custom_interval_size')
+      if customIntervalSize?
+        interval = parseFloat(customIntervalSize)
+      else
+        # probably the number of digits will have to be set depending on the property
+        interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+
+      console.log 'INTERVAL IS: ', customIntervalSize
       @set('bin_size', interval, {silent:true})
 
       ranges = []
@@ -141,9 +149,6 @@ glados.useNameSpace 'glados.models.Target',
 
       maxBinSize = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / minColumns).toFixed(2))
       minBinSize = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / maxColumns).toFixed(2))
-
-      console.log 'minBinSize: ', minBinSize
-      console.log 'maxBinSize: ', maxBinSize
 
       return {
         max_value: maxValue

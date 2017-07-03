@@ -111,3 +111,5 @@ describe "Target", ->
         keyGot = bucket.key
         bucketShouldBe = bucketsShouldBe[keyGot]
         expect(bucketShouldBe?).toBe(true)
+
+      expect(parsedObj.num_columns).toBe(Object.keys(bucketsShouldBe).length)
