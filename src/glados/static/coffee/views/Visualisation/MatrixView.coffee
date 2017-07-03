@@ -827,12 +827,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('diagonal-line', true)
 
     corner1G.append('text')
-      .text('Targets')
+      .text(NUM_COLUMNS + ' Targets')
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
 
     corner1G.append('text')
-      .text('Compounds')
+      .text(NUM_ROWS + ' Compounds')
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
