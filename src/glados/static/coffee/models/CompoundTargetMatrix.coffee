@@ -60,14 +60,14 @@ CompoundTargetMatrix = Backbone.Model.extend
       for targetBucket in targBuckets
 
         # what do I know now? there is a target, it could be new or repeated
-        targLabel = targetBucket.key
-        targPos = targetsToPosition[targLabel]
+        targID = targetBucket.key
+        targPos = targetsToPosition[targID]
 
         # it is new!
         if not targPos?
 
           newTargetObj =
-            label: targLabel
+            id: targID
             target_pref_name: 'TARG_NAME ' + latestTargPos
             target_chembl_id: targetBucket.key
             originalIndex: latestTargPos
@@ -78,7 +78,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
 
           targetsList.push newTargetObj
-          targetsToPosition[targLabel] = latestTargPos
+          targetsToPosition[targID] = latestTargPos
           latestTargPos++
 
         # it is not new, I just need to update the row properties
@@ -92,14 +92,14 @@ CompoundTargetMatrix = Backbone.Model.extend
         # now I know that there is a new intersection!
         activities =
           row_id: compID
-          col_id: targLabel
+          col_id: targID
           activity_count: targetBucket.doc_count
           pchembl_value_avg: targetBucket.pchembl_value_avg.value
 
 
         # here the compound and target must exist in the lists, recalculate the positions
         compPos = compoundsToPosition[compID]
-        targPos = targetsToPosition[targLabel]
+        targPos = targetsToPosition[targID]
 
         # create object for storing columns if not yet there
         if not links[compPos]?
@@ -112,7 +112,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       rows: compoundsList
       links: links
       rows_index: _.indexBy(compoundsList, 'id')
-      columns_index: _.indexBy(targetsList, 'label')
+      columns_index: _.indexBy(targetsList, 'id')
 
     console.log 'result: ', result
 
@@ -147,8 +147,8 @@ CompoundTargetMatrix = Backbone.Model.extend
     newOrders = newOrders.reverse() if reverse
     matrix.columns = []
     for col, index in newOrders
-      matrix.columns_index[col.label].currentPosition = index
-      matrix.columns.push(matrix.columns_index[col.label])
+      matrix.columns_index[col.id].currentPosition = index
+      matrix.columns.push(matrix.columns_index[col.id])
 
   #returns a list with all the links
   getDataList: ->

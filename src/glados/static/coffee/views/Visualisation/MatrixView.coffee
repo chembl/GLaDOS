@@ -633,7 +633,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaders.append('text')
       .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .text((d) -> d.label)
+      .text((d) -> d.id)
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -1083,10 +1083,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       console.log 'generating tooltip for: ', d
       $clickedElem = $(@)
-      if entityName == 'Target'
-        chemblID = d.label.replace('Targ: ', '')
-      else
-        chemblID = d.id
+      chemblID = d.id
       if $clickedElem.attr('data-qtip-configured')
         return
 
