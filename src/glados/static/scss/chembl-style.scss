@@ -2282,20 +2282,6 @@ span.badge-primary-color-no-float {
     opacity: 0.6
   }
 
-  .matrix-qtip {
-
-    .qtip-content {
-      padding: 0;
-      font-size: 120%;
-    }
-    .card {
-      margin: 0;
-      .card-content{
-        padding: 12px;
-      }
-    }
-  }
-
   .matrix-vis-options {
     position: absolute;
     right: 10px;
@@ -2311,6 +2297,20 @@ span.badge-primary-color-no-float {
     font-weight: bold;
   }
 
+}
+
+.matrix-qtip {
+
+  .qtip-content {
+    padding: 0;
+    font-size: 120%;
+  }
+  .card {
+    margin: 0;
+    .card-content{
+      padding: 12px;
+    }
+  }
 }
 
 

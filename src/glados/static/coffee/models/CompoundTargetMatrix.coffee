@@ -199,9 +199,5 @@ CompoundTargetMatrix = Backbone.Model.extend
                 pchembl_value_max:
                   max:
                     field: "pchembl_value"
-                assay_type_agg:
-                  terms:
-                    field: "assay_type"
-                    size: 100
 
     }
