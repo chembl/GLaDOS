@@ -3,6 +3,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   REVERSE_POSITION_TOOLTIP_TH: 0.8
   COL_HEADER_TEXT_BASE_ID: 'cols-header-text-'
+#  COL_HEADER_MAX_CHARS:
 
   initialize: ->
 
@@ -301,7 +302,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     SIDE_SIZE = 20
     ROWS_HEADER_WIDTH = 100
     ROWS_FOOTER_WIDTH = 50
-    COLS_HEADER_HEIGHT = 120
+    COLS_HEADER_HEIGHT = 150
     COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = SIDE_SIZE * NUM_ROWS
@@ -350,7 +351,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     VISUALISATION_HEIGHT = $(window).height() * 0.6
 
     MIN_COLUMNS_SEEN = 10
-    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
+    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
     # initial zoom
     MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
     MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
@@ -358,7 +359,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
     INITIAL_ZOOM = 1
     INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
-    MIN_ZOOM = 0.5
+    MIN_ZOOM = 0.2
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -1141,5 +1142,26 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   fillColHeaderText: (d3TextElem) ->
     thisView = @
     d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
+
+    d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
+    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem)
+
+  # because normally container and text elem scale at the same rate on zoom, this can be done only one.
+  # take this into account if there is a problem later.
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem) ->
+
+    # remember the rotation!
+    containerLimit = d3ContainerElem.node().getBBox().height
+    textWidth = d3TextElem.node().getBBox().width
+
+    if 0 < containerLimit < textWidth
+      text = d3TextElem.text()
+      numChars = text.length
+      charLength = textWidth / numChars
+      # reduce by num numchars because font characters are not all of the same width
+      maxChars = Math.ceil(containerLimit / charLength) - 2
+      newText = text[0..(maxChars-4)] + '...'
+      d3TextElem.text(newText)
+
 
 
