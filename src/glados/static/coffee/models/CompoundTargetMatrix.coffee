@@ -38,11 +38,11 @@ CompoundTargetMatrix = Backbone.Model.extend
     for moleculeBucket in molsBuckets
 
       # what do I know now? I am seeing a new compound
-      compLabel = moleculeBucket.key
+      compID = moleculeBucket.key
 
       # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
       newCompoundObj =
-        label: compLabel
+        id: compID
         molecule_pref_name: 'MOL_NAME ' + latestCompPos
         molecule_chembl_id: moleculeBucket.key
         originalIndex: latestCompPos
@@ -52,7 +52,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
       compoundsList.push newCompoundObj
-      compoundsToPosition[compLabel] = latestCompPos
+      compoundsToPosition[compID] = latestCompPos
       latestCompPos++
 
       # now check the targets for this molecule
@@ -91,14 +91,14 @@ CompoundTargetMatrix = Backbone.Model.extend
 
         # now I know that there is a new intersection!
         activities =
-          row_id: compLabel
+          row_id: compID
           col_id: targLabel
           activity_count: targetBucket.doc_count
           pchembl_value_avg: targetBucket.pchembl_value_avg.value
 
 
         # here the compound and target must exist in the lists, recalculate the positions
-        compPos = compoundsToPosition[compLabel]
+        compPos = compoundsToPosition[compID]
         targPos = targetsToPosition[targLabel]
 
         # create object for storing columns if not yet there
@@ -111,7 +111,7 @@ CompoundTargetMatrix = Backbone.Model.extend
       columns: targetsList
       rows: compoundsList
       links: links
-      rows_index: _.indexBy(compoundsList, 'label')
+      rows_index: _.indexBy(compoundsList, 'id')
       columns_index: _.indexBy(targetsList, 'label')
 
     console.log 'result: ', result
@@ -129,12 +129,6 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     return values
 
-  getLinkForColHeader: (itemID) ->
-    return Target.get_report_card_url itemID.replace('Targ: ', '')
-
-  getLinkForRowHeader: (itemID) ->
-    return Compound.get_report_card_url(itemID)
-
   sortMatrixRowsBy: (propName, reverse=false) ->
 
     matrix = @get('matrix')
@@ -143,8 +137,8 @@ CompoundTargetMatrix = Backbone.Model.extend
     #avoid issues with inconsistency of the objects pointed
     matrix.rows = []
     for row, index in newOrders
-      matrix.rows_index[row.label].currentPosition = index
-      matrix.rows.push(matrix.rows_index[row.label])
+      matrix.rows_index[row.id].currentPosition = index
+      matrix.rows.push(matrix.rows_index[row.id])
 
   sortMatrixColsBy: (propName, reverse=false) ->
 
