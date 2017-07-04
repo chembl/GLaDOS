@@ -1,5 +1,8 @@
 CompoundTargetMatrix = Backbone.Model.extend
 
+  LOADING_DATA_LABEL: 'Loading...'
+  ERROR_LOADING_DATA_LABEL: '(Error Loading data)'
+  TARGET_PREF_NAMES_UPDATED_EVT: 'TARGET_PREF_NAMES_UPDATED_EVT'
   initialize: ->
 
 
@@ -16,7 +19,15 @@ CompoundTargetMatrix = Backbone.Model.extend
       reset: true
 
     thisModel = @
-    $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
+    $.ajax(fetchESOptions).done((data) ->
+      thisModel.set(thisModel.parse data)
+      allTargets = thisModel.get('matrix').columns
+      for target in allTargets
+        chemblID = target.target_chembl_id
+        thisModel.loadTargetsPrefName(chemblID)
+    )
+
+
 
   parse: (data) ->
 
@@ -68,7 +79,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
           newTargetObj =
             id: targID
-            pref_name: 'TARG_NAME ' + latestTargPos
+            pref_name: @LOADING_DATA_LABEL
             target_chembl_id: targetBucket.key
             originalIndex: latestTargPos
             currentPosition: latestTargPos
@@ -116,7 +127,22 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     console.log 'result: ', result
 
+
+
     return {"matrix": result}
+
+  loadTargetsPrefName: (targetChemblID) ->
+
+    targetUrl = glados.Settings.WS_BASE_URL + 'target/' + targetChemblID + '.json'
+    thisModel = @
+    $.getJSON(targetUrl).done( (data) ->
+      targetPrefName = data.pref_name
+      targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+      targetToUpdate.pref_name = targetPrefName
+    ).fail( ->
+      targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+      targetToUpdate.pref_name = thisModel.ERROR_LOADING_DATA_LABEL
+    ).always(-> thisModel.trigger(CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, targetChemblID))
 
   getValuesListForProperty: (propName) ->
 

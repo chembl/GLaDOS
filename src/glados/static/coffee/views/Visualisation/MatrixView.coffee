@@ -39,11 +39,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     @model.on 'change', @render, @
+    @model.on CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
 
+  handleTargetPrefNameChange: (targetChemblID) ->
+    console.log 'TARGET PREF NAME CHANGED!, ', targetChemblID
   renderWhenError: ->
 
     @clearVisualisation()
@@ -552,7 +555,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
     rowHeaders.append('text')
       .classed('headers-text', true)
-      .text((d) -> d[thisView.currentRowLabelProperty.propName])
+      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowLabelProperty.propName))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -639,7 +642,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaders.append('text')
       .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .text((d) -> d[thisView.currentColLabelProperty.propName])
+      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
