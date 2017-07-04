@@ -7,6 +7,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = {
       properties:
+        molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
+            'CHEMBL_ID')
         target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
             'CHEMBL_ID')
         target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
@@ -28,6 +30,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       initial_col_sorting_reverse: true
       col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
       initial_col_label_property: 'target_pref_name'
+      initial_row_label_property: 'molecule_chembl_id'
       propertyToType:
         activity_count: "number"
         pchembl_value_avg: "number"
@@ -271,6 +274,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentColSortingPropertyReverse = @config.initial_row_sorting_reverse
     @currentPropertyColour = @config.properties[@config.initial_colouring]
     @currentColLabelProperty = @config.properties[@config.initial_col_label_property]
+    @currentRowLabelProperty = @config.properties[@config.initial_row_label_property]
 
     # --------------------------------------
     # Sort by default value
@@ -548,7 +552,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
     rowHeaders.append('text')
       .classed('headers-text', true)
-      .text((d) -> d.id)
+      .text((d) -> d[thisView.currentRowLabelProperty.propName])
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
