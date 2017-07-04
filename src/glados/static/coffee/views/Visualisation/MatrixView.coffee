@@ -2,6 +2,7 @@
 MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   REVERSE_POSITION_TOOLTIP_TH: 0.8
+  COL_HEADER_TEXT_BASE_ID: 'cols-header-text-'
 
   initialize: ->
 
@@ -46,7 +47,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     updateViewProxy = @setUpResponsiveRender()
 
   handleTargetPrefNameChange: (targetChemblID) ->
-    console.log 'TARGET PREF NAME CHANGED!, ', targetChemblID
+    textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+    @fillColHeaderText(textElem)
+
   renderWhenError: ->
 
     @clearVisualisation()
@@ -642,11 +645,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaders.append('text')
       .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
+      .each((d)-> thisView.fillColHeaderText(d3.select(@)))
+      .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -1090,7 +1094,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     return (d) ->
 
-      console.log 'generating tooltip for: ', d
       $clickedElem = $(@)
       chemblID = d.id
       if $clickedElem.attr('data-qtip-configured')
@@ -1135,5 +1138,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
 
+  fillColHeaderText: (d3TextElem) ->
+    thisView = @
+    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
 
 
