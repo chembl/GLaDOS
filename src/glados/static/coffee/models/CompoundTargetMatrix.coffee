@@ -68,7 +68,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
           newTargetObj =
             id: targID
-            target_pref_name: 'TARG_NAME ' + latestTargPos
+            pref_name: 'TARG_NAME ' + latestTargPos
             target_chembl_id: targetBucket.key
             originalIndex: latestTargPos
             currentPosition: latestTargPos

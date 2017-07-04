@@ -36,6 +36,9 @@ glados.useNameSpace 'glados.models.visualisation',
         CHEMBL_ID:
           propName:'target_chembl_id'
           label: 'CHEMBL_ID'
+        PREF_NAME:
+          propName:'pref_name'
+          label: 'Pref. Name'
     Activity:
       esIndex:'chembl_activity'
       Properties:

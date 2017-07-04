@@ -9,6 +9,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       properties:
         target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
             'CHEMBL_ID')
+        target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+            'PREF_NAME')
         pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
             'PCHEMBL_VALUE_AVG')
         activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
@@ -25,7 +27,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       initial_col_sorting: 'activity_count'
       initial_col_sorting_reverse: true
       col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-      initial_col_label_property: 'target_chembl_id'
+      initial_col_label_property: 'target_pref_name'
       propertyToType:
         activity_count: "number"
         pchembl_value_avg: "number"
@@ -633,7 +635,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaders.append('text')
       .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .text((d) -> d.id)
+      .text((d) -> d[thisView.currentColLabelProperty.propName])
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
