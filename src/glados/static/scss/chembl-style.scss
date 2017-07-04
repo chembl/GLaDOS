@@ -2297,6 +2297,9 @@ span.badge-primary-color-no-float {
     font-weight: bold;
   }
 
+  .headers-text:hover{
+    fill: color("teal", "accent-4");
+  }
 }
 
 .matrix-qtip {

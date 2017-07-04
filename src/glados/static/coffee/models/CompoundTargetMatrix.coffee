@@ -43,6 +43,8 @@ CompoundTargetMatrix = Backbone.Model.extend
       # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
       newCompoundObj =
         label: compLabel
+        molecule_pref_name: 'MOL_NAME ' + latestCompPos
+        molecule_chembl_id: moleculeBucket.key
         originalIndex: latestCompPos
         currentPosition: latestCompPos
         activity_count: moleculeBucket.doc_count
@@ -66,6 +68,8 @@ CompoundTargetMatrix = Backbone.Model.extend
 
           newTargetObj =
             label: targLabel
+            target_pref_name: 'TARG_NAME ' + latestTargPos
+            target_chembl_id: targetBucket.key
             originalIndex: latestTargPos
             currentPosition: latestTargPos
             activity_count: targetBucket.doc_count

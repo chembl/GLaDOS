@@ -7,6 +7,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = {
       properties:
+        target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+            'CHEMBL_ID')
         pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
             'PCHEMBL_VALUE_AVG')
         activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
@@ -23,6 +25,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       initial_col_sorting: 'activity_count'
       initial_col_sorting_reverse: true
       col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      initial_col_label_property: 'target_chembl_id'
       propertyToType:
         activity_count: "number"
         pchembl_value_avg: "number"
@@ -265,6 +268,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
     @currentColSortingPropertyReverse = @config.initial_row_sorting_reverse
     @currentPropertyColour = @config.properties[@config.initial_colouring]
+    @currentColLabelProperty = @config.properties[@config.initial_col_label_property]
 
     # --------------------------------------
     # Sort by default value
@@ -546,8 +550,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
-      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
       .on('click', setUpRowTooltip)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
@@ -636,8 +638,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
-      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
-      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
