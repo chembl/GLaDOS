@@ -346,14 +346,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mainContainer = d3.select(@$vis_elem.get(0))
 
-    VISUALISATION_WIDTH = width
+    @VISUALISATION_WIDTH = width
     VISUALISATION_HEIGHT = $(window).height() * 0.6
 
     MIN_COLUMNS_SEEN = 10
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
     # initial zoom
     MAX_DESIRED_WIDTH = (@SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
-    MAX_ZOOM =  VISUALISATION_WIDTH / (@ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + @ROWS_FOOTER_WIDTH)
+    MAX_ZOOM =  @VISUALISATION_WIDTH / (@ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + @ROWS_FOOTER_WIDTH)
     #the initial zoom scale is a scale that makes all the matrix to be seen at once
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
     INITIAL_ZOOM = 1
@@ -364,7 +364,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainSVGContainer = mainContainer
       .append('svg')
       .attr('class', 'mainSVGContainer')
-      .attr('width', VISUALISATION_WIDTH)
+      .attr('width', @VISUALISATION_WIDTH)
       .attr('height', VISUALISATION_HEIGHT)
       .attr('style', 'background-color: white;')
 
@@ -385,7 +385,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if fixedToLeft
         baseWidth = elem.attr(BASE_WIDTH_ATT)
-        newTransX = VISUALISATION_WIDTH - (baseWidth * zoomScale)
+        newTransX = thisView.VISUALISATION_WIDTH - (baseWidth * zoomScale)
       else
         newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
 
