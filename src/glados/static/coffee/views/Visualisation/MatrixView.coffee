@@ -295,8 +295,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     links = matrix.links
     @NUM_COLUMNS = matrix.columns.length
-    NUM_ROWS = matrix.rows.length
-    TOTAL_NUM_CELLS = @NUM_COLUMNS * NUM_ROWS
+    @NUM_ROWS = matrix.rows.length
 
     # make sure all intersections are squared
     @SIDE_SIZE = 20
@@ -305,7 +304,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @COLS_HEADER_HEIGHT = 150
     @COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
-    RANGE_Y_END = @SIDE_SIZE * NUM_ROWS
+    RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END
     COLS_HEADER_WIDTH = RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
@@ -323,7 +322,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     ZOOM_ACTIVATED = false
 
     getYCoord = d3.scale.ordinal()
-      .domain([0..(NUM_ROWS-1)])
+      .domain([0..(@NUM_ROWS-1)])
       .rangeBands([0, RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
@@ -340,7 +339,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     width = elemWidth
     #since I know the side size and how many rows I have, I can calculate which should be the height of the container
-    height = @SIDE_SIZE * NUM_ROWS
+    height = @SIDE_SIZE * @NUM_ROWS
     # Anyway, I have to limit it so it is not too long.
     if height > width
       height = width
@@ -846,7 +845,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'middle')
 
     corner1G.append('text')
-      .text(NUM_ROWS + ' Compounds')
+      .text(@NUM_ROWS + ' Compounds')
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
