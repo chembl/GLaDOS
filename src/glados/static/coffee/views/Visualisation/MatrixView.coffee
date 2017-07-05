@@ -304,8 +304,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @COLS_HEADER_HEIGHT = 150
     @COLS_FOOTER_HEIGHT = 50
     @RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
-    RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
-    ROWS_HEADER_HEIGHT = RANGE_Y_END
+    @RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
+    ROWS_HEADER_HEIGHT = @RANGE_Y_END
     COLS_HEADER_WIDTH = @RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
@@ -323,7 +323,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getYCoord = d3.scale.ordinal()
       .domain([0..(@NUM_ROWS-1)])
-      .rangeBands([0, RANGE_Y_END])
+      .rangeBands([0, @RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
       .domain([0..(@NUM_COLUMNS-1)])
