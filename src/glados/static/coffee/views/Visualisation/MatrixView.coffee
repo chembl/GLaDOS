@@ -305,8 +305,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @COLS_FOOTER_HEIGHT = 50
     @RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
     @RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
-    ROWS_HEADER_HEIGHT = @RANGE_Y_END
-    COLS_HEADER_WIDTH = @RANGE_X_END
+    @ROWS_HEADER_HEIGHT = @RANGE_Y_END
+    @COLS_HEADER_WIDTH = @RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
@@ -464,20 +464,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
       cellsContainerG.selectAll('.grid-horizontal-rect')
         .attr("x", 0)
         .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
-        .attr("width", COLS_HEADER_WIDTH * zoomScale)
+        .attr("width", thisView.COLS_HEADER_WIDTH * zoomScale)
         .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
 
       cellsContainerG.selectAll('.grid-vertical-line')
         .attr("x1", (d) -> (getXCoord(d.currentPosition) * zoomScale))
         .attr("y1", 0)
         .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
-        .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
       cellsContainerG.positionCols(zoomScale)
@@ -573,7 +573,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsHeaderG.scaleSizes = (zoomScale) ->
 
       rowsHeaderG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.positionRows(zoomScale)
@@ -664,7 +664,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsHeaderG.select('.background-rect')
         .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
-        .attr('width', COLS_HEADER_WIDTH * zoomScale)
+        .attr('width', thisView.COLS_HEADER_WIDTH * zoomScale)
 
       colsHeaderG.positionCols(zoomScale)
 
@@ -731,7 +731,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsFooterG.scaleSizes = (zoomScale) ->
 
       rowsFooterG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.positionRows(zoomScale)
@@ -799,7 +799,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsFooterG.select('.background-rect')
         .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
       colsFooterG.positionCols(zoomScale)
 
