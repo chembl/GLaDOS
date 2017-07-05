@@ -299,13 +299,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     TOTAL_NUM_CELLS = NUM_COLUMNS * NUM_ROWS
 
     # make sure all intersections are squared
-    SIDE_SIZE = 20
+    @SIDE_SIZE = 20
     ROWS_HEADER_WIDTH = 100
     ROWS_FOOTER_WIDTH = 50
     COLS_HEADER_HEIGHT = 150
     COLS_FOOTER_HEIGHT = 50
-    RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
-    RANGE_Y_END = SIDE_SIZE * NUM_ROWS
+    RANGE_X_END = @SIDE_SIZE * NUM_COLUMNS
+    RANGE_Y_END = @SIDE_SIZE * NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END
     COLS_HEADER_WIDTH = RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
@@ -340,7 +340,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     width = elemWidth
     #since I know the side size and how many rows I have, I can calculate which should be the height of the container
-    height = SIDE_SIZE * NUM_ROWS
+    height = @SIDE_SIZE * NUM_ROWS
     # Anyway, I have to limit it so it is not too long.
     if height > width
       height = width
@@ -353,7 +353,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MIN_COLUMNS_SEEN = 10
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
     # initial zoom
-    MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
+    MAX_DESIRED_WIDTH = (@SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
     MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
     #the initial zoom scale is a scale that makes all the matrix to be seen at once
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
