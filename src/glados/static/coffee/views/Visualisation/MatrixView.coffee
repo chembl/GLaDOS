@@ -302,7 +302,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @SIDE_SIZE = 20
     @ROWS_HEADER_WIDTH = 100
     @ROWS_FOOTER_WIDTH = 50
-    COLS_HEADER_HEIGHT = 150
+    @COLS_HEADER_HEIGHT = 150
     COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = @SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = @SIDE_SIZE * NUM_ROWS
@@ -410,7 +410,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     cellsContainerG = mainGContainer.append('g')
       .attr('data-section-name', 'cellsContainerG')
       .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -537,7 +537,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     rowsHeaderG = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
@@ -606,7 +606,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.scaleSizes = (zoomScale) ->
       corner2G.select('rect')
-        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
 
     applyZoomAndTranslation(corner2G)
@@ -621,7 +621,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_Y_ATT, NO)
 
     colsHeaderG.append('rect')
-      .attr('height', COLS_HEADER_HEIGHT)
+      .attr('height', @COLS_HEADER_HEIGHT)
       .attr('width', RANGE_X_END)
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
@@ -659,29 +659,29 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll('.vis-column')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
         ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) +
-        " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+        " " + (thisView.COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
     colsHeaderG.scaleSizes = (zoomScale) ->
 
       colsHeaderG.select('.background-rect')
-        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
         .attr('width', COLS_HEADER_WIDTH * zoomScale)
 
       colsHeaderG.positionCols(zoomScale)
 
       colsHeaderG.selectAll('.headers-background-rect')
-        .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale) )
         .attr('width', (getXCoord.rangeBand() * zoomScale))
 
       colsHeaderG.selectAll('.headers-divisory-line')
         .attr('x1', (getXCoord.rangeBand() * zoomScale))
-        .attr('y1', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('y1', (thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('x2', (getXCoord.rangeBand() * zoomScale))
         .attr('y2', 0)
 
       colsHeaderG.selectAll('.headers-text')
         .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
-        .attr('x', (-COLS_HEADER_HEIGHT * zoomScale))
+        .attr('x', (-thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
@@ -691,7 +691,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Rows Footer Container
     # --------------------------------------
     rowsFooterG = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
       .attr(FIXED_TO_LEFT_ATT, YES)
@@ -850,27 +850,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
-    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / @ROWS_HEADER_WIDTH))
+    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(@COLS_HEADER_HEIGHT / @ROWS_HEADER_WIDTH))
 
     corner1G.scaleSizes = (zoomScale) ->
 
       corner1G.select('.background-rect')
-        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
         .attr('width', thisView.ROWS_HEADER_WIDTH * zoomScale)
 
       corner1G.select('.diagonal-line')
         .attr('x2', thisView.ROWS_HEADER_WIDTH * zoomScale)
-        .attr('y2', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('y2', thisView.COLS_HEADER_HEIGHT * zoomScale)
 
       corner1G.select('.columns-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
         .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
-          (COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+          (thisView.COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
       corner1G.select('.rows-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
         .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
-          (COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+          (thisView.COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
     applyZoomAndTranslation(corner1G)
 
