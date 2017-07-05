@@ -347,7 +347,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainContainer = d3.select(@$vis_elem.get(0))
 
     @VISUALISATION_WIDTH = width
-    VISUALISATION_HEIGHT = $(window).height() * 0.6
+    @VISUALISATION_HEIGHT = $(window).height() * 0.6
 
     MIN_COLUMNS_SEEN = 10
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
@@ -365,7 +365,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('svg')
       .attr('class', 'mainSVGContainer')
       .attr('width', @VISUALISATION_WIDTH)
-      .attr('height', VISUALISATION_HEIGHT)
+      .attr('height', @VISUALISATION_HEIGHT)
       .attr('style', 'background-color: white;')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
@@ -391,7 +391,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if fixedToBottom
         baseHeight = elem.attr(BASE_HEIGHT_ATT)
-        newTransY = VISUALISATION_HEIGHT - (baseHeight * zoomScale)
+        newTransY = thisView.VISUALISATION_HEIGHT - (baseHeight * zoomScale)
       else
         newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
 
