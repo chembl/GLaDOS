@@ -359,6 +359,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     INITIAL_ZOOM = 1
     INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
     MIN_ZOOM = 0.2
+    @calculateInitialZoom()
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -1162,5 +1163,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       newText = text[0..(maxChars-4)] + '...'
       d3TextElem.text(newText)
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # Initial Zoom Calculation
+  #---------------------------------------------------------------------------------------------------------------------
+  calculateInitialZoom: ->
+    console.log 'CACULATE INITIAL ZOOM'
+    baseMatrixWidth = @SIDE_SIZE * @NUM_COLUMNS
+    baseMatrixHeight = @SIDE_SIZE * @NUM_ROWS
+    console.log 'baseMatrixWidth: ', baseMatrixWidth
+    console.log 'baseMatrixHeight: ', baseMatrixHeight
+    B = -@ROWS_HEADER_WIDTH - baseMatrixWidth - @ROWS_FOOTER_WIDTH
+    console.log 'B: ', B
 
 
