@@ -294,9 +294,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
     links = matrix.links
-    NUM_COLUMNS = matrix.columns.length
+    @NUM_COLUMNS = matrix.columns.length
     NUM_ROWS = matrix.rows.length
-    TOTAL_NUM_CELLS = NUM_COLUMNS * NUM_ROWS
+    TOTAL_NUM_CELLS = @NUM_COLUMNS * NUM_ROWS
 
     # make sure all intersections are squared
     @SIDE_SIZE = 20
@@ -304,7 +304,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @ROWS_FOOTER_WIDTH = 50
     @COLS_HEADER_HEIGHT = 150
     @COLS_FOOTER_HEIGHT = 50
-    RANGE_X_END = @SIDE_SIZE * NUM_COLUMNS
+    RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
     RANGE_Y_END = @SIDE_SIZE * NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END
     COLS_HEADER_WIDTH = RANGE_X_END
@@ -327,7 +327,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .rangeBands([0, RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
-      .domain([0..(NUM_COLUMNS-1)])
+      .domain([0..(@NUM_COLUMNS-1)])
       .rangeBands([0, RANGE_X_END])
 
     LABELS_PADDING = 8
@@ -841,7 +841,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('diagonal-line', true)
 
     corner1G.append('text')
-      .text(NUM_COLUMNS + ' Targets')
+      .text(@NUM_COLUMNS + ' Targets')
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
 
