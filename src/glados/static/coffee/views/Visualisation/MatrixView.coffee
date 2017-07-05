@@ -303,7 +303,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @ROWS_HEADER_WIDTH = 100
     @ROWS_FOOTER_WIDTH = 50
     @COLS_HEADER_HEIGHT = 150
-    COLS_FOOTER_HEIGHT = 50
+    @COLS_FOOTER_HEIGHT = 50
     RANGE_X_END = @SIDE_SIZE * NUM_COLUMNS
     RANGE_Y_END = @SIDE_SIZE * NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END
@@ -757,7 +757,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+      .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
     colsFooterG.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -799,20 +799,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsFooterG.scaleSizes = (zoomScale) ->
 
       colsFooterG.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (COLS_HEADER_WIDTH * zoomScale))
 
       colsFooterG.positionCols(zoomScale)
 
       colsFooterG.selectAll('.footers-background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (getXCoord.rangeBand() * zoomScale))
 
       colsFooterG.selectAll('.footers-divisory-line')
         .attr('x1', (getXCoord.rangeBand() * zoomScale))
         .attr('y1',0)
         .attr('x2', (getXCoord.rangeBand() * zoomScale))
-        .attr('y2', (COLS_FOOTER_HEIGHT * zoomScale) )
+        .attr('y2', (thisView.COLS_FOOTER_HEIGHT * zoomScale) )
 
       colsFooterG.selectAll('.footers-text')
         .attr("y", (-getXCoord.rangeBand() * (1/3) * zoomScale) )
@@ -882,7 +882,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+      .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
     corner3G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -901,7 +901,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner3G.scaleSizes = (zoomScale) ->
 
       corner3G.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
@@ -918,7 +918,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(FIXED_TO_LEFT_ATT, YES)
       .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, (COLS_FOOTER_HEIGHT))
+      .attr(BASE_HEIGHT_ATT, (@COLS_FOOTER_HEIGHT))
 
     corner4G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -927,7 +927,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner4G.scaleSizes = (zoomScale) ->
 
       corner4G.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
     applyZoomAndTranslation(corner4G)
