@@ -303,10 +303,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @ROWS_FOOTER_WIDTH = 50
     @COLS_HEADER_HEIGHT = 150
     @COLS_FOOTER_HEIGHT = 50
-    RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
+    @RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
     RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
     ROWS_HEADER_HEIGHT = RANGE_Y_END
-    COLS_HEADER_WIDTH = RANGE_X_END
+    COLS_HEADER_WIDTH = @RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
@@ -327,7 +327,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     getXCoord = d3.scale.ordinal()
       .domain([0..(@NUM_COLUMNS-1)])
-      .rangeBands([0, RANGE_X_END])
+      .rangeBands([0, @RANGE_X_END])
 
     LABELS_PADDING = 8
     COLS_LABELS_ROTATION = 30
@@ -621,7 +621,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colsHeaderG.append('rect')
       .attr('height', @COLS_HEADER_HEIGHT)
-      .attr('width', RANGE_X_END)
+      .attr('width', @RANGE_X_END)
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
