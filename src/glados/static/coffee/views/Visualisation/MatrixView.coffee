@@ -300,7 +300,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # make sure all intersections are squared
     @SIDE_SIZE = 20
-    ROWS_HEADER_WIDTH = 100
+    @ROWS_HEADER_WIDTH = 100
     ROWS_FOOTER_WIDTH = 50
     COLS_HEADER_HEIGHT = 150
     COLS_FOOTER_HEIGHT = 50
@@ -354,7 +354,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
     # initial zoom
     MAX_DESIRED_WIDTH = (@SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
-    MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
+    MAX_ZOOM =  VISUALISATION_WIDTH / (@ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
     #the initial zoom scale is a scale that makes all the matrix to be seen at once
     #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
     INITIAL_ZOOM = 1
@@ -409,7 +409,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     cellsContainerG = mainGContainer.append('g')
       .attr('data-section-name', 'cellsContainerG')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
       .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
@@ -575,13 +575,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       rowsHeaderG.select('.background-rect')
         .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.positionRows(zoomScale)
 
       rowsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.headers-text')
         .attr('x', (LABELS_PADDING * zoomScale))
@@ -615,7 +615,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Header Container
     # --------------------------------------
     colsHeaderG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
@@ -753,7 +753,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Footer Container
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
@@ -850,26 +850,26 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
-    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / ROWS_HEADER_WIDTH))
+    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / @ROWS_HEADER_WIDTH))
 
     corner1G.scaleSizes = (zoomScale) ->
 
       corner1G.select('.background-rect')
         .attr('height', COLS_HEADER_HEIGHT * zoomScale)
-        .attr('width', ROWS_HEADER_WIDTH * zoomScale)
+        .attr('width', thisView.ROWS_HEADER_WIDTH * zoomScale)
 
       corner1G.select('.diagonal-line')
-        .attr('x2', ROWS_HEADER_WIDTH * zoomScale)
+        .attr('x2', thisView.ROWS_HEADER_WIDTH * zoomScale)
         .attr('y2', COLS_HEADER_HEIGHT * zoomScale)
 
       corner1G.select('.columns-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
-        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
+        .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
           (COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
       corner1G.select('.rows-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
-        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
+        .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
           (COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
     applyZoomAndTranslation(corner1G)
@@ -902,7 +902,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       corner3G.select('.background-rect')
         .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (3/4) * zoomScale) + 'px;')
