@@ -15,3 +15,9 @@ class ActivitiesBrowserApp
       standalone_mode: true
 
     actsList.fetch()
+
+  @initMatrixCellMiniReportCard: ($containerElem, d) ->
+    console.log 'INITIALIZING MINI REP CARD: ', $containerElem, d
+
+    summary = new glados.models.Activity.CompoundTargetActivitySummary()
+

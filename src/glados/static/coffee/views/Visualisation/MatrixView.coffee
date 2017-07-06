@@ -466,6 +466,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('stroke-width', GRID_STROKE_WIDTH)
       .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
       .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
+      .on('click', (d) -> thisView.showCellTooltip($(@), d))
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -1128,7 +1129,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
 
     return
-    
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Rows /Cols Headers tooltips
+  #---------------------------------------------------------------------------------------------------------------------
   generateTooltipFunction: (entityName, matrixView) ->
 
     return (d) ->
@@ -1176,6 +1180,35 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       else
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # cells tooltips
+  #---------------------------------------------------------------------------------------------------------------------
+  showCellTooltip: ($clickedElem, d)  ->
+
+    if $clickedElem.attr('data-qtip-configured')
+        return
+
+    cardID = d.row_id + '_' + d.col_id
+    miniRepCardID = 'BCK-MiniReportCard-' + cardID
+
+    qtipConfig =
+      content:
+        text: '<div id="' + miniRepCardID + '"></div>'
+        button: 'close'
+      show:
+        event: 'click'
+        solo: true
+      hide: 'click'
+      style:
+        classes:'matrix-qtip qtip-light qtip-shadow'
+
+    $clickedElem.qtip qtipConfig
+    $clickedElem.qtip('api').show()
+    $clickedElem.attr('data-qtip-configured', true)
+
+    $newMiniReportCardContainer = $('#' + miniRepCardID)
+    ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
 
   fillColHeaderText: (d3TextElem) ->
     thisView = @
