@@ -199,7 +199,7 @@ class CompoundReportCardApp
   @initMiniCompoundReportCard = ($containerElem, chemblID)->
 
     compound = new Compound({molecule_chembl_id: chemblID})
-    new MiniReportCardView
+    new glados.views.MiniReportCardView
       el: $containerElem
       model: compound
       entity: Compound
