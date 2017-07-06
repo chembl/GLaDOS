@@ -349,17 +349,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @VISUALISATION_WIDTH = width
     @VISUALISATION_HEIGHT = $(window).height() * 0.6
 
-    MIN_COLUMNS_SEEN = 10
-    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see MIN_COLUMNS_SEEN columns, notice that the structure is very similar to
-    # initial zoom
-    MAX_DESIRED_WIDTH = (@SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
-    MAX_ZOOM =  @VISUALISATION_WIDTH / (@ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + @ROWS_FOOTER_WIDTH)
-    #the initial zoom scale is a scale that makes all the matrix to be seen at once
-    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
-    INITIAL_ZOOM = 1
-    INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
-    MIN_ZOOM = 0.2
-    @calculateInitialZoom()
+    # --------------------------------------
+    # Zoom
+    # --------------------------------------
+    VISUALIZATION_PROPORTION = @VISUALISATION_HEIGHT / @VISUALISATION_WIDTH
+    # THE MAXIMUM POSSIBLE ZOOM is the calculated for a matrix with 10 columns and the same proportion as the visualization
+    MIN_COLS_SEEN = 5
+    MIN_ROWS_SEEN = Math.floor(MIN_COLS_SEEN * VISUALIZATION_PROPORTION)
+    MAX_ZOOM = @calculateInitialZoom(MIN_COLS_SEEN, MIN_ROWS_SEEN)
+
+    # for the minimum possible zoom I calculate the biggest rectangle that should be seen completely according
+    # to the screen. Is calculated without taking into account the scaling of other parts for simplicity.
+    PIXELS_PER_SIDE = 5
+    MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / PIXELS_PER_SIDE)
+    MAX_COLS_SEEN = if MAX_COLS_SEEN < 30 then 30 else MAX_COLS_SEEN
+    MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / PIXELS_PER_SIDE)
+    MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then 30 else MAX_ROWS_SEEN
+    MIN_ZOOM = @calculateInitialZoom(MAX_COLS_SEEN, MAX_ROWS_SEEN)
+
+    # calculate the initial zoom with the matrix I got
+    INITIAL_ZOOM = @calculateInitialZoom(@NUM_COLUMNS, @NUM_ROWS)
+
+    # never start with zoom less than 1
+    INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
+    # never allow it to be greater than the maximum zoom
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -1166,13 +1179,39 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Initial Zoom Calculation
   #---------------------------------------------------------------------------------------------------------------------
-  calculateInitialZoom: ->
-    console.log 'CACULATE INITIAL ZOOM'
-    baseMatrixWidth = @SIDE_SIZE * @NUM_COLUMNS
-    baseMatrixHeight = @SIDE_SIZE * @NUM_ROWS
-    console.log 'baseMatrixWidth: ', baseMatrixWidth
-    console.log 'baseMatrixHeight: ', baseMatrixHeight
-    B = -@ROWS_HEADER_WIDTH - baseMatrixWidth - @ROWS_FOOTER_WIDTH
-    console.log 'B: ', B
+  # Diagrams:
+  # https://drive.google.com/file/d/0BzECtlZ_ur1Ca0M4UllLdmNlMkU/view?usp=sharing
+  # https://drive.google.com/file/d/0BzECtlZ_ur1Cc0JoWkpVSWtKWGc/view?usp=sharing
+  # Calculator:
+  # https://docs.google.com/spreadsheets/d/1vg6JNcZcwo4uwR0zj3iWm8d-8jJaw4AVEZSeP7wZBO4/edit?usp=sharing
+  calculateInitialZoom: (numColumns, numRows) ->
 
+    baseMatrixWidth = @SIDE_SIZE * numColumns
+    baseMatrixHeight = @SIDE_SIZE * numRows
+
+    zoom = 0
+    zoomIsAcceptable = true
+    zoomIncrement = 0.05
+
+    while (zoomIsAcceptable)
+
+      newZoom = zoom + zoomIncrement
+
+      B = -@ROWS_HEADER_WIDTH - baseMatrixWidth - @ROWS_FOOTER_WIDTH
+      E1 = @VISUALISATION_WIDTH + (B * newZoom)
+      C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
+      E2 = @VISUALISATION_HEIGHT + (C * newZoom)
+      D = -@ROWS_HEADER_WIDTH - @ROWS_FOOTER_WIDTH
+      E3 = @VISUALISATION_WIDTH + (D * newZoom)
+      E = -@COLS_FOOTER_HEIGHT - baseMatrixHeight - @COLS_HEADER_HEIGHT
+      E4 = @VISUALISATION_HEIGHT + (E * newZoom)
+
+      A1 = E1 * (E2 - E4)
+      A2 = E4 * E3
+      A = A1 + A2
+      zoomIsAcceptable = A1 > 0 and A2 > 0
+      if zoomIsAcceptable
+        zoom += zoomIncrement
+
+    return zoom
 
