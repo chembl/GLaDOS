@@ -2288,10 +2288,17 @@ span.badge-primary-color-no-float {
     top: 0;
     padding: 5px;
     opacity: 0.8;
+    user-select: none;
 
-    a:hover {
-      color: color("teal", "accent-4");
+    a{
+      &.disabled{
+        color: $button-disabled-color;
+      }
+      &:not(.disabled):hover {
+        color: color("teal", "accent-4");
+      }
     }
+
   }
   .rows-text,.columns-text{
     font-weight: bold;

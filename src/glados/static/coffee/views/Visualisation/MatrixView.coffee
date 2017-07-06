@@ -368,7 +368,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / PIXELS_PER_SIDE)
     MAX_COLS_SEEN = if MAX_COLS_SEEN < 30 then 30 else MAX_COLS_SEEN
     MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / PIXELS_PER_SIDE)
-    MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then 30 else MAX_ROWS_SEEN
+    MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then Math.floor(30 * VISUALIZATION_PROPORTION) else MAX_ROWS_SEEN
     MIN_ZOOM = @calculateInitialZoom(MAX_COLS_SEEN, MAX_ROWS_SEEN)
 
     # calculate the initial zoom with the matrix I got
@@ -377,6 +377,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # never start with zoom less than 1
     INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
     # never allow it to be greater than the maximum zoom
+
+    console.log 'MIN_ZOOM: ', MIN_ZOOM
+    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
+    console.log 'MAX_ZOOM: ', MAX_ZOOM
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -976,6 +980,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
       applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
 
+      $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
+      if zoomScale <= MIN_ZOOM
+        $zoomOutBtn.addClass('disabled')
+      else
+        $zoomOutBtn.removeClass('disabled')
+
+      $zoomInBtn = $(thisView.el).find(".BCK-zoom-in-btn")
+      if zoomScale >= MAX_ZOOM
+        $zoomInBtn.addClass('disabled')
+      else
+        $zoomInBtn.removeClass('disabled')
+
     ZOOM_STEP = 0.1
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
@@ -1028,7 +1044,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     $(@el).find('.BCK-toggle-grab').click ->
 
-      $targetBtnIcon = $(@)
+      $targetBtnIcon = $(@).find('i')
       if ZOOM_ACTIVATED
         ZOOM_ACTIVATED = false
         $targetBtnIcon.removeClass 'fa-hand-rock-o'
