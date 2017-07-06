@@ -20,4 +20,7 @@ class ActivitiesBrowserApp
     console.log 'INITIALIZING MINI REP CARD: ', $containerElem, d
 
     summary = new glados.models.Activity.CompoundTargetActivitySummary()
-
+    new MiniReportCardView
+      el: $containerElem
+      model: summary
+      entity: Activity
