@@ -3,7 +3,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   REVERSE_POSITION_TOOLTIP_TH: 0.8
   COL_HEADER_TEXT_BASE_ID: 'cols-header-text-'
-#  COL_HEADER_MAX_CHARS:
+  ROW_HEADER_TEXT_BASE_ID: 'rows-header-text-'
+  COL_FOOTER_TEXT_BASE_ID: 'cols-footer-text-'
+  ROW_FOOTER_TEXT_BASE_ID: 'rows-footer-text-'
 
   initialize: ->
 
@@ -462,6 +464,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter().append("rect")
       .classed('vis-cell', true)
       .attr('stroke-width', GRID_STROKE_WIDTH)
+      .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
+      .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -507,9 +511,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       cellsContainerG.selectAll(".vis-cell")
         .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
-        .classed('tooltipped', true)
-        .attr('data-position', 'bottom')
-        .attr('data-delay', '50')
+
 
     applyZoomAndTranslation(cellsContainerG)
 
@@ -585,6 +587,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpRowTooltip)
+      .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -737,6 +740,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-text', true)
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
 
     rowsFooterG.assignTexts = (transitionDuration=0) ->
 
@@ -802,6 +806,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-text', true)
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
+      .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
 
 
     colsFooterG.positionCols = (zoomScale, transitionDuration=0) ->
@@ -1235,3 +1240,24 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     return zoom
 
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Cell Hovering
+  #---------------------------------------------------------------------------------------------------------------------
+  emphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d)
+
+  deEmphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d, false)
+
+  applyEmphasisFromCellHover: (d, hasEmphasis=true) ->
+
+    colHeaderTextElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + d.col_id)
+    colHeaderTextElem.classed('emphasis', hasEmphasis)
+
+    rowHeaderTextElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + d.row_id)
+    rowHeaderTextElem.classed('emphasis', hasEmphasis)
+
+    colFooterTextElem = d3.select('#' + @COL_FOOTER_TEXT_BASE_ID + d.col_id)
+    colFooterTextElem.classed('emphasis', hasEmphasis)
+
+    rowFooterTextElem = d3.select('#' + @ROW_FOOTER_TEXT_BASE_ID + d.row_id)
+    rowFooterTextElem.classed('emphasis', hasEmphasis)

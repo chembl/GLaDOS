@@ -2278,8 +2278,12 @@ span.badge-primary-color-no-float {
 .es-results-matrix {
   position: relative;
 
-  .vis-cell:hover{
-    opacity: 0.6
+  .vis-cell {
+    cursor: context-menu;
+    &:hover {
+      stroke-width: 2;
+      stroke: black;
+    }
   }
 
   .matrix-vis-options {
@@ -2290,8 +2294,8 @@ span.badge-primary-color-no-float {
     opacity: 0.8;
     user-select: none;
 
-    a{
-      &.disabled{
+    a {
+      &.disabled {
         color: $button-disabled-color;
       }
       &:not(.disabled):hover {
@@ -2300,12 +2304,22 @@ span.badge-primary-color-no-float {
     }
 
   }
-  .rows-text,.columns-text{
+  .rows-text, .columns-text {
     font-weight: bold;
   }
 
-  .headers-text:hover{
-    fill: color("teal", "accent-4");
+  .headers-text {
+    &:hover {
+      fill: color("teal", "accent-4");
+    }
+    &.emphasis {
+      font-weight: bold;
+    }
+  }
+  .footers-text{
+    &.emphasis {
+      font-weight: bold;
+    }
   }
 }
 
@@ -2450,7 +2464,6 @@ span.badge-primary-color-no-float {
       stroke: black;
     }
     .property-label{
-      font-weight: bold;
       font-size: 80%;
     }
     .tick{
