@@ -19,8 +19,5 @@ class ActivitiesBrowserApp
   @initMatrixCellMiniReportCard: ($containerElem, d) ->
     console.log 'INITIALIZING MINI REP CARD: ', $containerElem, d
 
-    summary = new glados.models.Activity.CompoundTargetActivitySummary()
-    new glados.views.MiniReportCardView
-      el: $containerElem
-      model: summary
-      entity: Activity
+    summary = new glados.models.Activity.ActivityAggregation()
+    new glados.views.Activity.ActivityAggregationView()

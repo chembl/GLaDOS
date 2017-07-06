@@ -1,6 +1,6 @@
 glados.useNameSpace 'glados.models.Activity',
   ActivityAggregation: Backbone.Model.extend
-    initialize: ->
+    initialize: -> console.log 'init ActivityAggregation'
 
 glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
