@@ -48,6 +48,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     updateViewProxy = @setUpResponsiveRender()
 
   handleTargetPrefNameChange: (targetChemblID) ->
+
+    # only bother if my element is visible, it must be re rendered on wake up anyway
+    if not $(@el).is(":visible")
+      return
     textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
     @fillColHeaderText(textElem)
 
