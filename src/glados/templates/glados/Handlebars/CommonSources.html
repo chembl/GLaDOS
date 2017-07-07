@@ -625,20 +625,31 @@
 
   <div class="card grey lighten-5">
     <div class="card-content">
+
       {% endverbatim %}
         {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
       {% verbatim %}
     </div>
-
 </div>
 </script>
 
 <script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
 
-{% endverbatim %}
-  {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
-{% verbatim %}
+  <span class="load-messages-container">
+  </span>
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      Show:
+      <input name="group1" type="radio" id="test1" />
+      <label for="test1">Selected Targets</label>
+      <input name="group1" type="radio" id="test2" />
+      <label for="test2">All Targets</label>
 
+    {% endverbatim %}
+      {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
+    {% verbatim %}
+    </div>
+  </div>
 </script>
 
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
