@@ -45,7 +45,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     @model.on 'change', @render, @
-    @model.on CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
+    @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt

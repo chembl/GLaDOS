@@ -1,6 +1,6 @@
 describe "Compounds vs Target Matrix", ->
 
-  ctm = new CompoundTargetMatrix
+  ctm = new glados.models.Activity.ActivityAggregationMatrix()
 
   beforeEach (done) ->
     TestsUtils.simulateDataMatrix(ctm, glados.Settings.STATIC_URL + 'testData/MatrixTestData0.json', done)

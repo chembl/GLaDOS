@@ -240,7 +240,9 @@ describe "Legend Model", ->
 
       prop = undefined
       legendModel = undefined
-      ctm = new CompoundTargetMatrix
+
+      ctm = new glados.models.Activity.ActivityAggregationMatrix
+
       beforeAll (done) ->
         TestsUtils.simulateDataMatrix(ctm, glados.Settings.STATIC_URL + 'testData/MatrixTestData0.json', done)
 

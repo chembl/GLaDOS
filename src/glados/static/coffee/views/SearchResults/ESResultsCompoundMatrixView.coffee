@@ -7,7 +7,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
       @MAX_COMPOUNDS_FOR_MATRIX = 10000
-      @ctm = new CompoundTargetMatrix
+      @ctm = new glados.models.Activity.ActivityAggregationMatrix()
+      
       @ctmView = new MatrixView
           model: @ctm
           el: $(@el).find('.BCK-CompTargetMatrix')
