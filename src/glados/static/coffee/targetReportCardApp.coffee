@@ -185,7 +185,7 @@ class TargetReportCardApp
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
     target = new Target({target_chembl_id: chemblID})
-    new MiniReportCardView
+    new glados.views.MiniReportCardView
       el: $containerElem
       model: target
       entity: Target

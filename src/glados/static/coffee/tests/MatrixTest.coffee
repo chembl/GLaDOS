@@ -5,13 +5,6 @@ describe "Compounds vs Target Matrix", ->
   beforeEach (done) ->
     TestsUtils.simulateDataMatrix(ctm, glados.Settings.STATIC_URL + 'testData/MatrixTestData0.json', done)
 
-  it 'Gives the correct link for a column', ->
-    expect(ctm.getLinkForRowHeader('CHEMBL59')).toBe('/compound_report_card/CHEMBL59')
-
-  it 'Gives the correct link for a row', ->
-
-    expect(ctm.getLinkForColHeader('Targ: CHEMBL612545')).toBe('/target_report_card/CHEMBL612545')
-
   it 'Gives a list of values in a cell for a property', ->
 
     prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',

@@ -43,6 +43,12 @@ glados.useNameSpace 'glados',
 
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
 
+        returnCol['format_as_number'] = colDescription.format_as_number
+
+        if colDescription.num_decimals? and colDescription.format_as_number\
+        and col_value != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+
+          col_value = col_value.toFixed(colDescription.num_decimals)
 
         if _.isBoolean(col_value)
           returnCol['value'] = if col_value then 'Yes' else 'No'
@@ -59,8 +65,6 @@ glados.useNameSpace 'glados',
           returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
           for paramComp in colDescription.function_parameters).join(',')
           returnCol['function_key'] = colDescription.function_key
-
-        returnCol['format_as_number'] = colDescription.format_as_number
 
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
