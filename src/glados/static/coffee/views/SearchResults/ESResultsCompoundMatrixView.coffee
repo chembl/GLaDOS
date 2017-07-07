@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
-      @MAX_COMPOUNDS_FOR_MATRIX = 30
+      @MAX_COMPOUNDS_FOR_MATRIX = 10000
       @ctm = new CompoundTargetMatrix
       @ctmView = new MatrixView
           model: @ctm

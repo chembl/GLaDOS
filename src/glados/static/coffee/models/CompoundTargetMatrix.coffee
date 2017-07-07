@@ -203,7 +203,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         molecule_chembl_id_agg:
           terms:
             field: "molecule_chembl_id",
-            size: 20,
+            size: 10000,
             order:
               _count: "desc"
           aggs:
