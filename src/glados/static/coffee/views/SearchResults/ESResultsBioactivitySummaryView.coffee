@@ -34,8 +34,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @handleVisualisationStatus()
 
     handleVisualisationStatus: ->
-      console.log 'HANDLE VISUALISATION STATUS!'
-      return
 
       # only bother if my element is visible
       if not $(@el).is(":visible")
@@ -44,16 +42,19 @@ glados.useNameSpace 'glados.views.SearchResults',
       numSelectedItems = @collection.getNumberOfSelectedItems()
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
 
+      console.log 'HANDLE VISUALISATION STATUS!'
+      return
+
       if numSelectedItems < threshold[0]
         @setProgressMessage('Please select at least ' + threshold[0] + ' target to show this visualisation.',
           hideCog=true)
-        @hideTable()
+        @hideMatrix()
         return
 
       if numSelectedItems > threshold[1]
         @setProgressMessage('Please select less than ' + threshold[1] + ' targets to show this visualisation.',
           hideCog=true)
-        @hideTable()
+        @hideMatrix()
         return
 
 
@@ -69,7 +70,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         @setProgressMessage('Showing results for the selected targets ' + '(' + numSelectedItems + ').',
           hideCog=true, linkURL=url, linkText='Browse all activities for those targets.')
-        @showTable()
+        @showMatrix()
         return
 
       @setProgressMessage('Filtering activities...')
@@ -92,6 +93,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
       @activitiesSummarylist.fetch()
 
-    hideTable: -> $(@el).find('.BCK-summary-table-container').hide()
-    showTable: -> $(@el).find('.BCK-summary-table-container').show()
+    hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
+    showMatrix: -> $(@el).find('.BCK-CompTargetMatrix').show()
 
