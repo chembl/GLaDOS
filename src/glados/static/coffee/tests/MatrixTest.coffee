@@ -7,7 +7,7 @@ describe "Compounds vs Target Matrix", ->
 
   it 'Gives a list of values in a cell for a property', ->
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
       'PCHEMBL_VALUE_AVG')
 
     links = ctm.get('matrix').links
@@ -25,7 +25,7 @@ describe "Compounds vs Target Matrix", ->
 
   it 'sorts rows by property', ->
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
       'PCHEMBL_VALUE_MAX')
 
     ctm.sortMatrixRowsBy(prop.propName)
@@ -41,7 +41,7 @@ describe "Compounds vs Target Matrix", ->
 
   it 'sorts rows by property (reverse)', ->
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
       'PCHEMBL_VALUE_MAX')
 
     ctm.sortMatrixRowsBy(prop.propName, reverse=true)
@@ -57,7 +57,7 @@ describe "Compounds vs Target Matrix", ->
 
   it 'sorts cols by property', ->
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
       'PCHEMBL_VALUE_MAX')
 
     ctm.sortMatrixColsBy(prop.propName)
@@ -73,7 +73,7 @@ describe "Compounds vs Target Matrix", ->
 
   it 'sorts cols by property (reverse)', ->
 
-    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+    prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
       'PCHEMBL_VALUE_MAX')
 
     ctm.sortMatrixColsBy(prop.propName, reverse=true)

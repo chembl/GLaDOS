@@ -19,13 +19,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             'CHEMBL_ID')
         target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
             'PREF_NAME')
-        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_AVG')
-        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'ACTIVITY_COUNT')
-        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'HIT_COUNT')
-        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_MAX')
       initial_colouring: 'pchembl_value_avg'
       colour_properties: ['activity_count', 'pchembl_value_avg']

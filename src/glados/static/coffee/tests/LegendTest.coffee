@@ -248,7 +248,7 @@ describe "Legend Model", ->
 
       beforeEach ->
 
-        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_AVG')
 
         colourValues = ctm.getValuesListForProperty(prop.propName)
