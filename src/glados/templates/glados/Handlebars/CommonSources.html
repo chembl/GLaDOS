@@ -188,36 +188,50 @@
 
 </script>
 
+<script id="Handlebars-Common-GladosSummoned" type="text/x-handlebars-template">
+<div class="card">
+  <div class="card-image">
+    <img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png">
+  </div>
+  <div class="card-content">
+    <p>I am still alive!</p>
+  </div>
+</div>
+</script>
+
+
 <script id="Handlebars-Common-MiniReportCard" type="text/x-handlebars-template">
 
-    <div class="card horizontal grey lighten-5 z-depth-0">
+  <div class="card horizontal grey lighten-5 z-depth-0">
 
-
-      {{#if img_url}}
-        <div class="white card-image" >
-          <img src="{{img_url}}" height="150px" width="150px" >
-        </div>
-      {{/if}}
-      <div class="card-content">
-
-        {{#each columns}}
-
-        {{#if this.has_link}}
-
-        <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-        </p>
-
-        {{else}}
-        <small>
-          <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-        </small>
-        {{/if}}
-        {{/each}}
-
+    {{#if img_url}}
+      <div class="white card-image" >
+        <img src="{{img_url}}" height="150px" width="150px" >
       </div>
+    {{/if}}
+    <div class="card-content">
 
+      {{#each columns}}
+
+      {{#if this.has_link}}
+
+      <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+      </p>
+
+      {{else}}
+      <small>
+        <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+      </small>
+      {{/if}}
+      {{/each}}
+
+      {{#if general_link_url}}
+        <hr>
+        <a target="_blank" href="{{general_link_url}}">{{general_link_text}}</a>
+      {{/if}}
     </div>
 
+  </div>
 
  </script>
 
@@ -543,13 +557,13 @@
 
 <script id="Handlebars-Common-ESResultsMatrix-ZoomOptions" type="text/x-handlebars-template">
     <div class="matrix-vis-options grey lighten-3">
-        <a><i class="fa fa-lg fa-home tooltipped BCK-reset-zoom-btn" aria-hidden="true" href=""
+        <a class="BCK-reset-zoom-btn"><i class="fa fa-lg fa-home tooltipped" aria-hidden="true" href=""
               data-position="bottom" data-tooltip="Reset zoom"></i></a>
-        <a><i class="fa fa-lg fa-search-plus tooltipped BCK-zoom-in-btn" aria-hidden="true" data-position="bottom"
+        <a class="BCK-zoom-in-btn"><i class="fa fa-lg fa-search-plus tooltipped" aria-hidden="true" data-position="bottom"
               data-tooltip="Zoom in" ></i></a>
-        <a><i class="fa fa-lg fa-search-minus tooltipped BCK-zoom-out-btn" aria-hidden="true" data-position="bottom"
+        <a class="BCK-zoom-out-btn"><i class="fa fa-lg fa-search-minus tooltipped" aria-hidden="true" data-position="bottom"
               data-tooltip="Zoom out"></i></a>
-        <a><i class="fa fa-lg fa-hand-paper-o tooltipped BCK-toggle-grab deactivated" aria-hidden="true" data-position="bottom"
+        <a class="BCK-toggle-grab"><i class="fa fa-lg fa-hand-paper-o tooltipped" aria-hidden="true" data-position="bottom"
               data-tooltip="Grab"></i></a>
     </div>
 </script>

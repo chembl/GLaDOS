@@ -30,6 +30,15 @@ glados.useNameSpace 'glados.models.visualisation',
         HBD:
           propName:'molecule_properties.hbd'
           label: 'Hydrogen Bond Donnors'
+    Target:
+      esIndex:'chembl_target'
+      Properties:
+        CHEMBL_ID:
+          propName:'target_chembl_id'
+          label: 'CHEMBL_ID'
+        PREF_NAME:
+          propName:'pref_name'
+          label: 'Pref. Name'
     Activity:
       esIndex:'chembl_activity'
       Properties:

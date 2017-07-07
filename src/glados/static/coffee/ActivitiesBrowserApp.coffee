@@ -15,3 +15,15 @@ class ActivitiesBrowserApp
       standalone_mode: true
 
     actsList.fetch()
+
+  @initMatrixCellMiniReportCard: ($containerElem, d) ->
+
+    summary = new glados.models.Activity.ActivityAggregation
+      activity_count: d.activity_count
+      pchembl_value_avg: d.pchembl_value_avg
+      molecule_chembl_id: d.row_id
+      target_chembl_id: d.col_id
+
+    new glados.views.Activity.ActivityAggregationView
+      el: $containerElem
+      model: summary

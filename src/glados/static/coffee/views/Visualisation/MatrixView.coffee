@@ -2,11 +2,23 @@
 MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   REVERSE_POSITION_TOOLTIP_TH: 0.8
+  COL_HEADER_TEXT_BASE_ID: 'cols-header-text-'
+  ROW_HEADER_TEXT_BASE_ID: 'rows-header-text-'
+  COL_FOOTER_TEXT_BASE_ID: 'cols-footer-text-'
+  ROW_FOOTER_TEXT_BASE_ID: 'rows-footer-text-'
+  KEYS_PRESSED: []
+  GLADOS: [71, 76, 97, 68, 79, 83]
 
   initialize: ->
 
     @config = {
       properties:
+        molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
+            'CHEMBL_ID')
+        target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+            'CHEMBL_ID')
+        target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+            'PREF_NAME')
         pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
             'PCHEMBL_VALUE_AVG')
         activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
@@ -23,6 +35,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       initial_col_sorting: 'activity_count'
       initial_col_sorting_reverse: true
       col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+      initial_col_label_property: 'target_pref_name'
+      initial_row_label_property: 'molecule_chembl_id'
       propertyToType:
         activity_count: "number"
         pchembl_value_avg: "number"
@@ -31,10 +45,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     @model.on 'change', @render, @
+    @model.on CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
+
+    thisView = @
+    $(window).keypress( (event) ->
+      limit = 6
+      thisView.KEYS_PRESSED.push(event.which)
+      if thisView.KEYS_PRESSED.length > limit
+        thisView.KEYS_PRESSED.shift()
+    )
+
+  handleTargetPrefNameChange: (targetChemblID) ->
+
+    # only bother if my element is visible, it must be re rendered on wake up anyway
+    if not $(@el).is(":visible")
+      return
+    textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+    @fillColHeaderText(textElem)
 
   renderWhenError: ->
 
@@ -265,6 +296,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @currentColSortingProperty = @config.properties[@config.initial_col_sorting]
     @currentColSortingPropertyReverse = @config.initial_row_sorting_reverse
     @currentPropertyColour = @config.properties[@config.initial_colouring]
+    @currentColLabelProperty = @config.properties[@config.initial_col_label_property]
+    @currentRowLabelProperty = @config.properties[@config.initial_row_label_property]
 
     # --------------------------------------
     # Sort by default value
@@ -277,20 +310,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
 
     links = matrix.links
-    NUM_COLUMNS = matrix.columns.length
-    NUM_ROWS = matrix.rows.length
-    TOTAL_NUM_CELLS = NUM_COLUMNS * NUM_ROWS
+    @NUM_COLUMNS = matrix.columns.length
+    @NUM_ROWS = matrix.rows.length
 
     # make sure all intersections are squared
-    SIDE_SIZE = 20
-    ROWS_HEADER_WIDTH = 100
-    ROWS_FOOTER_WIDTH = 50
-    COLS_HEADER_HEIGHT = 120
-    COLS_FOOTER_HEIGHT = 50
-    RANGE_X_END = SIDE_SIZE * NUM_COLUMNS
-    RANGE_Y_END = SIDE_SIZE * NUM_ROWS
-    ROWS_HEADER_HEIGHT = RANGE_Y_END
-    COLS_HEADER_WIDTH = RANGE_X_END
+    @SIDE_SIZE = 20
+    @ROWS_HEADER_WIDTH = 100
+    @ROWS_FOOTER_WIDTH = 50
+    @COLS_HEADER_HEIGHT = 150
+    @COLS_FOOTER_HEIGHT = 50
+    @RANGE_X_END = @SIDE_SIZE * @NUM_COLUMNS
+    @RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
+    @ROWS_HEADER_HEIGHT = @RANGE_Y_END
+    @COLS_HEADER_WIDTH = @RANGE_X_END
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
@@ -306,12 +338,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     ZOOM_ACTIVATED = false
 
     getYCoord = d3.scale.ordinal()
-      .domain([0..(NUM_ROWS-1)])
-      .rangeBands([0, RANGE_Y_END])
+      .domain([0..(@NUM_ROWS-1)])
+      .rangeBands([0, @RANGE_Y_END])
 
     getXCoord = d3.scale.ordinal()
-      .domain([0..(NUM_COLUMNS-1)])
-      .rangeBands([0, RANGE_X_END])
+      .domain([0..(@NUM_COLUMNS-1)])
+      .rangeBands([0, @RANGE_X_END])
 
     LABELS_PADDING = 8
     COLS_LABELS_ROTATION = 30
@@ -323,34 +355,50 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     elemWidth = $(@el).width()
     width = elemWidth
     #since I know the side size and how many rows I have, I can calculate which should be the height of the container
-    height = SIDE_SIZE * NUM_ROWS
+    height = @SIDE_SIZE * @NUM_ROWS
     # Anyway, I have to limit it so it is not too long.
     if height > width
       height = width
 
     mainContainer = d3.select(@$vis_elem.get(0))
 
-    VISUALISATION_WIDTH = width
-    #this is a initial valur, it will be changed after organising everything
-    VISUALISATION_HEIGHT = 500
+    @VISUALISATION_WIDTH = width
+    @VISUALISATION_HEIGHT = $(window).height() * 0.6
 
-    MIN_COLUMNS_SEEN = 20
-    # THE MAXIMUM POSSIBLE ZOOM is the one that allows to see 5 columns, notice that the structure is very similar to
-    # initial zoom
-    MAX_DESIRED_WIDTH = (SIDE_SIZE - 1) * MIN_COLUMNS_SEEN
-    MAX_ZOOM =  VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + MAX_DESIRED_WIDTH + ROWS_FOOTER_WIDTH)
-    #the initial zoom scale is a scale that makes all the matrix to be seen at once
-    #ROWS_HEADER_WIDTH * zoomScale + COLS_HEADER_WIDTH * zoomScale + ROWS_FOOTER_WIDTH * zoomScale = VISUALISATION_WIDTH
-    INITIAL_ZOOM = VISUALISATION_WIDTH / (ROWS_HEADER_WIDTH + COLS_HEADER_WIDTH + ROWS_FOOTER_WIDTH)
-    INITIAL_ZOOM = MAX_ZOOM if INITIAL_ZOOM > MAX_ZOOM
-    # the minimum zoom possible is also the one that makes all the matrix to be seen at once
-    MIN_ZOOM = INITIAL_ZOOM
+    # --------------------------------------
+    # Zoom
+    # --------------------------------------
+    VISUALIZATION_PROPORTION = @VISUALISATION_HEIGHT / @VISUALISATION_WIDTH
+    # THE MAXIMUM POSSIBLE ZOOM is the calculated for a matrix with 10 columns and the same proportion as the visualization
+    MIN_COLS_SEEN = 5
+    MIN_ROWS_SEEN = Math.floor(MIN_COLS_SEEN * VISUALIZATION_PROPORTION)
+    MAX_ZOOM = @calculateInitialZoom(MIN_COLS_SEEN, MIN_ROWS_SEEN)
+
+    # for the minimum possible zoom I calculate the biggest rectangle that should be seen completely according
+    # to the screen. Is calculated without taking into account the scaling of other parts for simplicity.
+    PIXELS_PER_SIDE = 5
+    MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / PIXELS_PER_SIDE)
+    MAX_COLS_SEEN = if MAX_COLS_SEEN < 30 then 30 else MAX_COLS_SEEN
+    MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / PIXELS_PER_SIDE)
+    MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then Math.floor(30 * VISUALIZATION_PROPORTION) else MAX_ROWS_SEEN
+    MIN_ZOOM = @calculateInitialZoom(MAX_COLS_SEEN, MAX_ROWS_SEEN)
+
+    # calculate the initial zoom with the matrix I got
+    INITIAL_ZOOM = @calculateInitialZoom(@NUM_COLUMNS, @NUM_ROWS)
+
+    # never start with zoom less than 1
+    INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
+    # never allow it to be greater than the maximum zoom
+
+    console.log 'MIN_ZOOM: ', MIN_ZOOM
+    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
+    console.log 'MAX_ZOOM: ', MAX_ZOOM
 
     mainSVGContainer = mainContainer
       .append('svg')
       .attr('class', 'mainSVGContainer')
-      .attr('width', VISUALISATION_WIDTH)
-      .attr('height', VISUALISATION_HEIGHT)
+      .attr('width', @VISUALISATION_WIDTH)
+      .attr('height', @VISUALISATION_HEIGHT)
       .attr('style', 'background-color: white;')
 
     mainSVGContainer = mainContainer.select('.mainSVGContainer')
@@ -370,13 +418,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if fixedToLeft
         baseWidth = elem.attr(BASE_WIDTH_ATT)
-        newTransX = VISUALISATION_WIDTH - (baseWidth * zoomScale)
+        newTransX = thisView.VISUALISATION_WIDTH - (baseWidth * zoomScale)
       else
         newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
 
       if fixedToBottom
         baseHeight = elem.attr(BASE_HEIGHT_ATT)
-        newTransY = VISUALISATION_HEIGHT - (baseHeight * zoomScale)
+        newTransY = thisView.VISUALISATION_HEIGHT - (baseHeight * zoomScale)
       else
         newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
 
@@ -394,8 +442,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     cellsContainerG = mainGContainer.append('g')
       .attr('data-section-name', 'cellsContainerG')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
 
@@ -426,6 +474,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter().append("rect")
       .classed('vis-cell', true)
       .attr('stroke-width', GRID_STROKE_WIDTH)
+      .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
+      .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
+      .on('click', (d) -> thisView.showCellTooltip($(@), d))
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -450,20 +501,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     cellsContainerG.scaleSizes = (zoomScale) ->
 
       cellsContainerG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
       cellsContainerG.selectAll('.grid-horizontal-rect')
         .attr("x", 0)
         .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
-        .attr("width", COLS_HEADER_WIDTH * zoomScale)
+        .attr("width", thisView.COLS_HEADER_WIDTH * zoomScale)
         .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
 
       cellsContainerG.selectAll('.grid-vertical-line')
         .attr("x1", (d) -> (getXCoord(d.currentPosition) * zoomScale))
         .attr("y1", 0)
         .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
-        .attr("y2", (ROWS_HEADER_HEIGHT * zoomScale))
+        .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
       cellsContainerG.positionCols(zoomScale)
@@ -471,9 +522,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       cellsContainerG.selectAll(".vis-cell")
         .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
-        .classed('tooltipped', true)
-        .attr('data-position', 'bottom')
-        .attr('data-delay', '50')
+
 
     applyZoomAndTranslation(cellsContainerG)
 
@@ -522,7 +571,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     rowsHeaderG = mainGContainer.append('g')
       .attr(BASE_X_TRANS_ATT, 0)
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
 
@@ -544,13 +593,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
     rowHeaders.append('text')
       .classed('headers-text', true)
-      .text((d) -> d.label)
+      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowLabelProperty.propName))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
-      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
       .on('click', setUpRowTooltip)
+      .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -561,14 +609,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsHeaderG.scaleSizes = (zoomScale) ->
 
       rowsHeaderG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.positionRows(zoomScale)
 
       rowsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.headers-text')
         .attr('x', (LABELS_PADDING * zoomScale))
@@ -586,15 +634,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
 
     corner2G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
 
     corner2G.scaleSizes = (zoomScale) ->
       corner2G.select('rect')
-        .attr('height', (COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_FOOTER_WIDTH *zoomScale))
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
 
     applyZoomAndTranslation(corner2G)
 
@@ -602,14 +650,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Header Container
     # --------------------------------------
     colsHeaderG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
 
     colsHeaderG.append('rect')
-      .attr('height', COLS_HEADER_HEIGHT)
-      .attr('width', RANGE_X_END)
+      .attr('height', @COLS_HEADER_HEIGHT)
+      .attr('width', @RANGE_X_END)
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
@@ -633,13 +681,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsHeaders.append('text')
       .classed('headers-text', true)
       .attr('transform', 'rotate(-90)')
-      .text((d) -> d.label)
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
-      .on('mouseover', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_ACCENT_4))
-      .on('mouseout', -> d3.select(@).style('fill', glados.Settings.VISUALISATION_TEAL_MAX))
+      .each((d)-> thisView.fillColHeaderText(d3.select(@)))
+      .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -647,29 +694,29 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll('.vis-column')
         .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
         ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) +
-        " " + (COLS_HEADER_HEIGHT * zoomScale) + ")" ))
+        " " + (thisView.COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
     colsHeaderG.scaleSizes = (zoomScale) ->
 
       colsHeaderG.select('.background-rect')
-        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
-        .attr('width', COLS_HEADER_WIDTH * zoomScale)
+        .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
+        .attr('width', thisView.COLS_HEADER_WIDTH * zoomScale)
 
       colsHeaderG.positionCols(zoomScale)
 
       colsHeaderG.selectAll('.headers-background-rect')
-        .attr('height', (COLS_HEADER_HEIGHT * zoomScale) )
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale) )
         .attr('width', (getXCoord.rangeBand() * zoomScale))
 
       colsHeaderG.selectAll('.headers-divisory-line')
         .attr('x1', (getXCoord.rangeBand() * zoomScale))
-        .attr('y1', (COLS_HEADER_HEIGHT * zoomScale))
+        .attr('y1', (thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('x2', (getXCoord.rangeBand() * zoomScale))
         .attr('y2', 0)
 
       colsHeaderG.selectAll('.headers-text')
         .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
-        .attr('x', (-COLS_HEADER_HEIGHT * zoomScale))
+        .attr('x', (-thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
@@ -679,11 +726,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Rows Footer Container
     # --------------------------------------
     rowsFooterG = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, COLS_HEADER_HEIGHT)
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, YES)
       .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
 
     rowsFooterG.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -704,6 +751,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-text', true)
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
 
     rowsFooterG.assignTexts = (transitionDuration=0) ->
 
@@ -720,18 +768,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsFooterG.scaleSizes = (zoomScale) ->
 
       rowsFooterG.select('.background-rect')
-        .attr('height', (ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.positionRows(zoomScale)
       rowsFooterG.assignTexts()
 
       rowsFooterG.selectAll('.footers-background-rect')
         .attr('height', (getYCoord.rangeBand() * zoomScale))
-        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.selectAll('.footers-text')
-        .attr('x', ((ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
+        .attr('x', ((thisView.ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
         .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
@@ -741,11 +789,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Cols Footer Container
     # --------------------------------------
     colsFooterG = mainGContainer.append('g')
-      .attr(BASE_X_TRANS_ATT, ROWS_HEADER_WIDTH)
+      .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+      .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
     colsFooterG.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -769,6 +817,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-text', true)
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
+      .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
 
 
     colsFooterG.positionCols = (zoomScale, transitionDuration=0) ->
@@ -787,20 +836,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     colsFooterG.scaleSizes = (zoomScale) ->
 
       colsFooterG.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (COLS_HEADER_WIDTH * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
       colsFooterG.positionCols(zoomScale)
 
       colsFooterG.selectAll('.footers-background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
         .attr('width', (getXCoord.rangeBand() * zoomScale))
 
       colsFooterG.selectAll('.footers-divisory-line')
         .attr('x1', (getXCoord.rangeBand() * zoomScale))
         .attr('y1',0)
         .attr('x2', (getXCoord.rangeBand() * zoomScale))
-        .attr('y2', (COLS_FOOTER_HEIGHT * zoomScale) )
+        .attr('y2', (thisView.COLS_FOOTER_HEIGHT * zoomScale) )
 
       colsFooterG.selectAll('.footers-text')
         .attr("y", (-getXCoord.rangeBand() * (1/3) * zoomScale) )
@@ -829,36 +878,36 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('diagonal-line', true)
 
     corner1G.append('text')
-      .text('Targets')
+      .text(@NUM_COLUMNS + ' Targets')
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
 
     corner1G.append('text')
-      .text('Compounds')
+      .text(@NUM_ROWS + ' Compounds')
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
-    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(COLS_HEADER_HEIGHT / ROWS_HEADER_WIDTH))
+    corner1G.textRotationAngle = glados.Utils.getDegreesFromRadians(Math.atan(@COLS_HEADER_HEIGHT / @ROWS_HEADER_WIDTH))
 
     corner1G.scaleSizes = (zoomScale) ->
 
       corner1G.select('.background-rect')
-        .attr('height', COLS_HEADER_HEIGHT * zoomScale)
-        .attr('width', ROWS_HEADER_WIDTH * zoomScale)
+        .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
+        .attr('width', thisView.ROWS_HEADER_WIDTH * zoomScale)
 
       corner1G.select('.diagonal-line')
-        .attr('x2', ROWS_HEADER_WIDTH * zoomScale)
-        .attr('y2', COLS_HEADER_HEIGHT * zoomScale)
+        .attr('x2', thisView.ROWS_HEADER_WIDTH * zoomScale)
+        .attr('y2', thisView.COLS_HEADER_HEIGHT * zoomScale)
 
       corner1G.select('.columns-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
-        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
-          (COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+        .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
+          (thisView.COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
       corner1G.select('.rows-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
-        .attr('transform', 'translate(' + (ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
-          (COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
+        .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
+          (thisView.COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
     applyZoomAndTranslation(corner1G)
 
@@ -870,7 +919,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, COLS_FOOTER_HEIGHT)
+      .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
     corner3G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -889,8 +938,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner3G.scaleSizes = (zoomScale) ->
 
       corner3G.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_HEADER_WIDTH * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (3/4) * zoomScale) + 'px;')
@@ -904,9 +953,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_X_ATT, NO)
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, ROWS_FOOTER_WIDTH)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
       .attr(FIXED_TO_BOTTOM_ATT, YES)
-      .attr(BASE_HEIGHT_ATT, (COLS_FOOTER_HEIGHT))
+      .attr(BASE_HEIGHT_ATT, (@COLS_FOOTER_HEIGHT))
 
     corner4G.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -915,8 +964,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     corner4G.scaleSizes = (zoomScale) ->
 
       corner4G.select('.background-rect')
-        .attr('height', (COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (ROWS_FOOTER_WIDTH * zoomScale))
+        .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
     applyZoomAndTranslation(corner4G)
 
@@ -947,6 +996,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
       applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
 
+      $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
+      if zoomScale <= MIN_ZOOM
+        $zoomOutBtn.addClass('disabled')
+      else
+        $zoomOutBtn.removeClass('disabled')
+
+      $zoomInBtn = $(thisView.el).find(".BCK-zoom-in-btn")
+      if zoomScale >= MAX_ZOOM
+        $zoomInBtn.addClass('disabled')
+      else
+        $zoomInBtn.removeClass('disabled')
+
     ZOOM_STEP = 0.1
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
@@ -965,22 +1026,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       handleZoom(ingoreActivation=true)
 
     resetZoom()
-
-    adjustVisHeight = ->
-
-      translateX = zoom.translate()[0]
-      translateY = zoom.translate()[1]
-      zoomScale = zoom.scale()
-
-      VISUALISATION_HEIGHT = $(window).height() * 0.6
-      mainSVGContainer
-        .attr('height', VISUALISATION_HEIGHT)
-
-      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
-
-    adjustVisHeight()
 
     $(@el).find(".BCK-reset-zoom-btn").click resetZoom
 
@@ -1015,7 +1060,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     $(@el).find('.BCK-toggle-grab').click ->
 
-      $targetBtnIcon = $(@)
+      $targetBtnIcon = $(@).find('i')
       if ZOOM_ACTIVATED
         ZOOM_ACTIVATED = false
         $targetBtnIcon.removeClass 'fa-hand-rock-o'
@@ -1094,16 +1139,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
 
     return
-    
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Rows /Cols Headers tooltips
+  #---------------------------------------------------------------------------------------------------------------------
   generateTooltipFunction: (entityName, matrixView) ->
 
     return (d) ->
 
       $clickedElem = $(@)
-      if entityName == 'Target'
-        chemblID = d.label.replace('Targ: ', '')
-      else
-        chemblID = d.label
+      chemblID = d.id
       if $clickedElem.attr('data-qtip-configured')
         return
 
@@ -1146,5 +1191,140 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # cells tooltips
+  #---------------------------------------------------------------------------------------------------------------------
+  summoningMe: ->
+
+    if @KEYS_PRESSED.length != @GLADOS.length
+      return false
+
+    for i in [0..@KEYS_PRESSED.length-1]
+      keyIs = @KEYS_PRESSED[i]
+      keyMustBe = @GLADOS[i]
+      if keyIs != keyMustBe
+        return false
+
+    return true
+
+  showCellTooltip: ($clickedElem, d)  ->
+
+    summoningMe = @summoningMe()
+    if $clickedElem.attr('data-qtip-configured') and not summoningMe
+        return
+
+    cardID = d.row_id + '_' + d.col_id
+    miniRepCardID = 'BCK-MiniReportCard-' + cardID
+    htmlContent = '<div id="' + miniRepCardID + '"></div>'
+
+    if summoningMe
+      htmlContent = Handlebars.compile($('#Handlebars-Common-GladosSummoned').html())()
+
+    qtipConfig =
+      content:
+        text: htmlContent
+        button: 'close'
+      show:
+        event: 'click'
+        solo: true
+      hide: 'click'
+      style:
+        classes:'matrix-qtip qtip-light qtip-shadow'
+      position:
+        my: 'top left'
+        at: 'bottom center'
+
+    $clickedElem.qtip qtipConfig
+    $clickedElem.qtip('api').show()
+    $clickedElem.attr('data-qtip-configured', true)
+
+    if summoningMe
+      return
+
+    $newMiniReportCardContainer = $('#' + miniRepCardID)
+    ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
+
+  fillColHeaderText: (d3TextElem) ->
+    thisView = @
+    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
+
+    d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
+    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem)
+
+  # because normally container and text elem scale at the same rate on zoom, this can be done only one.
+  # take this into account if there is a problem later.
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem) ->
+
+    # remember the rotation!
+    containerLimit = d3ContainerElem.node().getBBox().height
+    textWidth = d3TextElem.node().getBBox().width
+
+    if 0 < containerLimit < textWidth
+      text = d3TextElem.text()
+      numChars = text.length
+      charLength = textWidth / numChars
+      # reduce by num numchars because font characters are not all of the same width
+      maxChars = Math.ceil(containerLimit / charLength) - 2
+      newText = text[0..(maxChars-4)] + '...'
+      d3TextElem.text(newText)
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Initial Zoom Calculation
+  #---------------------------------------------------------------------------------------------------------------------
+  # Diagrams:
+  # https://drive.google.com/file/d/0BzECtlZ_ur1Ca0M4UllLdmNlMkU/view?usp=sharing
+  # https://drive.google.com/file/d/0BzECtlZ_ur1Cc0JoWkpVSWtKWGc/view?usp=sharing
+  # Calculator:
+  # https://docs.google.com/spreadsheets/d/1vg6JNcZcwo4uwR0zj3iWm8d-8jJaw4AVEZSeP7wZBO4/edit?usp=sharing
+  calculateInitialZoom: (numColumns, numRows) ->
+
+    baseMatrixWidth = @SIDE_SIZE * numColumns
+    baseMatrixHeight = @SIDE_SIZE * numRows
+
+    zoom = 0
+    zoomIsAcceptable = true
+    zoomIncrement = 0.05
+
+    while (zoomIsAcceptable)
+
+      newZoom = zoom + zoomIncrement
+
+      B = -@ROWS_HEADER_WIDTH - baseMatrixWidth - @ROWS_FOOTER_WIDTH
+      E1 = @VISUALISATION_WIDTH + (B * newZoom)
+      C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
+      E2 = @VISUALISATION_HEIGHT + (C * newZoom)
+      D = -@ROWS_HEADER_WIDTH - @ROWS_FOOTER_WIDTH
+      E3 = @VISUALISATION_WIDTH + (D * newZoom)
+      E = -@COLS_FOOTER_HEIGHT - baseMatrixHeight - @COLS_HEADER_HEIGHT
+      E4 = @VISUALISATION_HEIGHT + (E * newZoom)
+
+      A1 = E1 * (E2 - E4)
+      A2 = E4 * E3
+      A = A1 + A2
+      zoomIsAcceptable = A1 > 0 and A2 > 0
+      if zoomIsAcceptable
+        zoom += zoomIncrement
+
+    return zoom
 
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # Cell Hovering
+  #---------------------------------------------------------------------------------------------------------------------
+  emphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d)
+
+  deEmphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d, false)
+
+  applyEmphasisFromCellHover: (d, hasEmphasis=true) ->
+
+    colHeaderTextElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + d.col_id)
+    colHeaderTextElem.classed('emphasis', hasEmphasis)
+
+    rowHeaderTextElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + d.row_id)
+    rowHeaderTextElem.classed('emphasis', hasEmphasis)
+
+    colFooterTextElem = d3.select('#' + @COL_FOOTER_TEXT_BASE_ID + d.col_id)
+    colFooterTextElem.classed('emphasis', hasEmphasis)
+
+    rowFooterTextElem = d3.select('#' + @ROW_FOOTER_TEXT_BASE_ID + d.row_id)
+    rowFooterTextElem.classed('emphasis', hasEmphasis)

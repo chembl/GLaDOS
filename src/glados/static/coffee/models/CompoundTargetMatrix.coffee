@@ -1,5 +1,8 @@
 CompoundTargetMatrix = Backbone.Model.extend
 
+  LOADING_DATA_LABEL: 'Loading...'
+  ERROR_LOADING_DATA_LABEL: '(Error Loading data)'
+  TARGET_PREF_NAMES_UPDATED_EVT: 'TARGET_PREF_NAMES_UPDATED_EVT'
   initialize: ->
 
 
@@ -16,7 +19,15 @@ CompoundTargetMatrix = Backbone.Model.extend
       reset: true
 
     thisModel = @
-    $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
+    $.ajax(fetchESOptions).done((data) ->
+      thisModel.set(thisModel.parse data)
+      allTargets = thisModel.get('matrix').columns
+      for target in allTargets
+        chemblID = target.target_chembl_id
+        thisModel.loadTargetsPrefName(chemblID)
+    )
+
+
 
   parse: (data) ->
 
@@ -38,11 +49,13 @@ CompoundTargetMatrix = Backbone.Model.extend
     for moleculeBucket in molsBuckets
 
       # what do I know now? I am seeing a new compound
-      compLabel = moleculeBucket.key
+      compID = moleculeBucket.key
 
       # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
       newCompoundObj =
-        label: compLabel
+        id: compID
+        molecule_pref_name: 'MOL_NAME ' + latestCompPos
+        molecule_chembl_id: moleculeBucket.key
         originalIndex: latestCompPos
         currentPosition: latestCompPos
         activity_count: moleculeBucket.doc_count
@@ -50,7 +63,7 @@ CompoundTargetMatrix = Backbone.Model.extend
         hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
       compoundsList.push newCompoundObj
-      compoundsToPosition[compLabel] = latestCompPos
+      compoundsToPosition[compID] = latestCompPos
       latestCompPos++
 
       # now check the targets for this molecule
@@ -58,14 +71,16 @@ CompoundTargetMatrix = Backbone.Model.extend
       for targetBucket in targBuckets
 
         # what do I know now? there is a target, it could be new or repeated
-        targLabel = targetBucket.key
-        targPos = targetsToPosition[targLabel]
+        targID = targetBucket.key
+        targPos = targetsToPosition[targID]
 
         # it is new!
         if not targPos?
 
           newTargetObj =
-            label: targLabel
+            id: targID
+            pref_name: @LOADING_DATA_LABEL
+            target_chembl_id: targetBucket.key
             originalIndex: latestTargPos
             currentPosition: latestTargPos
             activity_count: targetBucket.doc_count
@@ -74,7 +89,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
 
           targetsList.push newTargetObj
-          targetsToPosition[targLabel] = latestTargPos
+          targetsToPosition[targID] = latestTargPos
           latestTargPos++
 
         # it is not new, I just need to update the row properties
@@ -87,15 +102,15 @@ CompoundTargetMatrix = Backbone.Model.extend
 
         # now I know that there is a new intersection!
         activities =
-          row_id: compLabel
-          col_id: targLabel
+          row_id: compID
+          col_id: targID
           activity_count: targetBucket.doc_count
           pchembl_value_avg: targetBucket.pchembl_value_avg.value
 
 
         # here the compound and target must exist in the lists, recalculate the positions
-        compPos = compoundsToPosition[compLabel]
-        targPos = targetsToPosition[targLabel]
+        compPos = compoundsToPosition[compID]
+        targPos = targetsToPosition[targID]
 
         # create object for storing columns if not yet there
         if not links[compPos]?
@@ -107,12 +122,27 @@ CompoundTargetMatrix = Backbone.Model.extend
       columns: targetsList
       rows: compoundsList
       links: links
-      rows_index: _.indexBy(compoundsList, 'label')
-      columns_index: _.indexBy(targetsList, 'label')
+      rows_index: _.indexBy(compoundsList, 'id')
+      columns_index: _.indexBy(targetsList, 'id')
 
     console.log 'result: ', result
 
+
+
     return {"matrix": result}
+
+  loadTargetsPrefName: (targetChemblID) ->
+
+    targetUrl = glados.Settings.WS_BASE_URL + 'target/' + targetChemblID + '.json'
+    thisModel = @
+    $.getJSON(targetUrl).done( (data) ->
+      targetPrefName = data.pref_name
+      targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+      targetToUpdate.pref_name = targetPrefName
+    ).fail( ->
+      targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+      targetToUpdate.pref_name = thisModel.ERROR_LOADING_DATA_LABEL
+    ).always(-> thisModel.trigger(CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, targetChemblID))
 
   getValuesListForProperty: (propName) ->
 
@@ -125,12 +155,6 @@ CompoundTargetMatrix = Backbone.Model.extend
 
     return values
 
-  getLinkForColHeader: (itemID) ->
-    return Target.get_report_card_url itemID.replace('Targ: ', '')
-
-  getLinkForRowHeader: (itemID) ->
-    return Compound.get_report_card_url(itemID)
-
   sortMatrixRowsBy: (propName, reverse=false) ->
 
     matrix = @get('matrix')
@@ -139,8 +163,8 @@ CompoundTargetMatrix = Backbone.Model.extend
     #avoid issues with inconsistency of the objects pointed
     matrix.rows = []
     for row, index in newOrders
-      matrix.rows_index[row.label].currentPosition = index
-      matrix.rows.push(matrix.rows_index[row.label])
+      matrix.rows_index[row.id].currentPosition = index
+      matrix.rows.push(matrix.rows_index[row.id])
 
   sortMatrixColsBy: (propName, reverse=false) ->
 
@@ -149,8 +173,8 @@ CompoundTargetMatrix = Backbone.Model.extend
     newOrders = newOrders.reverse() if reverse
     matrix.columns = []
     for col, index in newOrders
-      matrix.columns_index[col.label].currentPosition = index
-      matrix.columns.push(matrix.columns_index[col.label])
+      matrix.columns_index[col.id].currentPosition = index
+      matrix.columns.push(matrix.columns_index[col.id])
 
   #returns a list with all the links
   getDataList: ->
@@ -164,7 +188,7 @@ CompoundTargetMatrix = Backbone.Model.extend
 
   getRequestData: ->
 
-    # just limit for now the ammount of data received
+    # just limit for now the amount of data received
     if @get('molecule_chembl_ids').length < 1000
       idsList = @get('molecule_chembl_ids')
     else
@@ -199,9 +223,5 @@ CompoundTargetMatrix = Backbone.Model.extend
                 pchembl_value_max:
                   max:
                     field: "pchembl_value"
-                assay_type_agg:
-                  terms:
-                    field: "assay_type"
-                    size: 100
 
     }

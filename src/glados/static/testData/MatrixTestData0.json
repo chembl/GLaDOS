@@ -1,1720 +1,540 @@
 {
+  "molecule_chembl_ids": [
+    "CHEMBL138921",
+    "CHEMBL59"
+  ],
   "matrix": {
     "columns": [
       {
-        "label": "Targ: CHEMBL376",
+        "id": "CHEMBL612545",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL612545",
         "originalIndex": 0,
         "currentPosition": 0,
-        "activity_count": 1931,
-        "pchembl_value_max": 7.54,
-        "hit_count": 7
+        "activity_count": 138,
+        "pchembl_value_max": 8.88,
+        "hit_count": 2
       },
       {
-        "label": "Targ: CHEMBL612545",
+        "id": "CHEMBL217",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL217",
         "originalIndex": 1,
         "currentPosition": 1,
-        "activity_count": 912,
-        "pchembl_value_max": 8.88,
-        "hit_count": 10
+        "activity_count": 79,
+        "pchembl_value_max": 8.72,
+        "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL1697861",
+        "id": "CHEMBL376",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL376",
         "originalIndex": 2,
         "currentPosition": 2,
-        "activity_count": 121,
-        "pchembl_value_max": 0,
-        "hit_count": 7
+        "activity_count": 77,
+        "pchembl_value_max": 7.54,
+        "hit_count": 2
       },
       {
-        "label": "Targ: CHEMBL612558",
+        "id": "CHEMBL234",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL234",
         "originalIndex": 3,
         "currentPosition": 3,
-        "activity_count": 75,
-        "pchembl_value_max": 4.42,
-        "hit_count": 4
-      },
-      {
-        "label": "Targ: CHEMBL372",
-        "originalIndex": 4,
-        "currentPosition": 4,
-        "activity_count": 35,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1293224",
-        "originalIndex": 5,
-        "currentPosition": 5,
-        "activity_count": 7,
-        "pchembl_value_max": 5.5,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL340",
-        "originalIndex": 6,
-        "currentPosition": 6,
-        "activity_count": 5,
-        "pchembl_value_max": 4.8,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL5027",
-        "originalIndex": 7,
-        "currentPosition": 7,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1293226",
-        "originalIndex": 8,
-        "currentPosition": 8,
-        "activity_count": 3,
-        "pchembl_value_max": 5.52,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1293234",
-        "originalIndex": 9,
-        "currentPosition": 9,
-        "activity_count": 3,
-        "pchembl_value_max": 4.95,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL2366738",
-        "originalIndex": 10,
-        "currentPosition": 10,
-        "activity_count": 38,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL375",
-        "originalIndex": 11,
-        "currentPosition": 11,
-        "activity_count": 53,
-        "pchembl_value_max": 0,
-        "hit_count": 2
-      },
-      {
-        "label": "Targ: CHEMBL205",
-        "originalIndex": 12,
-        "currentPosition": 12,
-        "activity_count": 13,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL261",
-        "originalIndex": 13,
-        "currentPosition": 13,
-        "activity_count": 8,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL2362975",
-        "originalIndex": 14,
-        "currentPosition": 14,
-        "activity_count": 16,
-        "pchembl_value_max": 0,
-        "hit_count": 2
-      },
-      {
-        "label": "Targ: CHEMBL3622",
-        "originalIndex": 15,
-        "currentPosition": 15,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL217",
-        "originalIndex": 16,
-        "currentPosition": 16,
-        "activity_count": 89,
-        "pchembl_value_max": 8.72,
-        "hit_count": 2
-      },
-      {
-        "label": "Targ: CHEMBL234",
-        "originalIndex": 17,
-        "currentPosition": 17,
         "activity_count": 41,
         "pchembl_value_max": 8.75,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL339",
-        "originalIndex": 18,
-        "currentPosition": 18,
+        "id": "CHEMBL339",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL339",
+        "originalIndex": 4,
+        "currentPosition": 4,
         "activity_count": 37,
         "pchembl_value_max": 8.96,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL373",
-        "originalIndex": 19,
-        "currentPosition": 19,
+        "id": "CHEMBL373",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL373",
+        "originalIndex": 5,
+        "currentPosition": 5,
         "activity_count": 29,
         "pchembl_value_max": null,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL2056",
-        "originalIndex": 20,
-        "currentPosition": 20,
-        "activity_count": 23,
-        "pchembl_value_max": 7.7,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL265",
-        "originalIndex": 21,
-        "currentPosition": 21,
+        "id": "CHEMBL265",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL265",
+        "originalIndex": 7,
+        "currentPosition": 6,
         "activity_count": 23,
         "pchembl_value_max": 6.82,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL3998",
-        "originalIndex": 22,
-        "currentPosition": 22,
-        "activity_count": 18,
+        "id": "CHEMBL2056",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL2056",
+        "originalIndex": 6,
+        "currentPosition": 7,
+        "activity_count": 23,
+        "pchembl_value_max": 7.7,
+        "hit_count": 1
+      },
+      {
+        "id": "CHEMBL1697861",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1697861",
+        "originalIndex": 8,
+        "currentPosition": 8,
+        "activity_count": 19,
+        "pchembl_value_max": null,
+        "hit_count": 1
+      },
+      {
+        "id": "CHEMBL3998",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL3998",
+        "originalIndex": 9,
+        "currentPosition": 9,
+        "activity_count": 17,
         "pchembl_value_max": 8.75,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL222",
-        "originalIndex": 23,
-        "currentPosition": 23,
-        "activity_count": 16,
-        "pchembl_value_max": 6.83,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL228",
-        "originalIndex": 24,
-        "currentPosition": 24,
-        "activity_count": 15,
-        "pchembl_value_max": 8.42,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL238",
-        "originalIndex": 25,
-        "currentPosition": 25,
-        "activity_count": 14,
-        "pchembl_value_max": 5.44,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1626541",
-        "originalIndex": 26,
-        "currentPosition": 26,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1798",
-        "originalIndex": 27,
-        "currentPosition": 27,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1821",
-        "originalIndex": 28,
-        "currentPosition": 28,
-        "activity_count": 6,
-        "pchembl_value_max": 10.01,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1824",
-        "originalIndex": 29,
-        "currentPosition": 29,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1827",
-        "originalIndex": 30,
-        "currentPosition": 30,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1832",
-        "originalIndex": 31,
-        "currentPosition": 31,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL1833",
-        "originalIndex": 32,
-        "currentPosition": 32,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      {
-        "label": "Targ: CHEMBL364",
-        "originalIndex": 33,
-        "currentPosition": 33,
-        "activity_count": 12,
-        "pchembl_value_max": 5.43,
-        "hit_count": 2
-      },
-      {
-        "label": "Targ: CHEMBL363",
-        "originalIndex": 34,
-        "currentPosition": 34,
-        "activity_count": 24,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL614955",
-        "originalIndex": 35,
-        "currentPosition": 35,
-        "activity_count": 24,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL612994",
-        "originalIndex": 36,
-        "currentPosition": 36,
-        "activity_count": 22,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL613162",
-        "originalIndex": 37,
-        "currentPosition": 37,
-        "activity_count": 22,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL366",
-        "originalIndex": 38,
-        "currentPosition": 38,
-        "activity_count": 11,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1293231",
-        "originalIndex": 39,
-        "currentPosition": 39,
-        "activity_count": 4,
-        "pchembl_value_max": 6.3,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL612763",
-        "originalIndex": 40,
-        "currentPosition": 40,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL1293278",
-        "originalIndex": 41,
-        "currentPosition": 41,
+        "id": "CHEMBL614632",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL614632",
+        "originalIndex": 12,
+        "currentPosition": 10,
         "activity_count": 3,
         "pchembl_value_max": null,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL240",
-        "originalIndex": 42,
-        "currentPosition": 42,
-        "activity_count": 10,
-        "pchembl_value_max": 6.92,
+        "id": "CHEMBL3571",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL3571",
+        "originalIndex": 11,
+        "currentPosition": 11,
+        "activity_count": 3,
+        "pchembl_value_max": 6.6,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL224",
-        "originalIndex": 43,
-        "currentPosition": 43,
-        "activity_count": 8,
-        "pchembl_value_max": 10.1,
+        "id": "CHEMBL1293224",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293224",
+        "originalIndex": 10,
+        "currentPosition": 12,
+        "activity_count": 3,
+        "pchembl_value_max": 5.5,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL225",
-        "originalIndex": 44,
-        "currentPosition": 44,
-        "activity_count": 7,
-        "pchembl_value_max": 9.26,
+        "id": "CHEMBL1293255",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293255",
+        "originalIndex": 17,
+        "currentPosition": 13,
+        "activity_count": 1,
+        "pchembl_value_max": 4.4,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL1871",
-        "originalIndex": 45,
-        "currentPosition": 45,
-        "activity_count": 6,
-        "pchembl_value_max": null,
+        "id": "CHEMBL1293254",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293254",
+        "originalIndex": 16,
+        "currentPosition": 14,
+        "activity_count": 1,
+        "pchembl_value_max": 4.75,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL1835",
-        "originalIndex": 46,
-        "currentPosition": 46,
-        "activity_count": 2,
-        "pchembl_value_max": null,
+        "id": "CHEMBL1293248",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293248",
+        "originalIndex": 15,
+        "currentPosition": 15,
+        "activity_count": 1,
+        "pchembl_value_max": 4.35,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL1841",
-        "originalIndex": 47,
-        "currentPosition": 47,
-        "activity_count": 2,
-        "pchembl_value_max": null,
+        "id": "CHEMBL1293234",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293234",
+        "originalIndex": 14,
+        "currentPosition": 16,
+        "activity_count": 1,
+        "pchembl_value_max": 4.8,
         "hit_count": 1
       },
       {
-        "label": "Targ: CHEMBL1867",
-        "originalIndex": 48,
-        "currentPosition": 48,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL387",
-        "originalIndex": 49,
-        "currentPosition": 49,
-        "activity_count": 7,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL392",
-        "originalIndex": 50,
-        "currentPosition": 50,
-        "activity_count": 7,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL384",
-        "originalIndex": 51,
-        "currentPosition": 51,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL390",
-        "originalIndex": 52,
-        "currentPosition": 52,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL396",
-        "originalIndex": 53,
-        "currentPosition": 53,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL613508",
-        "originalIndex": 54,
-        "currentPosition": 54,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL613977",
-        "originalIndex": 55,
-        "currentPosition": 55,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL614166",
-        "originalIndex": 56,
-        "currentPosition": 56,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      {
-        "label": "Targ: CHEMBL614387",
-        "originalIndex": 57,
-        "currentPosition": 57,
-        "activity_count": 6,
-        "pchembl_value_max": null,
+        "id": "CHEMBL1293231",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293231",
+        "originalIndex": 13,
+        "currentPosition": 17,
+        "activity_count": 1,
+        "pchembl_value_max": 4.95,
         "hit_count": 1
       }
     ],
     "rows": [
       {
-        "label": "CHEMBL459",
+        "id": "CHEMBL59",
+        "molecule_pref_name": "MOL_NAME 0",
+        "molecule_chembl_id": "CHEMBL59",
         "originalIndex": 0,
         "currentPosition": 0,
-        "activity_count": 1796,
-        "pchembl_value_max": 6.9,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL1009",
-        "originalIndex": 1,
-        "currentPosition": 1,
-        "activity_count": 790,
-        "pchembl_value_max": 8.2,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL59",
-        "originalIndex": 2,
-        "currentPosition": 2,
         "activity_count": 740,
         "pchembl_value_max": 8.96,
         "hit_count": 10
       },
       {
-        "label": "CHEMBL637",
-        "originalIndex": 3,
-        "currentPosition": 3,
-        "activity_count": 682,
-        "pchembl_value_max": 8.7,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL1237174",
-        "originalIndex": 4,
-        "currentPosition": 4,
-        "activity_count": 422,
-        "pchembl_value_max": null,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL1200748",
-        "originalIndex": 5,
-        "currentPosition": 5,
-        "activity_count": 381,
-        "pchembl_value_max": 5.7,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL242580",
-        "originalIndex": 6,
-        "currentPosition": 6,
-        "activity_count": 321,
-        "pchembl_value_max": 8.75,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL708",
-        "originalIndex": 7,
-        "currentPosition": 7,
-        "activity_count": 278,
-        "pchembl_value_max": 10.1,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL1201024",
-        "originalIndex": 8,
-        "currentPosition": 8,
-        "activity_count": 266,
-        "pchembl_value_max": 10.01,
-        "hit_count": 10
-      },
-      {
-        "label": "CHEMBL320753",
-        "originalIndex": 9,
-        "currentPosition": 9,
-        "activity_count": 255,
-        "pchembl_value_max": 8.68,
+        "id": "CHEMBL138921",
+        "molecule_pref_name": "MOL_NAME 1",
+        "molecule_chembl_id": "CHEMBL138921",
+        "originalIndex": 1,
+        "currentPosition": 1,
+        "activity_count": 38,
+        "pchembl_value_max": 7.92,
         "hit_count": 10
       }
     ],
     "links": {
       "0": {
         "0": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 1262,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL612545",
+          "activity_count": 131,
+          "pchembl_value_avg": 5.898333333333333
         },
         "1": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 99,
-          "pchembl_value_avg": 4.707142857142857
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL217",
+          "activity_count": 79,
+          "pchembl_value_avg": 6.869199999999999
         },
         "2": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 38,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL376",
+          "activity_count": 73,
+          "pchembl_value_avg": 5.84
         },
         "3": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL612558",
-          "activity_count": 18,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL234",
+          "activity_count": 41,
+          "pchembl_value_avg": 7.806
         },
         "4": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL372",
-          "activity_count": 12,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL339",
+          "activity_count": 37,
+          "pchembl_value_avg": 6.2030769230769245
         },
         "5": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL1293224",
-          "activity_count": 7,
-          "pchembl_value_avg": 5.164285714285714
-        },
-        "6": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL340",
-          "activity_count": 5,
-          "pchembl_value_avg": 4.8
-        },
-        "7": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL5027",
-          "activity_count": 4,
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL373",
+          "activity_count": 29,
           "pchembl_value_avg": null
         },
+        "6": {
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL2056",
+          "activity_count": 23,
+          "pchembl_value_avg": 6.349230769230768
+        },
+        "7": {
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL265",
+          "activity_count": 23,
+          "pchembl_value_avg": 5.875555555555555
+        },
         "8": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL1293226",
-          "activity_count": 3,
-          "pchembl_value_avg": 5.239999999999999
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL1697861",
+          "activity_count": 19,
+          "pchembl_value_avg": null
         },
         "9": {
-          "row_id": "CHEMBL459",
-          "col_id": "Targ: CHEMBL1293234",
-          "activity_count": 3,
-          "pchembl_value_avg": 4.8500000000000005
+          "row_id": "CHEMBL59",
+          "col_id": "CHEMBL3998",
+          "activity_count": 17,
+          "pchembl_value_avg": 6.621818181818182
         }
       },
       "1": {
         "0": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 192,
-          "pchembl_value_avg": null
-        },
-        "1": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 130,
-          "pchembl_value_avg": 5.65
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL612545",
+          "activity_count": 7,
+          "pchembl_value_avg": 5.7925
         },
         "2": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "3": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL612558",
-          "activity_count": 25,
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL376",
+          "activity_count": 4,
           "pchembl_value_avg": null
         },
         "10": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL2366738",
-          "activity_count": 38,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293224",
+          "activity_count": 3,
+          "pchembl_value_avg": 4.866666666666666
         },
         "11": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL375",
-          "activity_count": 36,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL3571",
+          "activity_count": 3,
+          "pchembl_value_avg": 6.539999999999999
         },
         "12": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL205",
-          "activity_count": 13,
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL614632",
+          "activity_count": 3,
           "pchembl_value_avg": null
         },
         "13": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL261",
-          "activity_count": 8,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293231",
+          "activity_count": 1,
+          "pchembl_value_avg": 4.95
         },
         "14": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL2362975",
-          "activity_count": 6,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293234",
+          "activity_count": 1,
+          "pchembl_value_avg": 4.8
         },
         "15": {
-          "row_id": "CHEMBL1009",
-          "col_id": "Targ: CHEMBL3622",
-          "activity_count": 4,
-          "pchembl_value_avg": null
-        }
-      },
-      "2": {
-        "0": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 73,
-          "pchembl_value_avg": 5.84
-        },
-        "1": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 131,
-          "pchembl_value_avg": 5.898333333333333
-        },
-        "2": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 19,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293248",
+          "activity_count": 1,
+          "pchembl_value_avg": 4.35
         },
         "16": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL217",
-          "activity_count": 79,
-          "pchembl_value_avg": 6.869199999999999
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293254",
+          "activity_count": 1,
+          "pchembl_value_avg": 4.75
         },
         "17": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL234",
-          "activity_count": 41,
-          "pchembl_value_avg": 7.806
-        },
-        "18": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL339",
-          "activity_count": 37,
-          "pchembl_value_avg": 6.203076923076923
-        },
-        "19": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL373",
-          "activity_count": 29,
-          "pchembl_value_avg": null
-        },
-        "20": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL2056",
-          "activity_count": 23,
-          "pchembl_value_avg": 6.34923076923077
-        },
-        "21": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL265",
-          "activity_count": 23,
-          "pchembl_value_avg": 5.875555555555556
-        },
-        "22": {
-          "row_id": "CHEMBL59",
-          "col_id": "Targ: CHEMBL3998",
-          "activity_count": 18,
-          "pchembl_value_avg": 6.586363636363637
-        }
-      },
-      "3": {
-        "0": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 179,
-          "pchembl_value_avg": null
-        },
-        "1": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 105,
-          "pchembl_value_avg": null
-        },
-        "2": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 36,
-          "pchembl_value_avg": null
-        },
-        "3": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL612558",
-          "activity_count": 21,
-          "pchembl_value_avg": 4.42
-        },
-        "4": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL372",
-          "activity_count": 11,
-          "pchembl_value_avg": null
-        },
-        "11": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL375",
-          "activity_count": 17,
-          "pchembl_value_avg": null
-        },
-        "14": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL2362975",
-          "activity_count": 10,
-          "pchembl_value_avg": null
-        },
-        "23": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL222",
-          "activity_count": 16,
-          "pchembl_value_avg": 5.954166666666666
-        },
-        "24": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL228",
-          "activity_count": 15,
-          "pchembl_value_avg": 7.608181818181818
-        },
-        "25": {
-          "row_id": "CHEMBL637",
-          "col_id": "Targ: CHEMBL238",
-          "activity_count": 14,
-          "pchembl_value_avg": 5.131666666666667
-        }
-      },
-      "4": {
-        "0": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 135,
-          "pchembl_value_avg": null
-        },
-        "1": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 75,
-          "pchembl_value_avg": null
-        },
-        "2": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "26": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1626541",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "27": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1798",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "28": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1821",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "29": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1824",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "30": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1827",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "31": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1832",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "32": {
-          "row_id": "CHEMBL1237174",
-          "col_id": "Targ: CHEMBL1833",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        }
-      },
-      "5": {
-        "0": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 76,
-          "pchembl_value_avg": null
-        },
-        "1": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 77,
-          "pchembl_value_avg": 5.18
-        },
-        "2": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "27": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1798",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "28": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1821",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "29": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1824",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "30": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1827",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "31": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1832",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "32": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL1833",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "33": {
-          "row_id": "CHEMBL1200748",
-          "col_id": "Targ: CHEMBL364",
-          "activity_count": 6,
-          "pchembl_value_avg": 4.916666666666667
-        }
-      },
-      "6": {
-        "1": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 92,
-          "pchembl_value_avg": 5.097272727272727
-        },
-        "33": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL364",
-          "activity_count": 6,
-          "pchembl_value_avg": 5.26
-        },
-        "34": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL363",
-          "activity_count": 24,
-          "pchembl_value_avg": null
-        },
-        "35": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL614955",
-          "activity_count": 24,
-          "pchembl_value_avg": null
-        },
-        "36": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL612994",
-          "activity_count": 22,
-          "pchembl_value_avg": null
-        },
-        "37": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL613162",
-          "activity_count": 22,
-          "pchembl_value_avg": null
-        },
-        "38": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL366",
-          "activity_count": 11,
-          "pchembl_value_avg": null
-        },
-        "39": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL1293231",
-          "activity_count": 4,
-          "pchembl_value_avg": 5.875
-        },
-        "40": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL612763",
-          "activity_count": 4,
-          "pchembl_value_avg": null
-        },
-        "41": {
-          "row_id": "CHEMBL242580",
-          "col_id": "Targ: CHEMBL1293278",
-          "activity_count": 3,
-          "pchembl_value_avg": null
-        }
-      },
-      "7": {
-        "0": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL376",
-          "activity_count": 14,
-          "pchembl_value_avg": null
-        },
-        "1": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 93,
-          "pchembl_value_avg": 7.96
-        },
-        "2": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL1697861",
-          "activity_count": 14,
-          "pchembl_value_avg": null
-        },
-        "3": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL612558",
-          "activity_count": 11,
-          "pchembl_value_avg": null
-        },
-        "4": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL372",
-          "activity_count": 12,
-          "pchembl_value_avg": null
-        },
-        "16": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL217",
-          "activity_count": 10,
-          "pchembl_value_avg": 8.251111111111111
-        },
-        "42": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL240",
-          "activity_count": 10,
-          "pchembl_value_avg": 6.875
-        },
-        "43": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL224",
-          "activity_count": 8,
-          "pchembl_value_avg": 9.52
-        },
-        "44": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL225",
-          "activity_count": 7,
-          "pchembl_value_avg": 8.567142857142857
-        },
-        "45": {
-          "row_id": "CHEMBL708",
-          "col_id": "Targ: CHEMBL1871",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        }
-      },
-      "8": {
-        "1": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 56,
-          "pchembl_value_avg": null
-        },
-        "27": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1798",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "28": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1821",
-          "activity_count": 2,
-          "pchembl_value_avg": 9.58
-        },
-        "29": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1824",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "30": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1827",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "31": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1832",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "32": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1833",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "46": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1835",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "47": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1841",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        },
-        "48": {
-          "row_id": "CHEMBL1201024",
-          "col_id": "Targ: CHEMBL1867",
-          "activity_count": 2,
-          "pchembl_value_avg": null
-        }
-      },
-      "9": {
-        "1": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL612545",
-          "activity_count": 54,
-          "pchembl_value_avg": null
-        },
-        "49": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL387",
-          "activity_count": 7,
-          "pchembl_value_avg": null
-        },
-        "50": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL392",
-          "activity_count": 7,
-          "pchembl_value_avg": null
-        },
-        "51": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL384",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "52": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL390",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "53": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL396",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "54": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL613508",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "55": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL613977",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "56": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL614166",
-          "activity_count": 6,
-          "pchembl_value_avg": null
-        },
-        "57": {
-          "row_id": "CHEMBL320753",
-          "col_id": "Targ: CHEMBL614387",
-          "activity_count": 6,
-          "pchembl_value_avg": null
+          "row_id": "CHEMBL138921",
+          "col_id": "CHEMBL1293255",
+          "activity_count": 1,
+          "pchembl_value_avg": 4.4
         }
       }
     },
     "rows_index": {
-      "CHEMBL459": {
-        "label": "CHEMBL459",
+      "CHEMBL59": {
+        "id": "CHEMBL59",
+        "molecule_pref_name": "MOL_NAME 0",
+        "molecule_chembl_id": "CHEMBL59",
         "originalIndex": 0,
         "currentPosition": 0,
-        "activity_count": 1796,
-        "pchembl_value_max": 6.9,
-        "hit_count": 10
-      },
-      "CHEMBL1009": {
-        "label": "CHEMBL1009",
-        "originalIndex": 1,
-        "currentPosition": 1,
-        "activity_count": 790,
-        "pchembl_value_max": 8.2,
-        "hit_count": 10
-      },
-      "CHEMBL59": {
-        "label": "CHEMBL59",
-        "originalIndex": 2,
-        "currentPosition": 2,
         "activity_count": 740,
         "pchembl_value_max": 8.96,
         "hit_count": 10
       },
-      "CHEMBL637": {
-        "label": "CHEMBL637",
-        "originalIndex": 3,
-        "currentPosition": 3,
-        "activity_count": 682,
-        "pchembl_value_max": 8.7,
-        "hit_count": 10
-      },
-      "CHEMBL1237174": {
-        "label": "CHEMBL1237174",
-        "originalIndex": 4,
-        "currentPosition": 4,
-        "activity_count": 422,
-        "pchembl_value_max": null,
-        "hit_count": 10
-      },
-      "CHEMBL1200748": {
-        "label": "CHEMBL1200748",
-        "originalIndex": 5,
-        "currentPosition": 5,
-        "activity_count": 381,
-        "pchembl_value_max": 5.7,
-        "hit_count": 10
-      },
-      "CHEMBL242580": {
-        "label": "CHEMBL242580",
-        "originalIndex": 6,
-        "currentPosition": 6,
-        "activity_count": 321,
-        "pchembl_value_max": 8.75,
-        "hit_count": 10
-      },
-      "CHEMBL708": {
-        "label": "CHEMBL708",
-        "originalIndex": 7,
-        "currentPosition": 7,
-        "activity_count": 278,
-        "pchembl_value_max": 10.1,
-        "hit_count": 10
-      },
-      "CHEMBL1201024": {
-        "label": "CHEMBL1201024",
-        "originalIndex": 8,
-        "currentPosition": 8,
-        "activity_count": 266,
-        "pchembl_value_max": 10.01,
-        "hit_count": 10
-      },
-      "CHEMBL320753": {
-        "label": "CHEMBL320753",
-        "originalIndex": 9,
-        "currentPosition": 9,
-        "activity_count": 255,
-        "pchembl_value_max": 8.68,
+      "CHEMBL138921": {
+        "id": "CHEMBL138921",
+        "molecule_pref_name": "MOL_NAME 1",
+        "molecule_chembl_id": "CHEMBL138921",
+        "originalIndex": 1,
+        "currentPosition": 1,
+        "activity_count": 38,
+        "pchembl_value_max": 7.92,
         "hit_count": 10
       }
     },
     "columns_index": {
-      "Targ: CHEMBL376": {
-        "label": "Targ: CHEMBL376",
+      "CHEMBL612545": {
+        "id": "CHEMBL612545",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL612545",
         "originalIndex": 0,
         "currentPosition": 0,
-        "activity_count": 1931,
-        "pchembl_value_max": 7.54,
-        "hit_count": 7
+        "activity_count": 138,
+        "pchembl_value_max": 8.88,
+        "hit_count": 2
       },
-      "Targ: CHEMBL612545": {
-        "label": "Targ: CHEMBL612545",
+      "CHEMBL217": {
+        "id": "CHEMBL217",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL217",
         "originalIndex": 1,
         "currentPosition": 1,
-        "activity_count": 912,
-        "pchembl_value_max": 8.88,
-        "hit_count": 10
+        "activity_count": 79,
+        "pchembl_value_max": 8.72,
+        "hit_count": 1
       },
-      "Targ: CHEMBL1697861": {
-        "label": "Targ: CHEMBL1697861",
+      "CHEMBL376": {
+        "id": "CHEMBL376",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL376",
         "originalIndex": 2,
         "currentPosition": 2,
-        "activity_count": 121,
-        "pchembl_value_max": 0,
-        "hit_count": 7
+        "activity_count": 77,
+        "pchembl_value_max": 7.54,
+        "hit_count": 2
       },
-      "Targ: CHEMBL612558": {
-        "label": "Targ: CHEMBL612558",
+      "CHEMBL234": {
+        "id": "CHEMBL234",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL234",
         "originalIndex": 3,
         "currentPosition": 3,
-        "activity_count": 75,
-        "pchembl_value_max": 4.42,
-        "hit_count": 4
-      },
-      "Targ: CHEMBL372": {
-        "label": "Targ: CHEMBL372",
-        "originalIndex": 4,
-        "currentPosition": 4,
-        "activity_count": 35,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1293224": {
-        "label": "Targ: CHEMBL1293224",
-        "originalIndex": 5,
-        "currentPosition": 5,
-        "activity_count": 7,
-        "pchembl_value_max": 5.5,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL340": {
-        "label": "Targ: CHEMBL340",
-        "originalIndex": 6,
-        "currentPosition": 6,
-        "activity_count": 5,
-        "pchembl_value_max": 4.8,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL5027": {
-        "label": "Targ: CHEMBL5027",
-        "originalIndex": 7,
-        "currentPosition": 7,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1293226": {
-        "label": "Targ: CHEMBL1293226",
-        "originalIndex": 8,
-        "currentPosition": 8,
-        "activity_count": 3,
-        "pchembl_value_max": 5.52,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1293234": {
-        "label": "Targ: CHEMBL1293234",
-        "originalIndex": 9,
-        "currentPosition": 9,
-        "activity_count": 3,
-        "pchembl_value_max": 4.95,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL2366738": {
-        "label": "Targ: CHEMBL2366738",
-        "originalIndex": 10,
-        "currentPosition": 10,
-        "activity_count": 38,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL375": {
-        "label": "Targ: CHEMBL375",
-        "originalIndex": 11,
-        "currentPosition": 11,
-        "activity_count": 53,
-        "pchembl_value_max": 0,
-        "hit_count": 2
-      },
-      "Targ: CHEMBL205": {
-        "label": "Targ: CHEMBL205",
-        "originalIndex": 12,
-        "currentPosition": 12,
-        "activity_count": 13,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL261": {
-        "label": "Targ: CHEMBL261",
-        "originalIndex": 13,
-        "currentPosition": 13,
-        "activity_count": 8,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL2362975": {
-        "label": "Targ: CHEMBL2362975",
-        "originalIndex": 14,
-        "currentPosition": 14,
-        "activity_count": 16,
-        "pchembl_value_max": 0,
-        "hit_count": 2
-      },
-      "Targ: CHEMBL3622": {
-        "label": "Targ: CHEMBL3622",
-        "originalIndex": 15,
-        "currentPosition": 15,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL217": {
-        "label": "Targ: CHEMBL217",
-        "originalIndex": 16,
-        "currentPosition": 16,
-        "activity_count": 89,
-        "pchembl_value_max": 8.72,
-        "hit_count": 2
-      },
-      "Targ: CHEMBL234": {
-        "label": "Targ: CHEMBL234",
-        "originalIndex": 17,
-        "currentPosition": 17,
         "activity_count": 41,
         "pchembl_value_max": 8.75,
         "hit_count": 1
       },
-      "Targ: CHEMBL339": {
-        "label": "Targ: CHEMBL339",
-        "originalIndex": 18,
-        "currentPosition": 18,
+      "CHEMBL339": {
+        "id": "CHEMBL339",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL339",
+        "originalIndex": 4,
+        "currentPosition": 4,
         "activity_count": 37,
         "pchembl_value_max": 8.96,
         "hit_count": 1
       },
-      "Targ: CHEMBL373": {
-        "label": "Targ: CHEMBL373",
-        "originalIndex": 19,
-        "currentPosition": 19,
+      "CHEMBL373": {
+        "id": "CHEMBL373",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL373",
+        "originalIndex": 5,
+        "currentPosition": 5,
         "activity_count": 29,
         "pchembl_value_max": null,
         "hit_count": 1
       },
-      "Targ: CHEMBL2056": {
-        "label": "Targ: CHEMBL2056",
-        "originalIndex": 20,
-        "currentPosition": 20,
+      "CHEMBL2056": {
+        "id": "CHEMBL2056",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL2056",
+        "originalIndex": 6,
+        "currentPosition": 7,
         "activity_count": 23,
         "pchembl_value_max": 7.7,
         "hit_count": 1
       },
-      "Targ: CHEMBL265": {
-        "label": "Targ: CHEMBL265",
-        "originalIndex": 21,
-        "currentPosition": 21,
+      "CHEMBL265": {
+        "id": "CHEMBL265",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL265",
+        "originalIndex": 7,
+        "currentPosition": 6,
         "activity_count": 23,
         "pchembl_value_max": 6.82,
         "hit_count": 1
       },
-      "Targ: CHEMBL3998": {
-        "label": "Targ: CHEMBL3998",
-        "originalIndex": 22,
-        "currentPosition": 22,
-        "activity_count": 18,
+      "CHEMBL1697861": {
+        "id": "CHEMBL1697861",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1697861",
+        "originalIndex": 8,
+        "currentPosition": 8,
+        "activity_count": 19,
+        "pchembl_value_max": null,
+        "hit_count": 1
+      },
+      "CHEMBL3998": {
+        "id": "CHEMBL3998",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL3998",
+        "originalIndex": 9,
+        "currentPosition": 9,
+        "activity_count": 17,
         "pchembl_value_max": 8.75,
         "hit_count": 1
       },
-      "Targ: CHEMBL222": {
-        "label": "Targ: CHEMBL222",
-        "originalIndex": 23,
-        "currentPosition": 23,
-        "activity_count": 16,
-        "pchembl_value_max": 6.83,
+      "CHEMBL1293224": {
+        "id": "CHEMBL1293224",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293224",
+        "originalIndex": 10,
+        "currentPosition": 12,
+        "activity_count": 3,
+        "pchembl_value_max": 5.5,
         "hit_count": 1
       },
-      "Targ: CHEMBL228": {
-        "label": "Targ: CHEMBL228",
-        "originalIndex": 24,
-        "currentPosition": 24,
-        "activity_count": 15,
-        "pchembl_value_max": 8.42,
+      "CHEMBL3571": {
+        "id": "CHEMBL3571",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL3571",
+        "originalIndex": 11,
+        "currentPosition": 11,
+        "activity_count": 3,
+        "pchembl_value_max": 6.6,
         "hit_count": 1
       },
-      "Targ: CHEMBL238": {
-        "label": "Targ: CHEMBL238",
-        "originalIndex": 25,
-        "currentPosition": 25,
-        "activity_count": 14,
-        "pchembl_value_max": 5.44,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1626541": {
-        "label": "Targ: CHEMBL1626541",
-        "originalIndex": 26,
-        "currentPosition": 26,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1798": {
-        "label": "Targ: CHEMBL1798",
-        "originalIndex": 27,
-        "currentPosition": 27,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1821": {
-        "label": "Targ: CHEMBL1821",
-        "originalIndex": 28,
-        "currentPosition": 28,
-        "activity_count": 6,
-        "pchembl_value_max": 10.01,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1824": {
-        "label": "Targ: CHEMBL1824",
-        "originalIndex": 29,
-        "currentPosition": 29,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1827": {
-        "label": "Targ: CHEMBL1827",
-        "originalIndex": 30,
-        "currentPosition": 30,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1832": {
-        "label": "Targ: CHEMBL1832",
-        "originalIndex": 31,
-        "currentPosition": 31,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL1833": {
-        "label": "Targ: CHEMBL1833",
-        "originalIndex": 32,
-        "currentPosition": 32,
-        "activity_count": 6,
-        "pchembl_value_max": 0,
-        "hit_count": 3
-      },
-      "Targ: CHEMBL364": {
-        "label": "Targ: CHEMBL364",
-        "originalIndex": 33,
-        "currentPosition": 33,
-        "activity_count": 12,
-        "pchembl_value_max": 5.43,
-        "hit_count": 2
-      },
-      "Targ: CHEMBL363": {
-        "label": "Targ: CHEMBL363",
-        "originalIndex": 34,
-        "currentPosition": 34,
-        "activity_count": 24,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL614955": {
-        "label": "Targ: CHEMBL614955",
-        "originalIndex": 35,
-        "currentPosition": 35,
-        "activity_count": 24,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL612994": {
-        "label": "Targ: CHEMBL612994",
-        "originalIndex": 36,
-        "currentPosition": 36,
-        "activity_count": 22,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL613162": {
-        "label": "Targ: CHEMBL613162",
-        "originalIndex": 37,
-        "currentPosition": 37,
-        "activity_count": 22,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL366": {
-        "label": "Targ: CHEMBL366",
-        "originalIndex": 38,
-        "currentPosition": 38,
-        "activity_count": 11,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1293231": {
-        "label": "Targ: CHEMBL1293231",
-        "originalIndex": 39,
-        "currentPosition": 39,
-        "activity_count": 4,
-        "pchembl_value_max": 6.3,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL612763": {
-        "label": "Targ: CHEMBL612763",
-        "originalIndex": 40,
-        "currentPosition": 40,
-        "activity_count": 4,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1293278": {
-        "label": "Targ: CHEMBL1293278",
-        "originalIndex": 41,
-        "currentPosition": 41,
+      "CHEMBL614632": {
+        "id": "CHEMBL614632",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL614632",
+        "originalIndex": 12,
+        "currentPosition": 10,
         "activity_count": 3,
         "pchembl_value_max": null,
         "hit_count": 1
       },
-      "Targ: CHEMBL240": {
-        "label": "Targ: CHEMBL240",
-        "originalIndex": 42,
-        "currentPosition": 42,
-        "activity_count": 10,
-        "pchembl_value_max": 6.92,
+      "CHEMBL1293231": {
+        "id": "CHEMBL1293231",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293231",
+        "originalIndex": 13,
+        "currentPosition": 17,
+        "activity_count": 1,
+        "pchembl_value_max": 4.95,
         "hit_count": 1
       },
-      "Targ: CHEMBL224": {
-        "label": "Targ: CHEMBL224",
-        "originalIndex": 43,
-        "currentPosition": 43,
-        "activity_count": 8,
-        "pchembl_value_max": 10.1,
+      "CHEMBL1293234": {
+        "id": "CHEMBL1293234",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293234",
+        "originalIndex": 14,
+        "currentPosition": 16,
+        "activity_count": 1,
+        "pchembl_value_max": 4.8,
         "hit_count": 1
       },
-      "Targ: CHEMBL225": {
-        "label": "Targ: CHEMBL225",
-        "originalIndex": 44,
-        "currentPosition": 44,
-        "activity_count": 7,
-        "pchembl_value_max": 9.26,
+      "CHEMBL1293248": {
+        "id": "CHEMBL1293248",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293248",
+        "originalIndex": 15,
+        "currentPosition": 15,
+        "activity_count": 1,
+        "pchembl_value_max": 4.35,
         "hit_count": 1
       },
-      "Targ: CHEMBL1871": {
-        "label": "Targ: CHEMBL1871",
-        "originalIndex": 45,
-        "currentPosition": 45,
-        "activity_count": 6,
-        "pchembl_value_max": null,
+      "CHEMBL1293254": {
+        "id": "CHEMBL1293254",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293254",
+        "originalIndex": 16,
+        "currentPosition": 14,
+        "activity_count": 1,
+        "pchembl_value_max": 4.75,
         "hit_count": 1
       },
-      "Targ: CHEMBL1835": {
-        "label": "Targ: CHEMBL1835",
-        "originalIndex": 46,
-        "currentPosition": 46,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1841": {
-        "label": "Targ: CHEMBL1841",
-        "originalIndex": 47,
-        "currentPosition": 47,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL1867": {
-        "label": "Targ: CHEMBL1867",
-        "originalIndex": 48,
-        "currentPosition": 48,
-        "activity_count": 2,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL387": {
-        "label": "Targ: CHEMBL387",
-        "originalIndex": 49,
-        "currentPosition": 49,
-        "activity_count": 7,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL392": {
-        "label": "Targ: CHEMBL392",
-        "originalIndex": 50,
-        "currentPosition": 50,
-        "activity_count": 7,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL384": {
-        "label": "Targ: CHEMBL384",
-        "originalIndex": 51,
-        "currentPosition": 51,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL390": {
-        "label": "Targ: CHEMBL390",
-        "originalIndex": 52,
-        "currentPosition": 52,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL396": {
-        "label": "Targ: CHEMBL396",
-        "originalIndex": 53,
-        "currentPosition": 53,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL613508": {
-        "label": "Targ: CHEMBL613508",
-        "originalIndex": 54,
-        "currentPosition": 54,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL613977": {
-        "label": "Targ: CHEMBL613977",
-        "originalIndex": 55,
-        "currentPosition": 55,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL614166": {
-        "label": "Targ: CHEMBL614166",
-        "originalIndex": 56,
-        "currentPosition": 56,
-        "activity_count": 6,
-        "pchembl_value_max": null,
-        "hit_count": 1
-      },
-      "Targ: CHEMBL614387": {
-        "label": "Targ: CHEMBL614387",
-        "originalIndex": 57,
-        "currentPosition": 57,
-        "activity_count": 6,
-        "pchembl_value_max": null,
+      "CHEMBL1293255": {
+        "id": "CHEMBL1293255",
+        "pref_name": "Loading...",
+        "target_chembl_id": "CHEMBL1293255",
+        "originalIndex": 17,
+        "currentPosition": 13,
+        "activity_count": 1,
+        "pchembl_value_max": 4.4,
         "hit_count": 1
       }
     }
