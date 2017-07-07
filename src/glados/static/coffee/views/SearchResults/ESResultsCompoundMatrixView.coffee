@@ -8,10 +8,10 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @MAX_COMPOUNDS_FOR_MATRIX = 10000
       @ctm = new glados.models.Activity.ActivityAggregationMatrix()
-      
+
       @ctmView = new MatrixView
-          model: @ctm
-          el: $(@el).find('.BCK-CompTargetMatrix')
+        model: @ctm
+        el: $(@el).find('.BCK-CompTargetMatrix')
 
       # I need to make the collection load all items
       @fetchInfoForMatrix()
