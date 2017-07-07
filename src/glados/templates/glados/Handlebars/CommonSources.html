@@ -710,14 +710,13 @@
 
   {{#each columnsDescriptions}}
     <div class="input-field col l3 m4 s6">
-      <b>Column {{this.columnNumber}}:</b> <br>
-      <select class="browser-default BCK-Bioactivity-column-select">
+      <select class="BCK-Bioactivity-column-select">
         {{#each this.fields}}
-          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}} >
-            {{this.name_to_show}}
-          </option>
+          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}}
+          >{{this.name_to_show}}</option>
         {{/each}}
       </select>
+      <label>Column {{this.columnNumber}}:</label>
     </div>
   {{/each}}
 
