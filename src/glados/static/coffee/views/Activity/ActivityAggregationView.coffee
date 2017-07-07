@@ -8,10 +8,14 @@ glados.useNameSpace 'glados.views.Activity',
       valuesObject = glados.Utils.getColumnsWithValues(\
         glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD.COLUMNS, @model)
 
-      general_link = 'hola'
+      filter = 'target_chembl_id:("' + @model.get('target_chembl_id') +
+        '") AND molecule_chembl_id:("' + @model.get('molecule_chembl_id') + '")'
+
+      linkURL = Activity.getActivitiesListURL(filter)
       glados.Utils.fillContentForElement($(@el),
         {
           columns: valuesObject
-          general_link: general_link
+          general_link_url: linkURL
+          general_link_text: 'See all activities'
         },
         templateID)

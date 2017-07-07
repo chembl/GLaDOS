@@ -1,6 +1,6 @@
 glados.useNameSpace 'glados.models.Activity',
   ActivityAggregation: Backbone.Model.extend
-    initialize: -> console.log 'init ActivityAggregation'
+    initialize: ->
 
 glados.models.Activity.ActivityAggregation.COLUMNS = {
   BIOACTIVITIES_NUMBER: {
