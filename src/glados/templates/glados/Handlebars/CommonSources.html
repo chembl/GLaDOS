@@ -202,34 +202,36 @@
 
 <script id="Handlebars-Common-MiniReportCard" type="text/x-handlebars-template">
 
-    <div class="card horizontal grey lighten-5 z-depth-0">
+  <div class="card horizontal grey lighten-5 z-depth-0">
 
-
-      {{#if img_url}}
-        <div class="white card-image" >
-          <img src="{{img_url}}" height="150px" width="150px" >
-        </div>
-      {{/if}}
-      <div class="card-content">
-
-        {{#each columns}}
-
-        {{#if this.has_link}}
-
-        <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-        </p>
-
-        {{else}}
-        <small>
-          <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-        </small>
-        {{/if}}
-        {{/each}}
-
+    {{#if img_url}}
+      <div class="white card-image" >
+        <img src="{{img_url}}" height="150px" width="150px" >
       </div>
+    {{/if}}
+    <div class="card-content">
 
+      {{#each columns}}
+
+      {{#if this.has_link}}
+
+      <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+      </p>
+
+      {{else}}
+      <small>
+        <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+      </small>
+      {{/if}}
+      {{/each}}
+
+      {{#if general_link}}
+        <hr>
+        {{general_link}}
+      {{/if}}
     </div>
 
+  </div>
 
  </script>
 

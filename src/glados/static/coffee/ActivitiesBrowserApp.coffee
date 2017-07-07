@@ -20,6 +20,7 @@ class ActivitiesBrowserApp
 
     summary = new glados.models.Activity.ActivityAggregation
       activity_count: d.activity_count
+      pchembl_value_avg: d.pchembl_value_avg
 
     new glados.views.Activity.ActivityAggregationView
       el: $containerElem

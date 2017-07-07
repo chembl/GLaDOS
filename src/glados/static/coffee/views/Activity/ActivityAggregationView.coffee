@@ -8,4 +8,10 @@ glados.useNameSpace 'glados.views.Activity',
       valuesObject = glados.Utils.getColumnsWithValues(\
         glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD.COLUMNS, @model)
 
-      glados.Utils.fillContentForElement($(@el), {columns: valuesObject}, templateID)
+      general_link = 'hola'
+      glados.Utils.fillContentForElement($(@el),
+        {
+          columns: valuesObject
+          general_link: general_link
+        },
+        templateID)

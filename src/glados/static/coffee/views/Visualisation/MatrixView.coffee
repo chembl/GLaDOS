@@ -1230,6 +1230,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       hide: 'click'
       style:
         classes:'matrix-qtip qtip-light qtip-shadow'
+      position:
+        my: 'top left'
+        at: 'bottom center'
 
     $clickedElem.qtip qtipConfig
     $clickedElem.qtip('api').show()
