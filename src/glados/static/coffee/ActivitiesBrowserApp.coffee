@@ -17,7 +17,10 @@ class ActivitiesBrowserApp
     actsList.fetch()
 
   @initMatrixCellMiniReportCard: ($containerElem, d) ->
-    console.log 'INITIALIZING MINI REP CARD: ', $containerElem, d
 
-    summary = new glados.models.Activity.ActivityAggregation()
-    new glados.views.Activity.ActivityAggregationView()
+    summary = new glados.models.Activity.ActivityAggregation
+      activity_count: d.activity_count
+
+    new glados.views.Activity.ActivityAggregationView
+      el: $containerElem
+      model: summary

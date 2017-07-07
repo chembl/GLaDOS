@@ -6,6 +6,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   ROW_HEADER_TEXT_BASE_ID: 'rows-header-text-'
   COL_FOOTER_TEXT_BASE_ID: 'cols-footer-text-'
   ROW_FOOTER_TEXT_BASE_ID: 'rows-footer-text-'
+  KEYS_PRESSED: []
+  GLADOS: [71, 76, 97, 68, 79, 83]
 
   initialize: ->
 
@@ -48,6 +50,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
+
+    thisView = @
+    $(window).keypress( (event) ->
+      limit = 6
+      thisView.KEYS_PRESSED.push(event.which)
+      if thisView.KEYS_PRESSED.length > limit
+        thisView.KEYS_PRESSED.shift()
+    )
 
   handleTargetPrefNameChange: (targetChemblID) ->
 
@@ -1184,17 +1194,35 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # cells tooltips
   #---------------------------------------------------------------------------------------------------------------------
+  summoningMe: ->
+
+    if @KEYS_PRESSED.length != @GLADOS.length
+      return false
+
+    for i in [0..@KEYS_PRESSED.length-1]
+      keyIs = @KEYS_PRESSED[i]
+      keyMustBe = @GLADOS[i]
+      if keyIs != keyMustBe
+        return false
+
+    return true
+
   showCellTooltip: ($clickedElem, d)  ->
 
-    if $clickedElem.attr('data-qtip-configured')
+    summoningMe = @summoningMe()
+    if $clickedElem.attr('data-qtip-configured') and not summoningMe
         return
 
     cardID = d.row_id + '_' + d.col_id
     miniRepCardID = 'BCK-MiniReportCard-' + cardID
+    htmlContent = '<div id="' + miniRepCardID + '"></div>'
+
+    if summoningMe
+      htmlContent = Handlebars.compile($('#Handlebars-Common-GladosSummoned').html())()
 
     qtipConfig =
       content:
-        text: '<div id="' + miniRepCardID + '"></div>'
+        text: htmlContent
         button: 'close'
       show:
         event: 'click'
@@ -1206,6 +1234,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $clickedElem.qtip qtipConfig
     $clickedElem.qtip('api').show()
     $clickedElem.attr('data-qtip-configured', true)
+
+    if summoningMe
+      return
 
     $newMiniReportCardContainer = $('#' + miniRepCardID)
     ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
