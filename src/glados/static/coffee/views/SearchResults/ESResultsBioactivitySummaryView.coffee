@@ -9,8 +9,16 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      @ctm = new glados.models.Activity.ActivityAggregationMatrix()
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
+
+      @entityName = @collection.getMeta('label')
+      if @entityName == 'Targets'
+        filterProperty = 'target_chembl_id'
+      else
+        filterProperty = 'molecule_chembl_id'
+
+      @ctm = new glados.models.Activity.ActivityAggregationMatrix
+        filter_property: filterProperty
 
       @ctmView = new MatrixView
         model: @ctm
@@ -54,22 +62,22 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       console.log 'numWorkingItems: ', numWorkingItems
 
+      @hideDisplayAnywayButton()
       if numWorkingItems > threshold[1]
-        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' targets to show this visualisation.',
+        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
           hideCog=true)
         @hideMatrix()
         return
 
       if numWorkingItems > threshold[2] and not @FORCE_DISPLAY
-        msg = 'I am going to generate this visualisation from ' + numWorkingItems +
-          ' targets. This can cause your browser to slow down. Press the following button to override this warning.'
+        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @entityName +
+          '. This can cause your browser to slow down. Press the following button to override this warning.'
 
         @setProgressMessage(msg, hideCog=true, linkUrl=undefined, linkText=undefined, showWarningIcon=true)
         @showDisplayAnywayButton()
         @hideMatrix()
         return
-      else
-        @hideDisplayAnywayButton()
+
 
       @setProgressMessage('', hideCog=true)
 
@@ -122,12 +130,12 @@ glados.useNameSpace 'glados.views.SearchResults',
         allItemsIDs = (item.target_chembl_id for item in thisView.collection.allResults)
         console.log 'allItemsIDs: ', allItemsIDs
         # use hardcoded list for now
-        thisView.ctm.set('filter_property', 'target_chembl_id', {silent:true})
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
-        console.log 'ids set!'
+        console.log 'telling ctm to fetch'
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
+        thisView.showMatrix()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
       console.log 'getAllChemblIDsAndFetch'
