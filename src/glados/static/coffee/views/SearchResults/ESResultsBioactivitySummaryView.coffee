@@ -39,6 +39,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       if not $(@el).is(":visible")
         return
 
+      totalItems = @collection.get('num_records')
+      console.log 'totalItems: ', totalItems
       numSelectedItems = @collection.getNumberOfSelectedItems()
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
 
