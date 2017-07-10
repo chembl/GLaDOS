@@ -67,10 +67,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
       else
         @hideDisplayAnywayButton()
-        @setProgressMessage('', hideCog=true)
 
+      @setProgressMessage('', hideCog=true)
 
-      console.log 'HANDLE VISUALISATION STATUS!'
+      console.log 'GET DATA!!'
+      if not thereIsSelection
+        @getAllChemblIDsAndFetch()
+
       return
 
 
@@ -108,6 +111,21 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
+      $messagesElement = $(@el).find('.BCK-VisualisationMessages').first()
+      deferreds = @collection.getAllResults($messagesElement)
+
+      thisView = @
+      $.when.apply($, deferreds).done( ->
+        allItemsIDs = (item.target_chembl_id for item in thisView.collection.allResults)
+        console.log 'allItemsIDs: ', allItemsIDs
+
+        moleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419']
+        # use hardcoded list for now
+        thisView.ctm.set('molecule_chembl_ids', moleculeIDs, {silent:true} )
+        thisView.ctm.fetch()
+      ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
+
+      console.log 'getAllChemblIDsAndFetch'
 
     getChemblIDsAndFetchFromSelection: (requiredIDs) ->
 
