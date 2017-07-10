@@ -1,15 +1,17 @@
 glados.useNameSpace 'glados.models.Activity',
   ActivityAggregationMatrix: Backbone.Model.extend
 
-    initialize: ->
+    defaults:
+      'filter_property': 'molecule_chembl_id'
 
+    initialize: ->
 
     fetch: (options) ->
 
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
-
+      console.log 'esJSONRequest: ', esJSONRequest
       fetchESOptions =
         url: @url
         data: esJSONRequest
@@ -184,45 +186,51 @@ glados.useNameSpace 'glados.models.Activity',
 
       return dataList
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Request data
+    #-------------------------------------------------------------------------------------------------------------------
+    addQueryToRequest: (requestData, idsList) ->
+      requestData.query =
+        terms: {}
+
+      requestData.query.terms[@get('filter_property')] = idsList
+
     getRequestData: ->
 
-      # just limit for now the amount of data received
-      if @get('molecule_chembl_ids').length < 1000
-        idsList = @get('molecule_chembl_ids')
-      else
-        idsList = @get('molecule_chembl_ids')[0..1000]
+      idsList = @get('chembl_ids')
 
-      return {
-        query:
-          terms:
-            molecule_chembl_id: idsList
+      requestData =
         size: 0
-        aggs:
-          molecule_chembl_id_agg:
-            terms:
-              field: "molecule_chembl_id",
-              size: 10000,
-              order:
-                _count: "desc"
-            aggs:
-              pchembl_value_max:
-                max:
-                  field: "pchembl_value"
-              target_chembl_id_agg:
-                terms:
-                  field: "target_chembl_id",
-                  size: 10,
-                  order:
-                    _count: "desc"
-                aggs:
-                  pchembl_value_avg:
-                    avg:
-                      field: "pchembl_value"
-                  pchembl_value_max:
-                    max:
-                      field: "pchembl_value"
 
-      }
+      @addQueryToRequest(requestData, idsList)
+
+
+      requestData.aggs =
+        molecule_chembl_id_agg:
+          terms:
+            field: "molecule_chembl_id",
+            size: 10,
+            order:
+              _count: "desc"
+          aggs:
+            pchembl_value_max:
+              max:
+                field: "pchembl_value"
+            target_chembl_id_agg:
+              terms:
+                field: "target_chembl_id",
+                size: 10,
+                order:
+                  _count: "desc"
+              aggs:
+                pchembl_value_avg:
+                  avg:
+                    field: "pchembl_value"
+                pchembl_value_max:
+                  max:
+                    field: "pchembl_value"
+
+      return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
 glados.models.Activity.ActivityAggregationMatrix. ERROR_LOADING_DATA_LABEL = '(Error Loading data)'
