@@ -23,7 +23,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     setProgressMessage: (msg, hideCog=false, linkUrl, linkText, showWarningIcon=false) ->
 
-      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+      $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
+      $messagesElement.show()
+      console.log '$messagesElement: ', $messagesElement
       glados.Utils.fillContentForElement $messagesElement,
         message: msg
         hide_cog: hideCog
@@ -31,6 +33,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         link_text: linkText
         show_warning_icon: showWarningIcon
 
+    hideProgressElement: -> $(@el).find('.BCK-ViewHandlerMessages').hide()
     #------------------------------------------------------------------------------------------------------------------
     # Handle visualisation status
     #-------------------------------------------------------------------------------------------------------------------
@@ -111,7 +114,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
-      $messagesElement = $(@el).find('.BCK-VisualisationMessages').first()
+      $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
 
       thisView = @
@@ -123,6 +126,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
         console.log 'ids set!'
         thisView.ctm.fetch()
+        thisView.setProgressMessage('', hideCog=true)
+        thisView.hideProgressElement()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
       console.log 'getAllChemblIDsAndFetch'
@@ -130,7 +135,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     getChemblIDsAndFetchFromSelection: (requiredIDs) ->
 
       if requiredIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
-        $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+        $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
         deferreds = @collection.getAllResults($messagesElement)
 
         thisView = @
