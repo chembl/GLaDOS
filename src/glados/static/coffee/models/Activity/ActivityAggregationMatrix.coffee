@@ -230,6 +230,7 @@ glados.useNameSpace 'glados.models.Activity',
                   max:
                     field: "pchembl_value"
 
+      console.log 'requestData: ', requestData
       return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'

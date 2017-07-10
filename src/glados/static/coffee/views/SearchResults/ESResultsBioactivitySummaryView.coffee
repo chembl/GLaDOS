@@ -118,10 +118,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       $.when.apply($, deferreds).done( ->
         allItemsIDs = (item.target_chembl_id for item in thisView.collection.allResults)
         console.log 'allItemsIDs: ', allItemsIDs
-
-        moleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419']
         # use hardcoded list for now
-        thisView.ctm.set('molecule_chembl_ids', moleculeIDs, {silent:true} )
+        thisView.ctm.set('filter_property', 'target_chembl_id', {silent:true})
+        thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
+        console.log 'ids set!'
         thisView.ctm.fetch()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
