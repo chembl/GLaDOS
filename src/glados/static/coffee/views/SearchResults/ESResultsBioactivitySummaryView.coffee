@@ -4,6 +4,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     MAX_AGGREGATIONS: 3
 
+    events:
+      'click .BCK-show-anyway': 'displayAnyway'
+
     initialize: ->
 
       @ctm = new glados.models.Activity.ActivityAggregationMatrix()
@@ -18,7 +21,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     # Progess Message
     #-------------------------------------------------------------------------------------------------------------------
-    setProgressMessage: (msg, hideCog=false, linkUrl, linkText) ->
+    setProgressMessage: (msg, hideCog=false, linkUrl, linkText, showWarningIcon=false) ->
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       glados.Utils.fillContentForElement $messagesElement,
@@ -26,6 +29,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         hide_cog: hideCog
         link_url: linkUrl
         link_text: linkText
+        show_warning_icon: showWarningIcon
 
     #------------------------------------------------------------------------------------------------------------------
     # Handle visualisation status
@@ -39,25 +43,36 @@ glados.useNameSpace 'glados.views.SearchResults',
       if not $(@el).is(":visible")
         return
 
-      totalItems = @collection.get('num_records')
-      console.log 'totalItems: ', totalItems
+      numTotalItems = @collection.getMeta('total_records')
       numSelectedItems = @collection.getNumberOfSelectedItems()
+      thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
+      numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
+
+      console.log 'numWorkingItems: ', numWorkingItems
+
+      if numWorkingItems > threshold[1]
+        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' targets to show this visualisation.',
+          hideCog=true)
+        @hideMatrix()
+        return
+
+      if numWorkingItems > threshold[2] and not @FORCE_DISPLAY
+        msg = 'I am going to generate this visualisation from ' + numWorkingItems +
+          ' targets. This can cause your browser to slow down. Press the following button to override this warning.'
+
+        @setProgressMessage(msg, hideCog=true, linkUrl=undefined, linkText=undefined, showWarningIcon=true)
+        @showDisplayAnywayButton()
+        @hideMatrix()
+        return
+      else
+        @hideDisplayAnywayButton()
+        @setProgressMessage('', hideCog=true)
+
 
       console.log 'HANDLE VISUALISATION STATUS!'
       return
 
-      if numSelectedItems < threshold[0]
-        @setProgressMessage('Please select at least ' + threshold[0] + ' target to show this visualisation.',
-          hideCog=true)
-        @hideMatrix()
-        return
-
-      if numSelectedItems > threshold[1]
-        @setProgressMessage('Please select less than ' + threshold[1] + ' targets to show this visualisation.',
-          hideCog=true)
-        @hideMatrix()
-        return
 
 
       selectedIDs = @collection.getSelectedItemsIDs()
@@ -77,24 +92,38 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @setProgressMessage('Filtering activities...')
 
-      @setTargetChemblIDsAndFetch(selectedIDs)
+      @getChemblIDsAndFetchFromSelection(selectedIDs)
 
-    setTargetChemblIDsAndFetch: (selectedIDs) ->
+    showDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').show()
+    hideDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').hide()
+    hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
+    showMatrix: -> $(@el).find('.BCK-CompTargetMatrix').show()
 
-      if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+    displayAnyway: ->
+      @FORCE_DISPLAY = true
+      @handleVisualisationStatus()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Get items to generate matrix
+    #-------------------------------------------------------------------------------------------------------------------
+    getAllChemblIDsAndFetch: (requiredIDs) ->
+
+
+    getChemblIDsAndFetchFromSelection: (requiredIDs) ->
+
+      if requiredIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
         $messagesElement = $(@el).find('.BCK-VisualisationMessages')
         deferreds = @collection.getAllResults($messagesElement)
 
         thisView = @
-        f = $.proxy(@setTargetChemblIDsAndFetch, @)
+        f = $.proxy(@getChemblIDsAndFetchFromSelection, @)
         $.when.apply($, deferreds).done( -> f(thisView.collection.getSelectedItemsIDs()))
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 
 
-      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
+      @activitiesSummarylist.setMeta('origin_chembl_ids', requiredIDs, undefined, trackPreviousValue=true)
       @activitiesSummarylist.fetch()
 
-    hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
-    showMatrix: -> $(@el).find('.BCK-CompTargetMatrix').show()
+
 

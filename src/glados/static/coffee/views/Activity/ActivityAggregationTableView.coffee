@@ -117,16 +117,16 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @setProgressMessage('Filtering activities...')
 
-      @setTargetChemblIDsAndFetch(selectedIDs)
+      @getChemblIDsAndFetchFromSelection(selectedIDs)
 
-    setTargetChemblIDsAndFetch: (selectedIDs) ->
+    getChemblIDsAndFetchFromSelection: (selectedIDs) ->
 
       if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
         $messagesElement = $(@el).find('.BCK-VisualisationMessages')
         deferreds = @collection.getAllResults($messagesElement)
 
         thisView = @
-        f = $.proxy(@setTargetChemblIDsAndFetch, @)
+        f = $.proxy(@getChemblIDsAndFetchFromSelection, @)
         $.when.apply($, deferreds).done( -> f(thisView.collection.getSelectedItemsIDs()))
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return

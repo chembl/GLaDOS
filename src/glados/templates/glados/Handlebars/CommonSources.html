@@ -495,7 +495,9 @@
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
-  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw">{{/unless}}</i> {{message}}
+  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw">{{/unless}}</i>
+  {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
+  {{message}}
   {{#if link_url}}
     <a target="_blank" href="{{link_url}}">{{link_text}}</a>
   {{/if}}
