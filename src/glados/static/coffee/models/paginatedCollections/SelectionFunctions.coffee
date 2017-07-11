@@ -109,7 +109,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
-    # warning: this is intended to work only when the list has all the elements in the client, not with server side lists
     getSelectedItemsIDs: ->
 
       idProperty = @getMeta('id_column').comparator

@@ -495,7 +495,9 @@
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
-  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw">{{/unless}}</i> {{message}}
+  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw">{{/unless}}</i>
+  {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
+  {{message}}
   {{#if link_url}}
     <a target="_blank" href="{{link_url}}">{{link_text}}</a>
   {{/if}}
@@ -625,20 +627,25 @@
 
   <div class="card grey lighten-5">
     <div class="card-content">
+
       {% endverbatim %}
-        {% include "glados/SearchResultsParts/CompoundTargetMatrixBase.html" %}
+        {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
       {% verbatim %}
     </div>
-
 </div>
 </script>
 
 <script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
 
-{% endverbatim %}
-  {% include "glados/SearchResultsParts/BioactivitySummaryBase.html" %}
-{% verbatim %}
-
+  <span class="load-messages-container">
+  </span>
+  <div class="card grey lighten-5">
+    <div class="card-content">
+    {% endverbatim %}
+      {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
+    {% verbatim %}
+    </div>
+  </div>
 </script>
 
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
@@ -710,14 +717,13 @@
 
   {{#each columnsDescriptions}}
     <div class="input-field col l3 m4 s6">
-      <b>Column {{this.columnNumber}}:</b> <br>
-      <select class="browser-default BCK-Bioactivity-column-select">
+      <select class="BCK-Bioactivity-column-select">
         {{#each this.fields}}
-          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}} >
-            {{this.name_to_show}}
-          </option>
+          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}}
+          >{{this.name_to_show}}</option>
         {{/each}}
       </select>
+      <label>Column {{this.columnNumber}}:</label>
     </div>
   {{/each}}
 

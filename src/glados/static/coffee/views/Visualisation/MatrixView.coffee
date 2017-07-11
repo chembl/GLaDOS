@@ -19,13 +19,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
             'CHEMBL_ID')
         target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
             'PREF_NAME')
-        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_AVG')
-        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'ACTIVITY_COUNT')
-        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'HIT_COUNT')
-        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_MAX')
       initial_colouring: 'pchembl_value_avg'
       colour_properties: ['activity_count', 'pchembl_value_avg']
@@ -45,7 +45,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     }
 
     @model.on 'change', @render, @
-    @model.on CompoundTargetMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
+    @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
@@ -1012,6 +1012,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
+      .scale(INITIAL_ZOOM)
+      .translate([0, 0])
 
     mainGContainer.call zoom
     # --------------------------------------

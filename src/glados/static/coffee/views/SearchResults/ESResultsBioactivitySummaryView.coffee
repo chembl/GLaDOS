@@ -2,81 +2,50 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ESResultsBioactivitySummaryView: Backbone.View.extend
 
-    MAX_AGGREGATIONS: 3
+    events:
+      'click .BCK-show-anyway': 'displayAnyway'
 
     initialize: ->
-      @activitiesSummarylist = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBioactivitiesSummaryList()
-      @activitiesSummarylist.on 'reset do-repaint sort', @handleVisualisationStatus, @
+
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
 
-      glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
-        $(@el).find('.BCK-summary-table-container'), undefined, disableColumnsSelection=true, disableItemSelection=true)
+      @entityName = @collection.getMeta('label')
+      if @entityName == 'Targets'
+        filterProperty = 'target_chembl_id'
+      else
+        filterProperty = 'molecule_chembl_id'
+
+      @ctm = new glados.models.Activity.ActivityAggregationMatrix
+        filter_property: filterProperty
+
+      @ctmView = new MatrixView
+        model: @ctm
+        el: $(@el).find('.BCK-CompTargetMatrix')
 
       @handleVisualisationStatus()
-      @paintFieldsSelectors(@activitiesSummarylist.getMeta('default_comparators'))
 
-    paintFieldsSelectors: (currentComparators) ->
-      $columnsSelectorContainer = $(@el).find('.BCK-columns-selector-container')
-      columnsDescriptions = []
+    #-------------------------------------------------------------------------------------------------------------------
+    # Progess Message
+    #-------------------------------------------------------------------------------------------------------------------
+    setProgressMessage: (msg, hideCog=false, linkUrl, linkText, showWarningIcon=false) ->
 
-      for i in [0..@MAX_AGGREGATIONS-1]
-        selectedComparator = currentComparators[i]
-        alreadyChosenComparatos = _.without(currentComparators, selectedComparator)
-        availableOptions = []
-
-        for key, field of Activity.COLUMNS
-
-          if not field.use_in_summary
-            continue
-          if _.contains(alreadyChosenComparatos, field.comparator)
-            continue
-
-          option =
-            is_selected: field.comparator == selectedComparator
-            value: i + '-' + field.comparator
-            name_to_show: field.name_to_show
-
-          availableOptions.push option
-
-        currentColumnOptions =
-          columnNumber: (i + 1)
-          fields: availableOptions
-        columnsDescriptions.push(currentColumnOptions)
-
-      glados.Utils.fillContentForElement $columnsSelectorContainer,
-        columnsDescriptions: columnsDescriptions
-
-      $(@el).find('select').material_select()
-
-      handleColumnFieldChangeProxy = $.proxy(@handleColumnFieldChange, @)
-      $(@el).find('.BCK-Bioactivity-column-select').change ->
-        if @value?
-          handleColumnFieldChangeProxy @value
-
-    handleColumnFieldChange: (selectedValue) ->
-
-      valueParts = selectedValue.split('-')
-      colNum = valueParts[0]
-      comparator = valueParts[1]
-      currentComparators = @activitiesSummarylist.getMeta('current_comparators')
-      currentComparators[colNum] = comparator
-      @activitiesSummarylist.setMeta('current_comparators', currentComparators)
-      @paintFieldsSelectors(currentComparators)
-      @setProgressMessage('loading... ')
-      @hideTable()
-      @activitiesSummarylist.fetch()
-
-    setProgressMessage: (msg, hideCog=false, linkUrl, linkText) ->
-
-      $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+      $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
+      $messagesElement.show()
+      console.log '$messagesElement: ', $messagesElement
       glados.Utils.fillContentForElement $messagesElement,
         message: msg
         hide_cog: hideCog
         link_url: linkUrl
         link_text: linkText
+        show_warning_icon: showWarningIcon
 
-    wakeUpView: ->
-      @handleVisualisationStatus()
+    hideProgressElement: -> $(@el).find('.BCK-ViewHandlerMessages').hide()
+    #------------------------------------------------------------------------------------------------------------------
+    # Handle visualisation status
+    #-------------------------------------------------------------------------------------------------------------------
+    getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+    wakeUpView: -> @handleVisualisationStatus()
+    sleepView: -> @ctmView.destroyAllTooltips()
 
     handleVisualisationStatus: ->
 
@@ -84,57 +53,91 @@ glados.useNameSpace 'glados.views.SearchResults',
       if not $(@el).is(":visible")
         return
 
+      numTotalItems = @collection.getMeta('total_records')
+      @hideDisplayAnywayButton()
+      if numTotalItems == 0
+        @setProgressMessage('No data to show',hideCog=true)
+        return
+
       numSelectedItems = @collection.getNumberOfSelectedItems()
+      thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
+      numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
 
-      if numSelectedItems < threshold[0]
-        @setProgressMessage('Please select at least ' + threshold[0] + ' target to show this visualisation.',
+      if numWorkingItems > threshold[1]
+        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
           hideCog=true)
-        @hideTable()
+        @hideMatrix()
         return
 
-      if numSelectedItems > threshold[1]
-        @setProgressMessage('Please select less than ' + threshold[1] + ' targets to show this visualisation.',
-          hideCog=true)
-        @hideTable()
+      if numWorkingItems > threshold[2] and not @FORCE_DISPLAY
+        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @entityName +
+          '. This can cause your browser to slow down. Press the following button to override this warning.'
+
+        @setProgressMessage(msg, hideCog=true, linkUrl=undefined, linkText=undefined, showWarningIcon=true)
+        @showDisplayAnywayButton()
+        @hideMatrix()
         return
 
-
-      selectedIDs = @collection.getSelectedItemsIDs()
-
-      IDsListAttrName = 'origin_chembl_ids'
-      originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
-      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
-
-      if originChemblIDS? and not @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
-        filter = 'target_chembl_id:(' + ('"' + id + '"' for id in originChemblIDS).join(' OR ') + ')'
-        url = Activity.getActivitiesListURL(filter)
-
-        @setProgressMessage('Showing results for the selected targets ' + '(' + numSelectedItems + ').',
-          hideCog=true, linkURL=url, linkText='Browse all activities for those targets.')
-        @showTable()
+      @setProgressMessage('', hideCog=true)
+      if not thereIsSelection
+        @getAllChemblIDsAndFetch()
         return
 
       @setProgressMessage('Filtering activities...')
+      selectedIDs = @collection.getSelectedItemsIDs()
+      @getChemblIDsAndFetchFromSelection(selectedIDs)
 
-      @setTargetChemblIDsAndFetch(selectedIDs)
+      return
 
-    setTargetChemblIDsAndFetch: (selectedIDs) ->
+    showDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').show()
+    hideDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').hide()
+    hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
+    showMatrix: -> $(@el).find('.BCK-CompTargetMatrix').show()
+
+    displayAnyway: ->
+      @FORCE_DISPLAY = true
+      @handleVisualisationStatus()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Get items to generate matrix
+    #-------------------------------------------------------------------------------------------------------------------
+    getAllChemblIDsAndFetch: (requiredIDs) ->
+
+      $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
+      deferreds = @collection.getAllResults($messagesElement)
+
+      thisView = @
+      $.when.apply($, deferreds).done( ->
+        filterProperty = thisView.ctm.get('filter_property')
+        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults)
+        console.log 'allItemsIDs: ', allItemsIDs
+        thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
+        thisView.ctm.fetch()
+        thisView.setProgressMessage('', hideCog=true)
+        thisView.hideProgressElement()
+        thisView.showMatrix()
+      ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
+
+
+    getChemblIDsAndFetchFromSelection: (selectedIDs) ->
 
       if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
-        $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+        $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
         deferreds = @collection.getAllResults($messagesElement)
 
         thisView = @
-        f = $.proxy(@setTargetChemblIDsAndFetch, @)
+        f = $.proxy(@getChemblIDsAndFetchFromSelection, @)
         $.when.apply($, deferreds).done( -> f(thisView.collection.getSelectedItemsIDs()))
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 
+      @ctm.set('chembl_ids', selectedIDs, {silent:true})
+      @ctm.fetch()
+      @showMatrix()
+      @setProgressMessage('', hideCog=true)
+      @hideProgressElement()
 
-      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
-      @activitiesSummarylist.fetch()
 
-    hideTable: -> $(@el).find('.BCK-summary-table-container').hide()
-    showTable: -> $(@el).find('.BCK-summary-table-container').show()
+
 
