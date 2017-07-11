@@ -78,35 +78,16 @@ glados.useNameSpace 'glados.views.SearchResults',
         @hideMatrix()
         return
 
-
       @setProgressMessage('', hideCog=true)
-
-      console.log 'GET DATA!!'
       if not thereIsSelection
         @getAllChemblIDsAndFetch()
-
-      return
-
-
-
-      selectedIDs = @collection.getSelectedItemsIDs()
-
-      IDsListAttrName = 'origin_chembl_ids'
-      originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
-      @activitiesSummarylist.setMeta('origin_chembl_ids', selectedIDs, undefined, trackPreviousValue=true)
-
-      if originChemblIDS? and not @activitiesSummarylist.metaListHasChanged(IDsListAttrName)
-        filter = 'target_chembl_id:(' + ('"' + id + '"' for id in originChemblIDS).join(' OR ') + ')'
-        url = Activity.getActivitiesListURL(filter)
-
-        @setProgressMessage('Showing results for the selected targets ' + '(' + numSelectedItems + ').',
-          hideCog=true, linkURL=url, linkText='Browse all activities for those targets.')
-        @showMatrix()
         return
 
       @setProgressMessage('Filtering activities...')
-
+      selectedIDs = @collection.getSelectedItemsIDs()
       @getChemblIDsAndFetchFromSelection(selectedIDs)
+
+      return
 
     showDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').show()
     hideDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').hide()
@@ -128,21 +109,18 @@ glados.useNameSpace 'glados.views.SearchResults',
       thisView = @
       $.when.apply($, deferreds).done( ->
         allItemsIDs = (item.target_chembl_id for item in thisView.collection.allResults)
-        console.log 'allItemsIDs: ', allItemsIDs
         # use hardcoded list for now
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
-        console.log 'telling ctm to fetch'
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
         thisView.showMatrix()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
-      console.log 'getAllChemblIDsAndFetch'
 
-    getChemblIDsAndFetchFromSelection: (requiredIDs) ->
+    getChemblIDsAndFetchFromSelection: (selectedIDs) ->
 
-      if requiredIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+      if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
         $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
         deferreds = @collection.getAllResults($messagesElement)
 
@@ -152,9 +130,12 @@ glados.useNameSpace 'glados.views.SearchResults',
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 
+      @ctm.set('chembl_ids', selectedIDs, {silent:true})
+      @ctm.fetch()
+      @showMatrix()
+      @setProgressMessage('', hideCog=true)
+      @hideProgressElement()
 
-      @activitiesSummarylist.setMeta('origin_chembl_ids', requiredIDs, undefined, trackPreviousValue=true)
-      @activitiesSummarylist.fetch()
 
 
 

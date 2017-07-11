@@ -1012,6 +1012,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
+      .scale(INITIAL_ZOOM)
+      .translate([0, 0])
 
     mainGContainer.call zoom
     # --------------------------------------
