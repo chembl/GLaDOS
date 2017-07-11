@@ -45,8 +45,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     #------------------------------------------------------------------------------------------------------------------
     # Handle visualisation status
     #-------------------------------------------------------------------------------------------------------------------
-    wakeUpView: ->
-      @handleVisualisationStatus()
+    getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+    wakeUpView: -> @handleVisualisationStatus()
+    sleepView: -> @ctmView.destroyAllTooltips()
 
     handleVisualisationStatus: ->
 
@@ -55,14 +56,16 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       numTotalItems = @collection.getMeta('total_records')
+      @hideDisplayAnywayButton()
+      if numTotalItems == 0
+        @setProgressMessage('No data to show',hideCog=true)
+        return
+
       numSelectedItems = @collection.getNumberOfSelectedItems()
       thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
 
-      console.log 'numWorkingItems: ', numWorkingItems
-
-      @hideDisplayAnywayButton()
       if numWorkingItems > threshold[1]
         @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
           hideCog=true)
@@ -108,8 +111,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       thisView = @
       $.when.apply($, deferreds).done( ->
-        allItemsIDs = (item.target_chembl_id for item in thisView.collection.allResults)
-        # use hardcoded list for now
+        filterProperty = thisView.ctm.get('filter_property')
+        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults)
+        console.log 'allItemsIDs: ', allItemsIDs
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
