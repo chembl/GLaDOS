@@ -51,6 +51,7 @@ describe "Compounds vs Target Matrix", ->
       filter_property: 'molecule_chembl_id'
       chembl_ids: testMoleculeIDs
       aggregations: testAggList
+    testDataToParse = undefined
 
     describe "Request Data", ->
 
@@ -58,6 +59,15 @@ describe "Compounds vs Target Matrix", ->
       it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
       it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
 
+    describe "Parsing", ->
+
+      beforeAll (done) ->
+        $.get (glados.Settings.STATIC_URL + 'testData/ActivityMatrixFromCompoundsSampleResponse.json'), (testData) ->
+          testDataToParse = testData
+          console.log 'testDataToParse: ', testDataToParse
+          done()
+
+      it 'parses the basic matrix structure (rows, columns, and links)', ->
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
