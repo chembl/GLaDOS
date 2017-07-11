@@ -6,11 +6,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @collection.on 'reset do-repaint', @fetchInfoForMatrix, @
 
-      @MAX_COMPOUNDS_FOR_MATRIX = 30
-      @ctm = new CompoundTargetMatrix
+      @MAX_COMPOUNDS_FOR_MATRIX = 10000
+      @ctm = new glados.models.Activity.ActivityAggregationMatrix()
+
       @ctmView = new MatrixView
-          model: @ctm
-          el: $(@el).find('.BCK-CompTargetMatrix')
+        model: @ctm
+        el: $(@el).find('.BCK-CompTargetMatrix')
 
       # I need to make the collection load all items
       @fetchInfoForMatrix()
@@ -38,7 +39,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         #with all items loaded now I can generate the matrix
         moleculeIDs = (item.molecule_chembl_id for item in thisView.collection.selectedResults)
-        thisView.ctm.set('molecule_chembl_ids', moleculeIDs, {silent:true} )
+        thisView.ctm.set('chembl_ids', moleculeIDs, {silent:true} )
         thisView.ctm.fetch()
 
         setTimeout( (()-> $progressElement.html ''), 200)

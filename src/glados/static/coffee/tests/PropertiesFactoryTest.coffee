@@ -119,7 +119,7 @@ describe "Properties Factory for visualisation", ->
 
         prop = undefined
         beforeEach ->
-          prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('CompoundTargetMatrix',
+          prop = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
             'PCHEMBL_VALUE_AVG')
 
         it 'generates the basic configuration', ->

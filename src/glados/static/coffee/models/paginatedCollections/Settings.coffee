@@ -18,9 +18,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Matrix'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
