@@ -40,6 +40,9 @@ describe "Compounds vs Target Matrix", ->
     expect(agg2?).toBe(true)
     expect(agg2.max.field).toBe('pchembl_value')
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # From Compounds
+  #---------------------------------------------------------------------------------------------------------------------
   describe "Starting From Compounds", ->
 
     testMoleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419']
@@ -55,17 +58,27 @@ describe "Compounds vs Target Matrix", ->
       it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
       it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # From Targets
+  #---------------------------------------------------------------------------------------------------------------------
   describe "Starting From Targets", ->
 
     testTargetIDs = ['CHEMBL2111342', 'CHEMBL2111341', 'CHEMBL2111359', 'CHEMBL3102']
+    testAggList = ['target_chembl_id', 'molecule_chembl_id']
     ctm = new glados.models.Activity.ActivityAggregationMatrix
       filter_property: 'target_chembl_id'
       chembl_ids: testTargetIDs
+      aggregations: testAggList
 
     describe "Request Data", ->
 
       it 'Generates the filter', -> testFilter(ctm, testTargetIDs)
+      it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
+      it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # General Functions
+  #---------------------------------------------------------------------------------------------------------------------
   describe "General Functions", ->
 
     ctm = new glados.models.Activity.ActivityAggregationMatrix()

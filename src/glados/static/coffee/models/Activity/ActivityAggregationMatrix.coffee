@@ -244,6 +244,7 @@ glados.useNameSpace 'glados.models.Activity',
       @addCellAggregationsToRequest(requestData)
 
       console.log 'requestData: ', requestData
+      console.log JSON.stringify(requestData)
       return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
