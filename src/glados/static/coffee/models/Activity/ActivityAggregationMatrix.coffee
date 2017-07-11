@@ -2,7 +2,8 @@ glados.useNameSpace 'glados.models.Activity',
   ActivityAggregationMatrix: Backbone.Model.extend
 
     defaults:
-      'filter_property': 'molecule_chembl_id'
+      filter_property: 'molecule_chembl_id'
+      aggregations: ['molecule_chembl_id', 'target_chembl_id']
 
     initialize: ->
 
@@ -195,6 +196,42 @@ glados.useNameSpace 'glados.models.Activity',
 
       requestData.query.terms[@get('filter_property')] = idsList
 
+    addAggregationsToRequest: (requestData) ->
+
+      aggsList = @get('aggregations')
+      requestData.aggs = {}
+      aggsContainer = requestData.aggs
+      for propName in aggsList
+        aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        aggsContainer[aggName] =
+          terms:
+            field: propName,
+            size: 10,
+            order:
+              _count: "desc"
+          aggs: {}
+
+        aggsContainer = aggsContainer[aggName].aggs
+
+    addCellAggregationsToRequest: (requestData) ->
+
+      aggsList = @get('aggregations')
+      aggsContainer = requestData.aggs
+
+      for i in [0..aggsList.length-1]
+        propName = aggsList[i]
+        aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        if i != aggsList.length - 1
+          aggsContainer = aggsContainer[aggName].aggs
+        else
+          aggsContainer[aggName].aggs =
+            pchembl_value_avg:
+              avg:
+                field: "pchembl_value"
+            pchembl_value_max:
+              max:
+                field: "pchembl_value"
+
     getRequestData: ->
 
       idsList = @get('chembl_ids')
@@ -203,32 +240,8 @@ glados.useNameSpace 'glados.models.Activity',
         size: 0
 
       @addQueryToRequest(requestData, idsList)
-
-
-      requestData.aggs =
-        molecule_chembl_id_agg:
-          terms:
-            field: "molecule_chembl_id",
-            size: 10,
-            order:
-              _count: "desc"
-          aggs:
-            pchembl_value_max:
-              max:
-                field: "pchembl_value"
-            target_chembl_id_agg:
-              terms:
-                field: "target_chembl_id",
-                size: 10,
-                order:
-                  _count: "desc"
-              aggs:
-                pchembl_value_avg:
-                  avg:
-                    field: "pchembl_value"
-                pchembl_value_max:
-                  max:
-                    field: "pchembl_value"
+      @addAggregationsToRequest(requestData)
+      @addCellAggregationsToRequest(requestData)
 
       console.log 'requestData: ', requestData
       return requestData
@@ -236,3 +249,4 @@ glados.useNameSpace 'glados.models.Activity',
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
 glados.models.Activity.ActivityAggregationMatrix. ERROR_LOADING_DATA_LABEL = '(Error Loading data)'
 glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT = 'TARGET_PREF_NAMES_UPDATED_EVT'
+glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX = '_agg'

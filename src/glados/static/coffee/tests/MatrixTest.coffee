@@ -3,23 +3,57 @@ describe "Compounds vs Target Matrix", ->
   testFilter = (ctm, testIDs) ->
 
     requestData = ctm.getRequestData()
-    console.log 'requestData: ', JSON.stringify(requestData)
     iDsGot = requestData.query.terms[ctm.get('filter_property')]
     expect(iDsGot.length).toBe(testIDs.length)
 
     for i in [0..testIDs.length-1]
       expect(iDsGot[i]).toBe(testIDs[i])
 
+  testAggregations = (ctm, testAggList) ->
+
+    requestData = ctm.getRequestData()
+    aggsContainer = requestData.aggs
+    for propName in testAggList
+      aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+      currentAgg = aggsContainer[aggName]
+      expect(currentAgg?).toBe(true)
+      expect(currentAgg.terms.field).toBe(propName)
+      aggsContainer = currentAgg.aggs
+
+
+  testCellsAggregations = (ctm, testAggList) ->
+
+    requestData = ctm.getRequestData()
+
+    aggsContainer = requestData.aggs
+    for propName in testAggList
+      aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+      aggsContainer = aggsContainer[aggName].aggs
+
+    # this is hardcoded for simplicity
+    cellsAggsContainer = aggsContainer
+    agg1 = cellsAggsContainer.pchembl_value_avg
+    expect(agg1?).toBe(true)
+    expect(agg1.avg.field).toBe('pchembl_value')
+
+    agg2 = cellsAggsContainer.pchembl_value_max
+    expect(agg2?).toBe(true)
+    expect(agg2.max.field).toBe('pchembl_value')
+
   describe "Starting From Compounds", ->
 
     testMoleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419']
+    testAggList = ['molecule_chembl_id', 'target_chembl_id']
     ctm = new glados.models.Activity.ActivityAggregationMatrix
       filter_property: 'molecule_chembl_id'
       chembl_ids: testMoleculeIDs
+      aggregations: testAggList
 
     describe "Request Data", ->
 
-      it 'Generates the correct filter', -> testFilter(ctm, testMoleculeIDs)
+      it 'Generates the filter', -> testFilter(ctm, testMoleculeIDs)
+      it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
+      it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
 
   describe "Starting From Targets", ->
 
@@ -30,7 +64,7 @@ describe "Compounds vs Target Matrix", ->
 
     describe "Request Data", ->
 
-      it 'Generates the correct filter', -> testFilter(ctm, testTargetIDs)
+      it 'Generates the filter', -> testFilter(ctm, testTargetIDs)
 
   describe "General Functions", ->
 
