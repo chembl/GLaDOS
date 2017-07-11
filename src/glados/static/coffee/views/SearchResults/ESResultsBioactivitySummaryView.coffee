@@ -2,8 +2,6 @@
 glados.useNameSpace 'glados.views.SearchResults',
   ESResultsBioactivitySummaryView: Backbone.View.extend
 
-    MAX_AGGREGATIONS: 3
-
     events:
       'click .BCK-show-anyway': 'displayAnyway'
 
