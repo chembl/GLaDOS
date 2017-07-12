@@ -85,7 +85,7 @@ glados.useNameSpace 'glados.models.Activity',
               originalIndex: latestTargPos
               currentPosition: latestTargPos
               activity_count: targetBucket.doc_count
-              pchembl_value_max: null
+              pchembl_value_max: targetBucket.pchembl_value_max.value
               hit_count: 1
 
 
@@ -97,16 +97,15 @@ glados.useNameSpace 'glados.models.Activity',
           else
 
             targObj = targetsList[targPos]
-
             targObj.activity_count += targetBucket.doc_count
             targObj.hit_count++
+            newPchemblMax = targetBucket.pchembl_value_max.value
+            currentPchemblMax = targObj.pchembl_value_max
 
-            newPchemblMax = targObj.pchembl_value_max
-            currentPchemblMax = targetBucket.pchembl_value_max.value
-            if not currentRowPchemblMax?
+            if not currentPchemblMax?
               targObj.pchembl_value_max = newPchemblMax
             else if newPchemblMax?
-              targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
+              targObj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
 
           # now I know that there is a new intersection!
           activities =

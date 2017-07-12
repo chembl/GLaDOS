@@ -217,7 +217,6 @@ describe "Compounds vs Target Matrix", ->
           maxPchemblGot = colObj.pchembl_value_max
           expect(maxPchemblGot).toBe(colMaxsMustBe[colID])
 
-
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
