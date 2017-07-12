@@ -60,7 +60,7 @@ glados.useNameSpace 'glados.models.Activity',
           originalIndex: latestCompPos
           currentPosition: latestCompPos
           activity_count: moleculeBucket.doc_count
-          pchembl_value_max: moleculeBucket.pchembl_value_max.value
+          pchembl_value_max: 0 #moleculeBucket.pchembl_value_max.value
           hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
         compoundsList.push newCompoundObj

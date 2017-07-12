@@ -64,10 +64,31 @@ describe "Compounds vs Target Matrix", ->
       beforeAll (done) ->
         $.get (glados.Settings.STATIC_URL + 'testData/ActivityMatrixFromCompoundsSampleResponse.json'), (testData) ->
           testDataToParse = testData
-          console.log 'testDataToParse: ', testDataToParse
           done()
 
-      it 'parses the basic matrix structure (rows, columns, and links)', ->
+      it 'parses the rows', ->
+
+        matrix = (ctm.parse testDataToParse).matrix
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        rowsMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
+        rowsGot = matrix.rows_index
+        for row in rowsMustBe
+          expect(rowsGot[row]?).toBe(true)
+
+      it 'parses the columns', ->
+
+        matrix = (ctm.parse testDataToParse).matrix
+
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+        colsGot = matrix.columns_index
+        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+        for rowObj in rowsContainer
+          for colObj in rowObj[colsAggName].buckets
+            colMustBe = colObj.key
+            expect(colsGot[colMustBe]?).toBe(true)
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
