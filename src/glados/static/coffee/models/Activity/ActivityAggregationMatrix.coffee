@@ -60,7 +60,7 @@ glados.useNameSpace 'glados.models.Activity',
           originalIndex: latestCompPos
           currentPosition: latestCompPos
           activity_count: 0
-          pchembl_value_max: undefined
+          pchembl_value_max: null
           hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
         compoundsList.push newCompoundObj
@@ -85,7 +85,7 @@ glados.useNameSpace 'glados.models.Activity',
               originalIndex: latestTargPos
               currentPosition: latestTargPos
               activity_count: targetBucket.doc_count
-              pchembl_value_max: targetBucket.pchembl_value_max.value
+              pchembl_value_max: null
               hit_count: 1
 
 
@@ -96,10 +96,17 @@ glados.useNameSpace 'glados.models.Activity',
           # it is not new, I just need to update the row properties
           else
 
-             targObj = targetsList[targPos]
-             targObj.activity_count += targetBucket.doc_count
-             targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
-             targObj.hit_count++
+            targObj = targetsList[targPos]
+
+            targObj.activity_count += targetBucket.doc_count
+            targObj.hit_count++
+
+            newPchemblMax = targObj.pchembl_value_max
+            currentPchemblMax = targetBucket.pchembl_value_max.value
+            if not currentRowPchemblMax?
+              targObj.pchembl_value_max = newPchemblMax
+            else if newPchemblMax?
+              targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
 
           # now I know that there is a new intersection!
           activities =
@@ -110,9 +117,10 @@ glados.useNameSpace 'glados.models.Activity',
             pchembl_value_max: targetBucket.pchembl_value_max.value
 
           # update the row properties
+          newCompoundObj.activity_count += targetBucket.doc_count
+
           newPchemblMax = targetBucket.pchembl_value_max.value
           currentRowPchemblMax = newCompoundObj.pchembl_value_max
-          newCompoundObj.activity_count += targetBucket.doc_count
           if not currentRowPchemblMax?
             newCompoundObj.pchembl_value_max = newPchemblMax
           else if newPchemblMax?

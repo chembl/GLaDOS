@@ -209,17 +209,15 @@ describe "Compounds vs Target Matrix", ->
             else if newPchemblValMax?
               colMaxsMustBe[colKey] = Math.max(currentColPchemblValMax, newPchemblValMax)
 
-
-            console.log 'colObj: ', colObj
-            console.log 'currentPchemblValMax: ', newPchemblValMax
-
-
         for rowID, rowObj of rowsGot
           maxPchemblGot = rowObj.pchembl_value_max
           expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
 
-        console.log 'rowMaxsMustBe: ', rowMaxsMustBe
-        console.log 'colMaxsMustBe: ', colMaxsMustBe
+        for colID, colObj of colsGot
+          maxPchemblGot = colObj.pchembl_value_max
+          expect(maxPchemblGot).toBe(colMaxsMustBe[colID])
+
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
