@@ -23,6 +23,7 @@ class ActivitiesBrowserApp
       pchembl_value_avg: d.pchembl_value_avg
       molecule_chembl_id: d.row_id
       target_chembl_id: d.col_id
+      pchembl_value_max: d.pchembl_value_max
 
     new glados.views.Activity.ActivityAggregationView
       el: $containerElem
