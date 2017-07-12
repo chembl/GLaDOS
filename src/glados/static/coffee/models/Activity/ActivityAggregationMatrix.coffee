@@ -59,8 +59,8 @@ glados.useNameSpace 'glados.models.Activity',
           molecule_chembl_id: moleculeBucket.key
           originalIndex: latestCompPos
           currentPosition: latestCompPos
-          activity_count: 0 #moleculeBucket.doc_count
-          pchembl_value_max: 0 #moleculeBucket.pchembl_value_max.value
+          activity_count: 0
+          pchembl_value_max: undefined
           hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
         compoundsList.push newCompoundObj
@@ -107,9 +107,16 @@ glados.useNameSpace 'glados.models.Activity',
             col_id: targID
             activity_count: targetBucket.doc_count
             pchembl_value_avg: targetBucket.pchembl_value_avg.value
+            pchembl_value_max: targetBucket.pchembl_value_max.value
 
           # update the row properties
+          newPchemblMax = targetBucket.pchembl_value_max.value
+          currentRowPchemblMax = newCompoundObj.pchembl_value_max
           newCompoundObj.activity_count += targetBucket.doc_count
+          if not currentRowPchemblMax?
+            newCompoundObj.pchembl_value_max = newPchemblMax
+          else if newPchemblMax?
+            newCompoundObj.pchembl_value_max = Math.max(newPchemblMax, currentRowPchemblMax)
 
           # here the compound and target must exist in the lists, recalculate the positions
           compPos = compoundsToPosition[compID]

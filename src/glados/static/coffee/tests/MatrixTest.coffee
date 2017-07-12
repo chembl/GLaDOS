@@ -178,7 +178,48 @@ describe "Compounds vs Target Matrix", ->
           actCountGot = colObj.activity_count
           expect(actCountGot).toBe(colSumsMustBe[colID])
 
+      it 'calculates pchembl value max per row and column', ->
 
+        matrix = (ctm.parse testDataToParse).matrix
+
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+        rowsGot = matrix.rows_index
+        colsGot = matrix.columns_index
+        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+        rowMaxsMustBe = {}
+        colMaxsMustBe = {}
+
+        for rowObj in rowsContainer
+          rowKey = rowObj.key
+          for colObj in rowObj[colsAggName].buckets
+            colKey = colObj.key
+
+            newPchemblValMax = colObj.pchembl_value_max.value
+            currentRowPchemblValMax = rowMaxsMustBe[rowKey]
+            if not currentRowPchemblValMax?
+              rowMaxsMustBe[rowKey] = newPchemblValMax
+            else if newPchemblValMax?
+              rowMaxsMustBe[rowKey] = Math.max(currentRowPchemblValMax, newPchemblValMax)
+
+            currentColPchemblValMax = colMaxsMustBe[colKey]
+            if not currentColPchemblValMax?
+              colMaxsMustBe[colKey] = newPchemblValMax
+            else if newPchemblValMax?
+              colMaxsMustBe[colKey] = Math.max(currentColPchemblValMax, newPchemblValMax)
+
+
+            console.log 'colObj: ', colObj
+            console.log 'currentPchemblValMax: ', newPchemblValMax
+
+
+        for rowID, rowObj of rowsGot
+          maxPchemblGot = rowObj.pchembl_value_max
+          expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
+
+        console.log 'rowMaxsMustBe: ', rowMaxsMustBe
+        console.log 'colMaxsMustBe: ', colMaxsMustBe
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
