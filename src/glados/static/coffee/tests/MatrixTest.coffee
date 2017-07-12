@@ -116,6 +116,69 @@ describe "Compounds vs Target Matrix", ->
             expect(rowIdInLink).toBe(rowKey)
             expect(colIdInlink).toBe(colKey)
 
+      it 'calculates the hit count per row and per column', ->
+
+        matrix = (ctm.parse testDataToParse).matrix
+
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+        rowsGot = matrix.rows_index
+        colsGot = matrix.columns_index
+        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+        rowHitCountsMustBe = {}
+        colHitCountsMustBe = {}
+
+        for rowObj in rowsContainer
+          rowKey = rowObj.key
+          rowHitCountsMustBe[rowKey] = 0 unless rowHitCountsMustBe[rowKey]?
+          for colObj in rowObj[colsAggName].buckets
+            colKey = colObj.key
+            colHitCountsMustBe[colKey] = 0 unless colHitCountsMustBe[colKey]?
+
+            rowHitCountsMustBe[rowKey]++
+            colHitCountsMustBe[colKey]++
+
+        for rowID, rowObj of rowsGot
+          hitCountGot = rowObj.hit_count
+          expect(hitCountGot).toBe(rowHitCountsMustBe[rowID])
+
+        for colID, colObj of colsGot
+          hitCountGot = colObj.hit_count
+          expect(hitCountGot).toBe(colHitCountsMustBe[colID])
+
+      it 'calculates activity count per row and column', ->
+
+        matrix = (ctm.parse testDataToParse).matrix
+
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+        rowsGot = matrix.rows_index
+        colsGot = matrix.columns_index
+        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+        rowSumsMustBe = {}
+        colSumsMustBe = {}
+
+        for rowObj in rowsContainer
+          rowKey = rowObj.key
+          rowSumsMustBe[rowKey] = 0 unless rowSumsMustBe[rowKey]?
+          for colObj in rowObj[colsAggName].buckets
+            colKey = colObj.key
+            colSumsMustBe[colKey] = 0 unless colSumsMustBe[colKey]?
+
+            rowSumsMustBe[rowKey] += colObj.doc_count
+            colSumsMustBe[colKey] += colObj.doc_count
+
+        for rowID, rowObj of rowsGot
+          actCountGot = rowObj.activity_count
+          expect(actCountGot).toBe(rowSumsMustBe[rowID])
+
+        for colID, colObj of colsGot
+          actCountGot = colObj.activity_count
+          expect(actCountGot).toBe(colSumsMustBe[colID])
+
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------

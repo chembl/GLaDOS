@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.models.Activity',
           molecule_chembl_id: moleculeBucket.key
           originalIndex: latestCompPos
           currentPosition: latestCompPos
-          activity_count: moleculeBucket.doc_count
+          activity_count: 0 #moleculeBucket.doc_count
           pchembl_value_max: 0 #moleculeBucket.pchembl_value_max.value
           hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
 
@@ -108,6 +108,8 @@ glados.useNameSpace 'glados.models.Activity',
             activity_count: targetBucket.doc_count
             pchembl_value_avg: targetBucket.pchembl_value_avg.value
 
+          # update the row properties
+          newCompoundObj.activity_count += targetBucket.doc_count
 
           # here the compound and target must exist in the lists, recalculate the positions
           compPos = compoundsToPosition[compID]
