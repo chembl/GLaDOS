@@ -89,6 +89,33 @@ describe "Compounds vs Target Matrix", ->
             colMustBe = colObj.key
             expect(colsGot[colMustBe]?).toBe(true)
 
+      it 'parses the links', ->
+
+        matrix = (ctm.parse testDataToParse).matrix
+
+        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+        linksGot = matrix.links
+        rowsGot = matrix.rows_index
+        colsGot = matrix.columns_index
+        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+
+        for rowObj in rowsContainer
+
+          rowKey = rowObj.key
+          rowOriginalIndex = rowsGot[rowKey].originalIndex
+
+          for colObj in rowObj[colsAggName].buckets
+            colKey = colObj.key
+            colOriginalIndex = colsGot[colKey].originalIndex
+            linkGot = linksGot[rowOriginalIndex][colOriginalIndex]
+
+            rowIdInLink = linkGot.row_id
+            colIdInlink = linkGot.col_id
+            expect(rowIdInLink).toBe(rowKey)
+            expect(colIdInlink).toBe(colKey)
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
   #---------------------------------------------------------------------------------------------------------------------
