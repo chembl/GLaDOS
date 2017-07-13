@@ -28,126 +28,128 @@ glados.useNameSpace 'glados.models.Activity',
           thisModel.loadTargetsPrefName(chemblID)
       )
 
-
-
+    #-------------------------------------------------------------------------------------------------------------------
+    # Parsing
+    #-------------------------------------------------------------------------------------------------------------------
     parse: (data) ->
 
-      compoundsToPosition = {}
-      targetsToPosition = {}
+      rowsToPosition = {}
+      colsToPosition = {}
       links = {}
 
-      compoundsList = []
-      latestCompPos = 0
-      targetsList = []
-      latestTargPos = 0
+      rowsList = []
+      latestRowPos = 0
+      colsList = []
+      latestColPos = 0
 
       rowsIndex = {}
       columnsIndex = {}
 
       # start with the list of molecules from the aggregation
-      molsBuckets = data.aggregations.molecule_chembl_id_agg.buckets
+      rowsBuckets = data.aggregations.molecule_chembl_id_agg.buckets
 
-      for moleculeBucket in molsBuckets
+      for rowBucket in rowsBuckets
 
         # what do I know now? I am seeing a new compound
-        compID = moleculeBucket.key
+        rowID = rowBucket.key
 
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newCompoundObj =
-          id: compID
-          molecule_pref_name: 'MOL_NAME ' + latestCompPos
-          molecule_chembl_id: moleculeBucket.key
-          originalIndex: latestCompPos
-          currentPosition: latestCompPos
+        newRowObj =
+          id: rowID
+          molecule_pref_name: 'MOL_NAME ' + latestRowPos
+          molecule_chembl_id: rowBucket.key
+          originalIndex: latestRowPos
+          currentPosition: latestRowPos
           activity_count: 0
           pchembl_value_max: null
-          hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
+          hit_count: rowBucket.target_chembl_id_agg.buckets.length
 
-        compoundsList.push newCompoundObj
-        compoundsToPosition[compID] = latestCompPos
-        latestCompPos++
+        rowsList.push newRowObj
+        rowsToPosition[rowID] = latestRowPos
+        latestRowPos++
 
         # now check the targets for this molecule
-        targBuckets = moleculeBucket.target_chembl_id_agg.buckets
-        for targetBucket in targBuckets
+        colBuckets = rowBucket.target_chembl_id_agg.buckets
+        for colBucket in colBuckets
 
           # what do I know now? there is a target, it could be new or repeated
-          targID = targetBucket.key
-          targPos = targetsToPosition[targID]
+          colID = colBucket.key
+          colPos = colsToPosition[colID]
 
           # it is new!
-          if not targPos?
+          if not colPos?
 
             newTargetObj =
-              id: targID
+              id: colID
               pref_name: @LOADING_DATA_LABEL
-              target_chembl_id: targetBucket.key
-              originalIndex: latestTargPos
-              currentPosition: latestTargPos
-              activity_count: targetBucket.doc_count
-              pchembl_value_max: targetBucket.pchembl_value_max.value
+              target_chembl_id: colBucket.key
+              originalIndex: latestColPos
+              currentPosition: latestColPos
+              activity_count: colBucket.doc_count
+              pchembl_value_max: colBucket.pchembl_value_max.value
               hit_count: 1
 
 
-            targetsList.push newTargetObj
-            targetsToPosition[targID] = latestTargPos
-            latestTargPos++
+            colsList.push newTargetObj
+            colsToPosition[colID] = latestColPos
+            latestColPos++
 
           # it is not new, I just need to update the row properties
           else
 
-            targObj = targetsList[targPos]
-            targObj.activity_count += targetBucket.doc_count
-            targObj.hit_count++
-            newPchemblMax = targetBucket.pchembl_value_max.value
-            currentPchemblMax = targObj.pchembl_value_max
+            colObj = colsList[colPos]
+            colObj.activity_count += colBucket.doc_count
+            colObj.hit_count++
+            newPchemblMax = colBucket.pchembl_value_max.value
+            currentPchemblMax = colObj.pchembl_value_max
 
             if not currentPchemblMax?
-              targObj.pchembl_value_max = newPchemblMax
+              colObj.pchembl_value_max = newPchemblMax
             else if newPchemblMax?
-              targObj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
+              colObj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
 
           # now I know that there is a new intersection!
-          activities =
-            row_id: compID
-            col_id: targID
-            activity_count: targetBucket.doc_count
-            pchembl_value_avg: targetBucket.pchembl_value_avg.value
-            pchembl_value_max: targetBucket.pchembl_value_max.value
+          cellObj =
+            row_id: rowID
+            col_id: colID
+            activity_count: colBucket.doc_count
+            pchembl_value_avg: colBucket.pchembl_value_avg.value
+            pchembl_value_max: colBucket.pchembl_value_max.value
 
           # update the row properties
-          newCompoundObj.activity_count += targetBucket.doc_count
+          newRowObj.activity_count += colBucket.doc_count
 
-          newPchemblMax = targetBucket.pchembl_value_max.value
-          currentRowPchemblMax = newCompoundObj.pchembl_value_max
+          newPchemblMax = colBucket.pchembl_value_max.value
+          currentRowPchemblMax = newRowObj.pchembl_value_max
           if not currentRowPchemblMax?
-            newCompoundObj.pchembl_value_max = newPchemblMax
+            newRowObj.pchembl_value_max = newPchemblMax
           else if newPchemblMax?
-            newCompoundObj.pchembl_value_max = Math.max(newPchemblMax, currentRowPchemblMax)
+            newRowObj.pchembl_value_max = Math.max(newPchemblMax, currentRowPchemblMax)
 
           # here the compound and target must exist in the lists, recalculate the positions
-          compPos = compoundsToPosition[compID]
-          targPos = targetsToPosition[targID]
+          compPos = rowsToPosition[rowID]
+          colPos = colsToPosition[colID]
 
           # create object for storing columns if not yet there
           if not links[compPos]?
             links[compPos] = {}
 
-          links[compPos][targPos] = activities
+          links[compPos][colPos] = cellObj
 
       result =
-        columns: targetsList
-        rows: compoundsList
+        columns: colsList
+        rows: rowsList
         links: links
-        rows_index: _.indexBy(compoundsList, 'id')
-        columns_index: _.indexBy(targetsList, 'id')
+        rows_index: _.indexBy(rowsList, 'id')
+        columns_index: _.indexBy(colsList, 'id')
 
       console.log 'result: ', result
 
-
-
       return {"matrix": result}
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Additional data
+    #-------------------------------------------------------------------------------------------------------------------
     loadTargetsPrefName: (targetChemblID) ->
 
       targetUrl = glados.Settings.WS_BASE_URL + 'target/' + targetChemblID + '.json'
