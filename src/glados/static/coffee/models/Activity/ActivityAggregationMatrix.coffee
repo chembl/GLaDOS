@@ -54,15 +54,7 @@ glados.useNameSpace 'glados.models.Activity',
         rowID = rowBucket.key
 
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newRowObj =
-          id: rowID
-          molecule_pref_name: 'MOL_NAME ' + latestRowPos
-          molecule_chembl_id: rowBucket.key
-          originalIndex: latestRowPos
-          currentPosition: latestRowPos
-          activity_count: 0
-          pchembl_value_max: null
-          hit_count: rowBucket.target_chembl_id_agg.buckets.length
+        newRowObj = @createNewRowObj(rowID, rowBucket, latestRowPos)
 
         rowsList.push newRowObj
         rowsToPosition[rowID] = latestRowPos
@@ -79,18 +71,9 @@ glados.useNameSpace 'glados.models.Activity',
           # it is new!
           if not colPos?
 
-            newTargetObj =
-              id: colID
-              pref_name: @LOADING_DATA_LABEL
-              target_chembl_id: colBucket.key
-              originalIndex: latestColPos
-              currentPosition: latestColPos
-              activity_count: colBucket.doc_count
-              pchembl_value_max: colBucket.pchembl_value_max.value
-              hit_count: 1
+            newColObj = @createNewColObj(colID, colBucket, latestColPos)
 
-
-            colsList.push newTargetObj
+            colsList.push newColObj
             colsToPosition[colID] = latestColPos
             latestColPos++
 
@@ -109,12 +92,7 @@ glados.useNameSpace 'glados.models.Activity',
               colObj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
 
           # now I know that there is a new intersection!
-          cellObj =
-            row_id: rowID
-            col_id: colID
-            activity_count: colBucket.doc_count
-            pchembl_value_avg: colBucket.pchembl_value_avg.value
-            pchembl_value_max: colBucket.pchembl_value_max.value
+          cellObj = @createNewCellObj(rowID, colID, colBucket)
 
           # update the row properties
           newRowObj.activity_count += colBucket.doc_count
@@ -147,6 +125,38 @@ glados.useNameSpace 'glados.models.Activity',
 
       return {"matrix": result}
 
+    createNewRowObj: (rowID, rowBucket, latestRowPos) ->
+
+      return {
+        id: rowID
+        molecule_pref_name: 'MOL_NAME ' + latestRowPos
+        molecule_chembl_id: rowBucket.key
+        originalIndex: latestRowPos
+        currentPosition: latestRowPos
+        activity_count: 0
+        pchembl_value_max: null
+        hit_count: rowBucket.target_chembl_id_agg.buckets.length
+      }
+
+    createNewColObj: (colID, colBucket, latestColPos) ->
+
+      return {
+        id: colID
+        pref_name: @LOADING_DATA_LABEL
+        target_chembl_id: colBucket.key
+        originalIndex: latestColPos
+        currentPosition: latestColPos
+        activity_count: colBucket.doc_count
+        pchembl_value_max: colBucket.pchembl_value_max.value
+        hit_count: 1
+      }
+
+    createNewCellObj: (rowID, colID, colBucket) ->
+      row_id: rowID
+      col_id: colID
+      activity_count: colBucket.doc_count
+      pchembl_value_avg: colBucket.pchembl_value_avg.value
+      pchembl_value_max: colBucket.pchembl_value_max.value
     #-------------------------------------------------------------------------------------------------------------------
     # Additional data
     #-------------------------------------------------------------------------------------------------------------------
