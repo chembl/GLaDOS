@@ -235,12 +235,27 @@ describe "Compounds vs Target Matrix", ->
       filter_property: 'target_chembl_id'
       chembl_ids: testTargetIDs
       aggregations: testAggList
+    testDataToParse = undefined
 
     describe "Request Data", ->
 
       it 'Generates the filter', -> testFilter(ctm, testTargetIDs)
       it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
       it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
+
+    describe "Parsing", ->
+
+      beforeAll (done) ->
+        $.get (glados.Settings.STATIC_URL + 'testData/ActivityMatrixFromTargetsSampleResponse.json'), (testData) ->
+          testDataToParse = testData
+          done()
+
+      it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
+      it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
+      it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
+      it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
+      it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
+      it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # General Functions

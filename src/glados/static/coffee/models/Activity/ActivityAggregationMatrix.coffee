@@ -117,7 +117,7 @@ glados.useNameSpace 'glados.models.Activity',
       if aggregations[0] == 'molecule_chembl_id'
         @createNewCompObj(rowID, rowBucket, latestRowPos)
       else
-        @createTargObj(rowID, rowBucket, latestRowPos)
+        @createNewTargObj(rowID, rowBucket, latestRowPos)
 
     createNewColObj: (colID, colBucket, latestColPos) ->
 
