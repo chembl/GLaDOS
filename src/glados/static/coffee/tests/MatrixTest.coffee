@@ -1,5 +1,8 @@
 describe "Compounds vs Target Matrix", ->
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # Generic test functions
+  #---------------------------------------------------------------------------------------------------------------------
   testFilter = (ctm, testIDs) ->
 
     requestData = ctm.getRequestData()
@@ -40,6 +43,154 @@ describe "Compounds vs Target Matrix", ->
     expect(agg2?).toBe(true)
     expect(agg2.max.field).toBe('pchembl_value')
 
+  testParsesRows = (ctm, testAggList, testDataToParse) ->
+    matrix = (ctm.parse testDataToParse).matrix
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    rowsMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
+    rowsGot = matrix.rows_index
+    for row in rowsMustBe
+      expect(rowsGot[row]?).toBe(true)
+
+  testParsesColumns = (ctm, testAggList, testDataToParse) ->
+
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+    for rowObj in rowsContainer
+      for colObj in rowObj[colsAggName].buckets
+        colMustBe = colObj.key
+        expect(colsGot[colMustBe]?).toBe(true)
+
+  testParsesLinks = (ctm, testAggList, testDataToParse) ->
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    linksGot = matrix.links
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+
+    for rowObj in rowsContainer
+
+      rowKey = rowObj.key
+      rowOriginalIndex = rowsGot[rowKey].originalIndex
+
+      for colObj in rowObj[colsAggName].buckets
+        colKey = colObj.key
+        colOriginalIndex = colsGot[colKey].originalIndex
+        linkGot = linksGot[rowOriginalIndex][colOriginalIndex]
+
+        rowIdInLink = linkGot.row_id
+        colIdInlink = linkGot.col_id
+        expect(rowIdInLink).toBe(rowKey)
+        expect(colIdInlink).toBe(colKey)
+
+  testHitCount = (ctm, testAggList, testDataToParse) ->
+
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+    rowHitCountsMustBe = {}
+    colHitCountsMustBe = {}
+
+    for rowObj in rowsContainer
+      rowKey = rowObj.key
+      rowHitCountsMustBe[rowKey] = 0 unless rowHitCountsMustBe[rowKey]?
+      for colObj in rowObj[colsAggName].buckets
+        colKey = colObj.key
+        colHitCountsMustBe[colKey] = 0 unless colHitCountsMustBe[colKey]?
+
+        rowHitCountsMustBe[rowKey]++
+        colHitCountsMustBe[colKey]++
+
+    for rowID, rowObj of rowsGot
+      hitCountGot = rowObj.hit_count
+      expect(hitCountGot).toBe(rowHitCountsMustBe[rowID])
+
+    for colID, colObj of colsGot
+      hitCountGot = colObj.hit_count
+      expect(hitCountGot).toBe(colHitCountsMustBe[colID])
+
+  testActivityCount = (ctm, testAggList, testDataToParse) ->
+
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+    rowSumsMustBe = {}
+    colSumsMustBe = {}
+
+    for rowObj in rowsContainer
+      rowKey = rowObj.key
+      rowSumsMustBe[rowKey] = 0 unless rowSumsMustBe[rowKey]?
+      for colObj in rowObj[colsAggName].buckets
+        colKey = colObj.key
+        colSumsMustBe[colKey] = 0 unless colSumsMustBe[colKey]?
+
+        rowSumsMustBe[rowKey] += colObj.doc_count
+        colSumsMustBe[colKey] += colObj.doc_count
+
+    for rowID, rowObj of rowsGot
+      actCountGot = rowObj.activity_count
+      expect(actCountGot).toBe(rowSumsMustBe[rowID])
+
+    for colID, colObj of colsGot
+      actCountGot = colObj.activity_count
+      expect(actCountGot).toBe(colSumsMustBe[colID])
+
+  testPchemblValue = (ctm, testAggList, testDataToParse) ->
+
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+    rowMaxsMustBe = {}
+    colMaxsMustBe = {}
+
+    for rowObj in rowsContainer
+      rowKey = rowObj.key
+      for colObj in rowObj[colsAggName].buckets
+        colKey = colObj.key
+
+        newPchemblValMax = colObj.pchembl_value_max.value
+        currentRowPchemblValMax = rowMaxsMustBe[rowKey]
+        if not currentRowPchemblValMax?
+          rowMaxsMustBe[rowKey] = newPchemblValMax
+        else if newPchemblValMax?
+          rowMaxsMustBe[rowKey] = Math.max(currentRowPchemblValMax, newPchemblValMax)
+
+        currentColPchemblValMax = colMaxsMustBe[colKey]
+        if not currentColPchemblValMax?
+          colMaxsMustBe[colKey] = newPchemblValMax
+        else if newPchemblValMax?
+          colMaxsMustBe[colKey] = Math.max(currentColPchemblValMax, newPchemblValMax)
+
+    for rowID, rowObj of rowsGot
+      maxPchemblGot = rowObj.pchembl_value_max
+      expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
+
+    for colID, colObj of colsGot
+      maxPchemblGot = colObj.pchembl_value_max
+      expect(maxPchemblGot).toBe(colMaxsMustBe[colID])
   #---------------------------------------------------------------------------------------------------------------------
   # From Compounds
   #---------------------------------------------------------------------------------------------------------------------
@@ -66,156 +217,12 @@ describe "Compounds vs Target Matrix", ->
           testDataToParse = testData
           done()
 
-      it 'parses the rows', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        rowsMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
-        rowsGot = matrix.rows_index
-        for row in rowsMustBe
-          expect(rowsGot[row]?).toBe(true)
-
-      it 'parses the columns', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-
-        colsGot = matrix.columns_index
-        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
-        for rowObj in rowsContainer
-          for colObj in rowObj[colsAggName].buckets
-            colMustBe = colObj.key
-            expect(colsGot[colMustBe]?).toBe(true)
-
-      it 'parses the links', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-
-        linksGot = matrix.links
-        rowsGot = matrix.rows_index
-        colsGot = matrix.columns_index
-        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
-
-        for rowObj in rowsContainer
-
-          rowKey = rowObj.key
-          rowOriginalIndex = rowsGot[rowKey].originalIndex
-
-          for colObj in rowObj[colsAggName].buckets
-            colKey = colObj.key
-            colOriginalIndex = colsGot[colKey].originalIndex
-            linkGot = linksGot[rowOriginalIndex][colOriginalIndex]
-
-            rowIdInLink = linkGot.row_id
-            colIdInlink = linkGot.col_id
-            expect(rowIdInLink).toBe(rowKey)
-            expect(colIdInlink).toBe(colKey)
-
-      it 'calculates the hit count per row and per column', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-
-        rowsGot = matrix.rows_index
-        colsGot = matrix.columns_index
-        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
-        rowHitCountsMustBe = {}
-        colHitCountsMustBe = {}
-
-        for rowObj in rowsContainer
-          rowKey = rowObj.key
-          rowHitCountsMustBe[rowKey] = 0 unless rowHitCountsMustBe[rowKey]?
-          for colObj in rowObj[colsAggName].buckets
-            colKey = colObj.key
-            colHitCountsMustBe[colKey] = 0 unless colHitCountsMustBe[colKey]?
-
-            rowHitCountsMustBe[rowKey]++
-            colHitCountsMustBe[colKey]++
-
-        for rowID, rowObj of rowsGot
-          hitCountGot = rowObj.hit_count
-          expect(hitCountGot).toBe(rowHitCountsMustBe[rowID])
-
-        for colID, colObj of colsGot
-          hitCountGot = colObj.hit_count
-          expect(hitCountGot).toBe(colHitCountsMustBe[colID])
-
-      it 'calculates activity count per row and column', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-
-        rowsGot = matrix.rows_index
-        colsGot = matrix.columns_index
-        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
-        rowSumsMustBe = {}
-        colSumsMustBe = {}
-
-        for rowObj in rowsContainer
-          rowKey = rowObj.key
-          rowSumsMustBe[rowKey] = 0 unless rowSumsMustBe[rowKey]?
-          for colObj in rowObj[colsAggName].buckets
-            colKey = colObj.key
-            colSumsMustBe[colKey] = 0 unless colSumsMustBe[colKey]?
-
-            rowSumsMustBe[rowKey] += colObj.doc_count
-            colSumsMustBe[colKey] += colObj.doc_count
-
-        for rowID, rowObj of rowsGot
-          actCountGot = rowObj.activity_count
-          expect(actCountGot).toBe(rowSumsMustBe[rowID])
-
-        for colID, colObj of colsGot
-          actCountGot = colObj.activity_count
-          expect(actCountGot).toBe(colSumsMustBe[colID])
-
-      it 'calculates pchembl value max per row and column', ->
-
-        matrix = (ctm.parse testDataToParse).matrix
-
-        rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-        colsAggName = testAggList[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
-
-        rowsGot = matrix.rows_index
-        colsGot = matrix.columns_index
-        rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
-        rowMaxsMustBe = {}
-        colMaxsMustBe = {}
-
-        for rowObj in rowsContainer
-          rowKey = rowObj.key
-          for colObj in rowObj[colsAggName].buckets
-            colKey = colObj.key
-
-            newPchemblValMax = colObj.pchembl_value_max.value
-            currentRowPchemblValMax = rowMaxsMustBe[rowKey]
-            if not currentRowPchemblValMax?
-              rowMaxsMustBe[rowKey] = newPchemblValMax
-            else if newPchemblValMax?
-              rowMaxsMustBe[rowKey] = Math.max(currentRowPchemblValMax, newPchemblValMax)
-
-            currentColPchemblValMax = colMaxsMustBe[colKey]
-            if not currentColPchemblValMax?
-              colMaxsMustBe[colKey] = newPchemblValMax
-            else if newPchemblValMax?
-              colMaxsMustBe[colKey] = Math.max(currentColPchemblValMax, newPchemblValMax)
-
-        for rowID, rowObj of rowsGot
-          maxPchemblGot = rowObj.pchembl_value_max
-          expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
-
-        for colID, colObj of colsGot
-          maxPchemblGot = colObj.pchembl_value_max
-          expect(maxPchemblGot).toBe(colMaxsMustBe[colID])
+      it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
+      it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
+      it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
+      it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
+      it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
+      it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets

@@ -94,7 +94,7 @@ glados.useNameSpace 'glados.models.Activity',
           compPos = rowsToPosition[rowID]
           colPos = colsToPosition[colID]
 
-          # create object for storing columns if not yet there
+          # create object for storing links if not yet there
           if not links[compPos]?
             links[compPos] = {}
 
