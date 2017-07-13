@@ -14,12 +14,17 @@ glados.useNameSpace 'glados.views.SearchResults',
         filterProperty = 'target_chembl_id'
         aggList = ['target_chembl_id', 'molecule_chembl_id']
         rowsEntityName = 'Targets'
+        rowsLabelProperty = 'target_pref_name'
         colsEntityName = 'Compounds'
+        colsLabelProperty = 'molecule_chembl_id'
+
       else
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
         rowsEntityName = 'Compounds'
+        rowsLabelProperty = 'molecule_chembl_id'
         colsEntityName = 'Targets'
+        colsLabelProperty = 'target_pref_name'
 
       config = {
         rows_entity_name: rowsEntityName
@@ -47,8 +52,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         initial_col_sorting: 'activity_count'
         initial_col_sorting_reverse: true
         col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-        initial_col_label_property: 'target_pref_name'
-        initial_row_label_property: 'molecule_chembl_id'
+        initial_col_label_property: colsLabelProperty
+        initial_row_label_property: rowsLabelProperty
         propertyToType:
           activity_count: "number"
           pchembl_value_avg: "number"

@@ -437,9 +437,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll(".vis-cell")
         .style("fill", fillColour)
 
-      $(thisView.el).find('.tooltipped').tooltip('remove')
-      $(thisView.el).find('.tooltipped').tooltip()
-
       thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
         enableSelection=false)
@@ -757,13 +754,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('diagonal-line', true)
 
+
     corner1G.append('text')
-      .text(@NUM_COLUMNS + ' Targets')
+      .text(@NUM_COLUMNS + ' ' + @config.cols_entity_name)
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
 
     corner1G.append('text')
-      .text(@NUM_ROWS + ' Compounds')
+      .text(@NUM_ROWS + ' ' + @config.rows_entity_name)
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
