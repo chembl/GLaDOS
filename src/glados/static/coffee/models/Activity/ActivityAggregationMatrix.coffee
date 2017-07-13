@@ -22,8 +22,13 @@ glados.useNameSpace 'glados.models.Activity',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parse data)
-        allTargets = thisModel.get('matrix').columns
-        console.log 'allTargets: ', allTargets
+        aggregations = thisModel.get('aggregations')
+
+        if aggregations[1] == 'target_chembl_id'
+          allTargets = thisModel.get('matrix').columns
+        else
+          allTargets = thisModel.get('matrix').rows
+
         for target in allTargets
           chemblID = target.target_chembl_id
           thisModel.loadTargetsPrefName(chemblID)
@@ -181,13 +186,20 @@ glados.useNameSpace 'glados.models.Activity',
     loadTargetsPrefName: (targetChemblID) ->
 
       targetUrl = glados.Settings.WS_BASE_URL + 'target/' + targetChemblID + '.json'
+
+      aggregations = @get('aggregations')
+      if aggregations[1] == 'target_chembl_id'
+        targetsIndex = @get('matrix').columns_index
+      else
+        targetsIndex = @get('matrix').rows_index
+
       thisModel = @
       $.getJSON(targetUrl).done( (data) ->
         targetPrefName = data.pref_name
-        targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+        targetToUpdate = targetsIndex[targetChemblID]
         targetToUpdate.pref_name = targetPrefName
       ).fail( ->
-        targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+        targetToUpdate = targetsIndex[targetChemblID]
         targetToUpdate.pref_name = thisModel.ERROR_LOADING_DATA_LABEL
       ).always(-> thisModel.trigger(glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, targetChemblID))
 

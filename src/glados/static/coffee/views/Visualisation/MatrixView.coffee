@@ -33,8 +33,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible, it must be re rendered on wake up anyway
     if not $(@el).is(":visible")
       return
-    textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
-    @fillColHeaderText(textElem)
+    if @config.rows_entity_name == 'Compounds'
+      textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+      @fillHeaderText(textElem)
+    else
+      textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
+      @fillHeaderText(textElem, isCol=false)
 
   renderWhenError: ->
 
@@ -470,7 +474,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     setUpRowTooltip = @generateTooltipFunction('Compound', @)
     rowHeaders.append('text')
       .classed('headers-text', true)
-      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowLabelProperty.propName))
+      .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -562,7 +566,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
-      .each((d)-> thisView.fillColHeaderText(d3.select(@)))
+      .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
@@ -1124,9 +1128,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $newMiniReportCardContainer = $('#' + miniRepCardID)
     ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
 
-  fillColHeaderText: (d3TextElem) ->
+  fillHeaderText: (d3TextElem, isCol=true) ->
     thisView = @
-    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
+
+    propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
+    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
 
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
     @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem)
