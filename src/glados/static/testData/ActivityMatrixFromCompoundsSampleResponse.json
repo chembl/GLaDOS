@@ -1,0 +1,382 @@
+{
+    "took": 38,
+    "timed_out": false,
+    "_shards": {
+        "total": 7,
+        "successful": 7,
+        "failed": 0
+    },
+    "hits": {
+        "total": 815,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "molecule_chembl_id_agg": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+                {
+                    "key": "CHEMBL59",
+                    "doc_count": 740,
+                    "target_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 7,
+                        "sum_other_doc_count": 268,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL612545",
+                                "doc_count": 131,
+                                "pchembl_value_max": {
+                                    "value": 8.88
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.898333333333333
+                                }
+                            },
+                            {
+                                "key": "CHEMBL217",
+                                "doc_count": 79,
+                                "pchembl_value_max": {
+                                    "value": 8.72
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.869199999999999
+                                }
+                            },
+                            {
+                                "key": "CHEMBL376",
+                                "doc_count": 73,
+                                "pchembl_value_max": {
+                                    "value": 7.54
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.84
+                                }
+                            },
+                            {
+                                "key": "CHEMBL234",
+                                "doc_count": 41,
+                                "pchembl_value_max": {
+                                    "value": 8.75
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 7.806
+                                }
+                            },
+                            {
+                                "key": "CHEMBL339",
+                                "doc_count": 37,
+                                "pchembl_value_max": {
+                                    "value": 8.96
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.2030769230769245
+                                }
+                            },
+                            {
+                                "key": "CHEMBL373",
+                                "doc_count": 29,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL2056",
+                                "doc_count": 23,
+                                "pchembl_value_max": {
+                                    "value": 7.7
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.349230769230768
+                                }
+                            },
+                            {
+                                "key": "CHEMBL265",
+                                "doc_count": 23,
+                                "pchembl_value_max": {
+                                    "value": 6.82
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.875555555555555
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1697861",
+                                "doc_count": 19,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL3998",
+                                "doc_count": 17,
+                                "pchembl_value_max": {
+                                    "value": 8.75
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.621818181818182
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL138921",
+                    "doc_count": 38,
+                    "target_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 13,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL612545",
+                                "doc_count": 7,
+                                "pchembl_value_max": {
+                                    "value": 7.92
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.7925
+                                }
+                            },
+                            {
+                                "key": "CHEMBL376",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293224",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": 5.5
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.866666666666666
+                                }
+                            },
+                            {
+                                "key": "CHEMBL3571",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": 6.6
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.539999999999999
+                                }
+                            },
+                            {
+                                "key": "CHEMBL614632",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293231",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.95
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.95
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293234",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.8
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.8
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293248",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.35
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.35
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293254",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.75
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.75
+                                }
+                            },
+                            {
+                                "key": "CHEMBL1293255",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.4
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.4
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL457419",
+                    "doc_count": 20,
+                    "target_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 0,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL612557",
+                                "doc_count": 9,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL614632",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL612545",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.65
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.65
+                                }
+                            },
+                            {
+                                "key": "CHEMBL612558",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL614392",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL4159",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 4.8
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.8
+                                }
+                            },
+                            {
+                                "key": "CHEMBL5619",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL138040",
+                    "doc_count": 17,
+                    "target_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 0,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL612557",
+                                "doc_count": 9,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL376",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL614392",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL3571",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": 5.5
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.5
+                                }
+                            },
+                            {
+                                "key": "CHEMBL612558",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

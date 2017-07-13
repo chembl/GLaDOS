@@ -1,8 +1,14 @@
 {% verbatim %}
 <script id="Handlebars-Common-CardError" type="text/x-handlebars-template">
-
   <i class="fa fa-exclamation-circle"></i> {{msg}}
+</script>
 
+<script id="Handlebars-Common-ErrorInCard" type="text/x-handlebars-template">
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+    </div>
+  </div>
 </script>
 
 <script id="Handlebars-Common-EmbedCode" type="text/x-handlebars-template">
