@@ -54,9 +54,9 @@ glados.useNameSpace 'glados.models.Activity',
         rowID = rowBucket.key
 
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newRowObj = @createNewRowObj(rowID, rowBucket, latestRowPos)
+        rowObj = @createNewRowObj(rowID, rowBucket, latestRowPos)
 
-        rowsList.push newRowObj
+        rowsList.push rowObj
         rowsToPosition[rowID] = latestRowPos
         latestRowPos++
 
@@ -71,22 +71,21 @@ glados.useNameSpace 'glados.models.Activity',
           # it is new!
           if not colPos?
 
-            newColObj = @createNewColObj(colID, colBucket, latestColPos)
+            colObj = @createNewColObj(colID, colBucket, latestColPos)
 
-            colsList.push newColObj
+            colsList.push colObj
             colsToPosition[colID] = latestColPos
             latestColPos++
-
           # it is not new, I just need to update the row properties
           else
             colObj = colsList[colPos]
-            @updateColOrRowObj(colObj, colBucket)
 
           # now I know that there is a new intersection!
           cellObj = @createNewCellObj(rowID, colID, colBucket)
 
-          @updateColOrRowObj(newRowObj, colBucket)
-          # update the row properties
+          #update row and col properties
+          @updateColOrRowObj(rowObj, colBucket)
+          @updateColOrRowObj(colObj, colBucket)
 
           # here the compound and target must exist in the lists, recalculate the positions
           compPos = rowsToPosition[rowID]
@@ -130,9 +129,9 @@ glados.useNameSpace 'glados.models.Activity',
         target_chembl_id: colBucket.key
         originalIndex: latestColPos
         currentPosition: latestColPos
-        activity_count: colBucket.doc_count
-        pchembl_value_max: colBucket.pchembl_value_max.value
-        hit_count: 1
+        activity_count: 0
+        pchembl_value_max: null
+        hit_count: 0
       }
 
     createNewCellObj: (rowID, colID, colBucket) ->
