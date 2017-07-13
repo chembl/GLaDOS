@@ -1135,14 +1135,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
 
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
-    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem)
+    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
 
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false) ->
 
     # remember the rotation!
-    containerLimit = d3ContainerElem.node().getBBox().height
+    if limitByHeight
+      containerLimit = d3ContainerElem.node().getBBox().height
+    else
+      containerLimit = d3ContainerElem.node().getBBox().width
+
     textWidth = d3TextElem.node().getBBox().width
 
     if 0 < containerLimit < textWidth
@@ -1150,8 +1154,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       numChars = text.length
       charLength = textWidth / numChars
       # reduce by num numchars because font characters are not all of the same width
-      maxChars = Math.ceil(containerLimit / charLength) - 2
-      newText = text[0..(maxChars-4)] + '...'
+      numChars = Math.ceil(containerLimit / charLength) - 2
+      textLimit = numChars - 4
+      textLimit = if textLimit < 0 then 0 else textLimit
+      newText = text[0..textLimit] + '...'
       d3TextElem.text(newText)
 
   #---------------------------------------------------------------------------------------------------------------------
