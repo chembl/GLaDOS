@@ -49,7 +49,6 @@ describe "Target", ->
 
     beforeAll (done) ->
 
-      console.log 'URL: ', glados.Settings.STATIC_URL + 'testData/AssociatedCompoundsBucketsSampleResponse.json'
       $.get (glados.Settings.STATIC_URL + 'testData/AssociatedCompoundsBucketsSampleResponse.json'), (testData) ->
         bucketsTestData = testData
         done()

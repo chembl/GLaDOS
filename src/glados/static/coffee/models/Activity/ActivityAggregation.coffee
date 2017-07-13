@@ -19,12 +19,22 @@ glados.models.Activity.ActivityAggregation.COLUMNS = {
     'format_as_number': true
     'num_decimals': 2
   }
+  PCHEMBL_VALUE_MAX: {
+    'name_to_show': 'pChEMBL Max'
+    'comparator': 'pchembl_value_max'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'format_as_number': true
+    'num_decimals': 2
+  }
 }
 
 glados.models.Activity.ActivityAggregation.COLUMNS_SETTINGS = {
   RESULTS_LIST_TABLE: [
     glados.models.Activity.ActivityAggregation.COLUMNS.BIOACTIVITIES_NUMBER
     glados.models.Activity.ActivityAggregation.COLUMNS.PCHEMBL_VALUE_AVG
+    glados.models.Activity.ActivityAggregation.COLUMNS.PCHEMBL_VALUE_MAX
   ]
 }
 

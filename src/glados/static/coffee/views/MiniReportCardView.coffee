@@ -3,7 +3,8 @@ glados.useNameSpace 'glados.views',
 
     initialize: ->
       @entity = arguments[0].entity
-      @model.on 'change', @.render, @
+      @model.on 'change', @render, @
+      @model.on 'error', @renderError, @
       templateCont = $('#' + Compound.MINI_REPORT_CARD.LOADING_TEMPLATE).html()
       $(@el).html Handlebars.compile(templateCont)
 
@@ -15,3 +16,6 @@ glados.useNameSpace 'glados.views',
       $(@el).html Handlebars.compile(templateCont)
         img_url: imgUrl
         columns: valuesObject
+
+    renderError:  (model_or_collection, jqXHR, options) ->
+      $(@el).html glados.Utils.ErrorMessages.getErrorCardContent(jqXHR)

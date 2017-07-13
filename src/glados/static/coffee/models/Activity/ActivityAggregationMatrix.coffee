@@ -2,7 +2,8 @@ glados.useNameSpace 'glados.models.Activity',
   ActivityAggregationMatrix: Backbone.Model.extend
 
     defaults:
-      'filter_property': 'molecule_chembl_id'
+      filter_property: 'molecule_chembl_id'
+      aggregations: ['molecule_chembl_id', 'target_chembl_id']
 
     initialize: ->
 
@@ -21,126 +22,184 @@ glados.useNameSpace 'glados.models.Activity',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parse data)
-        allTargets = thisModel.get('matrix').columns
+        aggregations = thisModel.get('aggregations')
+
+        if aggregations[1] == 'target_chembl_id'
+          allTargets = thisModel.get('matrix').columns
+        else
+          allTargets = thisModel.get('matrix').rows
+
         for target in allTargets
           chemblID = target.target_chembl_id
           thisModel.loadTargetsPrefName(chemblID)
       )
 
-
-
+    #-------------------------------------------------------------------------------------------------------------------
+    # Parsing
+    #-------------------------------------------------------------------------------------------------------------------
     parse: (data) ->
 
-      compoundsToPosition = {}
-      targetsToPosition = {}
+      rowsToPosition = {}
+      colsToPosition = {}
       links = {}
 
-      compoundsList = []
-      latestCompPos = 0
-      targetsList = []
-      latestTargPos = 0
+      rowsList = []
+      latestRowPos = 0
+      colsList = []
+      latestColPos = 0
 
       rowsIndex = {}
       columnsIndex = {}
 
-      # start with the list of molecules from the aggregation
-      molsBuckets = data.aggregations.molecule_chembl_id_agg.buckets
+      aggregations = @get('aggregations')
+      rowsAggName = aggregations[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+      colsAggName = aggregations[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
 
-      for moleculeBucket in molsBuckets
+      rowsBuckets = data.aggregations[rowsAggName].buckets
+
+      for rowBucket in rowsBuckets
 
         # what do I know now? I am seeing a new compound
-        compID = moleculeBucket.key
+        rowID = rowBucket.key
 
         # remember that  the orgiginalIndex and currentPosition are used to sort easily the nodes.
-        newCompoundObj =
-          id: compID
-          molecule_pref_name: 'MOL_NAME ' + latestCompPos
-          molecule_chembl_id: moleculeBucket.key
-          originalIndex: latestCompPos
-          currentPosition: latestCompPos
-          activity_count: moleculeBucket.doc_count
-          pchembl_value_max: moleculeBucket.pchembl_value_max.value
-          hit_count: moleculeBucket.target_chembl_id_agg.buckets.length
+        rowObj = @createNewRowObj(rowID, rowBucket, latestRowPos)
 
-        compoundsList.push newCompoundObj
-        compoundsToPosition[compID] = latestCompPos
-        latestCompPos++
+        rowsList.push rowObj
+        rowsToPosition[rowID] = latestRowPos
+        latestRowPos++
 
         # now check the targets for this molecule
-        targBuckets = moleculeBucket.target_chembl_id_agg.buckets
-        for targetBucket in targBuckets
+        colBuckets = rowBucket[colsAggName].buckets
+        for colBucket in colBuckets
 
           # what do I know now? there is a target, it could be new or repeated
-          targID = targetBucket.key
-          targPos = targetsToPosition[targID]
+          colID = colBucket.key
+          colPos = colsToPosition[colID]
 
           # it is new!
-          if not targPos?
+          if not colPos?
 
-            newTargetObj =
-              id: targID
-              pref_name: @LOADING_DATA_LABEL
-              target_chembl_id: targetBucket.key
-              originalIndex: latestTargPos
-              currentPosition: latestTargPos
-              activity_count: targetBucket.doc_count
-              pchembl_value_max: targetBucket.pchembl_value_max.value
-              hit_count: 1
+            colObj = @createNewColObj(colID, colBucket, latestColPos)
 
-
-            targetsList.push newTargetObj
-            targetsToPosition[targID] = latestTargPos
-            latestTargPos++
-
+            colsList.push colObj
+            colsToPosition[colID] = latestColPos
+            latestColPos++
           # it is not new, I just need to update the row properties
           else
-
-             targObj = targetsList[targPos]
-             targObj.activity_count += targetBucket.doc_count
-             targObj.pchembl_value_max = Math.max(targetBucket.pchembl_value_max.value, targObj.pchembl_value_max)
-             targObj.hit_count++
+            colObj = colsList[colPos]
 
           # now I know that there is a new intersection!
-          activities =
-            row_id: compID
-            col_id: targID
-            activity_count: targetBucket.doc_count
-            pchembl_value_avg: targetBucket.pchembl_value_avg.value
+          cellObj = @createNewCellObj(rowID, colID, colBucket)
 
+          #update row and col properties
+          @updateColOrRowObj(rowObj, colBucket)
+          @updateColOrRowObj(colObj, colBucket)
 
           # here the compound and target must exist in the lists, recalculate the positions
-          compPos = compoundsToPosition[compID]
-          targPos = targetsToPosition[targID]
+          compPos = rowsToPosition[rowID]
+          colPos = colsToPosition[colID]
 
-          # create object for storing columns if not yet there
+          # create object for storing links if not yet there
           if not links[compPos]?
             links[compPos] = {}
 
-          links[compPos][targPos] = activities
+          links[compPos][colPos] = cellObj
 
       result =
-        columns: targetsList
-        rows: compoundsList
+        columns: colsList
+        rows: rowsList
         links: links
-        rows_index: _.indexBy(compoundsList, 'id')
-        columns_index: _.indexBy(targetsList, 'id')
+        rows_index: _.indexBy(rowsList, 'id')
+        columns_index: _.indexBy(colsList, 'id')
 
       console.log 'result: ', result
 
-
-
       return {"matrix": result}
 
+    createNewRowObj: (rowID, rowBucket, latestRowPos) ->
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'molecule_chembl_id'
+        @createNewCompObj(rowID, rowBucket, latestRowPos)
+      else
+        @createNewTargObj(rowID, rowBucket, latestRowPos)
+
+    createNewColObj: (colID, colBucket, latestColPos) ->
+
+      aggregations = @get('aggregations')
+      if aggregations[1] == 'target_chembl_id'
+        @createNewTargObj(colID, colBucket, latestColPos)
+      else
+        @createNewCompObj(colID, colBucket, latestColPos)
+
+    createNewCompObj: (id, bucket, latestPos) ->
+      return {
+        id: id
+        molecule_pref_name: 'MOL_NAME ' + latestPos
+        molecule_chembl_id: bucket.key
+        originalIndex: latestPos
+        currentPosition: latestPos
+        activity_count: 0
+        pchembl_value_max: null
+        hit_count: 0
+      }
+
+    createNewTargObj: (id, bucket, latestPos) ->
+
+      return {
+        id: id
+        pref_name: @LOADING_DATA_LABEL
+        target_chembl_id: bucket.key
+        originalIndex: latestPos
+        currentPosition: latestPos
+        activity_count: 0
+        pchembl_value_max: null
+        hit_count: 0
+      }
+
+
+    createNewCellObj: (rowID, colID, colBucket) ->
+      row_id: rowID
+      col_id: colID
+      activity_count: colBucket.doc_count
+      pchembl_value_avg: colBucket.pchembl_value_avg.value
+      pchembl_value_max: colBucket.pchembl_value_max.value
+
+    updateColOrRowObj: (obj, colBucket) ->
+
+      obj.activity_count += colBucket.doc_count
+      obj.hit_count++
+
+      newPchemblMax = colBucket.pchembl_value_max.value
+      currentPchemblMax = obj.pchembl_value_max
+
+      if not currentPchemblMax?
+        obj.pchembl_value_max = newPchemblMax
+      else if newPchemblMax?
+        obj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
+
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Additional data
+    #-------------------------------------------------------------------------------------------------------------------
     loadTargetsPrefName: (targetChemblID) ->
 
       targetUrl = glados.Settings.WS_BASE_URL + 'target/' + targetChemblID + '.json'
+
+      aggregations = @get('aggregations')
+      if aggregations[1] == 'target_chembl_id'
+        targetsIndex = @get('matrix').columns_index
+      else
+        targetsIndex = @get('matrix').rows_index
+
       thisModel = @
       $.getJSON(targetUrl).done( (data) ->
         targetPrefName = data.pref_name
-        targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+        targetToUpdate = targetsIndex[targetChemblID]
         targetToUpdate.pref_name = targetPrefName
       ).fail( ->
-        targetToUpdate = thisModel.get('matrix').columns_index[targetChemblID]
+        targetToUpdate = targetsIndex[targetChemblID]
         targetToUpdate.pref_name = thisModel.ERROR_LOADING_DATA_LABEL
       ).always(-> thisModel.trigger(glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, targetChemblID))
 
@@ -195,6 +254,42 @@ glados.useNameSpace 'glados.models.Activity',
 
       requestData.query.terms[@get('filter_property')] = idsList
 
+    addAggregationsToRequest: (requestData) ->
+
+      aggsList = @get('aggregations')
+      requestData.aggs = {}
+      aggsContainer = requestData.aggs
+      for propName in aggsList
+        aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        aggsContainer[aggName] =
+          terms:
+            field: propName,
+            size: 10,
+            order:
+              _count: "desc"
+          aggs: {}
+
+        aggsContainer = aggsContainer[aggName].aggs
+
+    addCellAggregationsToRequest: (requestData) ->
+
+      aggsList = @get('aggregations')
+      aggsContainer = requestData.aggs
+
+      for i in [0..aggsList.length-1]
+        propName = aggsList[i]
+        aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+        if i != aggsList.length - 1
+          aggsContainer = aggsContainer[aggName].aggs
+        else
+          aggsContainer[aggName].aggs =
+            pchembl_value_avg:
+              avg:
+                field: "pchembl_value"
+            pchembl_value_max:
+              max:
+                field: "pchembl_value"
+
     getRequestData: ->
 
       idsList = @get('chembl_ids')
@@ -203,36 +298,14 @@ glados.useNameSpace 'glados.models.Activity',
         size: 0
 
       @addQueryToRequest(requestData, idsList)
-
-
-      requestData.aggs =
-        molecule_chembl_id_agg:
-          terms:
-            field: "molecule_chembl_id",
-            size: 10,
-            order:
-              _count: "desc"
-          aggs:
-            pchembl_value_max:
-              max:
-                field: "pchembl_value"
-            target_chembl_id_agg:
-              terms:
-                field: "target_chembl_id",
-                size: 10,
-                order:
-                  _count: "desc"
-              aggs:
-                pchembl_value_avg:
-                  avg:
-                    field: "pchembl_value"
-                pchembl_value_max:
-                  max:
-                    field: "pchembl_value"
+      @addAggregationsToRequest(requestData)
+      @addCellAggregationsToRequest(requestData)
 
       console.log 'requestData: ', requestData
+      console.log JSON.stringify(requestData)
       return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
 glados.models.Activity.ActivityAggregationMatrix. ERROR_LOADING_DATA_LABEL = '(Error Loading data)'
 glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT = 'TARGET_PREF_NAMES_UPDATED_EVT'
+glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX = '_agg'

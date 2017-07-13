@@ -1,0 +1,462 @@
+{
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+        "total": 7,
+        "successful": 7,
+        "failed": 0
+    },
+    "hits": {
+        "total": 548,
+        "max_score": 0,
+        "hits": []
+    },
+    "aggregations": {
+        "target_chembl_id_agg": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 0,
+            "buckets": [
+                {
+                    "key": "CHEMBL2111341",
+                    "doc_count": 197,
+                    "molecule_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 4,
+                        "sum_other_doc_count": 176,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL120512",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL212608",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL212912",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL213336",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL215885",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL225230",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL27559",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL283489",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL42",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL425069",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL2111342",
+                    "doc_count": 162,
+                    "molecule_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 2,
+                        "sum_other_doc_count": 127,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL2261102",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 11
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 10.51
+                                }
+                            },
+                            {
+                                "key": "CHEMBL285755",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 10.19
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 8.58
+                                }
+                            },
+                            {
+                                "key": "CHEMBL301265",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 8.7
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 7.783333333333332
+                                }
+                            },
+                            {
+                                "key": "CHEMBL484599",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 8.82
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 8.103333333333333
+                                }
+                            },
+                            {
+                                "key": "CHEMBL531",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 8.37
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 8.283333333333333
+                                }
+                            },
+                            {
+                                "key": "CHEMBL589",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": 8.41
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 7.223333333333334
+                                }
+                            },
+                            {
+                                "key": "CHEMBL69271",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL54",
+                                "doc_count": 3,
+                                "pchembl_value_max": {
+                                    "value": 8.62
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 8.605
+                                }
+                            },
+                            {
+                                "key": "CHEMBL219916",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 8.99
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 8.75
+                                }
+                            },
+                            {
+                                "key": "CHEMBL240773",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 6.34
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 6.105
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL3102",
+                    "doc_count": 130,
+                    "molecule_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 110,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL164747",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 5.59
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.59
+                                }
+                            },
+                            {
+                                "key": "CHEMBL164791",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.48
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.48
+                                }
+                            },
+                            {
+                                "key": "CHEMBL278068",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 5.92
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.92
+                                }
+                            },
+                            {
+                                "key": "CHEMBL292271",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL292989",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL293230",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.28
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.28
+                                }
+                            },
+                            {
+                                "key": "CHEMBL293669",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 5.62
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 5.62
+                                }
+                            },
+                            {
+                                "key": "CHEMBL294549",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.13
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.13
+                                }
+                            },
+                            {
+                                "key": "CHEMBL294593",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.28
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.28
+                                }
+                            },
+                            {
+                                "key": "CHEMBL302341",
+                                "doc_count": 2,
+                                "pchembl_value_max": {
+                                    "value": 4.13
+                                },
+                                "pchembl_value_avg": {
+                                    "value": 4.13
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "CHEMBL2111359",
+                    "doc_count": 59,
+                    "molecule_chembl_id_agg": {
+                        "doc_count_error_upper_bound": 0,
+                        "sum_other_doc_count": 46,
+                        "buckets": [
+                            {
+                                "key": "CHEMBL24172",
+                                "doc_count": 4,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL166484",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL166545",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL166819",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL166849",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL167008",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL167051",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL167488",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL167671",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            },
+                            {
+                                "key": "CHEMBL167734",
+                                "doc_count": 1,
+                                "pchembl_value_max": {
+                                    "value": null
+                                },
+                                "pchembl_value_avg": {
+                                    "value": null
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

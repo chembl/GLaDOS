@@ -12,15 +12,63 @@ glados.useNameSpace 'glados.views.SearchResults',
       @entityName = @collection.getMeta('label')
       if @entityName == 'Targets'
         filterProperty = 'target_chembl_id'
+        aggList = ['target_chembl_id', 'molecule_chembl_id']
+        rowsEntityName = 'Targets'
+        rowsLabelProperty = 'target_pref_name'
+        colsEntityName = 'Compounds'
+        colsLabelProperty = 'molecule_chembl_id'
+
       else
         filterProperty = 'molecule_chembl_id'
+        aggList = ['molecule_chembl_id', 'target_chembl_id']
+        rowsEntityName = 'Compounds'
+        rowsLabelProperty = 'molecule_chembl_id'
+        colsEntityName = 'Targets'
+        colsLabelProperty = 'target_pref_name'
+
+      config = {
+        rows_entity_name: rowsEntityName
+        cols_entity_name: colsEntityName
+        properties:
+          molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
+              'CHEMBL_ID')
+          target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+              'CHEMBL_ID')
+          target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
+              'PREF_NAME')
+          pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
+              'PCHEMBL_VALUE_AVG')
+          activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
+              'ACTIVITY_COUNT')
+          hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
+              'HIT_COUNT')
+          pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
+              'PCHEMBL_VALUE_MAX')
+        initial_colouring: 'pchembl_value_avg'
+        colour_properties: ['activity_count', 'pchembl_value_avg']
+        initial_row_sorting: 'activity_count'
+        initial_row_sorting_reverse: true
+        row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+        initial_col_sorting: 'activity_count'
+        initial_col_sorting_reverse: true
+        col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
+        initial_col_label_property: colsLabelProperty
+        initial_row_label_property: rowsLabelProperty
+        propertyToType:
+          activity_count: "number"
+          pchembl_value_avg: "number"
+          pchembl_value_max: "number"
+          hit_count: "number"
+      }
 
       @ctm = new glados.models.Activity.ActivityAggregationMatrix
         filter_property: filterProperty
+        aggregations: aggList
 
       @ctmView = new MatrixView
         model: @ctm
         el: $(@el).find('.BCK-CompTargetMatrix')
+        config: config
 
       @handleVisualisationStatus()
 
@@ -31,7 +79,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages')
       $messagesElement.show()
-      console.log '$messagesElement: ', $messagesElement
       glados.Utils.fillContentForElement $messagesElement,
         message: msg
         hide_cog: hideCog

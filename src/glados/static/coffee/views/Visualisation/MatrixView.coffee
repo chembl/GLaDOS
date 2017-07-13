@@ -11,38 +11,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
-    @config = {
-      properties:
-        molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-            'CHEMBL_ID')
-        target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-            'CHEMBL_ID')
-        target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-            'PREF_NAME')
-        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'PCHEMBL_VALUE_AVG')
-        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'ACTIVITY_COUNT')
-        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'HIT_COUNT')
-        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'PCHEMBL_VALUE_MAX')
-      initial_colouring: 'pchembl_value_avg'
-      colour_properties: ['activity_count', 'pchembl_value_avg']
-      initial_row_sorting: 'activity_count'
-      initial_row_sorting_reverse: true
-      row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-      initial_col_sorting: 'activity_count'
-      initial_col_sorting_reverse: true
-      col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-      initial_col_label_property: 'target_pref_name'
-      initial_row_label_property: 'molecule_chembl_id'
-      propertyToType:
-        activity_count: "number"
-        pchembl_value_avg: "number"
-        pchembl_value_max: "number"
-        hit_count: "number"
-    }
+    @config = arguments[0].config
 
     @model.on 'change', @render, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
@@ -64,8 +33,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible, it must be re rendered on wake up anyway
     if not $(@el).is(":visible")
       return
-    textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
-    @fillColHeaderText(textElem)
+    if @config.rows_entity_name == 'Compounds'
+      textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+      @fillHeaderText(textElem)
+    else
+      textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
+      @fillHeaderText(textElem, isCol=false)
 
   renderWhenError: ->
 
@@ -195,95 +168,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       custom_label: label
 
   paintMatrix: ->
-
-    # --------------------------------------
-    # Data
-    # --------------------------------------
-
-# this can be used for testing, do not delete
-    matrix = {
-      "columns": [
-        {
-          "label": "C1",
-          "originalIndex": 0
-          "currentPosition": 0
-          pchembl_value: 30
-          published_value: 330
-        },
-        {
-          "label": "C2",
-          "originalIndex": 1
-          "currentPosition": 1
-          pchembl_value: 26
-          published_value: 260
-        },
-        {
-          "label": "C3",
-          "originalIndex": 2
-          "currentPosition": 2
-          pchembl_value: 22
-          published_value: 190
-        }
-      ],
-      "rows": [
-        {
-          "label": "T1",
-          "originalIndex": 0
-          "currentPosition": 0
-          pchembl_value: 33
-          published_value: 240
-        },
-        {
-          "label": "T2",
-          "originalIndex": 1
-          "currentPosition": 1
-          pchembl_value: 24
-          published_value: 210
-        },
-        {
-          "label": "T3",
-          "originalIndex": 2
-          "currentPosition": 2
-          pchembl_value: 15
-          published_value: 90
-        },
-        {
-          "label": "T4",
-          "originalIndex": 3
-          "currentPosition": 3
-          pchembl_value: 6
-          published_value: 240
-        },
-      ],
-      "links": {
-
-        #source Target
-        0: {
-          # destination Compound
-          0: {'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 12, molecule_chembl_id: 'C1', target_chembl_id: 'T1', 'published_value': 120} # this means target 0 is connected to compound 0 through an assay with a value of 1
-          1: {'num_bioactivities': 10, 'assay_type': 'P', 'pchembl_value': 11, molecule_chembl_id: 'C2', target_chembl_id: 'T1', 'published_value': 80}
-          2: {'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 10, molecule_chembl_id: 'C3', target_chembl_id: 'T1', 'published_value': 40}
-        }
-        1: {
-          0: {'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 9, molecule_chembl_id: 'C1', target_chembl_id: 'T2', 'published_value': 110}
-          1: {'num_bioactivities': 20, 'assay_type': 'T', 'pchembl_value': 8, molecule_chembl_id: 'C2', target_chembl_id: 'T2', 'published_value': 70}
-          2: {'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 7, molecule_chembl_id: 'C3', target_chembl_id: 'T2', 'published_value': 30}
-        }
-        2: {
-          0: {'num_bioactivities': 0, 'assay_type': 'U', 'pchembl_value': 6, molecule_chembl_id: 'C1', target_chembl_id: 'T3', 'published_value': 10}
-          1: {'num_bioactivities': 30, 'assay_type': 'P', 'pchembl_value': 5, molecule_chembl_id: 'C2', target_chembl_id: 'T3', 'published_value': 60}
-          2: {'num_bioactivities': 0, 'assay_type': 'B', 'pchembl_value': 4, molecule_chembl_id: 'C3', target_chembl_id: 'T3', 'published_value': 20}
-        }
-        3: {
-          0: {'num_bioactivities': 0, 'assay_type': 'A', 'pchembl_value': 3, molecule_chembl_id: 'C1', target_chembl_id: 'T4', 'published_value': 90}
-          1: {'num_bioactivities': 40, 'assay_type': 'T', 'pchembl_value': 2, molecule_chembl_id: 'C2', target_chembl_id: 'T4', 'published_value': 50}
-          2: {'num_bioactivities': 0, 'assay_type': 'F', 'pchembl_value': 1, molecule_chembl_id: 'C3', target_chembl_id: 'T4', 'published_value': 100}
-        }
-
-
-      }
-
-    }
 
     matrix = @model.get('matrix')
     thisView = @
@@ -557,9 +441,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       t.selectAll(".vis-cell")
         .style("fill", fillColour)
 
-      $(thisView.el).find('.tooltipped').tooltip('remove')
-      $(thisView.el).find('.tooltipped').tooltip()
-
       thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
         enableSelection=false)
@@ -590,10 +471,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
-    setUpRowTooltip = @generateTooltipFunction('Compound', @)
+
+    if @config.rows_entity_name == 'Compounds'
+      setUpRowTooltip = @generateTooltipFunction('Compound', @)
+    else
+      setUpRowTooltip = @generateTooltipFunction('Target', @)
+
     rowHeaders.append('text')
       .classed('headers-text', true)
-      .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowLabelProperty.propName))
+      .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -676,7 +562,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-divisory-line', true)
 
-    setUpColTooltip = @generateTooltipFunction('Target', @)
+    if @config.cols_entity_name == 'Targets'
+      setUpColTooltip = @generateTooltipFunction('Target', @)
+    else
+      setUpColTooltip = @generateTooltipFunction('Compound', @)
 
     colsHeaders.append('text')
       .classed('headers-text', true)
@@ -685,7 +574,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpColTooltip)
-      .each((d)-> thisView.fillColHeaderText(d3.select(@)))
+      .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
@@ -877,13 +766,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('diagonal-line', true)
 
+
     corner1G.append('text')
-      .text(@NUM_COLUMNS + ' Targets')
+      .text(@NUM_COLUMNS + ' ' + @config.cols_entity_name)
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
 
     corner1G.append('text')
-      .text(@NUM_ROWS + ' Compounds')
+      .text(@NUM_ROWS + ' ' + @config.rows_entity_name)
       .classed('rows-text', true)
       .attr('text-anchor', 'middle')
 
@@ -1246,19 +1136,25 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     $newMiniReportCardContainer = $('#' + miniRepCardID)
     ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
 
-  fillColHeaderText: (d3TextElem) ->
+  fillHeaderText: (d3TextElem, isCol=true) ->
     thisView = @
-    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, thisView.currentColLabelProperty.propName))
+
+    propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
+    d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
 
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
-    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem)
+    @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
 
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false) ->
 
     # remember the rotation!
-    containerLimit = d3ContainerElem.node().getBBox().height
+    if limitByHeight
+      containerLimit = d3ContainerElem.node().getBBox().height
+    else
+      containerLimit = d3ContainerElem.node().getBBox().width
+
     textWidth = d3TextElem.node().getBBox().width
 
     if 0 < containerLimit < textWidth
@@ -1266,8 +1162,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       numChars = text.length
       charLength = textWidth / numChars
       # reduce by num numchars because font characters are not all of the same width
-      maxChars = Math.ceil(containerLimit / charLength) - 2
-      newText = text[0..(maxChars-4)] + '...'
+      numChars = Math.ceil(containerLimit / charLength) - 2
+      textLimit = numChars - 4
+      textLimit = if textLimit < 0 then 0 else textLimit
+      newText = text[0..textLimit] + '...'
       d3TextElem.text(newText)
 
   #---------------------------------------------------------------------------------------------------------------------

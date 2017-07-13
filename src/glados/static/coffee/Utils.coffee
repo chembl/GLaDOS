@@ -182,6 +182,12 @@ glados.useNameSpace 'glados',
           errorDetails = jqXHR.status + ': ' + jqXHR.statusText
           $progressElem.html 'Error loading data (' + errorDetails + ')'
 
+      getErrorCardContent: (jqXHR) ->
+        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+        return Handlebars.compile($('#Handlebars-Common-ErrorInCard').html())
+          msg: errorDetails
+
+
 
 
 
