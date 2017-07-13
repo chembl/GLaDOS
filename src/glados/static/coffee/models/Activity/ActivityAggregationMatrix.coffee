@@ -45,8 +45,11 @@ glados.useNameSpace 'glados.models.Activity',
       rowsIndex = {}
       columnsIndex = {}
 
-      # start with the list of molecules from the aggregation
-      rowsBuckets = data.aggregations.molecule_chembl_id_agg.buckets
+      aggregations = @get('aggregations')
+      rowsAggName = aggregations[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+      colsAggName = aggregations[1] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+      rowsBuckets = data.aggregations[rowsAggName].buckets
 
       for rowBucket in rowsBuckets
 
@@ -61,7 +64,7 @@ glados.useNameSpace 'glados.models.Activity',
         latestRowPos++
 
         # now check the targets for this molecule
-        colBuckets = rowBucket.target_chembl_id_agg.buckets
+        colBuckets = rowBucket[colsAggName].buckets
         for colBucket in colBuckets
 
           # what do I know now? there is a target, it could be new or repeated
@@ -110,29 +113,45 @@ glados.useNameSpace 'glados.models.Activity',
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 
-      return {
-        id: rowID
-        molecule_pref_name: 'MOL_NAME ' + latestRowPos
-        molecule_chembl_id: rowBucket.key
-        originalIndex: latestRowPos
-        currentPosition: latestRowPos
-        activity_count: 0
-        pchembl_value_max: null
-        hit_count: 0
-      }
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'molecule_chembl_id'
+        @createNewCompObj(rowID, rowBucket, latestRowPos)
+      else
+        @createTargObj(rowID, rowBucket, latestRowPos)
 
     createNewColObj: (colID, colBucket, latestColPos) ->
 
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        @createNewTargObj(colID, colBucket, latestColPos)
+      else
+        @createNewCompObj(colID, colBucket, latestColPos)
+
+    createNewCompObj: (id, bucket, latestPos) ->
       return {
-        id: colID
-        pref_name: @LOADING_DATA_LABEL
-        target_chembl_id: colBucket.key
-        originalIndex: latestColPos
-        currentPosition: latestColPos
+        id: id
+        molecule_pref_name: 'MOL_NAME ' + latestPos
+        molecule_chembl_id: bucket.key
+        originalIndex: latestPos
+        currentPosition: latestPos
         activity_count: 0
         pchembl_value_max: null
         hit_count: 0
       }
+
+    createNewTargObj: (id, bucket, latestPos) ->
+
+      return {
+        id: id
+        pref_name: @LOADING_DATA_LABEL
+        target_chembl_id: bucket.key
+        originalIndex: latestPos
+        currentPosition: latestPos
+        activity_count: 0
+        pchembl_value_max: null
+        hit_count: 0
+      }
+
 
     createNewCellObj: (rowID, colID, colBucket) ->
       row_id: rowID
