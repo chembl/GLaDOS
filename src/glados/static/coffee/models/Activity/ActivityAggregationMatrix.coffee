@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.models.Activity',
       $.ajax(fetchESOptions).done((data) ->
         thisModel.set(thisModel.parse data)
         allTargets = thisModel.get('matrix').columns
+        console.log 'allTargets: ', allTargets
         for target in allTargets
           chemblID = target.target_chembl_id
           thisModel.loadTargetsPrefName(chemblID)
@@ -122,7 +123,7 @@ glados.useNameSpace 'glados.models.Activity',
     createNewColObj: (colID, colBucket, latestColPos) ->
 
       aggregations = @get('aggregations')
-      if aggregations[0] == 'target_chembl_id'
+      if aggregations[1] == 'target_chembl_id'
         @createNewTargObj(colID, colBucket, latestColPos)
       else
         @createNewCompObj(colID, colBucket, latestColPos)

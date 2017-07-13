@@ -11,38 +11,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
-    @config = {
-      properties:
-        molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-            'CHEMBL_ID')
-        target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-            'CHEMBL_ID')
-        target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-            'PREF_NAME')
-        pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'PCHEMBL_VALUE_AVG')
-        activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'ACTIVITY_COUNT')
-        hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'HIT_COUNT')
-        pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-            'PCHEMBL_VALUE_MAX')
-      initial_colouring: 'pchembl_value_avg'
-      colour_properties: ['activity_count', 'pchembl_value_avg']
-      initial_row_sorting: 'activity_count'
-      initial_row_sorting_reverse: true
-      row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-      initial_col_sorting: 'activity_count'
-      initial_col_sorting_reverse: true
-      col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-      initial_col_label_property: 'target_pref_name'
-      initial_row_label_property: 'molecule_chembl_id'
-      propertyToType:
-        activity_count: "number"
-        pchembl_value_avg: "number"
-        pchembl_value_max: "number"
-        hit_count: "number"
-    }
+    @config = arguments[0].config
 
     @model.on 'change', @render, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
