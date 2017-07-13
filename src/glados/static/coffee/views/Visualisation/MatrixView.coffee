@@ -471,7 +471,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
-    setUpRowTooltip = @generateTooltipFunction('Compound', @)
+
+    if @config.rows_entity_name == 'Compounds'
+      setUpRowTooltip = @generateTooltipFunction('Compound', @)
+    else
+      setUpRowTooltip = @generateTooltipFunction('Target', @)
+
     rowHeaders.append('text')
       .classed('headers-text', true)
       .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
@@ -557,7 +562,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-divisory-line', true)
 
-    setUpColTooltip = @generateTooltipFunction('Target', @)
+    if @config.cols_entity_name == 'Targets'
+      setUpColTooltip = @generateTooltipFunction('Target', @)
+    else
+      setUpColTooltip = @generateTooltipFunction('Compound', @)
 
     colsHeaders.append('text')
       .classed('headers-text', true)
