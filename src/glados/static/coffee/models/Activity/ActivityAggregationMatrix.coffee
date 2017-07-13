@@ -79,30 +79,14 @@ glados.useNameSpace 'glados.models.Activity',
 
           # it is not new, I just need to update the row properties
           else
-
             colObj = colsList[colPos]
-            colObj.activity_count += colBucket.doc_count
-            colObj.hit_count++
-            newPchemblMax = colBucket.pchembl_value_max.value
-            currentPchemblMax = colObj.pchembl_value_max
-
-            if not currentPchemblMax?
-              colObj.pchembl_value_max = newPchemblMax
-            else if newPchemblMax?
-              colObj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
+            @updateColOrRowObj(colObj, colBucket)
 
           # now I know that there is a new intersection!
           cellObj = @createNewCellObj(rowID, colID, colBucket)
 
+          @updateColOrRowObj(newRowObj, colBucket)
           # update the row properties
-          newRowObj.activity_count += colBucket.doc_count
-
-          newPchemblMax = colBucket.pchembl_value_max.value
-          currentRowPchemblMax = newRowObj.pchembl_value_max
-          if not currentRowPchemblMax?
-            newRowObj.pchembl_value_max = newPchemblMax
-          else if newPchemblMax?
-            newRowObj.pchembl_value_max = Math.max(newPchemblMax, currentRowPchemblMax)
 
           # here the compound and target must exist in the lists, recalculate the positions
           compPos = rowsToPosition[rowID]
@@ -135,7 +119,7 @@ glados.useNameSpace 'glados.models.Activity',
         currentPosition: latestRowPos
         activity_count: 0
         pchembl_value_max: null
-        hit_count: rowBucket.target_chembl_id_agg.buckets.length
+        hit_count: 0
       }
 
     createNewColObj: (colID, colBucket, latestColPos) ->
@@ -157,6 +141,21 @@ glados.useNameSpace 'glados.models.Activity',
       activity_count: colBucket.doc_count
       pchembl_value_avg: colBucket.pchembl_value_avg.value
       pchembl_value_max: colBucket.pchembl_value_max.value
+
+    updateColOrRowObj: (obj, colBucket) ->
+
+      obj.activity_count += colBucket.doc_count
+      obj.hit_count++
+
+      newPchemblMax = colBucket.pchembl_value_max.value
+      currentPchemblMax = obj.pchembl_value_max
+
+      if not currentPchemblMax?
+        obj.pchembl_value_max = newPchemblMax
+      else if newPchemblMax?
+        obj.pchembl_value_max = Math.max(newPchemblMax, currentPchemblMax)
+
+
     #-------------------------------------------------------------------------------------------------------------------
     # Additional data
     #-------------------------------------------------------------------------------------------------------------------
