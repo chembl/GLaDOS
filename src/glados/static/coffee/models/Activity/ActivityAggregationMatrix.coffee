@@ -106,6 +106,8 @@ glados.useNameSpace 'glados.models.Activity',
 
           links[compPos][colPos] = cellObj
 
+      @addRowsWithNoData(rowsList, latestRowPos)
+
       result =
         columns: colsList
         rows: rowsList
@@ -116,6 +118,21 @@ glados.useNameSpace 'glados.models.Activity',
       console.log 'result: ', result
 
       return {"matrix": result}
+
+    # the user requested some items for rows. For some
+    addRowsWithNoData: (rowsList, latestRowPos) ->
+
+      rowsIDsGot = (row.id for row in rowsList)
+      missingRowsIDs = _.difference(@get('chembl_ids'), rowsIDsGot)
+      aggregations = @get('aggregations')
+      for id in missingRowsIDs
+
+        mockBucket =
+          key: id
+        newRow = @createNewRowObj(id, mockBucket, latestRowPos)
+        rowsList.push(newRow)
+        latestRowPos++
+
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 
