@@ -867,6 +867,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if not ZOOM_ACTIVATED and not ingoreActivation
         return
 
+      thisView.destroyAllTooltips()
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
       zoomScale = zoom.scale()
