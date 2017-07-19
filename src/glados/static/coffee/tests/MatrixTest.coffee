@@ -44,11 +44,24 @@ describe "Compounds vs Target Matrix", ->
     expect(agg2.max.field).toBe('pchembl_value')
 
   testParsesRows = (ctm, testAggList, testDataToParse) ->
+
     matrix = (ctm.parse testDataToParse).matrix
     rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
     rowsMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
     rowsGot = matrix.rows_index
     for row in rowsMustBe
+      expect(rowsGot[row]?).toBe(true)
+
+  testAddsRowsWithNoData = (ctm, testAggList, testDataToParse) ->
+
+    matrix = (ctm.parse testDataToParse).matrix
+    rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    rowsWithDataMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
+    originalRequestedIds = ctm.get('chembl_ids')
+    additionalIdsMustBe = _.difference(ctm.get('chembl_ids'), rowsWithDataMustBe)
+
+    rowsGot = matrix.rows_index
+    for row in additionalIdsMustBe
       expect(rowsGot[row]?).toBe(true)
 
   testParsesColumns = (ctm, testAggList, testDataToParse) ->
@@ -116,7 +129,9 @@ describe "Compounds vs Target Matrix", ->
 
     for rowID, rowObj of rowsGot
       hitCountGot = rowObj.hit_count
-      expect(hitCountGot).toBe(rowHitCountsMustBe[rowID])
+      # ignore additional columns
+      if rowHitCountsMustBe[rowID]?
+        expect(hitCountGot).toBe(rowHitCountsMustBe[rowID])
 
     for colID, colObj of colsGot
       hitCountGot = colObj.hit_count
@@ -147,7 +162,8 @@ describe "Compounds vs Target Matrix", ->
 
     for rowID, rowObj of rowsGot
       actCountGot = rowObj.activity_count
-      expect(actCountGot).toBe(rowSumsMustBe[rowID])
+      if rowSumsMustBe[rowID]?
+        expect(actCountGot).toBe(rowSumsMustBe[rowID])
 
     for colID, colObj of colsGot
       actCountGot = colObj.activity_count
@@ -186,7 +202,8 @@ describe "Compounds vs Target Matrix", ->
 
     for rowID, rowObj of rowsGot
       maxPchemblGot = rowObj.pchembl_value_max
-      expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
+      if rowMaxsMustBe[rowID]?
+        expect(maxPchemblGot).toBe(rowMaxsMustBe[rowID])
 
     for colID, colObj of colsGot
       maxPchemblGot = colObj.pchembl_value_max
@@ -196,7 +213,8 @@ describe "Compounds vs Target Matrix", ->
   #---------------------------------------------------------------------------------------------------------------------
   describe "Starting From Compounds", ->
 
-    testMoleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419']
+    # there will be no data for chembl 25 in the response
+    testMoleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419', 'CHEMBL25']
     testAggList = ['molecule_chembl_id', 'target_chembl_id']
     ctm = new glados.models.Activity.ActivityAggregationMatrix
       filter_property: 'molecule_chembl_id'
@@ -218,11 +236,13 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
       it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
+
 
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
@@ -251,6 +271,7 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
