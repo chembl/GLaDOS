@@ -53,6 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
       console.log 'request data to fetch: ', requestData
+      console.log esJSONRequest
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -413,6 +414,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
+      console.log 'NEED TO SORT BY : ', comparator
+      @setMeta('current_page', 1)
+      columns = @getMeta('columns')
 #TODO implement sorting
 
     resetSortData: ->

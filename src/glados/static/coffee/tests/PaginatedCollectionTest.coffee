@@ -268,6 +268,11 @@ describe "Paginated Collection", ->
       totalRecords = 100
       testIteratesPagesWithDifferentPageSizes(esList, totalRecords)
 
+    it 'updates the state for sorting', ->
+
+      console.log 'SORTING!'
+      esList.sortCollection('molecule_chembl_id')
+
     describe 'After selecting a facet', ->
 
       beforeAll (done) ->
