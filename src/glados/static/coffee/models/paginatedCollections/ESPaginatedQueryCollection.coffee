@@ -417,6 +417,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'NEED TO SORT BY : ', comparator
       @setMeta('current_page', 1)
       columns = @getMeta('columns')
+      @setupColSorting(columns, comparator)
 #TODO implement sorting
 
     resetSortData: ->

@@ -130,14 +130,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @sort()
 
-    resetSortData: ->
-
-      @comparator = undefined
-      columns = @getMeta('columns')
-      for col in columns
-        col.is_sorting = 0
-        col.sort_class = 'fa-sort'
-
 
     # from all the comparators, returns the one that is being used for sorting.
     # if none is being used for sorting returns undefined

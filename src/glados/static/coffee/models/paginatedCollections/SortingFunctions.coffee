@@ -31,3 +31,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           when 1 then 'fa-sort-asc'
 
       return is_descending
+
+    resetSortData: ->
+
+      @comparator = undefined
+      columns = @getMeta('columns')
+      for col in columns
+        col.is_sorting = 0
+        col.sort_class = 'fa-sort'

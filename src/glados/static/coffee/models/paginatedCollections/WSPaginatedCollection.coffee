@@ -182,14 +182,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log(@url)
       @fetch()
 
-    resetSortData: ->
-
-      @comparator = undefined
-      columns = @getMeta('columns')
-      for col in columns
-        col.is_sorting = 0
-        col.sort_class = 'fa-sort'
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Searching

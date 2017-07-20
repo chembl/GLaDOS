@@ -207,7 +207,7 @@ describe "Paginated Collection", ->
       esList.setMeta('singular_terms', ['aspirin'])
       esList.setMeta('exact_terms', ['"CHEMBL59"'])
       esList.setMeta('filter_terms', [])
-
+      esList.resetSortData()
 
       #
       done()
@@ -268,10 +268,36 @@ describe "Paginated Collection", ->
       totalRecords = 100
       testIteratesPagesWithDifferentPageSizes(esList, totalRecords)
 
-    it 'updates the state for sorting', ->
+    it 'updates the state for sorting (asc)', ->
 
-      console.log 'SORTING!'
-      esList.sortCollection('molecule_chembl_id')
+      sortingComparator = 'molecule_chembl_id'
+      esList.sortCollection(sortingComparator)
+      columns = esList.getMeta('columns')
+      for col in columns
+        if col.comparator == sortingComparator
+          expect(col.is_sorting).toBe(1)
+        else
+          expect(col.is_sorting).toBe(0)
+
+    it 'updates the state for sorting (desc)', ->
+
+      sortingComparator = 'molecule_chembl_id'
+      esList.sortCollection(sortingComparator)
+      esList.sortCollection(sortingComparator)
+      columns = esList.getMeta('columns')
+      for col in columns
+        if col.comparator == sortingComparator
+          expect(col.is_sorting).toBe(-1)
+        else
+          expect(col.is_sorting).toBe(0)
+
+    it 'resets sorting', ->
+
+      esList.resetSortData()
+      columns = esList.getMeta('columns')
+      for col in columns
+        expect(col.is_sorting).toBe(0)
+
 
     describe 'After selecting a facet', ->
 
