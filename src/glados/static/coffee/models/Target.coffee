@@ -142,6 +142,14 @@ Target.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  NUM_COMPOUNDS:{
+    'name_to_show': 'Compounds'
+    'comparator': '_metadata.related_compounds.count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'format_as_number': true
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -152,6 +160,7 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
+    Target.COLUMNS.NUM_COMPOUNDS
     Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD:[

@@ -97,9 +97,9 @@ Compound.COLUMNS = {
   SYNONYMS: {
       'name_to_show': 'Synonyms'
       'comparator': 'molecule_synonyms'
-      'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      'sort_disabled': false
       'parse_function': (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
     }
   PREF_NAME: {
@@ -334,6 +334,14 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  NUM_TARGETS:{
+    'name_to_show': 'Targets'
+    'comparator': '_metadata.related_targets.count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'format_as_number': true
+  }
 
 }
 
@@ -353,6 +361,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.ROTATABLE_BONDS,
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED,
+    Compound.COLUMNS.NUM_TARGETS
 
   ]
   RESULTS_LIST_REPORT_CARD:[
@@ -362,6 +371,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.FULL_MWT_CARD,
     Compound.COLUMNS.RO5_CARD,
     Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.NUM_TARGETS
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,

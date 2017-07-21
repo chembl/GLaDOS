@@ -26,6 +26,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.on 'reset do-repaint sort', @render, @
 
       @collection.on 'error', @handleError, @
+      @collection.on 'all', (evName) -> console.log 'EVENT: ', evName
 
       @numVisibleColumnsList = []
       if @renderAtInit
@@ -46,7 +47,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # events 
     # ------------------------------------------------------------------------------------------------------------------
-  
     events:
       'click .page-selector': 'getPageEvent'
       'change .change-page-size': 'changePageSize'
@@ -233,7 +233,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     checkIfTableNeedsToScroll: ->
 
-      console.log 'CHECK IF TABLE NEEDS TO SCROLL'
       $specificElemContainer = $(@el).find('.BCK-items-container')
 
       if not $specificElemContainer.is(":visible")
@@ -795,21 +794,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Error handling
     # ------------------------------------------------------------------------------------------------------------------
-    handleError: (model, xhr, options) ->
-  
-      if xhr.responseJSON?
-        console.log 'error getting list!'
-        console.log xhr
-        message = xhr.responseJSON.error_message
-        if not message?
-          message = xhr.responseJSON.error
-      else
-        message = 'There was an error while handling your request'
-  
-  
-      $(@el).find('.BCK-PreloaderContainer').hide()
-      $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
-        msg: message
+    handleError: (model, jqXHR, options) ->
+
+      $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
+      $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
+      $errorMessagesContainer.show()
 
 
 # ----------------------------------------------------------------------------------------------------------------------

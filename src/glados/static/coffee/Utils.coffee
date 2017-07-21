@@ -187,6 +187,10 @@ glados.useNameSpace 'glados',
         return Handlebars.compile($('#Handlebars-Common-ErrorInCard').html())
           msg: errorDetails
 
+      getCollectionErrorContent: (jqXHR) ->
+        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+        return Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+          msg: errorDetails
 
 
 
