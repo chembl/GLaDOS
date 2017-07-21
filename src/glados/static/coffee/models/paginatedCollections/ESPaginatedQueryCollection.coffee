@@ -346,6 +346,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     setMeta: (attr, value) ->
+      previousValue = @meta[attr]
+      console.log '---'
+      console.log 'attr: ', attr
+      console.log 'previousValue: ', previousValue
+      console.log 'value: ', value
+      console.log '^^^'
+
       @meta[attr] = value
       @trigger('meta-changed')
 
@@ -392,6 +399,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #  sorting data per column.
 #
     resetMeta: (totalRecords, max_score) ->
+      console.log 'RESETTING META'
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
