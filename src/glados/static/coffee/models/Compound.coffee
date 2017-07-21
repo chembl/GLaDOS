@@ -335,11 +335,12 @@ Compound.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   NUM_TARGETS:{
-    'name_to_show': '#Targets'
+    'name_to_show': 'Targets'
     'comparator': '_metadata.related_targets.count'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'format_as_number': true
   }
 
 }
