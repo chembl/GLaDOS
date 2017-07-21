@@ -260,10 +260,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # for the minimum possible zoom I calculate the biggest rectangle that should be seen completely according
     # to the screen. Is calculated without taking into account the scaling of other parts for simplicity.
-    PIXELS_PER_SIDE = 5
-    MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / PIXELS_PER_SIDE)
+    MIN_PIXELS_PER_SIDE = 5
+    MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / MIN_PIXELS_PER_SIDE)
     MAX_COLS_SEEN = if MAX_COLS_SEEN < 30 then 30 else MAX_COLS_SEEN
-    MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / PIXELS_PER_SIDE)
+    MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / MIN_PIXELS_PER_SIDE)
     MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then Math.floor(30 * VISUALIZATION_PROPORTION) else MAX_ROWS_SEEN
     MIN_ZOOM = @calculateInitialZoom(MAX_COLS_SEEN, MAX_ROWS_SEEN)
 
@@ -272,7 +272,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # never start with zoom less than 1
     INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
-    # never allow it to be greater than the maximum zoom
+    @zoomScale = INITIAL_ZOOM
+    # --------------------------------------
+    # Window
+    # --------------------------------------
+    # now that I have the zoom, I can calculate the window
+    @calculateCurrentWindow(@zoomScale)
 
     console.log 'MIN_ZOOM: ', MIN_ZOOM
     console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
@@ -870,31 +875,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.destroyAllTooltips()
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
-      zoomScale = zoom.scale()
-
+      thisView.zoomScale = zoom.scale()
+      thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
       console.log 'translateY: ', translateY
-      console.log zoomScale
+      console.log thisView.zoomScale
 
-      applyZoomAndTranslation(corner1G, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(colsHeaderG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(corner2G, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(rowsHeaderG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(cellsContainerG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(rowsFooterG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(corner3G, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(colsFooterG, translateX, translateY, zoomScale)
-      applyZoomAndTranslation(corner4G, translateX, translateY, zoomScale)
+      applyZoomAndTranslation(corner1G, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(colsHeaderG, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(corner2G, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(rowsHeaderG, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(cellsContainerG, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(rowsFooterG, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
+      applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
 
       $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
-      if zoomScale <= MIN_ZOOM
+      if thisView.zoomScale <= MIN_ZOOM
         $zoomOutBtn.addClass('disabled')
       else
         $zoomOutBtn.removeClass('disabled')
 
       $zoomInBtn = $(thisView.el).find(".BCK-zoom-in-btn")
-      if zoomScale >= MAX_ZOOM
+      if thisView.zoomScale >= MAX_ZOOM
         $zoomInBtn.addClass('disabled')
       else
         $zoomInBtn.removeClass('disabled')
@@ -903,7 +908,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
-      .scale(INITIAL_ZOOM)
+      .scale(@zoomScale)
       .translate([0, 0])
 
     mainGContainer.call zoom
@@ -1208,6 +1213,36 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     return zoom
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # Window
+  #---------------------------------------------------------------------------------------------------------------------
+  # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
+  calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0) ->
+
+    C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
+    E2 = @VISUALISATION_HEIGHT + (C * zoomScale)
+    D = -@ROWS_HEADER_WIDTH - @ROWS_FOOTER_WIDTH
+    E3 = @VISUALISATION_WIDTH + (D * zoomScale)
+
+    winX = -translateX * zoomScale
+    winX = if winX < 0 then 0 else winX
+    winY = -translateY * zoomScale
+    winY = if winY < 0 then 0 else winY
+    winW = E3
+    winH = E2
+
+    cellsPerSideH = E2 / (@SIDE_SIZE * zoomScale)
+
+    @WINDOW =
+      winX: winX
+      winY: winY
+      winW: winW
+      winH: winH
+      minRowNum: cellsPerSideH
+
+    console.log 'calculating window!'
+    console.log 'zoomScale: ', zoomScale
+    console.log '@WINDOW: ', @WINDOW
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
