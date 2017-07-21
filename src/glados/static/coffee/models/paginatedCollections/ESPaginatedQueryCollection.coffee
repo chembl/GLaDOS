@@ -192,6 +192,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           bool:
             must: null
       }
+      @addSortingToQuery(es_query)
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
@@ -219,6 +220,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if facets_query
           es_query.aggs = facets_query
       return es_query
+
+    addSortingToQuery: (esQuery) ->
+      sortList = []
+
+      columns = @getMeta('columns')
+      for col in columns
+        if col.is_sorting == 1
+          sortObj = {}
+          sortObj[col.comparator] =
+            order: 'asc'
+          sortList.push sortObj
+        if col.is_sorting == -1
+          sortObj = {}
+          sortObj[col.comparator] =
+            order: 'desc'
+          sortList.push sortObj
+
+      esQuery.sort = sortList
+
 
     getFilterQuery: (facets_filtered) ->
       filter_query = {bool: {must: []}}

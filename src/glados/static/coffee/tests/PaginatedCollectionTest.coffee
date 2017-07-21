@@ -236,6 +236,7 @@ describe "Paginated Collection", ->
       expect(requestData['size']).toBe(10)
 
     testIteratesPages = (esList, pageSize, totalPages) ->
+
       for pageNumber in [1..totalPages]
         requestData = esList.setPage(pageNumber, doFetch=true, testMode=true)
         expect(requestData['from']).toBe(pageSize * (pageNumber - 1))
@@ -298,6 +299,24 @@ describe "Paginated Collection", ->
       for col in columns
         expect(col.is_sorting).toBe(0)
 
+    it 'generates the request data for sorting (asc)', ->
+
+      sortingComparator = 'molecule_chembl_id'
+      esList.sortCollection(sortingComparator)
+      requestData = esList.getRequestData()
+      sortingInfo = requestData.sort[0]
+      expect(sortingInfo[sortingComparator]?).toBe(true)
+      expect(sortingInfo[sortingComparator].order).toBe('asc')
+
+    it 'generates the request data for sorting (desc)', ->
+
+      sortingComparator = 'molecule_chembl_id'
+      esList.sortCollection(sortingComparator)
+      esList.sortCollection(sortingComparator)
+      requestData = esList.getRequestData()
+      sortingInfo = requestData.sort[0]
+      expect(sortingInfo[sortingComparator]?).toBe(true)
+      expect(sortingInfo[sortingComparator].order).toBe('desc')
 
     describe 'After selecting a facet', ->
 
