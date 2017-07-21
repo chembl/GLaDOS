@@ -334,6 +334,13 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  NUM_TARGETS:{
+    'name_to_show': '#Targets'
+    'comparator': '_metadata.related_targets.count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 
 }
 
@@ -353,6 +360,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.ROTATABLE_BONDS,
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED,
+    Compound.COLUMNS.NUM_TARGETS
 
   ]
   RESULTS_LIST_REPORT_CARD:[
@@ -362,6 +370,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.FULL_MWT_CARD,
     Compound.COLUMNS.RO5_CARD,
     Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.NUM_TARGETS
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,
