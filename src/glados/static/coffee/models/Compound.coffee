@@ -97,9 +97,9 @@ Compound.COLUMNS = {
   SYNONYMS: {
       'name_to_show': 'Synonyms'
       'comparator': 'molecule_synonyms'
-      'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      'sort_disabled': false
       'parse_function': (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
     }
   PREF_NAME: {
