@@ -1231,14 +1231,23 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     winW = E3
     winH = E2
 
-    cellsPerSideH = E2 / (@SIDE_SIZE * zoomScale)
+    console.log 'winY: ', winY
+
+    #https://drive.google.com/file/d/0BzECtlZ_ur1CMjNkbExYQU5BMW8/view?usp=sharing
+    minRowNum = Math.floor(winY / (@SIDE_SIZE * zoomScale))
+    maxRowNum = Math.floor((winH + winY) / (@SIDE_SIZE * zoomScale))
+    minColNum = Math.floor(winX / (@SIDE_SIZE * zoomScale))
+    maxColNum = Math.floor((winW + winX) / (@SIDE_SIZE * zoomScale))
 
     @WINDOW =
-      winX: winX
-      winY: winY
-      winW: winW
-      winH: winH
-      minRowNum: cellsPerSideH
+      win_x: winX
+      win_y: winY
+      win_W: winW
+      win_H: winH
+      min_row_num: minRowNum
+      max_row_num: maxRowNum
+      min_col_num: minColNum
+      max_col_num: maxColNum
 
     console.log 'calculating window!'
     console.log 'zoomScale: ', zoomScale
