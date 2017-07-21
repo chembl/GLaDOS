@@ -221,11 +221,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     CONTAINER_X_PADDING = 0
     ZOOM_ACTIVATED = false
 
-    getYCoord = d3.scale.ordinal()
+    @getYCoord = d3.scale.ordinal()
       .domain([0..(@NUM_ROWS-1)])
       .rangeBands([0, @RANGE_Y_END])
 
-    getXCoord = d3.scale.ordinal()
+    @getXCoord = d3.scale.ordinal()
       .domain([0..(@NUM_COLUMNS-1)])
       .rangeBands([0, @RANGE_X_END])
 
@@ -371,21 +371,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if transitionDuration == 0
         cellsContainerG.selectAll(".vis-cell")
-          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+          .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
       else
         t = cellsContainerG.transition().duration(transitionDuration)
         t.selectAll(".vis-cell")
-          .attr("y", (d) -> (getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+          .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
 
     cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
 
       if transitionDuration == 0
         cellsContainerG.selectAll(".vis-cell")
-        .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+        .attr("x", (d) -> (thisView.getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
       else
         t = cellsContainerG.transition().duration(transitionDuration)
         t.selectAll(".vis-cell")
-          .attr("x", (d) -> (getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
+          .attr("x", (d) -> (thisView.getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
 
     cellsContainerG.scaleSizes = (zoomScale) ->
 
@@ -395,22 +395,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       cellsContainerG.selectAll('.grid-horizontal-rect')
         .attr("x", 0)
-        .attr("y", (d) -> (getYCoord(d.currentPosition) * zoomScale) )
+        .attr("y", (d) -> (thisView.getYCoord(d.currentPosition) * zoomScale) )
         .attr("width", thisView.COLS_HEADER_WIDTH * zoomScale)
-        .attr("height", (d) -> (getYCoord.rangeBand() * zoomScale) )
+        .attr("height", (d) -> (thisView.getYCoord.rangeBand() * zoomScale) )
 
       cellsContainerG.selectAll('.grid-vertical-line')
-        .attr("x1", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("x1", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
         .attr("y1", 0)
-        .attr("x2", (d) -> (getXCoord(d.currentPosition) * zoomScale))
+        .attr("x2", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
         .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
       cellsContainerG.positionCols(zoomScale)
 
       cellsContainerG.selectAll(".vis-cell")
-        .attr("width", (getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
-        .attr("height", (getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .attr("width", (thisView.getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
+        .attr("height", (thisView.getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
 
     applyZoomAndTranslation(cellsContainerG)
@@ -495,7 +495,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = rowsHeaderG.transition().duration(transitionDuration)
       t.selectAll('.vis-row')
-        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")")
+        .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")")
 
     rowsHeaderG.scaleSizes = (zoomScale) ->
 
@@ -506,12 +506,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       rowsHeaderG.positionRows(zoomScale)
 
       rowsHeaderG.selectAll('.headers-background-rect')
-        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       rowsHeaderG.selectAll('.headers-text')
         .attr('x', (LABELS_PADDING * zoomScale))
-        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
 
@@ -586,8 +586,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = colsHeaderG.transition().duration(transitionDuration)
       t.selectAll('.vis-column')
-        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(" + COLS_LABELS_ROTATION + " " + (getXCoord.rangeBand() * zoomScale) +
+        .attr("transform", ((d) -> "translate(" + (thisView.getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + COLS_LABELS_ROTATION + " " + (thisView.getXCoord.rangeBand() * zoomScale) +
         " " + (thisView.COLS_HEADER_HEIGHT * zoomScale) + ")" ))
 
     colsHeaderG.scaleSizes = (zoomScale) ->
@@ -600,16 +600,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsHeaderG.selectAll('.headers-background-rect')
         .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale) )
-        .attr('width', (getXCoord.rangeBand() * zoomScale))
+        .attr('width', (thisView.getXCoord.rangeBand() * zoomScale))
 
       colsHeaderG.selectAll('.headers-divisory-line')
-        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('x1', (thisView.getXCoord.rangeBand() * zoomScale))
         .attr('y1', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('x2', (thisView.getXCoord.rangeBand() * zoomScale))
         .attr('y2', 0)
 
       colsHeaderG.selectAll('.headers-text')
-        .attr("y", (getXCoord.rangeBand() * (2/3) * zoomScale ) )
+        .attr("y", (thisView.getXCoord.rangeBand() * (2/3) * zoomScale ) )
         .attr('x', (-thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
@@ -657,7 +657,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = rowsFooterG.transition().duration(transitionDuration)
       t.selectAll('.vis-row-footer')
-        .attr('transform', (d) -> "translate(0, " + (getYCoord(d.currentPosition) * zoomScale) + ")" )
+        .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")" )
 
     rowsFooterG.scaleSizes = (zoomScale) ->
 
@@ -669,12 +669,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       rowsFooterG.assignTexts()
 
       rowsFooterG.selectAll('.footers-background-rect')
-        .attr('height', (getYCoord.rangeBand() * zoomScale))
+        .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
         .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
       rowsFooterG.selectAll('.footers-text')
         .attr('x', ((thisView.ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
-        .attr("y", (getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
     applyZoomAndTranslation(rowsFooterG)
@@ -718,8 +718,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       t = colsFooterG.transition().duration(transitionDuration)
       t.selectAll('.vis-column-footer')
-        .attr("transform", ((d) -> "translate(" + (getXCoord(d.currentPosition) * zoomScale) +
-        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (getXCoord.rangeBand() * zoomScale) + " 0)" ))
+        .attr("transform", ((d) -> "translate(" + (thisView.getXCoord(d.currentPosition) * zoomScale) +
+        ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (thisView.getXCoord.rangeBand() * zoomScale) + " 0)" ))
 
     colsFooterG.assignTexts = (transitionDuration=0) ->
 
@@ -737,16 +737,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsFooterG.selectAll('.footers-background-rect')
         .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
-        .attr('width', (getXCoord.rangeBand() * zoomScale))
+        .attr('width', (thisView.getXCoord.rangeBand() * zoomScale))
 
       colsFooterG.selectAll('.footers-divisory-line')
-        .attr('x1', (getXCoord.rangeBand() * zoomScale))
+        .attr('x1', (thisView.getXCoord.rangeBand() * zoomScale))
         .attr('y1',0)
-        .attr('x2', (getXCoord.rangeBand() * zoomScale))
+        .attr('x2', (thisView.getXCoord.rangeBand() * zoomScale))
         .attr('y2', (thisView.COLS_FOOTER_HEIGHT * zoomScale) )
 
       colsFooterG.selectAll('.footers-text')
-        .attr("y", (-getXCoord.rangeBand() * (1/3) * zoomScale) )
+        .attr("y", (-thisView.getXCoord.rangeBand() * (1/3) * zoomScale) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
@@ -822,7 +822,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner3G.append('text')
       .attr('x', LABELS_PADDING)
-      .attr('y', getYCoord.rangeBand())
+      .attr('y', thisView.getYCoord.rangeBand())
       .classed('cols-sort-text', true)
 
     corner3G.assignTexts = ->
