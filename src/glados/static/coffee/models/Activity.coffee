@@ -151,7 +151,7 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   PUBLISHED_VALUE: {
-    'name_to_show': 'Published Units'
+    'name_to_show': 'Published Value'
     'comparator': 'published_value'
     'sort_disabled': false
     'is_sorting': 0
@@ -268,12 +268,37 @@ Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
 Activity.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD: [
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
-    Activity.COLUMNS.ACTIVITY_ID,
-    Activity.COLUMNS.ASSAY_CHEMBL_ID,
-    Activity.COLUMNS.MOLECULE_CHEMBL_ID,
-    Activity.COLUMNS.TARGET_CHEMBL_ID,
     Activity.COLUMNS.STANDARD_TYPE
+    Activity.COLUMNS.STANDARD_RELATION
+    Activity.COLUMNS.STANDARD_VALUE
+    Activity.COLUMNS.STANDARD_UNITS
+    Activity.COLUMNS.PCHEMBL_VALUE
+    Activity.COLUMNS.ASSAY_TYPE
+    Activity.COLUMNS.ASSAY_DESCRIPTION
+    Activity.COLUMNS.TARGET_PREF_NAME
+    Activity.COLUMNS.TARGET_CHEMBL_ID
     Activity.COLUMNS.TARGET_ORGANISM
+    Activity.COLUMNS.DOCUMENT_CHEMBL_ID
+  ]
+  RESULTS_LIST_TABLE_ADDITIONAL: [
+    Activity.COLUMNS.ACTIVITY_ID
+    Activity.COLUMNS.ASSAY_CHEMBL_ID
+    Activity.COLUMNS.COMMENT
+    Activity.COLUMNS.BAO_FORMAT
+    Activity.COLUMNS.PUBLISHED_TYPE
+    Activity.COLUMNS.PUBLISHED_RELATION
+    Activity.COLUMNS.PUBLISHED_VALUE
+    Activity.COLUMNS.PUBLISHED_UNITS
+    Activity.COLUMNS.CANONICAL_SMILES
+    Activity.COLUMNS.DATA_VALIDITY_COMMENT
+    Activity.COLUMNS.DOCUMENT_JOURNAL
+    Activity.COLUMNS.DOCUMENT_YEAR
+    Activity.COLUMNS.QUDT_UNITS
+    Activity.COLUMNS.RECORD_ID
+    Activity.COLUMNS.SRC_ID
+    Activity.COLUMNS.STANDARD_FLAG
+    Activity.COLUMNS.UO_UNITS
+    Activity.COLUMNS.DOC_COUNT
   ]
 }
 

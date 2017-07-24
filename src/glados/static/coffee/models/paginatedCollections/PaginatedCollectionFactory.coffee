@@ -10,7 +10,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false) ->
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
-      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
+      .extend(glados.models.paginatedCollections.SelectionFunctions)
+      .extend(glados.models.paginatedCollections.SortingFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -45,7 +46,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings, filter='') ->
       wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
-      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
+      .extend(glados.models.paginatedCollections.SelectionFunctions)
+      .extend(glados.models.paginatedCollections.SortingFunctions).extend
 
         model: collectionSettings.MODEL
         initialize: ->
@@ -74,7 +76,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewClientSideCollectionFor: (collectionSettings) ->
 
       collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
-      .extend(glados.models.paginatedCollections.SelectionFunctions).extend
+      .extend(glados.models.paginatedCollections.SelectionFunctions)
+      .extend(glados.models.paginatedCollections.SortingFunctions).extend
 
         model: collectionSettings.MODEL
 

@@ -26,6 +26,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.on 'reset do-repaint sort', @render, @
 
       @collection.on 'error', @handleError, @
+      @collection.on 'all', (evName) -> console.log 'EVENT: ', evName
 
       @numVisibleColumnsList = []
       if @renderAtInit
@@ -46,7 +47,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # events 
     # ------------------------------------------------------------------------------------------------------------------
-  
     events:
       'click .page-selector': 'getPageEvent'
       'change .change-page-size': 'changePageSize'
@@ -108,6 +108,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite() and not $(@el).is(":visible")
         return
 
+      console.log 'RENDER'
       if @isInfinite() and @collection.getMeta('current_page') == 1
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
@@ -162,10 +163,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.length > 0
         for i in [0..$elem.length - 1]
           @sendDataToTemplate $($elem[i]), visibleColumns
-          @checkIfTableNeedsToScroll $($elem[i])
         @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
+        @checkIfTableNeedsToScroll()
       else
         @hideHeaderContainer()
         @hideFooterContainer()
@@ -230,7 +231,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fixCardHeight($appendTo)
 
-    checkIfTableNeedsToScroll: ($specificElemContainer) ->
+    checkIfTableNeedsToScroll: ->
+
+      $specificElemContainer = $(@el).find('.BCK-items-container')
 
       if not $specificElemContainer.is(":visible")
         return
@@ -240,16 +243,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if $specificElemContainer.is('table') and $specificElemContainer.hasClass('scrollable')
 
         $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
-        $firstTableRow = $specificElemContainer.find('tr').first()
         containerWidth = $specificElemContainer.parent().width()
         tableWidth = $specificElemContainer.width()
         $topScrollerDummy.width(tableWidth)
 
-
-        console.log "$specificElemContainer.hasClass('scrolling')", $specificElemContainer.hasClass('scrolling')
         if $specificElemContainer.hasClass('scrolling')
 
           $specificElemContainer.removeClass('scrolling')
+          $specificElemContainer.css('display', 'table')
           currentContainer = $specificElemContainer
           f = $.proxy(@checkIfTableNeedsToScroll, @)
           setTimeout((-> f(currentContainer)), glados.Settings.RESPONSIVE_REPAINT_WAIT)
@@ -260,9 +261,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
           $specificElemContainer.addClass('scrolling')
+          $specificElemContainer.css('display', 'block')
           $topScrollerDummy.height(1)
         else
           $specificElemContainer.removeClass('scrolling')
+          $specificElemContainer.css('display', 'table')
           $topScrollerDummy.height(0)
 
         # bind the scroll functions if not done yet
@@ -791,21 +794,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Error handling
     # ------------------------------------------------------------------------------------------------------------------
-    handleError: (model, xhr, options) ->
-  
-      if xhr.responseJSON?
-        console.log 'error getting list!'
-        console.log xhr
-        message = xhr.responseJSON.error_message
-        if not message?
-          message = xhr.responseJSON.error
-      else
-        message = 'There was an error while handling your request'
-  
-  
-      $(@el).find('.BCK-PreloaderContainer').hide()
-      $(@el).find('.BCK-ErrorMessagesContainer').html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
-        msg: message
+    handleError: (model, jqXHR, options) ->
+
+      $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
+      $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
+      $errorMessagesContainer.show()
 
 
 # ----------------------------------------------------------------------------------------------------------------------

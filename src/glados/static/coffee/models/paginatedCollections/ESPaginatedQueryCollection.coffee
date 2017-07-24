@@ -53,6 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
       console.log 'request data to fetch: ', requestData
+      console.log esJSONRequest
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -191,6 +192,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           bool:
             must: null
       }
+      @addSortingToQuery(es_query)
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
@@ -218,6 +220,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if facets_query
           es_query.aggs = facets_query
       return es_query
+
+    addSortingToQuery: (esQuery) ->
+      sortList = []
+
+      columns = @getMeta('columns')
+      for col in columns
+        if col.is_sorting == 1
+          sortObj = {}
+          sortObj[col.comparator] =
+            order: 'asc'
+          sortList.push sortObj
+        if col.is_sorting == -1
+          sortObj = {}
+          sortObj[col.comparator] =
+            order: 'desc'
+          sortList.push sortObj
+
+      esQuery.sort = sortList
+
 
     getFilterQuery: (facets_filtered) ->
       filter_query = {bool: {must: []}}
@@ -325,6 +346,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     setMeta: (attr, value) ->
+      previousValue = @meta[attr]
+      console.log '---'
+      console.log 'attr: ', attr
+      console.log 'previousValue: ', previousValue
+      console.log 'value: ', value
+      console.log '^^^'
+
       @meta[attr] = value
       @trigger('meta-changed')
 
@@ -371,6 +399,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #  sorting data per column.
 #
     resetMeta: (totalRecords, max_score) ->
+      console.log 'RESETTING META'
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
@@ -413,6 +442,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
+      columns = @getMeta('columns')
+      @setupColSorting(columns, comparator)
+      @invalidateAllDownloadedResults()
+      @setPage(1, false)
+      @fetch()
+
 #TODO implement sorting
 
     resetSortData: ->
