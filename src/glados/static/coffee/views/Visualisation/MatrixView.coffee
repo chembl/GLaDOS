@@ -562,8 +562,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    cols = @getColsHeadersForWindow(colsHeaderG)
-
+    @updateColsHeadersForWindow(colsHeaderG)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -860,6 +859,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       translateY = zoom.translate()[1]
       thisView.zoomScale = zoom.scale()
       thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
+      thisView.updateColsHeadersForWindow(colsHeaderG)
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
       console.log 'translateY: ', translateY
@@ -1236,22 +1236,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'zoomScale: ', zoomScale
     console.log '@WINDOW: ', @WINDOW
 
-  getColsHeadersForWindow: (colsHeaderG) ->
+  updateColsHeadersForWindow: (colsHeaderG) ->
 
     thisView = @
-    console.log 'GET COLS HEADERS!'
+
     minColNum = @WINDOW.min_col_num
     maxColNum = @WINDOW.max_col_num
-    console.log 'minColNum: ', minColNum
-    console.log 'maxColNum: ', maxColNum
+    colsList = @model.get('matrix').columns
+    end = if maxColNum >= colsList.length then colsList.length - 1 else maxColNum - 1
+    start = if minColNum >= colsList.length then end - 1 else minColNum
     colsIndex = @model.get('matrix').columns_curr_position_index
-    colsInWindow = (colsIndex[i] for i in [minColNum..maxColNum-1])
-    console.log 'colsIndex: ', colsIndex
-    console.log 'colsInWindow: ', colsInWindow
+    colsInWindow = (colsIndex[i] for i in [start..end])
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
 
+    colsHeaders.exit().remove()
     colsHeadersEnter = colsHeaders.enter()
       .append("g")
       .classed('vis-column', true)
