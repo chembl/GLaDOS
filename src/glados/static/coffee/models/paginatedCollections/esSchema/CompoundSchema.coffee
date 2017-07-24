@@ -39,3 +39,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_molecule','molecule_properties.hbd'
         )
+      related_targets_count:
+        label: '# Related Targets'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','_metadata.related_targets.count'
+        )
+      activity_count:
+        label: '# Bioactivities'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_molecule','_metadata.activity_count'
+        )
