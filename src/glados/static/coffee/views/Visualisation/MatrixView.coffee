@@ -33,12 +33,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible, it must be re rendered on wake up anyway
     if not $(@el).is(":visible")
       return
+
     if @config.rows_entity_name == 'Compounds'
-      textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
-      @fillHeaderText(textElem)
+
+      colsIndex = @model.get('matrix').columns_index
+      target = colsIndex[targetChemblID]
+      if @WINDOW.min_col_num <= target.currentPosition <= @WINDOW.max_col_num
+        textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+        @fillHeaderText(textElem)
+
     else
-      textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
-      @fillHeaderText(textElem, isCol=false)
+
+      rowsIndex = @model.get('matrix').rows_index
+      target = rowsIndex[targetChemblID]
+      if @WINDOW.min_row_num <= target.currentPosition <= @WINDOW.max_row_num
+        textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
+        @fillHeaderText(textElem, isCol=false)
 
   renderWhenError: ->
 
@@ -232,8 +242,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     LABELS_PADDING = 8
     COLS_LABELS_ROTATION = 30
     BASE_LABELS_SIZE = 10
-    GRID_STROKE_WIDTH = 1
-    CELLS_PADDING = GRID_STROKE_WIDTH
+    @GRID_STROKE_WIDTH = 1
+    CELLS_PADDING = @GRID_STROKE_WIDTH
     TRANSITIONS_DURATION = 1000
 
     elemWidth = $(@el).width()
@@ -354,7 +364,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append("line")
         .classed('grid-vertical-line', true)
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr('stroke-width', GRID_STROKE_WIDTH)
+        .attr('stroke-width', @GRID_STROKE_WIDTH)
 
     dataList = @model.getDataList()
 
@@ -362,7 +372,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(dataList)
       .enter().append("rect")
       .classed('vis-cell', true)
-      .attr('stroke-width', GRID_STROKE_WIDTH)
+      .attr('stroke-width', @GRID_STROKE_WIDTH)
       .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
       .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
       .on('click', (d) -> thisView.showCellTooltip($(@), d))
@@ -472,7 +482,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowHeaders.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
@@ -552,35 +562,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    colsHeaders = colsHeaderG.selectAll(".vis-column")
-      .data(matrix.columns)
-      .enter().append("g")
-      .classed('vis-column', true)
+    cols = @getColsHeadersForWindow(colsHeaderG)
 
-    colsHeaders.append('rect')
-      .style('fill', 'none')
-      .style('fill-opacity', 0.5)
-      .classed('headers-background-rect', true)
-
-    colsHeaders.append('line')
-      .style('stroke-width', GRID_STROKE_WIDTH)
-      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .classed('headers-divisory-line', true)
-
-    if @config.cols_entity_name == 'Targets'
-      setUpColTooltip = @generateTooltipFunction('Target', @)
-    else
-      setUpColTooltip = @generateTooltipFunction('Compound', @)
-
-    colsHeaders.append('text')
-      .classed('headers-text', true)
-      .attr('transform', 'rotate(-90)')
-      .attr('text-decoration', 'underline')
-      .attr('cursor', 'pointer')
-      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('click', setUpColTooltip)
-      .each((d)-> thisView.fillHeaderText(d3.select(@)))
-      .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -637,7 +620,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowFooters.append('rect')
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('footers-background-rect', true)
 
@@ -703,7 +686,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('footers-background-rect', true)
 
     colsFooters.append('line')
-      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('footers-divisory-line', true)
 
@@ -767,7 +750,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('background-rect', true)
 
     corner1G.append('line')
-      .style('stroke-width', GRID_STROKE_WIDTH)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('diagonal-line', true)
 
@@ -1252,6 +1235,51 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'calculating window!'
     console.log 'zoomScale: ', zoomScale
     console.log '@WINDOW: ', @WINDOW
+
+  getColsHeadersForWindow: (colsHeaderG) ->
+
+    thisView = @
+    console.log 'GET COLS HEADERS!'
+    minColNum = @WINDOW.min_col_num
+    maxColNum = @WINDOW.max_col_num
+    console.log 'minColNum: ', minColNum
+    console.log 'maxColNum: ', maxColNum
+    colsIndex = @model.get('matrix').columns_curr_position_index
+    colsInWindow = (colsIndex[i] for i in [minColNum..maxColNum-1])
+    console.log 'colsIndex: ', colsIndex
+    console.log 'colsInWindow: ', colsInWindow
+
+    colsHeaders = colsHeaderG.selectAll(".vis-column")
+      .data(colsInWindow, (d) -> d.id)
+
+    colsHeadersEnter = colsHeaders.enter()
+      .append("g")
+      .classed('vis-column', true)
+
+    colsHeadersEnter.append('rect')
+      .style('fill', 'none')
+      .style('fill-opacity', 0.5)
+      .classed('headers-background-rect', true)
+
+    colsHeadersEnter.append('line')
+      .style('stroke-width', @GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('headers-divisory-line', true)
+
+    if @config.cols_entity_name == 'Targets'
+      setUpColTooltip = @generateTooltipFunction('Target', @)
+    else
+      setUpColTooltip = @generateTooltipFunction('Compound', @)
+
+    colsHeadersEnter.append('text')
+      .classed('headers-text', true)
+      .attr('transform', 'rotate(-90)')
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .on('click', setUpColTooltip)
+      .each((d)-> thisView.fillHeaderText(d3.select(@)))
+      .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
