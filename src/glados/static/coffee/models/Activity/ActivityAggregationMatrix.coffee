@@ -39,6 +39,8 @@ glados.useNameSpace 'glados.models.Activity',
     #-------------------------------------------------------------------------------------------------------------------
     parse: (data) ->
 
+      starTime = Date.now()
+
       rowsToPosition = {}
       colsToPosition = {}
       links = {}
@@ -84,10 +86,12 @@ glados.useNameSpace 'glados.models.Activity',
 
             colsList.push colObj
             colsToPosition[colID] = latestColPos
+            columnsIndex[colID] = colObj
             latestColPos++
           # it is not new, I just need to update the row properties
           else
             colObj = colsList[colPos]
+
 
           # now I know that there is a new intersection!
           cellObj = @createNewCellObj(rowID, colID, colBucket)
@@ -106,29 +110,24 @@ glados.useNameSpace 'glados.models.Activity',
 
           links[compPos][colPos] = cellObj
 
+
       @addRowsWithNoData(rowsList, latestRowPos)
 
       result =
         columns: colsList
         rows: rowsList
         links: links
-        links_index: @generateLinksIndex(links)
         rows_index: _.indexBy(rowsList, 'id')
         rows_curr_position_index: _.indexBy(rowsList, 'currentPosition')
-        columns_index: _.indexBy(colsList, 'id')
+        columns_index: columnsIndex
         columns_curr_position_index: _.indexBy(colsList, 'currentPosition')
 
-      console.log 'result: ', result
+
+      endTime = Date.now()
+      time = endTime - starTime
+      console.log 'parsing time: ', time
 
       return {"matrix": result}
-
-    generateLinksIndex: (links) ->
-
-      linksIndex = {}
-      for rowNum, rowContent of links
-        for colNum, cell of rowContent
-          linksIndex[cell.id] = cell
-      return linksIndex
 
     # the user requested some items for rows. For some
     addRowsWithNoData: (rowsList, latestRowPos) ->
@@ -306,7 +305,7 @@ glados.useNameSpace 'glados.models.Activity',
           aggs: {}
 
         aggsContainer = aggsContainer[aggName].aggs
-        aggSize = 100000
+        aggSize = 1000000
 
     addCellAggregationsToRequest: (requestData) ->
 
