@@ -792,14 +792,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       translateY = zoom.translate()[1]
       thisView.zoomScale = zoom.scale()
       thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
-      thisView.updateColsHeadersForWindow(colsHeaderG)
-      thisView.updateColsFootersForWindow(colsFooterG)
-      colsFooterG.assignTexts()
-      thisView.updateRowsHeadersForWindow(rowsHeaderG)
-      thisView.updateRowsFootersForWindow(rowsFooterG)
-      rowsFooterG.assignTexts()
-      thisView.updateCellsForWindow(cellsContainerG)
-      colourCells()
+      if thisView.WINDOW.window_changed
+        console.log 'WINDOW CHANGED!!!'
+        thisView.updateColsHeadersForWindow(colsHeaderG)
+        thisView.updateColsFootersForWindow(colsFooterG)
+        colsFooterG.assignTexts()
+        thisView.updateRowsHeadersForWindow(rowsHeaderG)
+        thisView.updateRowsFootersForWindow(rowsFooterG)
+        rowsFooterG.assignTexts()
+        thisView.updateCellsForWindow(cellsContainerG)
+        colourCells()
 
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
@@ -1163,6 +1165,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     minColNum = Math.floor(winX / (@SIDE_SIZE * zoomScale))
     maxColNum = Math.floor((winW + winX) / (@SIDE_SIZE * zoomScale))
 
+    windowChanged = false
+    if not @PREVIOUS_WINDOW?
+      windowChanged = true
+    else if @PREVIOUS_WINDOW.min_row_num != minRowNum
+      windowChanged = true
+    else if @PREVIOUS_WINDOW.max_row_num != maxRowNum
+      windowChanged = true
+    else if @PREVIOUS_WINDOW.min_col_num != minColNum
+      windowChanged = true
+    else if @PREVIOUS_WINDOW.max_col_num != maxColNum
+      windowChanged = true
+
     @WINDOW =
       win_x: winX
       win_y: winY
@@ -1172,7 +1186,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       max_row_num: maxRowNum
       min_col_num: minColNum
       max_col_num: maxColNum
+      window_changed: windowChanged
 
+    @PREVIOUS_WINDOW = @WINDOW
     console.log 'calculating window!'
     console.log 'zoomScale: ', zoomScale
     console.log '@WINDOW: ', @WINDOW
