@@ -366,16 +366,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .attr('stroke-width', @GRID_STROKE_WIDTH)
 
-    dataList = @model.getDataList()
-
-    cells = cellsContainerG.selectAll(".vis-cell")
-      .data(dataList)
-      .enter().append("rect")
-      .classed('vis-cell', true)
-      .attr('stroke-width', @GRID_STROKE_WIDTH)
-      .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
-      .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
-      .on('click', (d) -> thisView.showCellTooltip($(@), d))
+    @updateCellsForWindow(cellsContainerG)
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -807,6 +798,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.updateRowsHeadersForWindow(rowsHeaderG)
       thisView.updateRowsFootersForWindow(rowsFooterG)
       rowsFooterG.assignTexts()
+      thisView.updateCellsForWindow(cellsContainerG)
+      colourCells()
 
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
@@ -1326,6 +1319,38 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
+
+  getCellsInWindow: ->
+    rowsInWindow = @getRowsInWindow()
+    colsInWindow = @getColsInWindow()
+    cellsIndex = @model.get('matrix').links_index
+
+    cellsInWindow = []
+    for row in rowsInWindow
+      for col in colsInWindow
+        cellID = row.id + '-' + col.id
+        cellObj = cellsIndex[cellID]
+        if cellObj?
+          cellsInWindow.push cellObj
+
+    return cellsInWindow
+
+  updateCellsForWindow: (cellsContainerG)->
+
+    thisView = @
+    cellsInWindow = @getCellsInWindow()
+
+    cells = cellsContainerG.selectAll(".vis-cell")
+      .data(cellsInWindow, (d) -> d.id)
+
+    cells.exit().remove()
+    cellsEnter = cells.enter()
+      .append("rect")
+      .classed('vis-cell', true)
+      .attr('stroke-width', @GRID_STROKE_WIDTH)
+      .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
+      .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
+      .on('click', (d) -> thisView.showCellTooltip($(@), d))
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering

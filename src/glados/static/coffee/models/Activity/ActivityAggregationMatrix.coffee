@@ -112,6 +112,7 @@ glados.useNameSpace 'glados.models.Activity',
         columns: colsList
         rows: rowsList
         links: links
+        links_index: @generateLinksIndex(links)
         rows_index: _.indexBy(rowsList, 'id')
         rows_curr_position_index: _.indexBy(rowsList, 'currentPosition')
         columns_index: _.indexBy(colsList, 'id')
@@ -120,6 +121,14 @@ glados.useNameSpace 'glados.models.Activity',
       console.log 'result: ', result
 
       return {"matrix": result}
+
+    generateLinksIndex: (links) ->
+
+      linksIndex = {}
+      for rowNum, rowContent of links
+        for colNum, cell of rowContent
+          linksIndex[cell.id] = cell
+      return linksIndex
 
     # the user requested some items for rows. For some
     addRowsWithNoData: (rowsList, latestRowPos) ->
@@ -179,6 +188,7 @@ glados.useNameSpace 'glados.models.Activity',
 
 
     createNewCellObj: (rowID, colID, colBucket) ->
+      id: rowID + '-' + colID
       row_id: rowID
       col_id: colID
       activity_count: colBucket.doc_count
