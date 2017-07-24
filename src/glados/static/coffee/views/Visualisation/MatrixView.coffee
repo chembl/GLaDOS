@@ -588,22 +588,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    rowFooters = rowsFooterG.selectAll('.vis-row-footer')
-      .data(matrix.rows)
-      .enter()
-      .append('g').attr('class', 'vis-row-footer')
-
-    rowFooters.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-      .style('stroke-width', @GRID_STROKE_WIDTH)
-      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .classed('footers-background-rect', true)
-
-    rowFooters.append('text')
-      .classed('footers-text', true)
-      .attr('text-anchor', 'end')
-      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
+    @updateRowsFootersForWindow(rowsFooterG)
 
     rowsFooterG.assignTexts = (transitionDuration=0) ->
 
@@ -820,6 +805,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.updateColsFootersForWindow(colsFooterG)
       colsFooterG.assignTexts()
       thisView.updateRowsHeadersForWindow(rowsHeaderG)
+      thisView.updateRowsFootersForWindow(rowsFooterG)
+      rowsFooterG.assignTexts()
 
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
@@ -1315,6 +1302,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('click', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
+
+  updateRowsFootersForWindow: (rowsFooterG) ->
+
+    thisView = @
+    rowsInWindow = @getRowsInWindow()
+
+    rowFooters = rowsFooterG.selectAll('.vis-row-footer')
+      .data(rowsInWindow, (d) -> d.id)
+
+    rowFooters.exit().remove()
+    rowFootersEnter = rowFooters.enter()
+      .append('g').attr('class', 'vis-row-footer')
+
+    rowFootersEnter.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('footers-background-rect', true)
+
+    rowFootersEnter.append('text')
+      .classed('footers-text', true)
+      .attr('text-anchor', 'end')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
