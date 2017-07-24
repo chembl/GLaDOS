@@ -306,7 +306,7 @@ glados.useNameSpace 'glados.models.Activity',
           aggs: {}
 
         aggsContainer = aggsContainer[aggName].aggs
-        aggSize = 10
+        aggSize = 100000
 
     addCellAggregationsToRequest: (requestData) ->
 
