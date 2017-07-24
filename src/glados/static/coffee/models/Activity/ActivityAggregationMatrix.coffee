@@ -112,12 +112,23 @@ glados.useNameSpace 'glados.models.Activity',
         columns: colsList
         rows: rowsList
         links: links
+        links_index: @generateLinksIndex(links)
         rows_index: _.indexBy(rowsList, 'id')
+        rows_curr_position_index: _.indexBy(rowsList, 'currentPosition')
         columns_index: _.indexBy(colsList, 'id')
+        columns_curr_position_index: _.indexBy(colsList, 'currentPosition')
 
       console.log 'result: ', result
 
       return {"matrix": result}
+
+    generateLinksIndex: (links) ->
+
+      linksIndex = {}
+      for rowNum, rowContent of links
+        for colNum, cell of rowContent
+          linksIndex[cell.id] = cell
+      return linksIndex
 
     # the user requested some items for rows. For some
     addRowsWithNoData: (rowsList, latestRowPos) ->
@@ -177,6 +188,7 @@ glados.useNameSpace 'glados.models.Activity',
 
 
     createNewCellObj: (rowID, colID, colBucket) ->
+      id: rowID + '-' + colID
       row_id: rowID
       col_id: colID
       activity_count: colBucket.doc_count
@@ -242,6 +254,8 @@ glados.useNameSpace 'glados.models.Activity',
         matrix.rows_index[row.id].currentPosition = index
         matrix.rows.push(matrix.rows_index[row.id])
 
+      matrix.rows_curr_position_index = _.indexBy(matrix.rows, 'currentPosition')
+
     sortMatrixColsBy: (propName, reverse=false) ->
 
       matrix = @get('matrix')
@@ -252,6 +266,7 @@ glados.useNameSpace 'glados.models.Activity',
         matrix.columns_index[col.id].currentPosition = index
         matrix.columns.push(matrix.columns_index[col.id])
 
+      matrix.columns_curr_position_index = _.indexBy(matrix.columns, 'currentPosition')
     #returns a list with all the links
     getDataList: ->
 
