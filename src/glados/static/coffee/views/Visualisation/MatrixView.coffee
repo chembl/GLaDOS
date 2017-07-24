@@ -675,26 +675,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    colsFooters = colsFooterG.selectAll(".vis-column-footer")
-      .data(matrix.columns)
-      .enter().append("g")
-      .classed('vis-column-footer', true)
-
-    colsFooters.append('rect')
-      .style('fill', 'none')
-      .classed('footers-background-rect', true)
-
-    colsFooters.append('line')
-      .style('stroke-width', @GRID_STROKE_WIDTH)
-      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .classed('footers-divisory-line', true)
-
-    colsFooters.append('text')
-      .classed('footers-text', true)
-      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .attr('transform', 'rotate(90)')
-      .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
-
+    @updateColsFootersForWindow(colsFooterG)
 
     colsFooterG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -860,6 +841,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.zoomScale = zoom.scale()
       thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
       thisView.updateColsHeadersForWindow(colsHeaderG)
+      thisView.updateColsFootersForWindow(colsFooterG)
+      colsFooterG.assignTexts()
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
       console.log 'translateY: ', translateY
@@ -1236,9 +1219,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'zoomScale: ', zoomScale
     console.log '@WINDOW: ', @WINDOW
 
-  updateColsHeadersForWindow: (colsHeaderG) ->
-
-    thisView = @
+  getColsInWindow: ->
 
     minColNum = @WINDOW.min_col_num
     maxColNum = @WINDOW.max_col_num
@@ -1246,7 +1227,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     end = if maxColNum >= colsList.length then colsList.length - 1 else maxColNum - 1
     start = if minColNum >= colsList.length then end - 1 else minColNum
     colsIndex = @model.get('matrix').columns_curr_position_index
-    colsInWindow = (colsIndex[i] for i in [start..end])
+    return (colsIndex[i] for i in [start..end])
+
+  updateColsHeadersForWindow: (colsHeaderG) ->
+
+    thisView = @
+    colsInWindow = @getColsInWindow()
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
@@ -1280,6 +1266,34 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('click', setUpColTooltip)
       .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
+
+  updateColsFootersForWindow: (colsFooterG) ->
+
+    thisView = @
+    colsInWindow = @getColsInWindow()
+
+    colsFooters = colsFooterG.selectAll(".vis-column-footer")
+      .data(colsInWindow, (d) -> d.id)
+
+    colsFooters.exit().remove()
+    colsFootersEnter = colsFooters.enter()
+      .append("g")
+      .classed('vis-column-footer', true)
+
+    colsFootersEnter.append('rect')
+      .style('fill', 'none')
+      .classed('footers-background-rect', true)
+
+    colsFootersEnter.append('line')
+      .style('stroke-width', @GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('footers-divisory-line', true)
+
+    colsFootersEnter.append('text')
+      .classed('footers-text', true)
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .attr('transform', 'rotate(90)')
+      .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
