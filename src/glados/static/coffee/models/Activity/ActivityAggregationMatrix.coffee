@@ -113,7 +113,9 @@ glados.useNameSpace 'glados.models.Activity',
         rows: rowsList
         links: links
         rows_index: _.indexBy(rowsList, 'id')
+        rows_curr_position_index: _.indexBy(rowsList, 'currentPosition')
         columns_index: _.indexBy(colsList, 'id')
+        columns_curr_position_index: _.indexBy(colsList, 'currentPosition')
 
       console.log 'result: ', result
 
@@ -242,6 +244,8 @@ glados.useNameSpace 'glados.models.Activity',
         matrix.rows_index[row.id].currentPosition = index
         matrix.rows.push(matrix.rows_index[row.id])
 
+      matrix.rows_curr_position_index = _.indexBy(matrix.rows, 'currentPosition')
+
     sortMatrixColsBy: (propName, reverse=false) ->
 
       matrix = @get('matrix')
@@ -252,6 +256,7 @@ glados.useNameSpace 'glados.models.Activity',
         matrix.columns_index[col.id].currentPosition = index
         matrix.columns.push(matrix.columns_index[col.id])
 
+      matrix.columns_curr_position_index = _.indexBy(matrix.columns, 'currentPosition')
     #returns a list with all the links
     getDataList: ->
 
