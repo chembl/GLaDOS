@@ -1339,13 +1339,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   getCellsInWindow: ->
     rowsInWindow = @getRowsInWindow()
     colsInWindow = @getColsInWindow()
-    cellsIndex = @model.get('matrix').links_index
+
+    links = @model.get('matrix').links
 
     cellsInWindow = []
     for row in rowsInWindow
+      rowOIndex = row.originalIndex
+
+      rowContent = links[rowOIndex]
+      if not rowContent?
+        continue
+
       for col in colsInWindow
-        cellID = row.id + '-' + col.id
-        cellObj = cellsIndex[cellID]
+        colOIndex = col.originalIndex
+
+        cellObj = rowContent[colOIndex]
         if cellObj?
           cellsInWindow.push cellObj
 
