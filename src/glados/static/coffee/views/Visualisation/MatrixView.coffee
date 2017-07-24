@@ -38,7 +38,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsIndex = @model.get('matrix').columns_index
       target = colsIndex[targetChemblID]
-      if @WINDOW.min_col_num <= target.currentPosition <= @WINDOW.max_col_num
+      if @WINDOW.min_col_num <= target.currentPosition < @WINDOW.max_col_num
         textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
         @fillHeaderText(textElem)
 
@@ -46,7 +46,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       rowsIndex = @model.get('matrix').rows_index
       target = rowsIndex[targetChemblID]
-      if @WINDOW.min_row_num <= target.currentPosition <= @WINDOW.max_row_num
+      if @WINDOW.min_row_num <= target.currentPosition < @WINDOW.max_row_num
         textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
         @fillHeaderText(textElem, isCol=false)
 
@@ -475,31 +475,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    rowHeaders = rowsHeaderG.selectAll('.vis-row')
-      .data(matrix.rows)
-      .enter()
-      .append('g').attr('class', 'vis-row')
-
-    rowHeaders.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-      .style('stroke-width', @GRID_STROKE_WIDTH)
-      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .classed('headers-background-rect', true)
-
-
-    if @config.rows_entity_name == 'Compounds'
-      setUpRowTooltip = @generateTooltipFunction('Compound', @)
-    else
-      setUpRowTooltip = @generateTooltipFunction('Target', @)
-
-    rowHeaders.append('text')
-      .classed('headers-text', true)
-      .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
-      .attr('text-decoration', 'underline')
-      .attr('cursor', 'pointer')
-      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('click', setUpRowTooltip)
-      .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
+    @updateRowsHeadersForWindow(rowsHeaderG)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -843,6 +819,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.updateColsHeadersForWindow(colsHeaderG)
       thisView.updateColsFootersForWindow(colsFooterG)
       colsFooterG.assignTexts()
+      thisView.updateRowsHeadersForWindow(rowsHeaderG)
+
       console.log 'handle zoom'
       console.log 'translateX: ', translateX
       console.log 'translateY: ', translateY
@@ -1294,6 +1272,49 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
       .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
+
+  getRowsInWindow: ->
+
+    minRowNum = @WINDOW.min_row_num
+    maxRowNum = @WINDOW.max_row_num
+    rowsList = @model.get('matrix').rows
+    end = if maxRowNum >= rowsList.length then rowsList.length - 1 else maxRowNum - 1
+    start = if minRowNum >= rowsList.length then end - 1 else minRowNum
+    rowsIndex = @model.get('matrix').rows_curr_position_index
+    return (rowsIndex[i] for i in [start..end])
+
+  updateRowsHeadersForWindow: (rowsHeaderG) ->
+
+    thisView = @
+    rowsInWindow = @getRowsInWindow()
+
+    rowHeaders = rowsHeaderG.selectAll('.vis-row')
+      .data(rowsInWindow, (d) -> d.id)
+
+    rowHeaders.exit().remove()
+    rowHeadersEnter = rowHeaders.enter()
+      .append('g').attr('class', 'vis-row')
+
+    rowHeadersEnter.append('rect')
+      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .classed('headers-background-rect', true)
+
+
+    if @config.rows_entity_name == 'Compounds'
+      setUpRowTooltip = @generateTooltipFunction('Compound', @)
+    else
+      setUpRowTooltip = @generateTooltipFunction('Target', @)
+
+    rowHeadersEnter.append('text')
+      .classed('headers-text', true)
+      .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
+      .attr('text-decoration', 'underline')
+      .attr('cursor', 'pointer')
+      .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
+      .on('click', setUpRowTooltip)
+      .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
