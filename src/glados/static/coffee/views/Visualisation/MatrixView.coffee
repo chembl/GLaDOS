@@ -208,8 +208,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # variable initialisation
     # --------------------------------------
-
-    links = matrix.links
     @NUM_COLUMNS = matrix.columns.length
     @NUM_ROWS = matrix.rows.length
 
@@ -421,11 +419,23 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     colourCells = (transitionDuration=0)->
 
+      starTime = Date.now()
       if not thisView.currentPropertyColour.colourScale?
+
+        maxValCheatName = 'cell_max_' + thisView.currentPropertyColour.propName
+        minValCheatName = 'cell_min_' + thisView.currentPropertyColour.propName
+        maxValCheat = thisView.model.get('matrix')[maxValCheatName]
+        minValCheat = thisView.model.get('matrix')[minValCheatName]
+
+        if maxValCheat? and minValCheat?
+          thisView.currentPropertyColour.domain = [minValCheat, maxValCheat]
+
         if not thisView.currentPropertyColour.domain?
+
           colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
           glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(thisView.currentPropertyColour,
             colourValues)
+
         glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
 
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
@@ -441,7 +451,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
         enableSelection=false)
 
+      endTime = Date.now()
+      time = endTime - starTime
+      console.log 'inside colour cells: ', time
+
+    starTime = Date.now()
+
     colourCells()
+
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'colour cells: ', time
 
     # --------------------------------------
     # Rows Header Container
@@ -1180,16 +1200,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @PREVIOUS_WINDOW = @WINDOW
 
-    console.log 'calculating window!'
-    console.log 'zoomScale: ', zoomScale
-    console.log '@WINDOW: ', @WINDOW
-
     if @WINDOW.window_changed
-      console.log 'WINDOW CHANGED!'
       @COLS_IN_WINDOW = @getColsInWindow()
       @ROWS_IN_WINDOW = @getRowsInWindow()
       @CELLS_IN_WINDOW = @getCellsInWindow()
-      console.log '@COLS_IN_WINDOW: ', @COLS_IN_WINDOW
+
 
 
   getColsInWindow: ->
