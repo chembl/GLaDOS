@@ -222,6 +222,10 @@ describe "Compounds vs Target Matrix", ->
       aggregations: testAggList
     testDataToParse = undefined
 
+    describe "General", ->
+      it 'Generates the link to browse all activities', ->
+        ctm.getLinkToAllActivities()
+
     describe "Request Data", ->
 
       it 'Generates the filter', -> testFilter(ctm, testMoleculeIDs)

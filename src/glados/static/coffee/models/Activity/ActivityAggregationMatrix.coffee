@@ -34,12 +34,12 @@ glados.useNameSpace 'glados.models.Activity',
           thisModel.loadTargetsPrefName(chemblID)
       )
 
+    getLinkToAllActivities: ->
+      console.log 'getLinkToAllActivities'
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
     parse: (data) ->
-
-      starTime = Date.now()
 
       rowsToPosition = {}
       colsToPosition = {}
@@ -140,10 +140,6 @@ glados.useNameSpace 'glados.models.Activity',
         cell_min_activity_count: MinActivityCount
 
       console.log 'result', result
-
-      endTime = Date.now()
-      time = endTime - starTime
-      console.log 'parsing time: ', time
 
       return {"matrix": result}
 
