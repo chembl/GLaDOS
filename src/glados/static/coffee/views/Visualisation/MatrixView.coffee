@@ -410,13 +410,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return glados.Settings.VISUALISATION_GRID_UNDEFINED
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])
 
-    getCellTooltip = (d) ->
-
-      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label +
-        ":" + d[thisView.currentPropertyColour.propName]
-
-      return txt
-
     colourCells = (transitionDuration=0)->
 
       starTime = Date.now()
@@ -440,8 +433,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
-      cellsContainerG.selectAll(".vis-cell")
-        .attr('data-tooltip', getCellTooltip)
 
       t = cellsContainerG.transition().duration(transitionDuration)
       t.selectAll(".vis-cell")
@@ -455,14 +446,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       time = endTime - starTime
       console.log 'inside colour cells: ', time
 
-    starTime = Date.now()
-
     colourCells()
-
-    endTime = Date.now()
-    time = endTime - starTime
-    console.log 'colour cells: ', time
-
     # --------------------------------------
     # Rows Header Container
     # --------------------------------------
