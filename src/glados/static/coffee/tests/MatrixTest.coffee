@@ -208,6 +208,13 @@ describe "Compounds vs Target Matrix", ->
     for colID, colObj of colsGot
       maxPchemblGot = colObj.pchembl_value_max
       expect(maxPchemblGot).toBe(colMaxsMustBe[colID])
+
+  testLinkToAllActivities = (ctm, testMoleculeIDs) ->
+
+    filterMustBe = ctm.get('filter_property') + ':(' + ('"' + id + '"' for id in testMoleculeIDs).join(' OR ') + ')'
+    urlMustBe = Activity.getActivitiesListURL(filterMustBe)
+    urlGot = ctm.getLinkToAllActivities()
+    expect(urlGot).toBe(urlMustBe)
   #---------------------------------------------------------------------------------------------------------------------
   # From Compounds
   #---------------------------------------------------------------------------------------------------------------------
@@ -221,6 +228,10 @@ describe "Compounds vs Target Matrix", ->
       chembl_ids: testMoleculeIDs
       aggregations: testAggList
     testDataToParse = undefined
+
+    describe "General", ->
+
+      it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testMoleculeIDs)
 
     describe "Request Data", ->
 
@@ -256,6 +267,10 @@ describe "Compounds vs Target Matrix", ->
       chembl_ids: testTargetIDs
       aggregations: testAggList
     testDataToParse = undefined
+
+    describe "General", ->
+
+      it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testTargetIDs)
 
     describe "Request Data", ->
 

@@ -65,6 +65,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible
     if $(@el).is(":visible")
 
+      starTime = Date.now()
+
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
@@ -72,6 +74,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       @clearVisualisation()
       @paintControls()
       @paintMatrix()
+
+      endTime = Date.now()
+      time = endTime - starTime
+      console.log 'render time: ', time
 
       $(@el).find('select').material_select()
 
@@ -202,8 +208,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # variable initialisation
     # --------------------------------------
-
-    links = matrix.links
     @NUM_COLUMNS = matrix.columns.length
     @NUM_ROWS = matrix.rows.length
 
@@ -350,22 +354,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
 
-    cellsContainerG.selectAll('grid-horizontal-rect')
-      .data(matrix.rows)
-      .enter()
-      .append("rect")
-        .classed('grid-horizontal-rect', true)
-        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
-
-    cellsContainerG.selectAll('grid-vertical-line')
-      .data(matrix.columns)
-      .enter()
-      .append("line")
-        .classed('grid-vertical-line', true)
-        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr('stroke-width', @GRID_STROKE_WIDTH)
-
     @updateCellsForWindow(cellsContainerG)
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
@@ -422,26 +410,29 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           return glados.Settings.VISUALISATION_GRID_UNDEFINED
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])
 
-    getCellTooltip = (d) ->
-
-      txt = d.row_id + "\n" + d.col_id + "\n" + thisView.currentPropertyColour.label +
-        ":" + d[thisView.currentPropertyColour.propName]
-
-      return txt
-
     colourCells = (transitionDuration=0)->
 
+      starTime = Date.now()
       if not thisView.currentPropertyColour.colourScale?
+
+        maxValCheatName = 'cell_max_' + thisView.currentPropertyColour.propName
+        minValCheatName = 'cell_min_' + thisView.currentPropertyColour.propName
+        maxValCheat = thisView.model.get('matrix')[maxValCheatName]
+        minValCheat = thisView.model.get('matrix')[minValCheatName]
+
+        if maxValCheat? and minValCheat?
+          thisView.currentPropertyColour.domain = [minValCheat, maxValCheat]
+
         if not thisView.currentPropertyColour.domain?
+
           colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
           glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(thisView.currentPropertyColour,
             colourValues)
+
         glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
 
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
-      cellsContainerG.selectAll(".vis-cell")
-        .attr('data-tooltip', getCellTooltip)
 
       t = cellsContainerG.transition().duration(transitionDuration)
       t.selectAll(".vis-cell")
@@ -451,8 +442,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
         enableSelection=false)
 
-    colourCells()
+      endTime = Date.now()
+      time = endTime - starTime
+      console.log 'inside colour cells: ', time
 
+    colourCells()
     # --------------------------------------
     # Rows Header Container
     # --------------------------------------
@@ -782,7 +776,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Zoom
     # --------------------------------------
-    handleZoom = (ingoreActivation=false) ->
+    handleZoom = (ingoreActivation=false, forceSectionsUpdate=false) ->
 
       if not ZOOM_ACTIVATED and not ingoreActivation
         return
@@ -791,8 +785,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
       thisView.zoomScale = zoom.scale()
-      thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
-      if thisView.WINDOW.window_changed
+      thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY, forceSectionsUpdate)
+      if thisView.WINDOW.window_changed or forceSectionsUpdate
         console.log 'WINDOW CHANGED!!!'
         thisView.updateColsHeadersForWindow(colsHeaderG)
         thisView.updateColsFootersForWindow(colsFooterG)
@@ -916,6 +910,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       rowsFooterG.assignTexts TRANSITIONS_DURATION
       cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
       rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      # add missing rows in window
+      setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
 
     triggerColSorting = ->
 
@@ -925,6 +921,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
       colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
       corner3G.assignTexts()
+      # add missing rows in window
+      setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
 
     $(@el).find(".select-row-sort").on "change", () ->
 
@@ -1066,7 +1064,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return
 
     $newMiniReportCardContainer = $('#' + miniRepCardID)
-    ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d)
+    ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d, @config.rows_entity_name == 'Compounds')
 
   fillHeaderText: (d3TextElem, isCol=true) ->
     thisView = @
@@ -1143,7 +1141,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   # Window
   #---------------------------------------------------------------------------------------------------------------------
   # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
-  calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0) ->
+  calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
 
     C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
     E2 = @VISUALISATION_HEIGHT + (C * zoomScale)
@@ -1156,8 +1154,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     winY = if winY < 0 then 0 else winY
     winW = E3
     winH = E2
-
-    console.log 'winY: ', winY
 
     #https://drive.google.com/file/d/0BzECtlZ_ur1CMjNkbExYQU5BMW8/view?usp=sharing
     minRowNum = Math.floor(winY / (@SIDE_SIZE * zoomScale))
@@ -1189,11 +1185,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       window_changed: windowChanged
 
     @PREVIOUS_WINDOW = @WINDOW
-    console.log 'calculating window!'
-    console.log 'zoomScale: ', zoomScale
-    console.log '@WINDOW: ', @WINDOW
+
+    if @WINDOW.window_changed or forceSectionsUpdate
+      @COLS_IN_WINDOW = @getColsInWindow()
+      @ROWS_IN_WINDOW = @getRowsInWindow()
+      @CELLS_IN_WINDOW = @getCellsInWindow()
+
+
 
   getColsInWindow: ->
+
+    starTime = Date.now()
 
     minColNum = @WINDOW.min_col_num
     maxColNum = @WINDOW.max_col_num
@@ -1201,12 +1203,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     end = if maxColNum >= colsList.length then colsList.length - 1 else maxColNum - 1
     start = if minColNum >= colsList.length then end - 1 else minColNum
     colsIndex = @model.get('matrix').columns_curr_position_index
+
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'getColsInWindow: ', time
+
     return (colsIndex[i] for i in [start..end])
 
   updateColsHeadersForWindow: (colsHeaderG) ->
+    starTime = Date.now()
 
     thisView = @
-    colsInWindow = @getColsInWindow()
+    colsInWindow = @COLS_IN_WINDOW
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
@@ -1241,10 +1249,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'updateColsHeadersForWindow: ', time
+
   updateColsFootersForWindow: (colsFooterG) ->
 
     thisView = @
-    colsInWindow = @getColsInWindow()
+    colsInWindow = @COLS_IN_WINDOW
 
     colsFooters = colsFooterG.selectAll(".vis-column-footer")
       .data(colsInWindow, (d) -> d.id)
@@ -1271,18 +1283,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   getRowsInWindow: ->
 
+    starTime = Date.now()
+
     minRowNum = @WINDOW.min_row_num
     maxRowNum = @WINDOW.max_row_num
     rowsList = @model.get('matrix').rows
     end = if maxRowNum >= rowsList.length then rowsList.length - 1 else maxRowNum - 1
     start = if minRowNum >= rowsList.length then end - 1 else minRowNum
     rowsIndex = @model.get('matrix').rows_curr_position_index
+
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'getRowsInWindow: ', time
+
     return (rowsIndex[i] for i in [start..end])
 
   updateRowsHeadersForWindow: (rowsHeaderG) ->
 
+    starTime = Date.now()
+
     thisView = @
-    rowsInWindow = @getRowsInWindow()
+    rowsInWindow = @ROWS_IN_WINDOW
 
     rowHeaders = rowsHeaderG.selectAll('.vis-row')
       .data(rowsInWindow, (d) -> d.id)
@@ -1297,6 +1318,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'updateRowsHeadersForWindow: ', time
 
     if @config.rows_entity_name == 'Compounds'
       setUpRowTooltip = @generateTooltipFunction('Compound', @)
@@ -1312,10 +1336,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('click', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'updateRowsHeadersForWindow: ', time
+
   updateRowsFootersForWindow: (rowsFooterG) ->
 
+    starTime = Date.now()
+
     thisView = @
-    rowsInWindow = @getRowsInWindow()
+    rowsInWindow = @ROWS_IN_WINDOW
 
     rowFooters = rowsFooterG.selectAll('.vis-row-footer')
       .data(rowsInWindow, (d) -> d.id)
@@ -1336,9 +1366,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
 
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'updateRowsFootersForWindow: ', time
+
   getCellsInWindow: ->
-    rowsInWindow = @getRowsInWindow()
-    colsInWindow = @getColsInWindow()
+
+    starTime = Date.now()
+
+    rowsInWindow = @ROWS_IN_WINDOW
+    colsInWindow = @COLS_IN_WINDOW
 
     links = @model.get('matrix').links
 
@@ -1357,13 +1394,53 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         if cellObj?
           cellsInWindow.push cellObj
 
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'getCellsInWindow: ', time
+
     return cellsInWindow
 
-  updateCellsForWindow: (cellsContainerG)->
+  updateCellsForWindow: (cellsContainerG) ->
+
+    starTime = Date.now()
 
     thisView = @
-    cellsInWindow = @getCellsInWindow()
+    cellsInWindow = @CELLS_IN_WINDOW
+    rowsInWindow = @ROWS_IN_WINDOW
+    colsInWindow = @COLS_IN_WINDOW
 
+    # -------------------------------------------------------------------------------
+    # horizontal rectangles
+    # -------------------------------------------------------------------------------
+    horizontalRectangles = cellsContainerG.selectAll('.grid-horizontal-rect')
+      .data(rowsInWindow)
+
+    horizontalRectangles.exit().remove()
+
+    horizontalRectanglesEnter = horizontalRectangles.enter()
+      .append("rect")
+      .classed('grid-horizontal-rect', true)
+      .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+
+    # -------------------------------------------------------------------------------
+    # Vertical Lines
+    # -------------------------------------------------------------------------------
+    verticalLines = cellsContainerG.selectAll('.grid-vertical-line')
+      .data(colsInWindow)
+
+    verticalLines.exit().remove()
+
+    verticalLinesEnter = verticalLines.enter()
+      .append("line")
+      .classed('grid-vertical-line', true)
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr('stroke-width', @GRID_STROKE_WIDTH)
+
+
+    # -------------------------------------------------------------------------------
+    # Cells
+    # -------------------------------------------------------------------------------
     cells = cellsContainerG.selectAll(".vis-cell")
       .data(cellsInWindow, (d) -> d.id)
 
@@ -1375,6 +1452,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
       .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
       .on('click', (d) -> thisView.showCellTooltip($(@), d))
+
+
+    endTime = Date.now()
+    time = endTime - starTime
+    console.log 'updateCellsForWindow: ', time
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering
