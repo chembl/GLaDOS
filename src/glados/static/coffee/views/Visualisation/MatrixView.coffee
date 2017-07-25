@@ -356,19 +356,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
 
-    starTime = Date.now()
-
-    cellsContainerG.selectAll('.grid-horizontal-rect')
-      .data(matrix.rows)
-      .enter()
-      .append("rect")
-        .classed('grid-horizontal-rect', true)
-        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
-
-    endTime = Date.now()
-    time = endTime - starTime
-    console.log 'adding horizontal lines: ', time
+#    starTime = Date.now()
+#
+#    cellsContainerG.selectAll('.grid-horizontal-rect')
+#      .data(matrix.rows)
+#      .enter()
+#      .append("rect")
+#        .classed('grid-horizontal-rect', true)
+#        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+#        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+#
+#    endTime = Date.now()
+#    time = endTime - starTime
+#    console.log 'adding horizontal lines: ', time
 
     starTime = Date.now()
 
@@ -1424,6 +1424,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     cellsInWindow = @getCellsInWindow()
+    rowsInWindow = @getRowsInWindow()
+    colsInWindow = @getColsInWindow()
+
+    horizontalRectangles = cellsContainerG.selectAll('.grid-horizontal-rect')
+      .data(rowsInWindow, (d) -> d.id)
+
+    horizontalRectangles.exit().remove()
+
+    horizontalRectanglesEnter = horizontalRectangles.enter()
+      .append("rect")
+      .classed('grid-horizontal-rect', true)
+      .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
 
     cells = cellsContainerG.selectAll(".vis-cell")
       .data(cellsInWindow, (d) -> d.id)
