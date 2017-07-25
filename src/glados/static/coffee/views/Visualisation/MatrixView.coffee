@@ -356,34 +356,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
 
-#    starTime = Date.now()
-#
-#    cellsContainerG.selectAll('.grid-horizontal-rect')
-#      .data(matrix.rows)
-#      .enter()
-#      .append("rect")
-#        .classed('grid-horizontal-rect', true)
-#        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-#        .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
-#
-#    endTime = Date.now()
-#    time = endTime - starTime
-#    console.log 'adding horizontal lines: ', time
-
-    starTime = Date.now()
-
-    cellsContainerG.selectAll('.grid-vertical-line')
-      .data(matrix.columns)
-      .enter()
-      .append("line")
-        .classed('grid-vertical-line', true)
-        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr('stroke-width', @GRID_STROKE_WIDTH)
-
-    endTime = Date.now()
-    time = endTime - starTime
-    console.log 'adding vertical lines: ', time
-
     @updateCellsForWindow(cellsContainerG)
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
@@ -1427,8 +1399,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowsInWindow = @getRowsInWindow()
     colsInWindow = @getColsInWindow()
 
+    # -------------------------------------------------------------------------------
+    # horizontal rectangles
+    # -------------------------------------------------------------------------------
     horizontalRectangles = cellsContainerG.selectAll('.grid-horizontal-rect')
-      .data(rowsInWindow, (d) -> d.id)
+      .data(rowsInWindow)
 
     horizontalRectangles.exit().remove()
 
@@ -1438,6 +1413,24 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
 
+    # -------------------------------------------------------------------------------
+    # Vertical Lines
+    # -------------------------------------------------------------------------------
+    verticalLines = cellsContainerG.selectAll('.grid-vertical-line')
+      .data(colsInWindow)
+
+    verticalLines.exit().remove()
+
+    verticalLinesEnter = verticalLines.enter()
+      .append("line")
+      .classed('grid-vertical-line', true)
+      .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+      .attr('stroke-width', @GRID_STROKE_WIDTH)
+
+
+    # -------------------------------------------------------------------------------
+    # Cells
+    # -------------------------------------------------------------------------------
     cells = cellsContainerG.selectAll(".vis-cell")
       .data(cellsInWindow, (d) -> d.id)
 
