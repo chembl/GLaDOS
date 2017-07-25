@@ -149,6 +149,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix
     #-------------------------------------------------------------------------------------------------------------------
+    fillLinkToAllActivities: ->
+      glados.Utils.fillContentForElement $(@el).find('.BCK-See-all-activities'),
+        url: 'aspirin'
+
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
@@ -164,6 +168,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
         thisView.showMatrix()
+        thisView.fillLinkToAllActivities()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
 
@@ -184,6 +189,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showMatrix()
       @setProgressMessage('', hideCog=true)
       @hideProgressElement()
+      @fillLinkToAllActivities()
 
 
 
