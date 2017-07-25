@@ -34,12 +34,13 @@ glados.useNameSpace 'glados.models.Activity',
           thisModel.loadTargetsPrefName(chemblID)
       )
 
+    getLinkToAllActivities: ->
+      filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
+      return Activity.getActivitiesListURL(filter)
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
     parse: (data) ->
-
-      starTime = Date.now()
 
       rowsToPosition = {}
       colsToPosition = {}
@@ -52,6 +53,11 @@ glados.useNameSpace 'glados.models.Activity',
 
       rowsIndex = {}
       columnsIndex = {}
+      # this is to optimize the cell colouring
+      MaxPchemblValueAvg = -Number.MAX_VALUE
+      MinPchemblValueAvg = Number.MAX_VALUE
+      MaxActivityCount = -Number.MAX_VALUE
+      MinActivityCount = Number.MAX_VALUE
 
       aggregations = @get('aggregations')
       rowsAggName = aggregations[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
@@ -95,6 +101,15 @@ glados.useNameSpace 'glados.models.Activity',
 
           # now I know that there is a new intersection!
           cellObj = @createNewCellObj(rowID, colID, colBucket)
+          if cellObj.pchembl_value_avg? and cellObj.pchembl_value_avg > MaxPchemblValueAvg
+            MaxPchemblValueAvg = cellObj.pchembl_value_avg
+          if cellObj.pchembl_value_avg? and cellObj.pchembl_value_avg < MinPchemblValueAvg
+            MinPchemblValueAvg = cellObj.pchembl_value_avg
+
+          if cellObj.activity_count? and cellObj.activity_count > MaxActivityCount
+            MaxActivityCount = cellObj.activity_count
+          if cellObj.activity_count? and cellObj.activity_count < MinActivityCount
+            MinActivityCount = cellObj.activity_count
 
           #update row and col properties
           @updateColOrRowObj(rowObj, colBucket)
@@ -110,7 +125,6 @@ glados.useNameSpace 'glados.models.Activity',
 
           links[compPos][colPos] = cellObj
 
-
       @addRowsWithNoData(rowsList, latestRowPos)
 
       result =
@@ -121,11 +135,12 @@ glados.useNameSpace 'glados.models.Activity',
         rows_curr_position_index: _.indexBy(rowsList, 'currentPosition')
         columns_index: columnsIndex
         columns_curr_position_index: _.indexBy(colsList, 'currentPosition')
+        cell_max_pchembl_value_avg: MaxPchemblValueAvg
+        cell_min_pchembl_value_avg: MinPchemblValueAvg
+        cell_max_activity_count: MaxActivityCount
+        cell_min_activity_count: MinActivityCount
 
-
-      endTime = Date.now()
-      time = endTime - starTime
-      console.log 'parsing time: ', time
+      console.log 'result', result
 
       return {"matrix": result}
 
@@ -142,7 +157,6 @@ glados.useNameSpace 'glados.models.Activity',
         newRow = @createNewRowObj(id, mockBucket, latestRowPos)
         rowsList.push(newRow)
         latestRowPos++
-
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 
