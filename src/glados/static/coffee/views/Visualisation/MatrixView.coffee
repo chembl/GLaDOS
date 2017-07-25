@@ -1179,9 +1179,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       window_changed: windowChanged
 
     @PREVIOUS_WINDOW = @WINDOW
+
     console.log 'calculating window!'
     console.log 'zoomScale: ', zoomScale
     console.log '@WINDOW: ', @WINDOW
+
+    if @WINDOW.window_changed
+      console.log 'WINDOW CHANGED!'
+      @COLS_IN_WINDOW = @getColsInWindow()
+      @ROWS_IN_WINDOW = @getRowsInWindow()
+      @CELLS_IN_WINDOW = @getCellsInWindow()
+      console.log '@COLS_IN_WINDOW: ', @COLS_IN_WINDOW
+
 
   getColsInWindow: ->
 
@@ -1204,7 +1213,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     starTime = Date.now()
 
     thisView = @
-    colsInWindow = @getColsInWindow()
+    colsInWindow = @COLS_IN_WINDOW
 
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
@@ -1246,7 +1255,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   updateColsFootersForWindow: (colsFooterG) ->
 
     thisView = @
-    colsInWindow = @getColsInWindow()
+    colsInWindow = @COLS_IN_WINDOW
 
     colsFooters = colsFooterG.selectAll(".vis-column-footer")
       .data(colsInWindow, (d) -> d.id)
@@ -1293,7 +1302,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     starTime = Date.now()
 
     thisView = @
-    rowsInWindow = @getRowsInWindow()
+    rowsInWindow = @ROWS_IN_WINDOW
 
     rowHeaders = rowsHeaderG.selectAll('.vis-row')
       .data(rowsInWindow, (d) -> d.id)
@@ -1335,7 +1344,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     starTime = Date.now()
 
     thisView = @
-    rowsInWindow = @getRowsInWindow()
+    rowsInWindow = @ROWS_IN_WINDOW
 
     rowFooters = rowsFooterG.selectAll('.vis-row-footer')
       .data(rowsInWindow, (d) -> d.id)
@@ -1364,8 +1373,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     starTime = Date.now()
 
-    rowsInWindow = @getRowsInWindow()
-    colsInWindow = @getColsInWindow()
+    rowsInWindow = @ROWS_IN_WINDOW
+    colsInWindow = @COLS_IN_WINDOW
 
     links = @model.get('matrix').links
 
@@ -1395,9 +1404,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     starTime = Date.now()
 
     thisView = @
-    cellsInWindow = @getCellsInWindow()
-    rowsInWindow = @getRowsInWindow()
-    colsInWindow = @getColsInWindow()
+    cellsInWindow = @CELLS_IN_WINDOW
+    rowsInWindow = @ROWS_IN_WINDOW
+    colsInWindow = @COLS_IN_WINDOW
 
     # -------------------------------------------------------------------------------
     # horizontal rectangles
