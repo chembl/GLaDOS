@@ -776,7 +776,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Zoom
     # --------------------------------------
-    handleZoom = (ingoreActivation=false) ->
+    handleZoom = (ingoreActivation=false, forceSectionsUpdate=false) ->
 
       if not ZOOM_ACTIVATED and not ingoreActivation
         return
@@ -785,8 +785,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       translateX = zoom.translate()[0]
       translateY = zoom.translate()[1]
       thisView.zoomScale = zoom.scale()
-      thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY)
-      if thisView.WINDOW.window_changed
+      thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY, forceSectionsUpdate)
+      if thisView.WINDOW.window_changed or forceSectionsUpdate
         console.log 'WINDOW CHANGED!!!'
         thisView.updateColsHeadersForWindow(colsHeaderG)
         thisView.updateColsFootersForWindow(colsFooterG)
@@ -910,6 +910,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       rowsFooterG.assignTexts TRANSITIONS_DURATION
       cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
       rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      # add missing rows in window
+      setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
 
     triggerColSorting = ->
 
@@ -919,6 +921,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
       colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
       corner3G.assignTexts()
+      # add missing rows in window
+      setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
 
     $(@el).find(".select-row-sort").on "change", () ->
 
@@ -1137,7 +1141,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   # Window
   #---------------------------------------------------------------------------------------------------------------------
   # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
-  calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0) ->
+  calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
 
     C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
     E2 = @VISUALISATION_HEIGHT + (C * zoomScale)
@@ -1150,8 +1154,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     winY = if winY < 0 then 0 else winY
     winW = E3
     winH = E2
-
-    console.log 'winY: ', winY
 
     #https://drive.google.com/file/d/0BzECtlZ_ur1CMjNkbExYQU5BMW8/view?usp=sharing
     minRowNum = Math.floor(winY / (@SIDE_SIZE * zoomScale))
@@ -1184,7 +1186,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @PREVIOUS_WINDOW = @WINDOW
 
-    if @WINDOW.window_changed
+    if @WINDOW.window_changed or forceSectionsUpdate
       @COLS_IN_WINDOW = @getColsInWindow()
       @ROWS_IN_WINDOW = @getRowsInWindow()
       @CELLS_IN_WINDOW = @getCellsInWindow()
