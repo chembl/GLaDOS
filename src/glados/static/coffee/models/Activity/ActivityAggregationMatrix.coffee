@@ -35,7 +35,8 @@ glados.useNameSpace 'glados.models.Activity',
       )
 
     getLinkToAllActivities: ->
-      console.log 'getLinkToAllActivities'
+      filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
+      return Activity.getActivitiesListURL(filter)
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
@@ -156,7 +157,6 @@ glados.useNameSpace 'glados.models.Activity',
         newRow = @createNewRowObj(id, mockBucket, latestRowPos)
         rowsList.push(newRow)
         latestRowPos++
-
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 

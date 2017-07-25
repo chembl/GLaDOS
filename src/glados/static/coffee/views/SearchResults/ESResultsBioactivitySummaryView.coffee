@@ -151,7 +151,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     fillLinkToAllActivities: ->
       glados.Utils.fillContentForElement $(@el).find('.BCK-See-all-activities'),
-        url: 'aspirin'
+        url: @ctm.getLinkToAllActivities()
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
