@@ -158,6 +158,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 fields: [
                   "*.std_analyzed^10",
                   "*.keyword^1000",
+                  "*.lower_case_keyword^1000"
                   "*.entity_id^100000",
                   "*.id_reference^1000",
                   "*.chembl_id^10000",
