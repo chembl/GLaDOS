@@ -84,6 +84,18 @@
       },
       "max_phase_MIN": {
         "value": 0
+      },
+      "_metadata.related_targets.count_MIN": {
+        "value": 0
+      },
+      "_metadata.related_targets.count_MAX": {
+        "value": 194
+      },
+      "_metadata.activity_count_MIN": {
+        "value": 0
+      },
+      "_metadata.activity_count_MAX": {
+        "value": 1796
       }
     },
     "firstCall": true
@@ -187,6 +199,54 @@
           {
             "key": 8,
             "doc_count": 1
+          }
+        ]
+      },
+      "_metadata.activity_count": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 93
+          },
+          {
+            "key": 360,
+            "doc_count": 2
+          },
+          {
+            "key": 720,
+            "doc_count": 2
+          },
+          {
+            "key": 1080,
+            "doc_count": 0
+          },
+          {
+            "key": 1440,
+            "doc_count": 1
+          }
+        ]
+      },
+      "_metadata.related_targets.count": {
+        "buckets": [
+          {
+            "key": 0,
+            "doc_count": 88
+          },
+          {
+            "key": 39,
+            "doc_count": 3
+          },
+          {
+            "key": 78,
+            "doc_count": 3
+          },
+          {
+            "key": 117,
+            "doc_count": 2
+          },
+          {
+            "key": 156,
+            "doc_count": 2
           }
         ]
       }
