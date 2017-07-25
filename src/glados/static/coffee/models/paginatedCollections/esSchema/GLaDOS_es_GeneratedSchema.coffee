@@ -14,6 +14,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "document_chembl_id" : {type: String, aggregatable: true}
       "document_journal" : {type: String, aggregatable: true}
       "document_year" : {type: Number, aggregatable: true}
+      "ligand_efficiency.bei" : {type: Number, aggregatable: true}
+      "ligand_efficiency.le" : {type: Number, aggregatable: true}
+      "ligand_efficiency.lle" : {type: Number, aggregatable: true}
+      "ligand_efficiency.sei" : {type: Number, aggregatable: true}
       "molecule_chembl_id" : {type: String, aggregatable: true}
       "pchembl_value" : {type: Number, aggregatable: true}
       "potential_duplicate" : {type: Boolean, aggregatable: true}
@@ -67,7 +71,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "level4" : {type: String, aggregatable: true}
       "level4_description" : {type: String, aggregatable: true}
       "level5" : {type: String, aggregatable: true}
-      "who_id" : {type: String, aggregatable: true}
       "who_name" : {type: String, aggregatable: true}
     chembl_binding_site:
       "site_components.domain.domain_id" : {type: String, aggregatable: true}
@@ -105,6 +108,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "entity_type" : {type: String, aggregatable: true}
       "resource_url" : {type: String, aggregatable: true}
       "status" : {type: String, aggregatable: true}
+    chembl_compound_record:
+      "compound_key" : {type: String, aggregatable: true}
+      "compound_name" : {type: String, aggregatable: false}
+      "curated" : {type: Boolean, aggregatable: true}
+      "document_chembl_id" : {type: String, aggregatable: true}
+      "load_date" : {type: String, aggregatable: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true}
+      "record_id" : {type: String, aggregatable: true}
+      "src_id" : {type: String, aggregatable: true}
     chembl_document:
       "abstract" : {type: String, aggregatable: false}
       "authors" : {type: String, aggregatable: false}
@@ -115,10 +127,40 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "issue" : {type: String, aggregatable: true}
       "journal" : {type: String, aggregatable: true}
       "last_page" : {type: String, aggregatable: true}
+      "patent_id" : {type: String, aggregatable: true}
       "pubmed_id" : {type: String, aggregatable: true}
       "title" : {type: String, aggregatable: false}
       "volume" : {type: Number, aggregatable: true}
       "year" : {type: Number, aggregatable: true}
+    chembl_drug:
+      "applicants" : {type: String, aggregatable: false}
+      "atc_classification.code" : {type: String, aggregatable: true}
+      "atc_classification.description" : {type: String, aggregatable: false}
+      "availability_type" : {type: Number, aggregatable: true}
+      "black_box" : {type: Boolean, aggregatable: true}
+      "chirality" : {type: Number, aggregatable: true}
+      "development_phase" : {type: Number, aggregatable: true}
+      "drug_type" : {type: Number, aggregatable: true}
+      "first_approval" : {type: Number, aggregatable: true}
+      "first_in_class" : {type: Boolean, aggregatable: true}
+      "indication_class" : {type: String, aggregatable: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true}
+      "ob_patent" : {type: String, aggregatable: true}
+      "oral" : {type: Boolean, aggregatable: true}
+      "parenteral" : {type: Boolean, aggregatable: true}
+      "prodrug" : {type: Boolean, aggregatable: true}
+      "research_codes" : {type: String, aggregatable: true}
+      "rule_of_five" : {type: Boolean, aggregatable: true}
+      "sc_patent" : {type: String, aggregatable: true}
+      "synonyms" : {type: String, aggregatable: false}
+      "topical" : {type: Boolean, aggregatable: true}
+      "usan_stem" : {type: String, aggregatable: true}
+      "usan_stem_definition" : {type: String, aggregatable: true}
+      "usan_stem_substem" : {type: String, aggregatable: true}
+      "usan_year" : {type: Number, aggregatable: true}
+      "withdrawn_country" : {type: String, aggregatable: true}
+      "withdrawn_reason" : {type: String, aggregatable: false}
+      "withdrawn_year" : {type: Number, aggregatable: true}
     chembl_drug_indication:
       "drugind_id" : {type: String, aggregatable: true}
       "efo_id" : {type: String, aggregatable: true}
@@ -172,6 +214,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "target_chembl_id" : {type: String, aggregatable: true}
       "tax_id" : {type: String, aggregatable: true}
     chembl_molecule:
+      "_metadata.activity_count" : {type: Number, aggregatable: true}
+      "_metadata.compound_records.compound_key" : {type: String, aggregatable: false}
+      "_metadata.compound_records.compound_name" : {type: String, aggregatable: false}
+      "_metadata.disease_name" : {type: String, aggregatable: false}
+      "_metadata.related_targets.chembl_ids.0" : {type: String, aggregatable: true}
+      "_metadata.related_targets.chembl_ids.1" : {type: String, aggregatable: true}
+      "_metadata.related_targets.chembl_ids.2" : {type: String, aggregatable: true}
+      "_metadata.related_targets.count" : {type: Number, aggregatable: true}
+      "_metadata.tags" : {type: String, aggregatable: true}
       "atc_classifications" : {type: String, aggregatable: true}
       "availability_type" : {type: Number, aggregatable: true}
       "biotherapeutic.biocomponents.component_id" : {type: String, aggregatable: true}
@@ -235,6 +286,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "structure_type" : {type: String, aggregatable: true}
       "therapeutic_flag" : {type: Boolean, aggregatable: true}
       "topical" : {type: Boolean, aggregatable: true}
+      "usan_stem" : {type: String, aggregatable: true}
       "usan_stem_definition" : {type: String, aggregatable: false}
       "usan_substem" : {type: String, aggregatable: true}
       "usan_year" : {type: Number, aggregatable: true}
@@ -259,6 +311,90 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "src_id" : {type: String, aggregatable: true}
       "src_short_name" : {type: String, aggregatable: true}
     chembl_target:
+      "_metadata.activity_count" : {type: Number, aggregatable: true}
+      "_metadata.disease_name" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.0" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.1" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.10" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.11" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.12" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.13" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.14" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.15" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.16" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.17" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.18" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.19" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.2" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.20" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.21" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.22" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.23" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.24" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.25" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.26" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.27" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.28" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.29" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.3" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.30" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.31" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.32" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.33" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.34" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.35" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.36" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.37" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.38" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.39" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.4" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.40" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.41" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.42" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.43" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.44" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.45" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.46" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.47" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.48" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.49" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.5" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.50" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.51" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.52" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.53" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.54" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.55" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.56" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.57" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.58" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.59" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.6" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.60" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.61" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.62" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.63" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.64" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.65" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.66" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.67" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.68" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.69" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.7" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.70" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.71" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.72" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.73" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.74" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.75" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.76" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.77" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.78" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.79" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.8" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.chembl_ids.9" : {type: String, aggregatable: true}
+      "_metadata.related_compounds.count" : {type: Number, aggregatable: true}
+      "_metadata.tags" : {type: String, aggregatable: true}
       "organism" : {type: String, aggregatable: true}
       "pref_name" : {type: String, aggregatable: false}
       "species_group_flag" : {type: Boolean, aggregatable: true}
@@ -289,6 +425,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       "relationship" : {type: String, aggregatable: true}
       "target_chembl_id" : {type: String, aggregatable: true}
     chembl_tissue:
+      "bto_id" : {type: String, aggregatable: true}
+      "caloha_id" : {type: String, aggregatable: true}
       "efo_id" : {type: String, aggregatable: true}
       "pref_name" : {type: String, aggregatable: false}
       "tissue_chembl_id" : {type: String, aggregatable: true}

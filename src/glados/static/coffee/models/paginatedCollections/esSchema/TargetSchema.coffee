@@ -14,8 +14,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_target','target_type'
         )
-      target_components_component_type:
-        label: 'Component Type'
+      related_compounds_count:
+        label: '# Related Compounds'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-          'chembl_target','target_components.component_type'
+          'chembl_target','_metadata.related_compounds.count'
+        )
+      activity_count:
+        label: '# Bioactivities'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_target','_metadata.activity_count'
         )
