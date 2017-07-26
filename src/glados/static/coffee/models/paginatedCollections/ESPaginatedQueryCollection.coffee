@@ -446,7 +446,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       columns = @getMeta('columns')
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
-      @setPage(1, false)
+      @setMeta('current_page', 1)
       @fetch()
 
 #TODO implement sorting
