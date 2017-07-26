@@ -217,7 +217,7 @@ class TargetReportCardApp
     targetChemblID = paramsList[0]
     $containerElem = $clickedLink.parent()
     $containerElem.removeClass('number-cell')
-    $containerElem.addClass('vis-cell')
+    $containerElem.addClass('vis-container')
 
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 

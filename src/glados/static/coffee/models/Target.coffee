@@ -111,6 +111,7 @@ Target.COLUMNS = {
     # or probably not, depending on how this evolves
     'function_key': 'bioactivities'
     'function_link': true
+    'execute_on_render': true
     'format_as_number': true
   }
   PREF_NAME: {

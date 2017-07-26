@@ -61,6 +61,8 @@ glados.useNameSpace 'glados',
         returnCol['has_link'] = _.has(colDescription, 'link_base')
         returnCol['is_secondary_link'] = colDescription.secondary_link == true
         returnCol['is_function_link'] = colDescription.function_link == true
+        returnCol['execute_on_render'] = colDescription.execute_on_render == true
+
         if returnCol['is_function_link']
           returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
           for paramComp in colDescription.function_parameters).join(',')
