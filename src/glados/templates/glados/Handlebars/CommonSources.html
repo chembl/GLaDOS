@@ -94,7 +94,7 @@
 
   <thead>
 
-    <tr>
+    <tr >
 
       {{#unless selection_disabled}}
       <th>
@@ -108,17 +108,17 @@
       {{#each columns}}
         <th>
 
-           <table class="headers-table">
+           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
             <thead>
              <tr>
-               <th>
+               <th class="name-to-show">
 
           {{this.name_to_show}}
                </th>
                <th>
           {{#unless this.sort_disabled}}
 
-          <i class="fa {{sort_class}} sort grey-text"
+          <i class="fa {{sort_class}} grey-text sort-icon"
              aria-hidden="true" data-comparator="{{this.comparator}}"></i>
 
           {{/unless}}
