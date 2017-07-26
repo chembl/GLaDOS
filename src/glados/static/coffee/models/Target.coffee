@@ -71,6 +71,7 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
     filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
     parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    parsed.targets_url = Compound.getCompoundsListURL()
     return parsed;
 
   fetchFromAssayChemblID: ->
@@ -148,6 +149,7 @@ Target.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'format_as_number': true
+    'link_base': 'targets_url'
   }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID

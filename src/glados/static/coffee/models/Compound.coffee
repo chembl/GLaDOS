@@ -402,3 +402,10 @@ Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+
+Compound.getCompoundsListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds/filter/' + filter
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds'
