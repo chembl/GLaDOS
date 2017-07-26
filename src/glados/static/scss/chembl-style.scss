@@ -1255,8 +1255,12 @@ div#CNC-zoom-modal {
     &.number-cell{
       text-align: right;
     }
-    &.vis-cell{
+    .vis-container {
       width: 150px;
+      padding: 5px;
+      border: 1px solid color('grey', 'lighten-2');
+      margin-left: auto;
+      margin-right: 0;
     }
 
   }
@@ -2294,7 +2298,7 @@ span.badge-primary-color-no-float {
 .es-results-matrix {
   position: relative;
 
-  .vis-cell {
+  .vis-container {
     cursor: context-menu;
     &:hover {
       stroke-width: 2;
