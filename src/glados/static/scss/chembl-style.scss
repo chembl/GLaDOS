@@ -1230,6 +1230,13 @@ div#CNC-zoom-modal {
   }
   .headers-table {
     border-collapse: separate;
+    .sort-icon{
+      font-size: 1.3em;
+      cursor: pointer;
+      &:hover{
+        color: color($primary-color-name, "accent-4") !important;
+      }
+    }
   }
   td {
 
@@ -1246,7 +1253,7 @@ div#CNC-zoom-modal {
   }
 
   th {
-    font-size: 85%;
+    font-size: 0.9em;
   }
 
 }
