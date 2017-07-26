@@ -109,6 +109,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
       return res_lists_dict
 
+    getNewESCompoundsList: (customQueryString='*') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND,
+        customQueryString, useCustomQueryString=true)
+      return list
+
     getNewESActivitiesList: (customQueryString='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY,
         customQueryString, useCustomQueryString=true)

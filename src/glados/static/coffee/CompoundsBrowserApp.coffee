@@ -3,4 +3,16 @@ class CompoundsBrowserApp
   @init = ->
 
     filter = URLProcessor.getFilter()
-    console.log 'init compunds browser!'
+    compsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter)
+
+    new glados.views.Browsers.BrowserMenuView
+      collection: compsList
+      el: $('.BCK-BrowserContainer')
+      standalone_mode: true
+
+    new glados.views.Browsers.BrowserFacetView
+      collection: compsList
+      standalone_mode: true
+
+    compsList.fetch()
+
