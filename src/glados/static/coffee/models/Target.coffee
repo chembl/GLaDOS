@@ -116,9 +116,7 @@ Target.COLUMNS = {
   PREF_NAME: {
     'name_to_show': 'Name'
     'comparator': 'pref_name'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
+    'sort_disabled': true
     'custom_field_template': '<i>{{val}}</i>'
   }
   TYPE: {
