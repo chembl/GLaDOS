@@ -123,13 +123,28 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', VISUALISATION_HEIGHT)
 
       thisView = @
-      TITLE_Y = if @config.big_size then 30 else 10
-      TITLE_Y_PADDING = if @config.big_size then 15 else 5
-      BARS_MIN_HEIGHT = 2
-      RIGHT_PADDING = if @config.big_size then 20 else 0
 
-      X_AXIS_HEIGHT = if @config.big_size then 100 else 0
-      Y_AXIS_WIDTH = if @config.big_size then 60 else 0
+#      hide_title
+
+      if @config.big_size
+        TITLE_Y = 30
+        TITLE_Y_PADDING = 15
+        RIGHT_PADDING = 20
+        X_AXIS_HEIGHT = 100
+        Y_AXIS_WIDTH = 60
+      else
+        TITLE_Y = 10
+        TITLE_Y_PADDING = 5
+        RIGHT_PADDING = 0
+        X_AXIS_HEIGHT = 0
+        Y_AXIS_WIDTH = 0
+
+      if @config.hide_title
+        TITLE_Y = 0
+        TITLE_Y_PADDING = 0
+
+      BARS_MIN_HEIGHT = 2
+
 
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
@@ -218,18 +233,19 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-----------------------------------------------------------------------------------------------------------------
       # add title
       #-----------------------------------------------------------------------------------------------------------------
-      totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
-      totalItemsTxt = '(' + totalItems + ')'
-      titleBase = if @config.title? then @config.title else 'Browse All'
-      mainSVGContainer.append('text')
-        .text(titleBase + ' ' + totalItemsTxt)
-        .attr('x', VISUALISATION_WIDTH/2)
-        .attr('y', TITLE_Y)
-        .attr('text-anchor', 'middle')
-        .classed('title', true)
-        .on('click', ->
-          window.open(thisView.model.get('link_to_all'))
-      )
+      unless @config.hide_title
+        totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
+        totalItemsTxt = '(' + totalItems + ')'
+        titleBase = if @config.title? then @config.title else 'Browse All'
+        mainSVGContainer.append('text')
+          .text(titleBase + ' ' + totalItemsTxt)
+          .attr('x', VISUALISATION_WIDTH/2)
+          .attr('y', TITLE_Y)
+          .attr('text-anchor', 'middle')
+          .classed('title', true)
+          .on('click', ->
+            window.open(thisView.model.get('link_to_all'))
+        )
 
       if not @config.big_size
         return

@@ -203,6 +203,7 @@ class TargetReportCardApp
       max_categories: 8
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
+      hide_title: true
 
     new glados.views.Visualisation.HistogramView
       model: bioactivities
