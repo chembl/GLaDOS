@@ -69,6 +69,8 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   parse: (data) ->
     parsed = data
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
+    filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
+    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
     return parsed;
 
   fetchFromAssayChemblID: ->
@@ -83,9 +85,6 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     ).fail(
       () -> console.log('failed!')
     )
-
-
-
 
 Target.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
@@ -105,6 +104,7 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'link_base': 'activities_url'
     'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
     'function_parameters': ['target_chembl_id', 'pref_name']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
