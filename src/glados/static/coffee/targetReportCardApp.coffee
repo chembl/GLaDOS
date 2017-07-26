@@ -218,7 +218,6 @@ class TargetReportCardApp
     $containerElem = $clickedLink.parent()
     $containerElem.removeClass('number-cell')
     $containerElem.addClass('vis-cell')
-#    $containerElem.attr('width', '150px')
 
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
