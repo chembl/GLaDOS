@@ -66,8 +66,8 @@ DownloadModelOrCollectionExt =
 
   getFullCSVString: (downloadObject, isTabSeparated) ->
 
-    header = @getCSVHeaderString(downloadObject)
-    content = @getCSVContentString(downloadObject)
+    header = @getCSVHeaderString(downloadObject, isTabSeparated)
+    content = @getCSVContentString(downloadObject, isTabSeparated)
     return header + '\n' + content
 
   # the downloadParserFunction is a function that knows what modifications to do for the raw json data

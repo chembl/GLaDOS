@@ -689,7 +689,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           # erase progress element contents after some milliseconds
           setTimeout((()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']
-          DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, true)
+          DownloadModelOrCollectionExt.downloadCSV('results.tsv', null, downloadObject, isTabSeparated=true)
           # erase progress element contents after some milliseconds
           setTimeout((()-> $progressElement.html ''), 1000)
         else if format == glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']
