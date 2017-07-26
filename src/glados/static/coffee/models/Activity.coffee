@@ -228,6 +228,7 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'sort_disabled': true
     'use_in_summary': true
   }
   TARGET_PREF_NAME: {
