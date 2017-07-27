@@ -150,7 +150,7 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
-    'format_as_number': true
+    'format_class': 'number-cell-center'
     'link_base': 'targets_url'
   }
 }
