@@ -69,6 +69,10 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   parse: (data) ->
     parsed = data
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
+    filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
+    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    filterForCompounds = '_metadata.related_targets.chembl_ids.%5C*:' + parsed.target_chembl_id
+    parsed.targets_url = Compound.getCompoundsListURL(filterForCompounds)
     return parsed;
 
   fetchFromAssayChemblID: ->
@@ -83,9 +87,6 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     ).fail(
       () -> console.log('failed!')
     )
-
-
-
 
 Target.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
@@ -105,20 +106,21 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'link_base': 'activities_url'
     'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
     'function_parameters': ['target_chembl_id', 'pref_name']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
     # or probably not, depending on how this evolves
     'function_key': 'bioactivities'
     'function_link': true
-    'format_as_number': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
+    'secondary_link': true
   }
   PREF_NAME: {
     'name_to_show': 'Name'
     'comparator': 'pref_name'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
+    'sort_disabled': true
     'custom_field_template': '<i>{{val}}</i>'
   }
   TYPE: {
@@ -136,7 +138,7 @@ Target.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   ACCESSION:{
-    'name_to_show': 'UniProt Acession'
+    'name_to_show': 'UniProt Accession'
     'comparator': 'target_components.accession'
     'sort_disabled': false
     'is_sorting': 0
@@ -148,7 +150,8 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
-    'format_as_number': true
+    'format_class': 'number-cell-center'
+    'link_base': 'targets_url'
   }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID

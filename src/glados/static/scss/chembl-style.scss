@@ -1230,6 +1230,22 @@ div#CNC-zoom-modal {
   }
   .headers-table {
     border-collapse: separate;
+
+    &.sort{
+      .name-to-show{
+        cursor: pointer;
+      }
+
+      &:hover{
+        .sort-icon {
+          color: color($primary-color-name, "accent-4") !important;
+        }
+      }
+    }
+    .sort-icon{
+      font-size: 1.3em;
+      cursor: pointer;
+    }
   }
   td {
 
@@ -1239,14 +1255,20 @@ div#CNC-zoom-modal {
     &.number-cell{
       text-align: right;
     }
-    &.vis-cell{
+    &.number-cell-center{
+      text-align: center;
+    }
+    .vis-container {
       width: 150px;
+      padding: 5px;
+      margin-left: auto;
+      margin-right: 0;
     }
 
   }
 
   th {
-    font-size: 85%;
+    font-size: 0.9em;
   }
 
 }
@@ -2278,7 +2300,7 @@ span.badge-primary-color-no-float {
 .es-results-matrix {
   position: relative;
 
-  .vis-cell {
+  .vis-container {
     cursor: context-menu;
     &:hover {
       stroke-width: 2;

@@ -40,7 +40,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       columns = @getMeta('columns')
 
-      sorting = _.filter(columns, (col) -> col.is_sorting != 0)
+      sorting = _.filter(columns, (col) -> (col.is_sorting == 1 or col.is_sorting == -1))
       for field in sorting
         comparator = field.comparator
         comparator = '-' + comparator unless field.is_sorting == 1

@@ -97,9 +97,7 @@ Compound.COLUMNS = {
   SYNONYMS: {
       'name_to_show': 'Synonyms'
       'comparator': 'molecule_synonyms'
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'sort_disabled': false
+      'sort_disabled': true
       'parse_function': (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
     }
   PREF_NAME: {
@@ -404,3 +402,10 @@ Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+
+Compound.getCompoundsListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds/filter/' + filter
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds'

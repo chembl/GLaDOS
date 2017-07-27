@@ -176,13 +176,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     bindFunctionLinks: ->
       $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
       visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
+      console.log 'visibleColumnsIndex: ', visibleColumnsIndex
       $linksToBind.each (i, link) ->
         $currentLink = $(@)
         alreadyBound = $currentLink.attr('data-already-function-bound')?
         if not alreadyBound
           functionKey = $currentLink.attr('data-function-key')
+          console.log 'visibleColumnsIndex: ', visibleColumnsIndex
           functionToBind = visibleColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
+          executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
+          if executeOnRender
+            $currentLink.click()
           $currentLink.attr('data-already-function-bound', 'yes')
 
     getVisibleColumns: ->
@@ -537,8 +542,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     sortCollection: (event) ->
   
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
-      order_icon = $(event.currentTarget)
-      comparator = order_icon.attr('data-comparator')
+      sortIcon = $(event.currentTarget).find('.sort-icon')
+      comparator = sortIcon.attr('data-comparator')
   
       @triggerCollectionSort(comparator)
   

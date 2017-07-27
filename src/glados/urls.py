@@ -53,6 +53,8 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/MoleculeMetabolismGraphFS.html")), ),
 
+  url(r'^compounds/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseCompounds.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Targets

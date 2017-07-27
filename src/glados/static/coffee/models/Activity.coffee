@@ -39,9 +39,7 @@ Activity.COLUMNS = {
   ASSAY_DESCRIPTION: {
     'name_to_show': 'Assay Description'
     'comparator': 'assay_description'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
+    'sort_disabled': true
   }
   ASSAY_TYPE: {
     'name_to_show': 'Assay Type'
@@ -230,14 +228,12 @@ Activity.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'sort_disabled': true
     'use_in_summary': true
   }
   TARGET_PREF_NAME: {
     'name_to_show': 'Target Pref. Name'
     'comparator': 'target_pref_name'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
     'use_in_summary': true
   }
   UO_UNITS: {
@@ -298,7 +294,6 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.SRC_ID
     Activity.COLUMNS.STANDARD_FLAG
     Activity.COLUMNS.UO_UNITS
-    Activity.COLUMNS.DOC_COUNT
   ]
 }
 

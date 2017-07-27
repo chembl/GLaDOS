@@ -6,7 +6,7 @@ install:
   - python setup.py install
 before_script:
   - python -m glados.manage migrate
-  - python -m glados.manage runserver 8000 2>&1 | grep -v 200 | grep -v 304 &
+  - python -m glados.manage runserver 8000 &
   - sleep 10 # give Web server some time to bind to sockets, etc
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
@@ -16,3 +16,4 @@ script:
 addons:
   apt:
     packages: memcached
+dist: precise
