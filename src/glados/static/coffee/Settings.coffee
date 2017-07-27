@@ -132,7 +132,7 @@ glados.useNameSpace 'glados',
      # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
     # ranges include both numbers
     VIEW_SELECTION_THRESHOLDS:
-      'Bioactivity': [0,10000, 1000]
+      'Bioactivity': [0,1024, 300]
   Events:
     Collections:
       ALL_ITEMS_DOWNLOADED: 'ALL_ITEMS_DOWNLOADED'
