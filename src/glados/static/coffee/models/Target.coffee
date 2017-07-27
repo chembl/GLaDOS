@@ -138,7 +138,7 @@ Target.COLUMNS = {
     'sort_class': 'fa-sort'
   }
   ACCESSION:{
-    'name_to_show': 'UniProt Acession'
+    'name_to_show': 'UniProt Accession'
     'comparator': 'target_components.accession'
     'sort_disabled': false
     'is_sorting': 0
