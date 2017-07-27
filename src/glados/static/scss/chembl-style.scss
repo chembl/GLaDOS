@@ -1255,6 +1255,9 @@ div#CNC-zoom-modal {
     &.number-cell{
       text-align: right;
     }
+    &.number-cell-center{
+      text-align: center;
+    }
     .vis-container {
       width: 150px;
       padding: 5px;

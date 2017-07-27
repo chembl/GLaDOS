@@ -43,7 +43,7 @@ glados.useNameSpace 'glados',
 
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
 
-        returnCol['format_as_number'] = colDescription.format_as_number
+        returnCol['format_class'] = colDescription.format_class
 
         if colDescription.num_decimals? and colDescription.format_as_number\
         and col_value != glados.Settings.DEFAULT_NULL_VALUE_LABEL

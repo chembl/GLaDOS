@@ -112,7 +112,8 @@ Target.COLUMNS = {
     'function_key': 'bioactivities'
     'function_link': true
     'execute_on_render': true
-    'format_as_number': true
+    'format_class': 'number-cell-center'
+    'secondary_link': true
   }
   PREF_NAME: {
     'name_to_show': 'Name'
