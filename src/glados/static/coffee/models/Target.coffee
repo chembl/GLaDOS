@@ -151,6 +151,7 @@ Target.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'format_class': 'number-cell-center'
+    'secondary_link': true
     'link_base': 'targets_url'
   }
 }
@@ -172,6 +173,7 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
+    Target.COLUMNS.NUM_COMPOUNDS
     Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
 }
