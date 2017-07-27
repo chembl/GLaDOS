@@ -78,6 +78,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
+    filterForTargets = '_metadata.related_compounds.chembl_ids.%5C*:' + response.molecule_chembl_id
+    response.targets_url = Compound.getCompoundsListURL(filterForTargets)
+
     return response;
 
 
@@ -339,6 +342,8 @@ Compound.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'format_as_number': true
+    'link_base': 'targets_url'
+    'secondary_link': true
   }
 
 }
