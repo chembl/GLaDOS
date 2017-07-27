@@ -1,0 +1,3 @@
+class CompoundsBrowserApp
+
+  @init = ->
