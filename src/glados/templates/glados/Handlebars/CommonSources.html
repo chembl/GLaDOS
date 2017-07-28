@@ -749,4 +749,18 @@
  <a target="_blank" href="{{url}}">Browse all activities used in this visualisation</a>
 </script>
 
+<script id="Handlebars-Common-FacetsList" type="text/x-handlebars-template">
+  Filters
+  <ul>
+    {{#each facets}}
+      <li>{{this.label}}</li>
+      <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}">
+        holaa
+      </div>
+    {{/each}}
+
+  </ul>
+</script>
+
+
 {% endverbatim %}

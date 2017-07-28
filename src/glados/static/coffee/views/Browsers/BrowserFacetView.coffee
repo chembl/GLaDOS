@@ -9,15 +9,30 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.on 'facets-changed', @render, @
 
     render: ->
-      console.log 'RENDER BROWSER FACET VIEW!'
       facetsGroups = @collection.getFacetsGroups()
-      console.log 'facetsGroups: ', facetsGroups
 
-#      # @collection - must be provided in the constructor call
-#      @search_bar_view = arguments[0].search_bar_view
-#      @standaloneMode = arguments[0].standalone_mode == true
-#      @collection.on 'facets-changed', @render, @
-#      @render()
+      facetListForRender = []
+      for key, fGroup of facetsGroups
+        facetListForRender.push
+          label: fGroup.label
+          key: key
+
+      glados.Utils.fillContentForElement $(@el),
+        facets: facetListForRender
+
+      @paintAllHistograms()
+
+    paintAllHistograms: ->
+      $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
+      thisView = @
+      $histogramsContainers.each((i) -> thisView.paintHistogram($(@)))
+
+    paintHistogram: ($containerElem) ->
+
+      console.log 'painting histogram in: ', $containerElem
+
+
+
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
       facets_groups = @collection.getFacetsGroups()
