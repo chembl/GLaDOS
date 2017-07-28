@@ -10,9 +10,9 @@ class CompoundsBrowserApp
       el: $('.BCK-BrowserContainer')
       standalone_mode: true
 
-    new glados.views.Browsers.BrowserFacetView
-      collection: compsList
-      standalone_mode: true
+#    new glados.views.Browsers.BrowserFacetView
+#      collection: compsList
+#      standalone_mode: true
 
     compsList.fetch()
 

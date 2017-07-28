@@ -28,7 +28,8 @@ glados.useNameSpace 'glados.views.Browsers',
       @allViewsPerType = {}
       if @standaloneMode
         @viewContainerID = @collection.getMeta('id_name')
-        @$viewContainer = $(@el).find('.BCK-BrowserCurrentViewContainer').attr('id', @viewContainerID)
+        @$viewContainer = $(@el).find('.BCK-Items-Container').attr('id', @viewContainerID)
+        console.log '@$viewContainer: ', @$viewContainer
       else
         @viewContainerID = $(@el).attr('id').replace('-menu', '')
         console.log 'view id: ', $(@el).attr('id')
