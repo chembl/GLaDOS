@@ -258,11 +258,6 @@ footer {
   }
 }
 
-main, #chembl-header-container {
-  /* to prevent the side bar from overlapping the main contens */
-  padding-left: $side-nav-width;
-}
-
 /**
 * Chembl bar
 * ----------------------------------------------------------------------------------------------------------------------
