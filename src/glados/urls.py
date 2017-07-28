@@ -92,6 +92,9 @@ urlpatterns = [
     DirectTemplateView.as_view(
       template_name="glados/TargetReportCardParts/AssociatedCompoundsToEmbed.html")), ),
 
+  url(r'^targets/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseTargets.html"), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
   # --------------------------------------------------------------------------------------------------------------------
