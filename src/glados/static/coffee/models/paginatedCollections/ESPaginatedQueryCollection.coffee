@@ -348,12 +348,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setMeta: (attr, value) ->
       previousValue = @meta[attr]
-      console.log '---'
-      console.log 'attr: ', attr
-      console.log 'previousValue: ', previousValue
-      console.log 'value: ', value
-      console.log '^^^'
-
       @meta[attr] = value
       @trigger('meta-changed')
 
