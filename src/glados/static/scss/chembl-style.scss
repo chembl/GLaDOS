@@ -1366,7 +1366,7 @@ div#CNC-zoom-modal {
         z-index: 999;
 
         [type="checkbox"].filled-in:not(:checked) + label:after {
-          border-color: color('grey', 'lighten-3')
+          border-color: color('grey', 'lighten-1')
         }
 
       }
