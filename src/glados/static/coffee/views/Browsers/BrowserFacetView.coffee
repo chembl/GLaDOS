@@ -1,13 +1,15 @@
 glados.useNameSpace 'glados.views.Browsers',
   # View that renders the search facet to filter results
-  BrowserFacetView: Backbone.View.extend
+  BrowserFacetView: Backbone.View.extend(ResponsiviseViewExt).extend
 
-    initialize: () ->
-      # @collection - must be provided in the constructor call
-      @search_bar_view = arguments[0].search_bar_view
-      @standaloneMode = arguments[0].standalone_mode == true
-      @collection.on 'facets-changed', @render, @
-      @render()
+    initialize: ->
+      console.log 'init BrowserFacetView'
+
+#      # @collection - must be provided in the constructor call
+#      @search_bar_view = arguments[0].search_bar_view
+#      @standaloneMode = arguments[0].standalone_mode == true
+#      @collection.on 'facets-changed', @render, @
+#      @render()
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
       facets_groups = @collection.getFacetsGroups()
