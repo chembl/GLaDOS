@@ -30,6 +30,53 @@ glados.useNameSpace 'glados.views.Browsers',
     paintHistogram: ($containerElem) ->
 
       console.log 'painting histogram in: ', $containerElem
+      facetGroupKey =  $containerElem.attr('data-facet-group-key')
+      console.log 'key is: ', facetGroupKey
+      currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
+      buckets = []
+      for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
+        datum.key = datumKey
+        buckets.push datum
+
+      console.log 'buckets: ', buckets
+      console.log 'num bins', buckets.length
+      console.log 'currentFacetGroup: ', currentFacetGroup
+      HISTOGRAM_WIDTH = $(@el).width()
+      BIN_HEIGHT = 25
+      HISTOGRAM_HEIGHT = buckets.length * BIN_HEIGHT
+      console.log 'HISTOGRAM_WIDTH: ', HISTOGRAM_WIDTH
+      console.log 'HISTOGRAM_HEIGHT: ', HISTOGRAM_HEIGHT
+
+      mainContainer = d3.select($containerElem.get(0))
+
+      mainSVGContainer = mainContainer
+        .append('svg')
+        .attr('class', 'mainSVGContainer')
+        .attr('width', HISTOGRAM_WIDTH)
+        .attr('height', HISTOGRAM_HEIGHT)
+
+      thisView = @
+
+      BARS_MIN_WIDTH = 2
+
+      bucketNames = _.pluck(buckets, 'key')
+      console.log 'bucketNames: ', bucketNames
+      getYForBucket = d3.scale.ordinal()
+        .domain(bucketNames)
+        .rangeBands([0,HISTOGRAM_HEIGHT], 0.1)
+
+      bucketGroups = mainSVGContainer.selectAll('.bucket')
+        .data(buckets)
+        .enter()
+        .append('g')
+        .classed('bucket', true)
+        .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
+
+      bucketGroups.append('rect')
+        .attr('height', getYForBucket.rangeBand())
+        .attr('width', HISTOGRAM_WIDTH)
+        .classed('background-bar', true)
+
 
 
 
