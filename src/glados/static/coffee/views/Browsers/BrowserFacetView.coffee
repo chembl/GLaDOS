@@ -84,7 +84,16 @@ glados.useNameSpace 'glados.views.Browsers',
         .classed('value-bar', true)
 
       bucketGroups.append('text')
-        .text('hola')
+        .text((d) -> d.key)
+        .attr('y', BIN_HEIGHT * (2/3))
+        .classed('key-text', true)
+
+      bucketGroups.append('text')
+        .text((d) -> d.count)
+        .attr('x', HISTOGRAM_WIDTH)
+        .attr('y', BIN_HEIGHT* (2/3))
+        .attr('text-anchor', 'end')
+        .classed('coutn-text', true)
 
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
