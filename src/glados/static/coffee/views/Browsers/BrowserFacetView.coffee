@@ -61,9 +61,14 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketNames = _.pluck(buckets, 'key')
       console.log 'bucketNames: ', bucketNames
+      bucketSizes = _.pluck(buckets, 'count')
+      console.log 'bucketSizes: ', bucketSizes
       getYForBucket = d3.scale.ordinal()
         .domain(bucketNames)
         .rangeBands([0,HISTOGRAM_HEIGHT], 0.1)
+      getWidthForBucket = d3.scale.linear()
+        .domain([0, _.max(bucketSizes)])
+        .range([BARS_MIN_WIDTH, HISTOGRAM_WIDTH])
 
       bucketGroups = mainSVGContainer.selectAll('.bucket')
         .data(buckets)
@@ -74,11 +79,12 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketGroups.append('rect')
         .attr('height', getYForBucket.rangeBand())
-        .attr('width', HISTOGRAM_WIDTH)
-        .classed('background-bar', true)
+        .attr('width', (d) -> getWidthForBucket(d.count))
+        .attr('x', (d) -> HISTOGRAM_WIDTH - getWidthForBucket(d.count))
+        .classed('value-bar', true)
 
-
-
+      bucketGroups.append('text')
+        .text('hola')
 
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
