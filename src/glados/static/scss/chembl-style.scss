@@ -2512,10 +2512,28 @@ span.badge-primary-color-no-float {
 
 .facets{
   .histogram-container{
-    border: 1px solid black;
     .bucket{
+      cursor: pointer;
       .value-bar{
-        fill: blue;
+        fill: color('grey', 'lighten-3');
+      }
+      .key-text{
+        font-size: 80%;
+        fill: color($primary-color-name, 'darken-3');
+      }
+      .count-text{
+        font-size: 80%;
+        fill: color('grey', 'darken-3');
+      }
+      .front-bar{
+        fill: white;
+        opacity: 0;
+      }
+      &:hover{
+        .front-bar{
+          stroke-width: 1;
+          stroke: color($primary-color-name, 'accent-4');
+        }
       }
     }
   }
