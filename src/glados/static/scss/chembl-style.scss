@@ -2514,6 +2514,7 @@ span.badge-primary-color-no-float {
   background-color: color('grey', 'lighten-5');
   .histogram-container{
     .bucket{
+
       cursor: pointer;
       .value-bar{
         fill: color($primary-color-name, 'lighten-5');
@@ -2533,10 +2534,17 @@ span.badge-primary-color-no-float {
       .hover-bar{
         fill: none;
       }
-      &:hover{
+      &:not(.selected):hover{
         .hover-bar{
           stroke-width: 1;
           stroke: color($primary-color-name, 'accent-4');
+        }
+      }
+
+      &.selected{
+        .hover-bar{
+          stroke-width: 1;
+          stroke: $primary-color;
         }
       }
     }

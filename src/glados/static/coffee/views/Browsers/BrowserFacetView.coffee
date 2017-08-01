@@ -77,6 +77,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .enter()
         .append('g')
         .classed('bucket', true)
+        .classed('selected', (d) -> d.selected)
         .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
       bucketGroups.append('rect')
@@ -102,6 +103,14 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('height', getYForBucket.rangeBand())
         .attr('width', HISTOGRAM_WIDTH)
         .classed('front-bar', true)
+        .attr('data-facet-group-key', facetGroupKey)
+        .attr('data-facet-key', (d) -> d.key)
+        .on('click', ->
+          $clickedElem = $(@)
+          facetGroupKey = $clickedElem.attr('data-facet-group-key')
+          facetKey = $clickedElem.attr('data-facet-key')
+          thisView.toggleSelectFacet(facetGroupKey, facetKey)
+        )
 
       bucketGroups.append('rect')
         .attr('height', getYForBucket.rangeBand())
@@ -113,12 +122,6 @@ glados.useNameSpace 'glados.views.Browsers',
       faceting_handler = facets_groups[facet_group_key].faceting_handler
       faceting_handler.toggleKeySelection(facet_key)
 
-      menu_key = @getMenuKey(facet_group_key)
-      SideMenuHelper.updateSelectedLink(
-        menu_key,
-        faceting_handler.getFacetId(facet_key),
-        faceting_handler.faceting_data[facet_key].selected
-      )
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
 
