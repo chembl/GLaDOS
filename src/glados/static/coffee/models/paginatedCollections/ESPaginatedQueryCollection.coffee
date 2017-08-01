@@ -329,7 +329,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     clearAllFacetsGroups: ()->
       for facet_group_key, facet_group of @meta.facets_groups
-        facet_group.faceting_handler.clearFacets()
+        facet_group.faceting_handler.clearFacetsSelection()
+
+    clearAllFacetsSelections: ->
+
+      for fGroupKey, fGroup of @meta.facets_groups
+        fGroup.faceting_handler.clearSelections()
+
+      @setMeta('facets_changed', true)
+      @fetch()
 
 # builds the url to do the request
     getURL: ->

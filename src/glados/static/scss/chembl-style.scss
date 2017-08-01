@@ -1930,6 +1930,10 @@ span.badge-primary-color-no-float {
     padding: 4px 8px;
     font-size: 0.65em;
   }
+  &.disabled{
+    background-color: color('grey', 'lighten-3');
+    color: color('grey', 'lighten-1');
+  }
 }
 
 /**
@@ -2512,6 +2516,11 @@ span.badge-primary-color-no-float {
 
 .facets{
   background-color: color('grey', 'lighten-5');
+
+  .clear-filters-button{
+    margin-top: 10px;
+  }
+
   .histogram-container{
     .bucket{
 

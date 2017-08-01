@@ -178,6 +178,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       @faceting_data[facet_key].selected = not @faceting_data[facet_key].selected
       return @faceting_data[facet_key].selected
 
+    clearSelections: ->
+      for fKey, fData of @faceting_data
+        fData.selected = false
+
     getFacetingHandlerId:()->
       return (@es_index+"_"+@es_property_name).replace(FacetingHandler.KEY_REGEX_REPLACE,"__")
 

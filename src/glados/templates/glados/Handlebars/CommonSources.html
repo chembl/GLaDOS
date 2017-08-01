@@ -750,7 +750,12 @@
 </script>
 
 <script id="Handlebars-Common-FacetsList" type="text/x-handlebars-template">
-  Filters
+
+  {{#if filters_selected}}
+    <div class="clear-filters-button center-align">
+      <a class="menu-button BCK-clear-facets">Clear Filters</a>
+    </div>
+  {{/if}}
   <ul>
     {{#each facets}}
       <li><b>{{this.label}}</b><br>
