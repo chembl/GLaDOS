@@ -2511,11 +2511,12 @@ span.badge-primary-color-no-float {
 }
 
 .facets{
+  background-color: color('grey', 'lighten-5');
   .histogram-container{
     .bucket{
       cursor: pointer;
       .value-bar{
-        fill: color('grey', 'lighten-3');
+        fill: color($primary-color-name, 'lighten-5');
       }
       .key-text{
         font-size: 80%;
@@ -2526,11 +2527,14 @@ span.badge-primary-color-no-float {
         fill: color('grey', 'darken-3');
       }
       .front-bar{
-        fill: white;
+        fill: black;
         opacity: 0;
       }
+      .hover-bar{
+        fill: none;
+      }
       &:hover{
-        .front-bar{
+        .hover-bar{
           stroke-width: 1;
           stroke: color($primary-color-name, 'accent-4');
         }

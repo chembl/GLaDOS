@@ -58,6 +58,10 @@ glados.useNameSpace 'glados.views.Browsers',
       thisView = @
 
       BARS_MIN_WIDTH = 2
+      BAR_CONTENT_PADDING =
+        left: 2
+        right: 1
+      BARS_MAX_WIDTH = HISTOGRAM_WIDTH
 
       bucketNames = _.pluck(buckets, 'key')
       bucketSizes = _.pluck(buckets, 'count')
@@ -66,7 +70,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .rangeBands([0,HISTOGRAM_HEIGHT], 0.1)
       getWidthForBucket = d3.scale.linear()
         .domain([0, _.reduce(bucketSizes, (nemo, num) -> nemo + num )])
-        .range([BARS_MIN_WIDTH, HISTOGRAM_WIDTH])
+        .range([BARS_MIN_WIDTH, BARS_MAX_WIDTH])
 
       bucketGroups = mainSVGContainer.selectAll('.bucket')
         .data(buckets)
@@ -84,11 +88,12 @@ glados.useNameSpace 'glados.views.Browsers',
       bucketGroups.append('text')
         .text((d) -> d.key)
         .attr('y', BIN_HEIGHT * (2/3))
+        .attr('x', BAR_CONTENT_PADDING.left)
         .classed('key-text', true)
 
       bucketGroups.append('text')
         .text((d) -> d.count)
-        .attr('x', HISTOGRAM_WIDTH)
+        .attr('x', HISTOGRAM_WIDTH - BAR_CONTENT_PADDING.right)
         .attr('y', BIN_HEIGHT* (2/3))
         .attr('text-anchor', 'end')
         .classed('count-text', true)
@@ -97,6 +102,11 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('height', getYForBucket.rangeBand())
         .attr('width', HISTOGRAM_WIDTH)
         .classed('front-bar', true)
+
+      bucketGroups.append('rect')
+        .attr('height', getYForBucket.rangeBand())
+        .attr('width', HISTOGRAM_WIDTH)
+        .classed('hover-bar', true)
 
     toggleSelectFacet: (facet_group_key, facet_key) ->
       facets_groups = @collection.getFacetsGroups()
