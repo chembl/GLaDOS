@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.Browsers',
   # View that renders the search facet to filter results
   BrowserFacetView: Backbone.View.extend(ResponsiviseViewExt).extend
 
+    TRANSITION_DURATION: 1500
     initialize: ->
       console.log 'init BrowserFacetView'
       @$vis_elem = $(@el)
@@ -44,23 +45,16 @@ glados.useNameSpace 'glados.views.Browsers',
 
     paintHistogram: ($containerElem) ->
 
-      console.log 'painting histogram in: ', $containerElem
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
-      console.log 'key is: ', facetGroupKey
       currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
       buckets = []
       for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
         datum.key = datumKey
         buckets.push datum
 
-      console.log 'buckets: ', buckets
-      console.log 'num bins', buckets.length
-      console.log 'currentFacetGroup: ', currentFacetGroup
       HISTOGRAM_WIDTH = $(@el).width()
       BIN_HEIGHT = 25
       HISTOGRAM_HEIGHT = buckets.length * BIN_HEIGHT
-      console.log 'HISTOGRAM_WIDTH: ', HISTOGRAM_WIDTH
-      console.log 'HISTOGRAM_HEIGHT: ', HISTOGRAM_HEIGHT
 
       mainContainer = d3.select($containerElem.get(0))
 
@@ -95,11 +89,19 @@ glados.useNameSpace 'glados.views.Browsers',
         .classed('selected', (d) -> d.selected)
         .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
-      bucketGroups.append('rect')
+      oneBucketSelected = _.any(buckets, (d) -> d.selected)
+
+      valueRectangles = bucketGroups.append('rect')
+        .attr('x', HISTOGRAM_WIDTH)
+        .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
+        .classed('value-bar', true)
+
+      duration = if oneBucketSelected then 0 else @TRANSITION_DURATION
+      valueRectangles.transition()
+        .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
         .attr('x', (d) -> HISTOGRAM_WIDTH - getWidthForBucket(d.count))
-        .classed('value-bar', true)
 
       bucketGroups.append('text')
         .text((d) -> d.key)
@@ -132,6 +134,31 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('width', HISTOGRAM_WIDTH)
         .classed('hover-bar', true)
 
+      bucketGroups.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
+
+
+    addEllipsisIfNecessary: (bucketG) ->
+
+      keyText = bucketG.select('.key-text')
+      countText = bucketG.select('.count-text')
+      frontBar = bucketG.select('.front-bar')
+
+      countTextX = parseFloat(countText.attr('x'))
+      keyTextX = parseFloat(keyText.attr('x'))
+      keyTextWidth = keyText.node().getBBox().width
+      countTextWidth = countText.node().getBBox().width
+      frontBarWidth = parseFloat(frontBar.attr('width'))
+
+      # remember that text anchor is end
+      spaceForText = countTextX - countTextWidth
+      spaceOccupiedByKeyText = keyTextX + keyTextWidth
+
+      if spaceOccupiedByKeyText > spaceForText
+
+        textWidthLimit = countTextX - countTextWidth
+        newText = glados.Utils.Text.getTextForEllipsis(keyText.text(), keyTextWidth, textWidthLimit)
+        keyText.text(newText)
+        
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
