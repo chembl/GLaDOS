@@ -147,7 +147,6 @@ glados.useNameSpace 'glados.views.Browsers',
       keyTextX = parseFloat(keyText.attr('x'))
       keyTextWidth = keyText.node().getBBox().width
       countTextWidth = countText.node().getBBox().width
-      frontBarWidth = parseFloat(frontBar.attr('width'))
 
       # remember that text anchor is end
       spaceForText = countTextX - countTextWidth
@@ -155,10 +154,28 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if spaceOccupiedByKeyText > spaceForText
 
+        originalText = keyText.text()
         textWidthLimit = countTextX - countTextWidth
-        newText = glados.Utils.Text.getTextForEllipsis(keyText.text(), keyTextWidth, textWidthLimit)
+        newText = glados.Utils.Text.getTextForEllipsis(originalText, keyTextWidth, textWidthLimit)
         keyText.text(newText)
-        
+
+        $frontBar = $(frontBar.node())
+
+        qtipConfig =
+          content:
+            text: originalText
+          position:
+            my: 'left center'
+            at: 'right center'
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+
+        $frontBar.qtip qtipConfig
+#        $hoverBar.qtip('api').show()
+        console.log 'qtip configured!'
+
+        frontBar.on('mouseover', -> console.log 'mouseover!!!')
+
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
