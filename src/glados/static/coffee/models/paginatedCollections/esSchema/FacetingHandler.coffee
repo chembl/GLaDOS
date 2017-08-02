@@ -117,6 +117,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 index: @faceting_keys_inorder.length
                 count: aggregated_data.sum_other_doc_count
                 selected: false
+                key_for_humans: FacetingHandler.OTHERS_CATEGORY
               }
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
