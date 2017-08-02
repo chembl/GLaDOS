@@ -154,9 +154,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       esIndex = @es_index
       propName = @es_property_name
 
-#      return glados.models.visualisation.PropertiesFactory.parseValueForEntity(esIndex, propName, key)
-
-      return key + 'P'
+      return glados.models.visualisation.PropertiesFactory.parseValueForEntity(esIndex, propName, key)
 
     parseIntervalKey: (key, intervalsSize) ->
 
