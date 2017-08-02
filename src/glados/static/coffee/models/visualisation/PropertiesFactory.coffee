@@ -155,7 +155,11 @@ glados.useNameSpace 'glados.models.visualisation',
             for propKey, property of properties
               if property.propName == propName
                 parser = property.parser
-                parsersIndex[parserID] = parser
+
+      # if parser doesn't exist, add a placeholder
+      if not parser?
+        parser = {}
+      parsersIndex[parserID] = parser
 
       parsedValue = parser[propValue]
       parsedValue ?= propValue

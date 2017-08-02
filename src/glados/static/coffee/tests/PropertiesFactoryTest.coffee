@@ -24,6 +24,22 @@ describe "Properties Factory for visualisation", ->
       expect(tCase.parsedMustBe).toBe(glados.models.visualisation.PropertiesFactory.parseValueForEntity(indexName, propName,
         tCase.value))
 
+  it 'parses the value for a property for which there is no parser (no property with that name)', ->
+    indexName = 'chembl_molecule'
+    propName = 'noexist'
+    valueMustBe = 'value'
+
+    parsed = glados.models.visualisation.PropertiesFactory.parseValueForEntity(indexName, propName, valueMustBe)
+    expect(parsed).toBe(valueMustBe)
+
+  it 'parses the value for a property for which there is no parser (no entity with that name)', ->
+    indexName = 'noexist'
+    propName = 'noexist'
+    valueMustBe = 'value'
+
+    parsed = glados.models.visualisation.PropertiesFactory.parseValueForEntity(indexName, propName, valueMustBe)
+    expect(parsed).toBe(valueMustBe)
+
   describe 'with a default domain', ->
 
     describe 'categorical', ->
