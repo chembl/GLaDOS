@@ -9,6 +9,21 @@ describe "Properties Factory for visualisation", ->
     expect(prop.propName).toBe("molecule_properties.alogp")
     expect(prop.type).toBe(Number)
 
+  it 'parses the value for a property with a value parser', ->
+
+    indexName = 'chembl_molecule'
+    propName = 'therapeutic_flag'
+    testCases = [
+      {value: 0, parsedMustBe: 'No'}
+      {value: 1, parsedMustBe: 'Yes'}
+      {value: false, parsedMustBe: 'No'}
+      {value: true, parsedMustBe: 'Yes'}
+      {value: 5, parsedMustBe: 5}
+    ]
+    for tCase in testCases
+      expect(tCase.parsedMustBe).toBe(glados.models.visualisation.PropertiesFactory.parseValueForEntity(indexName, propName,
+        tCase.value))
+
   describe 'with a default domain', ->
 
     describe 'categorical', ->

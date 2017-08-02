@@ -151,10 +151,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     parseCategoricalKey: (key) ->
 
-      esIndex = @es_indes
+      esIndex = @es_index
+      propName = @es_property_name
       console.log 'parsing'
       console.log 'key: ', key
       console.log 'esIndex: ', esIndex
+      console.log 'propName: ', propName
 
       return key + 'P'
 

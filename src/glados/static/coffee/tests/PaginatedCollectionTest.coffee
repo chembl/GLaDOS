@@ -338,7 +338,7 @@ describe "Paginated Collection", ->
 
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'full_mwt'
-        testFacetKey = '[0 - 122)'
+        testFacetKey = '[0-122)'
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
 
@@ -352,7 +352,7 @@ describe "Paginated Collection", ->
 
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'full_mwt'
-        testFacetKey = '[0 - 122)'
+        testFacetKey = '[0-122)'
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
 
@@ -372,7 +372,7 @@ describe "Paginated Collection", ->
 
           facetGroups = esList.getFacetsGroups()
           testFacetGroupKey = 'full_mwt'
-          testFacetKey = '[0 - 122)'
+          testFacetKey = '[0-122)'
           facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
           facetingHandler.toggleKeySelection(testFacetKey)
           esList.setMeta('facets_changed', true)
