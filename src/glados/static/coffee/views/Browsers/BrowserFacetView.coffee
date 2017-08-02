@@ -104,7 +104,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('x', (d) -> HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 
       bucketGroups.append('text')
-        .text((d) -> d.key)
+        .text((d) -> d.key_for_humans)
         .attr('y', BIN_HEIGHT * (2/3))
         .attr('x', BAR_CONTENT_PADDING.left)
         .classed('key-text', true)
@@ -171,10 +171,6 @@ glados.useNameSpace 'glados.views.Browsers',
             classes:'matrix-qtip qtip-light qtip-shadow'
 
         $frontBar.qtip qtipConfig
-#        $hoverBar.qtip('api').show()
-        console.log 'qtip configured!'
-
-        frontBar.on('mouseover', -> console.log 'mouseover!!!')
 
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection

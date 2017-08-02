@@ -102,10 +102,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         if aggregated_data
           if not _.isUndefined(aggregated_data.buckets)
             for bucket_i in aggregated_data.buckets
-              @faceting_data[bucket_i.key] = {
+              fKey = bucket_i.key
+              @parseCategoricalKey(fKey)
+              @faceting_data[fKey] = {
                 index: @faceting_keys_inorder.length
                 count: bucket_i.doc_count
                 selected: false
+                key_for_humans: @parseCategoricalKey(fKey)
               }
               @faceting_keys_inorder.push(bucket_i.key)
 
@@ -135,15 +138,31 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if aggregated_data
             if not _.isUndefined(aggregated_data.buckets)
               for bucket_i in aggregated_data.buckets
-                facet_key = "["+bucket_i.key+" - "+(bucket_i.key+@intervals_size)+")"
-                @faceting_data[facet_key] = {
+                fKey = @parseIntervalKey(bucket_i.key, @intervals_size)
+                @faceting_data[fKey] = {
                   min: bucket_i.key
                   max: bucket_i.key + @intervals_size
                   index: @faceting_keys_inorder.length
                   count: bucket_i.doc_count
                   selected: false
+                  key_for_humans: fKey
                 }
-                @faceting_keys_inorder.push(facet_key)
+                @faceting_keys_inorder.push(fKey)
+
+    parseCategoricalKey: (key) ->
+
+      esIndex = @es_indes
+      console.log 'parsing'
+      console.log 'key: ', key
+      console.log 'esIndex: ', esIndex
+
+      return key + 'P'
+
+    parseIntervalKey: (key, intervalsSize) ->
+
+      if intervalsSize == 1
+        return key
+      else return "[" + key + "-" + (key + intervalsSize) + ")"
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING
