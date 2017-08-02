@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     TRANSITION_DURATION: 1500
     initialize: ->
-      console.log 'init BrowserFacetView'
+
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
@@ -21,9 +21,6 @@ glados.useNameSpace 'glados.views.Browsers',
       facetListForRender = []
       filtersSelected = false
       for key, fGroup of facetsGroups
-        console.log 'fGroup: ', fGroup
-
-        console.log fGroup.faceting_handler
         for dataKey, data of fGroup.faceting_handler.faceting_data
           filtersSelected ||= data.selected
 
@@ -31,7 +28,6 @@ glados.useNameSpace 'glados.views.Browsers',
           label: fGroup.label
           key: key
 
-      console.log 'facetListForRender: ', facetListForRender
       glados.Utils.fillContentForElement $(@el),
         facets: facetListForRender
         filters_selected: filtersSelected
