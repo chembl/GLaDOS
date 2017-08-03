@@ -2528,7 +2528,7 @@ span.badge-primary-color-no-float {
 }
 
 .facets{
-  background-color: color('grey', 'lighten-5');
+  background-color: color('grey', 'lighten-4');
 
   .clear-filters-button{
     margin-top: 10px;
@@ -2536,7 +2536,6 @@ span.badge-primary-color-no-float {
 
   .histogram-container{
     .bucket{
-
       cursor: pointer;
       .value-bar{
         fill: color($primary-color-name, 'lighten-4');
