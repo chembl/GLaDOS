@@ -182,8 +182,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @atResultsPage and not @resultsListsViewsRendered
         @container = $('#BCK-ESResults')
         @lists_container = $('#BCK-ESResults-lists')
-        listTitleAndMenuTemplate = Handlebars.compile($("#Handlebars-ESResultsListTitleAndMenu").html())
-        listViewTemplate = Handlebars.compile($("#Handlebars-ESResultsListViewContainer").html())
+        resultsListContainerTemplate = Handlebars.compile($("#Handlebars-ESResultsList").html())
+
 
         @searchResultsMenusViewsDict = {}
         @$searchResultsListsContainersDict = {}
@@ -197,37 +197,15 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           if _.has(resultsListsDict, resourceName)
             resultsListViewID = @getBCKBaseID(resourceName)
-            es_results_list_title = resultsListSettings.LABEL
-            es_results_url_path = @getSearchURLFor(resourceName, @expandable_search_bar.val())
-            es_all_results_url_path = @getSearchURLFor(null, @expandable_search_bar.val())
             $container = $('<div id="' + resultsListViewID + '-container">')
-
-            listTitleContent = listTitleAndMenuTemplate
-              es_results_list_id: resultsListViewID
-              es_results_list_title: es_results_list_title
-              es_results_url_path: es_results_url_path
-              es_all_results_url_path: es_all_results_url_path
-
-            listViewContent = listViewTemplate
-              es_results_list_id: resultsListViewID
-              es_results_url_path: es_results_url_path
-
-            $container.append(listTitleContent)
-            $container.append(listViewContent)
+            $container.append resultsListContainerTemplate()
             @lists_container.append($container)
-            # Link events for links
-            glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-              $('#'+resultsListViewID+'-filter-link'), @navigateTo.bind(@)
-            )
-            glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-              $('#'+resultsListViewID+'-all-link'), @navigateTo.bind(@)
-            )
 
             # Initialises a Menu view which will be in charge of handling the menu bar,
             # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
             resultsMenuViewI = new glados.views.Browsers.BrowserMenuView
               collection: resultsListsDict[resourceName]
-              el: '#' + resultsListViewID + '-menu'
+              el: $container.find('.BCK-BrowserContainer')
 
             resultsMenuViewI.render()
 

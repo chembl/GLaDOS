@@ -9,11 +9,9 @@ class ActivitiesBrowserApp
     new glados.views.Browsers.BrowserMenuView
       collection: actsList
       el: $browserContainer
-      standalone_mode: true
 
     new glados.views.Browsers.BrowserFacetView
       collection: actsList
-      standalone_mode: true
       el: $browserContainer.find('.BCK-Facets-Container')
 
     actsList.fetch()
