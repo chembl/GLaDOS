@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
       facetsGroups = @collection.getFacetsGroups()
+      console.log 'facetsGroups: ', facetsGroups
 
       facetListForRender = []
       filtersSelected = false
@@ -88,6 +89,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .enter()
         .append('g')
         .classed('bucket', true)
+        .attr('data-bucket-key', (d) -> d.key)
         .classed('selected', (d) -> d.selected)
         .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
@@ -180,7 +182,10 @@ glados.useNameSpace 'glados.views.Browsers',
     toggleSelectFacet: (facet_group_key, facet_key) ->
       facets_groups = @collection.getFacetsGroups()
       faceting_handler = facets_groups[facet_group_key].faceting_handler
-      faceting_handler.toggleKeySelection(facet_key)
+      isSelected = faceting_handler.toggleKeySelection(facet_key)
+      $selectedSVGGroup = $(@el).find("[data-facet-group-key='" + facet_group_key + "']")\
+        .find("[data-bucket-key='" + facet_key + "']")
+      $selectedSVGGroup.toggleClass('selected', isSelected)
 
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
