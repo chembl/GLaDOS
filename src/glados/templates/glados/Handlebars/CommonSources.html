@@ -20,13 +20,20 @@
 
 <script id="Handlebars-Common-Preloader" type="text/x-handlebars-template">
 
+
+  {{#if msg}}
+    {{msg}}
+  {{/if}}
+
   <div class="card-preolader-to-hide">
 
-  <div class="progress">
-    <div class="indeterminate"></div>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
   </div>
 
-</div>
+
 </script>
 
 <script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">

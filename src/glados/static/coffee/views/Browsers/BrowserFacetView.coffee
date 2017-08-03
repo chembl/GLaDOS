@@ -9,12 +9,18 @@ glados.useNameSpace 'glados.views.Browsers',
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
 
+      @showPreloader()
+
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: ->
+
+      glados.Utils.fillContentForElement $(@el), {msg: 'Loading Filters...'}, 'Handlebars-Common-Preloader'
+
     render: ->
       facetsGroups = @collection.getFacetsGroups()
 
