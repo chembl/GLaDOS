@@ -266,6 +266,15 @@ footer {
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
 
+main{
+  &.with-sidenav{
+    /* to prevent the side bar from overlapping the main contens */
+    @media #{$large-and-up} {
+      padding-left: $side-nav-width;
+    }
+  }
+ }
+
 header .row {
   margin-bottom: 0;
 }
