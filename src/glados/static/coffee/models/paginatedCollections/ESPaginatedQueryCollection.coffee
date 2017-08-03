@@ -33,6 +33,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
+
+      if not @getMeta('ignore_score')
+        #Triggers the event after the values have been updated
+        @trigger('score_and_records_update')
+      else
+        @setMeta('ignore_score', false)
+
       return jsonResultsList
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -48,6 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @unSelectAll()
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
+        @setMeta('ignore_score', true)
 
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
@@ -409,9 +417,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('total_pages', Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size'))))
       @calculateHowManyInCurrentPage()
 
-      #Triggers the event after the values have been updated
-      @trigger('score_and_records_update')
-
     calculateHowManyInCurrentPage: ->
       current_page = @getMeta('current_page')
       total_pages = @getMeta('total_pages')
@@ -445,6 +450,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
+      @setMeta('ignore_score', true)
       @fetch()
 
 #TODO implement sorting
