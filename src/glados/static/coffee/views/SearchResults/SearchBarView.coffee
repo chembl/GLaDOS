@@ -23,7 +23,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
       @searchResultsMenusViewsDict = null
-      @searchFacetsViews = null
       @container = null
       @lists_container = null
 
@@ -180,7 +179,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         @searchResultsMenusViewsDict = {}
         @$searchResultsListsContainersDict = {}
-        @searchFacetsViews = {}
         # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
         # Share the same keys to access different objects
         resultsListsDict = @searchModel.getResultsListsDict()
@@ -208,12 +206,6 @@ glados.useNameSpace 'glados.views.SearchResults',
             # event register for score update and update chips
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
             resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
-
-            res_facet_view = new glados.views.Browsers.BrowserFacetView
-              collection: resultsListsDict[resourceName]
-              search_bar_view: @
-
-            @searchFacetsViews[resourceName] = res_facet_view
 
         @container.show()
         @updateChips()
