@@ -852,6 +852,7 @@ div#global-footer img {
 @media only screen and (min-width: 601px) {
   .main-container {
     width: 95%;
+    max-width: none;
   }
 }
 
