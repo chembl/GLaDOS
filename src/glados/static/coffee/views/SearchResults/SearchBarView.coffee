@@ -63,7 +63,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
       @updateChips()
-      @updateFacets()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)
@@ -76,12 +75,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Views
     # ------------------------------------------------------------------------------------------------------------------
-
-    updateFacets:()->
-      if @searchFacetsViews
-        for res_name, facets_wiew of @searchFacetsViews
-          facets_wiew.render()
-
     sortResultsListsViews: ()->
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity

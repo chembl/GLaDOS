@@ -327,10 +327,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sub_facet_groups[facet_group_key] = facet_group
         return sub_facet_groups
 
-    clearAllFacetsGroups: ()->
-      for facet_group_key, facet_group of @meta.facets_groups
-        facet_group.faceting_handler.clearFacetsSelection()
-
     clearAllFacetsSelections: ->
 
       for fGroupKey, fGroup of @meta.facets_groups
@@ -379,7 +375,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @invalidateAllDownloadedResults()
       @unSelectAll()
       @clearAllResults()
-      @clearAllFacetsGroups()
+      @clearAllFacetsSelections()
       @setPage(1, false)
       @fetch()
 

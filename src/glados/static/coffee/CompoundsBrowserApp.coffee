@@ -10,9 +10,5 @@ class CompoundsBrowserApp
       collection: compsList
       el: $browserContainer
 
-    new glados.views.Browsers.BrowserFacetView
-      collection: compsList
-      el: $browserContainer.find('.BCK-Facets-Container')
-
     compsList.fetch()
 

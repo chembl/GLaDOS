@@ -31,6 +31,10 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
+      new glados.views.Browsers.BrowserFacetView
+        collection: @collection
+        el: $(@el).find('.BCK-Facets-Container')
+
     render: ->
       if @collection.getMeta('total_records') != 0
 

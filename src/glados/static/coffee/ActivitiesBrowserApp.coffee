@@ -10,10 +10,6 @@ class ActivitiesBrowserApp
       collection: actsList
       el: $browserContainer
 
-    new glados.views.Browsers.BrowserFacetView
-      collection: actsList
-      el: $browserContainer.find('.BCK-Facets-Container')
-
     actsList.fetch()
 
   @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
