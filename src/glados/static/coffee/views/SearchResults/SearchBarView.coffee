@@ -188,8 +188,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           if _.has(resultsListsDict, resourceName)
             resultsListViewID = @getBCKBaseID(resourceName)
+            @getEntityName(resourceName)
             $container = $('<div id="' + resultsListViewID + '-container">')
-            $container.append resultsListContainerTemplate()
+            $container.append resultsListContainerTemplate
+              entity_name: @getEntityName(resourceName)
+            console.log 'resourceName: ', resourceName
             @lists_container.append($container)
 
             # Initialises a Menu view which will be in charge of handling the menu bar,
@@ -234,8 +237,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Additional Functionalities
     # ------------------------------------------------------------------------------------------------------------------
 
-    getBCKBaseID: (resourceName)->
+    getBCKBaseID: (resourceName) ->
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
+
+    getEntityName: (resourceName) -> resourceName.replace(/_/g, ' ').toLowerCase() + 's'
 
     getSearchURLFor: (es_settings_key, search_str)->
       selected_es_entity_path = if es_settings_key then \

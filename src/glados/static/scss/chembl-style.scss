@@ -1857,8 +1857,11 @@ span.badge-primary-color-no-float {
 * Browser Menus
 * ----------------------------------------------------------------------------------------------------------------------
 */
-
+.browser-header{
+    text-transform: capitalize
+  }
 .browser-menu{
+
   border-bottom: 1px solid color('grey', 'lighten-1');
   &.row{
     margin-bottom: 2px;
