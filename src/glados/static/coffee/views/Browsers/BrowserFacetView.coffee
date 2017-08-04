@@ -20,10 +20,7 @@ glados.useNameSpace 'glados.views.Browsers',
       facetsGroups = @collection.getFacetsGroups()
 
       facetListForRender = []
-      filtersSelected = false
       for key, fGroup of facetsGroups
-        for dataKey, data of fGroup.faceting_handler.faceting_data
-          filtersSelected ||= data.selected
 
         facetListForRender.push
           label: fGroup.label
@@ -31,7 +28,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       glados.Utils.fillContentForElement $(@el),
         facets: facetListForRender
-        filters_selected: filtersSelected
 
       $preloaderContainer = $(@el).find('.BCK-Preloader-Container')
       glados.Utils.fillContentForElement $preloaderContainer,
@@ -73,12 +69,26 @@ glados.useNameSpace 'glados.views.Browsers',
     render: ->
       @hidePreloader()
 
+      facetsGroups = @collection.getFacetsGroups()
+
+      filtersSelected = false
+      for key, fGroup of facetsGroups
+        for dataKey, data of fGroup.faceting_handler.faceting_data
+          filtersSelected ||= data.selected
+
+      console.log 'FILTERS SELECTED? ', filtersSelected
+      console.log '^^^ '
+
+      $clearFiltersContainer = $(@el).find('.BCK-clearFiltersButtonContainer')
+      if filtersSelected
+        $clearFiltersContainer.show()
+      else
+        $clearFiltersContainer.hide()
+
+
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
-
-#      @paintAllHistograms()
-
 
     initHistogram: ($containerElem) ->
 
