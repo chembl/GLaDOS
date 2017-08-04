@@ -67,6 +67,9 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers.each((i) -> thisView.initHistogram($(@)))
 
     render: ->
+
+      @HISTOGRAM_WIDTH = $(@el).width()
+      @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
       facetsGroups = @collection.getFacetsGroups()
@@ -77,6 +80,8 @@ glados.useNameSpace 'glados.views.Browsers',
           filtersSelected ||= data.selected
 
       console.log 'FILTERS SELECTED? ', filtersSelected
+
+      console.log '@HISTOGRAM_WIDTH: ', @HISTOGRAM_WIDTH
       console.log '^^^ '
 
       $clearFiltersContainer = $(@el).find('.BCK-clearFiltersButtonContainer')
@@ -115,7 +120,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
-      mainSVGContainer.attr('height', HISTOGRAM_HEIGHT)
+      mainSVGContainer
+        .attr('height', HISTOGRAM_HEIGHT)
+        .attr('width', @HISTOGRAM_WIDTH)
 
       bucketNames = _.pluck(buckets, 'key')
       bucketSizes = _.pluck(buckets, 'count')
