@@ -1089,13 +1089,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if 0 < containerLimit < textWidth
       text = d3TextElem.text()
-      numChars = text.length
-      charLength = textWidth / numChars
-      # reduce by num numchars because font characters are not all of the same width
-      numChars = Math.ceil(containerLimit / charLength) - 2
-      textLimit = numChars - 4
-      textLimit = if textLimit < 0 then 0 else textLimit
-      newText = text[0..textLimit] + '...'
+      newText = glados.Utils.Text.getTextForEllipsis(text, textWidth, containerLimit)
       d3TextElem.text(newText)
 
   #---------------------------------------------------------------------------------------------------------------------

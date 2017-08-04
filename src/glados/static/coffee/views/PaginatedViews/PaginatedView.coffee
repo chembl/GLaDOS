@@ -24,9 +24,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.on 'sync', @.render, @
       else
         @collection.on 'reset do-repaint sort', @render, @
+        @collection.on 'request', @showPreloaderHideOthers, @
 
       @collection.on 'error', @handleError, @
-      @collection.on 'all', (evName) -> console.log 'EVENT: ', evName
 
       @numVisibleColumnsList = []
       if @renderAtInit
