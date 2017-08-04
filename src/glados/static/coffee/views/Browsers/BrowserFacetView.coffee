@@ -69,11 +69,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
       thisView = @
 
-      BARS_MIN_WIDTH = 2
+      BARS_MIN_WIDTH = 1
       BAR_CONTENT_PADDING =
         left: 2
         right: 1
       BARS_MAX_WIDTH = HISTOGRAM_WIDTH
+      RECT_RX = 3
+      RECT_RY = RECT_RX
 
       bucketNames = _.pluck(buckets, 'key')
       bucketSizes = _.pluck(buckets, 'count')
@@ -97,6 +99,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
       valueRectangles = bucketGroups.append('rect')
         .attr('x', HISTOGRAM_WIDTH)
+        .attr('rx', RECT_RX)
+        .attr('ry', RECT_RY)
         .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
         .classed('value-bar', true)
@@ -136,6 +140,8 @@ glados.useNameSpace 'glados.views.Browsers',
       bucketGroups.append('rect')
         .attr('height', getYForBucket.rangeBand())
         .attr('width', HISTOGRAM_WIDTH)
+        .attr('rx', RECT_RX)
+        .attr('ry', RECT_RY)
         .classed('hover-bar', true)
 
       bucketGroups.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
