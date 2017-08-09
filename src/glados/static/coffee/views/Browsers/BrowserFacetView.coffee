@@ -68,7 +68,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      console.log 'RENDER!!! FACETS!'
       if @IS_RESPONSIVE_RENDER
         @initializeHTMLStructure()
 
@@ -83,11 +82,6 @@ glados.useNameSpace 'glados.views.Browsers',
         for dataKey, data of fGroup.faceting_handler.faceting_data
           filtersSelected ||= data.selected
 
-      console.log 'FILTERS SELECTED? ', filtersSelected
-
-      console.log '@HISTOGRAM_WIDTH: ', @HISTOGRAM_WIDTH
-      console.log '^^^ '
-
       $clearFiltersContainer = $(@el).find('.BCK-clearFiltersButtonContainer')
       if filtersSelected
         $clearFiltersContainer.show()
@@ -98,7 +92,6 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
-      console.log 'RENDERED EACH HISTOGRAM'
 
     initHistogram: ($containerElem) ->
 
@@ -110,7 +103,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     updateHistogram: ($containerElem) ->
 
-      console.log '---- '
       thisView = @
 
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
@@ -140,24 +132,10 @@ glados.useNameSpace 'glados.views.Browsers',
         .domain([0, _.reduce(bucketSizes, (nemo, num) -> nemo + num )])
         .range([@BARS_MIN_WIDTH, @BARS_MAX_WIDTH])
 
-
-      console.log '---'
-      console.log 'HISTOGRAM_HEIGHT: ', HISTOGRAM_HEIGHT
-      console.log 'facetGroupKey: ', facetGroupKey
-      console.log 'num buckets: ', buckets.length
-      console.log 'bucketNames: ', bucketNames
       bucketGroups = mainSVGContainer.selectAll('.bucket')
-        .data(buckets, (d) ->
-          console.log('using id: ', d.id)
-          return d.id
-        )
-
-      console.log 'buckets: ', buckets
-      bucketGroupsExit = bucketGroups.exit()
-      console.log 'bucketGroupsExit: ', bucketGroupsExit.data()
+        .data(buckets, (d) -> d.id)
 
       bucketGroups.exit().remove()
-
       bucketGroupsEnter = bucketGroups.enter()
         .append('g')
         .classed('bucket', true)
@@ -166,10 +144,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketGroups.attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
-      console.log 'bucketGroupsEnter: ', bucketGroupsEnter.data()
-      console.log '^^^'
-
-
       valueRectangles = bucketGroupsEnter.append('rect')
         .classed('value-bar', true)
         .attr('x', @HISTOGRAM_WIDTH)
@@ -177,7 +151,6 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
-
 
       duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
