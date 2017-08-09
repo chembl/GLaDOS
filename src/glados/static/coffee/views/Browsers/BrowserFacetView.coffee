@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
 
-      @initializeHTMLStructure()
+      @initializeHTMLStructure(emptyBeforeRender=true)
       @showPreloader()
 
     events:
@@ -67,6 +67,12 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers.each((i) -> thisView.initHistogram($(@)))
 
     render: ->
+
+      if @IS_RESPONSIVE_RENDER
+        @initializeHTMLStructure()
+
+      @HISTOGRAM_WIDTH = $(@el).width()
+      @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
       facetsGroups = @collection.getFacetsGroups()
@@ -75,9 +81,6 @@ glados.useNameSpace 'glados.views.Browsers',
       for key, fGroup of facetsGroups
         for dataKey, data of fGroup.faceting_handler.faceting_data
           filtersSelected ||= data.selected
-
-      console.log 'FILTERS SELECTED? ', filtersSelected
-      console.log '^^^ '
 
       $clearFiltersContainer = $(@el).find('.BCK-clearFiltersButtonContainer')
       if filtersSelected
@@ -106,16 +109,19 @@ glados.useNameSpace 'glados.views.Browsers',
       currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
       buckets = []
       for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
-        datum.key = datumKey
-        datum.id = datumKey + ':' + datum.count
-        datum.key
-        buckets.push datum
+        datumToAdd = datum
+        datumToAdd.key = datumKey
+        datumToAdd.id = datumKey + ':' + datumToAdd.count
+        datumToAdd.key
+        buckets.push datumToAdd
 
       HISTOGRAM_HEIGHT = buckets.length * @BIN_HEIGHT
 
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
-      mainSVGContainer.attr('height', HISTOGRAM_HEIGHT)
+      mainSVGContainer
+        .attr('height', HISTOGRAM_HEIGHT)
+        .attr('width', @HISTOGRAM_WIDTH)
 
       bucketNames = _.pluck(buckets, 'key')
       bucketSizes = _.pluck(buckets, 'count')
@@ -126,29 +132,29 @@ glados.useNameSpace 'glados.views.Browsers',
         .domain([0, _.reduce(bucketSizes, (nemo, num) -> nemo + num )])
         .range([@BARS_MIN_WIDTH, @BARS_MAX_WIDTH])
 
-
       bucketGroups = mainSVGContainer.selectAll('.bucket')
         .data(buckets, (d) -> d.id)
 
       bucketGroups.exit().remove()
-
       bucketGroupsEnter = bucketGroups.enter()
         .append('g')
         .classed('bucket', true)
         .attr('data-bucket-key', (d) -> d.key)
         .classed('selected', (d) -> d.selected)
-        .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
+
+      bucketGroups.attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
       valueRectangles = bucketGroupsEnter.append('rect')
+        .classed('value-bar', true)
         .attr('x', @HISTOGRAM_WIDTH)
         .attr('rx', @RECT_RX)
         .attr('ry', @RECT_RY)
         .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
-        .classed('value-bar', true)
 
+      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
-        .duration(@TRANSITION_DURATION)
+        .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
         .attr('x', (d) -> thisView.HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 
