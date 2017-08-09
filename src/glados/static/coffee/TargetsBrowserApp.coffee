@@ -10,8 +10,4 @@ class TargetsBrowserApp
       el: $('.BCK-BrowserContainer')
       standalone_mode: true
 
-    new glados.views.Browsers.BrowserFacetView
-      collection: targsList
-      standalone_mode: true
-
     targsList.fetch()
