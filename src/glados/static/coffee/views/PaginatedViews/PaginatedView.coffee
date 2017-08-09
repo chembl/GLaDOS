@@ -7,7 +7,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation
     # ------------------------------------------------------------------------------------------------------------------
-  
+    DEFAULT_CARDS_SIZES:
+      small: 12
+      medium: 6
+      large: 4
+
     initialize: () ->
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
@@ -31,6 +35,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
+
+      @CURRENT_CARD_SIZES =
+        small: @DEFAULT_CARDS_SIZES.small
+        medium: @DEFAULT_CARDS_SIZES.medium
+        large: @DEFAULT_CARDS_SIZES.large
   
     isCards: ()->
       return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
@@ -58,6 +67,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
       'click .BCK-select-one-item': 'toggleSelectOneItem'
+      'click .BCK-zoom-in': 'zoomIn'
+      'click .BCK-zoom-out': 'zoomOut'
+      'click .BCK-reset-zoom': 'resetZoom'
   
   
     # ------------------------------------------------------------------------------------------------------------------
@@ -148,6 +160,34 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     wakeUpView: ->
       @collection.setPage(1)
+
+    zoomIn: ->
+      @CURRENT_CARD_SIZES =
+        small: @CURRENT_CARD_SIZES.small + 1
+        medium: @CURRENT_CARD_SIZES.medium + 1
+        large: @CURRENT_CARD_SIZES.large + 1
+
+      @render()
+
+    zoomOut: ->
+
+      @CURRENT_CARD_SIZES =
+        small: @CURRENT_CARD_SIZES.small - 1
+        medium: @CURRENT_CARD_SIZES.medium - 1
+        large: @CURRENT_CARD_SIZES.large - 1
+
+      @render()
+
+    resetZoom: ->
+
+      @CURRENT_CARD_SIZES =
+        small: @DEFAULT_CARDS_SIZES.small
+        medium: @DEFAULT_CARDS_SIZES.medium
+        large: @DEFAULT_CARDS_SIZES.large
+
+      @render()
+
+
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
@@ -234,6 +274,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
+          small_size: @CURRENT_CARD_SIZES.small
+          medium_size: @CURRENT_CARD_SIZES.medium
+          large_size: @CURRENT_CARD_SIZES.large
 
         $appendTo.append($(newItemContent))
 

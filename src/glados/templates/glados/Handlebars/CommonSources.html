@@ -258,7 +258,9 @@
 
 <script id="Handlebars-Common-Paginated-Card-Horizontal" type="text/x-handlebars-template">
 
-  <div class="col s12 m6 l4">
+  <div class="col s{{small_size}}
+                  m{{medium_size}}
+                  l{{large_size}}">
 
     <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}}">
 
@@ -462,8 +464,9 @@
 </script>
 
 <script id="Handlebars-Common-CardsZoom" type="text/x-handlebars-template">
-  <a class="menu-button"><i class="fa fa-plus" ></i></a>
-  <a class="menu-button"><i class="fa fa-minus"></i></a>
+  <a class="BCK-zoom-in menu-button"><i class="fa fa-plus" ></i></a>
+  <a class="BCK-reset-zoom menu-button"><i class="fa fa-home" ></i></a>
+  <a class="BCK-zoom-out menu-button"><i class="fa fa-minus"></i></a>
 </script>
 <script id="Handlebars-Common-ShowHideColumnsDropdown" type="text/x-handlebars-template">
 
