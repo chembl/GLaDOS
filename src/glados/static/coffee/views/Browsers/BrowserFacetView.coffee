@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: ->
 
       @$vis_elem = $(@el)
-      @setUpResponsiveRender()
+      @setUpResponsiveRender(emptyBeforeRender=false)
       @collection.on 'facets-changed', @render, @
 
       @initializeHTMLStructure()
@@ -40,11 +40,13 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     showPreloader: ->
 
+      console.log 'SHOWING PRELOADER'
       $(@el).find('.BCK-Preloader-Container').show()
       $(@el).find('.BCK-FacetsContent').hide()
 
     hidePreloader: ->
 
+      console.log 'HIDING PRELOADER'
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
@@ -68,6 +70,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
+      console.log 'RENDER!!! FACETS!'
       @HISTOGRAM_WIDTH = $(@el).width()
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
@@ -94,6 +97,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
+      console.log 'RENDERED EACH HISTOGRAM'
 
     initHistogram: ($containerElem) ->
 
@@ -105,16 +109,18 @@ glados.useNameSpace 'glados.views.Browsers',
 
     updateHistogram: ($containerElem) ->
 
+      console.log '---- '
       thisView = @
 
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
       currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
       buckets = []
       for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
-        datum.key = datumKey
-        datum.id = datumKey + ':' + datum.count
-        datum.key
-        buckets.push datum
+        datumToAdd = datum
+        datumToAdd.key = datumKey
+        datumToAdd.id = datumKey + ':' + datumToAdd.count
+        datumToAdd.key
+        buckets.push datumToAdd
 
       HISTOGRAM_HEIGHT = buckets.length * @BIN_HEIGHT
 
@@ -134,8 +140,20 @@ glados.useNameSpace 'glados.views.Browsers',
         .range([@BARS_MIN_WIDTH, @BARS_MAX_WIDTH])
 
 
+      console.log '---'
+      console.log 'HISTOGRAM_HEIGHT: ', HISTOGRAM_HEIGHT
+      console.log 'facetGroupKey: ', facetGroupKey
+      console.log 'num buckets: ', buckets.length
+      console.log 'bucketNames: ', bucketNames
       bucketGroups = mainSVGContainer.selectAll('.bucket')
-        .data(buckets, (d) -> d.id)
+        .data(buckets, (d) ->
+          console.log('using id: ', d.id)
+          return d.id
+        )
+
+      console.log 'buckets: ', buckets
+      bucketGroupsExit = bucketGroups.exit()
+      console.log 'bucketGroupsExit: ', bucketGroupsExit.data()
 
       bucketGroups.exit().remove()
 
@@ -144,7 +162,11 @@ glados.useNameSpace 'glados.views.Browsers',
         .classed('bucket', true)
         .attr('data-bucket-key', (d) -> d.key)
         .classed('selected', (d) -> d.selected)
-        .attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
+
+      bucketGroups.attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
+
+      console.log 'bucketGroupsEnter: ', bucketGroupsEnter.data()
+      console.log '^^^'
 
       valueRectangles = bucketGroupsEnter.append('rect')
         .attr('x', @HISTOGRAM_WIDTH)
