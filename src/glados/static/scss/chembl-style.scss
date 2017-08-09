@@ -2573,8 +2573,17 @@ span.badge-primary-color-no-float {
 }
 
 .paginated-collection{
+  padding: 4px;
   .pg-table{
     margin-left: 8px;
+  }
+  .pagination{
+    margin: 0;
+    li{
+      a {
+        font-size: 1rem;
+      }
+    }
   }
 }
 
