@@ -126,6 +126,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
+      if @isCards()
+        @fillZoomContainer()
+
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
@@ -331,6 +334,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         #TODO: complete this function!
   
       $win.scroll _.throttle(pinUnpinTableHeader, 200)
+
+    fillZoomContainer: ->
+
+      $zoomBtnsContainer = $(@el).find('.BCK-zoom-buttons-container')
+      glados.Utils.fillContentForElement($zoomBtnsContainer)
   
     fillPaginators: ->
   
