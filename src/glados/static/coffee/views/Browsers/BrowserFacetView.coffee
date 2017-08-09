@@ -6,10 +6,10 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: ->
 
       @$vis_elem = $(@el)
-      @setUpResponsiveRender(emptyBeforeRender=false)
+      @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
 
-      @initializeHTMLStructure()
+      @initializeHTMLStructure(emptyBeforeRender=true)
       @showPreloader()
 
     events:
@@ -40,13 +40,11 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     showPreloader: ->
 
-      console.log 'SHOWING PRELOADER'
       $(@el).find('.BCK-Preloader-Container').show()
       $(@el).find('.BCK-FacetsContent').hide()
 
     hidePreloader: ->
 
-      console.log 'HIDING PRELOADER'
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
@@ -71,6 +69,9 @@ glados.useNameSpace 'glados.views.Browsers',
     render: ->
 
       console.log 'RENDER!!! FACETS!'
+      if @IS_RESPONSIVE_RENDER
+        @initializeHTMLStructure()
+
       @HISTOGRAM_WIDTH = $(@el).width()
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
@@ -168,16 +169,19 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'bucketGroupsEnter: ', bucketGroupsEnter.data()
       console.log '^^^'
 
+
       valueRectangles = bucketGroupsEnter.append('rect')
+        .classed('value-bar', true)
         .attr('x', @HISTOGRAM_WIDTH)
         .attr('rx', @RECT_RX)
         .attr('ry', @RECT_RY)
         .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
-        .classed('value-bar', true)
 
+
+      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
-        .duration(@TRANSITION_DURATION)
+        .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
         .attr('x', (d) -> thisView.HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 

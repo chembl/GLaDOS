@@ -24,7 +24,9 @@ ResponsiviseViewExt =
     # the render function is debounced so it waits for the size of the
     # element to be ready
     reRender = ->
+      @IS_RESPONSIVE_RENDER = true
       @render()
+      @IS_RESPONSIVE_RENDER = false
       @hideResponsiveViewPreloader(emptyBeforeRender)
 
     debouncedRender = _.debounce($.proxy(reRender, @), glados.Settings.RESPONSIVE_REPAINT_WAIT)
