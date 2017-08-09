@@ -258,11 +258,6 @@ footer {
   }
 }
 
-main, #chembl-header-container {
-  /* to prevent the side bar from overlapping the main contens */
-  padding-left: $side-nav-width;
-}
-
 /**
 * Chembl bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -270,6 +265,15 @@ main, #chembl-header-container {
 
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
+
+main{
+  &.with-sidenav{
+    /* to prevent the side bar from overlapping the main contens */
+    @media #{$large-and-up} {
+      padding-left: $side-nav-width;
+    }
+  }
+ }
 
 header .row {
   margin-bottom: 0;
@@ -848,6 +852,7 @@ div#global-footer img {
 @media only screen and (min-width: 601px) {
   .main-container {
     width: 95%;
+    max-width: none;
   }
 }
 
@@ -1366,7 +1371,7 @@ div#CNC-zoom-modal {
         z-index: 999;
 
         [type="checkbox"].filled-in:not(:checked) + label:after {
-          border-color: color('grey', 'lighten-3')
+          border-color: color('grey', 'lighten-1')
         }
 
       }
@@ -1852,8 +1857,11 @@ span.badge-primary-color-no-float {
 * Browser Menus
 * ----------------------------------------------------------------------------------------------------------------------
 */
-
+.browser-header{
+    text-transform: capitalize
+  }
 .browser-menu{
+
   border-bottom: 1px solid color('grey', 'lighten-1');
   &.row{
     margin-bottom: 2px;
@@ -1934,6 +1942,10 @@ span.badge-primary-color-no-float {
   &.mini{
     padding: 4px 8px;
     font-size: 0.65em;
+  }
+  &.disabled{
+    background-color: color('grey', 'lighten-3');
+    color: color('grey', 'lighten-1');
   }
 }
 
@@ -2514,3 +2526,50 @@ span.badge-primary-color-no-float {
   }
 
 }
+
+.facets{
+  background-color: color('grey', 'lighten-4');
+
+  .clear-filters-button{
+    margin-top: 10px;
+  }
+
+  .histogram-container{
+    .bucket{
+      cursor: pointer;
+      .value-bar{
+        fill: color($primary-color-name, 'lighten-4');
+      }
+      .key-text{
+        font-size: 80%;
+        fill: color($primary-color-name, 'darken-3');
+      }
+      .count-text{
+        font-size: 80%;
+        fill: color('grey', 'darken-3');
+      }
+      .front-bar{
+        fill: black;
+        opacity: 0;
+      }
+      .hover-bar{
+        fill: none;
+      }
+      &:not(.selected):hover{
+        .hover-bar{
+          stroke-width: 1;
+          stroke: color($primary-color-name, 'accent-4');
+        }
+      }
+
+      &.selected{
+        .hover-bar{
+          stroke-width: 1;
+          stroke: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+

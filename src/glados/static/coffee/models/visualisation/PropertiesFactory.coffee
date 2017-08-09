@@ -30,6 +30,14 @@ glados.useNameSpace 'glados.models.visualisation',
         HBD:
           propName:'molecule_properties.hbd'
           label: 'Hydrogen Bond Donnors'
+        THERAPEUTIC_FLAG:
+          propName: 'therapeutic_flag'
+          label: 'Therapeutic'
+          parser:
+            0: 'No'
+            1: 'Yes'
+            false: 'No'
+            true: 'Yes'
     Target:
       esIndex:'chembl_target'
       Properties:
@@ -127,6 +135,38 @@ glados.useNameSpace 'glados.models.visualisation',
           minVal = val
 
       prop.domain = [minVal, maxVal]
+
+    parseValueForEntity: (esIndex, propName, propValue) ->
+
+      # the idea is that the parsers can be cached so the browser doesn't have to look for the parser every time
+      # the function is called
+      if not glados.models.visualisation.PropertiesFactory.parsersIndex?
+        glados.models.visualisation.PropertiesFactory.parsersIndex = {}
+
+      parsersIndex = glados.models.visualisation.PropertiesFactory.parsersIndex
+      parserID = esIndex + ":" + propName
+      parser = parsersIndex[parserID]
+
+      if not parser?
+
+        for entityKey, entity of glados.models.visualisation.PropertiesFactory
+          if entity.esIndex == esIndex
+            properties = entity.Properties
+            for propKey, property of properties
+              if property.propName == propName
+                parser = property.parser
+
+      # if parser doesn't exist, add a placeholder
+      if not parser?
+        parser = {}
+      parsersIndex[parserID] = parser
+
+      parsedValue = parser[propValue]
+      parsedValue ?= propValue
+
+      return parsedValue
+
+
 
 glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName, propertyID, withColourScale=false) ->
 

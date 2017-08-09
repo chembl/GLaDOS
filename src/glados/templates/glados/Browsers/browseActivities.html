@@ -1,4 +1,4 @@
-{% extends "glados/base/base_layout.html" %}
+{% extends "glados/base/base_layout_new.html" %}
 
 {% block title %}Browse Activities{% endblock %}
 
@@ -7,21 +7,7 @@
   <h2>
     Browse Activities
   </h2>
-
-  <div class="BCK-BrowserContainer">
-
-    <div class="BCK-MenuContainer">
-        {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
-    </div>
-
-    <div class="BCK-BrowserCurrentViewContainer">
-
-    </div>
-
-
-  </div>
-
-
+  {% include "glados/Browsers/DefaultBrowserContent.html" %}
 </div>
 {% endblock %}
 

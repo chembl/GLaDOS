@@ -33,6 +33,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       jsonResultsList = []
       for hitI in data.hits.hits
         jsonResultsList.push(hitI._source)
+
+      if not @getMeta('ignore_score')
+        #Triggers the event after the values have been updated
+        @trigger('score_and_records_update')
+      else
+        @setMeta('ignore_score', false)
+
       return jsonResultsList
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -48,6 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @unSelectAll()
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
+        @setMeta('ignore_score', true)
 
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
@@ -327,9 +335,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sub_facet_groups[facet_group_key] = facet_group
         return sub_facet_groups
 
-    clearAllFacetsGroups: ()->
-      for facet_group_key, facet_group of @meta.facets_groups
-        facet_group.faceting_handler.clearFacets()
+    clearAllFacetsSelections: ->
+
+      for fGroupKey, fGroup of @meta.facets_groups
+        fGroup.faceting_handler.clearSelections()
+
+      @setMeta('facets_changed', true)
+      @fetch()
 
 # builds the url to do the request
     getURL: ->
@@ -348,12 +360,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setMeta: (attr, value) ->
       previousValue = @meta[attr]
-      console.log '---'
-      console.log 'attr: ', attr
-      console.log 'previousValue: ', previousValue
-      console.log 'value: ', value
-      console.log '^^^'
-
       @meta[attr] = value
       @trigger('meta-changed')
 
@@ -377,7 +383,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @invalidateAllDownloadedResults()
       @unSelectAll()
       @clearAllResults()
-      @clearAllFacetsGroups()
+      @clearAllFacetsSelections()
       @setPage(1, false)
       @fetch()
 
@@ -410,9 +416,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('search_term', '')
       @setMeta('total_pages', Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size'))))
       @calculateHowManyInCurrentPage()
-
-      #Triggers the event after the values have been updated
-      @trigger('score_and_records_update')
 
     calculateHowManyInCurrentPage: ->
       current_page = @getMeta('current_page')
@@ -447,6 +450,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
+      @setMeta('ignore_score', true)
       @fetch()
 
 #TODO implement sorting
