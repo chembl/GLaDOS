@@ -79,7 +79,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
     filterForTargets = '_metadata.related_compounds.chembl_ids.%5C*:' + response.molecule_chembl_id
-    response.targets_url = Compound.getCompoundsListURL(filterForTargets)
+    response.targets_url = Target.getTargetsListURL(filterForTargets)
 
     return response;
 

@@ -182,3 +182,10 @@ Target.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+
+Target.getTargetsListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + filter
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets'
