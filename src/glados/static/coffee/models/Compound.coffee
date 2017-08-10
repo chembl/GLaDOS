@@ -2,7 +2,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'molecule_chembl_id'
   initialize: ->
-    console.log 'INITIALIZING COMPOUND!'
     id = @get('id')
     id ?= @get('molecule_chembl_id')
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
@@ -373,12 +372,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   RESULTS_LIST_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT_CARD,
-    Compound.COLUMNS.RO5_CARD,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.NUM_TARGETS
+    Compound.COLUMNS.PREF_NAME
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,

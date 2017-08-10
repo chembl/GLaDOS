@@ -262,18 +262,29 @@
                   m{{medium_size}}
                   l{{large_size}}">
 
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="{{img_url}}">
+    <div class="card grey lighten-5 hoverable">
+
+      <div class='checkbox-container'>
+        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
+           {{#if is_selected}}checked="checked"{{/if}}/>
+          <label for="BCK-cards-{{base_check_box_id}}-select"></label>
+      </div>
+      
+      <div class="white card-image">
+        <img src="{{img_url}}">
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-        <p><a href="#">This is a link</a></p>
+        {{#each columns}}
+          {{#if this.has_link}}
+            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+          {{else}}
+            <small>
+              <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+            </small>
+          {{/if}}
+        {{/each}}
       </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
+
     </div>
 
   </div>
