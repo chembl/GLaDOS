@@ -269,11 +269,18 @@
            {{#if is_selected}}checked="checked"{{/if}}/>
           <label for="BCK-cards-{{base_check_box_id}}-select"></label>
       </div>
-      
+
       <div class="white card-image">
         <img src="{{img_url}}">
       </div>
       <div class="card-content">
+        <div class="slide-up-more-info">
+          <div class="center-align">
+            <a>
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
         {{#each columns}}
           {{#if this.has_link}}
             <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>

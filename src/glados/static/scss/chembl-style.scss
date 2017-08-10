@@ -1184,6 +1184,10 @@ div#CNC-zoom-modal {
   }
 }
 
+a:not(.menu-button):not(.btn-small):not(.btn):hover {
+  color: color($primary-color-name, 'accent-4');
+}
+
 /**
 * Preloaders and Error message wrapppers
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1363,7 +1367,6 @@ div#CNC-zoom-modal {
   flex-flow: row wrap;
   .col {
     .card {
-      height: 91.5% !important;
       .checkbox-container {
         position: absolute;
         right: -15px;
@@ -1374,6 +1377,18 @@ div#CNC-zoom-modal {
           border-color: color('grey', 'lighten-1')
         }
 
+      }
+
+      .card-content{
+        position: relative;
+        .slide-up-more-info{
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
       }
     }
 
