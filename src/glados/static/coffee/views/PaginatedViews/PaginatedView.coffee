@@ -55,14 +55,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
-      @numVisibleColumnsList = []
-      if @renderAtInit
-        @render()
-
       @CURRENT_CARD_SIZES =
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
+
+      @numVisibleColumnsList = []
+      if @renderAtInit
+        @render()
+
   
     isCards: ()->
       return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
@@ -186,7 +187,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     zoomIn: ->
 
-
       @CURRENT_CARD_SIZES =
         small: @getNextSize(@CURRENT_CARD_SIZES.small)
         medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
@@ -212,6 +212,33 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @render()
 
+
+    mustDisableZoomIn: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @getNextSize(@CURRENT_CARD_SIZES.small) == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @getNextSize(@CURRENT_CARD_SIZES.medium) == @CURRENT_CARD_SIZES.medium
+      else
+        return @getNextSize(@CURRENT_CARD_SIZES.large) == @CURRENT_CARD_SIZES.large
+
+    mustDisableReset: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @DEFAULT_CARDS_SIZES.small == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @DEFAULT_CARDS_SIZES.medium == @CURRENT_CARD_SIZES.medium
+      else
+        return @DEFAULT_CARDS_SIZES.large == @CURRENT_CARD_SIZES.large
+
+    mustDisableZoomOut: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @getPreviousSize(@CURRENT_CARD_SIZES.small) == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @getPreviousSize(@CURRENT_CARD_SIZES.medium) == @CURRENT_CARD_SIZES.medium
+      else
+        return @getPreviousSize(@CURRENT_CARD_SIZES.large) == @CURRENT_CARD_SIZES.large
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
@@ -293,15 +320,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
-        newItemContent = applyTemplate
+        templateParams =
           base_check_box_id: idColumnValue
           is_selected: @collection.itemIsSelected(idColumnValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
-          small_size: @CURRENT_CARD_SIZES.small
-          medium_size: @CURRENT_CARD_SIZES.medium
-          large_size: @CURRENT_CARD_SIZES.large
+
+        if @isCards()
+          templateParams.small_size = @CURRENT_CARD_SIZES.small
+          templateParams.medium_size = @CURRENT_CARD_SIZES.medium
+          templateParams.large_size = @CURRENT_CARD_SIZES.large
+
+        newItemContent = applyTemplate(templateParams)
+
 
         $appendTo.append($(newItemContent))
 
@@ -406,7 +438,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillZoomContainer: ->
 
       $zoomBtnsContainer = $(@el).find('.BCK-zoom-buttons-container')
-      glados.Utils.fillContentForElement($zoomBtnsContainer)
+      glados.Utils.fillContentForElement $zoomBtnsContainer,
+        disable_zoom_in: @mustDisableZoomIn()
+        disable_reset: @mustDisableReset()
+        disable_zoom_out: @mustDisableZoomOut()
   
     fillPaginators: ->
   
