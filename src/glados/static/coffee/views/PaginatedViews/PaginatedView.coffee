@@ -7,6 +7,29 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation
     # ------------------------------------------------------------------------------------------------------------------
+    POSSIBLE_CARD_SIZES_STRUCT:
+      1:
+        previous: 1
+        next: 2
+      2:
+        previous: 1
+        next: 3
+      3:
+        previous: 2
+        next: 4
+      4:
+        previous: 3
+        next: 6
+      6:
+        previous: 4
+        next: 12
+      12:
+        previous: 6
+        next: 12
+
+    getPreviousSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].previous
+    getNextSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].next
+
     DEFAULT_CARDS_SIZES:
       small: 12
       medium: 6
@@ -162,19 +185,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.setPage(1)
 
     zoomIn: ->
+
+
       @CURRENT_CARD_SIZES =
-        small: @CURRENT_CARD_SIZES.small + 1
-        medium: @CURRENT_CARD_SIZES.medium + 1
-        large: @CURRENT_CARD_SIZES.large + 1
+        small: @getNextSize(@CURRENT_CARD_SIZES.small)
+        medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
+        large: @getNextSize(@CURRENT_CARD_SIZES.large)
 
       @render()
 
     zoomOut: ->
 
       @CURRENT_CARD_SIZES =
-        small: @CURRENT_CARD_SIZES.small - 1
-        medium: @CURRENT_CARD_SIZES.medium - 1
-        large: @CURRENT_CARD_SIZES.large - 1
+        small: @getPreviousSize(@CURRENT_CARD_SIZES.small)
+        medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
+        large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
       @render()
 
