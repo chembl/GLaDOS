@@ -296,7 +296,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      templateID = @collection.getMeta('custom_cards_template')
+      if @isCards()
+        templateID = @collection.getMeta('custom_cards_template')
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
@@ -319,11 +320,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       for item in @collection.getCurrentPage()
 
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
-        idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+        idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
         templateParams =
-          base_check_box_id: idColumnValue
-          is_selected: @collection.itemIsSelected(idColumnValue)
+          base_check_box_id: idValue
+          is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
@@ -333,10 +334,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           templateParams.medium_size = @CURRENT_CARD_SIZES.medium
           templateParams.large_size = @CURRENT_CARD_SIZES.large
 
-        newItemContent = applyTemplate(templateParams)
+        $newItemElem = $(applyTemplate(templateParams))
+        $appendTo.append($newItemElem)
 
-
-        $appendTo.append($(newItemContent))
+        CustomElementView = @collection.getMeta('custom_cards_item_view')
+        if CustomElementView?
+          ItemModel = @collection.getMeta('model')
+          model = new ItemModel
+            id: idValue
+          new CustomElementView
+            model: model
+            el: $newItemElem
 
       @fixCardHeight($appendTo)
 

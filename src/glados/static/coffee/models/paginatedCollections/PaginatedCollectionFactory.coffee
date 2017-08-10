@@ -43,6 +43,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             selection_exceptions: {}
             custom_query_string: customQueryString
             use_custom_query_string: useCustomQueryString
+            model: esIndexSettings.MODEL
 
       return new indexESPagQueryCollection
 
