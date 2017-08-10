@@ -29,6 +29,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
             #columns specific for cards view
             columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
+            enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
+            custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             additional_columns: ( $.extend(col, {show: false}) for col in esIndexSettings.ADDITIONAL_COLUMNS)
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             key_name: esIndexSettings.KEY_NAME

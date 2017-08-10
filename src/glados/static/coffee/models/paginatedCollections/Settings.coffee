@@ -14,6 +14,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ENABLE_CARDS_ZOOM: true
+        CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],

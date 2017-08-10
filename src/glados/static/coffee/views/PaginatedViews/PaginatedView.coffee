@@ -162,7 +162,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
-      if @isCards()
+      if @isCards() and @collection.getMeta('enable_cards_zoom')
         @fillZoomContainer()
 
       @fillPaginators()
@@ -271,7 +271,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     bindFunctionLinks: ->
       $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
       visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
-      console.log 'visibleColumnsIndex: ', visibleColumnsIndex
       $linksToBind.each (i, link) ->
         $currentLink = $(@)
         alreadyBound = $currentLink.attr('data-already-function-bound')?
@@ -297,7 +296,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      applyTemplate = Handlebars.compile($('#' + $specificElemContainer.attr('data-hb-template')).html())
+      templateID = @collection.getMeta('custom_cards_template')
+      templateID ?= $specificElemContainer.attr('data-hb-template')
+      applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
       # if it is a table, add the corresponding header
