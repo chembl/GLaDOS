@@ -1396,6 +1396,9 @@ a:not(.menu-button):not(.btn-small):not(.btn):hover {
         bottom: 0;
         left: 0;
         display: none;
+        .details-content{
+          padding: 4px;
+        }
       }
     }
 
