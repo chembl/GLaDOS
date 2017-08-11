@@ -1380,17 +1380,29 @@ a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-se
       }
       .card-content{
         position: relative;
-        .slide-more-info{
-          position: absolute;
-          top: 0;
-          left: 0;
-          margin-left: auto;
-          margin-right: auto;
+      }
+
+      .slide-more-info{
           width: 100%;
+
+          a{
+            display:inline-block;
+            width: 100%;
+            &:hover{
+              background-color: color($primary-color-name, 'lighten-5');
+            }
+          }
+
+          &.opener {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
         }
 
-
-      }
       .details{
         position: absolute;
         width: 100%;
@@ -1402,6 +1414,7 @@ a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-se
           padding: 4px;
         }
 
+
         .tabs-container{
 
           position: absolute;
@@ -1410,6 +1423,14 @@ a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-se
           margin-left: auto;
           margin-right: auto;
           width: 100%;
+
+        }
+
+        .tabs-contents{
+
+          .compound-details{
+            overflow-y: scroll;
+          }
         }
 
 

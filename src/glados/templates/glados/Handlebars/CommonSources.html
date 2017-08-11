@@ -274,7 +274,7 @@
         <img src="{{img_url}}">
       </div>
       <div class="card-content">
-        <div class="slide-more-info">
+        <div class="slide-more-info opener">
           <div class="center-align">
             <a class="BCK-open-info">
               <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -302,18 +302,20 @@
             </a>
           </div>
 
-          <div class="BCK-tabs-contents">
+        </div>
 
-          </div>
-
-          <div class="tabs-container">
-            <div class="card-tabs">
-              <a class="section-item BCK-openTab selected" data-tab-id="Details">Details</a>
-              <a class="section-item BCK-openTab" data-tab-id="Targets" >Targets</a>
-            </div>
-          </div>
+        <div class="BCK-tabs-contents tabs-contents">
 
         </div>
+
+        <div class="tabs-container">
+          <div class="card-tabs">
+            <a class="section-item BCK-openTab selected" data-tab-id="Details">Details</a>
+            <a class="section-item BCK-openTab" data-tab-id="Targets" >Targets</a>
+          </div>
+        </div>
+
+
       </div>
 
     </div>
@@ -324,15 +326,6 @@
 
 <script id='Handlebars-Common-Paginated-Card-TabContent' type="text/x-handlebars-template">
   <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
-</script>
-<script id='Handlebars-Common-Paginated-Card-Details' type="text/x-handlebars-template">
-
-  <div class="details-content">
-    <span>I am a very simple card. I am good at containing small bits of information.
-    I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-    </span>
-  </div>
-
 </script>
 
 
@@ -421,6 +414,43 @@
   </div>
 
  </script>
+
+<script id="Handlebars-Common-CompoundDetails" type="text/x-handlebars-template">
+
+  <div class="compound-details">
+    {{#if img_url}}
+      <div class="white center-align">
+        <img src="{{img_url}}" height="100px">
+      </div>
+    {{/if}}
+    <div class="card-content">
+
+      {{#each columns}}
+
+      {{#if this.has_link}}
+
+        {{#if this.is_secondary_link}}
+          <small>
+            <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+          </small>
+        {{else}}
+          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+        {{/if}}
+
+      {{else}}
+      <small>
+        <p >
+          <b>{{this.name_to_show}}</b>: {{this.value}}
+        </p>
+      </small>
+      {{/if}}
+      {{/each}}
+
+    </div>
+
+  </div>
+
+</script>
 
 <script id="Handlebars-Common-Paginated-Card" type="text/x-handlebars-template">
 

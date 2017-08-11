@@ -10,9 +10,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initialize: ->
 
-      $detailsContainer = $(@el).find('.BCK-info-container')
-
-      @MODEL_FETCHED = false
+      cardHeight = $(@el).height()
+      console.log 'CARD HEIGHT: ', cardHeight
 
     openInfo: ->
 
@@ -57,9 +56,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $currentTabSelector.addClass('selected')
 
     initTab: ($tabElement, tabID) ->
-      
+
       if tabID == 'Details'
-        CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model)
+
+        $compoundDetails = $tabElement.find('.compound-details')
+        infoHeight = $(@el).find('.BCK-info-container').height()
+
+        console.log 'infoHeight: ', infoHeight
+
+
+        CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model,
+          'Handlebars-Common-CompoundDetails')
 
       $tabElement.attr('data-initialised','yes')
 

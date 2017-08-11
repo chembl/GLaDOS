@@ -374,6 +374,18 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME
   ]
+  MINI_REPORT_CARD:[
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.SYNONYMS,
+    Compound.COLUMNS.MAX_PHASE,
+    Compound.COLUMNS.FULL_MWT,
+    Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.PSA,
+    Compound.COLUMNS.HBA,
+    Compound.COLUMNS.HBD,
+    Compound.COLUMNS.RO5
+  ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,
     Compound.COLUMNS.BPKA,
@@ -404,7 +416,7 @@ Compound.COLUMNS_SETTINGS = {
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+  COLUMNS: Compound.COLUMNS_SETTINGS.MINI_REPORT_CARD
 
 Compound.getCompoundsListURL = (filter) ->
 
