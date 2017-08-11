@@ -4,6 +4,8 @@ glados.useNameSpace 'glados.views',
     initialize: ->
       @entity = arguments[0].entity
       @customTemplate = arguments[0].custom_template
+      @additional_params = arguments[0].additional_params
+
       @model.on 'change', @render, @
       @model.on 'error', @renderError, @
       templateCont = $('#' + Compound.MINI_REPORT_CARD.LOADING_TEMPLATE).html()
@@ -16,9 +18,13 @@ glados.useNameSpace 'glados.views',
       templateCont = $('#' + templateID).html()
       valuesObject = glados.Utils.getColumnsWithValues(@entity.MINI_REPORT_CARD.COLUMNS, @model)
       imgUrl = glados.Utils.getImgURL(valuesObject)
-      $(@el).html Handlebars.compile(templateCont)
+
+      paramsObj =
         img_url: imgUrl
         columns: valuesObject
+
+      _.extend(paramsObj, @additional_params)
+      $(@el).html Handlebars.compile(templateCont)(paramsObj)
 
     renderError:  (model_or_collection, jqXHR, options) ->
       $(@el).html glados.Utils.ErrorMessages.getErrorCardContent(jqXHR)

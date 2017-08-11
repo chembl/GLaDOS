@@ -83,18 +83,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     setUpTooltip: ->
 
       $imageContainer = $(@el).find('.BCK-image')
-      $imageContainer.mouseover(@generateTooltipFunction(@model.get('id')))
+      $imageContainer.mouseover(@generateTooltipFunction(@model))
 
-      console.log 'SETTING UP TOOLTIP!!'
-
-    generateTooltipFunction: (chemblID) ->
+    generateTooltipFunction: (compound) ->
 
       return ->
 
         $hoveredElem = $(@)
         if $hoveredElem.attr('data-qtip-configured') == 'yes'
+          console.log 'TOOL TIP ALREADY SET UP!!!'
           return
 
+        console.log 'SETTING UP TOOLTIP!!'
+
+        chemblID = compound.get('id')
         miniRepCardID = 'BCK-MiniReportCard-' + chemblID
         console.log 'miniRepCardID: ', miniRepCardID
 
@@ -115,6 +117,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $hoveredElem.attr('data-qtip-configured', 'yes')
 
         $newMiniReportCardContainer = $('#' + miniRepCardID)
-        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
+          {hide_img:true})
 
 
