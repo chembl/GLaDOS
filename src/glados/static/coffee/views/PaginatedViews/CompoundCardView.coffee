@@ -6,12 +6,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-close-details': 'closeDetails'
 
     initialize: ->
+      @model.on 'change', @renderDetails, @
+
       @MODEL_FETCHED = false
       @initDetailsSection()
 
     openDetails: ->
 
       if not @MODEL_FETCHED
+        console.log 'GOING TO FETCH MODEL!'
         @model.fetch()
         @MODEL_FETCHED = true
 
@@ -28,7 +31,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $preloaderContainer = $(@el).find('.BCK-Preloader-Container')
       glados.Utils.fillContentForElement($preloaderContainer)
 
-    fillDetailsSection: ->
+    renderDetails: ->
 
       $detailsContainer = $(@el).find('.BCK-details-container')
+
 #      glados.Utils.$detailsContainer.

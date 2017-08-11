@@ -1184,7 +1184,7 @@ div#CNC-zoom-modal {
   }
 }
 
-a:not(.menu-button):not(.btn-small):not(.btn):hover {
+a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-section-item):hover {
   color: color($primary-color-name, 'accent-4');
 }
 
@@ -1388,6 +1388,8 @@ a:not(.menu-button):not(.btn-small):not(.btn):hover {
           margin-right: auto;
           width: 100%;
         }
+
+
       }
       .details{
         position: absolute;
@@ -1399,6 +1401,18 @@ a:not(.menu-button):not(.btn-small):not(.btn):hover {
         .details-content{
           padding: 4px;
         }
+
+        .tabs-container{
+
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
+
+
       }
     }
 
@@ -2612,3 +2626,34 @@ span.badge-primary-color-no-float {
   }
 }
 
+/**
+* Custom Tabs
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.card-tabs{
+  .section-item {
+
+    padding: 10px 10px;
+    margin: 0px 0px;
+    color: color('grey', 'darken-2');
+    display: inline-block;
+
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+      background-color: color('grey', 'lighten-5');
+    }
+    &:not(.selected):hover{
+      color: color('grey', 'darken-4');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+    }
+  }
+
+  background-color: white;
+
+  &.scrollable{
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
