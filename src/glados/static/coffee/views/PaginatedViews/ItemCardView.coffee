@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   ItemCardView: Backbone.View.extend
 
     TABS_CONTENT_TEMPLATE: 'Handlebars-Common-Paginated-Card-TabContent'
+    WIDTH_THRESHOLD: 190
 
     events:
       'click .BCK-open-info': 'openInfo'
@@ -10,19 +11,32 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initialize: ->
 
-      cardHeight = $(@el).height()
-      console.log 'CARD HEIGHT: ', cardHeight
+      cardWidth = $(@el).width()
+      console.log 'CARD WIDTH: ', cardWidth
+      if cardWidth < @WIDTH_THRESHOLD
+        @hideInfoOpener()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Info Footer
+    # ------------------------------------------------------------------------------------------------------------------
+    hideInfoOpener: ->
+
+      $infoOpener = $(@el).find('.BCK-info-opener')
+      $infoOpener.hide()
 
     openInfo: ->
 
-      $detailsElement = $(@el).find('.BCK-info-container')
-      $detailsElement.slideDown('fast')
+      $infoElement = $(@el).find('.BCK-info-container')
+      $infoElement.slideDown('fast')
       @showTab('Details')
 
     closeInfo: ->
-      $detailsElement = $(@el).find('.BCK-info-container')
-      $detailsElement.slideUp('fast')
+      $infoElement = $(@el).find('.BCK-info-container')
+      $infoElement.slideUp('fast')
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Tabs
+    # ------------------------------------------------------------------------------------------------------------------
     openTab: (event) ->
 
       tabID = $(event.currentTarget).attr('data-tab-id')
@@ -62,4 +76,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           'Handlebars-Common-CompoundDetails')
 
       $tabElement.attr('data-initialised','yes')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Mini report card on hover
+    # ------------------------------------------------------------------------------------------------------------------
+
 
