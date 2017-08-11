@@ -196,9 +196,14 @@ class CompoundReportCardApp
 
     compoundMetabolism.fetch()
 
-  @initMiniCompoundReportCard = ($containerElem, chemblID)->
+  # you can provide chembld iD or a model already created
+  @initMiniCompoundReportCard = ($containerElem, chemblID, model)->
 
-    compound = new Compound({molecule_chembl_id: chemblID})
+    if model?
+      compound = model
+    else
+      compound = new Compound({molecule_chembl_id: chemblID})
+
     new glados.views.MiniReportCardView
       el: $containerElem
       model: compound

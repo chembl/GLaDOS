@@ -302,14 +302,14 @@
             </a>
           </div>
 
-          <div class="BCK-tab-content">
+          <div class="BCK-tabs-contents">
 
           </div>
 
           <div class="tabs-container">
             <div class="card-tabs">
-              <a class="section-item BCK-openDetails selected">Details</a>
-              <a class="section-item BCK-openTargets">Targets</a>
+              <a class="section-item BCK-openTab selected" data-tab-id="Details">Details</a>
+              <a class="section-item BCK-openTab" data-tab-id="Targets" >Targets</a>
             </div>
           </div>
 
@@ -322,6 +322,9 @@
 
 </script>
 
+<script id='Handlebars-Common-Paginated-Card-TabContent' type="text/x-handlebars-template">
+  <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
+</script>
 <script id='Handlebars-Common-Paginated-Card-Details' type="text/x-handlebars-template">
 
   <div class="details-content">
