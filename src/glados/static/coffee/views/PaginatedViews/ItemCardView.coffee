@@ -58,13 +58,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initTab: ($tabElement, tabID) ->
 
       if tabID == 'Details'
-
-        $compoundDetails = $tabElement.find('.compound-details')
-        infoHeight = $(@el).find('.BCK-info-container').height()
-
-        console.log 'infoHeight: ', infoHeight
-
-
         CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model,
           'Handlebars-Common-CompoundDetails')
 

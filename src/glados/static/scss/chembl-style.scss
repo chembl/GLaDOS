@@ -1431,6 +1431,10 @@ a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-se
           .compound-details{
             overflow-y: scroll;
           }
+
+          height: calc(100% - 45px);
+          overflow-y: scroll;
+
         }
 
 
