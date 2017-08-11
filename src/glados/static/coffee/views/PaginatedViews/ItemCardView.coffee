@@ -12,9 +12,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initialize: ->
 
       cardWidth = $(@el).width()
-      console.log 'CARD WIDTH: ', cardWidth
       if cardWidth < @WIDTH_THRESHOLD
         @hideInfoOpener()
+        @setUpTooltip()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Info Footer
@@ -80,5 +80,41 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Mini report card on hover
     # ------------------------------------------------------------------------------------------------------------------
+    setUpTooltip: ->
+
+      $imageContainer = $(@el).find('.BCK-image')
+      $imageContainer.mouseover(@generateTooltipFunction(@model.get('id')))
+
+      console.log 'SETTING UP TOOLTIP!!'
+
+    generateTooltipFunction: (chemblID) ->
+
+      return ->
+
+        $hoveredElem = $(@)
+        if $hoveredElem.attr('data-qtip-configured') == 'yes'
+          return
+
+        miniRepCardID = 'BCK-MiniReportCard-' + chemblID
+        console.log 'miniRepCardID: ', miniRepCardID
+
+        qtipConfig =
+          content:
+            text: '<div id="' + miniRepCardID + '"></div>'
+          show:
+            solo: true
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+          position:
+            my: 'top center'
+            at: 'bottom center'
+
+        $hoveredElem.qtip qtipConfig
+
+        $hoveredElem.qtip('api').show()
+        $hoveredElem.attr('data-qtip-configured', 'yes')
+
+        $newMiniReportCardContainer = $('#' + miniRepCardID)
+        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
 
