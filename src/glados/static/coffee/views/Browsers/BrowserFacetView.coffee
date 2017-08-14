@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
-      $histogramsContainers.each((i) -> thisView.initHistogram($(@)))
+      $histogramsContainers.each((i) ->thisView.initHistogram($(@)))
 
     render: ->
 

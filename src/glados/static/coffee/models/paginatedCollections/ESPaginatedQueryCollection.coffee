@@ -10,7 +10,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     errorHandler: (collection, response, options)->
-      console.log("ERROR QUERYING ELASTIC SEARCH:", collection, response, options)
       @resetMeta(0, 0)
       @reset()
 
@@ -60,8 +59,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'request data to fetch: ', requestData
-      console.log esJSONRequest
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -205,7 +202,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
-      console.log 'custom query string: ', customQueryString
       if @getMeta('use_custom_query_string')
         es_query.query.bool.must = {
           query_string:
@@ -406,7 +402,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #  sorting data per column.
 #
     resetMeta: (totalRecords, max_score) ->
-      console.log 'RESETTING META'
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
       @setMeta('total_records', parseInt(totalRecords))
