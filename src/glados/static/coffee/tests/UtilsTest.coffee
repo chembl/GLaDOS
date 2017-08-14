@@ -47,7 +47,7 @@ describe "Utils", ->
 
     it 'generates columns and values for chembl25', ->
 
-      columns = Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+      columns = Compound.COLUMNS_SETTINGS.TEST
       colsWithVals = glados.Utils.getColumnsWithValues(columns, testCompound)
 
       for col in colsWithVals

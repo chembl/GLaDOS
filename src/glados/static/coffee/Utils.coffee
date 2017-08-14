@@ -105,6 +105,19 @@ glados.useNameSpace 'glados',
 
       $element.html templateFunction(paramsObj)
 
+    getContentFromTemplate: (templateID, paramsObj={}) ->
+
+      templateSelector = '#' + templateID
+
+      if not glados.Utils.cachedTemplateFunctions[templateSelector]?
+        templateFunction = Handlebars.compile($(templateSelector).html())
+        glados.Utils.cachedTemplateFunctions[templateSelector] = templateFunction
+      else
+        templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
+
+      return templateFunction(paramsObj)
+
+
     # Helper function to prevent links from navigating to an url that is inside the same js page
     # If key_up is true will override for enter listening on links
     # If key_up is false will override for click listening on links

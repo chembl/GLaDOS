@@ -1184,6 +1184,10 @@ div#CNC-zoom-modal {
   }
 }
 
+a:not(.menu-button):not(.btn-small):not(.btn):not(.section-item):not(.results-section-item):hover {
+  color: color($primary-color-name, 'accent-4');
+}
+
 /**
 * Preloaders and Error message wrapppers
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1363,7 +1367,6 @@ div#CNC-zoom-modal {
   flex-flow: row wrap;
   .col {
     .card {
-      height: 91.5% !important;
       .checkbox-container {
         position: absolute;
         right: -15px;
@@ -1373,6 +1376,67 @@ div#CNC-zoom-modal {
         [type="checkbox"].filled-in:not(:checked) + label:after {
           border-color: color('grey', 'lighten-1')
         }
+
+      }
+      .card-content{
+        position: relative;
+      }
+
+      .slide-more-info{
+          width: 100%;
+
+          a{
+            display:inline-block;
+            width: 100%;
+            &:hover{
+              background-color: color($primary-color-name, 'lighten-5');
+            }
+          }
+
+          &.opener {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+        }
+
+      .details{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        display: none;
+        .details-content{
+          padding: 4px;
+        }
+
+
+        .tabs-container{
+
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+
+        }
+
+        .tabs-contents{
+
+          .compound-details{
+            overflow-y: scroll;
+          }
+
+          height: calc(100% - 45px);
+          overflow-y: scroll;
+
+        }
+
 
       }
     }
@@ -2572,4 +2636,49 @@ span.badge-primary-color-no-float {
   }
 }
 
+.paginated-collection{
+  padding: 4px;
+  .pg-table{
+    margin-left: 8px;
+  }
+  .pagination{
+    margin: 0;
+    li{
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+}
 
+/**
+* Custom Tabs
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.card-tabs{
+  .section-item {
+
+    padding: 10px 10px;
+    margin: 0px 0px;
+    color: color('grey', 'darken-2');
+    display: inline-block;
+
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+      background-color: color('grey', 'lighten-5');
+    }
+    &:not(.selected):hover{
+      color: color('grey', 'darken-4');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+    }
+  }
+
+  background-color: white;
+
+  &.scrollable{
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
