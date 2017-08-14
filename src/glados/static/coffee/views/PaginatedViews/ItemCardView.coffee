@@ -91,7 +91,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $hoveredElem = $(@)
         if $hoveredElem.attr('data-qtip-configured') == 'yes'
-          console.log 'TOOL TIP ALREADY SET UP!!!'
           return
 
         chemblID = compound.get('id')
