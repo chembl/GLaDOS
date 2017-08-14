@@ -243,4 +243,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
 
-    clearFacetsSelection: -> @collection.clearAllFacetsSelections()
+    clearFacetsSelection: ->
+      @collection.clearAllFacetsSelections()
+      $(@el).find('g.bucket').removeClass('selected')

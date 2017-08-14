@@ -353,9 +353,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 # Metadata Handlers for query and pagination
 # ------------------------------------------------------------------------------------------------------------------
-
     setMeta: (attr, value) ->
-      previousValue = @meta[attr]
       @meta[attr] = value
       @trigger('meta-changed')
 
