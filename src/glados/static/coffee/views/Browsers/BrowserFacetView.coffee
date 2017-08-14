@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
-      $histogramsContainers.each((i) -> thisView.initHistogram($(@)))
+      $histogramsContainers.each((i) ->thisView.initHistogram($(@)))
 
     render: ->
 
@@ -243,4 +243,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
 
-    clearFacetsSelection: -> @collection.clearAllFacetsSelections()
+    clearFacetsSelection: ->
+      @collection.clearAllFacetsSelections()
+      $(@el).find('g.bucket').removeClass('selected')
