@@ -94,15 +94,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           console.log 'TOOL TIP ALREADY SET UP!!!'
           return
 
-        console.log 'SETTING UP TOOLTIP!!'
-
         chemblID = compound.get('id')
         miniRepCardID = 'BCK-MiniReportCard-' + chemblID
-        console.log 'miniRepCardID: ', miniRepCardID
+        $qtipContent = $('#' + miniRepCardID)
+        if $qtipContent.length == 0
+          $qtipContent = $('<div id="' + miniRepCardID + '"></div>')
 
         qtipConfig =
           content:
-            text: '<div id="' + miniRepCardID + '"></div>'
+            text: $qtipContent
           show:
             solo: true
           style:
