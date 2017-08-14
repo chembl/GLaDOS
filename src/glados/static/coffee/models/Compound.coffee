@@ -411,6 +411,11 @@ Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
     Compound.COLUMNS.CHEMBL_ID,
   ]
+  TEST: [
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME
+    Compound.COLUMNS.MAX_PHASE,
+  ]
 }
 
 Compound.MINI_REPORT_CARD =
