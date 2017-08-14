@@ -128,10 +128,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
           if not @max_value
             @max_value = 0
-          round_diff = Math.ceil(@max_value-@min_value)
-          @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
-          if round_diff < FacetingHandler.NUM_INTERVALS
-            @intervals_size = 1
+          if @max_value == 0 and @min_value == 0
+            @intervals_size = Number.MAX_SAFE_INTEGER
+          else
+            round_diff = Math.ceil(@max_value-@min_value)
+            @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
+            if round_diff < FacetingHandler.NUM_INTERVALS
+              @intervals_size = 1
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
