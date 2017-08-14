@@ -48,8 +48,12 @@ class SearchResultsApp
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
       idsList = (item.molecule_chembl_id for item in resultsList.allResults)
-      console.log 'ALL ITEMS GOT!!!'
-      console.log 'idsList: ', idsList
+
+      queryString = glados.Utils.QueryStrings.getQueryStringForCompoundList(idsList)
+      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(queryString)
+
+      
+
     ).fail((msg) ->
         if $progressElement?
           $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
