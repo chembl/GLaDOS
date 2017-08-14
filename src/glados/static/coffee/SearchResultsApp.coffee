@@ -41,6 +41,22 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
+
+    $progressElement = $('#BCK-loading-messages-container')
+    deferreds = resultsList.getAllResults($progressElement)
+
+    # for now, we need to jump from web services to elastic
+    $.when.apply($, deferreds).done(->
+      idsList = (item.molecule_chembl_id for item in resultsList.allResults)
+      console.log 'ALL ITEMS GOT!!!'
+      console.log 'idsList: ', idsList
+    ).fail((msg) ->
+        if $progressElement?
+          $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+            msg: msg
+      )
+
+
     glados.views.PaginatedViews.PaginatedView\
     .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
 

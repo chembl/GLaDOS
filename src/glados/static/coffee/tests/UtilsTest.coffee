@@ -102,3 +102,15 @@ describe "Utils", ->
 
         totalBucketsGot = newBuckets.length
         expect(totalBucketsGot <= maxBuckets).toBe(true)
+
+  describe "Query Strings", ->
+
+    it 'generates a querystring for a list of compound chembl ids', ->
+
+      chemblIDs = ["CHEMBL277500", "CHEMBL1332267", "CHEMBL1449337", "CHEMBL1531487", "CHEMBL1741626", "CHEMBL1881764", "CHEMBL1893751", "CHEMBL1966526", "CHEMBL1995935", "CHEMBL2003799", "CHEMBL2132226", "CHEMBL3833355", "CHEMBL3833360", "CHEMBL3833364"]
+      qs = glados.Utils.QueryStrings.getQueryStringForCompoundList(chemblIDs)
+      console.log 'qs: ', qs
+      listGot = qs.replace('molecule_chembl_id:(', '').replace(')', '').replace(/"/g, '').split(' OR ')
+
+      for i in [0..listGot.length-1]
+        expect(listGot[i]).toBe(chemblIDs[i])

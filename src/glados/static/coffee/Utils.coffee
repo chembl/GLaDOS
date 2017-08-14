@@ -217,3 +217,8 @@ glados.useNameSpace 'glados',
         textLimit = numChars - 4
         textLimit = if textLimit < 0 then 0 else textLimit
         return originalText[0..textLimit] + '...'
+
+    QueryStrings:
+      getQueryStringForCompoundList: (chemblIDs) ->
+
+        return 'molecule_chembl_id:(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'
