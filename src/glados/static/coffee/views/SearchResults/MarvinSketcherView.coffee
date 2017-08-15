@@ -6,6 +6,10 @@ MarvinSketcherView = Backbone.View.extend
   SUBSTRUCTURE_SEARCH: 'substructure'
   FLEXMATCH_SEARCH: 'flexmatch'
 
+  #format names in marvin
+  SDF_FORMAT: 'mol'
+  SMILES_FORMAT: 'smiles'
+
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
@@ -13,16 +17,20 @@ MarvinSketcherView = Backbone.View.extend
 
   initialize: (options)->
 
-    console.log 'ELEMENT: ', @el
+    console.log 'INIT MARVIN VIEW!'
     @preloader = $(@el).find('#marvin-preloader')
     @marvin_iframe = $(@el).find('#sketch')
     if options
       @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
+      @smiles_to_load_on_ready = options.smiles_to_load_on_ready
+
     thisView = @
     MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
       thisView.marvinSketcherInstance = sketcherInstance
       if thisView.sdf_smiles_to_load_on_ready
-        thisView.loadSDF(thisView.sdf_smiles_to_load_on_ready)
+        thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
+      else if thisView.smiles_to_load_on_ready
+        thisView.loadStructure(thisView.smiles_to_load_on_ready, @SMILES_FORMAT)
     ), (error) ->
       alert 'Loading of the sketcher failed' + error
 
@@ -86,13 +94,18 @@ MarvinSketcherView = Backbone.View.extend
     ), (error) ->
       $(@el).find('.messages-to-user').text('There was an error: ' + error)
 
-  loadSDF: (sdf_string)->
+  # --------------------------------------------------------------------------------------------------------------------
+  # loading structures
+  # --------------------------------------------------------------------------------------------------------------------
+  loadStructure: (sdf_string, format)->
+    console.log 'LOADING STRUCTURE: ', sdf_string
+    console.log 'SUPPORTED FORMATS: ', @marvinSketcherInstance.getSupportedFormats()
     @marvin_iframe.hide()
     @preloader.show()
     load_structure = ->
-        @marvinSketcherInstance.pasteStructure('mol', sdf_string)
-        @preloader.hide()
-        @marvin_iframe.show()
+      @marvinSketcherInstance.pasteStructure(format, sdf_string)
+      @preloader.hide()
+      @marvin_iframe.show()
 
     setTimeout(load_structure.bind(@), 1000)
 
