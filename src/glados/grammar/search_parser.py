@@ -353,6 +353,8 @@ class TermsVisitor(PTNodeVisitor):
 
 
 def parse_query_str(query_string: str):
+    if len(query_string.strip()) == 0:
+        return {}
     query_string = re.sub(r'\s+', ' ', query_string)
     # print(query_string)
     pt = parser.parse(query_string)
@@ -362,7 +364,7 @@ def parse_query_str(query_string: str):
     return json_result
 
 
-parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
+# parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
 
 longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+" \
                         r"]OC(CO)C(O)C(OC2OC(CO)C(O)C(O)C2O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC3OC(CO" \
@@ -385,46 +387,46 @@ longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O
                         r"c%29)n%16)cc%15)cc%13)P(=O)(O)[O-]"
 
 
-t_ini = time.time()
-print(parse_query_str(
-    """
-    COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
-
-AND C NCCc1ccc(O)c(O)c1
-
-C\C(=C\C(=O)O)\C=C\C=C(/C)\C=C\C1=C(C)CCCC1(C)C
-
-and ( COC1(CN2CCC1CC2)C#CC(C#N)(c3ccccc3)c4ccccc4 or CN1C\C(=C/c2ccc(C)cc2)\C3=C(C1)C(C(=C(N)O3)C#N)c4ccc(C)cc4 )
-
-COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
-
-CC(C)C[C@H](NC(=O)[C@@H](NC(=O)[C@H](Cc1c[nH]c2ccccc12)NC(=O)[C@H]3CCCN3C(=O)C(CCCCN)CCCCN)C(C)(C)C)C(=O)O
-
-    (InChI=1/BrH/h1H/i1[-]1)
-    ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 and c and ccc cs or ccs or InChI=1s/BrH and c)
-    CC(C)(N)Cc1ccccc1
-    CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
-
-    VYFYYTLLBUKUHU-UHFFFAOYSA-N
-
-    Q86UW1
-
-    +json.port:\" asda asda asd \"
-    _metadata.api.json:>=10
-    _metadata.api.json:( 789 )
-    +US-68921(123) 'yes search for this mofo!! () ' aspirin eugenol ester
-
-    ChEMBL(25)
-
-    vitamin a
-
-    InChI=1/BrH/h1H/i1+1
-
-    10.1021/jm900587h
-InChI=1S/C20H28O2/c1-15(8-6-9-16(2)14-19(21)22)11-12-18-17(3)10-7-13-20(18,4)5/h6,8-9,11-12,14H,7,10,13H2,1-5H3,(H,21,22)/b9-6+,12-11+,15-8+,16-14+
-1
-    """ + longest_chembl_smiles + " "+'C'*14+'-'+'C'*10+'-C'+"  ((CCO) or (C)C(O))"
-), time.time()-t_ini)
+# t_ini = time.time()
+# print(parse_query_str(
+#     """
+#     COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
+#
+# AND C NCCc1ccc(O)c(O)c1
+#
+# C\C(=C\C(=O)O)\C=C\C=C(/C)\C=C\C1=C(C)CCCC1(C)C
+#
+# and ( COC1(CN2CCC1CC2)C#CC(C#N)(c3ccccc3)c4ccccc4 or CN1C\C(=C/c2ccc(C)cc2)\C3=C(C1)C(C(=C(N)O3)C#N)c4ccc(C)cc4 )
+#
+# COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
+#
+# CC(C)C[C@H](NC(=O)[C@@H](NC(=O)[C@H](Cc1c[nH]c2ccccc12)NC(=O)[C@H]3CCCN3C(=O)C(CCCCN)CCCCN)C(C)(C)C)C(=O)O
+#
+#     (InChI=1/BrH/h1H/i1[-]1)
+#     ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 and c and ccc cs or ccs or InChI=1s/BrH and c)
+#     CC(C)(N)Cc1ccccc1
+#     CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
+#
+#     VYFYYTLLBUKUHU-UHFFFAOYSA-N
+#
+#     Q86UW1
+#
+#     +json.port:\" asda asda asd \"
+#     _metadata.api.json:>=10
+#     _metadata.api.json:( 789 )
+#     +US-68921(123) 'yes search for this mofo!! () ' aspirin eugenol ester
+#
+#     ChEMBL(25)
+#
+#     vitamin a
+#
+#     InChI=1/BrH/h1H/i1+1
+#
+#     10.1021/jm900587h
+# InChI=1S/C20H28O2/c1-15(8-6-9-16(2)14-19(21)22)11-12-18-17(3)10-7-13-20(18,4)5/h6,8-9,11-12,14H,7,10,13H2,1-5H3,(H,21,22)/b9-6+,12-11+,15-8+,16-14+
+# 1
+#     """ + longest_chembl_smiles + " "+'C'*14+'-'+'C'*10+'-C'+"  ((CCO) or (C)C(O))"
+# ), time.time()-t_ini)
 
 # t_ini = time.time()
 # print(parse_query_str("CCO"), time.time()-t_ini)
