@@ -16,10 +16,9 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-    glados.views.PaginatedViews.PaginatedView\
-    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
-
-    resultsList.fetch()
+    $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
   @initSimilaritySearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
