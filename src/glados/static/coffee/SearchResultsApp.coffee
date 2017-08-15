@@ -41,8 +41,12 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-
     $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
+
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement) ->
+
     deferreds = resultsList.getAllResults($progressElement)
 
     # for now, we need to jump from web services to elastic
@@ -52,7 +56,6 @@ class SearchResultsApp
       queryString = glados.Utils.QueryStrings.getQueryStringForCompoundList(idsList)
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(queryString)
 
-      $browserContainer = $('.BCK-BrowserContainer')
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList
         el: $browserContainer
@@ -60,10 +63,17 @@ class SearchResultsApp
       esCompoundsList.fetch()
 
     ).fail((msg) ->
+
+        $browserContainer.hide()
         if $progressElement?
-          $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
-            msg: msg
+          # it can be a jqxr
+          if msg.status?
+            $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg)
+          else
+            $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+              msg: msg
       )
+
 
 
   # --------------------------------------------------------------------------------------------------------------------
