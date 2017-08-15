@@ -52,7 +52,12 @@ class SearchResultsApp
       queryString = glados.Utils.QueryStrings.getQueryStringForCompoundList(idsList)
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(queryString)
 
-      
+      $browserContainer = $('.BCK-BrowserContainer')
+      new glados.views.Browsers.BrowserMenuView
+        collection: esCompoundsList
+        el: $browserContainer
+
+      esCompoundsList.fetch()
 
     ).fail((msg) ->
         if $progressElement?
@@ -60,11 +65,6 @@ class SearchResultsApp
             msg: msg
       )
 
-
-    glados.views.PaginatedViews.PaginatedView\
-    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
-
-    resultsList.fetch()
 
   # --------------------------------------------------------------------------------------------------------------------
   # Graph Views
