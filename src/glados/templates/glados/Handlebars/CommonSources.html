@@ -920,5 +920,17 @@
   </div>
 </script>
 
+<script id="Handlebars-Common-StructureQuery" type="text/x-handlebars-template">
+
+ <div class="card-panel z-depth-0 green lighten-5">
+  <b>Query:</b> {{search_term}}
+  {{#if similarity}}
+   <b>Similarity:</b> {{similarity}}%
+  {{/if}}
+  <a class="menu-button">Edit</a>
+ </div>
+
+</script>
+
 
 {% endverbatim %}

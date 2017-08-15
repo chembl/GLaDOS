@@ -24,6 +24,15 @@ class SearchResultsApp
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
 
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
+      similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
+
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
 
