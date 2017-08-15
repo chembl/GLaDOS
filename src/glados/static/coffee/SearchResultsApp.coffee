@@ -25,14 +25,11 @@ class SearchResultsApp
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
 
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
-
     resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
 
-    subResView = new SimilaritySearchResultsView
-      collection: resultsList
-      el: $('#BCK-SimilaritySearchResults')
-
-    resultsList.fetch()
+    $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)

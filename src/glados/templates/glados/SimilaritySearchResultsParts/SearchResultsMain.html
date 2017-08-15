@@ -1,32 +1,17 @@
-{% extends "glados/base/base_layout.html" %}
+{% extends "glados/base/base_layout_new.html" %}
 
 {% block title %}ChEMBL{% endblock %}
 
 {% block content %}
 
 <div class="container main-container">
+  <div id="BCK-loading-messages-container"></div>
+  <h2>
+    Similarity Search Results
+  </h2>
+  {% include "glados/Browsers/DefaultBrowserContent.html" %}
+</div>
 
-  <div id="BCK-SimilaritySearchResults">
-
-    <h2>Similarity Search Results:</h2>
-
-    {% verbatim %}
-      <script id="Handlebars-SimmilarCompoundsResults-Title" type="text/x-handlebars-template">
-        Compounds similar with at least {{similarity}}% similarity:
-      </script>
-    {% endverbatim %}
-
-    <span class="similar-compounds-title" data-hb-template="Handlebars-SimmilarCompoundsResults-Title">
-    </span>
-
-    <br>
-    <br>
-
-    {% block browser_content %}
-      {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
-    {% endblock %}
-
-  </div>
 </div>
 
 
