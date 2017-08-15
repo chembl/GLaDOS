@@ -68,10 +68,10 @@
   {% block common_js_coffee_gen %}
     <!-- Helpers -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/URLProcessor.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/styling/lazy_iframes_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/styling/scrollspy_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/styling/buttons_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/styling/menu_helper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/lazy_iframes_helper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/scrollspy_helper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/buttons_helper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/SideMenuHelper.js' %}"></script>
 
 
     <!-- Backbone -->
@@ -83,6 +83,7 @@
 
     <!-- Generic List Views -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ItemCardView.js' %}"></script>
 
     <!-- Data visualisations -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/LegendModel.js' %}"></script>

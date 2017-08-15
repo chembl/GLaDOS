@@ -5,36 +5,43 @@
 ResponsiviseViewExt =
 
 
-  updateView: (debounced_render) ->
+  updateView: (debounced_render, emptyBeforeRender=true) ->
 
-    if @$vis_elem?
-      $to_empty = @$vis_elem
-    else
-      $to_empty = $(@el)
+    if emptyBeforeRender
+      if @$vis_elem?
+        $to_empty = @$vis_elem
+      else
+        $to_empty = $(@el)
 
-    $to_empty.empty()
-    @showResponsiveViewPreloader()
+      $to_empty.empty()
+
+    @showResponsiveViewPreloader(emptyBeforeRender)
     debounced_render()
 
-
   # this also binds the resize event with the repaint event.
-  setUpResponsiveRender: ->
+  setUpResponsiveRender: (emptyBeforeRender=true) ->
 
     # the render function is debounced so it waits for the size of the
     # element to be ready
     reRender = ->
+      @IS_RESPONSIVE_RENDER = true
       @render()
-      @hideResponsiveViewPreloader()
+      @IS_RESPONSIVE_RENDER = false
+      @hideResponsiveViewPreloader(emptyBeforeRender)
 
     debouncedRender = _.debounce($.proxy(reRender, @), glados.Settings.RESPONSIVE_REPAINT_WAIT)
-    updateViewProxy = $.proxy(@updateView, @, debouncedRender)
+    updateViewProxy = $.proxy(@updateView, @, debouncedRender, emptyBeforeRender)
 
     $(window).resize ->
       updateViewProxy()
 
     return updateViewProxy
 
-  showResponsiveViewPreloader: ->
+  showResponsiveViewPreloader: (emptyBeforeRender=true) ->
+
+    if not emptyBeforeRender
+      @showPreloader()
+      return
 
     if @$vis_elem?
       $base_elem = @$vis_elem
@@ -45,7 +52,11 @@ ResponsiviseViewExt =
       $base_elem.html Handlebars.compile($('#Handlebars-Common-Preloader').html())
       $base_elem.attr('data-loading', 'true')
 
-  hideResponsiveViewPreloader: ->
+  hideResponsiveViewPreloader: (emptyBeforeRender=true) ->
+
+    if not emptyBeforeRender
+      @hidePreloader()
+      return
 
     if @$vis_elem?
       $base_elem = @$vis_elem

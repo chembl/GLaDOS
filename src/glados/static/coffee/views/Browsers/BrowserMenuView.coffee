@@ -17,7 +17,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
-      @standaloneMode = arguments[0].standalone_mode == true
       @collection.on 'reset do-repaint sort', @render, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
@@ -26,14 +25,15 @@ glados.useNameSpace 'glados.views.Browsers',
       # This handles all the views this menu view handles, there is one view per view type, for example
       # {'Table': <instance of table view>}
       @allViewsPerType = {}
-      if @standaloneMode
-        @viewContainerID = @collection.getMeta('id_name')
-        @$viewContainer = $(@el).find('.BCK-BrowserCurrentViewContainer').attr('id', @viewContainerID)
-      else
-        @viewContainerID = $(@el).attr('id').replace('-menu', '')
-        console.log 'view id: ', $(@el).attr('id')
+      @viewContainerID = @collection.getMeta('id_name')
+      @$viewContainer = $(@el).find('.BCK-Items-Container').attr('id', @viewContainerID)
+
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
+
+      new glados.views.Browsers.BrowserFacetView
+        collection: @collection
+        el: $(@el).find('.BCK-Facets-Container')
 
     render: ->
       if @collection.getMeta('total_records') != 0

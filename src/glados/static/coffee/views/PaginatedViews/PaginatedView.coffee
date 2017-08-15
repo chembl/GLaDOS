@@ -7,7 +7,34 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation
     # ------------------------------------------------------------------------------------------------------------------
-  
+    POSSIBLE_CARD_SIZES_STRUCT:
+      1:
+        previous: 1
+        next: 2
+      2:
+        previous: 1
+        next: 3
+      3:
+        previous: 2
+        next: 4
+      4:
+        previous: 3
+        next: 6
+      6:
+        previous: 4
+        next: 12
+      12:
+        previous: 6
+        next: 12
+
+    getPreviousSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].previous
+    getNextSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].next
+
+    DEFAULT_CARDS_SIZES:
+      small: 12
+      medium: 6
+      large: 4
+
     initialize: () ->
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
@@ -24,13 +51,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.on 'sync', @.render, @
       else
         @collection.on 'reset do-repaint sort', @render, @
+        @collection.on 'request', @showPreloaderHideOthers, @
 
       @collection.on 'error', @handleError, @
-      @collection.on 'all', (evName) -> console.log 'EVENT: ', evName
+
+      @CURRENT_CARD_SIZES =
+        small: @DEFAULT_CARDS_SIZES.small
+        medium: @DEFAULT_CARDS_SIZES.medium
+        large: @DEFAULT_CARDS_SIZES.large
 
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
+
   
     isCards: ()->
       return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
@@ -58,6 +91,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
       'click .BCK-select-one-item': 'toggleSelectOneItem'
+      'click .BCK-zoom-in': 'zoomIn'
+      'click .BCK-zoom-out': 'zoomOut'
+      'click .BCK-reset-zoom': 'resetZoom'
   
   
     # ------------------------------------------------------------------------------------------------------------------
@@ -126,6 +162,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
+      if @isCards() and @collection.getMeta('enable_cards_zoom')
+        @fillZoomContainer()
+
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
@@ -145,6 +184,62 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     wakeUpView: ->
       @collection.setPage(1)
+
+    zoomIn: ->
+
+      @CURRENT_CARD_SIZES =
+        small: @getNextSize(@CURRENT_CARD_SIZES.small)
+        medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
+        large: @getNextSize(@CURRENT_CARD_SIZES.large)
+
+      @render()
+
+    zoomOut: ->
+
+      @CURRENT_CARD_SIZES =
+        small: @getPreviousSize(@CURRENT_CARD_SIZES.small)
+        medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
+        large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
+
+      @render()
+
+    resetZoom: ->
+
+      @CURRENT_CARD_SIZES =
+        small: @DEFAULT_CARDS_SIZES.small
+        medium: @DEFAULT_CARDS_SIZES.medium
+        large: @DEFAULT_CARDS_SIZES.large
+
+      @render()
+
+
+    mustDisableZoomIn: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @getNextSize(@CURRENT_CARD_SIZES.small) == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @getNextSize(@CURRENT_CARD_SIZES.medium) == @CURRENT_CARD_SIZES.medium
+      else
+        return @getNextSize(@CURRENT_CARD_SIZES.large) == @CURRENT_CARD_SIZES.large
+
+    mustDisableReset: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @DEFAULT_CARDS_SIZES.small == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @DEFAULT_CARDS_SIZES.medium == @CURRENT_CARD_SIZES.medium
+      else
+        return @DEFAULT_CARDS_SIZES.large == @CURRENT_CARD_SIZES.large
+
+    mustDisableZoomOut: ->
+      currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
+      if currentScreenType == glados.Settings.SMALL_SCREEN
+        return @getPreviousSize(@CURRENT_CARD_SIZES.small) == @CURRENT_CARD_SIZES.small
+      else if currentScreenType == glados.Settings.MEDIUM_SCREEN
+        return @getPreviousSize(@CURRENT_CARD_SIZES.medium) == @CURRENT_CARD_SIZES.medium
+      else
+        return @getPreviousSize(@CURRENT_CARD_SIZES.large) == @CURRENT_CARD_SIZES.large
+
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
     # ------------------------------------------------------------------------------------------------------------------
@@ -176,7 +271,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     bindFunctionLinks: ->
       $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
       visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
-      console.log 'visibleColumnsIndex: ', visibleColumnsIndex
       $linksToBind.each (i, link) ->
         $currentLink = $(@)
         alreadyBound = $currentLink.attr('data-already-function-bound')?
@@ -202,7 +296,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      applyTemplate = Handlebars.compile($('#' + $specificElemContainer.attr('data-hb-template')).html())
+      if @isCards()
+        templateID = @collection.getMeta('custom_cards_template')
+      templateID ?= $specificElemContainer.attr('data-hb-template')
+      applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
       # if it is a table, add the corresponding header
@@ -223,16 +320,31 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       for item in @collection.getCurrentPage()
 
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
-        idColumnValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+        idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
-        newItemContent = applyTemplate
-          base_check_box_id: idColumnValue
-          is_selected: @collection.itemIsSelected(idColumnValue)
+        templateParams =
+          base_check_box_id: idValue
+          is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
 
-        $appendTo.append($(newItemContent))
+        if @isCards()
+          templateParams.small_size = @CURRENT_CARD_SIZES.small
+          templateParams.medium_size = @CURRENT_CARD_SIZES.medium
+          templateParams.large_size = @CURRENT_CARD_SIZES.large
+
+        $newItemElem = $(applyTemplate(templateParams))
+        $appendTo.append($newItemElem)
+
+        CustomElementView = @collection.getMeta('custom_cards_item_view')
+        if CustomElementView?
+          ItemModel = @collection.getMeta('model')
+          model = new ItemModel
+            id: idValue
+          new CustomElementView
+            model: model
+            el: $newItemElem
 
       @fixCardHeight($appendTo)
 
@@ -331,6 +443,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         #TODO: complete this function!
   
       $win.scroll _.throttle(pinUnpinTableHeader, 200)
+
+    fillZoomContainer: ->
+
+      $zoomBtnsContainer = $(@el).find('.BCK-zoom-buttons-container')
+      glados.Utils.fillContentForElement $zoomBtnsContainer,
+        disable_zoom_in: @mustDisableZoomIn()
+        disable_reset: @mustDisableReset()
+        disable_zoom_out: @mustDisableZoomOut()
   
     fillPaginators: ->
   

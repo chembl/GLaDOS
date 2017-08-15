@@ -39,15 +39,9 @@
 </header>
 
 
-<main class="with-sidenav">
+<main>
 
   {% include "glados/base/modals/generated_modals_container.html" %}
-
-  <!-- Side Navbar-->
-  {% block side_nav %}
-    {% include "glados/base/side_nav.html" %}
-  {% endblock %}
-
 
   {% block content %}{% endblock %}
 
@@ -94,8 +88,6 @@
 <script type="text/javascript" charset="utf-8">
 
   $(document).ready(function () {
-
-    SideMenuHelper.initializeSideMenu();
 
     {% block custom_js_inline %}{% endblock %}
 

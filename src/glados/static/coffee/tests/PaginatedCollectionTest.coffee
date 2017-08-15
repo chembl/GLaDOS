@@ -318,37 +318,81 @@ describe "Paginated Collection", ->
       expect(sortingInfo[sortingComparator]?).toBe(true)
       expect(sortingInfo[sortingComparator].order).toBe('desc')
 
-    describe 'After selecting a facet', ->
+    describe 'Faceting: ', ->
 
       beforeAll (done) ->
 
         TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
       beforeEach ->
+        esList.clearAllFacetsSelections()
+
+      it 'starts with all facets unselected', ->
+
+        facetGroups = esList.getFacetsGroups()
+        for fGroupKey, fGroup of facetGroups
+          for fKey, fData of fGroup.faceting_handler.faceting_data
+            expect(fData.selected).toBe(false)
+
+      it 'clears all facets selection', ->
 
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'full_mwt'
-        testFacetKey = '[0 - 122)'
+        testFacetKey = '[0-122)'
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
-        esList.setMeta('facets_changed', true)
-        esList.fetch(options=undefined, testMode=true)
 
-      it 'Updates the request data as the pagination moves', ->
+        esList.clearAllFacetsSelections()
 
-        totalRecords = 100
-        esList.setMeta('total_records', totalRecords)
-        pageSize = 10
-        esList.setMeta('page_size', pageSize)
-        totalPages = Math.ceil(totalRecords / pageSize)
-        esList.setMeta('total_pages', totalPages)
+        for fGroupKey, fGroup of facetGroups
+          for fKey, fData of fGroup.faceting_handler.faceting_data
+            expect(fData.selected).toBe(false)
 
-        testIteratesPages(esList, pageSize, totalPages)
+      it 'selects one facet', ->
 
-      it 'updates the request data as the pagination moves, with different pager sizes', ->
+        facetGroups = esList.getFacetsGroups()
+        testFacetGroupKey = 'full_mwt'
+        testFacetKey = '[0-122)'
+        facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
+        facetingHandler.toggleKeySelection(testFacetKey)
 
-        totalRecords = 100
-        testIteratesPagesWithDifferentPageSizes(esList, totalRecords)
+        expect(facetGroups[testFacetGroupKey].faceting_handler.faceting_data[testFacetKey].selected).toBe(true)
+
+
+      describe 'After selecting a facet', ->
+
+        beforeAll (done) ->
+
+          esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
+          glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
+          ]
+          TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
+
+        beforeEach ->
+
+          facetGroups = esList.getFacetsGroups()
+          testFacetGroupKey = 'full_mwt'
+          testFacetKey = '[0-122)'
+          facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
+          facetingHandler.toggleKeySelection(testFacetKey)
+          esList.setMeta('facets_changed', true)
+          esList.fetch(options=undefined, testMode=true)
+
+        it 'Updates the request data as the pagination moves', ->
+
+          totalRecords = 100
+          esList.setMeta('total_records', totalRecords)
+          pageSize = 10
+          esList.setMeta('page_size', pageSize)
+          totalPages = Math.ceil(totalRecords / pageSize)
+          esList.setMeta('total_pages', totalPages)
+
+          testIteratesPages(esList, pageSize, totalPages)
+
+        it 'updates the request data as the pagination moves, with different pager sizes', ->
+
+          totalRecords = 100
+          testIteratesPagesWithDifferentPageSizes(esList, totalRecords)
 
   #TODO: tests for sorting and filtering search
   describe "An elasticsearch collection initialised from a custom querystring", ->

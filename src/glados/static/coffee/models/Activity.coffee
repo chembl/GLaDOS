@@ -1,7 +1,6 @@
 Activity = Backbone.Model.extend
 
   initialize: ->
-    console.log 'initialising activity!'
 
   parse: (response) ->
     response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'

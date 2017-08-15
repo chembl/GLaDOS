@@ -1,7 +1,10 @@
 Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
+  idAttribute: 'molecule_chembl_id'
   initialize: ->
-    @url = glados.Settings.WS_BASE_URL + 'molecule/' + @get('molecule_chembl_id') + '.json'
+    id = @get('id')
+    id ?= @get('molecule_chembl_id')
+    @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
   parse: (response) ->
 
@@ -79,7 +82,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
     filterForTargets = '_metadata.related_compounds.chembl_ids.%5C*:' + response.molecule_chembl_id
-    response.targets_url = Compound.getCompoundsListURL(filterForTargets)
+    response.targets_url = Target.getTargetsListURL(filterForTargets)
 
     return response;
 
@@ -369,12 +372,19 @@ Compound.COLUMNS_SETTINGS = {
   ]
   RESULTS_LIST_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME
+  ]
+  MINI_REPORT_CARD:[
+    Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.SYNONYMS,
     Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT_CARD,
-    Compound.COLUMNS.RO5_CARD,
+    Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.NUM_TARGETS
+    Compound.COLUMNS.PSA,
+    Compound.COLUMNS.HBA,
+    Compound.COLUMNS.HBD,
+    Compound.COLUMNS.RO5
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,
@@ -401,12 +411,17 @@ Compound.COLUMNS_SETTINGS = {
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
     Compound.COLUMNS.CHEMBL_ID,
   ]
+  TEST: [
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME
+    Compound.COLUMNS.MAX_PHASE,
+  ]
 }
 
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+  COLUMNS: Compound.COLUMNS_SETTINGS.MINI_REPORT_CARD
 
 Compound.getCompoundsListURL = (filter) ->
 

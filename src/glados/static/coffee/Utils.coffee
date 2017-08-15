@@ -105,6 +105,19 @@ glados.useNameSpace 'glados',
 
       $element.html templateFunction(paramsObj)
 
+    getContentFromTemplate: (templateID, paramsObj={}) ->
+
+      templateSelector = '#' + templateID
+
+      if not glados.Utils.cachedTemplateFunctions[templateSelector]?
+        templateFunction = Handlebars.compile($(templateSelector).html())
+        glados.Utils.cachedTemplateFunctions[templateSelector] = templateFunction
+      else
+        templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
+
+      return templateFunction(paramsObj)
+
+
     # Helper function to prevent links from navigating to an url that is inside the same js page
     # If key_up is true will override for enter listening on links
     # If key_up is false will override for click listening on links
@@ -194,6 +207,13 @@ glados.useNameSpace 'glados',
         return Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
           msg: errorDetails
 
+    Text:
+      getTextForEllipsis: (originalText, originalWidth, containerLimit ) ->
 
-
-
+        numChars = originalText.length
+        charLength = originalWidth / numChars
+        # reduce by num numchars because font characters are not all of the same width
+        numChars = Math.ceil(containerLimit / charLength) - 2
+        textLimit = numChars - 4
+        textLimit = if textLimit < 0 then 0 else textLimit
+        return originalText[0..textLimit] + '...'
