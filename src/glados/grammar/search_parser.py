@@ -283,7 +283,7 @@ class TermsVisitor(PTNodeVisitor):
         exp = {'or': []}
         last_was_and = False
         for child_i in children:
-            str_child_i = str(child_i).strip()
+            str_child_i = str(child_i).strip().lower()
             if len(str_child_i) > 0:
                 if str_child_i == 'and':
                     last_was_and = True
@@ -304,7 +304,8 @@ class TermsVisitor(PTNodeVisitor):
         return {
             'term': term,
             'include_in_query': include_in_query,
-            'references': []
+            'references': [],
+            'exact_match_term': False
         }
 
     def visit_smiles(self, node, children):
@@ -331,16 +332,16 @@ class TermsVisitor(PTNodeVisitor):
         return term_dict
 
     def visit_property_term(self, node, children):
-        return {
-            'type': 'property_term',
-            'term': ''.join(children)
-        }
+        term = ''.join(children)
+        term_dict = self.get_term_dict(term, include_in_query=False)
+        term_dict['exact_match_term'] = True
+        return term_dict
 
     def visit_exact_match_term(self, node, children):
-        return {
-            'type': 'exact_match_term',
-            'term': ''.join(children)
-        }
+        term = ''.join(children)
+        term_dict = self.get_term_dict(term, include_in_query=False)
+        term_dict['exact_match_term'] = True
+        return term_dict
 
     def visit_single_term(self, node, children):
         term = ''.join(children)
@@ -356,11 +357,9 @@ def parse_query_str(query_string: str):
     if len(query_string.strip()) == 0:
         return {}
     query_string = re.sub(r'\s+', ' ', query_string)
-    # print(query_string)
     pt = parser.parse(query_string)
     result = arpeggio.visit_parse_tree(pt, TermsVisitor())
     json_result = json.dumps(result, indent=4)
-    # print(json_result)
     return json_result
 
 

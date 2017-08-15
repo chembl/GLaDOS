@@ -13,7 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     @NUM_INTERVALS = 6
 
-    @EMPTY_CATEGORY = 'Not Defined in CHEMBL'
+    @EMPTY_CATEGORY = '---'
     @OTHERS_CATEGORY = 'Other Categories'
     @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
 
