@@ -22,7 +22,7 @@ var MolChangeHandler = (function() {
 	
 	/*
 	 * Constructor of MolChangeHandler.
-	 * @param bind to this Marvin JS editor instance
+	 * @param bind to this Sketchers JS editor instance
 	 * @param triggered function at molchange event.
 	 * */
 	function MolChangeHandler(sketcher, onSuccess) {

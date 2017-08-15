@@ -9,12 +9,11 @@ MarvinSketcherView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
-
-  el: $('#BCK-MarvinContainer')
-
   sdf_smiles_to_load_on_ready: null
 
   initialize: (options)->
+
+    console.log 'ELEMENT: ', @el
     @preloader = $(@el).find('#marvin-preloader')
     @marvin_iframe = $(@el).find('#sketch')
     if options
@@ -113,7 +112,7 @@ MarvinSketcherView = Backbone.View.extend
     selector = $(event.currentTarget)
     percentage = selector.val()
 
-    $(@el).find('.similarity-search-threshold-text').text Handlebars.compile( $('#Handlebars-Marvin-Similarity-Percentage').html() )
+    $(@el).find('.similarity-search-threshold-text').text Handlebars.compile( $('#Handlebars-Sketchers-Similarity-Percentage').html() )
       percentage: percentage
 
 

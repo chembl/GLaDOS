@@ -925,12 +925,19 @@
  <div class="card-panel z-depth-0 green lighten-5">
   <b>Query:</b> {{search_term}}
   {{#if similarity}}
-   <b>Similarity:</b> {{similarity}}%
+   <b>Threshold:</b> {{similarity}}%
   {{/if}}
-  <a class="menu-button">Edit</a>
+  <a class="menu-button BCK-Edit-Query">Edit</a>
  </div>
 
 </script>
 
+<script id="Handlebars-Common-MarvinModal" type="text/x-handlebars-template">
+  <div id="{{id}}" class='modal' style="display: none; max-height: 100% !important ; overflow-y: hidden !important ; overflow-x: hidden !important ;">
+    {% endverbatim %}
+      {% include "glados/Sketchers/marvinSearch.html" %}
+    {% verbatim %}
+  </div>
+</script>
 
 {% endverbatim %}

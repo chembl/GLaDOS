@@ -29,6 +29,7 @@ CompoundRepresentationsView = CardView.extend
 
   renderButtons: ->
     compound_model = @model
+    thisView = @
     # Requests the ajax here to avoid conflict with the copy to clipboard
     @model.get('get_sdf_content_promise')().done( )
 
@@ -49,12 +50,24 @@ CompoundRepresentationsView = CardView.extend
     )
 
     # Editor button/link
+    $openInEditorBtn = $(@el).find('#Reps-Molfile-edit')
+    $editorModal = ButtonsHelper.generateModalFromTemplate($openInEditorBtn, 'Handlebars-Common-MarvinModal')
+
+    ButtonsHelper.initLinkButton($openInEditorBtn, 'Open Molecule Editor')
+
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-        marvinSketcherView = new MarvinSketcherView({sdf_smiles_to_load_on_ready:molfile_data})
-        marvin_iframe = $('#sketch')
-        $('#sketch', marvin_iframe.contents()).addClass('border')
+
+        if $editorModal.attr('data-marvin-initialised') != 'yes'
+          new MarvinSketcherView({
+            el: $editorModal
+            sdf_smiles_to_load_on_ready:molfile_data
+          })
+          marvin_iframe = $('#sketch')
+          $('#sketch', marvin_iframe.contents()).addClass('border')
+          $editorModal.attr('data-marvin-initialised', 'yes')
     )
+
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
         window.sessionStorage.setItem('molfile_data',molfile_data)
