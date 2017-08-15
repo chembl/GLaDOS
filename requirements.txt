@@ -8,3 +8,4 @@ pyScss
 CoffeeScript
 watchdog
 whitenoise
+requests
