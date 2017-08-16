@@ -4,10 +4,12 @@
 
 {% block content %}
 <div class="container main-container">
-  <div id="BCK-loading-messages-container"></div>
-  <h2>
+  <h3>
     Search Results
-  </h2>
+  </h3>
+  <div class="BCK-query-Container" data-hb-template="Handlebars-Common-StructureQuery">
+  </div>
+  <div id="BCK-loading-messages-container"></div>
   {% include "glados/Browsers/DefaultBrowserContent.html" %}
 </div>
 {% endblock %}

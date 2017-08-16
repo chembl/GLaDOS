@@ -16,6 +16,14 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
+
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
@@ -42,6 +50,14 @@ class SearchResultsApp
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
+
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
 
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
