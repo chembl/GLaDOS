@@ -142,9 +142,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       scores = {}
       for i in [0..generatorList.length-1]
         item = generatorList[i]
-        currentScore = item.similarity
-        currentScore ?= ((generatorList.length - i) / generatorList.length) * 100
+        if item.similarity?
+          currentScore = parseFloat(item.similarity)
+        else
+          currentScore = ((generatorList.length - i) / generatorList.length) * 100
         scores[item[idAttribute]] = currentScore
+
+      console.log '---'
+      console.log 'scores: ', scores
+      console.log '^^^'
 
       return {
         function_score:
@@ -258,6 +264,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           es_query.aggs = facets_query
 
       console.log 'Request data: ', es_query
+      console.log JSON.stringify(es_query)
       return es_query
 
     addSortingToQuery: (esQuery) ->
