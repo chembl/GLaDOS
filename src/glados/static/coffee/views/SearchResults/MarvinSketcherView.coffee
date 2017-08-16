@@ -23,6 +23,10 @@ MarvinSketcherView = Backbone.View.extend
     if options
       @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
       @smiles_to_load_on_ready = options.smiles_to_load_on_ready
+      @custom_initial_similarity = options.custom_initial_similarity
+
+    @updatePercentageText(@custom_initial_similarity) unless not @custom_initial_similarity?
+    @updatePercentageSlider(@custom_initial_similarity) unless not @custom_initial_similarity?
 
     thisView = @
     MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
@@ -98,8 +102,7 @@ MarvinSketcherView = Backbone.View.extend
   # loading structures
   # --------------------------------------------------------------------------------------------------------------------
   loadStructure: (sdf_string, format)->
-    console.log 'LOADING STRUCTURE: ', sdf_string
-    console.log 'SUPPORTED FORMATS: ', @marvinSketcherInstance.getSupportedFormats()
+
     @marvin_iframe.hide()
     @preloader.show()
     load_structure = ->
@@ -124,9 +127,16 @@ MarvinSketcherView = Backbone.View.extend
 
     selector = $(event.currentTarget)
     percentage = selector.val()
+    @updatePercentageText(percentage)
 
-    $(@el).find('.similarity-search-threshold-text').text Handlebars.compile( $('#Handlebars-Sketchers-Similarity-Percentage').html() )
+  updatePercentageText: (percentage) ->
+
+    $percentageField = $(@el).find('.similarity-search-threshold-text')
+    glados.Utils.fillContentForElement $percentageField,
       percentage: percentage
 
+  updatePercentageSlider: (percentage) ->
 
-
+    $percentageSlider = $(@el).find('.BCK-SliderContainer')
+    glados.Utils.fillContentForElement $percentageSlider,
+      percentage: percentage

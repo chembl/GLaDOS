@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       $modal = ButtonsHelper.generateModalFromTemplate($clickedElem, 'Handlebars-Common-MarvinModal')
 
       if $modal.attr('data-marvin-initialised') != 'yes'
-        marvinView = new MarvinSketcherView
+        new MarvinSketcherView
           el: $modal
           smiles_to_load_on_ready: @queryParams.search_term
+          custom_initial_similarity: @queryParams.similarity_percentage
