@@ -102,9 +102,9 @@ def expression():
             Optional(common.space_sequence),
             expression_term,
             ZeroOrMore(
-                Optional(
-                    (common.space_sequence, _(r'and|or', ignore_case=True))
-                ),
+                # Optional(
+                #     (common.space_sequence, _(r'and|or', ignore_case=True))
+                # ),
                 common.space_sequence,
                 expression_term,
                 common.term_end_lookahead
@@ -128,7 +128,7 @@ def check_chembl(term_dict: dict):
     if re_match is not None:
         chembl_id_num = re_match.group(1)
         term_dict['references'].append(
-            {'type': 'chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(chembl_id_num)]}
+            {'type': 'chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(chembl_id_num)], 'include_in_query': True}
         )
 
 
@@ -136,7 +136,8 @@ def check_integer(term_dict: dict):
     re_match = INTEGER_REGEX.match(term_dict['term'])
     if re_match is not None:
         term_dict['references'].append(
-            {'type': 'integer_chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(term_dict['term'])]}
+            {'type': 'integer_chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(term_dict['term'])],
+             'include_in_query': False}
         )
 
 
@@ -165,7 +166,7 @@ def check_doi(term_dict: dict):
                 chembl_ids.append(hit_i['_source']['document_chembl_id'])
             if chembl_ids:
                 term_dict['references'].append(
-                    {'type': 'doi', 'chembl_ids': chembl_ids}
+                    {'type': 'doi', 'chembl_ids': chembl_ids, 'include_in_query': False}
                 )
         except:
             traceback.print_exc()
@@ -194,7 +195,8 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
             chembl_ids.append(hit_i['_source']['molecule_chembl_id'])
         if chembl_ids:
             term_dict['references'].append(
-                {'type': 'inchi'+('_key' if term_is_inchi_key else ''), 'chembl_ids': chembl_ids}
+                {'type': 'inchi'+('_key' if term_is_inchi_key else ''), 'chembl_ids': chembl_ids,
+                 'include_in_query': False}
             )
     except:
         traceback.print_exc()
@@ -215,7 +217,7 @@ def check_smiles(term_dict: dict):
                 chembl_ids.append(molecule_i['molecule_chembl_id'])
             next_url_path = json_response['page_meta']['next']
         if chembl_ids:
-            term_dict['references'].append({'type': 'smiles', 'chembl_ids': chembl_ids})
+            term_dict['references'].append({'type': 'smiles', 'chembl_ids': chembl_ids, 'include_in_query': False})
     except:
         traceback.print_exc()
 
@@ -244,13 +246,12 @@ def check_unichem(term_dict: dict):
 
         if chembl_ids or unichem_cross_refs:
             term_dict['references'].append(
-                {'type': 'unichem', 'chembl_ids': chembl_ids, 'cross_references': unichem_cross_refs}
+                {'type': 'unichem', 'chembl_ids': chembl_ids, 'cross_references': unichem_cross_refs,
+                 'include_in_query': False}
             )
     except:
         print(term_dict)
         traceback.print_exc()
-
-
 
 
 class TermsVisitor(PTNodeVisitor):
@@ -281,22 +282,31 @@ class TermsVisitor(PTNodeVisitor):
 
     def visit_expression(self, node, children):
         exp = {'or': []}
-        last_was_and = False
+        previous_single_term_lc = None
         for child_i in children:
-            str_child_i = str(child_i).strip().lower()
-            if len(str_child_i) > 0:
-                if str_child_i == 'and':
-                    last_was_and = True
-                elif str_child_i != 'or':
-                    if last_was_and:
-                        if type(['or'][-1]) == dict and 'and' in exp['or'][-1]:
-                            exp['or'][-1]['and'].append(child_i)
-                        else:
-                            exp['or'][-1] = {'and': [exp['or'][-1], child_i]}
+            str_child_i_lc = str(child_i).strip().lower()
+            term_dict = None
+            if len(str_child_i_lc) > 0:
 
-                        last_was_and = False
+                if str_child_i_lc == 'and' or str_child_i_lc == 'or':
+                    term_dict = self.get_term_dict(str(child_i).strip(), include_in_query=False)
+                    check_unichem(term_dict)
+                last_term_is_and_group = len(exp['or']) > 0 and type(exp['or'][-1]) == dict and 'and' in exp['or'][-1]
+                if str_child_i_lc == 'and' and not last_term_is_and_group:
+                    exp['or'][-1] = {'and': [exp['or'][-1], term_dict]}
+                elif last_term_is_and_group and (str_child_i_lc == 'and' or previous_single_term_lc == 'and'):
+                    if term_dict:
+                        exp['or'][-1]['and'].append(term_dict)
+                    else:
+                        exp['or'][-1]['and'].append(child_i)
+                else:
+                    if term_dict:
+                        exp['or'].append(term_dict)
                     else:
                         exp['or'].append(child_i)
+                previous_single_term_lc = str_child_i_lc
+        if len(exp['or']) == 1:
+            return exp['or'][0]
         return exp
 
     @staticmethod
@@ -305,7 +315,8 @@ class TermsVisitor(PTNodeVisitor):
             'term': term,
             'include_in_query': include_in_query,
             'references': [],
-            'exact_match_term': False
+            'exact_match_term': False,
+            'filter_term': False
         }
 
     def visit_smiles(self, node, children):
@@ -333,19 +344,22 @@ class TermsVisitor(PTNodeVisitor):
 
     def visit_property_term(self, node, children):
         term = ''.join(children)
-        term_dict = self.get_term_dict(term, include_in_query=False)
-        term_dict['exact_match_term'] = True
+        term_dict = self.get_term_dict(term)
+        term_dict['filter_term'] = True
         return term_dict
 
     def visit_exact_match_term(self, node, children):
         term = ''.join(children)
-        term_dict = self.get_term_dict(term, include_in_query=False)
+        term_dict = self.get_term_dict(term)
         term_dict['exact_match_term'] = True
         return term_dict
 
     def visit_single_term(self, node, children):
         term = ''.join(children)
-        term_dict = self.get_term_dict(term, include_in_query=False)
+        term_lc = term.lower()
+        if term_lc == 'or' or term_lc == 'and':
+            return term
+        term_dict = self.get_term_dict(term)
         check_unichem(term_dict)
         check_chembl(term_dict)
         check_integer(term_dict)

@@ -88,42 +88,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # Elastic Search Query structure
 # ------------------------------------------------------------------------------------------------------------------
 
-    getSingleTermQuery: (single_term)->
-      single_term_query = {bool: {should: []}}
-      single_term_query.bool.should.push {
-        multi_match:
-          fields: [
-            "*.std_analyzed^10",
-            "*.eng_analyzed^5"
-          ],
-          query: single_term,
-          boost: 1
-      }
-      single_term_query.bool.should.push {
-        multi_match:
-          fields: [
-            "*.std_analyzed^10",
-            "*.eng_analyzed^5"
-          ],
-          query: single_term,
-          boost: 0.1,
-          fuzziness : (if @getMeta('fuzzy-search')? and @getMeta('fuzzy-search') == true then 'AUTO'  else 0)
-      }
-      if single_term.length >= 4
-        single_term_query.bool.should.push {
-          constant_score:
-            query:
-              multi_match:
-                fields: [
-                  "*.pref_name_analyzed^1.3",
-                  "*.alt_name_analyzed",
-                ],
-                query: single_term,
-                minimum_should_match: "80%"
-            boost: 100
-        }
-      return single_term_query
-
 # given a list of chembl ids, it gives the request data to query for only those ids
     getRequestDataForChemblIDs: (page, pageSize, idsList) ->
       return {
@@ -133,50 +97,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           terms:
             molecule_chembl_id: idsList
       }
-
-    getNormalSearchQuery: ()->
-      singular_terms = @getMeta('singular_terms')
-      exact_terms = @getMeta('exact_terms')
-      exact_terms_joined = null
-      if singular_terms.length == 0 and exact_terms.length == 0
-        exact_terms_joined = '*'
-      else if exact_terms.length == 0
-        exact_terms_joined = ''
-      else
-        exact_terms_joined = exact_terms.join(' ')
-      by_term_query = {
-        bool:
-          minimum_should_match: "70%"
-          boost: 100
-          should: []
-      }
-      for term_i in singular_terms
-        term_i_query = @getSingleTermQuery(term_i)
-        by_term_query.bool.should.push(term_i_query)
-
-
-      search_query ={
-        bool:
-          should: [
-            {
-              query_string:
-                fields: [
-                  "*.std_analyzed^10",
-                  "*.keyword^1000",
-                  "*.lower_case_keyword^1000"
-                  "*.entity_id^100000",
-                  "*.id_reference^1000",
-                  "*.chembl_id^10000",
-                  "*.chembl_id_reference^5000"
-                ]
-                fuzziness: 0
-                query: exact_terms_joined
-            }
-          ]
-      }
-      if singular_terms.length > 0
-        search_query.bool.should.push(by_term_query)
-      return search_query
 
 # generates an object with the data necessary to do the ES request
 # customPage: set a customPage if you want a page different than the one set as current
@@ -210,12 +130,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         }
       # Normal Search query
       else
-        es_query.query.bool.must = @getNormalSearchQuery()
+        es_query.query.bool.must = @getMeta('es_list_query')
 
-      # Includes the filter query by query filter terms and selected facets
-      filter_query = @getFilterQuery(facets_filtered)
-      if filter_query
-        es_query.query.bool.filter = [filter_query]
+      # Includes the selected facets filter
+      if facets_filtered
+        es_query.query.bool.filter = @getFacetFilterQuery()
 
 
       if request_facets
@@ -244,34 +163,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       esQuery.sort = sortList
 
-
-    getFilterQuery: (facets_filtered) ->
-      filter_query = {bool: {must: []}}
-# TODO: UPDATE TO GRAMMAR HANDLING OF SEARCH  EXACT TERMS
-#      filter_terms = @getMeta("filter_terms")
-#      if filter_terms and filter_terms.length > 0
-#        filter_terms_joined = filter_terms.join(' ')
-#        filter_query.bool.must.push(
-#          {
-#            query_string:
-#              fields: [
-#                "*"
-#              ]
-#              fuzziness: 0
-#              query: filter_terms_joined
-#          }
-#        )
-      if facets_filtered
-        faceting_handlers = []
-        for facet_group_key, facet_group of @meta.facets_groups
-          faceting_handlers.push(facet_group.faceting_handler)
-        facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
+    getFacetFilterQuery: () ->
+      facet_queries = []
+      faceting_handlers = []
+      for facet_group_key, facet_group of @meta.facets_groups
+        faceting_handlers.push(facet_group.faceting_handler)
+      facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
         .getAllFacetGroupsSelectedQuery(faceting_handlers)
-        if facets_groups_query
-          filter_query.bool.must.push facets_groups_query
-      if filter_query.bool.must.length == 0
-        return null
-      return filter_query
+      if facets_groups_query
+        facet_queries.push facets_groups_query
+      return facet_queries
 
     getFacetsGroupsAggsQuery: (facets_first_call)->
       non_selected_facets_groups = @getFacetsGroups(false)
@@ -367,13 +268,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # Search functions
 # ------------------------------------------------------------------------------------------------------------------
 
-    search: (singular_terms, exact_terms, filter_terms)->
-      singular_terms = if _.isUndefined(singular_terms) then [] else singular_terms
-      exact_terms = if _.isUndefined(exact_terms) then [] else exact_terms
-      filter_terms = if _.isUndefined(filter_terms) then [] else filter_terms
-      @setMeta('singular_terms', singular_terms)
-      @setMeta('exact_terms', exact_terms)
-      @setMeta('filter_terms', filter_terms)
+    search: (es_list_query)->
+      es_list_query = if _.isUndefined(es_list_query) then {bool:{should:[],filter:[]}} else es_list_query
+      @setMeta('es_list_query', es_list_query)
       @invalidateAllDownloadedResults()
       @unSelectAll()
       @clearAllResults()
