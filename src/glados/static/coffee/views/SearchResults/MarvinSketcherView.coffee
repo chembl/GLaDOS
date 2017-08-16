@@ -41,7 +41,7 @@ MarvinSketcherView = Backbone.View.extend
         $.get(sdfURL).done( (sdf) ->
           thisView.loadStructure(sdf, @SDF_FORMAT)
         )
-        
+
     ), (error) ->
       alert 'Loading of the sketcher failed' + error
 
