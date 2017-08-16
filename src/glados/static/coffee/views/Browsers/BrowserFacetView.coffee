@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
+      @collection.on 'reset', @checkIfNoItems, @
 
       @initializeHTMLStructure(emptyBeforeRender=true)
       @showPreloader()
@@ -48,6 +49,21 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
+    hideAll: ->
+
+      $(@el).find('.BCK-Preloader-Container').hide()
+      $(@el).find('.BCK-FacetsContent').hide()
+
+    checkIfNoItems: ->
+
+      console.log 'CHECK BROWSER FACET VIEW! ', @collection.getMeta('total_records')
+
+      totalRecords = @collection.getMeta('total_records')
+      if totalRecords == 0
+        @hideAll()
+        return true
+      return false
+
     initAllHistograms: ->
 
       @HISTOGRAM_WIDTH = $(@el).width()
@@ -67,6 +83,9 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers.each((i) ->thisView.initHistogram($(@)))
 
     render: ->
+
+      if @checkIfNoItems()
+        return
 
       if @IS_RESPONSIVE_RENDER
         @initializeHTMLStructure()

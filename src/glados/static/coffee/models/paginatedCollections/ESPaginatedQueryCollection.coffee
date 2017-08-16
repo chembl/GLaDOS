@@ -138,15 +138,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       idAttribute = @getMeta('model').ID_COLUMN.comparator
       generatorList = @getMeta('generator_items_list')
+
+
       idsList = (item[idAttribute] for item in generatorList)
       scores = {}
-      for i in [0..generatorList.length-1]
-        item = generatorList[i]
-        if item.similarity?
-          currentScore = parseFloat(item.similarity)
-        else
-          currentScore = ((generatorList.length - i) / generatorList.length) * 100
-        scores[item[idAttribute]] = currentScore
+      if generatorList.length > 0
+        for i in [0..generatorList.length-1]
+          item = generatorList[i]
+          if item.similarity?
+            currentScore = parseFloat(item.similarity)
+          else
+            currentScore = ((generatorList.length - i) / generatorList.length) * 100
+          scores[item[idAttribute]] = currentScore
 
       console.log '---'
       console.log 'scores: ', scores
