@@ -134,6 +134,34 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             molecule_chembl_id: idsList
       }
 
+    getQueryForGeneratorList: ->
+
+      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      generatorList = @getMeta('generator_items_list')
+      idsList = (item[idAttribute] for item in generatorList)
+      scores = {}
+      for i in [0..generatorList.length-1]
+        item = generatorList[i]
+        currentScore = item.similarity
+        currentScore ?= ((generatorList.length - i) / generatorList.length) * 100
+        scores[item[idAttribute]] = currentScore
+
+      return {
+        function_score:
+          query:
+            query_string:
+              query: glados.Utils.QueryStrings.getQueryStringForItemsList(idsList, idAttribute)
+          functions: [
+
+           script_score:
+             script:
+               lang: "painless",
+               params:
+                 scores: scores
+               inline: "String mcid=doc['" + idAttribute + "'].value; if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
+         ]
+      }
+
     getNormalSearchQuery: ()->
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
@@ -202,6 +230,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
+      generatorList = @getMeta('generator_items_list')
       if @getMeta('use_custom_query_string')
         es_query.query.bool.must = {
           query_string:
@@ -209,6 +238,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             query: customQueryString
         }
       # Normal Search query
+      else if generatorList?
+        console.log 'USING GENERATOR LIST!'
+        es_query.query.bool.must = @getQueryForGeneratorList()
       else
         es_query.query.bool.must = @getNormalSearchQuery()
 
@@ -224,6 +256,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
+
+      console.log 'Request data: ', es_query
       return es_query
 
     addSortingToQuery: (esQuery) ->

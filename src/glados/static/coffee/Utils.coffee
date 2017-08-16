@@ -219,6 +219,5 @@ glados.useNameSpace 'glados',
         return originalText[0..textLimit] + '...'
 
     QueryStrings:
-      getQueryStringForCompoundList: (chemblIDs) ->
-
-        return 'molecule_chembl_id:(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'
+      getQueryStringForItemsList: (chemblIDs, idAttribute) ->
+        return idAttribute + ':(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'

@@ -72,10 +72,9 @@ class SearchResultsApp
 
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
-      idsList = (item.molecule_chembl_id for item in resultsList.allResults)
 
-      queryString = glados.Utils.QueryStrings.getQueryStringForCompoundList(idsList)
-      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(queryString)
+      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
+        resultsList.allResults)
 
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList
