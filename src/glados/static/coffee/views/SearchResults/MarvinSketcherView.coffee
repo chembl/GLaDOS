@@ -24,6 +24,7 @@ MarvinSketcherView = Backbone.View.extend
       @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
       @smiles_to_load_on_ready = options.smiles_to_load_on_ready
       @custom_initial_similarity = options.custom_initial_similarity
+      @chembl_id_to_load_on_ready = options.chembl_id_to_load_on_ready
 
     @updatePercentageText(@custom_initial_similarity) unless not @custom_initial_similarity?
     @updatePercentageSlider(@custom_initial_similarity) unless not @custom_initial_similarity?
@@ -35,6 +36,12 @@ MarvinSketcherView = Backbone.View.extend
         thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
       else if thisView.smiles_to_load_on_ready
         thisView.loadStructure(thisView.smiles_to_load_on_ready, @SMILES_FORMAT)
+      else if thisView.chembl_id_to_load_on_ready
+        sdfURL = Compound.getSDFURL(thisView.chembl_id_to_load_on_ready)
+        $.get(sdfURL).done( (sdf) ->
+          thisView.loadStructure(sdf, @SDF_FORMAT)
+        )
+        
     ), (error) ->
       alert 'Loading of the sketcher failed' + error
 

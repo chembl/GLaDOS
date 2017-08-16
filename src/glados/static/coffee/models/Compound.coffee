@@ -90,6 +90,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 Compound.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
 
+Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
+
 Compound.COLUMNS = {
   CHEMBL_ID: {
       'name_to_show': 'ChEMBL ID'
