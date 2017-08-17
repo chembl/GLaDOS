@@ -38,10 +38,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'parsing: ', hitI
         currentItemData = hitI._source
         console.log 'parsing: currentItemData: ', currentItemData
-        currentItemData.score = hitI._score
+        currentItemData._score = hitI._score
 
-        if not currentItemData.score? and scores?
-          currentItemData.score = scores[currentItemData[idAttribute]]
+        if not currentItemData._score? and scores?
+          currentItemData._score = scores[currentItemData[idAttribute]]
 
         jsonResultsList.push(currentItemData)
 

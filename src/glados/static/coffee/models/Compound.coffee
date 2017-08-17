@@ -146,7 +146,7 @@ Compound.COLUMNS = {
     }
   SIMILARITY_ELASTIC: {
       'name_to_show': 'Similarity'
-      'comparator': 'score'
+      'comparator': '_score'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
