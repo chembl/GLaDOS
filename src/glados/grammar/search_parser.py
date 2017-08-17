@@ -58,7 +58,7 @@ def property_term():
 
 
 def json_property_path_segment():
-    return OneOrMore(_(r'[a-zA-Z0-9_\-]'))
+    return OneOrMore(_(r'[a-z0-9_\-]'))
 
 
 def single_term():
@@ -71,8 +71,8 @@ def exact_match_term():
             (
               Optional(['+', '-']),
               [
-                 ('"', _('[^"]+'), '"'),
-                 ("'", _("[^']+"), "'")
+                 ('"', _(r'((\\")|[^"])+'), '"'),
+                 ("'", _(r"((\\')|[^'])+"), "'")
               ]
             ),
             (
@@ -123,6 +123,20 @@ DOI_REGEX = re.compile(__DOI_REGEX_STR)
 INTEGER_REGEX = re.compile(r'^\d+$')
 
 
+def adjust_exact_term(exact_term: str) -> str:
+    if exact_term[-1] == '"':
+        return exact_term
+    elif exact_term[-1] == "'":
+        first_char = 1
+        prefix = ""
+        if exact_term[0] == '+' or exact_term[0] == '-':
+            first_char = 2
+            prefix = exact_term[0]
+        return prefix+'"'+exact_term[first_char:-1].replace(r"\'", r'\"')+'"'
+    else:
+        return exact_term[0]+'"'+exact_term[1:]+'"'
+
+
 def check_chembl(term_dict: dict):
     re_match = CHEMBL_REGEX.match(term_dict['term'])
     if re_match is not None:
@@ -137,7 +151,7 @@ def check_integer(term_dict: dict):
     if re_match is not None:
         term_dict['references'].append(
             {'type': 'integer_chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(term_dict['term'])],
-             'include_in_query': False}
+             'include_in_query': True}
         )
 
 
@@ -166,7 +180,7 @@ def check_doi(term_dict: dict):
                 chembl_ids.append(hit_i['_source']['document_chembl_id'])
             if chembl_ids:
                 term_dict['references'].append(
-                    {'type': 'doi', 'chembl_ids': chembl_ids, 'include_in_query': False}
+                    {'type': 'doi', 'chembl_ids': chembl_ids, 'include_in_query': True}
                 )
         except:
             traceback.print_exc()
@@ -196,7 +210,7 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
         if chembl_ids:
             term_dict['references'].append(
                 {'type': 'inchi'+('_key' if term_is_inchi_key else ''), 'chembl_ids': chembl_ids,
-                 'include_in_query': False}
+                 'include_in_query': True}
             )
     except:
         traceback.print_exc()
@@ -217,7 +231,7 @@ def check_smiles(term_dict: dict):
                 chembl_ids.append(molecule_i['molecule_chembl_id'])
             next_url_path = json_response['page_meta']['next']
         if chembl_ids:
-            term_dict['references'].append({'type': 'smiles', 'chembl_ids': chembl_ids, 'include_in_query': False})
+            term_dict['references'].append({'type': 'smiles', 'chembl_ids': chembl_ids, 'include_in_query': True})
     except:
         traceback.print_exc()
 
@@ -247,7 +261,7 @@ def check_unichem(term_dict: dict):
         if chembl_ids or unichem_cross_refs:
             term_dict['references'].append(
                 {'type': 'unichem', 'chembl_ids': chembl_ids, 'cross_references': unichem_cross_refs,
-                 'include_in_query': False}
+                 'include_in_query': True}
             )
     except:
         print(term_dict)
@@ -350,6 +364,7 @@ class TermsVisitor(PTNodeVisitor):
 
     def visit_exact_match_term(self, node, children):
         term = ''.join(children)
+        term = adjust_exact_term(term)
         term_dict = self.get_term_dict(term)
         term_dict['exact_match_term'] = True
         return term_dict
