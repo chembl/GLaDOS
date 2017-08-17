@@ -255,7 +255,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         }
       # Normal Search query
       else if generatorList?
-        console.log 'USING GENERATOR LIST!'
         es_query.query.bool.must = @getQueryForGeneratorList()
       else
         es_query.query.bool.must = @getNormalSearchQuery()
@@ -287,7 +286,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       sortList = []
 
       columns = @getAllColumns()
-      console.log 'columns: ', columns
       for col in columns
 
         if col.is_sorting? and col.is_sorting !=0
