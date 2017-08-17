@@ -12,7 +12,16 @@
     </div>
     <div class="container">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">ChEMBL
+
+        <a href="{% url 'main' %}" class="chembl-logo-link hide-on-large-only">
+          <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}" />
+        </a>
+
+        <a id='NEW-Logo-img' href="{% url 'main' %}" class="chembl-logo-link-new" style="display: none">
+          <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}" />
+        </a>
+
+        <a href="{% url 'main' %}" class="brand-logo">ChEMBL
           <small><span class="icon icon-generic" data-icon=">"></span></small>
         </a>
         <ul class="right hide-on-med-and-down">
