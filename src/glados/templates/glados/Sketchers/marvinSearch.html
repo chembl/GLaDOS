@@ -1,0 +1,47 @@
+{% load static %}
+<div id="marvin-preloader" class="row" style="margin: 20px; display: none">
+  Loading molfile . . .
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
+</div>
+<iframe id="sketch" src="{% static 'marvinjs/editorws.html' %}"
+        style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
+<div class="row marvinjs-buttons">
+  <div class="col offset-s1  s3 center-align">
+    <a class="waves-effect waves-light btn-chembl teal flexmatch-search-btn"><i class="icon icon-functional"
+                                                                             data-icon="1"></i>Search</a>
+  </div>
+  <div class="col s4 center-align">
+    <a class="waves-effect waves-light btn-chembl teal similarity-search-btn"><i class="icon icon-functional"
+                                                                             data-icon="1"></i>Similarity</a>
+  </div>
+  <div class="col s3 center-align">
+    <a class="waves-effect waves-light btn-chembl teal substructure-search-btn"><i class="icon icon-functional"
+                                                                             data-icon="1"></i>Substructure</a>
+  </div>
+
+</div>
+<div class="row">
+
+  <div class="col offset-s4 s4" class="similarity-search-threshold">
+
+
+    <div class="similarity-search-threshold">
+
+      <p class="center-align similarity-search-threshold-text" data-hb-template="Handlebars-Marvin-Similarity-Percentage">
+        >= 95%
+      </p>
+
+      <p class="range-field col s8 offset-s2">
+        <div class="BCK-SliderContainer" data-hb-template="Handlebars-Marvin-Similarity-PercentageSlider">
+          <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="95"/>
+        </div>
+      </p>
+
+
+    </div>
+
+  </div>
+
+</div>

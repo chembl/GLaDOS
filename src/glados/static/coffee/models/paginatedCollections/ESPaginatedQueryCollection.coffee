@@ -30,8 +30,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @setMeta('fuzzy-results', true)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
+
+      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      scores = @getMeta('scores')
+
       for hitI in data.hits.hits
-        jsonResultsList.push(hitI._source)
+        currentItemData = hitI._source
+        currentItemData._score = hitI._score
+
+        if not currentItemData._score? and scores?
+          currentItemData._score = scores[currentItemData[idAttribute]]
+
+        jsonResultsList.push(currentItemData)
 
       if not @getMeta('ignore_score')
         #Triggers the event after the values have been updated
@@ -134,6 +144,40 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             molecule_chembl_id: idsList
       }
 
+    getQueryForGeneratorList: ->
+
+      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      generatorList = @getMeta('generator_items_list')
+
+      idsList = (item[idAttribute] for item in generatorList)
+      scores = {}
+      if generatorList.length > 0
+        for i in [0..generatorList.length-1]
+          item = generatorList[i]
+          if item.similarity?
+            currentScore = parseFloat(item.similarity)
+          else
+            currentScore = ((generatorList.length - i) / generatorList.length) * 100
+          scores[item[idAttribute]] = currentScore
+
+      @setMeta('scores', scores)
+
+      return {
+        function_score:
+          query:
+            query_string:
+              query: glados.Utils.QueryStrings.getQueryStringForItemsList(idsList, idAttribute)
+          functions: [
+
+           script_score:
+             script:
+               lang: "painless",
+               params:
+                 scores: scores
+               inline: "String mcid=doc['" + idAttribute + "'].value; if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
+         ]
+      }
+
     getNormalSearchQuery: ()->
       singular_terms = @getMeta('singular_terms')
       exact_terms = @getMeta('exact_terms')
@@ -202,6 +246,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
+      generatorList = @getMeta('generator_items_list')
       if @getMeta('use_custom_query_string')
         es_query.query.bool.must = {
           query_string:
@@ -209,6 +254,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             query: customQueryString
         }
       # Normal Search query
+      else if generatorList?
+        es_query.query.bool.must = @getQueryForGeneratorList()
       else
         es_query.query.bool.must = @getNormalSearchQuery()
 
@@ -224,22 +271,33 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
+
+      console.log 'Request data: ', es_query
+      console.log JSON.stringify(es_query)
       return es_query
+
+    getAllColumns: ->
+
+      defaultColumns = @getMeta('columns')
+      contextualColumns = @getMeta('contextual_properties')
+      return _.union(defaultColumns, contextualColumns)
 
     addSortingToQuery: (esQuery) ->
       sortList = []
 
-      columns = @getMeta('columns')
+      columns = @getAllColumns()
       for col in columns
-        if col.is_sorting == 1
+
+        if col.is_sorting? and col.is_sorting !=0
+
           sortObj = {}
+          if col.is_sorting == 1
+            order = 'asc'
+          if col.is_sorting == -1
+            order = 'desc'
+
           sortObj[col.comparator] =
-            order: 'asc'
-          sortList.push sortObj
-        if col.is_sorting == -1
-          sortObj = {}
-          sortObj[col.comparator] =
-            order: 'desc'
+            order: order
           sortList.push sortObj
 
       esQuery.sort = sortList
@@ -439,7 +497,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
-      columns = @getMeta('columns')
+      columns = @getAllColumns()
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
@@ -451,10 +509,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetSortData: ->
 #TODO implement sorting
 
-# organises the information of the columns that are going to be sorted.
-# returns true if the sorting needs to be descending, false otherwise.
-    setupColSorting: (columns, comparator) ->
-#TODO implement sorting
 
 # sets the term to search in the collection
 # when the collection is server side, the corresponding column and type are required.

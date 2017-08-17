@@ -217,3 +217,7 @@ glados.useNameSpace 'glados',
         textLimit = numChars - 4
         textLimit = if textLimit < 0 then 0 else textLimit
         return originalText[0..textLimit] + '...'
+
+    QueryStrings:
+      getQueryStringForItemsList: (chemblIDs, idAttribute) ->
+        return idAttribute + ':(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'

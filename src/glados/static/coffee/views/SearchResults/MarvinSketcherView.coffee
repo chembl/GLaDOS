@@ -6,24 +6,42 @@ MarvinSketcherView = Backbone.View.extend
   SUBSTRUCTURE_SEARCH: 'substructure'
   FLEXMATCH_SEARCH: 'flexmatch'
 
+  #format names in marvin
+  SDF_FORMAT: 'mol'
+  SMILES_FORMAT: 'smiles'
+
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
-
-  el: $('#BCK-MarvinContainer')
-
   sdf_smiles_to_load_on_ready: null
 
   initialize: (options)->
+
+    console.log 'INIT MARVIN VIEW!'
     @preloader = $(@el).find('#marvin-preloader')
     @marvin_iframe = $(@el).find('#sketch')
     if options
       @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
+      @smiles_to_load_on_ready = options.smiles_to_load_on_ready
+      @custom_initial_similarity = options.custom_initial_similarity
+      @chembl_id_to_load_on_ready = options.chembl_id_to_load_on_ready
+
+    @updatePercentageText(@custom_initial_similarity) unless not @custom_initial_similarity?
+    @updatePercentageSlider(@custom_initial_similarity) unless not @custom_initial_similarity?
+
     thisView = @
     MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
       thisView.marvinSketcherInstance = sketcherInstance
       if thisView.sdf_smiles_to_load_on_ready
-        thisView.loadSDF(thisView.sdf_smiles_to_load_on_ready)
+        thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
+      else if thisView.smiles_to_load_on_ready
+        thisView.loadStructure(thisView.smiles_to_load_on_ready, @SMILES_FORMAT)
+      else if thisView.chembl_id_to_load_on_ready
+        sdfURL = Compound.getSDFURL(thisView.chembl_id_to_load_on_ready)
+        $.get(sdfURL).done( (sdf) ->
+          thisView.loadStructure(sdf, @SDF_FORMAT)
+        )
+
     ), (error) ->
       alert 'Loading of the sketcher failed' + error
 
@@ -87,13 +105,17 @@ MarvinSketcherView = Backbone.View.extend
     ), (error) ->
       $(@el).find('.messages-to-user').text('There was an error: ' + error)
 
-  loadSDF: (sdf_string)->
+  # --------------------------------------------------------------------------------------------------------------------
+  # loading structures
+  # --------------------------------------------------------------------------------------------------------------------
+  loadStructure: (sdf_string, format)->
+
     @marvin_iframe.hide()
     @preloader.show()
     load_structure = ->
-        @marvinSketcherInstance.pasteStructure('mol', sdf_string)
-        @preloader.hide()
-        @marvin_iframe.show()
+      @marvinSketcherInstance.pasteStructure(format, sdf_string)
+      @preloader.hide()
+      @marvin_iframe.show()
 
     setTimeout(load_structure.bind(@), 1000)
 
@@ -112,9 +134,16 @@ MarvinSketcherView = Backbone.View.extend
 
     selector = $(event.currentTarget)
     percentage = selector.val()
+    @updatePercentageText(percentage)
 
-    $(@el).find('.similarity-search-threshold-text').text Handlebars.compile( $('#Handlebars-Marvin-Similarity-Percentage').html() )
+  updatePercentageText: (percentage) ->
+
+    $percentageField = $(@el).find('.similarity-search-threshold-text')
+    glados.Utils.fillContentForElement $percentageField,
       percentage: percentage
 
+  updatePercentageSlider: (percentage) ->
 
-
+    $percentageSlider = $(@el).find('.BCK-SliderContainer')
+    glados.Utils.fillContentForElement $percentageSlider,
+      percentage: percentage

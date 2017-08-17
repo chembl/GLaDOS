@@ -6,7 +6,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
 
-      @marvinSketcherView = new MarvinSketcherView()
+      @marvinSketcherView = new MarvinSketcherView
+        el: $('#BCK-MarvinContainer')
 
       LazyIFramesHelper.initLazyIFrames()
 
