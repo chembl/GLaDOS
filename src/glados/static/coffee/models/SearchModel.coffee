@@ -87,16 +87,17 @@ SearchModel = Backbone.Model.extend
         }
       )
       for term_i in terms
-        query.bool[bool_query].push(
-          {
-            multi_match:
-              type: "most_fields"
-              fields: fields_boosts_keyword
-              query: term_i
-              fuzziness: 0
-              boost: 10
-          }
-        )
+        if term_i.length >= 3
+          query.bool[bool_query].push(
+            {
+              multi_match:
+                type: "most_fields"
+                fields: fields_boosts_keyword
+                query: term_i
+                fuzziness: 0
+                boost: 10
+            }
+          )
     chembl_ids_et = []
     for c_id_i, i in chembl_ids
       chembl_ids_et.push('"'+c_id_i+'"'+'^'+(1.3-i*delta))
