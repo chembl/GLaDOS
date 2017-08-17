@@ -2679,3 +2679,24 @@ span.badge-primary-color-no-float {
     overflow-x: auto;
   }
 }
+
+.chembl-logo-link{
+  img{
+    padding-top: 7px;
+    width: 40px;
+
+  }
+
+}
+
+.chembl-logo-link-new{
+
+  position: absolute;
+  top: 0;
+  left: -15%;
+
+  img{
+    width: 70px;
+    padding-top: 10px;
+  }
+}
