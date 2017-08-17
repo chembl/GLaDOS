@@ -1,22 +1,17 @@
-{% extends "glados/base/base_layout.html" %}
+{% extends "glados/base/base_layout_new.html" %}
 
 {% block title %}ChEMBL{% endblock %}
 
 {% block content %}
-
 <div class="container main-container">
-
-  <div id="BCK-SubstructureSearchResults">
-
-    <h2>Substructure Search Results:</h2>
-
-    {% block browser_content %}
-      {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
-    {% endblock %}
-
+  <h3>
+    Substructure Search Results
+  </h3>
+   <div class="BCK-query-Container" data-hb-template="Handlebars-Common-StructureQuery">
   </div>
+    <div id="BCK-loading-messages-container"></div>
+  {% include "glados/Browsers/DefaultBrowserContent.html" %}
 </div>
-
 
 {% endblock %}
 

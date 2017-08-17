@@ -8,7 +8,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # --------------------------------------------------------------------------------------------------------------------
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
-    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false) ->
+    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
+      contextualProperties) ->
+
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions).extend
@@ -44,6 +46,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_query_string: customQueryString
             use_custom_query_string: useCustomQueryString
             model: esIndexSettings.MODEL
+            generator_items_list: itemsList
+            contextual_properties: contextualProperties
 
       return new indexESPagQueryCollection
 
@@ -118,9 +122,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQueryString=true)
       return list
 
-    getNewESCompoundsList: (customQueryString='*') ->
+    getNewESCompoundsList: (customQueryString='*', itemsList, contextualProperties) ->
+
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND,
-        customQueryString, useCustomQueryString=true)
+        customQueryString, useCustomQueryString=(not itemsList?), itemsList, contextualProperties)
       return list
 
     getNewESActivitiesList: (customQueryString='*') ->

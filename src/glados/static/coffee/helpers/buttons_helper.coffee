@@ -1,6 +1,25 @@
 class ButtonsHelper
 
   # ------------------------------------------------------------
+  # Modals
+  # ------------------------------------------------------------
+  # it returns the element that has the modal contents so it can be used to bind views to it.
+  @generateModalFromTemplate = ($trigger, templateID) ->
+
+    if $trigger.attr('data-modal-configured') == 'yes'
+      return
+
+    console.log 'CONFIGURING MODAL'
+    modalId = 'modal-' + (new Date()).getTime()
+    $('body').append($(glados.Utils.getContentFromTemplate(templateID, {id: modalId})))
+    $trigger.attr('href', '#' + modalId).addClass('modal-trigger')
+    $newModal = $('#' + modalId)
+    $newModal.modal()
+    $trigger.attr('data-modal-configured', 'yes')
+
+    return $newModal
+
+  # ------------------------------------------------------------
   # Download buttons
   # ------------------------------------------------------------
 
@@ -12,7 +31,8 @@ class ButtonsHelper
   @initLinkButton = (elem, tooltip, click_cb) ->
     elem.addClass('tooltipped')
     elem.attr('data-tooltip', tooltip)
-    elem.click( click_cb )
+    if click_cb?
+      elem.click( click_cb )
 
 
   ### *

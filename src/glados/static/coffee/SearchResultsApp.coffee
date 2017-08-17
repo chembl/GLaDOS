@@ -16,35 +16,86 @@ class SearchResultsApp
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-    glados.views.PaginatedViews.PaginatedView\
-    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
 
-    resultsList.fetch()
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
+
+    $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
   @initSimilaritySearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
 
-    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
+      similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
 
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
+
+    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
 
-    subResView = new SimilaritySearchResultsView
-      collection: resultsList
-      el: $('#BCK-SimilaritySearchResults')
-
-    resultsList.fetch()
+    $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC])
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
 
+    queryParams =
+      search_term: GlobalVariables.SEARCH_TERM
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      query_params: queryParams
+
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
-    glados.views.PaginatedViews.PaginatedView\
-    .getNewInfinitePaginatedView(resultsList, $('#BCK-SubstructureSearchResults'))
+    $progressElement = $('#BCK-loading-messages-container')
+    $browserContainer = $('.BCK-BrowserContainer')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
-    resultsList.fetch()
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns) ->
+
+    deferreds = resultsList.getAllResults($progressElement)
+
+    # for now, we need to jump from web services to elastic
+    $.when.apply($, deferreds).done(->
+
+
+      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
+        resultsList.allResults, contextualColumns)
+
+      new glados.views.Browsers.BrowserMenuView
+        collection: esCompoundsList
+        el: $browserContainer
+
+      esCompoundsList.fetch()
+
+    ).fail((msg) ->
+
+        $browserContainer.hide()
+        if $progressElement?
+          # it can be a jqxr
+          if msg.status?
+            $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg)
+          else
+            $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+              msg: msg
+      )
+
+
 
   # --------------------------------------------------------------------------------------------------------------------
   # Graph Views
