@@ -286,13 +286,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     getVisibleColumns: ->
 
+      columns = []
       # use special configuration config for cards if available
       if @isCards() and @collection.getMeta('columns_card').length > 0
-        return @collection.getMeta('columns_card')
+        columns = _.filter(@collection.getMeta('columns_card'), -> true)
       else
         defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
         additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-        return _.union(defaultVisibleColumns, additionalVisibleColumns)
+        columns = _.union(defaultVisibleColumns, additionalVisibleColumns)
+
+      contextualProperties = @collection.getMeta('contextual_properties')
+      contextualProperties ?= []
+      for prop in contextualProperties
+        columns.push(prop)
+
+      return columns
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 

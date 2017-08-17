@@ -46,7 +46,7 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY])
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
@@ -66,15 +66,16 @@ class SearchResultsApp
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
-  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement) ->
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns) ->
 
     deferreds = resultsList.getAllResults($progressElement)
 
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
 
+
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-        resultsList.allResults)
+        resultsList.allResults, contextualColumns)
 
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList
