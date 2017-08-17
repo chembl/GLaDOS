@@ -55,27 +55,48 @@ SearchModel = Backbone.Model.extend
     if query_string
       query.bool[bool_query].push(
         {
-          dis_max:
-            queries:[
-              {
-                multi_match:
-                  type: "phrase_prefix"
-                  fields: fields_boosts_text.concat fields_boosts_keyword
-                  query: query_string
-                  minimum_should_match: "100%",
-                  boost: 1.1
-              },
-              {
-                multi_match:
-                  type: "best_fields"
-                  fields: fields_boosts_text
-                  query: query_string
-                  fuzziness: 0
-                  minimum_should_match: "100%"
-              }
-            ]
+          multi_match:
+            type: "phrase_prefix"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            minimum_should_match: "100%",
         }
       )
+      query.bool[bool_query].push(
+        {
+          multi_match:
+            type: "most_fields"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            fuzziness: 0
+            minimum_should_match: "100%"
+            boost: 10
+
+        }
+      )
+      query.bool[bool_query].push(
+        {
+          multi_match:
+            type: "best_fields"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            fuzziness: 0
+            minimum_should_match: "100%"
+            boost: 2
+
+        }
+      )
+      for term_i in terms
+        query.bool[bool_query].push(
+          {
+            multi_match:
+              type: "most_fields"
+              fields: fields_boosts_keyword
+              query: term_i
+              fuzziness: 0
+              boost: 10
+          }
+        )
     chembl_ids_et = []
     for c_id_i, i in chembl_ids
       chembl_ids_et.push('"'+c_id_i+'"'+'^'+(1.3-i*delta))
@@ -93,9 +114,8 @@ SearchModel = Backbone.Model.extend
     if filter_terms_joined
       query.bool.filter.push({
         query_string:
-          fields: ['*']
+          fields: fields_boosts_text.concat fields_boosts_keyword
           query: filter_terms_joined
-          fuzziness: 0
       })
     if sub_queries
       query.bool[bool_query] = query.bool[bool_query].concat(sub_queries)
@@ -107,10 +127,12 @@ SearchModel = Backbone.Model.extend
       if cur_parsed_query.include_in_query
         if cur_parsed_query.exact_match_term
           terms.push(cur_parsed_query.term)
+          filter_terms.push(cur_parsed_query.term)
         else
-          terms.push(cur_parsed_query.term.replace(
-            /([\+\-\=\&\|\!\(\)\{\}\[\]\^\"\~\:\\\/])/g, '\\$1'
-          ).replace(/[\<\>]/g, ' '))
+          terms.push(cur_parsed_query.term)
+#          terms.push(cur_parsed_query.term.replace(
+#            /([\+\-\=\&\|\!\(\)\{\}\[\]\^\"\~\:\\\/])/g, '\\$1'
+#          ).replace(/[\<\>]/g, ' '))
       for ref_i in cur_parsed_query.references
         if ref_i.include_in_query
           for chembl_id_i in ref_i.chembl_ids
