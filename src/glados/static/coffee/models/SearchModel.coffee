@@ -32,10 +32,11 @@ SearchModel = Backbone.Model.extend
     filter_terms_joined = filter_terms.join(' AND ')
     query = {
       bool:
-        should:[]
-        must: []
+        must: 
+          bool:
+            should: []
+            must: []
         filter:[]
-        must_not:[]
     }
     fields_boosts_text = [
       "*.std_analyzed^1.6",
@@ -53,7 +54,7 @@ SearchModel = Backbone.Model.extend
     ]
     bool_query = if is_or then 'should'else 'must'
     if query_string
-      query.bool[bool_query].push(
+      query.bool.must.bool[bool_query].push(
         {
           multi_match:
             type: "phrase_prefix"
@@ -62,7 +63,7 @@ SearchModel = Backbone.Model.extend
             minimum_should_match: "100%",
         }
       )
-      query.bool[bool_query].push(
+      query.bool.must.bool[bool_query].push(
         {
           multi_match:
             type: "most_fields"
@@ -74,7 +75,7 @@ SearchModel = Backbone.Model.extend
 
         }
       )
-      query.bool[bool_query].push(
+      query.bool.must.bool[bool_query].push(
         {
           multi_match:
             type: "best_fields"
@@ -88,7 +89,7 @@ SearchModel = Backbone.Model.extend
       )
       for term_i in terms
         if term_i.length >= 3
-          query.bool[bool_query].push(
+          query.bool.must.bool[bool_query].push(
             {
               multi_match:
                 type: "most_fields"
@@ -102,7 +103,7 @@ SearchModel = Backbone.Model.extend
     for c_id_i, i in chembl_ids
       chembl_ids_et.push('"'+c_id_i+'"'+'^'+(1.3-i*delta))
     if chembl_ids_et.length > 0
-      query.bool[bool_query].push(
+      query.bool.must.bool[bool_query].push(
         {
           query_string:
             fields: fields_boosts_text.concat(fields_boosts_keyword)
@@ -119,7 +120,7 @@ SearchModel = Backbone.Model.extend
           query: filter_terms_joined
       })
     if sub_queries
-      query.bool[bool_query] = query.bool[bool_query].concat(sub_queries)
+      query.bool.must.bool[bool_query] = query.bool.must.bool[bool_query].concat(sub_queries)
     return query
 
   readParsedQueryRecursive: (cur_parsed_query, chembl_ids, terms, filter_terms, parent_type='or')->
@@ -128,6 +129,8 @@ SearchModel = Backbone.Model.extend
       if cur_parsed_query.include_in_query
         if cur_parsed_query.exact_match_term
           terms.push(cur_parsed_query.term)
+          filter_terms.push(cur_parsed_query.term)
+        else if cur_parsed_query.filter_term
           filter_terms.push(cur_parsed_query.term)
         else
           terms.push(cur_parsed_query.term)
