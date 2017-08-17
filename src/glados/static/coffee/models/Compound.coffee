@@ -90,6 +90,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 Compound.get_report_card_url = (chembl_id)->
   return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
 
+Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
+
 Compound.COLUMNS = {
   CHEMBL_ID: {
       'name_to_show': 'ChEMBL ID'
@@ -141,6 +143,14 @@ Compound.COLUMNS = {
       'is_sorting': 0
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>{{val}}</b>'
+    }
+  SIMILARITY_ELASTIC: {
+      'name_to_show': 'Similarity'
+      'comparator': '_score'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      is_elastic_score: true
     }
   STRUCTURE_TYPE:{
     'name_to_show': 'Structure Type'

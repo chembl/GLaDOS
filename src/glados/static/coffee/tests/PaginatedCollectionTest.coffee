@@ -305,6 +305,7 @@ describe "Paginated Collection", ->
       esList.sortCollection(sortingComparator)
       requestData = esList.getRequestData()
       sortingInfo = requestData.sort[0]
+      console.log 'sortingInfo: ', sortingInfo
       expect(sortingInfo[sortingComparator]?).toBe(true)
       expect(sortingInfo[sortingComparator].order).toBe('asc')
 
