@@ -686,7 +686,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Preloaders and content
     # ------------------------------------------------------------------------------------------------------------------
-
     showSuggestedLabel: () ->
       suggestedLabel = $(@el).find('.BCK-SuggestedLabel')
       suggestedLabel.show()

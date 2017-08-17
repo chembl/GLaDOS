@@ -30,9 +30,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @setMeta('fuzzy-results', true)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
+
+      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      scores = @getMeta('scores')
+
       for hitI in data.hits.hits
+        console.log 'parsing: ', hitI
         currentItemData = hitI._source
+        console.log 'parsing: currentItemData: ', currentItemData
         currentItemData.score = hitI._score
+
+        if not currentItemData.score? and scores?
+          currentItemData.score = scores[currentItemData[idAttribute]]
+
         jsonResultsList.push(currentItemData)
 
       if not @getMeta('ignore_score')
@@ -152,9 +162,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             currentScore = ((generatorList.length - i) / generatorList.length) * 100
           scores[item[idAttribute]] = currentScore
 
-      console.log '---'
-      console.log 'scores: ', scores
-      console.log '^^^'
+      @setMeta('scores', scores)
 
       return {
         function_score:
@@ -271,20 +279,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log JSON.stringify(es_query)
       return es_query
 
+    getAllColumns: ->
+
+      defaultColumns = @getMeta('columns')
+      contextualColumns = @getMeta('contextual_properties')
+      return _.union(defaultColumns, contextualColumns)
+
     addSortingToQuery: (esQuery) ->
       sortList = []
 
-      columns = @getMeta('columns')
+      columns = @getAllColumns()
+      console.log 'columns: ', columns
       for col in columns
-        if col.is_sorting == 1
+
+        if col.is_sorting? and col.is_sorting !=0
+
           sortObj = {}
-          sortObj[col.comparator] =
-            order: 'asc'
-          sortList.push sortObj
-        if col.is_sorting == -1
-          sortObj = {}
-          sortObj[col.comparator] =
-            order: 'desc'
+          if col.is_sorting == 1
+            order = 'asc'
+          if col.is_sorting == -1
+            order = 'desc'
+
+          sortObj[col.comparator] = order
           sortList.push sortObj
 
       esQuery.sort = sortList
@@ -484,7 +500,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
-      columns = @getMeta('columns')
+      columns = @getAllColumns()
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
@@ -496,10 +512,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetSortData: ->
 #TODO implement sorting
 
-# organises the information of the columns that are going to be sorted.
-# returns true if the sorting needs to be descending, false otherwise.
-    setupColSorting: (columns, comparator) ->
-#TODO implement sorting
 
 # sets the term to search in the collection
 # when the collection is server side, the corresponding column and type are required.

@@ -150,6 +150,7 @@ Compound.COLUMNS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      is_elastic_score: true
     }
   STRUCTURE_TYPE:{
     'name_to_show': 'Structure Type'
