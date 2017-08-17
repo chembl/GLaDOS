@@ -35,9 +35,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       scores = @getMeta('scores')
 
       for hitI in data.hits.hits
-        console.log 'parsing: ', hitI
         currentItemData = hitI._source
-        console.log 'parsing: currentItemData: ', currentItemData
         currentItemData._score = hitI._score
 
         if not currentItemData._score? and scores?
@@ -300,7 +298,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if col.is_sorting == -1
             order = 'desc'
 
-          sortObj[col.comparator] = order
+          sortObj[col.comparator] =
+            order: order
           sortList.push sortObj
 
       esQuery.sort = sortList
