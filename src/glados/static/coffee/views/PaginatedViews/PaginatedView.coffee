@@ -144,7 +144,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite() and not $(@el).is(":visible")
         return
 
-      console.log 'RENDER'
+      console.log 'col: ', @collection
+
       if @isInfinite() and @collection.getMeta('current_page') == 1
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.

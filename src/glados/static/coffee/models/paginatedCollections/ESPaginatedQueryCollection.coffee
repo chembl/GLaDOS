@@ -31,7 +31,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
       for hitI in data.hits.hits
-        jsonResultsList.push(hitI._source)
+        currentItemData = hitI._source
+        currentItemData.score = hitI._score
+        jsonResultsList.push(currentItemData)
 
       if not @getMeta('ignore_score')
         #Triggers the event after the values have been updated
@@ -138,7 +140,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       idAttribute = @getMeta('model').ID_COLUMN.comparator
       generatorList = @getMeta('generator_items_list')
-
 
       idsList = (item[idAttribute] for item in generatorList)
       scores = {}

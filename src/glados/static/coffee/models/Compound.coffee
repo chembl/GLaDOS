@@ -144,6 +144,13 @@ Compound.COLUMNS = {
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>{{val}}</b>'
     }
+  SIMILARITY_ELASTIC: {
+      'name_to_show': 'Similarity'
+      'comparator': 'score'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+    }
   STRUCTURE_TYPE:{
     'name_to_show': 'Structure Type'
     'comparator': 'structure_type'
