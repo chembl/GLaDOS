@@ -163,6 +163,11 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketGroups.attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
+      bucketGroupsEnter.append('rect')
+        .attr('height', getYForBucket.rangeBand())
+        .attr('width', @HISTOGRAM_WIDTH)
+        .classed('background-bar', true)
+
       valueRectangles = bucketGroupsEnter.append('rect')
         .classed('value-bar', true)
         .attr('x', @HISTOGRAM_WIDTH)
@@ -170,12 +175,6 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .attr('width', 0)
         .attr('height', getYForBucket.rangeBand())
-
-      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
-      valueRectangles.transition()
-        .duration(duration)
-        .attr('width', (d) -> getWidthForBucket(d.count))
-        .attr('x', (d) -> thisView.HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 
       bucketGroupsEnter.append('text')
         .text((d) -> d.key_for_humans)
@@ -189,6 +188,19 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('y', @BIN_HEIGHT * (2/3))
         .attr('text-anchor', 'end')
         .classed('count-text', true)
+
+      bucketGroupsEnter.append('rect')
+        .attr('height', getYForBucket.rangeBand())
+        .attr('width', @HISTOGRAM_WIDTH)
+        .attr('rx', @RECT_RX)
+        .attr('ry', @RECT_RY)
+        .classed('make-teal-bar', true)
+
+      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
+      valueRectangles.transition()
+        .duration(duration)
+        .attr('width', (d) -> getWidthForBucket(d.count))
+        .attr('x', (d) -> thisView.HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 
       bucketGroupsEnter.append('rect')
         .attr('height', getYForBucket.rangeBand())

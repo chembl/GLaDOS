@@ -2536,6 +2536,7 @@ span.badge-primary-color-no-float {
     opacity: 0;
   }
   .bar-group{
+
     .background-bar{
       fill: white;
       opacity: 0;
@@ -2607,27 +2608,61 @@ span.badge-primary-color-no-float {
       }
       .count-text{
         font-size: 80%;
-        fill: color('grey', 'darken-3');
+        fill: color($primary-color-name, 'darken-3');
       }
       .front-bar{
         fill: black;
         opacity: 0;
       }
-      .hover-bar{
+      .hover-bar {
         fill: none;
       }
+      .make-teal-bar{
+        fill: none;
+      }
+      .background-bar{
+        fill: none;
+      }
+
       &:not(.selected):hover{
-        .hover-bar{
-          stroke-width: 1;
-          stroke: color($primary-color-name, 'accent-4');
+
+        .value-bar{
+          fill: color($primary-color-name, 'lighten-3');
         }
+
+        .background-bar{
+          fill: color('teal', 'lighten-5');
+        }
+
       }
 
       &.selected{
-        .hover-bar{
-          stroke-width: 1;
-          stroke: $primary-color;
+
+        isolation: isolate;
+
+        .background-bar{
+          fill: color('grey', 'lighten-2');
         }
+
+        .value-bar{
+          fill: black;
+        }
+
+        .key-text{
+          fill: color('grey', 'lighten-3');;
+          mix-blend-mode: difference;
+        }
+
+        .count-text{
+          fill: color('grey', 'lighten-3');
+          mix-blend-mode: difference;
+        }
+        .make-teal-bar{
+          fill: color($primary-color-name, 'base');
+          mix-blend-mode: screen;
+        }
+
+
       }
     }
   }
