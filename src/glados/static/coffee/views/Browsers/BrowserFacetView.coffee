@@ -72,7 +72,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @BARS_MIN_WIDTH = 1
       @BAR_CONTENT_PADDING =
         left: 2
-        right: 1
+        right: 4
 
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @RECT_RX = 3
