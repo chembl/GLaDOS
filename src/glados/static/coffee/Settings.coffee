@@ -197,6 +197,8 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX = '(?:/('+elastic_search_paths.join('|')+'))?'
 
+  glados.Settings.SEARCH_RESULTS_PARSER_URL = glados.Settings.GLADOS_BASE_PATH_REL+'search_results_parser'
+
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
   glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+glados.Settings.SEARCH_RESULTS_PAGE+

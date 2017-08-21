@@ -1,19 +1,24 @@
-<div id="BCK-SRB-wrapper">
-  {% block search_med_big %}
-    {% include "glados/SearchResultsParts/search_bar_med_and_up.html" %}
-  {% endblock %}
-  <div id="BCK-SRB-med-and-up" data-hb-template="Handlebars-SearchBar-med-and-up" class="hide-on-small-only" >
+<div class="container main-container">
+  <div id="BCK-SRB-wrapper">
+    {% block search_med_big %}
+      {% include "glados/SearchResultsParts/search_bar_med_and_up.html" %}
+    {% endblock %}
+    <div id="BCK-SRB-med-and-up" data-hb-template="Handlebars-SearchBar-med-and-up" class="hide-on-small-only" >
 
-    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
+    </div>
+
+    {% block search_small %}
+      {% include "glados/SearchResultsParts/search_bar_small.html" %}
+    {% endblock %}
+    <div id="BCK-SRB-small" data-hb-template="Handlebars-SearchBar-small" class="hide-on-med-and-up">
+
+      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+    </div>
   </div>
-
-  {% block search_small %}
-    {% include "glados/SearchResultsParts/search_bar_small.html" %}
+  {% block query_explain %}
+    {% include "glados/SearchResultsParts/ESQueryExplain.html" %}
   {% endblock %}
-  <div id="BCK-SRB-small" data-hb-template="Handlebars-SearchBar-small" class="hide-on-med-and-up">
-
-    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
-  </div>
 </div>
