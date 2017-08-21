@@ -55,6 +55,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
+      if @collection.getMeta('custom_default_card_sizes')?
+        @DEFAULT_CARDS_SIZES = @collection.getMeta('custom_default_card_sizes')
+
       @CURRENT_CARD_SIZES =
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
@@ -413,11 +416,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite()
         $cards = $(@el).find('.BCK-items-container').children()
         $cards.height $(_.max($cards, (card) -> $(card).height())).height() + 'px'
-      else
+      else if @isCards()
         # This code completes rows for grids of 2 or 3 columns in the flex box css display
         total_cards = @collection.getCurrentPage().length
-        while total_cards%6 != 0
-          $appendTo.append('<div class="col s12 m6 l4"/>')
+        placeholderTemplate = '<div class="col s{{small_size}} m{{medium_size}} l{{large_size}}" />'
+        paramsObj =
+          small: @CURRENT_CARD_SIZES.small
+          medium_size: @CURRENT_CARD_SIZES.medium
+          large_size: @CURRENT_CARD_SIZES.large
+
+        placeholderContent = glados.Utils.getContentFromTemplate( undefined, paramsObj, placeholderTemplate)
+        while total_cards % 12 != 0
+
+          $appendTo.append(placeholderContent)
           total_cards++
 
     # ------------------------------------------------------------------------------------------------------------------

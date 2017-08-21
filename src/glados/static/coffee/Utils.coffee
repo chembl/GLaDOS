@@ -105,12 +105,16 @@ glados.useNameSpace 'glados',
 
       $element.html templateFunction(paramsObj)
 
-    getContentFromTemplate: (templateID, paramsObj={}) ->
+    getContentFromTemplate: (templateID, paramsObj={}, customTemplateContent) ->
 
       templateSelector = '#' + templateID
 
-      if not glados.Utils.cachedTemplateFunctions[templateSelector]?
-        templateFunction = Handlebars.compile($(templateSelector).html())
+      if not glados.Utils.cachedTemplateFunctions[templateSelector]? or customTemplateContent?
+        if customTemplateContent?
+          templateContent = customTemplateContent
+        else
+          templateContent = $(templateSelector).html()
+        templateFunction = Handlebars.compile(templateContent)
         glados.Utils.cachedTemplateFunctions[templateSelector] = templateFunction
       else
         templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
