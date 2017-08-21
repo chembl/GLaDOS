@@ -9,6 +9,7 @@ SearchModel = Backbone.Model.extend
   defaults:
     resultsListsDict: null
     queryString: ''
+    jsonQuery: null
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -41,12 +42,12 @@ SearchModel = Backbone.Model.extend
     fields_boosts_text = [
       "*.std_analyzed^1.6",
       "*.eng_analyzed^0.8",
-      "*.ws_analyzed^1.4"
-    ]
-    fields_boosts_keyword = [
+      "*.ws_analyzed^1.4",
       "*.keyword^2",
       "*.lower_case_keyword^1.5",
-      "*.alphanumeric_lowercase_keyword^1.3",
+      "*.alphanumeric_lowercase_keyword^1.3"
+    ]
+    fields_boosts_keyword = [
       "*.entity_id^2",
       "*.id_reference^1.5",
       "*.chembl_id^2",
@@ -140,7 +141,8 @@ SearchModel = Backbone.Model.extend
       for ref_i in cur_parsed_query.references
         if ref_i.include_in_query
           for chembl_id_i in ref_i.chembl_ids
-            chembl_ids.push(chembl_id_i)
+            if chembl_id_i.include_in_query
+              chembl_ids.push(chembl_id_i.chembl_id)
       return [
         cur_parsed_query.term,
         null
@@ -192,6 +194,7 @@ SearchModel = Backbone.Model.extend
       if not expression_es_query
         expression_es_query = @get_es_query_for(chembl_ids, terms, filter_terms, [])
       @set('queryString', expression_str)
+      @set('jsonQuery', parsed_query)
       @set("es_list_query", expression_es_query)
 
       console.log("SEARCH_DEBUG: expression_es_query", expression_es_query)
