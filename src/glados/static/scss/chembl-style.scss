@@ -2592,6 +2592,13 @@ span.badge-primary-color-no-float {
 .facets{
   background-color: color('grey', 'lighten-4');
 
+  border-radius: 10px;
+  padding: 6px 8px;
+
+  .filters-title{
+    margin-top: 10px;
+  }
+
   .clear-filters-button{
     margin-top: 10px;
   }
