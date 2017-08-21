@@ -137,12 +137,37 @@ def adjust_exact_term(exact_term: str) -> str:
         return exact_term[0]+'"'+exact_term[1:]+'"'
 
 
+def get_chembl_id_dict(chembl_id, cross_references=[], include_in_query=True):
+    return {
+        'chembl_id': chembl_id,
+        'cross_references': cross_references,
+        'include_in_query': include_in_query
+    }
+
+
+def get_chembl_id_list_dict(chembl_ids, cross_references=[], include_in_query=True):
+    return [
+        get_chembl_id_dict(
+            chembl_id_i,
+            cross_references[i] if i < len(cross_references) else [],
+            include_in_query
+        )
+        for i, chembl_id_i in enumerate(chembl_ids)
+    ]
+
 def check_chembl(term_dict: dict):
     re_match = CHEMBL_REGEX.match(term_dict['term'])
     if re_match is not None:
         chembl_id_num = re_match.group(1)
         term_dict['references'].append(
-            {'type': 'chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(chembl_id_num)], 'include_in_query': True}
+            {
+                'type': 'chembl_id',
+                'label': 'ChEMBL ID',
+                'chembl_ids': [
+                    get_chembl_id_dict('CHEMBL{0}'.format(chembl_id_num))
+                ],
+                'include_in_query': True
+            }
         )
 
 
@@ -150,8 +175,14 @@ def check_integer(term_dict: dict):
     re_match = INTEGER_REGEX.match(term_dict['term'])
     if re_match is not None:
         term_dict['references'].append(
-            {'type': 'integer_chembl_id', 'chembl_ids': ['CHEMBL{0}'.format(term_dict['term'])],
-             'include_in_query': True}
+            {
+                'type': 'integer_chembl_id',
+                'label': 'Integer as ChEMBL ID',
+                'chembl_ids': [
+                    get_chembl_id_dict('CHEMBL{0}'.format(term_dict['term']))
+                ],
+                'include_in_query': True
+            }
         )
 
 
@@ -180,7 +211,12 @@ def check_doi(term_dict: dict):
                 chembl_ids.append(hit_i['_source']['document_chembl_id'])
             if chembl_ids:
                 term_dict['references'].append(
-                    {'type': 'doi', 'chembl_ids': chembl_ids, 'include_in_query': True}
+                    {
+                        'type': 'doi',
+                        'label': 'DOI',
+                        'chembl_ids': get_chembl_id_list_dict(chembl_ids),
+                        'include_in_query': True
+                    }
                 )
         except:
             traceback.print_exc()
@@ -209,8 +245,12 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
             chembl_ids.append(hit_i['_source']['molecule_chembl_id'])
         if chembl_ids:
             term_dict['references'].append(
-                {'type': 'inchi'+('_key' if term_is_inchi_key else ''), 'chembl_ids': chembl_ids,
-                 'include_in_query': True}
+                {
+                    'type': 'inchi'+('_key' if term_is_inchi_key else ''),
+                    'label': 'InChI'+(' Key' if term_is_inchi_key else ''),
+                    'chembl_ids': get_chembl_id_list_dict(chembl_ids),
+                    'include_in_query': True
+                }
             )
     except:
         traceback.print_exc()
@@ -231,7 +271,14 @@ def check_smiles(term_dict: dict):
                 chembl_ids.append(molecule_i['molecule_chembl_id'])
             next_url_path = json_response['page_meta']['next']
         if chembl_ids:
-            term_dict['references'].append({'type': 'smiles', 'chembl_ids': chembl_ids, 'include_in_query': True})
+            term_dict['references'].append(
+                {
+                    'type': 'smiles',
+                    'label': 'SMILES',
+                    'chembl_ids': get_chembl_id_list_dict(chembl_ids),
+                    'include_in_query': True
+                }
+            )
     except:
         traceback.print_exc()
 
@@ -245,23 +292,35 @@ def check_unichem(term_dict: dict):
         if 'error' in json_response:
             return None
         chembl_ids = []
-        unichem_cross_refs = {}
+        unichem_not_in_chembl_cross_refs = []
         for unichem_src_i in json_response:
             cross_references = []
+            chembl_id_i = None
             for link_i in json_response[unichem_src_i]:
                 if link_i['src_id'] == '1':
-                    chembl_ids.append(link_i['src_compound_id'])
-                cross_references.append(
-                    get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
-                )
-            link_data_i = get_unichem_cross_reference_link_data(unichem_src_i, term_dict['term'])
-            unichem_cross_refs[unichem_src_i] = {'cross_reference_link': link_data_i,
-                                                 'cross_references': cross_references}
+                    chembl_id_i = link_i['src_compound_id']
+                else:
+                    cross_references.append(
+                        get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
+                    )
+            cross_references_dict = {
+                'from': get_unichem_cross_reference_link_data(unichem_src_i, term_dict['term']),
+                'also_in': cross_references
+            }
+            if chembl_id_i is not None:
+                chembl_ids.append(get_chembl_id_dict(chembl_id_i, [cross_references_dict]))
+            else:
+                unichem_not_in_chembl_cross_refs.append(cross_references_dict)
 
-        if chembl_ids or unichem_cross_refs:
+        if len(chembl_ids) > 0 or len(unichem_not_in_chembl_cross_refs) > 0:
             term_dict['references'].append(
-                {'type': 'unichem', 'chembl_ids': chembl_ids, 'cross_references': unichem_cross_refs,
-                 'include_in_query': True}
+                {
+                    'type': 'unichem',
+                    'label': 'UniChem',
+                    'chembl_ids': chembl_ids,
+                    'not_in_chembl': unichem_not_in_chembl_cross_refs,
+                    'include_in_query': True
+                }
             )
     except:
         print(term_dict)
@@ -307,7 +366,10 @@ class TermsVisitor(PTNodeVisitor):
                     check_unichem(term_dict)
                 last_term_is_and_group = len(exp['or']) > 0 and type(exp['or'][-1]) == dict and 'and' in exp['or'][-1]
                 if str_child_i_lc == 'and' and not last_term_is_and_group:
-                    exp['or'][-1] = {'and': [exp['or'][-1], term_dict]}
+                    if len(exp['or']) > 0:
+                        exp['or'][-1] = {'and': [exp['or'][-1], term_dict]}
+                    else:
+                        exp['or'].append({'and': [term_dict]})
                 elif last_term_is_and_group and (str_child_i_lc == 'and' or previous_single_term_lc == 'and'):
                     if term_dict:
                         exp['or'][-1]['and'].append(term_dict)
