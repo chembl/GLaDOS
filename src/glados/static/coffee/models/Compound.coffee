@@ -384,6 +384,13 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME
   ]
+  RESULTS_LIST_REPORT_CARD_LONG:[
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.MAX_PHASE,
+    Compound.COLUMNS.FULL_MWT,
+    Compound.COLUMNS.ALOGP,
+  ]
   MINI_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME,

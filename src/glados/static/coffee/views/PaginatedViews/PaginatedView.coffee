@@ -410,6 +410,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fixCardHeight: ($appendTo) ->
 
+      console.log 'FIXING CARD HEIGHT!'
       if @isInfinite()
         $cards = $(@el).find('.BCK-items-container').children()
         $cards.height $(_.max($cards, (card) -> $(card).height())).height() + 'px'
