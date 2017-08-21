@@ -9,9 +9,7 @@ SearchModel = Backbone.Model.extend
   defaults:
     resultsListsDict: null
     queryString: ''
-    chembl_ids: []
-    inchi_keys: []
-    smiles: []
+    jsonQuery: null
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -28,154 +26,182 @@ SearchModel = Backbone.Model.extend
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
 
-  checkUniCHEM: (term, callback_response, index)->
-    # TODO: Change when UniChem accepts the CORS headers
-    callback_unichem = (uc_json_response)->
-      chembl_ids_terms = []
-      if _.has(uc_json_response, 'error')
-        console.log('unichem: not found for '+term)
-      else
-        num_ids = _.keys(uc_json_response).length
-        for key_i, key_index in _.keys(uc_json_response)
-          chembl_ids_terms.push('"'+uc_json_response[key_i][0].src_compound_id+'"'+
-              '^'+(1+(num_ids-key_index)/num_ids).toFixed(3)
+  get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
+    delta = 0.3/chembl_ids.length
+    joining_term = if is_or then ' ' else ' AND '
+    query_string = terms.join(joining_term)
+    filter_terms_joined = filter_terms.join(' AND ')
+    query = {
+      bool:
+        must: 
+          bool:
+            should: []
+            must: []
+        filter:[]
+    }
+    fields_boosts_text = [
+      "*.std_analyzed^1.6",
+      "*.eng_analyzed^0.8",
+      "*.ws_analyzed^1.4",
+      "*.keyword^2",
+      "*.lower_case_keyword^1.5",
+      "*.alphanumeric_lowercase_keyword^1.3"
+    ]
+    fields_boosts_keyword = [
+      "*.entity_id^2",
+      "*.id_reference^1.5",
+      "*.chembl_id^2",
+      "*.chembl_id_reference^1.5"
+    ]
+    bool_query = if is_or then 'should'else 'must'
+    if query_string
+      query.bool.must.bool[bool_query].push(
+        {
+          multi_match:
+            type: "phrase_prefix"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            minimum_should_match: "100%",
+        }
+      )
+      query.bool.must.bool[bool_query].push(
+        {
+          multi_match:
+            type: "most_fields"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            fuzziness: 0
+            minimum_should_match: "100%"
+            boost: 10
+
+        }
+      )
+      query.bool.must.bool[bool_query].push(
+        {
+          multi_match:
+            type: "best_fields"
+            fields: fields_boosts_text.concat fields_boosts_keyword
+            query: query_string
+            fuzziness: 0
+            minimum_should_match: "100%"
+            boost: 2
+
+        }
+      )
+      for term_i in terms
+        if term_i.length >= 3
+          query.bool.must.bool[bool_query].push(
+            {
+              multi_match:
+                type: "most_fields"
+                fields: fields_boosts_keyword
+                query: term_i
+                fuzziness: 0
+                boost: 10
+            }
           )
-      if chembl_ids_terms
-        callback_response(chembl_ids_terms, index)
-    # Hack to prevent all callbacks to point to the same function with overriden index position
-    callback_unichem.index_pos = index
-    unichem_cb_name = 'unichem_cb_'+index
-    window[unichem_cb_name] = callback_unichem
-    jQueryPromise = $.ajax( {
-        type: 'GET'
-        url: glados.ChemUtils.UniChem.orphaned_id_url+encodeURI(term)+'/1?callback='+unichem_cb_name
-        jsonp: unichem_cb_name
-        dataType: 'jsonp'
-        headers:
-          'Accept':'application/json'
-        error: ()->
-          return
-      }
-    )
-    return jQueryPromise
+    chembl_ids_et = []
+    for c_id_i, i in chembl_ids
+      chembl_ids_et.push('"'+c_id_i+'"'+'^'+(1.3-i*delta))
+    if chembl_ids_et.length > 0
+      query.bool.must.bool[bool_query].push(
+        {
+          query_string:
+            fields: fields_boosts_text.concat(fields_boosts_keyword)
+            query: chembl_ids_et.join(' ')
+            allow_leading_wildcard: false
+            fuzziness: 0
+            use_dis_max: false
+        }
+      )
+    if filter_terms_joined
+      query.bool.filter.push({
+        query_string:
+          fields: fields_boosts_text.concat fields_boosts_keyword
+          query: filter_terms_joined
+      })
+    if sub_queries
+      query.bool.must.bool[bool_query] = query.bool.must.bool[bool_query].concat(sub_queries)
+    return query
 
-  flexmatchSMILES: (term, callback_response, index)->
-    jQueryPromise = $.ajax( {
-        type: 'GET'
-        url: glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL+encodeURI(term)
-        success: (data)->
-          if data and _.has(data,'molecules')
-            chembl_ids_terms = []
-            num_ids = data.molecules.length
-            for molecule_i, molecule_index in data.molecules
-              chembl_ids_terms.push('"'+molecule_i.molecule_chembl_id+'"'+
-                  '^'+(1+(num_ids-molecule_index)/num_ids).toFixed(3)
-              )
-            if chembl_ids_terms
-              callback_response(chembl_ids_terms, index)
-              Number()
-        error: ()->
-          return
-      }
-    )
-    return jQueryPromise
-
-  getStringTerms: (rawQueryString)->
-    valid_separators = /[,|;]/
-    cleansed_terms = []
-    # Removes invalid characters
-    # removes multiple spaces
-    # adds 1 trailing and 1 heading space to simplify terms regex
-    rawQueryString = rawQueryString.replace(/[^\x20-\x7E]+/g, ' ');
-    rawQueryString = ' '+rawQueryString.replace(/\s+/g,' ').trim()+' '
-    regex_terms = /\s((?:".+?")|(?:\S+))(?=\s)/g
-    terms_by_regex = []
-    match_arr = null
-    while (match_arr = regex_terms.exec(rawQueryString)) != null
-      terms_by_regex.push(match_arr[1])
-    for term_i in terms_by_regex
-      if term_i
-        if glados.ChemUtils.InChI.regex.test(term_i)
-          cleansed_terms.push(term_i)
+  readParsedQueryRecursive: (cur_parsed_query, chembl_ids, terms, filter_terms, parent_type='or')->
+    # Query tree leafs
+    if _.has(cur_parsed_query, 'term')
+      if cur_parsed_query.include_in_query
+        if cur_parsed_query.exact_match_term
+          terms.push(cur_parsed_query.term)
+          filter_terms.push(cur_parsed_query.term)
+        else if cur_parsed_query.filter_term
+          filter_terms.push(cur_parsed_query.term)
         else
-          subterms = term_i.split(valid_separators)
-          for subterm_i in subterms
-            if subterm_i
-              cleansed_terms.push(subterm_i)
-    return cleansed_terms
+          terms.push(cur_parsed_query.term)
+#          terms.push(cur_parsed_query.term.replace(
+#            /([\+\-\=\&\|\!\(\)\{\}\[\]\^\"\~\:\\\/])/g, '\\$1'
+#          ).replace(/[\<\>]/g, ' '))
+      for ref_i in cur_parsed_query.references
+        if ref_i.include_in_query
+          for chembl_id_i in ref_i.chembl_ids
+            if chembl_id_i.include_in_query
+              chembl_ids.push(chembl_id_i.chembl_id)
+      return [
+        cur_parsed_query.term,
+        null
+      ]
+
+    chembl_ids = []
+    terms = []
+    filter_terms = []
+
+    next_terms = []
+    cur_type = null
+    if _.has(cur_parsed_query, 'or')
+      next_terms = cur_parsed_query.or
+      cur_type = 'or'
+    if _.has(cur_parsed_query, 'and')
+      next_terms = cur_parsed_query.and
+      cur_type = 'and'
+
+    inner_terms = []
+    inner_queries = []
+    for term_i in next_terms
+      [term_str, term_query] = @readParsedQueryRecursive(
+        term_i, chembl_ids, terms, filter_terms, cur_type
+      )
+      inner_terms.push(term_str)
+      if term_query
+        inner_queries.push(term_query)
+    expression_str = inner_terms.join(' ')
+    if not (cur_type == parent_type or inner_terms.length == 1)
+      expression_str = '('+expression_str+')'
+    return [
+      expression_str,
+      @get_es_query_for(chembl_ids, terms, filter_terms, inner_queries, cur_type == 'or')
+    ]
+
 
   parseQueryString: (rawQueryString, callback)->
-    terms = @getStringTerms(rawQueryString)
-    console.log(terms)
-    @set('queryString', terms.join(' '))
 
-    terms_transform_in_order = terms.slice(0)
-
-    final_cb = ()->
-      singular_terms = []
-      exact_terms = []
+    done_callback = (parsed_query_json_str)->
+      parsed_query = {'or':[]}
+      if parsed_query_json_str.trim()
+        parsed_query = JSON.parse(parsed_query_json_str)
+      chembl_ids = []
+      terms = []
       filter_terms = []
-      classify_term = (term_2_classify)->
-        if SearchModel.EXACT_TERM_REGEX.test(term_2_classify)
-          exact_terms.push(term_2_classify)
-        else if SearchModel.PROPERTY_TERM_REGEX.test(term_2_classify)
-          filter_terms.push(term_2_classify)
-        else
-          singular_terms.push(term_2_classify)
+      [expression_str, expression_es_query] = @readParsedQueryRecursive(
+        parsed_query, chembl_ids, terms, filter_terms
+      )
+      if not expression_es_query
+        expression_es_query = @get_es_query_for(chembl_ids, terms, filter_terms, [])
+      @set('queryString', expression_str)
+      @set('jsonQuery', parsed_query)
+      @set("es_list_query", expression_es_query)
 
-      for term, index in terms_transform_in_order
-        if _.isArray(term)
-          for subterm in term
-            classify_term(subterm)
-        else if term.trim()
-          classify_term(term)
-      console.log("singular",singular_terms)
-      console.log("exact",exact_terms)
-      console.log("filter_terms",filter_terms)
-      @set("singular_terms",singular_terms)
-      @set("exact_terms",exact_terms)
-      @set("filter_terms",filter_terms)
+      console.log("SEARCH_DEBUG: expression_es_query", expression_es_query)
+
       setTimeout(callback,10)
-    final_cb = final_cb.bind(@)
 
-    term_replacement_callback = (termReplacement,term_pos)->
-      terms_transform_in_order[term_pos] = termReplacement
-    jquery_promises = []
-    for term, index in terms
-      if (SearchModel.EXACT_TERM_REGEX).test(term)
-        # replaces internal double quotation if found
-        term = term.slice(1,-1).replace(/"/g,'\\"')
-        terms_transform_in_order[index] = SearchModel.toExactTerm(term)
-      else if SearchModel.PROPERTY_TERM_REGEX.test(term)
-        terms_transform_in_order[index] = term
-      else if (/^\d+$/).test(term)
-        if term.length > 2
-          terms_transform_in_order.push(SearchModel.toExactTerm(term))
-        terms_transform_in_order[index] = ''
-        terms_transform_in_order.push(SearchModel.toExactTerm('CHEMBL'+term)+"^3")
-        unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
-        jquery_promises.push(unichem_promise)
-      else if (glados.ChemUtils.CHEMBL.id_regex).test(term)
-        terms_transform_in_order[index] = SearchModel.toExactTerm(
-          'CHEMBL'+glados.ChemUtils.CHEMBL.id_regex.exec(term)[1]
-        )
-      else if glados.ChemUtils.DOI.regex.test(term)
-        terms_transform_in_order[index] = SearchModel.toExactTerm(term)
-      else if glados.ChemUtils.InChI.regex.test(term) or glados.ChemUtils.InChI.key_regex.test(term)
-        terms_transform_in_order[index] = SearchModel.toExactTerm(term)
-      else if glados.ChemUtils.SMILES.regex.test(term)
-        terms_transform_in_order[index] = SearchModel.toExactTerm(term)
-        smiles_promise = @flexmatchSMILES(term,term_replacement_callback, index)
-        jquery_promises.push(smiles_promise)
-      else if term
-        terms_transform_in_order.push(term)
-        unichem_promise = @checkUniCHEM(term,term_replacement_callback, index)
-        jquery_promises.push(unichem_promise)
-    if jquery_promises.length > 0
-      $.when.apply($,jquery_promises).always(final_cb)
-    else
-      final_cb()
-
+    $.get(glados.Settings.SEARCH_RESULTS_PARSER_URL+'/'+encodeURIComponent(rawQueryString)).done(done_callback.bind(@))
 
   __search: ()->
     rls_dict = @getResultsListsDict()
@@ -183,20 +209,12 @@ SearchModel = Backbone.Model.extend
       # Skips the search on non selected entities
       if @selected_es_entity and @selected_es_entity != resource_name
         continue
-      resource_es_collection.search(@get("singular_terms"), @get("exact_terms"), @get("filter_terms"))
+      resource_es_collection.search(@get("es_list_query"))
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     @parseQueryString(rawQueryString, @__search.bind(@))
-
-# --------------------------------------------------------------------------------------------------------------------
-# CONSTANTS
-# --------------------------------------------------------------------------------------------------------------------
-
-SearchModel.EXACT_TERM_REGEX = /^".*"(\^\d+(\.\d+)?)?$/
-SearchModel.PROPERTY_TERM_REGEX = /^(\+|-)?[A-Za-z0-9_\-.]+:.+$/
-SearchModel.toExactTerm = (term) -> return "\""+term+"\""
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

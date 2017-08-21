@@ -5,6 +5,7 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
 from django.contrib import admin
+import glados.grammar.search_parser
 
 
 urlpatterns = [
@@ -174,6 +175,9 @@ urlpatterns = [
   # --------------------------------------------------------------------------------------------------------------------
   # Search Results
   # --------------------------------------------------------------------------------------------------------------------
+
+  url(r'^search_results_parser/(?P<search_string>.*?)$',
+      glados.grammar.search_parser.parse_url_search, ),
 
   url(r'^search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),

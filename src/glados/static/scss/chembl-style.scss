@@ -136,6 +136,10 @@ a:hover {
   cursor: pointer;
 }
 
+.no-margin{
+  margin: 0 !important;
+}
+
 /**
 * Side Menu bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1857,13 +1861,36 @@ $marvin-size-fullscreen: 91vh;
 .search-banner {
 
   background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  background-color: color('teal', 'lighten-5');
+  background-color: color('green', 'lighten-5');
   backgroground-position: right center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+  .card-content{
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
 
+}
+
+.search-banner-results {
+
+  background-color: color('green', 'lighten-5');
+  background-size: cover;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+  .card-content{
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  .search-bar-help a{
+    color: $chembl-teal !important;
+  }
 }
 
 /**
@@ -1934,7 +1961,7 @@ span.badge-primary-color-no-float {
     position: relative;
     height: 55px;
     .buttons-container{
-      margin: 20px auto 0 auto;
+      margin: 20px 10px 0 auto;
       @media #{$small-and-down} {
         margin: auto;
       }
@@ -2415,6 +2442,15 @@ span.badge-primary-color-no-float {
     &.emphasis {
       font-weight: bold;
     }
+  }
+}
+
+.explain-qtip {
+  max-width: 1000px !important;
+  .qtip-content {
+    max-width: 1000px !important;
+    margin: 0;
+    padding: 0;
   }
 }
 
