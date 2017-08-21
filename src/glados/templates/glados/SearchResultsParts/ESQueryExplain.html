@@ -1,0 +1,126 @@
+{% verbatim %}
+<script id="Handlebars-query-explain-references" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
+  <div class="qtip-content grey lighten-5" style="width: {{width}};">
+    <ul class="collapsible no-margin no-padding" data-collapsible="accordion">
+      {{#each references}}
+        <li>
+          <div class="collapsible-header no-margin no-padding green lighten-2">
+            <div class="row no-margin no-padding">
+              <div class="col s8">
+                <b>{{label}}</b>
+              </div>
+              <div class="col s4">
+                <div class="switch">
+                  <label>
+                    Off
+                    {{#if include_in_query }}
+                      <input type="checkbox" checked="checked">
+                    {{else}}
+                      <input type="checkbox">
+                    {{/if}}
+                    <span class="lever"></span>
+                    On
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapsible-body no-margin no-padding">
+            <div class="row no-margin no-padding">
+              <ul class="collapsible no-margin no-padding" data-collapsible="accordion">
+                {{#each chembl_ids}}
+                  <li>
+                    <div class="collapsible-header no-margin no-padding">
+                      <div class="row no-margin no-padding">
+                        <div class="col s8">
+                          <a>{{chembl_id}}</a>
+                        </div>
+                        <div class="col s4">
+                          <div class="switch">
+                            <label>
+                              Off
+                              {{#if include_in_query }}
+                                <input type="checkbox" checked="checked">
+                              {{else}}
+                                <input type="checkbox">
+                              {{/if}}
+                              <span class="lever"></span>
+                              On
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {{#if cross_references}}
+                      <div class="collapsible-body no-margin no-padding">
+                        <div class="row">
+                          {{#each cross_references}}
+                            <div class="col s12">
+                              <h5><b>Found in:</b></h5>
+                              <span class="truncate"><b>- {{from.cross_reference_label}} :</b> <a target="_blank" href="{{from.cross_reference_link}}">{{from.cross_reference_id}}</a></span>
+                              {{#if also_in}}
+                                <h5><b>Also appears in:</b></h5>
+                                {{#each also_in}}
+                                <span class="truncate"><b>- {{cross_reference_label}} :</b> <a target="_blank" href="{{cross_reference_link}}">{{cross_reference_id}}</a></span>
+                                {{/each}}
+                              {{/if}}
+                            </div>
+                          {{/each}}
+                        </div>
+                      </div>
+                    {{/if}}
+                  </li>
+                {{/each}}
+                {{#if not_in_chembl}}
+                  <li>
+                    <div class="collapsible-header no-margin no-padding">
+                      <div class="row no-margin no-padding">
+                        <div class="col s12">
+                          <a>Not in ChEMBL</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapsible-body no-margin no-padding">
+                      <div class="row">
+                        {{#each not_in_chembl}}
+                          <div class="col s12">
+                            <h5><b>Found in:</b></h5>
+                            <span class="truncate"><b>- {{from.cross_reference_label}} :</b> <a target="_blank" href="{{from.cross_reference_link}}">{{from.cross_reference_id}}</a></span>
+                            {{#if also_in}}
+                              <h5><b>Also appears in:</b></h5>
+                              {{#each also_in}}
+                              <span class="truncate"><b>- {{cross_reference_label}} :</b> <a target="_blank" href="{{cross_reference_link}}">{{cross_reference_id}}</a></span>
+                              {{/each}}
+                            {{/if}}
+                            <br>
+                            <hr>
+                          </div>
+                        {{/each}}
+                      </div>
+                    </div>
+                  </li>
+                {{/if}}
+              </ul>
+            </div>
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</script>
+{% endverbatim %}
+
+<div id="es-query-explain" style="display: none;">
+  <h3>Search Results</h3>
+  <div class="card search-banner-results z-depth-0">
+    <div class="card-content">
+      <div class="section">
+        <div class="row">
+          <div class="col m12">
+            <b>Your Query:</b><p id="query-explain-p"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
