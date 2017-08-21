@@ -1934,7 +1934,7 @@ span.badge-primary-color-no-float {
     position: relative;
     height: 55px;
     .buttons-container{
-      margin: 20px auto 0 auto;
+      margin: 20px 10px 0 auto;
       @media #{$small-and-down} {
         margin: auto;
       }
