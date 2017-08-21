@@ -14,6 +14,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG
+        CUSTOM_DEFAULT_CARD_SIZES:
+          small: 12
+          medium: 6
+          large: 4
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
