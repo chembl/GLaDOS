@@ -42,7 +42,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         hide:
           event: 'unfocus'
         style:
-          classes:'explain-qtip qtip-light qtip-shadow'
+          classes:'simple-qtip qtip-light qtip-shadow'
 
       $hoveredElem.qtip qtipConfig
 
