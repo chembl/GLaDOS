@@ -10,6 +10,7 @@ SearchModel = Backbone.Model.extend
     resultsListsDict: null
     queryString: ''
     jsonQuery: null
+    autocompleteSuggestions: []
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -26,10 +27,47 @@ SearchModel = Backbone.Model.extend
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
 
+  requestAutocompleteSuggestions: (textQuery)->
+    @set('autocompleteSuggestions', [])
+    done_callback = (esData)->
+      suggestions = []
+      for suggI in esData.suggest.autocomplete
+        for optionJ in suggI.options
+          matchSection = optionJ.text.substring(suggI.offset, suggI.offset+suggI.length)
+          nonMatching = optionJ.text.substring(suggI.offset+suggI.length, optionJ.text.length)
+          suggestions.push({
+            text: '<b>'+matchSection+'</b>'+nonMatching
+            type: optionJ._id
+            color: if optionJ._index == 'chembl_target' then 'lime' else 'cyan'
+          })
+
+      @set('autocompleteSuggestions', @get('autocompleteSuggestions').concat(suggestions))
+
+    esQuery = {
+      suggest:
+        autocomplete:
+          prefix: textQuery
+          completion:
+            field: "_metadata.es_completion"
+    }
+
+    deferred_t =$.post(
+      glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_target/_search',
+      JSON.stringify(esQuery)
+    )
+    deferred_t.done(done_callback.bind(@))
+    deferred_m =$.post(
+      glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search',
+      JSON.stringify(esQuery)
+    )
+    deferred_m.done(done_callback.bind(@))
+
+
+
+
   get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
     delta = 0.3/chembl_ids.length
-    joining_term = if is_or then ' ' else ' AND '
-    query_string = terms.join(joining_term)
+    query_string = terms.join(' ')
     filter_terms_joined = filter_terms.join(' AND ')
     query = {
       bool:
