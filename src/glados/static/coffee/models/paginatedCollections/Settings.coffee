@@ -18,6 +18,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           small: 12
           medium: 6
           large: 4
+        ENABLE_CARDS_ZOOM: true
+        CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
+        CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
