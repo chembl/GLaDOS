@@ -14,9 +14,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        CUSTOM_DEFAULT_CARD_SIZES:
+          small: 12
+          medium: 6
+          large: 4
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
+        COMPLICATE_CARDS_VIEW: true
+        COMPLICATE_CARDS_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -127,6 +133,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+      COMPOUND_COOL_CARDS:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESCompound'
+        LABEL: 'Compounds'
+        PATH: '/chembl_molecule'
+        MODEL: Compound
+        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: Compound.ID_COLUMN
+        COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ENABLE_CARDS_ZOOM: true
+        CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
+        CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
+        ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+        DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity

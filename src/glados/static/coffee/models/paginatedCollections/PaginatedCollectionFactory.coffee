@@ -31,9 +31,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
             #columns specific for cards view
             columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
+            custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
             custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             custom_cards_item_view: esIndexSettings.CUSTOM_CARDS_ITEM_VIEW
+            complicate_cards_view: esIndexSettings.COMPLICATE_CARDS_VIEW
+            complicate_card_columns: esIndexSettings.COMPLICATE_CARDS_COLUMNS
             additional_columns: ( $.extend(col, {show: false}) for col in esIndexSettings.ADDITIONAL_COLUMNS)
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             key_name: esIndexSettings.KEY_NAME
@@ -124,7 +127,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewESCompoundsList: (customQueryString='*', itemsList, contextualProperties) ->
 
-      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND,
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
         customQueryString, useCustomQueryString=(not itemsList?), itemsList, contextualProperties)
       return list
 

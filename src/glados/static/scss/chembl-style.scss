@@ -1961,7 +1961,7 @@ span.badge-primary-color-no-float {
     position: relative;
     height: 55px;
     .buttons-container{
-      margin: 20px auto 0 auto;
+      margin: 20px 10px 0 auto;
       @media #{$small-and-down} {
         margin: auto;
       }
@@ -2572,6 +2572,7 @@ span.badge-primary-color-no-float {
     opacity: 0;
   }
   .bar-group{
+
     .background-bar{
       fill: white;
       opacity: 0;
@@ -2627,6 +2628,13 @@ span.badge-primary-color-no-float {
 .facets{
   background-color: color('grey', 'lighten-4');
 
+  border-radius: 10px;
+  padding: 6px 8px;
+
+  .filters-title{
+    margin-top: 10px;
+  }
+
   .clear-filters-button{
     margin-top: 10px;
   }
@@ -2643,27 +2651,61 @@ span.badge-primary-color-no-float {
       }
       .count-text{
         font-size: 80%;
-        fill: color('grey', 'darken-3');
+        fill: color($primary-color-name, 'darken-3');
       }
       .front-bar{
         fill: black;
         opacity: 0;
       }
-      .hover-bar{
+      .hover-bar {
         fill: none;
       }
+      .make-teal-bar{
+        fill: none;
+      }
+      .background-bar{
+        fill: none;
+      }
+
       &:not(.selected):hover{
-        .hover-bar{
-          stroke-width: 1;
-          stroke: color($primary-color-name, 'accent-4');
+
+        .value-bar{
+          fill: color($primary-color-name, 'lighten-3');
         }
+
+        .background-bar{
+          fill: color('teal', 'lighten-5');
+        }
+
       }
 
       &.selected{
-        .hover-bar{
-          stroke-width: 1;
-          stroke: $primary-color;
+
+        isolation: isolate;
+
+        .background-bar{
+          fill: color('grey', 'lighten-2');
         }
+
+        .value-bar{
+          fill: black;
+        }
+
+        .key-text{
+          fill: color('grey', 'lighten-3');;
+          mix-blend-mode: difference;
+        }
+
+        .count-text{
+          fill: color('grey', 'lighten-3');
+          mix-blend-mode: difference;
+        }
+        .make-teal-bar{
+          fill: color($primary-color-name, 'base');
+          mix-blend-mode: screen;
+        }
+
+
       }
     }
   }
@@ -2713,5 +2755,26 @@ span.badge-primary-color-no-float {
   &.scrollable{
     white-space: nowrap;
     overflow-x: auto;
+  }
+}
+
+.chembl-logo-link{
+  img{
+    padding-top: 7px;
+    width: 40px;
+
+  }
+
+}
+
+.chembl-logo-link-new{
+
+  position: absolute;
+  top: 0;
+  left: -15%;
+
+  img{
+    width: 70px;
+    padding-top: 10px;
   }
 }
