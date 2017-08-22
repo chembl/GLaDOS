@@ -213,7 +213,7 @@ def check_doi(term_dict: dict):
                 term_dict['references'].append(
                     {
                         'type': 'doi',
-                        'label': 'DOI',
+                        'label': 'DOI (Digital Object Identifier)',
                         'chembl_ids': get_chembl_id_list_dict(chembl_ids),
                         'include_in_query': True
                     }

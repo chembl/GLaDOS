@@ -1,0 +1,22 @@
+{% verbatim %}
+<div id="BCK-autocomplete" style="display: none">
+  <script id="Handlebars-search-bar-autocomplete" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
+    <div class="qtip-content grey lighten-5">
+      <ul class="collection no-margin no-padding" >
+        {{#each suggestions}}
+          <li class="collection-item no-margin no-padding">
+            <div class="row no-margin no-padding">
+              <div class="col s9">
+                {{{text}}}
+              </div>
+              <div class="col s3 right-align">
+                <a class="chip-syn {{color}} darken-2 white-text right-align">{{type}}</a>
+              </div>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </script>
+</div>
+{% endverbatim %}

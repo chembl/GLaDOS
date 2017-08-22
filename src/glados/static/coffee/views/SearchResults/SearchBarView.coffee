@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       # Rendering and resize events
       @render()
       $(window).resize(@render.bind(@))
-      @searchModel.bind('change queryString', @updateSearchBarFromModel.bind(@))
+      @searchModel.on('change:queryString', @updateSearchBarFromModel.bind(@))
 
       if @atResultsPage
         # Handles the popstate event to reload a search
@@ -307,6 +307,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         # expandable search bar
         @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('#search_bar'))
         @expandable_search_bar.onEnter(@search.bind(@))
+        setTimeout(
+          ()->
+            glados.views.SearchResults.SearchBarAutocompleteView.getInstance().attachSearchBar('search_bar')
+          , 1000
+        )
       else
         console.log("Error trying to render the SearchBarView because the div or the template could not be found")
 

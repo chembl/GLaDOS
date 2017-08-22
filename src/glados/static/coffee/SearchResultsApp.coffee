@@ -5,8 +5,10 @@ class SearchResultsApp
   # --------------------------------------------------------------------------------------------------------------------
 
   @init = ->
-    @ESQueryExplainView = glados.views.SearchResults.ESQueryExplainView.getInstance()
+    @eSQueryExplainView = glados.views.SearchResults.ESQueryExplainView.getInstance()
     @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
+    @searchBarAutocompleteView = glados.views.SearchResults.SearchBarAutocompleteView.getInstance()
+
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
