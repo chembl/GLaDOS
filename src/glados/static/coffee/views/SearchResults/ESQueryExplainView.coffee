@@ -11,9 +11,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       @referencesTemplate = Handlebars.compile $("#Handlebars-query-explain-references").html()
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       @searchModel = SearchModel.getInstance()
+      @searchModel.on('change:jsonQuery', @updateQueryFromModel.bind(@))
+      if @searchModel.get('queryString')
+        @updateQueryFromModel()
       @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
       @query_explain_el = null
-      @searchModel.bind('change queryString', @updateQueryFromModel.bind(@))
       if @atResultsPage
         $(@el).show()
         $(@searchBarView.el).hide()
@@ -42,7 +44,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         hide:
           event: 'unfocus'
         style:
-          classes:'explain-qtip qtip-light qtip-shadow'
+          classes:'simple-qtip qtip-light qtip-shadow'
 
       $hoveredElem.qtip qtipConfig
 
