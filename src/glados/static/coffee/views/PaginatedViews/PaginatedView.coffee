@@ -147,6 +147,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite() and not $(@el).is(":visible")
         return
 
+      isDefault = @mustDisableReset()
+      mustComplicate = @collection.getMeta('complicate_cards_view')
+      @isComplicated = isDefault and mustComplicate
+
       console.log 'col: ', @collection
 
       if @isInfinite() and @collection.getMeta('current_page') == 1
@@ -293,7 +297,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       columns = []
       # use special configuration config for cards if available
       if @isCards() and @collection.getMeta('columns_card').length > 0
-        columns = _.filter(@collection.getMeta('columns_card'), -> true)
+        if @isComplicated
+          columns = _.filter(@collection.getMeta('complicate_card_columns'), -> true)
+        else
+          columns = _.filter(@collection.getMeta('columns_card'), -> true)
       else
         defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
         additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
@@ -308,7 +315,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      if @isCards()
+      if @isCards() and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
@@ -350,7 +357,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $appendTo.append($newItemElem)
 
         CustomElementView = @collection.getMeta('custom_cards_item_view')
-        if CustomElementView?
+        if CustomElementView? and not @isComplicated
           ItemModel = @collection.getMeta('model')
           model = new ItemModel
             id: idValue
