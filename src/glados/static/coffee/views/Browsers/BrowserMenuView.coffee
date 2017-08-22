@@ -36,6 +36,10 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-Facets-Container')
 
     render: ->
+
+      if not $(@el).is(":visible")
+        return
+
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
