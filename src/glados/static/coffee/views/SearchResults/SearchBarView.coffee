@@ -53,15 +53,17 @@ glados.useNameSpace 'glados.views.SearchResults',
       @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
         glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
 
-    searchFromURL: ()->
+    searchFromURL: ->
+      console.log 'SEARCHING FROM URL'
       @parseURLData()
-      @showSelectedResourceOnly()
+#      @showSelectedResourceOnly()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
+      console.log 'urlQueryString: ', urlQueryString
       if urlQueryString != @lastURLQuery
-        @expandable_search_bar.val(urlQueryString)
+#        @expandable_search_bar.val(urlQueryString)
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
-      @updateChips()
+#      @updateChips()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)
@@ -113,11 +115,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         if @lists_container
           for score_i in sorted_scores
             for resource_name in resources_names_by_score[score_i]
-              idToMove =  @getBCKBaseID(resource_name) + '-container'
+              idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
               $div_key_i = $('#' + idToMove)
               @lists_container.append($div_key_i)
 
-    updateChips: ()->
+    updateChips: ->
       # Always generate chips for the results summary
       chipStruct = []
       # Includes an All Results chip to go back to the general results
@@ -162,20 +164,19 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[resourceName].hide()
           @$searchResultsListsContainersDict[resourceName].show(300)
           if @selected_es_entity == resourceName
-            $('#'+@getBCKBaseID(resourceName)+'-filter-link').hide()
-            $('#'+@getBCKBaseID(resourceName)+'-all-link').show()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').hide()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show()
           else
-            $('#'+@getBCKBaseID(resourceName)+'-filter-link').show()
-            $('#'+@getBCKBaseID(resourceName)+'-all-link').hide()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').show()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').hide()
 
 
-    renderResultsListsViews: () ->
+    renderResultsListsViews: ->
       # Don't instantiate the ResultsLists if it is not necessary
       if @atResultsPage and not @resultsListsViewsRendered
         @container = $('#BCK-ESResults')
         @lists_container = $('#BCK-ESResults-lists')
         resultsListContainerTemplate = Handlebars.compile($("#Handlebars-ESResultsList").html())
-
 
         @searchResultsMenusViewsDict = {}
         @$searchResultsListsContainersDict = {}
@@ -279,7 +280,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Component rendering
     # ------------------------------------------------------------------------------------------------------------------
 
-    render: () ->
+    render: ->
       if @last_screen_type_rendered != GlobalVariables.CURRENT_SCREEN_TYPE
         # on re-render cleans the drawn bar
         $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
@@ -289,8 +290,8 @@ glados.useNameSpace 'glados.views.SearchResults',
             top : 106
         else
           @fillTemplate(@med_andup_bar_id)
-        # Rendders the results lists and the chips
-        @renderResultsListsViews()
+
+#        @renderResultsListsViews()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->

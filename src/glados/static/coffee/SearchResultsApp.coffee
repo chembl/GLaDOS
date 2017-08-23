@@ -9,10 +9,10 @@ class SearchResultsApp
     @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
     @searchBarAutocompleteView = glados.views.SearchResults.SearchBarAutocompleteView.getInstance()
 
-    $searchResultsContainer = $('BCK-SearchResultsContainer')
+    $searchResultsContainer = $('.BCK-SearchResultsContainer')
     new glados.views.SearchResults.SearchResultsView
       el: $searchResultsContainer
-
+      model: SearchModel.getInstance()
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
