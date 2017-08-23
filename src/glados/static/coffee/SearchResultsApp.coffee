@@ -98,16 +98,3 @@ class SearchResultsApp
               msg: msg
       )
 
-
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Graph Views
-  # --------------------------------------------------------------------------------------------------------------------
-
-  # this initialises the view that shows the compound results graph view
-  @initCompResultsGraphView = (topLevelElem) ->
-    compResGraphView = new PlotView
-      el: topLevelElem
-
-    return compResGraphView
-
