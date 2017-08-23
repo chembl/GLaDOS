@@ -60,10 +60,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       console.log 'urlQueryString: ', urlQueryString
       if urlQueryString != @lastURLQuery
-#        @expandable_search_bar.val(urlQueryString)
+        @expandable_search_bar.val(urlQueryString)
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
-#      @updateChips()
 
     navigateTo: (nav_url)->
       if URLProcessor.isAtSearchResultsPage(nav_url)
@@ -131,10 +130,10 @@ glados.useNameSpace 'glados.views.SearchResults',
 
             # event register for score update and update chips
             resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
-            resultsListsDict[resourceName].on('score_and_records_update',@updateChips.bind(@))
+            resultsListsDict[resourceName].on('score_and_records_update',@renderTabs.bind(@))
 
         @container.show()
-        @updateChips()
+        @renderTabs()
         @showSelectedResourceOnly()
         @resultsListsViewsRendered = true
 
@@ -159,22 +158,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Additional Functionalities
     # ------------------------------------------------------------------------------------------------------------------
-
-    getBCKBaseID: (resourceName) ->
-      return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
-
-    getEntityName: (resourceName) -> resourceName.replace(/_/g, ' ').toLowerCase() + 's'
-
-    getSearchURLFor: (es_settings_key, search_str)->
-      selected_es_entity_path = if es_settings_key then \
-                                '/'+glados.Settings.ES_KEY_2_SEARCH_PATH[es_settings_key] else ''
-      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+\
-                              selected_es_entity_path+\
-                              '/'+encodeURI(search_str)
-      return search_url_for_query
-
-    getCurrentSearchURL: ()->
-      return @getSearchURLFor(@selected_es_entity, @expandable_search_bar.val())
 
     search: () ->
       # Updates the navigation URL

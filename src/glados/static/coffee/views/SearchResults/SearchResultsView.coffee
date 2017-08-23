@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $listsContainer = $(@el).find('.BCK-ESResults-lists')
       console.log '$listsContainer: ', $listsContainer
-      # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
+      # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       resultsListsDict = @model.getResultsListsDict()
 
@@ -31,6 +31,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
+          resultsListsDict[resourceName].on('score_and_records_update',@renderTabs, @)
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
@@ -82,7 +83,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
     # ------------------------------------------------------------------------------------------------------------------
-    updateChips: ->
+    renderTabs: ->
       # Always generate chips for the results summary
       chipStruct = []
       # Includes an All Results chip to go back to the general results
@@ -90,15 +91,15 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: @getSearchURLFor(null, @expandable_search_bar.val())
+        url_path: @getSearchURLFor(null, @model.get('query_string'))
         selected: if @selected_es_entity then false else true
       })
 
-      srl_dict = @searchModel.getResultsListsDict()
+      resultsListDict = @model.getResultsListsDict()
 
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
 
-        totalRecords = srl_dict[key_i].getMeta("total_records")
+        totalRecords = resultsListDict[key_i].getMeta("total_records")
         if not totalRecords
           totalRecords = 0
         resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
@@ -107,18 +108,34 @@ glados.useNameSpace 'glados.views.SearchResults',
           prepend_br: true
           total_records: totalRecords
           label:resourceLabel
-          url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
+          url_path: @getSearchURLFor(key_i, @model.get('query_string'))
           selected: @selected_es_entity == key_i
         })
 
-      $('.BCK-summary-tabs-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
+      $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
+      glados.Utils.fillContentForElement $tabsContainer,
         chips: chipStruct
 
       glados.Utils.overrideHrefNavigationUnlessTargetBlank(
         $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
       )
 
+
+    navigateTo: ->
+      console.log 'NAVIGATION!'
+
     getBCKListContainerBaseID: (resourceName) ->
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
 
     getEntityName: (resourceName) -> resourceName.replace(/_/g, ' ').toLowerCase() + 's'
+
+    getSearchURLFor: (es_settings_key, search_str)->
+      selected_es_entity_path = if es_settings_key then \
+                                '/'+glados.Settings.ES_KEY_2_SEARCH_PATH[es_settings_key] else ''
+      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+\
+                              selected_es_entity_path+\
+                              '/'+encodeURI(search_str)
+      return search_url_for_query
+
+    getCurrentSearchURL: ()->
+      return @getSearchURLFor(@selected_es_entity, @expandable_search_bar.val())
