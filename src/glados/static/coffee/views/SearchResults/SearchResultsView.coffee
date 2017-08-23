@@ -30,7 +30,93 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsMenuViewI.render()
           @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
+          resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # sort Elements
+    # ------------------------------------------------------------------------------------------------------------------
+    sortResultsListsViews: ->
+
+      # If an entity is selected the ordering is skipped
+      if not @selected_es_entity
+        sorted_scores = []
+        insert_score_in_order = (_score)->
+          inserted = false
+          for score_i, i in sorted_scores
+            if score_i < _score
+              sorted_scores.splice(i,0,_score)
+              inserted = true
+              break
+          if not inserted
+            sorted_scores.push(_score)
+        resources_names_by_score = {}
+        srl_dict = @model.getResultsListsDict()
+        for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+          if _.has(srl_dict, key_i)
+            score_i = srl_dict[key_i].getMeta("max_score")
+            total_records = srl_dict[key_i].getMeta("total_records")
+            if not score_i
+              score_i = 0
+            if not total_records
+              total_records = 0
+            # Boost compounds and targets to the top!
+            boost = 1
+            if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
+              boost = 100
+            else if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET.KEY_NAME
+              boost = 50
+            score_i *= boost
+
+            if not _.has(resources_names_by_score,score_i)
+              resources_names_by_score[score_i] = []
+            resources_names_by_score[score_i].push(key_i)
+            insert_score_in_order(score_i)
+
+        $listsContainer = $(@el).find('.BCK-ESResults-lists')
+        for score_i in sorted_scores
+          for resource_name in resources_names_by_score[score_i]
+            idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
+            $div_key_i = $('#' + idToMove)
+            $listsContainer.append($div_key_i)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Tabs Handling
+    # ------------------------------------------------------------------------------------------------------------------
+    updateChips: ->
+      # Always generate chips for the results summary
+      chipStruct = []
+      # Includes an All Results chip to go back to the general results
+      chipStruct.push({
+        prepend_br: false
+        total_records: 0
+        label: 'All Results'
+        url_path: @getSearchURLFor(null, @expandable_search_bar.val())
+        selected: if @selected_es_entity then false else true
+      })
+
+      srl_dict = @searchModel.getResultsListsDict()
+
+      for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+        totalRecords = srl_dict[key_i].getMeta("total_records")
+        if not totalRecords
+          totalRecords = 0
+        resourceLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[key_i].LABEL
+        chipStruct[0].total_records += totalRecords
+        chipStruct.push({
+          prepend_br: true
+          total_records: totalRecords
+          label:resourceLabel
+          url_path: @getSearchURLFor(key_i, @expandable_search_bar.val())
+          selected: @selected_es_entity == key_i
+        })
+
+      $('.BCK-summary-tabs-container').html Handlebars.compile($('#Handlebars-ESResults-Chips').html())
+        chips: chipStruct
+
+      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
+        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
+      )
 
     getBCKListContainerBaseID: (resourceName) ->
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
