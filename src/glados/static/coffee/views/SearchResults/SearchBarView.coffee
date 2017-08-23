@@ -10,15 +10,12 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: () ->
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       @searchModel = SearchModel.getInstance()
-      @es_path = null
-      @selected_es_entity = null
       @showAdvanced = false
       @expandable_search_bar = null # Assigned after render
       @small_bar_id = 'BCK-SRB-small'
       @med_andup_bar_id = 'BCK-SRB-med-and-up'
       # re-renders on widnow resize
       @last_screen_type_rendered = null
-
       # Render variables
       @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
@@ -49,93 +46,15 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     parseURLData: () ->
       @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
-      @es_path = URLProcessor.getSpecificSearchResultsPage()
-      @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
-        glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
 
     searchFromURL: ->
       console.log 'SEARCHING FROM URL'
       @parseURLData()
-#      @showSelectedResourceOnly()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-      console.log 'urlQueryString: ', urlQueryString
       if urlQueryString != @lastURLQuery
         @expandable_search_bar.val(urlQueryString)
         @searchModel.search(urlQueryString, null)
         @lastURLQuery = urlQueryString
-
-    navigateTo: (nav_url)->
-      if URLProcessor.isAtSearchResultsPage(nav_url)
-        window.history.pushState({}, 'ChEMBL: '+@expandable_search_bar.val(), nav_url)
-        @searchFromURL()
-      else
-        # Navigates to the specified URL
-        window.location.href = nav_url
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Views
-    # ------------------------------------------------------------------------------------------------------------------
-
-    showSelectedResourceOnly: ()->
-      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
-        # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity and @selected_es_entity != resourceName
-          @$searchResultsListsContainersDict[resourceName].hide()
-        else
-          @$searchResultsListsContainersDict[resourceName].hide()
-          @$searchResultsListsContainersDict[resourceName].show(300)
-          if @selected_es_entity == resourceName
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').hide()
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show()
-          else
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').show()
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').hide()
-
-
-    renderResultsListsViews: ->
-      # Don't instantiate the ResultsLists if it is not necessary
-      if @atResultsPage and not @resultsListsViewsRendered
-        @container = $('#BCK-ESResults')
-        @lists_container = $('#BCK-ESResults-lists')
-        resultsListContainerTemplate = Handlebars.compile($("#Handlebars-ESResultsList").html())
-
-        @searchResultsMenusViewsDict = {}
-        @$searchResultsListsContainersDict = {}
-        # @searchModel.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
-        # Share the same keys to access different objects
-        resultsListsDict = @searchModel.getResultsListsDict()
-        # Clears the container before redrawing
-        @lists_container.html('')
-        for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
-
-          if _.has(resultsListsDict, resourceName)
-            resultsListViewID = @getBCKBaseID(resourceName)
-            @getEntityName(resourceName)
-            $container = $('<div id="' + resultsListViewID + '-container">')
-            $container.append resultsListContainerTemplate
-              entity_name: @getEntityName(resourceName)
-            console.log 'resourceName: ', resourceName
-            @lists_container.append($container)
-
-            # Initialises a Menu view which will be in charge of handling the menu bar,
-            # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
-            resultsMenuViewI = new glados.views.Browsers.BrowserMenuView
-              collection: resultsListsDict[resourceName]
-              el: $container.find('.BCK-BrowserContainer')
-
-            resultsMenuViewI.render()
-
-            @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
-            @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
-
-            # event register for score update and update chips
-            resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews.bind(@))
-            resultsListsDict[resourceName].on('score_and_records_update',@renderTabs.bind(@))
-
-        @container.show()
-        @renderTabs()
-        @showSelectedResourceOnly()
-        @resultsListsViewsRendered = true
 
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
@@ -196,7 +115,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         else
           @fillTemplate(@med_andup_bar_id)
 
-#        @renderResultsListsViews()
         @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
 
     fillTemplate: (div_id) ->

@@ -4,9 +4,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @searchResultsMenusViewsDict = {}
       @$searchResultsListsContainersDict = {}
+      @selected_es_entity = null
+      @es_path = null
+      @parseURLData()
 
       $listsContainer = $(@el).find('.BCK-ESResults-lists')
-      console.log '$listsContainer: ', $listsContainer
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       resultsListsDict = @model.getResultsListsDict()
@@ -32,6 +34,9 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
           resultsListsDict[resourceName].on('score_and_records_update',@renderTabs, @)
+
+      @showSelectedResourceOnly()
+      @renderTabs()
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
@@ -91,7 +96,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: @getSearchURLFor(null, @model.get('query_string'))
+        url_path: @getSearchURLFor(null, @model.get('queryString'))
         selected: if @selected_es_entity then false else true
       })
 
@@ -108,7 +113,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           prepend_br: true
           total_records: totalRecords
           label:resourceLabel
-          url_path: @getSearchURLFor(key_i, @model.get('query_string'))
+          url_path: @getSearchURLFor(key_i, @model.get('queryString'))
           selected: @selected_es_entity == key_i
         })
 
@@ -120,10 +125,36 @@ glados.useNameSpace 'glados.views.SearchResults',
         $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
       )
 
+    parseURLData: () ->
+      @es_path = URLProcessor.getSpecificSearchResultsPage()
+      @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
+        glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
 
-    navigateTo: ->
-      console.log 'NAVIGATION!'
+    navigateTo: (navUrl) ->
+      window.history.pushState({}, 'ChEMBL: ' + @model.get('queryString'), navUrl)
+      @parseURLData()
+      @showSelectedResourceOnly()
+      @renderTabs()
 
+    showSelectedResourceOnly: ->
+
+      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+        # if there is a selection and this container is not selected it gets hidden if else it shows all resources
+        if @selected_es_entity and @selected_es_entity != resourceName
+          @$searchResultsListsContainersDict[resourceName].hide()
+        else
+          @$searchResultsListsContainersDict[resourceName].hide()
+          @$searchResultsListsContainersDict[resourceName].show(300)
+          if @selected_es_entity == resourceName
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').hide()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show(300)
+          else
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').show()
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').hide()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Helper functions
+    # ------------------------------------------------------------------------------------------------------------------
     getBCKListContainerBaseID: (resourceName) ->
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
 
@@ -137,5 +168,5 @@ glados.useNameSpace 'glados.views.SearchResults',
                               '/'+encodeURI(search_str)
       return search_url_for_query
 
-    getCurrentSearchURL: ()->
+    getCurrentSearchURL: ->
       return @getSearchURLFor(@selected_es_entity, @expandable_search_bar.val())
