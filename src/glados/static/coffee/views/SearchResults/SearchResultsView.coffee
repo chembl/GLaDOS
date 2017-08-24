@@ -144,10 +144,10 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[resourceName].hide()
         else
           @$searchResultsListsContainersDict[resourceName].hide()
-          @$searchResultsListsContainersDict[resourceName].show(300)
+          @$searchResultsListsContainersDict[resourceName].show()
           if @selected_es_entity == resourceName
             $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').hide()
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show(300)
+            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show()
           else
             $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').show()
             $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').hide()
