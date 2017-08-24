@@ -91,7 +91,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible")
         return
 
-      if @checkIfNoItems() and not @collection.facetsReady
+      if @checkIfNoItems()
         return
 
       if @IS_RESPONSIVE_RENDER
