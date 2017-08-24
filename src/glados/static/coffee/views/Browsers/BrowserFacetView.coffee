@@ -39,6 +39,10 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
+    wakeUp: ->
+      if @collection.facetsReady
+        @render()
+
     showPreloader: ->
 
       $(@el).find('.BCK-Preloader-Container').show()
@@ -83,6 +87,9 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers.each((i) ->thisView.initHistogram($(@)))
 
     render: ->
+
+      if not $(@el).is(":visible")
+        return
 
       if @checkIfNoItems()
         return

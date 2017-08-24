@@ -277,6 +277,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @loadFacetGroups(false)
         else
           @trigger('facets-changed')
+          @facetsReady = true
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 

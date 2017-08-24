@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       # Render variables
       @resultsListsViewsRendered = false
       @$searchResultsListsContainersDict = null
-      @searchResultsMenusViewsDict = null
+      @browsersDict = null
       @container = null
       @lists_container = null
 
