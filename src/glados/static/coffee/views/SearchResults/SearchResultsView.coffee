@@ -141,10 +141,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
         if @selected_es_entity? and @selected_es_entity != resourceName
-          @$searchResultsListsContainersDict[resourceName].hide(10)
+          @$searchResultsListsContainersDict[resourceName].hide()
         else
           @$searchResultsListsContainersDict[resourceName].hide()
-          @$searchResultsListsContainersDict[resourceName].show(300)
+          @$searchResultsListsContainersDict[resourceName].show(100)
           @browsersDict[resourceName].wakeUp()
 
     # ------------------------------------------------------------------------------------------------------------------
