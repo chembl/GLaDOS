@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.views.SearchResults',
   SearchResultsView: Backbone.View.extend(glados.views.SearchResults.URLFunctions).extend
     initialize: ->
 
-      @searchResultsMenusViewsDict = {}
+      @browsersDict = {}
       @$searchResultsListsContainersDict = {}
       @selected_es_entity = null
       @es_path = null
@@ -25,12 +25,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           # Initialises a Menu view which will be in charge of handling the menu bar,
           # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
-          resultsMenuViewI = new glados.views.Browsers.BrowserMenuView
+          resultsBrowserI = new glados.views.Browsers.BrowserMenuView
             collection: resultsListsDict[resourceName]
             el: $container.find('.BCK-BrowserContainer')
 
-          resultsMenuViewI.render()
-          @searchResultsMenusViewsDict[resourceName] = resultsMenuViewI
+          resultsBrowserI.render()
+          @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
           resultsListsDict[resourceName].on('score_and_records_update',@renderTabs, @)
@@ -140,17 +140,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity and @selected_es_entity != resourceName
+        if @selected_es_entity? and @selected_es_entity != resourceName
           @$searchResultsListsContainersDict[resourceName].hide()
         else
           @$searchResultsListsContainersDict[resourceName].hide()
-          @$searchResultsListsContainersDict[resourceName].show(300)
-          if @selected_es_entity == resourceName
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').hide()
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').show(300)
-          else
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-filter-link').show()
-            $('#'+@getBCKListContainerBaseID(resourceName)+'-all-link').hide()
+          @$searchResultsListsContainersDict[resourceName].show(100)
+          @browsersDict[resourceName].wakeUp()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Helper functions
