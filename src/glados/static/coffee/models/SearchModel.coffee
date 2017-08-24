@@ -62,9 +62,6 @@ SearchModel = Backbone.Model.extend
     )
     deferred_m.done(done_callback.bind(@))
 
-
-
-
   get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
     delta = 0.3/chembl_ids.length
     query_string = terms.join(' ')
