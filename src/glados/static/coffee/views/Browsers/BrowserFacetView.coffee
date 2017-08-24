@@ -60,8 +60,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     checkIfNoItems: ->
 
-      console.log 'CHECK BROWSER FACET VIEW! ', @collection.getMeta('total_records')
-
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
@@ -277,7 +275,7 @@ glados.useNameSpace 'glados.views.Browsers',
       facetingHandler = facetsGroups[facet_group_key].faceting_handler
       if facetingHandler.faceting_data[facet_key].count == 0
         return
-        
+
       isSelected = facetingHandler.toggleKeySelection(facet_key)
       $selectedSVGGroup = $(@el).find("[data-facet-group-key='" + facet_group_key + "']")\
         .find("[data-bucket-key='" + facet_key + "']")

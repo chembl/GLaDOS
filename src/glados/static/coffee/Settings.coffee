@@ -96,7 +96,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_LEGEND_HEIGHT: 100
     VISUALISATION_LEGEND_RECT_HEIGHT: 20
     # for a responsive visualisation, the time that it waits for the container size
-    RESPONSIVE_REPAINT_WAIT: 400
+    RESPONSIVE_REPAINT_WAIT: 10
     RESPONSIVE_SIZE_CHECK_WAIT: 10
     # by default the debug is deactivated
     DEBUG: false
