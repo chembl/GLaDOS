@@ -1,6 +1,6 @@
 glados.useNameSpace 'glados.views.SearchResults',
   # View that renders the search bar and advanced search components
-  SearchBarView: Backbone.View.extend
+  SearchBarView: Backbone.View.extend(glados.views.SearchResults.URLFunctions).extend
 
     # ------------------------------------------------------------------------------------------------------------------
     # Initialization and navigation

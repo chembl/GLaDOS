@@ -1,5 +1,5 @@
 glados.useNameSpace 'glados.views.SearchResults',
-  SearchResultsView: Backbone.View.extend
+  SearchResultsView: Backbone.View.extend(glados.views.SearchResults.URLFunctions).extend
     initialize: ->
 
       @searchResultsMenusViewsDict = {}
@@ -159,14 +159,3 @@ glados.useNameSpace 'glados.views.SearchResults',
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
 
     getEntityName: (resourceName) -> resourceName.replace(/_/g, ' ').toLowerCase() + 's'
-
-    getSearchURLFor: (es_settings_key, search_str)->
-      selected_es_entity_path = if es_settings_key then \
-                                '/'+glados.Settings.ES_KEY_2_SEARCH_PATH[es_settings_key] else ''
-      search_url_for_query = glados.Settings.SEARCH_RESULTS_PAGE+\
-                              selected_es_entity_path+\
-                              '/'+encodeURI(search_str)
-      return search_url_for_query
-
-    getCurrentSearchURL: ->
-      return @getSearchURLFor(@selected_es_entity, @expandable_search_bar.val())
