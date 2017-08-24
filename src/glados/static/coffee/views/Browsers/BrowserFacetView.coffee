@@ -167,6 +167,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .classed('bucket', true)
         .attr('data-bucket-key', (d) -> d.key)
         .classed('selected', (d) -> d.selected)
+        .classed('disabled', (d) -> d.count == 0)
 
       bucketGroups.attr('transform', (b) -> 'translate(0,' + getYForBucket(b.key) + ')')
 
@@ -209,18 +210,19 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('width', (d) -> getWidthForBucket(d.count))
         .attr('x', (d) -> thisView.HISTOGRAM_WIDTH - getWidthForBucket(d.count))
 
+      handleClickBar = ->
+        $clickedElem = $(@)
+        facetGroupKey = $clickedElem.attr('data-facet-group-key')
+        facetKey = $clickedElem.attr('data-facet-key')
+        thisView.toggleSelectFacet(facetGroupKey, facetKey)
+
       bucketGroupsEnter.append('rect')
         .attr('height', getYForBucket.rangeBand())
         .attr('width', @HISTOGRAM_WIDTH)
         .classed('front-bar', true)
         .attr('data-facet-group-key', facetGroupKey)
         .attr('data-facet-key', (d) -> d.key)
-        .on('click', ->
-          $clickedElem = $(@)
-          facetGroupKey = $clickedElem.attr('data-facet-group-key')
-          facetKey = $clickedElem.attr('data-facet-key')
-          thisView.toggleSelectFacet(facetGroupKey, facetKey)
-        )
+        .on('click', handleClickBar)
 
       bucketGroupsEnter.append('rect')
         .attr('height', getYForBucket.rangeBand())
@@ -271,9 +273,12 @@ glados.useNameSpace 'glados.views.Browsers',
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectFacet: (facet_group_key, facet_key) ->
-      facets_groups = @collection.getFacetsGroups()
-      faceting_handler = facets_groups[facet_group_key].faceting_handler
-      isSelected = faceting_handler.toggleKeySelection(facet_key)
+      facetsGroups = @collection.getFacetsGroups()
+      facetingHandler = facetsGroups[facet_group_key].faceting_handler
+      if facetingHandler.faceting_data[facet_key].count == 0
+        return
+        
+      isSelected = facetingHandler.toggleKeySelection(facet_key)
       $selectedSVGGroup = $(@el).find("[data-facet-group-key='" + facet_group_key + "']")\
         .find("[data-bucket-key='" + facet_key + "']")
       $selectedSVGGroup.toggleClass('selected', isSelected)
