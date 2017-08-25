@@ -10,8 +10,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   RANGE_SELECTOR_STROKE: 'black'
 
   initialize: ->
+
+    @model.on 'change', @render, @
     @$vis_elem = $(@el)
-    updateViewProxy = @setUpResponsiveRender()
+    @setUpResponsiveRender()
     @render()
 
     if @model.get('selection-enabled')

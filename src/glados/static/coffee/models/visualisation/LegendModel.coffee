@@ -7,6 +7,8 @@ glados.useNameSpace 'glados.models.visualisation',
       if @get('collection')?
         @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
 
+      @get('collection').on(glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @handleColDownloaded, @)
+
       @set('selection-enabled', arguments[0].enable_selection)
 
       @set('domain', @get('property').domain)
@@ -59,8 +61,6 @@ glados.useNameSpace 'glados.models.visualisation',
     # ------------------------------------------------------------------------------------------------------------------
     fillAmountPerRange: ->
 
-
-      timeStart = (new Date()).getTime()
       collection = @get('collection')
       if collection.allResults?
         allItemsObjs = collection.allResults
@@ -90,8 +90,6 @@ glados.useNameSpace 'glados.models.visualisation',
             rangeNumLimit = Number.MAX_VALUE
           else
             rangeNumLimit = domain[rangeNum]
-
-      timeEnd = (new Date()).getTime()
 
       @set('amounts-per-range', amountsPerRange)
 
@@ -195,3 +193,6 @@ glados.useNameSpace 'glados.models.visualisation',
           @selectAllValues()
         else
           @selectFullRange()
+
+    handleColDownloaded: ->
+      @fillAmountPerValue()
