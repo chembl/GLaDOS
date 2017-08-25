@@ -9,6 +9,21 @@ glados.useNameSpace 'glados.models.Activity',
 
     fetch: (options) ->
 
+      cleanMatrixConfig =
+        columns: []
+        rows: []
+        links: []
+        rows_index: []
+        rows_curr_position_index: {}
+        columns_index: {}
+        columns_curr_position_index: {}
+        cell_max_pchembl_value_avg: 0
+        cell_min_pchembl_value_avg: 0
+        cell_max_activity_count: 0
+        cell_min_activity_count: 0
+      @set('matrix', cleanMatrixConfig, {silent:true})
+      console.log '... matrix before fetch', JSON.stringify(@get('matrix'))
+
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())

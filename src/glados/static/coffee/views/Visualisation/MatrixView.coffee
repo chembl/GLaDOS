@@ -65,15 +65,29 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible
     if $(@el).is(":visible")
 
+      console.log '... rendering matrix: ', @model.get('matrix')
+      console.log '... num rows ', @model.get('matrix').rows.length
+      console.log '... num cols ', @model.get('matrix').columns.length
+      console.log '... num rows in links ', Object.keys(@model.get('matrix').links).length
+      console.log '... checking matrix integrity'
+      links = @model.get('matrix').links
+#      for rowNum, row of links
+      console.log '... ^^^'
+#      console.log '... rendering matrix: ', JSON.stringify(@model.get('matrix'))
       starTime = Date.now()
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
 
+      numColumns = @model.get('matrix').columns.length
       @clearVisualisation()
-      @paintControls()
-      @paintMatrix()
+      if numColumns > 0
+        @paintControls()
+        @paintMatrix()
+        $messagesElement.html ''
+      else
+        @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
 
       endTime = Date.now()
       time = endTime - starTime
@@ -81,7 +95,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       $(@el).find('select').material_select()
 
-      $messagesElement.html ''
+
+
+  setProgressMessage: (msg, hideCog=false) ->
+
+    console.log 'set progress message!'
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    glados.Utils.fillContentForElement $messagesElement,
+      message: msg
+      hide_cog: hideCog
+
+    $messagesElement.show()
 
   destroyAllTooltips: ->
 
@@ -188,6 +212,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     matrix = @model.get('matrix')
     thisView = @
 
+    console.log '... PAINTING MATRIX!'
+    console.log '... matrix: ', matrix
+    console.log '... num rows ', @model.get('matrix').rows.length
+    console.log '... num cols ', @model.get('matrix').columns.length
+    console.log '... num rows in links ', Object.keys(@model.get('matrix').links).length
+    console.log '... matrix string:', JSON.stringify(matrix)
+    console.log '^^^'
     # --------------------------------------
     # Sort properties
     # --------------------------------------
@@ -358,13 +389,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
+      console.log '... cellsContainerG.positionRows'
       if transitionDuration == 0
         cellsContainerG.selectAll(".vis-cell")
-          .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+          .attr("y", (d) ->
+            console.log '... positioning cell ', d.row_id, matrix.rows_index[d.row_id]
+            (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale
+          )
       else
         t = cellsContainerG.transition().duration(transitionDuration)
         t.selectAll(".vis-cell")
           .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+
 
     cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
 
@@ -1438,6 +1474,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     cells = cellsContainerG.selectAll(".vis-cell")
       .data(cellsInWindow, (d) -> d.id)
 
+    console.log '... cellsInWindow:', cellsInWindow
     cells.exit().remove()
     cellsEnter = cells.enter()
       .append("rect")

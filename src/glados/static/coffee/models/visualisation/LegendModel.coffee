@@ -6,8 +6,7 @@ glados.useNameSpace 'glados.models.visualisation',
 
       if @get('collection')?
         @get('collection').on(glados.Events.Collections.SELECTION_UPDATED, @handleCollSelectionChanged, @)
-
-      @get('collection').on(glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @handleColDownloaded, @)
+        @get('collection').on(glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @handleColDownloaded, @)
 
       @set('selection-enabled', arguments[0].enable_selection)
 
