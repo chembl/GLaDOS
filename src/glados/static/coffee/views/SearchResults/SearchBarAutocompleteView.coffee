@@ -13,6 +13,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
       @barId = null
+      @lastSearch = null
+      @qtipAPI = null
 
     attachSearchBar: (barId)->
       @barId= barId
@@ -23,28 +25,40 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     submitAutocompleteRequest: ()->
       if $('#'+@barId).val().length >= 3
-        @searchModel.requestAutocompleteSuggestions($('#'+@barId).val())
+        searchText = $('#'+@barId).val()
+        if @lastSearch != searchText
+          @searchModel.requestAutocompleteSuggestions searchText
+          @lastSearch = searchText
+      else
+        @searchModel.set 'autocompleteSuggestions',[]
 
-    updateAutocomplete:()->
-      $hoveredElem = $('#'+'compressed-search-input')
-      qtipConfig =
-        content:
-          text: $(@suggestionsTemplate({
-            suggestions: @searchModel.get('autocompleteSuggestions')
-          }))
-        show:
-          solo: true
-        hide:
-          event: 'unfocus'
-        position:
-          my: 'top left'
-          at: 'bottom left'
-        style:
-          width: $hoveredElem.width()
-          classes:'simple-qtip qtip-light qtip-shadow'
+    updateAutocomplete: ()->
+      $hoveredElem = $('#'+@barId)
+      autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
+      if autocompleteSuggestions.length > 0
+        if not @qtipAPI
+          qtipConfig =
+            content:
+              text: ''
+            show:
+              solo: true
+            hide:
+              event: 'unfocus'
+            position:
+              my: 'top left'
+              at: 'bottom left'
+            style:
+              width: $hoveredElem.width()
+              classes:'simple-qtip qtip-light qtip-shadow'
+          $hoveredElem.qtip qtipConfig
+          @qtipAPI = $hoveredElem.qtip('api')
 
-      $hoveredElem.qtip qtipConfig
-      $hoveredElem.qtip('api').show()
+        $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
+          suggestions: autocompleteSuggestions
+        }))
+        $hoveredElem.qtip('show')
+      else if @qtipAPI
+        $hoveredElem.qtip('hide')
       
 
 # ----------------------------------------------------------------------------------------------------------------------

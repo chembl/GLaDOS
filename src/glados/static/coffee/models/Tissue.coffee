@@ -11,9 +11,11 @@ glados.useNameSpace 'glados.models',
 
       return response;
 
+# Constant definition for ReportCardEntity model functionalities
+_.extend(glados.models.Tissue, glados.models.base.ReportCardEntity)
+glados.models.Tissue.color = 'deep-orange'
+glados.models.Tissue.reportCardPath = 'tissue_report_card/'
 
-glados.models.Tissue.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'tissue_report_card/'+chembl_id
 
 glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: {

@@ -9,7 +9,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        PATH: '/chembl_molecule'
+        INDEX_NAME: 'chembl_molecule'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: Compound.ID_COLUMN
@@ -37,7 +38,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
-        PATH:'/chembl_target'
+        INDEX_NAME: 'chembl_target'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -54,7 +56,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
         LABEL: 'Assays'
-        PATH:'/chembl_assay'
+        INDEX_NAME: 'chembl_assay'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
         ID_COLUMN: Assay.ID_COLUMN
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -70,7 +73,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
         LABEL: 'Documents'
-        PATH:'/chembl_document'
+        INDEX_NAME: 'chembl_document'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -86,7 +90,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
         LABEL: 'Cells'
-        PATH:'/chembl_cell_line'
+        INDEX_NAME: 'chembl_cell_line'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -102,7 +107,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
         LABEL: 'Tissues'
-        PATH:'/chembl_tissue'
+        INDEX_NAME: 'chembl_tissue'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -119,7 +125,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESActivitity'
         LABEL: 'Activities'
-        PATH: '/chembl_activity'
+        INDEX_NAME: 'chembl_activity'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Activity
         ID_COLUMN: Activity.ID_COLUMN
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
@@ -137,7 +144,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        PATH: '/chembl_molecule'
+        INDEX_NAME: 'chembl_molecule'
+        # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: Compound.ID_COLUMN
@@ -253,10 +261,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: []
         ADDITIONAL_COLUMNS:[]
 
+glados.models.paginatedCollections.Settings.ES_INDEX_2_MODEL = {}
+
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
+  val_i.PATH = '/'+val_i.INDEX_NAME
+  glados.models.paginatedCollections.Settings.ES_INDEX_2_MODEL[val_i.INDEX_NAME] = val_i.MODEL
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
   val_i.KEY_NAME = key_i
+  val_i.PATH = '/'+val_i.INDEX_NAME
+
 # Loads the Search results URL's including the ElasticSearch entities configuration
 glados.loadSearchResultsURLS()

@@ -11,6 +11,8 @@ SearchModel = Backbone.Model.extend
     queryString: ''
     jsonQuery: null
     autocompleteSuggestions: []
+    debouncedAutocompleteRequest: null
+    autocompleteQuery: ''
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -27,26 +29,26 @@ SearchModel = Backbone.Model.extend
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
 
-  requestAutocompleteSuggestions: (textQuery)->
-    @set('autocompleteSuggestions', [])
+  __requestAutocompleteSuggestions: ()->
+    suggestions = []
     done_callback = (esData)->
-      suggestions = []
       for suggI in esData.suggest.autocomplete
         for optionJ in suggI.options
           matchSection = optionJ.text.substring(suggI.offset, suggI.offset+suggI.length)
           nonMatching = optionJ.text.substring(suggI.offset+suggI.length, optionJ.text.length)
           suggestions.push({
             text: '<b>'+matchSection+'</b>'+nonMatching
-            type: optionJ._id
-            color: if optionJ._index == 'chembl_target' then 'lime' else 'cyan'
+            chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_MODEL[optionJ._index]\
+              .get_colored_report_card_url(optionJ._id)
           })
 
-      @set('autocompleteSuggestions', @get('autocompleteSuggestions').concat(suggestions))
+    then_callback = ()->
+      @set('autocompleteSuggestions', suggestions)
 
     esQuery = {
       suggest:
         autocomplete:
-          prefix: textQuery
+          prefix: @autocompleteQuery
           completion:
             field: "_metadata.es_completion"
     }
@@ -55,12 +57,19 @@ SearchModel = Backbone.Model.extend
       glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_target/_search',
       JSON.stringify(esQuery)
     )
-    deferred_t.done(done_callback.bind(@))
     deferred_m =$.post(
       glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search',
       JSON.stringify(esQuery)
     )
+    deferred_t.done(done_callback.bind(@))
     deferred_m.done(done_callback.bind(@))
+    $.when.apply($,[deferred_m,deferred_t]).then(then_callback.bind(@))
+
+  requestAutocompleteSuggestions: (textQuery)->
+    @autocompleteQuery = textQuery
+    if not debouncedAutocompleteRequest
+      debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
+    debouncedAutocompleteRequest()
 
 
 

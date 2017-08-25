@@ -1701,10 +1701,23 @@ $search-items-height: 45px;
 
 }
 
+
+
+
 /**
 * Buttons
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+.dotted-link{
+  border-bottom: 1px dotted;
+}
+
+.close-corner-button{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
 
 .btn-chembl {
   color: #ffffff;

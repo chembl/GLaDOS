@@ -10,7 +10,12 @@
                 {{{text}}}
               </div>
               <div class="col s3 right-align">
-                <a class="chip-syn {{color}} darken-2 white-text right-align">{{type}}</a>
+                {{#if chembl_id_link}}
+                  <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable"
+                     href="{{chembl_id_link.href}}">
+                    {{chembl_id_link.text}}
+                  </a>
+                {{/if}}
               </div>
             </div>
           </li>

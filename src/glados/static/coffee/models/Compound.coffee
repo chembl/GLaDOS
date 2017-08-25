@@ -86,9 +86,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     return response;
 
-
-Compound.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'compound_report_card/'+chembl_id
+# Constant definition for ReportCardEntity model functionalities
+_.extend(Compound, glados.models.base.ReportCardEntity)
+Compound.color = 'cyan'
+Compound.reportCardPath = 'compound_report_card/'
+console.log 'COMPOUND MODEL', Compound
 
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 
