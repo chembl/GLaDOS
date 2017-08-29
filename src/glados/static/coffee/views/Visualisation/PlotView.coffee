@@ -15,7 +15,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
     @$vis_elem = $(@el).find('.BCK-CompResultsGraphContainer')
-    updateViewProxy = @setUpResponsiveRender()
+    @setUpResponsiveRender()
 
     @config = arguments[0].config
 
