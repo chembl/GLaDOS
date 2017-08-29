@@ -1,17 +1,28 @@
 {% verbatim %}
 <div id="BCK-autocomplete" style="display: none">
   <script id="Handlebars-search-bar-autocomplete" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
-    <div class="qtip-content grey lighten-5">
+    <div id="search-bar-autocomplete-tooltip" class="qtip-content grey lighten-5">
       <ul class="collection no-margin no-padding" >
         {{#each suggestions}}
           <li class="collection-item no-margin no-padding">
             <div class="row no-margin no-padding">
-              <div class="col s9">
-                {{{text}}}
-              </div>
-              <div class="col s3 right-align">
-                <a class="chip-syn {{color}} darken-2 white-text right-align">{{type}}</a>
-              </div>
+              {{#if header}}
+                <button class="col s12 autocomplete-option autocomplete-option-{{@index}}">
+                  Search for all <b>"{{../textSearch}}"</b> in <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
+                </button>
+              {{else}}
+                <button class="col s{{#if chembl_id_link}}9{{else}}12{{/if}} autocomplete-option autocomplete-option-{{@index}}">
+                  {{{text}}}
+                </button>
+                {{#if chembl_id_link}}
+                  <div class="col s3 right-align">
+                      <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable"
+                         href="{{chembl_id_link.href}}">
+                        {{chembl_id_link.text}}
+                      </a>
+                  </div>
+                {{/if}}
+              {{/if}}
             </div>
           </li>
         {{/each}}

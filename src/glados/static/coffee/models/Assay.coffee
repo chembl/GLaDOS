@@ -12,8 +12,10 @@ Assay = Backbone.Model.extend
     parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
     return parsed;
 
-Assay.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'assay_report_card/'+chembl_id
+# Constant definition for ReportCardEntity model functionalities
+_.extend(Assay, glados.models.base.ReportCardEntity)
+Assay.color = 'amber'
+Assay.reportCardPath = 'assay_report_card/'
 
 Assay.getAssaysListURL = (filter) ->
 

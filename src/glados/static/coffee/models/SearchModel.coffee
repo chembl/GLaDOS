@@ -11,6 +11,8 @@ SearchModel = Backbone.Model.extend
     queryString: ''
     jsonQuery: null
     autocompleteSuggestions: []
+    debouncedAutocompleteRequest: null
+    autocompleteQuery: ''
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -27,26 +29,53 @@ SearchModel = Backbone.Model.extend
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
 
-  requestAutocompleteSuggestions: (textQuery)->
-    @set('autocompleteSuggestions', [])
+  __requestAutocompleteSuggestions: ()->
+    allSuggestions = []
+    allSuggestionsScores = []
     done_callback = (esData)->
       suggestions = []
       for suggI in esData.suggest.autocomplete
+        suggestions.push()
         for optionJ in suggI.options
           matchSection = optionJ.text.substring(suggI.offset, suggI.offset+suggI.length)
           nonMatching = optionJ.text.substring(suggI.offset+suggI.length, optionJ.text.length)
           suggestions.push({
+            chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
+              .MODEL.get_colored_report_card_url(optionJ._id)
+            header: false
+            entityLabel: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
+              .LABEL
+            score: optionJ._score
             text: '<b>'+matchSection+'</b>'+nonMatching
-            type: optionJ._id
-            color: if optionJ._index == 'chembl_target' then 'lime' else 'cyan'
           })
+      if suggestions.length > 0
 
-      @set('autocompleteSuggestions', @get('autocompleteSuggestions').concat(suggestions))
+        suggestions.splice(0, 0, {
+          color: suggestions[0].chembl_id_link.color
+          header: true
+          title: suggestions[0].entityLabel
+          maxScore: suggestions[0].score
+        })
+        insertAt = 0
+        for scoreI in allSuggestionsScores
+          if suggestions[0].maxScore > scoreI
+            break
+          insertAt++
+        allSuggestionsScores.splice(insertAt, 0, suggestions[0].maxScore)
+        allSuggestions.splice(insertAt, 0, suggestions)
+
+    then_callback = ()->
+      concatenatedSuggestions = []
+      for suggestionsI in allSuggestions
+        for suggestionJ in suggestionsI
+          concatenatedSuggestions.push(suggestionJ)
+      @set('autocompleteSuggestions', concatenatedSuggestions)
 
     esQuery = {
+      size: 0
       suggest:
         autocomplete:
-          prefix: textQuery
+          prefix: @autocompleteQuery
           completion:
             field: "_metadata.es_completion"
     }
@@ -55,12 +84,19 @@ SearchModel = Backbone.Model.extend
       glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_target/_search',
       JSON.stringify(esQuery)
     )
-    deferred_t.done(done_callback.bind(@))
     deferred_m =$.post(
       glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search',
       JSON.stringify(esQuery)
     )
+    deferred_t.done(done_callback.bind(@))
     deferred_m.done(done_callback.bind(@))
+    $.when.apply($,[deferred_m,deferred_t]).then(then_callback.bind(@))
+
+  requestAutocompleteSuggestions: (textQuery)->
+    @autocompleteQuery = textQuery
+    if not debouncedAutocompleteRequest
+      debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
+    debouncedAutocompleteRequest()
 
   get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
     delta = 0.3/chembl_ids.length

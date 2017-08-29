@@ -8,8 +8,10 @@ CellLine = Backbone.Model.extend
     parsed.report_card_url = CellLine.get_report_card_url(parsed.cell_chembl_id)
     return parsed;
 
-CellLine.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'cell_line_report_card/'+chembl_id
+# Constant definition for ReportCardEntity model functionalities
+_.extend(CellLine, glados.models.base.ReportCardEntity)
+CellLine.color = 'deep-purple'
+CellLine.reportCardPath = 'cell_line_report_card/'
 
 CellLine.COLUMNS = {
   CHEMBL_ID:{

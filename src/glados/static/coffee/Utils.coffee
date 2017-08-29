@@ -1,5 +1,10 @@
 glados.useNameSpace 'glados',
   Utils:
+    getFormattedNumber: (n)->
+      if n < Math.pow(10, 6)
+        return numeral(n).format('0,[.]00')
+      return numeral(n).format('0.[0000]e+0')
+
     # this is to support using dots for nested properties in the list settings
     #for example, if you have the following object
     # a = {
@@ -225,3 +230,37 @@ glados.useNameSpace 'glados',
     QueryStrings:
       getQueryStringForItemsList: (chemblIDs, idAttribute) ->
         return idAttribute + ':(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'
+
+    Tooltips:
+      getQltipSafePostion: ($jqueryElement, $tooltipContent=null) ->
+        screenWidth = $( window ).width()
+        screenHeight = $( window ).height()
+        offset = $jqueryElement.offset()
+        elemCenterX = offset.left - $( window ).scrollLeft() + $jqueryElement.width()/2
+        elemCenterY = offset.top - $( window ).scrollTop() + $jqueryElement.height()/2
+
+        horizontalPos = null
+        if elemCenterX < screenWidth/4
+          horizontalPos = 'left'
+        else if elemCenterX >= screenWidth/4 and elemCenterX <= 3*screenWidth/4
+          horizontalPos = 'center'
+        else
+          horizontalPos = 'right'
+
+        myVert = null
+        atVert = null
+        if elemCenterY <= screenHeight/2
+          myVert = 'top'
+          atVert = 'bottom'
+        else
+          myVert = 'bottom'
+          atVert = 'top'
+        console.log 'ELEM data', offset.top, $tooltipContent.height()
+        if $tooltipContent and $tooltipContent.height() >= offset.top
+          myVert = 'top'
+          atVert = 'bottom'
+        return {
+          my: myVert+' '+horizontalPos
+          at: atVert+' '+horizontalPos
+        }
+

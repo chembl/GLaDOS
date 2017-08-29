@@ -339,7 +339,8 @@ describe "Paginated Collection", ->
 
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'full_mwt'
-        testFacetKey = '[0-122)'
+        console.log "DEBUGGING", JSON.stringify(facetGroups[testFacetGroupKey].faceting_handler)
+        testFacetKey = '[0 ... 200)'
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
 
@@ -347,13 +348,14 @@ describe "Paginated Collection", ->
 
         for fGroupKey, fGroup of facetGroups
           for fKey, fData of fGroup.faceting_handler.faceting_data
+            console.log "DEBUGGING", fData
             expect(fData.selected).toBe(false)
 
       it 'selects one facet', ->
 
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'full_mwt'
-        testFacetKey = '[0-122)'
+        testFacetKey = '[0 ... 200)'
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
 
@@ -373,7 +375,7 @@ describe "Paginated Collection", ->
 
           facetGroups = esList.getFacetsGroups()
           testFacetGroupKey = 'full_mwt'
-          testFacetKey = '[0-122)'
+          testFacetKey = '[0 ... 200)'
           facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
           facetingHandler.toggleKeySelection(testFacetKey)
           esList.setMeta('facets_changed', true)
