@@ -908,11 +908,14 @@
       </div>
     </div>
 
-    <ul>
+    <ul class="collapsible z-depth-0" data-collapsible="expandable">
       {{#each facets}}
-        <li><b>{{this.label}}</b><br>
-        <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}">
-        </div>
+        <li>
+          <div class="collapsible-header">{{this.label}}</div>
+          <div class="collapsible-body">
+            Facet!
+            <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}"></div>
+          </div>
         </li>
       {{/each}}
 

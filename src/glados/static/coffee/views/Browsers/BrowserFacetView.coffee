@@ -34,6 +34,7 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
+      $(@el).find('.collapsible').collapsible()
       @initAllHistograms()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -104,6 +105,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @IS_RESPONSIVE_RENDER
         @initializeHTMLStructure()
 
+      return
       @HISTOGRAM_WIDTH = $(@el).width()
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
