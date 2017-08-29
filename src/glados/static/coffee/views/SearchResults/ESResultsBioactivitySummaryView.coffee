@@ -8,8 +8,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
 
       console.log 'BIOACTIVITY!'
-#      @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
-#      @collection.on glados.Events.Collections.SELECTION_UPDATED, (-> console.log('... SELECTION UPDATED'), @
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
       @collection.on 'reset do-repaint', @handleVisualisationStatus, @
 
       @entityName = @collection.getMeta('label')
