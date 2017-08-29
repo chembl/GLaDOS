@@ -1345,7 +1345,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('click', setUpRowTooltip)
+      .on('mouseover', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
     endTime = Date.now()
