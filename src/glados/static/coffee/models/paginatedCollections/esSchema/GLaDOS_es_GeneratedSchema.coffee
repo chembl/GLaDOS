@@ -2,432 +2,440 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # The contents of this file were generated from the GLaDOS-es project
   GLaDOS_es_GeneratedSchema:
     chembl_activity:
-      "activity_comment" : {type: String, aggregatable: true}
-      "activity_id" : {type: String, aggregatable: true}
-      "assay_chembl_id" : {type: String, aggregatable: true}
-      "assay_description" : {type: String, aggregatable: false}
-      "assay_type" : {type: String, aggregatable: true}
-      "bao_endpoint" : {type: String, aggregatable: true}
-      "bao_format" : {type: String, aggregatable: true}
-      "canonical_smiles" : {type: String, aggregatable: true}
-      "data_validity_comment" : {type: String, aggregatable: false}
-      "document_chembl_id" : {type: String, aggregatable: true}
-      "document_journal" : {type: String, aggregatable: true}
-      "document_year" : {type: Number, aggregatable: true}
-      "ligand_efficiency.bei" : {type: Number, aggregatable: true}
-      "ligand_efficiency.le" : {type: Number, aggregatable: true}
-      "ligand_efficiency.lle" : {type: Number, aggregatable: true}
-      "ligand_efficiency.sei" : {type: Number, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "pchembl_value" : {type: Number, aggregatable: true}
-      "potential_duplicate" : {type: Boolean, aggregatable: true}
-      "published_relation" : {type: String, aggregatable: true}
-      "published_type" : {type: String, aggregatable: true}
-      "published_units" : {type: String, aggregatable: true}
-      "published_value" : {type: Number, aggregatable: true}
-      "qudt_units" : {type: String, aggregatable: true}
-      "record_id" : {type: String, aggregatable: true}
-      "src_id" : {type: String, aggregatable: true}
-      "standard_flag" : {type: Boolean, aggregatable: true}
-      "standard_relation" : {type: String, aggregatable: true}
-      "standard_type" : {type: String, aggregatable: true}
-      "standard_units" : {type: String, aggregatable: true}
-      "standard_value" : {type: Number, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
-      "target_organism" : {type: String, aggregatable: true}
-      "target_pref_name" : {type: String, aggregatable: false}
-      "uo_units" : {type: String, aggregatable: true}
+      "activity_comment" : {type: String, aggregatable: true, integer: false}
+      "activity_id" : {type: String, aggregatable: true, integer: false}
+      "assay_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "assay_description" : {type: String, aggregatable: false, integer: false}
+      "assay_type" : {type: String, aggregatable: true, integer: false}
+      "bao_endpoint" : {type: String, aggregatable: true, integer: false}
+      "bao_format" : {type: String, aggregatable: true, integer: false}
+      "canonical_smiles" : {type: String, aggregatable: true, integer: false}
+      "data_validity_comment" : {type: String, aggregatable: false, integer: false}
+      "document_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "document_journal" : {type: String, aggregatable: true, integer: false}
+      "document_year" : {type: Number, aggregatable: true, integer: true}
+      "ligand_efficiency.bei" : {type: Number, aggregatable: true, integer: false}
+      "ligand_efficiency.le" : {type: Number, aggregatable: true, integer: false}
+      "ligand_efficiency.lle" : {type: Number, aggregatable: true, integer: false}
+      "ligand_efficiency.sei" : {type: Number, aggregatable: true, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "pchembl_value" : {type: Number, aggregatable: true, integer: false}
+      "potential_duplicate" : {type: Boolean, aggregatable: true, integer: false}
+      "published_relation" : {type: String, aggregatable: true, integer: false}
+      "published_type" : {type: String, aggregatable: true, integer: false}
+      "published_units" : {type: String, aggregatable: true, integer: false}
+      "published_value" : {type: Number, aggregatable: true, integer: false}
+      "qudt_units" : {type: String, aggregatable: true, integer: false}
+      "record_id" : {type: String, aggregatable: true, integer: false}
+      "src_id" : {type: String, aggregatable: true, integer: false}
+      "standard_flag" : {type: Boolean, aggregatable: true, integer: false}
+      "standard_relation" : {type: String, aggregatable: true, integer: false}
+      "standard_type" : {type: String, aggregatable: true, integer: false}
+      "standard_units" : {type: String, aggregatable: true, integer: false}
+      "standard_value" : {type: Number, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "target_organism" : {type: String, aggregatable: true, integer: false}
+      "target_pref_name" : {type: String, aggregatable: false, integer: false}
+      "uo_units" : {type: String, aggregatable: true, integer: false}
     chembl_assay:
-      "assay_category" : {type: String, aggregatable: true}
-      "assay_cell_type" : {type: String, aggregatable: true}
-      "assay_chembl_id" : {type: String, aggregatable: true}
-      "assay_organism" : {type: String, aggregatable: true}
-      "assay_strain" : {type: String, aggregatable: true}
-      "assay_subcellular_fraction" : {type: String, aggregatable: true}
-      "assay_tax_id" : {type: String, aggregatable: true}
-      "assay_test_type" : {type: String, aggregatable: true}
-      "assay_tissue" : {type: String, aggregatable: true}
-      "assay_type" : {type: String, aggregatable: true}
-      "assay_type_description" : {type: String, aggregatable: true}
-      "bao_format" : {type: String, aggregatable: true}
-      "cell_chembl_id" : {type: String, aggregatable: true}
-      "confidence_description" : {type: String, aggregatable: true}
-      "confidence_score" : {type: Number, aggregatable: true}
-      "description" : {type: String, aggregatable: false}
-      "document_chembl_id" : {type: String, aggregatable: true}
-      "relationship_description" : {type: String, aggregatable: true}
-      "relationship_type" : {type: String, aggregatable: true}
-      "src_assay_id" : {type: String, aggregatable: true}
-      "src_id" : {type: String, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
-      "tissue_chembl_id" : {type: String, aggregatable: true}
+      "assay_category" : {type: String, aggregatable: true, integer: false}
+      "assay_cell_type" : {type: String, aggregatable: true, integer: false}
+      "assay_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "assay_organism" : {type: String, aggregatable: true, integer: false}
+      "assay_strain" : {type: String, aggregatable: true, integer: false}
+      "assay_subcellular_fraction" : {type: String, aggregatable: true, integer: false}
+      "assay_tax_id" : {type: String, aggregatable: true, integer: false}
+      "assay_test_type" : {type: String, aggregatable: true, integer: false}
+      "assay_tissue" : {type: String, aggregatable: true, integer: false}
+      "assay_type" : {type: String, aggregatable: true, integer: false}
+      "assay_type_description" : {type: String, aggregatable: true, integer: false}
+      "bao_format" : {type: String, aggregatable: true, integer: false}
+      "cell_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "confidence_description" : {type: String, aggregatable: true, integer: false}
+      "confidence_score" : {type: Number, aggregatable: true, integer: false}
+      "description" : {type: String, aggregatable: false, integer: false}
+      "document_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "relationship_description" : {type: String, aggregatable: true, integer: false}
+      "relationship_type" : {type: String, aggregatable: true, integer: false}
+      "src_assay_id" : {type: String, aggregatable: true, integer: false}
+      "src_id" : {type: String, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "tissue_chembl_id" : {type: String, aggregatable: true, integer: false}
     chembl_atc_class:
-      "level1" : {type: String, aggregatable: true}
-      "level1_description" : {type: String, aggregatable: true}
-      "level2" : {type: String, aggregatable: true}
-      "level2_description" : {type: String, aggregatable: true}
-      "level3" : {type: String, aggregatable: true}
-      "level3_description" : {type: String, aggregatable: true}
-      "level4" : {type: String, aggregatable: true}
-      "level4_description" : {type: String, aggregatable: true}
-      "level5" : {type: String, aggregatable: true}
-      "who_name" : {type: String, aggregatable: true}
+      "level1" : {type: String, aggregatable: true, integer: false}
+      "level1_description" : {type: String, aggregatable: true, integer: false}
+      "level2" : {type: String, aggregatable: true, integer: false}
+      "level2_description" : {type: String, aggregatable: true, integer: false}
+      "level3" : {type: String, aggregatable: true, integer: false}
+      "level3_description" : {type: String, aggregatable: true, integer: false}
+      "level4" : {type: String, aggregatable: true, integer: false}
+      "level4_description" : {type: String, aggregatable: true, integer: false}
+      "level5" : {type: String, aggregatable: true, integer: false}
+      "who_name" : {type: String, aggregatable: true, integer: false}
     chembl_binding_site:
-      "site_components.domain.domain_id" : {type: String, aggregatable: true}
-      "site_components.domain.domain_name" : {type: String, aggregatable: true}
-      "site_components.domain.domain_type" : {type: String, aggregatable: true}
-      "site_components.domain.source_domain_id" : {type: String, aggregatable: true}
-      "site_components.sitecomp_id" : {type: String, aggregatable: true}
-      "site_id" : {type: String, aggregatable: true}
-      "site_name" : {type: String, aggregatable: false}
+      "site_components.domain.domain_id" : {type: String, aggregatable: true, integer: false}
+      "site_components.domain.domain_name" : {type: String, aggregatable: true, integer: false}
+      "site_components.domain.domain_type" : {type: String, aggregatable: true, integer: false}
+      "site_components.domain.source_domain_id" : {type: String, aggregatable: true, integer: false}
+      "site_components.sitecomp_id" : {type: String, aggregatable: true, integer: false}
+      "site_id" : {type: String, aggregatable: true, integer: false}
+      "site_name" : {type: String, aggregatable: false, integer: false}
     chembl_biotherapeutic:
-      "biocomponents.component_id" : {type: String, aggregatable: true}
-      "biocomponents.component_type" : {type: String, aggregatable: true}
-      "biocomponents.description" : {type: String, aggregatable: false}
-      "biocomponents.organism" : {type: String, aggregatable: true}
-      "biocomponents.sequence" : {type: String, aggregatable: true}
-      "biocomponents.tax_id" : {type: String, aggregatable: true}
-      "description" : {type: String, aggregatable: false}
-      "helm_notation" : {type: String, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
+      "biocomponents.component_id" : {type: String, aggregatable: true, integer: false}
+      "biocomponents.component_type" : {type: String, aggregatable: true, integer: false}
+      "biocomponents.description" : {type: String, aggregatable: false, integer: false}
+      "biocomponents.organism" : {type: String, aggregatable: true, integer: false}
+      "biocomponents.sequence" : {type: String, aggregatable: true, integer: false}
+      "biocomponents.tax_id" : {type: String, aggregatable: true, integer: false}
+      "description" : {type: String, aggregatable: false, integer: false}
+      "helm_notation" : {type: String, aggregatable: true, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
     chembl_cell_line:
-      "cell_chembl_id" : {type: String, aggregatable: true}
-      "cell_description" : {type: String, aggregatable: true}
-      "cell_id" : {type: String, aggregatable: true}
-      "cell_name" : {type: String, aggregatable: false}
-      "cell_source_organism" : {type: String, aggregatable: true}
-      "cell_source_tax_id" : {type: String, aggregatable: true}
-      "cell_source_tissue" : {type: String, aggregatable: true}
-      "cellosaurus_id" : {type: String, aggregatable: true}
-      "cl_lincs_id" : {type: String, aggregatable: true}
-      "clo_id" : {type: String, aggregatable: true}
-      "efo_id" : {type: String, aggregatable: true}
+      "cell_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "cell_description" : {type: String, aggregatable: true, integer: false}
+      "cell_id" : {type: String, aggregatable: true, integer: false}
+      "cell_name" : {type: String, aggregatable: false, integer: false}
+      "cell_source_organism" : {type: String, aggregatable: true, integer: false}
+      "cell_source_tax_id" : {type: String, aggregatable: true, integer: false}
+      "cell_source_tissue" : {type: String, aggregatable: true, integer: false}
+      "cellosaurus_id" : {type: String, aggregatable: true, integer: false}
+      "cl_lincs_id" : {type: String, aggregatable: true, integer: false}
+      "clo_id" : {type: String, aggregatable: true, integer: false}
+      "efo_id" : {type: String, aggregatable: true, integer: false}
     chembl_chembl_id_lookup:
-      "chembl_id" : {type: String, aggregatable: true}
-      "chembl_id_number" : {type: Number, aggregatable: true}
-      "entity_type" : {type: String, aggregatable: true}
-      "resource_url" : {type: String, aggregatable: true}
-      "status" : {type: String, aggregatable: true}
+      "chembl_id" : {type: String, aggregatable: true, integer: false}
+      "chembl_id_number" : {type: Number, aggregatable: true, integer: true}
+      "entity_type" : {type: String, aggregatable: true, integer: false}
+      "resource_url" : {type: String, aggregatable: true, integer: false}
+      "status" : {type: String, aggregatable: true, integer: false}
     chembl_compound_record:
-      "compound_key" : {type: String, aggregatable: true}
-      "compound_name" : {type: String, aggregatable: false}
-      "curated" : {type: Boolean, aggregatable: true}
-      "document_chembl_id" : {type: String, aggregatable: true}
-      "load_date" : {type: String, aggregatable: false}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "record_id" : {type: String, aggregatable: true}
-      "src_id" : {type: String, aggregatable: true}
+      "compound_key" : {type: String, aggregatable: true, integer: false}
+      "compound_name" : {type: String, aggregatable: false, integer: false}
+      "curated" : {type: Boolean, aggregatable: true, integer: false}
+      "document_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "load_date" : {type: String, aggregatable: false, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "record_id" : {type: String, aggregatable: true, integer: false}
+      "src_id" : {type: String, aggregatable: true, integer: false}
     chembl_document:
-      "abstract" : {type: String, aggregatable: false}
-      "authors" : {type: String, aggregatable: false}
-      "doc_type" : {type: String, aggregatable: true}
-      "document_chembl_id" : {type: String, aggregatable: true}
-      "doi" : {type: String, aggregatable: true}
-      "first_page" : {type: String, aggregatable: true}
-      "issue" : {type: String, aggregatable: true}
-      "journal" : {type: String, aggregatable: true}
-      "last_page" : {type: String, aggregatable: true}
-      "patent_id" : {type: String, aggregatable: true}
-      "pubmed_id" : {type: String, aggregatable: true}
-      "title" : {type: String, aggregatable: false}
-      "volume" : {type: Number, aggregatable: true}
-      "year" : {type: Number, aggregatable: true}
+      "abstract" : {type: String, aggregatable: false, integer: false}
+      "authors" : {type: String, aggregatable: false, integer: false}
+      "doc_type" : {type: String, aggregatable: true, integer: false}
+      "document_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "doi" : {type: String, aggregatable: true, integer: false}
+      "first_page" : {type: String, aggregatable: true, integer: false}
+      "issue" : {type: String, aggregatable: true, integer: false}
+      "journal" : {type: String, aggregatable: true, integer: false}
+      "last_page" : {type: String, aggregatable: true, integer: false}
+      "patent_id" : {type: String, aggregatable: true, integer: false}
+      "pubmed_id" : {type: String, aggregatable: true, integer: false}
+      "title" : {type: String, aggregatable: false, integer: false}
+      "volume" : {type: Number, aggregatable: true, integer: true}
+      "year" : {type: Number, aggregatable: true, integer: true}
     chembl_drug:
-      "applicants" : {type: String, aggregatable: false}
-      "atc_classification.code" : {type: String, aggregatable: true}
-      "atc_classification.description" : {type: String, aggregatable: false}
-      "availability_type" : {type: Number, aggregatable: true}
-      "black_box" : {type: Boolean, aggregatable: true}
-      "chirality" : {type: Number, aggregatable: true}
-      "development_phase" : {type: Number, aggregatable: true}
-      "drug_type" : {type: Number, aggregatable: true}
-      "first_approval" : {type: Number, aggregatable: true}
-      "first_in_class" : {type: Boolean, aggregatable: true}
-      "indication_class" : {type: String, aggregatable: false}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "ob_patent" : {type: String, aggregatable: true}
-      "oral" : {type: Boolean, aggregatable: true}
-      "parenteral" : {type: Boolean, aggregatable: true}
-      "prodrug" : {type: Boolean, aggregatable: true}
-      "research_codes" : {type: String, aggregatable: true}
-      "rule_of_five" : {type: Boolean, aggregatable: true}
-      "sc_patent" : {type: String, aggregatable: true}
-      "synonyms" : {type: String, aggregatable: false}
-      "topical" : {type: Boolean, aggregatable: true}
-      "usan_stem" : {type: String, aggregatable: true}
-      "usan_stem_definition" : {type: String, aggregatable: true}
-      "usan_stem_substem" : {type: String, aggregatable: true}
-      "usan_year" : {type: Number, aggregatable: true}
-      "withdrawn_country" : {type: String, aggregatable: true}
-      "withdrawn_reason" : {type: String, aggregatable: false}
-      "withdrawn_year" : {type: Number, aggregatable: true}
+      "applicants" : {type: String, aggregatable: false, integer: false}
+      "atc_classification.code" : {type: String, aggregatable: true, integer: false}
+      "atc_classification.description" : {type: String, aggregatable: false, integer: false}
+      "availability_type" : {type: Number, aggregatable: true, integer: true}
+      "black_box" : {type: Boolean, aggregatable: true, integer: false}
+      "chirality" : {type: Number, aggregatable: true, integer: true}
+      "development_phase" : {type: Number, aggregatable: true, integer: true}
+      "drug_type" : {type: Number, aggregatable: true, integer: true}
+      "first_approval" : {type: Number, aggregatable: true, integer: true}
+      "first_in_class" : {type: Boolean, aggregatable: true, integer: false}
+      "indication_class" : {type: String, aggregatable: false, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "ob_patent" : {type: String, aggregatable: true, integer: false}
+      "oral" : {type: Boolean, aggregatable: true, integer: false}
+      "parenteral" : {type: Boolean, aggregatable: true, integer: false}
+      "prodrug" : {type: Boolean, aggregatable: true, integer: false}
+      "research_codes" : {type: String, aggregatable: true, integer: false}
+      "rule_of_five" : {type: Boolean, aggregatable: true, integer: false}
+      "sc_patent" : {type: String, aggregatable: true, integer: false}
+      "synonyms" : {type: String, aggregatable: false, integer: false}
+      "topical" : {type: Boolean, aggregatable: true, integer: false}
+      "usan_stem" : {type: String, aggregatable: true, integer: false}
+      "usan_stem_definition" : {type: String, aggregatable: true, integer: false}
+      "usan_stem_substem" : {type: String, aggregatable: true, integer: false}
+      "usan_year" : {type: Number, aggregatable: true, integer: true}
+      "withdrawn_country" : {type: String, aggregatable: true, integer: false}
+      "withdrawn_reason" : {type: String, aggregatable: false, integer: false}
+      "withdrawn_year" : {type: Number, aggregatable: true, integer: true}
     chembl_drug_indication:
-      "drugind_id" : {type: String, aggregatable: true}
-      "efo_id" : {type: String, aggregatable: true}
-      "efo_term" : {type: String, aggregatable: false}
-      "indication_refs.ref_id" : {type: String, aggregatable: true}
-      "indication_refs.ref_type" : {type: String, aggregatable: true}
-      "indication_refs.ref_url" : {type: String, aggregatable: true}
-      "max_phase_for_ind" : {type: Number, aggregatable: true}
-      "mesh_heading" : {type: String, aggregatable: false}
-      "mesh_id" : {type: String, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
+      "drugind_id" : {type: String, aggregatable: true, integer: false}
+      "efo_id" : {type: String, aggregatable: true, integer: false}
+      "efo_term" : {type: String, aggregatable: false, integer: false}
+      "indication_refs.ref_id" : {type: String, aggregatable: true, integer: false}
+      "indication_refs.ref_type" : {type: String, aggregatable: true, integer: false}
+      "indication_refs.ref_url" : {type: String, aggregatable: true, integer: false}
+      "max_phase_for_ind" : {type: Number, aggregatable: true, integer: true}
+      "mesh_heading" : {type: String, aggregatable: false, integer: false}
+      "mesh_id" : {type: String, aggregatable: true, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
     chembl_go_slim:
-      "aspect" : {type: String, aggregatable: true}
-      "class_level" : {type: Number, aggregatable: true}
-      "go_id" : {type: String, aggregatable: true}
-      "parent_go_id" : {type: String, aggregatable: true}
-      "path" : {type: String, aggregatable: false}
-      "pref_name" : {type: String, aggregatable: false}
+      "aspect" : {type: String, aggregatable: true, integer: false}
+      "class_level" : {type: Number, aggregatable: true, integer: true}
+      "go_id" : {type: String, aggregatable: true, integer: false}
+      "parent_go_id" : {type: String, aggregatable: true, integer: false}
+      "path" : {type: String, aggregatable: false, integer: false}
+      "pref_name" : {type: String, aggregatable: false, integer: false}
     chembl_mechanism:
-      "action_type" : {type: String, aggregatable: true}
-      "binding_site_comment" : {type: String, aggregatable: false}
-      "direct_interaction" : {type: Boolean, aggregatable: true}
-      "disease_efficacy" : {type: Boolean, aggregatable: true}
-      "max_phase" : {type: Number, aggregatable: true}
-      "mec_id" : {type: String, aggregatable: true}
-      "mechanism_comment" : {type: String, aggregatable: false}
-      "mechanism_of_action" : {type: String, aggregatable: false}
-      "mechanism_refs.ref_id" : {type: String, aggregatable: true}
-      "mechanism_refs.ref_type" : {type: String, aggregatable: true}
-      "mechanism_refs.ref_url" : {type: String, aggregatable: true}
-      "molecular_mechanism" : {type: Boolean, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "record_id" : {type: String, aggregatable: true}
-      "selectivity_comment" : {type: String, aggregatable: true}
-      "site_id" : {type: String, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
+      "action_type" : {type: String, aggregatable: true, integer: false}
+      "binding_site_comment" : {type: String, aggregatable: false, integer: false}
+      "direct_interaction" : {type: Boolean, aggregatable: true, integer: false}
+      "disease_efficacy" : {type: Boolean, aggregatable: true, integer: false}
+      "max_phase" : {type: Number, aggregatable: true, integer: true}
+      "mec_id" : {type: String, aggregatable: true, integer: false}
+      "mechanism_comment" : {type: String, aggregatable: false, integer: false}
+      "mechanism_of_action" : {type: String, aggregatable: false, integer: false}
+      "mechanism_refs.ref_id" : {type: String, aggregatable: true, integer: false}
+      "mechanism_refs.ref_type" : {type: String, aggregatable: true, integer: false}
+      "mechanism_refs.ref_url" : {type: String, aggregatable: true, integer: false}
+      "molecular_mechanism" : {type: Boolean, aggregatable: true, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "record_id" : {type: String, aggregatable: true, integer: false}
+      "selectivity_comment" : {type: String, aggregatable: true, integer: false}
+      "site_id" : {type: String, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
     chembl_metabolism:
-      "drug_chembl_id" : {type: String, aggregatable: true}
-      "enzyme_name" : {type: String, aggregatable: true}
-      "met_comment" : {type: String, aggregatable: false}
-      "met_conversion" : {type: String, aggregatable: false}
-      "met_id" : {type: String, aggregatable: true}
-      "metabolism_refs.ref_id" : {type: String, aggregatable: true}
-      "metabolism_refs.ref_type" : {type: String, aggregatable: true}
-      "metabolism_refs.ref_url" : {type: String, aggregatable: true}
-      "metabolite_chembl_id" : {type: String, aggregatable: true}
-      "organism" : {type: String, aggregatable: true}
-      "pathway_id" : {type: String, aggregatable: true}
-      "pathway_key" : {type: String, aggregatable: true}
-      "substrate_chembl_id" : {type: String, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
-      "tax_id" : {type: String, aggregatable: true}
+      "drug_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "enzyme_name" : {type: String, aggregatable: true, integer: false}
+      "met_comment" : {type: String, aggregatable: false, integer: false}
+      "met_conversion" : {type: String, aggregatable: false, integer: false}
+      "met_id" : {type: String, aggregatable: true, integer: false}
+      "metabolism_refs.ref_id" : {type: String, aggregatable: true, integer: false}
+      "metabolism_refs.ref_type" : {type: String, aggregatable: true, integer: false}
+      "metabolism_refs.ref_url" : {type: String, aggregatable: true, integer: false}
+      "metabolite_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "organism" : {type: String, aggregatable: true, integer: false}
+      "pathway_id" : {type: String, aggregatable: true, integer: false}
+      "pathway_key" : {type: String, aggregatable: true, integer: false}
+      "substrate_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "tax_id" : {type: String, aggregatable: true, integer: false}
     chembl_molecule:
-      "_metadata.activity_count" : {type: Number, aggregatable: true}
-      "_metadata.compound_records.compound_key" : {type: String, aggregatable: false}
-      "_metadata.compound_records.compound_name" : {type: String, aggregatable: false}
-      "_metadata.disease_name" : {type: String, aggregatable: false}
-      "_metadata.related_targets.chembl_ids.0" : {type: String, aggregatable: true}
-      "_metadata.related_targets.chembl_ids.1" : {type: String, aggregatable: true}
-      "_metadata.related_targets.chembl_ids.2" : {type: String, aggregatable: true}
-      "_metadata.related_targets.count" : {type: Number, aggregatable: true}
-      "_metadata.tags" : {type: String, aggregatable: true}
-      "atc_classifications" : {type: String, aggregatable: true}
-      "availability_type" : {type: Number, aggregatable: true}
-      "biotherapeutic.biocomponents.component_id" : {type: String, aggregatable: true}
-      "biotherapeutic.biocomponents.component_type" : {type: String, aggregatable: true}
-      "biotherapeutic.biocomponents.description" : {type: String, aggregatable: false}
-      "biotherapeutic.biocomponents.organism" : {type: String, aggregatable: true}
-      "biotherapeutic.biocomponents.sequence" : {type: String, aggregatable: true}
-      "biotherapeutic.biocomponents.tax_id" : {type: String, aggregatable: true}
-      "biotherapeutic.description" : {type: String, aggregatable: false}
-      "biotherapeutic.helm_notation" : {type: String, aggregatable: true}
-      "biotherapeutic.molecule_chembl_id" : {type: String, aggregatable: true}
-      "black_box_warning" : {type: String, aggregatable: true}
-      "chebi_par_id" : {type: String, aggregatable: true}
-      "chirality" : {type: Number, aggregatable: true}
-      "dosed_ingredient" : {type: Boolean, aggregatable: true}
-      "first_approval" : {type: Number, aggregatable: true}
-      "first_in_class" : {type: Number, aggregatable: true}
-      "helm_notation" : {type: String, aggregatable: true}
-      "indication_class" : {type: String, aggregatable: true}
-      "inorganic_flag" : {type: Number, aggregatable: true}
-      "max_phase" : {type: Number, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "molecule_hierarchy.molecule_chembl_id" : {type: String, aggregatable: true}
-      "molecule_hierarchy.parent_chembl_id" : {type: String, aggregatable: true}
-      "molecule_properties.acd_logd" : {type: Number, aggregatable: true}
-      "molecule_properties.acd_logp" : {type: Number, aggregatable: true}
-      "molecule_properties.acd_most_apka" : {type: Number, aggregatable: true}
-      "molecule_properties.acd_most_bpka" : {type: Number, aggregatable: true}
-      "molecule_properties.alogp" : {type: Number, aggregatable: true}
-      "molecule_properties.aromatic_rings" : {type: Number, aggregatable: true}
-      "molecule_properties.full_molformula" : {type: String, aggregatable: true}
-      "molecule_properties.full_mwt" : {type: Number, aggregatable: true}
-      "molecule_properties.hba" : {type: Number, aggregatable: true}
-      "molecule_properties.hba_lipinski" : {type: Number, aggregatable: true}
-      "molecule_properties.hbd" : {type: Number, aggregatable: true}
-      "molecule_properties.hbd_lipinski" : {type: Number, aggregatable: true}
-      "molecule_properties.heavy_atoms" : {type: Number, aggregatable: true}
-      "molecule_properties.molecular_species" : {type: String, aggregatable: true}
-      "molecule_properties.mw_freebase" : {type: Number, aggregatable: true}
-      "molecule_properties.mw_monoisotopic" : {type: Number, aggregatable: true}
-      "molecule_properties.num_alerts" : {type: Number, aggregatable: true}
-      "molecule_properties.num_lipinski_ro5_violations" : {type: Number, aggregatable: true}
-      "molecule_properties.num_ro5_violations" : {type: Number, aggregatable: true}
-      "molecule_properties.psa" : {type: Number, aggregatable: true}
-      "molecule_properties.qed_weighted" : {type: Number, aggregatable: true}
-      "molecule_properties.ro3_pass" : {type: String, aggregatable: true}
-      "molecule_properties.rtb" : {type: Number, aggregatable: true}
-      "molecule_structures.canonical_smiles" : {type: String, aggregatable: true}
-      "molecule_structures.standard_inchi" : {type: String, aggregatable: true}
-      "molecule_structures.standard_inchi_key" : {type: String, aggregatable: true}
-      "molecule_synonyms.molecule_synonym" : {type: String, aggregatable: false}
-      "molecule_synonyms.syn_type" : {type: String, aggregatable: true}
-      "molecule_synonyms.synonyms" : {type: String, aggregatable: false}
-      "molecule_type" : {type: String, aggregatable: true}
-      "natural_product" : {type: Number, aggregatable: true}
-      "oral" : {type: Boolean, aggregatable: true}
-      "parenteral" : {type: Boolean, aggregatable: true}
-      "polymer_flag" : {type: Boolean, aggregatable: true}
-      "pref_name" : {type: String, aggregatable: false}
-      "prodrug" : {type: Number, aggregatable: true}
-      "structure_type" : {type: String, aggregatable: true}
-      "therapeutic_flag" : {type: Boolean, aggregatable: true}
-      "topical" : {type: Boolean, aggregatable: true}
-      "usan_stem" : {type: String, aggregatable: true}
-      "usan_stem_definition" : {type: String, aggregatable: false}
-      "usan_substem" : {type: String, aggregatable: true}
-      "usan_year" : {type: Number, aggregatable: true}
-      "withdrawn_country" : {type: String, aggregatable: true}
-      "withdrawn_flag" : {type: Boolean, aggregatable: true}
-      "withdrawn_reason" : {type: String, aggregatable: false}
-      "withdrawn_year" : {type: Number, aggregatable: true}
+      "_metadata.activity_count" : {type: Number, aggregatable: true, integer: true}
+      "_metadata.compound_records.compound_key" : {type: String, aggregatable: false, integer: false}
+      "_metadata.compound_records.compound_name" : {type: String, aggregatable: false, integer: false}
+      "_metadata.disease_name" : {type: String, aggregatable: false, integer: false}
+      "_metadata.es_completion" : {type: String, aggregatable: false, integer: false}
+      "_metadata.related_targets.chembl_ids.0" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_targets.chembl_ids.1" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_targets.chembl_ids.2" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_targets.count" : {type: Number, aggregatable: true, integer: true}
+      "_metadata.tags" : {type: String, aggregatable: true, integer: false}
+      "atc_classifications" : {type: String, aggregatable: true, integer: false}
+      "availability_type" : {type: Number, aggregatable: true, integer: true}
+      "biotherapeutic.biocomponents.component_id" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.biocomponents.component_type" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.biocomponents.description" : {type: String, aggregatable: false, integer: false}
+      "biotherapeutic.biocomponents.organism" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.biocomponents.sequence" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.biocomponents.tax_id" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.description" : {type: String, aggregatable: false, integer: false}
+      "biotherapeutic.helm_notation" : {type: String, aggregatable: true, integer: false}
+      "biotherapeutic.molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "black_box_warning" : {type: String, aggregatable: true, integer: false}
+      "chebi_par_id" : {type: String, aggregatable: true, integer: false}
+      "chirality" : {type: Number, aggregatable: true, integer: true}
+      "dosed_ingredient" : {type: Boolean, aggregatable: true, integer: false}
+      "first_approval" : {type: Number, aggregatable: true, integer: true}
+      "first_in_class" : {type: Number, aggregatable: true, integer: true}
+      "helm_notation" : {type: String, aggregatable: true, integer: false}
+      "indication_class" : {type: String, aggregatable: true, integer: false}
+      "inorganic_flag" : {type: Number, aggregatable: true, integer: true}
+      "max_phase" : {type: Number, aggregatable: true, integer: true}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "molecule_hierarchy.molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "molecule_hierarchy.parent_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "molecule_properties.acd_logd" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.acd_logp" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.acd_most_apka" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.acd_most_bpka" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.alogp" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.aromatic_rings" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.full_molformula" : {type: String, aggregatable: true, integer: false}
+      "molecule_properties.full_mwt" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.hba" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.hba_lipinski" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.hbd" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.hbd_lipinski" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.heavy_atoms" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.molecular_species" : {type: String, aggregatable: true, integer: false}
+      "molecule_properties.mw_freebase" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.mw_monoisotopic" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.num_alerts" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.num_lipinski_ro5_violations" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.num_ro5_violations" : {type: Number, aggregatable: true, integer: true}
+      "molecule_properties.psa" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.qed_weighted" : {type: Number, aggregatable: true, integer: false}
+      "molecule_properties.ro3_pass" : {type: String, aggregatable: true, integer: false}
+      "molecule_properties.rtb" : {type: Number, aggregatable: true, integer: true}
+      "molecule_structures.canonical_smiles" : {type: String, aggregatable: true, integer: false}
+      "molecule_structures.standard_inchi" : {type: String, aggregatable: true, integer: false}
+      "molecule_structures.standard_inchi_key" : {type: String, aggregatable: true, integer: false}
+      "molecule_synonyms.molecule_synonym" : {type: String, aggregatable: false, integer: false}
+      "molecule_synonyms.syn_type" : {type: String, aggregatable: true, integer: false}
+      "molecule_synonyms.synonyms" : {type: String, aggregatable: false, integer: false}
+      "molecule_type" : {type: String, aggregatable: true, integer: false}
+      "natural_product" : {type: Number, aggregatable: true, integer: true}
+      "oral" : {type: Boolean, aggregatable: true, integer: false}
+      "parenteral" : {type: Boolean, aggregatable: true, integer: false}
+      "polymer_flag" : {type: Boolean, aggregatable: true, integer: false}
+      "pref_name" : {type: String, aggregatable: false, integer: false}
+      "prodrug" : {type: Number, aggregatable: true, integer: true}
+      "structure_type" : {type: String, aggregatable: true, integer: false}
+      "therapeutic_flag" : {type: Boolean, aggregatable: true, integer: false}
+      "topical" : {type: Boolean, aggregatable: true, integer: false}
+      "usan_stem" : {type: String, aggregatable: true, integer: false}
+      "usan_stem_definition" : {type: String, aggregatable: false, integer: false}
+      "usan_substem" : {type: String, aggregatable: true, integer: false}
+      "usan_year" : {type: Number, aggregatable: true, integer: true}
+      "withdrawn_country" : {type: String, aggregatable: true, integer: false}
+      "withdrawn_flag" : {type: Boolean, aggregatable: true, integer: false}
+      "withdrawn_reason" : {type: String, aggregatable: false, integer: false}
+      "withdrawn_year" : {type: Number, aggregatable: true, integer: true}
     chembl_molecule_form:
-      "is_parent" : {type: Boolean, aggregatable: true}
-      "molecule_chembl_id" : {type: String, aggregatable: true}
-      "parent_chembl_id" : {type: String, aggregatable: true}
+      "is_parent" : {type: Boolean, aggregatable: true, integer: false}
+      "molecule_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "parent_chembl_id" : {type: String, aggregatable: true, integer: false}
+    chembl_organism:
+      "l1" : {type: String, aggregatable: true, integer: false}
+      "l2" : {type: String, aggregatable: true, integer: false}
+      "l3" : {type: String, aggregatable: true, integer: false}
+      "oc_id" : {type: String, aggregatable: true, integer: false}
+      "tax_id" : {type: String, aggregatable: true, integer: false}
     chembl_protein_class:
-      "l1" : {type: String, aggregatable: true}
-      "l2" : {type: String, aggregatable: true}
-      "l3" : {type: String, aggregatable: true}
-      "l4" : {type: String, aggregatable: true}
-      "l5" : {type: String, aggregatable: true}
-      "l6" : {type: String, aggregatable: true}
-      "protein_class_id" : {type: String, aggregatable: true}
+      "l1" : {type: String, aggregatable: true, integer: false}
+      "l2" : {type: String, aggregatable: true, integer: false}
+      "l3" : {type: String, aggregatable: true, integer: false}
+      "l4" : {type: String, aggregatable: true, integer: false}
+      "l5" : {type: String, aggregatable: true, integer: false}
+      "l6" : {type: String, aggregatable: true, integer: false}
+      "protein_class_id" : {type: String, aggregatable: true, integer: false}
     chembl_source:
-      "src_description" : {type: String, aggregatable: true}
-      "src_id" : {type: String, aggregatable: true}
-      "src_short_name" : {type: String, aggregatable: true}
+      "src_description" : {type: String, aggregatable: true, integer: false}
+      "src_id" : {type: String, aggregatable: true, integer: false}
+      "src_short_name" : {type: String, aggregatable: true, integer: false}
     chembl_target:
-      "_metadata.activity_count" : {type: Number, aggregatable: true}
-      "_metadata.disease_name" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.0" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.1" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.10" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.11" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.12" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.13" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.14" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.15" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.16" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.17" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.18" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.19" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.2" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.20" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.21" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.22" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.23" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.24" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.25" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.26" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.27" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.28" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.29" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.3" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.30" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.31" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.32" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.33" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.34" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.35" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.36" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.37" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.38" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.39" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.4" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.40" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.41" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.42" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.43" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.44" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.45" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.46" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.47" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.48" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.49" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.5" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.50" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.51" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.52" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.53" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.54" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.55" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.56" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.57" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.58" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.59" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.6" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.60" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.61" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.62" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.63" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.64" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.65" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.66" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.67" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.68" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.69" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.7" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.70" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.71" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.72" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.73" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.74" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.75" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.76" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.77" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.78" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.79" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.8" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.chembl_ids.9" : {type: String, aggregatable: true}
-      "_metadata.related_compounds.count" : {type: Number, aggregatable: true}
-      "_metadata.tags" : {type: String, aggregatable: true}
-      "organism" : {type: String, aggregatable: true}
-      "pref_name" : {type: String, aggregatable: false}
-      "species_group_flag" : {type: Boolean, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
-      "target_components.accession" : {type: String, aggregatable: true}
-      "target_components.component_description" : {type: String, aggregatable: false}
-      "target_components.component_id" : {type: String, aggregatable: true}
-      "target_components.component_type" : {type: String, aggregatable: true}
-      "target_components.relationship" : {type: String, aggregatable: true}
-      "target_components.target_component_synonyms.component_synonym" : {type: String, aggregatable: false}
-      "target_components.target_component_synonyms.syn_type" : {type: String, aggregatable: true}
-      "target_type" : {type: String, aggregatable: true}
+      "_metadata.activity_count" : {type: Number, aggregatable: true, integer: true}
+      "_metadata.disease_name" : {type: String, aggregatable: false, integer: false}
+      "_metadata.es_completion" : {type: String, aggregatable: false, integer: false}
+      "_metadata.related_compounds.chembl_ids.0" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.1" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.10" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.11" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.12" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.13" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.14" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.15" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.16" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.17" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.18" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.19" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.2" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.20" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.21" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.22" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.23" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.24" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.25" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.26" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.27" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.28" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.29" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.3" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.30" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.31" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.32" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.33" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.34" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.35" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.36" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.37" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.38" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.39" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.4" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.40" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.41" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.42" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.43" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.44" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.45" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.46" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.47" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.48" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.49" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.5" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.50" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.51" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.52" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.53" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.54" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.55" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.56" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.57" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.58" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.59" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.6" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.60" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.61" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.62" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.63" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.64" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.65" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.66" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.67" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.68" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.69" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.7" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.70" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.71" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.72" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.73" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.74" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.75" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.76" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.77" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.78" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.79" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.8" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.chembl_ids.9" : {type: String, aggregatable: true, integer: false}
+      "_metadata.related_compounds.count" : {type: Number, aggregatable: true, integer: true}
+      "_metadata.tags" : {type: String, aggregatable: true, integer: false}
+      "organism" : {type: String, aggregatable: true, integer: false}
+      "pref_name" : {type: String, aggregatable: false, integer: false}
+      "species_group_flag" : {type: Boolean, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "target_components.accession" : {type: String, aggregatable: true, integer: false}
+      "target_components.component_description" : {type: String, aggregatable: false, integer: false}
+      "target_components.component_id" : {type: String, aggregatable: true, integer: false}
+      "target_components.component_type" : {type: String, aggregatable: true, integer: false}
+      "target_components.relationship" : {type: String, aggregatable: true, integer: false}
+      "target_components.target_component_synonyms.component_synonym" : {type: String, aggregatable: false, integer: false}
+      "target_components.target_component_synonyms.syn_type" : {type: String, aggregatable: true, integer: false}
+      "target_type" : {type: String, aggregatable: true, integer: false}
     chembl_target_component:
-      "accession" : {type: String, aggregatable: true}
-      "component_id" : {type: String, aggregatable: true}
-      "component_type" : {type: String, aggregatable: true}
-      "description" : {type: String, aggregatable: false}
-      "go_slims.go_id" : {type: String, aggregatable: true}
-      "organism" : {type: String, aggregatable: true}
-      "protein_classifications.protein_classification_id" : {type: String, aggregatable: true}
-      "sequence" : {type: String, aggregatable: true}
-      "target_component_synonyms.component_synonym" : {type: String, aggregatable: true}
-      "target_component_synonyms.syn_type" : {type: String, aggregatable: true}
-      "targets.target_chembl_id" : {type: String, aggregatable: true}
-      "tax_id" : {type: String, aggregatable: true}
+      "accession" : {type: String, aggregatable: true, integer: false}
+      "component_id" : {type: String, aggregatable: true, integer: false}
+      "component_type" : {type: String, aggregatable: true, integer: false}
+      "description" : {type: String, aggregatable: false, integer: false}
+      "go_slims.go_id" : {type: String, aggregatable: true, integer: false}
+      "organism" : {type: String, aggregatable: true, integer: false}
+      "protein_classifications.protein_classification_id" : {type: String, aggregatable: true, integer: false}
+      "sequence" : {type: String, aggregatable: true, integer: false}
+      "target_component_synonyms.component_synonym" : {type: String, aggregatable: true, integer: false}
+      "target_component_synonyms.syn_type" : {type: String, aggregatable: true, integer: false}
+      "targets.target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "tax_id" : {type: String, aggregatable: true, integer: false}
     chembl_target_relation:
-      "related_target_chembl_id" : {type: String, aggregatable: true}
-      "relationship" : {type: String, aggregatable: true}
-      "target_chembl_id" : {type: String, aggregatable: true}
+      "related_target_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "relationship" : {type: String, aggregatable: true, integer: false}
+      "target_chembl_id" : {type: String, aggregatable: true, integer: false}
     chembl_tissue:
-      "bto_id" : {type: String, aggregatable: true}
-      "caloha_id" : {type: String, aggregatable: true}
-      "efo_id" : {type: String, aggregatable: true}
-      "pref_name" : {type: String, aggregatable: false}
-      "tissue_chembl_id" : {type: String, aggregatable: true}
-      "uberon_id" : {type: String, aggregatable: true}
+      "bto_id" : {type: String, aggregatable: true, integer: false}
+      "caloha_id" : {type: String, aggregatable: true, integer: false}
+      "efo_id" : {type: String, aggregatable: true, integer: false}
+      "pref_name" : {type: String, aggregatable: false, integer: false}
+      "tissue_chembl_id" : {type: String, aggregatable: true, integer: false}
+      "uberon_id" : {type: String, aggregatable: true, integer: false}
