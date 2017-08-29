@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.Browsers',
   BrowserMenuView: Backbone.View.extend
 
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
-      'Matrix': glados.views.SearchResults.ESResultsCompoundMatrixView
       'Graph': glados.views.SearchResults.ESResultsGraphView
       'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
@@ -31,11 +30,21 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
-      new glados.views.Browsers.BrowserFacetView
+      @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
 
+    wakeUp: ->
+      @facetsView.wakeUp()
+      $currentViewInstance = @getCurrentViewInstance()
+      if $currentViewInstance.wakeUpView?
+        $currentViewInstance.wakeUpView()
+
     render: ->
+
+      if not $(@el).is(":visible")
+        return
+
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
@@ -166,14 +175,11 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if !@allViewsPerType[viewType]?
 
-        console.log 'view ', viewType, ' did not exist'
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID)
         templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
-        console.log 'TEMPLATE NAME: ', templateName
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
-        console.log '$viewElement: ', $viewElement
 
         # Instantiates the results list view for each ES entity and links them with the html component
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
@@ -186,7 +192,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       else
 
-        console.log 'view ', viewType, ' exists already! just need to wake it up'
         $('#' + viewElementID).show()
         # wake up the view if necessary
         if @allViewsPerType[viewType].wakeUpView?

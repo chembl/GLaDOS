@@ -98,9 +98,6 @@ SearchModel = Backbone.Model.extend
       debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
     debouncedAutocompleteRequest()
 
-
-
-
   get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
     delta = 0.3/chembl_ids.length
     query_string = terms.join(' ')

@@ -2694,7 +2694,7 @@ span.badge-primary-color-no-float {
         fill: none;
       }
 
-      &:not(.selected):hover{
+      &:not(.selected):not(.disabled):hover{
 
         .value-bar{
           fill: color($primary-color-name, 'lighten-3');
@@ -2704,6 +2704,19 @@ span.badge-primary-color-no-float {
           fill: color('teal', 'lighten-5');
         }
 
+      }
+
+      &.disabled{
+        cursor: initial;
+        .value-bar{
+          fill: color('grey', 'lighten-3');
+        }
+        .key-text{
+          fill: color('grey', 'lighten-1');
+        }
+        .count-text{
+          fill: color('grey', 'lighten-1');
+        }
       }
 
       &.selected{

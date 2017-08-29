@@ -9,6 +9,10 @@ class SearchResultsApp
     @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
     @searchBarAutocompleteView = glados.views.SearchResults.SearchBarAutocompleteView.getInstance()
 
+    $searchResultsContainer = $('.BCK-SearchResultsContainer')
+    new glados.views.SearchResults.SearchResultsView
+      el: $searchResultsContainer
+      model: SearchModel.getInstance()
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
@@ -97,17 +101,4 @@ class SearchResultsApp
             $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
               msg: msg
       )
-
-
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Graph Views
-  # --------------------------------------------------------------------------------------------------------------------
-
-  # this initialises the view that shows the compound results graph view
-  @initCompResultsGraphView = (topLevelElem) ->
-    compResGraphView = new PlotView
-      el: topLevelElem
-
-    return compResGraphView
 

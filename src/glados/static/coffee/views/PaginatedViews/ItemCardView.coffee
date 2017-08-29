@@ -102,8 +102,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         qtipConfig =
           content:
             text: $qtipContent
+            button: 'close'
           show:
             solo: true
+          hide: 'click'
           style:
             classes:'matrix-qtip qtip-light qtip-shadow'
           position:

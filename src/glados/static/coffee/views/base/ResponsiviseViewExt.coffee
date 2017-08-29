@@ -21,15 +21,29 @@ ResponsiviseViewExt =
   # this also binds the resize event with the repaint event.
   setUpResponsiveRender: (emptyBeforeRender=true) ->
 
+    @originalRender = $.proxy(@render, @)
+    renderIfResizeStopped = $.proxy((->
+      newWidth = @getVisElem().width()
+
+      if newWidth != @currentElemWidth
+        @currentElemWidth = newWidth
+        setTimeout(renderIfResizeStopped, glados.Settings.RESPONSIVE_SIZE_CHECK_WAIT)
+      else
+        @IS_RESPONSIVE_RENDER = true
+        @originalRender()
+        @hideResponsiveViewPreloader(emptyBeforeRender)
+        @IS_RESPONSIVE_RENDER = false
+    ), @)
+
     # the render function is debounced so it waits for the size of the
     # element to be ready
     reRender = ->
-      @IS_RESPONSIVE_RENDER = true
-      @render()
-      @IS_RESPONSIVE_RENDER = false
-      @hideResponsiveViewPreloader(emptyBeforeRender)
+
+      @currentElemWidth = @getVisElem().width()
+      setTimeout(renderIfResizeStopped, glados.Settings.RESPONSIVE_SIZE_CHECK_WAIT)
 
     debouncedRender = _.debounce($.proxy(reRender, @), glados.Settings.RESPONSIVE_REPAINT_WAIT)
+    @render = debouncedRender
     updateViewProxy = $.proxy(@updateView, @, debouncedRender, emptyBeforeRender)
 
     $(window).resize ->
@@ -58,11 +72,8 @@ ResponsiviseViewExt =
       @hidePreloader()
       return
 
-    if @$vis_elem?
-      $base_elem = @$vis_elem
-    else
-      $base_elem = $(@el)
+    $baseElem = @getVisElem()
+    $baseElem.find('.card-preolader-to-hide').hide()
+    $baseElem.attr('data-loading', 'false')
 
-
-    $base_elem.find('.card-preolader-to-hide').hide()
-    $base_elem.attr('data-loading', 'false')
+  getVisElem: -> if @$vis_elem? then @$vis_elem else $(@el)
