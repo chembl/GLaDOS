@@ -92,8 +92,8 @@ glados.useNameSpace 'glados.views.Browsers',
     initAllHistograms: ->
 
       @HISTOGRAM_PADDING =
-        top: 4
-        bottom: 4
+        top: 10
+        bottom: 10
         left: 8
         right: 8
 
@@ -185,7 +185,8 @@ glados.useNameSpace 'glados.views.Browsers',
         datumToAdd.key
         buckets.push datumToAdd
 
-      HISTOGRAM_HEIGHT = buckets.length * @BIN_HEIGHT
+      HISTOGRAM_HEIGHT = (buckets.length * @BIN_HEIGHT)
+      $containerElem.height(HISTOGRAM_HEIGHT + @HISTOGRAM_PADDING.top + @HISTOGRAM_PADDING.bottom)
 
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
