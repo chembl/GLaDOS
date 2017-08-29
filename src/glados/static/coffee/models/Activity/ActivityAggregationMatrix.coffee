@@ -22,12 +22,10 @@ glados.useNameSpace 'glados.models.Activity',
         cell_max_activity_count: 0
         cell_min_activity_count: 0
       @set('matrix', cleanMatrixConfig, {silent:true})
-      console.log '... matrix before fetch', JSON.stringify(@get('matrix'))
 
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'esJSONRequest: ', esJSONRequest
       fetchESOptions =
         url: @url
         data: esJSONRequest
@@ -367,7 +365,6 @@ glados.useNameSpace 'glados.models.Activity',
       @addCellAggregationsToRequest(requestData)
 
       console.log 'requestData: ', requestData
-      console.log JSON.stringify(requestData)
       return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
