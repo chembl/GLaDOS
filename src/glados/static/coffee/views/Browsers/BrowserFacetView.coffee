@@ -284,10 +284,12 @@ glados.useNameSpace 'glados.views.Browsers',
       countText = bucketG.select('.count-text')
       frontBar = bucketG.select('.front-bar')
 
+      # an estimation is needed because of troubles with .getBBox
+      charWidth = 6
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
-      keyTextWidth = keyText.node().getBBox().width
-      countTextWidth = countText.node().getBBox().width
+      keyTextWidth = keyText.text().length * charWidth
+      countTextWidth = countText.text().length * charWidth
 
       # remember that text anchor is end
       spaceForText = countTextX - countTextWidth
