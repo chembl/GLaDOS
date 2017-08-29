@@ -122,6 +122,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
+      console.log 'RENDER FACETS'
       if not $(@el).is(":visible")
         return
 
@@ -130,7 +131,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @destroyAllTooltips()
 
-      if @IS_RESPONSIVE_RENDER
+      if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
         @initializeHTMLStructure()
 
       @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
@@ -154,6 +155,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
+      @WAITING_FOR_FACETS = false
 
     initHistogram: ($containerElem) ->
 
@@ -246,7 +248,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .classed('make-teal-bar', true)
 
-      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
+      duration = if (@IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS) then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
         .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
@@ -328,6 +330,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
+      @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->
       @collection.clearAllFacetsSelections()
