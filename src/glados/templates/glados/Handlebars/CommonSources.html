@@ -911,9 +911,9 @@
     <ul class="collapsible z-depth-0" data-collapsible="expandable">
       {{#each facets}}
         <li>
-          <div class="collapsible-header">{{this.label}}</div>
+          <div class="BCK-collapsible-header collapsible-header" data-facet-group-key="{{this.key}}">
+            <i class="BCK-open-close-icon material-icons">arrow_drop_down</i>{{this.label}}</div>
           <div class="collapsible-body">
-            Facet!
             <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}"></div>
           </div>
         </li>

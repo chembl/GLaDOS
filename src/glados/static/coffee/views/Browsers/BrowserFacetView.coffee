@@ -35,6 +35,8 @@ glados.useNameSpace 'glados.views.Browsers',
         msg: 'Loading Filters...'
 
       $(@el).find('.collapsible').collapsible()
+      f = $.proxy(@toggleFacetOpening, @)
+      $(@el).find('.BCK-collapsible-header').click -> f($(@))
       @initAllHistograms()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -43,6 +45,26 @@ glados.useNameSpace 'glados.views.Browsers',
     wakeUp: ->
       if @collection.facetsReady
         @render()
+
+    toggleFacetOpening: ($opener) ->
+
+      console.log 'toggleFacetOpening'
+      $icon = $opener.find('.BCK-open-close-icon')
+
+      facetGroupKey = $opener.attr('data-facet-group-key')
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      console.log '$histogramContainer: ', $histogramContainer
+
+      if $opener.attr('data-is-open') != 'yes'
+        $icon.html('arrow_drop_up')
+        $opener.attr('data-is-open', 'yes')
+        $histogramContainer.attr('data-is-open', 'yes')
+        @updateHistogram($histogramContainer)
+      else
+        $icon.html('arrow_drop_down')
+        $opener.attr('data-is-open', 'no')
+        $histogramContainer.attr('data-is-open', 'no')
+
 
     showPreloader: ->
 
@@ -69,7 +91,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initAllHistograms: ->
 
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_PADDING =
+        top: 4
+        bottom: 4
+        left: 8
+        right: 8
+
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BIN_HEIGHT = 25
 
       @BARS_MIN_WIDTH = 1
@@ -105,8 +133,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @IS_RESPONSIVE_RENDER
         @initializeHTMLStructure()
 
-      return
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
@@ -130,13 +157,19 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initHistogram: ($containerElem) ->
 
+      console.log 'aaa @HISTOGRAM_WIDTH: ', @HISTOGRAM_WIDTH
+      console.log 'aaa @HISTOGRAM_PADDING: ', @HISTOGRAM_PADDING
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer
         .append('svg')
         .attr('class', 'mainSVGContainer')
-        .attr('width', @HISTOGRAM_WIDTH)
+        .attr('width', @HISTOGRAM_WIDTH )
+        .attr('transform', 'translate(' + @HISTOGRAM_PADDING.left + ',' + @HISTOGRAM_PADDING.top + ')')
 
     updateHistogram: ($containerElem) ->
+
+      if $containerElem.attr('data-is-open') != 'yes'
+        return
 
       thisView = @
 

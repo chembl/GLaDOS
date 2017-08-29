@@ -2631,8 +2631,15 @@ span.badge-primary-color-no-float {
   border-radius: 10px;
   padding: 6px 8px;
 
+  i.material-icons{
+    margin-right: 0;
+  }
   .filters-title{
     margin-top: 10px;
+  }
+
+  .collapsible-body{
+    padding: 0;
   }
 
   .clear-filters-button{
