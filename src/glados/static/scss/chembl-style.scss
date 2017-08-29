@@ -1679,10 +1679,10 @@ $search-items-height: 45px;
     background-color: darken($primary-color, 3%) !important;
   }
   &:focus {
-    background-color: $primary-color;
+    background-color: $primary-color !important;
   }
   &:hover {
-    background-color: lighten($primary-color, 3%);
+    background-color: lighten($primary-color, 3%) !important;
   }
 }
 
@@ -1701,7 +1701,21 @@ $search-items-height: 45px;
 
 }
 
+.autocomplete-option{
 
+  @extend .clean-button;
+  text-align: left;
+  &:active, &:target {
+    background-color: darken(white, 3%) !important;
+  }
+  &:focus {
+    outline: none !important;
+    background-color: darken(white, 10%) !important;
+  }
+  &:hover {
+    background-color: darken(white, 10%) !important;
+  }
+}
 
 
 /**

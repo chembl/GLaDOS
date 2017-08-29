@@ -15,15 +15,33 @@ glados.useNameSpace 'glados.views.SearchResults',
       @barId = null
       @lastSearch = null
       @qtipAPI = null
+      @$options = []
+      @numSuggestions = 0
 
     attachSearchBar: (barId)->
       @barId= barId
       $('#'+barId).bind(
         'keyup',
-        @submitAutocompleteRequest.bind(@)
+        @barKeyupHandler.bind(@)
+      )
+      $('#'+barId).bind(
+        'keydown',
+        @barKeydownHandler.bind(@)
       )
 
-    submitAutocompleteRequest: ()->
+    barKeydownHandler: (keyEvent)->
+      # Up key code
+      if keyEvent.which == 38
+        if @numSuggestions > 0
+          @$options[@numSuggestions-1].focus()
+        keyEvent.preventDefault()
+      # Down key code
+      else if keyEvent.which == 40
+        if @numSuggestions > 0
+          @$options[0].focus()
+        keyEvent.preventDefault()
+
+    barKeyupHandler: (keyEvent)->
       if $('#'+@barId).val().length >= 3
         searchText = $('#'+@barId).val()
         if @lastSearch != searchText
@@ -32,21 +50,57 @@ glados.useNameSpace 'glados.views.SearchResults',
       else
         @searchModel.set 'autocompleteSuggestions',[]
 
+    getKeydownListenerForSuggestionN: (n)->
+      return (keyEvent)->
+        # Up key code
+        if keyEvent.which == 38
+          if n == 0 and @numSuggestions > 0
+            $('#'+@barId).focus()
+          else if n < @numSuggestions
+            @$options[n-1].focus()
+          keyEvent.preventDefault()
+        # Down key code
+        else if keyEvent.which == 40
+          if n < @numSuggestions-1
+            @$options[n+1].focus()
+          else if n == @numSuggestions-1
+            $('#'+@barId).focus()
+          keyEvent.preventDefault()
+
+
+    linkTooltipOptions: (event, api)->
+      #AutoCompleteTooltip
+      $act = $('#search-bar-autocomplete-tooltip')
+      @$options = []
+      for n in [0..@numSuggestions]
+        $optionN = $act.find('.autocomplete-option-'+n)
+        $optionN.bind(
+          'keydown',
+          @getKeydownListenerForSuggestionN(n).bind(@)
+        )
+        @$options.push $optionN
+
+    unlinkTooltipOptions: (event, api)->
+      @$options = null
+
     updateAutocomplete: ()->
       $hoveredElem = $('#'+@barId)
       autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
+      @numSuggestions = autocompleteSuggestions.length
       if autocompleteSuggestions.length > 0
         if not @qtipAPI
           qtipConfig =
             content:
               text: ''
-            show:
-              solo: true
+            events:
+              show: @linkTooltipOptions.bind(@)
             hide:
               event: 'unfocus'
             position:
               my: 'top left'
               at: 'bottom left'
+            show:
+              solo: true
             style:
               width: $hoveredElem.width()
               classes:'simple-qtip qtip-light qtip-shadow'
@@ -55,6 +109,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
           suggestions: autocompleteSuggestions
+          textSearch: @lastSearch
         }))
         $hoveredElem.qtip('show')
       else if @qtipAPI

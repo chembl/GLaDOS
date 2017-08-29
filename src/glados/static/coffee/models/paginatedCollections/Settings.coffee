@@ -261,13 +261,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: []
         ADDITIONAL_COLUMNS:[]
 
-glados.models.paginatedCollections.Settings.ES_INDEX_2_MODEL = {}
+glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS= {}
 
 # fills the KEY_NAME for the ES_INDEXES object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
   val_i.PATH = '/'+val_i.INDEX_NAME
-  glados.models.paginatedCollections.Settings.ES_INDEX_2_MODEL[val_i.INDEX_NAME] = val_i.MODEL
+  glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[val_i.INDEX_NAME] = val_i
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
   val_i.KEY_NAME = key_i
   val_i.PATH = '/'+val_i.INDEX_NAME
