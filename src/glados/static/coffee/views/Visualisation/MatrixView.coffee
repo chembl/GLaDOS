@@ -33,7 +33,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible, it must be re rendered on wake up anyway
     if not $(@el).is(":visible")
       return
-
     if @config.rows_entity_name == 'Compounds'
 
       colsIndex = @model.get('matrix').columns_index
@@ -71,17 +70,30 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
 
+      numColumns = @model.get('matrix').columns.length
       @clearVisualisation()
-      @paintControls()
-      @paintMatrix()
+      if numColumns > 0
+        @paintControls()
+        @paintMatrix()
+        $messagesElement.html ''
+      else
+        @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
 
       endTime = Date.now()
       time = endTime - starTime
-      console.log 'render time: ', time
 
       $(@el).find('select').material_select()
 
-      $messagesElement.html ''
+
+
+  setProgressMessage: (msg, hideCog=false) ->
+
+    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+    glados.Utils.fillContentForElement $messagesElement,
+      message: msg
+      hide_cog: hideCog
+
+    $messagesElement.show()
 
   destroyAllTooltips: ->
 
@@ -291,6 +303,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # Window
     # --------------------------------------
     # now that I have the zoom, I can calculate the window
+    @unsetWindow()
     @calculateCurrentWindow(@zoomScale)
 
     console.log 'MIN_ZOOM: ', MIN_ZOOM
@@ -360,11 +373,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if transitionDuration == 0
         cellsContainerG.selectAll(".vis-cell")
-          .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+          .attr("y", (d) ->
+            (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale
+          )
       else
         t = cellsContainerG.transition().duration(transitionDuration)
         t.selectAll(".vis-cell")
           .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
+
 
     cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
 
@@ -981,7 +997,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
           text: '<div id="' + miniRepCardID + '"></div>'
           button: 'close'
         show:
-          event: 'click'
           solo: true
         hide: 'click'
         style:
@@ -1134,6 +1149,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Window
   #---------------------------------------------------------------------------------------------------------------------
+  unsetWindow: ->
+
+    @COLS_IN_WINDOW = undefined
+    @ROWS_IN_WINDOW = undefined
+    @CELLS_IN_WINDOW = undefined
+
   # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
   calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
 
@@ -1180,11 +1201,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @PREVIOUS_WINDOW = @WINDOW
 
-    if @WINDOW.window_changed or forceSectionsUpdate
+    windowIsUndefined = not @COLS_IN_WINDOW? and not @ROWS_IN_WINDOW? and not @CELLS_IN_WINDOW?
+
+    if @WINDOW.window_changed or forceSectionsUpdate or windowIsUndefined
       @COLS_IN_WINDOW = @getColsInWindow()
       @ROWS_IN_WINDOW = @getRowsInWindow()
       @CELLS_IN_WINDOW = @getCellsInWindow()
-
 
 
   getColsInWindow: ->
@@ -1200,7 +1222,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'getColsInWindow: ', time
 
     return (colsIndex[i] for i in [start..end])
 
@@ -1239,13 +1260,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('click', setUpColTooltip)
+      .on('mouseover', setUpColTooltip)
       .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'updateColsHeadersForWindow: ', time
 
   updateColsFootersForWindow: (colsFooterG) ->
 
@@ -1288,7 +1308,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'getRowsInWindow: ', time
 
     return (rowsIndex[i] for i in [start..end])
 
@@ -1314,7 +1333,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'updateRowsHeadersForWindow: ', time
 
     if @config.rows_entity_name == 'Compounds'
       setUpRowTooltip = @generateTooltipFunction('Compound', @)
@@ -1327,12 +1345,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-decoration', 'underline')
       .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-      .on('click', setUpRowTooltip)
+      .on('mouseover', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'updateRowsHeadersForWindow: ', time
 
   updateRowsFootersForWindow: (rowsFooterG) ->
 
@@ -1362,7 +1379,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'updateRowsFootersForWindow: ', time
 
   getCellsInWindow: ->
 
@@ -1390,7 +1406,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'getCellsInWindow: ', time
 
     return cellsInWindow
 
@@ -1450,7 +1465,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     endTime = Date.now()
     time = endTime - starTime
-    console.log 'updateCellsForWindow: ', time
 
   #---------------------------------------------------------------------------------------------------------------------
   # Cell Hovering

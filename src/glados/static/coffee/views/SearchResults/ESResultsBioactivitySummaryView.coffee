@@ -7,7 +7,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
+      console.log 'BIOACTIVITY!'
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
+      @collection.on 'reset do-repaint', @handleVisualisationStatus, @
 
       @entityName = @collection.getMeta('label')
       if @entityName == 'Targets'
@@ -91,7 +93,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Handle visualisation status
     #-------------------------------------------------------------------------------------------------------------------
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
-    wakeUpView: -> @handleVisualisationStatus()
+    wakeUpView: ->
+      console.log '... WAKING UP MATRIX'
+      @handleVisualisationStatus()
     sleepView: -> @ctmView.destroyAllTooltips()
 
     handleVisualisationStatus: ->
@@ -99,6 +103,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       # only bother if my element is visible
       if not $(@el).is(":visible")
         return
+
+      if @collection.loading_facets
+        console.log '... LOADING FACETS!'
+      else
+        console.log '... NOT LOADING FACETS!'
 
       numTotalItems = @collection.getMeta('total_records')
       @hideDisplayAnywayButton()
@@ -110,6 +119,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
+      console.log '... numWorkingItems: ', numWorkingItems
 
       if numWorkingItems > threshold[1]
         @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
@@ -126,8 +136,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         @hideMatrix()
         return
 
+      console.log '... is there selection?'
       @setProgressMessage('', hideCog=true)
       if not thereIsSelection
+        console.log '... there is no selection'
         @getAllChemblIDsAndFetch()
         return
 
@@ -185,6 +197,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       @ctm.set('chembl_ids', selectedIDs, {silent:true})
+      console.log '... FETCH MATRIX!'
       @ctm.fetch()
       @showMatrix()
       @setProgressMessage('', hideCog=true)

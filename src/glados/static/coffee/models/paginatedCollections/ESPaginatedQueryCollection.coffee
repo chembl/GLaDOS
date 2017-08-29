@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
+      console.log '... PARSE COLLECTION!!'
       @setMeta('fuzzy-results', false)
       if @getMeta('fuzzy-search') == false and data.hits.total == 0
         @setMeta('fuzzy-search', true)
