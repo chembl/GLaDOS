@@ -12,6 +12,8 @@ glados.useNameSpace 'glados.views.Browsers',
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
 
+      @makeToolbarThinProxy = $.proxy(@makeToolbarThin, @)
+
     wakeUp: ->
 
       @facetsView.wakeUp()
@@ -22,12 +24,31 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon = $opener.find('i')
 
       if $opener.attr('data-filters-open') == 'yes'
-        @$facetsElem.slideUp()
+        @$facetsElem.slideUp(@makeToolbarThinProxy)
         $icon.removeClass('fa-chevron-left')
         $icon.addClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'no')
       else
+        @makeToolbarThick()
         @$facetsElem.slideDown()
         $icon.addClass('fa-chevron-left')
         $icon.removeClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'yes')
+
+    makeToolbarThin: ->
+
+      $(@el).removeClass('m4 l3')
+      $(@el).addClass('m1')
+
+      $toolBar = $(@el).find('.BCK-tool-bar')
+      $toolBar.removeClass('s2')
+      $toolBar.addClass('s12')
+
+    makeToolbarThick: ->
+
+      $(@el).removeClass('m1')
+      $(@el).addClass('m4 l3')
+
+      $toolBar = $(@el).find('.BCK-tool-bar')
+      $toolBar.removeClass('s12')
+      $toolBar.addClass('s2')
