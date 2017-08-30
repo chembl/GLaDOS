@@ -30,12 +30,17 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
-      @facetsView = new glados.views.Browsers.BrowserFacetView
+      @toolBarView = new glados.views.Browsers.BrowserToolBarView
         collection: @collection
-        el: $(@el).find('.BCK-Facets-Container')
+        el: $(@el).find('.BCK-ToolBar-Container')
+        menu_view: @
 
     wakeUp: ->
-      @facetsView.wakeUp()
+      @toolBarView.wakeUp()
+      @wakeUpCurrentView()
+
+    wakeUpCurrentView: ->
+
       $currentViewInstance = @getCurrentViewInstance()
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
@@ -63,6 +68,20 @@ glados.useNameSpace 'glados.views.Browsers',
         @selectButton @currentViewType
 
       @addRemoveQtipToButtons()
+
+    makeItemsContainerWider: ->
+
+      $itemsContainer = $(@el).find('.BCK-Items-Container')
+      $itemsContainer.removeClass('m8 l9')
+      $itemsContainer.addClass('m11 l11')
+      @wakeUpCurrentView()
+
+    makeItemsContainerThin: ->
+
+      $itemsContainer = $(@el).find('.BCK-Items-Container')
+      $itemsContainer.removeClass('m11 l11')
+      $itemsContainer.addClass('m8 l9')
+      @wakeUpCurrentView()
 
     #--------------------------------------------------------------------------------------
     # Selections
