@@ -30,12 +30,13 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
-      @facetsView = new glados.views.Browsers.BrowserFacetView
+      @toolBarView = new glados.views.Browsers.BrowserToolBarView
         collection: @collection
-        el: $(@el).find('.BCK-Facets-Container')
+        el: $(@el).find('.BCK-ToolBar-Container')
+        menu_view: @
 
     wakeUp: ->
-      @facetsView.wakeUp()
+      @toolBarView.wakeUp()
       $currentViewInstance = @getCurrentViewInstance()
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
