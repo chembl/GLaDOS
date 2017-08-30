@@ -2652,14 +2652,42 @@ span.badge-primary-color-no-float {
 
 }
 
-.facets{
-  background-color: color('grey', 'lighten-4');
-
+.browser-tools{
+  padding: 0 !important;
+  background-color: color('grey', 'lighten-2');
   border-radius: 10px;
+
+  .tool-bar{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    a{
+      padding: 10px;
+    }
+  }
+}
+.facets{
+  position: relative;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: color('grey', 'lighten-4');
   padding: 6px 8px;
 
+  .close-filters{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  i.material-icons{
+    margin-right: 0;
+  }
   .filters-title{
     margin-top: 10px;
+  }
+
+  .collapsible-body{
+    padding: 0;
   }
 
   .clear-filters-button{

@@ -31,8 +31,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getNextSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].next
 
     DEFAULT_CARDS_SIZES:
-      small: 6
-      medium: 4
+      small: 12
+      medium: 6
       large: 3
 
     initialize: () ->

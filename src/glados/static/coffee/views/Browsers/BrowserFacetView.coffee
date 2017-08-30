@@ -34,6 +34,9 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
+      $(@el).find('.collapsible').collapsible()
+      f = $.proxy(@toggleFacetOpening, @)
+      $(@el).find('.BCK-collapsible-header').click -> f($(@))
       @initAllHistograms()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -42,6 +45,24 @@ glados.useNameSpace 'glados.views.Browsers',
     wakeUp: ->
       if @collection.facetsReady
         @render()
+
+    toggleFacetOpening: ($opener) ->
+
+      $icon = $opener.find('.BCK-open-close-icon')
+
+      facetGroupKey = $opener.attr('data-facet-group-key')
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+
+      if $opener.attr('data-is-open') != 'yes'
+        $icon.html('arrow_drop_up')
+        $opener.attr('data-is-open', 'yes')
+        $histogramContainer.attr('data-is-open', 'yes')
+        @updateHistogram($histogramContainer)
+      else
+        $icon.html('arrow_drop_down')
+        $opener.attr('data-is-open', 'no')
+        $histogramContainer.attr('data-is-open', 'no')
+
 
     showPreloader: ->
 
@@ -68,7 +89,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initAllHistograms: ->
 
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_PADDING =
+        top: 10
+        bottom: 10
+        left: 8
+        right: 8
+
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BIN_HEIGHT = 25
 
       @BARS_MIN_WIDTH = 1
@@ -101,10 +128,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @destroyAllTooltips()
 
-      if @IS_RESPONSIVE_RENDER
+      if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
         @initializeHTMLStructure()
 
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
@@ -125,6 +152,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
+      @WAITING_FOR_FACETS = false
 
     initHistogram: ($containerElem) ->
 
@@ -132,9 +160,13 @@ glados.useNameSpace 'glados.views.Browsers',
       mainSVGContainer = mainContainer
         .append('svg')
         .attr('class', 'mainSVGContainer')
-        .attr('width', @HISTOGRAM_WIDTH)
+        .attr('width', @HISTOGRAM_WIDTH )
+        .attr('transform', 'translate(' + @HISTOGRAM_PADDING.left + ',' + @HISTOGRAM_PADDING.top + ')')
 
     updateHistogram: ($containerElem) ->
+
+      if $containerElem.attr('data-is-open') != 'yes'
+        return
 
       thisView = @
 
@@ -148,7 +180,8 @@ glados.useNameSpace 'glados.views.Browsers',
         datumToAdd.key
         buckets.push datumToAdd
 
-      HISTOGRAM_HEIGHT = buckets.length * @BIN_HEIGHT
+      HISTOGRAM_HEIGHT = (buckets.length * @BIN_HEIGHT)
+      $containerElem.height(HISTOGRAM_HEIGHT + @HISTOGRAM_PADDING.top + @HISTOGRAM_PADDING.bottom)
 
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
@@ -211,7 +244,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .classed('make-teal-bar', true)
 
-      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
+      duration = if (@IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS) then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
         .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
@@ -247,10 +280,12 @@ glados.useNameSpace 'glados.views.Browsers',
       countText = bucketG.select('.count-text')
       frontBar = bucketG.select('.front-bar')
 
+      # an estimation is needed because of troubles with .getBBox
+      charWidth = 6
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
-      keyTextWidth = keyText.node().getBBox().width
-      countTextWidth = countText.node().getBBox().width
+      keyTextWidth = keyText.text().length * charWidth
+      countTextWidth = countText.text().length * charWidth
 
       # remember that text anchor is end
       spaceForText = countTextX - countTextWidth
@@ -293,6 +328,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
+      @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->
       @collection.clearAllFacetsSelections()
