@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @CATEGORY_FACETING = 'CATEGORY'
     @INTERVAL_FACETING = 'INTERVAL'
 
-    @NUM_INTERVALS = 6
+    @NUM_INTERVALS = 10
 
     @EMPTY_CATEGORY = '- N/A -'
     @OTHERS_CATEGORY = 'Other Categories'
@@ -106,7 +106,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     # will round the interval size to the closest 10*, 20* or 50*
     roundInterval: ()->
-      isSmallFloat = @intervals_size < 8/9 and not @property_type.integer
+      # Do the division first to prevent number overflow
+      @intervals_size = (@max_value/FacetingHandler.NUM_INTERVALS)-(@min_value/FacetingHandler.NUM_INTERVALS)
+      isSmallFloat = @intervals_size < 5 and not @property_type.integer
       if isSmallFloat
         @intervals_size *= Math.pow(10, 20)
       curLevel = -1
@@ -117,10 +119,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         curNum = Math.ceil(curNum/10)
         if curNum == 1 or curNum == 0
           break
-      if lastNum == 9
+      if lastNum > 5
         curLevel++
         lastNum = 1
-      else if lastNum >= 5
+      else if lastNum > 2
         lastNum = 5
       else if lastNum > 1
         lastNum = 2
@@ -166,14 +168,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
           if not _.isNumber(@max_value) and not _.isNaN(@max_value)
             @max_value = Number.MAX_SAFE_INTEGER
-          if @max_value == 0 and @min_value == 0
-            @intervals_size = 1
-          else if @max_value == Number.MAX_SAFE_INTEGER and @min_value == Number.MIN_SAFE_INTEGER
-            @intervals_size = Number.MAX_SAFE_INTEGER/6
-          else if @max_value == Number.MAX_SAFE_INTEGER or @min_value == Number.MIN_SAFE_INTEGER
-            @intervals_size = Number.MAX_SAFE_INTEGER/3
-          else
-            @intervals_size = (@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1)
           @roundInterval()
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
@@ -204,7 +198,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       formatKey = glados.Utils.getFormattedNumber
       if intervalsSize == 1
         return formatKey(key)
-      else return "[" + formatKey(key) + " ... " + formatKey(key + intervalsSize) + ")"
+      else
+        return formatKey(key) + "  to  " + formatKey(key + intervalsSize)
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING
