@@ -1,9 +1,11 @@
 glados.useNameSpace 'glados',
   Utils:
-    getFormattedNumber: (n)->
-      if n < Math.pow(10, 6)
-        return numeral(n).format('0,[.]00')
-      return numeral(n).format('0.[0000]e+0')
+    getFormattedNumber: (numberToFormat)->
+      if numberToFormat < -Math.pow(10, 20)
+        return numberToFormat.toExponential()
+      if numberToFormat < Math.pow(10, 6)
+        return numeral(numberToFormat).format('0,[.]00')
+      return numeral(numberToFormat).format('0.[0000]e+0')
 
     # this is to support using dots for nested properties in the list settings
     #for example, if you have the following object
