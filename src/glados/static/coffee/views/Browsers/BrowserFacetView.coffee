@@ -48,12 +48,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
     toggleFacetOpening: ($opener) ->
 
-      console.log 'toggleFacetOpening'
       $icon = $opener.find('.BCK-open-close-icon')
 
       facetGroupKey = $opener.attr('data-facet-group-key')
       $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
-      console.log '$histogramContainer: ', $histogramContainer
 
       if $opener.attr('data-is-open') != 'yes'
         $icon.html('arrow_drop_up')
@@ -122,7 +120,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      console.log 'RENDER FACETS'
       if not $(@el).is(":visible")
         return
 
@@ -159,8 +156,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initHistogram: ($containerElem) ->
 
-      console.log 'aaa @HISTOGRAM_WIDTH: ', @HISTOGRAM_WIDTH
-      console.log 'aaa @HISTOGRAM_PADDING: ', @HISTOGRAM_PADDING
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer
         .append('svg')

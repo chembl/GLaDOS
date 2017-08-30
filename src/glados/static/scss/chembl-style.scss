@@ -2626,10 +2626,17 @@ span.badge-primary-color-no-float {
 }
 
 .facets{
+  position: relative;
   background-color: color('grey', 'lighten-4');
 
   border-radius: 10px;
   padding: 6px 8px;
+
+  .close-filters{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   i.material-icons{
     margin-right: 0;
