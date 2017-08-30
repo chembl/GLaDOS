@@ -7,6 +7,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
+      @browserView = arguments[0].menu_view
+
       @$facetsElem = $(@el).find('.BCK-Facets-Container')
       @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
@@ -44,6 +46,8 @@ glados.useNameSpace 'glados.views.Browsers',
       $toolBar.removeClass('s2')
       $toolBar.addClass('s12')
 
+      @browserView.makeItemsContainerWider()
+
     makeToolbarThick: ->
 
       $(@el).removeClass('m1')
@@ -52,3 +56,5 @@ glados.useNameSpace 'glados.views.Browsers',
       $toolBar = $(@el).find('.BCK-tool-bar')
       $toolBar.removeClass('s12')
       $toolBar.addClass('s2')
+
+      @browserView.makeItemsContainerThin()
