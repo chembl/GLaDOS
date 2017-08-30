@@ -10,8 +10,10 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     parsed.report_card_url = Document.get_report_card_url(parsed.document_chembl_id)
     return parsed;
 
-Document.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'document_report_card/'+chembl_id
+# Constant definition for ReportCardEntity model functionalities
+_.extend(Document, glados.models.base.ReportCardEntity)
+Document.color = 'red'
+Document.reportCardPath = 'document_report_card/'
 
 Document.COLUMNS = {
   CHEMBL_ID: {

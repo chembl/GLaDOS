@@ -88,8 +88,10 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       () -> console.log('failed!')
     )
 
-Target.get_report_card_url = (chembl_id)->
-  return glados.Settings.GLADOS_BASE_PATH_REL+'target_report_card/'+chembl_id
+# Constant definition for ReportCardEntity model functionalities
+_.extend(Target, glados.models.base.ReportCardEntity)
+Target.color = 'lime'
+Target.reportCardPath = 'target_report_card/'
 
 Target.COLUMNS = {
   CHEMBL_ID: {

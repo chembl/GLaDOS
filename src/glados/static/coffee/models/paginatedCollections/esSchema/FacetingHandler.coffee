@@ -13,7 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     @NUM_INTERVALS = 6
 
-    @EMPTY_CATEGORY = '---'
+    @EMPTY_CATEGORY = '- N/A -'
     @OTHERS_CATEGORY = 'Other Categories'
     @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
 
@@ -37,9 +37,21 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       if not property_type.aggregatable
         throw "ERROR! "+es_property+" for elastic index "+es_index+" is not aggregatable"
       if property_type.type == String or property_type.type == Boolean
-        return new FacetingHandler(es_index, es_property, property_type.type, FacetingHandler.CATEGORY_FACETING)
+        return new FacetingHandler(
+          es_index,
+          es_property,
+          property_type.type,
+          FacetingHandler.CATEGORY_FACETING,
+          property_type
+        )
       else if property_type.type == Number
-        return new FacetingHandler(es_index, es_property, property_type.type, FacetingHandler.INTERVAL_FACETING)
+        return new FacetingHandler(
+          es_index,
+          es_property,
+          property_type.type,
+          FacetingHandler.INTERVAL_FACETING,
+          property_type
+        )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
             +" does not have a defined faceting type"
@@ -48,7 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor:(@es_index, @es_property_name, @js_type, @faceting_type)->
+    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type)->
       @faceting_keys_inorder = null
       @faceting_data = null
       @min_value = null
@@ -92,6 +104,32 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 interval: @intervals_size
             }
 
+    # will round the interval size to the closest 10*, 20* or 50*
+    roundInterval: ()->
+      isSmallFloat = @intervals_size < 8/9 and not @property_type.integer
+      if isSmallFloat
+        @intervals_size *= Math.pow(10, 20)
+      curLevel = -1
+      curNum = @intervals_size
+      loop
+        curLevel += 1
+        lastNum = curNum
+        curNum = Math.ceil(curNum/10)
+        if curNum == 1 or curNum == 0
+          break
+      if lastNum == 9
+        curLevel++
+        lastNum = 1
+      else if lastNum >= 5
+        lastNum = 5
+      else if lastNum > 1
+        lastNum = 2
+      else
+        lastNum = 1
+      @intervals_size = lastNum * Math.pow(10, curLevel)
+      if isSmallFloat
+        @intervals_size /= Math.pow(10, 20)
+
     parseESResults: (es_aggregations_data, first_call)->
 
       if first_call
@@ -123,18 +161,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
           @min_value = es_aggregations_data[@es_property_name+'_MIN'].value
-          if not @min_value
-            @min_value = 0
+          if not _.isNumber(@min_value) and not _.isNaN(@min_value)
+            @min_value = Number.MIN_SAFE_INTEGER
           @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
-          if not @max_value
-            @max_value = 0
+          if not _.isNumber(@max_value) and not _.isNaN(@max_value)
+            @max_value = Number.MAX_SAFE_INTEGER
           if @max_value == 0 and @min_value == 0
-            @intervals_size = Number.MAX_SAFE_INTEGER
+            @intervals_size = 1
+          else if @max_value == Number.MAX_SAFE_INTEGER and @min_value == Number.MIN_SAFE_INTEGER
+            @intervals_size = Number.MAX_SAFE_INTEGER/6
+          else if @max_value == Number.MAX_SAFE_INTEGER or @min_value == Number.MIN_SAFE_INTEGER
+            @intervals_size = Number.MAX_SAFE_INTEGER/3
           else
-            round_diff = Math.ceil(@max_value-@min_value)
-            @intervals_size = Math.ceil((@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1))
-            if round_diff < FacetingHandler.NUM_INTERVALS
-              @intervals_size = 1
+            @intervals_size = (@max_value-@min_value)/(FacetingHandler.NUM_INTERVALS-1)
+          @roundInterval()
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
@@ -161,10 +201,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       return glados.models.visualisation.PropertiesFactory.parseValueForEntity(esIndex, propName, key)
 
     parseIntervalKey: (key, intervalsSize) ->
-
+      formatKey = glados.Utils.getFormattedNumber
       if intervalsSize == 1
-        return key
-      else return "[" + key + "-" + (key + intervalsSize) + ")"
+        return formatKey(key)
+      else return "[" + formatKey(key) + " ... " + formatKey(key + intervalsSize) + ")"
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING

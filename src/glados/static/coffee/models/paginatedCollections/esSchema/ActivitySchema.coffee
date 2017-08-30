@@ -4,6 +4,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   ActivitySchema:
     FACETS_GROUPS:
+      standard_value:
+        label: 'Standard Value'
+        faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          'chembl_activity','standard_value'
+        )
       standard_type:
         label: 'Standard Type'
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
