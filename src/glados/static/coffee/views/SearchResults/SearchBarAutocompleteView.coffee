@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$options = []
       @$optionsReportCards = []
       @numSuggestions = 0
+      @autocompleteSuggestions = []
 
     attachSearchBar: (barId)->
       @barId= barId
@@ -31,16 +32,22 @@ glados.useNameSpace 'glados.views.SearchResults',
       )
 
     barKeydownHandler: (keyEvent)->
+      elementToFocus = null
       # Up key code
       if keyEvent.which == 38
         if @numSuggestions > 0
-          @$options[@numSuggestions-1].focus()
+          elementToFocus = @$options[@numSuggestions-1]
         keyEvent.preventDefault()
       # Down key code
       else if keyEvent.which == 40
         if @numSuggestions > 0
-          @$options[0].focus()
+          elementToFocus = @$options[0]
         keyEvent.preventDefault()
+      else
+        elementToFocus = null
+      if elementToFocus
+        elementToFocus.focus()
+        $('#'+@barId).val elementToFocus.attr("autocomplete-text")
 
     barKeyupHandler: (keyEvent)->
       if $('#'+@barId).val().length >= 3
@@ -53,19 +60,25 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getKeydownListenerForSuggestionN: (n, reportCardLink=false)->
       upElement = null
+      upTextForSearchBar = null
       downElement = null
+      downTextForSearchBar = null
       rightElement = null
       leftElement = null
       if not reportCardLink
         if n == 0 and @numSuggestions > 0
           upElement = $('#'+@barId)
+          upTextForSearchBar = @lastSearch
         else if n < @numSuggestions
           upElement = @$options[n-1]
+          upTextForSearchBar = @autocompleteSuggestions[n-1].text
 
         if n < @numSuggestions-1
           downElement = @$options[n+1]
+          downTextForSearchBar = @autocompleteSuggestions[n+1].text
         else if n == @numSuggestions-1
           downElement = $('#'+@barId)
+          downTextForSearchBar = @lastSearch
 
         if @$optionsReportCards[n]
           rightElement = @$optionsReportCards[n]
@@ -97,22 +110,33 @@ glados.useNameSpace 'glados.views.SearchResults',
             break
 
       return (keyEvent)->
+        elementToFocus = null
         # Up key code
         if upElement and keyEvent.which == 38
-          upElement.focus()
+          elementToFocus = upElement
           keyEvent.preventDefault()
         # Down key code
         else if downElement and keyEvent.which == 40
-          downElement.focus()
+          elementToFocus = downElement
           keyEvent.preventDefault()
         # Right key code
         else if rightElement and keyEvent.which == 39
-          rightElement.focus()
+          elementToFocus = rightElement
           keyEvent.preventDefault()
         # Left key code
         else if leftElement and keyEvent.which == 37
-          leftElement.focus()
+          elementToFocus = leftElement
           keyEvent.preventDefault()
+        else
+          elementToFocus = null
+          keyEvent.preventDefault()
+          $('#'+@barId).focus()
+#          keyPress = jQuery.Event("keyup")
+#          keyPress.which = keyEvent.which
+#          $('#'+@barId).trigger(keyPress)
+        if elementToFocus
+          elementToFocus.focus()
+          $('#'+@barId).val elementToFocus.attr("autocomplete-text")
 
 
     linkTooltipOptions: (event, api)->
@@ -120,7 +144,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       $act = $('#search-bar-autocomplete-tooltip')
       @$options = []
       @$optionsReportCards = []
-      autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
+      $('#'+@barId).attr("autocomplete-text", @lastSearch)
       for n in [0..@numSuggestions]
         $optionN = $act.find('.autocomplete-option-'+n)
         @$options.push $optionN
@@ -145,9 +169,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     updateAutocomplete: ()->
       $hoveredElem = $('#'+@barId)
-      autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
-      @numSuggestions = autocompleteSuggestions.length
-      if autocompleteSuggestions.length > 0
+      @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
+      @numSuggestions = @autocompleteSuggestions.length
+      if @autocompleteSuggestions.length > 0
         if not @qtipAPI
           qtipConfig =
             content:
@@ -167,13 +191,16 @@ glados.useNameSpace 'glados.views.SearchResults',
           $hoveredElem.qtip qtipConfig
           @qtipAPI = $hoveredElem.qtip('api')
 
+        @qtipAPI.enable()
         $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
-          suggestions: autocompleteSuggestions
+          suggestions: @autocompleteSuggestions
           textSearch: @lastSearch
         }))
         $hoveredElem.qtip('show')
       else if @qtipAPI
         $hoveredElem.qtip('hide')
+        @qtipAPI.disable(true)
+
       
 
 # ----------------------------------------------------------------------------------------------------------------------
