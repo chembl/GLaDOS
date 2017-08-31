@@ -81,23 +81,16 @@ glados.useNameSpace 'glados.views.Browsers',
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.addClass('facets-hidden')
 
-      filtersContainerWidth = $filtersContainer[0].offsetWidth
       $pagItemsContainer = $(@el).find('.BCK-Items-Container')
       $pagItemsContainer.addClass('facets-hidden')
 
-      containerWidth = $(@el)[0].offsetWidth
-      toolBarWidth = $(@el).find('.BCK-ToolBar-Container')[0].offsetWidth
-      newItemosContainerWidth = containerWidth - toolBarWidth
+    showFilters: ->
 
-#      $pagItemsContainer.css('transform', 'translateX(-' + filtersContainerWidth + 'px)')
-#      $pagItemsContainer.css('width', newItemosContainerWidth + 'px')
+      $filtersContainer = $(@el).find('.BCK-Facets-Container')
+      $filtersContainer.removeClass('facets-hidden')
 
-
-    makeItemsContainerThin: ->
-
-      $itemsContainer = $(@el).find('.BCK-Items-Container')
-      $itemsContainer.removeClass('m11 l11')
-      $itemsContainer.addClass('m8 l9')
+      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer.removeClass('facets-hidden')
 
     #--------------------------------------------------------------------------------------
     # Selections

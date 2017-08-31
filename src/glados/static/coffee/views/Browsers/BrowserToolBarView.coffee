@@ -28,6 +28,7 @@ glados.useNameSpace 'glados.views.Browsers',
         $icon.addClass('fa-chevron-left')
         $icon.removeClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'yes')
+        @browserView.showFilters()
 
 
     makeToolbarThin: ->
