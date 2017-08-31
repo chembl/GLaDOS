@@ -8,7 +8,7 @@
             <div class="row no-margin no-padding">
               {{#if header}}
                 <button class="col s12 autocomplete-option autocomplete-option-{{@index}}">
-                  Search for all <b>"{{../textSearch}}"</b> in <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
+                  Search for <b>"{{../textSearch}}"</b> in all <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
                 </button>
               {{else}}
                 <button class="col s{{#if chembl_id_link}}9{{else}}12{{/if}} autocomplete-option autocomplete-option-{{@index}}">
@@ -16,7 +16,7 @@
                 </button>
                 {{#if chembl_id_link}}
                   <div class="col s3 right-align">
-                      <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable"
+                      <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable autocomplete-option-rc-link autocomplete-option-rc-link-{{@index}}"
                          href="{{chembl_id_link.href}}">
                         {{chembl_id_link.text}}
                       </a>
