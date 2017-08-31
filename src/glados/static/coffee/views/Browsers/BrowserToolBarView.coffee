@@ -2,21 +2,17 @@ glados.useNameSpace 'glados.views.Browsers',
   # View that renders the search facet to filter results
   BrowserToolBarView: Backbone.View.extend
 
-    events:
-      'click .BCK-toggle-hide-filters': 'toggleHideFilters'
+#    events:
+#      'click .BCK-toggle-hide-filters': 'toggleHideFilters'
 
     initialize: ->
 
       @browserView = arguments[0].menu_view
 
-      @$facetsElem = $(@el).find('.BCK-Facets-Container')
-      @facetsView = new glados.views.Browsers.BrowserFacetView
-        collection: @collection
-        el: $(@el).find('.BCK-Facets-Container')
 
     wakeUp: ->
-
-      @facetsView.wakeUp()
+#
+#      @facetsView.wakeUp()
 
     toggleHideFilters: ->
 

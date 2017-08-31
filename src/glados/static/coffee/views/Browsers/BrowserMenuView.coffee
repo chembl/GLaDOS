@@ -35,8 +35,15 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-ToolBar-Container')
         menu_view: @
 
+
+      @$facetsElem = $(@el).find('.BCK-Facets-Container')
+      @facetsView = new glados.views.Browsers.BrowserFacetView
+        collection: @collection
+        el: $(@el).find('.BCK-Facets-Container')
+
     wakeUp: ->
       @toolBarView.wakeUp()
+      @facetsView.wakeUp()
       @wakeUpCurrentView()
 
     wakeUpCurrentView: ->
