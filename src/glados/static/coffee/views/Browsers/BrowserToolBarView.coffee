@@ -2,8 +2,8 @@ glados.useNameSpace 'glados.views.Browsers',
   # View that renders the search facet to filter results
   BrowserToolBarView: Backbone.View.extend
 
-#    events:
-#      'click .BCK-toggle-hide-filters': 'toggleHideFilters'
+    events:
+      'click .BCK-toggle-hide-filters': 'toggleHideFilters'
 
     initialize: ->
 
@@ -20,14 +20,10 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon = $opener.find('i')
 
       if $opener.attr('data-filters-open') == 'yes'
-        @makeToolbarThin()
-        @$facetsElem.toggle('slide')
         $icon.removeClass('fa-chevron-left')
         $icon.addClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'no')
       else
-        @makeToolbarThick()
-        @$facetsElem.slideDown()
         $icon.addClass('fa-chevron-left')
         $icon.removeClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'yes')
