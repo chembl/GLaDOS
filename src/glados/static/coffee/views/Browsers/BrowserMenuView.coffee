@@ -35,8 +35,15 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-ToolBar-Container')
         menu_view: @
 
+
+      @$facetsElem = $(@el).find('.BCK-Facets-Container')
+      @facetsView = new glados.views.Browsers.BrowserFacetView
+        collection: @collection
+        el: $(@el).find('.BCK-Facets-Container')
+
     wakeUp: ->
       @toolBarView.wakeUp()
+      @facetsView.wakeUp()
       @wakeUpCurrentView()
 
     wakeUpCurrentView: ->
@@ -69,19 +76,21 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @addRemoveQtipToButtons()
 
-    makeItemsContainerWider: ->
+    hideFilters: ->
 
-      $itemsContainer = $(@el).find('.BCK-Items-Container')
-      $itemsContainer.removeClass('m8 l9')
-      $itemsContainer.addClass('m11 l11')
-      @wakeUpCurrentView()
+      $filtersContainer = $(@el).find('.BCK-Facets-Container')
+      $filtersContainer.addClass('facets-hidden')
 
-    makeItemsContainerThin: ->
+      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer.addClass('facets-hidden')
 
-      $itemsContainer = $(@el).find('.BCK-Items-Container')
-      $itemsContainer.removeClass('m11 l11')
-      $itemsContainer.addClass('m8 l9')
-      @wakeUpCurrentView()
+    showFilters: ->
+
+      $filtersContainer = $(@el).find('.BCK-Facets-Container')
+      $filtersContainer.removeClass('facets-hidden')
+
+      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer.removeClass('facets-hidden')
 
     #--------------------------------------------------------------------------------------
     # Selections

@@ -9,16 +9,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
 
-      @$facetsElem = $(@el).find('.BCK-Facets-Container')
-      @facetsView = new glados.views.Browsers.BrowserFacetView
-        collection: @collection
-        el: $(@el).find('.BCK-Facets-Container')
-
-      @makeToolbarThinProxy = $.proxy(@makeToolbarThin, @)
 
     wakeUp: ->
-
-      @facetsView.wakeUp()
+#
+#      @facetsView.wakeUp()
 
     toggleHideFilters: ->
 
@@ -26,27 +20,30 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon = $opener.find('i')
 
       if $opener.attr('data-filters-open') == 'yes'
-        @$facetsElem.slideUp(@makeToolbarThinProxy)
         $icon.removeClass('fa-chevron-left')
         $icon.addClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'no')
+        @browserView.hideFilters()
       else
-        @makeToolbarThick()
-        @$facetsElem.slideDown()
         $icon.addClass('fa-chevron-left')
         $icon.removeClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'yes')
+        @browserView.showFilters()
+
 
     makeToolbarThin: ->
 
-      $(@el).removeClass('m4 l3')
-      $(@el).addClass('m1')
-
       $toolBar = $(@el).find('.BCK-tool-bar')
-      $toolBar.removeClass('s2')
-      $toolBar.addClass('s12')
+      toolBarWidth = $toolBar.width()
+      console.log 'toolBarWidth: ', toolBarWidth
 
-      @browserView.makeItemsContainerWider()
+      $(@el).removeClass('s12 m4 l3')
+      $(@el).addClass('thin-bar')
+#      $(@el).width(toolBarWidth)
+
+
+
+#      @browserView.makeItemsContainerWider()
 
     makeToolbarThick: ->
 
@@ -57,4 +54,4 @@ glados.useNameSpace 'glados.views.Browsers',
       $toolBar.removeClass('s12')
       $toolBar.addClass('s2')
 
-      @browserView.makeItemsContainerThin()
+#      @browserView.makeItemsContainerThin()
