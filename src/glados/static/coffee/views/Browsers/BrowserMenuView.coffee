@@ -74,14 +74,12 @@ glados.useNameSpace 'glados.views.Browsers',
       $itemsContainer = $(@el).find('.BCK-Items-Container')
       $itemsContainer.removeClass('m8 l9')
       $itemsContainer.addClass('m11 l11')
-      @wakeUpCurrentView()
 
     makeItemsContainerThin: ->
 
       $itemsContainer = $(@el).find('.BCK-Items-Container')
       $itemsContainer.removeClass('m11 l11')
       $itemsContainer.addClass('m8 l9')
-      @wakeUpCurrentView()
 
     #--------------------------------------------------------------------------------------
     # Selections

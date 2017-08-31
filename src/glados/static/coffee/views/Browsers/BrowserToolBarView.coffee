@@ -14,8 +14,6 @@ glados.useNameSpace 'glados.views.Browsers',
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
 
-      @makeToolbarThinProxy = $.proxy(@makeToolbarThin, @)
-
     wakeUp: ->
 
       @facetsView.wakeUp()
@@ -26,7 +24,8 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon = $opener.find('i')
 
       if $opener.attr('data-filters-open') == 'yes'
-        @$facetsElem.slideUp(@makeToolbarThinProxy)
+        @makeToolbarThin()
+        @$facetsElem.toggle('slide')
         $icon.removeClass('fa-chevron-left')
         $icon.addClass('fa-chevron-right')
         $opener.attr('data-filters-open', 'no')
@@ -39,14 +38,17 @@ glados.useNameSpace 'glados.views.Browsers',
 
     makeToolbarThin: ->
 
-      $(@el).removeClass('m4 l3')
-      $(@el).addClass('m1')
-
       $toolBar = $(@el).find('.BCK-tool-bar')
-      $toolBar.removeClass('s2')
-      $toolBar.addClass('s12')
+      toolBarWidth = $toolBar.width()
+      console.log 'toolBarWidth: ', toolBarWidth
 
-      @browserView.makeItemsContainerWider()
+      $(@el).removeClass('s12 m4 l3')
+      $(@el).addClass('thin-bar')
+#      $(@el).width(toolBarWidth)
+
+
+
+#      @browserView.makeItemsContainerWider()
 
     makeToolbarThick: ->
 
@@ -57,4 +59,4 @@ glados.useNameSpace 'glados.views.Browsers',
       $toolBar.removeClass('s12')
       $toolBar.addClass('s2')
 
-      @browserView.makeItemsContainerThin()
+#      @browserView.makeItemsContainerThin()

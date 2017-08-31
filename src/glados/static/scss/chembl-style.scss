@@ -2625,18 +2625,26 @@ span.badge-primary-color-no-float {
 
 }
 
+$browser-tools-height: 98vh;
 .browser-tools{
   padding: 0 !important;
   background-color: color('grey', 'lighten-2');
   border-radius: 10px;
+  min-height: $browser-tools-height !important;
+
+  &.thin-bar{
+    display: inline-block;
+  }
 
   .tool-bar{
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+
     a{
       padding: 10px;
     }
+
   }
 }
 .facets{
@@ -2645,6 +2653,7 @@ span.badge-primary-color-no-float {
   border-bottom-right-radius: 10px;
   background-color: color('grey', 'lighten-4');
   padding: 6px 8px;
+  min-height: $browser-tools-height !important;
 
   .close-filters{
     position: absolute;
