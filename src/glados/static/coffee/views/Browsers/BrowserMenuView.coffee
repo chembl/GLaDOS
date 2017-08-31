@@ -76,11 +76,22 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @addRemoveQtipToButtons()
 
-    makeItemsContainerWider: ->
+    hideFilters: ->
 
-      $itemsContainer = $(@el).find('.BCK-Items-Container')
-      $itemsContainer.removeClass('m8 l9')
-      $itemsContainer.addClass('m11 l11')
+      $filtersContainer = $(@el).find('.BCK-Facets-Container')
+      $filtersContainer.addClass('facets-hidden')
+
+      filtersContainerWidth = $filtersContainer[0].offsetWidth
+      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer.addClass('facets-hidden')
+
+      containerWidth = $(@el)[0].offsetWidth
+      toolBarWidth = $(@el).find('.BCK-ToolBar-Container')[0].offsetWidth
+      newItemosContainerWidth = containerWidth - toolBarWidth
+
+#      $pagItemsContainer.css('transform', 'translateX(-' + filtersContainerWidth + 'px)')
+#      $pagItemsContainer.css('width', newItemosContainerWidth + 'px')
+
 
     makeItemsContainerThin: ->
 
