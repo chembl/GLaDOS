@@ -5,6 +5,8 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
+      @browserView = arguments[0].menu_view
+      @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
@@ -18,6 +20,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
+      console.log 'INIT HTML STRUCTURE!'
       facetsGroups = @collection.getFacetsGroups()
 
       facetListForRender = []
@@ -26,6 +29,7 @@ glados.useNameSpace 'glados.views.Browsers',
         facetListForRender.push
           label: fGroup.label
           key: key
+          closed: @FACET_GROUP_IS_CLOSED[key]
 
       glados.Utils.fillContentForElement $(@el),
         facets: facetListForRender
@@ -34,10 +38,11 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
-      $(@el).find('.collapsible').collapsible()
-      f = $.proxy(@toggleFacetOpening, @)
-      $(@el).find('.BCK-collapsible-header').click -> f($(@))
       @initAllHistograms()
+
+      $(@el).find('.collapsible').collapsible
+        onOpen: $.proxy(@handleOpenFacet, @)
+        onClose: $.proxy(@handleCloseFacet, @)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -46,31 +51,56 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.facetsReady
         @render()
 
-    toggleFacetOpening: ($opener) ->
+    collapseAllFilters: ->
 
-      $icon = $opener.find('.BCK-open-close-icon')
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
 
-      facetGroupKey = $opener.attr('data-facet-group-key')
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless not $currentElem.hasClass('active')
+
+      )
+
+    expandAllFilters: ->
+
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
+
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless $currentElem.hasClass('active')
+      )
+
+
+    handleOpenFacet: ($li) ->
+
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_up')
+      $li.attr('data-is-open', 'yes')
+      facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = false
       $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'yes')
+      @updateHistogram($histogramContainer)
 
-      if $opener.attr('data-is-open') != 'yes'
-        $icon.html('arrow_drop_up')
-        $opener.attr('data-is-open', 'yes')
-        $histogramContainer.attr('data-is-open', 'yes')
-        @updateHistogram($histogramContainer)
-      else
-        $icon.html('arrow_drop_down')
-        $opener.attr('data-is-open', 'no')
-        $histogramContainer.attr('data-is-open', 'no')
+    handleCloseFacet: ($li) ->
 
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_down')
+      $li.attr('data-is-open', 'no')
+      facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = true
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'no')
 
     showPreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').show()
       $(@el).find('.BCK-FacetsContent').hide()
 
     hidePreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
@@ -78,6 +108,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').hide()
+      $(@el).hide()
 
     checkIfNoItems: ->
 
@@ -120,7 +151,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      if not $(@el).is(":visible")
+      if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
       if @checkIfNoItems()
@@ -147,7 +178,6 @@ glados.useNameSpace 'glados.views.Browsers',
         $clearFiltersContainer.show()
       else
         $clearFiltersContainer.hide()
-
 
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
