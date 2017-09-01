@@ -127,7 +127,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      if not $(@el).is(":visible")
+      if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
       if @checkIfNoItems()
