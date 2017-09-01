@@ -4,54 +4,68 @@ glados.useNameSpace 'glados.views.Browsers',
 
     events:
       'click .BCK-toggle-hide-filters': 'toggleHideFilters'
+      'click .BCK-toggle-collapse-filters': 'toggleCollapseFilters'
 
     initialize: ->
 
       @browserView = arguments[0].menu_view
+      @collection.on 'reset', @checkIfNoItems, @
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Render
+    # ------------------------------------------------------------------------------------------------------------------
+    hideAll: ->
+      $(@el).hide()
+
+    checkIfNoItems: ->
+
+      totalRecords = @collection.getMeta('total_records')
+      if totalRecords == 0
+        @hideAll()
+        return true
+      return false
 
     wakeUp: ->
-#
-#      @facetsView.wakeUp()
 
-    toggleHideFilters: ->
+    # ------------------------------------------------------------------------------------------------------------------
+    # Hide Filters
+    # ------------------------------------------------------------------------------------------------------------------
+    toggleHideFilters: (event) ->
 
-      $opener = $(@el).find('.BCK-toggle-hide-filters')
+      $opener = $(event.currentTarget)
       $icon = $opener.find('i')
 
+      $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')
+
       if $opener.attr('data-filters-open') == 'yes'
-        $icon.removeClass('fa-chevron-left')
-        $icon.addClass('fa-chevron-right')
+        $icon.addClass('fa-rotate-90')
         $opener.attr('data-filters-open', 'no')
+        $filtersCollapser.addClass('disabled')
         @browserView.hideFilters()
       else
-        $icon.addClass('fa-chevron-left')
-        $icon.removeClass('fa-chevron-right')
+        $icon.removeClass('fa-rotate-90')
         $opener.attr('data-filters-open', 'yes')
+        $filtersCollapser.removeClass('disabled')
         @browserView.showFilters()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Collapse Filters
+    # ------------------------------------------------------------------------------------------------------------------
+    toggleCollapseFilters: (event) ->
 
-    makeToolbarThin: ->
+      $opener = $(event.currentTarget)
+      if $opener.hasClass('disabled')
+        return
 
-      $toolBar = $(@el).find('.BCK-tool-bar')
-      toolBarWidth = $toolBar.width()
-      console.log 'toolBarWidth: ', toolBarWidth
+      $icon = $opener.find('i')
 
-      $(@el).removeClass('s12 m4 l3')
-      $(@el).addClass('thin-bar')
-#      $(@el).width(toolBarWidth)
-
-
-
-#      @browserView.makeItemsContainerWider()
-
-    makeToolbarThick: ->
-
-      $(@el).removeClass('m1')
-      $(@el).addClass('m4 l3')
-
-      $toolBar = $(@el).find('.BCK-tool-bar')
-      $toolBar.removeClass('s12')
-      $toolBar.addClass('s2')
-
-#      @browserView.makeItemsContainerThin()
+      if $opener.attr('data-filters-expanded') == 'yes'
+        $icon.removeClass('fa-angle-double-up')
+        $icon.addClass('fa-angle-double-down')
+        $opener.attr('data-filters-expanded', 'no')
+        @browserView.collapseAllFilters()
+      else
+        $icon.addClass('fa-angle-double-up')
+        $icon.removeClass('fa-angle-double-down')
+        $opener.attr('data-filters-expanded', 'yes')
+        @browserView.expandAllFilters()

@@ -40,6 +40,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
+        menu_view: @
 
     wakeUp: ->
       @toolBarView.wakeUp()
@@ -76,6 +77,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @addRemoveQtipToButtons()
 
+    #--------------------------------------------------------------------------------------
+    # Filters
+    #--------------------------------------------------------------------------------------
     hideFilters: ->
 
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
@@ -83,6 +87,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $pagItemsContainer = $(@el).find('.BCK-Items-Container')
       $pagItemsContainer.addClass('facets-hidden')
+
+      @manualResizeCurrentView()
 
     showFilters: ->
 
@@ -92,6 +98,15 @@ glados.useNameSpace 'glados.views.Browsers',
       $pagItemsContainer = $(@el).find('.BCK-Items-Container')
       $pagItemsContainer.removeClass('facets-hidden')
 
+      @manualResizeCurrentView()
+
+    collapseAllFilters: -> @facetsView.collapseAllFilters()
+    expandAllFilters: -> @facetsView.expandAllFilters()
+
+    manualResizeCurrentView: ->
+
+      currentView = @getCurrentViewInstance()
+      currentView.handleManualResize() unless not currentView.handleManualResize?
     #--------------------------------------------------------------------------------------
     # Selections
     #--------------------------------------------------------------------------------------

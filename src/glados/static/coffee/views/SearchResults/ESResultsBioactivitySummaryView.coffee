@@ -97,6 +97,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       console.log '... WAKING UP MATRIX'
       @handleVisualisationStatus()
     sleepView: -> @ctmView.destroyAllTooltips()
+    handleManualResize: -> @ctmView.render()
 
     handleVisualisationStatus: ->
 
