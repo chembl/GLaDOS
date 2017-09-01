@@ -68,3 +68,5 @@ glados.useNameSpace 'glados.views.SearchResults',
         @compResGraphView.render()
       else
         @fetchInfoForGraph()
+
+    handleManualResize: -> @compResGraphView.render()
