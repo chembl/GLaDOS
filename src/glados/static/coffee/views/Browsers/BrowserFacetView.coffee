@@ -34,10 +34,11 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
-      $(@el).find('.collapsible').collapsible()
-      f = $.proxy(@toggleFacetOpening, @)
-      $(@el).find('.BCK-collapsible-header').click -> f($(@))
       @initAllHistograms()
+
+      $(@el).find('.collapsible').collapsible
+        onOpen: $.proxy(@handleOpenFacet, @)
+        onClose: $.proxy(@handleCloseFacet, @)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -46,23 +47,24 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.facetsReady
         @render()
 
-    toggleFacetOpening: ($opener) ->
+    handleOpenFacet: ($li) ->
 
-      $icon = $opener.find('.BCK-open-close-icon')
-
-      facetGroupKey = $opener.attr('data-facet-group-key')
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_up')
+      $li.attr('data-is-open', 'yes')
+      facetGroupKey = $li.attr('data-facet-group-key')
       $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'yes')
+      @updateHistogram($histogramContainer)
 
-      if $opener.attr('data-is-open') != 'yes'
-        $icon.html('arrow_drop_up')
-        $opener.attr('data-is-open', 'yes')
-        $histogramContainer.attr('data-is-open', 'yes')
-        @updateHistogram($histogramContainer)
-      else
-        $icon.html('arrow_drop_down')
-        $opener.attr('data-is-open', 'no')
-        $histogramContainer.attr('data-is-open', 'no')
+    handleCloseFacet: ($li) ->
 
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_down')
+      $li.attr('data-is-open', 'no')
+      facetGroupKey = $li.attr('data-facet-group-key')
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'no')
 
     showPreloader: ->
 
