@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
+      @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
@@ -18,6 +19,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
+      console.log 'INIT HTML STRUCTURE!'
       facetsGroups = @collection.getFacetsGroups()
 
       facetListForRender = []
@@ -26,6 +28,7 @@ glados.useNameSpace 'glados.views.Browsers',
         facetListForRender.push
           label: fGroup.label
           key: key
+          closed: @FACET_GROUP_IS_CLOSED[key]
 
       glados.Utils.fillContentForElement $(@el),
         facets: facetListForRender
@@ -53,6 +56,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon.html('arrow_drop_up')
       $li.attr('data-is-open', 'yes')
       facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = false
       $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
       $histogramContainer.attr('data-is-open', 'yes')
       @updateHistogram($histogramContainer)
@@ -63,6 +67,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $icon.html('arrow_drop_down')
       $li.attr('data-is-open', 'no')
       facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = true
       $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
       $histogramContainer.attr('data-is-open', 'no')
 
