@@ -74,11 +74,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
     showPreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').show()
       $(@el).find('.BCK-FacetsContent').hide()
 
     hidePreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
@@ -86,6 +88,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').hide()
+      $(@el).hide()
 
     checkIfNoItems: ->
 
