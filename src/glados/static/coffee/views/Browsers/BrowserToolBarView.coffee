@@ -35,15 +35,17 @@ glados.useNameSpace 'glados.views.Browsers',
       $opener = $(event.currentTarget)
       $icon = $opener.find('i')
 
+      $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')
+
       if $opener.attr('data-filters-open') == 'yes'
-        $icon.removeClass('fa-chevron-left')
-        $icon.addClass('fa-chevron-right')
+        $icon.addClass('fa-rotate-90')
         $opener.attr('data-filters-open', 'no')
+        $filtersCollapser.addClass('disabled')
         @browserView.hideFilters()
       else
-        $icon.addClass('fa-chevron-left')
-        $icon.removeClass('fa-chevron-right')
+        $icon.removeClass('fa-rotate-90')
         $opener.attr('data-filters-open', 'yes')
+        $filtersCollapser.removeClass('disabled')
         @browserView.showFilters()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -52,15 +54,18 @@ glados.useNameSpace 'glados.views.Browsers',
     toggleCollapseFilters: (event) ->
 
       $opener = $(event.currentTarget)
+      if $opener.hasClass('disabled')
+        return
+
       $icon = $opener.find('i')
 
       if $opener.attr('data-filters-expanded') == 'yes'
-        $icon.removeClass('fa-chevron-up')
-        $icon.addClass('fa-chevron-down')
+        $icon.removeClass('fa-angle-double-up')
+        $icon.addClass('fa-angle-double-down')
         $opener.attr('data-filters-expanded', 'no')
         @browserView.collapseAllFilters()
       else
-        $icon.addClass('fa-chevron-up')
-        $icon.removeClass('fa-chevron-down')
+        $icon.addClass('fa-angle-double-up')
+        $icon.removeClass('fa-angle-double-down')
         $opener.attr('data-filters-expanded', 'yes')
         @browserView.expandAllFilters()

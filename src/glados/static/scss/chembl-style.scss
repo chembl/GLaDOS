@@ -2642,13 +2642,14 @@ $browser-tool-bar-width: 55px;
   min-height: $browser-tools-height !important;
 
   .tool-bar{
-    padding-top: 5px;
+    padding-top: 1px;
     padding-bottom: 5px;
     text-align: center;
 
     a{
       display: block;
-      padding: 10px;
+      margin: 2px 4px;
+
     }
 
   }
