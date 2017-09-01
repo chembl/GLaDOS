@@ -71,3 +71,10 @@ glados.useNameSpace 'glados.views.Browsers',
         $icon.removeClass('fa-angle-double-down')
         $opener.attr('data-filters-expanded', 'yes')
         @browserView.expandAllFilters()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Zoom Controls
+    # ------------------------------------------------------------------------------------------------------------------
+    showZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').show()
+    hideZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').hide()
+
