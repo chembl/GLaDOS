@@ -9,7 +9,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
 
-
     wakeUp: ->
 #
 #      @facetsView.wakeUp()

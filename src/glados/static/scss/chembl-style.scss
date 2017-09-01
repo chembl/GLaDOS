@@ -2625,6 +2625,10 @@ span.badge-primary-color-no-float {
 
 }
 
+.browser-views-container{
+  display: flex;
+}
+
 $browser-tools-height: 98vh;
 $browser-tool-bar-width: 55px;
 .browser-tools{

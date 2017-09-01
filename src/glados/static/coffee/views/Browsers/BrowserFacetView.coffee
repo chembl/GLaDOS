@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
+      @browserView = arguments[0].menu_view
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
@@ -154,7 +155,6 @@ glados.useNameSpace 'glados.views.Browsers',
         $clearFiltersContainer.show()
       else
         $clearFiltersContainer.hide()
-
 
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @

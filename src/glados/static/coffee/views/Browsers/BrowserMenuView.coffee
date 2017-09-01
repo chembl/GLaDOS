@@ -40,6 +40,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
+        menu_view: @
 
     wakeUp: ->
       @toolBarView.wakeUp()
