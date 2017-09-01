@@ -77,6 +77,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @addRemoveQtipToButtons()
 
+    #--------------------------------------------------------------------------------------
+    # Filters
+    #--------------------------------------------------------------------------------------
     hideFilters: ->
 
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
@@ -96,6 +99,9 @@ glados.useNameSpace 'glados.views.Browsers',
       $pagItemsContainer.removeClass('facets-hidden')
 
       @manualResizeCurrentView()
+
+    collapseAllFilters: -> @facetsView.collapseAllFilters()
+    expandAllFilters: -> @facetsView.expandAllFilters()
 
     manualResizeCurrentView: ->
 

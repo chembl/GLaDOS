@@ -58,9 +58,9 @@ glados.useNameSpace 'glados.views.Browsers',
         $icon.removeClass('fa-chevron-up')
         $icon.addClass('fa-chevron-down')
         $opener.attr('data-filters-expanded', 'no')
-#        @browserView.hideFilters()
+        @browserView.collapseAllFilters()
       else
         $icon.addClass('fa-chevron-up')
         $icon.removeClass('fa-chevron-down')
         $opener.attr('data-filters-expanded', 'yes')
-#        @browserView.showFilters()
+        @browserView.expandAllFilters()

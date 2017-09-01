@@ -51,6 +51,26 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.facetsReady
         @render()
 
+    collapseAllFilters: ->
+
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
+
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless not $currentElem.hasClass('active')
+
+      )
+
+    expandAllFilters: ->
+
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
+
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless $currentElem.hasClass('active')
+      )
+
+
     handleOpenFacet: ($li) ->
 
       $icon = $li.find('.BCK-open-close-icon')
