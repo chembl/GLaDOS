@@ -282,19 +282,29 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           @loading_facets = false
       ajax_deferred.done(done_callback.bind(@))
 
-    getFacetsGroups: (selected)->
-      if not selected?
-        return @meta.facets_groups
+    getFacetsGroups: (selected, onlyVisible=true)->
+
+      if onlyVisible
+        facetGroups = {}
+        for facetGroupKey, facetGroup of @meta.facets_groups
+          if facetGroup.show
+            facetGroups[facetGroupKey] = facetGroup
       else
-        sub_facet_groups = {}
-        for facet_group_key, facet_group of @meta.facets_groups
-          if selected == facet_group.faceting_handler.hasSelection()
-            sub_facet_groups[facet_group_key] = facet_group
-        return sub_facet_groups
+        facetGroups = @meta.facets_groups
+
+
+      if not selected?
+        return facetGroups
+      else
+        subFacetGroups = {}
+        for facetGroupKey, facetGroup of facetGroups
+          if selected == facetGroup.faceting_handler.hasSelection()
+            subFacetGroups[facetGroupKey] = facetGroup
+        return subFacetGroups
 
     clearAllFacetsSelections: ->
 
-      for fGroupKey, fGroup of @getFacetsGroups(true)
+      for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
       @setMeta('facets_changed', true)

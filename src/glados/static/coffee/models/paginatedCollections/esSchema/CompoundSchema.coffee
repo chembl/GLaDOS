@@ -48,7 +48,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         )
       therapeutic_flag:
         label: 'Therapeutic'
-        show: true
+        show: false
         faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
           'chembl_molecule','therapeutic_flag'
         )
