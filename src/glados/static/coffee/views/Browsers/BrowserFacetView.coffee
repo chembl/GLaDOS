@@ -134,7 +134,7 @@ glados.useNameSpace 'glados.views.Browsers',
         modal_id: modalID
 
       $modalTrigger.attr('href', '#' + modalID)
-      
+
       $(@el).find('.modal').modal()
 
 

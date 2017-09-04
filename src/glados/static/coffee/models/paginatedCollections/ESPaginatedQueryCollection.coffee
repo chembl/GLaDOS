@@ -92,7 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # Parses the facets groups aggregations data
     parseFacetsGroups: (facets_data)->
       if _.isUndefined(facets_data.aggregations)
-        for facet_group_key, facet_group of @meta.facets_groups
+        for facet_group_key, facet_group of @getFacetsGroups(true)
           facet_group.faceting_handler.parseESResults(facets_data.aggregations)
 
 # ------------------------------------------------------------------------------------------------------------------
@@ -225,7 +225,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getFacetFilterQuery: () ->
       facet_queries = []
       faceting_handlers = []
-      for facet_group_key, facet_group of @meta.facets_groups
+      for facet_group_key, facet_group of @getFacetsGroups(true)
         faceting_handlers.push(facet_group.faceting_handler)
       facets_groups_query = glados.models.paginatedCollections.esSchema.FacetingHandler\
         .getAllFacetGroupsSelectedQuery(faceting_handlers)
@@ -294,7 +294,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     clearAllFacetsSelections: ->
 
-      for fGroupKey, fGroup of @meta.facets_groups
+      for fGroupKey, fGroup of @getFacetsGroups(true)
         fGroup.faceting_handler.clearSelections()
 
       @setMeta('facets_changed', true)
