@@ -8,12 +8,10 @@ ResponsiviseViewExt =
   updateView: (debounced_render, emptyBeforeRender=true) ->
 
     if emptyBeforeRender
-      if @$vis_elem?
-        $to_empty = @$vis_elem
-      else
-        $to_empty = $(@el)
+      @getVisElem().empty()
 
-      $to_empty.empty()
+    if not @getVisElem().is(":visible")
+      return
 
     @showResponsiveViewPreloader(emptyBeforeRender)
     debounced_render()
@@ -57,10 +55,8 @@ ResponsiviseViewExt =
       @showPreloader()
       return
 
-    if @$vis_elem?
-      $base_elem = @$vis_elem
-    else
-      $base_elem = $(@el)
+
+    $base_elem = @getVisElem()
 
     if $base_elem.attr('data-loading') == 'false' or !$base_elem.attr('data-loading')?
       $base_elem.html Handlebars.compile($('#Handlebars-Common-Preloader').html())

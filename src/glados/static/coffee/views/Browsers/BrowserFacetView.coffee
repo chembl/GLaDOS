@@ -5,6 +5,8 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
+      @browserView = arguments[0].menu_view
+      @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender()
       @collection.on 'facets-changed', @render, @
@@ -18,6 +20,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
+      console.log 'INIT HTML STRUCTURE!'
       facetsGroups = @collection.getFacetsGroups()
 
       facetListForRender = []
@@ -26,6 +29,7 @@ glados.useNameSpace 'glados.views.Browsers',
         facetListForRender.push
           label: fGroup.label
           key: key
+          closed: @FACET_GROUP_IS_CLOSED[key]
 
       glados.Utils.fillContentForElement $(@el),
         facets: facetListForRender
@@ -36,6 +40,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @initAllHistograms()
 
+      $(@el).find('.collapsible').collapsible
+        onOpen: $.proxy(@handleOpenFacet, @)
+        onClose: $.proxy(@handleCloseFacet, @)
+
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -43,13 +51,56 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.facetsReady
         @render()
 
+    collapseAllFilters: ->
+
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
+
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless not $currentElem.hasClass('active')
+
+      )
+
+    expandAllFilters: ->
+
+      $collapsibleHeaders = $(@el).find('.BCK-collapsible-header')
+
+      $collapsibleHeaders.each( ->
+        $currentElem = $(@)
+        $currentElem.click() unless $currentElem.hasClass('active')
+      )
+
+
+    handleOpenFacet: ($li) ->
+
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_up')
+      $li.attr('data-is-open', 'yes')
+      facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = false
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'yes')
+      @updateHistogram($histogramContainer)
+
+    handleCloseFacet: ($li) ->
+
+      $icon = $li.find('.BCK-open-close-icon')
+      $icon.html('arrow_drop_down')
+      $li.attr('data-is-open', 'no')
+      facetGroupKey = $li.attr('data-facet-group-key')
+      @FACET_GROUP_IS_CLOSED[facetGroupKey] = true
+      $histogramContainer = $(@el).find(".BCK-facet-group-histogram[data-facet-group-key='" + facetGroupKey + "']")
+      $histogramContainer.attr('data-is-open', 'no')
+
     showPreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').show()
       $(@el).find('.BCK-FacetsContent').hide()
 
     hidePreloader: ->
 
+      $(@el).show()
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').show()
 
@@ -57,6 +108,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').hide()
+      $(@el).hide()
 
     checkIfNoItems: ->
 
@@ -68,7 +120,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initAllHistograms: ->
 
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_PADDING =
+        top: 10
+        bottom: 10
+        left: 8
+        right: 8
+
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BIN_HEIGHT = 25
 
       @BARS_MIN_WIDTH = 1
@@ -93,7 +151,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      if not $(@el).is(":visible")
+      if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
       if @checkIfNoItems()
@@ -101,10 +159,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @destroyAllTooltips()
 
-      if @IS_RESPONSIVE_RENDER
+      if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
         @initializeHTMLStructure()
 
-      @HISTOGRAM_WIDTH = $(@el).width()
+      @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
@@ -121,10 +179,10 @@ glados.useNameSpace 'glados.views.Browsers',
       else
         $clearFiltersContainer.hide()
 
-
       $histogramsContainers = $(@el).find('.BCK-facet-group-histogram')
       thisView = @
       $histogramsContainers.each((i) -> thisView.updateHistogram($(@)))
+      @WAITING_FOR_FACETS = false
 
     initHistogram: ($containerElem) ->
 
@@ -132,9 +190,13 @@ glados.useNameSpace 'glados.views.Browsers',
       mainSVGContainer = mainContainer
         .append('svg')
         .attr('class', 'mainSVGContainer')
-        .attr('width', @HISTOGRAM_WIDTH)
+        .attr('width', @HISTOGRAM_WIDTH )
+        .attr('transform', 'translate(' + @HISTOGRAM_PADDING.left + ',' + @HISTOGRAM_PADDING.top + ')')
 
     updateHistogram: ($containerElem) ->
+
+      if $containerElem.attr('data-is-open') != 'yes'
+        return
 
       thisView = @
 
@@ -148,7 +210,8 @@ glados.useNameSpace 'glados.views.Browsers',
         datumToAdd.key
         buckets.push datumToAdd
 
-      HISTOGRAM_HEIGHT = buckets.length * @BIN_HEIGHT
+      HISTOGRAM_HEIGHT = (buckets.length * @BIN_HEIGHT)
+      $containerElem.height(HISTOGRAM_HEIGHT + @HISTOGRAM_PADDING.top + @HISTOGRAM_PADDING.bottom)
 
       mainContainer = d3.select($containerElem.get(0))
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
@@ -211,7 +274,7 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .classed('make-teal-bar', true)
 
-      duration = if @IS_RESPONSIVE_RENDER then 0 else @TRANSITION_DURATION
+      duration = if (@IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS) then 0 else @TRANSITION_DURATION
       valueRectangles.transition()
         .duration(duration)
         .attr('width', (d) -> getWidthForBucket(d.count))
@@ -247,10 +310,12 @@ glados.useNameSpace 'glados.views.Browsers',
       countText = bucketG.select('.count-text')
       frontBar = bucketG.select('.front-bar')
 
+      # an estimation is needed because of troubles with .getBBox
+      charWidth = 6
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
-      keyTextWidth = keyText.node().getBBox().width
-      countTextWidth = countText.node().getBBox().width
+      keyTextWidth = keyText.text().length * charWidth
+      countTextWidth = countText.text().length * charWidth
 
       # remember that text anchor is end
       spaceForText = countTextX - countTextWidth
@@ -293,6 +358,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @collection.setMeta('facets_changed', true)
       @collection.fetch()
+      @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->
       @collection.clearAllFacetsSelections()

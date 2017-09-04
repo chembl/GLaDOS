@@ -31,8 +31,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getNextSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].next
 
     DEFAULT_CARDS_SIZES:
-      small: 6
-      medium: 4
+      small: 12
+      medium: 6
       large: 3
 
     initialize: () ->
@@ -55,6 +55,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
+      @$zoomControlsContainer = arguments[0].zoom_controls_container
       if @collection.getMeta('custom_default_card_sizes')?
         @DEFAULT_CARDS_SIZES = @collection.getMeta('custom_default_card_sizes')
 
@@ -473,7 +474,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fillZoomContainer: ->
 
-      $zoomBtnsContainer = $(@el).find('.BCK-zoom-buttons-container')
+      $zoomBtnsContainer = @$zoomControlsContainer
       glados.Utils.fillContentForElement $zoomBtnsContainer,
         disable_zoom_in: @mustDisableZoomIn()
         disable_reset: @mustDisableReset()

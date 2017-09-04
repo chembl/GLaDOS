@@ -4,10 +4,28 @@
         {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
     </div>
 
-    <div class="BCK-BrowserCurrentViewContainer row">
-        <div class="BCK-Facets-Container facets col s12 m3 l2" data-hb-template="Handlebars-Common-FacetsList">
-        </div>
-      <div class="BCK-Items-Container col s12 m9 l10"></div>
+    <div class="BCK-BrowserCurrentViewContainer browser-views-container row">
+
+        <div class="BCK-ToolBar-Container browser-tools">
+            <div class="BCK-tool-bar tool-bar">
+
+                <a class="BCK-toggle-hide-filters menu-button" data-filters-open='yes'>
+                    <i class="fa fa-2x fa-sliders"></i>
+                </a>
+                <a class="BCK-toggle-collapse-filters menu-button" data-filters-expanded='yes'>
+                    <i class="fa fa-2x fa-angle-double-up"></i>
+                </a>
+
+                <div class="BCK-zoom-buttons-container zoom-buttons" data-hb-template="Handlebars-Common-CardsZoom">
+
+                </div>
+
+
+
+            </div>
+        </div><!--
+      --><div class="BCK-Facets-Container facets" data-hb-template="Handlebars-Common-FacetsList"></div><!--
+      --><div class="BCK-Items-Container pag-items-container"></div>
     </div>
 
 

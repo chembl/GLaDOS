@@ -2670,14 +2670,109 @@ span.badge-primary-color-no-float {
 
 }
 
+.browser-views-container{
+  display: flex;
+}
+
+$browser-tools-height: 98vh;
+$browser-tool-bar-width: 55px;
+.browser-tools{
+  width: $browser-tool-bar-width;
+  display: block;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  float: left;
+  padding: 0 !important;
+  background-color: color('grey', 'lighten-2');
+  min-height: $browser-tools-height !important;
+
+  .tool-bar{
+    padding-top: 1px;
+    padding-bottom: 5px;
+    text-align: center;
+
+    a{
+      display: block;
+      margin: 2px 4px;
+
+    }
+    .zoom-buttons{
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid color('grey', 'base');
+    }
+
+  }
+}
+
+$facets-width-medium: 30%;
+$facets-width-large: 21%;
+
+.pag-items-container{
+  float: left;
+  padding-left: 8px;
+  @media #{$medium-only} {
+    width: calc(100% - #{$facets-width-medium} - #{$browser-tool-bar-width});
+  }
+  @media #{$large-and-up} {
+    width: calc(100% - #{$facets-width-large} - #{$browser-tool-bar-width});
+  }
+
+  &.facets-hidden{
+    @media #{$medium-only} {
+      width: calc(100% - #{$browser-tool-bar-width} - 30px);
+    }
+    @media #{$large-and-up} {
+      width: calc(100% - #{$browser-tool-bar-width} - 30px);
+    }
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
+
+}
 .facets{
+
+  @media #{$medium-only} {
+    width: $facets-width-medium;
+  }
+  @media #{$large-and-up} {
+    width: $facets-width-large;
+  }
+  &.facets-hidden{
+    overflow: hidden;
+    opacity: 0;
+    width: 0;
+    z-index: -1;
+    transform: translateX(-100%);
+    -webkit-transition: transform 0.5s, width 0.5s, opacity 0.5s;
+    transition: transform 0.5s, width 0.5s, opacity 0.5s;
+  }
+
+
+  display: block;
+  float: left;
+  position: relative;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: color('grey', 'lighten-4');
+  padding: 6px 0;
+  min-height: $browser-tools-height !important;
 
-  border-radius: 10px;
-  padding: 6px 8px;
+  .close-filters{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
+  i.material-icons{
+    margin-right: 0;
+  }
   .filters-title{
     margin-top: 10px;
+  }
+
+  .collapsible-body{
+    padding: 0;
   }
 
   .clear-filters-button{
