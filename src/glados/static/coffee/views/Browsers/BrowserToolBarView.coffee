@@ -5,6 +5,9 @@ glados.useNameSpace 'glados.views.Browsers',
     events:
       'click .BCK-toggle-hide-filters': 'toggleHideFilters'
       'click .BCK-toggle-collapse-filters': 'toggleCollapseFilters'
+      'click .BCK-zoom-in': 'zoomIn'
+      'click .BCK-zoom-out': 'zoomOut'
+      'click .BCK-reset-zoom': 'resetZoom'
 
     initialize: ->
 
@@ -77,4 +80,8 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     showZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').show()
     hideZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').hide()
+    getZoomControlsContainer: -> $(@el).find('.BCK-zoom-buttons-container')
 
+    zoomIn: -> @browserView.zoomIn()
+    zoomOut: -> @browserView.zoomOut()
+    resetZoom: -> @browserView.resetZoom()

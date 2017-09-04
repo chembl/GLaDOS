@@ -229,6 +229,7 @@ glados.useNameSpace 'glados.views.Browsers',
           el: $viewElement
           custom_render_evts: undefined
           render_at_init: true
+          zoom_controls_container: @toolBarView.getZoomControlsContainer()
 
         @allViewsPerType[viewType] = newView
 
@@ -261,6 +262,11 @@ glados.useNameSpace 'glados.views.Browsers',
       $('#' + viewElementID).hide()
 
     getCurrentViewInstance: -> @allViewsPerType[@currentViewType]
-
+    #--------------------------------------------------------------------------------------
+    # Zoom
+    #--------------------------------------------------------------------------------------
+    zoomIn: -> @getCurrentViewInstance().zoomIn()
+    zoomOut: -> @getCurrentViewInstance().zoomOut()
+    resetZoom: -> @getCurrentViewInstance().resetZoom()
 
 
