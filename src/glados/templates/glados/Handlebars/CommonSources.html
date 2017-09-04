@@ -625,7 +625,19 @@
 <script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
    <div id="{{modal_id}}" class="modal bottom-sheet">
       <div class="modal-content">
-        hola!
+
+        <div class="row">
+          {{#each filters}}
+          <div class="col s6 m3 l2">
+
+            <input type="checkbox" class="BCK-show-hide-filter filled-in" id="check-{{this.id}}"
+                   data-facet-group-key='{{this.key}}' {{# if checked}}checked="checked"{{/if}} />
+            <label for="check-{{this.id}}">{{this.label}}</label>
+
+          </div>
+          {{/each}}
+        </div>
+
       </div>
    </div>
 </script>

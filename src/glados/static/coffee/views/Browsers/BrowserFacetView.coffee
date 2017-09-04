@@ -123,15 +123,25 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseEditFiltersModal: ->
 
+      now = + Date.now()
       $modalTrigger = $(@el).find('.BCK-Filters-Settings-Trigger')
       $modalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
-      modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + Date.now()
+      modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + now
 
       if $modalContainer.length == 0
         return
 
+      filters = []
+      for fGroupKey, fGroup of @collection.getFacetsGroups(undefined, onlyVisible=false)
+        filters.push
+          id: fGroupKey + now
+          label: fGroup.label
+          key: fGroupKey
+          checked: fGroup.show
+
       glados.Utils.fillContentForElement $modalContainer,
         modal_id: modalID
+        filters: filters
 
       $modalTrigger.attr('href', '#' + modalID)
 
