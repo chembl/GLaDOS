@@ -118,6 +118,29 @@ glados.useNameSpace 'glados.views.Browsers',
         return true
       return false
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Add Remove filters
+    # ------------------------------------------------------------------------------------------------------------------
+    initialiseEditFiltersModal: ->
+
+      $modalTrigger = $(@el).find('.BCK-Filters-Settings-Trigger')
+      $modalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
+      modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + Date.now()
+
+      if $modalContainer.length == 0
+        return
+
+      glados.Utils.fillContentForElement $modalContainer,
+        modal_id: modalID
+
+      $modalTrigger.attr('href', '#' + modalID)
+      
+      $(@el).find('.modal').modal()
+
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Histogram Rendering
+    # ------------------------------------------------------------------------------------------------------------------
     initAllHistograms: ->
 
       @HISTOGRAM_PADDING =
@@ -162,6 +185,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
         @initializeHTMLStructure()
 
+      @initialiseEditFiltersModal()
       @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
