@@ -114,13 +114,13 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.BCK-FacetsContent').hide()
       $(@el).hide()
 
-    checkIfNoItems: ->
 
+    checkIfNoItems: ->
+      console.log 'CHECK IF NO ITEMS'
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
         return true
-      return false
 
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove filters
