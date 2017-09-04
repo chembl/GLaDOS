@@ -5,11 +5,16 @@ glados.useNameSpace 'glados.views.Browsers',
     events:
       'click .BCK-toggle-hide-filters': 'toggleHideFilters'
       'click .BCK-toggle-collapse-filters': 'toggleCollapseFilters'
+      'click .BCK-zoom-in': 'zoomIn'
+      'click .BCK-zoom-out': 'zoomOut'
+      'click .BCK-reset-zoom': 'resetZoom'
 
     initialize: ->
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+
+      @checkIfNoItems()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -69,3 +74,14 @@ glados.useNameSpace 'glados.views.Browsers',
         $icon.removeClass('fa-angle-double-down')
         $opener.attr('data-filters-expanded', 'yes')
         @browserView.expandAllFilters()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Zoom Controls
+    # ------------------------------------------------------------------------------------------------------------------
+    showZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').show()
+    hideZoomControls: -> $(@el).find('.BCK-zoom-buttons-container').hide()
+    getZoomControlsContainer: -> $(@el).find('.BCK-zoom-buttons-container')
+
+    zoomIn: -> @browserView.zoomIn()
+    zoomOut: -> @browserView.zoomOut()
+    resetZoom: -> @browserView.resetZoom()
