@@ -55,6 +55,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.on 'error', @handleError, @
 
+      @$zoomControlsContainer = arguments[0].zoom_controls_container
       if @collection.getMeta('custom_default_card_sizes')?
         @DEFAULT_CARDS_SIZES = @collection.getMeta('custom_default_card_sizes')
 
@@ -473,7 +474,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fillZoomContainer: ->
 
-      $zoomBtnsContainer = $(@el).find('.BCK-zoom-buttons-container')
+      $zoomBtnsContainer = @$zoomControlsContainer
       glados.Utils.fillContentForElement $zoomBtnsContainer,
         disable_zoom_in: @mustDisableZoomIn()
         disable_reset: @mustDisableReset()
@@ -658,11 +659,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
   
-      $dropdownContainer = $(@el).find('.BCK-show-hide-columns-container')
+      $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
   
-      if $dropdownContainer.length == 0
+      if $modalContainer.length == 0
         return
-      $dropdownContainer.html Handlebars.compile($('#' + $dropdownContainer.attr('data-hb-template')).html())
+
+      glados.Utils.fillContentForElement $modalContainer,
         modal_id: $(@el).attr('id') + '-select-columns-modal'
         columns: @collection.getMeta('columns')
         additional_columns: @collection.getMeta('additional_columns')
@@ -670,8 +672,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $(@el).find('.modal').modal()
   
     showHideColumn: (event) ->
-  
-  
+
       $checkbox = $(event.currentTarget)
       colComparator = $checkbox.attr('data-comparator')
       isChecked = $checkbox.is(':checked')

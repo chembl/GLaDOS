@@ -27,20 +27,19 @@ glados.useNameSpace 'glados.views.Browsers',
       @viewContainerID = @collection.getMeta('id_name')
       @$viewContainer = $(@el).find('.BCK-Items-Container').attr('id', @viewContainerID)
 
-      console.log 'INITIAL VIEW: ', @currentViewType
-      @showOrCreateView @currentViewType
-
       @toolBarView = new glados.views.Browsers.BrowserToolBarView
         collection: @collection
         el: $(@el).find('.BCK-ToolBar-Container')
         menu_view: @
-
 
       @$facetsElem = $(@el).find('.BCK-Facets-Container')
       @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
         el: $(@el).find('.BCK-Facets-Container')
         menu_view: @
+
+      console.log 'INITIAL VIEW: ', @currentViewType
+      @showOrCreateView @currentViewType
 
     wakeUp: ->
       @toolBarView.wakeUp()
@@ -230,6 +229,7 @@ glados.useNameSpace 'glados.views.Browsers',
           el: $viewElement
           custom_render_evts: undefined
           render_at_init: true
+          zoom_controls_container: @toolBarView.getZoomControlsContainer()
 
         @allViewsPerType[viewType] = newView
 
@@ -239,6 +239,18 @@ glados.useNameSpace 'glados.views.Browsers',
         # wake up the view if necessary
         if @allViewsPerType[viewType].wakeUpView?
           @allViewsPerType[viewType].wakeUpView()
+
+      currentView = @allViewsPerType[viewType]
+
+      showZoomControls = false
+      if currentView.isCards?
+        if currentView.isCards() and @collection.getMeta('enable_cards_zoom')
+          showZoomControls = true
+
+      if showZoomControls
+        @toolBarView.showZoomControls()
+      else
+        @toolBarView.hideZoomControls()
 
     hideView: (viewType) ->
 
@@ -250,6 +262,11 @@ glados.useNameSpace 'glados.views.Browsers',
       $('#' + viewElementID).hide()
 
     getCurrentViewInstance: -> @allViewsPerType[@currentViewType]
-
+    #--------------------------------------------------------------------------------------
+    # Zoom
+    #--------------------------------------------------------------------------------------
+    zoomIn: -> @getCurrentViewInstance().zoomIn()
+    zoomOut: -> @getCurrentViewInstance().zoomOut()
+    resetZoom: -> @getCurrentViewInstance().resetZoom()
 
 

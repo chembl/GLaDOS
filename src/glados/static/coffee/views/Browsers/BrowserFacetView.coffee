@@ -12,11 +12,13 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
 
+      @initialiseTitle()
       @initializeHTMLStructure(emptyBeforeRender=true)
       @showPreloader()
 
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
+      'click .BCK-show-hide-filter': 'showHideFilter'
 
     initializeHTMLStructure: ->
 
@@ -31,7 +33,8 @@ glados.useNameSpace 'glados.views.Browsers',
           key: key
           closed: @FACET_GROUP_IS_CLOSED[key]
 
-      glados.Utils.fillContentForElement $(@el),
+      $facetsContainer = $(@el).find('.BCK-Facets-content')
+      glados.Utils.fillContentForElement $facetsContainer,
         facets: facetListForRender
 
       $preloaderContainer = $(@el).find('.BCK-Preloader-Container')
@@ -43,6 +46,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.collapsible').collapsible
         onOpen: $.proxy(@handleOpenFacet, @)
         onClose: $.proxy(@handleCloseFacet, @)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -110,14 +114,51 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.BCK-FacetsContent').hide()
       $(@el).hide()
 
-    checkIfNoItems: ->
 
+    checkIfNoItems: ->
+      console.log 'CHECK IF NO ITEMS'
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
         return true
-      return false
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Add Remove filters
+    # ------------------------------------------------------------------------------------------------------------------
+    initialiseTitle: ->
+
+
+      $titleAndModalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
+      now = Date.now()
+      modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + now
+
+      filters = []
+      for fGroupKey, fGroup of @collection.getFacetsGroups(undefined, onlyVisible=false)
+        filters.push
+          id: fGroupKey + now
+          label: fGroup.label
+          key: fGroupKey
+          checked: fGroup.show
+
+      glados.Utils.fillContentForElement $titleAndModalContainer,
+        modal_id: modalID
+        filters: filters
+
+      $(@el).find('#' + modalID).modal()
+
+    showHideFilter: (event) ->
+
+      $checkbox = $(event.currentTarget)
+      facetGroupKey = $checkbox.attr('data-facet-group-key')
+      isChecked = $checkbox.is(':checked')
+      allFacets = @collection.getFacetsGroups(undefined, onlyVisible=false)
+      allFacets[facetGroupKey].show = isChecked
+
+      @collection.loadFacetGroups()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Histogram Rendering
+    # ------------------------------------------------------------------------------------------------------------------
     initAllHistograms: ->
 
       @HISTOGRAM_PADDING =
