@@ -37,17 +37,31 @@ SearchModel = Backbone.Model.extend
       for suggI in esData.suggest.autocomplete
         suggestions.push()
         for optionJ in suggI.options
-          matchSection = optionJ.text.substring(suggI.offset, suggI.offset+suggI.length)
-          nonMatching = optionJ.text.substring(suggI.offset+suggI.length, optionJ.text.length)
-          suggestions.push({
+          suggestionI = {
             chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
               .MODEL.get_colored_report_card_url(optionJ._id)
             header: false
             entityLabel: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
               .LABEL
             score: optionJ._score
-            text: '<b>'+matchSection+'</b>'+nonMatching
-          })
+            text: optionJ.text
+            highlightedText: ''
+            highlights: [
+              {
+                offset: suggI.offset
+                length: suggI.length
+              }
+            ]
+          }
+          highlightedTextI = suggestionI.text
+          for highlightJ in suggestionI.highlights
+            posEnd = highlightJ.offset+highlightJ.length
+            highlightedTextI = highlightedTextI.slice(0, posEnd)+'</b></big>'+highlightedTextI.slice(posEnd)
+            highlightedTextI = \
+              highlightedTextI.slice(0, highlightJ.offset)+'<big><b>'+highlightedTextI.slice(highlightJ.offset)
+          suggestionI.highlightedText = highlightedTextI
+          suggestions.push suggestionI
+
       if suggestions.length > 0
 
         suggestions.splice(0, 0, {
@@ -94,9 +108,9 @@ SearchModel = Backbone.Model.extend
 
   requestAutocompleteSuggestions: (textQuery)->
     @autocompleteQuery = textQuery
-    if not debouncedAutocompleteRequest
-      debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
-    debouncedAutocompleteRequest()
+    if not @debouncedAutocompleteRequest
+      @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 10)
+    @debouncedAutocompleteRequest()
 
   get_es_query_for:(chembl_ids, terms, filter_terms, sub_queries, is_or=true)->
     delta = 0.3/chembl_ids.length
@@ -267,8 +281,6 @@ SearchModel = Backbone.Model.extend
       @set('queryString', expression_str)
       @set('jsonQuery', parsed_query)
       @set("es_list_query", expression_es_query)
-
-      console.log("SEARCH_DEBUG: expression_es_query", expression_es_query)
 
       setTimeout(callback,10)
 

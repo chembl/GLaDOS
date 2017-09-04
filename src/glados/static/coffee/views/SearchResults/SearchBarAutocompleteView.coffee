@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @barId= barId
       $('#'+barId).bind(
         'keyup',
-        @barKeyupHandler.bind(@)
+        @getBarKeyupHandler()
       )
       $('#'+barId).bind(
         'keydown',
@@ -49,36 +49,36 @@ glados.useNameSpace 'glados.views.SearchResults',
         elementToFocus.focus()
         $('#'+@barId).val elementToFocus.attr("autocomplete-text")
 
-    barKeyupHandler: (keyEvent)->
+    __barKeyupHandler: (keyEvent)->
       if $('#'+@barId).val().length >= 3
-        searchText = $('#'+@barId).val()
+        searchText = $('#'+@barId).val().trim()
         if @lastSearch != searchText
           @searchModel.requestAutocompleteSuggestions searchText
           @lastSearch = searchText
       else
         @searchModel.set 'autocompleteSuggestions',[]
 
+    getBarKeyupHandler: ->
+      handler = (keyEvent)->
+        @__barKeyupHandler(keyEvent)
+      handler = handler.bind(@)
+      return _.debounce(handler, 200)
+
     getKeydownListenerForSuggestionN: (n, reportCardLink=false)->
       upElement = null
-      upTextForSearchBar = null
       downElement = null
-      downTextForSearchBar = null
       rightElement = null
       leftElement = null
       if not reportCardLink
         if n == 0 and @numSuggestions > 0
           upElement = $('#'+@barId)
-          upTextForSearchBar = @lastSearch
         else if n < @numSuggestions
           upElement = @$options[n-1]
-          upTextForSearchBar = @autocompleteSuggestions[n-1].text
 
         if n < @numSuggestions-1
           downElement = @$options[n+1]
-          downTextForSearchBar = @autocompleteSuggestions[n+1].text
         else if n == @numSuggestions-1
           downElement = $('#'+@barId)
-          downTextForSearchBar = @lastSearch
 
         if @$optionsReportCards[n]
           rightElement = @$optionsReportCards[n]
@@ -130,14 +130,19 @@ glados.useNameSpace 'glados.views.SearchResults',
         else
           elementToFocus = null
           keyEvent.preventDefault()
+          searchVal = $('#'+@barId).val()
           $('#'+@barId).focus()
-#          keyPress = jQuery.Event("keyup")
-#          keyPress.which = keyEvent.which
-#          $('#'+@barId).trigger(keyPress)
+          $('#'+@barId).val searchVal
         if elementToFocus
           elementToFocus.focus()
           $('#'+@barId).val elementToFocus.attr("autocomplete-text")
 
+    getClickListenerForSuggestionN: (n)->
+      return (clickEvent)->
+        $('#'+@barId).focus()
+        $('#'+@barId).val @$options[n].attr("autocomplete-text")
+        $('#'+@barId).qtip('hide')
+        @qtipAPI.disable(true)
 
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
@@ -157,6 +162,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         @$options[n].bind(
           'keydown',
           @getKeydownListenerForSuggestionN(n).bind(@)
+        )
+        @$options[n].bind(
+          'click',
+          @getClickListenerForSuggestionN(n).bind(@)
         )
         if @$optionsReportCards[n]
           @$optionsReportCards[n].bind(

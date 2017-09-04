@@ -13,7 +13,7 @@
               {{else}}
                 <button class="col s{{#if chembl_id_link}}9{{else}}12{{/if}} autocomplete-option autocomplete-option-{{@index}}"
                     autocomplete-text="{{entityLabel}} {{text}}">
-                  {{{text}}}
+                  {{{highlightedText}}}
                 </button>
                 {{#if chembl_id_link}}
                   <div class="col s3 right-align">
