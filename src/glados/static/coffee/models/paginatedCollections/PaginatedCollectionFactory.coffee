@@ -51,6 +51,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
             contextual_properties: contextualProperties
+            enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
 
       return new indexESPagQueryCollection
 

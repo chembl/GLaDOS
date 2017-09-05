@@ -42,6 +42,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if not currentItemData._score? and scores?
           currentItemData._score = scores[currentItemData[idAttribute]]
 
+        currentItemData.enable_similarity_map = @getMeta('enable_similarity_maps')
         jsonResultsList.push(currentItemData)
 
       if not @getMeta('ignore_score')
@@ -50,6 +51,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @setMeta('ignore_score', false)
 
+      console.log 'jsonResultsList: ', jsonResultsList
       return jsonResultsList
 
 # Prepares an Elastic Search query to search in all the fields of a document in a specific index
