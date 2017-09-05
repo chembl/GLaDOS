@@ -20,6 +20,16 @@ BASE_EBI_DEV_URL = "https://wwwdev.ebi.ac.uk"
 
 UNICHEM_DS = {}
 
+CHEMBL_ENTITIES = {
+    'target': 'targets',
+    'compound': 'compounds',
+    'molecule': 'compounds',
+    'document': 'documents',
+    'assay': 'assays',
+    'cell': 'cells',
+    'tissue': 'tissues'
+}
+
 req = requests.get(url=BASE_EBI_URL + '/unichem/rest/src_ids/', headers={'Accept': 'application/json'})
 json_resp = req.json()
 for ds_i in json_resp:
@@ -155,6 +165,7 @@ def get_chembl_id_list_dict(chembl_ids, cross_references=[], include_in_query=Tr
         for i, chembl_id_i in enumerate(chembl_ids)
     ]
 
+
 def check_chembl(term_dict: dict):
     re_match = CHEMBL_REGEX.match(term_dict['term'])
     if re_match is not None:
@@ -186,6 +197,14 @@ def check_integer(term_dict: dict):
         )
 
 
+def check_chembl_entities(term_dict: dict):
+    term = term_dict['term'].lower()
+    if len(term) > 0 and term[-1] == 's':
+        term = term[0:-1]
+    if term in CHEMBL_ENTITIES:
+        term_dict['chembl_entity'] = CHEMBL_ENTITIES[term]
+
+
 def check_doi(term_dict: dict):
     re_match = DOI_REGEX.match(term_dict['term'])
     if re_match is not None:
@@ -215,7 +234,8 @@ def check_doi(term_dict: dict):
                         'type': 'doi',
                         'label': 'DOI (Digital Object Identifier)',
                         'chembl_ids': get_chembl_id_list_dict(chembl_ids),
-                        'include_in_query': True
+                        'include_in_query': True,
+                        'chembl_entity': 'document'
                     }
                 )
         except:
@@ -249,7 +269,8 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
                     'type': 'inchi'+('_key' if term_is_inchi_key else ''),
                     'label': 'InChI'+(' Key' if term_is_inchi_key else ''),
                     'chembl_ids': get_chembl_id_list_dict(chembl_ids),
-                    'include_in_query': True
+                    'include_in_query': True,
+                    'chembl_entity': 'compound'
                 }
             )
     except:
@@ -276,7 +297,8 @@ def check_smiles(term_dict: dict):
                     'type': 'smiles',
                     'label': 'SMILES',
                     'chembl_ids': get_chembl_id_list_dict(chembl_ids),
-                    'include_in_query': True
+                    'include_in_query': True,
+                    'chembl_entity': 'compound'
                 }
             )
     except:
@@ -299,10 +321,11 @@ def check_unichem(term_dict: dict):
             for link_i in json_response[unichem_src_i]:
                 if link_i['src_id'] == '1':
                     chembl_id_i = link_i['src_compound_id']
-                else:
-                    cross_references.append(
-                        get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
-                    )
+                elif unichem_src_i == '1':
+                    chembl_id_i = term_dict['term']
+                cross_references.append(
+                    get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
+                )
             cross_references_dict = {
                 'from': get_unichem_cross_reference_link_data(unichem_src_i, term_dict['term']),
                 'also_in': cross_references
@@ -319,7 +342,8 @@ def check_unichem(term_dict: dict):
                     'label': 'UniChem',
                     'chembl_ids': chembl_ids,
                     'not_in_chembl': unichem_not_in_chembl_cross_refs,
-                    'include_in_query': True
+                    'include_in_query': True,
+                    'chembl_entity': 'compound'
                 }
             )
     except:
@@ -392,7 +416,8 @@ class TermsVisitor(PTNodeVisitor):
             'include_in_query': include_in_query,
             'references': [],
             'exact_match_term': False,
-            'filter_term': False
+            'filter_term': False,
+            'chembl_entity': None
         }
 
     def visit_smiles(self, node, children):
@@ -441,6 +466,7 @@ class TermsVisitor(PTNodeVisitor):
         check_chembl(term_dict)
         check_integer(term_dict)
         check_doi(term_dict)
+        check_chembl_entities(term_dict)
         return term_dict
 
 
