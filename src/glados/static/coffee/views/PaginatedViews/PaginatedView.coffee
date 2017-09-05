@@ -359,9 +359,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         CustomElementView = @collection.getMeta('custom_cards_item_view')
         if CustomElementView? and not @isComplicated
-          ItemModel = @collection.getMeta('model')
-          model = new ItemModel
-            id: idValue
+          model =  @collection.get(idValue)
           new CustomElementView
             model: model
             el: $newItemElem
