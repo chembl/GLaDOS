@@ -38,7 +38,7 @@ class SearchResultsApp
   @initSimilaritySearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
-
+    console.log 'initSimilaritySearchResults'
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
       similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
@@ -53,7 +53,8 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC])
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC],
+    glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS)
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
@@ -73,7 +74,7 @@ class SearchResultsApp
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
-  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns) ->
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns, customSettings) ->
 
     deferreds = resultsList.getAllResults($progressElement)
 
@@ -82,7 +83,7 @@ class SearchResultsApp
 
 
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-        resultsList.allResults, contextualColumns)
+        resultsList.allResults, contextualColumns, customSettings)
 
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList
