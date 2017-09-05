@@ -19,16 +19,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
-      console.log '... PARSE COLLECTION!!'
-      @setMeta('fuzzy-results', false)
-      if @getMeta('fuzzy-search') == false and data.hits.total == 0
-        @setMeta('fuzzy-search', true)
-        @fetch()
-        return []
-      else if @getMeta('fuzzy-search') == true
-        @setMeta('fuzzy-search', false)
-        if data.hits.total > 0
-          @setMeta('fuzzy-results', true)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
 
@@ -54,9 +44,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
-      fuzzySearch = @getMeta('fuzzy-search')
-      if not fuzzySearch?
-        @setMeta('fuzzy-search', false)
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
