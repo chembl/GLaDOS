@@ -6,8 +6,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     id = @get('id')
     id ?= @get('molecule_chembl_id')
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
-    console.log 'COMP:'
-    console.log 'COMP: enable_similarity_map', @get('enable_similarity_map')
+
+    if @get('enable_similarity_map')
+      @set('loading_similarity_map', true)
 
   parse: (response) ->
 
