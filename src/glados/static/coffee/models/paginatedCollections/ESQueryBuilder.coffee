@@ -82,18 +82,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           )
       return queries
 
-    @getESQueryFor: (chemblIds, terms, filterTerms, subQueries, fuzzy, minimumShouldMatch, isOr=true)->
+    @getESQueryFor: (chemblIds, terms, filterTerms, subQueries, fuzzy, minimumShouldMatch,
+    boostedESKeys, curESKey, isOr=true)->
       delta = 0.3/chemblIds.length
       queryString = terms.join(' ')
       filterTermsJoined = filterTerms.join(' AND ')
       query = {
         bool:
+          boost: if boostedESKeys.has(curESKey) then 1000 else 1
           must:
             bool:
               should: []
               must: []
           filter:[]
       }
+      console.warn(boostedESKeys, curESKey, query.bool.boost)
       boolQuery = if isOr then 'should'else 'must'
       if queryString
         query.bool.must.bool[boolQuery] = query.bool.must.bool[boolQuery].concat(
@@ -127,14 +130,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         query.bool.must.bool[boolQuery] = query.bool.must.bool[boolQuery].concat(subQueries)
       return query
 
-    @buildParsedQueryRecursive: (curParsedQuery, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch)->
+    @buildParsedQueryRecursive: (curParsedQuery, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch,
+    boostedESKeys, curESKey)->
       # Query tree leafs
       if _.has(curParsedQuery, 'term')
         if curParsedQuery.chembl_entity and _.has(
           glados.Settings.SEARCH_PATH_2_ES_KEY,
           curParsedQuery.chembl_entity
         )
-          entityBoost = curParsedQuery.chembl_entity
+          boostedESKeys.add(glados.Settings.SEARCH_PATH_2_ES_KEY[curParsedQuery.chembl_entity])
+          return null
         if curParsedQuery.include_in_query
           if curParsedQuery.exact_match_term
             terms.push(curParsedQuery.term)
@@ -153,6 +158,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       chemblIds = []
       terms = []
       filterTerms = []
+      boostedESKeys = new Set()
 
       nextTerms = []
       curType = null
@@ -166,21 +172,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       innerQueries = []
       for termI in nextTerms
         termQuery = ESQueryBuilder.buildParsedQueryRecursive(
-          termI, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch, curType
+          termI, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch, boostedESKeys, curESKey
         )
         if termQuery
           innerQueries.push(termQuery)
       return ESQueryBuilder.getESQueryFor(
-        chemblIds, terms, filterTerms, innerQueries, fuzzy, minimumShouldMatch, curType == 'or'
+        chemblIds, terms, filterTerms, innerQueries, fuzzy, minimumShouldMatch, boostedESKeys, curESKey, curType == 'or'
       )
 
-    @getESQueryForJsonQuery: (jsonQuery, fuzzy=false, minimumShouldMatch='100%')->
+    @getESQueryForJsonQuery: (jsonQuery, curESKey='', fuzzy=false, minimumShouldMatch='100%')->
       chemblIds = []
       terms = []
       filterTerms = []
+      boostedESKeys = new Set()
       esQuery= ESQueryBuilder.buildParsedQueryRecursive(
-        jsonQuery, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch
+        jsonQuery, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch, boostedESKeys, curESKey
       )
       if not esQuery
-        esQuery = ESQueryBuilder.getESQueryFor(chemblIds, terms, filterTerms, [], fuzzy, minimumShouldMatch)
+        esQuery = ESQueryBuilder.getESQueryFor(
+          chemblIds, terms, filterTerms, [], fuzzy, minimumShouldMatch, boostedESKeys, curESKey
+        )
       return esQuery
