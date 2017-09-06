@@ -365,6 +365,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       curMinShouldMatch = 100
       fuzzy = false
+      @setMeta('fuzzy-results', false)
 
       searchESQuery = if not jsonQuery? then {bool:{should:[],filter:[]}} else glados.models\
         .paginatedCollections.ESQueryBuilder.getESQueryForJsonQuery(jsonQuery, false, curMinShouldMatch+'%')
@@ -372,8 +373,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred =  @__requestCurrentQuerySize()
 
       done_callback = (esData)->
-        if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and curMinShouldMatch > 20
-          curMinShouldMatch -= 20
+        if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and curMinShouldMatch > 40
+          curMinShouldMatch -= 30
           @setMeta(
             'searchESQuery',
             glados.models.paginatedCollections.ESQueryBuilder\
@@ -381,7 +382,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           )
           ajax_deferred =  @__requestCurrentQuerySize()
           ajax_deferred.done(done_callback)
-          console.warn "CALLED WITH", curMinShouldMatch, @getURL()
         else if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and not fuzzy
           fuzzy = true
           @setMeta(
@@ -391,7 +391,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           )
           ajax_deferred =  @__requestCurrentQuerySize()
           ajax_deferred.done(done_callback)
-          console.warn "CALLED FUZZY!", @getURL()
+          @setMeta('fuzzy-results', true)
         else
           final_callback()
 

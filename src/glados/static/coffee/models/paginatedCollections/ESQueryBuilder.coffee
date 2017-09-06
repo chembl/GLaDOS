@@ -25,40 +25,45 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       queries = [
         {
           multi_match:
-            type: "phrase"
-            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat ESQueryBuilder.ID_FIELDS_BOOSTS
-            query: queryString
-            minimum_should_match: minimumShouldMatch
-            boost: 1.5
-        },
-        {
-          multi_match:
-            type: "phrase_prefix"
-            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat ESQueryBuilder.ID_FIELDS_BOOSTS
-            query: queryString
-            minimum_should_match: minimumShouldMatch
-        },
-        {
-          multi_match:
             type: "most_fields"
-            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat ESQueryBuilder.ID_FIELDS_BOOSTS
+            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS
             query: queryString
             fuzziness: 0
             minimum_should_match: minimumShouldMatch
             boost: 10
-
+            fuzziness: if fuzzy then 'AUTO' else 0
         },
         {
           multi_match:
             type: "best_fields"
-            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat ESQueryBuilder.ID_FIELDS_BOOSTS
+            fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS
             query: queryString
             fuzziness: 0
             minimum_should_match: minimumShouldMatch
             boost: 2
-
+            fuzziness: if fuzzy then 'AUTO' else 0
         }
       ]
+      if not fuzzy
+        queries.push(
+          {
+            multi_match:
+              type: "phrase"
+              fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS
+              query: queryString
+              minimum_should_match: minimumShouldMatch
+              boost: 1.5
+          }
+        )
+        queries.push(
+          {
+            multi_match:
+              type: "phrase_prefix"
+              fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS
+              query: queryString
+              minimum_should_match: minimumShouldMatch
+          }
+        )
       return queries
 
     @getESIdTermQueries: (terms, fuzzy, minimumShouldMatch)->
@@ -71,7 +76,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 type: "most_fields"
                 fields: ESQueryBuilder.ID_FIELDS_BOOSTS
                 query: termI
-                fuzziness: 0
+                fuzziness: if fuzzy then 'AUTO' else 0
                 boost: 10
             }
           )
