@@ -1,34 +1,24 @@
 glados.useNameSpace 'glados.models.paginatedCollections',
 
-# --------------------------------------------------------------------------------------------------------------------
-# This class implements the pagination, sorting and searching for a collection in ElasticSearch
-# extend it to get a collection with the extra capabilities
-# --------------------------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------------------------
+  # This class implements the pagination, sorting and searching for a collection in ElasticSearch
+  # extend it to get a collection with the extra capabilities
+  # --------------------------------------------------------------------------------------------------------------------
   ESPaginatedQueryCollection: Backbone.Collection.extend
-# ------------------------------------------------------------------------------------------------------------------
-# Backbone Override
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Backbone Override
+    # ------------------------------------------------------------------------------------------------------------------
 
     errorHandler: (collection, response, options)->
       @resetMeta(0, 0)
       @reset()
 
-# ------------------------------------------------------------------------------------------------------------------
-# Parse/Fetch Collection data
-# ------------------------------------------------------------------------------------------------------------------
-
-# Parses the Elastic Search Response and resets the pagination metadata
+    # ------------------------------------------------------------------------------------------------------------------
+    # Parse/Fetch Collection data
+    # ------------------------------------------------------------------------------------------------------------------
+    
+    # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
-      console.log '... PARSE COLLECTION!!'
-      @setMeta('fuzzy-results', false)
-      if @getMeta('fuzzy-search') == false and data.hits.total == 0
-        @setMeta('fuzzy-search', true)
-        @fetch()
-        return []
-      else if @getMeta('fuzzy-search') == true
-        @setMeta('fuzzy-search', false)
-        if data.hits.total > 0
-          @setMeta('fuzzy-results', true)
       @resetMeta(data.hits.total, data.hits.max_score)
       jsonResultsList = []
 
@@ -52,11 +42,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
-# Prepares an Elastic Search query to search in all the fields of a document in a specific index
+    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
-      fuzzySearch = @getMeta('fuzzy-search')
-      if not fuzzySearch?
-        @setMeta('fuzzy-search', false)
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -85,21 +72,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       Backbone.Collection.prototype.fetch.call(this, fetchESOptions) unless testMode
       return requestData
 
-# ------------------------------------------------------------------------------------------------------------------
-# Parse/Fetch Facets Groups data
-# ------------------------------------------------------------------------------------------------------------------
-
-# Parses the facets groups aggregations data
+    # ------------------------------------------------------------------------------------------------------------------
+    # Parse/Fetch Facets Groups data
+    # ------------------------------------------------------------------------------------------------------------------
+    
+    # Parses the facets groups aggregations data
     parseFacetsGroups: (facets_data)->
       if _.isUndefined(facets_data.aggregations)
         for facet_group_key, facet_group of @getFacetsGroups(true)
           facet_group.faceting_handler.parseESResults(facets_data.aggregations)
 
-# ------------------------------------------------------------------------------------------------------------------
-# Elastic Search Query structure
-# ------------------------------------------------------------------------------------------------------------------
-
-# given a list of chembl ids, it gives the request data to query for only those ids
+    # ------------------------------------------------------------------------------------------------------------------
+    # Elastic Search Query structure
+    # ------------------------------------------------------------------------------------------------------------------
+    
+    # given a list of chembl ids, it gives the request data to query for only those ids
     getRequestDataForChemblIDs: (page, pageSize, idsList) ->
       return {
         size: pageSize,
@@ -139,13 +126,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                lang: "painless",
                params:
                  scores: scores
-               inline: "String mcid=doc['" + idAttribute + "'].value; if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
+               inline: "String mcid=doc['" + idAttribute + "'].value; "\
+                 +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
          ]
       }
 
-# generates an object with the data necessary to do the ES request
-# customPage: set a customPage if you want a page different than the one set as current
-# the same for customPageSize
+    # generates an object with the data necessary to do the ES request
+    # customPage: set a customPage if you want a page different than the one set as current
+    # the same for customPageSize
     getRequestData: (customPage, customPageSize, request_facets=false, facets_first_call) ->
       # If facets are requested the facet filters are excluded from the query
       facets_filtered = true
@@ -178,22 +166,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else if generatorList?
         es_query.query.bool.must = @getQueryForGeneratorList()
       else
-        es_query.query.bool.must = @getMeta('es_list_query')
+        es_query.query.bool.must = @getMeta('searchESQuery')
 
       # Includes the selected facets filter
       if facets_filtered
         es_query.query.bool.filter = @getFacetFilterQuery()
 
-
       if request_facets
-        if _.isUndefined(facets_first_call)
+        if not facets_first_call?
           throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
         facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
 
-      console.log 'Request data: ', es_query
-      console.log JSON.stringify(es_query)
       return es_query
 
     getAllColumns: ->
@@ -241,7 +226,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
 
-    requestFacetsGroupsData: (first_call)->
+    __requestCurrentQuerySize: ()->
+      es_url = @getURL()
+      # Creates the Elastic Search Query parameters and serializes them
+      esJSONRequestData = JSON.stringify(@getRequestData(1, 0,))
+      # Uses POST to prevent result caching
+      ajax_deferred = $.post(es_url, esJSONRequestData)
+      return ajax_deferred
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Elastic Search Facets request
+    # ------------------------------------------------------------------------------------------------------------------
+
+    __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()
       # Creates the Elastic Search Query parameters and serializes them
       # Includes the request for the faceting data
@@ -250,37 +247,55 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
 
-    loadFacetGroups: (first_call=true)->
-      non_selected_facets_groups = @getFacetsGroups(false)
-      if _.keys(non_selected_facets_groups).length == 0
-        return
+    __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
+      if not es_data? or not es_data.aggregations?
+        console.error "ERROR! The aggregations data in the response is missing!"
+        reject()
+      for facet_group_key, facet_group of non_selected_facets_groups
+        facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+      if (first_call and not needs_second_call) or not first_call
+        resolve()
 
-      call_time = new Date().getTime()
-      # TODO: CHECK HOW TO HANDLE REPETITIVE QUERIES SUBMISSIONS MORE EFFICIENTLY
-#      if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
-#        console.log "WARNING! Facets requested again before they finished loading!", @getMeta('index')
-#        return
-      if first_call
-        @loading_facets = true
-        @loading_facets_t_ini = call_time
-        @needs_second_call = false
+    __loadFacetGroups: ()->
+      promiseFunc = (resolve, reject)->
+        non_selected_facets_groups = @getFacetsGroups(false)
+        if _.keys(non_selected_facets_groups).length == 0
+          return
+        needs_second_call = false
         for group_key, facet_group of non_selected_facets_groups
           if facet_group.faceting_handler.needsSecondRequest()
-            @needs_second_call = true
+            needs_second_call = true
+        ajax_deferred = @__requestFacetsGroupsData(true)
+        first_call = true
+        done_callback = (es_data)->
+          @__parseFacetsGroupsData(non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)
+        fail_callback = ()->
+          reject()
+          setTimeout(@loadFacetGroups.bind(@), 1000)
+        then_callback = ()->
+          ajax_deferred_sc = @__requestFacetsGroupsData(false)
+          first_call = false
+          ajax_deferred_sc.done(done_callback.bind(@))
+          ajax_deferred_sc.fail(fail_callback.bind(@))
 
-      ajax_deferred = @requestFacetsGroupsData(first_call)
-      done_callback = (es_data)->
-        if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
-          throw "ERROR! The aggregations data in the response is missing!"
-        for facet_group_key, facet_group of non_selected_facets_groups
-          facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
-        if first_call and @needs_second_call
-          @loadFacetGroups(false)
-        else
+        ajax_deferred.done(done_callback.bind(@))
+        ajax_deferred.fail(fail_callback.bind(@))
+        if needs_second_call
+          ajax_deferred.then(then_callback.bind(@), null)
+      runPromise = ()->
+        @__last_facets_promise = new Promise(promiseFunc.bind(@))
+        triggerEvent = ()->
           @trigger('facets-changed')
-          @facetsReady = true
-          @loading_facets = false
-      ajax_deferred.done(done_callback.bind(@))
+        @__last_facets_promise.then(triggerEvent.bind(@))
+      if @__last_facets_promise?
+        @__last_facets_promise.then(runPromise.bind(@))
+      else
+        runPromise.bind(@)()
+
+    loadFacetGroups: ()->
+      if not @__debouncedLoadFacetGroups?
+        @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)
+      @__debouncedLoadFacetGroups()
 
     getFacetsGroups: (selected, onlyVisible=true)->
 
@@ -310,20 +325,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('facets_changed', true)
       @fetch()
 
-# builds the url to do the request
+    # builds the url to do the request
     getURL: ->
       glados.models.paginatedCollections.Settings.ES_BASE_URL + @getMeta('index') + '/_search'
 
-# ------------------------------------------------------------------------------------------------------------------
-# Items Selection
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Items Selection
+    # ------------------------------------------------------------------------------------------------------------------
     toggleSelectAll: ->
       @setMeta('all_items_selected', !@getMeta('all_items_selected'))
       @trigger('selection-changed')
 
-# ------------------------------------------------------------------------------------------------------------------
-# Metadata Handlers for query and pagination
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Metadata Handlers for query and pagination
+    # ------------------------------------------------------------------------------------------------------------------
     setMeta: (attr, value) ->
       @meta[attr] = value
       @trigger('meta-changed')
@@ -334,38 +349,75 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     hasMeta: (attr) ->
       return attr in _.keys(@meta)
 
-# ------------------------------------------------------------------------------------------------------------------
-# Search functions
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Search functions
+    # ------------------------------------------------------------------------------------------------------------------
 
-    search: (es_list_query)->
-      es_list_query = if _.isUndefined(es_list_query) then {bool:{should:[],filter:[]}} else es_list_query
-      @setMeta('es_list_query', es_list_query)
-      @invalidateAllDownloadedResults()
-      @unSelectAll()
-      @clearAllResults()
-      @clearAllFacetsSelections()
-      @setPage(1, false)
-      @fetch()
+    search: (jsonQuery)->
+      final_callback = ()->
+        @invalidateAllDownloadedResults()
+        @unSelectAll()
+        @clearAllResults()
+        @clearAllFacetsSelections()
+        @setPage(1, false)
+        @fetch()
+      final_callback = final_callback.bind(@)
+
+      esKeyName = @getMeta 'key_name'
+      curMinShouldMatch = 100
+      fuzzy = false
+      @setMeta('fuzzy-results', false)
+
+      searchESQuery = if not jsonQuery? then {bool:{should:[],filter:[]}} else glados.models\
+        .paginatedCollections.ESQueryBuilder.getESQueryForJsonQuery(jsonQuery, esKeyName, false, curMinShouldMatch+'%')
+      @setMeta('searchESQuery', searchESQuery)
+      ajax_deferred =  @__requestCurrentQuerySize()
+
+      done_callback = (esData)->
+        if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and curMinShouldMatch > 40
+          curMinShouldMatch -= 30
+          @setMeta(
+            'searchESQuery',
+            glados.models.paginatedCollections.ESQueryBuilder\
+              .getESQueryForJsonQuery(jsonQuery, esKeyName, fuzzy, curMinShouldMatch+'%')
+          )
+          ajax_deferred =  @__requestCurrentQuerySize()
+          ajax_deferred.done(done_callback)
+        else if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and not fuzzy
+          fuzzy = true
+          @setMeta(
+            'searchESQuery',
+            glados.models.paginatedCollections.ESQueryBuilder\
+              .getESQueryForJsonQuery(jsonQuery, esKeyName, fuzzy, curMinShouldMatch+'%')
+          )
+          ajax_deferred =  @__requestCurrentQuerySize()
+          ajax_deferred.done(done_callback)
+          @setMeta('fuzzy-results', true)
+        else
+          final_callback()
+
+      done_callback = done_callback.bind(@)
+
+      ajax_deferred.done(done_callback)
 
 
-# ------------------------------------------------------------------------------------------------------------------
-# Pagination functions
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Pagination functions
+    # ------------------------------------------------------------------------------------------------------------------
 
     resetPageSize: (newPageSize) ->
       @setMeta('page_size', parseInt(newPageSize))
       @setPage(1)
 
 
-# Meta data values are:
-#  total_records
-#  current_page
-#  total_pages
-#  page_size
-#  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
-#  sorting data per column.
-#
+    # Meta data values are:
+    #  total_records
+    #  current_page
+    #  total_pages
+    #  page_size
+    #  records_in_page -- How many records are in the current page (useful if the last page has less than page_size)
+    #  sorting data per column.
+    #
     resetMeta: (totalRecords, max_score) ->
       max_score = if _.isNumber(max_score) then max_score else 0
       @setMeta('max_score', max_score)
@@ -401,9 +453,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')
-# ------------------------------------------------------------------------------------------------------------------
-# Sorting functions
-# ------------------------------------------------------------------------------------------------------------------
+    
+    # ------------------------------------------------------------------------------------------------------------------
+    # Sorting functions
+    # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
       columns = @getAllColumns()
@@ -433,9 +486,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentSortingComparator: () ->
 #TODO implement sorting
 
-# ------------------------------------------------------------------------------------------------------------------
-# Download functions
-# ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # Download functions
+    # ------------------------------------------------------------------------------------------------------------------
     DOWNLOADED_ITEMS_ARE_VALID: false
     DOWNLOAD_ERROR_STATE: false
     invalidateAllDownloadedResults: -> @DOWNLOADED_ITEMS_ARE_VALID = false
@@ -630,9 +683,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return downloadObj
 
-
-
-# you can pass an Jquery elector to be used to report the status, see the template Handlebars-Common-DownloadColMessages0
+    # you can pass an Jquery elector to be used to report the status, 
+    # see the template Handlebars-Common-DownloadColMessages0
     downloadAllItems: (format, columns, $progressElement) ->
       deferreds = @getAllResults($progressElement, true)
 

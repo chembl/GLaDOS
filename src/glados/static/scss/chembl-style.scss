@@ -1705,17 +1705,35 @@ $search-items-height: 45px;
 
   @extend .clean-button;
   text-align: left;
+  font-size: 1.05em;
   &:active, &:target {
     background-color: darken(white, 3%) !important;
+    font-size: 1.1em;
   }
   &:focus {
     outline: none !important;
     background-color: darken(white, 10%) !important;
+    font-size: 1.15em;
   }
   &:hover {
-    background-color: darken(white, 10%) !important;
+    font-size: 1.2em;
   }
 }
+
+.autocomplete-option-rc-link{
+  font-size: 1.1em;
+  &:active, &:target {
+    font-size: 1.15em;
+  }
+  &:focus {
+    outline: none !important;
+    font-size: 1.3em;
+  }
+  &:hover {
+    font-size: 1.4em;
+  }
+}
+
 
 
 /**
