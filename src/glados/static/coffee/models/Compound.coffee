@@ -45,10 +45,24 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       thisModel.set
         loading_similarity_map: false
         similarity_map_base64_img: base64Img
+        reference_smiles_error: false
+        reference_smiles_error_jqxhr: undefined
       ,
         silent: true
 
       console.log 'AAA data loaded! '
+
+    getImageData.error (jqXHR) ->
+
+      thisModel.set
+        reference_smiles_error: false
+        reference_smiles_error_jqxhr: jqXHR
+      ,
+        silent: true
+
+      thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
+
+
 
 
 
