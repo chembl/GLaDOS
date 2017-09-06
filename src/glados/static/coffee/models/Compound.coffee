@@ -14,6 +14,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   loadSimilarityMap: ->
 
+    if @get('reference_smiles_error')
+      console.log 'AAA similarity map error!'
+      return
+
     # to start I need the smiles of the compound and the compared one
     console.log 'AAA loading similarity map!, '
     structures = @get('molecule_structures')

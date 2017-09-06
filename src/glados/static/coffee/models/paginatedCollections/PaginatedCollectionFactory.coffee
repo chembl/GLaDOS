@@ -66,7 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
               f = $.proxy(@handleReferenceCompoundLoaded, @)
               @referenceCompound.on 'change', (-> setTimeout(f, 400)), @
-              @referenceCompound.on 'error', (-> console.log 'AAA error!!'), @
+              @referenceCompound.on 'error', @handleReferenceCompoundError, @
               @referenceCompound.fetch()
             else
               console.log 'already got smiles!'
@@ -80,6 +80,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           for model in @models
             model.set('reference_smiles', refSmiles)
             console.log 'AAA updating model!'
+
+        handleReferenceCompoundError: ->
+          @setMeta('reference_smiles_error', true)
+          console.log 'AAA handleReferenceCompoundError'
+          for model in @models
+            model.set('reference_smiles_error', true)
+            console.log 'AAA updating model!'
+
 
 
 
