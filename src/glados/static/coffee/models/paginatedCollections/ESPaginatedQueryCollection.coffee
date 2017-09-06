@@ -126,7 +126,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                lang: "painless",
                params:
                  scores: scores
-               inline: "String mcid=doc['" + idAttribute + "'].value; if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
+               inline: "String mcid=doc['" + idAttribute + "'].value; "\
+                 +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
          ]
       }
 
@@ -228,7 +229,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
 
-    requestFacetsGroupsData: (first_call)->
+    # ------------------------------------------------------------------------------------------------------------------
+    # Elastic Search Facets request
+    # ------------------------------------------------------------------------------------------------------------------
+
+    __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()
       # Creates the Elastic Search Query parameters and serializes them
       # Includes the request for the faceting data
@@ -237,37 +242,55 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
 
-    loadFacetGroups: (first_call=true)->
-      non_selected_facets_groups = @getFacetsGroups(false)
-      if _.keys(non_selected_facets_groups).length == 0
-        return
+    __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
+      if not es_data? or not es_data.aggregations?
+        console.error "ERROR! The aggregations data in the response is missing!"
+        reject()
+      for facet_group_key, facet_group of non_selected_facets_groups
+        facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+      if (first_call and not needs_second_call) or not first_call
+        resolve()
 
-      call_time = new Date().getTime()
-      # TODO: CHECK HOW TO HANDLE REPETITIVE QUERIES SUBMISSIONS MORE EFFICIENTLY
-#      if first_call and @loading_facets and call_time - @loading_facets_t_ini < 5000
-#        console.log "WARNING! Facets requested again before they finished loading!", @getMeta('index')
-#        return
-      if first_call
-        @loading_facets = true
-        @loading_facets_t_ini = call_time
-        @needs_second_call = false
+    __loadFacetGroups: ()->
+      promiseFunc = (resolve, reject)->
+        non_selected_facets_groups = @getFacetsGroups(false)
+        if _.keys(non_selected_facets_groups).length == 0
+          return
+        needs_second_call = false
         for group_key, facet_group of non_selected_facets_groups
           if facet_group.faceting_handler.needsSecondRequest()
-            @needs_second_call = true
+            needs_second_call = true
+        ajax_deferred = @__requestFacetsGroupsData(true)
+        first_call = true
+        done_callback = (es_data)->
+          @__parseFacetsGroupsData(non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)
+        fail_callback = ()->
+          reject()
+          setTimeout(@loadFacetGroups.bind(@), 1000)
+        then_callback = ()->
+          ajax_deferred_sc = @__requestFacetsGroupsData(false)
+          first_call = false
+          ajax_deferred_sc.done(done_callback.bind(@))
+          ajax_deferred_sc.fail(fail_callback.bind(@))
 
-      ajax_deferred = @requestFacetsGroupsData(first_call)
-      done_callback = (es_data)->
-        if _.isUndefined(es_data) or _.isUndefined(es_data.aggregations)
-          throw "ERROR! The aggregations data in the response is missing!"
-        for facet_group_key, facet_group of non_selected_facets_groups
-          facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
-        if first_call and @needs_second_call
-          @loadFacetGroups(false)
-        else
+        ajax_deferred.done(done_callback.bind(@))
+        ajax_deferred.fail(fail_callback.bind(@))
+        if needs_second_call
+          ajax_deferred.then(then_callback.bind(@), null)
+      runPromise = ()->
+        @__last_facets_promise = new Promise(promiseFunc.bind(@))
+        triggerEvent = ()->
           @trigger('facets-changed')
-          @facetsReady = true
-          @loading_facets = false
-      ajax_deferred.done(done_callback.bind(@))
+        @__last_facets_promise.then(triggerEvent.bind(@))
+      if @__last_facets_promise?
+        @__last_facets_promise.then(runPromise.bind(@))
+      else
+        runPromise.bind(@)()
+
+    loadFacetGroups: ()->
+      if not @__debouncedLoadFacetGroups?
+        @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)
+      @__debouncedLoadFacetGroups()
 
     getFacetsGroups: (selected, onlyVisible=true)->
 
