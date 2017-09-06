@@ -22,7 +22,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         $(@searchBarView.el).hide()
 
     updateQueryFromModel:()->
-      [queryHtml, @tooltipCallbacks] = @readParsedQueryRecursive(@searchModel.get('jsonQuery'))
+      [queryHtml, @tooltipCallbacks] = @buildParsedQueryRecursive(@searchModel.get('jsonQuery'))
       $(@el).find('.query-explain-p').html(queryHtml)
       for cbI in @tooltipCallbacks
         cbI()
@@ -69,16 +69,19 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $hoveredElem.qtip qtipConfig
 
-    readParsedQueryRecursive: (curParsedQuery, parentType='or', depth=0, termId='root')->
+    buildParsedQueryRecursive: (curParsedQuery, parentType='or', depth=0, termId='root')->
       if _.has(curParsedQuery, 'term')
         term = curParsedQuery.term
-        if _.has(curParsedQuery, 'references') and curParsedQuery.references.length > 0
+        if curParsedQuery.chembl_entity or (_.has(curParsedQuery, 'references') and curParsedQuery.references.length > 0)
           termHtmlId = 'query-explain-term-'+termId
           callbackTooltip = ->
             @createTooltip(termHtmlId, curParsedQuery.references)
-
+          color = 'lime'
+          if curParsedQuery.chembl_entity and _.has(glados.Settings.SEARCH_PATH_2_ES_KEY, curParsedQuery.chembl_entity)
+            esKey = glados.Settings.SEARCH_PATH_2_ES_KEY[curParsedQuery.chembl_entity]
+            color = glados.models.paginatedCollections.Settings.ES_INDEXES[esKey].MODEL.color
           return [
-            '<span class="chip-syn lime darken-2 white-text hoverable '+termHtmlId+'">'+term+'</span>',
+            '<span class="chip-syn '+color+' darken-2 white-text hoverable '+termHtmlId+'">'+term+'</span>',
             [callbackTooltip.bind(@)]
           ]
         return [term, []]
@@ -95,7 +98,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       innerTerms = []
       innerCallbacks = []
       for termI, termIndex in nextTerms
-        [termStr, tooltipCallbacks]= @readParsedQueryRecursive(termI, curType, depth+1, termId+'-'+termIndex)
+        [termStr, tooltipCallbacks]= @buildParsedQueryRecursive(termI, curType, depth+1, termId+'-'+termIndex)
         innerTerms.push(termStr)
         innerCallbacks = innerCallbacks.concat(tooltipCallbacks)
       expressionStr = innerTerms.join(' ')

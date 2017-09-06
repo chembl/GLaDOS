@@ -8,12 +8,12 @@ glados.useNameSpace 'glados.views.Browsers',
       @browserView = arguments[0].menu_view
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
-      @setUpResponsiveRender()
+      @setUpResponsiveRender(emptyBeforeRender=false)
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
 
       @initialiseTitle()
-      @initializeHTMLStructure(emptyBeforeRender=true)
+      @initializeHTMLStructure()
       @showPreloader()
 
     events:

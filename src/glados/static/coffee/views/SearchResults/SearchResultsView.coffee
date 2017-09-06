@@ -65,13 +65,6 @@ glados.useNameSpace 'glados.views.SearchResults',
               score_i = 0
             if not total_records
               total_records = 0
-            # Boost compounds and targets to the top!
-            boost = 1
-            if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
-              boost = 100
-            else if val_i.KEY_NAME == glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET.KEY_NAME
-              boost = 50
-            score_i *= boost
 
             if not _.has(resources_names_by_score,score_i)
               resources_names_by_score[score_i] = []

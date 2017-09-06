@@ -8,14 +8,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Class Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    @CATEGORY_FACETING = 'CATEGORY'
-    @INTERVAL_FACETING = 'INTERVAL'
+    @CATEGORY_FACETING: 'CATEGORY'
+    @INTERVAL_FACETING: 'INTERVAL'
 
-    @NUM_INTERVALS = 10
+    @NUM_INTERVALS: 10
 
-    @EMPTY_CATEGORY = '- N/A -'
-    @OTHERS_CATEGORY = 'Other Categories'
-    @KEY_REGEX_REPLACE = /[^A-Z0-9_-]/gi
+    @EMPTY_CATEGORY: '- N/A -'
+    @OTHERS_CATEGORY: 'Other Categories'
+    @KEY_REGEX_REPLACE: /[^A-Z0-9_-]/gi
 
     @getAllFacetGroupsSelectedQuery: (faceting_handlers_list)->
       all_facets_query = []
@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         return null
       return all_facets_query
 
-    @getNewFacetingHandler = (es_index, es_property)->
+    @getNewFacetingHandler: (es_index, es_property)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       if not es_index_schema
         throw "ERROR! unknown elastic index "+es_index
@@ -73,7 +73,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     # Interval aggregations require 2 calls to find out first the min/max range
     # and then create an histogram of n columns
-    addQueryAggs:(es_query_aggs, first_call)->
+    addQueryAggs: (es_query_aggs, first_call)->
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
         if first_call
           es_query_aggs[@es_property_name] = {
@@ -238,7 +238,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       for fKey, fData of @faceting_data
         fData.selected = false
 
-    getFacetingHandlerId:()->
+    getFacetingHandlerId: ()->
       return (@es_index+"_"+@es_property_name).replace(FacetingHandler.KEY_REGEX_REPLACE,"__")
 
     getFacetId:(facet_key)->
