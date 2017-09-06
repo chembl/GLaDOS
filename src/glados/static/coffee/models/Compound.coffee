@@ -14,26 +14,42 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   loadSimilarityMap: ->
 
-    console.log 'trying to load similarity map'
     if @get('reference_smiles_error')
-      console.log 'AAA similarity map error! going to trigger'
       @set('loading_similarity_map', false)
       @trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
       return
 
     # to start I need the smiles of the compound and the compared one
-    console.log 'AAA loading similarity map!, '
     structures = @get('molecule_structures')
     if not structures?
       return
-
-    console.log 'AAA I already have mol structure!'
+    mySmiles = structures.canonical_smiles
 
     referenceSmiles = @get('reference_smiles')
     if not referenceSmiles?
       return
 
-    console.log 'AAA I already reference smiles!'
+    url = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
+    data = referenceSmiles + '\n' + mySmiles
+    console.log 'AAA I am ready!!'
+    console.log 'AAA url: ', url
+    console.log 'AAA data: ', data
+    getImageData = $.ajax
+      type: "POST",
+      url: url,
+      data: data
+
+    thisModel = @
+    getImageData.done (binaryData) ->
+      base64Img = btoa(unescape(encodeURIComponent(binaryData)))
+      thisModel.set
+        loading_similarity_map: false
+        similarity_map_base64_img: base64Img
+      ,
+        silent: true
+
+      console.log 'AAA data loaded! '
+
 
 
 

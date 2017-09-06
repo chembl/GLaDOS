@@ -7,11 +7,13 @@ glados.useNameSpace 'glados.views.Compound',
 
     renderSimilarityMap: ->
 
+      console.log 'AAA renderSimilarityMap'
       if @model.get('loading_similarity_map')
        @showPreloader()
-       return
       else if @model.get('reference_smiles_error')
         @renderSimilarityMapError()
+      else
+        console.log 'AAA image ready!'
 
     showPreloader: ->
 
