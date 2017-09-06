@@ -172,16 +172,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if facets_filtered
         es_query.query.bool.filter = @getFacetFilterQuery()
 
-
       if request_facets
-        if _.isUndefined(facets_first_call)
+        if not facets_first_call?
           throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
         facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
 
-      console.log 'Request data: ', es_query
-      console.log JSON.stringify(es_query)
       return es_query
 
     getAllColumns: ->
@@ -228,6 +225,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
+
+    __requestCurrentQuerySize: ()->
+      es_url = @getURL()
+      # Creates the Elastic Search Query parameters and serializes them
+      esJSONRequestData = JSON.stringify(@getRequestData(1, 0,))
+      # Uses POST to prevent result caching
+      ajax_deferred = $.post(es_url, esJSONRequestData)
+      return ajax_deferred
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Facets request
@@ -349,16 +354,50 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     search: (jsonQuery)->
-      searchESQuery = if _.isUndefined(jsonQuery) then {bool:{should:[],filter:[]}} else glados.models\
-        .paginatedCollections.ESQueryBuilder.getESQueryForJsonQuery(jsonQuery)
-      @setMeta('searchESQuery', searchESQuery)
+      final_callback = ()->
+        @invalidateAllDownloadedResults()
+        @unSelectAll()
+        @clearAllResults()
+        @clearAllFacetsSelections()
+        @setPage(1, false)
+        @fetch()
+      final_callback = final_callback.bind(@)
 
-      @invalidateAllDownloadedResults()
-      @unSelectAll()
-      @clearAllResults()
-      @clearAllFacetsSelections()
-      @setPage(1, false)
-      @fetch()
+      curMinShouldMatch = 100
+      fuzzy = false
+
+      searchESQuery = if not jsonQuery? then {bool:{should:[],filter:[]}} else glados.models\
+        .paginatedCollections.ESQueryBuilder.getESQueryForJsonQuery(jsonQuery, false, curMinShouldMatch+'%')
+      @setMeta('searchESQuery', searchESQuery)
+      ajax_deferred =  @__requestCurrentQuerySize()
+
+      done_callback = (esData)->
+        if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and curMinShouldMatch > 20
+          curMinShouldMatch -= 20
+          @setMeta(
+            'searchESQuery',
+            glados.models.paginatedCollections.ESQueryBuilder\
+              .getESQueryForJsonQuery(jsonQuery, fuzzy, curMinShouldMatch+'%')
+          )
+          ajax_deferred =  @__requestCurrentQuerySize()
+          ajax_deferred.done(done_callback)
+          console.warn "CALLED WITH", curMinShouldMatch, @getURL()
+        else if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and not fuzzy
+          fuzzy = true
+          @setMeta(
+            'searchESQuery',
+            glados.models.paginatedCollections.ESQueryBuilder\
+              .getESQueryForJsonQuery(jsonQuery, fuzzy, curMinShouldMatch+'%')
+          )
+          ajax_deferred =  @__requestCurrentQuerySize()
+          ajax_deferred.done(done_callback)
+          console.warn "CALLED FUZZY!", @getURL()
+        else
+          final_callback()
+
+      done_callback = done_callback.bind(@)
+
+      ajax_deferred.done(done_callback)
 
 
     # ------------------------------------------------------------------------------------------------------------------

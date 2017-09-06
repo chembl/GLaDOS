@@ -128,7 +128,7 @@ SearchModel = Backbone.Model.extend
 
       innerTerms = []
       for termI in nextTerms
-        termStr = @buildParsedQueryRecursive termI, curType
+        termStr = @readParsedQueryRecursive termI, curType
         innerTerms.push(termStr)
       expressionStr = innerTerms.join(' ')
       if not (curType == parentType or innerTerms.length == 1)

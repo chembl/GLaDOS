@@ -104,17 +104,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if chemblIdsEt.length > 0
         query.bool.must.bool[boolQuery].push(
           {
-            queryString:
+            query_string:
               fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat(ESQueryBuilder.ID_FIELDS_BOOSTS)
               query: chemblIdsEt.join(' ')
-              allowLeadingWildcard: false
+              allow_leading_wildcard: false
               fuzziness: 0
-              useDisMax: false
+              use_dis_max: false
           }
         )
       if filterTermsJoined
         query.bool.filter.push({
-          queryString:
+          query_string:
             fields: ESQueryBuilder.TEXT_FIELDS_BOOSTS.concat ESQueryBuilder.ID_FIELDS_BOOSTS
             query: filterTermsJoined
         })
@@ -140,7 +140,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             terms.push(curParsedQuery.term)
         for refI in curParsedQuery.references
           if refI.include_in_query
-            for chemblIdI in refI.chemblIds
+            for chemblIdI in refI.chembl_ids
               if chemblIdI.include_in_query
                 chemblIds.push(chemblIdI.chembl_id)
         return null
@@ -158,13 +158,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         nextTerms = curParsedQuery.and
         curType = 'and'
 
-      innerTerms = []
       innerQueries = []
       for termI in nextTerms
-        [termStr, termQuery] = ESQueryBuilder.buildParsedQueryRecursive(
+        termQuery = ESQueryBuilder.buildParsedQueryRecursive(
           termI, chemblIds, terms, filterTerms, fuzzy, minimumShouldMatch, curType
         )
-        innerTerms.push(termStr)
         if termQuery
           innerQueries.push(termQuery)
       return ESQueryBuilder.getESQueryFor(
