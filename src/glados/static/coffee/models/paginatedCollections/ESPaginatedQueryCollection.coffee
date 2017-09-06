@@ -45,7 +45,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if @getMeta('enable_similarity_maps')
           currentItemData.enable_similarity_map = @getMeta('enable_similarity_maps')
           currentItemData.reference_smiles = @getMeta('reference_smiles')
-          jsonResultsList.push(currentItemData)
+
+        jsonResultsList.push(currentItemData)
+
 
       if not @getMeta('ignore_score')
         #Triggers the event after the values have been updated

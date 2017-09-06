@@ -61,9 +61,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             console.log 'similarity maps enabled!'
             if searchTerm.startsWith('CHEMBL')
               console.log 'need to get smiles!!'
+              @referenceCompound = new Compound
+                id: searchTerm + 'bla bla bla'
+
+              f = $.proxy(@handleReferenceCompoundLoaded, @)
+              @referenceCompound.on 'change', (-> setTimeout(f, 400)), @
+              @referenceCompound.on 'error', (-> console.log 'AAA error!!'), @
+              @referenceCompound.fetch()
             else
               console.log 'already got smiles!'
               @setMeta('reference_smiles', searchTerm)
+
+        handleReferenceCompoundLoaded: ->
+          refSmiles = @referenceCompound.get('molecule_structures').canonical_smiles
+          @setMeta('reference_smiles', refSmiles)
+          console.log('AAA handleReferenceCompoundLoaded!', @getMeta('reference_smiles'))
+
+          for model in @models
+            model.set('reference_smiles', refSmiles)
+            console.log 'AAA updating model!'
+
+
 
       return new indexESPagQueryCollection
 
