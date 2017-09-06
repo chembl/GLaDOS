@@ -54,7 +54,8 @@ class SearchResultsApp
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC],
-    glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS)
+    glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
+    GlobalVariables.SEARCH_TERM)
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
@@ -74,7 +75,8 @@ class SearchResultsApp
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
 
-  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns, customSettings) ->
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns, customSettings,
+    searchTerm) ->
 
     deferreds = resultsList.getAllResults($progressElement)
 
@@ -83,7 +85,7 @@ class SearchResultsApp
 
 
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-        resultsList.allResults, contextualColumns, customSettings)
+        resultsList.allResults, contextualColumns, customSettings, searchTerm)
 
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList

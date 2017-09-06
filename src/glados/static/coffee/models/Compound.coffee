@@ -9,6 +9,26 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     if @get('enable_similarity_map')
       @set('loading_similarity_map', true)
+      @loadSimilarityMap()
+      @on 'change', @loadSimilarityMap, @
+
+  loadSimilarityMap: ->
+
+    # to start I need the smiles of the compound and the compared one
+    console.log 'loading similarity map!, '
+    structures = @get('molecule_structures')
+    if not structures?
+      return
+
+    console.log 'I already have mol structure!'
+
+    referenceSmiles = @get('reference_smiles')
+    if not referenceSmiles?
+      return
+
+    console.log 'I already reference smiles!'
+
+
 
   parse: (response) ->
 
