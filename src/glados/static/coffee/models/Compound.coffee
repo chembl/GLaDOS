@@ -14,8 +14,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   loadSimilarityMap: ->
 
+    console.log 'trying to load similarity map'
     if @get('reference_smiles_error')
-      console.log 'AAA similarity map error!'
+      console.log 'AAA similarity map error! going to trigger'
+      @set('loading_similarity_map', false)
+      @trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
       return
 
     # to start I need the smiles of the compound and the compared one
