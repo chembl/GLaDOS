@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+      @renderSimMapControls()
 
       @checkIfNoItems()
 
@@ -89,5 +90,12 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # Similariy maps controls
     # ------------------------------------------------------------------------------------------------------------------
+    renderSimMapControls: ->
+      console.log 'renderSimMapControls '
+
+      glados.Utils.fillContentForElement @getSimMapControlsContainer(),
+        checked: @collection.getMeta('show_similarity_maps')
+
     showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
     hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
+    getSimMapControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
