@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
+      'click .BCK-toggle-SimMaps': 'toggleSimMaps'
 
     initialize: ->
 
@@ -91,7 +92,6 @@ glados.useNameSpace 'glados.views.Browsers',
     # Similariy maps controls
     # ------------------------------------------------------------------------------------------------------------------
     renderSimMapControls: ->
-      console.log 'renderSimMapControls '
 
       glados.Utils.fillContentForElement @getSimMapControlsContainer(),
         checked: @collection.getMeta('show_similarity_maps')
@@ -99,3 +99,11 @@ glados.useNameSpace 'glados.views.Browsers',
     showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
     hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
     getSimMapControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
+
+    toggleSimMaps: (event) ->
+
+      $toggler = $(event.currentTarget)
+      checked = $toggler.prop('checked')
+      @collection.toggleShowSimMaps(checked)
+
+

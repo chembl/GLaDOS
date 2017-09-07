@@ -26,9 +26,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('reference_smiles_error_jqxhr', undefined)
 
     handleReferenceCompoundError: (modelOrCollection, jqXHR) ->
+
       @setMeta('reference_smiles_error', true)
       @setMeta('reference_smiles_error_jqxhr', jqXHR)
 
       for model in @models
         model.set('reference_smiles_error', true)
         @setMeta('reference_smiles_error_jqxhr', jqXHR)
+
+    toggleShowSimMaps: (active) ->
+
+      active ?= not @getMeta('show_similarity_maps')
+
+      @setMeta('show_similarity_maps', active)
+
+      for model in @models
+        model.set('show_similarity_map', active)
+

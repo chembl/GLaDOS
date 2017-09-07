@@ -8,11 +8,20 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
     if @get('enable_similarity_map')
-      @set('loading_similarity_map', true)
-      @loadSimilarityMap()
+      @set
+        'loading_similarity_map': true
+        'force_load_similarity_map': true
+
+      @loadSimilarityMap(force=true)
+      @set('force_load_similarity_map', false)
+
       @on 'change', @loadSimilarityMap, @
 
-  loadSimilarityMap: ->
+  loadSimilarityMap:  ->
+
+    force = @get('force_load_similarity_map')
+    if not @changed['molecule_chembl_id']? and not force
+      return
 
     if @get('reference_smiles_error')
       @set('loading_similarity_map', false)

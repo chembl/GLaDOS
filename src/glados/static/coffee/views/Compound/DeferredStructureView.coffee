@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.views.Compound',
 
       @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
       @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderSimilarityMapError, @
+      @model.on 'change', @checkIfShowStatusChanged, @
       @renderSimilarityMap()
 
     renderSimilarityMap: ->
@@ -49,6 +50,11 @@ glados.useNameSpace 'glados.views.Compound',
     #-------------------------------------------------------------------------------------------------------------------
     # Images Handling
     #-------------------------------------------------------------------------------------------------------------------
+    checkIfShowStatusChanged: ->
+
+      if @model.changed['show_similarity_map']?
+        @showCorrectImage()
+
     hideAllImages: ->
 
       $image = $(@el).find('img.BCK-main-image')
