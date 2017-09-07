@@ -252,6 +252,16 @@ glados.useNameSpace 'glados.views.Browsers',
       else
         @toolBarView.hideZoomControls()
 
+      showSimMapControls = false
+      if currentView.isCards?
+        if currentView.isCards() and @collection.getMeta('enable_similarity_maps')
+          showSimMapControls = true
+
+      if showSimMapControls
+        @toolBarView.showSimMapControls()
+      else
+        @toolBarView.hideSimMapControls()
+
     hideView: (viewType) ->
 
       if @allViewsPerType[viewType].sleepView?

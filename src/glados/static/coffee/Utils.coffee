@@ -218,6 +218,11 @@ glados.useNameSpace 'glados',
         return Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
           msg: errorDetails
 
+      getErrorImageContent: (jqXHR) ->
+        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+        return Handlebars.compile($('#Handlebars-Common-ErrorInImage').html())
+          msg: errorDetails
+
     Text:
       getTextForEllipsis: (originalText, originalWidth, containerLimit ) ->
 

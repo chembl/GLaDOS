@@ -145,6 +145,9 @@ glados.useNameSpace 'glados',
         UNSELECTED: 'unselect'
         BULK_SELECTED: 'bulk-selected'
         BULK_UNSELECTED: 'bulk-unselected'
+    Compound:
+      SIMILARITY_MAP_ERROR: 'SIMILARITY_MAP_ERROR'
+      SIMILARITY_MAP_READY: 'SIMILARITY_MAP_READY'
     Legend:
       VALUE_SELECTED: 'value-selected'
       VALUE_UNSELECTED: 'value-unselected'

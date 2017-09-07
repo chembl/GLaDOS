@@ -197,22 +197,25 @@ class CompoundReportCardApp
     compoundMetabolism.fetch()
 
   # you can provide chembld iD or a model already created
-  @initMiniCompoundReportCard = ($containerElem, chemblID, model, customTemplate, additionalTemplateParams={})->
+  @initMiniCompoundReportCard = ($containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
+  fetchModel=true)->
 
     if model?
       compound = model
     else
       compound = new Compound({molecule_chembl_id: chemblID})
 
-    new glados.views.MiniReportCardView
+    view = new glados.views.MiniReportCardView
       el: $containerElem
       model: compound
       entity: Compound
       custom_template: customTemplate
       additional_params: additionalTemplateParams
 
-    compound.fetch()
-
+    if not fetchModel
+      view.render()
+    else
+      compound.fetch()
   # -------------------------------------------------------------
   # Views
   # -------------------------------------------------------------

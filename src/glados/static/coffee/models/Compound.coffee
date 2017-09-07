@@ -2,9 +2,76 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'molecule_chembl_id'
   initialize: ->
+
     id = @get('id')
     id ?= @get('molecule_chembl_id')
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+
+    if @get('enable_similarity_map')
+      @set
+        'loading_similarity_map': true
+        'force_load_similarity_map': true
+
+      @loadSimilarityMap(force=true)
+      @set('force_load_similarity_map', false)
+
+      @on 'change', @loadSimilarityMap, @
+
+  loadSimilarityMap:  ->
+
+    force = @get('force_load_similarity_map')
+    if not @changed['molecule_chembl_id']? and not force
+      return
+
+    if @get('reference_smiles_error')
+      @set('loading_similarity_map', false)
+      @trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
+      return
+
+    # to start I need the smiles of the compound and the compared one
+    structures = @get('molecule_structures')
+    if not structures?
+      return
+    mySmiles = structures.canonical_smiles
+
+    referenceSmiles = @get('reference_smiles')
+    if not referenceSmiles?
+      return
+
+    url = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
+    data = referenceSmiles + '\n' + mySmiles
+
+    thisModel = @
+
+    getImageDataXHR = new XMLHttpRequest()
+    getImageDataXHR.onreadystatechange = ->
+      if (@readyState == 4 and @status == 200)
+        fr = new FileReader()
+        fr.readAsDataURL(@response)
+        fr.onload = ->
+
+          thisModel.set
+            loading_similarity_map: false
+            similarity_map_base64_img: @result.replace('data:image/png;base64,', '')
+            reference_smiles_error: false
+            reference_smiles_error_jqxhr: undefined
+          ,
+            silent: true
+
+          thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_READY
+
+      else
+        thisModel.set
+          reference_smiles_error: true
+          reference_smiles_error_jqxhr: @
+        ,
+          silent: true
+
+        thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
+
+    getImageDataXHR.open('POST', url)
+    getImageDataXHR.responseType = 'blob'
+    getImageDataXHR.send(data)
 
   parse: (response) ->
 
@@ -90,7 +157,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 _.extend(Compound, glados.models.base.ReportCardEntity)
 Compound.color = 'cyan'
 Compound.reportCardPath = 'compound_report_card/'
-console.log 'COMPOUND MODEL', Compound
 
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 

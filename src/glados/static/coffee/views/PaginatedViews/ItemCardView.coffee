@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $infoOpener.hide()
 
     openInfo: ->
-
+      console.log 'openInfo!'
       $infoElement = $(@el).find('.BCK-info-container')
       $infoElement.slideDown('fast')
       @showTab('Details')
@@ -73,7 +73,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if tabID == 'Details'
         CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model,
-          'Handlebars-Common-CompoundDetails')
+          'Handlebars-Common-CompoundDetails', undefined, fetchModel=false)
 
       $tabElement.attr('data-initialised','yes')
 
@@ -119,6 +119,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $newMiniReportCardContainer = $('#' + miniRepCardID)
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
-          {hide_img:true})
+          {hide_img:true}, fetchModel=false)
 
 
