@@ -2699,10 +2699,18 @@ $browser-tool-bar-width: 55px;
       margin: 2px 4px;
 
     }
-    .zoom-buttons{
+    .zoom-buttons, .toggle-special-structures-imgs{
       margin-top: 8px;
       padding-top: 8px;
       border-top: 1px solid color('grey', 'base');
+    }
+
+    .tool-title{
+      font-size: 70%;
+    }
+    .lever{
+      transform: rotate(-90deg);
+      margin: 20px 0;
     }
 
   }

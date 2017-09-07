@@ -187,6 +187,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SIMILARITY_MAPS: true
+        SHOW_SIMILARITY_MAPS: true
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
