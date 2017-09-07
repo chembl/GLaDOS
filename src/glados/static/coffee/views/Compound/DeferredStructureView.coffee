@@ -55,7 +55,7 @@ glados.useNameSpace 'glados.views.Compound',
 
       if not @model.changed['show_similarity_map']?
         return
-        
+
       if @model.get('loading_similarity_map') and @model.get('show_similarity_map')
         @showPreloader()
         return

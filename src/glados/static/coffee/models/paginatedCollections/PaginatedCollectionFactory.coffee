@@ -53,6 +53,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             generator_items_list: itemsList
             contextual_properties: contextualProperties
             enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
+            enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
+            show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             show_similarity_maps: esIndexSettings.SHOW_SIMILARITY_MAPS
             search_term: searchTerm
 
