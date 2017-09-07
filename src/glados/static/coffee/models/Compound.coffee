@@ -85,6 +85,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   loadStructureHighlight: ->
 
     console.log 'loadStructureHighlight: '
+    
 
   parse: (response) ->
 
