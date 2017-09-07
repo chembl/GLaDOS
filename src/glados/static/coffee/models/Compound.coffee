@@ -86,11 +86,108 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     return response;
 
+  #---------------------------------------------------------------------------------------------------------------------
+  # 3D SDF
+  #---------------------------------------------------------------------------------------------------------------------
+
+  download2DSDF: ()->
+    promiseFunc = (resolve, reject)->
+      if @get('sdf2DData')?
+        resolve(@get('sdf2DData'))
+      else
+        ajax_deferred = $.get(Compound.SDF_2D_URL + @get('molecule_chembl_id') + '.sdf')
+        compoundModel = @
+        ajax_deferred.done (ajaxData)->
+          compoundModel.set('sdf2DData', ajaxData)
+          resolve(ajaxData)
+        ajax_deferred.fail (error)->
+          console.error error
+          reject()
+    return new Promise(promiseFunc.bind(@))
+
+  download3DSDF: (endpointIndex)->
+    data3DCacheName = 'sdf3DData_'+endpointIndex
+    promiseFunc = (resolve, reject)->
+      if not @get('sdf2DData')?
+        error = 'Error, There is no 2D data for the compound '+@get('molecule_chembl_id')+'!'
+        console.error error
+        reject(error)
+      else if @get(data3DCacheName)?
+        resolve(data3DCacheName)
+      else
+        ajax_deferred = $.post(Compound.SDF_3D_ENDPOINTS[endpointIndex], @get('sdf2DData'))
+        compoundModel = @
+        ajax_deferred.done (ajaxData)->
+          compoundModel.set(data3DCacheName, ajaxData)
+          resolve(ajaxData)
+        ajax_deferred.fail (error)->
+          console.error error
+          reject()
+    return new Promise(promiseFunc.bind(@))
+
+  download3DXYZ: (endpointIndex)->
+    dataVarName = 'sdf3DDataXYZ_'+endpointIndex
+    data3DSDFVarName = 'sdf3DData_'+endpointIndex
+    promiseFunc = (resolve, reject)->
+      if not @get('current3DData')?
+        error = 'Error, There is no 3D data for the compound '+@get('molecule_chembl_id')+'!'
+        console.error error
+        reject(error)
+      else if @get(dataVarName)?
+        resolve(dataVarName)
+      else
+        ajax_deferred = $.post(Compound.SDF_3D_2_XYZ, @get(data3DSDFVarName))
+        compoundModel = @
+        ajax_deferred.done (ajaxData)->
+          console.warn( compoundModel.get(data3DSDFVarName))
+          console.warn( ajaxData)
+          compoundModel.set(dataVarName, ajaxData)
+          resolve(ajaxData)
+        ajax_deferred.fail (error)->
+          console.error error
+          reject()
+    return new Promise(promiseFunc.bind(@))
+
+
+  calculate3DSDFAndXYZ: (endpointIndex)->
+    @set('cur3DEndpointIndex', endpointIndex)
+    @set('current3DData', null)
+    @set('current3DXYZData', null)
+    dataVarName = 'sdf3DData_'+endpointIndex
+    dataXYZVarName = 'sdf3DDataXYZ_'+endpointIndex
+
+    after3DDownload = ()->
+      @set('current3DData', @get(dataVarName))
+      afterXYZDownload = ()->
+        @set('current3DXYZData', @get(dataXYZVarName))
+      @download3DXYZ(endpointIndex).then afterXYZDownload.bind(@)
+    after3DDownload = after3DDownload.bind(@)
+
+    download3DPromise = @download3DSDF.bind(@, endpointIndex)
+    @download2DSDF().then ()->
+      download3DPromise().then(after3DDownload)
+
+#-----------------------------------------------------------------------------------------------------------------------
+# 3D SDF Constants
+#-----------------------------------------------------------------------------------------------------------------------
+
+Compound.SDF_2D_URL = glados.Settings.WS_BASE_URL + 'molecule/'
+Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL+ 'ctab2xyz'
+Compound.SDF_3D_ENDPOINTS = [
+  {
+    label: 'UFF'
+    url: glados.Settings.BEAKER_BASE_URL+ 'ctab23D'
+  },
+  {
+    label: 'MMFF'
+    url: glados.Settings.BEAKER_BASE_URL+ 'MMFFctab23D'
+  }
+]
+
 # Constant definition for ReportCardEntity model functionalities
 _.extend(Compound, glados.models.base.ReportCardEntity)
 Compound.color = 'cyan'
 Compound.reportCardPath = 'compound_report_card/'
-console.log 'COMPOUND MODEL', Compound
 
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 

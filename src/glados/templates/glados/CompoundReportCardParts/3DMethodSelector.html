@@ -1,0 +1,17 @@
+{% verbatim %}
+<script id="Handlebars-Compound-3D-options-menu" type="text/x-handlebars-template">
+    <div class="row">
+      <b>Renderer:</b>
+    </div>
+    {{#each renderingOptions}}
+    <p>
+        {{#if selected}}
+            <input id="rendering-option-{{@index}}" name="renderer" type="radio" value="{{@index}}" class="with-gap" checked/>
+        {{else}}
+            <input id="rendering-option-{{@index}}" name="renderer" type="radio" value="{{@index}}" class="with-gap"/>
+        {{/if}}
+        <label for="rendering-option-{{@index}}">{{label}}</label>
+    </p>
+    {{/each}}
+</script>
+{% endverbatim %}
