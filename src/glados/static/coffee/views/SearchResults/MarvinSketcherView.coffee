@@ -83,17 +83,20 @@ MarvinSketcherView = Backbone.View.extend
 
       console.log 'URL: ', url_and_data.url
 
-      $.post(url_and_data.url, url_and_data.data).done( (smiles) ->
+      $.post(url_and_data.url, url_and_data.data).done( (smilesData) ->
 
         $(thisView.el).find('.messages-to-user').text('Searching...')
 
+        smilesLine = smilesData.split('\n')[1].trim()
+        smiles = smilesLine.split(' ')[0]
+
         if searchType == thisView.SUBSTRUCTURE_SEARCH
-          searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+          searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles
         else if searchType == thisView.FLEXMATCH_SEARCH
-          searchUrl = glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim()
+          searchUrl = glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE + smiles
         else
           percentage = $(thisView.el).find('.similarity-search-threshold-input').val()
-          searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles.split('\n')[1].trim() + '/' + percentage
+          searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles + '/' + percentage
 
         window.location.href =  searchUrl
 
