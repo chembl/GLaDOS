@@ -29,38 +29,72 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if not referenceSmiles?
       return
 
+#    data = 'Qyg9TylPYzFjY2NjYzFDKD1PKU8KQ0MoPU8pT2MxY2NjY2MxQyg9TylPCg=='
     url = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
     data = referenceSmiles + '\n' + mySmiles
     console.log 'AAA I am ready!!'
     console.log 'AAA url: ', url
     console.log 'AAA data: ', data
-    getImageData = $.ajax
-      type: "POST",
-      url: url,
-      data: data
 
     thisModel = @
-    getImageData.done (binaryData) ->
-      base64Img = btoa(unescape(encodeURIComponent(binaryData)))
-      thisModel.set
-        loading_similarity_map: false
-        similarity_map_base64_img: base64Img
-        reference_smiles_error: false
-        reference_smiles_error_jqxhr: undefined
-      ,
-        silent: true
 
-      console.log 'AAA data loaded! '
+    getImageDataXHR = new XMLHttpRequest()
+    getImageDataXHR.onreadystatechange = ->
+      if (@readyState == 4 and @status == 200)
+        fr = new FileReader()
+        fr.readAsDataURL(@response)
+        fr.onload = ->
 
-    getImageData.error (jqXHR) ->
+          thisModel.set
+            loading_similarity_map: false
+            similarity_map_base64_img: @result.replace('data:image/png;base64,', '')
+            reference_smiles_error: false
+            reference_smiles_error_jqxhr: undefined
+          ,
+            silent: true
 
-      thisModel.set
-        reference_smiles_error: false
-        reference_smiles_error_jqxhr: jqXHR
-      ,
-        silent: true
+          thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_READY
 
-      thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
+    getImageDataXHR.open('POST', url)
+    getImageDataXHR.responseType = 'blob'
+    getImageDataXHR.send(data)
+
+#    getImageData = $.ajax
+#      type: "GET"
+#      url: url
+##      data: data
+#
+#    thisModel = @
+#    getImageData.done (binaryData) ->
+#
+#      fr = new FileReader()
+#
+#      fr.readAsDataURL(binaryData)
+#      fr.onload = -> console.log ' AAA FR result ', @result
+#
+#
+#
+#      base64Img = btoa(unescape(encodeURIComponent(binaryData)))
+#      thisModel.set
+#        loading_similarity_map: false
+#        similarity_map_base64_img: base64Img
+#        reference_smiles_error: false
+#        reference_smiles_error_jqxhr: undefined
+#      ,
+#        silent: true
+#
+#      thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_READY
+#      console.log 'AAA data loaded! '
+
+#    getImageData.error (jqXHR) ->
+#
+#      thisModel.set
+#        reference_smiles_error: false
+#        reference_smiles_error_jqxhr: jqXHR
+#      ,
+#        silent: true
+
+#      thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
 
 
 
