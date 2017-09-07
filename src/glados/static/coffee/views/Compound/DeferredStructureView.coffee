@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.Compound',
 
       @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
       @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderSimilarityMapError, @
-      @model.on 'change', @checkIfShowStatusChanged, @
+      @model.on 'change:show_similarity_map', @handleShowStatusChanged, @
       @renderSimilarityMap()
 
     renderSimilarityMap: ->
@@ -51,10 +51,7 @@ glados.useNameSpace 'glados.views.Compound',
     #-------------------------------------------------------------------------------------------------------------------
     # Images Handling
     #-------------------------------------------------------------------------------------------------------------------
-    checkIfShowStatusChanged: ->
-
-      if not @model.changed['show_similarity_map']?
-        return
+    handleShowStatusChanged: ->
 
       if @model.get('loading_similarity_map') and @model.get('show_similarity_map')
         @showPreloader()
