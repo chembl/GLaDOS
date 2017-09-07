@@ -13,9 +13,6 @@ glados.useNameSpace 'glados.views.Compound',
       else if @model.get('reference_smiles_error')
         @renderSimilarityMapError()
       else
-        $preloader = $(@el).find('.BCK-preloader')
-        $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
-        $image = $(@el).find('img.BCK-main-image')
         $simMapImage = $(@el).find('img.BCK-simMap-image')
 
         if $simMapImage.length == 0
@@ -25,11 +22,7 @@ glados.useNameSpace 'glados.views.Compound',
 
         $simMapImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
 
-        $preloader.hide()
-        $errorMessagesContainer.hide()
-        $errorMessagesContainer.hide()
-        $image.hide()
-        $simMapImage.show()
+        @showCorrectImage()
 
     showPreloader: ->
 
@@ -39,10 +32,7 @@ glados.useNameSpace 'glados.views.Compound',
         $(@el).attr('data-preloader-added', 'yes')
 
       $newPreloader.show()
-      $image = $(@el).find('img.BCK-main-image')
-      $image.hide()
-      $simMapImage = $(@el).find('img.BCK-simMap-image')
-      $simMapImage.hide()
+      @hideAllImages()
 
     renderSimilarityMapError: ->
 
@@ -54,8 +44,33 @@ glados.useNameSpace 'glados.views.Compound',
         $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
 
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getErrorImageContent(jqXHR)
+      @hideAllImages()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Images Handling
+    #-------------------------------------------------------------------------------------------------------------------
+    hideAllImages: ->
+
       $image = $(@el).find('img.BCK-main-image')
       $image.hide()
       $simMapImage = $(@el).find('img.BCK-simMap-image')
       $simMapImage.hide()
+
+    showCorrectImage: ->
+
+      $preloader = $(@el).find('.BCK-preloader')
+      $preloader.hide()
+
+      $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
+      $errorMessagesContainer.hide()
+
+      $image = $(@el).find('img.BCK-main-image')
+      $simMapImage = $(@el).find('img.BCK-simMap-image')
+
+      if @model.get('show_similarity_map')
+        $simMapImage.show()
+        $image.hide()
+      else
+        $simMapImage.hide()
+        $image.show()
 

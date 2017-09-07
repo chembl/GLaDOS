@@ -53,10 +53,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             generator_items_list: itemsList
             contextual_properties: contextualProperties
             enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
+            show_similarity_maps: esIndexSettings.SHOW_SIMILARITY_MAPS
             search_term: searchTerm
-
-          console.log 'search_term: ', searchTerm
-          console.log 'enable_similarity_maps: ', @getMeta('enable_similarity_maps')
 
           if @getMeta('enable_similarity_maps')
             @initSimilarityMapFunctions()

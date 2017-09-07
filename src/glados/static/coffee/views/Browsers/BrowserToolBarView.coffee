@@ -85,3 +85,9 @@ glados.useNameSpace 'glados.views.Browsers',
     zoomIn: -> @browserView.zoomIn()
     zoomOut: -> @browserView.zoomOut()
     resetZoom: -> @browserView.resetZoom()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Similariy maps controls
+    # ------------------------------------------------------------------------------------------------------------------
+    showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
+    hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
