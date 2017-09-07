@@ -11,6 +11,12 @@
   </div>
 </script>
 
+<script id="Handlebars-Common-ErrorInImage" type="text/x-handlebars-template">
+
+  <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+
+</script>
+
 <script id="Handlebars-Common-EmbedCode" type="text/x-handlebars-template">
 
   <object data="{{base_url}}{{resource_type}}_report_card/{{chembl_id}}/embed/{{section_name}}/"
@@ -38,14 +44,17 @@
 
 <script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
 
-   <div class="preloader-wrapper small active">
-    <div class="spinner-layer spinner-teal-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
+  <div class="BCK-preloader">
+
+     <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-teal-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -274,7 +283,7 @@
       </div>
 
       <div class="white card-image BCK-image">
-        <img src="{{img_url}}">
+        <img class="BCK-main-image"src="{{img_url}}">
       </div>
 
       <div class="card-content BCK-info-opener">
@@ -339,7 +348,7 @@
                   m{{medium_size}}
                   l{{large_size}}" >
 
-    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}}" style="height: 85%">
+    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable" style="height: 85%">
 
       <div class='checkbox-container'>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"

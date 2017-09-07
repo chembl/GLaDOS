@@ -9,11 +9,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties) ->
+      contextualProperties, searchTerm) ->
 
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
-      .extend(glados.models.paginatedCollections.SortingFunctions).extend
+      .extend(glados.models.paginatedCollections.SortingFunctions)
+      .extend(glados.models.paginatedCollections.SimilarityMapFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -51,6 +52,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
             contextual_properties: contextualProperties
+            enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
+            search_term: searchTerm
+
+          console.log 'search_term: ', searchTerm
+          console.log 'enable_similarity_maps: ', @getMeta('enable_similarity_maps')
+
+          if @getMeta('enable_similarity_maps')
+            @initSimilarityMapFunctions()
+
 
       return new indexESPagQueryCollection
 
@@ -125,10 +135,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQueryString=true)
       return list
 
-    getNewESCompoundsList: (customQueryString='*', itemsList, contextualProperties) ->
+    getNewESCompoundsList: (customQueryString='*', itemsList, contextualProperties,
+      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
+      searchTerm) ->
 
-      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
-        customQueryString, useCustomQueryString=(not itemsList?), itemsList, contextualProperties)
+
+      list = @getNewESResultsListFor(settings, customQueryString, useCustomQueryString=(not itemsList?), itemsList,
+        contextualProperties, searchTerm)
       return list
 
     getNewESActivitiesList: (customQueryString='*') ->

@@ -359,12 +359,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         CustomElementView = @collection.getMeta('custom_cards_item_view')
         if CustomElementView? and not @isComplicated
-          ItemModel = @collection.getMeta('model')
-          model = new ItemModel
-            id: idValue
+          model =  @collection.get(idValue)
           new CustomElementView
             model: model
             el: $newItemElem
+
+        if templateParams.img_url? and @collection.getMeta('enable_similarity_maps')
+          new glados.views.Compound.DeferredStructureView
+            model: model
+            el: $newItemElem.find('.BCK-image')
+
 
       @fixCardHeight($appendTo)
 
