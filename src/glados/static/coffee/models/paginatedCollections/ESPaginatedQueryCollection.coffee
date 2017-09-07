@@ -39,6 +39,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           currentItemData.reference_smiles_error_jqxhr = @getMeta('reference_smiles_error_jqxhr')
           currentItemData.show_similarity_map = @getMeta('show_similarity_maps')
 
+        if @getMeta('enable_substructure_highlighting')
+          currentItemData.enable_substructure_highlighting = @getMeta('enable_substructure_highlighting')
+          currentItemData.reference_smiles = @getMeta('reference_smiles')
+
         jsonResultsList.push(currentItemData)
 
 

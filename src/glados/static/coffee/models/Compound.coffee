@@ -12,10 +12,19 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         'loading_similarity_map': true
         'force_load_similarity_map': true
 
-      @loadSimilarityMap(force=true)
+      @loadSimilarityMap()
       @set('force_load_similarity_map', false)
 
       @on 'change', @loadSimilarityMap, @
+
+    if @get('enable_substructure_highlighting')
+      @set
+        'loading_substructure_highlight': true
+        'force_substructure_highlight': true
+
+      @loadStructureHighlight()
+      @set('force_substructure_highlight', false)
+      @on 'change', @loadStructureHighlight, @
 
   loadSimilarityMap:  ->
 
@@ -72,6 +81,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     getImageDataXHR.open('POST', url)
     getImageDataXHR.responseType = 'blob'
     getImageDataXHR.send(data)
+
+  loadStructureHighlight: ->
+
+    console.log 'loadStructureHighlight: '
 
   parse: (response) ->
 
