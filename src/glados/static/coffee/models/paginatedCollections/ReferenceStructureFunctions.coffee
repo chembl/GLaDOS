@@ -1,8 +1,8 @@
 glados.useNameSpace 'glados.models.paginatedCollections',
 
-  SimilarityMapFunctions:
+  ReferenceStructureFunctions:
 
-    initSimilarityMapFunctions: ->
+    initReferenceStructureFunctions: ->
       searchTerm = @getMeta('search_term')
       if searchTerm.startsWith('CHEMBL')
         @referenceCompound = new Compound

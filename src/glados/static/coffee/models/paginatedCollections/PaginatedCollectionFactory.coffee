@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.SimilarityMapFunctions).extend
+      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             search_term: searchTerm
 
           if @getMeta('enable_similarity_maps')
-            @initSimilarityMapFunctions()
+            @initReferenceStructureFunctions()
 
 
       return new indexESPagQueryCollection
