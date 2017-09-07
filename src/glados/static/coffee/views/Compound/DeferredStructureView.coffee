@@ -27,12 +27,13 @@ glados.useNameSpace 'glados.views.Compound',
 
     showPreloader: ->
 
-      if not $(@el).attr('data-preloader-added') != 'yes'
+      if  $(@el).attr('data-preloader-added') != 'yes'
         $newPreloader = $(glados.Utils.getContentFromTemplate('Handlebars-Common-MiniRepCardPreloader'))
         $(@el).append($newPreloader)
         $(@el).attr('data-preloader-added', 'yes')
 
-      $newPreloader.show()
+      $preloader = $(@el).find('.BCK-preloader')
+      $preloader.show()
       @hideAllImages()
 
     renderSimilarityMapError: ->
@@ -52,8 +53,14 @@ glados.useNameSpace 'glados.views.Compound',
     #-------------------------------------------------------------------------------------------------------------------
     checkIfShowStatusChanged: ->
 
-      if @model.changed['show_similarity_map']?
-        @showCorrectImage()
+      if not @model.changed['show_similarity_map']?
+        return
+        
+      if @model.get('loading_similarity_map') and @model.get('show_similarity_map')
+        @showPreloader()
+        return
+
+      @showCorrectImage()
 
     hideAllImages: ->
 
