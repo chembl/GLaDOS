@@ -3,7 +3,8 @@ glados.useNameSpace 'glados.views.Compound',
     initialize: ->
 
       @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
-      @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderSimilarityMapError, @
+      @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderLoadingError, @
+      @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @renderLoadingError, @
       @model.on 'change:show_similarity_map', @handleShowStatusChanged, @
       @renderSimilarityMap()
 
@@ -12,7 +13,7 @@ glados.useNameSpace 'glados.views.Compound',
       if @model.get('loading_similarity_map')
        @showPreloader()
       else if @model.get('reference_smiles_error')
-        @renderSimilarityMapError()
+        @renderLoadingError()
       else
         $simMapImage = $(@el).find('img.BCK-simMap-image')
 
@@ -36,7 +37,7 @@ glados.useNameSpace 'glados.views.Compound',
       $preloader.show()
       @hideAllImages()
 
-    renderSimilarityMapError: ->
+    renderLoadingError: ->
 
       jqXHR = @model.get('reference_smiles_error_jqxhr')
       $errorMessagesContainer = $(@el).find('.BCK-error-message-container')

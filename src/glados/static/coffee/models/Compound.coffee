@@ -8,29 +8,18 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
     if @get('enable_similarity_map')
-      @set
-        'loading_similarity_map': true
-        'force_load_similarity_map': true
-
+      @set('loading_similarity_map', true)
       @loadSimilarityMap()
-      @set('force_load_similarity_map', false)
 
-      @on 'change', @loadSimilarityMap, @
+      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
 
     if @get('enable_substructure_highlighting')
-      @set
-        'loading_substructure_highlight': true
-        'force_substructure_highlight': true
-
+      @set('loading_substructure_highlight', true)
       @loadStructureHighlight()
-      @set('force_substructure_highlight', false)
-      @on 'change', @loadStructureHighlight, @
+
+      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
 
   loadSimilarityMap:  ->
-
-    force = @get('force_load_similarity_map')
-    if not @changed['molecule_chembl_id']? and not force
-      return
 
     if @get('reference_smiles_error')
       @set('loading_similarity_map', false)
@@ -85,7 +74,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   loadStructureHighlight: ->
 
     console.log 'loadStructureHighlight: '
-    
+    if @get('reference_smiles_error')
+      @set('loading_substructure_highlight', false)
+      @trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
+      return
+
 
   parse: (response) ->
 

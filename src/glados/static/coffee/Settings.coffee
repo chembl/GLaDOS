@@ -148,6 +148,7 @@ glados.useNameSpace 'glados',
     Compound:
       SIMILARITY_MAP_ERROR: 'SIMILARITY_MAP_ERROR'
       SIMILARITY_MAP_READY: 'SIMILARITY_MAP_READY'
+      STRUCTURE_HIGHLIGHT_ERROR: 'STRUCTURE_HIGHLIGHT_ERROR'
     Legend:
       VALUE_SELECTED: 'value-selected'
       VALUE_UNSELECTED: 'value-unselected'
