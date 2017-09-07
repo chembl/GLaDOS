@@ -8,32 +8,28 @@ glados.useNameSpace 'glados.views.Compound',
 
     renderSimilarityMap: ->
 
-      console.log 'AAA renderSimilarityMap'
       if @model.get('loading_similarity_map')
        @showPreloader()
       else if @model.get('reference_smiles_error')
         @renderSimilarityMapError()
       else
-        console.log 'AAA image ready!'
         $preloader = $(@el).find('.BCK-preloader')
         $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
         $image = $(@el).find('img.BCK-main-image')
         $simMapImage = $(@el).find('img.BCK-simMap-image')
 
         if $simMapImage.length == 0
-          newImage = '<img class="BCK-simMap-image">'
+          newImage = '<img class="BCK-simMap-image similarity-map-img">'
           $(@el).append(newImage)
           $simMapImage = $(@el).find('img.BCK-simMap-image')
 
         $simMapImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
-#        console.log 'AAA base64 img: ', @model.get('similarity_map_base64_img')
 
         $preloader.hide()
         $errorMessagesContainer.hide()
         $errorMessagesContainer.hide()
         $image.hide()
         $simMapImage.show()
-        console.log 'AAA image set!!'
 
     showPreloader: ->
 
