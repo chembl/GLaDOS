@@ -34,12 +34,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model.set('reference_smiles_error', true)
         @setMeta('reference_smiles_error_jqxhr', jqXHR)
 
-    toggleShowSimMaps: (active) ->
+    toggleShowSpecialStructure: (active) ->
 
-      active ?= not @getMeta('show_similarity_maps')
+      if @getMeta('enable_similarity_maps')
+        @showStructurePropName = 'show_similarity_map'
+      else if @getMeta('enable_substructure_highlighting')
+        @showStructurePropName = 'show_substructure_highlighting'
 
-      @setMeta('show_similarity_maps', active)
-
+      active ?= not @getMeta(@showStructurePropName)
+      @setMeta(@showStructurePropName, active)
       for model in @models
-        model.set('show_similarity_map', active)
+        model.set(@showStructurePropName, active)
 

@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
-      'click .BCK-toggle-SimMaps': 'toggleSimMaps'
+      'click .BCK-toggle-SimMaps': 'toggleSpecialStructure'
 
     initialize: ->
 
@@ -111,10 +111,10 @@ glados.useNameSpace 'glados.views.Browsers',
     hideSpecialStructureControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
     getSpecialStructureControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
 
-    toggleSimMaps: (event) ->
+    toggleSpecialStructure: (event) ->
 
       $toggler = $(event.currentTarget)
       checked = $toggler.prop('checked')
-      @collection.toggleShowSimMaps(checked)
+      @collection.toggleShowSpecialStructure(checked)
 
 

@@ -20,6 +20,7 @@ glados.useNameSpace 'glados.views.Compound',
         @initSubstructureHighlightMode()
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @showCorrectImage, @
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY, @showCorrectImage, @
+        @model.on 'change:show_substructure_highlighting', @showCorrectImage, @
 
         console.log 'ENABLE_SUBSTRUCTURE_HIGHLIGHTING'
 
