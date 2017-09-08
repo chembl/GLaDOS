@@ -158,6 +158,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   #---------------------------------------------------------------------------------------------------------------------
 
   download2DSDF: ()->
+    @set('sdf2DError', false, {silent: true})
     promiseFunc = (resolve, reject)->
       if @get('sdf2DData')?
         resolve(@get('sdf2DData'))
@@ -168,11 +169,12 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           compoundModel.set('sdf2DData', ajaxData)
           resolve(ajaxData)
         ajax_deferred.fail (error)->
-          console.error error
+          compoundModel.set('sdf2DError', true)
           reject()
     return new Promise(promiseFunc.bind(@))
 
   download3DSDF: (endpointIndex)->
+    @set('sdf3DError', false, {silent: true})
     data3DCacheName = 'sdf3DData_'+endpointIndex
     promiseFunc = (resolve, reject)->
       if not @get('sdf2DData')?
@@ -188,11 +190,12 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           compoundModel.set(data3DCacheName, ajaxData)
           resolve(ajaxData)
         ajax_deferred.fail (error)->
-          console.error error
+          compoundModel.set('sdf3DError', true)
           reject()
     return new Promise(promiseFunc.bind(@))
 
   download3DXYZ: (endpointIndex)->
+    @set('xyz3DError', false, {silent: true})
     dataVarName = 'sdf3DDataXYZ_'+endpointIndex
     data3DSDFVarName = 'sdf3DData_'+endpointIndex
     promiseFunc = (resolve, reject)->
@@ -209,7 +212,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           compoundModel.set(dataVarName, ajaxData)
           resolve(ajaxData)
         ajax_deferred.fail (error)->
-          console.error error
+          compoundModel.set('xyz3DError', true)
           reject()
     return new Promise(promiseFunc.bind(@))
 
