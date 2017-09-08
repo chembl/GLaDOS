@@ -139,8 +139,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         ajax_deferred = $.post(Compound.SDF_3D_2_XYZ, @get(data3DSDFVarName))
         compoundModel = @
         ajax_deferred.done (ajaxData)->
-          console.warn( compoundModel.get(data3DSDFVarName))
-          console.warn( ajaxData)
           compoundModel.set(dataVarName, ajaxData)
           resolve(ajaxData)
         ajax_deferred.fail (error)->

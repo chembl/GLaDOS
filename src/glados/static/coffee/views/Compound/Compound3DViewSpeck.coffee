@@ -12,12 +12,20 @@ Compound3DViewSpeck = Backbone.View.extend
   render: ->
 
     if @supportsWebGL
+
       $(@el).html(Handlebars.compile($(@typeToTemplate[@type]).html())({}))
       if not @model.get('current3DXYZData')?
         $('#BCK-loadingcoords').show()
+        delete @molVis
       else
-        $('#BCK-loadingcoords').hide()
-        @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('current3DXYZData'))
+        draw = ()->
+          console.warn('draw', @model.get('cur3DEndpointIndex'))
+          if $('#render-container').is(":visible")
+            console.warn('visible', @model.get('cur3DEndpointIndex'))
+            $('#BCK-loadingcoords').hide()
+            @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('current3DXYZData'))
+        draw = draw.bind(@)
+        setTimeout(draw, 300)
     else
       @showError('WebGL does not seem to be available in this browser.')
 

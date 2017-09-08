@@ -23,4 +23,11 @@ glados.useNameSpace 'glados.views.Compound',
       $(@el).find('.3D-options').html(@hbTemplate(data))
       $(@el).find('input[type=radio][name=renderer]').change () ->
         rendererSelectionChange(parseInt(@value))
+      $('#Bck-Comp-3D-options-menuclose').click ->
+        $('#Bck-Comp-3D-options-menu').slideUp ->
+         $('#Bck-Comp-3D-options-menuopen').show()
+
+      $('#Bck-Comp-3D-options-menuopen').click ->
+        $('#Bck-Comp-3D-options-menu').slideDown()
+        $(@).hide()
 
