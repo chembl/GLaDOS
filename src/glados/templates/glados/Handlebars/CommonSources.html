@@ -44,8 +44,6 @@
 
 <script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
 
-  <div class="BCK-preloader">
-
      <div class="preloader-wrapper small active">
       <div class="spinner-layer spinner-teal-only">
         <div class="circle-clipper left">
@@ -57,7 +55,6 @@
         </div>
       </div>
     </div>
-  </div>
 
 </script>
 
@@ -283,7 +280,13 @@
       </div>
 
       <div class="white card-image BCK-image">
+
+        <div class="BCK-preloader"></div>
+        <div class="BCK-error-messages-container"></div>
+        <img class="BCK-specialStruct-image similarity-map-img">
         <img class="BCK-main-image"src="{{img_url}}">
+
+
       </div>
 
       <div class="card-content BCK-info-opener">

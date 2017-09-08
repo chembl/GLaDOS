@@ -373,6 +373,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             el: $newItemElem.find('.BCK-image')
 
 
+
       @fixCardHeight($appendTo)
 
     checkIfTableNeedsToScroll: ->

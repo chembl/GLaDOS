@@ -2,73 +2,58 @@ glados.useNameSpace 'glados.views.Compound',
   DeferredStructureView: Backbone.View.extend
     initialize: ->
 
-      if @model.get('enable_similarity_map')
-        @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
-        @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderLoadingError, @
-        @model.on 'change:show_similarity_map', @handleShowStatusChanged, @
-        @renderSimilarityMap()
+      @initPreloader()
+      @initErrorMessagesContainer()
+      @$image = $(@el).find('img.BCK-main-image')
+      @$simMapImage = $(@el).find('img.BCK-specialStruct-image')
 
-      if @model.get('enable_substructure_highlighting')
-        @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @renderLoadingError, @
+      console.log 'init DeferredStructureView: ', arguments
+      if @model.get('enable_similarity_map')
+        @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @showCorrectImage, @
+        @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @showCorrectImage, @
+        @model.on 'change:show_similarity_map', @showCorrectImage, @
+
+      @showCorrectImage()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Structure show
     #-------------------------------------------------------------------------------------------------------------------
     renderSimilarityMap: ->
-
-      if @model.get('loading_similarity_map')
-       @showPreloader()
-      else if @model.get('reference_smiles_error')
-        @renderLoadingError()
-      else
-        $simMapImage = $(@el).find('img.BCK-simMap-image')
-
-        if $simMapImage.length == 0
-          newImage = '<img class="BCK-simMap-image similarity-map-img">'
-          $(@el).append(newImage)
-          $simMapImage = $(@el).find('img.BCK-simMap-image')
-
-        $simMapImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
-
-        @showCorrectImage()
+      @$simMapImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
 
     #-------------------------------------------------------------------------------------------------------------------
     # General
     #-------------------------------------------------------------------------------------------------------------------
+    initPreloader: ->
+
+      @$preloaderContainer = $(@el).find('.BCK-preloader')
+      @$preloaderContainer.html glados.Utils.getContentFromTemplate('Handlebars-Common-MiniRepCardPreloader')
+      @$preloaderContainer.hide()
+
     showPreloader: ->
 
-      if  $(@el).attr('data-preloader-added') != 'yes'
-        $newPreloader = $(glados.Utils.getContentFromTemplate('Handlebars-Common-MiniRepCardPreloader'))
-        $(@el).append($newPreloader)
-        $(@el).attr('data-preloader-added', 'yes')
-
-      $preloader = $(@el).find('.BCK-preloader')
-      $preloader.show()
+      @$preloaderContainer.show()
       @hideAllImages()
+
+    hidePreloader: -> @$preloaderContainer.hide()
+
+    initErrorMessagesContainer: -> @$errorMessagesContainer = $(@el).find('.BCK-error-messages-container')
 
     renderLoadingError: ->
 
       jqXHR = @model.get('reference_smiles_error_jqxhr')
-      $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
-      if $errorMessagesContainer.length == 0
-        errorMessagesContainer = '<div class="BCK-error-message-container"></div>'
-        $(@el).append(errorMessagesContainer)
-        $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
+      @$errorMessagesContainer.html glados.Utils.ErrorMessages.getErrorImageContent(jqXHR)
 
-      $errorMessagesContainer.html glados.Utils.ErrorMessages.getErrorImageContent(jqXHR)
+    showLoadingError: ->
+
+      @hidePreloader()
       @hideAllImages()
+      @$errorMessagesContainer.show()
 
+    hideErrorMessagesContainer: -> @$errorMessagesContainer.hide()
     #-------------------------------------------------------------------------------------------------------------------
     # Images Handling
     #-------------------------------------------------------------------------------------------------------------------
-    handleShowStatusChanged: ->
-
-      if @model.get('loading_similarity_map') and @model.get('show_similarity_map')
-        @showPreloader()
-        return
-
-      @showCorrectImage()
-
     hideAllImages: ->
 
       $image = $(@el).find('img.BCK-main-image')
@@ -78,19 +63,39 @@ glados.useNameSpace 'glados.views.Compound',
 
     showCorrectImage: ->
 
-      $preloader = $(@el).find('.BCK-preloader')
-      $preloader.hide()
+      console.log 'show correct image!'
 
-      $errorMessagesContainer = $(@el).find('.BCK-error-message-container')
-      $errorMessagesContainer.hide()
-
-      $image = $(@el).find('img.BCK-main-image')
-      $simMapImage = $(@el).find('img.BCK-simMap-image')
 
       if @model.get('show_similarity_map')
-        $simMapImage.show()
-        $image.hide()
+
+        console.log 'showing similarity map!'
+        if @model.get('loading_similarity_map')
+          console.log 'it is loading!'
+          @showPreloader()
+        else if @model.get('reference_smiles_error')
+          console.log 'there is an error!'
+          @renderLoadingError()
+          @showLoadingError()
+        else
+          console.log 'show special structure image!!'
+          @showSpecialStructureImage()
+
       else
-        $simMapImage.hide()
-        $image.show()
+
+        @showNormalImage()
+
+    showNormalImage: ->
+
+      @$simMapImage.hide()
+      @$image.show()
+      @hidePreloader()
+      @hideErrorMessagesContainer()
+
+    showSpecialStructureImage: ->
+
+      @renderSimilarityMap()
+      @$image.hide()
+      @$simMapImage.show()
+      @hidePreloader()
+      @hideErrorMessagesContainer()
 
