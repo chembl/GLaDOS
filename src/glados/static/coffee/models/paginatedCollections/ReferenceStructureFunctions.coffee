@@ -43,7 +43,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     toggleShowSpecialStructure: (active) ->
 
       if @getMeta('enable_similarity_maps')
-        @showStructurePropName = 'show_similarity_map'
+        @showStructurePropName = 'show_similarity_maps'
       else if @getMeta('enable_substructure_highlighting')
         @showStructurePropName = 'show_substructure_highlighting'
 
