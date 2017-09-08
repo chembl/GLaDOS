@@ -42,9 +42,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if @getMeta('enable_substructure_highlighting')
           currentItemData.enable_substructure_highlighting = @getMeta('enable_substructure_highlighting')
           currentItemData.reference_smiles = @getMeta('reference_smiles')
+          currentItemData.reference_ctab = @getMeta('reference_ctab')
           currentItemData.reference_smiles_error = @getMeta('reference_smiles_error')
           currentItemData.reference_smiles_error_jqxhr = @getMeta('reference_smiles_error_jqxhr')
           currentItemData.show_substructure_highlighting = @getMeta('show_substructure_highlighting')
+
 
         jsonResultsList.push(currentItemData)
 
