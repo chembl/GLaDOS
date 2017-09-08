@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
-      @renderSimMapControls()
+      @initSpecialStructuresToggler()
 
       @checkIfNoItems()
 
@@ -91,14 +91,25 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # Similariy maps controls
     # ------------------------------------------------------------------------------------------------------------------
-    renderSimMapControls: ->
+    initSpecialStructuresToggler: ->
 
-      glados.Utils.fillContentForElement @getSimMapControlsContainer(),
-        checked: @collection.getMeta('show_similarity_maps')
+      if @collection.getMeta('enable_similarity_maps')
 
-    showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
-    hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
-    getSimMapControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
+        @showStructurePropName = 'show_similarity_maps'
+        glados.Utils.fillContentForElement @getSpecialStructureControlsContainer(),
+          title: 'Similarity Maps'
+          checked: @collection.getMeta(@showStructurePropName)
+
+      else if @collection.getMeta('enable_substructure_highlighting')
+
+        @showStructurePropName = 'show_substructure_highlighting'
+        glados.Utils.fillContentForElement @getSpecialStructureControlsContainer(),
+          title: 'Highlight'
+          checked: @collection.getMeta(@showStructurePropName)
+
+    showSpecialStructureControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
+    hideSpecialStructureControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
+    getSpecialStructureControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
 
     toggleSimMaps: (event) ->
 
