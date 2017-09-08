@@ -73,7 +73,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   loadStructureHighlight: ->
 
-    console.log 'loadStructureHighlight: '
     if @get('reference_smiles_error')
       @set('loading_substructure_highlight', false)
       @trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR

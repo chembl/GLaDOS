@@ -5,21 +5,41 @@ glados.useNameSpace 'glados.views.Compound',
       @initPreloader()
       @initErrorMessagesContainer()
       @$image = $(@el).find('img.BCK-main-image')
-      @$simMapImage = $(@el).find('img.BCK-specialStruct-image')
+      @$specialStructImage = $(@el).find('img.BCK-specialStruct-image')
 
-      console.log 'init DeferredStructureView: ', arguments
+
       if @model.get('enable_similarity_map')
+
+        @initSimilarityMode()
         @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @showCorrectImage, @
         @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @showCorrectImage, @
         @model.on 'change:show_similarity_map', @showCorrectImage, @
 
+      if @model.get('enable_substructure_highlighting')
+
+        @initSubstructureHighlightMode()
+        @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @showCorrectImage, @
+
+        console.log 'ENABLE_SUBSTRUCTURE_HIGHLIGHTING'
+
       @showCorrectImage()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Mode initialisation
+    #-------------------------------------------------------------------------------------------------------------------
+    initSimilarityMode: ->
+      @showStructurePropName = 'show_similarity_map'
+      @loadingStructurePropName = 'loading_similarity_map'
+
+    initSubstructureHighlightMode: ->
+      @showStructurePropName = 'show_substructure_highlighting'
+      @loadingStructurePropName = 'loading_substructure_highlight'
 
     #-------------------------------------------------------------------------------------------------------------------
     # Structure show
     #-------------------------------------------------------------------------------------------------------------------
     renderSimilarityMap: ->
-      @$simMapImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
+      @$specialStructImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
 
     #-------------------------------------------------------------------------------------------------------------------
     # General
@@ -56,20 +76,17 @@ glados.useNameSpace 'glados.views.Compound',
     #-------------------------------------------------------------------------------------------------------------------
     hideAllImages: ->
 
-      $image = $(@el).find('img.BCK-main-image')
-      $image.hide()
-      $simMapImage = $(@el).find('img.BCK-simMap-image')
-      $simMapImage.hide()
+      @$image.hide()
+      @$specialStructImage.hide()
 
+    # Here I read the status of the object and act accordingly.
     showCorrectImage: ->
 
       console.log 'show correct image!'
 
-
-      if @model.get('show_similarity_map')
-
+      if @model.get(@showStructurePropName)
         console.log 'showing similarity map!'
-        if @model.get('loading_similarity_map')
+        if @model.get(@loadingStructurePropName)
           console.log 'it is loading!'
           @showPreloader()
         else if @model.get('reference_smiles_error')
@@ -79,14 +96,13 @@ glados.useNameSpace 'glados.views.Compound',
         else
           console.log 'show special structure image!!'
           @showSpecialStructureImage()
-
       else
-
+        console.log 'not showing special structure! normal image instead'
         @showNormalImage()
 
     showNormalImage: ->
 
-      @$simMapImage.hide()
+      @$specialStructImage.hide()
       @$image.show()
       @hidePreloader()
       @hideErrorMessagesContainer()
@@ -95,7 +111,7 @@ glados.useNameSpace 'glados.views.Compound',
 
       @renderSimilarityMap()
       @$image.hide()
-      @$simMapImage.show()
+      @$specialStructImage.show()
       @hidePreloader()
       @hideErrorMessagesContainer()
 
