@@ -1160,7 +1160,7 @@ div#CNC-zoom-modal {
   left: 0;
   margin-right: auto;
   margin-left: auto;
-  bottom: 10px;
+  bottom: 5px;
 }
 
 .img-zoom-menu {
@@ -1174,7 +1174,6 @@ div#CNC-zoom-modal {
   max-width: 50%;
   padding: 15px;
   border-radius: 5px;
-
 }
 
 .img-zoom-menu label {
@@ -1184,6 +1183,44 @@ div#CNC-zoom-modal {
 /* small screens */
 @media only screen and (max-width: 600px) {
   .img-zoom-menu {
+    max-width: 90%;
+  }
+}
+
+.modal-3D{
+  min-height: 300px;
+}
+
+.options-3D-menu-wrapper{
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.img-3D-menu {
+  opacity: 0.8;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50%;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.img-3D-menu label {
+  color: black;
+}
+
+/* small screens */
+@media only screen and (max-width: 600px) {
+  .img-3D-menu {
     max-width: 90%;
   }
 }
