@@ -2,6 +2,9 @@ Compound3DViewSpeck = Backbone.View.extend
 
   initialize: (options) ->
     @model.on 'change:current3DXYZData', @render, @
+    @model.on 'change:xyz3DError', @renderError, @
+    @model.on 'change:sdf3DError', @renderError, @
+    @model.on 'change:sdf2DError', @renderError, @
     @type = options.type
 
     @supportsWebGL =  @supportsWebGL()
@@ -26,6 +29,10 @@ Compound3DViewSpeck = Backbone.View.extend
         setTimeout(draw, 300)
     else
       @showError('WebGL does not seem to be available in this browser.')
+
+  renderError: ()->
+    if @model.get('sdf3DError') or @model.get('sdf2DError') or @model.get('xyz3DError')
+      @showError('There was an error obtaining the coordinates from the server.')
 
   showError: (msg) ->
     $(@el).html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
