@@ -29,9 +29,10 @@ glados.useNameSpace 'glados.views.Compound',
     # Mode initialisation
     #-------------------------------------------------------------------------------------------------------------------
     initSimilarityMode: ->
-      @showStructurePropName = 'show_similarity_map'
+      @showStructurePropName = glados.PropertiesNames.Compound.SimilarityMaps.SHOW_STRUCTURE
       @loadingStructurePropName = 'loading_similarity_map'
       @base64ImgPropName = 'similarity_map_base64_img'
+
 
     initSubstructureHighlightMode: ->
       @showStructurePropName = 'show_substructure_highlighting'

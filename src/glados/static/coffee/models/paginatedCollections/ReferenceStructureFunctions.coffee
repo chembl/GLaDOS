@@ -36,10 +36,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     toggleShowSimMaps: (active) ->
 
-      active ?= not @getMeta('show_similarity_maps')
+      active ?= not @getMeta(glados.PropertiesNames.Collections.SimilarityMaps.SHOW_SIMILARITY_MAPS)
 
-      @setMeta('show_similarity_maps', active)
+      @setMeta(glados.PropertiesNames.Collections.SimilarityMaps.SHOW_SIMILARITY_MAPS, active)
 
       for model in @models
-        model.set('show_similarity_map', active)
+        model.set(glados.PropertiesNames.Compound.SimilarityMaps.SHOW_STRUCTURE, active)
 

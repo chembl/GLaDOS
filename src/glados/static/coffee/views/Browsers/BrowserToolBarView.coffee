@@ -94,7 +94,7 @@ glados.useNameSpace 'glados.views.Browsers',
     renderSimMapControls: ->
 
       glados.Utils.fillContentForElement @getSimMapControlsContainer(),
-        checked: @collection.getMeta('show_similarity_maps')
+        checked: @collection.getMeta(glados.PropertiesNames.Collections.SimilarityMaps.SHOW_SIMILARITY_MAPS)
 
     showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
     hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
