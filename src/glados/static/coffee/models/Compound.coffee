@@ -36,7 +36,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if not referenceSmiles?
       return
 
-    url = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
+    url = Compound.SMILES_2_SIMILARITY_MAP_URL
     data = referenceSmiles + '\n' + mySmiles
 
     thisModel = @
@@ -270,6 +270,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
 Compound.SDF_2D_URL = glados.Settings.WS_BASE_URL + 'molecule/'
 Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL+ 'ctab2xyz'
+Compound.SMILES_2_SIMILARITY_MAP_URL = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
 Compound.SDF_3D_ENDPOINTS = [
   {
     label: 'UFF'
