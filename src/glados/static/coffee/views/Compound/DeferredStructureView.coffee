@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.views.Compound',
 
         @initSubstructureHighlightMode()
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @showCorrectImage, @
+        @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY, @showCorrectImage, @
 
         console.log 'ENABLE_SUBSTRUCTURE_HIGHLIGHTING'
 
@@ -30,16 +31,18 @@ glados.useNameSpace 'glados.views.Compound',
     initSimilarityMode: ->
       @showStructurePropName = 'show_similarity_map'
       @loadingStructurePropName = 'loading_similarity_map'
+      @base64ImgPropName = 'similarity_map_base64_img'
 
     initSubstructureHighlightMode: ->
       @showStructurePropName = 'show_substructure_highlighting'
       @loadingStructurePropName = 'loading_substructure_highlight'
+      @base64ImgPropName = 'substructure_highlight_base64_img'
 
     #-------------------------------------------------------------------------------------------------------------------
     # Structure show
     #-------------------------------------------------------------------------------------------------------------------
     renderSimilarityMap: ->
-      @$specialStructImage.attr('src', 'data:image/png;base64,' + @model.get('similarity_map_base64_img'))
+      @$specialStructImage.attr('src', 'data:image/png;base64,' + @model.get(@base64ImgPropName))
 
     #-------------------------------------------------------------------------------------------------------------------
     # General
