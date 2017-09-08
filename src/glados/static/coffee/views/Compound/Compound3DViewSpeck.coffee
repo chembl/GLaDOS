@@ -15,12 +15,12 @@ Compound3DViewSpeck = Backbone.View.extend
 
       $(@el).html(Handlebars.compile($(@typeToTemplate[@type]).html())({}))
       if not @model.get('current3DXYZData')?
-        $('#BCK-loadingcoords').show()
+        $(@el).find('.BCK-loadingcoords').show()
         delete @molVis
       else
         draw = ()->
           if $('#render-container').is(":visible")
-            $('#BCK-loadingcoords').hide()
+            $(@el).find('.BCK-loadingcoords').hide()
             @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('current3DXYZData'))
         draw = draw.bind(@)
         setTimeout(draw, 300)
