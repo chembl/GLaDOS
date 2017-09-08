@@ -19,9 +19,7 @@ Compound3DViewSpeck = Backbone.View.extend
         delete @molVis
       else
         draw = ()->
-          console.warn('draw', @model.get('cur3DEndpointIndex'))
           if $('#render-container').is(":visible")
-            console.warn('visible', @model.get('cur3DEndpointIndex'))
             $('#BCK-loadingcoords').hide()
             @molVis = new MoleculeVisualisator("render-container", "renderer-canvas", @model.get('current3DXYZData'))
         draw = draw.bind(@)
