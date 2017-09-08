@@ -22,8 +22,6 @@ glados.useNameSpace 'glados.views.Compound',
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY, @showCorrectImage, @
         @model.on 'change:show_substructure_highlighting', @showCorrectImage, @
 
-        console.log 'ENABLE_SUBSTRUCTURE_HIGHLIGHTING'
-
       @showCorrectImage()
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -86,22 +84,15 @@ glados.useNameSpace 'glados.views.Compound',
     # Here I read the status of the object and act accordingly.
     showCorrectImage: ->
 
-      console.log 'show correct image!'
-
       if @model.get(@showStructurePropName)
-        console.log 'showing similarity map!'
         if @model.get(@loadingStructurePropName)
-          console.log 'it is loading!'
           @showPreloader()
         else if @model.get('reference_smiles_error')
-          console.log 'there is an error!'
           @renderLoadingError()
           @showLoadingError()
         else
-          console.log 'show special structure image!!'
           @showSpecialStructureImage()
       else
-        console.log 'not showing special structure! normal image instead'
         @showNormalImage()
 
     showNormalImage: ->

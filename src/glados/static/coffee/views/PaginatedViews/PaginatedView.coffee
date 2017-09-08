@@ -367,12 +367,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if templateParams.img_url? and \
         (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-          console.log 'creating defs view!'
           new glados.views.Compound.DeferredStructureView
             model: model
             el: $newItemElem.find('.BCK-image')
-
-
 
       @fixCardHeight($appendTo)
 
