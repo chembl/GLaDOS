@@ -155,14 +155,6 @@ glados.useNameSpace 'glados',
       VALUE_UNSELECTED: 'value-unselected'
       RANGE_SELECTED: 'range-selected'
       RANGE_SELECTION_INVALID: 'range-selected-invalid'
-  PropertiesNames:
-    Compound:
-      SimilarityMaps:
-        SHOW_STRUCTURE: 'show_similarity_map'
-    Collections:
-      SimilarityMaps:
-        SHOW_SIMILARITY_MAPS: 'show_similarity_maps'
-
   Visualisation:
     CATEGORICAL:'CATEGORICAL'
     CONTINUOUS:'CONTINUOUS'
