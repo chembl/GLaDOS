@@ -2,12 +2,18 @@ glados.useNameSpace 'glados.views.Compound',
   DeferredStructureView: Backbone.View.extend
     initialize: ->
 
-      @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
-      @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderLoadingError, @
-      @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @renderLoadingError, @
-      @model.on 'change:show_similarity_map', @handleShowStatusChanged, @
-      @renderSimilarityMap()
+      if @model.get('enable_similarity_map')
+        @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @renderSimilarityMap, @
+        @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @renderLoadingError, @
+        @model.on 'change:show_similarity_map', @handleShowStatusChanged, @
+        @renderSimilarityMap()
 
+      if @model.get('enable_substructure_highlighting')
+        @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @renderLoadingError, @
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Structure show
+    #-------------------------------------------------------------------------------------------------------------------
     renderSimilarityMap: ->
 
       if @model.get('loading_similarity_map')
@@ -26,6 +32,9 @@ glados.useNameSpace 'glados.views.Compound',
 
         @showCorrectImage()
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # General
+    #-------------------------------------------------------------------------------------------------------------------
     showPreloader: ->
 
       if  $(@el).attr('data-preloader-added') != 'yes'
