@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('reference_smiles', searchTerm)
 
         if @getMeta('enable_substructure_highlighting')
-          @loadReferenceCTAB()
+          @loadSubstructureHighlightingRefData()
 
     handleReferenceCompoundLoaded: ->
       refSmiles = @referenceCompound.get('molecule_structures').canonical_smiles
@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model.set('reference_smiles_error', false)
         model.set('reference_smiles_error_jqxhr', undefined)
 
-      @loadReferenceCTAB()
+      @loadSubstructureHighlightingRefData()
 
     handleReferenceCompoundError: (modelOrCollection, jqXHR) ->
 
@@ -65,11 +65,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model.set('reference_smiles_error_jqxhr', jqXHR)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Substructure Highlighting
+    # ------------------------------------------------------------------------------------------------------------------
+    loadSubstructureHighlightingRefData: ->
+      # here I assume that I already have smiles
+      @loadReferenceCTAB()
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Reference CTAB
     # ------------------------------------------------------------------------------------------------------------------
     loadReferenceCTAB: ->
 
-      # here I assume that I already have smiles
       url = glados.Settings.BEAKER_BASE_URL + 'smiles2ctab'
       data = @getMeta('reference_smiles')
       getReferenceCTAB = $.post(url, data)
@@ -88,5 +94,32 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model.set('reference_ctab', ctab)
         model.set('reference_smiles_error', false)
         model.set('reference_smiles_error_jqxhr', undefined)
+
+      @loadReferenceSmarts()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Reference Smarts
+    # ------------------------------------------------------------------------------------------------------------------
+    loadReferenceSmarts: ->
+
+      url = glados.Settings.BEAKER_BASE_URL + 'ctab2smarts'
+      data = @getMeta('reference_ctab')
+      getReferenceSmarts = $.post(url, data)
+
+      getReferenceSmarts.done $.proxy(@handleReferenceSmartsLoaded, @)
+      getReferenceSmarts.error $.proxy(@handleReferenceSmartsError, @)
+
+    handleReferenceSmartsError: (jqXHR) -> @setLoadingSpecialStructureError(jqXHR)
+    handleReferenceSmartsLoaded: (smarts) ->
+
+      @setMeta('reference_smarts', smarts)
+      @setMeta('reference_smiles_error', false)
+      @setMeta('reference_smiles_error_jqxhr', undefined)
+
+      for model in @models
+        model.set('reference_smarts', smarts)
+        model.set('reference_smiles_error', false)
+        model.set('reference_smiles_error_jqxhr', undefined)
+
 
 
