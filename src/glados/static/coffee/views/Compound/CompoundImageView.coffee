@@ -131,7 +131,13 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   # 3d view
   # rendererName is defined in GlobalVariables
   get3DView: (rendererName) ->
-
+    # initializes the 3d sdf data if it has not been initialized yet
+    if not @model.get('current3DData')?
+      @model.calculate3DSDFAndXYZ(0)
+    if not @renderer3DOptionsView?
+      @renderer3DOptionsView = new glados.views.Compound.Compound3DMethodSelectorView
+        el: $('#Bck-Comp-3D-options-menu')
+        model: @model
     # initialise if not already
     if !@renderers3D[rendererName]?
 

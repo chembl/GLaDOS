@@ -1,5 +1,6 @@
 {% block custom_handlebars %}
 {% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
+{% include "glados/CompoundReportCardParts/3DMethodSelector.html" %}
 {% endblock %}
 
 {% block custom_js %}
@@ -49,7 +50,7 @@
   <div id="BCK-compound-3dview-LiteMol" class="modal-content" style="height: 100%;">
 
     {% verbatim %}
-    <script id="Handlebars-LieMol-Visualisation" type="text/x-handlebars-template">
+    <script id="Handlebars-LiteMol-Visualisation" type="text/x-handlebars-template">
       <pdb-lite-mol pdb-id="'1cbs'" load-ed-maps="true" hide-controls="true"
                     source-url="{{sdf_url}}"
                     source-format="sdf"></pdb-lite-mol>
@@ -63,8 +64,21 @@
 
   </div>
 
+
+  <!-- Floating options panel -->
+  <div id='Bck-Comp-3D-options-menuopen' class="menu-open-icon" style="display: none">
+    <a><i class="fa fa-bars fa-lg" aria-hidden="true"></i></a>
+  </div>
+  <div id='Bck-Comp-3D-options-menu' class="img-zoom-menu grey lighten-2">
+    <div id='Bck-Comp-3D-options-menuclose' class="menu-close-icon">
+      <a><i class="fa fa-minus-square-o fa-lg" aria-hidden="true"></i></a>
+    </div>
+    <div class="3D-options">
+
+    </div>
+  </div>
+
   {% block close_modal %}
   {% include "glados/base/modals/close_modal_button.html" %}
   {% endblock %}
-
 </div>
