@@ -14,7 +14,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions).extend
+      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
+      .extend(glados.models.paginatedCollections.CacheFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
