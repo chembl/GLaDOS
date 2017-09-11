@@ -28,12 +28,12 @@ glados.useNameSpace 'glados.views.Compound',
     # Mode initialisation
     #-------------------------------------------------------------------------------------------------------------------
     initSimilarityMode: ->
-      @showStructurePropName = 'show_similarity_map'
+      @showStructurePropNameCol = 'show_similarity_map'
       @loadingStructurePropName = 'loading_similarity_map'
       @base64ImgPropName = 'similarity_map_base64_img'
 
     initSubstructureHighlightMode: ->
-      @showStructurePropName = 'show_substructure_highlighting'
+      @showStructurePropNameCol = 'show_substructure_highlighting'
       @loadingStructurePropName = 'loading_substructure_highlight'
       @base64ImgPropName = 'substructure_highlight_base64_img'
 
@@ -84,7 +84,7 @@ glados.useNameSpace 'glados.views.Compound',
     # Here I read the status of the object and act accordingly.
     showCorrectImage: ->
 
-      if @model.get(@showStructurePropName)
+      if @model.get(@showStructurePropNameCol)
         if @model.get(@loadingStructurePropName)
           @showPreloader()
         else if @model.get('reference_smiles_error')
