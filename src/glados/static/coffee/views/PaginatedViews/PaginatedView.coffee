@@ -145,6 +145,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      console.log 'AAA RENDER PAG VIEW!'
       if @isInfinite() and not $(@el).is(":visible")
         return
 
@@ -272,6 +273,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @showFooterContainer()
         @checkIfTableNeedsToScroll()
       else
+        console.log 'AAA it is empty'
         @hideHeaderContainer()
         @hideFooterContainer()
         @hideContentContainer()
