@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.SimilarityMapFunctions).extend
+      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -54,10 +54,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             contextual_properties: contextualProperties
             enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
             show_similarity_maps: esIndexSettings.SHOW_SIMILARITY_MAPS
+            enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
+            show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             search_term: searchTerm
 
-          if @getMeta('enable_similarity_maps')
-            @initSimilarityMapFunctions()
+          if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
+            @initReferenceStructureFunctions()
 
 
       return new indexESPagQueryCollection

@@ -252,15 +252,16 @@ glados.useNameSpace 'glados.views.Browsers',
       else
         @toolBarView.hideZoomControls()
 
-      showSimMapControls = false
+      showSpecialStructureControls = false
       if currentView.isCards?
-        if currentView.isCards() and @collection.getMeta('enable_similarity_maps')
-          showSimMapControls = true
+        if currentView.isCards() and (@collection.getMeta('enable_similarity_maps') \
+        or @collection.getMeta('enable_substructure_highlighting'))
+          showSpecialStructureControls = true
 
-      if showSimMapControls
-        @toolBarView.showSimMapControls()
+      if showSpecialStructureControls
+        @toolBarView.showSpecialStructureControls()
       else
-        @toolBarView.hideSimMapControls()
+        @toolBarView.hideSpecialStructureControls()
 
     hideView: (viewType) ->
 
