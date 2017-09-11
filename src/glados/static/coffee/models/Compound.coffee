@@ -8,20 +8,18 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
     if @get('enable_similarity_map')
-      @set
-        'loading_similarity_map': true
-        'force_load_similarity_map': true
+      @set('loading_similarity_map', true)
+      @loadSimilarityMap()
 
-      @loadSimilarityMap(force=true)
-      @set('force_load_similarity_map', false)
+      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
 
-      @on 'change', @loadSimilarityMap, @
+    if @get('enable_substructure_highlighting')
+      @set('loading_substructure_highlight', true)
+      @loadStructureHighlight()
+
+      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
 
   loadSimilarityMap:  ->
-
-    force = @get('force_load_similarity_map')
-    if not @changed['molecule_chembl_id']? and not force
-      return
 
     if @get('reference_smiles_error')
       @set('loading_similarity_map', false)
@@ -38,7 +36,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if not referenceSmiles?
       return
 
-    url = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
+    url = Compound.SMILES_2_SIMILARITY_MAP_URL
     data = referenceSmiles + '\n' + mySmiles
 
     thisModel = @
@@ -52,7 +50,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
           thisModel.set
             loading_similarity_map: false
-            similarity_map_base64_img: @result.replace('data:image/png;base64,', '')
+            similarity_map_base64_img: @result
             reference_smiles_error: false
             reference_smiles_error_jqxhr: undefined
           ,
@@ -72,6 +70,42 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     getImageDataXHR.open('POST', url)
     getImageDataXHR.responseType = 'blob'
     getImageDataXHR.send(data)
+
+  loadStructureHighlight: ->
+
+    if @get('reference_smiles_error')
+      @set('loading_substructure_highlight', false)
+      @trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
+      return
+
+    referenceSmiles = @get('reference_smiles')
+    if not referenceSmiles?
+      return
+
+    referenceCTAB = @get('reference_ctab')
+    if not referenceCTAB?
+      return
+
+    referenceSmarts = @get('reference_smarts')
+    if not referenceSmarts?
+      return
+
+    model = @
+    downloadHighlighted = ->
+      model.downloadHighlightedSVG().then ->
+        base64SVG = model.get('highlighted_svg_base64')
+        model.set
+          loading_substructure_highlight: false
+          substructure_highlight_base64_img: 'data:image/svg+xml;base64,'+base64SVG
+          reference_smiles_error: false
+          reference_smiles_error_jqxhr: undefined
+        ,
+          silent: true
+        model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY
+
+    @download2DSDF().then ->
+      model.downloadAlignedSDF().then downloadHighlighted, downloadHighlighted
+
 
   parse: (response) ->
 
@@ -154,6 +188,109 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     return response;
 
   #---------------------------------------------------------------------------------------------------------------------
+  # Highlighting
+  #---------------------------------------------------------------------------------------------------------------------
+
+  downloadAlignedSDF: ()->
+    @set
+      'reference_smiles_error': false
+      'download_aligned_error': false
+    ,
+      silent: true
+    model = @
+    promiseFunc = (resolve, reject)->
+      referenceCtab = model.get('reference_ctab')
+      sdf2DData = model.get('sdf2DData')
+      if not referenceCtab?
+        reject('Error, the reference CTAB is not present!')
+        return
+      if not sdf2DData?
+        reject('Error, the compound '+model.get('molecule_chembl_id')+' CTAB is not present!')
+        return
+
+      if model.get('aligned_sdf')?
+        resolve(model.get('aligned_sdf'))
+      else
+        formData = new FormData()
+        sdf2DData = sdf2DData+'$$$$\n'
+        templateBlob = new Blob([referenceCtab], {type: 'chemical/x-mdl-molfile'})
+        ctabBlob = new Blob([sdf2DData+sdf2DData], {type: 'chemical/x-mdl-sdfile'})
+        formData.append('template', templateBlob, 'pattern.mol')
+        formData.append('ctab', ctabBlob, 'mcs.sdf')
+        ajax_deferred = $.post
+          url: Compound.SDF_2D_ALIGN_URL
+          data: formData
+          enctype: 'multipart/form-data'
+          processData: false
+          contentType: false
+          cache: false
+        ajax_deferred.done (ajaxData)->
+          alignedSdf = ajaxData.split('$$$$')[0]+'$$$$\n'
+          model.set('aligned_sdf', alignedSdf)
+          resolve(ajaxData)
+        ajax_deferred.fail (jqxhrError)->
+          reject(jqxhrError)
+    promise = new Promise(promiseFunc)
+    promise.then null, (jqxhrError)->
+      console.error jqxhrError
+      model.set
+        'download_aligned_error': true
+        'reference_smiles_error': true
+      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
+    return promise
+
+  downloadHighlightedSVG: ()->
+    @set
+      'reference_smiles_error': false
+      'download_highlighted_error': false
+    ,
+      silent: true
+    model = @
+    promiseFunc = (resolve, reject)->
+      referenceSmarts = model.get('reference_smarts')
+      # Tries to use the 2d sdf without alignment if the alignment failed
+      if model.get('aligned_sdf')?
+        alignedSdf = model.get('aligned_sdf')
+      else
+        alignedSdf = model.get('sdf2DData')
+      if not referenceSmarts?
+        reject('Error, the reference SMARTS is not present!')
+        return
+      if not alignedSdf?
+        reject('Error, the compound '+model.get('molecule_chembl_id')+' ALIGNED CTAB is not present!')
+        return
+
+      if model.get('highlighted_svg')?
+        resolve(model.get('highlighted_svg'))
+      else
+        formData = new FormData()
+        formData.append('file', new Blob([alignedSdf], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
+        formData.append('smarts', referenceSmarts)
+        ajax_deferred = $.post
+          url: Compound.SDF_2D_HIGHLIGHT_URL
+          data: formData
+          enctype: 'multipart/form-data'
+          processData: false
+          contentType: false
+          cache: false
+          converters:
+            'text xml': String
+        ajax_deferred.done (ajaxData)->
+          model.set('highlighted_svg_base64', btoa(ajaxData))
+          resolve(ajaxData)
+        ajax_deferred.fail (jqxhrError)->
+          reject(jqxhrError)
+    promise = new Promise(promiseFunc)
+    promise.then null, (jqxhrError)->
+      model.set('reference_smiles_error_jqxhr', jqxhrError)
+      model.set
+        'loading_substructure_highlight': false
+        'download_highlighted_error': true
+        'reference_smiles_error': true
+      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
+    return promise
+
+  #---------------------------------------------------------------------------------------------------------------------
   # 3D SDF
   #---------------------------------------------------------------------------------------------------------------------
 
@@ -170,7 +307,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           resolve(ajaxData)
         ajax_deferred.fail (error)->
           compoundModel.set('sdf2DError', true)
-          reject()
+          reject(error)
     return new Promise(promiseFunc.bind(@))
 
   download3DSDF: (endpointIndex)->
@@ -179,6 +316,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     promiseFunc = (resolve, reject)->
       if not @get('sdf2DData')?
         error = 'Error, There is no 2D data for the compound '+@get('molecule_chembl_id')+'!'
+        compoundModel.set('sdf3DError', true)
         console.error error
         reject(error)
       else if @get(data3DCacheName)?
@@ -201,6 +339,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     promiseFunc = (resolve, reject)->
       if not @get('current3DData')?
         error = 'Error, There is no 3D data for the compound '+@get('molecule_chembl_id')+'!'
+        compoundModel.set('xyz3DError', true)
         console.error error
         reject(error)
       else if @get(dataVarName)?
@@ -239,8 +378,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 # 3D SDF Constants
 #-----------------------------------------------------------------------------------------------------------------------
 
+Compound.SDF_2D_ALIGN_URL = glados.Settings.BEAKER_BASE_URL + 'align'
+Compound.SDF_2D_HIGHLIGHT_URL = glados.Settings.BEAKER_BASE_URL + 'highlightCtabFragmentSvg'
 Compound.SDF_2D_URL = glados.Settings.WS_BASE_URL + 'molecule/'
-Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL+ 'ctab2xyz'
+Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL + 'ctab2xyz'
+Compound.SMILES_2_SIMILARITY_MAP_URL = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
 Compound.SDF_3D_ENDPOINTS = [
   {
     label: 'UFF'

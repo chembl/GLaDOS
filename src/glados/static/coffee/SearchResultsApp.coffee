@@ -33,7 +33,9 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, undefined,
+      glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING,
+      GlobalVariables.SEARCH_TERM)
 
   @initSimilaritySearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
@@ -54,8 +56,8 @@ class SearchResultsApp
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC],
-    glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
-    GlobalVariables.SEARCH_TERM)
+      glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
+      GlobalVariables.SEARCH_TERM)
 
   @initFlexmatchSearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)

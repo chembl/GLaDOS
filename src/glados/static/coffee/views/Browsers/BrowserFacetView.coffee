@@ -22,7 +22,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
-      console.log 'INIT HTML STRUCTURE!'
       facetsGroups = @collection.getFacetsGroups()
 
       facetListForRender = []

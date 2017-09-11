@@ -364,11 +364,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             model: model
             el: $newItemElem
 
-        if templateParams.img_url? and @collection.getMeta('enable_similarity_maps')
+        if templateParams.img_url? and \
+        (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+
           new glados.views.Compound.DeferredStructureView
             model: model
             el: $newItemElem.find('.BCK-image')
-
 
       @fixCardHeight($appendTo)
 

@@ -8,13 +8,13 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
-      'click .BCK-toggle-SimMaps': 'toggleSimMaps'
+      'click .BCK-toggle-SimMaps': 'toggleSpecialStructure'
 
     initialize: ->
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
-      @renderSimMapControls()
+      @initSpecialStructuresToggler()
 
       @checkIfNoItems()
 
@@ -91,19 +91,30 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # Similariy maps controls
     # ------------------------------------------------------------------------------------------------------------------
-    renderSimMapControls: ->
+    initSpecialStructuresToggler: ->
 
-      glados.Utils.fillContentForElement @getSimMapControlsContainer(),
-        checked: @collection.getMeta('show_similarity_maps')
+      if @collection.getMeta('enable_similarity_maps')
 
-    showSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
-    hideSimMapControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
-    getSimMapControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
+        @showStructurePropNameCol = 'show_similarity_maps'
+        glados.Utils.fillContentForElement @getSpecialStructureControlsContainer(),
+          title: 'Similarity Maps'
+          checked: @collection.getMeta(@showStructurePropNameCol)
 
-    toggleSimMaps: (event) ->
+      else if @collection.getMeta('enable_substructure_highlighting')
+
+        @showStructurePropNameCol = 'show_substructure_highlighting'
+        glados.Utils.fillContentForElement @getSpecialStructureControlsContainer(),
+          title: 'Highlight'
+          checked: @collection.getMeta(@showStructurePropNameCol)
+
+    showSpecialStructureControls: -> $(@el).find('.BCK-special-structures-toggler-container').show()
+    hideSpecialStructureControls: -> $(@el).find('.BCK-special-structures-toggler-container').hide()
+    getSpecialStructureControlsContainer: -> $(@el).find('.BCK-special-structures-toggler-container')
+
+    toggleSpecialStructure: (event) ->
 
       $toggler = $(event.currentTarget)
       checked = $toggler.prop('checked')
-      @collection.toggleShowSimMaps(checked)
+      @collection.toggleShowSpecialStructure(checked)
 
 
