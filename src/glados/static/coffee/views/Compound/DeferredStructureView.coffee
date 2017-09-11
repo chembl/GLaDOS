@@ -41,7 +41,7 @@ glados.useNameSpace 'glados.views.Compound',
     # Structure show
     #-------------------------------------------------------------------------------------------------------------------
     renderSimilarityMap: ->
-      @$specialStructImage.attr('src', 'data:image/png;base64,' + @model.get(@base64ImgPropName))
+      @$specialStructImage.attr('src', @model.get(@base64ImgPropName))
 
     #-------------------------------------------------------------------------------------------------------------------
     # General
