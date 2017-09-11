@@ -145,14 +145,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      if not @collection.getMeta('data_loaded')
+        return
+
       if @isInfinite() and not $(@el).is(":visible")
         return
 
       isDefault = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefault and mustComplicate
-
-      console.log 'col: ', @collection
 
       if @isInfinite() and @collection.getMeta('current_page') == 1
         # always clear the infinite container when receiving the first page, to avoid
@@ -191,8 +192,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite()
         @destroyAllWaypoints()
 
-    wakeUpView: ->
-      @collection.setPage(1)
+    wakeUpView: -> @collection.setPage(1)
 
     zoomIn: ->
 
@@ -259,7 +259,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # fills a template with the contents of the collection's current page
     # it handle the case when the items are shown as list, table, or infinite browser
     fillTemplates: ->
-  
+
       $elem = $(@el).find('.BCK-items-container')
       visibleColumns = @getVisibleColumns()
       @numVisibleColumnsList.push visibleColumns.length

@@ -2816,7 +2816,13 @@ $facets-width-large: 21%;
     margin-right: 0;
   }
   .filters-title{
-    margin-top: 10px;
+    margin: 10px;
+    .title{
+      line-height: 31px;
+    }
+    .modal-trigger{
+      float: right;
+    }
   }
 
   .collapsible-body{
