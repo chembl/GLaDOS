@@ -20,12 +20,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if endPosition < startPosition
         return []
 
-      if startPosition == endPosition
-        return [cache[startPosition]]
-
       objs = []
-
-      for pos in [startPosition..endPosition-1]
+      for pos in [startPosition..endPosition]
         objs.push cache[pos]
 
       return objs
@@ -41,3 +37,35 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for i in [0..objects.length-1]
         position = startingPosition + i
         cache[position] = objects[i]
+
+    # If it is not possible to get the entire page from cache, it returns undefined.
+    getObjectsInCacheFromPage: (pageNum) ->
+
+      cache = @getMeta('cache')
+
+      if Object.keys(cache).length == 0
+        return []
+
+      totalPages = @getMeta('total_pages')
+      if pageNum > totalPages
+        return undefined
+
+      pageSize = @getMeta('page_size')
+      startPosition = pageSize * (pageNum - 1)
+      endPosition = startPosition + (pageSize - 1)
+
+      answer = @getObjectsInCache(startPosition, endPosition)
+      isLastPage = pageNum == totalPages
+
+      if isLastPage
+
+        return _.filter(answer, (obj) -> obj?)
+
+      else
+        # don't return incomplete cache results, it has all the page or doesn't
+        for obj in answer
+          if not obj?
+            return undefined
+
+
+      return answer

@@ -73,11 +73,79 @@ describe "Paginated Collections Cache", ->
     # Start < End
     #-------------------------------------
     startingPosition = 0
-    endPosition = testObjs.length
+    endPosition = testObjs.length - 1
 
     objsGot = list.getObjectsInCache(startingPosition, endPosition)
     for i in [0..testObjs.length-1]
       expect(objsGot[i].name).toBe(testObjs[i].name)
+
+  testGetObjectsFromPage = (list) ->
+
+    #-------------------------------------
+    # No Objects in Cache
+    #-------------------------------------
+    pageNum = 1
+    objsGot = list.getObjectsInCacheFromPage(pageNum)
+    expect(objsGot.length).toBe(0)
+
+    #-------------------------------------
+    # AddTestObjs
+    #-------------------------------------
+    numTestObjects = 90
+    testObjs = []
+    for i in [0..numTestObjects-1]
+      newObj =
+        name: i
+      list.addObjectToCache(newObj, i)
+      testObjs.push newObj
+
+    #-------------------------------------
+    # Page in cache
+    #-------------------------------------
+    pageNum = 1
+    pageSize = list.getMeta('page_size')
+    objsGot = list.getObjectsInCacheFromPage(pageNum)
+    for i in [0..pageSize-1]
+      expect(objsGot[i].name).toBe(testObjs[i].name)
+
+    #-------------------------------------
+    # Page not in cache at all
+    #-------------------------------------
+    pageNum = 20
+    objsGot = list.getObjectsInCacheFromPage(pageNum)
+    expect(objsGot?).toBe(false)
+
+    #-------------------------------------
+    # Page part in cache
+    #-------------------------------------
+    limitPageNum = Math.floor(numTestObjects / pageSize) + 1
+    objsGot = list.getObjectsInCacheFromPage(limitPageNum)
+    expect(objsGot?).toBe(false)
+
+    #-------------------------------------
+    # Last page
+    #-------------------------------------
+    totalPages = list.getMeta('total_pages')
+    totalMaxItems = pageSize * totalPages
+    itemsToRemoveInLastPage = Math.ceil(pageSize / 2)
+    itemsToCreate = totalMaxItems - itemsToRemoveInLastPage
+
+    numTestObjects = itemsToCreate
+    testObjs = []
+    for i in [0..numTestObjects-1]
+      newObj =
+        name: i
+      list.addObjectToCache(newObj, i)
+      testObjs.push newObj
+
+    objsGot = list.getObjectsInCacheFromPage(totalPages)
+    pageStartingPosition = pageSize * (totalPages - 1)
+
+    for i in [0..objsGot.length-1]
+
+      expect(objsGot[i].name).toBe(testObjs[i + pageStartingPosition].name)
+
+
 
   testAddsFromPage = (list) ->
 
@@ -113,6 +181,7 @@ describe "Paginated Collections Cache", ->
 
     beforeAll ->
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
+      list.setMeta('total_pages', 10)
     beforeEach ->
       list.resetCache()
 
@@ -122,6 +191,7 @@ describe "Paginated Collections Cache", ->
     it 'retrieves one object', -> testRetrieveObj(list)
     it 'retrieves objects in a range', -> testRetrieveObjs(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
+    it 'gets objects from a given page', -> testGetObjectsFromPage(list)
 
   describe 'ES Collections', ->
 
@@ -132,6 +202,7 @@ describe "Paginated Collections Cache", ->
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
           glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
         )
+      list.setMeta('total_pages', 10)
 
     beforeEach ->
       list.resetCache()
@@ -141,3 +212,4 @@ describe "Paginated Collections Cache", ->
     it 'resets cache', -> testResetCache(list)
     it 'retrieves one object', -> testRetrieveObj(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
+    it 'gets objects from a given page', -> testGetObjectsFromPage(list)
