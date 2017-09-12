@@ -1,5 +1,9 @@
 describe "Paginated Collections Cache", ->
 
+  #-------------------------------------------------------------------------------------------------------------------
+  # Generic test functions
+  #-------------------------------------------------------------------------------------------------------------------
+
   testInitCache = (list) -> expect(list.getMeta('cache')?).toBe(true)
 
   testAddObj = (list) ->
@@ -25,6 +29,28 @@ describe "Paginated Collections Cache", ->
     objGot = list.getObjectInCache(1)
     expect(objGot.name).toBe(testObj.name)
 
+  testAddsFromPage = (list) ->
+
+    pageSize = 10
+    objects = []
+    for i in [0..pageSize-1]
+      objects.push
+        name: i
+
+    for pageNum in [1..10]
+
+      list.addObjectsToCacheFromPage(objects, pageNum)
+
+      cache = list.getMeta('cache')
+      startingPosition = objects.length * (pageNum - 1)
+      for i in [0..objects.length-1]
+        expectedPosition = startingPosition + i
+        expect(cache[expectedPosition].name).toBe(i)
+
+
+  #-------------------------------------------------------------------------------------------------------------------
+  # Specific descriptions
+  #-------------------------------------------------------------------------------------------------------------------
   describe 'Collection with no caching', ->
     list = undefined
 
@@ -44,6 +70,7 @@ describe "Paginated Collections Cache", ->
     it 'adds an object to cache', -> testAddObj(list)
     it 'resets cache', -> testResetCache(list)
     it 'retrieves objects', -> testRetrieveObj(list)
+    it 'adds objects from received pages', -> testAddsFromPage(list)
 
   describe 'ES Collections', ->
 
@@ -62,3 +89,4 @@ describe "Paginated Collections Cache", ->
     it 'adds an object to cache', -> testAddObj(list)
     it 'resets cache', -> testResetCache(list)
     it 'retrieves objects', -> testRetrieveObj(list)
+    it 'adds objects from received pages', -> testAddsFromPage(list)
