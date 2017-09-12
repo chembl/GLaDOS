@@ -57,6 +57,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             search_term: searchTerm
+            data_loaded: false
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -87,6 +88,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             all_items_selected: false
             selection_exceptions: {}
             custom_filter: filter
+            data_loaded: false
 
           @initialiseUrl()
 
@@ -114,6 +116,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
             all_items_selected: false
             selection_exceptions: {}
+            data_loaded: false
 
           @on 'reset', @resetMeta, @
 
@@ -154,6 +157,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)
       list.parse = (data) ->
         data.page_meta.records_in_page = data.assays.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
         return data.assays
 
@@ -164,6 +168,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
       list.parse = (data) ->
         data.page_meta.records_in_page = data.activities.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
         return data.activities
 
@@ -173,8 +178,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecules.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
-
         return data.molecules
 
       return list
@@ -191,6 +196,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecules.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
         return data.molecules
@@ -211,6 +217,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecules.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
         return data.molecules
@@ -229,6 +236,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecules.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
         return data.molecules
@@ -251,6 +259,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecules.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
         return data.molecules
@@ -266,6 +275,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.parse = (data) ->
         data.page_meta.records_in_page = data.molecule_forms.length
+        @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
         return data.molecule_forms
@@ -471,6 +481,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
         @setMetadataAfterParse()
+        @setMeta('data_loaded', true)
         @reset(models)
 
       console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
@@ -561,6 +572,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @url = glados.Settings.WS_BASE_URL + 'target/' + chembl_id + '.json'
 
       list.parse = (response) ->
+        @setMeta('data_loaded', true)
         return response.target_components
 
 
