@@ -251,6 +251,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
+        ENABLE_COLLECTION_CACHING: true
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

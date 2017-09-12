@@ -64,6 +64,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
 
+          if @getMeta('enable_collection_caching')
+            @initCache()
+
 
       return new indexESPagQueryCollection
 
@@ -95,6 +98,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_collection_caching: collectionSettings.ENABLE_COLLECTION_CACHING
 
           @initialiseUrl()
+
+          console.log 'checking if col caching'
+          if @getMeta('enable_collection_caching')
+            console.log 'coll caching? ', @getMeta('enable_collection_caching')
+            @initCache()
 
       return new wsPagCollection
 
