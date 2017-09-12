@@ -29,6 +29,56 @@ describe "Paginated Collections Cache", ->
     objGot = list.getObjectInCache(1)
     expect(objGot.name).toBe(testObj.name)
 
+  testRetrieveObjs = (list) ->
+
+    #-------------------------------------
+    # No Objects in Cache
+    #-------------------------------------
+    startingPosition = 0
+    endPosition = 10
+
+    objsGot = list.getObjectsInCache(startingPosition, endPosition)
+    expect(objsGot.length).toBe(0)
+
+    #-------------------------------------
+    # AddTestObjs
+    #-------------------------------------
+    numTestObjects = 10
+    testObjs = []
+    for i in [0..numTestObjects-1]
+      newObj =
+        name: i
+      list.addObjectToCache(newObj, i)
+      testObjs.push newObj
+
+    #-------------------------------------
+    # Start > End
+    #-------------------------------------
+    startingPosition = 1
+    endPosition = 0
+
+    objsGot = list.getObjectsInCache(startingPosition, endPosition)
+    expect(objsGot.length).toBe(0)
+
+    #-------------------------------------
+    # Start == End
+    #-------------------------------------
+    startingPosition = 0
+    endPosition = 0
+
+    objsGot = list.getObjectsInCache(startingPosition, endPosition)
+    expect(objsGot[startingPosition].name).toBe(testObjs[startingPosition].name)
+
+    #-------------------------------------
+    # Start < End
+    #-------------------------------------
+    startingPosition = 0
+    endPosition = testObjs.length
+
+    objsGot = list.getObjectsInCache(startingPosition, endPosition)
+    for i in [0..testObjs.length-1]
+      expect(objsGot[i].name).toBe(testObjs[i].name)
+
   testAddsFromPage = (list) ->
 
     pageSize = 10
@@ -69,7 +119,8 @@ describe "Paginated Collections Cache", ->
     it 'initializes cache', -> testInitCache(list)
     it 'adds an object to cache', -> testAddObj(list)
     it 'resets cache', -> testResetCache(list)
-    it 'retrieves objects', -> testRetrieveObj(list)
+    it 'retrieves one object', -> testRetrieveObj(list)
+    it 'retrieves objects in a range', -> testRetrieveObjs(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
 
   describe 'ES Collections', ->
@@ -88,5 +139,5 @@ describe "Paginated Collections Cache", ->
     it "initializes cache", -> testInitCache(list)
     it 'adds an object to cache', -> testAddObj(list)
     it 'resets cache', -> testResetCache(list)
-    it 'retrieves objects', -> testRetrieveObj(list)
+    it 'retrieves one object', -> testRetrieveObj(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
