@@ -59,6 +59,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             search_term: searchTerm
             data_loaded: false
+            enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -70,7 +71,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewWSCollectionFor: (collectionSettings, filter='') ->
       wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
-      .extend(glados.models.paginatedCollections.SortingFunctions).extend
+      .extend(glados.models.paginatedCollections.SortingFunctions)
+      .extend(glados.models.paginatedCollections.CacheFunctions).extend
 
         model: collectionSettings.MODEL
         initialize: ->
@@ -90,6 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             selection_exceptions: {}
             custom_filter: filter
             data_loaded: false
+            enable_collection_caching: collectionSettings.ENABLE_COLLECTION_CACHING
 
           @initialiseUrl()
 
