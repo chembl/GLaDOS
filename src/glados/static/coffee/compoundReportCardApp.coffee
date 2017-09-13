@@ -221,5 +221,6 @@ class CompoundReportCardApp
   # -------------------------------------------------------------
 
   @initPieView = ->
-    pieview = new PieView
-    pieview.render()
+    # TODO DAVID WILL MAKE THIS SOMEDAY
+#    pieview = new PieView
+#    pieview.render()
