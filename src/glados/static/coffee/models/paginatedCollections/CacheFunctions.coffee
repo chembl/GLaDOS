@@ -31,7 +31,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #-------------------------------------------------------------------------------------------------------------------
     addObjectsToCacheFromPage: (objects, page) ->
 
-      startingPosition = objects.length * (page - 1)
+      startingPosition = @getMeta('page_size') * (page - 1)
 
       cache = @getMeta('cache')
       for i in [0..objects.length-1]

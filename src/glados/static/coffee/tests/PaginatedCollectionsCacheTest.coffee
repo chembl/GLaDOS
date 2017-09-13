@@ -148,7 +148,24 @@ describe "Paginated Collections Cache", ->
 
   testAddsFromPage = (list) ->
 
-    pageSize = 10
+    #-------------------------------------
+    # Page with one item
+    #-------------------------------------
+    pageSize = 1
+    objects = []
+    for i in [0..pageSize-1]
+      objects.push
+        name: i
+
+    list.addObjectsToCacheFromPage(objects, 1)
+    cache = list.getMeta('cache')
+    expect(cache[0].name).toBe(objects[0].name)
+
+    list.resetCache()
+    #-------------------------------------
+    # Page  with multiple items
+    #-------------------------------------
+    pageSize = list.getMeta('page_size')
     objects = []
     for i in [0..pageSize-1]
       objects.push
@@ -166,7 +183,7 @@ describe "Paginated Collections Cache", ->
 
   testAddsItemsAfterParse = (list, testDataToParse1, colType) ->
 
-    list.set(list.parse(testDataToParse1))
+    list.reset(list.parse(testDataToParse1))
 
     if colType == WS_COL_TYPE
       objsInData = testDataToParse1.molecules

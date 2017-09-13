@@ -472,15 +472,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
 
-        console.log 'AAA is cache activated? ', @getMeta('enable_collection_caching')
+        console.log 'cache activated? ', @getMeta('enable_collection_caching')
         if @getMeta('enable_collection_caching')
           modelsInCache = @getObjectsInCacheFromPage(newPageNum)
-          console.log 'AAA cache: ', @getMeta('cache')
+          console.log 'cache: ', @getMeta('cache')
+          console.log 'modelsInCache: ', modelsInCache
           if modelsInCache?
             if modelsInCache.length > 0
               @resetMeta(@getMeta('total_records'), @getMeta('total_records'))
-              @set(modelsInCache)
-              console.log 'AAA there is cache!!!, not requesting'
+              @reset(modelsInCache)
+              console.log 'there is cache!!!, not requesting'
               return
 
         @fetch(options=undefined, testMode)
@@ -493,9 +494,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
+      @resetCache() unless not @getMeta('enable_collection_caching')
       columns = @getAllColumns()
       @setupColSorting(columns, comparator)
-      @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
       @setMeta('ignore_score', true)
