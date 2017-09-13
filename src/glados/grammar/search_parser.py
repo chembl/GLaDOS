@@ -12,13 +12,15 @@ import requests
 import urllib.parse
 import traceback
 import time
+import sys
 
 from django.http import HttpResponse
 
 BASE_EBI_URL = 'https://www.ebi.ac.uk'
 BASE_EBI_DEV_URL = "https://wwwdev.ebi.ac.uk"
 
-UNICHEM_DS = {}
+UNICHEM_DS = None
+UNICHEM_DS_LAST_LOAD = 0
 
 CHEMBL_ENTITIES = {
     'target': 'targets',
@@ -30,27 +32,46 @@ CHEMBL_ENTITIES = {
     'tissue': 'tissues'
 }
 
-req = requests.get(url=BASE_EBI_URL + '/unichem/rest/src_ids/', headers={'Accept': 'application/json'})
-json_resp = req.json()
-for ds_i in json_resp:
-    ds_id_i = ds_i['src_id']
-    req_i = requests.get(url=BASE_EBI_URL + '/unichem/rest/sources/{0}'.format(ds_id_i),
-                         headers={'Accept': 'application/json'})
-    UNICHEM_DS[ds_id_i] = req_i.json()[0]
+
+def load_unichem_data():
+    global UNICHEM_DS, UNICHEM_DS_LAST_LOAD
+    if time.time() - UNICHEM_DS_LAST_LOAD > 2*pow(60, 2):
+        try:
+            print('Loading UNICHEM data . . .')
+            UNICHEM_DS = {}
+            req = requests.get(
+                url=BASE_EBI_URL + '/unichem/rest/src_ids/',
+                headers={'Accept': 'application/json'},
+                timeout=5
+            )
+            json_resp = req.json()
+            for ds_i in json_resp:
+                ds_id_i = ds_i['src_id']
+                req_i = requests.get(url=BASE_EBI_URL + '/unichem/rest/sources/{0}'.format(ds_id_i),
+                                     headers={'Accept': 'application/json'})
+                UNICHEM_DS[ds_id_i] = req_i.json()[0]
+            UNICHEM_DS_LAST_LOAD = time.time()
+        except:
+            print('Error, UNICHEM data is not available!', file=sys.stderr)
+    return UNICHEM_DS is not None
+
+load_unichem_data()
 
 
 def get_unichem_cross_reference_link_data(src_id: str, cross_reference_id: str) -> dict:
-    link_data = {
-            'cross_reference_id': cross_reference_id,
-            'cross_reference_link': None,
-            'cross_reference_label': 'Unknown in UniChem'
-        }
-    if src_id in UNICHEM_DS:
-        ds = UNICHEM_DS[src_id]
-        if ds['base_id_url_available'] == '1':
-            link_data['cross_reference_link'] = ds['base_id_url'] + cross_reference_id
-        link_data['cross_reference_label'] = ds['name_label']
-    return link_data
+    global UNICHEM_DS
+    if load_unichem_data():
+        link_data = {
+                'cross_reference_id': cross_reference_id,
+                'cross_reference_link': None,
+                'cross_reference_label': 'Unknown in UniChem'
+            }
+        if src_id in UNICHEM_DS:
+            ds = UNICHEM_DS[src_id]
+            if ds['base_id_url_available'] == '1':
+                link_data['cross_reference_link'] = ds['base_id_url'] + cross_reference_id
+            link_data['cross_reference_label'] = ds['name_label']
+        return link_data
 
 
 def property_term():
@@ -223,7 +244,8 @@ def check_doi(term_dict: dict):
                             }
                         }
                     }
-                }
+                },
+                timeout=5
             )
             json_response = response.json()
             for hit_i in json_response['hits']['hits']:
@@ -258,7 +280,8 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
                         }
                     }
                 }
-            }
+            },
+            timeout=5
         )
         json_response = response.json()
         for hit_i in json_response['hits']['hits']:
@@ -283,8 +306,11 @@ def check_smiles(term_dict: dict):
         next_url_path = '/chembl/api/data/molecule.json?molecule_structures__canonical_smiles__flexmatch={0}'\
                         .format(urllib.parse.quote(term_dict['term']))
         while next_url_path:
-            response = requests.get(BASE_EBI_URL + next_url_path,
-                                    headers={'Accept': 'application/json'})
+            response = requests.get(
+                BASE_EBI_URL + next_url_path,
+                headers={'Accept': 'application/json'},
+                timeout=5
+            )
             json_response = response.json()
             if 'error_message' in json_response:
                 return None
@@ -307,9 +333,12 @@ def check_smiles(term_dict: dict):
 
 def check_unichem(term_dict: dict):
     try:
-        response = requests.get(BASE_EBI_URL+'/unichem/rest/orphanIdMap/{0}'
-                                .format(urllib.parse.quote(term_dict['term'])),
-                                headers={'Accept': 'application/json'})
+        response = requests.get(
+            BASE_EBI_URL+'/unichem/rest/orphanIdMap/{0}'
+            .format(urllib.parse.quote(term_dict['term'])),
+            headers={'Accept': 'application/json'},
+            timeout=5
+        )
         json_response = response.json()
         if 'error' in json_response:
             return None

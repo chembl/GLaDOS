@@ -12,12 +12,17 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       @loadSimilarityMap()
 
       @on 'change:molecule_chembl_id', @loadSimilarityMap, @
+      @on 'change:reference_smiles', @loadSimilarityMap, @
+      @on 'change:reference_smiles_error', @loadSimilarityMap, @
 
     if @get('enable_substructure_highlighting')
       @set('loading_substructure_highlight', true)
       @loadStructureHighlight()
 
       @on 'change:molecule_chembl_id', @loadStructureHighlight, @
+      @on 'change:reference_ctab', @loadStructureHighlight, @
+      @on 'change:reference_smarts', @loadStructureHighlight, @
+      @on 'change:reference_smiles_error', @loadStructureHighlight, @
 
   loadSimilarityMap:  ->
 
@@ -235,8 +240,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       console.error jqxhrError
       model.set
         'download_aligned_error': true
-        'reference_smiles_error': true
-      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
+#        'reference_smiles_error': true
+#      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
     return promise
 
   downloadHighlightedSVG: ()->
@@ -266,6 +271,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData = new FormData()
         formData.append('file', new Blob([alignedSdf], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
         formData.append('smarts', referenceSmarts)
+        formData.append('computeCoords', 0)
         ajax_deferred = $.post
           url: Compound.SDF_2D_HIGHLIGHT_URL
           data: formData
@@ -345,7 +351,17 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       else if @get(dataVarName)?
         resolve(dataVarName)
       else
-        ajax_deferred = $.post(Compound.SDF_3D_2_XYZ, @get(data3DSDFVarName))
+        formData = new FormData()
+        formData.append('file', new Blob([@get(data3DSDFVarName)], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
+        formData.set('computeCoords', 0)
+
+        ajax_deferred = $.post
+          url: Compound.SDF_3D_2_XYZ
+          data: formData
+          enctype: 'multipart/form-data'
+          processData: false
+          contentType: false
+          cache: false
         compoundModel = @
         ajax_deferred.done (ajaxData)->
           compoundModel.set(dataVarName, ajaxData)

@@ -12,6 +12,7 @@ SimilarCompoundsView = CardView.extend
 
     @initEmbedModal('similar')
     @activateModals()
+    @render()
 
   render: ->
 

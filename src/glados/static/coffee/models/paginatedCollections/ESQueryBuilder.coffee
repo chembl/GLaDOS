@@ -89,7 +89,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       filterTermsJoined = filterTerms.join(' AND ')
       query = {
         bool:
-          boost: if boostedESKeys.has(curESKey) then 1000 else 1
+          boost: if boostedESKeys.has(curESKey) then Math.pow(10,9) else 1
           must:
             bool:
               should: []
