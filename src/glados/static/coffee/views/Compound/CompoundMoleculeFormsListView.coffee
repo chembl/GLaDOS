@@ -12,6 +12,7 @@ CompoundMoleculeFormsListView = CardView.extend
 
     @initEmbedModal('alternate_forms')
     @activateModals()
+    @render()
 
   render: ->
     if @collection.length == 1 and @collection.at(0).get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID and not GlobalVariables['EMBEDED']
