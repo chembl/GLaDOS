@@ -68,6 +68,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @url = @getURL()
 
       if @getMeta('facets_changed')
+        @resetCache() unless not @getMeta('enable_collection_caching')
         @invalidateAllDownloadedResults()
         @unSelectAll()
         @setMeta('current_page', 1)
@@ -375,6 +376,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     search: (jsonQuery)->
       final_callback = ()->
+        @resetCache() unless not @getMeta('enable_collection_caching')
         @invalidateAllDownloadedResults()
         @unSelectAll()
         @clearAllResults()
@@ -481,6 +483,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     sortCollection: (comparator) ->
       columns = @getAllColumns()
       @setupColSorting(columns, comparator)
+      @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
       @setMeta('ignore_score', true)
