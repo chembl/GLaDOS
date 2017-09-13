@@ -178,7 +178,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
-      @showPaginatedViewContent()
+      # don't force to show content when element is not visible.
+      @showPaginatedViewContent() unless not $(@el).is(":visible")
 
       @initialiseColumnsModal() unless @disableColumnsSelection
 
