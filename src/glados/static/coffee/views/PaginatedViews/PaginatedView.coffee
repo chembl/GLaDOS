@@ -48,9 +48,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @customRenderEvents?
         @collection.on @customRenderEvents, @.render, @
       else if @isInfinite()
-        @collection.on 'sync', @.render, @
+        @collection.on 'sync do-repaint', @.render, @
       else
-        @collection.on 'reset do-repaint sort', @render, @
+        @collection.on 'reset sort', @render, @
         @collection.on 'request', @showPreloaderHideOthers, @
 
       @collection.on 'error', @handleError, @
@@ -142,6 +142,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
+    clearContentForInfinite: ->
+
+      @clearContentContainer()
+      @renderSortingSelector()
+      @fillNumResults()
 
     render: ->
 
@@ -158,9 +163,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite() and @collection.getMeta('current_page') == 1
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
-        @clearContentContainer()
-        @renderSortingSelector()
-        @fillNumResults()
+        @clearContentForInfinite()
       else if not @isInfinite()
         @clearContentContainer()
 
@@ -193,7 +196,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite()
         @destroyAllWaypoints()
 
-    wakeUpView: -> @collection.setPage(1)
+    wakeUpView: ->
+      @collection.setPage(1)
 
     zoomIn: ->
 

@@ -468,6 +468,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, doFetch=true, testMode=false) ->
+      console.log 'Getting Page: ', newPageNum
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
@@ -481,6 +482,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             if modelsInCache.length > 0
               @resetMeta(@getMeta('total_records'), @getMeta('total_records'))
               @reset(modelsInCache)
+              @trigger('do-repaint')
               console.log 'there is cache!!!, not requesting'
               return
 
