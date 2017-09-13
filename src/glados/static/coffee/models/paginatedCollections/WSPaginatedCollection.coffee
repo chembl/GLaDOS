@@ -164,6 +164,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log(page_num)
       console.log('URL')
       console.log(@url)
+
+      if @getMeta('enable_collection_caching')
+        modelsInCache = @getObjectsInCacheFromPage(page_num)
+        if modelsInCache?
+          if modelsInCache.length > 0
+            @set(modelsInCache)
+            console.log 'there is cache!!!, not requesting'
+            return
+
       @fetch()
 
     # tells if the current page is the las page
