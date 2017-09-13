@@ -66,7 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           if @getMeta('enable_collection_caching')
             @initCache()
-            @on 'update', @addModelsInCurrentPage, @
+            @on 'reset update', @addModelsInCurrentPage, @
 
 
       return new indexESPagQueryCollection
@@ -102,7 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           if @getMeta('enable_collection_caching')
             @initCache()
-            @on 'update', @addModelsInCurrentPage, @
+            @on 'reset update', @addModelsInCurrentPage, @
 
       return new wsPagCollection
 
