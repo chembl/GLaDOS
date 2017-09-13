@@ -3,7 +3,8 @@ describe "Paginated Collections Cache", ->
   #-------------------------------------------------------------------------------------------------------------------
   # Generic test functions
   #-------------------------------------------------------------------------------------------------------------------
-
+  ES_COL_TYPE = 'ES'
+  WS_COL_TYPE = 'WS'
   testInitCache = (list) -> expect(list.getMeta('cache')?).toBe(true)
 
   testAddObj = (list) ->
@@ -145,8 +146,6 @@ describe "Paginated Collections Cache", ->
 
       expect(objsGot[i].name).toBe(testObjs[i + pageStartingPosition].name)
 
-
-
   testAddsFromPage = (list) ->
 
     pageSize = 10
@@ -165,6 +164,26 @@ describe "Paginated Collections Cache", ->
         expectedPosition = startingPosition + i
         expect(cache[expectedPosition].name).toBe(i)
 
+  testAddsItemsAfterParse = (list, testDataToParse1, colType) ->
+
+    list.set(list.parse(testDataToParse1))
+
+    if colType == WS_COL_TYPE
+      objsInData = testDataToParse1.molecules
+    else if colType == ES_COL_TYPE
+      objsInData = testDataToParse1.hits.hits
+
+    modelsInCache = list.getObjectsInCacheFromPage 1
+
+    for i in [0..modelsInCache.length-1]
+      idGot = modelsInCache[i].get('molecule_chembl_id')
+
+      if colType == WS_COL_TYPE
+        idInData = objsInData[i]['molecule_chembl_id']
+      else if colType == ES_COL_TYPE
+        idInData = objsInData[i]._source['molecule_chembl_id']
+
+      expect(idGot).toBe(idInData)
 
   #-------------------------------------------------------------------------------------------------------------------
   # Specific descriptions
@@ -178,10 +197,30 @@ describe "Paginated Collections Cache", ->
 
   describe 'WS Collections with caching', ->
     list = undefined
+    testDataToParse1 = undefined
+    testDataToParse2 = undefined
 
-    beforeAll ->
+    beforeAll (done) ->
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
       list.setMeta('total_pages', 10)
+
+      dataURL1 = glados.Settings.STATIC_URL + 'testData/SimilarityResultsSampleResponsePage1.json'
+      got1 = false
+      dataURL2 = glados.Settings.STATIC_URL + 'testData/SimilarityResultsSampleResponsePage2.json'
+      got2 = false
+
+      $.get dataURL1, (testData) ->
+        testDataToParse1 = testData
+        got1 = true
+        if got1 and got2
+          done()
+
+      $.get dataURL2, (testData) ->
+        testDataToParse2 = testData
+        got2 = true
+        if got1 and got2
+          done()
+
     beforeEach ->
       list.resetCache()
 
@@ -192,17 +231,24 @@ describe "Paginated Collections Cache", ->
     it 'retrieves objects in a range', -> testRetrieveObjs(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
     it 'gets objects from a given page', -> testGetObjectsFromPage(list)
+    it 'adds items to cache after parse', -> testAddsItemsAfterParse(list, testDataToParse1, WS_COL_TYPE)
 
   describe 'ES Collections', ->
 
     list = undefined
+    testDataToParse = undefined
 
-    beforeAll ->
+    beforeAll (done) ->
 
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
           glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
         )
       list.setMeta('total_pages', 10)
+
+      dataURL = glados.Settings.STATIC_URL + 'testData/ESCollectionTestData1.json'
+      $.get dataURL, (testData) ->
+        testDataToParse = testData
+        done()
 
     beforeEach ->
       list.resetCache()
@@ -213,3 +259,4 @@ describe "Paginated Collections Cache", ->
     it 'retrieves one object', -> testRetrieveObj(list)
     it 'adds objects from received pages', -> testAddsFromPage(list)
     it 'gets objects from a given page', -> testGetObjectsFromPage(list)
+    it 'adds items to cache after parse', -> testAddsItemsAfterParse(list, testDataToParse, ES_COL_TYPE)

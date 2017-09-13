@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           if @getMeta('enable_collection_caching')
             @initCache()
+            @on 'update', @addModelsInCurrentPage, @
 
 
       return new indexESPagQueryCollection
@@ -99,10 +100,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           @initialiseUrl()
 
-          console.log 'checking if col caching'
           if @getMeta('enable_collection_caching')
-            console.log 'coll caching? ', @getMeta('enable_collection_caching')
             @initCache()
+            @on 'update', @addModelsInCurrentPage, @
 
       return new wsPagCollection
 
@@ -210,7 +210,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         data.page_meta.records_in_page = data.molecules.length
         @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
-
         return data.molecules
 
       return list

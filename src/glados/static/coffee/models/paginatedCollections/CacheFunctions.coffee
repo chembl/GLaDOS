@@ -69,3 +69,5 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
       return answer
+
+    addModelsInCurrentPage: -> @addObjectsToCacheFromPage(@models, @getMeta('current_page'))
