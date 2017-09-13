@@ -683,7 +683,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @DOWNLOAD_ERROR_STATE = false
       @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
       # If the downloaded items are all of the collection use them as cache
-      if @getMeta('enable_collection_caching')
+      if @getMeta('enable_collection_caching') and not @getMeta('disable_cache_on_download')
         if @allResults?
           i = 0
           for obj in @allResults

@@ -60,6 +60,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             search_term: searchTerm
             data_loaded: false
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
+            disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
