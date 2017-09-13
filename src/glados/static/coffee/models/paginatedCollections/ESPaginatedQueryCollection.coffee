@@ -682,6 +682,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @DOWNLOADED_ITEMS_ARE_VALID = true
       @DOWNLOAD_ERROR_STATE = false
       @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
+      # If the downloaded items are all of the collection use them as cache
+      if @getMeta('enable_collection_caching')
+        if @allResults?
+          i = 0
+          for obj in @allResults
+            ModelType = @getMeta('model')
+            model = new ModelType(obj)
+            # trick to make sure parsed attributes such as img are created.
+            model.set(model.parse(model.attributes))
+            @addObjectToCache(model, i)
+            i++
 
     removeHolesInAllResults: ->
       i = 0

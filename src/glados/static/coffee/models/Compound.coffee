@@ -2,7 +2,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'molecule_chembl_id'
   initialize: ->
-
     id = @get('id')
     id ?= @get('molecule_chembl_id')
     @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
