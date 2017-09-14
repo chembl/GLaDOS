@@ -150,23 +150,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     # page num must be always a number
-    setPage: (newPageNum) ->
+    setPage: (page_num) ->
 
       # don't bother if the page requested is greater than the total number of pages
-      if newPageNum > @getMeta('total_pages')
+      if page_num > @getMeta('total_pages')
         return
 
-      console.log 'getting page: ', newPageNum
+      console.log 'getting page: ', page_num
       base_url = @getMeta('base_url')
-      @setMeta('current_page', newPageNum)
+      @setMeta('current_page', page_num)
       @url = @getPaginatedURL()
       console.log('Getting page:')
-      console.log(newPageNum)
+      console.log(page_num)
       console.log('URL')
       console.log(@url)
 
       if @getMeta('enable_collection_caching')
-        modelsInCache = @getObjectsInCacheFromPage(newPageNum)
+        modelsInCache = @getObjectsInCacheFromPage(page_num)
         console.log 'cache: ', @getMeta('cache')
         console.log 'modelsInCache: ', modelsInCache
         if modelsInCache?
