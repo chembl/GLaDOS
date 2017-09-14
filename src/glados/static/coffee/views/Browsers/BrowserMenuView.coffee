@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.views.Browsers',
       # {'Table': <instance of table view>}
       @allViewsPerType = {}
       @viewContainerID = @collection.getMeta('id_name')
-      @$viewContainer = $(@el).find('.BCK-Items-Container').attr('id', @viewContainerID)
+      @$viewContainer = $(@el).find('.BCK-View-Container').attr('id', @viewContainerID)
 
       @toolBarView = new glados.views.Browsers.BrowserToolBarView
         collection: @collection
@@ -38,7 +38,6 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-Facets-Container')
         menu_view: @
 
-      console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
     wakeUp: ->
@@ -84,7 +83,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.addClass('facets-hidden')
 
-      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer = $(@el).find('.BCK-View-Container')
       $pagItemsContainer.addClass('facets-hidden')
 
       @manualResizeCurrentView()
@@ -94,7 +93,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.removeClass('facets-hidden')
 
-      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer = $(@el).find('.BCK-View-Container')
       $pagItemsContainer.removeClass('facets-hidden')
 
       @manualResizeCurrentView()
@@ -182,14 +181,11 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
     disableButton: (type) ->
-      console.log 'DISABLING BUTTON!', type
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
-      console.log '$buttonToDisable: ', $buttonToDisable
       $buttonToDisable.addClass('disabled')
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
-      console.log 'ENABLING BUTTON!', type
       $buttonToEnable = $(@el).find('[data-view=' + type + ']')
       $buttonToEnable.removeClass('disabled')
       @addRemoveQtipToButtons()
@@ -201,14 +197,13 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       desiredViewType = $clickedElem.attr('data-view')
-      console.log 'SWITCH TO VIEW: ', desiredViewType
 
       @unSelectAllButtons()
       @selectButton desiredViewType
 
       @hideView @currentViewType
-      @showOrCreateView desiredViewType
       @currentViewType = desiredViewType
+      @showOrCreateView desiredViewType
 
     # if the view already exists, shows it, otherwise it creates it.
     showOrCreateView: (viewType) ->
@@ -233,18 +228,16 @@ glados.useNameSpace 'glados.views.Browsers',
 
         @allViewsPerType[viewType] = newView
 
-      else
-
-        $('#' + viewElementID).show()
-        # wake up the view if necessary
-        if @allViewsPerType[viewType].wakeUpView?
-          @allViewsPerType[viewType].wakeUpView()
+      $('#' + viewElementID).show()
+      # wake up the view if necessary
+      if @allViewsPerType[viewType].wakeUpView?
+        @allViewsPerType[viewType].wakeUpView()
 
       currentView = @allViewsPerType[viewType]
 
       showZoomControls = false
       if currentView.isCards?
-        if currentView.isCards() and @collection.getMeta('enable_cards_zoom')
+        if (currentView.isCards() or currentView.isInfinite()) and @collection.getMeta('enable_cards_zoom')
           showZoomControls = true
 
       if showZoomControls
@@ -254,7 +247,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       showSpecialStructureControls = false
       if currentView.isCards?
-        if currentView.isCards() and (@collection.getMeta('enable_similarity_maps') \
+        if (currentView.isCards() or currentView.isInfinite()) and (@collection.getMeta('enable_similarity_maps') \
         or @collection.getMeta('enable_substructure_highlighting'))
           showSpecialStructureControls = true
 
@@ -269,7 +262,6 @@ glados.useNameSpace 'glados.views.Browsers',
           @allViewsPerType[viewType].sleepView()
 
       viewElementID = @viewContainerID + '-' + viewType
-      console.log 'hiding view:', viewElementID
       $('#' + viewElementID).hide()
 
     getCurrentViewInstance: -> @allViewsPerType[@currentViewType]

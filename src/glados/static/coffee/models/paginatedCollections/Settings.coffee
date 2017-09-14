@@ -34,6 +34,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
+        ENABLE_COLLECTION_CACHING: true
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
@@ -52,6 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
@@ -69,6 +71,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
       DOCUMENT:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
@@ -86,6 +89,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
       CELL_LINE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
@@ -163,6 +167,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
+        ENABLE_COLLECTION_CACHING: true
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -188,6 +193,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
+        ENABLE_COLLECTION_CACHING: true
+        DISABLE_CACHE_ON_DOWNLOAD: true
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -213,6 +220,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SIMILARITY_MAPS: true
         SHOW_SIMILARITY_MAPS: true
+        ENABLE_COLLECTION_CACHING: true
+        DISABLE_CACHE_ON_DOWNLOAD: true
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
@@ -241,6 +250,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
+        ENABLE_COLLECTION_CACHING: true
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
@@ -250,6 +260,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_CARD: []
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
+        ENABLE_COLLECTION_CACHING: true
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
