@@ -153,7 +153,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not @collection.getMeta('data_loaded')
         return
 
-      if @isInfinite() and not $(@el).is(":visible")
+      # don't force to show content when element is not visible.
+      if not $(@el).is(":visible")
         return
 
       isDefault = @mustDisableReset()
@@ -175,14 +176,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
-      if @isCards() and @collection.getMeta('enable_cards_zoom')
+      if (@isCards() or @isInfinite()) and @collection.getMeta('enable_cards_zoom')
         @fillZoomContainer()
 
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
-      # don't force to show content when element is not visible.
-      @showPaginatedViewContent() unless not $(@el).is(":visible")
+      @showPaginatedViewContent()
 
       @initialiseColumnsModal() unless @disableColumnsSelection
 
@@ -201,28 +201,53 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     zoomIn: ->
 
+      isDisabled = @$zoomControlsContainer.find('.BCK-zoom-in').hasClass('disabled')
+      if isDisabled
+        return
+
       @CURRENT_CARD_SIZES =
         small: @getNextSize(@CURRENT_CARD_SIZES.small)
         medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
         large: @getNextSize(@CURRENT_CARD_SIZES.large)
 
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
+
       @render()
 
     zoomOut: ->
+
+      isDisabled = @$zoomControlsContainer.find('.BCK-zoom-out').hasClass('disabled')
+      if isDisabled
+        return
 
       @CURRENT_CARD_SIZES =
         small: @getPreviousSize(@CURRENT_CARD_SIZES.small)
         medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
         large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
-      @render()
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
     resetZoom: ->
+
+      isDisabled = @$zoomControlsContainer.find('.BCK-reset-zoom').hasClass('disabled')
+      if isDisabled
+        return
 
       @CURRENT_CARD_SIZES =
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
+
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
       @render()
 
@@ -290,7 +315,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         alreadyBound = $currentLink.attr('data-already-function-bound')?
         if not alreadyBound
           functionKey = $currentLink.attr('data-function-key')
-          console.log 'visibleColumnsIndex: ', visibleColumnsIndex
           functionToBind = visibleColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
           executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
@@ -327,7 +351,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
-      console.log 'GOING TO USE TEMPLATE: ', templateID
       # if it is a table, add the corresponding header
       if $specificElemContainer.is('table')
   
@@ -819,7 +842,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
     setUpLoadingWaypoint: ->
 
-      console.log 'SETTING UP WAYPOINT'
       $cards = $(@el).find('.BCK-items-container').children()
   
       # don't bother when there aren't any cards
