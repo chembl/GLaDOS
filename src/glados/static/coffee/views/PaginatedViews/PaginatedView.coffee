@@ -302,7 +302,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       columns = []
       # use special configuration config for cards if available
-      if @isCards() and @collection.getMeta('columns_card').length > 0
+      if (@isCards() or @isInfinite()) and @collection.getMeta('columns_card').length > 0
         if @isComplicated
           columns = _.filter(@collection.getMeta('complicate_card_columns'), -> true)
         else
@@ -321,12 +321,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      if @isCards() and not @isComplicated
+      if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
+      console.log 'GOING TO USE TEMPLATE: ', templateID
       # if it is a table, add the corresponding header
       if $specificElemContainer.is('table')
   
@@ -354,7 +355,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
 
-        if @isCards()
+        if (@isCards() or @isInfinite())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
           templateParams.medium_size = @CURRENT_CARD_SIZES.medium
           templateParams.large_size = @CURRENT_CARD_SIZES.large
@@ -362,21 +363,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $newItemElem = $(applyTemplate(templateParams))
         $appendTo.append($newItemElem)
 
-        CustomElementView = @collection.getMeta('custom_cards_item_view')
-        if CustomElementView? and not @isComplicated
-          model =  @collection.get(idValue)
-          new CustomElementView
-            model: model
-            el: $newItemElem
+        if (@isCards() or @isInfinite())
+          CustomElementView = @collection.getMeta('custom_cards_item_view')
+          if CustomElementView? and not @isComplicated
+            model =  @collection.get(idValue)
+            new CustomElementView
+              model: model
+              el: $newItemElem
 
-        if templateParams.img_url? and \
-        (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+          if templateParams.img_url? and \
+          (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-          new glados.views.Compound.DeferredStructureView
-            model: model
-            el: $newItemElem.find('.BCK-image')
+            new glados.views.Compound.DeferredStructureView
+              model: model
+              el: $newItemElem.find('.BCK-image')
 
-      @fixCardHeight($appendTo)
+          @fixCardHeight($appendTo)
 
     checkIfTableNeedsToScroll: ->
 
