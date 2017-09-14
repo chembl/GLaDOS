@@ -221,6 +221,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         ctabBlob = new Blob([sdf2DData+sdf2DData], {type: 'chemical/x-mdl-sdfile'})
         formData.append('template', templateBlob, 'pattern.mol')
         formData.append('ctab', ctabBlob, 'mcs.sdf')
+        formData.append('force', 'true')
         ajax_deferred = $.post
           url: Compound.SDF_2D_ALIGN_URL
           data: formData
@@ -271,6 +272,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('file', new Blob([alignedSdf], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
         formData.append('smarts', referenceSmarts)
         formData.append('computeCoords', 0)
+        formData.append('force', 'true')
         ajax_deferred = $.post
           url: Compound.SDF_2D_HIGHLIGHT_URL
           data: formData
