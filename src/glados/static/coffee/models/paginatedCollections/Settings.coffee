@@ -194,6 +194,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
         ENABLE_COLLECTION_CACHING: true
+        DISABLE_CACHE_ON_DOWNLOAD: true
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
