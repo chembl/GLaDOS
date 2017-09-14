@@ -38,7 +38,6 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-Facets-Container')
         menu_view: @
 
-      console.log 'INITIAL VIEW: ', @currentViewType
       @showOrCreateView @currentViewType
 
     wakeUp: ->
@@ -182,14 +181,11 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
     disableButton: (type) ->
-      console.log 'DISABLING BUTTON!', type
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
-      console.log '$buttonToDisable: ', $buttonToDisable
       $buttonToDisable.addClass('disabled')
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
-      console.log 'ENABLING BUTTON!', type
       $buttonToEnable = $(@el).find('[data-view=' + type + ']')
       $buttonToEnable.removeClass('disabled')
       @addRemoveQtipToButtons()
@@ -201,14 +197,13 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       desiredViewType = $clickedElem.attr('data-view')
-      console.log 'SWITCH TO VIEW: ', desiredViewType
 
       @unSelectAllButtons()
       @selectButton desiredViewType
 
       @hideView @currentViewType
-      @showOrCreateView desiredViewType
       @currentViewType = desiredViewType
+      @showOrCreateView desiredViewType
 
     # if the view already exists, shows it, otherwise it creates it.
     showOrCreateView: (viewType) ->
@@ -233,12 +228,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
         @allViewsPerType[viewType] = newView
 
-      else
-
-        $('#' + viewElementID).show()
-        # wake up the view if necessary
-        if @allViewsPerType[viewType].wakeUpView?
-          @allViewsPerType[viewType].wakeUpView()
+      $('#' + viewElementID).show()
+      # wake up the view if necessary
+      if @allViewsPerType[viewType].wakeUpView?
+        @allViewsPerType[viewType].wakeUpView()
 
       currentView = @allViewsPerType[viewType]
 
@@ -269,7 +262,6 @@ glados.useNameSpace 'glados.views.Browsers',
           @allViewsPerType[viewType].sleepView()
 
       viewElementID = @viewContainerID + '-' + viewType
-      console.log 'hiding view:', viewElementID
       $('#' + viewElementID).hide()
 
     getCurrentViewInstance: -> @allViewsPerType[@currentViewType]
