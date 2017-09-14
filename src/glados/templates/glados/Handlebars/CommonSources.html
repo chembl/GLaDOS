@@ -678,12 +678,14 @@
 </script>
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
+  {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}
   <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
   <a> <i class="fa fa-times" aria-hidden="true" onclick="$(this).parent().parent().empty();"></i></a>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages0" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i> Collecting Items... {{percentage}}%
+  <i class="fa fa-cog fa-spin fa-fw"></i>
+  {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages1" type="text/x-handlebars-template">

@@ -242,7 +242,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
     # without requesting again to the server.
     # you can use a progress element to show the progress if you want.
-    getAllResults: ($progressElement, askingForOnlySelected = false) ->
+    getAllResults: ($progressElement, askingForOnlySelected=false, onlyFirstThousand, customBaseProgressText) ->
 
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
@@ -251,6 +251,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if $progressElement?
         $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
           percentage: '0'
+          custom_base_progress_text: customBaseProgressText
 
       customPageNum = 1
       # 1000 is the maximun page size allowed by the ws
@@ -268,7 +269,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       getPage = (url) ->
         $.get(url).done((response) ->
           itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
-          totalRecords = response.page_meta.total_count
+          totalRecords = if onlyFirstThousand then 1000 else response.page_meta.total_count
 
           for item in response[itemsKeyName]
             thisView.allResults.push(item)
@@ -277,9 +278,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if $progressElement? and (progress % 10) == 0
             $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
               percentage: progress
+              custom_base_progress_text: customBaseProgressText
 
           nextUrl = response.page_meta.next
-          if nextUrl?
+          if nextUrl? and not onlyFirstThousand
             nextUrl = baseURL + nextUrl
             getPage nextUrl
           else
@@ -318,6 +320,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               $progressElement.html msg
               generateWaitingToolongMsg(secondWaitTime)
           ),waitTime)
-        generateWaitingToolongMsg(firstWaitTime)
+#        generateWaitingToolongMsg(firstWaitTime)
 
       return deferreds
