@@ -302,7 +302,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         alreadyBound = $currentLink.attr('data-already-function-bound')?
         if not alreadyBound
           functionKey = $currentLink.attr('data-function-key')
-          console.log 'visibleColumnsIndex: ', visibleColumnsIndex
           functionToBind = visibleColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
           executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
@@ -339,7 +338,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
-      console.log 'GOING TO USE TEMPLATE: ', templateID
       # if it is a table, add the corresponding header
       if $specificElemContainer.is('table')
   
@@ -831,7 +829,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
     setUpLoadingWaypoint: ->
 
-      console.log 'SETTING UP WAYPOINT'
       $cards = $(@el).find('.BCK-items-container').children()
   
       # don't bother when there aren't any cards
