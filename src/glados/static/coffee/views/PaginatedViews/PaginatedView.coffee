@@ -210,6 +210,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
         large: @getNextSize(@CURRENT_CARD_SIZES.large)
 
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
+
       @render()
 
     zoomOut: ->
@@ -223,7 +228,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
         large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
-      @render()
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
     resetZoom: ->
 
@@ -235,6 +243,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
+
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
       @render()
 

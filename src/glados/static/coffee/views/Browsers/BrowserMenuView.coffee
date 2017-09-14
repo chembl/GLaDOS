@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.views.Browsers',
       # {'Table': <instance of table view>}
       @allViewsPerType = {}
       @viewContainerID = @collection.getMeta('id_name')
-      @$viewContainer = $(@el).find('.BCK-Items-Container').attr('id', @viewContainerID)
+      @$viewContainer = $(@el).find('.BCK-View-Container').attr('id', @viewContainerID)
 
       @toolBarView = new glados.views.Browsers.BrowserToolBarView
         collection: @collection
@@ -83,7 +83,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.addClass('facets-hidden')
 
-      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer = $(@el).find('.BCK-View-Container')
       $pagItemsContainer.addClass('facets-hidden')
 
       @manualResizeCurrentView()
@@ -93,7 +93,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.removeClass('facets-hidden')
 
-      $pagItemsContainer = $(@el).find('.BCK-Items-Container')
+      $pagItemsContainer = $(@el).find('.BCK-View-Container')
       $pagItemsContainer.removeClass('facets-hidden')
 
       @manualResizeCurrentView()
