@@ -12,16 +12,12 @@ glados.useNameSpace 'glados.views.Compound',
         @initSimilarityMode()
         @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @showCorrectImage, @
         @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @showCorrectImage, @
-        @model.on 'change:show_similarity_map', @showCorrectImage, @
 
       if @model.get('enable_substructure_highlighting')
 
         @initSubstructureHighlightMode()
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @showCorrectImage, @
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY, @showCorrectImage, @
-        @model.on 'change:show_substructure_highlighting', @showCorrectImage, @
-
-      @showCorrectImage()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Mode initialisation

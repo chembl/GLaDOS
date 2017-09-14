@@ -64,6 +64,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
 
+      if (@isCards() or @isInfinite())\
+      and (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+        @createDeferredStructuresContainer()
+
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
@@ -165,8 +169,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
         @clearContentForInfinite()
+        @cleanUpDeferredElementsContainer()
       else if not @isInfinite()
         @clearContentContainer()
+        @cleanUpDeferredElementsContainer()
 
       @fillTemplates()
 
@@ -364,6 +370,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $specificElemContainer.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
         $specificElemContainer.append($('<tbody>'))
+        $specificElemContainer.append($('<tbody>'))
 
 
       for item in @collection.getCurrentPage()
@@ -397,11 +404,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and \
           (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-            new glados.views.Compound.DeferredStructureView
-              model: model
-              el: $newItemElem.find('.BCK-image')
+            @createDeferredSctructureView(model, $newItemElem)
 
           @fixCardHeight($appendTo)
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Deferred Structures
+    #-------------------------------------------------------------------------------------------------------------------
+    createDeferredStructuresContainer: -> @deferredStructuresContainer = []
+    cleanUpDeferredElementsContainer: -> @createDeferredStructuresContainer()
+
+    createDeferredSctructureView: (model, $newItemElem) ->
+      dfsView = new glados.views.Compound.DeferredStructureView
+        model: model
+        el: $newItemElem.find('.BCK-image')
+
+      @deferredStructuresContainer.push
+      dfsView.showCorrectImage()
 
     checkIfTableNeedsToScroll: ->
 
