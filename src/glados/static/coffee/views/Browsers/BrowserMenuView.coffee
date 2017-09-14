@@ -237,7 +237,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       showZoomControls = false
       if currentView.isCards?
-        if currentView.isCards() and @collection.getMeta('enable_cards_zoom')
+        if (currentView.isCards() or currentView.isInfinite()) and @collection.getMeta('enable_cards_zoom')
           showZoomControls = true
 
       if showZoomControls
