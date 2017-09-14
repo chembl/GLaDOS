@@ -272,6 +272,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('file', new Blob([alignedSdf], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
         formData.append('smarts', referenceSmarts)
         formData.append('computeCoords', 0)
+        formData.append('force', 'true')
         ajax_deferred = $.post
           url: Compound.SDF_2D_HIGHLIGHT_URL
           data: formData
