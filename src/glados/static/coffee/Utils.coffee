@@ -203,23 +203,31 @@ glados.useNameSpace 'glados',
         return buckets
 
     ErrorMessages:
+
+      getJQXHRErrorText: (jqXHR) ->
+        if jqXHR.status == 0
+          return console.log jqXHR.getAllResponseHeaders()
+        else
+          jqXHR.status + ': ' + jqXHR.statusText
+
       showLoadingErrorMessageGen: ($progressElem) ->
         return (jqXHR, textStatus, errorThrown) ->
-          errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+          errorDetails = glados.Utils.ErrorMessages.getJQXHRErrorText(jqXHR)
           $progressElem.html 'Error loading data (' + errorDetails + ')'
 
       getErrorCardContent: (jqXHR) ->
-        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+        errorDetails = glados.Utils.ErrorMessages.getJQXHRErrorText(jqXHR)
         return Handlebars.compile($('#Handlebars-Common-ErrorInCard').html())
           msg: errorDetails
 
-      getCollectionErrorContent: (jqXHR) ->
-        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+      getCollectionErrorContent: (jqXHR, customExplanation) ->
+        errorDetails = glados.Utils.ErrorMessages.getJQXHRErrorText(jqXHR)
         return Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
           msg: errorDetails
+          custom_explanation: customExplanation
 
       getErrorImageContent: (jqXHR) ->
-        errorDetails = jqXHR.status + ': ' + jqXHR.statusText
+        errorDetails = glados.Utils.ErrorMessages.getJQXHRErrorText(jqXHR)
         return Handlebars.compile($('#Handlebars-Common-ErrorInImage').html())
           msg: errorDetails
 

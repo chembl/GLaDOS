@@ -80,7 +80,8 @@ class SearchResultsApp
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns, customSettings,
     searchTerm) ->
 
-    deferreds = resultsList.getAllResults($progressElement)
+    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstThousand=true,
+    customBaseProgressText='Searching...')
 
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
@@ -97,13 +98,15 @@ class SearchResultsApp
 
     ).fail((msg) ->
 
+        customExplanation = 'Error while performing the search.'
         $browserContainer.hide()
         if $progressElement?
           # it can be a jqxr
           if msg.status?
-            $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg)
+            $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg, customExplanation)
           else
             $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
               msg: msg
+              custom_explanation: customExplanation
       )
 
