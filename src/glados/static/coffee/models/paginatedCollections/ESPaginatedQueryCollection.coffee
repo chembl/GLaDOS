@@ -480,6 +480,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           console.log 'modelsInCache: ', modelsInCache
           if modelsInCache?
             if modelsInCache.length > 0
+
+              # this should be done in a better way
+              if @getMeta('enable_substructure_highlighting') or @getMeta('enable_similarity_maps')
+                for model in modelsInCache
+                  model.set('show_similarity_map', @getMeta('show_similarity_maps'))
+                  model.set('show_substructure_highlighting', @getMeta('show_substructure_highlighting'))
+
               @resetMeta(@getMeta('total_records'), @getMeta('total_records'))
               @reset(modelsInCache)
               @trigger('do-repaint')
