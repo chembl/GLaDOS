@@ -153,7 +153,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not @collection.getMeta('data_loaded')
         return
 
-      if @isInfinite() and not $(@el).is(":visible")
+      # don't force to show content when element is not visible.
+      if not $(@el).is(":visible")
         return
 
       isDefault = @mustDisableReset()
@@ -175,14 +176,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
-      if @isCards() and @collection.getMeta('enable_cards_zoom')
+      if (@isCards() or @isInfinite()) and @collection.getMeta('enable_cards_zoom')
         @fillZoomContainer()
 
       @fillPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
-      # don't force to show content when element is not visible.
-      @showPaginatedViewContent() unless not $(@el).is(":visible")
+      @showPaginatedViewContent()
 
       @initialiseColumnsModal() unless @disableColumnsSelection
 
@@ -201,28 +201,53 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     zoomIn: ->
 
+      isDisabled = @$zoomControlsContainer.find('.BCK-zoom-in').hasClass('disabled')
+      if isDisabled
+        return
+
       @CURRENT_CARD_SIZES =
         small: @getNextSize(@CURRENT_CARD_SIZES.small)
         medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
         large: @getNextSize(@CURRENT_CARD_SIZES.large)
 
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
+
       @render()
 
     zoomOut: ->
+
+      isDisabled = @$zoomControlsContainer.find('.BCK-zoom-out').hasClass('disabled')
+      if isDisabled
+        return
 
       @CURRENT_CARD_SIZES =
         small: @getPreviousSize(@CURRENT_CARD_SIZES.small)
         medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
         large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
-      @render()
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
     resetZoom: ->
+
+      isDisabled = @$zoomControlsContainer.find('.BCK-reset-zoom').hasClass('disabled')
+      if isDisabled
+        return
 
       @CURRENT_CARD_SIZES =
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
+
+      if @isInfinite()
+        @collection.setPage(1)
+      else
+        @render()
 
       @render()
 
@@ -290,7 +315,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         alreadyBound = $currentLink.attr('data-already-function-bound')?
         if not alreadyBound
           functionKey = $currentLink.attr('data-function-key')
-          console.log 'visibleColumnsIndex: ', visibleColumnsIndex
           functionToBind = visibleColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
           executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
@@ -302,7 +326,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       columns = []
       # use special configuration config for cards if available
-      if @isCards() and @collection.getMeta('columns_card').length > 0
+      if (@isCards() or @isInfinite()) and @collection.getMeta('columns_card').length > 0
         if @isComplicated
           columns = _.filter(@collection.getMeta('complicate_card_columns'), -> true)
         else
@@ -321,7 +345,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
-      if @isCards() and not @isComplicated
+      if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
@@ -354,7 +378,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
 
-        if @isCards()
+        if (@isCards() or @isInfinite())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
           templateParams.medium_size = @CURRENT_CARD_SIZES.medium
           templateParams.large_size = @CURRENT_CARD_SIZES.large
@@ -362,21 +386,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $newItemElem = $(applyTemplate(templateParams))
         $appendTo.append($newItemElem)
 
-        CustomElementView = @collection.getMeta('custom_cards_item_view')
-        if CustomElementView? and not @isComplicated
-          model =  @collection.get(idValue)
-          new CustomElementView
-            model: model
-            el: $newItemElem
+        if (@isCards() or @isInfinite())
+          CustomElementView = @collection.getMeta('custom_cards_item_view')
+          if CustomElementView? and not @isComplicated
+            model =  @collection.get(idValue)
+            new CustomElementView
+              model: model
+              el: $newItemElem
 
-        if templateParams.img_url? and \
-        (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+          if templateParams.img_url? and \
+          (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-          new glados.views.Compound.DeferredStructureView
-            model: model
-            el: $newItemElem.find('.BCK-image')
+            new glados.views.Compound.DeferredStructureView
+              model: model
+              el: $newItemElem.find('.BCK-image')
 
-      @fixCardHeight($appendTo)
+          @fixCardHeight($appendTo)
 
     checkIfTableNeedsToScroll: ->
 
@@ -817,7 +842,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   
     setUpLoadingWaypoint: ->
 
-      console.log 'SETTING UP WAYPOINT'
       $cards = $(@el).find('.BCK-items-container').children()
   
       # don't bother when there aren't any cards

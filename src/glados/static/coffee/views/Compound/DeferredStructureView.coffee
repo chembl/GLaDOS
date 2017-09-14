@@ -7,8 +7,6 @@ glados.useNameSpace 'glados.views.Compound',
       @$image = $(@el).find('img.BCK-main-image')
       @$specialStructImage = $(@el).find('img.BCK-specialStruct-image')
 
-      console.log 'INIT DSV'
-
       if @model.get('enable_similarity_map')
 
         @initSimilarityMode()

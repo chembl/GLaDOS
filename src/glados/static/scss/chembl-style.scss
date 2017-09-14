@@ -1401,8 +1401,13 @@ div#CNC-zoom-modal {
     }
   }
 
+  &.infinite-cards{
+    width: 100%;
+  }
+
   display: flex;
   flex-flow: row wrap;
+
   .col {
     .card {
       .checkbox-container {

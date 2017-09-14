@@ -1,27 +1,29 @@
-<div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
-  <!-- Backbone fills this with the infinity browser view -->
-</div>
+<div class="paginated-collection">
+  <div class="col s12 num-results" data-hb-template="Handlebars-Common-Paginated-NumResults">
+    <!-- Backbone fills this with the infinity browser view -->
+  </div>
 
 
-<div class='BCK-items-container row' data-is-infinite="yes"
-     {% if custom_item_template %}
-      data-hb-template="{{custom_item_template}}"
-     {% else %}
-      data-hb-template="Handlebars-Common-Paginated-Card"
-     {% endif %} >
-  <!-- Backbone fills this with the infinity browser view -->
-</div>
+  <div class='BCK-items-container row cards-container infinite-cards' data-is-infinite="yes" style="display: none"
+       {% if custom_item_template %}
+        data-hb-template="{{custom_item_template}}"
+       {% else %}
+        data-hb-template="Handlebars-Common-Paginated-Card"
+       {% endif %} >
+    <!-- Backbone fills this with the infinity browser view -->
+  </div>
 
-<div class="BCK-PreloaderContainer">
-  {% block preloaders %}
-  {% include "glados/base/infinite_browse_loaders.html" %}
-  {% endblock %}
-</div>
+  <div class="BCK-PreloaderContainer">
+    {% block preloaders %}
+    {% include "glados/base/infinite_browse_loaders.html" %}
+    {% endblock %}
+  </div>
 
 
-<div class='BCK-SuggestedLabel row' style="display: none">
-  <h5>No records were found. However, we found the following similar results:</h5>
-</div>
+  <div class='BCK-SuggestedLabel row' style="display: none">
+    <h5>No records were found. However, we found the following similar results:</h5>
+  </div>
 
-<div class="BCK-ErrorMessagesContainer">
+  <div class="BCK-ErrorMessagesContainer">
+  </div>
 </div>
