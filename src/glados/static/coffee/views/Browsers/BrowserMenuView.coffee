@@ -247,7 +247,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       showSpecialStructureControls = false
       if currentView.isCards?
-        if currentView.isCards() and (@collection.getMeta('enable_similarity_maps') \
+        if (currentView.isCards() or currentView.isInfinite()) and (@collection.getMeta('enable_similarity_maps') \
         or @collection.getMeta('enable_substructure_highlighting'))
           showSpecialStructureControls = true
 
