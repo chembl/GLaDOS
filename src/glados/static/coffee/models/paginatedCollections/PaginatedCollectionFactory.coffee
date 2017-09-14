@@ -14,7 +14,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions).extend
+      .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
+      .extend(glados.models.paginatedCollections.CacheFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -58,9 +59,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             search_term: searchTerm
             data_loaded: false
+            enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
+            disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
+
+          if @getMeta('enable_collection_caching')
+            @initCache()
+            @on 'reset update', @addModelsInCurrentPage, @
 
 
       return new indexESPagQueryCollection
@@ -69,7 +76,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewWSCollectionFor: (collectionSettings, filter='') ->
       wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
-      .extend(glados.models.paginatedCollections.SortingFunctions).extend
+      .extend(glados.models.paginatedCollections.SortingFunctions)
+      .extend(glados.models.paginatedCollections.CacheFunctions).extend
 
         model: collectionSettings.MODEL
         initialize: ->
@@ -89,8 +97,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             selection_exceptions: {}
             custom_filter: filter
             data_loaded: false
+            enable_collection_caching: collectionSettings.ENABLE_COLLECTION_CACHING
 
           @initialiseUrl()
+
+          if @getMeta('enable_collection_caching')
+            @initCache()
+            @on 'reset', @addModelsInCurrentPage, @
 
       return new wsPagCollection
 
@@ -198,7 +211,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         data.page_meta.records_in_page = data.molecules.length
         @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
-
         return data.molecules
 
       return list

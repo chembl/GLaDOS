@@ -164,6 +164,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log(page_num)
       console.log('URL')
       console.log(@url)
+
+      if @getMeta('enable_collection_caching')
+        modelsInCache = @getObjectsInCacheFromPage(page_num)
+        console.log 'cache: ', @getMeta('cache')
+        console.log 'modelsInCache: ', modelsInCache
+        if modelsInCache?
+          if modelsInCache.length > 0
+            @reset(modelsInCache)
+            console.log 'there is cache!!!, not requesting'
+            return
+
       @fetch()
 
     # tells if the current page is the las page
@@ -173,7 +184,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Sorting
     # ------------------------------------------------------------------------------------------------------------------
     sortCollection: (comparator) ->
-
+      @resetCache() unless not @getMeta('enable_collection_caching')
       @setMeta('current_page', 1)
       columns = @getMeta('columns')
       @setupColSorting(columns, comparator)
@@ -215,7 +226,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       comp = sorVal.comparator unless !sorVal?
 
       return comp
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions

@@ -68,6 +68,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @url = @getURL()
 
       if @getMeta('facets_changed')
+        @resetCache() unless not @getMeta('enable_collection_caching')
         @invalidateAllDownloadedResults()
         @unSelectAll()
         @setMeta('current_page', 1)
@@ -375,6 +376,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     search: (jsonQuery)->
       final_callback = ()->
+        @resetCache() unless not @getMeta('enable_collection_caching')
         @invalidateAllDownloadedResults()
         @unSelectAll()
         @clearAllResults()
@@ -466,9 +468,31 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, doFetch=true, testMode=false) ->
+      console.log 'Getting Page: ', newPageNum
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
+
+        console.log 'cache activated? ', @getMeta('enable_collection_caching')
+        if @getMeta('enable_collection_caching')
+          modelsInCache = @getObjectsInCacheFromPage(newPageNum)
+          console.log 'cache: ', @getMeta('cache')
+          console.log 'modelsInCache: ', modelsInCache
+          if modelsInCache?
+            if modelsInCache.length > 0
+
+              # this should be done in a better way
+              if @getMeta('enable_substructure_highlighting') or @getMeta('enable_similarity_maps')
+                for model in modelsInCache
+                  model.set('show_similarity_map', @getMeta('show_similarity_maps'))
+                  model.set('show_substructure_highlighting', @getMeta('show_substructure_highlighting'))
+
+              @resetMeta(@getMeta('total_records'), @getMeta('total_records'))
+              @reset(modelsInCache)
+              @trigger('do-repaint')
+              console.log 'there is cache!!!, not requesting'
+              return
+
         @fetch(options=undefined, testMode)
 
      # tells if the current page is the las page
@@ -479,6 +503,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (comparator) ->
+      @resetCache() unless not @getMeta('enable_collection_caching')
       columns = @getAllColumns()
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
@@ -664,6 +689,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @DOWNLOADED_ITEMS_ARE_VALID = true
       @DOWNLOAD_ERROR_STATE = false
       @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
+      # If the downloaded items are all of the collection use them as cache
+      if @getMeta('enable_collection_caching') and not @getMeta('disable_cache_on_download')
+        if @allResults?
+          i = 0
+          for obj in @allResults
+            ModelType = @getMeta('model')
+            model = new ModelType(obj)
+            # trick to make sure parsed attributes such as img are created.
+            model.set(model.parse(model.attributes))
+            @addObjectToCache(model, i)
+            i++
 
     removeHolesInAllResults: ->
       i = 0
