@@ -93,7 +93,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if $hoveredElem.attr('data-qtip-configured') == 'yes'
           return
 
-        chemblID = compound.get('id')
+        chemblID = compound.id
         miniRepCardID = 'BCK-MiniReportCard-' + chemblID
         $qtipContent = $('#' + miniRepCardID)
         if $qtipContent.length == 0
