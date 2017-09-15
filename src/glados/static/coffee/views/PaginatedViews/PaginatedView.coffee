@@ -433,14 +433,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         #TODO: complete this function!
   
       $win.scroll _.throttle(pinUnpinTableHeader, 200)
-
-    fillZoomContainer: ->
-
-      $zoomBtnsContainer = @$zoomControlsContainer
-      glados.Utils.fillContentForElement $zoomBtnsContainer,
-        disable_zoom_in: @mustDisableZoomIn()
-        disable_reset: @mustDisableReset()
-        disable_zoom_out: @mustDisableZoomOut()
   
     fillPaginators: ->
   

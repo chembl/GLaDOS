@@ -1,6 +1,14 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
   CardZoomFunctions:
 
+    fillZoomContainer: ->
+
+      $zoomBtnsContainer = @$zoomControlsContainer
+      glados.Utils.fillContentForElement $zoomBtnsContainer,
+        disable_zoom_in: @mustDisableZoomIn()
+        disable_reset: @mustDisableReset()
+        disable_zoom_out: @mustDisableZoomOut()
+
     zoomIn: ->
 
       isDisabled = @$zoomControlsContainer.find('.BCK-zoom-in').hasClass('disabled')
