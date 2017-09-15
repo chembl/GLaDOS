@@ -223,6 +223,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if @isInfinite()
           @destroyAllWaypoints()
 
+        if (@isCards() or @isInfinite()) and @hasCustomElementView()
+          @sleepCustomElementviews()
+
       wakeUpView: ->
         @collection.setPage(1)
 

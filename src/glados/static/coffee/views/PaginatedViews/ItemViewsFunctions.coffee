@@ -13,4 +13,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @customItemViewsContainer.push newView
 
+    sleepCustomElementviews: ->
+
+      for view in @customItemViewsContainer
+
+        view.sleep() unless not view.sleep?
+
 

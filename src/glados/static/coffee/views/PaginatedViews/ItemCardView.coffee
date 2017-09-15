@@ -121,4 +121,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
           {hide_img:true}, fetchModel=false)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Sleep view
+    # ------------------------------------------------------------------------------------------------------------------
+    destroyAllTooltips: ->
 
+      $elemsWithToolTip = $(@el).find('[data-qtip-configured=yes]')
+      $elemsWithToolTip.each (index, elem) ->
+        $(elem).qtip('destroy', true)
+        $(elem).attr('data-qtip-configured', null )
+
+    sleep: ->
+
+      @destroyAllTooltips()
