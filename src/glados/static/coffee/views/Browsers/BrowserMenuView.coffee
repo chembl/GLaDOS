@@ -231,8 +231,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $('#' + viewElementID).show()
       # wake up the view if necessary
-      if @allViewsPerType[viewType].wakeUpView?
-        @allViewsPerType[viewType].wakeUpView()
+      @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
 
       currentView = @allViewsPerType[viewType]
 
@@ -259,8 +258,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     hideView: (viewType) ->
 
-      if @allViewsPerType[viewType].sleepView?
-          @allViewsPerType[viewType].sleepView()
+      @allViewsPerType[viewType].sleepView() unless not @allViewsPerType[viewType].sleepView?
 
       viewElementID = @viewContainerID + '-' + viewType
       $('#' + viewElementID).hide()
