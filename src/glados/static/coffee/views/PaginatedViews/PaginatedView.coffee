@@ -66,7 +66,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if (@isCards() or @isInfinite())\
       and (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
-        @createDeferredStructuresContainer()
+        @createDeferredViewsContainer()
 
       @numVisibleColumnsList = []
       if @renderAtInit
@@ -169,10 +169,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
         @clearContentForInfinite()
-        @cleanUpDeferredElementsContainer()
+        @cleanUpDeferredViewsContainer()
       else if not @isInfinite()
         @clearContentContainer()
-        @cleanUpDeferredElementsContainer()
+        @cleanUpDeferredViewsContainer()
 
       @fillTemplates()
 
@@ -404,22 +404,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and \
           (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-            @createDeferredSctructureView(model, $newItemElem)
+            @createDeferredView(model, $newItemElem)
 
           @fixCardHeight($appendTo)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Deferred Structures
     #-------------------------------------------------------------------------------------------------------------------
-    createDeferredStructuresContainer: -> @deferredStructuresContainer = []
-    cleanUpDeferredElementsContainer: -> @createDeferredStructuresContainer()
+    createDeferredViewsContainer: -> @deferredStructuresContainer = []
+    cleanUpDeferredViewsContainer: -> @createDeferredViewsContainer()
 
-    createDeferredSctructureView: (model, $newItemElem) ->
+    createDeferredView: (model, $newItemElem) ->
       dfsView = new glados.views.Compound.DeferredStructureView
         model: model
         el: $newItemElem.find('.BCK-image')
 
-      @deferredStructuresContainer.push
+      @deferredStructuresContainer.push dfsView
       dfsView.showCorrectImage()
 
     checkIfTableNeedsToScroll: ->

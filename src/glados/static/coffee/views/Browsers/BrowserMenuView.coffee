@@ -225,6 +225,7 @@ glados.useNameSpace 'glados.views.Browsers',
           custom_render_evts: undefined
           render_at_init: true
           zoom_controls_container: @toolBarView.getZoomControlsContainer()
+          special_structures_toggler: @toolBarView.getSpecialStructureControlsContainer()
 
         @allViewsPerType[viewType] = newView
 
