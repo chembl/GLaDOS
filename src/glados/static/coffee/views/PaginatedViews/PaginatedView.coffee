@@ -71,6 +71,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
           @createDeferredViewsContainer()
 
+        if (@isCards() or @isInfinite()) and @hasCustomElementView()
+          @createCustomItemViewsContainer()
+
         @numVisibleColumnsList = []
         if @renderAtInit
           @render()
@@ -174,7 +177,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @cleanUpDeferredViewsContainer()
         else if not @isInfinite()
           @clearContentContainer()
-          @cleanUpDeferredViewsContainer()
+
+          if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
+            @cleanUpDeferredViewsContainer()
+
+          if (@isCards() or @isInfinite()) and @hasCustomElementView()
+            @cleanUpCustomItemViewsContainer()
 
         @fillTemplates()
 
