@@ -324,8 +324,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
               model: model
               el: $newItemElem
 
-          if templateParams.img_url? and \
-          (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+          if templateParams.img_url? and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
 
             @createDeferredView(model, $newItemElem)
 
