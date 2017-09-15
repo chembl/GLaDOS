@@ -97,6 +97,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $toggler = $(event.currentTarget)
       checked = $toggler.prop('checked')
-      @collection.toggleShowSpecialStructure(checked)
+      @browserView.toggleShowSpecialStructure(checked)
 
 

@@ -273,4 +273,10 @@ glados.useNameSpace 'glados.views.Browsers',
     zoomOut: -> @getCurrentViewInstance().zoomOut()
     resetZoom: -> @getCurrentViewInstance().resetZoom()
 
+    #--------------------------------------------------------------------------------------
+    # Deferred Structures
+    #--------------------------------------------------------------------------------------
+    toggleShowSpecialStructure: (checked) -> @getCurrentViewInstance().toggleShowSpecialStructure(checked)
+
+
 
