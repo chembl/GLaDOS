@@ -2,7 +2,7 @@
 # to get the functionality for handling the pagination.
 # this way allows to easily handle multiple inheritance in the models.
 glados.useNameSpace 'glados.views.PaginatedViews',
-  PaginatedView: Backbone.View.extend
+  PaginatedView: Backbone.View.extend(glados.views.PaginatedViews.DeferredViewsFunctions).extend
   
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation
@@ -407,20 +407,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             @createDeferredView(model, $newItemElem)
 
           @fixCardHeight($appendTo)
-
-    #-------------------------------------------------------------------------------------------------------------------
-    # Deferred Structures
-    #-------------------------------------------------------------------------------------------------------------------
-    createDeferredViewsContainer: -> @deferredStructuresContainer = []
-    cleanUpDeferredViewsContainer: -> @createDeferredViewsContainer()
-
-    createDeferredView: (model, $newItemElem) ->
-      dfsView = new glados.views.Compound.DeferredStructureView
-        model: model
-        el: $newItemElem.find('.BCK-image')
-
-      @deferredStructuresContainer.push dfsView
-      dfsView.showCorrectImage()
 
     checkIfTableNeedsToScroll: ->
 
