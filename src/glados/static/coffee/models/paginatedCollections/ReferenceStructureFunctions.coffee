@@ -40,20 +40,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model.set('reference_smiles_error', true)
         model.set('reference_smiles_error_jqxhr', jqXHR)
 
-    toggleShowSpecialStructure: (active) ->
-
-      if @getMeta('enable_similarity_maps')
-        @showStructurePropNameCol = 'show_similarity_maps'
-        @showStructurePropNameModel = 'show_similarity_map'
-
-      else if @getMeta('enable_substructure_highlighting')
-        @showStructurePropNameCol = @showStructurePropNameModel = 'show_substructure_highlighting'
-
-      active ?= not @getMeta(@showStructurePropNameCol)
-      @setMeta(@showStructurePropNameCol, active)
-      for model in @models
-        model.set(@showStructurePropNameModel, active)
-
     # ------------------------------------------------------------------------------------------------------------------
     # General Error Handling
     # ------------------------------------------------------------------------------------------------------------------
