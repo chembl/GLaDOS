@@ -2,7 +2,7 @@
 # to get the functionality for handling the pagination.
 # this way allows to easily handle multiple inheritance in the models.
 glados.useNameSpace 'glados.views.PaginatedViews',
-  PaginatedView: Backbone.View.extend
+  PaginatedView: Backbone.View.extend(glados.views.PaginatedViews.DeferredViewsFunctions).extend
   
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation
@@ -63,6 +63,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
+
+      @$specialStructuresTogglerContainer = arguments[0].special_structures_toggler
+      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
+        @createDeferredViewsContainer()
 
       @numVisibleColumnsList = []
       if @renderAtInit
@@ -165,8 +169,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         # always clear the infinite container when receiving the first page, to avoid
         # showing results from previous delayed requests.
         @clearContentForInfinite()
+        @cleanUpDeferredViewsContainer()
       else if not @isInfinite()
         @clearContentContainer()
+        @cleanUpDeferredViewsContainer()
 
       @fillTemplates()
 
@@ -178,6 +184,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if (@isCards() or @isInfinite()) and @collection.getMeta('enable_cards_zoom')
         @fillZoomContainer()
+
+      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
+        @renderSpecialStructuresToggler()
 
       @fillPaginators()
       @fillPageSizeSelectors()
@@ -364,6 +373,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $specificElemContainer.append($(header_row_cont))
         # make sure that the rows are appended to the tbody, otherwise the striped class won't work
         $specificElemContainer.append($('<tbody>'))
+        $specificElemContainer.append($('<tbody>'))
 
 
       for item in @collection.getCurrentPage()
@@ -397,11 +407,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and \
           (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
 
-            new glados.views.Compound.DeferredStructureView
-              model: model
-              el: $newItemElem.find('.BCK-image')
+            @createDeferredView(model, $newItemElem)
 
-          @fixCardHeight($appendTo)
+      @fixCardHeight($appendTo)
 
     checkIfTableNeedsToScroll: ->
 
