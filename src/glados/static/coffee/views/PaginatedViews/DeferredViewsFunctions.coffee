@@ -11,3 +11,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @deferredStructuresContainer.push dfsView
       dfsView.showCorrectImage()
+
+    renderSpecialStructuresToggler: ->
+
+      if @hasSimilarityMapsEnabled()
+
+        @showStructurePropNameCol = 'show_similarity_maps'
+        glados.Utils.fillContentForElement @$specialStructuresTogglerContainer,
+          title: 'Similarity Maps'
+          checked: @collection.getMeta(@showStructurePropNameCol)
+
+      else if @hasStructureHighlightingEnabled()
+
+        @showStructurePropNameCol = 'show_substructure_highlighting'
+        glados.Utils.fillContentForElement @$specialStructuresTogglerContainer,
+          title: 'Highlight'
+          checked: @collection.getMeta(@showStructurePropNameCol)
+
+    hasStructureHighlightingEnabled: -> @collection.getMeta('enable_substructure_highlighting')
+    hasSimilarityMapsEnabled: -> @collection.getMeta('enable_similarity_maps')

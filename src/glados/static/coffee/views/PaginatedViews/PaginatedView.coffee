@@ -64,8 +64,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
 
-      if (@isCards() or @isInfinite())\
-      and (@collection.getMeta('enable_similarity_maps') or @collection.getMeta('enable_substructure_highlighting'))
+      @$specialStructuresTogglerContainer = arguments[0].special_structures_toggler
+      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
         @createDeferredViewsContainer()
 
       @numVisibleColumnsList = []
@@ -184,6 +184,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if (@isCards() or @isInfinite()) and @collection.getMeta('enable_cards_zoom')
         @fillZoomContainer()
+
+      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
+        @renderSpecialStructuresToggler()
 
       @fillPaginators()
       @fillPageSizeSelectors()
