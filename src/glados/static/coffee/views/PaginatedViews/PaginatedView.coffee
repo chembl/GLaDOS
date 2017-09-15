@@ -409,7 +409,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
             @createDeferredView(model, $newItemElem)
 
-          @fixCardHeight($appendTo)
+      @fixCardHeight($appendTo)
 
     checkIfTableNeedsToScroll: ->
 
