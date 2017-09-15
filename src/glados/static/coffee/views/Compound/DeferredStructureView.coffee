@@ -2,6 +2,9 @@ glados.useNameSpace 'glados.views.Compound',
   DeferredStructureView: Backbone.View.extend
     initialize: ->
 
+      @showSpecialStructure = arguments[0].show_special_structure
+      @showSpecialStructure ?= false
+
       @initPreloader()
       @initErrorMessagesContainer()
       @$image = $(@el).find('img.BCK-main-image')
@@ -12,27 +15,22 @@ glados.useNameSpace 'glados.views.Compound',
         @initSimilarityMode()
         @model.on glados.Events.Compound.SIMILARITY_MAP_READY, @showCorrectImage, @
         @model.on glados.Events.Compound.SIMILARITY_MAP_ERROR, @showCorrectImage, @
-        @model.on 'change:show_similarity_map', @showCorrectImage, @
 
       if @model.get('enable_substructure_highlighting')
 
         @initSubstructureHighlightMode()
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR, @showCorrectImage, @
         @model.on glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY, @showCorrectImage, @
-        @model.on 'change:show_substructure_highlighting', @showCorrectImage, @
-
-      @showCorrectImage()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Mode initialisation
     #-------------------------------------------------------------------------------------------------------------------
     initSimilarityMode: ->
-      @showStructurePropNameCol = 'show_similarity_map'
       @loadingStructurePropName = 'loading_similarity_map'
       @base64ImgPropName = 'similarity_map_base64_img'
 
     initSubstructureHighlightMode: ->
-      @showStructurePropNameCol = 'show_substructure_highlighting'
+
       @loadingStructurePropName = 'loading_substructure_highlight'
       @base64ImgPropName = 'substructure_highlight_base64_img'
 
@@ -83,7 +81,7 @@ glados.useNameSpace 'glados.views.Compound',
     # Here I read the status of the object and act accordingly.
     showCorrectImage: ->
 
-      if @model.get(@showStructurePropNameCol)
+      if @showSpecialStructure
         if @model.get(@loadingStructurePropName)
           @showPreloader()
         else if @model.get('reference_smiles_error')
@@ -108,4 +106,6 @@ glados.useNameSpace 'glados.views.Compound',
       @$specialStructImage.show()
       @hidePreloader()
       @hideErrorMessagesContainer()
+
+    setShowSpecialStructure: (show) -> @showSpecialStructure = show
 
