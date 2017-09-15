@@ -7,8 +7,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     createCustomElementView: (model, $newItemElem) ->
 
       CustomElementView = @collection.getMeta('custom_cards_item_view')
-      new CustomElementView
+      newView = new CustomElementView
         model: model
         el: $newItemElem
+
+      @customItemViewsContainer.push newView
 
 
