@@ -174,15 +174,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           # always clear the infinite container when receiving the first page, to avoid
           # showing results from previous delayed requests.
           @clearContentForInfinite()
-          @cleanUpDeferredViewsContainer()
+
+          if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+              @cleanUpDeferredViewsContainer()
+
+          if @hasCustomElementView()
+            @cleanUpCustomItemViewsContainer()
+
         else if not @isInfinite()
           @clearContentContainer()
 
-          if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
-            @cleanUpDeferredViewsContainer()
+          if @isCards()
 
-          if (@isCards() or @isInfinite()) and @hasCustomElementView()
-            @cleanUpCustomItemViewsContainer()
+            if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+              @cleanUpDeferredViewsContainer()
+
+            if @hasCustomElementView()
+              @cleanUpCustomItemViewsContainer()
 
         @fillTemplates()
 

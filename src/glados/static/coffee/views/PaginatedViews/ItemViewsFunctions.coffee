@@ -10,3 +10,5 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       new CustomElementView
         model: model
         el: $newItemElem
+
+
