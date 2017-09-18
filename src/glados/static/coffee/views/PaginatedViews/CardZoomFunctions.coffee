@@ -1,6 +1,34 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
   CardZoomFunctions:
 
+    POSSIBLE_CARD_SIZES_STRUCT:
+        1:
+          previous: 1
+          next: 2
+        2:
+          previous: 1
+          next: 3
+        3:
+          previous: 2
+          next: 4
+        4:
+          previous: 3
+          next: 6
+        6:
+          previous: 4
+          next: 12
+        12:
+          previous: 6
+          next: 12
+
+    getPreviousSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].previous
+    getNextSize: (currentSize) -> @POSSIBLE_CARD_SIZES_STRUCT[currentSize].next
+
+    DEFAULT_CARDS_SIZES:
+      small: 12
+      medium: 6
+      large: 3
+
     fillZoomContainer: ->
 
       $zoomBtnsContainer = @$zoomControlsContainer
