@@ -52,6 +52,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if (@isCards() or @isInfinite()) and @hasCustomElementView()
           @createCustomItemViewsContainer()
 
+        @initAvailablePageSizes()
+
         @numVisibleColumnsList = []
         if @renderAtInit
           @render()
@@ -820,7 +822,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         currentPageSize = @collection.getMeta('page_size')
         pageSizesItems = []
 
-        for size in @collection.getMeta('available_page_sizes')
+        for size in @AVAILABLE_PAGE_SIZES
           item = {}
           item.number = size
           item.is_selected = currentPageSize == size
