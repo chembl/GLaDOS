@@ -81,7 +81,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
     # ------------------------------------------------------------------------------------------------------------------
+    destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
+
     renderTabs: ->
+      @destroyAllTooltips()
       # Always generate chips for the results summary
       chipStruct = []
       # Includes an All Results chip to go back to the general results

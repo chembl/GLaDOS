@@ -61,6 +61,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if isDisabled
         return
 
+
       @CURRENT_CARD_SIZES =
         small: @getPreviousSize(@CURRENT_CARD_SIZES.small)
         medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)

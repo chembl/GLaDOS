@@ -143,6 +143,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if not $(@el).is(":visible")
           return
 
+        glados.Utils.Tooltips.destroyAllTooltips($(@el))
+
         isDefault = @mustDisableReset()
         mustComplicate = @collection.getMeta('complicate_cards_view')
         @isComplicated = isDefault and mustComplicate
