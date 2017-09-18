@@ -34,46 +34,12 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     structures = @get('molecule_structures')
     if not structures?
       return
-    mySmiles = structures.canonical_smiles
 
     referenceSmiles = @get('reference_smiles')
     if not referenceSmiles?
       return
 
-    url = Compound.SMILES_2_SIMILARITY_MAP_URL
-    data = referenceSmiles + '\n' + mySmiles
-
-    thisModel = @
-
-    getImageDataXHR = new XMLHttpRequest()
-    getImageDataXHR.onreadystatechange = ->
-      if (@readyState == 4 and @status == 200)
-        fr = new FileReader()
-        fr.readAsDataURL(@response)
-        fr.onload = ->
-
-          thisModel.set
-            loading_similarity_map: false
-            similarity_map_base64_img: @result
-            reference_smiles_error: false
-            reference_smiles_error_jqxhr: undefined
-          ,
-            silent: true
-
-          thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_READY
-
-      else
-        thisModel.set
-          reference_smiles_error: true
-          reference_smiles_error_jqxhr: @
-        ,
-          silent: true
-
-        thisModel.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
-
-    getImageDataXHR.open('POST', url)
-    getImageDataXHR.responseType = 'blob'
-    getImageDataXHR.send(data)
+    @downloadSimilaritySVG()
 
   loadStructureHighlight: ->
 
@@ -96,16 +62,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     model = @
     downloadHighlighted = ->
-      model.downloadHighlightedSVG().then ->
-        base64SVG = model.get('highlighted_svg_base64')
-        model.set
-          loading_substructure_highlight: false
-          substructure_highlight_base64_img: 'data:image/svg+xml;base64,'+base64SVG
-          reference_smiles_error: false
-          reference_smiles_error_jqxhr: undefined
-        ,
-          silent: true
-        model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY
+      model.downloadHighlightedSVG()
 
     @download2DSDF().then ->
       model.downloadAlignedSDF().then downloadHighlighted, downloadHighlighted
@@ -192,20 +149,87 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     return response;
 
   #---------------------------------------------------------------------------------------------------------------------
+  # Similarity
+  #---------------------------------------------------------------------------------------------------------------------
+
+  downloadSimilaritySVG: ()->
+    @set
+      reference_smiles_error: false
+      download_similarity_map_error: false
+    ,
+      silent: true
+    model = @
+    promiseFunc = (resolve, reject)->
+      referenceSmiles = model.get('reference_smiles')
+      structures = model.get('molecule_structures')
+      if not referenceSmiles?
+        reject('Error, there is no reference SMILES PRESENT!')
+        return
+      if not structures?
+        reject('Error, the compound does not have structures data!')
+        return
+      mySmiles = structures.canonical_smiles
+      if not mySmiles?
+        reject('Error, the compound does not have SMILES data!')
+        return
+
+      if model.get('similarity_map_base64_img')?
+        resolve(model.get('similarity_map_base64_img'))
+      else
+        formData = new FormData()
+        formData.append('file', new Blob([referenceSmiles+'\n'+mySmiles], {type: 'chemical/x-daylight-smiles'}), 'sim.smi')
+#        formData.append('fingerprint', referenceSmiles)
+        formData.append('format', 'svg')
+        ajax_deferred = $.post
+          url: Compound.SMILES_2_SIMILARITY_MAP_URL
+          data: formData
+          enctype: 'multipart/form-data'
+          processData: false
+          contentType: false
+          cache: false
+          converters:
+            'text xml': String
+        ajax_deferred.done (ajaxData)->
+          model.set
+            loading_similarity_map: false
+            similarity_map_base64_img: 'data:image/svg+xml;base64,'+btoa(ajaxData)
+            reference_smiles_error: false
+            reference_smiles_error_jqxhr: undefined
+          ,
+            silent: true
+
+          model.trigger glados.Events.Compound.SIMILARITY_MAP_READY
+          resolve(ajaxData)
+        ajax_deferred.fail (jqxhrError)->
+          reject(jqxhrError)
+    promise = new Promise(promiseFunc)
+    promise.then null, (jqxhrError)->
+      model.set
+        download_similarity_map_error: true
+        loading_similarity_map: false
+        reference_smiles_error: true
+        reference_smiles_error_jqxhr: jqxhrError
+      ,
+        silent: true
+
+      model.trigger glados.Events.Compound.SIMILARITY_MAP_ERROR
+    return promise
+
+  #---------------------------------------------------------------------------------------------------------------------
   # Highlighting
   #---------------------------------------------------------------------------------------------------------------------
 
   downloadAlignedSDF: ()->
     @set
-      'reference_smiles_error': false
+#      'reference_smiles_error': false
       'download_aligned_error': false
     ,
       silent: true
     model = @
     promiseFunc = (resolve, reject)->
-      referenceCtab = model.get('reference_ctab')
+      referenceCTAB = model.get('reference_ctab')
       sdf2DData = model.get('sdf2DData')
-      if not referenceCtab?
+      if not referenceCTAB?
         reject('Error, the reference CTAB is not present!')
         return
       if not sdf2DData?
@@ -217,7 +241,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       else
         formData = new FormData()
         sdf2DData = sdf2DData+'$$$$\n'
-        templateBlob = new Blob([referenceCtab], {type: 'chemical/x-mdl-molfile'})
+        templateBlob = new Blob([referenceCTAB], {type: 'chemical/x-mdl-molfile'})
         ctabBlob = new Blob([sdf2DData+sdf2DData], {type: 'chemical/x-mdl-sdfile'})
         formData.append('template', templateBlob, 'pattern.mol')
         formData.append('ctab', ctabBlob, 'mcs.sdf')
@@ -265,8 +289,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         reject('Error, the compound '+model.get('molecule_chembl_id')+' ALIGNED CTAB is not present!')
         return
 
-      if model.get('highlighted_svg')?
-        resolve(model.get('highlighted_svg'))
+      if model.get('substructure_highlight_base64_img')?
+        resolve(model.get('substructure_highlight_base64_img'))
       else
         formData = new FormData()
         formData.append('file', new Blob([alignedSdf], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
@@ -283,17 +307,24 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           converters:
             'text xml': String
         ajax_deferred.done (ajaxData)->
-          model.set('highlighted_svg_base64', btoa(ajaxData))
+          model.set
+            loading_substructure_highlight: false
+            substructure_highlight_base64_img: 'data:image/svg+xml;base64,'+btoa(ajaxData)
+            reference_smiles_error: false
+            reference_smiles_error_jqxhr: undefined
+          ,
+            silent: true
+          model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_READY
           resolve(ajaxData)
         ajax_deferred.fail (jqxhrError)->
           reject(jqxhrError)
     promise = new Promise(promiseFunc)
     promise.then null, (jqxhrError)->
-      model.set('reference_smiles_error_jqxhr', jqxhrError)
       model.set
-        'loading_substructure_highlight': false
-        'download_highlighted_error': true
-        'reference_smiles_error': true
+        loading_substructure_highlight: false
+        download_highlighted_error: true
+        reference_smiles_error: true
+        reference_smiles_error_jqxhr: jqxhrError
       model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
     return promise
 
