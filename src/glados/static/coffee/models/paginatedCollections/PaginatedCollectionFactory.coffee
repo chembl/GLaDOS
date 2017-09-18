@@ -61,6 +61,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             data_loaded: false
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
             disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
+            custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

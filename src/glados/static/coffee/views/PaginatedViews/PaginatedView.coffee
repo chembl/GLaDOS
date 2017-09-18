@@ -62,6 +62,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if @collection.getMeta('custom_default_card_sizes')?
           @DEFAULT_CARDS_SIZES = @collection.getMeta('custom_default_card_sizes')
 
+        if @collection.getMeta('custom_possible_card_sizes_struct')?
+          @POSSIBLE_CARD_SIZES_STRUCT = @collection.getMeta('custom_possible_card_sizes_struct')
+
+
         @CURRENT_CARD_SIZES =
           small: @DEFAULT_CARDS_SIZES.small
           medium: @DEFAULT_CARDS_SIZES.medium
