@@ -187,7 +187,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @renderSpecialStructuresToggler()
 
         @fillPaginators()
-        @fillPageSizeSelectors()
+        if not @isCarousel()
+          @fillPageSizeSelectors()
         @activateSelectors()
         @showPaginatedViewContent()
 
