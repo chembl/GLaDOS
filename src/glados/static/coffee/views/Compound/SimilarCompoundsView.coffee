@@ -8,7 +8,7 @@ SimilarCompoundsView = CardView.extend
     @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
     @resource_type = 'Compound'
 
-    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewCardsPaginatedView(@collection, @el)
+    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewCardsCarouselView(@collection, @el)
 
     @initEmbedModal('similar')
     @activateModals()

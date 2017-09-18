@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [5, 10, 20, 50, 100]
-      
+
     getPageEvent: (event) ->
 
       clicked = $(event.currentTarget)
