@@ -55,16 +55,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
 
     isCards: ()->
-      return @type == glados.views.PaginatedViews.PaginatedView.CARDS_TYPE
+      return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
 
     isCarousel: ()->
-      return @type == glados.views.PaginatedViews.PaginatedView.CAROUSEL_TYPE
+      return @type == glados.views.PaginatedViews.PaginatedViewFactory.CAROUSEL_TYPE
 
     isInfinite: ()->
-      return @type == glados.views.PaginatedViews.PaginatedView.INFINITE_TYPE
+      return @type == glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE
 
     isTable: ()->
-      return @type == glados.views.PaginatedViews.PaginatedView.TABLE_TYPE
+      return @type == glados.views.PaginatedViews.PaginatedViewFactory.TABLE_TYPE
 
     # ------------------------------------------------------------------------------------------------------------------
     # events

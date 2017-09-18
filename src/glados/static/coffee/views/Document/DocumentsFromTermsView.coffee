@@ -4,7 +4,7 @@ DocumentsFromTermsView = Backbone.View.extend
   initialize: ->
     @collection.on 'sync', @.render, @
     @isInfinite = true
-    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewInfinitePaginatedView(@collection, @el, 'do-repaint')
+    @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(@collection, @el, 'do-repaint')
 
   render: ->
 
