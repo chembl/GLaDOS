@@ -1,12 +1,13 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
   PaginationFunctions:
 
+    initPageNumber: -> @currentPageNum = 1
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [5, 10, 20, 50, 100]
       @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
 
     requestCurrentPage: ->
-      @collection.setPage(1, doFetch=true, testMode=false, customPageSize=@currentPageSize)
+      @collection.setPage(@currentPageNum, doFetch=true, testMode=false, customPageSize=@currentPageSize)
 
     getPageEvent: (event) ->
 
@@ -35,6 +36,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if pageNum > totalPages
         return
 
+      @currentPageNum = parseInt(pageNum)
       @collection.setPage(pageNum)
 
 

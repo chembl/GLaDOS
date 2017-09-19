@@ -34,7 +34,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.getMeta('custom_possible_card_sizes_struct')?
         @POSSIBLE_CARD_SIZES_STRUCT = @collection.getMeta('custom_possible_card_sizes_struct')
 
-
       @CURRENT_CARD_SIZES =
         small: @DEFAULT_CARDS_SIZES.small
         medium: @DEFAULT_CARDS_SIZES.medium
@@ -48,6 +47,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @createCustomItemViewsContainer()
 
       @initAvailablePageSizes()
+      @initPageNumber()
 
       @numVisibleColumnsList = []
       if @renderAtInit
@@ -141,7 +141,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not $(@el).is(":visible")
         return
 
-      if @collection.getMeta('page_size') != @currentPageSize
+      #Make sure I am rendering the correct page
+      if (@collection.getMeta('page_size') != @currentPageSize)\
+      or (@collection.getMeta('current_page') != @currentPageNum)
         @requestCurrentPage()
 
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
@@ -207,10 +209,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if (@isCards() or @isInfinite()) and @hasCustomElementView()
         @sleepCustomElementviews()
 
-    wakeUpView: ->
-      console.log 'WAKING UP VIEW: ', @type
-      console.log 'with page size: ', @currentPageSize
-      @collection.setPage(1, doFetch=true, testMode=false, customPageSize=@currentPageSize)
+    wakeUpView: -> @requestCurrentPage()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
