@@ -7,16 +7,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   WSPaginatedCollection: Backbone.Collection.extend
 
     # ------------------------------------------------------------------------------------------------------------------
-    # change page size when it is a carousel
-    # ------------------------------------------------------------------------------------------------------------------
-    responsivisePageSize: ->
-      return
-      resetPageSizeProxy = $.proxy(@resetPageSize, @)
-      $(window).resize ->
-        if GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED
-          resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-
-    # ------------------------------------------------------------------------------------------------------------------
     # URL handling
     # ------------------------------------------------------------------------------------------------------------------
     initialiseUrl: ->
