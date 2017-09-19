@@ -124,13 +124,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Sleep view
     # ------------------------------------------------------------------------------------------------------------------
-    destroyAllTooltips: ->
-
-      $elemsWithToolTip = $(@el).find('[data-qtip-configured=yes]')
-      $elemsWithToolTip.each (index, elem) ->
-        $(elem).qtip('destroy', true)
-        $(elem).attr('data-qtip-configured', null )
-
+    destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
     sleep: ->
-
       @destroyAllTooltips()

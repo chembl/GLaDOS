@@ -4,9 +4,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
     DEFAULT_RESULTS_VIEWS_BY_TYPE:
       'Graph': glados.views.SearchResults.ESResultsGraphView
-      'Table': glados.views.PaginatedViews.PaginatedView.getTableConstructor()
-      'Cards': glados.views.PaginatedViews.PaginatedView.getCardsConstructor()
-      'Infinite': glados.views.PaginatedViews.PaginatedView.getInfiniteConstructor()
+      'Table': glados.views.PaginatedViews.PaginatedViewFactory.getTableConstructor()
+      'Cards': glados.views.PaginatedViews.PaginatedViewFactory.getCardsConstructor()
+      'Infinite': glados.views.PaginatedViews.PaginatedViewFactory.getInfiniteConstructor()
       'Bioactivity': glados.views.SearchResults.ESResultsBioactivitySummaryView
 
     events:

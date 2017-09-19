@@ -182,12 +182,7 @@ glados.useNameSpace 'glados.views.Browsers',
       thisView = @
       $histogramsContainers.each((i) ->thisView.initHistogram($(@)))
 
-    destroyAllTooltips: ->
-
-      $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
-      $elemsWithToolTip.each (index, elem) ->
-        $(elem).qtip('destroy', true)
-        $(elem).attr('data-qtip-configured', null )
+    destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     render: ->
 
@@ -380,7 +375,7 @@ glados.useNameSpace 'glados.views.Browsers',
             classes:'matrix-qtip qtip-light qtip-shadow'
 
         $frontBar.qtip qtipConfig
-        $frontBar.attr('data-qtip-configured', true )
+        $frontBar.attr('data-qtip-configured', 'yes' )
 
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection

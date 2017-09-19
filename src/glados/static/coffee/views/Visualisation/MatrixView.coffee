@@ -95,12 +95,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $messagesElement.show()
 
-  destroyAllTooltips: ->
-
-    $elemsWithToolTip = $(@el).find('[data-qtip-configured=true]')
-    $elemsWithToolTip.each (index, elem) ->
-      $(elem).qtip('destroy', true)
-      $(elem).attr('data-qtip-configured', null )
+  destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
   clearVisualisation: ->
 
@@ -1018,7 +1013,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $clickedElem.qtip qtipConfig
 
       $clickedElem.qtip('api').show()
-      $clickedElem.attr('data-qtip-configured', true)
+      $clickedElem.attr('data-qtip-configured', 'yes')
 
       $newMiniReportCardContainer = $('#' + miniRepCardID)
 
