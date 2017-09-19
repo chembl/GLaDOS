@@ -180,6 +180,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('file', new Blob([referenceSmiles+'\n'+mySmiles], {type: 'chemical/x-daylight-smiles'}), 'sim.smi')
 #        formData.append('fingerprint', referenceSmiles)
         formData.append('format', 'svg')
+        formData.append('height', '500')
+        formData.append('width', '500')
         ajax_deferred = $.post
           url: Compound.SMILES_2_SIMILARITY_MAP_URL
           data: formData
