@@ -282,7 +282,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #this list is to get the alternate forms of a compound
     getNewAlternateFormsListForCarousel: ->
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.COMPOUND_WS_RESULTS_LIST_CAROUSEL
-      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+#      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
       list = @getNewWSCollectionFor config
       list.responsivisePageSize()
 
