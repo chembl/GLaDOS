@@ -141,6 +141,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not $(@el).is(":visible")
         return
 
+      if @collection.getMeta('page_size') != @currentPageSize
+        @requestCurrentPage()
+
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
       isDefault = @mustDisableReset()
@@ -205,7 +208,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @sleepCustomElementviews()
 
     wakeUpView: ->
-      @collection.setPage(1)
+      console.log 'WAKING UP VIEW: ', @type
+      console.log 'with page size: ', @currentPageSize
+      @collection.setPage(1, doFetch=true, testMode=false, customPageSize=@currentPageSize)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates

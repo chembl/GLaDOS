@@ -3,6 +3,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [5, 10, 20, 50, 100]
+      @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+
+    requestCurrentPage: ->
+      @collection.setPage(1, doFetch=true, testMode=false, customPageSize=@currentPageSize)
 
     getPageEvent: (event) ->
 
@@ -59,11 +63,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
       selector = $(event.currentTarget)
-      new_page_size = selector.val()
+      newPageSize = selector.val()
       # this is an issue with materialise, it fires 2 times the event, one of which has an empty value
-      if new_page_size == ''
+      if newPageSize == ''
         return
-      @collection.resetPageSize(new_page_size)
+
+      @currentPageSize = newPageSize
+      @collection.resetPageSize(newPageSize)
 
 
 
