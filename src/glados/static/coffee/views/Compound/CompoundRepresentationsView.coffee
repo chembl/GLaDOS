@@ -36,7 +36,7 @@ CompoundRepresentationsView = CardView.extend
     # View Raw button/link
     raw_modal = $(@el).find('#SDF-raw-modal')
     raw_modal_title = $(@el).find('#SDF-raw-modal-title')
-    raw_modal_content = $(@el).find('#SDF-raw-modal-content')
+    raw_modal_content = $(@el).find('.SDF-raw-modal-content')
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-rawview,#Reps-Molfile-rawview-small'), 'View Raw SDF File', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
         raw_modal_title.text(compound_model.get('molecule_chembl_id'))
