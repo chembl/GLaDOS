@@ -464,11 +464,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getCurrentPage: ->
       return @models
 
-    setPage: (newPageNum, doFetch=true, testMode=false) ->
+    setPage: (newPageNum, doFetch=true, testMode=false, customPageSize) ->
       console.log 'Getting Page: ', newPageNum
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
+        if customPageSize?
+          @setMeta('page_size', customPageSize)
 
         console.log 'cache activated? ', @getMeta('enable_collection_caching')
         if @getMeta('enable_collection_caching')

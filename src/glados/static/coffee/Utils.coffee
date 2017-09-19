@@ -247,6 +247,15 @@ glados.useNameSpace 'glados',
         return idAttribute + ':(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'
 
     Tooltips:
+      # removes all qtips from and element, the elements that have a tooltip must have the property
+      # data-qtip-configured set to 'yes'
+      destroyAllTooltips: ($elem) ->
+
+        $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes]')
+        $elemsWithToolTip.each (index, elem) ->
+          $(elem).qtip('destroy', true)
+          $(elem).attr('data-qtip-configured', null )
+
       getQltipSafePostion: ($jqueryElement, $tooltipContent=null) ->
         screenWidth = $( window ).width()
         screenHeight = $( window ).height()

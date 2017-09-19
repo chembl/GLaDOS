@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @activitiesSummarylist.on 'reset do-repaint sort', @handleVisualisationStatus, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
 
-      glados.views.PaginatedViews.PaginatedView.getNewTablePaginatedView(@activitiesSummarylist, 
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(@activitiesSummarylist,
         $(@el).find('.BCK-summary-table-container'), undefined, disableColumnsSelection=true, disableItemSelection=true)
 
       @handleVisualisationStatus()

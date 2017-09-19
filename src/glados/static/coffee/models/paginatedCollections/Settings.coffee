@@ -35,6 +35,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
+        POSSIBLE_CARD_SIZES_STRUCT:
+          1:
+            previous: 1
+            next: 2
+          2:
+            previous: 1
+            next: 4
+          3:
+            previous: 2
+            next: 4
+          4:
+            previous: 2
+            next: 6
+          6:
+            previous: 4
+            next: 12
+          12:
+            previous: 6
+            next: 12
+
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'

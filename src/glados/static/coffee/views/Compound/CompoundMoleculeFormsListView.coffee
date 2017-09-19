@@ -8,7 +8,7 @@ CompoundMoleculeFormsListView = CardView.extend
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
-    @paginatedView = glados.views.PaginatedViews.PaginatedView.getNewCardsPaginatedView(@collection, @el)
+    @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsPaginatedView(@collection, @el)
 
     @initEmbedModal('alternate_forms')
     @activateModals()
