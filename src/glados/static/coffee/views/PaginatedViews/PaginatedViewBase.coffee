@@ -1,7 +1,7 @@
 # This is a base object for the paginated tables, extend a view in backbone with this object
 # to get the functionality for handling the pagination.
 glados.useNameSpace 'glados.views.PaginatedViews',
-  PaginatedViewBase: Backbone.View.extend
+  PaginatedViewBase:
 
     # ------------------------------------------------------------------------------------------------------------------
     # Initialisation

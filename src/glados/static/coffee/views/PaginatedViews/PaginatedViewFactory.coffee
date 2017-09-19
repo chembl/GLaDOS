@@ -5,28 +5,32 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     INFINITE_TYPE: 'INFINITE_TYPE'
     TABLE_TYPE: 'TABLE_TYPE'
 
-    Cards: glados.views.PaginatedViews.PaginatedViewBase\
+    Cards: Backbone.View\
+      .extend(glados.views.PaginatedViews.PaginatedViewBase)\
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
       .extend(glados.views.PaginatedViews.CardZoomFunctions)\
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.PaginatedCards)
 
-    Carousel: glados.views.PaginatedViews.PaginatedViewBase\
+    Carousel: Backbone.View\
+      .extend(glados.views.PaginatedViews.PaginatedViewBase)\
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
       .extend(glados.views.PaginatedViews.CardZoomFunctions)\
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.Carousel)
 
-    Infinite: glados.views.PaginatedViews.PaginatedViewBase\
+    Infinite: Backbone.View\
+      .extend(glados.views.PaginatedViews.PaginatedViewBase)\
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
       .extend(glados.views.PaginatedViews.CardZoomFunctions)\
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
-      .extend(glados.views.PaginatedViews.InfiniteCard)
+      .extend(glados.views.PaginatedViews.InfiniteCards)
 
-    Table: glados.views.PaginatedViews.PaginatedViewBase\
+    Table: Backbone.View\
+      .extend(glados.views.PaginatedViews.PaginatedViewBase)\
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
       .extend(glados.views.PaginatedViews.CardZoomFunctions)\
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\

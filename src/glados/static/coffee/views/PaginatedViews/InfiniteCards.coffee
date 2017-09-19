@@ -4,3 +4,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [6, 12, 24, 48, 96]
       @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+
+    wakeUpView: ->
+      @currentPageNum = 1
+      glados.views.PaginatedViews.PaginatedViewBase.wakeUpView.call(@)
