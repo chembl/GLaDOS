@@ -62,7 +62,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
       minPageSize = @getMinimunPageSize()
-      console.log 'minPageSize: ', minPageSize
       @finishZoom(minPageSize)
 
     resetZoom: ->
@@ -77,7 +76,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         large: @DEFAULT_CARDS_SIZES.large
 
       minPageSize = @getMinimunPageSize()
-      console.log 'minPageSize: ', minPageSize
       @finishZoom(minPageSize)
 
     getMinimunPageSize: ->
