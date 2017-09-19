@@ -439,6 +439,14 @@ Compound.SDF_3D_ENDPOINTS = [
   {
     label: 'MMFF'
     url: glados.Settings.BEAKER_BASE_URL+ 'MMFFctab23D'
+  },
+  {
+    label: 'ETKDG'
+    url: glados.Settings.BEAKER_BASE_URL+ 'ETKDGctab23D'
+  },
+  {
+    label: 'KDG'
+    url: glados.Settings.BEAKER_BASE_URL+ 'KDGctab23D'
   }
 ]
 
