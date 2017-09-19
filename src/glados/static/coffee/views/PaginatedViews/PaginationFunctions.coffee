@@ -68,7 +68,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if newPageSize == ''
         return
 
-      @currentPageSize = newPageSize
+      @currentPageSize = parseInt(newPageSize)
       @collection.resetPageSize(newPageSize)
 
 

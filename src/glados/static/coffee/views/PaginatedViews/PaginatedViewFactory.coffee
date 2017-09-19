@@ -9,7 +9,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
       .extend(glados.views.PaginatedViews.CardZoomFunctions)\
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
-      .extend(glados.views.PaginatedViews.PaginationFunctions)
+      .extend(glados.views.PaginatedViews.PaginationFunctions)\
+      .extend(glados.views.PaginatedViews.PaginatedCards)
 
     Carousel: glados.views.PaginatedViews.PaginatedViewBase\
       .extend(glados.views.PaginatedViews.DeferredViewsFunctions)\
