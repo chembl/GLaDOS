@@ -10,14 +10,14 @@ Compound3DViewLiteMol = Backbone.View.extend
     current3DData = @model.get('current3DData')
 
     if not current3DData?
-        $(@el).find('.BCK-loadingcoords').show()
-        $(@el).find('.visualisation-container').hide()
+        $(@el).find('.loadingcoords-preloader').show()
+        $(@el).find('.visualisation-container-3D').hide()
     else
       draw = ()->
-        $(@el).find('.BCK-loadingcoords').hide()
-        $(@el).find('.visualisation-container').show()
+        $(@el).find('.loadingcoords-preloader').hide()
+        $(@el).find('.visualisation-container-3D').show()
         sdf3DDataURL = 'data:chemical/x-mdl-sdfile;base64,' + btoa(current3DData)
-        $(@el).find('.visualisation-container')\
+        $(@el).find('.visualisation-container-3D')\
             .html Handlebars.compile($('#Handlebars-LiteMol-Visualisation').html())
               sdf_url: sdf3DDataURL
         angular.bootstrap($(@el).find('pdb-lite-mol')[0], ['pdb.component.library'])
@@ -29,8 +29,8 @@ Compound3DViewLiteMol = Backbone.View.extend
       @showError('There was an error obtaining the coordinates from the server.')
 
   showError: (msg) ->
-    $(@el).find('.BCK-loadingcoords').hide()
-    $(@el).find('.visualisation-container').hide()
+    $(@el).find('.loadingcoords-preloader').hide()
+    $(@el).find('.visualisation-container-3D').hide()
     $(@el).find('.error-container').show()
     $(@el).find('.error-container').html Handlebars.compile($('#Handlebars-Compound-3D-error').html())
       msg: msg

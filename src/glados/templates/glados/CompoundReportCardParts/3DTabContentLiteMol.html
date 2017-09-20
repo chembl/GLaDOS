@@ -1,0 +1,12 @@
+{% extends "./3DDefaultTabContent.html" %}
+{% block tab_handlebars_templates %}
+    {% verbatim %}
+        <script id="Handlebars-LiteMol-Visualisation" type="text/x-handlebars-template">
+            <pdb-lite-mol pdb-id="'1cbs'" load-ed-maps="true" hide-controls="true"
+                    source-url="{{sdf_url}}"
+                    source-format="sdf"></pdb-lite-mol>
+        </script>
+    {% endverbatim %}
+{% endblock %}
+{% block tab_content %}
+{% endblock %}
