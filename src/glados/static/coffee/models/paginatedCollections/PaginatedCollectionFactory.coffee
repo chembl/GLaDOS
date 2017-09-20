@@ -299,7 +299,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewDocumentsFromTermsList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST)
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST
+      config.DEFAULT_PAGE_SIZE = 50
+      list = @getNewWSCollectionFor(config)
 
       list.initURL = (term) ->
         @baseUrl = glados.Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
@@ -321,6 +323,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if receivedDocs == totalDocs
             console.log 'ALL READY!'
             console.log thisCollection
+            thisCollection.setMeta('data_loaded', true)
             thisCollection.trigger('do-repaint')
 
         getDocuments.done((data) ->
