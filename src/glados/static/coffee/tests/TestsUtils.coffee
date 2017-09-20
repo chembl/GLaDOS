@@ -55,3 +55,17 @@ class TestsUtils
     $.get dataURL, (testData) ->
       matrix.set('matrix', testData.matrix)
       done()
+
+  @listsAreEqual = (list1, list2) ->
+
+    if list1.length != list2.length
+      return false
+
+    for i in [0..list1.length-1]
+      item1 = list1[i]
+      item2 = list2[i]
+
+      if item1 != item2
+        return false
+
+    return true
