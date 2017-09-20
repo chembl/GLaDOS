@@ -4,8 +4,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
 
   initialize: ->
     #ResponsiviseViewExt
-    updateViewProxy = @setUpResponsiveRender()
-    @model.on 'change', updateViewProxy, @
+    @setUpResponsiveRender()
+    @model.on 'change', @render, @
     @resource_type = 'Document'
     @$vis_elem = $('#BCK-DocWordCloud')
     @firstTimeRender = true
