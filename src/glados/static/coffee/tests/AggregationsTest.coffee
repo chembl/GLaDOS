@@ -1,0 +1,3 @@
+describe 'Aggregation', ->
+
+  it 'works', ->
