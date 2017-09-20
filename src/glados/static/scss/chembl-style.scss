@@ -1189,6 +1189,7 @@ div#CNC-zoom-modal {
 
 .modal-3D{
   min-height: 400px;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 
@@ -1204,9 +1205,10 @@ div#CNC-zoom-modal {
 
 .visualisation-container-3D {
   text-align: center;
-  position:relative;
-  width:100%;
+  position: relative;
+  width: 100%;
   min-height: 300px;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 

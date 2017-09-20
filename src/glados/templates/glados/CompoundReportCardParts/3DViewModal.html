@@ -1,17 +1,13 @@
-{% block custom_handlebars %}
-  {% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
-  {% include "glados/CompoundReportCardParts/3DMethodSelector.html" %}
-  {% verbatim %}
-    <script id="Handlebars-Compound-3D-error" type="text/x-handlebars-template">
 
-      <i class="fa fa-exclamation-circle"></i> {{msg}}
+{% include "glados/CompoundReportCardParts/3DView-HBS.html" %}
+{% include "glados/CompoundReportCardParts/3DMethodSelector.html" %}
+{% verbatim %}
+<script id="Handlebars-Compound-3D-error" type="text/x-handlebars-template">
 
-    </script>
-  {% endverbatim %}
-{% endblock %}
+  <i class="fa fa-exclamation-circle"></i> {{msg}}
 
-
-{% block custom_js %}
+</script>
+{% endverbatim %}
 
 <!-- PDBE -->
 <!-- https://www.ebi.ac.uk/pdbe/pdb-component-library/getting_started.html -->
@@ -28,8 +24,6 @@
 
 <!-- 3D Mol Visualizer -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/3Dmol/1.2.0/3Dmol-min.js"></script>
-
-{% endblock %}
 
 
 <div id="CNC-3d-modal" class="modal modal-3D">

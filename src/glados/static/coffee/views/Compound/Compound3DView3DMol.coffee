@@ -17,13 +17,26 @@ Compound3DView3DMol = Backbone.View.extend
         $(@el).find('.loadingcoords-preloader').hide()
         $(@el).find('.visualisation-container-3D').show()
         if not @molViewer?
-          @molViewer = $3Dmol.createViewer($(@el).find('.viewer_3Dmoljs'))
+          @molViewer = $3Dmol.createViewer($(@el).find('.viewer-3D'))
+        viewer = @molViewer
         @molViewer.clear()
+        @molViewer.setBackgroundColor(0xfffafafa)
         @molViewer.addModel current3DData, '3D_SDF.sdf'
+        @molViewer.center()
         @molViewer.zoomTo()
         @molViewer.setStyle {}, {stick:{}}
-        @molViewer.addSurface $3Dmol.SurfaceType.MS, {opacity:0.85}
+        @molViewer.addSurface $3Dmol.SurfaceType.MS, {opacity:0.75}
         @molViewer.render()
+        @molViewer.rotate(180, 'y', 1500)
+        setTimeout ->
+          viewer.rotate(180, 'y', 1500)
+          setTimeout ->
+            viewer.rotate(180, 'x', 1500)
+            setTimeout ->
+              viewer.rotate(180, 'x', 1500)
+            , 1500
+          , 1500
+        , 1500
       draw = draw.bind(@)
       setTimeout(draw, 300)
 
