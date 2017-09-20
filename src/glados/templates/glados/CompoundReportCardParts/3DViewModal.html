@@ -27,24 +27,22 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
-        <li class="tab col s3"><a class="active" href="#BCK-compound-3dview-Speck">Speck</a></li>
+        <li class="tab col s3"><a class="active" href="#BCK-compound-3dview-3DMol">3DMol</a></li>
         <li class="tab col s3"><a href="#BCK-compound-3dview-LiteMol">LiteMol</a></li>
+        <li class="tab col s3"><a href="#BCK-compound-3dview-Speck">Speck</a></li>
       </ul>
     </div>
   </div>
 
-  <div id="BCK-compound-3dview-Speck" class="modal-content" style="height: 100%;">
+  <div id="BCK-compound-3dview-3DMol" class="modal-content" style="height: 100%;">
+    <div class="BCK-loadingcoords"> Loading coordinates...</div>
+    <div style="position:relative;height:300px;width:100%;" class="visualisation-container">
+      <div style="height: 300px; width: 300px; position: relative;" class="viewer_3Dmoljs">
 
-    <!-- Backbone renders this -->
-
-    <div class="card-preolader-to-hide">
-
-      <div class="progress">
-        <div class="indeterminate"></div>
       </div>
-
     </div>
-
+    <div class="error-container">
+    </div>
   </div>
 
   <div id="BCK-compound-3dview-LiteMol" class="modal-content" style="height: 100%;">
@@ -61,7 +59,23 @@
     <div style="position:relative;height:300px;width:100%;" class="visualisation-container">
 
     </div>
+    <div class="error-container">
+    </div>
 
+
+  </div>
+
+  <div id="BCK-compound-3dview-Speck" class="modal-content" style="height: 100%;">
+
+    <!-- Backbone renders this -->
+
+    <div class="card-preolader-to-hide">
+
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
+
+    </div>
 
   </div>
 

@@ -1,8 +1,9 @@
 # View that renders the Image of the compound for the Compound Name and Classification Section
 CompoundImageView = CardView.extend(DownloadViewExt).extend
 
-  RENDERER_3D_SPECK_NAME:  '3DSpeck'
   RENDERER_3D_LITEMOL_NAME:  '3DLiteMol'
+  RENDERER_3D_3DMOL_NAME:  '3D3DMol'
+  RENDERER_3D_SPECK_NAME:  '3DSpeck'
 
   initialize: ->
     @model.on 'change', @.render, @
@@ -14,8 +15,9 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       $('#CNC-3d-modal-trigger').hide()
       $('#CNC-3d-modal-trigger-small').hide()
     else
-      $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
+      $(@el).find("a[href='#BCK-compound-3dview-3DMol']").attr('data-renderer', @RENDERER_3D_3DMOL_NAME)
       $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
+      $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
 
     @renderImage()
     @initDownloadButtons()
@@ -26,8 +28,9 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
     return _.extend {}, DownloadViewExt.events,
       "click #CNC-3d-modal-trigger": "initDefault3DView"
       "click #CNC-3d-modal-trigger-small": "initDefault3DView"
-      "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
+      "click a[href='#BCK-compound-3dview-3DMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
+      "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
 
   renderImage: ->
     img_url = @model.get('image_url')
@@ -112,7 +115,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   initDefault3DView: ->
 
     #make sure the speck visualisation is selected, this triggers lazyInit3DView
-    $('ul.tabs').tabs('select_tab', 'BCK-compound-3dview-Speck')
+    $('ul.tabs').tabs('select_tab', 'BCK-compound-3dview-3DMol')
 
 
   lazyInit3DView: (e) ->
@@ -142,18 +145,25 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
     if !@renderers3D[rendererName]?
 
       switch rendererName
-        when @RENDERER_3D_SPECK_NAME
 
-          @renderers3D[rendererName] = new Compound3DViewSpeck
-            el: $('#BCK-compound-3dview-Speck')
+        when @RENDERER_3D_3DMOL_NAME
+
+          @renderers3D[rendererName] = new Compound3DView3DMol
+            el: $('#BCK-compound-3dview-3DMol')
             model: @model
-            type: 'reduced'
 
         when @RENDERER_3D_LITEMOL_NAME
 
           @renderers3D[rendererName] = new Compound3DViewLiteMol
             el: $('#BCK-compound-3dview-LiteMol')
             model: @model
+
+        when @RENDERER_3D_SPECK_NAME
+
+          @renderers3D[rendererName] = new Compound3DViewSpeck
+            el: $('#BCK-compound-3dview-Speck')
+            model: @model
+            type: 'reduced'
 
     return @renderers3D[rendererName]
 
