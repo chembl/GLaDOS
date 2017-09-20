@@ -11,7 +11,7 @@ class DocumentSearchByTermsApp
     docsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDocumentsFromTermsList()
     docsList.initURL(GlobalVariables.SEARCH_TERM)
 
-    docResView = new DocumentsFromTermsView
+    new DocumentsFromTermsView
       collection: docsList
       el: $('#BCK-DocsWithTermResults')
 

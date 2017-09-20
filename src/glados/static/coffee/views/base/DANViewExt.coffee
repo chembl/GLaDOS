@@ -76,21 +76,21 @@ DANViewExt =
       'Ex vivo': Color({r: 0, g: 0, b: 255}),
       null: Color({r: 0, g: 0, b: 0})
 
-    tip = d3.tip()
-          .attr('class', 'd3-tip')
-          .html( (d) ->
-              if typeof d == 'string' || d instanceof String
-                  return d
-              return d.z
-          )
+#    tip = d3.tip()
+#          .attr('class', 'd3-tip')
+#          .html( (d) ->
+#              if typeof d == 'string' || d instanceof String
+#                  return d
+#              return d.z
+#          )
 
     mouseover= (p) ->
-      tip.show(p)
+#      tip.show(p)
       d3.selectAll(".dan-row text").classed("active", (d, i) -> i == p.y)
       d3.selectAll(".dan-column text").classed("active", (d, i) ->  i == p.x )
 
     mouseout = ->
-      tip.hide()
+#      tip.hide()
       d3.selectAll("text").classed("active", false)
       d3.selectAll("text").classed("linked", false)
 
@@ -175,7 +175,7 @@ DANViewExt =
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-    svg.call(tip)
+#    svg.call(tip)
 
     # --------------------------------------
     # Work with data
