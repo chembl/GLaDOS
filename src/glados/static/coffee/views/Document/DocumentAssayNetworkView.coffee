@@ -8,8 +8,8 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
 
     #ResponsiviseViewExt
     @$vis_elem = $('#AssayNetworkVisualisationContainer')
-    updateViewProxy = @setUpResponsiveRender()
-    @model.on 'change', updateViewProxy, @
+    @setUpResponsiveRender()
+    @model.on 'change', @render, @
     @resource_type = 'Document'
 
   render: ->
