@@ -4,12 +4,37 @@ glados.useNameSpace 'glados.views.Compound',
 
     initialize: ()->
       @model.on 'change:cur3DEndpointIndex', @render, @
+      @model.on 'change:current3DXYZData', @render, @
+      @model.on 'change:current3DData', @render, @
       @hbTemplate = Handlebars.compile($('#Handlebars-Compound-3D-options-menu').html())
       @render()
+
+    getDesiredFile: (sdfFile)->
+      desiredFile = null
+      if sdfFile and (@model.get 'current3DData')?
+        desiredFile = @model.get 'current3DData'
+      else if (@model.get 'current3DXYZData')?
+        desiredFile = @model.get 'current3DXYZData'
+      return desiredFile
+
+    downloadFile: (sdfFile)->
+      fileToDownload = @getDesiredFile(sdfFile)
+      mimeType = if sdfFile then 'chemical/x-mdl-sdfile' else 'chemical/x-xyz'
+      fileExtension = if sdfFile then '.sdf' else '.xyz'
+      typeForceField = Compound.SDF_3D_ENDPOINTS[@model.get 'cur3DEndpointIndex'].label
+      blobToDownload = new Blob([fileToDownload], {type: mimeType+";charset=utf-8"})
+      saveAs(blobToDownload, @model.get('molecule_chembl_id')+'-'+typeForceField+fileExtension)
+
+    copyFile: (sdfFile)->
+      fileToDownload = @getDesiredFile(sdfFile)
+      copyElem = $(@el).find if sdfFile then '.sdf-3d-copy' else '.xyz-3d-copy'
+      ButtonsHelper.handleCopyDynamic(copyElem, fileToDownload)
 
     render: ()->
       data = {
         renderingOptions: []
+        enable_sdf: (@model.get 'current3DData')?
+        enable_xyz: (@model.get 'current3DXYZData')?
       }
       selectedIdx = @model.get('cur3DEndpointIndex')
       for renderingOptionI, index in Compound.SDF_3D_ENDPOINTS
@@ -31,3 +56,16 @@ glados.useNameSpace 'glados.views.Compound',
         $('#Bck-Comp-3D-options-menu').slideDown()
         $(@).hide()
 
+      if (@model.get 'current3DData')?
+        ButtonsHelper.initLinkButton $(@el).find('.sdf-3d-dnld'), 'Download SDF File to clipboard',
+          @downloadFile.bind(@, true)
+
+        ButtonsHelper.initLinkButton $(@el).find('.sdf-3d-copy'), 'Copy SDF File to clipboard',
+          @copyFile.bind(@, true)
+
+      if (@model.get 'current3DXYZData')?
+        ButtonsHelper.initLinkButton $(@el).find('.xyz-3d-dnld'), 'Download XYZ File to clipboard',
+          @downloadFile.bind(@, false)
+
+        ButtonsHelper.initLinkButton $(@el).find('.xyz-3d-copy'), 'Copy XYZ File to clipboard',
+          @copyFile.bind(@, false)

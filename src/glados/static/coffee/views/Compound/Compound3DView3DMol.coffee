@@ -1,4 +1,4 @@
-Compound3DViewLiteMol = Backbone.View.extend
+Compound3DView3DMol = Backbone.View.extend
 
   initialize: ->
     @model.on 'change:current3DData', @render, @
@@ -10,17 +10,20 @@ Compound3DViewLiteMol = Backbone.View.extend
     current3DData = @model.get('current3DData')
 
     if not current3DData?
-        $(@el).find('.BCK-loadingcoords').show()
-        $(@el).find('.visualisation-container').hide()
+      $(@el).find('.BCK-loadingcoords').show()
+      $(@el).find('.visualisation-container').hide()
     else
       draw = ()->
         $(@el).find('.BCK-loadingcoords').hide()
         $(@el).find('.visualisation-container').show()
-        sdf3DDataURL = 'data:chemical/x-mdl-sdfile;base64,' + btoa(current3DData)
-        $(@el).find('.visualisation-container')\
-            .html Handlebars.compile($('#Handlebars-LiteMol-Visualisation').html())
-              sdf_url: sdf3DDataURL
-        angular.bootstrap($(@el).find('pdb-lite-mol')[0], ['pdb.component.library'])
+        if not @molViewer?
+          @molViewer = $3Dmol.createViewer($(@el).find('.viewer_3Dmoljs'))
+        @molViewer.clear()
+        @molViewer.addModel current3DData, '3D_SDF.sdf'
+        @molViewer.zoomTo()
+        @molViewer.setStyle {}, {stick:{}}
+        @molViewer.addSurface $3Dmol.SurfaceType.MS, {opacity:0.85}
+        @molViewer.render()
       draw = draw.bind(@)
       setTimeout(draw, 300)
 
