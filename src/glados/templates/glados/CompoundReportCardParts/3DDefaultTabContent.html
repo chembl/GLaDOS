@@ -1,0 +1,25 @@
+<div id="{{tab_id}}" class="modal-content vis-3D-wrapper" style="height: 100%;">
+    {% block tab_handlebars_templates %}
+    {% endblock %}
+    <div class="loadingcoords-preloader">
+        <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-teal-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        </div>
+        Loading coordinates...
+    </div>
+    <div class="visualisation-container-3D">
+        {% block tab_content %}{% endblock %}
+    </div>
+    <div class="error-container">
+    </div>
+</div>
