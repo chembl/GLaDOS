@@ -1,7 +1,5 @@
 describe 'Aggregation', ->
-
   describe 'with a numeric property (Associated compounds for a target)', ->
-
     associatedCompounds = undefined
     minMaxTestData = undefined
     indexUrl = glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
@@ -20,9 +18,9 @@ describe 'Aggregation', ->
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
           min_columns: 1
           max_columns: 20
+          num_columns: 10
 
     beforeAll (done) ->
-
       associatedCompounds = new glados.models.Aggregations.Aggregation
         index_url: indexUrl
         query_config: queryConfig
@@ -34,10 +32,9 @@ describe 'Aggregation', ->
         done()
 
     it 'initializes correctly', ->
-
       expect(associatedCompounds.url).toBe(indexUrl)
       expect(associatedCompounds.get('state'))\
-      .toBe(glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
+        .toBe(glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
 
       queryGot = associatedCompounds.get('query')
       expect(queryGot.multi_match?).toBe(true)
@@ -45,7 +42,6 @@ describe 'Aggregation', ->
       expect(TestsUtils.listsAreEqual(queryGot.multi_match.fields, queryConfig.fields)).toBe(true)
 
     it 'Generates the request data to get min and max', ->
-
       requestData = associatedCompounds.getRequestMinMaxData()
 
       expect(requestData.aggs.x_axis_agg_max.max.field).toBe(currentXAxisProperty)
@@ -56,11 +52,6 @@ describe 'Aggregation', ->
       expect(chemblIDis).toBe(chemblIDMustBe)
 
     it 'Parses the min and max data', ->
-
-      console.log 'fetching'
-      associatedCompounds.fetch()
-      console.log 'parse test data: ', minMaxTestData
-
       minValue = 153.18
       maxValue = 565.33
       minColumns = 1
@@ -76,6 +67,49 @@ describe 'Aggregation', ->
       expect(parsedObj.aggs.x_axis_agg.min_bin_size).toBe(minBinSizeMustBe)
 
 
+    it 'Generates the request data', ->
+
+      aggsWithMinMax =
+        aggs:
+          x_axis_agg:
+            field: "molecule_properties.full_mwt"
+            type: "RANGE"
+            min_columns: 1
+            max_columns: 20
+            num_columns: 10
+            min_value: 153.18
+            max_value: 565.33
+            min_bin_size: 20.65
+            max_bin_size: 413
+
+      associatedCompounds.set('aggs_config', aggsWithMinMax)
+      requestData = associatedCompounds.getRequestData()
+      expect(requestData.aggs.x_axis_agg.range.field).toBe(currentXAxisProperty)
+
+      requestDataAggs = requestData.aggs
+      aggs = aggsWithMinMax.aggs
+      for aggKey, aggDescription of aggs
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+
+          minValueMustBe = aggDescription.min_value
+          maxValueMustBe = aggDescription.max_value
+          numColsMustBe = aggDescription.num_columns
+
+          rangesGot = requestDataAggs[aggKey].range.ranges
+          expect(rangesGot.length).toBe(numColsMustBe)
+          firstRangeFrom = rangesGot[0].from
+          expect(firstRangeFrom).toBe(minValueMustBe)
+          lastRangeTo = rangesGot[rangesGot.length-1].to
+          expect(lastRangeTo >= maxValueMustBe).toBe(true)
+
+      chemblIDis = requestData.query.multi_match.query
+      chemblIDMustBe = associatedCompounds.get('target_chembl_id')
+      expect(chemblIDis).toBe(chemblIDMustBe)
+
+    it 'parses the bucket data', ->
+      
+#      console.log 'fetching'
+#      associatedCompounds.fetch()
 
 
 

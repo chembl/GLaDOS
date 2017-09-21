@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     fetch: ->
 
+      console.log 'fetching!'
       $progressElem = @get('progress_elem')
       state = @get('state')
 
@@ -31,13 +32,20 @@ glados.useNameSpace 'glados.models.Aggregations',
         if $progressElem? or true
 #          $progressElem.html 'Loading minimun and maximum values...'
           console.log 'loading min and max'
-        @set('state', @LOADING_MIN_MAX)
+        @set('state', glados.models.Aggregations.Aggregation.States.LOADING_MIN_MAX)
         @fetchMinMax()
         return
+
+      console.log 'I already have min and max'
+      if $progressElem?
+        $progressElem.html 'Fetching Compound Data...'
+
+      console.log 'request data: ', @getRequestData()
 
 
     fetchMinMax: ->
 
+      console.log 'fetching min and max data'
       $progressElem = @get('progress_elem')
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
@@ -50,12 +58,16 @@ glados.useNameSpace 'glados.models.Aggregations',
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
 
-        thisModel.set(thisModel.parseMinMax(data))
-#        if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
+        thisModel.set('aggs_config', thisModel.parseMinMax(data))
+
+        console.log 'min and max data received!'
+        if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
 #          $progressElem.html ''
-#          return
-#        thisModel.set('state', thisModel.LOADING_BUCKETS, {silent:true})
-#        thisModel.fetch()
+          console.log 'no data found! ', thisModel.get('state')
+          return
+
+        thisModel.set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
+        thisModel.fetch()
 
       ).fail( -> console.log 'ERROR!'
 #        glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem)
@@ -68,7 +80,7 @@ glados.useNameSpace 'glados.models.Aggregations',
     parseMinMax: (data) ->
 
       if data.hits.total == 0
-        @set('state', @NO_DATA_FOUND_STATE)
+        @set('state', glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
         return
 
       aggsConfig = @get('aggs_config')
@@ -136,6 +148,35 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     getMinAggName: (aggKey) -> aggKey + '_min'
     getMaxAggName: (aggKey) -> aggKey + '_max'
+
+    getRequestData: ->
+
+      aggsData = {}
+      aggsConfig = @get('aggs_config')
+
+      aggs = aggsConfig.aggs
+      for aggKey, aggDescription of aggs
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+
+          minValue = aggDescription.min_value
+          maxValue = aggDescription.max_value
+          numCols = aggDescription.num_columns
+
+          ranges = glados.Utils.Buckets.getElasticRanges(minValue, maxValue, numCols)
+
+          aggsData[aggKey] =
+            range:
+              field: aggDescription.field
+              ranges: ranges
+              keyed: true
+
+      queryData = @get('query')
+
+      return {
+        size: 0
+        query: queryData
+        aggs: aggsData
+      }
 
 
 glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\

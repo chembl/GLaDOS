@@ -202,6 +202,25 @@ glados.useNameSpace 'glados',
 
         return buckets
 
+      getElasticRanges: (minValue, maxValue, numCols) ->
+
+        interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+
+        ranges = []
+        from = minValue
+        to = minValue + interval
+        for col in [0..numCols-1]
+          from = parseFloat(from.toFixed(2))
+          to = parseFloat(to.toFixed(2))
+          ranges.push
+            from: from
+            to: to
+
+          from += interval
+          to += interval
+
+        return ranges
+
     ErrorMessages:
 
       getJQXHRErrorText: (jqXHR) ->
