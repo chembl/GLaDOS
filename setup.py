@@ -37,6 +37,13 @@ add_data_dir_recursive_as_package_data('glados', 'static', package_data_desc)
 add_data_dir_recursive_as_package_data('glados', 'static_root', package_data_desc)
 add_data_dir_recursive_as_package_data('glados', 'templates', package_data_desc)
 
+requirements_data = []
+with open('./requirements.txt', 'r') as req_f:
+    line = req_f.readline()
+    while line is not None:
+        requirements_data.append(line)
+        line = req_f.readline()
+
 setup(
     name='glados',
     version='0.1',
@@ -47,19 +54,7 @@ setup(
     package_dir={'': src_dir},
     packages=find_packages(src_dir),
     long_description=open('README.md').read(),
-    install_requires=[
-        'Arpeggio',
-        'django==1.10.4',
-        'django-compressor>=2.0',
-        'twitter',
-        'python3-memcached',
-        'selenium==2.52',
-        'CoffeeScript',
-        'pyScss',
-        'watchdog',
-        'whitenoise',
-        'requests'
-    ],
+    install_requires=requirements_data,
     package_data=package_data_desc,
     include_package_data=True,
     classifiers=['Development Status :: 2 - Pre-Alpha',
