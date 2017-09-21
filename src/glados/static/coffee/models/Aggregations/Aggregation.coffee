@@ -48,14 +48,16 @@ glados.useNameSpace 'glados.models.Aggregations',
         type: 'POST'
         reset: true
 
+      thisModel = @
       $.ajax(fetchESOptions).done((data) ->
         if $progressElem?
           $progressElem.html ''
 
         console.log 'data received!! ', data
 
-#        thisModel.set(thisModel.parse(data))
-#        thisModel.set('state', thisModel.INITIAL_STATE, {silent:true})
+        thisModel.set('bucket_data', thisModel.parse(data))
+        thisModel.set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
+        console.log 'thisModel: ', thisModel
 #        thisModel.set('custom_interval_size', undefined , {silent:true})
 
       ).fail( -> console.log 'error'

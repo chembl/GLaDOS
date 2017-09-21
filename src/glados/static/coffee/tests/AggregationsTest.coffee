@@ -127,9 +127,6 @@ describe 'Aggregation', ->
 
       expect(parsedObj.x_axis_agg.num_columns).toBe(Object.keys(bucketsShouldBe).length)
 
-#      console.log 'fetching'
-#      associatedCompounds.fetch()
-
 
 
 
