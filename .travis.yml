@@ -16,4 +16,3 @@ script:
 addons:
   apt:
     packages: memcached
-dist: precise
