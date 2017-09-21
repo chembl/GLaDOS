@@ -6,6 +6,8 @@ Compound3DView3DMol = Backbone.View.extend
     @model.on 'change:sdf2DError', @renderError, @
 
   render: ()->
+    if @molViewer
+      @molViewer.stopAnimate()
     $(@el).find('.error-container').hide()
     current3DData = @model.get('current3DData')
 
@@ -18,7 +20,6 @@ Compound3DView3DMol = Backbone.View.extend
         $(@el).find('.visualisation-container-3D').show()
         if not @molViewer?
           @molViewer = $3Dmol.createViewer($(@el).find('.viewer-3D'))
-        viewer = @molViewer
         @molViewer.clear()
         @molViewer.setBackgroundColor(0xfffafafa)
         @molViewer.addModel current3DData, '3D_SDF.sdf'
@@ -28,21 +29,13 @@ Compound3DView3DMol = Backbone.View.extend
         @molViewer.addSurface $3Dmol.SurfaceType.MS, {opacity:0.75}
         @molViewer.render()
         @molViewer.rotate(180, 'y', 1500)
-        setTimeout ->
-          viewer.rotate(180, 'y', 1500)
-          setTimeout ->
-            viewer.rotate(180, 'x', 1500)
-            setTimeout ->
-              viewer.rotate(180, 'x', 1500)
-            , 1500
-          , 1500
-        , 1500
       draw = draw.bind(@)
       setTimeout(draw, 300)
 
   renderError: ()->
     if @model.get('sdf3DError') or @model.get('sdf2DError')
       @showError('There was an error obtaining the coordinates from the server.')
+
 
   showError: (msg) ->
     $(@el).find('.loadingcoords-preloader').hide()
