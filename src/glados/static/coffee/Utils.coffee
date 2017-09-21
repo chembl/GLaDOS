@@ -221,6 +221,14 @@ glados.useNameSpace 'glados',
 
         return ranges
 
+      getBucketsList: (elasticBucketsObj) ->
+
+        buckets = []
+        for key, bucket of elasticBucketsObj
+          bucket.key = key
+          buckets.push bucket
+
+        return buckets
     ErrorMessages:
 
       getJQXHRErrorText: (jqXHR) ->

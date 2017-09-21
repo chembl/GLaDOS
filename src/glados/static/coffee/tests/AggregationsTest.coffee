@@ -2,6 +2,7 @@ describe 'Aggregation', ->
   describe 'with a numeric property (Associated compounds for a target)', ->
     associatedCompounds = undefined
     minMaxTestData = undefined
+    bucketsTestData = undefined
     indexUrl = glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
     currentXAxisProperty = 'molecule_properties.full_mwt'
     targetChemblID = 'CHEMBL2111342'
@@ -29,6 +30,12 @@ describe 'Aggregation', ->
 
       $.get (glados.Settings.STATIC_URL + 'testData/AggregationMinMaxSampleResponseSc1.json'), (testData) ->
         minMaxTestData = testData
+        done()
+
+    beforeAll (done) ->
+
+      $.get (glados.Settings.STATIC_URL + 'testData/AggegationBucketsSampleResponseSc1.json'), (testData) ->
+        bucketsTestData = testData
         done()
 
     it 'initializes correctly', ->
@@ -107,7 +114,19 @@ describe 'Aggregation', ->
       expect(chemblIDis).toBe(chemblIDMustBe)
 
     it 'parses the bucket data', ->
-      
+
+
+      parsedObj = associatedCompounds.parse(bucketsTestData)
+      bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
+      bucketsGot = parsedObj.x_axis_agg.buckets
+
+      for key, bucket of bucketsGot
+        keyGot = bucket.key
+        bucketShouldBe = bucketsShouldBe[keyGot]
+        expect(bucketShouldBe?).toBe(true)
+
+      expect(parsedObj.x_axis_agg.num_columns).toBe(Object.keys(bucketsShouldBe).length)
+
 #      console.log 'fetching'
 #      associatedCompounds.fetch()
 

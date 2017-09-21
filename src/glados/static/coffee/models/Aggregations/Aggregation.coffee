@@ -29,9 +29,9 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE\
       or state == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
-        if $progressElem? or true
-#          $progressElem.html 'Loading minimun and maximum values...'
-          console.log 'loading min and max'
+        if $progressElem?
+          $progressElem.html 'Loading minimun and maximum values...'
+        console.log 'loading min and max'
         @set('state', glados.models.Aggregations.Aggregation.States.LOADING_MIN_MAX)
         @fetchMinMax()
         return
@@ -40,8 +40,27 @@ glados.useNameSpace 'glados.models.Aggregations',
       if $progressElem?
         $progressElem.html 'Fetching Compound Data...'
 
-      console.log 'request data: ', @getRequestData()
+      esJSONRequest = JSON.stringify(@getRequestData())
 
+      fetchESOptions =
+        url: @url
+        data: esJSONRequest
+        type: 'POST'
+        reset: true
+
+      $.ajax(fetchESOptions).done((data) ->
+        if $progressElem?
+          $progressElem.html ''
+
+        console.log 'data received!! ', data
+
+#        thisModel.set(thisModel.parse(data))
+#        thisModel.set('state', thisModel.INITIAL_STATE, {silent:true})
+#        thisModel.set('custom_interval_size', undefined , {silent:true})
+
+      ).fail( -> console.log 'error'
+#        glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem)
+      )
 
     fetchMinMax: ->
 
@@ -62,7 +81,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         console.log 'min and max data received!'
         if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
-#          $progressElem.html ''
+          $progressElem.html '' unless not $progressElem?
           console.log 'no data found! ', thisModel.get('state')
           return
 
@@ -111,6 +130,26 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig
 
 
+    parse: (data) ->
+
+      bucketsData = {}
+
+      aggsConfig = @get('aggs_config')
+      receivedAggsInfo = data.aggregations
+
+      aggs = aggsConfig.aggs
+      for aggKey, aggDescription of aggs
+
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+
+          currentBuckets = receivedAggsInfo[aggKey].buckets
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+
+          bucketsData[aggKey] =
+            buckets: bucketsList
+            num_columns: bucketsList.length
+
+      return bucketsData
 
 
     #-------------------------------------------------------------------------------------------------------------------
