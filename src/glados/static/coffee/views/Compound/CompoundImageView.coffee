@@ -19,6 +19,10 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       $(@el).find("a[href='#BCK-compound-3dview-LiteMol']").attr('data-renderer', @RENDERER_3D_LITEMOL_NAME)
       $(@el).find("a[href='#BCK-compound-3dview-Speck']").attr('data-renderer', @RENDERER_3D_SPECK_NAME)
 
+    $('#CNC-3d-modal').modal
+      ready: @initDefault3DView.bind @
+
+
     @renderImage()
     @initDownloadButtons()
     @initZoomModal()
@@ -26,8 +30,8 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   events: ->
     # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events,
-      "click #CNC-3d-modal-trigger": "initDefault3DView"
-      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
+#      "click #CNC-3d-modal-trigger": "initDefault3DView"
+#      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
       "click a[href='#BCK-compound-3dview-3DMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
@@ -141,6 +145,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       @renderer3DOptionsView = new glados.views.Compound.Compound3DMethodSelectorView
         el: $('#Bck-Comp-3D-options-menu')
         model: @model
+    # TODO: destroy WebGL Context that are not active
     # initialise if not already
     if !@renderers3D[rendererName]?
 
@@ -166,9 +171,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
             type: 'reduced'
 
     return @renderers3D[rendererName]
-
-
-
 
   # --------------------------------------------------------------------
   # Downloads
