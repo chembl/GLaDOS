@@ -407,9 +407,12 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
 
   calculate3DSDFAndXYZ: (endpointIndex)->
-    @set('cur3DEndpointIndex', endpointIndex)
-    @set('current3DData', null)
-    @set('current3DXYZData', null)
+    @set
+      cur3DEndpointIndex: endpointIndex
+      current3DData: null
+      current3DXYZData: null
+    @trigger 'change:current3DData'
+    @trigger 'change:current3DXYZData'
     dataVarName = 'sdf3DData_'+endpointIndex
     dataXYZVarName = 'sdf3DDataXYZ_'+endpointIndex
 

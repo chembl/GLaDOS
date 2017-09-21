@@ -23,7 +23,7 @@ class ReportCardTester(unittest.TestCase):
   def instantiateBrowser():
     if ReportCardTester.SINGLETON_BROWSER is None:
       try:
-        ReportCardTester.SINGLETON_BROWSER = webdriver.Firefox()
+        ReportCardTester.SINGLETON_BROWSER = webdriver.PhantomJS()
         ReportCardTester.SINGLETON_BROWSER.set_window_size(1024, 768)
         ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
         ReportCardTester.NUM_BROWSER_CALLS = 0
