@@ -141,8 +141,19 @@ describe 'Aggregation', ->
       expect(aggConfigGot.max_value?).toBe(false)
       expect(aggConfigGot.min_value?).toBe(false)
 
+    it 'changes the number od columns for an aggregation', ->
 
+      newNumColumns = 5
+      associatedCompounds.changeNumColumnsForAggregation('x_axis_agg', newNumColumns)
 
+      aggsConfigGot = associatedCompounds.get('aggs_config').aggs.x_axis_agg
+      aggConfigGot = aggsConfigGot
+
+      expect(aggConfigGot.num_columns).toBe(newNumColumns)
+      expect(aggConfigGot.max_bin_size?).toBe(false)
+      expect(aggConfigGot.min_bin_size?).toBe(false)
+      expect(aggConfigGot.max_value?).toBe(false)
+      expect(aggConfigGot.min_value?).toBe(false)
 
 
 

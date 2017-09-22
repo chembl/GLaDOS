@@ -68,9 +68,8 @@ glados.useNameSpace 'glados.views.Visualisation',
     handleNumColumnsChange: (event) ->
 
       newColsNum = $(event.currentTarget).val()
-      @model.set('num_columns', newColsNum)
       @paintNumBarsRange(newColsNum)
-      @model.fetch()
+      @model.changeNumColumnsForAggregation(@xAxisAggName, newColsNum)
 
     handleBinSizeChange: (event) ->
 
@@ -112,7 +111,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       if @config.big_size
         @paintBinSizeRange()
-        @paintNumBarsRange(buckets.num_columns)
+        @paintNumBarsRange(buckets.length)
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60

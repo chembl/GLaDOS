@@ -18,6 +18,11 @@ glados.useNameSpace 'glados.models.Aggregations',
             fields: queryConfig.fields
         @set('query', query)
 
+    getAggregationConfig: (aggName) ->
+
+      aggsConfig = @get('aggs_config')
+      return aggsConfig.aggs[aggName]
+
     #-------------------------------------------------------------------------------------------------------------------
     # Changing configuration
     #-------------------------------------------------------------------------------------------------------------------
@@ -30,13 +35,20 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     changeFieldForAggregation: (aggName, newField) ->
 
-      aggsConfig = @get('aggs_config')
-
-      aggConfig = aggsConfig.aggs[aggName]
+      aggConfig = @getAggregationConfig(aggName)
       if aggConfig.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
         @cleanUpRangeAggConfig(aggConfig)
 
       aggConfig.field = newField
+
+      @fetch() unless @get('test_mode')
+
+    changeNumColumnsForAggregation: (aggName, newNumColumns) ->
+
+      aggConfig = @getAggregationConfig(aggName)
+      aggConfig.num_columns = newNumColumns
+      if aggConfig.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        @cleanUpRangeAggConfig(aggConfig)
 
       @fetch() unless @get('test_mode')
 
@@ -170,6 +182,7 @@ glados.useNameSpace 'glados.models.Aggregations',
           currentNumCols = bucketsList.length
 
           console.log 'I have the buckets!', receivedAggsInfo
+          console.log 'currentNumCols: ', currentNumCols
 
           currentMinValue = aggDescription.min_value
           currentMaxValue = aggDescription.max_value
