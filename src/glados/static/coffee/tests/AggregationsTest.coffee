@@ -49,6 +49,9 @@ describe 'Aggregation', ->
       expect(queryGot.multi_match.query).toBe(targetChemblID)
       expect(TestsUtils.listsAreEqual(queryGot.multi_match.fields, queryConfig.fields)).toBe(true)
 
+    it 'Knows that it needs to get Min and Max', ->
+      expect(associatedCompounds.needsMinAndMax()).toBe(true)
+
     it 'Generates the request data to get min and max', ->
       requestData = associatedCompounds.getRequestMinMaxData()
 
@@ -173,6 +176,7 @@ describe 'Aggregation', ->
 
     associatedBioactivities = undefined
     indexUrl = glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+    currentField = 'standard_type'
     targetChemblID = 'CHEMBL2111342'
 
     queryConfig =
@@ -181,13 +185,20 @@ describe 'Aggregation', ->
       template_data:
         target_chembl_id: 'target_chembl_id'
 
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: currentField
+          size: 20
+
     beforeAll (done) ->
       associatedBioactivities = new glados.models.Aggregations.Aggregation
         index_url: indexUrl
         query_config: queryConfig
         target_chembl_id: targetChemblID
-#        aggs_config: aggsConfig
-#        test_mode: true
+        aggs_config: aggsConfig
+        test_mode: true
       done()
 
     it 'initializes correctly', ->
@@ -202,5 +213,13 @@ describe 'Aggregation', ->
       expect(queryGot.query_string?).toBe(true)
       expect(queryGot.query_string.query).toBe(queryStringMustBe)
 
+    it 'Knows that it does not need to get Min and Max', ->
+      expect(associatedBioactivities.needsMinAndMax()).toBe(false)
+
+    it 'Generates the request data', ->
+
+      requestData = associatedBioactivities.getRequestData()
+      expect(requestData.aggs.types.terms.field).toBe(currentField)
+      expect(requestData.aggs.types.terms.size).toBe(aggsConfig.aggs.types.size)
 
 

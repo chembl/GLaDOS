@@ -82,14 +82,24 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
+    needsMinAndMax: ->
+
+      aggsConfig = @get('aggs_config')
+      aggs = aggsConfig.aggs
+      for aggKey, aggDescription of aggs
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          return true
+      return false
+
     fetch: ->
 
       console.log 'fetching!'
       $progressElem = @get('progress_elem')
       state = @get('state')
 
-      if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE\
-      or state == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+      if @needsMinAndMax() and\
+      (state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE\
+      or state == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
         console.log 'loading min and max'
@@ -97,7 +107,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         @fetchMinMax()
         return
 
-      console.log 'I already have min and max'
+      console.log 'I already have min and max or dont need it'
       if $progressElem?
         $progressElem.html 'Fetching Compound Data...'
 
@@ -290,6 +300,15 @@ glados.useNameSpace 'glados.models.Aggregations',
               ranges: ranges
               keyed: true
 
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
+
+          aggsData[aggKey] =
+            terms:
+              field: aggDescription.field
+              size: aggDescription.size
+              order:
+                _count: 'desc'
+
       queryData = @get('query')
 
       return {
@@ -317,3 +336,4 @@ glados.models.Aggregations.Aggregation.QueryTypes =
 
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
+   TERMS: 'TERMS'
