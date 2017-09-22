@@ -221,6 +221,9 @@ glados.useNameSpace 'glados',
 
         return ranges
 
+      getIntervalSize: (maxValue, minValue, numColumns) ->
+        parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numColumns).toFixed(2))
+
       getBucketsList: (elasticBucketsObj) ->
 
         buckets = []

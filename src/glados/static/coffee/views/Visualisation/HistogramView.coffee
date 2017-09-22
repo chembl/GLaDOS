@@ -4,9 +4,10 @@ glados.useNameSpace 'glados.views.Visualisation',
     initialize: ->
       @config = arguments[0].config
 
-      @model.on 'change', @render, @
+      @model.on 'change:bucket_data', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
-      updateViewProxy = @setUpResponsiveRender()
+      @setUpResponsiveRender()
+      @xAxisAggName = @config.x_axis_prop_name
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
@@ -42,14 +43,15 @@ glados.useNameSpace 'glados.views.Visualisation',
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
 
-    paintBinSizeRange: (currentBinSize=@model.get('bin_size')) ->
+    paintBinSizeRange: (currentBinSize=@model.get('bucket_data')[@xAxisAggName].bin_size) ->
 
+      buckets = @model.get('bucket_data')[@xAxisAggName]
       console.log 'painting range with: ', currentBinSize
       $xAxisBinSizeRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-binSize')
       glados.Utils.fillContentForElement $xAxisBinSizeRange,
         current_value: currentBinSize
-        min_value: @model.get('min_bin_size')
-        max_value: @model.get('max_bin_size')
+        min_value: buckets.min_bin_size
+        max_value: buckets.max_bin_size
 
     handleXAxisPropertyChange: (event) ->
 
@@ -59,8 +61,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       @currentXAxisProperty = @config.properties[newProperty]
       newPropertyComparator = @currentXAxisProperty.propName
+
       @model.set('current_xaxis_property', newPropertyComparator)
-      @model.fetch()
+      @model.changeFieldForAggregation(@xAxisAggName, newPropertyComparator)
 
     handleNumColumnsChange: (event) ->
 
@@ -97,10 +100,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       console.log 'RENDER HISTOGRAM!'
       @$vis_elem.empty()
 
-      if @config.range_categories
-        buckets = @model.get('buckets')
-      else
-        buckets = @getBucketsForView()
+      console.log 'LOADING BUCKETS'
+
+      buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
       if buckets.length == 0
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
@@ -110,7 +112,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       if @config.big_size
         @paintBinSizeRange()
-        @paintNumBarsRange(@model.get('num_columns'))
+        @paintNumBarsRange(buckets.num_columns)
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
@@ -123,8 +125,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', VISUALISATION_HEIGHT)
 
       thisView = @
-
-#      hide_title
 
       if @config.big_size
         TITLE_Y = 30
@@ -144,7 +144,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         TITLE_Y_PADDING = 0
 
       BARS_MIN_HEIGHT = 2
-
 
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
@@ -166,6 +165,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       bucketNames = (b.key for b in buckets)
       bucketSizes = (b.doc_count for b in buckets)
 
+      console.log 'buckets: ', buckets
+      console.log 'bucketNames: ', bucketNames
       if @config.fixed_bar_width
         barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
         xRangeEnd = barWidth * buckets.length

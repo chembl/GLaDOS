@@ -27,6 +27,7 @@ describe 'Aggregation', ->
         query_config: queryConfig
         target_chembl_id: targetChemblID
         aggs_config: aggsConfig
+        test_mode: true
 
       $.get (glados.Settings.STATIC_URL + 'testData/AggregationMinMaxSampleResponseSc1.json'), (testData) ->
         minMaxTestData = testData
@@ -115,7 +116,6 @@ describe 'Aggregation', ->
 
     it 'parses the bucket data', ->
 
-
       parsedObj = associatedCompounds.parse(bucketsTestData)
       bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
       bucketsGot = parsedObj.x_axis_agg.buckets
@@ -126,6 +126,21 @@ describe 'Aggregation', ->
         expect(bucketShouldBe?).toBe(true)
 
       expect(parsedObj.x_axis_agg.num_columns).toBe(Object.keys(bucketsShouldBe).length)
+
+    it 'changes the field for an aggregation', ->
+
+      newPropertyName = 'molecule_properties.alogp'
+      associatedCompounds.changeFieldForAggregation('x_axis_agg', newPropertyName)
+
+      aggsConfigGot = associatedCompounds.get('aggs_config').aggs.x_axis_agg
+      aggConfigGot = aggsConfigGot
+
+      expect(aggConfigGot.field).toBe(newPropertyName)
+      expect(aggConfigGot.max_bin_size?).toBe(false)
+      expect(aggConfigGot.min_bin_size?).toBe(false)
+      expect(aggConfigGot.max_value?).toBe(false)
+      expect(aggConfigGot.min_value?).toBe(false)
+
 
 
 

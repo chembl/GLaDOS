@@ -19,6 +19,28 @@ glados.useNameSpace 'glados.models.Aggregations',
         @set('query', query)
 
     #-------------------------------------------------------------------------------------------------------------------
+    # Changing configuration
+    #-------------------------------------------------------------------------------------------------------------------
+    cleanUpRangeAggConfig: (aggConfig) ->
+
+      aggConfig.max_bin_size = null
+      aggConfig.min_bin_size = null
+      aggConfig.max_value = null
+      aggConfig.min_value = null
+
+    changeFieldForAggregation: (aggName, newField) ->
+
+      aggsConfig = @get('aggs_config')
+
+      aggConfig = aggsConfig.aggs[aggName]
+      if aggConfig.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        @cleanUpRangeAggConfig(aggConfig)
+
+      aggConfig.field = newField
+
+      @fetch() unless @get('test_mode')
+
+    #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
     fetch: ->
@@ -119,12 +141,11 @@ glados.useNameSpace 'glados.models.Aggregations',
           currentAggReceivedMax = receivedAggsInfo[maxAggName].value
           aggDescription.max_value = currentAggReceivedMax
 
-          range = currentAggReceivedMax - currentAggReceivedMin
           minColumns = aggDescription.min_columns
           maxColumns = aggDescription.max_columns
 
-          maxBinSize = parseFloat((Math.ceil(Math.abs(range)) / minColumns).toFixed(2))
-          minBinSize = parseFloat((Math.ceil(Math.abs(range)) / maxColumns).toFixed(2))
+          maxBinSize = glados.Utils.Buckets.getIntervalSize(currentAggReceivedMax, currentAggReceivedMin, minColumns)
+          minBinSize = glados.Utils.Buckets.getIntervalSize(currentAggReceivedMax, currentAggReceivedMin, maxColumns)
 
           aggDescription.min_bin_size = minBinSize
           aggDescription.max_bin_size = maxBinSize
@@ -146,10 +167,22 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+          currentNumCols = bucketsList.length
+
+          console.log 'I have the buckets!', receivedAggsInfo
+
+          currentMinValue = aggDescription.min_value
+          currentMaxValue = aggDescription.max_value
+
+          intervalSize = glados.Utils.Buckets.getIntervalSize(currentMaxValue, currentMinValue, currentNumCols)
 
           bucketsData[aggKey] =
             buckets: bucketsList
-            num_columns: bucketsList.length
+            num_columns: currentNumCols
+            bin_size: intervalSize
+            min_bin_size: aggDescription.min_bin_size
+            max_bin_size: aggDescription.max_bin_size
+
 
       return bucketsData
 

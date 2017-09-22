@@ -172,8 +172,31 @@ class TargetReportCardApp
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-        target_chembl_id: GlobalVariables.CHEMBL_ID
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'target_chembl_id'
+      fields: ['_metadata.related_targets.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 1
+          max_columns: 20
+          num_columns: 10
+
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: GlobalVariables.CHEMBL_ID
+      aggs_config: aggsConfig
+
+    console.log 'initialising associated compounds!'
+    console.log 'associatedCompounds: ', associatedCompounds
+
+#    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
+#        target_chembl_id: GlobalVariables.CHEMBL_ID
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     new glados.views.Target.AssociatedCompoundsView

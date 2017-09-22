@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.Target',
   AssociatedCompoundsView: CardView.extend
 
     initialize: ->
+      console.log 'INIT VIEW!'
       @model.on 'change', @render, @
       $progressElem = $(@el).find('.load-messages-container')
       @model.set('progress_elem', $progressElem)
@@ -22,6 +23,7 @@ glados.useNameSpace 'glados.views.Target',
         x_axis_min_columns: 1
         x_axis_max_columns: 20
         x_axis_initial_num_columns: 10
+        x_axis_prop_name: 'x_axis_agg'
         title: 'Associated Compounds for Target ' + @model.get('target_chembl_id')
         range_categories: true
         max_categories: 8
