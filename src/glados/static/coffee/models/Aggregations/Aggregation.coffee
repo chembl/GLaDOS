@@ -32,6 +32,8 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggConfig.min_bin_size = null
       aggConfig.max_value = null
       aggConfig.min_value = null
+      aggConfig.bin_size = null
+      aggConfig.intervals_set_by_bin_size = null
 
     changeFieldForAggregation: (aggName, newField) ->
 
@@ -46,12 +48,22 @@ glados.useNameSpace 'glados.models.Aggregations',
     changeNumColumnsForAggregation: (aggName, newNumColumns) ->
 
       aggConfig = @getAggregationConfig(aggName)
-      aggConfig.num_columns = newNumColumns
       if aggConfig.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
         @cleanUpRangeAggConfig(aggConfig)
 
+      aggConfig.num_columns = newNumColumns
       @fetch() unless @get('test_mode')
 
+    changeBinSizeForAggregation: (aggName, newBinSize) ->
+
+      aggConfig = @getAggregationConfig(aggName)
+      if aggConfig.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        @cleanUpRangeAggConfig(aggConfig)
+
+      aggConfig.bin_size = newBinSize
+      aggConfig.intervals_set_by_bin_size = true
+
+      @fetch() unless @get('test_mode')
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
@@ -238,6 +250,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     getRequestData: ->
 
+      console.log 'get request data!'
       aggsData = {}
       aggsConfig = @get('aggs_config')
 
@@ -247,7 +260,12 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           minValue = aggDescription.min_value
           maxValue = aggDescription.max_value
-          numCols = aggDescription.num_columns
+
+          if aggDescription.intervals_set_by_bin_size
+            interval = aggDescription.bin_size
+            numCols = Math.ceil(Math.abs(maxValue - minValue) / interval)
+          else
+            numCols = aggDescription.num_columns
 
           ranges = glados.Utils.Buckets.getElasticRanges(minValue, maxValue, numCols)
 

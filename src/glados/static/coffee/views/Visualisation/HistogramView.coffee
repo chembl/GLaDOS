@@ -75,9 +75,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       newBinSize = $(event.currentTarget).val()
       @paintBinSizeRange(newBinSize)
-      console.log 'new bin size: ', newBinSize
-      @model.set('custom_interval_size', newBinSize)
-      @model.fetch()
+      @model.changeBinSizeForAggregation(@xAxisAggName, newBinSize)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render

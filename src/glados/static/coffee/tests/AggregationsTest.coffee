@@ -132,28 +132,44 @@ describe 'Aggregation', ->
       newPropertyName = 'molecule_properties.alogp'
       associatedCompounds.changeFieldForAggregation('x_axis_agg', newPropertyName)
 
-      aggsConfigGot = associatedCompounds.get('aggs_config').aggs.x_axis_agg
-      aggConfigGot = aggsConfigGot
+      aggsConfigGot = associatedCompounds.get('aggs_config').aggs
+      aggConfigGot = aggsConfigGot.x_axis_agg
 
       expect(aggConfigGot.field).toBe(newPropertyName)
-      expect(aggConfigGot.max_bin_size?).toBe(false)
-      expect(aggConfigGot.min_bin_size?).toBe(false)
-      expect(aggConfigGot.max_value?).toBe(false)
-      expect(aggConfigGot.min_value?).toBe(false)
 
-    it 'changes the number od columns for an aggregation', ->
+    it 'changes the number of columns for an aggregation', ->
 
       newNumColumns = 5
       associatedCompounds.changeNumColumnsForAggregation('x_axis_agg', newNumColumns)
 
-      aggsConfigGot = associatedCompounds.get('aggs_config').aggs.x_axis_agg
-      aggConfigGot = aggsConfigGot
+      aggsConfigGot = associatedCompounds.get('aggs_config').aggs
+      aggConfigGot = aggsConfigGot.x_axis_agg
 
       expect(aggConfigGot.num_columns).toBe(newNumColumns)
-      expect(aggConfigGot.max_bin_size?).toBe(false)
-      expect(aggConfigGot.min_bin_size?).toBe(false)
-      expect(aggConfigGot.max_value?).toBe(false)
-      expect(aggConfigGot.min_value?).toBe(false)
+
+    it 'changes the bin size for an aggregation', ->
+
+      newbinSize = 180
+      associatedCompounds.changeBinSizeForAggregation('x_axis_agg', newbinSize)
+
+      aggsConfigGot = associatedCompounds.get('aggs_config').aggs.x_axis_agg
+      aggConfigGot = aggsConfigGot
+      expect(aggConfigGot.bin_size).toBe(newbinSize)
+      expect(aggConfigGot.intervals_set_by_bin_size).toBe(true)
+
+    it 'cleans up the configuration for an aggregation', ->
+
+      aggsConfig = associatedCompounds.get('aggs_config').aggs
+      aggConfig = aggsConfig.x_axis_agg
+
+      associatedCompounds.cleanUpRangeAggConfig(aggConfig)
+      expect(aggConfig.max_bin_size?).toBe(false)
+      expect(aggConfig.min_bin_size?).toBe(false)
+      expect(aggConfig.max_value?).toBe(false)
+      expect(aggConfig.min_value?).toBe(false)
+
+
+
 
 
 
