@@ -175,6 +175,7 @@ describe 'Aggregation', ->
   describe 'with a categorical property (Associated bioactivities for a target)', ->
 
     associatedBioactivities = undefined
+    bucketsTestData = undefined
     indexUrl = glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
     currentField = 'standard_type'
     targetChemblID = 'CHEMBL2111342'
@@ -199,7 +200,10 @@ describe 'Aggregation', ->
         target_chembl_id: targetChemblID
         aggs_config: aggsConfig
         test_mode: true
-      done()
+
+      $.get (glados.Settings.STATIC_URL + 'testData/AggregationBucketsSampleResponseSc2.json'), (testData) ->
+        bucketsTestData = testData
+        done()
 
     it 'initializes correctly', ->
 
@@ -221,5 +225,19 @@ describe 'Aggregation', ->
       requestData = associatedBioactivities.getRequestData()
       expect(requestData.aggs.types.terms.field).toBe(currentField)
       expect(requestData.aggs.types.terms.size).toBe(aggsConfig.aggs.types.size)
+
+    it 'parses the bucket data', ->
+
+      parsedObj = associatedBioactivities.parse(bucketsTestData)
+      bucketsShouldBe = bucketsTestData.aggregations.types.buckets
+      bucketsGot = parsedObj.types.buckets
+
+      for key, bucket of bucketsGot
+        keyGot = bucket.key
+        bucketShouldBe = bucketsShouldBe[keyGot]
+        expect(bucketShouldBe?).toBe(true)
+
+      expect(parsedObj.types.num_columns).toBe(Object.keys(bucketsShouldBe).length)
+
 
 

@@ -125,6 +125,7 @@ glados.useNameSpace 'glados.models.Aggregations',
           $progressElem.html ''
 
         console.log 'data received!! ', data
+        console.log JSON.stringify(data)
 
         thisModel.set('bucket_data', thisModel.parse(data))
         thisModel.set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
@@ -232,6 +233,16 @@ glados.useNameSpace 'glados.models.Aggregations',
             bin_size: intervalSize
             min_bin_size: aggDescription.min_bin_size
             max_bin_size: aggDescription.max_bin_size
+
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
+
+          currentBuckets = receivedAggsInfo[aggKey].buckets
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+          currentNumCols = bucketsList.length
+
+          bucketsData[aggKey] =
+            buckets: bucketsList
+            num_columns: currentNumCols
 
 
       return bucketsData
