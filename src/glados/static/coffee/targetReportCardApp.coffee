@@ -35,9 +35,6 @@ class TargetReportCardApp
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
     console.log 'query string: ', customQueryString
 
-    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -68,9 +65,7 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    new glados.views.Target.AssociatedCompoundsView
-      el: $('#TAssociatedCompoundProperties')
-      model: associatedCompounds
+    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
 
     target.fetch()
     appDrugsClinCandsList.fetch()
@@ -78,7 +73,6 @@ class TargetReportCardApp
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
-    associatedCompounds.fetch()
 
   @initTargetNameAndClassification = ->
 
@@ -168,9 +162,7 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-  @initAssociatedCompounds = ->
-
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+  @initAssociatedCompoundsContent = (targetChemblID) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -189,21 +181,20 @@ class TargetReportCardApp
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      target_chembl_id: targetChemblID
       aggs_config: aggsConfig
 
-    console.log 'initialising associated compounds!'
-    console.log 'associatedCompounds: ', associatedCompounds
-
-#    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-#        target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
       model: associatedCompounds
 
     associatedCompounds.fetch()
+
+  @initAssociatedCompounds = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
+
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
