@@ -169,7 +169,38 @@ describe 'Aggregation', ->
       expect(aggConfig.min_value?).toBe(false)
 
 
+  describe 'with a categorical property (Associated bioactivities for a target)', ->
 
+    associatedBioactivities = undefined
+    indexUrl = glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+    targetChemblID = 'CHEMBL2111342'
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    beforeAll (done) ->
+      associatedBioactivities = new glados.models.Aggregations.Aggregation
+        index_url: indexUrl
+        query_config: queryConfig
+        target_chembl_id: targetChemblID
+#        aggs_config: aggsConfig
+#        test_mode: true
+      done()
+
+    it 'initializes correctly', ->
+
+      queryStringMustBe = 'target_chembl_id:CHEMBL2111342'
+
+      expect(associatedBioactivities.url).toBe(indexUrl)
+      expect(associatedBioactivities.get('state'))\
+        .toBe(glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
+
+      queryGot = associatedBioactivities.get('query')
+      expect(queryGot.query_string?).toBe(true)
+      expect(queryGot.query_string.query).toBe(queryStringMustBe)
 
 
 

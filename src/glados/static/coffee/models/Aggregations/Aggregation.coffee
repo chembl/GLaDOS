@@ -17,6 +17,21 @@ glados.useNameSpace 'glados.models.Aggregations',
             query: @get(queryConfig.queryValueField)
             fields: queryConfig.fields
         @set('query', query)
+      else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+        templateValues = {}
+        templateData = queryConfig.template_data
+
+        for propKey, propName of templateData
+          templateValues[propKey] = @get(propName)
+
+        queryStringTemplate = queryConfig.query_string_template
+        queryString = Handlebars.compile(queryStringTemplate)(templateValues)
+
+        query =
+          query_string:
+            query: queryString
+            analyze_wildcard: true
+        @set('query', query)
 
     getAggregationConfig: (aggName) ->
 
@@ -287,6 +302,9 @@ glados.useNameSpace 'glados.models.Aggregations',
 glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_molecule/_search'
 
+glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
++ '/chembl_activity/_search'
+
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'
   LOADING_MIN_MAX: 'LOADING_MIN_MAX'
@@ -295,6 +313,7 @@ glados.models.Aggregations.Aggregation.States =
 
 glados.models.Aggregations.Aggregation.QueryTypes =
    MULTIMATCH: 'MULTIMATCH'
+   QUERY_STRING: 'QUERY_STRING'
 
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'

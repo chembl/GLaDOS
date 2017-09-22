@@ -207,6 +207,7 @@ class TargetReportCardApp
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
+    console.log 'init assoc bioactivities!'
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: chemblID
 
