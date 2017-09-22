@@ -45,14 +45,11 @@ run_step(){
 
 CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
 
+run_step "git checkout master"
+run_step "git pull"
 run_step "git checkout -b ${TAG_NAME}"
-run_step "git push -u ${TO_UPSTREAM} ${TAG_NAME}"
-run_step "git fetch --all"
-run_step "git reset --hard ${TO_UPSTREAM}/${TAG_NAME}"
-run_step "git push -f -u ${TO_UPSTREAM} ${TAG_NAME}"
-run_step "git tag -a ${TAG_NAME} -m 'Deployed with script on ${TAG_NAME}'"
-run_step "git pull --commit --no-edit origin master"
-run_step "git push -u ${TO_UPSTREAM} ${TAG_NAME}"
+run_step "git tag -a v-${TAG_NAME} -m 'Deployment using script on ${TAG_NAME}'"
+run_step "git push -u ${TO_UPSTREAM} v-${TAG_NAME}"
 run_step "git checkout ${CURRENT_BRANCH}"
 run_step "git branch -d ${TAG_NAME}"
 run_step "git reset --hard"
