@@ -4,9 +4,10 @@ glados.useNameSpace 'glados.views.Visualisation',
     initialize: ->
       @config = arguments[0].config
 
-      @model.on 'change', @render, @
+      @model.on 'change:state', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
-      updateViewProxy = @setUpResponsiveRender()
+      @setUpResponsiveRender()
+      @xAxisAggName = @config.x_axis_prop_name
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
@@ -24,6 +25,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       else
         glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
 
+    hideHistogramContent: -> $(@el).find('.BCK-HistogramContainer').hide()
+    hideAxesSelectors: -> $(@el).find('.BCK-AxesSelectorContainer').hide()
     # ------------------------------------------------------------------------------------------------------------------
     # axes selectors
     # ------------------------------------------------------------------------------------------------------------------
@@ -42,14 +45,14 @@ glados.useNameSpace 'glados.views.Visualisation',
         min_value: @config.x_axis_min_columns
         max_value: @config.x_axis_max_columns
 
-    paintBinSizeRange: (currentBinSize=@model.get('bin_size')) ->
+    paintBinSizeRange: (currentBinSize=@model.get('bucket_data')[@xAxisAggName].bin_size) ->
 
-      console.log 'painting range with: ', currentBinSize
+      buckets = @model.get('bucket_data')[@xAxisAggName]
       $xAxisBinSizeRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-binSize')
       glados.Utils.fillContentForElement $xAxisBinSizeRange,
         current_value: currentBinSize
-        min_value: @model.get('min_bin_size')
-        max_value: @model.get('max_bin_size')
+        min_value: buckets.min_bin_size
+        max_value: buckets.max_bin_size
 
     handleXAxisPropertyChange: (event) ->
 
@@ -59,58 +62,53 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       @currentXAxisProperty = @config.properties[newProperty]
       newPropertyComparator = @currentXAxisProperty.propName
+
       @model.set('current_xaxis_property', newPropertyComparator)
-      @model.fetch()
+      @model.changeFieldForAggregation(@xAxisAggName, newPropertyComparator)
 
     handleNumColumnsChange: (event) ->
 
       newColsNum = $(event.currentTarget).val()
-      @model.set('num_columns', newColsNum)
       @paintNumBarsRange(newColsNum)
-      @model.fetch()
+      @model.changeNumColumnsForAggregation(@xAxisAggName, newColsNum)
 
     handleBinSizeChange: (event) ->
 
       newBinSize = $(event.currentTarget).val()
       @paintBinSizeRange(newBinSize)
-      console.log 'new bin size: ', newBinSize
-      @model.set('custom_interval_size', newBinSize)
-      @model.fetch()
+      @model.changeBinSizeForAggregation(@xAxisAggName, newBinSize)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
 
-    # returns the buckets that are going to be used for the visualisation
-    # actual buckets may be merged into "other" depending on @maxCategories
-    getBucketsForView: ->
-      buckets =  @model.get('buckets')
-      maxCategories = @config.max_categories
-
-      if buckets.length > maxCategories
-        buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model)
-
-      return buckets
-
     render: ->
 
-      console.log 'RENDER HISTOGRAM!'
-      @$vis_elem.empty()
-
-      if @config.range_categories
-        buckets = @model.get('buckets')
-      else
-        buckets = @getBucketsForView()
-
-      if buckets.length == 0
+      console.log 'RENDER HISTOGRAM: ', @model.get('state')
+      if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
         noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
         $visualisationMessages.html(noDataMsg)
+        @hideHistogramContent()
+        @hideAxesSelectors()
         return
+
+      if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+        return
+
+      @$vis_elem.empty()
+
+
+      buckets = @model.get('bucket_data')[@xAxisAggName].buckets
+
+      maxCategories = @config.max_categories
+      if buckets.length > maxCategories
+        buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
+
 
       if @config.big_size
         @paintBinSizeRange()
-        @paintNumBarsRange(@model.get('num_columns'))
+        @paintNumBarsRange(buckets.length)
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
@@ -123,8 +121,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', VISUALISATION_HEIGHT)
 
       thisView = @
-
-#      hide_title
 
       if @config.big_size
         TITLE_Y = 30
@@ -144,7 +140,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         TITLE_Y_PADDING = 0
 
       BARS_MIN_HEIGHT = 2
-
 
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
       BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING

@@ -180,7 +180,7 @@ glados.useNameSpace 'glados',
     getRadiansFromDegrees: (degrees) -> (degrees * Math.PI) / 180
 
     Buckets:
-      mergeBuckets: (buckets, maxCategories, model) ->
+      mergeBuckets: (buckets, maxCategories, model, aggName) ->
 
         if buckets.length > maxCategories
           start = maxCategories - 1
@@ -188,7 +188,7 @@ glados.useNameSpace 'glados',
           bucketsToMerge = buckets[start..stop]
 
           if model?
-            mergedLink = model.getMergedLink(bucketsToMerge)
+            mergedLink = model.getMergedLink(bucketsToMerge, aggName)
           else
             mergedLink = ''
 
@@ -202,6 +202,36 @@ glados.useNameSpace 'glados',
 
         return buckets
 
+      getElasticRanges: (minValue, maxValue, numCols) ->
+
+        interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+
+        ranges = []
+        from = minValue
+        to = minValue + interval
+        for col in [0..numCols-1]
+          from = parseFloat(from.toFixed(2))
+          to = parseFloat(to.toFixed(2))
+          ranges.push
+            from: from
+            to: to
+
+          from += interval
+          to += interval
+
+        return ranges
+
+      getIntervalSize: (maxValue, minValue, numColumns) ->
+        parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numColumns).toFixed(2))
+
+      getBucketsList: (elasticBucketsObj) ->
+
+        buckets = []
+        for key, bucket of elasticBucketsObj
+          bucket.key = key
+          buckets.push bucket
+
+        return buckets
     ErrorMessages:
 
       getJQXHRErrorText: (jqXHR) ->

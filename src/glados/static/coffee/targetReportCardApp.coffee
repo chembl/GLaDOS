@@ -35,9 +35,6 @@ class TargetReportCardApp
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
     console.log 'query string: ', customQueryString
 
-    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
@@ -68,9 +65,7 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    new glados.views.Target.AssociatedCompoundsView
-      el: $('#TAssociatedCompoundProperties')
-      model: associatedCompounds
+    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
 
     target.fetch()
     appDrugsClinCandsList.fetch()
@@ -78,7 +73,6 @@ class TargetReportCardApp
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
-    associatedCompounds.fetch()
 
   @initTargetNameAndClassification = ->
 
@@ -168,19 +162,39 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-  @initAssociatedCompounds = ->
+  @initAssociatedCompoundsContent = (targetChemblID) ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'target_chembl_id'
+      fields: ['_metadata.related_targets.chembl_ids.*']
 
-    associatedCompounds = new glados.models.Target.TargetAssociatedCompounds
-        target_chembl_id: GlobalVariables.CHEMBL_ID
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 1
+          max_columns: 20
+          num_columns: 10
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: targetChemblID
+      aggs_config: aggsConfig
+
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
       model: associatedCompounds
 
     associatedCompounds.fetch()
+
+  @initAssociatedCompounds = ->
+
+    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
+
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
@@ -193,8 +207,36 @@ class TargetReportCardApp
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    bioactivities = new TargetAssociatedBioactivities
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'standard_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Activity.getActivitiesListURL
+
+
+    bioactivities = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+      query_config: queryConfig
       target_chembl_id: chemblID
+      aggs_config: aggsConfig
 
     barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true).colourScale
@@ -204,6 +246,7 @@ class TargetReportCardApp
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
       hide_title: true
+      x_axis_prop_name: 'types'
 
     new glados.views.Visualisation.HistogramView
       model: bioactivities
