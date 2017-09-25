@@ -194,11 +194,21 @@ $sidenav-badge-padding: 3px;
   }
 
   li {
-    div.collapsible-header {
+    a {
+      &.selected {
+        background: $primary-color;
+        color: white;
+        span.badge-primary-color-no-float {
+          color: $primary-color;
+          background-color: $chip-bg-color;
+        }
+      }
+
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
       min-height: inherit !important;
       line-height: $sidenav-links-lineheight !important;
       padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
+      padding-left: 2*$sidenav-links-side-padding !important;
 
       span.badge {
         margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
@@ -206,38 +216,6 @@ $sidenav-badge-padding: 3px;
         padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
         &.new:after {
           content: "" !important;
-        }
-      }
-    }
-    div.collapsible-body {
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      min-height: inherit !important;
-      line-height: $sidenav-links-lineheight !important;
-      padding: 0px !important;
-      li a {
-
-        &.selected {
-          background: $primary-color;
-          color: white;
-          span.badge-primary-color-no-float {
-            color: $primary-color;
-            background-color: $chip-bg-color;
-          }
-        }
-
-        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-        min-height: inherit !important;
-        line-height: $sidenav-links-lineheight !important;
-        padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
-        padding-left: 2*$sidenav-links-side-padding !important;
-
-        span.badge {
-          margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
-          border-radius: 2*$sidenav-badge-padding;
-          padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
-          &.new:after {
-            content: "" !important;
-          }
         }
       }
     }
@@ -266,6 +244,23 @@ footer {
 * Chembl bar
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+#chembl-header-container{
+  height: 0;
+  z-index: 5;
+  &.pin-top{
+    margin-top: 0;
+  }
+  &.pinned{
+    display: block;
+    width: 100%;
+  }
+}
+
+#chembl-header-container-spacer{
+  display: block;
+  height: 100px;
+}
 
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;

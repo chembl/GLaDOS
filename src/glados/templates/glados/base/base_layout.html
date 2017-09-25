@@ -30,10 +30,13 @@
 
   </div>
 
-  <div id="chembl-header-container" class="row">
+  <div id="chembl-header-container">
    {% block chembl_header %}
       {% include "glados/base/chembl_header.html" %}
     {% endblock %}
+  </div>
+  <div id="chembl-header-container-spacer">
+
   </div>
 
 </header>
@@ -94,8 +97,8 @@
 <script type="text/javascript" charset="utf-8">
 
   $(document).ready(function () {
-
-    SideMenuHelper.initializeSideMenu();
+    glados.helpers.HeaderHelper.initializeHeader();
+    glados.helpers.SideMenuHelper.initializeSideMenu();
 
     {% block custom_js_inline %}{% endblock %}
 
