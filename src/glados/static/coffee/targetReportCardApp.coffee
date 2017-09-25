@@ -220,7 +220,17 @@ class TargetReportCardApp
           field: 'standard_type'
           size: 20
           bucket_links:
-            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} AND '
+
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Activity.getActivitiesListURL
+
 
     bioactivities = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL

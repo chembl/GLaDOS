@@ -93,7 +93,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     fetch: ->
 
-      console.log 'fetching!'
       $progressElem = @get('progress_elem')
       state = @get('state')
 
@@ -102,19 +101,15 @@ glados.useNameSpace 'glados.models.Aggregations',
       or state == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
         if $progressElem?
           $progressElem.html 'Loading minimun and maximum values...'
-        console.log 'loading min and max'
+
         @set('state', glados.models.Aggregations.Aggregation.States.LOADING_MIN_MAX)
         @fetchMinMax()
         return
 
-      console.log 'I already have min and max or dont need it'
       if $progressElem?
         $progressElem.html 'Fetching Data...'
 
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log '@url: ', @url
-      console.log 'esJSONRequest: ', esJSONRequest
-      console.log 'req data obj: ', @getRequestData()
 
       fetchESOptions =
         url: @url
@@ -127,23 +122,14 @@ glados.useNameSpace 'glados.models.Aggregations',
         if $progressElem?
           $progressElem.html ''
 
-        console.log 'data received!! ', data
-        console.log '---'
-        console.log JSON.stringify(data)
-        console.log '---'
-
         thisModel.set('bucket_data', thisModel.parse(data))
         thisModel.set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
-        console.log 'thisModel: ', thisModel
-#        thisModel.set('custom_interval_size', undefined , {silent:true})
 
-      ).fail( -> console.log 'error'
-#        glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem)
-      )
+
+      ).fail( -> glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
     fetchMinMax: ->
 
-      console.log 'fetching min and max data'
       $progressElem = @get('progress_elem')
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
@@ -158,18 +144,14 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         thisModel.set('aggs_config', thisModel.parseMinMax(data))
 
-        console.log 'min and max data received!'
         if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
           $progressElem.html '' unless not $progressElem?
-          console.log 'no data found! ', thisModel.get('state')
           return
 
         thisModel.set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
         thisModel.fetch()
 
-      ).fail( -> console.log 'ERROR!'
-#        glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem)
-      )
+      ).fail( -> glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
 
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -218,19 +200,21 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
 
+        # ---------------------------------------------------------------------
+        # Parsing by type
+        # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
           currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
-          console.log 'I have the buckets!', receivedAggsInfo
-          console.log 'currentNumCols: ', currentNumCols
-
           currentMinValue = aggDescription.min_value
           currentMaxValue = aggDescription.max_value
 
           intervalSize = glados.Utils.Buckets.getIntervalSize(currentMaxValue, currentMinValue, currentNumCols)
+
+          @parseBucketsLink(aggDescription, bucketsList)
 
           bucketsData[aggKey] =
             buckets: bucketsList
@@ -244,15 +228,59 @@ glados.useNameSpace 'glados.models.Aggregations',
           currentBuckets = receivedAggsInfo[aggKey].buckets
           currentNumCols = currentBuckets.length
 
+          @parseBucketsLink(aggDescription, currentBuckets)
+
           bucketsData[aggKey] =
             buckets: currentBuckets
             num_columns: currentNumCols
 
-
       return bucketsData
 
+    parseBucketsLink: (aggDescription, bucketsList) ->
 
-    getMergedLink: -> 'hola'
+      linksDescription = aggDescription.bucket_links
+
+      if linksDescription?
+        templateDataDesc =  linksDescription.template_data
+        template = linksDescription.bucket_filter_template
+        linkGenerator = linksDescription.link_generator
+        generateFilter = Handlebars.compile(template)
+        for bucket in bucketsList
+          @setLinkForBucket(generateFilter, templateDataDesc, bucket, linkGenerator)
+
+    getMergedLink: (bucketsToMerge, aggName) ->
+
+      currentAggConfig = @get('aggs_config').aggs[aggName]
+      linksDescription = currentAggConfig.bucket_links
+      templateDataDesc =  linksDescription.template_data
+      template = linksDescription.bucket_filter_template
+      linkGenerator = linksDescription.link_generator
+      generateFilter = Handlebars.compile(template)
+
+      @setLinkForBucket(generateFilter, templateDataDesc, undefined , linkGenerator, bucketsToMerge)
+
+    setLinkForBucket: (compiledTemplate, templateDataDesc, bucket, linkGenerator, bucketsToMerge) ->
+
+      if bucketsToMerge?
+        bucket = bucketsToMerge[0]
+        restOfBuckets = bucketsToMerge[1..bucketsToMerge.length-1]
+
+      templateValues = {}
+      for propKey, propExp of templateDataDesc
+
+        if propExp.startsWith('BUCKET')
+          propName = propExp.split('.')[1]
+          value = bucket[propName]
+        else if propExp.startsWith('EXTRA_BUCKETS') and bucketsToMerge?
+          propName = propExp.split('.')[1]
+          value = (b.key for b in restOfBuckets)
+        else
+          value = @get(propExp)
+
+        templateValues[propKey] = value
+
+      bucket.link = linkGenerator(compiledTemplate(templateValues))
+
     #-------------------------------------------------------------------------------------------------------------------
     # Request Data
     #-------------------------------------------------------------------------------------------------------------------
@@ -291,7 +319,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     getRequestData: ->
 
-      console.log 'get request data!'
       aggsData = {}
       aggsConfig = @get('aggs_config')
 

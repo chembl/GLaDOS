@@ -180,7 +180,7 @@ glados.useNameSpace 'glados',
     getRadiansFromDegrees: (degrees) -> (degrees * Math.PI) / 180
 
     Buckets:
-      mergeBuckets: (buckets, maxCategories, model) ->
+      mergeBuckets: (buckets, maxCategories, model, aggName) ->
 
         if buckets.length > maxCategories
           start = maxCategories - 1
@@ -188,7 +188,7 @@ glados.useNameSpace 'glados',
           bucketsToMerge = buckets[start..stop]
 
           if model?
-            mergedLink = model.getMergedLink(bucketsToMerge)
+            mergedLink = model.getMergedLink(bucketsToMerge, aggName)
           else
             mergedLink = ''
 
