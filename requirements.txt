@@ -1,5 +1,5 @@
 Arpeggio
-django==1.11.5
+django==1.10.4
 django-compressor>=2.0
 selenium
 twitter
