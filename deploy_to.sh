@@ -41,12 +41,13 @@ check_last_call(){
 
 CURRENT_STEP=1
 run_step(){
-    echo "\nStep ${CURRENT_STEP}: ----------> $1\n"
+    printf "\nStep ${CURRENT_STEP}: ----------> $1\n\n"
     eval $1
     check_last_call
     let "CURRENT_STEP++"
 }
 
+trap return_to_origin_dir INT
 
 ORIGIN_URL=$(git config --get remote.origin.url)
 DEPLOYMENT_URL=$(git config --get remote.${TO_UPSTREAM}.url)
