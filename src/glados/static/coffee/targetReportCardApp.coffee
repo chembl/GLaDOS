@@ -255,16 +255,59 @@ class TargetReportCardApp
 
     bioactivities.fetch()
 
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    console.log 'initMiniCompoundsHistogram:'
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'target_chembl_id'
+      fields: ['_metadata.related_targets.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 8
+          max_columns: 8
+          num_columns: 8
+
+
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: true
+      x_axis_prop_name: 'x_axis_agg'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
     paramsList = $(@).attr('data-function-paramaters').split(',')
-    targetChemblID = paramsList[0]
+    constantParamsList = $(@).attr('data-function_constant_parameters').split(',')
     $containerElem = $clickedLink.parent()
     $containerElem.removeClass('number-cell')
     $containerElem.addClass('vis-container')
-
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
-    TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+    histogramType = constantParamsList[0]
+    targetChemblID = paramsList[0]
+    if histogramType == 'activities'
+      TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+    else if histogramType == 'compounds'
+      TargetReportCardApp.initMiniCompoundsHistogram($containerElem, targetChemblID)
 
 

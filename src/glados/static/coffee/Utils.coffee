@@ -73,6 +73,7 @@ glados.useNameSpace 'glados',
         if returnCol['is_function_link']
           returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
           for paramComp in colDescription.function_parameters).join(',')
+          returnCol['function_constant_parameters'] = colDescription.function_constant_parameters
           returnCol['function_key'] = colDescription.function_key
 
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']

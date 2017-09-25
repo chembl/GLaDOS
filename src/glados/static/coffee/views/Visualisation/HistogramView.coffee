@@ -84,7 +84,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
-      console.log 'RENDER HISTOGRAM: ', @model.get('state')
       if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
         noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
