@@ -16,14 +16,18 @@ if [ -z "$TO_UPSTREAM" ]; then
     exit 1
 fi
 
-CALL_DIR=$(pwd)
-echo $(pwd)
-cd $DIR
-echo $(pwd)
-
 return_to_origin_dir(){
-    cd $CALL_DIR
-    echo $(pwd)
+    if [ -n "$CALL_DIR" ]
+    then
+        echo "Returning to $CALL_DIR . . ."
+        cd $CALL_DIR
+        echo "Current location: $(pwd)"
+    fi
+    if [ -n "$TEMP_DIR" ]
+    then
+        echo "Deleting temporary directory at: $TEMP_DIR"
+        rm -rf $TEMP_DIR
+    fi
 }
 
 check_last_call(){
@@ -37,20 +41,38 @@ check_last_call(){
 
 CURRENT_STEP=1
 run_step(){
-    echo "Step ${CURRENT_STEP}: ----------> $1"
+    printf "\nStep ${CURRENT_STEP}: ----------> $1\n\n"
     eval $1
     check_last_call
     let "CURRENT_STEP++"
 }
 
-CURRENT_BRANCH=$(git branch | grep \* | cut -d ' ' -f2)
+trap return_to_origin_dir INT
 
+ORIGIN_URL=$(git config --get remote.origin.url)
+DEPLOYMENT_URL=$(git config --get remote.${TO_UPSTREAM}.url)
+if [ -z "$DEPLOYMENT_URL" ]
+then
+    echo "There is not an URL defined for ${TO_UPSTREAM}"
+    exit 1
+fi
+
+CALL_DIR=$(pwd)
+echo "Called from: $(pwd)"
+cd $DIR
+echo "Script Location: $(pwd)"
+TEMP_DIR=$(mktemp -d)
+check_last_call
+
+
+run_step "cd ${TEMP_DIR}"
+run_step "git clone ${DEPLOYMENT_URL}"
+run_step "cd GLaDOS-deployment"
+run_step "git remote add deploy_from ${ORIGIN_URL}"
 run_step "git checkout master"
 run_step "git pull"
-run_step "git checkout -b ${TAG_NAME}"
-run_step "git tag -a v-${TAG_NAME} -m 'Deployment using script on ${TAG_NAME}'"
-run_step "git push -u ${TO_UPSTREAM} v-${TAG_NAME}"
-run_step "git checkout ${CURRENT_BRANCH}"
-run_step "git branch -d ${TAG_NAME}"
-run_step "git reset --hard"
+run_step "git pull --commit --no-edit deploy_from master"
+run_step "git push"
+run_step "git tag -a DEPLOY_${TAG_NAME} -m 'Deployment using script on ${TAG_NAME}'"
+run_step "git push origin DEPLOY_${TAG_NAME}"
 return_to_origin_dir
