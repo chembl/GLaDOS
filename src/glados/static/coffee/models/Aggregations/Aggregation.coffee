@@ -109,9 +109,12 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       console.log 'I already have min and max or dont need it'
       if $progressElem?
-        $progressElem.html 'Fetching Compound Data...'
+        $progressElem.html 'Fetching Data...'
 
       esJSONRequest = JSON.stringify(@getRequestData())
+      console.log '@url: ', @url
+      console.log 'esJSONRequest: ', esJSONRequest
+      console.log 'req data obj: ', @getRequestData()
 
       fetchESOptions =
         url: @url
@@ -125,7 +128,9 @@ glados.useNameSpace 'glados.models.Aggregations',
           $progressElem.html ''
 
         console.log 'data received!! ', data
+        console.log '---'
         console.log JSON.stringify(data)
+        console.log '---'
 
         thisModel.set('bucket_data', thisModel.parse(data))
         thisModel.set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
@@ -237,17 +242,17 @@ glados.useNameSpace 'glados.models.Aggregations',
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
 
           currentBuckets = receivedAggsInfo[aggKey].buckets
-          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
-          currentNumCols = bucketsList.length
+          currentNumCols = currentBuckets.length
 
           bucketsData[aggKey] =
-            buckets: bucketsList
+            buckets: currentBuckets
             num_columns: currentNumCols
 
 
       return bucketsData
 
 
+    getMergedLink: -> 'hola'
     #-------------------------------------------------------------------------------------------------------------------
     # Request Data
     #-------------------------------------------------------------------------------------------------------------------

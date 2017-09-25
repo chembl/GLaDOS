@@ -46,7 +46,6 @@ glados.useNameSpace 'glados.views.Visualisation',
     paintBinSizeRange: (currentBinSize=@model.get('bucket_data')[@xAxisAggName].bin_size) ->
 
       buckets = @model.get('bucket_data')[@xAxisAggName]
-      console.log 'painting range with: ', currentBinSize
       $xAxisBinSizeRange = $(@el).find('.BCK-ESResultsPlot-selectXAxis-binSize')
       glados.Utils.fillContentForElement $xAxisBinSizeRange,
         current_value: currentBinSize
@@ -97,9 +96,13 @@ glados.useNameSpace 'glados.views.Visualisation',
       console.log 'RENDER HISTOGRAM!'
       @$vis_elem.empty()
 
-      console.log 'LOADING BUCKETS'
+      console.log 'LOADING BUCKETS: ', @xAxisAggName
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
+
+      maxCategories = @config.max_categories
+      if buckets.length > maxCategories
+        buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model)
 
       if buckets.length == 0
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')

@@ -207,9 +207,26 @@ class TargetReportCardApp
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    console.log 'init assoc bioactivities!'
-    bioactivities = new TargetAssociatedBioactivities
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'standard_type'
+          size: 20
+          bucket_links:
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} AND '
+
+    bioactivities = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+      query_config: queryConfig
       target_chembl_id: chemblID
+      aggs_config: aggsConfig
 
     barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true).colourScale
@@ -219,6 +236,7 @@ class TargetReportCardApp
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
       hide_title: true
+      x_axis_prop_name: 'types'
 
     new glados.views.Visualisation.HistogramView
       model: bioactivities
