@@ -1,41 +1,18 @@
 {% load static %}
-<div class="position-relative">
+<div class="chembl-header">
 
-  <nav class="top-nav">
-    <!-- To show the side navbar when it has been hidden-->
-    <div class="container show-on-medium-and-down">
-
-      <a data-activates="slide-out" class="button-collapse">
-        <i class="material-icons">menu</i>
-      </a>
-
-    </div>
-    <div class="container">
-      <div class="nav-wrapper">
-        <a href="{% url 'main' %}" class="chembl-logo-link hide-on-large-only">
-          <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}" />
-        </a>
-
-        <a id='NEW-Logo-img' href="{% url 'main' %}" class="chembl-logo-link-new" style="display: none">
-          <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}" />
-        </a>
-
-        <a href="{% url 'main' %}" class="brand-logo">ChEMBL
-          <small><span class="icon icon-generic" data-icon=">"></span></small>
-        </a>
-        <ul class="right hide-on-med-and-down">
-
-          <li><img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" height="30"
-                   style="padding-top: 10px;"/>
-          </li>
-
-        </ul>
-
-      </div>
-    </div>
-
-
-  </nav>
+  {% if hide_side_nav %}
+    <a data-activates="slide-out" class="button-collapse z-depth-1 waves-effect waves-light">
+      <i class="material-icons medium">menu</i>
+    </a>
+    <a href="{% url 'main' %}" class="z-depth-1">
+      <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
+    </a>
+  {% endif %}
+  <a href="{% url 'main' %}">
+    ChEMBL
+    <span class="icon icon-generic" data-icon="&gt;"></span>
+  </a>
 
   <div class="download-database-btn valign-wrapper">
 
