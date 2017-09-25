@@ -1,5 +1,5 @@
 describe 'Aggregation', ->
-  describe 'with a numeric property (Associated compounds for a target)', ->
+  describe '1. with a numeric property (Associated compounds for a target)', ->
     associatedCompounds = undefined
     minMaxTestData = undefined
     bucketsTestData = undefined
@@ -172,7 +172,7 @@ describe 'Aggregation', ->
       expect(aggConfig.min_value?).toBe(false)
 
 
-  describe 'with a categorical property (Associated bioactivities for a target)', ->
+  describe '2. with a categorical property (Associated bioactivities for a target)', ->
 
     associatedBioactivities = undefined
     bucketsTestData = undefined
@@ -232,10 +232,14 @@ describe 'Aggregation', ->
       bucketsShouldBe = bucketsTestData.aggregations.types.buckets
       bucketsGot = parsedObj.types.buckets
 
-      for key, bucket of bucketsGot
-        keyGot = bucket.key
-        bucketShouldBe = bucketsShouldBe[keyGot]
-        expect(bucketShouldBe?).toBe(true)
+      for i in [0..bucketsGot.length-1]
+        bucketGot = bucketsGot[i]
+        bucketShouldBe = bucketsShouldBe[i]
+
+        keyGot = bucketGot.key
+        keyShouldBe = bucketShouldBe.key
+
+        expect(keyGot).toBe(keyShouldBe)
 
       expect(parsedObj.types.num_columns).toBe(Object.keys(bucketsShouldBe).length)
 

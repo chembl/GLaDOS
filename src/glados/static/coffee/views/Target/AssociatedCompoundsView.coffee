@@ -26,7 +26,6 @@ glados.useNameSpace 'glados.views.Target',
         x_axis_prop_name: 'x_axis_agg'
         title: 'Associated Compounds for Target ' + @model.get('target_chembl_id')
         range_categories: true
-        max_categories: 8
 
       @model.set('current_xaxis_property', config.properties[config.initial_property_x].propName)
       @model.set('num_columns', config.x_axis_initial_num_columns)

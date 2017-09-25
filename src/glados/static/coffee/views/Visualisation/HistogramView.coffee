@@ -90,6 +90,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
       maxCategories = @config.max_categories
+      console.log 'maxCategories: ', maxCategories
       if buckets.length > maxCategories
         buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
 
