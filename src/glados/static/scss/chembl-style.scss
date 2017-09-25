@@ -158,6 +158,10 @@ $sidenav-badge-padding: 3px;
   padding: 0px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
+  &:not(.fixed){
+    display: none;
+  }
+
   &:after {
     content: "   ";
     display: block;
@@ -278,21 +282,13 @@ header .row {
   margin-bottom: 0;
 }
 
-nav.top-nav {
-  background-color: $h2-color;
-  height: 90px;
-  line-height: 100px;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  border-bottom: 1px solid #d1d1d1;
-}
-
-nav.top-nav a {
-  text-shadow: 1px 1px #000000;
-  font-size: 3rem;
-  padding-left: 0px;
+.button-collapse{
+  padding: 5px;
+  border-radius: $default-btn-border-radius;
 }
 
 .download-database-btn {
+  font-size: 1rem;
   position: absolute;
   right: 5%;
   top: 0;
@@ -313,8 +309,34 @@ nav.top-nav a {
   }
 }
 
-.position-relative {
+.chembl-header {
+  font-family: "ChEMBL_HelveticaNeueLTPRo",helvetica,Arial,sans-serif;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  height: 85px;
   position: relative;
+  font-size: 3rem;
+  background: $chembl-teal;
+  vertical-align:middle;
+  div{
+    display: block;
+  }
+  a {
+    display: inline-block;
+    font-family: "ChEMBL_HelveticaNeueLTPRo",helvetica,Arial,sans-serif;
+    color: white;
+    margin: 0 3px;
+    vertical-align:middle;
+    img{
+      height: 4rem !important;
+      padding: 5px;
+    }
+    height: calc(4rem + 10px) !important;
+    padding: 5px;
+  }
 }
 
 /* responsive sizes */
@@ -323,16 +345,14 @@ nav.top-nav a {
     padding-left: 0px;
   }
 
-  nav.top-nav {
+  .chembl-header{
     background: $h2-color;
     margin-left: 0px;
     margin-top: 0px;
     height: $chembl-nav-height;
     line-height: $chembl-nav-line-height;
     padding-left: 0px;
-  }
 
-  nav.top-nav a {
     font-size: 2rem;
   }
 
@@ -1424,7 +1444,6 @@ div#CNC-zoom-modal {
         position: absolute;
         right: -15px;
         top: 0;
-        z-index: 999;
 
         [type="checkbox"].filled-in:not(:checked) + label:after {
           border-color: color('grey', 'lighten-1')

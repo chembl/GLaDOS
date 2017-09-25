@@ -1,6 +1,5 @@
 
-<!-- This shows when the screen is large -->
-<ul id="slide-out" class="side-nav fixed teal lighten-5">
+<ul id="slide-out" class="side-nav teal lighten-5 {{ hide_side_nav|yesno:',fixed' }}">
  {% block menu_links %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}
