@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.Visualisation',
     initialize: ->
       @config = arguments[0].config
 
-      @model.on 'change:bucket_data', @render, @
+      @model.on 'change:state', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       @setUpResponsiveRender()
       @xAxisAggName = @config.x_axis_prop_name
@@ -25,6 +25,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       else
         glados.Utils.fillContentForElement(@$vis_elem, {}, 'Handlebars-Common-MiniRepCardPreloader')
 
+    hideHistogramContent: -> $(@el).find('.BCK-HistogramContainer').hide()
+    hideAxesSelectors: -> $(@el).find('.BCK-AxesSelectorContainer').hide()
     # ------------------------------------------------------------------------------------------------------------------
     # axes selectors
     # ------------------------------------------------------------------------------------------------------------------
@@ -82,23 +84,27 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
-      console.log 'RENDER HISTOGRAM!'
+      console.log 'RENDER HISTOGRAM: ', @model.get('state')
+      if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+        $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
+        noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
+        $visualisationMessages.html(noDataMsg)
+        @hideHistogramContent()
+        @hideAxesSelectors()
+        return
+
+      if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+        return
+
       @$vis_elem.empty()
 
-      console.log 'LOADING BUCKETS: ', @xAxisAggName
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
       maxCategories = @config.max_categories
-      console.log 'maxCategories: ', maxCategories
       if buckets.length > maxCategories
         buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
 
-      if buckets.length == 0
-        $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
-        noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
-        $visualisationMessages.html(noDataMsg)
-        return
 
       if @config.big_size
         @paintBinSizeRange()
@@ -155,8 +161,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       bucketNames = (b.key for b in buckets)
       bucketSizes = (b.doc_count for b in buckets)
 
-      console.log 'buckets: ', buckets
-      console.log 'bucketNames: ', bucketNames
       if @config.fixed_bar_width
         barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
         xRangeEnd = barWidth * buckets.length

@@ -108,6 +108,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if $progressElem?
         $progressElem.html 'Fetching Data...'
+      @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
       esJSONRequest = JSON.stringify(@getRequestData())
 
@@ -122,8 +123,13 @@ glados.useNameSpace 'glados.models.Aggregations',
         if $progressElem?
           $progressElem.html ''
 
-        thisModel.set('bucket_data', thisModel.parse(data))
-        thisModel.set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
+        if data.hits.total == 0
+          thisModel.set
+            'state': glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+        else
+          thisModel.set
+            'bucket_data': thisModel.parse(data)
+            'state': glados.models.Aggregations.Aggregation.States.INITIAL_STATE
 
 
       ).fail( -> glados.Utils.ErrorMessages.showLoadingErrorMessageGen($progressElem))
@@ -144,7 +150,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         thisModel.set('aggs_config', thisModel.parseMinMax(data))
 
-        if thisModel.get('state') == thisModel.NO_DATA_FOUND_STATE
+        if thisModel.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
           $progressElem.html '' unless not $progressElem?
           return
 
@@ -161,7 +167,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if data.hits.total == 0
         @set('state', glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
-        return
+        return @get('aggs_config')
 
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations
