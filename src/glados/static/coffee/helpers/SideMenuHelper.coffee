@@ -9,6 +9,9 @@ glados.useNameSpace 'glados.helpers',
 
       SideMenuHelper.$side_menu = $('.side-nav')
       SideMenuHelper.initializeTopMenuController()
+      $(".button-collapse").click ->
+        SideMenuHelper.$side_menu.css
+          display: 'block'
       $(".button-collapse").sideNav()
       
     @initializeTopMenuController = ->
