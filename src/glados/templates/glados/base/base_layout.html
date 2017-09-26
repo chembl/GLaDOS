@@ -42,7 +42,9 @@
 </header>
 
 
-<main class="with-sidenav">
+{% block main_start_tag %}
+<main class="with-sidenav {{ hide_side_nav|yesno:',side-nav-padding' }}">
+{% endblock %}
 
   {% include "glados/base/modals/generated_modals_container.html" %}
 
