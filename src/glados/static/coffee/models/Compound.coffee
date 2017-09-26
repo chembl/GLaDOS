@@ -783,6 +783,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   MINI_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
@@ -794,7 +795,8 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.PSA,
     Compound.COLUMNS.HBA,
     Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5
+    Compound.COLUMNS.RO5,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,
