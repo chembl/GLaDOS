@@ -310,7 +310,6 @@ class TargetReportCardApp
 
     associatedCompounds.fetch()
 
-
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
     paramsList = $(@).attr('data-function-paramaters').split(',')
