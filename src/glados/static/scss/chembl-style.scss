@@ -249,6 +249,26 @@ footer {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+$chembl-nav-height: 56px;
+$chembl-nav-line-height: 61px;
+
+header .row {
+  margin-bottom: 0;
+}
+
+.button-collapse{
+  padding: 5px;
+  border-radius: $default-btn-border-radius;
+}
+
+.side-nav-padding{
+  padding-left: $side-nav-width !important;
+}
+
+$chembl-header-height: 6rem;
+$chembl-header-padding: 0.5rem;
+
+
 #chembl-header-container{
   height: 0;
   z-index: 5;
@@ -263,79 +283,113 @@ footer {
 
 #chembl-header-container-spacer{
   display: block;
-  height: 100px;
-}
-
-$chembl-nav-height: 56px;
-$chembl-nav-line-height: 61px;
-
-main{
-  &.with-sidenav{
-    /* to prevent the side bar from overlapping the main contens */
-    @media #{$large-and-up} {
-      padding-left: $side-nav-width;
-    }
-  }
- }
-
-header .row {
-  margin-bottom: 0;
-}
-
-.button-collapse{
-  padding: 5px;
-  border-radius: $default-btn-border-radius;
-}
-
-.download-database-btn {
-  font-size: 1rem;
-  position: absolute;
-  right: 5%;
-  top: 0;
-  bottom: 0;
-
-  p {
-    margin: 0;
-  }
-
-  i {
-    font-size: 2rem;
-  }
-
-  a {
-    color: white;
-    padding: 10px 20px;
-    border-radius: $default-btn-border-radius;
-  }
+  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
 }
 
 .chembl-header {
-  font-family: "ChEMBL_HelveticaNeueLTPRo",helvetica,Arial,sans-serif;
+  font-family: "ChEMBL_Verdana", Verdana, Arial, sans-serif;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
   color: white;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
-  height: 85px;
+  padding-top: $chembl-header-padding;
+  padding-bottom: $chembl-header-padding;
+  width: 100%;
+  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
   position: relative;
-  font-size: 3rem;
   background: $chembl-teal;
-  vertical-align:middle;
-  div{
-    display: block;
-  }
-  a {
-    display: inline-block;
-    font-family: "ChEMBL_HelveticaNeueLTPRo",helvetica,Arial,sans-serif;
-    color: white;
-    margin: 0 3px;
-    vertical-align:middle;
-    img{
-      height: 4rem !important;
-      padding: 5px;
+  text-align: center;
+  ul{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    li{
+      flex-grow: 1;
+      flex-shrink: 0;
+      text-align: center;
+
+      a{
+        display: block;
+        color: white;
+        padding: 0.25rem;
+        .chembl-logo-header{
+          display: block;
+          height: 3.5rem;
+          width: 3.5rem;
+        }
+        i{
+          display: block;
+        }
+        &.download-button {
+          font-size: 1rem;
+          p {
+            margin: 0;
+          }
+          i {
+            font-size: 2rem;
+          }
+          a {
+            font-size: 1.1rem;
+            color: white;
+            padding: 5px;
+            border-radius: $default-btn-border-radius;
+          }
+        }
+        &.long-link{
+          flex-grow: 3;
+          font-size: 3rem;
+          div{
+            display: block;
+            .icon-generic{
+              font-size: 1.8rem;
+            }
+          }
+        }
+      }
     }
-    height: calc(4rem + 10px) !important;
-    padding: 5px;
+    &::after{
+      font-size: 4rem;
+      content: "";
+      flex-grow: 0.1;
+      flex-shrink: 0;
+      text-align: center;
+      height: $chembl-header-height;
+    }
+  }
+  a{
+    font-size: 1rem;
+    color: white;
+  }
+}
+
+.search-bar-header{
+  background-color: $chembl-teal;
+  display: inline-block !important;
+  position: absolute;
+  height: 70px;
+  input{
+    position: absolute;
+    top: 0.7rem;
+    color: black;
+    background: white;
+    padding: 3px !important;
+    border-radius: 5px;
+    height: calc(1.2rem + 6px);
+    font-size: 1.2rem;
+  }
+  p{
+    position: absolute;
+    bottom: 0.7rem;
+    margin: 0;
+    height: 1rem !important;
+    font-size: 1rem !important;
+    a{
+      display: inline;
+      vertical-align: bottom;
+      color: white;
+      height: 1rem !important;
+      font-size: 1rem !important;
+    }
   }
 }
 
