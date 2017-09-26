@@ -12,11 +12,13 @@ glados.useNameSpace 'glados.models.Aggregations',
     loadQuery: ->
       queryConfig = @get('query_config')
       if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+        console.log 'loading query!!'
         query =
           multi_match:
             query: @get(queryConfig.queryValueField)
             fields: queryConfig.fields
         @set('query', query)
+        console.log 'query is: ', query
       else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
         templateValues = {}
         templateData = queryConfig.template_data
@@ -372,6 +374,9 @@ glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL = glados.models.pagina
 
 glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_activity/_search'
+
+glados.models.Aggregations.Aggregation.TARGET_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
++ '/chembl_target/_search'
 
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'

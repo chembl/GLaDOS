@@ -262,8 +262,6 @@ class TargetReportCardApp
 
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
-    console.log 'initMiniCompoundsHistogram:'
-
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'target_chembl_id'
@@ -310,15 +308,11 @@ class TargetReportCardApp
 
     associatedCompounds.fetch()
 
-
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
-    paramsList = $(@).attr('data-function-paramaters').split(',')
-    constantParamsList = $(@).attr('data-function_constant_parameters').split(',')
-    $containerElem = $clickedLink.parent()
-    $containerElem.removeClass('number-cell')
-    $containerElem.addClass('vis-container')
-    glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
+
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
 
     histogramType = constantParamsList[0]
     targetChemblID = paramsList[0]

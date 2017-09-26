@@ -70,6 +70,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   parse: (response) ->
 
+    filterForActivities = 'molecule_chembl_id:' + response.molecule_chembl_id
+    response.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
     # Lazy definition for sdf content retrieving
     response.sdf_url = glados.Settings.WS_BASE_URL + 'molecule/' + response.molecule_chembl_id + '.sdf'
     response.sdf_promise = null
@@ -143,7 +146,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
-    filterForTargets = '_metadata.related_compounds.chembl_ids.%5C*:' + response.molecule_chembl_id
+    filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + response.molecule_chembl_id
     response.targets_url = Target.getTargetsListURL(filterForTargets)
 
     return response;
@@ -727,6 +730,31 @@ Compound.COLUMNS = {
     'format_as_number': true
     'link_base': 'targets_url'
     'secondary_link': true
+    'on_click': CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    'function_parameters': ['molecule_chembl_id']
+    'function_constant_parameters': ['targets']
+    'function_key': 'targets'
+    'function_link': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
+  }
+  BIOACTIVITIES_NUMBER: {
+    'name_to_show': 'Bioactivities'
+    'comparator': '_metadata.activity_count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'link_base': 'activities_url'
+    'on_click': CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    'function_parameters': ['molecule_chembl_id']
+    'function_constant_parameters': ['activities']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    'function_key': 'bioactivities'
+    'function_link': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
+    'secondary_link': true
   }
 
 }
@@ -747,7 +775,9 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.ROTATABLE_BONDS,
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED,
-    Compound.COLUMNS.NUM_TARGETS
+    Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER
 
   ]
   RESULTS_LIST_REPORT_CARD:[
@@ -760,6 +790,8 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   MINI_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
@@ -771,7 +803,9 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.PSA,
     Compound.COLUMNS.HBA,
     Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5
+    Compound.COLUMNS.RO5,
+    Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.APKA,
