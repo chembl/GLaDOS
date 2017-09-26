@@ -67,7 +67,9 @@ class URLProcessor
     if match and match.length > 3
       # todo add more?
       if match[3] == 'GLaDOS'
+        $('body').css('background-image', 'url("' + glados.Settings.STATIC_IMAGES_URL + '/GLaDOS-ProfilePic.png")')
         alert('Believe me, I am still alive!')
+
       return match[3]
     return ""
 
