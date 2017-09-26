@@ -282,6 +282,57 @@ class CompoundReportCardApp
 
     bioactivities.fetch()
 
+  @initMiniTargetsHistogram = ($containerElem, chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'molecule_chembl_id'
+      fields: ['_metadata.related_compounds.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'target_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
+                                    'AND target_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              molecule_chembl_id: 'molecule_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Target.getTargetsListURL
+
+    targetTypes = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      molecule_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE')
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: targetTypes
+      el: $containerElem
+      config: config
+
+    targetTypes.fetch()
+
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
 
@@ -293,3 +344,5 @@ class CompoundReportCardApp
 
     if histogramType == 'activities'
       CompoundReportCardApp.initMiniBioactivitiesHistogram($containerElem, compoundChemblID)
+    else if histogramType == 'targets'
+      CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)

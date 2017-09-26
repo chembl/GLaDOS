@@ -146,7 +146,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
 
-    filterForTargets = '_metadata.related_compounds.chembl_ids.%5C*:' + response.molecule_chembl_id
+    filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + response.molecule_chembl_id
     response.targets_url = Target.getTargetsListURL(filterForTargets)
 
     return response;
@@ -730,8 +730,14 @@ Compound.COLUMNS = {
     'format_as_number': true
     'link_base': 'targets_url'
     'secondary_link': true
+    'on_click': CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    'function_parameters': ['molecule_chembl_id']
+    'function_constant_parameters': ['targets']
+    'function_key': 'targets'
+    'function_link': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
   }
-
   BIOACTIVITIES_NUMBER: {
     'name_to_show': 'Bioactivities'
     'comparator': '_metadata.activity_count'
@@ -770,6 +776,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED,
     Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.NUM_TARGETS,
     Compound.COLUMNS.BIOACTIVITIES_NUMBER
 
   ]
@@ -783,6 +790,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.MAX_PHASE,
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.NUM_TARGETS,
     Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   MINI_REPORT_CARD:[
@@ -796,6 +804,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.HBA,
     Compound.COLUMNS.HBD,
     Compound.COLUMNS.RO5,
+    Compound.COLUMNS.NUM_TARGETS,
     Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[

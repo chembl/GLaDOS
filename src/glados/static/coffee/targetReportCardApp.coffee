@@ -262,8 +262,6 @@ class TargetReportCardApp
 
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
-    console.log 'initMiniCompoundsHistogram:'
-
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'target_chembl_id'

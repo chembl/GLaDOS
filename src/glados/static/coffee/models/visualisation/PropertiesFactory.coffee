@@ -48,6 +48,10 @@ glados.useNameSpace 'glados.models.visualisation',
         PREF_NAME:
           propName:'pref_name'
           label: 'Pref. Name'
+        TARGET_TYPE:
+          propName:'target_type'
+          label: 'Target Type'
+          label_mini: 'Type'
     Activity:
       esIndex:'chembl_activity'
       Properties:
