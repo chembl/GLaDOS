@@ -313,7 +313,7 @@ class TargetReportCardApp
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
 
-    [paramsList, constantParamsListm $containerElem] = \
+    [paramsList, constantParamsList, $containerElem] = \
     glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
 
     histogramType = constantParamsList[0]
