@@ -71,7 +71,7 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
     filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
     parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
-    filterForCompounds = '_metadata.related_targets.chembl_ids.%5C*:' + parsed.target_chembl_id
+    filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + parsed.target_chembl_id
     parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
     return parsed;
 
@@ -110,7 +110,8 @@ Target.COLUMNS = {
     'sort_class': 'fa-sort'
     'link_base': 'activities_url'
     'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
-    'function_parameters': ['target_chembl_id', 'pref_name']
+    'function_parameters': ['target_chembl_id']
+    'function_constant_parameters': ['activities']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
     # or probably not, depending on how this evolves
     'function_key': 'bioactivities'
@@ -156,6 +157,24 @@ Target.COLUMNS = {
     'secondary_link': true
     'link_base': 'compounds_url'
   }
+  NUM_COMPOUNDS_HISTOGRAM: {
+    'name_to_show': 'Compounds'
+    'comparator': '_metadata.related_compounds.count'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'link_base': 'compounds_url'
+    'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
+    'function_constant_parameters': ['compounds']
+    'function_parameters': ['target_chembl_id']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    'function_key': 'num_compounds'
+    'function_link': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
+    'secondary_link': true
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -166,7 +185,7 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
     Target.COLUMNS.ORGANISM
-    Target.COLUMNS.NUM_COMPOUNDS
+    Target.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
     Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD:[
@@ -188,6 +207,6 @@ Target.MINI_REPORT_CARD =
 Target.getTargetsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + encodeURIComponent(filter)
   else
     return glados.Settings.GLADOS_BASE_PATH_REL + 'targets'

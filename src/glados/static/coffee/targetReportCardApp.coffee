@@ -238,15 +238,20 @@ class TargetReportCardApp
       target_chembl_id: chemblID
       aggs_config: aggsConfig
 
-    barsColourScale = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
-      withColourScale=true).colourScale
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
 
     config =
       max_categories: 8
       bars_colour_scale: barsColourScale
       fixed_bar_width: true
-      hide_title: true
+      hide_title: false
       x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
 
     new glados.views.Visualisation.HistogramView
       model: bioactivities
@@ -255,16 +260,71 @@ class TargetReportCardApp
 
     bioactivities.fetch()
 
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    console.log 'initMiniCompoundsHistogram:'
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'target_chembl_id'
+      fields: ['_metadata.related_targets.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 8
+          max_columns: 8
+          num_columns: 8
+          bucket_links:
+            bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              min_val: 'BUCKET.from'
+              max_val: 'BUCKETS.to'
+
+            link_generator: Compound.getCompoundsListURL
+
+
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'x_axis_agg'
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      initial_property_x: 'mwt'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
     paramsList = $(@).attr('data-function-paramaters').split(',')
-    targetChemblID = paramsList[0]
+    constantParamsList = $(@).attr('data-function_constant_parameters').split(',')
     $containerElem = $clickedLink.parent()
     $containerElem.removeClass('number-cell')
     $containerElem.addClass('vis-container')
-
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
-    TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+    histogramType = constantParamsList[0]
+    targetChemblID = paramsList[0]
+    if histogramType == 'activities'
+      TargetReportCardApp.initMiniBioactivitiesHistogram($containerElem, targetChemblID)
+    else if histogramType == 'compounds'
+      TargetReportCardApp.initMiniCompoundsHistogram($containerElem, targetChemblID)
 
 

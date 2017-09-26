@@ -199,7 +199,6 @@ glados.useNameSpace 'glados.models.Aggregations',
     parse: (data) ->
 
       bucketsData = {}
-
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations
 
@@ -248,6 +247,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if linksDescription?
         templateDataDesc =  linksDescription.template_data
+        templateDataFunc = linksDescription.template_data_func
         template = linksDescription.bucket_filter_template
         linkGenerator = linksDescription.link_generator
         generateFilter = Handlebars.compile(template)

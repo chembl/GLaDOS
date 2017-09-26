@@ -78,7 +78,7 @@ class URLProcessor
     filterWord = '/filter/'
     pathname = window.location.pathname
     filter = pathname.split(filterWord)[1]
-    return if filter? then decodeURI(filter) else undefined
+    return if filter? then decodeURIComponent(filter) else undefined
   # --------------------------------------------------------------------------------------------------------------------
   # Structure Search URL's
   # --------------------------------------------------------------------------------------------------------------------
