@@ -71,7 +71,7 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
     filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
     parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
-    filterForCompounds = '_metadata.related_targets.chembl_ids.%5C*:' + parsed.target_chembl_id
+    filterForCompounds = encodeURIComponent('_metadata.related_targets.chembl_ids.\\*:' + parsed.target_chembl_id)
     parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
     return parsed;
 
@@ -207,6 +207,6 @@ Target.MINI_REPORT_CARD =
 Target.getTargetsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + encodeURIComponent(filter)
   else
     return glados.Settings.GLADOS_BASE_PATH_REL + 'targets'

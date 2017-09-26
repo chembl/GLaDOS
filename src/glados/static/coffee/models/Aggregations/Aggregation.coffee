@@ -248,6 +248,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if linksDescription?
         templateDataDesc =  linksDescription.template_data
+        templateDataFunc = linksDescription.template_data_func
         template = linksDescription.bucket_filter_template
         linkGenerator = linksDescription.link_generator
         generateFilter = Handlebars.compile(template)
@@ -271,6 +272,8 @@ glados.useNameSpace 'glados.models.Aggregations',
         bucket = bucketsToMerge[0]
         restOfBuckets = bucketsToMerge[1..bucketsToMerge.length-1]
 
+
+      console.log 'bucket is: ', bucket
       templateValues = {}
       for propKey, propExp of templateDataDesc
 
