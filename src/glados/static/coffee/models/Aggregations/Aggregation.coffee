@@ -199,7 +199,6 @@ glados.useNameSpace 'glados.models.Aggregations',
     parse: (data) ->
 
       bucketsData = {}
-
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations
 
@@ -272,8 +271,6 @@ glados.useNameSpace 'glados.models.Aggregations',
         bucket = bucketsToMerge[0]
         restOfBuckets = bucketsToMerge[1..bucketsToMerge.length-1]
 
-
-      console.log 'bucket is: ', bucket
       templateValues = {}
       for propKey, propExp of templateDataDesc
 

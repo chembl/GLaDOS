@@ -206,6 +206,8 @@ glados.useNameSpace 'glados',
       getElasticRanges: (minValue, maxValue, numCols) ->
 
         interval = parseFloat((Math.ceil(Math.abs(maxValue - minValue)) / numCols).toFixed(2))
+        if interval == 0
+          interval = 0.01
 
         ranges = []
         from = minValue
