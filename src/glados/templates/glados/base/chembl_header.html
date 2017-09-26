@@ -1,9 +1,10 @@
 {% load static %}
-<div class="chembl-header">
+<div class="chembl-header {{ hide_side_nav|yesno:',side-nav-padding' }}">
 
   {% if hide_side_nav %}
     <a data-activates="slide-out" class="button-collapse z-depth-1 waves-effect waves-light">
-      <i class="material-icons medium">menu</i>
+      <i class="material-icons medium hide-on-small-only">menu</i>
+      <i class="material-icons small hide-on-med-and-up">menu</i>
     </a>
     <a href="{% url 'main' %}" class="z-depth-1">
       <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
