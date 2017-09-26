@@ -104,7 +104,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       if buckets.length > maxCategories
         buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
 
-
       if @config.big_size
         @paintBinSizeRange()
         @paintNumBarsRange(buckets.length)
@@ -230,13 +229,20 @@ glados.useNameSpace 'glados.views.Visualisation',
       unless @config.hide_title
         totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
         totalItemsTxt = '(' + totalItems + ')'
-        titleBase = if @config.title? then @config.title else 'Browse All'
+
+        titleBase = if @config.title? then @config.title \
+        else 'By ' + @config.properties[@config.initial_property_x].label_mini + ': '
+
+        titleText = titleBase
+        if @config.big_size
+           titleText += ' ' + totalItemsTxt
+
         mainSVGContainer.append('text')
-          .text(titleBase + ' ' + totalItemsTxt)
+          .text(titleText)
           .attr('x', VISUALISATION_WIDTH/2)
           .attr('y', TITLE_Y)
           .attr('text-anchor', 'middle')
-          .classed('title', true)
+          .classed('title', @config.big_size)
           .on('click', ->
             window.open(thisView.model.get('link_to_all'))
         )
