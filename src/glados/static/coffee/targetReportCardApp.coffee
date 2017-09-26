@@ -312,12 +312,9 @@ class TargetReportCardApp
 
   @initMiniHistogramFromFunctionLink = ->
     $clickedLink = $(@)
-    paramsList = $(@).attr('data-function-paramaters').split(',')
-    constantParamsList = $(@).attr('data-function_constant_parameters').split(',')
-    $containerElem = $clickedLink.parent()
-    $containerElem.removeClass('number-cell')
-    $containerElem.addClass('vis-container')
-    glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
+
+    [paramsList, constantParamsListm $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
 
     histogramType = constantParamsList[0]
     targetChemblID = paramsList[0]
