@@ -1,22 +1,28 @@
 {% load static %}
-<div class="chembl-header row">
+<div class="chembl-header row {{ hide_side_nav|yesno:',side-nav-padding' }}">
 
     <div class="col l3 m5 s6">
         <ul>
             {% if hide_side_nav %}
-            <li>
-                <a data-activates="slide-out" class="button-collapse hoverable z-depth-1 waves-effect waves-light">
-                    <i class="material-icons small hide-on-small-only">menu</i>
-                    <i class="material-icons small hide-on-med-and-up">menu</i>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'main' %}" class="hoverable waves-effect waves-light">
-                    <img title="Go to the ChEMBL homepage"
-                         class="chembl-logo-header"
-                         alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
-                </a>
-            </li>
+                <li>
+                    <a data-activates="slide-out" class="button-collapse hoverable z-depth-1 waves-effect waves-light">
+                        <i class="material-icons">menu</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'main' %}" class="hoverable waves-effect waves-light">
+                        <img title="Go to the ChEMBL homepage"
+                             class="chembl-logo-header"
+                             alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a data-activates="slide-out"
+                       class="button-collapse hoverable z-depth-1 waves-effect waves-light hide-on-large-only">
+                        <i class="material-icons">menu</i>
+                    </a>
+                </li>
             {% endif %}
             <li>
                 <a href="{% url 'main' %}" class="hoverable waves-effect waves-light long-link">
@@ -33,50 +39,46 @@
             </li>
         </ul>
     </div>
+
+    <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6 s2 offset-s4,l3 offset-l6 m4 offset-m3 s6' }}">
+        <ul>
+            {% if not hide_side_nav %}
+                <li>
+                    <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img"/>
+                </li>
+                {% endif %}
+            <li>
+                <a href="#download-db-modal"
+                    class="modal-trigger-safe hoverable tooltipped z-depth-1 waves-effect waves-light download-button"
+                    data-position="bottom" data-tooltip="Download">
+                    <p>
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </p>
+                    <p class="hide-on-med-and-down">
+                        <small>Download</small>
+                    </p>
+
+                </a>
+            </li>
+        </ul>
+    </div>
+
     {% if hide_side_nav %}
-        <div class="col l6 offset-l1 m6 s12 push-s6 red">
-            <div class="row">
-                <div class="col s10">
-                    <input type="text" placeholder="Lets search for some drugs! :)">
-                </div>
-                <div class="col s2">
-                    <a class="button">
-                        <span>
-                            <i class="material-icons">search</i>
-                            Search
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col l6">
-                    <a>Dopamine</a>, <a>Aspirin</a>
-                </div>
-            </div>
+        <div class="col l6 pull-l0 m6 pull-m1 s12 chembl-search-bar">
+            <ul>
+                <li>
+                    <div class="row">
+                        <div class="col s10">
+                            <input type="text" placeholder="Lets search for some drugs! :)">
+                        </div>
+                        <div class="col s2">
+                        </div>
+                        <div class="col l6">
+                            <a>Dopamine</a>, <a>Aspirin</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     {% endif %}
-
-  <div class="col {{ hide_side_nav|yesno:'l1 offset-l1 m1,l3 offset-l5 m4 offset-m3' }} s6 pull-s6 blue">
-    <ul>
-        {% if not hide_side_nav %}
-            <li>
-                <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" height="30"
-                   style="padding-top: 10px;"/>
-            </li>
-        {% endif %}
-        <li>
-            <a href="#download-db-modal"
-               class="modal-trigger-safe hoverable tooltipped z-depth-1 waves-effect waves-light download-button"
-               data-position="bottom" data-tooltip="Download">
-              <p>
-                <i class="fa fa-download" aria-hidden="true"></i>
-              </p>
-              <p class="hide-on-med-and-down">
-                <small>Download</small>
-              </p>
-
-            </a>
-        </li>
-    </ul>
-  </div>
 </div>
