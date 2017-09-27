@@ -2025,6 +2025,9 @@ span.badge-primary-color-no-float {
     color: color('grey', 'darken-2');
     display: inline-block;
 
+    &.disabled {
+        color: color('grey', 'lighten-1');
+    }
     &.selected {
       color: color('black', 'base');
       border-bottom: 2px solid color($primary-color-name, 'base');
@@ -2092,29 +2095,23 @@ span.badge-primary-color-no-float {
       font-size: 0.7em;
       text-decoration: underline;
     }
-  .section-item{
-    padding: 10px 6px;
-    display: inline-block;
-    color: color('grey', 'darken-2');
-    text-align: center;
-    .label{
-      font-size: 0.8em;
-      margin: 0;
+  .summary-tabs {
+    .section-item {
+      @extend .results-section-item;
+
+      padding: 10px 6px;
+      text-align: center;
+
+      .label {
+        font-size: 0.8em;
+        margin: 0;
+      }
+      .icon {
+        margin: 0;
+      }
+
     }
-    .icon{
-      margin: 0;
-    }
-    &.disabled{
-      color: color('grey', 'lighten-1');
-    }
-    &.selected {
-      color: color('black', 'base');
-      border-bottom: 2px solid color($primary-color-name, 'base');
-    }
-    &:not(.selected):not(.disabled):hover{
-      color: color('grey', 'darken-4');
-      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
-    }
+    border-bottom: none;
   }
 }
 
