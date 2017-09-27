@@ -313,12 +313,14 @@ class CompoundReportCardApp
       molecule_chembl_id: chemblID
       aggs_config: aggsConfig
 
-    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE')
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE',
+    withColourScale=true)
 
     barsColourScale = stdTypeProp.colourScale
 
     config =
       max_categories: 8
+      bars_colour_scale: barsColourScale
       fixed_bar_width: true
       hide_title: false
       x_axis_prop_name: 'types'
