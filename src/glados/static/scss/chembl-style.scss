@@ -2762,6 +2762,33 @@ $browser-tool-bar-width: 55px;
       border-top: 1px solid color('grey', 'base');
     }
 
+    .buttons-wrapper{
+      background-color: white;
+      margin-left: 8px;
+      margin-right: 8px;
+      box-shadow: 1px 0px 3px 1px rgba(0, 0, 0, 0.4);
+
+      .zoom-btn{
+        padding: 8px 4px;
+        color: color('grey', 'darken-2');
+        font-size: 80%;
+
+        &:hover{
+          color: color('grey', 'darken-4');
+        }
+        &.disabled {
+          color: color('grey', 'lighten-1');
+        }
+
+      }
+
+
+      a:nth-child(1),a:nth-child(2){
+        border-bottom: 1px solid color('grey', 'lighten-2');
+      }
+
+    }
+
     .tool-title{
       font-size: 70%;
     }

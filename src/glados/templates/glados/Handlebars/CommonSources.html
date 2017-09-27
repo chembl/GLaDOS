@@ -592,9 +592,11 @@
 
 <script id="Handlebars-Common-CardsZoom" type="text/x-handlebars-template">
 
-  <a class="BCK-zoom-in menu-button {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
-  <a class="BCK-reset-zoom menu-button {{#if disable_reset}}disabled{{/if}}" ><i class="fa fa-lg fa-home"></i></a>
-  <a class="BCK-zoom-out menu-button {{#if disable_zoom_out}}disabled{{/if}}" ><i class="fa fa-lg fa-minus"></i></a>
+  <div class="buttons-wrapper">
+    <a class="BCK-zoom-in zoom-btn {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
+    <a class="BCK-reset-zoom zoom-btn {{#if disable_reset}}disabled{{/if}}" ><i class="fa fa-lg fa-home"></i></a>
+    <a class="BCK-zoom-out  zoom-btn {{#if disable_zoom_out}}disabled{{/if}}" ><i class="fa fa-lg fa-minus"></i></a>
+  </div>
 
 </script>
 
