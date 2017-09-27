@@ -264,28 +264,44 @@ header .row {
 .side-nav-padding{
   padding-left: $side-nav-width !important;
   @media #{$medium-and-down} {
-    padding-left: 0px !important;
+    padding-left: 0 !important;
   }
 }
 
-$chembl-header-height: 6rem;
-$chembl-header-padding: 1rem;
+$chembl-header-height: 6em;
+$chembl-header-padding: 1.1em;
 
 
 #chembl-header-container{
   height: 0;
   z-index: 5;
+  font-size: 1rem;
   .chembl-header {
+    transition: height 1s;
     font-family: "ChEMBL_Verdana", Verdana, Arial, sans-serif;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     color: white;
     padding-top: $chembl-header-padding;
     padding-bottom: $chembl-header-padding;
     width: 100%;
-    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
+    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
     position: relative;
     background: $chembl-teal;
     text-align: center;
+    .chembl-search-bar{
+      a{
+        font-size: 0.85em !important;
+      }
+      input{
+        display: block;
+        font-size: 1.2em !important;
+        padding: 0.1em !important;
+        height: 1.4em;
+        background-color: white;
+        margin: 0;
+        border: 0;
+      }
+    }
     ul{
       margin: 0;
       display: flex;
@@ -296,60 +312,66 @@ $chembl-header-padding: 1rem;
         flex-grow: 1;
         flex-shrink: 0;
         text-align: center;
-
+        .wellcome-trust-img{
+          display: block;
+          height: 1.8em;
+        }
         a{
           display: block;
           color: white;
-          padding: 0.25rem;
+          padding: 0.25em;
           .chembl-logo-header{
             display: block;
-            height: 3.5rem;
-            width: 3.5rem;
+            height: 3.5em;
+            width: 3.5em;
           }
           i{
             display: block;
+            &.material-icons{
+              font-size: 2em;
+            }
           }
           &.download-button {
-            font-size: 1rem;
+            font-size: 1em;
             p {
               margin: 0;
             }
             i {
-              font-size: 2rem;
+              font-size: 2em;
             }
             a {
-              font-size: 1.1rem;
+              font-size: 1.1em;
               color: white;
-              padding: 5px;
+              padding: 0.2em;
               border-radius: $default-btn-border-radius;
             }
           }
           &.long-link{
             flex-grow: 3;
-            font-size: 3rem;
+            font-size: 3em;
             div{
               display: block;
               .beta-sign{
-                font-size: 1rem;
+                font-size: 0.3em;
               }
               .icon-generic{
-                font-size: 1.8rem;
+                font-size: 0.6em;
               }
             }
           }
         }
       }
       &::after{
-        font-size: 4rem;
+        display: block;
         content: "";
         flex-grow: 0.1;
         flex-shrink: 0;
         text-align: center;
-        height: $chembl-header-height;
+        height: $chembl-header-height !important;
       }
     }
     a{
-      font-size: 1rem;
+      font-size: 1em;
       color: white;
     }
   }
@@ -360,66 +382,39 @@ $chembl-header-padding: 1rem;
     display: block;
     width: 100%;
     .chembl-header{
-      height: calc(#{$chembl-header-height} + #{2*0.1rem});
-      padding-top: 0.1rem;
-      padding-bottom: 0.1rem;
+      height: calc(#{$chembl-header-height} + #{2*0.1em}) !important;
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+    }
+  }
+  @media #{$small-and-down} {
+    font-size: 0.5rem;
+    .chembl-header {
+      &:not(.side-nav-padding){
+        height: calc(#{2*$chembl-header-height} + #{2*$chembl-header-padding}) !important;
+      }
+    }
+    &.pinned{
+      .chembl-header{
+        &:not(.side-nav-padding) {
+          height: calc(#{2*$chembl-header-height} + #{2*0.1em}) !important;
+        }
+      }
     }
   }
 }
 
 #chembl-header-container-spacer{
-  display: block;
-  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
-}
-
-.search-bar-header{
-  background-color: $chembl-teal;
-  display: inline-block !important;
-  position: absolute;
-  height: 70px;
-  input{
-    position: absolute;
-    top: 0.7rem;
-    color: black;
-    background: white;
-    padding: 3px !important;
-    border-radius: 5px;
-    height: calc(1.2rem + 6px);
-    font-size: 1.2rem;
-  }
-  p{
-    position: absolute;
-    bottom: 0.7rem;
-    margin: 0;
-    height: 1rem !important;
-    font-size: 1rem !important;
-    a{
-      display: inline;
-      vertical-align: bottom;
-      color: white;
-      height: 1rem !important;
-      font-size: 1rem !important;
+  font-size: 1rem;
+  @media #{$small-and-down} {
+    font-size: 0.5rem;
+    &:not(.side-nav-padding){
+      display: block;
+      height: calc(#{2*$chembl-header-height} + #{2*$chembl-header-padding}) !important;
     }
   }
-}
-
-/* responsive sizes */
-@media #{$medium-and-down} {
-  header, main, footer, #chembl-header-container {
-    padding-left: 0px;
-  }
-
-  .chembl-header{
-    background: $h2-color;
-    margin-left: 0px;
-    margin-top: 0px;
-    height: $chembl-nav-height;
-    line-height: $chembl-nav-line-height;
-    padding-left: 0px;
-
-    font-size: 2rem;
-  }
-
+  display: block;
+  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
 }
 
 /**

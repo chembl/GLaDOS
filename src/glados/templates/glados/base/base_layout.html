@@ -30,14 +30,12 @@
 
   </div>
 
-  <div id="chembl-header-container">
-   {% block chembl_header %}
+  {% block chembl_header %}
+    <div id="chembl-header-container">
       {% include "glados/base/chembl_header.html" %}
-    {% endblock %}
-  </div>
-  <div id="chembl-header-container-spacer">
-
-  </div>
+    </div>
+    <div id="chembl-header-container-spacer" class="{{hide_side_nav|yesno:',side-nav-padding' }}"></div>
+  {% endblock %}
 
 </header>
 
