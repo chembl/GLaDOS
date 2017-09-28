@@ -174,6 +174,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       thisView = @
       $.when.apply($, deferreds).done( ->
         filterProperty = thisView.ctm.get('filter_property')
+        console.log 'all results: ', thisView.collection.allResults
         allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults)
         console.log 'allItemsIDs: ', allItemsIDs
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
