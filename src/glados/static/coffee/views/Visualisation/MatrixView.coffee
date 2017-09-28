@@ -16,6 +16,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.on 'change', @render, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
+    $(@el).mouseleave($.proxy(@destroyAllTooltipsIfNecessary, @))
+
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
     updateViewProxy = @setUpResponsiveRender()
@@ -1023,6 +1025,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
 
 
+  destroyAllTooltipsIfNecessary: (event) ->
+
+    console.log 'DESTROY TOOLTIP IF NECESSARY'
+    mouseX = event.clientX
+    mouseY = event.clientY
+    glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($(@el), mouseX, mouseY)
   #---------------------------------------------------------------------------------------------------------------------
   # cells tooltips
   #---------------------------------------------------------------------------------------------------------------------
