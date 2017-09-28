@@ -339,6 +339,9 @@ $search-bar-small-font-size: 2em;
             width: 100%;
             .example-link{
               display: inline;
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }
@@ -2105,7 +2108,6 @@ $marvin-size-fullscreen: 91vh;
 .search-banner {
 
   background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  background-color: color('green', 'lighten-5');
   backgroground-position: right center;
   background-repeat: no-repeat;
   background-size: cover;

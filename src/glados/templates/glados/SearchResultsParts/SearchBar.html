@@ -1,27 +1,76 @@
 <div class="container main-container">
-  <div id="BCK-SRB-wrapper">
-    {% block search_med_big %}
-      {% include "glados/SearchResultsParts/search_bar_med_and_up.html" %}
-    {% endblock %}
-    <div id="BCK-SRB-med-and-up" data-hb-template="Handlebars-SearchBar-med-and-up" class="hide-on-small-only" >
+  {% if not hide_side_nav %}
+    <div id="BCK-SRB-wrapper">
+      {% block autocomplete_BCK_SRB %}
+        {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
+      {% endblock %}
+      <div class="hide-on-small-only" >
 
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+        <div class="card search-banner z-depth-0">
+            <div class="card-content">
+
+              <div class="section">
+
+                  <div class="row">
+
+                    <div class="col m12">
+
+                      <div class="search-bar full-height z-depth-2">
+
+                        <div class="search-bar-help">
+                          <small><b>Example:</b>
+                            <a class="example-link">Dopamine</a>,
+                            <a class="example-link">Aspirin</a>,
+                            <a class="example-link">NCCc1ccc(O)c(O)c1</a>,
+                            <a class="example-link">Liver</a>
+                          </small>
+                        </div>
+
+                        <div class="col m8">
+
+                          <div class="search-input-wrapper" >
+                            <input type="search" value="" name="search-str"
+                                   placeholder="Search in ChEMBL!" class="chembl-search-bar"/>
+                          </div>
+
+                        </div>
+
+                        <div class="col m2">
+
+                          <button onclick="this.blur();" class="search-opts col m12">
+                            <span>
+                              <i class="icon icon-generic" data-icon="("></i> Advanced
+                            </span>
+                          </button>
+
+                        </div>
+
+                        <div class="col m2">
+
+                          <button onclick="this.blur();" class="search-button search-btn col m12">
+                            <span>
+                              <i class="icon icon-functional" data-icon="1"></i> Search
+                            </span>
+                          </button>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+              </div>
+
+            </div>
+
+          </div>
+      </div>
 
     </div>
-
-    {% block search_small %}
-      {% include "glados/SearchResultsParts/search_bar_small.html" %}
-    {% endblock %}
-    <div id="BCK-SRB-small" data-hb-template="Handlebars-SearchBar-small" class="hide-on-med-and-up">
-
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
-    </div>
-  </div>
+  {% endif %}
   {% block query_explain %}
     {% include "glados/SearchResultsParts/ESQueryExplain.html" %}
-  {% endblock %}
-  {% block autocomplete %}
-    {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
   {% endblock %}
 </div>

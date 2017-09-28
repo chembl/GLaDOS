@@ -101,6 +101,7 @@
     $(document).ready(function () {
       glados.helpers.HeaderHelper.initializeHeader();
       glados.helpers.SideMenuHelper.initializeSideMenu();
+      glados.views.SearchResults.SearchBarView.createInstances();
 
       {% block custom_js_inline %}{% endblock %}
 
@@ -110,7 +111,6 @@
       var baseMenuItem = DownloadWizardApp.initWizardStep();
       DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
       baseMenuItem.fetch();
-
     });
   </script>
   {% endcompress%}
