@@ -1027,7 +1027,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   destroyAllTooltipsIfNecessary: (event) ->
 
-    console.log 'DESTROY TOOLTIP IF NECESSARY'
     mouseX = event.clientX
     mouseY = event.clientY
     glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($(@el), mouseX, mouseY)
