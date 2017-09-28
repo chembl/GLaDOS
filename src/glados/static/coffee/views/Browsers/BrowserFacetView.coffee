@@ -115,14 +115,14 @@ glados.useNameSpace 'glados.views.Browsers',
 
 
     checkIfNoItems: ->
-      console.log 'CHECK IF NO ITEMS'
+
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
         return true
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Add Remove filters
+    # Add Remove
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
 

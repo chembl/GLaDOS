@@ -96,7 +96,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               must: []
           filter:[]
       }
-      console.warn(boostedESKeys, curESKey, query.bool.boost)
       boolQuery = if isOr then 'should'else 'must'
       if queryString
         query.bool.must.bool[boolQuery] = query.bool.must.bool[boolQuery].concat(
