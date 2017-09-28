@@ -324,3 +324,20 @@ glados.useNameSpace 'glados',
           at: atVert+' '+horizontalPos
         }
 
+      destroyAllTooltipsWhenMouseIsOut: ($container, mouseX, mouseY)->
+
+        scrollTop = $(window).scrollTop()
+        scrollLeft = $(window).scrollLeft()
+        itemsContainerOffset = $container.offset().top
+
+        containerYUpperLimit =  itemsContainerOffset - scrollTop
+        containerYLowerLimit = (itemsContainerOffset + $container.height()) - scrollTop
+        containerLeftLimit = $container.offset().left - scrollLeft
+        containerRightLimit = ($container.offset().left + $container.width()) - scrollLeft
+
+        xIsOut = (mouseX < containerLeftLimit) or (mouseX > containerRightLimit)
+        yIsOut = (mouseY < containerYUpperLimit) or (mouseY > containerYLowerLimit)
+
+        if xIsOut or yIsOut
+          glados.Utils.Tooltips.destroyAllTooltips($($container))
+
