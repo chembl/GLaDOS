@@ -870,12 +870,10 @@
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
 
   <div class="summary-tabs">
-    {{#each options}}
-    <a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}" data-view="{{this.label}}">
+    {{#each options}}<a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}" data-view="{{this.label}}">
       <p class="icon"><i class="fa {{this.icon_class}}"></i></p>
       <p class="label">{{this.label}}</p>
-    </a>
-    {{/each}}
+    </a>{{/each}}
   </div>
 
 </script>

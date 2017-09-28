@@ -2018,23 +2018,45 @@ span.badge-primary-color-no-float {
 }
 
 .summary-tabs{
+  background-color: color('grey', 'lighten-4');
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  .results-section-item:nth-child(1){
+    border-top-left-radius: 5px;
+  }
+  .results-section-item:last-child{
+    border-top-right-radius: 5px;
+  }
+
   .results-section-item {
 
     padding: 10px 10px;
     margin: 0px 0px;
     color: color('grey', 'darken-2');
     display: inline-block;
+    .badge-primary-color-no-float{
+      background-color: color('grey', 'lighten-2');
+    }
 
     &.disabled {
         color: color('grey', 'lighten-1');
     }
     &.selected {
+      background-color: color('grey', 'lighten-2');
       color: color('black', 'base');
       border-bottom: 2px solid color($primary-color-name, 'base');
+      .badge-primary-color-no-float{
+        background-color: color('grey', 'lighten-5');
+      }
     }
     &:not(.selected):hover{
+      background-color: color('grey', 'lighten-3');
       color: color('grey', 'darken-4');
       border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+      .badge-primary-color-no-float{
+        background-color: color('grey', 'lighten-4');
+      }
     }
   }
 
@@ -2057,6 +2079,10 @@ span.badge-primary-color-no-float {
     text-transform: capitalize
   }
 .browser-menu{
+
+  background-color: color('grey', 'lighten-4');
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 
   border-bottom: 1px solid color('grey', 'lighten-1');
   &.row{
