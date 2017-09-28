@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Initialisation
     # ------------------------------------------------------------------------------------------------------------------
 
-    initialize: () ->
+    initialize: ->
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableItemsSelection = arguments[0].disable_items_selection
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
+      @initTooltipFunctions()
 
       if @customRenderEvents?
         @collection.on @customRenderEvents, @.render, @

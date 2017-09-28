@@ -83,7 +83,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     setUpTooltip: ->
 
       $imageContainer = $(@el).find('.BCK-image')
-      $imageContainer.mouseover(@generateTooltipFunction(@model))
+      $imageContainer.mouseenter(@generateTooltipFunction(@model))
 
     generateTooltipFunction: (compound) ->
 
@@ -116,6 +116,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $hoveredElem.qtip('api').show()
         $hoveredElem.attr('data-qtip-configured', 'yes')
+
+        # trick to always get correct position of tooltip
+        $(window).scrollTop($(window).scrollTop() + 1)
+        $(window).scrollTop($(window).scrollTop() - 1)
 
         $newMiniReportCardContainer = $('#' + miniRepCardID)
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
