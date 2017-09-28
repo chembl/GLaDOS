@@ -10,7 +10,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'main' %}" class="hoverable waves-effect waves-light">
+                    <a href="{% url 'main' %}" class="waves-effect waves-light">
                         <img title="Go to the ChEMBL homepage"
                              class="chembl-logo-header"
                              alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
@@ -25,7 +25,7 @@
                 </li>
             {% endif %}
             <li>
-                <a href="{% url 'main' %}" class="hoverable waves-effect waves-light long-link">
+                <a href="{% url 'main' %}" class="waves-effect waves-light long-link">
                     <div>
                         <span>ChEMBL</span>
 
@@ -41,7 +41,7 @@
     </div>
 
     <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6 s2 offset-s4,l3 offset-l6 m4 offset-m3 s6' }}">
-        <ul>
+        <ul class="right-align-content">
             {% if not hide_side_nav %}
                 <li>
                     <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img"/>
@@ -64,17 +64,27 @@
     </div>
 
     {% if hide_side_nav %}
-        <div class="col l6 pull-l0 m6 pull-m1 s12 chembl-search-bar">
-            <ul>
+        <div class="col l6 pull-l0 m6 pull-m1 s12 chembl-search-bar no-padding">
+            <ul class="max-expand-content">
                 <li>
-                    <div class="row">
-                        <div class="col s10">
-                            <input type="text" placeholder="Lets search for some drugs! :)">
+                    <div class="row chembl-search-bar-container">
+                        <div class="col s12 no-padding">
+                            <div class="row search-bar-wrapper">
+                                <div class="col s11 no-padding">
+                                    <input type="text" class="chembl-search-bar" placeholder="Search in ChEMBL!">
+                                </div>
+                                <div class="col s1 no-padding">
+                                    <a class="search-button green lighten-1">
+                                        <i class="material-icons">search</i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col s2">
-                        </div>
-                        <div class="col l6">
-                            <a>Dopamine</a>, <a>Aspirin</a>
+                        <div class="col s12">
+                            <div class="example-link-container">
+                                <b class="green-text lighten-5">Examples: </b>
+                                <a class="example-link">Dopamine</a> <a class="example-link">Aspirin</a>
+                            </div>
                         </div>
                     </div>
                 </li>

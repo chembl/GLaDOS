@@ -270,6 +270,8 @@ header .row {
 
 $chembl-header-height: 6em;
 $chembl-header-padding: 1.1em;
+$search-bar-font-size: 1em;
+$search-bar-small-font-size: 2em;
 
 
 #chembl-header-container{
@@ -288,38 +290,67 @@ $chembl-header-padding: 1.1em;
     position: relative;
     background: $chembl-teal;
     text-align: center;
-    .chembl-search-bar{
-      a{
-        font-size: 0.85em !important;
-      }
-      input{
-        display: block;
-        font-size: 1.2em !important;
-        padding: 0.1em !important;
-        height: 1.4em;
-        background-color: white;
-        margin: 0;
-        border: 0;
-      }
-    }
     ul{
       margin: 0;
       display: flex;
       flex-direction: row;
       align-items: center;
-
       li{
         flex-grow: 1;
         flex-shrink: 0;
         text-align: center;
+        max-width: 100%;
+        .chembl-search-bar-container{
+          font-size: $search-bar-font-size;
+          .search-bar-wrapper{
+            font-size: inherit !important;
+            margin: 0 0 0.4em 0;
+            background: white;
+            $padding-search-bar: 0.5em;
+            border-radius: 0.2em;
+            .chembl-search-bar{
+              font-size: inherit !important;
+              color: black;
+              display: block;
+              background-color: transparent !important;
+              border: 0!important;
+              padding: 0 $padding-search-bar 0 $padding-search-bar;
+              width: calc(100% - #{$padding-search-bar*2});
+              margin: 0.1em 0 0 0 !important;
+              outline: none !important;
+              height: 2em !important;
+              box-shadow: none !important;
+            }
+            .search-button{
+              font-size: inherit !important;
+              display: block;
+              border-radius: 0.3em !important;
+              margin: 0.2em;
+              i{
+                font-weight: bold;
+                font-size: inherit !important;
+              }
+            }
+
+          }
+          .example-link-container{
+            font-size: 0.9em;
+            text-align: left;
+            width: 100%;
+            .example-link{
+              display: inline;
+            }
+          }
+        }
         .wellcome-trust-img{
           display: block;
           height: 1.8em;
+          margin: 0 0.5em 0 0.5em;
         }
         a{
           display: block;
           color: white;
-          padding: 0.25em;
+          padding: 0.5em;
           .chembl-logo-header{
             display: block;
             height: 3.5em;
@@ -349,6 +380,7 @@ $chembl-header-padding: 1.1em;
           &.long-link{
             flex-grow: 3;
             font-size: 3em;
+            padding: 0.2em;
             div{
               display: block;
               .beta-sign{
@@ -364,10 +396,41 @@ $chembl-header-padding: 1.1em;
       &::after{
         display: block;
         content: "";
-        flex-grow: 0.1;
+        flex-grow: 10000;
         flex-shrink: 0;
         text-align: center;
         height: $chembl-header-height !important;
+      }
+      &.right-align-content{
+        &::after{
+          display: none;
+        }
+        &::before{
+          display: block;
+          content: "";
+          flex-grow: 10000;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
+      }
+      &.max-expand-content{
+        &::after{
+          display: block;
+          content: "";
+          flex-grow: 0.1;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
+        &::before {
+          display: block;
+          content: "";
+          flex-grow: 0.1;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
       }
     }
     a{
@@ -387,18 +450,23 @@ $chembl-header-padding: 1.1em;
       padding-bottom: 0.1em;
     }
   }
+  @media #{$medium-only} {
+    font-size: 0.8rem;
+  }
   @media #{$small-and-down} {
     font-size: 0.5rem;
     .chembl-header {
-      &:not(.side-nav-padding){
-        height: calc(#{2*$chembl-header-height} + #{2*$chembl-header-padding}) !important;
+      height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*$chembl-header-padding}) !important;
+        .chembl-search-bar-container{
+          font-size: $search-bar-small-font-size !important;
+          .search-bar-wrapper{
+            margin-bottom: 0.1em !important;
+          }
       }
     }
     &.pinned{
       .chembl-header{
-        &:not(.side-nav-padding) {
-          height: calc(#{2*$chembl-header-height} + #{2*0.1em}) !important;
-        }
+        height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*0.2em}) !important;
       }
     }
   }
@@ -406,12 +474,13 @@ $chembl-header-padding: 1.1em;
 
 #chembl-header-container-spacer{
   font-size: 1rem;
+  @media #{$medium-only} {
+    font-size: 0.8rem;
+  }
   @media #{$small-and-down} {
     font-size: 0.5rem;
-    &:not(.side-nav-padding){
-      display: block;
-      height: calc(#{2*$chembl-header-height} + #{2*$chembl-header-padding}) !important;
-    }
+    display: block;
+    height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*$chembl-header-padding}) !important;
   }
   display: block;
   height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
