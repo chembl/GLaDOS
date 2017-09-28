@@ -89,6 +89,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       return ->
 
+        console.log 'render tooltip!!'
         $hoveredElem = $(@)
         if $hoveredElem.attr('data-qtip-configured') == 'yes'
           return
@@ -116,6 +117,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $hoveredElem.qtip('api').show()
         $hoveredElem.attr('data-qtip-configured', 'yes')
+
+        # trick to always get correct position of tooltip
+#        $(window).scrollTop($(window).scrollTop() + 1)
+#        $(window).scrollTop($(window).scrollTop() - 1)
 
         $newMiniReportCardContainer = $('#' + miniRepCardID)
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
