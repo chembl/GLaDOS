@@ -9,12 +9,9 @@
 <!-- Handlebars Templates -->
 {% verbatim %}
 <script id="Handlebars-ESResults-Chips" type="text/x-handlebars-template">
-  {{#each chips}}
-    {{#if this.prepend_br}}<br class="hide-on-med-and-up"/>{{/if}}
-    <a href="{{this.url_path}}" class="results-section-item{{#if this.selected}} selected{{/if}}">
+  {{#each chips}}{{#if this.prepend_br}}<br class="hide-on-med-and-up"/>{{/if}}<a href="{{this.url_path}}" class="results-section-item{{#if this.selected}} selected{{/if}}">
       {{this.label}} <span class="badge-primary-color-no-float">{{this.total_records}}</span>
-    </a>
-  {{/each}}
+    </a>{{/each}}
 </script>
 
 
