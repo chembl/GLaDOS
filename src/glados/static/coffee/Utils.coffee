@@ -287,7 +287,7 @@ glados.useNameSpace 'glados',
       # data-qtip-configured set to 'yes'
       destroyAllTooltips: ($elem) ->
 
-        $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes]')
+        $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes],[data-qtip-configured=true]')
         $elemsWithToolTip.each (index, elem) ->
           $(elem).qtip('destroy', true)
           $(elem).attr('data-qtip-configured', null )
