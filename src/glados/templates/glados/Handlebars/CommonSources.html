@@ -246,8 +246,14 @@
 
       {{#if this.has_link}}
 
-      <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-      </p>
+        {{#if this.is_secondary_link}}
+          <small>
+            <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+          </small>
+        {{else}}
+          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          </p>
+        {{/if}}
 
       {{else}}
       <small>
