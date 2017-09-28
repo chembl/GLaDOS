@@ -487,6 +487,7 @@ Compound.COLUMNS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      'custom_null_vale_label': 'No Name'
     }
   MOLECULE_TYPE: {
       'name_to_show': 'Molecule Type'

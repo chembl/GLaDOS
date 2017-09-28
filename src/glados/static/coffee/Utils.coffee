@@ -15,9 +15,11 @@ glados.useNameSpace 'glados',
     #       }
     #     }
     # you can use the function like this getNestedValue(a, 'b.c'.split('.'))
-    getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false) ->
+    getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false, customNullValueLabel) ->
 
-      nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      nullValueLabel = customNullValueLabel
+      nullValueLabel ?= glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else nullValueLabel
 
       nestedComparatorsList = nestedComparatorsStr.split('.')
       if nestedComparatorsList.length == 1
@@ -48,7 +50,8 @@ glados.useNameSpace 'glados',
         returnCol = {}
         returnCol.name_to_show = colDescription['name_to_show']
 
-        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator)
+        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,
+        customNullValueLabel=colDescription.custom_null_vale_label)
 
         returnCol['format_class'] = colDescription.format_class
 
