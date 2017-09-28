@@ -8,8 +8,8 @@ class CompoundReportCardTest(ReportCardTester):
 
   def assert_copy_button(self, elem_id, tooltip, value):
     copy_button = self.browser.find_element_by_id(elem_id)
-    self.assertEquals(copy_button.get_attribute('data-tooltip'), tooltip)
-    self.assertEquals(copy_button.get_attribute('data-copy'), value)
+    self.assertEqual(copy_button.get_attribute('data-tooltip'), tooltip)
+    self.assertEqual(copy_button.get_attribute('data-copy'), value)
 
   def assert_compound_representation(self, elem_id, original_value):
     canonical_smiles_input = self.browser.find_element_by_id(elem_id)
@@ -23,7 +23,7 @@ class CompoundReportCardTest(ReportCardTester):
     tooltip = canonical_smiles_dwnld_btn.get_attribute('data-tooltip')
     self.assertEqual(tooltip, curr_tooltip)
     href = canonical_smiles_dwnld_btn.get_attribute('href')
-    self.assertEquals(href, data)
+    self.assertEqual(href, data)
 
   def assert_molecule_feature(self, elem_id, should_be_active, data_icon, img_tooltip,
                               tooltip_position):
