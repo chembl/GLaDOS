@@ -128,7 +128,7 @@ glados.useNameSpace 'glados',
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
       Bioactivity: 'fa-th'
-    DEFAULT_NULL_VALUE_LABEL: '---'
+    DEFAULT_NULL_VALUE_LABEL: 'No Data'
     INCOMPLETE_SELECTION_LIST_LABEL: 'INCOMPLETE_SELECTION_LIST'
      # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
     # ranges include both numbers
