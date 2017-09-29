@@ -396,5 +396,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->
+      @showPreloader()
       @collection.clearAllFacetsSelections()
       $(@el).find('g.bucket').removeClass('selected')

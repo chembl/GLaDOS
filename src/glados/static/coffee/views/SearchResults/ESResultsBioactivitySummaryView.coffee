@@ -163,7 +163,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       glados.Utils.fillContentForElement $elem,
         url: @ctm.getLinkToAllActivities()
       $elem.show()
-      
+
     hideLinkToAllActivities: -> $(@el).find('.BCK-See-all-activities').hide()
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
