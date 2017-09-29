@@ -12,15 +12,17 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @config = arguments[0].config
+    @parentView = arguments[0].parent_view
 
     @model.on 'change:matrix', @render, @
+    @model.on 'change:state', @handleMatrixState, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     $(@el).mouseleave($.proxy(@destroyAllTooltipsIfNecessary, @))
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
-    updateViewProxy = @setUpResponsiveRender()
+    @setUpResponsiveRender()
 
     thisView = @
     $(window).keypress( (event) ->
@@ -29,6 +31,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if thisView.KEYS_PRESSED.length > limit
         thisView.KEYS_PRESSED.shift()
     )
+
+  handleMatrixState: ->
+    state = @model.get('state')
+    if state == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
+      @setProgressMessage('Loading Activity Data...')
+    else if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      @setProgressMessage('')
 
   handleTargetPrefNameChange: (targetChemblID) ->
 
@@ -63,11 +72,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
-    alert 'start to render!!'
-    console.log 'model: ', @model
     # only bother if my element is visible
     if $(@el).is(":visible")
 
+      @showRenderingMessage()
       starTime = Date.now()
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
@@ -79,6 +87,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if numColumns > 0
         @paintControls()
         @paintMatrix()
+        @parentView.fillLinkToAllActivities()
         $messagesElement.html ''
       else
         @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
@@ -87,26 +96,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       time = endTime - starTime
 
       $(@el).find('select').material_select()
-      alert 'finish render!!'
+      @hideRenderingMessage()
 
+  showRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').show()
+  hideRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').hide()
 
   setProgressMessage: (msg, hideCog=false) ->
 
     $messagesElement = $(@el).find('.BCK-VisualisationMessages')
+
     glados.Utils.fillContentForElement $messagesElement,
       message: msg
       hide_cog: hideCog
 
-    $messagesElement.show()
+    if msg == ''
+      @hideProgressMessage()
+    else
+      $messagesElement.show()
+
+  hideProgressMessage: -> $(@el).find('.BCK-VisualisationMessages').hide()
 
   destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
   clearVisualisation: ->
 
-    $messagesElement = $(@el).find('.BCK-VisualisationMessages')
-    $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
-      message: 'Generating Visualisation...'
-
+    @parentView.hideLinkToAllActivities()
     @destroyAllTooltips()
     @clearControls()
     @clearMatrix()

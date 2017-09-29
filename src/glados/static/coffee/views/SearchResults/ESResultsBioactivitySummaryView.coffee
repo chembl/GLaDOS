@@ -71,6 +71,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         model: @ctm
         el: $(@el).find('.BCK-CompTargetMatrix')
         config: config
+        parent_view: @
 
     #-------------------------------------------------------------------------------------------------------------------
     # Progess Message
@@ -92,23 +93,18 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
     wakeUpView: ->
-      console.log '... WAKING UP MATRIX'
       @handleVisualisationStatus()
     sleepView: -> @ctmView.destroyAllTooltips()
     handleManualResize: -> @ctmView.render()
 
     handleVisualisationStatus: ->
 
-      console.log '...HANDLE VISUALISATION STATUS'
       # only bother if my element is visible
       if not $(@el).is(":visible")
         return
 
       if @collection.loading_facets
-        console.log '... LOADING FACETS!'
         return
-      else
-        console.log '... NOT LOADING FACETS!'
 
       numTotalItems = @collection.getMeta('total_records')
       @hideDisplayAnywayButton()
@@ -163,14 +159,19 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Get items to generate matrix
     #-------------------------------------------------------------------------------------------------------------------
     fillLinkToAllActivities: ->
-      glados.Utils.fillContentForElement $(@el).find('.BCK-See-all-activities'),
+      $elem = $(@el).find('.BCK-See-all-activities')
+      glados.Utils.fillContentForElement $elem,
         url: @ctm.getLinkToAllActivities()
+      $elem.show()
+      
+    hideLinkToAllActivities: -> $(@el).find('.BCK-See-all-activities').hide()
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
       console.log 'getAllChemblIDsAndFetch: '
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
+      @ctmView.clearVisualisation()
 
       thisView = @
       $.when.apply($, deferreds).done( ->
@@ -178,14 +179,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         console.log 'all results: ', thisView.collection.allResults
         # TODO: probably fix these cases in a better way. Also some actions should be disabled while loading
         allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
-        console.log 'allItemsIDs: ', allItemsIDs
-        thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
-        alert '... FETCH MATRIX 2'
+        thisView.ctm.set('chembl_ids', allItemsIDs)
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
         thisView.showMatrix()
-        thisView.fillLinkToAllActivities()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
 
@@ -202,12 +200,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       @ctm.set('chembl_ids', selectedIDs, {silent:true})
-      alert '... FETCH MATRIX 1'
       @ctm.fetch()
       @showMatrix()
       @setProgressMessage('', hideCog=true)
       @hideProgressElement()
-      @fillLinkToAllActivities()
 
 
 
