@@ -7,8 +7,6 @@ class MainPageApp
 
   @init = ->
 
-    @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
-
     new glados.views.MainPage.CentralCardView
       el: $('.BCK-Central-Card')
 

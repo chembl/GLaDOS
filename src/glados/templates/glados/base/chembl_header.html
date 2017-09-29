@@ -1,70 +1,72 @@
 {% load static %}
 <div class="chembl-header row {{ hide_side_nav|yesno:',side-nav-padding' }}">
+    <div class="inner-row">
+        <div class="col l3 m5 s6">
+            <ul>
+                {% if hide_side_nav %}
+                    <li>
+                        <a data-activates="slide-out" class="button-collapse hoverable z-depth-1 waves-effect waves-light">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'main' %}" class="waves-effect waves-light">
+                            <img title="Go to the ChEMBL homepage"
+                                 class="chembl-logo-header"
+                                 alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a data-activates="slide-out"
+                           class="button-collapse hoverable z-depth-1 waves-effect waves-light hide-on-large-only">
+                            <i class="material-icons">menu</i>
+                        </a>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'main' %}" class="waves-effect waves-light long-link">
+                        <div>
+                            <span>ChEMBL</span>
 
-    <div class="col l3 m5 s6">
-        <ul>
-            {% if hide_side_nav %}
-                <li>
-                    <a data-activates="slide-out" class="button-collapse hoverable z-depth-1 waves-effect waves-light">
-                        <i class="material-icons">menu</i>
+                            {% if hide_side_nav %}
+                                <span class="beta-sign">BETA</span>
+                            {% else %}
+                                <span class="icon icon-generic" data-icon="&gt;"></span>
+                            {% endif %}
+                        </div>
                     </a>
                 </li>
-                <li>
-                    <a href="{% url 'main' %}" class="waves-effect waves-light">
-                        <img title="Go to the ChEMBL homepage"
-                             class="chembl-logo-header"
-                             alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <a data-activates="slide-out"
-                       class="button-collapse hoverable z-depth-1 waves-effect waves-light hide-on-large-only">
-                        <i class="material-icons">menu</i>
-                    </a>
-                </li>
-            {% endif %}
-            <li>
-                <a href="{% url 'main' %}" class="waves-effect waves-light long-link">
-                    <div>
-                        <span>ChEMBL</span>
+            </ul>
+        </div>
 
-                        {% if hide_side_nav %}
-                            <span class="beta-sign">BETA</span>
-                        {% else %}
-                            <span class="icon icon-generic" data-icon="&gt;"></span>
-                        {% endif %}
-                    </div>
-                </a>
-            </li>
-        </ul>
+        <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6 s2 offset-s4,l3 offset-l6 m4 offset-m3 s6' }}">
+            <ul class="right-align-content">
+                {% if not hide_side_nav %}
+                    <li>
+                        <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img"/>
+                    </li>
+                {% endif %}
+                <li>
+                    <a href="#download-db-modal"
+                        class="modal-trigger-safe hoverable tooltipped z-depth-1 waves-effect waves-light download-button"
+                        data-position="bottom" data-tooltip="Download">
+                        <p>
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </p>
+                        <p class="hide-on-med-and-down">
+                            <small>Download</small>
+                        </p>
+
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        {% block header_search_bar %}
+          {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
+        {% endblock %}
+
     </div>
-
-    <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6 s2 offset-s4,l3 offset-l6 m4 offset-m3 s6' }}">
-        <ul class="right-align-content">
-            {% if not hide_side_nav %}
-                <li>
-                    <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img"/>
-                </li>
-            {% endif %}
-            <li>
-                <a href="#download-db-modal"
-                    class="modal-trigger-safe hoverable tooltipped z-depth-1 waves-effect waves-light download-button"
-                    data-position="bottom" data-tooltip="Download">
-                    <p>
-                        <i class="fa fa-download" aria-hidden="true"></i>
-                    </p>
-                    <p class="hide-on-med-and-down">
-                        <small>Download</small>
-                    </p>
-
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-    {% block header_search_bar %}
-      {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
-    {% endblock %}
 </div>

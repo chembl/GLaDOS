@@ -269,18 +269,30 @@ header .row {
 }
 
 $chembl-header-height: 6em;
-$chembl-header-padding: 1.1em;
+$chembl-header-padding: 0.4em;
 $search-bar-font-size: 1em;
 $search-bar-small-font-size: 2em;
+$chembl-header-shrink-ratio: 0.65;
+$large-font-size: 0.9rem;
+$medium-font-size: 0.75rem;
+$small-font-size: 0.9rem;
+// d/h = (1-cos(30 degree))/2
+$hexagon-lateral-distance-proportion: 0.0669872981;
 
 
 #chembl-header-container{
   height: 0;
   z-index: 5;
-  font-size: 1rem;
+  font-size: $large-font-size;
+  .inner-row{
+    width: calc(95% + 2.3em);
+    margin-left: auto;
+    margin-right: auto;
+  }
   .chembl-header {
-    transition: height 1s;
-    font-family: "ChEMBL_Verdana", Verdana, Arial, sans-serif;
+    transition: height 0.5s, width 0.5s;
+    transition-timing-function: ease;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     color: white;
     padding-top: $chembl-header-padding;
@@ -308,6 +320,9 @@ $search-bar-small-font-size: 2em;
             background: white;
             $padding-search-bar: 0.5em;
             border-radius: 0.2em;
+            &.row{
+              padding: 0;
+            }
             .chembl-search-bar{
               font-size: inherit !important;
               color: black;
@@ -356,35 +371,43 @@ $search-bar-small-font-size: 2em;
           padding: 0.5em;
           .chembl-logo-header{
             display: block;
-            height: 3.5em;
-            width: 3.5em;
+            height: 5em;
+            width: 5em;
+            padding: 0.5em;
+            //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
           }
           i{
             display: block;
             &.material-icons{
-              font-size: 2em;
+              font-size: 2.5em;
             }
           }
           &.download-button {
             font-size: 1em;
             p {
+              font-size: 1.4em !important;
               margin: 0;
             }
             i {
-              font-size: 2em;
+              font-size: 2em !important;
             }
             a {
-              font-size: 1.1em;
               color: white;
-              padding: 0.2em;
+              padding: 0.1em !important;
               border-radius: $default-btn-border-radius;
             }
           }
           &.long-link{
             flex-grow: 3;
-            font-size: 3em;
-            padding: 0.2em;
+            padding: 0 0 0.2em 0;
+            text-shadow: 2px 2px black;
+            max-height: 5em;
+            overflow: hidden;
+
             div{
+              font-size: 3.5em;
+              position: relative;
+              top: 0.15em;
               display: block;
               .beta-sign{
                 font-size: 0.3em;
@@ -445,12 +468,34 @@ $search-bar-small-font-size: 2em;
     margin-top: 0;
   }
   &.pinned{
+    font-size: #{$large-font-size*$chembl-header-shrink-ratio};
     display: block;
     width: 100%;
     .chembl-header{
       height: calc(#{$chembl-header-height} + #{2*0.1em}) !important;
       padding-top: 0.1em;
       padding-bottom: 0.1em;
+      .chembl-search-bar-container{
+          font-size: #{$search-bar-font-size/$chembl-header-shrink-ratio};
+      }
+      .example-link-container{
+        display: none;
+      }
+      .search-bar-wrapper{
+        margin: 0 !important;
+      }
+      .hide-on-med-and-down{
+        display: none;
+      }
+    }
+    ul{
+      li{
+        margin-right: 2em;
+        &.right-align-content{
+          margin-left: 2em;
+          margin-right: 0;
+        }
+      }
     }
   }
   @media #{$medium-only} {
