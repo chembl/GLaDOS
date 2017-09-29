@@ -72,8 +72,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         el: $(@el).find('.BCK-CompTargetMatrix')
         config: config
 
-      @handleVisualisationStatus()
-
     #-------------------------------------------------------------------------------------------------------------------
     # Progess Message
     #-------------------------------------------------------------------------------------------------------------------
@@ -182,6 +180,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
         console.log 'allItemsIDs: ', allItemsIDs
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
+        alert '... FETCH MATRIX 2'
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
@@ -203,7 +202,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       @ctm.set('chembl_ids', selectedIDs, {silent:true})
-      console.log '... FETCH MATRIX!'
+      alert '... FETCH MATRIX 1'
       @ctm.fetch()
       @showMatrix()
       @setProgressMessage('', hideCog=true)

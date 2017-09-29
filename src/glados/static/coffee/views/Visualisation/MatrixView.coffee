@@ -13,7 +13,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
 
-    @model.on 'change', @render, @
+    @model.on 'change:matrix', @render, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
     $(@el).mouseleave($.proxy(@destroyAllTooltipsIfNecessary, @))
@@ -63,6 +63,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
+    alert 'start to render!!'
+    console.log 'model: ', @model
     # only bother if my element is visible
     if $(@el).is(":visible")
 
@@ -85,7 +87,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       time = endTime - starTime
 
       $(@el).find('select').material_select()
-
+      alert 'finish render!!'
 
 
   setProgressMessage: (msg, hideCog=false) ->

@@ -21,6 +21,7 @@ glados.useNameSpace 'glados.models.Activity',
         cell_min_pchembl_value_avg: 0
         cell_max_activity_count: 0
         cell_min_activity_count: 0
+      alert 'set clean matrix'
       @set('matrix', cleanMatrixConfig, {silent:true})
 
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
@@ -34,6 +35,7 @@ glados.useNameSpace 'glados.models.Activity',
 
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->
+        alert 'set real matrix'
         thisModel.set(thisModel.parse data)
         aggregations = thisModel.get('aggregations')
 
