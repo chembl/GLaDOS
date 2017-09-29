@@ -271,11 +271,11 @@ header .row {
 $chembl-header-height: 6em;
 $chembl-header-padding: 0.4em;
 $search-bar-font-size: 1em;
-$search-bar-small-font-size: 2em;
+$search-bar-font-size-small: 1.3em;
 $chembl-header-shrink-ratio: 0.65;
 $large-font-size: 0.9rem;
-$medium-font-size: 0.75rem;
-$small-font-size: 0.9rem;
+$medium-font-size: 0.8rem;
+$small-font-size: 0.7rem;
 // d/h = (1-cos(30 degree))/2
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
@@ -284,6 +284,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   height: 0;
   z-index: 5;
   font-size: $large-font-size;
+  width: 100%;
   .inner-row{
     width: calc(95% + 2.3em);
     margin-left: auto;
@@ -312,6 +313,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         flex-shrink: 0;
         text-align: center;
         max-width: 100%;
+        margin-right: 0.2em;
         .chembl-search-bar-container{
           font-size: $search-bar-font-size;
           .search-bar-wrapper{
@@ -330,7 +332,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
               background-color: transparent !important;
               border: 0!important;
               padding: 0 $padding-search-bar 0 $padding-search-bar;
-              width: calc(100% - #{$padding-search-bar*2});
+              width: calc(100% - #{$padding-search-bar*2}) !important;
               margin: 0.1em 0 0 0 !important;
               outline: none !important;
               height: 2em !important;
@@ -341,9 +343,25 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
               display: block;
               border-radius: 0.3em !important;
               margin: 0.2em;
+              padding: 0.1em;
+              height: 2em;
               i{
                 font-weight: bold;
-                font-size: inherit !important;
+                font-size: 1.5em !important;
+                padding: 0.2em;
+              }
+            }
+
+            .draw-structure{
+              font-size: inherit !important;
+              display: block;
+              border-radius: 0.3em !important;
+              margin: 0.2em;
+              padding: 0.1em;
+              height: 2em;
+              i{
+                font-weight: bold;
+                font-size: 0.95em !important;
               }
             }
 
@@ -428,6 +446,11 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         height: $chembl-header-height !important;
       }
       &.right-align-content{
+        li{
+          margin-left: 0.2em;
+          margin-right: 0;
+
+        }
         &::after{
           display: none;
         }
@@ -441,10 +464,14 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         }
       }
       &.max-expand-content{
+        li{
+          margin-left: 0;
+          margin-right: 0;
+        }
         &::after{
           display: block;
           content: "";
-          flex-grow: 0.1;
+          flex-grow: 0.01;
           flex-shrink: 0;
           text-align: center;
           height: $chembl-header-height !important;
@@ -452,7 +479,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         &::before {
           display: block;
           content: "";
-          flex-grow: 0.1;
+          flex-grow: 0.01;
           flex-shrink: 0;
           text-align: center;
           height: $chembl-header-height !important;
@@ -490,45 +517,80 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     }
     ul{
       li{
-        margin-right: 2em;
-        &.right-align-content{
+          margin-right: 2em;
+      }
+      &.right-align-content{
+        li{
           margin-left: 2em;
+          margin-right: 0;
+
+        }
+      }
+
+      &.max-expand-content{
+        li{
+          margin-left: 0;
           margin-right: 0;
         }
       }
     }
   }
   @media #{$medium-only} {
-    font-size: 0.8rem;
-  }
-  @media #{$small-and-down} {
-    font-size: 0.5rem;
-    .chembl-header {
-      height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*$chembl-header-padding}) !important;
-        .chembl-search-bar-container{
-          font-size: $search-bar-small-font-size !important;
-          .search-bar-wrapper{
-            margin-bottom: 0.1em !important;
-          }
+    font-size: $medium-font-size;
+    .long-link{
+      div{
+        font-size: 2.7em !important;
       }
     }
+    &.pinned {
+      font-size: #{$medium-font-size*$chembl-header-shrink-ratio};
+    }
+  }
+  @media #{$small-and-down} {
+    .inner-row{
+      width: 99% !important;
+    }
+    .long-link{
+      div{
+        font-size: 2.5em !important;
+      }
+    }
+    font-size: $small-font-size;
+    .chembl-search-bar-container{
+      font-size: $search-bar-font-size-small !important;
+    }
+    .chembl-header {
+      transition: height 0.25s, width 0.25s;
+      transition-timing-function: ease;
+      height: calc(#{$chembl-header-height+4*$search-bar-font-size-small} + #{2*$chembl-header-padding}) !important;
+    }
     &.pinned{
+      .inner-row{
+        width: 99% !important;
+        .hide-on-small-pinned{
+          display: none !important;
+        }
+      }
+      font-size: #{$small-font-size*$chembl-header-shrink-ratio};
+      .chembl-search-bar-container {
+        font-size: #{$search-bar-font-size-small/$chembl-header-shrink-ratio} !important;
+      }
       .chembl-header{
-        height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*0.2em}) !important;
+        height: calc(#{3*$search-bar-font-size-small/$chembl-header-shrink-ratio} + #{2*0.2em}) !important;
       }
     }
   }
 }
 
 #chembl-header-container-spacer{
-  font-size: 1rem;
+  font-size: $large-font-size;
   @media #{$medium-only} {
-    font-size: 0.8rem;
+    font-size: $medium-font-size;
   }
   @media #{$small-and-down} {
-    font-size: 0.5rem;
+    font-size: $small-font-size;
     display: block;
-    height: calc(#{$chembl-header-height+4*$search-bar-small-font-size} + #{2*$chembl-header-padding}) !important;
+    height: calc(#{$chembl-header-height+3*$search-bar-font-size} + #{2*$chembl-header-padding}) !important;
   }
   display: block;
   height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
@@ -2136,11 +2198,30 @@ $marvin-size-fullscreen: 91vh;
   position: relative;
   .iframe-cover {
     position: absolute;
-    top: 0;
+    top: 0 !important;
     left: 0;
     right: 0;
+    bottom: 0 !important;
     height: 100%;
     width: 100%;
+    background-color: $chembl-teal;
+    opacity: 0.4;
+    .iframe-centered{
+      position: absolute;
+      top: 15%;
+      text-align: center;
+      width: 100%;
+      p{
+        color: white;
+        opacity: 1;
+      }
+      a{
+        outline: none;
+        color: white;
+        opacity: 1;
+      }
+
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 {% load static %}
 <div class="chembl-header row {{ hide_side_nav|yesno:',side-nav-padding' }}">
     <div class="inner-row">
-        <div class="col l3 m5 s6">
+        <div class="col l3 m5 s10 hide-on-small-pinned">
             <ul>
                 {% if hide_side_nav %}
                     <li>
@@ -40,11 +40,11 @@
             </ul>
         </div>
 
-        <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6 s2 offset-s4,l3 offset-l6 m4 offset-m3 s6' }}">
+        <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6,l3 offset-l6 m4 offset-m3' }} s2 hide-on-small-pinned">
             <ul class="right-align-content">
                 {% if not hide_side_nav %}
                     <li>
-                        <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img"/>
+                        <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img hide-on-small-only"/>
                     </li>
                 {% endif %}
                 <li>

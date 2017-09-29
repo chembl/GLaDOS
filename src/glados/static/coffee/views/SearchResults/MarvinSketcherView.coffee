@@ -16,10 +16,9 @@ MarvinSketcherView = Backbone.View.extend
   sdf_smiles_to_load_on_ready: null
 
   initialize: (options)->
-
-    console.log 'INIT MARVIN VIEW!'
     @preloader = $(@el).find('#marvin-preloader')
     @marvin_iframe = $(@el).find('#sketch')
+
     if options
       @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
       @smiles_to_load_on_ready = options.smiles_to_load_on_ready
@@ -31,6 +30,14 @@ MarvinSketcherView = Backbone.View.extend
 
     thisView = @
     MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
+      # TODO: disable scroll
+#      console.log $(thisView.marvin_iframe[0].contentWindow.document).find('.gwt-progressContainer.mjs-canvasScrollPanelNoLogo')
+#      $(thisView.marvin_iframe[0].contentWindow.document).find('.mjs-canvasScrollPanelNoLogo').bind('mousewheel', (mouseEvent)->
+#        console.log 'entered!'
+#        if not(mouseEvent.ctrlKey or GlobalVariables.IS_COMMAND_KEY_DOWN)
+#          mouseEvent.preventDefault()
+#          console.log 'prevented!'
+#      )
       thisView.marvinSketcherInstance = sketcherInstance
       if thisView.sdf_smiles_to_load_on_ready
         thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
@@ -111,16 +118,15 @@ MarvinSketcherView = Backbone.View.extend
   # --------------------------------------------------------------------------------------------------------------------
   # loading structures
   # --------------------------------------------------------------------------------------------------------------------
-  loadStructure: (sdf_string, format)->
-
-    @marvin_iframe.hide()
+  loadStructure: (sdf_string, format, onlyIfEmpty=false)->
+    if onlyIfEmpty and not @marvinSketcherInstance.isEmpty()
+      return
     @preloader.show()
     load_structure = ->
       @marvinSketcherInstance.pasteStructure(format, sdf_string)
       @preloader.hide()
-      @marvin_iframe.show()
 
-    setTimeout(load_structure.bind(@), 1000)
+    setTimeout(load_structure.bind(@), 0)
 
   triggerSubstructureSearch: ->
 
