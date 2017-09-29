@@ -7,9 +7,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      console.log 'BIOACTIVITY!'
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
-      @collection.on 'reset do-repaint', @handleVisualisationStatus, @
+      @collection.on 'reset', @handleVisualisationStatus, @
 
       @entityName = @collection.getMeta('label')
       if @entityName == 'Targets'
@@ -116,7 +115,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
-      console.log '... numWorkingItems: ', numWorkingItems
 
       if numWorkingItems > threshold[1]
         @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
@@ -133,10 +131,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         @hideMatrix()
         return
 
-      console.log '... is there selection?'
+
       @setProgressMessage('', hideCog=true)
       if not thereIsSelection
-        console.log '... there is no selection'
         @getAllChemblIDsAndFetch()
         return
 
@@ -168,7 +165,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
-      console.log 'getAllChemblIDsAndFetch: '
+
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
       @ctmView.clearVisualisation()
@@ -176,7 +173,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       thisView = @
       $.when.apply($, deferreds).done( ->
         filterProperty = thisView.ctm.get('filter_property')
-        console.log 'all results: ', thisView.collection.allResults
         # TODO: probably fix these cases in a better way. Also some actions should be disabled while loading
         allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
         thisView.ctm.set('chembl_ids', allItemsIDs)

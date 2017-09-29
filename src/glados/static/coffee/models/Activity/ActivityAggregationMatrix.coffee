@@ -205,7 +205,7 @@ glados.useNameSpace 'glados.models.Activity',
 
       return {
         id: id
-        pref_name: @LOADING_DATA_LABEL
+        pref_name: glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL
         target_chembl_id: bucket.key
         originalIndex: latestPos
         currentPosition: latestPos
@@ -370,6 +370,6 @@ glados.useNameSpace 'glados.models.Activity',
       return requestData
 
 glados.models.Activity.ActivityAggregationMatrix.LOADING_DATA_LABEL = 'Loading...'
-glados.models.Activity.ActivityAggregationMatrix. ERROR_LOADING_DATA_LABEL = '(Error Loading data)'
+glados.models.Activity.ActivityAggregationMatrix.ERROR_LOADING_DATA_LABEL = '(Error Loading data)'
 glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT = 'TARGET_PREF_NAMES_UPDATED_EVT'
 glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX = '_agg'

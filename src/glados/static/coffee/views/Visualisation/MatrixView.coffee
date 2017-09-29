@@ -53,7 +53,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         if @WINDOW.min_col_num <= target.currentPosition < @WINDOW.max_col_num
           textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
           @fillHeaderText(textElem)
-          
+
     else
 
       rowsIndex = @model.get('matrix').rows_index

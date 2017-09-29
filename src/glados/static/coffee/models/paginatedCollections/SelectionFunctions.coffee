@@ -146,9 +146,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     unSelectAll: ->
 
-      @setMeta('all_items_selected', false)
-      @setMeta('selection_exceptions', {})
-      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
+      if @getNumberOfSelectedItems() > 0
+        @setMeta('all_items_selected', false)
+        @setMeta('selection_exceptions', {})
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
 
     selectByPropertyValue: (propName, value) ->
 
