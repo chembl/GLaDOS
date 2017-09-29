@@ -101,12 +101,14 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     handleVisualisationStatus: ->
 
+      console.log '...HANDLE VISUALISATION STATUS'
       # only bother if my element is visible
       if not $(@el).is(":visible")
         return
 
       if @collection.loading_facets
         console.log '... LOADING FACETS!'
+        return
       else
         console.log '... NOT LOADING FACETS!'
 
@@ -168,6 +170,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
+      console.log 'getAllChemblIDsAndFetch: '
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
 
@@ -175,7 +178,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       $.when.apply($, deferreds).done( ->
         filterProperty = thisView.ctm.get('filter_property')
         console.log 'all results: ', thisView.collection.allResults
-        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults)
+        # TODO: probably fix these cases in a better way. Also some actions should be disabled while loading
+        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
         console.log 'allItemsIDs: ', allItemsIDs
         thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
         thisView.ctm.fetch()
