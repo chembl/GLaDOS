@@ -39,6 +39,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     else if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE
       @setProgressMessage('')
 
+  # If the target prefered name comes in the index we don't need this anymore
   handleTargetPrefNameChange: (targetChemblID) ->
 
     # only bother if my element is visible, it must be re rendered on wake up anyway
@@ -48,17 +49,19 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       colsIndex = @model.get('matrix').columns_index
       target = colsIndex[targetChemblID]
-      if @WINDOW.min_col_num <= target.currentPosition < @WINDOW.max_col_num
-        textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
-        @fillHeaderText(textElem)
-
+      if target?
+        if @WINDOW.min_col_num <= target.currentPosition < @WINDOW.max_col_num
+          textElem = d3.select('#' + @COL_HEADER_TEXT_BASE_ID + targetChemblID)
+          @fillHeaderText(textElem)
+          
     else
 
       rowsIndex = @model.get('matrix').rows_index
       target = rowsIndex[targetChemblID]
-      if @WINDOW.min_row_num <= target.currentPosition < @WINDOW.max_row_num
-        textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
-        @fillHeaderText(textElem, isCol=false)
+      if target?
+        if @WINDOW.min_row_num <= target.currentPosition < @WINDOW.max_row_num
+          textElem = d3.select('#' + @ROW_HEADER_TEXT_BASE_ID + targetChemblID)
+          @fillHeaderText(textElem, isCol=false)
 
   renderWhenError: ->
 
