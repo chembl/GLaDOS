@@ -158,6 +158,10 @@ $sidenav-badge-padding: 3px;
   padding: 0px;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
+  &:not(.fixed){
+    display: none;
+  }
+
   &:after {
     content: "   ";
     display: block;
@@ -194,11 +198,21 @@ $sidenav-badge-padding: 3px;
   }
 
   li {
-    div.collapsible-header {
+    a {
+      &.selected {
+        background: $primary-color;
+        color: white;
+        span.badge-primary-color-no-float {
+          color: $primary-color;
+          background-color: $chip-bg-color;
+        }
+      }
+
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
       min-height: inherit !important;
       line-height: $sidenav-links-lineheight !important;
       padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
+      padding-left: 2*$sidenav-links-side-padding !important;
 
       span.badge {
         margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
@@ -206,38 +220,6 @@ $sidenav-badge-padding: 3px;
         padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
         &.new:after {
           content: "" !important;
-        }
-      }
-    }
-    div.collapsible-body {
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      min-height: inherit !important;
-      line-height: $sidenav-links-lineheight !important;
-      padding: 0px !important;
-      li a {
-
-        &.selected {
-          background: $primary-color;
-          color: white;
-          span.badge-primary-color-no-float {
-            color: $primary-color;
-            background-color: $chip-bg-color;
-          }
-        }
-
-        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-        min-height: inherit !important;
-        line-height: $sidenav-links-lineheight !important;
-        padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
-        padding-left: 2*$sidenav-links-side-padding !important;
-
-        span.badge {
-          margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
-          border-radius: 2*$sidenav-badge-padding;
-          padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
-          &.new:after {
-            content: "" !important;
-          }
         }
       }
     }
@@ -270,77 +252,351 @@ footer {
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
 
-main{
-  &.with-sidenav{
-    /* to prevent the side bar from overlapping the main contens */
-    @media #{$large-and-up} {
-      padding-left: $side-nav-width;
-    }
-  }
- }
-
 header .row {
   margin-bottom: 0;
 }
 
-nav.top-nav {
-  background-color: $h2-color;
-  height: 90px;
-  line-height: 100px;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-  border-bottom: 1px solid #d1d1d1;
+.button-collapse{
+  padding: 5px;
+  border-radius: $default-btn-border-radius;
 }
 
-nav.top-nav a {
-  text-shadow: 1px 1px #000000;
-  font-size: 3rem;
-  padding-left: 0px;
+.side-nav-padding{
+  padding-left: $side-nav-width !important;
+  @media #{$medium-and-down} {
+    padding-left: 0 !important;
+  }
 }
 
-.download-database-btn {
-  position: absolute;
-  right: 5%;
-  top: 0;
-  bottom: 0;
+$chembl-header-height: 6em;
+$chembl-header-padding: 0.4em;
+$search-bar-font-size: 1em;
+$search-bar-font-size-small: 1.3em;
+$chembl-header-shrink-ratio: 0.65;
+$large-font-size: 0.9rem;
+$medium-font-size: 0.8rem;
+$small-font-size: 0.7rem;
+// d/h = (1-cos(30 degree))/2
+$hexagon-lateral-distance-proportion: 0.0669872981;
 
-  p {
-    margin: 0;
+
+#chembl-header-container{
+  height: 0;
+  z-index: 5;
+  font-size: $large-font-size;
+  width: 100%;
+  .inner-row{
+    width: calc(95% + 2.3em);
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  i {
-    font-size: 2rem;
-  }
-
-  a {
+  .chembl-header {
+    transition: height 0.5s, width 0.5s;
+    transition-timing-function: ease;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     color: white;
-    padding: 10px 20px;
-    border-radius: $default-btn-border-radius;
+    padding-top: $chembl-header-padding;
+    padding-bottom: $chembl-header-padding;
+    width: 100%;
+    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
+    position: relative;
+    background: $chembl-teal;
+    text-align: center;
+    ul{
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      li{
+        flex-grow: 1;
+        flex-shrink: 0;
+        text-align: center;
+        max-width: 100%;
+        margin-right: 0.2em;
+        .chembl-search-bar-container{
+          font-size: $search-bar-font-size;
+          .search-bar-wrapper{
+            position: relative;
+            font-size: inherit !important;
+            font-family: "ChEMBL_Verdana", Verdana, sans-serif !important;
+            margin: 0 0 0.4em 0;
+            background: white;
+            $padding-search-bar: 0.5em;
+            border-radius: 0.2em;
+            &.row{
+              padding: 0;
+            }
+            .chembl-search-bar{
+              font-size: inherit !important;
+              color: black;
+              display: inline-block;
+              overflow: hidden;
+              background-color: transparent !important;
+              border: 0!important;
+              padding: 0 $padding-search-bar 0 $padding-search-bar;
+              width: calc(100% - #{$padding-search-bar*2});
+              margin: 0.1em 0 0 0 !important;
+              outline: none !important;
+              height: 2em !important;
+              box-shadow: none !important;
+            }
+            .search-button{
+              font-size: inherit !important;
+              display: block;
+              border-radius: 0.3em !important;
+              margin: 0.2em;
+              padding: 0.1em;
+              height: 2em;
+              i{
+                font-weight: bold;
+                font-size: 1.5em !important;
+                padding: 0.2em;
+              }
+            }
+
+            .draw-structure{
+              font-size: inherit !important;
+              display: block;
+              border-radius: 0.3em !important;
+              margin: 0.2em;
+              padding: 0.1em;
+              height: 2em;
+              i{
+                font-weight: bold;
+                font-size: 0.95em !important;
+              }
+            }
+
+          }
+          .example-link-container{
+            font-size: 0.9em;
+            text-align: left;
+            width: 100%;
+            .example-link{
+              display: inline;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        .wellcome-trust-img{
+          display: block;
+          height: 1.8em;
+          margin: 0 0.5em 0 0.5em;
+        }
+        a{
+          display: block;
+          color: white;
+          padding: 0.5em;
+          .chembl-logo-header{
+            display: block;
+            height: 5em;
+            width: 5em;
+            padding: 0.5em;
+            //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
+          }
+          i{
+            display: block;
+            &.material-icons{
+              font-size: 2.5em;
+            }
+          }
+          &.download-button {
+            font-size: 1em;
+            p {
+              font-size: 1.4em !important;
+              margin: 0;
+            }
+            i {
+              font-size: 2em !important;
+            }
+            a {
+              color: white;
+              padding: 0.1em !important;
+              border-radius: $default-btn-border-radius;
+            }
+          }
+          &.long-link{
+            flex-grow: 3;
+            padding: 0 0 0.2em 0;
+            text-shadow: 2px 2px black;
+            max-height: 5em;
+            overflow: hidden;
+
+            div{
+              font-size: 3.5em;
+              position: relative;
+              top: 0.15em;
+              display: block;
+              .beta-sign{
+                font-size: 0.3em;
+              }
+              .icon-generic{
+                font-size: 0.6em;
+              }
+            }
+          }
+        }
+      }
+      &::after{
+        display: block;
+        content: "";
+        flex-grow: 10000;
+        flex-shrink: 0;
+        text-align: center;
+        height: $chembl-header-height !important;
+      }
+      &.right-align-content{
+        li{
+          margin-left: 0.2em;
+          margin-right: 0;
+
+        }
+        &::after{
+          display: none;
+        }
+        &::before{
+          display: block;
+          content: "";
+          flex-grow: 10000;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
+      }
+      &.max-expand-content{
+        li{
+          margin-left: 0;
+          margin-right: 0;
+        }
+        &::after{
+          display: block;
+          content: "";
+          flex-grow: 0.01;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
+        &::before {
+          display: block;
+          content: "";
+          flex-grow: 0.01;
+          flex-shrink: 0;
+          text-align: center;
+          height: $chembl-header-height !important;
+        }
+      }
+    }
+    a{
+      font-size: 1em;
+      color: white;
+    }
+  }
+  &.pin-top{
+    margin-top: 0;
+  }
+  &.pinned{
+    font-size: #{$large-font-size*$chembl-header-shrink-ratio};
+    display: block;
+    width: 100%;
+    .chembl-header{
+      height: calc(#{$chembl-header-height} + #{2*0.1em}) !important;
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+      .chembl-search-bar-container{
+          font-size: #{$search-bar-font-size/$chembl-header-shrink-ratio};
+      }
+      .example-link-container{
+        display: none;
+      }
+      .search-bar-wrapper{
+        margin: 0 !important;
+      }
+      .hide-on-med-and-down{
+        display: none;
+      }
+    }
+    ul{
+      li{
+          margin-right: 2em;
+      }
+      &.right-align-content{
+        li{
+          margin-left: 2em;
+          margin-right: 0;
+
+        }
+      }
+
+      &.max-expand-content{
+        li{
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  @media #{$medium-only} {
+    font-size: $medium-font-size;
+    .long-link{
+      div{
+        font-size: 2.7em !important;
+      }
+    }
+    &.pinned {
+      font-size: #{$medium-font-size*$chembl-header-shrink-ratio};
+    }
+  }
+  @media #{$small-and-down} {
+    .inner-row{
+      width: 99% !important;
+    }
+    .long-link{
+      div{
+        font-size: 2.5em !important;
+      }
+    }
+    font-size: $small-font-size;
+    .chembl-search-bar-container{
+      font-size: $search-bar-font-size-small !important;
+    }
+    .chembl-header {
+      transition: height 0.25s, width 0.25s;
+      transition-timing-function: ease;
+      height: calc(#{$chembl-header-height+4*$search-bar-font-size-small} + #{2*$chembl-header-padding}) !important;
+    }
+    &.pinned{
+      .inner-row{
+        width: 99% !important;
+        .hide-on-small-pinned{
+          display: none !important;
+        }
+      }
+      font-size: #{$small-font-size*$chembl-header-shrink-ratio};
+      .chembl-search-bar-container {
+        font-size: #{$search-bar-font-size-small/$chembl-header-shrink-ratio} !important;
+      }
+      .chembl-header{
+        height: calc(#{3*$search-bar-font-size-small/$chembl-header-shrink-ratio} + #{2*0.2em}) !important;
+      }
+    }
   }
 }
 
-.position-relative {
-  position: relative;
-}
-
-/* responsive sizes */
-@media #{$medium-and-down} {
-  header, main, footer, #chembl-header-container {
-    padding-left: 0px;
+#chembl-header-container-spacer{
+  font-size: $large-font-size;
+  @media #{$medium-only} {
+    font-size: $medium-font-size;
   }
-
-  nav.top-nav {
-    background: $h2-color;
-    margin-left: 0px;
-    margin-top: 0px;
-    height: $chembl-nav-height;
-    line-height: $chembl-nav-line-height;
-    padding-left: 0px;
+  @media #{$small-and-down} {
+    font-size: $small-font-size;
+    display: block;
+    height: calc(#{$chembl-header-height+3*$search-bar-font-size} + #{2*$chembl-header-padding}) !important;
   }
-
-  nav.top-nav a {
-    font-size: 2rem;
-  }
-
+  display: block;
+  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
 }
 
 /**
@@ -1429,7 +1685,6 @@ div#CNC-zoom-modal {
         position: absolute;
         right: -15px;
         top: 0;
-        z-index: 999;
 
         [type="checkbox"].filled-in:not(:checked) + label:after {
           border-color: color('grey', 'lighten-1')
@@ -1663,7 +1918,9 @@ div#CNC-zoom-modal {
   z-index: 20;
   line-height: 1.5;
   display: none;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   background: white;
   border: 2px solid $primary-color;
   border-radius: 5px;
@@ -1901,19 +2158,6 @@ $max_chembl_logo_height: 60px;
 */
 
 $marvin-size-fullscreen: 91vh;
-.search-bar-small {
-
-  background-color: $h2-color;
-  height: $chembl-nav-height;
-  color: white;
-  line-height: $chembl-nav-height;
-  width: 100%;
-  margin-top: 0px;
-  z-index: 998;
-  a {
-    color: white;
-  }
-}
 
 .marvin-search-options {
 
@@ -1946,11 +2190,30 @@ $marvin-size-fullscreen: 91vh;
   position: relative;
   .iframe-cover {
     position: absolute;
-    top: 0;
+    top: 0 !important;
     left: 0;
     right: 0;
+    bottom: 0 !important;
     height: 100%;
     width: 100%;
+    background-color: $chembl-teal;
+    opacity: 0.4;
+    .iframe-centered{
+      position: absolute;
+      top: 15%;
+      text-align: center;
+      width: 100%;
+      p{
+        color: white;
+        opacity: 1;
+      }
+      a{
+        outline: none;
+        color: white;
+        opacity: 1;
+      }
+
+    }
   }
 }
 
@@ -1963,7 +2226,6 @@ $marvin-size-fullscreen: 91vh;
 .search-banner {
 
   background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  background-color: color('green', 'lighten-5');
   backgroground-position: right center;
   background-repeat: no-repeat;
   background-size: cover;

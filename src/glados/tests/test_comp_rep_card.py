@@ -357,7 +357,7 @@ class CompoundReportCardTest(ReportCardTester):
     tradenames_td = self.browser.find_element_by_id('CompNameClass-tradenames')
 
     self.assertEqual(
-      'GNF-Pf-3680 MB 800 [AS ISETHIONATE] MB-800 PENTAMIDINE PENTAMIDINE ISETIONATE',
+      'GNF-Pf-3680 MB 800 [AS ISETHIONATE] MB-800 PENTAMIDINE PENTAMIDINE ISETIONATE Pentamidine RP 2512 [AS ISETHIONATE) RP-2512',
       synonyms_td.text)
     self.assertEqual(
       'NEBUPENT [AS ISETHIONATE] PENTACARINAT [AS ISETHIONATE] PENTAM 300 [AS ISETHIONATE]',

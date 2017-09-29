@@ -6,27 +6,21 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Initialization and navigation
     # ------------------------------------------------------------------------------------------------------------------
 
-    el: $('#BCK-SRB-wrapper')
     initialize: () ->
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       @searchModel = SearchModel.getInstance()
       @showAdvanced = false
-      @expandable_search_bar = null # Assigned after render
-      @small_bar_id = 'BCK-SRB-small'
-      @med_andup_bar_id = 'BCK-SRB-med-and-up'
-      # re-renders on widnow resize
-      @last_screen_type_rendered = null
-      # Render variables
-      @resultsListsViewsRendered = false
-      @$searchResultsListsContainersDict = null
-      @browsersDict = null
-      @container = null
-      @lists_container = null
 
+      @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('.chembl-search-bar'))
+      @expandable_search_bar.onEnter(@search.bind(@))
       # Rendering and resize events
-      @render()
-      $(window).resize(@render.bind(@))
       @searchModel.on('change:queryString', @updateSearchBarFromModel.bind(@))
+      autocompleteElemFind = $(@el).find('.autocomplete-hb')
+      console.log autocompleteElemFind
+      autocompleteElem = $(autocompleteElemFind[0])
+      @autocompleteView = new glados.views.SearchResults.SearchBarAutocompleteView
+        el: autocompleteElem
+      @autocompleteView.attachSearchBar($(@el).find('.chembl-search-bar'))
 
       if @atResultsPage
         # Handles the popstate event to reload a search
@@ -60,9 +54,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     events:
-      'click .example_link' : 'searchExampleLink'
-      'click #submit_search' : 'search'
-      'click #search-opts' : 'searchAdvanced'
+      'click .example-link' : 'searchExampleLink'
+      'click .search-button' : 'search'
+      'click .search-opts' : 'searchAdvanced'
 
     updateSearchBarFromModel: (e) ->
       if @expandable_search_bar
@@ -99,50 +93,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     switchShowAdvanced: ->
       @showAdvanced = not @showAdvanced
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Component rendering
-    # ------------------------------------------------------------------------------------------------------------------
-
-    render: ->
-      if @last_screen_type_rendered != GlobalVariables.CURRENT_SCREEN_TYPE
-        # on re-render cleans the drawn bar
-        $(@el).find('#'+@small_bar_id+',#'+@med_andup_bar_id).html('')
-        if GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.SMALL_SCREEN
-          @fillTemplate(@small_bar_id)
-          $(@el).find('#search-bar-small').pushpin
-            top : 106
-        else
-          @fillTemplate(@med_andup_bar_id)
-
-        @last_screen_type_rendered = GlobalVariables.CURRENT_SCREEN_TYPE
-
-    fillTemplate: (div_id) ->
-      div = $(@el).find('#' + div_id)
-      template = $('#' + div.attr('data-hb-template'))
-      if div and template
-        div.html Handlebars.compile(template.html())
-          searchBarQueryStr: @searchModel.get('queryString')
-          showAdvanced: @showAdvanced
-        # Shows the central div of the page after the search bar loads
-        if not @atResultsPage
-          $('#MainPageCentralDiv').show()
-
-        # expandable search bar
-        @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('#search_bar'))
-        @expandable_search_bar.onEnter(@search.bind(@))
-        setTimeout(
-          ()->
-            glados.views.SearchResults.SearchBarAutocompleteView.getInstance().attachSearchBar('search_bar')
-          , 1000
-        )
-      else
-        console.log("Error trying to render the SearchBarView because the div or the template could not be found")
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
 
-glados.views.SearchResults.SearchBarView.getInstance = () ->
-  if not glados.views.SearchResults.SearchBarView.__view_instance
-    glados.views.SearchResults.SearchBarView.__view_instance = new glados.views.SearchResults.SearchBarView
-  return glados.views.SearchResults.SearchBarView.__view_instance
+glados.views.SearchResults.SearchBarView.createInstances = () ->
+  glados.views.SearchResults.SearchBarView.BCKSRBInstance = undefined
+  if $('#BCK-SRB-wrapper').length == 1
+    glados.views.SearchResults.SearchBarView.BCKSRBInstance = new glados.views.SearchResults.SearchBarView
+      el: $('#BCK-SRB-wrapper')
+  glados.views.SearchResults.SearchBarView.HeaderInstance = undefined
+  if $('#chembl-header-search-bar-container').length == 1
+    glados.views.SearchResults.SearchBarView.HeaderInstance = new glados.views.SearchResults.SearchBarView
+      el: $('#chembl-header-search-bar-container')

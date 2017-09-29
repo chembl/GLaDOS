@@ -1,55 +1,5 @@
-<!-- this is the template for extra collapsible menus -->
-<script id="Handlebars-SideBar-CollapsibleMenu" type="text/x-handlebars-template">
-  {% verbatim %}
-  <li class="no-padding{{#if menu_class}} {{menu_class}}{{/if}}">
-    <div class="collapsible-header{{#if menu_class}} {{menu_class}}{{/if}} chembl-teal white-text">
-      <table class="no-padding">
-        <tr class="no-padding">
-          <td class="no-padding" style="width: 80%; word-wrap: break-word;">
-            {{title}}
-          </td>
-          {{#if title_badge}}
-            <td class="no-padding" style="text-align: center;">
-              <span class="badge-primary-color-no-float">{{title_badge}}</span>
-            </td>
-          {{/if}}
-        </tr>
-      </table>
-    </div>
-    <div class="collapsible-body{{#if menu_class}} {{menu_class}}{{/if}} no-padding transparent">
-      {{#if content}}
-        {{content}}
-      {{/if}}
-      {{#if links}}
-      <ul>
-        {{#each links}}
-        <li>
-          <a  class="waves-effect waves-teal{{#if this.selected}} selected{{/if}}{{#if this.link_class_key}} {{this.link_class_key}}{{/if}}"
-              {{#if this.href}} href="{{this.href}}"{{/if}}>
-            <table class="no-padding">
-              <tr class="no-padding">
-                <td class="no-padding" style="width: 80%; word-wrap: break-word;">
-                  {{this.label}}
-                </td>
-                {{#if this.badge}}
-                  <td class="no-padding" style="text-align: center;">
-                    <span class="badge-primary-color-no-float">{{this.badge}}</span>
-                  </td>
-                {{/if}}
-              </tr>
-            </table>
-          </a>
-        </li>
-        {{/each}}
-      </ul>
-      {{/if}}
-    </div>
-  </li>
-  {% endverbatim %}
-</script>
 
-<!-- This shows when the screen is large -->
-<ul id="slide-out" class="collapsible side-nav fixed teal lighten-5" data-collapsible="expandable">
+<ul id="slide-out" class="side-nav teal lighten-5 {{ hide_side_nav|yesno:',fixed' }}">
  {% block menu_links %}
     {% include "glados/base/left_menu_links.html" %}
   {% endblock %}

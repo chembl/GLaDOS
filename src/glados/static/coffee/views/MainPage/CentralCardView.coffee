@@ -23,6 +23,19 @@ glados.useNameSpace 'glados.views.MainPage',
 
       @showHideDivs()
 
+    hideIFrameCover: ->
+      $(@el).find('.iframe-cover.scroll-cover').hide()
+      iframe = $(@el).find('#sketch')[0]
+      iframe.contentWindow.focus()
+      @marvinSketcherView.loadStructure('c1ccccc1', MarvinSketcherView.SMILES_FORMAT, true)
+
+    showIFrameCover: ->
+      $(@el).find('.iframe-cover.scroll-cover').show()
+
+    events:
+      'click .iframe-cover.scroll-cover .iframe-centered a': 'hideIFrameCover'
+      'mouseleave': 'showIFrameCover'
+
     showHideDivs: ->
       $tabsLinks = $(@el).find('.summary-tabs .results-section-item')
       for tab in $tabsLinks

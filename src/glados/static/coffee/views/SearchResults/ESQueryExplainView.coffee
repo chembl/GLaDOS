@@ -14,12 +14,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       @searchModel.on('change:jsonQuery', @updateQueryFromModel.bind(@))
       if @searchModel.get('queryString')
         @updateQueryFromModel()
-      @searchBarView = glados.views.SearchResults.SearchBarView.getInstance()
       @query_explain_el = null
       @tooltipCallbacks = []
       if @atResultsPage
         $(@el).show()
-        $(@searchBarView.el).hide()
 
     updateQueryFromModel:()->
       [queryHtml, @tooltipCallbacks] = @buildParsedQueryRecursive(@searchModel.get('jsonQuery'))
@@ -118,7 +116,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     events:
       'click .es-query-explain-show' : 'showExplainDiv'
       'click .es-query-explain-close' : 'closeExplainDiv'
-      'click .edit-query' : 'showEditQuery'
 
     showExplainDiv: ()->
       $(@el).find('.es-query-explain').slideDown()
@@ -128,10 +125,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       $(@el).find('.es-query-explain').slideUp()
       $(@el).find('.es-query-explain-header').show(400)
 
-    showEditQuery: ()->
-      $(@searchBarView.el).slideDown()
-      $(@el).find('.edit-query').hide(400)
-      $(@searchBarView.el).find('#search_bar').focus()
 
 
       
