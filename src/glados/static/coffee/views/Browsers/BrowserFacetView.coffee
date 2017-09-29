@@ -126,7 +126,6 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
 
-
       $titleAndModalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
       now = Date.now()
       modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + now
@@ -381,6 +380,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectFacet: (facet_group_key, facet_key) ->
+      @showPreloader()
       facetsGroups = @collection.getFacetsGroups()
       facetingHandler = facetsGroups[facet_group_key].faceting_handler
       if facetingHandler.faceting_data[facet_key].count == 0
