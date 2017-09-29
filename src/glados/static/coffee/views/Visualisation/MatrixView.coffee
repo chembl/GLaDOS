@@ -30,6 +30,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.KEYS_PRESSED.push(event.which)
       if thisView.KEYS_PRESSED.length > limit
         thisView.KEYS_PRESSED.shift()
+      thisView.GLADOS_SUMMONED = thisView.summoningMe()
+      if thisView.GLADOS_SUMMONED
+        alert "Oh, it’s you. It’s been a long time. How have you been? I’ve been really busy being dead."
+        thisView.render()
     )
 
   handleMatrixState: ->
@@ -439,8 +443,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     fillColour = (d) ->
 
       if not d[thisView.currentPropertyColour.propName]?
-          return glados.Settings.VISUALISATION_GRID_UNDEFINED
+        return glados.Settings.VISUALISATION_GRID_UNDEFINED
+
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])
+
 
     colourCells = (transitionDuration=0)->
 
@@ -467,8 +473,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
       t = cellsContainerG.transition().duration(transitionDuration)
-      t.selectAll(".vis-cell")
-        .style("fill", fillColour)
+      gladosColour = (d, i) ->
+        seed = glados.Utils.getRadiansFromDegrees(i)
+        return  "#" + (Math.round(Math.abs(Math.sin(seed)) * 0xFFFFFF)).toString(16)
+
+      if thisView.GLADOS_SUMMONED
+        t.selectAll(".vis-cell")
+          .style("fill", gladosColour)
+      else
+        t.selectAll(".vis-cell")
+          .style("fill", fillColour)
 
       thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
       glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
