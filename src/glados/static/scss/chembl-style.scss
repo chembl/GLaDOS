@@ -317,7 +317,9 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         .chembl-search-bar-container{
           font-size: $search-bar-font-size;
           .search-bar-wrapper{
+            position: relative;
             font-size: inherit !important;
+            font-family: "ChEMBL_Verdana", Verdana, sans-serif !important;
             margin: 0 0 0.4em 0;
             background: white;
             $padding-search-bar: 0.5em;
@@ -328,11 +330,12 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
             .chembl-search-bar{
               font-size: inherit !important;
               color: black;
-              display: block;
+              display: inline-block;
+              overflow: hidden;
               background-color: transparent !important;
               border: 0!important;
               padding: 0 $padding-search-bar 0 $padding-search-bar;
-              width: calc(100% - #{$padding-search-bar*2}) !important;
+              width: calc(100% - #{$padding-search-bar*2});
               margin: 0.1em 0 0 0 !important;
               outline: none !important;
               height: 2em !important;
@@ -1915,7 +1918,9 @@ div#CNC-zoom-modal {
   z-index: 20;
   line-height: 1.5;
   display: none;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   background: white;
   border: 2px solid $primary-color;
   border-radius: 5px;
@@ -2153,19 +2158,6 @@ $max_chembl_logo_height: 60px;
 */
 
 $marvin-size-fullscreen: 91vh;
-.search-bar-small {
-
-  background-color: $h2-color;
-  height: $chembl-nav-height;
-  color: white;
-  line-height: $chembl-nav-height;
-  width: 100%;
-  margin-top: 0px;
-  z-index: 998;
-  a {
-    color: white;
-  }
-}
 
 .marvin-search-options {
 

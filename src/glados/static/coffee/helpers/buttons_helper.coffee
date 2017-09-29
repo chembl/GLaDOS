@@ -387,11 +387,12 @@ class ButtonsHelper
       if not @$input_element.is("input")
         throw new Error("WARNING: could not obtain a valid input element to create an expandable input.")
 
+
       @$input_element.after(
         '<textarea id="'+@expanded_area_id+'" class="buttons-helper-expandable-input">'
       )
-      @initial_width = @$input_element.width()
-      @initial_height = @$input_element.height()
+      @initial_width = Math.ceil(@$input_element.width())
+      @initial_height = Math.ceil(@$input_element.height())
       @$expandend_element = $('#'+@expanded_area_id)
       @$input_element.keyup(@onkeyup.bind(@))
       @$input_element.focus(@onfocus.bind(@))
@@ -401,6 +402,7 @@ class ButtonsHelper
       @val(@$input_element.val())
       # on enter callback
       @on_enter_cb = null
+      console.warn @expanded_area_id, @
 
     val: (new_value)->
       if _.isUndefined(new_value)
@@ -439,7 +441,7 @@ class ButtonsHelper
         @$input_element.val(@real_value)
 
     isInputOverflowing: ()->
-      return (@$input_element[0].scrollWidth > @initial_width)
+      return (@$input_element[0].scrollWidth > @$input_element[0].clientWidth)
 
     adjustExpandedHeight: ()->
       max_height = $(window).height()*0.8

@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: () ->
-      @suggestionsTemplate = Handlebars.compile $('#Handlebars-search-bar-autocomplete').html()
+      @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
       @$barElem = null
@@ -144,7 +144,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
-      $act = $('#search-bar-autocomplete-tooltip')
+      $act = $(@el).find('.search-bar-autocomplete-tooltip')
       @$options = []
       @$optionsReportCards = []
       @$barElem.attr("autocomplete-text", @lastSearch)
@@ -175,6 +175,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$options = null
 
     updateAutocomplete: ()->
+      if not @$barElem? or not @$barElem.is(":visible")
+        return
       $hoveredElem = @$barElem
       @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
       @numSuggestions = @autocompleteSuggestions.length
@@ -204,6 +206,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           textSearch: @lastSearch
         }))
         $hoveredElem.qtip('show')
-      else if @qtipAPI
+      else if @qtipAPI?
         $hoveredElem.qtip('hide')
         @qtipAPI.disable(true)

@@ -29,7 +29,9 @@
 
 </div>
 
-{% include "glados/SearchResultsParts/SearchBar.html" %}
+{% with hide_side_nav=False %}
+  {% include "glados/SearchResultsParts/SearchBar.html" %}
+{% endwith %}
 
 <div id="MainPageCentralDiv" class="row hide-on-small-only">
 
