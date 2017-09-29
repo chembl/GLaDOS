@@ -56,7 +56,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         @setMeta('ignore_score', false)
 
-      console.log 'jsonResultsList: ', jsonResultsList
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -465,18 +464,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, doFetch=true, testMode=false, customPageSize) ->
-      console.log 'Getting Page: ', newPageNum
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
         if customPageSize?
           @setMeta('page_size', customPageSize)
 
-        console.log 'cache activated? ', @getMeta('enable_collection_caching')
         if @getMeta('enable_collection_caching')
           modelsInCache = @getObjectsInCacheFromPage(newPageNum)
-          console.log 'cache: ', @getMeta('cache')
-          console.log 'modelsInCache: ', modelsInCache
           if modelsInCache?
             if modelsInCache.length > 0
 
@@ -489,7 +484,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @resetMeta(@getMeta('total_records'), @getMeta('total_records'))
               @reset(modelsInCache)
               @trigger('do-repaint')
-              console.log 'there is cache!!!, not requesting'
               return
 
         @fetch(options=undefined, testMode)

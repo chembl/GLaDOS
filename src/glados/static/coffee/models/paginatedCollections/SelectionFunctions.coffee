@@ -97,7 +97,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('selection_exceptions', exceptions)
 
       if Object.keys(exceptions).length == @getMeta('total_records')
-        @unSelectAll()
+        @unSelectAll(force=true)
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.BULK_UNSELECTED, idsList)
 
@@ -140,15 +140,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         delete selectionExceptions[itemID]
 
       if Object.keys(selectionExceptions).length == @getMeta('total_records') or Object.keys(selectionExceptions).length == 0
-        @unSelectAll()
+        @unSelectAll(force=true)
       else
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.UNSELECTED, itemID)
 
-    unSelectAll: ->
+    unSelectAll: (force=false) ->
 
-      @setMeta('all_items_selected', false)
-      @setMeta('selection_exceptions', {})
-      @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
+      if @getNumberOfSelectedItems() > 0 or force
+        @setMeta('all_items_selected', false)
+        @setMeta('selection_exceptions', {})
+        @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
 
     selectByPropertyValue: (propName, value) ->
 

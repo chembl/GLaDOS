@@ -287,7 +287,7 @@ glados.useNameSpace 'glados',
       # data-qtip-configured set to 'yes'
       destroyAllTooltips: ($elem) ->
 
-        $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes]')
+        $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes],[data-qtip-configured=true]')
         $elemsWithToolTip.each (index, elem) ->
           $(elem).qtip('destroy', true)
           $(elem).attr('data-qtip-configured', null )
@@ -323,4 +323,21 @@ glados.useNameSpace 'glados',
           my: myVert+' '+horizontalPos
           at: atVert+' '+horizontalPos
         }
+
+      destroyAllTooltipsWhenMouseIsOut: ($container, mouseX, mouseY)->
+
+        scrollTop = $(window).scrollTop()
+        scrollLeft = $(window).scrollLeft()
+        itemsContainerOffset = $container.offset().top
+
+        containerYUpperLimit =  itemsContainerOffset - scrollTop
+        containerYLowerLimit = (itemsContainerOffset + $container.height()) - scrollTop
+        containerLeftLimit = $container.offset().left - scrollLeft
+        containerRightLimit = ($container.offset().left + $container.width()) - scrollLeft
+
+        xIsOut = (mouseX < containerLeftLimit) or (mouseX > containerRightLimit)
+        yIsOut = (mouseY < containerYUpperLimit) or (mouseY > containerYLowerLimit)
+
+        if xIsOut or yIsOut
+          glados.Utils.Tooltips.destroyAllTooltips($($container))
 

@@ -115,17 +115,16 @@ glados.useNameSpace 'glados.views.Browsers',
 
 
     checkIfNoItems: ->
-      console.log 'CHECK IF NO ITEMS'
+
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
         return true
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Add Remove filters
+    # Add Remove
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
-
 
       $titleAndModalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
       now = Date.now()
@@ -381,6 +380,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectFacet: (facet_group_key, facet_key) ->
+      @showPreloader()
       facetsGroups = @collection.getFacetsGroups()
       facetingHandler = facetsGroups[facet_group_key].faceting_handler
       if facetingHandler.faceting_data[facet_key].count == 0
@@ -396,5 +396,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->
+      @showPreloader()
       @collection.clearAllFacetsSelections()
       $(@el).find('g.bucket').removeClass('selected')

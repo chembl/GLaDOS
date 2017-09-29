@@ -12,13 +12,11 @@ glados.useNameSpace 'glados.models.Aggregations',
     loadQuery: ->
       queryConfig = @get('query_config')
       if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-        console.log 'loading query!!'
         query =
           multi_match:
             query: @get(queryConfig.queryValueField)
             fields: queryConfig.fields
         @set('query', query)
-        console.log 'query is: ', query
       else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
         templateValues = {}
         templateData = queryConfig.template_data

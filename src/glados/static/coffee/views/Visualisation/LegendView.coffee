@@ -162,14 +162,14 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('width', @LEGEND_RECT_HEIGHT)
       .attr('fill', glados.Settings.VISUALISATION_GRID_UNDEFINED)
       .classed('legend-rect', @model.get('selection-enabled'))
-      .classed('legend-rect-' + glados.Settings.DEFAULT_NULL_VALUE_LABEL, true)
+      .classed('legend-rect-' + glados.Settings.DEFAULT_NULL_VALUE_LABEL_LEGEND, true)
       .style('stroke-width', 2)
-      .on('click', $.proxy( (-> @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL)), @))
+      .on('click', $.proxy( (-> @model.toggleValueSelection(glados.Settings.DEFAULT_NULL_VALUE_LABEL_LEGEND)), @))
 
     nullSelectorG.append('text')
       .attr('y', 2 * @LEGEND_RECT_HEIGHT)
       .attr('x', @LEGEND_RECT_HEIGHT / 2)
-      .text(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
+      .text(glados.Settings.DEFAULT_NULL_VALUE_LABEL_LEGEND)
       .attr('text-anchor', 'middle')
 
     legendG.call(legendAxis)

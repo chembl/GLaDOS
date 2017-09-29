@@ -7,9 +7,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      console.log 'BIOACTIVITY!'
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
-      @collection.on 'reset do-repaint', @handleVisualisationStatus, @
+      @collection.on 'reset', @handleVisualisationStatus, @
 
       @entityName = @collection.getMeta('label')
       if @entityName == 'Targets'
@@ -71,8 +70,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         model: @ctm
         el: $(@el).find('.BCK-CompTargetMatrix')
         config: config
-
-      @handleVisualisationStatus()
+        parent_view: @
 
     #-------------------------------------------------------------------------------------------------------------------
     # Progess Message
@@ -94,7 +92,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
     wakeUpView: ->
-      console.log '... WAKING UP MATRIX'
       @handleVisualisationStatus()
     sleepView: -> @ctmView.destroyAllTooltips()
     handleManualResize: -> @ctmView.render()
@@ -106,9 +103,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       if @collection.loading_facets
-        console.log '... LOADING FACETS!'
-      else
-        console.log '... NOT LOADING FACETS!'
+        return
 
       numTotalItems = @collection.getMeta('total_records')
       @hideDisplayAnywayButton()
@@ -120,7 +115,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       thereIsSelection = numSelectedItems > 0
       threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
-      console.log '... numWorkingItems: ', numWorkingItems
 
       if numWorkingItems > threshold[1]
         @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
@@ -137,10 +131,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         @hideMatrix()
         return
 
-      console.log '... is there selection?'
+
       @setProgressMessage('', hideCog=true)
       if not thereIsSelection
-        console.log '... there is no selection'
         @getAllChemblIDsAndFetch()
         return
 
@@ -163,25 +156,30 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Get items to generate matrix
     #-------------------------------------------------------------------------------------------------------------------
     fillLinkToAllActivities: ->
-      glados.Utils.fillContentForElement $(@el).find('.BCK-See-all-activities'),
+      $elem = $(@el).find('.BCK-See-all-activities')
+      glados.Utils.fillContentForElement $elem,
         url: @ctm.getLinkToAllActivities()
+      $elem.show()
+
+    hideLinkToAllActivities: -> $(@el).find('.BCK-See-all-activities').hide()
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
+
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
+      @ctmView.clearVisualisation()
 
       thisView = @
       $.when.apply($, deferreds).done( ->
         filterProperty = thisView.ctm.get('filter_property')
-        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults)
-        console.log 'allItemsIDs: ', allItemsIDs
-        thisView.ctm.set('chembl_ids', allItemsIDs, {silent:true} )
+        # TODO: probably fix these cases in a better way. Also some actions should be disabled while loading
+        allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
+        thisView.ctm.set('chembl_ids', allItemsIDs)
         thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
         thisView.showMatrix()
-        thisView.fillLinkToAllActivities()
       ).fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
 
 
@@ -198,12 +196,10 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       @ctm.set('chembl_ids', selectedIDs, {silent:true})
-      console.log '... FETCH MATRIX!'
       @ctm.fetch()
       @showMatrix()
       @setProgressMessage('', hideCog=true)
       @hideProgressElement()
-      @fillLinkToAllActivities()
 
 
 

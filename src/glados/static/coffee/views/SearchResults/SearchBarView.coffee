@@ -48,7 +48,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
 
     searchFromURL: ->
-      console.log 'SEARCHING FROM URL'
       @parseURLData()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       if urlQueryString != @lastURLQuery
