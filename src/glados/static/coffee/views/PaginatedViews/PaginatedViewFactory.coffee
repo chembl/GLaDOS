@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.TooltipFunctions)\
+      .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.PaginatedCards)
 
     Carousel: Backbone.View\
@@ -21,6 +22,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.TooltipFunctions)\
+      .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.Carousel)
 
     Infinite: Backbone.View\
@@ -30,6 +32,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.TooltipFunctions)\
+      .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.InfiniteCards)
 
     Table: Backbone.View\
@@ -39,6 +42,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.ItemViewsFunctions)\
       .extend(glados.views.PaginatedViews.PaginationFunctions)\
       .extend(glados.views.PaginatedViews.TooltipFunctions)\
+      .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.PaginatedTable)
 
     getNewCardsPaginatedView: (collection, el, customRenderEvents)->
