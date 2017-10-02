@@ -20,6 +20,35 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Add Remove Columns
+    # ------------------------------------------------------------------------------------------------------------------
+    initialiseColumnsModal: ->
+
+      $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
+
+      if $modalContainer.length == 0
+        return
+
+      glados.Utils.fillContentForElement $modalContainer,
+        modal_id: $(@el).attr('id') + '-select-columns-modal'
+        columns: @collection.getMeta('columns')
+        additional_columns: @collection.getMeta('additional_columns')
+
+      $(@el).find('.modal').modal()
+
+    showHideColumn: (event) ->
+
+      $checkbox = $(event.currentTarget)
+      colComparator = $checkbox.attr('data-comparator')
+      isChecked = $checkbox.is(':checked')
+
+      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+      changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
+      changedColumn.show = isChecked
+      @clearTemplates()
+      @fillTemplates()
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
 #-----------------------------------------------------------------------------------------------------------------------
