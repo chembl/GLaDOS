@@ -375,6 +375,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
             width: 100%;
             .example-link{
               display: inline;
+              padding: 0.5em 0 0.5em 0;
               &:hover {
                 text-decoration: underline;
               }
@@ -1682,6 +1683,7 @@ div#CNC-zoom-modal {
   .col {
     .card {
       .checkbox-container {
+        z-index: 4;
         position: absolute;
         right: -15px;
         top: 0;

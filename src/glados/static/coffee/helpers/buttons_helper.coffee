@@ -9,7 +9,6 @@ class ButtonsHelper
     if $trigger.attr('data-modal-configured') == 'yes'
       return
 
-    console.log 'CONFIGURING MODAL'
     modalId = 'modal-' + (new Date()).getTime()
     $('body').append($(glados.Utils.getContentFromTemplate(templateID, {id: modalId})))
     $trigger.attr('href', '#' + modalId).addClass('modal-trigger')
@@ -131,8 +130,6 @@ class ButtonsHelper
     # this toggles the div elements to show or hide all the contents.
     toggleCroppedContainer = ->
 
-      console.log 'toggle cropped container!'
-
       if elem.hasClass( "expanded" )
         ButtonsHelper.contract(elem)
         ButtonsHelper.setMoreText($(this))
@@ -173,13 +170,11 @@ class ButtonsHelper
         if overflow
 
           if !activator.hasClass('toggler-bound')
-            console.log 'binding function'
             toggler = ButtonsHelper.toggleCroppedContainerWrapper(activated, buttons)
             activator.addClass('toggler-bound')
             activator.click(toggler)
 
           activator.show()
-          console.log 'overflow!!!'
         else
           activator.hide()
     , 300)
@@ -402,7 +397,6 @@ class ButtonsHelper
       @val(@$input_element.val())
       # on enter callback
       @on_enter_cb = null
-      console.warn @expanded_area_id, @
 
     val: (new_value)->
       if _.isUndefined(new_value)

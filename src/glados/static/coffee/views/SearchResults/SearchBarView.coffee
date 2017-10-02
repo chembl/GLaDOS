@@ -16,7 +16,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       # Rendering and resize events
       @searchModel.on('change:queryString', @updateSearchBarFromModel.bind(@))
       autocompleteElemFind = $(@el).find('.autocomplete-hb')
-      console.log autocompleteElemFind
       autocompleteElem = $(autocompleteElemFind[0])
       @autocompleteView = new glados.views.SearchResults.SearchBarAutocompleteView
         el: autocompleteElem
@@ -43,6 +42,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     searchFromURL: ->
       @parseURLData()
+      urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       if urlQueryString != @lastURLQuery
         @expandable_search_bar.val(urlQueryString)
