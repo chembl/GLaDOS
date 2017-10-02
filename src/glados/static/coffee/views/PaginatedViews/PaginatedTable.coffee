@@ -25,27 +25,39 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
 
+      console.log 'creating SH MODAL'
       $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
 
       if $modalContainer.length == 0
         return
 
+      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+
       glados.Utils.fillContentForElement $modalContainer,
+        all_selected: true
         modal_id: $(@el).attr('id') + '-select-columns-modal'
-        columns: @collection.getMeta('columns')
-        additional_columns: @collection.getMeta('additional_columns')
+        random_num: (new Date()).getTime()
+        all_columns: allColumns
+
 
       $(@el).find('.modal').modal()
 
     showHideColumn: (event) ->
 
+      console.log 'SHOW HIDE COLUMN'
       $checkbox = $(event.currentTarget)
       colComparator = $checkbox.attr('data-comparator')
       isChecked = $checkbox.is(':checked')
 
       allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
-      changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
-      changedColumn.show = isChecked
+
+      if colComparator == 'SELECT-ALL'
+        for col in allColumns
+          col.show = isChecked
+      else
+        changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
+        changedColumn.show = isChecked
+
       @clearTemplates()
       @fillTemplates()
 

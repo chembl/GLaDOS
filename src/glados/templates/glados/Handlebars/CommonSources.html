@@ -630,22 +630,27 @@
       <div class="modal-content left-align">
 
         <div class="row">
-          {{#each columns}}
+
+          <div class="col s6 m3 l2">
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                   {{#if all_selected}} checked="checked" {{/if}}
+            />
+            <label for="check-{{random_num}}">Select All</label>
+          </div>
+
+          {{#each all_columns}}
           <div class="col s6 m3 l2">
 
             <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                   data-comparator='{{this.comparator}}' checked="checked" />
+                   data-comparator='{{this.comparator}}'
+                   {{#if this.show}} checked="checked" {{/if}}
+            />
             <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
 
           </div>
           {{/each}}
-          {{#each additional_columns}}
-          <div class="col s6 m3 l2">
-            <input type="checkbox" class="BCK-show-hide-column filled-in"
-                   data-comparator='{{this.comparator}}' id="check-{{this.comparator}}" />
-            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
-          </div>
-          {{/each}}
+
         </div>
 
         <div class="row">
