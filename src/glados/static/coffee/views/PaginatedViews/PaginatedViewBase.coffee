@@ -109,59 +109,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @requestCurrentPage()
 
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
+      @renderViewState()
 
-      isDefault = @mustDisableReset()
-      mustComplicate = @collection.getMeta('complicate_cards_view')
-      @isComplicated = isDefault and mustComplicate
+    renderViewState: ->
 
-      if @isInfinite() and @collection.getMeta('current_page') == 1
-        # always clear the infinite container when receiving the first page, to avoid
-        # showing results from previous delayed requests.
-        @clearContentForInfinite()
-
-        if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
-            @cleanUpDeferredViewsContainer()
-
-        if @hasCustomElementView()
-          @cleanUpCustomItemViewsContainer()
-
-      else if not @isInfinite()
-        @clearContentContainer()
-
-        if @isCards()
-
-          if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
-            @cleanUpDeferredViewsContainer()
-
-          if @hasCustomElementView()
-            @cleanUpCustomItemViewsContainer()
-
-      @fillTemplates()
-
-      if @isInfinite()
-        @setUpLoadingWaypoint()
-        @hidePreloaderIfNoNextItems()
-
-      @fillSelectAllContainer() unless @disableItemsSelection
-
-      if (@isCards() or @isInfinite()) and @isCardsZoomEnabled()
-        @fillZoomContainer()
-
-      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
-        @renderSpecialStructuresToggler()
-
-      @fillPaginators()
-      if not @isCarousel()
-        @fillPageSizeSelectors()
-      @activateSelectors()
-      @showPaginatedViewContent()
-
-      @initialiseColumnsModal() unless @disableColumnsSelection
-
-      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
-        @showSuggestedLabel()
-      else
-        @hideSuggestedLabel()
+      return
 
     sleepView: ->
       # destroy loading waypoints when I sleep to avoid triggering next pages when hidden

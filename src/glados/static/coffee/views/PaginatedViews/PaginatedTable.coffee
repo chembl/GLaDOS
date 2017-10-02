@@ -1,5 +1,24 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
-  PaginatedTable: {}
+  PaginatedTable:
+    renderViewState: ->
+
+      @clearContentContainer()
+      @fillTemplates()
+
+      @fillSelectAllContainer() unless @disableItemsSelection
+      @fillPaginators()
+      @fillPageSizeSelectors()
+      @activateSelectors()
+      @showPaginatedViewContent()
+
+      @initialiseColumnsModal() unless @disableColumnsSelection
+
+      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
+        @showSuggestedLabel()
+      else
+        @hideSuggestedLabel()
+
+      glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions

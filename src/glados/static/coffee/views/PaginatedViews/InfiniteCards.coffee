@@ -27,5 +27,44 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @requestPageInCollection(1)
 
+    renderViewState: ->
+
+      isDefaultZoom = @mustDisableReset()
+      mustComplicate = @collection.getMeta('complicate_cards_view')
+      @isComplicated = isDefaultZoom and mustComplicate
+
+      if @collection.getMeta('current_page') == 1
+        # always clear the infinite container when receiving the first page, to avoid
+        # showing results from previous delayed requests.
+        @clearContentForInfinite()
+
+        if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+            @cleanUpDeferredViewsContainer()
+
+        if @hasCustomElementView()
+          @cleanUpCustomItemViewsContainer()
+
+      @fillTemplates()
+
+      @setUpLoadingWaypoint()
+      @hidePreloaderIfNoNextItems()
+
+      @fillSelectAllContainer() unless @disableItemsSelection
+
+      if @isCardsZoomEnabled()
+        @fillZoomContainer()
+
+      if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+        @renderSpecialStructuresToggler()
+
+      @showPaginatedViewContent()
+
+      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
+        @showSuggestedLabel()
+      else
+        @hideSuggestedLabel()
+
+      glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
 
 
