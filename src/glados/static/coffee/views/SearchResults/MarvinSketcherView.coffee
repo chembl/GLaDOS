@@ -38,6 +38,7 @@ MarvinSketcherView = Backbone.View.extend
 #          mouseEvent.preventDefault()
 #          console.log 'prevented!'
 #      )
+      console.log sketcherInstance
       thisView.marvinSketcherInstance = sketcherInstance
       if thisView.sdf_smiles_to_load_on_ready
         thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
