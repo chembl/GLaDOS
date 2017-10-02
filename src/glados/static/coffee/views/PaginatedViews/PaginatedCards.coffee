@@ -58,3 +58,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideSuggestedLabel()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+    sleepView: ->
+      if @hasCustomElementView()
+        @sleepCustomElementviews()

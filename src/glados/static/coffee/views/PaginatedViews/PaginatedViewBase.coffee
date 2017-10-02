@@ -116,12 +116,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       return
 
     sleepView: ->
-      # destroy loading waypoints when I sleep to avoid triggering next pages when hidden
-      if @isInfinite()
-        @destroyAllWaypoints()
-
-      if (@isCards() or @isInfinite()) and @hasCustomElementView()
-        @sleepCustomElementviews()
 
     wakeUpView: -> @requestCurrentPage()
 

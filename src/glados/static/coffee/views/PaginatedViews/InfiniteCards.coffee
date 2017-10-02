@@ -66,5 +66,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    sleepView: ->
+      @destroyAllWaypoints()
+      if @hasCustomElementView()
+        @sleepCustomElementviews()
+
 
 
