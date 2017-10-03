@@ -6,10 +6,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   ColumnsHandler: Backbone.Model.extend
     initialize: ->
 
-      console.log 'INIT ColumnsHandler'
-      console.log 'Default Columns: ', @get('default_columns')
-      console.log 'Additional Columns: ', @get('additional_columns')
-
       defaultColumns = @get('default_columns')
       if defaultColumns?
         for col in defaultColumns
@@ -26,9 +22,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           col.show = false
 
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
-      console.log 'allColumns: ', allColumns
       @set('all_columns', allColumns)
 
+      @setVisibleColumns()
+
+    setVisibleColumns: ->
+
+      allColumns = @get('all_columns')
       visibleColumns = _.filter(allColumns, (col) -> col.show)
       @set('visible_columns', visibleColumns)
+
+    setShowHideColumnStatus: (identifier, show) ->
+
+      allColumns = @get('all_columns')
+      changedColumn = _.find(allColumns, (col) -> col.comparator == identifier)
+      changedColumn.show = show
+
+      @setVisibleColumns()
+
+    setShowHideAllColumnStatus: (show) ->
+
+      allColumns = @get('all_columns')
+      for col in allColumns
+        col.show = show
+
+      @setVisibleColumns()
+
 

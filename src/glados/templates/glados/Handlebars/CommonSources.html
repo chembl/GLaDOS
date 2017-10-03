@@ -619,47 +619,50 @@
 </div>
 
 </script>
+<scrpit id="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+  <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
 
-<script id="Handlebars-Common-ShowHideColumnsDropdown" type="text/x-handlebars-template">
+  <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+       data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+  </div>
 
-  <!-- Dropdown Trigger -->
-    <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
+</scrpit>
 
-    <!-- Modal Structure -->
-    <div id="{{modal_id}}" class="modal bottom-sheet">
-      <div class="modal-content left-align">
+<script id="Handlebars-Common-ShowHideColumnsDropdown-content" type="text/x-handlebars-template">
 
-        <div class="row">
+    <div class="modal-content left-align">
 
-          <div class="col s6 m3 l2">
-            <input type="checkbox" class="BCK-show-hide-column filled-in"
-                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
-                   {{#if all_selected}} checked="checked" {{/if}}
-            />
-            <label for="check-{{random_num}}">Select All</label>
-          </div>
+      <div class="row">
 
-          {{#each all_columns}}
-          <div class="col s6 m3 l2">
-
-            <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                   data-comparator='{{this.comparator}}'
-                   {{#if this.show}} checked="checked" {{/if}}
-            />
-            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
-
-          </div>
-          {{/each}}
-
+        <div class="col s6 m3 l2">
+          <input type="checkbox" class="BCK-show-hide-column filled-in"
+                 data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                 {{#if all_selected}} checked="checked" {{/if}}
+          />
+          <label for="check-{{random_num}}">Select All</label>
         </div>
 
-        <div class="row">
-          You may need to scroll the table horizontally to see all columns.
+        {{#each all_columns}}
+        <div class="col s6 m3 l2">
+
+          <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                 data-comparator='{{this.comparator}}'
+                 {{#if this.show}} checked="checked" {{/if}}
+          />
+          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+
         </div>
+        {{/each}}
 
       </div>
 
+      <div class="row">
+        You may need to scroll the table horizontally to see all columns.
+      </div>
+
     </div>
+
+
 
 </script>
 

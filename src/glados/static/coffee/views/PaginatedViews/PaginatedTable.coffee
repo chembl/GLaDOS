@@ -28,7 +28,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
 
-      console.log 'initialising SHC MODAL'
       $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
 
       new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
@@ -37,7 +36,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $modalContainer.find('.modal').modal()
 
-    
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
 #-----------------------------------------------------------------------------------------------------------------------

@@ -2,39 +2,40 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
   ColumnsHandlerView: Backbone.View.extend
 
     initialize: ->
-      console.log 'init Columns handler view'
+
+      @modalId = (new Date()).getTime()
       @render()
+      @model.on 'change:visible_columns', @renderModalContent, @
 
     events:
       'click .BCK-show-hide-column': 'showHideColumn'
 
     render: ->
-      console.log 'render columns handler view'
+
+      @renderModalTrigger()
+      @renderModalContent()
+
+    renderModalTrigger: ->
+
+      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
+        modal_id: @modalId
+
+    renderModalContent: ->
 
       allColumns = @model.get('all_columns')
 
-      glados.Utils.fillContentForElement $(@el),
-        all_selected: true
-        modal_id: $(@el).attr('id') + '-select-columns-modal'
+      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
+        all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
 
     showHideColumn: (event) ->
 
-      console.log 'SHOW HIDE COLUMN'
-      return
       $checkbox = $(event.currentTarget)
       colComparator = $checkbox.attr('data-comparator')
       isChecked = $checkbox.is(':checked')
 
-      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
-
       if colComparator == 'SELECT-ALL'
-        for col in allColumns
-          col.show = isChecked
+        @model.setShowHideAllColumnStatus(isChecked)
       else
-        changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
-        changedColumn.show = isChecked
-
-      @clearTemplates()
-      @fillTemplates()
+        @model.setShowHideColumnStatus(colComparator, isChecked)

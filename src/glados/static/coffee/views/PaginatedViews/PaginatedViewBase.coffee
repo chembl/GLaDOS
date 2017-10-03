@@ -60,8 +60,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initColumnsHandler: ->
 
-      console.log 'PAG COLL GOING TO INIT COLUMNS HANDLER!!'
-
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
       contextualProperties = @collection.getMeta('contextual_properties')
@@ -70,6 +68,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         default_columns: defaultColumns
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
+
+      @columnsHandler.on 'change:visible_columns', @handleVisibleColumnsChange, @
+
+    handleVisibleColumnsChange: ->
+
+      @clearTemplates()
+      @fillTemplates()
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
