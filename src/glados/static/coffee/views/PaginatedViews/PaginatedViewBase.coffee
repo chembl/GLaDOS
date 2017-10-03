@@ -16,6 +16,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableItemsSelection = arguments[0].disable_items_selection
       @initColumnsHandler()
 
+      if @isTable()
+        @initialiseColumnsModal() unless @disableColumnsSelection
+
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
       @initTooltipFunctions()
 
@@ -91,7 +94,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'change select.select-search' : 'setSearch'
       'change .select-sort': 'sortCollectionFormSelect'
       'click .btn-sort-direction': 'changeSortOrderInf'
-      'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
       'click .BCK-select-one-item': 'toggleSelectOneItem'
       'click .BCK-zoom-in': 'zoomIn'
@@ -175,29 +177,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             $currentLink.click()
           $currentLink.attr('data-already-function-bound', 'yes')
 
-    getVisibleColumns: ->
-
-      return @columnsHandler.get('visible_columns')
-
-      columns = []
-      # use special configuration config for cards if available
-      if (@isCards() or @isInfinite()) and @collection.getMeta('columns_card').length > 0
-        if @isComplicated
-          columns = _.filter(@collection.getMeta('complicate_card_columns'), -> true)
-        else
-          columns = _.filter(@collection.getMeta('columns_card'), -> true)
-      else
-        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
-        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-        columns = _.union(defaultVisibleColumns, additionalVisibleColumns)
-
-      contextualProperties = @collection.getMeta('contextual_properties')
-      contextualProperties ?= []
-      for prop in contextualProperties
-        columns.push(prop)
-
-      return columns
-
+    getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->

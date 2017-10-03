@@ -11,8 +11,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @activateSelectors()
       @showPaginatedViewContent()
 
-      @initialiseColumnsModal() unless @disableColumnsSelection
-
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
         @showSuggestedLabel()
       else
@@ -30,42 +28,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
 
-      console.log 'creating SH MODAL'
+      console.log 'initialising SHC MODAL'
       $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
 
-      if $modalContainer.length == 0
-        return
+      new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
+        model: @columnsHandler
+        el: $modalContainer
 
-      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
+      $modalContainer.find('.modal').modal()
 
-      glados.Utils.fillContentForElement $modalContainer,
-        all_selected: true
-        modal_id: $(@el).attr('id') + '-select-columns-modal'
-        random_num: (new Date()).getTime()
-        all_columns: allColumns
-
-
-      $(@el).find('.modal').modal()
-
-    showHideColumn: (event) ->
-
-      console.log 'SHOW HIDE COLUMN'
-      $checkbox = $(event.currentTarget)
-      colComparator = $checkbox.attr('data-comparator')
-      isChecked = $checkbox.is(':checked')
-
-      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
-
-      if colComparator == 'SELECT-ALL'
-        for col in allColumns
-          col.show = isChecked
-      else
-        changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
-        changedColumn.show = isChecked
-
-      @clearTemplates()
-      @fillTemplates()
-
+    
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
 #-----------------------------------------------------------------------------------------------------------------------
