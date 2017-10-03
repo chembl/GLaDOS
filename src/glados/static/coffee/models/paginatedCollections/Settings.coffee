@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -71,6 +72,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
+        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -96,6 +98,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
         ID_COLUMN: Assay.ID_COLUMN
+        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -120,6 +123,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
+        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -193,6 +197,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Activity.ID_COLUMN
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -216,6 +221,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -247,6 +253,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -282,6 +289,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -316,6 +324,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -332,6 +341,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_BASE_URL + 'assay.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
@@ -348,6 +358,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -364,6 +375,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -381,6 +393,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
@@ -397,6 +410,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
@@ -414,6 +428,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Document.ID_COLUMN
+        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
@@ -429,6 +444,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: ApprovedDrugClinicalCandidate
         DEFAULT_PAGE_SIZE: 10
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        ID_COLUMN: ApprovedDrugClinicalCandidate.ID_COLUMN
+        COLUMNS: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -444,6 +461,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetRelation.ID_COLUMN
+        COLUMNS: TargetRelation.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: TargetRelation.ID_COLUMN
@@ -458,6 +476,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetComponent.ID_COLUMN
+        COLUMNS: TargetComponent.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -473,6 +492,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: 20
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Activity.ID_COLUMN
+        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: []

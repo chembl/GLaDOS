@@ -5,9 +5,11 @@ describe "Selection Functions", ->
   # -------------------------------------------------------------------------------------------------
 
   testSelectsOneItem = (list) ->
+    console.log 'testSelectsOneItem: '
     allItemsIDs = TestsUtils.getAllItemsIDs(list)
     itemToSelect = allItemsIDs[0]
     itemNotSelected = allItemsIDs[1]
+    console.log 'allItemsIDs: ', allItemsIDs
 
     list.selectItem(itemToSelect)
     expect(list.itemIsSelected(itemToSelect)).toBe(true)

@@ -68,6 +68,13 @@ Assay.COLUMNS = {
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
 
 Assay.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of Assay.COLUMNS
+      colsList.push value
+    return colsList
+  )()
+
   RESULTS_LIST_TABLE: [
     Assay.COLUMNS.CHEMBL_ID
     Assay.COLUMNS.STRAIN

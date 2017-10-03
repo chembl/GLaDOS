@@ -35,6 +35,12 @@ TargetRelation.COLUMNS = {
 TargetRelation.ID_COLUMN = TargetRelation.COLUMNS.CHEMBL_ID
 
 TargetRelation.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of TargetRelation.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE: [
     TargetRelation.COLUMNS.CHEMBL_ID
     TargetRelation.COLUMNS.RELATIONSHIP

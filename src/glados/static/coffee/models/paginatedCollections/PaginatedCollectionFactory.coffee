@@ -29,6 +29,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             facets: esIndexSettings.FACETS
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: esIndexSettings.FACETS_GROUPS
+            columns: esIndexSettings.COLUMNS
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
@@ -85,6 +86,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
+            columns: collectionSettings.COLUMNS
             columns_description: collectionSettings.COLUMNS_DESCRIPTION
             is_carousel: collectionSettings.IS_CAROUSEL
             all_items_selected: false
@@ -119,6 +121,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
+            columns: collectionSettings.COLUMNS
             columns_description: collectionSettings.COLUMNS_DESCRIPTION
             all_items_selected: false
             selection_exceptions: {}

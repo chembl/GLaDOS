@@ -315,7 +315,4 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return deferreds
 
-    getAllColumns: ->
-
-      console.log 'GET ALL COLUMNS'
-      return []
+    getAllColumns: -> @getMeta('columns')
