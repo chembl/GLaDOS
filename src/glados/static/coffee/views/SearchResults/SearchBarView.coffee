@@ -20,12 +20,20 @@ glados.useNameSpace 'glados.views.SearchResults',
       @autocompleteView = new glados.views.SearchResults.SearchBarAutocompleteView
         el: autocompleteElem
       @autocompleteView.attachSearchBar($(@el).find('.chembl-search-bar'))
-
+      @initializeSketcherButton()
       if @atResultsPage
         # Handles the popstate event to reload a search
         @last_location_url = window.location.href
         window.onpopstate = @popStateHandler.bind(@)
         @searchFromURL()
+
+    initializeSketcherButton: ()->
+      $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
+      console.log $openEditorBtn
+      $editorModal = ButtonsHelper.generateModalFromTemplate($openEditorBtn, 'Handlebars-Common-MarvinModal')
+      @marvinEditor = new MarvinSketcherView({
+        el: $editorModal
+      })
 
     popStateHandler: ()->
       @atResultsPage = URLProcessor.isAtSearchResultsPage()

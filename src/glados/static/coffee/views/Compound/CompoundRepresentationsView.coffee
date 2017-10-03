@@ -63,8 +63,8 @@ CompoundRepresentationsView = CardView.extend
             el: $editorModal
             sdf_to_load_on_ready: molfile_data
           })
-          marvin_iframe = $('#sketch')
-          $('#sketch', marvin_iframe.contents()).addClass('border')
+          marvin_iframe = $(thisView.el).find('.sketch-iframe')
+          $($(thisView.el).find('.sketch-iframe'), marvin_iframe.contents()).addClass('border')
           $editorModal.attr('data-marvin-initialised', 'yes')
         else if thisView.marvinEditor?
           thisView.marvinEditor.loadStructure(molfile_data, MarvinSketcherView.SDF_FORMAT)
