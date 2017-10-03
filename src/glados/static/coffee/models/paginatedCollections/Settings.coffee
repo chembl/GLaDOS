@@ -74,6 +74,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
         COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
@@ -93,6 +102,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Assay
         ID_COLUMN: Assay.ID_COLUMN
         COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Infinite:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Carousel:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
@@ -111,6 +129,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
         COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Infinite:
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Carousel:
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
@@ -129,6 +156,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
         COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Infinite:
+            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Carousel:
+            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
@@ -146,6 +182,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
         COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Cards:
+            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_CARD: []
         ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS

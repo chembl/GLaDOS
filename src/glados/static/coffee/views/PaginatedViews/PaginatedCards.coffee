@@ -68,3 +68,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     getDefaultColumns: -> @collection.getMeta('columns_description').Cards.Default
     getAdditionalColumns: -> @collection.getMeta('columns_description').Cards.Additional
+    getVisibleColumns: ->
+      if @isComplicated
+        _.filter(@collection.getMeta('complicate_card_columns'), -> true)
+      else
+        glados.views.PaginatedViews.PaginatedViewBase.getVisibleColumns.call(@)
