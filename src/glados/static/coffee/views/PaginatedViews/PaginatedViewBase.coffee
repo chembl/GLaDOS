@@ -60,12 +60,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       console.log 'PAG COLL GOING TO INIT COLUMNS HANDLER!!'
 
       defaultColumns = @getDefaultColumns()
-      console.log 'defaultColumns: ', defaultColumns
-      
       additionalColumns = @getAdditionalColumns()
-      console.log 'additionalColumns: ', additionalColumns
 
-      @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler()
+      @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler
+        default_columns: defaultColumns
+        additional_columns: additionalColumns
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
