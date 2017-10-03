@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
+      @initColumnsHandler()
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
       @initTooltipFunctions()
@@ -54,17 +55,25 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @renderAtInit
         @render()
 
+    initColumnsHandler: ->
 
-    isCards: ()->
+      console.log 'PAG COLL GOING TO INIT COLUMNS HANDLER!!'
+
+      defaultColumns = @getDefaultColumns()
+      console.log 'defaultColumns: ', defaultColumns
+
+      @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler()
+
+    isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
 
-    isCarousel: ()->
+    isCarousel: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CAROUSEL_TYPE
 
-    isInfinite: ()->
+    isInfinite: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE
 
-    isTable: ()->
+    isTable: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.TABLE_TYPE
 
     # ------------------------------------------------------------------------------------------------------------------

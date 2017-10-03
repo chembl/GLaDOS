@@ -62,3 +62,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     sleepView: ->
       if @hasCustomElementView()
         @sleepCustomElementviews()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Columns initalisation
+    # ------------------------------------------------------------------------------------------------------------------
+    getDefaultColumns: -> @collection.getMeta('columns_description').Cards.Default

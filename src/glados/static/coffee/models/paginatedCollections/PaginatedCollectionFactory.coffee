@@ -31,6 +31,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             facets_groups: esIndexSettings.FACETS_GROUPS
             # set by default columns with show: true, and additional with show: false
             columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
+            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             #columns specific for cards view
             columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES

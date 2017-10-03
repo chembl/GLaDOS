@@ -21,6 +21,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Columns initalisation
+    # ------------------------------------------------------------------------------------------------------------------
+    getDefaultColumns: -> @collection.getMeta('columns_description').Table.Default
+    # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->

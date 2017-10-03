@@ -71,5 +71,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @hasCustomElementView()
         @sleepCustomElementviews()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Columns initalisation
+    # ------------------------------------------------------------------------------------------------------------------
+    getDefaultColumns: -> @collection.getMeta('columns_description').Infinite.Default
+
 
 

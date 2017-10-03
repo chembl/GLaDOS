@@ -31,3 +31,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Columns initalisation
+    # ------------------------------------------------------------------------------------------------------------------
+    getDefaultColumns: ->
+      console.log 'getDefaultColumns CAROUSEL'
+      @collection.getMeta('columns_description').Carousel.Default

@@ -13,6 +13,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         CUSTOM_DEFAULT_CARD_SIZES:
@@ -172,6 +182,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
         COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ENABLE_CARDS_ZOOM: true
