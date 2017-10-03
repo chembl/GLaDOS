@@ -494,9 +494,24 @@ class ButtonsHelper
   @createExpandableInput = (input_element)->
     return new ButtonsHelper.ExpandableInput(input_element)
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Scrolling
+  # --------------------------------------------------------------------------------------------------------------------
 
+  @disableScroll = (jQueryElement)->
+    jQueryElement.css('overflow-y', 'hidden')
 
+  @enableScroll = (jQueryElement)->
+    jQueryElement.css('overflow-y', 'auto')
 
+  @disableOuterScrollOnMouseEnter= (element, outerElement) ->
+    s = { insideIFrame: false }
+    $(element).mouseenter ->
+      s.insideIFrame = true
+      ButtonsHelper.disableScroll($(outerElement))
+    $(element).mouseleave ->
+      s.insideIFrame = false
+      ButtonsHelper.enableScroll($(outerElement))
 
 
 

@@ -25,18 +25,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
     hideIFrameCover: ->
       $(@el).find('.iframe-cover.scroll-cover').hide()
-      iframe = $(@el).find('#sketch')[0]
-      iframeDoc = iframe.contentDocument || iframe.contentWindow.document
-      innerCanvas = $(iframeDoc).find('#canvas')
-      innerCanvas.focus()
-#      innerCanvas.bind 'wheel', (mouseEvent)->
-#        if mouseEvent.ctrlKey
-#          console.log innerCanvas[0].__listener
-#          console.log innerCanvas[0].__eventBits
-##          innerCanvas[0].onwheel(mouseEvent.originalEvent)
-#        else
-#          mouseEvent.stopImmediatePropagation()
-
 
       @marvinSketcherView.loadStructure('c1ccccc1', MarvinSketcherView.SMILES_FORMAT, true)
 

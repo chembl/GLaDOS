@@ -54,18 +54,20 @@ CompoundRepresentationsView = CardView.extend
     $editorModal = ButtonsHelper.generateModalFromTemplate($openInEditorBtn, 'Handlebars-Common-MarvinModal')
 
     ButtonsHelper.initLinkButton($openInEditorBtn, 'Open Molecule Editor')
+    @marvinEditor = null
 
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-
         if $editorModal.attr('data-marvin-initialised') != 'yes'
-          new MarvinSketcherView({
+          thisView.marvinEditor = new MarvinSketcherView({
             el: $editorModal
-            sdf_smiles_to_load_on_ready:molfile_data
+            sdf_to_load_on_ready: molfile_data
           })
           marvin_iframe = $('#sketch')
           $('#sketch', marvin_iframe.contents()).addClass('border')
           $editorModal.attr('data-marvin-initialised', 'yes')
+        else if thisView.marvinEditor?
+          thisView.marvinEditor.loadStructure(molfile_data, MarvinSketcherView.SDF_FORMAT)
     )
 
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
