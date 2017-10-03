@@ -61,6 +61,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       defaultColumns = @getDefaultColumns()
       console.log 'defaultColumns: ', defaultColumns
+      
+      additionalColumns = @getAdditionalColumns()
+      console.log 'additionalColumns: ', additionalColumns
 
       @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler()
 

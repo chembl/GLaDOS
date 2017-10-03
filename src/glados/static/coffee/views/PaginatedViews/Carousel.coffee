@@ -35,6 +35,5 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Columns initalisation
     # ------------------------------------------------------------------------------------------------------------------
-    getDefaultColumns: ->
-      console.log 'getDefaultColumns CAROUSEL'
-      @collection.getMeta('columns_description').Carousel.Default
+    getDefaultColumns: -> @collection.getMeta('columns_description').Carousel.Default
+    getAdditionalColumns: -> @collection.getMeta('columns_description').Carousel.Additional

@@ -67,3 +67,4 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Columns initalisation
     # ------------------------------------------------------------------------------------------------------------------
     getDefaultColumns: -> @collection.getMeta('columns_description').Cards.Default
+    getAdditionalColumns: -> @collection.getMeta('columns_description').Cards.Additional

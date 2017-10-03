@@ -24,6 +24,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Columns initalisation
     # ------------------------------------------------------------------------------------------------------------------
     getDefaultColumns: -> @collection.getMeta('columns_description').Table.Default
+    getAdditionalColumns: -> @collection.getMeta('columns_description').Table.Additional
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
     # ------------------------------------------------------------------------------------------------------------------
