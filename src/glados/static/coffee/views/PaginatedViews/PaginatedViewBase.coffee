@@ -198,6 +198,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       return columns
 
+    getAllColumns: -> @columnsHandler.get('all_columns')
+
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
       if (@isInfinite() or @isCards()) and not @isComplicated

@@ -316,8 +316,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Cards:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Activity.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       ASSAYS_LIST:
@@ -325,8 +332,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_BASE_URL + 'assay.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+          Cards:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+          Infinite:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+          Carousel:
+            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
         ID_COLUMN: Assay.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       DRUG_LIST:
@@ -334,18 +348,31 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
         ENABLE_COLLECTION_CACHING: true
       SUBSTRUCTURE_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         ENABLE_COLLECTION_CACHING: true
@@ -354,8 +381,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
@@ -363,10 +397,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-        COLUMNS_CARD: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
         IS_CAROUSEL: true
       DOCS_BY_TERM_LIST:
         MODEL: Document
@@ -374,41 +414,74 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-        COLUMNS_CARD: []
-        ADDITIONAL_COLUMNS:[]
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
+          Cards:
+            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
+          Infinite:
+            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
+          Carousel:
+            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate
         DEFAULT_PAGE_SIZE: 10
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        ID_COLUMN: ApprovedDrugClinicalCandidate.ID_COLUMN
-        COLUMNS: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ADDITIONAL_COLUMNS:[]
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Infinite:
+            Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Carousel:
+            Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetRelation.ID_COLUMN
-        COLUMNS: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ADDITIONAL_COLUMNS:[]
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: TargetRelation.ID_COLUMN
+          Cards:
+            Default: TargetRelation.ID_COLUMN
+          Infinite:
+            Default: TargetRelation.ID_COLUMN
+          Carousel:
+            Default: TargetRelation.ID_COLUMN
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: TargetComponent.ID_COLUMN
-        COLUMNS: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ADDITIONAL_COLUMNS:[]
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Cards:
+            Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Infinite:
+            Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+          Carousel:
+            Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
     CLIENT_SIDE_ES_COLLECTIONS:
       BIOACTIVITY_SUMMARY_LIST:
         MODEL: Activity
         DEFAULT_PAGE_SIZE: 20
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Activity.ID_COLUMN
-        COLUMNS: []
-        ADDITIONAL_COLUMNS:[]
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: []
+          Cards:
+            Default: []
+          Infinite:
+            Default: []
+          Carousel:
+            Default: []
 
 glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS= {}
 

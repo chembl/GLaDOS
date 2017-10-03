@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetSortData: ->
 
       @comparator = undefined
-      columns = @getMeta('columns')
+      columns = @getAllColumns()
       for col in columns
         col.is_sorting = 0
         col.sort_class = 'fa-sort'

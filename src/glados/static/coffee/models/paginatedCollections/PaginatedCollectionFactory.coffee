@@ -85,10 +85,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
-            columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
-            #columns specific for cards view
-            columns_card: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS_CARD)
-            additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            columns_description: collectionSettings.COLUMNS_DESCRIPTION
             is_carousel: collectionSettings.IS_CAROUSEL
             all_items_selected: false
             selection_exceptions: {}
@@ -122,8 +119,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
-            columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
-            additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            columns_description: collectionSettings.COLUMNS_DESCRIPTION
             all_items_selected: false
             selection_exceptions: {}
             data_loaded: false
