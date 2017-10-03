@@ -61,10 +61,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
+      contextualProperties = @collection.getMeta('contextual_properties')
 
       @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler
         default_columns: defaultColumns
         additional_columns: additionalColumns
+        contextual_properties: contextualProperties
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
@@ -174,6 +176,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           $currentLink.attr('data-already-function-bound', 'yes')
 
     getVisibleColumns: ->
+
+      return @columnsHandler.get('visible_columns')
 
       columns = []
       # use special configuration config for cards if available
