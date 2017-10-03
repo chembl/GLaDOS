@@ -1,6 +1,6 @@
 <!-- ChEMBL Header SearchBar -->
 <div id="chembl-header-search-bar-container"
-     class="col l6 pull-l0 m6 pull-m1 s12 no-padding {{ hide_side_nav|yesno:',hide-on-med-and-up' }}">
+     class="col l6 pull-l0 m6 pull-m1 s12 no-padding {{ hide_side_nav|yesno:',hide-before-big-bar' }}">
     {% block autocomplete_chembl_header %}
       {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
     {% endblock %}

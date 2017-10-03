@@ -291,7 +291,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     margin-right: auto;
   }
   .chembl-header {
-    transition: height 0.5s, width 0.5s;
+    transition: height 0.25s, width 0.25s;
     transition-timing-function: ease;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
@@ -303,6 +303,15 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     position: relative;
     background: $chembl-teal;
     text-align: center;
+    .hide-before-big-bar{
+      display: none;
+    }
+    .big-search-bar{
+      transition: height 0.25s, width 0.25s;
+      transition-timing-function: ease;
+      margin-top: 1em;
+      color: black;
+    }
     ul{
       margin: 0;
       display: flex;
@@ -515,7 +524,13 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       .search-bar-wrapper{
         margin: 0 !important;
       }
-      .hide-on-med-and-down{
+      .hide-on-pinned{
+        display: none;
+      }
+      .hide-before-big-bar{
+        display: block;
+      }
+      .big-search-bar{
         display: none;
       }
     }
@@ -564,9 +579,10 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       font-size: $search-bar-font-size-small !important;
     }
     .chembl-header {
-      transition: height 0.25s, width 0.25s;
-      transition-timing-function: ease;
       height: calc(#{$chembl-header-height+4*$search-bar-font-size-small} + #{2*$chembl-header-padding}) !important;
+      .hide-before-big-bar{
+        display: block !important;
+      }
     }
     &.pinned{
       .inner-row{

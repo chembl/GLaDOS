@@ -40,13 +40,8 @@
             </ul>
         </div>
 
-        <div class="col {{ hide_side_nav|yesno:'l1 push-l8 m1 push-m6,l3 offset-l6 m4 offset-m3' }} s2 hide-on-small-pinned">
+        <div class="col l1 push-l8 m1 push-m6 s2 hide-on-small-pinned">
             <ul class="right-align-content">
-                {% if not hide_side_nav %}
-                    <li>
-                        <img alt="Wellcome Trust" src="{% static 'img/wellcometrust.png' %}" class="wellcome-trust-img hide-on-small-only"/>
-                    </li>
-                {% endif %}
                 <li>
                     <a href="#download-db-modal"
                         class="modal-trigger-safe hoverable tooltipped z-depth-1 waves-effect waves-light download-button"
@@ -54,7 +49,7 @@
                         <p>
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </p>
-                        <p class="hide-on-med-and-down">
+                        <p class="hide-on-pinned">
                             <small>Download</small>
                         </p>
 
@@ -63,10 +58,14 @@
             </ul>
         </div>
 
-
         {% block header_search_bar %}
           {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
         {% endblock %}
+        {% if not hide_side_nav %}
+            <div class="col s12 big-search-bar hide-on-small-only">
+                {% include "glados/SearchResultsParts/SearchBar.html" %}
+            </div>
+        {% endif %}
 
     </div>
 </div>
