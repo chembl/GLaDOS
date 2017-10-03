@@ -18,8 +18,13 @@
                             </a>
                         </div>
                         <div class="col s1 no-padding">
-                            <a class="draw-structure green lighten-1 tooltipped"
-                               data-position="left" data-delay="50" data-tooltip="Draw a chemical structure">
+                            <a class="draw-structure green lighten-1 tooltipped hide-on-small-only"
+                               data-position="left" data-delay="50" data-tooltip="Draw a structure">
+                                <i class="icon icon-conceptual icon-c6" data-icon="b"> </i>
+                            </a>
+                            <a class="draw-structure green lighten-1 tooltipped hide-on-med-and-up"
+                               href="{% url 'main' %}marvin_search_fullscreen/"
+                               data-position="left" data-delay="50" data-tooltip="Draw a structure">
                                 <i class="icon icon-conceptual icon-c6" data-icon="b"> </i>
                             </a>
                         </div>
@@ -30,8 +35,8 @@
                         <b class="green-text lighten-5">Examples: </b>
                         <a class="example-link">Dopamine</a>,
                         <span class="hide-on-small-only"><a class="example-link">Aspirin</a>,</span>
-                        <a class="example-link">NCCc1ccc(O)c(O)c1</a>
-                        <span class="hide-on-small-only">,<a class="example-link hide-on-small-only">Liver</a></span>
+                        <a class="example-link">NCCc1ccc(O)c(O)c1</a><span class="hide-on-small-only no-padding no-margin">,</span>
+                        <span class="hide-on-small-only"><a class="example-link hide-on-small-only">Liver</a></span>
                     </div>
                 </div>
             </div>

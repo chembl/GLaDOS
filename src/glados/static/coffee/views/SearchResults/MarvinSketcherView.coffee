@@ -1,159 +1,1 @@
-# View that renders the marvin sketcher and handles all the communication with it.
-MarvinSketcherView = Backbone.View.extend
-
-  # Search types
-  SIMILARITY_SEARCH: 'similarity'
-  SUBSTRUCTURE_SEARCH: 'substructure'
-  FLEXMATCH_SEARCH: 'flexmatch'
-
-  #format names in marvin
-  SDF_FORMAT: 'mol'
-  SMILES_FORMAT: 'smiles'
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Initialization
-  # --------------------------------------------------------------------------------------------------------------------
-  sdf_smiles_to_load_on_ready: null
-
-  initialize: (options)->
-    @preloader = $(@el).find('#marvin-preloader')
-    @marvin_iframe = $(@el).find('#sketch')
-
-    if options
-      @sdf_smiles_to_load_on_ready = options.sdf_smiles_to_load_on_ready
-      @smiles_to_load_on_ready = options.smiles_to_load_on_ready
-      @custom_initial_similarity = options.custom_initial_similarity
-      @chembl_id_to_load_on_ready = options.chembl_id_to_load_on_ready
-
-    @updatePercentageText(@custom_initial_similarity) unless not @custom_initial_similarity?
-    @updatePercentageSlider(@custom_initial_similarity) unless not @custom_initial_similarity?
-
-    thisView = @
-    MarvinJSUtil.getEditor('#sketch').then ((sketcherInstance) ->
-      # TODO: disable scroll
-#      console.log $(thisView.marvin_iframe[0].contentWindow.document).find('.gwt-progressContainer.mjs-canvasScrollPanelNoLogo')
-#      $(thisView.marvin_iframe[0].contentWindow.document).find('.mjs-canvasScrollPanelNoLogo').bind('mousewheel', (mouseEvent)->
-#        console.log 'entered!'
-#        if not(mouseEvent.ctrlKey or GlobalVariables.IS_COMMAND_KEY_DOWN)
-#          mouseEvent.preventDefault()
-#          console.log 'prevented!'
-#      )
-      console.log sketcherInstance
-      thisView.marvinSketcherInstance = sketcherInstance
-      if thisView.sdf_smiles_to_load_on_ready
-        thisView.loadStructure(thisView.sdf_smiles_to_load_on_ready, @SDF_FORMAT)
-      else if thisView.smiles_to_load_on_ready
-        thisView.loadStructure(thisView.smiles_to_load_on_ready, @SMILES_FORMAT)
-      else if thisView.chembl_id_to_load_on_ready
-        sdfURL = Compound.getSDFURL(thisView.chembl_id_to_load_on_ready)
-        $.get(sdfURL).done( (sdf) ->
-          thisView.loadStructure(sdf, @SDF_FORMAT)
-        )
-
-    ), (error) ->
-      alert 'Loading of the sketcher failed' + error
-
-    $(@el).find('select').material_select();
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Events Handling
-  # --------------------------------------------------------------------------------------------------------------------
-
-  events:
-    'click .substructure-search-btn': 'triggerSubstructureSearch'
-    'click .similarity-search-btn': 'triggerSimilaritySearch'
-    'click .flexmatch-search-btn': 'triggerFlexmatchSearch'
-    'change .select-type-of-search': 'selectSearchType'
-    'input .similarity-search-threshold-input': 'updatePercentageField'
-    'change .similarity-search-threshold-input': 'updatePercentageField'
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Sketcher Handling
-  # --------------------------------------------------------------------------------------------------------------------
-
-  # gets the parameters and what the user drew in the sketcher to then perform a search with it.
-  triggerMarvinSearch: (searchType) ->
-
-    if @marvinSketcherInstance.isEmpty()
-      $(@el).find('.messages-to-user').text('Please draw a structure first!')
-      return
-
-    $(@el).find('.messages-to-user').text('Processing structure...')
-
-    thisView = @
-    @marvinSketcherInstance.exportStructure('mol').then ((data) ->
-      console.log 'structure received: ', data
-
-      url_and_data = {}
-      # Don't add the last slash, you will get the "No 'Access-Control-Allow-Origin' header" issue
-      url_and_data.url = glados.Settings.BEAKER_BASE_URL + 'ctab2smiles'
-      url_and_data.data = data
-
-      console.log 'URL: ', url_and_data.url
-
-      $.post(url_and_data.url, url_and_data.data).done( (smilesData) ->
-
-        $(thisView.el).find('.messages-to-user').text('Searching...')
-
-        smilesLine = smilesData.split('\n')[1].trim()
-        smiles = smilesLine.split(' ')[0]
-
-        if searchType == thisView.SUBSTRUCTURE_SEARCH
-          searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles
-        else if searchType == thisView.FLEXMATCH_SEARCH
-          searchUrl = glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE + smiles
-        else
-          percentage = $(thisView.el).find('.similarity-search-threshold-input').val()
-          searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles + '/' + percentage
-
-        window.location.href =  searchUrl
-
-      ).error( (error) ->
-        $(thisView.el).find('.messages-to-user').text('There was an error: ' + error)
-      )
-
-
-    ), (error) ->
-      $(@el).find('.messages-to-user').text('There was an error: ' + error)
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # loading structures
-  # --------------------------------------------------------------------------------------------------------------------
-  loadStructure: (sdf_string, format, onlyIfEmpty=false)->
-    if onlyIfEmpty and not @marvinSketcherInstance.isEmpty()
-      return
-    @preloader.show()
-    load_structure = ->
-      @marvinSketcherInstance.pasteStructure(format, sdf_string)
-      @preloader.hide()
-
-    setTimeout(load_structure.bind(@), 0)
-
-  triggerSubstructureSearch: ->
-
-    @triggerMarvinSearch(@SUBSTRUCTURE_SEARCH)
-
-  triggerSimilaritySearch: ->
-
-    @triggerMarvinSearch(@SIMILARITY_SEARCH)
-
-  triggerFlexmatchSearch: ->
-    @triggerMarvinSearch(@FLEXMATCH_SEARCH)
-
-  updatePercentageField: (event) ->
-
-    selector = $(event.currentTarget)
-    percentage = selector.val()
-    @updatePercentageText(percentage)
-
-  updatePercentageText: (percentage) ->
-
-    $percentageField = $(@el).find('.similarity-search-threshold-text')
-    glados.Utils.fillContentForElement $percentageField,
-      percentage: percentage
-
-  updatePercentageSlider: (percentage) ->
-
-    $percentageSlider = $(@el).find('.BCK-SliderContainer')
-    glados.Utils.fillContentForElement $percentageSlider,
-      percentage: percentage
+# View that renders the marvin sketcher and handles all the communication with it.MarvinSketcherView = Backbone.View.extend  # --------------------------------------------------------------------------------------------------------------------  # Initialization  # --------------------------------------------------------------------------------------------------------------------  sdf_to_load_on_ready: null  initialize: (options)->    @preloader = $(@el).find('.marvin-preloader')    @marvin_iframe = $(@el).find('.sketch-iframe')    @marvinIframeId = 'MarvinJS-editor-'+MarvinSketcherView.CURRENT_EDITOR_ID    MarvinSketcherView.CURRENT_EDITOR_ID += 1    @marvin_iframe.attr('id', @marvinIframeId)    if options      @sdf_to_load_on_ready = options.sdf_to_load_on_ready      @smiles_to_load_on_ready = options.smiles_to_load_on_ready      @custom_initial_similarity = options.custom_initial_similarity      @chembl_id_to_load_on_ready = options.chembl_id_to_load_on_ready    @updatePercentageText(@custom_initial_similarity) unless not @custom_initial_similarity?    @updatePercentageSlider(@custom_initial_similarity) unless not @custom_initial_similarity?    outerHtml = $('html')    thisView = @    MarvinJSUtil.getEditor(@marvinIframeId).then ((sketcherInstance) ->      empty = false      sketcherInstance.on 'molchange', ->        empty = sketcherInstance.isEmpty()        thisView.innerCanvas.focus()      ButtonsHelper.disableOuterScrollOnMouseEnter thisView.marvin_iframe[0], outerHtml[0]      innerDoc = thisView.marvin_iframe[0].contentDocument || thisView.marvin_iframe[0].contentWindow.document      lastCursor = ''      thisView.innerCanvas = $(innerDoc).find('#canvas')      mouseElements = $(innerDoc).find('body').add($(innerDoc).find('#canvas')).add($(innerDoc).find('td').children())      debouncedClean = _.debounce ->        setTimeout ->          lastCursor = ''          mouseElements.css('cursor', '')        , 500      , 500      $(innerDoc).find('td').children().on 'wheel', (wheelEvent)->        if wheelEvent.deltaY == 0          return        cursor = if wheelEvent.originalEvent.deltaY > 0 then 'zoom-out' else 'zoom-in'        if cursor != lastCursor          lastCursor = cursor          mouseElements.css('cursor', cursor, 'important')        debouncedClean()      thisView.marvinSketcherInstance = sketcherInstance      if thisView.sdf_to_load_on_ready        thisView.loadStructure(thisView.sdf_to_load_on_ready, MarvinSketcherView.SDF_FORMAT)      else if thisView.smiles_to_load_on_ready        thisView.loadStructure(thisView.smiles_to_load_on_ready, MarvinSketcherView.SMILES_FORMAT)      else if thisView.chembl_id_to_load_on_ready        sdfURL = Compound.getSDFURL(thisView.chembl_id_to_load_on_ready)        $.get(sdfURL).done( (sdf) ->          thisView.loadStructure(sdf, MarvinSketcherView.SDF_FORMAT)        )    ), (error) ->      alert 'Loading of the sketcher failed' + error    $(@el).find('select').material_select();  # --------------------------------------------------------------------------------------------------------------------  # Events Handling  # --------------------------------------------------------------------------------------------------------------------  events:    'click .substructure-search-btn': 'triggerSubstructureSearch'    'click .similarity-search-btn': 'triggerSimilaritySearch'    'click .flexmatch-search-btn': 'triggerFlexmatchSearch'    'change .select-type-of-search': 'selectSearchType'    'input .similarity-search-threshold-input': 'updatePercentageField'    'change .similarity-search-threshold-input': 'updatePercentageField'  # --------------------------------------------------------------------------------------------------------------------  # Sketcher Handling  # --------------------------------------------------------------------------------------------------------------------  # gets the parameters and what the user drew in the sketcher to then perform a search with it.  triggerMarvinSearch: (searchType) ->    if @marvinSketcherInstance.isEmpty()      $(@el).find('.messages-to-user').text('Please draw a structure first!')      return    $(@el).find('.messages-to-user').text('Processing structure...')    thisView = @    @marvinSketcherInstance.exportStructure('mol').then ((data) ->      console.log 'structure received: ', data      url_and_data = {}      # Don't add the last slash, you will get the "No 'Access-Control-Allow-Origin' header" issue      url_and_data.url = glados.Settings.BEAKER_BASE_URL + 'ctab2smiles'      url_and_data.data = data      console.log 'URL: ', url_and_data.url      $.post(url_and_data.url, url_and_data.data).done( (smilesData) ->        $(thisView.el).find('.messages-to-user').text('Searching...')        smilesLine = smilesData.split('\n')[1].trim()        smiles = smilesLine.split(' ')[0]        if searchType == thisView.SUBSTRUCTURE_SEARCH          searchUrl = glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE + smiles        else if searchType == thisView.FLEXMATCH_SEARCH          searchUrl = glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE + smiles        else          percentage = $(thisView.el).find('.similarity-search-threshold-input').val()          searchUrl = glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE + smiles + '/' + percentage        window.location.href =  searchUrl      ).error( (error) ->        $(thisView.el).find('.messages-to-user').text('There was an error: ' + error)      )    ), (error) ->      $(@el).find('.messages-to-user').text('There was an error: ' + error)  # --------------------------------------------------------------------------------------------------------------------  # loading structures  # --------------------------------------------------------------------------------------------------------------------  loadStructure: (load_string, format=MarvinSketcherView.SDF_FORMAT, onlyIfEmpty=false)->    if onlyIfEmpty and not @marvinSketcherInstance.isEmpty()      return    if not @marvinSketcherInstance?      if format == MarvinSketcherView.SMILES_FORMAT        @smiles_to_load_on_ready = load_string      else if format == MarvinSketcherView.SDF_FORMAT        @sdf_to_load_on_ready = load_string      return    @preloader.show()    load_structure = ->      @marvinSketcherInstance.pasteStructure(format, load_string)      @preloader.hide()    setTimeout(load_structure.bind(@), 0)  triggerSubstructureSearch: ->    @triggerMarvinSearch(MarvinSketcherView.SUBSTRUCTURE_SEARCH)  triggerSimilaritySearch: ->    @triggerMarvinSearch(MarvinSketcherView.SIMILARITY_SEARCH)  triggerFlexmatchSearch: ->    @triggerMarvinSearch(MarvinSketcherView.FLEXMATCH_SEARCH)  updatePercentageField: (event) ->    selector = $(event.currentTarget)    percentage = selector.val()    @updatePercentageText(percentage)  updatePercentageText: (percentage) ->    $percentageField = $(@el).find('.similarity-search-threshold-text')    glados.Utils.fillContentForElement $percentageField,      percentage: percentage  updatePercentageSlider: (percentage) ->    $percentageSlider = $(@el).find('.BCK-SliderContainer')    glados.Utils.fillContentForElement $percentageSlider,      percentage: percentage# ----------------------------------------------------------------------------------------------------------------------# Constants# ----------------------------------------------------------------------------------------------------------------------MarvinSketcherView.CURRENT_EDITOR_ID = 0# Search typesMarvinSketcherView.SIMILARITY_SEARCH = 'similarity'MarvinSketcherView.SUBSTRUCTURE_SEARCH = 'substructure'MarvinSketcherView.FLEXMATCH_SEARCH = 'flexmatch'#format names in marvinMarvinSketcherView.SDF_FORMAT = 'mol'MarvinSketcherView.SMILES_FORMAT = 'smiles'
