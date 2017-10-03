@@ -29,7 +29,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initializeSketcherButton: ()->
       $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
-      console.log $openEditorBtn
       $editorModal = ButtonsHelper.generateModalFromTemplate($openEditorBtn, 'Handlebars-Common-MarvinModal')
       @marvinEditor = new MarvinSketcherView({
         el: $editorModal
