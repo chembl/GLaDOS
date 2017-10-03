@@ -29,18 +29,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             facets: esIndexSettings.FACETS
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: esIndexSettings.FACETS_GROUPS
-            # set by default columns with show: true, and additional with show: false
-            columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION
-            #columns specific for cards view
-            columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
             custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             custom_cards_item_view: esIndexSettings.CUSTOM_CARDS_ITEM_VIEW
             complicate_cards_view: esIndexSettings.COMPLICATE_CARDS_VIEW
             complicate_card_columns: esIndexSettings.COMPLICATE_CARDS_COLUMNS
-            additional_columns: ( $.extend(col, {show: false}) for col in esIndexSettings.ADDITIONAL_COLUMNS)
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             key_name: esIndexSettings.KEY_NAME
             id_name: esIndexSettings.ID_NAME

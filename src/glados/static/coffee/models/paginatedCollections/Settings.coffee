@@ -12,7 +12,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -24,7 +23,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
-        COLUMNS_CARD: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         CUSTOM_DEFAULT_CARD_SIZES:
           small: 12
           medium: 6
@@ -73,7 +71,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
-        COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_DESCRIPTION:
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -83,8 +80,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -101,7 +96,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
         ID_COLUMN: Assay.ID_COLUMN
-        COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_DESCRIPTION:
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -111,8 +105,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        COLUMNS_CARD: []
-        ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -128,7 +120,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_DESCRIPTION:
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -138,8 +129,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        COLUMNS_CARD: []
-        ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -155,7 +144,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
-        COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         COLUMNS_DESCRIPTION:
           Table:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -165,8 +153,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        COLUMNS_CARD: []
-        ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -181,7 +167,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
-        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
@@ -191,8 +176,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: []
-        ADDITIONAL_COLUMNS:[]
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
