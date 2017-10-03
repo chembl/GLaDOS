@@ -7,7 +7,8 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
   initialize: ->
     @collection.on 'reset', @.render, @
     @resource_type = 'Target'
-    @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(@collection, @el)
+    @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
+      @collection, @el, customRenderEvent=undefined, disableColumnsSelection=true)
 
     @initEmbedModal('components')
     @activateModals()

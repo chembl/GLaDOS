@@ -29,17 +29,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             facets: esIndexSettings.FACETS
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: esIndexSettings.FACETS_GROUPS
-            # set by default columns with show: true, and additional with show: false
-            columns: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS)
-            #columns specific for cards view
-            columns_card: ( $.extend(col, {show: true})  for col in esIndexSettings.COLUMNS_CARD)
+            columns: esIndexSettings.COLUMNS
+            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
             custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             custom_cards_item_view: esIndexSettings.CUSTOM_CARDS_ITEM_VIEW
             complicate_cards_view: esIndexSettings.COMPLICATE_CARDS_VIEW
             complicate_card_columns: esIndexSettings.COMPLICATE_CARDS_COLUMNS
-            additional_columns: ( $.extend(col, {show: false}) for col in esIndexSettings.ADDITIONAL_COLUMNS)
             download_formats: esIndexSettings.DOWNLOAD_FORMATS
             key_name: esIndexSettings.KEY_NAME
             id_name: esIndexSettings.ID_NAME
@@ -89,10 +86,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
-            columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
-            #columns specific for cards view
-            columns_card: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS_CARD)
-            additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            columns: collectionSettings.COLUMNS
+            columns_description: collectionSettings.COLUMNS_DESCRIPTION
             is_carousel: collectionSettings.IS_CAROUSEL
             all_items_selected: false
             selection_exceptions: {}
@@ -126,8 +121,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
-            columns: ( $.extend(col, {show: true})  for col in collectionSettings.COLUMNS)
-            additional_columns: ( $.extend(col, {show: false}) for col in collectionSettings.ADDITIONAL_COLUMNS)
+            columns: collectionSettings.COLUMNS
+            columns_description: collectionSettings.COLUMNS_DESCRIPTION
             all_items_selected: false
             selection_exceptions: {}
             data_loaded: false

@@ -60,6 +60,14 @@ Document.COLUMNS = {
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 
 Document.COLUMNS_SETTINGS = {
+
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of Document.COLUMNS
+      colsList.push value
+    return colsList
+  )()
+
   RESULTS_LIST_TABLE: [
     Document.COLUMNS.CHEMBL_ID
     Document.COLUMNS.TITLE

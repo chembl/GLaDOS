@@ -35,6 +35,12 @@ TargetComponent.COLUMNS = {
 TargetComponent.ID_COLUMN = TargetComponent.COLUMNS.DESCRIPTION
 
 TargetComponent.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of TargetComponent.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE: [
     TargetComponent.COLUMNS.DESCRIPTION
     TargetComponent.COLUMNS.RELATIONSHIP

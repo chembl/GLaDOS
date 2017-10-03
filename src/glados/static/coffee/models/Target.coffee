@@ -175,10 +175,23 @@ Target.COLUMNS = {
     'format_class': 'number-cell-center'
     'secondary_link': true
   }
+  SPECIES_GROUP:{
+    'name_to_show': 'Species Group'
+    'comparator': 'species_group_flag'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
 Target.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of Target.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE: [
     Target.COLUMNS.CHEMBL_ID
     Target.COLUMNS.PREF_NAME
@@ -187,6 +200,7 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.ORGANISM
     Target.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
     Target.COLUMNS.BIOACTIVITIES_NUMBER
+    Target.COLUMNS.SPECIES_GROUP
   ]
   RESULTS_LIST_REPORT_CARD:[
     Target.COLUMNS.CHEMBL_ID

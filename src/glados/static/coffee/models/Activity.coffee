@@ -261,6 +261,12 @@ Activity.COLUMNS = {
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
 
 Activity.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of Activity.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_REPORT_CARD: [
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
     Activity.COLUMNS.STANDARD_TYPE

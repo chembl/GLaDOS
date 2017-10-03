@@ -763,6 +763,12 @@ Compound.COLUMNS = {
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
 
 Compound.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of Compound.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE: [
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.SYNONYMS,

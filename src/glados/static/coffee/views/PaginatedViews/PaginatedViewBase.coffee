@@ -14,6 +14,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
+      @initColumnsHandler()
+
+      if @isTable()
+        @initialiseColumnsModal() unless @disableColumnsSelection
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
       @initTooltipFunctions()
@@ -54,17 +58,34 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @renderAtInit
         @render()
 
+    initColumnsHandler: ->
 
-    isCards: ()->
+      defaultColumns = @getDefaultColumns()
+      additionalColumns = @getAdditionalColumns()
+      contextualProperties = @collection.getMeta('contextual_properties')
+
+      @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler
+        default_columns: defaultColumns
+        additional_columns: additionalColumns
+        contextual_properties: contextualProperties
+
+      @columnsHandler.on 'change:visible_columns', @handleVisibleColumnsChange, @
+
+    handleVisibleColumnsChange: ->
+
+      @clearTemplates()
+      @fillTemplates()
+
+    isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
 
-    isCarousel: ()->
+    isCarousel: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CAROUSEL_TYPE
 
-    isInfinite: ()->
+    isInfinite: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE
 
-    isTable: ()->
+    isTable: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.TABLE_TYPE
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -78,51 +99,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'change select.select-search' : 'setSearch'
       'change .select-sort': 'sortCollectionFormSelect'
       'click .btn-sort-direction': 'changeSortOrderInf'
-      'click .BCK-show-hide-column': 'showHideColumn'
       'click .BCK-toggle-select-all': 'toggleSelectAll'
       'click .BCK-select-one-item': 'toggleSelectOneItem'
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Selection
-    # ------------------------------------------------------------------------------------------------------------------
-    toggleSelectAll: ->
-      @collection.toggleSelectAll()
-
-    toggleSelectOneItem: (event) ->
-
-      #for id structure the elem id must always be in the third position
-      elemID = $(event.currentTarget).attr('id').split('-')[2]
-      @collection.toggleSelectItem(elemID)
-
-    selectionChangedHandler: (action, detail)->
-
-      if action == glados.Events.Collections.Params.ALL_SELECTED
-
-        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', true)
-
-      else if action == glados.Events.Collections.Params.ALL_UNSELECTED
-
-        $(@el).find('.BCK-toggle-select-all,.BCK-select-one-item').prop('checked', false)
-
-      else if action == glados.Events.Collections.Params.SELECTED
-
-        endingID = detail + '-select'
-        $(@el).find('[id$=' + endingID + ']').prop('checked', true)
-
-      else if action == glados.Events.Collections.Params.UNSELECTED
-
-        endingID = detail + '-select'
-        $(@el).find('[id$=' + endingID + ']').prop('checked', false)
-        $(@el).find('.BCK-toggle-select-all').prop('checked', false)
-
-      else if action == glados.Events.Collections.Params.BULK_SELECTED
-
-        for itemID in detail
-          endingID = itemID + '-select'
-          $(@el).find('[id$=' + endingID + ']').prop('checked', true)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -148,67 +129,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @requestCurrentPage()
 
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
+      @renderViewState()
 
-      isDefault = @mustDisableReset()
-      mustComplicate = @collection.getMeta('complicate_cards_view')
-      @isComplicated = isDefault and mustComplicate
+    renderViewState: ->
 
-      if @isInfinite() and @collection.getMeta('current_page') == 1
-        # always clear the infinite container when receiving the first page, to avoid
-        # showing results from previous delayed requests.
-        @clearContentForInfinite()
-
-        if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
-            @cleanUpDeferredViewsContainer()
-
-        if @hasCustomElementView()
-          @cleanUpCustomItemViewsContainer()
-
-      else if not @isInfinite()
-        @clearContentContainer()
-
-        if @isCards()
-
-          if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
-            @cleanUpDeferredViewsContainer()
-
-          if @hasCustomElementView()
-            @cleanUpCustomItemViewsContainer()
-
-      @fillTemplates()
-
-      if @isInfinite()
-        @setUpLoadingWaypoint()
-        @hidePreloaderIfNoNextItems()
-
-      @fillSelectAllContainer() unless @disableItemsSelection
-
-      if (@isCards() or @isInfinite()) and @isCardsZoomEnabled()
-        @fillZoomContainer()
-
-      if (@isCards() or @isInfinite()) and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
-        @renderSpecialStructuresToggler()
-
-      @fillPaginators()
-      if not @isCarousel()
-        @fillPageSizeSelectors()
-      @activateSelectors()
-      @showPaginatedViewContent()
-
-      @initialiseColumnsModal() unless @disableColumnsSelection
-
-      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
-        @showSuggestedLabel()
-      else
-        @hideSuggestedLabel()
+      return
 
     sleepView: ->
-      # destroy loading waypoints when I sleep to avoid triggering next pages when hidden
-      if @isInfinite()
-        @destroyAllWaypoints()
-
-      if (@isCards() or @isInfinite()) and @hasCustomElementView()
-        @sleepCustomElementviews()
 
     wakeUpView: -> @requestCurrentPage()
 
@@ -255,26 +182,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             $currentLink.click()
           $currentLink.attr('data-already-function-bound', 'yes')
 
-    getVisibleColumns: ->
-
-      columns = []
-      # use special configuration config for cards if available
-      if (@isCards() or @isInfinite()) and @collection.getMeta('columns_card').length > 0
-        if @isComplicated
-          columns = _.filter(@collection.getMeta('complicate_card_columns'), -> true)
-        else
-          columns = _.filter(@collection.getMeta('columns_card'), -> true)
-      else
-        defaultVisibleColumns = _.filter(@collection.getMeta('columns'), (col) -> col.show)
-        additionalVisibleColumns = _.filter(@collection.getMeta('additional_columns'), (col) -> col.show)
-        columns = _.union(defaultVisibleColumns, additionalVisibleColumns)
-
-      contextualProperties = @collection.getMeta('contextual_properties')
-      contextualProperties ?= []
-      for prop in contextualProperties
-        columns.push(prop)
-
-      return columns
+    getVisibleColumns: -> @columnsHandler.get('visible_columns')
+    getAllColumns: -> @columnsHandler.get('all_columns')
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 
@@ -547,34 +456,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.setSearch(term, column, type)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # Add Remove Columns
-    # ------------------------------------------------------------------------------------------------------------------
-    initialiseColumnsModal: ->
-
-      $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
-
-      if $modalContainer.length == 0
-        return
-
-      glados.Utils.fillContentForElement $modalContainer,
-        modal_id: $(@el).attr('id') + '-select-columns-modal'
-        columns: @collection.getMeta('columns')
-        additional_columns: @collection.getMeta('additional_columns')
-
-      $(@el).find('.modal').modal()
-
-    showHideColumn: (event) ->
-
-      $checkbox = $(event.currentTarget)
-      colComparator = $checkbox.attr('data-comparator')
-      isChecked = $checkbox.is(':checked')
-
-      allColumns = _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
-      changedColumn = _.find(allColumns, (col) -> col.comparator == colComparator)
-      changedColumn.show = isChecked
-      @clearTemplates()
-      @fillTemplates()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Sort

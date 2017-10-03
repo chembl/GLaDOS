@@ -22,3 +22,54 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @requestPageSizeInCollection(minPageSize)
       else
         @render()
+
+    renderViewState: ->
+
+      isDefaultZoom = @mustDisableReset()
+      mustComplicate = @collection.getMeta('complicate_cards_view')
+      @isComplicated = isDefaultZoom and mustComplicate
+
+      @clearContentContainer()
+
+      if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+        @cleanUpDeferredViewsContainer()
+
+      if @hasCustomElementView()
+        @cleanUpCustomItemViewsContainer()
+
+      @fillTemplates()
+
+      @fillSelectAllContainer() unless @disableItemsSelection
+
+      if @isCardsZoomEnabled()
+        @fillZoomContainer()
+
+      if @hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled()
+        @renderSpecialStructuresToggler()
+
+      @fillPaginators()
+      @fillPageSizeSelectors()
+      @activateSelectors()
+      @showPaginatedViewContent()
+
+      if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
+        @showSuggestedLabel()
+      else
+        @hideSuggestedLabel()
+
+      glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+    sleepView: ->
+      if @hasCustomElementView()
+        @sleepCustomElementviews()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Columns initalisation
+    # ------------------------------------------------------------------------------------------------------------------
+    getDefaultColumns: -> @collection.getMeta('columns_description').Cards.Default
+    getAdditionalColumns: -> @collection.getMeta('columns_description').Cards.Additional
+    getVisibleColumns: ->
+      if @isComplicated
+        _.filter(@collection.getMeta('complicate_card_columns'), -> true)
+      else
+        glados.views.PaginatedViews.PaginatedViewBase.getVisibleColumns.call(@)

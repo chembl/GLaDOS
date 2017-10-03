@@ -190,3 +190,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           search_dict[full_search_str.toUpperCase()] = model
 
         @setMeta('search_dict', search_dict)
+
+    getAllColumns: -> @getMeta('columns')
+
+#      defaultColumns = @getMeta('columns')
+#      contextualColumns = @getMeta('contextual_properties')
+#      return _.union(defaultColumns, contextualColumns)

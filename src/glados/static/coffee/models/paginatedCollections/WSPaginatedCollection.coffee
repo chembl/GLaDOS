@@ -314,3 +314,5 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #        generateWaitingToolongMsg(firstWaitTime)
 
       return deferreds
+
+    getAllColumns: -> @getMeta('columns')

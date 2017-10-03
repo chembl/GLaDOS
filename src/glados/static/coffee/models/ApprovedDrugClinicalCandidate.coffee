@@ -42,6 +42,12 @@ ApprovedDrugClinicalCandidate.COLUMNS = {
 ApprovedDrugClinicalCandidate.ID_COLUMN = ApprovedDrugClinicalCandidate.COLUMNS.CHEMBL_ID
 
 ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of ApprovedDrugClinicalCandidate.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE:[
     ApprovedDrugClinicalCandidate.COLUMNS.CHEMBL_ID
     ApprovedDrugClinicalCandidate.COLUMNS.PREF_NAME
