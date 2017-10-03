@@ -193,9 +193,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Activity.ID_COLUMN
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        COLUMNS_CARD: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ADDITIONAL_COLUMNS: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Additional: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+          Cards:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
