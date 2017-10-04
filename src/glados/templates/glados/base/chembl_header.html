@@ -49,7 +49,7 @@
                         <p>
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </p>
-                        <p class="hide-on-pinned">
+                        <p class="hide-on-pinned hide-on-med-and-down">
                             <small>Download</small>
                         </p>
 
@@ -61,11 +61,6 @@
         {% block header_search_bar %}
           {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
         {% endblock %}
-        {% if not hide_side_nav %}
-            <div class="col s12 big-search-bar hide-on-small-only">
-                {% include "glados/SearchResultsParts/SearchBar.html" %}
-            </div>
-        {% endif %}
 
     </div>
 </div>

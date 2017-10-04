@@ -33,9 +33,15 @@
     </div>
 
     {% block chembl_header %}
-      <div id="chembl-header-container">
-        {% include "glados/base/chembl_header.html" %}
-      </div>
+      {% if not hide_side_nav %}
+        <div id="chembl-header-sidenav-pushpin-container">
+      {% endif %}
+          <div id="chembl-header-container" >
+            {% include "glados/base/chembl_header.html" %}
+          </div>
+      {% if not hide_side_nav %}
+        </div>
+      {% endif %}
       <div id="chembl-header-container-spacer" class="{{hide_side_nav|yesno:',side-nav-padding' }}"></div>
     {% endblock %}
 
