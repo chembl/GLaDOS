@@ -19,98 +19,9 @@
 </head>
 
 <body id="BCK-MarvinContainer">
-
-  <div class="marvin-preloader" class="row" style="display: none">
-    {% block preloader %}
-    {% include "glados/base/infinite_browse_loaders.html" %}
-    {% endblock %}
-  </div>
-  <div class="marvin-search-fullscreen row">
-    <iframe class="sketch-iframe" src="{% static 'marvinjs/editor.html' %}"
-            style="overflow: hidden; width: 100%; min-height: 100%; border: 1px solid darkgray;"></iframe>
-
-  </div>
-
-  <div class="marvin-search-options">
-
-    <div class="row">
-
-      <div class="col s4">
-
-
-        <div class="left">
-
-          <a  class="waves-effect waves-light flexmatch-search-btn" href="#"><i class="icon icon-functional" data-icon="1"></i> Search</a>
-
-        </div>
-
-      </div>
-
-      <div class="col s4">
-
-          <span class="center-align"> <a class="waves-effect waves-light modal-trigger" href="#options-modal"><i class="icon icon-functional" data-icon="M"></i></a></span>
-
-        </div>
-
-      <div class="col s4">
-
-        <div class="right">
-          <a id="cancel-button" class="waves-effect waves-light">Cancel <i class="valign icon icon-functional" data-icon="x"></i></a>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Modal Structure -->
-  <div id="options-modal" class="modal bottom-sheet">
-    <div class="modal-content">
-      <h4>Search Options</h4>
-      <div class="row marvinjs-buttons" style="margin-bottom: 10px !important;">
-        <div class="col s12 center-align">
-          <a class="waves-effect waves-light btn-chembl teal substructure-search-btn"><i class="icon icon-functional"
-                                                                                   data-icon="1"></i>Substructure</a>
-        </div>
-        <br/>
-        <br/>
-        <div class="col s12 center-align">
-          <a class="waves-effect waves-light btn-chembl teal similarity-search-btn"><i class="icon icon-functional"
-                                                                                   data-icon="1"></i>Similarity</a>
-        </div>
-
-      </div>
-      <div class="row" style="margin-bottom: 10px !important;">
-
-        <div class="col s12" class="similarity-search-threshold">
-
-
-          <div class="similarity-search-threshold">
-
-            {% verbatim %}
-            <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
-              >= {{percentage}}%
-            </script>
-            {% endverbatim %}
-            <div class="row" >
-              <div class="similarity-search-threshold-text col s3">
-                >= 95%
-              </div>
-
-              <div class="range-field col s8">
-                <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="95"/>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
+  {% with in_modal=True %}
+    {% include "glados/Sketchers/marvinSearch.html" %}
+  {% endwith %}
 
   <!-- - - - - - - - - - - - - - - - - - - - -->
   <!-- APIs -->
@@ -128,7 +39,12 @@
     });
   </script>
   {% endcompress%}
-
+  <div style="display: none">
+    <!-- handlebars templates -->
+    {% block common_handlebars %}
+      {% include "glados/Handlebars/CommonSources.html" %}
+    {% endblock %}
+  </div>
 
 </body>
 
