@@ -23,8 +23,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
       @set('all_columns', allColumns)
+      @setColumnsPositions()
 
       @setVisibleColumns()
+
+    setColumnsPositions: ->
+
+      allColumns = @get('all_columns')
+      for i in [1..allColumns.length]
+        allColumns[i-1].position = i
 
     setVisibleColumns: ->
 
@@ -47,5 +54,3 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         col.show = show
 
       @setVisibleColumns()
-
-
