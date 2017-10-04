@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       @renderModalTrigger()
       @renderModalContent()
+      @initDragging()
 
     renderModalTrigger: ->
 
@@ -39,3 +40,9 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         @model.setShowHideAllColumnStatus(isChecked)
       else
         @model.setShowHideColumnStatus(colComparator, isChecked)
+
+    initDragging: ->
+
+      $dragableElems = $(@el).find('.BCK-draggable')
+      $dragableElems.on 'dragstart', ->
+        console.log 'DRAG STARTED!'

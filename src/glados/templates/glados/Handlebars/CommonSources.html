@@ -632,7 +632,7 @@
 
     <div class="modal-content left-align">
 
-      <div class="row">
+      <div class="row show-hide-columns">
 
         <div class="col s6 m3 l2">
           <input type="checkbox" class="BCK-show-hide-column filled-in"
@@ -643,14 +643,15 @@
         </div>
 
         {{#each all_columns}}
-        <div class="col s6 m3 l2">
+        <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true'>
 
-          <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                 data-comparator='{{this.comparator}}'
-                 {{#if this.show}} checked="checked" {{/if}}
-          />
-          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
-
+          <div class="item-content">
+            <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                   data-comparator='{{this.comparator}}'
+                   {{#if this.show}} checked="checked" {{/if}}
+            />
+            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+          </div>
         </div>
         {{/each}}
 

@@ -3276,6 +3276,11 @@ $facets-width-large: 21%;
   }
 }
 
+/**
+* Paginated Collections
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
 .paginated-collection{
   padding: 4px;
   .pg-table{
@@ -3286,6 +3291,23 @@ $facets-width-large: 21%;
     li{
       a {
         font-size: 1rem;
+      }
+    }
+  }
+}
+
+.show-hide-columns{
+  .sortable-item{
+    .item-content{
+      margin-top: 2px;
+      border-radius: $default-btn-border-radius;
+      border: 1px solid color('grey', 'lighten-1');
+      &:hover{
+        border: 1px solid color($primary-color-name, 'accent-4');
+      }
+
+      [type="checkbox"]{
+        position: static;
       }
     }
   }
