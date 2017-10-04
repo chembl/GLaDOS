@@ -41,8 +41,48 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       else
         @model.setShowHideColumnStatus(colComparator, isChecked)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Drag and drop
+    #-------------------------------------------------------------------------------------------------------------------
     initDragging: ->
 
-      $dragableElems = $(@el).find('.BCK-draggable')
-      $dragableElems.on 'dragstart', ->
-        console.log 'DRAG STARTED!'
+      $draggableElems = $(@el).find('.BCK-draggable')
+      $draggableElemsContainer = $(@el).find('.BCK-draggable-container')
+
+      thisView = @
+
+      $draggableElems.each ->
+        @addEventListener 'dragstart', (e) ->
+          e.dataTransfer.setData('text', 'fix for firefox')
+
+      $draggableElems.on 'dragstart', (event) ->
+
+        $draggedElem = $(@)
+        $draggedElem.addClass('being-dragged')
+
+      $draggableElems.on 'drag', ->
+
+        $draggedElem = $(@)
+        propertyName = $draggedElem.attr('data-comparator')
+        thisView.property_being_dragged = propertyName
+
+      $draggableElems.on 'dragenter', ->
+
+        $draggedOver = $(@)
+        propertyName = $draggedOver.attr('data-comparator')
+        propertyBeingDragged = thisView.property_being_dragged
+        if propertyName != propertyBeingDragged
+          $draggedOver.addClass('dragged-over')
+
+        $restOfElements = $draggableElemsContainer.find(':not([data-comparator="' + propertyName + '"])')
+        $restOfElements.removeClass('dragged-over')
+
+      $draggableElems.on 'drop', ->
+
+        $receivingElem = $(@)
+        propertyName = $receivingElem.attr('data-comparator')
+        console.log 'element dropped on me: ', propertyName
+
+      $draggableElemsContainer.on 'drop', ->
+        console.log 'DROPPED ON CONTAINER'
+

@@ -3297,19 +3297,34 @@ $facets-width-large: 21%;
 }
 
 .show-hide-columns{
-  .sortable-item{
-    .item-content{
-      margin-top: 2px;
-      border-radius: $default-btn-border-radius;
-      border: 1px solid color('grey', 'lighten-1');
-      &:hover{
-        border: 1px solid color($primary-color-name, 'accent-4');
+
+  .sortable-items-container{
+    position: relative;
+
+    .sortable-item {
+
+      .item-content {
+        margin-top: 2px;
+        border-radius: $default-btn-border-radius;
+        border: 1px solid color('grey', 'lighten-1');
+        &:hover {
+          border: 1px solid color($primary-color-name, 'accent-4');
+        }
+
+        [type="checkbox"] {
+          position: static;
+        }
       }
 
-      [type="checkbox"]{
-        position: static;
+      &.dragged-over{
+        background-color: red;
+      }
+
+      &.being-dragged{
+        background-color: blue;
       }
     }
+
   }
 }
 

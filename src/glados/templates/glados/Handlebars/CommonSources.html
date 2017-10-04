@@ -619,41 +619,45 @@
 </div>
 
 </script>
-<scrpit id="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+<script id="Handlebars-Common-ShowHideColumnsDropdown-trigger" type="text/x-handlebars-template">
   <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
 
   <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
        data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
   </div>
 
-</scrpit>
+</script>
 
 <script id="Handlebars-Common-ShowHideColumnsDropdown-content" type="text/x-handlebars-template">
 
     <div class="modal-content left-align">
 
-      <div class="row show-hide-columns">
+      <div class="show-hide-columns">
 
-        <div class="col s6 m3 l2">
-          <input type="checkbox" class="BCK-show-hide-column filled-in"
-                 data-comparator='SELECT-ALL' id="check-{{random_num}}"
-                 {{#if all_selected}} checked="checked" {{/if}}
-          />
-          <label for="check-{{random_num}}">Select All</label>
-        </div>
+        <div class="row center-align">
 
-        {{#each all_columns}}
-        <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true'>
-
-          <div class="item-content">
-            <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                   data-comparator='{{this.comparator}}'
-                   {{#if this.show}} checked="checked" {{/if}}
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                   {{#if all_selected}} checked="checked" {{/if}}
             />
-            <label for="check-{{this.comparator}}">{{this.name_to_show}}</label> p:{{this.position}}
-          </div>
+            <label for="check-{{random_num}}">Select All</label>
+
         </div>
-        {{/each}}
+
+        <div class="row BCK-draggable-container sortable-items-container">
+          {{#each all_columns}}
+          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
+
+            <div class="item-content">
+              <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                     data-comparator='{{this.comparator}}'
+                     {{#if this.show}} checked="checked" {{/if}}
+              />
+              <label for="check-{{this.comparator}}">{{this.name_to_show}}</label> p:{{this.position}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
 
       </div>
 
