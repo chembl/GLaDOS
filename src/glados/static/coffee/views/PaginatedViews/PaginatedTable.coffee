@@ -36,6 +36,43 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $modalContainer.find('.modal').modal()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Fill Templates
+    # ------------------------------------------------------------------------------------------------------------------
+    fillTemplates: ->
+
+      $elem = $(@el).find('.BCK-items-container')
+      visibleColumns = @getVisibleColumns()
+      @numVisibleColumnsList.push visibleColumns.length
+
+      if @collection.length > 0
+        for i in [0..$elem.length - 1]
+          @sendDataToTemplate $($elem[i]), visibleColumns
+        @bindFunctionLinks()
+        @showHeaderContainer()
+        @showFooterContainer()
+        @checkIfTableNeedsToScroll()
+      else
+        @hideHeaderContainer()
+        @hideFooterContainer()
+        @hideContentContainer()
+        @showEmptyMessageContainer()
+
+    bindFunctionLinks: ->
+      $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
+      visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
+      $linksToBind.each (i, link) ->
+        $currentLink = $(@)
+        alreadyBound = $currentLink.attr('data-already-function-bound')?
+        if not alreadyBound
+          functionKey = $currentLink.attr('data-function-key')
+          functionToBind = visibleColumnsIndex[functionKey].on_click
+          $currentLink.click functionToBind
+          executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
+          if executeOnRender
+            $currentLink.click()
+          $currentLink.attr('data-already-function-bound', 'yes')
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
