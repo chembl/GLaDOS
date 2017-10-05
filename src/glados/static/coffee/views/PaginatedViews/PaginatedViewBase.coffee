@@ -180,22 +180,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
-      # if it is a table, add the corresponding header
-      if $specificElemContainer.is('table')
-
-        header_template = $('#' + $specificElemContainer.attr('data-hb-header-template'))
-        header_row_cont = Handlebars.compile( header_template.html() )
-          base_check_box_id: @getBaseSelectAllCheckBoxID()
-          all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
-          columns: visibleColumns
-          selection_disabled: @disableItemsSelection
-
-        $specificElemContainer.append($(header_row_cont))
-        # make sure that the rows are appended to the tbody, otherwise the striped class won't work
-        $specificElemContainer.append($('<tbody>'))
-        $specificElemContainer.append($('<tbody>'))
-
-
       for item in @collection.getCurrentPage()
 
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)

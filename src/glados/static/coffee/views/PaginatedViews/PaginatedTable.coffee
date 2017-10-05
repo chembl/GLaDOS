@@ -42,12 +42,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
 
       $elem = $(@el).find('.BCK-items-container')
-      visibleColumns = @getVisibleColumns()
-      @numVisibleColumnsList.push visibleColumns.length
+      allColumns = @getAllColumns()
+      @numVisibleColumnsList.push allColumns.length
 
       if @collection.length > 0
         for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i]), visibleColumns
+          @sendDataToTemplate $($elem[i]), allColumns
         @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
@@ -72,6 +72,43 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if executeOnRender
             $currentLink.click()
           $currentLink.attr('data-already-function-bound', 'yes')
+
+    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+
+      templateID = $specificElemContainer.attr('data-hb-template')
+      applyTemplate = Handlebars.compile($('#' + templateID).html())
+      $appendTo = $specificElemContainer
+
+      # if it is a table, add the corresponding header
+      if $specificElemContainer.is('table')
+
+        header_template = $('#' + $specificElemContainer.attr('data-hb-header-template'))
+        header_row_cont = Handlebars.compile( header_template.html() )
+          base_check_box_id: @getBaseSelectAllCheckBoxID()
+          all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
+          columns: visibleColumns
+          selection_disabled: @disableItemsSelection
+
+        $specificElemContainer.append($(header_row_cont))
+        # make sure that the rows are appended to the tbody, otherwise the striped class won't work
+        $specificElemContainer.append($('<tbody>'))
+        $specificElemContainer.append($('<tbody>'))
+
+
+      for item in @collection.getCurrentPage()
+
+        columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
+        idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
+
+        templateParams =
+          base_check_box_id: idValue
+          is_selected: @collection.itemIsSelected(idValue)
+          img_url: glados.Utils.getImgURL(columnsWithValues)
+          columns: columnsWithValues
+          selection_disabled: @disableItemsSelection
+
+        $newItemElem = $(applyTemplate(templateParams))
+        $appendTo.append($newItemElem)
 
 
 #-----------------------------------------------------------------------------------------------------------------------
