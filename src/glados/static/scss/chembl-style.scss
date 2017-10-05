@@ -2251,9 +2251,10 @@ $marvin-size-fullscreen: 91vh;
     }
   }
 
-  .modal-cover{
+  .chembl-modal-cover{
     @extend .iframe-cover;
-    z-index: 999;
+    display: block;
+    z-index: 99999;
   }
 }
 

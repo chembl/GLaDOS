@@ -73,8 +73,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     handleVisibleColumnsChange: ->
 
+      start = (new Date()).getTime()
       @clearTemplates()
       @fillTemplates()
+      end = (new Date()).getTime()
+
+      console.log 'Time in handleVisibleColumnsChange: ', (end - start)
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE

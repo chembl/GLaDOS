@@ -23,6 +23,8 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
     renderModalContent: ->
 
       allColumns = @model.get('all_columns')
+      console.log 'render modal content: '
+      console.log 'allColumns: ', allColumns
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
@@ -31,17 +33,31 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       @initDragging()
 
+      @hidePreloader()
+      thisView = @
+      _.defer ->
+        thisView.hidePreloader()
+
     showHideColumn: (event) ->
 
       $checkbox = $(event.currentTarget)
       colComparator = $checkbox.attr('data-comparator')
       isChecked = $checkbox.is(':checked')
 
-      if colComparator == 'SELECT-ALL'
-        @model.setShowHideAllColumnStatus(isChecked)
-      else
-        @model.setShowHideColumnStatus(colComparator, isChecked)
+      thisView = @
 
+      @showPreloader()
+      if colComparator == 'SELECT-ALL'
+        _.defer ->
+          thisView.model.setShowHideAllColumnStatus(isChecked)
+      else
+        _.defer ->
+          thisView.model.setShowHideColumnStatus(colComparator, isChecked)
+
+    showPreloader: ->$(@el).find('.BCK-loading-cover').show()
+    hidePreloader: ->
+      console.log 'hiding preloader'
+      $(@el).find('.BCK-loading-cover').hide()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Drag and drop
@@ -87,7 +103,13 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         $draggedElem.removeClass('being-dragged')
         $draggableElems.removeClass('dragged-over')
 
-        thisView.model.changeColumnsOrder(thisView.property_receiving_drag, thisView.property_being_dragged)
+        propertyReceivingDrag = thisView.property_receiving_drag
+        propertyBeingDragged = thisView.property_being_dragged
+
+        if propertyReceivingDrag != propertyBeingDragged
+          thisView.showPreloader()
+          _.defer ->
+            thisView.model.changeColumnsOrder(propertyReceivingDrag, propertyBeingDragged)
 
 
 

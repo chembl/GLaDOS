@@ -76,4 +76,5 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           allColumns.splice(i, 0, draggedColumn)
           break
 
+      console.log 'all columns: ', allColumns
       @setVisibleColumns()
