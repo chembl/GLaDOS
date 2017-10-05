@@ -14,7 +14,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       @renderModalTrigger()
       @renderModalContent()
-      @initDragging()
 
     renderModalTrigger: ->
 
@@ -29,6 +28,8 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
+
+      @initDragging()
 
     showHideColumn: (event) ->
 
@@ -71,18 +72,21 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         $draggedOver = $(@)
         propertyName = $draggedOver.attr('data-comparator')
         propertyBeingDragged = thisView.property_being_dragged
+        thisView.property_receiving_drag = propertyName
+
         if propertyName != propertyBeingDragged
           $draggedOver.addClass('dragged-over')
 
         $restOfElements = $draggableElemsContainer.find(':not([data-comparator="' + propertyName + '"])')
         $restOfElements.removeClass('dragged-over')
 
-      $draggableElems.on 'drop', ->
+      $draggableElems.on 'dragend', (event) ->
 
-        $receivingElem = $(@)
-        propertyName = $receivingElem.attr('data-comparator')
-        console.log 'element dropped on me: ', propertyName
+        $draggedElem = $(@)
+        $draggedElem.removeClass('being-dragged')
+        $draggableElems.removeClass('dragged-over')
 
-      $draggableElemsContainer.on 'drop', ->
-        console.log 'DROPPED ON CONTAINER'
+        thisView.model.changeColumnsOrder(thisView.property_receiving_drag, thisView.property_being_dragged)
+
+
 

@@ -54,3 +54,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         col.show = show
 
       @setVisibleColumns()
+
+    changeColumnsOrder: (receivingProperty, draggedProperty) ->
+
+      if receivingProperty == draggedProperty
+        return
+
+      allColumns = @get('all_columns')
+      draggedColumn = undefined
+
+      for i in [0..allColumns.length-1]
+        col = allColumns[i]
+        if col.comparator == draggedProperty
+          draggedColumn = col
+          allColumns.splice(i, 1)
+          break
+
+      for i in [0..allColumns.length-1]
+        col = allColumns[i]
+        if col.comparator == receivingProperty
+          allColumns.splice(i, 0, draggedColumn)
+          break
+
+      @setVisibleColumns()
