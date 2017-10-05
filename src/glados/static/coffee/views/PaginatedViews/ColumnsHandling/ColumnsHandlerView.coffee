@@ -42,6 +42,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       else
         @model.setShowHideColumnStatus(colComparator, isChecked)
 
+
     #-------------------------------------------------------------------------------------------------------------------
     # Drag and drop
     #-------------------------------------------------------------------------------------------------------------------

@@ -2233,6 +2233,11 @@ $marvin-size-fullscreen: 91vh;
 
     }
   }
+
+  .modal-cover{
+    @extend .iframe-cover;
+    z-index: 999;
+  }
 }
 
 .marvin-search-fullscreen {
