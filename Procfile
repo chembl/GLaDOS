@@ -1,1 +1,1 @@
-web: ./manage_glados_no_install.sh runserver $HOSTNAME:$PORT
+web: python ./manage.py runserver $HOSTNAME:$PORT
