@@ -279,6 +279,21 @@ $small-font-size: 0.7rem;
 // d/h = (1-cos(30 degree))/2
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
+#chembl-header-sidenav-pushpin-container{
+  height: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  &.pin-top{
+    margin-top: 0;
+    width: 100%;
+  }
+  &.pinned {
+    display: block;
+    width: 100%;
+  }
+}
 
 #chembl-header-container{
   height: 0;
@@ -299,7 +314,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     padding-top: $chembl-header-padding;
     padding-bottom: $chembl-header-padding;
     width: 100%;
-    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
+    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
     position: relative;
     background: $chembl-teal;
     text-align: center;
@@ -327,8 +342,8 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
           font-size: $search-bar-font-size;
           .search-bar-wrapper{
             position: relative;
-            font-size: inherit !important;
-            font-family: "ChEMBL_Verdana", Verdana, sans-serif !important;
+            font-size: inherit;
+            font-family: "ChEMBL_Verdana", Verdana, sans-serif;
             margin: 0 0 0.4em 0;
             background: white;
             $padding-search-bar: 0.5em;
@@ -337,43 +352,43 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
               padding: 0;
             }
             .chembl-search-bar{
-              font-size: inherit !important;
+              font-size: inherit;
               color: black;
               display: inline-block;
               overflow: hidden;
-              background-color: transparent !important;
-              border: 0!important;
+              background-color: transparent;
+              border: 0;
               padding: 0 $padding-search-bar 0 $padding-search-bar;
               width: calc(100% - #{$padding-search-bar*2});
-              margin: 0.1em 0 0 0 !important;
-              outline: none !important;
-              height: 2em !important;
-              box-shadow: none !important;
+              margin: 0.1em 0 0 0;
+              outline: none;
+              height: 2em;
+              box-shadow: none;
             }
             .search-button{
-              font-size: inherit !important;
+              font-size: inherit;
               display: block;
-              border-radius: 0.3em !important;
+              border-radius: 0.3em;
               margin: 0.2em;
               padding: 0.1em;
               height: 2em;
               i{
                 font-weight: bold;
-                font-size: 1.5em !important;
+                font-size: 1.5em;
                 padding: 0.2em;
               }
             }
 
             .draw-structure{
-              font-size: inherit !important;
+              font-size: inherit;
               display: block;
-              border-radius: 0.3em !important;
+              border-radius: 0.3em;
               margin: 0.2em;
               padding: 0.1em;
               height: 2em;
               i{
                 font-weight: bold;
-                font-size: 0.95em !important;
+                font-size: 0.95em;
               }
             }
 
@@ -416,15 +431,15 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
           &.download-button {
             font-size: 1em;
             p {
-              font-size: 1.4em !important;
+              font-size: 1.4em;
               margin: 0;
             }
             i {
-              font-size: 2em !important;
+              font-size: 2em;
             }
             a {
               color: white;
-              padding: 0.1em !important;
+              padding: 0.1em;
               border-radius: $default-btn-border-radius;
             }
           }
@@ -456,7 +471,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         flex-grow: 10000;
         flex-shrink: 0;
         text-align: center;
-        height: $chembl-header-height !important;
+        height: $chembl-header-height;
       }
       &.right-align-content{
         li{
@@ -473,7 +488,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
           flex-grow: 10000;
           flex-shrink: 0;
           text-align: center;
-          height: $chembl-header-height !important;
+          height: $chembl-header-height;
         }
       }
       &.max-expand-content{
@@ -487,7 +502,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
           flex-grow: 0.01;
           flex-shrink: 0;
           text-align: center;
-          height: $chembl-header-height !important;
+          height: $chembl-header-height;
         }
         &::before {
           display: block;
@@ -495,7 +510,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
           flex-grow: 0.01;
           flex-shrink: 0;
           text-align: center;
-          height: $chembl-header-height !important;
+          height: $chembl-header-height;
         }
       }
     }
@@ -512,7 +527,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     display: block;
     width: 100%;
     .chembl-header{
-      height: calc(#{$chembl-header-height} + #{2*0.1em}) !important;
+      height: calc(#{$chembl-header-height} + #{2*0.1em});
       padding-top: 0.1em;
       padding-bottom: 0.1em;
       .chembl-search-bar-container{
@@ -558,7 +573,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     font-size: $medium-font-size;
     .long-link{
       div{
-        font-size: 2.7em !important;
+        font-size: 2.7em;
       }
     }
     &.pinned {
@@ -567,36 +582,36 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
   @media #{$small-and-down} {
     .inner-row{
-      width: 99% !important;
+      width: 99%;
     }
     .long-link{
       div{
-        font-size: 2.5em !important;
+        font-size: 2.5em;
       }
     }
     font-size: $small-font-size;
     .chembl-search-bar-container{
-      font-size: $search-bar-font-size-small !important;
+      font-size: $search-bar-font-size-small;
     }
     .chembl-header {
-      height: calc(#{$chembl-header-height+4*$search-bar-font-size-small} + #{2*$chembl-header-padding}) !important;
+      height: calc(#{$chembl-header-height+4*$search-bar-font-size-small} + #{2*$chembl-header-padding});
       .hide-before-big-bar{
-        display: block !important;
+        display: block;
       }
     }
     &.pinned{
       .inner-row{
-        width: 99% !important;
+        width: 99%;
         .hide-on-small-pinned{
-          display: none !important;
+          display: none;
         }
       }
       font-size: #{$small-font-size*$chembl-header-shrink-ratio};
       .chembl-search-bar-container {
-        font-size: #{$search-bar-font-size-small/$chembl-header-shrink-ratio} !important;
+        font-size: #{$search-bar-font-size-small/$chembl-header-shrink-ratio};
       }
       .chembl-header{
-        height: calc(#{3*$search-bar-font-size-small/$chembl-header-shrink-ratio} + #{2*0.2em}) !important;
+        height: calc(#{3*$search-bar-font-size-small/$chembl-header-shrink-ratio} + #{2*0.2em});
       }
     }
   }
@@ -610,10 +625,10 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   @media #{$small-and-down} {
     font-size: $small-font-size;
     display: block;
-    height: calc(#{$chembl-header-height+3*$search-bar-font-size} + #{2*$chembl-header-padding}) !important;
+    height: calc(#{$chembl-header-height+3*$search-bar-font-size} + #{2*$chembl-header-padding});
   }
   display: block;
-  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding}) !important;
+  height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
 }
 
 /**
@@ -2205,6 +2220,7 @@ $marvin-size-fullscreen: 91vh;
 }
 
 .iframe-cover-wrapper {
+  display: block;
   position: relative;
   .iframe-cover {
     position: absolute;
@@ -2214,23 +2230,24 @@ $marvin-size-fullscreen: 91vh;
     bottom: 0 !important;
     height: 100%;
     width: 100%;
-    background-color: $chembl-teal;
-    opacity: 0.4;
+    background-color: black;
+    opacity: 0.5;
+    color: white;
+    a, p, i, span{
+      color: white;
+      opacity: 1;
+      outline: none;
+    }
+    .top-right{
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
     .iframe-centered{
       position: absolute;
       top: 15%;
       text-align: center;
       width: 100%;
-      p{
-        color: white;
-        opacity: 1;
-      }
-      a{
-        outline: none;
-        color: white;
-        opacity: 1;
-      }
-
     }
   }
 
@@ -2775,18 +2792,81 @@ span.badge-primary-color-no-float {
   * MarvinJS editor
   * ----------------------------------------------------------------------------------------------------------------------
   */
-.marvinjs-buttons {
 
-  .col {
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
+.marvin-search-container{
+  .marvinjs-buttons, .marvin-container, .marvinjs-buttons-closed{
+    .col {
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+    }
+
+    a {
+      width: 100%;
+    }
   }
 
-  a {
-    width: 100%;
+  &.in-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    .row{
+      padding: 0;
+      margin: 0;
+    }
+    .marvinjs-buttons, .marvin-container, .marvinjs-buttons-closed {
+      .col {
+        padding: 0.1rem;
+      }
+
+      a {
+        width: 100%;
+      }
+      p {
+        font-size: 0.7rem;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    .marvinjs-buttons-closed, .marvinjs-buttons{
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+    .marvin-container{
+      width: 100%;
+      flex-grow: 100;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .iframe-cover-wrapper{
+        width: 100%;
+        flex-grow: 10;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        iframe{
+          width: 100%;
+          flex-grow: 10;
+          flex-shrink: 0;
+        }
+        &::after{
+          flex-grow: 0.001;
+          flex-shrink: 0;
+        }
+      }
+      &::after{
+        flex-grow: 0.001;
+        flex-shrink: 0;
+      }
+    }
   }
 
 }
+
 
 /**
   * results lists menu editor

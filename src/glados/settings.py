@@ -163,8 +163,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV != RunEnvs.PROD
 
 # ----------------------------------------------------------------------------------------------------------------------

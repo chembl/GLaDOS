@@ -9,7 +9,6 @@ def reverse_regex_or_clause(regex_or_clause: str) -> str:
     :return: reversed regex clause eg. Zn|Hf|He|H|As
     """
     reversed_clause = '|'.join(reversed(sorted(regex_or_clause.split('|'))))
-    print(reversed_clause)
     return reversed_clause
 
 

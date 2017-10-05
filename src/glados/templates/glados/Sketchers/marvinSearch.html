@@ -1,52 +1,102 @@
 {% load static %}
-<div class="container">
-  <div class="row">
-    <div class="messages-to-user center-align"></div>
-  </div>
-</div>
-<div class="marvin-preloader row" style="margin: 20px; display: none">
-  Loading molfile . . .
-  <div class="progress">
-    <div class="indeterminate"></div>
-  </div>
-</div>
-<iframe class="sketch-iframe" src="{% static 'marvinjs/editorws.html' %}"
-        style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
-<div class="row marvinjs-buttons">
-  <div class="col offset-s1  s3 center-align">
-    <a class="waves-effect waves-light btn-chembl teal flexmatch-search-btn"><i class="icon icon-functional"
-                                                                             data-icon="1"></i>Search</a>
-  </div>
-  <div class="col s4 center-align">
-    <a class="waves-effect waves-light btn-chembl teal similarity-search-btn"><i class="icon icon-functional"
-                                                                             data-icon="1"></i>Similarity</a>
-  </div>
-  <div class="col s3 center-align">
-    <a class="waves-effect waves-light btn-chembl teal substructure-search-btn"><i class="icon icon-functional"
-                                                                             data-icon="1"></i>Substructure</a>
-  </div>
+<div class="marvin-search-container {{ in_modal|yesno:'in-modal,' }}">
 
-</div>
-<div class="row">
+  <div class="row marvin-container">
 
-  <div class="col offset-s4 s4" class="similarity-search-threshold">
+    <div class="iframe-cover-wrapper">
 
-
-    <div class="similarity-search-threshold">
-
-      <p class="center-align similarity-search-threshold-text" data-hb-template="Handlebars-Marvin-Similarity-Percentage">
-        >= 95%
-      </p>
-
-      <p class="range-field col s8 offset-s2">
-        <div class="BCK-SliderContainer" data-hb-template="Handlebars-Marvin-Similarity-PercentageSlider">
-          <input class="similarity-search-threshold-input" type="range" min="70" max="100" value="95"/>
+      <iframe class="sketch-iframe"  src="{% static 'marvinjs/editorws.html' %}"
+              style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
+      <div class="marvin-preloader iframe-cover" style="display: none;">
+        <div class="iframe-centered">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <p>
+            Loading . . .
+          </p>
         </div>
-      </p>
-
-
+      </div>
+      <div class="messages-to-user iframe-cover" style="display: none;">
+        <div class="top-right">
+          <a class="close-messages-to-user hoverable waves-effect waves-light">
+            <b><i class="material-icons">close</i></b>
+          </a>
+        </div>
+        <div class="message iframe-centered">
+        </div>
+      </div>
+      {%if not in_modal %}
+        <div class="iframe-cover scroll-cover">
+          <div class="iframe-centered">
+            <a>
+              <i class="material-icons">mouse</i> Click here to draw a structure
+            </a>
+          </div>
+        </div>
+      {% endif %}
     </div>
 
   </div>
+    <!-- editor buttons -->
+  {% if not in_modal %}
+    <p><b>Search by:</b></p><br>
+  {% endif %}
+  <div class="row marvinjs-buttons">
+    <div class="col s6 offset-m1  m3 center-align">
+      <a class="waves-effect waves-light btn-chembl teal flexmatch-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Search</a>
+    </div>
+    <div class="col s6 push-m4 m3 center-align">
+      <a class="waves-effect waves-light btn-chembl teal substructure-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Substructure</a>
+    </div>
+    <div class="col s12 pull-m3 m4 center-align">
+      <a class="waves-effect waves-light btn-chembl teal similarity-search-btn"><i class="icon icon-functional"
+                                                                               data-icon="1"></i>Similarity</a>
+    </div>
+    <div class="col m1 hide-on-small-only"></div>
+    <div class="col s12 offset-m4 m4 similarity-search-threshold">
 
+      <div class="similarity-search-threshold">
+
+        <p class="center-align similarity-search-threshold-text" data-hb-template="Handlebars-Marvin-Similarity-Percentage">
+          >= 95%
+        </p>
+
+        <p class="range-field col s8 offset-s2">
+          <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="95"/>
+        </p>
+
+      </div>
+
+    </div>
+  {% if in_modal %}
+    <div class="col s12 center-align">
+      <a class="waves-effect waves-light chembl-teal-text menu-button-close">
+        <i class="material-icons">menu</i>
+        <i class="material-icons">arrow_drop_down</i>
+      </a>
+    </div>
+  {% endif %}
+  </div>
+
+  {% if in_modal %}
+    <div class="row marvinjs-buttons-closed" style="display: none;">
+      <div class="col s12 center-align">
+        <a class="waves-effect waves-light chembl-teal-text menu-button-open">
+          <i class="material-icons">menu</i>
+          <i class="material-icons">arrow_drop_up</i>
+        </a>
+      </div>
+    </div>
+  {% endif %}
 </div>
