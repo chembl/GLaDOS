@@ -6,20 +6,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     bindCollectionEvents: ->
 
-      @collection.on 'all', (event) -> console.log 'event: ', event
-
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
       @collection.on 'reset sort', @render, @
       @collection.on 'request', @showPreloaderHideOthers, @
       @collection.on 'error', @handleError, @
 
-
-
     # ------------------------------------------------------------------------------------------------------------------
     # rendering
     # ------------------------------------------------------------------------------------------------------------------
     renderViewState: ->
-      console.log 'renderViewState'
+
       @clearContentContainer()
       @fillTemplates()
 

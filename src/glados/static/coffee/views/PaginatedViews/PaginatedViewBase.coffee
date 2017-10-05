@@ -125,6 +125,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      id = (new Date()).getTime()
       if not @collection.getMeta('data_loaded')
         return
 
@@ -136,8 +137,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if (@collection.getMeta('page_size') != @currentPageSize)\
       or (@collection.getMeta('current_page') != @currentPageNum)
         @requestCurrentPage()
+        return
 
-      console.log 'render called by: ', arguments.callee.caller.name
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
       @renderViewState()
 
