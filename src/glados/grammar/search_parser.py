@@ -12,6 +12,7 @@ import requests
 import urllib.parse
 import traceback
 import time
+import threading
 import sys
 
 from django.http import HttpResponse
@@ -21,6 +22,8 @@ BASE_EBI_DEV_URL = "https://wwwdev.ebi.ac.uk"
 
 UNICHEM_DS = None
 UNICHEM_DS_LAST_LOAD = 0
+UNICHEM_LOADING_THREAD = None
+UNICHEM_LOADING_THREAD_LOCK = threading.Lock()
 
 CHEMBL_ENTITIES = {
     'target': 'targets',
@@ -33,29 +36,51 @@ CHEMBL_ENTITIES = {
 }
 
 
-def load_unichem_data():
-    global UNICHEM_DS, UNICHEM_DS_LAST_LOAD
-    if time.time() - UNICHEM_DS_LAST_LOAD > 2*pow(60, 2):
+# noinspection PyBroadException
+def __load_unichem_data():
+    global UNICHEM_DS, UNICHEM_LOADING_THREAD, UNICHEM_DS_LAST_LOAD
+    try:
+        print('Loading UNICHEM data . . .')
+        UNICHEM_DS = {}
+        req = requests.get(
+            url=BASE_EBI_URL + '/unichem/rest/src_ids/',
+            headers={'Accept': 'application/json'},
+            timeout=5
+        )
+        json_resp = req.json()
+        for ds_i in json_resp:
+            ds_id_i = ds_i['src_id']
+            req_i = requests.get(url=BASE_EBI_URL + '/unichem/rest/sources/{0}'.format(ds_id_i),
+                                 headers={'Accept': 'application/json'})
+            UNICHEM_DS[ds_id_i] = req_i.json()[0]
+        UNICHEM_DS_LAST_LOAD = time.time()
+        print(' . . . UNICHEM data loaded!')
+    except:
+        print('Error, UNICHEM data is not available!', file=sys.stderr)
+    UNICHEM_LOADING_THREAD = None
+    UNICHEM_LOADING_THREAD_LOCK.release()
+
+
+# noinspection PyBroadException
+def load_unichem_data(wait=True):
+    global UNICHEM_LOADING_THREAD, UNICHEM_LOADING_THREAD_LOCK, UNICHEM_DS_LAST_LOAD
+    if time.time() - UNICHEM_DS_LAST_LOAD > 2*pow(60, 2) and UNICHEM_LOADING_THREAD is None:
         try:
-            print('Loading UNICHEM data . . .')
-            UNICHEM_DS = {}
-            req = requests.get(
-                url=BASE_EBI_URL + '/unichem/rest/src_ids/',
-                headers={'Accept': 'application/json'},
-                timeout=5
-            )
-            json_resp = req.json()
-            for ds_i in json_resp:
-                ds_id_i = ds_i['src_id']
-                req_i = requests.get(url=BASE_EBI_URL + '/unichem/rest/sources/{0}'.format(ds_id_i),
-                                     headers={'Accept': 'application/json'})
-                UNICHEM_DS[ds_id_i] = req_i.json()[0]
-            UNICHEM_DS_LAST_LOAD = time.time()
+            UNICHEM_LOADING_THREAD_LOCK.acquire()
+            if UNICHEM_LOADING_THREAD is None:
+                UNICHEM_LOADING_THREAD = threading.Thread(target=__load_unichem_data,
+                                                          name='unichem-data-loader', daemon=True)
+                UNICHEM_LOADING_THREAD.start()
         except:
-            print('Error, UNICHEM data is not available!', file=sys.stderr)
+            UNICHEM_LOADING_THREAD_LOCK.release()
+    if wait:
+        if UNICHEM_LOADING_THREAD is not None:
+            UNICHEM_LOADING_THREAD.join()
+        return UNICHEM_DS is not None
     return UNICHEM_DS is not None
 
-load_unichem_data()
+
+load_unichem_data(False)
 
 
 def get_unichem_cross_reference_link_data(src_id: str, cross_reference_id: str) -> dict:
