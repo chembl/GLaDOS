@@ -5,19 +5,18 @@ glados.useNameSpace 'glados.helpers',
   # --------------------------------------------------------------------------------------------------------------------
   HeaderHelper: class HeaderHelper
     @initializeHeader = ()->
-      $masthead = $('#masthead-contaniner')
-      $chemblHeaderContainer = $('#chembl-header-container')
-      $chemblHeader = $chemblHeaderContainer.find('.chembl-header')
-      $chemblHeaderSidenavPushpinContainer = $('#chembl-header-sidenav-pushpin-container')
-
-      $chemblBannerSearchBar = $('.card.search-banner')
-      if $chemblBannerSearchBar.length == 1
-        $chemblHeaderSidenavPushpinContainer.pushpin
-          top: $masthead.height()
+      HeaderHelper.$masthead = $('#masthead-contaniner')
+      HeaderHelper.$chemblHeaderContainer = $('#chembl-header-container')
+      HeaderHelper.$chemblHeader = HeaderHelper.$chemblHeaderContainer.find('.chembl-header')
+      HeaderHelper.$chemblHeaderSidenavPushpinContainer = $('#chembl-header-sidenav-pushpin-container')
+      HeaderHelper.$chemblBannerSearchBar = $('.card.search-banner')
+      if HeaderHelper.$chemblBannerSearchBar.length == 1
+        HeaderHelper.$chemblHeaderSidenavPushpinContainer.pushpin
+          top: HeaderHelper.$masthead.height()
           offset: 0
-        $chemblHeaderContainer.pushpin
-          top: $chemblBannerSearchBar.offset().top + $chemblBannerSearchBar.height()-$chemblHeader.height()
+        HeaderHelper.$chemblHeaderContainer.pushpin
+          top: HeaderHelper.$chemblBannerSearchBar.offset().top + HeaderHelper.$chemblBannerSearchBar.height()-HeaderHelper.$chemblHeader.height()
           offset: 0
       else
-        $chemblHeaderContainer.pushpin
-          top: $masthead.height()
+        HeaderHelper.$chemblHeaderContainer.pushpin
+          top: HeaderHelper.$masthead.height()

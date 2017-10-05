@@ -141,7 +141,7 @@ a:hover {
 }
 
 /**
-* Side Menu bar
+* Chembl bar & and Side nav bar
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
@@ -151,8 +151,19 @@ $sidenav-links-lineheight: 1.1em;
 $sidenav-links-v-padding: 8px;
 $sidenav-badge-padding: 3px;
 
+$chembl-header-height: 6em;
+$chembl-header-padding: 0.4em;
+$search-bar-font-size: 1em;
+$search-bar-font-size-small: 1.3em;
+$chembl-header-shrink-ratio: 0.65;
+$large-font-size: 0.9rem;
+$medium-font-size: 0.8rem;
+$small-font-size: 0.7rem;
+// d/h = (1-cos(30 degree))/2
+$hexagon-lateral-distance-proportion: 0.0669872981;
+
 .side-nav {
-  border: none !important;
+  border: none;
   width: $side-nav-width;
   height: 100%;
   padding: 0px;
@@ -169,24 +180,31 @@ $sidenav-badge-padding: 3px;
   }
 
   li.menu-logo {
+    font-size: $large-font-size;
     text-align: center;
     background-color: $chembl-teal;
     border-bottom: 1px solid #d1d1d1;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    padding: 0px;
-    margin-bottom: 1%;
-    &:hover {
-      background-color: $chembl-teal;
-    }
-    height: 90px;
+    padding: 0;
+    margin: 0;
+    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
     a {
-      height: 100%;
-      padding: 0px;
+      font-size: 1em;
+      padding: 0;
+      margin: auto;
+      text-align: center;
     }
-    img {
-      height: 90%;
-      padding: 5px;
-      margin-top: 5px;
+    .chembl-logo-header{
+      margin: 0.5em auto 0.5em auto;
+      display: block;
+      height: 5em;
+      width: 5em;
+      padding: 0.5em;
+      //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
+    }
+    &.pinned-non-materialize{
+      font-size: #{$large-font-size*$chembl-header-shrink-ratio};
+      height: calc(#{$chembl-header-height} + #{2*0.1em});
     }
   }
   li {
@@ -209,17 +227,17 @@ $sidenav-badge-padding: 3px;
       }
 
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      min-height: inherit !important;
-      line-height: $sidenav-links-lineheight !important;
-      padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding !important;
-      padding-left: 2*$sidenav-links-side-padding !important;
+      min-height: inherit;
+      line-height: $sidenav-links-lineheight;
+      padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding;
+      padding-left: 2*$sidenav-links-side-padding;
 
       span.badge {
-        margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2}) !important;
+        margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2});
         border-radius: 2*$sidenav-badge-padding;
         padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
         &.new:after {
-          content: "" !important;
+          content: "";
         }
       }
     }
@@ -244,11 +262,6 @@ footer {
   }
 }
 
-/**
-* Chembl bar
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
 
@@ -267,17 +280,6 @@ header .row {
     padding-left: 0 !important;
   }
 }
-
-$chembl-header-height: 6em;
-$chembl-header-padding: 0.4em;
-$search-bar-font-size: 1em;
-$search-bar-font-size-small: 1.3em;
-$chembl-header-shrink-ratio: 0.65;
-$large-font-size: 0.9rem;
-$medium-font-size: 0.8rem;
-$small-font-size: 0.7rem;
-// d/h = (1-cos(30 degree))/2
-$hexagon-lateral-distance-proportion: 0.0669872981;
 
 #chembl-header-sidenav-pushpin-container{
   height: 0;
@@ -405,11 +407,6 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
               }
             }
           }
-        }
-        .wellcome-trust-img{
-          display: block;
-          height: 1.8em;
-          margin: 0 0.5em 0 0.5em;
         }
         a{
           display: block;

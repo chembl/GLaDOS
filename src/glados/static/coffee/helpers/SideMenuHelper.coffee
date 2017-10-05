@@ -8,11 +8,30 @@ glados.useNameSpace 'glados.helpers',
     @initializeSideMenu = ()->
 
       SideMenuHelper.$side_menu = $('.side-nav')
+      SideMenuHelper.$chemblLogo = SideMenuHelper.$side_menu.find('.menu-logo')
+      SideMenuHelper.$chemblLogoImg = SideMenuHelper.$chemblLogo.find('img')
       SideMenuHelper.initializeTopMenuController()
       SideMenuHelper.$side_menu.css
         display: 'block'
       $(".button-collapse").sideNav()
-      
+      SideMenuHelper.observeMutationsChemblHeader()
+
+    @observeMutationsChemblHeader: ->
+      mutationObserver = new MutationObserver (mutations)->
+        isPinned = false
+        mutations.forEach (mutation)->
+          isPinned = $(mutation.target).hasClass('pinned')
+        console.warn 'PINNED', isPinned
+        if isPinned
+          SideMenuHelper.$chemblLogo.addClass('pinned-non-materialize')
+        else
+          SideMenuHelper.$chemblLogo.removeClass('pinned-non-materialize')
+      mutationObserver.observe HeaderHelper.$chemblHeaderContainer[0], {
+        attributes: true
+        attributeFilter: ['class']
+      }
+
+
     @initializeTopMenuController = ->
 
       # This changes the padding of the side nav when the window is scrolled.
@@ -21,6 +40,7 @@ glados.useNameSpace 'glados.helpers',
 
       maxPadding = $('#masthead-contaniner').height()
       win.resize ->
+
         top = win.scrollTop()
         maxPadding = $('#masthead-contaniner').height()
         footer_h = $('footer').height()
@@ -29,13 +49,14 @@ glados.useNameSpace 'glados.helpers',
           'paddingTop': maxPadding - top + 'px'
 
       scrollHandler = ->
-        top = win.scrollTop()
+        _.defer ->
+          top = win.scrollTop()
 
-        if top > maxPadding
-          SideMenuHelper.$side_menu .css
-            'paddingTop': '0px'
-        else:
-          SideMenuHelper.$side_menu .css
-            'paddingTop': maxPadding - top + 'px'
+          if top > maxPadding
+            SideMenuHelper.$side_menu .css
+              'paddingTop': '0px'
+          else:
+            SideMenuHelper.$side_menu .css
+              'paddingTop': maxPadding - top + 'px'
       win.scroll scrollHandler
       scrollHandler()
