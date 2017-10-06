@@ -1,8 +1,9 @@
 {% load static %}
 
   <li class="menu-logo">
-    <a href="{% url 'main' %}">
-      <img title="Go to the ChEMBL homepage" alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
+    <a class="hoverable waves-effect waves-teal" href="{% url 'main' %}">
+      <img title="Go to the ChEMBL homepage" class="chembl-logo-header" alt="ChEMBL logo"
+           src="{% static 'img/chembl_logo.png' %}"/>
     </a>
   </li>
   <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/unichem">UniChem</a></li>
