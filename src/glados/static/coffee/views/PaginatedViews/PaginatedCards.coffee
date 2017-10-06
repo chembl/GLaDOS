@@ -60,8 +60,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
     sleepView: ->
+
       if @hasCustomElementView()
         @sleepCustomElementviews()
+
+      glados.views.PaginatedViews.PaginatedViewBase.sleepView.call(@)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Columns initalisation
