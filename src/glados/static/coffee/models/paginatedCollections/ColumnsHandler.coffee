@@ -24,8 +24,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
       @set('all_columns', allColumns)
       @setColumnsPositions()
-
       @setVisibleColumns()
+      @indexAllColumns()
+
+    indexAllColumns: ->
+
+      allColumns = @get('all_columns')
+      @set('columns_index', _.indexBy(allColumns, 'comparator'))
 
     setColumnsPositions: ->
 
@@ -41,9 +46,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setShowHideColumnStatus: (identifier, show) ->
 
-      allColumns = @get('all_columns')
-      changedColumn = _.find(allColumns, (col) -> col.comparator == identifier)
-      changedColumn.show = show
+      allColumnsIndex = @get('columns_index')
+      allColumnsIndex[identifier].show = show
+
+      if show
+        enter = [identifier]
+        @set('enter', enter)
+      else
+        exit = [identifier]
+        @set('exit', exit)
 
       @setVisibleColumns()
 
@@ -76,5 +87,4 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           allColumns.splice(i, 0, draggedColumn)
           break
 
-      console.log 'all columns: ', allColumns
       @setVisibleColumns()
