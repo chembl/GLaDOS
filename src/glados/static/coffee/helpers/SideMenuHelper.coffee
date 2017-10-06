@@ -17,19 +17,19 @@ glados.useNameSpace 'glados.helpers',
       SideMenuHelper.observeMutationsChemblHeader()
 
     @observeMutationsChemblHeader: ->
-      mutationObserver = new MutationObserver (mutations)->
-        isPinned = false
-        mutations.forEach (mutation)->
-          isPinned = $(mutation.target).hasClass('pinned')
-        console.warn 'PINNED', isPinned
+      updateSideNavHeader = ->
+        isPinned = HeaderHelper.$chemblHeaderContainer.hasClass('pinned')
         if isPinned
           SideMenuHelper.$chemblLogo.addClass('pinned-non-materialize')
         else
           SideMenuHelper.$chemblLogo.removeClass('pinned-non-materialize')
+
+      mutationObserver = new MutationObserver updateSideNavHeader
       mutationObserver.observe HeaderHelper.$chemblHeaderContainer[0], {
         attributes: true
         attributeFilter: ['class']
       }
+      updateSideNavHeader()
 
 
     @initializeTopMenuController = ->
