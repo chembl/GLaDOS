@@ -62,15 +62,34 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     handleColumnsOrderChange: ->
       start = (new Date()).getTime()
 
-      comparators = (col.comparator for col in @getAllColumns())
-#      $(@el).find('.BCK-sortable-pag-table-header').sort (a, b) ->
+      columnsIndex = @columnsHandler.get('columns_index')
 
+      $headersRow = $(@el).find('.BCK-headers-row')
+      $headers = $(@el).find('.BCK-sortable-pag-table-header')
 
+      compareFunction = (a, b) ->
 
-      console.log 'comparators: ', comparators
+        comparatorA = $(a).attr('data-comparator')
+        comparatorB = $(b).attr('data-comparator')
+
+        positionA = columnsIndex[comparatorA].position
+        positionB = columnsIndex[comparatorB].position
+
+        return positionA - positionB
+
+      $headers.sort compareFunction
+      $headersRow.append($headers)
+
+      $itemsRows = $(@el).find('tr.BCK-items-row')
+      $itemsRows.each ->
+        $currentRow = $(@)
+        $cells = $currentRow.find('td.BCK-sortable-pag-table-cell')
+        $cells.sort compareFunction
+        $currentRow.append $cells
 
       end = (new Date()).getTime()
       console.log 'Time in handleColumnsOrderChange: ', (end - start)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns

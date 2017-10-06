@@ -67,7 +67,7 @@
 
 <script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
 
-    <tr>
+    <tr class="BCK-items-row">
       {{#unless selection_disabled}}
       <td>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
@@ -79,7 +79,8 @@
       {{#each columns}}
 
           <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
-            {{#unless this.show}}hidden_cell{{/unless}}" data-comparator="{{this.comparator}}">
+            {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
+              data-comparator="{{this.comparator}}">
 
           {{#if this.img_url}}
             <img src="{{this.img_url}}" height="75px" width="75px" ><br>
@@ -116,7 +117,7 @@
 
   <thead>
 
-    <tr >
+    <tr class="BCK-headers-row" >
 
       {{#unless selection_disabled}}
       <th>

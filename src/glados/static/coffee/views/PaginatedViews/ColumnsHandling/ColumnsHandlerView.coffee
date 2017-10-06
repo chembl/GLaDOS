@@ -23,7 +23,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     renderModalContent: ->
 
-      console.log 'render modal content'
       allColumns = @model.get('all_columns')
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
