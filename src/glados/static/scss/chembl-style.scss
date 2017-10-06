@@ -3371,7 +3371,15 @@ $facets-width-large: 21%;
   padding: 4px;
   .pg-table{
     margin-left: 8px;
+
+    .hidden_header, .hidden_cell{
+      display: none;
+    }
+
   }
+   .hidden_list_prop{
+     display: none;
+   }
   .pagination{
     margin: 0;
     li{

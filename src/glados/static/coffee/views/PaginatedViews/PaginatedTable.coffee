@@ -104,6 +104,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         columnsWithValues = glados.Utils.getColumnsWithValues(columns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
+        console.log 'columnsWithValues: ', columnsWithValues
+
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)

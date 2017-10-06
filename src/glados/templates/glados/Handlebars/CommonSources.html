@@ -78,9 +78,9 @@
 
       {{#each columns}}
 
+          <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
+            {{#unless this.show}}hidden_cell{{/unless}}" >
 
-
-          <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}" >
           {{#if this.img_url}}
             <img src="{{this.img_url}}" height="75px" width="75px" ><br>
           {{/if}}
@@ -128,7 +128,7 @@
       {{/unless}}
 
       {{#each columns}}
-        <th>
+        <th class="{{#unless this.show}}hidden_header{{/unless}}">
 
            <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
             <thead>
@@ -176,13 +176,15 @@
     <p>
 
       {{#each columns}}
-        <b>{{this.name_to_show}}:</b>
-        {{#if this.has_link}}
-          <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-        {{else}}
-          {{this.value}}
-        {{/if}}
-        <br>
+        <div class="{{#unless this.show}}hidden_list_prop{{/unless}}">
+          <b>{{this.name_to_show}}:</b>
+          {{#if this.has_link}}
+            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          {{else}}
+            {{this.value}}
+          {{/if}}
+          <br>
+        </div>
 
       {{/each}}
 
