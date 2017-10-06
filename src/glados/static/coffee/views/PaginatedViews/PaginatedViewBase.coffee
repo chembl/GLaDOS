@@ -74,9 +74,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
 
-      @columnsHandler.on 'change:exit change:enter', @handleColumnsChange, @
+      @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
+      @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
+        @handleColumnsOrderChange, @
 
-    handleColumnsChange: ->
+    handleShowHideColumns: ->
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE

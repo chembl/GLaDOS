@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       @modalId = (new Date()).getTime()
       @render()
       @model.on 'change:visible_columns', @renderModalContent, @
+      @model.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @renderModalContent, @
 
     events:
       'click .BCK-show-hide-column': 'showHideColumn'
@@ -22,6 +23,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     renderModalContent: ->
 
+      console.log 'render modal content'
       allColumns = @model.get('all_columns')
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
@@ -100,9 +102,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         propertyBeingDragged = thisView.property_being_dragged
 
         if propertyReceivingDrag != propertyBeingDragged
-          thisView.showPreloader()
-          _.defer ->
-            thisView.model.changeColumnsOrder(propertyReceivingDrag, propertyBeingDragged)
+          thisView.model.changeColumnsOrder(propertyReceivingDrag, propertyBeingDragged)
 
 
 

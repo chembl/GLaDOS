@@ -37,8 +37,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     setColumnsPositions: ->
 
       allColumns = @get('all_columns')
+      positionsChanged = false
       for i in [1..allColumns.length]
+
+        if allColumns[i-1].position != i
+          positionsChanged = true
         allColumns[i-1].position = i
+
+      if positionsChanged
+        console.log 'positions changed'
+        @trigger(glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED)
 
     setVisibleColumns: ->
 
@@ -86,6 +94,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     changeColumnsOrder: (receivingProperty, draggedProperty) ->
 
+      console.log 'changeColumnsOrder'
       if receivingProperty == draggedProperty
         return
 
@@ -106,3 +115,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           break
 
       @setVisibleColumns()
+      @setColumnsPositions()
+
+glados.models.paginatedCollections.ColumnsHandler.EVENTS =
+  COLUMNS_ORDER_CHANGED: 'COLUMNS_ORDER_CHANGED'

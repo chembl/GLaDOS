@@ -38,12 +38,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getDefaultColumns: -> @collection.getMeta('columns_description').Table.Default
     getAdditionalColumns: -> @collection.getMeta('columns_description').Table.Additional
 
-    handleColumnsChange: ->
+    handleShowHideColumns: ->
 
       start = (new Date()).getTime()
 
       exitColsComparators = @columnsHandler.get('exit')
-      console.log 'exitColsComparators: ', exitColsComparators
       for comparator in exitColsComparators
 
         $(@el).find('th[data-comparator="' + comparator + '"]').addClass('hidden_header')
@@ -51,7 +50,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').addClass('hidden_list_prop')
 
       enterColsComparators = @columnsHandler.get('enter')
-      console.log 'enterColsComparators: ', enterColsComparators
       for comparator in enterColsComparators
 
         $(@el).find('th[data-comparator="' + comparator + '"]').removeClass('hidden_header')
@@ -59,8 +57,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
 
       end = (new Date()).getTime()
-
       console.log 'Time in handleVisibleColumnsChange: ', (end - start)
+
+    handleColumnsOrderChange: ->
+      start = (new Date()).getTime()
+
+      comparators = (col.comparator for col in @getAllColumns())
+#      $(@el).find('.BCK-sortable-pag-table-header').sort (a, b) ->
+
+
+
+      console.log 'comparators: ', comparators
+
+      end = (new Date()).getTime()
+      console.log 'Time in handleColumnsOrderChange: ', (end - start)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
