@@ -26,6 +26,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setColumnsPositions()
       @setVisibleColumns()
       @indexAllColumns()
+      @set('enter', [])
+      @set('exit', [])
 
     indexAllColumns: ->
 
@@ -51,10 +53,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if show
         enter = [identifier]
-        @set('enter', enter)
+        @set
+          enter: enter
+          exit: []
       else
         exit = [identifier]
-        @set('exit', exit)
+        @set
+          enter: []
+          exit: exit
 
       @setVisibleColumns()
 

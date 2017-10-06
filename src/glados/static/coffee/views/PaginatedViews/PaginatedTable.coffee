@@ -33,10 +33,35 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Columns initalisation
+    # Columns handling
     # ------------------------------------------------------------------------------------------------------------------
     getDefaultColumns: -> @collection.getMeta('columns_description').Table.Default
     getAdditionalColumns: -> @collection.getMeta('columns_description').Table.Additional
+
+    handleColumnsChange: ->
+
+      start = (new Date()).getTime()
+
+      exitColsComparators = @columnsHandler.get('exit')
+      console.log 'exitColsComparators: ', exitColsComparators
+      for comparator in exitColsComparators
+
+        $(@el).find('th[data-comparator="' + comparator + '"]').addClass('hidden_header')
+        $(@el).find('td[data-comparator="' + comparator + '"]').addClass('hidden_header')
+        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').addClass('hidden_header')
+
+      enterColsComparators = @columnsHandler.get('enter')
+      console.log 'enterColsComparators: ', enterColsComparators
+      for comparator in enterColsComparators
+
+        $(@el).find('th[data-comparator="' + comparator + '"]').removeClass('hidden_header')
+        $(@el).find('td[data-comparator="' + comparator + '"]').removeClass('hidden_header')
+        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_header')
+
+      end = (new Date()).getTime()
+
+      console.log 'Time in handleVisibleColumnsChange: ', (end - start)
+
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
     # ------------------------------------------------------------------------------------------------------------------
@@ -113,7 +138,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $newItemElem = $(applyTemplateTo(templateParams))
         $appendTo.append($newItemElem)
-
 
     bindFunctionLinks: ->
       $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')

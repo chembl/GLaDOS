@@ -74,16 +74,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
 
-      @columnsHandler.on 'change:visible_columns', @handleVisibleColumnsChange, @
+      @columnsHandler.on 'change:exit change:enter', @handleColumnsChange, @
 
-    handleVisibleColumnsChange: ->
-
-      start = (new Date()).getTime()
-      @clearTemplates()
-      @fillTemplates()
-      end = (new Date()).getTime()
-
-      console.log 'Time in handleVisibleColumnsChange: ', (end - start)
+    handleColumnsChange: ->
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE

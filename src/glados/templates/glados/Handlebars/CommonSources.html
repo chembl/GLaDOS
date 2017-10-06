@@ -79,7 +79,7 @@
       {{#each columns}}
 
           <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
-            {{#unless this.show}}hidden_cell{{/unless}}" >
+            {{#unless this.show}}hidden_cell{{/unless}}" data-comparator="{{this.comparator}}">
 
           {{#if this.img_url}}
             <img src="{{this.img_url}}" height="75px" width="75px" ><br>
@@ -128,7 +128,7 @@
       {{/unless}}
 
       {{#each columns}}
-        <th class="{{#unless this.show}}hidden_header{{/unless}}">
+        <th class="{{#unless this.show}}hidden_header{{/unless}}" data-comparator="{{this.comparator}}">
 
            <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
             <thead>
@@ -176,7 +176,7 @@
     <p>
 
       {{#each columns}}
-        <div class="{{#unless this.show}}hidden_list_prop{{/unless}}">
+        <div class="{{#unless this.show}}hidden_list_prop{{/unless}}" data-comparator="{{this.comparator}}">
           <b>{{this.name_to_show}}:</b>
           {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>

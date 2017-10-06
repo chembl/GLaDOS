@@ -23,8 +23,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
     renderModalContent: ->
 
       allColumns = @model.get('all_columns')
-      console.log 'render modal content: '
-      console.log 'allColumns: ', allColumns
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
@@ -46,18 +44,13 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       thisView = @
 
-      @showPreloader()
       if colComparator == 'SELECT-ALL'
-        _.defer ->
-          thisView.model.setShowHideAllColumnStatus(isChecked)
+        thisView.model.setShowHideAllColumnStatus(isChecked)
       else
-        _.defer ->
-          thisView.model.setShowHideColumnStatus(colComparator, isChecked)
+        thisView.model.setShowHideColumnStatus(colComparator, isChecked)
 
     showPreloader: ->$(@el).find('.BCK-loading-cover').show()
-    hidePreloader: ->
-      console.log 'hiding preloader'
-      $(@el).find('.BCK-loading-cover').hide()
+    hidePreloader: -> $(@el).find('.BCK-loading-cover').hide()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Drag and drop
