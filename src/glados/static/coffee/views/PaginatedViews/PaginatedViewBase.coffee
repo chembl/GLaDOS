@@ -407,6 +407,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $contentCont.show()
 
     clearContentContainer: ->
+
+      @latestPageRendered = undefined
+      @latestPageSizeRendered = undefined
+
       $(@el).find('.BCK-items-container').empty()
       @hideEmptyMessageContainer()
       @showContentContainer()

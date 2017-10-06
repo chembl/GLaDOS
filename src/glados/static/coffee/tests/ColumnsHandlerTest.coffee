@@ -28,9 +28,36 @@ describe 'Columns Handler', ->
 
       # hide a visible column
       visibleColumnIdentifier = _.find(allColumns, (col) -> col.show).comparator
-      columnsHandler.setShowHideColumnStatus(hiddenColumnIdentifier, false)
+      columnsHandler.setShowHideColumnStatus(visibleColumnIdentifier, false)
       expect(columnsIndex[visibleColumnIdentifier].show).toBe(false)
       expect(columnsHandler.get('exit')[0]).toBe(visibleColumnIdentifier)
+
+    it 'Changes the state when showing or hiding ALL columns', ->
+
+      allColumns = columnsHandler.get('all_columns')
+
+      # show all columns
+      enterComparatorsMustBe = (col.comparator for col in allColumns when not col.show)
+      columnsHandler.setShowHideAllColumnStatus(true)
+      enterComparators = columnsHandler.get('enter')
+      exitComparators = columnsHandler.get('exit')
+      expect(TestsUtils.listsAreEqual(enterComparatorsMustBe, enterComparators)).toBe(true)
+      expect(exitComparators.length).toBe(0)
+
+      for col in allColumns
+        expect(col.show).toBe(true)
+
+      # hide all columns
+      exitComparatorsMustBe = (col.comparator for col in allColumns when col.show)
+      columnsHandler.setShowHideAllColumnStatus(false)
+      enterComparators = columnsHandler.get('enter')
+      exitComparators = columnsHandler.get('exit')
+      expect(TestsUtils.listsAreEqual(exitComparatorsMustBe, exitComparators)).toBe(true)
+      expect(enterComparators.length).toBe(0)
+
+      for col in allColumns
+        expect(col.show).toBe(false)
+
 
     it 'Changes the order of the columns', ->
 

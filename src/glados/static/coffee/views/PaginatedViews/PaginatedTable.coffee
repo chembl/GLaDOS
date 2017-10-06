@@ -47,16 +47,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       for comparator in exitColsComparators
 
         $(@el).find('th[data-comparator="' + comparator + '"]').addClass('hidden_header')
-        $(@el).find('td[data-comparator="' + comparator + '"]').addClass('hidden_header')
-        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').addClass('hidden_header')
+        $(@el).find('td[data-comparator="' + comparator + '"]').addClass('hidden_cell')
+        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').addClass('hidden_list_prop')
 
       enterColsComparators = @columnsHandler.get('enter')
       console.log 'enterColsComparators: ', enterColsComparators
       for comparator in enterColsComparators
 
         $(@el).find('th[data-comparator="' + comparator + '"]').removeClass('hidden_header')
-        $(@el).find('td[data-comparator="' + comparator + '"]').removeClass('hidden_header')
-        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_header')
+        $(@el).find('td[data-comparator="' + comparator + '"]').removeClass('hidden_cell')
+        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
 
       end = (new Date()).getTime()
 

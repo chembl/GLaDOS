@@ -67,8 +67,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     setShowHideAllColumnStatus: (show) ->
 
       allColumns = @get('all_columns')
+      identifiers = []
       for col in allColumns
-        col.show = show
+        if col.show != show
+          col.show = show
+          identifiers.push col.comparator
+
+      if show
+        @set
+          enter: identifiers
+          exit: []
+      else
+        @set
+          enter: []
+          exit: identifiers
 
       @setVisibleColumns()
 
