@@ -56,6 +56,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('td[data-comparator="' + comparator + '"]').removeClass('hidden_cell')
         $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
 
+      @bindFunctionLinks()
       end = (new Date()).getTime()
       console.log 'Time in handleVisibleColumnsChange: ', (end - start)
 
@@ -168,16 +169,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $appendTo.append($newItemElem)
 
     bindFunctionLinks: ->
+
       $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
-      visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
+      functionColumnsIndex = _.indexBy(@getAllColumns(), 'function_key')
       $linksToBind.each (i, link) ->
+
         $currentLink = $(@)
+        if not $currentLink.is(":visible")
+          return
+
         alreadyBound = $currentLink.attr('data-already-function-bound')?
         if not alreadyBound
+
           functionKey = $currentLink.attr('data-function-key')
-          functionToBind = visibleColumnsIndex[functionKey].on_click
+          functionToBind = functionColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
-          executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
+          executeOnRender = functionColumnsIndex[functionKey].execute_on_render
+
           if executeOnRender
             $currentLink.click()
           $currentLink.attr('data-already-function-bound', 'yes')
