@@ -643,6 +643,10 @@
 
       <div class="show-hide-columns">
 
+        <div class="row">
+          You may need to scroll the table horizontally to see all columns. Drag and drop items to change their order.
+        </div>
+
         <div class="row center-align">
 
             <input type="checkbox" class="BCK-show-hide-column filled-in"
@@ -658,20 +662,36 @@
           <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
 
             <div class="item-content">
-              <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                     data-comparator='{{this.comparator}}'
-                     {{#if this.show}} checked="checked" {{/if}}
-              />
-              <label for="check-{{this.comparator}}">{{this.name_to_show}}</label> p:{{this.position}}
+
+              <div class="item-checkbox">
+
+
+                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                       data-comparator='{{this.comparator}}'
+                       {{#if this.show}} checked="checked" {{/if}}
+                />
+
+                  <label for="check-{{this.comparator}}">
+                  {{this.position}}.
+                  </label>
+
+
+
+
+              </div>
+
+
+              <div class="property-name">{{this.name_to_show}}</div>
+
+
+
             </div>
+
           </div>
+
           {{/each}}
         </div>
 
-      </div>
-
-      <div class="row">
-        You may need to scroll the table horizontally to see all columns.
       </div>
 
       <div class='chembl-modal-cover BCK-loading-cover'> Loading... </div>

@@ -3397,12 +3397,31 @@ $facets-width-large: 21%;
 
     .sortable-item {
 
+      padding: 0 0.25rem;
       .item-content {
         margin-top: 2px;
         border-radius: $default-btn-border-radius;
-        border: 1px solid color('grey', 'lighten-1');
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        input{
+          width: 0;
+          height: 0;
+        }
+
+        label{
+          margin-top: 1px;
+          padding-left: 25px;
+        }
+
+        .item-checkbox, .property-name{
+          display: inline-block;
+        }
+
         &:hover {
-          border: 1px solid color($primary-color-name, 'accent-4');
+          background-color: color('grey', 'lighten-3');
         }
 
         [type="checkbox"]{
@@ -3411,11 +3430,15 @@ $facets-width-large: 21%;
       }
 
       &.dragged-over{
-        background-color: red;
+        .item-content {
+          background-color: color('grey', 'base');
+        }
       }
 
       &.being-dragged{
-        background-color: blue;
+        .item-content {
+          background-color: color('grey', 'base');
+        }
       }
     }
 
