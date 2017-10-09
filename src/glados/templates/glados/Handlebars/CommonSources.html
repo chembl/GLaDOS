@@ -163,7 +163,7 @@
 
 <script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
 
-  <li class="collection-item">
+  <li class="collection-item BCK-items-li">
 
     {{#unless selection_disabled}}
     <p>
@@ -177,7 +177,8 @@
     <p>
 
       {{#each columns}}
-        <div class="{{#unless this.show}}hidden_list_prop{{/unless}}" data-comparator="{{this.comparator}}">
+        <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
+             data-comparator="{{this.comparator}}">
           <b>{{this.name_to_show}}:</b>
           {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>

@@ -40,8 +40,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     handleShowHideColumns: ->
 
-      start = (new Date()).getTime()
-
       exitColsComparators = @columnsHandler.get('exit')
       for comparator in exitColsComparators
 
@@ -57,11 +55,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
 
       @bindFunctionLinks()
-      end = (new Date()).getTime()
-      console.log 'Time in handleVisibleColumnsChange: ', (end - start)
 
     handleColumnsOrderChange: ->
-      start = (new Date()).getTime()
 
       columnsIndex = @columnsHandler.get('columns_index')
 
@@ -88,8 +83,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $cells.sort compareFunction
         $currentRow.append $cells
 
-      end = (new Date()).getTime()
-      console.log 'Time in handleColumnsOrderChange: ', (end - start)
+      $listItems = $(@el).find('li.BCK-items-li')
+      $listItems.each ->
+        $currentItem = $(@)
+        $divs = $currentItem.find('div.BCK-sortable-pag-list-prop')
+        $divs.sort compareFunction
+        $currentItem.append $divs
+
 
 
     # ------------------------------------------------------------------------------------------------------------------

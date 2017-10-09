@@ -13,7 +13,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
 
     requestCurrentPage: ->
-      console.log 'requesting current page'
       @collection.setPage(@currentPageNum, doFetch=true, testMode=false, customPageSize=@currentPageSize)
 
     getPageEvent: (event) ->
