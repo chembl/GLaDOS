@@ -19,18 +19,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isTable()
         @initialiseColumnsModal() unless @disableColumnsSelection
 
-      @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
       @initTooltipFunctions()
-
-      if @customRenderEvents?
-        @collection.on @customRenderEvents, @.render, @
-      else if @isInfinite()
-        @collection.on 'sync do-repaint', @.render, @
-      else
-        @collection.on 'reset sort', @render, @
-        @collection.on 'request', @showPreloaderHideOthers, @
-
-      @collection.on 'error', @handleError, @
+      @bindCollectionEvents()
 
       @$zoomControlsContainer = arguments[0].zoom_controls_container
       if @collection.getMeta('custom_default_card_sizes')?
@@ -58,6 +48,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @renderAtInit
         @render()
 
+    bindCollectionEvents: ->
+
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
+
+      if @customRenderEvents?
+        @collection.on @customRenderEvents, @.render, @
+      else if @isInfinite()
+        @collection.on 'sync do-repaint', @.render, @
+      else
+        @collection.on 'reset sort', @render, @
+        @collection.on 'request', @showPreloaderHideOthers, @
+
+      @collection.on 'error', @handleError, @
+
+
     initColumnsHandler: ->
 
       defaultColumns = @getDefaultColumns()
@@ -69,12 +74,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
 
-      @columnsHandler.on 'change:visible_columns', @handleVisibleColumnsChange, @
+      @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
+      @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
+        @handleColumnsOrderChange, @
 
-    handleVisibleColumnsChange: ->
-
-      @clearTemplates()
-      @fillTemplates()
+    handleShowHideColumns: ->
 
     isCards: ->
       return @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
@@ -127,15 +131,24 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if (@collection.getMeta('page_size') != @currentPageSize)\
       or (@collection.getMeta('current_page') != @currentPageNum)
         @requestCurrentPage()
+        return
+
+      #Avoid rendering the same thing again. For example, when reset triggered render and also it was render at init.
+      if (@latestPageRendered == @currentPageNum) and (@latestPageSizeRendered == @currentPageSize)
+        return
 
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
       @renderViewState()
 
+      @latestPageRendered = @currentPageNum
+      @latestPageSizeRendered = @currentPageSize
+
     renderViewState: ->
 
-      return
-
     sleepView: ->
+
+      @latestPageRendered = undefined
+      @latestPageSizeRendered = undefined
 
     wakeUpView: -> @requestCurrentPage()
 
@@ -157,30 +170,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.length > 0
         for i in [0..$elem.length - 1]
           @sendDataToTemplate $($elem[i]), visibleColumns
-        @bindFunctionLinks()
         @showHeaderContainer()
         @showFooterContainer()
-        @checkIfTableNeedsToScroll()
       else
         @hideHeaderContainer()
         @hideFooterContainer()
         @hideContentContainer()
         @showEmptyMessageContainer()
-
-    bindFunctionLinks: ->
-      $linksToBind = $(@el).find('.BCK-items-container .BCK-function-link')
-      visibleColumnsIndex = _.indexBy(@getVisibleColumns(), 'function_key')
-      $linksToBind.each (i, link) ->
-        $currentLink = $(@)
-        alreadyBound = $currentLink.attr('data-already-function-bound')?
-        if not alreadyBound
-          functionKey = $currentLink.attr('data-function-key')
-          functionToBind = visibleColumnsIndex[functionKey].on_click
-          $currentLink.click functionToBind
-          executeOnRender = visibleColumnsIndex[functionKey].execute_on_render
-          if executeOnRender
-            $currentLink.click()
-          $currentLink.attr('data-already-function-bound', 'yes')
 
     getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
@@ -192,22 +188,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
-
-      # if it is a table, add the corresponding header
-      if $specificElemContainer.is('table')
-
-        header_template = $('#' + $specificElemContainer.attr('data-hb-header-template'))
-        header_row_cont = Handlebars.compile( header_template.html() )
-          base_check_box_id: @getBaseSelectAllCheckBoxID()
-          all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
-          columns: visibleColumns
-          selection_disabled: @disableItemsSelection
-
-        $specificElemContainer.append($(header_row_cont))
-        # make sure that the rows are appended to the tbody, otherwise the striped class won't work
-        $specificElemContainer.append($('<tbody>'))
-        $specificElemContainer.append($('<tbody>'))
-
 
       for item in @collection.getCurrentPage()
 
@@ -240,57 +220,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fixCardHeight($appendTo)
 
-    checkIfTableNeedsToScroll: ->
-
-      $specificElemContainer = $(@el).find('.BCK-items-container')
-
-      if not $specificElemContainer.is(":visible")
-        return
-
-       # After adding everything, if the element is a table I now set up the top scroller
-      # also set up the automatic header fixation
-      if $specificElemContainer.is('table') and $specificElemContainer.hasClass('scrollable')
-
-        $topScrollerDummy = $(@el).find('.BCK-top-scroller-dummy')
-        containerWidth = $specificElemContainer.parent().width()
-        tableWidth = $specificElemContainer.width()
-        $topScrollerDummy.width(tableWidth)
-
-        if $specificElemContainer.hasClass('scrolling')
-
-          $specificElemContainer.removeClass('scrolling')
-          $specificElemContainer.css('display', 'table')
-          currentContainer = $specificElemContainer
-          f = $.proxy(@checkIfTableNeedsToScroll, @)
-          setTimeout((-> f(currentContainer)), glados.Settings.RESPONSIVE_REPAINT_WAIT)
-          return
-
-        else
-          hasToScroll = tableWidth > containerWidth
-
-        if hasToScroll and GlobalVariables.CURRENT_SCREEN_TYPE != GlobalVariables.SMALL_SCREEN
-          $specificElemContainer.addClass('scrolling')
-          $specificElemContainer.css('display', 'block')
-          $topScrollerDummy.height(1)
-        else
-          $specificElemContainer.removeClass('scrolling')
-          $specificElemContainer.css('display', 'table')
-          $topScrollerDummy.height(0)
-
-        # bind the scroll functions if not done yet
-        if !$specificElemContainer.attr('data-scroll-setup')
-
-          @setUpTopTableScroller($specificElemContainer)
-          $specificElemContainer.attr('data-scroll-setup', true)
-
-        # now set up tha header fixation
-        if !$specificElemContainer.attr('data-header-pinner-setup')
-
-          # delay this to wait for
-          @setUpTableHeaderPinner($specificElemContainer)
-          $specificElemContainer.attr('data-header-pinner-setup', true)
-
-
     fixCardHeight: ($appendTo) ->
 
       if @isInfinite()
@@ -310,39 +239,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
           $appendTo.append(placeholderContent)
           total_cards++
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Table scroller
-    # ------------------------------------------------------------------------------------------------------------------
-    # this sets up dor a table the additional scroller on top of the table
-    setUpTopTableScroller: ($table) ->
-
-      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-      $scrollContainer.scroll( -> $table.scrollLeft($scrollContainer.scrollLeft()))
-      $table.scroll( -> $scrollContainer.scrollLeft($table.scrollLeft()))
-
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Table header pinner
-    # ------------------------------------------------------------------------------------------------------------------
-    setUpTableHeaderPinner: ($table) ->
-
-      #use the top scroller to trigger the pin
-      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-      $firstTableRow = $table.find('tr').first()
-
-      $win = $(window)
-      topTrigger = $scrollContainer.offset().top
-
-      pinUnpinTableHeader = ->
-
-        # don't bother if table is not shown
-        if !$table.is(":visible")
-          return
-
-        #TODO: complete this function!
-
-      $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
     fillPaginators: ->
 
@@ -513,6 +409,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $contentCont.show()
 
     clearContentContainer: ->
+
+      @latestPageRendered = undefined
+      @latestPageSizeRendered = undefined
+
       $(@el).find('.BCK-items-container').empty()
       @hideEmptyMessageContainer()
       @showContentContainer()

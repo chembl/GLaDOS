@@ -3,8 +3,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initPageNumber: -> @currentPageNum = 1
     initAvailablePageSizes: ->
+
       @AVAILABLE_PAGE_SIZES = [5, 10, 20, 50, 100]
-      @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+
+      defaultPageSize = @collection.getMeta('default_page_size')
+      if defaultPageSize?
+        @currentPageSize = defaultPageSize
+      else
+        @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
 
     requestCurrentPage: ->
       @collection.setPage(@currentPageNum, doFetch=true, testMode=false, customPageSize=@currentPageSize)

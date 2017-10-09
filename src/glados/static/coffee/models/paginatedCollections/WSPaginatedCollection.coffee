@@ -147,7 +147,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if newPageNum > @getMeta('total_pages')
         return
 
-      console.log 'getting page: ', newPageNum
       base_url = @getMeta('base_url')
       @setMeta('current_page', newPageNum)
       @url = @getPaginatedURL()

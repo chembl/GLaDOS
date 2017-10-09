@@ -3,7 +3,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [6, 12, 24, 48, 96, 192]
-      @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+
+      defaultPageSize = @collection.getMeta('default_page_size')
+      if defaultPageSize?
+        @currentPageSize = defaultPageSize
+      else
+        @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
 
     #-------------------------------------------------------------------------------------------------------------------
     # Zoom
@@ -60,8 +65,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
     sleepView: ->
+
       if @hasCustomElementView()
         @sleepCustomElementviews()
+
+      glados.views.PaginatedViews.PaginatedViewBase.sleepView.call(@)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Columns initalisation

@@ -2252,6 +2252,12 @@ $marvin-size-fullscreen: 91vh;
       width: 100%;
     }
   }
+
+  .chembl-modal-cover{
+    @extend .iframe-cover;
+    display: block;
+    z-index: 99999;
+  }
 }
 
 .marvin-search-fullscreen {
@@ -3358,11 +3364,24 @@ $facets-width-large: 21%;
   }
 }
 
+/**
+* Paginated Collections
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
 .paginated-collection{
   padding: 4px;
   .pg-table{
     margin-left: 8px;
+
+    .hidden_header, .hidden_cell{
+      display: none;
+    }
+
   }
+   .hidden_list_prop{
+     display: none;
+   }
   .pagination{
     margin: 0;
     li{
@@ -3370,6 +3389,62 @@ $facets-width-large: 21%;
         font-size: 1rem;
       }
     }
+  }
+}
+
+.show-hide-columns{
+
+  .sortable-items-container{
+    position: relative;
+
+    .sortable-item {
+
+      padding: 0 0.25rem;
+      .item-content {
+        margin-top: 2px;
+        border-radius: $default-btn-border-radius;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        input{
+          width: 0;
+          height: 0;
+        }
+
+        label{
+          margin-top: 1px;
+          padding-left: 25px;
+        }
+
+        .item-checkbox, .property-name{
+          display: inline-block;
+        }
+
+        &:hover {
+          background-color: color('grey', 'lighten-3');
+        }
+
+        [type="checkbox"]{
+          position: static;
+        }
+      }
+
+      &.dragged-over{
+        .item-content {
+          background-color: color('grey', 'lighten-2');
+          border-left: 4px solid color($primary-color-name, 'accent-4');
+        }
+      }
+
+      &.being-dragged{
+        .item-content {
+          background-color: color('grey', 'lighten-2');
+        }
+      }
+    }
+
   }
 }
 

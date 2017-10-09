@@ -22,6 +22,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           @meta =
             index: esIndexSettings.PATH
+            default_page_size: esIndexSettings.DEFAULT_PAGE_SIZE
             page_size: glados.Settings.CARD_PAGE_SIZES[2]
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
@@ -81,6 +82,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         initialize: ->
           @meta =
             base_url: collectionSettings.BASE_URL
+            default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
             page_size: collectionSettings.DEFAULT_PAGE_SIZE
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
@@ -116,6 +118,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         initialize: ->
           @meta =
             base_url: collectionSettings.BASE_URL
+            default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
             page_size: collectionSettings.DEFAULT_PAGE_SIZE
             available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1

@@ -67,7 +67,7 @@
 
 <script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
 
-    <tr>
+    <tr class="BCK-items-row">
       {{#unless selection_disabled}}
       <td>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
@@ -78,28 +78,33 @@
 
       {{#each columns}}
 
-        <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}" >
-        {{#if this.img_url}}
-          <img src="{{this.img_url}}" height="75px" width="75px" ><br>
-        {{/if}}
-        {{#if this.has_link}}
-          <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-        {{else}}
-          {{this.value}}
-        {{/if}}
+          <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
+            {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
+              data-comparator="{{this.comparator}}">
 
-        {{#if this.is_function_link}}
-          <br>
-          <div>
-          <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
-             data-function_constant_parameters="{{this.function_constant_parameters}}"
-             data-function-key="{{this.function_key}}">
-            <i class="fa fa-bar-chart" aria-hidden="true"></i>
-          </a>
-          </div>
-        {{/if}}
+          {{#if this.img_url}}
+            <img src="{{this.img_url}}" height="75px" width="75px" ><br>
+          {{/if}}
+          {{#if this.has_link}}
+            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          {{else}}
+            {{this.value}}
+          {{/if}}
 
-        </td>
+          {{#if this.is_function_link}}
+            <br>
+            <div>
+            <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
+               data-function_constant_parameters="{{this.function_constant_parameters}}"
+               data-function-key="{{this.function_key}}">
+              <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            </a>
+            </div>
+          {{/if}}
+
+          </td>
+
+
       {{/each}}
 
     </tr>
@@ -112,7 +117,7 @@
 
   <thead>
 
-    <tr >
+    <tr class="BCK-headers-row" >
 
       {{#unless selection_disabled}}
       <th>
@@ -124,7 +129,7 @@
       {{/unless}}
 
       {{#each columns}}
-        <th>
+        <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header" data-comparator="{{this.comparator}}">
 
            <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
             <thead>
@@ -158,7 +163,7 @@
 
 <script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
 
-  <li class="collection-item">
+  <li class="collection-item BCK-items-li">
 
     {{#unless selection_disabled}}
     <p>
@@ -172,13 +177,16 @@
     <p>
 
       {{#each columns}}
-        <b>{{this.name_to_show}}:</b>
-        {{#if this.has_link}}
-          <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-        {{else}}
-          {{this.value}}
-        {{/if}}
-        <br>
+        <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
+             data-comparator="{{this.comparator}}">
+          <b>{{this.name_to_show}}:</b>
+          {{#if this.has_link}}
+            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+          {{else}}
+            {{this.value}}
+          {{/if}}
+          <br>
+        </div>
 
       {{/each}}
 
@@ -619,52 +627,80 @@
 </div>
 
 </script>
-<scrpit id="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+<script id="Handlebars-Common-ShowHideColumnsDropdown-trigger" type="text/x-handlebars-template">
   <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
 
   <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
        data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
   </div>
 
-</scrpit>
+</script>
 
 <script id="Handlebars-Common-ShowHideColumnsDropdown-content" type="text/x-handlebars-template">
 
-    <div class="modal-content left-align">
+    <div class="modal-content left-align iframe-cover-wrapper">
 
-      <div class="row">
 
-        <div class="col s6 m3 l2">
-          <input type="checkbox" class="BCK-show-hide-column filled-in"
-                 data-comparator='SELECT-ALL' id="check-{{random_num}}"
-                 {{#if all_selected}} checked="checked" {{/if}}
-          />
-          <label for="check-{{random_num}}">Select All</label>
+      <div class="show-hide-columns">
+
+        <div class="row">
+          You may need to scroll the table horizontally to see all columns. Drag and drop items to change their order.
         </div>
 
-        {{#each all_columns}}
-        <div class="col s6 m3 l2">
+        <div class="row center-align">
 
-          <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
-                 data-comparator='{{this.comparator}}'
-                 {{#if this.show}} checked="checked" {{/if}}
-          />
-          <label for="check-{{this.comparator}}">{{this.name_to_show}}</label>
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                   {{#if all_selected}} checked="checked" {{/if}}
+            />
+            <label for="check-{{random_num}}">Select All</label>
 
         </div>
-        {{/each}}
+
+        <div class="row BCK-draggable-container sortable-items-container">
+          {{#each all_columns}}
+          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
+
+            <div class="item-content">
+
+              <div class="item-checkbox">
+
+
+                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                       data-comparator='{{this.comparator}}'
+                       {{#if this.show}} checked="checked" {{/if}}
+                />
+
+                  <label for="check-{{this.comparator}}">
+                  {{this.position}}.
+                  </label>
+
+
+
+
+              </div>
+
+
+              <div class="property-name">{{this.name_to_show}}</div>
+
+
+
+            </div>
+
+          </div>
+
+          {{/each}}
+        </div>
 
       </div>
 
-      <div class="row">
-        You may need to scroll the table horizontally to see all columns.
-      </div>
-
+      <div class='chembl-modal-cover BCK-loading-cover'> Loading... </div>
     </div>
 
 
 
 </script>
+
 
 <script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
 
