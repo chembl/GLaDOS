@@ -3,7 +3,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [6, 12, 24, 48, 96, 192]
-      @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+
+      defaultPageSize = @collection.getMeta('default_page_size')
+      if defaultPageSize?
+        @currentPageSize = defaultPageSize
+      else
+        @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
 
     #-------------------------------------------------------------------------------------------------------------------
     # Zoom

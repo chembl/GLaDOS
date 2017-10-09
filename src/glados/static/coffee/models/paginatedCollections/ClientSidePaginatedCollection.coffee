@@ -73,7 +73,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('current_page', 1)
       @calculateTotalPages()
       @calculateHowManyInCurrentPage()
-      @trigger('do-repaint')
+      @trigger('reset')
 
     calculateTotalPages: ->
 
@@ -109,12 +109,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setPage: (page_num) ->
 
+      console.log 'setting page!! ', page_num
       # don't bother if the page requested is greater than the total number of pages
       if page_num > @getMeta('total_pages')
         return
 
       @setMeta('current_page', page_num)
-      @trigger('do-repaint')
+      @trigger('reset')
 
     sortCollection: (comparator) ->
 
