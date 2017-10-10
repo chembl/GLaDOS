@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     finishZoom: (minPageSize) ->
 
+      @invalidateLatestPageNumSizeCheck()
       if @currentPageSize < minPageSize
         @requestPageSizeInCollection(minPageSize)
       else
