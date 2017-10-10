@@ -60,17 +60,15 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       $draggableElems = $(@el).find('.BCK-draggable')
       $draggableElemsContainer = $(@el).find('.BCK-draggable-container')
+      $dragDummies = $(@el).find('.BCK-drag-dummy')
 
       thisView = @
+      allColumnsIndex = @.model.get('columns_index')
 
       $draggableElems.each ->
         @addEventListener 'dragstart', (e) ->
           e.dataTransfer.setData('text', 'fix for firefox')
 
-      $draggableElems.on 'dragstart', (event) ->
-
-        $draggedElem = $(@)
-        $draggedElem.addClass('being-dragged')
 
       $draggableElems.on 'drag', ->
 
@@ -86,16 +84,23 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         thisView.property_receiving_drag = propertyName
 
         if propertyName != propertyBeingDragged
+          $draggedElem = $draggableElemsContainer.find('.BCK-draggable[data-comparator="' + propertyBeingDragged + '"]')
+          $draggedElem.addClass('being-dragged')
           $draggedOver.addClass('dragged-over')
+          $dragDummy = $draggableElemsContainer.find('.BCK-drag-dummy[data-comparator="' + propertyName + '"]')
+          $dragDummy.addClass('show')
+          $dragDummy.text(thisView.model.getPropertyLabel(propertyBeingDragged))
 
         $restOfElements = $draggableElemsContainer.find(':not([data-comparator="' + propertyName + '"])')
         $restOfElements.removeClass('dragged-over')
+        $restOfElements.removeClass('show')
 
       $draggableElems.on 'dragend', (event) ->
 
         $draggedElem = $(@)
         $draggedElem.removeClass('being-dragged')
         $draggableElems.removeClass('dragged-over')
+        $dragDummies.removeClass('show')
 
         propertyReceivingDrag = thisView.property_receiving_drag
         propertyBeingDragged = thisView.property_being_dragged

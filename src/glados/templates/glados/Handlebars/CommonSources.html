@@ -659,6 +659,10 @@
 
         <div class="row BCK-draggable-container sortable-items-container">
           {{#each all_columns}}
+
+          <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
+          </div>
+
           <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
 
             <div class="item-content">
