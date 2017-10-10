@@ -3433,18 +3433,21 @@ $facets-width-large: 21%;
 
       &.dragged-over{
         .item-content {
-          background-color: color('grey', 'lighten-2');
-          border-left: 4px solid color($primary-color-name, 'accent-4');
         }
       }
 
       &.being-dragged{
-        .item-content {
-          background-color: color('grey', 'lighten-2');
-        }
+        display: none;
       }
     }
 
+    .drag-dummy{
+      display: none;
+      background-color: color('grey', 'lighten-2');
+      &.show{
+        display: initial;
+      }
+    }
   }
 }
 

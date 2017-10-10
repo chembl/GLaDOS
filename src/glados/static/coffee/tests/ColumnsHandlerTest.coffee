@@ -58,7 +58,6 @@ describe 'Columns Handler', ->
       for col in allColumns
         expect(col.show).toBe(false)
 
-
     it 'Changes the order of the columns', ->
 
       allColumns = columnsHandler.get('all_columns')

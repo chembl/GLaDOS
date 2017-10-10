@@ -145,11 +145,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderViewState: ->
 
-    sleepView: ->
+    invalidateLatestPageNumSizeCheck: ->
 
       @latestPageRendered = undefined
       @latestPageSizeRendered = undefined
 
+    sleepView: -> @invalidateLatestPageNumSizeCheck()
     wakeUpView: -> @requestCurrentPage()
 
     # ------------------------------------------------------------------------------------------------------------------

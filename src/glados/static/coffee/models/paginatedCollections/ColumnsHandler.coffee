@@ -118,5 +118,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setVisibleColumns()
       @setColumnsPositions()
 
+    getPropertyLabel: (propertyName) -> @get('columns_index')[propertyName].name_to_show
+
 glados.models.paginatedCollections.ColumnsHandler.EVENTS =
   COLUMNS_ORDER_CHANGED: 'COLUMNS_ORDER_CHANGED'
