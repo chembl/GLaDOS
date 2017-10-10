@@ -5,6 +5,9 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
+      facetsGroups = @collection.getFacetsGroups()
+      console.log 'facetsGroups at init: ', JSON.stringify(facetsGroups)
+
       @browserView = arguments[0].menu_view
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
@@ -23,6 +26,7 @@ glados.useNameSpace 'glados.views.Browsers',
     initializeHTMLStructure: ->
 
       facetsGroups = @collection.getFacetsGroups()
+      console.log 'facetsGroups: ', facetsGroups
 
       facetListForRender = []
       for key, fGroup of facetsGroups
