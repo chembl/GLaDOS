@@ -22,6 +22,13 @@ describe 'Facets Group Visibility Handler', ->
     facetsVisibilityHandler.setShowHideFGroupStatus(shownColumnIdentifier, false)
     expect(allFGroups[shownColumnIdentifier].show).toBe(false)
 
+  it 'Changes the state when showing or hiding ALL facets groups', ->
 
+    allFGroups = facetsVisibilityHandler.get('all_facets_groups')
 
+    #show all facets
+    facetsVisibilityHandler.setShowHideAllFGroupStatus(true)
+    for key, fGroup of allFGroups
+      expect(fGroup.show).toBe(true)
 
+  it 'Changes the order of facets groups', ->
