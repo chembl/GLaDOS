@@ -324,7 +324,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         facetGroups = @meta.facets_groups
 
-
       if not selected?
         return facetGroups
       else

@@ -27,8 +27,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
-      facetsGroups = @collection.getFacetsGroups()
-      console.log 'facetsGroups: ', facetsGroups
+      facetsGroups = @facetsVisibilityHandler.getVisibleFacetsGroups()
 
       facetListForRender = []
       for key, fGroup of facetsGroups
@@ -37,6 +36,8 @@ glados.useNameSpace 'glados.views.Browsers',
           label: fGroup.label
           key: key
           closed: @FACET_GROUP_IS_CLOSED[key]
+
+      facetListForRender.sort (a, b) -> a.position - b.position
 
       $facetsContainer = $(@el).find('.BCK-Facets-content')
       glados.Utils.fillContentForElement $facetsContainer,
@@ -205,7 +206,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
-      facetsGroups = @collection.getFacetsGroups()
+      facetsGroups = @facetsVisibilityHandler.getAllFacetsGroups()
 
       filtersSelected = false
       for key, fGroup of facetsGroups
@@ -240,7 +241,7 @@ glados.useNameSpace 'glados.views.Browsers',
       thisView = @
 
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
-      currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
+      currentFacetGroup = @facetsVisibilityHandler.getAllFacetsGroups()[facetGroupKey]
       buckets = []
       for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
         datumToAdd = datum
@@ -386,7 +387,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectFacet: (facet_group_key, facet_key) ->
       @showPreloader()
-      facetsGroups = @collection.getFacetsGroups()
+      facetsGroups = @facetsVisibilityHandler.getAllFacetsGroups()
       facetingHandler = facetsGroups[facet_group_key].faceting_handler
       if facetingHandler.faceting_data[facet_key].count == 0
         return
