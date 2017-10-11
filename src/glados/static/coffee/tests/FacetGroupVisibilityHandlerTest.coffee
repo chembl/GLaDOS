@@ -32,3 +32,31 @@ describe 'Facets Group Visibility Handler', ->
       expect(fGroup.show).toBe(true)
 
   it 'Changes the order of facets groups', ->
+
+    allFGroups = facetsVisibilityHandler.get('all_facets_groups')
+
+    draggedIndex = 6
+    receivingIndex = 1
+
+    valuesWithKeys = []
+    for key, fGroup of allFGroups
+      valuesWithKeys.push _.extend({key: key}, fGroup)
+
+    valuesWithKeys.sort (a, b) -> a.position - b.position
+    facetKeysInOrder = (fg.key for fg in valuesWithKeys)
+    draggedKey = facetKeysInOrder[draggedIndex]
+    receivingKey = facetKeysInOrder[receivingIndex]
+
+    facetKeysInOrder.splice(receivingIndex, 0, draggedKey)
+    if draggedIndex >= receivingIndex
+      facetKeysInOrder.splice(draggedIndex + 1, 1)
+    else
+      facetKeysInOrder.splice(draggedIndex, 1)
+
+    facetsVisibilityHandler.changeColumnsOrder(receivingKey, draggedKey)
+
+    for i in [0..facetKeysInOrder.length-1]
+      key = facetKeysInOrder[i]
+      positionGot = allFGroups[key].position
+      positionMustBe = i + 1
+      expect(positionGot).toBe(positionMustBe)
