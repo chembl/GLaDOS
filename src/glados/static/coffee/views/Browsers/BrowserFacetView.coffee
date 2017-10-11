@@ -5,15 +5,17 @@ glados.useNameSpace 'glados.views.Browsers',
     TRANSITION_DURATION: 1500
     initialize: ->
 
-      facetsGroups = @collection.getFacetsGroups()
-      console.log 'facetsGroups at init: ', JSON.stringify(facetsGroups)
-
       @browserView = arguments[0].menu_view
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender(emptyBeforeRender=false)
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
+
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+
+      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
+        all_facets_groups: facetsGroups
 
       @initialiseTitle()
       @initializeHTMLStructure()
@@ -49,7 +51,6 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.collapsible').collapsible
         onOpen: $.proxy(@handleOpenFacet, @)
         onClose: $.proxy(@handleCloseFacet, @)
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render

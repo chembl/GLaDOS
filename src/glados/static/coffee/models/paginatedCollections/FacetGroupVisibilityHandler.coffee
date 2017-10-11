@@ -10,6 +10,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for key, fGroup of allFGroups
         fGroup.show = show
 
+    getAllFacetsGroups: -> @get('all_facets_groups')
+    getVisibleFacetsGroups: ->
+
+      onlyVisible = {}
+      for facetGroupKey, facetGroup of @getAllFacetsGroups()
+        if facetGroup.show
+          onlyVisible[facetGroupKey] = facetGroup
+
+      return onlyVisible
+
     changeColumnsOrder: (receivingKey, draggedKey) ->
 
       allFGroups = @get('all_facets_groups')
@@ -24,7 +34,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       affectedRange = switch
         when isFirstCase then [(draggedPosition + 1)..(receivingPosition-1)]
         else [receivingPosition..(draggedPosition - 1)]
-
 
       for key, fGroup of allFGroups
 

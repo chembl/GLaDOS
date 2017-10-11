@@ -60,3 +60,23 @@ describe 'Facets Group Visibility Handler', ->
       positionGot = allFGroups[key].position
       positionMustBe = i + 1
       expect(positionGot).toBe(positionMustBe)
+
+  it 'gives all facets groups', ->
+
+    allFGroupsMustBe = facetsVisibilityHandler.get('all_facets_groups')
+    allFGroupsGot = facetsVisibilityHandler.getAllFacetsGroups()
+
+    for key, fGroup of allFGroupsMustBe
+      expect(allFGroupsGot[key]?).toBe(true)
+
+  it 'gives visible facets groups', ->
+
+    allFGroupsMustBe = facetsVisibilityHandler.get('all_facets_groups')
+    visibleFGroupsGot = facetsVisibilityHandler.getVisibleFacetsGroups()
+
+    for key, fGroup of allFGroupsMustBe
+
+      if fGroup.show
+        expect(visibleFGroupsGot[key]?).toBe(true)
+      else
+        expect(visibleFGroupsGot[key]?).toBe(false)
