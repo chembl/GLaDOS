@@ -133,24 +133,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @requestCurrentPage()
         return
 
-      #Avoid rendering the same thing again. For example, when reset triggered render and also it was render at init.
-      if (@latestPageRendered == @currentPageNum) and (@latestPageSizeRendered == @currentPageSize)
-        return
-
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
       @renderViewState()
 
-      @latestPageRendered = @currentPageNum
-      @latestPageSizeRendered = @currentPageSize
-
     renderViewState: ->
 
-    invalidateLatestPageNumSizeCheck: ->
-
-      @latestPageRendered = undefined
-      @latestPageSizeRendered = undefined
-
-    sleepView: -> @invalidateLatestPageNumSizeCheck()
+    sleepView: ->
     wakeUpView: -> @requestCurrentPage()
 
     # ------------------------------------------------------------------------------------------------------------------
