@@ -146,7 +146,13 @@ glados.useNameSpace 'glados.views.Browsers',
 
       glados.Utils.fillContentForElement $titleAndModalContainer,
         modal_id: modalID
-        filters: filters
+
+      $modalContentContainer = $titleAndModalContainer.find('.BCK-ModalContent')
+      new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
+        model: @facetsVisibilityHandler
+        el: $modalContentContainer
+        modal_id: modalID
+        facets_mode: true
 
       $(@el).find('#' + modalID).modal()
 

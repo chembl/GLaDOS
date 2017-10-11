@@ -670,12 +670,12 @@
               <div class="item-checkbox">
 
 
-                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="{{modal_id}}-check-{{this.comparator}}"
                        data-comparator='{{this.comparator}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 
-                  <label for="check-{{this.comparator}}">
+                  <label for="{{modal_id}}-check-{{this.comparator}}">
                   {{this.position}}.
                   </label>
 
@@ -715,23 +715,13 @@
       </a>
   </div>
 
-   <div id="{{modal_id}}" class="modal bottom-sheet">
-      <div class="modal-content">
+  <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+       data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
 
-        <div class="row">
-          {{#each filters}}
-          <div class="col s6 m3 l2">
+    modal content!!!
+  </div>
 
-            <input type="checkbox" class="BCK-show-hide-filter filled-in" id="check-{{this.id}}"
-                   data-facet-group-key='{{this.key}}' {{# if checked}}checked="checked"{{/if}} />
-            <label for="check-{{this.id}}">{{this.label}}</label>
 
-          </div>
-          {{/each}}
-        </div>
-
-      </div>
-   </div>
 </script>
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">

@@ -80,3 +80,15 @@ describe 'Facets Group Visibility Handler', ->
         expect(visibleFGroupsGot[key]?).toBe(true)
       else
         expect(visibleFGroupsGot[key]?).toBe(false)
+
+  it 'gives all facets groups as a list, soerted by position', ->
+
+    allFGroupsMustBe = facetsVisibilityHandler.get('all_facets_groups')
+    allFGroupsListGot = facetsVisibilityHandler.getAllFacetsGroupsAsList()
+
+    lastPosition = 0
+    for fGroup in allFGroupsListGot
+      
+      expect(allFGroupsMustBe[fGroup.key]?).toBe(true)
+      expect(fGroup.position > lastPosition).toBe(true)
+      lastPosition = fGroup.position

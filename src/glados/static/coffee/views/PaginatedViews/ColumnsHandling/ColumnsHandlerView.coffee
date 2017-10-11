@@ -3,8 +3,12 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     initialize: ->
 
-      @modalId = (new Date()).getTime()
+      console.log 'init ColumnsHandlerView'
+      @modalId = arguments[0].modal_id
+      @modalId ?= (new Date()).getTime()
+      @facetsMode = arguments[0].facets_mode
       @render()
+      return
       @model.on 'change:visible_columns', @renderModalContent, @
       @model.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @renderModalContent, @
 
@@ -13,7 +17,8 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     render: ->
 
-      @renderModalTrigger()
+      if not @facetsMode
+        @renderModalTrigger()
       @renderModalContent()
 
     renderModalTrigger: ->
@@ -21,21 +26,26 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
         modal_id: @modalId
 
+    getAllColumnsFromFacets: ->
+
+
     renderModalContent: ->
 
-      allColumns = @model.get('all_columns')
+      if @facetsMode
+        allColumns = @getAllColumnsFromFacets()
+        console.log 'allColumns: ', allColumns
+        return
+      else
+        allColumns = @model.get('all_columns')
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
+        modal_id: @modalId
 
       @initDragging()
-
       @hidePreloader()
-      thisView = @
-      _.defer ->
-        thisView.hidePreloader()
 
     showHideColumn: (event) ->
 
@@ -63,7 +73,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       $dragDummies = $(@el).find('.BCK-drag-dummy')
 
       thisView = @
-      allColumnsIndex = @.model.get('columns_index')
 
       $draggableElems.each ->
         @addEventListener 'dragstart', (e) ->

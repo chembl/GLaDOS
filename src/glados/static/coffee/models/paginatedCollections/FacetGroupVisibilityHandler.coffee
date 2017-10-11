@@ -20,6 +20,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return onlyVisible
 
+    getAllFacetsGroupsAsList: ->
+
+      allGroupsList = []
+      allFGroups = @get('all_facets_groups')
+      for key, fGroup of allFGroups
+        allGroupsList.push _.extend({key: key}, fGroup)
+      allGroupsList.sort (a, b) -> a.position - b.position
+      console.log 'allGroupsList: ', allGroupsList
+      return allGroupsList
+
     changeColumnsOrder: (receivingKey, draggedKey) ->
 
       allFGroups = @get('all_facets_groups')
