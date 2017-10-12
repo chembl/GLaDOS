@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
     events:
       'click .results-section-item': 'switchTab'
+      'click .iframe-cover.scroll-cover': 'hideIFrameCover'
 
     initialize: ->
 
@@ -27,9 +28,6 @@ glados.useNameSpace 'glados.views.MainPage',
       $(@el).find('.iframe-cover.scroll-cover').hide()
 
       @marvinSketcherView.loadStructure('c1ccccc1', MarvinSketcherView.SMILES_FORMAT, true)
-
-    events:
-      'click .iframe-cover.scroll-cover': 'hideIFrameCover'
 
     showHideDivs: ->
       $tabsLinks = $(@el).find('.summary-tabs .results-section-item')
