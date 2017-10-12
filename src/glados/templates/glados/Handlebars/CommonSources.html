@@ -669,13 +669,12 @@
 
               <div class="item-checkbox">
 
-
-                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="check-{{this.comparator}}"
+                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="{{modal_id}}-check-{{this.comparator}}"
                        data-comparator='{{this.comparator}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 
-                  <label for="check-{{this.comparator}}">
+                  <label for="{{modal_id}}-check-{{this.comparator}}">
                   {{this.position}}.
                   </label>
 
@@ -715,23 +714,14 @@
       </a>
   </div>
 
-   <div id="{{modal_id}}" class="modal bottom-sheet">
-      <div class="modal-content">
+  <div class="BCK-ModalContent-container">
+    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
 
-        <div class="row">
-          {{#each filters}}
-          <div class="col s6 m3 l2">
+    </div>
+  </div>
 
-            <input type="checkbox" class="BCK-show-hide-filter filled-in" id="check-{{this.id}}"
-                   data-facet-group-key='{{this.key}}' {{# if checked}}checked="checked"{{/if}} />
-            <label for="check-{{this.id}}">{{this.label}}</label>
 
-          </div>
-          {{/each}}
-        </div>
-
-      </div>
-   </div>
 </script>
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
@@ -1019,9 +1009,9 @@
       </div>
     </div>
 
-    <ul class="collapsible z-depth-0" data-collapsible="expandable">
+    <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
       {{#each facets}}
-        <li data-facet-group-key="{{this.key}}">
+        <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
           <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
             <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}</div>
           <div class="collapsible-body">

@@ -12,17 +12,31 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
 
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+
+      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
+        all_facets_groups: facetsGroups
+
+      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
+        @handleFiltersReordering, @
+
+      @facetsVisibilityHandler.on \
+        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+        @handleShowHideFilter, @
+
+
       @initialiseTitle()
       @initializeHTMLStructure()
       @showPreloader()
 
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
-      'click .BCK-show-hide-filter': 'showHideFilter'
 
     initializeHTMLStructure: ->
 
-      facetsGroups = @collection.getFacetsGroups()
+      console.log 'initializeHTMLStructure'
+      facetsGroups = @facetsVisibilityHandler.getVisibleFacetsGroups()
+      console.log 'facetsGroups: ', facetsGroups
 
       facetListForRender = []
       for key, fGroup of facetsGroups
@@ -32,6 +46,8 @@ glados.useNameSpace 'glados.views.Browsers',
           key: key
           closed: @FACET_GROUP_IS_CLOSED[key]
 
+      facetListForRender.sort (a, b) -> a.position - b.position
+
       $facetsContainer = $(@el).find('.BCK-Facets-content')
       glados.Utils.fillContentForElement $facetsContainer,
         facets: facetListForRender
@@ -40,12 +56,13 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
+      #make sure it is always ordered correctly
+      @handleFiltersReordering()
       @initAllHistograms()
 
       $(@el).find('.collapsible').collapsible
         onOpen: $.proxy(@handleOpenFacet, @)
         onClose: $.proxy(@handleCloseFacet, @)
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -122,6 +139,34 @@ glados.useNameSpace 'glados.views.Browsers',
         return true
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Filters reordering
+    # ------------------------------------------------------------------------------------------------------------------
+    handleFiltersReordering: ->
+
+      allFacets = @facetsVisibilityHandler.getAllFacetsGroups()
+      $facetsCollapsible = $(@el).find('.BCK-facets-collapsible')
+
+      compareFunction = (a, b) ->
+
+        comparatorA = $(a).attr('data-facet-group-key')
+        comparatorB = $(b).attr('data-facet-group-key')
+
+        positionA = allFacets[comparatorA].position
+        positionB = allFacets[comparatorB].position
+
+        return positionA - positionB
+
+      $listItems = $facetsCollapsible.find('li.BCK-facet-li')
+      $listItems.sort compareFunction
+      $facetsCollapsible.append $listItems
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Show/hide filters
+    # ------------------------------------------------------------------------------------------------------------------
+    handleShowHideFilter: ->
+      @showPreloader()
+      @collection.loadFacetGroups()
+    # ------------------------------------------------------------------------------------------------------------------
     # Add Remove
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
@@ -140,19 +185,16 @@ glados.useNameSpace 'glados.views.Browsers',
 
       glados.Utils.fillContentForElement $titleAndModalContainer,
         modal_id: modalID
-        filters: filters
+
+      $modalContentContainer = $titleAndModalContainer.find('.BCK-ModalContent-container')
+      new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
+        model: @facetsVisibilityHandler
+        el: $modalContentContainer
+        modal_id: modalID
+        facets_mode: true
 
       $(@el).find('#' + modalID).modal()
 
-    showHideFilter: (event) ->
-
-      $checkbox = $(event.currentTarget)
-      facetGroupKey = $checkbox.attr('data-facet-group-key')
-      isChecked = $checkbox.is(':checked')
-      allFacets = @collection.getFacetsGroups(undefined, onlyVisible=false)
-      allFacets[facetGroupKey].show = isChecked
-
-      @collection.loadFacetGroups()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Histogram Rendering
@@ -200,7 +242,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @hidePreloader()
 
-      facetsGroups = @collection.getFacetsGroups()
+      facetsGroups = @facetsVisibilityHandler.getAllFacetsGroups()
 
       filtersSelected = false
       for key, fGroup of facetsGroups
@@ -235,7 +277,7 @@ glados.useNameSpace 'glados.views.Browsers',
       thisView = @
 
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
-      currentFacetGroup = @collection.getFacetsGroups()[facetGroupKey]
+      currentFacetGroup = @facetsVisibilityHandler.getAllFacetsGroups()[facetGroupKey]
       buckets = []
       for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
         datumToAdd = datum
@@ -381,7 +423,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     toggleSelectFacet: (facet_group_key, facet_key) ->
       @showPreloader()
-      facetsGroups = @collection.getFacetsGroups()
+      facetsGroups = @facetsVisibilityHandler.getAllFacetsGroups()
       facetingHandler = facetsGroups[facet_group_key].faceting_handler
       if facetingHandler.faceting_data[facet_key].count == 0
         return

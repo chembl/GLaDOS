@@ -3403,10 +3403,8 @@ $facets-width-large: 21%;
       .item-content {
         margin-top: 2px;
         border-radius: $default-btn-border-radius;
-
-        overflow: hidden;
         white-space: nowrap;
-        text-overflow: ellipsis;
+
 
         input{
           width: 0;
@@ -3420,6 +3418,12 @@ $facets-width-large: 21%;
 
         .item-checkbox, .property-name{
           display: inline-block;
+        }
+        .property-name{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: calc(100% - 50px);
         }
 
         &:hover {

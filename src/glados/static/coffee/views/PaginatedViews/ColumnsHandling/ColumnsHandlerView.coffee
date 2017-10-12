@@ -3,9 +3,18 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     initialize: ->
 
-      @modalId = (new Date()).getTime()
+      console.log 'init ColumnsHandlerView'
+      @modalId = arguments[0].modal_id
+      @modalId ?= (new Date()).getTime()
+      @facetsMode = arguments[0].facets_mode
       @render()
-      @model.on 'change:visible_columns', @renderModalContent, @
+
+      if @facetsMode
+        @model.on glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+          @renderModalContent, @
+      else
+        @model.on 'change:visible_columns', @renderModalContent, @
+
       @model.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @renderModalContent, @
 
     events:
@@ -13,7 +22,8 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     render: ->
 
-      @renderModalTrigger()
+      if not @facetsMode
+        @renderModalTrigger()
       @renderModalContent()
 
     renderModalTrigger: ->
@@ -21,21 +31,31 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
         modal_id: @modalId
 
+    getAllColumnsFromFacets: -> @model.getAllFacetsGroupsAsList()
+
+    prepareFacetListForView: (facetsList) ->
+
+      for fGroup in facetsList
+        fGroup.comparator = fGroup.key
+        fGroup.name_to_show = fGroup.label
+
     renderModalContent: ->
 
-      allColumns = @model.get('all_columns')
+      if @facetsMode
+        allColumns = @getAllColumnsFromFacets()
+        @prepareFacetListForView(allColumns)
+
+      else
+        allColumns = @model.get('all_columns')
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
+        modal_id: @modalId
 
       @initDragging()
-
       @hidePreloader()
-      thisView = @
-      _.defer ->
-        thisView.hidePreloader()
 
     showHideColumn: (event) ->
 
@@ -45,10 +65,19 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       thisView = @
 
-      if colComparator == 'SELECT-ALL'
-        thisView.model.setShowHideAllColumnStatus(isChecked)
+      if @facetsMode
+
+        if colComparator == 'SELECT-ALL'
+          thisView.model.setShowHideAllFGroupStatus(isChecked)
+        else
+          thisView.model.setShowHideFGroupStatus(colComparator, isChecked)
+
       else
-        thisView.model.setShowHideColumnStatus(colComparator, isChecked)
+
+        if colComparator == 'SELECT-ALL'
+          thisView.model.setShowHideAllColumnStatus(isChecked)
+        else
+          thisView.model.setShowHideColumnStatus(colComparator, isChecked)
 
     showPreloader: ->$(@el).find('.BCK-loading-cover').show()
     hidePreloader: -> $(@el).find('.BCK-loading-cover').hide()
@@ -63,12 +92,10 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       $dragDummies = $(@el).find('.BCK-drag-dummy')
 
       thisView = @
-      allColumnsIndex = @.model.get('columns_index')
 
       $draggableElems.each ->
         @addEventListener 'dragstart', (e) ->
           e.dataTransfer.setData('text', 'fix for firefox')
-
 
       $draggableElems.on 'drag', ->
 
