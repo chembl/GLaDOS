@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       @modalId ?= (new Date()).getTime()
       @facetsMode = arguments[0].facets_mode
       @render()
-      return
+
       @model.on 'change:visible_columns', @renderModalContent, @
       @model.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @renderModalContent, @
 
@@ -119,8 +119,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         propertyBeingDragged = thisView.property_being_dragged
 
         if propertyReceivingDrag != propertyBeingDragged
-          console.log 'do change order!!!!'
-          return
           thisView.model.changeColumnsOrder(propertyReceivingDrag, propertyBeingDragged)
 
 

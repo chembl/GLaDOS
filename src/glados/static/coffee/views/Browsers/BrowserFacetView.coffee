@@ -17,6 +17,8 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
         all_facets_groups: facetsGroups
 
+      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @handleFiltersReordering, @
+
       @initialiseTitle()
       @initializeHTMLStructure()
       @showPreloader()
@@ -126,6 +128,28 @@ glados.useNameSpace 'glados.views.Browsers',
       if totalRecords == 0
         @hideAll()
         return true
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Filters reordering
+    # ------------------------------------------------------------------------------------------------------------------
+    handleFiltersReordering: ->
+
+      allFacets = @facetsVisibilityHandler.getAllFacetsGroups()
+      $facetsCollapsible = $(@el).find('.BCK-facets-collapsible')
+
+      compareFunction = (a, b) ->
+
+        comparatorA = $(a).attr('data-facet-group-key')
+        comparatorB = $(b).attr('data-facet-group-key')
+
+        positionA = allFacets[comparatorA].position
+        positionB = allFacets[comparatorB].position
+
+        return positionA - positionB
+
+      $listItems = $facetsCollapsible.find('li.BCK-facet-li')
+      $listItems.sort compareFunction
+      $facetsCollapsible.append $listItems
 
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove

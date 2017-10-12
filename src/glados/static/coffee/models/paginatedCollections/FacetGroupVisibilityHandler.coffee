@@ -61,3 +61,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             fGroup.position--
           else
             fGroup.position++
+
+      console.log 'triggering event!!'
+      #use the event of the columns handler, to avoid having duplicate definitions of the same thing
+      @trigger(glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED)

@@ -719,7 +719,6 @@
     <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
          data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
 
-      modal content!!!
     </div>
   </div>
 
@@ -1011,9 +1010,9 @@
       </div>
     </div>
 
-    <ul class="collapsible z-depth-0" data-collapsible="expandable">
+    <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
       {{#each facets}}
-        <li data-facet-group-key="{{this.key}}">
+        <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
           <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
             <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}</div>
           <div class="collapsible-body">
