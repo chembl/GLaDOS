@@ -17,7 +17,13 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
         all_facets_groups: facetsGroups
 
-      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @handleFiltersReordering, @
+      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
+        @handleFiltersReordering, @
+
+      @facetsVisibilityHandler.on \
+        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+        @handleShowHideFilter, @
+
 
       @initialiseTitle()
       @initializeHTMLStructure()
@@ -25,11 +31,12 @@ glados.useNameSpace 'glados.views.Browsers',
 
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
-      'click .BCK-show-hide-filter': 'showHideFilter'
 
     initializeHTMLStructure: ->
 
+      console.log 'initializeHTMLStructure'
       facetsGroups = @facetsVisibilityHandler.getVisibleFacetsGroups()
+      console.log 'facetsGroups: ', facetsGroups
 
       facetListForRender = []
       for key, fGroup of facetsGroups
@@ -49,6 +56,8 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $preloaderContainer,
         msg: 'Loading Filters...'
 
+      #make sure it is always ordered correctly
+      @handleFiltersReordering()
       @initAllHistograms()
 
       $(@el).find('.collapsible').collapsible
@@ -152,6 +161,12 @@ glados.useNameSpace 'glados.views.Browsers',
       $facetsCollapsible.append $listItems
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Show/hide filters
+    # ------------------------------------------------------------------------------------------------------------------
+    handleShowHideFilter: ->
+      @showPreloader()
+      @collection.loadFacetGroups()
+    # ------------------------------------------------------------------------------------------------------------------
     # Add Remove
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
@@ -180,15 +195,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $(@el).find('#' + modalID).modal()
 
-    showHideFilter: (event) ->
-
-      $checkbox = $(event.currentTarget)
-      facetGroupKey = $checkbox.attr('data-facet-group-key')
-      isChecked = $checkbox.is(':checked')
-      allFacets = @collection.getFacetsGroups(undefined, onlyVisible=false)
-      allFacets[facetGroupKey].show = isChecked
-
-      @collection.loadFacetGroups()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Histogram Rendering

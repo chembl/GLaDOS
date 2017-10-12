@@ -9,7 +9,12 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       @facetsMode = arguments[0].facets_mode
       @render()
 
-      @model.on 'change:visible_columns', @renderModalContent, @
+      if @facetsMode
+        @model.on glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+          @renderModalContent, @
+      else
+        @model.on 'change:visible_columns', @renderModalContent, @
+
       @model.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED, @renderModalContent, @
 
     events:
@@ -60,10 +65,19 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       thisView = @
 
-      if colComparator == 'SELECT-ALL'
-        thisView.model.setShowHideAllColumnStatus(isChecked)
+      if @facetsMode
+
+        if colComparator == 'SELECT-ALL'
+          thisView.model.setShowHideAllFGroupStatus(isChecked)
+        else
+          thisView.model.setShowHideFGroupStatus(colComparator, isChecked)
+
       else
-        thisView.model.setShowHideColumnStatus(colComparator, isChecked)
+
+        if colComparator == 'SELECT-ALL'
+          thisView.model.setShowHideAllColumnStatus(isChecked)
+        else
+          thisView.model.setShowHideColumnStatus(colComparator, isChecked)
 
     showPreloader: ->$(@el).find('.BCK-loading-cover').show()
     hidePreloader: -> $(@el).find('.BCK-loading-cover').hide()

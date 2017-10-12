@@ -2,13 +2,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
   FacetGroupVisibilityHandler: Backbone.Model.extend
 
-    setShowHideFGroupStatus: (identifier, show) -> @get('all_facets_groups')[identifier].show = show
+    setShowHideFGroupStatus: (identifier, show) ->
+
+      @get('all_facets_groups')[identifier].show = show
+      @trigger(glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED)
 
     setShowHideAllFGroupStatus: (show) ->
 
       allFGroups = @get('all_facets_groups')
       for key, fGroup of allFGroups
         fGroup.show = show
+
+      @trigger(glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED)
 
     getAllFacetsGroups: -> @get('all_facets_groups')
     getVisibleFacetsGroups: ->
@@ -62,6 +67,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           else
             fGroup.position++
 
-      console.log 'triggering event!!'
       #use the event of the columns handler, to avoid having duplicate definitions of the same thing
       @trigger(glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED)
+
+glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS =
+  COLUMNS_SHOW_STATUS_CHANGED: 'COLUMNS_SHOW_STATUS_CHANGED'
