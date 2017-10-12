@@ -93,18 +93,16 @@ SearchModel = Backbone.Model.extend
           completion:
             field: "_metadata.es_completion"
     }
-
-    deferred_t =$.post(
-      glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_target/_search',
-      JSON.stringify(esQuery)
-    )
-    deferred_m =$.post(
-      glados.models.paginatedCollections.Settings.ES_BASE_URL+'/chembl_molecule/_search',
-      JSON.stringify(esQuery)
-    )
-    deferred_t.done(done_callback.bind(@))
-    deferred_m.done(done_callback.bind(@))
-    $.when.apply($,[deferred_m,deferred_t]).then(then_callback.bind(@))
+    deferreds = []
+    for es_index_i_key in _.keys(glados.models.paginatedCollections.Settings.ES_INDEXES)
+      es_index_i = glados.models.paginatedCollections.Settings.ES_INDEXES[es_index_i_key]
+      deferred_i = $.post(
+        glados.models.paginatedCollections.Settings.ES_BASE_URL + es_index_i.PATH + '/_search',
+        JSON.stringify(esQuery)
+      )
+      deferred_i.done(done_callback.bind(@))
+      deferreds.push(deferred_i)
+    $.when.apply($, deferreds).then(then_callback.bind(@), then_callback.bind(@))
 
   requestAutocompleteSuggestions: (textQuery)->
     @autocompleteQuery = textQuery
