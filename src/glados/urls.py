@@ -56,6 +56,9 @@ urlpatterns = [
 
   url(r'^compounds/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseCompounds.html"), ),
+    
+  url(r'^drugs/(filter/[\S| ]+)?$',
+    DirectTemplateView.as_view(template_name="glados/Browsers/browseDrugs.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Targets
