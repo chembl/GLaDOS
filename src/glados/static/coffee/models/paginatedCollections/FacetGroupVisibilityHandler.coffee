@@ -27,9 +27,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for key, fGroup of allFGroups
         allGroupsList.push _.extend({key: key}, fGroup)
       allGroupsList.sort (a, b) -> a.position - b.position
-      console.log 'allGroupsList: ', allGroupsList
       return allGroupsList
 
+    getPropertyLabel: (fGroupKey) -> @get('all_facets_groups')[fGroupKey].label
     changeColumnsOrder: (receivingKey, draggedKey) ->
 
       allFGroups = @get('all_facets_groups')

@@ -88,7 +88,7 @@ describe 'Facets Group Visibility Handler', ->
 
     lastPosition = 0
     for fGroup in allFGroupsListGot
-      
+
       expect(allFGroupsMustBe[fGroup.key]?).toBe(true)
       expect(fGroup.position > lastPosition).toBe(true)
       lastPosition = fGroup.position

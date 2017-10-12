@@ -26,15 +26,20 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
         modal_id: @modalId
 
-    getAllColumnsFromFacets: ->
+    getAllColumnsFromFacets: -> @model.getAllFacetsGroupsAsList()
 
+    prepareFacetListForView: (facetsList) ->
+
+      for fGroup in facetsList
+        fGroup.comparator = fGroup.key
+        fGroup.name_to_show = fGroup.label
 
     renderModalContent: ->
 
       if @facetsMode
         allColumns = @getAllColumnsFromFacets()
-        console.log 'allColumns: ', allColumns
-        return
+        @prepareFacetListForView(allColumns)
+
       else
         allColumns = @model.get('all_columns')
 
@@ -78,7 +83,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         @addEventListener 'dragstart', (e) ->
           e.dataTransfer.setData('text', 'fix for firefox')
 
-
       $draggableElems.on 'drag', ->
 
         $draggedElem = $(@)
@@ -115,6 +119,8 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         propertyBeingDragged = thisView.property_being_dragged
 
         if propertyReceivingDrag != propertyBeingDragged
+          console.log 'do change order!!!!'
+          return
           thisView.model.changeColumnsOrder(propertyReceivingDrag, propertyBeingDragged)
 
 
