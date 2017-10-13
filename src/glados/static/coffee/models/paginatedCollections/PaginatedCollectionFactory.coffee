@@ -175,6 +175,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewESDrugsList: (customQueryString='*', itemsList, contextualProperties,
+      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST,
+      searchTerm) ->
+
+      list = @getNewESResultsListFor(settings, customQueryString, useCustomQueryString=(not itemsList?), itemsList,
+        contextualProperties, searchTerm)
+      return list
+
     getNewActivitiesList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
