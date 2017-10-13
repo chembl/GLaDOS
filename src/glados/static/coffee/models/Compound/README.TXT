@@ -1,0 +1,1 @@
+All models related to compounds must be moved to this folder some day
