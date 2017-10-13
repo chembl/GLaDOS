@@ -3,7 +3,7 @@
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
 
-## Configuring the tweets in the main page
+## Configuring the tweets in the main page 
 
 To be able to get the latest tweets in main page you need to set the following variables:
 
