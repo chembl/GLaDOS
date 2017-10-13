@@ -180,8 +180,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST,
       searchTerm) ->
 
+      stickyQuery =
+        term:
+          "_metadata.drug.is_drug": true
+
       list = @getNewESResultsListFor(settings, customQueryString, useCustomQueryString=(not itemsList?), itemsList,
-        contextualProperties, searchTerm)
+        contextualProperties, searchTerm, stickyQuery)
       return list
 
     getNewActivitiesList: (filter='') ->
