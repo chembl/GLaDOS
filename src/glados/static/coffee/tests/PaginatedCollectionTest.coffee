@@ -412,7 +412,7 @@ describe "Paginated Collection", ->
     it 'Generates the correct request object', ->
 
       requestData = esList.getRequestData()
-      expect(requestData.query.bool.must.query_string.query).toBe(customQueryString)
+      expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
 
   describe "A WS collection initialised with a filter", ->
 

@@ -174,11 +174,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       customQueryString = @getMeta('custom_query_string')
       generatorList = @getMeta('generator_items_list')
       if @getMeta('use_custom_query_string')
-        es_query.query.bool.must = {
+        es_query.query.bool.must = [{
+
           query_string:
             analyze_wildcard: true
             query: customQueryString
-        }
+        }]
       # Normal Search query
       else if generatorList?
         es_query.query.bool.must = @getQueryForGeneratorList()
