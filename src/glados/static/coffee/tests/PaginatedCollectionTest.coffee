@@ -414,6 +414,28 @@ describe "Paginated Collection", ->
       requestData = esList.getRequestData()
       expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
 
+  describe "A collection with a sticky query", ->
+
+    settings = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST
+    stickyQueryMustBe =
+      term:
+        "_metadata.drug.is_drug": true
+
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(settings,
+      customQueryString=undefined, useCustomQueryString=false, itemsList=undefined, contextualProperties=undefined,
+      searchTerm=undefined, stickyQueryMustBe)
+
+    it "sets the initial parameters", ->
+
+      stickyQueryGot = list.getMeta('sticky_query')
+      expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
+
+    it 'Generates the correct request object', ->
+
+      requestData = list.getRequestData()
+      stickyQueryGot = requestData.query.bool.must[0]
+      expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
+
   describe "A WS collection initialised with a filter", ->
 
     filter = 'target_chembl_id=CHEMBL2096905&standard_type=Ki'

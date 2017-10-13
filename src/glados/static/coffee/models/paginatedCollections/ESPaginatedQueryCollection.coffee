@@ -197,6 +197,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if facets_query
           es_query.aggs = facets_query
 
+      stickyQuery = @getMeta('sticky_query')
+      if stickyQuery?
+        es_query.query.bool.must = [] unless es_query.query.bool.must?
+        es_query.query.bool.must.push stickyQuery
+
       return es_query
 
     getAllColumns: ->

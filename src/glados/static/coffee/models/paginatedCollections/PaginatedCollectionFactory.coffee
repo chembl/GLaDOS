@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm) ->
+      contextualProperties, searchTerm, stickyQuery) ->
 
       indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
@@ -56,6 +56,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
             search_term: searchTerm
+            sticky_query: stickyQuery
             data_loaded: false
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
             disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
