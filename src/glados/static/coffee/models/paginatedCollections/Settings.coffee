@@ -318,6 +318,40 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SIMILARITY_MAPS: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
+      DRUGS_LIST:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESDrugs'
+        LABEL: 'Drugs'
+        INDEX_NAME: 'chembl_molecule'
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        MODEL: glados.models.Compound.Drug
+        COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+          Cards:
+            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Infinite:
+            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+          Carousel:
+            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        ID_COLUMN: glados.models.Compound.Drug.ID_COLUMN
+        ENABLE_CARDS_ZOOM: true
+        CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
+        CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
+        ADDITIONAL_COLUMNS: Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+        DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
+        ENABLE_COLLECTION_CACHING: true
+        DISABLE_CACHE_ON_DOWNLOAD: true
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity

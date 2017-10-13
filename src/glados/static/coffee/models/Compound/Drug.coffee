@@ -1,6 +1,8 @@
 glados.useNameSpace 'glados.models.Compound',
   Drug: Compound.extend {}
 
+Drug = glados.models.Compound.Drug
+
 glados.models.Compound.Drug.COLUMNS =
   CHEMBL_ID: _.extend({}, Compound.COLUMNS.CHEMBL_ID,
     'name_to_show': 'Parent Molecule')
