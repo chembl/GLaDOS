@@ -166,7 +166,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
         query:
           bool:
-            must: null
+            must: []
       }
       @addSortingToQuery(es_query)
 
