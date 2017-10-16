@@ -28,6 +28,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           small: 12
           medium: 6
           large: 4
+        CUSTOM_CARD_SIZE_TO_PAGE_SIZES:
+          12: 6
+          6: 12
+          4: 24
+          3: 24
+          2: 96
+          1: 192
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView

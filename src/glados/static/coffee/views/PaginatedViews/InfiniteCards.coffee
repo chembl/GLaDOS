@@ -12,7 +12,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     #-------------------------------------------------------------------------------------------------------------------
     # Zoom
     #-------------------------------------------------------------------------------------------------------------------
-    CARD_SIZE_TO_MIN_PAGE_SIZE:
+    CARD_SIZE_TO_PAGE_SIZE:
       12: 50
       6: 50
       4: 50
@@ -20,10 +20,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       2: 100
       1: 200
 
-    finishZoom: (minPageSize) ->
+    finishZoom: (pageSizeMustBe) ->
 
-      if @currentPageSize < minPageSize
-        @requestPageSizeInCollection(minPageSize)
+      if @currentPageSize != pageSizeMustBe
+        @requestPageSizeInCollection(pageSizeMustBe)
       else
         @requestPageInCollection(1)
 

@@ -33,6 +33,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             columns: esIndexSettings.COLUMNS
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
+            custom_card_size_to_page_sizes: esIndexSettings.CUSTOM_CARD_SIZE_TO_PAGE_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
             custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             custom_cards_item_view: esIndexSettings.CUSTOM_CARDS_ITEM_VIEW
