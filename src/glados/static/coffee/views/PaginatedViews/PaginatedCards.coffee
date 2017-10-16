@@ -8,12 +8,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if defaultPageSize?
         @currentPageSize = defaultPageSize
       else
-        @currentPageSize = @AVAILABLE_PAGE_SIZES[2]
+        @currentPageSize = @getPageSizeAccordingToZoom()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Zoom
     #-------------------------------------------------------------------------------------------------------------------
-    CARD_SIZE_TO_MIN_PAGE_SIZE:
+    CARD_SIZE_TO_PAGE_SIZE:
       12: 6
       6: 6
       4: 12
@@ -21,10 +21,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       2: 96
       1: 192
 
-    finishZoom: (minPageSize) ->
+    finishZoom: (pageSizeMustBe) ->
 
-      if @currentPageSize < minPageSize
-        @requestPageSizeInCollection(minPageSize)
+      if @currentPageSize != pageSizeMustBe
+        @requestPageSizeInCollection(pageSizeMustBe)
       else
         @render()
 

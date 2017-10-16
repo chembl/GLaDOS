@@ -48,7 +48,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @getNextSize(@CURRENT_CARD_SIZES.medium)
         large: @getNextSize(@CURRENT_CARD_SIZES.large)
 
-      @finishZoom()
+      pageSizeMustBe = @getPageSizeAccordingToZoom()
+      @finishZoom(pageSizeMustBe)
 
     zoomOut: ->
 
@@ -61,8 +62,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @getPreviousSize(@CURRENT_CARD_SIZES.medium)
         large: @getPreviousSize(@CURRENT_CARD_SIZES.large)
 
-      minPageSize = @getMinimunPageSize()
-      @finishZoom(minPageSize)
+      pageSizeMustBe = @getPageSizeAccordingToZoom()
+      @finishZoom(pageSizeMustBe)
 
     resetZoom: ->
 
@@ -75,18 +76,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         medium: @DEFAULT_CARDS_SIZES.medium
         large: @DEFAULT_CARDS_SIZES.large
 
-      minPageSize = @getMinimunPageSize()
-      @finishZoom(minPageSize)
+      pageSizeMustBe = @getPageSizeAccordingToZoom()
+      @finishZoom(pageSizeMustBe)
 
-    getMinimunPageSize: ->
+    getPageSizeAccordingToZoom: ->
 
       currentScreenType = GlobalVariables.CURRENT_SCREEN_TYPE
       if currentScreenType == glados.Settings.SMALL_SCREEN
-        return @CARD_SIZE_TO_MIN_PAGE_SIZE[@CURRENT_CARD_SIZES.small]
+        return @CARD_SIZE_TO_PAGE_SIZE[@CURRENT_CARD_SIZES.small]
       else if currentScreenType == glados.Settings.MEDIUM_SCREEN
-        return @CARD_SIZE_TO_MIN_PAGE_SIZE[@CURRENT_CARD_SIZES.medium]
+        return @CARD_SIZE_TO_PAGE_SIZE[@CURRENT_CARD_SIZES.medium]
       else
-        return @CARD_SIZE_TO_MIN_PAGE_SIZE[@CURRENT_CARD_SIZES.large]
+        return @CARD_SIZE_TO_PAGE_SIZE[@CURRENT_CARD_SIZES.large]
 
 
     mustDisableZoomIn: ->
