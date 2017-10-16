@@ -21,13 +21,14 @@ glados.useNameSpace 'glados.views.SearchResults',
       @autocompleteSuggestions = []
       @linkWindowScrollResize()
 
-    attachSearchBar: ($element)->
-      @$barElem =  $element
-      $element.bind(
+    attachSearchBar: (searchBarView)->
+      @searchBarView = searchBarView
+      @$barElem = $(searchBarView.el).find('.chembl-search-bar')
+      @$barElem.bind(
         'keyup',
         @getBarKeyupHandler()
       )
-      $element.bind(
+      @$barElem.bind(
         'keydown',
         @barKeydownHandler.bind(@)
       )
@@ -48,7 +49,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         elementToFocus = null
       if elementToFocus
         elementToFocus.focus()
-        @$barElem.val elementToFocus.attr("autocomplete-text")
+        @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
 
     __barKeyupHandler: (keyEvent)->
       if @$barElem.val().length >= 3
@@ -133,17 +134,16 @@ glados.useNameSpace 'glados.views.SearchResults',
           keyEvent.preventDefault()
           searchVal = @$barElem.val()
           @$barElem.focus()
-          @$barElem.val searchVal
+          @searchBarView.expandable_search_bar.val searchVal
         if elementToFocus
           elementToFocus.focus()
-          @$barElem.val elementToFocus.attr("autocomplete-text")
+          @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
 
     getClickListenerForSuggestionN: (n)->
       return (clickEvent)->
         @$barElem.focus()
-        @$barElem.val @$options[n].attr("autocomplete-text")
-        @$barElem.qtip('hide')
-        @qtipAPI.disable(true)
+        @searchBarView.expandable_search_bar.val @$options[n].attr("autocomplete-text")
+        @searchBarView.search()
 
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
