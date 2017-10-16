@@ -166,7 +166,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
         query:
           bool:
-            must: null
+            must: []
       }
       @addSortingToQuery(es_query)
 
@@ -174,11 +174,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       customQueryString = @getMeta('custom_query_string')
       generatorList = @getMeta('generator_items_list')
       if @getMeta('use_custom_query_string')
-        es_query.query.bool.must = {
+        es_query.query.bool.must = [{
+
           query_string:
             analyze_wildcard: true
             query: customQueryString
-        }
+        }]
       # Normal Search query
       else if generatorList?
         es_query.query.bool.must = @getQueryForGeneratorList()
@@ -195,6 +196,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
         if facets_query
           es_query.aggs = facets_query
+
+      stickyQuery = @getMeta('sticky_query')
+      if stickyQuery?
+        es_query.query.bool.must = [] unless es_query.query.bool.must?
+        es_query.query.bool.must.push stickyQuery
 
       return es_query
 
@@ -585,14 +591,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if totalRecords >= 10000 and not iNeedToGetOnlySome
         msg = 'It is still not supported to process 10000 items or more! (' + totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
-        errorModalID = 'error-' + parseInt(Math.random() * 1000)
-        $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
-          modal_id: errorModalID
-          msg: msg
-        )
-        $('#BCK-GeneratedModalsContainer').append($newModal)
-        $newModal.modal()
-        $newModal.modal('open')
+#        errorModalID = 'error-' + parseInt(Math.random() * 1000)
+#        $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
+#          modal_id: errorModalID
+#          msg: msg
+#        )
+#        $('#BCK-GeneratedModalsContainer').append($newModal)
+#        $newModal.modal()
+#        $newModal.modal('open')
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'

@@ -13,12 +13,7 @@ glados.useNameSpace 'glados.views.MainPage',
       LazyIFramesHelper.initLazyIFrames()
 
       @targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-      @drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
-
       @targetBrowserView = TargetBrowserApp.initBrowserMain(@targetHierarchy, $('#BCK-TargetBrowserMain'))
-      @drugBrowserTableView = DrugBrowserApp.initBrowserAsTable(@drugList, $('#BCK-DrugBrowserMain'))
-
-      @drugList.fetch({reset: true})
 
       LazyIFramesHelper.loadObjectOnceOnClick($('a[data-target="#browse_targets"]'), @targetHierarchy)
 
