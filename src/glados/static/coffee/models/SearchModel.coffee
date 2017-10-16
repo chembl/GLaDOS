@@ -14,6 +14,9 @@ SearchModel = Backbone.Model.extend
     debouncedAutocompleteRequest: null
     autocompleteQuery: ''
 
+
+
+
   # --------------------------------------------------------------------------------------------------------------------
   # Models
   # --------------------------------------------------------------------------------------------------------------------
@@ -25,6 +28,17 @@ SearchModel = Backbone.Model.extend
           glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict())
     return @get('resultsListsDict')
 
+  loadBase64Data: ()->
+    if @egData?
+      return @egData
+    base64Data = 'W3sidDEiOiAiU09EYUxHIiwidDIiOiAiIWV2aWxhIGxsaXRzIG1hIEkiLCJ0MyI6ICJTT0RhTEcvbGJtZWhjL21vYy5idWh0aWcvLzpzcHR0aCJ9LHsidDEiOiAib2lDTmVEb0ogU09EYUxHIiwidDIiOiAib2lDTmVEb0oiLCJ0MyI6ICJvemVwb2xjbi9tb2MuYnVodGlnLy86c3B0dGgifSx7InQxIjogIm9pQ05hVGVUIFNPRGFMRyIsInQyIjogIm9pQ05hVGVUIiwidDMiOiAiYWt0b3dvbm0vbW9jLmJ1aHRpZy8vOnNwdHRoIn0seyJ0MSI6ICIhZU5vIFlUSEdpTSBlSFQgU09EYUxHIiwidDIiOiAiIWVObyBZVEhHaU0gZUhUIFNPRGFMRyIsInQzIjogIjJ4bWZuYXVqL21vYy5idWh0aWcvLzpzcHR0aCJ9XQ0K'
+    strData = atob(base64Data)
+    @egData = JSON.parse(strData)
+    for dataI in @egData
+      dataI.t1 = dataI.t1.split("").reverse().join("")
+      dataI.t2 = dataI.t2.split("").reverse().join("")
+      dataI.t3 = dataI.t3.split("").reverse().join("")
+
   # --------------------------------------------------------------------------------------------------------------------
   # Functions
   # --------------------------------------------------------------------------------------------------------------------
@@ -35,7 +49,6 @@ SearchModel = Backbone.Model.extend
     done_callback = (esData)->
       suggestions = []
       for suggI in esData.suggest.autocomplete
-        suggestions.push()
         for optionJ in suggI.options
           suggestionI = {
             chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
@@ -107,6 +120,30 @@ SearchModel = Backbone.Model.extend
   requestAutocompleteSuggestions: (textQuery, caller)->
     @autocompleteQuery = textQuery
     @autocompleteCaller = caller
+    if textQuery.startsWith('GLaDOS')
+      @loadBase64Data()
+      if @egData?
+        for dataI in @egData
+          if dataI.t1 == textQuery
+            result = {
+              chembl_id_link:
+                color: 'pink'
+                href: dataI.t3
+                text: dataI.t1
+              header: false
+              entityLabel: dataI.t1
+              score: 100
+              text: dataI.t2
+              highlightedText: dataI.t2
+              highlights: [
+                {
+                  offset: 0
+                  length: dataI.t2.length-1
+                }
+              ]
+            }
+            @set('autocompleteSuggestions', [result])
+            return
     if not @debouncedAutocompleteRequest
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 10)
     @debouncedAutocompleteRequest()
