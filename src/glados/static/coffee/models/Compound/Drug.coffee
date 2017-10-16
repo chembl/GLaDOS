@@ -11,7 +11,7 @@ glados.models.Compound.Drug.COLUMNS =
 
       synonyms = {}
       for v in values
-        if v.syn_type != "OTHER" and v.syn_type != "TRADE_NAME" and v.syn_type != "RESEARCH_CODE"
+        if v.syn_type != 'OTHER' and v.syn_type != 'TRADE_NAME' and v.syn_type != 'RESEARCH_CODE'
           if not synonyms[v.molecule_synonym]?
             synonyms[v.molecule_synonym] = []
           synonyms[v.molecule_synonym].push v.syn_type
@@ -28,6 +28,32 @@ glados.models.Compound.Drug.COLUMNS =
   )
   PHASE: _.extend({}, Compound.COLUMNS.MAX_PHASE,
     'name_to_show': 'Phase')
+  APPLICANTS:
+    'name_to_show': 'Applicants'
+    'comparator': '_metadata.drug.drug_data.applicants'
+    'sort_disabled': true
+  USAN_STEM:
+    'name_to_show': 'USAN Stem'
+    'comparator': 'usan_stem'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  USAN_YEAR:
+    'name_to_show': 'USAN Year'
+    'comparator': 'usan_year'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  FIRST_APPROVAL:
+    'name_to_show': 'First Approval'
+    'comparator': 'first_approval'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  ATC_CLASSIFICATIONS:
+    'name_to_show': 'ATC Classifications'
+    'comparator': 'atc_classifications'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'parse_function': (values) -> values.join(', ')
+
 
 glados.models.Compound.Drug.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->
@@ -41,6 +67,11 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.SYNONYMS
     Drug.COLUMNS.RESEARCH_CODES
     Drug.COLUMNS.PHASE
+    Drug.COLUMNS.APPLICANTS
+    Drug.COLUMNS.USAN_STEM
+    Drug.COLUMNS.USAN_YEAR
+    Drug.COLUMNS.FIRST_APPROVAL
+    Drug.COLUMNS.ATC_CLASSIFICATIONS
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL: []
   RESULTS_LIST_REPORT_CARD: [
