@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       autocompleteElem = $(autocompleteElemFind[0])
       @autocompleteView = new glados.views.SearchResults.SearchBarAutocompleteView
         el: autocompleteElem
-      @autocompleteView.attachSearchBar($(@el).find('.chembl-search-bar'))
+      @autocompleteView.attachSearchBar(@)
       @initializeSketcherButton()
       if @atResultsPage
         # Handles the popstate event to reload a search
@@ -101,7 +101,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showAdvanced = not @showAdvanced
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Singleton pattern
+# Instances Initialization
 # ----------------------------------------------------------------------------------------------------------------------
 
 glados.views.SearchResults.SearchBarView.createInstances = () ->

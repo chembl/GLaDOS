@@ -19,14 +19,16 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$optionsReportCards = []
       @numSuggestions = 0
       @autocompleteSuggestions = []
+      @linkWindowScrollResize()
 
-    attachSearchBar: ($element)->
-      @$barElem =  $element
-      $element.bind(
+    attachSearchBar: (searchBarView)->
+      @searchBarView = searchBarView
+      @$barElem = $(searchBarView.el).find('.chembl-search-bar')
+      @$barElem.bind(
         'keyup',
         @getBarKeyupHandler()
       )
-      $element.bind(
+      @$barElem.bind(
         'keydown',
         @barKeydownHandler.bind(@)
       )
@@ -47,13 +49,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         elementToFocus = null
       if elementToFocus
         elementToFocus.focus()
-        @$barElem.val elementToFocus.attr("autocomplete-text")
+        @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
 
     __barKeyupHandler: (keyEvent)->
       if @$barElem.val().length >= 3
         searchText = @$barElem.val().trim()
         if @lastSearch != searchText
-          @searchModel.requestAutocompleteSuggestions searchText
+          @searchModel.requestAutocompleteSuggestions searchText, @
           @lastSearch = searchText
       else
         @searchModel.set 'autocompleteSuggestions',[]
@@ -132,22 +134,20 @@ glados.useNameSpace 'glados.views.SearchResults',
           keyEvent.preventDefault()
           searchVal = @$barElem.val()
           @$barElem.focus()
-          @$barElem.val searchVal
+          @searchBarView.expandable_search_bar.val searchVal
         if elementToFocus
           elementToFocus.focus()
-          @$barElem.val elementToFocus.attr("autocomplete-text")
+          @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
 
     getClickListenerForSuggestionN: (n)->
       return (clickEvent)->
         @$barElem.focus()
-        @$barElem.val @$options[n].attr("autocomplete-text")
-        @$barElem.qtip('hide')
-        @qtipAPI.disable(true)
+        @searchBarView.expandable_search_bar.val @$options[n].attr("autocomplete-text")
+        @searchBarView.search()
 
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
       $act = $('#qtip-'+@qtipId).find('.search-bar-autocomplete-tooltip')
-      console.log($act)
       @$options = []
       @$optionsReportCards = []
       @$barElem.attr("autocomplete-text", @lastSearch)
@@ -177,8 +177,18 @@ glados.useNameSpace 'glados.views.SearchResults',
     unlinkTooltipOptions: (event, api)->
       @$options = null
 
+    linkWindowScrollResize: ->
+      thisView = @
+      scrollNResize = ()->
+        if thisView.hideQtip?
+          thisView.hideQtip()
+      $(window).scroll scrollNResize
+      $(window).resize scrollNResize
+
     updateAutocomplete: ()->
       if not @$barElem? or not @$barElem.is(":visible")
+        return
+      if @searchModel.autocompleteCaller != @
         return
       $hoveredElem = @$barElem
       @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
@@ -199,19 +209,24 @@ glados.useNameSpace 'glados.views.SearchResults',
             show:
               solo: true
             style:
-              width: $hoveredElem.width()
+              width: $hoveredElem.parent().parent().parent().width()
               classes:'simple-qtip qtip-light qtip-shadow'
           $hoveredElem.qtip qtipConfig
           @qtipAPI = $hoveredElem.qtip('api')
+          @hideQtip = ->
+            @$barElem.blur()
+            if $('#qtip-'+@qtipId).is(":visible")
+              @qtipAPI.hide()
+          @hideQtip = @hideQtip.bind(@)
 
         @qtipAPI.enable()
         $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
           suggestions: @autocompleteSuggestions
           textSearch: @lastSearch
         }))
-        $hoveredElem.qtip('show')
+        @qtipAPI.show()
       else if @qtipAPI?
-        $hoveredElem.qtip('hide')
+        @qtipAPI.hide()
         @qtipAPI.disable(true)
 
 glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT = 0
