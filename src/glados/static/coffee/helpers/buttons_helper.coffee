@@ -412,6 +412,9 @@ class ButtonsHelper
       @val(@$input_element.val())
       # on enter callback
       @on_enter_cb = null
+      thisObject = @
+      $(window).resize ->
+        thisObject.$input_element.width('')
 
     val: (new_value)->
       if _.isUndefined(new_value)
