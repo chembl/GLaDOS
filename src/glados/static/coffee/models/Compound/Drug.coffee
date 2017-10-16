@@ -22,6 +22,10 @@ glados.models.Compound.Drug.COLUMNS =
 
       return text
   )
+  RESEARCH_CODES: _.extend({}, Compound.COLUMNS.SYNONYMS,
+    'name_to_show': 'Research Codes'
+    'parse_function': (values) -> (v.molecule_synonym for v in values when v.syn_type == "RESEARCH_CODE").join(', ')
+  )
   PHASE: _.extend({}, Compound.COLUMNS.MAX_PHASE,
     'name_to_show': 'Phase')
 
@@ -35,11 +39,13 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
   RESULTS_LIST_TABLE: [
     Drug.COLUMNS.CHEMBL_ID
     Drug.COLUMNS.SYNONYMS
+    Drug.COLUMNS.RESEARCH_CODES
     Drug.COLUMNS.PHASE
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL: []
   RESULTS_LIST_REPORT_CARD: [
     Drug.COLUMNS.CHEMBL_ID
     Drug.COLUMNS.SYNONYMS
+    Drug.COLUMNS.RESEARCH_CODES
     Drug.COLUMNS.PHASE
   ]
