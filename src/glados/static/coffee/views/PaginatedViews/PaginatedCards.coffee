@@ -4,6 +4,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initAvailablePageSizes: ->
       @AVAILABLE_PAGE_SIZES = [6, 12, 24, 48, 96, 192]
 
+      if @collection.getMeta('custom_card_size_to_page_sizes')?
+        @CARD_SIZE_TO_PAGE_SIZE = @collection.getMeta('custom_card_size_to_page_sizes')
+
       defaultPageSize = @collection.getMeta('default_page_size')
       if defaultPageSize?
         @currentPageSize = defaultPageSize
