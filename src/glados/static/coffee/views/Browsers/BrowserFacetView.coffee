@@ -24,7 +24,6 @@ glados.useNameSpace 'glados.views.Browsers',
         glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
         @handleShowHideFilter, @
 
-
       @initialiseTitle()
       @initializeHTMLStructure()
       @showPreloader()
@@ -34,9 +33,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initializeHTMLStructure: ->
 
-      console.log 'initializeHTMLStructure'
       facetsGroups = @facetsVisibilityHandler.getVisibleFacetsGroups()
-      console.log 'facetsGroups: ', facetsGroups
 
       facetListForRender = []
       for key, fGroup of facetsGroups

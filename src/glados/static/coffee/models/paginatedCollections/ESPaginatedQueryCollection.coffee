@@ -283,6 +283,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       promiseFunc = (resolve, reject)->
         non_selected_facets_groups = @getFacetsGroups(false)
         if _.keys(non_selected_facets_groups).length == 0
+          resolve()
           return
         needs_second_call = false
         for group_key, facet_group of non_selected_facets_groups
@@ -310,6 +311,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         triggerEvent = ()->
           @trigger('facets-changed')
         @__last_facets_promise.then(triggerEvent.bind(@))
+
       if @__last_facets_promise?
         @__last_facets_promise.then(runPromise.bind(@))
       else
