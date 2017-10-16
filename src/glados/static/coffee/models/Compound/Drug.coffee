@@ -6,7 +6,22 @@ Drug = glados.models.Compound.Drug
 glados.models.Compound.Drug.COLUMNS =
   CHEMBL_ID: _.extend({}, Compound.COLUMNS.CHEMBL_ID,
     'name_to_show': 'Parent Molecule')
-  SYNONYMS: Compound.COLUMNS.SYNONYMS
+  SYNONYMS: _.extend({}, Compound.COLUMNS.SYNONYMS,
+    'parse_function': (values) ->
+
+      synonyms = {}
+      for v in values
+        if v.syn_type != "OTHER" and v.syn_type != "TRADE_NAME" and v.syn_type != "RESEARCH_CODE"
+          if not synonyms[v.molecule_synonym]?
+            synonyms[v.molecule_synonym] = []
+          synonyms[v.molecule_synonym].push v.syn_type
+
+      text = ""
+      for key, types of synonyms
+        text += key + '(' + types.join(', ') + ')'
+
+      return text
+  )
   PHASE: _.extend({}, Compound.COLUMNS.MAX_PHASE,
     'name_to_show': 'Phase')
 
