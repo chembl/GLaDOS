@@ -658,6 +658,7 @@
         </div>
 
         <div class="row BCK-draggable-container sortable-items-container">
+
           {{#each all_columns}}
 
           <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
@@ -669,12 +670,13 @@
 
               <div class="item-checkbox">
 
-                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="{{modal_id}}-check-{{this.comparator}}"
+                  <input type="checkbox" class="BCK-show-hide-column filled-in"
+                       id="{{this.modal_id}}-check-{{this.comparator}}"
                        data-comparator='{{this.comparator}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 
-                  <label for="{{modal_id}}-check-{{this.comparator}}">
+                  <label for="{{this.modal_id}}-check-{{this.comparator}}">
                   {{this.position}}.
                   </label>
 
