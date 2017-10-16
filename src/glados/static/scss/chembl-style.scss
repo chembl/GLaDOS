@@ -291,7 +291,7 @@ header .row {
   width: 100%;
   margin: 0;
   padding: 0;
-  z-index: 10;
+  z-index: 20;
   &.pin-top{
     margin-top: 0;
     width: 100%;
@@ -304,7 +304,7 @@ header .row {
 
 #chembl-header-container{
   height: 0;
-  z-index: 5;
+  z-index: 20;
   font-size: $large-font-size;
   width: 100%;
   .inner-row{
@@ -1922,10 +1922,10 @@ div#CNC-zoom-modal {
   }
 
   input {
-    font-size: 1.2rem;
-    height: 1.5em;
+    font-size: 1rem;
+    height: 1.5rem;
     margin-left: 10px;
-    margin-top: 0.2em;
+    margin-top: 0.5rem;
     width: 99% !important;
     border-bottom: 0px;
   }
