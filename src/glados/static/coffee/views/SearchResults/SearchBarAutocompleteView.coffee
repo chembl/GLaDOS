@@ -7,6 +7,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: () ->
+      @qtipId = 'autocomplete_tooltip__'+glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT
+      glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT += 1
       @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
@@ -144,7 +146,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
-      $act = $(@el).find('.search-bar-autocomplete-tooltip')
+      $act = $('#qtip-'+@qtipId).find('.search-bar-autocomplete-tooltip')
+      console.log($act)
       @$options = []
       @$optionsReportCards = []
       @$barElem.attr("autocomplete-text", @lastSearch)
@@ -183,6 +186,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @autocompleteSuggestions.length > 0
         if not @qtipAPI
           qtipConfig =
+            id: @qtipId
             content:
               text: ''
             events:
@@ -209,3 +213,5 @@ glados.useNameSpace 'glados.views.SearchResults',
       else if @qtipAPI?
         $hoveredElem.qtip('hide')
         @qtipAPI.disable(true)
+
+glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT = 0
