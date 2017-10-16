@@ -54,7 +54,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @$barElem.val().length >= 3
         searchText = @$barElem.val().trim()
         if @lastSearch != searchText
-          @searchModel.requestAutocompleteSuggestions searchText
+          @searchModel.requestAutocompleteSuggestions searchText, @
           @lastSearch = searchText
       else
         @searchModel.set 'autocompleteSuggestions',[]
@@ -188,6 +188,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     updateAutocomplete: ()->
       if not @$barElem? or not @$barElem.is(":visible")
         return
+      if @searchModel.autocompleteCaller != @
+        return
       $hoveredElem = @$barElem
       @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
       @numSuggestions = @autocompleteSuggestions.length
@@ -214,7 +216,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @hideQtip = ->
             @$barElem.blur()
             if $('#qtip-'+@qtipId).is(":visible")
-              $hoveredElem.qtip('hide')
+              @qtipAPI.hide()
           @hideQtip = @hideQtip.bind(@)
 
         @qtipAPI.enable()
@@ -222,9 +224,9 @@ glados.useNameSpace 'glados.views.SearchResults',
           suggestions: @autocompleteSuggestions
           textSearch: @lastSearch
         }))
-        $hoveredElem.qtip('show')
+        @qtipAPI.show()
       else if @qtipAPI?
-        $hoveredElem.qtip('hide')
+        @qtipAPI.hide()
         @qtipAPI.disable(true)
 
 glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT = 0

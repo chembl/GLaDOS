@@ -104,8 +104,9 @@ SearchModel = Backbone.Model.extend
       deferreds.push(deferred_i)
     $.when.apply($, deferreds).then(then_callback.bind(@), then_callback.bind(@))
 
-  requestAutocompleteSuggestions: (textQuery)->
+  requestAutocompleteSuggestions: (textQuery, caller)->
     @autocompleteQuery = textQuery
+    @autocompleteCaller = caller
     if not @debouncedAutocompleteRequest
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 10)
     @debouncedAutocompleteRequest()
