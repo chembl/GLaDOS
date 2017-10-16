@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$optionsReportCards = []
       @numSuggestions = 0
       @autocompleteSuggestions = []
+      @linkWindowScrollResize()
 
     attachSearchBar: ($element)->
       @$barElem =  $element
@@ -147,7 +148,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     linkTooltipOptions: (event, api)->
       #AutoCompleteTooltip
       $act = $('#qtip-'+@qtipId).find('.search-bar-autocomplete-tooltip')
-      console.log($act)
       @$options = []
       @$optionsReportCards = []
       @$barElem.attr("autocomplete-text", @lastSearch)
@@ -177,6 +177,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     unlinkTooltipOptions: (event, api)->
       @$options = null
 
+    linkWindowScrollResize: ->
+      thisView = @
+      scrollNResize = ()->
+        if thisView.hideQtip?
+          thisView.hideQtip()
+      $(window).scroll scrollNResize
+      $(window).resize scrollNResize
+
     updateAutocomplete: ()->
       if not @$barElem? or not @$barElem.is(":visible")
         return
@@ -199,10 +207,15 @@ glados.useNameSpace 'glados.views.SearchResults',
             show:
               solo: true
             style:
-              width: $hoveredElem.width()
+              width: $hoveredElem.parent().parent().parent().width()
               classes:'simple-qtip qtip-light qtip-shadow'
           $hoveredElem.qtip qtipConfig
           @qtipAPI = $hoveredElem.qtip('api')
+          @hideQtip = ->
+            @$barElem.blur()
+            if $('#qtip-'+@qtipId).is(":visible")
+              $hoveredElem.qtip('hide')
+          @hideQtip = @hideQtip.bind(@)
 
         @qtipAPI.enable()
         $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
