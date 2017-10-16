@@ -385,12 +385,15 @@ class ButtonsHelper
 
   class @ExpandableInput
 
+    @CURRENT_ID = 0
+
     constructor:(input_element)->
       if not input_element instanceof jQuery
         @$input_element = $(input_element)
       else
         @$input_element = $(input_element)
-      @expanded_area_id = @$input_element.attr('id')+'-expanded'
+      @expanded_area_id = 'expandable-input-'+ButtonsHelper.ExpandableInput.CURRENT_ID
+      ButtonsHelper.ExpandableInput.CURRENT_ID += 1
       if not @$input_element.is("input")
         throw new Error("WARNING: could not obtain a valid input element to create an expandable input.")
 
@@ -432,8 +435,10 @@ class ButtonsHelper
 
     decompressInput: ()->
       # This is required to reset the values of scrollWidth and clientWidth to check if text is overflowing
-      @$input_element.width(@initial_width)
-      @$input_element.val(@real_value)
+      @initial_width = Math.ceil(@$input_element.width())
+      if @initial_width > 0
+        @$input_element.width(@initial_width)
+        @$input_element.val(@real_value)
 
     compressInput: ()->
       @decompressInput()
