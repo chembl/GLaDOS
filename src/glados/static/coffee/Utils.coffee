@@ -82,6 +82,7 @@ glados.useNameSpace 'glados',
           returnCol['function_key'] = colDescription.function_key
 
           returnCol['hide_value'] = colDescription.hide_value
+          returnCol['table_cell_width'] = colDescription.table_cell_width
 
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')

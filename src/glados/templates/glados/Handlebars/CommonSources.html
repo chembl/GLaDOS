@@ -81,7 +81,8 @@
 
           <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
             {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
-              data-comparator="{{this.comparator}}">
+              data-comparator="{{this.comparator}}"
+          >
 
           {{#if this.img_url}}
             <img src="{{this.img_url}}" height="75px" width="75px" ><br>
@@ -134,9 +135,13 @@
       {{/unless}}
 
       {{#each columns}}
-        <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header" data-comparator="{{this.comparator}}">
+        <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header"
+            data-comparator="{{this.comparator}}"
+        >
 
-           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
+           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
+              {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};'{{/if}}
+           >
             <thead>
              <tr>
                <th class="name-to-show">
@@ -1144,8 +1149,10 @@
   <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
   <div class="feat-icon {{active_class}}">
     <div class="valign-wrapper">
-      <i class="valign icon {{icon_class}} tooltipped" data-icon="{{data_icon}}" data-position="{{tooltip_position}}"
-            data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
+         data-icon="{{data_icon}}"
+         data-position="{{tooltip_position}}"
+         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
     </div>
   </div>
 </script>

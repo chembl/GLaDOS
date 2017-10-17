@@ -94,7 +94,7 @@ glados.models.Compound.Drug.COLUMNS =
     'sort_disabled': true
   ICON: {
     'name_to_show': 'Icon'
-    'comparator': ''
+    'comparator': '--'
     'sort_disabled': true
     'on_click': CompoundReportCardApp.initDrugIconGridFromFunctionLink
     'function_parameters': ['molecule_chembl_id']
@@ -104,6 +104,8 @@ glados.models.Compound.Drug.COLUMNS =
     'function_link': true
     'execute_on_render': true
     'hide_value': true
+    'table_cell_width': '300px'
+
   }
 
 glados.models.Compound.Drug.COLUMNS_SETTINGS =

@@ -1827,6 +1827,9 @@ div#CNC-zoom-modal {
       font-size: 2em;
       margin: auto;
 
+      &.table_cell_icon{
+        font-size: 1.6em;
+      }
     }
   }
 
@@ -1842,7 +1845,7 @@ div#CNC-zoom-modal {
       background-color: #077b7f;
     }
   }
-  
+
 }
 
 /**
