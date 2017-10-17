@@ -14,9 +14,6 @@ SearchModel = Backbone.Model.extend
     debouncedAutocompleteRequest: null
     autocompleteQuery: ''
 
-
-
-
   # --------------------------------------------------------------------------------------------------------------------
   # Models
   # --------------------------------------------------------------------------------------------------------------------
@@ -31,7 +28,11 @@ SearchModel = Backbone.Model.extend
   loadBase64Data: ()->
     if @egData?
       return @egData
-    base64Data = 'W3sidDEiOiAiU09EYUxHIiwidDIiOiAiIWV2aWxhIGxsaXRzIG1hIEkiLCJ0MyI6ICJTT0RhTEcvbGJtZWhjL21vYy5idWh0aWcvLzpzcHR0aCJ9LHsidDEiOiAib2lDTmVEb0ogU09EYUxHIiwidDIiOiAib2lDTmVEb0oiLCJ0MyI6ICJvemVwb2xjbi9tb2MuYnVodGlnLy86c3B0dGgifSx7InQxIjogIm9pQ05hVGVUIFNPRGFMRyIsInQyIjogIm9pQ05hVGVUIiwidDMiOiAiYWt0b3dvbm0vbW9jLmJ1aHRpZy8vOnNwdHRoIn0seyJ0MSI6ICIhZU5vIFlUSEdpTSBlSFQgU09EYUxHIiwidDIiOiAiIWVObyBZVEhHaU0gZUhUIFNPRGFMRyIsInQzIjogIjJ4bWZuYXVqL21vYy5idWh0aWcvLzpzcHR0aCJ9XQ0K'
+    base64Data = 'W3sidDEiOiAiU09EYUxHIiwidDIiOiAiIWV2aWxhIGxsaXRzIG1hIEkiLCJ0MyI6ICJTT0RhTEcvbGJtZWhjL21vYy5idWh0aW'+
+      'cvLzpzcHR0aCJ9LHsidDEiOiAib2lDTmVEb0ogU09EYUxHIiwidDIiOiAib2lDTmVEb0oiLCJ0MyI6ICJvemVwb2xjbi9tb2MuYnVodGlnLy8'+
+      '6c3B0dGgifSx7InQxIjogIm9pQ05hVGVUIFNPRGFMRyIsInQyIjogIm9pQ05hVGVUIiwidDMiOiAiYWt0b3dvbm0vbW9jLmJ1aHRpZy8vOnNw'+
+      'dHRoIn0seyJ0MSI6ICIhZU5vIFlUSEdpTSBlSFQgU09EYUxHIiwidDIiOiAiIWVObyBZVEhHaU0gZUhUIFNPRGFMRyIsInQzIjogIjJ4bWZuY'+
+      'XVqL21vYy5idWh0aWcvLzpzcHR0aCJ9XQ0K'
     strData = atob(base64Data)
     @egData = JSON.parse(strData)
     for dataI in @egData
