@@ -396,7 +396,7 @@ def check_unichem(term_dict: dict):
                     'label': 'UniChem',
                     'chembl_ids': chembl_ids,
                     'not_in_chembl': unichem_not_in_chembl_cross_refs,
-                    'include_in_query': True,
+                    'include_in_query': False,
                     'chembl_entity': 'compound'
                 }
             )
