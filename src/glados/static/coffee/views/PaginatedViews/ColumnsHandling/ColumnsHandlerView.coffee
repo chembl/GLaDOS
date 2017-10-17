@@ -48,7 +48,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       else
         allColumns = @model.get('all_columns')
 
-      console.log 'render with id: ', @modalId
       # handlebars can't acces variables outside of scope. :(
       for col in allColumns
         col.modal_id = @modalId
@@ -61,7 +60,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
       # handlebars can't acces variables outside of scope. :(
       for col in allColumns
-        col.modal_id = undefined 
+        col.modal_id = undefined
 
       @initDragging()
       @hidePreloader()

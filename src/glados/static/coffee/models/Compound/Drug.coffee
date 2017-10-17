@@ -1,5 +1,10 @@
 glados.useNameSpace 'glados.models.Compound',
-  Drug: Compound.extend {}
+  Drug: Compound.extend
+    parse: (response) ->
+      patentID = response._metadata.drug.drug_data.sc_patent
+      if patentID
+        response.patent_url = 'https://www.surechembl.org/document/' + patentID
+      return Compound.prototype.parse.call(@, response)
 
 Drug = glados.models.Compound.Drug
 
@@ -64,10 +69,29 @@ glados.models.Compound.Drug.COLUMNS =
   INDICATION_CLASS:
     'name_to_show': 'Indication Class'
     'comparator': 'indication_class'
-    'sort_disabled': true
     'is_sorting': 0
     'sort_class': 'fa-sort'
-
+  PATENT:
+    'name_to_show': 'Patent'
+    'comparator': '_metadata.drug.drug_data.sc_patent'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'link_base': 'patent_url'
+    'secondary_link': true
+  WITHDRAWN_YEAR:
+    'name_to_show': 'Withdrawn Year'
+    'comparator': 'withdrawn_year'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  WITHDRAWN_COUNTRY:
+    'name_to_show': 'Withdrawn Country'
+    'comparator': 'withdrawn_country'
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  WITHDRAWN_REASON:
+    'name_to_show': 'Withdrawn Reason'
+    'comparator': 'withdrawn_reason'
+    'sort_disabled': true
 
 
 glados.models.Compound.Drug.COLUMNS_SETTINGS =
@@ -92,6 +116,10 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.USAN_STEM_DEFINITION
     Drug.COLUMNS.USAN_STEM_SUBSTEM
     Drug.COLUMNS.INDICATION_CLASS
+    Drug.COLUMNS.PATENT
+    Drug.COLUMNS.WITHDRAWN_YEAR
+    Drug.COLUMNS.WITHDRAWN_REASON
+    Drug.COLUMNS.WITHDRAWN_COUNTRY
   ]
   RESULTS_LIST_REPORT_CARD: [
     Drug.COLUMNS.CHEMBL_ID
