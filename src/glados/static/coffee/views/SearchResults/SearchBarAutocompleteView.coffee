@@ -181,7 +181,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     linkWindowScrollResize: ->
       thisView = @
       scrollNResize = ()->
-        console.warn thisView.currentWindowOffset, Math.abs(thisView.currentWindowOffset-$(window).scrollTop())
         hideOnScroll = thisView.currentWindowOffset? and
           Math.abs(thisView.currentWindowOffset-$(window).scrollTop()) > 100
         if thisView.hideQtip? and hideOnScroll
