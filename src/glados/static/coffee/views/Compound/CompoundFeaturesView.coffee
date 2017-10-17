@@ -3,7 +3,6 @@
 CompoundFeaturesView = CardView.extend
 
   initialize: ->
-    console.log 'INIT COMP FEATURES VIEW!!'
     $gridContainer = $(@el).find('.BCK-FeaturesGrid')
     glados.Utils.fillContentForElement($gridContainer)
 

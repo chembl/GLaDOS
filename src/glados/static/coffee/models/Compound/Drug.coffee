@@ -103,8 +103,7 @@ glados.models.Compound.Drug.COLUMNS =
     'function_key': 'drug_icon_grid'
     'function_link': true
     'execute_on_render': true
-    'format_class': 'number-cell-center'
-    'secondary_link': true
+    'hide_value': true
   }
 
 glados.models.Compound.Drug.COLUMNS_SETTINGS =

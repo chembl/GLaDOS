@@ -81,6 +81,8 @@ glados.useNameSpace 'glados',
           returnCol['function_constant_parameters'] = colDescription.function_constant_parameters
           returnCol['function_key'] = colDescription.function_key
 
+          returnCol['hide_value'] = colDescription.hide_value
+
         returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])

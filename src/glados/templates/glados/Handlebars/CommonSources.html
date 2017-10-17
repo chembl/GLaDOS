@@ -78,6 +78,7 @@
 
       {{#each columns}}
 
+
           <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
             {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
               data-comparator="{{this.comparator}}">
@@ -88,11 +89,15 @@
           {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
           {{else}}
-            {{this.value}}
+
+            {{#unless this.hide_value}}
+              {{this.value}}
+            {{/unless}}
+
           {{/if}}
 
           {{#if this.is_function_link}}
-            <br>
+            {{#unless this.hide_value}}<br>{{/unless}}
             <div>
             <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
                data-function_constant_parameters="{{this.function_constant_parameters}}"
