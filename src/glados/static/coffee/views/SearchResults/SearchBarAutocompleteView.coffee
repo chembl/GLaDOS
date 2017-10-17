@@ -146,6 +146,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @searchBarView.search()
 
     linkTooltipOptions: (event, api)->
+      @currentWindowOffset = $(window).scrollTop()
       #AutoCompleteTooltip
       $act = $('#qtip-'+@qtipId).find('.search-bar-autocomplete-tooltip')
       @$options = []
@@ -180,7 +181,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     linkWindowScrollResize: ->
       thisView = @
       scrollNResize = ()->
-        if thisView.hideQtip?
+        console.warn thisView.currentWindowOffset, Math.abs(thisView.currentWindowOffset-$(window).scrollTop())
+        hideOnScroll = thisView.currentWindowOffset? and
+          Math.abs(thisView.currentWindowOffset-$(window).scrollTop()) > 100
+        if thisView.hideQtip? and hideOnScroll
           thisView.hideQtip()
       $(window).scroll scrollNResize
       $(window).resize scrollNResize
