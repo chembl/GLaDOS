@@ -1054,4 +1054,14 @@
 <script id="Handlebars-Marvin-Similarity-PercentageSlider" type="text/x-handlebars-template">
   <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
 </script>
+
+<script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
+  <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
+  <div class="feat-icon {{active_class}}">
+    <div class="valign-wrapper">
+      <i class="valign icon {{icon_class}} tooltipped" data-icon="{{data_icon}}" data-position="{{tooltip_position}}"
+            data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+    </div>
+  </div>
+</script>
 {% endverbatim %}

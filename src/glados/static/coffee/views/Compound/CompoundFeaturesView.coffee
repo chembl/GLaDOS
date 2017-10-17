@@ -28,10 +28,10 @@ CompoundFeaturesView = CardView.extend
 
     @activateTooltips()
 
-  renderProperty: (div_id, property) ->
-    property_div = $(@el).find('#' + div_id)
+  renderProperty: (featureName, property) ->
+    $propertyDiv = $(@el).find('[data-feature-name="' + featureName + '"]')
 
-    property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
+    glados.Utils.fillContentForElement $propertyDiv,
       active_class: @getMolFeatureDetails(property, 0)
       data_icon: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
@@ -39,9 +39,6 @@ CompoundFeaturesView = CardView.extend
       icon_class: @getMolFeatureDetails(property, 4)
 
   getMolFeatureDetails: (feature, position) ->
-    console.log 'feature: ', feature
-    console.log 'position: ', position
-    console.log '@model.get(feature)', @model.get(feature)
     if feature == 'molecule_type' and @model.get('natural_product') == '1'
       @molFeatures[feature]['Natural product'][position]
     else if feature == 'molecule_type' and @model.get('polymer_flag') == true
