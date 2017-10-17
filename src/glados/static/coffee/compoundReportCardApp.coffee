@@ -348,3 +348,23 @@ class CompoundReportCardApp
       CompoundReportCardApp.initMiniBioactivitiesHistogram($containerElem, compoundChemblID)
     else if histogramType == 'targets'
       CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)
+
+  @initDrugIconGridFromFunctionLink = ->
+
+    $clickedLink = $(@)
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+
+    $gridContainer = $('<div class="BCK-FeaturesGrid" data-hb-template="Handlebars-Compound-MoleculeFeaturesGrid">')
+    $containerElem.append($gridContainer)
+
+    chemblID = paramsList[0]
+    # in the future this should be taken form the collection instead of creating a new instance
+    compound = new Compound
+      molecule_chembl_id: chemblID
+    new CompoundFeaturesView
+      model: compound
+      el: $containerElem
+    compound.fetch()
+
+

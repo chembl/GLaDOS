@@ -92,7 +92,20 @@ glados.models.Compound.Drug.COLUMNS =
     'name_to_show': 'Withdrawn Reason'
     'comparator': 'withdrawn_reason'
     'sort_disabled': true
-
+  ICON: {
+    'name_to_show': 'Icon'
+    'comparator': ''
+    'sort_disabled': true
+    'on_click': CompoundReportCardApp.initDrugIconGridFromFunctionLink
+    'function_parameters': ['molecule_chembl_id']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    'function_key': 'drug_icon_grid'
+    'function_link': true
+    'execute_on_render': true
+    'format_class': 'number-cell-center'
+    'secondary_link': true
+  }
 
 glados.models.Compound.Drug.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->
@@ -111,6 +124,7 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.USAN_YEAR
     Drug.COLUMNS.FIRST_APPROVAL
     Drug.COLUMNS.ATC_CLASSIFICATIONS
+    Drug.COLUMNS.ICON
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL: [
     Drug.COLUMNS.USAN_STEM_DEFINITION
