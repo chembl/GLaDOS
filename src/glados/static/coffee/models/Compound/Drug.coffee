@@ -104,7 +104,8 @@ glados.models.Compound.Drug.COLUMNS =
     'function_link': true
     'execute_on_render': true
     'hide_value': true
-    'table_cell_width': '300px'
+    'remove_link_after_click': true
+    'table_cell_width': '250px'
 
   }
 

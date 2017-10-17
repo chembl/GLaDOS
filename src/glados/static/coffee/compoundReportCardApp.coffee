@@ -353,7 +353,7 @@ class CompoundReportCardApp
 
     $clickedLink = $(@)
     [paramsList, constantParamsList, $containerElem] = \
-    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink, isDataVis=false)
 
     $gridContainer = $('<div class="BCK-FeaturesGrid" data-hb-template="Handlebars-Compound-MoleculeFeaturesGrid">')
     $containerElem.append($gridContainer)

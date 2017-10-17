@@ -184,10 +184,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           functionKey = $currentLink.attr('data-function-key')
           functionToBind = functionColumnsIndex[functionKey].on_click
           $currentLink.click functionToBind
+
+          removeAfterClick = functionColumnsIndex[functionKey].remove_link_after_click
+          if removeAfterClick
+            $currentLink.click -> $(@).remove()
+
           executeOnRender = functionColumnsIndex[functionKey].execute_on_render
 
           if executeOnRender
             $currentLink.click()
+
+
+
+
           $currentLink.attr('data-already-function-bound', 'yes')
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -276,15 +285,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
 #-----------------------------------------------------------------------------------------------------------------------
-glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell = ($clickedElem) ->
+glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell = ($clickedElem, isDataVis=true) ->
 
   $clickedLink = $clickedElem
   paramsList = $clickedLink.attr('data-function-paramaters').split(',')
   constantParamsList = $clickedLink.attr('data-function_constant_parameters').split(',')
   $containerElem = $clickedLink.parent()
-  $containerElem.removeClass('number-cell')
-  $containerElem.addClass('vis-container')
-  glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
+
+  if isDataVis
+    $containerElem.removeClass('number-cell')
+    $containerElem.addClass('vis-container')
+    glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
   return [paramsList, constantParamsList, $containerElem]
 
