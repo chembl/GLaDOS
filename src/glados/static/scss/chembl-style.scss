@@ -1806,40 +1806,43 @@ div#CNC-zoom-modal {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.mol-features-grid .col {
-  border: 1px solid #fafafa;
-  padding: 2px;
-  background-color: #e0e0e0;
-}
-
-.mol-features-grid .row {
-  margin-bottom: 0;
-}
-
-.mol-features-grid {
-  line-height: 1.5;
-}
-
-.mol-features-grid .mol-features-detail {
-  font-size: 65%;
-}
-
-.mol-features-grid .feat-icon {
-
-  i {
-    font-size: 2em;
-    margin: auto;
-
+.mol-features-grid{
+  .col {
+    border: 1px solid #fafafa;
+    padding: 2px;
+    background-color: #e0e0e0;
   }
-}
 
-.mol-features-grid .first-row .active {
-  background-color: #73b360;
-  opacity: 0.9
-}
+  .row {
+    margin-bottom: 0;
+  }
 
-.mol-features-grid .second-row .active {
-  background-color: #077b7f;
+  .mol-features-grid {
+    line-height: 1.5;
+  }
+
+  .feat-icon {
+
+    i {
+      font-size: 2em;
+      margin: auto;
+
+    }
+  }
+
+  .first-row{
+    .active {
+      background-color: #73b360;
+      opacity: 0.9
+    }
+  }
+
+  .second-row{
+    .active {
+      background-color: #077b7f;
+    }
+  }
+  
 }
 
 /**

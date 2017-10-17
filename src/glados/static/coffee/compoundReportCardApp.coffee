@@ -365,6 +365,7 @@ class CompoundReportCardApp
     new CompoundFeaturesView
       model: compound
       el: $containerElem
+      table_cell_mode: true
     compound.fetch()
 
 

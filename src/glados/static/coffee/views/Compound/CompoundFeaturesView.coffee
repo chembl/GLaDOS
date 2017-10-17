@@ -3,8 +3,12 @@
 CompoundFeaturesView = CardView.extend
 
   initialize: ->
+
+    @tableCellMode = arguments[0].table_cell_mode
+
     $gridContainer = $(@el).find('.BCK-FeaturesGrid')
-    glados.Utils.fillContentForElement($gridContainer)
+    glados.Utils.fillContentForElement $gridContainer,
+      table_cell_mode: @tableCellMode
 
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
@@ -40,6 +44,7 @@ CompoundFeaturesView = CardView.extend
       tooltip: @getMolFeatureDetails(property, 2)
       tooltip_position: @getMolFeatureDetails(property, 3)
       icon_class: @getMolFeatureDetails(property, 4)
+      table_cell_mode: @tableCellMode
 
   getMolFeatureDetails: (feature, position) ->
     if feature == 'molecule_type' and @model.get('natural_product') == '1'
