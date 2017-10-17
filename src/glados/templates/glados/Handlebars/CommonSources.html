@@ -1055,6 +1055,86 @@
   <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
 </script>
 
+<script id="Handlebars-Compound-MoleculeFeaturesGrid" type="text/x-handlebars-template">
+
+<div class="mol-features-grid white-text">
+
+            <div class="row center-align first-row">
+
+              <div data-feature-name='Bck-MolType' class="col s2 offset-s1"
+               data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-RuleOfFive' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-FirstInClass' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+              <div data-feature-name='Bck-Chirality' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-Prodrug' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+            </div>
+
+            <div class="row center-align second-row">
+
+              <div data-feature-name='Bck-Oral' class="col s2 offset-s1"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-Parenteral' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-Topical' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-BlackBox' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div data-feature-name='Bck-Availability' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+</script>
+
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
   <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
   <div class="feat-icon {{active_class}}">

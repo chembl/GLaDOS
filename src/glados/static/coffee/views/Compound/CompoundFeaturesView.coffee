@@ -3,6 +3,9 @@
 CompoundFeaturesView = CardView.extend
 
   initialize: ->
+    $gridContainer = $(@el).find('.BCK-FeaturesGrid')
+    glados.Utils.fillContentForElement($gridContainer)
+
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
