@@ -162,6 +162,7 @@ urlpatterns = [
   # Tests
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
+  url(r'^string_standardisation_test/$', DirectTemplateView.as_view(template_name="glados/stringStandardisationTest.html"), ),
   url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
 
   url(r'^acknowledgements/$', views.acks, name='acks'),

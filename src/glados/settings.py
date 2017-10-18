@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import glados
+from django.utils.translation import ugettext_lazy as _
 
 
 class RunEnvs(object):
@@ -131,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 # ----------------------------------------------------------------------------------------------------------------------
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en_gb'
 
 TIME_ZONE = 'UTC'
 
@@ -141,6 +142,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('en_gb', _('English')),
+)
+LOCALE_PATHS = (
+    os.path.join(GLADOS_ROOT, 'locale'),
+)
 # ----------------------------------------------------------------------------------------------------------------------
 # STATIC FILES (CSS, JavaScript, Images) and URL's
 # https://docs.djangoproject.com/en/1.9/howto/static-files/

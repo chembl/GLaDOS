@@ -1,10 +1,12 @@
 from django.views.generic import TemplateView
 import traceback
+from django.utils import translation
 
 # This class allows to render template html files directly
 class DirectTemplateView(TemplateView):
-  extra_context = None
 
+  translation.activate('en_gb')
+  extra_context = None
   def get_context_data(self, **kwargs):
     context = super(self.__class__, self).get_context_data(**kwargs)
     if self.extra_context is not None:

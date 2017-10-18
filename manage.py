@@ -6,5 +6,4 @@ GLADOS_PATH = os.path.join(SCRIPT_DIR, 'src')
 sys.path.append(GLADOS_PATH)
 
 import glados.manage as inner_manage
-
 inner_manage.main()
