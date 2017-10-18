@@ -132,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 # ----------------------------------------------------------------------------------------------------------------------
 
-LANGUAGE_CODE = 'en-uk'
+LANGUAGE_CODE = 'en_gb'
 
 TIME_ZONE = 'UTC'
 
@@ -143,7 +143,7 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ('en', _('English')),
+    ('en_gb', _('English')),
 )
 LOCALE_PATHS = (
     os.path.join(GLADOS_ROOT, 'locale'),

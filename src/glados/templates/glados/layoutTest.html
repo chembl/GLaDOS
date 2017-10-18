@@ -1,4 +1,5 @@
 {% extends "glados/base/base_layout.html" %}
+{% load i18n %}
 
 {% block title %}Layout test page{% endblock %}
 
@@ -63,6 +64,9 @@
         dui lectus.
 
       </p>
+
+      <h3>String StandardizationTest:</h3>
+      {% trans "hello" %}
 
       <h3>Molecule Features Icons:</h3>
 
