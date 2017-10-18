@@ -3,6 +3,13 @@
 CompoundFeaturesView = CardView.extend
 
   initialize: ->
+
+    @tableCellMode = arguments[0].table_cell_mode
+
+    $gridContainer = $(@el).find('.BCK-FeaturesGrid')
+    glados.Utils.fillContentForElement $gridContainer,
+      table_cell_mode: @tableCellMode
+
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
@@ -28,21 +35,23 @@ CompoundFeaturesView = CardView.extend
 
     @activateTooltips()
 
-  renderProperty: (div_id, property) ->
-    property_div = $(@el).find('#' + div_id)
+  renderProperty: (featureName, property) ->
+    $propertyDiv = $(@el).find('[data-feature-name="' + featureName + '"]')
 
-    property_div.html Handlebars.compile($('#Handlebars-Compound-MoleculeFeatures-IconContainer').html())
+    glados.Utils.fillContentForElement $propertyDiv,
       active_class: @getMolFeatureDetails(property, 0)
       data_icon: @getMolFeatureDetails(property, 1)
       tooltip: @getMolFeatureDetails(property, 2)
       tooltip_position: @getMolFeatureDetails(property, 3)
       icon_class: @getMolFeatureDetails(property, 4)
+      table_cell_mode: @tableCellMode
 
   getMolFeatureDetails: (feature, position) ->
     if feature == 'molecule_type' and @model.get('natural_product') == '1'
       @molFeatures[feature]['Natural product'][position]
     else if feature == 'molecule_type' and @model.get('polymer_flag') == true
       @molFeatures[feature]['Small molecule polymer'][position]
+
     else
       return @molFeatures[feature][@model.get(feature)][position]
 
@@ -86,6 +95,7 @@ CompoundFeaturesView = CardView.extend
       '0': ['', 'b', 'Black Box: No', 'bottom', 'icon-chembl']
       '1': ['active', 'b', 'Black Box: Yes', 'bottom', 'icon-chembl']
     'availability_type':
+      '-2': ['', '1', 'Availability: Withdrawn', 'bottom', 'icon-chembl']
       '-1': ['', '1', 'Availability: Undefined', 'bottom', 'icon-chembl']
       '0': ['active', '2', 'Availability: Discontinued', 'bottom', 'icon-chembl']
       '1': ['active', '1', 'Availability: Prescription Only', 'bottom', 'icon-chembl']

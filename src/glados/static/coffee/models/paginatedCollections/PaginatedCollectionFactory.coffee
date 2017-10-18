@@ -37,6 +37,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
             custom_cards_template: esIndexSettings.CUSTOM_CARDS_TEMPLATE
             custom_cards_item_view: esIndexSettings.CUSTOM_CARDS_ITEM_VIEW
+            custom_card_item_view_details_columns: esIndexSettings.CUSTOM_CARD_ITEM_VIEW_DETAILS_COLUMNS
             complicate_cards_view: esIndexSettings.COMPLICATE_CARDS_VIEW
             complicate_card_columns: esIndexSettings.COMPLICATE_CARDS_COLUMNS
             download_formats: esIndexSettings.DOWNLOAD_FORMATS

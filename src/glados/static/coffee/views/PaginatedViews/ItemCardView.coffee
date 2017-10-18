@@ -11,6 +11,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initialize: ->
 
+      @customColumns = arguments[0].custom_columns
       cardWidth = $(@el).width()
       if cardWidth < @WIDTH_THRESHOLD
         @hideInfoOpener()
@@ -73,7 +74,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if tabID == 'Details'
         CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model,
-          'Handlebars-Common-CompoundDetails', undefined, fetchModel=false)
+          'Handlebars-Common-CompoundDetails', undefined, fetchModel=false, customColumns=@customColumns)
 
       $tabElement.attr('data-initialised','yes')
 
