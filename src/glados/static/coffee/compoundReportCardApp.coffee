@@ -198,7 +198,7 @@ class CompoundReportCardApp
 
   # you can provide chembld iD or a model already created
   @initMiniCompoundReportCard = ($containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
-  fetchModel=true)->
+  fetchModel=true, customColumns)->
 
     if model?
       compound = model
@@ -211,6 +211,7 @@ class CompoundReportCardApp
       entity: Compound
       custom_template: customTemplate
       additional_params: additionalTemplateParams
+      custom_columns: customColumns
 
     if not fetchModel
       view.render()

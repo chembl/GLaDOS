@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views',
       @entity = arguments[0].entity
       @customTemplate = arguments[0].custom_template
       @additional_params = arguments[0].additional_params
+      @customColumns = arguments[0].custom_columns
 
       @model.on 'change', @render, @
       @model.on 'error', @renderError, @
@@ -16,7 +17,10 @@ glados.useNameSpace 'glados.views',
       templateID = @customTemplate
       templateID ?= @entity.MINI_REPORT_CARD.TEMPLATE
       templateCont = $('#' + templateID).html()
-      valuesObject = glados.Utils.getColumnsWithValues(@entity.MINI_REPORT_CARD.COLUMNS, @model)
+
+      columns = @customColumns
+      columns ?= @entity.MINI_REPORT_CARD.COLUMNS
+      valuesObject = glados.Utils.getColumnsWithValues(columns, @model)
       imgUrl = glados.Utils.getImgURL(valuesObject)
 
       paramsObj =
