@@ -4,7 +4,7 @@ from django.utils import translation
 
 # This class allows to render template html files directly
 class DirectTemplateView(TemplateView):
-  
+
   translation.activate('en_gb')
   extra_context = None
   def get_context_data(self, **kwargs):
