@@ -198,7 +198,7 @@ class CompoundReportCardApp
 
   # you can provide chembld iD or a model already created
   @initMiniCompoundReportCard = ($containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
-  fetchModel=true)->
+  fetchModel=true, customColumns)->
 
     if model?
       compound = model
@@ -211,6 +211,7 @@ class CompoundReportCardApp
       entity: Compound
       custom_template: customTemplate
       additional_params: additionalTemplateParams
+      custom_columns: customColumns
 
     if not fetchModel
       view.render()
@@ -348,3 +349,24 @@ class CompoundReportCardApp
       CompoundReportCardApp.initMiniBioactivitiesHistogram($containerElem, compoundChemblID)
     else if histogramType == 'targets'
       CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)
+
+  @initDrugIconGridFromFunctionLink = ->
+
+    $clickedLink = $(@)
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink, isDataVis=false)
+
+    $gridContainer = $('<div class="BCK-FeaturesGrid" data-hb-template="Handlebars-Compound-MoleculeFeaturesGrid">')
+    $containerElem.append($gridContainer)
+
+    chemblID = paramsList[0]
+    # in the future this should be taken form the collection instead of creating a new instance
+    compound = new Compound
+      molecule_chembl_id: chemblID
+    new CompoundFeaturesView
+      model: compound
+      el: $containerElem
+      table_cell_mode: true
+    compound.fetch()
+
+

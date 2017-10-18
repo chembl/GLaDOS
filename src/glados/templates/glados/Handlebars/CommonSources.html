@@ -78,9 +78,11 @@
 
       {{#each columns}}
 
+
           <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
             {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
-              data-comparator="{{this.comparator}}">
+              data-comparator="{{this.comparator}}"
+          >
 
           {{#if this.img_url}}
             <img src="{{this.img_url}}" height="75px" width="75px" ><br>
@@ -88,17 +90,22 @@
           {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
           {{else}}
-            {{this.value}}
+
+            {{#unless this.hide_value}}
+              {{this.value}}
+            {{/unless}}
+
           {{/if}}
 
           {{#if this.is_function_link}}
-            <br>
+            {{#unless this.hide_value}}<br>{{/unless}}
             <div>
-            <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
-               data-function_constant_parameters="{{this.function_constant_parameters}}"
-               data-function-key="{{this.function_key}}">
-              <i class="fa fa-bar-chart" aria-hidden="true"></i>
-            </a>
+              <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
+                 data-function_constant_parameters="{{this.function_constant_parameters}}"
+                 data-function-key="{{this.function_key}}"
+              >
+                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+              </a>
             </div>
           {{/if}}
 
@@ -129,9 +136,13 @@
       {{/unless}}
 
       {{#each columns}}
-        <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header" data-comparator="{{this.comparator}}">
+        <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header"
+            data-comparator="{{this.comparator}}"
+        >
 
-           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}">
+           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
+              {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};'{{/if}}
+           >
             <thead>
              <tr>
                <th class="name-to-show">
@@ -658,6 +669,7 @@
         </div>
 
         <div class="row BCK-draggable-container sortable-items-container">
+
           {{#each all_columns}}
 
           <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
@@ -669,12 +681,13 @@
 
               <div class="item-checkbox">
 
-                  <input type="checkbox" class="BCK-show-hide-column filled-in" id="{{modal_id}}-check-{{this.comparator}}"
+                  <input type="checkbox" class="BCK-show-hide-column filled-in"
+                       id="{{this.modal_id}}-check-{{this.comparator}}"
                        data-comparator='{{this.comparator}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 
-                  <label for="{{modal_id}}-check-{{this.comparator}}">
+                  <label for="{{this.modal_id}}-check-{{this.comparator}}">
                   {{this.position}}.
                   </label>
 
@@ -1051,5 +1064,97 @@
 </script>
 <script id="Handlebars-Marvin-Similarity-PercentageSlider" type="text/x-handlebars-template">
   <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
+</script>
+
+<script id="Handlebars-Compound-MoleculeFeaturesGrid" type="text/x-handlebars-template">
+
+<div class="mol-features-grid white-text">
+
+            <div class="row center-align first-row">
+
+              <div id='Bck-MolType' data-feature-name='Bck-MolType' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+               data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+              <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+            </div>
+
+            <div class="row center-align second-row">
+
+              <div id='Bck-Oral' data-feature-name='Bck-Oral' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+</script>
+
+<script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
+  <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
+  <div class="feat-icon {{active_class}}">
+    <div class="valign-wrapper">
+      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
+         data-icon="{{data_icon}}"
+         data-position="{{tooltip_position}}"
+         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+    </div>
+  </div>
 </script>
 {% endverbatim %}

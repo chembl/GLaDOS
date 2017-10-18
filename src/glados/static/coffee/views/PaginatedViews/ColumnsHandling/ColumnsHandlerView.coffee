@@ -48,11 +48,19 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       else
         allColumns = @model.get('all_columns')
 
+      # handlebars can't acces variables outside of scope. :(
+      for col in allColumns
+        col.modal_id = @modalId
+
       glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
         modal_id: @modalId
+
+      # handlebars can't acces variables outside of scope. :(
+      for col in allColumns
+        col.modal_id = undefined
 
       @initDragging()
       @hidePreloader()

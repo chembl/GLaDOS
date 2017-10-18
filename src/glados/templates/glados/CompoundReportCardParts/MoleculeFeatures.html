@@ -1,17 +1,3 @@
-{% verbatim %}
-
-<script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
-  <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
-  <div class="feat-icon {{active_class}}">
-    <div class="valign-wrapper">
-      <i class="valign icon {{icon_class}} tooltipped" data-icon="{{data_icon}}" data-position="{{tooltip_position}}"
-            data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
-    </div>
-  </div>
-
-</script>
-
-{% endverbatim %}
 
 <div class="col s12 m12 l12">
 
@@ -35,74 +21,8 @@
 
       <div class="row">
 
-        <div class="col s12 m9 offset-m1 l8 offset-l2">
-
-          <div class="mol-features-grid white-text">
-
-
-            <div class="row center-align first-row">
-
-              <div id='Bck-MolType' class="col s2 offset-s1">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-RuleOfFive' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-FirstInClass' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-
-              <div id='Bck-Chirality' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Prodrug' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-
-            </div>
-
-            <div class="row center-align second-row">
-
-              <div id='Bck-Oral' class="col s2 offset-s1">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Parenteral' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Topical' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-BlackBox' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Availability' class="col s2">
-
-                <!-- Backbone -->
-
-              </div>
-
-            </div>
-
-
-          </div>
+        <div class="col s12 m9 offset-m1 l8 offset-l2 BCK-FeaturesGrid"
+             data-hb-template="Handlebars-Compound-MoleculeFeaturesGrid">
 
         </div>
 
