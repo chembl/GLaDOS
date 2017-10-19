@@ -59,7 +59,14 @@ DownloadModelOrCollectionExt =
     for obj in downloadObject
       values = []
       for key, value of obj
-        values.push('"' + JSON.stringify(obj[key]).replace(/"/g, '') + '"')
+
+        finalValue = obj[key]
+        finalValue ?= glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        if _.isFunction(finalValue)
+          finalValue = glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        finalValue = JSON.stringify(finalValue).replace(/"/g, '')
+
+        values.push('"' + finalValue + '"')
       rows.push(values.join(separator))
 
     return rows.join('\n')
