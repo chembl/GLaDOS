@@ -3,7 +3,8 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-
-#: src/glados/templates/glados/layoutTest.html:69
 msgid "GLADOS_PCHEMBL"
 msgstr "pChEMBL"
+
+msgid "GLADOS_CHEMBL_ID"
+msgstr "ChEMBL ID"
