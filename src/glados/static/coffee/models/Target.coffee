@@ -146,11 +146,13 @@ Target.COLUMNS = {
   ACCESSION:{
     'name_to_show': 'UniProt Accession'
     'comparator': 'target_components'
-    'sort_disabled': false
+    'sort_disabled': true
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'parse_function': (components) -> (comp.accession for comp in components).join(', ')
-    'link_function': -> 'www.google.com'
+    'link_function': (components) ->
+      'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
+
   }
   NUM_COMPOUNDS:{
     'name_to_show': 'Compounds'

@@ -122,14 +122,14 @@ describe "Utils", ->
     describe 'with link function', ->
 
       testCol =
-          name_to_show: 'UniProt Accession'
-          comparator: 'target_components'
-          sort_disabled: false
-          is_sorting: 0
-          sort_class: 'fa-sort'
-          parse_function: (components) -> (comp.accession for comp in components).join(', ')
-          link_function: (components) ->
-            'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
+        name_to_show: 'UniProt Accession'
+        comparator: 'target_components'
+        sort_disabled: false
+        is_sorting: 0
+        sort_class: 'fa-sort'
+        parse_function: (components) -> (comp.accession for comp in components).join(', ')
+        link_function: (components) ->
+          'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
 
       testColumns = [testCol]
       testTarget = new Target()
