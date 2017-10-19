@@ -47,7 +47,7 @@ DownloadModelOrCollectionExt =
     #use first object to get header
     keys = []
     for key, value of downloadObject[0]
-      keys.push(key)
+      keys.push('"' + key + '"')
 
     return keys.join(separator)
 
@@ -59,7 +59,7 @@ DownloadModelOrCollectionExt =
     for obj in downloadObject
       values = []
       for key, value of obj
-        values.push(JSON.stringify(obj[key]))
+        values.push('"' + JSON.stringify(obj[key]).replace(/"/g, '') + '"')
       rows.push(values.join(separator))
 
     return rows.join('\n')
