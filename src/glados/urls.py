@@ -6,9 +6,18 @@ from django.conf import settings
 from . import views
 from django.contrib import admin
 import glados.grammar.search_parser
+from django.views.i18n import javascript_catalog
 
+js_info_dict = { 'domain': 'django',
+                 'packages': ('glados',), }
 
 urlpatterns = [
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Translation for Javascript
+  # --------------------------------------------------------------------------------------------------------------------
+    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+
 
   # --------------------------------------------------------------------------------------------------------------------
   # Django Admin
