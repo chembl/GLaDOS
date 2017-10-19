@@ -149,7 +149,7 @@ Target.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
-    'parse_function': (components) -> (comp.accession for comp in components)
+    'parse_function': (components) -> (comp.accession for comp in components).join(', ')
     'link_function': -> 'www.google.com'
   }
   NUM_COMPOUNDS:{
