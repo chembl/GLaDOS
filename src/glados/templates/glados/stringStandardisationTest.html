@@ -12,7 +12,43 @@
 {% endblock %}
 
 {% block content %}
-<h3>String StandardisationTest:</h3>
+<h2>String Standardisation Catalog:</h2>
 
-    hello: {% trans "hello" %}
+<div id='catalog' data-hb-template='catalog-template'>
+
+</div>
+
+
+<script id="catalog-template" type="text/x-handlebars-template">
+{% verbatim %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Value</th>
+    </tr>
+
+    {{#each rows}}
+    <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.value}}</td>
+    </tr>
+    {{/each}}
+</table>
+{% endverbatim %}
+</script>
+{% endblock %}
+
+{% block custom_js_inline%}
+
+rows = []
+for (var key in django.catalog) {
+
+  if (key.startsWith('GLADOS')){
+   rows.push({id: key, value: django.catalog[key]});
+  }
+
+}
+$catalogTable = $('#catalog');
+glados.Utils.fillContentForElement($catalogTable, {rows: rows});
+
 {% endblock %}
