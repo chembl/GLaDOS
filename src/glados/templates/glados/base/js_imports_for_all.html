@@ -1,5 +1,8 @@
 {% load static %}
 
+<!-- Django translation catalog not compressable -->
+<script type="text/javascript" src="{% url 'javascript-translation-catalog' %}"></script>
+
 <!-- Already compressed external files -->
 
 
@@ -8,8 +11,6 @@
 {% compress js %}
   {% block common_js_libs %}
 
-    <!-- Django translation catalog -->
-    <script type="text/javascript" src="{% url 'javascript-translation-catalog' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/materialize.js' %}"></script>
