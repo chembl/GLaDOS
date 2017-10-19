@@ -5,5 +5,5 @@
 #
 
 #: src/glados/templates/glados/layoutTest.html:69
-msgid "hello"
-msgstr "holass"
+msgid "GLADOS_PCHEMBL"
+msgstr "pChEMBL"
