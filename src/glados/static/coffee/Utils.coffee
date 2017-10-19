@@ -70,7 +70,7 @@ glados.useNameSpace 'glados',
         if _.has(colDescription, 'parse_function')
           returnCol['value'] = colDescription['parse_function'](col_value)
 
-        returnCol['has_link'] = _.has(colDescription, 'link_base')
+        returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['is_secondary_link'] = colDescription.secondary_link == true
         returnCol['is_function_link'] = colDescription.function_link == true
         returnCol['execute_on_render'] = colDescription.execute_on_render == true
@@ -85,7 +85,14 @@ glados.useNameSpace 'glados',
           returnCol['table_cell_width'] = colDescription.table_cell_width
           returnCol['remove_link_after_click'] = colDescription.remove_link_after_click
 
-        returnCol['link_url'] = model.get(colDescription['link_base']) unless !returnCol['has_link']
+        if returnCol['has_link']
+          if colDescription['link_base']?
+            returnCol['link_url'] = model.get(colDescription['link_base'])
+          if colDescription['link_function']?
+            console.log 'going to execute link function'
+            returnCol['link_url'] = colDescription['link_function'] col_value
+
+
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
           returnCol['img_url'] = img_url

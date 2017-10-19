@@ -1,0 +1,180 @@
+{
+  "organism": "Rattus norvegicus",
+  "target_components": [
+    {
+      "component_type": "PROTEIN",
+      "component_id": 2912,
+      "target_component_synonyms": [
+        {
+          "component_synonym": "Edg2 ",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Gpcr91",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lpa1",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lpar1",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lysophosphatidic acid receptor 1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "Lysophosphatidic acid receptor Edg-2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "LPA receptor 1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "LPA-1",
+          "syn_type": "UNIPROT"
+        }
+      ],
+      "accession": "P61794",
+      "relationship": "GROUP MEMBER",
+      "component_description": "Lysophosphatidic acid receptor 1"
+    },
+    {
+      "component_type": "PROTEIN",
+      "component_id": 2740,
+      "target_component_synonyms": [
+        {
+          "component_synonym": "Edg7 ",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lpa3",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lpar3",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "Lysophosphatidic acid receptor 3",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "Lysophosphatidic acid receptor Edg-7",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "snGPCR32",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "LPA receptor 3",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "LPA-3",
+          "syn_type": "UNIPROT"
+        }
+      ],
+      "accession": "Q8K5E0",
+      "relationship": "GROUP MEMBER",
+      "component_description": "Lysophosphatidic acid receptor 3"
+    }
+  ],
+  "target_chembl_id": "CHEMBL3301393",
+  "target_type": "PROTEIN FAMILY",
+  "_metadata": {
+    "activity_count": 2,
+    "es_completion": [
+      {
+        "input": "Edg7 ",
+        "weight": 75
+      },
+      {
+        "input": "Lysophosphatidic acid receptor 3",
+        "weight": 75
+      },
+      {
+        "input": "Lpa3",
+        "weight": 75
+      },
+      {
+        "input": "LPA receptor 3",
+        "weight": 75
+      },
+      {
+        "input": "LPA-3",
+        "weight": 75
+      },
+      {
+        "input": "Lpar1",
+        "weight": 75
+      },
+      {
+        "input": "Lysophosphatidic acid receptor Edg-2",
+        "weight": 75
+      },
+      {
+        "input": "snGPCR32",
+        "weight": 75
+      },
+      {
+        "input": "Rattus norvegicus",
+        "weight": 20
+      },
+      {
+        "input": "Lpar3",
+        "weight": 75
+      },
+      {
+        "input": "Gpcr91",
+        "weight": 75
+      },
+      {
+        "input": "LPA receptor 1",
+        "weight": 75
+      },
+      {
+        "input": "Lysophosphatidic acid receptor Edg-7",
+        "weight": 75
+      },
+      {
+        "input": "Lpa1",
+        "weight": 75
+      },
+      {
+        "input": "Lysophosphatidic acid receptor 1/lysophosphatidic acid receptor 3",
+        "weight": 100
+      },
+      {
+        "input": "CHEMBL3301393",
+        "weight": 10
+      },
+      {
+        "input": "Lysophosphatidic acid receptor 1",
+        "weight": 75
+      },
+      {
+        "input": "Edg2 ",
+        "weight": 75
+      },
+      {
+        "input": "LPA-1",
+        "weight": 75
+      }
+    ],
+    "disease_name": [],
+    "related_compounds": {
+      "count": 2,
+      "chembl_ids": {}
+    },
+    "tags": []
+  },
+  "tax_id": 10116,
+  "pref_name": "Lysophosphatidic acid receptor 1/lysophosphatidic acid receptor 3",
+  "species_group_flag": false,
+  "_score": 285773660000
+}

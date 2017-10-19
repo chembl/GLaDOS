@@ -116,3 +116,31 @@ describe "Utils", ->
 
       for i in [0..listGot.length-1]
         expect(listGot[i]).toBe(chemblIDs[i])
+
+  describe "Columns Parsing", ->
+
+    describe 'with link function', ->
+
+      testCol =
+        name_to_show: 'UniProt Accession'
+        comparator: 'target_components'
+        sort_disabled: false
+        is_sorting: 0
+        sort_class: 'fa-sort'
+        parse_function: (components) -> (comp.accession for comp in components).join(', ')
+        link_function: (components) ->
+          'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
+
+      testColumns = [testCol]
+      testTarget = new Target()
+
+      beforeAll (done) ->
+        dataURL =  glados.Settings.STATIC_URL + 'testData/TargetCHEMBL3301393TestData.json'
+        TestsUtils.simulateDataModel(testTarget, dataURL, done)
+
+      it 'generates the correct values', ->
+
+        columnsWithValuesGot = glados.Utils.getColumnsWithValues(testColumns, testTarget)
+        expect(columnsWithValuesGot[0].value).toBe('P61794, Q8K5E0')
+        expect(columnsWithValuesGot[0].link_url).toBe('http://www.uniprot.org/uniprot/?query=accession:P61794+OR+accession:Q8K5E0')
+
