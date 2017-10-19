@@ -12,7 +12,18 @@
 {% endblock %}
 
 {% block content %}
-<h3>String StandardisationTest:</h3>
+<h2>String StandardisationTest:</h2>
 
+<h3>HTML Templates:</h3>
     hello: {% trans "hello" %}
+
+<h3>Javascript</h3>
+
+{% endblock %}
+
+{% block custom_js_inline%}
+
+console.log('django.catalog:');
+console.log(django.catalog);
+console.log(gettext('hello'));
 {% endblock %}
