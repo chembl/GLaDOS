@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from glados.utils import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -8,16 +9,16 @@ from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import JavaScriptCatalog
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Translation for Javascript
+# ----------------------------------------------------------------------------------------------------------------------
+urlpatterns = \
+  i18n_patterns(
+    url(r'^glados/$', JavaScriptCatalog.as_view(packages=['glados'], domain='django'),
+        name='javascript-translation-catalog'),
+  )
 
-urlpatterns = [
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Translation for Javascript
-  # --------------------------------------------------------------------------------------------------------------------
-  url(r'^jsi18n/glados', JavaScriptCatalog.as_view(packages=['glados'], domain='django'),
-      name='javascript-translation-catalog'),
-
-
+urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   # Django Admin
   # --------------------------------------------------------------------------------------------------------------------
