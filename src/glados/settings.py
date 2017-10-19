@@ -68,6 +68,7 @@ MIDDLEWARE_CLASSES = [
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.common.CommonMiddleware',
   'django.middleware.csrf.CsrfViewMiddleware',
+  'django.middleware.locale.LocaleMiddleware',
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
@@ -142,12 +143,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = (
+LANGUAGES = [
     ('en_gb', _('English')),
-)
-LOCALE_PATHS = (
+]
+LOCALE_PATHS = [
     os.path.join(GLADOS_ROOT, 'locale'),
-)
+]
+
 # ----------------------------------------------------------------------------------------------------------------------
 # STATIC FILES (CSS, JavaScript, Images) and URL's
 # https://docs.djangoproject.com/en/1.9/howto/static-files/

@@ -16,7 +16,7 @@ def main():
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'collectstatic':
         glados.static_files_compiler.StaticFilesCompiler.compile_coffee()
         glados.static_files_compiler.StaticFilesCompiler.compile_scss()
-        execute_from_command_line([sys.argv[0], 'compilemessages'])
+        execute_from_command_line([sys.argv[0], 'compilemessages', '--settings=glados'])
         if settings.COMPRESS_ENABLED and settings.COMPRESS_OFFLINE:
             execute_from_command_line([sys.argv[0], 'compress'])
     execute_from_command_line(sys.argv)
