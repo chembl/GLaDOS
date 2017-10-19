@@ -29,6 +29,10 @@ class TestsUtils
       list.setMeta('total_records', testData.length)
       done()
 
+  @simulateDataModel = (model, dataURL, done) ->
+    $.get dataURL, (testData) ->
+      model.set(model.parse(testData))
+      done()
   # simulates facet groups received for the list
   # it is meant to work only for a ES compound list
   @simulateFacetsESList = (list, dataURL, done) ->

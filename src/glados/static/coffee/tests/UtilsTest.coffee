@@ -116,3 +116,29 @@ describe "Utils", ->
 
       for i in [0..listGot.length-1]
         expect(listGot[i]).toBe(chemblIDs[i])
+
+  describe "Columns Parsing", ->
+
+    describe 'with link function', ->
+
+      testCol =
+          name_to_show: 'UniProt Accession'
+          comparator: 'target_components'
+          sort_disabled: false
+          is_sorting: 0
+          sort_class: 'fa-sort'
+          parse_function: (components) -> (comp.accession for comp in components)
+          link_function: -> 'www.google.com'
+
+      testColumns = [testCol]
+      testTarget = new Target()
+
+      beforeAll (done) ->
+        dataURL =  glados.Settings.STATIC_URL + 'testData/TargetCHEMBL3301393TestData.json'
+        TestsUtils.simulateDataModel(testTarget, dataURL, done)
+
+      it 'generates the correct values', ->
+
+        console.log 'testTarget: ', testTarget
+
+

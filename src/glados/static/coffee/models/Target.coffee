@@ -67,6 +67,9 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         )
 
   parse: (data) ->
+    console.log 'PARSING TARGET data: '
+    console.log  JSON.stringify(data)
+
     parsed = data
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
     filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
@@ -142,10 +145,12 @@ Target.COLUMNS = {
   }
   ACCESSION:{
     'name_to_show': 'UniProt Accession'
-    'comparator': 'target_components.accession'
+    'comparator': 'target_components'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'parse_function': (components) -> (comp.accession for comp in components)
+    'link_function': -> 'www.google.com'
   }
   NUM_COMPOUNDS:{
     'name_to_show': 'Compounds'
