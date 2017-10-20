@@ -17,6 +17,10 @@
 <div id='catalog' data-hb-template='catalog-template'>
 
 </div>
+<h2>GLaDOS-es Generated Catalog:</h2>
+<div id='glados_es_gs__catalog' data-hb-template='catalog-template'>
+
+</div>
 
 
 <script id="catalog-template" type="text/x-handlebars-template">
@@ -41,14 +45,20 @@
 {% block custom_js_inline%}
 
 rows = []
+rows_gen = []
 for (var key in django.catalog) {
 
-  if (key.startsWith('GLADOS')){
-   rows.push({id: key, value: django.catalog[key]});
+  if (key.startsWith('glados_es_gs__')){
+   rows_gen.push({id: key, value: django.catalog[key]});
+  }
+  else{
+    rows.push({id: key, value: django.catalog[key]});
   }
 
 }
 $catalogTable = $('#catalog');
 glados.Utils.fillContentForElement($catalogTable, {rows: rows});
+$catalogTable = $('#glados_es_gs__catalog');
+glados.Utils.fillContentForElement($catalogTable, {rows: rows_gen});
 
 {% endblock %}
