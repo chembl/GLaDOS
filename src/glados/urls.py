@@ -20,6 +20,9 @@ urlpatterns = \
     url(r'^glados_jsi18n/glados_es_generated$',
         JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
         name='js-glados_es_generated-catalog'),
+    url(r'^glados_jsi18n/glados_es_override$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
+        name='js-glados_es_override-catalog'),
   )
 
 urlpatterns += [

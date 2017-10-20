@@ -1,0 +1,2 @@
+msgid "glados_es_gs___metadata__label"
+msgstr "OVERRIDED META"

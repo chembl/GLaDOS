@@ -564,7 +564,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_mini_id : 'glados_es_gs__year__label__mini'
 
     chembl_molecule:
-<<<<<<< HEAD
       '_metadata.activity_count' : 
         type : Number
         integer : true
