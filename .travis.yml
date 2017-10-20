@@ -13,4 +13,6 @@ script:
   - "./run_tests_no_install.sh"
 addons:
   apt:
-    packages: memcached
+    packages:
+    - memcached
+    - gettext
