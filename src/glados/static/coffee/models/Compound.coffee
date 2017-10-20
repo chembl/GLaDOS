@@ -550,7 +550,6 @@ Compound.COLUMNS = {
     name_to_show: 'Passes Rule of Three'
     comparator: 'molecule_properties.ro3_pass'
   QED_WEIGHTED: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'QUED Weighted'
     comparator: 'molecule_properties.qed_weighted'
   APKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'ACD ApKa'
