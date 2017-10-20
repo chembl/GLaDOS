@@ -6,12 +6,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       gladosSchema = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema
       gladosConfig = gladosSchema[indexName][baseConfig.comparator]
 
-      inferedProperties = {}
+      inferredProperties = {}
 
       if gladosConfig.aggregatable
-        inferedProperties.sort_disabled = false
-        inferedProperties.is_sorting = 0
-        inferedProperties.sort_class = 'fa-sort'
+        inferredProperties.sort_disabled = false
+        inferredProperties.is_sorting = 0
+        inferredProperties.sort_class = 'fa-sort'
+      else
+        inferredProperties.sort_disabled = true
 
-      finalConfig = _.extend({}, gladosConfig, inferedProperties, baseConfig)
+      finalConfig = _.extend({}, gladosConfig, inferredProperties, baseConfig)
       return finalConfig

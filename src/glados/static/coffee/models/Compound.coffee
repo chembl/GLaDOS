@@ -472,12 +472,10 @@ Compound.COLUMNS = {
     comparator: 'molecule_chembl_id'
     link_base: 'report_card_url'
     image_base_url: 'image_url'
-  SYNONYMS: {
-      'name_to_show': 'Synonyms'
-      'comparator': 'molecule_synonyms'
-      'sort_disabled': true
-      'parse_function': (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
-    }
+  SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Synonyms'
+    comparator: 'molecule_synonyms'
+    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
   PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Name'
     comparator: 'pref_name'
