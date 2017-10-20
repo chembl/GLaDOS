@@ -12,7 +12,7 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.sort_disabled).toBe(false)
     expect(configGot.is_sorting).toBe(0)
     expect(configGot.sort_class).toBe('fa-sort')
-    expect(configGot.name_to_show).toBe('Molecule Type')
+    expect(configGot.label_id).toBe('glados_es_gs__molecule_type__label')
 
   it 'generates the configuration for an non aggregatable property', ->
 
@@ -26,5 +26,5 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.sort_disabled).toBe(true)
     expect(configGot.is_sorting?).toBe(false)
     expect(configGot.sort_class?).toBe(false)
-    expect(configGot.name_to_show).toBe('Molecule Synonyms')
+    expect(configGot.label_id).toBe('glados_es_gs__molecule_synonyms__label')
 
