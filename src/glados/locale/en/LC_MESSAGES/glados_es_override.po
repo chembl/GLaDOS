@@ -1,0 +1,8 @@
+msgid "glados_es_gs___metadata__label"
+msgstr "OVERRIDED META"
+
+msgid "glados_es_gs__pchembl_value__label"
+msgstr "pChEMBL Value"
+
+msgid "glados_es_gs__molecule_properties___qed_weighted__label"
+msgstr "QED Weighted"

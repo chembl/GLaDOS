@@ -1606,7 +1606,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : true
         label_id : 'glados_es_gs__withdrawn_year__label'
         label_mini_id : 'glados_es_gs__withdrawn_year__label__mini'
-
     chembl_target:
       '_metadata.activity_count' : 
         type : Number

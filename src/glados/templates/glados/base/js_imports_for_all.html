@@ -3,6 +3,7 @@
 <!-- Django translation catalog not compressable -->
 <script type="text/javascript" src="{% url 'js-django-catalog' %}"></script>
 <script type="text/javascript" src="{% url 'js-glados_es_generated-catalog' %}"></script>
+<script type="text/javascript" src="{% url 'js-glados_es_override-catalog' %}"></script>
 
 <!-- Already compressed external files -->
 
@@ -87,6 +88,10 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DANViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
+
+    <!-- Properties handling -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/GLaDOS_es_GeneratedSchema.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsFactory.js' %}"></script>
 
     <!-- Generic List Views -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/Carousel.js' %}"></script>
@@ -218,7 +223,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/downloadWizardApp.js' %}"></script>
 
     <!-- Elastic Search Models -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/GLaDOS_es_GeneratedSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/FacetingHandler.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CompoundSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TargetSchema.js' %}"></script>
