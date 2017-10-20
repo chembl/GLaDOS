@@ -1,6 +1,6 @@
 describe "Columns Factory for paginated views", ->
 
-  it 'generates the configuration for a property', ->
+  it 'generates the configuration for an aggregatable property', ->
 
 #{
 #      'name_to_show': 'Molecule Type'
