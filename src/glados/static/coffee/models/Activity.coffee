@@ -9,6 +9,7 @@ Activity = Backbone.Model.extend
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
     return response
 
+Activity.indexName = 'chembl_activity'
 Activity.COLUMNS = {
   COMMENT: {
     'name_to_show': 'Activity Comment'
@@ -111,13 +112,8 @@ Activity.COLUMNS = {
     'sort_class': 'fa-sort'
     'use_in_summary': true
   }
-  PCHEMBL_VALUE: {
-    'name_to_show': 'PchEMBL Value'
+  PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'pchembl_value'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
   POTENTIAL_DUPLICATE: {
     'name_to_show': 'Potential Duplicate'
     'comparator': 'potential_duplicate'
