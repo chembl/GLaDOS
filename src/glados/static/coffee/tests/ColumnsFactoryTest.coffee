@@ -2,8 +2,6 @@ describe "Columns Factory for paginated views", ->
 
   it 'generates the configuration for an aggregatable property', ->
 
-#      'name_to_show': 'Molecule Type'
-
     baseColConfig =
       comparator: 'molecule_type'
     indexName = 'chembl_molecule'
@@ -14,6 +12,7 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.sort_disabled).toBe(false)
     expect(configGot.is_sorting).toBe(0)
     expect(configGot.sort_class).toBe('fa-sort')
+    expect(configGot.name_to_show).toBe('Molecule Type')
 
   it 'generates the configuration for an non aggregatable property', ->
 
@@ -27,3 +26,5 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.sort_disabled).toBe(true)
     expect(configGot.is_sorting?).toBe(false)
     expect(configGot.sort_class?).toBe(false)
+    expect(configGot.name_to_show).toBe('Molecule Synonyms')
+

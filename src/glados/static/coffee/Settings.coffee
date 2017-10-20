@@ -53,6 +53,7 @@ glados.getScreenType = ->
 
 glados.useNameSpace 'glados',
   Settings:
+    GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
     BEAKER_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/utils/'
