@@ -33,65 +33,45 @@ glados.models.Compound.Drug.COLUMNS =
   )
   PHASE: _.extend({}, Compound.COLUMNS.MAX_PHASE,
     'name_to_show': 'Phase')
-  APPLICANTS:
-    'name_to_show': 'Applicants'
-    'comparator': '_metadata.drug.drug_data.applicants'
-    'sort_disabled': true
-  USAN_STEM:
-    'name_to_show': 'USAN Stem'
-    'comparator': 'usan_stem'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  USAN_YEAR:
-    'name_to_show': 'USAN Year'
-    'comparator': 'usan_year'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  FIRST_APPROVAL:
-    'name_to_show': 'First Approval'
-    'comparator': 'first_approval'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  ATC_CLASSIFICATIONS:
-    'name_to_show': 'ATC Classifications'
-    'comparator': 'atc_classifications'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'parse_function': (values) -> values.join(', ')
-  USAN_STEM_DEFINITION:
-    'name_to_show': 'USAN Stem Definition'
-    'comparator': 'usan_stem_definition'
-    'sort_disabled': true
-  USAN_STEM_SUBSTEM:
-    'name_to_show': 'USAN Stem Substem'
-    'comparator': '_metadata.drug.drug_data.usan_stem_substem'
-    'sort_disabled': true
-  INDICATION_CLASS:
-    'name_to_show': 'Indication Class'
-    'comparator': 'indication_class'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  PATENT:
-    'name_to_show': 'Patent'
-    'comparator': '_metadata.drug.drug_data.sc_patent'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base': 'patent_url'
-    'secondary_link': true
-  WITHDRAWN_YEAR:
-    'name_to_show': 'Withdrawn Year'
-    'comparator': 'withdrawn_year'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  WITHDRAWN_COUNTRY:
-    'name_to_show': 'Withdrawn Country'
-    'comparator': 'withdrawn_country'
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  WITHDRAWN_REASON:
-    'name_to_show': 'Withdrawn Reason'
-    'comparator': 'withdrawn_reason'
-    'sort_disabled': true
+  APPLICANTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Applicants'
+    comparator: '_metadata.drug.drug_data.applicants'
+  USAN_STEM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'USAN Stem'
+    comparator: 'usan_stem'
+  USAN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'USAN Year'
+    comparator: 'usan_year'
+  FIRST_APPROVAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'First Approval'
+    comparator: 'first_approval'
+  ATC_CLASSIFICATIONS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'ATC Classifications'
+    comparator: 'atc_classifications'
+    parse_function: (values) -> values.join(', ')
+  USAN_STEM_DEFINITION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'USAN Stem Definition'
+    comparator: 'usan_stem_definition'
+  USAN_STEM_SUBSTEM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'USAN Stem Substem'
+    comparator: '_metadata.drug.drug_data.usan_stem_substem'
+  INDICATION_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Indication Class'
+    comparator: 'indication_class'
+  PATENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Patent'
+    comparator: '_metadata.drug.drug_data.sc_patent'
+    link_base: 'patent_url'
+    secondary_link: true
+  WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Withdrawn Year'
+    comparator: 'withdrawn_year'
+  WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Withdrawn Country'
+    comparator: 'withdrawn_country'
+  WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Withdrawn Reason'
+    comparator: 'withdrawn_reason'
   ICON: {
     'name_to_show': 'Icon'
     'comparator': '--'
