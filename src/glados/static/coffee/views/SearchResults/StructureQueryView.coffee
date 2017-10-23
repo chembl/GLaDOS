@@ -14,13 +14,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         similarity: @queryParams.similarity_percentage
 
     showEditModal: (event) ->
-      $clickedElem = $(event.currentTarget)
-      $modal = ButtonsHelper.generateModalFromTemplate($clickedElem, 'Handlebars-Common-MarvinModal')
+      @$clickedElem = $(event.currentTarget)
+      if not @$modal?
+        @$modal = ButtonsHelper.generateModalFromTemplate(@$clickedElem, 'Handlebars-Common-MarvinModal')
 
-      if $modal.attr('data-marvin-initialised') != 'yes'
+      if @$modal.attr('data-marvin-initialised') != 'yes'
 
         sketcherParams =
-          el: $modal
+          el: @$modal
           custom_initial_similarity: @queryParams.similarity_percentage
 
         if @queryParams.search_term.startsWith('CHEMBL')
