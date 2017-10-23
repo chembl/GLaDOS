@@ -1040,9 +1040,11 @@
 <script id="Handlebars-Common-StructureQuery" type="text/x-handlebars-template">
 
  <div class="card-panel z-depth-0 green lighten-5">
-  <b>Query:</b> {{search_term}}
+  <img src="{{image_url}}" height="150"><br>
+  <b>Query:</b>
+  {{search_term}}
   {{#if similarity}}
-   <b>Threshold:</b> {{similarity}}%
+    <b>Threshold:</b> {{similarity}}%
   {{/if}}
   <a class="menu-button BCK-Edit-Query">Edit Search</a>
  </div>
