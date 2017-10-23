@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     render: ->
       glados.Utils.fillContentForElement $(@el),
+        image_url: glados.Settings.BEAKER_BASE_URL + 'smiles2svg/'+ btoa(@queryParams.search_term)
         search_term: @queryParams.search_term
         similarity: @queryParams.similarity_percentage
 
