@@ -207,7 +207,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE
             Additional: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
           Cards:
             Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD

@@ -7,6 +7,7 @@ Activity = Backbone.Model.extend
     response.molecule_link = Compound.get_report_card_url(response.molecule_chembl_id )
     response.target_link = Target.get_report_card_url(response.target_chembl_id)
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
+    response.document_link = Document.get_report_card_url(response.document_chembl_id)
     return response
 
 Activity.indexName = 'chembl_activity'
@@ -78,6 +79,8 @@ Activity.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
     'use_in_summary': true
+    link_base: 'document_link'
+    secondary_link: true
   }
   DOCUMENT_JOURNAL: {
     'name_to_show': 'Document Journal'
@@ -114,6 +117,8 @@ Activity.COLUMNS = {
   }
   PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'pchembl_value'
+  ACTIVITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'activity_comment'
   POTENTIAL_DUPLICATE: {
     'name_to_show': 'Potential Duplicate'
     'comparator': 'potential_duplicate'
@@ -263,6 +268,21 @@ Activity.COLUMNS_SETTINGS = {
       colsList.push value
     return colsList
   )()
+  RESULTS_LIST_REPORT_TABLE: [
+    Activity.COLUMNS.MOLECULE_CHEMBL_ID
+    Activity.COLUMNS.STANDARD_TYPE
+    Activity.COLUMNS.STANDARD_RELATION
+    Activity.COLUMNS.STANDARD_VALUE
+    Activity.COLUMNS.STANDARD_UNITS
+    Activity.COLUMNS.PCHEMBL_VALUE
+    Activity.COLUMNS.ACTIVITY_COMMENT
+    Activity.COLUMNS.ASSAY_CHEMBL_ID
+    Activity.COLUMNS.ASSAY_DESCRIPTION
+    Activity.COLUMNS.TARGET_CHEMBL_ID
+    Activity.COLUMNS.TARGET_PREF_NAME
+    Activity.COLUMNS.TARGET_ORGANISM
+    Activity.COLUMNS.DOCUMENT_CHEMBL_ID
+  ]
   RESULTS_LIST_REPORT_CARD: [
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
     Activity.COLUMNS.STANDARD_TYPE
@@ -279,7 +299,6 @@ Activity.COLUMNS_SETTINGS = {
   ]
   RESULTS_LIST_TABLE_ADDITIONAL: [
     Activity.COLUMNS.ACTIVITY_ID
-    Activity.COLUMNS.ASSAY_CHEMBL_ID
     Activity.COLUMNS.COMMENT
     Activity.COLUMNS.BAO_FORMAT
     Activity.COLUMNS.PUBLISHED_TYPE
