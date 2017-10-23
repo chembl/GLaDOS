@@ -31,14 +31,15 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, undefined,
+    $browserContainer.hide()
+    $noResultsDiv = $('.no-results-found')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv, undefined,
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING,
       GlobalVariables.SEARCH_TERM)
 
   @initSimilaritySearchResults = () ->
     GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
     GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
-    console.log 'initSimilaritySearchResults'
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
       similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
@@ -53,7 +54,10 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, [Compound.COLUMNS.SIMILARITY_ELASTIC],
+    $browserContainer.hide()
+    $noResultsDiv = $('.no-results-found')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv,
+      [Compound.COLUMNS.SIMILARITY_ELASTIC],
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
       GlobalVariables.SEARCH_TERM)
 
@@ -73,17 +77,24 @@ class SearchResultsApp
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement)
+    $browserContainer.hide()
+    $noResultsDiv = $('.no-results-found')
+    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
-  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, contextualColumns, customSettings,
-    searchTerm) ->
-
+  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
+    customSettings, searchTerm) ->
     deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstThousand=true,
     customBaseProgressText='Searching...')
 
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
 
+      if resultsList.allResults.length == 0
+        $progressElement.hide()
+        $browserContainer.hide()
+        $noResultsDiv.show()
+        return
+      $browserContainer.show()
 
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
         resultsList.allResults, contextualColumns, customSettings, searchTerm)
