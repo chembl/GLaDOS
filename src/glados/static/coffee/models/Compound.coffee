@@ -561,7 +561,6 @@ Compound.COLUMNS = {
     name_to_show: 'ACD LogP'
     comparator: 'molecule_properties.acd_logp'
   ACD_LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'ACD Logd'
     comparator: 'molecule_properties.acd_logd'
   AROMATIC_RINGS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Aromatic Rings'

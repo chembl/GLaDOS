@@ -6,3 +6,6 @@ msgstr "pChEMBL Value"
 
 msgid "glados_es_gs__molecule_properties___qed_weighted__label"
 msgstr "QED Weighted"
+
+msgid "glados_es_gs__molecule_properties___acd_logd__label"
+msgstr "ACD LogD"
