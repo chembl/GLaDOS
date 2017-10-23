@@ -12,52 +12,19 @@ Activity = Backbone.Model.extend
 
 Activity.indexName = 'chembl_activity'
 Activity.COLUMNS = {
-  COMMENT: {
-    'name_to_show': 'Activity Comment'
-    'comparator': 'activity_comment'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  ACTIVITY_ID: {
-    'name_to_show': 'Activity id'
-    'comparator': 'activity_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ASSAY_CHEMBL_ID: {
-    'name_to_show': 'Assay'
-    'comparator': 'assay_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base':'assay_link'
-    'secondary_link': true
-    'use_in_summary': true
-  }
-  ASSAY_DESCRIPTION: {
-    'name_to_show': 'Assay Description'
+  ACTIVITY_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'activity_id'
+  ASSAY_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'assay_chembl_id'
+    link_base:'assay_link'
+    secondary_link: true
+    use_in_summary: true
+  ASSAY_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'assay_description'
-    'sort_disabled': true
-  }
-  ASSAY_TYPE: {
-    'name_to_show': 'Assay Type'
-    'comparator': 'assay_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  BAO_FORMAT: {
-    'name_to_show': 'BAO Format'
-    'comparator': 'bao_format'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
+  ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'assay_type'
+  BAO_FORMAT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'bao_format'
   CANONICAL_SMILES: {
     'name_to_show': 'Canonical Smiles'
     'comparator': 'canonical_smiles'
@@ -298,7 +265,6 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.DOCUMENT_CHEMBL_ID
   ]
   RESULTS_LIST_TABLE_ADDITIONAL: [
-    Activity.COLUMNS.COMMENT
     Activity.COLUMNS.BAO_FORMAT
     Activity.COLUMNS.PUBLISHED_TYPE
     Activity.COLUMNS.PUBLISHED_RELATION

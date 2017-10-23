@@ -81,3 +81,9 @@ msgstr "Molecular Formula"
 
 msgid "glados_es_gs__pref_name__label"
 msgstr "Name"
+
+msgid "glados_es_gs__assay_chembl_id__label"
+msgstr "Assay"
+
+msgid "glados_es_gs__bao_format__label"
+msgstr "BAO Format ID"
