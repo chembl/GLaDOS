@@ -28,5 +28,5 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.is_sorting?).toBe(false)
     expect(configGot.sort_class?).toBe(false)
     expect(configGot.label_id).toBe('glados_es_gs__molecule_synonyms__label')
-    expect(configGot.name_to_show).toBe('Molecule Synonyms')
+    expect(configGot.name_to_show).toBe('Synonyms')
 
