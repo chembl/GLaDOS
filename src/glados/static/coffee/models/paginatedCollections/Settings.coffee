@@ -83,6 +83,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Infinite:
