@@ -27,6 +27,25 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         return null
       return all_facets_query
 
+    @generateFacetsForIndex: (es_index)->
+      facets = {}
+      if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
+        throw new 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
+      gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
+      cur_pos = 1
+      for prop_i in _.keys(gs_data)
+        if gs_data[prop_i].aggregatable
+          facets[prop_i] = {
+            label: django.gettext(gs_data[prop_i].label_id)
+            label_mini: django.gettext(gs_data[prop_i].label_mini_id)
+            show: false
+            position: cur_pos++
+            faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+              es_index, prop_i
+            )
+          }
+      return facets
+
     @getNewFacetingHandler: (es_index, es_property)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       if not es_index_schema
