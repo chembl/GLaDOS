@@ -25,30 +25,14 @@ Activity.COLUMNS = {
     comparator: 'assay_type'
   BAO_FORMAT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'bao_format'
-  CANONICAL_SMILES: {
-    'name_to_show': 'Canonical Smiles'
-    'comparator': 'canonical_smiles'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  DATA_VALIDITY_COMMENT: {
-    'name_to_show': 'Data Validity Comment'
-    'comparator': 'data_validity_comment'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  DOCUMENT_CHEMBL_ID: {
-    'name_to_show': 'Document'
-    'comparator': 'document_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
+  CANONICAL_SMILES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'canonical_smiles'
+  DATA_VALIDITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'data_validity_comment'
+  DOCUMENT_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'document_chembl_id'
     link_base: 'document_link'
     secondary_link: true
-  }
   DOCUMENT_JOURNAL: {
     'name_to_show': 'Document Journal'
     'comparator': 'document_journal'
