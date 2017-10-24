@@ -65,7 +65,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       if defaults_hidden?
         for prop_i in defaults_hidden
           facets[prop_i] = getFacetData(prop_i)
-          facets[prop_i].show = true
+          facets[prop_i].show = false
       for prop_i in hidden
         facets[prop_i] = getFacetData(prop_i)
       return facets
