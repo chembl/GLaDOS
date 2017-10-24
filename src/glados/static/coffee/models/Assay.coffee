@@ -11,6 +11,7 @@ Assay = Backbone.Model.extend
 
     parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
     parsed.document_link = Document.get_report_card_url(parsed.document_chembl_id)
+    parsed.tissue_link = glados.models.Tissue.get_report_card_url(parsed.tissue_chembl_id)
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -28,47 +29,30 @@ Assay.getAssaysListURL = (filter) ->
 Assay.INDEX_NAME = 'chembl_assay'
 Assay.COLUMNS = {
 
-  CHEMBL_ID:{
-    'name_to_show': 'CHEMBL_ID'
-    'comparator': 'assay_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base': 'report_card_url'
-  }
-  STRAIN:{
-    'name_to_show': 'Strain'
-    'comparator': 'assay_strain'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'custom_field_template': '<i>{{val}}</i>'
-  }
-  DESCRIPTION:{
-    'name_to_show': 'Description'
-    'comparator': 'description'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ORGANISM:{
-    'name_to_show': 'Organism'
-    'comparator': 'assay_organism'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ASSAY_TYPE: {
-    'name_to_show': 'Assay type'
-    'comparator': 'assay_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
+  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_chembl_id'
+    link_base: 'report_card_url'
+  STRAIN: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_strain'
+    custom_field_template: '<i>{{val}}</i>'
+  DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'description'
+  ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_organism'
+  ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_type'
   DOCUMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'document_chembl_id'
     link_base: 'document_link'
     secondary_link: true
+  TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'tissue_chembl_id'
+    link_base: 'tissue_link'
+    secondary_link: true
+  CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_cell_type'
+  SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_subcellular_fraction'
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -89,6 +73,10 @@ Assay.COLUMNS_SETTINGS = {
   ]
   RESULTS_LIST_ADDITIONAL:[
     Assay.COLUMNS.STRAIN
+    Assay.COLUMNS.ASSAY_TYPE
+    Assay.COLUMNS.TISSUE
+    Assay.COLUMNS.CELL_TYPE
+    Assay.COLUMNS.SUBCELLULAR_FRACTION
   ]
   RESULTS_LIST_CARD: [
     Assay.COLUMNS.CHEMBL_ID
