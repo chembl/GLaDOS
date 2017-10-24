@@ -47,7 +47,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       canonical_smiles : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__activity__canonical_smiles__label'
         label_mini_id : 'glados_es_gs__activity__canonical_smiles__label__mini'
 
@@ -916,19 +916,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.drug.drug_data.molecule_structures.canonical_smiles' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___canonical_smiles__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___canonical_smiles__label__mini'
 
       '_metadata.drug.drug_data.molecule_structures.standard_inchi' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi__label__mini'
 
       '_metadata.drug.drug_data.molecule_structures.standard_inchi_key' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi_key__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi_key__label__mini'
 
@@ -1267,7 +1267,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       'molecule_hierarchy.molecule_chembl_id' : 
         type : String
-        aggregatable : true
+        aggregatable : false
         label_id : 'glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label__mini'
 
@@ -1449,19 +1449,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       'molecule_structures.canonical_smiles' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___canonical_smiles__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___canonical_smiles__label__mini'
 
       'molecule_structures.standard_inchi' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi__label__mini'
 
       'molecule_structures.standard_inchi_key' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi_key__label'
         label_mini_id : 'glados_es_gs__molecule__molecule_structures___standard_inchi_key__label__mini'
 
@@ -1678,7 +1678,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       target_chembl_id : 
         type : String
-        aggregatable : true
+        aggregatable : false
         label_id : 'glados_es_gs__target__target_chembl_id__label'
         label_mini_id : 'glados_es_gs__target__target_chembl_id__label__mini'
 

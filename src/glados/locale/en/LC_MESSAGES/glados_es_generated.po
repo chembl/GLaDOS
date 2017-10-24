@@ -959,19 +959,19 @@ msgstr "Dosed Ingredient"
 
 
 msgid "glados_es_gs__molecule__drug___drug_data__label"
-msgstr "Drug Drug Data"
+msgstr "Drug Data"
 
 
 msgid "glados_es_gs__molecule__drug___drug_data__label__mini"
-msgstr "Drug Drug Data"
+msgstr "Drug Data"
 
 
 msgid "glados_es_gs__molecule__drug___is_drug__label"
-msgstr "Drug Is Drug"
+msgstr "Is Drug"
 
 
 msgid "glados_es_gs__molecule__drug___is_drug__label__mini"
-msgstr "Drug Is Drug"
+msgstr "Is Drug"
 
 
 msgid "glados_es_gs__molecule__drug__label"
