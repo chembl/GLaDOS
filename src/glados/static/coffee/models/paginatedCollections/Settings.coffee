@@ -110,6 +110,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Infinite:
