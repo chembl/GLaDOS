@@ -96,3 +96,36 @@ msgstr "Document"
 
 msgid "glados_es_gs__activity__bao_format__label"
 msgstr "BAO Format ID"
+
+msgid "glados_es_gs__activity__molecule_chembl_id__label"
+msgstr "Molecule"
+
+msgid "glados_es_gs__activity__src_id__label"
+msgstr "SRC ID"
+
+msgid "glados_es_gs__activity__target_chembl_id__label"
+msgstr "Target"
+
+msgid "glados_es_gs__activity__target_pref_name__label"
+msgstr "Target Pref. Name"
+
+msgid "glados_es_gs__activity__uo_units__label"
+msgstr "UO Units"
+
+msgid "glados_es_gs__target__target_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__target__activity_count__label"
+msgstr "Bioactivities"
+
+msgid "glados_es_gs__target__pref_name__label"
+msgstr "Name"
+
+msgid "glados_es_gs__target__target_type__label"
+msgstr "Type"
+
+msgid "glados_es_gs__target__related_compounds___count__label"
+msgstr "Compounds"
+
+msgid "glados_es_gs__target__target_components__label"
+msgstr "UniProt Accession"

@@ -96,99 +96,58 @@ _.extend(Target, glados.models.base.ReportCardEntity)
 Target.color = 'lime'
 Target.reportCardPath = 'target_report_card/'
 
+Target.INDEX_NAME = 'chembl_target'
 Target.COLUMNS = {
-  CHEMBL_ID: {
-      'name_to_show': 'CHEMBL_ID'
-      'comparator': 'target_chembl_id'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'link_base': 'report_card_url'
-    }
-  BIOACTIVITIES_NUMBER: {
-    'name_to_show': 'Bioactivities'
-    'comparator': '_metadata.activity_count'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base': 'activities_url'
-    'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
-    'function_parameters': ['target_chembl_id']
-    'function_constant_parameters': ['activities']
+  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'target_chembl_id'
+    link_base: 'report_card_url'
+  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: '_metadata.activity_count'
+    link_base: 'activities_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['target_chembl_id']
+    function_constant_parameters: ['activities']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
     # or probably not, depending on how this evolves
-    'function_key': 'bioactivities'
-    'function_link': true
-    'execute_on_render': true
-    'format_class': 'number-cell-center'
-    'secondary_link': true
-  }
-  PREF_NAME: {
-    'name_to_show': 'Name'
-    'comparator': 'pref_name'
-    'sort_disabled': true
-    'custom_field_template': '<i>{{val}}</i>'
-  }
-  TYPE: {
-    'name_to_show': 'Type'
-    'comparator': 'target_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ORGANISM:{
-    'name_to_show': 'Organism'
-    'comparator': 'organism'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ACCESSION:{
-    'name_to_show': 'UniProt Accession'
-    'comparator': 'target_components'
-    'sort_disabled': true
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'parse_function': (components) -> (comp.accession for comp in components).join(', ')
-    'link_function': (components) ->
+    function_key: 'bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
+  PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'pref_name'
+    sort_disabled: true
+    custom_field_template: '<i>{{val}}</i>'
+  TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'target_type'
+  ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'organism'
+  ACCESSION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'target_components'
+    parse_function: (components) -> (comp.accession for comp in components).join(', ')
+    link_function: (components) ->
       'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
-
-  }
-  NUM_COMPOUNDS:{
-    'name_to_show': 'Compounds'
-    'comparator': '_metadata.related_compounds.count'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'format_class': 'number-cell-center'
-    'secondary_link': true
-    'link_base': 'compounds_url'
-  }
-  NUM_COMPOUNDS_HISTOGRAM: {
-    'name_to_show': 'Compounds'
-    'comparator': '_metadata.related_compounds.count'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base': 'compounds_url'
-    'on_click': TargetReportCardApp.initMiniHistogramFromFunctionLink
-    'function_constant_parameters': ['compounds']
-    'function_parameters': ['target_chembl_id']
+  NUM_COMPOUNDS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    format_class: 'number-cell-center'
+    secondary_link: true
+    link_base: 'compounds_url'
+  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    link_base: 'compounds_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['target_chembl_id']
     # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
     # or probably not, depending on how this evolves
-    'function_key': 'num_compounds'
-    'function_link': true
-    'execute_on_render': true
-    'format_class': 'number-cell-center'
-    'secondary_link': true
-  }
-  SPECIES_GROUP:{
-    'name_to_show': 'Species Group'
-    'comparator': 'species_group_flag'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
+    function_key: 'num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
+  SPECIES_GROUP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'species_group_flag'
+
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
