@@ -7,78 +7,32 @@ Activity = Backbone.Model.extend
     response.molecule_link = Compound.get_report_card_url(response.molecule_chembl_id )
     response.target_link = Target.get_report_card_url(response.target_chembl_id)
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
+    response.document_link = Document.get_report_card_url(response.document_chembl_id)
     return response
 
 Activity.indexName = 'chembl_activity'
 Activity.COLUMNS = {
-  COMMENT: {
-    'name_to_show': 'Activity Comment'
-    'comparator': 'activity_comment'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  ACTIVITY_ID: {
-    'name_to_show': 'Activity id'
-    'comparator': 'activity_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  ASSAY_CHEMBL_ID: {
-    'name_to_show': 'Assay'
-    'comparator': 'assay_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base':'assay_link'
-    'secondary_link': true
-    'use_in_summary': true
-  }
-  ASSAY_DESCRIPTION: {
-    'name_to_show': 'Assay Description'
+  ACTIVITY_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'activity_id'
+  ASSAY_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'assay_chembl_id'
+    link_base:'assay_link'
+    secondary_link: true
+    use_in_summary: true
+  ASSAY_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'assay_description'
-    'sort_disabled': true
-  }
-  ASSAY_TYPE: {
-    'name_to_show': 'Assay Type'
-    'comparator': 'assay_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  BAO_FORMAT: {
-    'name_to_show': 'BAO Format'
-    'comparator': 'bao_format'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  CANONICAL_SMILES: {
-    'name_to_show': 'Canonical Smiles'
-    'comparator': 'canonical_smiles'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  DATA_VALIDITY_COMMENT: {
-    'name_to_show': 'Data Validity Comment'
-    'comparator': 'data_validity_comment'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  DOCUMENT_CHEMBL_ID: {
-    'name_to_show': 'Document'
-    'comparator': 'document_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
+  ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'assay_type'
+  BAO_FORMAT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'bao_format'
+  CANONICAL_SMILES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'canonical_smiles'
+  DATA_VALIDITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'data_validity_comment'
+  DOCUMENT_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'document_chembl_id'
+    link_base: 'document_link'
+    secondary_link: true
   DOCUMENT_JOURNAL: {
     'name_to_show': 'Document Journal'
     'comparator': 'document_journal'
@@ -114,6 +68,8 @@ Activity.COLUMNS = {
   }
   PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'pchembl_value'
+  ACTIVITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'activity_comment'
   POTENTIAL_DUPLICATE: {
     'name_to_show': 'Potential Duplicate'
     'comparator': 'potential_duplicate'
@@ -263,6 +219,21 @@ Activity.COLUMNS_SETTINGS = {
       colsList.push value
     return colsList
   )()
+  RESULTS_LIST_REPORT_TABLE: [
+    Activity.COLUMNS.MOLECULE_CHEMBL_ID
+    Activity.COLUMNS.STANDARD_TYPE
+    Activity.COLUMNS.STANDARD_RELATION
+    Activity.COLUMNS.STANDARD_VALUE
+    Activity.COLUMNS.STANDARD_UNITS
+    Activity.COLUMNS.PCHEMBL_VALUE
+    Activity.COLUMNS.ACTIVITY_COMMENT
+    Activity.COLUMNS.ASSAY_CHEMBL_ID
+    Activity.COLUMNS.ASSAY_DESCRIPTION
+    Activity.COLUMNS.TARGET_CHEMBL_ID
+    Activity.COLUMNS.TARGET_PREF_NAME
+    Activity.COLUMNS.TARGET_ORGANISM
+    Activity.COLUMNS.DOCUMENT_CHEMBL_ID
+  ]
   RESULTS_LIST_REPORT_CARD: [
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
     Activity.COLUMNS.STANDARD_TYPE
@@ -278,9 +249,6 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.DOCUMENT_CHEMBL_ID
   ]
   RESULTS_LIST_TABLE_ADDITIONAL: [
-    Activity.COLUMNS.ACTIVITY_ID
-    Activity.COLUMNS.ASSAY_CHEMBL_ID
-    Activity.COLUMNS.COMMENT
     Activity.COLUMNS.BAO_FORMAT
     Activity.COLUMNS.PUBLISHED_TYPE
     Activity.COLUMNS.PUBLISHED_RELATION
@@ -290,11 +258,9 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.DATA_VALIDITY_COMMENT
     Activity.COLUMNS.DOCUMENT_JOURNAL
     Activity.COLUMNS.DOCUMENT_YEAR
-    Activity.COLUMNS.QUDT_UNITS
-    Activity.COLUMNS.RECORD_ID
     Activity.COLUMNS.SRC_ID
-    Activity.COLUMNS.STANDARD_FLAG
     Activity.COLUMNS.UO_UNITS
+    Activity.COLUMNS.POTENTIAL_DUPLICATE
   ]
 }
 
