@@ -2,7 +2,7 @@ msgid "glados_es_gs___metadata__label"
 msgstr "OVERRIDDEN META"
 
 #-----------------------------------------------------------------------------------------------------------------------
-# Compounds paginate views
+# Compounds paginated views
 #-----------------------------------------------------------------------------------------------------------------------
 msgid "glados_es_gs__molecule__molecule_chembl_id__label"
 msgstr "ChEMBL ID"
@@ -82,13 +82,17 @@ msgstr "Molecular Species"
 msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label"
 msgstr "Molecular Formula"
 
-#---------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
+# Activities paginated views
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__activity__pchembl_value__label"
+msgstr "pChEMBL Value"
 
-msgid "glados_es_gs__pref_name__label"
-msgstr "Name"
-
-msgid "glados_es_gs__assay_chembl_id__label"
+msgid "glados_es_gs__activity__assay_chembl_id__label"
 msgstr "Assay"
 
-msgid "glados_es_gs__bao_format__label"
+msgid "glados_es_gs__activity__document_chembl_id__label"
+msgstr "Document"
+
+msgid "glados_es_gs__activity__bao_format__label"
 msgstr "BAO Format ID"
