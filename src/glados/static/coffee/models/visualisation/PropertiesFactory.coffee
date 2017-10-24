@@ -75,11 +75,11 @@ glados.useNameSpace 'glados.models.visualisation',
       Properties:
         LIGAND_EFFICIENCY_SEI:
           propName: 'ligand_efficiency.sei'
-          label: 'Surface Efficieny index (SEI)'
+          label: 'Surface Efficiency index (SEI)'
           type: Number
         LIGAND_EFFICIENCY_BEI:
           propName: 'ligand_efficiency.bei'
-          label: 'Binding Efficieny index (BEI)'
+          label: 'Binding Efficiency index (BEI)'
           type: Number
         STANDARD_VALUE:
           propName: 'standard_value'
