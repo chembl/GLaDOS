@@ -67,8 +67,6 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         )
 
   parse: (data) ->
-    console.log 'PARSING TARGET data: '
-    console.log  JSON.stringify(data)
 
     parsed = data
     parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
