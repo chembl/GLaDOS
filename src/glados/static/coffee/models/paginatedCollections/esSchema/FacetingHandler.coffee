@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         return null
       return all_facets_query
 
-    @generateFacetsForIndex: (es_index, defaults, exclude_patterns)->
+    @generateFacetsForIndex: (es_index, defaults, defaults_hidden, exclude_patterns)->
       facets = {}
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
@@ -57,9 +57,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               return false
         return true
       )
-      hidden = _.difference(all_props, defaults)
+      hidden = _.difference(all_props, defaults, defaults_hidden)
       if defaults?
         for prop_i in defaults
+          facets[prop_i] = getFacetData(prop_i)
+          facets[prop_i].show = true
+      if defaults_hidden?
+        for prop_i in defaults_hidden
           facets[prop_i] = getFacetData(prop_i)
           facets[prop_i].show = true
       for prop_i in hidden
