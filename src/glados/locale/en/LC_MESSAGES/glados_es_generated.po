@@ -1079,187 +1079,187 @@ msgstr "Molecule Hierarchy"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label"
-msgstr "Molecule Properties Acd Logd"
+msgstr "Acd Logd"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label__mini"
-msgstr "Molecule Properties Acd Logd"
+msgstr "Acd Logd"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label"
-msgstr "Molecule Properties Acd Logp"
+msgstr "Acd Logp"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label__mini"
-msgstr "Molecule Properties Acd Logp"
+msgstr "Acd Logp"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label"
-msgstr "Molecule Properties Acd Most Apka"
+msgstr "Acd Most Apka"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label__mini"
-msgstr "Molecule Properties Acd Most Apka"
+msgstr "Acd Most Apka"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label"
-msgstr "Molecule Properties Acd Most Bpka"
+msgstr "Acd Most Bpka"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label__mini"
-msgstr "Molecule Properties Acd Most Bpka"
+msgstr "Acd Most Bpka"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___alogp__label"
-msgstr "Molecule Properties Alogp"
+msgstr "Alogp"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___alogp__label__mini"
-msgstr "Molecule Properties Alogp"
+msgstr "Alogp"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label"
-msgstr "Molecule Properties Aromatic Rings"
+msgstr "Aromatic Rings"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label__mini"
-msgstr "Molecule Properties Aromatic Rings"
+msgstr "Aromatic Rings"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label"
-msgstr "Molecule Properties Full Molformula"
+msgstr "Full Molformula"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label__mini"
-msgstr "Molecule Properties Full Molformula"
+msgstr "Full Molformula"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___full_mwt__label"
-msgstr "Molecule Properties Full Mwt"
+msgstr "Full Mwt"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___full_mwt__label__mini"
-msgstr "Molecule Properties Full Mwt"
+msgstr "Full Mwt"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hba__label"
-msgstr "Molecule Properties Hba"
+msgstr "Hba"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hba__label__mini"
-msgstr "Molecule Properties Hba"
+msgstr "Hba"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hba_lipinski__label"
-msgstr "Molecule Properties Hba Lipinski"
+msgstr "Hba Lipinski"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hba_lipinski__label__mini"
-msgstr "Molecule Properties Hba Lipinski"
+msgstr "Hba Lipinski"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hbd__label"
-msgstr "Molecule Properties Hbd"
+msgstr "Hbd"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hbd__label__mini"
-msgstr "Molecule Properties Hbd"
+msgstr "Hbd"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hbd_lipinski__label"
-msgstr "Molecule Properties Hbd Lipinski"
+msgstr "Hbd Lipinski"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___hbd_lipinski__label__mini"
-msgstr "Molecule Properties Hbd Lipinski"
+msgstr "Hbd Lipinski"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___heavy_atoms__label"
-msgstr "Molecule Properties Heavy Atoms"
+msgstr "Heavy Atoms"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___heavy_atoms__label__mini"
-msgstr "Molecule Properties Heavy Atoms"
+msgstr "Heavy Atoms"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___molecular_species__label"
-msgstr "Molecule Properties Molecular Species"
+msgstr "Molecular Species"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___molecular_species__label__mini"
-msgstr "Molecule Properties Molecular Species"
+msgstr "Molecular Species"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___mw_freebase__label"
-msgstr "Molecule Properties Mw Freebase"
+msgstr "Mw Freebase"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___mw_freebase__label__mini"
-msgstr "Molecule Properties Mw Freebase"
+msgstr "Mw Freebase"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label"
-msgstr "Molecule Properties Mw Monoisotopic"
+msgstr "Mw Monoisotopic"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label__mini"
-msgstr "Molecule Properties Mw Monoisotopic"
+msgstr "Mw Monoisotopic"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_alerts__label"
-msgstr "Molecule Properties # Alerts"
+msgstr "# Alerts"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_alerts__label__mini"
-msgstr "Molecule Properties # Alerts"
+msgstr "# Alerts"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label"
-msgstr "Molecule Properties # Lipinski Ro5 Violations"
+msgstr "# Lipinski Ro5 Violations"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label__mini"
-msgstr "Molecule Properties # Lipinski Ro5 Violations"
+msgstr "# Lipinski Ro5 Violations"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label"
-msgstr "Molecule Properties # Ro5 Violations"
+msgstr "# Ro5 Violations"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label__mini"
-msgstr "Molecule Properties # Ro5 Violations"
+msgstr "# Ro5 Violations"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___psa__label"
-msgstr "Molecule Properties Psa"
+msgstr "Psa"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___psa__label__mini"
-msgstr "Molecule Properties Psa"
+msgstr "Psa"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label"
-msgstr "Molecule Properties Qed Weighted"
+msgstr "Qed Weighted"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label__mini"
-msgstr "Molecule Properties Qed Weighted"
+msgstr "Qed Weighted"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___ro3_pass__label"
-msgstr "Molecule Properties Ro3 Pass"
+msgstr "Ro3 Pass"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___ro3_pass__label__mini"
-msgstr "Molecule Properties Ro3 Pass"
+msgstr "Ro3 Pass"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___rtb__label"
-msgstr "Molecule Properties Rtb"
+msgstr "Rtb"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___rtb__label__mini"
-msgstr "Molecule Properties Rtb"
+msgstr "Rtb"
 
 
 msgid "glados_es_gs__molecule__molecule_properties__label"
