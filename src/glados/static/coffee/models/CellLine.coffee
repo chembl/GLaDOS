@@ -13,6 +13,7 @@ _.extend(CellLine, glados.models.base.ReportCardEntity)
 CellLine.color = 'deep-purple'
 CellLine.reportCardPath = 'cell_line_report_card/'
 
+CellLine.INDEX_NAME = 'chembl_cell_line'
 CellLine.COLUMNS = {
   CHEMBL_ID:{
       'name_to_show': 'CHEMBL_ID'
@@ -22,6 +23,16 @@ CellLine.COLUMNS = {
       'sort_class': 'fa-sort'
       'link_base': 'report_card_url'
     }
+  SOURCE_TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'cell_source_tissue'
+  CLO_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'clo_id'
+  EFO_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'efo_id'
+  CELLOSAURUS_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'cellosaurus_id'
+  LINCS_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'cl_lincs_id'
 }
 
 CellLine.ID_COLUMN = CellLine.COLUMNS.CHEMBL_ID
@@ -45,18 +56,19 @@ CellLine.COLUMNS_SETTINGS = {
       'sort_class': 'fa-sort'
     }
     {
-      'name_to_show': 'Type'
-      'comparator': 'cell_description'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
-    {
       'name_to_show': 'Organism'
       'comparator': 'cell_source_organism'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
     }
+    CellLine.COLUMNS.SOURCE_TISSUE
+
+  ]
+  RESULTS_LIST_ADDITIONAL: [
+    CellLine.COLUMNS.CLO_ID
+    CellLine.COLUMNS.EFO_ID
+    CellLine.COLUMNS.CELLOSAURUS_ID
+    CellLine.COLUMNS.LINCS_ID
   ]
 }

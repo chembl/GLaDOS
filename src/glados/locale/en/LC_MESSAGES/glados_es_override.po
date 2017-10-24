@@ -129,3 +129,39 @@ msgstr "Compounds"
 
 msgid "glados_es_gs__target__target_components__label"
 msgstr "UniProt Accession"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Assays Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__assay__document_chembl_id__label"
+msgstr "Document"
+
+msgid "glados_es_gs__assay__tissue_chembl_id__label"
+msgstr "Tissue"
+
+msgid "glados_es_gs__assay__assay_cell_type__label"
+msgstr "Cell Type"
+
+msgid "glados_es_gs__assay__assay_subcellular_fraction__label"
+msgstr "Subcellular Fraction"
+
+msgid "glados_es_gs__assay__assay_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__assay__assay_strain__label"
+msgstr "Strain"
+
+msgid "glados_es_gs__assay__assay_organism__label"
+msgstr "Organism"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Cell Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__cell_line__cell_source_tissue__label"
+msgstr "Source Tissue"
+
+msgid "glados_es_gs__cell_line__clo_id__label"
+msgstr "CLO ID"
+
+msgid "glados_es_gs__cell_line__cl_lincs_id__label"
+msgstr "LINCS ID"
