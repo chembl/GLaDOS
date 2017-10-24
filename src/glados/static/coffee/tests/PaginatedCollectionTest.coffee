@@ -338,7 +338,7 @@ describe "Paginated Collection", ->
       it 'clears all facets selection', ->
 
         facetGroups = esList.getFacetsGroups()
-        testFacetGroupKey = 'full_mwt'
+        testFacetGroupKey = 'max_phase'
         testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
@@ -353,7 +353,7 @@ describe "Paginated Collection", ->
       it 'selects one facet', ->
 
         facetGroups = esList.getFacetsGroups()
-        testFacetGroupKey = 'full_mwt'
+        testFacetGroupKey = 'max_phase'
         testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)
@@ -373,7 +373,7 @@ describe "Paginated Collection", ->
         beforeEach ->
 
           facetGroups = esList.getFacetsGroups()
-          testFacetGroupKey = 'full_mwt'
+          testFacetGroupKey = 'max_phase'
           testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
           facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
           facetingHandler.toggleKeySelection(testFacetKey)
