@@ -10,6 +10,7 @@ Assay = Backbone.Model.extend
     parsed.target = data.target_chembl_id
 
     parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
+    parsed.document_link = Document.get_report_card_url(parsed.document_chembl_id)
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -24,6 +25,7 @@ Assay.getAssaysListURL = (filter) ->
   else
     return glados.Settings.GLADOS_BASE_PATH_REL + 'assays'
 
+Assay.INDEX_NAME = 'chembl_assay'
 Assay.COLUMNS = {
 
   CHEMBL_ID:{
@@ -56,13 +58,17 @@ Assay.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
-  ASSAY_TYPE:{
+  ASSAY_TYPE: {
     'name_to_show': 'Assay type'
     'comparator': 'assay_type'
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  DOCUMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'document_chembl_id'
+    link_base: 'document_link'
+    secondary_link: true
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -77,13 +83,15 @@ Assay.COLUMNS_SETTINGS = {
 
   RESULTS_LIST_TABLE: [
     Assay.COLUMNS.CHEMBL_ID
-    Assay.COLUMNS.STRAIN
     Assay.COLUMNS.DESCRIPTION
     Assay.COLUMNS.ORGANISM
+    Assay.COLUMNS.DOCUMENT
+  ]
+  RESULTS_LIST_ADDITIONAL:[
+    Assay.COLUMNS.STRAIN
   ]
   RESULTS_LIST_CARD: [
     Assay.COLUMNS.CHEMBL_ID
-    Assay.COLUMNS.STRAIN
     Assay.COLUMNS.DESCRIPTION
     Assay.COLUMNS.ORGANISM
     Assay.COLUMNS.ASSAY_TYPE
