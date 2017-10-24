@@ -21,12 +21,16 @@ CellLine.COLUMNS = {
     comparator: 'cell_source_tissue'
   CLO_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'clo_id'
+    link_function: (id) -> 'http://purl.obolibrary.org/obo/' + id
   EFO_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'efo_id'
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form=' + id
   CELLOSAURUS_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cellosaurus_id'
+    link_function: (id) -> 'http://web.expasy.org/cellosaurus/' + id
   LINCS_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cl_lincs_id'
+    link_function: (id) -> 'http://life.ccs.miami.edu/life/summary?mode=CellLine&source=LINCS&input=' + id
   NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cell_name'
     custom_field_template: '<i>{{val}}</i>'
