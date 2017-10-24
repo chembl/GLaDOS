@@ -27,23 +27,43 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         return null
       return all_facets_query
 
-    @generateFacetsForIndex: (es_index)->
+    @generateFacetsForIndex: (es_index, defaults, exclude_patterns)->
       facets = {}
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
-        throw new 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
+        throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       cur_pos = 1
-      for prop_i in _.keys(gs_data)
-        if gs_data[prop_i].aggregatable
-          facets[prop_i] = {
-            label: django.gettext(gs_data[prop_i].label_id)
-            label_mini: django.gettext(gs_data[prop_i].label_mini_id)
+      getFacetData = (prop_name)->
+        if prop_name not in _.keys(gs_data)
+          throw 'ERROR: '+prop_name+' is not a property of '+es_index+'!'
+        if gs_data[prop_name].aggregatable
+          return {
+            label: django.gettext(gs_data[prop_name].label_id)
+            label_mini: django.gettext(gs_data[prop_name].label_mini_id)
             show: false
             position: cur_pos++
             faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-              es_index, prop_i
+              es_index, prop_name
             )
           }
+        throw 'ERROR: '+prop_name+' is not an aggregatable property!'
+      all_props = _.filter(_.keys(gs_data), (property_name)->
+        if not gs_data[property_name].aggregatable
+          return false
+        if exclude_patterns?
+          for exclude_pattern_i in exclude_patterns
+            exclude = exclude_pattern_i.test(property_name)
+            if exclude
+              return false
+        return true
+      )
+      hidden = _.difference(all_props, defaults)
+      if defaults?
+        for prop_i in defaults
+          facets[prop_i] = getFacetData(prop_i)
+          facets[prop_i].show = true
+      for prop_i in hidden
+        facets[prop_i] = getFacetData(prop_i)
       return facets
 
     @getNewFacetingHandler: (es_index, es_property)->
