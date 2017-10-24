@@ -1,1592 +1,1808 @@
-msgid "glados_es_gs___metadata__label"
-msgstr " Metadata"
-
-
-msgid "glados_es_gs___metadata__label__mini"
-msgstr " Metadata"
-
-
-msgid "glados_es_gs__abstract__label"
-msgstr "Abstract"
-
-
-msgid "glados_es_gs__abstract__label__mini"
-msgstr "Abstract"
-
-
-msgid "glados_es_gs__activity_comment__label"
+msgid "glados_es_gs__activity__activity_comment__label"
 msgstr "Activity Comment"
 
 
-msgid "glados_es_gs__activity_comment__label__mini"
+msgid "glados_es_gs__activity__activity_comment__label__mini"
 msgstr "Activity Comment"
 
 
-msgid "glados_es_gs__activity_count__label"
-msgstr "Activity Count"
-
-
-msgid "glados_es_gs__activity_count__label__mini"
-msgstr "Activity Count"
-
-
-msgid "glados_es_gs__activity_id__label"
+msgid "glados_es_gs__activity__activity_id__label"
 msgstr "Activity ID"
 
 
-msgid "glados_es_gs__activity_id__label__mini"
+msgid "glados_es_gs__activity__activity_id__label__mini"
 msgstr "Activity ID"
 
 
-msgid "glados_es_gs__applicants__label"
-msgstr "Applicants"
-
-
-msgid "glados_es_gs__applicants__label__mini"
-msgstr "Applicants"
-
-
-msgid "glados_es_gs__assay_category__label"
-msgstr "Assay Category"
-
-
-msgid "glados_es_gs__assay_category__label__mini"
-msgstr "Assay Category"
-
-
-msgid "glados_es_gs__assay_cell_type__label"
-msgstr "Assay Cell Type"
-
-
-msgid "glados_es_gs__assay_cell_type__label__mini"
-msgstr "Assay Cell Type"
-
-
-msgid "glados_es_gs__assay_chembl_id__label"
+msgid "glados_es_gs__activity__assay_chembl_id__label"
 msgstr "Assay ChEMBL ID"
 
 
-msgid "glados_es_gs__assay_chembl_id__label__mini"
+msgid "glados_es_gs__activity__assay_chembl_id__label__mini"
 msgstr "Assay ChEMBL ID"
 
 
-msgid "glados_es_gs__assay_description__label"
+msgid "glados_es_gs__activity__assay_description__label"
 msgstr "Assay Description"
 
 
-msgid "glados_es_gs__assay_description__label__mini"
+msgid "glados_es_gs__activity__assay_description__label__mini"
 msgstr "Assay Description"
 
 
-msgid "glados_es_gs__assay_organism__label"
-msgstr "Assay Organism"
-
-
-msgid "glados_es_gs__assay_organism__label__mini"
-msgstr "Assay Organism"
-
-
-msgid "glados_es_gs__assay_strain__label"
-msgstr "Assay Strain"
-
-
-msgid "glados_es_gs__assay_strain__label__mini"
-msgstr "Assay Strain"
-
-
-msgid "glados_es_gs__assay_subcellular_fraction__label"
-msgstr "Assay Subcellular Fraction"
-
-
-msgid "glados_es_gs__assay_subcellular_fraction__label__mini"
-msgstr "Assay Subcellular Fraction"
-
-
-msgid "glados_es_gs__assay_tax_id__label"
-msgstr "Assay Tax ID"
-
-
-msgid "glados_es_gs__assay_tax_id__label__mini"
-msgstr "Assay Tax ID"
-
-
-msgid "glados_es_gs__assay_test_type__label"
-msgstr "Assay Test Type"
-
-
-msgid "glados_es_gs__assay_test_type__label__mini"
-msgstr "Assay Test Type"
-
-
-msgid "glados_es_gs__assay_tissue__label"
-msgstr "Assay Tissue"
-
-
-msgid "glados_es_gs__assay_tissue__label__mini"
-msgstr "Assay Tissue"
-
-
-msgid "glados_es_gs__assay_type__label"
+msgid "glados_es_gs__activity__assay_type__label"
 msgstr "Assay Type"
 
 
-msgid "glados_es_gs__assay_type__label__mini"
+msgid "glados_es_gs__activity__assay_type__label__mini"
 msgstr "Assay Type"
 
 
-msgid "glados_es_gs__assay_type_description__label"
-msgstr "Assay Type Description"
-
-
-msgid "glados_es_gs__assay_type_description__label__mini"
-msgstr "Assay Type Description"
-
-
-msgid "glados_es_gs__atc_classification___code__label"
-msgstr "Atc Classification Code"
-
-
-msgid "glados_es_gs__atc_classification___code__label__mini"
-msgstr "Atc Classification Code"
-
-
-msgid "glados_es_gs__atc_classification___description__label"
-msgstr "Atc Classification Description"
-
-
-msgid "glados_es_gs__atc_classification___description__label__mini"
-msgstr "Atc Classification Description"
-
-
-msgid "glados_es_gs__atc_classification__label"
-msgstr "Atc Classification"
-
-
-msgid "glados_es_gs__atc_classification__label__mini"
-msgstr "Atc Classification"
-
-
-msgid "glados_es_gs__atc_classifications__label"
-msgstr "Atc Classifications"
-
-
-msgid "glados_es_gs__atc_classifications__label__mini"
-msgstr "Atc Classifications"
-
-
-msgid "glados_es_gs__authors__label"
-msgstr "Authors"
-
-
-msgid "glados_es_gs__authors__label__mini"
-msgstr "Authors"
-
-
-msgid "glados_es_gs__availability_type__label"
-msgstr "Availability Type"
-
-
-msgid "glados_es_gs__availability_type__label__mini"
-msgstr "Availability Type"
-
-
-msgid "glados_es_gs__bao_endpoint__label"
+msgid "glados_es_gs__activity__bao_endpoint__label"
 msgstr "Bao Endpoint"
 
 
-msgid "glados_es_gs__bao_endpoint__label__mini"
+msgid "glados_es_gs__activity__bao_endpoint__label__mini"
 msgstr "Bao Endpoint"
 
 
-msgid "glados_es_gs__bao_format__label"
+msgid "glados_es_gs__activity__bao_format__label"
 msgstr "Bao Format"
 
 
-msgid "glados_es_gs__bao_format__label__mini"
+msgid "glados_es_gs__activity__bao_format__label__mini"
 msgstr "Bao Format"
 
 
-msgid "glados_es_gs__biocomponents___component_id__label"
-msgstr "Biocomponents Component ID"
-
-
-msgid "glados_es_gs__biocomponents___component_id__label__mini"
-msgstr "Biocomponents Component ID"
-
-
-msgid "glados_es_gs__biocomponents___component_type__label"
-msgstr "Biocomponents Component Type"
-
-
-msgid "glados_es_gs__biocomponents___component_type__label__mini"
-msgstr "Biocomponents Component Type"
-
-
-msgid "glados_es_gs__biocomponents___description__label"
-msgstr "Biocomponents Description"
-
-
-msgid "glados_es_gs__biocomponents___description__label__mini"
-msgstr "Biocomponents Description"
-
-
-msgid "glados_es_gs__biocomponents___organism__label"
-msgstr "Biocomponents Organism"
-
-
-msgid "glados_es_gs__biocomponents___organism__label__mini"
-msgstr "Biocomponents Organism"
-
-
-msgid "glados_es_gs__biocomponents___sequence__label"
-msgstr "Biocomponents Sequence"
-
-
-msgid "glados_es_gs__biocomponents___sequence__label__mini"
-msgstr "Biocomponents Sequence"
-
-
-msgid "glados_es_gs__biocomponents___tax_id__label"
-msgstr "Biocomponents Tax ID"
-
-
-msgid "glados_es_gs__biocomponents___tax_id__label__mini"
-msgstr "Biocomponents Tax ID"
-
-
-msgid "glados_es_gs__biotherapeutic___biocomponents__label"
-msgstr "Biotherapeutic Biocomponents"
-
-
-msgid "glados_es_gs__biotherapeutic___biocomponents__label__mini"
-msgstr "Biotherapeutic Biocomponents"
-
-
-msgid "glados_es_gs__biotherapeutic___description__label"
-msgstr "Biotherapeutic Description"
-
-
-msgid "glados_es_gs__biotherapeutic___description__label__mini"
-msgstr "Biotherapeutic Description"
-
-
-msgid "glados_es_gs__biotherapeutic___helm_notation__label"
-msgstr "Biotherapeutic Helm Notation"
-
-
-msgid "glados_es_gs__biotherapeutic___helm_notation__label__mini"
-msgstr "Biotherapeutic Helm Notation"
-
-
-msgid "glados_es_gs__biotherapeutic___molecule_chembl_id__label"
-msgstr "Biotherapeutic Molecule ChEMBL ID"
-
-
-msgid "glados_es_gs__biotherapeutic___molecule_chembl_id__label__mini"
-msgstr "Biotherapeutic Molecule ChEMBL ID"
-
-
-msgid "glados_es_gs__biotherapeutic__label"
-msgstr "Biotherapeutic"
-
-
-msgid "glados_es_gs__biotherapeutic__label__mini"
-msgstr "Biotherapeutic"
-
-
-msgid "glados_es_gs__black_box__label"
-msgstr "Black Box"
-
-
-msgid "glados_es_gs__black_box__label__mini"
-msgstr "Black Box"
-
-
-msgid "glados_es_gs__black_box_warning__label"
-msgstr "Black Box Warning"
-
-
-msgid "glados_es_gs__black_box_warning__label__mini"
-msgstr "Black Box Warning"
-
-
-msgid "glados_es_gs__bto_id__label"
-msgstr "Bto ID"
-
-
-msgid "glados_es_gs__bto_id__label__mini"
-msgstr "Bto ID"
-
-
-msgid "glados_es_gs__caloha_id__label"
-msgstr "Caloha ID"
-
-
-msgid "glados_es_gs__caloha_id__label__mini"
-msgstr "Caloha ID"
-
-
-msgid "glados_es_gs__canonical_smiles__label"
+msgid "glados_es_gs__activity__canonical_smiles__label"
 msgstr "Canonical Smiles"
 
 
-msgid "glados_es_gs__canonical_smiles__label__mini"
+msgid "glados_es_gs__activity__canonical_smiles__label__mini"
 msgstr "Canonical Smiles"
 
 
-msgid "glados_es_gs__cell_chembl_id__label"
-msgstr "Cell ChEMBL ID"
-
-
-msgid "glados_es_gs__cell_chembl_id__label__mini"
-msgstr "Cell ChEMBL ID"
-
-
-msgid "glados_es_gs__cell_description__label"
-msgstr "Cell Description"
-
-
-msgid "glados_es_gs__cell_description__label__mini"
-msgstr "Cell Description"
-
-
-msgid "glados_es_gs__cell_id__label"
-msgstr "Cell ID"
-
-
-msgid "glados_es_gs__cell_id__label__mini"
-msgstr "Cell ID"
-
-
-msgid "glados_es_gs__cell_name__label"
-msgstr "Cell Name"
-
-
-msgid "glados_es_gs__cell_name__label__mini"
-msgstr "Cell Name"
-
-
-msgid "glados_es_gs__cell_source_organism__label"
-msgstr "Cell Source Organism"
-
-
-msgid "glados_es_gs__cell_source_organism__label__mini"
-msgstr "Cell Source Organism"
-
-
-msgid "glados_es_gs__cell_source_tax_id__label"
-msgstr "Cell Source Tax ID"
-
-
-msgid "glados_es_gs__cell_source_tax_id__label__mini"
-msgstr "Cell Source Tax ID"
-
-
-msgid "glados_es_gs__cell_source_tissue__label"
-msgstr "Cell Source Tissue"
-
-
-msgid "glados_es_gs__cell_source_tissue__label__mini"
-msgstr "Cell Source Tissue"
-
-
-msgid "glados_es_gs__cellosaurus_id__label"
-msgstr "Cellosaurus ID"
-
-
-msgid "glados_es_gs__cellosaurus_id__label__mini"
-msgstr "Cellosaurus ID"
-
-
-msgid "glados_es_gs__chebi_par_id__label"
-msgstr "Chebi Par ID"
-
-
-msgid "glados_es_gs__chebi_par_id__label__mini"
-msgstr "Chebi Par ID"
-
-
-msgid "glados_es_gs__chirality__label"
-msgstr "Chirality"
-
-
-msgid "glados_es_gs__chirality__label__mini"
-msgstr "Chirality"
-
-
-msgid "glados_es_gs__cl_lincs_id__label"
-msgstr "Cl Lincs ID"
-
-
-msgid "glados_es_gs__cl_lincs_id__label__mini"
-msgstr "Cl Lincs ID"
-
-
-msgid "glados_es_gs__clo_id__label"
-msgstr "Clo ID"
-
-
-msgid "glados_es_gs__clo_id__label__mini"
-msgstr "Clo ID"
-
-
-msgid "glados_es_gs__compound_records___compound_key__label"
-msgstr "Compound Records Compound Key"
-
-
-msgid "glados_es_gs__compound_records___compound_key__label__mini"
-msgstr "Compound Records Compound Key"
-
-
-msgid "glados_es_gs__compound_records___compound_name__label"
-msgstr "Compound Records Compound Name"
-
-
-msgid "glados_es_gs__compound_records___compound_name__label__mini"
-msgstr "Compound Records Compound Name"
-
-
-msgid "glados_es_gs__compound_records__label"
-msgstr "Compound Records"
-
-
-msgid "glados_es_gs__compound_records__label__mini"
-msgstr "Compound Records"
-
-
-msgid "glados_es_gs__confidence_description__label"
-msgstr "Confidence Description"
-
-
-msgid "glados_es_gs__confidence_description__label__mini"
-msgstr "Confidence Description"
-
-
-msgid "glados_es_gs__confidence_score__label"
-msgstr "Confidence Score"
-
-
-msgid "glados_es_gs__confidence_score__label__mini"
-msgstr "Confidence Score"
-
-
-msgid "glados_es_gs__data_validity_comment__label"
+msgid "glados_es_gs__activity__data_validity_comment__label"
 msgstr "Data Validity Comment"
 
 
-msgid "glados_es_gs__data_validity_comment__label__mini"
+msgid "glados_es_gs__activity__data_validity_comment__label__mini"
 msgstr "Data Validity Comment"
 
 
-msgid "glados_es_gs__description__label"
-msgstr "Description"
-
-
-msgid "glados_es_gs__description__label__mini"
-msgstr "Description"
-
-
-msgid "glados_es_gs__development_phase__label"
-msgstr "Development Phase"
-
-
-msgid "glados_es_gs__development_phase__label__mini"
-msgstr "Development Phase"
-
-
-msgid "glados_es_gs__disease_name__label"
-msgstr "Disease Name"
-
-
-msgid "glados_es_gs__disease_name__label__mini"
-msgstr "Disease Name"
-
-
-msgid "glados_es_gs__doc_type__label"
-msgstr "Doc Type"
-
-
-msgid "glados_es_gs__doc_type__label__mini"
-msgstr "Doc Type"
-
-
-msgid "glados_es_gs__document_chembl_id__label"
+msgid "glados_es_gs__activity__document_chembl_id__label"
 msgstr "Document ChEMBL ID"
 
 
-msgid "glados_es_gs__document_chembl_id__label__mini"
+msgid "glados_es_gs__activity__document_chembl_id__label__mini"
 msgstr "Document ChEMBL ID"
 
 
-msgid "glados_es_gs__document_journal__label"
+msgid "glados_es_gs__activity__document_journal__label"
 msgstr "Document Journal"
 
 
-msgid "glados_es_gs__document_journal__label__mini"
+msgid "glados_es_gs__activity__document_journal__label__mini"
 msgstr "Document Journal"
 
 
-msgid "glados_es_gs__document_year__label"
+msgid "glados_es_gs__activity__document_year__label"
 msgstr "Document Year"
 
 
-msgid "glados_es_gs__document_year__label__mini"
+msgid "glados_es_gs__activity__document_year__label__mini"
 msgstr "Document Year"
 
 
-msgid "glados_es_gs__doi__label"
-msgstr "Doi"
-
-
-msgid "glados_es_gs__doi__label__mini"
-msgstr "Doi"
-
-
-msgid "glados_es_gs__dosed_ingredient__label"
-msgstr "Dosed Ingredient"
-
-
-msgid "glados_es_gs__dosed_ingredient__label__mini"
-msgstr "Dosed Ingredient"
-
-
-msgid "glados_es_gs__drug___drug_data__label"
-msgstr "Drug Drug Data"
-
-
-msgid "glados_es_gs__drug___drug_data__label__mini"
-msgstr "Drug Drug Data"
-
-
-msgid "glados_es_gs__drug___is_drug__label"
-msgstr "Drug Is Drug"
-
-
-msgid "glados_es_gs__drug___is_drug__label__mini"
-msgstr "Drug Is Drug"
-
-
-msgid "glados_es_gs__drug__label"
-msgstr "Drug"
-
-
-msgid "glados_es_gs__drug__label__mini"
-msgstr "Drug"
-
-
-msgid "glados_es_gs__drug_type__label"
-msgstr "Drug Type"
-
-
-msgid "glados_es_gs__drug_type__label__mini"
-msgstr "Drug Type"
-
-
-msgid "glados_es_gs__efo_id__label"
-msgstr "EFO ID"
-
-
-msgid "glados_es_gs__efo_id__label__mini"
-msgstr "EFO ID"
-
-
-msgid "glados_es_gs__es_completion__label"
-msgstr "Es Completion"
-
-
-msgid "glados_es_gs__es_completion__label__mini"
-msgstr "Es Completion"
-
-
-msgid "glados_es_gs__first_approval__label"
-msgstr "First Approval"
-
-
-msgid "glados_es_gs__first_approval__label__mini"
-msgstr "First Approval"
-
-
-msgid "glados_es_gs__first_in_class__label"
-msgstr "First In Class"
-
-
-msgid "glados_es_gs__first_in_class__label__mini"
-msgstr "First In Class"
-
-
-msgid "glados_es_gs__first_page__label"
-msgstr "First Page"
-
-
-msgid "glados_es_gs__first_page__label__mini"
-msgstr "First Page"
-
-
-msgid "glados_es_gs__helm_notation__label"
-msgstr "Helm Notation"
-
-
-msgid "glados_es_gs__helm_notation__label__mini"
-msgstr "Helm Notation"
-
-
-msgid "glados_es_gs__indication_class__label"
-msgstr "Indication Class"
-
-
-msgid "glados_es_gs__indication_class__label__mini"
-msgstr "Indication Class"
-
-
-msgid "glados_es_gs__inorganic_flag__label"
-msgstr "Inorganic Flag"
-
-
-msgid "glados_es_gs__inorganic_flag__label__mini"
-msgstr "Inorganic Flag"
-
-
-msgid "glados_es_gs__issue__label"
-msgstr "Issue"
-
-
-msgid "glados_es_gs__issue__label__mini"
-msgstr "Issue"
-
-
-msgid "glados_es_gs__journal__label"
-msgstr "Journal"
-
-
-msgid "glados_es_gs__journal__label__mini"
-msgstr "Journal"
-
-
-msgid "glados_es_gs__last_page__label"
-msgstr "Last Page"
-
-
-msgid "glados_es_gs__last_page__label__mini"
-msgstr "Last Page"
-
-
-msgid "glados_es_gs__ligand_efficiency___bei__label"
+msgid "glados_es_gs__activity__ligand_efficiency___bei__label"
 msgstr "Ligand Efficiency Bei"
 
 
-msgid "glados_es_gs__ligand_efficiency___bei__label__mini"
+msgid "glados_es_gs__activity__ligand_efficiency___bei__label__mini"
 msgstr "Ligand Efficiency Bei"
 
 
-msgid "glados_es_gs__ligand_efficiency___le__label"
+msgid "glados_es_gs__activity__ligand_efficiency___le__label"
 msgstr "Ligand Efficiency Le"
 
 
-msgid "glados_es_gs__ligand_efficiency___le__label__mini"
+msgid "glados_es_gs__activity__ligand_efficiency___le__label__mini"
 msgstr "Ligand Efficiency Le"
 
 
-msgid "glados_es_gs__ligand_efficiency___lle__label"
+msgid "glados_es_gs__activity__ligand_efficiency___lle__label"
 msgstr "Ligand Efficiency Lle"
 
 
-msgid "glados_es_gs__ligand_efficiency___lle__label__mini"
+msgid "glados_es_gs__activity__ligand_efficiency___lle__label__mini"
 msgstr "Ligand Efficiency Lle"
 
 
-msgid "glados_es_gs__ligand_efficiency___sei__label"
+msgid "glados_es_gs__activity__ligand_efficiency___sei__label"
 msgstr "Ligand Efficiency Sei"
 
 
-msgid "glados_es_gs__ligand_efficiency___sei__label__mini"
+msgid "glados_es_gs__activity__ligand_efficiency___sei__label__mini"
 msgstr "Ligand Efficiency Sei"
 
 
-msgid "glados_es_gs__ligand_efficiency__label"
+msgid "glados_es_gs__activity__ligand_efficiency__label"
 msgstr "Ligand Efficiency"
 
 
-msgid "glados_es_gs__ligand_efficiency__label__mini"
+msgid "glados_es_gs__activity__ligand_efficiency__label__mini"
 msgstr "Ligand Efficiency"
 
 
-msgid "glados_es_gs__max_phase__label"
-msgstr "Max Phase"
-
-
-msgid "glados_es_gs__max_phase__label__mini"
-msgstr "Max Phase"
-
-
-msgid "glados_es_gs__molecule_chembl_id__label"
+msgid "glados_es_gs__activity__molecule_chembl_id__label"
 msgstr "Molecule ChEMBL ID"
 
 
-msgid "glados_es_gs__molecule_chembl_id__label__mini"
+msgid "glados_es_gs__activity__molecule_chembl_id__label__mini"
 msgstr "Molecule ChEMBL ID"
 
 
-msgid "glados_es_gs__molecule_hierarchy___molecule_chembl_id__label"
-msgstr "Molecule Hierarchy Molecule ChEMBL ID"
-
-
-msgid "glados_es_gs__molecule_hierarchy___molecule_chembl_id__label__mini"
-msgstr "Molecule Hierarchy Molecule ChEMBL ID"
-
-
-msgid "glados_es_gs__molecule_hierarchy___parent_chembl_id__label"
-msgstr "Molecule Hierarchy Parent ChEMBL ID"
-
-
-msgid "glados_es_gs__molecule_hierarchy___parent_chembl_id__label__mini"
-msgstr "Molecule Hierarchy Parent ChEMBL ID"
-
-
-msgid "glados_es_gs__molecule_hierarchy__label"
-msgstr "Molecule Hierarchy"
-
-
-msgid "glados_es_gs__molecule_hierarchy__label__mini"
-msgstr "Molecule Hierarchy"
-
-
-msgid "glados_es_gs__molecule_properties___acd_logd__label"
-msgstr "Molecule Properties Acd Logd"
-
-
-msgid "glados_es_gs__molecule_properties___acd_logd__label__mini"
-msgstr "Molecule Properties Acd Logd"
-
-
-msgid "glados_es_gs__molecule_properties___acd_logp__label"
-msgstr "Molecule Properties Acd Logp"
-
-
-msgid "glados_es_gs__molecule_properties___acd_logp__label__mini"
-msgstr "Molecule Properties Acd Logp"
-
-
-msgid "glados_es_gs__molecule_properties___acd_most_apka__label"
-msgstr "Molecule Properties Acd Most Apka"
-
-
-msgid "glados_es_gs__molecule_properties___acd_most_apka__label__mini"
-msgstr "Molecule Properties Acd Most Apka"
-
-
-msgid "glados_es_gs__molecule_properties___acd_most_bpka__label"
-msgstr "Molecule Properties Acd Most Bpka"
-
-
-msgid "glados_es_gs__molecule_properties___acd_most_bpka__label__mini"
-msgstr "Molecule Properties Acd Most Bpka"
-
-
-msgid "glados_es_gs__molecule_properties___alogp__label"
-msgstr "Molecule Properties Alogp"
-
-
-msgid "glados_es_gs__molecule_properties___alogp__label__mini"
-msgstr "Molecule Properties Alogp"
-
-
-msgid "glados_es_gs__molecule_properties___aromatic_rings__label"
-msgstr "Molecule Properties Aromatic Rings"
-
-
-msgid "glados_es_gs__molecule_properties___aromatic_rings__label__mini"
-msgstr "Molecule Properties Aromatic Rings"
-
-
-msgid "glados_es_gs__molecule_properties___full_molformula__label"
-msgstr "Molecule Properties Full Molformula"
-
-
-msgid "glados_es_gs__molecule_properties___full_molformula__label__mini"
-msgstr "Molecule Properties Full Molformula"
-
-
-msgid "glados_es_gs__molecule_properties___full_mwt__label"
-msgstr "Molecule Properties Full Mwt"
-
-
-msgid "glados_es_gs__molecule_properties___full_mwt__label__mini"
-msgstr "Molecule Properties Full Mwt"
-
-
-msgid "glados_es_gs__molecule_properties___hba__label"
-msgstr "Molecule Properties Hba"
-
-
-msgid "glados_es_gs__molecule_properties___hba__label__mini"
-msgstr "Molecule Properties Hba"
-
-
-msgid "glados_es_gs__molecule_properties___hba_lipinski__label"
-msgstr "Molecule Properties Hba Lipinski"
-
-
-msgid "glados_es_gs__molecule_properties___hba_lipinski__label__mini"
-msgstr "Molecule Properties Hba Lipinski"
-
-
-msgid "glados_es_gs__molecule_properties___hbd__label"
-msgstr "Molecule Properties Hbd"
-
-
-msgid "glados_es_gs__molecule_properties___hbd__label__mini"
-msgstr "Molecule Properties Hbd"
-
-
-msgid "glados_es_gs__molecule_properties___hbd_lipinski__label"
-msgstr "Molecule Properties Hbd Lipinski"
-
-
-msgid "glados_es_gs__molecule_properties___hbd_lipinski__label__mini"
-msgstr "Molecule Properties Hbd Lipinski"
-
-
-msgid "glados_es_gs__molecule_properties___heavy_atoms__label"
-msgstr "Molecule Properties Heavy Atoms"
-
-
-msgid "glados_es_gs__molecule_properties___heavy_atoms__label__mini"
-msgstr "Molecule Properties Heavy Atoms"
-
-
-msgid "glados_es_gs__molecule_properties___molecular_species__label"
-msgstr "Molecule Properties Molecular Species"
-
-
-msgid "glados_es_gs__molecule_properties___molecular_species__label__mini"
-msgstr "Molecule Properties Molecular Species"
-
-
-msgid "glados_es_gs__molecule_properties___mw_freebase__label"
-msgstr "Molecule Properties Mw Freebase"
-
-
-msgid "glados_es_gs__molecule_properties___mw_freebase__label__mini"
-msgstr "Molecule Properties Mw Freebase"
-
-
-msgid "glados_es_gs__molecule_properties___mw_monoisotopic__label"
-msgstr "Molecule Properties Mw Monoisotopic"
-
-
-msgid "glados_es_gs__molecule_properties___mw_monoisotopic__label__mini"
-msgstr "Molecule Properties Mw Monoisotopic"
-
-
-msgid "glados_es_gs__molecule_properties___num_alerts__label"
-msgstr "Molecule Properties # Alerts"
-
-
-msgid "glados_es_gs__molecule_properties___num_alerts__label__mini"
-msgstr "Molecule Properties # Alerts"
-
-
-msgid "glados_es_gs__molecule_properties___num_lipinski_ro5_violations__label"
-msgstr "Molecule Properties # Lipinski Ro5 Violations"
-
-
-msgid "glados_es_gs__molecule_properties___num_lipinski_ro5_violations__label__mini"
-msgstr "Molecule Properties # Lipinski Ro5 Violations"
-
-
-msgid "glados_es_gs__molecule_properties___num_ro5_violations__label"
-msgstr "Molecule Properties # Ro5 Violations"
-
-
-msgid "glados_es_gs__molecule_properties___num_ro5_violations__label__mini"
-msgstr "Molecule Properties # Ro5 Violations"
-
-
-msgid "glados_es_gs__molecule_properties___psa__label"
-msgstr "Molecule Properties Psa"
-
-
-msgid "glados_es_gs__molecule_properties___psa__label__mini"
-msgstr "Molecule Properties Psa"
-
-
-msgid "glados_es_gs__molecule_properties___qed_weighted__label"
-msgstr "Molecule Properties Qed Weighted"
-
-
-msgid "glados_es_gs__molecule_properties___qed_weighted__label__mini"
-msgstr "Molecule Properties Qed Weighted"
-
-
-msgid "glados_es_gs__molecule_properties___ro3_pass__label"
-msgstr "Molecule Properties Ro3 Pass"
-
-
-msgid "glados_es_gs__molecule_properties___ro3_pass__label__mini"
-msgstr "Molecule Properties Ro3 Pass"
-
-
-msgid "glados_es_gs__molecule_properties___rtb__label"
-msgstr "Molecule Properties Rtb"
-
-
-msgid "glados_es_gs__molecule_properties___rtb__label__mini"
-msgstr "Molecule Properties Rtb"
-
-
-msgid "glados_es_gs__molecule_properties__label"
-msgstr "Molecule Properties"
-
-
-msgid "glados_es_gs__molecule_properties__label__mini"
-msgstr "Molecule Properties"
-
-
-msgid "glados_es_gs__molecule_structures___canonical_smiles__label"
-msgstr "Molecule Structures Canonical Smiles"
-
-
-msgid "glados_es_gs__molecule_structures___canonical_smiles__label__mini"
-msgstr "Molecule Structures Canonical Smiles"
-
-
-msgid "glados_es_gs__molecule_structures___standard_inchi__label"
-msgstr "Molecule Structures Standard Inchi"
-
-
-msgid "glados_es_gs__molecule_structures___standard_inchi__label__mini"
-msgstr "Molecule Structures Standard Inchi"
-
-
-msgid "glados_es_gs__molecule_structures___standard_inchi_key__label"
-msgstr "Molecule Structures Standard Inchi Key"
-
-
-msgid "glados_es_gs__molecule_structures___standard_inchi_key__label__mini"
-msgstr "Molecule Structures Standard Inchi Key"
-
-
-msgid "glados_es_gs__molecule_structures__label"
-msgstr "Molecule Structures"
-
-
-msgid "glados_es_gs__molecule_structures__label__mini"
-msgstr "Molecule Structures"
-
-
-msgid "glados_es_gs__molecule_synonyms___molecule_synonym__label"
-msgstr "Molecule Synonyms Molecule Synonym"
-
-
-msgid "glados_es_gs__molecule_synonyms___molecule_synonym__label__mini"
-msgstr "Molecule Synonyms Molecule Synonym"
-
-
-msgid "glados_es_gs__molecule_synonyms___syn_type__label"
-msgstr "Molecule Synonyms Syn Type"
-
-
-msgid "glados_es_gs__molecule_synonyms___syn_type__label__mini"
-msgstr "Molecule Synonyms Syn Type"
-
-
-msgid "glados_es_gs__molecule_synonyms___synonyms__label"
-msgstr "Molecule Synonyms Synonyms"
-
-
-msgid "glados_es_gs__molecule_synonyms___synonyms__label__mini"
-msgstr "Molecule Synonyms Synonyms"
-
-
-msgid "glados_es_gs__molecule_synonyms__label"
-msgstr "Molecule Synonyms"
-
-
-msgid "glados_es_gs__molecule_synonyms__label__mini"
-msgstr "Molecule Synonyms"
-
-
-msgid "glados_es_gs__molecule_type__label"
-msgstr "Molecule Type"
-
-
-msgid "glados_es_gs__molecule_type__label__mini"
-msgstr "Molecule Type"
-
-
-msgid "glados_es_gs__natural_product__label"
-msgstr "Natural Product"
-
-
-msgid "glados_es_gs__natural_product__label__mini"
-msgstr "Natural Product"
-
-
-msgid "glados_es_gs__ob_patent__label"
-msgstr "Ob Patent"
-
-
-msgid "glados_es_gs__ob_patent__label__mini"
-msgstr "Ob Patent"
-
-
-msgid "glados_es_gs__oral__label"
-msgstr "Oral"
-
-
-msgid "glados_es_gs__oral__label__mini"
-msgstr "Oral"
-
-
-msgid "glados_es_gs__organism__label"
-msgstr "Organism"
-
-
-msgid "glados_es_gs__organism__label__mini"
-msgstr "Organism"
-
-
-msgid "glados_es_gs__parenteral__label"
-msgstr "Parenteral"
-
-
-msgid "glados_es_gs__parenteral__label__mini"
-msgstr "Parenteral"
-
-
-msgid "glados_es_gs__patent_id__label"
-msgstr "Patent ID"
-
-
-msgid "glados_es_gs__patent_id__label__mini"
-msgstr "Patent ID"
-
-
-msgid "glados_es_gs__pchembl_value__label"
+msgid "glados_es_gs__activity__pchembl_value__label"
 msgstr "Pchembl Value"
 
 
-msgid "glados_es_gs__pchembl_value__label__mini"
+msgid "glados_es_gs__activity__pchembl_value__label__mini"
 msgstr "Pchembl Value"
 
 
-msgid "glados_es_gs__polymer_flag__label"
-msgstr "Polymer Flag"
-
-
-msgid "glados_es_gs__polymer_flag__label__mini"
-msgstr "Polymer Flag"
-
-
-msgid "glados_es_gs__potential_duplicate__label"
+msgid "glados_es_gs__activity__potential_duplicate__label"
 msgstr "Potential Duplicate"
 
 
-msgid "glados_es_gs__potential_duplicate__label__mini"
+msgid "glados_es_gs__activity__potential_duplicate__label__mini"
 msgstr "Potential Duplicate"
 
 
-msgid "glados_es_gs__pref_name__label"
-msgstr "Pref Name"
-
-
-msgid "glados_es_gs__pref_name__label__mini"
-msgstr "Pref Name"
-
-
-msgid "glados_es_gs__prodrug__label"
-msgstr "Prodrug"
-
-
-msgid "glados_es_gs__prodrug__label__mini"
-msgstr "Prodrug"
-
-
-msgid "glados_es_gs__published_relation__label"
+msgid "glados_es_gs__activity__published_relation__label"
 msgstr "Published Relation"
 
 
-msgid "glados_es_gs__published_relation__label__mini"
+msgid "glados_es_gs__activity__published_relation__label__mini"
 msgstr "Published Relation"
 
 
-msgid "glados_es_gs__published_type__label"
+msgid "glados_es_gs__activity__published_type__label"
 msgstr "Published Type"
 
 
-msgid "glados_es_gs__published_type__label__mini"
+msgid "glados_es_gs__activity__published_type__label__mini"
 msgstr "Published Type"
 
 
-msgid "glados_es_gs__published_units__label"
+msgid "glados_es_gs__activity__published_units__label"
 msgstr "Published Units"
 
 
-msgid "glados_es_gs__published_units__label__mini"
+msgid "glados_es_gs__activity__published_units__label__mini"
 msgstr "Published Units"
 
 
-msgid "glados_es_gs__published_value__label"
+msgid "glados_es_gs__activity__published_value__label"
 msgstr "Published Value"
 
 
-msgid "glados_es_gs__published_value__label__mini"
+msgid "glados_es_gs__activity__published_value__label__mini"
 msgstr "Published Value"
 
 
-msgid "glados_es_gs__pubmed_id__label"
-msgstr "Pubmed ID"
-
-
-msgid "glados_es_gs__pubmed_id__label__mini"
-msgstr "Pubmed ID"
-
-
-msgid "glados_es_gs__qudt_units__label"
+msgid "glados_es_gs__activity__qudt_units__label"
 msgstr "Qudt Units"
 
 
-msgid "glados_es_gs__qudt_units__label__mini"
+msgid "glados_es_gs__activity__qudt_units__label__mini"
 msgstr "Qudt Units"
 
 
-msgid "glados_es_gs__record_id__label"
+msgid "glados_es_gs__activity__record_id__label"
 msgstr "Record ID"
 
 
-msgid "glados_es_gs__record_id__label__mini"
+msgid "glados_es_gs__activity__record_id__label__mini"
 msgstr "Record ID"
 
 
-msgid "glados_es_gs__related_compounds___chembl_ids__label"
-msgstr "Related Compounds ChEMBL Ids"
-
-
-msgid "glados_es_gs__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
-
-
-msgid "glados_es_gs__related_compounds___count__label"
-msgstr "Related Compounds Count"
-
-
-msgid "glados_es_gs__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
-
-
-msgid "glados_es_gs__related_compounds__label"
-msgstr "Related Compounds"
-
-
-msgid "glados_es_gs__related_compounds__label__mini"
-msgstr "Related Compounds"
-
-
-msgid "glados_es_gs__related_targets___chembl_ids__label"
-msgstr "Related Targets ChEMBL Ids"
-
-
-msgid "glados_es_gs__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
-
-
-msgid "glados_es_gs__related_targets___count__label"
-msgstr "Related Targets Count"
-
-
-msgid "glados_es_gs__related_targets___count__label__mini"
-msgstr "Related Targets Count"
-
-
-msgid "glados_es_gs__related_targets__label"
-msgstr "Related Targets"
-
-
-msgid "glados_es_gs__related_targets__label__mini"
-msgstr "Related Targets"
-
-
-msgid "glados_es_gs__relationship_description__label"
-msgstr "Relationship Description"
-
-
-msgid "glados_es_gs__relationship_description__label__mini"
-msgstr "Relationship Description"
-
-
-msgid "glados_es_gs__relationship_type__label"
-msgstr "Relationship Type"
-
-
-msgid "glados_es_gs__relationship_type__label__mini"
-msgstr "Relationship Type"
-
-
-msgid "glados_es_gs__research_codes__label"
-msgstr "Research Codes"
-
-
-msgid "glados_es_gs__research_codes__label__mini"
-msgstr "Research Codes"
-
-
-msgid "glados_es_gs__rule_of_five__label"
-msgstr "Rule Of Five"
-
-
-msgid "glados_es_gs__rule_of_five__label__mini"
-msgstr "Rule Of Five"
-
-
-msgid "glados_es_gs__sc_patent__label"
-msgstr "Sc Patent"
-
-
-msgid "glados_es_gs__sc_patent__label__mini"
-msgstr "Sc Patent"
-
-
-msgid "glados_es_gs__species_group_flag__label"
-msgstr "Species Group Flag"
-
-
-msgid "glados_es_gs__species_group_flag__label__mini"
-msgstr "Species Group Flag"
-
-
-msgid "glados_es_gs__src_assay_id__label"
-msgstr "Src Assay ID"
-
-
-msgid "glados_es_gs__src_assay_id__label__mini"
-msgstr "Src Assay ID"
-
-
-msgid "glados_es_gs__src_id__label"
+msgid "glados_es_gs__activity__src_id__label"
 msgstr "Src ID"
 
 
-msgid "glados_es_gs__src_id__label__mini"
+msgid "glados_es_gs__activity__src_id__label__mini"
 msgstr "Src ID"
 
 
-msgid "glados_es_gs__standard_flag__label"
+msgid "glados_es_gs__activity__standard_flag__label"
 msgstr "Standard Flag"
 
 
-msgid "glados_es_gs__standard_flag__label__mini"
+msgid "glados_es_gs__activity__standard_flag__label__mini"
 msgstr "Standard Flag"
 
 
-msgid "glados_es_gs__standard_relation__label"
+msgid "glados_es_gs__activity__standard_relation__label"
 msgstr "Standard Relation"
 
 
-msgid "glados_es_gs__standard_relation__label__mini"
+msgid "glados_es_gs__activity__standard_relation__label__mini"
 msgstr "Standard Relation"
 
 
-msgid "glados_es_gs__standard_type__label"
+msgid "glados_es_gs__activity__standard_type__label"
 msgstr "Standard Type"
 
 
-msgid "glados_es_gs__standard_type__label__mini"
+msgid "glados_es_gs__activity__standard_type__label__mini"
 msgstr "Standard Type"
 
 
-msgid "glados_es_gs__standard_units__label"
+msgid "glados_es_gs__activity__standard_units__label"
 msgstr "Standard Units"
 
 
-msgid "glados_es_gs__standard_units__label__mini"
+msgid "glados_es_gs__activity__standard_units__label__mini"
 msgstr "Standard Units"
 
 
-msgid "glados_es_gs__standard_value__label"
+msgid "glados_es_gs__activity__standard_value__label"
 msgstr "Standard Value"
 
 
-msgid "glados_es_gs__standard_value__label__mini"
+msgid "glados_es_gs__activity__standard_value__label__mini"
 msgstr "Standard Value"
 
 
-msgid "glados_es_gs__structure_type__label"
-msgstr "Structure Type"
-
-
-msgid "glados_es_gs__structure_type__label__mini"
-msgstr "Structure Type"
-
-
-msgid "glados_es_gs__synonyms__label"
-msgstr "Synonyms"
-
-
-msgid "glados_es_gs__synonyms__label__mini"
-msgstr "Synonyms"
-
-
-msgid "glados_es_gs__tags__label"
-msgstr "Tags"
-
-
-msgid "glados_es_gs__tags__label__mini"
-msgstr "Tags"
-
-
-msgid "glados_es_gs__target_chembl_id__label"
+msgid "glados_es_gs__activity__target_chembl_id__label"
 msgstr "Target ChEMBL ID"
 
 
-msgid "glados_es_gs__target_chembl_id__label__mini"
+msgid "glados_es_gs__activity__target_chembl_id__label__mini"
 msgstr "Target ChEMBL ID"
 
 
-msgid "glados_es_gs__target_component_synonyms___component_synonym__label"
-msgstr "Target Component Synonyms Component Synonym"
-
-
-msgid "glados_es_gs__target_component_synonyms___component_synonym__label__mini"
-msgstr "Target Component Synonyms Component Synonym"
-
-
-msgid "glados_es_gs__target_component_synonyms___syn_type__label"
-msgstr "Target Component Synonyms Syn Type"
-
-
-msgid "glados_es_gs__target_component_synonyms___syn_type__label__mini"
-msgstr "Target Component Synonyms Syn Type"
-
-
-msgid "glados_es_gs__target_components___accession__label"
-msgstr "Target Components Accession"
-
-
-msgid "glados_es_gs__target_components___accession__label__mini"
-msgstr "Target Components Accession"
-
-
-msgid "glados_es_gs__target_components___component_description__label"
-msgstr "Target Components Component Description"
-
-
-msgid "glados_es_gs__target_components___component_description__label__mini"
-msgstr "Target Components Component Description"
-
-
-msgid "glados_es_gs__target_components___component_id__label"
-msgstr "Target Components Component ID"
-
-
-msgid "glados_es_gs__target_components___component_id__label__mini"
-msgstr "Target Components Component ID"
-
-
-msgid "glados_es_gs__target_components___component_type__label"
-msgstr "Target Components Component Type"
-
-
-msgid "glados_es_gs__target_components___component_type__label__mini"
-msgstr "Target Components Component Type"
-
-
-msgid "glados_es_gs__target_components___relationship__label"
-msgstr "Target Components Relationship"
-
-
-msgid "glados_es_gs__target_components___relationship__label__mini"
-msgstr "Target Components Relationship"
-
-
-msgid "glados_es_gs__target_components___target_component_synonyms__label"
-msgstr "Target Components Target Component Synonyms"
-
-
-msgid "glados_es_gs__target_components___target_component_synonyms__label__mini"
-msgstr "Target Components Target Component Synonyms"
-
-
-msgid "glados_es_gs__target_components__label"
-msgstr "Target Components"
-
-
-msgid "glados_es_gs__target_components__label__mini"
-msgstr "Target Components"
-
-
-msgid "glados_es_gs__target_organism__label"
+msgid "glados_es_gs__activity__target_organism__label"
 msgstr "Target Organism"
 
 
-msgid "glados_es_gs__target_organism__label__mini"
+msgid "glados_es_gs__activity__target_organism__label__mini"
 msgstr "Target Organism"
 
 
-msgid "glados_es_gs__target_pref_name__label"
+msgid "glados_es_gs__activity__target_pref_name__label"
 msgstr "Target Pref Name"
 
 
-msgid "glados_es_gs__target_pref_name__label__mini"
+msgid "glados_es_gs__activity__target_pref_name__label__mini"
 msgstr "Target Pref Name"
 
 
-msgid "glados_es_gs__target_tax_id__label"
+msgid "glados_es_gs__activity__target_tax_id__label"
 msgstr "Target Tax ID"
 
 
-msgid "glados_es_gs__target_tax_id__label__mini"
+msgid "glados_es_gs__activity__target_tax_id__label__mini"
 msgstr "Target Tax ID"
 
 
-msgid "glados_es_gs__target_type__label"
-msgstr "Target Type"
-
-
-msgid "glados_es_gs__target_type__label__mini"
-msgstr "Target Type"
-
-
-msgid "glados_es_gs__tax_id__label"
-msgstr "Tax ID"
-
-
-msgid "glados_es_gs__tax_id__label__mini"
-msgstr "Tax ID"
-
-
-msgid "glados_es_gs__therapeutic_flag__label"
-msgstr "Therapeutic Flag"
-
-
-msgid "glados_es_gs__therapeutic_flag__label__mini"
-msgstr "Therapeutic Flag"
-
-
-msgid "glados_es_gs__tissue_chembl_id__label"
-msgstr "Tissue ChEMBL ID"
-
-
-msgid "glados_es_gs__tissue_chembl_id__label__mini"
-msgstr "Tissue ChEMBL ID"
-
-
-msgid "glados_es_gs__title__label"
-msgstr "Title"
-
-
-msgid "glados_es_gs__title__label__mini"
-msgstr "Title"
-
-
-msgid "glados_es_gs__topical__label"
-msgstr "Topical"
-
-
-msgid "glados_es_gs__topical__label__mini"
-msgstr "Topical"
-
-
-msgid "glados_es_gs__uberon_id__label"
-msgstr "UBERON ID"
-
-
-msgid "glados_es_gs__uberon_id__label__mini"
-msgstr "UBERON ID"
-
-
-msgid "glados_es_gs__uo_units__label"
+msgid "glados_es_gs__activity__uo_units__label"
 msgstr "Uo Units"
 
 
-msgid "glados_es_gs__uo_units__label__mini"
+msgid "glados_es_gs__activity__uo_units__label__mini"
 msgstr "Uo Units"
 
 
-msgid "glados_es_gs__usan_stem__label"
-msgstr "Usan Stem"
+msgid "glados_es_gs__assay___metadata__label"
+msgstr " Metadata"
 
 
-msgid "glados_es_gs__usan_stem__label__mini"
-msgstr "Usan Stem"
+msgid "glados_es_gs__assay___metadata__label__mini"
+msgstr " Metadata"
 
 
-msgid "glados_es_gs__usan_stem_definition__label"
-msgstr "Usan Stem Definition"
+msgid "glados_es_gs__assay__assay_category__label"
+msgstr "Assay Category"
 
 
-msgid "glados_es_gs__usan_stem_definition__label__mini"
-msgstr "Usan Stem Definition"
+msgid "glados_es_gs__assay__assay_category__label__mini"
+msgstr "Assay Category"
 
 
-msgid "glados_es_gs__usan_stem_substem__label"
-msgstr "Usan Stem Substem"
+msgid "glados_es_gs__assay__assay_cell_type__label"
+msgstr "Assay Cell Type"
 
 
-msgid "glados_es_gs__usan_stem_substem__label__mini"
-msgstr "Usan Stem Substem"
+msgid "glados_es_gs__assay__assay_cell_type__label__mini"
+msgstr "Assay Cell Type"
 
 
-msgid "glados_es_gs__usan_substem__label"
-msgstr "Usan Substem"
+msgid "glados_es_gs__assay__assay_chembl_id__label"
+msgstr "Assay ChEMBL ID"
 
 
-msgid "glados_es_gs__usan_substem__label__mini"
-msgstr "Usan Substem"
+msgid "glados_es_gs__assay__assay_chembl_id__label__mini"
+msgstr "Assay ChEMBL ID"
 
 
-msgid "glados_es_gs__usan_year__label"
-msgstr "Usan Year"
+msgid "glados_es_gs__assay__assay_organism__label"
+msgstr "Assay Organism"
 
 
-msgid "glados_es_gs__usan_year__label__mini"
-msgstr "Usan Year"
+msgid "glados_es_gs__assay__assay_organism__label__mini"
+msgstr "Assay Organism"
 
 
-msgid "glados_es_gs__volume__label"
+msgid "glados_es_gs__assay__assay_strain__label"
+msgstr "Assay Strain"
+
+
+msgid "glados_es_gs__assay__assay_strain__label__mini"
+msgstr "Assay Strain"
+
+
+msgid "glados_es_gs__assay__assay_subcellular_fraction__label"
+msgstr "Assay Subcellular Fraction"
+
+
+msgid "glados_es_gs__assay__assay_subcellular_fraction__label__mini"
+msgstr "Assay Subcellular Fraction"
+
+
+msgid "glados_es_gs__assay__assay_tax_id__label"
+msgstr "Assay Tax ID"
+
+
+msgid "glados_es_gs__assay__assay_tax_id__label__mini"
+msgstr "Assay Tax ID"
+
+
+msgid "glados_es_gs__assay__assay_test_type__label"
+msgstr "Assay Test Type"
+
+
+msgid "glados_es_gs__assay__assay_test_type__label__mini"
+msgstr "Assay Test Type"
+
+
+msgid "glados_es_gs__assay__assay_tissue__label"
+msgstr "Assay Tissue"
+
+
+msgid "glados_es_gs__assay__assay_tissue__label__mini"
+msgstr "Assay Tissue"
+
+
+msgid "glados_es_gs__assay__assay_type__label"
+msgstr "Assay Type"
+
+
+msgid "glados_es_gs__assay__assay_type__label__mini"
+msgstr "Assay Type"
+
+
+msgid "glados_es_gs__assay__assay_type_description__label"
+msgstr "Assay Type Description"
+
+
+msgid "glados_es_gs__assay__assay_type_description__label__mini"
+msgstr "Assay Type Description"
+
+
+msgid "glados_es_gs__assay__bao_format__label"
+msgstr "Bao Format"
+
+
+msgid "glados_es_gs__assay__bao_format__label__mini"
+msgstr "Bao Format"
+
+
+msgid "glados_es_gs__assay__cell_chembl_id__label"
+msgstr "Cell ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__cell_chembl_id__label__mini"
+msgstr "Cell ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__confidence_description__label"
+msgstr "Confidence Description"
+
+
+msgid "glados_es_gs__assay__confidence_description__label__mini"
+msgstr "Confidence Description"
+
+
+msgid "glados_es_gs__assay__confidence_score__label"
+msgstr "Confidence Score"
+
+
+msgid "glados_es_gs__assay__confidence_score__label__mini"
+msgstr "Confidence Score"
+
+
+msgid "glados_es_gs__assay__description__label"
+msgstr "Description"
+
+
+msgid "glados_es_gs__assay__description__label__mini"
+msgstr "Description"
+
+
+msgid "glados_es_gs__assay__document_chembl_id__label"
+msgstr "Document ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__document_chembl_id__label__mini"
+msgstr "Document ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__assay__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__assay__relationship_description__label"
+msgstr "Relationship Description"
+
+
+msgid "glados_es_gs__assay__relationship_description__label__mini"
+msgstr "Relationship Description"
+
+
+msgid "glados_es_gs__assay__relationship_type__label"
+msgstr "Relationship Type"
+
+
+msgid "glados_es_gs__assay__relationship_type__label__mini"
+msgstr "Relationship Type"
+
+
+msgid "glados_es_gs__assay__src_assay_id__label"
+msgstr "Src Assay ID"
+
+
+msgid "glados_es_gs__assay__src_assay_id__label__mini"
+msgstr "Src Assay ID"
+
+
+msgid "glados_es_gs__assay__src_id__label"
+msgstr "Src ID"
+
+
+msgid "glados_es_gs__assay__src_id__label__mini"
+msgstr "Src ID"
+
+
+msgid "glados_es_gs__assay__target_chembl_id__label"
+msgstr "Target ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__target_chembl_id__label__mini"
+msgstr "Target ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__tissue_chembl_id__label"
+msgstr "Tissue ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__tissue_chembl_id__label__mini"
+msgstr "Tissue ChEMBL ID"
+
+
+msgid "glados_es_gs__cell_line___metadata__label"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__cell_line___metadata__label__mini"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__cell_line__cell_chembl_id__label"
+msgstr "Cell ChEMBL ID"
+
+
+msgid "glados_es_gs__cell_line__cell_chembl_id__label__mini"
+msgstr "Cell ChEMBL ID"
+
+
+msgid "glados_es_gs__cell_line__cell_description__label"
+msgstr "Cell Description"
+
+
+msgid "glados_es_gs__cell_line__cell_description__label__mini"
+msgstr "Cell Description"
+
+
+msgid "glados_es_gs__cell_line__cell_id__label"
+msgstr "Cell ID"
+
+
+msgid "glados_es_gs__cell_line__cell_id__label__mini"
+msgstr "Cell ID"
+
+
+msgid "glados_es_gs__cell_line__cell_name__label"
+msgstr "Cell Name"
+
+
+msgid "glados_es_gs__cell_line__cell_name__label__mini"
+msgstr "Cell Name"
+
+
+msgid "glados_es_gs__cell_line__cell_source_organism__label"
+msgstr "Cell Source Organism"
+
+
+msgid "glados_es_gs__cell_line__cell_source_organism__label__mini"
+msgstr "Cell Source Organism"
+
+
+msgid "glados_es_gs__cell_line__cell_source_tax_id__label"
+msgstr "Cell Source Tax ID"
+
+
+msgid "glados_es_gs__cell_line__cell_source_tax_id__label__mini"
+msgstr "Cell Source Tax ID"
+
+
+msgid "glados_es_gs__cell_line__cell_source_tissue__label"
+msgstr "Cell Source Tissue"
+
+
+msgid "glados_es_gs__cell_line__cell_source_tissue__label__mini"
+msgstr "Cell Source Tissue"
+
+
+msgid "glados_es_gs__cell_line__cellosaurus_id__label"
+msgstr "Cellosaurus ID"
+
+
+msgid "glados_es_gs__cell_line__cellosaurus_id__label__mini"
+msgstr "Cellosaurus ID"
+
+
+msgid "glados_es_gs__cell_line__cl_lincs_id__label"
+msgstr "Cl Lincs ID"
+
+
+msgid "glados_es_gs__cell_line__cl_lincs_id__label__mini"
+msgstr "Cl Lincs ID"
+
+
+msgid "glados_es_gs__cell_line__clo_id__label"
+msgstr "Clo ID"
+
+
+msgid "glados_es_gs__cell_line__clo_id__label__mini"
+msgstr "Clo ID"
+
+
+msgid "glados_es_gs__cell_line__efo_id__label"
+msgstr "EFO ID"
+
+
+msgid "glados_es_gs__cell_line__efo_id__label__mini"
+msgstr "EFO ID"
+
+
+msgid "glados_es_gs__cell_line__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__cell_line__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__document___metadata__label"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__document___metadata__label__mini"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__document__abstract__label"
+msgstr "Abstract"
+
+
+msgid "glados_es_gs__document__abstract__label__mini"
+msgstr "Abstract"
+
+
+msgid "glados_es_gs__document__authors__label"
+msgstr "Authors"
+
+
+msgid "glados_es_gs__document__authors__label__mini"
+msgstr "Authors"
+
+
+msgid "glados_es_gs__document__doc_type__label"
+msgstr "Doc Type"
+
+
+msgid "glados_es_gs__document__doc_type__label__mini"
+msgstr "Doc Type"
+
+
+msgid "glados_es_gs__document__document_chembl_id__label"
+msgstr "Document ChEMBL ID"
+
+
+msgid "glados_es_gs__document__document_chembl_id__label__mini"
+msgstr "Document ChEMBL ID"
+
+
+msgid "glados_es_gs__document__doi__label"
+msgstr "Doi"
+
+
+msgid "glados_es_gs__document__doi__label__mini"
+msgstr "Doi"
+
+
+msgid "glados_es_gs__document__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__document__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__document__first_page__label"
+msgstr "First Page"
+
+
+msgid "glados_es_gs__document__first_page__label__mini"
+msgstr "First Page"
+
+
+msgid "glados_es_gs__document__issue__label"
+msgstr "Issue"
+
+
+msgid "glados_es_gs__document__issue__label__mini"
+msgstr "Issue"
+
+
+msgid "glados_es_gs__document__journal__label"
+msgstr "Journal"
+
+
+msgid "glados_es_gs__document__journal__label__mini"
+msgstr "Journal"
+
+
+msgid "glados_es_gs__document__last_page__label"
+msgstr "Last Page"
+
+
+msgid "glados_es_gs__document__last_page__label__mini"
+msgstr "Last Page"
+
+
+msgid "glados_es_gs__document__patent_id__label"
+msgstr "Patent ID"
+
+
+msgid "glados_es_gs__document__patent_id__label__mini"
+msgstr "Patent ID"
+
+
+msgid "glados_es_gs__document__pubmed_id__label"
+msgstr "Pubmed ID"
+
+
+msgid "glados_es_gs__document__pubmed_id__label__mini"
+msgstr "Pubmed ID"
+
+
+msgid "glados_es_gs__document__title__label"
+msgstr "Title"
+
+
+msgid "glados_es_gs__document__title__label__mini"
+msgstr "Title"
+
+
+msgid "glados_es_gs__document__volume__label"
 msgstr "Volume"
 
 
-msgid "glados_es_gs__volume__label__mini"
+msgid "glados_es_gs__document__volume__label__mini"
 msgstr "Volume"
 
 
-msgid "glados_es_gs__withdrawn_country__label"
-msgstr "Withdrawn Country"
-
-
-msgid "glados_es_gs__withdrawn_country__label__mini"
-msgstr "Withdrawn Country"
-
-
-msgid "glados_es_gs__withdrawn_flag__label"
-msgstr "Withdrawn Flag"
-
-
-msgid "glados_es_gs__withdrawn_flag__label__mini"
-msgstr "Withdrawn Flag"
-
-
-msgid "glados_es_gs__withdrawn_reason__label"
-msgstr "Withdrawn Reason"
-
-
-msgid "glados_es_gs__withdrawn_reason__label__mini"
-msgstr "Withdrawn Reason"
-
-
-msgid "glados_es_gs__withdrawn_year__label"
-msgstr "Withdrawn Year"
-
-
-msgid "glados_es_gs__withdrawn_year__label__mini"
-msgstr "Withdrawn Year"
-
-
-msgid "glados_es_gs__year__label"
+msgid "glados_es_gs__document__year__label"
 msgstr "Year"
 
 
-msgid "glados_es_gs__year__label__mini"
+msgid "glados_es_gs__document__year__label__mini"
 msgstr "Year"
+
+
+msgid "glados_es_gs__molecule___metadata__label"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__molecule___metadata__label__mini"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__molecule__activity_count__label"
+msgstr "Activity Count"
+
+
+msgid "glados_es_gs__molecule__activity_count__label__mini"
+msgstr "Activity Count"
+
+
+msgid "glados_es_gs__molecule__applicants__label"
+msgstr "Applicants"
+
+
+msgid "glados_es_gs__molecule__applicants__label__mini"
+msgstr "Applicants"
+
+
+msgid "glados_es_gs__molecule__atc_classification___code__label"
+msgstr "Atc Classification Code"
+
+
+msgid "glados_es_gs__molecule__atc_classification___code__label__mini"
+msgstr "Atc Classification Code"
+
+
+msgid "glados_es_gs__molecule__atc_classification___description__label"
+msgstr "Atc Classification Description"
+
+
+msgid "glados_es_gs__molecule__atc_classification___description__label__mini"
+msgstr "Atc Classification Description"
+
+
+msgid "glados_es_gs__molecule__atc_classification__label"
+msgstr "Atc Classification"
+
+
+msgid "glados_es_gs__molecule__atc_classification__label__mini"
+msgstr "Atc Classification"
+
+
+msgid "glados_es_gs__molecule__atc_classifications__label"
+msgstr "Atc Classifications"
+
+
+msgid "glados_es_gs__molecule__atc_classifications__label__mini"
+msgstr "Atc Classifications"
+
+
+msgid "glados_es_gs__molecule__availability_type__label"
+msgstr "Availability Type"
+
+
+msgid "glados_es_gs__molecule__availability_type__label__mini"
+msgstr "Availability Type"
+
+
+msgid "glados_es_gs__molecule__biocomponents___component_id__label"
+msgstr "Biocomponents Component ID"
+
+
+msgid "glados_es_gs__molecule__biocomponents___component_id__label__mini"
+msgstr "Biocomponents Component ID"
+
+
+msgid "glados_es_gs__molecule__biocomponents___component_type__label"
+msgstr "Biocomponents Component Type"
+
+
+msgid "glados_es_gs__molecule__biocomponents___component_type__label__mini"
+msgstr "Biocomponents Component Type"
+
+
+msgid "glados_es_gs__molecule__biocomponents___description__label"
+msgstr "Biocomponents Description"
+
+
+msgid "glados_es_gs__molecule__biocomponents___description__label__mini"
+msgstr "Biocomponents Description"
+
+
+msgid "glados_es_gs__molecule__biocomponents___organism__label"
+msgstr "Biocomponents Organism"
+
+
+msgid "glados_es_gs__molecule__biocomponents___organism__label__mini"
+msgstr "Biocomponents Organism"
+
+
+msgid "glados_es_gs__molecule__biocomponents___sequence__label"
+msgstr "Biocomponents Sequence"
+
+
+msgid "glados_es_gs__molecule__biocomponents___sequence__label__mini"
+msgstr "Biocomponents Sequence"
+
+
+msgid "glados_es_gs__molecule__biocomponents___tax_id__label"
+msgstr "Biocomponents Tax ID"
+
+
+msgid "glados_es_gs__molecule__biocomponents___tax_id__label__mini"
+msgstr "Biocomponents Tax ID"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___biocomponents__label"
+msgstr "Biotherapeutic Biocomponents"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___biocomponents__label__mini"
+msgstr "Biotherapeutic Biocomponents"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___description__label"
+msgstr "Biotherapeutic Description"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___description__label__mini"
+msgstr "Biotherapeutic Description"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___helm_notation__label"
+msgstr "Biotherapeutic Helm Notation"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___helm_notation__label__mini"
+msgstr "Biotherapeutic Helm Notation"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___molecule_chembl_id__label"
+msgstr "Biotherapeutic Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic___molecule_chembl_id__label__mini"
+msgstr "Biotherapeutic Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic__label"
+msgstr "Biotherapeutic"
+
+
+msgid "glados_es_gs__molecule__biotherapeutic__label__mini"
+msgstr "Biotherapeutic"
+
+
+msgid "glados_es_gs__molecule__black_box__label"
+msgstr "Black Box"
+
+
+msgid "glados_es_gs__molecule__black_box__label__mini"
+msgstr "Black Box"
+
+
+msgid "glados_es_gs__molecule__black_box_warning__label"
+msgstr "Black Box Warning"
+
+
+msgid "glados_es_gs__molecule__black_box_warning__label__mini"
+msgstr "Black Box Warning"
+
+
+msgid "glados_es_gs__molecule__chebi_par_id__label"
+msgstr "Chebi Par ID"
+
+
+msgid "glados_es_gs__molecule__chebi_par_id__label__mini"
+msgstr "Chebi Par ID"
+
+
+msgid "glados_es_gs__molecule__chirality__label"
+msgstr "Chirality"
+
+
+msgid "glados_es_gs__molecule__chirality__label__mini"
+msgstr "Chirality"
+
+
+msgid "glados_es_gs__molecule__compound_records___compound_key__label"
+msgstr "Compound Records Compound Key"
+
+
+msgid "glados_es_gs__molecule__compound_records___compound_key__label__mini"
+msgstr "Compound Records Compound Key"
+
+
+msgid "glados_es_gs__molecule__compound_records___compound_name__label"
+msgstr "Compound Records Compound Name"
+
+
+msgid "glados_es_gs__molecule__compound_records___compound_name__label__mini"
+msgstr "Compound Records Compound Name"
+
+
+msgid "glados_es_gs__molecule__compound_records__label"
+msgstr "Compound Records"
+
+
+msgid "glados_es_gs__molecule__compound_records__label__mini"
+msgstr "Compound Records"
+
+
+msgid "glados_es_gs__molecule__development_phase__label"
+msgstr "Development Phase"
+
+
+msgid "glados_es_gs__molecule__development_phase__label__mini"
+msgstr "Development Phase"
+
+
+msgid "glados_es_gs__molecule__disease_name__label"
+msgstr "Disease Name"
+
+
+msgid "glados_es_gs__molecule__disease_name__label__mini"
+msgstr "Disease Name"
+
+
+msgid "glados_es_gs__molecule__dosed_ingredient__label"
+msgstr "Dosed Ingredient"
+
+
+msgid "glados_es_gs__molecule__dosed_ingredient__label__mini"
+msgstr "Dosed Ingredient"
+
+
+msgid "glados_es_gs__molecule__drug___drug_data__label"
+msgstr "Drug Drug Data"
+
+
+msgid "glados_es_gs__molecule__drug___drug_data__label__mini"
+msgstr "Drug Drug Data"
+
+
+msgid "glados_es_gs__molecule__drug___is_drug__label"
+msgstr "Drug Is Drug"
+
+
+msgid "glados_es_gs__molecule__drug___is_drug__label__mini"
+msgstr "Drug Is Drug"
+
+
+msgid "glados_es_gs__molecule__drug__label"
+msgstr "Drug"
+
+
+msgid "glados_es_gs__molecule__drug__label__mini"
+msgstr "Drug"
+
+
+msgid "glados_es_gs__molecule__drug_type__label"
+msgstr "Drug Type"
+
+
+msgid "glados_es_gs__molecule__drug_type__label__mini"
+msgstr "Drug Type"
+
+
+msgid "glados_es_gs__molecule__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__molecule__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__molecule__first_approval__label"
+msgstr "First Approval"
+
+
+msgid "glados_es_gs__molecule__first_approval__label__mini"
+msgstr "First Approval"
+
+
+msgid "glados_es_gs__molecule__first_in_class__label"
+msgstr "First In Class"
+
+
+msgid "glados_es_gs__molecule__first_in_class__label__mini"
+msgstr "First In Class"
+
+
+msgid "glados_es_gs__molecule__helm_notation__label"
+msgstr "Helm Notation"
+
+
+msgid "glados_es_gs__molecule__helm_notation__label__mini"
+msgstr "Helm Notation"
+
+
+msgid "glados_es_gs__molecule__indication_class__label"
+msgstr "Indication Class"
+
+
+msgid "glados_es_gs__molecule__indication_class__label__mini"
+msgstr "Indication Class"
+
+
+msgid "glados_es_gs__molecule__inorganic_flag__label"
+msgstr "Inorganic Flag"
+
+
+msgid "glados_es_gs__molecule__inorganic_flag__label__mini"
+msgstr "Inorganic Flag"
+
+
+msgid "glados_es_gs__molecule__max_phase__label"
+msgstr "Max Phase"
+
+
+msgid "glados_es_gs__molecule__max_phase__label__mini"
+msgstr "Max Phase"
+
+
+msgid "glados_es_gs__molecule__molecule_chembl_id__label"
+msgstr "Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_chembl_id__label__mini"
+msgstr "Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label"
+msgstr "Molecule Hierarchy Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label__mini"
+msgstr "Molecule Hierarchy Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy___parent_chembl_id__label"
+msgstr "Molecule Hierarchy Parent ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy___parent_chembl_id__label__mini"
+msgstr "Molecule Hierarchy Parent ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy__label"
+msgstr "Molecule Hierarchy"
+
+
+msgid "glados_es_gs__molecule__molecule_hierarchy__label__mini"
+msgstr "Molecule Hierarchy"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label"
+msgstr "Molecule Properties Acd Logd"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label__mini"
+msgstr "Molecule Properties Acd Logd"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label"
+msgstr "Molecule Properties Acd Logp"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label__mini"
+msgstr "Molecule Properties Acd Logp"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label"
+msgstr "Molecule Properties Acd Most Apka"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label__mini"
+msgstr "Molecule Properties Acd Most Apka"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label"
+msgstr "Molecule Properties Acd Most Bpka"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label__mini"
+msgstr "Molecule Properties Acd Most Bpka"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___alogp__label"
+msgstr "Molecule Properties Alogp"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___alogp__label__mini"
+msgstr "Molecule Properties Alogp"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label"
+msgstr "Molecule Properties Aromatic Rings"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label__mini"
+msgstr "Molecule Properties Aromatic Rings"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label"
+msgstr "Molecule Properties Full Molformula"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label__mini"
+msgstr "Molecule Properties Full Molformula"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___full_mwt__label"
+msgstr "Molecule Properties Full Mwt"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___full_mwt__label__mini"
+msgstr "Molecule Properties Full Mwt"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hba__label"
+msgstr "Molecule Properties Hba"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hba__label__mini"
+msgstr "Molecule Properties Hba"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hba_lipinski__label"
+msgstr "Molecule Properties Hba Lipinski"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hba_lipinski__label__mini"
+msgstr "Molecule Properties Hba Lipinski"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd__label"
+msgstr "Molecule Properties Hbd"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd__label__mini"
+msgstr "Molecule Properties Hbd"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd_lipinski__label"
+msgstr "Molecule Properties Hbd Lipinski"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd_lipinski__label__mini"
+msgstr "Molecule Properties Hbd Lipinski"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___heavy_atoms__label"
+msgstr "Molecule Properties Heavy Atoms"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___heavy_atoms__label__mini"
+msgstr "Molecule Properties Heavy Atoms"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___molecular_species__label"
+msgstr "Molecule Properties Molecular Species"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___molecular_species__label__mini"
+msgstr "Molecule Properties Molecular Species"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___mw_freebase__label"
+msgstr "Molecule Properties Mw Freebase"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___mw_freebase__label__mini"
+msgstr "Molecule Properties Mw Freebase"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label"
+msgstr "Molecule Properties Mw Monoisotopic"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label__mini"
+msgstr "Molecule Properties Mw Monoisotopic"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_alerts__label"
+msgstr "Molecule Properties # Alerts"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_alerts__label__mini"
+msgstr "Molecule Properties # Alerts"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label"
+msgstr "Molecule Properties # Lipinski Ro5 Violations"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label__mini"
+msgstr "Molecule Properties # Lipinski Ro5 Violations"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label"
+msgstr "Molecule Properties # Ro5 Violations"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label__mini"
+msgstr "Molecule Properties # Ro5 Violations"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___psa__label"
+msgstr "Molecule Properties Psa"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___psa__label__mini"
+msgstr "Molecule Properties Psa"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label"
+msgstr "Molecule Properties Qed Weighted"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label__mini"
+msgstr "Molecule Properties Qed Weighted"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___ro3_pass__label"
+msgstr "Molecule Properties Ro3 Pass"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___ro3_pass__label__mini"
+msgstr "Molecule Properties Ro3 Pass"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___rtb__label"
+msgstr "Molecule Properties Rtb"
+
+
+msgid "glados_es_gs__molecule__molecule_properties___rtb__label__mini"
+msgstr "Molecule Properties Rtb"
+
+
+msgid "glados_es_gs__molecule__molecule_properties__label"
+msgstr "Molecule Properties"
+
+
+msgid "glados_es_gs__molecule__molecule_properties__label__mini"
+msgstr "Molecule Properties"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___canonical_smiles__label"
+msgstr "Molecule Structures Canonical Smiles"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___canonical_smiles__label__mini"
+msgstr "Molecule Structures Canonical Smiles"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___standard_inchi__label"
+msgstr "Molecule Structures Standard Inchi"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___standard_inchi__label__mini"
+msgstr "Molecule Structures Standard Inchi"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___standard_inchi_key__label"
+msgstr "Molecule Structures Standard Inchi Key"
+
+
+msgid "glados_es_gs__molecule__molecule_structures___standard_inchi_key__label__mini"
+msgstr "Molecule Structures Standard Inchi Key"
+
+
+msgid "glados_es_gs__molecule__molecule_structures__label"
+msgstr "Molecule Structures"
+
+
+msgid "glados_es_gs__molecule__molecule_structures__label__mini"
+msgstr "Molecule Structures"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label"
+msgstr "Molecule Synonyms Molecule Synonym"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label__mini"
+msgstr "Molecule Synonyms Molecule Synonym"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___syn_type__label"
+msgstr "Molecule Synonyms Syn Type"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___syn_type__label__mini"
+msgstr "Molecule Synonyms Syn Type"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label"
+msgstr "Molecule Synonyms Synonyms"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label__mini"
+msgstr "Molecule Synonyms Synonyms"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms__label"
+msgstr "Molecule Synonyms"
+
+
+msgid "glados_es_gs__molecule__molecule_synonyms__label__mini"
+msgstr "Molecule Synonyms"
+
+
+msgid "glados_es_gs__molecule__molecule_type__label"
+msgstr "Molecule Type"
+
+
+msgid "glados_es_gs__molecule__molecule_type__label__mini"
+msgstr "Molecule Type"
+
+
+msgid "glados_es_gs__molecule__natural_product__label"
+msgstr "Natural Product"
+
+
+msgid "glados_es_gs__molecule__natural_product__label__mini"
+msgstr "Natural Product"
+
+
+msgid "glados_es_gs__molecule__ob_patent__label"
+msgstr "Ob Patent"
+
+
+msgid "glados_es_gs__molecule__ob_patent__label__mini"
+msgstr "Ob Patent"
+
+
+msgid "glados_es_gs__molecule__oral__label"
+msgstr "Oral"
+
+
+msgid "glados_es_gs__molecule__oral__label__mini"
+msgstr "Oral"
+
+
+msgid "glados_es_gs__molecule__parenteral__label"
+msgstr "Parenteral"
+
+
+msgid "glados_es_gs__molecule__parenteral__label__mini"
+msgstr "Parenteral"
+
+
+msgid "glados_es_gs__molecule__polymer_flag__label"
+msgstr "Polymer Flag"
+
+
+msgid "glados_es_gs__molecule__polymer_flag__label__mini"
+msgstr "Polymer Flag"
+
+
+msgid "glados_es_gs__molecule__pref_name__label"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__molecule__pref_name__label__mini"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__molecule__prodrug__label"
+msgstr "Prodrug"
+
+
+msgid "glados_es_gs__molecule__prodrug__label__mini"
+msgstr "Prodrug"
+
+
+msgid "glados_es_gs__molecule__related_targets___chembl_ids__label"
+msgstr "Related Targets ChEMBL Ids"
+
+
+msgid "glados_es_gs__molecule__related_targets___chembl_ids__label__mini"
+msgstr "Related Targets ChEMBL Ids"
+
+
+msgid "glados_es_gs__molecule__related_targets___count__label"
+msgstr "Related Targets Count"
+
+
+msgid "glados_es_gs__molecule__related_targets___count__label__mini"
+msgstr "Related Targets Count"
+
+
+msgid "glados_es_gs__molecule__related_targets__label"
+msgstr "Related Targets"
+
+
+msgid "glados_es_gs__molecule__related_targets__label__mini"
+msgstr "Related Targets"
+
+
+msgid "glados_es_gs__molecule__research_codes__label"
+msgstr "Research Codes"
+
+
+msgid "glados_es_gs__molecule__research_codes__label__mini"
+msgstr "Research Codes"
+
+
+msgid "glados_es_gs__molecule__rule_of_five__label"
+msgstr "Rule Of Five"
+
+
+msgid "glados_es_gs__molecule__rule_of_five__label__mini"
+msgstr "Rule Of Five"
+
+
+msgid "glados_es_gs__molecule__sc_patent__label"
+msgstr "Sc Patent"
+
+
+msgid "glados_es_gs__molecule__sc_patent__label__mini"
+msgstr "Sc Patent"
+
+
+msgid "glados_es_gs__molecule__structure_type__label"
+msgstr "Structure Type"
+
+
+msgid "glados_es_gs__molecule__structure_type__label__mini"
+msgstr "Structure Type"
+
+
+msgid "glados_es_gs__molecule__synonyms__label"
+msgstr "Synonyms"
+
+
+msgid "glados_es_gs__molecule__synonyms__label__mini"
+msgstr "Synonyms"
+
+
+msgid "glados_es_gs__molecule__tags__label"
+msgstr "Tags"
+
+
+msgid "glados_es_gs__molecule__tags__label__mini"
+msgstr "Tags"
+
+
+msgid "glados_es_gs__molecule__therapeutic_flag__label"
+msgstr "Therapeutic Flag"
+
+
+msgid "glados_es_gs__molecule__therapeutic_flag__label__mini"
+msgstr "Therapeutic Flag"
+
+
+msgid "glados_es_gs__molecule__topical__label"
+msgstr "Topical"
+
+
+msgid "glados_es_gs__molecule__topical__label__mini"
+msgstr "Topical"
+
+
+msgid "glados_es_gs__molecule__usan_stem__label"
+msgstr "Usan Stem"
+
+
+msgid "glados_es_gs__molecule__usan_stem__label__mini"
+msgstr "Usan Stem"
+
+
+msgid "glados_es_gs__molecule__usan_stem_definition__label"
+msgstr "Usan Stem Definition"
+
+
+msgid "glados_es_gs__molecule__usan_stem_definition__label__mini"
+msgstr "Usan Stem Definition"
+
+
+msgid "glados_es_gs__molecule__usan_stem_substem__label"
+msgstr "Usan Stem Substem"
+
+
+msgid "glados_es_gs__molecule__usan_stem_substem__label__mini"
+msgstr "Usan Stem Substem"
+
+
+msgid "glados_es_gs__molecule__usan_substem__label"
+msgstr "Usan Substem"
+
+
+msgid "glados_es_gs__molecule__usan_substem__label__mini"
+msgstr "Usan Substem"
+
+
+msgid "glados_es_gs__molecule__usan_year__label"
+msgstr "Usan Year"
+
+
+msgid "glados_es_gs__molecule__usan_year__label__mini"
+msgstr "Usan Year"
+
+
+msgid "glados_es_gs__molecule__withdrawn_country__label"
+msgstr "Withdrawn Country"
+
+
+msgid "glados_es_gs__molecule__withdrawn_country__label__mini"
+msgstr "Withdrawn Country"
+
+
+msgid "glados_es_gs__molecule__withdrawn_flag__label"
+msgstr "Withdrawn Flag"
+
+
+msgid "glados_es_gs__molecule__withdrawn_flag__label__mini"
+msgstr "Withdrawn Flag"
+
+
+msgid "glados_es_gs__molecule__withdrawn_reason__label"
+msgstr "Withdrawn Reason"
+
+
+msgid "glados_es_gs__molecule__withdrawn_reason__label__mini"
+msgstr "Withdrawn Reason"
+
+
+msgid "glados_es_gs__molecule__withdrawn_year__label"
+msgstr "Withdrawn Year"
+
+
+msgid "glados_es_gs__molecule__withdrawn_year__label__mini"
+msgstr "Withdrawn Year"
+
+
+msgid "glados_es_gs__target___metadata__label"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__target___metadata__label__mini"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__target__activity_count__label"
+msgstr "Activity Count"
+
+
+msgid "glados_es_gs__target__activity_count__label__mini"
+msgstr "Activity Count"
+
+
+msgid "glados_es_gs__target__disease_name__label"
+msgstr "Disease Name"
+
+
+msgid "glados_es_gs__target__disease_name__label__mini"
+msgstr "Disease Name"
+
+
+msgid "glados_es_gs__target__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__target__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__target__organism__label"
+msgstr "Organism"
+
+
+msgid "glados_es_gs__target__organism__label__mini"
+msgstr "Organism"
+
+
+msgid "glados_es_gs__target__pref_name__label"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__target__pref_name__label__mini"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__target__related_compounds___chembl_ids__label"
+msgstr "Related Compounds ChEMBL Ids"
+
+
+msgid "glados_es_gs__target__related_compounds___chembl_ids__label__mini"
+msgstr "Related Compounds ChEMBL Ids"
+
+
+msgid "glados_es_gs__target__related_compounds___count__label"
+msgstr "Related Compounds Count"
+
+
+msgid "glados_es_gs__target__related_compounds___count__label__mini"
+msgstr "Related Compounds Count"
+
+
+msgid "glados_es_gs__target__related_compounds__label"
+msgstr "Related Compounds"
+
+
+msgid "glados_es_gs__target__related_compounds__label__mini"
+msgstr "Related Compounds"
+
+
+msgid "glados_es_gs__target__species_group_flag__label"
+msgstr "Species Group Flag"
+
+
+msgid "glados_es_gs__target__species_group_flag__label__mini"
+msgstr "Species Group Flag"
+
+
+msgid "glados_es_gs__target__tags__label"
+msgstr "Tags"
+
+
+msgid "glados_es_gs__target__tags__label__mini"
+msgstr "Tags"
+
+
+msgid "glados_es_gs__target__target_chembl_id__label"
+msgstr "Target ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_chembl_id__label__mini"
+msgstr "Target ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label"
+msgstr "Target Component Synonyms Component Synonym"
+
+
+msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label__mini"
+msgstr "Target Component Synonyms Component Synonym"
+
+
+msgid "glados_es_gs__target__target_component_synonyms___syn_type__label"
+msgstr "Target Component Synonyms Syn Type"
+
+
+msgid "glados_es_gs__target__target_component_synonyms___syn_type__label__mini"
+msgstr "Target Component Synonyms Syn Type"
+
+
+msgid "glados_es_gs__target__target_components___accession__label"
+msgstr "Target Components Accession"
+
+
+msgid "glados_es_gs__target__target_components___accession__label__mini"
+msgstr "Target Components Accession"
+
+
+msgid "glados_es_gs__target__target_components___component_description__label"
+msgstr "Target Components Component Description"
+
+
+msgid "glados_es_gs__target__target_components___component_description__label__mini"
+msgstr "Target Components Component Description"
+
+
+msgid "glados_es_gs__target__target_components___component_id__label"
+msgstr "Target Components Component ID"
+
+
+msgid "glados_es_gs__target__target_components___component_id__label__mini"
+msgstr "Target Components Component ID"
+
+
+msgid "glados_es_gs__target__target_components___component_type__label"
+msgstr "Target Components Component Type"
+
+
+msgid "glados_es_gs__target__target_components___component_type__label__mini"
+msgstr "Target Components Component Type"
+
+
+msgid "glados_es_gs__target__target_components___relationship__label"
+msgstr "Target Components Relationship"
+
+
+msgid "glados_es_gs__target__target_components___relationship__label__mini"
+msgstr "Target Components Relationship"
+
+
+msgid "glados_es_gs__target__target_components___target_component_synonyms__label"
+msgstr "Target Components Target Component Synonyms"
+
+
+msgid "glados_es_gs__target__target_components___target_component_synonyms__label__mini"
+msgstr "Target Components Target Component Synonyms"
+
+
+msgid "glados_es_gs__target__target_components__label"
+msgstr "Target Components"
+
+
+msgid "glados_es_gs__target__target_components__label__mini"
+msgstr "Target Components"
+
+
+msgid "glados_es_gs__target__target_type__label"
+msgstr "Target Type"
+
+
+msgid "glados_es_gs__target__target_type__label__mini"
+msgstr "Target Type"
+
+
+msgid "glados_es_gs__target__tax_id__label"
+msgstr "Tax ID"
+
+
+msgid "glados_es_gs__target__tax_id__label__mini"
+msgstr "Tax ID"
+
+
+msgid "glados_es_gs__tissue___metadata__label"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__tissue___metadata__label__mini"
+msgstr " Metadata"
+
+
+msgid "glados_es_gs__tissue__bto_id__label"
+msgstr "Bto ID"
+
+
+msgid "glados_es_gs__tissue__bto_id__label__mini"
+msgstr "Bto ID"
+
+
+msgid "glados_es_gs__tissue__caloha_id__label"
+msgstr "Caloha ID"
+
+
+msgid "glados_es_gs__tissue__caloha_id__label__mini"
+msgstr "Caloha ID"
+
+
+msgid "glados_es_gs__tissue__efo_id__label"
+msgstr "EFO ID"
+
+
+msgid "glados_es_gs__tissue__efo_id__label__mini"
+msgstr "EFO ID"
+
+
+msgid "glados_es_gs__tissue__es_completion__label"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__tissue__es_completion__label__mini"
+msgstr "Es Completion"
+
+
+msgid "glados_es_gs__tissue__pref_name__label"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__tissue__pref_name__label__mini"
+msgstr "Pref Name"
+
+
+msgid "glados_es_gs__tissue__tissue_chembl_id__label"
+msgstr "Tissue ChEMBL ID"
+
+
+msgid "glados_es_gs__tissue__tissue_chembl_id__label__mini"
+msgstr "Tissue ChEMBL ID"
+
+
+msgid "glados_es_gs__tissue__uberon_id__label"
+msgstr "UBERON ID"
+
+
+msgid "glados_es_gs__tissue__uberon_id__label__mini"
+msgstr "UBERON ID"
 
 
