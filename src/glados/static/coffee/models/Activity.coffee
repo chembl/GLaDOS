@@ -33,167 +33,58 @@ Activity.COLUMNS = {
     comparator: 'document_chembl_id'
     link_base: 'document_link'
     secondary_link: true
-  DOCUMENT_JOURNAL: {
-    'name_to_show': 'Document Journal'
+  DOCUMENT_JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'document_journal'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  DOCUMENT_YEAR: {
-    'name_to_show': 'Document Year'
+  DOCUMENT_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'document_year'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  MOLECULE_CHEMBL_ID: {
-    'name_to_show': 'Molecule'
-    'comparator': 'molecule_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'image_base_url': 'image_url'
-    'link_base':'molecule_link'
-    'secondary_link': true
-    'use_in_summary': true
-  }
-  STANDARD_TYPE: {
-    'name_to_show': 'Standard Type'
-    'comparator': 'standard_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
+  MOLECULE_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'molecule_chembl_id'
+    image_base_url: 'image_url'
+    link_base:'molecule_link'
+    secondary_link: true
+  STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_type'
   PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    'comparator': 'pchembl_value'
+    comparator: 'pchembl_value'
   ACTIVITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'activity_comment'
-  POTENTIAL_DUPLICATE: {
-    'name_to_show': 'Potential Duplicate'
-    'comparator': 'potential_duplicate'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  PUBLISHED_RELATION: {
-    'name_to_show': 'Published Relation'
-    'comparator': 'published_relation'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  PUBLISHED_TYPE: {
-    'name_to_show': 'Published Type'
-    'comparator': 'published_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  PUBLISHED_UNITS: {
-    'name_to_show': 'Published Units'
-    'comparator': 'published_units'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  PUBLISHED_VALUE: {
-    'name_to_show': 'Published Value'
-    'comparator': 'published_value'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  QUDT_UNITS: {
-    'name_to_show': 'QUDT Units'
-    'comparator': 'qudt_units'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  RECORD_ID: {
-    'name_to_show': 'Record ID'
-    'comparator': 'record_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  SRC_ID: {
-    'name_to_show': 'SRC ID'
-    'comparator': 'src_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  STANDARD_FLAG: {
-    'name_to_show': 'Standard Flag'
-    'comparator': 'standard_flag'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  STANDARD_RELATION: {
-    'name_to_show': 'Standard Relation'
-    'comparator': 'standard_relation'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  STANDARD_TYPE: {
-    'name_to_show': 'Standard Type'
-    'comparator': 'standard_type'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'use_in_summary': true
-  }
-  STANDARD_UNITS: {
-    'name_to_show': 'Standard Units'
-    'comparator': 'standard_units'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  STANDARD_VALUE: {
-    'name_to_show': 'Standard Value'
-    'comparator': 'standard_value'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  TARGET_CHEMBL_ID: {
-    'name_to_show': 'Target'
-    'comparator': 'target_chembl_id'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'link_base':'target_link'
-    'secondary_link': true
-    'use_in_summary': true
-  }
-  TARGET_ORGANISM: {
-    'name_to_show': 'Target Organism'
-    'comparator': 'target_organism'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'sort_disabled': true
-    'use_in_summary': true
-  }
-  TARGET_PREF_NAME: {
-    'name_to_show': 'Target Pref. Name'
-    'comparator': 'target_pref_name'
-    'use_in_summary': true
-  }
-  UO_UNITS: {
-    'name_to_show': 'UO Units'
-    'comparator': 'uo_units'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
+  POTENTIAL_DUPLICATE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'potential_duplicate'
+  PUBLISHED_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'published_relation'
+  PUBLISHED_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'published_type'
+  PUBLISHED_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    name_to_show: 'Published Units'
+    comparator: 'published_units'
+  PUBLISHED_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'published_value'
+  QUDT_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'qudt_units'
+  RECORD_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'record_id'
+  SRC_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'src_id'
+  STANDARD_FLAG: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_flag'
+  STANDARD_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_relation'
+  STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_type'
+  STANDARD_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_units'
+  STANDARD_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_value'
+  TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_chembl_id'
+    link_base:'target_link'
+    secondary_link: true
+  TARGET_ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_organism'
+  TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_pref_name'
+  UO_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'uo_units'
   DOC_COUNT: {
     'name_to_show': 'Count'
     'comparator': 'doc_count'

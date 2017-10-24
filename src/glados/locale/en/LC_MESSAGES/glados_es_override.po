@@ -1,89 +1,131 @@
 msgid "glados_es_gs___metadata__label"
 msgstr "OVERRIDDEN META"
 
-msgid "glados_es_gs__pchembl_value__label"
-msgstr "pChEMBL Value"
-
-msgid "glados_es_gs__molecule_properties___qed_weighted__label"
-msgstr "QED Weighted"
-
-msgid "glados_es_gs__molecule_properties___acd_logd__label"
-msgstr "ACD LogD"
-
-msgid "glados_es_gs__molecule_chembl_id__label"
+#-----------------------------------------------------------------------------------------------------------------------
+# Compounds paginated views
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__molecule__molecule_chembl_id__label"
 msgstr "ChEMBL ID"
 
-msgid "glados_es_gs__molecule_synonyms__label"
-msgstr "Synonyms"
-
-msgid "glados_es_gs__molecule_properties___full_mwt__label"
-msgstr "Molecular Weight"
-
-msgid "glados_es_gs__molecule_properties___alogp__label"
-msgstr "AlogP"
-
-msgid "glados_es_gs__related_targets___count__label"
-msgstr "Targets"
-
-msgid "glados_es_gs__activity_count__label"
-msgstr "Bioactivities"
-
-msgid "glados_es_gs__molecule_properties___psa__label"
-msgstr "PSA"
-
-msgid "glados_es_gs__molecule_properties___hba__label"
-msgstr "HBA"
-
-msgid "glados_es_gs__molecule_properties___hbd__label"
-msgstr "HBD"
-
-msgid "glados_es_gs__molecule_properties___num_ro5_violations__label"
-msgstr "#RO5 Violations"
-
-msgid "glados_es_gs__molecule_properties___rtb__label"
-msgstr "#Rotatable Bonds"
-
-msgid "glados_es_gs__molecule_properties___ro3_pass__label"
-msgstr "Passes Ro3"
-
-msgid "glados_es_gs__molecule_properties___acd_most_apka__label"
-msgstr "ACD ApKa"
-
-msgid "glados_es_gs__molecule_properties___acd_most_bpka__label"
-msgstr "ACD BpKa"
-
-msgid "glados_es_gs__molecule_properties___acd_logp__label"
-msgstr "ACD LogP"
-
-msgid "glados_es_gs__molecule_properties___aromatic_rings__label"
-msgstr "Aromatic Rings"
-
-msgid "glados_es_gs__molecule_properties___heavy_atoms__label"
-msgstr "Heavy Atoms"
-
-msgid "glados_es_gs__molecule_properties___hba_lipinski__label"
-msgstr "HBA Lipinski"
-
-msgid "glados_es_gs__molecule_properties___hbd_lipinski__label"
-msgstr "HBD Lipinski"
-
-msgid "glados_es_gs__molecule_properties___num_lipinski_ro5_violations__label"
-msgstr "#RO5 Violations (Lipinski)"
-
-msgid "glados_es_gs__molecule_properties___mw_monoisotopic__label"
-msgstr "Molecular Weight (Monoisotopic)"
-
-msgid "glados_es_gs__molecule_properties___molecular_species__label"
-msgstr "Molecular Species"
-
-msgid "glados_es_gs__molecule_properties___full_molformula__label"
-msgstr "Molecular Formula"
-
-msgid "glados_es_gs__pref_name__label"
+msgid "glados_es_gs__molecule__pref_name__label"
 msgstr "Name"
 
-msgid "glados_es_gs__assay_chembl_id__label"
+msgid "glados_es_gs__molecule__molecule_synonyms__label"
+msgstr "Synonyms"
+
+msgid "glados_es_gs__molecule__molecule_properties___full_mwt__label"
+msgstr "Molecular Weight"
+
+msgid "glados_es_gs__molecule__related_targets___count__label"
+msgstr "Targets"
+
+msgid "glados_es_gs__molecule__activity_count__label"
+msgstr "Bioactivities"
+
+msgid "glados_es_gs__molecule__molecule_properties___alogp__label"
+msgstr "AlogP"
+
+msgid "glados_es_gs__molecule__molecule_properties___psa__label"
+msgstr "PSA"
+
+msgid "glados_es_gs__molecule__molecule_properties___hba__label"
+msgstr "HBA"
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd__label"
+msgstr "HBD"
+
+msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label"
+msgstr "#RO5 Violations"
+
+msgid "glados_es_gs__molecule__molecule_properties___rtb__label"
+msgstr "#Rotatable Bonds"
+
+msgid "glados_es_gs__molecule__molecule_properties___ro3_pass__label"
+msgstr "Passes Ro3"
+
+msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label"
+msgstr "QED Weighted"
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label"
+msgstr "ACD ApKa"
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label"
+msgstr "ACD BpKa"
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label"
+msgstr "ACD LogP"
+
+msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label"
+msgstr "ACD LogD"
+
+msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label"
+msgstr "Aromatic Rings"
+
+msgid "glados_es_gs__molecule__molecule_properties___heavy_atoms__label"
+msgstr "Heavy Atoms"
+
+msgid "glados_es_gs__molecule__molecule_properties___hba_lipinski__label"
+msgstr "HBA Lipinski"
+
+msgid "glados_es_gs__molecule__molecule_properties___hbd_lipinski__label"
+msgstr "HBD Lipinski"
+
+msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label"
+msgstr "#RO5 Violations (Lipinski)"
+
+msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label"
+msgstr "Molecular Weight (Monoisotopic)"
+
+msgid "glados_es_gs__molecule__molecule_properties___molecular_species__label"
+msgstr "Molecular Species"
+
+msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label"
+msgstr "Molecular Formula"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Activities paginated views
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__activity__pchembl_value__label"
+msgstr "pChEMBL Value"
+
+msgid "glados_es_gs__activity__assay_chembl_id__label"
 msgstr "Assay"
 
-msgid "glados_es_gs__bao_format__label"
+msgid "glados_es_gs__activity__document_chembl_id__label"
+msgstr "Document"
+
+msgid "glados_es_gs__activity__bao_format__label"
 msgstr "BAO Format ID"
+
+msgid "glados_es_gs__activity__molecule_chembl_id__label"
+msgstr "Molecule"
+
+msgid "glados_es_gs__activity__src_id__label"
+msgstr "SRC ID"
+
+msgid "glados_es_gs__activity__target_chembl_id__label"
+msgstr "Target"
+
+msgid "glados_es_gs__activity__target_pref_name__label"
+msgstr "Target Pref. Name"
+
+msgid "glados_es_gs__activity__uo_units__label"
+msgstr "UO Units"
+
+msgid "glados_es_gs__target__target_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__target__activity_count__label"
+msgstr "Bioactivities"
+
+msgid "glados_es_gs__target__pref_name__label"
+msgstr "Name"
+
+msgid "glados_es_gs__target__target_type__label"
+msgstr "Type"
+
+msgid "glados_es_gs__target__related_compounds___count__label"
+msgstr "Compounds"
+
+msgid "glados_es_gs__target__target_components__label"
+msgstr "UniProt Accession"
