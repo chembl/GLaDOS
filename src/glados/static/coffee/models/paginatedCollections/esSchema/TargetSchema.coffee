@@ -4,5 +4,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   TargetSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      'chembl_target'
+      'chembl_target',
+      [
+        'organism',
+        'target_type',
+        '_metadata.related_compounds.count',
+        '_metadata.activity_count',
+      ],
+      [
+
+      ],
+      [
+
+      ]
     )
