@@ -1,255 +1,216 @@
 [
   {
     "aggData": {
-      "molecule_type": {
-        "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 0,
-        "buckets": [
-          {
-            "key": "Small molecule",
-            "doc_count": 28
-          },
-          {
-            "key": "Unknown",
-            "doc_count": 2
-          }
-        ]
-      },
-      "molecule_properties.hbd_MAX": {
-        "value": 8
-      },
-      "indication_class": {
-        "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 0,
-        "buckets": [
-          {
-            "key": "Not Defined in CHEMBL",
-            "doc_count": 24
-          },
-          {
-            "key": "Adrenergic",
-            "doc_count": 2
-          },
-          {
-            "key": "Analgesic; Antirheumatic; Antipyretic",
-            "doc_count": 1
-          },
-          {
-            "key": "Antibacterial; Antineoplastic",
-            "doc_count": 1
-          },
-          {
-            "key": "Antipsychotic",
-            "doc_count": 1
-          },
-          {
-            "key": "Pharmaceutic Aid (solvent and source of ammonia),Radioactive Agent; Diagnostic Aid (cardiac imaging); Diagnostic Aid (liver imaging)",
-            "doc_count": 1
-          }
-        ]
-      },
-      "molecule_properties.full_mwt_MAX": {
-        "value": 622.92
-      },
-      "molecule_properties.hbd_MIN": {
-        "value": 0
-      },
-      "therapeutic_flag": {
-        "doc_count_error_upper_bound": 0,
-        "sum_other_doc_count": 0,
-        "buckets": [
-          {
-            "key": 0,
-            "key_as_string": "false",
-            "doc_count": 26
-          },
-          {
-            "key": 1,
-            "key_as_string": "true",
-            "doc_count": 4
-          }
-        ]
-      },
-      "molecule_properties.hba_MAX": {
-        "value": 14
-      },
-      "max_phase_MAX": {
-        "value": 4
-      },
-      "molecule_properties.full_mwt_MIN": {
-        "value": 17.03
-      },
-      "molecule_properties.hba_MIN": {
-        "value": 1
-      },
-      "max_phase_MIN": {
-        "value": 0
-      },
-      "_metadata.related_targets.count_MIN": {
-        "value": 0
-      },
-      "_metadata.related_targets.count_MAX": {
-        "value": 194
-      },
-      "_metadata.activity_count_MIN": {
-        "value": 0
-      },
-      "_metadata.activity_count_MAX": {
-        "value": 1796
-      }
+        "molecule_type"
+    :
+        {
+            "doc_count_error_upper_bound"
+        :
+            0, "sum_other_doc_count"
+        :
+            0, "buckets"
+        :
+            [{"key": "Small molecule", "doc_count": 1707891}, {"key": "Protein", "doc_count": 20943}, {
+                "key": "Unknown",
+                "doc_count": 5566
+            }, {"key": "Antibody", "doc_count": 750}, {"key": "Oligonucleotide", "doc_count": 103}, {
+                "key": "Enzyme",
+                "doc_count": 94
+            }, {"key": "Oligosaccharide", "doc_count": 63}, {"key": "Cell", "doc_count": 28}, {
+                "key": "Unclassified",
+                "doc_count": 4
+            }]
+        }
+    ,
+        "molecule_properties.full_mwt_MAX"
+    :
+        {
+            "value"
+        :
+            13020.3
+        }
+    ,
+        "molecule_properties.num_ro5_violations_MAX"
+    :
+        {
+            "value"
+        :
+            4.0
+        }
+    ,
+        "_metadata.activity_count_MAX"
+    :
+        {
+            "value"
+        :
+            14808.0
+        }
+    ,
+        "molecule_properties.full_mwt_MIN"
+    :
+        {
+            "value"
+        :
+            4.0
+        }
+    ,
+        "max_phase_MAX"
+    :
+        {
+            "value"
+        :
+            4.0
+        }
+    ,
+        "_metadata.related_targets.count_MIN"
+    :
+        {
+            "value"
+        :
+            0.0
+        }
+    ,
+        "_metadata.drug.is_drug"
+    :
+        {
+            "doc_count_error_upper_bound"
+        :
+            0, "sum_other_doc_count"
+        :
+            0, "buckets"
+        :
+            [{"key": 1, "key_as_string": "true", "doc_count": 11542}]
+        }
+    ,
+        "molecule_properties.alogp_MIN"
+    :
+        {
+            "value"
+        :
+            -20.49
+        }
+    ,
+        "_metadata.related_targets.count_MAX"
+    :
+        {
+            "value"
+        :
+            1181.0
+        }
+    ,
+        "molecule_properties.alogp_MAX"
+    :
+        {
+            "value"
+        :
+            25.53
+        }
+    ,
+        "_metadata.activity_count_MIN"
+    :
+        {
+            "value"
+        :
+            0.0
+        }
+    ,
+        "max_phase_MIN"
+    :
+        {
+            "value"
+        :
+            0.0
+        }
+    ,
+        "molecule_properties.num_ro5_violations_MIN"
+    :
+        {
+            "value"
+        :
+            0.0
+        }
     },
     "firstCall": true
   },
   {
     "aggData": {
-      "molecule_properties.hba": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 1
-          },
-          {
-            "key": 3,
-            "doc_count": 14
-          },
-          {
-            "key": 6,
-            "doc_count": 9
-          },
-          {
-            "key": 9,
-            "doc_count": 1
-          },
-          {
-            "key": 12,
-            "doc_count": 1
-          }
-        ]
-      },
-      "max_phase": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 24
-          },
-          {
-            "key": 1,
-            "doc_count": 0
-          },
-          {
-            "key": 2,
-            "doc_count": 0
-          },
-          {
-            "key": 3,
-            "doc_count": 0
-          },
-          {
-            "key": 4,
-            "doc_count": 6
-          }
-        ]
-      },
-      "molecule_properties.full_mwt": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 2
-          },
-          {
-            "key": 100,
-            "doc_count": 5
-          },
-          {
-            "key": 200,
-            "doc_count": 9
-          },
-          {
-            "key": 300,
-            "doc_count": 7
-          },
-          {
-            "key": 400,
-            "doc_count": 3
-          },
-          {
-            "key": 500,
-            "doc_count": 2
-          }
-        ]
-      },
-      "molecule_properties.hbd": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 16
-          },
-          {
-            "key": 2,
-            "doc_count": 9
-          },
-          {
-            "key": 4,
-            "doc_count": 0
-          },
-          {
-            "key": 6,
-            "doc_count": 0
-          },
-          {
-            "key": 8,
-            "doc_count": 1
-          }
-        ]
-      },
-      "_metadata.activity_count": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 93
-          },
-          {
-            "key": 360,
-            "doc_count": 2
-          },
-          {
-            "key": 720,
-            "doc_count": 2
-          },
-          {
-            "key": 1080,
-            "doc_count": 0
-          },
-          {
-            "key": 1440,
-            "doc_count": 1
-          }
-        ]
-      },
-      "_metadata.related_targets.count": {
-        "buckets": [
-          {
-            "key": 0,
-            "doc_count": 88
-          },
-          {
-            "key": 39,
-            "doc_count": 3
-          },
-          {
-            "key": 78,
-            "doc_count": 3
-          },
-          {
-            "key": 117,
-            "doc_count": 2
-          },
-          {
-            "key": 156,
-            "doc_count": 2
-          }
-        ]
-      }
+        "molecule_properties.alogp"
+    :
+        {
+            "buckets"
+        :
+            [{"key": -25.0, "doc_count": 1}, {"key": -20.0, "doc_count": 1}, {
+                "key": -15.0,
+                "doc_count": 181
+            }, {"key": -10.0, "doc_count": 3024}, {"key": -5.0, "doc_count": 76138}, {
+                "key": 0.0,
+                "doc_count": 1323237
+            }, {"key": 5.0, "doc_count": 279808}, {"key": 10.0, "doc_count": 5648}, {
+                "key": 15.0,
+                "doc_count": 465
+            }, {"key": 20.0, "doc_count": 21}, {"key": 25.0, "doc_count": 2}]
+        }
+    ,
+        "molecule_properties.num_ro5_violations"
+    :
+        {
+            "buckets"
+        :
+            [{"key": 0.0, "doc_count": 1229031}, {"key": 1.0, "doc_count": 299076}, {
+                "key": 2.0,
+                "doc_count": 134082
+            }, {"key": 3.0, "doc_count": 25276}, {"key": 4.0, "doc_count": 1061}]
+        }
+    ,
+        "_metadata.related_targets.count"
+    :
+        {
+            "buckets"
+        :
+            [{"key": 0.0, "doc_count": 1734520}, {"key": 200.0, "doc_count": 770}, {
+                "key": 400.0,
+                "doc_count": 60
+            }, {"key": 600.0, "doc_count": 54}, {"key": 800.0, "doc_count": 25}, {"key": 1000.0, "doc_count": 13}]
+        }
+    ,
+        "molecule_properties.full_mwt"
+    :
+        {
+            "buckets"
+        :
+            [{"key": 0.0, "doc_count": 1724888}, {"key": 2000.0, "doc_count": 4772}, {
+                "key": 4000.0,
+                "doc_count": 1246
+            }, {"key": 6000.0, "doc_count": 186}, {"key": 8000.0, "doc_count": 20}, {
+                "key": 10000.0,
+                "doc_count": 8
+            }, {"key": 12000.0, "doc_count": 3}]
+        }
+    ,
+        "max_phase"
+    :
+        {
+            "buckets"
+        :
+            [{"key": 0.0, "doc_count": 1728780}, {"key": 1.0, "doc_count": 671}, {
+                "key": 2.0,
+                "doc_count": 1147
+            }, {"key": 3.0, "doc_count": 928}, {"key": 4.0, "doc_count": 3916}]
+        }
+    ,
+        "_metadata.activity_count"
+    :
+        {
+            "buckets"
+        :
+            [{"key": 0.0, "doc_count": 1735318}, {"key": 2000.0, "doc_count": 102}, {
+                "key": 4000.0,
+                "doc_count": 14
+            }, {"key": 6000.0, "doc_count": 5}, {"key": 8000.0, "doc_count": 2}, {
+                "key": 10000.0,
+                "doc_count": 0
+            }, {"key": 12000.0, "doc_count": 0}, {"key": 14000.0, "doc_count": 1}]
+        }
     },
     "firstCall": false
   }
