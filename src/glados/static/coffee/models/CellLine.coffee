@@ -16,6 +16,7 @@ CellLine.reportCardPath = 'cell_line_report_card/'
 CellLine.INDEX_NAME = 'chembl_cell_line'
 CellLine.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    link_base: 'report_card_url'
     comparator: 'cell_chembl_id'
   SOURCE_TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cell_source_tissue'
