@@ -1,8 +1,6 @@
 DownloadModelOrCollectionExt =
 
-  getBlobToDownload: (contentStr, contentType) ->
-
-    contentType = 'text/plain;charset=utf-8' unless contentType?
+  getBlobToDownload: (contentStr, contentType='text/plain;charset=utf-16le') ->
     return new Blob([contentStr], type: contentType)
 
   # This function returns the object that is going to be used to
@@ -47,7 +45,12 @@ DownloadModelOrCollectionExt =
     #use first object to get header
     keys = []
     for key, value of downloadObject[0]
-      keys.push('"' + key + '"')
+
+      if isTabSeparated
+        finalValue = key
+      else
+        finalValue = '"' + key + '"'
+      keys.push(finalValue)
 
     return keys.join(separator)
 
@@ -66,7 +69,11 @@ DownloadModelOrCollectionExt =
           finalValue = glados.Settings.DEFAULT_NULL_VALUE_LABEL
         finalValue = JSON.stringify(finalValue).replace(/"/g, '')
 
-        values.push('"' + finalValue + '"')
+        if isTabSeparated
+          finalValue = finalValue
+        else
+          finalValue = '"' + finalValue + '"'
+        values.push(finalValue)
       rows.push(values.join(separator))
 
     return rows.join('\n')
