@@ -1,8 +1,6 @@
 DownloadModelOrCollectionExt =
 
-  getBlobToDownload: (contentStr, contentType) ->
-
-    contentType = 'text/plain;charset=utf-8' unless contentType?
+  getBlobToDownload: (contentStr, contentType='text/plain;charset=utf-16le') ->
     return new Blob([contentStr], type: contentType)
 
   # This function returns the object that is going to be used to
