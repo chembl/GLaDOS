@@ -190,3 +190,15 @@ msgstr "Name"
 
 msgid "glados_es_gs__tissue__bto_id__label"
 msgstr "BTO ID"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Document Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__document__document_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__document__pubmed_id__label"
+msgstr "PubMed ID"
+
+msgid "glados_es_gs__document__doc_type__label"
+msgstr "Type"

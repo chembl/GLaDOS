@@ -136,12 +136,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Infinite:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Carousel:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
