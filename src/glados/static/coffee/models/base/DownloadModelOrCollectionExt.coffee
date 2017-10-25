@@ -47,7 +47,12 @@ DownloadModelOrCollectionExt =
     #use first object to get header
     keys = []
     for key, value of downloadObject[0]
-      keys.push('"' + key + '"')
+
+      if isTabSeparated
+        finalValue = key
+      else
+        finalValue = '"' + key + '"'
+      keys.push(finalValue)
 
     return keys.join(separator)
 
@@ -66,7 +71,11 @@ DownloadModelOrCollectionExt =
           finalValue = glados.Settings.DEFAULT_NULL_VALUE_LABEL
         finalValue = JSON.stringify(finalValue).replace(/"/g, '')
 
-        values.push('"' + finalValue + '"')
+        if isTabSeparated
+          finalValue = finalValue
+        else
+          finalValue = '"' + finalValue + '"'
+        values.push(finalValue)
       rows.push(values.join(separator))
 
     return rows.join('\n')
