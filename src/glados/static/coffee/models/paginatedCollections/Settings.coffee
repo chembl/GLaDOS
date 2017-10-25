@@ -136,12 +136,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Infinite:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Carousel:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -157,9 +158,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
+        COLUMNS: CellLine.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Infinite:
@@ -180,9 +183,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
+        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Infinite:

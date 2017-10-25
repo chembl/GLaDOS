@@ -319,6 +319,22 @@ describe "Paginated Collection", ->
       expect(sortingInfo[sortingComparator]?).toBe(true)
       expect(sortingInfo[sortingComparator].order).toBe('desc')
 
+    describe "Downloads", ->
+
+      it 'generates the correct query to download a list of IDs', ->
+
+        idsList = ["CHEMBL2605", "CHEMBL251"]
+        page = 1
+        pageSize = 10
+        requestData = esList.getRequestDataForChemblIDs(page, pageSize, idsList)
+
+        idPropertyName = esList.getMeta('id_column').comparator
+        expect(requestData.from).toBe(page - 1)
+        expect(requestData.size).toBe(pageSize)
+        expect(requestData.query.terms[idPropertyName]?).toBe(true)
+        termsGot = requestData.query.terms[idPropertyName]
+        expect(TestsUtils.listsAreEqual(termsGot, idsList)).toBe(true)
+
     describe 'Faceting: ', ->
 
       beforeAll (done) ->

@@ -15,37 +15,18 @@ _.extend(Document, glados.models.base.ReportCardEntity)
 Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
+Document.INDEX_NAME = 'chembl_document'
 Document.COLUMNS = {
-  CHEMBL_ID: {
-      'name_to_show': 'CHEMBL_ID'
-      'comparator': 'document_chembl_id'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'link_base': 'report_card_url'
-  }
-  TITLE: {
-      'name_to_show': 'Title'
-      'comparator': 'title'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<i>{{val}}</i>'
-  }
-  AUTHORS: {
-      'name_to_show': 'Authors'
-      'comparator': 'authors'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-  }
-  YEAR:{
-      'name_to_show': 'Year'
-      'comparator': 'year'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-    }
+  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'document_chembl_id'
+    link_base: 'report_card_url'
+  TITLE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'title'
+    custom_field_template: '<i>{{val}}</i>'
+  AUTHORS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'authors'
+  YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'year'
   # this is shown when searching documents by terms.
   SCORE: {
       'name_to_show': 'Score'
@@ -55,6 +36,20 @@ Document.COLUMNS = {
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>Score: </b>{{val}}'
   }
+  PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'pubmed_id'
+    link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
+  DOI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'doi'
+    link_function: (id) -> 'http://dx.doi.org/'+ encodeURIComponent(id)
+  PATENT_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'patent_id'
+  JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'journal'
+  TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'doc_type'
+  ABSTRACT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: 'abstract'
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -70,6 +65,21 @@ Document.COLUMNS_SETTINGS = {
 
   RESULTS_LIST_TABLE: [
     Document.COLUMNS.CHEMBL_ID
+    Document.COLUMNS.JOURNAL
+    Document.COLUMNS.TITLE
+    Document.COLUMNS.PUBMED_ID
+    Document.COLUMNS.DOI
+    Document.COLUMNS.PATENT_ID
+    Document.COLUMNS.AUTHORS
+    Document.COLUMNS.YEAR
+  ]
+  RESULTS_LIST_ADDITIONAL: [
+    Document.COLUMNS.TYPE
+    Document.COLUMNS.ABSTRACT
+  ]
+  RESULTS_LIST_CARD: [
+    Document.COLUMNS.CHEMBL_ID
+    Document.COLUMNS.JOURNAL
     Document.COLUMNS.TITLE
     Document.COLUMNS.AUTHORS
     Document.COLUMNS.YEAR

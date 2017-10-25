@@ -55,6 +55,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
 
       @bindFunctionLinks()
+      @checkIfTableNeedsToScroll()
 
     handleColumnsOrderChange: ->
 

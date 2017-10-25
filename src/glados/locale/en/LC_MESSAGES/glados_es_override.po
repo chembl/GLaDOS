@@ -153,3 +153,55 @@ msgstr "Strain"
 
 msgid "glados_es_gs__assay__assay_organism__label"
 msgstr "Organism"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Cell Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__cell_line__cell_source_tissue__label"
+msgstr "Source Tissue"
+
+msgid "glados_es_gs__cell_line__clo_id__label"
+msgstr "CLO ID"
+
+msgid "glados_es_gs__cell_line__cl_lincs_id__label"
+msgstr "LINCS ID"
+
+msgid "glados_es_gs__cell_line__cell_name__label"
+msgstr "Name"
+
+msgid "glados_es_gs__cell_line__cell_description__label"
+msgstr "Description"
+
+msgid "glados_es_gs__cell_line__cell_source_organism__label"
+msgstr "Source Organism"
+
+
+msgid "glados_es_gs__cell_line__cell_chembl_id__label"
+msgstr "ChEMBL ID"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Tissue Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__tissue__tissue_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__tissue__pref_name__label"
+msgstr "Name"
+
+msgid "glados_es_gs__tissue__bto_id__label"
+msgstr "BTO ID"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Document Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__document__document_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__document__pubmed_id__label"
+msgstr "PubMed ID"
+
+msgid "glados_es_gs__document__doc_type__label"
+msgstr "Type"
+
+msgid "glados_es_gs__document__doi__label"
+msgstr "DOI"
