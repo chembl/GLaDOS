@@ -202,3 +202,6 @@ msgstr "PubMed ID"
 
 msgid "glados_es_gs__document__doc_type__label"
 msgstr "Type"
+
+msgid "glados_es_gs__document__doi__label"
+msgstr "DOI"
