@@ -157,9 +157,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
+        COLUMNS: CellLine.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Infinite:
