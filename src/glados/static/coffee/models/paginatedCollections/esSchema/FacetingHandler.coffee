@@ -57,7 +57,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               return false
         return true
       )
-      hidden = _.difference(all_props, defaults, defaults_hidden)
       if defaults?
         for prop_i in defaults
           facets[prop_i] = getFacetData(prop_i)
@@ -66,8 +65,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         for prop_i in defaults_hidden
           facets[prop_i] = getFacetData(prop_i)
           facets[prop_i].show = false
-      for prop_i in hidden
-        facets[prop_i] = getFacetData(prop_i)
       return facets
 
     @getNewFacetingHandler: (es_index, es_property)->
