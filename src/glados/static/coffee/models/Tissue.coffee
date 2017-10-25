@@ -40,6 +40,12 @@ glados.models.Tissue.COLUMNS = {
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
 
 glados.models.Tissue.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of glados.models.Tissue.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_REPORT_CARD: [
     glados.models.Tissue.COLUMNS.CHEMBL_ID,
     glados.models.Tissue.COLUMNS.PREF_NAME,
