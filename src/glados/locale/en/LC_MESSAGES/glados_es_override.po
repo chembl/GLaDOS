@@ -178,3 +178,15 @@ msgstr "Source Organism"
 
 msgid "glados_es_gs__cell_line__cell_chembl_id__label"
 msgstr "ChEMBL ID"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Tissue Paginated Views:
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__tissue__tissue_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__tissue__pref_name__label"
+msgstr "Name"
+
+msgid "glados_es_gs__tissue__bto_id__label"
+msgstr "BTO ID"

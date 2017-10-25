@@ -185,6 +185,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Infinite:
