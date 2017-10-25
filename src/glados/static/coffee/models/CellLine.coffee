@@ -44,6 +44,12 @@ CellLine.COLUMNS = {
 CellLine.ID_COLUMN = CellLine.COLUMNS.CHEMBL_ID
 
 CellLine.COLUMNS_SETTINGS = {
+  ALL_COLUMNS: (->
+    colsList = []
+    for key, value of CellLine.COLUMNS
+      colsList.push value
+    return colsList
+  )()
   RESULTS_LIST_TABLE: [
     CellLine.COLUMNS.CHEMBL_ID
     CellLine.COLUMNS.NAME
