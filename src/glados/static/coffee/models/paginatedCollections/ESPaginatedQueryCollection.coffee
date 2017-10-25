@@ -105,12 +105,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     
     # given a list of chembl ids, it gives the request data to query for only those ids
     getRequestDataForChemblIDs: (page, pageSize, idsList) ->
+
+      idPropertyName = @getMeta('id_column').comparator
+      query =
+        terms: {}
+      query.terms[idPropertyName] = idsList
       return {
         size: pageSize,
         from: ((page - 1) * pageSize)
-        query:
-          terms:
-            molecule_chembl_id: idsList
+        query: query
       }
 
     getQueryForGeneratorList: ->
