@@ -182,9 +182,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
+        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
           Cards:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Infinite:
