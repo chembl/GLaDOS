@@ -91,8 +91,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        DOWNLOAD_COLUMNS: _.union(Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-          Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+        DOWNLOAD_COLUMNS: Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -120,6 +119,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        DOWNLOAD_COLUMNS: Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -146,6 +146,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Carousel:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+        DOWNLOAD_COLUMNS: Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

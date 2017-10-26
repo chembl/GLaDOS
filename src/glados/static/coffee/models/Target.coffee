@@ -145,7 +145,8 @@ Target.COLUMNS = {
     secondary_link: true
   SPECIES_GROUP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'species_group_flag'
-
+  TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
+    comparator: 'tax_id'
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -178,6 +179,9 @@ Target.COLUMNS_SETTINGS = {
     Target.COLUMNS.BIOACTIVITIES_NUMBER
   ]
 }
+
+Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+  Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL, [Target.COLUMNS.TAX_ID])
 
 Target.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
