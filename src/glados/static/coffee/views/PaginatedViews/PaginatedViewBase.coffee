@@ -127,6 +127,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not $(@el).is(":visible")
         return
 
+      if @checkAndRenderIfNoItems()
+        return
+
       #Make sure I am rendering the correct page
       if (@collection.getMeta('page_size') != @currentPageSize)\
       or (@collection.getMeta('current_page') != @currentPageNum)
@@ -139,7 +142,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
 
     sleepView: ->
-    wakeUpView: -> @requestCurrentPage()
+    wakeUpView: ->
+      if @checkAndRenderIfNoItems()
+        return
+      @requestCurrentPage()
+
+    checkAndRenderIfNoItems: ->
+      if @collection.length == 0
+        @showNoResultsFound()
+        return true
+      return false
+
+    showNoResultsFound: ->
+      @hidePreloaderOnly()
+      @hideHeaderContainer()
+      @hideFooterContainer()
+      @hideContentContainer()
+      @showEmptyMessageContainer()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
@@ -156,16 +175,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       visibleColumns = @getVisibleColumns()
       @numVisibleColumnsList.push visibleColumns.length
 
-      if @collection.length > 0
-        for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i]), visibleColumns
-        @showHeaderContainer()
-        @showFooterContainer()
-      else
-        @hideHeaderContainer()
-        @hideFooterContainer()
-        @hideContentContainer()
-        @showEmptyMessageContainer()
+      for i in [0..$elem.length - 1]
+        @sendDataToTemplate $($elem[i]), visibleColumns
+      @showHeaderContainer()
+      @showFooterContainer()
 
     getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
