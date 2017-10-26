@@ -24,8 +24,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
-        DOWNLOAD_COLUMNS: _.union(Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-          Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
+        DOWNLOAD_COLUMNS: Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         CUSTOM_DEFAULT_CARD_SIZES:
           small: 12
           medium: 6
