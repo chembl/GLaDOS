@@ -57,3 +57,7 @@ glados.models.Tissue.COLUMNS_SETTINGS = {
     glados.models.Tissue.COLUMNS.CALOHA_ID
   ]
 }
+
+glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
+  glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD,
+  glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
