@@ -95,35 +95,35 @@ msgstr "Document Year"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___bei__label"
-msgstr "Ligand Efficiency Bei"
+msgstr "Ligand Efficiency BEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___bei__label__mini"
-msgstr "Ligand Efficiency Bei"
+msgstr "Ligand Efficiency BEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___le__label"
-msgstr "Ligand Efficiency Le"
+msgstr "Ligand Efficiency LE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___le__label__mini"
-msgstr "Ligand Efficiency Le"
+msgstr "Ligand Efficiency LE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___lle__label"
-msgstr "Ligand Efficiency Lle"
+msgstr "Ligand Efficiency LLE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___lle__label__mini"
-msgstr "Ligand Efficiency Lle"
+msgstr "Ligand Efficiency LLE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___sei__label"
-msgstr "Ligand Efficiency Sei"
+msgstr "Ligand Efficiency SEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___sei__label__mini"
-msgstr "Ligand Efficiency Sei"
+msgstr "Ligand Efficiency SEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency__label"
@@ -1487,43 +1487,43 @@ msgstr "Topical"
 
 
 msgid "glados_es_gs__molecule__usan_stem__label"
-msgstr "Usan Stem"
+msgstr "USAN Stem"
 
 
 msgid "glados_es_gs__molecule__usan_stem__label__mini"
-msgstr "Usan Stem"
+msgstr "USAN Stem"
 
 
 msgid "glados_es_gs__molecule__usan_stem_definition__label"
-msgstr "Usan Stem Definition"
+msgstr "USAN Stem Definition"
 
 
 msgid "glados_es_gs__molecule__usan_stem_definition__label__mini"
-msgstr "Usan Stem Definition"
+msgstr "USAN Stem Definition"
 
 
 msgid "glados_es_gs__molecule__usan_stem_substem__label"
-msgstr "Usan Stem Substem"
+msgstr "USAN Stem Substem"
 
 
 msgid "glados_es_gs__molecule__usan_stem_substem__label__mini"
-msgstr "Usan Stem Substem"
+msgstr "USAN Stem Substem"
 
 
 msgid "glados_es_gs__molecule__usan_substem__label"
-msgstr "Usan Substem"
+msgstr "USAN Substem"
 
 
 msgid "glados_es_gs__molecule__usan_substem__label__mini"
-msgstr "Usan Substem"
+msgstr "USAN Substem"
 
 
 msgid "glados_es_gs__molecule__usan_year__label"
-msgstr "Usan Year"
+msgstr "USAN Year"
 
 
 msgid "glados_es_gs__molecule__usan_year__label__mini"
-msgstr "Usan Year"
+msgstr "USAN Year"
 
 
 msgid "glados_es_gs__molecule__withdrawn_country__label"

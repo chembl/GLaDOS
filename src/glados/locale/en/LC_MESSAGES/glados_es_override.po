@@ -82,6 +82,9 @@ msgstr "Molecular Species"
 msgid "glados_es_gs__molecule__molecule_properties___full_molformula__label"
 msgstr "Molecular Formula"
 
+msgid "glados_es_gs__molecule__indication_class__label"
+msgstr "USAN Indication Class"
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Activities paginated views
 #-----------------------------------------------------------------------------------------------------------------------
