@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     initialize: ->
 
-      console.log 'init ColumnsHandlerView'
       @modalId = arguments[0].modal_id
       @modalId ?= (new Date()).getTime()
       @facetsMode = arguments[0].facets_mode
