@@ -72,7 +72,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return full_url
 
-    fetch: () ->
+    fetch: (options) ->
       # Uses POST if set in the meta
       use_post = @getMeta('use_post')
       if use_post
@@ -84,9 +84,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           data: @getMeta('post_parameters')
           type: 'GET'
           reset: true
-        Backbone.Collection.prototype.fetch.call(this, fetchOptions)
+        Backbone.Collection.prototype.fetch.call(this, _.extend(fetchOptions, options))
       else
-        Backbone.Collection.prototype.fetch.call(this)
+        Backbone.Collection.prototype.fetch.call(this, options)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
