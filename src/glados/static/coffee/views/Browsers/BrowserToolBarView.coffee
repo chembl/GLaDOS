@@ -22,6 +22,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     hideAll: ->
       $(@el).hide()
+      @browserView.hideFilters()
 
     checkIfNoItems: ->
 
