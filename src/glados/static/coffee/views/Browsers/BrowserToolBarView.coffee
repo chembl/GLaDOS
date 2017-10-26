@@ -43,6 +43,17 @@ glados.useNameSpace 'glados.views.Browsers',
         $opener.addClass('disabled')
         @browserView.hideFilters()
 
+        qtipConfig =
+          content:
+            text: gettext('glados_filters__no_filters_available')
+          style:
+            classes: 'qtip-light qtip-shadow'
+          position:
+            my: 'left center'
+            at: 'right center'
+
+        $opener.qtip qtipConfig
+
     # ------------------------------------------------------------------------------------------------------------------
     # Hide Filters
     # ------------------------------------------------------------------------------------------------------------------
