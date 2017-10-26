@@ -83,8 +83,9 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
-    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstThousand=true,
-    customBaseProgressText='Searching...')
+
+    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=10000,
+    customBaseProgressText='Searching . . . ')
 
     # for now, we need to jump from web services to elastic
     $.when.apply($, deferreds).done(->
@@ -104,18 +105,17 @@ class SearchResultsApp
         el: $browserContainer
 
       esCompoundsList.fetch()
-
     ).fail((msg) ->
 
-        customExplanation = 'Error while performing the search.'
-        $browserContainer.hide()
-        if $progressElement?
-          # it can be a jqxr
-          if msg.status?
-            $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg, customExplanation)
-          else
-            $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
-              msg: msg
-              custom_explanation: customExplanation
-      )
+      customExplanation = 'Error while performing the search.'
+      $browserContainer.hide()
+      if $progressElement?
+        # it can be a jqxr
+        if msg.status?
+          $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg, customExplanation)
+        else
+          $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
+            msg: msg
+            custom_explanation: customExplanation
+    )
 

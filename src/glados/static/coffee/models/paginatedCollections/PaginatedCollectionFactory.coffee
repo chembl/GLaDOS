@@ -215,9 +215,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
 
       list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL + term + '.json'
+        @baseUrl = glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
+        @setMeta('use_post', true)
+        params = {}
+        if term.startsWith('CHEMBL')
+          params['chembl_id'] = term
+        else
+          params['smiles'] = term
+
+        @setMeta('post_parameters', params)
         @initialiseUrl()
 
 
@@ -235,9 +243,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
 
       list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL + term
+        @baseUrl = glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
+        @setMeta('use_post', true)
+        @setMeta('post_parameters', {
+          molecule_structures__canonical_smiles__flexmatch: term
+        })
         @initialiseUrl()
 
 
@@ -254,9 +266,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
 
       list.initURL = (term, percentage) ->
-        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL + term + '/' + percentage + '.json'
+        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
+        @setMeta('use_post', true)
+        params = {
+          similarity: percentage
+        }
+        if term.startsWith('CHEMBL')
+          params['chembl_id'] = term
+        else
+          params['smiles'] = term
+
+        @setMeta('post_parameters', params)
         @initialiseUrl()
 
 
@@ -275,9 +297,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewWSCollectionFor config
 
       list.initURL = (term, percentage) ->
-        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL + term + '/' + percentage + '.json'
+        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
+        @setMeta('use_post', true)
+        params = {
+          similarity: percentage
+        }
+        if term.startsWith('CHEMBL')
+          params['chembl_id'] = term
+        else
+          params['smiles'] = term
+
+        @setMeta('post_parameters', params)
         @initialiseUrl()
 
 
