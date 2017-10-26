@@ -24,6 +24,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
+        DOWNLOAD_COLUMNS: _.union(Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+          Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
         CUSTOM_DEFAULT_CARD_SIZES:
           small: 12
           medium: 6
@@ -90,6 +92,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        DOWNLOAD_COLUMNS: _.union(Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+          Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

@@ -744,7 +744,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # you can pass an Jquery elector to be used to report the status, 
     # see the template Handlebars-Common-DownloadColMessages0
-    downloadAllItems: (format, columns, $progressElement) ->
+    downloadAllItems: (format, columns=@getMeta('download_columns'), $progressElement) ->
       deferreds = @getAllResults($progressElement, true)
 
       thisCollection = @

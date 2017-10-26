@@ -673,6 +673,8 @@ Compound.COLUMNS_SETTINGS = {
   ]
 }
 
+#Compound.COLUMNS_SETTINGS.
+
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
