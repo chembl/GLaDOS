@@ -208,3 +208,9 @@ msgstr "Type"
 
 msgid "glados_es_gs__document__doi__label"
 msgstr "DOI"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Filters handling
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_filters__no_filters_available"
+msgstr "There are no filters available."

@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+      @checkIfNoFilters()
       @checkIfNoItems()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -32,12 +33,36 @@ glados.useNameSpace 'glados.views.Browsers',
 
     wakeUp: ->
 
+    checkIfNoFilters: ->
+      console.log 'CHECK IF NO FILTERS'
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+      if Object.keys(facetsGroups).length == 0
+        $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')
+        $filtersCollapser.addClass('disabled')
+        $opener = $(@el).find('.BCK-toggle-hide-filters')
+        $opener.addClass('disabled')
+        @browserView.hideFilters()
+
+        qtipConfig =
+          content:
+            text: gettext('glados_filters__no_filters_available')
+          style:
+            classes: 'qtip-light qtip-shadow'
+          position:
+            my: 'left center'
+            at: 'right center'
+
+        $opener.qtip qtipConfig
+
     # ------------------------------------------------------------------------------------------------------------------
     # Hide Filters
     # ------------------------------------------------------------------------------------------------------------------
     toggleHideFilters: (event) ->
 
       $opener = $(event.currentTarget)
+      if $opener.hasClass('disabled')
+        return
+
       $icon = $opener.find('i')
 
       $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')

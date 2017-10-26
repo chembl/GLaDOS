@@ -104,7 +104,8 @@ glados.useNameSpace 'glados.views.Browsers',
     manualResizeCurrentView: ->
 
       currentView = @getCurrentViewInstance()
-      currentView.handleManualResize() unless not currentView.handleManualResize?
+      if currentView?
+        currentView.handleManualResize() unless not currentView.handleManualResize?
     #--------------------------------------------------------------------------------------
     # Selections
     #--------------------------------------------------------------------------------------
