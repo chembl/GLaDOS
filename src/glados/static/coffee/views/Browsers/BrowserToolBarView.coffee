@@ -34,7 +34,6 @@ glados.useNameSpace 'glados.views.Browsers',
     wakeUp: ->
 
     checkIfNoFilters: ->
-      console.log 'CHECK IF NO FILTERS'
       facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
       if Object.keys(facetsGroups).length == 0
         $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')
