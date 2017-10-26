@@ -72,6 +72,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return full_url
 
+    fetch: () ->
+      # Uses POST if set in the meta
+      use_post = @getMeta('use_post')
+      if use_post
+        fetchOptions =
+          headers: {
+            'X-HTTP-Method-Override': 'GET'
+            'Content-type': 'application/json'
+          }
+          data: @getMeta('post_parameters')
+          type: 'GET'
+          reset: true
+        Backbone.Collection.prototype.fetch.call(this, fetchOptions)
+      else
+        Backbone.Collection.prototype.fetch.call(this)
+
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
     # ------------------------------------------------------------------------------------------------------------------
@@ -257,7 +273,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisView = @
 
       getPage = (url) ->
-        $.get(url).done((response) ->
+        # Uses POST if set in the meta
+        use_post = thisView.getMeta('use_post')
+        deferredGetPage = null
+        if use_post and url == firstURL
+          fetchOptions =
+            headers: {
+              'X-HTTP-Method-Override': 'GET'
+              'Content-type': 'application/json'
+            }
+            data: thisView.getMeta('post_parameters')
+            type: 'GET'
+          deferredGetPage = $.ajax(url, fetchOptions)
+        else
+          deferredGetPage = $.get(url)
+
+        deferredGetPage.done((response) ->
           itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
           totalRecords = if onlyFirstN? then onlyFirstN else response.page_meta.total_count
 
