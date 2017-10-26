@@ -90,14 +90,14 @@ class URLProcessor
 
     pathname = window.location.pathname
     pathnameParts = pathname.split('/')
-    return pathnameParts[pathnameParts.length - 1]
+    return decodeURIComponent pathnameParts[pathnameParts.length - 1]
 
   # gets the query string for the substructure search results page
   @getSimilaritySearchQueryString = ->
 
     pathname = window.location.pathname
     pathnameParts = pathname.split('/')
-    return pathnameParts[pathnameParts.length - 2]
+    return decodeURIComponent pathnameParts[pathnameParts.length - 2]
 
   # gets the query string for the substructure search results page
   @getSimilaritySearchPercentage = ->
@@ -112,4 +112,4 @@ class URLProcessor
 
     pathname = window.location.pathname
     pathnameParts = pathname.split('/')
-    return pathnameParts[pathnameParts.length - position - 1]
+    return decodeURIComponent pathnameParts[pathnameParts.length - position - 1]
