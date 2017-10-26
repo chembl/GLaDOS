@@ -211,23 +211,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fixCardHeight: ($appendTo) ->
 
-      if @isInfinite()
-        $cards = $(@el).find('.BCK-items-container').children()
-        $cards.height $(_.max($cards, (card) -> $(card).height())).height() + 'px'
-      else if @isCards()
-        # This code completes rows for grids of 2 or 3 columns in the flex box css display
-        total_cards = @collection.getCurrentPage().length
-        placeholderTemplate = '<div class="col s{{small_size}} m{{medium_size}} l{{large_size}}" />'
-        paramsObj =
-          small: @CURRENT_CARD_SIZES.small
-          medium_size: @CURRENT_CARD_SIZES.medium
-          large_size: @CURRENT_CARD_SIZES.large
+      # Remove previous placeholders first, specially useful in infinite
+      $appendTo.find('.BCK-Flex-Placeholder').remove()
+      # This code completes rows for grids of 2 or 3 columns in the flex box css display
+      total_cards = @collection.getCurrentPage().length
+      placeholderTemplate = '<div class="BCK-Flex-Placeholder col s{{small_size}} m{{medium_size}} l{{large_size}}" />'
+      paramsObj =
+        small: @CURRENT_CARD_SIZES.small
+        medium_size: @CURRENT_CARD_SIZES.medium
+        large_size: @CURRENT_CARD_SIZES.large
 
-        placeholderContent = glados.Utils.getContentFromTemplate( undefined, paramsObj, placeholderTemplate)
-        while total_cards % 12 != 0
+      placeholderContent = glados.Utils.getContentFromTemplate( undefined, paramsObj, placeholderTemplate)
+      while total_cards % 12 != 0
 
-          $appendTo.append(placeholderContent)
-          total_cards++
+        $appendTo.append(placeholderContent)
+        total_cards++
 
     fillPaginators: ->
 
