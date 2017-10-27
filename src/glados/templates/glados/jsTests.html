@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  {% block analytics %}
+    {% include "glados/base/hotjar_analytics.html" %}
+  {% endblock %}
   <meta charset="UTF-8">
   <title>Javascript Tests for ChEMBL</title>
   {% load static %}
