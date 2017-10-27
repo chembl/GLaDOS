@@ -353,7 +353,6 @@ glados.useNameSpace 'glados',
           glados.Utils.Tooltips.destroyAllTooltips($($container))
 
     Fetching:
-
       fetchModelOnce: (model) ->
 
         timesFetched = model.get('glados_times_fetched')
@@ -364,3 +363,10 @@ glados.useNameSpace 'glados',
             glados_times_fetched: 1
           model.fetch()
 
+    URLS:
+      getCurrentModelChemblID: ->
+
+        if GlobalVariables['EMBEDED']
+          return URLProcessor.getRequestedChemblIDWhenEmbedded()
+        else
+          return URLProcessor.getRequestedChemblID()

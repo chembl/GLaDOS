@@ -11,11 +11,7 @@ class TargetReportCardApp
 
     target = TargetReportCardApp.getCurrentTarget()
     TargetReportCardApp.initTargetNameAndClassification()
-
-    appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
-    
-    console.log 'appDrugsClinCandsList: ', appDrugsClinCandsList
+    TargetReportCardApp.initApprovedDrugsClinicalCandidates()
 
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
     targetRelations.initURL GlobalVariables.CHEMBL_ID
@@ -27,7 +23,6 @@ class TargetReportCardApp
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
-    console.log 'bioactivities: ', bioactivities
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: GlobalVariables.CHEMBL_ID
 
@@ -43,10 +38,6 @@ class TargetReportCardApp
     new RelationsView
       collection: targetRelations
       el: $('#TRelationsCard')
-
-    new ApprovedDrugsClinicalCandidatesView
-      collection: appDrugsClinCandsList
-      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
 
     new TargetAssociatedBioactivitiesView
       model: bioactivities
@@ -65,23 +56,20 @@ class TargetReportCardApp
     @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
 
     target.fetch()
-    appDrugsClinCandsList.fetch()
+#    appDrugsClinCandsList.fetch()
     targetRelations.fetch({reset: true})
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
 
   # -------------------------------------------------------------
-  # CurrentTarget
+  # Singleton
   # -------------------------------------------------------------
   @getCurrentTarget = ->
 
     if not @currentTarget?
 
-      if GlobalVariables['EMBEDED']
-        targetChemblID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-      else
-        targetChemblID = URLProcessor.getRequestedChemblID()
+      targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
       @currentTarget = new Target
         target_chembl_id: targetChemblID
@@ -89,6 +77,9 @@ class TargetReportCardApp
 
     else return @currentTarget
 
+  # -------------------------------------------------------------
+  # Section initialisation
+  # -------------------------------------------------------------
   @initTargetNameAndClassification = ->
 
     target = TargetReportCardApp.getCurrentTarget()
@@ -128,10 +119,9 @@ class TargetReportCardApp
 
   @initApprovedDrugsClinicalCandidates = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
+    appDrugsClinCandsList.initURL(targetChemblID)
 
     new ApprovedDrugsClinicalCandidatesView
       collection: appDrugsClinCandsList
