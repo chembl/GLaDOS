@@ -101,15 +101,15 @@ describe "Downloads", ->
     it 'Generates the configuration for Targets', ->
 
       comparatorsMustBe = ["target_chembl_id","pref_name","target_components","target_type","organism",
-        "_metadata.related_compounds.count","_metadata.activity_count","species_group_flag","tax_id"]
+       "_metadata.related_compounds.count","_metadata.activity_count","tax_id", "species_group_flag"]
 
       comparatorsGot = (col.comparator for col in Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
     it 'Generates the configuration for Assays', ->
 
-      comparatorsMustBe = ["assay_chembl_id","description","assay_organism","document_chembl_id","assay_strain",
-        "assay_type","tissue_chembl_id","assay_cell_type","assay_subcellular_fraction","assay_tax_id"]
+      comparatorsMustBe = ["assay_chembl_id","description","assay_organism","document_chembl_id", "assay_tax_id",
+        "assay_strain","assay_type","tissue_chembl_id","assay_cell_type","assay_subcellular_fraction"]
 
       comparatorsGot = (col.comparator for col in Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
@@ -125,7 +125,7 @@ describe "Downloads", ->
     it 'Generates the configuration for Cell Lines', ->
 
       comparatorsMustBe = ["cell_chembl_id","cell_name","cell_description","cell_source_organism",
-        "cell_source_tissue","clo_id","efo_id","cellosaurus_id","cl_lincs_id","cell_source_tax_id"]
+        "cell_source_tissue","cell_source_tax_id", "clo_id","efo_id","cellosaurus_id","cl_lincs_id"]
 
       comparatorsGot = (col.comparator for col in CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
@@ -142,10 +142,10 @@ describe "Downloads", ->
 
       comparatorsMustBe = ["molecule_chembl_id","standard_type","standard_relation","standard_value",
         "standard_units","pchembl_value","activity_comment","assay_chembl_id","assay_description",
-        "target_chembl_id","target_pref_name","target_organism","document_chembl_id","bao_format",
+        "target_chembl_id","target_pref_name","target_organism", "document_chembl_id", "target_tax_id", "bao_format",
         "published_type","published_relation","published_value","published_units","canonical_smiles",
         "data_validity_comment","document_journal","document_year","src_id","uo_units","potential_duplicate",
-        "target_tax_id"]
+        ]
 
       comparatorsGot = (col.comparator for col in Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)

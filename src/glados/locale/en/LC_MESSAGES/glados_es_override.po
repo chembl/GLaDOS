@@ -133,6 +133,8 @@ msgstr "Compounds"
 msgid "glados_es_gs__target__target_components__label"
 msgstr "UniProt Accession"
 
+msgid "glados_es_gs__activity__target_tax_id__label"
+msgstr "Organism Tax ID"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
