@@ -99,6 +99,8 @@ Activity.COLUMNS = {
     'is_sorting': 0
     'sort_class': 'fa-sort'
   }
+  TARGET_TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_tax_id'
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
@@ -154,6 +156,9 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.POTENTIAL_DUPLICATE
   ]
 }
+
+Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE,
+  Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL, [Activity.COLUMNS.TARGET_TAX_ID])
 
 Activity.getActivitiesListURL = (filter) ->
 

@@ -72,6 +72,32 @@ describe "Downloads", ->
       comparatorsGot = (col.comparator for col in Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
+    it 'Generates the configuration for Compounds (similarity Searches)', ->
+
+      comparatorsMustBe = ["molecule_chembl_id","pref_name","molecule_synonyms","molecule_type","max_phase",
+        "molecule_properties.full_mwt","_metadata.related_targets.count","_metadata.activity_count",
+        "molecule_properties.alogp","molecule_properties.psa","molecule_properties.hba","molecule_properties.hbd",
+        "molecule_properties.num_ro5_violations","molecule_properties.rtb","molecule_properties.ro3_pass",
+        "molecule_properties.qed_weighted","molecule_properties.acd_most_apka","molecule_properties.acd_most_bpka",
+        "molecule_properties.acd_logp","molecule_properties.acd_logd","molecule_properties.aromatic_rings",
+        "structure_type","inorganic_flag","molecule_properties.heavy_atoms","molecule_properties.hba_lipinski",
+        "molecule_properties.hbd_lipinski","molecule_properties.num_lipinski_ro5_violations",
+        "molecule_properties.mw_monoisotopic","molecule_properties.molecular_species",
+        "molecule_properties.full_molformula","_score"]
+
+      comparatorsGot = (col.comparator for col in Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY)
+      expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
+
+    it 'Generates the configuration for Drugs', ->
+
+      comparatorsMustBe = ["molecule_chembl_id","molecule_synonyms","molecule_synonyms","max_phase",
+        "_metadata.drug.drug_data.applicants","usan_stem","usan_year","first_approval","atc_classifications",
+        "--","usan_stem_definition","_metadata.drug.drug_data.usan_stem_substem","indication_class",
+        "_metadata.drug.drug_data.sc_patent","withdrawn_year","withdrawn_reason","withdrawn_country"]
+
+      comparatorsGot = (col.comparator for col in glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
+      expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
+
     it 'Generates the configuration for Targets', ->
 
       comparatorsMustBe = ["target_chembl_id","pref_name","target_components","target_type","organism",
@@ -110,4 +136,16 @@ describe "Downloads", ->
       comparatorsMustBe = ["tissue_chembl_id","pref_name","uberon_id","efo_id","bto_id","caloha_id"]
 
       comparatorsGot = (col.comparator for col in glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
+      expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
+
+    it 'Generates the configuration for Activities', ->
+
+      comparatorsMustBe = ["molecule_chembl_id","standard_type","standard_relation","standard_value",
+        "standard_units","pchembl_value","activity_comment","assay_chembl_id","assay_description",
+        "target_chembl_id","target_pref_name","target_organism","document_chembl_id","bao_format",
+        "published_type","published_relation","published_value","published_units","canonical_smiles",
+        "data_validity_comment","document_journal","document_year","src_id","uo_units","potential_duplicate",
+        "target_tax_id"]
+
+      comparatorsGot = (col.comparator for col in Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
