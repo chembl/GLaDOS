@@ -116,18 +116,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
 
-      if @collection.length > 0
-        for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i]), allColumns
-        @bindFunctionLinks()
-        @showHeaderContainer()
-        @showFooterContainer()
-        @checkIfTableNeedsToScroll()
-      else
-        @hideHeaderContainer()
-        @hideFooterContainer()
-        @hideContentContainer()
-        @showEmptyMessageContainer()
+      for i in [0..$elem.length - 1]
+        @sendDataToTemplate $($elem[i]), allColumns
+      @bindFunctionLinks()
+      @showHeaderContainer()
+      @showFooterContainer()
+      @checkIfTableNeedsToScroll()
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
 

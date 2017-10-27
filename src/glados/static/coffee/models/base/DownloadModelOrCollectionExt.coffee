@@ -41,7 +41,7 @@ DownloadModelOrCollectionExt =
 
   getCSVHeaderString: (downloadObject, isTabSeparated) ->
 
-    separator = if isTabSeparated then "\t" else ";"
+    separator = if isTabSeparated then "\t" else ","
     #use first object to get header
     keys = []
     for key, value of downloadObject[0]
@@ -56,7 +56,7 @@ DownloadModelOrCollectionExt =
 
   getCSVContentString: (downloadObject, isTabSeparated) ->
 
-    separator = if isTabSeparated then "\t" else ";"
+    separator = if isTabSeparated then "\t" else ","
 
     rows = []
     for obj in downloadObject

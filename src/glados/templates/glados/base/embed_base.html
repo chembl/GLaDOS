@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-
+  {% block analytics %}
+    {% include "glados/base/hotjar_analytics.html" %}
+  {% endblock %}
   {% load compress %}
   <!-- Imports used by all the templates-->
   {% block common_css %}

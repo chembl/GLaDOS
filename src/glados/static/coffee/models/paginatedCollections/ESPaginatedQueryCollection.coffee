@@ -134,21 +134,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setMeta('scores', scores)
 
-      return {
-        function_score:
-          query:
-            query_string:
-              query: glados.Utils.QueryStrings.getQueryStringForItemsList(idsList, idAttribute)
-          functions: [
+      query_fgl = {
+        terms: {}
+      }
+      query_fgl.terms[idAttribute] = idsList
 
-           script_score:
-             script:
-               lang: "painless",
-               params:
-                 scores: scores
-               inline: "String mcid=doc['" + idAttribute + "'].value; "\
-                 +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
-         ]
+      return {
+        must_query:
+          function_score:
+            query: {}
+            functions: [
+
+             script_score:
+               script:
+                 lang: "painless",
+                 params:
+                   scores: scores
+                 inline: "String mcid=doc['" + idAttribute + "'].value; "\
+                   +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
+           ]
+        filter_query:
+          query_fgl
       }
 
     # generates an object with the data necessary to do the ES request
@@ -170,6 +176,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         query:
           bool:
             must: []
+            filter: []
       }
       @addSortingToQuery(es_query)
 
@@ -185,13 +192,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         }]
       # Normal Search query
       else if generatorList?
-        es_query.query.bool.must = @getQueryForGeneratorList()
+        glq = @getQueryForGeneratorList()
+        es_query.query.bool.must.push glq.must_query
+        es_query.query.bool.filter.push glq.filter_query
       else
         es_query.query.bool.must = @getMeta('searchESQuery')
 
       # Includes the selected facets filter
       if facets_filtered
-        es_query.query.bool.filter = @getFacetFilterQuery()
+        filter_query = @getFacetFilterQuery()
+        if _.isArray filter_query and filter_query.length > 0
+          es_query.query.bool.filter = _.union es_query.query.bool.filter, filter_query
+        else if filter_query? and not _.isArray filter_query
+          es_query.query.bool.filter.push filter_query
 
       if request_facets
         if not facets_first_call?
@@ -744,7 +757,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # you can pass an Jquery elector to be used to report the status, 
     # see the template Handlebars-Common-DownloadColMessages0
-    downloadAllItems: (format, columns, $progressElement) ->
+    downloadAllItems: (format, columns=@getMeta('download_columns'), $progressElement) ->
       deferreds = @getAllResults($progressElement, true)
 
       thisCollection = @

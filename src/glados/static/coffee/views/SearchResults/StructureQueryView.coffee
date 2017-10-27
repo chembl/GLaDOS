@@ -9,8 +9,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       @render()
 
     render: ->
+      img_url = glados.Settings.BEAKER_BASE_URL + 'smiles2svg/'+ btoa(@queryParams.search_term)
+      if @queryParams.search_term.startsWith('CHEMBL')
+        img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
       glados.Utils.fillContentForElement $(@el),
-        image_url: glados.Settings.BEAKER_BASE_URL + 'smiles2svg/'+ btoa(@queryParams.search_term)
+        image_url: img_url
         search_term: @queryParams.search_term
         similarity: @queryParams.similarity_percentage
 

@@ -157,6 +157,9 @@ msgstr "Strain"
 msgid "glados_es_gs__assay__assay_organism__label"
 msgstr "Organism"
 
+msgid "glados_es_gs__assay__assay_tax_id__label"
+msgstr "Tax ID"
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Cell Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -181,6 +184,9 @@ msgstr "Source Organism"
 
 msgid "glados_es_gs__cell_line__cell_chembl_id__label"
 msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__cell_line__cell_source_tax_id__label"
+msgstr "Tax ID"
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Tissue Paginated Views:
@@ -208,3 +214,9 @@ msgstr "Type"
 
 msgid "glados_es_gs__document__doi__label"
 msgstr "DOI"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Filters handling
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_filters__no_filters_available"
+msgstr "There are no filters available."

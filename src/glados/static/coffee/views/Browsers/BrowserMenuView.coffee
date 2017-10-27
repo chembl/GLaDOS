@@ -104,7 +104,8 @@ glados.useNameSpace 'glados.views.Browsers',
     manualResizeCurrentView: ->
 
       currentView = @getCurrentViewInstance()
-      currentView.handleManualResize() unless not currentView.handleManualResize?
+      if currentView?
+        currentView.handleManualResize() unless not currentView.handleManualResize?
     #--------------------------------------------------------------------------------------
     # Selections
     #--------------------------------------------------------------------------------------
@@ -146,7 +147,7 @@ glados.useNameSpace 'glados.views.Browsers',
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
       $progressMessages = $(@el).find('.download-messages-container')
-      @collection.downloadAllItems(desiredFormat, @getCurrentViewInstance().getVisibleColumns(), $progressMessages)
+      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
 
     #--------------------------------------------------------------------------------------
     # Switching Views

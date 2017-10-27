@@ -127,6 +127,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not $(@el).is(":visible")
         return
 
+      if @checkAndRenderIfNoItems()
+        return
+
       #Make sure I am rendering the correct page
       if (@collection.getMeta('page_size') != @currentPageSize)\
       or (@collection.getMeta('current_page') != @currentPageNum)
@@ -139,7 +142,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
 
     sleepView: ->
-    wakeUpView: -> @requestCurrentPage()
+    wakeUpView: ->
+      if @checkAndRenderIfNoItems()
+        return
+      @requestCurrentPage()
+
+    checkAndRenderIfNoItems: ->
+      if @collection.length == 0
+        @showNoResultsFound()
+        return true
+      return false
+
+    showNoResultsFound: ->
+      @hidePreloaderOnly()
+      @hideHeaderContainer()
+      @hideFooterContainer()
+      @hideContentContainer()
+      @showEmptyMessageContainer()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
@@ -156,16 +175,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       visibleColumns = @getVisibleColumns()
       @numVisibleColumnsList.push visibleColumns.length
 
-      if @collection.length > 0
-        for i in [0..$elem.length - 1]
-          @sendDataToTemplate $($elem[i]), visibleColumns
-        @showHeaderContainer()
-        @showFooterContainer()
-      else
-        @hideHeaderContainer()
-        @hideFooterContainer()
-        @hideContentContainer()
-        @showEmptyMessageContainer()
+      for i in [0..$elem.length - 1]
+        @sendDataToTemplate $($elem[i]), visibleColumns
+      @showHeaderContainer()
+      @showFooterContainer()
 
     getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
@@ -211,23 +224,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fixCardHeight: ($appendTo) ->
 
-      if @isInfinite()
-        $cards = $(@el).find('.BCK-items-container').children()
-        $cards.height $(_.max($cards, (card) -> $(card).height())).height() + 'px'
-      else if @isCards()
-        # This code completes rows for grids of 2 or 3 columns in the flex box css display
-        total_cards = @collection.getCurrentPage().length
-        placeholderTemplate = '<div class="col s{{small_size}} m{{medium_size}} l{{large_size}}" />'
-        paramsObj =
-          small: @CURRENT_CARD_SIZES.small
-          medium_size: @CURRENT_CARD_SIZES.medium
-          large_size: @CURRENT_CARD_SIZES.large
+      # Remove previous placeholders first, specially useful in infinite
+      $appendTo.find('.BCK-Flex-Placeholder').remove()
+      # This code completes rows for grids of 2 or 3 columns in the flex box css display
+      total_cards = @collection.getCurrentPage().length
+      placeholderTemplate = '<div class="BCK-Flex-Placeholder col s{{small_size}} m{{medium_size}} l{{large_size}}" />'
+      paramsObj =
+        small: @CURRENT_CARD_SIZES.small
+        medium_size: @CURRENT_CARD_SIZES.medium
+        large_size: @CURRENT_CARD_SIZES.large
 
-        placeholderContent = glados.Utils.getContentFromTemplate( undefined, paramsObj, placeholderTemplate)
-        while total_cards % 12 != 0
+      placeholderContent = glados.Utils.getContentFromTemplate( undefined, paramsObj, placeholderTemplate)
+      while total_cards % 12 != 0
 
-          $appendTo.append(placeholderContent)
-          total_cards++
+        $appendTo.append(placeholderContent)
+        total_cards++
 
     fillPaginators: ->
 
