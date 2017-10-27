@@ -92,13 +92,9 @@ class TargetReportCardApp
 
     else return @currentTarget
 
-
   @initTargetNameAndClassification = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
-    target = new Target
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+    target = TargetReportCardApp.getCurrentTarget()
 
     new TargetNameAndClassificationView
       model: target

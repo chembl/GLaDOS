@@ -144,3 +144,16 @@ describe "Utils", ->
         expect(columnsWithValuesGot[0].value).toBe('P61794, Q8K5E0')
         expect(columnsWithValuesGot[0].link_url).toBe('http://www.uniprot.org/uniprot/?query=accession:P61794+OR+accession:Q8K5E0')
 
+  describe "Fetching Utils", ->
+
+    it 'fetches a model only once', ->
+
+      testTarget = new Target
+        target_chembl_id: 'CHEMBL2111359'
+
+      spyOn(testTarget, 'fetch')
+      glados.Utils.Fetching.fetchModelOnce(testTarget)
+      glados.Utils.Fetching.fetchModelOnce(testTarget)
+      glados.Utils.Fetching.fetchModelOnce(testTarget)
+      expect(testTarget.fetch).toHaveBeenCalledTimes(1)
+
