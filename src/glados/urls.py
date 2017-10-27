@@ -14,9 +14,9 @@ from django.views.i18n import JavaScriptCatalog
 # ----------------------------------------------------------------------------------------------------------------------
 urlpatterns = \
   i18n_patterns(
-    url(r'^glados_jsi18n/django$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='django'),
-        name='js-django-catalog'),
+    url(r'^glados_jsi18n/glados$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
+        name='js-glados-catalog'),
     url(r'^glados_jsi18n/glados_es_generated$',
         JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
         name='js-glados_es_generated-catalog'),
