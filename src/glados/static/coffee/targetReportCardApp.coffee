@@ -10,6 +10,7 @@ class TargetReportCardApp
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     target = TargetReportCardApp.getCurrentTarget()
+    TargetReportCardApp.initTargetNameAndClassification()
 
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
     appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
@@ -34,10 +35,6 @@ class TargetReportCardApp
       ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
     console.log 'query string: ', customQueryString
-
-    new TargetNameAndClassificationView
-      model: target
-      el: $('#TNameClassificationCard')
 
     new TargetComponentsView
       collection: targetComponents
@@ -99,7 +96,9 @@ class TargetReportCardApp
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
-    target.fetch()
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initTargetComponents = ->
 
