@@ -7,9 +7,6 @@ class TargetReportCardApp
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
-
-    target = TargetReportCardApp.getCurrentTarget()
     TargetReportCardApp.initTargetNameAndClassification()
     TargetReportCardApp.initApprovedDrugsClinicalCandidates()
     TargetReportCardApp.initTargetRelations()
@@ -17,12 +14,10 @@ class TargetReportCardApp
     TargetReportCardApp.initBioactivities()
     TargetReportCardApp.initAssociatedAssays()
     TargetReportCardApp.initLigandEfficiencies()
-
-
-    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
-
+    TargetReportCardApp.initAssociatedCompounds()
+    
+    target = TargetReportCardApp.getCurrentTarget()
     target.fetch()
-
 
   # -------------------------------------------------------------
   # Singleton
@@ -126,7 +121,9 @@ class TargetReportCardApp
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: targetChemblID
 
-  @initAssociatedCompoundsContent = (targetChemblID) ->
+  @initAssociatedCompounds = ->
+
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -153,12 +150,6 @@ class TargetReportCardApp
       model: associatedCompounds
 
     associatedCompounds.fetch()
-
-  @initAssociatedCompounds = ->
-
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
-
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
