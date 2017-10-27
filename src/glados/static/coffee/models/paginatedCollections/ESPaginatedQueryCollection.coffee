@@ -197,13 +197,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         es_query.query.bool.filter.push glq.filter_query
       else
         es_query.query.bool.must = @getMeta('searchESQuery')
-
       # Includes the selected facets filter
       if facets_filtered
         filter_query = @getFacetFilterQuery()
-        if _.isArray filter_query and filter_query.length > 0
+        if _.isArray(filter_query) and filter_query.length > 0
           es_query.query.bool.filter = _.union es_query.query.bool.filter, filter_query
-        else if filter_query? and not _.isArray filter_query
+        else if filter_query? and not _.isArray(filter_query)
           es_query.query.bool.filter.push filter_query
 
       if request_facets
