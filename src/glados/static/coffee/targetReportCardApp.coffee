@@ -7,91 +7,52 @@ class TargetReportCardApp
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
-
-    target = new Target
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
+    TargetReportCardApp.initTargetNameAndClassification()
+    TargetReportCardApp.initApprovedDrugsClinicalCandidates()
+    TargetReportCardApp.initTargetRelations()
+    TargetReportCardApp.initTargetComponents()
+    TargetReportCardApp.initBioactivities()
+    TargetReportCardApp.initAssociatedAssays()
+    TargetReportCardApp.initLigandEfficiencies()
+    TargetReportCardApp.initAssociatedCompounds()
     
-    console.log 'appDrugsClinCandsList: ', appDrugsClinCandsList
-
-    targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
-    targetRelations.initURL GlobalVariables.CHEMBL_ID
-
-    targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
-
-    targetComponents.initURL GlobalVariables.CHEMBL_ID
-
-    bioactivities = new TargetAssociatedBioactivities
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    associatedAssays = new TargetAssociatedAssays
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
-      ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
-    ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
-    console.log 'query string: ', customQueryString
-
-    new TargetNameAndClassificationView
-      model: target
-      el: $('#TNameClassificationCard')
-
-    new TargetComponentsView
-      collection: targetComponents
-      el: $('#TComponentsCard')
-
-    new RelationsView
-      collection: targetRelations
-      el: $('#TRelationsCard')
-
-    new ApprovedDrugsClinicalCandidatesView
-      collection: appDrugsClinCandsList
-      el: $('#ApprovedDrugsAndClinicalCandidatesCard')
-
-    new TargetAssociatedBioactivitiesView
-      model: bioactivities
-      el: $('#TAssociatedBioactivitiesCard')
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    new TargetAssociatedAssaysView
-      model: associatedAssays
-      el: $('#TAssociatedAssaysCard')
-
-    new glados.views.Target.LigandEfficienciesView
-      collection: ligandEfficiencies
-      el: $('#TLigandEfficienciesCard')
-      target_chembl_id: GlobalVariables.CHEMBL_ID
-
-    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
-
+    target = TargetReportCardApp.getCurrentTarget()
     target.fetch()
-    appDrugsClinCandsList.fetch()
-    targetRelations.fetch({reset: true})
-    targetComponents.fetch({reset: true})
-    bioactivities.fetch()
-    associatedAssays.fetch()
 
+  # -------------------------------------------------------------
+  # Singleton
+  # -------------------------------------------------------------
+  @getCurrentTarget = ->
+
+    if not @currentTarget?
+
+      targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+      @currentTarget = new Target
+        target_chembl_id: targetChemblID
+      return @currentTarget
+
+    else return @currentTarget
+
+  # -------------------------------------------------------------
+  # Section initialisation
+  # -------------------------------------------------------------
   @initTargetNameAndClassification = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
-    target = new Target
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+    target = TargetReportCardApp.getCurrentTarget()
 
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
-    target.fetch()
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initTargetComponents = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
-    targetComponents.initURL GlobalVariables.CHEMBL_ID
+    targetComponents.initURL targetChemblID
 
     new TargetComponentsView
       collection: targetComponents
@@ -101,10 +62,9 @@ class TargetReportCardApp
 
   @initTargetRelations = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
-    targetRelations.initURL GlobalVariables.CHEMBL_ID
+    targetRelations.initURL targetChemblID
 
     new RelationsView
       collection: targetRelations
@@ -114,10 +74,9 @@ class TargetReportCardApp
 
   @initApprovedDrugsClinicalCandidates = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    appDrugsClinCandsList.initURL(GlobalVariables.CHEMBL_ID)
+    appDrugsClinCandsList.initURL(targetChemblID)
 
     new ApprovedDrugsClinicalCandidatesView
       collection: appDrugsClinCandsList
@@ -127,9 +86,9 @@ class TargetReportCardApp
 
   @initBioactivities = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = new TargetAssociatedBioactivities
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      target_chembl_id: targetChemblID
 
     new TargetAssociatedBioactivitiesView
       model: bioactivities
@@ -139,9 +98,9 @@ class TargetReportCardApp
 
   @initAssociatedAssays = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedAssays = new TargetAssociatedAssays
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      target_chembl_id: targetChemblID
 
     new TargetAssociatedAssaysView
       model: associatedAssays
@@ -152,17 +111,19 @@ class TargetReportCardApp
 
   @initLigandEfficiencies = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-    customQueryString = 'target_chembl_id:' + GlobalVariables.CHEMBL_ID + ' AND' +
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    customQueryString = 'target_chembl_id:' + targetChemblID + ' AND' +
       ' standard_type:(IC50 OR Ki OR EC50 OR Kd) AND _exists_:standard_value AND _exists_:ligand_efficiency'
     ligandEfficiencies = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(customQueryString)
 
     new glados.views.Target.LigandEfficienciesView
       collection: ligandEfficiencies
       el: $('#TLigandEfficienciesCard')
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      target_chembl_id: targetChemblID
 
-  @initAssociatedCompoundsContent = (targetChemblID) ->
+  @initAssociatedCompounds = ->
+
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -189,12 +150,6 @@ class TargetReportCardApp
       model: associatedCompounds
 
     associatedCompounds.fetch()
-
-  @initAssociatedCompounds = ->
-
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-    @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
-
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 
