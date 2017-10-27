@@ -12,9 +12,8 @@ class TargetReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
     TargetReportCardApp.initTargetNameAndClassification()
     TargetReportCardApp.initApprovedDrugsClinicalCandidates()
+    TargetReportCardApp.initTargetRelations()
 
-    targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
-    targetRelations.initURL GlobalVariables.CHEMBL_ID
 
     targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
 
@@ -35,10 +34,6 @@ class TargetReportCardApp
       collection: targetComponents
       el: $('#TComponentsCard')
 
-    new RelationsView
-      collection: targetRelations
-      el: $('#TRelationsCard')
-
     new TargetAssociatedBioactivitiesView
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
@@ -56,8 +51,8 @@ class TargetReportCardApp
     @initAssociatedCompoundsContent(GlobalVariables.CHEMBL_ID)
 
     target.fetch()
-#    appDrugsClinCandsList.fetch()
-    targetRelations.fetch({reset: true})
+
+
     targetComponents.fetch({reset: true})
     bioactivities.fetch()
     associatedAssays.fetch()
@@ -106,10 +101,10 @@ class TargetReportCardApp
 
   @initTargetRelations = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
-    targetRelations.initURL GlobalVariables.CHEMBL_ID
+    targetRelations.initURL targetChemblID
 
     new RelationsView
       collection: targetRelations
