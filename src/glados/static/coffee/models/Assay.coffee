@@ -53,6 +53,8 @@ Assay.COLUMNS = {
     comparator: 'assay_cell_type'
   SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'assay_subcellular_fraction'
+  TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'assay_tax_id'
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -85,3 +87,6 @@ Assay.COLUMNS_SETTINGS = {
     Assay.COLUMNS.ASSAY_TYPE
   ]
 }
+
+Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+  Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL, [Assay.COLUMNS.TAX_ID])

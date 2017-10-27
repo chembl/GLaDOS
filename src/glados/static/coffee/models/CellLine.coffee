@@ -39,6 +39,8 @@ CellLine.COLUMNS = {
     comparator: 'cell_description'
   ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cell_source_organism'
+  TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: 'cell_source_tax_id'
 
 }
 
@@ -66,3 +68,6 @@ CellLine.COLUMNS_SETTINGS = {
     CellLine.COLUMNS.LINCS_ID
   ]
 }
+
+CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+  CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL, [CellLine.COLUMNS.TAX_ID])
