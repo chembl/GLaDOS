@@ -138,6 +138,14 @@ class TargetReportCardApp
           min_columns: 1
           max_columns: 20
           num_columns: 10
+          bucket_links:
+            bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              min_val: 'BUCKET.from'
+              max_val: 'BUCKETS.to'
+            link_generator: Compound.getCompoundsListURL
 
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
@@ -237,9 +245,7 @@ class TargetReportCardApp
               target_chembl_id: 'target_chembl_id'
               min_val: 'BUCKET.from'
               max_val: 'BUCKETS.to'
-
             link_generator: Compound.getCompoundsListURL
-
 
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
