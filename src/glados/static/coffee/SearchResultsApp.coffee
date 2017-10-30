@@ -83,7 +83,9 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
-    doneCallback = ->
+    esCompoundsList = undefined
+    browserView = undefined
+    doneCallback = (finalCall=false)->
 
       if resultsList.allResults.length == 0
         $progressElement.hide()
@@ -91,26 +93,33 @@ class SearchResultsApp
         $noResultsDiv.show()
         return
       $browserContainer.show()
+      browserCover = $browserContainer.find('.div-cover')
+      if finalCall
+        browserCover.hide()
+      else
+        browserCover.show()
+      if not esCompoundsList?
+        esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
+          resultsList.allResults, contextualColumns, customSettings, searchTerm)
+        if resultsList.getMeta('total_all_results') > query_first_n
+          esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
 
-      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-        resultsList.allResults, contextualColumns, customSettings, searchTerm)
-      if resultsList.getMeta('total_all_results') > query_first_n
-        esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
-
-      new glados.views.Browsers.BrowserMenuView
-        collection: esCompoundsList
-        el: $browserContainer
-
+        browserView = new glados.views.Browsers.BrowserMenuView
+          collection: esCompoundsList
+          el: $browserContainer
+      else
+        esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
+        console.warn('Setting meta!', finalCall)
       esCompoundsList.fetch()
 
-    doneCallback = _.debounce(doneCallback, 200)
+    debouncedDoneCallback = _.debounce(doneCallback, 500, true)
 
     query_first_n = 10000
     deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
-    customBaseProgressText='Searching . . . ', customProgressCallback=doneCallback)
+    customBaseProgressText='Searching . . . ', customProgressCallback=debouncedDoneCallback)
 
     # for now, we need to jump from web services to elastic
-    $.when.apply($, deferreds).done(doneCallback).fail((msg) ->
+    $.when.apply($, deferreds).done(doneCallback.bind(@, true)).fail((msg) ->
 
       customExplanation = 'Error while performing the search.'
       $browserContainer.hide()
