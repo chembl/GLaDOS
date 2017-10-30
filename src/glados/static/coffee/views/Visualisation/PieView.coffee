@@ -5,7 +5,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
-    console.log '@model: ', @model
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -21,9 +20,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       $visualisationMessages.html('There is no data to show. ' + @model.get('title'))
       return
 
-    console.log 'render Pie!!'
     buckets =  @model.get('bucket_data')[@xAxisAggName].buckets
-    console.log 'Pie view buckets: ', buckets
 
     values = []
     labels = []
@@ -42,7 +39,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     layout =
       height: width * (3/5)
       width: width
-      title: @model.get('title')
+      title: @config.title
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
