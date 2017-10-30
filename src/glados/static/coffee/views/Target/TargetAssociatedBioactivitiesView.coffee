@@ -14,6 +14,7 @@ TargetAssociatedBioactivitiesView = CardView.extend
 
   render: ->
 
+    console.log 'target chembl id:', @target_chembl_id
     @showCardContent()
     buckets = @model.get('buckets')
 
