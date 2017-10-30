@@ -50,6 +50,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     pieDiv.on('plotly_click', (eventInfo) ->
       clickedKey = eventInfo.points[0].label
-      link = thisView.model.get('buckets_index')[clickedKey].link
+      bucketsIndex =  thisView.model.get('bucket_data')[thisView.xAxisAggName].buckets_index
+      link = bucketsIndex[clickedKey].link
       window.open(link)
     )
