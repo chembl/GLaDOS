@@ -109,7 +109,6 @@ class SearchResultsApp
           el: $browserContainer
       else
         esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
-        console.warn('Setting meta!', finalCall)
       esCompoundsList.fetch()
 
     debouncedDoneCallback = _.debounce(doneCallback, 500, true)
