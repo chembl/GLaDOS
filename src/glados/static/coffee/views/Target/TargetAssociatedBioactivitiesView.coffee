@@ -7,7 +7,7 @@ TargetAssociatedBioactivitiesView = CardView.extend
 
     config =
       x_axis_prop_name: 'types'
-      title: gettext('glados_target__associated_assays_pie_title_base') + @model.get('target_chembl_id')
+      title: gettext('glados_target__associated_activities_pie_title_base') + @model.get('target_chembl_id')
 
     @paginatedView = new PieView
       model: @model
@@ -19,13 +19,13 @@ TargetAssociatedBioactivitiesView = CardView.extend
 
   render: ->
 
-    console.log 'target chembl id:', @target_chembl_id
     @showCardContent()
-    buckets = @model.get('buckets')
 
-    if buckets?
-      if buckets.length > 0
-        $linkToActivities = $(@el).find('.BCK-bioactivities-link')
-        glados.Utils.fillContentForElement $linkToActivities,
-          target_chembl_id: @target_chembl_id
-          url: Activity.getActivitiesListURL('target_chembl_id:' + @target_chembl_id)
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE or \
+    @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+      return
+
+    $linkToActivities = $(@el).find('.BCK-bioactivities-link')
+    glados.Utils.fillContentForElement $linkToActivities,
+      target_chembl_id: @model.get('target_chembl_id')
+      url: Activity.getActivitiesListURL('target_chembl_id:' + @model.get('target_chembl_id'))
