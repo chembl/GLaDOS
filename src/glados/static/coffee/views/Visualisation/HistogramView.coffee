@@ -243,6 +243,10 @@ glados.useNameSpace 'glados.views.Visualisation',
           .attr('y', TITLE_Y)
           .attr('text-anchor', 'middle')
           .classed('title', @config.big_size)
+          .on('click',
+            if @config.title_link_url
+              -> window.open(thisView.config.title_link_url)
+          )
 
       if not @config.big_size
         return
