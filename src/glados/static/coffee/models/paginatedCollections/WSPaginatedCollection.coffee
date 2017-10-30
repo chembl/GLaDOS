@@ -261,7 +261,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       customPageNum = 1
       # 1000 is the maximun page size allowed by the ws
-      customPageSize = 1000
+      customPageSize = 500
       firstURL = @getPaginatedURL(customPageSize, customPageNum)
       baseURL = firstURL.split('/chembl/')[0]
       console.log(firstURL)
@@ -290,7 +290,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         deferredGetPage.done((response) ->
           itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
-          totalRecords = if onlyFirstN? then onlyFirstN else response.page_meta.total_count
+          totalRecords = if onlyFirstN? then Math.min(onlyFirstN, response.page_meta.total_count)\
+            else response.page_meta.total_count
 
           for item in response[itemsKeyName]
             thisView.allResults.push(item)
@@ -304,6 +305,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           nextUrl = response.page_meta.next
           fetchNext = if onlyFirstN? then itemsReceived < onlyFirstN else true
+          thisView.setMeta('total_all_results', response.page_meta.total_count)
           if nextUrl? and fetchNext
             nextUrl = baseURL + nextUrl
             getPage nextUrl

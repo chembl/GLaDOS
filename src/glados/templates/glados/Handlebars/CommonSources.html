@@ -865,7 +865,7 @@
 
       {% verbatim %}
     </div>
-
+  </div>
 
 </script>
 
@@ -940,7 +940,7 @@
   <div class="selection-menu">
     <div class="selection-information">
 
-      <b>{{total_items}} {{entity_label}}</b><br>
+      <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
       {{num_selected}} Selected
     </div>
 

@@ -83,8 +83,8 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
-
-    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=10000,
+    query_first_n = 10000
+    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
     customBaseProgressText='Searching . . . ')
 
     # for now, we need to jump from web services to elastic
@@ -99,6 +99,8 @@ class SearchResultsApp
 
       esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
         resultsList.allResults, contextualColumns, customSettings, searchTerm)
+      if resultsList.getMeta('total_all_results') > query_first_n
+        esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
 
       new glados.views.Browsers.BrowserMenuView
         collection: esCompoundsList
