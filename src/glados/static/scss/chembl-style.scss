@@ -2226,10 +2226,10 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
-.iframe-cover-wrapper {
+.div-cover-wrapper {
   display: block;
   position: relative;
-  .iframe-cover {
+  .div-cover {
     position: absolute;
     top: 0 !important;
     left: 0;
@@ -2259,7 +2259,7 @@ $marvin-size-fullscreen: 91vh;
   }
 
   .chembl-modal-cover{
-    @extend .iframe-cover;
+    @extend .div-cover;
     display: block;
     z-index: 99999;
   }
@@ -2849,7 +2849,7 @@ span.badge-primary-color-no-float {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .iframe-cover-wrapper{
+      .div-cover-wrapper{
         width: 100%;
         flex-grow: 10;
         flex-shrink: 0;
