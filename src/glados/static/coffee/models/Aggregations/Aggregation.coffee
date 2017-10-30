@@ -238,6 +238,7 @@ glados.useNameSpace 'glados.models.Aggregations',
           bucketsData[aggKey] =
             buckets: currentBuckets
             num_columns: currentNumCols
+            buckets_index: _.indexBy(currentBuckets, 'key')
 
       return bucketsData
 

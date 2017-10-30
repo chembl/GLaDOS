@@ -243,5 +243,15 @@ describe 'Aggregation', ->
 
       expect(parsedObj.types.num_columns).toBe(Object.keys(bucketsShouldBe).length)
 
+    it 'generates a bucket index', ->
+
+      parsedObj = associatedBioactivities.parse(bucketsTestData)
+      bucketsShouldBe = bucketsTestData.aggregations.types.buckets
+      bucketIndexGot = parsedObj.types.buckets_index
+
+      for bucketShouldBe in bucketsShouldBe
+        keyShouldBe = bucketShouldBe.key
+        expect(bucketIndexGot[keyShouldBe].key).toBe(keyShouldBe)
+
 
 
