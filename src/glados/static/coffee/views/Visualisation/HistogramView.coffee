@@ -96,7 +96,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       @$vis_elem.empty()
 
-
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
       maxCategories = @config.max_categories

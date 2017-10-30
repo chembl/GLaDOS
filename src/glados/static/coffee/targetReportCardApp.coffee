@@ -98,10 +98,8 @@ class TargetReportCardApp
   @initAssociatedAssays = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    associatedAssays = new TargetAssociatedAssays
-      target_chembl_id: targetChemblID
+    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(targetChemblID)
 
-    console.log 'associatedAssays: ', associatedAssays
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
@@ -270,3 +268,37 @@ class TargetReportCardApp
       aggs_config: aggsConfig
 
     return bioactivities
+
+  @getAssociatedAssaysAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'assay_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
+                                    'AND assay_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Assay.getAssaysListURL
+
+    associatedAssays = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return associatedAssays

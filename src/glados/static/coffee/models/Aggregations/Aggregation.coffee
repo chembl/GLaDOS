@@ -377,6 +377,9 @@ glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL = glados.models.pagina
 glados.models.Aggregations.Aggregation.TARGET_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_target/_search'
 
+glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
++ '/chembl_assay/_search'
+
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'
   LOADING_MIN_MAX: 'LOADING_MIN_MAX'
