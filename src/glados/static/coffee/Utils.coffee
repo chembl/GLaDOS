@@ -3,7 +3,7 @@ glados.useNameSpace 'glados',
     getFormattedNumber: (numberToFormat)->
       if numberToFormat < -Math.pow(10, 20)
         return numberToFormat.toExponential()
-      if numberToFormat < Math.pow(10, 6)
+      if numberToFormat < Math.pow(10, 7)
         return numeral(numberToFormat).format('0,[.]00')
       return numeral(numberToFormat).format('0.[0000]e+0')
 

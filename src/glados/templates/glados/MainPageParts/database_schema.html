@@ -7,10 +7,8 @@
     <a target="_blank" href="{% static 'chembl_schema_diagrams/src/schema.html' %}">Open in full screen</a>
   </p>
 
-  <div class="iframe-cover-wrapper">
+  <div class="div-cover-wrapper">
 
-    <img class="iframe-cover" src="{% static 'img/iframe_cover.svg' %}"
-         onclick="this.style.display = 'none';">
 
 
     <iframe id="if_database_schema"
@@ -18,6 +16,8 @@
     <!--src="{% static 'chembl_schema_diagrams/src/schema.html' %}"-->
     <!-- the source of this iframe is hanldled by the lazy iframes loader! -->
 
+    <div class="div-cover"
+         onclick="this.style.display = 'none';"></div>
   </div>
 
 </div>

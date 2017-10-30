@@ -248,7 +248,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # I got everything. The idea is that if the results have been already loaded it immediately returns a resolved deferred
     # without requesting again to the server.
     # you can use a progress element to show the progress if you want.
-    getAllResults: ($progressElement, askingForOnlySelected=false, onlyFirstN=null, customBaseProgressText) ->
+    getAllResults: ($progressElement, askingForOnlySelected=false, onlyFirstN=null, customBaseProgressText,
+      customProgressCallback) ->
 
       # check if I already have all the results and they are valid
       if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
@@ -261,18 +262,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       customPageNum = 1
       # 1000 is the maximun page size allowed by the ws
-      customPageSize = 1000
+      customPageSize = 500
       firstURL = @getPaginatedURL(customPageSize, customPageNum)
       baseURL = firstURL.split('/chembl/')[0]
-      console.log(firstURL)
+
+
+
 
       # this is to keep the same strucutre as the function for the elasticsearch collections
       baseDeferred = jQuery.Deferred()
       deferreds = [baseDeferred]
       @allResults = []
       thisView = @
-
-      getPage = (url) ->
+      getPage = (url, first = false) ->
         # Uses POST if set in the meta
         use_post = thisView.getMeta('use_post')
         deferredGetPage = null
@@ -290,20 +292,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         deferredGetPage.done((response) ->
           itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
-          totalRecords = if onlyFirstN? then onlyFirstN else response.page_meta.total_count
+          totalRecords = if onlyFirstN? then Math.min(onlyFirstN, response.page_meta.total_count)\
+            else response.page_meta.total_count
 
           for item in response[itemsKeyName]
             thisView.allResults.push(item)
           itemsReceived = thisView.allResults.length
           progress = parseInt((itemsReceived / totalRecords) * 10000)
-          if $progressElement? and (progress % 10) == 0
-            progress /= 100.0
-            $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
-              percentage: progress
-              custom_base_progress_text: customBaseProgressText
+          customBaseProgressText = 'Found ' + glados.Utils.getFormattedNumber(response.page_meta.total_count) + \
+              '. Downloading' +\
+              if onlyFirstN? and totalRecords < response.page_meta.total_count then ' first '+\
+                glados.Utils.getFormattedNumber(onlyFirstN) else ''
+          customBaseProgressText += ' . . . '
+          progress /= 100.0
+          $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
+            percentage: progress
+            custom_base_progress_text: customBaseProgressText
+          if customProgressCallback?
+            customProgressCallback()
 
           nextUrl = response.page_meta.next
           fetchNext = if onlyFirstN? then itemsReceived < onlyFirstN else true
+          thisView.setMeta('total_all_results', response.page_meta.total_count)
           if nextUrl? and fetchNext
             nextUrl = baseURL + nextUrl
             getPage nextUrl
@@ -312,7 +322,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ).fail( (xhr, status, error) ->
           baseDeferred.reject(xhr, status, error)
         )
-      getPage(firstURL)
+      getPage(firstURL, true)
 
       setValidDownload = $.proxy((-> @DOWNLOADED_ITEMS_ARE_VALID = true; @DOWNLOAD_ERROR_STATE = false), @)
       $.when.apply($, deferreds).done ->
