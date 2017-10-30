@@ -83,12 +83,7 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
-    query_first_n = 10000
-    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
-    customBaseProgressText='Searching . . . ')
-
-    # for now, we need to jump from web services to elastic
-    $.when.apply($, deferreds).done(->
+    doneCallback = ->
 
       if resultsList.allResults.length == 0
         $progressElement.hide()
@@ -107,7 +102,15 @@ class SearchResultsApp
         el: $browserContainer
 
       esCompoundsList.fetch()
-    ).fail((msg) ->
+
+    doneCallback = _.debounce(doneCallback, 200)
+
+    query_first_n = 10000
+    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
+    customBaseProgressText='Searching . . . ', customProgressCallback=doneCallback)
+
+    # for now, we need to jump from web services to elastic
+    $.when.apply($, deferreds).done(doneCallback).fail((msg) ->
 
       customExplanation = 'Error while performing the search.'
       $browserContainer.hide()
