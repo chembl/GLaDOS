@@ -87,20 +87,13 @@ class TargetReportCardApp
   @initBioactivities = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    bioactivities = new TargetAssociatedBioactivities
-      target_chembl_id: targetChemblID
-
-    bioactivitiesNew = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(targetChemblID)
+    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(targetChemblID)
 
     new TargetAssociatedBioactivitiesView
-      model: bioactivitiesNew
+      model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
 
-    console.log 'bioactivities: ', bioactivities
-    console.log 'bioactivitiesNew: ', bioactivitiesNew
-
     bioactivities.fetch()
-    bioactivitiesNew.fetch()
 
   @initAssociatedAssays = ->
 
