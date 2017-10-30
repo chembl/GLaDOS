@@ -87,7 +87,7 @@ class TargetReportCardApp
   @initBioactivities = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(targetChemblID)
+    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(targetChemblID)
 
     new TargetAssociatedBioactivitiesView
       model: bioactivities
@@ -101,6 +101,7 @@ class TargetReportCardApp
     associatedAssays = new TargetAssociatedAssays
       target_chembl_id: targetChemblID
 
+    console.log 'associatedAssays: ', associatedAssays
     new TargetAssociatedAssaysView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
@@ -124,7 +125,7 @@ class TargetReportCardApp
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
-    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAggConfig(targetChemblID)
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(targetChemblID)
 
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
@@ -143,7 +144,7 @@ class TargetReportCardApp
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(chemblID)
+    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true)
@@ -169,7 +170,7 @@ class TargetReportCardApp
 
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
-    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAggConfig(chemblID, minCols=8,
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
       maxCols=8, defaultCols=8)
 
     config =
@@ -204,7 +205,7 @@ class TargetReportCardApp
   # --------------------------------------------------------------------------------------------------------------------
   # AggregationsConfig
   # --------------------------------------------------------------------------------------------------------------------
-  @getAssociatedCompoundsAggConfig = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
+  @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -236,7 +237,7 @@ class TargetReportCardApp
 
     return associatedCompounds
 
-  @getAssociatedBioactivitiesAggConfig = (chemblID) ->
+  @getAssociatedBioactivitiesAgg = (chemblID) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
