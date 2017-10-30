@@ -126,13 +126,7 @@ class TargetReportCardApp
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
-    [queryConfig, aggsConfig] = TargetReportCardApp.getAssociatedCompoundsAggConfig()
-
-    associatedCompounds = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
-      query_config: queryConfig
-      target_chembl_id: targetChemblID
-      aggs_config: aggsConfig
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAggConfig(targetChemblID)
 
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
@@ -178,14 +172,8 @@ class TargetReportCardApp
 
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
-    [queryConfig, aggsConfig] = TargetReportCardApp.getAssociatedCompoundsAggConfig(minCols=8, maxCols=8,
-      defaultCols=8)
-
-    associatedCompounds = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
-      query_config: queryConfig
-      target_chembl_id: chemblID
-      aggs_config: aggsConfig
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAggConfig(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
 
     config =
       max_categories: 8
@@ -219,7 +207,7 @@ class TargetReportCardApp
   # --------------------------------------------------------------------------------------------------------------------
   # AggregationsConfig
   # --------------------------------------------------------------------------------------------------------------------
-  @getAssociatedCompoundsAggConfig = (minCols=1, maxCols=20, defaultCols=10) ->
+  @getAssociatedCompoundsAggConfig = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -243,7 +231,13 @@ class TargetReportCardApp
               max_val: 'BUCKETS.to'
             link_generator: Compound.getCompoundsListURL
 
-    return [queryConfig, aggsConfig]
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return associatedCompounds
 
   @getAssociatedBioactivitiesAggConfig = (chemblID) ->
 
