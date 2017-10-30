@@ -5,9 +5,14 @@ TargetAssociatedBioactivitiesView = CardView.extend
     @target_chembl_id = arguments[0].target_chembl_id
     @model.on 'change', @render, @
     @resource_type = 'Target'
+
+    config =
+      x_axis_prop_name: 'types'
+
     @paginatedView = new PieView
       model: @model
       el: $(@el).find('.BCK-Main-Pie-container')
+      config: config
 
     @initEmbedModal('bioactivities')
     @activateModals()

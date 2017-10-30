@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     initialize: ->
       @config = arguments[0].config
-
       @model.on 'change:state', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       @setUpResponsiveRender()

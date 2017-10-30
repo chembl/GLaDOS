@@ -90,12 +90,17 @@ class TargetReportCardApp
     bioactivities = new TargetAssociatedBioactivities
       target_chembl_id: targetChemblID
 
+    bioactivitiesNew = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(targetChemblID)
+
     new TargetAssociatedBioactivitiesView
-      model: bioactivities
+      model: bioactivitiesNew
       el: $('#TAssociatedBioactivitiesCard')
 
     console.log 'bioactivities: ', bioactivities
+    console.log 'bioactivitiesNew: ', bioactivitiesNew
+
     bioactivities.fetch()
+    bioactivitiesNew.fetch()
 
   @initAssociatedAssays = ->
 
@@ -144,7 +149,6 @@ class TargetReportCardApp
     target.fetch()
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
-
 
     bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAggConfig(chemblID)
 

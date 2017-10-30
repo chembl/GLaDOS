@@ -3,17 +3,27 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = arguments[0].config
+    @xAxisAggName = @config.x_axis_prop_name
+    console.log '@model: ', @model
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
 
   render: ->
 
-    buckets =  @model.get('buckets')
-    if buckets.length == 0
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+
       $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
       $visualisationMessages.html('There is no data to show. ' + @model.get('title'))
       return
+
+    console.log 'render Pie!!'
+    buckets =  @model.get('bucket_data')[@xAxisAggName].buckets
+    console.log 'Pie view buckets: ', buckets
 
     values = []
     labels = []
