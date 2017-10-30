@@ -2286,6 +2286,22 @@ $marvin-size-fullscreen: 91vh;
     padding-bottom: 10px !important;
   }
 
+  .search-bar{
+    background-color: $primary-color;
+    .search-input-wrapper{
+      background-color: white;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    .advanced-search-wrapper{
+      background-color: white;
+    }
+
+    .draw-and-search-wrapper{
+      background-color: white;
+    }
+  }
+
 }
 
 .search-banner-results {
