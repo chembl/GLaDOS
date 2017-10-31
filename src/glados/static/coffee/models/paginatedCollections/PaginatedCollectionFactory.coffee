@@ -168,6 +168,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQueryString=true)
       return list
 
+    getNewESAssaysList: (customQueryString='*') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.ASSAY,
+        customQueryString, useCustomQueryString=true)
+      return list
+
     getNewAssaysList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)

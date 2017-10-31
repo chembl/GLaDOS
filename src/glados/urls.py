@@ -129,7 +129,7 @@ urlpatterns += [
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
 
   url(r'^assays/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/browseAssays.html"), ),
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseAssays.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Documents
