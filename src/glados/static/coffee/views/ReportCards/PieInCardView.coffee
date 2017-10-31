@@ -12,7 +12,6 @@ glados.useNameSpace 'glados.views.ReportCards',
         el: $(@el).find('.BCK-Main-Pie-container')
         config: @config.pie_config
 
-      console.log '@model ', @model
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
 
