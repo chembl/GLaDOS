@@ -3,15 +3,11 @@
 {% block title %}Browse Assays{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container main-container">
   <h2>
     Browse Assays
   </h2>
-
-   <div id="BCK-AssaysSearchResults">
-     {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
-  </div>
-
+  {% include "glados/Browsers/DefaultBrowserContent.html" %}
 </div>
 {% endblock %}
 

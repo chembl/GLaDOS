@@ -3,7 +3,11 @@ class AssaysBrowserApp
   @init = ->
 
     filter = URLProcessor.getFilter()
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAssaysList(filter)
-    $elem = $('#BCK-AssaysSearchResults')
-    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(list, $elem)
-    list.fetch()
+    assays = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESAssaysList(filter)
+
+    $browserContainer = $('.BCK-BrowserContainer')
+    new glados.views.Browsers.BrowserMenuView
+      collection: assays
+      el: $browserContainer
+
+    assays.fetch()
