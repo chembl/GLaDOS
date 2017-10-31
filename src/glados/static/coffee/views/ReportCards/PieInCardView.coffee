@@ -3,32 +3,29 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
+      @config = arguments[0].config
       @model.on 'change', @render, @
-      @resource_type = 'Target'
-
-      config =
-        x_axis_prop_name: 'types'
-        title: gettext('glados_target__associated_activities_pie_title_base') + @model.get('target_chembl_id')
+      @resource_type = @config.resource_type
 
       @paginatedView = new PieView
         model: @model
         el: $(@el).find('.BCK-Main-Pie-container')
-        config: config
+        config: @config.pie_config
 
-      @initEmbedModal('bioactivities')
+      @initEmbedModal(@config.embed_section_name)
       @activateModals()
 
-  render: ->
+    render: ->
 
-    @showCardContent()
+      @showCardContent()
 
-    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE or \
-    @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
-      return
+      if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE or \
+      @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+        return
 
-    $linkToActivities = $(@el).find('.BCK-bioactivities-link')
-    glados.Utils.fillContentForElement $linkToActivities,
-      target_chembl_id: @model.get('target_chembl_id')
-      url: Activity.getActivitiesListURL('target_chembl_id:' + @model.get('target_chembl_id'))
+      $linkToActivities = $(@el).find('.BCK-all-sources-link')
+      glados.Utils.fillContentForElement $linkToActivities,
+        link_text: @config.link_to_all.link_text
+        url: @config.link_to_all.url
 
 

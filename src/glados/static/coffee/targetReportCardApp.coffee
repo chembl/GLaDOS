@@ -89,9 +89,22 @@ class TargetReportCardApp
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(targetChemblID)
 
-    new TargetAssociatedBioactivitiesView
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_target_name')
+      link_to_all:
+        link_text: 'See all bioactivities for target ' + targetChemblID + ' used in this visualisation.'
+        url: Activity.getActivitiesListURL('target_chembl_id:' + targetChemblID)
+
+    new glados.views.ReportCards.PieInCardView
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
+      config: viewConfig
+      embed_section_name: 'bioactivities'
 
     bioactivities.fetch()
 

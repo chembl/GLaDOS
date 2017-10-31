@@ -231,3 +231,9 @@ msgstr "ChEMBL Assays for Target "
 
 msgid "glados_target__associated_activities_pie_title_base"
 msgstr "ChEMBL Activity Types for Target "
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Main Entities
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_entities_target_name"
+msgstr "Target"
