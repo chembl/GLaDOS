@@ -96,6 +96,8 @@ class TargetReportCardApp
     viewConfig =
       pie_config: pieConfig
       resource_type: gettext('glados_entities_target_name')
+      embed_section_name: 'bioactivities'
+      embed_identifier: targetChemblID
       link_to_all:
         link_text: 'See all bioactivities for target ' + targetChemblID + ' used in this visualisation.'
         url: Activity.getActivitiesListURL('target_chembl_id:' + targetChemblID)
@@ -104,7 +106,6 @@ class TargetReportCardApp
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
       config: viewConfig
-      embed_section_name: 'bioactivities'
 
     bioactivities.fetch()
 
@@ -113,10 +114,21 @@ class TargetReportCardApp
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(targetChemblID)
 
-    new TargetAssociatedAssaysView
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_target_name')
+      link_to_all:
+        link_text: 'See all assays for target ' + targetChemblID + ' used in this visualisation.'
+        url: Assay.getAssaysListURL('target_chembl_id:' + targetChemblID)
+
+    new glados.views.ReportCards.PieInCardView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      config: viewConfig
 
     associatedAssays.fetch()
 
