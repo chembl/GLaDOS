@@ -2256,11 +2256,14 @@ $marvin-size-fullscreen: 91vh;
       top: 1rem;
       right: 1rem;
     }
-    .iframe-centered{
+    .div-cover-centered{
       position: absolute;
       top: 15%;
       text-align: center;
       width: 100%;
+      &.top-aligned{
+        top: 1%;
+      }
     }
   }
 
