@@ -57,6 +57,7 @@ class TargetReportCardApp
     new TargetComponentsView
       collection: targetComponents
       el: $('#TComponentsCard')
+      target_chembl_id: targetChemblID
 
     targetComponents.fetch({reset: true})
 
@@ -69,6 +70,7 @@ class TargetReportCardApp
     new RelationsView
       collection: targetRelations
       el: $('#TRelationsCard')
+      target_chembl_id: targetChemblID
 
     targetRelations.fetch({reset: true})
 
@@ -153,6 +155,7 @@ class TargetReportCardApp
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
       model: associatedCompounds
+      target_chembl_id: targetChemblID
 
     associatedCompounds.fetch()
 

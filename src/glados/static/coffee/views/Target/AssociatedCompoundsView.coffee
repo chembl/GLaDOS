@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.Target',
       @model.set('progress_elem', $progressElem)
 
       @resource_type = 'Target'
-      @initEmbedModal('associated_compounds')
+      @initEmbedModal('associated_compounds', arguments[0].target_chembl_id)
       @activateModals()
 
       config =

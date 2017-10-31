@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.views.Target',
       @target_chembl_id = arguments[0].target_chembl_id
 
       @resource_type = 'Target'
-      @initEmbedModal('ligand_efficiencies')
+      @initEmbedModal('ligand_efficiencies', arguments[0].target_chembl_id)
       @activateModals()
 
       config = {

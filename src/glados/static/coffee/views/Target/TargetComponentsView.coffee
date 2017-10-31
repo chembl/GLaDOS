@@ -10,7 +10,7 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
       @collection, @el, customRenderEvent=undefined, disableColumnsSelection=true)
 
-    @initEmbedModal('components')
+    @initEmbedModal('components', arguments[0].target_chembl_id)
     @activateModals()
 
   events: ->
