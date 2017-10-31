@@ -74,6 +74,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
 
+      console.log 'columns handler: ', @columnsHandler
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @

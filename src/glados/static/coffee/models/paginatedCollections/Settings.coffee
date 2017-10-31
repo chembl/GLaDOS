@@ -524,13 +524,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: TargetRelation.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: TargetRelation.ID_COLUMN
+            Default: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Cards:
-            Default: TargetRelation.ID_COLUMN
+            Default: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Infinite:
-            Default: TargetRelation.ID_COLUMN
+            Default: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
-            Default: TargetRelation.ID_COLUMN
+            Default: TargetRelation.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       TARGET_COMPONENTS_LIST:
         MODEL: TargetComponent
         DEFAULT_PAGE_SIZE: 5
