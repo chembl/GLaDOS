@@ -7,16 +7,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if defaultColumns?
         for col in defaultColumns
           col.show = true
+      else
+        defaultColumns = []
 
       contextualProperties = @get('contextual_properties')
       if contextualProperties?
         for col in contextualProperties
           col.show = true
+      else
+        contextualProperties = []
 
       additionalColumns = @get('additional_columns')
       if additionalColumns?
         for col in additionalColumns
           col.show = false
+      else
+        additionalColumns = []
 
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
       allColumns ?= []

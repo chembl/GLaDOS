@@ -110,7 +110,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Fill Templates
     # ------------------------------------------------------------------------------------------------------------------
     fillTemplates: ->
-      console.log 'fillTemplates: '
 
       $elem = $(@el).find('.BCK-items-container')
       allColumns = @getAllColumns()

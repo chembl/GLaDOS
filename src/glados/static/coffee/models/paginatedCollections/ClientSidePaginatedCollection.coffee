@@ -193,9 +193,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         @setMeta('search_dict', search_dict)
 
-    getAllColumns: ->
-      console.log 'get all columns, ', @
-      @getMeta('columns')
+    getAllColumns: -> @getMeta('columns')
 
 #      defaultColumns = @getMeta('columns')
 #      contextualColumns = @getMeta('contextual_properties')
