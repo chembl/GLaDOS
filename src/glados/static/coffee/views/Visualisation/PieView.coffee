@@ -3,17 +3,24 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = arguments[0].config
+    @xAxisAggName = @config.x_axis_prop_name
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
 
   render: ->
 
-    buckets =  @model.get('buckets')
-    if buckets.length == 0
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+
       $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
       $visualisationMessages.html('There is no data to show. ' + @model.get('title'))
       return
+
+    buckets =  @model.get('bucket_data')[@xAxisAggName].buckets
 
     values = []
     labels = []
@@ -32,7 +39,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     layout =
       height: width * (3/5)
       width: width
-      title: @model.get('title')
+      title: @config.title
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
@@ -40,6 +47,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     pieDiv.on('plotly_click', (eventInfo) ->
       clickedKey = eventInfo.points[0].label
-      link = thisView.model.get('buckets_index')[clickedKey].link
+      bucketsIndex =  thisView.model.get('bucket_data')[thisView.xAxisAggName].buckets_index
+      link = bucketsIndex[clickedKey].link
       window.open(link)
     )

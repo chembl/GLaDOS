@@ -57,6 +57,7 @@ class TargetReportCardApp
     new TargetComponentsView
       collection: targetComponents
       el: $('#TComponentsCard')
+      target_chembl_id: targetChemblID
 
     targetComponents.fetch({reset: true})
 
@@ -69,6 +70,7 @@ class TargetReportCardApp
     new RelationsView
       collection: targetRelations
       el: $('#TRelationsCard')
+      target_chembl_id: targetChemblID
 
     targetRelations.fetch({reset: true})
 
@@ -87,25 +89,48 @@ class TargetReportCardApp
   @initBioactivities = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    bioactivities = new TargetAssociatedBioactivities
-      target_chembl_id: targetChemblID
+    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(targetChemblID)
 
-    new TargetAssociatedBioactivitiesView
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_target_name')
+      embed_section_name: 'bioactivities'
+      embed_identifier: targetChemblID
+      link_to_all:
+        link_text: 'See all bioactivities for target ' + targetChemblID + ' used in this visualisation.'
+        url: Activity.getActivitiesListURL('target_chembl_id:' + targetChemblID)
+
+    new glados.views.ReportCards.PieInCardView
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
+      config: viewConfig
 
     bioactivities.fetch()
 
   @initAssociatedAssays = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    associatedAssays = new TargetAssociatedAssays
-      target_chembl_id: targetChemblID
+    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(targetChemblID)
 
-    new TargetAssociatedAssaysView
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_target_name')
+      link_to_all:
+        link_text: 'See all assays for target ' + targetChemblID + ' used in this visualisation.'
+        url: Assay.getAssaysListURL('target_chembl_id:' + targetChemblID)
+
+    new glados.views.ReportCards.PieInCardView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
-      target_chembl_id: GlobalVariables.CHEMBL_ID
+      config: viewConfig
 
     associatedAssays.fetch()
 
@@ -125,29 +150,12 @@ class TargetReportCardApp
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'target_chembl_id'
-      fields: ['_metadata.related_targets.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        x_axis_agg:
-          field: 'molecule_properties.full_mwt'
-          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
-
-    associatedCompounds = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
-      query_config: queryConfig
-      target_chembl_id: targetChemblID
-      aggs_config: aggsConfig
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(targetChemblID)
 
     new glados.views.Target.AssociatedCompoundsView
       el: $('#TAssociatedCompoundProperties')
       model: associatedCompounds
+      target_chembl_id: targetChemblID
 
     associatedCompounds.fetch()
 
@@ -162,36 +170,7 @@ class TargetReportCardApp
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
-      template_data:
-        target_chembl_id: 'target_chembl_id'
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'standard_type'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
-                                    'AND standard_type:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              target_chembl_id: 'target_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Activity.getActivitiesListURL
-
-
-    bioactivities = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
-      query_config: queryConfig
-      target_chembl_id: chemblID
-      aggs_config: aggsConfig
+    bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true)
@@ -217,35 +196,8 @@ class TargetReportCardApp
 
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'target_chembl_id'
-      fields: ['_metadata.related_targets.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        x_axis_agg:
-          field: 'molecule_properties.full_mwt'
-          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 8
-          max_columns: 8
-          num_columns: 8
-          bucket_links:
-            bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
-              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
-            template_data:
-              target_chembl_id: 'target_chembl_id'
-              min_val: 'BUCKET.from'
-              max_val: 'BUCKETS.to'
-
-            link_generator: Compound.getCompoundsListURL
-
-
-    associatedCompounds = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
-      query_config: queryConfig
-      target_chembl_id: chemblID
-      aggs_config: aggsConfig
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
 
     config =
       max_categories: 8
@@ -276,4 +228,105 @@ class TargetReportCardApp
     else if histogramType == 'compounds'
       TargetReportCardApp.initMiniCompoundsHistogram($containerElem, targetChemblID)
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # AggregationsConfig
+  # --------------------------------------------------------------------------------------------------------------------
+  @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'target_chembl_id'
+      fields: ['_metadata.related_targets.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 1
+          max_columns: 20
+          num_columns: 10
+          bucket_links:
+            bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              min_val: 'BUCKET.from'
+              max_val: 'BUCKETS.to'
+            link_generator: Compound.getCompoundsListURL
+
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return associatedCompounds
+
+  @getAssociatedBioactivitiesAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'standard_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Activity.getActivitiesListURL
+
+    bioactivities = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return bioactivities
+
+  @getAssociatedAssaysAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'target_chembl_id:{{target_chembl_id}}'
+      template_data:
+        target_chembl_id: 'target_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'assay_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
+                                    'AND assay_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              target_chembl_id: 'target_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Assay.getAssaysListURL
+
+    associatedAssays = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return associatedAssays

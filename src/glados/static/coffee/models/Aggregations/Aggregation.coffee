@@ -238,6 +238,7 @@ glados.useNameSpace 'glados.models.Aggregations',
           bucketsData[aggKey] =
             buckets: currentBuckets
             num_columns: currentNumCols
+            buckets_index: _.indexBy(currentBuckets, 'key')
 
       return bucketsData
 
@@ -375,6 +376,9 @@ glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL = glados.models.pagina
 
 glados.models.Aggregations.Aggregation.TARGET_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_target/_search'
+
+glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
++ '/chembl_assay/_search'
 
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'
