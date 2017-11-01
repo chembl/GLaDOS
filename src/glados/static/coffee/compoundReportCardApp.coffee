@@ -6,7 +6,7 @@ class CompoundReportCardApp
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
-    compound = new Compound({molecule_chembl_id: GlobalVariables.CHEMBL_ID})
+    compound = CompoundReportCardApp.getCurrentCompound()
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
@@ -64,6 +64,20 @@ class CompoundReportCardApp
     ButtonsHelper.initExpendableMenus()
 
     @initPieView()
+
+  # -------------------------------------------------------------
+  # Singleton
+  # -------------------------------------------------------------
+  @getCurrentCompound = ->
+
+    if not @currentCompound?
+
+      chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+      @currentCompound = new Compound
+        molecule_chembl_id: chemblID
+      return @currentCompound
+
+    else return @currentCompound
 
   # -------------------------------------------------------------
   # Specific section initialization
