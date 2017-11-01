@@ -86,7 +86,7 @@ class SearchResultsApp
     esCompoundsList = undefined
     browserView = undefined
     query_first_n = 10000
-    doneCallback = (finalCall=false)->
+    doneCallback = (firstCall=false, finalCall=false)->
 
       if resultsList.allResults.length == 0
         $progressElement.hide()
@@ -95,13 +95,11 @@ class SearchResultsApp
         return
       $browserContainer.show()
       browserCover = $browserContainer.find('.div-cover')
-      if finalCall
-        browserCover.hide()
-      else
-        browserCover.show()
+      browserCover.show()
       if not esCompoundsList?
         esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
           resultsList.allResults, contextualColumns, customSettings, searchTerm)
+        esCompoundsList.enableStreamingMode()
         if resultsList.getMeta('total_all_results') > query_first_n
           esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
         browserView = new glados.views.Browsers.BrowserMenuView
@@ -109,14 +107,21 @@ class SearchResultsApp
           el: $browserContainer
       else
         esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
-      esCompoundsList.fetch()
+
+      fetchDeferred = esCompoundsList.fetch()
+      if firstCall or finalCall
+        esCompoundsList.loadFacetGroups()
+      if finalCall
+        fetchDeferred.then ->
+          browserCover.hide()
+          esCompoundsList.disableStreamingMode()
 
     debouncedDoneCallback = _.debounce(doneCallback, 500, true)
     deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
     customBaseProgressText='Searching . . . ', customProgressCallback=debouncedDoneCallback)
 
     # for now, we need to jump from web services to elastic
-    $.when.apply($, deferreds).done(doneCallback.bind(@, true)).fail((msg) ->
+    $.when.apply($, deferreds).done(doneCallback.bind(@, false, true)).fail((msg) ->
 
       customExplanation = 'Error while performing the search.'
       $browserContainer.hide()
