@@ -20,7 +20,7 @@ CompoundNameClassificationView = CardView.extend
     # until here, all the visible content has been rendered.
     @showCardContent()
 
-    @initEmbedModal('name_and_classification')
+    @initEmbedModal('name_and_classification', @model.get('molecule_chembl_id'))
     @activateTooltips()
     @activateModals()
 

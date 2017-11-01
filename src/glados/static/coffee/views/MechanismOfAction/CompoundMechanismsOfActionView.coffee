@@ -8,6 +8,7 @@ CompoundMechanismsOfActionView = CardView.extend
     @collection.on 'reset', @render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
+    @molecule_chembl_id = arguments[0].molecule_chembl_id
 
   render: ->
 
@@ -20,7 +21,7 @@ CompoundMechanismsOfActionView = CardView.extend
     # until here, all the visible content has been rendered.
     @showCardContent()
 
-    @initEmbedModal('mechanism_of_action')
+    @initEmbedModal('mechanism_of_action', @molecule_chembl_id)
     @activateTooltips()
     @activateModals()
 

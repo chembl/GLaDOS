@@ -21,7 +21,7 @@ CompoundRepresentationsView = CardView.extend
     # until here, all the visible content has been rendered.
     @showCardContent()
 
-    @initEmbedModal('representations')
+    @initEmbedModal('representations',  @model.get('molecule_chembl_id'))
     @activateTooltips()
     @activateModals()
 

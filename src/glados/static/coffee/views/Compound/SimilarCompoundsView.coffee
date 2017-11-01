@@ -3,6 +3,7 @@
 SimilarCompoundsView = CardView.extend
 
   initialize: ->
+    console.log 'init similar comps view: ', arguments
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
@@ -10,7 +11,7 @@ SimilarCompoundsView = CardView.extend
 
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
 
-    @initEmbedModal('similar')
+    @initEmbedModal('similar', arguments[0].molecule_chembl_id)
     @activateModals()
     @render()
 
