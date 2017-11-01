@@ -19,10 +19,7 @@ class CompoundReportCardApp
 
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
-
-    new CompoundCalculatedParentPropertiesView
-        model: compound
-        el: $('#CalculatedParentPropertiesCard')
+    CompoundReportCardApp.initCalculatedCompoundParentProperties()
 
     new CompoundMechanismsOfActionView
         collection: mechanismOfActionList
@@ -111,15 +108,14 @@ class CompoundReportCardApp
 
   @initCalculatedCompoundParentProperties = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-    compound = new Compound
-      molecule_chembl_id: CHEMBL_ID
+    compound = CompoundReportCardApp.getCurrentCompound()
 
     new CompoundCalculatedParentPropertiesView
         model: compound
         el: $('#CalculatedParentPropertiesCard')
 
-    compound.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initMechanismOfAction = ->
 
