@@ -313,7 +313,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           fetchNext = if onlyFirstN? then itemsReceived < onlyFirstN else true
           thisView.setMeta('total_all_results', response.page_meta.total_count)
           if customProgressCallback?
-            customProgressCallback()
+            customProgressCallback(first)
           if nextUrl? and fetchNext
             nextUrl = baseURL + nextUrl
             getPage nextUrl

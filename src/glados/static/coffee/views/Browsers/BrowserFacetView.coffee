@@ -223,7 +223,6 @@ glados.useNameSpace 'glados.views.Browsers',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     render: ->
-
       if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
