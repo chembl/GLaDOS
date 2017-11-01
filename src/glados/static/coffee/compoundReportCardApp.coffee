@@ -123,8 +123,29 @@ class CompoundReportCardApp
 
   @initAssaySummary = ->
 
+    #TODO: needs to inlude related compounds in assays index
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
+
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_compound_name')
+      embed_section_name: 'related_assays'
+      embed_identifier: chemblID
+      link_to_all:
+        link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
+        url: Assay.getAssaysListURL()
+
+    new glados.views.ReportCards.PieInCardView
+      model: relatedAssays
+      el: $('#CAssociatedAssaysCard')
+      config: viewConfig
+
+    relatedAssays.fetch()
 
   @initTargetSummary = ->
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
@@ -364,6 +385,29 @@ class CompoundReportCardApp
 
     #TODO: needs to inlude related compounds in assays index
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'assay_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'assay_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Assay.getAssaysListURL
+
+    assays = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
+      query_config: queryConfig
+      molecule_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return assays
