@@ -20,10 +20,7 @@ class CompoundReportCardApp
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initCalculatedCompoundParentProperties()
-
-    new CompoundMechanismsOfActionView
-        collection: mechanismOfActionList
-        el: $('#MechOfActCard')
+    CompoundReportCardApp.initMechanismOfAction()
 
     new CompoundFeaturesView
         model: compound
@@ -42,8 +39,7 @@ class CompoundReportCardApp
       el: $('#MetabolismCard')
 
     compound.fetch()
-
-    mechanismOfActionList.fetch({reset: true})
+    
     moleculeFormsList.fetch({reset: true})
     similarCompoundsList.fetch({reset: true})
     compoundMetabolism.fetch()
@@ -119,13 +115,13 @@ class CompoundReportCardApp
 
   @initMechanismOfAction = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID;
     new CompoundMechanismsOfActionView
       collection: mechanismOfActionList
       el: $('#MechOfActCard')
+      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+
     mechanismOfActionList.fetch({reset: true})
 
   @initMoleculeFeatures = ->
