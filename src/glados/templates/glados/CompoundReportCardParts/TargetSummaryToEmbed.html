@@ -1,0 +1,19 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Alternate Forms{% endblock %}
+
+{% block content %}
+
+   <div id="AlternateFormsOfCompoundInChEMBL" style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
+   </div>
+
+{% endblock %}
+
+{% load static %}
+
+{% block custom_js_inline %}
+
+CompoundReportCardApp.initTargetSummary();
+
+{% endblock %}
