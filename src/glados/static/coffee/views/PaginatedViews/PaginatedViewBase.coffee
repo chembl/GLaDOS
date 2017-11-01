@@ -280,8 +280,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $elem.html Handlebars.compile(template.html())
         pages: pages
-        records_showing: (first_record+1) + '-' + last_page
-        total_records: @collection.getMeta('total_records')
+        records_showing: glados.Utils.getFormattedNumber(first_record+1) + '-' + \
+          glados.Utils.getFormattedNumber(last_page)
+        total_records: glados.Utils.getFormattedNumber(@collection.getMeta('total_records'))
         show_next_ellipsis: show_next_ellipsis
         show_previous_ellipsis: show_previous_ellipsis
 

@@ -308,12 +308,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           $progressElement.html Handlebars.compile($('#Handlebars-Common-DownloadColMessages0').html())
             percentage: progress
             custom_base_progress_text: customBaseProgressText
-          if customProgressCallback?
-            customProgressCallback()
 
           nextUrl = response.page_meta.next
           fetchNext = if onlyFirstN? then itemsReceived < onlyFirstN else true
           thisView.setMeta('total_all_results', response.page_meta.total_count)
+          if customProgressCallback?
+            customProgressCallback()
           if nextUrl? and fetchNext
             nextUrl = baseURL + nextUrl
             getPage nextUrl

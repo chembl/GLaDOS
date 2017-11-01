@@ -8,7 +8,7 @@
       <iframe class="sketch-iframe"  src="{% static 'marvinjs/editorws.html' %}"
               style="overflow: hidden; min-width: 360px; min-height: 450px; width: 100%; border: 1px solid darkgray;"></iframe>
       <div class="marvin-preloader div-cover" style="display: none;">
-        <div class="iframe-centered">
+        <div class="div-cover-centered">
           <div class="preloader-wrapper small active">
             <div class="spinner-layer spinner-green-only">
               <div class="circle-clipper left">
@@ -31,12 +31,12 @@
             <b><i class="material-icons">close</i></b>
           </a>
         </div>
-        <div class="message iframe-centered">
+        <div class="message div-cover-centered">
         </div>
       </div>
       {%if not in_modal %}
         <div class="div-cover scroll-cover">
-          <div class="iframe-centered">
+          <div class="div-cover-centered">
             <a>
               <i class="material-icons">mouse</i> Click here to draw a structure
             </a>

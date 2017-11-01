@@ -85,6 +85,7 @@ class SearchResultsApp
     customSettings, searchTerm) ->
     esCompoundsList = undefined
     browserView = undefined
+    query_first_n = 10000
     doneCallback = (finalCall=false)->
 
       if resultsList.allResults.length == 0
@@ -103,7 +104,6 @@ class SearchResultsApp
           resultsList.allResults, contextualColumns, customSettings, searchTerm)
         if resultsList.getMeta('total_all_results') > query_first_n
           esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
-
         browserView = new glados.views.Browsers.BrowserMenuView
           collection: esCompoundsList
           el: $browserContainer
@@ -112,8 +112,6 @@ class SearchResultsApp
       esCompoundsList.fetch()
 
     debouncedDoneCallback = _.debounce(doneCallback, 500, true)
-
-    query_first_n = 10000
     deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
     customBaseProgressText='Searching . . . ', customProgressCallback=debouncedDoneCallback)
 

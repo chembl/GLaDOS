@@ -1,4 +1,5 @@
-<div class="BCK-BrowserContainer div-cover-wrapper">
+{% load static %}
+<div class="BCK-BrowserContainer">
     <div class="BCK-MenuContainer">
         {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
     </div>
@@ -25,14 +26,32 @@
 
             </div>
         </div><!--
-      --><div class="BCK-Facets-Container facets" >
+      --><div class="BCK-Facets-Container facets div-cover-wrapper" >
             <div class="BCK-show-hide-filters-modal-container" data-hb-template="Handlebars-Common-EditFiltersModal"></div>
             <div class="BCK-Facets-content" data-hb-template="Handlebars-Common-FacetsList"></div>
 
+            <div class="div-cover" style="display: none;">
+                <div class="div-cover-centered top-aligned">
+                  <div class="preloader-wrapper small active">
+                    <div class="spinner-layer spinner-green-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    Loading . . .
+                  </p>
+                </div>
+                <img src="{% static 'img/glados_potato.png' %}" style="width: 100%; position: absolute; bottom: 2%;">
+            </div>
         </div><!--
       --><div class="BCK-View-Container pag-items-container"></div>
     </div>
 
-    <div class="div-cover inside-container" style="display: none;"></div>
 
 </div>
