@@ -8,8 +8,6 @@ class CompoundReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
-    mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
     moleculeFormsList.initURL GlobalVariables.CHEMBL_ID
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
@@ -21,10 +19,7 @@ class CompoundReportCardApp
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initCalculatedCompoundParentProperties()
     CompoundReportCardApp.initMechanismOfAction()
-
-    new CompoundFeaturesView
-        model: compound
-        el: $('#MoleculeFeaturesCard')
+    CompoundReportCardApp.initMoleculeFeatures()
 
     new CompoundMoleculeFormsListView
         collection: moleculeFormsList
@@ -39,7 +34,7 @@ class CompoundReportCardApp
       el: $('#MetabolismCard')
 
     compound.fetch()
-    
+
     moleculeFormsList.fetch({reset: true})
     similarCompoundsList.fetch({reset: true})
     compoundMetabolism.fetch()
@@ -126,15 +121,13 @@ class CompoundReportCardApp
 
   @initMoleculeFeatures = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
-    compound = new Compound
-      molecule_chembl_id: CHEMBL_ID
+    compound = CompoundReportCardApp.getCurrentCompound()
     new CompoundFeaturesView
       model: compound
       el: $('#MoleculeFeaturesCard')
-    compound.fetch()
 
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initAlternateForms = ->
 
