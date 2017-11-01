@@ -24,8 +24,6 @@ class CompoundReportCardApp
     ButtonsHelper.initCroppedContainers()
     ButtonsHelper.initExpendableMenus()
 
-    @initPieView()
-
   # -------------------------------------------------------------
   # Singleton
   # -------------------------------------------------------------
@@ -178,14 +176,6 @@ class CompoundReportCardApp
       view.render()
     else
       compound.fetch()
-  # -------------------------------------------------------------
-  # Views
-  # -------------------------------------------------------------
-
-  @initPieView = ->
-    # TODO DAVID WILL MAKE THIS SOMEDAY
-#    pieview = new PieView
-#    pieview.render()
 
   # -------------------------------------------------------------
   # Function Cells
