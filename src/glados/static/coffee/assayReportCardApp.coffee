@@ -5,24 +5,11 @@ class AssayReportCardApp
   # -------------------------------------------------------------
   @init = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
+    assay = AssayReportCardApp.getCurrentAssay()
+    AssayReportCardApp.initAssayBasicInformation()
+    AssayReportCardApp.initCurationSummary()
 
-    assay = new Assay
-      assay_chembl_id: GlobalVariables.CHEMBL_ID
-
-    new AssayBasicInformationView
-      model: assay
-      el: $('#ABasicInformation')
-
-    target = new Target
-      assay_chembl_id: GlobalVariables.CHEMBL_ID
-
-    new AssayCurationSummaryView
-      model: target
-      el: $('#ACurationSummaryCard')
-
-    assay.fetch();
-    target.fetchFromAssayChemblID();
+    assay.fetch()
 
     $('.scrollspy').scrollSpy();
     ScrollSpyHelper.initializeScrollSpyPinner();
@@ -33,23 +20,19 @@ class AssayReportCardApp
   # -------------------------------------------------------------
   @initAssayBasicInformation = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
-    assay = new Assay
-      assay_chembl_id: GlobalVariables.CHEMBL_ID
+    assay = AssayReportCardApp.getCurrentAssay()
 
     new AssayBasicInformationView
       model: assay
       el: $('#ABasicInformation')
 
-    assay.fetch()
+    if GlobalVariables['EMBEDED']
+      assay.fetch()
 
   @initCurationSummary = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
     target = new Target
-      assay_chembl_id: GlobalVariables.CHEMBL_ID
+      assay_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     new AssayCurationSummaryView
       model: target
@@ -57,4 +40,17 @@ class AssayReportCardApp
 
     target.fetchFromAssayChemblID();
 
+  # -------------------------------------------------------------
+  # Singleton
+  # -------------------------------------------------------------
+  @getCurrentAssay = ->
 
+    if not @currentAssay?
+
+      chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+      @currentAssay = new Assay
+        assay_chembl_id: chemblID
+      return @currentAssay
+
+    else return @currentAssay
