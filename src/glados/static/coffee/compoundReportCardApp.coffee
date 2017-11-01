@@ -14,6 +14,7 @@ class CompoundReportCardApp
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initAlternateForms()
+    CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMetabolism()
@@ -119,6 +120,11 @@ class CompoundReportCardApp
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     moleculeFormsList.fetch({reset: true})
+
+  @initAssaySummary = ->
+
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
 
   @initTargetSummary = ->
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
@@ -354,3 +360,10 @@ class CompoundReportCardApp
 
     return targetTypes
 
+  @getRelatedAssaysAgg = (chemblID) ->
+
+    #TODO: needs to inlude related compounds in assays index
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'molecule_chembl_id'
+      fields: ['_metadata.related_compounds.chembl_ids.*']
