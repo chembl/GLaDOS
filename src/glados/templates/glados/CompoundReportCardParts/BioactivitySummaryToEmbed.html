@@ -1,0 +1,17 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Activity Summary{% endblock %}
+
+{% block content %}
+
+   <div style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
+   </div>
+
+{% endblock %}
+
+{% load static %}
+
+{% block custom_js_inline %}
+CompoundReportCardApp.initActivitySummary();
+{% endblock %}
