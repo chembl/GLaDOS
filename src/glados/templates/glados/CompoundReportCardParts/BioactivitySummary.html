@@ -1,27 +1,9 @@
-<div class="col s12 m12 l12">
+{% extends "glados/base/basic_table_card.html" %}
 
-  <div id='BioactivitySummaryCard' class="card chembl-card grey lighten-5">
+{% block card_id %}CAssociatedActivitiesCard{% endblock %}
 
-
-    <div class="card-content" >
-
-      <div class="row">
-
-        <div class="col s12 m8">
-
-          <div id="Bck-BioactivitySummaryChart" class="ct-chart ct-minor-seventh">
-
-
-          </div>
-
-        </div>
-
-
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
+{% block general_content %}
+<span class="BCK-all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink">
+</span>
+{% include "glados/base/Visualisation/DefaultPieChartContent.html" %}
+{% endblock %}

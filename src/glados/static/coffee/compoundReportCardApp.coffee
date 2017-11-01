@@ -234,35 +234,7 @@ class CompoundReportCardApp
   # -------------------------------------------------------------
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: 'molecule_chembl_id:{{molecule_chembl_id}}'
-      template_data:
-        molecule_chembl_id: 'molecule_chembl_id'
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'standard_type'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: 'molecule_chembl_id:{{molecule_chembl_id}} ' +
-                                    'AND standard_type:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Activity.getActivitiesListURL
-
-    bioactivities = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
-      query_config: queryConfig
-      molecule_chembl_id: chemblID
-      aggs_config: aggsConfig
+    bioactivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true)
@@ -411,3 +383,37 @@ class CompoundReportCardApp
       aggs_config: aggsConfig
 
     return assays
+
+  @getRelatedActivitiesAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: 'molecule_chembl_id:{{molecule_chembl_id}}'
+      template_data:
+        molecule_chembl_id: 'molecule_chembl_id'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'standard_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'molecule_chembl_id:{{molecule_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              molecule_chembl_id: 'molecule_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Activity.getActivitiesListURL
+
+    bioactivities = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+      query_config: queryConfig
+      molecule_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return bioactivities
