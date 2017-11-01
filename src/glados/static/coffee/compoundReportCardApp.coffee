@@ -14,6 +14,7 @@ class CompoundReportCardApp
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initAlternateForms()
+    CompoundReportCardApp.initTargetSummary()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMetabolism()
 
@@ -118,6 +119,30 @@ class CompoundReportCardApp
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     moleculeFormsList.fetch({reset: true})
+
+  @initTargetSummary = ->
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    relatedTargets = CompoundReportCardApp.getRelatedTargetsAgg(chemblID)
+
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_compound__associated_targets_pie_title_base') + chemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_compound_name')
+      embed_section_name: 'related_targets'
+      embed_identifier: chemblID
+      link_to_all:
+        link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
+        url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+
+    new glados.views.ReportCards.PieInCardView
+      model: relatedTargets
+      el: $('#CAssociatedTargetsCard')
+      config: viewConfig
+
+    relatedTargets.fetch()
 
   @initSimilarCompounds = ->
 
@@ -236,7 +261,7 @@ class CompoundReportCardApp
 
   @initMiniTargetsHistogram = ($containerElem, chemblID) ->
 
-    targetTypes = getRelatedTargetsAgg(chemblID)
+    targetTypes = CompoundReportCardApp.getRelatedTargetsAgg(chemblID)
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE',
     withColourScale=true)
@@ -296,7 +321,7 @@ class CompoundReportCardApp
   # --------------------------------------------------------------------------------------------------------------------
   # Aggregations
   # --------------------------------------------------------------------------------------------------------------------
-  getRelatedTargetsAgg = (chemblID) ->
+  @getRelatedTargetsAgg = (chemblID) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH

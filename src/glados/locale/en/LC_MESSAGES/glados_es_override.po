@@ -237,3 +237,12 @@ msgstr "ChEMBL Activity Types for Target "
 #-----------------------------------------------------------------------------------------------------------------------
 msgid "glados_entities_target_name"
 msgstr "Target"
+
+msgid "glados_entities_compound_name"
+msgstr "Compound"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Compound Report Card
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_compound__associated_targets_pie_title_base"
+msgstr "ChEMBL Target Types for Compound "
