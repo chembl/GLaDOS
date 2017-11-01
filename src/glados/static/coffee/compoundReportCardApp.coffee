@@ -7,6 +7,7 @@ class CompoundReportCardApp
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     compound = CompoundReportCardApp.getCurrentCompound()
+
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID
     moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
@@ -16,9 +17,7 @@ class CompoundReportCardApp
     compoundMetabolism = new CompoundMetabolism()
     compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
 
-    new CompoundNameClassificationView
-      model: compound
-      el: $('#CNCCard')
+    CompoundReportCardApp.initNameAndClassification()
 
     new CompoundImageView
         model: compound
@@ -53,6 +52,7 @@ class CompoundReportCardApp
       el: $('#MetabolismCard')
 
     compound.fetch()
+
     mechanismOfActionList.fetch({reset: true})
     moleculeFormsList.fetch({reset: true})
     similarCompoundsList.fetch({reset: true})
@@ -85,21 +85,18 @@ class CompoundReportCardApp
   # -------------------------------------------------------------
   @initNameAndClassification = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
-    compound = new Compound
-      molecule_chembl_id: GlobalVariables.CHEMBL_ID
-
-    console.log compound
+    compound = CompoundReportCardApp.getCurrentCompound()
 
     new CompoundNameClassificationView({
         model: compound,
         el: $('#CNCCard')})
+
     new CompoundImageView({
         model: compound,
         el: ('#CNCImageCard')})
 
-    compound.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
     ButtonsHelper.initCroppedContainers()
     ButtonsHelper.initExpendableMenus()
@@ -107,12 +104,9 @@ class CompoundReportCardApp
 
   @initRepresentations = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
+    compound = CompoundReportCardApp.getCurrentCompound()
 
-    compound = new Compound
-      molecule_chembl_id: CHEMBL_ID
-
-    compRepsView = new CompoundRepresentationsView
+    new CompoundRepresentationsView
       model: compound
       el: $('#CompRepsCard')
 

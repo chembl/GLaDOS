@@ -229,7 +229,7 @@ class TargetReportCardApp
       TargetReportCardApp.initMiniCompoundsHistogram($containerElem, targetChemblID)
 
   # --------------------------------------------------------------------------------------------------------------------
-  # AggregationsConfig
+  # Aggregations
   # --------------------------------------------------------------------------------------------------------------------
   @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
