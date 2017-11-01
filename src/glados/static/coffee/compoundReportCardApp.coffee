@@ -14,6 +14,7 @@ class CompoundReportCardApp
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initAlternateForms()
+    CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
     CompoundReportCardApp.initSimilarCompounds()
@@ -120,6 +121,31 @@ class CompoundReportCardApp
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     moleculeFormsList.fetch({reset: true})
+
+  @initActivitySummary = ->
+
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_compound_name')
+      embed_section_name: 'related_activities'
+      embed_identifier: chemblID
+      link_to_all:
+        link_text: 'See all activities related to ' + chemblID + ' used in this visualisation.'
+        url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
+
+    new glados.views.ReportCards.PieInCardView
+      model: relatedActivities
+      el: $('#CAssociatedActivitiesCard')
+      config: viewConfig
+
+    relatedActivities.fetch()
 
   @initAssaySummary = ->
 

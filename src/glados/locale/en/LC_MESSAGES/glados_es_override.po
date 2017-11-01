@@ -249,3 +249,6 @@ msgstr "ChEMBL Target Types for Compound "
 
 msgid "glados_compound__associated_assays_pie_title_base"
 msgstr "ChEMBL Assays for Compound "
+
+msgid "glados_compound__associated_activities_pie_title_base"
+msgstr "ChEMBL Activity Types for Compound "
