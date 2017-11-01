@@ -18,14 +18,7 @@ class CompoundReportCardApp
     compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
 
     CompoundReportCardApp.initNameAndClassification()
-
-    new CompoundImageView
-        model: compound
-        el: ('#CNCImageCard')
-
-    new CompoundRepresentationsView
-        model: compound
-        el: $('#CompRepsCard')
+    CompoundReportCardApp.initRepresentations()
 
     new CompoundCalculatedParentPropertiesView
         model: compound
@@ -110,7 +103,8 @@ class CompoundReportCardApp
       model: compound
       el: $('#CompRepsCard')
 
-    compound.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
     ButtonsHelper.initCroppedContainers()
     ButtonsHelper.initExpendableMenus()
