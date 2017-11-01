@@ -8,9 +8,6 @@ class CompoundReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
-    compoundMetabolism = new CompoundMetabolism()
-    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
-
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initCalculatedCompoundParentProperties()
@@ -18,13 +15,9 @@ class CompoundReportCardApp
     CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initAlternateForms()
     CompoundReportCardApp.initSimilarCompounds()
-
-    new CompoundMetabolismView
-      model: compoundMetabolism
-      el: $('#MetabolismCard')
+    CompoundReportCardApp.initMetabolism()
 
     compound.fetch()
-    compoundMetabolism.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
@@ -154,14 +147,13 @@ class CompoundReportCardApp
 
   @initMetabolism = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 3
-
     compoundMetabolism = new CompoundMetabolism()
-    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+    compoundMetabolism.url = glados.Settings.STATIC_URL + 'testData/metabolismSampleData.json'
 
     new CompoundMetabolismView
       model: compoundMetabolism
       el: $('#MetabolismCard')
+      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     compoundMetabolism.fetch()
 

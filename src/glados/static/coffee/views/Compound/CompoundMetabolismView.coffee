@@ -5,21 +5,20 @@ CompoundMetabolismView = CardView.extend
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
+    @molecule_chembl_id = arguments[0].molecule_chembl_id
 
   render: ->
 
-#    glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL
-
     $(@el).find('.visualisation-title').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-Title').html() )
-      chembl_id: GlobalVariables.CHEMBL_ID
+      chembl_id: @molecule_chembl_id
 
     $(@el).find('.visualisation-fullscreen-link').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-FSLink').html() )
-      chembl_id: GlobalVariables.CHEMBL_ID
+      chembl_id: @molecule_chembl_id
 
 
     @showCardContent()
     MetabolismVisualizator._loadFromVariable("metabolism-visualisation-container", @model.get('graph'))
 
-    @initEmbedModal('metabolism')
+    @initEmbedModal('metabolism', @molecule_chembl_id)
     @activateModals()
 
