@@ -276,3 +276,6 @@ msgstr "ChEMBL Target Types for Document "
 
 msgid "glados_document__associated_assays_pie_title_base"
 msgstr "ChEMBL Assay Types for Document "
+
+msgid "glados_document__associated_activities_pie_title_base"
+msgstr "ChEMBL Activity Types for Document "
