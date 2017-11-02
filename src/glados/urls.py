@@ -174,6 +174,9 @@ urlpatterns += [
   url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_activities/$', xframe_options_exempt(
       DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/ActivitySummaryToEmbed.html")), ),
 
+  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
+      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/CompoundSummaryToEmbed.html")), ),
+
   url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
 

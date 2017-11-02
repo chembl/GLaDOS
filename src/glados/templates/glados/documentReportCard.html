@@ -79,7 +79,7 @@
 
       <div class="divider"></div>
       <div id="ProteinTargetSummay" class="section scrollspy">
-        <h3>Protein Target Summay</h3>
+        <h3>Protein Target Summary</h3>
 
         <div class="row">
           {% with is_dynamic=True  %}
@@ -118,9 +118,9 @@
         <h3>Compound Summaries</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/DocumentReportCardParts/CompoundSummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
