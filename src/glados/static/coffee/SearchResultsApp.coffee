@@ -94,8 +94,6 @@ class SearchResultsApp
         $noResultsDiv.show()
         return
       $browserContainer.show()
-      browserCover = $browserContainer.find('.div-cover')
-      browserCover.show()
       if not esCompoundsList?
         esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
           resultsList.allResults, contextualColumns, customSettings, searchTerm)
@@ -109,12 +107,10 @@ class SearchResultsApp
         esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
 
       fetchDeferred = esCompoundsList.fetch()
-      if firstCall or finalCall
-        esCompoundsList.loadFacetGroups()
       if finalCall
-        fetchDeferred.then ->
-          browserCover.hide()
+        fetchDeferred.then _.defer( ->
           esCompoundsList.disableStreamingMode()
+        )
 
     debouncedDoneCallback = _.debounce(doneCallback, 500, true)
     deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
