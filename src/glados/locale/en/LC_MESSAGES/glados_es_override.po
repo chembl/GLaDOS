@@ -269,7 +269,10 @@ msgid "glados_assay__associated_targets_pie_title_base"
 msgstr "ChEMBL Target Types for Assay "
 
 #-----------------------------------------------------------------------------------------------------------------------
-# Assay Report Card
+# Document Report Card
 #-----------------------------------------------------------------------------------------------------------------------
 msgid "glados_document__associated_targets_pie_title_base"
-msgstr "ChEMBL Target Types for Assay "
+msgstr "ChEMBL Target Types for Document "
+
+msgid "glados_document__associated_assays_pie_title_base"
+msgstr "ChEMBL Assay Types for Document "
