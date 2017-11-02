@@ -244,6 +244,9 @@ msgstr "Compound"
 msgid "glados_entities_assay_name"
 msgstr "Assay"
 
+msgid "glados_entities_document_name"
+msgstr "Document"
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Compound Report Card
 #-----------------------------------------------------------------------------------------------------------------------
@@ -263,4 +266,10 @@ msgid "glados_assay__associated_activities_pie_title_base"
 msgstr "ChEMBL Activity Types for Assay "
 
 msgid "glados_assay__associated_targets_pie_title_base"
+msgstr "ChEMBL Target Types for Assay "
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Assay Report Card
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_document__associated_targets_pie_title_base"
 msgstr "ChEMBL Target Types for Assay "
