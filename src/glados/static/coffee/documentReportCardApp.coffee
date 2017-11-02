@@ -78,6 +78,7 @@ class DocumentReportCardApp
 
     docTerms.fetch()
 
+  @initTargetSummary = ->
   # -------------------------------------------------------------
   # Full Screen views
   # -------------------------------------------------------------

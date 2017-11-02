@@ -82,9 +82,9 @@
         <h3>Protein Target Summay</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/DocumentReportCardParts/TargetSummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
