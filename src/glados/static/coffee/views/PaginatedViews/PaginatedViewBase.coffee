@@ -185,6 +185,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getAllColumns: -> @columnsHandler.get('all_columns')
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
 
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
@@ -410,11 +412,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $preloaderCont.show()
       $contentCont.show()
 
+    shouldIgnoreContentChangeRequestWhileStreaming: ->
+      return _.isFunction(@collection.shouldIgnoreContentChangeRequestWhileStreaming) and \
+        @collection.shouldIgnoreContentChangeRequestWhileStreaming()
+
     clearContentContainer: ->
+
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
 
       @latestPageRendered = undefined
       @latestPageSizeRendered = undefined
-
       $(@el).find('.BCK-items-container').empty()
       @hideEmptyMessageContainer()
       @showContentContainer()
@@ -460,6 +468,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $headerRow.show()
 
     showPreloaderHideOthers: ->
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
       @showPreloaderOnly()
       @hideHeaderContainer()
       @hideContentContainer()
