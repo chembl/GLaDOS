@@ -2,7 +2,6 @@ glados.useNameSpace 'glados.views.Target',
   AssociatedCompoundsView: CardView.extend
 
     initialize: ->
-      console.log 'INIT VIEW!'
       @model.on 'change', @render, @
       $progressElem = $(@el).find('.load-messages-container')
       @model.set('progress_elem', $progressElem)
