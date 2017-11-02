@@ -12,7 +12,7 @@ AssayCurationSummaryView = CardView.extend
     @fillTemplate('BCK-ACS-small')
     @showCardContent()
 
-    @initEmbedModal('curation_summary')
+    @initEmbedModal('curation_summary', @model.get('assay_chembl_id'))
     @activateModals()
 
   fillTemplate: (div_id) ->

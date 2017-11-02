@@ -148,14 +148,39 @@ class TargetReportCardApp
 
   @initAssociatedCompounds = ->
 
-    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(chemblID)
 
-    associatedCompounds = TargetReportCardApp.getAssociatedCompoundsAgg(targetChemblID)
+    histogramConfig =
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        alogp: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'ALogP')
+        psa: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'PSA')
+      initial_property_x: 'mwt'
+      x_axis_options: ['mwt', 'alogp', 'psa']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 20
+      x_axis_initial_num_columns: 10
+      x_axis_prop_name: 'x_axis_agg'
+      title: 'Associated Compounds for Target ' + chemblID
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_targets.chembl_ids.\\*:' +
+        chemblID)
+      range_categories: true
 
-    new glados.views.Target.AssociatedCompoundsView
+    config =
+      histogram_config: histogramConfig
+      resource_type: 'Target'
+      embed_section_name: 'associated_compounds'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.HistogramInCardView
       el: $('#TAssociatedCompoundProperties')
       model: associatedCompounds
-      target_chembl_id: targetChemblID
+      target_chembl_id: chemblID
+      config: config
+
 
     associatedCompounds.fetch()
 

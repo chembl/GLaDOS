@@ -13,7 +13,7 @@ AssayBasicInformationView = CardView.extend
     @fillTemplate('BCK-ABI-small')
     @showCardContent()
 
-    @initEmbedModal('basic_information')
+    @initEmbedModal('basic_information', @model.get('assay_chembl_id'))
     @activateModals()
 
 
