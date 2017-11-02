@@ -60,8 +60,8 @@ class CompoundReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
-    ButtonsHelper.initCroppedContainers()
-    ButtonsHelper.initExpendableMenus()
+      ButtonsHelper.initCroppedContainers()
+      ButtonsHelper.initExpendableMenus()
 
 
   @initRepresentations = ->
@@ -75,8 +75,8 @@ class CompoundReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
-    ButtonsHelper.initCroppedContainers()
-    ButtonsHelper.initExpendableMenus()
+      ButtonsHelper.initCroppedContainers()
+      ButtonsHelper.initExpendableMenus()
 
   @initCalculatedCompoundParentProperties = ->
 
