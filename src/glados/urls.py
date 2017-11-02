@@ -140,6 +140,9 @@ urlpatterns += [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedBioactivitiesToEmbed.html")), ),
 
+  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedCompoundsToEmbed.html")), ),
+
   url(r'^assays/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseAssays.html"), ),
 

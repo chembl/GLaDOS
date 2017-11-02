@@ -9,6 +9,7 @@ class AssayReportCardApp
     AssayReportCardApp.initAssayBasicInformation()
     AssayReportCardApp.initCurationSummary()
     AssayReportCardApp.initActivitySummary()
+    AssayReportCardApp.initAssociatedCompounds()
 
     assay.fetch()
 
@@ -66,6 +67,43 @@ class AssayReportCardApp
 
     bioactivities.fetch()
 
+  @initAssociatedCompounds = ->
+
+    #TODO: UPDATE WHEN AGG IS READY
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    associatedCompounds = AssayReportCardApp.getAssociatedCompoundsAgg(chemblID)
+
+    histogramConfig =
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+        alogp: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'ALogP')
+        psa: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'PSA')
+      initial_property_x: 'mwt'
+      x_axis_options: ['mwt', 'alogp', 'psa']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 20
+      x_axis_initial_num_columns: 10
+      x_axis_prop_name: 'x_axis_agg'
+      title: 'Associated Compounds for Assay ' + chemblID
+      title_link_url: Compound.getCompoundsListURL()
+      range_categories: true
+
+    config =
+      histogram_config: histogramConfig
+      resource_type: 'Assay'
+      embed_section_name: 'associated_compounds'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#AAssociatedCompoundProperties')
+      model: associatedCompounds
+      target_chembl_id: chemblID
+      config: config
+
+    associatedCompounds.fetch()
+
   # -------------------------------------------------------------
   # Singleton
   # -------------------------------------------------------------
@@ -117,3 +155,33 @@ class AssayReportCardApp
       aggs_config: aggsConfig
 
     return bioactivities
+
+  @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
+
+    #TODO use proper parameters when index is ready
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+
+    aggsConfig =
+      aggs:
+        x_axis_agg:
+          field: 'molecule_properties.full_mwt'
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          min_columns: 1
+          max_columns: 20
+          num_columns: 10
+          bucket_links:
+            bucket_filter_template: 'molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            template_data:
+              min_val: 'BUCKET.from'
+              max_val: 'BUCKETS.to'
+            link_generator: Compound.getCompoundsListURL
+
+    associatedCompounds = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      target_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return associatedCompounds

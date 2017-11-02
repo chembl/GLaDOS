@@ -66,9 +66,9 @@
         <h3>Compound Summaries</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/AssayReportCardParts/AssociatedCompounds.html" %}
+          {% endwith %}
         </div>
 
         <div class="divider"></div>
