@@ -746,6 +746,9 @@
 <script id="Handlebars-Common-DownloadColMessages0" type="text/x-handlebars-template">
   <i class="fa fa-cog fa-spin fa-fw"></i>
   {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
+  <div class="progress">
+      <div class="determinate" style="width: {{percentage}}%"></div>
+  </div>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages1" type="text/x-handlebars-template">
