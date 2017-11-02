@@ -202,12 +202,10 @@ class ButtonsHelper
   # ------------------------------------------------------------
 
   @showExpandableMenu = (activator, elem) ->
-
     activator.html('<i class="material-icons">remove</i>')
     elem.slideDown(300)
 
   @hideExpandableMenu = (activator, elem) ->
-
     activator.html('<i class="material-icons">add</i>')
     elem.slideUp(300)
 
@@ -236,7 +234,7 @@ class ButtonsHelper
 
         elem = $('#' + elem_id)
 
-        if elem.css('display') == 'none'
+        if not elem.is(':visible')
           ButtonsHelper.showExpandableMenu(activator, elem)
         else
           ButtonsHelper.hideExpandableMenu(activator, elem)
