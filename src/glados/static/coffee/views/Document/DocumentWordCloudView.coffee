@@ -26,7 +26,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       report_card_url:  @model.get('report_card_url')
 
     @showCardContent()
-    @initEmbedModal('word_cloud')
+    @initEmbedModal('word_cloud',  @model.get('document_chembl_id'))
     @activateModals()
     @paintWordCloud()
 

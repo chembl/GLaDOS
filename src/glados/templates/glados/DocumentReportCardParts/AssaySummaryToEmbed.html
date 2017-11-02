@@ -1,11 +1,11 @@
 {% extends "glados/base/embed_base.html" %}
 
-{% block title %}Target Summary{% endblock %}
+{% block title %}Assay Summary{% endblock %}
 
 {% block content %}
 
    <div style="margin-top: 25px;">
-    {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
+    {% include "glados/DocumentReportCardParts/AssaySummary.html" %}
    </div>
 
 {% endblock %}
@@ -13,7 +13,5 @@
 {% load static %}
 
 {% block custom_js_inline %}
-
-CompoundReportCardApp.initTargetSummary();
-
+DocumentReportCardApp.initAssaySummary();
 {% endblock %}
