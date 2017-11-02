@@ -133,6 +133,8 @@ msgstr "Compounds"
 msgid "glados_es_gs__target__target_components__label"
 msgstr "UniProt Accession"
 
+msgid "glados_es_gs__activity__target_tax_id__label"
+msgstr "Organism Tax ID"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -220,3 +222,45 @@ msgstr "DOI"
 #-----------------------------------------------------------------------------------------------------------------------
 msgid "glados_filters__no_filters_available"
 msgstr "There are no filters available."
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Target Report Card
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_target__associated_assays_pie_title_base"
+msgstr "ChEMBL Assays for Target "
+
+msgid "glados_target__associated_activities_pie_title_base"
+msgstr "ChEMBL Activity Types for Target "
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Main Entities
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_entities_target_name"
+msgstr "Target"
+
+msgid "glados_entities_compound_name"
+msgstr "Compound"
+
+msgid "glados_entities_assay_name"
+msgstr "Assay"
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Compound Report Card
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_compound__associated_targets_pie_title_base"
+msgstr "ChEMBL Target Types for Compound "
+
+msgid "glados_compound__associated_assays_pie_title_base"
+msgstr "ChEMBL Assays for Compound "
+
+msgid "glados_compound__associated_activities_pie_title_base"
+msgstr "ChEMBL Activity Types for Compound "
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Assay Report Card
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_assay__associated_activities_pie_title_base"
+msgstr "ChEMBL Activity Types for Assay "
+
+msgid "glados_assay__associated_targets_pie_title_base"
+msgstr "ChEMBL Target Types for Assay "

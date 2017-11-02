@@ -83,12 +83,10 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
-
-    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=10000,
-    customBaseProgressText='Searching . . . ')
-
-    # for now, we need to jump from web services to elastic
-    $.when.apply($, deferreds).done(->
+    esCompoundsList = undefined
+    browserView = undefined
+    query_first_n = 10000
+    doneCallback = (firstCall=false, finalCall=false)->
 
       if resultsList.allResults.length == 0
         $progressElement.hide()
@@ -96,16 +94,30 @@ class SearchResultsApp
         $noResultsDiv.show()
         return
       $browserContainer.show()
+      if not esCompoundsList?
+        esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
+          resultsList.allResults, contextualColumns, customSettings, searchTerm)
+        esCompoundsList.enableStreamingMode()
+        if resultsList.getMeta('total_all_results') > query_first_n
+          esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
+        browserView = new glados.views.Browsers.BrowserMenuView
+          collection: esCompoundsList
+          el: $browserContainer
+      else
+        esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
 
-      esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-        resultsList.allResults, contextualColumns, customSettings, searchTerm)
+      fetchDeferred = esCompoundsList.fetch()
+      if finalCall
+        fetchDeferred.then _.defer( ->
+          esCompoundsList.disableStreamingMode()
+        )
 
-      new glados.views.Browsers.BrowserMenuView
-        collection: esCompoundsList
-        el: $browserContainer
+    debouncedDoneCallback = _.debounce(doneCallback, 500, true)
+    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
+    customBaseProgressText='Searching . . . ', customProgressCallback=debouncedDoneCallback)
 
-      esCompoundsList.fetch()
-    ).fail((msg) ->
+    # for now, we need to jump from web services to elastic
+    $.when.apply($, deferreds).done(doneCallback.bind(@, false, true)).fail((msg) ->
 
       customExplanation = 'Error while performing the search.'
       $browserContainer.hide()

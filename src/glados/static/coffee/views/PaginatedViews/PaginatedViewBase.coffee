@@ -74,6 +74,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
 
+      console.log 'columns handler: ', @columnsHandler
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @
@@ -184,6 +185,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getAllColumns: -> @columnsHandler.get('all_columns')
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
 
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
@@ -279,8 +282,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $elem.html Handlebars.compile(template.html())
         pages: pages
-        records_showing: (first_record+1) + '-' + last_page
-        total_records: @collection.getMeta('total_records')
+        records_showing: glados.Utils.getFormattedNumber(first_record+1) + '-' + \
+          glados.Utils.getFormattedNumber(last_page)
+        total_records: glados.Utils.getFormattedNumber(@collection.getMeta('total_records'))
         show_next_ellipsis: show_next_ellipsis
         show_previous_ellipsis: show_previous_ellipsis
 
@@ -408,11 +412,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $preloaderCont.show()
       $contentCont.show()
 
+    shouldIgnoreContentChangeRequestWhileStreaming: ->
+      return _.isFunction(@collection.shouldIgnoreContentChangeRequestWhileStreaming) and \
+        @collection.shouldIgnoreContentChangeRequestWhileStreaming()
+
     clearContentContainer: ->
+
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
 
       @latestPageRendered = undefined
       @latestPageSizeRendered = undefined
-
       $(@el).find('.BCK-items-container').empty()
       @hideEmptyMessageContainer()
       @showContentContainer()
@@ -458,6 +468,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $headerRow.show()
 
     showPreloaderHideOthers: ->
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
       @showPreloaderOnly()
       @hideHeaderContainer()
       @hideContentContainer()

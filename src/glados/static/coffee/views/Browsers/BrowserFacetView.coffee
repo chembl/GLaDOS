@@ -12,6 +12,8 @@ glados.useNameSpace 'glados.views.Browsers',
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
 
+      @facetsStreamingCover = $(@el).find('.div-cover')
+
       facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
 
       @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
@@ -223,6 +225,10 @@ glados.useNameSpace 'glados.views.Browsers',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     render: ->
+      if @collection.isStreaming()
+        @facetsStreamingCover.show()
+      else
+        @facetsStreamingCover.hide()
 
       if not $(@el).is(":visible") or $(@el).width() == 0
         return

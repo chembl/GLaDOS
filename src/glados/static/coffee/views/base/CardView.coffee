@@ -26,7 +26,7 @@ CardView = Backbone.View.extend
     $(@el).children('.card-load-error').show()
 
 
-  initEmbedModal: (section_name) ->
+  initEmbedModal: (section_name, chemblID) ->
 
     if EMBEDED?
       # prevent unnecessary loops
@@ -42,6 +42,7 @@ CardView = Backbone.View.extend
     modal_trigger.attr('href', '#' + modal_id)
     modal_trigger.attr('rendered', 'false')
     modal_trigger.attr('data-embed-sect-name', section_name)
+    modal_trigger.attr('data-chembl-id', chemblID)
     modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
 
     modal_trigger.click @renderModalPreview
@@ -59,7 +60,8 @@ CardView = Backbone.View.extend
     modal = $(clicked.attr('href'))
 
     code_elem = modal.find('code')
-    chembl_id = if @model? then @model.get('molecule_chembl_id') else GlobalVariables.CHEMBL_ID
+    console.log 'this: ', @
+    chembl_id = clicked.attr('data-chembl-id')
 
     rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
       base_url: glados.Settings.GLADOS_BASE_URL_FULL

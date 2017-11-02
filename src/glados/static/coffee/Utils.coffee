@@ -3,7 +3,7 @@ glados.useNameSpace 'glados',
     getFormattedNumber: (numberToFormat)->
       if numberToFormat < -Math.pow(10, 20)
         return numberToFormat.toExponential()
-      if numberToFormat < Math.pow(10, 6)
+      if numberToFormat < Math.pow(10, 7)
         return numeral(numberToFormat).format('0,[.]00')
       return numeral(numberToFormat).format('0.[0000]e+0')
 
@@ -352,3 +352,21 @@ glados.useNameSpace 'glados',
         if xIsOut or yIsOut
           glados.Utils.Tooltips.destroyAllTooltips($($container))
 
+    Fetching:
+      fetchModelOnce: (model) ->
+
+        timesFetched = model.get('glados_times_fetched')
+        timesFetched ?= 0
+
+        if timesFetched < 1
+          model.set
+            glados_times_fetched: 1
+          model.fetch()
+
+    URLS:
+      getCurrentModelChemblID: ->
+
+        if GlobalVariables['EMBEDED']
+          return URLProcessor.getRequestedChemblIDWhenEmbedded()
+        else
+          return URLProcessor.getRequestedChemblID()

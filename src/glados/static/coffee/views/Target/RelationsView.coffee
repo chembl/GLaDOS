@@ -9,7 +9,7 @@ RelationsView = CardView.extend
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
       @collection, @el,customRenderEvent=undefined, disableColumnsSelection=true)
 
-    @initEmbedModal('relations')
+    @initEmbedModal('relations', arguments[0].target_chembl_id)
     @activateModals()
 
   render: ->

@@ -19,6 +19,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
+
+      lastPageResultsIds = null
+      lastPageResultsIds = @getMeta('last_page_results_ids')
+      if not lastPageResultsIds?
+        lastPageResultsIds = {}
+      curPageResultsIds = {}
+
       @resetMeta(data.hits.total, data.hits.max_score)
       @setMeta('data_loaded', true)
       jsonResultsList = []
@@ -26,7 +33,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       idAttribute = @getMeta('model').ID_COLUMN.comparator
       scores = @getMeta('scores')
 
+      pageChanged = false
       for hitI in data.hits.hits
+        if not _.has(lastPageResultsIds, hitI._id)
+          pageChanged = true
+        curPageResultsIds[hitI._id] = true
+
         currentItemData = hitI._source
         currentItemData._score = hitI._score
 
@@ -48,6 +60,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           currentItemData.reference_smiles_error_jqxhr = @getMeta('reference_smiles_error_jqxhr')
 
         jsonResultsList.push(currentItemData)
+      if not pageChanged
+        pageChanged = _.keys(lastPageResultsIds).length != _.keys(curPageResultsIds).length
+      @setMeta('page_changed', pageChanged)
 
 
       if not @getMeta('ignore_score')
@@ -55,6 +70,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @trigger('score_and_records_update')
       else
         @setMeta('ignore_score', false)
+
+      @setMeta('last_page_results_ids', curPageResultsIds)
 
       return jsonResultsList
 
@@ -83,11 +100,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Use options if specified by caller
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
+      @loadFacetGroups() unless testMode or @isStreaming()
 
-      @loadFacetGroups() unless testMode
+      if testMode
+        return requestData
+
       # Call Backbone's fetch
-      Backbone.Collection.prototype.fetch.call(this, fetchESOptions) unless testMode
-      return requestData
+      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Parse/Fetch Facets Groups data
@@ -197,13 +217,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         es_query.query.bool.filter.push glq.filter_query
       else
         es_query.query.bool.must = @getMeta('searchESQuery')
-
       # Includes the selected facets filter
       if facets_filtered
         filter_query = @getFacetFilterQuery()
-        if _.isArray filter_query and filter_query.length > 0
+        if _.isArray(filter_query) and filter_query.length > 0
           es_query.query.bool.filter = _.union es_query.query.bool.filter, filter_query
-        else if filter_query? and not _.isArray filter_query
+        else if filter_query? and not _.isArray(filter_query)
           es_query.query.bool.filter.push filter_query
 
       if request_facets
@@ -377,8 +396,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @trigger('selection-changed')
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Streaming Mode
+    # ------------------------------------------------------------------------------------------------------------------
+
+    enableStreamingMode: ->
+      @setMeta('streaming_mode', true)
+      @loadFacetGroups()
+
+    disableStreamingMode: ->
+      delete @meta['streaming_mode']
+      @loadFacetGroups()
+
+    isStreaming: ->
+      return @hasMeta('streaming_mode') and @getMeta('streaming_mode')
+
+    shouldIgnoreContentChangeRequestWhileStreaming: ->
+      return @isStreaming() and not @getMeta('page_changed')
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
     # ------------------------------------------------------------------------------------------------------------------
+
+    removeMeta: (attr)->
+      delete @meta[attr]
+
     setMeta: (attr, value) ->
       @meta[attr] = value
       @trigger('meta-changed')
@@ -387,7 +428,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @meta[attr]
 
     hasMeta: (attr) ->
-      return attr in _.keys(@meta)
+      return _.has(@meta, attr)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Search functions

@@ -111,7 +111,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     fillTemplates: ->
 
-
       $elem = $(@el).find('.BCK-items-container')
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
@@ -124,6 +123,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @checkIfTableNeedsToScroll()
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+      if @shouldIgnoreContentChangeRequestWhileStreaming()
+        return
 
       templateID = $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())

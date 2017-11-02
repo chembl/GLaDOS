@@ -19,7 +19,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
       value = '--' unless value?
       $('#' + elem_id).text(value)
 
-    @initEmbedModal('calculated_properties')
+    @initEmbedModal('calculated_properties', @model.get('molecule_chembl_id'))
     @activateModals()
     @showCardContent()
 

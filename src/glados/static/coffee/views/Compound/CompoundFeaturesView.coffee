@@ -30,7 +30,7 @@ CompoundFeaturesView = CardView.extend
     # until here, all the visible content has been rendered.
     @showCardContent()
 
-    @initEmbedModal('molecule_features')
+    @initEmbedModal('molecule_features', @model.get('molecule_chembl_id'))
     @activateModals()
 
     @activateTooltips()

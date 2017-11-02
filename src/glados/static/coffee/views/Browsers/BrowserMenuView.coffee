@@ -124,13 +124,17 @@ glados.useNameSpace 'glados.views.Browsers',
     handleSelection: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      out_of_n = @collection.getMeta('out_of_n')
       numSelectedItems = @collection.getNumberOfSelectedItems()
       glados.Utils.fillContentForElement $selectionMenuContainer,
+        out_of_n: if out_of_n > 0 then glados.Utils.getFormattedNumber(out_of_n) else false
         num_selected: numSelectedItems
         hide_num_selected: numSelectedItems == 0
-        total_items: @collection.getMeta('total_records')
+        total_items: glados.Utils.getFormattedNumber @collection.getMeta('total_records')
         entity_label: @collection.getMeta('label')
         none_is_selected: not @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
+      _.defer ->
+        $selectionMenuContainer.find('.tooltipped').tooltip()
 
       for viewLabel in @collection.getMeta('available_views')
         if @checkIfViewMustBeDisabled(viewLabel)

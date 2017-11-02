@@ -54,9 +54,9 @@
         <h3>Bioactivity</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/AssayReportCardParts/AssociatedBioactivities.html" %}
+          {% endwith %}
         </div>
 
       </div>
@@ -66,9 +66,9 @@
         <h3>Compound Summaries</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/AssayReportCardParts/AssociatedCompounds.html" %}
+          {% endwith %}
         </div>
 
         <div class="divider"></div>
@@ -76,9 +76,9 @@
           <h3>Protein Target Summaries</h3>
 
           <div class="row">
-
-            stuff
-
+            {% with is_dynamic=True  %}
+              {% include "glados/AssayReportCardParts/TargetSummary.html" %}
+            {% endwith %}
           </div>
 
         </div>

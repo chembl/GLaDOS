@@ -54,6 +54,15 @@ urlpatterns += [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/alternate_forms/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/AlternateFormsToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_activities/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/BioactivitySummaryToEmbed.html")), ),
+
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/AssaySummaryToEmbed.html")), ),
+
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_targets/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/TargetSummaryToEmbed.html")), ),
+
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/calculated_properties/$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
@@ -128,8 +137,17 @@ urlpatterns += [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
 
+  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedBioactivitiesToEmbed.html")), ),
+
+  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedCompoundsToEmbed.html")), ),
+
+  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/related_targets/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/TargetSummaryToEmbed.html")), ),
+
   url(r'^assays/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/browseAssays.html"), ),
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseAssays.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Documents

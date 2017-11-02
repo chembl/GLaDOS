@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.views.Target',
       @target_chembl_id = arguments[0].target_chembl_id
 
       @resource_type = 'Target'
-      @initEmbedModal('ligand_efficiencies')
+      @initEmbedModal('ligand_efficiencies', arguments[0].target_chembl_id)
       @activateModals()
 
       config = {
@@ -43,8 +43,8 @@ glados.useNameSpace 'glados.views.Target',
       @scatterPlotView.render()
 
       if @collection.getMeta('total_records') > 0
-        $linkToActivities = $(@el).find('.BCK-bioactivities-link')
+        $linkToActivities = $(@el).find('.BCK-all-sources-link')
         glados.Utils.fillContentForElement $linkToActivities,
-          target_chembl_id: @target_chembl_id
+          link_text: 'See all bioactivities for target ' + @target_chembl_id + ' used in this visualisation'
           url: Activity.getActivitiesListURL(@collection.getMeta('custom_query_string'))
 

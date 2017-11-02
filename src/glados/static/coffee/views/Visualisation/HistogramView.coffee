@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     initialize: ->
       @config = arguments[0].config
-
       @model.on 'change:state', @render, @
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       @setUpResponsiveRender()
@@ -96,7 +95,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         return
 
       @$vis_elem.empty()
-
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
@@ -243,6 +241,10 @@ glados.useNameSpace 'glados.views.Visualisation',
           .attr('y', TITLE_Y)
           .attr('text-anchor', 'middle')
           .classed('title', @config.big_size)
+          .on('click',
+            if @config.title_link_url
+              -> window.open(thisView.config.title_link_url)
+          )
 
       if not @config.big_size
         return
