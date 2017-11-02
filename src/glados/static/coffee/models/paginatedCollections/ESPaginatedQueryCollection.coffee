@@ -401,9 +401,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     enableStreamingMode: ->
       @setMeta('streaming_mode', true)
+      @loadFacetGroups()
 
     disableStreamingMode: ->
       delete @meta['streaming_mode']
+      @loadFacetGroups()
 
     isStreaming: ->
       return @hasMeta('streaming_mode') and @getMeta('streaming_mode')
