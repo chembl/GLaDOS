@@ -5,19 +5,27 @@ class CellLineReportCardApp
   # -------------------------------------------------------------
   @init = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
-
-    cellLine = new CellLine
-      cell_chembl_id: GlobalVariables.CHEMBL_ID
-
-    new CellLineBasicInformationView
-      model: cellLine
-      el: $('#CBasicInformation')
-
+    cellLine = CellLineReportCardApp.getCurrentCellLine()
+    CellLineReportCardApp.initBasicInformation()
     cellLine.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
+
+  # -------------------------------------------------------------
+  # Singleton
+  # -------------------------------------------------------------
+  @getCurrentCellLine = ->
+
+    if not @currentCellLine?
+
+      chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+      @currentCellLine = new CellLine
+        cell_chembl_id: chemblID
+      return @currentCellLine
+
+    else return @currentCellLine
 
   # -------------------------------------------------------------
   # Specific section initialization
@@ -25,13 +33,12 @@ class CellLineReportCardApp
   # -------------------------------------------------------------
   @initBasicInformation = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    cellLine = new CellLine
-      cell_chembl_id: GlobalVariables.CHEMBL_ID
+    cellLine = CellLineReportCardApp.getCurrentCellLine()
 
     new CellLineBasicInformationView
       model: cellLine
       el: $('#CBasicInformation')
 
-    cellLine.fetch()
+    if GlobalVariables['EMBEDED']
+      cellLine.fetch()
