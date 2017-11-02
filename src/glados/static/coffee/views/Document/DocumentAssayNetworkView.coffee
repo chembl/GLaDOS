@@ -19,7 +19,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     @addFSLinkAndInfo()
     @paintMatrix()
 
-    @initEmbedModal('assay_network')
+    @initEmbedModal('assay_network', @model.get('document_chembl_id'))
     @activateModals()
 
 

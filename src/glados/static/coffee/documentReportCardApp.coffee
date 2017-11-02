@@ -5,59 +5,51 @@ class DocumentReportCardApp
   # -------------------------------------------------------------
   @init = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
+    document = DocumentReportCardApp.getCurrentDocument()
 
-    document = new Document
-      document_chembl_id: GlobalVariables.CHEMBL_ID
-
-    documentAssayNetwork = new DocumentAssayNetwork
-      document_chembl_id: GlobalVariables.CHEMBL_ID
-
-    new DocumentBasicInformationView
-      model: document
-      el: $('#DBasicInformation')
-
-    docTerms = new DocumentTerms
-      document_chembl_id: GlobalVariables.CHEMBL_ID
-
-    dWordCloudView = new DocumentWordCloudView
-      model: docTerms
-      el: $('#DWordCloudCard')
-
-
-    new DocumentAssayNetworkView
-      model: documentAssayNetwork
-      el: $('#DAssayNetworkCard')
+    DocumentReportCardApp.initBasicInformation()
+    DocumentReportCardApp.initAssayNetwork()
+    DocumentReportCardApp.initWordCloud()
 
     document.fetch()
-    documentAssayNetwork.fetch()
-    docTerms.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
+
+  # -------------------------------------------------------------
+  # Singleton
+  # -------------------------------------------------------------
+  @getCurrentDocument = ->
+
+    if not @currentDocument?
+
+      chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+      @currentDocument = new Document
+        document_chembl_id: chemblID
+      return @currentDocument
+
+    else return @currentDocument
 
   # -------------------------------------------------------------
   # Specific section initialization
   # this is functions only initialize a section of the report card
   # -------------------------------------------------------------
   @initBasicInformation = ->
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
 
-    document = new Document
-      document_chembl_id: GlobalVariables.CHEMBL_ID
+    document = DocumentReportCardApp.getCurrentDocument()
 
     new DocumentBasicInformationView
       model: document
       el: $('#DBasicInformation')
 
-    document.fetch()
+    if GlobalVariables['EMBEDED']
+      document.fetch()
 
   @initAssayNetwork = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
     documentAssayNetwork = new DocumentAssayNetwork
-      document_chembl_id: GlobalVariables.CHEMBL_ID
+      document_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     new DocumentAssayNetworkView
       model: documentAssayNetwork
@@ -67,12 +59,10 @@ class DocumentReportCardApp
 
   @initWordCloud = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblIDWhenEmbedded()
-
     docTerms = new DocumentTerms
-      document_chembl_id: GlobalVariables.CHEMBL_ID
+      document_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
-    dWordCloudView = new DocumentWordCloudView
+    new DocumentWordCloudView
       model: docTerms
       el: $('#DWordCloudCard')
 

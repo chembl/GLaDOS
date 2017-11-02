@@ -15,7 +15,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
     @fillTemplate('BCK-DBI-small')
     @showCardContent()
 
-    @initEmbedModal('basic_information')
+    @initEmbedModal('basic_information', @model.get('document_chembl_id'))
     @activateModals()
 
   fillTemplate: (div_id) ->
