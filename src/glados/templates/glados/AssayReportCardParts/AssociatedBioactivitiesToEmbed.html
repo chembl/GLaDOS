@@ -1,0 +1,16 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Bioactivities{% endblock %}
+
+{% block content2 %}
+
+   <div style="margin-top: 25px;">
+    {% include "glados/AssayReportCardParts/AssociatedBioactivities.html" %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+AssayReportCardApp.initActivitySummary();
+{% endblock %}
