@@ -21,9 +21,11 @@ ApprovedDrugClinicalCandidate.COLUMNS = {
   }
   REFERENCES:{
     'name_to_show': 'References'
-    'comparator': 'references'
+    'comparator': 'mechanism_refs'
     'sort_disabled': true
     'is_sorting': 0
+    multiple_links: true
+    multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
   }
 }
 
