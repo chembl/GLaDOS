@@ -1,0 +1,15 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Assay Summary{% endblock %}
+
+{% block content %}
+   <div style="margin-top: 25px;">
+    {% include "glados/TissueReportCardParts/AssaySummary.html" %}
+   </div>
+{% endblock %}
+
+{% load static %}
+
+{% block custom_js_inline %}
+TissueReportCardApp.initAssaySummary();
+{% endblock %}

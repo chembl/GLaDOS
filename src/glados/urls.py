@@ -202,9 +202,6 @@ urlpatterns += [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CellReportCardParts/CompoundSummaryToEmbed.html")), ),
 
-  url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
-
   url(r'^$', views.main_page, name='main'),
 
   url(r'^marvin_search_fullscreen/$',
@@ -213,6 +210,20 @@ urlpatterns += [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Tissues
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
+      DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
+
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/AssaySummaryToEmbed.html")), ),
+
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/ActivitySummaryToEmbed.html")), ),
+
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/CompoundSummaryToEmbed.html")), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Tests
   # --------------------------------------------------------------------------------------------------------------------

@@ -23,11 +23,9 @@
         <h3>Basic Information</h3>
 
         <div class="row">
-
           {% block tbi %}
           {% include "glados/TissueReportCardParts/BasicInformation.html" %}
           {% endblock %}
-
         </div>
 
       </div>
@@ -36,9 +34,9 @@
         <h3>Assay Summary</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/TissueReportCardParts/AssaySummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
@@ -47,9 +45,9 @@
         <h3>Bioactivity Summary</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
@@ -58,9 +56,9 @@
         <h3>Compound Summaries</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/TissueReportCardParts/CompoundSummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
@@ -78,14 +76,6 @@
 
           <li><a href="#BasicInformation">
             <small>Basic Information</small>
-          </a></li>
-
-          <li><a href="#AssaySummary">
-            <small>Assay Summary</small>
-          </a></li>
-
-          <li><a href="#BioactivitySummary">
-            <small>Bioactivity Summary</small>
           </a></li>
 
           <li><a href="#AssaySummary">
@@ -118,8 +108,5 @@
 
 
 {% block custom_js_inline %}
-
-$('.scrollspy').scrollSpy();
-ScrollSpyHelper.initializeScrollSpyPinner();
-
+TissueReportCardApp.init();
 {% endblock %}
