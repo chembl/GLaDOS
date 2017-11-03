@@ -222,6 +222,8 @@ urlpatterns += [
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/ActivitySummaryToEmbed.html")), ),
 
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/CompoundSummaryToEmbed.html")), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Tests
   # --------------------------------------------------------------------------------------------------------------------
