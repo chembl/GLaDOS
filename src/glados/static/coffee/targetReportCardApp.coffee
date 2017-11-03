@@ -113,19 +113,21 @@ class TargetReportCardApp
 
   @initAssociatedAssays = ->
 
-    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(targetChemblID)
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(chemblID)
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+      title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
 
     viewConfig =
       pie_config: pieConfig
       resource_type: gettext('glados_entities_target_name')
       link_to_all:
-        link_text: 'See all assays for target ' + targetChemblID + ' used in this visualisation.'
-        url: Assay.getAssaysListURL('target_chembl_id:' + targetChemblID)
+        link_text: 'See all assays for target ' + chemblID + ' used in this visualisation.'
+        url: Assay.getAssaysListURL('target_chembl_id:' + chemblID)
+      embed_section_name: 'associated_assays'
+      embed_identifier: chemblID
 
     new glados.views.ReportCards.PieInCardView
       model: associatedAssays
