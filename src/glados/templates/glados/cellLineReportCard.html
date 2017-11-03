@@ -62,9 +62,9 @@
         <h3>Compound Summaries</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/CellReportCardParts/CompoundSummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
