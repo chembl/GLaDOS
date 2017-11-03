@@ -90,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_property,
           property_type.type,
           FacetingHandler.INTERVAL_FACETING,
-          property_type
+          property_type, property_type.year
         )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
@@ -100,18 +100,21 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type)->
+    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear)->
       @faceting_keys_inorder = null
       @faceting_data = null
       @min_value = null
       @max_value = null
+      @std_dev = null
+      @get_upper_percentile = true
+      @get_lower_percentile = true
       @intervals_size = null
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Interval aggregations require 2 calls to find out first the min/max range
+    # Interval aggregations require 2 calls to find out first the min/max/dev_std range
     # and then create an histogram of n columns
     addQueryAggs: (es_query_aggs, first_call)->
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
@@ -126,12 +129,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
-          es_query_aggs[@es_property_name+'_MIN'] = {
-            min:
-              field: @es_property_name
-          }
-          es_query_aggs[@es_property_name+'_MAX'] = {
-            max:
+          es_query_aggs[@es_property_name+'_STATS'] = {
+            extended_stats:
               field: @es_property_name
           }
         else
@@ -139,10 +138,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             throw "ERROR! The minimum and maximum have not been requested yet!"
           else
             es_query_aggs[@es_property_name] = {
-              histogram:
+              range:
                 field: @es_property_name
-                interval: @intervals_size
+                ranges: []
             }
+            cur_from = @min_value
+            while cur_from < @max_value
+              es_query_aggs[@es_property_name].range.ranges.push
+                from: cur_from
+                to: cur_from + @intervals_size
+              cur_from += @intervals_size
 
     # will round the interval size to the closest 10*, 20* or 50*
     roundInterval: ()->
@@ -202,24 +207,32 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
-          @min_value = es_aggregations_data[@es_property_name+'_MIN'].value
+          stats = es_aggregations_data[@es_property_name+'_STATS']
+          limit = stats.std_deviation
+          if stats.avg < stats.std_deviation
+            limit = stats.avg/10
+          upperBound = stats.avg + 2 * limit
+          lowerBound = stats.avg - 2 * limit
+          @min_value = if stats.min > lowerBound then stats.min else lowerBound
+          console.warn(@min_value, upperBound, lowerBound)
           if not _.isNumber(@min_value) and not _.isNaN(@min_value)
             @min_value = Number.MIN_SAFE_INTEGER
-          @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
+          @max_value = if stats.max < upperBound then stats.max else upperBound
           if not _.isNumber(@max_value) and not _.isNaN(@max_value)
             @max_value = Number.MAX_SAFE_INTEGER
+          console.warn('min', @min_value, 'max', @max_value, stats)
           @roundInterval()
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
           aggregated_data = es_aggregations_data[@es_property_name]
-          if aggregated_data
-            if not _.isUndefined(aggregated_data.buckets)
+          if aggregated_data?
+            if aggregated_data.buckets
               for bucket_i in aggregated_data.buckets
-                fKey = @parseIntervalKey(bucket_i.key, @intervals_size)
+                fKey = @getIntervalKey(bucket_i)
                 @faceting_data[fKey] = {
-                  min: bucket_i.key
-                  max: bucket_i.key + @intervals_size
+                  min: bucket_i.from
+                  max: bucket_i.from + bucket_i.to
                   index: @faceting_keys_inorder.length
                   count: bucket_i.doc_count
                   selected: false
@@ -234,12 +247,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       return glados.models.visualisation.PropertiesFactory.parseValueForEntity(esIndex, propName, key)
 
-    parseIntervalKey: (key, intervalsSize) ->
-      formatKey = glados.Utils.getFormattedNumber
-      if intervalsSize == 1
-        return formatKey(key)
+    getIntervalKey: (bucket_data) ->
+      formatKey = if @isYear then ((n)-> return n) else glados.Utils.getFormattedNumber
+      if @intervals_size == 1
+        return formatKey(bucket_data.from)
       else
-        return formatKey(key) + "  to  " + formatKey(key + intervalsSize)
+        return formatKey(bucket_data.from) + "  to  " + formatKey(bucket_data.to)
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING
