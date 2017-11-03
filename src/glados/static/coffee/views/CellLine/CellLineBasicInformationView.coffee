@@ -15,7 +15,7 @@ CellLineBasicInformationView = CardView.extend
     @fillTemplate('BCK-CBI-small')
 
     @showCardContent()
-    @initEmbedModal('basic_information')
+    @initEmbedModal('basic_information', @model.get('cell_chembl_id'))
     @activateModals()
 
   fillTemplate: (div_id) ->
