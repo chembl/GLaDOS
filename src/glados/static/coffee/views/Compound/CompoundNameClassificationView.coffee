@@ -19,6 +19,7 @@ CompoundNameClassificationView = CardView.extend
     @renderMaxPhase()
     @renderMolFormula()
     @renderSynonymsAndTradeNames()
+    @renderMolType()
 
     # until here, all the visible content has been rendered.
     @showCardContent()
@@ -44,6 +45,8 @@ CompoundNameClassificationView = CardView.extend
       undef: name == null
 
     $(@el).find('#Bck-PREF_NAME').html(rendered)
+
+  renderMolType: -> $(@el).find('#Bck-MOLTYPE').html(@model.get('molecule_type'))
 
   renderMaxPhase: ->
     phase = @model.get('max_phase')
