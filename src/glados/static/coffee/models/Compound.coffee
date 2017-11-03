@@ -67,10 +67,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @download2DSDF().then ->
       model.downloadAlignedSDF().then downloadHighlighted, downloadHighlighted
 
-
   parse: (response) ->
 
-    console.log 'PARSING COMPOUND'
     filterForActivities = 'molecule_chembl_id:' + response.molecule_chembl_id
     response.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
