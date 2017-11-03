@@ -39,19 +39,27 @@ msgstr "Assay Type"
 
 
 msgid "glados_es_gs__activity__bao_endpoint__label"
-msgstr "Bao Endpoint"
+msgstr "BAO Endpoint"
 
 
 msgid "glados_es_gs__activity__bao_endpoint__label__mini"
-msgstr "Bao Endpoint"
+msgstr "BAO Endpoint"
 
 
 msgid "glados_es_gs__activity__bao_format__label"
-msgstr "Bao Format"
+msgstr "BAO Format"
 
 
 msgid "glados_es_gs__activity__bao_format__label__mini"
-msgstr "Bao Format"
+msgstr "BAO Format"
+
+
+msgid "glados_es_gs__activity__bao_label__label"
+msgstr "BAO Label"
+
+
+msgid "glados_es_gs__activity__bao_label__label__mini"
+msgstr "BAO Label"
 
 
 msgid "glados_es_gs__activity__canonical_smiles__label"
@@ -140,6 +148,14 @@ msgstr "Molecule ChEMBL ID"
 
 msgid "glados_es_gs__activity__molecule_chembl_id__label__mini"
 msgstr "Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__activity__parent_molecule_chembl_id__label"
+msgstr "Parent Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__activity__parent_molecule_chembl_id__label__mini"
+msgstr "Parent Molecule ChEMBL ID"
 
 
 msgid "glados_es_gs__activity__pchembl_value__label"
@@ -391,11 +407,19 @@ msgstr "Assay Type Description"
 
 
 msgid "glados_es_gs__assay__bao_format__label"
-msgstr "Bao Format"
+msgstr "BAO Format"
 
 
 msgid "glados_es_gs__assay__bao_format__label__mini"
-msgstr "Bao Format"
+msgstr "BAO Format"
+
+
+msgid "glados_es_gs__assay__bao_label__label"
+msgstr "BAO Label"
+
+
+msgid "glados_es_gs__assay__bao_label__label__mini"
+msgstr "BAO Label"
 
 
 msgid "glados_es_gs__assay__cell_chembl_id__label"
