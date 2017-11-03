@@ -6,7 +6,8 @@ class TissueReportCardApp
   @init = ->
 
     TissueReportCardApp.initAssaySummary()
-    
+    TissueReportCardApp.initActivitySummary()
+
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
 
@@ -34,6 +35,31 @@ class TissueReportCardApp
       config: viewConfig
 
     associatedAssays.fetch()
+
+  @initActivitySummary = ->
+
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    bioactivities = TissueReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
+
+    pieConfig =
+      x_axis_prop_name: 'types'
+      title: gettext('glados_tissue__bioactivities_pie_title_base') + chemblID
+
+    viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_tissue_name')
+      embed_section_name: 'bioactivities'
+      embed_identifier: chemblID
+      link_to_all:
+        link_text: 'See all bioactivities for tissue ' + chemblID + ' used in this visualisation.'
+        url: Activity.getActivitiesListURL()
+
+    new glados.views.ReportCards.PieInCardView
+      model: bioactivities
+      el: $('#TiAssociatedActivitiesCard')
+      config: viewConfig
+
+    bioactivities.fetch()
 
   # -------------------------------------------------------------
   # Aggregations
@@ -71,3 +97,34 @@ class TissueReportCardApp
       aggs_config: aggsConfig
 
     return associatedAssays
+
+  @getAssociatedBioactivitiesAgg = (chemblID) ->
+
+    #TODO: check how to get in index
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+
+    aggsConfig =
+      aggs:
+        types:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'standard_type'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: 'standard_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Activity.getActivitiesListURL
+
+    bioactivities = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
+      query_config: queryConfig
+      cell_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return bioactivities

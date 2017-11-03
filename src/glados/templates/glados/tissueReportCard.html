@@ -45,9 +45,9 @@
         <h3>Bioactivity Summary</h3>
 
         <div class="row">
-
-          stuff
-
+          {% with is_dynamic=True  %}
+            {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
+          {% endwith %}
         </div>
 
       </div>
