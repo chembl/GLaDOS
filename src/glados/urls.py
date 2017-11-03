@@ -196,6 +196,9 @@ urlpatterns += [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CellReportCardParts/AssaySummaryToEmbed.html")), ),
 
+  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CellReportCardParts/ActivitySummaryToEmbed.html")), ),
+
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
 
