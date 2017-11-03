@@ -5,6 +5,13 @@ ApprovedDrugClinicalCandidate.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_chembl_id'
     link_function: Compound.get_report_card_url.bind(Compound)
+  PREF_NAME:{
+    'name_to_show': 'Name'
+    'comparator': 'pref_name'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+  }
   MECH_OF_ACT:{
     'name_to_show': 'Mechanism of Action'
     'comparator': 'mechanism_of_action'
@@ -31,7 +38,7 @@ ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS = {
   )()
   RESULTS_LIST_TABLE:[
     ApprovedDrugClinicalCandidate.COLUMNS.CHEMBL_ID
-    Compound.COLUMNS.PREF_NAME
+    ApprovedDrugClinicalCandidate.COLUMNS.PREF_NAME
     ApprovedDrugClinicalCandidate.COLUMNS.MECH_OF_ACT
     Compound.COLUMNS.MAX_PHASE
     ApprovedDrugClinicalCandidate.COLUMNS.REFERENCES
