@@ -70,6 +70,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   parse: (response) ->
 
+    console.log 'PARSING COMPOUND'
     filterForActivities = 'molecule_chembl_id:' + response.molecule_chembl_id
     response.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
