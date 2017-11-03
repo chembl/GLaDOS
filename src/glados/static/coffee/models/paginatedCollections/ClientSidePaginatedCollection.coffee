@@ -34,7 +34,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     resetMeta: ->
 
-      console.log 'reseting meta'
       @setMeta('total_records', @models.length)
       @setMeta('current_page', 1)
       @calculateTotalPages()
@@ -109,7 +108,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return to_show
 
     setPage: (page_num) ->
-
 
       # don't bother if the page requested is greater than the total number of pages
       if page_num > @getMeta('total_pages')

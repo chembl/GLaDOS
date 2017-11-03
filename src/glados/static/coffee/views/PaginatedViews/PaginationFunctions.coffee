@@ -24,7 +24,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
-
       pageNum = clicked.attr('data-page')
       @requestPageInCollection(pageNum)
 

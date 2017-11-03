@@ -441,7 +441,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             # here everything is ready
             this_collection.setMeta('data_loaded', true)
             this_collection.reset(drug_mechanisms)
-            console.log 'drug mechanisms got: ', drug_mechanisms
           )
 
           getMoleculesInfo.fail(()->
