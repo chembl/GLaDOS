@@ -83,6 +83,7 @@ class TargetReportCardApp
     new ApprovedDrugsClinicalCandidatesView
       collection: appDrugsClinCandsList
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
+      target_chembl_id: targetChemblID
 
     appDrugsClinCandsList.fetch()
 

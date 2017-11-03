@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: ->
+
       # @collection - must be provided in the constructor call
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
@@ -50,11 +51,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     bindCollectionEvents: ->
 
+      console.log 'aa binding events', @customRenderEvents
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
       if @customRenderEvents?
         @collection.on @customRenderEvents, @.render, @
-      else if @isInfinite()
+
+      if @isInfinite()
         @collection.on 'sync do-repaint', @.render, @
       else
         @collection.on 'reset sort', @render, @
