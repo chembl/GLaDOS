@@ -408,11 +408,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list.fetch = ->
         this_collection = @
-        drug_mechanisms = {}
+        drugMechanisms = []
+        drugMechanismsPositions = {}
 
+        console.log 'going to get list of mechs'
         # 1 first get list of drug mechanisms
         getDrugMechanisms = $.getJSON(@url, (data) ->
-          drug_mechanisms = data.mechanisms
+          drugMechanisms = data.mechanisms
+
+          if drugMechanisms.length > 0
+            for i in [0..drugMechanisms.length-1]
+              console.log 'i is: ', i
+              currentDrug = drugMechanisms[i]
+              drugMechanismsPositions[currentDrug.molecule_chembl_id] = i
         )
 
         getDrugMechanisms.fail(()->
@@ -423,24 +431,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         base_url2 = glados.Settings.WS_BASE_URL + 'molecule.json?molecule_chembl_id__in='
         # after I have the drug mechanisms now I get the molecules
         getDrugMechanisms.done(() ->
-          molecules_list = (dm.molecule_chembl_id for dm in drug_mechanisms).join(',')
+          moleculesIDs = (dm.molecule_chembl_id for dm in drugMechanisms).join(',')
+          console.log 'drugMechanismsPositions: ', drugMechanismsPositions
           # order is very important to iterate in the same order as the first call
-          getMoleculesInfoUrl = base_url2 + molecules_list + '&order_by=molecule_chembl_id&limit=1000'
+          getMoleculesInfoUrl = base_url2 + moleculesIDs + '&order_by=molecule_chembl_id&limit=1000'
 
           getMoleculesInfo = $.getJSON(getMoleculesInfoUrl, (data) ->
+
             molecules = data.molecules
-            # Now I fill the missing information, both arrays are ordered by molecule_chembl_id
-            i = 0
+            # Now I fill the missing information
             for mol in molecules
 
-              drug_mechanisms[i].max_phase = mol.max_phase
-              drug_mechanisms[i].pref_name = mol.pref_name
-
-              i++
+              positionInDrugMechs = drugMechanismsPositions[mol.molecule_chembl_id]
+              drugMechanisms[positionInDrugMechs].max_phase = mol.max_phase
+              drugMechanisms[positionInDrugMechs].pref_name = mol.pref_name
 
             # here everything is ready
             this_collection.setMeta('data_loaded', true)
-            this_collection.reset(drug_mechanisms)
+            this_collection.reset(drugMechanisms)
           )
 
           getMoleculesInfo.fail(()->
