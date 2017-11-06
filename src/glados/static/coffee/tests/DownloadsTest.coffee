@@ -50,8 +50,6 @@ describe "Downloads", ->
   testJSONFile = (currentContent, expectedFileUrl, done) ->
     $.get expectedFileUrl, (expectedFileContent) ->
 
-      console.log 'content expected: '
-      console.log JSON.stringify(expectedFileContent)
       expect(currentContent).toBe(JSON.stringify(expectedFileContent))
       done()
 
