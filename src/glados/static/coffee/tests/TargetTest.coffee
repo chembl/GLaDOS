@@ -13,13 +13,33 @@ describe "Target", ->
       expect(class1).toBe('Other cytosolic protein')
       expect(class2).toBe('Unclassified protein')
 
+    testActivitiesURL = (response, parsed) ->
+
+      chemblID = response.target_chembl_id
+      activitiesURLMustBe = Activity.getActivitiesListURL('target_chembl_id:' + chemblID)
+      expect(parsed.activities_url).toBe(activitiesURLMustBe)
+
+    testCompoundsURL = (response, parsed) ->
+
+      chemblID = response.target_chembl_id
+      urlMustBe = Compound.getCompoundsListURL('_metadata.related_targets.chembl_ids.\\*:' + chemblID)
+      expect(parsed.compounds_url).toBe(urlMustBe)
+
+    testReportCardURL = (response, parsed) ->
+
+      chemblID = response.target_chembl_id
+      urlMustBe = Target.get_report_card_url(chemblID)
+      expect(parsed.report_card_url).toBe(urlMustBe)
+
     #-------------------------------------------------------------------------------------------------------------------
     # From Web services
     #-------------------------------------------------------------------------------------------------------------------
     describe "Loaded From Web Services", ->
 
+      chemblID = 'CHEMBL2363965'
       target = new Target
-          target_chembl_id: 'CHEMBL2363965'
+          target_chembl_id: chemblID
+          fetch_from_elastic: false
 
       beforeAll (done) ->
         target.fetch()
@@ -32,10 +52,24 @@ describe "Target", ->
           done()
         ), 10000
 
+      wsResponse = undefined
+      parsed = undefined
+
+      beforeAll (done) ->
+
+        dataURL = glados.Settings.STATIC_URL + 'testData/Targets/CHEMBL2363965-WS-Response.json'
+        $.get dataURL, (testData) ->
+          wsResponse = testData
+          parsed = target.parse(wsResponse)
+          done()
+
       it 'generates the web services url', ->
 
-        console.log 'url is: ', target.url
+        urlMustBe = glados.Settings.WS_BASE_URL + 'target/' + chemblID + '.json'
+        expect(target.url).toBe(urlMustBe)
 
       it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
-
+      it 'parses the activities URL', -> testActivitiesURL(wsResponse, parsed)
+      it 'parses the compounds URL', -> testCompoundsURL(wsResponse, parsed)
+      it 'parses the report card URL', -> testReportCardURL(wsResponse, parsed)
 
