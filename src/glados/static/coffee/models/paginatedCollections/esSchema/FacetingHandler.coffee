@@ -103,13 +103,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear)->
       @faceting_keys_inorder = null
       @faceting_data = null
-      @min_value = null
-      @max_value = null
-      @std_dev = null
-      @get_upper_percentile = true
-      @get_lower_percentile = true
-      @normal_distributed = true
-      @intervals_size = null
+      @intervalsLimits
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
@@ -141,29 +135,56 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               keyed: true
           }
         else
-          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
-            throw "ERROR! The minimum and maximum have not been requested yet!"
+          if not @intervalsLimits?
+            throw "ERROR! The intervals have not been calculated yet!"
           else
             es_query_aggs[@es_property_name] = {
               range:
                 field: @es_property_name
                 ranges: []
             }
-            cur_from = @min_value
-            while cur_from < @max_value
+            for intervalLimitI, index in @intervalsLimits
+              if index == @intervalsLimits.length - 1
+                continue
               es_query_aggs[@es_property_name].range.ranges.push
-                from: cur_from
-                to: cur_from + @intervals_size
-              cur_from += @intervals_size
+                from: intervalLimitI
+                to: @intervalsLimits[index+1]
 
-    # will round the interval size to the closest 10*, 20* or 50*
-    roundInterval: ()->
-      # Do the division first to prevent number overflow
-      @intervals_size = (@max_value/FacetingHandler.NUM_INTERVALS)-(@min_value/FacetingHandler.NUM_INTERVALS)
-      isSmallFloat = @intervals_size < 5 and not @property_type.integer
-      @intervals_size = glados.Utils.roundNumber(@intervals_size, isSmallFloat)
-      @min_value = Math.floor(@min_value)
-      @max_value = Math.ceil(@max_value)
+    calculateIntervals: (stats, percentiles)->
+      # WARNING: Do the division first to prevent number overflow
+      intervalsSize = (stats.max/FacetingHandler.NUM_INTERVALS)-(stats.min/FacetingHandler.NUM_INTERVALS)
+      # WARNING: Do the division first to prevent number overflow
+
+      isSmallFloat = intervalsSize < 5 and not @property_type.integer
+      isNormalDistributed = percentiles['80.0'] > stats.avg or percentiles['20.0'] < stats.avg
+
+      roundedMin = glados.Utils.roundNumber(stats.min, isSmallFloat, true)
+      roundedMax = glados.Utils.roundNumber(stats.max, isSmallFloat)
+
+      @intervalsLimits = [roundedMin]
+
+      if stats.max - stats.min <= FacetingHandler.NUM_INTERVALS and @property_type.integer
+        for numJ in [roundedMin+1..roundedMax-1]
+          @intervalsLimits.push(numJ)
+      if not isNormalDistributed
+        for keyI in _.keys(percentiles)
+          @intervalsLimits.push glados.Utils.roundNumber(percentiles[keyI], true)
+      else
+        lowerBound = glados.Utils.roundNumber(stats.avg - 2 * stats.std_deviation)
+        upperBound = glados.Utils.roundNumber( stats.avg + 2 * stats.std_deviation)
+        intervalsSize = (upperBound/FacetingHandler.NUM_INTERVALS)-(lowerBound/FacetingHandler.NUM_INTERVALS)
+        intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat)
+        curNum = lowerBound
+        while curNum < upperBound and curNum < roundedMax
+          if curNum > @intervalsLimits[-1]
+            @intervalsLimits.push curNum
+          curNum += intervalsSize
+        if upperBound < roundedMax
+          @intervalsLimits.push roundedMax
+
+      @intervalsLimits.push(roundedMax)
+      console.warn(@property_type, @intervalsLimits, isNormalDistributed)
+
 
     parseESResults: (es_aggregations_data, first_call)->
 
@@ -197,21 +218,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         if first_call
           stats = es_aggregations_data[@es_property_name+'_STATS']
           percentiles = es_aggregations_data[@es_property_name+'_PERCENTILES'].values
-          @normal_distributed = percentiles['80.0'] < stats.avg or percentiles['20.0'] > stats.avg
-          upperBound = stats.avg + 2 * stats.std_deviation
-          lowerBound = stats.avg - 2 * stats.std_deviation
-          @min_value = if stats.min > lowerBound then stats.min else lowerBound
-          console.warn(@min_value, upperBound, lowerBound)
-          if not _.isNumber(@min_value) and not _.isNaN(@min_value)
-            @min_value = Number.MIN_SAFE_INTEGER
-          @max_value = if stats.max < upperBound then stats.max else upperBound
-          if not _.isNumber(@max_value) and not _.isNaN(@max_value)
-            @max_value = Number.MAX_SAFE_INTEGER
-          console.warn('min', @min_value, 'max', @max_value, stats)
-          @roundInterval()
+          @calculateIntervals stats, percentiles
         else
-          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
-            throw "ERROR! The minimum and maximum have not been requested yet!"
+          if not @intervalsLimits?
+            throw "ERROR! The intervals have not been calculated yet!"
           aggregated_data = es_aggregations_data[@es_property_name]
           if aggregated_data?
             if aggregated_data.buckets
