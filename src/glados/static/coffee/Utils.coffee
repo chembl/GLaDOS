@@ -1,5 +1,31 @@
 glados.useNameSpace 'glados',
   Utils:
+    # Will round a number to the closest 10*, 20* or 50*
+    roundNumber: (n, isSmallFloat=false)->
+      if isSmallFloat
+        n *= Math.pow(10, 20)
+      curLevel = -1
+      curNum = n
+      loop
+        curLevel += 1
+        lastNum = curNum
+        curNum = Math.ceil(curNum/10)
+        if curNum == 1 or curNum == 0
+          break
+      if lastNum > 5
+        curLevel++
+        lastNum = 1
+      else if lastNum > 2
+        lastNum = 5
+      else if lastNum > 1
+        lastNum = 2
+      else
+        lastNum = 1
+      n = lastNum * Math.pow(10, curLevel)
+      if isSmallFloat
+        n /= Math.pow(10, 20)
+      return n
+
     getFormattedNumber: (numberToFormat, exponentialAfter=Math.pow(10, 9), year=false)->
       if year
         return ""+numberToFormat
