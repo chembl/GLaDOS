@@ -72,82 +72,80 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       model.downloadAlignedSDF().then downloadHighlighted, downloadHighlighted
 
   #---------------------------------------------------------------------------------------------------------------------
-  # Fetching
-  #---------------------------------------------------------------------------------------------------------------------
-
-  #---------------------------------------------------------------------------------------------------------------------
-  # ElasticSearch
-  #---------------------------------------------------------------------------------------------------------------------
-
-  #---------------------------------------------------------------------------------------------------------------------
   # Parsing
   #---------------------------------------------------------------------------------------------------------------------
   parse: (response) ->
 
-    filterForActivities = 'molecule_chembl_id:' + response.molecule_chembl_id
-    response.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    # get data when it comes from elastic
+    if response._source?
+      objData = response._source
+    else
+      objData = response
+
+    filterForActivities = 'molecule_chembl_id:' + objData.molecule_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
     # Lazy definition for sdf content retrieving
-    response.sdf_url = glados.Settings.WS_BASE_URL + 'molecule/' + response.molecule_chembl_id + '.sdf'
-    response.sdf_promise = null
-    response.get_sdf_content_promise = ->
-      if not response.sdf_promise
-        response.sdf_promise = $.ajax(response.sdf_url)
-      return response.sdf_promise
+    objData.sdf_url = glados.Settings.WS_BASE_URL + 'molecule/' + objData.molecule_chembl_id + '.sdf'
+    objData.sdf_promise = null
+    objData.get_sdf_content_promise = ->
+      if not objData.sdf_promise
+        objData.sdf_promise = $.ajax(objData.sdf_url)
+      return objData.sdf_promise
 
     # Calculate the rule of five from other properties
-    if response.molecule_properties?
-      response.ro5 = response.molecule_properties.num_ro5_violations == 0
+    if objData.molecule_properties?
+      objData.ro5 = objData.molecule_properties.num_ro5_violations == 0
     else
-      response.ro5 = false
+      objData.ro5 = false
 
     # Computed Image and report card URL's for Compounds
-    response.structure_image = false
-    if response.structure_type == 'NONE' or response.structure_type == 'SEQ'
+    objData.structure_image = false
+    if objData.structure_type == 'NONE' or objData.structure_type == 'SEQ'
       # see the cases here: https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?spaceKey=CHEMBL&title=ChEMBL+Interface
       # in the section Placeholder Compound Images
 
-      if response.molecule_properties?
-        if glados.Utils.Compounds.containsMetals(response.molecule_properties.full_molformula)
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
-      else if response.molecule_type == 'Oligosaccharide'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
-      else if response.molecule_type == 'Small molecule'
+      if objData.molecule_properties?
+        if glados.Utils.Compounds.containsMetals(objData.molecule_properties.full_molformula)
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
+      else if objData.molecule_type == 'Oligosaccharide'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
+      else if objData.molecule_type == 'Small molecule'
 
-        if response.natural_product == '1'
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.svg'
-        else if response.polymer_flag == true
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
+        if objData.natural_product == '1'
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.svg'
+        else if objData.polymer_flag == true
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
         else
-          response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.svg'
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.svg'
 
-      else if response.molecule_type == 'Antibody'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.svg'
-      else if response.molecule_type == 'Protein'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
-      else if response.molecule_type == 'Oligonucleotide'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
-      else if response.molecule_type == 'Enzyme'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.svg'
-      else if response.molecule_type == 'Cell'
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
+      else if objData.molecule_type == 'Antibody'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.svg'
+      else if objData.molecule_type == 'Protein'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
+      else if objData.molecule_type == 'Oligonucleotide'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
+      else if objData.molecule_type == 'Enzyme'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.svg'
+      else if objData.molecule_type == 'Cell'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
       else #if response.molecule_type == 'Unclassified' or response.molecule_type = 'Unknown' or not response.molecule_type?
-        response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
 
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
-      response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
-      response.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id \
+      objData.image_url = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id + '.svg?engine=indigo'
+      objData.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id \
           + '.png?engine=indigo'
-      response.structure_image = true
+      objData.structure_image = true
 
-    response.report_card_url = Compound.get_report_card_url(response.molecule_chembl_id )
+    objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id )
 
-    filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + response.molecule_chembl_id
-    response.targets_url = Target.getTargetsListURL(filterForTargets)
+    filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + objData.molecule_chembl_id
+    objData.targets_url = Target.getTargetsListURL(filterForTargets)
 
-    return response;
+    return objData;
 
   #---------------------------------------------------------------------------------------------------------------------
   # Similarity

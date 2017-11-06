@@ -1,0 +1,2377 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL25",
+  "_version": 5,
+  "found": true,
+  "_source": {
+    "inorganic_flag": "0",
+    "indication_class": "Analgesic; Antirheumatic; Antipyretic",
+    "pref_name": "ASPIRIN",
+    "prodrug": "0",
+    "structure_type": "MOL",
+    "usan_stem": null,
+    "withdrawn_year": null,
+    "molecule_properties": {
+      "psa": "63.6",
+      "heavy_atoms": 13,
+      "hba_lipinski": 4,
+      "hbd": 1,
+      "alogp": "1.23",
+      "num_lipinski_ro5_violations": 0,
+      "acd_most_bpka": null,
+      "full_mwt": "180.16",
+      "hbd_lipinski": 1,
+      "acd_logp": "1.4",
+      "acd_logd": "-1.68",
+      "molecular_species": "ACID",
+      "acd_most_apka": "3.48",
+      "hba": 4,
+      "aromatic_rings": 1,
+      "mw_freebase": "180.16",
+      "num_alerts": 2,
+      "rtb": 3,
+      "full_molformula": "C9H8O4",
+      "qed_weighted": "0.56",
+      "mw_monoisotopic": "180.0423",
+      "num_ro5_violations": 0,
+      "ro3_pass": "N"
+    },
+    "therapeutic_flag": true,
+    "availability_type": "2",
+    "withdrawn_country": null,
+    "molecule_synonyms": [
+      {
+        "synonyms": "8-hour bayer",
+        "molecule_synonym": "8-Hour Bayer",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Acetylsalicylic Acid",
+        "molecule_synonym": "Acetylsalicylic Acid",
+        "syn_type": "INN"
+      },
+      {
+        "synonyms": "ASPIRIN",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "BAN"
+      },
+      {
+        "synonyms": "ASPIRIN",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "FDA"
+      },
+      {
+        "synonyms": "ASPIRIN",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "JAN"
+      },
+      {
+        "synonyms": "ASPIRIN",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "USP"
+      },
+      {
+        "synonyms": "ACETYLSALICYLIC ACID",
+        "molecule_synonym": "Acetylsalicylic Acid",
+        "syn_type": "OTHER"
+      },
+      {
+        "synonyms": "Acetosalic Acid",
+        "molecule_synonym": "Acetosalic Acid",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Acetylsalicylic Acid",
+        "molecule_synonym": "Acetylsalicylic Acid",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "ASPIRIN",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Aspirin",
+        "molecule_synonym": "Aspirin",
+        "syn_type": "USAN"
+      },
+      {
+        "synonyms": "Bayer extra strength aspirin for migraine pain",
+        "molecule_synonym": "Bayer Extra Strength",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Measurin",
+        "molecule_synonym": "Measurin",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Salicylic Acid Acetate",
+        "molecule_synonym": "Salicylic Acid Acetate",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Ecotrin",
+        "molecule_synonym": "Ecotrin",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "Equi-Prin",
+        "molecule_synonym": "Equi-Prin",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "ACETYLSALICYLIC ACID",
+        "molecule_synonym": "Acetylsalicylic Acid",
+        "syn_type": "ATC"
+      }
+    ],
+    "black_box_warning": "0",
+    "molecule_chembl_id": "CHEMBL25",
+    "oral": true,
+    "natural_product": "0",
+    "first_approval": 1950,
+    "helm_notation": null,
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL25",
+      "parent_chembl_id": "CHEMBL25"
+    },
+    "chirality": "1",
+    "first_in_class": "0",
+    "biotherapeutic": null,
+    "polymer_flag": false,
+    "molecule_structures": {
+      "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+      "standard_inchi": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+      "standard_inchi_key": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+    },
+    "usan_year": null,
+    "atc_classifications": [
+      "N02BA51",
+      "N02BA71",
+      "B01AC06",
+      "N02BA01",
+      "A01AD05"
+    ],
+    "dosed_ingredient": true,
+    "usan_substem": null,
+    "parenteral": false,
+    "withdrawn_flag": false,
+    "chebi_par_id": 15365,
+    "_metadata": {
+      "drug": {
+        "is_drug": true,
+        "drug_data": {
+          "prodrug": false,
+          "development_phase": 4,
+          "topical": false,
+          "molecule_structures": {
+            "standard_inchi": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+            "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O",
+            "standard_inchi_key": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+          },
+          "usan_stem_substem": null,
+          "applicants": [
+            "Roxane Laboratories Inc",
+            "Nexgen Pharma Inc",
+            "Schwarz Pharma Inc",
+            "Xanodyne Pharmaceutics Inc",
+            "Boehringer Ingelheim Pharmaceuticals Inc",
+            "Meda Pharmaceuticals Meda Pharmaceuticals Inc",
+            "L Perrigo Co",
+            "Jerome Stevens Pharmaceuticals Inc",
+            "Abbott Laboratories Pharmaceutical Products Div",
+            "Actavis Elizabeth Llc"
+          ],
+          "molecule_properties": {
+            "full_mwt": "180.16",
+            "rtb": 3,
+            "num_lipinski_ro5_violations": 0,
+            "qed_weighted": "0.56",
+            "full_molformula": "C9H8O4",
+            "alogp": "1.23",
+            "acd_logp": "1.4",
+            "hba": 4,
+            "hba_lipinski": 4,
+            "hbd": 1,
+            "molecular_species": "ACID",
+            "mw_freebase": "180.16",
+            "acd_logd": "-1.68",
+            "num_ro5_violations": 0,
+            "ro3_pass": "N",
+            "mw_monoisotopic": "180.0423",
+            "aromatic_rings": 1,
+            "acd_most_apka": "3.48",
+            "hbd_lipinski": 1,
+            "heavy_atoms": 13,
+            "num_alerts": 2,
+            "psa": "63.6",
+            "acd_most_bpka": null
+          },
+          "biotherapeutic": null,
+          "withdrawn_country": null,
+          "indication_class": "Analgesic; Antirheumatic; Antipyretic",
+          "drug_type": "1",
+          "sc_patent": "US-5972916-A",
+          "molecule_chembl_id": "CHEMBL25",
+          "withdrawn_year": null,
+          "withdrawn_reason": null,
+          "usan_year": null,
+          "chirality": "1",
+          "black_box": false,
+          "first_in_class": false,
+          "synonyms": [
+            "Aspirin"
+          ],
+          "usan_stem_definition": null,
+          "research_codes": null,
+          "helm_notation": null,
+          "molecule_synonyms": [
+            {
+              "synonyms": "8-hour bayer",
+              "molecule_synonym": "8-Hour Bayer",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "ACETYLSALICYLIC ACID",
+              "molecule_synonym": "Acetylsalicylic Acid",
+              "syn_type": "ATC"
+            },
+            {
+              "synonyms": "ACETYLSALICYLIC ACID",
+              "molecule_synonym": "Acetylsalicylic Acid",
+              "syn_type": "OTHER"
+            },
+            {
+              "synonyms": "ASPIRIN",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "BAN"
+            },
+            {
+              "synonyms": "ASPIRIN",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "FDA"
+            },
+            {
+              "synonyms": "ASPIRIN",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "JAN"
+            },
+            {
+              "synonyms": "ASPIRIN",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "ASPIRIN",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "USP"
+            },
+            {
+              "synonyms": "Acetosalic Acid",
+              "molecule_synonym": "Acetosalic Acid",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Acetylsalicylic Acid",
+              "molecule_synonym": "Acetylsalicylic Acid",
+              "syn_type": "INN"
+            },
+            {
+              "synonyms": "Acetylsalicylic Acid",
+              "molecule_synonym": "Acetylsalicylic Acid",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Aspirin",
+              "molecule_synonym": "Aspirin",
+              "syn_type": "USAN"
+            },
+            {
+              "synonyms": "Bayer extra strength aspirin for migraine pain",
+              "molecule_synonym": "Bayer Extra Strength",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Ecotrin",
+              "molecule_synonym": "Ecotrin",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Equi-Prin",
+              "molecule_synonym": "Equi-Prin",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Measurin",
+              "molecule_synonym": "Measurin",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "Salicylic Acid Acetate",
+              "molecule_synonym": "Salicylic Acid Acetate",
+              "syn_type": "TRADE_NAME"
+            }
+          ],
+          "atc_classification": [
+            {
+              "code": "N02BA51",
+              "description": "NERVOUS SYSTEM: ANALGESICS: OTHER ANALGESICS AND ANTIPYRETICS: Salicylic acid and derivative"
+            },
+            {
+              "code": "N02BA71",
+              "description": "NERVOUS SYSTEM: ANALGESICS: OTHER ANALGESICS AND ANTIPYRETICS: Salicylic acid and derivative"
+            },
+            {
+              "code": "B01AC06",
+              "description": "BLOOD AND BLOOD FORMING ORGANS: ANTITHROMBOTIC AGENTS: ANTITHROMBOTIC AGENTS: Platelet aggregation inhibitors excl. hepari"
+            },
+            {
+              "code": "A01AD05",
+              "description": "ALIMENTARY TRACT AND METABOLISM: STOMATOLOGICAL PREPARATIONS: STOMATOLOGICAL PREPARATIONS: Other agents for local oral treatmen"
+            },
+            {
+              "code": "N02BA01",
+              "description": "NERVOUS SYSTEM: ANALGESICS: OTHER ANALGESICS AND ANTIPYRETICS: Salicylic acid and derivatives"
+            }
+          ],
+          "usan_stem": null,
+          "rule_of_five": true,
+          "ob_patent": "5972916",
+          "parenteral": false,
+          "availability_type": "2",
+          "first_approval": 1950,
+          "oral": true
+        }
+      },
+      "compound_records": [
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "1"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "(aspirin)2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetyl Salicyclic Acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid (aspirin)",
+          "compound_key": "58"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "93"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "18 (Aspirin)"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicilic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aps"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Ass (aspirin)"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-Acetoxy-benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1"
+        },
+        {
+          "compound_name": "2-(methoxycarbonyl)benzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "acetyl salicylic acid"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "003"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "21"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "6, aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "7"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "AAS"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "9a"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetoxybenzoate",
+          "compound_key": "acetyl salicylate"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "4"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "10"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl Salicylic acid",
+          "compound_key": "Acetyl Salicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic Acid",
+          "compound_key": "6"
+        },
+        {
+          "compound_name": "2-acetoxybenzoic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "36"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicyclic acid",
+          "compound_key": "Acetyl salicyclic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "SID17389202",
+          "compound_key": "SID17389202"
+        },
+        {
+          "compound_name": "SID17390036",
+          "compound_key": "SID17390036"
+        },
+        {
+          "compound_name": "SID26747283",
+          "compound_key": "SID26747283"
+        },
+        {
+          "compound_name": "SID50105490",
+          "compound_key": "SID50105490"
+        },
+        {
+          "compound_name": "Acetylsalicylic Acid",
+          "compound_key": "Acetylsalicylic Acid"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "121"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Asp"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "1, ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1, ASA"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Acetylsalicyclic acid",
+          "compound_key": "1, aspirin"
+        },
+        {
+          "compound_name": "SID47193676",
+          "compound_key": "SID47193676"
+        },
+        {
+          "compound_name": "SID26752858",
+          "compound_key": "SID26752858"
+        },
+        {
+          "compound_name": "SID85230910",
+          "compound_key": "SID85230910"
+        },
+        {
+          "compound_name": "SID90340586",
+          "compound_key": "SID90340586"
+        },
+        {
+          "compound_name": "Acetylsalicylic Acid",
+          "compound_key": "Acetylsalicylic Acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1, ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "SID87798",
+          "compound_key": "SID87798"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "1, ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "19, a"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "20"
+        },
+        {
+          "compound_name": "Acetylsalicylate",
+          "compound_key": "Acetylsalicylate"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylate",
+          "compound_key": "Acetylsalicylate"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA, aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "acetyl salicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "2-acetyloxybenzoic acid",
+          "compound_key": "27, aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "1, Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASP"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASP, aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetyl salicylic acid",
+          "compound_key": "Acetyl salicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid (table SV)"
+        },
+        {
+          "compound_name": "2-(acetyloxy)benzoic acid",
+          "compound_key": "24 (table SVIII)"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "ASPIRINE",
+          "compound_key": "ASPIRINE"
+        },
+        {
+          "compound_name": "SID144203627",
+          "compound_key": "SID144203627"
+        },
+        {
+          "compound_name": "SID144209315",
+          "compound_key": "SID144209315"
+        },
+        {
+          "compound_name": "SID144210466",
+          "compound_key": "SID144210466"
+        },
+        {
+          "compound_name": "SID174007205",
+          "compound_key": "SID174007205"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "2, aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "acetylsalicylic acid"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Asparin",
+          "compound_key": "Asparin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "acetylsalicylic acid",
+          "compound_key": "Asp, aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Acetylsalicylic Acid",
+          "compound_key": "Acetylsalicylic Acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "SID170465039",
+          "compound_key": "SID170465039"
+        },
+        {
+          "compound_name": "aspirin",
+          "compound_key": "3"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Asprin",
+          "compound_key": "Asprin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "o-acetylsalicylic acid",
+          "compound_key": "39; Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "ASA"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Acetylsalicylic acid",
+          "compound_key": "Acetylsalicylic acid"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "Aspirin",
+          "compound_key": "Aspirin"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        },
+        {
+          "compound_name": "ASPIRIN",
+          "compound_key": "ASPIRIN"
+        }
+      ],
+      "disease_name": [
+        "HYPERTROPHIC CARDIOMYOPATHY",
+        "DIGESTIVE SYSTEM DISEASE",
+        "RHINITIS, ALLERGIC, SEASONAL",
+        "BRAIN INFARCTION",
+        "MIGRAINE DISORDERS",
+        "RESPIRATORY DISTRESS SYNDROME, ADULT",
+        "CORONARY DISEASE",
+        "INFERTILITY",
+        "POLYCYTHEMIA VERA",
+        "CARDIOVASCULAR DISEASES",
+        "CHRONIC OBSTRUCTIVE PULMONARY DISEASE",
+        "PNEUMONIA",
+        "ABORTION, HABITUAL",
+        "VASCULAR DISEASE",
+        "BARRETT ESOPHAGUS",
+        "VENOUS THROMBOSIS",
+        "PREGNANCY",
+        "GLIOBLASTOMA MULTIFORME",
+        "GLIOBLASTOMA",
+        "SPASM",
+        "FEVER",
+        "VASCULAR DISEASES",
+        "ATRIAL FIBRILLATION",
+        "CARDIOMYOPATHY, HYPERTROPHIC",
+        "HEART FAILURE",
+        "PSYCHOTIC DISORDERS",
+        "MIGRAINE DISORDER",
+        "CORONARY HEART DISEASE",
+        "SICKLE CELL ANEMIA",
+        "PREECLAMPSIA",
+        "NEOPLASMS",
+        "RETINAL VEIN OCCLUSION",
+        "POST-TRAUMATIC STRESS DISORDER",
+        "DIGESTIVE SYSTEM DISEASES",
+        "DIABETES MELLITUS, TYPE 2",
+        "ANEMIA, SICKLE CELL",
+        "BREAST CARCINOMA",
+        "COLORECTAL NEOPLASMS",
+        "OSTEOMYELITIS",
+        "CORONARY ARTERY DISEASE",
+        "ACUTE LUNG INJURY",
+        "HIV INFECTIONS",
+        "BRAIN ISCHEMIA",
+        "PSYCHOSIS",
+        "DIABETES MELLITUS",
+        "INFECTIOUS MENINGITIS",
+        "PRE-ECLAMPSIA",
+        "HIV-1 INFECTION",
+        "THROMBOSIS",
+        "NON-SMALL CELL LUNG CARCINOMA",
+        "DIABETIC FOOT",
+        "CARCINOMA, SQUAMOUS CELL",
+        "SKIN ULCER",
+        "BREAST NEOPLASMS",
+        "CEREBRAL ISCHEMIA",
+        "PULMONARY HYPERTENSION",
+        "SEPSIS",
+        "VENOUS THROMBOEMBOLISM",
+        "STROKE",
+        "MENINGITIS",
+        "ATHEROSCLEROSIS",
+        "ISCHEMIA",
+        "ACUTE RESPIRATORY DISTRESS SYNDROME",
+        "COLORECTAL ADENOMA",
+        "BREAST NEOPLASM",
+        "NEOPLASM",
+        "RENAL INSUFFICIENCY, CHRONIC",
+        "CARDIOVASCULAR DISEASE",
+        "CHRONIC KIDNEY DISEASE",
+        "HABITUAL ABORTION",
+        "COLORECTAL ADENOCARCINOMA",
+        "NICOTINE DEPENDENCE",
+        "STRESS DISORDERS, POST-TRAUMATIC",
+        "PEPTIC ULCER",
+        "PERIPHERAL ARTERIAL DISEASE",
+        "PULMONARY DISEASE, CHRONIC OBSTRUCTIVE",
+        "HIV INFECTION",
+        "DUODENAL ULCER",
+        "TOBACCO USE DISORDER",
+        "BIPOLAR DISORDER",
+        "ASTHMA",
+        "LYNCH SYNDROME",
+        "BARRETT'S ESOPHAGUS",
+        "COLORECTAL NEOPLASMS, HEREDITARY NONPOLYPOSIS",
+        "HYPERTENSION, PULMONARY",
+        "TYPE II DIABETES MELLITUS",
+        "RECURRENT THROMBOPHLEBITIS",
+        "CARCINOMA, NON-SMALL-CELL LUNG",
+        "PAIN",
+        "ESOPHAGEAL NEOPLASMS",
+        "SQUAMOUS CELL CARCINOMA",
+        "MYOCARDIAL INFARCTION",
+        "SEASONAL ALLERGIC RHINITIS",
+        "ADENOMA",
+        "ESOPHAGEAL CARCINOMA"
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+            "CHEMBL613064",
+            "CHEMBL1697861",
+            "CHEMBL614922",
+            "CHEMBL613829",
+            "CHEMBL614388",
+            "CHEMBL2157",
+            "CHEMBL614697",
+            "CHEMBL3254",
+            "CHEMBL614177",
+            "CHEMBL2414",
+            "CHEMBL5486",
+            "CHEMBL225",
+            "CHEMBL6032",
+            "CHEMBL614207",
+            "CHEMBL1841",
+            "CHEMBL614058",
+            "CHEMBL1287617",
+            "CHEMBL3622",
+            "CHEMBL238",
+            "CHEMBL4608",
+            "CHEMBL612544",
+            "CHEMBL376",
+            "CHEMBL612796",
+            "CHEMBL4074",
+            "CHEMBL1889",
+            "CHEMBL5281",
+            "CHEMBL614214",
+            "CHEMBL276",
+            "CHEMBL340",
+            "CHEMBL4777",
+            "CHEMBL4018",
+            "CHEMBL4302",
+            "CHEMBL5061",
+            "CHEMBL614164",
+            "CHEMBL3979",
+            "CHEMBL315",
+            "CHEMBL222",
+            "CHEMBL614361",
+            "CHEMBL1777665",
+            "CHEMBL213",
+            "CHEMBL614561",
+            "CHEMBL312",
+            "CHEMBL261",
+            "CHEMBL2434",
+            "CHEMBL248",
+            "CHEMBL614021",
+            "CHEMBL614213",
+            "CHEMBL251",
+            "CHEMBL614818",
+            "CHEMBL612263",
+            "CHEMBL4801",
+            "CHEMBL4372",
+            "CHEMBL4071",
+            "CHEMBL613424",
+            "CHEMBL5391",
+            "CHEMBL613107",
+            "CHEMBL614530",
+            "CHEMBL613652",
+            "CHEMBL2093869",
+            "CHEMBL332",
+            "CHEMBL4681",
+            "CHEMBL6035",
+            "CHEMBL3396942",
+            "CHEMBL384",
+            "CHEMBL392",
+            "CHEMBL614997",
+            "CHEMBL4159",
+            "CHEMBL5658",
+            "CHEMBL1743316",
+            "CHEMBL614610",
+            "CHEMBL1798",
+            "CHEMBL614886",
+            "CHEMBL612851",
+            "CHEMBL613617",
+            "CHEMBL319",
+            "CHEMBL614054",
+            "CHEMBL1871",
+            "CHEMBL1909043",
+            "CHEMBL1743319",
+            "CHEMBL1821",
+            "CHEMBL5696",
+            "CHEMBL3385",
+            "CHEMBL612647",
+            "CHEMBL5738",
+            "CHEMBL613564",
+            "CHEMBL1832",
+            "CHEMBL382",
+            "CHEMBL612853",
+            "CHEMBL1293255",
+            "CHEMBL210",
+            "CHEMBL234",
+            "CHEMBL3392921",
+            "CHEMBL246",
+            "CHEMBL614882",
+            "CHEMBL612877",
+            "CHEMBL289",
+            "CHEMBL612262",
+            "CHEMBL1641347",
+            "CHEMBL224",
+            "CHEMBL1868",
+            "CHEMBL4445",
+            "CHEMBL614317",
+            "CHEMBL614709",
+            "CHEMBL5017",
+            "CHEMBL5685",
+            "CHEMBL235",
+            "CHEMBL4607",
+            "CHEMBL612348",
+            "CHEMBL613860",
+            "CHEMBL612848",
+            "CHEMBL1901",
+            "CHEMBL211",
+            "CHEMBL2860",
+            "CHEMBL223",
+            "CHEMBL2056",
+            "CHEMBL614067",
+            "CHEMBL613977",
+            "CHEMBL1867",
+            "CHEMBL205",
+            "CHEMBL613416",
+            "CHEMBL368",
+            "CHEMBL4644",
+            "CHEMBL3048",
+            "CHEMBL614696",
+            "CHEMBL220",
+            "CHEMBL400",
+            "CHEMBL612849",
+            "CHEMBL612888",
+            "CHEMBL613490",
+            "CHEMBL260",
+            "CHEMBL2327",
+            "CHEMBL613427",
+            "CHEMBL374",
+            "CHEMBL614643",
+            "CHEMBL614096",
+            "CHEMBL614919",
+            "CHEMBL2111358",
+            "CHEMBL236",
+            "CHEMBL366",
+            "CHEMBL2035",
+            "CHEMBL5144",
+            "CHEMBL3253",
+            "CHEMBL2728",
+            "CHEMBL1963",
+            "CHEMBL613834",
+            "CHEMBL390",
+            "CHEMBL4794",
+            "CHEMBL614917",
+            "CHEMBL3072",
+            "CHEMBL4015",
+            "CHEMBL242",
+            "CHEMBL614051",
+            "CHEMBL1951",
+            "CHEMBL5282",
+            "CHEMBL2146316",
+            "CHEMBL216",
+            "CHEMBL249",
+            "CHEMBL1909044",
+            "CHEMBL614056",
+            "CHEMBL4029",
+            "CHEMBL2094253",
+            "CHEMBL383",
+            "CHEMBL387",
+            "CHEMBL614908",
+            "CHEMBL230",
+            "CHEMBL614300",
+            "CHEMBL613450",
+            "CHEMBL5653",
+            "CHEMBL259",
+            "CHEMBL612843",
+            "CHEMBL5269",
+            "CHEMBL2362975",
+            "CHEMBL273",
+            "CHEMBL385",
+            "CHEMBL364",
+            "CHEMBL613712",
+            "CHEMBL2622",
+            "CHEMBL1824",
+            "CHEMBL2949",
+            "CHEMBL1833",
+            "CHEMBL5016",
+            "CHEMBL256",
+            "CHEMBL217",
+            "CHEMBL240",
+            "CHEMBL614519",
+            "CHEMBL612555",
+            "CHEMBL1835",
+            "CHEMBL375",
+            "CHEMBL613561",
+            "CHEMBL3397",
+            "CHEMBL1743121",
+            "CHEMBL1941",
+            "CHEMBL1626541",
+            "CHEMBL1293226",
+            "CHEMBL613979",
+            "CHEMBL206",
+            "CHEMBL613373",
+            "CHEMBL203",
+            "CHEMBL3157",
+            "CHEMBL612545",
+            "CHEMBL612518",
+            "CHEMBL3464",
+            "CHEMBL614740",
+            "CHEMBL1914",
+            "CHEMBL614078",
+            "CHEMBL614391",
+            "CHEMBL1827",
+            "CHEMBL2179",
+            "CHEMBL1942",
+            "CHEMBL615022",
+            "CHEMBL4102",
+            "CHEMBL237",
+            "CHEMBL612446",
+            "CHEMBL1741186",
+            "CHEMBL367",
+            "CHEMBL233",
+            "CHEMBL258",
+            "CHEMBL612879",
+            "CHEMBL402",
+            "CHEMBL274",
+            "CHEMBL231",
+            "CHEMBL614487",
+            "CHEMBL614725",
+            "CHEMBL5365",
+            "CHEMBL1916",
+            "CHEMBL373",
+            "CHEMBL252",
+            "CHEMBL614139",
+            "CHEMBL612884",
+            "CHEMBL3243",
+            "CHEMBL614830",
+            "CHEMBL397",
+            "CHEMBL5619",
+            "CHEMBL614860",
+            "CHEMBL250",
+            "CHEMBL613426",
+            "CHEMBL245",
+            "CHEMBL369",
+            "CHEMBL614072",
+            "CHEMBL613508",
+            "CHEMBL395",
+            "CHEMBL3371",
+            "CHEMBL614925",
+            "CHEMBL321",
+            "CHEMBL4040",
+            "CHEMBL4358",
+            "CHEMBL228",
+            "CHEMBL226",
+            "CHEMBL287",
+            "CHEMBL3577",
+            "CHEMBL218",
+            "CHEMBL2756",
+            "CHEMBL612556",
+            "CHEMBL612855",
+            "CHEMBL2073671",
+            "CHEMBL2034",
+            "CHEMBL221",
+            "CHEMBL612558",
+            "CHEMBL613102",
+            "CHEMBL614387",
+            "CHEMBL219",
+            "CHEMBL2096674",
+            "CHEMBL360",
+            "CHEMBL3459",
+            "CHEMBL394",
+            "CHEMBL372",
+            "CHEMBL614451",
+            "CHEMBL299",
+            "CHEMBL3356",
+            "CHEMBL2007625",
+            "CHEMBL1075138",
+            "CHEMBL612880",
+            "CHEMBL1293237"
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 273
+      },
+      "es_completion": [
+        {
+          "input": "Equi-Prin",
+          "weight": 75
+        },
+        {
+          "input": "ASPIRIN",
+          "weight": 100
+        },
+        {
+          "input": "CHEMBL25",
+          "weight": 10
+        },
+        {
+          "input": "CC(=O)Oc1ccccc1C(=O)O",
+          "weight": 30
+        },
+        {
+          "input": "Salicylic Acid Acetate",
+          "weight": 75
+        },
+        {
+          "input": "Measurin",
+          "weight": 75
+        },
+        {
+          "input": "Ecotrin",
+          "weight": 75
+        },
+        {
+          "input": "Aspirin",
+          "weight": 75
+        },
+        {
+          "input": "ACETYLSALICYLIC ACID",
+          "weight": 75
+        },
+        {
+          "input": "BSYNRYMUTXBXSQ-UHFFFAOYSA-N",
+          "weight": 30
+        },
+        {
+          "input": "C9H8O4",
+          "weight": 90
+        },
+        {
+          "input": "Acetosalic Acid",
+          "weight": 75
+        },
+        {
+          "input": "8-hour bayer",
+          "weight": 75
+        },
+        {
+          "input": "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)",
+          "weight": 30
+        },
+        {
+          "input": "Acetylsalicylic Acid",
+          "weight": 75
+        },
+        {
+          "input": "8-Hour Bayer",
+          "weight": 75
+        },
+        {
+          "input": "Bayer Extra Strength",
+          "weight": 75
+        },
+        {
+          "input": "Bayer extra strength aspirin for migraine pain",
+          "weight": 75
+        }
+      ],
+      "tags": [
+
+      ],
+      "activity_count": 3100
+    },
+    "molecule_type": "Small molecule",
+    "max_phase": 4,
+    "usan_stem_definition": null,
+    "withdrawn_reason": null,
+    "topical": false
+  }
+}

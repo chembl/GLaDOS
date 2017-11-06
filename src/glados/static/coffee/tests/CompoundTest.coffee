@@ -107,6 +107,10 @@ describe "Compound", ->
     #-------------------------------------------------------------------------------------------------------------------
     # Specific cases
     #-------------------------------------------------------------------------------------------------------------------
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # From Web services
+    #-------------------------------------------------------------------------------------------------------------------
     describe "Loaded From Web Services", ->
 
       chemblID = 'CHEMBL25'
@@ -272,6 +276,9 @@ describe "Compound", ->
 
         it 'generates the correct Image', -> testHasCellIMG(wsResponse, parsed)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # From Elasticsearch
+    #-------------------------------------------------------------------------------------------------------------------
     describe "Loaded From Elastic Search", ->
 
       chemblID = 'CHEMBL25'
@@ -279,11 +286,147 @@ describe "Compound", ->
         molecule_chembl_id: chemblID
         fetch_from_elastic: true
 
+      esResponse = undefined
+      parsed = undefined
+
+      beforeAll (done) ->
+
+        dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL25esResponse.json'
+        $.get dataURL, (testData) ->
+          esResponse = testData
+          parsed = compound.parse(esResponse)
+          done()
+
       it 'generates the elasctisearch url', ->
 
         console.log 'compound url: ', compound.url
         urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + chemblID
         expect(compound.url).toBe(urlMustBe)
 
+      it 'parses the basic information received from web services', -> testBasicProperties(esResponse._source, parsed)
+      it 'parses the activities URL', -> testActivitiesURL(esResponse._source, parsed)
+      it 'parses the sdf URL', -> testSDFURL(esResponse._source, parsed)
+      it 'parses Rule of 5 pass', -> testRo5Pass(esResponse._source, parsed)
+      it 'parses the report card url', -> testReportCardURL(esResponse._source, parsed)
+      it 'parses the related targets url', -> testRelatedTargetsURL(esResponse._source, parsed)
+      it 'parses a normal image url', -> testHasNormalImageURL(esResponse._source, parsed)
 
+      describe 'Metal Containing', ->
 
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL364516MetalContainingesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasMetalContainingIMG(esResponse._source, parsed)
+
+      describe 'Oligosaccharide', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2108122OligosaccharidgeesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasOligosaccharideIMG(esResponse._source, parsed)
+
+      describe 'Natural Product', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL1201454NaturalProductesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasNaturlaProductIMG(esResponse._source, parsed)
+
+      describe 'Small Polymer', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2108458SmallPolymeresResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasSmallPolymerIMG(esResponse._source, parsed)
+
+      describe 'Antibody', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2109414AntibodyesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasAntibodyIMG(esResponse._source, parsed)
+
+      describe 'Protein', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL1201644proteinesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasProteinIMG(esResponse._source, parsed)
+
+      describe 'Oligonucleotide', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL3545182OligonucleotideesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasOligonucleotideIMG(esResponse._source, parsed)
+
+      describe 'Enzyme', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2107858EnzymeesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasEnzymeIMG(esResponse._source, parsed)
+
+      describe 'Unknown Type', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2109133UnknownesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasUnknownTypeIMG(esResponse._source, parsed)
+
+      describe 'Cell', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2107865CellesResponse.json'
+          $.get dataURL, (testData) ->
+            esResponse = testData
+            parsed = compound.parse(esResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasCellIMG(esResponse._source, parsed)

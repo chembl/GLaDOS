@@ -1,0 +1,156 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL2109414",
+  "_version": 3,
+  "found": true,
+  "_source": {
+    "inorganic_flag": "0",
+    "indication_class": null,
+    "pref_name": "IMGN-853",
+    "prodrug": "0",
+    "structure_type": "SEQ",
+    "usan_stem": null,
+    "withdrawn_year": null,
+    "molecule_properties": null,
+    "therapeutic_flag": false,
+    "availability_type": "-1",
+    "withdrawn_country": null,
+    "molecule_synonyms": [
+      {
+        "synonyms": "IMGN-853",
+        "molecule_synonym": "IMGN-853",
+        "syn_type": "RESEARCH_CODE"
+      }
+    ],
+    "black_box_warning": "0",
+    "molecule_chembl_id": "CHEMBL2109414",
+    "oral": false,
+    "natural_product": "0",
+    "first_approval": null,
+    "helm_notation": null,
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL2109414",
+      "parent_chembl_id": "CHEMBL2109414"
+    },
+    "chirality": "1",
+    "first_in_class": "0",
+    "biotherapeutic": {
+      "description": "IMGN-853 (mab)",
+      "helm_notation": null,
+      "biocomponents": [
+
+      ],
+      "molecule_chembl_id": "CHEMBL2109414"
+    },
+    "polymer_flag": false,
+    "molecule_structures": null,
+    "usan_year": null,
+    "atc_classifications": [
+
+    ],
+    "dosed_ingredient": false,
+    "usan_substem": null,
+    "parenteral": false,
+    "withdrawn_flag": false,
+    "chebi_par_id": null,
+    "_metadata": {
+      "drug": {
+        "is_drug": true,
+        "drug_data": {
+          "prodrug": false,
+          "development_phase": 1,
+          "topical": false,
+          "molecule_structures": null,
+          "usan_stem_substem": null,
+          "applicants": null,
+          "molecule_properties": null,
+          "biotherapeutic": {
+            "helm_notation": null,
+            "description": "IMGN-853 (mab)",
+            "molecule_chembl_id": "CHEMBL2109414",
+            "biocomponents": [
+
+            ]
+          },
+          "withdrawn_country": null,
+          "indication_class": null,
+          "drug_type": "6",
+          "sc_patent": null,
+          "molecule_chembl_id": "CHEMBL2109414",
+          "withdrawn_year": null,
+          "withdrawn_reason": null,
+          "usan_year": null,
+          "chirality": "1",
+          "black_box": false,
+          "first_in_class": false,
+          "synonyms": [
+            "Imgn-853"
+          ],
+          "usan_stem_definition": null,
+          "research_codes": [
+            "IMGN-853"
+          ],
+          "helm_notation": null,
+          "molecule_synonyms": [
+            {
+              "synonyms": "IMGN-853",
+              "molecule_synonym": "IMGN-853",
+              "syn_type": "RESEARCH_CODE"
+            }
+          ],
+          "atc_classification": null,
+          "usan_stem": null,
+          "rule_of_five": false,
+          "ob_patent": null,
+          "parenteral": false,
+          "availability_type": "-1",
+          "first_approval": null,
+          "oral": false
+        }
+      },
+      "compound_records": [
+        {
+          "compound_name": "IMGN-853",
+          "compound_key": "IMGN-853"
+        }
+      ],
+      "disease_name": [
+
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 0
+      },
+      "es_completion": [
+        {
+          "input": "IMGN-853",
+          "weight": 100
+        },
+        {
+          "input": "CHEMBL2109414",
+          "weight": 10
+        }
+      ],
+      "tags": [
+
+      ],
+      "activity_count": 0
+    },
+    "molecule_type": "Antibody",
+    "max_phase": 1,
+    "usan_stem_definition": null,
+    "withdrawn_reason": null,
+    "topical": false
+  }
+}
