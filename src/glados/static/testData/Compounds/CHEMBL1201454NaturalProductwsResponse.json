@@ -1,0 +1,69 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "0",
+  "biotherapeutic": null,
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": true,
+  "first_approval": 1982,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": null,
+  "inorganic_flag": "0",
+  "max_phase": 4,
+  "molecule_chembl_id": "CHEMBL1201454",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL1201454",
+    "parent_chembl_id": "CHEMBL1201454"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Alseroxylon",
+      "syn_type": "FDA",
+      "synonyms": "ALSEROXYLON"
+    },
+    {
+      "molecule_synonym": "Alseroxylon",
+      "syn_type": "JAN",
+      "synonyms": "ALSEROXYLON"
+    },
+    {
+      "molecule_synonym": "Alseroxylon",
+      "syn_type": "OTHER",
+      "synonyms": "Alseroxylon"
+    },
+    {
+      "molecule_synonym": "Rautensin",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "RAUTENSIN"
+    },
+    {
+      "molecule_synonym": "Rauwiloid",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "RAUWILOID"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": "1",
+  "oral": true,
+  "parenteral": false,
+  "polymer_flag": false,
+  "pref_name": "ALSEROXYLON",
+  "prodrug": "0",
+  "structure_type": "NONE",
+  "therapeutic_flag": true,
+  "topical": false,
+  "usan_stem": null,
+  "usan_stem_definition": null,
+  "usan_substem": null,
+  "usan_year": null,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}

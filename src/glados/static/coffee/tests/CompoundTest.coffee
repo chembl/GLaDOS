@@ -50,6 +50,60 @@ describe "Compound", ->
       imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg?engine=indigo'
       expect(parsed.image_url).toBe(imageURLMustBe)
 
+    testHasMetalContainingIMG = (response, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasOligosaccharideIMG = (response, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasNaturlaProductIMG = (response, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.svg'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasSmallPolymerIMG = (response, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasSmallMoleculeIMG = (response, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.svg'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasAntibodyIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.svg'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasProteinIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasOligonucleotideIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasEnzymeIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.svg'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasCellIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
+      expect(parsed.image_url).toBe(imgURLMustBe)
+
+    testHasUnknownTypeIMG = (wsResponse, parsed) ->
+
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
+      expect(parsed.image_url).toBe(imgURLMustBe)
     #-------------------------------------------------------------------------------------------------------------------
     # Specific cases
     #-------------------------------------------------------------------------------------------------------------------
@@ -82,21 +136,139 @@ describe "Compound", ->
       it 'parses the related targets url', -> testRelatedTargetsURL(wsResponse, parsed)
       it 'parses a normal image url', -> testHasNormalImageURL(wsResponse, parsed)
 
-      describe 'Metal Containing Compound', ->
+      describe 'Metal Containing', ->
 
-        
         beforeAll (done) ->
 
-          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL25wsResponse.json'
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL364516MetalContainingwsResponse.json'
           $.get dataURL, (testData) ->
             wsResponse = testData
             parsed = compound.parse(wsResponse)
             done()
 
-        it 'generates the correctImage', ->
+        it 'generates the correct Image', -> testHasMetalContainingIMG(wsResponse, parsed)
+
+      describe 'Oligosaccharide', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2108122OligosaccharidgewsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasOligosaccharideIMG(wsResponse, parsed)
+
+      describe 'Natural Product', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL1201454NaturalProductwsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasNaturlaProductIMG(wsResponse, parsed)
+
+      describe 'Small Polymer', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2108458SmallPolymerwsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasSmallPolymerIMG(wsResponse, parsed)
+
+      describe 'Small Molecule', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL3544956smallMoleculewsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasSmallMoleculeIMG(wsResponse, parsed)
+
+      describe 'Antibody', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2109414AntibodywsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasAntibodyIMG(wsResponse, parsed)
 
 
+      describe 'Protein', ->
 
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL1201644proteinwsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasProteinIMG(wsResponse, parsed)
+
+      describe 'Oligonucleotide', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL3545182OligonucleotidewsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasOligonucleotideIMG(wsResponse, parsed)
+
+
+      describe 'Enzyme', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2107858EnzymewsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasEnzymeIMG(wsResponse, parsed)
+
+      describe 'Unknown Type', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2109133UnknownwsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasUnknownTypeIMG(wsResponse, parsed)
+
+      describe 'Cell', ->
+
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL2107865CellwsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correct Image', -> testHasCellIMG(wsResponse, parsed)
 
     describe "Loaded From Elastic Search", ->
 
