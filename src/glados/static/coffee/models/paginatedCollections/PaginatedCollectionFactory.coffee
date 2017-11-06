@@ -411,13 +411,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         drugMechanisms = []
         drugMechanismsPositions = {}
 
+        console.log 'going to get list of mechs'
         # 1 first get list of drug mechanisms
         getDrugMechanisms = $.getJSON(@url, (data) ->
           drugMechanisms = data.mechanisms
 
-          for i in [0..drugMechanisms.length-1]
-            currentDrug = drugMechanisms[i]
-            drugMechanismsPositions[currentDrug.molecule_chembl_id] = i
+          if drugMechanisms.length > 0
+            for i in [0..drugMechanisms.length-1]
+              console.log 'i is: ', i
+              currentDrug = drugMechanisms[i]
+              drugMechanismsPositions[currentDrug.molecule_chembl_id] = i
         )
 
         getDrugMechanisms.fail(()->
