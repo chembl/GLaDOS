@@ -108,6 +108,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       @std_dev = null
       @get_upper_percentile = true
       @get_lower_percentile = true
+      @normal_distributed = true
       @intervals_size = null
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -133,6 +134,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             extended_stats:
               field: @es_property_name
           }
+          es_query_aggs[@es_property_name+'_PERCENTILES'] = {
+            percentiles:
+              field: @es_property_name,
+              percents: [10,20,30,40,50,60,70,80,90],
+              keyed: true
+          }
         else
           if not _.isNumber(@min_value) or not _.isNumber(@max_value)
             throw "ERROR! The minimum and maximum have not been requested yet!"
@@ -154,28 +161,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       # Do the division first to prevent number overflow
       @intervals_size = (@max_value/FacetingHandler.NUM_INTERVALS)-(@min_value/FacetingHandler.NUM_INTERVALS)
       isSmallFloat = @intervals_size < 5 and not @property_type.integer
-      if isSmallFloat
-        @intervals_size *= Math.pow(10, 20)
-      curLevel = -1
-      curNum = @intervals_size
-      loop
-        curLevel += 1
-        lastNum = curNum
-        curNum = Math.ceil(curNum/10)
-        if curNum == 1 or curNum == 0
-          break
-      if lastNum > 5
-        curLevel++
-        lastNum = 1
-      else if lastNum > 2
-        lastNum = 5
-      else if lastNum > 1
-        lastNum = 2
-      else
-        lastNum = 1
-      @intervals_size = lastNum * Math.pow(10, curLevel)
-      if isSmallFloat
-        @intervals_size /= Math.pow(10, 20)
+      @intervals_size = glados.Utils.roundNumber(@intervals_size, isSmallFloat)
+      @min_value = Math.floor(@min_value)
+      @max_value = Math.ceil(@max_value)
 
     parseESResults: (es_aggregations_data, first_call)->
 
@@ -208,11 +196,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
           stats = es_aggregations_data[@es_property_name+'_STATS']
-          limit = stats.std_deviation
-          if stats.avg < stats.std_deviation
-            limit = stats.avg/10
-          upperBound = stats.avg + 2 * limit
-          lowerBound = stats.avg - 2 * limit
+          percentiles = es_aggregations_data[@es_property_name+'_PERCENTILES'].values
+          @normal_distributed = percentiles['80.0'] < stats.avg or percentiles['20.0'] > stats.avg
+          upperBound = stats.avg + 2 * stats.std_deviation
+          lowerBound = stats.avg - 2 * stats.std_deviation
           @min_value = if stats.min > lowerBound then stats.min else lowerBound
           console.warn(@min_value, upperBound, lowerBound)
           if not _.isNumber(@min_value) and not _.isNaN(@min_value)
