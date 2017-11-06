@@ -15,6 +15,35 @@ describe "Compound", ->
           expect(response[propVal]).toBe(parsed[propVal])
         # propably later check objects and arrays
 
+    testActivitiesURL = (response, parsed) ->
+
+      chemblID = response.molecule_chembl_id
+      activitiesURLMustBe = Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
+      expect(parsed.activities_url).toBe(activitiesURLMustBe)
+
+    testSDFURL = (response, parsed) ->
+
+      chemblID = response.molecule_chembl_id
+      sdfURLMustBe = glados.Settings.WS_BASE_URL + 'molecule/' + chemblID + '.sdf'
+      expect(parsed.sdf_url).toBe(sdfURLMustBe)
+
+    testRo5Pass = (response, parsed) ->
+
+      ro5Pass = response.molecule_properties.num_ro5_violations == 0
+      expect(parsed.ro5).toBe(ro5Pass)
+
+    testReportCardURL = (response, parsed) ->
+
+      chemblID = response.molecule_chembl_id
+      reportCardURLMustBe = Compound.get_report_card_url(chemblID)
+      expect(parsed.report_card_url).toBe(reportCardURLMustBe)
+
+    testRelatedTargetsURL = (response, parsed) ->
+
+      chemblID = response.molecule_chembl_id
+      urlMustBe = Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+      expect(response.targets_url).toBe(urlMustBe)
+
     #-------------------------------------------------------------------------------------------------------------------
     # Specific cases
     #-------------------------------------------------------------------------------------------------------------------
@@ -24,12 +53,14 @@ describe "Compound", ->
       compound = new Compound
         molecule_chembl_id: chemblID
       wsResponse = undefined
+      parsed = undefined
 
       beforeAll (done) ->
 
         dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL25wsResponse.json'
         $.get dataURL, (testData) ->
           wsResponse = testData
+          parsed = compound.parse(wsResponse)
           done()
 
       it 'generates the web services url', ->
@@ -37,10 +68,12 @@ describe "Compound", ->
         urlMustBe = glados.Settings.WS_BASE_URL + 'molecule/' + chemblID + '.json'
         expect(compound.url).toBe(urlMustBe)
 
-      it 'parses the basic information received from web services', ->
-
-        parsed = compound.parse(wsResponse)
-        testBasicProperties(wsResponse, parsed)
+      it 'parses the basic information received from web services', -> testBasicProperties(wsResponse, parsed)
+      it 'parses the activities URL', -> testActivitiesURL(wsResponse, parsed)
+      it 'parses the sdf URL', -> testSDFURL(wsResponse, parsed)
+      it 'parses Rule of 5 pass', -> testRo5Pass(wsResponse, parsed)
+      it 'parses the report card url', -> testReportCardURL(wsResponse, parsed)
+      it 'parsed the related targets url', -> testRelatedTargetsURL(wsResponse, parsed)
 
     describe "Loaded From Elastic Search", ->
 
