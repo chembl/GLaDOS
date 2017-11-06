@@ -1,30 +1,64 @@
 glados.useNameSpace 'glados',
   Utils:
     # Will round a number to the closest 10*, 20* or 50*
-    roundNumber: (n, isSmallFloat=false)->
+    # Check the next function to get some examples about how this function works
+    roundNumber: (n, isSmallFloat=false, downwards=false)->
       if isSmallFloat
         n *= Math.pow(10, 20)
       curLevel = -1
-      curNum = n
+      curNum = Math.abs(n)
       loop
         curLevel += 1
         lastNum = curNum
-        curNum = Math.ceil(curNum/10)
+        curNum /= 10.0
+        curNum = if downwards and Math.sign(n) > 0 then Math.floor(curNum) else Math.ceil(curNum)
         if curNum == 1 or curNum == 0
           break
-      if lastNum > 5
+      if lastNum >= 10
         curLevel++
         lastNum = 1
-      else if lastNum > 2
-        lastNum = 5
-      else if lastNum > 1
-        lastNum = 2
+
+      if downwards and Math.sign(n) > 0
+        if lastNum < 5
+          lastNum = 1
+          if curLevel <= 0 and lastNum == 1
+            lastNum = 0
+        else
+          lastNum = 5
       else
-        lastNum = 1
-      n = lastNum * Math.pow(10, curLevel)
+        if lastNum > 5
+          curLevel++
+          lastNum = 1
+        else if lastNum > 2
+          lastNum = 5
+        else if lastNum > 1
+          lastNum = 2
+        else
+          lastNum = 1
+      n = Math.sign(n) * lastNum * Math.pow(10, curLevel)
       if isSmallFloat
         n /= Math.pow(10, 20)
       return n
+
+    runRoundNumberExamples: ->
+      exampleRunner = (factor=1)->
+        console.log 'Round Examples factor: ' + factor
+        cur_i = -500
+        last_up_v = null
+        last_down_v = null
+        while cur_i <= 500
+          up_v = glados.Utils.roundNumber(cur_i, false, false)
+          down_v = glados.Utils.roundNumber(cur_i, false, true)
+          if up_v == down_v and (up_v != last_up_v or down_v != last_down_v)
+            console.log cur_i/factor, '->', up_v
+          else if up_v != down_v and (up_v != last_up_v or down_v != last_down_v)
+            console.log cur_i/factor, 'up ->', up_v, 'down ->', down_v
+          last_up_v = up_v
+          last_down_v = down_v
+          cur_i++
+      exampleRunner(1)
+      exampleRunner(100.0)
+      exampleRunner(10000.0)
 
     getFormattedNumber: (numberToFormat, exponentialAfter=Math.pow(10, 9), year=false)->
       if year
