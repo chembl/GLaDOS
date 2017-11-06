@@ -112,6 +112,8 @@ describe "Compound", ->
       chemblID = 'CHEMBL25'
       compound = new Compound
         molecule_chembl_id: chemblID
+        fetch_from_elastic: false
+
       wsResponse = undefined
       parsed = undefined
 
@@ -272,11 +274,16 @@ describe "Compound", ->
 
     describe "Loaded From Elastic Search", ->
 
+      chemblID = 'CHEMBL25'
       compound = new Compound
-        molecule_chembl_id: 'CHEMBL25'
+        molecule_chembl_id: chemblID
         fetch_from_elastic: true
 
-      it 'parses the data from elastic correctly', ->
+      it 'generates the elasctisearch url', ->
+
+        console.log 'compound url: ', compound.url
+        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + chemblID
+        expect(compound.url).toBe(urlMustBe)
 
 
 

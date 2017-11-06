@@ -4,7 +4,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   initialize: ->
     id = @get('id')
     id ?= @get('molecule_chembl_id')
-    @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
     if @get('enable_similarity_map')
       @set('loading_similarity_map', true)
