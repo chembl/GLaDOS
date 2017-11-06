@@ -1,6 +1,8 @@
 Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'molecule_chembl_id'
+  defaults:
+    fetch_from_elastic: true
   initialize: ->
     id = @get('id')
     id ?= @get('molecule_chembl_id')
