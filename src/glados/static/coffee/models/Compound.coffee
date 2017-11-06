@@ -91,22 +91,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         response.sdf_promise = $.ajax(response.sdf_url)
       return response.sdf_promise
 
-    containsMetals = (molformula) ->
-
-      nonMetals = ['H', 'C', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I']
-
-      testMolformula = response.molecule_properties.full_molformula
-      testMolformula = testMolformula.replace(/[0-9]+/g, '')
-      testMolformula = testMolformula.replace('.', '')
-
-      for element in nonMetals
-        testMolformula = testMolformula.replace(element, '')
-
-      testMolformula = testMolformula.replace(element, '')
-
-      return testMolformula.length > 0
-
-
     # Calculate the rule of five from other properties
     if response.molecule_properties?
       response.ro5 = response.molecule_properties.num_ro5_violations == 0
@@ -120,7 +104,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       # in the section Placeholder Compound Images
 
       if response.molecule_properties?
-        if containsMetals(response.molecule_properties.full_molformula)
+        if glados.Utils.Compounds.containsMetals(response.molecule_properties.full_molformula)
           response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
       else if response.molecule_type == 'Oligosaccharide'
         response.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'

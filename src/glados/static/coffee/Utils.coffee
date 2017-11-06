@@ -375,3 +375,19 @@ glados.useNameSpace 'glados',
           return URLProcessor.getRequestedChemblIDWhenEmbedded()
         else
           return URLProcessor.getRequestedChemblID()
+
+    Compounds:
+      containsMetals: (molformula) ->
+
+        nonMetals = ['H', 'C', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I']
+
+        testMolformula = molformula
+        testMolformula = testMolformula.replace(/[0-9]+/g, '')
+        testMolformula = testMolformula.replace('.', '')
+
+        for element in nonMetals
+          testMolformula = testMolformula.replace(element, '')
+
+        testMolformula = testMolformula.replace(element, '')
+
+        return testMolformula.length > 0

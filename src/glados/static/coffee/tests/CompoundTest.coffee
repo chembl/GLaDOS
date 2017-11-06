@@ -42,7 +42,13 @@ describe "Compound", ->
 
       chemblID = response.molecule_chembl_id
       urlMustBe = Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-      expect(response.targets_url).toBe(urlMustBe)
+      expect(parsed.targets_url).toBe(urlMustBe)
+
+    testHasNormalImageURL = (response, parsed) ->
+
+      chemblID = response.molecule_chembl_id
+      imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg?engine=indigo'
+      expect(parsed.image_url).toBe(imageURLMustBe)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Specific cases
@@ -73,7 +79,24 @@ describe "Compound", ->
       it 'parses the sdf URL', -> testSDFURL(wsResponse, parsed)
       it 'parses Rule of 5 pass', -> testRo5Pass(wsResponse, parsed)
       it 'parses the report card url', -> testReportCardURL(wsResponse, parsed)
-      it 'parsed the related targets url', -> testRelatedTargetsURL(wsResponse, parsed)
+      it 'parses the related targets url', -> testRelatedTargetsURL(wsResponse, parsed)
+      it 'parses a normal image url', -> testHasNormalImageURL(wsResponse, parsed)
+
+      describe 'Metal Containing Compound', ->
+
+        
+        beforeAll (done) ->
+
+          dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL25wsResponse.json'
+          $.get dataURL, (testData) ->
+            wsResponse = testData
+            parsed = compound.parse(wsResponse)
+            done()
+
+        it 'generates the correctImage', ->
+
+
+
 
     describe "Loaded From Elastic Search", ->
 
