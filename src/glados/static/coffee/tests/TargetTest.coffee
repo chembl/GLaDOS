@@ -1,6 +1,5 @@
 describe "Target", ->
 
-
   describe "Target Model", ->
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -33,5 +32,10 @@ describe "Target", ->
           done()
         ), 10000
 
+      it 'generates the web services url', ->
+
+        console.log 'url is: ', target.url
+
       it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
+
 
