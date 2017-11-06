@@ -1,9 +1,9 @@
 glados.useNameSpace 'glados',
   Utils:
-    getFormattedNumber: (numberToFormat)->
-      if numberToFormat < -Math.pow(10, 20)
-        return numberToFormat.toExponential()
-      if numberToFormat < Math.pow(10, 7)
+    getFormattedNumber: (numberToFormat, exponentialAfter=Math.pow(10, 9), year=false)->
+      if year
+        return ""+numberToFormat
+      if Math.abs(numberToFormat) < exponentialAfter
         return numeral(numberToFormat).format('0,[.]00')
       return numeral(numberToFormat).format('0.[0000]e+0')
 
