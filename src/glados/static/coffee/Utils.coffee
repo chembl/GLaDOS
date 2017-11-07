@@ -283,6 +283,11 @@ glados.useNameSpace 'glados',
         return Handlebars.compile($('#Handlebars-Common-ErrorInImage').html())
           msg: errorDetails
 
+      fillErrorForElement: ($element, paramsObj={}) ->
+
+        templateID = $element.attr('data-hb-error-template')
+        glados.Utils.fillContentForElement($element, paramsObj, templateID)
+
     Text:
       getTextForEllipsis: (originalText, originalWidth, containerLimit ) ->
 

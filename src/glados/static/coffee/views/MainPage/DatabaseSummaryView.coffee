@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
       @model.on 'change', @render, @
+      @model.on 'error', @renderError, @
 
     render: ->
 
@@ -30,5 +31,10 @@ glados.useNameSpace 'glados.views.MainPage',
     showContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.BCK-content').show()
+
+    renderError: ->
+      $contentElement = $(@el).find('.BCK-content')
+      glados.Utils.ErrorMessages.fillErrorForElement($contentElement)
+      @showContent()
 
 
