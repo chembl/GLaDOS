@@ -1,7 +1,8 @@
 Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'target_chembl_id'
-
+  defaults:
+    fetch_from_elastic: true
   initialize: ->
     @on 'change', @getProteinTargetClassification, @
     @initURL()
