@@ -37,6 +37,7 @@ class CompoundReportCardApp
       chemblID = glados.Utils.URLS.getCurrentModelChemblID()
       @currentCompound = new Compound
         molecule_chembl_id: chemblID
+        fetch_from_elastic: false
       return @currentCompound
 
     else return @currentCompound
