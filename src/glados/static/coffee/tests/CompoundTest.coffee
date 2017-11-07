@@ -299,7 +299,6 @@ describe "Compound", ->
 
       it 'generates the elasctisearch url', ->
 
-        console.log 'compound url: ', compound.url
         urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + chemblID
         expect(compound.url).toBe(urlMustBe)
 
