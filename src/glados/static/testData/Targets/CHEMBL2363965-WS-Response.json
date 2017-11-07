@@ -1,0 +1,1053 @@
+{
+  "organism": "Mycobacterium tuberculosis",
+  "pref_name": "70S ribosome",
+  "species_group_flag": false,
+  "target_chembl_id": "CHEMBL2363965",
+  "target_components": [
+    {
+      "accession": null,
+      "component_description": "5S ribosomal RNA",
+      "component_id": 7479,
+      "component_type": "RNA",
+      "relationship": "RNA SUBUNIT",
+      "target_component_synonyms": [
+
+      ]
+    },
+    {
+      "accession": null,
+      "component_description": "16S ribosomal RNA",
+      "component_id": 7480,
+      "component_type": "RNA",
+      "relationship": "RNA SUBUNIT",
+      "target_component_synonyms": [
+
+      ]
+    },
+    {
+      "accession": null,
+      "component_description": "23S ribosomal RNA",
+      "component_id": 7481,
+      "component_type": "RNA",
+      "relationship": "RNA SUBUNIT",
+      "target_component_synonyms": [
+
+      ]
+    },
+    {
+      "accession": "P9WHE1",
+      "component_description": "50S ribosomal protein L13",
+      "component_id": 252,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L13",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplM",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH43",
+      "component_description": "30S ribosomal protein S1",
+      "component_id": 7544,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsA",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH67",
+      "component_description": "30S ribosomal protein S10",
+      "component_id": 7545,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S10",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsJ",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsX",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH65",
+      "component_description": "30S ribosomal protein S11",
+      "component_id": 7546,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S11",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsK",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH63",
+      "component_description": "30S ribosomal protein S12",
+      "component_id": 7547,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S12",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rps12",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsL",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH61",
+      "component_description": "30S ribosomal protein S13",
+      "component_id": 7548,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S13",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsM",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH59",
+      "component_description": "30S ribosomal protein S14",
+      "component_id": 7549,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S14",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsN",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsN2",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH57",
+      "component_description": "30S ribosomal protein S14 type Z",
+      "component_id": 7550,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S14 type Z",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsN1",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsZ",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH55",
+      "component_description": "30S ribosomal protein S15",
+      "component_id": 7551,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S15",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsO",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH53",
+      "component_description": "30S ribosomal protein S16",
+      "component_id": 7552,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S16",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsP",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH51",
+      "component_description": "30S ribosomal protein S17",
+      "component_id": 7553,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S17",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsQ",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH49",
+      "component_description": "30S ribosomal protein S18 1",
+      "component_id": 7554,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S18 1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsR",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsR1",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH47",
+      "component_description": "30S ribosomal protein S18 2",
+      "component_id": 7555,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S18 2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsR2",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH45",
+      "component_description": "30S ribosomal protein S19",
+      "component_id": 7556,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S19",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsS",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH39",
+      "component_description": "30S ribosomal protein S2",
+      "component_id": 7557,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsB",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH41",
+      "component_description": "30S ribosomal protein S20",
+      "component_id": 7558,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S20",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsT",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH37",
+      "component_description": "30S ribosomal protein S3",
+      "component_id": 7559,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S3",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsC",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH35",
+      "component_description": "30S ribosomal protein S4",
+      "component_id": 7560,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S4",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsD",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH33",
+      "component_description": "30S ribosomal protein S5",
+      "component_id": 7561,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S5",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsE",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH31",
+      "component_description": "30S ribosomal protein S6",
+      "component_id": 7562,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S6",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsF",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH29",
+      "component_description": "30S ribosomal protein S7",
+      "component_id": 7563,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S7",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rps7",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpsG",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH27",
+      "component_description": "30S ribosomal protein S8",
+      "component_id": 7564,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S8",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsH",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH25",
+      "component_description": "30S ribosomal protein S9",
+      "component_id": 7565,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "30S ribosomal protein S9",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpsI",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHC7",
+      "component_description": "50S ribosomal protein L1",
+      "component_id": 7566,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplA",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHE7",
+      "component_description": "50S ribosomal protein L10",
+      "component_id": 7567,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L10",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplJ",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHE5",
+      "component_description": "50S ribosomal protein L11",
+      "component_id": 7568,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L11",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplK",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHD9",
+      "component_description": "50S ribosomal protein L14",
+      "component_id": 7569,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L14",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplN",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHD7",
+      "component_description": "50S ribosomal protein L15",
+      "component_id": 7570,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L15",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplO",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHD5",
+      "component_description": "50S ribosomal protein L16",
+      "component_id": 7571,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L16",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplP",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHD3",
+      "component_description": "50S ribosomal protein L17",
+      "component_id": 7572,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L17",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplQ",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHD1",
+      "component_description": "50S ribosomal protein L18",
+      "component_id": 7573,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L18",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplR",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHC9",
+      "component_description": "50S ribosomal protein L19",
+      "component_id": 7574,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L19",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplS",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHA5",
+      "component_description": "50S ribosomal protein L2",
+      "component_id": 7575,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplB",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHC5",
+      "component_description": "50S ribosomal protein L20",
+      "component_id": 7576,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L20",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplT",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHC3",
+      "component_description": "50S ribosomal protein L21",
+      "component_id": 7577,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L21",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplU",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHC1",
+      "component_description": "50S ribosomal protein L22",
+      "component_id": 7578,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L22",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplV",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHB9",
+      "component_description": "50S ribosomal protein L23",
+      "component_id": 7579,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L23",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplW",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHB7",
+      "component_description": "50S ribosomal protein L24",
+      "component_id": 7580,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L24",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplX",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHB5",
+      "component_description": "50S ribosomal protein L25",
+      "component_id": 7581,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L25",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "General stress protein CTC",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "ctc",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rplY",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHB3",
+      "component_description": "50S ribosomal protein L27",
+      "component_id": 7582,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L27",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmA",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHB1",
+      "component_description": "50S ribosomal protein L28-1",
+      "component_id": 7583,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L28-1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmB",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpmB1",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHA9",
+      "component_description": "50S ribosomal protein L28-2",
+      "component_id": 7584,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L28-2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmB2",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHA7",
+      "component_description": "50S ribosomal protein L29",
+      "component_id": 7585,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L29",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmC",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH87",
+      "component_description": "50S ribosomal protein L3",
+      "component_id": 7586,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L3",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplC",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHA3",
+      "component_description": "50S ribosomal protein L30",
+      "component_id": 7587,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L30",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmD",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHA1",
+      "component_description": "50S ribosomal protein L31",
+      "component_id": 7588,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L31",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmE",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH99",
+      "component_description": "50S ribosomal protein L32",
+      "component_id": 7589,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L32",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmF",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH97",
+      "component_description": "50S ribosomal protein L33 1",
+      "component_id": 7590,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L33 1",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmG",
+          "syn_type": "GENE_SYMBOL"
+        },
+        {
+          "component_synonym": "rpmG1",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH95",
+      "component_description": "50S ribosomal protein L33 2",
+      "component_id": 7591,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L33 2",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmG2",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH93",
+      "component_description": "50S ribosomal protein L34",
+      "component_id": 7592,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L34",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmH",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH91",
+      "component_description": "50S ribosomal protein L35",
+      "component_id": 7593,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L35",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmI",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH89",
+      "component_description": "50S ribosomal protein L36",
+      "component_id": 7594,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L36",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "Ribosomal protein B",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rpmJ",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH85",
+      "component_description": "50S ribosomal protein L4",
+      "component_id": 7595,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L4",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplD",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH83",
+      "component_description": "50S ribosomal protein L5",
+      "component_id": 7596,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L5",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplE",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH81",
+      "component_description": "50S ribosomal protein L6",
+      "component_id": 7597,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L6",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplF",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WHE3",
+      "component_description": "50S ribosomal protein L7/L12",
+      "component_id": 7598,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L7/L12",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplL",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    },
+    {
+      "accession": "P9WH79",
+      "component_description": "50S ribosomal protein L9",
+      "component_id": 7599,
+      "component_type": "PROTEIN",
+      "relationship": "PROTEIN SUBUNIT",
+      "target_component_synonyms": [
+        {
+          "component_synonym": "50S ribosomal protein L9",
+          "syn_type": "UNIPROT"
+        },
+        {
+          "component_synonym": "rplI",
+          "syn_type": "GENE_SYMBOL"
+        }
+      ]
+    }
+  ],
+  "target_type": "PROTEIN NUCLEIC-ACID COMPLEX",
+  "tax_id": 1773
+}

@@ -30,6 +30,7 @@ class TargetReportCardApp
 
       @currentTarget = new Target
         target_chembl_id: targetChemblID
+        fetch_from_elastic: false
       return @currentTarget
 
     else return @currentTarget

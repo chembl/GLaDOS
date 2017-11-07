@@ -1,0 +1,54 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "-1",
+  "biotherapeutic": null,
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": "Contact Lens Material (hydrophilic)",
+  "inorganic_flag": "0",
+  "max_phase": 3,
+  "molecule_chembl_id": "CHEMBL2108458",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL2108458",
+    "parent_chembl_id": "CHEMBL2108458"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Nelfilcon A",
+      "syn_type": "OTHER",
+      "synonyms": "NELFILCON A"
+    },
+    {
+      "molecule_synonym": "Nelfilcon A",
+      "syn_type": "USAN",
+      "synonyms": "NELFILCON A"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": "0",
+  "oral": false,
+  "parenteral": false,
+  "polymer_flag": true,
+  "pref_name": "NELFILCON A",
+  "prodrug": "0",
+  "structure_type": "NONE",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": "-filcon",
+  "usan_stem_definition": "hydrophilic contact lens materials",
+  "usan_substem": null,
+  "usan_year": 1997,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}

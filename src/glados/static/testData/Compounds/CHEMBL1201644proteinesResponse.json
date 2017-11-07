@@ -1,0 +1,225 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL1201644",
+  "_version": 3,
+  "found": true,
+  "_source": {
+    "inorganic_flag": "0",
+    "indication_class": null,
+    "pref_name": "INSULIN ZINC SUSP RECOMBINANT HUMAN",
+    "prodrug": "0",
+    "structure_type": "SEQ",
+    "usan_stem": null,
+    "withdrawn_year": null,
+    "molecule_properties": null,
+    "therapeutic_flag": true,
+    "availability_type": "0",
+    "withdrawn_country": null,
+    "molecule_synonyms": [
+      {
+        "synonyms": "NOVOLIN L",
+        "molecule_synonym": "Novolin L",
+        "syn_type": "TRADE_NAME"
+      },
+      {
+        "synonyms": "INSULIN ZINC SUSP RECOMBINANT HUMAN",
+        "molecule_synonym": "Insulin Zinc Susp Recombinant Human",
+        "syn_type": "FDA"
+      },
+      {
+        "synonyms": "Insulin zinc susp recombinant human",
+        "molecule_synonym": "Insulin zinc susp recombinant human",
+        "syn_type": "OTHER"
+      },
+      {
+        "synonyms": "HUMULIN L",
+        "molecule_synonym": "Humulin L",
+        "syn_type": "TRADE_NAME"
+      }
+    ],
+    "black_box_warning": "0",
+    "molecule_chembl_id": "CHEMBL1201644",
+    "oral": false,
+    "natural_product": "0",
+    "first_approval": 1985,
+    "helm_notation": null,
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL1201644",
+      "parent_chembl_id": "CHEMBL1201644"
+    },
+    "chirality": "1",
+    "first_in_class": "0",
+    "biotherapeutic": {
+      "description": "Recombinant human insulin zinc suspension",
+      "helm_notation": null,
+      "biocomponents": [
+        {
+          "sequence": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN",
+          "organism": "Homo sapiens",
+          "description": "Purified semisynthetic human insulin zinc suspension",
+          "component_type": "PROTEIN",
+          "component_id": 6677,
+          "tax_id": 9606
+        }
+      ],
+      "molecule_chembl_id": "CHEMBL1201644"
+    },
+    "polymer_flag": false,
+    "molecule_structures": null,
+    "usan_year": null,
+    "atc_classifications": [
+
+    ],
+    "dosed_ingredient": true,
+    "usan_substem": null,
+    "parenteral": true,
+    "withdrawn_flag": false,
+    "chebi_par_id": null,
+    "_metadata": {
+      "drug": {
+        "is_drug": true,
+        "drug_data": {
+          "prodrug": false,
+          "development_phase": 4,
+          "topical": false,
+          "molecule_structures": null,
+          "usan_stem_substem": null,
+          "applicants": [
+            "Novo Nordisk Inc",
+            "Eli Lilly And Co"
+          ],
+          "molecule_properties": null,
+          "biotherapeutic": {
+            "helm_notation": null,
+            "description": "Recombinant human insulin zinc suspension",
+            "molecule_chembl_id": "CHEMBL1201644",
+            "biocomponents": [
+              {
+                "sequence": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN",
+                "component_type": "PROTEIN",
+                "component_id": 6677,
+                "organism": "Homo sapiens",
+                "description": "Purified semisynthetic human insulin zinc suspension",
+                "tax_id": 9606
+              }
+            ]
+          },
+          "withdrawn_country": null,
+          "indication_class": null,
+          "drug_type": "5",
+          "sc_patent": null,
+          "molecule_chembl_id": "CHEMBL1201644",
+          "withdrawn_year": null,
+          "withdrawn_reason": null,
+          "usan_year": null,
+          "chirality": "1",
+          "black_box": false,
+          "first_in_class": false,
+          "synonyms": [
+            "Insulin zinc susp recombinant human"
+          ],
+          "usan_stem_definition": null,
+          "research_codes": null,
+          "helm_notation": null,
+          "molecule_synonyms": [
+            {
+              "synonyms": "HUMULIN L",
+              "molecule_synonym": "Humulin L",
+              "syn_type": "TRADE_NAME"
+            },
+            {
+              "synonyms": "INSULIN ZINC SUSP RECOMBINANT HUMAN",
+              "molecule_synonym": "Insulin Zinc Susp Recombinant Human",
+              "syn_type": "FDA"
+            },
+            {
+              "synonyms": "Insulin zinc susp recombinant human",
+              "molecule_synonym": "Insulin zinc susp recombinant human",
+              "syn_type": "OTHER"
+            },
+            {
+              "synonyms": "NOVOLIN L",
+              "molecule_synonym": "Novolin L",
+              "syn_type": "TRADE_NAME"
+            }
+          ],
+          "atc_classification": null,
+          "usan_stem": null,
+          "rule_of_five": false,
+          "ob_patent": null,
+          "parenteral": true,
+          "availability_type": "0",
+          "first_approval": 1985,
+          "oral": false
+        }
+      },
+      "compound_records": [
+        {
+          "compound_name": "Insulin Zinc Susp Recombinant Human",
+          "compound_key": "INSULIN ZINC SUSP RECOMBINANT HUMAN"
+        }
+      ],
+      "disease_name": [
+
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 0
+      },
+      "es_completion": [
+        {
+          "input": "CHEMBL1201644",
+          "weight": 10
+        },
+        {
+          "input": "NOVOLIN L",
+          "weight": 75
+        },
+        {
+          "input": "Insulin Zinc Susp Recombinant Human",
+          "weight": 75
+        },
+        {
+          "input": "Humulin L",
+          "weight": 75
+        },
+        {
+          "input": "Novolin L",
+          "weight": 75
+        },
+        {
+          "input": "INSULIN ZINC SUSP RECOMBINANT HUMAN",
+          "weight": 100
+        },
+        {
+          "input": "HUMULIN L",
+          "weight": 75
+        },
+        {
+          "input": "Insulin zinc susp recombinant human",
+          "weight": 75
+        }
+      ],
+      "tags": [
+
+      ],
+      "activity_count": 0
+    },
+    "molecule_type": "Protein",
+    "max_phase": 4,
+    "usan_stem_definition": null,
+    "withdrawn_reason": null,
+    "topical": false
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL2109133",
+  "_version": 3,
+  "found": true,
+  "_source": {
+    "inorganic_flag": "0",
+    "indication_class": "Pharmaceutic Aid (tablet excipient)",
+    "pref_name": "MAGNESIUM SILICATE",
+    "prodrug": "0",
+    "structure_type": "NONE",
+    "usan_stem": null,
+    "withdrawn_year": null,
+    "molecule_properties": null,
+    "therapeutic_flag": false,
+    "availability_type": "-1",
+    "withdrawn_country": null,
+    "molecule_synonyms": [
+      {
+        "synonyms": "MAGNESIUM SILICATE",
+        "molecule_synonym": "Magnesium Silicate",
+        "syn_type": "NATIONAL_FORMULARY"
+      },
+      {
+        "synonyms": "MAGNESIUM SILICATE",
+        "molecule_synonym": "Magnesium Silicate",
+        "syn_type": "JAN"
+      },
+      {
+        "synonyms": "MAGNESIUM SILICATE",
+        "molecule_synonym": "Magnesium Silicate",
+        "syn_type": "ATC"
+      }
+    ],
+    "black_box_warning": "0",
+    "molecule_chembl_id": "CHEMBL2109133",
+    "oral": false,
+    "natural_product": "0",
+    "first_approval": null,
+    "helm_notation": null,
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL2109133",
+      "parent_chembl_id": "CHEMBL2109133"
+    },
+    "chirality": "1",
+    "first_in_class": "0",
+    "biotherapeutic": null,
+    "polymer_flag": false,
+    "molecule_structures": null,
+    "usan_year": null,
+    "atc_classifications": [
+      "A02AA05"
+    ],
+    "dosed_ingredient": false,
+    "usan_substem": null,
+    "parenteral": false,
+    "withdrawn_flag": false,
+    "chebi_par_id": null,
+    "_metadata": {
+      "drug": {
+        "is_drug": true,
+        "drug_data": {
+          "prodrug": false,
+          "development_phase": 0,
+          "topical": false,
+          "molecule_structures": null,
+          "usan_stem_substem": null,
+          "applicants": null,
+          "molecule_properties": null,
+          "biotherapeutic": null,
+          "withdrawn_country": null,
+          "indication_class": "Pharmaceutic Aid (tablet excipient)",
+          "drug_type": "-1",
+          "sc_patent": null,
+          "molecule_chembl_id": "CHEMBL2109133",
+          "withdrawn_year": null,
+          "withdrawn_reason": null,
+          "usan_year": null,
+          "chirality": "1",
+          "black_box": false,
+          "first_in_class": false,
+          "synonyms": [
+            "Magnesium silicate"
+          ],
+          "usan_stem_definition": null,
+          "research_codes": null,
+          "helm_notation": null,
+          "molecule_synonyms": [
+            {
+              "synonyms": "MAGNESIUM SILICATE",
+              "molecule_synonym": "Magnesium Silicate",
+              "syn_type": "ATC"
+            },
+            {
+              "synonyms": "MAGNESIUM SILICATE",
+              "molecule_synonym": "Magnesium Silicate",
+              "syn_type": "JAN"
+            },
+            {
+              "synonyms": "MAGNESIUM SILICATE",
+              "molecule_synonym": "Magnesium Silicate",
+              "syn_type": "NATIONAL_FORMULARY"
+            }
+          ],
+          "atc_classification": [
+            {
+              "code": "A02AA05",
+              "description": "ALIMENTARY TRACT AND METABOLISM: DRUGS FOR ACID RELATED DISORDERS: ANTACIDS: Magnesium compounds"
+            }
+          ],
+          "usan_stem": null,
+          "rule_of_five": false,
+          "ob_patent": null,
+          "parenteral": false,
+          "availability_type": "-1",
+          "first_approval": null,
+          "oral": false
+        }
+      },
+      "compound_records": [
+        {
+          "compound_name": "Magnesium Silicate",
+          "compound_key": "MAGNESIUM SILICATE"
+        },
+        {
+          "compound_name": "MAGNESIUM SILICATE",
+          "compound_key": "MAGNESIUM SILICATE"
+        }
+      ],
+      "disease_name": [
+
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 0
+      },
+      "es_completion": [
+        {
+          "input": "Magnesium Silicate",
+          "weight": 75
+        },
+        {
+          "input": "MAGNESIUM SILICATE",
+          "weight": 100
+        },
+        {
+          "input": "CHEMBL2109133",
+          "weight": 10
+        }
+      ],
+      "tags": [
+
+      ],
+      "activity_count": 0
+    },
+    "molecule_type": "Unknown",
+    "max_phase": 0,
+    "usan_stem_definition": null,
+    "withdrawn_reason": null,
+    "topical": false
+  }
+}

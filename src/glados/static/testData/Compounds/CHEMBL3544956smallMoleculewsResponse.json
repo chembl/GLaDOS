@@ -1,0 +1,49 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "-1",
+  "biotherapeutic": null,
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": null,
+  "inorganic_flag": "0",
+  "max_phase": 2,
+  "molecule_chembl_id": "CHEMBL3544956",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL3544956",
+    "parent_chembl_id": "CHEMBL3544956"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Pyrotinib",
+      "syn_type": "USAN",
+      "synonyms": "Pyrotinib"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": "0",
+  "oral": false,
+  "parenteral": false,
+  "polymer_flag": false,
+  "pref_name": "Pyrotinib",
+  "prodrug": "0",
+  "structure_type": "NONE",
+  "therapeutic_flag": true,
+  "topical": false,
+  "usan_stem": "-tinib",
+  "usan_stem_definition": "tyrosine kinase inhibitors",
+  "usan_substem": null,
+  "usan_year": null,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}

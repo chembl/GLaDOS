@@ -1,0 +1,129 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL364516",
+  "_version": 3,
+  "found": true,
+  "_source": {
+    "inorganic_flag": "-1",
+    "indication_class": null,
+    "pref_name": "N-{4-[4-(2-methoxyphenyl)piperazin-1-yl]butyl}-1-ferra-1,1'-spirobi[pentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-2,2',4,4'-tetraene-6-carboxamide",
+    "prodrug": "-1",
+    "structure_type": "NONE",
+    "usan_stem": null,
+    "withdrawn_year": null,
+    "molecule_properties": {
+      "psa": null,
+      "heavy_atoms": null,
+      "hba_lipinski": null,
+      "hbd": null,
+      "alogp": null,
+      "num_lipinski_ro5_violations": null,
+      "acd_most_bpka": null,
+      "full_mwt": "467.34",
+      "hbd_lipinski": null,
+      "acd_logp": null,
+      "acd_logd": null,
+      "molecular_species": null,
+      "acd_most_apka": null,
+      "hba": null,
+      "aromatic_rings": null,
+      "mw_freebase": null,
+      "num_alerts": null,
+      "rtb": null,
+      "full_molformula": "C26H25FeN3O2",
+      "qed_weighted": null,
+      "mw_monoisotopic": null,
+      "num_ro5_violations": null,
+      "ro3_pass": null
+    },
+    "therapeutic_flag": false,
+    "availability_type": "-1",
+    "withdrawn_country": null,
+    "molecule_synonyms": [
+
+    ],
+    "black_box_warning": "0",
+    "molecule_chembl_id": "CHEMBL364516",
+    "oral": false,
+    "natural_product": "-1",
+    "first_approval": null,
+    "helm_notation": null,
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL364516",
+      "parent_chembl_id": "CHEMBL364516"
+    },
+    "chirality": "-1",
+    "first_in_class": "-1",
+    "biotherapeutic": null,
+    "polymer_flag": false,
+    "molecule_structures": null,
+    "usan_year": null,
+    "atc_classifications": [
+
+    ],
+    "dosed_ingredient": false,
+    "usan_substem": null,
+    "parenteral": false,
+    "withdrawn_flag": false,
+    "chebi_par_id": null,
+    "_metadata": {
+      "drug": {
+        "is_drug": false,
+        "drug_data": null
+      },
+      "compound_records": [
+        {
+          "compound_name": "N-{4-[4-(2-methoxyphenyl)piperazin-1-yl]butyl}-1-ferra-1,1'-spirobi[pentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-2,2',4,4'-tetraene-6-carboxamide",
+          "compound_key": "1a"
+        }
+      ],
+      "disease_name": [
+
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+            "CHEMBL2095200",
+            "CHEMBL234",
+            "CHEMBL2094251",
+            "CHEMBL219",
+            "CHEMBL214",
+            "CHEMBL5067",
+            "CHEMBL217"
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 7
+      },
+      "es_completion": [
+        {
+          "input": "CHEMBL364516",
+          "weight": 10
+        },
+        {
+          "input": "C26H25FeN3O2",
+          "weight": 90
+        },
+        {
+          "input": "N-{4-[4-(2-methoxyphenyl)piperazin-1-yl]butyl}-1-ferra-1,1'-spirobi[pentacyclo[2.2.0.0^{1,3}.0^{1,5}.0^{2,6}]hexane]-2,2',4,4'-tetraene-6-carboxamide",
+          "weight": 100
+        }
+      ],
+      "tags": [
+
+      ],
+      "activity_count": 14
+    },
+    "molecule_type": "Small molecule",
+    "max_phase": 0,
+    "usan_stem_definition": null,
+    "withdrawn_reason": null,
+    "topical": false
+  }
+}
