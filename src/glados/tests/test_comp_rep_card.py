@@ -210,7 +210,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # structure not available
     img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/metalContaining.png')
+    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/metalContaining.svg')
 
     # Max Phase 0
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
