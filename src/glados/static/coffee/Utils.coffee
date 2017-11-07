@@ -19,10 +19,12 @@ glados.useNameSpace 'glados',
         lastNum = 1
 
       if downwards and Math.sign(n) > 0
-        if lastNum < 5
+        if lastNum < 2
           lastNum = 1
           if curLevel <= 0 and lastNum == 1
             lastNum = 0
+        else if lastNum < 5
+          lastNum = 2
         else
           lastNum = 5
       else
