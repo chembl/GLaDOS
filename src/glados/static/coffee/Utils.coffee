@@ -52,6 +52,8 @@ glados.useNameSpace 'glados',
         returnCol.show = colDescription.show
         returnCol.comparator = colDescription.comparator
 
+        #remove this if no need for old
+
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,
         customNullValueLabel=colDescription.custom_null_vale_label)
 
