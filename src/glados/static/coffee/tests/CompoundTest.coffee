@@ -52,12 +52,12 @@ describe "Compound", ->
 
     testHasMetalContainingIMG = (response, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasOligosaccharideIMG = (response, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasNaturlaProductIMG = (response, parsed) ->
@@ -67,7 +67,7 @@ describe "Compound", ->
 
     testHasSmallPolymerIMG = (response, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasSmallMoleculeIMG = (response, parsed) ->
@@ -82,12 +82,12 @@ describe "Compound", ->
 
     testHasProteinIMG = (wsResponse, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasOligonucleotideIMG = (wsResponse, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasEnzymeIMG = (wsResponse, parsed) ->
@@ -97,7 +97,7 @@ describe "Compound", ->
 
     testHasCellIMG = (wsResponse, parsed) ->
 
-      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
+      imgURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.svg'
       expect(parsed.image_url).toBe(imgURLMustBe)
 
     testHasUnknownTypeIMG = (wsResponse, parsed) ->

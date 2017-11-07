@@ -1174,6 +1174,12 @@ div#CompoundNameAndClassification .CNC-img-btn {
   white-space: nowrap;
 }
 
+.p-oneline{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 div#CompoundNameAndClassification .CNC-table td {
   padding: 2px;
   font-size: 80%;
@@ -3418,6 +3424,12 @@ $facets-width-large: 21%;
       a {
         font-size: 1rem;
       }
+    }
+  }
+
+  .paginated-card{
+    .card-stacked{
+      width: 60%
     }
   }
 }

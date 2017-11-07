@@ -383,7 +383,7 @@
                   m{{medium_size}}
                   l{{large_size}}" >
 
-    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable" style="height: 85%">
+    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable paginated-card" style="height: 85%">
 
       <div class='checkbox-container'>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
@@ -405,16 +405,16 @@
 
             {{#if this.is_secondary_link}}
                 <small>
-                  <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                  <p  ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
                 </small>
               {{else}}
-                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                <p  ><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
                 </p>
               {{/if}}
 
           {{else}}
           <small>
-            <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+            <p ><b>{{this.name_to_show}}:</b> {{this.value}}</p>
           </small>
           {{/if}}
           {{/each}}

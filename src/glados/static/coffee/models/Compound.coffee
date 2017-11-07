@@ -109,28 +109,28 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
       if objData.molecule_properties?
         if glados.Utils.Compounds.containsMetals(objData.molecule_properties.full_molformula)
-          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.png'
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.svg'
       else if objData.molecule_type == 'Oligosaccharide'
-        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.png'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligosaccharide.svg'
       else if objData.molecule_type == 'Small molecule'
 
         if objData.natural_product == '1'
           objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/naturalProduct.svg'
         else if objData.polymer_flag == true
-          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.png'
+          objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolPolymer.svg'
         else
           objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/smallMolecule.svg'
 
       else if objData.molecule_type == 'Antibody'
         objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/antibody.svg'
       else if objData.molecule_type == 'Protein'
-        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.png'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/peptide.svg'
       else if objData.molecule_type == 'Oligonucleotide'
-        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.png'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/oligonucleotide.svg'
       else if objData.molecule_type == 'Enzyme'
         objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/enzyme.svg'
       else if objData.molecule_type == 'Cell'
-        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.png'
+        objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/cell.svg'
       else #if response.molecule_type == 'Unclassified' or response.molecule_type = 'Unknown' or not response.molecule_type?
         objData.image_url = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
 
