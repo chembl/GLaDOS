@@ -68,6 +68,13 @@
     </div>
 
 </script>
+
+<script id="Handlebars-DatabaseInfoError" type="text/x-handlebars-template">
+  <div class="card-content">
+  There was an error while loading the database status. Click <a href="http://chembl.github.io/status/">here</a>
+  for more information.
+  </div>
+</script>
 {% endverbatim %}
 
 <div class="BCK-Database-summary-info card teal lighten-5 z-depth-0">
@@ -80,7 +87,8 @@
 
   </div>
 
-  <div class="BCK-content database-info" style="display: none" data-hb-template="Handlebars-DatabaseInfo">
+  <div class="BCK-content database-info" style="display: none" data-hb-template="Handlebars-DatabaseInfo"
+       data-hb-error-template="Handlebars-DatabaseInfoError">
 
   </div>
 
