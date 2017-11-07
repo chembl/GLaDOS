@@ -1,9 +1,10 @@
 # This takes care of handling the compound report card.
-class CompoundReportCardApp
+class CompoundReportCardApp extends ReportCardApp
 
   #This initializes all views and models necessary for the compound report card
   @init = ->
 
+    CompoundReportCardApp.hideSection('hola!!')
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     compound = CompoundReportCardApp.getCurrentCompound()
