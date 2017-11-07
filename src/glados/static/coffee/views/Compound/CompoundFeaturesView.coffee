@@ -95,7 +95,7 @@ CompoundFeaturesView = CardView.extend
       '0': ['', 'b', 'Black Box: No', 'bottom', 'icon-chembl']
       '1': ['active', 'b', 'Black Box: Yes', 'bottom', 'icon-chembl']
     'availability_type':
-      '-2': ['', '2', 'Availability: Withdrawn', 'bottom', 'icon-chembl']
+      '-2': ['active', 'w', 'Availability: Withdrawn', 'bottom', 'icon-chembl-2']
       '-1': ['', '1', 'Availability: Undefined', 'bottom', 'icon-chembl']
       '0': ['active', '2', 'Availability: Discontinued', 'bottom', 'icon-chembl']
       '1': ['active', '1', 'Availability: Prescription Only', 'bottom', 'icon-chembl']
