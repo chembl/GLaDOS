@@ -18,11 +18,11 @@ glados.useNameSpace 'glados.views.MainPage',
       glados.Utils.fillContentForElement $contentElement,
         chembl_db_version: chemblDBVersion.replace('_', ' ')
         chembl_release_date: @model.get('chembl_release_date')
-        num_targets: $.number(@model.get('num_targets'))
-        num_compound_records: $.number(@model.get('num_compound_records'))
-        num_compounds: $.number(@model.get('num_compounds'))
-        num_activities: $.number(@model.get('num_activities'))
-        num_publications: $.number(@model.get('num_publications'))
+        num_targets: $.number(@model.get('targets'))
+        num_compound_records: $.number(@model.get('compound_records'))
+        num_compounds: $.number(@model.get('disinct_compounds'))
+        num_activities: $.number(@model.get('activities'))
+        num_publications: $.number(@model.get('publications'))
         release_notes_link: releaseNotesLink
 
       @showContent()
