@@ -6,7 +6,7 @@ SimilarCompoundsView = CardView.extend
     console.log 'init similar comps view: ', arguments
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
-    @collection.on 'error', (-> $('#SimilarCompounds').hide()), @
+    @collection.on 'error', (-> CompoundReportCardApp.hideSection('SimilarCompounds')), @
     @resource_type = 'Compound'
 
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
@@ -26,7 +26,7 @@ SimilarCompoundsView = CardView.extend
       similarity_threshold: glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-      $('#TargetRelations').hide()
+      CompoundReportCardApp.hideSection('SimilarCompounds')
       return
 
     @showCardContent()
