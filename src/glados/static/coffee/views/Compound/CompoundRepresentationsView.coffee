@@ -11,8 +11,9 @@ CompoundRepresentationsView = CardView.extend
     @molecule_structures = @model.get('molecule_structures')
 
     if not @molecule_structures?
-      $('#CompoundRepresentations').hide()
+      CompoundReportCardApp.hideSection('CompoundRepresentations')
       return
+
     @renderButtons()
     @renderCanonicalSmiles()
     @renderStandardInchi()

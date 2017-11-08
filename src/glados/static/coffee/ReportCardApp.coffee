@@ -1,5 +1,3 @@
 class ReportCardApp
 
-  @hideSection = (sectionID) ->
-
-    alert ('hiding section: ' + sectionID)
+  @hideSection = (sectionID) -> $('#' + sectionID).hide()
