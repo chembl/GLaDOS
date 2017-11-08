@@ -6,12 +6,13 @@ CompoundRepresentationsView = CardView.extend
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
+    @section_id = arguments[0].section_id
 
   render: ->
     @molecule_structures = @model.get('molecule_structures')
 
     if not @molecule_structures?
-      CompoundReportCardApp.hideSection('CompoundRepresentations')
+      CompoundReportCardApp.hideSection(@section_id)
       return
 
     @renderButtons()

@@ -72,6 +72,7 @@ class CompoundReportCardApp extends ReportCardApp
     new CompoundRepresentationsView
       model: compound
       el: $('#CompRepsCard')
+      section_id: 'CompoundRepresentations'
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
