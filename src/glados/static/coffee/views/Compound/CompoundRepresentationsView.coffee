@@ -15,6 +15,8 @@ CompoundRepresentationsView = CardView.extend
       CompoundReportCardApp.hideSection(@section_id)
       return
 
+    CompoundReportCardApp.showSection(@section_id)
+
     @renderButtons()
     @renderCanonicalSmiles()
     @renderStandardInchi()

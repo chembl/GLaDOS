@@ -85,8 +85,9 @@ class CompoundReportCardApp extends ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     new CompoundCalculatedParentPropertiesView
-        model: compound
-        el: $('#CalculatedParentPropertiesCard')
+      model: compound
+      el: $('#CalculatedParentPropertiesCard')
+      section_id: 'CalculatedCompoundParentProperties'
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -208,6 +209,7 @@ class CompoundReportCardApp extends ReportCardApp
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      section_id: 'SimilarCompounds'
 
     similarCompoundsList.fetch({reset: true})
 
