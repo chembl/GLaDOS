@@ -5,5 +5,5 @@ glados.useNameSpace 'glados',
     @showSection = (sectionID) -> $('#' + sectionID).show()
     @init = ->
       @scrollSpyHandler = new glados.models.ScrollSpy.ScrollSpyHandler
+      ScrollSpyHelper.initializeScrollSpyPinner()
 #      $('.scrollspy').scrollSpy()
-#      ScrollSpyHelper.initializeScrollSpyPinner()
