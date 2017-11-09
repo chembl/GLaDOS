@@ -1,4 +1,5 @@
-class ReportCardApp
+glados.useNameSpace 'glados',
+  ReportCardApp: class ReportCardApp
 
-  @hideSection = (sectionID) -> $('#' + sectionID).hide()
-  @showSection = (sectionID) -> $('#' + sectionID).show()
+    @hideSection = (sectionID) -> $('#' + sectionID).hide()
+    @showSection = (sectionID) -> $('#' + sectionID).show()

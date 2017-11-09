@@ -1,5 +1,5 @@
 # This takes care of handling the compound report card.
-class CompoundReportCardApp extends ReportCardApp
+class CompoundReportCardApp extends glados.ReportCardApp
 
   #This initializes all views and models necessary for the compound report card
   @init = ->
