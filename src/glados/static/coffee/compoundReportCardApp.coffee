@@ -49,13 +49,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
-    new CompoundNameClassificationView({
-        model: compound,
-        el: $('#CNCCard')})
+    new CompoundNameClassificationView
+      model: compound,
+      el: $('#CNCCard')
+      section_id: 'CompoundNameAndClassification'
 
-    new CompoundImageView({
-        model: compound,
-        el: ('#CNCImageCard')})
+    new CompoundImageView
+      model: compound,
+      el: ('#CNCImageCard')
 
     if GlobalVariables['EMBEDED']
       compound.fetch()

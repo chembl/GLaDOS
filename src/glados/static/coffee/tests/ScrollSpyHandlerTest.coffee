@@ -15,6 +15,7 @@ describe 'Scroll Spy Handler', ->
     sections = scrollSpyHandler.get('sections')
 
     expect(sections[sectionName].state).toBe(glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE)
+    expect(sections[sectionName].name).toBe(sectionName)
     expect(sections[sectionName].position).toBe(0)
 
   it 'Resets the sections', ->
@@ -40,6 +41,7 @@ describe 'Scroll Spy Handler', ->
     for i in [0..sectionNames.length-1]
       currentName = sectionNames[i]
       expect(sections[currentName].state).toBe(glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE)
+      expect(sections[currentName].name).toBe(currentName)
       expect(sections[currentName].position).toBe(i)
 
   it 'Changes the state of a section to shown', ->

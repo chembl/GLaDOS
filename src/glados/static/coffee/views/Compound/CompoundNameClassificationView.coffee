@@ -5,9 +5,12 @@
 CompoundNameClassificationView = CardView.extend
 
   initialize: ->
+
+    @sectionID = arguments[0].section_id
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
+    CompoundReportCardApp.registerSection(@sectionID)
 
   render: ->
 

@@ -1,9 +1,15 @@
 glados.useNameSpace 'glados',
   ReportCardApp: class ReportCardApp
 
-    @hideSection = (sectionID) -> $('#' + sectionID).hide()
-    @showSection = (sectionID) -> $('#' + sectionID).show()
     @init = ->
       @scrollSpyHandler = new glados.models.ScrollSpy.ScrollSpyHandler
       ScrollSpyHelper.initializeScrollSpyPinner()
-#      $('.scrollspy').scrollSpy()
+      new glados.views.ScrollSpy.ScrollSpyView
+        el: $('.BCK-ScrollSpy')
+        model: @scrollSpyHandler
+
+
+    @hideSection = (sectionID) -> $('#' + sectionID).hide()
+    @showSection = (sectionID) -> $('#' + sectionID).show()
+    @registerSection = (sectionID) ->
+      @scrollSpyHandler.registerSection(sectionID)
