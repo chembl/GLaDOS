@@ -23,8 +23,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
     ButtonsHelper.initCroppedContainers()
     ButtonsHelper.initExpendableMenus()
 
