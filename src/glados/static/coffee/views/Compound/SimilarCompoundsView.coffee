@@ -18,10 +18,10 @@ SimilarCompoundsView = CardView.extend
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-      CompoundReportCardApp.hideSection(@section_id)
+#      CompoundReportCardApp.hideSection(@section_id)
       return
 
-    CompoundReportCardApp.showSection(@section_id)
+#    CompoundReportCardApp.showSection(@section_id)
 
     glados.Utils.fillContentForElement $(@el).find('.similar-compounds-title'),
       chembl_id: GlobalVariables.CHEMBL_ID

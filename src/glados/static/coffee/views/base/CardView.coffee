@@ -2,6 +2,14 @@
 # make sure the handlebars templates are loaded!
 CardView = Backbone.View.extend
 
+  initialize: (originalArguments) ->
+
+    @sectionID = originalArguments[0].section_id
+    @reportCardApp = originalArguments[0].report_card_app
+    @reportCardApp.registerSection(@sectionID)
+
+  showSection: -> @reportCardApp.showSection(@sectionID)
+    
   showCompoundErrorCard: (model, xhr, options) ->
 
     $(@el).children('.card-preolader-to-hide').hide()

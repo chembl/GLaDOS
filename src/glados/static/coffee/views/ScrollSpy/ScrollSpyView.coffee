@@ -12,3 +12,5 @@ glados.useNameSpace 'glados.views.ScrollSpy',
         return a.position - b.position
 
       console.log 'AAA sections: ', sections
+      console.log 'AAA all sections', @model.get('sections')
+

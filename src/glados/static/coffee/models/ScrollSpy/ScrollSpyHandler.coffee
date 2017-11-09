@@ -16,7 +16,6 @@ glados.useNameSpace 'glados.models.ScrollSpy',
       sections[sectionName].state = glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW
       @trigger('change:sections')
 
-
     resetSections: ->
       @set('sections', {})
 
