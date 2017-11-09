@@ -417,17 +417,13 @@ class CompoundReportCardTest(ReportCardTester):
     # Compound Representations
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('CompRepsCard').find_element_by_class_name('Bck-errormsg')
-    # TODO: PhantomJS does not receive back the correct XHR code!
-    self.assertIn(error_msg_p.text, ['No compound found with id CHEMBL7',
-                                     'There was an error while loading the data (0 error)'])
+    self.assertFalse(error_msg_p.is_displayed())
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('MoleculeFeaturesCard').find_element_by_class_name('Bck-errormsg')
-    # TODO: PhantomJS does not receive back the correct XHR code!
-    self.assertIn(error_msg_p.text, ['No compound found with id CHEMBL7',
-                                     'There was an error while loading the data (0 error)'])
+    self.assertFalse(error_msg_p.is_displayed())
 
   def test_compound_report_card_scenario_10(self):
 
