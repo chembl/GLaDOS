@@ -53,6 +53,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: compound,
       el: $('#CNCCard')
       section_id: 'CompoundNameAndClassification'
+      section_label: 'Name And Classification'
       report_card_app: @
 
     new CompoundImageView

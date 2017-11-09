@@ -6,8 +6,9 @@ CardView = Backbone.View.extend
 
     unless GlobalVariables['EMBEDED']
       @sectionID = originalArguments[0].section_id
+      @sectionLabel = originalArguments[0].section_label
       @reportCardApp = originalArguments[0].report_card_app
-      @reportCardApp.registerSection(@sectionID)
+      @reportCardApp.registerSection(@sectionID, @sectionLabel)
 
   showSection: -> @reportCardApp.showSection(@sectionID) unless GlobalVariables['EMBEDED']
 

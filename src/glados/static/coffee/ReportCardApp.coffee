@@ -13,5 +13,5 @@ glados.useNameSpace 'glados',
     @showSection = (sectionID) ->
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
-    @registerSection = (sectionID) ->
-      @scrollSpyHandler.registerSection(sectionID)
+    @registerSection = (sectionID, sectionLabel) ->
+      @scrollSpyHandler.registerSection(sectionID, sectionLabel)
