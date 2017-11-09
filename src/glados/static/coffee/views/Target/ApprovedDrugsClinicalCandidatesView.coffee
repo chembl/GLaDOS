@@ -4,6 +4,8 @@
 ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
+
+    CardView.prototype.initialize.call(@, arguments)
     @collection.on 'reset do-repaint sort', @.render, @
     @resource_type = 'Target'
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
@@ -20,9 +22,9 @@ ApprovedDrugsClinicalCandidatesView = CardView.extend(DownloadViewExt).extend
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-      $('#ApprovedDrugsAndClinicalCandidates').hide()
       return
 
+    @showSection()
     @showCardContent()
 
   # -----------------------------------------------------------------

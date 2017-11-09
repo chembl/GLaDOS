@@ -5,6 +5,8 @@
 TargetComponentsView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
+
+    CardView.prototype.initialize.call(@, arguments)
     @collection.on 'reset', @.render, @
     @resource_type = 'Target'
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
@@ -13,16 +15,16 @@ TargetComponentsView = CardView.extend(DownloadViewExt).extend
     @initEmbedModal('components', arguments[0].target_chembl_id)
     @activateModals()
 
+
   events: ->
-    # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events
 
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-      $('#TargetComponents').hide()
       return
 
+    @showSection()
     @showCardContent()
 
   # -----------------------------------------------------------------
