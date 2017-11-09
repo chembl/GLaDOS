@@ -1168,4 +1168,15 @@
     </div>
   </div>
 </script>
+
+<script id="Handlebars-ScrollSpyContent" type="text/x-handlebars-template">
+<ul class="section table-of-contents">
+  {{#each sections}}
+    <li><a href="#{{this.name}}">
+        <small>Name and Classification</small>
+        </a>
+    </li>
+  {{/each}}
+</ul>
+</script>
 {% endverbatim %}

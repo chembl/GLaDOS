@@ -13,4 +13,13 @@ glados.useNameSpace 'glados.views.ScrollSpy',
 
       console.log 'AAA sections: ', sections
       console.log 'AAA all sections', @model.get('sections')
+      @hidePreloader()
+      $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
+      glados.Utils.fillContentForElement $contentContainer,
+        sections: sections
+
+      $('.scrollspy').scrollSpy()
+
+    hidePreloader: ->
+      $(@el).find('.BKC-preolader-to-hide').hide()
 
