@@ -416,14 +416,15 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
     # Compound Representations
     # --------------------------------------
-    error_msg_p = self.browser.find_element_by_id('CompRepsCard').find_element_by_class_name('Bck-errormsg')
+    error_msg_p = self.browser.find_element_by_id('CompoundRepresentations').find_element_by_class_name('Bck-errormsg')
     self.assertFalse(error_msg_p.is_displayed())
 
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
     error_msg_p = self.browser.find_element_by_id('MoleculeFeaturesCard').find_element_by_class_name('Bck-errormsg')
-    self.assertFalse(error_msg_p.is_displayed())
+    self.assertIn(error_msg_p.text, ['No compound found with id CHEMBL7',
+                                     'There was an error while loading the data (0 error)'])
 
   def test_compound_report_card_scenario_10(self):
 
