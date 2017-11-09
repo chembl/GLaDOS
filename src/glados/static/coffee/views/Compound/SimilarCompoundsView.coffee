@@ -4,10 +4,10 @@ SimilarCompoundsView = CardView.extend
 
   initialize: ->
 
+    CardView.prototype.initialize.call(@, arguments)
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
-    @section_id = arguments[0].section_id
 
     @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
 
@@ -18,11 +18,9 @@ SimilarCompoundsView = CardView.extend
   render: ->
 
     if @collection.size() == 0 and !@collection.getMeta('force_show')
-#      CompoundReportCardApp.hideSection(@section_id)
       return
 
-#    CompoundReportCardApp.showSection(@section_id)
-
+    @showSection()
     glados.Utils.fillContentForElement $(@el).find('.similar-compounds-title'),
       chembl_id: GlobalVariables.CHEMBL_ID
       similarity: glados.Settings.DEFAULT_SIMILARITY_THRESHOLD

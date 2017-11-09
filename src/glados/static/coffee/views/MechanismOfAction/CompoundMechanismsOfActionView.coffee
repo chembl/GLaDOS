@@ -5,6 +5,7 @@
 CompoundMechanismsOfActionView = CardView.extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     @collection.on 'reset', @render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
@@ -13,9 +14,9 @@ CompoundMechanismsOfActionView = CardView.extend
   render: ->
 
     if @collection.size() == 0
-      $('#MechanismOfAction').hide()
       return
 
+    @showSection()
     @addAllMechanisms()
 
     # until here, all the visible content has been rendered.

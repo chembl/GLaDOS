@@ -3,21 +3,18 @@
 CompoundRepresentationsView = CardView.extend
 
   initialize: ->
-
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
-#    console.log 'section id: ', @section_id
 
   render: ->
     @molecule_structures = @model.get('molecule_structures')
 
     if not @molecule_structures?
-#      CompoundReportCardApp.hideSection(@section_id)
       return
 
-#    CompoundReportCardApp.showSection(@section_id)
-
+    @showSection()
     @renderButtons()
     @renderCanonicalSmiles()
     @renderStandardInchi()

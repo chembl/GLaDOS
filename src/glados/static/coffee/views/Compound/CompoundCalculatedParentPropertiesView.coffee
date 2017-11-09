@@ -3,17 +3,17 @@
 CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
-    @section_id = arguments[0].section_id
+
 
   render: ->
 
     if not @model.get('molecule_properties')?
-#      CompoundReportCardApp.hideSection(@section_id)
       return
-#    CompoundReportCardApp.showSection(@section_id)
+    @showSection()
 
     thisView = @
     $.each @mol_properties, ( key, elem_id ) ->

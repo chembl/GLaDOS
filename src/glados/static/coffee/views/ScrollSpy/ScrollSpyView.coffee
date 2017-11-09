@@ -11,8 +11,6 @@ glados.useNameSpace 'glados.views.ScrollSpy',
       when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
         return a.position - b.position
 
-      console.log 'AAA sections: ', sections
-      console.log 'AAA all sections', @model.get('sections')
       @hidePreloader()
       $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
       glados.Utils.fillContentForElement $contentContainer,
