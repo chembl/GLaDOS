@@ -1,15 +1,17 @@
-class DocumentReportCardApp
+class DocumentReportCardApp extends glados.ReportCardApp
 
   # -------------------------------------------------------------
   # Initialization
   # -------------------------------------------------------------
   @init = ->
 
+    super
     document = DocumentReportCardApp.getCurrentDocument()
 
     DocumentReportCardApp.initBasicInformation()
-    DocumentReportCardApp.initAssayNetwork()
+    DocumentReportCardApp.initRelatedDocuments()
     DocumentReportCardApp.initWordCloud()
+    DocumentReportCardApp.initAssayNetwork()
     DocumentReportCardApp.initTargetSummary()
     DocumentReportCardApp.initAssaySummary()
     DocumentReportCardApp.initActivitySummary()
@@ -46,9 +48,17 @@ class DocumentReportCardApp
     new DocumentBasicInformationView
       model: document
       el: $('#DBasicInformation')
+      section_id: 'BasicInformation'
+      section_label: 'Basic Information'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       document.fetch()
+
+  @initRelatedDocuments = ->
+
+    @registerSection('RelatedDocuments', 'Related Documents')
+    @showSection('RelatedDocuments')
 
   @initAssayNetwork = ->
 
@@ -58,6 +68,9 @@ class DocumentReportCardApp
     new DocumentAssayNetworkView
       model: documentAssayNetwork
       el: $('#DAssayNetworkCard')
+      section_id: 'AssayNetwork'
+      section_label: 'Assay Network'
+      report_card_app: @
 
     documentAssayNetwork.fetch()
 
@@ -69,6 +82,9 @@ class DocumentReportCardApp
     new DocumentWordCloudView
       model: docTerms
       el: $('#DWordCloudCard')
+      section_id: 'WordCloud'
+      section_label: 'Word Cloud'
+      report_card_app: @
 
     docTerms.fetch()
 
@@ -94,6 +110,9 @@ class DocumentReportCardApp
       model: relatedTargets
       el: $('#DAssociatedTargetsCard')
       config: viewConfig
+      section_id: 'ProteinTargetSummay'
+      section_label: 'Target Summay'
+      report_card_app: @
 
     relatedTargets.fetch()
 
@@ -119,6 +138,9 @@ class DocumentReportCardApp
       model: relatedAssays
       el: $('#DAssociatedAssaysCard')
       config: viewConfig
+      section_id: 'AssaySummary'
+      section_label: 'Assay Summary'
+      report_card_app: @
 
     relatedAssays.fetch()
 
@@ -144,6 +166,9 @@ class DocumentReportCardApp
       model: relatedActivities
       el: $('#DAssociatedActivitiesCard')
       config: viewConfig
+      section_id: 'BioactivitySummary'
+      section_label: 'Activity Summary'
+      report_card_app: @
 
     relatedActivities.fetch()
 
@@ -182,6 +207,9 @@ class DocumentReportCardApp
       model: associatedCompounds
       document_chembl_id: chemblID
       config: config
+      section_id: 'CompoundSummaries'
+      section_label: 'Compound Summaries'
+      report_card_app: @
 
 
     associatedCompounds.fetch()
