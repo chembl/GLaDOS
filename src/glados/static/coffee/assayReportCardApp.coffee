@@ -1,10 +1,11 @@
-class AssayReportCardApp
+class AssayReportCardApp extends glados.ReportCardApp
 
   # -------------------------------------------------------------
   # Initialisation
   # -------------------------------------------------------------
   @init = ->
 
+    super
     assay = AssayReportCardApp.getCurrentAssay()
     AssayReportCardApp.initAssayBasicInformation()
     AssayReportCardApp.initCurationSummary()
@@ -28,6 +29,9 @@ class AssayReportCardApp
     new AssayBasicInformationView
       model: assay
       el: $('#ABasicInformation')
+      section_id: 'BasicInformation'
+      section_label: 'Basic Information'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       assay.fetch()
@@ -40,6 +44,9 @@ class AssayReportCardApp
     new AssayCurationSummaryView
       model: target
       el: $('#ACurationSummaryCard')
+      section_id: 'CurationSummary'
+      section_label: 'Curation Summary'
+      report_card_app: @
 
     target.fetchFromAssayChemblID();
 
@@ -65,6 +72,9 @@ class AssayReportCardApp
       model: bioactivities
       el: $('#AAssociatedBioactivitiesCard')
       config: viewConfig
+      section_id: 'Bioactivity'
+      section_label: 'Activity Summary'
+      report_card_app: @
 
     bioactivities.fetch()
 
@@ -102,6 +112,9 @@ class AssayReportCardApp
       model: associatedCompounds
       target_chembl_id: chemblID
       config: config
+      section_id: 'CompoundSummaries'
+      section_label: 'Compound Summary'
+      report_card_app: @
 
     associatedCompounds.fetch()
 
@@ -128,6 +141,9 @@ class AssayReportCardApp
       model: relatedTargets
       el: $('#AAssociatedTargetsCard')
       config: viewConfig
+      section_id: 'ProteinTargetSummaries'
+      section_label: 'Target Summary'
+      report_card_app: @
 
     relatedTargets.fetch()
 
