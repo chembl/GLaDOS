@@ -1,10 +1,11 @@
-class TissueReportCardApp
+class TissueReportCardApp extends glados.ReportCardApp
 
   # -------------------------------------------------------------
   # Initialisation
   # -------------------------------------------------------------
   @init = ->
 
+    super
     TissueReportCardApp.initAssaySummary()
     TissueReportCardApp.initActivitySummary()
     TissueReportCardApp.initAssociatedCompounds()
@@ -34,6 +35,9 @@ class TissueReportCardApp
       model: associatedAssays
       el: $('#TiAssociatedAssaysCard')
       config: viewConfig
+      section_id: 'AssaySummary'
+      section_label: 'Assay Summary'
+      report_card_app: @
 
     associatedAssays.fetch()
 
@@ -59,6 +63,9 @@ class TissueReportCardApp
       model: bioactivities
       el: $('#TiAssociatedActivitiesCard')
       config: viewConfig
+      section_id: 'BioactivitySummary'
+      section_label: 'Activity Summary'
+      report_card_app: @
 
     bioactivities.fetch()
 
@@ -95,6 +102,9 @@ class TissueReportCardApp
       model: associatedCompounds
       target_chembl_id: chemblID
       config: config
+      section_id: 'CompoundSummaries'
+      section_label: 'Compound Summaries'
+      report_card_app: @
 
 
     associatedCompounds.fetch()
