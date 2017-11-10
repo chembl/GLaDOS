@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.views.ScrollSpy',
     initialize: ->
 
       @model.on 'change:sections', @render, @
+      $('.scrollspy').scrollSpy()
 
     render: ->
 
@@ -15,8 +16,6 @@ glados.useNameSpace 'glados.views.ScrollSpy',
       $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
       glados.Utils.fillContentForElement $contentContainer,
         sections: sections
-
-      $('.scrollspy').scrollSpy()
 
     hidePreloader: ->
       $(@el).find('.BKC-preolader-to-hide').hide()
