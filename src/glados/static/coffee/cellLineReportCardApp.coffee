@@ -1,10 +1,11 @@
-class CellLineReportCardApp
+class CellLineReportCardApp extends glados.ReportCardApp
 
   # -------------------------------------------------------------
   # Initialisation
   # -------------------------------------------------------------
   @init = ->
 
+    super
     cellLine = CellLineReportCardApp.getCurrentCellLine()
     CellLineReportCardApp.initBasicInformation()
     CellLineReportCardApp.initAssaySummary()
@@ -41,6 +42,9 @@ class CellLineReportCardApp
     new CellLineBasicInformationView
       model: cellLine
       el: $('#CBasicInformation')
+      section_id: 'BasicInformation'
+      section_label: 'Basic Information'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       cellLine.fetch()
@@ -67,6 +71,9 @@ class CellLineReportCardApp
       model: associatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
+      section_id: 'AssaySummary'
+      section_label: 'Assay Summary'
+      report_card_app: @
 
     associatedAssays.fetch()
 
@@ -94,6 +101,9 @@ class CellLineReportCardApp
       model: bioactivities
       el: $('#CLAssociatedActivitiesCard')
       config: viewConfig
+      section_id: 'BioactivitySummary'
+      section_label: 'Activity Summary'
+      report_card_app: @
 
     bioactivities.fetch()
 
@@ -130,6 +140,9 @@ class CellLineReportCardApp
       model: associatedCompounds
       target_chembl_id: chemblID
       config: config
+      section_id: 'CompoundSummaries'
+      section_label: 'Compound Summaries'
+      report_card_app: @
 
 
     associatedCompounds.fetch()

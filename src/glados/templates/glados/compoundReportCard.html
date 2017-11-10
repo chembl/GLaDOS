@@ -38,7 +38,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="CompoundRepresentations" class="section scrollspy">
+      <div id="CompoundRepresentations" class="section scrollspy" style="display: none;">
         <h3>Compound Representations</h3>
 
         <div class="row">
@@ -53,7 +53,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="CalculatedCompoundParentProperties" class="section scrollspy">
+      <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
         <h3>Calculated Compound Parent Properties</h3>
 
 
@@ -68,7 +68,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="MechanismOfAction" class="section scrollspy">
+      <div id="MechanismOfAction" class="section scrollspy" style="display: none;">
         <h3>Mechanism of Action</h3>
         <div class="row">
 
@@ -97,7 +97,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="SimilarCompounds" class="section scrollspy">
+      <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
         <h3>Similar Compounds</h3>
 
         <div class="row">
@@ -167,7 +167,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy">
+      <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">
         <h3>Alternate Forms of Compound in ChEMBL</h3>
 
 
@@ -266,61 +266,7 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - -->
 
     <div class="col l2 hide-on-med-and-down">
-
-      <div class="scrollspy-wrapper pin-top">
-
-        <ul class="section table-of-contents">
-          <li><a href="#CompoundNameAndClassification">
-            <small>Name and Classification</small>
-          </a></li>
-          <li><a href="#CompoundRepresentations">
-            <small>Representations</small>
-          </a></li>
-          <li><a href="#CalculatedCompoundParentProperties">
-            <small>Calculated Parent Properties</small>
-          </a></li>
-          <li><a href="#MechanismOfAction">
-            <small>Mechanism of Action</small>
-          </a></li>
-          <li><a href="#Indications">
-            <small>Indications</small>
-          </a></li>
-          <li><a href="#SimilarCompounds">
-            <small>Similar Compounds</small>
-          </a></li>
-          <li><a href="#MoleculeFeatures">
-            <small>Molecule Features</small>
-          </a></li>
-          <li><a href="#ClinicalData">
-            <small>Clinical Data</small>
-          </a></li>
-          <li><a href="#StructuralAlerts">
-            <small>Structural Alerts</small>
-          </a></li>
-          <li><a href="#AlternateFormsOfCompoundInChEMBL">
-            <small>Alternate Forms in ChEMBL</small>
-          </a></li>
-          <li><a href="#CompoundBioactivitySummary">
-            <small>Bioactivity Summary</small>
-          </a></li>
-          <li><a href="#CompoundAssaySummary">
-            <small>Assay Summary</small>
-          </a></li>
-          <li><a href="#CompoundTargetSummary">
-            <small>Target Summary</small>
-          </a></li>
-          <li><a href="#TargetPredictions">
-            <small>Target Predictions</small>
-          </a></li>
-          <li><a href="#CompoundCrossReferences">
-            <small>Cross References</small>
-          </a></li>
-          <li><a href="#UniChemCrossReferences">
-            <small>UniChem Cross References</small>
-          </a></li>
-        </ul>
-
-      </div>
+      {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
     </div>
 
   </div>

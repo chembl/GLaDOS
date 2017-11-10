@@ -5,7 +5,7 @@
 DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewExt).extend(DownloadViewExt).extend
 
   initialize: ->
-
+    CardView.prototype.initialize.call(@, arguments)
     #ResponsiviseViewExt
     @$vis_elem = $('#AssayNetworkVisualisationContainer')
     @setUpResponsiveRender()
@@ -13,7 +13,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     @resource_type = 'Document'
 
   render: ->
-
+    @showSection()
     @showCardContent()
     @hideResponsiveViewPreloader()
     @addFSLinkAndInfo()

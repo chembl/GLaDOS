@@ -3,9 +3,12 @@
 AssayBasicInformationView = CardView.extend
 
   initialize: ->
+
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Assay'
+    @showSection()
 
   render: ->
 

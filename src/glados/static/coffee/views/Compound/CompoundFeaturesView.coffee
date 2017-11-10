@@ -4,6 +4,7 @@ CompoundFeaturesView = CardView.extend
 
   initialize: ->
 
+    CardView.prototype.initialize.call(@, arguments)
     @tableCellMode = arguments[0].table_cell_mode
 
     $gridContainer = $(@el).find('.BCK-FeaturesGrid')
@@ -16,6 +17,7 @@ CompoundFeaturesView = CardView.extend
 
   render: ->
 
+    @showSection()
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
     @renderProperty('Bck-FirstInClass', 'first_in_class')

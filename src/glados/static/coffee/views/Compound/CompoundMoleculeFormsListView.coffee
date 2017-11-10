@@ -5,6 +5,8 @@
 CompoundMoleculeFormsListView = CardView.extend
 
   initialize: ->
+
+    CardView.prototype.initialize.call(@, arguments)
     @collection.on 'reset', @.render, @
     @collection.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
@@ -16,8 +18,9 @@ CompoundMoleculeFormsListView = CardView.extend
 
   render: ->
     if @collection.length == 1 and @collection.at(0).get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID and not GlobalVariables['EMBEDED']
-      $('#AlternateFormsOfCompoundInChEMBL').hide()
+      return
 
+    @showSection()
     glados.Utils.fillContentForElement $(@el).find('.alternate-compounds-title'),
       chembl_id: GlobalVariables.CHEMBL_ID
 
