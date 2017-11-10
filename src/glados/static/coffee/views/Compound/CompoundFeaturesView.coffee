@@ -17,6 +17,11 @@ CompoundFeaturesView = CardView.extend
 
   render: ->
 
+    metadata = @model.get('_metadata')
+    isDrug = glados.Utils.getNestedValue(metadata, 'drug.is_drug')
+    if not isDrug
+      return
+
     @showSection()
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
