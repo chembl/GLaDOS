@@ -252,9 +252,9 @@
 
         <div class="row">
 
-          {% block unichem_cross_references %}
-          {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
-          {% endblock %}
+          {% with is_dynamic=True  %}
+            {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
+          {% endwith  %}
 
         </div>
       </div>
