@@ -257,7 +257,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initUniChemCrossReferences = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
-    
+
     new glados.views.ReportCards.ReferencesInCardView
       model: CompoundReportCardApp.getCurrentCompound()
       el: $('#UniChemCrossReferencesCard')

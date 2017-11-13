@@ -27,7 +27,6 @@ glados.useNameSpace 'glados.views.References',
       ]
 
       refsIndex = _.groupBy(references, 'src_name')
-      console.log 'AAA refsIndex: ', refsIndex
 
       refsGroups = []
       for refKey, refsList of refsIndex
@@ -35,8 +34,6 @@ glados.useNameSpace 'glados.views.References',
           src_name: refKey
           src_url: refsList[0].src_url
           ref_items: refsList
-
-      console.log 'AAA refsGroups: ', refsGroups
 
       referencesContainer = $(@el)
       glados.Utils.fillContentForElement referencesContainer,
