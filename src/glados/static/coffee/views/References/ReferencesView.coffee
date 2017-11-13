@@ -35,6 +35,8 @@ glados.useNameSpace 'glados.views.References',
           src_url: refsList[0].src_url
           ref_items: refsList
 
+      refsGroups.sort (a, b) -> a.src_name.localeCompare(b.src_name)
+
       referencesContainer = $(@el)
       glados.Utils.fillContentForElement referencesContainer,
         references_groups: refsGroups
