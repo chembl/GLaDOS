@@ -49,18 +49,46 @@
 
         </div>
 
-
       </div>
 
       <div class="divider"></div>
-      <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
-        <h3>Calculated Compound Parent Properties</h3>
+      <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">
+        <h3>Alternate Forms of Compound in ChEMBL</h3>
 
 
         <div class="row">
 
-          {% block calculated_parent_properties %}
-          {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
+          {% block alternate_forms %}
+          {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
+        <h3>Similar Compounds</h3>
+
+        <div class="row">
+
+          {% block similarCompounds %}
+          {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
+          {% endblock %}
+
+        </div>
+
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="MoleculeFeatures" class="section scrollspy" style="display: none;">
+        <h3>Molecule Features</h3>
+
+        <div class="row">
+
+          {% block molecule_features %}
+          {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
           {% endblock %}
 
         </div>
@@ -97,17 +125,16 @@
       </div>
 
       <div class="divider"></div>
-      <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
-        <h3>Similar Compounds</h3>
+      <div id="ClinicalData" class="section scrollspy">
+        <h3>Clinical Data</h3>
 
         <div class="row">
 
-          {% block similarCompounds %}
-          {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
+          {% block clinical_data %}
+          {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
           {% endblock %}
 
         </div>
-
 
       </div>
 
@@ -123,61 +150,6 @@
 
         </div>
 
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="MoleculeFeatures" class="section scrollspy" style="display: none;">
-        <h3>Molecule Features</h3>
-
-        <div class="row">
-
-          {% block molecule_features %}
-          {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
-          {% endblock %}
-
-        </div>
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="ClinicalData" class="section scrollspy">
-        <h3>Clinical Data</h3>
-
-        <div class="row">
-
-          {% block clinical_data %}
-          {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
-          {% endblock %}
-
-        </div>
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="StructuralAlerts" class="section scrollspy">
-        <h3>Structural Alerts</h3>
-
-
-        {% block structural_alerts %}
-        {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
-        {% endblock %}
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">
-        <h3>Alternate Forms of Compound in ChEMBL</h3>
-
-
-        <div class="row">
-
-          {% block alternate_forms %}
-          {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
-          {% endblock %}
-
-        </div>
 
       </div>
 
@@ -230,6 +202,35 @@
         </div>
 
       </div>
+
+      <div class="divider"></div>
+      <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
+        <h3>Calculated Compound Parent Properties</h3>
+
+
+        <div class="row">
+
+          {% block calculated_parent_properties %}
+          {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
+          {% endblock %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="StructuralAlerts" class="section scrollspy">
+        <h3>Structural Alerts</h3>
+
+
+        {% block structural_alerts %}
+        {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+        {% endblock %}
+
+
+      </div>
+
+
 
       <div class="divider"></div>
       <div id="CompoundCrossReferences" class="section scrollspy">
