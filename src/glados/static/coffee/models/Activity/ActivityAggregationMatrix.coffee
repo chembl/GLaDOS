@@ -321,7 +321,7 @@ glados.useNameSpace 'glados.models.Activity',
       aggsContainer = requestData.aggs
       # only the first aggregation will support up to 10000 elements, the rest is limited to reduce the amount of data
       # that will be received.
-      aggSize = 10
+      aggSize = 10000
       for propName in aggsList
         aggName = propName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
 
@@ -334,7 +334,7 @@ glados.useNameSpace 'glados.models.Activity',
           aggs: {}
 
         aggsContainer = aggsContainer[aggName].aggs
-        aggSize = 10
+        aggSize = 1000000
 
     addCellAggregationsToRequest: (requestData) ->
 
