@@ -418,16 +418,18 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
-      cellsContainerG.selectAll('.grid-horizontal-rect')
-        .attr("x", 0)
-        .attr("y", (d) -> (thisView.getYCoord(d.currentPosition) * zoomScale) )
-        .attr("width", thisView.COLS_HEADER_WIDTH * zoomScale)
-        .attr("height", (d) -> (thisView.getYCoord.rangeBand() * zoomScale) )
+      cellsContainerG.selectAll('.grid-horizontal-line')
+        .attr("x1", -> (thisView.getXCoord(thisView.WINDOW.min_col_num) * zoomScale))
+        .attr("y1", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale))
+        .attr("y2", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale) )
+        .attr("x2", (thisView.COLS_HEADER_WIDTH * zoomScale))
+
+      console.log 'AAA horizontal lines: ', cellsContainerG.selectAll('.grid-horizontal-line')
 
       cellsContainerG.selectAll('.grid-vertical-line')
-        .attr("x1", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
-        .attr("y1", 0)
-        .attr("x2", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
+        .attr("x1", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
+        .attr("y1", -> (thisView.getXCoord(thisView.WINDOW.min_row_num) * zoomScale))
+        .attr("x2", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
         .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
@@ -1456,22 +1458,37 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # -------------------------------------------------------------------------------
     # horizontal rectangles
     # -------------------------------------------------------------------------------
-    horizontalRectangles = cellsContainerG.selectAll('.grid-horizontal-rect')
-      .data(rowsInWindow)
+    if rowsInWindow.length <= 1
+      horizontalLinesData = []
+    else
+      horizontalLinesData = [1..rowsInWindow.length-1]
 
-    horizontalRectangles.exit().remove()
+    console.log 'AAA horizontalLinesData: ', horizontalLinesData
+    horizontalLines = cellsContainerG.selectAll('.grid-horizontal-line')
+      .data(horizontalLinesData)
 
-    horizontalRectanglesEnter = horizontalRectangles.enter()
-      .append("rect")
-      .classed('grid-horizontal-rect', true)
+
+    console.log 'AAA horizontalRectangles exit: ', horizontalLines.exit()
+    console.log 'AAA horizontalRectangles enter: ', horizontalLines.enter()
+    horizontalLines.exit().remove()
+
+
+    horizontalLinesEnter = horizontalLines.enter()
+      .append("line")
+      .classed('grid-horizontal-line', true)
       .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
 
     # -------------------------------------------------------------------------------
     # Vertical Lines
     # -------------------------------------------------------------------------------
+    if colsInWindow.length <= 1
+      verticalLinesData = []
+    else
+      verticalLinesData = [1..colsInWindow.length-1]
+
     verticalLines = cellsContainerG.selectAll('.grid-vertical-line')
-      .data(colsInWindow)
+      .data(verticalLinesData)
 
     verticalLines.exit().remove()
 
@@ -1480,8 +1497,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('grid-vertical-line', true)
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr('stroke-width', @GRID_STROKE_WIDTH)
-
-
     # -------------------------------------------------------------------------------
     # Cells
     # -------------------------------------------------------------------------------
