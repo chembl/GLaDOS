@@ -424,8 +424,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y2", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale) )
         .attr("x2", (thisView.COLS_HEADER_WIDTH * zoomScale))
 
-      console.log 'AAA horizontal lines: ', cellsContainerG.selectAll('.grid-horizontal-line')
-
       cellsContainerG.selectAll('.grid-vertical-line')
         .attr("x1", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
         .attr("y1", -> (thisView.getXCoord(thisView.WINDOW.min_row_num) * zoomScale))
@@ -1463,16 +1461,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       horizontalLinesData = [1..rowsInWindow.length-1]
 
-    console.log 'AAA horizontalLinesData: ', horizontalLinesData
     horizontalLines = cellsContainerG.selectAll('.grid-horizontal-line')
       .data(horizontalLinesData)
 
-
-    console.log 'AAA horizontalRectangles exit: ', horizontalLines.exit()
-    console.log 'AAA horizontalRectangles enter: ', horizontalLines.enter()
     horizontalLines.exit().remove()
-
-
     horizontalLinesEnter = horizontalLines.enter()
       .append("line")
       .classed('grid-horizontal-line', true)
