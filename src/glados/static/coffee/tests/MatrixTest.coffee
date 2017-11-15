@@ -112,6 +112,7 @@ describe "Compounds vs Target Matrix", ->
     rowsAggName = rowsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
     colsAggName = colsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
 
+    linksGot = matrix.links
     rowsGot = matrix.rows_index
     colsGot = matrix.columns_index
     rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
@@ -119,9 +120,21 @@ describe "Compounds vs Target Matrix", ->
     for rowObj in rowsContainer
 
       rowKey = rowObj.key
-      rowActivityFilter = rowsPropName + ':' + rowObj.key
+      rowActivityFilter = rowsPropName + ':' + rowKey
       rowFooterURLMustBe = Activity.getActivitiesListURL(rowActivityFilter)
       expect(rowsGot[rowKey].footer_url).toBe(rowFooterURLMustBe)
+
+      for colObj in rowObj[colsAggName].buckets
+
+        colKey = colObj.key
+
+        relatedRows = ctm.getRelatedRowIDsFromColID(colKey, linksGot)
+        rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
+        colActivityFilter = colsPropName + ':' + colKey + ' AND ' + rowsListFilter
+        colFooterURLMustBe = Activity.getActivitiesListURL(colActivityFilter)
+
+        expect(colsGot[colKey].footer_url).toBe(colFooterURLMustBe)
+
 
   testHitCount = (ctm, testAggList, testDataToParse) ->
 
@@ -272,7 +285,7 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
       it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
-
+      it 'parses the number external links', -> testParsesNumberExternalLinks(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets

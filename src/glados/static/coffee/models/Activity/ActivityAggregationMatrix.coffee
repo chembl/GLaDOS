@@ -142,6 +142,7 @@ glados.useNameSpace 'glados.models.Activity',
 
       @addRowsWithNoData(rowsList, latestRowPos)
       @addRowsFooterLinks(rowsList)
+      @addColsFooterLinks(colsList, links)
 
       result =
         columns: colsList
@@ -159,6 +160,15 @@ glados.useNameSpace 'glados.models.Activity',
       console.log 'result', result
 
       return {"matrix": result}
+
+    getRelatedRowIDsFromColID: (colID, links) ->
+
+      relatedRows = []
+      for rowKey, rowObj of links
+        for colKey, linkObj of rowObj
+          if linkObj.col_id == colID
+            relatedRows.push linkObj.row_id
+      return relatedRows
 
     # the user requested some items for rows. For some
     addRowsWithNoData: (rowsList, latestRowPos) ->
@@ -185,6 +195,24 @@ glados.useNameSpace 'glados.models.Activity',
       for row in rowsList
         activityFilter = activityFilterBase + row.id
         row.footer_url = Activity.getActivitiesListURL(activityFilter)
+
+    addColsFooterLinks: (colsList, links) ->
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        rowsPropName = 'target_chembl_id'
+        colsPropName = 'molecule_chembl_id'
+      else
+        colsPropName = 'target_chembl_id'
+        rowsPropName = 'molecule_chembl_id'
+
+      for col in colsList
+
+        relatedRows = @getRelatedRowIDsFromColID(col.id, links)
+        rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
+        colActivityFilter = colsPropName + ':' + col.id + ' AND ' + rowsListFilter
+        col.footer_url = Activity.getActivitiesListURL(colActivityFilter)
+
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 
