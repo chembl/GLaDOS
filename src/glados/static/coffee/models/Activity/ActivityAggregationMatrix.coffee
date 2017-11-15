@@ -141,6 +141,7 @@ glados.useNameSpace 'glados.models.Activity',
           links[compPos][colPos] = cellObj
 
       @addRowsWithNoData(rowsList, latestRowPos)
+      @addRowsFooterLinks(rowsList)
 
       result =
         columns: colsList
@@ -172,6 +173,18 @@ glados.useNameSpace 'glados.models.Activity',
         newRow = @createNewRowObj(id, mockBucket, latestRowPos)
         rowsList.push(newRow)
         latestRowPos++
+
+    addRowsFooterLinks: (rowsList) ->
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        activityFilterBase = 'target_chembl_id:'
+      else
+        activityFilterBase = 'molecule_chembl_id:'
+
+      for row in rowsList
+        activityFilter = activityFilterBase + row.id
+        row.footer_url = Activity.getActivitiesListURL(activityFilter)
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 

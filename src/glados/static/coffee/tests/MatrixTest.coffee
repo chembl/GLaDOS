@@ -104,6 +104,25 @@ describe "Compounds vs Target Matrix", ->
         expect(rowIdInLink).toBe(rowKey)
         expect(colIdInlink).toBe(colKey)
 
+  testParsesNumberExternalLinks = (ctm, testAggList, testDataToParse) ->
+    matrix = (ctm.parse testDataToParse).matrix
+
+    rowsPropName = testAggList[0]
+    colsPropName = testAggList[1]
+    rowsAggName = rowsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = colsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+
+    for rowObj in rowsContainer
+
+      rowKey = rowObj.key
+      rowActivityFilter = rowsPropName + ':' + rowObj.key
+      rowFooterURLMustBe = Activity.getActivitiesListURL(rowActivityFilter)
+      expect(rowsGot[rowKey].footer_url).toBe(rowFooterURLMustBe)
+
   testHitCount = (ctm, testAggList, testDataToParse) ->
 
     matrix = (ctm.parse testDataToParse).matrix
@@ -292,6 +311,7 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
       it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
+      it 'parses the number external links', -> testParsesNumberExternalLinks(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # General Functions
