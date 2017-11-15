@@ -1307,6 +1307,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
 
+    # generate footer links for window
+    for colObj in colsInWindow
+      thisView.model.getColFooterLink(colObj.id)
+
     colsFooters = colsFooterG.selectAll(".vis-column-footer")
       .data(colsInWindow, (d) -> d.id)
 
@@ -1391,6 +1395,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     rowsInWindow = @ROWS_IN_WINDOW
+    # generate footer links for window
+    for rowObj in rowsInWindow
+      thisView.model.getRowFooterLink(rowObj.id)
 
     rowFooters = rowsFooterG.selectAll('.vis-row-footer')
       .data(rowsInWindow, (d) -> d.id)

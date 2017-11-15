@@ -141,8 +141,7 @@ glados.useNameSpace 'glados.models.Activity',
           links[compPos][colPos] = cellObj
 
       @addRowsWithNoData(rowsList, latestRowPos)
-      @addRowsFooterLinks(rowsList)
-      @addColsFooterLinks(colsList, links)
+      @addRowsHeadersLinks(rowsList)
 
       result =
         columns: colsList
@@ -161,7 +160,7 @@ glados.useNameSpace 'glados.models.Activity',
 
       return {"matrix": result}
 
-    getRelatedRowIDsFromColID: (colID, links) ->
+    getRelatedRowIDsFromColID: (colID, links=@get('matrix').links) ->
 
       relatedRows = []
       for rowKey, rowObj of links
@@ -184,7 +183,23 @@ glados.useNameSpace 'glados.models.Activity',
         rowsList.push(newRow)
         latestRowPos++
 
-    addRowsFooterLinks: (rowsList) ->
+    addRowsHeadersLinks: (rowsList) ->
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        urlGenerator = $.proxy(Target.get_report_card_url, Target)
+      else
+        urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
+
+      for row in rowsList
+        row.header_url = urlGenerator(row.id)
+
+
+    getRowFooterLink: (rowID) ->
+
+      rowsIndex = @get('matrix').rows_index
+      if rowsIndex[rowID].footer_url?
+        return rowsIndex[rowID].footer_url
 
       aggregations = @get('aggregations')
       if aggregations[0] == 'target_chembl_id'
@@ -192,12 +207,18 @@ glados.useNameSpace 'glados.models.Activity',
       else
         activityFilterBase = 'molecule_chembl_id:'
 
-      for row in rowsList
-        activityFilter = activityFilterBase + row.id
-        row.footer_url = Activity.getActivitiesListURL(activityFilter)
+      activityFilter = activityFilterBase + rowID
+      url = Activity.getActivitiesListURL(activityFilter)
+      rowsIndex[rowID].footer_url = url
+      return url
 
-    addColsFooterLinks: (colsList, links) ->
+    getColFooterLink: (colID) ->
 
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].footer_url?
+        return colsIndex[colID].footer_url
+
+      console.log 'AAA CALCULATING COL FOOTER'
       aggregations = @get('aggregations')
       if aggregations[0] == 'target_chembl_id'
         rowsPropName = 'target_chembl_id'
@@ -206,12 +227,12 @@ glados.useNameSpace 'glados.models.Activity',
         colsPropName = 'target_chembl_id'
         rowsPropName = 'molecule_chembl_id'
 
-      for col in colsList
-
-        relatedRows = @getRelatedRowIDsFromColID(col.id, links)
-        rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
-        colActivityFilter = colsPropName + ':' + col.id + ' AND ' + rowsListFilter
-        col.footer_url = Activity.getActivitiesListURL(colActivityFilter)
+      relatedRows = @getRelatedRowIDsFromColID(colID)
+      rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
+      colActivityFilter = colsPropName + ':' + colID + ' AND ' + rowsListFilter
+      url = Activity.getActivitiesListURL(colActivityFilter)
+      colsIndex[colID].footer_url = url
+      return url
 
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
