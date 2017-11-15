@@ -160,13 +160,15 @@ glados.useNameSpace 'glados.models.Activity',
 
       return {"matrix": result}
 
-    getRelatedRowIDsFromColID: (colID, links=@get('matrix').links) ->
+    getRelatedRowIDsFromColID: (colID, links=@get('matrix').links, colsIndex=@get('matrix').columns_index ) ->
+
+      originalColIndex = colsIndex[colID].originalIndex
 
       relatedRows = []
       for rowKey, rowObj of links
-        for colKey, linkObj of rowObj
-          if linkObj.col_id == colID
-            relatedRows.push linkObj.row_id
+        if rowObj[originalColIndex]?
+          relatedRows.push rowObj[originalColIndex].row_id
+
       return relatedRows
 
     # the user requested some items for rows. For some
@@ -194,7 +196,6 @@ glados.useNameSpace 'glados.models.Activity',
       for row in rowsList
         row.header_url = urlGenerator(row.id)
 
-
     getRowFooterLink: (rowID) ->
 
       rowsIndex = @get('matrix').rows_index
@@ -218,7 +219,6 @@ glados.useNameSpace 'glados.models.Activity',
       if colsIndex[colID].footer_url?
         return colsIndex[colID].footer_url
 
-      console.log 'AAA CALCULATING COL FOOTER'
       aggregations = @get('aggregations')
       if aggregations[0] == 'target_chembl_id'
         rowsPropName = 'target_chembl_id'

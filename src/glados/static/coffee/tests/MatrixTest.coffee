@@ -132,7 +132,7 @@ describe "Compounds vs Target Matrix", ->
 
         colKey = colObj.key
 
-        relatedRows = ctm.getRelatedRowIDsFromColID(colKey, linksGot)
+        relatedRows = ctm.getRelatedRowIDsFromColID(colKey, linksGot, colsGot)
         rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
         colActivityFilter = colsPropName + ':' + colKey + ' AND ' + rowsListFilter
         colFooterURLMustBe = Activity.getActivitiesListURL(colActivityFilter)
