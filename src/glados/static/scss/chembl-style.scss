@@ -2963,15 +2963,13 @@ span.badge-primary-color-no-float {
     font-weight: bold;
   }
 
-  .headers-text {
+  .headers-text, .footers-text {
+
+    text-decoration: underline;
+    cursor: pointer;
     &:hover {
       fill: color("teal", "accent-4");
     }
-    &.emphasis {
-      font-weight: bold;
-    }
-  }
-  .footers-text{
     &.emphasis {
       font-weight: bold;
     }

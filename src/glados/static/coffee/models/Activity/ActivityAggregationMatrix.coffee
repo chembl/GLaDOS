@@ -159,6 +159,17 @@ glados.useNameSpace 'glados.models.Activity',
 
       return {"matrix": result}
 
+    getRelatedRowIDsFromColID: (colID, links=@get('matrix').links, colsIndex=@get('matrix').columns_index ) ->
+
+      originalColIndex = colsIndex[colID].originalIndex
+
+      relatedRows = []
+      for rowKey, rowObj of links
+        if rowObj[originalColIndex]?
+          relatedRows.push rowObj[originalColIndex].row_id
+
+      return relatedRows
+
     # the user requested some items for rows. For some
     addRowsWithNoData: (rowsList, latestRowPos) ->
 
@@ -172,6 +183,79 @@ glados.useNameSpace 'glados.models.Activity',
         newRow = @createNewRowObj(id, mockBucket, latestRowPos)
         rowsList.push(newRow)
         latestRowPos++
+
+    getRowHeaderLink: (rowID) ->
+
+      rowsIndex = @get('matrix').rows_index
+      if rowsIndex[rowID].header_url?
+        return rowsIndex[rowID].header_url
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        urlGenerator = $.proxy(Target.get_report_card_url, Target)
+      else
+        urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
+
+      url = urlGenerator(rowID)
+      rowsIndex[rowID].header_url = url
+      return url
+
+
+    getRowFooterLink: (rowID) ->
+
+      rowsIndex = @get('matrix').rows_index
+      if rowsIndex[rowID].footer_url?
+        return rowsIndex[rowID].footer_url
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        activityFilterBase = 'target_chembl_id:'
+      else
+        activityFilterBase = 'molecule_chembl_id:'
+
+      activityFilter = activityFilterBase + rowID
+      url = Activity.getActivitiesListURL(activityFilter)
+      rowsIndex[rowID].footer_url = url
+      return url
+
+    getColHeaderLink: (colID) ->
+
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].header_url?
+        return colsIndex[colID].header_url
+
+      aggregations = @get('aggregations')
+      if aggregations[1] == 'target_chembl_id'
+        urlGenerator = $.proxy(Target.get_report_card_url, Target)
+      else
+        urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
+
+      url = urlGenerator(colID)
+      colsIndex[colID].header_url = url
+      return url
+
+
+    getColFooterLink: (colID) ->
+
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].footer_url?
+        return colsIndex[colID].footer_url
+
+      aggregations = @get('aggregations')
+      if aggregations[0] == 'target_chembl_id'
+        rowsPropName = 'target_chembl_id'
+        colsPropName = 'molecule_chembl_id'
+      else
+        colsPropName = 'target_chembl_id'
+        rowsPropName = 'molecule_chembl_id'
+
+      relatedRows = @getRelatedRowIDsFromColID(colID)
+      rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
+      colActivityFilter = colsPropName + ':' + colID + ' AND ' + rowsListFilter
+      url = Activity.getActivitiesListURL(colActivityFilter)
+      colsIndex[colID].footer_url = url
+      return url
+
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 
