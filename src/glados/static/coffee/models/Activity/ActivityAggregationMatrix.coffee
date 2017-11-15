@@ -218,6 +218,23 @@ glados.useNameSpace 'glados.models.Activity',
       rowsIndex[rowID].footer_url = url
       return url
 
+    getColHeaderLink: (colID) ->
+
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].header_url?
+        return colsIndex[colID].header_url
+
+      aggregations = @get('aggregations')
+      if aggregations[1] == 'target_chembl_id'
+        urlGenerator = $.proxy(Target.get_report_card_url, Target)
+      else
+        urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
+
+      url = urlGenerator(colID)
+      colsIndex[colID].header_url = url
+      return url
+
+
     getColFooterLink: (colID) ->
 
       colsIndex = @get('matrix').columns_index

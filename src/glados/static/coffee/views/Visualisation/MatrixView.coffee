@@ -1265,6 +1265,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
 
+    for colObj in colsInWindow
+      thisView.model.getColHeaderLink(colObj.id)
+
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
 
@@ -1297,6 +1300,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', setUpColTooltip)
       .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
+      .on('click', thisView.handleColHeaderClick)
 
     endTime = Date.now()
     time = endTime - starTime
@@ -1543,4 +1547,5 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   handleRowHeaderClick: (d) -> window.open(d.header_url)
   handleRowFooterClick: (d) -> window.open(d.footer_url)
+  handleColHeaderClick: (d) -> window.open(d.header_url)
   handleColFooterClick: (d) -> window.open(d.footer_url)

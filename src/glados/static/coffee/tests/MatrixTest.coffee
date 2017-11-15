@@ -163,10 +163,20 @@ describe "Compounds vs Target Matrix", ->
       else
         rowHeaderURLMustBe = Target.get_report_card_url(rowKey)
 
-      console.log 'rowHeaderURLMustBe: ', rowHeaderURLMustBe
       expect(ctm.getRowHeaderLink(rowKey)).toBe(rowHeaderURLMustBe)
       expect(rowsGot[rowKey].header_url).toBe(rowHeaderURLMustBe)
 
+      for colObj in rowObj[colsAggName].buckets
+
+        colKey = colObj.key
+
+        if colsPropName == 'molecule_chembl_id'
+          colHeaderURLMustBe = Compound.get_report_card_url(colKey)
+        else
+          colHeaderURLMustBe = Target.get_report_card_url(colKey)
+
+        expect(ctm.getColHeaderLink(colKey)).toBe(colHeaderURLMustBe)
+        expect(colsGot[colKey].header_url).toBe(colHeaderURLMustBe)
 
   testHitCount = (ctm, testAggList, testDataToParse) ->
 
