@@ -142,7 +142,8 @@ describe "Compounds vs Target Matrix", ->
 
   testParsesHeaderExternalLinks = (ctm, testAggList, testDataToParse) ->
 
-    matrix = (ctm.parse testDataToParse).matrix
+    ctm.set(ctm.parse testDataToParse)
+    matrix = ctm.get('matrix')
 
     rowsPropName = testAggList[0]
     colsPropName = testAggList[1]
@@ -163,6 +164,7 @@ describe "Compounds vs Target Matrix", ->
         rowHeaderURLMustBe = Target.get_report_card_url(rowKey)
 
       console.log 'rowHeaderURLMustBe: ', rowHeaderURLMustBe
+      expect(ctm.getRowHeaderLink(rowKey)).toBe(rowHeaderURLMustBe)
       expect(rowsGot[rowKey].header_url).toBe(rowHeaderURLMustBe)
 
 

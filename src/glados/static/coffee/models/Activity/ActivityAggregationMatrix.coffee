@@ -141,7 +141,6 @@ glados.useNameSpace 'glados.models.Activity',
           links[compPos][colPos] = cellObj
 
       @addRowsWithNoData(rowsList, latestRowPos)
-      @addRowsHeadersLinks(rowsList)
 
       result =
         columns: colsList
@@ -185,7 +184,11 @@ glados.useNameSpace 'glados.models.Activity',
         rowsList.push(newRow)
         latestRowPos++
 
-    addRowsHeadersLinks: (rowsList) ->
+    getRowHeaderLink: (rowID) ->
+
+      rowsIndex = @get('matrix').rows_index
+      if rowsIndex[rowID].header_url?
+        return rowsIndex[rowID].header_url
 
       aggregations = @get('aggregations')
       if aggregations[0] == 'target_chembl_id'
@@ -193,8 +196,10 @@ glados.useNameSpace 'glados.models.Activity',
       else
         urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
 
-      for row in rowsList
-        row.header_url = urlGenerator(row.id)
+      url = urlGenerator(rowID)
+      rowsIndex[rowID].header_url = url
+      return url
+
 
     getRowFooterLink: (rowID) ->
 
