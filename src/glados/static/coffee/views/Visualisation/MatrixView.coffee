@@ -1329,6 +1329,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
       .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
+      .on('click', thisView.handleColFooterClick)
 
   getRowsInWindow: ->
 
@@ -1377,8 +1378,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowHeadersEnter.append('text')
       .classed('headers-text', true)
       .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
-      .attr('text-decoration', 'underline')
-      .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('mouseover', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
@@ -1411,6 +1410,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
+      .on('click', thisView.handleRowFooterClick )
 
     endTime = Date.now()
     time = endTime - starTime
@@ -1528,3 +1528,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowFooterTextElem = d3.select('#' + @ROW_FOOTER_TEXT_BASE_ID + d.row_id)
     rowFooterTextElem.classed('emphasis', hasEmphasis)
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Headers/Footers link
+  #---------------------------------------------------------------------------------------------------------------------
+  handleRowFooterClick: (d) -> window.open(d.footer_url)
+  handleColFooterClick: (d) -> window.open(d.footer_url)
