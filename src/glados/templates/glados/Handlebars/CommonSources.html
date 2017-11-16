@@ -1179,4 +1179,41 @@
   {{/each}}
 </ul>
 </script>
+
+<script id="Handlebars-Common-References-Collapsible" type="text/x-handlebars-template">
+
+ <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+
+ {{#each references_groups}}
+
+   <li>
+      <div class="collapsible-header {{#if active}}active{{/if}}">
+        <a href="{{this.src_url}}">
+          <i class="fa fa-link"></i>
+        </a>
+        {{this.src_name}}
+      </div>
+      <div class="collapsible-body">
+
+        {{#each this.ref_items}}
+          <a target='_blank' href="{{this.link}}">{{this.id}}</a>
+        {{/each}}
+
+      </div>
+
+   </li>
+
+ {{/each}}
+
+
+ </ul>
+
+</script>
+
+<script id="Handlebars-Common-No-References-Collapsible" type="text/x-handlebars-template">
+
+There are no UniChem cross references for this compound.
+
+</script>
+
 {% endverbatim %}

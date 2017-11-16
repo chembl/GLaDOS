@@ -247,14 +247,14 @@
       </div>
 
       <div class="divider"></div>
-      <div id="UniChemCrossReferences" class="section scrollspy">
+      <div id="UniChemCrossReferences" class="section scrollspy" style="display: none;">
         <h3>UniChem Cross References</h3>
 
         <div class="row">
 
-          {% block unichem_cross_references %}
-          {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
-          {% endblock %}
+          {% with is_dynamic=True  %}
+            {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
+          {% endwith  %}
 
         </div>
       </div>

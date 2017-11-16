@@ -256,8 +256,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initUniChemCrossReferences = ->
 
-    @registerSection('UniChemCrossReferences', 'UniChem Cross References')
-    @showSection('UniChemCrossReferences')
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: CompoundReportCardApp.getCurrentCompound()
+      el: $('#UniChemCrossReferencesCard')
+      embed_section_name: 'unichem_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
+      section_id: 'UniChemCrossReferences'
+      section_label: 'UniChem Cross References'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initSimilarCompounds = ->
 
