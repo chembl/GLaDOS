@@ -52,9 +52,8 @@ CompoundNameClassificationView = CardView.extend
     phase = @model.get('max_phase')
     phase_class = 'comp-phase-' + phase
 
-    show_phase = phase != 0
-
     description = switch
+      when phase == 0 then 'Preclinical'
       when phase == 1 then 'Phase I'
       when phase == 2 then 'Phase II'
       when phase == 3 then 'Phase III'
@@ -63,20 +62,15 @@ CompoundNameClassificationView = CardView.extend
         'Undefined'
 
     tooltip_text = switch
-      when phase == 0 then 'Phase 0: Exploratory study involving very limited human exposure to the drug, with no ' +
-        'therapeutic or diagnostic goals (for example, screening studies, microdose studies)'
-      when phase == 1 then 'Phase 1: Studies that are usually conducted with healthy volunteers and that emphasize ' +
-        'safety. The goal is to find out what the drug\'s most frequent and serious adverse events are and, often, ' +
-        'how the drug is metabolized and excreted.'
-      when phase == 2 then 'Phase 2: Studies that gather preliminary data on effectiveness (whether the drug works ' +
-        'in people who have a certain disease or condition). For example, participants receiving the drug may be ' +
-        'compared to similar participants receiving a different treatment, usually an inactive substance, called a ' +
-        'placebo, or a different drug. Safety continues to be evaluated, and short-term adverse events are studied.'
-      when phase == 3 then 'Phase 3: Studies that gather more information about safety and effectiveness by studying ' +
-        'different populations and different dosages and by using the drug in combination with other drugs.'
-      when phase == 4 then 'Phase 4: Studies occurring after FDA has approved a drug for marketing. These including ' +
-        'postmarket requirement and commitment studies that are required of or agreed to by the study sponsor. These ' +
-        'studies gather additional information about a drug\'s safety, efficacy, or optimal use.'
+      when phase == 0 then 'Phase 0: The compound has not yet reached phase I clinical trials ' +
+        '(preclinical/research compound).'
+      when phase == 1 then 'Phase 1: The compound has reached phase I clinical trials (safety studies, usually ' +
+        'with healthy volunteers).'
+      when phase == 2 then 'Phase 2: The compound has reached phase II clinical trials (preliminary studies of ' +
+        'effectiveness).'
+      when phase == 3 then 'Phase 3: The compound has reached phase III clinical trials (larger studies of safety and ' +
+        'effectiveness).'
+      when phase == 4 then 'Phase 4: The compound has been approved in at least one country or area.'
       else
         'Undefined'
 
@@ -86,7 +80,6 @@ CompoundNameClassificationView = CardView.extend
       class: phase_class
       text: phase
       desc: description
-      show_phase: show_phase
       tooltip: tooltip_text
 
     $(@el).find('#Bck-MAX_PHASE').html(rendered)
