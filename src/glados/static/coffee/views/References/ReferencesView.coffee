@@ -6,6 +6,10 @@ glados.useNameSpace 'glados.views.References',
     render: ->
 
       references = @model.get('_metadata').unichem
+      if not references?
+        @renderWhenNoRefs()
+        return
+
       refsIndex = _.groupBy(references, 'src_name')
 
       refsGroups = []
@@ -24,3 +28,9 @@ glados.useNameSpace 'glados.views.References',
         references_groups: refsGroups
 
       $(@el).find('.collapsible').collapsible()
+
+    renderWhenNoRefs: ->
+
+      referencesContainer = $(@el)
+      glados.Utils.fillContentForElement referencesContainer, {},
+        'Handlebars-Common-No-References-Collapsible'
