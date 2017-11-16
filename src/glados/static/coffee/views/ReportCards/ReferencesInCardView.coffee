@@ -20,6 +20,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       if not @model.get('_metadata').unichem?
         return
-        
+
       @showSection()
       @showCardContent()

@@ -80,10 +80,6 @@ class CompoundReportCardTest(ReportCardTester):
     # Compound Name and Classification
     # --------------------------------------
 
-    # Normal structure image
-    img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), 'https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo')
-
     # Normal compound name
     name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
     self.assertEqual('ASPIRIN', name_td.text)
@@ -210,10 +206,6 @@ class CompoundReportCardTest(ReportCardTester):
     # Compound Name and Classification
     # --------------------------------------
 
-    # structure not available
-    img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/metalContaining.svg')
-
     # Max Phase 0
     phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
     self.assertEqual('0', phase_td.text)
@@ -258,10 +250,7 @@ class CompoundReportCardTest(ReportCardTester):
     # Compound Name and Classification
     # --------------------------------------
 
-    # protein sctructure
-    img = self.browser.find_element_by_id('Bck-COMP_IMG')
-    self.assertEqual(img.get_attribute('src'), self.HOST + '/static/img/compound_placeholders/antibody.svg')
-
+  
     # --------------------------------------
     # Molecule Features
     # --------------------------------------
