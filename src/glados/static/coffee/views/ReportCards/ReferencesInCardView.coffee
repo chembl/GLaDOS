@@ -17,5 +17,9 @@ glados.useNameSpace 'glados.views.ReportCards',
         el: $(@el).find('.BCK-ReferencesContainer')
 
     render: ->
+
+      if not @model.get('_metadata').unichem?
+        return
+        
       @showSection()
       @showCardContent()
