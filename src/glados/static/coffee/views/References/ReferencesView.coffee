@@ -5,27 +5,7 @@ glados.useNameSpace 'glados.views.References',
 
     render: ->
 
-      references = [
-        {
-          id: 'DB00945'
-          src_name: 'DrugBank'
-          url: 'http://www.drugbank.ca/drugs/DB00945'
-          src_url: 'http://www.drugbank.ca/'
-        }
-        {
-          id: 'aspirin'
-          src_name: 'Atlas'
-          url: 'http://www.ebi.ac.uk/gxa/query?conditionQuery=aspirin'
-          src_url: 'http://www.ebi.ac.uk/gxa/home'
-        }
-        {
-          id: 'acetylsalicylic acid'
-          src_name: 'Atlas'
-          url: 'http://www.ebi.ac.uk/gxa/query?conditionQuery=acetylsalicylic acid'
-          src_url: 'http://www.ebi.ac.uk/gxa/home'
-        }
-      ]
-
+      references = @model.get('_metadata').unichem
       refsIndex = _.groupBy(references, 'src_name')
 
       refsGroups = []
