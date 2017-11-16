@@ -18,7 +18,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.on 'change:state', @handleMatrixState, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
-    $(@el).mouseleave($.proxy(@destroyAllTooltipsIfNecessary, @))
+    $matrixContainer = $(@el).find('.BCK-CompTargMatrixContainer')
+    $matrixContainer.mouseleave(@destroyAllTooltipsIfNecessary)
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
@@ -1061,7 +1062,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mouseX = event.clientX
     mouseY = event.clientY
-    glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($(@el), mouseX, mouseY)
+    $elementLeft = $(event.currentTarget)
+    glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($elementLeft, mouseX, mouseY)
   #---------------------------------------------------------------------------------------------------------------------
   # cells tooltips
   #---------------------------------------------------------------------------------------------------------------------
