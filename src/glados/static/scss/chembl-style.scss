@@ -2974,6 +2974,19 @@ span.badge-primary-color-no-float {
       font-weight: bold;
     }
   }
+  .cells-container-g{
+    &.grab-activated{
+      cursor: move; /* fallback if grab cursor is unsupported */
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+    &.grabbing{
+      cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
+    }
+  }
 }
 
 .simple-qtip {
