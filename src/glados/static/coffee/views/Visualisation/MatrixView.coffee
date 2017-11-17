@@ -562,6 +562,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
+      .classed('BCK-ColsHeaderG', true)
 
     colsHeaderG.append('rect')
       .attr('height', @COLS_HEADER_HEIGHT)
@@ -1025,10 +1026,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       qtipConfig =
         content:
           text: '<div id="' + miniRepCardID + '"></div>'
-          button: 'close'
         show:
           solo: true
-        hide: 'click'
+        hide:
+          fixed: true,
+          delay: glados.Settings.TOOLTIPS.DEFAULT_MERCY_TIME
         style:
           classes:'matrix-qtip qtip-light qtip-shadow'
 
@@ -1051,6 +1053,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $clickedElem.attr('data-qtip-configured', 'yes')
 
       $newMiniReportCardContainer = $('#' + miniRepCardID)
+      $newMiniReportCardContainer.hover ->
+        $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
       if entityName == 'Target'
         TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
@@ -1064,6 +1068,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     mouseY = event.clientY
     $elementLeft = $(event.currentTarget)
     glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($elementLeft, mouseX, mouseY)
+
+  destroyAllTooltipsWithMercy: ->
+
+    $container = $(@el)
+    glados.Utils.Tooltips.destroyAllTooltipsWhitMercy($container)
   #---------------------------------------------------------------------------------------------------------------------
   # cells tooltips
   #---------------------------------------------------------------------------------------------------------------------
