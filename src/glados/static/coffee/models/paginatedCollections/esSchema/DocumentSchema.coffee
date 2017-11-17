@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       [
         'doc_type',
         'journal',
-        # TODO 'src_id', does not exist yet
+        '_metadata.source.src_description'
         'year',
       ],
       # Default Hidden

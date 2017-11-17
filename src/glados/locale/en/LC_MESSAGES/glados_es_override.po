@@ -222,6 +222,9 @@ msgstr "Type"
 msgid "glados_es_gs__document__doi__label"
 msgstr "DOI"
 
+msgid "glados_es_gs__document__source___src_description__label"
+msgstr "Source"
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
 #-----------------------------------------------------------------------------------------------------------------------
