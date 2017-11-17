@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @CATEGORY_FACETING: 'CATEGORY'
     @INTERVAL_FACETING: 'INTERVAL'
 
-    @NUM_INTERVALS: 10
+    @NUM_INTERVALS: 12
 
     @EMPTY_CATEGORY: '- N/A -'
     @OTHERS_CATEGORY: 'Other Categories'
@@ -155,35 +155,63 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       intervalsSize = (stats.max/FacetingHandler.NUM_INTERVALS)-(stats.min/FacetingHandler.NUM_INTERVALS)
       # WARNING: Do the division first to prevent number overflow
 
-      isSmallFloat = intervalsSize < 5 and not @property_type.integer
-      isNormalDistributed = percentiles['80.0'] > stats.avg or percentiles['20.0'] < stats.avg
+      lowP = percentiles['20.0']
+      hiP = percentiles['80.0']
 
-      roundedMin = glados.Utils.roundNumber(stats.min, isSmallFloat, true)
-      roundedMax = glados.Utils.roundNumber(stats.max, isSmallFloat)
+      isSmallFloat = hiP - lowP <= 10 and not @property_type.integer
+      isNormalDistributed = hiP > stats.avg and lowP < stats.avg
+
+      roundedMin = stats.min
+      roundedMax = stats.max
 
       @intervalsLimits = [roundedMin]
 
       if stats.max - stats.min <= FacetingHandler.NUM_INTERVALS and @property_type.integer
-        for numJ in [roundedMin+1..roundedMax-1]
+        for numJ in [roundedMin..roundedMax]
           @intervalsLimits.push(numJ)
-      if not isNormalDistributed
+      else if not isNormalDistributed
         for keyI in _.keys(percentiles)
-          @intervalsLimits.push glados.Utils.roundNumber(percentiles[keyI], true)
+          nextLimit = percentiles[keyI]
+          notIncludeDecimals = @property_type.integer or Math.abs(nextLimit) > 10
+          nextLimit *= 100.00 unless notIncludeDecimals
+          nextLimit = Math.round(nextLimit)
+          nextLimit /= 100.00 unless notIncludeDecimals
+          console.warn(isSmallFloat, percentiles[keyI], '->', nextLimit)
+          if nextLimit > _.last(@intervalsLimits)
+            @intervalsLimits.push(nextLimit)
+        console.warn('PERCENTIL!')
+        console.warn(@property_type, stats, percentiles)
+        console.warn(@intervalsLimits)
       else
-        lowerBound = glados.Utils.roundNumber(stats.avg - 2 * stats.std_deviation)
-        upperBound = glados.Utils.roundNumber( stats.avg + 2 * stats.std_deviation)
-        intervalsSize = (upperBound/FacetingHandler.NUM_INTERVALS)-(lowerBound/FacetingHandler.NUM_INTERVALS)
-        intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat)
+        lowerBound = stats.avg - 2 * stats.std_deviation
+        upperBound = stats.avg + 2 * stats.std_deviation
+        if roundedMin > lowerBound
+          lowerBound = roundedMin
+        if roundedMax < upperBound
+          upperBound = roundedMax
+        lowerBound = glados.Utils.roundNumber(lowerBound, isSmallFloat, true)
+        upperBound = glados.Utils.roundNumber(upperBound, isSmallFloat)
+        console.warn('NORMAL!')
+        console.warn(@property_type, stats, percentiles)
+        console.warn(lowerBound, upperBound)
+        console.warn(@intervalsLimits)
+        intervalsSize = (upperBound/(FacetingHandler.NUM_INTERVALS-2))-(lowerBound/(FacetingHandler.NUM_INTERVALS-2))
+        intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat, true)
+        if lowerBound < 10
+          lowerBound = 0
+        if intervalsSize == 0
+          intervalsSize = 1
         curNum = lowerBound
         while curNum < upperBound and curNum < roundedMax
-          if curNum > @intervalsLimits[-1]
+          if curNum > _.last(@intervalsLimits)
             @intervalsLimits.push curNum
           curNum += intervalsSize
         if upperBound < roundedMax
           @intervalsLimits.push roundedMax
-
-      @intervalsLimits.push(roundedMax)
-      console.warn(@property_type, @intervalsLimits, isNormalDistributed)
+      if roundedMax <= _.last(@intervalsLimits)
+        @intervalsLimits[@intervalsLimits.length - 1] = roundedMax
+      else
+        @intervalsLimits.push(roundedMax)
 
 
     parseESResults: (es_aggregations_data, first_call)->
