@@ -118,10 +118,11 @@ describe "Downloads", ->
 
     it 'Generates the configuration for Documents', ->
 
-      comparatorsMustBe = ["document_chembl_id","journal","title","pubmed_id","doi","patent_id","authors",
-        "year","doc_type","abstract"]
+      comparatorsMustBe = ["document_chembl_id","journal","title","pubmed_id","doi","patent_id",
+        "_metadata.source","authors","year","doc_type","abstract"]
 
       comparatorsGot = (col.comparator for col in Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
+      console.log 'comparatorsGot: ', JSON.stringify(comparatorsGot)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
     it 'Generates the configuration for Cell Lines', ->
