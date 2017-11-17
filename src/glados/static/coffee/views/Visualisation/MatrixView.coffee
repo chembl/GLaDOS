@@ -383,6 +383,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
+      .classed('cells-container-g', true)
 
     cellsContainerG.append('rect')
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
@@ -823,6 +824,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Zoom
     # --------------------------------------
+    handleZoomStart = ->
+
+      if not ZOOM_ACTIVATED
+        return
+
+      cellsContainerG.classed('grabbing', true)
+
+    handleZoomEnd = ->
+
+      if not ZOOM_ACTIVATED
+        return
+
+      cellsContainerG.classed('grabbing', false)
+
     handleZoom = (ingoreActivation=false, forceSectionsUpdate=false) ->
 
       if not ZOOM_ACTIVATED and not ingoreActivation
@@ -875,6 +890,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
+      .on('zoomstart', handleZoomStart)
+      .on('zoomend', handleZoomEnd)
       .scale(@zoomScale)
       .translate([0, 0])
 
@@ -930,10 +947,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         ZOOM_ACTIVATED = false
         $targetBtnIcon.removeClass 'fa-hand-rock-o'
         $targetBtnIcon.addClass 'fa-hand-paper-o'
+        cellsContainerG.classed('grab-activated', false)
       else
         ZOOM_ACTIVATED = true
         $targetBtnIcon.removeClass 'fa-hand-paper-o'
         $targetBtnIcon.addClass 'fa-hand-rock-o'
+        cellsContainerG.classed('grab-activated', true)
+
     # --------------------------------------
     # colour property selector
     # --------------------------------------
