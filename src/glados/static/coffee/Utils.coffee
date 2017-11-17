@@ -308,10 +308,15 @@ glados.useNameSpace 'glados',
     Tooltips:
       # removes all qtips from and element, the elements that have a tooltip must have the property
       # data-qtip-configured set to 'yes'
-      destroyAllTooltips: ($elem) ->
+      destroyAllTooltips: ($elem, withMercy) ->
 
         $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes],[data-qtip-configured=true]')
         $elemsWithToolTip.each (index, elem) ->
+          if $(elem).attr('data-qtip-have-mercy') == 'yes' and withMercy
+            # I have mercy only once
+            $(elem).attr('data-qtip-have-mercy', undefined)
+            return
+
           $(elem).qtip('destroy', true)
           $(elem).attr('data-qtip-configured', null )
 
@@ -338,7 +343,6 @@ glados.useNameSpace 'glados',
         else
           myVert = 'bottom'
           atVert = 'top'
-        console.log 'ELEM data', offset.top, $tooltipContent.height()
         if $tooltipContent and $tooltipContent.height() >= offset.top
           myVert = 'top'
           atVert = 'bottom'
@@ -348,6 +352,7 @@ glados.useNameSpace 'glados',
         }
 
       destroyAllTooltipsWhenMouseIsOut: ($container, mouseX, mouseY)->
+        # This function destroys all tooltips immediately if the mouse is outside the element that the mouse left
 
         scrollTop = $(window).scrollTop()
         scrollLeft = $(window).scrollLeft()
@@ -363,6 +368,14 @@ glados.useNameSpace 'glados',
 
         if xIsOut or yIsOut
           glados.Utils.Tooltips.destroyAllTooltips($($container))
+
+      destroyAllTooltipsWhitMercy: ($container)->
+        # With mercy means that it waits some time (defined in settings) before destroy the tooltips in $container
+        # If an element is saved it is not destroyed. An tooltip is saved when the mouse hovers over it.
+
+        setTimeout (-> glados.Utils.Tooltips.destroyAllTooltips($($container), withMercy=true)),
+          glados.Settings.TOOLTIPS.DEFAULT_MERCY_TIME
+
 
     Fetching:
       fetchModelOnce: (model) ->

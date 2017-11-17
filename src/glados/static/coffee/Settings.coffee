@@ -136,6 +136,8 @@ glados.useNameSpace 'glados',
     # ranges include both numbers
     VIEW_SELECTION_THRESHOLDS:
       'Bioactivity': [0,1024, 300]
+    TOOLTIPS:
+      DEFAULT_MERCY_TIME: 100
   Events:
     Collections:
       ALL_ITEMS_DOWNLOADED: 'ALL_ITEMS_DOWNLOADED'
