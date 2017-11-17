@@ -1144,7 +1144,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       return
 
     $newMiniReportCardContainer = $('#' + miniRepCardID)
-    ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d, @config.rows_entity_name == 'Compounds')
+    glados.apps.Activity.ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d,
+      @config.rows_entity_name == 'Compounds')
 
   fillHeaderText: (d3TextElem, isCol=true) ->
     thisView = @
