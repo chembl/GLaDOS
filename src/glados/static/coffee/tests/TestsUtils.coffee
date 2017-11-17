@@ -70,6 +70,7 @@ class TestsUtils
       item2 = list2[i]
 
       if item1 != item2
+        console.log item1, ' is different from ', item2
         return false
 
     return true

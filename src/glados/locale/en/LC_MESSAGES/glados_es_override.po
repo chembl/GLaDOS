@@ -162,6 +162,11 @@ msgstr "Organism"
 msgid "glados_es_gs__assay__assay_tax_id__label"
 msgstr "Tax ID"
 
+msgid "glados_es_gs__assay__source___src_description__label"
+msgstr "Source"
+
+msgid "glados_es_gs__assay__bao_label__label"
+msgstr "BAO Format"
 #-----------------------------------------------------------------------------------------------------------------------
 # Cell Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
