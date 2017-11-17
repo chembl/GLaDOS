@@ -3,6 +3,11 @@ glados.useNameSpace 'glados.apps.Activity',
 
     @init = ->
 
+      router = new glados.apps.Activity.ActivitiesRouter
+      Backbone.history.start()
+
+    @initBrowser = ->
+
       filter = URLProcessor.getFilter()
       actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(filter)
 
