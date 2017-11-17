@@ -108,10 +108,12 @@ describe "Downloads", ->
 
     it 'Generates the configuration for Assays', ->
 
-      comparatorsMustBe = ["assay_chembl_id","description","assay_organism","document_chembl_id", "assay_tax_id",
-        "assay_strain","assay_type","tissue_chembl_id","assay_cell_type","assay_subcellular_fraction"]
+      comparatorsMustBe = ["assay_chembl_id", "description", "assay_organism", "document_chembl_id", "bao_label",
+        "_metadata.source.src_description", "assay_tax_id", "assay_strain", "assay_type", "tissue_chembl_id",
+        "assay_cell_type", "assay_subcellular_fraction"]
 
       comparatorsGot = (col.comparator for col in Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
+      console.log 'comparatorsGot: ', comparatorsGot
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
     it 'Generates the configuration for Documents', ->
