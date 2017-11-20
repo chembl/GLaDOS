@@ -10,13 +10,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'standard_type',
         # TODO missing target_type
         'target_organism',
-        'bao_format',
+        'bao_label',
         'pchembl_value',
-        # TODO missing max_phase
-        # TODO missing RO5 violations
-        # TODO missing alogp
-        # TODO missing molecular weight
-        'src_id'
+        '_metadata.parent_molecule_data.max_phase'
+        '_metadata.parent_molecule_data.num_ro5_violations'
+        '_metadata.parent_molecule_data.alogp'
+        '_metadata.parent_molecule_data.full_mwt'
+        '_metadata.source.src_description'
       ],
       # Default Hidden
       [

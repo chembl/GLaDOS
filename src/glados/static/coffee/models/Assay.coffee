@@ -45,6 +45,10 @@ Assay.COLUMNS = {
     comparator: 'document_chembl_id'
     link_base: 'document_link'
     secondary_link: true
+  BAO_LABEL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: 'bao_label'
+  SRC_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: '_metadata.source.src_description'
   TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'tissue_chembl_id'
     link_base: 'tissue_link'
@@ -72,6 +76,8 @@ Assay.COLUMNS_SETTINGS = {
     Assay.COLUMNS.DESCRIPTION
     Assay.COLUMNS.ORGANISM
     Assay.COLUMNS.DOCUMENT
+    Assay.COLUMNS.BAO_LABEL
+    Assay.COLUMNS.SRC_DESCRIPTION
   ]
   RESULTS_LIST_ADDITIONAL:[
     Assay.COLUMNS.TAX_ID

@@ -27,6 +27,9 @@ Document.COLUMNS = {
     comparator: 'authors'
   YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'year'
+  SOURCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.source'
+    parse_function: (values) -> (v.src_description for v in values).join(', ')
   # this is shown when searching documents by terms.
   SCORE: {
       'name_to_show': 'Score'
@@ -70,6 +73,8 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.PUBMED_ID
     Document.COLUMNS.DOI
     Document.COLUMNS.PATENT_ID
+    Document.COLUMNS.SOURCE
+    Document.COLUMNS.JOURNAL
     Document.COLUMNS.AUTHORS
     Document.COLUMNS.YEAR
   ]

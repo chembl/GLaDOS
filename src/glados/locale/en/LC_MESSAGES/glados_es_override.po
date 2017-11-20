@@ -84,7 +84,6 @@ msgstr "Molecular Formula"
 
 msgid "glados_es_gs__molecule__indication_class__label"
 msgstr "USAN Indication Class"
-
 #-----------------------------------------------------------------------------------------------------------------------
 # Activities paginated views
 #-----------------------------------------------------------------------------------------------------------------------
@@ -135,6 +134,40 @@ msgstr "UniProt Accession"
 
 msgid "glados_es_gs__activity__target_tax_id__label"
 msgstr "Organism Tax ID"
+
+msgid "glados_es_gs__activity__bao_label__label"
+msgstr "BAO Format"
+
+msgid "glados_es_gs__activity__source___src_description__label"
+msgstr "Source"
+
+msgid "glados_es_gs__activity__parent_molecule_data___max_phase__label"
+msgstr "Max Phase"
+
+msgid "glados_es_gs__activity__parent_molecule_data___num_ro5_violations__label"
+msgstr "#Ro5 Violations"
+
+msgid "glados_es_gs__activity__parent_molecule_data___full_mwt__label"
+msgstr "Molecular Weight"
+
+msgid "glados_es_gs__activity__parent_molecule_data___alogp__label"
+msgstr "ALogP"
+
+msgid "glados_es_gs__activity__assay_data___assay_organism__label"
+msgstr "Assay Organism"
+
+msgid "glados_es_gs__activity__assay_data___tissue_chembl_id__label"
+msgstr "Assay Tissue ChEMBL ID"
+
+msgid "glados_es_gs__activity__assay_data___assay_tissue__label"
+msgstr "Assay Tissue Name"
+
+msgid "glados_es_gs__activity__assay_data___assay_cell_type__label"
+msgstr "Assay Cell Type"
+
+msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label"
+msgstr "Assay Subcellular Fraction"
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -162,6 +195,11 @@ msgstr "Organism"
 msgid "glados_es_gs__assay__assay_tax_id__label"
 msgstr "Tax ID"
 
+msgid "glados_es_gs__assay__source___src_description__label"
+msgstr "Source"
+
+msgid "glados_es_gs__assay__bao_label__label"
+msgstr "BAO Format"
 #-----------------------------------------------------------------------------------------------------------------------
 # Cell Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -216,6 +254,9 @@ msgstr "Type"
 
 msgid "glados_es_gs__document__doi__label"
 msgstr "DOI"
+
+msgid "glados_es_gs__document__source___src_description__label"
+msgstr "Source"
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
