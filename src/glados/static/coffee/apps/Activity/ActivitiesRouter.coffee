@@ -5,5 +5,4 @@ glados.useNameSpace 'glados.apps.Activity',
       'matrix_fs/:sourceEntity': 'initFullScreenMatrix'
 
     initBrowser: -> ActivitiesBrowserApp.initBrowser()
-    initFullScreenMatrix: (sourceEntity) ->
-      alert('init matrix from ' + sourceEntity)
+    initFullScreenMatrix: (sourceEntity) -> ActivitiesBrowserApp.initMatrixFSView(sourceEntity)

@@ -8,6 +8,8 @@ glados.useNameSpace 'glados.apps.Activity',
 
     @initBrowser = ->
 
+      $mainContainer = $('.BCK-main-container')
+      $mainContainer.show()
       filter = URLProcessor.getFilter()
       actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(filter)
 
@@ -17,6 +19,17 @@ glados.useNameSpace 'glados.apps.Activity',
         el: $browserContainer
 
       actsList.fetch()
+
+    @initMatrixFSView = (sourceEntity) ->
+
+      $mainContainer = $('.BCK-main-container')
+      $mainContainer.show()
+
+      $('.BCK-main-container').children().hide()
+      $('.BCK-main-container').find('.BCK-matrix-full-screen').show()
+#      alert('FS: init matrix from ' + sourceEntity)
+
+
 
     @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
 

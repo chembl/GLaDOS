@@ -3,11 +3,16 @@
 {% block title %}Browse Activities{% endblock %}
 
 {% block content %}
-<div class="container main-container">
-  <h2>
-    Browse Activities
-  </h2>
-  {% include "glados/Browsers/DefaultBrowserContent.html" %}
+<div class="container main-container BCK-main-container" style="display: none;">
+  <div class="BCK-browser">
+    <h2>
+      Browse Activities
+    </h2>
+    {% include "glados/Browsers/DefaultBrowserContent.html" %}
+  </div>
+  <div class="BCK-matrix-full-screen">
+    Matrix
+  </div>
 </div>
 {% endblock %}
 
