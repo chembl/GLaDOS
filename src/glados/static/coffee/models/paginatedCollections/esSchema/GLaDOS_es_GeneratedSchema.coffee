@@ -27,6 +27,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__activity__assay_data___assay_tissue__label'
         label_mini_id : 'glados_es_gs__activity__assay_data___assay_tissue__label__mini'
 
+      '_metadata.assay_data.cell_chembl_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__activity__assay_data___cell_chembl_id__label'
+        label_mini_id : 'glados_es_gs__activity__assay_data___cell_chembl_id__label__mini'
+
+      '_metadata.assay_data.tissue_chembl_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__activity__assay_data___tissue_chembl_id__label'
+        label_mini_id : 'glados_es_gs__activity__assay_data___tissue_chembl_id__label__mini'
+
       '_metadata.assay_data' : 
         type : Object
         aggregatable : false
@@ -82,6 +94,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : true
         label_id : 'glados_es_gs__activity__parent_molecule_data___alogp__label'
         label_mini_id : 'glados_es_gs__activity__parent_molecule_data___alogp__label__mini'
+
+      '_metadata.parent_molecule_data.compound_keys' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__activity__parent_molecule_data___compound_keys__label'
+        label_mini_id : 'glados_es_gs__activity__parent_molecule_data___compound_keys__label__mini'
 
       '_metadata.parent_molecule_data.full_mwt' : 
         type : Number
