@@ -10,6 +10,10 @@ glados.useNameSpace 'glados.apps.Activity',
 
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
+
+      $mainContainer.children().hide()
+      $mainContainer.find('.BCK-browser').show()
+
       filter = URLProcessor.getFilter()
       actsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList(filter)
 
