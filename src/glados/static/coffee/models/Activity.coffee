@@ -8,6 +8,7 @@ Activity = Backbone.Model.extend
     response.target_link = Target.get_report_card_url(response.target_chembl_id)
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
     response.document_link = Document.get_report_card_url(response.document_chembl_id)
+    response.tissue_link = glados.models.Tissue.get_report_card_url(response._metadata.assay_data.tissue_chembl_id)
     return response
 
 Activity.indexName = 'chembl_activity'
@@ -23,8 +24,22 @@ Activity.COLUMNS = {
     'comparator': 'assay_description'
   ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'assay_type'
+  ASSAY_ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.assay_data.assay_organism'
+  ASSAY_TISSUE_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.assay_data.assay_tissue'
+  ASSAY_TISSUE_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.assay_data.tissue_chembl_id'
+    link_base: 'tissue_link'
+    secondary_link: true
+  ASSAY_CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.assay_data.assay_cell_type'
+  ASSAY_SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.assay_data.assay_subcellular_fraction'
   BAO_FORMAT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'bao_format'
+  BAO_LABEL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'bao_label'
   CANONICAL_SMILES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'canonical_smiles'
   DATA_VALIDITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -42,6 +57,22 @@ Activity.COLUMNS = {
     image_base_url: 'image_url'
     link_base:'molecule_link'
     secondary_link: true
+  ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.parent_molecule_data.alogp'
+  MAX_PHASE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.parent_molecule_data.max_phase'
+  NUM_RO5_VIOLATIONS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.parent_molecule_data.num_ro5_violations'
+  MOLECULAR_WEIGHT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.parent_molecule_data.full_mwt'
+  LIGAND_EFFICIENCIES_BEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'ligand_efficiency.bei'
+  LIGAND_EFFICIENCIES_LE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'ligand_efficiency.le'
+  LIGAND_EFFICIENCIES_LLE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'ligand_efficiency.lle'
+  LIGAND_EFFICIENCIES_SEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'ligand_efficiency.sei'
   STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'standard_type'
   PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -65,6 +96,8 @@ Activity.COLUMNS = {
     comparator: 'record_id'
   SRC_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'src_id'
+  SRC_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.source.src_description'
   STANDARD_FLAG: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'standard_flag'
   STANDARD_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -122,10 +155,12 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.ACTIVITY_COMMENT
     Activity.COLUMNS.ASSAY_CHEMBL_ID
     Activity.COLUMNS.ASSAY_DESCRIPTION
+    Activity.COLUMNS.BAO_LABEL
     Activity.COLUMNS.TARGET_CHEMBL_ID
     Activity.COLUMNS.TARGET_PREF_NAME
     Activity.COLUMNS.TARGET_ORGANISM
     Activity.COLUMNS.DOCUMENT_CHEMBL_ID
+    Activity.COLUMNS.SRC_DESCRIPTION
   ]
   RESULTS_LIST_REPORT_CARD: [
     Activity.COLUMNS.MOLECULE_CHEMBL_ID
@@ -142,6 +177,19 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.DOCUMENT_CHEMBL_ID
   ]
   RESULTS_LIST_TABLE_ADDITIONAL: [
+    Activity.COLUMNS.MAX_PHASE
+    Activity.COLUMNS.NUM_RO5_VIOLATIONS
+    Activity.COLUMNS.MOLECULAR_WEIGHT
+    Activity.COLUMNS.LIGAND_EFFICIENCIES_BEI
+    Activity.COLUMNS.LIGAND_EFFICIENCIES_LE
+    Activity.COLUMNS.LIGAND_EFFICIENCIES_LLE
+    Activity.COLUMNS.LIGAND_EFFICIENCIES_SEI
+    Activity.COLUMNS.ALOGP
+    Activity.COLUMNS.ASSAY_ORGANISM
+    Activity.COLUMNS.ASSAY_TISSUE_CHEMBL_ID
+    Activity.COLUMNS.ASSAY_TISSUE_NAME
+    Activity.COLUMNS.ASSAY_CELL_TYPE
+    Activity.COLUMNS.ASSAY_SUBCELLULAR_FRACTION
     Activity.COLUMNS.TARGET_TAX_ID
     Activity.COLUMNS.BAO_FORMAT
     Activity.COLUMNS.PUBLISHED_TYPE
