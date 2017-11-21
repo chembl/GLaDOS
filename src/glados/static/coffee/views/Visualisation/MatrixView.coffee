@@ -1034,7 +1034,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Rows /Cols Headers tooltips
   #---------------------------------------------------------------------------------------------------------------------
-  generateTooltipFunction: (entityName, matrixView) ->
+  generateTooltipFunction: (sourceEntity, matrixView) ->
 
     return (d) ->
 
@@ -1056,7 +1056,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         style:
           classes:'matrix-qtip qtip-light qtip-shadow'
 
-      if entityName == 'Target'
+      if sourceEntity == 'Target'
 
         numCols = matrixView.model.get('matrix').columns.length
 
@@ -1078,7 +1078,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $newMiniReportCardContainer.hover ->
         $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
-      if entityName == 'Target'
+      if sourceEntity == 'Target'
         TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
       else
         CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)

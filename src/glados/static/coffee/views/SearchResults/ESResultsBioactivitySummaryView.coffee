@@ -10,15 +10,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
       @collection.on 'reset', @handleVisualisationStatus, @
 
-      @entityName = @collection.getMeta('label')
-      if @entityName == 'Targets'
+      @sourceEntity = @collection.getMeta('label')
+      if @sourceEntity == 'Targets'
         filterProperty = 'target_chembl_id'
         aggList = ['target_chembl_id', 'molecule_chembl_id']
       else
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
 
-      config = MatrixView.getDefaultConfig @entityName
+      config = MatrixView.getDefaultConfig @sourceEntity
 
       @ctm = new glados.models.Activity.ActivityAggregationMatrix
         filter_property: filterProperty
@@ -75,13 +75,13 @@ glados.useNameSpace 'glados.views.SearchResults',
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
 
       if numWorkingItems > threshold[1]
-        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
+        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @sourceEntity + ' to show this visualisation.',
           hideCog=true)
         @hideMatrix()
         return
 
       if numWorkingItems > threshold[2] and not @FORCE_DISPLAY
-        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @entityName +
+        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @sourceEntity +
           '. This can cause your browser to slow down. Press the following button to override this warning.'
 
         @setProgressMessage(msg, hideCog=true, linkUrl=undefined, linkText=undefined, showWarningIcon=true)

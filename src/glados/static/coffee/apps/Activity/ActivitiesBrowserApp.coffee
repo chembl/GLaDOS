@@ -27,6 +27,8 @@ glados.useNameSpace 'glados.apps.Activity',
     @initMatrixFSView = (sourceEntity) ->
 
       filter = URLProcessor.getFilter()
+      console.log 'full url: ', window.location.pathname
+      console.log 'sourceEntity: ', sourceEntity
       # TODO: this also needs to be refactored using the router
       if filter[filter.length-1] == '/'
         filter = filter.slice(0, -1)
@@ -38,16 +40,19 @@ glados.useNameSpace 'glados.apps.Activity',
       $matrixFSContainer = $mainContainer.find('.BCK-matrix-full-screen')
       $matrixFSContainer.show()
 
-      entityName = 'Compounds'
-      filterProperty = 'molecule_chembl_id'
-      aggList = ['molecule_chembl_id', 'target_chembl_id']
+      if sourceEntity == 'Targets'
+        filterProperty = 'target_chembl_id'
+        aggList = ['target_chembl_id', 'molecule_chembl_id']
+      else
+        filterProperty = 'molecule_chembl_id'
+        aggList = ['molecule_chembl_id', 'target_chembl_id']
 
       ctm = new glados.models.Activity.ActivityAggregationMatrix
         query_string: filter
         filter_property: filterProperty
         aggregations: aggList
 
-      config = MatrixView.getDefaultConfig entityName
+      config = MatrixView.getDefaultConfig sourceEntity
 
       $matrixContainer = $matrixFSContainer.find('.BCK-CompTargetMatrix')
       console.log('FS: init matrix from ' + sourceEntity)
