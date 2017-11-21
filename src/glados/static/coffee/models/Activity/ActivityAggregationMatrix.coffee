@@ -52,6 +52,16 @@ glados.useNameSpace 'glados.models.Activity',
     getLinkToAllActivities: ->
       filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
       return Activity.getActivitiesListURL(filter)
+
+    getLinkToFullScreen: ->
+      filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
+
+      filterProperty = @get('filter_property')
+      startingFrom = switch filterProperty
+        when 'molecule_chembl_id' then 'Compounds'
+        else 'Targets'
+
+      return Activity.getActivitiesListURL(filter) + '/#matrix_fs/' + startingFrom
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------

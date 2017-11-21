@@ -294,6 +294,20 @@ describe "Compounds vs Target Matrix", ->
     urlMustBe = Activity.getActivitiesListURL(filterMustBe)
     urlGot = ctm.getLinkToAllActivities()
     expect(urlGot).toBe(urlMustBe)
+
+  testLinkToFullScreen = (ctm, testIDs) ->
+
+    filterProperty = ctm.get('filter_property')
+    startingFrom = switch filterProperty
+      when 'molecule_chembl_id' then 'Compounds'
+      else 'Targets'
+
+    filterMustBe = ctm.get('filter_property') + ':(' + ('"' + id + '"' for id in testIDs).join(' OR ') + ')'
+
+    urlMustBe = Activity.getActivitiesListURL(filterMustBe) + '/#matrix_fs/' + startingFrom
+    urlGot = ctm.getLinkToFullScreen()
+    expect(urlGot).toBe(urlMustBe)
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Compounds
   #---------------------------------------------------------------------------------------------------------------------
@@ -311,6 +325,7 @@ describe "Compounds vs Target Matrix", ->
     describe "General", ->
 
       it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testMoleculeIDs)
+      it 'Generates the link to full screen view', -> testLinkToFullScreen(ctm, testMoleculeIDs)
 
     describe "Request Data", ->
 
@@ -351,6 +366,7 @@ describe "Compounds vs Target Matrix", ->
     describe "General", ->
 
       it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testTargetIDs)
+      it 'Generates the link to full screen view', -> testLinkToFullScreen(ctm, testTargetIDs)
 
     describe "Request Data", ->
 

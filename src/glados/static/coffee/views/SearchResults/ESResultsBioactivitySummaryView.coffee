@@ -122,7 +122,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     fillLinkToFullScreen: ->
 
       $elem = $(@el).find('.BCK-See-matrix-fullscreen')
-      glados.Utils.fillContentForElement $elem
+      glados.Utils.fillContentForElement $elem,
+        url: @ctm.getLinkToFullScreen()
       $elem.show()
 
     hideLinkToAllActivities: -> $(@el).find('.BCK-See-all-activities').hide()
