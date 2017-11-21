@@ -393,6 +393,14 @@ glados.useNameSpace 'glados.models.Activity',
     # Request data
     #-------------------------------------------------------------------------------------------------------------------
     addQueryToRequest: (requestData, idsList) ->
+
+      queryString = @get('query_string')
+      if queryString
+        requestData.query =
+          query_string:
+            query: queryString
+        return
+
       requestData.query =
         terms: {}
 
