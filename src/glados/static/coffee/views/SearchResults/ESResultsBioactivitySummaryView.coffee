@@ -119,7 +119,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         url: @ctm.getLinkToAllActivities()
       $elem.show()
 
+    fillLinkToFullScreen: ->
+
+      $elem = $(@el).find('.BCK-See-matrix-fullscreen')
+      glados.Utils.fillContentForElement $elem
+      $elem.show()
+
     hideLinkToAllActivities: -> $(@el).find('.BCK-See-all-activities').hide()
+    hideLinkToAllFullScreen: -> $(@el).find('.BCK-See-matrix-fullscreen').hide()
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
