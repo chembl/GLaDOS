@@ -27,6 +27,10 @@ glados.useNameSpace 'glados.apps.Activity',
     @initMatrixFSView = (sourceEntity) ->
 
       filter = URLProcessor.getFilter()
+      # TODO: this also needs to be refactored using the router
+      if filter[filter.length-1] == '/'
+        filter = filter.slice(0, -1)
+
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
@@ -39,6 +43,7 @@ glados.useNameSpace 'glados.apps.Activity',
       aggList = ['molecule_chembl_id', 'target_chembl_id']
 
       ctm = new glados.models.Activity.ActivityAggregationMatrix
+        query_string: filter
         filter_property: filterProperty
         aggregations: aggList
 
@@ -53,8 +58,6 @@ glados.useNameSpace 'glados.apps.Activity',
         el: $matrixContainer
         config: config
 
-      allItemsIDs = ['CHEMBL59', 'CHEMBL1557', 'CHEMBL457419']
-      ctm.set('chembl_ids', allItemsIDs)
       ctm.fetch()
 
     @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
