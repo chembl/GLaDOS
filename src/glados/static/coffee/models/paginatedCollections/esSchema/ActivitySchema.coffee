@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       # Default Selected
       [
         'standard_type',
-        # TODO missing target_type
+        '_metadata.target_data.target_type',
         'target_organism',
         'bao_label',
         'pchembl_value',
@@ -36,6 +36,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'potential_duplicate',
         'target_chembl_id',
         'target_tax_id',
+        '_metadata.activity_generated.short_data_validity_comment',
+        '_metadata.protein_classification.l1'
       ],
       [
 

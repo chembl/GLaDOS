@@ -65,6 +65,8 @@ Activity.COLUMNS = {
     comparator: '_metadata.parent_molecule_data.num_ro5_violations'
   MOLECULAR_WEIGHT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: '_metadata.parent_molecule_data.full_mwt'
+  COMPOUND_KEY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.parent_molecule_data.compound_key'
   LIGAND_EFFICIENCIES_BEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'ligand_efficiency.bei'
   LIGAND_EFFICIENCIES_LE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -153,6 +155,7 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.STANDARD_UNITS
     Activity.COLUMNS.PCHEMBL_VALUE
     Activity.COLUMNS.ACTIVITY_COMMENT
+    Activity.COLUMNS.COMPOUND_KEY
     Activity.COLUMNS.ASSAY_CHEMBL_ID
     Activity.COLUMNS.ASSAY_DESCRIPTION
     Activity.COLUMNS.BAO_LABEL
