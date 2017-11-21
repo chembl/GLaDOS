@@ -7,6 +7,17 @@ glados.useNameSpace 'glados.models.Activity',
 
     initialize: ->
 
+      queryString = @get('query_string')
+      if queryString?
+        filterProperty = @get('filter_property')
+        idsWrapperRegex = new RegExp(filterProperty + ':\(.*\)', 'g')
+        matches = queryString.match(idsWrapperRegex)
+        if matches.length > 0
+
+          idsText = matches[0].replace(filterProperty + ':(', '').replace(')', '').replace(/"/g, '')
+          ids = idsText.split(' OR ')
+          @set('chembl_ids', ids)
+
     fetch: (options) ->
 
       cleanMatrixConfig =

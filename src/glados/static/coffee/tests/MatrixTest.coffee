@@ -57,13 +57,12 @@ describe "Compounds vs Target Matrix", ->
     for row in rowsMustBe
       expect(rowsGot[row]?).toBe(true)
 
-  testAddsRowsWithNoData = (ctm, testAggList, testDataToParse) ->
+  testAddsRowsWithNoData = (ctm, testAggList, testDataToParse, testIDs) ->
 
     matrix = (ctm.parse testDataToParse).matrix
     rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
     rowsWithDataMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
-    originalRequestedIds = ctm.get('chembl_ids')
-    additionalIdsMustBe = _.difference(ctm.get('chembl_ids'), rowsWithDataMustBe)
+    additionalIdsMustBe = _.difference(testIDs, rowsWithDataMustBe)
 
     rowsGot = matrix.rows_index
     for row in additionalIdsMustBe
@@ -341,7 +340,7 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
-      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testMoleculeIDs)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
@@ -382,7 +381,7 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
-      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testTargetIDs)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
@@ -425,7 +424,7 @@ describe "Compounds vs Target Matrix", ->
             done()
 
         it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
-        it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
+        it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testMoleculeIDs)
         it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
         it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
         it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
