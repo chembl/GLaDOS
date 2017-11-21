@@ -957,6 +957,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         cellsContainerG.classed('grab-activated', true)
 
     # --------------------------------------
+    # Open in full screen
+    # --------------------------------------
+    $(@el).find('.BCK-open-full-screen').click -> window.open(thisView.model.getLinkToFullScreen())
+    # --------------------------------------
     # colour property selector
     # --------------------------------------
 
