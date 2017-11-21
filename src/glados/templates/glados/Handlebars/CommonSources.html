@@ -89,7 +89,13 @@
           {{/if}}
           {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          {{else}}
+          {{else if this.has_multiple_links}}
+            {{#each this.links_values}}
+            <a href="{{this.url}}" target="_blank">{{this.text}}</a>
+            {{/each}}
+
+          {{else }}
+
 
             {{#unless this.hide_value}}
               {{this.value}}
@@ -377,7 +383,7 @@
                   m{{medium_size}}
                   l{{large_size}}" >
 
-    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable" style="height: 85%">
+    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable paginated-card" style="height: 85%">
 
       <div class='checkbox-container'>
         <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
@@ -399,16 +405,16 @@
 
             {{#if this.is_secondary_link}}
                 <small>
-                  <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                  <p  ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
                 </small>
               {{else}}
-                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                <p  ><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
                 </p>
               {{/if}}
 
           {{else}}
           <small>
-            <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+            <p ><b>{{this.name_to_show}}:</b> {{this.value}}</p>
           </small>
           {{/if}}
           {{/each}}
@@ -1162,4 +1168,52 @@
     </div>
   </div>
 </script>
+
+<script id="Handlebars-ScrollSpyContent" type="text/x-handlebars-template">
+<ul class="section table-of-contents">
+  {{#each sections}}
+    <li><a href="#{{this.name}}">
+        <small>{{this.label}}</small>
+        </a>
+    </li>
+  {{/each}}
+</ul>
+</script>
+
+<script id="Handlebars-Common-References-Collapsible" type="text/x-handlebars-template">
+
+ <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+
+ {{#each references_groups}}
+
+   <li>
+      <div class="collapsible-header {{#if active}}active{{/if}}">
+        <a href="{{this.src_url}}">
+          <i class="fa fa-link"></i>
+        </a>
+        {{this.src_name}}
+      </div>
+      <div class="collapsible-body">
+
+        {{#each this.ref_items}}
+          <a target='_blank' href="{{this.link}}">{{this.id}}</a>
+        {{/each}}
+
+      </div>
+
+   </li>
+
+ {{/each}}
+
+
+ </ul>
+
+</script>
+
+<script id="Handlebars-Common-No-References-Collapsible" type="text/x-handlebars-template">
+
+There are no UniChem cross references for this compound.
+
+</script>
+
 {% endverbatim %}

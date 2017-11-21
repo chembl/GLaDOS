@@ -1,14 +1,19 @@
 Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   idAttribute: 'target_chembl_id'
-
+  defaults:
+    fetch_from_elastic: true
   initialize: ->
     @on 'change', @getProteinTargetClassification, @
     @initURL()
 
   initURL: ->
 
-    @url = glados.Settings.WS_BASE_URL + 'target/' + @get('target_chembl_id') + '.json'
+    id = @get('target_chembl_id')
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_target/target/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'target/' + id + '.json'
 
   getProteinTargetClassification: ->
 
@@ -66,15 +71,20 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           () -> console.log('failed!')
         )
 
-  parse: (data) ->
+  parse: (response) ->
 
-    parsed = data
-    parsed.report_card_url = Target.get_report_card_url(parsed.target_chembl_id)
-    filterForActivities = 'target_chembl_id:' + parsed.target_chembl_id
-    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
-    filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + parsed.target_chembl_id
-    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
-    return parsed;
+    # get data when it comes from elastic
+    if response._source?
+      objData = response._source
+    else
+      objData = response
+
+    objData.report_card_url = Target.get_report_card_url(objData.target_chembl_id)
+    filterForActivities = 'target_chembl_id:' + objData.target_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + objData.target_chembl_id
+    objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+    return objData;
 
   fetchFromAssayChemblID: ->
 

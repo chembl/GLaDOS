@@ -3,6 +3,7 @@
 DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     #ResponsiviseViewExt
     @setUpResponsiveRender()
     @model.on 'change', @render, @
@@ -11,6 +12,8 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
     @firstTimeRender = true
 
   render: ->
+
+    @showSection()
 
     if @firstTimeRender
       @$vis_elem.html '<i class="fa fa-cog fa-spin fa-2x fa-fw" aria-hidden="true"></i><span class="sr-only">Loading Visualisation...</span><br>'
@@ -26,7 +29,7 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
       report_card_url:  @model.get('report_card_url')
 
     @showCardContent()
-    @initEmbedModal('word_cloud')
+    @initEmbedModal('word_cloud',  @model.get('document_chembl_id'))
     @activateModals()
     @paintWordCloud()
 

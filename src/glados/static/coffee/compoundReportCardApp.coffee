@@ -1,29 +1,34 @@
 # This takes care of handling the compound report card.
-class CompoundReportCardApp
+class CompoundReportCardApp extends glados.ReportCardApp
 
   #This initializes all views and models necessary for the compound report card
   @init = ->
 
+    super
     GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
-    CompoundReportCardApp.initCalculatedCompoundParentProperties()
-    CompoundReportCardApp.initMechanismOfAction()
-    CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initAlternateForms()
+    CompoundReportCardApp.initSimilarCompounds()
+    CompoundReportCardApp.initMoleculeFeatures()
+    CompoundReportCardApp.initMechanismOfAction()
+    CompoundReportCardApp.initIndications()
+    CompoundReportCardApp.initClinicalData()
+    CompoundReportCardApp.initMetabolism()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
-    CompoundReportCardApp.initSimilarCompounds()
-    CompoundReportCardApp.initMetabolism()
+    CompoundReportCardApp.initTargetPredictions()
+    CompoundReportCardApp.initCalculatedCompoundParentProperties()
+    CompoundReportCardApp.initStructuralAlerts()
+    CompoundReportCardApp.initCrossReferences()
+    CompoundReportCardApp.initUniChemCrossReferences()
 
     compound.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
     ButtonsHelper.initCroppedContainers()
     ButtonsHelper.initExpendableMenus()
 
@@ -49,13 +54,16 @@ class CompoundReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
-    new CompoundNameClassificationView({
-        model: compound,
-        el: $('#CNCCard')})
+    new CompoundNameClassificationView
+      model: compound,
+      el: $('#CNCCard')
+      section_id: 'CompoundNameAndClassification'
+      section_label: 'Name And Classification'
+      report_card_app: @
 
-    new CompoundImageView({
-        model: compound,
-        el: ('#CNCImageCard')})
+    new CompoundImageView
+      model: compound,
+      el: ('#CNCImageCard')
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -71,6 +79,9 @@ class CompoundReportCardApp
     new CompoundRepresentationsView
       model: compound
       el: $('#CompRepsCard')
+      section_id: 'CompoundRepresentations'
+      section_label: 'Representations'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -83,8 +94,11 @@ class CompoundReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     new CompoundCalculatedParentPropertiesView
-        model: compound
-        el: $('#CalculatedParentPropertiesCard')
+      model: compound
+      el: $('#CalculatedParentPropertiesCard')
+      section_id: 'CalculatedCompoundParentProperties'
+      section_label: 'Calculated Parent Properties'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -97,8 +111,16 @@ class CompoundReportCardApp
       collection: mechanismOfActionList
       el: $('#MechOfActCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      section_id: 'MechanismOfAction'
+      section_label: 'Mechanism Of Action'
+      report_card_app: @
 
     mechanismOfActionList.fetch({reset: true})
+
+  @initIndications = ->
+
+    @registerSection('Indications', 'Indications')
+    @showSection('Indications')
 
   @initMoleculeFeatures = ->
 
@@ -106,9 +128,22 @@ class CompoundReportCardApp
     new CompoundFeaturesView
       model: compound
       el: $('#MoleculeFeaturesCard')
+      section_id: 'MoleculeFeatures'
+      section_label: 'Molecule Features'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
+
+  @initClinicalData = ->
+
+    @registerSection('ClinicalData', 'Clinical Data')
+    @showSection('ClinicalData')
+
+  @initStructuralAlerts = ->
+
+    @registerSection('StructuralAlerts', 'Structural Alerts')
+    @showSection('StructuralAlerts')
 
   @initAlternateForms = ->
 
@@ -119,6 +154,9 @@ class CompoundReportCardApp
       collection: moleculeFormsList
       el: $('#AlternateFormsCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      section_id: 'AlternateFormsOfCompoundInChEMBL'
+      section_label: 'Alternate Forms'
+      report_card_app: @
 
     moleculeFormsList.fetch({reset: true})
 
@@ -144,6 +182,9 @@ class CompoundReportCardApp
       model: relatedActivities
       el: $('#CAssociatedActivitiesCard')
       config: viewConfig
+      section_id: 'CompoundBioactivitySummary'
+      section_label: 'Bioactivity Summary'
+      report_card_app: @
 
     relatedActivities.fetch()
 
@@ -170,6 +211,9 @@ class CompoundReportCardApp
       model: relatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
+      section_id: 'CompoundAssaySummary'
+      section_label: 'Assay Summary'
+      report_card_app: @
 
     relatedAssays.fetch()
 
@@ -194,8 +238,38 @@ class CompoundReportCardApp
       model: relatedTargets
       el: $('#CAssociatedTargetsCard')
       config: viewConfig
+      section_id: 'CompoundTargetSummary'
+      section_label: 'Target Summary'
+      report_card_app: @
 
     relatedTargets.fetch()
+
+  @initTargetPredictions = ->
+
+    @registerSection('TargetPredictions', 'Target Predictions')
+    @showSection('TargetPredictions')
+
+  @initCrossReferences = ->
+
+    @registerSection('CompoundCrossReferences', 'Cross References')
+    @showSection('CompoundCrossReferences')
+
+  @initUniChemCrossReferences = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: CompoundReportCardApp.getCurrentCompound()
+      el: $('#UniChemCrossReferencesCard')
+      embed_section_name: 'unichem_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
+      section_id: 'UniChemCrossReferences'
+      section_label: 'UniChem Cross References'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initSimilarCompounds = ->
 
@@ -206,6 +280,9 @@ class CompoundReportCardApp
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      section_id: 'SimilarCompounds'
+      section_label: 'Similar Compounds'
+      report_card_app: @
 
     similarCompoundsList.fetch({reset: true})
 
@@ -230,6 +307,9 @@ class CompoundReportCardApp
       model: compoundMetabolism
       el: $('#MetabolismCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      section_id: 'Metabolism'
+      section_label: 'Metabolism'
+      report_card_app: @
 
     compoundMetabolism.fetch()
 

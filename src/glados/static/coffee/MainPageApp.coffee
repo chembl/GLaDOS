@@ -11,7 +11,7 @@ class MainPageApp
       el: $('.BCK-Central-Card')
 
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
-
+    console.log 'databaseInfo: ', databaseInfo
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')

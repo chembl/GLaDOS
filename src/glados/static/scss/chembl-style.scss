@@ -1174,6 +1174,12 @@ div#CompoundNameAndClassification .CNC-img-btn {
   white-space: nowrap;
 }
 
+.p-oneline{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 div#CompoundNameAndClassification .CNC-table td {
   padding: 2px;
   font-size: 80%;
@@ -2957,7 +2963,10 @@ span.badge-primary-color-no-float {
     font-weight: bold;
   }
 
-  .headers-text {
+  .headers-text, .footers-text {
+
+    text-decoration: underline;
+    cursor: pointer;
     &:hover {
       fill: color("teal", "accent-4");
     }
@@ -2965,9 +2974,17 @@ span.badge-primary-color-no-float {
       font-weight: bold;
     }
   }
-  .footers-text{
-    &.emphasis {
-      font-weight: bold;
+  .cells-container-g{
+    &.grab-activated{
+      cursor: move; /* fallback if grab cursor is unsupported */
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+    &.grabbing{
+      cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
     }
   }
 }
@@ -3418,6 +3435,12 @@ $facets-width-large: 21%;
       a {
         font-size: 1rem;
       }
+    }
+  }
+
+  .paginated-card{
+    .card-stacked{
+      width: 60%
     }
   }
 }

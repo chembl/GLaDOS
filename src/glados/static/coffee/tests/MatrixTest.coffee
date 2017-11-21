@@ -104,6 +104,80 @@ describe "Compounds vs Target Matrix", ->
         expect(rowIdInLink).toBe(rowKey)
         expect(colIdInlink).toBe(colKey)
 
+  testGeneratesFooterExternalLinks = (ctm, testAggList, testDataToParse) ->
+
+    ctm.set(ctm.parse testDataToParse)
+    matrix = ctm.get('matrix')
+
+    rowsPropName = testAggList[0]
+    colsPropName = testAggList[1]
+    rowsAggName = rowsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = colsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    linksGot = matrix.links
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+
+    for rowObj in rowsContainer
+
+      rowKey = rowObj.key
+      rowActivityFilter = rowsPropName + ':' + rowKey
+      rowFooterURLMustBe = Activity.getActivitiesListURL(rowActivityFilter)
+      expect(ctm.getRowFooterLink(rowKey)).toBe(rowFooterURLMustBe)
+      # expect to be saved after generated
+      expect(rowsGot[rowKey].footer_url).toBe(rowFooterURLMustBe)
+
+      for colObj in rowObj[colsAggName].buckets
+
+        colKey = colObj.key
+
+        relatedRows = ctm.getRelatedRowIDsFromColID(colKey, linksGot, colsGot)
+        rowsListFilter = rowsPropName + ':(' + ('"' + row + '"' for row in relatedRows).join(' OR ') + ')'
+        colActivityFilter = colsPropName + ':' + colKey + ' AND ' + rowsListFilter
+        colFooterURLMustBe = Activity.getActivitiesListURL(colActivityFilter)
+        expect(ctm.getColFooterLink(colKey)).toBe(colFooterURLMustBe)
+        expect(colsGot[colKey].footer_url).toBe(colFooterURLMustBe)
+
+
+  testParsesHeaderExternalLinks = (ctm, testAggList, testDataToParse) ->
+
+    ctm.set(ctm.parse testDataToParse)
+    matrix = ctm.get('matrix')
+
+    rowsPropName = testAggList[0]
+    colsPropName = testAggList[1]
+    rowsAggName = rowsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+    colsAggName = colsPropName + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
+
+    rowsGot = matrix.rows_index
+    colsGot = matrix.columns_index
+    rowsContainer = testDataToParse.aggregations[rowsAggName].buckets
+
+    for rowObj in rowsContainer
+
+      rowKey = rowObj.key
+
+      if rowsPropName == 'molecule_chembl_id'
+        rowHeaderURLMustBe = Compound.get_report_card_url(rowKey)
+      else
+        rowHeaderURLMustBe = Target.get_report_card_url(rowKey)
+
+      expect(ctm.getRowHeaderLink(rowKey)).toBe(rowHeaderURLMustBe)
+      expect(rowsGot[rowKey].header_url).toBe(rowHeaderURLMustBe)
+
+      for colObj in rowObj[colsAggName].buckets
+
+        colKey = colObj.key
+
+        if colsPropName == 'molecule_chembl_id'
+          colHeaderURLMustBe = Compound.get_report_card_url(colKey)
+        else
+          colHeaderURLMustBe = Target.get_report_card_url(colKey)
+
+        expect(ctm.getColHeaderLink(colKey)).toBe(colHeaderURLMustBe)
+        expect(colsGot[colKey].header_url).toBe(colHeaderURLMustBe)
+
   testHitCount = (ctm, testAggList, testDataToParse) ->
 
     matrix = (ctm.parse testDataToParse).matrix
@@ -253,7 +327,8 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
       it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
-
+      it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
+      it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
@@ -292,6 +367,8 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
       it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
+      it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
+      it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # General Functions

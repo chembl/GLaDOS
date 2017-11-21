@@ -1,20 +1,24 @@
-class TargetReportCardApp
+class TargetReportCardApp extends glados.ReportCardApp
 
   # -------------------------------------------------------------
   # Initialisation
   # -------------------------------------------------------------
   @init = ->
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
+    super
 
     TargetReportCardApp.initTargetNameAndClassification()
-    TargetReportCardApp.initApprovedDrugsClinicalCandidates()
-    TargetReportCardApp.initTargetRelations()
     TargetReportCardApp.initTargetComponents()
+    TargetReportCardApp.initTargetRelations()
+    TargetReportCardApp.initApprovedDrugsClinicalCandidates()
     TargetReportCardApp.initBioactivities()
     TargetReportCardApp.initAssociatedAssays()
     TargetReportCardApp.initLigandEfficiencies()
     TargetReportCardApp.initAssociatedCompounds()
+    TargetReportCardApp.initGeneCrossReferences()
+    TargetReportCardApp.initProteinCrossReferences()
+    TargetReportCardApp.initDomainCrossReferences()
+    TargetReportCardApp.initStructureCrossReferences()
+
     
     target = TargetReportCardApp.getCurrentTarget()
     target.fetch()
@@ -30,6 +34,7 @@ class TargetReportCardApp
 
       @currentTarget = new Target
         target_chembl_id: targetChemblID
+        fetch_from_elastic: false
       return @currentTarget
 
     else return @currentTarget
@@ -44,6 +49,9 @@ class TargetReportCardApp
     new TargetNameAndClassificationView
       model: target
       el: $('#TNameClassificationCard')
+      section_id: 'TargetNameAndClassification'
+      section_label: 'Name And Classification'
+      report_card_app: @
 
     if GlobalVariables['EMBEDED']
       target.fetch()
@@ -58,6 +66,9 @@ class TargetReportCardApp
       collection: targetComponents
       el: $('#TComponentsCard')
       target_chembl_id: targetChemblID
+      section_id: 'TargetComponents'
+      section_label: 'Components'
+      report_card_app: @
 
     targetComponents.fetch({reset: true})
 
@@ -71,6 +82,9 @@ class TargetReportCardApp
       collection: targetRelations
       el: $('#TRelationsCard')
       target_chembl_id: targetChemblID
+      section_id: 'TargetRelations'
+      section_label: 'Relations'
+      report_card_app: @
 
     targetRelations.fetch({reset: true})
 
@@ -83,6 +97,10 @@ class TargetReportCardApp
     new ApprovedDrugsClinicalCandidatesView
       collection: appDrugsClinCandsList
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
+      target_chembl_id: targetChemblID
+      section_id: 'ApprovedDrugsAndClinicalCandidates'
+      section_label: 'Drugs And ClinicalCandidates'
+      report_card_app: @
 
     appDrugsClinCandsList.fetch()
 
@@ -108,29 +126,37 @@ class TargetReportCardApp
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
       config: viewConfig
+      section_id: 'TargetAssociatedBioactivities'
+      section_label: 'Associated Bioactivities'
+      report_card_app: @
 
     bioactivities.fetch()
 
   @initAssociatedAssays = ->
 
-    targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(targetChemblID)
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(chemblID)
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+      title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
 
     viewConfig =
       pie_config: pieConfig
       resource_type: gettext('glados_entities_target_name')
       link_to_all:
-        link_text: 'See all assays for target ' + targetChemblID + ' used in this visualisation.'
-        url: Assay.getAssaysListURL('target_chembl_id:' + targetChemblID)
+        link_text: 'See all assays for target ' + chemblID + ' used in this visualisation.'
+        url: Assay.getAssaysListURL('target_chembl_id:' + chemblID)
+      embed_section_name: 'associated_assays'
+      embed_identifier: chemblID
 
     new glados.views.ReportCards.PieInCardView
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
       config: viewConfig
+      section_id: 'TargetAssociatedAssays'
+      section_label: 'Associated Assays'
+      report_card_app: @
 
     associatedAssays.fetch()
 
@@ -145,6 +171,9 @@ class TargetReportCardApp
       collection: ligandEfficiencies
       el: $('#TLigandEfficienciesCard')
       target_chembl_id: targetChemblID
+      section_id: 'TargetLigandEfficiencies'
+      section_label: 'Ligand Efficiencies'
+      report_card_app: @
 
   @initAssociatedCompounds = ->
 
@@ -180,9 +209,32 @@ class TargetReportCardApp
       model: associatedCompounds
       target_chembl_id: chemblID
       config: config
+      section_id: 'TargetAssociatedCompoundProperties'
+      section_label: 'Associated Compounds'
+      report_card_app: @
 
 
     associatedCompounds.fetch()
+
+  @initGeneCrossReferences = ->
+
+    @registerSection('TargetCrossReferencesGene', 'Gene Cross References')
+    @showSection('TargetCrossReferencesGene')
+
+  @initProteinCrossReferences = ->
+
+    @registerSection('TargetCrossReferencesProtein', 'Protein Cross References')
+    @showSection('TargetCrossReferencesProtein')
+
+  @initDomainCrossReferences = ->
+
+    @registerSection('TargetCrossReferencesDomain', 'Domain Cross References')
+    @showSection('TargetCrossReferencesDomain')
+
+  @initStructureCrossReferences = ->
+
+    @registerSection('TargetCrossReferencesStructure', 'Structure Cross References')
+    @showSection('TargetCrossReferencesStructure')
 
   @initMiniTargetReportCard = ($containerElem, chemblID) ->
 

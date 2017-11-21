@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     bindCollectionEvents: ->
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
-      @collection.on 'reset sort', @render, @
+      @collection.on 'reset sort do-repaint', @render, @
       @collection.on 'request', @showPreloaderHideOthers, @
       @collection.on 'error', @handleError, @
 

@@ -2,6 +2,7 @@
 CompoundMetabolismView = CardView.extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Compound'
@@ -9,6 +10,7 @@ CompoundMetabolismView = CardView.extend
 
   render: ->
 
+    @showSection()
     $(@el).find('.visualisation-title').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-Title').html() )
       chembl_id: @molecule_chembl_id
 

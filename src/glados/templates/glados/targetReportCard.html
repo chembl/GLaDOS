@@ -36,7 +36,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="TargetComponents" class="section scrollspy">
+      <div id="TargetComponents" class="section scrollspy" style="display: none;">
         <h3>Target Components</h3>
 
         <div class="row">
@@ -52,7 +52,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="TargetRelations" class="section scrollspy">
+      <div id="TargetRelations" class="section scrollspy" style="display: none;">
         <h3>Target Relations</h3>
 
         <div class="row">
@@ -69,7 +69,7 @@
       </div>
 
       <div class="divider"></div>
-      <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy">
+      <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy" style="display: none;">
         <h3>Approved Drugs And Clinical Candidates</h3>
 
          <div class="row">
@@ -190,51 +190,8 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - -->
 
     <div class="col l2 hide-on-med-and-down">
-
-      <div class="scrollspy-wrapper pin-top">
-
-        <ul class="section table-of-contents">
-          <li><a href="#TargetNameAndClassification">
-            <small>Name And Classification</small>
-          </a></li>
-          <li><a href="#TargetComponents">
-            <small>Components</small>
-          </a></li>
-          <li><a href="#TargetRelations">
-            <small>Relations</small>
-          </a></li>
-          <li><a href="#ApprovedDrugsAndClinicalCandidates">
-            <small>Drugs And Clinical Candidates</small>
-          </a></li>
-          <li><a href="#TargetAssociatedBioactivities">
-            <small>Target Associated Bioactivities</small>
-          </a></li>
-          <li><a href="#TargetAssociatedAssays">
-            <small>Associated Assays</small>
-          </a></li>
-          <li><a href="#TargetLigandEfficiencies">
-            <small>Ligand Efficiencies</small>
-          </a></li>
-          <li><a href="#TargetAssociatedCompoundProperties">
-            <small>Associated Compound Properties</small>
-          </a></li>
-          <li><a href="#TargetCrossReferencesGene">
-            <small>Gene Cross References</small>
-          </a></li>
-          <li><a href="#TargetCrossReferencesProtein">
-            <small>Protein Cross References</small>
-          </a></li>
-          <li><a href="#TargetCrossReferencesDomain">
-            <small>Domain Cross References</small>
-          </a></li>
-          <li><a href="#TargetCrossReferencesStructure">
-            <small>Structure Cross References</small>
-          </a></li>
-        </ul>
-
-      </div>
+      {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
     </div>
-
 
   </div>
 

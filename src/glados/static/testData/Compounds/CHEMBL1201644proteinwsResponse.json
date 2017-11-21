@@ -1,0 +1,78 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "0",
+  "biotherapeutic": {
+    "biocomponents": [
+      {
+        "component_id": 6677,
+        "component_type": "PROTEIN",
+        "description": "Purified semisynthetic human insulin zinc suspension",
+        "organism": "Homo sapiens",
+        "sequence": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN",
+        "tax_id": 9606
+      }
+    ],
+    "description": "Recombinant human insulin zinc suspension",
+    "helm_notation": null,
+    "molecule_chembl_id": "CHEMBL1201644"
+  },
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": true,
+  "first_approval": 1985,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": null,
+  "inorganic_flag": "0",
+  "max_phase": 4,
+  "molecule_chembl_id": "CHEMBL1201644",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL1201644",
+    "parent_chembl_id": "CHEMBL1201644"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Humulin L",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "HUMULIN L"
+    },
+    {
+      "molecule_synonym": "Insulin Zinc Susp Recombinant Human",
+      "syn_type": "FDA",
+      "synonyms": "INSULIN ZINC SUSP RECOMBINANT HUMAN"
+    },
+    {
+      "molecule_synonym": "Insulin zinc susp recombinant human",
+      "syn_type": "OTHER",
+      "synonyms": "Insulin zinc susp recombinant human"
+    },
+    {
+      "molecule_synonym": "Novolin L",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "NOVOLIN L"
+    }
+  ],
+  "molecule_type": "Protein",
+  "natural_product": "0",
+  "oral": false,
+  "parenteral": true,
+  "polymer_flag": false,
+  "pref_name": "INSULIN ZINC SUSP RECOMBINANT HUMAN",
+  "prodrug": "0",
+  "structure_type": "SEQ",
+  "therapeutic_flag": true,
+  "topical": false,
+  "usan_stem": null,
+  "usan_stem_definition": null,
+  "usan_substem": null,
+  "usan_year": null,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}

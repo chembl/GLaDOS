@@ -8,8 +8,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       # Default Selected
       [
         'assay_organism',
-        'bao_format',
-        'src_id',
+        'bao_label',
+        '_metadata.source.src_description',
         'confidence_score',
         'confidence_description',
       ],

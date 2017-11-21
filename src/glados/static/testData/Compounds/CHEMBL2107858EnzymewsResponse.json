@@ -1,0 +1,64 @@
+{
+  "atc_classifications": [
+
+  ],
+  "availability_type": "-1",
+  "biotherapeutic": null,
+  "black_box_warning": "0",
+  "chebi_par_id": null,
+  "chirality": "1",
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": "0",
+  "helm_notation": null,
+  "indication_class": null,
+  "inorganic_flag": "0",
+  "max_phase": 0,
+  "molecule_chembl_id": "CHEMBL2107858",
+  "molecule_hierarchy": {
+    "molecule_chembl_id": "CHEMBL2107858",
+    "parent_chembl_id": "CHEMBL2107858"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Component Of E-101",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "COMPONENT OF E-101"
+    },
+    {
+      "molecule_synonym": "MPO",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "MPO"
+    },
+    {
+      "molecule_synonym": "MPO; component of E-101",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "MPO; COMPONENT OF E-101"
+    },
+    {
+      "molecule_synonym": "Myeloperoxidase",
+      "syn_type": "USAN",
+      "synonyms": "MYELOPEROXIDASE"
+    }
+  ],
+  "molecule_type": "Enzyme",
+  "natural_product": "0",
+  "oral": false,
+  "parenteral": false,
+  "polymer_flag": false,
+  "pref_name": "MYELOPEROXIDASE",
+  "prodrug": "0",
+  "structure_type": "NONE",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": "-ase",
+  "usan_stem_definition": "enzymes",
+  "usan_substem": null,
+  "usan_year": 2008,
+  "withdrawn_country": null,
+  "withdrawn_flag": false,
+  "withdrawn_reason": null,
+  "withdrawn_year": null
+}

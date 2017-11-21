@@ -12,4 +12,4 @@ glados.useNameSpace 'glados.models.base',
       }
 
     get_report_card_url : (chembl_id)->
-      return glados.Settings.GLADOS_BASE_PATH_REL+@reportCardPath+chembl_id
+      return glados.Settings.GLADOS_BASE_PATH_REL + @reportCardPath + chembl_id

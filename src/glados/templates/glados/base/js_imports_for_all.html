@@ -130,13 +130,18 @@
 
 
     <!-- Report Cards -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/ReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MiniReportCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/PieInCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/HistogramInCardView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/ReferencesInCardView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ScrollSpy/ScrollSpyHandler.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ScrollSpy/ScrollSpyView.js' %}"></script>
 
     <!-- Tissue Report Card -->
 
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Tissue.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/TissueReportCardApp.js' %}"></script>
 
     <!-- Compound Report Card -->
 
@@ -169,6 +174,7 @@
     <!-- The Drug.js file needs to be loaded after the Compound.js -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/DrugsBrowserApp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
 
     <!-- Activities -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity/ActivityAggregation.js' %}"></script>
@@ -186,7 +192,6 @@
 
     <!-- Target Report Card -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/targetReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Target.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetComponent.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetRelation.js' %}"></script>
@@ -246,6 +251,9 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/LegendView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PieView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/HistogramView.js' %}"></script>
+
+    <!-- References -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/References/ReferencesView.js' %}"></script>
 
     <!-- Document Search by Terms -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/DocumentSearchByTermsApp.js' %}"></script>

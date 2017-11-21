@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
+      CardView.prototype.initialize.call(@, arguments)
       @config = arguments[0].config
       @model.on 'change', @render, @
       @resource_type = @config.resource_type
@@ -17,6 +18,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
+      @showSection()
       @showCardContent()
 
       if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE or \

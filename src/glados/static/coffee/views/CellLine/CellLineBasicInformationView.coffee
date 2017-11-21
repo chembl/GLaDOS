@@ -5,9 +5,11 @@
 CellLineBasicInformationView = CardView.extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Cell Line'
+    @showSection()
 
   render: ->
 
@@ -15,7 +17,7 @@ CellLineBasicInformationView = CardView.extend
     @fillTemplate('BCK-CBI-small')
 
     @showCardContent()
-    @initEmbedModal('basic_information')
+    @initEmbedModal('basic_information', @model.get('cell_chembl_id'))
     @activateModals()
 
   fillTemplate: (div_id) ->

@@ -2,6 +2,8 @@ glados.useNameSpace 'glados.views.Target',
   LigandEfficienciesView: CardView.extend
 
     initialize: ->
+      CardView.prototype.initialize.call(@, arguments)
+      @showSection()
       @showCardContent()
 
       @collection.on glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @renderPlot, @

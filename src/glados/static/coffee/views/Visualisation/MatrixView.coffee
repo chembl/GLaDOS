@@ -18,7 +18,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.on 'change:state', @handleMatrixState, @
     @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
-    $(@el).mouseleave($.proxy(@destroyAllTooltipsIfNecessary, @))
+    $matrixContainer = $(@el).find('.BCK-CompTargMatrixContainer')
+    $matrixContainer.mouseleave(@destroyAllTooltipsIfNecessary)
 
     @$vis_elem = $(@el).find('.BCK-CompTargMatrixContainer')
     #ResponsiviseViewExt
@@ -382,6 +383,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, YES)
+      .classed('cells-container-g', true)
 
     cellsContainerG.append('rect')
       .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
@@ -418,16 +420,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
 
-      cellsContainerG.selectAll('.grid-horizontal-rect')
-        .attr("x", 0)
-        .attr("y", (d) -> (thisView.getYCoord(d.currentPosition) * zoomScale) )
-        .attr("width", thisView.COLS_HEADER_WIDTH * zoomScale)
-        .attr("height", (d) -> (thisView.getYCoord.rangeBand() * zoomScale) )
+      cellsContainerG.selectAll('.grid-horizontal-line')
+        .attr("x1", -> (thisView.getXCoord(thisView.WINDOW.min_col_num) * zoomScale))
+        .attr("y1", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale))
+        .attr("y2", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale) )
+        .attr("x2", (thisView.COLS_HEADER_WIDTH * zoomScale))
 
       cellsContainerG.selectAll('.grid-vertical-line')
-        .attr("x1", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
-        .attr("y1", 0)
-        .attr("x2", (d) -> (thisView.getXCoord(d.currentPosition) * zoomScale))
+        .attr("x1", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
+        .attr("y1", -> (thisView.getXCoord(thisView.WINDOW.min_row_num) * zoomScale))
+        .attr("x2", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
         .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
 
       cellsContainerG.positionRows(zoomScale)
@@ -531,7 +533,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
-
     applyZoomAndTranslation(rowsHeaderG)
 
     # --------------------------------------
@@ -562,6 +563,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_Y_TRANS_ATT, 0)
       .attr(MOVE_X_ATT, YES)
       .attr(MOVE_Y_ATT, NO)
+      .classed('BCK-ColsHeaderG', true)
 
     colsHeaderG.append('rect')
       .attr('height', @COLS_HEADER_HEIGHT)
@@ -822,6 +824,20 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Zoom
     # --------------------------------------
+    handleZoomStart = ->
+
+      if not ZOOM_ACTIVATED
+        return
+
+      cellsContainerG.classed('grabbing', true)
+
+    handleZoomEnd = ->
+
+      if not ZOOM_ACTIVATED
+        return
+
+      cellsContainerG.classed('grabbing', false)
+
     handleZoom = (ingoreActivation=false, forceSectionsUpdate=false) ->
 
       if not ZOOM_ACTIVATED and not ingoreActivation
@@ -874,6 +890,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     zoom = d3.behavior.zoom()
       .scaleExtent([MIN_ZOOM, MAX_ZOOM])
       .on("zoom", handleZoom)
+      .on('zoomstart', handleZoomStart)
+      .on('zoomend', handleZoomEnd)
       .scale(@zoomScale)
       .translate([0, 0])
 
@@ -929,10 +947,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         ZOOM_ACTIVATED = false
         $targetBtnIcon.removeClass 'fa-hand-rock-o'
         $targetBtnIcon.addClass 'fa-hand-paper-o'
+        cellsContainerG.classed('grab-activated', false)
       else
         ZOOM_ACTIVATED = true
         $targetBtnIcon.removeClass 'fa-hand-paper-o'
         $targetBtnIcon.addClass 'fa-hand-rock-o'
+        cellsContainerG.classed('grab-activated', true)
+
     # --------------------------------------
     # colour property selector
     # --------------------------------------
@@ -1025,10 +1046,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       qtipConfig =
         content:
           text: '<div id="' + miniRepCardID + '"></div>'
-          button: 'close'
         show:
           solo: true
-        hide: 'click'
+        hide:
+          fixed: true,
+          delay: glados.Settings.TOOLTIPS.DEFAULT_MERCY_TIME
         style:
           classes:'matrix-qtip qtip-light qtip-shadow'
 
@@ -1051,6 +1073,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $clickedElem.attr('data-qtip-configured', 'yes')
 
       $newMiniReportCardContainer = $('#' + miniRepCardID)
+      $newMiniReportCardContainer.hover ->
+        $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
       if entityName == 'Target'
         TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
@@ -1062,7 +1086,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     mouseX = event.clientX
     mouseY = event.clientY
-    glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($(@el), mouseX, mouseY)
+    $elementLeft = $(event.currentTarget)
+    glados.Utils.Tooltips.destroyAllTooltipsWhenMouseIsOut($elementLeft, mouseX, mouseY)
+
+  destroyAllTooltipsWithMercy: ->
+
+    $container = $(@el)
+    glados.Utils.Tooltips.destroyAllTooltipsWhitMercy($container)
   #---------------------------------------------------------------------------------------------------------------------
   # cells tooltips
   #---------------------------------------------------------------------------------------------------------------------
@@ -1266,6 +1296,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
 
+    for colObj in colsInWindow
+      thisView.model.getColHeaderLink(colObj.id)
+
     colsHeaders = colsHeaderG.selectAll(".vis-column")
       .data(colsInWindow, (d) -> d.id)
 
@@ -1298,6 +1331,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', setUpColTooltip)
       .each((d)-> thisView.fillHeaderText(d3.select(@)))
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
+      .on('click', thisView.handleColHeaderClick)
 
     endTime = Date.now()
     time = endTime - starTime
@@ -1306,6 +1340,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
+
+    # generate footer links for window
+    for colObj in colsInWindow
+      thisView.model.getColFooterLink(colObj.id)
 
     colsFooters = colsFooterG.selectAll(".vis-column-footer")
       .data(colsInWindow, (d) -> d.id)
@@ -1329,6 +1367,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('transform', 'rotate(90)')
       .attr('id', (d) -> thisView.COL_FOOTER_TEXT_BASE_ID + d.id )
+      .on('click', thisView.handleColFooterClick)
 
   getRowsInWindow: ->
 
@@ -1352,6 +1391,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     rowsInWindow = @ROWS_IN_WINDOW
+    for rowObj in rowsInWindow
+      thisView.model.getRowHeaderLink(rowObj.id)
 
     rowHeaders = rowsHeaderG.selectAll('.vis-row')
       .data(rowsInWindow, (d) -> d.id)
@@ -1377,11 +1418,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     rowHeadersEnter.append('text')
       .classed('headers-text', true)
       .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
-      .attr('text-decoration', 'underline')
-      .attr('cursor', 'pointer')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .on('mouseover', setUpRowTooltip)
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
+      .on('click', thisView.handleRowHeaderClick)
 
     endTime = Date.now()
     time = endTime - starTime
@@ -1392,6 +1432,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     thisView = @
     rowsInWindow = @ROWS_IN_WINDOW
+    # generate footer links for window
+    for rowObj in rowsInWindow
+      thisView.model.getRowFooterLink(rowObj.id)
 
     rowFooters = rowsFooterG.selectAll('.vis-row-footer')
       .data(rowsInWindow, (d) -> d.id)
@@ -1411,6 +1454,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'end')
       .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
       .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
+      .on('click', thisView.handleRowFooterClick )
 
     endTime = Date.now()
     time = endTime - starTime
@@ -1456,22 +1500,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # -------------------------------------------------------------------------------
     # horizontal rectangles
     # -------------------------------------------------------------------------------
-    horizontalRectangles = cellsContainerG.selectAll('.grid-horizontal-rect')
-      .data(rowsInWindow)
+    if rowsInWindow.length <= 1
+      horizontalLinesData = []
+    else
+      horizontalLinesData = [1..rowsInWindow.length-1]
 
-    horizontalRectangles.exit().remove()
+    horizontalLines = cellsContainerG.selectAll('.grid-horizontal-line')
+      .data(horizontalLinesData)
 
-    horizontalRectanglesEnter = horizontalRectangles.enter()
-      .append("rect")
-      .classed('grid-horizontal-rect', true)
+    horizontalLines.exit().remove()
+    horizontalLinesEnter = horizontalLines.enter()
+      .append("line")
+      .classed('grid-horizontal-line', true)
       .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+      .style('stroke-width', @GRID_STROKE_WIDTH)
 
     # -------------------------------------------------------------------------------
     # Vertical Lines
     # -------------------------------------------------------------------------------
+    if colsInWindow.length <= 1
+      verticalLinesData = []
+    else
+      verticalLinesData = [1..colsInWindow.length-1]
+
     verticalLines = cellsContainerG.selectAll('.grid-vertical-line')
-      .data(colsInWindow)
+      .data(verticalLinesData)
 
     verticalLines.exit().remove()
 
@@ -1480,8 +1533,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('grid-vertical-line', true)
       .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .attr('stroke-width', @GRID_STROKE_WIDTH)
-
-
     # -------------------------------------------------------------------------------
     # Cells
     # -------------------------------------------------------------------------------
@@ -1521,3 +1572,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     rowFooterTextElem = d3.select('#' + @ROW_FOOTER_TEXT_BASE_ID + d.row_id)
     rowFooterTextElem.classed('emphasis', hasEmphasis)
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Headers/Footers link
+  #---------------------------------------------------------------------------------------------------------------------
+  handleRowHeaderClick: (d) -> window.open(d.header_url)
+  handleRowFooterClick: (d) -> window.open(d.footer_url)
+  handleColHeaderClick: (d) -> window.open(d.header_url)
+  handleColFooterClick: (d) -> window.open(d.footer_url)

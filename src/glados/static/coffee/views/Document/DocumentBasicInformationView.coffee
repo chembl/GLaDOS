@@ -5,9 +5,11 @@
 DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
 
   initialize: ->
+    CardView.prototype.initialize.call(@, arguments)
     @model.on 'change', @.render, @
     @model.on 'error', @.showCompoundErrorCard, @
     @resource_type = 'Document'
+    @showSection()
 
   render: ->
 
@@ -15,7 +17,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
     @fillTemplate('BCK-DBI-small')
     @showCardContent()
 
-    @initEmbedModal('basic_information')
+    @initEmbedModal('basic_information', @model.get('document_chembl_id'))
     @activateModals()
 
   fillTemplate: (div_id) ->

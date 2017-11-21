@@ -114,6 +114,8 @@ glados.useNameSpace 'glados',
         returnCol.show = colDescription.show
         returnCol.comparator = colDescription.comparator
 
+        #remove this if no need for old
+
         col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,
         customNullValueLabel=colDescription.custom_null_vale_label)
 
@@ -133,6 +135,8 @@ glados.useNameSpace 'glados',
           returnCol['value'] = colDescription['parse_function'](col_value)
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
+        returnCol['has_multiple_links'] = colDescription.multiple_links == true
+
         returnCol['is_secondary_link'] = colDescription.secondary_link == true
         returnCol['is_function_link'] = colDescription.function_link == true
         returnCol['execute_on_render'] = colDescription.execute_on_render == true
@@ -152,6 +156,9 @@ glados.useNameSpace 'glados',
             returnCol['link_url'] = model.get(colDescription['link_base'])
           if colDescription['link_function']?
             returnCol['link_url'] = colDescription['link_function'] col_value
+
+        else if returnCol['has_multiple_links']
+          returnCol['links_values'] = colDescription['multiple_links_function'] col_value
 
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
@@ -340,6 +347,11 @@ glados.useNameSpace 'glados',
         return Handlebars.compile($('#Handlebars-Common-ErrorInImage').html())
           msg: errorDetails
 
+      fillErrorForElement: ($element, paramsObj={}) ->
+
+        templateID = $element.attr('data-hb-error-template')
+        glados.Utils.fillContentForElement($element, paramsObj, templateID)
+
     Text:
       getTextForEllipsis: (originalText, originalWidth, containerLimit ) ->
 
@@ -358,10 +370,15 @@ glados.useNameSpace 'glados',
     Tooltips:
       # removes all qtips from and element, the elements that have a tooltip must have the property
       # data-qtip-configured set to 'yes'
-      destroyAllTooltips: ($elem) ->
+      destroyAllTooltips: ($elem, withMercy) ->
 
         $elemsWithToolTip = $($elem).find('[data-qtip-configured=yes],[data-qtip-configured=true]')
         $elemsWithToolTip.each (index, elem) ->
+          if $(elem).attr('data-qtip-have-mercy') == 'yes' and withMercy
+            # I have mercy only once
+            $(elem).attr('data-qtip-have-mercy', undefined)
+            return
+
           $(elem).qtip('destroy', true)
           $(elem).attr('data-qtip-configured', null )
 
@@ -388,7 +405,6 @@ glados.useNameSpace 'glados',
         else
           myVert = 'bottom'
           atVert = 'top'
-        console.log 'ELEM data', offset.top, $tooltipContent.height()
         if $tooltipContent and $tooltipContent.height() >= offset.top
           myVert = 'top'
           atVert = 'bottom'
@@ -398,6 +414,7 @@ glados.useNameSpace 'glados',
         }
 
       destroyAllTooltipsWhenMouseIsOut: ($container, mouseX, mouseY)->
+        # This function destroys all tooltips immediately if the mouse is outside the element that the mouse left
 
         scrollTop = $(window).scrollTop()
         scrollLeft = $(window).scrollLeft()
@@ -413,6 +430,14 @@ glados.useNameSpace 'glados',
 
         if xIsOut or yIsOut
           glados.Utils.Tooltips.destroyAllTooltips($($container))
+
+      destroyAllTooltipsWhitMercy: ($container)->
+        # With mercy means that it waits some time (defined in settings) before destroy the tooltips in $container
+        # If an element is saved it is not destroyed. An tooltip is saved when the mouse hovers over it.
+
+        setTimeout (-> glados.Utils.Tooltips.destroyAllTooltips($($container), withMercy=true)),
+          glados.Settings.TOOLTIPS.DEFAULT_MERCY_TIME
+
 
     Fetching:
       fetchModelOnce: (model) ->
@@ -432,3 +457,19 @@ glados.useNameSpace 'glados',
           return URLProcessor.getRequestedChemblIDWhenEmbedded()
         else
           return URLProcessor.getRequestedChemblID()
+
+    Compounds:
+      containsMetals: (molformula) ->
+
+        nonMetals = ['H', 'C', 'N', 'O', 'P', 'S', 'F', 'Cl', 'Br', 'I']
+
+        testMolformula = molformula
+        testMolformula = testMolformula.replace(/[0-9]+/g, '')
+        testMolformula = testMolformula.replace('.', '')
+
+        for element in nonMetals
+          testMolformula = testMolformula.replace(element, '')
+
+        testMolformula = testMolformula.replace(element, '')
+
+        return testMolformula.length > 0

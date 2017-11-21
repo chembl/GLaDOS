@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
       @model.on 'change', @render, @
+      @model.on 'error', @renderError, @
 
     render: ->
 
@@ -18,11 +19,11 @@ glados.useNameSpace 'glados.views.MainPage',
       glados.Utils.fillContentForElement $contentElement,
         chembl_db_version: chemblDBVersion.replace('_', ' ')
         chembl_release_date: @model.get('chembl_release_date')
-        num_targets: $.number(@model.get('num_targets'))
-        num_compound_records: $.number(@model.get('num_compound_records'))
-        num_compounds: $.number(@model.get('num_compounds'))
-        num_activities: $.number(@model.get('num_activities'))
-        num_publications: $.number(@model.get('num_publications'))
+        num_targets: $.number(@model.get('targets'))
+        num_compound_records: $.number(@model.get('compound_records'))
+        num_compounds: $.number(@model.get('disinct_compounds'))
+        num_activities: $.number(@model.get('activities'))
+        num_publications: $.number(@model.get('publications'))
         release_notes_link: releaseNotesLink
 
       @showContent()
@@ -30,5 +31,10 @@ glados.useNameSpace 'glados.views.MainPage',
     showContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.BCK-content').show()
+
+    renderError: ->
+      $contentElement = $(@el).find('.BCK-content')
+      glados.Utils.ErrorMessages.fillErrorForElement($contentElement)
+      @showContent()
 
 

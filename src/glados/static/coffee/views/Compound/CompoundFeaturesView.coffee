@@ -4,6 +4,7 @@ CompoundFeaturesView = CardView.extend
 
   initialize: ->
 
+    CardView.prototype.initialize.call(@, arguments)
     @tableCellMode = arguments[0].table_cell_mode
 
     $gridContainer = $(@el).find('.BCK-FeaturesGrid')
@@ -16,6 +17,12 @@ CompoundFeaturesView = CardView.extend
 
   render: ->
 
+    metadata = @model.get('_metadata')
+    isDrug = glados.Utils.getNestedValue(metadata, 'drug.is_drug')
+    if not isDrug
+      return
+
+    @showSection()
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
     @renderProperty('Bck-FirstInClass', 'first_in_class')
@@ -95,7 +102,7 @@ CompoundFeaturesView = CardView.extend
       '0': ['', 'b', 'Black Box: No', 'bottom', 'icon-chembl']
       '1': ['active', 'b', 'Black Box: Yes', 'bottom', 'icon-chembl']
     'availability_type':
-      '-2': ['', '1', 'Availability: Withdrawn', 'bottom', 'icon-chembl']
+      '-2': ['active', 'w', 'Availability: Withdrawn', 'bottom', 'icon-chembl-2']
       '-1': ['', '1', 'Availability: Undefined', 'bottom', 'icon-chembl']
       '0': ['active', '2', 'Availability: Discontinued', 'bottom', 'icon-chembl']
       '1': ['active', '1', 'Availability: Prescription Only', 'bottom', 'icon-chembl']
