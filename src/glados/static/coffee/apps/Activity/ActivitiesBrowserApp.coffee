@@ -26,14 +26,36 @@ glados.useNameSpace 'glados.apps.Activity',
 
     @initMatrixFSView = (sourceEntity) ->
 
+      filter = URLProcessor.getFilter()
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
-      $('.BCK-main-container').children().hide()
-      $('.BCK-main-container').find('.BCK-matrix-full-screen').show()
-#      alert('FS: init matrix from ' + sourceEntity)
+      $mainContainer.children().hide()
+      $matrixFSContainer = $mainContainer.find('.BCK-matrix-full-screen')
+      $matrixFSContainer.show()
 
+      entityName = 'Compounds'
+      filterProperty = 'molecule_chembl_id'
+      aggList = ['molecule_chembl_id', 'target_chembl_id']
 
+      ctm = new glados.models.Activity.ActivityAggregationMatrix
+        filter_property: filterProperty
+        aggregations: aggList
+
+      config = MatrixView.getDefaultConfig entityName
+
+      $matrixContainer = $matrixFSContainer.find('.BCK-CompTargetMatrix')
+      console.log('FS: init matrix from ' + sourceEntity)
+      console.log 'config: ', config
+      console.log 'filter: ', filter
+      new MatrixView
+        model: ctm
+        el: $matrixContainer
+        config: config
+
+      allItemsIDs = ['CHEMBL59', 'CHEMBL1557', 'CHEMBL457419']
+      ctm.set('chembl_ids', allItemsIDs)
+      ctm.fetch()
 
     @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
 

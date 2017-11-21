@@ -95,7 +95,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       if numColumns > 0
         @paintControls()
         @paintMatrix()
-        @parentView.fillLinkToAllActivities()
+        @parentView.fillLinkToAllActivities() unless not @parentView?
         $messagesElement.html ''
       else
         @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
@@ -128,7 +128,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   clearVisualisation: ->
 
-    @parentView.hideLinkToAllActivities()
+    @parentView.hideLinkToAllActivities() unless not @parentView?
     @destroyAllTooltips()
     @clearControls()
     @clearMatrix()
