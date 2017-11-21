@@ -14,6 +14,22 @@ msgid "glados_es_gs__activity__activity_comment__label__mini"
 msgstr "Activity Comment"
 
 
+msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label"
+msgstr "Activity Generated Short Data Validity Comment"
+
+
+msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label__mini"
+msgstr "Activity Generated Short Data Validity Comment"
+
+
+msgid "glados_es_gs__activity__activity_generated__label"
+msgstr "Activity Generated"
+
+
+msgid "glados_es_gs__activity__activity_generated__label__mini"
+msgstr "Activity Generated"
+
+
 msgid "glados_es_gs__activity__activity_id__label"
 msgstr "Activity ID"
 
@@ -76,6 +92,14 @@ msgstr "Assay Data Tissue ChEMBL ID"
 
 msgid "glados_es_gs__activity__assay_data___tissue_chembl_id__label__mini"
 msgstr "Assay Data Tissue ChEMBL ID"
+
+
+msgid "glados_es_gs__activity__assay_data___type_label__label"
+msgstr "Assay Data Type Label"
+
+
+msgid "glados_es_gs__activity__assay_data___type_label__label__mini"
+msgstr "Assay Data Type Label"
 
 
 msgid "glados_es_gs__activity__assay_data__label"
@@ -286,6 +310,14 @@ msgid "glados_es_gs__activity__parent_molecule_data___alogp__label__mini"
 msgstr "Parent Molecule Data Alogp"
 
 
+msgid "glados_es_gs__activity__parent_molecule_data___compound_key__label"
+msgstr "Parent Molecule Data Compound Key"
+
+
+msgid "glados_es_gs__activity__parent_molecule_data___compound_key__label__mini"
+msgstr "Parent Molecule Data Compound Key"
+
+
 msgid "glados_es_gs__activity__parent_molecule_data___compound_keys__label"
 msgstr "Parent Molecule Data Compound Keys"
 
@@ -340,6 +372,70 @@ msgstr "Potential Duplicate"
 
 msgid "glados_es_gs__activity__potential_duplicate__label__mini"
 msgstr "Potential Duplicate"
+
+
+msgid "glados_es_gs__activity__protein_classification___l1__label"
+msgstr "Protein Classification L1"
+
+
+msgid "glados_es_gs__activity__protein_classification___l1__label__mini"
+msgstr "Protein Classification L1"
+
+
+msgid "glados_es_gs__activity__protein_classification___l2__label"
+msgstr "Protein Classification L2"
+
+
+msgid "glados_es_gs__activity__protein_classification___l2__label__mini"
+msgstr "Protein Classification L2"
+
+
+msgid "glados_es_gs__activity__protein_classification___l3__label"
+msgstr "Protein Classification L3"
+
+
+msgid "glados_es_gs__activity__protein_classification___l3__label__mini"
+msgstr "Protein Classification L3"
+
+
+msgid "glados_es_gs__activity__protein_classification___l4__label"
+msgstr "Protein Classification L4"
+
+
+msgid "glados_es_gs__activity__protein_classification___l4__label__mini"
+msgstr "Protein Classification L4"
+
+
+msgid "glados_es_gs__activity__protein_classification___l5__label"
+msgstr "Protein Classification L5"
+
+
+msgid "glados_es_gs__activity__protein_classification___l5__label__mini"
+msgstr "Protein Classification L5"
+
+
+msgid "glados_es_gs__activity__protein_classification___l6__label"
+msgstr "Protein Classification L6"
+
+
+msgid "glados_es_gs__activity__protein_classification___l6__label__mini"
+msgstr "Protein Classification L6"
+
+
+msgid "glados_es_gs__activity__protein_classification___protein_class_id__label"
+msgstr "Protein Classification Protein Class ID"
+
+
+msgid "glados_es_gs__activity__protein_classification___protein_class_id__label__mini"
+msgstr "Protein Classification Protein Class ID"
+
+
+msgid "glados_es_gs__activity__protein_classification__label"
+msgstr "Protein Classification"
+
+
+msgid "glados_es_gs__activity__protein_classification__label__mini"
+msgstr "Protein Classification"
 
 
 msgid "glados_es_gs__activity__published_relation__label"
@@ -478,6 +574,22 @@ msgid "glados_es_gs__activity__target_chembl_id__label__mini"
 msgstr "Target ChEMBL ID"
 
 
+msgid "glados_es_gs__activity__target_data___target_type__label"
+msgstr "Target Data Target Type"
+
+
+msgid "glados_es_gs__activity__target_data___target_type__label__mini"
+msgstr "Target Data Target Type"
+
+
+msgid "glados_es_gs__activity__target_data__label"
+msgstr "Target Data"
+
+
+msgid "glados_es_gs__activity__target_data__label__mini"
+msgstr "Target Data"
+
+
 msgid "glados_es_gs__activity__target_organism__label"
 msgstr "Target Organism"
 
@@ -540,6 +652,38 @@ msgstr "Assay ChEMBL ID"
 
 msgid "glados_es_gs__assay__assay_chembl_id__label__mini"
 msgstr "Assay ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__assay_generated___confidence_label__label"
+msgstr "Assay Generated Confidence Label"
+
+
+msgid "glados_es_gs__assay__assay_generated___confidence_label__label__mini"
+msgstr "Assay Generated Confidence Label"
+
+
+msgid "glados_es_gs__assay__assay_generated___relationship_label__label"
+msgstr "Assay Generated Relationship Label"
+
+
+msgid "glados_es_gs__assay__assay_generated___relationship_label__label__mini"
+msgstr "Assay Generated Relationship Label"
+
+
+msgid "glados_es_gs__assay__assay_generated___type_label__label"
+msgstr "Assay Generated Type Label"
+
+
+msgid "glados_es_gs__assay__assay_generated___type_label__label__mini"
+msgstr "Assay Generated Type Label"
+
+
+msgid "glados_es_gs__assay__assay_generated__label"
+msgstr "Assay Generated"
+
+
+msgid "glados_es_gs__assay__assay_generated__label__mini"
+msgstr "Assay Generated"
 
 
 msgid "glados_es_gs__assay__assay_organism__label"
@@ -2574,12 +2718,132 @@ msgid "glados_es_gs__target__organism__label__mini"
 msgstr "Organism"
 
 
+msgid "glados_es_gs__target__organism_taxonomy___l1__label"
+msgstr "Organism Taxonomy L1"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l1__label__mini"
+msgstr "Organism Taxonomy L1"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l2__label"
+msgstr "Organism Taxonomy L2"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l2__label__mini"
+msgstr "Organism Taxonomy L2"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l3__label"
+msgstr "Organism Taxonomy L3"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l3__label__mini"
+msgstr "Organism Taxonomy L3"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l4_synonyms__label"
+msgstr "Organism Taxonomy L4 Synonyms"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___l4_synonyms__label__mini"
+msgstr "Organism Taxonomy L4 Synonyms"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___oc_id__label"
+msgstr "Organism Taxonomy Oc ID"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___oc_id__label__mini"
+msgstr "Organism Taxonomy Oc ID"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___tax_id__label"
+msgstr "Organism Taxonomy Tax ID"
+
+
+msgid "glados_es_gs__target__organism_taxonomy___tax_id__label__mini"
+msgstr "Organism Taxonomy Tax ID"
+
+
+msgid "glados_es_gs__target__organism_taxonomy__label"
+msgstr "Organism Taxonomy"
+
+
+msgid "glados_es_gs__target__organism_taxonomy__label__mini"
+msgstr "Organism Taxonomy"
+
+
 msgid "glados_es_gs__target__pref_name__label"
 msgstr "Pref Name"
 
 
 msgid "glados_es_gs__target__pref_name__label__mini"
 msgstr "Pref Name"
+
+
+msgid "glados_es_gs__target__protein_classification___l1__label"
+msgstr "Protein Classification L1"
+
+
+msgid "glados_es_gs__target__protein_classification___l1__label__mini"
+msgstr "Protein Classification L1"
+
+
+msgid "glados_es_gs__target__protein_classification___l2__label"
+msgstr "Protein Classification L2"
+
+
+msgid "glados_es_gs__target__protein_classification___l2__label__mini"
+msgstr "Protein Classification L2"
+
+
+msgid "glados_es_gs__target__protein_classification___l3__label"
+msgstr "Protein Classification L3"
+
+
+msgid "glados_es_gs__target__protein_classification___l3__label__mini"
+msgstr "Protein Classification L3"
+
+
+msgid "glados_es_gs__target__protein_classification___l4__label"
+msgstr "Protein Classification L4"
+
+
+msgid "glados_es_gs__target__protein_classification___l4__label__mini"
+msgstr "Protein Classification L4"
+
+
+msgid "glados_es_gs__target__protein_classification___l5__label"
+msgstr "Protein Classification L5"
+
+
+msgid "glados_es_gs__target__protein_classification___l5__label__mini"
+msgstr "Protein Classification L5"
+
+
+msgid "glados_es_gs__target__protein_classification___l6__label"
+msgstr "Protein Classification L6"
+
+
+msgid "glados_es_gs__target__protein_classification___l6__label__mini"
+msgstr "Protein Classification L6"
+
+
+msgid "glados_es_gs__target__protein_classification___protein_class_id__label"
+msgstr "Protein Classification Protein Class ID"
+
+
+msgid "glados_es_gs__target__protein_classification___protein_class_id__label__mini"
+msgstr "Protein Classification Protein Class ID"
+
+
+msgid "glados_es_gs__target__protein_classification__label"
+msgstr "Protein Classification"
+
+
+msgid "glados_es_gs__target__protein_classification__label__mini"
+msgstr "Protein Classification"
 
 
 msgid "glados_es_gs__target__protein_classifications___l1__label"
@@ -2836,6 +3100,102 @@ msgstr "Target ChEMBL ID"
 
 msgid "glados_es_gs__target__target_chembl_id__label__mini"
 msgstr "Target ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_component___accession__label"
+msgstr "Target Component Accession"
+
+
+msgid "glados_es_gs__target__target_component___accession__label__mini"
+msgstr "Target Component Accession"
+
+
+msgid "glados_es_gs__target__target_component___component_id__label"
+msgstr "Target Component Component ID"
+
+
+msgid "glados_es_gs__target__target_component___component_id__label__mini"
+msgstr "Target Component Component ID"
+
+
+msgid "glados_es_gs__target__target_component___component_type__label"
+msgstr "Target Component Component Type"
+
+
+msgid "glados_es_gs__target__target_component___component_type__label__mini"
+msgstr "Target Component Component Type"
+
+
+msgid "glados_es_gs__target__target_component___description__label"
+msgstr "Target Component Description"
+
+
+msgid "glados_es_gs__target__target_component___description__label__mini"
+msgstr "Target Component Description"
+
+
+msgid "glados_es_gs__target__target_component___go_slims__label"
+msgstr "Target Component Go Slims"
+
+
+msgid "glados_es_gs__target__target_component___go_slims__label__mini"
+msgstr "Target Component Go Slims"
+
+
+msgid "glados_es_gs__target__target_component___organism__label"
+msgstr "Target Component Organism"
+
+
+msgid "glados_es_gs__target__target_component___organism__label__mini"
+msgstr "Target Component Organism"
+
+
+msgid "glados_es_gs__target__target_component___protein_classifications__label"
+msgstr "Target Component Protein Classifications"
+
+
+msgid "glados_es_gs__target__target_component___protein_classifications__label__mini"
+msgstr "Target Component Protein Classifications"
+
+
+msgid "glados_es_gs__target__target_component___sequence__label"
+msgstr "Target Component Sequence"
+
+
+msgid "glados_es_gs__target__target_component___sequence__label__mini"
+msgstr "Target Component Sequence"
+
+
+msgid "glados_es_gs__target__target_component___target_component_synonyms__label"
+msgstr "Target Component Target Component Synonyms"
+
+
+msgid "glados_es_gs__target__target_component___target_component_synonyms__label__mini"
+msgstr "Target Component Target Component Synonyms"
+
+
+msgid "glados_es_gs__target__target_component___targets__label"
+msgstr "Target Component Targets"
+
+
+msgid "glados_es_gs__target__target_component___targets__label__mini"
+msgstr "Target Component Targets"
+
+
+msgid "glados_es_gs__target__target_component___tax_id__label"
+msgstr "Target Component Tax ID"
+
+
+msgid "glados_es_gs__target__target_component___tax_id__label__mini"
+msgstr "Target Component Tax ID"
+
+
+msgid "glados_es_gs__target__target_component__label"
+msgstr "Target Component"
+
+
+msgid "glados_es_gs__target__target_component__label__mini"
+msgstr "Target Component"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label"
