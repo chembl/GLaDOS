@@ -95,7 +95,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all bioactivities for cell line ' + chemblID + ' used in this visualisation.'
-        url: Activity.getActivitiesListURL()
+        url: Activity.getActivitiesListURL('_metadata.assay_data.cell_chembl_id:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: bioactivities
@@ -186,10 +186,11 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
   @getAssociatedBioactivitiesAgg = (chemblID) ->
 
-    #TODO: check how to get in index
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      query_string_template: '_metadata.assay_data.cell_chembl_id:{{cell_chembl_id}}'
+      template_data:
+        cell_chembl_id: 'cell_chembl_id'
 
     aggsConfig =
       aggs:
@@ -199,9 +200,11 @@ class CellLineReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'standard_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.assay_data.cell_chembl_id:{{cell_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              cell_chembl_id: 'cell_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
