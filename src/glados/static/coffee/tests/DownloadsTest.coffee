@@ -157,5 +157,4 @@ describe "Downloads", ->
         "src_id","uo_units","potential_duplicate"]
 
       comparatorsGot = (col.comparator for col in Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
-      console.log 'comparatorsGot: ', JSON.stringify(comparatorsGot)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
