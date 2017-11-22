@@ -320,9 +320,9 @@ class TargetReportCardApp extends glados.ReportCardApp
         x_axis_agg:
           field: 'molecule_properties.full_mwt'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
+          min_columns: minCols
+          max_columns: maxCols
+          num_columns: defaultCols
           bucket_links:
             bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
@@ -386,12 +386,12 @@ class TargetReportCardApp extends glados.ReportCardApp
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'assay_type'
+          field: '_metadata.assay_generated.type_label'
           size: 20
           bucket_links:
 
             bucket_filter_template: 'target_chembl_id:{{target_chembl_id}} ' +
-                                    'AND assay_type:("{{bucket_key}}"' +
+                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               target_chembl_id: 'target_chembl_id'

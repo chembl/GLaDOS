@@ -22,7 +22,7 @@ Assay.reportCardPath = 'assay_report_card/'
 Assay.getAssaysListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays/filter/' + filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays/filter/' + encodeURIComponent(filter)
   else
     return glados.Settings.GLADOS_BASE_PATH_REL + 'assays'
 

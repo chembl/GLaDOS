@@ -4,61 +4,82 @@
 
 {% block table %}
 
-<table class="compact-table striped hide-on-small-only">
+<div id="BCK-TBI-large" data-hb-template="Handlebars-Tissue-BasicInformation-large">
+</div>
 
-  <tr>
-    <td class="fixed-width-column-11"><b>ChEMMBL ID:</b></td>
-    <td>CHEMBL3559721</td>
-  </tr>
+{% verbatim %}
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Name:</b></td>
-    <td>blood plasma</td>
-  </tr>
+<script id="Handlebars-Tissue-BasicInformation-large" type="text/x-handlebars-template">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>Uberon:</b></td>
-    <td>UBERON:0001969</td>
-  </tr>
+  <table class="compact-table striped hide-on-small-only">
 
-  <tr>
-    <td class="fixed-width-column-11"><b>EFO:</b></td>
-    <td></td>
-  </tr>
+    <tr>
+      <td class="fixed-width-column-11"><b>ChEMBL ID:</b></td>
+      <td>{{chembl_id}}</td>
+    </tr>
 
-</table>
+    <tr>
+      <td class="fixed-width-column-11"><b>Name:</b></td>
+      <td>{{name}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>Uberon:</b></td>
+      <td>{{uberon_id}}</td>
+    </tr>
+
+    <tr>
+      <td class="fixed-width-column-11"><b>EFO:</b></td>
+      <td>{{efo_id}}</td>
+    </tr>
+
+  </table>
+
+</script>
+{% endverbatim %}
 
 {% endblock %}
 
 {% block collection %}
 
-<ul class="collection hide-on-med-and-up">
+<div id="BCK-TBI-small" data-hb-template="Handlebars-Tissue-BasicInformation-small">
+</div>
 
-  <li class="collection-item">
+{% verbatim %}
 
-    <b>ChEMMBL ID:</b> CHEMBL3559721
+<script id="Handlebars-Tissue-BasicInformation-small" type="text/x-handlebars-template">
 
-  </li>
+  <ul class="collection hide-on-med-and-up">
 
-  <li class="collection-item">
+    <li class="collection-item">
 
-    <b>Name:</b> blood plasma
+      <b>ChEMBL ID:</b> {{chembl_id}}
 
-  </li>
+    </li>
 
-  <li class="collection-item">
+    <li class="collection-item">
 
-    <b>Uberon:</b> UBERON:0001969
+      <b>Name:</b> {{name}}
 
-  </li>
+    </li>
 
-  <li class="collection-item">
+    <li class="collection-item">
 
-    <b>EFO:</b>
+      <b>Uberon:</b> {{uberon_id}}
 
-  </li>
+    </li>
 
-</ul>
+    <li class="collection-item">
+
+      <b>EFO:</b> {{efo_id}}
+
+    </li>
+
+  </ul>
+
+</script>
+
+{% endverbatim %}
 
 {% endblock %}
 

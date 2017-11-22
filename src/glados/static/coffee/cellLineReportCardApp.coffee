@@ -95,7 +95,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all bioactivities for cell line ' + chemblID + ' used in this visualisation.'
-        url: Activity.getActivitiesListURL()
+        url: Activity.getActivitiesListURL('_metadata.assay_data.cell_chembl_id:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: bioactivities
@@ -126,7 +126,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Cell Line ' + chemblID
-      title_link_url: Compound.getCompoundsListURL()
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_cell_lines.chembl_ids.\\*:' + chemblID)
       range_categories: true
 
     config =
@@ -162,12 +162,12 @@ class CellLineReportCardApp extends glados.ReportCardApp
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'assay_type'
+          field: '_metadata.assay_generated.type_label'
           size: 20
           bucket_links:
 
             bucket_filter_template: 'cell_chembl_id:{{cell_chembl_id}} ' +
-                                    'AND assay_type:("{{bucket_key}}"' +
+                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               cell_chembl_id: 'cell_chembl_id'
@@ -186,10 +186,11 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
   @getAssociatedBioactivitiesAgg = (chemblID) ->
 
-    #TODO: check how to get in index
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      query_string_template: '_metadata.assay_data.cell_chembl_id:{{cell_chembl_id}}'
+      template_data:
+        cell_chembl_id: 'cell_chembl_id'
 
     aggsConfig =
       aggs:
@@ -199,9 +200,11 @@ class CellLineReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'standard_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.assay_data.cell_chembl_id:{{cell_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              cell_chembl_id: 'cell_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -218,8 +221,9 @@ class CellLineReportCardApp extends glados.ReportCardApp
   @getAssociatedCompoundsAgg = (chemblID) ->
 
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'cell_chembl_id'
+      fields: ['_metadata.related_cell_lines.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -230,8 +234,10 @@ class CellLineReportCardApp extends glados.ReportCardApp
           max_columns: 20
           num_columns: 10
           bucket_links:
-            bucket_filter_template: 'molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            bucket_filter_template: '_metadata.related_cell_lines.chembl_ids.\\*:{{cell_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
+              cell_chembl_id: 'cell_chembl_id'
               min_val: 'BUCKET.from'
               max_val: 'BUCKETS.to'
             link_generator: Compound.getCompoundsListURL
@@ -239,7 +245,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
-      target_chembl_id: chemblID
+      cell_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return associatedCompounds
