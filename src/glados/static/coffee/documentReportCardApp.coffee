@@ -272,7 +272,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @getRelatedAssaysAgg = (chemblID) ->
 
-    #TODO: update when label for type is in index
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: 'document_chembl_id:{{document_chembl_id}}'
