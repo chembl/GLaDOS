@@ -320,9 +320,9 @@ class TargetReportCardApp extends glados.ReportCardApp
         x_axis_agg:
           field: 'molecule_properties.full_mwt'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
+          min_columns: minCols
+          max_columns: maxCols
+          num_columns: defaultCols
           bucket_links:
             bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
