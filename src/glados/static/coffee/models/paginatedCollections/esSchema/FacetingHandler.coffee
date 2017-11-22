@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @CATEGORY_FACETING: 'CATEGORY'
     @INTERVAL_FACETING: 'INTERVAL'
 
-    @NUM_INTERVALS: 12
+    @NUM_INTERVALS: 8
 
     @EMPTY_CATEGORY: '- N/A -'
     @OTHERS_CATEGORY: 'Other Categories'
@@ -130,8 +130,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           }
           es_query_aggs[@es_property_name+'_PERCENTILES'] = {
             percentiles:
-              field: @es_property_name,
-              percents: [10,20,30,40,50,60,70,80,90],
+              field: @es_property_name
+              percents: [1,10,20,30,40,50,60,70,80,90,99]
               keyed: true
           }
         else
@@ -155,22 +155,26 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       intervalsSize = (stats.max/FacetingHandler.NUM_INTERVALS)-(stats.min/FacetingHandler.NUM_INTERVALS)
       # WARNING: Do the division first to prevent number overflow
 
-      lowP = percentiles['20.0']
-      hiP = percentiles['80.0']
+      lowP = percentiles['1.0']
+      hiP = percentiles['99.0']
 
-      isSmallFloat = hiP - lowP <= 10 and not @property_type.integer
-      isNormalDistributed = hiP > stats.avg and lowP < stats.avg
+      isSmallFloat = hiP - lowP <= 7 and not @property_type.integer
+      isNormalDistributed = hiP > stats.avg + stats.std_deviation and lowP < stats.avg - stats.std_deviation
 
-      roundedMin = stats.min
-      roundedMax = stats.max
+      minV = stats.min
+      maxV = stats.max
 
-      @intervalsLimits = [roundedMin]
+      @intervalsLimits = [minV]
 
+      console.warn('ANOTHER ONE!', @property_type.label_id)
+      console.warn(@property_type, stats, percentiles)
       if stats.max - stats.min <= FacetingHandler.NUM_INTERVALS and @property_type.integer
-        for numJ in [roundedMin..roundedMax]
+        for numJ in [(minV+1)..maxV]
           @intervalsLimits.push(numJ)
       else if not isNormalDistributed
         for keyI in _.keys(percentiles)
+          if keyI in ['1.0','99.0']
+            continue
           nextLimit = percentiles[keyI]
           notIncludeDecimals = @property_type.integer or Math.abs(nextLimit) > 10
           nextLimit *= 100.00 unless notIncludeDecimals
@@ -180,38 +184,39 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if nextLimit > _.last(@intervalsLimits)
             @intervalsLimits.push(nextLimit)
         console.warn('PERCENTIL!')
-        console.warn(@property_type, stats, percentiles)
         console.warn(@intervalsLimits)
       else
-        lowerBound = stats.avg - 2 * stats.std_deviation
-        upperBound = stats.avg + 2 * stats.std_deviation
-        if roundedMin > lowerBound
-          lowerBound = roundedMin
-        if roundedMax < upperBound
-          upperBound = roundedMax
-        lowerBound = glados.Utils.roundNumber(lowerBound, isSmallFloat, true)
-        upperBound = glados.Utils.roundNumber(upperBound, isSmallFloat)
-        console.warn('NORMAL!')
-        console.warn(@property_type, stats, percentiles)
-        console.warn(lowerBound, upperBound)
-        console.warn(@intervalsLimits)
+        lowP = percentiles['1.0']
+        hiP = percentiles['99.0']
+        lowerBound = Math.round(Math.max(lowP, minV))
+        upperBound = Math.round(Math.min(hiP, maxV))
+
         intervalsSize = (upperBound/(FacetingHandler.NUM_INTERVALS-2))-(lowerBound/(FacetingHandler.NUM_INTERVALS-2))
+        console.warn('NORMAL!')
+        console.warn(@intervalsLimits)
+        console.warn(lowerBound, upperBound, intervalsSize)
+        notIncludeDecimals = @property_type.integer or Math.abs(intervalsSize) > 3
         intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat, true)
-        if lowerBound < 10
-          lowerBound = 0
         if intervalsSize == 0
           intervalsSize = 1
+        lowerBound *= 100.00 unless notIncludeDecimals
+        upperBound *= 100.00 unless notIncludeDecimals
+        lowerBound = Math.floor(lowerBound/intervalsSize) * intervalsSize
+        upperBound = Math.floor(upperBound/intervalsSize) * intervalsSize
+        lowerBound /= 100.00 unless notIncludeDecimals
+        upperBound /= 100.00 unless notIncludeDecimals
+
         curNum = lowerBound
-        while curNum < upperBound and curNum < roundedMax
+        while curNum <= upperBound and curNum < maxV
           if curNum > _.last(@intervalsLimits)
             @intervalsLimits.push curNum
           curNum += intervalsSize
-        if upperBound < roundedMax
-          @intervalsLimits.push roundedMax
-      if roundedMax <= _.last(@intervalsLimits)
-        @intervalsLimits[@intervalsLimits.length - 1] = roundedMax
+        if upperBound < maxV
+          @intervalsLimits.push maxV
+      if maxV <= _.last(@intervalsLimits)
+        @intervalsLimits[@intervalsLimits.length - 1] = maxV
       else
-        @intervalsLimits.push(roundedMax)
+        @intervalsLimits.push(maxV)
 
 
     parseESResults: (es_aggregations_data, first_call)->
