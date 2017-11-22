@@ -88,7 +88,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Tissue ' + chemblID
-      title_link_url: Compound.getCompoundsListURL()
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_tissues.chembl_ids.\\*:' + chemblID)
       range_categories: true
 
     config =
@@ -182,10 +182,10 @@ class TissueReportCardApp extends glados.ReportCardApp
 
   @getAssociatedCompoundsAgg = (chemblID) ->
 
-    #TODO: update when index is ready
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'tissue_chembl_id'
+      fields: ['_metadata.related_tissues.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -196,8 +196,10 @@ class TissueReportCardApp extends glados.ReportCardApp
           max_columns: 20
           num_columns: 10
           bucket_links:
-            bucket_filter_template: 'molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            bucket_filter_template: '_metadata.related_tissues.chembl_ids.\\*:{{tissue_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
+              tissue_chembl_id: 'tissue_chembl_id'
               min_val: 'BUCKET.from'
               max_val: 'BUCKETS.to'
             link_generator: Compound.getCompoundsListURL
@@ -205,7 +207,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
-      target_chembl_id: chemblID
+      tissue_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return associatedCompounds
