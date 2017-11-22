@@ -205,7 +205,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
-        url: Assay.getAssaysListURL()
+        url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: relatedAssays
@@ -461,22 +461,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedAssaysAgg = (chemblID) ->
 
-    #TODO: needs to inlude related compounds in assays index
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'molecule_chembl_id'
+      fields: ['_metadata.related_compounds.chembl_ids.*']
 
     aggsConfig =
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'assay_type'
+          field: '_metadata.assay_generated.type_label'
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'assay_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
+                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              molecule_chembl_id: 'molecule_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
