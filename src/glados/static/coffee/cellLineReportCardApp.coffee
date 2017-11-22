@@ -162,12 +162,12 @@ class CellLineReportCardApp extends glados.ReportCardApp
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'assay_type'
+          field: '_metadata.assay_generated.type_label'
           size: 20
           bucket_links:
 
             bucket_filter_template: 'cell_chembl_id:{{cell_chembl_id}} ' +
-                                    'AND assay_type:("{{bucket_key}}"' +
+                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               cell_chembl_id: 'cell_chembl_id'
