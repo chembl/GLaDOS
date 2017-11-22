@@ -134,7 +134,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL()
+        url: Target.getTargetsListURL('_metadata.related_assays.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: relatedTargets
@@ -233,10 +233,11 @@ class AssayReportCardApp extends glados.ReportCardApp
 
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: update when index is ready. https://github.com/chembl/GLaDOS-es/issues/6
+    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'assay_chembl_id'
+      fields: ['_metadata.related_assays.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -246,9 +247,11 @@ class AssayReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'target_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+                                    'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              assay_chembl_id: 'assay_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -257,7 +260,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      assay_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return targetTypes
