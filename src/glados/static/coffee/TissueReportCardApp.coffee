@@ -57,7 +57,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all bioactivities for tissue ' + chemblID + ' used in this visualisation.'
-        url: Activity.getActivitiesListURL()
+        url: Activity.getActivitiesListURL('_metadata.assay_data.tissue_chembl_id:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: bioactivities
@@ -148,10 +148,11 @@ class TissueReportCardApp extends glados.ReportCardApp
 
   @getAssociatedBioactivitiesAgg = (chemblID) ->
 
-    #TODO: check how to get in index
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      query_string_template: '_metadata.assay_data.tissue_chembl_id:{{tissue_chembl_id}}'
+      template_data:
+        tissue_chembl_id: 'tissue_chembl_id'
 
     aggsConfig =
       aggs:
@@ -161,9 +162,11 @@ class TissueReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'standard_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.assay_data.tissue_chembl_id:{{tissue_chembl_id}} ' +
+                                    'AND standard_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              tissue_chembl_id: 'tissue_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -172,7 +175,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     bioactivities = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
       query_config: queryConfig
-      cell_chembl_id: chemblID
+      tissue_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return bioactivities
