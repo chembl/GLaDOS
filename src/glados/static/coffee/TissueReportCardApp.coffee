@@ -6,12 +6,48 @@ class TissueReportCardApp extends glados.ReportCardApp
   @init = ->
 
     super
+    tissue = TissueReportCardApp.getCurrentTissue()
+    TissueReportCardApp.initBasicInformation()
     TissueReportCardApp.initAssaySummary()
     TissueReportCardApp.initActivitySummary()
     TissueReportCardApp.initAssociatedCompounds()
+    tissue.fetch()
 
     $('.scrollspy').scrollSpy()
     ScrollSpyHelper.initializeScrollSpyPinner()
+
+  # -------------------------------------------------------------
+  # Tissue
+  # -------------------------------------------------------------
+  @getCurrentTissue = ->
+
+    if not @currentTissue?
+
+      chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+      @currentTissue = new glados.models.Tissue
+        tissue_chembl_id: chemblID
+      return @currentTissue
+
+    else return @currentTissue
+
+  # -------------------------------------------------------------
+  # Specific section initialization
+  # this is functions only initialize a section of the report card
+  # -------------------------------------------------------------
+  @initBasicInformation = ->
+
+    tissue = TissueReportCardApp.getCurrentTissue()
+
+    new TissueBasicInformationView
+      model: tissue
+      el: $('#TiBasicInformation')
+      section_id: 'BasicInformation'
+      section_label: 'Basic Information'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      tissue.fetch()
 
   @initAssaySummary = ->
 

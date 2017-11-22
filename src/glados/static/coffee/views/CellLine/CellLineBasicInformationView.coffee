@@ -1,7 +1,3 @@
-# View that renders the Cell Line basic information section
-# from the cell line report card
-# load CardView first!
-# also make sure the html can access the handlebars templates!
 CellLineBasicInformationView = CardView.extend
 
   initialize: ->
