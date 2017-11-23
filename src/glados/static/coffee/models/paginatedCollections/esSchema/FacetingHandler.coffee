@@ -273,6 +273,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                   key_for_humans: fKey
                 }
                 @faceting_keys_inorder.push(fKey)
+              if @property_type.year
+                @faceting_keys_inorder.reverse()
 
     parseCategoricalKey: (key) ->
 
