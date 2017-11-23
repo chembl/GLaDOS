@@ -12,6 +12,9 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     filterForActivities = 'document_chembl_id:' + parsed.document_chembl_id
     parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
+    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + parsed.document_chembl_id
+    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -68,6 +71,17 @@ Document.COLUMNS = {
     execute_on_render: true
     format_class: 'number-cell-center'
     secondary_link: true
+  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    link_base: 'compounds_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['document_chembl_id']
+    function_key: 'document_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -97,6 +111,7 @@ Document.COLUMNS_SETTINGS = {
   RESULTS_LIST_ADDITIONAL: [
     Document.COLUMNS.TYPE
     Document.COLUMNS.ABSTRACT
+    Document.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
   ]
   RESULTS_LIST_CARD: [
     Document.COLUMNS.CHEMBL_ID

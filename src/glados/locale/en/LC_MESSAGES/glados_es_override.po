@@ -271,6 +271,9 @@ msgstr "Source"
 
 msgid "glados_es_gs__document__related_activities___count__label"
 msgstr "Activities"
+
+msgid "glados_es_gs__document__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
 #-----------------------------------------------------------------------------------------------------------------------
