@@ -269,6 +269,8 @@ msgstr "DOI"
 msgid "glados_es_gs__document__source___src_description__label"
 msgstr "Source"
 
+msgid "glados_es_gs__document__related_activities___count__label"
+msgstr "Activities"
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
 #-----------------------------------------------------------------------------------------------------------------------

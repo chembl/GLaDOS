@@ -266,7 +266,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     return targetTypes
 
   # --------------------------------------------------------------------------------------------------------------------
-  # Histograms
+  # mini Histograms
   # --------------------------------------------------------------------------------------------------------------------
   @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
 
