@@ -264,3 +264,42 @@ class AssayReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return targetTypes
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Histograms
+  # --------------------------------------------------------------------------------------------------------------------
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    associatedCompounds = AssayReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'x_axis_agg'
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      initial_property_x: 'mwt'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+    $clickedLink = $(@)
+
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+
+    histogramType = constantParamsList[0]
+    chemblID = paramsList[0]
+
+    if histogramType == 'compounds'
+      AssayReportCardApp.initMiniCompoundsHistogram($containerElem, chemblID)
+
+#    else if histogramType == 'targets'
+#      CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)

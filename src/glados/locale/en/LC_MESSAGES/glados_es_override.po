@@ -176,6 +176,9 @@ msgstr "Target Type"
 
 msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label"
 msgstr "Data Validity Comment"
+
+msgid "glados_es_gs__assay__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------

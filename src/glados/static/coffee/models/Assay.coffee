@@ -7,11 +7,15 @@ Assay = Backbone.Model.extend
 
   parse: (data) ->
     parsed = data
-    parsed.target = data.target_chembl_id
+    parsed.target = data.assay_chembl_id
 
     parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
     parsed.document_link = Document.get_report_card_url(parsed.document_chembl_id)
     parsed.tissue_link = glados.models.Tissue.get_report_card_url(parsed.tissue_chembl_id)
+
+    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + parsed.target_chembl_id
+    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -59,6 +63,17 @@ Assay.COLUMNS = {
     comparator: 'assay_subcellular_fraction'
   TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'assay_tax_id'
+  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    link_base: 'compounds_url'
+    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['assay_chembl_id']
+    function_key: 'assay_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -75,6 +90,7 @@ Assay.COLUMNS_SETTINGS = {
     Assay.COLUMNS.CHEMBL_ID
     Assay.COLUMNS.DESCRIPTION
     Assay.COLUMNS.ORGANISM
+    Assay.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
     Assay.COLUMNS.DOCUMENT
     Assay.COLUMNS.BAO_LABEL
     Assay.COLUMNS.SRC_DESCRIPTION
