@@ -187,6 +187,8 @@ urlpatterns += [
   url(r'^documents_with_same_terms/(?P<doc_terms>.+)/$',
     DirectTemplateView.as_view(template_name="glados/DocumentTerms/DocumentTermsSearch.html"), ),
 
+  url(r'^documents/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseDocuments.html"), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Cells
   # --------------------------------------------------------------------------------------------------------------------
