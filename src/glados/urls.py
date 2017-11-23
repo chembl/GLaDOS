@@ -216,6 +216,9 @@ urlpatterns += [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
+  url(r'^cells/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseCells.html"), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Tissues
   # --------------------------------------------------------------------------------------------------------------------
