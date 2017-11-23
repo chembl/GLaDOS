@@ -12,6 +12,11 @@ describe "Compounds vs Target Matrix", ->
     for i in [0..testIDs.length-1]
       expect(iDsGot[i]).toBe(testIDs[i])
 
+  testQueryString = (ctm, testQueryString) ->
+
+    requestData = ctm.getRequestData()
+    expect(requestData.query.query_string.query).toBe(testQueryString)
+
   testAggregations = (ctm, testAggList) ->
 
     requestData = ctm.getRequestData()
@@ -52,13 +57,12 @@ describe "Compounds vs Target Matrix", ->
     for row in rowsMustBe
       expect(rowsGot[row]?).toBe(true)
 
-  testAddsRowsWithNoData = (ctm, testAggList, testDataToParse) ->
+  testAddsRowsWithNoData = (ctm, testAggList, testDataToParse, testIDs) ->
 
     matrix = (ctm.parse testDataToParse).matrix
     rowsAggName = testAggList[0] + glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX
     rowsWithDataMustBe = (bucket.key for bucket in testDataToParse.aggregations[rowsAggName].buckets)
-    originalRequestedIds = ctm.get('chembl_ids')
-    additionalIdsMustBe = _.difference(ctm.get('chembl_ids'), rowsWithDataMustBe)
+    additionalIdsMustBe = _.difference(testIDs, rowsWithDataMustBe)
 
     rowsGot = matrix.rows_index
     for row in additionalIdsMustBe
@@ -289,6 +293,20 @@ describe "Compounds vs Target Matrix", ->
     urlMustBe = Activity.getActivitiesListURL(filterMustBe)
     urlGot = ctm.getLinkToAllActivities()
     expect(urlGot).toBe(urlMustBe)
+
+  testLinkToFullScreen = (ctm, testIDs) ->
+
+    filterProperty = ctm.get('filter_property')
+    startingFrom = switch filterProperty
+      when 'molecule_chembl_id' then 'Compounds'
+      else 'Targets'
+
+    filterMustBe = ctm.get('filter_property') + ':(' + ('"' + id + '"' for id in testIDs).join(' OR ') + ')'
+
+    urlMustBe = Activity.getActivitiesListURL(filterMustBe) + '/#matrix_fs/' + startingFrom
+    urlGot = ctm.getLinkToFullScreen()
+    expect(urlGot).toBe(urlMustBe)
+
   #---------------------------------------------------------------------------------------------------------------------
   # From Compounds
   #---------------------------------------------------------------------------------------------------------------------
@@ -306,6 +324,7 @@ describe "Compounds vs Target Matrix", ->
     describe "General", ->
 
       it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testMoleculeIDs)
+      it 'Generates the link to full screen view', -> testLinkToFullScreen(ctm, testMoleculeIDs)
 
     describe "Request Data", ->
 
@@ -321,7 +340,7 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
-      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testMoleculeIDs)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
@@ -346,6 +365,7 @@ describe "Compounds vs Target Matrix", ->
     describe "General", ->
 
       it 'Generates the link to browse all activities', -> testLinkToAllActivities(ctm, testTargetIDs)
+      it 'Generates the link to full screen view', -> testLinkToFullScreen(ctm, testTargetIDs)
 
     describe "Request Data", ->
 
@@ -361,7 +381,7 @@ describe "Compounds vs Target Matrix", ->
           done()
 
       it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
-      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse)
+      it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testTargetIDs)
       it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
       it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
       it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
@@ -369,6 +389,50 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
       it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
       it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # From a Query String
+  #---------------------------------------------------------------------------------------------------------------------
+  #TODO: this needs to be merged with the aggregation class. The chembl ids should be in a terms query, and the filter
+  #TODO: should be in a querystring
+  describe "Starting From a querystring", ->
+
+    describe "And using compounds as base", ->
+
+      # there will be no data for chembl 25 in the response
+      testMoleculeIDs = ['CHEMBL59', 'CHEMBL138921', 'CHEMBL138040', 'CHEMBL457419', 'CHEMBL25']
+      testQueryS = 'molecule_chembl_id:(' + ('"' + id + '"' for id in testMoleculeIDs).join(' OR ') + ')'
+
+      testAggList = ['molecule_chembl_id', 'target_chembl_id']
+      ctm = new glados.models.Activity.ActivityAggregationMatrix
+        filter_property: 'molecule_chembl_id'
+        query_string: testQueryS
+        aggregations: testAggList
+      testDataToParse = undefined
+
+      describe "Request Data", ->
+
+        it 'Generates the filter', -> testQueryString(ctm, testQueryS)
+        it 'Generates the aggregation structure', -> testAggregations(ctm, testAggList)
+        it 'Generates the cell aggregations', -> testCellsAggregations(ctm, testAggList)
+
+      describe "Parsing", ->
+
+        beforeAll (done) ->
+          $.get (glados.Settings.STATIC_URL + 'testData/ActivityMatrixFromCompoundsSampleResponse.json'), (testData) ->
+            testDataToParse = testData
+            done()
+
+        it 'parses the rows', -> testParsesRows(ctm, testAggList, testDataToParse)
+        it 'adds the rows with no data', -> testAddsRowsWithNoData(ctm, testAggList, testDataToParse, testMoleculeIDs)
+        it 'parses the columns', -> testParsesColumns(ctm, testAggList, testDataToParse)
+        it 'parses the links', -> testParsesLinks(ctm, testAggList, testDataToParse)
+        it 'calculates the hit count per row and per column', -> testHitCount(ctm, testAggList, testDataToParse)
+        it 'calculates activity count per row and column', -> testActivityCount(ctm, testAggList, testDataToParse)
+        it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
+        it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
+        it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
+
 
   #---------------------------------------------------------------------------------------------------------------------
   # General Functions

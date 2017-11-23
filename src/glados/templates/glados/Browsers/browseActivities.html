@@ -3,14 +3,19 @@
 {% block title %}Browse Activities{% endblock %}
 
 {% block content %}
-<div class="container main-container">
-  <h2>
-    Browse Activities
-  </h2>
-  {% include "glados/Browsers/DefaultBrowserContent.html" %}
+<div class="container main-container BCK-main-container" style="display: none;">
+  <div class="BCK-browser">
+    <h2>
+      Browse Activities
+    </h2>
+    {% include "glados/Browsers/DefaultBrowserContent.html" %}
+  </div>
+  <div class="BCK-matrix-full-screen matrix-full-screen">
+    {% include "glados/base/Visualisation/DefaultMatrixContent.html" %}
+  </div>
 </div>
 {% endblock %}
 
 {% block custom_js_inline %}
-ActivitiesBrowserApp.init();
+glados.apps.Activity.ActivitiesBrowserApp.init();
 {% endblock %}

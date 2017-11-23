@@ -168,6 +168,14 @@ msgstr "Assay Cell Type"
 msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label"
 msgstr "Assay Subcellular Fraction"
 
+msgid "glados_es_gs__activity__parent_molecule_data___compound_key__label"
+msgstr "Compound Key"
+
+msgid "glados_es_gs__activity__target_data___target_type__label"
+msgstr "Target Type"
+
+msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label"
+msgstr "Data Validity Comment"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------

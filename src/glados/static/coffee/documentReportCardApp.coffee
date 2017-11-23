@@ -90,6 +90,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @initTargetSummary = ->
 
+    #TODO: update when index is ready
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedTargets = DocumentReportCardApp.getRelatedTargetsAgg(chemblID)
 
@@ -104,7 +105,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL()
+        url: Target.getTargetsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: relatedTargets
@@ -237,10 +238,11 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: update when index is updated
+    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'document_chembl_id'
+      fields: ['_metadata.related_documents.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -250,9 +252,11 @@ class DocumentReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'target_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+                                    'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              document_chembl_id: 'document_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -261,14 +265,13 @@ class DocumentReportCardApp extends glados.ReportCardApp
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      document_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return targetTypes
 
   @getRelatedAssaysAgg = (chemblID) ->
 
-    #TODO: update when label for type is in index
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: 'document_chembl_id:{{document_chembl_id}}'
@@ -279,12 +282,12 @@ class DocumentReportCardApp extends glados.ReportCardApp
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'assay_type'
+          field: '_metadata.assay_generated.type_label'
           size: 20
           bucket_links:
 
             bucket_filter_template: 'document_chembl_id:{{document_chembl_id}} ' +
-                                    'AND assay_type:("{{bucket_key}}"' +
+                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               document_chembl_id: 'document_chembl_id'

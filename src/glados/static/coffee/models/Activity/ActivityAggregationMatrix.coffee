@@ -7,6 +7,17 @@ glados.useNameSpace 'glados.models.Activity',
 
     initialize: ->
 
+      queryString = @get('query_string')
+      if queryString?
+        filterProperty = @get('filter_property')
+        idsWrapperRegex = new RegExp(filterProperty + ':\(.*\)', 'g')
+        matches = queryString.match(idsWrapperRegex)
+        if matches.length > 0
+
+          idsText = matches[0].replace(filterProperty + ':(', '').replace(')', '').replace(/"/g, '')
+          ids = idsText.split(' OR ')
+          @set('chembl_ids', ids)
+
     fetch: (options) ->
 
       cleanMatrixConfig =
@@ -52,6 +63,16 @@ glados.useNameSpace 'glados.models.Activity',
     getLinkToAllActivities: ->
       filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
       return Activity.getActivitiesListURL(filter)
+
+    getLinkToFullScreen: ->
+      filter = @get('filter_property') + ':(' + ('"' + id + '"' for id in @get('chembl_ids')).join(' OR ') + ')'
+
+      filterProperty = @get('filter_property')
+      startingFrom = switch filterProperty
+        when 'molecule_chembl_id' then 'Compounds'
+        else 'Targets'
+
+      return Activity.getActivitiesListURL(filter) + '/#matrix_fs/' + startingFrom
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
@@ -393,6 +414,14 @@ glados.useNameSpace 'glados.models.Activity',
     # Request data
     #-------------------------------------------------------------------------------------------------------------------
     addQueryToRequest: (requestData, idsList) ->
+
+      queryString = @get('query_string')
+      if queryString
+        requestData.query =
+          query_string:
+            query: queryString
+        return
+
       requestData.query =
         terms: {}
 

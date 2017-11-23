@@ -80,7 +80,6 @@ class AssayReportCardApp extends glados.ReportCardApp
 
   @initAssociatedCompounds = ->
 
-    #TODO: UPDATE WHEN AGG IS READY
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedCompounds = AssayReportCardApp.getAssociatedCompoundsAgg(chemblID)
 
@@ -98,7 +97,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Assay ' + chemblID
-      title_link_url: Compound.getCompoundsListURL()
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_assays.chembl_ids.\\*:' + chemblID)
       range_categories: true
 
     config =
@@ -135,7 +134,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL()
+        url: Target.getTargetsListURL('_metadata.related_assays.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: relatedTargets
@@ -202,22 +201,24 @@ class AssayReportCardApp extends glados.ReportCardApp
 
   @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
-    #TODO use proper parameters when index is ready
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'assay_chembl_id'
+      fields: ['_metadata.related_assays.chembl_ids.*']
 
     aggsConfig =
       aggs:
         x_axis_agg:
           field: 'molecule_properties.full_mwt'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
+          min_columns: minCols
+          max_columns: maxCols
+          num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: 'molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+                                    'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
+              assay_chembl_id: 'assay_chembl_id'
               min_val: 'BUCKET.from'
               max_val: 'BUCKETS.to'
             link_generator: Compound.getCompoundsListURL
@@ -225,17 +226,18 @@ class AssayReportCardApp extends glados.ReportCardApp
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
-      target_chembl_id: chemblID
+      assay_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return associatedCompounds
 
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: update when index is ready. https://github.com/chembl/GLaDOS-es/issues/6
+    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'assay_chembl_id'
+      fields: ['_metadata.related_assays.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -245,9 +247,11 @@ class AssayReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'target_type:("{{bucket_key}}"' +
+            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+                                    'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
+              assay_chembl_id: 'assay_chembl_id'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -256,7 +260,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      assay_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return targetTypes

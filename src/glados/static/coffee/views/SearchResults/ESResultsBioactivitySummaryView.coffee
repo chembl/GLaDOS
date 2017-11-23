@@ -10,57 +10,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleVisualisationStatus, @
       @collection.on 'reset', @handleVisualisationStatus, @
 
-      @entityName = @collection.getMeta('label')
-      if @entityName == 'Targets'
+      @sourceEntity = @collection.getMeta('label')
+      if @sourceEntity == 'Targets'
         filterProperty = 'target_chembl_id'
         aggList = ['target_chembl_id', 'molecule_chembl_id']
-        rowsEntityName = 'Targets'
-        rowsLabelProperty = 'target_pref_name'
-        colsEntityName = 'Compounds'
-        colsLabelProperty = 'molecule_chembl_id'
-
       else
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
-        rowsEntityName = 'Compounds'
-        rowsLabelProperty = 'molecule_chembl_id'
-        colsEntityName = 'Targets'
-        colsLabelProperty = 'target_pref_name'
 
-      config = {
-        rows_entity_name: rowsEntityName
-        cols_entity_name: colsEntityName
-        properties:
-          molecule_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-              'CHEMBL_ID')
-          target_chembl_id: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-              'CHEMBL_ID')
-          target_pref_name: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target',
-              'PREF_NAME')
-          pchembl_value_avg: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-              'PCHEMBL_VALUE_AVG')
-          activity_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-              'ACTIVITY_COUNT')
-          hit_count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-              'HIT_COUNT')
-          pchembl_value_max: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('ActivityAggregation',
-              'PCHEMBL_VALUE_MAX')
-        initial_colouring: 'pchembl_value_avg'
-        colour_properties: ['activity_count', 'pchembl_value_avg']
-        initial_row_sorting: 'activity_count'
-        initial_row_sorting_reverse: true
-        row_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-        initial_col_sorting: 'activity_count'
-        initial_col_sorting_reverse: true
-        col_sorting_properties: ['activity_count', 'pchembl_value_max', 'hit_count']
-        initial_col_label_property: colsLabelProperty
-        initial_row_label_property: rowsLabelProperty
-        propertyToType:
-          activity_count: "number"
-          pchembl_value_avg: "number"
-          pchembl_value_max: "number"
-          hit_count: "number"
-      }
+      config = MatrixView.getDefaultConfig @sourceEntity
 
       @ctm = new glados.models.Activity.ActivityAggregationMatrix
         filter_property: filterProperty
@@ -117,13 +75,13 @@ glados.useNameSpace 'glados.views.SearchResults',
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
 
       if numWorkingItems > threshold[1]
-        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @entityName + ' to show this visualisation.',
+        @setProgressMessage('Please select or filter less than ' + threshold[1] + ' ' + @sourceEntity + ' to show this visualisation.',
           hideCog=true)
         @hideMatrix()
         return
 
       if numWorkingItems > threshold[2] and not @FORCE_DISPLAY
-        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @entityName +
+        msg = 'I am going to generate this visualisation from ' + numWorkingItems +  ' ' + @sourceEntity +
           '. This can cause your browser to slow down. Press the following button to override this warning.'
 
         @setProgressMessage(msg, hideCog=true, linkUrl=undefined, linkText=undefined, showWarningIcon=true)
