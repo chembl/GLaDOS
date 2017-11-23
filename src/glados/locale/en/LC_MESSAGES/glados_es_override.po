@@ -239,6 +239,8 @@ msgstr "ChEMBL ID"
 msgid "glados_es_gs__cell_line__cell_source_tax_id__label"
 msgstr "Tax ID"
 
+msgid "glados_es_gs__cell_line__related_activities___count__label"
+msgstr "Activities"
 #-----------------------------------------------------------------------------------------------------------------------
 # Tissue Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------

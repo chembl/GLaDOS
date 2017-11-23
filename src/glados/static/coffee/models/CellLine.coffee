@@ -6,6 +6,10 @@ CellLine = Backbone.Model.extend
   parse: (data) ->
     parsed = data
     parsed.report_card_url = CellLine.get_report_card_url(parsed.cell_chembl_id)
+
+    filterForActivities = '_metadata.assay_data.cell_chembl_id:' + parsed.cell_chembl_id
+    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -41,6 +45,17 @@ CellLine.COLUMNS = {
     comparator: 'cell_source_organism'
   TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cell_source_tax_id'
+  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+    comparator: '_metadata.related_activities.count'
+    link_base: 'activities_url'
+    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['cell_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'cell_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
 
 }
 
@@ -57,6 +72,7 @@ CellLine.COLUMNS_SETTINGS = {
     CellLine.COLUMNS.CHEMBL_ID
     CellLine.COLUMNS.NAME
     CellLine.COLUMNS.DESCRIPTION
+    CellLine.COLUMNS.BIOACTIVITIES_NUMBER
     CellLine.COLUMNS.ORGANISM
     CellLine.COLUMNS.SOURCE_TISSUE
 
