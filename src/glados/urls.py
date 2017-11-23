@@ -220,6 +220,9 @@ urlpatterns += [
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
 
+  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/BasicInformationToEmbed.html")), ),
+
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/AssaySummaryToEmbed.html")), ),
 
