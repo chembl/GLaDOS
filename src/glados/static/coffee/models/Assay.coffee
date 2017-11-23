@@ -13,8 +13,11 @@ Assay = Backbone.Model.extend
     parsed.document_link = Document.get_report_card_url(parsed.document_chembl_id)
     parsed.tissue_link = glados.models.Tissue.get_report_card_url(parsed.tissue_chembl_id)
 
-    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + parsed.target_chembl_id
+    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + parsed.assay_chembl_id
     parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
+    filterForActivities = 'assay_chembl_id:' + parsed.assay_chembl_id
+    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
     return parsed;
 
@@ -74,6 +77,17 @@ Assay.COLUMNS = {
     execute_on_render: true
     format_class: 'number-cell-center'
     secondary_link: true
+  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
+    comparator: '_metadata.related_activities.count'
+    link_base: 'activities_url'
+    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['assay_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'assay_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
@@ -102,6 +116,7 @@ Assay.COLUMNS_SETTINGS = {
     Assay.COLUMNS.TISSUE
     Assay.COLUMNS.CELL_TYPE
     Assay.COLUMNS.SUBCELLULAR_FRACTION
+    Assay.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_CARD: [
     Assay.COLUMNS.CHEMBL_ID
