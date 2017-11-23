@@ -22,52 +22,98 @@
             }]
         }
     ,
-        "molecule_properties.full_mwt_MAX"
+        "max_phase_PERCENTILES"
     :
         {
-            "value"
+            "values"
         :
-            13020.3
+            {
+                "1.0"
+            :
+                0.0, "10.0"
+            :
+                0.0, "20.0"
+            :
+                0.0, "30.0"
+            :
+                0.0, "40.0"
+            :
+                0.0, "50.0"
+            :
+                0.0, "60.0"
+            :
+                0.0, "70.0"
+            :
+                0.0, "80.0"
+            :
+                0.0, "90.0"
+            :
+                0.0, "99.0"
+            :
+                0.0
+            }
         }
     ,
-        "molecule_properties.num_ro5_violations_MAX"
+        "molecule_properties.alogp_PERCENTILES"
     :
         {
-            "value"
+            "values"
         :
-            4.0
+            {
+                "1.0"
+            :
+                -2.2736537033698476, "10.0"
+            :
+                0.9518883013285284, "20.0"
+            :
+                1.8032879146696634, "30.0"
+            :
+                2.374154875312578, "40.0"
+            :
+                2.8454727176634145, "50.0"
+            :
+                3.2839047268886405, "60.0"
+            :
+                3.7253629357815368, "70.0"
+            :
+                4.198862890196782, "80.0"
+            :
+                4.779829832144821, "90.0"
+            :
+                5.647088551723302, "99.0"
+            :
+                8.501268978842731
+            }
         }
     ,
-        "_metadata.activity_count_MAX"
+        "max_phase_STATS"
     :
         {
-            "value"
+            "count"
         :
-            14808.0
-        }
-    ,
-        "molecule_properties.full_mwt_MIN"
-    :
-        {
-            "value"
+            1735442, "min"
         :
-            4.0
-        }
-    ,
-        "max_phase_MAX"
-    :
-        {
-            "value"
+            0.0, "max"
         :
-            4.0
-        }
-    ,
-        "_metadata.related_targets.count_MIN"
-    :
-        {
-            "value"
+            4.0, "avg"
         :
-            0.0
+            0.012338643411880085, "sum"
+        :
+            21413.0, "sum_of_squares"
+        :
+            76267.0, "variance"
+        :
+            0.04379448729984719, "std_deviation"
+        :
+            0.2092713246000206, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                0.43088129261192126, "lower"
+            :
+                -0.4062040057881611
+            }
         }
     ,
         "_metadata.drug.is_drug"
@@ -79,55 +125,289 @@
         :
             0, "buckets"
         :
-            [{"key": 1, "key_as_string": "true", "doc_count": 11542}]
+            [{"key": 0, "key_as_string": "false", "doc_count": 1723900}, {
+                "key": 1,
+                "key_as_string": "true",
+                "doc_count": 11542
+            }]
         }
     ,
-        "molecule_properties.alogp_MIN"
+        "molecule_properties.alogp_STATS"
     :
         {
-            "value"
+            "count"
         :
-            -20.49
+            1688526, "min"
+        :
+            -20.49, "max"
+        :
+            25.53, "avg"
+        :
+            3.2787279615475087, "sum"
+        :
+            5536217.4099999685, "sum_of_squares"
+        :
+            2.523165981309779E7, "variance"
+        :
+            4.192952308537012, "std_deviation"
+        :
+            2.047669970609769, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                7.374067902767047, "lower"
+            :
+                -0.8166119796720293
+            }
         }
     ,
-        "_metadata.related_targets.count_MAX"
+        "molecule_properties.num_ro5_violations_PERCENTILES"
     :
         {
-            "value"
+            "values"
         :
-            1181.0
+            {
+                "1.0"
+            :
+                0.0, "10.0"
+            :
+                0.0, "20.0"
+            :
+                0.0, "30.0"
+            :
+                0.0, "40.0"
+            :
+                0.0, "50.0"
+            :
+                0.0, "60.0"
+            :
+                0.0, "70.0"
+            :
+                0.0, "80.0"
+            :
+                1.0, "90.0"
+            :
+                1.0, "99.0"
+            :
+                3.0
+            }
         }
     ,
-        "molecule_properties.alogp_MAX"
+        "_metadata.related_targets.count_PERCENTILES"
     :
         {
-            "value"
+            "values"
         :
-            25.53
+            {
+                "1.0"
+            :
+                0.0, "10.0"
+            :
+                1.0, "20.0"
+            :
+                1.0, "30.0"
+            :
+                1.0, "40.0"
+            :
+                2.0, "50.0"
+            :
+                2.0, "60.0"
+            :
+                3.0, "70.0"
+            :
+                5.000000000000001, "80.0"
+            :
+                6.0, "90.0"
+            :
+                11.0, "99.0"
+            :
+                58.0
+            }
         }
     ,
-        "_metadata.activity_count_MIN"
+        "_metadata.activity_count_PERCENTILES"
     :
         {
-            "value"
+            "values"
         :
-            0.0
+            {
+                "1.0"
+            :
+                0.0, "10.0"
+            :
+                1.0, "20.0"
+            :
+                1.0, "30.0"
+            :
+                2.0, "40.0"
+            :
+                3.0, "50.0"
+            :
+                3.1114605171208947, "60.0"
+            :
+                5.0, "70.0"
+            :
+                6.712655950095964, "80.0"
+            :
+                9.0, "90.0"
+            :
+                17.0, "99.0"
+            :
+                60.0
+            }
         }
     ,
-        "max_phase_MIN"
+        "molecule_properties.full_mwt_STATS"
     :
         {
-            "value"
+            "count"
         :
-            0.0
+            1731123, "min"
+        :
+            4.0, "max"
+        :
+            13020.3, "avg"
+        :
+            426.8327883749378, "sum"
+        :
+            7.389000571099875E8, "sum_of_squares"
+        :
+            4.224677627639878E11, "variance"
+        :
+            61856.37361258042, "std_deviation"
+        :
+            248.709416011096, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                924.2516203971298, "lower"
+            :
+                -70.5860436472542
+            }
         }
     ,
-        "molecule_properties.num_ro5_violations_MIN"
+        "_metadata.activity_count_STATS"
     :
         {
-            "value"
+            "count"
         :
-            0.0
+            1735442, "min"
+        :
+            0.0, "max"
+        :
+            14808.0, "avg"
+        :
+            8.456243423865505, "sum"
+        :
+            1.467532E7, "sum_of_squares"
+        :
+            2.967143176E9, "variance"
+        :
+            1638.2253614680744, "std_deviation"
+        :
+            40.474996744509745, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                89.40623691288499, "lower"
+            :
+                -72.49375006515399
+            }
+        }
+    ,
+        "_metadata.related_targets.count_STATS"
+    :
+        {
+            "count"
+        :
+            1735442, "min"
+        :
+            0.0, "max"
+        :
+            1181.0, "avg"
+        :
+            5.70605586357827, "sum"
+        :
+            9902529.0, "sum_of_squares"
+        :
+            3.68807189E8, "variance"
+        :
+            179.95577226740863, "std_deviation"
+        :
+            13.414759493461247, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                32.535574850500765, "lower"
+            :
+                -21.123463123344223
+            }
+        }
+    ,
+        "molecule_properties.full_mwt_PERCENTILES"
+    :
+        {
+            "values"
+        :
+            {
+                "1.0"
+            :
+                177.04760878961355, "10.0"
+            :
+                268.62546227019004, "20.0"
+            :
+                307.8044242456929, "30.0"
+            :
+                336.3306100265538, "40.0"
+            :
+                362.00296546524356, "50.0"
+            :
+                389.64803447258794, "60.0"
+            :
+                418.46394616476954, "70.0"
+            :
+                450.934294193573, "80.0"
+            :
+                492.97229229390047, "90.0"
+            :
+                574.0663286372996, "99.0"
+            :
+                1295.1991399718236
+            }
+        }
+    ,
+        "molecule_properties.num_ro5_violations_STATS"
+    :
+        {
+            "count"
+        :
+            1688526, "min"
+        :
+            0.0, "max"
+        :
+            4.0, "avg"
+        :
+            0.3833592138942486, "sum"
+        :
+            647312.0, "sum_of_squares"
+        :
+            1079864.0, "variance"
+        :
+            0.49256628594151713, "std_deviation"
+        :
+            0.7018306675698328, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                1.7870205490339142, "lower"
+            :
+                -1.020302121245417
+            }
         }
     },
     "firstCall": true
@@ -139,16 +419,37 @@
         {
             "buckets"
         :
-            [{"key": -25.0, "doc_count": 1}, {"key": -20.0, "doc_count": 1}, {
-                "key": -15.0,
-                "doc_count": 181
-            }, {"key": -10.0, "doc_count": 3024}, {"key": -5.0, "doc_count": 76138}, {
-                "key": 0.0,
-                "doc_count": 1323237
-            }, {"key": 5.0, "doc_count": 279808}, {"key": 10.0, "doc_count": 5648}, {
-                "key": 15.0,
-                "doc_count": 465
-            }, {"key": 20.0, "doc_count": 21}, {"key": 25.0, "doc_count": 2}]
+            [{"key": "-20.49--2.0", "from": -20.49, "to": -2.0, "doc_count": 20039}, {
+                "key": "-2.0--1.0",
+                "from": -2.0,
+                "to": -1.0,
+                "doc_count": 19138
+            }, {"key": "-1.0-0.0", "from": -1.0, "to": 0.0, "doc_count": 40168}, {
+                "key": "0.0-1.0",
+                "from": 0.0,
+                "to": 1.0,
+                "doc_count": 95749
+            }, {"key": "1.0-2.0", "from": 1.0, "to": 2.0, "doc_count": 214005}, {
+                "key": "2.0-3.0",
+                "from": 2.0,
+                "to": 3.0,
+                "doc_count": 343029
+            }, {"key": "3.0-4.0", "from": 3.0, "to": 4.0, "doc_count": 380580}, {
+                "key": "4.0-5.0",
+                "from": 4.0,
+                "to": 5.0,
+                "doc_count": 289874
+            }, {"key": "5.0-6.0", "from": 5.0, "to": 6.0, "doc_count": 159889}, {
+                "key": "6.0-7.0",
+                "from": 6.0,
+                "to": 7.0,
+                "doc_count": 71541
+            }, {"key": "7.0-8.0", "from": 7.0, "to": 8.0, "doc_count": 29768}, {
+                "key": "8.0-9.0",
+                "from": 8.0,
+                "to": 9.0,
+                "doc_count": 12949
+            }, {"key": "9.0-25.53", "from": 9.0, "to": 25.53, "doc_count": 11795}]
         }
     ,
         "molecule_properties.num_ro5_violations"
@@ -156,10 +457,17 @@
         {
             "buckets"
         :
-            [{"key": 0.0, "doc_count": 1229031}, {"key": 1.0, "doc_count": 299076}, {
-                "key": 2.0,
-                "doc_count": 134082
-            }, {"key": 3.0, "doc_count": 25276}, {"key": 4.0, "doc_count": 1061}]
+            [{"key": "0.0-1.0", "from": 0.0, "to": 1.0, "doc_count": 1229031}, {
+                "key": "1.0-2.0",
+                "from": 1.0,
+                "to": 2.0,
+                "doc_count": 299076
+            }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 134082}, {
+                "key": "3.0-4.0",
+                "from": 3.0,
+                "to": 4.0,
+                "doc_count": 25276
+            }, {"key": "4.0-4.0", "from": 4.0, "to": 4.0, "doc_count": 0}]
         }
     ,
         "_metadata.related_targets.count"
@@ -167,10 +475,22 @@
         {
             "buckets"
         :
-            [{"key": 0.0, "doc_count": 1734520}, {"key": 200.0, "doc_count": 770}, {
-                "key": 400.0,
-                "doc_count": 60
-            }, {"key": 600.0, "doc_count": 54}, {"key": 800.0, "doc_count": 25}, {"key": 1000.0, "doc_count": 13}]
+            [{"key": "0.0-1.0", "from": 0.0, "to": 1.0, "doc_count": 87294}, {
+                "key": "1.0-2.0",
+                "from": 1.0,
+                "to": 2.0,
+                "doc_count": 530959
+            }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 261718}, {
+                "key": "3.0-5.0",
+                "from": 3.0,
+                "to": 5.0,
+                "doc_count": 330034
+            }, {"key": "5.0-6.0", "from": 5.0, "to": 6.0, "doc_count": 100516}, {
+                "key": "6.0-11.0",
+                "from": 6.0,
+                "to": 11.0,
+                "doc_count": 239009
+            }, {"key": "11.0-1181.0", "from": 11.0, "to": 1181.0, "doc_count": 185911}]
         }
     ,
         "molecule_properties.full_mwt"
@@ -178,13 +498,37 @@
         {
             "buckets"
         :
-            [{"key": 0.0, "doc_count": 1724888}, {"key": 2000.0, "doc_count": 4772}, {
-                "key": 4000.0,
-                "doc_count": 1246
-            }, {"key": 6000.0, "doc_count": 186}, {"key": 8000.0, "doc_count": 20}, {
-                "key": 10000.0,
-                "doc_count": 8
-            }, {"key": 12000.0, "doc_count": 3}]
+            [{"key": "4.0-100.0", "from": 4.0, "to": 100.0, "doc_count": 847}, {
+                "key": "100.0-200.0",
+                "from": 100.0,
+                "to": 200.0,
+                "doc_count": 32968
+            }, {"key": "200.0-300.0", "from": 200.0, "to": 300.0, "doc_count": 271356}, {
+                "key": "300.0-400.0",
+                "from": 300.0,
+                "to": 400.0,
+                "doc_count": 624043
+            }, {"key": "400.0-500.0", "from": 400.0, "to": 500.0, "doc_count": 478366}, {
+                "key": "500.0-600.0",
+                "from": 500.0,
+                "to": 600.0,
+                "doc_count": 181285
+            }, {"key": "600.0-700.0", "from": 600.0, "to": 700.0, "doc_count": 62415}, {
+                "key": "700.0-800.0",
+                "from": 700.0,
+                "to": 800.0,
+                "doc_count": 26422
+            }, {"key": "800.0-900.0", "from": 800.0, "to": 900.0, "doc_count": 14661}, {
+                "key": "900.0-1000.0",
+                "from": 900.0,
+                "to": 1000.0,
+                "doc_count": 8564
+            }, {"key": "1000.0-1100.0", "from": 1000.0, "to": 1100.0, "doc_count": 6080}, {
+                "key": "1100.0-1200.0",
+                "from": 1100.0,
+                "to": 1200.0,
+                "doc_count": 3906
+            }, {"key": "1200.0-13020.3", "from": 1200.0, "to": 13020.3, "doc_count": 20209}]
         }
     ,
         "max_phase"
@@ -192,10 +536,17 @@
         {
             "buckets"
         :
-            [{"key": 0.0, "doc_count": 1728780}, {"key": 1.0, "doc_count": 671}, {
-                "key": 2.0,
-                "doc_count": 1147
-            }, {"key": 3.0, "doc_count": 928}, {"key": 4.0, "doc_count": 3916}]
+            [{"key": "0.0-1.0", "from": 0.0, "to": 1.0, "doc_count": 1728780}, {
+                "key": "1.0-2.0",
+                "from": 1.0,
+                "to": 2.0,
+                "doc_count": 671
+            }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 1147}, {
+                "key": "3.0-4.0",
+                "from": 3.0,
+                "to": 4.0,
+                "doc_count": 928
+            }, {"key": "4.0-4.0", "from": 4.0, "to": 4.0, "doc_count": 0}]
         }
     ,
         "_metadata.activity_count"
@@ -203,13 +554,27 @@
         {
             "buckets"
         :
-            [{"key": 0.0, "doc_count": 1735318}, {"key": 2000.0, "doc_count": 102}, {
-                "key": 4000.0,
-                "doc_count": 14
-            }, {"key": 6000.0, "doc_count": 5}, {"key": 8000.0, "doc_count": 2}, {
-                "key": 10000.0,
-                "doc_count": 0
-            }, {"key": 12000.0, "doc_count": 0}, {"key": 14000.0, "doc_count": 1}]
+            [{"key": "0.0-1.0", "from": 0.0, "to": 1.0, "doc_count": 87294}, {
+                "key": "1.0-2.0",
+                "from": 1.0,
+                "to": 2.0,
+                "doc_count": 371977
+            }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 230389}, {
+                "key": "3.0-5.0",
+                "from": 3.0,
+                "to": 5.0,
+                "doc_count": 323153
+            }, {"key": "5.0-7.0", "from": 5.0, "to": 7.0, "doc_count": 202556}, {
+                "key": "7.0-9.0",
+                "from": 7.0,
+                "to": 9.0,
+                "doc_count": 121491
+            }, {"key": "9.0-17.0", "from": 9.0, "to": 17.0, "doc_count": 220267}, {
+                "key": "17.0-14808.0",
+                "from": 17.0,
+                "to": 14808.0,
+                "doc_count": 178314
+            }]
         }
     },
     "firstCall": false
