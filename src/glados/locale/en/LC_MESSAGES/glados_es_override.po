@@ -241,6 +241,9 @@ msgstr "Tax ID"
 
 msgid "glados_es_gs__cell_line__related_activities___count__label"
 msgstr "Activities"
+
+msgid "glados_es_gs__cell_line__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Tissue Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
