@@ -274,6 +274,9 @@ msgstr "Activities"
 
 msgid "glados_es_gs__document__related_compounds___count__label"
 msgstr "Compounds"
+
+msgid "glados_es_gs__document__related_targets___count__label"
+msgstr "Targets"
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
 #-----------------------------------------------------------------------------------------------------------------------

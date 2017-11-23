@@ -173,7 +173,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     relatedActivities.fetch()
 
-
   @initCompoundSummary = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
@@ -237,7 +236,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'document_chembl_id'
@@ -403,7 +401,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
     associatedCompounds = DocumentReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
       maxCols=8, defaultCols=8)
 
-    console.log 'AAA: chembl ID ', chemblID
     config =
       max_categories: 8
       fixed_bar_width: true
@@ -420,6 +417,32 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     associatedCompounds.fetch()
 
+  @initMiniTargetsHistogram = ($containerElem, chemblID) ->
+
+    targetTypes = DocumentReportCardApp.getRelatedTargetsAgg(chemblID)
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE',
+    withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: targetTypes
+      el: $containerElem
+      config: config
+
+    targetTypes.fetch()
+
   @initMiniHistogramFromFunctionLink = ->
 
     $clickedLink = $(@)
@@ -434,6 +457,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       DocumentReportCardApp.initMiniActivitiesHistogram($containerElem, chemblID)
     else if histogramType == 'compounds'
       DocumentReportCardApp.initMiniCompoundsHistogram($containerElem, chemblID)
+    else if histogramType == 'targets'
+      DocumentReportCardApp.initMiniTargetsHistogram($containerElem, chemblID)
 
 
 

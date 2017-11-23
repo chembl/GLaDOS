@@ -82,6 +82,18 @@ Document.COLUMNS = {
     execute_on_render: true
     format_class: 'number-cell-center'
     secondary_link: true
+  NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.related_targets.count'
+    format_as_number: true
+    link_base: 'targets_url'
+    secondary_link: true
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'document_targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -112,6 +124,7 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.TYPE
     Document.COLUMNS.ABSTRACT
     Document.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
+    Document.COLUMNS.NUM_TARGETS
   ]
   RESULTS_LIST_CARD: [
     Document.COLUMNS.CHEMBL_ID
