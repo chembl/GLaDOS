@@ -63,8 +63,10 @@ glados.useNameSpace 'glados',
       exampleRunner(10000.0)
 
     getFormattedNumber: (numberToFormat, exponentialAfter=Math.pow(10, 9), year=false)->
+      if numberToFormat == 0
+        return '0'
       if year
-        return ""+numberToFormat
+        return ''+numberToFormat
       if Math.abs(numberToFormat) < exponentialAfter
         return numeral(numberToFormat).format('0,[.]00')
       return numeral(numberToFormat).format('0.[0000]e+0')

@@ -159,20 +159,27 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       hiP = percentiles['99.0']
 
       isSmallFloat = hiP - lowP <= 7 and not @property_type.integer
-      isNormalDistributed = hiP > stats.avg + stats.std_deviation and lowP < stats.avg - stats.std_deviation
+      bound = 3/4*stats.std_deviation
+      isNormalDistributed = hiP > stats.avg + bound and lowP < stats.avg - bound
 
       minV = stats.min
       maxV = stats.max
 
+      maxV += if @property_type.integer then 1 else 0.1
+
       delta = maxV - minV
 
       @intervalsLimits = [minV]
+      if @property_type.year
+        curYear = new Date().getFullYear()
+        for yearI in [(Math.max(curYear-10)+1)..curYear]
+          @intervalsLimits.push(yearI)
 
-      if delta <= 2*FacetingHandler.NUM_INTERVALS and (delta >= 7 or @property_type.integer)
+      else if delta <= 2*FacetingHandler.NUM_INTERVALS and (delta >= 7 or @property_type.integer)
         if not @property_type.integer
           minV = Math.floor(minV)
           maxV = Math.ceil(maxV)
-        for numJ in [(minV+1)..(maxV+1)]
+        for numJ in [(minV+1)..(maxV)]
           @intervalsLimits.push(numJ)
       else if not isNormalDistributed
         for keyI in _.keys(percentiles)
@@ -210,9 +217,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           curNum += intervalsSize
         if upperBound < maxV
           @intervalsLimits.push maxV
-      if maxV <= _.last(@intervalsLimits)
+      if maxV < _.last(@intervalsLimits)
         @intervalsLimits[@intervalsLimits.length - 1] = maxV
-      else
+      else if maxV > _.last(@intervalsLimits)
         @intervalsLimits.push(maxV)
 
 
@@ -259,13 +266,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 fKey = @getIntervalKey(bucket_i)
                 @faceting_data[fKey] = {
                   min: bucket_i.from
-                  max: bucket_i.from + bucket_i.to
+                  max: bucket_i.to
                   index: @faceting_keys_inorder.length
                   count: bucket_i.doc_count
                   selected: false
                   key_for_humans: fKey
                 }
                 @faceting_keys_inorder.push(fKey)
+              if @property_type.year
+                @faceting_keys_inorder.reverse()
 
     parseCategoricalKey: (key) ->
 
@@ -276,7 +285,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     getIntervalKey: (bucket_data) ->
       formatKey = if @isYear then ((n)-> return n) else glados.Utils.getFormattedNumber
-      if @intervals_size == 1
+      if bucket_data.to-bucket_data.from == 1
         return formatKey(bucket_data.from)
       else
         return formatKey(bucket_data.from) + "  to  " + formatKey(bucket_data.to)

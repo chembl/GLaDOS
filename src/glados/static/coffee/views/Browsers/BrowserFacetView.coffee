@@ -282,12 +282,13 @@ glados.useNameSpace 'glados.views.Browsers',
       facetGroupKey =  $containerElem.attr('data-facet-group-key')
       currentFacetGroup = @facetsVisibilityHandler.getAllFacetsGroups()[facetGroupKey]
       buckets = []
-      for datumKey, datum of currentFacetGroup.faceting_handler.faceting_data
-        datumToAdd = datum
-        datumToAdd.key = datumKey
-        datumToAdd.id = datumKey + ':' + datumToAdd.count
-        datumToAdd.key
-        buckets.push datumToAdd
+      if currentFacetGroup.faceting_handler.faceting_keys_inorder?
+        for datumKey in currentFacetGroup.faceting_handler.faceting_keys_inorder
+          datumToAdd = currentFacetGroup.faceting_handler.faceting_data[datumKey]
+          datumToAdd.key = datumKey
+          datumToAdd.id = datumKey + ':' + datumToAdd.count
+          datumToAdd.key
+          buckets.push datumToAdd
 
       HISTOGRAM_HEIGHT = (buckets.length * @BIN_HEIGHT)
       $containerElem.height(HISTOGRAM_HEIGHT + @HISTOGRAM_PADDING.top + @HISTOGRAM_PADDING.bottom)
