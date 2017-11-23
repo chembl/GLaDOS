@@ -164,12 +164,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       minV = stats.min
       maxV = stats.max
 
+      delta = maxV - minV
+
       @intervalsLimits = [minV]
 
-      console.warn('ANOTHER ONE!', @property_type.label_id)
-      console.warn(@property_type, stats, percentiles)
-      if stats.max - stats.min <= FacetingHandler.NUM_INTERVALS and @property_type.integer
-        for numJ in [(minV+1)..maxV]
+      if delta <= 2*FacetingHandler.NUM_INTERVALS and (delta >= 7 or @property_type.integer)
+        if not @property_type.integer
+          minV = Math.floor(minV)
+          maxV = Math.ceil(maxV)
+        for numJ in [(minV+1)..(maxV+1)]
           @intervalsLimits.push(numJ)
       else if not isNormalDistributed
         for keyI in _.keys(percentiles)
@@ -180,11 +183,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           nextLimit *= 100.00 unless notIncludeDecimals
           nextLimit = Math.round(nextLimit)
           nextLimit /= 100.00 unless notIncludeDecimals
-          console.warn(isSmallFloat, percentiles[keyI], '->', nextLimit)
           if nextLimit > _.last(@intervalsLimits)
             @intervalsLimits.push(nextLimit)
-        console.warn('PERCENTIL!')
-        console.warn(@intervalsLimits)
       else
         lowP = percentiles['1.0']
         hiP = percentiles['99.0']
@@ -192,9 +192,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         upperBound = Math.round(Math.min(hiP, maxV))
 
         intervalsSize = (upperBound/(FacetingHandler.NUM_INTERVALS-2))-(lowerBound/(FacetingHandler.NUM_INTERVALS-2))
-        console.warn('NORMAL!')
-        console.warn(@intervalsLimits)
-        console.warn(lowerBound, upperBound, intervalsSize)
         notIncludeDecimals = @property_type.integer or Math.abs(intervalsSize) > 3
         intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat, true)
         if intervalsSize == 0
@@ -207,7 +204,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         upperBound /= 100.00 unless notIncludeDecimals
 
         curNum = lowerBound
-        while curNum <= upperBound and curNum < maxV
+        while curNum <= upperBound and curNum <= maxV
           if curNum > _.last(@intervalsLimits)
             @intervalsLimits.push curNum
           curNum += intervalsSize
