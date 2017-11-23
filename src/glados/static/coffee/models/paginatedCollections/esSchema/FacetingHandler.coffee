@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     @CATEGORY_FACETING: 'CATEGORY'
     @INTERVAL_FACETING: 'INTERVAL'
 
-    @NUM_INTERVALS: 10
+    @NUM_INTERVALS: 8
 
     @EMPTY_CATEGORY: '- N/A -'
     @OTHERS_CATEGORY: 'Other Categories'
@@ -90,7 +90,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_property,
           property_type.type,
           FacetingHandler.INTERVAL_FACETING,
-          property_type
+          property_type, property_type.year
         )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
@@ -100,18 +100,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type)->
+    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear)->
       @faceting_keys_inorder = null
       @faceting_data = null
-      @min_value = null
-      @max_value = null
-      @intervals_size = null
+      @intervalsLimits
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Interval aggregations require 2 calls to find out first the min/max range
+    # Interval aggregations require 2 calls to find out first the min/max/dev_std range
     # and then create an histogram of n columns
     addQueryAggs: (es_query_aggs, first_call)->
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
@@ -126,51 +124,97 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
-          es_query_aggs[@es_property_name+'_MIN'] = {
-            min:
+          es_query_aggs[@es_property_name+'_STATS'] = {
+            extended_stats:
               field: @es_property_name
           }
-          es_query_aggs[@es_property_name+'_MAX'] = {
-            max:
+          es_query_aggs[@es_property_name+'_PERCENTILES'] = {
+            percentiles:
               field: @es_property_name
+              percents: [1,10,20,30,40,50,60,70,80,90,99]
+              keyed: true
           }
         else
-          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
-            throw "ERROR! The minimum and maximum have not been requested yet!"
+          if not @intervalsLimits?
+            throw "ERROR! The intervals have not been calculated yet!"
           else
             es_query_aggs[@es_property_name] = {
-              histogram:
+              range:
                 field: @es_property_name
-                interval: @intervals_size
+                ranges: []
             }
+            for intervalLimitI, index in @intervalsLimits
+              if index == @intervalsLimits.length - 1
+                continue
+              es_query_aggs[@es_property_name].range.ranges.push
+                from: intervalLimitI
+                to: @intervalsLimits[index+1]
 
-    # will round the interval size to the closest 10*, 20* or 50*
-    roundInterval: ()->
-      # Do the division first to prevent number overflow
-      @intervals_size = (@max_value/FacetingHandler.NUM_INTERVALS)-(@min_value/FacetingHandler.NUM_INTERVALS)
-      isSmallFloat = @intervals_size < 5 and not @property_type.integer
-      if isSmallFloat
-        @intervals_size *= Math.pow(10, 20)
-      curLevel = -1
-      curNum = @intervals_size
-      loop
-        curLevel += 1
-        lastNum = curNum
-        curNum = Math.ceil(curNum/10)
-        if curNum == 1 or curNum == 0
-          break
-      if lastNum > 5
-        curLevel++
-        lastNum = 1
-      else if lastNum > 2
-        lastNum = 5
-      else if lastNum > 1
-        lastNum = 2
+    calculateIntervals: (stats, percentiles)->
+      # WARNING: Do the division first to prevent number overflow
+      intervalsSize = (stats.max/FacetingHandler.NUM_INTERVALS)-(stats.min/FacetingHandler.NUM_INTERVALS)
+      # WARNING: Do the division first to prevent number overflow
+
+      lowP = percentiles['1.0']
+      hiP = percentiles['99.0']
+
+      isSmallFloat = hiP - lowP <= 7 and not @property_type.integer
+      isNormalDistributed = hiP > stats.avg + stats.std_deviation and lowP < stats.avg - stats.std_deviation
+
+      minV = stats.min
+      maxV = stats.max
+
+      delta = maxV - minV
+
+      @intervalsLimits = [minV]
+
+      if delta <= 2*FacetingHandler.NUM_INTERVALS and (delta >= 7 or @property_type.integer)
+        if not @property_type.integer
+          minV = Math.floor(minV)
+          maxV = Math.ceil(maxV)
+        for numJ in [(minV+1)..(maxV+1)]
+          @intervalsLimits.push(numJ)
+      else if not isNormalDistributed
+        for keyI in _.keys(percentiles)
+          if keyI in ['1.0','99.0']
+            continue
+          nextLimit = percentiles[keyI]
+          notIncludeDecimals = @property_type.integer or Math.abs(nextLimit) > 10
+          nextLimit *= 100.00 unless notIncludeDecimals
+          nextLimit = Math.round(nextLimit)
+          nextLimit /= 100.00 unless notIncludeDecimals
+          if nextLimit > _.last(@intervalsLimits)
+            @intervalsLimits.push(nextLimit)
       else
-        lastNum = 1
-      @intervals_size = lastNum * Math.pow(10, curLevel)
-      if isSmallFloat
-        @intervals_size /= Math.pow(10, 20)
+        lowP = percentiles['1.0']
+        hiP = percentiles['99.0']
+        lowerBound = Math.round(Math.max(lowP, minV))
+        upperBound = Math.round(Math.min(hiP, maxV))
+
+        intervalsSize = (upperBound/(FacetingHandler.NUM_INTERVALS-2))-(lowerBound/(FacetingHandler.NUM_INTERVALS-2))
+        notIncludeDecimals = @property_type.integer or Math.abs(intervalsSize) > 3
+        intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat, true)
+        if intervalsSize == 0
+          intervalsSize = 1
+        lowerBound *= 100.00 unless notIncludeDecimals
+        upperBound *= 100.00 unless notIncludeDecimals
+        lowerBound = Math.floor(lowerBound/intervalsSize) * intervalsSize
+        upperBound = Math.floor(upperBound/intervalsSize) * intervalsSize
+        lowerBound /= 100.00 unless notIncludeDecimals
+        upperBound /= 100.00 unless notIncludeDecimals
+
+        curNum = lowerBound
+        while curNum <= upperBound and curNum <= maxV
+          if curNum > _.last(@intervalsLimits)
+            @intervalsLimits.push curNum
+          curNum += intervalsSize
+        if upperBound < maxV
+          @intervalsLimits.push maxV
+      if maxV <= _.last(@intervalsLimits)
+        @intervalsLimits[@intervalsLimits.length - 1] = maxV
+      else
+        @intervalsLimits.push(maxV)
+
 
     parseESResults: (es_aggregations_data, first_call)->
 
@@ -202,24 +246,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               @faceting_keys_inorder.push(FacetingHandler.OTHERS_CATEGORY)
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
-          @min_value = es_aggregations_data[@es_property_name+'_MIN'].value
-          if not _.isNumber(@min_value) and not _.isNaN(@min_value)
-            @min_value = Number.MIN_SAFE_INTEGER
-          @max_value = es_aggregations_data[@es_property_name+'_MAX'].value
-          if not _.isNumber(@max_value) and not _.isNaN(@max_value)
-            @max_value = Number.MAX_SAFE_INTEGER
-          @roundInterval()
+          stats = es_aggregations_data[@es_property_name+'_STATS']
+          percentiles = es_aggregations_data[@es_property_name+'_PERCENTILES'].values
+          @calculateIntervals stats, percentiles
         else
-          if not _.isNumber(@min_value) or not _.isNumber(@max_value)
-            throw "ERROR! The minimum and maximum have not been requested yet!"
+          if not @intervalsLimits?
+            throw "ERROR! The intervals have not been calculated yet!"
           aggregated_data = es_aggregations_data[@es_property_name]
-          if aggregated_data
-            if not _.isUndefined(aggregated_data.buckets)
+          if aggregated_data?
+            if aggregated_data.buckets
               for bucket_i in aggregated_data.buckets
-                fKey = @parseIntervalKey(bucket_i.key, @intervals_size)
+                fKey = @getIntervalKey(bucket_i)
                 @faceting_data[fKey] = {
-                  min: bucket_i.key
-                  max: bucket_i.key + @intervals_size
+                  min: bucket_i.from
+                  max: bucket_i.from + bucket_i.to
                   index: @faceting_keys_inorder.length
                   count: bucket_i.doc_count
                   selected: false
@@ -234,12 +274,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       return glados.models.visualisation.PropertiesFactory.parseValueForEntity(esIndex, propName, key)
 
-    parseIntervalKey: (key, intervalsSize) ->
-      formatKey = glados.Utils.getFormattedNumber
-      if intervalsSize == 1
-        return formatKey(key)
+    getIntervalKey: (bucket_data) ->
+      formatKey = if @isYear then ((n)-> return n) else glados.Utils.getFormattedNumber
+      if @intervals_size == 1
+        return formatKey(bucket_data.from)
       else
-        return formatKey(key) + "  to  " + formatKey(key + intervalsSize)
+        return formatKey(bucket_data.from) + "  to  " + formatKey(bucket_data.to)
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING
