@@ -4,9 +4,9 @@
 
 {% block content %}
 
-   <div id="CellBasicInformation" style="margin-top: 25px;">
+   <div style="margin-top: 25px;">
      {% with is_dynamic=True  %}
-      {% include "glados/CellReportCardParts/BasicInformation.html" %}
+      {% include "glados/TissueReportCardParts/BasicInformation.html" %}
      {% endwith %}
    </div>
 
@@ -14,5 +14,5 @@
 
 
 {% block custom_js_inline %}
-CellLineReportCardApp.initBasicInformation()
+TissueReportCardApp.initBasicInformation()
 {% endblock %}
