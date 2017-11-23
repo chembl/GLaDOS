@@ -2598,46 +2598,6 @@ msgid "glados_es_gs__molecule__unichem__label__mini"
 msgstr "Unichem"
 
 
-msgid "glados_es_gs__molecule__unichem___id__label"
-msgstr "Unichem ID"
-
-
-msgid "glados_es_gs__molecule__unichem___id__label__mini"
-msgstr "Unichem ID"
-
-
-msgid "glados_es_gs__molecule__unichem___link__label"
-msgstr "Unichem Link"
-
-
-msgid "glados_es_gs__molecule__unichem___link__label__mini"
-msgstr "Unichem Link"
-
-
-msgid "glados_es_gs__molecule__unichem___src_name__label"
-msgstr "Unichem Src Name"
-
-
-msgid "glados_es_gs__molecule__unichem___src_name__label__mini"
-msgstr "Unichem Src Name"
-
-
-msgid "glados_es_gs__molecule__unichem___src_url__label"
-msgstr "Unichem Src Url"
-
-
-msgid "glados_es_gs__molecule__unichem___src_url__label__mini"
-msgstr "Unichem Src Url"
-
-
-msgid "glados_es_gs__molecule__unichem__label"
-msgstr "Unichem"
-
-
-msgid "glados_es_gs__molecule__unichem__label__mini"
-msgstr "Unichem"
-
-
 msgid "glados_es_gs__molecule__usan_stem__label"
 msgstr "USAN Stem"
 
