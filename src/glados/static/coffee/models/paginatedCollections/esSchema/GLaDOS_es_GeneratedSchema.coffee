@@ -1347,6 +1347,96 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__molecule__activity_count__label'
         label_mini_id : 'glados_es_gs__molecule__activity_count__label__mini'
 
+      '_metadata.atc_classification.level1' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level1__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level1__label__mini'
+
+      '_metadata.atc_classification.level1_description' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level1_description__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level1_description__label__mini'
+
+      '_metadata.atc_classification.level2' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level2__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level2__label__mini'
+
+      '_metadata.atc_classification.level2_description' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level2_description__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level2_description__label__mini'
+
+      '_metadata.atc_classification.level3' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level3__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level3__label__mini'
+
+      '_metadata.atc_classification.level3_description' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level3_description__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level3_description__label__mini'
+
+      '_metadata.atc_classification.level4' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level4__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level4__label__mini'
+
+      '_metadata.atc_classification.level4_description' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level4_description__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level4_description__label__mini'
+
+      '_metadata.atc_classification.level5' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___level5__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___level5__label__mini'
+
+      '_metadata.atc_classification.who_name' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification___who_name__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification___who_name__label__mini'
+
+      '_metadata.atc_classification' : 
+        type : Object
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__atc_classification__label'
+        label_mini_id : 'glados_es_gs__molecule__atc_classification__label__mini'
+
+      '_metadata.compound_generated.availability_type_label' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__compound_generated___availability_type_label__label'
+        label_mini_id : 'glados_es_gs__molecule__compound_generated___availability_type_label__label__mini'
+
+      '_metadata.compound_generated.chirality_label' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__compound_generated___chirality_label__label'
+        label_mini_id : 'glados_es_gs__molecule__compound_generated___chirality_label__label__mini'
+
+      '_metadata.compound_generated.image_file' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__compound_generated___image_file__label'
+        label_mini_id : 'glados_es_gs__molecule__compound_generated___image_file__label__mini'
+
+      '_metadata.compound_generated' : 
+        type : Object
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__compound_generated__label'
+        label_mini_id : 'glados_es_gs__molecule__compound_generated__label__mini'
+
       '_metadata.compound_records.compound_key' : 
         type : String
         aggregatable : false
@@ -2630,44 +2720,42 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.protein_classification.l1' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l1__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l1__label__mini'
 
       '_metadata.protein_classification.l2' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l2__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l2__label__mini'
 
       '_metadata.protein_classification.l3' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l3__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l3__label__mini'
 
       '_metadata.protein_classification.l4' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l4__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l4__label__mini'
 
       '_metadata.protein_classification.l5' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l5__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l5__label__mini'
 
       '_metadata.protein_classification.l6' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___l6__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___l6__label__mini'
 
       '_metadata.protein_classification.protein_class_id' : 
-        type : Number
-        integer : true
-        year : false
+        type : String
         aggregatable : true
         label_id : 'glados_es_gs__target__protein_classification___protein_class_id__label'
         label_mini_id : 'glados_es_gs__target__protein_classification___protein_class_id__label__mini'
@@ -2677,56 +2765,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : false
         label_id : 'glados_es_gs__target__protein_classification__label'
         label_mini_id : 'glados_es_gs__target__protein_classification__label__mini'
-
-      '_metadata.protein_classifications.l1' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l1__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l1__label__mini'
-
-      '_metadata.protein_classifications.l2' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l2__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l2__label__mini'
-
-      '_metadata.protein_classifications.l3' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l3__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l3__label__mini'
-
-      '_metadata.protein_classifications.l4' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l4__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l4__label__mini'
-
-      '_metadata.protein_classifications.l5' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l5__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l5__label__mini'
-
-      '_metadata.protein_classifications.l6' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications___l6__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___l6__label__mini'
-
-      '_metadata.protein_classifications.protein_class_id' : 
-        type : Number
-        integer : true
-        year : false
-        aggregatable : true
-        label_id : 'glados_es_gs__target__protein_classifications___protein_class_id__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___protein_class_id__label__mini'
-
-      '_metadata.protein_classifications' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__protein_classifications__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications__label__mini'
 
       '_metadata.related_activities.count' : 
         type : Number
@@ -2870,21 +2908,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.target_component.accession' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component___accession__label'
         label_mini_id : 'glados_es_gs__target__target_component___accession__label__mini'
 
       '_metadata.target_component.component_id' : 
-        type : Number
-        integer : true
-        year : false
+        type : String
         aggregatable : true
         label_id : 'glados_es_gs__target__target_component___component_id__label'
         label_mini_id : 'glados_es_gs__target__target_component___component_id__label__mini'
 
       '_metadata.target_component.component_type' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component___component_type__label'
         label_mini_id : 'glados_es_gs__target__target_component___component_type__label__mini'
 
@@ -2896,7 +2932,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.target_component.go_slims.go_id' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__go_slims___go_id__label'
         label_mini_id : 'glados_es_gs__target__go_slims___go_id__label__mini'
 
@@ -2908,14 +2944,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.target_component.organism' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component___organism__label'
         label_mini_id : 'glados_es_gs__target__target_component___organism__label__mini'
 
       '_metadata.target_component.protein_classifications.protein_classification_id' : 
-        type : Number
-        integer : true
-        year : false
+        type : String
         aggregatable : true
         label_id : 'glados_es_gs__target__protein_classifications___protein_classification_id__label'
         label_mini_id : 'glados_es_gs__target__protein_classifications___protein_classification_id__label__mini'
@@ -2928,19 +2962,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.target_component.sequence' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component___sequence__label'
         label_mini_id : 'glados_es_gs__target__target_component___sequence__label__mini'
 
       '_metadata.target_component.target_component_synonyms.component_synonym' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component_synonyms___component_synonym__label'
         label_mini_id : 'glados_es_gs__target__target_component_synonyms___component_synonym__label__mini'
 
       '_metadata.target_component.target_component_synonyms.syn_type' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__target_component_synonyms___syn_type__label'
         label_mini_id : 'glados_es_gs__target__target_component_synonyms___syn_type__label__mini'
 
@@ -2952,7 +2986,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
       '_metadata.target_component.targets.target_chembl_id' : 
         type : String
-        aggregatable : false
+        aggregatable : true
         label_id : 'glados_es_gs__target__targets___target_chembl_id__label'
         label_mini_id : 'glados_es_gs__target__targets___target_chembl_id__label__mini'
 
@@ -2963,9 +2997,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_mini_id : 'glados_es_gs__target__target_component___targets__label__mini'
 
       '_metadata.target_component.tax_id' : 
-        type : Number
-        integer : true
-        year : false
+        type : String
         aggregatable : true
         label_id : 'glados_es_gs__target__target_component___tax_id__label'
         label_mini_id : 'glados_es_gs__target__target_component___tax_id__label__mini'
@@ -2975,114 +3007,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : false
         label_id : 'glados_es_gs__target__target_component__label'
         label_mini_id : 'glados_es_gs__target__target_component__label__mini'
-
-      '_metadata.target_components.accession' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___accession__label'
-        label_mini_id : 'glados_es_gs__target__target_components___accession__label__mini'
-
-      '_metadata.target_components.component_id' : 
-        type : Number
-        integer : true
-        year : false
-        aggregatable : true
-        label_id : 'glados_es_gs__target__target_components___component_id__label'
-        label_mini_id : 'glados_es_gs__target__target_components___component_id__label__mini'
-
-      '_metadata.target_components.component_type' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___component_type__label'
-        label_mini_id : 'glados_es_gs__target__target_components___component_type__label__mini'
-
-      '_metadata.target_components.description' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___description__label'
-        label_mini_id : 'glados_es_gs__target__target_components___description__label__mini'
-
-      '_metadata.target_components.go_slims.go_id' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__go_slims___go_id__label'
-        label_mini_id : 'glados_es_gs__target__go_slims___go_id__label__mini'
-
-      '_metadata.target_components.go_slims' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___go_slims__label'
-        label_mini_id : 'glados_es_gs__target__target_components___go_slims__label__mini'
-
-      '_metadata.target_components.organism' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___organism__label'
-        label_mini_id : 'glados_es_gs__target__target_components___organism__label__mini'
-
-      '_metadata.target_components.protein_classifications.protein_classification_id' : 
-        type : Number
-        integer : true
-        year : false
-        aggregatable : true
-        label_id : 'glados_es_gs__target__protein_classifications___protein_classification_id__label'
-        label_mini_id : 'glados_es_gs__target__protein_classifications___protein_classification_id__label__mini'
-
-      '_metadata.target_components.protein_classifications' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___protein_classifications__label'
-        label_mini_id : 'glados_es_gs__target__target_components___protein_classifications__label__mini'
-
-      '_metadata.target_components.sequence' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___sequence__label'
-        label_mini_id : 'glados_es_gs__target__target_components___sequence__label__mini'
-
-      '_metadata.target_components.target_component_synonyms.component_synonym' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_component_synonyms___component_synonym__label'
-        label_mini_id : 'glados_es_gs__target__target_component_synonyms___component_synonym__label__mini'
-
-      '_metadata.target_components.target_component_synonyms.syn_type' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_component_synonyms___syn_type__label'
-        label_mini_id : 'glados_es_gs__target__target_component_synonyms___syn_type__label__mini'
-
-      '_metadata.target_components.target_component_synonyms' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___target_component_synonyms__label'
-        label_mini_id : 'glados_es_gs__target__target_components___target_component_synonyms__label__mini'
-
-      '_metadata.target_components.targets.target_chembl_id' : 
-        type : String
-        aggregatable : false
-        label_id : 'glados_es_gs__target__targets___target_chembl_id__label'
-        label_mini_id : 'glados_es_gs__target__targets___target_chembl_id__label__mini'
-
-      '_metadata.target_components.targets' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components___targets__label'
-        label_mini_id : 'glados_es_gs__target__target_components___targets__label__mini'
-
-      '_metadata.target_components.tax_id' : 
-        type : Number
-        integer : true
-        year : false
-        aggregatable : true
-        label_id : 'glados_es_gs__target__target_components___tax_id__label'
-        label_mini_id : 'glados_es_gs__target__target_components___tax_id__label__mini'
-
-      '_metadata.target_components' : 
-        type : Object
-        aggregatable : false
-        label_id : 'glados_es_gs__target__target_components__label'
-        label_mini_id : 'glados_es_gs__target__target_components__label__mini'
 
       _metadata : 
         type : Object
