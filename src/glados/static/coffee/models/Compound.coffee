@@ -569,6 +569,19 @@ Compound.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
+  NUM_TARGETS_BY_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Targets (by Class)'
+    comparator: '_metadata.related_targets.count'
+    format_as_number: true
+    link_base: 'targets_url'
+    secondary_link: true
+    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['molecule_chembl_id']
+    function_constant_parameters: ['targets_by_class']
+    function_key: 'compound_targets_by_class'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
   BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: '_metadata.activity_count'
     link_base: 'activities_url'
@@ -654,6 +667,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.MWT_MONOISOTOPIC,
     Compound.COLUMNS.MOLECULAR_SPECIES,
     Compound.COLUMNS.FULL_MOLFORMULA,
+#    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
   ]
   RESULTS_LIST_SIMILARITY:[
     Compound.COLUMNS.CHEMBL_ID,

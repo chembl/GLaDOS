@@ -54,16 +54,24 @@ glados.useNameSpace 'glados.models.visualisation',
           label_mini: 'Type'
           domain: ["Other","SINGLE PROTEIN","ORGANISM","CELL-LINE","PROTEIN COMPLEX","PROTEIN FAMILY","TISSUE","SELECTIVITY GROUP","PROTEIN COMPLEX GROUP","NUCLEIC-ACID","SMALL MOLECULE","PROTEIN-PROTEIN INTERACTION","UNKNOWN","SUBCELLULAR","METAL","MACROMOLECULE","OLIGOSACCHARIDE","PROTEIN NUCLEIC-ACID COMPLEX","CHIMERIC PROTEIN","LIPID","PHENOTYPE","ADMET","NO TARGET","UNCHECKED"]
           coloursRange: ["#9e9e9e","#393b79","#5254a3","#6b6ecf","#9c9ede","#637939","#8ca252","#b5cf6b","#cedb9c","#8c6d31","#bd9e39","#e7ba52","#e7cb94","#843c39","#ad494a","#d6616b","#e7969c","#7b4173","#a55194","#ce6dbd","#de9ed6","#e8c7b6","#242071","#c1bdce"]
+          colourScaleType: glados.Visualisation.CATEGORICAL
+        TARGET_CLASS:
+          propName:'target_class'
+          label: 'Target Class'
+          label_mini: 'Class'
+          domain: ["Other", "Enzyme", "Unclassified protein", "Membrane receptor", "Ion channel", "Other cytosolic protein", "Transporter", "Transcription factor", "Epigenetic regulator", "Secreted protein", "Structural protein", "Auxiliary transport protein", "Surface antigen", "Other membrane protein", "Adhesion", "Other nuclear protein"]
+          range: ["#242071","#-c1bdce","#-f57c0f","#-4787c6","#a83045","#fd4694","#698098","#-8b44f7","#-ffff5b","#-895cd7","#6b9011","#fd9871","#a67943","#-49b408","#-f61e24","#-c040b3"]
 
 #  (->
 #
 #            randomColours = []
-#            numColours = 24 - 21
-#            seed = 2
+#            numColours = 16
+#            seed = 3
 #            for i in [1..numColours]
 #              randomColours.push ("#" + (Math.round(Math.sin(seed++) * 0xFFFFFF)).toString(16))
 #
-#            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
+#            range = randomColours
+##            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
 #
 #            console.log 'AAA range: ', range
 #            console.log 'AAA range: ', JSON.stringify(range)

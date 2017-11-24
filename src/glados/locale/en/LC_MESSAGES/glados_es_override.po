@@ -326,6 +326,9 @@ msgstr "Tissue"
 #-----------------------------------------------------------------------------------------------------------------------
 # Compound Report Card
 #-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_compound__associated_targets_by_class_pie_title_base"
+msgstr "ChEMBL Target Classes for Compound "
+
 msgid "glados_compound__associated_targets_pie_title_base"
 msgstr "ChEMBL Target Types for Compound "
 
