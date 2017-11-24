@@ -236,6 +236,9 @@ urlpatterns += [
 
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/CompoundSummaryToEmbed.html")), ),
+
+  url(r'^tissues/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Tests
   # --------------------------------------------------------------------------------------------------------------------

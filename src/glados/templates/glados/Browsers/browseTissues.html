@@ -1,0 +1,16 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Browse Tissues{% endblock %}
+
+{% block content %}
+<div class="container main-container">
+  <h2>
+    Browse Tissues
+  </h2>
+  {% include "glados/Browsers/DefaultBrowserContent.html" %}
+</div>
+{% endblock %}
+
+{% block custom_js_inline %}
+TissuesBrowserApp.init();
+{% endblock %}
