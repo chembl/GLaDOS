@@ -173,10 +173,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     relatedActivities.fetch()
 
-
   @initCompoundSummary = ->
 
-    # TODO: update after index is updated https://github.com/chembl/GLaDOS-es/issues/8
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedCompounds = DocumentReportCardApp.getAssociatedCompoundsAgg(chemblID)
 
@@ -194,7 +192,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Document ' + chemblID
-      title_link_url: Compound.getCompoundsListURL()
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
       range_categories: true
 
     config =
@@ -238,7 +236,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'document_chembl_id'
@@ -340,22 +337,24 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
-    # TODO: update after index is updated. https://github.com/chembl/GLaDOS-es/issues/8
     queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'document_chembl_id'
+      fields: ['_metadata.related_documents.chembl_ids.*']
 
     aggsConfig =
       aggs:
         x_axis_agg:
           field: 'molecule_properties.full_mwt'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
+          min_columns: minCols
+          max_columns: maxCols
+          num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: 'molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
+            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+              'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
+              document_chembl_id: 'document_chembl_id'
               min_val: 'BUCKET.from'
               max_val: 'BUCKETS.to'
             link_generator: Compound.getCompoundsListURL
@@ -363,8 +362,103 @@ class DocumentReportCardApp extends glados.ReportCardApp
     associatedCompounds = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
-      target_chembl_id: chemblID
+      document_chembl_id: chemblID
       aggs_config: aggsConfig
 
     return associatedCompounds
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # mini Histograms
+  # --------------------------------------------------------------------------------------------------------------------
+  @initMiniActivitiesHistogram = ($containerElem, chemblID) ->
+
+    bioactivities = DocumentReportCardApp.getRelatedActivitiesAgg(chemblID)
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: bioactivities
+      el: $containerElem
+      config: config
+
+    bioactivities.fetch()
+
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    associatedCompounds = DocumentReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'x_axis_agg'
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      initial_property_x: 'mwt'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+  @initMiniTargetsHistogram = ($containerElem, chemblID) ->
+
+    targetTypes = DocumentReportCardApp.getRelatedTargetsAgg(chemblID)
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE',
+    withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: targetTypes
+      el: $containerElem
+      config: config
+
+    targetTypes.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+
+    $clickedLink = $(@)
+
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+
+    histogramType = constantParamsList[0]
+    chemblID = paramsList[0]
+
+    if histogramType == 'activities'
+      DocumentReportCardApp.initMiniActivitiesHistogram($containerElem, chemblID)
+    else if histogramType == 'compounds'
+      DocumentReportCardApp.initMiniCompoundsHistogram($containerElem, chemblID)
+    else if histogramType == 'targets'
+      DocumentReportCardApp.initMiniTargetsHistogram($containerElem, chemblID)
+
+
 

@@ -168,6 +168,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQueryString=true)
       return list
 
+    getNewESDocumentsList: (customQueryString='*') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT,
+        customQueryString, useCustomQueryString=true)
+      return list
+
+    getNewESCellsList: (customQueryString='*') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.CELL_LINE,
+        customQueryString, useCustomQueryString=true)
+      return list
+
+    getNewESTissuesList: (customQueryString='*') ->
+      list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TISSUE,
+        customQueryString, useCustomQueryString=true)
+      return list
+
     getNewESAssaysList: (customQueryString='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.ASSAY,
         customQueryString, useCustomQueryString=true)

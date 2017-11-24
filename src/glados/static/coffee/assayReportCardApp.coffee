@@ -264,3 +264,67 @@ class AssayReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return targetTypes
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # mini Histograms
+  # --------------------------------------------------------------------------------------------------------------------
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    associatedCompounds = AssayReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'x_axis_agg'
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      initial_property_x: 'mwt'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+  @initMiniActivitiesHistogram = ($containerElem, chemblID) ->
+
+    bioactivities = AssayReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: bioactivities
+      el: $containerElem
+      config: config
+
+    bioactivities.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+    $clickedLink = $(@)
+
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+
+    histogramType = constantParamsList[0]
+    chemblID = paramsList[0]
+
+    if histogramType == 'compounds'
+      AssayReportCardApp.initMiniCompoundsHistogram($containerElem, chemblID)
+    else if histogramType == 'activities'
+      AssayReportCardApp.initMiniActivitiesHistogram($containerElem, chemblID)

@@ -187,6 +187,8 @@ urlpatterns += [
   url(r'^documents_with_same_terms/(?P<doc_terms>.+)/$',
     DirectTemplateView.as_view(template_name="glados/DocumentTerms/DocumentTermsSearch.html"), ),
 
+  url(r'^documents/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseDocuments.html"), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Cells
   # --------------------------------------------------------------------------------------------------------------------
@@ -214,6 +216,9 @@ urlpatterns += [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
+  url(r'^cells/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseCells.html"), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Tissues
   # --------------------------------------------------------------------------------------------------------------------
@@ -231,6 +236,9 @@ urlpatterns += [
 
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/CompoundSummaryToEmbed.html")), ),
+
+  url(r'^tissues/(filter/[\S| ]+)?$',
+      DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Tests
   # --------------------------------------------------------------------------------------------------------------------

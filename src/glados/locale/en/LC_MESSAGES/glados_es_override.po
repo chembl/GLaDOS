@@ -176,6 +176,9 @@ msgstr "Target Type"
 
 msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label"
 msgstr "Data Validity Comment"
+
+msgid "glados_es_gs__assay__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -236,6 +239,11 @@ msgstr "ChEMBL ID"
 msgid "glados_es_gs__cell_line__cell_source_tax_id__label"
 msgstr "Tax ID"
 
+msgid "glados_es_gs__cell_line__related_activities___count__label"
+msgstr "Activities"
+
+msgid "glados_es_gs__cell_line__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Tissue Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -248,6 +256,11 @@ msgstr "Name"
 msgid "glados_es_gs__tissue__bto_id__label"
 msgstr "BTO ID"
 
+msgid "glados_es_gs__tissue__related_activities___count__label"
+msgstr "Activities"
+
+msgid "glados_es_gs__tissue__related_compounds___count__label"
+msgstr "Compounds"
 #-----------------------------------------------------------------------------------------------------------------------
 # Document Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -266,6 +279,14 @@ msgstr "DOI"
 msgid "glados_es_gs__document__source___src_description__label"
 msgstr "Source"
 
+msgid "glados_es_gs__document__related_activities___count__label"
+msgstr "Activities"
+
+msgid "glados_es_gs__document__related_compounds___count__label"
+msgstr "Compounds"
+
+msgid "glados_es_gs__document__related_targets___count__label"
+msgstr "Targets"
 #-----------------------------------------------------------------------------------------------------------------------
 # Filters handling
 #-----------------------------------------------------------------------------------------------------------------------

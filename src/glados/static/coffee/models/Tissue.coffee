@@ -6,8 +6,13 @@ glados.useNameSpace 'glados.models',
 
     parse: (response) ->
 
-
       response.report_card_url = glados.models.Tissue.get_report_card_url(response.tissue_chembl_id )
+
+      filterForActivities = '_metadata.assay_data.tissue_chembl_id:' + response.tissue_chembl_id
+      response.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+      filterForCompounds = '_metadata.related_tissues.chembl_ids.\\*:' + response.tissue_chembl_id
+      response.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
       return response;
 
@@ -35,6 +40,28 @@ glados.models.Tissue.COLUMNS = {
   CALOHA_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: 'caloha_id'
     link_function: (id) -> 'https://www.nextprot.org/term/' + encodeURIComponent(id)
+  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
+    comparator: '_metadata.related_activities.count'
+    link_base: 'activities_url'
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['tissue_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'tissue_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
+  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    link_base: 'compounds_url'
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['tissue_chembl_id']
+    function_key: 'tissue_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
 }
 
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
@@ -47,14 +74,16 @@ glados.models.Tissue.COLUMNS_SETTINGS = {
     return colsList
   )()
   RESULTS_LIST_REPORT_CARD: [
-    glados.models.Tissue.COLUMNS.CHEMBL_ID,
-    glados.models.Tissue.COLUMNS.PREF_NAME,
-    glados.models.Tissue.COLUMNS.UBERON_ID,
-    glados.models.Tissue.COLUMNS.EFO_ID,
+    glados.models.Tissue.COLUMNS.CHEMBL_ID
+    glados.models.Tissue.COLUMNS.PREF_NAME
+    glados.models.Tissue.COLUMNS.UBERON_ID
+    glados.models.Tissue.COLUMNS.EFO_ID
+    glados.models.Tissue.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_ADDITIONAL:[
     glados.models.Tissue.COLUMNS.BTO_ID
     glados.models.Tissue.COLUMNS.CALOHA_ID
+    glados.models.Tissue.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
   ]
 }
 

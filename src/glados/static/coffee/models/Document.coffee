@@ -8,6 +8,13 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   parse: (data) ->
     parsed = data
     parsed.report_card_url = Document.get_report_card_url(parsed.document_chembl_id)
+
+    filterForActivities = 'document_chembl_id:' + parsed.document_chembl_id
+    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + parsed.document_chembl_id
+    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -53,6 +60,40 @@ Document.COLUMNS = {
     comparator: 'doc_type'
   ABSTRACT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'abstract'
+  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.related_activities.count'
+    link_base: 'activities_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'document_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
+  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.related_compounds.count'
+    link_base: 'compounds_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['document_chembl_id']
+    function_key: 'document_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+    secondary_link: true
+  NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.related_targets.count'
+    format_as_number: true
+    link_base: 'targets_url'
+    secondary_link: true
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'document_targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
 }
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
@@ -72,6 +113,7 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.TITLE
     Document.COLUMNS.PUBMED_ID
     Document.COLUMNS.DOI
+    Document.COLUMNS.BIOACTIVITIES_NUMBER
     Document.COLUMNS.PATENT_ID
     Document.COLUMNS.SOURCE
     Document.COLUMNS.JOURNAL
@@ -81,6 +123,8 @@ Document.COLUMNS_SETTINGS = {
   RESULTS_LIST_ADDITIONAL: [
     Document.COLUMNS.TYPE
     Document.COLUMNS.ABSTRACT
+    Document.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
+    Document.COLUMNS.NUM_TARGETS
   ]
   RESULTS_LIST_CARD: [
     Document.COLUMNS.CHEMBL_ID

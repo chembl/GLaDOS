@@ -218,7 +218,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     return bioactivities
 
-  @getAssociatedCompoundsAgg = (chemblID) ->
+  @getAssociatedCompoundsAgg = (chemblID, minCols=1, maxCols=20, defaultCols=10) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
@@ -230,9 +230,9 @@ class CellLineReportCardApp extends glados.ReportCardApp
         x_axis_agg:
           field: 'molecule_properties.full_mwt'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: 1
-          max_columns: 20
-          num_columns: 10
+          min_columns: minCols
+          max_columns: maxCols
+          num_columns: defaultCols
           bucket_links:
             bucket_filter_template: '_metadata.related_cell_lines.chembl_ids.\\*:{{cell_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
@@ -249,3 +249,67 @@ class CellLineReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return associatedCompounds
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Mini histograms
+  # --------------------------------------------------------------------------------------------------------------------
+  @initMiniActivitiesHistogram = ($containerElem, chemblID) ->
+
+    bioactivities = CellLineReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
+
+    stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
+      withColourScale=true)
+
+    barsColourScale = stdTypeProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'types'
+      properties:
+        std_type: stdTypeProp
+      initial_property_x: 'std_type'
+
+    new glados.views.Visualisation.HistogramView
+      model: bioactivities
+      el: $containerElem
+      config: config
+
+    bioactivities.fetch()
+
+  @initMiniCompoundsHistogram = ($containerElem, chemblID) ->
+
+    associatedCompounds = CellLineReportCardApp.getAssociatedCompoundsAgg(chemblID, minCols=8,
+      maxCols=8, defaultCols=8)
+
+    config =
+      max_categories: 8
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'x_axis_agg'
+      properties:
+        mwt: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FULL_MWT')
+      initial_property_x: 'mwt'
+
+    new glados.views.Visualisation.HistogramView
+      model: associatedCompounds
+      el: $containerElem
+      config: config
+
+    associatedCompounds.fetch()
+
+  @initMiniHistogramFromFunctionLink = ->
+    $clickedLink = $(@)
+
+    [paramsList, constantParamsList, $containerElem] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink)
+
+    histogramType = constantParamsList[0]
+    chemblID = paramsList[0]
+
+    if histogramType == 'activities'
+      CellLineReportCardApp.initMiniActivitiesHistogram($containerElem, chemblID)
+    else if histogramType == 'compounds'
+      CellLineReportCardApp.initMiniCompoundsHistogram($containerElem, chemblID)

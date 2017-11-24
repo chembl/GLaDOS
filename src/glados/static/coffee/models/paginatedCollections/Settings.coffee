@@ -180,6 +180,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
       TISSUE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
@@ -206,6 +207,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
