@@ -35,6 +35,17 @@ glados.models.Tissue.COLUMNS = {
   CALOHA_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: 'caloha_id'
     link_function: (id) -> 'https://www.nextprot.org/term/' + encodeURIComponent(id)
+#  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
+#    comparator: '_metadata.related_activities.count'
+#    link_base: 'activities_url'
+#    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+#    function_parameters: ['cell_chembl_id']
+#    function_constant_parameters: ['activities']
+#    function_key: 'cell_bioactivities'
+#    function_link: true
+#    execute_on_render: true
+#    format_class: 'number-cell-center'
+#    secondary_link: true
 }
 
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
