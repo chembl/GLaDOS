@@ -90,13 +90,12 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @initTargetSummary = ->
 
-    #TODO: update when index is ready
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedTargets = DocumentReportCardApp.getRelatedTargetsAgg(chemblID)
+    relatedTargets = DocumentReportCardApp.getRelatedTargetsAggByClass(chemblID)
 
     pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_document__associated_targets_pie_title_base') + chemblID
+      x_axis_prop_name: 'classes'
+      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
 
     viewConfig =
       pie_config: pieConfig
@@ -234,6 +233,39 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   # Aggregations
   # -------------------------------------------------------------
+  @getRelatedTargetsAggByClass = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'document_chembl_id'
+      fields: ['_metadata.related_documents.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        classes:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.protein_classification.l1'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+                                    'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              document_chembl_id: 'document_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Target.getTargetsListURL
+
+    targetTypes = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      document_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return targetTypes
+
   @getRelatedTargetsAgg = (chemblID) ->
 
     queryConfig =
