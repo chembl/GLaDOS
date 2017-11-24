@@ -211,6 +211,9 @@ msgstr "Source"
 
 msgid "glados_es_gs__assay__bao_label__label"
 msgstr "BAO Format"
+
+msgid "glados_es_gs__assay__related_activities___count__label"
+msgstr "Activities"
 #-----------------------------------------------------------------------------------------------------------------------
 # Cell Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
