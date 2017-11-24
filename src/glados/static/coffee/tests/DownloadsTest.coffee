@@ -108,27 +108,28 @@ describe "Downloads", ->
 
     it 'Generates the configuration for Assays', ->
 
-      comparatorsMustBe = ["assay_chembl_id", "description", "assay_organism", "document_chembl_id", "bao_label",
-        "_metadata.source.src_description", "assay_tax_id", "assay_strain", "assay_type", "tissue_chembl_id",
-        "assay_cell_type", "assay_subcellular_fraction"]
+      comparatorsMustBe = ["assay_chembl_id","description","assay_organism","_metadata.related_compounds.count",
+        "document_chembl_id","bao_label","_metadata.source.src_description","assay_tax_id","assay_strain",
+        "assay_type","tissue_chembl_id","assay_cell_type","assay_subcellular_fraction",
+        "_metadata.related_activities.count"]
 
       comparatorsGot = (col.comparator for col in Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
-      console.log 'comparatorsGot: ', comparatorsGot
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
     it 'Generates the configuration for Documents', ->
 
-      comparatorsMustBe = ["document_chembl_id","journal","title","pubmed_id","doi","patent_id",
-        "_metadata.source","authors","year","doc_type","abstract"]
+      comparatorsMustBe = ["document_chembl_id","journal","title","pubmed_id","doi",
+        "_metadata.related_activities.count","patent_id","_metadata.source","authors",
+        "year","doc_type","abstract","_metadata.related_compounds.count","_metadata.related_targets.count"]
 
       comparatorsGot = (col.comparator for col in Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
-      console.log 'comparatorsGot: ', JSON.stringify(comparatorsGot)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
 
     it 'Generates the configuration for Cell Lines', ->
 
-      comparatorsMustBe = ["cell_chembl_id","cell_name","cell_description","cell_source_organism",
-        "cell_source_tissue","cell_source_tax_id", "clo_id","efo_id","cellosaurus_id","cl_lincs_id"]
+      comparatorsMustBe = ["cell_chembl_id","cell_name","cell_description","_metadata.related_activities.count",
+        "cell_source_organism","cell_source_tissue","cell_source_tax_id","clo_id","efo_id","cellosaurus_id",
+        "cl_lincs_id","_metadata.related_compounds.count"]
 
       comparatorsGot = (col.comparator for col in CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
@@ -136,7 +137,8 @@ describe "Downloads", ->
 
     it 'Generates the configuration for Tissue', ->
 
-      comparatorsMustBe = ["tissue_chembl_id","pref_name","uberon_id","efo_id","bto_id","caloha_id"]
+      comparatorsMustBe = ["tissue_chembl_id","pref_name","uberon_id","efo_id","_metadata.related_activities.count",
+        "bto_id","caloha_id","_metadata.related_compounds.count"]
 
       comparatorsGot = (col.comparator for col in glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
