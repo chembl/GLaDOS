@@ -119,13 +119,14 @@ class AssayReportCardApp extends glados.ReportCardApp
 
   @initTargetSummary = ->
 
-    #TODO: update when index is ready
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedTargets = AssayReportCardApp.getRelatedTargetsAgg(chemblID)
+    relatedTargets = AssayReportCardApp.getRelatedTargetsByClassAgg(chemblID)
+
+    console.log 'AAA relatedTargets:', relatedTargets
 
     pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_assay__associated_targets_pie_title_base') + chemblID
+      x_axis_prop_name: 'classes'
+      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
 
     viewConfig =
       pie_config: pieConfig
@@ -233,7 +234,6 @@ class AssayReportCardApp extends glados.ReportCardApp
 
   @getRelatedTargetsAgg = (chemblID) ->
 
-    #TODO: use the target class when it the mapping is ready https://github.com/chembl/GLaDOS-es/issues/15
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'assay_chembl_id'
@@ -249,6 +249,39 @@ class AssayReportCardApp extends glados.ReportCardApp
 
             bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
                                     'AND target_type:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              assay_chembl_id: 'assay_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Target.getTargetsListURL
+
+    targetTypes = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      assay_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return targetTypes
+
+  @getRelatedTargetsByClassAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'assay_chembl_id'
+      fields: ['_metadata.related_assays.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        classes:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.protein_classification.l1'
+          size: 20
+          bucket_links:
+
+            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+                                    'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               assay_chembl_id: 'assay_chembl_id'

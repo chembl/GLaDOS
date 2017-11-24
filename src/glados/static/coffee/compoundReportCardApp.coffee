@@ -190,7 +190,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAssaySummary = ->
 
-    #TODO: needs to inlude related compounds in assays index
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
 
@@ -222,8 +221,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
     relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
 
     pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_compound__associated_targets_pie_title_base') + chemblID
+      x_axis_prop_name: 'classes'
+      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
 
     viewConfig =
       pie_config: pieConfig
@@ -364,6 +363,33 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     bioactivities.fetch()
 
+  @initMiniTargetsByClassHistogram = ($containerElem, chemblID) ->
+
+    targetClases = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
+
+    stdClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_CLASS',
+    withColourScale=true)
+
+    barsColourScale = stdClassProp.colourScale
+
+    config =
+      max_categories: 8
+      bars_colour_scale: barsColourScale
+      fixed_bar_width: true
+      hide_title: false
+      x_axis_prop_name: 'classes'
+      properties:
+        target_class: stdTypeProp
+      initial_property_x: 'target_class'
+
+    new glados.views.Visualisation.HistogramView
+      model: targetTypes
+      el: $containerElem
+      config: config
+
+    targetTypes.fetch()
+
+
   @initMiniTargetsHistogram = ($containerElem, chemblID) ->
 
     targetTypes = CompoundReportCardApp.getRelatedTargetsAgg(chemblID)
@@ -403,6 +429,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       CompoundReportCardApp.initMiniBioactivitiesHistogram($containerElem, compoundChemblID)
     else if histogramType == 'targets'
       CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)
+    else if histogramType == 'targets_by_class'
+      CompoundReportCardApp.initMiniTargetsByClassHistogram($containerElem, compoundChemblID)
 
   @initDrugIconGridFromFunctionLink = ->
 
@@ -468,7 +496,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     aggsConfig =
       aggs:
-        types:
+        classes:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: '_metadata.protein_classification.l1'
           size: 20
