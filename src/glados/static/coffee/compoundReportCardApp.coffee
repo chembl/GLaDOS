@@ -461,7 +461,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedTargetsAggByClass = (chemblID) ->
 
-    #TODO: use the target class when it the mapping is ready
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'molecule_chembl_id'
@@ -471,12 +470,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
       aggs:
         types:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'target_type'
+          field: '_metadata.protein_classification.l1'
           size: 20
           bucket_links:
 
             bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND target_type:("{{bucket_key}}"' +
+                                    'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
               molecule_chembl_id: 'molecule_chembl_id'
