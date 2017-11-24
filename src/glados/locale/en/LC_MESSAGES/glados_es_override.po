@@ -256,6 +256,8 @@ msgstr "Name"
 msgid "glados_es_gs__tissue__bto_id__label"
 msgstr "BTO ID"
 
+msgid "glados_es_gs__tissue__related_activities___count__label"
+msgstr "Activities"
 #-----------------------------------------------------------------------------------------------------------------------
 # Document Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------

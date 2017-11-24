@@ -251,7 +251,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
     return associatedCompounds
 
   # --------------------------------------------------------------------------------------------------------------------
-  # Aggregations
+  # Mini histograms
   # --------------------------------------------------------------------------------------------------------------------
   @initMiniActivitiesHistogram = ($containerElem, chemblID) ->
 
