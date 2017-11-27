@@ -1,7 +1,11 @@
 glados.useNameSpace 'glados.views.Compound',
   MetabolismView: Backbone.View.extend
     initialize: ->
+      @model.on 'change', @render, @
 
+    render: ->
+
+      @loadFromVariable($(@el).attr('id'), @model.get('graph'))
     # ----------------------------------------------------------------------------------------------------------------------
     # default style
     # ----------------------------------------------------------------------------------------------------------------------
@@ -59,8 +63,6 @@ glados.useNameSpace 'glados.views.Compound',
         layout: layout
       )
       return cy
-
-
 
 #     returns the elements, and stylesheet objects from the graph description in the data
 #     @param data graph description, nodes and links

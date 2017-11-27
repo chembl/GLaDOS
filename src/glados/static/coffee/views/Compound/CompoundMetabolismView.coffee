@@ -9,9 +9,8 @@ CompoundMetabolismView = CardView.extend
     @molecule_chembl_id = arguments[0].molecule_chembl_id
 
     @metView = new glados.views.Compound.MetabolismView
-
-    console.log 'NEW METABOLISM VIEW INITIALISED!'
-
+      model: @model
+      el: $(@el).find('#BCK-metabolism-visualisation-container')
 
   render: ->
 
@@ -22,10 +21,7 @@ CompoundMetabolismView = CardView.extend
     $(@el).find('.visualisation-fullscreen-link').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-FSLink').html() )
       chembl_id: @molecule_chembl_id
 
-
     @showCardContent()
-#    MetabolismVisualizator._loadFromVariable("metabolism-visualisation-container", @model.get('graph'))
-    @metView.loadFromVariable("metabolism-visualisation-container", @model.get('graph'))
 
     @initEmbedModal('metabolism', @molecule_chembl_id)
     @activateModals()
