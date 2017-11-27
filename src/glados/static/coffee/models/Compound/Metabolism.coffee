@@ -2,5 +2,5 @@ glados.useNameSpace 'glados.models.Compound',
   Metabolism: Backbone.Model.extend
 
     initialize: ->
-      console.log 'URL: ', glados.Settings.ES_BASE_URL
-      @url = glados.Settings.STATIC_URL + 'testData/metabolismSampleData.json'
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL +
+      '/chembl_metabolism/_search?q=drug_chembl_id:' + @get('molecule_chembl_id') + '&size=10000'
