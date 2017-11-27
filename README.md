@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/chembl/GLaDOS.svg?branch=master)](https://travis-ci.org/chembl/GLaDOS)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/chembl/GLaDOS.svg)](http://isitmaintained.com/project/chembl/GLaDOS "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/chembl/GLaDOS.svg)](http://isitmaintained.com/project/chembl/GLaDOS "Percentage of issues still open")
 
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
