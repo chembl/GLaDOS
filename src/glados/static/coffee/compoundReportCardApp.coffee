@@ -299,7 +299,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initMetabolism = ->
 
-    compoundMetabolism = new CompoundMetabolism
+    compoundMetabolism = new glados.models.Compound.Metabolism
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
     new CompoundMetabolismView
