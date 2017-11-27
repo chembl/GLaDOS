@@ -334,6 +334,14 @@ msgid "glados_es_gs__activity__parent_molecule_data___full_mwt__label__mini"
 msgstr "Parent Molecule Data Full Mwt"
 
 
+msgid "glados_es_gs__activity__parent_molecule_data___image_file__label"
+msgstr "Parent Molecule Data Image File"
+
+
+msgid "glados_es_gs__activity__parent_molecule_data___image_file__label__mini"
+msgstr "Parent Molecule Data Image File"
+
+
 msgid "glados_es_gs__activity__parent_molecule_data___max_phase__label"
 msgstr "Parent Molecule Data Max Phase"
 
@@ -2654,6 +2662,86 @@ msgid "glados_es_gs__molecule__tags__label__mini"
 msgstr "Tags"
 
 
+msgid "glados_es_gs__molecule__target_predictions___in_training__label"
+msgstr "Target Predictions In Training"
+
+
+msgid "glados_es_gs__molecule__target_predictions___in_training__label__mini"
+msgstr "Target Predictions In Training"
+
+
+msgid "glados_es_gs__molecule__target_predictions___molecule_chembl_id__label"
+msgstr "Target Predictions Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___molecule_chembl_id__label__mini"
+msgstr "Target Predictions Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___pred_id__label"
+msgstr "Target Predictions Pred ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___pred_id__label__mini"
+msgstr "Target Predictions Pred ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___probability__label"
+msgstr "Target Predictions Probability"
+
+
+msgid "glados_es_gs__molecule__target_predictions___probability__label__mini"
+msgstr "Target Predictions Probability"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_accession__label"
+msgstr "Target Predictions Target Accession"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_accession__label__mini"
+msgstr "Target Predictions Target Accession"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_chembl_id__label"
+msgstr "Target Predictions Target ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_chembl_id__label__mini"
+msgstr "Target Predictions Target ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_organism__label"
+msgstr "Target Predictions Target Organism"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_organism__label__mini"
+msgstr "Target Predictions Target Organism"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_tax_id__label"
+msgstr "Target Predictions Target Tax ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_tax_id__label__mini"
+msgstr "Target Predictions Target Tax ID"
+
+
+msgid "glados_es_gs__molecule__target_predictions___value__label"
+msgstr "Target Predictions Value"
+
+
+msgid "glados_es_gs__molecule__target_predictions___value__label__mini"
+msgstr "Target Predictions Value"
+
+
+msgid "glados_es_gs__molecule__target_predictions__label"
+msgstr "Target Predictions"
+
+
+msgid "glados_es_gs__molecule__target_predictions__label__mini"
+msgstr "Target Predictions"
+
+
 msgid "glados_es_gs__molecule__therapeutic_flag__label"
 msgstr "Therapeutic Flag"
 
@@ -3316,6 +3404,86 @@ msgstr "Target Components"
 
 msgid "glados_es_gs__target__target_components__label__mini"
 msgstr "Target Components"
+
+
+msgid "glados_es_gs__target__target_predictions___in_training__label"
+msgstr "Target Predictions In Training"
+
+
+msgid "glados_es_gs__target__target_predictions___in_training__label__mini"
+msgstr "Target Predictions In Training"
+
+
+msgid "glados_es_gs__target__target_predictions___molecule_chembl_id__label"
+msgstr "Target Predictions Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_predictions___molecule_chembl_id__label__mini"
+msgstr "Target Predictions Molecule ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_predictions___pred_id__label"
+msgstr "Target Predictions Pred ID"
+
+
+msgid "glados_es_gs__target__target_predictions___pred_id__label__mini"
+msgstr "Target Predictions Pred ID"
+
+
+msgid "glados_es_gs__target__target_predictions___probability__label"
+msgstr "Target Predictions Probability"
+
+
+msgid "glados_es_gs__target__target_predictions___probability__label__mini"
+msgstr "Target Predictions Probability"
+
+
+msgid "glados_es_gs__target__target_predictions___target_accession__label"
+msgstr "Target Predictions Target Accession"
+
+
+msgid "glados_es_gs__target__target_predictions___target_accession__label__mini"
+msgstr "Target Predictions Target Accession"
+
+
+msgid "glados_es_gs__target__target_predictions___target_chembl_id__label"
+msgstr "Target Predictions Target ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_predictions___target_chembl_id__label__mini"
+msgstr "Target Predictions Target ChEMBL ID"
+
+
+msgid "glados_es_gs__target__target_predictions___target_organism__label"
+msgstr "Target Predictions Target Organism"
+
+
+msgid "glados_es_gs__target__target_predictions___target_organism__label__mini"
+msgstr "Target Predictions Target Organism"
+
+
+msgid "glados_es_gs__target__target_predictions___target_tax_id__label"
+msgstr "Target Predictions Target Tax ID"
+
+
+msgid "glados_es_gs__target__target_predictions___target_tax_id__label__mini"
+msgstr "Target Predictions Target Tax ID"
+
+
+msgid "glados_es_gs__target__target_predictions___value__label"
+msgstr "Target Predictions Value"
+
+
+msgid "glados_es_gs__target__target_predictions___value__label__mini"
+msgstr "Target Predictions Value"
+
+
+msgid "glados_es_gs__target__target_predictions__label"
+msgstr "Target Predictions"
+
+
+msgid "glados_es_gs__target__target_predictions__label__mini"
+msgstr "Target Predictions"
 
 
 msgid "glados_es_gs__target__target_type__label"
