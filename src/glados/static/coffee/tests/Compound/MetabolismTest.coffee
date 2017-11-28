@@ -29,6 +29,22 @@ describe 'Compound Metabolism', ->
 
   it 'parses the nodes correctly', ->
 
-    console.log 'parsedDataMustBe: ', parsedDataMustBe
-    console.log 'sampleDataToParse: ', sampleDataToParse
+    testChemblID = 'CHEMBL25'
+    compoundMetabolism = new glados.models.Compound.Metabolism
+      molecule_chembl_id: testChemblID
+
+    parsedData = compoundMetabolism.parse(sampleDataToParse)
+    console.log 'parsedData: ', parsedData
+    nodesMustBe = parsedDataMustBe.graph.nodes
+    nodesGot = parsedData.graph.nodes
+    nodesGotIndex = _.indexBy(nodesGot, 'chembl_id')
+    for nodeMustBe in nodesMustBe
+      nodeID = nodeMustBe.chembl_id
+      nodeGot = nodesGotIndex[nodeID]
+      expect(nodeGot?).toBe(true)
+      expect(nodeGot.is_current).toBe(nodeID == testChemblID)
+
+
+
+
 
