@@ -16,10 +16,8 @@ describe 'Compound Metabolism', ->
     compoundMetabolism = new glados.models.Compound.Metabolism
       molecule_chembl_id: testChemblID
 
-    console.log 'URL GOT: ', compoundMetabolism.url
     urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL +
       '/chembl_metabolism/_search?q=drug_chembl_id:' + testChemblID + '&size=10000'
-    console.log 'urlMustBe: ', urlMustBe
     expect(compoundMetabolism.url).toBe(urlMustBe)
 
   it 'parses the nodes correctly', ->
