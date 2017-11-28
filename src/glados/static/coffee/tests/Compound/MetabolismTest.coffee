@@ -1,14 +1,21 @@
 describe 'Compound Metabolism', ->
 
   parsedDataMustBe = undefined
+  sampleDataToParse = undefined
 
   beforeAll (done) ->
 
-    dataURL = glados.Settings.STATIC_URL + 'testData/metabolismSampleData.json'
+    dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/Metabolism/metabolismSampleParsedData.json'
     $.get dataURL, (testData) ->
       parsedDataMustBe = testData
       done()
 
+  beforeAll (done) ->
+
+    dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/Metabolism/sampleDataToParse.json'
+    $.get dataURL, (testData) ->
+      sampleDataToParse = testData
+      done()
 
   it 'Sets up the url correctly', ->
 
@@ -23,4 +30,5 @@ describe 'Compound Metabolism', ->
   it 'parses the nodes correctly', ->
 
     console.log 'parsedDataMustBe: ', parsedDataMustBe
+    console.log 'sampleDataToParse: ', sampleDataToParse
 
