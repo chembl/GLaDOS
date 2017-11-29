@@ -14,6 +14,15 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
+      console.log 'AAA MODEL: ', @model
+      numEdges = @model.get('graph').edges.length
+      numNodes = @model.get('graph').nodes.length
+
+      if numEdges == 0 and numNodes == 0
+        return
+
+      console.log 'AAA numEdges:', numEdges
+      console.log 'AAA numNodes:', numNodes
       @showSection()
       $(@el).find('.visualisation-title').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-Title').html() )
         chembl_id: @molecule_chembl_id
