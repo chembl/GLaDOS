@@ -34,3 +34,5 @@ AssayBasicInformationView = CardView.extend
       tissue: @model.get('assay_tissue')
       cell_type: @model.get('assay_cell_type')
       subcellular_fraction: @model.get('assay_subcellular_fraction')
+      target_chembl_id: @model.get('target_chembl_id')
+      target_link: @model.get('target_link')
