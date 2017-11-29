@@ -214,8 +214,6 @@ glados.useNameSpace 'glados.views.Browsers',
         left: 2
         right: 4
 
-      @KEY_TEXT_AND_COUNT_PADDING = 1
-
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @RECT_RX = 3
       @RECT_RY = @RECT_RX
@@ -407,13 +405,13 @@ glados.useNameSpace 'glados.views.Browsers',
       countTextWidth = maxTextWidth
 
       # remember that text anchor is end
-      spaceForText = countTextX - @KEY_TEXT_AND_COUNT_PADDING - countTextWidth
+      spaceForText = countTextX - countTextWidth
       spaceOccupiedByKeyText = keyTextX + keyTextWidth
 
       if spaceOccupiedByKeyText > spaceForText
 
         originalText = keyText.text()
-        textWidthLimit = countTextX - @KEY_TEXT_AND_COUNT_PADDING - countTextWidth
+        textWidthLimit = countTextX - countTextWidth
         newText = glados.Utils.Text.getTextForEllipsis(originalText, keyTextWidth, textWidthLimit)
         keyText.text(newText)
 
