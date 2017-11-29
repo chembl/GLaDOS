@@ -41,16 +41,17 @@ describe "Target", ->
           target_chembl_id: chemblID
           fetch_from_elastic: false
 
-      beforeAll (done) ->
-        target.fetch()
-
-        # this timeout is to give time to get the
-        # target classification information, it happens after the fetch,
-        # there is a way to know that it loaded at least one classification: get('protein_classifications_loaded')
-        # but there is no way to know that it loaded all the classifications.
-        setTimeout ( ->
-          done()
-        ), 10000
+      # TODO: this needs to be replaced with a better tests which does not depend on the server
+#      beforeAll (done) ->
+#        target.fetch()
+#
+#        # this timeout is to give time to get the
+#        # target classification information, it happens after the fetch,
+#        # there is a way to know that it loaded at least one classification: get('protein_classifications_loaded')
+#        # but there is no way to know that it loaded all the classifications.
+#        setTimeout ( ->
+#          done()
+#        ), 10000
 
       wsResponse = undefined
       parsed = undefined
@@ -68,7 +69,8 @@ describe "Target", ->
         urlMustBe = glados.Settings.WS_BASE_URL + 'target/' + chemblID + '.json'
         expect(target.url).toBe(urlMustBe)
 
-      it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
+      # TODO: this needs to be replaced with a better tests which does not depend on the server
+#      it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
       it 'parses the activities URL', -> testActivitiesURL(wsResponse, parsed)
       it 'parses the compounds URL', -> testCompoundsURL(wsResponse, parsed)
       it 'parses the report card URL', -> testReportCardURL(wsResponse, parsed)
@@ -84,16 +86,16 @@ describe "Target", ->
           target_chembl_id: chemblID
           fetch_from_elastic: true
 
-      beforeAll (done) ->
-        target.fetch()
-
-        # this timeout is to give time to get the
-        # target classification information, it happens after the fetch,
-        # there is a way to know that it loaded at least one classification: get('protein_classifications_loaded')
-        # but there is no way to know that it loaded all the classifications.
-        setTimeout ( ->
-          done()
-        ), 10000
+#      beforeAll (done) ->
+#        target.fetch()
+#
+#        # this timeout is to give time to get the
+#        # target classification information, it happens after the fetch,
+#        # there is a way to know that it loaded at least one classification: get('protein_classifications_loaded')
+#        # but there is no way to know that it loaded all the classifications.
+#        setTimeout ( ->
+#          done()
+#        ), 10000
 
       esResponse = undefined
       parsed = undefined
@@ -111,7 +113,8 @@ describe "Target", ->
         urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_target/target/' + chemblID
         expect(target.url).toBe(urlMustBe)
 
-      it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
+      # TODO: this needs to be replaced with a better tests which does not depend on the server
+#      it "(SERVER DEPENDENT) loads the protein target classification", -> testProteinTargetClassification(target)
       it 'parses the activities URL', -> testActivitiesURL(esResponse._source, parsed)
       it 'parses the compounds URL', -> testCompoundsURL(esResponse._source, parsed)
       it 'parses the report card URL', -> testReportCardURL(esResponse._source, parsed)
