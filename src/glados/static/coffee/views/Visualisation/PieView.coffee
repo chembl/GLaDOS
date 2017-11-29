@@ -16,7 +16,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @config.custom_empty_message?
       emptyMessage = @config.custom_empty_message
     else
-      emptyMessage = 'No data available. #{@config.title}'
+      emptyMessage = "No data available. #{@config.title}"
 
     $visualisationMessages.html("#{emptyMessage}")
 
