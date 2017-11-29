@@ -43,6 +43,16 @@ glados.useNameSpace 'glados.models.Compound',
         if not nodesToPosition[metaboliteID]?
           @addNode(metaboliteID, selectedChemblID, nodesList, nodesToPosition)
 
-        console.log 'PROCESSING: ', substrateID
+        newEdge =
+          enzyme: metData.enzyme_name
+          source: nodesToPosition[substrateID]
+          target: nodesToPosition[metaboliteID]
+          met_conversion: metData.met_conversion
+          organism: metData.organism
+          doc_chembl_id: 'CHEMBL3544494'
+          enzyme_chembl_id: metData.enzyme_chembl_id
+          references_list: (ref.ref_url for ref in metData.metabolism_refs).join("|")
+
+        parsed.graph.edges.push newEdge
 
       return parsed

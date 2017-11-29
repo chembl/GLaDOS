@@ -34,7 +34,6 @@ describe 'Compound Metabolism', ->
       molecule_chembl_id: testChemblID
 
     parsedData = compoundMetabolism.parse(sampleDataToParse)
-    console.log 'parsedData: ', parsedData
     nodesMustBe = parsedDataMustBe.graph.nodes
     nodesGot = parsedData.graph.nodes
     nodesGotIndex = _.indexBy(nodesGot, 'chembl_id')
@@ -43,6 +42,48 @@ describe 'Compound Metabolism', ->
       nodeGot = nodesGotIndex[nodeID]
       expect(nodeGot?).toBe(true)
       expect(nodeGot.is_current).toBe(nodeID == testChemblID)
+
+  it 'parses the edges correctly', ->
+
+    testChemblID = 'CHEMBL25'
+    compoundMetabolism = new glados.models.Compound.Metabolism
+      molecule_chembl_id: testChemblID
+
+    parsedData = compoundMetabolism.parse(sampleDataToParse)
+
+    nodesGot = parsedData.graph.nodes
+    nodesMustBe = parsedDataMustBe.graph.nodes
+    edgesMustBe = parsedDataMustBe.graph.edges
+    edgesGot = parsedData.graph.edges
+
+    edgesGotIndex = {}
+    for edge in edgesGot
+      id = "#{nodesGot[edge.source].chembl_id} -(#{edge.enzyme})> #{nodesGot[edge.target].chembl_id}"
+      edgesGotIndex[id] = edge
+
+    for edgeMustBe in edgesMustBe
+
+      sourceNodeMustBe = nodesMustBe[edgeMustBe.source]
+      targetNodeMustBe = nodesMustBe[edgeMustBe.target]
+      id = "#{sourceNodeMustBe.chembl_id} -(#{edgeMustBe.enzyme})> #{targetNodeMustBe.chembl_id}"
+
+      edgeGot = edgesGotIndex[id]
+      expect(edgeGot?).toBe(true)
+      expect(edgeGot.enzyme).toBe(edgeMustBe.enzyme)
+      expect(edgeGot.met_conversion).toBe(edgeMustBe.met_conversion)
+      expect(edgeGot.organism).toBe(edgeMustBe.organism)
+      expect(edgeGot.doc_chembl_id).toBe(edgeMustBe.doc_chembl_id)
+      refsListMustBe = edgeMustBe.references_list.split("|").sort()
+      refsListGot = edgeGot.references_list.split("|").sort()
+      expect(TestsUtils.listsAreEqual(refsListMustBe, refsListGot)).toBe(true)
+
+      sourceNodeGot = nodesGot[edgeGot.source]
+      expect(sourceNodeMustBe.chembl_id).toBe(sourceNodeGot.chembl_id)
+
+      targetNodeGot = nodesGot[edgeGot.target]
+      expect(targetNodeMustBe.chembl_id).toBe(targetNodeGot.chembl_id)
+
+
 
 
 
