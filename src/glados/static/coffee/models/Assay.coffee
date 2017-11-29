@@ -19,6 +19,9 @@ Assay = Backbone.Model.extend
     filterForActivities = 'assay_chembl_id:' + parsed.assay_chembl_id
     parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
+    parsed.target_link = Target.get_report_card_url(parsed.target_chembl_id)
+    parsed.cell_link = CellLine.get_report_card_url(parsed.cell_chembl_id)
+
     return parsed;
 
 # Constant definition for ReportCardEntity model functionalities
