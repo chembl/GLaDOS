@@ -136,27 +136,26 @@ describe "Paginated Collection", ->
     #    drugList = new DrugList
     drugList.setMeta('page_size', 20)
 
-    beforeEach (done) ->
+    beforeEach ->
       drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
-      drugList.fetch
-        success: done
 
-    it "(SERVER DEPENDENT) initialises correctly", (done) ->
-      page_size = drugList.getMeta('page_size')
-      current_page = drugList.getMeta('current_page')
-      total_pages = drugList.getMeta('total_pages')
-      total_records = drugList.getMeta('total_records')
-      records_in_page = drugList.getMeta('records_in_page')
-
-      expect(page_size).toBe(20)
-      expect(current_page).toBe(1)
-      expect(total_pages).toBe(86773)
-      expect(total_records).toBe(1735442)
-      expect(records_in_page).toBe(20)
-      expect(drugList.getMeta('all_items_selected')).toBe(false)
-      expect(Object.keys(drugList.getMeta('selection_exceptions')).length).toBe(0)
-
-      done()
+    #TODO: remove dependence from server on this test
+#    it "(SERVER DEPENDENT) initialises correctly", (done) ->
+#      page_size = drugList.getMeta('page_size')
+#      current_page = drugList.getMeta('current_page')
+#      total_pages = drugList.getMeta('total_pages')
+#      total_records = drugList.getMeta('total_records')
+#      records_in_page = drugList.getMeta('records_in_page')
+#
+#      expect(page_size).toBe(20)
+#      expect(current_page).toBe(1)
+#      expect(total_pages).toBe(86773)
+#      expect(total_records).toBe(1735442)
+#      expect(records_in_page).toBe(20)
+#      expect(drugList.getMeta('all_items_selected')).toBe(false)
+#      expect(Object.keys(drugList.getMeta('selection_exceptions')).length).toBe(0)
+#
+#      done()
 
     it "defines the initial url", ->
       expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=0')
