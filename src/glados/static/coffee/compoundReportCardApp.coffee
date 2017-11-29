@@ -302,7 +302,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compoundMetabolism = new glados.models.Compound.Metabolism
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
-    new CompoundMetabolismView
+    new glados.views.ReportCards.MetabolismInCardView
       model: compoundMetabolism
       el: $('#MetabolismCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
