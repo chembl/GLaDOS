@@ -1,1 +1,0 @@
-CompoundMetabolism = Backbone.Model.extend({})

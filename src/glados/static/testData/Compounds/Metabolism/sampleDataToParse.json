@@ -1,0 +1,360 @@
+{
+  "took": 0,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "hits": {
+    "total": 10,
+    "max_score": 4.7763186,
+    "hits": [
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "1295",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1159/000327782",
+              "ref_url": "http://doi.org/10.1159/000327782"
+            }
+          ],
+          "met_conversion": "O-glucuronide conjugation to the carboxylic acid group forming an ester",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 1295,
+          "target_chembl_id": "CHEMBL1743316",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544525",
+          "enzyme_name": "UGT1A6",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Plasma and Liver|Comment: A glucuronide conjugate metabolite, these metabolites make up a significant percentage of the final product.",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "623",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1159/000327782",
+              "ref_url": "http://doi.org/10.1159/000327782"
+            }
+          ],
+          "met_conversion": "Ester hydrolysis, leaving a hydroxyl group substituent on the aromatic ring.",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 623,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL424",
+          "enzyme_name": "Esterases",
+          "substrate_chembl_id": "CHEMBL25",
+          "met_comment": "Organ: Plasma and Liver|Comment: Active metabolite with its own anti-inflammatory properties  is the cause of toxicity in aspirin by causing increased O2 consumption and CO2 production leading to hyperventilation by direct interaction with the medulla, and also increases the predisposition of ulceration by inhibiting the synthesis of vasodilators and cytoprotective prostaglandins.",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "624",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1159/000327782",
+              "ref_url": "http://doi.org/10.1159/000327782"
+            }
+          ],
+          "met_conversion": "O-glucuronide conjugation to the hydroxyl group forming an ether",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 624,
+          "target_chembl_id": "CHEMBL1743316",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544526",
+          "enzyme_name": "UGT1A6",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Plasma and Liver|Comment: A glucuronide conjugate metabolite, these metabolites make up a significant percentage of the final product.",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "625",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1159/000327782",
+              "ref_url": "http://doi.org/10.1159/000327782"
+            }
+          ],
+          "met_conversion": "Glycine conjugation to the carboxylic acid group",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 625,
+          "target_chembl_id": "CHEMBL1743316",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL586",
+          "enzyme_name": "UGT1A6",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Liver|Comment: Glycine conjugate which id the major metabolite.",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "626",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Ring hydroxylation para to the other hydroxyl group",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 626,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544527",
+          "enzyme_name": "Cytochrome P450s",
+          "substrate_chembl_id": "CHEMBL586",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "627",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Ring hydroxylation para to the other hydroxyl",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 627,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL1461",
+          "enzyme_name": "Cytochrome P450s",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "628",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Glycine conjugation to the carboxylic acid group",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 628,
+          "target_chembl_id": "CHEMBL1743316",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544527",
+          "enzyme_name": "UGT1A6",
+          "substrate_chembl_id": "CHEMBL1461",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "629",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Ring hydroxylation ortho to the other hydroxyl",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 629,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL1432",
+          "enzyme_name": "Cytochrome P450s",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "630",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Ring hydroxylation para to one of the hydroxyls and meta to the other hydroxyl",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 630,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544545",
+          "enzyme_name": "Cytochrome P450s",
+          "substrate_chembl_id": "CHEMBL1432",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "631",
+        "_score": 4.7763186,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            }
+          ],
+          "met_conversion": "Ring hydroxylation ortho to one of the hydroxyl groups and meta to the other hydroxyl group",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 631,
+          "target_chembl_id": "CHEMBL612545",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544545",
+          "enzyme_name": "Cytochrome P450s",
+          "substrate_chembl_id": "CHEMBL1461",
+          "met_comment": "Organ: Plasma and Liver",
+          "_metadata": {
+            "compound_data": {}
+          }
+        }
+      }
+    ]
+  }
+}

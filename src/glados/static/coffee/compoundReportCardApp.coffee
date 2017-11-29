@@ -288,8 +288,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initMetabolismFullScreen = ->
 
     GlobalVariables.CHEMBL_ID = URLProcessor.getUrlPartInReversePosition 0
-    compoundMetabolism = new CompoundMetabolism()
-    compoundMetabolism.url = glados.Settings.STATIC_URL+'testData/metabolismSampleData.json'
+    compoundMetabolism = new glados.models.Compound.Metabolism
+      molecule_chembl_id: GlobalVariables.CHEMBL_ID
 
     new CompoundMetabolismFSView
       model: compoundMetabolism
@@ -299,10 +299,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initMetabolism = ->
 
-    compoundMetabolism = new CompoundMetabolism()
-    compoundMetabolism.url = glados.Settings.STATIC_URL + 'testData/metabolismSampleData.json'
+    compoundMetabolism = new glados.models.Compound.Metabolism
+      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
 
-    new CompoundMetabolismView
+    new glados.views.ReportCards.MetabolismInCardView
       model: compoundMetabolism
       el: $('#MetabolismCard')
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
