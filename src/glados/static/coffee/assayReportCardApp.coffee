@@ -11,7 +11,6 @@ class AssayReportCardApp extends glados.ReportCardApp
     AssayReportCardApp.initCurationSummary()
     AssayReportCardApp.initActivitySummary()
     AssayReportCardApp.initAssociatedCompounds()
-    AssayReportCardApp.initTargetSummary()
 
     assay.fetch()
 
@@ -116,36 +115,6 @@ class AssayReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     associatedCompounds.fetch()
-
-  @initTargetSummary = ->
-
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedTargets = AssayReportCardApp.getRelatedTargetsByClassAgg(chemblID)
-
-    console.log 'AAA relatedTargets:', relatedTargets
-
-    pieConfig =
-      x_axis_prop_name: 'classes'
-      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_assay_name')
-      embed_section_name: 'related_targets'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL('_metadata.related_assays.chembl_ids.\\*:' + chemblID)
-
-    new glados.views.ReportCards.PieInCardView
-      model: relatedTargets
-      el: $('#AAssociatedTargetsCard')
-      config: viewConfig
-      section_id: 'ProteinTargetSummaries'
-      section_label: 'Target Summary'
-      report_card_app: @
-
-    relatedTargets.fetch()
 
 
   # -------------------------------------------------------------
