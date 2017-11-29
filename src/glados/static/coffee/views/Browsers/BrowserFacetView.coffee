@@ -214,6 +214,8 @@ glados.useNameSpace 'glados.views.Browsers',
         left: 2
         right: 4
 
+      @KEY_TEXT_AND_COUNT_PADDING = 1
+
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @RECT_RX = 3
       @RECT_RY = @RECT_RX
@@ -381,10 +383,17 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .classed('hover-bar', true)
 
-      bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
+      maxTextWidth = 0
+      bucketGroups.each ->
+        countText = d3.select(@).select('.count-text')
+        charWidth = 6
+        countTextWidth = countText.text().length * charWidth
+        if countTextWidth > maxTextWidth
+          maxTextWidth = countTextWidth
 
+      bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@), maxTextWidth))
 
-    addEllipsisIfNecessary: (bucketG) ->
+    addEllipsisIfNecessary: (bucketG, maxTextWidth) ->
 
       keyText = bucketG.select('.key-text')
       countText = bucketG.select('.count-text')
@@ -395,16 +404,16 @@ glados.useNameSpace 'glados.views.Browsers',
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
       keyTextWidth = keyText.text().length * charWidth
-      countTextWidth = countText.text().length * charWidth
+      countTextWidth = maxTextWidth
 
       # remember that text anchor is end
-      spaceForText = countTextX - countTextWidth
+      spaceForText = countTextX - @KEY_TEXT_AND_COUNT_PADDING - countTextWidth
       spaceOccupiedByKeyText = keyTextX + keyTextWidth
 
       if spaceOccupiedByKeyText > spaceForText
 
         originalText = keyText.text()
-        textWidthLimit = countTextX - countTextWidth
+        textWidthLimit = countTextX - @KEY_TEXT_AND_COUNT_PADDING - countTextWidth
         newText = glados.Utils.Text.getTextForEllipsis(originalText, keyTextWidth, textWidthLimit)
         keyText.text(newText)
 
