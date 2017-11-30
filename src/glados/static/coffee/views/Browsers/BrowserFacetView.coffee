@@ -381,36 +381,20 @@ glados.useNameSpace 'glados.views.Browsers',
         .attr('ry', @RECT_RY)
         .classed('hover-bar', true)
 
-      maxCountTextWidth = 0
-      bucketGroups.each ->
-        countText = d3.select(@).select('.count-text')
-        countTextWidth = countText[0][0].getComputedTextLength()
-        if countTextWidth > maxCountTextWidth
-          maxCountTextWidth = countTextWidth
+      bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
 
-      console.log 'AAA maxTextWidth: ', maxCountTextWidth
-      bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@), maxCountTextWidth))
-
-    addEllipsisIfNecessary: (bucketG, maxCountTextWidth) ->
+    addEllipsisIfNecessary: (bucketG) ->
 
       keyText = bucketG.select('.key-text')
       countText = bucketG.select('.count-text')
       frontBar = bucketG.select('.front-bar')
 
       # an estimation is needed because of troubles with .getBBox
-      charWidth = 6
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
       keyTextWidth = keyText[0][0].getComputedTextLength()
       countTextWidth = countText[0][0].getComputedTextLength()
-      countTextWidth = maxCountTextWidth
 
-      console.log 'keyText: ', keyText
-      console.log 'AAA key text width: ', keyTextWidth
-
-      console.log 'AAA countText: ', countText
-      console.log 'AAA countTextWidth: ', countTextWidth
-      console.log '^^^'
       # remember that text anchor is end
       spaceForText = countTextX - countTextWidth
       spaceOccupiedByKeyText = keyTextX + keyTextWidth
