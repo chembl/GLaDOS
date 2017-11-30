@@ -355,7 +355,7 @@ glados.useNameSpace 'glados',
         glados.Utils.fillContentForElement($element, paramsObj, templateID)
 
     Text:
-      getTextForEllipsis: (originalText, originalWidth, containerLimit ) ->
+      getTextForEllipsis: (originalText, originalWidth, containerLimit) ->
 
         numChars = originalText.length
         charLength = originalWidth / numChars
