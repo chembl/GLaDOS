@@ -3,6 +3,16 @@ describe "Activity", ->
   describe "Activity Model", ->
 
     #-------------------------------------------------------------------------------------------------------------------
+    # Generic Testing functions
+    #-------------------------------------------------------------------------------------------------------------------
+    testHasNormalImageURL = (response, parsed) ->
+
+      moleculeChemblID = parsed.molecule_chembl_id
+      imageURLMustBe = "#{glados.Settings.WS_BASE_URL}image/#{moleculeChemblID}.svg?engine=indigo"
+      imgURLGot = parsed.image_url
+      expect(imageURLMustBe).toBe(imgURLGot)
+
+    #-------------------------------------------------------------------------------------------------------------------
     # From Elasticsearch
     #-------------------------------------------------------------------------------------------------------------------
     describe "Loaded From Elastic Search", ->
@@ -25,7 +35,5 @@ describe "Activity", ->
               parsed = activity.parse(esResponse)
               done()
 
-          it 'generates the correct Image', ->
-
-            console.log 'parsed: ', parsed
+          it 'generates the correct Image', -> testHasNormalImageURL(esResponse, parsed)
 
