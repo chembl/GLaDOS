@@ -31,6 +31,12 @@ describe "Activity", ->
       expect(imageURLMustBe).toBe(imgURLGot)
 
 
+    testHasSmalMolPolymnerImageURL = (response, parsed) ->
+
+      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/smallMolPolymer.svg"
+      imgURLGot = parsed.image_url
+      expect(imageURLMustBe).toBe(imgURLGot)
+
     #-------------------------------------------------------------------------------------------------------------------
     # From Elasticsearch
     #-------------------------------------------------------------------------------------------------------------------
@@ -94,5 +100,18 @@ describe "Activity", ->
               done()
 
           it 'generates the correct Image', -> testHasNaturalProductImageURL(esResponse, parsed)
+
+        describe "Small Molecule Polymer (molecule_chembl_id:CHEMBL2108139)", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithSmallMolPolymerCompESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasSmalMolPolymnerImageURL(esResponse, parsed)
 
 
