@@ -12,6 +12,12 @@ describe "Activity", ->
       imgURLGot = parsed.image_url
       expect(imageURLMustBe).toBe(imgURLGot)
 
+    testHasMetalContainingImageURL = (response, parsed) ->
+
+      imageURLMustBe = glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/metalContaining.svg'
+      imgURLGot = parsed.image_url
+      console.log 'imgURLGot: ', imgURLGot
+      expect(imageURLMustBe).toBe(imgURLGot)
     #-------------------------------------------------------------------------------------------------------------------
     # From Elasticsearch
     #-------------------------------------------------------------------------------------------------------------------
@@ -36,4 +42,17 @@ describe "Activity", ->
               done()
 
           it 'generates the correct Image', -> testHasNormalImageURL(esResponse, parsed)
+
+        describe "Metal containing", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithMetalContainingCompESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasMetalContainingImageURL(esResponse, parsed)
 
