@@ -214,6 +214,8 @@ glados.useNameSpace 'glados.views.Browsers',
         left: 2
         right: 4
 
+      @KEY_TEXT_COUNT_TEXT_PADDING = 1
+
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
       @RECT_RX = 3
       @RECT_RY = @RECT_RX
@@ -383,7 +385,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
 
-
     addEllipsisIfNecessary: (bucketG) ->
 
       keyText = bucketG.select('.key-text')
@@ -391,20 +392,19 @@ glados.useNameSpace 'glados.views.Browsers',
       frontBar = bucketG.select('.front-bar')
 
       # an estimation is needed because of troubles with .getBBox
-      charWidth = 6
       countTextX = parseFloat(countText.attr('x'))
       keyTextX = parseFloat(keyText.attr('x'))
-      keyTextWidth = keyText.text().length * charWidth
-      countTextWidth = countText.text().length * charWidth
+      keyTextWidth = keyText[0][0].getComputedTextLength()
+      countTextWidth = countText[0][0].getComputedTextLength()
 
       # remember that text anchor is end
-      spaceForText = countTextX - countTextWidth
+      spaceForText = countTextX - @KEY_TEXT_COUNT_TEXT_PADDING - countTextWidth
       spaceOccupiedByKeyText = keyTextX + keyTextWidth
 
       if spaceOccupiedByKeyText > spaceForText
 
         originalText = keyText.text()
-        textWidthLimit = countTextX - countTextWidth
+        textWidthLimit = countTextX - @KEY_TEXT_COUNT_TEXT_PADDING - countTextWidth
         newText = glados.Utils.Text.getTextForEllipsis(originalText, keyTextWidth, textWidthLimit)
         keyText.text(newText)
 
