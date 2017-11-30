@@ -7,6 +7,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_target',
       # Default Selected
       [
+        '_metadata.organism_taxonomy.l1',
+        '_metadata.organism_taxonomy.l2',
+        '_metadata.organism_taxonomy.l3',
         'organism',
         'target_type',
         '_metadata.related_compounds.count',
@@ -14,7 +17,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       ],
       # Default Hidden
       [
-        'tax_id'
       ],
       [
 
