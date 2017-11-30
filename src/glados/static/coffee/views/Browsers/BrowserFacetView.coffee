@@ -412,7 +412,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
         qtipConfig =
           content:
-            text: originalText
+            text: "<div style='padding: 3px'>#{originalText}</div>"
           position:
             my: 'left center'
             at: 'right center'
