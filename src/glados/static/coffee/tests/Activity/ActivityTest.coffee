@@ -22,8 +22,14 @@ describe "Activity", ->
 
       imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/oligosaccharide.svg"
       imgURLGot = parsed.image_url
-      console.log 'imgURLGot: ', imgURLGot
       expect(imageURLMustBe).toBe(imgURLGot)
+
+    testHasNaturalProductImageURL = (response, parsed) ->
+
+      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/naturalProduct.svg"
+      imgURLGot = parsed.image_url
+      expect(imageURLMustBe).toBe(imgURLGot)
+
 
     #-------------------------------------------------------------------------------------------------------------------
     # From Elasticsearch
@@ -75,4 +81,18 @@ describe "Activity", ->
               done()
 
           it 'generates the correct Image', -> testHasOligosaccharideImageURL(esResponse, parsed)
+
+        describe "Natural Product (molecule_chembl_id:CHEMBL1201469)", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithNaturalProductImageESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasNaturalProductImageURL(esResponse, parsed)
+
 
