@@ -96,7 +96,6 @@ glados.useNameSpace 'glados.views.Compound',
               doc_chembl_id: node.doc_chembl_id,
               has_structure: node.has_structure,
               image_file: node.image_file
-              molregno: node.molregno
 
           ws_img_url = "#{base_img_link}#{node.chembl_id}.svg?engine=indigo"
           backup_img_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{node.image_file}"
