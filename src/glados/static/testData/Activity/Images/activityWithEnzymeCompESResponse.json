@@ -1,0 +1,66 @@
+{
+  "published_type": "Hepatotoxicity (time to onset)",
+  "standard_units": null,
+  "standard_type": "Hepatotoxicity (time to onset)",
+  "standard_relation": null,
+  "bao_endpoint": null,
+  "published_units": null,
+  "data_validity_comment": null,
+  "activity_comment": "1 day - 1 week",
+  "target_pref_name": "Unchecked",
+  "bao_label": "assay format",
+  "pchembl_value": null,
+  "parent_molecule_chembl_id": "CHEMBL2108147",
+  "assay_chembl_id": "CHEMBL3137739",
+  "document_chembl_id": "CHEMBL3137667",
+  "target_tax_id": null,
+  "activity_id": 13994765,
+  "target_chembl_id": "CHEMBL612545",
+  "standard_flag": false,
+  "molecule_chembl_id": "CHEMBL2108147",
+  "_metadata": {
+    "target_data": {
+      "target_type": "UNCHECKED"
+    },
+    "activity_generated": {
+      "short_data_validity_comment": null
+    },
+    "parent_molecule_data": {
+      "max_phase": 4,
+      "image_file": "enzyme.svg",
+      "compound_key": "STREPTOKINASE"
+    },
+    "assay_data": {
+      "assay_subcellular_fraction": null,
+      "assay_organism": "Homo sapiens",
+      "assay_cell_type": null,
+      "cell_chembl_id": null,
+      "tissue_chembl_id": null,
+      "type_label": "T - Toxicity",
+      "assay_tissue": null
+    },
+    "source": {
+      "src_description": "Scientific Literature",
+      "src_id": 1,
+      "src_short_name": "LITERATURE"
+    },
+    "protein_classification": []
+  },
+  "qudt_units": null,
+  "standard_value": null,
+  "assay_type": "T",
+  "document_year": 2004,
+  "src_id": 1,
+  "target_organism": null,
+  "potential_duplicate": false,
+  "canonical_smiles": null,
+  "record_id": 1980328,
+  "published_relation": null,
+  "ligand_efficiency": null,
+  "document_journal": "Gastroenterol Clin Biol",
+  "uo_units": null,
+  "assay_description": "Times to onset, minimal and maximal, observed in the indexed observations. [column 'DELAI' in source]",
+  "bao_format": "BAO_0000019",
+  "published_value": null,
+  "_score": 6.8817797
+}

@@ -134,4 +134,18 @@ describe "Activity", ->
 
           it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'peptide.svg')
 
+        # there are no activities with oligonulceotide image
+        describe "Enzyme (molecule_chembl_id:CHEMBL2108147)", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithEnzymeCompESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'enzyme.svg')
+
 
