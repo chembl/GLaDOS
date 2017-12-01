@@ -647,10 +647,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
 
     corner2G.append('rect')
-      .style('fill', 'blue')
-      .style('opacity', 0.5)
-
-
     corner2G.append('polygon')
       .style('fill', 'lime')
 
