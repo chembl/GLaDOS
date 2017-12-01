@@ -148,4 +148,18 @@ describe "Activity", ->
 
           it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'enzyme.svg')
 
+        # there are no activities with cell image
+        describe "Unknown (molecule_chembl_id:CHEMBL1909064)", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithUnknownImageESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'unknown.svg')
+
 

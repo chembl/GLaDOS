@@ -3,8 +3,6 @@ Activity = Backbone.Model.extend
   initialize: ->
 
   parse: (response) ->
-    console.log 'PARSING ACTIVITY'
-    console.log JSON.stringify(response)
 
     imageFile = glados.Utils.getNestedValue(response, '_metadata.parent_molecule_data.image_file')
 
