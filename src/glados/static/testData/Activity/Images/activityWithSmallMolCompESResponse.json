@@ -1,0 +1,91 @@
+{
+  "published_type": "Drug metabolism",
+  "standard_units": "%",
+  "standard_type": "Drug metabolism",
+  "standard_relation": "=",
+  "bao_endpoint": null,
+  "published_units": "%",
+  "data_validity_comment": null,
+  "activity_comment": null,
+  "target_pref_name": "Muscle",
+  "bao_label": "organism-based format",
+  "pchembl_value": null,
+  "parent_molecule_chembl_id": "CHEMBL3527276",
+  "assay_chembl_id": "CHEMBL3531760",
+  "document_chembl_id": "CHEMBL3525916",
+  "target_tax_id": "10116",
+  "activity_id": 15451847,
+  "target_chembl_id": "CHEMBL613645",
+  "standard_flag": false,
+  "molecule_chembl_id": "CHEMBL3527276",
+  "_metadata": {
+    "target_data": {
+      "target_type": "TISSUE"
+    },
+    "activity_generated": {
+      "short_data_validity_comment": null
+    },
+    "parent_molecule_data": {
+      "max_phase": 0,
+      "image_file": "smallMolecule.svg",
+      "compound_key": "M544"
+    },
+    "organism_taxonomy": {
+      "l1": "Eukaryotes",
+      "l4_synonyms": [
+        "rats",
+        "Rattus norwegicus",
+        "Norway rat",
+        "Buffalo rat",
+        "Sprague-Dawley rat",
+        "laboratory rat",
+        "Rattus sp. strain Wistar",
+        "Rattus norvegicus",
+        "Gunn rats",
+        "Rattus PC12 clone IS",
+        "rat",
+        "Rattus norvegicus8",
+        "brown rat",
+        "Wistar rats",
+        "zitter rats",
+        "Rattus rattiscus"
+      ],
+      "l2": "Mammalia",
+      "l3": "Rodentia",
+      "oc_id": 42,
+      "tax_id": 10116
+    },
+    "assay_data": {
+      "assay_subcellular_fraction": null,
+      "assay_cell_type": null,
+      "assay_organism": "Rattus norvegicus",
+      "cell_chembl_id": null,
+      "tissue_chembl_id": "CHEMBL3638254",
+      "type_label": "A - ADME",
+      "assay_tissue": "Muscle tissue"
+    },
+    "source": {
+      "src_description": "Scientific Literature",
+      "src_id": 1,
+      "src_short_name": "LITERATURE"
+    },
+    "protein_classification": []
+  },
+  "qudt_units": "http://qudt.org/vocab/unit#Percent",
+  "standard_value": "14.6",
+  "assay_type": "A",
+  "document_year": 2012,
+  "src_id": 1,
+  "target_organism": "Rattus norvegicus",
+  "potential_duplicate": false,
+  "canonical_smiles": null,
+  "record_id": 2470327,
+  "published_relation": "=",
+  "ligand_efficiency": null,
+  "document_journal": "Drug Metab. Dispos.",
+  "uo_units": "UO_0000187",
+  "assay_description": "Drug level in albino Wistar Hannover rat muscle treated with 5 mg/kg, iv of [14C]figopitant by LESA-MS analysis",
+  "bao_format": "BAO_0000218",
+  "published_value": "14.6",
+  "_score": 3.9733136
+}

@@ -7,7 +7,6 @@ Activity = Backbone.Model.extend
     console.log JSON.stringify(response)
 
     imageFile = glados.Utils.getNestedValue(response, '_metadata.parent_molecule_data.image_file')
-    console.log 'imageFile: ', imageFile
 
     if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
       response.image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
