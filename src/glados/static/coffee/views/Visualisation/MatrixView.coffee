@@ -535,25 +535,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     applyZoomAndTranslation(rowsHeaderG)
 
-    # --------------------------------------
-    # Square 2
-    # --------------------------------------
-    corner2G = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, 0)
-      .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, NO)
-      .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-
-    corner2G.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-
-    corner2G.scaleSizes = (zoomScale) ->
-      corner2G.select('rect')
-        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
-
-    applyZoomAndTranslation(corner2G)
 
     # --------------------------------------
     # Cols Header Container
@@ -606,6 +587,61 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     applyZoomAndTranslation(colsHeaderG)
+
+    # --------------------------------------
+    # Square 2
+    # --------------------------------------
+    corner2G = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+
+    corner2G.append('rect')
+      .style('fill', 'blue')
+      .style('opacity', 0.5)
+
+
+    corner2G.append('polygon')
+      .style('fill', 'lime')
+
+#    corner3G.append('text')
+#      .attr('x', LABELS_PADDING)
+#      .attr('y', thisView.getYCoord.rangeBand())
+#      .classed('cols-sort-text', true)
+
+    corner2G.append('text')
+      .attr('x', LABELS_PADDING)
+      .attr('y', thisView.getYCoord.rangeBand())
+      .classed('cols-sort-text', true)
+      .text('holaaaa')
+
+    corner2G.scaleSizes = (zoomScale) ->
+      corner2G.select('rect')
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
+
+      trianglePoints = [
+        {
+          x: 0
+          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+        }
+        {
+          x: (thisView.ROWS_FOOTER_WIDTH *zoomScale)
+          y: zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(90 - COLS_LABELS_ROTATION))))
+        }
+        {
+          x: (thisView.ROWS_FOOTER_WIDTH *zoomScale)
+          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+        }
+      ]
+
+      pointsString = ("#{p.x},#{p.y}" for p in trianglePoints).join(' ')
+      corner2G.select('polygon')
+        .attr('points', pointsString)
+
+    applyZoomAndTranslation(corner2G)
 
     # --------------------------------------
     # Rows Footer Container
