@@ -8,53 +8,13 @@
   },
   "hits": {
     "total": 10,
-    "max_score": 4.7763186,
+    "max_score": 4.6735125,
     "hits": [
       {
         "_index": "chembl_metabolism",
         "_type": "metabolism",
-        "_id": "1295",
-        "_score": 4.7763186,
-        "_source": {
-          "metabolism_refs": [
-            {
-              "ref_type": "ISBN",
-              "ref_id": "0443051488",
-              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
-            },
-            {
-              "ref_type": "DOI",
-              "ref_id": "10.1007/s00210-012-0752-0",
-              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
-            },
-            {
-              "ref_type": "DOI",
-              "ref_id": "10.1159/000327782",
-              "ref_url": "http://doi.org/10.1159/000327782"
-            }
-          ],
-          "met_conversion": "O-glucuronide conjugation to the carboxylic acid group forming an ester",
-          "pathway_id": 1,
-          "organism": null,
-          "met_id": 1295,
-          "target_chembl_id": "CHEMBL1743316",
-          "drug_chembl_id": "CHEMBL25",
-          "tax_id": null,
-          "pathway_key": null,
-          "metabolite_chembl_id": "CHEMBL3544525",
-          "enzyme_name": "UGT1A6",
-          "substrate_chembl_id": "CHEMBL424",
-          "met_comment": "Organ: Plasma and Liver|Comment: A glucuronide conjugate metabolite, these metabolites make up a significant percentage of the final product.",
-          "_metadata": {
-            "compound_data": {}
-          }
-        }
-      },
-      {
-        "_index": "chembl_metabolism",
-        "_type": "metabolism",
         "_id": "623",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -86,7 +46,11 @@
           "substrate_chembl_id": "CHEMBL25",
           "met_comment": "Organ: Plasma and Liver|Comment: Active metabolite with its own anti-inflammatory properties  is the cause of toxicity in aspirin by causing increased O2 consumption and CO2 production leading to hyperventilation by direct interaction with the medulla, and also increases the predisposition of ulceration by inhibiting the synthesis of vasodilators and cytoprotective prostaglandins.",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "ASPIRIN",
+              "metabolite_pref_name": "SALICYLIC ACID"
+            }
           }
         }
       },
@@ -94,7 +58,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "624",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -126,7 +90,10 @@
           "substrate_chembl_id": "CHEMBL424",
           "met_comment": "Organ: Plasma and Liver|Comment: A glucuronide conjugate metabolite, these metabolites make up a significant percentage of the final product.",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLIC ACID"
+            }
           }
         }
       },
@@ -134,7 +101,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "625",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -166,7 +133,11 @@
           "substrate_chembl_id": "CHEMBL424",
           "met_comment": "Organ: Liver|Comment: Glycine conjugate which id the major metabolite.",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLIC ACID",
+              "metabolite_pref_name": "SALICYLURIC ACID"
+            }
           }
         }
       },
@@ -174,7 +145,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "626",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -196,7 +167,10 @@
           "substrate_chembl_id": "CHEMBL586",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLURIC ACID"
+            }
           }
         }
       },
@@ -204,7 +178,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "627",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -231,7 +205,11 @@
           "substrate_chembl_id": "CHEMBL424",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLIC ACID",
+              "metabolite_pref_name": "GENTISIC ACID"
+            }
           }
         }
       },
@@ -239,7 +217,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "628",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -261,7 +239,10 @@
           "substrate_chembl_id": "CHEMBL1461",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "GENTISIC ACID"
+            }
           }
         }
       },
@@ -269,7 +250,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "629",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -291,7 +272,11 @@
           "substrate_chembl_id": "CHEMBL424",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLIC ACID",
+              "metabolite_pref_name": "2,3-DIHYDROXYBENZOIC ACID"
+            }
           }
         }
       },
@@ -299,7 +284,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "630",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -321,7 +306,10 @@
           "substrate_chembl_id": "CHEMBL1432",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "2,3-DIHYDROXYBENZOIC ACID"
+            }
           }
         }
       },
@@ -329,7 +317,7 @@
         "_index": "chembl_metabolism",
         "_type": "metabolism",
         "_id": "631",
-        "_score": 4.7763186,
+        "_score": 4.6735125,
         "_source": {
           "metabolism_refs": [
             {
@@ -351,7 +339,53 @@
           "substrate_chembl_id": "CHEMBL1461",
           "met_comment": "Organ: Plasma and Liver",
           "_metadata": {
-            "compound_data": {}
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "GENTISIC ACID"
+            }
+          }
+        }
+      },
+      {
+        "_index": "chembl_metabolism",
+        "_type": "metabolism",
+        "_id": "1295",
+        "_score": 4.6735125,
+        "_source": {
+          "metabolism_refs": [
+            {
+              "ref_type": "ISBN",
+              "ref_id": "0443051488",
+              "ref_url": "http://www.isbnsearch.org/isbn/0443051488"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1007/s00210-012-0752-0",
+              "ref_url": "http://doi.org/10.1007/s00210-012-0752-0"
+            },
+            {
+              "ref_type": "DOI",
+              "ref_id": "10.1159/000327782",
+              "ref_url": "http://doi.org/10.1159/000327782"
+            }
+          ],
+          "met_conversion": "O-glucuronide conjugation to the carboxylic acid group forming an ester",
+          "pathway_id": 1,
+          "organism": null,
+          "met_id": 1295,
+          "target_chembl_id": "CHEMBL1743316",
+          "drug_chembl_id": "CHEMBL25",
+          "tax_id": null,
+          "pathway_key": null,
+          "metabolite_chembl_id": "CHEMBL3544525",
+          "enzyme_name": "UGT1A6",
+          "substrate_chembl_id": "CHEMBL424",
+          "met_comment": "Organ: Plasma and Liver|Comment: A glucuronide conjugate metabolite, these metabolites make up a significant percentage of the final product.",
+          "_metadata": {
+            "compound_data": {
+              "drug_pref_name": "ASPIRIN",
+              "substrate_pref_name": "SALICYLIC ACID"
+            }
           }
         }
       }

@@ -25,6 +25,7 @@ describe 'Compound Metabolism', ->
 
     urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL +
       '/chembl_metabolism/_search?q=drug_chembl_id:' + testChemblID + '&size=10000'
+    console.log 'URL: ', compoundMetabolism.url
     expect(compoundMetabolism.url).toBe(urlMustBe)
 
   it 'parses the nodes correctly', ->
@@ -42,6 +43,7 @@ describe 'Compound Metabolism', ->
       nodeGot = nodesGotIndex[nodeID]
       expect(nodeGot?).toBe(true)
       expect(nodeGot.is_current).toBe(nodeID == testChemblID)
+      expect(nodeGot.pref_name).toBe(nodeMustBe.pref_name)
 
   it 'parses the edges correctly', ->
 
@@ -50,6 +52,7 @@ describe 'Compound Metabolism', ->
       molecule_chembl_id: testChemblID
 
     parsedData = compoundMetabolism.parse(sampleDataToParse)
+    console.log 'parsedData: ', parsedData
 
     nodesGot = parsedData.graph.nodes
     nodesMustBe = parsedDataMustBe.graph.nodes
@@ -73,6 +76,7 @@ describe 'Compound Metabolism', ->
       expect(edgeGot.met_conversion).toBe(edgeMustBe.met_conversion)
       expect(edgeGot.organism).toBe(edgeMustBe.organism)
       expect(edgeGot.doc_chembl_id).toBe(edgeMustBe.doc_chembl_id)
+      expect(edgeGot.enzyme_chembl_id).toBe(edgeMustBe.enzyme_chembl_id)
       refsListMustBe = edgeMustBe.references_list.split("|").sort()
       refsListGot = edgeGot.references_list.split("|").sort()
       expect(TestsUtils.listsAreEqual(refsListMustBe, refsListGot)).toBe(true)
