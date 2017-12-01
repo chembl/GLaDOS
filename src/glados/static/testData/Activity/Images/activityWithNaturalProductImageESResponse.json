@@ -1,0 +1,92 @@
+{
+  "published_type": "IC50",
+  "standard_units": "nM",
+  "standard_type": "IC50",
+  "standard_relation": "=",
+  "bao_endpoint": "BAO_0000190",
+  "published_units": "uM",
+  "data_validity_comment": null,
+  "activity_comment": null,
+  "target_pref_name": "Thromboxane-A synthase",
+  "bao_label": "tissue-based format",
+  "pchembl_value": "6.11",
+  "parent_molecule_chembl_id": "CHEMBL1201469",
+  "assay_chembl_id": "CHEMBL1909116",
+  "document_chembl_id": "CHEMBL1909046",
+  "target_tax_id": "9606",
+  "activity_id": 7670612,
+  "target_chembl_id": "CHEMBL1835",
+  "standard_flag": true,
+  "molecule_chembl_id": "CHEMBL1201469",
+  "_metadata": {
+    "target_data": {
+      "target_type": "SINGLE PROTEIN"
+    },
+    "activity_generated": {
+      "short_data_validity_comment": null
+    },
+    "parent_molecule_data": {
+      "max_phase": 4,
+      "image_file": "naturalProduct.svg",
+      "compound_key": "GRAMICIDIN"
+    },
+    "organism_taxonomy": {
+      "l1": "Eukaryotes",
+      "l4_synonyms": [
+        "Homo sapiens Linnaeus, 1758",
+        "Homo sapiens",
+        "human",
+        "hum",
+        "man"
+      ],
+      "l2": "Mammalia",
+      "l3": "Primates",
+      "oc_id": 7,
+      "tax_id": 9606
+    },
+    "assay_data": {
+      "assay_subcellular_fraction": null,
+      "assay_cell_type": null,
+      "assay_organism": "Homo sapiens",
+      "cell_chembl_id": null,
+      "tissue_chembl_id": null,
+      "type_label": "B - Binding",
+      "assay_tissue": "Platelets"
+    },
+    "source": {
+      "src_description": "DrugMatrix",
+      "src_id": 15,
+      "src_short_name": "DRUGMATRIX"
+    },
+    "protein_classification": [
+      {
+        "protein_class_id": 190,
+        "l1": "Enzyme",
+        "l2": "Cytochrome P450",
+        "l3": "Cytochrome P450 family 5",
+        "l4": "Cytochrome P450 family 5A",
+        "l5": "Cytochrome P450 5A1",
+        "l6": null,
+        "l7": null,
+        "l8": null
+      }
+    ]
+  },
+  "qudt_units": "http://www.openphacts.org/units/Nanomolar",
+  "standard_value": "774",
+  "assay_type": "B",
+  "document_year": null,
+  "src_id": 15,
+  "target_organism": "Homo sapiens",
+  "potential_duplicate": false,
+  "canonical_smiles": null,
+  "record_id": 1539816,
+  "published_relation": "=",
+  "ligand_efficiency": null,
+  "document_journal": null,
+  "uo_units": "UO_0000065",
+  "assay_description": "DRUGMATRIX: Thromboxane Synthetase enzyme inhibition (substrate: PGH2)",
+  "bao_format": "BAO_0000221",
+  "published_value": "0.774",
+  "_score": 6.539691
+}

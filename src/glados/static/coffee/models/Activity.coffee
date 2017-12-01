@@ -3,7 +3,16 @@ Activity = Backbone.Model.extend
   initialize: ->
 
   parse: (response) ->
-    response.image_url = glados.Settings.WS_BASE_URL + 'image/' + response.molecule_chembl_id + '.svg?engine=indigo'
+    console.log 'PARSING ACTIVITY'
+    console.log JSON.stringify(response)
+
+    imageFile = glados.Utils.getNestedValue(response, '_metadata.parent_molecule_data.image_file')
+
+    if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      response.image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
+    else
+      response.image_url = "#{glados.Settings.WS_BASE_URL}image/#{response.molecule_chembl_id}.svg?engine=indigo"
+
     response.molecule_link = Compound.get_report_card_url(response.molecule_chembl_id )
     response.target_link = Target.get_report_card_url(response.target_chembl_id)
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )

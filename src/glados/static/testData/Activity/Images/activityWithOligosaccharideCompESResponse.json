@@ -1,0 +1,66 @@
+{
+  "published_type": "Hepatotoxicity (granulomatous hepatitis)",
+  "standard_units": null,
+  "standard_type": "Hepatotoxicity (granulomatous hepatitis)",
+  "standard_relation": "=",
+  "bao_endpoint": null,
+  "published_units": null,
+  "data_validity_comment": null,
+  "activity_comment": "references out of a total of 4",
+  "target_pref_name": "Unchecked",
+  "bao_label": "assay format",
+  "pchembl_value": null,
+  "parent_molecule_chembl_id": "CHEMBL1201460",
+  "assay_chembl_id": "CHEMBL3137731",
+  "document_chembl_id": "CHEMBL3137667",
+  "target_tax_id": null,
+  "activity_id": 13986147,
+  "target_chembl_id": "CHEMBL612545",
+  "standard_flag": false,
+  "molecule_chembl_id": "CHEMBL1201460",
+  "_metadata": {
+    "target_data": {
+      "target_type": "UNCHECKED"
+    },
+    "activity_generated": {
+      "short_data_validity_comment": null
+    },
+    "parent_molecule_data": {
+      "max_phase": 4,
+      "image_file": "oligosaccharide.svg",
+      "compound_key": "DALTEPARINE"
+    },
+    "assay_data": {
+      "assay_subcellular_fraction": null,
+      "assay_organism": "Homo sapiens",
+      "assay_cell_type": null,
+      "cell_chembl_id": null,
+      "tissue_chembl_id": "CHEMBL3559723",
+      "type_label": "T - Toxicity",
+      "assay_tissue": "Liver"
+    },
+    "source": {
+      "src_description": "Scientific Literature",
+      "src_id": 1,
+      "src_short_name": "LITERATURE"
+    },
+    "protein_classification": []
+  },
+  "qudt_units": null,
+  "standard_value": "0",
+  "assay_type": "T",
+  "document_year": 2004,
+  "src_id": 1,
+  "target_organism": null,
+  "potential_duplicate": false,
+  "canonical_smiles": null,
+  "record_id": 1980286,
+  "published_relation": "=",
+  "ligand_efficiency": null,
+  "document_journal": "Gastroenterol Clin Biol",
+  "uo_units": null,
+  "assay_description": "Granulomatous liver disease, proven histopathologically. Value is number of references indexed. [column 'GRAN' in source]",
+  "bao_format": "BAO_0000019",
+  "published_value": "0",
+  "_score": 12.126336
+}
