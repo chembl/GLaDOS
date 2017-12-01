@@ -589,6 +589,54 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     applyZoomAndTranslation(colsHeaderG)
 
     # --------------------------------------
+    # Rows Footer Container
+    # --------------------------------------
+    rowsFooterG = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, YES)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+
+    rowsFooterG.append('rect')
+      .style('fill', 'none')
+      .classed('background-rect', true)
+
+    @updateRowsFootersForWindow(rowsFooterG)
+
+    rowsFooterG.assignTexts = (transitionDuration=0) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.footers-text')
+        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName))
+
+    rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
+
+      t = rowsFooterG.transition().duration(transitionDuration)
+      t.selectAll('.vis-row-footer')
+        .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")" )
+
+    rowsFooterG.scaleSizes = (zoomScale) ->
+
+      rowsFooterG.select('.background-rect')
+        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.positionRows(zoomScale)
+      rowsFooterG.assignTexts()
+
+      rowsFooterG.selectAll('.footers-background-rect')
+        .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
+
+      rowsFooterG.selectAll('.footers-text')
+        .attr('x', ((thisView.ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
+        .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
+
+    applyZoomAndTranslation(rowsFooterG)
+
+    # --------------------------------------
     # Square 2
     # --------------------------------------
     corner2G = mainGContainer.append('g')
@@ -642,54 +690,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('points', pointsString)
 
     applyZoomAndTranslation(corner2G)
-
-    # --------------------------------------
-    # Rows Footer Container
-    # --------------------------------------
-    rowsFooterG = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-      .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, YES)
-      .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-
-    rowsFooterG.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-      .classed('background-rect', true)
-
-    @updateRowsFootersForWindow(rowsFooterG)
-
-    rowsFooterG.assignTexts = (transitionDuration=0) ->
-
-      t = rowsFooterG.transition().duration(transitionDuration)
-      t.selectAll('.footers-text')
-        .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName))
-
-    rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
-
-      t = rowsFooterG.transition().duration(transitionDuration)
-      t.selectAll('.vis-row-footer')
-        .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")" )
-
-    rowsFooterG.scaleSizes = (zoomScale) ->
-
-      rowsFooterG.select('.background-rect')
-        .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
-
-      rowsFooterG.positionRows(zoomScale)
-      rowsFooterG.assignTexts()
-
-      rowsFooterG.selectAll('.footers-background-rect')
-        .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
-
-      rowsFooterG.selectAll('.footers-text')
-        .attr('x', ((thisView.ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
-        .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
-
-    applyZoomAndTranslation(rowsFooterG)
 
     # --------------------------------------
     # Cols Footer Container
