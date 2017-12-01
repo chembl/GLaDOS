@@ -222,6 +222,21 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else if maxV > _.last(@intervalsLimits)
         @intervalsLimits.push(maxV)
 
+      if @intervalsLimits.length <= FacetingHandler.NUM_INTERVALS/2
+        nextIntervalSet = []
+        intervalsLeft = FacetingHandler.NUM_INTERVALS-@intervalsLimits.length
+        for valI, i in @intervalsLimits
+          nextIntervalSet.push(valI)
+          nextI = i + 1
+          if nextI < @intervalsLimits.length
+            nextVal = @intervalsLimits[nextI]
+            if nextVal - valI >= 2
+              for newVal in [(valI+1)..(nextVal-1)]
+                if intervalsLeft <= 0
+                  break
+                nextIntervalSet.push(newVal)
+                intervalsLeft -= 1
+        @intervalsLimits = nextIntervalSet
 
     parseESResults: (es_aggregations_data, first_call)->
 
@@ -285,10 +300,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     getIntervalKey: (bucket_data) ->
       formatKey = if @isYear then ((n)-> return n) else glados.Utils.getFormattedNumber
-      if bucket_data.to-bucket_data.from == 1
+      if bucket_data.to-bucket_data.from == 1 and @property_type.integer
         return formatKey(bucket_data.from)
       else
-        return formatKey(bucket_data.from) + "  to  " + formatKey(bucket_data.to)
+        toStr = formatKey(bucket_data.to)+')'
+        if @property_type.integer
+          toStr = formatKey(bucket_data.to-1)+']'
+        return '['+formatKey(bucket_data.from) + '  to  ' + toStr
 
     needsSecondRequest:()->
       return @faceting_type == FacetingHandler.INTERVAL_FACETING
