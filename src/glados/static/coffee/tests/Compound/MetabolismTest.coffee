@@ -43,7 +43,7 @@ describe 'Compound Metabolism', ->
       nodeGot = nodesGotIndex[nodeID]
       expect(nodeGot?).toBe(true)
       expect(nodeGot.is_current).toBe(nodeID == testChemblID)
-      expect(nodeGot.pref_name).toBe(nodeMustBe.pref_name)
+#      expect(nodeGot.pref_name).toBe(nodeMustBe.pref_name)
 
   it 'parses the edges correctly', ->
 
