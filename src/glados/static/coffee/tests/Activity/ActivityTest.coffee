@@ -12,28 +12,9 @@ describe "Activity", ->
       imgURLGot = parsed.image_url
       expect(imageURLMustBe).toBe(imgURLGot)
 
-    testHasMetalContainingImageURL = (response, parsed) ->
+    testHasSpecialImageURL = (response, parsed, imageFileMustBe) ->
 
-      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/metalContaining.svg"
-      imgURLGot = parsed.image_url
-      expect(imageURLMustBe).toBe(imgURLGot)
-
-    testHasOligosaccharideImageURL = (response, parsed) ->
-
-      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/oligosaccharide.svg"
-      imgURLGot = parsed.image_url
-      expect(imageURLMustBe).toBe(imgURLGot)
-
-    testHasNaturalProductImageURL = (response, parsed) ->
-
-      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/naturalProduct.svg"
-      imgURLGot = parsed.image_url
-      expect(imageURLMustBe).toBe(imgURLGot)
-
-
-    testHasSmalMolPolymnerImageURL = (response, parsed) ->
-
-      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/smallMolPolymer.svg"
+      imageURLMustBe = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFileMustBe}"
       imgURLGot = parsed.image_url
       expect(imageURLMustBe).toBe(imgURLGot)
 
@@ -73,7 +54,7 @@ describe "Activity", ->
               parsed = activity.parse(esResponse)
               done()
 
-          it 'generates the correct Image', -> testHasMetalContainingImageURL(esResponse, parsed)
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'metalContaining.svg')
 
         describe "Oligosaccharidde (molecule_chembl_id:CHEMBL1201460)", ->
 
@@ -86,7 +67,7 @@ describe "Activity", ->
               parsed = activity.parse(esResponse)
               done()
 
-          it 'generates the correct Image', -> testHasOligosaccharideImageURL(esResponse, parsed)
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'oligosaccharide.svg')
 
         describe "Natural Product (molecule_chembl_id:CHEMBL1201469)", ->
 
@@ -99,7 +80,7 @@ describe "Activity", ->
               parsed = activity.parse(esResponse)
               done()
 
-          it 'generates the correct Image', -> testHasNaturalProductImageURL(esResponse, parsed)
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'naturalProduct.svg')
 
         describe "Small Molecule Polymer (molecule_chembl_id:CHEMBL2108139)", ->
 
@@ -112,6 +93,6 @@ describe "Activity", ->
               parsed = activity.parse(esResponse)
               done()
 
-          it 'generates the correct Image', -> testHasSmalMolPolymnerImageURL(esResponse, parsed)
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'smallMolPolymer.svg')
 
 
