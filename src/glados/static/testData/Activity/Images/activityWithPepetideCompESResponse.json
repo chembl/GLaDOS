@@ -1,0 +1,85 @@
+{
+  "published_type": "Activity",
+  "standard_units": null,
+  "standard_type": "Activity",
+  "standard_relation": null,
+  "bao_endpoint": "BAO_0000375",
+  "published_units": null,
+  "data_validity_comment": null,
+  "activity_comment": "Active",
+  "target_pref_name": "Mus musculus",
+  "bao_label": "organism-based format",
+  "pchembl_value": null,
+  "parent_molecule_chembl_id": "CHEMBL1201866",
+  "assay_chembl_id": "CHEMBL3620847",
+  "document_chembl_id": "CHEMBL3616405",
+  "target_tax_id": "10090",
+  "activity_id": 15713431,
+  "target_chembl_id": "CHEMBL375",
+  "standard_flag": false,
+  "molecule_chembl_id": "CHEMBL1201866",
+  "_metadata": {
+    "target_data": {
+      "target_type": "ORGANISM"
+    },
+    "activity_generated": {
+      "short_data_validity_comment": null
+    },
+    "parent_molecule_data": {
+      "max_phase": 4,
+      "image_file": "peptide.svg",
+      "compound_key": "liraglutide"
+    },
+    "organism_taxonomy": {
+      "l1": "Eukaryotes",
+      "l4_synonyms": [
+        "Mus sp. 129SV",
+        "house mouse",
+        "Mus musculus Linnaeus, 1758",
+        "Mus musculus",
+        "Mus muscaris",
+        "mice C57BL/6xCBA/CaJ hybrid",
+        "LK3 transgenic mice",
+        "nude mice",
+        "mouse",
+        "transgenic mice"
+      ],
+      "l2": "Mammalia",
+      "l3": "Rodentia",
+      "oc_id": 35,
+      "tax_id": 10090
+    },
+    "assay_data": {
+      "assay_subcellular_fraction": null,
+      "assay_cell_type": null,
+      "assay_organism": "Mus musculus",
+      "cell_chembl_id": null,
+      "tissue_chembl_id": null,
+      "type_label": "F - Functional",
+      "assay_tissue": null
+    },
+    "source": {
+      "src_description": "Scientific Literature",
+      "src_id": 1,
+      "src_short_name": "LITERATURE"
+    },
+    "protein_classification": []
+  },
+  "qudt_units": null,
+  "standard_value": null,
+  "assay_type": "F",
+  "document_year": 2015,
+  "src_id": 1,
+  "target_organism": "Mus musculus",
+  "potential_duplicate": false,
+  "canonical_smiles": null,
+  "record_id": 2501006,
+  "published_relation": null,
+  "ligand_efficiency": null,
+  "document_journal": "J. Med. Chem.",
+  "uo_units": null,
+  "assay_description": "Antihyperglycaemic activity in db/db mouse assessed as reduction of blood glucose level at 0.3 to 100 nmol/kg, sc after 48 hrs by glucose oxidase method",
+  "bao_format": "BAO_0000218",
+  "published_value": null,
+  "_score": 5.260294
+}
