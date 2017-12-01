@@ -108,4 +108,17 @@ describe "Activity", ->
 
           it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'smallMolecule.svg')
 
+        describe "Antibody (molecule_chembl_id:CHEMBL1201580)", ->
+
+          beforeAll (done) ->
+
+            dataURL = glados.Settings.STATIC_URL +
+              'testData/Activity/Images/activityWithAntibodyCompESResponse.json'
+            $.get dataURL, (testData) ->
+              esResponse = testData
+              parsed = activity.parse(esResponse)
+              done()
+
+          it 'generates the correct Image', -> testHasSpecialImageURL(esResponse, parsed, 'antibody.svg')
+
 
