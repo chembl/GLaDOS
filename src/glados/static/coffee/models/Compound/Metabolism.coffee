@@ -29,31 +29,21 @@ glados.useNameSpace 'glados.models.Compound',
 
       selectedChemblID = @get('molecule_chembl_id')
       metabolisms = response.hits.hits
-      console.log 'metabolisms: ',  metabolisms
       nodesToPosition = {}
       nodesList = parsed.graph.nodes
       for metabolism in metabolisms
 
         metData = metabolism._source
-        console.log 'metData: ', metData
 
         substrateID = metData.substrate_chembl_id
         if not nodesToPosition[substrateID]?
           @addNode(substrateID, selectedChemblID, metData._metadata.compound_data.substrate_pref_name,
             metData._metadata.compound_data.substrate_image_file, nodesList, nodesToPosition)
 
-        console.log 'substrateID: ', substrateID
-        console.log 'pref name: ', metData._metadata.compound_data.substrate_pref_name
-
         metaboliteID = metData.metabolite_chembl_id
         if not nodesToPosition[metaboliteID]?
           @addNode(metaboliteID, selectedChemblID, metData._metadata.compound_data.metabolite_pref_name,
             metData._metadata.compound_data.metabolite_image_file, nodesList, nodesToPosition)
-
-        console.log 'metaboliteID: ', metaboliteID
-        console.log 'pref name: ', metData._metadata.compound_data.metabolite_pref_name
-
-        console.log '^^^'
 
         newEdge =
           enzyme: metData.enzyme_name
