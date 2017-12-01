@@ -8,12 +8,13 @@ glados.useNameSpace 'glados.models.Compound',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
-    addNode: (chemblID, selectedID, pref_name, nodesList, nodesToPosition) ->
+    addNode: (chemblID, selectedID, pref_name, imageFile, nodesList, nodesToPosition) ->
 
       newNode =
         chembl_id: chemblID
         pref_name: pref_name
-        has_structure: true
+        has_structure: not imageFile?
+        image_file: imageFile
         is_current: chemblID == selectedID
 
       nodesList.push newNode
@@ -38,14 +39,16 @@ glados.useNameSpace 'glados.models.Compound',
 
         substrateID = metData.substrate_chembl_id
         if not nodesToPosition[substrateID]?
-          @addNode(substrateID, selectedChemblID, metData._metadata.compound_data.substrate_pref_name, nodesList, nodesToPosition)
+          @addNode(substrateID, selectedChemblID, metData._metadata.compound_data.substrate_pref_name,
+            metData._metadata.compound_data.substrate_image_file, nodesList, nodesToPosition)
 
         console.log 'substrateID: ', substrateID
         console.log 'pref name: ', metData._metadata.compound_data.substrate_pref_name
 
         metaboliteID = metData.metabolite_chembl_id
         if not nodesToPosition[metaboliteID]?
-          @addNode(metaboliteID, selectedChemblID, metData._metadata.compound_data.metabolite_pref_name, nodesList, nodesToPosition)
+          @addNode(metaboliteID, selectedChemblID, metData._metadata.compound_data.metabolite_pref_name,
+            metData._metadata.compound_data.metabolite_image_file, nodesList, nodesToPosition)
 
         console.log 'metaboliteID: ', metaboliteID
         console.log 'pref name: ', metData._metadata.compound_data.metabolite_pref_name

@@ -91,14 +91,15 @@ glados.useNameSpace 'glados.views.Compound',
           newItem =
             data:
               id: node.chembl_id,
-              'pref_name': node.pref_name,
-              'is_current': node.is_current,
-              'doc_chembl_id': node.doc_chembl_id,
-              'has_structure': node.has_structure,
-              'molregno': node.molregno
+              pref_name: node.pref_name,
+              is_current: node.is_current,
+              doc_chembl_id: node.doc_chembl_id,
+              has_structure: node.has_structure,
+              image_file: node.image_file
+              molregno: node.molregno
 
           ws_img_url = "#{base_img_link}#{node.chembl_id}.svg?engine=indigo"
-          backup_img_url = "#{base_img_backup_link}#{node.molregno}"
+          backup_img_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{node.image_file}"
           background_img = if node.has_structure then ws_img_url else backup_img_url
           ans.elems.push(newItem)
 
@@ -164,7 +165,7 @@ glados.useNameSpace 'glados.views.Compound',
           chembl_id = n.data('id')
 
           ws_img = "https://www.ebi.ac.uk/chembl/api/data/image/#{chembl_id}?engine=indigo"
-          backup_img = "https://www.ebi.ac.uk/chembl/compound/displayimage_large/#{n.data('molregno')}"
+          backup_img =  "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{n.data('image_file')}"
 
           img_link = if n.data('has_structure') then ws_img else backup_img
           compound_link = " <a target ='_blank' href = '/compound_report_card/#{chembl_id}'> #{chembl_id} </a>"
@@ -263,13 +264,7 @@ glados.useNameSpace 'glados.views.Compound',
 
         return cy
 
-    loadFromVariable: (container_id, data) ->
-
-      console.log('data from variable!')
-      console.log(data)
-      console.log('^^^^^^')
-      @getCytoscapeInstance(container_id, data)
-      console.log('DONE')
+    loadFromVariable: (container_id, data) -> @getCytoscapeInstance(container_id, data)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # View constants
