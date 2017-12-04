@@ -660,8 +660,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.assignTexts = ->
 
-      corner2G.select('.rows-sort-text')
+      d3TextElem = corner2G.select('.rows-sort-text')
         .text(thisView.currentRowSortingProperty.label + ':')
+      widthLimit = d3TextElem.attr('data-text-width-limit')
+      thisView.setEllipsisIfOverlaps(d3ContainerElem=undefined, d3TextElem, limitByHeight=false, addFullTextQtip=true,
+        widthLimit)
 
     SQ2_triangleAlpha = 90 - COLS_LABELS_ROTATION
     SQ2_triangleAlphaRad = glados.Utils.getRadiansFromDegrees(SQ2_triangleAlpha)
@@ -676,7 +679,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', currentContainerHeight)
         .attr('width', currentContainerWidth)
 
-      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * SQ2_tanTirangleAlhpa))
+      triangleHeight = thisView.ROWS_FOOTER_WIDTH * SQ2_tanTirangleAlhpa
+      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - triangleHeight)
       trianglePoints = [
         {
           x: 0
@@ -702,14 +706,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('x2', currentContainerWidth)
         .attr('y2', triangleTop)
 
+      # https://drive.google.com/file/d/1rEg1YNxzR6cB2upjRf7PtoIk08tyLapg/view?usp=sharing
       tY = (3/2) * LABELS_PADDING
       textY = (thisView.COLS_HEADER_HEIGHT + tY) * zoomScale
       tX = tY / SQ2_tanTirangleAlhpa
       textX = (tX + 2) * zoomScale # add a small padding because tX is always bound to triangle
       # The final textX or textY values need to take into account the current zoom scale
 
-      triangleHyp = Math.sqrt(Math.pow(currentContainerHeight, 2) + Math.pow(currentContainerWidth, 2))
-      textWidthLimit = triangleHyp - (2 * tX)
+      triangleHyp = Math.sqrt(Math.pow(triangleHeight, 2) + Math.pow(currentContainerWidth, 2))
+      textWidthLimit = triangleHyp - (2 * textX)
 
       corner2G.select('.rows-sort-text')
         .attr('x', textX)
@@ -1234,15 +1239,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit) ->
 
     # remember the rotation!
-    if limitByHeight
-      containerLimit = d3ContainerElem.node().getBBox().height
+    if customWidthLimit?
+      containerLimit = customWidthLimit
     else
-      containerLimit = d3ContainerElem.node().getBBox().width
+      if limitByHeight
+        containerLimit = d3ContainerElem.node().getBBox().height
+      else
+        containerLimit = d3ContainerElem.node().getBBox().width
 
+    console.log 'AAA add ellipsis'
     textWidth = d3TextElem.node().getBBox().width
+    console.log 'AAA textWidth: ', textWidth
+    console.log 'AAA containerLimit: ', containerLimit
 
     if 0 < containerLimit < textWidth
       text = d3TextElem.text()
