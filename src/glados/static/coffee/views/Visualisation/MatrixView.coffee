@@ -663,8 +663,13 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       d3TextElem = corner2G.select('.rows-sort-text')
         .text(thisView.currentRowSortingProperty.label + ':')
       widthLimit = d3TextElem.attr('data-text-width-limit')
+
+      customTooltipPosition =
+        my: 'top right'
+        at: 'bottom left'
+
       thisView.setEllipsisIfOverlaps(d3ContainerElem=undefined, d3TextElem, limitByHeight=false, addFullTextQtip=true,
-        widthLimit)
+        widthLimit, customTooltipPosition)
 
     SQ2_triangleAlpha = 90 - COLS_LABELS_ROTATION
     SQ2_triangleAlphaRad = glados.Utils.getRadiansFromDegrees(SQ2_triangleAlpha)
@@ -1239,7 +1244,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit,
+  customTooltipPosition=undefined ) ->
 
     # remember the rotation!
     if customWidthLimit?
@@ -1250,10 +1256,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       else
         containerLimit = d3ContainerElem.node().getBBox().width
 
-    console.log 'AAA add ellipsis'
     textWidth = d3TextElem.node().getBBox().width
-    console.log 'AAA textWidth: ', textWidth
-    console.log 'AAA containerLimit: ', containerLimit
+    $textElem = $(d3TextElem.node())
 
     if 0 < containerLimit < textWidth
       text = d3TextElem.text()
@@ -1262,21 +1266,22 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if addFullTextQtip
 
+        tooltipPosition = customTooltipPosition
+        tooltipPosition ?= glados.Utils.Tooltips.getQltipSafePostion($textElem)
+
         qtipConfig =
           content:
             text: "<div style='padding: 3px'>#{text}</div>"
-          position:
-            my: 'top left'
-            at: 'bottom center'
+          position: tooltipPosition
           style:
             classes:'matrix-qtip qtip-light qtip-shadow'
 
-        $(d3TextElem.node()).qtip qtipConfig
+        $textElem.qtip qtipConfig
 
     else
-      
+
       if addFullTextQtip
-        $(d3TextElem.node()).qtip('destroy', true)
+        $textElem.qtip('destroy', true)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Initial Zoom Calculation
