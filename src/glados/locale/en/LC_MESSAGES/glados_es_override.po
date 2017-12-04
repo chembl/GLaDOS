@@ -210,6 +210,12 @@ msgstr "Data Validity Comment"
 
 msgid "glados_es_gs__assay__related_compounds___count__label"
 msgstr "Compounds"
+
+msgid "glados_es_gs__activity__assay_data___type_label__label"
+msgstr "Assay Type"
+
+msgid "glados_es_gs__activity__assay_data___type_label__label__mini"
+msgstr "Assay Type"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
@@ -245,6 +251,24 @@ msgstr "BAO Format"
 
 msgid "glados_es_gs__assay__related_activities___count__label"
 msgstr "Activities"
+
+msgid "glados_es_gs__assay__assay_generated___confidence_label__label"
+msgstr "Confidence"
+
+msgid "glados_es_gs__assay__assay_generated___confidence_label__label__mini"
+msgstr "Confidence"
+
+msgid "glados_es_gs__assay__assay_generated___relationship_label__label"
+msgstr "Relationship"
+
+msgid "glados_es_gs__assay__assay_generated___relationship_label__label__mini"
+msgstr "Relationship"
+
+msgid "glados_es_gs__assay__assay_generated___type_label__label"
+msgstr "Type"
+
+msgid "glados_es_gs__assay__assay_generated___type_label__label__mini"
+msgstr "Type"
 #-----------------------------------------------------------------------------------------------------------------------
 # Cell Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
