@@ -835,8 +835,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner3G.assignTexts = ->
 
-      corner3G.select('.cols-sort-text')
+      colsSortText = corner3G.select('.cols-sort-text')
         .text(thisView.currentColSortingProperty.label + ':')
+      backgroundRect = corner3G.select('.background-rect')
+
+      thisView.setEllipsisIfOverlaps(backgroundRect, colsSortText, limitByHeight=false, addFullTextQtip=true)
 
     corner3G.scaleSizes = (zoomScale) ->
 
@@ -845,7 +848,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
     applyZoomAndTranslation(corner3G)
     corner3G.assignTexts()
@@ -1214,7 +1217,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false) ->
 
     # remember the rotation!
     if limitByHeight
@@ -1228,6 +1231,21 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       text = d3TextElem.text()
       newText = glados.Utils.Text.getTextForEllipsis(text, textWidth, containerLimit)
       d3TextElem.text(newText)
+
+      if addFullTextQtip
+
+        qtipConfig =
+          content:
+            text: "<div style='padding: 3px'>#{text}</div>"
+          position:
+            my: 'top left'
+            at: 'bottom center'
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+
+        $(d3TextElem.node()).qtip qtipConfig
+
+
 
   #---------------------------------------------------------------------------------------------------------------------
   # Initial Zoom Calculation
