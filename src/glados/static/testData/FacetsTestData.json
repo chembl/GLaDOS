@@ -1,6 +1,33 @@
 [
   {
     "aggData": {
+        "_metadata.atc_classifications.level1_description"
+    :
+        {
+            "doc_count_error_upper_bound"
+        :
+            0, "sum_other_doc_count"
+        :
+            706, "buckets"
+        :
+            [{"key": "- N/A -", "doc_count": 1732261}, {
+                "key": "N - NERVOUS SYSTEM",
+                "doc_count": 504
+            }, {"key": "A - ALIMENTARY TRACT AND METABOLISM", "doc_count": 443}, {
+                "key": "C - CARDIOVASCULAR SYSTEM",
+                "doc_count": 410
+            }, {
+                "key": "J - ANTIINFECTIVES FOR SYSTEMIC USE",
+                "doc_count": 345
+            }, {
+                "key": "L - ANTINEOPLASTIC AND IMMUNOMODULATING AGENTS",
+                "doc_count": 308
+            }, {"key": "D - DERMATOLOGICALS", "doc_count": 290}, {
+                "key": "R - RESPIRATORY SYSTEM",
+                "doc_count": 265
+            }, {"key": "V - VARIOUS", "doc_count": 214}, {"key": "S - SENSORY ORGANS", "doc_count": 208}]
+        }
+    ,
         "molecule_type"
     :
         {
@@ -20,6 +47,33 @@
                 "key": "Unclassified",
                 "doc_count": 4
             }]
+        }
+    ,
+        "_metadata.atc_classifications.level2_description"
+    :
+        {
+            "doc_count_error_upper_bound"
+        :
+            54, "sum_other_doc_count"
+        :
+            2635, "buckets"
+        :
+            [{"key": "- N/A -", "doc_count": 1732261}, {
+                "key": "J01 - ANTIBACTERIALS FOR SYSTEMIC USE",
+                "doc_count": 218
+            }, {"key": "S01 - OPHTHALMOLOGICALS", "doc_count": 201}, {
+                "key": "L01 - ANTINEOPLASTIC AGENTS",
+                "doc_count": 192
+            }, {"key": "N05 - PSYCHOLEPTICS", "doc_count": 166}, {
+                "key": "C01 - CARDIAC THERAPY",
+                "doc_count": 118
+            }, {
+                "key": "N06 - PSYCHOANALEPTICS",
+                "doc_count": 103
+            }, {
+                "key": "M01 - ANTIINFLAMMATORY AND ANTIRHEUMATIC PRODUCTS",
+                "doc_count": 77
+            }, {"key": "N02 - ANALGESICS", "doc_count": 77}, {"key": "B01 - ANTITHROMBOTIC AGENTS", "doc_count": 71}]
         }
     ,
         "max_phase_PERCENTILES"
@@ -62,27 +116,27 @@
             {
                 "1.0"
             :
-                -2.2736537033698476, "10.0"
+                -2.27283247614655, "10.0"
             :
-                0.9518883013285284, "20.0"
+                0.9499296732961047, "20.0"
             :
-                1.8032879146696634, "30.0"
+                1.8034592582166948, "30.0"
             :
-                2.374154875312578, "40.0"
+                2.379325329343914, "40.0"
             :
-                2.8454727176634145, "50.0"
+                2.8442605588945007, "50.0"
             :
-                3.2839047268886405, "60.0"
+                3.2840999072826214, "60.0"
             :
-                3.7253629357815368, "70.0"
+                3.7195754677370383, "70.0"
             :
-                4.198862890196782, "80.0"
+                4.195495364433576, "80.0"
             :
-                4.779829832144821, "90.0"
+                4.778056194898778, "90.0"
             :
-                5.647088551723302, "99.0"
+                5.648293228785265, "99.0"
             :
-                8.501268978842731
+                8.503911806387437
             }
         }
     ,
@@ -143,22 +197,54 @@
         :
             25.53, "avg"
         :
-            3.2787279615475087, "sum"
+            3.27872796154755, "sum"
         :
-            5536217.4099999685, "sum_of_squares"
+            5536217.410000038, "sum_of_squares"
         :
-            2.523165981309779E7, "variance"
+            2.5231659813097753E7, "variance"
         :
-            4.192952308537012, "std_deviation"
+            4.192952308536719, "std_deviation"
         :
-            2.047669970609769, "std_deviation_bounds"
+            2.0476699706096975, "std_deviation_bounds"
         :
             {
                 "upper"
             :
-                7.374067902767047, "lower"
+                7.374067902766945, "lower"
             :
-                -0.8166119796720293
+                -0.816611979671845
+            }
+        }
+    ,
+        "_metadata.related_activities.count_PERCENTILES"
+    :
+        {
+            "values"
+        :
+            {
+                "1.0"
+            :
+                1.0, "10.0"
+            :
+                1.0, "20.0"
+            :
+                1.0, "30.0"
+            :
+                2.0, "40.0"
+            :
+                3.0, "50.0"
+            :
+                4.0, "60.0"
+            :
+                5.0, "70.0"
+            :
+                7.000000000000001, "80.0"
+            :
+                10.0, "90.0"
+            :
+                17.871017627569554, "99.0"
+            :
+                60.0
             }
         }
     ,
@@ -194,6 +280,36 @@
             }
         }
     ,
+        "_metadata.related_activities.count_STATS"
+    :
+        {
+            "count"
+        :
+            1648148, "min"
+        :
+            1.0, "max"
+        :
+            14808.0, "avg"
+        :
+            8.90412754194405, "sum"
+        :
+            1.467532E7, "sum_of_squares"
+        :
+            2.967143176E9, "variance"
+        :
+            1721.0057925630208, "std_deviation"
+        :
+            41.48500684058062, "std_deviation_bounds"
+        :
+            {
+                "upper"
+            :
+                91.87414122310528, "lower"
+            :
+                -74.06588613921718
+            }
+        }
+    ,
         "_metadata.related_targets.count_PERCENTILES"
     :
         {
@@ -216,45 +332,13 @@
             :
                 3.0, "70.0"
             :
-                5.000000000000001, "80.0"
+                5.0, "80.0"
             :
                 6.0, "90.0"
             :
                 11.0, "99.0"
             :
                 58.0
-            }
-        }
-    ,
-        "_metadata.activity_count_PERCENTILES"
-    :
-        {
-            "values"
-        :
-            {
-                "1.0"
-            :
-                0.0, "10.0"
-            :
-                1.0, "20.0"
-            :
-                1.0, "30.0"
-            :
-                2.0, "40.0"
-            :
-                3.0, "50.0"
-            :
-                3.1114605171208947, "60.0"
-            :
-                5.0, "70.0"
-            :
-                6.712655950095964, "80.0"
-            :
-                9.0, "90.0"
-            :
-                17.0, "99.0"
-            :
-                60.0
             }
         }
     ,
@@ -269,52 +353,22 @@
         :
             13020.3, "avg"
         :
-            426.8327883749378, "sum"
+            426.8327883749287, "sum"
         :
-            7.389000571099875E8, "sum_of_squares"
+            7.389000571099718E8, "sum_of_squares"
         :
-            4.224677627639878E11, "variance"
+            4.22467762763984E11, "variance"
         :
-            61856.37361258042, "std_deviation"
+            61856.37361258596, "std_deviation"
         :
-            248.709416011096, "std_deviation_bounds"
-        :
-            {
-                "upper"
-            :
-                924.2516203971298, "lower"
-            :
-                -70.5860436472542
-            }
-        }
-    ,
-        "_metadata.activity_count_STATS"
-    :
-        {
-            "count"
-        :
-            1735442, "min"
-        :
-            0.0, "max"
-        :
-            14808.0, "avg"
-        :
-            8.456243423865505, "sum"
-        :
-            1.467532E7, "sum_of_squares"
-        :
-            2.967143176E9, "variance"
-        :
-            1638.2253614680744, "std_deviation"
-        :
-            40.474996744509745, "std_deviation_bounds"
+            248.70941601110715, "std_deviation_bounds"
         :
             {
                 "upper"
             :
-                89.40623691288499, "lower"
+                924.251620397143, "lower"
             :
-                -72.49375006515399
+                -70.58604364728558
             }
         }
     ,
@@ -356,27 +410,27 @@
             {
                 "1.0"
             :
-                177.04760878961355, "10.0"
+                177.16142478642848, "10.0"
             :
-                268.62546227019004, "20.0"
+                268.66594683731046, "20.0"
             :
-                307.8044242456929, "30.0"
+                307.7289711918098, "30.0"
             :
-                336.3306100265538, "40.0"
+                336.3859861527711, "40.0"
             :
-                362.00296546524356, "50.0"
+                362.0319536240576, "50.0"
             :
-                389.64803447258794, "60.0"
+                389.52088353087504, "60.0"
             :
-                418.46394616476954, "70.0"
+                418.48632450804746, "70.0"
             :
-                450.934294193573, "80.0"
+                450.77689284575786, "80.0"
             :
-                492.97229229390047, "90.0"
+                492.8986505494276, "90.0"
             :
-                574.0663286372996, "99.0"
+                573.9898915729121, "99.0"
             :
-                1295.1991399718236
+                1295.2256916830083
             }
         }
     ,
@@ -413,7 +467,7 @@
     "firstCall": true
   },
   {
-    "aggData": {
+    "aggData":{
         "molecule_properties.alogp"
     :
         {
@@ -445,11 +499,11 @@
                 "to": 7.0,
                 "doc_count": 71541
             }, {"key": "7.0-8.0", "from": 7.0, "to": 8.0, "doc_count": 29768}, {
-                "key": "8.0-9.0",
+                "key": "8.0-25.630000000000003",
                 "from": 8.0,
-                "to": 9.0,
-                "doc_count": 12949
-            }, {"key": "9.0-25.53", "from": 9.0, "to": 25.53, "doc_count": 11795}]
+                "to": 25.630000000000003,
+                "doc_count": 24746
+            }]
         }
     ,
         "molecule_properties.num_ro5_violations"
@@ -467,7 +521,7 @@
                 "from": 3.0,
                 "to": 4.0,
                 "doc_count": 25276
-            }, {"key": "4.0-4.0", "from": 4.0, "to": 4.0, "doc_count": 0}]
+            }, {"key": "4.0-5.0", "from": 4.0, "to": 5.0, "doc_count": 1061}]
         }
     ,
         "_metadata.related_targets.count"
@@ -490,7 +544,35 @@
                 "from": 6.0,
                 "to": 11.0,
                 "doc_count": 239009
-            }, {"key": "11.0-1181.0", "from": 11.0, "to": 1181.0, "doc_count": 185911}]
+            }, {"key": "11.0-1182.0", "from": 11.0, "to": 1182.0, "doc_count": 185912}]
+        }
+    ,
+        "_metadata.related_activities.count"
+    :
+        {
+            "buckets"
+        :
+            [{"key": "1.0-2.0", "from": 1.0, "to": 2.0, "doc_count": 371977}, {
+                "key": "2.0-3.0",
+                "from": 2.0,
+                "to": 3.0,
+                "doc_count": 230389
+            }, {"key": "3.0-4.0", "from": 3.0, "to": 4.0, "doc_count": 182747}, {
+                "key": "4.0-5.0",
+                "from": 4.0,
+                "to": 5.0,
+                "doc_count": 140406
+            }, {"key": "5.0-7.0", "from": 5.0, "to": 7.0, "doc_count": 202556}, {
+                "key": "7.0-10.0",
+                "from": 7.0,
+                "to": 10.0,
+                "doc_count": 176336
+            }, {"key": "10.0-18.0", "from": 10.0, "to": 18.0, "doc_count": 177731}, {
+                "key": "18.0-14809.0",
+                "from": 18.0,
+                "to": 14809.0,
+                "doc_count": 166006
+            }]
         }
     ,
         "molecule_properties.full_mwt"
@@ -523,12 +605,7 @@
                 "from": 900.0,
                 "to": 1000.0,
                 "doc_count": 8564
-            }, {"key": "1000.0-1100.0", "from": 1000.0, "to": 1100.0, "doc_count": 6080}, {
-                "key": "1100.0-1200.0",
-                "from": 1100.0,
-                "to": 1200.0,
-                "doc_count": 3906
-            }, {"key": "1200.0-13020.3", "from": 1200.0, "to": 13020.3, "doc_count": 20209}]
+            }, {"key": "1000.0-13020.4", "from": 1000.0, "to": 13020.4, "doc_count": 30196}]
         }
     ,
         "max_phase"
@@ -546,35 +623,7 @@
                 "from": 3.0,
                 "to": 4.0,
                 "doc_count": 928
-            }, {"key": "4.0-4.0", "from": 4.0, "to": 4.0, "doc_count": 0}]
-        }
-    ,
-        "_metadata.activity_count"
-    :
-        {
-            "buckets"
-        :
-            [{"key": "0.0-1.0", "from": 0.0, "to": 1.0, "doc_count": 87294}, {
-                "key": "1.0-2.0",
-                "from": 1.0,
-                "to": 2.0,
-                "doc_count": 371977
-            }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 230389}, {
-                "key": "3.0-5.0",
-                "from": 3.0,
-                "to": 5.0,
-                "doc_count": 323153
-            }, {"key": "5.0-7.0", "from": 5.0, "to": 7.0, "doc_count": 202556}, {
-                "key": "7.0-9.0",
-                "from": 7.0,
-                "to": 9.0,
-                "doc_count": 121491
-            }, {"key": "9.0-17.0", "from": 9.0, "to": 17.0, "doc_count": 220267}, {
-                "key": "17.0-14808.0",
-                "from": 17.0,
-                "to": 14808.0,
-                "doc_count": 178314
-            }]
+            }, {"key": "4.0-5.0", "from": 4.0, "to": 5.0, "doc_count": 3916}]
         }
     },
     "firstCall": false
