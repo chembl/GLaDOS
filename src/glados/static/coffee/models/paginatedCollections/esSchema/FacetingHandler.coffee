@@ -33,7 +33,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       cur_pos = 1
-      getFacetData = (prop_name)->
+      getFacetData = (prop_data)->
+        if _.isString(prop_data)
+          prop_name = prop_data
+        else if _.isObject(prop_data)
+          prop_name = prop_data.name
+          sort = prop_data.sort
         if prop_name not in _.keys(gs_data)
           throw 'ERROR: '+prop_name+' is not a property of '+es_index+'!'
         if gs_data[prop_name].aggregatable
@@ -43,7 +48,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             show: false
             position: cur_pos++
             faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-              es_index, prop_name
+              es_index, prop_name, sort
             )
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
@@ -67,7 +72,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           facets[prop_i].show = false
       return facets
 
-    @getNewFacetingHandler: (es_index, es_property)->
+    @getNewFacetingHandler: (es_index, es_property, sort=null)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       if not es_index_schema
         throw "ERROR! unknown elastic index "+es_index
@@ -82,7 +87,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_property,
           property_type.type,
           FacetingHandler.CATEGORY_FACETING,
-          property_type
+          property_type,
+          null,
+          sort
         )
       else if property_type.type == Number
         return new FacetingHandler(
@@ -90,7 +97,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           es_property,
           property_type.type,
           FacetingHandler.INTERVAL_FACETING,
-          property_type, property_type.year
+          property_type,
+          property_type.year,
+          sort
         )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
@@ -100,7 +109,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear)->
+    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear, @sort=null)->
       @faceting_keys_inorder = null
       @faceting_data = null
       @intervalsLimits
@@ -161,21 +170,21 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       isSmallFloat = hiP - lowP <= 7 and not @property_type.integer
       bound = 3/4*stats.std_deviation
       isNormalDistributed = hiP > stats.avg + bound and lowP < stats.avg - bound
-
+      if isNormalDistributed
+        isSmallFloat =  2*bound <= 7 and not @property_type.integer
       minV = stats.min
       maxV = stats.max
 
       maxV += if @property_type.integer then 1 else 0.1
 
       delta = maxV - minV
-
       @intervalsLimits = [minV]
       if @property_type.year
         curYear = new Date().getFullYear()
         for yearI in [(Math.max(curYear-10)+1)..curYear]
           @intervalsLimits.push(yearI)
 
-      else if delta <= 2*FacetingHandler.NUM_INTERVALS and (delta >= 7 or @property_type.integer)
+      else if delta <= 2*FacetingHandler.NUM_INTERVALS and not isSmallFloat
         if not @property_type.integer
           minV = Math.floor(minV)
           maxV = Math.ceil(maxV)
@@ -195,12 +204,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else
         lowP = percentiles['1.0']
         hiP = percentiles['99.0']
-        lowerBound = Math.round(Math.max(lowP, minV))
-        upperBound = Math.round(Math.min(hiP, maxV))
-
+        lowerBound = Math.round(Math.max(lowP, minV, stats.avg-2.5*stats.std_deviation))
+        upperBound = Math.round(Math.min(hiP, maxV, stats.avg+2.5*stats.std_deviation))
         intervalsSize = (upperBound/(FacetingHandler.NUM_INTERVALS-2))-(lowerBound/(FacetingHandler.NUM_INTERVALS-2))
         notIncludeDecimals = @property_type.integer or Math.abs(intervalsSize) > 3
         intervalsSize = glados.Utils.roundNumber(intervalsSize, isSmallFloat, true)
+
+
         if intervalsSize == 0
           intervalsSize = 1
         lowerBound *= 100.00 unless notIncludeDecimals
@@ -290,6 +300,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 @faceting_keys_inorder.push(fKey)
               if @property_type.year
                 @faceting_keys_inorder.reverse()
+
+      if @sort? and @sort == 'asc'
+        @faceting_keys_inorder.sort()
+      else if @sort? and @sort == 'desc'
+        @faceting_keys_inorder.sort()
+        @faceting_keys_inorder.reverse()
 
     parseCategoricalKey: (key) ->
 
