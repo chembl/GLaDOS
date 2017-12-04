@@ -535,25 +535,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     applyZoomAndTranslation(rowsHeaderG)
 
-    # --------------------------------------
-    # Square 2
-    # --------------------------------------
-    corner2G = mainGContainer.append('g')
-      .attr(BASE_Y_TRANS_ATT, 0)
-      .attr(MOVE_X_ATT, NO)
-      .attr(MOVE_Y_ATT, NO)
-      .attr(FIXED_TO_LEFT_ATT, YES)
-      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-
-    corner2G.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-
-    corner2G.scaleSizes = (zoomScale) ->
-      corner2G.select('rect')
-        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
-
-    applyZoomAndTranslation(corner2G)
 
     # --------------------------------------
     # Cols Header Container
@@ -618,7 +599,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
 
     rowsFooterG.append('rect')
-      .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
+      .style('fill', 'none')
       .classed('background-rect', true)
 
     @updateRowsFootersForWindow(rowsFooterG)
@@ -654,6 +635,76 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
     applyZoomAndTranslation(rowsFooterG)
+
+    # --------------------------------------
+    # Square 2
+    # --------------------------------------
+    corner2G = mainGContainer.append('g')
+      .attr(BASE_Y_TRANS_ATT, 0)
+      .attr(MOVE_X_ATT, NO)
+      .attr(MOVE_Y_ATT, NO)
+      .attr(FIXED_TO_LEFT_ATT, YES)
+      .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+      .classed('square2-g', true)
+
+    corner2G.append('rect')
+      .style('fill', 'none')
+    corner2G.append('polygon')
+      .classed('divider-triangle', true)
+    corner2G.append('line')
+      .classed('diagonal-line', true)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
+
+    corner2G.append('text')
+      .classed('rows-sort-text', true)
+      .attr('x', LABELS_PADDING)
+
+    corner2G.assignTexts = ->
+
+      corner2G.select('.rows-sort-text')
+        .text(thisView.currentRowSortingProperty.label + ':')
+
+    corner2G.scaleSizes = (zoomScale) ->
+      corner2G.select('rect')
+        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
+        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
+
+      triangleAlpha = 90 - COLS_LABELS_ROTATION
+      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(triangleAlpha))))
+      trianglePoints = [
+        {
+          x: 0
+          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+        }
+        {
+          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
+          y: triangleTop
+        }
+        {
+          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
+          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+        }
+      ]
+
+      pointsString = ("#{p.x},#{p.y}" for p in trianglePoints).join(' ')
+      corner2G.select('.divider-triangle')
+        .attr('points', pointsString)
+
+      corner2G.select('.diagonal-line')
+        .attr('x1', 0)
+        .attr('y1', thisView.COLS_HEADER_HEIGHT * zoomScale)
+        .attr('x2', thisView.ROWS_FOOTER_WIDTH * zoomScale)
+        .attr('y2', triangleTop)
+
+      corner2G.select('.rows-sort-text')
+        .attr('y', (thisView.COLS_HEADER_HEIGHT + (5/4) * LABELS_PADDING) * zoomScale)
+
+      corner2G.select('.rows-sort-text')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
+        .attr('transform', "rotate(#{-triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
+
+    applyZoomAndTranslation(corner2G)
+    corner2G.assignTexts()
 
     # --------------------------------------
     # Cols Footer Container
@@ -794,7 +845,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (3/4) * zoomScale) + 'px;')
+        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
 
     applyZoomAndTranslation(corner3G)
     corner3G.assignTexts()
@@ -981,6 +1032,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       rowsFooterG.assignTexts TRANSITIONS_DURATION
       cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
       rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
+      corner2G.assignTexts()
       # add missing rows in window
       setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
 
