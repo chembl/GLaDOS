@@ -645,11 +645,15 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr(MOVE_Y_ATT, NO)
       .attr(FIXED_TO_LEFT_ATT, YES)
       .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+      .classed('square2-g', true)
 
     corner2G.append('rect')
       .style('fill', 'none')
     corner2G.append('polygon')
-      .style('fill', 'lime')
+      .classed('divider-triangle', true)
+    corner2G.append('line')
+      .classed('diagonal-line', true)
+      .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
 
 #    corner3G.append('text')
 #      .attr('x', LABELS_PADDING)
@@ -667,24 +671,31 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
         .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
 
+      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(90 - COLS_LABELS_ROTATION))))
       trianglePoints = [
         {
           x: 0
           y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH *zoomScale)
-          y: zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(90 - COLS_LABELS_ROTATION))))
+          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
+          y: triangleTop
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH *zoomScale)
+          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
           y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
         }
       ]
 
       pointsString = ("#{p.x},#{p.y}" for p in trianglePoints).join(' ')
-      corner2G.select('polygon')
+      corner2G.select('.divider-triangle')
         .attr('points', pointsString)
+
+      corner2G.select('.diagonal-line')
+        .attr('x1', 0)
+        .attr('y1', thisView.COLS_HEADER_HEIGHT * zoomScale)
+        .attr('x2', thisView.ROWS_FOOTER_WIDTH * zoomScale)
+        .attr('y2', triangleTop)
 
     applyZoomAndTranslation(corner2G)
 
