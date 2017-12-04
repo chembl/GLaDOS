@@ -1822,6 +1822,86 @@ msgid "glados_es_gs__molecule__atc_classification__label__mini"
 msgstr "Atc Classification"
 
 
+msgid "glados_es_gs__molecule__atc_classifications___level1__label"
+msgstr "Atc Classifications Level1"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level1__label__mini"
+msgstr "Atc Classifications Level1"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level1_description__label"
+msgstr "Atc Classifications Level1 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level1_description__label__mini"
+msgstr "Atc Classifications Level1 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level2__label"
+msgstr "Atc Classifications Level2"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level2__label__mini"
+msgstr "Atc Classifications Level2"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level2_description__label"
+msgstr "Atc Classifications Level2 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level2_description__label__mini"
+msgstr "Atc Classifications Level2 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level3__label"
+msgstr "Atc Classifications Level3"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level3__label__mini"
+msgstr "Atc Classifications Level3"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level3_description__label"
+msgstr "Atc Classifications Level3 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level3_description__label__mini"
+msgstr "Atc Classifications Level3 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level4__label"
+msgstr "Atc Classifications Level4"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level4__label__mini"
+msgstr "Atc Classifications Level4"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level4_description__label"
+msgstr "Atc Classifications Level4 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level4_description__label__mini"
+msgstr "Atc Classifications Level4 Description"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level5__label"
+msgstr "Atc Classifications Level5"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___level5__label__mini"
+msgstr "Atc Classifications Level5"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___who_name__label"
+msgstr "Atc Classifications Who Name"
+
+
+msgid "glados_es_gs__molecule__atc_classifications___who_name__label__mini"
+msgstr "Atc Classifications Who Name"
+
+
 msgid "glados_es_gs__molecule__atc_classifications__label"
 msgstr "Atc Classifications"
 
@@ -2004,6 +2084,30 @@ msgstr "Compound Records Compound Name"
 
 msgid "glados_es_gs__molecule__compound_records___compound_name__label__mini"
 msgstr "Compound Records Compound Name"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_description__label"
+msgstr "Compound Records Src Description"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_description__label__mini"
+msgstr "Compound Records Src Description"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_id__label"
+msgstr "Compound Records Src ID"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_id__label__mini"
+msgstr "Compound Records Src ID"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_short_name__label"
+msgstr "Compound Records Src Short Name"
+
+
+msgid "glados_es_gs__molecule__compound_records___src_short_name__label__mini"
+msgstr "Compound Records Src Short Name"
 
 
 msgid "glados_es_gs__molecule__compound_records__label"

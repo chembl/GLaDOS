@@ -7,9 +7,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_cell_line'
       # Default Selected
       [
-        'cell_source_organism',
         'cell_source_tissue',
-        'cell_source_tax_id'
+        '_metadata.organism_taxonomy.l1',
+        '_metadata.organism_taxonomy.l2',
+        '_metadata.organism_taxonomy.l3',
+        'cell_source_organism',
       ],
       # Default Hidden
       [
