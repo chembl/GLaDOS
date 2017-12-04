@@ -657,32 +657,38 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.append('text')
       .classed('rows-sort-text', true)
-      .attr('x', LABELS_PADDING)
 
     corner2G.assignTexts = ->
 
       corner2G.select('.rows-sort-text')
         .text(thisView.currentRowSortingProperty.label + ':')
 
-    corner2G.scaleSizes = (zoomScale) ->
-      corner2G.select('rect')
-        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
+    SQ2_triangleAlpha = 90 - COLS_LABELS_ROTATION
+    SQ2_triangleAlphaRad = glados.Utils.getRadiansFromDegrees(SQ2_triangleAlpha)
+    SQ2_tanTirangleAlhpa = Math.tan(SQ2_triangleAlphaRad)
 
-      triangleAlpha = 90 - COLS_LABELS_ROTATION
-      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(triangleAlpha))))
+    corner2G.scaleSizes = (zoomScale) ->
+
+      currentContainerHeight = thisView.COLS_HEADER_HEIGHT * zoomScale
+      currentContainerWidth = thisView.ROWS_FOOTER_WIDTH * zoomScale
+
+      corner2G.select('rect')
+        .attr('height', currentContainerHeight)
+        .attr('width', currentContainerWidth)
+
+      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * SQ2_tanTirangleAlhpa))
       trianglePoints = [
         {
           x: 0
-          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+          y: currentContainerHeight
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
+          x: currentContainerWidth
           y: triangleTop
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
-          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+          x: currentContainerWidth
+          y: currentContainerHeight
         }
       ]
 
@@ -692,16 +698,27 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       corner2G.select('.diagonal-line')
         .attr('x1', 0)
-        .attr('y1', thisView.COLS_HEADER_HEIGHT * zoomScale)
-        .attr('x2', thisView.ROWS_FOOTER_WIDTH * zoomScale)
+        .attr('y1', currentContainerHeight)
+        .attr('x2', currentContainerWidth)
         .attr('y2', triangleTop)
 
-      corner2G.select('.rows-sort-text')
-        .attr('y', (thisView.COLS_HEADER_HEIGHT + (5/4) * LABELS_PADDING) * zoomScale)
+      tY = (3/2) * LABELS_PADDING
+      textY = (thisView.COLS_HEADER_HEIGHT + tY) * zoomScale
+      tX = tY / SQ2_tanTirangleAlhpa
+      textX = (tX + 2) * zoomScale # add a small padding because tX is always bound to triangle
+      # The final textX or textY values need to take into account the current zoom scale
+
+      triangleHyp = Math.sqrt(Math.pow(currentContainerHeight, 2) + Math.pow(currentContainerWidth, 2))
+      textWidthLimit = triangleHyp - (2 * tX)
 
       corner2G.select('.rows-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
-        .attr('transform', "rotate(#{-triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
+        .attr('x', textX)
+        .attr('y', textY)
+        .attr('data-text-width-limit', textWidthLimit)
+
+      corner2G.select('.rows-sort-text')
+        .attr('style', 'font-size:' + ( (4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', "rotate(#{-SQ2_triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
 
     applyZoomAndTranslation(corner2G)
     corner2G.assignTexts()
@@ -848,7 +865,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('style', 'font-size:' + ((4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
 
     applyZoomAndTranslation(corner3G)
     corner3G.assignTexts()
