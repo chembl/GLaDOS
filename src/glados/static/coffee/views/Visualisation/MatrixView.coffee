@@ -1273,7 +1273,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         $(d3TextElem.node()).qtip qtipConfig
 
-
+    else
+      
+      if addFullTextQtip
+        $(d3TextElem.node()).qtip('destroy', true)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Initial Zoom Calculation
