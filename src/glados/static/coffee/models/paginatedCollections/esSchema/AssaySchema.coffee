@@ -11,13 +11,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
         'assay_organism',
+        '_metadata.assay_generated.type_label',
         'bao_label',
         '_metadata.source.src_description',
-        '_metadata.assay_generated.confidence_label',
+        {
+          name:'_metadata.assay_generated.confidence_label'
+          sort:'asc'
+        },
       ],
       # Default Hidden
       [
-        '_metadata.assay_generated.type_label',
         'assay_tissue',
         'assay_cell_type',
         'assay_subcellular_fraction',
