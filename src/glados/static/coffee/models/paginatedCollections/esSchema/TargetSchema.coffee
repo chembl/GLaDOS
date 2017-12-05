@@ -10,10 +10,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
-        'organism',
+        {
+          property:'organism'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.protein_classification.l1',
         '_metadata.protein_classification.l2',
-        'target_type',
+        {
+          property:'target_type'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.related_compounds.count',
         '_metadata.activity_count',
       ],

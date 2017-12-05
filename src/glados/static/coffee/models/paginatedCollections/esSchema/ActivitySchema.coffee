@@ -8,18 +8,34 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       # Default Selected
       [
         'standard_type',
-        '_metadata.target_data.target_type',
+        {
+          property:'_metadata.target_data.target_type'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
-        'target_organism',
-        'bao_label',
+        {
+          property:'target_organism'
+          sort:'asc'
+          intervals: 20
+        },
+        {
+          property:'bao_label'
+          sort:'asc'
+          intervals: 20
+        },
         'pchembl_value',
-        '_metadata.parent_molecule_data.max_phase'
-        '_metadata.parent_molecule_data.num_ro5_violations'
-        '_metadata.parent_molecule_data.alogp'
-        '_metadata.parent_molecule_data.full_mwt'
-        '_metadata.source.src_description'
+        '_metadata.parent_molecule_data.max_phase',
+        '_metadata.parent_molecule_data.num_ro5_violations',
+        '_metadata.parent_molecule_data.alogp',
+        '_metadata.parent_molecule_data.full_mwt',
+        {
+          property:'_metadata.source.src_description'
+          sort:'asc'
+          intervals: 20
+        },
       ],
       # Default Hidden
       [

@@ -7,14 +7,26 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_molecule',
       # Default Selected
       [
-        'molecule_type',
+        {
+          property:'molecule_type'
+          sort:'asc'
+          intervals: 20
+        },
         'max_phase',
         'molecule_properties.num_ro5_violations',
         'molecule_properties.full_mwt',
         'molecule_properties.alogp',
         '_metadata.drug.is_drug',
-        '_metadata.atc_classifications.level1_description',
-        '_metadata.atc_classifications.level2_description',
+        {
+          property:'_metadata.atc_classifications.level1_description'
+          sort:'asc'
+          intervals: 20
+        },
+        {
+          property:'_metadata.atc_classifications.level2_description'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.related_targets.count',
         '_metadata.related_activities.count',
       ],
@@ -48,7 +60,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'natural_product',
         'prodrug',
         'structure_type',
-        'usan_stem',
+        {
+          property:'usan_stem'
+          sort:'asc'
+          intervals: 20
+        },
         'usan_year',
         'withdrawn_flag',
       ],
