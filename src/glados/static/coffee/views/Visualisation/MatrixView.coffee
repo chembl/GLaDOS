@@ -1260,10 +1260,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     if customWidthLimit?
       containerLimit = customWidthLimit
     else
+
       if limitByHeight
         containerLimit = d3ContainerElem.node().getBBox().height
       else
-        containerLimit = d3ContainerElem.node().getBBox().width
+        textX = d3TextElem.attr('x')
+        containerLimit = d3ContainerElem.node().getBBox().width - textX
 
     textWidth = d3TextElem.node().getBBox().width
     $textElem = $(d3TextElem.node())
