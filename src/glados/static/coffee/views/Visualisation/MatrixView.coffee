@@ -106,6 +106,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $(@el).find('select').material_select()
       @hideRenderingMessage()
 
+
   showRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').show()
   hideRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').hide()
 
@@ -320,16 +321,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # never start with zoom less than 1
     INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
     @zoomScale = INITIAL_ZOOM
+
+    console.log 'MIN_ZOOM: ', MIN_ZOOM
+    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
+    console.log 'MAX_ZOOM: ', MAX_ZOOM
     # --------------------------------------
     # Window
     # --------------------------------------
     # now that I have the zoom, I can calculate the window
     @unsetWindow()
     @calculateCurrentWindow(@zoomScale)
-
-    console.log 'MIN_ZOOM: ', MIN_ZOOM
-    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
-    console.log 'MAX_ZOOM: ', MAX_ZOOM
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -439,7 +440,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("width", (thisView.getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (thisView.getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
-
     applyZoomAndTranslation(cellsContainerG)
 
     fillColour = (d) ->
@@ -508,7 +508,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    @updateRowsHeadersForWindow(rowsHeaderG)
+    rowHeadersEnter = @updateRowsHeadersForWindow(rowsHeaderG)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -534,7 +534,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
     applyZoomAndTranslation(rowsHeaderG)
-
+    @setAllHeadersEllipsis(rowHeadersEnter, isCol=false)
 
     # --------------------------------------
     # Cols Header Container
@@ -552,7 +552,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    @updateColsHeadersForWindow(colsHeaderG)
+    colsHeadersEnter = @updateColsHeadersForWindow(colsHeaderG)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -587,7 +587,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     applyZoomAndTranslation(colsHeaderG)
-
+    @setAllHeadersEllipsis(colsHeadersEnter, isCol=true)
     # --------------------------------------
     # Rows Footer Container
     # --------------------------------------
@@ -657,32 +657,47 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner2G.append('text')
       .classed('rows-sort-text', true)
-      .attr('x', LABELS_PADDING)
 
     corner2G.assignTexts = ->
 
-      corner2G.select('.rows-sort-text')
+      d3TextElem = corner2G.select('.rows-sort-text')
         .text(thisView.currentRowSortingProperty.label + ':')
+      widthLimit = d3TextElem.attr('data-text-width-limit')
+
+      customTooltipPosition =
+        my: 'top right'
+        at: 'bottom left'
+
+      thisView.setEllipsisIfOverlaps(d3ContainerElem=undefined, d3TextElem, limitByHeight=false, addFullTextQtip=true,
+        widthLimit, customTooltipPosition)
+
+    SQ2_triangleAlpha = 90 - COLS_LABELS_ROTATION
+    SQ2_triangleAlphaRad = glados.Utils.getRadiansFromDegrees(SQ2_triangleAlpha)
+    SQ2_tanTirangleAlhpa = Math.tan(SQ2_triangleAlphaRad)
 
     corner2G.scaleSizes = (zoomScale) ->
-      corner2G.select('rect')
-        .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-        .attr('width', (thisView.ROWS_FOOTER_WIDTH *zoomScale))
 
-      triangleAlpha = 90 - COLS_LABELS_ROTATION
-      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - (thisView.ROWS_FOOTER_WIDTH * Math.tan(glados.Utils.getRadiansFromDegrees(triangleAlpha))))
+      currentContainerHeight = thisView.COLS_HEADER_HEIGHT * zoomScale
+      currentContainerWidth = thisView.ROWS_FOOTER_WIDTH * zoomScale
+
+      corner2G.select('rect')
+        .attr('height', currentContainerHeight)
+        .attr('width', currentContainerWidth)
+
+      triangleHeight = thisView.ROWS_FOOTER_WIDTH * SQ2_tanTirangleAlhpa
+      triangleTop = zoomScale * (thisView.COLS_HEADER_HEIGHT - triangleHeight)
       trianglePoints = [
         {
           x: 0
-          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+          y: currentContainerHeight
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
+          x: currentContainerWidth
           y: triangleTop
         }
         {
-          x: (thisView.ROWS_FOOTER_WIDTH * zoomScale)
-          y: (thisView.COLS_HEADER_HEIGHT * zoomScale)
+          x: currentContainerWidth
+          y: currentContainerHeight
         }
       ]
 
@@ -692,16 +707,28 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       corner2G.select('.diagonal-line')
         .attr('x1', 0)
-        .attr('y1', thisView.COLS_HEADER_HEIGHT * zoomScale)
-        .attr('x2', thisView.ROWS_FOOTER_WIDTH * zoomScale)
+        .attr('y1', currentContainerHeight)
+        .attr('x2', currentContainerWidth)
         .attr('y2', triangleTop)
 
-      corner2G.select('.rows-sort-text')
-        .attr('y', (thisView.COLS_HEADER_HEIGHT + (5/4) * LABELS_PADDING) * zoomScale)
+      # https://drive.google.com/file/d/1rEg1YNxzR6cB2upjRf7PtoIk08tyLapg/view?usp=sharing
+      tY = (3/2) * LABELS_PADDING
+      textY = (thisView.COLS_HEADER_HEIGHT + tY) * zoomScale
+      tX = tY / SQ2_tanTirangleAlhpa
+      textX = (tX + 2) * zoomScale # add a small padding because tX is always bound to triangle
+      # The final textX or textY values need to take into account the current zoom scale
+
+      triangleHyp = Math.sqrt(Math.pow(triangleHeight, 2) + Math.pow(currentContainerWidth, 2))
+      textWidthLimit = triangleHyp - (2 * textX)
 
       corner2G.select('.rows-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
-        .attr('transform', "rotate(#{-triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
+        .attr('x', textX)
+        .attr('y', textY)
+        .attr('data-text-width-limit', textWidthLimit)
+
+      corner2G.select('.rows-sort-text')
+        .attr('style', 'font-size:' + ( (4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
+        .attr('transform', "rotate(#{-SQ2_triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
 
     applyZoomAndTranslation(corner2G)
     corner2G.assignTexts()
@@ -835,8 +862,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     corner3G.assignTexts = ->
 
-      corner3G.select('.cols-sort-text')
+      colsSortText = corner3G.select('.cols-sort-text')
         .text(thisView.currentColSortingProperty.label + ':')
+      backgroundRect = corner3G.select('.background-rect')
+
+      thisView.setEllipsisIfOverlaps(backgroundRect, colsSortText, limitByHeight=false, addFullTextQtip=true)
 
     corner3G.scaleSizes = (zoomScale) ->
 
@@ -845,7 +875,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
       corner3G.select('.cols-sort-text')
-        .attr('style', 'font-size:' + (BASE_LABELS_SIZE * (4/5) * zoomScale) + 'px;')
+        .attr('style', 'font-size:' + ((4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
 
     applyZoomAndTranslation(corner3G)
     corner3G.assignTexts()
@@ -901,10 +931,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY, forceSectionsUpdate)
       if thisView.WINDOW.window_changed or forceSectionsUpdate
         console.log 'WINDOW CHANGED!!!'
-        thisView.updateColsHeadersForWindow(colsHeaderG)
+        colsHeadersEnter = thisView.updateColsHeadersForWindow(colsHeaderG)
         thisView.updateColsFootersForWindow(colsFooterG)
         colsFooterG.assignTexts()
-        thisView.updateRowsHeadersForWindow(rowsHeaderG)
+        rowHeadersEnter = thisView.updateRowsHeadersForWindow(rowsHeaderG)
         thisView.updateRowsFootersForWindow(rowsFooterG)
         rowsFooterG.assignTexts()
         thisView.updateCellsForWindow(cellsContainerG)
@@ -924,6 +954,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
       applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
       applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
+
+      # after adding elems to window, I need to check again for ellipsis
+      if thisView.WINDOW.window_changed or forceSectionsUpdate
+        thisView.setAllHeadersEllipsis.call(thisView, rowHeadersEnter, isCol=false)
+        thisView.setAllHeadersEllipsis.call(thisView, colsHeadersEnter, isCol=true)
 
       $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
       if thisView.zoomScale <= MIN_ZOOM
@@ -1088,7 +1123,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Rows /Cols Headers tooltips
   #---------------------------------------------------------------------------------------------------------------------
-  generateTooltipFunction: (sourceEntity, matrixView) ->
+  generateTooltipFunction: (sourceEntity, matrixView, isCol=true) ->
 
     return (d) ->
 
@@ -1110,18 +1145,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         style:
           classes:'matrix-qtip qtip-light qtip-shadow'
 
-      if sourceEntity == 'Target'
-
-        numCols = matrixView.model.get('matrix').columns.length
-
-        if d.currentPosition > numCols * matrixView.REVERSE_POSITION_TOOLTIP_TH
-          qtipConfig.position =
-            my: 'top right'
-            at: 'bottom left'
-        else
-          qtipConfig.position =
-            my: 'top left'
-            at: 'bottom left'
+      if isCol
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom left'
+      else
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom right'
 
       $clickedElem.qtip qtipConfig
 
@@ -1209,25 +1240,61 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
     d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
 
+    @setHeaderEllipsis(d3TextElem, isCol)
+
+  setHeaderEllipsis: (d3TextElem, isCol=true) ->
+
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
     @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
 
+  setAllHeadersEllipsis: (d3Selecion, isCol=true) ->
+
+    thisView = @
+    d3Selecion.selectAll('text')
+      .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol))
+
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
-  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false) ->
+  setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit,
+  customTooltipPosition=undefined ) ->
 
     # remember the rotation!
-    if limitByHeight
-      containerLimit = d3ContainerElem.node().getBBox().height
+    if customWidthLimit?
+      containerLimit = customWidthLimit
     else
-      containerLimit = d3ContainerElem.node().getBBox().width
+
+      if limitByHeight
+        containerLimit = d3ContainerElem.node().getBBox().height
+      else
+        textX = d3TextElem.attr('x')
+        containerLimit = d3ContainerElem.node().getBBox().width - textX
 
     textWidth = d3TextElem.node().getBBox().width
+    $textElem = $(d3TextElem.node())
 
     if 0 < containerLimit < textWidth
       text = d3TextElem.text()
       newText = glados.Utils.Text.getTextForEllipsis(text, textWidth, containerLimit)
       d3TextElem.text(newText)
+
+      if addFullTextQtip
+
+        tooltipPosition = customTooltipPosition
+        tooltipPosition ?= glados.Utils.Tooltips.getQltipSafePostion($textElem)
+
+        qtipConfig =
+          content:
+            text: "<div style='padding: 3px'>#{text}</div>"
+          position: tooltipPosition
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+
+        $textElem.qtip qtipConfig
+
+    else
+
+      if addFullTextQtip
+        $textElem.qtip('destroy', true)
 
   #---------------------------------------------------------------------------------------------------------------------
   # Initial Zoom Calculation
@@ -1273,9 +1340,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   unsetWindow: ->
 
-    @COLS_IN_WINDOW = undefined
-    @ROWS_IN_WINDOW = undefined
-    @CELLS_IN_WINDOW = undefined
+    @PREVIOUS_WINDOW = null
+    @WINDOW = null
+    @COLS_IN_WINDOW = null
+    @ROWS_IN_WINDOW = null
+    @CELLS_IN_WINDOW = null
 
   # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
   calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
@@ -1348,7 +1417,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     return (colsIndex[i] for i in [start..end])
 
   updateColsHeadersForWindow: (colsHeaderG) ->
-    starTime = Date.now()
 
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
@@ -1375,9 +1443,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('headers-divisory-line', true)
 
     if @config.cols_entity_name == 'Targets'
-      setUpColTooltip = @generateTooltipFunction('Target', @)
+      setUpColTooltip = @generateTooltipFunction('Target', @, isCol=true)
     else
-      setUpColTooltip = @generateTooltipFunction('Compound', @)
+      setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
 
     colsHeadersEnter.append('text')
       .classed('headers-text', true)
@@ -1390,8 +1458,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
       .on('click', thisView.handleColHeaderClick)
 
-    endTime = Date.now()
-    time = endTime - starTime
+    return colsHeadersEnter
 
   updateColsFootersForWindow: (colsFooterG) ->
 
@@ -1444,8 +1511,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   updateRowsHeadersForWindow: (rowsHeaderG) ->
 
-    starTime = Date.now()
-
     thisView = @
     rowsInWindow = @ROWS_IN_WINDOW
     for rowObj in rowsInWindow
@@ -1464,13 +1529,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
-    endTime = Date.now()
-    time = endTime - starTime
-
     if @config.rows_entity_name == 'Compounds'
-      setUpRowTooltip = @generateTooltipFunction('Compound', @)
+      setUpRowTooltip = @generateTooltipFunction('Compound', @, isCol=false)
     else
-      setUpRowTooltip = @generateTooltipFunction('Target', @)
+      setUpRowTooltip = @generateTooltipFunction('Target', @, isCol=false)
 
     rowHeadersEnter.append('text')
       .classed('headers-text', true)
@@ -1480,8 +1542,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
       .on('click', thisView.handleRowHeaderClick)
 
-    endTime = Date.now()
-    time = endTime - starTime
+    return rowHeadersEnter
 
   updateRowsFootersForWindow: (rowsFooterG) ->
 
