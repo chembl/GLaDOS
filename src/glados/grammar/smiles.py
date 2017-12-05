@@ -92,11 +92,22 @@ def bond():
 
 
 def branched_atom():
-    return atom, ZeroOrMore(ring_bond), ZeroOrMore(branch)
+    return atom, Optional(first_ring_bond, ZeroOrMore(next_ring_bond)), ZeroOrMore(branch)
 
 
-def ring_bond():
-    return Optional(bond), Optional('%'), common.digit, Optional(common.digit)
+def first_ring_bond():
+    return Optional(bond), \
+           [
+               (common.digit, Optional(common.digit)),
+               ('%', common.digit, common.digit)
+           ]
+
+
+def next_ring_bond():
+    return [
+               (bond, (common.digit, Optional(common.digit))),
+               (Optional(bond), '%', common.digit, common.digit)
+           ]
 
 
 def branch():
