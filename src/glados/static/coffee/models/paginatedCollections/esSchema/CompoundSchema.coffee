@@ -7,7 +7,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_molecule',
       # Default Selected
       [
-        'molecule_type',
+        {
+          property:'molecule_type'
+          sort:'asc'
+          intervals: 20
+        },
         'max_phase',
         'molecule_properties.num_ro5_violations',
         'molecule_properties.full_mwt',
