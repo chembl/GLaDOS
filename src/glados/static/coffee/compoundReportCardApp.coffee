@@ -106,6 +106,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_label: 'Sources'
       report_card_app: @
 
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
   @initCalculatedCompoundParentProperties = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()

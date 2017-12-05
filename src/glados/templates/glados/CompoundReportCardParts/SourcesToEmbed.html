@@ -1,0 +1,16 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compound Sources{% endblock %}
+
+{% block content %}
+
+   <div style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/Sources.html" %}
+   </div>
+
+{% endblock %}
+
+
+{% block custom_js_inline %}
+CompoundReportCardApp.initSources();
+{% endblock %}
