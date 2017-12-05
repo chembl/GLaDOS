@@ -934,7 +934,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         thisView.updateColsHeadersForWindow(colsHeaderG)
         thisView.updateColsFootersForWindow(colsFooterG)
         colsFooterG.assignTexts()
-        thisView.updateRowsHeadersForWindow(rowsHeaderG)
+        rowHeadersEnter = thisView.updateRowsHeadersForWindow(rowsHeaderG)
         thisView.updateRowsFootersForWindow(rowsFooterG)
         rowsFooterG.assignTexts()
         thisView.updateCellsForWindow(cellsContainerG)
@@ -954,6 +954,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
       applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
       applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
+
+      # after adding elems to window, I need to check again for ellipsis
+      if thisView.WINDOW.window_changed or forceSectionsUpdate
+        rowHeadersEnter.selectAll('text')
+        .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=false))
 
       $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
       if thisView.zoomScale <= MIN_ZOOM
@@ -1239,6 +1244,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
     d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
 
+    @setHeaderEllipsis(d3TextElem, isCol)
+
+  setHeaderEllipsis: (d3TextElem, isCol=true) ->
+
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
     @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
 
@@ -1498,8 +1507,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   updateRowsHeadersForWindow: (rowsHeaderG) ->
 
-    starTime = Date.now()
-
     thisView = @
     rowsInWindow = @ROWS_IN_WINDOW
     for rowObj in rowsInWindow
@@ -1518,9 +1525,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
       .classed('headers-background-rect', true)
 
-    endTime = Date.now()
-    time = endTime - starTime
-
     if @config.rows_entity_name == 'Compounds'
       setUpRowTooltip = @generateTooltipFunction('Compound', @)
     else
@@ -1534,8 +1538,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
       .on('click', thisView.handleRowHeaderClick)
 
-    endTime = Date.now()
-    time = endTime - starTime
+    return rowHeadersEnter
 
   updateRowsFootersForWindow: (rowsFooterG) ->
 
