@@ -11,7 +11,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
-        'cell_source_organism',
+        {
+          property:'cell_source_organism'
+          sort:'asc'
+          intervals: 20
+        },
       ],
       # Default Hidden
       [

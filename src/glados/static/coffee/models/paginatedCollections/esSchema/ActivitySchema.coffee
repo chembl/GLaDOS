@@ -16,7 +16,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
-        'target_organism',
+        {
+          property:'target_organism'
+          sort:'asc'
+          intervals: 20
+        },
         {
           property:'bao_label'
           sort:'asc'
