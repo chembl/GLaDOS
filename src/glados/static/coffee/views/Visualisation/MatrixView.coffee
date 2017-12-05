@@ -931,7 +931,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY, forceSectionsUpdate)
       if thisView.WINDOW.window_changed or forceSectionsUpdate
         console.log 'WINDOW CHANGED!!!'
-        thisView.updateColsHeadersForWindow(colsHeaderG)
+        colsHeadersEnter = thisView.updateColsHeadersForWindow(colsHeaderG)
         thisView.updateColsFootersForWindow(colsFooterG)
         colsFooterG.assignTexts()
         rowHeadersEnter = thisView.updateRowsHeadersForWindow(rowsHeaderG)
@@ -958,7 +958,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       # after adding elems to window, I need to check again for ellipsis
       if thisView.WINDOW.window_changed or forceSectionsUpdate
         rowHeadersEnter.selectAll('text')
-        .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=false))
+          .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=false))
+        colsHeadersEnter.selectAll('text')
+          .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=true))
 
       $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
       if thisView.zoomScale <= MIN_ZOOM
@@ -1413,7 +1415,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     return (colsIndex[i] for i in [start..end])
 
   updateColsHeadersForWindow: (colsHeaderG) ->
-    starTime = Date.now()
 
     thisView = @
     colsInWindow = @COLS_IN_WINDOW
@@ -1455,8 +1456,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
       .on('click', thisView.handleColHeaderClick)
 
-    endTime = Date.now()
-    time = endTime - starTime
+    return colsHeadersEnter
 
   updateColsFootersForWindow: (colsFooterG) ->
 
