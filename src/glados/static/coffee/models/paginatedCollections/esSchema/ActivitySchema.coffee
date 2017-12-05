@@ -13,7 +13,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',
         'target_organism',
-        'bao_label',
+        {
+          property:'bao_label'
+          sort:'asc'
+          intervals: 20
+        },
         'pchembl_value',
         '_metadata.parent_molecule_data.max_phase'
         '_metadata.parent_molecule_data.num_ro5_violations'

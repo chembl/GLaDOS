@@ -12,10 +12,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         '_metadata.organism_taxonomy.l3',
         'assay_organism',
         '_metadata.assay_generated.type_label',
-        'bao_label',
+        {
+          property:'bao_label'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.source.src_description',
         {
-          name:'_metadata.assay_generated.confidence_label'
+          property:'_metadata.assay_generated.confidence_label'
           sort:'asc'
         },
       ],
