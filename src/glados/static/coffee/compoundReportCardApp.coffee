@@ -11,6 +11,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
+    CompoundReportCardApp.initSources()
     CompoundReportCardApp.initAlternateForms()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMoleculeFeatures()
@@ -88,6 +89,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
       ButtonsHelper.initCroppedContainers()
       ButtonsHelper.initExpendableMenus()
+
+  @initSources = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
 
   @initCalculatedCompoundParentProperties = ->
 
