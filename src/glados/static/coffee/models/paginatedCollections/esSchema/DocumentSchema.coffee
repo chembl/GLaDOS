@@ -9,7 +9,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       [
         'doc_type',
         'journal',
-        '_metadata.source.src_description'
+        {
+          property:'_metadata.source.src_description'
+          sort:'asc'
+          intervals: 20
+        },
         'year',
       ],
       # Default Hidden

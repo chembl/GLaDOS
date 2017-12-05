@@ -17,7 +17,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           sort:'asc'
           intervals: 20
         },
-        '_metadata.source.src_description',
+        {
+          property:'_metadata.source.src_description'
+          sort:'asc'
+          intervals: 20
+        },
         {
           property:'_metadata.assay_generated.confidence_label'
           sort:'asc'
