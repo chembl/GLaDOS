@@ -106,6 +106,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       $(@el).find('select').material_select()
       @hideRenderingMessage()
 
+
   showRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').show()
   hideRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').hide()
 
@@ -320,16 +321,16 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # never start with zoom less than 1
     INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
     @zoomScale = INITIAL_ZOOM
+
+    console.log 'MIN_ZOOM: ', MIN_ZOOM
+    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
+    console.log 'MAX_ZOOM: ', MAX_ZOOM
     # --------------------------------------
     # Window
     # --------------------------------------
     # now that I have the zoom, I can calculate the window
     @unsetWindow()
     @calculateCurrentWindow(@zoomScale)
-
-    console.log 'MIN_ZOOM: ', MIN_ZOOM
-    console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
-    console.log 'MAX_ZOOM: ', MAX_ZOOM
 
     mainSVGContainer = mainContainer
       .append('svg')
@@ -439,7 +440,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr("width", (thisView.getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
         .attr("height", (thisView.getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
-
     applyZoomAndTranslation(cellsContainerG)
 
     fillColour = (d) ->
@@ -508,7 +508,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    @updateRowsHeadersForWindow(rowsHeaderG)
+    rowHeadersEnter = @updateRowsHeadersForWindow(rowsHeaderG)
 
     rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
 
@@ -534,7 +534,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
     applyZoomAndTranslation(rowsHeaderG)
-
+    @setAllHeadersEllipsis(rowHeadersEnter, isCol=false)
 
     # --------------------------------------
     # Cols Header Container
@@ -552,7 +552,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
       .classed('background-rect', true)
 
-    @updateColsHeadersForWindow(colsHeaderG)
+    colsHeadersEnter = @updateColsHeadersForWindow(colsHeaderG)
 
     colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
 
@@ -587,7 +587,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     applyZoomAndTranslation(colsHeaderG)
-
+    @setAllHeadersEllipsis(colsHeadersEnter, isCol=true)
     # --------------------------------------
     # Rows Footer Container
     # --------------------------------------
@@ -957,10 +957,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       # after adding elems to window, I need to check again for ellipsis
       if thisView.WINDOW.window_changed or forceSectionsUpdate
-        rowHeadersEnter.selectAll('text')
-          .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=false))
-        colsHeadersEnter.selectAll('text')
-          .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol=true))
+        thisView.setAllHeadersEllipsis.call(thisView, rowHeadersEnter, isCol=false)
+        thisView.setAllHeadersEllipsis.call(thisView, colsHeadersEnter, isCol=true)
 
       $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
       if thisView.zoomScale <= MIN_ZOOM
@@ -1249,6 +1247,12 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
     @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
 
+  setAllHeadersEllipsis: (d3Selecion, isCol=true) ->
+
+    thisView = @
+    d3Selecion.selectAll('text')
+      .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol))
+
   # because normally container and text elem scale at the same rate on zoom, this can be done only one.
   # take this into account if there is a problem later.
   setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit,
@@ -1336,9 +1340,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   unsetWindow: ->
 
-    @COLS_IN_WINDOW = undefined
-    @ROWS_IN_WINDOW = undefined
-    @CELLS_IN_WINDOW = undefined
+    @PREVIOUS_WINDOW = null
+    @WINDOW = null
+    @COLS_IN_WINDOW = null
+    @ROWS_IN_WINDOW = null
+    @CELLS_IN_WINDOW = null
 
   # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
   calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
