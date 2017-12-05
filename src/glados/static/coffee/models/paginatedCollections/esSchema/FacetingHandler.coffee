@@ -34,11 +34,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       cur_pos = 1
       getFacetData = (prop_data)->
+        sort = null
+        intervals = null
         if _.isString(prop_data)
           prop_name = prop_data
         else if _.isObject(prop_data)
-          prop_name = prop_data.name
+          prop_name = prop_data.property
           sort = prop_data.sort
+          intervals = prop_data.intervals
         if prop_name not in _.keys(gs_data)
           throw 'ERROR: '+prop_name+' is not a property of '+es_index+'!'
         if gs_data[prop_name].aggregatable
@@ -48,7 +51,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             show: false
             position: cur_pos++
             faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-              es_index, prop_name, sort
+              es_index, prop_name, sort, intervals
             )
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
@@ -64,15 +67,23 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       )
       if defaults?
         for prop_i in defaults
-          facets[prop_i] = getFacetData(prop_i)
-          facets[prop_i].show = true
+          if _.isString(prop_i)
+            prop_name = prop_i
+          else if _.isObject(prop_i)
+            prop_name = prop_i.property
+          facets[prop_name] = getFacetData(prop_i)
+          facets[prop_name].show = true
       if defaults_hidden?
         for prop_i in defaults_hidden
-          facets[prop_i] = getFacetData(prop_i)
-          facets[prop_i].show = false
+          if _.isString(prop_i)
+            prop_name = prop_i
+          else if _.isObject(prop_i)
+            prop_name = prop_i.property
+          facets[prop_name] = getFacetData(prop_i)
+          facets[prop_name].show = false
       return facets
 
-    @getNewFacetingHandler: (es_index, es_property, sort=null)->
+    @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       if not es_index_schema
         throw "ERROR! unknown elastic index "+es_index
@@ -89,7 +100,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           FacetingHandler.CATEGORY_FACETING,
           property_type,
           null,
-          sort
+          sort,
+          intervals
         )
       else if property_type.type == Number
         return new FacetingHandler(
@@ -99,7 +111,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           FacetingHandler.INTERVAL_FACETING,
           property_type,
           property_type.year,
-          sort
+          sort,
+          intervals
         )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
@@ -109,10 +122,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Instance Context
     # ------------------------------------------------------------------------------------------------------------------
 
-    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear, @sort=null)->
+    constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear, @sort=null,
+      @intervals=null)->
       @faceting_keys_inorder = null
       @faceting_data = null
-      @intervalsLimits
+      @intervalsLimits = null
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
@@ -127,6 +141,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             terms:
               field: @es_property_name
           }
+          if @intervals?
+            es_query_aggs[@es_property_name].terms['size'] = @intervals
           # Elastic search has a bug for terms aggregation in booleans with missing values
           if @js_type != Boolean
             es_query_aggs[@es_property_name].terms.missing = FacetingHandler.EMPTY_CATEGORY
