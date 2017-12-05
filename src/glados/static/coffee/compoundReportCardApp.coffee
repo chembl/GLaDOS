@@ -94,6 +94,18 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
+    viewConfig =
+      embed_section_name: 'sources'
+      embed_identifier: compound.get('molecule_chembl_id')
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CSourcesCard')
+      config: viewConfig
+      section_id: 'CompoundSources'
+      section_label: 'Sources'
+      report_card_app: @
+
   @initCalculatedCompoundParentProperties = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
