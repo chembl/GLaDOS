@@ -8,7 +8,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       # Default Selected
       [
         'standard_type',
-        '_metadata.target_data.target_type',
+        {
+          property:'_metadata.target_data.target_type'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',

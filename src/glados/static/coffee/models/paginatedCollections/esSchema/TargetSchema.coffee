@@ -13,7 +13,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'organism',
         '_metadata.protein_classification.l1',
         '_metadata.protein_classification.l2',
-        'target_type',
+        {
+          property:'target_type'
+          sort:'asc'
+          intervals: 20
+        },
         '_metadata.related_compounds.count',
         '_metadata.activity_count',
       ],
