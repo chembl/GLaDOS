@@ -1125,7 +1125,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Rows /Cols Headers tooltips
   #---------------------------------------------------------------------------------------------------------------------
-  generateTooltipFunction: (sourceEntity, matrixView) ->
+  generateTooltipFunction: (sourceEntity, matrixView, isCol=true) ->
 
     return (d) ->
 
@@ -1147,18 +1147,14 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         style:
           classes:'matrix-qtip qtip-light qtip-shadow'
 
-      if sourceEntity == 'Target'
-
-        numCols = matrixView.model.get('matrix').columns.length
-
-        if d.currentPosition > numCols * matrixView.REVERSE_POSITION_TOOLTIP_TH
-          qtipConfig.position =
-            my: 'top right'
-            at: 'bottom left'
-        else
-          qtipConfig.position =
-            my: 'top left'
-            at: 'bottom left'
+      if isCol
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom left'
+      else
+        qtipConfig.position =
+          my: 'top left'
+          at: 'bottom right'
 
       $clickedElem.qtip qtipConfig
 
@@ -1441,9 +1437,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('headers-divisory-line', true)
 
     if @config.cols_entity_name == 'Targets'
-      setUpColTooltip = @generateTooltipFunction('Target', @)
+      setUpColTooltip = @generateTooltipFunction('Target', @, isCol=true)
     else
-      setUpColTooltip = @generateTooltipFunction('Compound', @)
+      setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
 
     colsHeadersEnter.append('text')
       .classed('headers-text', true)
@@ -1528,9 +1524,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('headers-background-rect', true)
 
     if @config.rows_entity_name == 'Compounds'
-      setUpRowTooltip = @generateTooltipFunction('Compound', @)
+      setUpRowTooltip = @generateTooltipFunction('Compound', @, isCol=false)
     else
-      setUpRowTooltip = @generateTooltipFunction('Target', @)
+      setUpRowTooltip = @generateTooltipFunction('Target', @, isCol=false)
 
     rowHeadersEnter.append('text')
       .classed('headers-text', true)
