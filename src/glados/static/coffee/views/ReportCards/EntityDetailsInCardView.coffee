@@ -18,6 +18,9 @@ glados.useNameSpace 'glados.views.ReportCards',
         return
 
       propertiesToShow = @config.properties_to_show
+      protertiesWithValues = glados.Utils.getColumnsWithValues(propertiesToShow, @model)
+
+      #TODO FINISH THIS VIEW!
 
       @showSection()
       @showCardContent()

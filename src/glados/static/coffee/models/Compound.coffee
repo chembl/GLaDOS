@@ -598,7 +598,7 @@ Compound.COLUMNS = {
   COMPOUND_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: '_metadata.compound_records'
     name_to_show: 'Compound Sources'
-    parse_function: (values) -> (v.src_description for v in values)
+    parse_function: (values) -> _.unique(v.src_description for v in values)
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
