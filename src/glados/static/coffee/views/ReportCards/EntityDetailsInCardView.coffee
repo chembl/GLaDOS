@@ -13,7 +13,11 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
+      show = @config.show_if(@model)
+      if not show
+        return
+
       @showSection()
       @showCardContent()
 
-      console.log 'RENDER DETAILS!!'
+
