@@ -17,6 +17,8 @@ glados.useNameSpace 'glados.views.ReportCards',
       if not show
         return
 
+      propertiesToShow = @config.properties_to_show
+
       @showSection()
       @showCardContent()
 

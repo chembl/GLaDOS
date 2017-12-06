@@ -1,5 +1,38 @@
 describe "Utils", ->
 
+  describe "Round numbers", ->
+
+    testRoundNumbersForFactor = (factor, numbersMustBe) ->
+      console.log 'Round Examples factor: ' + factor
+
+      cur_i = -500
+      last_up_v = null
+      last_down_v = null
+      while cur_i <= 500
+        up_v = glados.Utils.roundNumber(cur_i, false, false)
+        down_v = glados.Utils.roundNumber(cur_i, false, true)
+
+        id = JSON.stringify(cur_i/factor)
+        valuesGot = numbersMustBe[id]
+
+        if up_v == down_v and (up_v != last_up_v or down_v != last_down_v)
+          expect(valuesGot[0]).toBe(up_v)
+        else if up_v != down_v and (up_v != last_up_v or down_v != last_down_v)
+          expect(valuesGot[0]).toBe(up_v)
+          expect(valuesGot[1]).toBe(down_v)
+        last_up_v = up_v
+        last_down_v = down_v
+        cur_i++
+
+    it 'rounds the numbers for factor 1', ->
+
+      rangesMustBe = {"0":[0],"1":[1,0],"2":[2],"3":[5,2],"5":[5],"6":[10,5],"10":[10],"11":[20,10],"20":[20],"21":[50,20],"50":[50],"51":[100,50],"100":[100],"101":[200,100],"200":[200],"201":[500,200],"500":[500],"-500":[-500],"-200":[-200],"-100":[-100],"-50":[-50],"-20":[-20],"-10":[-10],"-5":[-5],"-2":[-2],"-1":[-1]}
+      testRoundNumbersForFactor(1, rangesMustBe)
+      rangesMustBe = {"0":[0],"1":[100],"2":[200],"5":[500],"-5":[-500],"-2":[-200],"-1":[-100],"-0.5":[-50],"-0.2":[-20],"-0.1":[-10],"-0.05":[-5],"-0.02":[-2],"-0.01":[-1],"0.01":[1,0],"0.02":[2],"0.03":[5,2],"0.05":[5],"0.06":[10,5],"0.1":[10],"0.11":[20,10],"0.2":[20],"0.21":[50,20],"0.5":[50],"0.51":[100,50],"1.01":[200,100],"2.01":[500,200]}
+      testRoundNumbersForFactor(100.0, rangesMustBe)
+      rangesMustBe = {"0":[0],"-0.05":[-500],"-0.02":[-200],"-0.01":[-100],"-0.005":[-50],"-0.002":[-20],"-0.001":[-10],"-0.0005":[-5],"-0.0002":[-2],"-0.0001":[-1],"0.0001":[1,0],"0.0002":[2],"0.0003":[5,2],"0.0005":[5],"0.0006":[10,5],"0.001":[10],"0.0011":[20,10],"0.002":[20],"0.0021":[50,20],"0.005":[50],"0.0051":[100,50],"0.01":[100],"0.0101":[200,100],"0.02":[200],"0.0201":[500,200],"0.05":[500]}
+      testRoundNumbersForFactor(10000.0, rangesMustBe)
+
   it 'converts radians to degrees', ->
 
     expect(glados.Utils.getDegreesFromRadians(Math.PI)).toBe(180)
