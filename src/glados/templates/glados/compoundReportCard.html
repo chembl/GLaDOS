@@ -67,9 +67,9 @@
 
         <div class="row">
 
-          {% block alternate_forms %}
+          {% with is_dynamic=True  %}
           {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
-          {% endblock %}
+          {% endwith %}
 
         </div>
 

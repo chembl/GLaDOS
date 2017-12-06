@@ -1,38 +1,18 @@
-<div class="col s12 m12 l12">
+{% extends "glados/base/basic_table_card.html" %}
 
-  <div id='AlternateFormsCard' class="card grey lighten-5">
+{% block card_id %}AlternateFormsCard{% endblock %}
 
-     <!-- modal trigger -->
-      {% block embed_button %}
-      {% include "glados/base/embed_button.html" %}
-      {% endblock %}
+{% block general_content %}
 
-      {% block card_loaders %}
-      {% include "glados/base/card_loaders.html" %}
-      {% endblock %}
+{% verbatim %}
+    <script id="Handlebars-CarouselInCardTitle" type="text/x-handlebars-template">
+    {{title}}
+    </script>
+{% endverbatim %}
 
-      <!-- Embed Modal Structure -->
-      {% block embed_modal %}
-      {% include "glados/base/embed_modal.html" %}
-      {% endblock %}
+<span class="BCK-CarouselTitle" data-hb-template="Handlebars-CarouselInCardTitle">
+</span>
 
-    <div class="card-content" style="display: none">
+{% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
 
-      {% verbatim %}
-      <script id="Handlebars-CarouselInCardTitle" type="text/x-handlebars-template">
-        {{title}}
-      </script>
-      {% endverbatim %}
-
-      <span class="BCK-CarouselTitle" data-hb-template="Handlebars-CarouselInCardTitle">
-      </span>
-
-      {% block carousel %}
-        {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
-      {% endblock %}
-
-    </div>
-
-  </div>
-
-</div>
+{% endblock %}
