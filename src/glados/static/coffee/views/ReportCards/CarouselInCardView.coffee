@@ -6,19 +6,18 @@ glados.useNameSpace 'glados.views.ReportCards',
       CardView.prototype.initialize.call(@, arguments)
       @collection.on 'reset', @.render, @
       @collection.on 'error', @.showCompoundErrorCard, @
+      @config = arguments[0].config
       @resource_type = arguments[0].resource_type
       @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsPaginatedView(@collection, @el)
 
-      @initEmbedModal('alternate_forms', arguments[0].molecule_chembl_id)
+      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
       @render()
 
     render: ->
-      if @collection.length == 1 and @collection.at(0).get('molecule_chembl_id') == GlobalVariables.CHEMBL_ID and not GlobalVariables['EMBEDED']
-        return
+
+      glados.Utils.fillContentForElement $(@el).find('.BCK-CarouselTitle'),
+        title: @config.title
 
       @showSection()
-      glados.Utils.fillContentForElement $(@el).find('.alternate-compounds-title'),
-        chembl_id: GlobalVariables.CHEMBL_ID
-
       @showCardContent()

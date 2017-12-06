@@ -16,15 +16,15 @@
       {% include "glados/base/embed_modal.html" %}
       {% endblock %}
 
-    <div class="card-content ebi-links" style="display: none">
+    <div class="card-content" style="display: none">
 
       {% verbatim %}
-      <script id="Handlebars-CompRepCard-AlternateCompounds-Title" type="text/x-handlebars-template">
-        Alternate forms of {{chembl_id}}:
+      <script id="Handlebars-CarouselInCardTitle" type="text/x-handlebars-template">
+        {{title}}
       </script>
       {% endverbatim %}
 
-      <span class="alternate-compounds-title" data-hb-template="Handlebars-CompRepCard-AlternateCompounds-Title">
+      <span class="BCK-CarouselTitle" data-hb-template="Handlebars-CarouselInCardTitle">
       </span>
 
       {% block carousel %}

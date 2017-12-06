@@ -179,8 +179,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAlternateForms = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
-    moleculeFormsList.initURL glados.Utils.URLS.getCurrentModelChemblID()
+    moleculeFormsList.initURL chemblID
+
+    viewConfig =
+      embed_section_name: 'alternate_forms'
+      embed_identifier: chemblID
+      title: "Alternate forms of compound #{chemblID}:"
 
     new glados.views.ReportCards.CarouselInCardView
       collection: moleculeFormsList
@@ -189,6 +195,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
       section_id: 'AlternateFormsOfCompoundInChEMBL'
       section_label: 'Alternate Forms'
+      config: viewConfig
       report_card_app: @
 
     moleculeFormsList.fetch({reset: true})
