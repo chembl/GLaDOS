@@ -94,37 +94,31 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     sources = @getSourcesAgg(chemblID)
-    sources.fetch()
 
-    console.log 'AAA sources: ', sources
-
-    compound = CompoundReportCardApp.getCurrentCompound()
+    pieConfig =
+      x_axis_prop_name: 'sources'
+      title: "#{gettext('glados_compound__sources_pie_title_base')} #{chemblID}"
 
     viewConfig =
+      pie_config: pieConfig
+      resource_type: gettext('glados_entities_compound_name')
       embed_section_name: 'sources'
-      embed_identifier: compound.get('molecule_chembl_id')
-      show_if: (model) ->
-        compoundRecords = glados.Utils.getNestedValue(model.attributes, '_metadata.compound_records',
-          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+      embed_identifier: chemblID
+      link_to_all:
+        link_text: "See all documents related to #{chemblID} used in this visualisation."
+        url: Document.getDocumentsListURL("_metadata.related_compounds.chembl_ids.\\*:#{chemblID}")
 
-        if not compoundRecords?
-          return false
-        else if compoundRecords.length == 0
-          return false
-        else
-          return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
+    console.log 'pieConfig: ', pieConfig
 
-    new glados.views.ReportCards.EntityDetailsInCardView
-      model: compound
+    new glados.views.ReportCards.PieInCardView
+      model: sources
       el: $('#CSourcesCard')
       config: viewConfig
       section_id: 'CompoundSources'
       section_label: 'Sources'
       report_card_app: @
 
-    if GlobalVariables['EMBEDED']
-      compound.fetch()
+    sources.fetch()
 
   @initCalculatedCompoundParentProperties = ->
 

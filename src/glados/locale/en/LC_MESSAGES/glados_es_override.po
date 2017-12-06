@@ -384,6 +384,9 @@ msgstr "Tissue"
 #-----------------------------------------------------------------------------------------------------------------------
 # Compound Report Card
 #-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_compound__sources_pie_title_base"
+msgstr "Sources for Compound"
+
 msgid "glados_compound__associated_targets_by_class_pie_title_base"
 msgstr "ChEMBL Target Classes for Compound "
 
