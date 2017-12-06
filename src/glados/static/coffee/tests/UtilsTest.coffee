@@ -36,6 +36,16 @@ describe "Utils", ->
         expect(glados.Utils.getNestedValue(testObj, 'molecule_properties')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
         expect(glados.Utils.getNestedValue(testObj, 'molecule_properties.acd_logd')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
 
+      it 'Return nulls instead of null value label when requested', ->
+
+        valueGot = glados.Utils.getNestedValue(testObj, 'molecule_properties', forceAsNumber=false,
+          customNullValueLabel=undefined, returnUndefined=true)
+        expect(valueGot).toBe(undefined)
+
+        valueGot = glados.Utils.getNestedValue(testObj, 'molecule_properties.acd_logd', forceAsNumber=false,
+          customNullValueLabel=undefined, returnUndefined=true)
+        expect(valueGot).toBe(undefined)
+
   describe "Columns and values", ->
 
     testCompound = new Compound

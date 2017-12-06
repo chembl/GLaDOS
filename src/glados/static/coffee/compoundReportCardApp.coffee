@@ -97,6 +97,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'sources'
       embed_identifier: compound.get('molecule_chembl_id')
+      show_if_has_property: '_metadata.compound_records'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
