@@ -42,14 +42,23 @@
         <h3>Compound Representations</h3>
 
         <div class="row">
-
-          {% block representations %}
           {% include "glados/CompoundReportCardParts/Representations.html" %}
-          {% endblock %}
-
         </div>
 
       </div>
+
+      <div class="divider"></div>
+      <div id="CompoundSources" class="section scrollspy" style="display: none;">
+        <h3>Compound Sources</h3>
+
+        <div class="row">
+          {% with is_dynamic=True  %}
+            {% include "glados/CompoundReportCardParts/Sources.html" %}
+          {% endwith %}
+        </div>
+
+      </div>
+
 
       <div class="divider"></div>
       <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">

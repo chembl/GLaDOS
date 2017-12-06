@@ -1,0 +1,18 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}CSourcesCard{% endblock %}
+
+{% block general_content %}
+{% verbatim %}
+<script id='Handlebars-CompoundSources' type="text/x-handlebars-template">
+
+    <b>Sources:</b>
+    {{#each columns}}
+        {{#each this.value}}
+            <div class="chip">{{this}}</div>
+        {{/each}}
+    {{/each}}
+</script>
+{% endverbatim %}
+<div class="BCK-Details-Container" data-hb-template="Handlebars-CompoundSources"></div>
+{% endblock %}

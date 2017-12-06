@@ -595,6 +595,10 @@ Compound.COLUMNS = {
     execute_on_render: true
     format_class: 'number-cell-center'
     secondary_link: true
+  COMPOUND_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: '_metadata.compound_records'
+    name_to_show: 'Compound Sources'
+    parse_function: (values) -> _.unique(v.src_description for v in values)
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -682,6 +686,9 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME
     Compound.COLUMNS.MAX_PHASE,
+  ]
+  COMPOUND_SOURCES_SECTION: [
+    Compound.COLUMNS.COMPOUND_SOURCES_LIST
   ]
 }
 

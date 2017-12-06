@@ -11,6 +11,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
+    CompoundReportCardApp.initSources()
     CompoundReportCardApp.initAlternateForms()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMoleculeFeatures()
@@ -88,6 +89,37 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
       ButtonsHelper.initCroppedContainers()
       ButtonsHelper.initExpendableMenus()
+
+  @initSources = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'sources'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if_has_property: '_metadata.compound_records'
+      show_if: (model) ->
+        compoundRecords = glados.Utils.getNestedValue(model.attributes, '_metadata.compound_records',
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+
+        if not compoundRecords?
+          return false
+        else if compoundRecords.length == 0
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CSourcesCard')
+      config: viewConfig
+      section_id: 'CompoundSources'
+      section_label: 'Sources'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initCalculatedCompoundParentProperties = ->
 

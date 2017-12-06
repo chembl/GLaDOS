@@ -42,26 +42,6 @@ glados.useNameSpace 'glados',
         n /= Math.pow(10, 20)
       return n
 
-    runRoundNumberExamples: ->
-      exampleRunner = (factor=1)->
-        console.log 'Round Examples factor: ' + factor
-        cur_i = -500
-        last_up_v = null
-        last_down_v = null
-        while cur_i <= 500
-          up_v = glados.Utils.roundNumber(cur_i, false, false)
-          down_v = glados.Utils.roundNumber(cur_i, false, true)
-          if up_v == down_v and (up_v != last_up_v or down_v != last_down_v)
-            console.log cur_i/factor, '->', up_v
-          else if up_v != down_v and (up_v != last_up_v or down_v != last_down_v)
-            console.log cur_i/factor, 'up ->', up_v, 'down ->', down_v
-          last_up_v = up_v
-          last_down_v = down_v
-          cur_i++
-      exampleRunner(1)
-      exampleRunner(100.0)
-      exampleRunner(10000.0)
-
     getFormattedNumber: (numberToFormat, exponentialAfter=Math.pow(10, 9), year=false)->
       if numberToFormat == 0
         return '0'
@@ -79,11 +59,15 @@ glados.useNameSpace 'glados',
     #       }
     #     }
     # you can use the function like this getNestedValue(a, 'b.c'.split('.'))
-    getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false, customNullValueLabel) ->
+    getNestedValue: (nestedObj, nestedComparatorsStr, forceAsNumber=false, customNullValueLabel,
+      returnUndefined=false) ->
 
-      nullValueLabel = customNullValueLabel
-      nullValueLabel ?= glados.Settings.DEFAULT_NULL_VALUE_LABEL
-      nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else nullValueLabel
+      if returnUndefined
+        nullValueLabel = undefined
+      else
+        nullValueLabel = customNullValueLabel
+        nullValueLabel ?= glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        nullReturnVal = if forceAsNumber then -Number.MAX_VALUE else nullValueLabel
 
       nestedComparatorsList = nestedComparatorsStr.split('.')
       if nestedComparatorsList.length == 1

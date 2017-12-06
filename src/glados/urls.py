@@ -42,6 +42,9 @@ urlpatterns += [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/representations/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/RepresentationsToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/sources/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/SourcesToEmbed.html")), ),
+
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/name_and_classification/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/NameAndClassificationToEmbed.html")), ),
 
