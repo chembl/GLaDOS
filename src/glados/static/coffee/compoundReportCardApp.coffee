@@ -92,33 +92,31 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initSources = ->
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    sources = @getSourcesAgg(chemblID)
-
-    pieConfig =
-      x_axis_prop_name: 'sources'
-      title: "#{gettext('glados_compound__sources_pie_title_base')} #{chemblID}"
+    compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
       embed_section_name: 'sources'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: "See all documents related to #{chemblID} used in this visualisation."
-        url: Document.getDocumentsListURL("_metadata.related_compounds.chembl_ids.\\*:#{chemblID}")
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if_has_property: '_metadata.compound_records'
+      show_if: (model) ->
+        compoundRecords = glados.Utils.getNestedValue(model.attributes, '_metadata.compound_records',
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
-    console.log 'pieConfig: ', pieConfig
+        if not compoundRecords?
+          return false
+        else if compoundRecords.length == 0
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
 
-    new glados.views.ReportCards.PieInCardView
-      model: sources
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
       el: $('#CSourcesCard')
       config: viewConfig
       section_id: 'CompoundSources'
       section_label: 'Sources'
       report_card_app: @
-
-    sources.fetch()
 
   @initCalculatedCompoundParentProperties = ->
 
@@ -584,39 +582,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return assays
-
-  @getSourcesAgg = (chemblID) ->
-
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        sources:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: '_metadata.source.src_description'
-          size: 100
-          bucket_links:
-
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND _metadata.source.src_description:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Document.getDocumentsListURL
-
-    sources = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
-      query_config: queryConfig
-      molecule_chembl_id: chemblID
-      aggs_config: aggsConfig
-
-    return sources
 
   @getRelatedActivitiesAgg = (chemblID) ->
 

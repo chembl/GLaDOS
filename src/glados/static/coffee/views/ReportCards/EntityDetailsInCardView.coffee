@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       propertiesToShow = @config.properties_to_show
       protertiesWithValues = glados.Utils.getColumnsWithValues(propertiesToShow, @model)
+      console.log 'AAA protertiesWithValues: ', protertiesWithValues
 
       #TODO FINISH THIS VIEW!
 
