@@ -19,9 +19,9 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       propertiesToShow = @config.properties_to_show
       protertiesWithValues = glados.Utils.getColumnsWithValues(propertiesToShow, @model)
-      console.log 'AAA protertiesWithValues: ', protertiesWithValues
-
-      #TODO FINISH THIS VIEW!
+      $containerElem = $(@el).find('.BCK-Details-Container')
+      glados.Utils.fillContentForElement $containerElem,
+        columns: protertiesWithValues
 
       @showSection()
       @showCardContent()
