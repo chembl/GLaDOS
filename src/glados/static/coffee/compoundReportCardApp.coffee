@@ -92,6 +92,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initSources = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    sources = @getSourcesAgg(chemblID)
+    sources.fetch()
+
+    console.log 'AAA sources: ', sources
+
     compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =
@@ -584,6 +590,39 @@ class CompoundReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return assays
+
+  @getSourcesAgg = (chemblID) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'molecule_chembl_id'
+      fields: ['_metadata.related_compounds.chembl_ids.*']
+
+    aggsConfig =
+      aggs:
+        sources:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.source.src_description'
+          size: 100
+          bucket_links:
+
+            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
+                                    'AND _metadata.source.src_description:("{{bucket_key}}"' +
+                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            template_data:
+              molecule_chembl_id: 'molecule_chembl_id'
+              bucket_key: 'BUCKET.key'
+              extra_buckets: 'EXTRA_BUCKETS.key'
+
+            link_generator: Document.getDocumentsListURL
+
+    sources = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
+      query_config: queryConfig
+      molecule_chembl_id: chemblID
+      aggs_config: aggsConfig
+
+    return sources
 
   @getRelatedActivitiesAgg = (chemblID) ->
 

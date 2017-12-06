@@ -144,3 +144,10 @@ Document.COLUMNS_SETTINGS = {
 
 Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+
+Document.getDocumentsListURL = (filter) ->
+
+  if filter
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'documents/filter/' + encodeURIComponent(filter)
+  else
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'documents'
