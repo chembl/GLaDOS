@@ -432,6 +432,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             cpd_str_alert_id: structAlert.cpd_str_alert_id
             molecule_chembl_id: structAlert.molecule_chembl_id
             alert_name: structAlert.alert.alert_name
+            smarts: structAlert.alert.smarts
 
           if not setPosition?
             newAlertSet =

@@ -59,4 +59,7 @@ describe 'Compound Structural Alerts', ->
 
       alertNameMustBe = structAlertMustBe.alert.alert_name
       expect(currentAlert.alert_name).toBe(alertNameMustBe)
+
+      smartsMustBe = structAlertMustBe.alert.smarts
+      expect(currentAlert.smarts).toBe(smartsMustBe)
       console.log '^^^'
