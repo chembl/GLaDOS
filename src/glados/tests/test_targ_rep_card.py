@@ -87,12 +87,12 @@ class TargetReportCardTest(ReportCardTester):
     # Approved Drugs and Clinical Candidates
     # --------------------------------------
 
-    adcc_table = self.browser.find_element_by_id('ADCCTable-large')
-    texts_should_be = ['CHEMBL1617 RIFABUTIN Bacterial DNA-directed RNA polymerase inhibitor 4',
-                       'CHEMBL1660 RIFAMPICIN Bacterial DNA-directed RNA polymerase inhibitor 4',
-                       'CHEMBL374478 RIFAXIMIN Bacterial DNA-directed RNA polymerase inhibitor 4',
-                       'CHEMBL444633 RIFAPENTINE Bacterial DNA-directed RNA polymerase inhibitor 4']
-    self.assert_table_any_order(adcc_table,texts_should_be)
+    # adcc_table = self.browser.find_element_by_id('ADCCTable-large')
+    # texts_should_be = ['CHEMBL1617 RIFABUTIN Bacterial DNA-directed RNA polymerase inhibitor 4',
+    #                    'CHEMBL1660 RIFAMPICIN Bacterial DNA-directed RNA polymerase inhibitor 4',
+    #                    'CHEMBL374478 RIFAXIMIN Bacterial DNA-directed RNA polymerase inhibitor 4',
+    #                    'CHEMBL444633 RIFAPENTINE Bacterial DNA-directed RNA polymerase inhibitor 4']
+    # self.assert_table_any_order(adcc_table,texts_should_be)
 
 
 

@@ -62,12 +62,17 @@ class TargetReportCardApp extends glados.ReportCardApp
     targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
     targetComponents.initURL targetChemblID
 
-    new TargetComponentsView
+    viewConfig =
+      embed_section_name: 'components'
+      embed_identifier: targetChemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetComponents
       el: $('#TComponentsCard')
-      target_chembl_id: targetChemblID
+      resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetComponents'
       section_label: 'Components'
+      config: viewConfig
       report_card_app: @
 
     targetComponents.fetch({reset: true})
@@ -78,12 +83,17 @@ class TargetReportCardApp extends glados.ReportCardApp
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
     targetRelations.initURL targetChemblID
 
-    new RelationsView
+    viewConfig =
+      embed_section_name: 'relations'
+      embed_identifier: targetChemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetRelations
       el: $('#TRelationsCard')
-      target_chembl_id: targetChemblID
+      resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetRelations'
       section_label: 'Relations'
+      config: viewConfig
       report_card_app: @
 
     targetRelations.fetch({reset: true})
@@ -94,12 +104,17 @@ class TargetReportCardApp extends glados.ReportCardApp
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
     appDrugsClinCandsList.initURL(targetChemblID)
 
-    new ApprovedDrugsClinicalCandidatesView
+    viewConfig =
+      embed_section_name: 'approved_drugs_clinical_candidates'
+      embed_identifier: targetChemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: appDrugsClinCandsList
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
-      target_chembl_id: targetChemblID
+      resource_type: gettext('glados_entities_target_name')
       section_id: 'ApprovedDrugsAndClinicalCandidates'
       section_label: 'Drugs And ClinicalCandidates'
+      config: viewConfig
       report_card_app: @
 
     appDrugsClinCandsList.fetch()
