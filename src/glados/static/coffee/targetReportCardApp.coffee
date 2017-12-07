@@ -104,12 +104,17 @@ class TargetReportCardApp extends glados.ReportCardApp
     appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
     appDrugsClinCandsList.initURL(targetChemblID)
 
-    new ApprovedDrugsClinicalCandidatesView
+    viewConfig =
+      embed_section_name: 'approved_drugs_clinical_candidates'
+      embed_identifier: targetChemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: appDrugsClinCandsList
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
-      target_chembl_id: targetChemblID
+      resource_type: gettext('glados_entities_target_name')
       section_id: 'ApprovedDrugsAndClinicalCandidates'
       section_label: 'Drugs And ClinicalCandidates'
+      config: viewConfig
       report_card_app: @
 
     appDrugsClinCandsList.fetch()
