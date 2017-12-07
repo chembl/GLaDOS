@@ -518,7 +518,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       STRUCTURAL_ALERTS_LIST:
-        MODEL: glados.models.Compound.StructuralAlert
+        MODEL: glados.models.Compound.StructuralAlertSet
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: []
