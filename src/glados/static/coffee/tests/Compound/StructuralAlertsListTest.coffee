@@ -29,19 +29,14 @@ describe 'Compound Structural Alerts', ->
 
   it 'parses the data correctly', ->
 
-    console.log 'sampleDataToParse: ', sampleDataToParse
     parsedDataGot = structuralAlertsSets.parse(sampleDataToParse)
-    console.log 'parsedDataGot: ', parsedDataGot
-
     structuralAlertsSetsIndex = _.indexBy(parsedDataGot, 'set_name')
-    console.log 'structuralAlertsSetsIndex: ', structuralAlertsSetsIndex
+
 
     for structAlertMustBe in sampleDataToParse.compound_structural_alerts
-      console.log 'structAlert: ', structAlertMustBe
+
       setName = structAlertMustBe.alert.alert_set.set_name
-      console.log 'setName: ', setName
       parsedAlertSet = structuralAlertsSetsIndex[setName]
-      console.log 'parsetAlertSet: ', parsedAlertSet
       priorityMustBe = structAlertMustBe.alert.alert_set.priority
       expect(parsedAlertSet?).toBe(true)
       expect(parsedAlertSet.set_name).toBe(setName)
@@ -49,11 +44,8 @@ describe 'Compound Structural Alerts', ->
 
       alertsList = parsedAlertSet.alerts_list
       expect(alertsList?).toBe(true)
-      console.log 'alertsList: ', alertsList
       currentAlertID = structAlertMustBe.cpd_str_alert_id
-      console.log 'currentAlertID: ', currentAlertID
       currentAlert = _.find(alertsList, (a) -> a.cpd_str_alert_id == currentAlertID)
-      console.log 'currentAlert: ', currentAlert
       expect(currentAlert?).toBe(true)
       expect(currentAlert.molecule_chembl_id).toBe(testChemblID)
 
@@ -62,4 +54,3 @@ describe 'Compound Structural Alerts', ->
 
       smartsMustBe = structAlertMustBe.alert.smarts
       expect(currentAlert.smarts).toBe(smartsMustBe)
-      console.log '^^^'
