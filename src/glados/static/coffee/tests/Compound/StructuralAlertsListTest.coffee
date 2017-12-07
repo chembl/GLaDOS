@@ -32,7 +32,6 @@ describe 'Compound Structural Alerts', ->
     parsedDataGot = structuralAlertsSets.parse(sampleDataToParse)
     structuralAlertsSetsIndex = _.indexBy(parsedDataGot, 'set_name')
 
-
     for structAlertMustBe in sampleDataToParse.compound_structural_alerts
 
       setName = structAlertMustBe.alert.alert_set.set_name
@@ -54,3 +53,17 @@ describe 'Compound Structural Alerts', ->
 
       smartsMustBe = structAlertMustBe.alert.smarts
       expect(currentAlert.smarts).toBe(smartsMustBe)
+
+  it 'sorts the rows by priority by default', ->
+
+    parsedDataGot = structuralAlertsSets.parse(sampleDataToParse)
+
+    previousPriority = Number.MAX_SAFE_INTEGER
+    for structAlertSetGot in parsedDataGot
+      currentPriority = structAlertSetGot.priority
+      expect(currentPriority <= previousPriority).toBe(true)
+      previousPriority = currentPriority
+
+
+
+

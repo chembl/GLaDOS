@@ -444,8 +444,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           else
             structuralAlertsSets[setPosition].alerts_list.push newAlert
 
-
-        return structuralAlertsSets
+        return _.sortBy(structuralAlertsSets, (s) -> return -s.priority)
 
       list.initURL = (chemblID) ->
         @url = "#{glados.Settings.WS_BASE_URL}compound_structural_alert.json?molecule_chembl_id=#{chemblID}&limit=10000"
