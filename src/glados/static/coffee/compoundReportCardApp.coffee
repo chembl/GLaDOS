@@ -175,9 +175,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initStructuralAlerts = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    structuralAlertsSets = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertsSetsList()
+    structuralAlertsSets.initURL(chemblID)
 
-    @registerSection('StructuralAlerts', 'Structural Alerts')
-    @showSection('StructuralAlerts')
+    viewConfig =
+      embed_section_name: 'structural_alerts'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: structuralAlertsSets
+      el: $('#CStructuralAlertsCard')
+      resource_type: gettext('glados_entities_compound_name')
+      section_id: 'StructuralAlerts'
+      section_label: 'Structural Alerts'
+      config: viewConfig
+      report_card_app: @
+
+    structuralAlertsSets.fetch()
+    console.log 'AAA structuralAlertsSets: ', structuralAlertsSets
 
   @initAlternateForms = ->
 
