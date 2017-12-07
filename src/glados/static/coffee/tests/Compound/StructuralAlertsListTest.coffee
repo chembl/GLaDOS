@@ -6,8 +6,7 @@ describe 'Compound Structural Alerts', ->
     structuralAlerts = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertsList()
     structuralAlerts.initURL(testChemblID)
 
-    urlMustBe = 'URL'
+    urlMustBe = "#{glados.Settings.WS_BASE_URL}compound_structural_alert.json?molecule_chembl_id=#{testChemblID}&limit=10000"
     urlGot = structuralAlerts.url
 
-    console.log 'urlMustBe: ', urlMustBe
-    console.log 'urlGot: ', urlGot
+    expect(urlMustBe).toBe(urlGot)

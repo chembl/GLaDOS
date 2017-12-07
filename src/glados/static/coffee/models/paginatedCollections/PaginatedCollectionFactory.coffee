@@ -427,7 +427,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 #        return data.molecule_forms
 #
       list.initURL = (chemblID) ->
-        @url = 'hola'
+        @url = "#{glados.Settings.WS_BASE_URL}compound_structural_alert.json?molecule_chembl_id=#{chemblID}&limit=10000"
 
       return list
 
