@@ -42,8 +42,10 @@ describe 'Compound Structural Alerts', ->
       console.log 'setName: ', setName
       parsedAlertSet = structuralAlertsSetsIndex[setName]
       console.log 'parsetAlertSet: ', parsedAlertSet
+      priorityMustBe = structAlertMustBe.alert.alert_set.priority
       expect(parsedAlertSet?).toBe(true)
       expect(parsedAlertSet.set_name).toBe(setName)
+      expect(parsedAlertSet.priority).toBe(priorityMustBe)
 
       alertsList = parsedAlertSet.alerts_list
       expect(alertsList?).toBe(true)

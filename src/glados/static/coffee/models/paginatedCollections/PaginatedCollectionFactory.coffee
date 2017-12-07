@@ -437,6 +437,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             newAlertSet =
               set_name: setName
               alerts_list: [newAlert]
+              priority: structAlert.alert.alert_set.priority
             structuralAlertsSets.push newAlertSet
             structualAlertsToPosition[setName] = structuralAlertsSets.length - 1
           else
