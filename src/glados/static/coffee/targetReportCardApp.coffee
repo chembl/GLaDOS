@@ -87,12 +87,13 @@ class TargetReportCardApp extends glados.ReportCardApp
       embed_section_name: 'relations'
       embed_identifier: targetChemblID
 
-    new RelationsView
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetRelations
       el: $('#TRelationsCard')
-      target_chembl_id: targetChemblID
+      resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetRelations'
       section_label: 'Relations'
+      config: viewConfig
       report_card_app: @
 
     targetRelations.fetch({reset: true})
