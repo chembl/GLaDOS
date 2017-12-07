@@ -484,6 +484,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
+      STRUCTURAL_ALERTS_LIST:
+        MODEL: Document
+
       DOCS_BY_TERM_LIST:
         MODEL: Document
         BASE_URL: 'base_url is set by initURL'

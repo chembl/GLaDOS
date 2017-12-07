@@ -174,6 +174,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initStructuralAlerts = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
     @registerSection('StructuralAlerts', 'Structural Alerts')
     @showSection('StructuralAlerts')
 
