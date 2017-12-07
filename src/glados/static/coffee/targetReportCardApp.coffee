@@ -62,7 +62,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
     targetComponents.initURL targetChemblID
 
-    new TargetComponentsView
+    new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetComponents
       el: $('#TComponentsCard')
       target_chembl_id: targetChemblID
