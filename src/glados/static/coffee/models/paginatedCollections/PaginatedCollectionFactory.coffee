@@ -415,6 +415,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewStructuralAlertsList: ->
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
+      list = @getNewClientSideCollectionFor config
+
+#      list.parse = (data) ->
+#        data.page_meta.records_in_page = data.molecule_forms.length
+#        @setMeta('data_loaded', true)
+#        @resetMeta(data.page_meta)
+#
+#        return data.molecule_forms
+#
+      list.initURL = (chemblID) ->
+        @url = 'hola'
+
+      return list
+
     getNewApprovedDrugsClinicalCandidatesList: ->
       list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST)
 

@@ -484,9 +484,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
-      STRUCTURAL_ALERTS_LIST:
-        MODEL: Document
-
       DOCS_BY_TERM_LIST:
         MODEL: Document
         BASE_URL: 'base_url is set by initURL'
@@ -520,6 +517,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+      STRUCTURAL_ALERTS_LIST:
+        MODEL: glados.models.Compound.StructuralAlert
+        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: []
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
