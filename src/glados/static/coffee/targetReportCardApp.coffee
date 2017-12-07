@@ -70,7 +70,6 @@ class TargetReportCardApp extends glados.ReportCardApp
       collection: targetComponents
       el: $('#TComponentsCard')
       resource_type: gettext('glados_entities_target_name')
-      target_chembl_id: targetChemblID
       section_id: 'TargetComponents'
       section_label: 'Components'
       config: viewConfig
@@ -83,6 +82,10 @@ class TargetReportCardApp extends glados.ReportCardApp
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     targetRelations = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetRelationsList()
     targetRelations.initURL targetChemblID
+
+    viewConfig =
+      embed_section_name: 'relations'
+      embed_identifier: targetChemblID
 
     new RelationsView
       collection: targetRelations
