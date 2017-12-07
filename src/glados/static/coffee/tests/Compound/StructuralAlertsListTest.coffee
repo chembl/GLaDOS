@@ -36,10 +36,21 @@ describe 'Compound Structural Alerts', ->
     structuralAlertsSetsIndex = _.indexBy(parsedDataGot, 'set_name')
     console.log 'structuralAlertsSetsIndex: ', structuralAlertsSetsIndex
 
-    for structAlert in sampleDataToParse.compound_structural_alerts
-      console.log 'structAlert: ', structAlert
-      setName = structAlert.alert.alert_set.set_name
+    for structAlertMustBe in sampleDataToParse.compound_structural_alerts
+      console.log 'structAlert: ', structAlertMustBe
+      setName = structAlertMustBe.alert.alert_set.set_name
       console.log 'setName: ', setName
       parsedAlertSet = structuralAlertsSetsIndex[setName]
       console.log 'parsetAlertSet: ', parsedAlertSet
       expect(parsedAlertSet?).toBe(true)
+      expect(parsedAlertSet.set_name).toBe(setName)
+
+      alertsList = parsedAlertSet.alerts_list
+      expect(alertsList?).toBe(true)
+      console.log 'alertsList: ', alertsList
+      currentAlertID = structAlertMustBe.cpd_str_alert_id
+      console.log 'currentAlertID: ', currentAlertID
+      currentAlert = _.find(alertsList, (a) -> a.cpd_str_alert_id == currentAlertID)
+      console.log 'currentAlert: ', currentAlert
+      expect(currentAlert?).toBe(true)
+      console.log '^^^'

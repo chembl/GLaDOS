@@ -427,12 +427,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           setName = structAlert.alert.alert_set.set_name
           setPosition = structualAlertsToPosition[setName]
+          currentAlertID = structAlert.cpd_str_alert_id
+
+          newAlert =
+            cpd_str_alert_id: currentAlertID
 
           if not setPosition?
             newAlertSet =
               set_name: setName
+              alerts_list: [newAlert]
             structuralAlertsSets.push newAlertSet
             structualAlertsToPosition[setName] = structuralAlertsSets.length - 1
+          else
+            structuralAlertsSets[setPosition].alerts_list.push newAlert
+
 
         return structuralAlertsSets
 
