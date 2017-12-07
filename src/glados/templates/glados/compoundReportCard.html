@@ -81,9 +81,9 @@
 
         <div class="row">
 
-          {% block similarCompounds %}
+          {% with is_dynamic=True  %}
           {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
-          {% endblock %}
+          {% endwith %}
 
         </div>
 
