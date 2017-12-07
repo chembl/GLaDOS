@@ -415,7 +415,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewStructuralAlertsList: ->
+    getNewStructuralAlertsSetsList: ->
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
       list = @getNewClientSideCollectionFor config
 
