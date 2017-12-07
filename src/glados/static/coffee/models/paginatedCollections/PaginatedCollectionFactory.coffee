@@ -447,13 +447,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         return structuralAlertsSets
 
-
-#        data.page_meta.records_in_page = data.molecule_forms.length
-#        @setMeta('data_loaded', true)
-#        @resetMeta(data.page_meta)
-#
-#        return data.molecule_forms
-#
       list.initURL = (chemblID) ->
         @url = "#{glados.Settings.WS_BASE_URL}compound_structural_alert.json?molecule_chembl_id=#{chemblID}&limit=10000"
 
