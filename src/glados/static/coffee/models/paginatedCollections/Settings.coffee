@@ -521,10 +521,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: glados.models.Compound.StructuralAlertSet
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: []
+        ID_COLUMN: glados.models.Compound.StructuralAlertSet.ID_COLUMN
+        COLUMNS: glados.models.Compound.StructuralAlertSet.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: []
+            Default: glados.models.Compound.StructuralAlertSet.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation
