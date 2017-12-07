@@ -179,15 +179,22 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAlternateForms = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
-    moleculeFormsList.initURL glados.Utils.URLS.getCurrentModelChemblID()
+    moleculeFormsList.initURL chemblID
 
-    new CompoundMoleculeFormsListView
+    viewConfig =
+      embed_section_name: 'alternate_forms'
+      embed_identifier: chemblID
+      title: "Alternate forms of compound #{chemblID}:"
+
+    new glados.views.ReportCards.CarouselInCardView
       collection: moleculeFormsList
       el: $('#AlternateFormsCard')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
       section_id: 'AlternateFormsOfCompoundInChEMBL'
       section_label: 'Alternate Forms'
+      config: viewConfig
       report_card_app: @
 
     moleculeFormsList.fetch({reset: true})
@@ -305,15 +312,23 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initSimilarCompounds = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
     similarCompoundsList.initURL glados.Utils.URLS.getCurrentModelChemblID(), glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
-    new SimilarCompoundsView
+    viewConfig =
+      embed_section_name: 'similar'
+      embed_identifier: chemblID
+      title: "Compounds similar to #{chemblID} with at least 70% similarity:"
+      full_list_url: "/similarity_search_results/#{chemblID}/70"
+
+    new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
       section_id: 'SimilarCompounds'
       section_label: 'Similar Compounds'
+      config: viewConfig
       report_card_app: @
 
     similarCompoundsList.fetch({reset: true})

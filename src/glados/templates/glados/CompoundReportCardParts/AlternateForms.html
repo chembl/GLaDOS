@@ -1,38 +1,7 @@
-<div class="col s12 m12 l12">
+{% extends "glados/base/basic_table_card.html" %}
 
-  <div id='AlternateFormsCard' class="card grey lighten-5">
+{% block card_id %}AlternateFormsCard{% endblock %}
 
-     <!-- modal trigger -->
-      {% block embed_button %}
-      {% include "glados/base/embed_button.html" %}
-      {% endblock %}
-
-      {% block card_loaders %}
-      {% include "glados/base/card_loaders.html" %}
-      {% endblock %}
-
-      <!-- Embed Modal Structure -->
-      {% block embed_modal %}
-      {% include "glados/base/embed_modal.html" %}
-      {% endblock %}
-
-    <div class="card-content ebi-links" style="display: none">
-
-      {% verbatim %}
-      <script id="Handlebars-CompRepCard-AlternateCompounds-Title" type="text/x-handlebars-template">
-        Alternate forms of {{chembl_id}}:
-      </script>
-      {% endverbatim %}
-
-      <span class="alternate-compounds-title" data-hb-template="Handlebars-CompRepCard-AlternateCompounds-Title">
-      </span>
-
-      {% block carousel %}
-        {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
-      {% endblock %}
-
-    </div>
-
-  </div>
-
-</div>
+{% block general_content %}
+{% include "glados/base/ReportCards/DefaultCarouselInCardContent.html" %}
+{% endblock %}
