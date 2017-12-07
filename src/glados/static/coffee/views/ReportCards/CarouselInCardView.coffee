@@ -19,5 +19,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       glados.Utils.fillContentForElement $(@el).find('.BCK-CarouselTitle'),
         title: @config.title
 
+      fullListURL = @config.full_list_url
+      if fullListURL?
+        glados.Utils.fillContentForElement $(@el).find('.BCK-LinkToFullList'),
+          full_list_link: fullListURL
+
       @showSection()
       @showCardContent()
