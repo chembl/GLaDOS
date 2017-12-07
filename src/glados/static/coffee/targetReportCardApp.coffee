@@ -62,12 +62,18 @@ class TargetReportCardApp extends glados.ReportCardApp
     targetComponents = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTargetComponentsList()
     targetComponents.initURL targetChemblID
 
+    viewConfig =
+      embed_section_name: 'components'
+      embed_identifier: targetChemblID
+
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetComponents
       el: $('#TComponentsCard')
+      resource_type: gettext('glados_entities_target_name')
       target_chembl_id: targetChemblID
       section_id: 'TargetComponents'
       section_label: 'Components'
+      config: viewConfig
       report_card_app: @
 
     targetComponents.fetch({reset: true})

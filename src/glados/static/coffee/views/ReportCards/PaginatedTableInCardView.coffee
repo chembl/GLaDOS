@@ -5,11 +5,12 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       CardView.prototype.initialize.call(@, arguments)
       @collection.on 'reset', @.render, @
-      @resource_type = 'Target'
+      @config = arguments[0].config
+      @resource_type = arguments[0].resource_type
       @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         @collection, @el, customRenderEvent=undefined, disableColumnsSelection=true)
 
-      @initEmbedModal('components', arguments[0].target_chembl_id)
+      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
 
 
