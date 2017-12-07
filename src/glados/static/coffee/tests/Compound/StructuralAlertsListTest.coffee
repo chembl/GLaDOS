@@ -53,4 +53,8 @@ describe 'Compound Structural Alerts', ->
       currentAlert = _.find(alertsList, (a) -> a.cpd_str_alert_id == currentAlertID)
       console.log 'currentAlert: ', currentAlert
       expect(currentAlert?).toBe(true)
+      expect(currentAlert.molecule_chembl_id).toBe(testChemblID)
+
+      alertNameMustBe = structAlertMustBe.alert.alert_name
+      expect(currentAlert.alert_name).toBe(alertNameMustBe)
       console.log '^^^'
