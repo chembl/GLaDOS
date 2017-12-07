@@ -192,7 +192,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
       collection: moleculeFormsList
       el: $('#AlternateFormsCard')
       resource_type: gettext('glados_entities_compound_name')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
       section_id: 'AlternateFormsOfCompoundInChEMBL'
       section_label: 'Alternate Forms'
       config: viewConfig
@@ -313,15 +312,22 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initSimilarCompounds = ->
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
     similarCompoundsList.initURL glados.Utils.URLS.getCurrentModelChemblID(), glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
-    new SimilarCompoundsView
+    viewConfig =
+      embed_section_name: 'similar'
+      embed_identifier: chemblID
+      title: "Compounds similar to #{chemblID} with at least 70% similarity:"
+
+    new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
       section_id: 'SimilarCompounds'
       section_label: 'Similar Compounds'
+      config: viewConfig
       report_card_app: @
 
     similarCompoundsList.fetch({reset: true})
