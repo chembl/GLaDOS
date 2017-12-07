@@ -419,7 +419,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
       list = @getNewClientSideCollectionFor config
 
-#      list.parse = (data) ->
+      list.parse = (data) ->
+
+        structuralAlertsSets = []
+        structualAlertsToPosition = {}
+        for structAlert in data.compound_structural_alerts
+
+          setName = structAlert.alert.alert_set.set_name
+          setPosition = structualAlertsToPosition[setName]
+
+          if not setPosition?
+            newAlertSet =
+              set_name: setName
+            structuralAlertsSets.push newAlertSet
+            structualAlertsToPosition[setName] = structuralAlertsSets.length - 1
+
+        return structuralAlertsSets
+
+
 #        data.page_meta.records_in_page = data.molecule_forms.length
 #        @setMeta('data_loaded', true)
 #        @resetMeta(data.page_meta)

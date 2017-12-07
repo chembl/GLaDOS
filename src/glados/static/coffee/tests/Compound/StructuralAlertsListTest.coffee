@@ -32,3 +32,14 @@ describe 'Compound Structural Alerts', ->
     console.log 'sampleDataToParse: ', sampleDataToParse
     parsedDataGot = structuralAlerts.parse(sampleDataToParse)
     console.log 'parsedDataGot: ', parsedDataGot
+
+    structuralAlertsSetsIndex = _.indexBy(parsedDataGot, 'set_name')
+    console.log 'structuralAlertsSetsIndex: ', structuralAlertsSetsIndex
+
+    for structAlert in sampleDataToParse.compound_structural_alerts
+      console.log 'structAlert: ', structAlert
+      setName = structAlert.alert.alert_set.set_name
+      console.log 'setName: ', setName
+      parsedAlertSet = structuralAlertsSetsIndex[setName]
+      console.log 'parsetAlertSet: ', parsedAlertSet
+      expect(parsedAlertSet?).toBe(true)
