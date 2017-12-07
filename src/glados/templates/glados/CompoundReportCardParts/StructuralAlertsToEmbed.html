@@ -1,0 +1,17 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Structural Alerts{% endblock %}
+
+{% block content %}
+
+   <div style="margin-top: 25px;">
+    {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+   </div>
+
+{% endblock %}
+
+{% load static %}
+
+{% block custom_js_inline %}
+CompoundReportCardApp.initStructuralAlerts();
+{% endblock %}
