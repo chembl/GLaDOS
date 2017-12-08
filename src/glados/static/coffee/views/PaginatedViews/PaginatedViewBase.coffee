@@ -115,6 +115,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
 
+    stampViewIDOnEventsTriggerers: ->
+      eventTriggererClasses = ['page-selector', 'change-page-size', 'sort', 'select-search', 'select-sort',
+        'btn-sort-direction', 'BCK-toggle-select-all', 'BCK-select-one-item', 'BCK-zoom-in', 'BCK-zoom-out',
+        'BCK-reset-zoom']
+      for triggerClass in eventTriggererClasses
+        $elem = $(@el).find(".#{triggerClass}")
+        @stampViewIDOnElem($elem)
+
+    # this allows to have a paginated view inside another view
+    stampViewIDOnElem: ($elem) -> $elem.attr('data-view-id', @viewID)
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -145,7 +155,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.Utils.Tooltips.destroyAllTooltips($(@el))
       @renderViewState()
 
-    renderViewState: -> @fillTemplates()
+    renderViewState: ->
+      @stampViewIDOnEventsTriggerers()
+      @fillTemplates()
 
     sleepView: ->
     wakeUpView: ->
