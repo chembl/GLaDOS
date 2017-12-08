@@ -15,7 +15,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
-      @viewID = (new Date()).getTime()
+      @viewID = (new Date()).getTime().toString()
 
       @initColumnsHandler()
 
@@ -62,7 +62,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite()
         @collection.on 'sync do-repaint', @.render, @
       else
-        @collection.on 'reset sort', @render, @
+        @collection.on 'reset sort do-repaint', @render, @
         @collection.on 'request', @showPreloaderHideOthers, @
 
       @collection.on 'error', @handleError, @
@@ -125,6 +125,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     # this allows to have a paginated view inside another view
     stampViewIDOnElem: ($elem) -> $elem.attr('data-view-id', @viewID)
+    eventForThisView: ($elem) ->
+      console.log 'is this for me?'
+      console.log 'elem viw id: ', $elem.attr('data-view-id')
+      console.log 'my id: ', @viewID
+      console.log $elem.attr('data-view-id') == @viewID
+      $elem.attr('data-view-id') == @viewID
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------

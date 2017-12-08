@@ -18,6 +18,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getPageEvent: (event) ->
 
       clicked = $(event.currentTarget)
+      if not @eventForThisView(clicked)
+        return
 
       # Don't bother if the link was disabled.
       if clicked.hasClass('disabled')
