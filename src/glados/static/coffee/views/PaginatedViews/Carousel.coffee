@@ -32,6 +32,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+      customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
+      glados.views.PaginatedViews.PaginatedViewBase.sendDataToTemplate.call(@, $specificElemContainer, visibleColumns,
+        customTemplateID)
     # ------------------------------------------------------------------------------------------------------------------
     # Columns initalisation
     # ------------------------------------------------------------------------------------------------------------------

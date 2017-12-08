@@ -523,6 +523,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Carousel:
             Default: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-CarouselStructuralAlerts'
         ID_COLUMN: glados.models.Compound.StructuralAlert.ID_COLUMN
       STRUCTURAL_ALERTS_SETS_LIST:
         MODEL: glados.models.Compound.StructuralAlertSet

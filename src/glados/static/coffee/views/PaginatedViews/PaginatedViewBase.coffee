@@ -187,12 +187,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
 
-    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+    sendDataToTemplate: ($specificElemContainer, visibleColumns, customItemTemplate) ->
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
+      # this second way should be the correct way to do it, not changing it for now so I don't have refactor many things
+      if customItemTemplate?
+        templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
