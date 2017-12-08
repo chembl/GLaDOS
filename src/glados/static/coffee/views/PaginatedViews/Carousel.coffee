@@ -23,7 +23,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @isComplicated = isDefaultZoom and mustComplicate
 
       @clearContentContainer()
-      @fillTemplates()
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()

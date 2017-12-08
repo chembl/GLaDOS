@@ -26,7 +26,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
 
       @clearContentContainer()
-      @fillTemplates()
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()

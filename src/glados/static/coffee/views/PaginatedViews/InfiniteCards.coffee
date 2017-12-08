@@ -44,9 +44,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if @hasCustomElementView()
           @cleanUpCustomItemViewsContainer()
 
-      @fillTemplates()
-
-      @setUpLoadingWaypoint()
       @hidePreloaderIfNoNextItems()
 
       @fillSelectAllContainer() unless @disableItemsSelection
@@ -65,6 +62,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideSuggestedLabel()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+      @setUpLoadingWaypoint()
 
     sleepView: ->
 
