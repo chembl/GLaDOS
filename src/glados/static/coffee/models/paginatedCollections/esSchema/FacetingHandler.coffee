@@ -154,10 +154,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
               field: @es_property_name
           }
           es_query_aggs[@es_property_name+'_PERCENTILES'] = {
+            'filter': {
+                'range':  {}
+            }
+            aggs: {}
+          }
+          filtered_aggs_query = es_query_aggs[@es_property_name+'_PERCENTILES']
+          filtered_aggs_query.filter.range[@es_property_name]= {'gte': 7.62939453125e-6, 'lte': 1.073741824e9}
+          filtered_aggs_query.aggs[@es_property_name+'_PERCENTILES'] = {
             percentiles:
               field: @es_property_name
               percents: [1,10,20,30,40,50,60,70,80,90,99]
               keyed: true
+              hdr:
+                number_of_significant_value_digits: 3
           }
         else
           if not @intervalsLimits?
@@ -295,7 +305,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         if first_call
           stats = es_aggregations_data[@es_property_name+'_STATS']
-          percentiles = es_aggregations_data[@es_property_name+'_PERCENTILES'].values
+          percentiles = es_aggregations_data[@es_property_name+'_PERCENTILES'][@es_property_name+'_PERCENTILES'].values
           @calculateIntervals stats, percentiles
         else
           if not @intervalsLimits?
