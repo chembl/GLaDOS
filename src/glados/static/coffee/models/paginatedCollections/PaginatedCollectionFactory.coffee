@@ -417,8 +417,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewStructuralAlertList: ->
 
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
-      list = @getNewClientSideCollectionFor config
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
+      list = @getNewClientSideCollectionFor config
       return list
 
     getNewStructuralAlertsSetsList: ->

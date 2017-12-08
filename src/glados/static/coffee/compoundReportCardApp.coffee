@@ -507,6 +507,21 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     console.log 'AAA objectParam: ', objectParam
 
+    structAlerts = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertList()
+
+#    Handlebars-Common-DefaultCarouselContent
+    $carouselContainer = $("<div>#{glados.Utils.getContentFromTemplate('Handlebars-Common-DefaultCarouselContent')}</div>")
+    console.log 'AAA $carouselContainer: ', $carouselContainer
+    $containerElem.append($carouselContainer)
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(structAlerts, $containerElem)
+
+    parsedAlerts = JSON.parse(objectParam)
+    console.log 'AAA parsedAlerts: ', parsedAlerts
+    structAlerts.setMeta('data_loaded', true)
+    structAlerts.reset(parsedAlerts)
+
+    console.log 'AAA structAlerts: ', structAlerts
+
 
   @initDrugIconGridFromFunctionLink = ->
 

@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.ReportCards',
       @collection.on 'error', @.showCompoundErrorCard, @
       @config = arguments[0].config
       @resource_type = arguments[0].resource_type
-      @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsPaginatedView(@collection, @el)
+      @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
 
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
