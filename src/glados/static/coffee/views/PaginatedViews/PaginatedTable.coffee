@@ -12,6 +12,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.on 'error', @handleError, @
 
     # ------------------------------------------------------------------------------------------------------------------
+    # pageSizes
+    # ------------------------------------------------------------------------------------------------------------------
+    initAvailablePageSizes: ->
+      customDefaultPageSizes = @collection.getMeta('columns_description').Table.custom_page_sizes
+      if customDefaultPageSizes?
+        @AVAILABLE_PAGE_SIZES = customDefaultPageSizes
+      glados.views.PaginatedViews.PaginationFunctions.initAvailablePageSizes.call(@)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # rendering
     # ------------------------------------------------------------------------------------------------------------------
     renderViewState: ->

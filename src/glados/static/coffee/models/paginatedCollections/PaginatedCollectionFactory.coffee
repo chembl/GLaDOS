@@ -124,7 +124,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             base_url: collectionSettings.BASE_URL
             default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
             page_size: collectionSettings.DEFAULT_PAGE_SIZE
-            available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
