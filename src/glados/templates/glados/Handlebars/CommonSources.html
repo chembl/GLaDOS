@@ -590,18 +590,12 @@
 
           {{#each columns}}
 
-          {{#if this.has_link}}
-
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
-
-          {{else}}
-          <small>
-            <p >
-              {{this.name_to_show}}:{{this.value}} NEW ONE!!!
-            </p>
-          </small>
-          {{/if}}
+            {{#if this.img_url}}
+            {{else}}
+              <p >
+                {{this.value}}
+              </p>
+            {{/if}}
           {{/each}}
 
         </div>

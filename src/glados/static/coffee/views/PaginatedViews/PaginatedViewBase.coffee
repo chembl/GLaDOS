@@ -15,6 +15,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
+      @viewID = (new Date()).getMilliseconds()
+      console.log 'AAA ', @viewID
+
       @initColumnsHandler()
 
       if @isTable()

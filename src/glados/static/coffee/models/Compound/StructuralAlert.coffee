@@ -2,7 +2,6 @@ glados.useNameSpace 'glados.models.Compound',
   StructuralAlert: Backbone.Model.extend
 
     parse: (response) ->
-      console.log 'AAA parsing st alerts!!'
       response.image_url = "#{glados.Settings.WS_BASE_URL}compound_structural_alert/#{response.cpd_str_alert_id}.svg"
       return response
 
