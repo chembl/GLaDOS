@@ -295,6 +295,7 @@ glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCe
   $clickedLink = $clickedElem
   paramsList = $clickedLink.attr('data-function-paramaters').split(',')
   constantParamsList = $clickedLink.attr('data-function_constant_parameters').split(',')
+  objectParameter = $clickedElem.attr('data-function_object_parameter')
   $containerElem = $clickedLink.parent()
 
   if isDataVis
@@ -302,5 +303,5 @@ glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCe
     $containerElem.addClass('vis-container')
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
-  return [paramsList, constantParamsList, $containerElem]
+  return [paramsList, constantParamsList, $containerElem, objectParameter]
 

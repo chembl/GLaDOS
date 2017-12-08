@@ -11,8 +11,15 @@ glados.models.Compound.StructuralAlertSet.COLUMNS =
     format_class: 'number-cell-center'
   ALERTS_LIST:
     name_to_show: 'Alerts'
-#    comparator:
-
+    comparator: '--'
+    sort_disabled: true
+    on_click: CompoundReportCardApp.initStructuralAlertsCarouselFromFunctionLink
+    function_object_parameter: (attributes) -> attributes.alerts_list
+    function_key: 'drug_icon_grid'
+    function_link: true
+    execute_on_render: true
+    hide_value: true
+    remove_link_after_click: true
 
 
 glados.models.Compound.StructuralAlertSet.ID_COLUMN = glados.models.Compound.StructuralAlertSet.COLUMNS.SET_NAME
@@ -27,4 +34,5 @@ glados.models.Compound.StructuralAlertSet.COLUMNS_SETTINGS =
   RESULTS_LIST_TABLE: [
     glados.models.Compound.StructuralAlertSet.COLUMNS.SET_NAME
     glados.models.Compound.StructuralAlertSet.COLUMNS.PRIORITY
+    glados.models.Compound.StructuralAlertSet.COLUMNS.ALERTS_LIST
   ]

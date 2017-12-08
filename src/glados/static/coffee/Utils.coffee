@@ -128,10 +128,17 @@ glados.useNameSpace 'glados',
         returnCol['execute_on_render'] = colDescription.execute_on_render == true
 
         if returnCol['is_function_link']
-          returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
-          for paramComp in colDescription.function_parameters).join(',')
+
+          if colDescription.function_parameters?
+            returnCol['function_parameters'] = (glados.Utils.getNestedValue(model.attributes, paramComp) \
+            for paramComp in colDescription.function_parameters).join(',')
+
           returnCol['function_constant_parameters'] = colDescription.function_constant_parameters
           returnCol['function_key'] = colDescription.function_key
+
+          if colDescription.function_object_parameter?
+            fObjectParam = colDescription.function_object_parameter
+            returnCol['function_object_parameter'] = JSON.stringify(fObjectParam(model.attributes))
 
           returnCol['hide_value'] = colDescription.hide_value
           returnCol['table_cell_width'] = colDescription.table_cell_width

@@ -232,9 +232,9 @@
         <h3>Structural Alerts</h3>
 
 
-        {% block structural_alerts %}
+        {% with is_dynamic=True  %}
         {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
-        {% endblock %}
+        {% endwith  %}
 
 
       </div>

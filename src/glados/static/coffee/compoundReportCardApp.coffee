@@ -192,7 +192,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     structuralAlertsSets.fetch()
-    console.log 'AAA structuralAlertsSets: ', structuralAlertsSets
 
   @initAlternateForms = ->
 
@@ -496,6 +495,18 @@ class CompoundReportCardApp extends glados.ReportCardApp
       CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)
     else if histogramType == 'targets_by_class'
       CompoundReportCardApp.initMiniTargetsByClassHistogram($containerElem, compoundChemblID)
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Cells Functions
+  # --------------------------------------------------------------------------------------------------------------------
+  @initStructuralAlertsCarouselFromFunctionLink = ->
+
+    $clickedLink = $(@)
+    [paramsList, constantParamsList, $containerElem, objectParam] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink, isDataVis=false)
+
+    console.log 'AAA objectParam: ', objectParam
+
 
   @initDrugIconGridFromFunctionLink = ->
 
