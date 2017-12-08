@@ -1,6 +1,7 @@
 [
   {
-    "aggData": {
+    "aggData":
+    {
         "_metadata.atc_classifications.level1_description"
     :
         {
@@ -8,7 +9,7 @@
         :
             0, "sum_other_doc_count"
         :
-            706, "buckets"
+            0, "buckets"
         :
             [{"key": "- N/A -", "doc_count": 1732261}, {
                 "key": "N - NERVOUS SYSTEM",
@@ -25,7 +26,19 @@
             }, {"key": "D - DERMATOLOGICALS", "doc_count": 290}, {
                 "key": "R - RESPIRATORY SYSTEM",
                 "doc_count": 265
-            }, {"key": "V - VARIOUS", "doc_count": 214}, {"key": "S - SENSORY ORGANS", "doc_count": 208}]
+            }, {"key": "V - VARIOUS", "doc_count": 214}, {
+                "key": "S - SENSORY ORGANS",
+                "doc_count": 208
+            }, {
+                "key": "G - GENITO URINARY SYSTEM AND SEX HORMONES",
+                "doc_count": 184
+            }, {"key": "B - BLOOD AND BLOOD FORMING ORGANS", "doc_count": 169}, {
+                "key": "M - MUSCULO-SKELETAL SYSTEM",
+                "doc_count": 160
+            }, {
+                "key": "P - ANTIPARASITIC PRODUCTS, INSECTICIDES AND REPELLENTS",
+                "doc_count": 102
+            }, {"key": "H - SYSTEMIC HORMONAL PREPARATIONS, EXCL. SEX HORMONES AND INSULINS", "doc_count": 91}]
         }
     ,
         "molecule_type"
@@ -54,9 +67,9 @@
         {
             "doc_count_error_upper_bound"
         :
-            54, "sum_other_doc_count"
+            39, "sum_other_doc_count"
         :
-            2635, "buckets"
+            1998, "buckets"
         :
             [{"key": "- N/A -", "doc_count": 1732261}, {
                 "key": "J01 - ANTIBACTERIALS FOR SYSTEMIC USE",
@@ -73,70 +86,112 @@
             }, {
                 "key": "M01 - ANTIINFLAMMATORY AND ANTIRHEUMATIC PRODUCTS",
                 "doc_count": 77
-            }, {"key": "N02 - ANALGESICS", "doc_count": 77}, {"key": "B01 - ANTITHROMBOTIC AGENTS", "doc_count": 71}]
+            }, {"key": "N02 - ANALGESICS", "doc_count": 77}, {
+                "key": "B01 - ANTITHROMBOTIC AGENTS",
+                "doc_count": 71
+            }, {
+                "key": "R03 - DRUGS FOR OBSTRUCTIVE AIRWAY DISEASES",
+                "doc_count": 71
+            }, {
+                "key": "V09 - DIAGNOSTIC RADIOPHARMACEUTICALS",
+                "doc_count": 71
+            }, {
+                "key": "G03 - SEX HORMONES AND MODULATORS OF THE GENITAL SYSTEM",
+                "doc_count": 69
+            }, {
+                "key": "A03 - DRUGS FOR FUNCTIONAL GASTROINTESTINAL DISORDERS",
+                "doc_count": 68
+            }, {
+                "key": "R06 - ANTIHISTAMINES FOR SYSTEMIC USE",
+                "doc_count": 64
+            }, {
+                "key": "J05 - ANTIVIRALS FOR SYSTEMIC USE",
+                "doc_count": 63
+            }, {
+                "key": "R05 - COUGH AND COLD PREPARATIONS",
+                "doc_count": 59
+            }, {
+                "key": "A07 - ANTIDIARRHEALS, INTESTINAL ANTIINFLAMMATORY/ANTIINFECTIVE AGENTS",
+                "doc_count": 58
+            }, {
+                "key": "D07 - CORTICOSTEROIDS, DERMATOLOGICAL PREPARATIONS",
+                "doc_count": 58
+            }, {"key": "V03 - ALL OTHER THERAPEUTIC PRODUCTS", "doc_count": 56}]
         }
     ,
         "max_phase_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            6662, "max_phase_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                0.0, "10.0"
-            :
-                0.0, "20.0"
-            :
-                0.0, "30.0"
-            :
-                0.0, "40.0"
-            :
-                0.0, "50.0"
-            :
-                0.0, "60.0"
-            :
-                0.0, "70.0"
-            :
-                0.0, "80.0"
-            :
-                0.0, "90.0"
-            :
-                0.0, "99.0"
-            :
-                0.0
+                {
+                    "1.0"
+                :
+                    1.0, "10.0"
+                :
+                    1.0, "20.0"
+                :
+                    2.0009765625, "30.0"
+                :
+                    3.0009765625, "40.0"
+                :
+                    3.0009765625, "50.0"
+                :
+                    4.0029296875, "60.0"
+                :
+                    4.0029296875, "70.0"
+                :
+                    4.0029296875, "80.0"
+                :
+                    4.0029296875, "90.0"
+                :
+                    4.0029296875, "99.0"
+                :
+                    4.0029296875
+                }
             }
         }
     ,
         "molecule_properties.alogp_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            1608635, "molecule_properties.alogp_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                -2.27283247614655, "10.0"
-            :
-                0.9499296732961047, "20.0"
-            :
-                1.8034592582166948, "30.0"
-            :
-                2.379325329343914, "40.0"
-            :
-                2.8442605588945007, "50.0"
-            :
-                3.2840999072826214, "60.0"
-            :
-                3.7195754677370383, "70.0"
-            :
-                4.195495364433576, "80.0"
-            :
-                4.778056194898778, "90.0"
-            :
-                5.648293228785265, "99.0"
-            :
-                8.503911806387437
+                {
+                    "1.0"
+                :
+                    0.25023651123046875, "10.0"
+                :
+                    1.3808517456054688, "20.0"
+                :
+                    2.0410079956054688, "30.0"
+                :
+                    2.5410079956054688, "40.0"
+                :
+                    2.9706954956054688, "50.0"
+                :
+                    3.3906173706054688, "60.0"
+                :
+                    3.8105392456054688, "70.0"
+                :
+                    4.273429870605469, "80.0"
+                :
+                    4.843742370605469, "90.0"
+                :
+                    5.710929870605469, "99.0"
+                :
+                    8.562492370605469
+                }
             }
         }
     ,
@@ -219,64 +274,76 @@
         "_metadata.related_activities.count_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            1648148, "_metadata.related_activities.count_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                1.0, "10.0"
-            :
-                1.0, "20.0"
-            :
-                1.0, "30.0"
-            :
-                2.0, "40.0"
-            :
-                3.0, "50.0"
-            :
-                4.0, "60.0"
-            :
-                5.0, "70.0"
-            :
-                7.000000000000001, "80.0"
-            :
-                10.0, "90.0"
-            :
-                17.871017627569554, "99.0"
-            :
-                60.0
+                {
+                    "1.0"
+                :
+                    1.0, "10.0"
+                :
+                    1.0, "20.0"
+                :
+                    1.0, "30.0"
+                :
+                    2.0009765625, "40.0"
+                :
+                    3.0009765625, "50.0"
+                :
+                    4.0029296875, "60.0"
+                :
+                    5.0029296875, "70.0"
+                :
+                    7.0029296875, "80.0"
+                :
+                    10.0068359375, "90.0"
+                :
+                    18.0146484375, "99.0"
+                :
+                    60.0302734375
+                }
             }
         }
     ,
         "molecule_properties.num_ro5_violations_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            459495, "molecule_properties.num_ro5_violations_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                0.0, "10.0"
-            :
-                0.0, "20.0"
-            :
-                0.0, "30.0"
-            :
-                0.0, "40.0"
-            :
-                0.0, "50.0"
-            :
-                0.0, "60.0"
-            :
-                0.0, "70.0"
-            :
-                0.0, "80.0"
-            :
-                1.0, "90.0"
-            :
-                1.0, "99.0"
-            :
-                3.0
+                {
+                    "1.0"
+                :
+                    1.0, "10.0"
+                :
+                    1.0, "20.0"
+                :
+                    1.0, "30.0"
+                :
+                    1.0, "40.0"
+                :
+                    1.0, "50.0"
+                :
+                    1.0, "60.0"
+                :
+                    1.0, "70.0"
+                :
+                    2.0009765625, "80.0"
+                :
+                    2.0009765625, "90.0"
+                :
+                    2.0009765625, "99.0"
+                :
+                    3.0009765625
+                }
             }
         }
     ,
@@ -313,32 +380,38 @@
         "_metadata.related_targets.count_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            1648148, "_metadata.related_targets.count_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                0.0, "10.0"
-            :
-                1.0, "20.0"
-            :
-                1.0, "30.0"
-            :
-                1.0, "40.0"
-            :
-                2.0, "50.0"
-            :
-                2.0, "60.0"
-            :
-                3.0, "70.0"
-            :
-                5.0, "80.0"
-            :
-                6.0, "90.0"
-            :
-                11.0, "99.0"
-            :
-                58.0
+                {
+                    "1.0"
+                :
+                    1.0, "10.0"
+                :
+                    1.0, "20.0"
+                :
+                    1.0, "30.0"
+                :
+                    1.0, "40.0"
+                :
+                    2.0009765625, "50.0"
+                :
+                    3.0009765625, "60.0"
+                :
+                    4.0029296875, "70.0"
+                :
+                    5.0029296875, "80.0"
+                :
+                    7.0029296875, "90.0"
+                :
+                    11.0068359375, "99.0"
+                :
+                    59.0302734375
+                }
             }
         }
     ,
@@ -405,32 +478,38 @@
         "molecule_properties.full_mwt_PERCENTILES"
     :
         {
-            "values"
+            "doc_count"
+        :
+            1731123, "molecule_properties.full_mwt_PERCENTILES"
         :
             {
-                "1.0"
+                "values"
             :
-                177.16142478642848, "10.0"
-            :
-                268.66594683731046, "20.0"
-            :
-                307.7289711918098, "30.0"
-            :
-                336.3859861527711, "40.0"
-            :
-                362.0319536240576, "50.0"
-            :
-                389.52088353087504, "60.0"
-            :
-                418.48632450804746, "70.0"
-            :
-                450.77689284575786, "80.0"
-            :
-                492.8986505494276, "90.0"
-            :
-                573.9898915729121, "99.0"
-            :
-                1295.2256916830083
+                {
+                    "1.0"
+                :
+                    177.24609375, "10.0"
+                :
+                    268.49609375, "20.0"
+                :
+                    307.74609375, "30.0"
+                :
+                    336.49609375, "40.0"
+                :
+                    362.49609375, "50.0"
+                :
+                    389.49609375, "60.0"
+                :
+                    418.49609375, "70.0"
+                :
+                    450.74609375, "80.0"
+                :
+                    492.99609375, "90.0"
+                :
+                    573.99609375, "99.0"
+                :
+                    1295.99609375
+                }
             }
         }
     ,
@@ -473,12 +552,7 @@
         {
             "buckets"
         :
-            [{"key": "-20.49--2.0", "from": -20.49, "to": -2.0, "doc_count": 20039}, {
-                "key": "-2.0--1.0",
-                "from": -2.0,
-                "to": -1.0,
-                "doc_count": 19138
-            }, {"key": "-1.0-0.0", "from": -1.0, "to": 0.0, "doc_count": 40168}, {
+            [{"key": "-20.49-0.0", "from": -20.49, "to": 0.0, "doc_count": 79345}, {
                 "key": "0.0-1.0",
                 "from": 0.0,
                 "to": 1.0,
@@ -535,16 +609,21 @@
                 "to": 2.0,
                 "doc_count": 530959
             }, {"key": "2.0-3.0", "from": 2.0, "to": 3.0, "doc_count": 261718}, {
-                "key": "3.0-5.0",
+                "key": "3.0-4.0",
                 "from": 3.0,
-                "to": 5.0,
-                "doc_count": 330034
-            }, {"key": "5.0-6.0", "from": 5.0, "to": 6.0, "doc_count": 100516}, {
-                "key": "6.0-11.0",
-                "from": 6.0,
-                "to": 11.0,
-                "doc_count": 239009
-            }, {"key": "11.0-1182.0", "from": 11.0, "to": 1182.0, "doc_count": 185912}]
+                "to": 4.0,
+                "doc_count": 194268
+            }, {"key": "4.0-5.0", "from": 4.0, "to": 5.0, "doc_count": 135766}, {
+                "key": "5.0-7.0",
+                "from": 5.0,
+                "to": 7.0,
+                "doc_count": 185063
+            }, {"key": "7.0-11.0", "from": 7.0, "to": 11.0, "doc_count": 154462}, {
+                "key": "11.0-1182.0",
+                "from": 11.0,
+                "to": 1182.0,
+                "doc_count": 185912
+            }]
         }
     ,
         "_metadata.related_activities.count"
