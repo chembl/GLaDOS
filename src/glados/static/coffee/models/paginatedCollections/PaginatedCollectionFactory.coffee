@@ -113,6 +113,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # the collection gets all the data is in one call and the full list is in the client all the time.
     getNewClientSideCollectionFor: (collectionSettings) ->
 
+      console.log 'AAA collectionSettings.MODEL: ', collectionSettings.MODEL
       collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions).extend

@@ -513,12 +513,13 @@ class CompoundReportCardApp extends glados.ReportCardApp
     $carouselContainer = $("<div>#{glados.Utils.getContentFromTemplate('Handlebars-Common-DefaultCarouselContent')}</div>")
     console.log 'AAA $carouselContainer: ', $carouselContainer
     $containerElem.append($carouselContainer)
+    console.log 'AAA model: ', structAlerts.model
     glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(structAlerts, $containerElem)
 
     parsedAlerts = JSON.parse(objectParam)
     console.log 'AAA parsedAlerts: ', parsedAlerts
     structAlerts.setMeta('data_loaded', true)
-    structAlerts.reset(parsedAlerts)
+    structAlerts.reset(_.map(parsedAlerts, glados.models.Compound.StructuralAlert.prototype.parse))
 
     console.log 'AAA structAlerts: ', structAlerts
 
