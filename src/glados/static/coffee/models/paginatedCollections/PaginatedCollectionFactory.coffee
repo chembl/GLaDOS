@@ -414,8 +414,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewStructuralAlertsSetsList: ->
+    getNewStructuralAlertList: ->
+
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
+      list = @getNewClientSideCollectionFor config
+
+      return list
+
+    getNewStructuralAlertsSetsList: ->
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_SETS_LIST
       list = @getNewClientSideCollectionFor config
 
       list.fetch = ->
