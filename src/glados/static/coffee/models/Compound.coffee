@@ -601,6 +601,12 @@ Compound.COLUMNS = {
     comparator: '_metadata.compound_records'
     name_to_show: 'Compound Sources'
     parse_function: (values) -> _.unique(v.src_description for v in values)
+  WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'withdrawn_year'
+  WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'withdrawn_country'
+  WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'withdrawn_reason'
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -691,6 +697,11 @@ Compound.COLUMNS_SETTINGS = {
   ]
   COMPOUND_SOURCES_SECTION: [
     Compound.COLUMNS.COMPOUND_SOURCES_LIST
+  ]
+  WITHDRAWN_INFO_SECTION: [
+    Compound.COLUMNS.WITHDRAWN_YEAR
+    Compound.COLUMNS.WITHDRAWN_COUNTRY
+    Compound.COLUMNS.WITHDRAWN_REASON
   ]
 }
 

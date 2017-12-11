@@ -15,6 +15,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initAlternateForms()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMoleculeFeatures()
+    CompoundReportCardApp.initWithdrawnInfo()
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initIndications()
     CompoundReportCardApp.initClinicalData()
@@ -166,6 +167,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
+
+  @initWithdrawnInfo = ->
+
 
   @initClinicalData = ->
 
