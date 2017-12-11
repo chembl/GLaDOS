@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         inferredProperties.sort_disabled = true
 
       inferredProperties.name_to_show = gettext(gladosConfig.label_id)
+      inferredProperties.id = gettext(baseConfig.comparator)
 
       finalConfig = _.extend({}, gladosConfig, inferredProperties, baseConfig)
       return finalConfig

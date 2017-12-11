@@ -183,7 +183,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CWithdrawnInfoCard')
       config: viewConfig
       section_id: 'WithdrawnInfo'
-      section_label: 'Withdrawn Information'
+      section_label: 'Withdrawal Information'
       report_card_app: @
 
   @initClinicalData = ->

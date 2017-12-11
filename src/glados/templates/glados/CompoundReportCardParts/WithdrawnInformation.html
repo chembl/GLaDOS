@@ -3,5 +3,22 @@
 {% block card_id %}CWithdrawnInfoCard{% endblock %}
 
 {% block general_content %}
-Withdrawn!!!
+{% verbatim %}
+<script id='Handlebars-WithdrawnInfo' type="text/x-handlebars-template">
+
+    <ul>
+        <li>
+            <b>{{withdrawn_year.name_to_show}}:</b> {{withdrawn_year.value}}
+        </li>
+        <li>
+            <b>{{withdrawn_country.name_to_show}}:</b> {{withdrawn_country.value}}
+        </li>
+        <li>
+            <b>{{withdrawn_reason.name_to_show}}:</b> {{withdrawn_reason.value}}
+        </li>
+    </ul>
+
+</script>
+{% endverbatim %}
+<div class="BCK-Details-Container" data-hb-template="Handlebars-WithdrawnInfo"></div>
 {% endblock %}
