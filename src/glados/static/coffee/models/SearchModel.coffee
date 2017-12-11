@@ -49,6 +49,7 @@ SearchModel = Backbone.Model.extend
     allSuggestionsScores = []
     done_callback = (esData)->
       suggestions = []
+      groupedSuggestions = {}
       for suggI in esData.suggest.autocomplete
         for optionJ in suggI.options
           suggestionI = {
@@ -74,21 +75,41 @@ SearchModel = Backbone.Model.extend
             highlightedTextI = \
               highlightedTextI.slice(0, highlightJ.offset)+'<big><b>'+highlightedTextI.slice(highlightJ.offset)
           suggestionI.highlightedText = highlightedTextI
-          suggestions.push suggestionI
+          if not _.has(groupedSuggestions, optionJ.text)
+            groupedSuggestions[optionJ.text] = []
+          groupedSuggestions[optionJ.text].push suggestionI
 
-      if suggestions.length > 0
+      sortedSuggestions = _.keys(groupedSuggestions).sort().slice 0, 5
+      suggestions = []
 
-        suggestions.splice(0, 0, {
-          color: suggestions[0].chembl_id_link.color
+      if sortedSuggestions.length > 0
+        suggestions.push {
+          color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
           header: true
-          title: suggestions[0].entityLabel
-          maxScore: suggestions[0].score
-        })
+          title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
+          maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
+        }
+        maxScore = 0
+        for suggestionI in sortedSuggestions
+          docsSuggested = groupedSuggestions[suggestionI]
+          for docI in docsSuggested
+            if docI.maxScore > maxScore
+              maxScore = docI.maxScore
+          if docsSuggested.length == 1
+            suggestions.push docsSuggested[0]
+          else
+            suggestionI = docsSuggested[0]
+            suggestionI.chembl_id_link.href = glados.Settings.SEARCH_RESULTS_PAGE+'/'+suggestionI.entityLabel\
+                +' '+suggestionI.text
+            suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
+            suggestions.push suggestionI
+
         insertAt = 0
         for scoreI in allSuggestionsScores
-          if suggestions[0].maxScore > scoreI
+          if maxScore > scoreI
             break
           insertAt++
+        console.warn(groupedSuggestions[sortedSuggestions[0]][0].entityLabel, JSON.stringify(allSuggestionsScores))
         allSuggestionsScores.splice(insertAt, 0, suggestions[0].maxScore)
         allSuggestions.splice(insertAt, 0, suggestions)
 
@@ -106,6 +127,7 @@ SearchModel = Backbone.Model.extend
           prefix: @autocompleteQuery
           completion:
             field: "_metadata.es_completion"
+            size: 50
     }
     deferreds = []
     for es_index_i_key in _.keys(glados.models.paginatedCollections.Settings.ES_INDEXES)
