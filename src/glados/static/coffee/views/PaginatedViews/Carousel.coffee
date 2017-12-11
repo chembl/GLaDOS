@@ -26,6 +26,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
+      if @collection.getMeta('total_pages') == 1
+        @hidePaginators()
       @activateSelectors()
       @showPaginatedViewContent()
 

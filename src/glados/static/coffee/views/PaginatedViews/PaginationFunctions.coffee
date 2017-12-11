@@ -89,5 +89,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @currentPageSize = parseInt(newPageSize)
       @collection.resetPageSize(newPageSize)
 
+    hidePaginators: ->
+
+      $elem = $(@el).find('.BCK-paginator-container')
+      if $elem.length == 0
+        return
+
+      $elem.hide()
 
 
