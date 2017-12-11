@@ -95,10 +95,20 @@
         <h3>Molecule Features</h3>
 
         <div class="row">
-
-          {% block molecule_features %}
           {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
-          {% endblock %}
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="WithdrawnInfo" class="section scrollspy" style="display: none;">
+        <h3>Withdrawal Information</h3>
+
+        <div class="row">
+
+          {% with is_dynamic=True  %}
+          {% include "glados/CompoundReportCardParts/WithdrawnInformation.html" %}
+          {% endwith %}
 
         </div>
 

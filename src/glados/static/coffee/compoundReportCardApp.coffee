@@ -15,6 +15,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initAlternateForms()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMoleculeFeatures()
+    CompoundReportCardApp.initWithdrawnInfo()
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initIndications()
     CompoundReportCardApp.initClinicalData()
@@ -162,6 +163,27 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#MoleculeFeaturesCard')
       section_id: 'MoleculeFeatures'
       section_label: 'Molecule Features'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+  @initWithdrawnInfo = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'withdrawal_info'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) -> model.attributes.withdrawn_flag == true
+      properties_to_show: Compound.COLUMNS_SETTINGS.WITHDRAWN_INFO_SECTION
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CWithdrawnInfoCard')
+      config: viewConfig
+      section_id: 'WithdrawnInfo'
+      section_label: 'Withdrawal Information'
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
