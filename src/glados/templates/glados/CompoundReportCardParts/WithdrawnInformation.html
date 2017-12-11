@@ -6,17 +6,20 @@
 {% verbatim %}
 <script id='Handlebars-WithdrawnInfo' type="text/x-handlebars-template">
 
-    <ul>
-        <li>
-            <b>{{withdrawn_year.name_to_show}}:</b> {{withdrawn_year.value}}
-        </li>
-        <li>
-            <b>{{withdrawn_country.name_to_show}}:</b> {{withdrawn_country.value}}
-        </li>
-        <li>
-            <b>{{withdrawn_reason.name_to_show}}:</b> {{withdrawn_reason.value}}
-        </li>
-    </ul>
+    <div class="withdrawn-info amber lighten-5">
+        <div class="center-align"><i class='icon icon-chembl-2' data-icon='w'></i></div>
+        <ul>
+            <li>
+                <b>{{withdrawn_year.name_to_show}}:</b> {{withdrawn_year.value}}
+            </li>
+            <li>
+                <b>{{withdrawn_country.name_to_show}}:</b> {{withdrawn_country.value}}
+            </li>
+            <li>
+                <b>{{withdrawn_reason.name_to_show}}:</b> {{withdrawn_reason.value}}
+            </li>
+        </ul>
+    </div>
 
 </script>
 {% endverbatim %}
