@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
-      console.log 'INIT PAG TABLE'
       CardView.prototype.initialize.call(@, arguments)
       @collection.on 'reset', @.render, @
       @config = arguments[0].config
@@ -20,7 +19,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
-      console.log 'RENDER PAG TABLE'
       if @collection.size() == 0 and !@collection.getMeta('force_show')
         return
 

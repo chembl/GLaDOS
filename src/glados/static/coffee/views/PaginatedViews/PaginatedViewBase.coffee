@@ -53,7 +53,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     bindCollectionEvents: ->
 
-      console.log 'aa binding events', @customRenderEvents
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
       if @customRenderEvents?
@@ -121,17 +120,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         '.BCK-reset-zoom', '.headers-table']
       for triggerClass in eventTriggererSelectors
         $elem = $(@el).find(triggerClass)
-        console.log 'stamping: ', $elem
-
         @stampViewIDOnElem($elem)
 
     # this allows to have a paginated view inside another view
     stampViewIDOnElem: ($elem) -> $elem.attr('data-view-id', @viewID)
     eventForThisView: ($elem) ->
-      console.log 'is this for me?'
-      console.log 'elem viw id: ', $elem.attr('data-view-id')
-      console.log 'my id: ', @viewID
-      console.log $elem.attr('data-view-id') == @viewID
       $elem.attr('data-view-id') == @viewID
     # ------------------------------------------------------------------------------------------------------------------
     # Render

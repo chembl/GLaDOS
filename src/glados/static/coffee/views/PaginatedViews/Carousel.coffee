@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @AVAILABLE_PAGE_SIZES = (size for key, size of glados.Settings.DEFAULT_CAROUSEL_SIZES)
       @currentPageSize = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-      console.log 'CURRENT PAGE SIZE: ', @currentPageSize
 
       f = (newPageSize) ->
         @currentPageSize = newPageSize
