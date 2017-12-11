@@ -121,6 +121,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $elem = $(@el).find('.BCK-items-container')
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
+      # this is a workaround to the problem
+      for col in allColumns
+        if col.table_cell_width_medium? and GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.MEDIUM_SCREEN
+          col.table_cell_width = col.table_cell_width_medium
 
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i]), allColumns

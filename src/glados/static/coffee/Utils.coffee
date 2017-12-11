@@ -142,6 +142,7 @@ glados.useNameSpace 'glados',
 
           returnCol['hide_value'] = colDescription.hide_value
           returnCol['table_cell_width'] = colDescription.table_cell_width
+          returnCol['table_cell_width_medium'] = colDescription.table_cell_width_medium
           returnCol['remove_link_after_click'] = colDescription.remove_link_after_click
 
         if returnCol['has_link']
