@@ -96,8 +96,20 @@
 
         <div class="row">
 
-          {% block molecule_features %}
           {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
+
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+      <div id="MoleculeFeatures" class="section scrollspy" >
+        <h3>Withdrawn Information</h3>
+
+        <div class="row">
+
+          {% block molecule_features %}
+          {% include "glados/CompoundReportCardParts/WithdrawnInformation.html" %}
           {% endblock %}
 
         </div>
