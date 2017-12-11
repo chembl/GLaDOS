@@ -95,9 +95,7 @@
         <h3>Molecule Features</h3>
 
         <div class="row">
-
           {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
-
         </div>
 
       </div>
@@ -108,9 +106,9 @@
 
         <div class="row">
 
-          {% block molecule_features %}
+          {% with is_dynamic=True  %}
           {% include "glados/CompoundReportCardParts/WithdrawnInformation.html" %}
-          {% endblock %}
+          {% endwith %}
 
         </div>
 

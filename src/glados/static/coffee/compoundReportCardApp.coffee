@@ -173,7 +173,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =
-      embed_section_name: 'withdrawn_info'
+      embed_section_name: 'withdrawal_info'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) -> model.attributes.withdrawn_flag == true
       properties_to_show: Compound.COLUMNS_SETTINGS.WITHDRAWN_INFO_SECTION
@@ -185,6 +185,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'WithdrawnInfo'
       section_label: 'Withdrawal Information'
       report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initClinicalData = ->
 
