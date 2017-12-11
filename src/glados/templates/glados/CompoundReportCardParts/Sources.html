@@ -7,11 +7,11 @@
 <script id='Handlebars-CompoundSources' type="text/x-handlebars-template">
 
     <b>Sources:</b>
-    {{#each columns}}
-        {{#each this.value}}
-            <div class="chip">{{this}}</div>
-        {{/each}}
+
+    {{#each compound_sources_list.value}}
+        <div class="chip">{{this}}</div>
     {{/each}}
+
 </script>
 {% endverbatim %}
 <div class="BCK-Details-Container" data-hb-template="Handlebars-CompoundSources"></div>

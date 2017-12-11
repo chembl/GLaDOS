@@ -19,10 +19,9 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       propertiesToShow = @config.properties_to_show
       protertiesWithValues = glados.Utils.getColumnsWithValues(propertiesToShow, @model)
+      protertiesWithValuesIndex = _.indexBy(protertiesWithValues, 'id')
       $containerElem = $(@el).find('.BCK-Details-Container')
-      #the columns list could be dictionarized
-      glados.Utils.fillContentForElement $containerElem,
-        columns: protertiesWithValues
+      glados.Utils.fillContentForElement $containerElem, protertiesWithValuesIndex
 
       @showSection()
       @showCardContent()

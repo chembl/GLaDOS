@@ -96,6 +96,7 @@ glados.useNameSpace 'glados',
       return columns.map (colDescription) ->
 
         returnCol = {}
+        returnCol.id = colDescription.id
         returnCol.name_to_show = colDescription['name_to_show']
         returnCol.show = colDescription.show
         returnCol.comparator = colDescription.comparator
