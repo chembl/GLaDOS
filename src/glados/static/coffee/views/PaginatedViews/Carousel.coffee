@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @AVAILABLE_PAGE_SIZES = (size for key, size of glados.Settings.DEFAULT_CAROUSEL_SIZES)
       @currentPageSize = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-      console.log 'CURRENT PAGE SIZE: ', @currentPageSize
 
       f = (newPageSize) ->
         @currentPageSize = newPageSize
@@ -23,15 +22,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @isComplicated = isDefaultZoom and mustComplicate
 
       @clearContentContainer()
-      @fillTemplates()
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
+      if @collection.getMeta('total_pages') == 1
+        @hidePaginators()
       @activateSelectors()
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+      customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
+      glados.views.PaginatedViews.PaginatedViewBase.sendDataToTemplate.call(@, $specificElemContainer, visibleColumns,
+        customTemplateID)
     # ------------------------------------------------------------------------------------------------------------------
     # Columns initalisation
     # ------------------------------------------------------------------------------------------------------------------

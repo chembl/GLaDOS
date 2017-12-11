@@ -45,8 +45,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @hasCustomElementView()
         @cleanUpCustomItemViewsContainer()
 
-      @fillTemplates()
-
       @fillSelectAllContainer() unless @disableItemsSelection
 
       if @isCardsZoomEnabled()

@@ -1,0 +1,154 @@
+{
+  "compound_structural_alerts": [
+    {
+      "alert": {
+        "alert_id": 32,
+        "alert_name": "I1 Aliphatic methylene chains 7 or more long",
+        "alert_set": {
+          "priority": 8,
+          "set_name": "Glaxo"
+        },
+        "smarts": "[CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0]"
+      },
+      "cpd_str_alert_id": 1631080,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 63,
+        "alert_name": "Aliphatic long chain",
+        "alert_set": {
+          "priority": 4,
+          "set_name": "Dundee"
+        },
+        "smarts": "[R0;D2][R0;D2][R0;D2][R0;D2]"
+      },
+      "cpd_str_alert_id": 1631081,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 75,
+        "alert_name": "catechol",
+        "alert_set": {
+          "priority": 4,
+          "set_name": "Dundee"
+        },
+        "smarts": "c1c([OH])c([OH,NH2,NH])ccc1"
+      },
+      "cpd_str_alert_id": 1631082,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 234,
+        "alert_name": "gte_10_carbon_sb_chain",
+        "alert_set": {
+          "priority": 7,
+          "set_name": "BMS"
+        },
+        "smarts": "[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]-[C;!R]"
+      },
+      "cpd_str_alert_id": 1631083,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 245,
+        "alert_name": "gte_8_CF2_or_CH2",
+        "alert_set": {
+          "priority": 7,
+          "set_name": "BMS"
+        },
+        "smarts": "[CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0][CH2,$(CF2);R0]"
+      },
+      "cpd_str_alert_id": 1631084,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 360,
+        "alert_name": "catechol_A(92)",
+        "alert_set": {
+          "priority": 6,
+          "set_name": "PAINS"
+        },
+        "smarts": "c:1:c:c(:c(:c:c:1)-[#8;H1])-[#8;H1]"
+      },
+      "cpd_str_alert_id": 1631085,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 1039,
+        "alert_name": "long chain hydrocarbon",
+        "alert_set": {
+          "priority": 3,
+          "set_name": "MLSMR"
+        },
+        "smarts": "[CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0][CD2;R0]"
+      },
+      "cpd_str_alert_id": 1631086,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 1040,
+        "alert_name": "Long aliphatic chain",
+        "alert_set": {
+          "priority": 3,
+          "set_name": "MLSMR"
+        },
+        "smarts": "[N,C,S,O]-&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]&!@[N,C,S,O]"
+      },
+      "cpd_str_alert_id": 1631087,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 1041,
+        "alert_name": "Unbranched chain",
+        "alert_set": {
+          "priority": 3,
+          "set_name": "MLSMR"
+        },
+        "smarts": "[$([A&D2]),$([A&D1])]!@[A&D2]!@[A&D2]!@[A&D2]!@[A&D2]!@[$([A&D2]),$([A&D1])]"
+      },
+      "cpd_str_alert_id": 1631088,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 1136,
+        "alert_name": "Filter33_c10_alkyl",
+        "alert_set": {
+          "priority": 1,
+          "set_name": "Inpharmatica"
+        },
+        "smarts": "[CH3][CH2][CH2][CH2][CH2][CH2][CH2][CH2][CH2][CH2]"
+      },
+      "cpd_str_alert_id": 1631089,
+      "molecule_chembl_id": "CHEMBL457419"
+    },
+    {
+      "alert": {
+        "alert_id": 1231,
+        "alert_name": "long aliphatic chain, 6+",
+        "alert_set": {
+          "priority": 2,
+          "set_name": "LINT"
+        },
+        "smarts": "[CH2][CH2][CH2]-!@[CH2][CH2][CH2]"
+      },
+      "cpd_str_alert_id": 1631090,
+      "molecule_chembl_id": "CHEMBL457419"
+    }
+  ],
+  "page_meta": {
+    "limit": 1000,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total_count": 11
+  }
+}

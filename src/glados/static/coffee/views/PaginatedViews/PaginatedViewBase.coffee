@@ -15,6 +15,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderAtInit = arguments[0].render_at_init
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
+      @viewID = (new Date()).getTime().toString()
+
       @initColumnsHandler()
 
       if @isTable()
@@ -51,7 +53,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     bindCollectionEvents: ->
 
-      console.log 'aa binding events', @customRenderEvents
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
 
       if @customRenderEvents?
@@ -60,7 +61,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @isInfinite()
         @collection.on 'sync do-repaint', @.render, @
       else
-        @collection.on 'reset sort', @render, @
+        @collection.on 'reset sort do-repaint', @render, @
         @collection.on 'request', @showPreloaderHideOthers, @
 
       @collection.on 'error', @handleError, @
@@ -113,6 +114,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
 
+    stampViewIDOnEventsTriggerers: ->
+      eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',
+        '.btn-sort-direction', '.BCK-toggle-select-all', '.BCK-select-one-item', '.BCK-zoom-in', '.BCK-zoom-out',
+        '.BCK-reset-zoom', '.headers-table']
+      for triggerClass in eventTriggererSelectors
+        $elem = $(@el).find(triggerClass)
+        @stampViewIDOnElem($elem)
+
+    # this allows to have a paginated view inside another view
+    stampViewIDOnElem: ($elem) -> $elem.attr('data-view-id', @viewID)
+    eventForThisView: ($elem) ->
+      $elem.attr('data-view-id') == @viewID
     # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
@@ -144,6 +157,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderViewState()
 
     renderViewState: ->
+      @stampViewIDOnEventsTriggerers()
+      @fillTemplates()
 
     sleepView: ->
     wakeUpView: ->
@@ -187,12 +202,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getVisibleColumns: -> @columnsHandler.get('visible_columns')
     getAllColumns: -> @columnsHandler.get('all_columns')
 
-    sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
+    sendDataToTemplate: ($specificElemContainer, visibleColumns, customItemTemplate) ->
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
+      # this second way should be the correct way to do it, not changing it for now so I don't have refactor many things
+      if customItemTemplate?
+        templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
@@ -245,54 +263,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $appendTo.append(placeholderContent)
         total_cards++
-
-    fillPaginators: ->
-
-      $elem = $(@el).find('.BCK-paginator-container')
-      if $elem.length == 0
-        return
-      template = $('#' + $elem.attr('data-hb-template'))
-
-      current_page = @collection.getMeta('current_page')
-      records_in_page = @collection.getMeta('records_in_page')
-      page_size = @collection.getMeta('page_size')
-      num_pages = @collection.getMeta('total_pages')
-
-      first_record = (current_page - 1) * page_size
-      last_page = first_record + records_in_page
-
-      # this sets the window for showing the pages
-      show_previous_ellipsis = false
-      show_next_ellipsis = false
-      if num_pages <= 5
-        first_page_to_show = 1
-        last_page_to_show = num_pages
-      else if current_page + 2 <= 5
-        first_page_to_show = 1
-        last_page_to_show = 5
-        show_next_ellipsis = true
-      else if current_page + 2 < num_pages
-        first_page_to_show = current_page - 2
-        last_page_to_show = current_page + 2
-        show_previous_ellipsis = true
-        show_next_ellipsis = true
-      else
-        first_page_to_show = num_pages - 4
-        last_page_to_show = num_pages
-        show_previous_ellipsis = true
-
-      pages = (num for num in [first_page_to_show..last_page_to_show])
-
-      $elem.html Handlebars.compile(template.html())
-        pages: pages
-        records_showing: glados.Utils.getFormattedNumber(first_record+1) + '-' + \
-          glados.Utils.getFormattedNumber(last_page)
-        total_records: glados.Utils.getFormattedNumber(@collection.getMeta('total_records'))
-        show_next_ellipsis: show_next_ellipsis
-        show_previous_ellipsis: show_previous_ellipsis
-
-      @activateCurrentPageButton()
-      @enableDisableNextLastButtons()
 
     getBaseSelectAllCheckBoxID: ->
 
@@ -366,8 +336,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sortCollection: (event) ->
 
+      $target = $(event.currentTarget)
+      console.log '$target: ', $target
+      if not @eventForThisView($target)
+        return
+
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
-      sortIcon = $(event.currentTarget).find('.sort-icon')
+      sortIcon = $target.find('.sort-icon')
       comparator = sortIcon.attr('data-comparator')
 
       @triggerCollectionSort(comparator)

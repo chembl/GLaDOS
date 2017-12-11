@@ -124,7 +124,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             base_url: collectionSettings.BASE_URL
             default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
             page_size: collectionSettings.DEFAULT_PAGE_SIZE
-            available_page_sizes: collectionSettings.AVAILABLE_PAGE_SIZES
             current_page: 1
             to_show: []
             id_column: collectionSettings.ID_COLUMN
@@ -412,6 +411,67 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         getDocuments.fail ->
           console.log 'ERROR!'
+
+      return list
+
+    getNewStructuralAlertList: ->
+
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_LIST
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+
+      list = @getNewClientSideCollectionFor config
+      return list
+
+    getNewStructuralAlertsSetsList: ->
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.STRUCTURAL_ALERTS_SETS_LIST
+      list = @getNewClientSideCollectionFor config
+
+      list.fetch = ->
+
+        thisCollection = @
+
+        getStructAlerts = $.getJSON(@url, (data) ->
+          structAlertsSets = thisCollection.parse(data)
+          # here everything is ready
+          thisCollection.setMeta('data_loaded', true)
+          thisCollection.reset(structAlertsSets)
+        )
+
+
+        getStructAlerts.fail( ->
+          console.log('error')
+          thisCollection.trigger('error')
+        )
+
+      list.parse = (data) ->
+
+        structuralAlertsSets = []
+        structualAlertsToPosition = {}
+        for structAlert in data.compound_structural_alerts
+
+          setName = structAlert.alert.alert_set.set_name
+          setPosition = structualAlertsToPosition[setName]
+
+          newAlert =
+            cpd_str_alert_id: structAlert.cpd_str_alert_id
+            molecule_chembl_id: structAlert.molecule_chembl_id
+            alert_name: structAlert.alert.alert_name
+            smarts: structAlert.alert.smarts
+
+          if not setPosition?
+            newAlertSet =
+              set_name: setName
+              alerts_list: [newAlert]
+              priority: structAlert.alert.alert_set.priority
+            structuralAlertsSets.push newAlertSet
+            structualAlertsToPosition[setName] = structuralAlertsSets.length - 1
+          else
+            structuralAlertsSets[setPosition].alerts_list.push newAlert
+
+        return _.sortBy(structuralAlertsSets, (s) -> return -s.priority)
+
+      list.initURL = (chemblID) ->
+        @url = "#{glados.Settings.WS_BASE_URL}compound_structural_alert.json?molecule_chembl_id=#{chemblID}&limit=10000"
 
       return list
 

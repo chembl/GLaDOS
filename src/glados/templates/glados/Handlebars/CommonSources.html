@@ -108,6 +108,7 @@
             <div>
               <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
                  data-function_constant_parameters="{{this.function_constant_parameters}}"
+                 data-function_object_parameter="{{this.function_object_parameter}}"
                  data-function-key="{{this.function_key}}"
               >
                 <i class="fa fa-bar-chart" aria-hidden="true"></i>
@@ -148,6 +149,7 @@
 
            <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
               {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};'{{/if}}
+              data-view-id="{{this.view_id}}"
            >
             <thead>
              <tr>
@@ -566,6 +568,35 @@
             </p>
           </small>
           {{/if}}
+          {{/each}}
+
+        </div>
+      </div>
+
+    </div>
+
+</script>
+
+<script id="Handlebars-Common-Paginated-Card-CarouselStructuralAlerts" type="text/x-handlebars-template">
+
+    <div class="col s12 m6 l4">
+      <div class="card grey lighten-5">
+
+        {{#if img_url}}
+          <div class="white card-image">
+            <img src="{{img_url}}" height="200px">
+          </div>
+        {{/if}}
+        <div class="card-content">
+
+          {{#each columns}}
+
+            {{#if this.img_url}}
+            {{else}}
+              <p >
+                {{this.value}}
+              </p>
+            {{/if}}
           {{/each}}
 
         </div>
@@ -1217,6 +1248,12 @@
 
 There are no UniChem cross references for this compound.
 
+</script>
+
+<script id="Handlebars-Common-DefaultCarouselContent" type="text/x-handlebars-template">
+{% endverbatim %}
+{% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
+{% verbatim %}
 </script>
 
 {% endverbatim %}

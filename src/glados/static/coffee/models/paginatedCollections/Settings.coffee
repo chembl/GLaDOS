@@ -517,6 +517,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+      STRUCTURAL_ALERTS_LIST:
+        MODEL: glados.models.Compound.StructuralAlert
+        COLUMNS: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Carousel:
+            Default: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-CarouselStructuralAlerts'
+        ID_COLUMN: glados.models.Compound.StructuralAlert.ID_COLUMN
+      STRUCTURAL_ALERTS_SETS_LIST:
+        MODEL: glados.models.Compound.StructuralAlertSet
+        DEFAULT_PAGE_SIZE: 3
+        ID_COLUMN: glados.models.Compound.StructuralAlertSet.ID_COLUMN
+        COLUMNS: glados.models.Compound.StructuralAlertSet.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.StructuralAlertSet.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            custom_page_sizes: _.union([3], glados.Settings.TABLE_PAGE_SIZES)
       # used for targets
       TARGET_RELATIONS_LIST:
         MODEL: TargetRelation

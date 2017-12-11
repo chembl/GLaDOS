@@ -174,8 +174,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initStructuralAlerts = ->
 
-    @registerSection('StructuralAlerts', 'Structural Alerts')
-    @showSection('StructuralAlerts')
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    structuralAlertsSets = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertsSetsList()
+    structuralAlertsSets.initURL(chemblID)
+
+    viewConfig =
+      embed_section_name: 'structural_alerts'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: structuralAlertsSets
+      el: $('#CStructuralAlertsCard')
+      resource_type: gettext('glados_entities_compound_name')
+      section_id: 'StructuralAlerts'
+      section_label: 'Structural Alerts'
+      config: viewConfig
+      report_card_app: @
+
+    structuralAlertsSets.fetch()
 
   @initAlternateForms = ->
 
@@ -479,6 +495,26 @@ class CompoundReportCardApp extends glados.ReportCardApp
       CompoundReportCardApp.initMiniTargetsHistogram($containerElem, compoundChemblID)
     else if histogramType == 'targets_by_class'
       CompoundReportCardApp.initMiniTargetsByClassHistogram($containerElem, compoundChemblID)
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Cells Functions
+  # --------------------------------------------------------------------------------------------------------------------
+  @initStructuralAlertsCarouselFromFunctionLink = ->
+
+    $clickedLink = $(@)
+    [paramsList, constantParamsList, $containerElem, objectParam] = \
+    glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCell($clickedLink, isDataVis=false)
+
+
+    structAlerts = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertList()
+
+    $carouselContainer = $("<div>#{glados.Utils.getContentFromTemplate('Handlebars-Common-DefaultCarouselContent')}</div>")
+    $containerElem.append($carouselContainer)
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(structAlerts, $containerElem)
+
+    parsedAlerts = JSON.parse(objectParam)
+    structAlerts.setMeta('data_loaded', true)
+    structAlerts.reset(_.map(parsedAlerts, glados.models.Compound.StructuralAlert.prototype.parse))
 
   @initDrugIconGridFromFunctionLink = ->
 

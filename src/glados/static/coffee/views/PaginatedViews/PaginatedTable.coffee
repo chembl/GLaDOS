@@ -12,13 +12,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.on 'error', @handleError, @
 
     # ------------------------------------------------------------------------------------------------------------------
+    # pageSizes
+    # ------------------------------------------------------------------------------------------------------------------
+    initAvailablePageSizes: ->
+      customDefaultPageSizes = @collection.getMeta('columns_description').Table.custom_page_sizes
+      if customDefaultPageSizes?
+        @AVAILABLE_PAGE_SIZES = customDefaultPageSizes
+      glados.views.PaginatedViews.PaginationFunctions.initAvailablePageSizes.call(@)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # rendering
     # ------------------------------------------------------------------------------------------------------------------
     renderViewState: ->
 
       @clearContentContainer()
-      @fillTemplates()
-
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
       @fillPageSizeSelectors()
@@ -114,6 +121,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $elem = $(@el).find('.BCK-items-container')
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
+      # this is a workaround to the problem
+      for col in allColumns
+        if col.table_cell_width_medium? and GlobalVariables.CURRENT_SCREEN_TYPE == glados.Settings.MEDIUM_SCREEN
+          col.table_cell_width = col.table_cell_width_medium
 
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i]), allColumns
@@ -137,7 +148,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         header_row_cont = Handlebars.compile( header_template.html() )
           base_check_box_id: @getBaseSelectAllCheckBoxID()
           all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
-          columns: visibleColumns
+          columns: (_.extend(col, {view_id: @viewID}) for col in visibleColumns)
           selection_disabled: @disableItemsSelection
 
         $specificElemContainer.append($(header_row_cont))
@@ -286,6 +297,7 @@ glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCe
   $clickedLink = $clickedElem
   paramsList = $clickedLink.attr('data-function-paramaters').split(',')
   constantParamsList = $clickedLink.attr('data-function_constant_parameters').split(',')
+  objectParameter = $clickedElem.attr('data-function_object_parameter')
   $containerElem = $clickedLink.parent()
 
   if isDataVis
@@ -293,5 +305,5 @@ glados.views.PaginatedViews.PaginatedTable.prepareAndGetParamsFromFunctionLinkCe
     $containerElem.addClass('vis-container')
     glados.Utils.fillContentForElement($containerElem, {}, 'Handlebars-Common-MiniHistogramContainer')
 
-  return [paramsList, constantParamsList, $containerElem]
+  return [paramsList, constantParamsList, $containerElem, objectParameter]
 
