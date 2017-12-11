@@ -20,6 +20,7 @@ glados.models.Compound.StructuralAlertSet.COLUMNS =
     execute_on_render: true
     hide_value: true
     remove_link_after_click: true
+    table_cell_width: '650px'
 
 
 glados.models.Compound.StructuralAlertSet.ID_COLUMN = glados.models.Compound.StructuralAlertSet.COLUMNS.SET_NAME
