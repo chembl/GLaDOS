@@ -70,8 +70,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     changePageSize: (event) ->
 
-      @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
       selector = $(event.currentTarget)
+      if not @eventForThisView(selector)
+        return
+
+      @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
+
       newPageSize = selector.val()
       # this is an issue with materialise, it fires 2 times the event, one of which has an empty value
       if newPageSize == ''

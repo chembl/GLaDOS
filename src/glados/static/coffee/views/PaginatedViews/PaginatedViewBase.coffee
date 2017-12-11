@@ -116,11 +116,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-reset-zoom': 'resetZoom'
 
     stampViewIDOnEventsTriggerers: ->
-      eventTriggererClasses = ['page-selector', 'change-page-size', 'sort', 'select-search', 'select-sort',
-        'btn-sort-direction', 'BCK-toggle-select-all', 'BCK-select-one-item', 'BCK-zoom-in', 'BCK-zoom-out',
-        'BCK-reset-zoom']
-      for triggerClass in eventTriggererClasses
-        $elem = $(@el).find(".#{triggerClass}")
+      eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',
+        '.btn-sort-direction', '.BCK-toggle-select-all', '.BCK-select-one-item', '.BCK-zoom-in', '.BCK-zoom-out',
+        '.BCK-reset-zoom', '.headers-table']
+      for triggerClass in eventTriggererSelectors
+        $elem = $(@el).find(triggerClass)
+        console.log 'stamping: ', $elem
+
         @stampViewIDOnElem($elem)
 
     # this allows to have a paginated view inside another view
@@ -389,8 +391,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sortCollection: (event) ->
 
+      $target = $(event.currentTarget)
+      console.log '$target: ', $target
+      if not @eventForThisView($target)
+        return
+
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
-      sortIcon = $(event.currentTarget).find('.sort-icon')
+      sortIcon = $target.find('.sort-icon')
       comparator = sortIcon.attr('data-comparator')
 
       @triggerCollectionSort(comparator)

@@ -144,7 +144,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         header_row_cont = Handlebars.compile( header_template.html() )
           base_check_box_id: @getBaseSelectAllCheckBoxID()
           all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
-          columns: visibleColumns
+          columns: (_.extend(col, {view_id: @viewID}) for col in visibleColumns)
           selection_disabled: @disableItemsSelection
 
         $specificElemContainer.append($(header_row_cont))
