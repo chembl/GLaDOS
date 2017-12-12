@@ -42,22 +42,22 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         {
           property:'molecule_chembl_id'
           intervals: 20
-          report_card_model: Compound
+          report_card_entity: Compound
         },
         {
           property:'target_chembl_id'
           intervals: 20
-          report_card_model: Target
+          report_card_entity: Target
         },
         {
           property:'assay_chembl_id'
           intervals: 20
-          report_card_model: Assay
+          report_card_entity: Assay
         },
         {
           property:'document_chembl_id'
           intervals: 20
-          report_card_model: Document
+          report_card_entity: Document
         },
         'standard_value',
         'standard_units',

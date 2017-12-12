@@ -36,14 +36,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       getFacetData = (prop_data)->
         sort = null
         intervals = null
-        report_card_model = null
+        report_card_entity = null
         if _.isString(prop_data)
           prop_name = prop_data
         else if _.isObject(prop_data)
           prop_name = prop_data.property
           sort = prop_data.sort
           intervals = prop_data.intervals
-          report_card_model = prop_data.report_card_model
+          report_card_entity = prop_data.report_card_entity
         if prop_name not in _.keys(gs_data)
           throw 'ERROR: '+prop_name+' is not a property of '+es_index+'!'
         if gs_data[prop_name].aggregatable
@@ -53,7 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             show: false
             position: cur_pos++
             faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-              es_index, prop_name, sort, intervals, report_card_model
+              es_index, prop_name, sort, intervals, report_card_entity
             )
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
@@ -85,7 +85,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           facets[prop_name].show = false
       return facets
 
-    @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null, report_card_model=null)->
+    @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null, report_card_entity=null)->
       es_index_schema =  glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       if not es_index_schema
         throw "ERROR! unknown elastic index "+es_index
@@ -104,7 +104,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           null,
           sort,
           intervals,
-          report_card_model
+          report_card_entity
         )
       else if property_type.type == Number
         return new FacetingHandler(
@@ -116,7 +116,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           property_type.year,
           sort,
           intervals,
-          report_card_model
+          report_card_entity
         )
       else
         throw "ERROR! "+es_property+" for elastic index "+es_index+" with type "+property_type.type\
@@ -127,7 +127,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # ------------------------------------------------------------------------------------------------------------------
 
     constructor: (@es_index, @es_property_name, @js_type, @faceting_type, @property_type, @isYear, @sort=null,
-      @intervals=null, @report_card_model=null)->
+      @intervals=null, @report_card_entity=null)->
       @faceting_keys_inorder = null
       @faceting_data = null
       @intervalsLimits = null
@@ -137,7 +137,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # ------------------------------------------------------------------------------------------------------------------
 
     hasReportCardModel: ()->
-      return @report_card_model?
+      return @report_card_entity?
 
     # Interval aggregations require 2 calls to find out first the min/max/dev_std range
     # and then create an histogram of n columns
