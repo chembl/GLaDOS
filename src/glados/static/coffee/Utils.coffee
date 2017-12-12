@@ -1,5 +1,14 @@
 glados.useNameSpace 'glados',
   Utils:
+    getEntityFromName: (entityName) ->
+      switch
+        when entityName == Compound.prototype.entityName then Compound
+        when entityName == Target.prototype.entityName then Target
+        when entityName == Assay.prototype.entityName then Assay
+        when entityName == Document.prototype.entityName then Document
+        when entityName == CellLine.prototype.entityName then CellLine
+        when entityName == glados.models.Tissue.prototype.entityName then glados.models.Tissue
+
     # Will round a number to the closest 10*, 20* or 50*
     # Check the next function to get some examples about how this function works
     roundNumber: (n, isSmallFloat=false, downwards=false)->

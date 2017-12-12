@@ -1,5 +1,6 @@
 Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
+  entityName: 'Document'
   idAttribute:'document_chembl_id'
 
   initialize: ->

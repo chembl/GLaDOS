@@ -1,5 +1,6 @@
 CellLine = Backbone.Model.extend
 
+  entityName: 'Cell Line'
   initialize: ->
     @url = glados.Settings.WS_BASE_URL + 'cell_line/' + @get('cell_chembl_id') + '.json'
 

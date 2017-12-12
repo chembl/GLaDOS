@@ -1,5 +1,6 @@
 Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
+  entityName: 'Target'
   idAttribute: 'target_chembl_id'
   defaults:
     fetch_from_elastic: true

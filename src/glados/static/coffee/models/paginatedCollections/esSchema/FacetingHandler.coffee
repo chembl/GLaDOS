@@ -136,8 +136,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     # Query and Parse Facets to/from Elasticsearch
     # ------------------------------------------------------------------------------------------------------------------
 
-    hasReportCardModel: ()->
-      return @report_card_entity?
+    hasReportCardModel: -> @report_card_entity?
 
     # Interval aggregations require 2 calls to find out first the min/max/dev_std range
     # and then create an histogram of n columns

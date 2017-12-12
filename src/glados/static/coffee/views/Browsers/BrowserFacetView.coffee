@@ -385,6 +385,54 @@ glados.useNameSpace 'glados.views.Browsers',
 
       bucketGroupsEnter.each(->thisView.addEllipsisIfNecessary(d3.select(@)))
 
+      if currentFacetGroup.faceting_handler.hasReportCardModel()
+        bucketGroupsEnter.each((d) -> thisView.addMiniReportCardForHover(d3.select(@), d,
+          currentFacetGroup.faceting_handler.report_card_entity, thisView))
+
+    addMiniReportCardForHover: (bucketG, d, reportCardEntity, thisView) ->
+
+      chemblID = d.key
+      # ignore keys like 'Other categories'
+      if not chemblID.startsWith('CHEMBL')
+        return
+
+      frontBar = bucketG.select('.front-bar')
+      frontBar.attr('data-entity-name', reportCardEntity.prototype.entityName)
+      $frontBar = $(frontBar.node())
+      $frontBar.mouseenter(thisView.generateMiniRepCardTooltipOnHover)
+
+    generateMiniRepCardTooltipOnHover: (event) ->
+
+      $frontBar = $(event.currentTarget)
+      chemblID = $frontBar.attr('data-facet-key')
+      entityName = $frontBar.attr('data-entity-name')
+
+      if $frontBar.attr('data-qtip-configured') != 'yes'
+
+        miniRepCardID = "BCK-MiniReportCard-Filter-#{chemblID}"
+
+        qtipConfig =
+          content:
+            text: "<div id='#{miniRepCardID}'></div>"
+          show:
+            solo: true
+          hide:
+            fixed: true,
+            delay: glados.Settings.TOOLTIPS.DEFAULT_MERCY_TIME
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+          position:
+            my: 'center left'
+            at: 'center right'
+
+        $frontBar.qtip qtipConfig
+        $frontBar.qtip('api').show()
+        $newMiniReportCardContainer = $('#' + miniRepCardID)
+        Entity = glados.Utils.getEntityFromName(entityName)
+        console.log 'Entity: ', Entity
+        ReportCardApp.initMiniReportCard(Entity, $newMiniReportCardContainer, chemblID)
+        $frontBar.attr('data-qtip-configured', 'yes')
+
     addEllipsisIfNecessary: (bucketG) ->
 
       keyText = bucketG.select('.key-text')
@@ -420,7 +468,7 @@ glados.useNameSpace 'glados.views.Browsers',
             classes:'matrix-qtip qtip-light qtip-shadow'
 
         $frontBar.qtip qtipConfig
-        $frontBar.attr('data-qtip-configured', 'yes' )
+        $frontBar.attr('data-qtip-configured', 'yes')
 
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection

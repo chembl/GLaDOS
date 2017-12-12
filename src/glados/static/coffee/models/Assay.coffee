@@ -1,5 +1,6 @@
 Assay = Backbone.Model.extend
 
+  entityName: 'Assay'
   idAttribute: 'assay_chembl_id'
 
   initialize: ->
