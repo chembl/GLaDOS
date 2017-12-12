@@ -4,6 +4,12 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute:'document_chembl_id'
 
   initialize: ->
+
+    id = @get('id')
+    id ?= @get('document_chembl_id')
+    @set('id', id)
+    @set('document_chembl_id', id)
+
     @url = glados.Settings.WS_BASE_URL + 'document/' + @get('document_chembl_id') + '.json'
 
   parse: (data) ->
@@ -145,6 +151,12 @@ Document.COLUMNS_SETTINGS = {
 
 Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+
+Document.MINI_REPORT_CARD =
+  LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
+  TEMPLATE: 'Handlebars-Common-MiniReportCard'
+  COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+
 
 Document.getDocumentsListURL = (filter) ->
 

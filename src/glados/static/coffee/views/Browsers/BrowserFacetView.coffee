@@ -422,8 +422,8 @@ glados.useNameSpace 'glados.views.Browsers',
           style:
             classes:'matrix-qtip qtip-light qtip-shadow'
           position:
-            my: 'center left'
-            at: 'center right'
+            my: 'top left'
+            at: 'bottom right'
 
         $frontBar.qtip qtipConfig
         $frontBar.qtip('api').show()
