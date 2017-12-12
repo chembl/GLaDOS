@@ -398,28 +398,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compoundMetabolism.fetch()
 
-  # you can provide chembld iD or a model already created
-  @initMiniCompoundReportCard = ($containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
-  fetchModel=true, customColumns)->
-
-    if model?
-      compound = model
-    else
-      compound = new Compound({molecule_chembl_id: chemblID})
-
-    view = new glados.views.MiniReportCardView
-      el: $containerElem
-      model: compound
-      entity: Compound
-      custom_template: customTemplate
-      additional_params: additionalTemplateParams
-      custom_columns: customColumns
-
-    if not fetchModel
-      view.render()
-    else
-      compound.fetch()
-
   # -------------------------------------------------------------
   # Function Cells
   # -------------------------------------------------------------

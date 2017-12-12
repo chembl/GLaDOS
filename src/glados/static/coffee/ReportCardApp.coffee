@@ -23,7 +23,7 @@ glados.useNameSpace 'glados',
       if model?
         model = model
       else
-        model = new Entity({molecule_chembl_id: chemblID})
+        model = new Entity({id: chemblID})
 
       view = new glados.views.MiniReportCardView
         el: $containerElem

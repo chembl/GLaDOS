@@ -1164,9 +1164,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
       if sourceEntity == 'Target'
-        TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
+        ReportCardApp.initMiniReportCard(Entity=Target, $newMiniReportCardContainer, chemblID)
       else
-        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+        ReportCardApp.initMiniReportCard(Entity=Compound, $newMiniReportCardContainer, chemblID)
 
 
   destroyAllTooltipsIfNecessary: (event) ->
