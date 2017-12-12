@@ -39,12 +39,30 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       ],
       # Default Hidden
       [
+        {
+          property:'molecule_chembl_id'
+          intervals: 20
+          report_card_model: Compound
+        },
+        {
+          property:'target_chembl_id'
+          intervals: 20
+          report_card_model: Target
+        },
+        {
+          property:'assay_chembl_id'
+          intervals: 20
+          report_card_model: Assay
+        },
+        {
+          property:'document_chembl_id'
+          intervals: 20
+          report_card_model: Document
+        },
         'standard_value',
         'standard_units',
         'standard_relation',
-        'assay_chembl_id',
         '_metadata.assay_data.type_label',
-        'document_chembl_id',
         'document_journal',
         'document_year',
         'ligand_efficiency.bei',
@@ -53,7 +71,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'ligand_efficiency.sei',
         'molecule_chembl_id',
         'potential_duplicate',
-        'target_chembl_id',
         '_metadata.activity_generated.short_data_validity_comment',
         '_metadata.protein_classification.l1'
       ],
