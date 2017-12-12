@@ -3455,7 +3455,9 @@ $facets-width-large: 21%;
 
 .mini-report-card{
   .card-content{
-    width: 60%
+    &.has-img{
+      width: 60%
+    }
   }
 }
 

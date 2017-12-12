@@ -429,7 +429,6 @@ glados.useNameSpace 'glados.views.Browsers',
         $frontBar.qtip('api').show()
         $newMiniReportCardContainer = $('#' + miniRepCardID)
         Entity = glados.Utils.getEntityFromName(entityName)
-        console.log 'Entity: ', Entity
         ReportCardApp.initMiniReportCard(Entity, $newMiniReportCardContainer, chemblID)
         $frontBar.attr('data-qtip-configured', 'yes')
 
