@@ -281,6 +281,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return data.molecules
 
       return list
+    getNewDrugIndicationsList: ->
+
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_INDICATIONS_LIST
+      list = @getNewClientSideCollectionFor config
+
+      list.initURL = (chemblID) ->
+        console.log 'init url'
+
+      return list
 
     getNewSimilaritySearchResultsList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
