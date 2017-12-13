@@ -3460,6 +3460,17 @@ $facets-width-large: 21%;
   }
 }
 
+.row{
+  &.row-hidden{
+    margin-bottom: 0px;
+  }
+}
+
+.card-content{
+  .main-container-row{
+    margin-bottom: 0px;
+  }
+}
 .mini-report-card{
   .card-content{
     &.has-img{

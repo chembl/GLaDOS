@@ -28,6 +28,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @clearContentContainer()
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
+      if @collection.getMeta('total_pages') == 1
+        @hidePaginators()
+        @hideFooter()
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
@@ -200,9 +203,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
           if executeOnRender
             $currentLink.click()
-
-
-
 
           $currentLink.attr('data-already-function-bound', 'yes')
 
