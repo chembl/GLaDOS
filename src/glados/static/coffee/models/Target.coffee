@@ -1,5 +1,6 @@
 Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
+  entityName: 'Target'
   idAttribute: 'target_chembl_id'
   defaults:
     fetch_from_elastic: true
@@ -9,7 +10,11 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   initURL: ->
 
-    id = @get('target_chembl_id')
+    id = @get('id')
+    id ?= @get('target_chembl_id')
+    @set('id', id)
+    @set('target_chembl_id', id)
+
     if @get('fetch_from_elastic')
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_target/target/' + id
     else

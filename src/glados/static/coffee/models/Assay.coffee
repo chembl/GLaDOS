@@ -1,8 +1,15 @@
 Assay = Backbone.Model.extend
 
+  entityName: 'Assay'
   idAttribute: 'assay_chembl_id'
 
   initialize: ->
+
+    id = @get('id')
+    id ?= @get('assay_chembl_id')
+    @set('id', id)
+    @set('assay_chembl_id', id)
+
     @url = glados.Settings.WS_BASE_URL + 'assay/' + @get('assay_chembl_id') + '.json'
 
   parse: (data) ->
@@ -131,3 +138,8 @@ Assay.COLUMNS_SETTINGS = {
 
 Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+
+Assay.MINI_REPORT_CARD =
+  LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
+  TEMPLATE: 'Handlebars-Common-MiniReportCard'
+  COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
