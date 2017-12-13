@@ -282,7 +282,7 @@ glados.useNameSpace 'glados.models.Activity',
 
       if matrix.link_to_all_columns?
         return matrix.link_to_all_columns
-        
+
       allColumns = matrix.columns
       aggregations = @get('aggregations')
       allColumnsIDS = _.pluck(allColumns, 'id')
