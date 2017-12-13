@@ -811,6 +811,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .text(@NUM_COLUMNS + ' ' + @config.cols_entity_name)
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
+      .on('click', -> window.open(thisView.model.getLinkToAllColumns()))
 
     corner1G.append('text')
       .text(@NUM_ROWS + ' ' + @config.rows_entity_name)

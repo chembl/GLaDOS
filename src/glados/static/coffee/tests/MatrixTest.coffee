@@ -182,6 +182,25 @@ describe "Compounds vs Target Matrix", ->
         expect(ctm.getColHeaderLink(colKey)).toBe(colHeaderURLMustBe)
         expect(colsGot[colKey].header_url).toBe(colHeaderURLMustBe)
 
+  testGeneratesLinkToAllColumns = (ctm, testAggList, testDataToParse) ->
+
+    ctm.set(ctm.parse testDataToParse)
+    matrix = ctm.get('matrix')
+
+    rowsPropName = testAggList[0]
+    colsPropName = testAggList[1]
+    colsGot = matrix.columns_index
+
+    filter = "#{colsPropName}:(#{_.keys(colsGot).join(' OR ')})"
+
+    if rowsPropName == 'molecule_chembl_id'
+      allColsHeaderURLMustBe = Target.getTargetsListURL(filter)
+    else
+      allColsHeaderURLMustBe = Compound.getCompoundsListURL(filter)
+
+    expect(ctm.getLinkToAllColumns()).toBe(allColsHeaderURLMustBe)
+    expect(matrix.link_to_all_columns).toBe(allColsHeaderURLMustBe)
+
   testHitCount = (ctm, testAggList, testDataToParse) ->
 
     matrix = (ctm.parse testDataToParse).matrix
@@ -348,6 +367,7 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
       it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
       it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
+      it 'generates the link to all columns', -> testGeneratesLinkToAllColumns(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # From Targets
@@ -389,6 +409,7 @@ describe "Compounds vs Target Matrix", ->
       it 'calculates pchembl value max per row and column', -> testPchemblValue(ctm, testAggList, testDataToParse)
       it 'generates the footer links', -> testGeneratesFooterExternalLinks(ctm, testAggList, testDataToParse)
       it 'parses the header links', -> testParsesHeaderExternalLinks(ctm, testAggList, testDataToParse)
+      it 'generates the link to all columns', -> testGeneratesLinkToAllColumns(ctm, testAggList, testDataToParse)
 
   #---------------------------------------------------------------------------------------------------------------------
   # From a Query String
