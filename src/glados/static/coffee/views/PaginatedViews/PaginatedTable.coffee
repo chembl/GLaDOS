@@ -30,6 +30,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @fillPaginators()
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
+        @hideFooter()
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
