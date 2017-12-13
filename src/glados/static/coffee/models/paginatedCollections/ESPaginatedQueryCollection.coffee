@@ -199,6 +199,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             filter: []
       }
       @addSortingToQuery(es_query)
+      @addHighlightsToQuery(es_query)
 
       # Custom query String query
       customQueryString = @getMeta('custom_query_string')
@@ -244,6 +245,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       defaultColumns = @getMeta('columns')
       contextualColumns = @getMeta('contextual_properties')
       return _.union(defaultColumns, contextualColumns)
+
+    addHighlightsToQuery: (esQuery)->
+      esQuery.highlight = {
+        fields:
+          '*':
+            type: 'fvh'
+      }
 
     addSortingToQuery: (esQuery) ->
       sortList = []
