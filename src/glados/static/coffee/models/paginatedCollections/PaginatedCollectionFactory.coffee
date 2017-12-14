@@ -284,10 +284,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewDrugIndicationsList: ->
 
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_INDICATIONS_LIST
-      list = @getNewClientSideCollectionFor config
+      list = @getNewWSCollectionFor config
 
       list.initURL = (chemblID) ->
         console.log 'init url'
+        @baseUrl = "#{glados.Settings.WS_BASE_URL}drug_indication.json?molecule_chembl_id=#{chemblID}"
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
 
       return list
 

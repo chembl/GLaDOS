@@ -469,6 +469,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ADDITIONAL_COLUMNS:[]
       DRUG_INDICATIONS_LIST:
         MODEL: glados.models.Compound.DrugIndication
+        BASE_URL: 'base_url is set by initURL'
         COLUMNS: []
         COLUMNS_DESCRIPTION:
           Table:
