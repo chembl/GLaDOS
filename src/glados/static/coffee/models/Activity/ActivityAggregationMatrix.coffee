@@ -221,7 +221,6 @@ glados.useNameSpace 'glados.models.Activity',
       rowsIndex[rowID].header_url = url
       return url
 
-
     getRowFooterLink: (rowID) ->
 
       rowsIndex = @get('matrix').rows_index
@@ -277,6 +276,25 @@ glados.useNameSpace 'glados.models.Activity',
       colsIndex[colID].footer_url = url
       return url
 
+    getLinkToAllColumns: ->
+
+      matrix = @get('matrix')
+
+      if matrix.link_to_all_columns?
+        return matrix.link_to_all_columns
+
+      allColumns = matrix.columns
+      aggregations = @get('aggregations')
+      allColumnsIDS = _.pluck(allColumns, 'id')
+      filter = "#{aggregations[1]}:(#{allColumnsIDS.join(' OR ')})"
+
+      if aggregations[1] == 'target_chembl_id'
+        link = Target.getTargetsListURL(filter)
+      else
+        link = Compound.getCompoundsListURL(filter)
+
+      matrix.link_to_all_columns = link
+      return link
 
     createNewRowObj: (rowID, rowBucket, latestRowPos) ->
 

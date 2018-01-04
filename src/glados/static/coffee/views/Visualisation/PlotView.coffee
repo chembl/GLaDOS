@@ -262,7 +262,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       pointNumber = eventInfo.points[0].pointNumber
       clickedChemblID = eventInfo.points[0].data.text[pointNumber]
-      CompoundReportCardApp.initMiniCompoundReportCard($tooltip, clickedChemblID)
+      ReportCardApp.initMiniReportCard(Entity=Compound, $tooltip, clickedChemblID)
 
     )
 

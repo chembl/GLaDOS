@@ -257,7 +257,7 @@
 
 <script id="Handlebars-Common-MiniReportCard" type="text/x-handlebars-template">
 
-  <div class="card horizontal grey lighten-5 z-depth-0">
+  <div class="card horizontal grey lighten-5 z-depth-0 mini-report-card">
 
 
     {{#unless hide_img}}
@@ -267,7 +267,7 @@
         </div>
       {{/if}}
     {{/unless}}
-    <div class="card-content">
+    <div class="card-content {{#if img_url}}has-img{{/if}}">
 
       {{#each columns}}
 

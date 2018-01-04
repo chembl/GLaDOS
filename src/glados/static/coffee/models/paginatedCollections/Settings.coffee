@@ -467,6 +467,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
+      DRUG_INDICATIONS_LIST:
+        MODEL: glados.models.Compound.DrugIndication
+        BASE_URL: 'base_url is set by initURL'
+        COLUMNS: []
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: []
+        ID_COLUMN: undefined
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

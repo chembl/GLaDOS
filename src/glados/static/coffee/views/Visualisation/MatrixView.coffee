@@ -811,6 +811,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .text(@NUM_COLUMNS + ' ' + @config.cols_entity_name)
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
+      .on('click', -> window.open(thisView.model.getLinkToAllColumns()))
 
     corner1G.append('text')
       .text(@NUM_ROWS + ' ' + @config.rows_entity_name)
@@ -1164,9 +1165,9 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
       if sourceEntity == 'Target'
-        TargetReportCardApp.initMiniTargetReportCard($newMiniReportCardContainer, chemblID)
+        ReportCardApp.initMiniReportCard(Entity=Target, $newMiniReportCardContainer, chemblID)
       else
-        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, chemblID)
+        ReportCardApp.initMiniReportCard(Entity=Compound, $newMiniReportCardContainer, chemblID)
 
 
   destroyAllTooltipsIfNecessary: (event) ->

@@ -251,15 +251,6 @@ class TargetReportCardApp extends glados.ReportCardApp
     @registerSection('TargetCrossReferencesStructure', 'Structure Cross References')
     @showSection('TargetCrossReferencesStructure')
 
-  @initMiniTargetReportCard = ($containerElem, chemblID) ->
-
-    target = new Target({target_chembl_id: chemblID})
-    new glados.views.MiniReportCardView
-      el: $containerElem
-      model: target
-      entity: Target
-    target.fetch()
-
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
     bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(chemblID)

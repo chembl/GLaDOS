@@ -73,7 +73,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initTab: ($tabElement, tabID) ->
 
       if tabID == 'Details'
-        CompoundReportCardApp.initMiniCompoundReportCard($tabElement, undefined, @model,
+        ReportCardApp.initMiniReportCard(Entity=Compound, $tabElement, undefined, @model,
           'Handlebars-Common-CompoundDetails', undefined, fetchModel=false, customColumns=@customColumns)
 
       $tabElement.attr('data-initialised','yes')
@@ -123,7 +123,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $(window).scrollTop($(window).scrollTop() - 1)
 
         $newMiniReportCardContainer = $('#' + miniRepCardID)
-        CompoundReportCardApp.initMiniCompoundReportCard($newMiniReportCardContainer, undefined, compound, undefined,
+        ReportCardApp.initMiniReportCard(Entity=Compound, $newMiniReportCardContainer, undefined, compound, undefined,
           {hide_img:true}, fetchModel=false)
 
     # ------------------------------------------------------------------------------------------------------------------

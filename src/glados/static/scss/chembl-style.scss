@@ -2963,6 +2963,13 @@ span.badge-primary-color-no-float {
     font-weight: bold;
   }
 
+  .columns-text {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      fill: color("teal", "accent-4");
+    }
+  }
   .headers-text, .footers-text {
 
     text-decoration: underline;
@@ -3448,6 +3455,25 @@ $facets-width-large: 21%;
 
   .paginated-card{
     .card-stacked{
+      width: 60%
+    }
+  }
+}
+
+.row{
+  &.row-hidden{
+    margin-bottom: 0px;
+  }
+}
+
+.card-content{
+  .main-container-row{
+    margin-bottom: 0px;
+  }
+}
+.mini-report-card{
+  .card-content{
+    &.has-img{
       width: 60%
     }
   }
