@@ -17,6 +17,12 @@ glados.useNameSpace 'glados.models.ScrollSpy',
       sections[sectionName].state = glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW
       @trigger('change:sections')
 
+    hideSection: (sectionName) ->
+      console.log "hiding #{sectionName} section from scroll spy!"
+      sections = @get('sections')
+      sections[sectionName].state = glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE
+      @trigger('change:sections')
+
     resetSections: ->
       @set('sections', {})
 

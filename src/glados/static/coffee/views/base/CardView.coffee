@@ -11,6 +11,7 @@ CardView = Backbone.View.extend
       @reportCardApp.registerSection(@sectionID, @sectionLabel)
 
   showSection: -> @reportCardApp.showSection(@sectionID) unless GlobalVariables['EMBEDED']
+  hideSection: -> @reportCardApp.hideSection(@sectionID) unless GlobalVariables['EMBEDED']
 
   showCompoundErrorCard: (model, xhr, options) ->
 
