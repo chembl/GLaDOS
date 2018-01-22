@@ -6,8 +6,49 @@
 {% verbatim %}
 <script id='Handlebars-HELMNotation' type="text/x-handlebars-template">
 
-    <b>{{chembl_id.value}} HELM Notation:</b><br>
-    {{helm_notation.value}}
+    <table class="compact-table hide-on-small-only">
+        <tr>
+            <td><b>{{chembl_id.value}} HELM Notation:</b></td>
+        </tr>
+        <tr>
+            <td>
+                <div class="cropped-text-field">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="cropped-text-field-input">
+                                    <input id="CompReps-canonicalSmiles" type="text" value='{{helm_notation.value}}'>
+                                </div>
+                            </td>
+                            <td class="cropped-text-field-btns-cell">
+
+                              <div class="cropped-text-field-btns">
+
+                                  {% endverbatim %}
+                                    {% block CompReps-canonicalSmiles-dnld %}
+                                      {% with btn_id='CompReps-canonicalSmiles-dnld' %}
+                                        {% include "glados/base/btn_download_only_small.html" %}
+                                      {% endwith %}
+                                    {% endblock %}
+
+                                    {% block CompReps-canonicalSmiles-copy %}
+                                      {% with btn_id='CompReps-canonicalSmiles-copy' %}
+                                        {% include "glados/base/btn_copy_small.html" %}
+                                      {% endwith %}
+                                    {% endblock %}
+                                  {% verbatim %}
+
+                              </div>
+
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            </td>
+        </tr>
+    </table>
 
     <br>
     The ChEMBL HELM monomer library is available to download
