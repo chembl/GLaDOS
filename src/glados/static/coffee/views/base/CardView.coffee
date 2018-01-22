@@ -14,7 +14,7 @@ CardView = Backbone.View.extend
 
   showCompoundErrorCard: (model, xhr, options) ->
 
-    $(@el).children('.card-preolader-to-hide').hide()
+    $(@el).find('.card-preolader-to-hide').hide()
 
     if xhr.status == 404
 
@@ -31,9 +31,8 @@ CardView = Backbone.View.extend
     rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())
       msg: error_msg
 
-    $(@el).children('.card-load-error').find('.Bck-errormsg').html(rendered)
-
-    $(@el).children('.card-load-error').show()
+    $(@el).find('.card-load-error').find('.Bck-errormsg').html(rendered)
+    $(@el).find('.card-load-error').show()
 
 
   initEmbedModal: (section_name, chemblID) ->
