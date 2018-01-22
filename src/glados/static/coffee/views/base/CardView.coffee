@@ -31,8 +31,8 @@ CardView = Backbone.View.extend
     rendered = Handlebars.compile($('#Handlebars-Common-CardError').html())
       msg: error_msg
 
-    $(@el).find('.card-load-error').find('.Bck-errormsg').html(rendered)
-    $(@el).find('.card-load-error').show()
+    $(@el).find('.card-load-error').find('.Bck-errormsg').first().html(rendered)
+    $(@el).find('.card-load-error').first().show()
 
 
   initEmbedModal: (section_name, chemblID) ->
