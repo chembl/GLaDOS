@@ -84,6 +84,10 @@ urlpatterns += [
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/MetabolismToEmbed.html")), ),
 
+    url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/helm_notation/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/HELMNotationToEmbed.html")), ),
+
   url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/MoleculeMetabolismGraphFS.html")), ),
