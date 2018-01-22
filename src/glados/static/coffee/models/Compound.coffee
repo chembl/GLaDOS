@@ -611,6 +611,8 @@ Compound.COLUMNS = {
     comparator: 'withdrawn_country'
   WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_reason'
+  HELM_NOTATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'helm_notation'
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -709,6 +711,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   HELM_NOTATION_SECTION: [
     Compound.COLUMNS.CHEMBL_ID
+    Compound.COLUMNS.HELM_NOTATION
   ]
 }
 
