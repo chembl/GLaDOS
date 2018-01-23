@@ -421,7 +421,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
         $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
         ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
 
-        $downloadBtn = $(thisView.el).find('.BCK-Copy-btn')
+        $downloadBtn = $(thisView.el).find('.BCK-Dwnld-btn')
+        ButtonsHelper.initDownloadBtn($downloadBtn, "#{thisView.model.get('molecule_chembl_id')}-HELM.txt",
+          'Download', thisView.model.get('helm_notation'))
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound

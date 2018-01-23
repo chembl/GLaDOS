@@ -52,11 +52,12 @@ class ButtonsHelper
     * @param {String} Tooltip that you want for the button
     * @param {String} data data that is going to be downloaded
   ###
-  @initDownloadBtn = (elem, filename, tooltip, data)->
-    elem.attr('download', filename,)
-    elem.addClass('tooltipped')
-    elem.attr('data-tooltip', tooltip)
-    elem.attr('href', 'data:text/html,' + data)
+  @initDownloadBtn = ($btn, filename, tooltip, data)->
+    $btn.attr('download', filename,)
+    $btn.addClass('tooltipped')
+    $btn.attr('data-tooltip', tooltip)
+    $btn.attr('href', 'data:text/html,' + data)
+    $btn.tooltip()
 
   ### *
     * Handles the copy event receiving the data to be copied as a parameter
