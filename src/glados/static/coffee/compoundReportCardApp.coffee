@@ -20,6 +20,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initIndications()
     CompoundReportCardApp.initClinicalData()
     CompoundReportCardApp.initMetabolism()
+    CompoundReportCardApp.initHELMNotation()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
@@ -398,6 +399,42 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     compoundMetabolism.fetch()
+
+  @initHELMNotation = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'helm_notation'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) ->
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+
+        if not HELMNotation?
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
+        ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
+
+        $downloadBtn = $(thisView.el).find('.BCK-Dwnld-btn')
+        ButtonsHelper.initDownloadBtn($downloadBtn, "#{thisView.model.get('molecule_chembl_id')}-HELM.txt",
+          'Download', thisView.model.get('helm_notation'))
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CHELMNotationCard')
+      config: viewConfig
+      section_id: 'CompoundHELMNotation'
+      section_label: 'HELM Notation'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   # -------------------------------------------------------------
   # Function Cells

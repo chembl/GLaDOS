@@ -26,4 +26,6 @@ glados.useNameSpace 'glados.views.ReportCards',
       @showSection()
       @showCardContent()
 
+      @config.after_render(@) unless not @config.after_render?
+
 
