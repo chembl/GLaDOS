@@ -416,6 +416,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
         else
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
+        ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound

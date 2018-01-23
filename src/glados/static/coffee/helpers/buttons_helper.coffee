@@ -101,13 +101,12 @@ class ButtonsHelper
 
   @initCopyButton = (elem, tooltip, data) ->
 
-    copy_btn = elem
-    copy_btn.addClass('tooltipped')
-    copy_btn.attr('data-tooltip', tooltip)
-    copy_btn.attr('data-copy', data )
-
-    copy_btn.click ButtonsHelper.handleCopy
-
+    $copyBtn = elem
+    $copyBtn.addClass('tooltipped')
+    $copyBtn.attr('data-tooltip', tooltip)
+    $copyBtn.attr('data-copy', data )
+    $copyBtn.click ButtonsHelper.handleCopy
+    $copyBtn.tooltip()
 
   # ------------------------------------------------------------
   # Cropped container
