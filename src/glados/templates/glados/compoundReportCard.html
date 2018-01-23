@@ -173,6 +173,7 @@
       </div>
 
       <div class="divider"></div>
+
       <div id="CompoundHELMNotation" class="section scrollspy" style="display: none;">
         <h3>HELM Notation</h3>
 
@@ -188,37 +189,54 @@
       <div id="CompoundBioactivitySummary" class="section scrollspy">
         <h3>Compound Bioactivity Summary</h3>
 
+
         <div class="row">
 
-          {% block bioactivity_summary %}
-          {% with is_dynamic=True  %}
-          {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
-          {% endwith  %}
-          {% endblock %}
+            <div class="col m12 l6">
+
+              <div id="CompoundBioactivitySummary" class="section scrollspy">
+                <h3>Compound Bioactivity Summary</h3>
+
+                <div class="row">
+
+                  {% block bioactivity_summary %}
+                  {% with is_dynamic=True  %}
+                  {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
+                  {% endwith  %}
+                  {% endblock %}
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col m12 l6">
+              <div id="CompoundAssaySummary" class="section scrollspy">
+                <h3>Compound Assay Summary</h3>
+                <div class="row">
+                  {% with is_dynamic=True  %}
+                  {% include "glados/CompoundReportCardParts/AssaySummary.html" %}
+                  {% endwith  %}
+                </div>
+              </div>
+            </div>
+
+            <div class="col m12 l6">
+             <div id="CompoundTargetSummary" class="section scrollspy">
+                <h3>Compound Target Summary</h3>
+                <div class="row">
+                  {% with is_dynamic=True  %}
+                  {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
+                  {% endwith  %}
+                </div>
+              </div>
+            </div>
 
         </div>
 
-      </div>
 
-      <div class="divider"></div>
-      <div id="CompoundAssaySummary" class="section scrollspy">
-        <h3>Compound Assay Summary</h3>
-        <div class="row">
-          {% with is_dynamic=True  %}
-          {% include "glados/CompoundReportCardParts/AssaySummary.html" %}
-          {% endwith  %}
-        </div>
-      </div>
 
-      <div class="divider"></div>
-      <div id="CompoundTargetSummary" class="section scrollspy">
-        <h3>Compound Target Summary</h3>
-        <div class="row">
-          {% with is_dynamic=True  %}
-          {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
-          {% endwith  %}
-        </div>
-      </div>
 
       <div class="divider"></div>
       <div id="TargetPredictions" class="section scrollspy">

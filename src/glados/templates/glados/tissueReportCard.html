@@ -30,26 +30,30 @@
 
       </div>
 
-      <div id="AssaySummary" class="section scrollspy">
-        <h3>Assay Summary</h3>
+      <div class="row">
+          <div class="col m12 l6">
+              <div id="AssaySummary" class="section scrollspy">
+                <h3>Assay Summary</h3>
 
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/TissueReportCardParts/AssaySummary.html" %}
-          {% endwith %}
-        </div>
+                <div class="row">
+                  {% with is_dynamic=True  %}
+                    {% include "glados/TissueReportCardParts/AssaySummary.html" %}
+                  {% endwith %}
+                </div>
+             </div>
+          </div>
 
-      </div>
+          <div class="col m12 l6">
+              <div id="BioactivitySummary" class="section scrollspy">
+                <h3>Bioactivity Summary</h3>
 
-      <div id="BioactivitySummary" class="section scrollspy">
-        <h3>Bioactivity Summary</h3>
-
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
-          {% endwith %}
-        </div>
-
+                <div class="row">
+                  {% with is_dynamic=True  %}
+                    {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
+                  {% endwith %}
+                </div>
+              </div>
+          </div>
       </div>
 
       <div id="CompoundSummaries" class="section scrollspy">
