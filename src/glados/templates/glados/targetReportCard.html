@@ -85,26 +85,34 @@
 
       </div>
 
-       <div class="divider"></div>
-      <div id="TargetAssociatedBioactivities" class="section scrollspy">
-        <h3>Target Associated Bioactivities</h3>
+    <div class="divider"></div>
 
-         {% with is_dynamic=True  %}
-          {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
-         {% endwith %}
+    <div class="row">
 
-      </div>
+        <div class="col m12 l6">
+          <div id="TargetAssociatedBioactivities" class="section scrollspy">
+            <h3>Target Associated Bioactivities</h3>
 
-      <div class="divider"></div>
-      <div id="TargetAssociatedAssays" class="section scrollspy">
-        <h3>Target Associated Assays</h3>
+             {% with is_dynamic=True  %}
+              {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
+             {% endwith %}
 
-        {% with is_dynamic=True  %}
-          {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
-        {% endwith %}
+          </div>
 
+        </div>
+        <div class="col m12 l6">
 
-      </div>
+          <div id="TargetAssociatedAssays" class="section scrollspy">
+            <h3>Target Associated Assays</h3>
+
+            {% with is_dynamic=True  %}
+              {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
+            {% endwith %}
+
+          </div>
+        </div>
+
+    </div>
 
       <div class="divider"></div>
       <div id="TargetLigandEfficiencies" class="section scrollspy">
