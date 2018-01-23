@@ -203,15 +203,18 @@
         </div>
 
         <div class="divider"></div>
-         <div id="CompoundTargetSummary" class="section scrollspy">
-            <h3>Compound Target Summary</h3>
-            <div class="row">
-              {% with is_dynamic=True  %}
-              {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
-              {% endwith  %}
+        <div class="row">
+            <div class="col m12 l6">
+                 <div id="CompoundTargetSummary" class="section scrollspy">
+                    <h3>Compound Target Summary</h3>
+                    <div class="row">
+                      {% with is_dynamic=True  %}
+                      {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
+                      {% endwith  %}
+                    </div>
+                 </div>
             </div>
-         </div>
-
+        </div>
 
 
 
