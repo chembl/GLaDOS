@@ -175,12 +175,9 @@
       <div class="divider"></div>
 
         <div class="row">
-
             <div class="col m12 l6">
-
               <div id="CompoundBioactivitySummary" class="section scrollspy">
                 <h3>Compound Bioactivity Summary</h3>
-
                 <div class="row">
 
                   {% block bioactivity_summary %}
@@ -190,9 +187,7 @@
                   {% endblock %}
 
                 </div>
-
               </div>
-
             </div>
 
             <div class="col m12 l6">
@@ -205,19 +200,20 @@
                 </div>
               </div>
             </div>
-
-            <div class="col m12 l6">
-             <div id="CompoundTargetSummary" class="section scrollspy">
-                <h3>Compound Target Summary</h3>
-                <div class="row">
-                  {% with is_dynamic=True  %}
-                  {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
-                  {% endwith  %}
-                </div>
-              </div>
-            </div>
-
         </div>
+
+        <div class="divider"></div>
+         <div id="CompoundTargetSummary" class="section scrollspy">
+            <h3>Compound Target Summary</h3>
+            <div class="row">
+              {% with is_dynamic=True  %}
+              {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
+              {% endwith  %}
+            </div>
+         </div>
+
+
+
 
 
 
