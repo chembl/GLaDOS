@@ -405,7 +405,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =
-      embed_section_name: 'CompoundHELMNotation'
+      embed_section_name: 'helm_notation'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
         HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
