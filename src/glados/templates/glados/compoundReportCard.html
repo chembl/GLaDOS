@@ -185,6 +185,18 @@
       </div>
 
       <div class="divider"></div>
+      <div id="CompoundBIOLSeq" class="section scrollspy" >
+        <h3>Biological Sequence</h3>
+
+        <div class="row">
+          {% with is_dynamic=True %}
+            {% include "glados/CompoundReportCardParts/Biocomponents.html" %}
+          {% endwith %}
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
       <div id="CompoundBioactivitySummary" class="section scrollspy">
         <h3>Compound Bioactivity Summary</h3>
 
