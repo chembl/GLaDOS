@@ -3469,6 +3469,7 @@ $facets-width-large: 21%;
 .card-content{
   .main-container-row{
     margin-bottom: 0px;
+    height:100%;
   }
 }
 .mini-report-card{
@@ -3601,3 +3602,41 @@ $facets-width-large: 21%;
     font-size: 150%;
   }
 }
+
+/**
+* Report card piechart
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.piechart-group {
+  display: flex;
+  flex-flow: wrap;
+  .piechart-col {
+    display: flex;
+    .piechart-section {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      .layout {
+        display: flex;
+        flex-grow: 1;
+        .chembl-card {
+          display: flex;
+          flex-grow: 1;
+          width: 100%;
+          .card-content {
+            width: 100%;
+              .container{
+                display:flex;
+                flex-direction: column;
+                height: 100%;
+                  .valign-wrapper{
+                    height:100%;
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
+}
+
