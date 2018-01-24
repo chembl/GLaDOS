@@ -3629,9 +3629,13 @@ $facets-width-large: 21%;
                 display:flex;
                 flex-direction: column;
                 height: 100%;
-                  .valign-wrapper{
+                  .pie-with-error{
                     height:100%;
+                    .valign-wrapper{
+                      height:100%;
+                    }
                   }
+
               }
           }
         }
