@@ -453,14 +453,23 @@ class CompoundReportCardApp extends glados.ReportCardApp
         else
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
-#      after_render: (thisView) ->
-#        ButtonsHelper.initCroppedTextFields()
-#        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
-#        ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
-#
-#        $downloadBtn = $(thisView.el).find('.BCK-Dwnld-btn')
-#        ButtonsHelper.initDownloadBtn($downloadBtn, "#{thisView.model.get('molecule_chembl_id')}-HELM.txt",
-#          'Download', thisView.model.get('helm_notation'))
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+
+        $buttonsContainers = $(thisView.el).find('.BCK-ButtonsContainer')
+
+        $buttonsContainers.each (i, div) ->
+
+          $div = $(div)
+          $copyBtn = $div.find('.BCK-Copy-btn')
+
+          ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard',
+            $div.attr('data-value'))
+
+          $downloadBtn = $div.find('.BCK-Dwnld-btn')
+          ButtonsHelper.initDownloadBtn($downloadBtn,
+            "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$div.attr('data-description')}.txt",
+            'Download', $div.attr('data-value'))
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
