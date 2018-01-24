@@ -5,7 +5,17 @@
 {% block general_content %}
 {% verbatim %}
 <script id='Handlebars-Bioseq' type="text/x-handlebars-template">
-    Bioseq
+
+    <table class="compact-table">
+        <tr>
+            <td><b>{{molecule_chembl_id.value}} Biocomponents:</b></td>
+        </tr>
+        {{#each biotherapeutic.biocomponents}}
+            <tr>
+                <td>hola</td>
+            </tr>
+        {{/each}}
+    </table>
 </script>
 {% endverbatim %}
 <div class="BCK-Details-Container" data-hb-template="Handlebars-Bioseq"></div>

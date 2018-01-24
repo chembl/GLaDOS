@@ -409,7 +409,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'helm_notation'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.HELM_NOTATION.comparator,
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not HELMNotation?
@@ -445,14 +445,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'biocomponents'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
+        biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
-        if not HELMNotation?
+        if not biocomponents?
           return false
         else
           return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
 #      after_render: (thisView) ->
 #        ButtonsHelper.initCroppedTextFields()
 #        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')

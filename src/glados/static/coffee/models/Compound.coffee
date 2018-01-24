@@ -613,6 +613,8 @@ Compound.COLUMNS = {
     comparator: 'withdrawn_reason'
   HELM_NOTATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'helm_notation'
+  BIOCOMPONENTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'biotherapeutic.biocomponents'
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -712,6 +714,10 @@ Compound.COLUMNS_SETTINGS = {
   HELM_NOTATION_SECTION: [
     Compound.COLUMNS.CHEMBL_ID
     Compound.COLUMNS.HELM_NOTATION
+  ]
+  BIOCOMPONENTS_SECTION: [
+    Compound.COLUMNS.CHEMBL_ID
+    Compound.COLUMNS.BIOCOMPONENTS
   ]
 }
 
