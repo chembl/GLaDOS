@@ -106,6 +106,8 @@ glados.useNameSpace 'glados',
 
         returnCol = {}
         returnCol.id = colDescription.id
+        returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+
         returnCol.name_to_show = colDescription['name_to_show']
         returnCol.show = colDescription.show
         returnCol.comparator = colDescription.comparator
