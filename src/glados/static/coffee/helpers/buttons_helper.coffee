@@ -129,8 +129,6 @@ class ButtonsHelper
 
     $(elem).text('less...')
 
-
-
   ### *
     * @param {JQuery} elem element that is going to be toggled
     * @param {JQuery} buttons element that contains the buttons that activate this..

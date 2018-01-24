@@ -1,27 +1,37 @@
 {% extends "glados/base/basic_table_card.html" %}
 
-{% block card_id %}CHELMNotationCard{% endblock %}
+{% block card_id %}CBioseqCard{% endblock %}
 
 {% block general_content %}
 {% verbatim %}
-<script id='Handlebars-HELMNotation' type="text/x-handlebars-template">
+<script id='Handlebars-Bioseq' type="text/x-handlebars-template">
 
-    <b>{{molecule_chembl_id.value}} HELM Notation:</b>
+    <b>{{molecule_chembl_id.value}} Biocomponents:</b>
+    <br>
 
     <table class="compact-table">
-        <tr>
-            <td>
-                <div class="cropped-text-field">
+
+        {{#each biotherapeutic_dot_biocomponents.value}}
+            <tr>
+                <td>
+                    <b>{{this.description}}:</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <div class="cropped-text-field">
                     <table>
                         <tr>
                             <td>
                                 <div class="cropped-text-field-input">
-                                    <input id="CompReps-canonicalSmiles" type="text" value='{{helm_notation.value}}'>
+                                    <input id="CompReps-canonicalSmiles" type="text" value='{{this.sequence}}'>
                                 </div>
                             </td>
                             <td class="cropped-text-field-btns-cell">
 
-                              <div class="cropped-text-field-btns">
+                              <div class="cropped-text-field-btns BCK-ButtonsContainer"
+                                   data-description="{{this.description}}" data-value='{{this.sequence}}'>
 
                                   {% endverbatim %}
                                     {% block CompReps-canonicalSmiles-dnld %}
@@ -45,18 +55,12 @@
                     </table>
 
                 </div>
-            </td>
-        </tr>
+
+                </td>
+            </tr>
+        {{/each}}
     </table>
-
-    <br>
-    The ChEMBL HELM monomer library is available to download
-    <a target="_blank" href='ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/releases/chembl_23/chembl_23_monomer_library.xml'>here</a>.
-    <br>
-    For more details about HELM Notation, please visit the
-    <a target="_blank" href='http://www.openhelm.org/'>HELM Homepage</a>.
-
 </script>
 {% endverbatim %}
-<div class="BCK-Details-Container" data-hb-template="Handlebars-HELMNotation"></div>
+<div class="BCK-Details-Container" data-hb-template="Handlebars-Bioseq"></div>
 {% endblock %}
