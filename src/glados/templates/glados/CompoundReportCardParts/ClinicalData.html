@@ -1,11 +1,9 @@
 {% extends "glados/base/basic_table_card.html" %}
-{% block card_id %}CBioseqCard{% endblock %}
+{% block card_id %}ClinDataCard{% endblock %}
 
 {% block general_content %}
 {% verbatim %}
 <script id='Handlebars-ClinicalData' type="text/x-handlebars-template">
-
-    <div id='ClinicalDataCard' class="card chembl-card grey lighten-5">
 
         <div class="card-content ebi-links">
 
@@ -18,13 +16,13 @@
                 <tr>
 
                     <td>
-                        <a href="http://clinicaltrials.gov/">ClinicalTrials.gov</a>:
+                        <a href="http://clinicaltrials.gov/">ClinicalTrials.gov</a>
 
                     </td>
 
                     <td>
                         <a href="https://clinicaltrials.gov/ct2/results?term=Aspirin&Search=Search">
-                            Aspirin
+                            {{pref_name.value}}
                         </a>
                     </td>
 
@@ -33,12 +31,12 @@
                 <tr>
 
                     <td>
-                        <a href="http://www.cochrane.org/">The Cochrane Collaboration</a>:
+                        <a href="http://www.cochrane.org/">The Cochrane Collaboration</a>
                     </td>
 
                     <td>
                         <a>
-                            Aspririn
+                            {{pref_name.value}}
                         </a>
                     </td>
 
@@ -52,7 +50,6 @@
 
     </div>
 
-    </div>
 
 </script>
 

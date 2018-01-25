@@ -196,25 +196,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
     @registerSection('ClinicalData', 'Clinical Data')
     @showSection('ClinicalData')
 
-#    compound = CompoundReportCardApp.getCurrentCompound()
-#
-#    viewConfig =
-#      embed_section_name: 'withdrawal_info'
-#      embed_identifier: compound.get('molecule_chembl_id')
-#      show_if: (model) -> model.attributes.withdrawn_flag == true
-#      properties_to_show: Compound.COLUMNS_SETTINGS.WITHDRAWN_INFO_SECTION
-#
-#    new glados.views.ReportCards.EntityDetailsInCardView
-#      model: compound
-#      el: $('#CWithdrawnInfoCard')
-#      config: viewConfig
-#      section_id: 'WithdrawnInfo'
-#      section_label: 'Withdrawal Information'
-#      report_card_app: @
-#
-#    if GlobalVariables['EMBEDED']
-#      compound.fetch()
+    compound = CompoundReportCardApp.getCurrentCompound()
 
+    viewConfig =
+      embed_section_name: 'clinical_data'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) -> model.attributes.pref_name?
+      properties_to_show: Compound.COLUMNS_SETTINGS.CLINICAL_DATA_SECTION
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#ClinDataCard')
+      config: viewConfig
+      section_id: 'ClinicalData'
+      section_label: 'Clinical Data'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initStructuralAlerts = ->
 
