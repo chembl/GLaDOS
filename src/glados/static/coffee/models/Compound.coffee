@@ -722,7 +722,11 @@ Compound.COLUMNS_SETTINGS = {
   CLINICAL_DATA_SECTION:[
     _.extend Compound.COLUMNS.PREF_NAME,
       additional_parsing:
-        escaped_value: (value) -> value.replace(/[ ]/g, '+')
+        encoded_value: (value) -> value.replace(/[ ]/g, '+')
+    _.extend Compound.COLUMNS.SYNONYMS,
+      additional_parsing:
+        search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+        encoded_search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
   ]
 }
 
