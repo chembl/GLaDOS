@@ -260,8 +260,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedActivities
       el: $('#CAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'CompoundBioactivitySummary'
-      section_label: 'Bioactivity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedActivities.fetch()
@@ -288,8 +288,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'CompoundAssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedAssays.fetch()
@@ -316,8 +316,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedTargets
       el: $('#CAssociatedTargetsCard')
       config: viewConfig
-      section_id: 'CompoundTargetSummary'
-      section_label: 'Target Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedTargets.fetch()
