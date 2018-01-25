@@ -78,46 +78,48 @@
                 </div>
 
                 <div class="divider"></div>
-                <div id="ActivityPlots" class="scrollspy">
-                    <h3>Activity Plots</h3>
-                </div>
+                <div id="ActivityCharts" class="scrollspy">
+                    <h3>Activity Charts</h3>
 
-                <div class="row piechart-group">
-                    <div class="col m12 l6 piechart-col">
-                        <div id="ProteinTargetSummay" class="section scrollspy piechart-section">
-                            <h4 class="center-align">Protein Target Summary</h4>
 
-                            {% with is_dynamic=True %}
-                                {% include "glados/DocumentReportCardParts/TargetSummary.html" %}
-                            {% endwith %}
-                        </div>
-                    </div>
-                    <div class="col m12 l6 piechart-col">
-                        <div id="AssaySummary" class="section scrollspy piechart-section">
-                            <h4 class="center-align">Assay Summary</h4>
-                            {% with is_dynamic=True %}
-                                {% include "glados/DocumentReportCardParts/AssaySummary.html" %}
-                            {% endwith %}
-                        </div>
-                    </div>
+                    <div class="row piechart-group">
+                        <div class="col m12 l6 piechart-col">
+                            <div id="ProteinTargetSummay" class="section piechart-section">
+                                <h4 class="center-align">Protein Target Summary</h4>
 
-                    <div class="col m12 l6 piechart-section">
-                        <div id="BioactivitySummary" class="section scrollspy piechart-section">
-                            <h4 class="center-align">Bioactivity Summary</h4>
-                            {% with is_dynamic=True %}
-                                {% include "glados/DocumentReportCardParts/ActivitySummary.html" %}
-                            {% endwith %}
+                                {% with is_dynamic=True %}
+                                    {% include "glados/DocumentReportCardParts/TargetSummary.html" %}
+                                {% endwith %}
+                            </div>
                         </div>
+                        <div class="col m12 l6 piechart-col">
+                            <div id="AssaySummary" class="section piechart-section">
+                                <h4 class="center-align">Assay Summary</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/DocumentReportCardParts/AssaySummary.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <div class="col m12 l6 piechart-section">
+                            <div id="BioactivitySummary" class="section piechart-section">
+                                <h4 class="center-align">Bioactivity Summary</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/DocumentReportCardParts/ActivitySummary.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <div class="col m12 l6 piechart-col"></div>
                     </div>
-                    <div class="col m12 l6 piechart-col"></div>
                 </div>
 
                 <div class="divider"></div>
+            
                 <div id="CompoundSummaries" class="section scrollspy">
                     <h3>Compound Summaries</h3>
-                        {% with is_dynamic=True %}
-                            {% include "glados/DocumentReportCardParts/CompoundSummary.html" %}
-                        {% endwith %}
+                    {% with is_dynamic=True %}
+                        {% include "glados/DocumentReportCardParts/CompoundSummary.html" %}
+                    {% endwith %}
                 </div>
 
             </div>

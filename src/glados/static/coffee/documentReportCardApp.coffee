@@ -111,8 +111,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedTargets
       el: $('#DAssociatedTargetsCard')
       config: viewConfig
-      section_id: 'ProteinTargetSummay'
-      section_label: 'Target Summay'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedTargets.fetch()
@@ -139,8 +139,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedAssays
       el: $('#DAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'AssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedAssays.fetch()
@@ -167,8 +167,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedActivities
       el: $('#DAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'BioactivitySummary'
-      section_label: 'Activity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedActivities.fetch()
