@@ -34,28 +34,22 @@
 
       <div class="divider"></div>
 
-    <div class ="row">
-        <div class="col m12 l6">
-          <div id="AssaySummary" class="section scrollspy">
+    <div class ="row piechart-group">
+        <div class="col m12 l6 piechart-col">
+          <div id="AssaySummary" class="section scrollspy piechart-section">
             <h3>Assay Summary</h3>
-
-            <div class="row">
               {% with is_dynamic=True  %}
                 {% include "glados/CellReportCardParts/AssaySummary.html" %}
               {% endwith %}
-            </div>
           </div>
         </div>
 
-        <div class="col m12 l6">
-          <div id="BioactivitySummary" class="section scrollspy">
+        <div class="col m12 l6 piechart-col">
+          <div id="BioactivitySummary" class="section scrollspy piechart-section">
             <h3>Bioactivity Summary</h3>
-
-            <div class="row">
               {% with is_dynamic=True  %}
                 {% include "glados/CellReportCardParts/ActivitySummary.html" %}
               {% endwith %}
-            </div>
           </div>
         </div>
     </div>
