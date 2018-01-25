@@ -4,201 +4,193 @@
 
 {% block content %}
 
-<div class="container main-container">
+    <div class="container main-container">
 
 
-  {% block breadcrumb %}
-  {% include "glados/base/breadcrumb.html" %}
-  {% endblock %}
-
-  <div class="row">
-
-    <!-- the scrollspy disappears in medium and down -->
-    <div class="col m12 l10">
-
-      <h2>Target Report Card</h2>
-
-      <div class="divider"></div>
-      <div id="TargetNameAndClassification" class="section scrollspy">
-        <h3>Target Name and Classification</h3>
+        {% block breadcrumb %}
+            {% include "glados/base/breadcrumb.html" %}
+        {% endblock %}
 
         <div class="row">
 
-        {% block tnc %}
-          {% with is_dynamic=True  %}
-            {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
-          {% endwith %}
-        {% endblock %}
+            <!-- the scrollspy disappears in medium and down -->
+            <div class="col m12 l10">
+
+                <h2>Target Report Card</h2>
+
+                <div class="divider"></div>
+
+                <div id="TargetNameAndClassification" class="section scrollspy">
+                    <h3>Target Name and Classification</h3>
+
+                    <div class="row">
+                        {% block tnc %}
+                            {% with is_dynamic=True %}
+                                {% include "glados/TargetReportCardParts/NameAndClassification.html" %}
+                            {% endwith %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div id="TargetComponents" class="section scrollspy" style="display: none;">
+                    <h3>Target Components</h3>
+                    <div class="row">
+                        {% block tc %}
+                            {% with is_dynamic=True %}
+                                {% include "glados/TargetReportCardParts/Components.html" %}
+                            {% endwith %}
+                        {% endblock %}
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetRelations" class="section scrollspy" style="display: none;">
+                    <h3>Target Relations</h3>
+
+                    <div class="row">
+                        {% block tr %}
+                            {% with is_dynamic=True %}
+                                {% include "glados/TargetReportCardParts/Relations.html" %}
+                            {% endwith %}
+                        {% endblock %}
+                    </div>
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy" style="display: none;">
+                    <h3>Approved Drugs And Clinical Candidates</h3>
+
+                    <div class="row">
+
+                        {% block adcc %}
+                            {% with is_dynamic=True %}
+                                {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
+                            {% endwith %}
+                        {% endblock %}
+
+                    </div>
+                
+                </div>
+
+                <div class="divider"></div>
+                <div id="ActivityCharts" class="section scrollspy">
+                    <h3>Activity Charts</h3>
+
+                    <div class="row piechart-group">
+                        <div class="col m12 l6 piechart-col">
+                            <div id="TargetAssociatedBioactivities" class="section piechart-section">
+                                <h4 class="center-align">Target Associated Bioactivities</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <div class="col m12 l6 piechart-col">
+                            <div id="TargetAssociatedAssays" class="section piechart-section">
+                                <h4 class="center-align">Target Associated Assays</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetLigandEfficiencies" class="section scrollspy">
+                    <h3>Target Ligand Efficiencies</h3>
+
+                    {% with is_dynamic=True %}
+                        {% include "glados/TargetReportCardParts/LigandEfficiencies.html" %}
+                    {% endwith %}
+
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetAssociatedCompoundProperties" class="section scrollspy">
+                    <h3>Target Associated Compound Properties</h3>
+
+                    {% with is_dynamic=True %}
+                        {% include "glados/TargetReportCardParts/AssociatedCompounds.html" %}
+                    {% endwith %}
+
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetCrossReferencesGene" class="section scrollspy">
+                    <h3>Target Cross References - Gene</h3>
+
+                    <div class="row">
+                        {% block gtcr %}
+                            {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
+                        {% endblock %}
+
+                    </div>
+
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetCrossReferencesProtein" class="section scrollspy">
+                    <h3>Target Cross References - Protein</h3>
+
+                    <div class="row">
+                        {% block ptcr %}
+                            {% include "glados/TargetReportCardParts/ProteinCrossReferences.html" %}
+                        {% endblock %}
+
+                    </div>
+
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetCrossReferencesDomain" class="section scrollspy">
+                    <h3>Target Cross References - Domain</h3>
+
+                    <div class="row">
+                        {% block dtcr %}
+                            {% include "glados/TargetReportCardParts/DomainCrossReferences.html" %}
+                        {% endblock %}
+                    </div>
+
+
+                </div>
+
+                <div class="divider"></div>
+                <div id="TargetCrossReferencesStructure" class="section scrollspy">
+                    <h3>Target Cross References - Structure</h3>
+
+                    <div class="row">
+                        {% block stcr %}
+                            {% include "glados/TargetReportCardParts/StructureCrossReferences.html" %}
+                        {% endblock %}
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Scrolspy -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <div class="col l2 hide-on-med-and-down">
+                {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
+            </div>
 
         </div>
 
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetComponents" class="section scrollspy" style="display: none;">
-        <h3>Target Components</h3>
-
-        <div class="row">
-        {% block tc %}
-          {% with is_dynamic=True  %}
-            {% include "glados/TargetReportCardParts/Components.html" %}
-          {% endwith %}
-        {% endblock %}
-
-        </div>
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetRelations" class="section scrollspy" style="display: none;">
-        <h3>Target Relations</h3>
-
-        <div class="row">
-
-         {% block tr %}
-            {% with is_dynamic=True  %}
-              {% include "glados/TargetReportCardParts/Relations.html" %}
-            {% endwith %}
-          {% endblock %}
-
-        </div>
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy" style="display: none;">
-        <h3>Approved Drugs And Clinical Candidates</h3>
-
-         <div class="row">
-
-        {% block adcc %}
-           {% with is_dynamic=True  %}
-            {% include "glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidates.html" %}
-           {% endwith %}
-        {% endblock %}
-
-        </div>
-
-
-      </div>
-
-    <div class="divider"></div>
-     <div id="ActivityPlots" class="scrollspy">
-        <h3>Activity Plots</h3>
     </div>
-
-    <div class="row piechart-group">
-        <div class="col m12 l6 piechart-col">
-          <div id="TargetAssociatedBioactivities" class="section scrollspy piechart-section">
-            <h4 class="center-align">Target Associated Bioactivities</h4>
-             {% with is_dynamic=True  %}
-              {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
-             {% endwith %}
-          </div>
-        </div>
-        <div class="col m12 l6 piechart-col">
-          <div id="TargetAssociatedAssays" class="section scrollspy piechart-section">
-            <h4 class="center-align">Target Associated Assays</h4>
-            {% with is_dynamic=True  %}
-              {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
-            {% endwith %}
-          </div>
-        </div>
-    </div>
-
-      <div class="divider"></div>
-      <div id="TargetLigandEfficiencies" class="section scrollspy">
-        <h3>Target Ligand Efficiencies</h3>
-
-        {% with is_dynamic=True  %}
-          {% include "glados/TargetReportCardParts/LigandEfficiencies.html" %}
-        {% endwith %}
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetAssociatedCompoundProperties" class="section scrollspy">
-        <h3>Target Associated Compound Properties</h3>
-
-        {% with is_dynamic=True  %}
-          {% include "glados/TargetReportCardParts/AssociatedCompounds.html" %}
-        {% endwith %}
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetCrossReferencesGene" class="section scrollspy">
-        <h3>Target Cross References - Gene</h3>
-
-        <div class="row">
-        {% block gtcr %}
-          {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
-        {% endblock %}
-
-        </div>
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetCrossReferencesProtein" class="section scrollspy">
-        <h3>Target Cross References - Protein</h3>
-
-        <div class="row">
-        {% block ptcr %}
-          {% include "glados/TargetReportCardParts/ProteinCrossReferences.html" %}
-        {% endblock %}
-
-        </div>
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetCrossReferencesDomain" class="section scrollspy">
-        <h3>Target Cross References - Domain</h3>
-
-        <div class="row">
-          {% block dtcr %}
-            {% include "glados/TargetReportCardParts/DomainCrossReferences.html" %}
-          {% endblock %}
-        </div>
-
-
-      </div>
-
-      <div class="divider"></div>
-      <div id="TargetCrossReferencesStructure" class="section scrollspy">
-        <h3>Target Cross References - Structure</h3>
-
-        <div class="row">
-          {% block stcr %}
-            {% include "glados/TargetReportCardParts/StructureCrossReferences.html" %}
-          {% endblock %}
-        </div>
-
-
-      </div>
-
-
-    </div>
-
-    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
-    <!-- Scrolspy -->
-    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <div class="col l2 hide-on-med-and-down">
-      {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
-    </div>
-
-  </div>
-
-</div>
 
 {% endblock %}
 
@@ -208,7 +200,7 @@
 
 {% block custom_js_inline %}
 
-TargetReportCardApp.init();
+    TargetReportCardApp.init();
 
 {% endblock %}
 

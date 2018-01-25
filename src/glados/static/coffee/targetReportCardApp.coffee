@@ -141,8 +141,8 @@ class TargetReportCardApp extends glados.ReportCardApp
       model: bioactivities
       el: $('#TAssociatedBioactivitiesCard')
       config: viewConfig
-      section_id: 'TargetAssociatedBioactivities'
-      section_label: 'Associated Bioactivities'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     bioactivities.fetch()
@@ -169,8 +169,8 @@ class TargetReportCardApp extends glados.ReportCardApp
       model: associatedAssays
       el: $('#TAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'TargetAssociatedAssays'
-      section_label: 'Associated Assays'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     associatedAssays.fetch()
