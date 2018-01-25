@@ -186,53 +186,45 @@
       </div>
 
       <div class="divider"></div>
-      <div id="CompoundBioactivitySummary" class="section scrollspy">
-        <h3>Compound Bioactivity Summary</h3>
 
 
-        <div class="row">
-            <div class="col m12 l6">
-              <div id="CompoundBioactivitySummary" class="section scrollspy">
+        <div class="row piechart-group">
+            <div class="col m12 l6 piechart-col">
+              <div id="CompoundBioactivitySummary" class="section scrollspy piechart-section">
                 <h3>Compound Bioactivity Summary</h3>
-                <div class="row">
 
                   {% block bioactivity_summary %}
                   {% with is_dynamic=True  %}
                   {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
                   {% endwith  %}
                   {% endblock %}
-
-                </div>
               </div>
             </div>
 
-            <div class="col m12 l6">
-              <div id="CompoundAssaySummary" class="section scrollspy">
+            <div class="col m12 l6 piechart-col">
+              <div id="CompoundAssaySummary" class="section scrollspy piechart-section">
                 <h3>Compound Assay Summary</h3>
-                <div class="row">
+
                   {% with is_dynamic=True  %}
                   {% include "glados/CompoundReportCardParts/AssaySummary.html" %}
                   {% endwith  %}
-                </div>
+
               </div>
             </div>
-        </div>
-
-        <div class="divider"></div>
-        <div class="row">
-            <div class="col m12 l6">
-                 <div id="CompoundTargetSummary" class="section scrollspy">
+            <div class="col m12 l6 piechart-col">
+                 <div id="CompoundTargetSummary" class="section scrollspy piechart-section">
                     <h3>Compound Target Summary</h3>
-                    <div class="row">
+
                       {% with is_dynamic=True  %}
                       {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
                       {% endwith  %}
-                    </div>
+
                  </div>
             </div>
+            <div class="col m12 l6 piechart-col"></div>
         </div>
 
-      </div>
+
 
 
 

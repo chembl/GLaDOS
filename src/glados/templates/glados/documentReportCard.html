@@ -97,28 +97,24 @@
                             {% endwith %}
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col m12 l6">
-                        <div id="BioactivitySummary" class="section scrollspy">
+
+                    <div class="col m12 l6 piechart-section">
+                        <div id="BioactivitySummary" class="section scrollspy piechart-section">
                             <h3>Bioactivity Summary</h3>
                             {% with is_dynamic=True %}
                                 {% include "glados/DocumentReportCardParts/ActivitySummary.html" %}
                             {% endwith %}
                         </div>
                     </div>
+                    <div class="col m12 l6 piechart-col"></div>
                 </div>
 
                 <div class="divider"></div>
                 <div id="CompoundSummaries" class="section scrollspy">
                     <h3>Compound Summaries</h3>
-
-                    <div class="row">
                         {% with is_dynamic=True %}
                             {% include "glados/DocumentReportCardParts/CompoundSummary.html" %}
                         {% endwith %}
-                    </div>
-
                 </div>
 
             </div>
