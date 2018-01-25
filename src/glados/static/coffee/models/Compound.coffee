@@ -722,7 +722,7 @@ Compound.COLUMNS_SETTINGS = {
   CLINICAL_DATA_SECTION:[
     _.extend Compound.COLUMNS.PREF_NAME,
       additional_parsing:
-        escaped_value: (value) -> 'hola'
+        escaped_value: (value) -> value.replace(/[ ]/g, '+')
   ]
 }
 
