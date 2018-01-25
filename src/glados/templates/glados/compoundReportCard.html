@@ -186,12 +186,15 @@
       </div>
 
       <div class="divider"></div>
+      <div id="ActivityPlots" class="scrollspy">
+          <h3>Activity Plots</h3>
+      </div>
 
 
         <div class="row piechart-group">
             <div class="col m12 l6 piechart-col">
               <div id="CompoundBioactivitySummary" class="section scrollspy piechart-section">
-                <h3>Compound Bioactivity Summary</h3>
+                <h4 class="center-align">Compound Bioactivity Summary</h4>
                   {% block bioactivity_summary %}
                   {% with is_dynamic=True  %}
                   {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
@@ -202,7 +205,7 @@
 
             <div class="col m12 l6 piechart-col">
               <div id="CompoundAssaySummary" class="section scrollspy piechart-section">
-                <h3>Compound Assay Summary</h3>
+                <h4 class="center-align">Compound Assay Summary</h4>
                   {% with is_dynamic=True  %}
                   {% include "glados/CompoundReportCardParts/AssaySummary.html" %}
                   {% endwith  %}
@@ -210,7 +213,7 @@
             </div>
             <div class="col m12 l6 piechart-col">
                  <div id="CompoundTargetSummary" class="section scrollspy piechart-section">
-                    <h3>Compound Target Summary</h3>
+                    <h4 class="center-align">Compound Target Summary</h4>
                       {% with is_dynamic=True  %}
                       {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
                       {% endwith  %}
