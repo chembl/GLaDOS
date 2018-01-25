@@ -719,6 +719,15 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.CHEMBL_ID
     Compound.COLUMNS.BIOCOMPONENTS
   ]
+  CLINICAL_DATA_SECTION:[
+    _.extend Compound.COLUMNS.PREF_NAME,
+      additional_parsing:
+        encoded_value: (value) -> value.replace(/[ ]/g, '+')
+    _.extend Compound.COLUMNS.SYNONYMS,
+      additional_parsing:
+        search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+        encoded_search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+  ]
 }
 
 Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,

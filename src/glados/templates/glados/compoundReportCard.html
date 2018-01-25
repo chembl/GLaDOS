@@ -144,14 +144,14 @@
       </div>
 
       <div class="divider"></div>
-      <div id="ClinicalData" class="section scrollspy">
+      <div id="ClinicalData" class="section scrollspy" style="display: none;">
         <h3>Clinical Data</h3>
 
         <div class="row">
 
-          {% block clinical_data %}
-          {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
-          {% endblock %}
+          {% with is_dynamic=True %}
+            {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
+          {% endwith %}
 
         </div>
 
