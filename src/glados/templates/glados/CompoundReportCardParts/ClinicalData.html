@@ -1,59 +1,61 @@
-<div class="col s12 m12 l12">
+{% extends "glados/base/basic_table_card.html" %}
+{% block card_id %}CBioseqCard{% endblock %}
 
-  <div id='ClinicalDataCard' class="card chembl-card grey lighten-5">
+{% block general_content %}
+{% verbatim %}
+<script id='Handlebars-ClinicalData' type="text/x-handlebars-template">
 
-    <div class="card-content ebi-links">
+    <div id='ClinicalDataCard' class="card chembl-card grey lighten-5">
 
-      <table class="striped">
+        <div class="card-content ebi-links">
 
-        <tr>
+            <table class="striped">
 
-          <td>
-            Number of clinical trials registered at <a href="http://clinicaltrials.gov/">clinicaltrials.gov</a>:
+                <tr>
+                    <th>Source:</th>
+                    <th>Search Term:</th>
+                </tr>
+                <tr>
 
-          </td>
+                    <td>
+                        <a href="http://clinicaltrials.gov/">ClinicalTrials.gov</a>:
 
-          <td>
-            <a href="https://clinicaltrials.gov/ct2/results?term=Aspirin&Search=Search">
-              1010
-            </a>
-          </td>
+                    </td>
 
-        </tr>
+                    <td>
+                        <a href="https://clinicaltrials.gov/ct2/results?term=Aspirin&Search=Search">
+                            Aspirin
+                        </a>
+                    </td>
 
-        <tr>
+                </tr>
 
-          <td>
-            Number of reviews at <a href="http://www.cochrane.org/">The Cochrane Collaboration</a>:
-          </td>
+                <tr>
 
-          <td>
-            <a>
-              0
-            </a>
-          </td>
+                    <td>
+                        <a href="http://www.cochrane.org/">The Cochrane Collaboration</a>:
+                    </td>
 
-        </tr>
+                    <td>
+                        <a>
+                            Aspririn
+                        </a>
+                    </td>
 
-        <tr>
+                </tr>
 
-          <td>
-          Number of entries at <a href="http://www.bnf.org/">British National Formulary</a>:
-          </td>
 
-          <td>
-            <a>
-              0
-            </a>
-          </td>
+            </table>
 
-        </tr>
+        </div>
 
-      </table>
 
     </div>
 
+    </div>
 
-  </div>
+</script>
 
-</div>
+{% endverbatim %}
+<div class="BCK-Details-Container" data-hb-template="Handlebars-ClinicalData">holaa</div>
+{% endblock %}

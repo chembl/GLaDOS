@@ -1,0 +1,11 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compound ClinicalData{% endblock %}
+
+{% block content2 %}
+    {% include "glados/CompoundReportCardParts/HELMNotation.html" %}
+{% endblock %}
+
+{% block custom_js_inline %}
+CompoundReportCardApp.initHELMNotation();
+{% endblock %}
