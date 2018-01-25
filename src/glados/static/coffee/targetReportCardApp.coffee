@@ -127,6 +127,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+      max_categories: 8
 
     viewConfig =
       pie_config: pieConfig

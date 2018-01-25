@@ -41,6 +41,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     values = []
     labels = []
+
+    maxCategories = @config.max_categories
+    if buckets.length > maxCategories
+      buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
+
     for bucket in buckets
       values.push bucket.doc_count
       labels.push bucket.key
@@ -57,6 +62,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       height: width * (3/5)
       width: width
       title: @config.title
+      legend:
+        orientation: 'h'
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
