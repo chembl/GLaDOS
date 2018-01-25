@@ -71,8 +71,8 @@ class CellLineReportCardApp extends glados.ReportCardApp
       model: associatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'AssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     associatedAssays.fetch()
@@ -101,8 +101,8 @@ class CellLineReportCardApp extends glados.ReportCardApp
       model: bioactivities
       el: $('#CLAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'BioactivitySummary'
-      section_label: 'Activity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     bioactivities.fetch()
