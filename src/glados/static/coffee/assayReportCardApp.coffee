@@ -71,8 +71,8 @@ class AssayReportCardApp extends glados.ReportCardApp
       model: bioactivities
       el: $('#AAssociatedBioactivitiesCard')
       config: viewConfig
-      section_id: 'Bioactivity'
-      section_label: 'Activity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     bioactivities.fetch()
