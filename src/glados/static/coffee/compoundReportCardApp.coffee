@@ -193,9 +193,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initClinicalData = ->
 
-    @registerSection('ClinicalData', 'Clinical Data')
-    @showSection('ClinicalData')
-
     compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =

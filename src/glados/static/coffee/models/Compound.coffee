@@ -720,7 +720,9 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.BIOCOMPONENTS
   ]
   CLINICAL_DATA_SECTION:[
-    Compound.COLUMNS.PREF_NAME
+    _.extend Compound.COLUMNS.PREF_NAME,
+      additional_parsing:
+        escaped_value: (value) -> 'hola'
   ]
 }
 
