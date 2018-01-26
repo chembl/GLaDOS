@@ -59,7 +59,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     data = [data1]
     width = @$vis_elem.width()
-    minWidth = 500
+    minWidth = 400
     if width < minWidth
       width = minWidth
 

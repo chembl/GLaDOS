@@ -3600,6 +3600,8 @@ $facets-width-large: 21%;
 * Report card piechart
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+
 .piechart-group {
   display: flex;
   flex-flow: wrap;
@@ -3632,7 +3634,7 @@ $facets-width-large: 21%;
                 }
               }
               .pie-content{
-                    overflow: scroll;
+                overflow: scroll;
               }
             }
           }
@@ -3641,4 +3643,5 @@ $facets-width-large: 21%;
     }
   }
 }
+
 
