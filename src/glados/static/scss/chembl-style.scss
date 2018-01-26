@@ -3609,6 +3609,7 @@ $facets-width-large: 21%;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      width:100%;
       .layout {
         display: flex;
         flex-grow: 1;
@@ -3629,6 +3630,9 @@ $facets-width-large: 21%;
                   padding: 40px;
                   text-align: center;
                 }
+              }
+              .pie-content{
+                    overflow: scroll;
               }
             }
           }
