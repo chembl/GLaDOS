@@ -472,7 +472,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
-          Carousel:
+          Table:
             Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
