@@ -171,7 +171,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       report_card_app: @
 
-    drugIndicationsList.fetch()
+    drugIndicationsList.fetch({reset: true})
 
   @initMoleculeFeatures = ->
 

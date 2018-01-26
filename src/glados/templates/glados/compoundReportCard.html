@@ -133,9 +133,9 @@
                     <h3>Indications</h3>
 
                     <div class="row">
-                      {% block indications %}
-                          {% include "glados/CompoundReportCardParts/Indications.html" %}
-                      {% endblock %}
+                        {% with is_dynamic=True %}
+                            {% include "glados/CompoundReportCardParts/Indications.html" %}
+                        {% endwith %}
                     </div>
                 </div>
              
