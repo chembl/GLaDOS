@@ -31,3 +31,20 @@ describe 'Drug Indications List', ->
     console.log 'sampleDataToParse: ', sampleDataToParse
     console.log 'testChemblID: ', testChemblID
     console.log 'drugIndicationsList: ', drugIndicationsList
+
+    parsedDataGot = drugIndicationsList.parse(sampleDataToParse)
+
+    drugIndicationsIndex = _.indexBy(parsedDataGot, 'drugind_id')
+    console.log 'parsedDataGot: ', parsedDataGot
+    console.log 'drugIndicationsIndex: ', drugIndicationsIndex
+
+    for drugIndicationMustBe in sampleDataToParse.drug_indications
+
+      drugIndID = drugIndicationMustBe.drugind_id
+      drugIndicationGot = drugIndicationsIndex[drugIndID]
+
+      expect(drugIndicationGot?).toBe(true)
+      expect(drugIndicationGot.mesh_heading).toBe(drugIndicationMustBe.mesh_heading)
+      expect(drugIndicationGot.mesh_id).toBe(drugIndicationMustBe.mesh_id)
+      expect(drugIndicationGot.max_phase_for_ind).toBe(drugIndicationMustBe.max_phase_for_ind)
+
