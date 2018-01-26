@@ -39,6 +39,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       @showNoDataFoundMessage()
       return
 
+
+    $titleContainer = $(@el).find('.BCK-pie-title')
+    glados.Utils.fillContentForElement $titleContainer,
+      title: @config.title
+
     values = []
     labels = []
 
@@ -66,7 +71,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     layout =
       height: width * (3/5)
       width: width
-      title: @config.title
       margin:
         l: 5
         r: 5
