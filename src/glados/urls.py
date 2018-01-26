@@ -54,6 +54,9 @@ urlpatterns += [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/mechanism_of_action/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/MechanismOfActionToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/drug_indications/$', xframe_options_exempt(
+    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/IndicationsToEmbed.html")), ),
+
    url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/molecule_features/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/MoleculeFeaturesToEmbed.html")), ),
 

@@ -13,7 +13,6 @@ glados.useNameSpace 'glados.views.ReportCards',
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
 
-
     events: ->
       return _.extend {}, DownloadViewExt.events
 
